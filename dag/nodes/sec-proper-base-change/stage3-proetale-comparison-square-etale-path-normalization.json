@@ -12,26 +12,31 @@
  ],
  "proof": [
   {
-   "text": "Expand comparisonSquareEtalePath as the etale square whiskered by the comparison pullback, followed by the edge comparisons at g-prime and f. Apply mapDerivedCategoryNatIso_trans and its left/right whiskering equations. The associativity equation for mapDerivedCategoryCompIso cancels the internal composition factors and leaves comparisonSquareSourceIso, the three exact derived path maps, and the exact-composition part of comparisonSquareTargetIso.",
+   "text": "Apply the proved exact-derived square-pasting identity to the two edge comparisons at f and g-prime. Naturality of mapDerivedCategoryCompIso in its first functor inserts the etale square whiskered by the comparison pullback. Cancel the endpoint composition factors. This gives exact_path, the three-factor normalization before replacing exact pro-etale pullbacks by total left derived functors.",
+   "uses": [
+    "lem-weil-pbc-derived-square-pasting"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove restriction_path for arbitrary exact functors: the fully faithful bounded-below inclusion sends the composite of two restricted composition comparisons and a middle transport to mapDerivedCategorySquareIso. Obtain the inverse comparison from equality of isomorphisms. For the scheme square, prove etale_square_expansion and plus_square_expansion as separate equations before evaluation at M; the latter uses Etale.pullbackSquareComparison_def and reflexivity. Equality induction proves plus_transport for the middle equality transport. Apply restriction_path, map the two expansion equations to components, and compose the three equalities to obtain square_restrict. Keeping plus_square_expansion separate prevents the kernel from repeatedly unfolding the bounded-below functor constructions.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Expand etaleComparisonSquare, Etale.pullbackSquareComparison and Etale.upperStarPlusComp. The ordinary composition comparison is Etale.upperStarComp. Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app and Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app identify the two composition factors after bounded-below inclusion; equality induction identifies their commutativity transports. Thus the first exact derived map is the displayed image of the etale square.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "The ordinary edge comparison comparisonCoefficientPullbackIso is definitionally comparisonUpperStarCompUpperStarIso.symm. Expand leftDerivedUpperStarComparisonIso on each edge. Naturality of the inverse exactness comparison for g-prime moves it past the exact derived f-comparison and replaces its outer exact pullback by the total left derived pullback. The two inverse exactness factors left at the endpoint are precisely those in comparisonSquareTargetIso. Associate, cancel inverse-hom pairs, and evaluate at M. This uses no pro-etale square normalization or underived coherence hypothesis.",
+   "text": "Expand leftDerivedUpperStarComparisonIso: its bounded-below compatibility is the identity, leaving the exact-derived edge comparison followed by the inverse exactness isomorphism. In exact_path_with_comparisons apply naturality of the inverse exactness isomorphism at g-prime twice, to the edge comparison at f and to its endpoint exactness isomorphism. These give precisely the last factors of comparisonSquareTargetIso. Expand the source and target isomorphisms, evaluate at M.obj, and combine with the restriction identity for the etale square. No pro-etale square normalization or underived coherence hypothesis is used. The private exactOrdinaryPath, exactSourceIso, exactTargetIso and exactDerivedPath constructors retain the explicit parenthesizations of the public path definitions. Their specialization equalities are reflexivity lemmas, so all normalization of these constructors takes place in the abstract categorical proof.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-derived-square-pasting"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
-  "place": "Expanded proof step 4"
+  "place": "Expanded proof step 4",
+  "note": "E3: complete Lean proof using the already proved exact-derived square-pasting theorem. Generic restriction_path and explicit ordinary/bounded-below square expansion equations avoid expensive concrete conversion. All private helpers are proved; no new obligations or public interface changes."
  },
  "mathlib_searches": [
   {
@@ -122,12 +127,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261016T221553-L-1610887",
+  "landing": "20261017T021601-L-694009",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
