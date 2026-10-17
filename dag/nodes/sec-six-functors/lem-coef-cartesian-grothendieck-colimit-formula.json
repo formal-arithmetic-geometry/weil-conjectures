@@ -27,7 +27,8 @@
   "place": "Peng Du, Reshaping limit diagrams and cofinality in higher category theory, Theorem 4.2 and Theorem 4.4(1), printed pp. 4-5: Cartesian total category localized at transport arrows, then decomposition of a colimit-indexing category. The displayed transition formula is the ordinary-base specialization, with the existence-only refinement from the colimit universal property; source read online 2026-10-17, not archived in literature/. No Stacks tag states this coherent-colimit result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -327,5 +328,39 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-d74896af7 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, all 10 cited statements, the parent's use (lem-coef-canonical-hocolim-degree-reduction step 3, B=Delta), the unit and the main-20261015 ancestor proof paragraph 2. Du arXiv:2308.01798 is not archived (WANTED stands), so I checked the mathematics against HTT 3.3.4.3 and the colimit decomposition of 4.2.3; proof_origin agent is correct. The statement is true and unweakened. I checked by hand the Cartesian lifts of (f,1) (unique factorisation; composition strict since U(gf)=U(f)U(g)) and the cases B=[1] (colim = L_0, map L_1->L_0 in the stated direction), B empty, an empty fiber (initial L_b) and B terminal. There are no new nodes, no duplicate (fiber-colimit-collage is covariant; grothendieck-limits-colimits, fibre-localization and the section-colimit nodes are other statements) and no cycle (411 transitive dependencies traversed). uses equals proof_deps. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus. Two faults fixed in fixes/dag/nodes/sec-six-functors/lem-coef-cartesian-grothendieck-colimit-formula.json. (1) E5/C4: step 1 claimed the opposite-straightening identification with N(U) 'respects every base simplex'; the straightening node gives only fibers and transports. Reworded so F is the classifying functor with F(b)~N(U(b)) and F(f)~N(U(f)), which is all that steps 2-6 and the statement (edges of L only) use. The components H(f,1) of the gluing equivalences now come from the localization node's base-change clause c_u l_{p_u}~l_p r with u=f. Step 2 adjusted to match. (2) C4: step 3 credited Q_b~Map(L_b,-) to the Yoneda node; it now cites the dual cocone criterion of lem-cbc-enhanced-functor-cone-calculus, added to the step's uses (proof_deps unchanged). Statement, stmt_deps, sources and blueprint are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianGrothendieckColimitFormula",
+  "declaration": "SSet.Enhanced.lem_coef_cartesian_grothendieck_colimit_formula",
+  "declarations": [
+   "SSet.Enhanced.cartesianFiberInclusion",
+   "SSet.Enhanced.cartesianTransportArrow",
+   "SSet.Enhanced.cartesianFiberDiagram",
+   "SSet.Enhanced.CartesianFiberColimit",
+   "SSet.Enhanced.cartesianNervePair",
+   "SSet.Enhanced.cartesianNerveTransformation",
+   "SSet.Enhanced.cartesianTransportTransformation",
+   "SSet.Enhanced.cartesianCoconeEdge",
+   "SSet.Enhanced.CartesianGrothendieckColimitData",
+   "SSet.Enhanced.cartesianAdmissibleDiagrams",
+   "SSet.Enhanced.cartesianFamilyCocones",
+   "SSet.Enhanced.CartesianGrothendieckColimitNatural",
+   "SSet.Enhanced.lem_coef_cartesian_grothendieck_colimit_formula"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianGrothendieckColimitFormula.lean",
+  "statement": "theorem lem_coef_cartesian_grothendieck_colimit_formula (B : Type u) [Category.{u} B] (U : Bᵒᵖ ⥤ Cat.{u, u}) (C : SSet.{u}) [Quasicategory C] (H : nerve ((Grothendieck (U ⋙ Cat.opFunctor))ᵒᵖ) ⟶ C) (htransport : ∀ {b c : B} (f : b ⟶ c) (y : U.obj (op c)), IsEquivalenceEdge C (H.app _ (ComposableArrows.mk₁ (cartesianTransportArrow U f y)))) (hfiber : ∀ b : B, Nonempty (CartesianFiberColimit U H b)) : (∃ d : CartesianGrothendieckColimitData U H, ∀ t : (coconeCategory d.L) _⦋0⦌, IsColimiting d.L t → IsColimiting H (d.coconeComparison.app _ t)) ∧ CartesianGrothendieckColimitNatural U C",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The owning helpers construct the exact transport transformation, fiber cocones and coherent transition square. The cocone comparison is an equivalence over the apex and is supplied coherently over the full category of admissible H. Reuses calculusApex and calculusCommaArrow from the landed cone-calculus node, added to stmt_deps; no dependency interface or natural-language statement changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b61dbe3ea",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read node, Du source place, both stmt_dep modules (EnhancedDiagramsCones, EnhancedFunctorConeCalculus), Mathlib Grothendieck/ιNatTrans/Cat.opFunctor, and all 13 declarations. Total category (Grothendieck (U ⋙ Cat.opFunctor))ᵒᵖ has the node's arrows and composition; transport arrow (f,1) and the transport transformation H_b∘N U(f) ⟶ H_c are the real ones, direction checked; transitionSquare faces characterize L(f.op) as inverse transport then reindexing; the apex-preserving cocone-category equivalence sends colimiting to colimiting (existence and equivalence); fiberComparison gives the fiber legs; CartesianGrothendieckColimitNatural gives naturality in H and specified cocones. Edge cases (empty B or fibers, terminal B, B=[1], noninvertible edges) covered; no extra assumptions; universe u is the def-cbc convention. Gates: only sorry is the main theorem, real data everywhere, docstrings with source and blueprint, lines at most 100, lean.statement verbatim, node changed only in lean and stmt_deps (added landed cone-calculus, used in statement, no cycle), imports match recorded proof_dep modules, commit touches 3 files, report has Worker report and Second reading by Q71. nt_compile.py (local overlay) compiled it twice, rc=0, no error or warning text, 2.1 s. Observation only: nerve-pair helper overlaps the private strictDiagramComparison of an unrelated node; not an H4 fault."
  }
 }

@@ -304,18 +304,18 @@
   "file": "lean/Sheaf/AlgebraicGeometry/HypercohomologyFiltrations.lean",
   "statement": "def hypercohomologyFiltrations (n : ℤ) : PBCDecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyFirstFunctor f).obj (DerivedCategory.Q.obj K.obj))) × PBCDecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyBaseChangeFunctor f g).obj (DerivedCategory.Q.obj K.obj))) × PBCDecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologySecondFunctor f' g').obj (DerivedCategory.Q.obj K.obj)))",
   "branch": "newtargets-dag",
-  "by": "NA",
+  "by": "Q37",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Restates the withdrawn specification against the published BigradedExactCouple and PBCDecreasingFiltration interfaces; uses ChosenCartesianSquare as recorded by the square dependency. All three actual image filtrations, convergence clauses, bridge equations and canonical inverse-image comparisons are retained."
+  "note": "The published compiled hypercohomologyCouple has no F or K parameters (#check gives only {B} [Category B] [Abelian B] → BigradedExactCouple B 0), so it cannot describe the three truncation spectral sequences. Rebuild the full recorded construction, making F and K explicit in the couple declaration. It retains the actual truncation terms and maps, all three image filtrations, convergence, bridge equations, and canonical inverse-image comparisons. No mathematical statement is changed."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-7546638d1",
-  "group": "NA",
+  "reviewer": "NT-stage2-cc-d55936ae5",
+  "group": "Q37",
   "result": "pass",
-  "note": "Spec theorem is word-for-word the R-hcf-reviewed, proved live statement except the square, now the recorded ChosenCartesianSquare g' f' f g. Changes otherwise: retired Sheaf.* imports moved to WeilConjectures.*, DecreasingFiltration became PBCDecreasingFiltration, ofShifted replaced by a direct BigradedExactCouple instance. Checked every hypothesis and conclusion clause of (1) Rf_*, (2) g^-1 Rf_*, (3) Rf'_* g'^-1 against the node: E2 terms, IsFinite and range a<=q<=n, ConvergesTo, image filtration, bridgeIso equations, canonical delta/phi/c comparisons, termwise g'^-1 truncation. Lean-only repoints of def-sp-filtration and def-sp-image-filtration to the existing upstream PBCDecreasingFiltration(.image) are consistent: def-sp-convergence and thm-sp-truncation-e2 already use PBC and no new-targets citer uses the generic DecreasingFiltration; existing:true without file as stage2_delivery.py requires. Definitions have real data; only three named Prop theorems are sorry; docstrings carry source and blueprint tags; universes explicit (Scheme.{u}, AddCommGrpCat.{u+1}); lean.statement verbatim. nt_compile.py: clean, exit 0, no non-sorry warnings; a negative control confirmed errors are reported. Edge cases n<a, p=0, any a, empty schemes OK. Cosmetic only: inner ∃ hT shadows the unused torsion hypothesis hT."
+  "note": "Item boundedBelow_truncation_criterion matches node and blueprint order 1439. ChosenCartesianSquare e h g f gives Y = T×_S X with fst e and snd h. K is D^+_{P-tor} via AbelianDerivedCategoryPlusTorsionOfPrimes. The three IsIso clauses use truncLEι n through Rg_*, f⁻¹Rg_* and Rh_*e⁻¹. The support clause says page r (n-q) q is zero for r>=2, q>n on every representative; page r = pageCouple(r-2), so this starts at E2. No extra hypotheses; universes follow the dependency convention; statement verbatim; only the lean record changed. The section 1(B) lean-only repair of def-weil-pbc-hypercohomology-filtrations makes F and K explicit in hypercohomologyCouple. A probe confirmed the published decl has neither F nor K. Repaired type is correct and the argument order matches citers. Data is real; sorry appears only in theorems, with a diagnostic note in the record. nt_compile of both files is clean apart from permitted sorry. Importer TruncationExchangeAbutment is clean. HypercohomologyConvergence already fails on a duplicate ExactCoupleShifted import, identically against the live dependency, so it is unrelated to this delivery."
  },
  "reviewed_proof": {
   "date": "2026-10-15",
