@@ -1,0 +1,94 @@
+{
+ "id": "lem-geo-cartier-exponent-independence",
+ "kind": "statement",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-lem-geo-cartier",
+  "date": "2026-10-17",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "title": "Modulus change of the derived quotient and torsion identifications",
+ "statement": "Let $\\mathcal C$ be a small site with a final object [def-weil-pbc-sites-and-cohomology]. Let $m,n\\geq1$ with $n\\mid m$, put $R_q=(\\mathbf Z/q\\mathbf Z)_{\\mathcal C}$ and let $\\mathbf Z_{\\mathcal C}$ be the constant integer sheaf [def-weil-pbc-constant-sheaf]. Use module sheaves [def-weil-sheaf-of-modules-category], unbounded derived categories [def-weil-abstract-derived-category], and derived scalar extension with its restriction adjunction [lem-pur-derived-change-of-rings, lem-pur-sheaf-ring-derived-coefficient-adjunction]. Let\n$$a_K:(K\\otimes_{\\mathbf Z}^{\\mathbf L}R_m)\\otimes_{R_m}^{\\mathbf L}R_n\\xrightarrow{\\sim}K\\otimes_{\\mathbf Z}^{\\mathbf L}R_n$$\nbe the canonical transitivity isomorphism of [lem-sfb-successive-derived-quotient-normalization] for the ring maps $\\mathbf Z_{\\mathcal C}\\to R_m\\to R_n$. Let $F,B_0$ be abelian sheaves such that multiplication by each of $m,n$ is injective on $F$ and surjective on $B_0$. Put $H_q=\\ker(q:B_0\\to B_0)$ and $\\bar F_q=F/qF$. Assume that $H_m$ and $\\bar F_m$ are flat $R_m$-module sheaves, meaning their tensor functors on module sheaves preserve short exact sequences [def-pc-flat-sheaf-modules]. Under the quotient and normalized torsion identifications\n$$F\\otimes_{\\mathbf Z}^{\\mathbf L}R_q\\simeq\\bar F_q[0],\\qquad B_0\\otimes_{\\mathbf Z}^{\\mathbf L}R_q\\simeq H_q[1]$$\nof [lem-sfb-divisible-extension-derived-reduction] ($q=m,n$), $a_F$ and $a_{B_0}$ induce isomorphisms\n$$\\bar F_m\\otimes_{R_m}R_n\\xrightarrow{\\sim}\\bar F_n,\\quad \\bar f\\otimes\\bar b\\longmapsto bf\\bmod nF,$$\n$$H_m\\otimes_{R_m}R_n\\xrightarrow{\\sim}H_n,\\quad h\\otimes\\bar b\\longmapsto b(m/n)h.$$\nIn multiplicative notation the second formula on $h\\otimes1$ is $h\\mapsto h^{m/n}$. The normalization is the one for which the scalar-extension unit on $B_0$ is the connecting morphism of $0\\to H_q\\to B_0\\xrightarrow{q}B_0\\to0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Agent homological-algebra lemma isolating the exponent-comparison computation in the item's proof step 5 (two-term coefficient resolutions [Z -m-> Z] -> [Z -n-> Z] with maps (m/n,1)); makes precise the derived reduction modulo ell^r of blueprint proof paragraph 4. Machinery: Stacks sites-cohomology.tex Tags 06YU (definition-derived-tor), 06YY (lemma-derived-base-change). Exponent independence is not explicitly asserted in the blueprint paragraph. General transitivity is the existing node lem-sfb-successive-derived-quotient-normalization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-flat-sheaf-modules",
+  "lem-sfb-divisible-extension-derived-reduction"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a small site, derived reduction of an abelian sheaf modulo m followed by reduction modulo n for n dividing m is naturally derived reduction modulo n; on m torsion it induces multiplication by m divided by n",
+   "results": "localCohomology.diagram; localCohomology.ringModIdeals; AdicCompletion.transitionMap_comp_reduceModIdeal; CategoryTheory.Sheaf.instIsGrothendieckAbelian; SheafOfModules.instAbelian; instAbelianCondensedMod; AdicCompletion.transitionMap; instAbelianLightCondMod",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state this comparison for derived categories of sheaf modules; ordinary-module or underived sheaf results require further arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product of a divisible abelian sheaf with integers modulo n is its n torsion shifted, compatibly with changing n",
+   "results": "Rep.Tor; Rep.Tor_obj; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.Tor_obj; Rep.Tor_map; CategoryTheory.Tor'; Rep.torIso",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state this comparison for derived categories of sheaf modules; ordinary-module or underived sheaf results require further arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a ringed site derived extension of scalars along a composite of ring maps is canonically the composite of derived extensions and identifies reduction modulo m then modulo n with reduction modulo n",
+   "results": "ModuleCat.ExtendScalars.map'_comp; ModuleCat.extendScalarsComp_hom_app_one_tmul; ModuleCat.extendScalarsComp; ModuleCat.extendScalars_assoc; Algebra.Generators.Hom.toExtensionHom_comp; ModuleCat.extendScalars_assoc'; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; ModuleCat.homEquiv_extendScalarsComp",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state this comparison for derived categories of sheaf modules; ordinary-module or underived sheaf results require further arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction modulo n of an extension with n divisible kernel and n torsion free quotient is compatible with reducing a larger modulus m to n",
+   "results": "No hits; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "ModuleCat.extendScalarsComp; ModuleCat.extendScalars_comp_id; ModuleCat.extendScalars_id_comp; ModuleCat.extendScalars_comp_id_assoc; ModuleCat.extendScalars_id_comp_assoc; ModuleCat.extendScalarsComp_hom_app_one_tmul; ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state this comparison for derived categories of sheaf modules; ordinary-module or underived sheaf results require further arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Rr]educt|[Rr]educt.*derived|[Dd]ivisible.*[Tt]ensor|[Tt]ensor.*[Dd]ivisible",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state this comparison for derived categories of sheaf modules; ordinary-module or underived sheaf results require further arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|tensor.*ZMod|ZMod.*tensor",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Differentials/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; directory Algebra/Category/ModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state this comparison for derived categories of sheaf modules; ordinary-module or underived sheaf results require further arguments"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-geo-cartier",
+   "place": "proof paragraph 4, reduction of the extension boundary modulo ell^r and subsequent coefficient extension; makes precise comparison with another killing exponent used by the existing item statement and proof step 5",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
