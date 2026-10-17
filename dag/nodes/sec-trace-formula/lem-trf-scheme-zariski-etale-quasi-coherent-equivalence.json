@@ -362,5 +362,47 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-c51146638 (reviewer sub-agent of L); spot-checked: Read both nodes and all ten steps; checked cited statements, Stacks sources, canonical flat base-change map, module categories, duplicates, edge cases, and route constraints. No repairs needed. review.md records full findings and my prohibited read-only git invocation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d0fa352ba",
+  "group": "Q131",
+  "result": "fix",
+  "note": "Mathematics, canonical comparisons, dependencies, universes, edge cases, and verbatim signature checked; scompile.py passed. Replaced the H11 second-reading placeholder with a complete report under fixes/. Findings and compiler evidence are in review.md. Branch and snapshot unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scheme_zariski_etale_quasiCoherent_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModulePresheaf",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModulePresheaf_isSheaf",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleRing",
+   "AlgebraicGeometry.Scheme.Modules.SmallEtaleModules",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleOpenRingMap",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleModuleRestriction",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleRingMap",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModulePushforward",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleModuleExtension",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleModuleAdjunction",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModulePullback",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleAdjunction",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtaleModuleContext",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtaleModuleContext.restriction",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtaleModuleContext.extension",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtaleModuleContext.adjunction",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtalePullbackComparison",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtalePushforwardComparison",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverHasWeakSheafify",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverWEqualsLocallyBijective",
+   "AlgebraicGeometry.Scheme.Modules.scheme_zariski_etale_quasiCoherent_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeZariskiEtaleQuasiCoherentEquivalence.lean",
+  "statement": "theorem scheme_zariski_etale_quasiCoherent_equivalence : ∃ c : ∀ T : Scheme.{u}, ZariskiEtaleModuleContext T, (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent], ((c T).extension.obj F).IsQuasicoherent ∧ IsIso ((c T).adjunction.unit.app F)) ∧ (∀ (T : Scheme.{u}) (G : SmallEtaleModules T) [G.IsQuasicoherent], ((c T).restriction.obj G).IsQuasicoherent ∧ IsIso ((c T).adjunction.counit.app G)) ∧ ∃ e : ∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent], (SheafOfModules.toSheaf (smallEtaleModuleRing T)).obj ((c T).extension.obj F) ≅ etaleTensorSectionsSheaf F, (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (V : T.Etale) (r : Γ(V.left, ⊤)) (s : ((c T).extension.obj F).val.obj (op V)), (e T F).hom.hom.app (op V) (r • s) = r • (@id (Γ((tensorPullback V.hom).obj F, ⊤)) ((e T F).hom.hom.app (op V) s))) ∧ (∀ (T : Scheme.{u}) (F H : T.Modules) [F.IsQuasicoherent] [H.IsQuasicoherent] (f : F ⟶ H) (V : T.Etale), ((SheafOfModules.toSheaf (smallEtaleModuleRing T)).map ((c T).extension.map f)).hom.app (op V) ≫ (e T H).hom.hom.app (op V) = (e T F).hom.hom.app (op V) ≫ ((tensorPullback V.hom).map f).app ⊤) ∧ (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (W : T.Opens), ((c T).adjunction.unit.app F).app W ≫ (e T F).hom.hom.app (op ((AlgebraicGeometry.gabberOpenEtale T).obj W)) ≫ (tensorOpenSectionIso T F W).hom = 𝟙 _) ∧ (∀ (T : Scheme.{u}) (G : SmallEtaleModules T) [G.IsQuasicoherent] (h : ((c T).restriction.obj G).IsQuasicoherent) (W : T.Opens), (tensorOpenSectionIso T ((c T).restriction.obj G) W).inv ≫ (@e T ((c T).restriction.obj G) h).inv.hom.app (op ((AlgebraicGeometry.gabberOpenEtale T).obj W)) ≫ ((SheafOfModules.toSheaf (smallEtaleModuleRing T)).map ((c T).adjunction.counit.app G)).hom.app (op ((AlgebraicGeometry.gabberOpenEtale T).obj W)) = 𝟙 _) ∧ (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent], F.IsInvertible ↔ ∀ V : T.Etale, ∃ S : Sieve V, S ∈ T.smallEtaleTopology V ∧ ∀ (W : T.Etale) (f : W ⟶ V), S f → Nonempty (((c T).extension.obj F).over W ≅ SheafOfModules.unit ((smallEtaleModuleRing T).over W))) ∧ (∀ (T : Scheme.{u}) (G : SmallEtaleModules T), (∀ V : T.Etale, ∃ S : Sieve V, S ∈ T.smallEtaleTopology V ∧ ∀ (W : T.Etale) (f : W ⟶ V), S f → Nonempty (G.over W ≅ SheafOfModules.unit ((smallEtaleModuleRing T).over W))) → G.IsQuasicoherent ∧ ((c T).restriction.obj G).IsInvertible) ∧ ∀ (U T : Scheme.{u}) (a : U ⟶ T), ∃ (hp : (smallEtaleModulePushforward a).IsRightAdjoint) (r : smallEtaleModulePushforward a ⋙ (c T).restriction ≅ (c U).restriction ⋙ pushforward a), (∀ (G : SmallEtaleModules U) (W : T.Opens), (r.hom.app G).app W = G.val.presheaf.map (AlgebraicGeometry.gabberPreimageEtaleIso a W).hom.op) ∧ ∀ (_ : QuasiCompact a) (_ : IsSeparated a), (∀ (H : U.Modules) [H.IsQuasicoherent], ((pushforward a).obj H).IsQuasicoherent ∧ ((smallEtaleModulePushforward a).obj ((c U).extension.obj H)).IsQuasicoherent ∧ IsIso (zariskiEtalePushforwardComparison a (c U) (c T) hp r H)) ∧ (∀ (H K : U.Modules) [H.IsQuasicoherent] [K.IsQuasicoherent] (f : H ⟶ K), (c T).extension.map ((pushforward a).map f) ≫ zariskiEtalePushforwardComparison a (c U) (c T) hp r K = zariskiEtalePushforwardComparison a (c U) (c T) hp r H ≫ (smallEtaleModulePushforward a).map ((c U).extension.map f)) ∧ ∀ (H : U.Modules) [H.IsQuasicoherent], (c T).adjunction.unit.app ((pushforward a).obj H) ≫ (c T).restriction.map (zariskiEtalePushforwardComparison a (c U) (c T) hp r H) ≫ r.hom.app ((c U).extension.obj H) = (pushforward a).map ((c U).adjunction.unit.app H)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical ringed-site module pullbacks are Mathlib SheafOfModules.pullback for the explicit inclusion/base-change functors and regular-function maps. The theorem states their adjoint equivalence on quasi-coherent full subcategories by invertibility of the specified unit and counit, with section, scalar, line-module and canonical mate normalizations. Contexts contain only continuity/right-adjoint-existence proofs; no arbitrary functor or comparison is chosen. Slice sheafification helper statements retain the original coefficient and section universe."
  }
 }

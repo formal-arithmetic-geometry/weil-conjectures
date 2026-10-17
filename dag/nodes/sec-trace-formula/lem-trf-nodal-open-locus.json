@@ -238,5 +238,29 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-6a68afbf3 (reviewer sub-agent of L); spot-checked: Read the instructions, packet/report, item and both new nodes, all 26 cited DAG statements, the Stacks sources at Tags 0DSC, 02V3, 0475, 02GF and auxiliary cited locations, plus the sk-i-curve-zero unit route. Verified every proof step, hypotheses, base-change and Fitting arguments, maximality, edge cases, duplicate checks, searches, and route restrictions. Wrote review.md with concrete checks. No Lean, builds, git, ssh, or live-project operations used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2e28fc762",
+  "group": "Q141",
+  "result": "fix",
+  "note": "H8 documentation defect repaired in fixes/lean/Sheaf/TraceFormula/NodalOpenLocus.lean with complete proof-step docstring; replacement compiles via scompile.py."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NodalOpenLocus",
+  "declaration": "AlgebraicGeometry.nodalOpenLocus",
+  "declarations": [
+   "AlgebraicGeometry.IsSmoothOrOrdinaryNode",
+   "AlgebraicGeometry.HasOnlySmoothOrNodalGeometricFibres",
+   "AlgebraicGeometry.nodalOpenLocus"
+  ],
+  "file": "lean/Sheaf/TraceFormula/NodalOpenLocus.lean",
+  "statement": "theorem nodalOpenLocus (Y T : Scheme.{u}) (p : Y ⟶ T) [Flat p] [LocallyOfFinitePresentation p] (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ T), Nonempty (pullback (C := Scheme.{u}) p g) → (pullback (C := Scheme.{u}) p g).IsPureDimension 1) : ∃ U : Y.Opens, HasOnlySmoothOrNodalGeometricFibres (U.ι ≫ p) ∧ (∀ V : Y.Opens, HasOnlySmoothOrNodalGeometricFibres (V.ι ≫ p) → V ≤ U) ∧ (∀ (T' : Scheme.{u}) (g : T' ⟶ T), HasOnlySmoothOrNodalGeometricFibres ((pullback.fst p g ⁻¹ᵁ U).ι ≫ pullback.snd p g) ∧ (∀ V : (pullback p g).Opens, HasOnlySmoothOrNodalGeometricFibres (V.ι ≫ pullback.snd p g) → V ≤ pullback.fst p g ⁻¹ᵁ U)) ∧ (∀ (t : T), ∀ x : (pullback (C := Scheme.{u}) p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)), pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t) x ∈ U ↔ IsSmoothOrOrdinaryNode (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)) x) ∧ (∀ (t : T), ((∀ x : (pullback (C := Scheme.{u}) p (T.fromSpecResidueField t)), pullback.fst p (T.fromSpecResidueField t) x ∈ U) ↔ (∀ x : (pullback (C := Scheme.{u}) p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)), x ∉ (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)).smoothLocus → IsSmoothOrOrdinaryNode (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)) x)))",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-2e28fc762"
  }
 }

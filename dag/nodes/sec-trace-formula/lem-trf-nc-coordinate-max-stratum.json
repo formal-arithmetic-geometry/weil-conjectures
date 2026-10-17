@@ -12,7 +12,8 @@
   "pqf-def-locnoeth",
   "def-weil-closed-immersion",
   "def-weil-etale-morphism",
-  "def-pc-reduced-scheme"
+  "def-pc-reduced-scheme",
+  "def-trf-normal-crossings-branch-count"
  ],
  "proof": [
   {
@@ -304,5 +305,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-5cdbc27b3 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, ILO VIII 4.1.6–4.2.4 and relevant Stacks sources. All five steps are sound; strict-henselization comparisons, parameter transport, empty-center cases and dependency closure checked. No new nodes, duplicates, cycles or repairs. Accepted all ten declared tool uses. Detailed review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-12769b3d8",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, report, Lean module, source/docstrings, edge cases, route-pivot compliance, and exact declarations. Reproduced successful scompile for sandbox and library; no substantive or mechanical corrections required."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CoordinateMaximalBranchStratum",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.coordinate_maximal_branch_stratum",
+  "file": "lean/Sheaf/TraceFormula/CoordinateMaximalBranchStratum.lean",
+  "statement": "theorem coordinate_maximal_branch_stratum {U : Scheme.{u}} [IsLocallyNoetherian U] (hregular : ∀ x : U, ∃ V : U.affineOpens, x ∈ V.1 ∧ IsRegularRing Γ(U, V)) {s : ℕ} (hs : 1 ≤ s) (t : Fin s → Γ(U, ⊤)) (hcoord : ∀ x : U, ∃ (hR : IsNoetherianRing (U.presheaf.stalk x)) (q l : List (U.presheaf.stalk x)), @IsLocalRing.IsRegularSystemOfParameters (U.presheaf.stalk x) _ _ hR q ∧ l.Sublist q ∧ (∀ j : Fin s, U.presheaf.germ ⊤ x (by trivial) (t j) ∈ IsLocalRing.maximalIdeal _ ↔ U.presheaf.germ ⊤ x (by trivial) (t j) ∈ l) ∧ (∀ i j : Fin s, U.presheaf.germ ⊤ x (by trivial) (t i) ∈ IsLocalRing.maximalIdeal _ → U.presheaf.germ ⊤ x (by trivial) (t j) ∈ IsLocalRing.maximalIdeal _ → i ≠ j → U.presheaf.germ ⊤ x (by trivial) (t i) ≠ U.presheaf.germ ⊤ x (by trivial) (t j))) : let D : U.IdealSheafData := ofIdealTop (Ideal.span {∏ j : Fin s, t j}) let C : U.IdealSheafData := ofIdealTop (Ideal.span (Set.range t)) let b : U → ℕ := fun x ↦ Nat.card {j : Fin s // U.presheaf.germ ⊤ x (by trivial) (t j) ∈ IsLocalRing.maximalIdeal _} (∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (x : U) (ι : U.residueField x →+* Ω), D.ncBranchCount x = b x ∧ Nat.card {j : Fin s // ι (U.Γevaluation x (t j)) = 0} = b x) ∧ (∀ x : U, b x = 0 ↔ x ∉ (D.support : Set U)) ∧ (∀ x : U, b x ≤ s) ∧ (∀ (k : ℤ) (x : U), (k ≤ (b x : ℤ)) ↔ k ≤ 0 ∨ ∃ J : Finset (Fin s), (k : ℤ) = J.card ∧ x ∈ ((ofIdealTop (Ideal.span (Set.range (fun j : {j // j ∈ J} ↦ t j.1)))).support : Set U)) ∧ (∀ x : U, b x = s ↔ x ∈ (C.support : Set U)) ∧ (IsReduced C.subscheme ∧ ∀ x : C.subscheme, ∃ V : C.subscheme.affineOpens, x ∈ V.1 ∧ IsRegularRing Γ(C.subscheme, V)) ∧ ((∃ x : U, b x = s) ↔ Nonempty C.subscheme) ∧ (∀ {W : Scheme.{u}} (e : W ⟶ U) [Etale e], let tW : Fin s → Γ(W, ⊤) := fun j ↦ e.appTop (t j) let bW : W → ℕ := fun w ↦ Nat.card {j : Fin s // W.presheaf.germ ⊤ w (by trivial) (tW j) ∈ IsLocalRing.maximalIdeal _} IsLocallyNoetherian W ∧ (∀ w : W, ∃ V : W.affineOpens, w ∈ V.1 ∧ IsRegularRing Γ(W, V)) ∧ (∀ x : W, ∃ (hR : IsNoetherianRing (W.presheaf.stalk x)) (q l : List (W.presheaf.stalk x)), @IsLocalRing.IsRegularSystemOfParameters (W.presheaf.stalk x) _ _ hR q ∧ l.Sublist q ∧ (∀ j : Fin s, W.presheaf.germ ⊤ x (by trivial) (tW j) ∈ IsLocalRing.maximalIdeal _ ↔ W.presheaf.germ ⊤ x (by trivial) (tW j) ∈ l) ∧ (∀ i j : Fin s, W.presheaf.germ ⊤ x (by trivial) (tW i) ∈ IsLocalRing.maximalIdeal _ → W.presheaf.germ ⊤ x (by trivial) (tW j) ∈ IsLocalRing.maximalIdeal _ → i ≠ j → W.presheaf.germ ⊤ x (by trivial) (tW i) ≠ W.presheaf.germ ⊤ x (by trivial) (tW j))) ∧ D.comap e = ofIdealTop (Ideal.span {∏ j : Fin s, tW j}) ∧ C.comap e = ofIdealTop (Ideal.span (Set.range tW)) ∧ (∀ w : W, bW w = b (e w)) ∧ (∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (w : W) (ι : W.residueField w →+* Ω), (D.comap e).ncBranchCount w = bW w ∧ Nat.card {j : Fin s // ι (W.Γevaluation w (tW j)) = 0} = bW w) ∧ (∀ w : W, bW w = 0 ↔ w ∉ ((D.comap e).support : Set W)) ∧ (∀ w : W, bW w ≤ s) ∧ (∀ (k : ℤ) (w : W), k ≤ (bW w : ℤ) ↔ k ≤ 0 ∨ ∃ J : Finset (Fin s), (k : ℤ) = J.card ∧ w ∈ ((ofIdealTop (Ideal.span (Set.range (fun j : {j // j ∈ J} ↦ tW j.1)))).support : Set W)) ∧ (∀ w : W, bW w = s ↔ w ∈ ((C.comap e).support : Set W)) ∧ IsReduced (C.comap e).subscheme ∧ (∀ z : (C.comap e).subscheme, ∃ V : (C.comap e).subscheme.affineOpens, z ∈ V.1 ∧ IsRegularRing Γ((C.comap e).subscheme, V)) ∧ ((∃ w : W, bW w = s) ↔ Nonempty (C.comap e).subscheme) ∧ (∀ {r : ℕ} (hr : 1 ≤ r) (a : Fin r → Γ(W, ⊤)), (∀ x : W, ∃ (hR : IsNoetherianRing (W.presheaf.stalk x)) (q l : List (W.presheaf.stalk x)), @IsLocalRing.IsRegularSystemOfParameters (W.presheaf.stalk x) _ _ hR q ∧ l.Sublist q ∧ (∀ j : Fin r, W.presheaf.germ ⊤ x (by trivial) (a j) ∈ IsLocalRing.maximalIdeal _ ↔ W.presheaf.germ ⊤ x (by trivial) (a j) ∈ l) ∧ (∀ i j : Fin r, W.presheaf.germ ⊤ x (by trivial) (a i) ∈ IsLocalRing.maximalIdeal _ → W.presheaf.germ ⊤ x (by trivial) (a j) ∈ IsLocalRing.maximalIdeal _ → i ≠ j → W.presheaf.germ ⊤ x (by trivial) (a i) ≠ W.presheaf.germ ⊤ x (by trivial) (a j))) → ofIdealTop (Ideal.span {∏ j : Fin r, a j}) = D.comap e → ∀ w : W, Nat.card {j : Fin r // W.presheaf.germ ⊤ w (by trivial) (a j) ∈ IsLocalRing.maximalIdeal _} = bW w))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
