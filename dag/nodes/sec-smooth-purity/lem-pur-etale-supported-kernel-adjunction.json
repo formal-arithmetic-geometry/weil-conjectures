@@ -229,5 +229,28 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-4d1149a9a (reviewer sub-agent of L); spot-checked: Read in full: the item, all 14 cited statements (including the main-20261015 blueprint_update of finite-direct-image-exact and of geometric-stalk-conservative), and the Stacks source at Prop 04CA (proposition-closed-immersion-pushforward) and section-cohomology-support / Lemma 09XQ (lemma-sections-with-support-acyclic) with its Hom identity. The statement matches 09XQ+04CA: an arbitrary closed immersion and Ab(X_et), with no quasi-compact or torsion hypothesis. That generality is correct on the étale site because geometric points off Z factor through O and stalks are conservative. It is unlike the pro-étale def-pur-flasque-support and det-lem-formal-closed-support-adjunction, which need quasi-compact j and work with different coefficients. Step checks: (1) closed immersion is finite, then f_* is exact on Ab. (2) Kernel functoriality, j^{-1} exact, invertible open counit plus the triangle identity give j^{-1}P_Z=0. (3) Stalk-germ comparison, factoring through O and conservativity give the stalk criterion; lem-kun-04ca's essential-image clause gives P_Z F≅i_*B and j^{-1}i_*G=0. (4) Invertible closed counit (prop-openclosed-lowerstar-fully-faithful; its coefficient category includes Ab), triangle identity and naturality show the canonical unit is iso. (5) Open adjunction plus kernel universal property. (6) Composition with the 04CA full faithfulness; explicit inverses check out. Edge cases Z=X, Z=∅, nonreduced Z and injective F all work. No new nodes. The duplicate search over dag/nodes (09XQ, H_Z, ker(F→j_*j^{-1}F), support adjunctions) found no étale abelian duplicate. Acyclic; the only citer, lem-pur-relative-support-bottom-descent Step 4, uses exactly this. Route: the off-route, non-closed citations are lem-kun-04ca and the underived counit of lem-kun-open-immersion-restriction, both declared tool_uses, which I accept. The other citations are on route, closed, Mathlib leaves or definitions. No SGA. No fixes written. Minor: the item has no lean_audit field; this comes from the earlier NC creation and is maintainer metadata, not a fault of this split."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction",
+  "declaration": "AlgebraicGeometry.Etale.supportedKernel_closedAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedKernel",
+   "AlgebraicGeometry.Etale.supportedClosedInverseImage",
+   "AlgebraicGeometry.Etale.supportedKernel_closedAdjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSupportedKernelAdjunction.lean",
+  "statement": "theorem supportedKernel_closedAdjunction {Z O X : Scheme.{u}} (i : Z ⟶ X) (j : O ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hcompl : IsCompl (Set.range i.base) (Set.range j.base)) : IsIso (Functor.whiskerLeft (supportedKernel j) (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit) ∧ PreservesFiniteLimits (lowerStar AddCommGrpCat.{u + 1} i) ∧ PreservesFiniteColimits (lowerStar AddCommGrpCat.{u + 1} i) ∧ Nonempty (lowerStar AddCommGrpCat.{u + 1} i ⊣ supportedClosedInverseImage i j)",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-da66e127e",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source, dependencies, universes, canonical constructions, edge cases, docstrings, and verbatim signature. Reproduced clean per-file compilation in both wrapper views. No corrections needed; branch unchanged."
  }
 }
