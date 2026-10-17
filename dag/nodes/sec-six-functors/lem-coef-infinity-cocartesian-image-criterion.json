@@ -15,9 +15,67 @@
   "lem-coef-infinity-pointwise-equivalences",
   "lem-coef-kan-nerve-pullback-recognition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $z\\in E$ and write $S_E$ for the criterion square with corners $\\operatorname{Map}_E(b,z)$, $\\operatorname{Map}_E(a,z)$, $\\operatorname{Map}_B(p(b),p(z))$, $\\operatorname{Map}_B(p(a),p(z))$, in that order. Write $S_F$ for the square obtained by replacing $(E,p,e,z)$ by $(F,q,T(e),Tz)$. Their bottom rows agree because $qT=p$, including the edge $qT(e)=p(e)$. By [lem-coef-infinity-hom-bifunctor-functoriality], the top rows are restrictions of the coherent Hom bifunctors to the edge $e$ in the contravariant variable and the constant target $z$, or to $T(e)$ and $Tz$. The induced coherent Hom transformation $T_*$ restricts to a transformation between these top rows whose components are the maps induced by $T$ on the two right-pinched mapping spaces. The vertical maps are induced by $p$ or $q$. This specifies the four components of the desired square comparison: $T_*$ at $(b,z)$ and $(a,z)$ above, and identity maps on the two base mapping spaces below.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Corollary 8.3.5.8 and Remark 8.3.5.9 (03PD); restriction of coherent Hom functoriality to the edge and the fixed target. Agent specialization."
+   }
+  },
+  {
+   "text": "We check compatibility with the specified commutation data, so that these components define $\\eta:S_E\\to S_F$ in $\\operatorname{Fun}(N([1]\\times[1]),\\mathcal S)$. Use the fixed-edge roof and its triangle witness of [lem-coef-infinity-fixed-edge-prism-coherence]. Apply that statement to the functors $p$, $q$ and $T$. Every map between the roof spaces is postcomposition of a simplex by the indicated functor. Restriction to a face and precomposition with its displayed prism map commute with postcomposition: $T(t\\circ v)=(Tt)\\circ v$ for every simplex $t$ and indexing map $v$. Furthermore $q(Tt)=pt$ as simplices, by the equality of simplicial maps $qT=p$. Thus the diagrams of roof spaces commute strictly, both for the face maps $r_0,r_1$ and for the triangle witnesses $e(t)$. The bottom roof is identical in the two diagrams. The cited lemma identifies these roofs, including those triangle witnesses and the vertical maps, with the canonical precomposition squares. Consequently their comparison presents precisely $\\eta$ with the top-row Hom transformation of step 1; all of the commutation data are retained. This is a specialization of the cited natural prism construction, not a choice of homotopies between four unrelated edge classes.",
+   "uses": [
+    "lem-coef-infinity-fixed-edge-prism-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, dual mapping-square presentation; the simultaneous functorial prism comparison is written out from the cited existing lemma."
+   }
+  },
+  {
+   "text": "Full faithfulness means, by [def-cbc-enhanced-diagrams-cones], that the maps on the right-pinched mapping simplicial sets are weak homotopy equivalences. Hence the two top components of $\\eta$, on $\\operatorname{Map}_E(b,z)$ and $\\operatorname{Map}_E(a,z)$, are equivalences of spaces. The two bottom components are identities, and so are equivalences too. Apply [lem-coef-infinity-pointwise-equivalences] with $K=N([1]\\times[1])$ and target $\\mathcal S$. Its four vertex tests are exactly these four components. It follows that $\\eta$ is an equivalence of whole coherent square diagrams, proving the first assertion for this $z$. The construction works for every vertex $z$ of $E$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, applied to the square indexing simplicial set; full faithfulness is the existing definition."
+   }
+  },
+  {
+   "text": "Since $p$ is an inner fibration of quasicategories and $e$ is $p$-cocartesian, [lem-coef-infinity-cocartesian-mapping-criterion] says that $S_E$ is a homotopy pullback. By [lem-coef-kan-nerve-pullback-recognition], this is equivalent to $S_E$ being cartesian as a coherent square of spaces, with its specified commutation datum. That same lemma says that an equivalence of whole square diagrams preserves and reflects cartesianness. Apply it to the equivalence $\\eta$ from step 3, and then its specified-homotopy recognition clause to $S_F$. The result is that $S_F$ is a homotopy pullback, as asserted. Only the tests at $Tz$ are claimed. No essential-surjectivity hypothesis or test at vertices of $F$ outside the image is used.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-kan-nerve-pullback-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, opposite dual; transfer using the cited whole-square pullback-recognition statement. Agent argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-fixed-edge-prism-coherence",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-kan-nerve-pullback-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 2.4.4.3, dual, combined with Kerodon 046J/03PD and 01DK and the existing whole-square pullback-recognition statement. Sources read online 2026-10-17; archival copies WANTED. The item is an agent specialization, not a separately numbered source theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +118,80 @@
    "results": "0 hits.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor over a common base carries the cocartesian mapping criterion square at an object to the criterion square at its image",
+   "results": "{\"t\": \"2026-10-17T15:04:33Z\", \"tool\": \"leanfinder\", \"query\": \"A fully faithful functor over a common base carries the cocartesian mapping criterion square at an object to the criterion square at its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\"], \"digest\": \"0d5e715cebff5e01\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and strict set-valued pullbacks, not coherent quasicategorical mapping-space squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "Square.IsPullback Functor.FullyFaithful mapping space",
+   "results": "{\"t\": \"2026-10-17T15:04:34Z\", \"tool\": \"loogle\", \"query\": \"Square.IsPullback Functor.FullyFaithful mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Square.IsPullback`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and strict set-valued pullbacks, not coherent quasicategorical mapping-space squares."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPullback.*equiv|FullyFaithful.*map [Mathlib/CategoryTheory]",
+   "results": "{\"t\": \"2026-10-17T15:04:34Z\", \"tool\": \"grep\", \"query\": \"IsPullback.*equiv|FullyFaithful.*map [Mathlib/CategoryTheory]\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this over-restrictive literal pattern; not used as evidence of absence. Subsequent corrected grep patterns and source reads supply the concept check."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An objectwise equivalence between coherent squares of spaces induced by a fully faithful infinity functor preserves the homotopy pullback property",
+   "results": "{\"t\": \"2026-10-17T15:06:34Z\", \"tool\": \"leanfinder\", \"query\": \"An objectwise equivalence between coherent squares of spaces induced by a fully faithful infinity functor preserves the homotopy pullback property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Square.IsPullback.of_equiv\", \"CategoryTheory.Square.IsPullback.iff_of_equiv\", \"CategoryTheory.Square.IsPullback.map_iff\", \"CategoryTheory.Square.IsPullback.map\", \"CategoryTheory.Limits.CategoricalPullback.functorEquiv\", \"CategoryTheory.CatCommSq.hInvEquiv\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_obj_obj_iso_hom_app\", \"CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver_mapIso_mkNatIso_eq_mkIso\"], \"digest\": \"5a5507f4cad58b06\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Limits/Preserves/Shapes/Square.lean:85-114. of_equiv and iff_of_equiv concern Square (Type), not coherent squares of spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful functor between quasicategories over the same base compares cocartesian mapping space squares by equivalences",
+   "results": "{\"t\": \"2026-10-17T15:06:35Z\", \"tool\": \"leansearch\", \"query\": \"Fully faithful functor between quasicategories over the same base compares cocartesian mapping space squares by equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.ctorIdx\", \"CategoryTheory.Functor.FullyFaithful.ofIso\", \"CategoryTheory.fullyFaithfulInducedFunctor\", \"CategoryTheory.Functor.FullyFaithful\", \"CategoryTheory.Functor.FullyFaithful.casesOn\", \"CategoryTheory.Functor.FullyFaithful.homEquiv\", \"CategoryTheory.Functor.FullyFaithful.over\", \"CategoryTheory.nerveFunctor.fullyfaithful\"], \"digest\": \"b80f5205395eec89\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and strict set-valued pullbacks, not coherent quasicategorical mapping-space squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocartesian\", \"Quasicategory\"",
+   "results": "{\"t\": \"2026-10-17T15:06:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocartesian\\\", \\\"Quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and strict set-valued pullbacks, not coherent quasicategorical mapping-space squares."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian.{0,80}mapping|mapping.{0,80}cocartesian",
+   "results": "{\"t\": \"2026-10-17T15:06:35Z\", \"tool\": \"grep\", \"query\": \"cocartesian.{0,80}mapping|mapping.{0,80}cocartesian\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and strict set-valued pullbacks, not coherent quasicategorical mapping-space squares."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (of_equiv|iff_of_equiv)|def (of_equiv|iff_of_equiv)",
+   "results": "{\"t\": \"2026-10-17T15:07:37Z\", \"tool\": \"grep\", \"query\": \"theorem (of_equiv|iff_of_equiv)|def (of_equiv|iff_of_equiv)\", \"sub\": \"CategoryTheory/Limits/Preserves/Shapes/Square.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and strict set-valued pullbacks, not coherent quasicategorical mapping-space squares."
+  },
+  {
+   "tool": "grep",
+   "query": "class IsCocartesian|def map|structure IsCocartesian",
+   "results": "{\"t\": \"2026-10-17T15:07:37Z\", \"tool\": \"grep\", \"query\": \"class IsCocartesian|def map|structure IsCocartesian\", \"sub\": \"CategoryTheory/FiberedCategory/Cocartesian.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"55\", \"90\", \"197\"], \"digest\": \"e36f9faecc94592f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/FiberedCategory/Cocartesian.lean:44-103. IsCocartesian and map use ordinary Hom sets and a unique factorization, not Kan mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory|Quasicategory|mapping",
+   "results": "{\"t\": \"2026-10-17T15:07:37Z\", \"tool\": \"grep\", \"query\": \"quasicategory|Quasicategory|mapping\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"31\", \"32\"], \"digest\": \"36c9133190ca6810\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: documentation lists locally Kan nerve/quasicategory and anima constructions as future projects, not a mapping-square theorem. Read SimplicialNerve.lean:20-34."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-simplex-inverse-extension",
@@ -75,7 +203,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "The image-test part of the returned simplex-inverse marking step: full faithfulness over a common base identifies the two top mapping spaces, coherent Hom functoriality supplies the square comparison, and whole-square pullback invariance transfers the criterion.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint (main-20261015, sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md): the derived coefficient Hom adjunction before the displayed derived inverse limit. Within the inherited simplex-inverse marking infrastructure, the image-test clause: compare the full coherent cocartesian mapping square at z with the square at Tz by a fully faithful functor over the same base. The four steps realize that comparison and transfer its pullback test.",
    "via": [
     "lem-coef-cartesian-simplex-inverse-extension",
     "lem-coef-marked-relative-cartesian-model",
@@ -91,5 +219,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cocartesian-image-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all imported ancestry. Wrote four proof steps using existing coherent Hom, fixed-edge prism, pointwise-equivalence, cocartesian mapping criterion and whole-square recognition nodes. The strict simplex identities q(Tt)=pt and T(t composed with v)=(Tt) composed with v verify that the comparison includes the original commutation witnesses. No new nodes or Mathlib leaves; searches found only ordinary categorical analogues.",
+  "blueprint": "Ancestor proof paragraph 2, the derived Hom adjunction preceding R inverse limit, reached through the inherited marked-simplex infrastructure. Steps 1-2 form its image-test comparison with all coherence; step 3 proves whole-square equivalence; step 4 transfers the cocartesian mapping test. Current main-20261015 proof and historical master text read; no chapter or unit step changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-fd4632c57",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-fd4632c57 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full: def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, cocartesian-mapping-criterion, hom-bifunctor-functoriality, fixed-edge-prism-coherence, pointwise-equivalences, kan-nerve-pullback-recognition, and also the pinch/left-pinch comparison and mapping-composition nodes. The statement is unchanged and matches the dual of HTT 2.4.4.3. HTT and Kerodon are not archived and are correctly recorded as WANTED. The blueprint ancestor's paragraph 2 (main-20261015 prop-coef-integral-exceptional-adjoint.proof.md) is consistent with the item. Step 1: T_* gives the top-row components, and the bottom rows are equal because qT=p. Step 2: the prism node applied to T and q, whose composite is p=qT, gives a strictly commuting cube that includes the triangle witnesses. The move from left/right-pinched spaces to arrow spaces uses j and j^L, which are natural under simplicial functors as their nodes state. Step 3: full faithfulness plus the pointwise-equivalence node (K=N([1]x[1])) make the comparison an equivalence of whole squares. Step 4: I checked all hypotheses of the mapping criterion; the recognition node's invariance and specified-datum clauses then transfer the pullback to S_F. Small cases: B a point, T=id, e degenerate, empty mapping spaces. I also re-verified the scope example (F with a->b, a->c, no b->c): the test fails at c, outside the image of T, so the image-only conclusion is the right strength. There are no new nodes. The near neighbour lem-coef-infinity-equivalence-preserves-cocartesian-edges is a different statement, not a duplicate. A dependency traversal of 404 nodes found no cycle. All cited lemmas are in the item's unit, so no tool_uses are needed. No SGA is cited. No fixes."
  }
 }

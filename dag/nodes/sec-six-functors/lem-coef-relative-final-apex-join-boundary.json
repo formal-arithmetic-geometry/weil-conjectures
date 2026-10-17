@@ -13,9 +13,63 @@
   "def-coef-infinity-relative-cone",
   "lem-coef-infinity-relative-initial-boundary"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=K\\star\\partial\\Delta^r$ and $B=K\\star\\Delta^r$. The inclusion $A\\hookrightarrow B$ is degreewise injective by the join definition. Apply [lem-coef-infinity-monomorphism-boundary-cells] to obtain a relative skeletal filtration of $B$ starting at $A$ and attaching coproducts of boundary inclusions $\\partial\\Delta^n\\hookrightarrow\\Delta^n$, one for each nondegenerate simplex of $B$ outside $A$. We construct the desired lift along this filtration, retaining the already specified map on every previous stage.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0077",
+    "place": "Proposition 1.5.5.14, proof of (b), relative skeletal filtration."
+   }
+  },
+  {
+   "text": "Every nondegenerate simplex of $B$ outside $A$ has a nonempty $\\Delta^r$-block equal to the full nondegenerate $r$-simplex: if the $\\Delta^r$-block were a proper face, the simplex would lie in $K\\star\\partial\\Delta^r$. Thus it is the join of a nondegenerate $d$-simplex of $K$ with $\\Delta^r$, hence has dimension $n=d+r+1>0$, and its final vertex is the last vertex of the prescribed map $a$ (namely $a(r)$). This also covers $K=\\varnothing$, where the only new cell is $\\Delta^r$ itself.",
+   "uses": [
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (2), printed pp.337-338, simplex-by-simplex join expansion."
+   }
+  },
+  {
+   "text": "Suppose a stage of the filtration has already been lifted over $b$. For each newly attached $n$-simplex, its attaching boundary already has a map to $C$, and its composite with $p$ is the restriction of the corresponding $n$-simplex of $b$. By step 2 its final vertex is $a(r)$ and $n>0$. The $p$-final boundary criterion in [lem-coef-infinity-relative-initial-boundary] therefore supplies a filler $\\Delta^n\\to C$ whose restriction is exactly the prescribed boundary and whose composite with $p$ is exactly the base simplex. Since the cells at a stage meet only along their attaching boundaries, choose these fillers simultaneously and obtain the next-stage lift, fixed on the preceding stage.",
+   "uses": [
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Corollary 7.1.5.17, final-vertex boundary-filling criterion (opposite dual), expanded simplex-by-simplex."
+   }
+  },
+  {
+   "text": "At limit stages take the union of the compatible lifts. The filtration has colimit $B$, so the union is a simplicial map $h:B\\to C$; every finite simplex lies in a stage, hence all face and degeneracy equations hold. Each stage was over the fixed map $b$ and agreed with $a$ on $A$, so $ph=b$ exactly and $h|_A=a$ exactly. This proves the assertion, with no dimension-zero lifting requirement because $r>0$ ensures every newly attached cell has positive dimension.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (2), printed pp.337-338, compatible union conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-relative-initial-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Agent expansion of the last-apex portion of Higher Algebra Theorem 3.1.2.3, step (2), printed pp.337-338, using the relative boundary criterion and skeletal join filtration."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-left-horn-filling",
@@ -88,5 +142,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-final-apex-join-boundary",
+  "worker": "stage1",
+  "summary": "Split the relative final-apex join extension into a relative boundary-cell filtration, the join-simplex observation that every new cell has the prescribed final apex and positive dimension, the application of the existing relative-final boundary criterion to each cell, and the compatible union at limits. No new node was needed; all non-elementary facts are cited from existing DAG nodes.",
+  "blueprint": "Realizes the historical ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 middle comparison, specifically the Higher Algebra Theorem 3.1.2.3 step (2) last-apex relative-final boundary lifting on pp.337-338."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-6fdcf9d62",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-6fdcf9d62 (reviewer sub-agent of L); spot-checked: I read the whole item and every node it cites; no fixes were needed. Delivery: one commit with the item and its report, no new nodes. Statement: an inner fibration of quasicategories, r>0, a p-final last apex in the right-pinched Map sense and both equalities exact. These match the final-vertex clause of lem-coef-infinity-relative-initial-boundary (reviewed, Kerodon 02WS) and the parent's step 6 use (X*∂Δ^r over g with a q-final nullary apex); the item is not a restatement of a parent clause. Step 1: the injective inclusion and the relative cell filtration come from the Mathlib leaf lem-coef-infinity-monomorphism-boundary-cells (SSet.relativeCellComplexOfMono, Skeleton.lean:428-446). Step 2 (elementary): a nondegenerate simplex outside A is σ*Δ^r with d>=-1, so n>=r>0 and its last vertex is r, the apex a(r). Step 3: the boundary criterion applies cell by cell and gives both equalities. Step 4: the union over the ℕ-indexed filtration. Edge cases checked: K=∅ with r=1 (π0-surjectivity), K=Δ^0 with r=1 (A=Λ^2_0, two new cells), p=id, and D=Δ^0. Duplicate search with rg over dag/nodes: relative-limit-join-boundary, operadic-active-cone-boundary, simplex-join-attachment and cbc-terminal-boundary-extension all state different things. The route stays in sk-prop-sf-biduality-general and no tool_uses are needed. HA 3.1.2.3 and Kerodon are not in literature/, so I could not check them at the cited place; the proof is marked agent-written with WANTED recorded. No SGA source. Not a target node. Details in review.md."
  }
 }
