@@ -12,9 +12,117 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\widehat R$, with canonical map $c:R\\to S$, and put $J=IS$. By [lem-weil-pbc-local-completion-local-ring], $S$ is local with maximal ideal $\\mathfrak n=\\mathfrak mS$ and residue field $k=R/\\mathfrak m$. It is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. By [lem-weil-pbc-quotient-local-structure], $B$ has maximal ideal $\\mathfrak m/I$, and its powers are the images of $\\mathfrak m^n$. Thus [lem-weil-pbc-local-completion-quotient], applied to $R\\to R/I$, gives the canonical map $q$, its surjectivity and $\\ker q=J$. Completing $0\\to I\\to R\\to B\\to0$ by [lem-weil-pbc-completion-exact-finite-modules] identifies the completion $I^\\wedge$ of the $R$-module $I$ with $J$ as an $S$-module: the completed inclusion is injective with image $\\ker q$. These are the coordinatewise maps, so $a\\in I$ maps to $c(a)\\in J$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GI, 05GG, 0316, 00MA (lemma-completion-tensor) and 00MB (lemma-completion-flat), applied to the finite module exact sequence for R/I."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-weil-pbc-module-completion-complete] to the ideal $\\mathfrak m$ and module $I$, with exponent $1$. Together with the $S$-linear identification $I^\\wedge=J$ of step 1, it gives $I/\\mathfrak m I\\cong J/\\mathfrak nJ$ as $k$-vector spaces, carrying the class of $a$ to that of $c(a)$. Indeed $\\mathfrak m I^\\wedge$ maps to $\\mathfrak mJ=\\mathfrak nJ$: expand every element of $\\mathfrak n=\\mathfrak mS$ as a finite sum $\\sum c(a_j)s_j$ and absorb $s_j$ into the factor in $J$. The identification respects $k$ by the residue-field map in step 1.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), module quotient at exponent 1."
+   }
+  },
+  {
+   "text": "For the forward implication, let $f_1,\\ldots,f_t\\in I$ be a regular generating sequence. For $0\\leq i<t$, put $P_i=(f_1,\\ldots,f_i)$ and $M_i=R/P_i$. Multiplication $\\mu_i$ by $f_{i+1}$ on $M_i$ is injective by [def-weil-pbc-regular-sequence], and its cokernel is $M_{i+1}$. Complete the exact sequence $0\\to M_i\\xrightarrow{\\mu_i}M_i\\to M_{i+1}\\to0$ using [lem-weil-pbc-completion-exact-finite-modules]. The resulting multiplication map is injective. By [lem-weil-pbc-local-completion-quotient], $M_i^\\wedge=S/P_iS$; this isomorphism sends each compatible residue class to the same class in the quotient, so the completed map is multiplication by $c(f_{i+1})$. The final quotient $S/IS$ is nonzero because $IS\\subseteq\\mathfrak n$. Therefore $c(f_1),\\ldots,c(f_t)$ is regular and generates $J=\\ker q$.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LF (definition-regular-sequence), 00MA and 00MB, applied successively to the prefix quotients."
+   }
+  },
+  {
+   "text": "For the reverse implication, suppose $y_1,\\ldots,y_r\\in\\mathfrak n$ is a regular generating sequence of $J$. By [lem-weil-pbc-regular-sequence-conormal-free], $J/J^2$ has the displayed basis $y_j\\bmod J^2$ over $S/J$. Since $J\\subseteq\\mathfrak n$, we have $J^2\\subseteq\\mathfrak nJ$, and quotienting this basis isomorphism by $\\mathfrak n/J$ gives a basis $y_j\\bmod\\mathfrak nJ$ of $J/\\mathfrak nJ$ over $k$: componentwise reduction of $(S/J)^r$ is $k^r$. In particular this vector space has dimension $r$.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), degree 1, followed by componentwise quotient of a finite free module."
+   }
+  },
+  {
+   "text": "Using step 2, choose a basis of $I/\\mathfrak mI$ of length $r$ and lift its entries to $f_1,\\ldots,f_r\\in I$. By [lem-weil-pbc-nakayama-local-generators], these generate $I$, since $I$ is finitely generated. Their images $z_j=c(f_j)$ then generate $J=IS$: expand any element of $I$ in the $f_j$ and extend its coefficients to $S$. Now $J$ is a finite $S$-module with the two generating $r$-tuples $y$ and $z$, so [lem-pur-local-generating-tuples] gives $P=(p_{jk})\\in\\mathrm{GL}_r(S)$ with $z_j=\\sum_kp_{jk}y_k$. Put $C=S/J$. By [lem-pur-regular-sequence-graded-polynomial], $\\theta_y:C[T_1,\\ldots,T_r]\\to\\operatorname{gr}_J(S)$, $T_k\\mapsto[y_k]_1$, is an isomorphism. Let $\\sigma$ be the $C$-algebra endomorphism $T_j\\mapsto\\sum_k\\bar p_{jk}T_k$; it is a graded automorphism, with inverse given by the image of $P^{-1}$. Since $[z_j]_1=\\sum_k\\bar p_{jk}[y_k]_1$, the map $\\theta_z:T_j\\mapsto[z_j]_1$ equals $\\theta_y\\circ\\sigma$, hence is an isomorphism. As $S$ is Noetherian local (step 1), $z_j\\in J\\subseteq\\mathfrak n$ and $J=(z_1,\\ldots,z_r)$, [lem-pur-quasi-regular-noetherian-local] shows that $c(f_1),\\ldots,c(f_r)$ is regular in $S$. For $r=0$ all tuples are empty and $J=0$; the same citations apply.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-pur-local-generating-tuples",
+    "lem-pur-regular-sequence-graded-polynomial",
+    "lem-pur-quasi-regular-noetherian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Algebra Tag 00DV (lemma-NAK) for the lifted generators; More on Algebra Tag 066A (lemma-independence-of-generators), part (1) and its proof, with Algebra 00LN (lemma-regular-quasi-regular) and 061S (lemma-quasi-regular-regular) in algebra.tex."
+   }
+  },
+  {
+   "text": "Fix $0\\leq i<r$, put $P_i=(f_1,\\ldots,f_i)$, $M_i=R/P_i$, and let $K_i$ and $L_i$ be the kernel and image of multiplication $\\mu_i=f_{i+1}$ on $M_i$. These are finite $R$-modules by [lem-weil-pbc-noetherian-submodule-finite], since $M_i$ is cyclic. Complete $0\\to K_i\\to M_i\\to L_i\\to0$ and $0\\to L_i\\to M_i\\to M_i/L_i\\to0$ by [lem-weil-pbc-completion-exact-finite-modules]. The first gives $K_i^\\wedge$ as the kernel of $M_i^\\wedge\\to L_i^\\wedge$; the second makes $L_i^\\wedge\\to M_i^\\wedge$ injective. Their composite is $\\mu_i^\\wedge$, by its coordinatewise formula. Under [lem-weil-pbc-local-completion-quotient], $M_i^\\wedge=S/P_iS$ and this composite multiplies by $c(f_{i+1})$, which is injective by step 5. Hence $K_i^\\wedge=0$. Clause (2) of [lem-weil-pbc-module-completion-complete] gives $K_i/\\mathfrak mK_i=0$. Apply [lem-weil-pbc-nakayama-local-generators] with submodule $0\\subseteq K_i$: it yields $K_i=0$. This proves every required multiplication on $R/P_i$ injective. Finally $R/I\\neq0$ since $I\\subseteq\\mathfrak m$, so [def-weil-pbc-regular-sequence] proves $f_1,\\ldots,f_r$ regular.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IK (lemma-Noetherian-basic), 00MB, 00MA, 05GG, 00DV and 00LF; exactness and Nakayama reflect injectivity of each multiplication map."
+   }
+  },
+  {
+   "text": "The forward implication and the reverse implication give the claimed equivalence, using $\\ker q=IS$ from step 1. If $I=0$, the forward construction uses the empty sequence. Conversely, a regular sequence generating $J=0$ must have length $0$ by the conormal basis in step 4, and steps 2 and 5 give $I=0$ by Nakayama. Thus the empty-sequence case is included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Conclusion of the canonical completion comparison used in Divided Power Algebra Tag 09Q1 (lemma-quotient-regular-ring)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-regular-sequence",
+  "lem-pur-local-generating-tuples",
+  "lem-pur-quasi-regular-noetherian-local",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-regular-sequence-conormal-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09Q1 (lemma-quotient-regular-ring), completion comparison; detailed argument using Algebra 00MA, 00MB, 05GG and 00DV and More on Algebra 066A."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +151,45 @@
    "results": "RingTheory.Sequence.IsRegular.of_faithfullyFlat and ringKrullDim_add_length_eq_ringKrullDim_of_isRegular; no completion-kernel equivalence.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completion of a Noetherian local quotient has kernel generated by a regular sequence if and only if the original ideal is generated by a regular sequence",
+   "results": "{\"t\": \"2026-10-17T19:31:55Z\", \"tool\": \"leanfinder\", \"query\": \"completion of a Noetherian local quotient has kernel generated by a regular sequence if and only if the original ideal is generated by a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsRegular.cons'\", \"RingTheory.Sequence.isWeaklyRegular_iff\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"RingTheory.Sequence.isRegular_cons_iff\"], \"digest\": \"3f118db6c6ef7376\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: forward faithfully flat preservation is in Mathlib but no theorem states this equivalence of regular-sequence generation of a completion kernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, IsRegular",
+   "results": "{\"t\": \"2026-10-17T19:31:53Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, IsRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: forward faithfully flat preservation is in Mathlib but no theorem states this equivalence of regular-sequence generation of a completion kernel."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*regular.*sequence|regular.*sequence.*completion",
+   "results": "{\"t\": \"2026-10-17T19:31:52Z\", \"tool\": \"grep\", \"query\": \"completion.*regular.*sequence|regular.*sequence.*completion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: forward faithfully flat preservation is in Mathlib but no theorem states this equivalence of regular-sequence generation of a completion kernel."
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular sequence ideal generation is preserved and reflected by completion of a Noetherian local ring",
+   "results": "{\"t\": \"2026-10-17T19:31:53Z\", \"tool\": \"leansearch\", \"query\": \"regular sequence ideal generation is preserved and reflected by completion of a Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"IsLocalRing.isRegular_of_perm\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalization\", \"RingTheory.Sequence.IsRegular\", \"RingTheory.Sequence.IsRegular.recOn\", \"RingTheory.Sequence.IsRegular.casesOn\", \"AdicCompletion.map_exact\"], \"digest\": \"0811e0504d8eb901\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: forward faithfully flat preservation is in Mathlib but no theorem states this equivalence of regular-sequence generation of a completion kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complete intersection property of an ideal is unchanged by maximal ideal adic completion",
+   "results": "{\"t\": \"2026-10-17T19:32:13Z\", \"tool\": \"leanfinder\", \"query\": \"The complete intersection property of an ideal is unchanged by maximal ideal adic completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdic.isAdicComplete_iff\", \"IsAdic.isPrecomplete_iff\", \"isAdicComplete_iff\", \"IsAdicComplete\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsAdicComplete.le_jacobson_bot\", \"IsAdicComplete.toIsPrecomplete\", \"IsAdicComplete.henselianRing\"], \"digest\": \"bf824be3cd711401\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: forward faithfully flat preservation is in Mathlib but no theorem states this equivalence of regular-sequence generation of a completion kernel."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-quotient-completion-kernel-test",
@@ -65,5 +208,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-completion-regular-kernel-preservation",
+  "worker": "stage1",
+  "summary": "Identified the canonical completed quotient kernel using existing nodes, proved preservation and reflection of the individual nonzerodivisor tests by exact finite-module completion and Nakayama, compared generator numbers by reduction modulo the maximal ideal and the conormal basis, and changed generators in the completion by the 066A(1) argument from existing nodes (generating tuples related by GL_r, the regular-sequence graded isomorphism, and quasi-regular implies regular over a Noetherian local ring). Statement unchanged. Maintainer review: the separate same-length change-of-generators node of the delivery was folded into step 5 and dropped.",
+  "blueprint": "Refines the canonical completion comparison of 09Q1 in the regular-quotient test, below the completion-to-local-complete-intersection argument of Curves 0C4E used by lem-trf-local-term-locality. All new ancestry is through this item and lem-trf-regular-quotient-completion-kernel-test.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-24cf3aa91",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-24cf3aa91 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited node statement and the Stacks sources: dpa 09Q1 statement and proof, more-algebra 066A(1) and its proof, algebra 05GG(2) and 00MA(2,3), with tags checked in tags/tags. The statement is unchanged and true for Noetherian local R; no regularity hypothesis is needed. I tested I=0, (x^2) in k[x]_(x), (y) and (x) in (k[x,y]/(x^2))_(x,y), and (x^2,xy) in k[x,y]_(x,y). Steps 1-4, 6 and 7 are correct: q is surjective with kernel IS by local-completion-quotient (I in m gives the maximal ideal m/I), and I^ is identified with IS by exact completion of finite modules. Step 2 gives I/mI = J/nJ by 05GG(2) and mJ=nJ. The forward direction completes the prefix exact sequences. The reverse direction gets dim J/nJ = r from the conormal basis, lifts a basis with Nakayama, and reflects each nonzerodivisor condition via K_i^=0, 05GG(2) and Nakayama. The empty case is handled. The route is sk-i-curve-zero, whose transitive uses include sk-thm-p1, sk-thm-reduction, sk-def-purity-conv and sk-prop-a1-kummer; no tool_uses are declared or needed, and no SGA is cited. Fault (C1 / brief section 2): the new node lem-trf-local-regular-generators-same-length is true, but it is a few-line consequence of three existing nodes on the route: lem-pur-local-generating-tuples (z=Py with P in GL_r), lem-pur-regular-sequence-graded-polynomial (theta_y is an isomorphism), and lem-pur-quasi-regular-noetherian-local, with theta_z = theta_y composed with the graded automorphism T -> P-bar T. None of the three reaches the item, so there is no cycle. I folded this 066A(1) argument into step 5 of fixes/dag/nodes/sec-trace-formula/lem-trf-completion-regular-kernel-preservation.json, recomputed proof_deps and updated the split_report summary; no file cites the dropped node. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
