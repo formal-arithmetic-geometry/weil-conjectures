@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.Linear
 public import Mathlib.LinearAlgebra.FreeModule.PID
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
+public import WeilConjectures.CategoryTheory.DerivedCategory.UniversalCoefficient
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
@@ -273,33 +274,7 @@ lemma telescopeShortComplex_shortExact (hϖ : ϖ ∈ nonZeroDivisors R) :
 end Telescope
 
 
-/-- The homology of a complex of `R`-modules is `R`-linear in the morphism. -/
-lemma homologyMap_smul' {K L : CochainComplex (ModuleCat.{u} R) ℤ} (r : R) (φ : K ⟶ L) (i : ℤ) :
-    HomologicalComplex.homologyMap (r • φ) i = r • HomologicalComplex.homologyMap φ i := by
-  rw [HomologicalComplex.homologyMap, HomologicalComplex.homologyMap,
-    ← ShortComplex.homologyMap_smul]
-  congr 1
-
 variable [HasDerivedCategory.{u} (ModuleCat.{u} R)]
-
-/-- The cohomology functors of `D(R)` are `R`-linear on the scalar endomorphisms. -/
-lemma homologyFunctor_map_smul_id (r : R) (n : ℤ) (X : DerivedCategory (ModuleCat.{u} R)) :
-    (homologyFunctor (ModuleCat.{u} R) n).map (r • 𝟙 X) = r • 𝟙 _ := by
-  let e := Q.objObjPreimageIso X
-  have hX : r • 𝟙 X = e.inv ≫ Q.map (r • 𝟙 _) ≫ e.hom := by
-    rw [Functor.map_smul, CategoryTheory.Functor.map_id, Linear.smul_comp, Linear.comp_smul,
-      Category.id_comp, Iso.inv_hom_id]
-  have hQ : (homologyFunctor (ModuleCat.{u} R) n).map (Q.map (r • 𝟙 (Q.objPreimage X))) =
-      r • 𝟙 _ := by
-    have := (homologyFunctorFactors (ModuleCat.{u} R) n).hom.naturality (r • 𝟙 (Q.objPreimage X))
-    rw [← cancel_mono ((homologyFunctorFactors (ModuleCat.{u} R) n).hom.app _)]
-    erw [this]
-    change _ ≫ HomologicalComplex.homologyMap (r • 𝟙 _) n = _
-    rw [homologyMap_smul', HomologicalComplex.homologyMap_id, Linear.smul_comp,
-      Linear.comp_smul]
-    simp
-  rw [hX, Functor.map_comp, Functor.map_comp, hQ, Linear.smul_comp, Linear.comp_smul,
-    Category.id_comp, ← Functor.map_comp, Iso.inv_hom_id, CategoryTheory.Functor.map_id]
 
 /-- Let `ϖ` be a nonzerodivisor and `C ∈ D(R)` an object receiving no nonzero map from an object
 on which `ϖ` acts invertibly. Then every `ϖ`-divisible sequence `x` of `H⁰(C)`

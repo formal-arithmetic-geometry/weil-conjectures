@@ -291,8 +291,8 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal {ϖ : Λ}
     (hϖ : ϖ ∈ nonZeroDivisors Λ) [IsAdicComplete (Ideal.span {ϖ}) Λ]
     {N N₁ : _root_.DerivedCategory
       (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hN : (_root_.DerivedCategory.smulInvertible (Spec (.of k)).smallEtaleTopology ϖ).rightOrthogonal
-      N)
+    (hN : (_root_.DerivedCategory.smulInvertible (Spec (.of k)).smallEtaleTopology
+      ϖ).rightOrthogonal N)
     {g : N ⟶ N₁} {h : N₁ ⟶ N⟦(1 : ℤ)⟧} (hT : Triangle.mk (ϖ • 𝟙 N) g h ∈ distTriang _)
     (hN₁ : ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj N₁).IsPerfect) :
     ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj N).IsPerfect := by
@@ -327,8 +327,8 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
     {a b : ℤ} (hKt : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
       ((reductionModIdeal Λ X I).obj K))
     (N : _root_.DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hN : (_root_.DerivedCategory.smulInvertible (Spec (.of k)).smallEtaleTopology ϖ).rightOrthogonal
-      N)
+    (hN : (_root_.DerivedCategory.smulInvertible (Spec (.of k)).smallEtaleTopology
+      ϖ).rightOrthogonal N)
     (φ : (R(aX)_![ModuleCat.{u + 1} Λ]).obj K ⟶ N)
     (hφ : ∀ (Y : _root_.DerivedCategory
         (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) (g : N ⟶ Y)
@@ -368,11 +368,11 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
     ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).mapIso
       ((e₂.app K).symm ≪≫ asIso (F.map φ) ≪≫ e₁.symm))
 
-#exit
 variable [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
   [HasCompactification aX]
 
+omit [IsDomain Λ] [IsPrincipalIdealRing Λ] [IsSepClosed k] in
 /-- For `I = 0`, the ring `Λ ≅ Λ/I` is finite of exponent invertible in `k`, so the integral
 stage is the finite stage. -/
 lemma finite_and_hasInvertibleExponent_of_eq_bot (h : I = ⊥) :
@@ -506,7 +506,7 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
     _ hN (𝟙 _) fun Y g h hY ↦ ?_).of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)
-  have hY0 : IsZero Y := (Triangle.isZero₃_iff_isIso₁ _ hY).2 (by dsimp; infer_instance)
+  have hY0 : IsZero Y := (Triangle.isZero₃_iff_isIso₁ _ hY).2 (inferInstanceAs (IsIso (𝟙 _)))
   exact ⟨⟨0, hY0.eq_of_src _ _, hY0.eq_of_src _ _⟩⟩
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.

@@ -2754,7 +2754,6 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism.Point
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport.AdicReconstruction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
