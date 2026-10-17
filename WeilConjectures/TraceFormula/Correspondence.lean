@@ -60,7 +60,7 @@ correspondence `(X, Δ, 1_K)`, through the Künneth–Verdier isomorphism
   (`ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_trace`,
   blueprint `thm-trf-frobenius-local-term`). The dualizing complex of the curve enters through
   smooth purity `ω_C ≅ ℚ̄_ℓ,C(1)[2]` (`dualizingComplexSmoothIso`), and that of the reduced
-  point components of the fixed locus through étale purity (`BorelMooreSection.restrict`).
+  point components of the fixed locus through `Rj^! ≅ Lj^*` (`BorelMooreSection.restrict`).
 
 The trace class and the theorems about it are in `WeilConjectures.TraceFormula.TraceClass`.
 

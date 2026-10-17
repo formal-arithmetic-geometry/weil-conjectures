@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.SmoothPurity.Defs
@@ -48,12 +49,13 @@ For the base point no purity is needed: `a_s` is the identity of `s`, and
 ## Borel–Moore sections and integration
 
 A *Borel–Moore section* of `X` is a morphism `α : ℚ̄_ℓ,X ⟶ ω_X`
-(`ProEtale.CondensedRing.BorelMooreSection`, blueprint `sk-d-integral`). Along an étale morphism
+(`ProEtale.CondensedRing.BorelMooreSection`, blueprint `sk-d-integral`). Along an open immersion
 `j : U ⟶ X` it restricts to
 ```
-j^* α : ℚ̄_ℓ,U ≅ Rj^! ℚ̄_ℓ,X --Rj^! α--> Rj^! ω_X ≅ ω_U
+j^* α : ℚ̄_ℓ,U ≅ Lj^* ℚ̄_ℓ,X --Lj^* α--> Lj^* ω_X ≅ Rj^! ω_X ≅ ω_U
 ```
-by étale purity (`ProEtale.CondensedRing.BorelMooreSection.restrict`). For `X` proper over `s`
+through the canonical identification `Rj^! ≅ Lj^*` for open immersions
+(`ProEtale.CondensedRing.BorelMooreSection.restrict`). For `X` proper over `s`
 its *integral* is
 ```
 ∫_X α : ℚ̄_ℓ,s ⟶ Ra_{X*} La_X^* ℚ̄_ℓ,s ≅ Ra_{X*} ℚ̄_ℓ,X ≅ Ra_{X!} ℚ̄_ℓ,X --α^♭--> ℚ̄_ℓ,s,
@@ -209,17 +211,20 @@ namespace BorelMooreSection
 
 variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] [LocallyOfFiniteType U.hom]
   [IsSeparated U.hom] in
-/-- The *restriction* of a Borel–Moore section along an étale morphism `j : U ⟶ X`, for
+/-- The *restriction* of a Borel–Moore section along an open immersion `j : U ⟶ X`, for
 instance the inclusion of an open and closed subscheme:
 ```
-j^* α : ℚ̄_ℓ,U ≅ Rj^! ℚ̄_ℓ,X --Rj^! α--> Rj^! ω_X ≅ ω_U,
+j^* α : ℚ̄_ℓ,U ≅ Lj^* ℚ̄_ℓ,X --Lj^* α--> Lj^* ω_X ≅ Rj^! ω_X ≅ ω_U,
 ```
-through étale purity `etalePurityIso` and `dualizingComplexComp` (blueprint `def-trf-local-term`,
-restricted sections). -/
-noncomputable def restrict (j : U ⟶ X) [SmoothOfRelativeDimension 0 j.left]
+through the unit isomorphism of the monoidal functor `Lj^*`, the identification
+`Rj^! ≅ Lj^*` for the open immersion `j` (`boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl`)
+and `dualizingComplexComp` (blueprint `def-trf-local-term`, restricted sections). -/
+noncomputable def restrict (j : U ⟶ X) [IsOpenImmersion j.left]
     (α : BorelMooreSection ℓ X) : BorelMooreSection ℓ U :=
-  (etalePurityIso ℓ j).inv ≫
-    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map α ≫
+  (Functor.Monoidal.εIso
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)).hom ≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map α ≫
+    (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j).inv.app _ ≫
     (dualizingComplexComp ℓ j).hom
 
 /-- The *integral* `∫_X α ∈ End ℚ̄_ℓ,s` of a Borel–Moore section of a scheme proper over `s`:
