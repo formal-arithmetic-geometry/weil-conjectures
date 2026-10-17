@@ -128,7 +128,8 @@ noncomputable def derivedComparisonAdjunction : D(ν^*(X)[A]) ⊣ R(ν_*(X)[A]) 
   (comparisonAdjunction A X).derivedAdjunction.ofNatIsoLeft
     (ν^*(X)[A]).leftDerivedFunctorIsoMapDerivedCategory
 
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+/-- Blueprints `sk-prop-sf-comparison`, `thm-weil-pbc-site-comparison`: The pro-étale
+comparison
 
 *Full faithfulness on `D⁺`.* For a bounded below complex `M` of étale sheaves, the unit
 `M ⟶ Rν_* ν^* M` of the comparison adjunction is an isomorphism: this is the assertion
@@ -158,8 +159,8 @@ theorem isIso_derivedComparisonAdjunction_unit_app
   exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ _ this
 
 variable {A X} in
-/-- `D(ν^*)` is fully faithful on bounded below complexes: for `K` and `M` in `D⁺(X_ét)`,
-`D(ν^*)` induces a bijection `Hom(K, M) ≃ Hom(ν^* K, ν^* M)`. It is the composite of the
+/-- Blueprint `thm-weil-pbc-site-comparison`: `D(ν^*)` is fully faithful on bounded below
+complexes: for `K` and `M` in `D⁺(X_ét)`, `D(ν^*)` induces a bijection `Hom(K, M) ≃ Hom(ν^* K, ν^* M)`. It is the composite of the
 bijection `Hom(K, M) ≃ Hom(K, Rν_* ν^* M)` given by the unit, which is invertible at the bounded
 below `M` (`isIso_derivedComparisonAdjunction_unit_app`), and the adjunction
 `D(ν^*) ⊣ Rν_*`. Only `M` needs to be bounded below. -/

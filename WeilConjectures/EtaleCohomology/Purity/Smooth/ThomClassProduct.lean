@@ -135,14 +135,16 @@ lemma bijective_comp_whiskerRight {C : Type*} [Category C] [MonoidalCategory C] 
     Function.Bijective (fun f : S ⟶ E ⊗ L ↦ f ≫ χ ▷ L) := by
   let Eq := tensorRightEquivalenceOfTensorIso e e'
   have hF := Eq.fullyFaithfulFunctor
-  refine bijective_comp_of_iso_left (Eq.counitIso.app S).symm _ ?_
-  have : (fun f : Eq.functor.obj (Eq.inverse.obj S) ⟶ E ⊗ L ↦ f ≫ χ ▷ L) =
-      (fun f ↦ Eq.functor.map f) ∘ (fun f : S ⊗ L' ⟶ E ↦ f ≫ χ) ∘ hF.preimage := by
-    funext f
-    simp only [Function.comp_apply, Functor.map_comp, Functor.FullyFaithful.map_preimage]
-    rfl
-  rw [this]
-  exact hF.map_bijective _ _ |>.comp (h.comp hF.homEquiv.symm.bijective)
+  have key : Function.Bijective
+      (fun f : Eq.functor.obj (Eq.inverse.obj S) ⟶ Eq.functor.obj E ↦ f ≫ Eq.functor.map χ) := by
+    have : (fun f : Eq.functor.obj (Eq.inverse.obj S) ⟶ Eq.functor.obj E ↦
+        f ≫ Eq.functor.map χ) =
+        (fun f ↦ Eq.functor.map f) ∘ (fun f : S ⊗ L' ⟶ E ↦ f ≫ χ) ∘ hF.preimage := by
+      funext f
+      simp only [Function.comp_apply, Functor.map_comp, Functor.FullyFaithful.map_preimage]
+    rw [this]
+    exact hF.map_bijective _ _ |>.comp (h.comp hF.homEquiv.symm.bijective)
+  exact bijective_comp_of_iso_left (Eq.counitIso.app S).symm _ key
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
@@ -364,6 +366,287 @@ lemma isIso_iff_isSupportedUniversal
     exact isIso_of_reflects_iso φ (R(i)_![ModuleCat.{u + 1} Λ])
 
 end Universal
+
+section Restriction
+
+variable {U U' Z₂ Z' : Scheme.{u}} (e : U' ⟶ U) (i₂ : Z₂ ⟶ U) (b : Z' ⟶ U')
+  [IsClosedImmersion i₂] [IsClosedImmersion b] (g : Z' ⟶ Z₂) (hg : IsPullback g b i₂ e)
+
+/-- **Forget supports after restriction.** Let `β` be a class supported on `Z₂` and `β'` its
+restriction along `e : U' ⟶ U` to the base change `b : Z' ⟶ U'`. Up to an isomorphism
+`Rb_! Λ_{Z'} ≅ Le^* Ri₂_! Λ_{Z₂}` of the sources, the forget-supports morphism of `β'` is the
+pullback of that of `β`, followed by `τ`. -/
+lemma exists_iso_forget_restrictSupportedClass
+    {L₂ : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {L₂' : _root_.DerivedCategory (Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L₂ ≅ L₂')
+    (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj L₂)) :
+    ∃ σ : (R(b)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z') ≅
+        (L((e)^*[ModuleCat.{u + 1} Λ])).obj
+          ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂)),
+      (R(b)_![ModuleCat.{u + 1} Λ]).map (supportedTranspose Λ b
+          (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i₂ b g hg
+            (leftDerivedUpperStarConstantComplexIso Λ e).inv τ β)) ≫
+          (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) b).counit.app L₂' =
+        σ.hom ≫ (L((e)^*[ModuleCat.{u + 1} Λ])).map
+          ((R(i₂)_![ModuleCat.{u + 1} Λ]).map (supportedTranspose Λ i₂ β) ≫
+            (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i₂).counit.app L₂) ≫
+          τ.hom := by
+  set A := ModuleCat.{u + 1} Λ
+  set u₂ := supportedRestrictionMap Λ i₂
+  set v := (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫ (L((e)^*[A])).map u₂
+  have hsupp : IsSupported Λ b ((L((e)^*[A])).obj ((R(i₂)_![A]).obj (constantComplex Λ Z₂))) :=
+    isZero_leftDerivedUpperStar_openComplement_obj Λ e i₂ b g hg _
+  have hub := isIso_leftDerivedUpperStar_map_supportedRestrictionMap Λ b
+  have hv : IsIso ((L((b)^*[A])).map v) := by
+    have := isIso_leftDerivedUpperStar_map_supportedRestrictionMap Λ i₂
+    have h₂ : IsIso ((L((i₂)^*[A]) ⋙ L((g)^*[A])).map u₂) :=
+      inferInstanceAs (IsIso ((L((g)^*[A])).map ((L((i₂)^*[A])).map u₂)))
+    have h₁ : IsIso ((L((e)^*[A]) ⋙ L((b)^*[A])).map u₂) :=
+      (NatIso.isIso_map_iff ((leftDerivedUpperStarComp A b e (g ≫ i₂) hg.w).symm ≪≫
+        leftDerivedUpperStarComp A g i₂) u₂).2 h₂
+    have : IsIso ((L((b)^*[A])).map ((L((e)^*[A])).map u₂)) := h₁
+    simp only [v, Functor.map_comp]
+    infer_instance
+  obtain ⟨σ, hσ⟩ := exists_iso_comp_eq Λ b (isSupported_rightDerivedLowerShriek Λ b _) hsupp
+    (supportedRestrictionMap Λ b) v hub hv
+  refine ⟨σ, ?_⟩
+  have hψ : supportedRestriction A e i₂ b g hg L₂ L₂' τ ≫
+      (rightDerivedUpperShriekAdjunction A b).counit.app L₂' =
+        (L((e)^*[A])).map ((rightDerivedUpperShriekAdjunction A i₂).counit.app L₂) ≫ τ.hom :=
+    (existsUnique_supportedRestriction A e i₂ b g hg L₂ L₂' τ).exists.choose_spec
+  have hβ' : u₂ ≫ (R(i₂)_![A]).map (supportedTranspose Λ i₂ β) = β :=
+    supportedRestrictionMap_comp_map_supportedTranspose Λ i₂ β
+  have key : (R(b)_![A]).map (supportedTranspose Λ b
+      (restrictSupportedClass A e i₂ b g hg (leftDerivedUpperStarConstantComplexIso Λ e).inv τ
+        β)) =
+      σ.hom ≫ (L((e)^*[A])).map ((R(i₂)_![A]).map (supportedTranspose Λ i₂ β)) ≫
+        supportedRestriction A e i₂ b g hg L₂ L₂' τ := by
+    apply (bijective_supportedRestrictionMap_comp Λ b _).1
+    dsimp only
+    rw [supportedRestrictionMap_comp_map_supportedTranspose, ← Category.assoc, hσ]
+    simp only [v, restrictSupportedClass, Category.assoc, ← Functor.map_comp_assoc, hβ']
+  rw [key]
+  simp only [Category.assoc, Functor.map_comp, hψ]
+
+end Restriction
+
+section Product
+
+variable [Finite Λ] {U Z₁ Z₂ Z : Scheme.{u}} (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
+  [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
+
+/-- **The cup product of Thom classes.** Let `i₁ : Z₁ ⟶ U`, `i₂ : Z₂ ⟶ U` be closed immersions
+meeting in `i : Z ⟶ U` (with `Z ⊆ Z₁` and `Z ⊆ Z₂` scheme-theoretically), `b : Z' ⟶ Z₁` the
+base change of `i₂` along `i₁`, and let `α ∈ H_{Z₁}(U, L₁)`, `β ∈ H_{Z₂}(U, L₂)` be classes with
+supports, `L₂` invertible. If the adjoint of `α` is an isomorphism and the adjoint of the
+restriction of `β` to `Z₁` is an isomorphism, then the adjoint `Λ_Z ⟶ Ri^! (L₁ ⊗ L₂)` of the
+cup product with supports `α ∪ β` is an isomorphism. -/
+theorem isIso_supportedTranspose_cupWithSupports
+    (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
+    (b₁ : Z ⟶ Z₁) (hb₁ : b₁ ≫ i₁ = i) (b₂ : Z ⟶ Z₂) (hb₂ : b₂ ≫ i₂ = i)
+    {Z' : Scheme.{u}} (b : Z' ⟶ Z₁) [IsClosedImmersion b] (g : Z' ⟶ Z₂)
+    (hg : IsPullback g b i₂ i₁)
+    {L₁ L₂ : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hL₂ : DerivedCategory.isInvertible Λ U L₂)
+    {L₂' : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (τ : (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj L₂ ≅ L₂')
+    (Δ : constantComplex Λ U ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+      (constantComplex Λ U)).obj (constantComplex Λ U)) [IsIso Δ]
+    (α : constantComplex Λ U ⟶ (R(i₁)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i₁)^![ModuleCat.{u + 1} Λ]).obj L₁))
+    (β : constantComplex Λ U ⟶ (R(i₂)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i₂)^![ModuleCat.{u + 1} Λ]).obj L₂))
+    (hα : IsIso (supportedTranspose Λ i₁ α))
+    (hβ : IsIso (supportedTranspose Λ b (restrictSupportedClass (ModuleCat.{u + 1} Λ) i₁ i₂ b g
+      hg (leftDerivedUpperStarConstantComplexIso Λ i₁).inv τ β))) :
+    IsIso (supportedTranspose Λ i (cupWithSupports (ModuleCat.{u + 1} Λ) i₁ i₂ i h Δ α β)) := by
+  set u₁ := supportedRestrictionMap Λ i₁
+  set u₂ := supportedRestrictionMap Λ i₂
+  set φ₁ := supportedTranspose Λ i₁ α
+  set φ₂ := supportedTranspose Λ i₂ β
+  set χ₁ := (R(i₁)_![ModuleCat.{u + 1} Λ]).map φ₁ ≫
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i₁).counit.app L₁
+  set χ₂ := (R(i₂)_![ModuleCat.{u + 1} Λ]).map φ₂ ≫
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i₂).counit.app L₂
+  set Q := derivedTensorHom (ModuleCat.{u + 1} Λ) ((R(i₁)_![ModuleCat.{u + 1} Λ]).map φ₁)
+      ((R(i₂)_![ModuleCat.{u + 1} Λ]).map φ₂) ≫
+    supportedProduct (ModuleCat.{u + 1} Λ) i₁ i₂ i h L₁ L₂
+  set w := Δ ≫ derivedTensorHom (ModuleCat.{u + 1} Λ) u₁ u₂
+  have hα' : u₁ ≫ (R(i₁)_![ModuleCat.{u + 1} Λ]).map φ₁ = α :=
+    supportedRestrictionMap_comp_map_supportedTranspose Λ i₁ α
+  have hβ' : u₂ ≫ (R(i₂)_![ModuleCat.{u + 1} Λ]).map φ₂ = β :=
+    supportedRestrictionMap_comp_map_supportedTranspose Λ i₂ β
+  have hcup : cupWithSupports (ModuleCat.{u + 1} Λ) i₁ i₂ i h Δ α β = w ≫ Q := by
+    rw [cupWithSupports_eq, ← hα', ← hβ', ← derivedTensorHom_comp]
+    simp only [w, Q, Category.assoc]
+  have hsub₁ : Set.range i.base ⊆ Set.range i₁.base := by
+    rintro _ ⟨z, rfl⟩
+    exact ⟨b₁.base z, by rw [← Scheme.Hom.comp_apply, hb₁]⟩
+  -- the source `E₁ ⊗ E₂` of `Q` is supported on `Z`
+  have hT : IsSupported Λ i (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+      ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj
+        ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂))) :=
+    isZero_leftDerivedUpperStar_derivedTensor_of_disjoint _ i₁ i₂ i h
+      (fun v hv ↦ isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint _ i₁ _ v hv)
+      (fun v hv ↦ isZero_leftDerivedUpperStar_rightDerivedLowerShriek_of_disjoint _ i₂ _ v hv)
+      _ (disjoint_range_openComplement_ι i)
+  -- `Λ_U ⟶ Ri_! Λ_Z` and `Λ_U ⟶ E₁ ⊗ E₂` are reflections, so they differ by an isomorphism
+  have hLw : IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map w) := by
+    have hu : ∀ {Y : Scheme.{u}} (c : Y ⟶ U) [IsClosedImmersion c] (d : Z ⟶ Y),
+        d ≫ c = i → IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map (supportedRestrictionMap Λ c)) := by
+      intro Y c _ d hd
+      have := isIso_leftDerivedUpperStar_map_supportedRestrictionMap Λ c
+      have : IsIso ((L((c)^*[ModuleCat.{u + 1} Λ]) ⋙ L((d)^*[ModuleCat.{u + 1} Λ])).map
+          (supportedRestrictionMap Λ c)) :=
+        inferInstanceAs (IsIso ((L((d)^*[ModuleCat.{u + 1} Λ])).map
+          ((L((c)^*[ModuleCat.{u + 1} Λ])).map (supportedRestrictionMap Λ c))))
+      exact (NatIso.isIso_map_iff (leftDerivedUpperStarComp _ d c i hd.symm) _).2 this
+    have hu₁ := hu i₁ b₁ hb₁
+    have hu₂ := hu i₂ b₂ hb₂
+    have : IsIso (derivedTensorHom (ModuleCat.{u + 1} Λ)
+        ((L((i)^*[ModuleCat.{u + 1} Λ])).map u₁) ((L((i)^*[ModuleCat.{u + 1} Λ])).map u₂)) := by
+      unfold derivedTensorHom
+      infer_instance
+    have hn := leftDerivedUpperStarTensorIso_hom_naturality (ModuleCat.{u + 1} Λ) i u₁ u₂
+    have : IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map
+        (derivedTensorHom (ModuleCat.{u + 1} Λ) u₁ u₂) ≫
+          (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) i _ _).hom) := by
+      rw [hn]
+      infer_instance
+    have : IsIso ((L((i)^*[ModuleCat.{u + 1} Λ])).map
+        (derivedTensorHom (ModuleCat.{u + 1} Λ) u₁ u₂)) :=
+      IsIso.of_isIso_comp_right _ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) i _ _).hom
+    simp only [w, Functor.map_comp]
+    infer_instance
+  obtain ⟨a, ha⟩ := exists_iso_comp_eq Λ i (isSupported_rightDerivedLowerShriek Λ i _) hT
+    (supportedRestrictionMap Λ i) w (isIso_leftDerivedUpperStar_map_supportedRestrictionMap Λ i)
+    hLw
+  -- `Ri_! ψ = a ≫ Q`
+  have hψ : (R(i)_![ModuleCat.{u + 1} Λ]).map
+      (supportedTranspose Λ i (cupWithSupports (ModuleCat.{u + 1} Λ) i₁ i₂ i h Δ α β)) =
+        a.hom ≫ Q := by
+    apply (bijective_supportedRestrictionMap_comp Λ i _).1
+    dsimp only
+    rw [supportedRestrictionMap_comp_map_supportedTranspose, ← Category.assoc, ha, hcup]
+  suffices hQ : IsIso Q by
+    have : IsIso ((R(i)_![ModuleCat.{u + 1} Λ]).map
+        (supportedTranspose Λ i (cupWithSupports (ModuleCat.{u + 1} Λ) i₁ i₂ i h Δ α β))) := by
+      rw [hψ]
+      infer_instance
+    exact isIso_of_reflects_iso _ (R(i)_![ModuleCat.{u + 1} Λ])
+  -- the composite of `Q` with the counit is `χ₁ ⊗ χ₂`
+  have hQε : Q ≫ (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app
+      (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj L₁).obj L₂) =
+      ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+        ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).map χ₂ ≫
+        ((derivedTensor (ModuleCat.{u + 1} Λ) U).map χ₁).app L₂ := by
+    have : Q ≫ (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).counit.app
+        (((derivedTensor (ModuleCat.{u + 1} Λ) U).obj L₁).obj L₂) =
+        derivedTensorHom (ModuleCat.{u + 1} Λ) χ₁ χ₂ := by
+      simp only [Q, χ₁, χ₂, Category.assoc, supportedProduct_comp_counit, derivedTensorHom_comp]
+    rw [this]
+    exact (((derivedTensor (ModuleCat.{u + 1} Λ) U).map χ₁).naturality χ₂).symm
+  -- `- ⊗ L₂` and the universal property of `χ₁`
+  have h₁ : ∀ S, IsSupported Λ i S → Function.Bijective
+      (fun f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+        ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj L₂ ↦
+          f ≫ ((derivedTensor (ModuleCat.{u + 1} Λ) U).map χ₁).app L₂) := by
+    obtain ⟨M, ⟨eM⟩, ⟨eM'⟩⟩ := hL₂
+    have huniv₁ := (isIso_iff_isSupportedUniversal Λ i₁ φ₁).1 hα
+    intro S hS
+    exact bijective_comp_derivedTensor_map_app _ eM eM' χ₁
+      (huniv₁ _ ((hS.derivedTensor M).mono hsub₁))
+  -- the projection formula for `i₁` and the universal property of the restriction of `χ₂`
+  have h₂ : ∀ S, IsSupported Λ i S → Function.Bijective
+      (fun f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+          ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj
+            ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂)) ↦
+        f ≫ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+          ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).map χ₂) := by
+    intro S hS
+    obtain ⟨σ, hσ⟩ := exists_iso_forget_restrictSupportedClass Λ i₁ i₂ b g hg τ β
+    have huniv₂ := (isIso_iff_isSupportedUniversal Λ b _).1 hβ
+    -- `L i₁^* S` is supported on `Z'`
+    have hS' : IsSupported Λ b ((L((i₁)^*[ModuleCat.{u + 1} Λ])).obj S) := by
+      refine hS.leftDerivedUpperStar i₁ ?_
+      rw [Set.disjoint_left]
+      rintro _ ⟨y, rfl⟩ ⟨z, hz⟩
+      apply y.2
+      rw [Scheme.range_snd_of_isPullback hg]
+      refine ⟨b₂.base z, ?_⟩
+      rw [← Scheme.Hom.comp_apply, hb₂, hz, Scheme.Hom.comp_apply]
+      rfl
+    have hχ₂ : Function.Bijective
+        (fun f : (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj S ⟶ (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj
+            ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂)) ↦
+          f ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂) := by
+      have h0 := huniv₂ _ hS'
+      simp only [hσ] at h0
+      have : (fun f : (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj S ⟶
+            (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj
+              ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂)) ↦
+            f ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂) =
+          (fun f ↦ f ≫ τ.inv) ∘
+            (fun f ↦ f ≫ σ.hom ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂ ≫ τ.hom) ∘
+              (fun f ↦ f ≫ σ.inv) := by
+        funext f
+        simp
+      rw [this]
+      exact (bijective_comp_right_of_isIso _).comp (h0.comp (bijective_comp_right_of_isIso _))
+    -- transport along the projection formula and the adjunction `Li₁^* ⊣ Ri₁_*`
+    have := isIso_projectionMap_of_finite Λ i₁
+    let PF := (projectionMap (ModuleCat.{u + 1} Λ) i₁).app (constantComplex Λ Z₁)
+    let θ := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i₁
+    let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i₁
+    let lZ := derivedTensorLeftUnitorNatIso (ModuleCat.{u + 1} Λ) Z₁
+    let Φ : ∀ X, (S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+        ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj X) ≃
+        ((L((i₁)^*[ModuleCat.{u + 1} Λ])).obj S ⟶ (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj X) :=
+      fun X ↦ ((Iso.refl S).homCongr (asIso (PF.app X) ≪≫
+        (R(i₁)_![ModuleCat.{u + 1} Λ]).mapIso (lZ.app _) ≪≫ θ.app _)).trans
+          (adj.homEquiv _ _).symm
+    have hΦ : ∀ (f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+        ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj
+          ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂))),
+        Φ L₂ (f ≫ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+          ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).map χ₂) =
+          Φ _ f ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂ := by
+      intro f
+      have n₁ := PF.naturality χ₂
+      have n₂ := lZ.hom.naturality ((L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂)
+      have n₃ := θ.hom.naturality ((L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂)
+      simp only [Φ, Equiv.trans_apply, Iso.homCongr_apply, Iso.refl_inv, Category.id_comp,
+        Iso.trans_hom, asIso_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+      rw [← Adjunction.homEquiv_naturality_right_symm]
+      congr 1
+      dsimp only [Functor.id_obj, Functor.id_map] at n₂
+      erw [reassoc_of% n₁]
+      rw [← Functor.map_comp_assoc]
+      erw [n₂]
+      rw [Functor.map_comp_assoc, n₃]
+    have : (fun f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+          ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj
+            ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂)) ↦
+          f ≫ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+            ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).map χ₂) =
+        (Φ L₂).symm ∘ (fun f ↦ f ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂) ∘ Φ _ := by
+      funext f
+      simp only [Function.comp_apply]
+      rw [← hΦ, Equiv.symm_apply_apply]
+    rw [this]
+    exact (Φ L₂).symm.bijective.comp (hχ₂.comp (Φ _).bijective)
+  have hbQ : ∀ S, IsSupported Λ i S → Function.Bijective
+      (fun f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+          ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj
+            ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂)) ↦ f ≫ Q) :=
+    fun S hS ↦ bijective_comp_of_bijective_comp_comp (by simpa only [hQε] using
+      bijective_comp_comp (h₂ S hS) (h₁ S hS)) (bijective_comp_counit Λ i hS _)
+  exact isIso_of_bijective_comp_right _ (hbQ _ (isSupported_rightDerivedLowerShriek Λ i _)).2
+    (hbQ _ hT).1
+
+end Product
 
 end Etale
 

@@ -24,11 +24,19 @@ tensor formula of `sk-prop-cohsm`, and it is the last factor of the smooth purit
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.tensorComparison`: `φ_{f,K}`.
+- `AlgebraicGeometry.Etale.traceComparisonOfIsIso`,
+  `AlgebraicGeometry.Etale.traceComparisonSymmOfIsIso`:
+  the exceptional adjoint `T ⊗ᴸ Lf^* K ⟶ Rf^! K` of the projection-formula composite with an
+  integration map `Rf_! T ⟶ Λ_Y`.
+- `AlgebraicGeometry.Etale.traceAdjunct`: the adjunct `T ⟶ ω_f` of an integration map.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.dualizingComplexTensorMap_naturality`,
   `AlgebraicGeometry.Etale.tensorComparison_naturality`: both maps are natural in `K`.
+- `AlgebraicGeometry.Etale.traceComparisonOfIsIso_eq`,
+  `AlgebraicGeometry.Etale.traceComparisonSymmOfIsIso_eq`: the trace comparison of an integration
+  map is its adjunct `T ⟶ ω_f` followed by the tensor map.
 
 ## Implementation notes
 
@@ -108,6 +116,78 @@ lemma isIso_tensorComparisonOfIsIso_iff
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     IsIso (tensorComparisonOfIsIso f K) ↔ IsIso (dualizingComplexTensorMapOfIsIso f K) := by
   rw [tensorComparisonOfIsIso, isIso_comp_left_iff]
+
+
+/-- The **trace comparison** of a map `tr : Rf_! T ⟶ Λ_Y` (an integration map): the adjunct
+under `Rf_! ⊣ Rf^!` of
+
+`Rf_!(T ⊗ᴸ Lf^* K) ≅ Rf_! T ⊗ᴸ K ⟶ Λ_Y ⊗ᴸ K ≅ K`,
+
+the inverse of the projection map followed by `tr ⊗ 1` and the unit isomorphism. -/
+noncomputable def traceComparisonOfIsIso
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (tr : (R(f)_![A]).obj T ⟶ 𝟙_ _)
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    T ⊗ (L((f)^*[A])).obj K ⟶ (R(f)^![A]).obj K :=
+  (rightDerivedUpperShriekAdjunction A f).homEquiv _ _
+    (inv (((projectionMap A f).app T).app K) ≫ tr ▷ K ≫ (λ_ K).hom)
+
+/-- The adjunct `T ⟶ ω_f` of a map `tr : Rf_! T ⟶ Λ_Y` under `Rf_! ⊣ Rf^!`. -/
+noncomputable def traceAdjunct
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (tr : (R(f)_![A]).obj T ⟶ 𝟙_ _) :
+    T ⟶ dualizingComplex A f :=
+  (rightDerivedUpperShriekAdjunction A f).homEquiv _ _ tr
+
+/-- **The trace comparison factors through the tensor map.** The trace comparison of
+`tr : Rf_! T ⟶ Λ_Y` is the adjunct `T ⟶ ω_f` of `tr`, tensored with `Lf^* K`, followed by the
+canonical tensor map `ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`. -/
+theorem traceComparisonOfIsIso_eq
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (tr : (R(f)_![A]).obj T ⟶ 𝟙_ _)
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    traceComparisonOfIsIso f tr K =
+      traceAdjunct f tr ▷ (L((f)^*[A])).obj K ≫ dualizingComplexTensorMapOfIsIso f K := by
+  set adj := rightDerivedUpperShriekAdjunction A f
+  apply (adj.homEquiv _ _).symm.injective
+  have hπ := congr_app ((projectionMap A f).naturality (traceAdjunct f tr)) K
+  have htr : (R(f)_![A]).map (traceAdjunct f tr) ≫ adj.counit.app _ = tr := by
+    exact (adj.homEquiv_counit (g := traceAdjunct f tr)).symm.trans
+      ((adj.homEquiv _ _).symm_apply_apply tr)
+  rw [traceComparisonOfIsIso, Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
+  simp only [dualizingComplexTensorMapOfIsIso, rightDerivedUpperShriekTensorMap,
+    Functor.map_comp, Category.assoc]
+  erw [adj.counit_naturality]
+  rw [Adjunction.map_projectionTensorMap_comp_counit_assoc]
+  simp only [NatTrans.comp_app] at hπ
+  rw [← cancel_epi (inv (((projectionMap A f).app T).app K)), ← cancel_mono
+    (inv (((projectionMap A f).app (dualizingComplex A f)).app K))] at hπ
+  simp only [IsIso.inv_hom_id_assoc, Category.assoc, IsIso.hom_inv_id, Category.comp_id] at hπ
+  erw [← reassoc_of% hπ]
+  congr 1
+  have h : tr ▷ K = (R(f)_![A]).map (traceAdjunct f tr) ▷ K ≫ adj.counit.app _ ▷ K := by
+    rw [← comp_whiskerRight, htr]
+  rw [h, Category.assoc]
+  rfl
+
+attribute [local instance] derivedBraidedCategory in
+/-- The trace comparison of `tr : Rf_! T ⟶ Λ_Y` with the factors in the order of the tensor
+comparison: `Lf^* K ⊗ᴸ T ≅ T ⊗ᴸ Lf^* K ⟶ Rf^! K`, the symmetry followed by
+`AlgebraicGeometry.Etale.traceComparisonOfIsIso`. -/
+noncomputable def traceComparisonSymmOfIsIso
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (tr : (R(f)_![A]).obj T ⟶ 𝟙_ _)
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    ((derivedTensor A X).obj ((L((f)^*[A])).obj K)).obj T ⟶ (R(f)^![A]).obj K :=
+  (β_ ((L((f)^*[A])).obj K) T).hom ≫ traceComparisonOfIsIso f tr K
+
+attribute [local instance] derivedBraidedCategory in
+/-- The trace comparison of `tr : Rf_! T ⟶ Λ_Y` is `Lf^* K ⊗ (adjunct of tr)` followed by the
+tensor comparison `Lf^* K ⊗ᴸ ω_f ⟶ Rf^! K`. -/
+theorem traceComparisonSymmOfIsIso_eq
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (tr : (R(f)_![A]).obj T ⟶ 𝟙_ _)
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    traceComparisonSymmOfIsIso f tr K =
+      ((derivedTensor A X).obj ((L((f)^*[A])).obj K)).map (traceAdjunct f tr) ≫
+        tensorComparisonOfIsIso f K := by
+  rw [traceComparisonSymmOfIsIso, traceComparisonOfIsIso_eq, tensorComparisonOfIsIso,
+    derivedTensor_obj_map, BraidedCategory.braiding_naturality_right_assoc]
 
 end General
 

@@ -14,14 +14,15 @@ The purity chapter uses the Künneth formula of `thm-kun-0f1p` at the coefficien
 `A = 𝒪_E/ϖ_E^n` for `E/ℚ_ℓ` finite and `ℓ` invertible on the base field `k`. This file records
 it in that form: for `X`, `Y` of finite type over a separably closed field `k` and a finite ring
 `Λ` whose exponent is invertible in `k`, the exterior product
-`RΓ(X, K) ⊗ᴸ RΓ(Y, L) ⟶ RΓ(X ×_k Y, K ⊠ᴸ L)` is an isomorphism; the case of the rings
-`𝒪 ⧸ (ϖ ^ n)` killed by a power of a prime `ℓ` invertible in `k` is spelled out separately.
+`RΓ(X, K) ⊗ᴸ RΓ(Y, L) ⟶ RΓ(X ×_k Y, K ⊠ᴸ L)` is an isomorphism; the case of finite
+rings killed by a power of an integer `ℓ` invertible in `k` is spelled out separately.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.nonempty_iso_kunneth_pullback_of_isSepClosed`
   (`lem-pur-ordinary-kunneth-finite-ring`): the Künneth isomorphism for `X ×_k Y`.
-- `AlgebraicGeometry.Etale.nonempty_iso_kunneth_quotient_pow`: the case `Λ = 𝒪 ⧸ (ϖ ^ n)`.
+- `AlgebraicGeometry.Etale.nonempty_iso_kunneth_pullback_of_pow_eq_zero`: the case of finite
+  `ℓ`-power torsion rings such as `𝒪_E/ϖ_E^n`.
 -/
 
 @[expose] public section
@@ -58,8 +59,8 @@ Let `k` be a separably closed field (e.g. the algebraically closed field of
 `def-weil-finite-field-fiber`), `X`, `Y` schemes of finite type over `k` (separatedness is not
 needed), and `Λ` a finite ring whose exponent is invertible in `k`. This covers the rings
 `A = 𝒪_E/ϖ_E^n` of the blueprint, `E/ℚ_ℓ` finite and `ℓ ≠ char k`
-(`AlgebraicGeometry.Etale.nonempty_iso_kunneth_quotient_pow`). For all `K ∈ D(X_ét, Λ)` and
-`L ∈ D(Y_ét, Λ)`, with `K ⊠ᴸ L = Lp_X^* K ⊗ᴸ Lp_Y^* L` on `X ×_k Y`,
+(`AlgebraicGeometry.Etale.nonempty_iso_kunneth_pullback_of_pow_eq_zero`). For all
+`K ∈ D(X_ét, Λ)` and `L ∈ D(Y_ét, Λ)`, with `K ⊠ᴸ L = Lp_X^* K ⊗ᴸ Lp_Y^* L` on `X ×_k Y`,
 
 `RΓ(X, K) ⊗ᴸ RΓ(Y, L) ≅ RΓ(X ×_k Y, K ⊠ᴸ L)`
 
@@ -79,29 +80,23 @@ theorem nonempty_iso_kunneth_pullback_of_isSepClosed
           ((L((pullback.snd aX aY)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
   nonempty_iso_kunneth_of_isSepClosed Λ aX aY _ _ (IsPullback.of_hasPullback aX aY) K L
 
-/-- Blueprint `lem-pur-ordinary-kunneth-finite-ring`, for the coefficient rings
-`A = 𝒪 ⧸ (ϖ ^ n)`: if `A` is finite and killed by a power of a natural number `ℓ` which is
-invertible in the separably closed field `k` (for `𝒪 = 𝒪_E`, `E/ℚ_ℓ` finite, and
-`ℓ ≠ char k`), then `RΓ(X, K) ⊗ᴸ RΓ(Y, L) ≅ RΓ(X ×_k Y, K ⊠ᴸ L)` for `X`, `Y` of finite type
-over `k`. -/
-theorem nonempty_iso_kunneth_quotient_pow {𝒪 : Type (u + 1)} [CommRing 𝒪] (ϖ : 𝒪) (n : ℕ)
-    [Finite (𝒪 ⧸ Ideal.span {ϖ ^ n})] {ℓ m : ℕ} (hℓ : (ℓ : k) ≠ 0)
-    (hA : ((ℓ ^ m : ℕ) : 𝒪 ⧸ Ideal.span {ϖ ^ n}) = 0)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology
-      (ModuleCat.{u + 1} (𝒪 ⧸ Ideal.span {ϖ ^ n}))))
-    (L : DerivedCategory (Sheaf Y.smallEtaleTopology
-      (ModuleCat.{u + 1} (𝒪 ⧸ Ideal.span {ϖ ^ n})))) :
-    Nonempty
-      ((rightDerivedGlobalSections (ModuleCat.{u + 1} (𝒪 ⧸ Ideal.span {ϖ ^ n})) X).obj K ⊗
-        (rightDerivedGlobalSections (ModuleCat.{u + 1} (𝒪 ⧸ Ideal.span {ϖ ^ n})) Y).obj L ≅
-      (rightDerivedGlobalSections (ModuleCat.{u + 1} (𝒪 ⧸ Ideal.span {ϖ ^ n}))
-          (pullback aX aY)).obj
-        (((derivedTensor (ModuleCat.{u + 1} (𝒪 ⧸ Ideal.span {ϖ ^ n})) (pullback aX aY)).obj
-            ((L((pullback.fst aX aY)^*[ModuleCat.{u + 1} (𝒪 ⧸ Ideal.span {ϖ ^ n})])).obj
-              K)).obj
-          ((L((pullback.snd aX aY)^*[ModuleCat.{u + 1} (𝒪 ⧸ Ideal.span {ϖ ^ n})])).obj L))) :=
-  have := HasInvertibleExponent.spec_of_pow_eq_zero (𝒪 ⧸ Ideal.span {ϖ ^ n}) hℓ hA
-  nonempty_iso_kunneth_pullback_of_isSepClosed _ aX aY K L
+/-- Blueprint `lem-pur-ordinary-kunneth-finite-ring`, for finite `ℓ`-power torsion coefficient
+rings such as `A = 𝒪_E/ϖ_E^n` (`E/ℚ_ℓ` finite, so that `ℓ ^ (e n) = 0` in `A` for the
+ramification index `e`): if `Λ` is finite and killed by a power of a natural number `ℓ` which is
+nonzero in the separably closed field `k`, then `RΓ(X, K) ⊗ᴸ RΓ(Y, L) ≅ RΓ(X ×_k Y, K ⊠ᴸ L)`
+for `X`, `Y` of finite type over `k`. -/
+theorem nonempty_iso_kunneth_pullback_of_pow_eq_zero {ℓ m : ℕ} (hℓ : (ℓ : k) ≠ 0)
+    (hΛ : ((ℓ ^ m : ℕ) : Λ) = 0)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K ⊗
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).obj L ≅
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (pullback aX aY)).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) (pullback aX aY)).obj
+            ((L((pullback.fst aX aY)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
+          ((L((pullback.snd aX aY)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
+  have := HasInvertibleExponent.spec_of_pow_eq_zero Λ hℓ hΛ
+  nonempty_iso_kunneth_pullback_of_isSepClosed Λ aX aY K L
 
 end Etale
 

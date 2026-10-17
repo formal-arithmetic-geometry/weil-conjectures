@@ -231,8 +231,124 @@ the invertible unit of `Dj_! ⊣ Lj^*`, of the pullback comparison and of `Lj'^*
 `Dj'_! ⊣ Lj'^*`, which is inverse to the invertible unit. -/
 theorem isIso_derivedOpenImmersionLowerShriekExchange (sq : IsPullback g' j' j g) :
     IsIso (derivedOpenImmersionLowerShriekExchange Λ sq.toCommSq) := by
-  sorry
+  obtain ⟨_, _⟩ := full_faithful_derivedOpenImmersionLowerShriek Λ j
+  obtain ⟨_, _⟩ := full_faithful_derivedOpenImmersionLowerShriek Λ j'
+  have e : derivedOpenImmersionLowerShriekExchange Λ sq.toCommSq =
+      Adjunction.exchangeLeft (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j)
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j')
+        (derivedPullbackSquareIso Λ sq.toCommSq.flip) := by
+    unfold derivedOpenImmersionLowerShriekExchange
+    rfl
+  rw [e]
+  have (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+      IsIso ((Adjunction.exchangeLeft
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j)
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j')
+        (derivedPullbackSquareIso Λ sq.toCommSq.flip)).app K) :=
+    Adjunction.isIso_exchangeLeft_app_of_mem_essImage _ _ _ K
+      (leftDerivedUpperStar_obj_derivedOpenImmersionLowerShriek_mem_essImage Λ sq K)
+  exact NatIso.isIso_of_isIso_app _
+
+/-- The base change isomorphism `Dj_! ⋙ Lg^* ≅ Lg'^* ⋙ Dj'_!` for the extension by zero on module
+objects along a cartesian square `g' ≫ j = j' ≫ g` with `j`, `j'` open immersions: the inverse of
+the open-extension exchange `b'`
+(`ProEtale.CondensedRing.isIso_derivedOpenImmersionLowerShriekExchange`). -/
+noncomputable def derivedOpenImmersionLowerShriekBaseChangeIso (sq : IsPullback g' j' j g) :
+    D((j)_!open⟦Λ⟧) ⋙ L((g)^*⟦Λ⟧) ≅ L((g')^*⟦Λ⟧) ⋙ D((j')_!open⟦Λ⟧) :=
+  have := isIso_derivedOpenImmersionLowerShriekExchange Λ sq
+  (asIso (derivedOpenImmersionLowerShriekExchange Λ sq.toCommSq)).symm
 
 end Open
+
+/-! ### The compact-support exchange -/
+
+section Shriek
+
+variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+/-- Blueprint `pur713-def-shriek-exchange-module`: Compact-support exchange, module objects.
+
+For a cartesian square `g' ≫ f = f' ≫ g`, a compactification `c = (j, p)` of `f` and its base
+change `c' = (j', p')` along `g` (`Compactification.ofIsPullback`), a compactification of `f'`,
+the compact-support exchange `Ex_{!,□} : Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*` of functors
+`D(Mod_{Λ_X}) ⥤ D(Mod_{Λ_{Y'}})`, between the derived lower shrieks
+`Rf_!(c) = Rp_* ∘ Dj_!` of `ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactification`.
+Its component at `K` is the composite
+```
+Lg^* Rp_* Dj_! K ⟶ Rp'_* Lḡ^* Dj_! K ⟶ Rp'_* Dj'_! Lg'^* K
+```
+of the direct-image exchange `Ex_{*,□_p}` of the proper square
+(`ProEtale.CondensedRing.derivedLowerStarExchange`) and of `Rp'_*` of the inverse `b` of the
+open-extension exchange of the open square
+(`ProEtale.CondensedRing.derivedOpenImmersionLowerShriekBaseChangeIso`), where
+`ḡ : Z ×_Y Y' ⟶ Z` is the projection. No completed pullback is inserted. For `c` the chosen
+compactification of `f` this is the exchange `Lg^* Rf_! ⟶ R_{c'} Lg'^*` of the blueprint. -/
+noncomputable def derivedLowerShriekExchange (c : Compactification f) (sq : IsPullback g' f' f g) :
+    Rf_!(c)⟦Λ⟧ ⋙ L((g)^*⟦Λ⟧) ⟶ L((g')^*⟦Λ⟧) ⋙ Rf_!(c.ofIsPullback sq)⟦Λ⟧ :=
+  (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft D((c.i)_!open⟦Λ⟧)
+      (derivedLowerStarExchange Λ (c.isPullback_g_ofIsPullback sq).flip.toCommSq) ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight
+      (derivedOpenImmersionLowerShriekBaseChangeIso Λ (c.isPullback_i_ofIsPullback sq)).hom
+      R(((c.ofIsPullback sq).g)_*⟦Λ⟧) ≫
+    (Functor.associator _ _ _).hom
+
+end Shriek
+
+/-! ### The projection transformations -/
+
+section Projection
+
+variable {X Y : Scheme.{u}}
+
+/-- Blueprint `pur713-def-star-projection-module`: Direct-image projection transformation, module
+objects.
+
+For `f : X ⟶ Y`, the projection map `P_{f,K,L} : Rf_* K ⊗ᴸ L ⟶ Rf_* (K ⊗ᴸ Lf^* L)` in
+`D(Mod_{Λ_Y})`, natural in `K ∈ D(Mod_{Λ_X})` and `L ∈ D(Mod_{Λ_Y})`: the adjoint, under
+`Lf^* ⊣ Rf_*`, of
+```
+Lf^* (Rf_* K ⊗ᴸ L) ⟶ Lf^* Rf_* K ⊗ᴸ Lf^* L ⟶ K ⊗ᴸ Lf^* L,
+```
+the monoidal comparison of `Lf^*` (`ProEtale.CondensedRing.leftDerivedUpperStarTensor`) followed
+by the counit of `Lf^* ⊣ Rf_*` tensored with the identity
+(`CategoryTheory.Adjunction.rightAdjointProjectionMap`). -/
+noncomputable def derivedLowerStarProjection (f : X ⟶ Y) :
+    R((f)_*⟦Λ⟧) ⋙ curriedTensor _ ⟶
+      (Functor.postcompose₂.obj R((f)_*⟦Λ⟧)).obj
+        ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((f)^*⟦Λ⟧)).obj (curriedTensor _)) :=
+  (derivedUpperStarLowerStarAdjunction Λ f).rightAdjointProjectionMap
+    (leftDerivedUpperStarTensor Λ f)
+
+/-- Blueprint `pur713-def-shriek-projection-module`: Compact-support projection transformation,
+module objects.
+
+For a compactification `c = (j, p)` of `f : X ⟶ Y`, `K ∈ D(Mod_{Λ_X})` and
+`L ∈ D(Mod_{Λ_Y})`, the projection map
+`PF_{c,K,L} : Rf_!(c) K ⊗ᴸ L ⟶ Rf_!(c) (K ⊗ᴸ Lf^* L)` in `D(Mod_{Λ_Y})`, the composite
+```
+Rp_* Dj_! K ⊗ᴸ L ⟶ Rp_* (Dj_! K ⊗ᴸ Lp^* L) ⟶ Rp_* Dj_! (K ⊗ᴸ Lj^* Lp^* L)
+  ⟶ Rp_* Dj_! (K ⊗ᴸ Lf^* L)
+```
+of the direct-image projection map `P_p` (`ProEtale.CondensedRing.derivedLowerStarProjection`),
+of `Rp_*` of the inverse of the open-extension projection isomorphism `σ_j`
+(`ProEtale.CondensedRing.openImmersionProjectionComparison`), and of the composition
+isomorphism `Lj^* Lp^* ≅ L(j ≫ p)^* = Lf^*` (`ProEtale.CondensedRing.leftDerivedUpperStarComp`).
+For `c` the chosen compactification of `f` this is `PF_f`. -/
+noncomputable def derivedLowerShriekProjection {f : X ⟶ Y} (c : Compactification f)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) :
+    (Rf_!(c)⟦Λ⟧).obj K ⊗ L ⟶ (Rf_!(c)⟦Λ⟧).obj (K ⊗ L((f)^*⟦Λ⟧).obj L) :=
+  ((derivedLowerStarProjection Λ c.g).app (D((c.i)_!open⟦Λ⟧).obj K)).app L ≫
+    R((c.g)_*⟦Λ⟧).map (inv (((openImmersionProjectionComparison Λ c.i).app K).app
+      (L((c.g)^*⟦Λ⟧).obj L))) ≫
+    (Rf_!(c)⟦Λ⟧).map (K ◁ ((leftDerivedUpperStarComp Λ c.i c.g).inv.app L ≫
+      eqToHom (by rw [← c.comm])))
+
+end Projection
 
 end AlgebraicGeometry.ProEtale.CondensedRing

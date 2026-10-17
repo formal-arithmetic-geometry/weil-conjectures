@@ -170,7 +170,7 @@ instance isClosedImmersion_zeroRestrict (i : E.ι) : IsClosedImmersion (E.zeroRe
 
 include E in
 /-- The zero section of a vector bundle is a closed immersion. -/
-lemma isClosedImmersion_zero : IsClosedImmersion E.zero := by
+instance isClosedImmersion_zero : IsClosedImmersion E.zero := by
   refine IsZariskiLocalAtTarget.of_iSup_eq_top _ E.iSup_preimage_U fun i ↦ ?_
   rw [← Scheme.Hom.resLE_eq_morphismRestrict,
     Scheme.Hom.resLE_congr _ _ rfl (E.preimage_zero_preimage _) @IsClosedImmersion]

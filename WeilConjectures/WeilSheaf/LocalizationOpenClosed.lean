@@ -112,7 +112,7 @@ section Triangle
 
 variable {Z U X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
-  (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of k₀))]
+  (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
   (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
 
 variable (k₀ l) in
@@ -151,6 +151,8 @@ theorem ProEtaleWeilSheaf.exists_distTriang_openClosed
     ∃ w, Triangle.mk ((ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).counit.app M)
       ((ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l i).unit.app M) w ∈
         distTriang _ := by
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isCompl (k₀ := k₀) (l := l)
+    i j hij
   let adj := ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l i
   let adj' := ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j
   let jU := (ProEtaleWeilSheaf.upperStar k₀ l j).mapDerivedCategory
@@ -189,8 +191,11 @@ theorem ProEtaleWeilSheaf.exists_distTriang_openClosed
     rw [reassoc_of% this, ← Functor.map_comp, IsIso.hom_inv_id, CategoryTheory.Functor.map_id,
       Category.comp_id]
   refine ⟨e.inv ≫ h, isomorphic_distinguished _ hT _ ?_⟩
-  exact Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) e.symm (by simp only [Triangle.mk_mor₁, Iso.refl_hom, Category.id_comp, Category.comp_id])
-    (by rw [← he]; simp) (by simp)
+  have he' : adj.unit.app M ≫ e.inv = g := by rw [← he, Category.assoc, e.hom_inv_id, Category.comp_id]
+  refine Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) e.symm ?_ ?_ ?_
+  · exact (Category.comp_id _).trans (Category.id_comp _).symm
+  · exact he'.trans (Category.id_comp _).symm
+  · exact (congrArg _ (CategoryTheory.Functor.map_id _ _)).trans (Category.comp_id _)
 
 end Triangle
 

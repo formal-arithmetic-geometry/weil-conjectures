@@ -187,6 +187,7 @@ theorem comul_X_pow_char :
     Coalgebra.comul (R := k) ((X : k[X]) ^ p) = (X ^ p) ⊗ₜ[k] 1 + 1 ⊗ₜ[k] (X ^ p) := by
   rw [← Bialgebra.comulAlgHom_apply, map_pow, Bialgebra.comulAlgHom_apply, comul_X,
     add_pow_char_of_algebra k, Algebra.TensorProduct.tmul_pow, Algebra.TensorProduct.tmul_pow]
+  simp
 
 /-- In characteristic `p` the ideal `(X ^ p)` is a Hopf ideal of `k[X]`. -/
 instance isHopfIdeal_frobeniusKernelIdeal : (frobeniusKernelIdeal k p).IsHopfIdeal k := by

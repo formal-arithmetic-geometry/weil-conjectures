@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Module.ZMod
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.LinearAlgebra.TensorPower.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
@@ -106,5 +107,6 @@ noncomputable def tateTwistModuleOneIsoOfIsPrimitiveRoot [NeZero n] {ζ : kˣ}
     hζ.zmodEquivZPowers.trans (MulEquiv.subgroupCongr hζ.zpowers_eq).toAdditive
   let e' : ZMod n ≃ₗ[ZMod n] Additive (rootsOfUnity n k) :=
     LinearEquiv.ofBijective (e.toAddMonoidHom.toZModLinearMap n) e.bijective
-  LinearEquiv.toModuleIso ((LinearEquiv.baseChange (ZMod n) Λ _ _ e'.symm).trans
+  LinearEquiv.toModuleIso ((TensorProduct.AlgebraTensorModule.congr (LinearEquiv.refl Λ Λ)
+      e'.symm).trans
     ((TensorProduct.AlgebraTensorModule.rid (ZMod n) Λ Λ).trans ULift.moduleEquiv.symm))

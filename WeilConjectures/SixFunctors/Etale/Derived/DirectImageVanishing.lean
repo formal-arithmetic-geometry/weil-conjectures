@@ -47,6 +47,9 @@ underlying abelian sheaf of an injective sheaf of `Λ`-modules is acyclic
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.isZero_higherDirectImage_iff_forall_isZero_presheafFiber`: `R^q f_* F`
+  vanishes if and only if its stalks, computed as colimits of `H^q(W ×_Y X, F|)` over pointed
+  étale neighbourhoods, do (blueprint `lem-kun-cd-stalk-criterion`).
 - `AlgebraicGeometry.Etale.subsingleton_ext_freeSheaf_of_subsingleton_H`: the cohomology of a
   sheaf of `Λ`-modules over an étale `X`-scheme `V` vanishes in a degree where the abelian
   cohomology of its underlying abelian sheaf restricted to `V` does.
@@ -75,6 +78,76 @@ of `Λ`-modules on `X`. -/
 def Etale.HasUniformDirectImageVanishingLE {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ) : Prop :=
   ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), (N : ℤ) < q →
     IsZero (Etale.higherDirectImage Λ f q M)
+
+/-- The geometric stalk of a presheaf of abelian groups on `Y_ét` is that of `Q` under a locally
+bijective map `P ⟶ Q`: the map of stalks is bijective
+(`CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_bijective`, for the geometric
+point moved up one universe so that it applies to `AddCommGrpCat.{u + 1}`). -/
+noncomputable def Etale.presheafFiberIsoOfIsLocallyBijective {Y : Scheme.{u}} {Ω : Type u}
+    [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+    {P Q : (Y.Etale)ᵒᵖ ⥤ AddCommGrpCat.{u + 1}} (φ : P ⟶ Q)
+    [Presheaf.IsLocallyInjective Y.smallEtaleTopology φ]
+    [Presheaf.IsLocallySurjective Y.smallEtaleTopology φ] :
+    (Scheme.pointSmallEtale s).presheafFiber.obj P ≅
+      (Scheme.pointSmallEtale s).presheafFiber.obj Q := by
+  let Φ := (Scheme.pointSmallEtale s).ulift.{u + 1}
+  have : IsIso (Φ.presheafFiber.map φ) := by
+    rw [← isIso_iff_of_reflects_iso _ (forget AddCommGrpCat.{u + 1}), isIso_iff_bijective]
+    exact Φ.toPresheafFiber_map_bijective φ
+  exact ((Scheme.pointSmallEtale s).uliftPresheafFiberIso AddCommGrpCat.{u + 1}).symm.app P ≪≫
+    asIso (Φ.presheafFiber.map φ) ≪≫
+      ((Scheme.pointSmallEtale s).uliftPresheafFiberIso AddCommGrpCat.{u + 1}).app Q
+
+/-- Blueprint `lem-kun-cd-stalk-criterion`: Vanishing of a higher direct image, checked at a
+geometric point
+
+Let `f : X ⟶ Y` be a morphism of schemes, `q` an integer and `F` an étale sheaf of `Λ`-modules
+on `X`. Then `R^q f_* F = 0` if and only if for every geometric point `ȳ : Spec Ω ⟶ Y` the
+filtered colimit of the groups `H^q(W ×_Y X, F|)` over the pointed étale neighbourhoods
+`(W, w̄)` of `ȳ` vanishes; this colimit is the geometric stalk at `ȳ` of the presheaf
+`W ↦ H^q(W ×_Y X, F|)` (`AlgebraicGeometry.Etale.higherDirectImagePresheaf`).
+
+Indeed `R^q f_* F` is the sheafification of that presheaf
+(`AlgebraicGeometry.Etale.isLocallyBijective_higherDirectImagePresheafToSheaf`), so the two have
+the same geometric stalks, and a sheaf vanishes if and only if all its geometric stalks do. The
+blueprint assumes `f` quasi-compact and quasi-separated and `F` torsion; neither is needed. -/
+theorem Etale.isZero_higherDirectImage_iff_forall_isZero_presheafFiber {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (q : ℤ) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsZero (Etale.higherDirectImage Λ f q F) ↔
+      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+        IsZero ((Scheme.pointSmallEtale s).presheafFiber.obj
+          (Etale.higherDirectImagePresheaf Λ f q
+            ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
+  let K := (DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)) 0).obj F
+  let H := Etale.higherDirectImage Λ f q F
+  let G := (sheafCompose Y.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj H
+  obtain ⟨_, _⟩ := Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ f q K
+  -- the stalk of the presheaf is that of the sheaf `G`
+  have e (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) :
+      (Scheme.pointSmallEtale s).presheafFiber.obj (Etale.higherDirectImagePresheaf Λ f q K) ≅
+        (Scheme.pointSmallEtale s).sheafFiber.obj G :=
+    Etale.presheafFiberIsoOfIsLocallyBijective s
+      (Etale.higherDirectImagePresheafToSheaf Λ f q K)
+  have hHG : IsZero H ↔ IsZero G := by
+    refine ⟨fun h ↦ Functor.map_isZero _ h, fun h ↦ ?_⟩
+    rw [IsZero.iff_id_eq_zero] at h ⊢
+    refine (sheafCompose Y.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map_injective ?_
+    rw [CategoryTheory.Functor.map_id, Functor.map_zero]
+    exact h
+  rw [hHG]
+  refine ⟨fun h Ω _ _ s ↦ ?_, fun h ↦ ?_⟩
+  · have : PreservesColimitsOfSize.{0, 0}
+        ((Scheme.pointSmallEtale s).presheafFiber (A := AddCommGrpCat.{u + 1})) :=
+      preservesColimitsOfSize_shrink.{0, u, 0, u} _
+    refine IsZero.of_iso ?_ (e Ω s)
+    exact Functor.map_isZero (Scheme.pointSmallEtale s).presheafFiber
+      (Functor.map_isZero (sheafToPresheaf _ _) h)
+  · rw [IsZero.iff_id_eq_zero]
+    refine Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint fun y ↦ ?_
+    exact ((h _ _).of_iso (e _ _).symm).eq_of_src _ _
 
 variable {Λ} in
 /-- **Cohomology of sheaves of `Λ`-modules versus abelian sheaf cohomology.** Let `Λ` be a finite
