@@ -12,9 +12,66 @@
   "def-pc-scheme",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the forward implication of [lem-trf-quasi-affine-relative-spec-embedding] to $f$. Obtain a quasi-coherent $\\mathcal O_S$-algebra $\\mathcal A$, its relative spectrum $\\pi:Y=\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\to S$, and a quasi-compact open immersion $i:X\\hookrightarrow Y$ with $\\pi\\circ i=f$.",
+   "uses": [
+    "lem-trf-quasi-affine-relative-spec-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SO, first paragraph of proof, invoking Tag 01SM (lemma-characterize-quasi-affine)"
+   }
+  },
+  {
+   "text": "Put $Y'=Y\\times_S S\\prime$ and $X'=X\\times_S S\\prime$. The universal property [def-pc-fibre-product] identifies $X'$ with $X\\times_Y Y'$: a map from a scheme $T$ to either scheme is precisely a pair $(a:T\\to X,b:T\\to S\\prime)$ satisfying $fa=gb$, since the map $T\\to Y'$ is forced to be $(ia,b)$. These identifications preserve the maps to $Y'$ and $S\\prime$. Thus the induced $i':X'\\to Y'$ is the base change of $i$. It is an open immersion by [lem-weil-pbc-open-immersion-base-change] and is quasi-compact separately by [lem-weil-pbc-qcqs-morphism-permanence](3), because $i$ is quasi-compact. In particular these conclusions impose no condition on $g$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SO, second paragraph of proof; Schemes Tags 01JY (lemma-base-change-immersion) and 01K5 (lemma-quasi-compact-preserved-base-change)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-relative-spec-base-change] to $g$ and $\\mathcal A$. It supplies the quasi-coherent $\\mathcal O_{S\\prime}$-algebra $g^*\\mathcal A$ and an isomorphism $\\Phi:\\underline{\\operatorname{Spec}}_{S\\prime}(g^*\\mathcal A)\\xrightarrow{\\sim}Y'$ over $S\\prime$. Compose $i'$ with $\\Phi^{-1}$; identifying the target via this isomorphism gives a quasi-compact open immersion $X'\\hookrightarrow\\underline{\\operatorname{Spec}}_{S\\prime}(g^*\\mathcal A)$ over $S\\prime$. The open-subscheme image and the inverse images of affine opens are unchanged up to isomorphism, so openness and quasi-compactness are preserved by this identification.",
+   "uses": [
+    "lem-weil-pbc-relative-spec-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SO, base-changed relative-spectrum identification; Constructions Tag 01LX (lemma-spec-properties), base-change clause"
+   }
+  },
+  {
+   "text": "The converse implication of [lem-trf-quasi-affine-relative-spec-embedding], with base $S\\prime$ and algebra $g^*\\mathcal A$, now says that $X'\\to S\\prime$ is quasi-affine. The chosen map $X'\\to S\\prime$ is the fibre-product projection throughout Steps 2–3. No finite-presentation hypothesis has been used.",
+   "uses": [
+    "lem-trf-quasi-affine-relative-spec-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SO, final sentence, invoking Tag 01SM (lemma-characterize-quasi-affine)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-quasi-affine-relative-spec-embedding",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-relative-spec-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SO, lemma-base-change-quasi-affine, entire proof; Tag 01SM, lemma-characterize-quasi-affine; Schemes Tags 01JY and 01K5; Constructions Tag 01LX"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +107,59 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"{P : MorphismProperty Scheme.{u}} (_ : HasAffineProperty P (affineAnd Q)) (hQi : RingHom.RespectsIso Q)\\n  (hQb : RingHom.IsStableUnderBaseChange Q) : P.IsStableUnderBaseChange\", \"doc\": \"If $ Q $ is a ring homomorphism property that is invariant under ring isomorphisms and stable under base change, then the property of a morphism of schemes with affine target being affine and satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"{S T : Scheme.{max u v}} (f : S ⟶ T) : 𝔸(n; S) ⟶ 𝔸(n; T)\", \"doc\": \"Given a morphism $ f: S \\to T $ of schemes, this function constructs the induced morphism $ \\\\mathbb{A}^n_S \\to \\\\mathbb{A}^n_T $ between affine spaces by composing the canonical projection $ \\\\mathbb{A}^n\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffineHom f] [Y.IsQuasiAffine] : X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"(hQi : RingHom.RespectsIso Q) (hQb : RingHom.IsStableUnderBaseChange Q) : (affineAnd Q).IsStableUnderBaseChange\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: absolute quasi-affine and affine-morphism stability results do not state arbitrary relative quasi-affine base-change stability"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsQuasiAffine, IsAffineHom, IsOpenImmersion, pullback",
+   "results": "{\"t\": \"2026-10-17T22:00:38Z\", \"tool\": \"loogle\", \"query\": \"IsQuasiAffine, IsAffineHom, IsOpenImmersion, pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsQuasiAffine'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "invalid pattern: Loogle reported unknown identifier IsQuasiAffine; corrected by the quoted-name query recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.affine.*base.change|base.change.*quasi.affine|IsQuasiAffine",
+   "results": "{\"t\": \"2026-10-17T22:00:38Z\", \"tool\": \"grep\", \"query\": \"quasi.affine.*base.change|base.change.*quasi.affine|IsQuasiAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"72a7a78045fd65f9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the absolute quasi-affine API and affine/quasi-compact permanence do not state arbitrary relative quasi-affine base-change stability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change preserves quasi-affine morphisms of schemes",
+   "results": "{\"t\": \"2026-10-17T22:00:38Z\", \"tool\": \"leansearch\", \"query\": \"Base change preserves quasi-affine morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\"], \"digest\": \"d804c6f3bdf080af\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the absolute quasi-affine API and affine/quasi-compact permanence do not state arbitrary relative quasi-affine base-change stability."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.affine|RelativeSpec|relative.*Spec",
+   "results": "{\"t\": \"2026-10-17T22:03:53Z\", \"tool\": \"grep\", \"query\": \"quasi.affine|RelativeSpec|relative.*Spec\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"1e4625e64210fbcd\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the absolute quasi-affine API and affine/quasi-compact permanence do not state arbitrary relative quasi-affine base-change stability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Characterization of quasi-affine morphisms by quasi-compact open immersions into relative spectra",
+   "results": "{\"t\": \"2026-10-17T22:03:53Z\", \"tool\": \"leansearch\", \"query\": \"Characterization of quasi-affine morphisms by quasi-compact open immersions into relative spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.casesOn\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\"], \"digest\": \"a85e83c925c108f0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the absolute quasi-affine API and affine/quasi-compact permanence do not state arbitrary relative quasi-affine base-change stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-affine morphism is a quasi-compact open immersion into a relative spectrum of a quasi-coherent algebra",
+   "results": "{\"t\": \"2026-10-17T22:03:55Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi-affine morphism is a quasi-compact open immersion into a relative spectrum of a quasi-coherent algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.IsAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\"], \"digest\": \"c3a213a068c92e4f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the absolute quasi-affine API and affine/quasi-compact permanence do not state arbitrary relative quasi-affine base-change stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism is quasi affine if and only if it factors as a quasi compact open immersion followed by an affine morphism",
+   "results": "{\"t\": \"2026-10-17T22:04:28Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme morphism is quasi affine if and only if it factors as a quasi compact open immersion followed by an affine morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\"], \"digest\": \"3471edaf00fc6898\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the absolute quasi-affine API and affine/quasi-compact permanence do not state arbitrary relative quasi-affine base-change stability."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-quasi-affine-fpqc-effective-descent",
@@ -85,5 +191,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-quasi-affine-base-change",
+  "worker": "stage1",
+  "summary": "Kept the exact arbitrary-base-change statement with no finite-presentation assumption. Followed Tag 01SO: relative-spectrum characterization; fibre-product identification and separately cited stability of openness and quasi-compactness; relative-spectrum base change; converse characterization. Added one unsplit characterization node (Tag 01SM), reusing all other existing nodes. The similar project theorem IsQuasiAffineHom.of_isPullback has extra explicit QuasiCompact and QuasiSeparated hypotheses and therefore was not attached.",
+  "blueprint": "Provides Tag 01SO permanence used in the Tag 0247 quasi-affine fpqc-descent support chain of lem-trf-local-term-locality; Steps 1 and 4 realize the characterization invocations, Step 2 the quasi-compact open-immersion pullback, and Step 3 the relative-spectrum base-change identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-relative-spec-base-change",
+    "why": "Generic relative-spectrum base-change identification required explicitly by Tag 01SO; no node of sk-i-curve-zero states it. This preserves the assigned descent-support route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-relative-spec-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-4f5abc80e",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-4f5abc80e (reviewer sub-agent of L); spot-checked: Read the full item, new node, cited DAG statements, Stacks Tags 01SO and 01SM, and supporting source clauses. All four steps are mathematically sound; arbitrary base change, openness, quasi-compactness, relative-spectrum identification, directions, and hypotheses check correctly. No duplicates, hidden long-step lemmas, route-pivot machinery, SGA citations, cycles, or source mismatches found. Review written to review.md."
  }
 }

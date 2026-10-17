@@ -13,9 +13,104 @@
   "lem-pc-affine-qcoh-derived-equivalence",
   "def-pc-finite-tor-dimension-over"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal B=f^{-1}\\mathcal O_V$ on $U$ and $C^\\bullet=\\operatorname{Res}_{\\mathcal B}\\widetilde{M^\\bullet}$. Choose a K-flat resolution $P^\\bullet\\to C^\\bullet$ by [lem-pc-kflat-resolution]. For $x=\\mathfrak q\\in\\operatorname{Spec}A$ with $s=f(x)=\\mathfrak p$, [lem-pc-inverse-image-structure-stalk-iso] identifies $\\mathcal B_x$ with $\\mathcal O_{V,s}=R_{\\mathfrak p}$ and its structural map with the actual scheme stalk map. The affine associated-sheaf stalk formula, applied in each degree and to each differential, identifies $(\\widetilde{M^\\bullet})_x$ with $M^\\bullet_{\\mathfrak q}$. The scalar-restriction comparison [lem-pc-relative-inverse-image-stalk-restriction] therefore identifies $C^\\bullet_x$, with scalars transported to $R_{\\mathfrak p}$, with $M^\\bullet_{\\mathfrak q}$. Exactness of the stalk functor takes the chosen resolution to a quasi-isomorphism on stalks. Thus $Q(P_x^\\bullet)\\cong Q(M^\\bullet_{\\mathfrak q})$ in $D(R_{\\mathfrak p})$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-inverse-image-structure-stalk-iso",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-pc-relative-inverse-image-stalk-restriction",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY, proof opening stalk identifications; sites-cohomology.tex Tag 06YS; schemes.tex Tag 01HV; modules.tex Tag 01AG."
+   }
+  },
+  {
+   "text": "For any $\\mathcal B$-module sheaf $\\mathcal F$, apply [lem-pc-stalk-kflat-tensor-homology] to the ringed space $(U,\\mathcal B)$, $P^\\bullet$, and $R_{\\mathfrak p}\\cong\\mathcal B_x$. Together with Step 1 it gives, in every degree, $$H^i(E\\otimes_{\\mathcal B}^{\\mathbf L}\\mathcal F)_x\\cong H^i(M^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}\\mathcal F_x),$$ as abelian groups, with the stated scalar transport on $\\mathcal F_x$. Consequently, if every $M^\\bullet_{\\mathfrak q}$ has amplitude $[a,b]$ over $R_{\\mathfrak p}$, all these stalks vanish for $i\\notin[a,b]$. Exactness is detected on stalks by [lem-weil-pbc-module-stalk-exact], applied to $0\\to H^i\\to0$, so the cohomology sheaf itself vanishes. Conversely, assume (1). For a fixed $x$ and arbitrary $R_{\\mathfrak p}$-module $L$, transport $L$ to a $\\mathcal B_x$-module and take $\\mathcal F=i_{x,*}L$ on the ringed space $(U,\\mathcal B)$ [def-pc-ringed-module-skyscraper]. The stalk recovery statement gives $\\mathcal F_x\\cong L$. The displayed comparison and (1) now give vanishing against every $L$. We have proved that (1) is equivalent to amplitude $[a,b]$ for all the localized complexes over their contracted base-prime rings.",
+   "uses": [
+    "lem-pc-stalk-kflat-tensor-homology",
+    "lem-weil-pbc-module-stalk-exact",
+    "def-pc-ringed-module-skyscraper",
+    "lem-pc-skyscraper-complex-stalk-recovery"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY, both implications via cohomology.tex Tag 09U9 (lemma-tor-amplitude-stalk); skyscraper test from sheaves.tex Tag 009A (4)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-relative-tor-amplitude-localization] with the given map $R\\to A$, the given complex $M^\\bullet$, and the fixed integers $a\\le b$. Its condition (2) is exactly the localized amplitude condition at the end of Step 2, with $\\mathfrak p=\\mathfrak q\\cap R$. Its condition (1) is precisely condition (2) of the item. Combining the two equivalences proves (1)$\\Longleftrightarrow$(2). This does not replace relative amplitude over $R$ by absolute amplitude over $A$.",
+   "uses": [
+    "lem-trf-relative-tor-amplitude-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY, proof invoking more-algebra.tex Tag 0B67 (lemma-tor-amplitude-localization)."
+   }
+  },
+  {
+   "text": "Condition (1) plainly implies its restriction to sheaves $f^{-1}\\mathcal G$. For the reverse implication fix $x=\\mathfrak q$, $s=\\mathfrak p=f(x)$ and an arbitrary $R_{\\mathfrak p}$-module $L$. Set $\\mathcal G=i_{s,*}L$ on $(V,\\mathcal O_V)$; [lem-pc-skyscraper-complex-stalk-recovery] in degree zero gives $\\mathcal G_s\\cong L$. The inverse-image stalk formula for abelian sheaves gives $(f^{-1}\\mathcal G)_x\\cong\\mathcal G_s$. It is $\\mathcal B_x\\cong\\mathcal O_{V,s}$-linear: both scalar actions are obtained by taking germs of multiplication of representatives on a common neighbourhood, exactly as in [def-pc-topological-inverse-image-module]. Testing with $\\mathcal F=f^{-1}\\mathcal G$ in the comparison of Step 2 therefore shows $H^i(M^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}L)=0$ outside $[a,b]$. Step 2 implies (1). This verifies the extra inverse-image-test assertion, even when $f$ is not surjective and $\\mathcal G$ is not quasi-coherent.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper",
+    "lem-pc-skyscraper-complex-stalk-recovery",
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY with cohomology.tex Tag 09U9; sheaves.tex Tags 009A (4) and 008H, and the inverse-image module scalar formula."
+   }
+  },
+  {
+   "text": "Suppose $E$ locally has finite Tor dimension over $\\mathcal B$. Choose open neighbourhoods $W_x$ and intervals $[a_x,b_x]$ on which its tensor cohomology vanishes against every $\\mathcal B|_{W_x}$-module. The stalk comparison and skyscraper argument of Step 2 apply on the ringed space $(W_x,\\mathcal B|_{W_x})$: choose its K-flat resolution using [lem-pc-kflat-resolution] and apply [lem-pc-stalk-kflat-tensor-homology]; each stalk-module test is realized by [lem-pc-skyscraper-complex-stalk-recovery]. Hence for every $y\\in W_x$ the stalk complex $E_y$ has amplitude $[a_x,b_x]$ over $\\mathcal B_y$. Restricting a sheaf to an open leaves its stalk at a point of that open unchanged: the neighbourhoods contained in the open are cofinal among all neighbourhoods, with identical fraction-free germ and scalar formulas. Since $U$ is affine, [lem-weil-pbc-affine-scheme-qcqs] gives a finite subcover $W_1,\\ldots,W_r$. If $U$ is nonempty, take $a=\\min_j a_j$ and $b=\\max_j b_j$. Every point is in one of these opens, so its stalk complex has amplitude $[a,b]$. Step 2 gives global (1), and Step 3 gives a single finite $R$-Tor interval for $M^\\bullet$. If $U$ is empty, every sheaf on $U$ is zero, so (1) holds for $[0,0]$, and Step 3 still applies.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-stalk-kflat-tensor-homology",
+    "lem-pc-skyscraper-complex-stalk-recovery",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY, final paragraph: quasi-compactness gives a uniform interval; cohomology.tex Tag 09U9 and schemes.tex Tag 01K4."
+   }
+  },
+  {
+   "text": "Conversely, if $M^\\bullet$ has a finite $R$-Tor interval, Steps 2 and 3 give (1) for that interval on all of $U$. The single open neighbourhood $U$ at every point then witnesses local finite Tor dimension. For $M^\\bullet=0$ every interval works. For the identity map $R=A$, the formulas reduce to the usual affine absolute criterion. No step has used flatness or finite presentation of $R\\to A$, a bound on $M^\\bullet$, or a Noetherian hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY, clause (2), reverse implication and edge cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-inverse-image-structure-stalk-iso",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-pc-relative-inverse-image-stalk-restriction",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-stalk-kflat-tensor-homology",
+  "def-pc-ringed-module-skyscraper",
+  "lem-pc-skyscraper-complex-stalk-recovery",
+  "lem-trf-relative-tor-amplitude-localization",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "def-pc-topological-inverse-image-module",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DHY, lemma-tor-dimension-rel-affine; the cited stalk proof is expanded using cohomology.tex Tag 09U9, and the inverse-image-test addendum is proved by skyscraper tests."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +153,38 @@
    "results": "{\"t\": \"2026-10-17T21:41:38Z\", \"tool\": \"grep\", \"query\": \"TorAmplitude|torAmplitude|TorDimension|tor.dimension\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: no occurrence in the searched Mathlib subtree"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative Tor amplitude of a complex over R detected by all localizations R_p and A_q for a ring map R to A",
+   "results": "{\"t\": \"2026-10-17T22:02:17Z\", \"tool\": \"leanfinder\", \"query\": \"relative Tor amplitude of a complex over R detected by all localizations R_p and A_q for a ring map R to A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"DerivedCategory.isGE_iff\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"DerivedCategory.isLE_iff\"], \"digest\": \"e3a3fdfe036dc03c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits; ordinary prime localization, exactness, free loci, generic cohomological bounds, and projective Tor vanishing do not give a relative Tor-amplitude localization equivalence for arbitrary unbounded complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "Tor amplitude localization, ModuleCat, DerivedCategory.torAmplitudeIn",
+   "results": "{\"t\": \"2026-10-17T22:02:18Z\", \"tool\": \"loogle\", \"query\": \"Tor amplitude localization, ModuleCat, DerivedCategory.torAmplitudeIn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Tor`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits; ordinary prime localization, exactness, free loci, generic cohomological bounds, and projective Tor vanishing do not give a relative Tor-amplitude localization equivalence for arbitrary unbounded complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|tor amplitude.*local",
+   "results": "{\"t\": \"2026-10-17T22:02:18Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|TorAmplitude|tor amplitude.*local\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits; ordinary prime localization, exactness, free loci, generic cohomological bounds, and projective Tor vanishing do not give a relative Tor-amplitude localization equivalence for arbitrary unbounded complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative Tor amplitude on an affine scheme is equivalent to Tor amplitude of the module complex over the base ring",
+   "results": "{\"t\": \"2026-10-17T22:02:19Z\", \"tool\": \"leansearch\", \"query\": \"relative Tor amplitude on an affine scheme is equivalent to Tor amplitude of the module complex over the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec\", \"AlgebraicGeometry.isAffine_Spec\", \"ModuleCat.tildeInModuleCat\", \"AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine\", \"Module.Flat.rTensor_shortComplex_exact\", \"AlgebraicGeometry.affineAnd\"], \"digest\": \"fcc82a87adda9fb8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits; ordinary prime localization, exactness, free loci, generic cohomological bounds, and projective Tor vanishing do not give a relative Tor-amplitude localization equivalence for arbitrary unbounded complexes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-affine-relative-dualizing-comparison",
@@ -92,5 +215,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-affine-relative-tor-amplitude-criterion",
+  "worker": "stage1",
+  "summary": "Kept the full unrestricted relative statement and expanded its proof into explicit ring and module stalk identifications, K-flat tensor stalk comparison, prime-local algebraic detection, inverse-image skyscraper tests, and a finite-subcover uniform interval. Reused existing general stalk and skyscraper nodes; the sole new statement-only lemma is the algebraic localization criterion 0B67, not a geometric clause of the item. No Lean writing or compilation.",
+  "blueprint": "Supplies the generic relative-Tor input to the affine comparison of the already given coherent relative-dualizing pair, along the recorded semistable-alteration ancestry under lem-trf-local-term-locality. Retains the inherited unit and ancestor; realizes the fixed-interval and local-finite clauses used in the parent affine reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolution theorem for arbitrary ringed sites, needed on U with the inverse-image ring and on its ringed open subspaces; no node of the curve unit supplies it."
+   },
+   {
+    "node": "lem-pc-inverse-image-structure-stalk-iso",
+    "why": "Identifies the inverse-image base ring stalk and its canonical structure map, without any flatness hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Affine associated-sheaf stalk localization, applied degreewise to the arbitrary complex."
+   },
+   {
+    "node": "lem-pc-relative-inverse-image-stalk-restriction",
+    "why": "Identifies the actual scalar-restricted stalk complex with restriction along the scheme stalk map."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Exactness and detection of exactness on stalks for an arbitrary ringed space."
+   },
+   {
+    "node": "lem-pc-stalk-kflat-tensor-homology",
+    "why": "Computes stalks of derived tensor from the chosen K-flat representative on any ringed space, including the inverse-image ring."
+   },
+   {
+    "node": "lem-pc-skyscraper-complex-stalk-recovery",
+    "why": "Realizes every base-stalk module as the stalk of the skyscraper test, on U and separately on V."
+   },
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "Underlying abelian inverse-image stalk formula; the module action compatibility is checked on germs in Step 4."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Quasi-compactness supplies the finite subcover of U; no finiteness of the base or map is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-inverse-image-structure-stalk-iso",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-pc-relative-inverse-image-stalk-restriction",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-stalk-kflat-tensor-homology",
+  "lem-pc-skyscraper-complex-stalk-recovery",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-239327967",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-239327967 (reviewer sub-agent of L); spot-checked: Read both nodes fully; checked all six steps, cited statements, Stacks 0DHY/0B67/09U9, edge cases, duplicates and route closure. No repairs needed. review.md records accepted tool uses and the unavailable pivot-list/history verification limitation."
  }
 }

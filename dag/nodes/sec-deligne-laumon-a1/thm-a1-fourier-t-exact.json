@@ -3,87 +3,275 @@
  "blueprint": {
   "is": "thm-a1-fourier-t-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Fourier transform is perverse t-exact on the line",
- "statement": "In the conventions of [rem-dl-a1-conventions], let\n$\\operatorname{FT}_\\psi$ be the Fourier–Deligne transform of\n[def-fd-transform] from the line $A_0$ to the dual line $A'_0$, and\nwrite $\\mathrm{Perv}(A_0)$, $\\mathrm{Perv}(A'_0)$ for the hearts of the\nperverse t-structure of [thm-a1-curve-perverse-heart], built from the\nclasses ${}^pD^{\\le0}$, ${}^pD^{\\ge0}$ of\n[def-per-perverse-subcategories]. Then $\\operatorname{FT}_\\psi$ is\nt-exact:\n\n$$\n\\operatorname{FT}_\\psi\\bigl({}^pD^{\\le0}(A_0)\\bigr)\\subset{}^pD^{\\le0}(A'_0),\n\\qquad\n\\operatorname{FT}_\\psi\\bigl({}^pD^{\\ge0}(A_0)\\bigr)\\subset{}^pD^{\\ge0}(A'_0),\n$$\n\nso it sends $\\mathrm{Perv}(A_0)$ into $\\mathrm{Perv}(A'_0)$, and\nlikewise $\\operatorname{FT}_{\\psi^{-1}}$ (from $A'_0$ to $A_0$) is\nt-exact and sends $\\mathrm{Perv}(A'_0)$ into $\\mathrm{Perv}(A_0)$. This\nsharpens the amplitude bound $[-1,1]$ of [thm-fd-fourier-perverse] to\namplitude $0$. Moreover, with the Tate twist of [def-wf-tate-twist],\nthe functors\n\n$$\n\\operatorname{FT}_\\psi:\\mathrm{Perv}(A_0)\\rightleftarrows\\mathrm{Perv}(A'_0):\nG:=\\operatorname{FT}_{\\psi^{-1}}(-)(1)\n$$\n\nare mutually quasi-inverse exact equivalences of abelian categories.",
+ "statement": "Use the finite-field and adic $\\overline{\\mathbf Q}_\\ell$ conventions of [rem-dl-a1-conventions, def-weil-pbc-qbar-category]. Fix a nontrivial additive character $\\psi:k_0\\to\\overline{\\mathbf Q}_\\ell^\\times$ [def-fd-additive-character]. Write $A_0=\\mathbf A^1_{k_0}$, $A=A_0\\times_{k_0}k$, and use primes for the dual lines. Let $\\operatorname{FT}_\\psi$ be the transform of [def-fd-transform], with shift $[1]$ and the adic operations of [def-fourier-set].\n\nFor Weil complexes [def-weil-weil-sheaf-complex], the classes ${}^pD^{\\le0}(A_0)$ and ${}^pD^{\\ge0}(A_0)$ mean those fixed pairs whose underlying geometric complexes belong to the perverse classes of [def-per-perverse-subcategories, thm-a1-curve-perverse-heart] on $A$. Write $\\mathrm{Perv}(A_0)$ for the category of fixed pairs in that geometric perverse heart, and similarly for $A'_0$. This is the abelian Weil heart in [thm-a1-curve-perverse-heart]; a triangulated structure on the category of fixed pairs is not asserted.\n\nThen the Fourier transform is t-exact in the sense of preserving these two classes:\n$$\n\\operatorname{FT}_\\psi({}^pD^{\\le0}(A_0))\\subseteq{}^pD^{\\le0}(A'_0),\\qquad\n\\operatorname{FT}_\\psi({}^pD^{\\ge0}(A_0))\\subseteq{}^pD^{\\ge0}(A'_0).\n$$\nThe same holds for $\\operatorname{FT}_{\\psi^{-1}}$ from $A'_0$ to $A_0$. In particular both carry perverse Weil sheaves to perverse Weil sheaves, sharpening the amplitude bound $[-1,1]$ of [thm-fd-fourier-perverse] to amplitude $0$. With the Tate twist of [def-wf-tate-twist],\n$$\n\\operatorname{FT}_\\psi:\\mathrm{Perv}(A_0)\\rightleftarrows\\mathrm{Perv}(A'_0):\nG=\\operatorname{FT}_{\\psi^{-1}}(-)(1)\n$$\nare mutually quasi-inverse exact equivalences of abelian categories.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.md",
   "place": "node thm-a1-fourier-t-exact, order 2749"
  },
  "stmt_deps": [
+  "rem-dl-a1-conventions",
+  "def-weil-pbc-qbar-category",
+  "def-fd-additive-character",
   "def-fd-transform",
-  "thm-a1-curve-perverse-heart",
+  "def-fourier-set",
+  "def-weil-weil-sheaf-complex",
   "def-per-perverse-subcategories",
+  "thm-a1-curve-perverse-heart",
   "thm-fd-fourier-perverse",
   "def-wf-tate-twist"
  ],
  "proof": [
   {
-   "text": "Throughout, a class is tested after the geometric base change to $k$:\ncohomology sheaves commute with this pullback, supports and their\ndimensions are unchanged, and the transform commutes with it by\n[lem-fd-base-change]. By [thm-fd-transform-well-defined] the transform\nis an exact triangulated functor with values in $D^b_c$.",
+   "text": "Work throughout on the underlying geometric derived categories and retain the Frobenius isomorphisms. The theorem [thm-fd-transform-well-defined] makes the transform an exact triangulated functor on the underlying bounded constructible categories. Its pullback, rank-one kernel tensor product and compact-support image carry Weil structures, with equivariant composition and exchange maps, by [lem-fix-weil-operations]. At $\\overline{\\mathbf Q}_\\ell$ choose a common finite coefficient field containing the character values for each finite diagram and use the exact scalar-extension compatibility in [prop-functor-package]. This is the adic interpretation of [def-fourier-set], not discrete non-torsion étale sheaves.",
    "uses": [
-    "lem-fd-base-change",
-    "thm-fd-transform-well-defined"
+    "thm-fd-transform-well-defined",
+    "lem-fix-weil-operations",
+    "prop-functor-package",
+    "def-fourier-set"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Introduction: geometric testing and well-definedness"
+   }
   },
   {
-   "text": "*Step 0: the upper class on a curve.* On a curve every support has\ndimension $\\le1$, so the support condition of\n[def-per-support-condition] says exactly: $K\\in{}^pD^{\\le0}$ if and\nonly if $\\mathcal H^aK=0$ for $a>0$ and $\\mathcal H^0K$ has finite\nsupport. This class is stable under the shifts $[n]$, $n\\ge0$, and under\nextensions: for a triangle $K'\\to K\\to K''\\to$ the long exact sequence\nof cohomology sheaves gives\n$\\operatorname{Supp}\\mathcal H^aK\\subset\n\\operatorname{Supp}\\mathcal H^aK'\\cup\\operatorname{Supp}\\mathcal H^aK''$.\nIt is also stable under the twist $(1)$, which is the tensor with a\nlisse sheaf of rank one and so preserves each cohomology sheaf's support.",
+   "text": "The curve description [thm-a1-curve-perverse-heart] gives the upper criterion $\\mathcal H^aK=0$ for $a>0$, with $\\mathcal H^0K$ punctual. It also gives the lower criterion $\\mathcal H^aK=0$ for $a<-1$, with no nonzero punctual subsheaf of $\\mathcal H^{-1}K$. Standard truncations and cohomology are those of [lem-a1-qbar-open-closed-cohomology], whose standard structure is preserved by scheme isomorphisms. Geometric Frobenius and its inverse are scheme isomorphisms; their pullbacks reindex the geometric fibres, hence preserve finite support. Applying that exact sheaf equivalence and its inverse to subsheaf inclusions preserves the condition of having no punctual subsheaf. Hence Frobenius is t-exact for both the standard and the perverse structures. Apply [lem-a1-fixed-pair-truncation-orthogonality] to both structures: ordinary truncations are Weil pairs and the perverse lower class is the right orthogonal, in morphisms of Weil pairs, of the shifted upper class.",
    "uses": [
-    "def-per-support-condition"
+    "thm-a1-curve-perverse-heart",
+    "lem-a1-qbar-open-closed-cohomology",
+    "lem-a1-fixed-pair-truncation-orthogonality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Steps 0 and 3: curve descriptions and Frobenius-qualified orthogonality"
+   }
   },
   {
-   "text": "*Step 1: $\\operatorname{FT}_\\psi$ preserves the upper class.* Let\n$K\\in{}^pD^{\\le0}(A)$. The ordinary truncation triangles exhibit $K$ as\nan iterated extension of $\\mathcal H^0K$ (finite support, degree $0$)\nand of objects $\\mathcal G[m]$ with $\\mathcal G=\\mathcal H^{-m}K$ a\nconstructible sheaf and $m\\ge1$. By Step 0 and exactness of the\ntransform it suffices to treat (a) $\\mathcal G[1]$ for an arbitrary\nconstructible sheaf $\\mathcal G$ (then $\\mathcal G[m]=\\mathcal G[1][m-1]$\nfollows), and (b) a sheaf $\\mathcal G$ of finite support in degree $0$.\n\nFor a geometric point $\\xi$ of $A'$ the stalk formula\n[lem-fd-stalk-formula] (with $r=1$) gives\n\n$$\n\\operatorname{FT}_\\psi(\\mathcal G)_{\\xi}\\cong\nR\\Gamma_c\\bigl(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr)[1].\n$$\n\n(b) If $\\mathcal G$ has finite support, so has\n$\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}$, whose compact-support\ncohomology is the direct sum of its stalks, in degree $0$ (a\nzero-dimensional scheme over $k$ has no higher cohomology). So every\nstalk of $\\operatorname{FT}_\\psi(\\mathcal G)$ is concentrated in degree\n$-1$, and $\\operatorname{FT}_\\psi(\\mathcal G)\\in{}^pD^{\\le0}(A')$ by\nStep 0.\n\n(a) For a constructible sheaf $\\mathcal G$ the twisted groups\n$H^i_c(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)})$ vanish for\n$i\\notin\\{0,1,2\\}$ by [lem-zl-affine-curve-range], so the stalks of\n$\\operatorname{FT}_\\psi(\\mathcal G[1])$ live in degrees $-2,-1,0$, and\n\n$$\n\\mathcal H^0\\bigl(\\operatorname{FT}_\\psi(\\mathcal G[1])\\bigr)_{\\xi}\n\\cong H^2_c\\bigl(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr).\n$$\n\nIt remains to see that this is nonzero for only finitely many $\\xi$ (the\nsheaf $\\mathcal H^0$ being constructible, its support is then finite).\nLet $j:U\\hookrightarrow A$ be a dense open on which $\\mathcal G$ is\nlisse, with finite complement $Z$. In the sequence\n$0\\to j_!j^*\\mathcal G\\to\\mathcal G\\to i_*i^*\\mathcal G\\to0$, tensored\nwith the lisse $\\mathcal L_{\\psi(\\xi x)}$, the third term has no\n$H^1_c$ or $H^2_c$ (finite support, as in (b)), so\n\n$$\nH^2_c\\bigl(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr)\\cong\nH^2_c\\bigl(U,\\mathcal G|_U\\otimes\\mathcal L_{\\psi(\\xi x)}|_U\\bigr)\n\\cong\\bigl(V\\otimes\\chi_\\xi\\bigr)_{\\pi_1(U)}(-1)\n$$\n\nby [lem-a1-affine-hc2], where $V=\\mathcal G_{\\bar\\eta}$ and $\\chi_\\xi$ is\nthe rank-one character of $\\mathcal L_{\\psi(\\xi x)}|_U$. These\ncoinvariants are nonzero exactly when $V$ has a quotient isomorphic to\n$\\chi_\\xi^{-1}=\\chi_{-\\xi}$ ([lem-fd-as-characters]:\n$\\mathcal L_{\\psi(\\xi x)}^{-1}\\cong\\mathcal L_{\\psi(-\\xi x)}$). The\ncharacters $\\chi_a$ are pairwise distinct: if $\\chi_a=\\chi_b$ with\n$a\\neq b$, then by [lem-fd-as-characters]\n$\\mathcal L_{\\psi((a-b)x)}$ is trivial on $U$, hence on $A$ (a rank-one\nlisse sheaf on the normal connected $A$ that is trivial on a dense open\nis trivial, its global section extending), contradicting\n$H^0(A,\\mathcal L_{\\psi((a-b)x)})=0$ from\n[lem-fd-cohomology-affine-line-character]. If $\\chi_{a_1},\\dots,\\chi_{a_n}$\nare pairwise distinct quotients of $V$, the combined map\n$V\\to\\bigoplus_i\\chi_{a_i}$ is surjective (its image is a submodule of a\nsum of pairwise non-isomorphic simple modules projecting onto each\nsummand, hence the whole sum), so $n\\le\\dim V=\\operatorname{rank}\\mathcal G|_U$.\nHence $\\mathcal H^0\\operatorname{FT}_\\psi(\\mathcal G[1])$ has finite\nsupport, and $\\operatorname{FT}_\\psi(\\mathcal G[1])\\in{}^pD^{\\le0}(A')$ by\nStep 0. This proves\n$\\operatorname{FT}_\\psi({}^pD^{\\le0}(A))\\subset{}^pD^{\\le0}(A')$. The\nargument uses nothing about $\\psi$ beyond its nontriviality, so it\napplies equally to $\\operatorname{FT}_{\\psi^{-1}}$ from $A'$ to $A$, and\nby Step 0 also to $G=\\operatorname{FT}_{\\psi^{-1}}(-)(1)$.\n\n*Step 2: $\\operatorname{FT}_\\psi$ is an equivalence with quasi-inverse\n$G$.* Fourier inversion [lem-fd-inversion] with $r=1$ gives\n$\\operatorname{FT}_{\\psi^{-1}}\\operatorname{FT}_\\psi(K)\\cong K(-1)$, hence\n$G\\circ\\operatorname{FT}_\\psi\\cong\\mathrm{id}$; applied to the character\n$\\psi^{-1}$ it gives\n$\\operatorname{FT}_\\psi\\operatorname{FT}_{\\psi^{-1}}(M)\\cong M(-1)$, and\nsince the twist is the pullback of a sheaf on the base, linearity over the\nbase [prop-base-linear] gives\n$\\operatorname{FT}_\\psi(M(1))\\cong\\operatorname{FT}_\\psi(M)(1)$, so\n$\\operatorname{FT}_\\psi\\circ G\\cong\\mathrm{id}$.",
+   "text": "The upper class is stable under $[n]$ for $n\\ge0$: ordinary degrees decrease, and for $n>0$ the degree-zero sheaf vanishes. It is extension-closed by the long exact cohomology sequence, since a subquotient of a sheaf supported on a finite union of finite sets has finite support; this long exact sequence is supplied by [lem-weil-heart-short-exact-triangles] for the standard t-structure. Tensor with a Tate line is exact and invertible: the rank-one local freeness of [lem-pur-twist-sheaf-locally-free], the twist construction [def-wf-tate-twist], and inverse evaluation of a rank-one free module give this locally, hence globally. It preserves supports; applying its inverse to any subsheaf inclusion also shows that it preserves the absence of punctual subsheaves. Thus $(1)$ and $(-1)$ preserve both perverse classes by the two curve criteria.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-wf-tate-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 0: shifts, extensions and Tate lines"
+   }
+  },
+  {
+   "text": "Let $\\mathcal G$ be a punctual Weil sheaf. Its underlying support is a finite Frobenius-stable set, hence is contained in a reduced finite subscheme $Z_0\\subset A_0$. By the closed-support assertion of [lem-a1-qbar-open-closed-cohomology], $\\mathcal G=i_*i^*\\mathcal G$. Tensoring with $\\mathcal L_{\\psi(ax)}$ preserves this support. Compact-support composition and the proper comparison $Ri_!=Ri_*$ of [prop-functor-package] identify its cohomology on $A$ with that on $Z$. After a finite constant-field extension making $a\\in k$ rational, [lem-a1-finite-boundary-cohomology] concentrates that cohomology in degree zero. The stalk formula [lem-fd-stalk-formula], at rank one, therefore concentrates every closed geometric fibre of $\\operatorname{FT}_\\psi(\\mathcal G)$ in degree $-1$. The exact conservative closed geometric fibres of [lem-dl-a1-constructible-fibres-exact] show that its cohomology sheaves in degrees $\\ge0$ vanish. It satisfies the upper criterion.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology",
+    "prop-functor-package",
+    "lem-a1-finite-boundary-cohomology",
+    "lem-fd-stalk-formula",
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 1(b): punctual input"
+   }
+  },
+  {
+   "text": "Now let $\\mathcal G$ be any constructible Weil sheaf on $A_0$. For $a\\in k$ the stalk formula [lem-fd-stalk-formula] gives\n$$\\mathcal H^j(\\operatorname{FT}_\\psi(\\mathcal G[1]))_a=H_c^{j+2}(A,\\mathcal G\\otimes\\mathcal L_{\\psi(ax)}).$$\nAll data including $a$ and this Artin–Schreier sheaf descend to some finite constant-field extension of $k_0$. Here one uses the same prime-field character underlying $\\psi$; no trace from the algebraic closure is used. Apply [lem-zl-affine-curve-range] over that finite field to the twisted constructible Weil sheaf. The displayed group vanishes unless $-2\\le j\\le0$. Exactness and conservativity of geometric coefficient fibres [lem-dl-a1-constructible-fibres-exact] give $\\mathcal H^j=0$ for $j>0$. Only finite support of the degree-zero sheaf remains.",
    "uses": [
     "lem-fd-stalk-formula",
     "lem-zl-affine-curve-range",
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 1(a): degree bound from curve cohomology"
+   }
+  },
+  {
+   "text": "Choose a dense open $U\\subset A$ on which $\\mathcal G$ is lisse, with finite complement, using [sk-lem-coefficient-heart]. It can be chosen over $k_0$: each of the finitely many missing geometric points has finite Frobenius orbit, so remove their entire orbits. Write $j:U\\hookrightarrow A$ and $i:Z\\hookrightarrow A$. Apply the open–closed triangle [prop-sf-open-closed-triangle-all-stages] to $\\mathcal G\\otimes\\mathcal L_{\\psi(ax)}$. By [prop-functor-package], applying compact cohomology identifies its outer terms with compact cohomology on $U$ and $Z$. The finite-boundary vanishing [lem-a1-finite-boundary-cohomology] gives\n$$H_c^2(A,\\mathcal G\\otimes\\mathcal L_{\\psi(ax)})\\cong H_c^2(U,\\mathcal G|_U\\otimes\\mathcal L_{\\psi(ax)}|_U).$$\nAfter the same finite constant-field extension as above, $U_0$ is smooth geometrically connected affine, and the twisted restriction is lisse Weil. Thus [lem-a1-affine-hc2] identifies the last group with $(V\\otimes\\chi_a)_{\\pi_1(U)}(-1)$, where $V=\\mathcal G_{\\bar\\eta}$ and $\\chi_a$ is the character of $\\mathcal L_{\\psi(ax)}|_U$. The tensor interpretation of [cor-galois-lisse-representations] identifies this representation with the generic fibre of the twisted sheaf.",
+   "uses": [
+    "sk-lem-coefficient-heart",
+    "prop-sf-open-closed-triangle-all-stages",
+    "prop-functor-package",
+    "lem-a1-finite-boundary-cohomology",
     "lem-a1-affine-hc2",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 1(a): localization and top cohomology coinvariants"
+   }
+  },
+  {
+   "text": "The coinvariants $(V\\otimes\\chi_a)_{\\pi_1(U)}$ are nonzero exactly when $V$ has a quotient $\\chi_a^{-1}$: a nonzero functional on the coinvariant vector space is a nonzero invariant functional on $V\\otimes\\chi_a$, and tensoring by the inverse line converts it into an equivariant map $V\\to\\chi_a^{-1}$. Conversely such a nonzero map is onto the one-dimensional target and factors through the coinvariants after tensoring. This is finite-dimensional vector-space duality, with no semisimplicity hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 1(a): coinvariants detect one-dimensional quotients"
+   }
+  },
+  {
+   "text": "These characters are pairwise distinct. By the tensor and inverse identities of [lem-fd-as-characters], equality $\\chi_a=\\chi_b$ would make $\\mathcal L_{\\psi((a-b)x)}|_U$ trivial, using the tensor equivalence [cor-galois-lisse-representations]. The line $A$ is connected and normal (smooth-curve normality [lem-sc-smooth-normal]), so the dense-open fundamental-group surjection of [lem-wf-dense-open-pi1-surjective] makes this rank-one representation trivial on $A$ itself. If $a\\ne b$, the nontrivial prime-field Artin–Schreier cohomology computation [lem-fd-cohomology-affine-line-character] instead gives $H^0(A,\\mathcal L_{\\psi((a-b)x)})=0$. A trivial rank-one sheaf has a nonzero constant section, a contradiction. Also [lem-fd-as-characters] identifies $\\chi_a^{-1}=\\chi_{-a}$.",
+   "uses": [
     "lem-fd-as-characters",
-    "lem-fd-cohomology-affine-line-character",
+    "cor-galois-lisse-representations",
+    "lem-sc-smooth-normal",
+    "lem-wf-dense-open-pi1-surjective",
+    "lem-fd-cohomology-affine-line-character"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 1(a): distinctness on the dense open"
+   }
+  },
+  {
+   "text": "At most $r=\\dim V$ distinct characters can be quotients of $V$. Indeed choose a nonzero quotient functional $f_i:V\\to\\overline{\\mathbf Q}_\\ell$ for each distinct quotient character $\\lambda_i$. They satisfy $f_i\\rho(g)=\\lambda_i(g)f_i$. If they had a nonzero linear relation of minimal length, its length would be at least two. Choose two indices $i,j$ in it and $g$ with $\\lambda_i(g)\\ne\\lambda_j(g)$. Precompose the relation by $\\rho(g)$ and subtract $\\lambda_j(g)$ times the original relation. This is a shorter nonzero relation, a contradiction. The functionals are independent, so their number is at most $r$. This includes $V=0$, when no quotient exists.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 1(a): elementary rank bound for distinct quotient characters"
+   }
+  },
+  {
+   "text": "It follows that $\\mathcal H^0\\operatorname{FT}_\\psi(\\mathcal G[1])$ has nonzero closed geometric fibres at at most $r$ points $a\\in k$. The finite lisse stratification and locally constant ranks in [lem-per-adic-heart-pullback-fibres] rule out a nonzero generic fibre: the stratum containing the generic point contains a dense open, which over the infinite field $k$ has infinitely many closed points. All remaining nonzero fibres are among the finite exceptional set. Hence the degree-zero sheaf is punctual. Together with the degree bound in step 5 and [thm-a1-curve-perverse-heart], this proves that $\\operatorname{FT}_\\psi(\\mathcal G[1])$ belongs to the upper class.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres",
+    "thm-a1-curve-perverse-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 1(a): finite support from the rank bound"
+   }
+  },
+  {
+   "text": "Let $K$ be an upper-class Weil complex. Its bounded ordinary truncation tower, available equivariantly by [lem-a1-fixed-pair-truncation-orthogonality] and [lem-a1-qbar-open-closed-cohomology], has factors $\\mathcal H^0K$ and $\\mathcal H^{-m}K[m]$ for finitely many $m\\ge1$. The first factor is punctual; each other factor is $(\\mathcal H^{-m}K[1])[m-1]$. Steps 3–10 put their Fourier images in the upper class. Induct up this finite tower, starting with its zero truncation; the transform sends each underlying truncation triangle to a distinguished triangle, and upper extension-closure puts the middle image in the upper class at each stage. Thus $\\operatorname{FT}_\\psi$ preserves the upper class. The argument applies to every nontrivial character, in particular $\\psi^{-1}$ with the two lines exchanged. Tate-line stability from step 3 then gives upper preservation by $G=\\operatorname{FT}_{\\psi^{-1}}(-)(1)$ too.",
+   "uses": [
+    "lem-a1-fixed-pair-truncation-orthogonality",
+    "lem-a1-qbar-open-closed-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 1: finite ordinary truncation induction and inverse character"
+   }
+  },
+  {
+   "text": "Fourier inversion [lem-fd-inversion] at rank one gives natural isomorphisms $\\operatorname{FT}_{\\psi^{-1}}\\operatorname{FT}_\\psi(K)\\cong K(-1)$ and, applied to $\\psi^{-1}$, $\\operatorname{FT}_\\psi\\operatorname{FT}_{\\psi^{-1}}(M)\\cong M(-1)$. By [prop-base-linear] the transform commutes with $(1)$, and the isomorphism is one of Weil complexes. Tensoring with the inverse Tate line cancels the $(-1)$ twist, as in step 3. Hence $G\\operatorname{FT}_\\psi\\cong\\mathrm{id}$ and $\\operatorname{FT}_\\psi G\\cong\\mathrm{id}$ as functors on Weil pairs. These two natural isomorphisms exhibit mutually inverse equivalences; a triangulated structure on pairs is not needed.",
+   "uses": [
     "lem-fd-inversion",
     "prop-base-linear"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 2: equivalence and quasi-inverse"
+   }
   },
   {
-   "text": "*Step 3: the lower class.* In a t-structure, as provided by\n[thm-a1-curve-perverse-heart], one has\n${}^pD^{\\ge0}=\\{K:\\operatorname{Hom}(M,K)=0\\ \\text{for all}\\ M\\in{}^pD^{\\le-1}\\}$.\nIndeed $\\subset$ is the orthogonality axiom; conversely, if $K$ is\nright orthogonal to ${}^pD^{\\le-1}$, the map\n$\\tau^{\\le-1}K\\to K$ in the truncation triangle\n$\\tau^{\\le-1}K\\to K\\to\\tau^{\\ge0}K\\to$ vanishes, so the triangle splits\nand $\\tau^{\\le-1}K[1]$ is a direct summand of $\\tau^{\\ge0}K$; it\ntherefore lies in ${}^pD^{\\le-2}\\cap{}^pD^{\\ge0}$, which is zero by\northogonality, so $K\\cong\\tau^{\\ge0}K$. Now let $K\\in{}^pD^{\\ge0}(A)$\nand $M\\in{}^pD^{\\le-1}(A')$. By Step 2,\n\n$$\n\\operatorname{Hom}\\bigl(M,\\operatorname{FT}_\\psi K\\bigr)\\cong\n\\operatorname{Hom}\\bigl(GM,K\\bigr),\n$$\n\nand $GM=G(M[-1])[1]\\in{}^pD^{\\le-1}(A)$ by Step 1 (the classes are\ncompatible with shifts), so the right-hand side vanishes. Hence\n$\\operatorname{FT}_\\psi K\\in{}^pD^{\\ge0}(A')$. The same argument with\nthe roles of $\\psi,\\psi^{-1}$ and of the two lines exchanged (and the\ntwist, which preserves ${}^pD^{\\ge0}$ by the same orthogonality since\n$(-1)$ is its inverse) shows that $\\operatorname{FT}_{\\psi^{-1}}$ and $G$\npreserve ${}^pD^{\\ge0}$.",
+   "text": "Let $K$ lie in the lower class on $A_0$, and let $M$ be an upper-class Weil pair shifted into ${}^pD^{\\le-1}(A'_0)$. The equivalence in step 12 gives\n$$\\operatorname{Hom}_{\\mathrm W}(M,\\operatorname{FT}_\\psi K)\\cong\\operatorname{Hom}_{\\mathrm W}(GM,K).$$\nThe shift comparison for the underlying Fourier functor is equivariant by its Weil operations. Step 11 therefore puts $GM=G(M[-1])[1]$ in ${}^pD^{\\le-1}(A_0)$. The right-hand side vanishes by the fixed-pair orthogonality of [lem-a1-fixed-pair-truncation-orthogonality] applied in step 2. Its converse puts $\\operatorname{FT}_\\psi K$ in the lower class. Apply this argument with $\\psi^{-1}$ and the two lines exchanged to obtain lower preservation for $\\operatorname{FT}_{\\psi^{-1}}$. Step 3 gives lower preservation for $G$ as well.",
+   "uses": [
+    "lem-a1-fixed-pair-truncation-orthogonality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 3: transport of orthogonality in the fixed-pair Hom groups"
+   }
+  },
+  {
+   "text": "Upper and lower preservation restrict the two functors to the Weil perverse hearts of [thm-a1-curve-perverse-heart], and the natural isomorphisms of step 12 restrict with them. Thus they are mutually inverse equivalences of the stated abelian categories. An additive equivalence preserves a kernel: applying its inverse identifies maps killed by the image morphism with maps killed by the original morphism, so the original kernel's universal factorization gives the image kernel's unique factorization. The same argument applies to cokernels. Both Fourier functors are additive by their underlying triangulated construction, so their equivalences on the hearts are exact. This proves the last assertion without treating Weil pairs as a triangulated category.",
    "uses": [
     "thm-a1-curve-perverse-heart"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 4: the hearts.* By Steps 1 and 3, $\\operatorname{FT}_\\psi$ and $G$\nare t-exact, hence restrict to functors between $\\mathrm{Perv}(A_0)$ and\n$\\mathrm{Perv}(A'_0)$, which are quasi-inverse by Step 2. A t-exact\ntriangulated functor induces an exact functor on the abelian hearts of\n[thm-a1-curve-perverse-heart], the short exact sequences of a heart\nbeing the distinguished triangles with all three vertices in it. So\n$\\operatorname{FT}_\\psi$ is an exact equivalence\n$\\mathrm{Perv}(A_0)\\simeq\\mathrm{Perv}(A'_0)$ with quasi-inverse $G$.",
-   "uses": [
-    "thm-a1-curve-perverse-heart"
-   ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+    "place": "Step 4: exact equivalence on the hearts"
+   }
   }
  ],
  "proof_deps": [
-  "lem-fd-base-change",
   "thm-fd-transform-well-defined",
-  "def-per-support-condition",
+  "lem-fix-weil-operations",
+  "prop-functor-package",
+  "def-fourier-set",
+  "thm-a1-curve-perverse-heart",
+  "lem-a1-qbar-open-closed-cohomology",
+  "lem-a1-fixed-pair-truncation-orthogonality",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-wf-tate-twist",
+  "lem-a1-finite-boundary-cohomology",
   "lem-fd-stalk-formula",
+  "lem-dl-a1-constructible-fibres-exact",
   "lem-zl-affine-curve-range",
+  "sk-lem-coefficient-heart",
+  "prop-sf-open-closed-triangle-all-stages",
   "lem-a1-affine-hc2",
+  "cor-galois-lisse-representations",
   "lem-fd-as-characters",
+  "lem-sc-smooth-normal",
+  "lem-wf-dense-open-pi1-surjective",
   "lem-fd-cohomology-affine-line-character",
+  "lem-per-adic-heart-pullback-fibres",
   "lem-fd-inversion",
-  "prop-base-linear",
-  "thm-a1-curve-perverse-heart"
+  "prop-base-linear"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.proof.md",
+  "place": "Introduction and Steps 0–4, with Frobenius-pair type correction and explicit finite-field and coefficient checks"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform is an exact equivalence of perverse sheaves on the affine line",
+   "results": "FourierTransform.fourierEquiv_apply; FourierTransform.fourierₗ; FourierTransform.fourier; SchwartzMap.fourierTransformCLE_apply; FourierTransform.fourierEquiv_symm_apply; SchwartzMap.fourierTransformCLE; FourierPair; MeasureTheory.Lp.fourierTransformₗᵢ",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern analytic Fourier transforms or generic triangulated functors, not the étale Fourier–Deligne transform"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\"",
+   "results": "Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData; Lean.Elab.Tactic.Omega.Problem.instInhabitedFourierMotzkinData; Lean.Elab.Tactic.Omega.Problem.instToStringFourierMotzkinData; Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.exact; Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.isEmpty; Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.lowerExact; Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.size; Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.upperExact",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern analytic Fourier transforms or generic triangulated functors, not the étale Fourier–Deligne transform"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Deligne transform of constructible l-adic sheaves on the affine line is perverse t-exact",
+   "results": "CategoryTheory.Functor.IsHomological.mk'; DerivedCategory.TStructure.t; DerivedCategory.instIsGEObjSingleFunctor; CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.instIsLEObjSingleFunctor; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.isGE_Q_obj_iff; CategoryTheory.Functor.IsHomological.exact",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern analytic Fourier transforms or generic triangulated functors, not the étale Fourier–Deligne transform"
+  },
+  {
+   "tool": "grep",
+   "query": "Deligne|perverse|fourierTransform",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern analytic Fourier transforms or generic triangulated functors, not the étale Fourier–Deligne transform"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perverse sheaves on a line are preserved by the l-adic Artin Schreier Fourier transform and its inverse",
+   "results": "CategoryTheory.Abelian.isoModSerre_kernel_eq_inverseImage_isomorphisms; LightCondMod.LocallyConstant.functorIsoDiscrete; LightCondMod.LocallyConstant.functorIsoDiscreteComponents; CategoryTheory.ObjectProperty.isoModSerre_isInvertedBy_iff; CondensedMod.LocallyConstant.functorIsoDiscrete; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_obj_val; CondensedMod.LocallyConstant.functorIsoDiscreteComponents",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern analytic Fourier transforms or generic triangulated functors, not the étale Fourier–Deligne transform"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_remark"
@@ -159,5 +347,89 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-a1-fourier-t-exact",
+  "worker": "stage1",
+  "summary": "Followed the unit stalk/coinvariant/character-rank argument, with finite truncation induction and inversion. Added one generic fixed-pair truncation/orthogonality statement, retained every non-elementary supporting fact as an explicit citation, and wrote out the elementary quotient-character bound. Corrected the missing nontrivial-character hypothesis and the ill-typed t-structure language for Frobenius pairs. No Lean written or compiled.",
+  "blueprint": "Current main-20261015 proof introduction and Steps 0–4: split steps 1–3 treat coefficients, curve criteria and stability; 4–11 realize the stalk, coinvariant, distinct-character and truncation argument of Step 1; 12 inversion (Step 2); 13 orthogonality (Step 3); 14 hearts (Step 4). The new node supplies only the fixed-pair qualification of Step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Equivariance of the six operations on Weil pairs; the perverse unit supplies no such operation package."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Common coefficient-stage passage, compact-support composition/proper comparison and localization after compact cohomology; not a perverse exactness theorem."
+   },
+   {
+    "node": "lem-per-adic-heart-pullback-fibres",
+    "why": "Adic geometric fibres and finite lisse stratification, including exact pullback by a scheme isomorphism; a generic sheaf input."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Long exact standard cohomology for distinguished triangles, used only for extension-closure."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Local rank-one freeness of the Tate line, used for invertible exact tensor and support preservation."
+   },
+   {
+    "node": "lem-a1-finite-boundary-cohomology",
+    "why": "Finite support cohomology is concentrated in degree zero, used on punctual input and the localization boundary."
+   },
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Exact conservative closed geometric fibres of rational constructible sheaves, not arbitrary pro-etale stalks."
+   },
+   {
+    "node": "sk-lem-coefficient-heart",
+    "why": "Dense-open lisse decomposition of constructible sheaves on a curve; a generic sheaf tool."
+   },
+   {
+    "node": "prop-sf-open-closed-triangle-all-stages",
+    "why": "Underlying open–closed triangle and its Weil-equivariant arrows."
+   },
+   {
+    "node": "lem-a1-affine-hc2",
+    "why": "Top curve cohomology as geometric coinvariants, the endpoint tool expressly used in the unit proof."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Tensor-compatible lisse sheaf/monodromy representation equivalence."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Normality hypothesis for dense-open fundamental-group surjectivity."
+   },
+   {
+    "node": "lem-wf-dense-open-pi1-surjective",
+    "why": "A rank-one lisse character trivial on the dense open is trivial on the normal line."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-weil-operations",
+  "prop-functor-package",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-a1-finite-boundary-cohomology",
+  "lem-dl-a1-constructible-fibres-exact",
+  "sk-lem-coefficient-heart",
+  "prop-sf-open-closed-triangle-all-stages",
+  "lem-a1-affine-hc2",
+  "cor-galois-lisse-representations",
+  "lem-sc-smooth-normal",
+  "lem-wf-dense-open-pi1-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q84-4dffaf045",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q84-4dffaf045 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, unit, cited statements, blueprint proofs, BBD and Laumon sources in full. Verified hypotheses, coefficient category, fixed-pair truncation/orthogonality, all 14 steps, edge cases, route, searches, duplicates, and no forbidden SGA or pivot machinery. Wrote review.md; no fixes needed."
  }
 }

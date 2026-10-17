@@ -13,9 +13,118 @@
   "def-trf-geometric-morphism",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on $\\mathcal D=\\mathcal C_{\\tau'}/Y$. By localization of object cohomology, identify $H^q_{\\tau'}(T,H'|_T)$ with $H^q(T,H')$ for every $T\\to Y$. These identifications are natural in arrows over $Y$. In particular all pullbacks below are restrictions of object cohomology on this single site: they can be computed by the restriction maps of one injective resolution of $H'$ on $\\mathcal D$.",
+   "uses": [
+    "lem-weil-pbc-cohomology-over-object-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZD, lemma-make-class-zero-general, proof; the canonical cohomology-presheaf maps of Tag 072W, lemma-higher-direct-images."
+   }
+  },
+  {
+   "text": "The base-change functor $u:\\mathcal D\\to\\mathcal C_{\\tau'}/X$ sends $(V\\to Y)$ to $(V\\times_YX\\to X)$; its products exist by (1). It preserves coverings and their pullbacks, since these are the base-changed families in the site axioms. The direct image of the given relocalization is $(f_{\\tau',*}K)(V)=K(V\\times_YX\\to X)$. Indeed the adjunction with restriction is explicit: from $a:F|_X\\to K$ obtain $F(V)\\to F(V\\times_YX)\\xrightarrow{a}K(V\\times_YX)$; conversely evaluate a map $F\\to u^sK$ at $(U\\to Y)$ and then restrict $K(U\\times_YX)\\to K(U\\to X)$ along the graph of $U\\to X$. Naturality and the two projection-graph identities show these assignments are inverse. The same formulas on sheaves of sets give the adjunction to the specified inverse image of the relocalization. This inverse image preserves finite limits because the given relocalization is a geometric morphism. Thus this continuous $u$ presents that morphism of sites.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZD, lemma-make-class-zero-general, proof; the canonical cohomology-presheaf maps of Tag 072W, lemma-higher-direct-images."
+   }
+  },
+  {
+   "text": "Put $\\mathcal G'=R^qf_{\\tau',*}(H'|_X)$ and $P(V)=H^q(V\\times_YX\\to X,H'|_X)$. The higher-direct-image theorem identifies $\\mathcal G'$ canonically with the $\\tau'$-sheafification of $P$. Using Step 1, regard $P(V)$ as $H^q(V\\times_YX,H')$. Write $e_V:P(V)\\to\\mathcal G'(V)$ for the canonical map. Its restriction along $a:V'\\to V$ is induced by $a\\times_Y\\mathrm{id}_X$, and $e$ is a natural morphism of presheaves. Set $\\overline\\theta=e_Y(\\theta)$, using $Y\\times_YX\\cong X$.",
+   "uses": [
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "lem-weil-pbc-cohomology-over-object-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZD, lemma-make-class-zero-general, proof; the canonical cohomology-presheaf maps of Tag 072W, lemma-higher-direct-images."
+   }
+  },
+  {
+   "text": "Apply the same higher-direct-image theorem to the identity morphism of $\\mathcal D$: the presheaf $Q(V)=H^q(V,H')$ has sheafification $R^q\\mathrm{id}_*H'=0$. The last equality follows by applying the identity to an injective resolution, whose positive cohomology sheaves vanish by its definition and $q>0$. Abelian sheafification is sheafification on underlying sets, so local equality for sheafification applied to $\\theta,0\\in Q(X)$ gives a $\\tau'$-covering $\\{W_k\\to X\\}$ with $\\theta|_{W_k}=0$ for every $k$. This derives the locality input directly from the cited statements.",
+   "uses": [
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "def-sp-injective-resolutions",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZD, lemma-make-class-zero-general, proof; the canonical cohomology-presheaf maps of Tag 072W, lemma-higher-direct-images."
+   }
+  },
+  {
+   "text": "Write $X\\times_YX$ with $\\operatorname{pr}_1$ the projection to the base object $X\\to Y$ in $P(X)$ and $\\operatorname{pr}_2$ the projection to the coefficient slice $\\mathcal C/X$. Naturality of $e$ gives $\\overline\\theta|_X=e_X(\\operatorname{pr}_2^*\\theta)$. The equalizer hypothesis therefore gives $\\overline\\theta|_X=e_X(\\operatorname{pr}_1^*\\theta)$. For $a_k:W_k\\to X$, the restriction of $\\operatorname{pr}_1^*\\theta\\in P(X)$ to $P(W_k)$ is the pullback of $\\theta|_{W_k}$ along $W_k\\times_YX\\to W_k$, hence zero. This equality is simply the composition identity $\\operatorname{pr}_1\\circ(a_k\\times\\mathrm{id}_X)=a_k\\circ\\operatorname{pr}_{W_k}$ on the common section complex of Step 1.",
+   "uses": [
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "lem-weil-pbc-cohomology-over-object-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZD, lemma-make-class-zero-general, proof; the canonical cohomology-presheaf maps of Tag 072W, lemma-higher-direct-images."
+   }
+  },
+  {
+   "text": "The $\\tau'$-sheaf $\\mathcal G'$ is separated for $\\{W_k\\to X\\}$. The image $e_X(\\operatorname{pr}_1^*\\theta)$ restricts to zero on every $W_k$ by Step 5, so it is zero. Thus $\\overline\\theta|_X=0$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZD, lemma-make-class-zero-general, proof; the canonical cohomology-presheaf maps of Tag 072W, lemma-higher-direct-images."
+   }
+  },
+  {
+   "text": "Assumption (2) puts $H'|_X$ in $\\mathcal A'_X$. Since $f\\in\\mathcal P$, assumption (4) puts $\\mathcal G'$ in $\\mathcal A'_Y$, and (3) makes $\\mathcal G'$ a $\\tau$-sheaf. The singleton $\\tau$-covering $\\{X\\to Y\\}$ therefore makes $\\mathcal G'(Y)\\to\\mathcal G'(X)$ injective by the sheaf equalizer condition. As $\\overline\\theta|_X=0$, it follows that $\\overline\\theta=0$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZD, lemma-make-class-zero-general, proof; the canonical cohomology-presheaf maps of Tag 072W, lemma-higher-direct-images."
+   }
+  },
+  {
+   "text": "Now $e_Y(\\theta)=e_Y(0)$ in $P^\\#(Y)=\\mathcal G'(Y)$. Apply the underlying-set compatibility and local equality theorem for sheafification to $P$: there is a $\\tau'$-covering $\\{Y_j\\to Y\\}$ such that $\\theta|_{Y_j}=0$ in $P(Y_j)$. By the definition of $P$ and the natural localization isomorphism, these are exactly the required zero classes in $H^q_{\\tau'}(Y_j\\times_YX,H'|_{Y_j\\times_YX})$.",
+   "uses": [
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-cohomology-over-object-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZD, lemma-make-class-zero-general, proof; the canonical cohomology-presheaf maps of Tag 072W, lemma-higher-direct-images."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-geometric-morphism",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "def-sp-injective-resolutions",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EZD, lemma-make-class-zero-general, proof; the canonical cohomology-presheaf maps of Tag 072W, lemma-higher-direct-images."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +160,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Opens.mayerVietorisSquare\", \"module\": \"Mathlib/Topology/Sheaves/MayerVietoris\", \"type\": \"{T : Type u} →\\n  [inst : TopologicalSpace T] →\\n    TopologicalSpace.Opens T → TopologicalSpace.Opens T → (Opens.grothendieckTopology T).MayerVietorisSquare\", \"doc\": \"For any two open sets $U$ and $V$ in a topological space $T$, the commutative diagram of inclusions\\n$$\\n\\\\begin{CD}\\nU \\\\cap V @>>> U \\\\\\\\\\n@VVV @VVV \\\\\\\\\\nV @>>> U \\\\cup V\\n\\\\end{CD}\\n$$\\nis a Mayer-Vietoris square\"}\n  {\"name\": \"TopCat.Presheaf.IsCompatible\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {FC : C → C → Type u_2} →\\n      {CC : C → Type u_3} →\\n        [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] →\\n          [inst_2 : CategoryTheory.ConcreteCategory C FC] →\\n            {X : TopCat} →\\n              (F : TopCa\", \"doc\": \"Given a presheaf $\\\\mathcal{F}$ on a topological space $X$ and an open cover $\\\\{U_i\\\\}$ of an open set $U \\\\subseteq X$, a family of sections $s_i \\\\in \\\\mathcal{F}(U_i)$ satisfies the compatibility condit\"}\n  {\"name\": \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/OpensLeCover\", \"type\": \"∀ {X : TopCat} {ι : Type u_2} (U : ι → TopologicalSpace.Opens ↑X) {Y : TopologicalSpace.Opens ↑X} (hY : Y = iSup U)\\n  (V : TopCat.Presheaf.SheafCondition.OpensLeCover U),\\n  ((TopCat.Presheaf.generateEquivalenceOpensLe_inverse' U hY).obj V).obj.hom = CategoryTheory.homOfLE ⋯\", \"doc\": \"The functor maps the full subcategory of open sets covered by an open cover $\\\\{U_i\\\\}$ of $Y$ to the full subcategory defined by the sieve generated from the presieve of the covering. This construction\"}\n  {\"name\": \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_right_as\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/OpensLeCover\", \"type\": \"∀ {X : TopCat} {ι : Type u_2} (U : ι → TopologicalSpace.Opens ↑X) {Y : TopologicalSpace.Opens ↑X} (hY : Y = iSup U)\\n  (V : TopCat.Presheaf.SheafCondition.OpensLeCover U),\\n  ((TopCat.Presheaf.generateEquivalenceOpensLe_inverse' U hY).obj V).obj.right.as = PUnit.unit\", \"doc\": \"The functor mapping open sets covered by an open cover $\\\\{U_i\\\\}$ of $Y$ to the sieve-generated subcategory encodes the sheaf condition by ensuring sections agree on overlaps. For any open set $V$ cont\"}\n  {\"name\": \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/OpensLeCover\", \"type\": \"∀ {X : TopCat} {ι : Type u_2} (U : ι → TopologicalSpace.Opens ↑X) {Y : TopologicalSpace.Opens ↑X} (hY : Y = iSup U),\\n  (TopCat.Presheaf.generateEquivalenceOpensLe U hY).inverse = TopCat.Presheaf.generateEquivalenceOpensLe_inverse' U hY\", \"doc\": \"For a topological space $X$ with an open cover $\\\\{U_i\\\\}$ of an open set $Y = \\\\bigcup U_i$, the inverse of the categorical equivalence between the sieve-generated subcategory (morphisms factoring throu\"}\n  {\"name\": \"TopologicalSpace.IsOpenCover.generalizingMap_iff_comp\", \"module\": \"Mathlib/Topology/LocalAtTarget\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] {f : α → β} {ι : Type u_3}\\n  {U : ι → TopologicalSpace.Opens α},\\n  TopologicalSpace.IsOpenCover U → (GeneralizingMap f ↔ ∀ (i : ι), GeneralizingMap (f ∘ Subtype.val))\", \"doc\": \"A function $ f $ between topological spaces is a generalizing map if and only if, for every open set $ U_i $ in an open cover $ \\\\{U_i\\\\} $ of the domain, the composition of $ f $ with the inclusion map\"}\n  {\"name\": \"CompHausLike.LocallyConstant.presheaf_ext\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ {P : TopCat → Prop} [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  {S : CompHausLike P} {Y : CategoryTheory.Functor (CompHausLike P)ᵒᵖ (Type (max u w))}\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}]\\n  (f : LocallyConstant (↑S.toTop) (Y.obj (Opposite\", \"doc\": \"For a presheaf $ X $ on compact Hausdorff-like spaces that preserves finite products, if two sections $ x $ and $ y $ over a space $ S $ agree when restricted to every fiber of a map $ f $, then $ x =\"}\n  {\"name\": \"TopCat.Presheaf.generateEquivalenceOpensLe_functor\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/OpensLeCover\", \"type\": \"∀ {X : TopCat} {ι : Type u_2} (U : ι → TopologicalSpace.Opens ↑X) {Y : TopologicalSpace.Opens ↑X} (hY : Y = iSup U),\\n  (TopCat.Presheaf.generateEquivalenceOpensLe U hY).functor = TopCat.Presheaf.generateEquivalenceOpensLe_functor' U\", \"doc\": \"There is an equivalence of categories between the full subcategory of the comma category over $ Y $ consisting of morphisms in the sieve generated by an open cover $\\\\{U_i\\\\}$, and the full subcategory \"}",
    "date": "2026-10-17",
    "verdict": "no match: hits give sheaf equalizer conditions, Mayer-Vietoris and local scheme morphism properties. None kills a positive cohomology class after a cover of the base under these higher-direct-image hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer.*cohom|cohom.*equalizer|kill.*cohom|cohom.*locally",
+   "results": "Actual msearch result: 0 hits; . ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions of cohomology and general local sheafification facts do not assert equalizer-class killing on the base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image sheafification of cohomology kills invariant cohomology classes locally on the base",
+   "results": "Actual msearch result: 8 hits; CategoryTheory.Presheaf.isLocallyInjective_toSheafify, CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff, CategoryTheory.Sheaf.isColimitSheafifyCocone, CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, PresheafOfModules.toSheafify, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, groupCohomology.H0Iso, CategoryTheory.Presheaf.sheafificationIsoImagePresheaf. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions of cohomology and general local sheafification facts do not assert equalizer-class killing on the base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "Actual msearch result: 7 hits; CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions of cohomology and general local sheafification facts do not assert equalizer-class killing on the base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive degree sheaf cohomology class invariant under two Cech projections is killed over a covering of the base",
+   "results": "Actual msearch result: 8 hits; AlgebraicGeometry.Scheme.zero_of_zero_cover, CategoryTheory.Sheaf.H, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.Sheaf.cohomologyPresheaf. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions of cohomology and general local sheafification facts do not assert equalizer-class killing on the base."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-comparison-induction-step",
@@ -82,5 +219,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-comparison-equalizer-class-killing",
+  "worker": "stage1",
+  "summary": "Follows Stacks Tag 0EZD using existing DAG interfaces for cohomology localization, higher direct images and local equality in sheafification. Expands the zero-image claim with the cohomology presheaf, deriving local killing from the identity higher-direct-image case; no new nodes and no statement change. Repair: rechecked against the maintainer-installed topology-comparison unit and updated the route description; retained all eight steps, statement, citations and logged searches unchanged.",
+  "blueprint": "The eight retained steps prove Stacks Tag 0EZD, the equalizer-class-killing input to Tag 0EZE. In the corrected authoritative unit sk-lem-trf-topology-comparison they realize step 6, carried by this item and lem-trf-comparison-induction-step. Maintenance commit 94687fb585fba54dba7a2d9b9c788625f36fa45a repaired the proof-unit binding; delivery preserves that current base unit. The historical blueprint.from/via chain through lem-trf-local-term-locality remains unchanged as creation provenance, not an assertion that 0EZD proves Frobenius local-term vanishing.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic object/slice cohomology and restriction naturality; the unit has no general site-localization interface."
+   },
+   {
+    "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "why": "Generic cohomology-presheaf sheafification formula, for the relocalization and identity; it implements the source route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Generic compatibility of abelian sheafification with underlying sets, needed to apply local equality."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local equality in sheafification, applied to the identity cohomology presheaf and to the relocalization presheaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-46b3bc470",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-46b3bc470 (reviewer sub-agent of L); spot-checked: Read the item, all eight steps, cited statements and source passages in full. Projection maps, abelian coefficients, hypotheses, local sheafification arguments and repaired unit binding check out. No new nodes, long steps, cycles, forbidden batch-5 dependencies or dropped machinery. review.md records the checks and a nonblocking report discrepancy concerning inherited creation provenance."
  }
 }
