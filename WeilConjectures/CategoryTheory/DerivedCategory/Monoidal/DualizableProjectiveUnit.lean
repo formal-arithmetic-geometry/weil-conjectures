@@ -63,11 +63,12 @@ def UnitFactorsThroughFiniteCoproducts : Prop :=
   ∀ ⦃J : Type⦄ (X : J → C) [HasCoproduct X] (x : 𝟙_ C ⟶ ∐ X),
     ∃ (S : Finset J) (y : ∀ j, 𝟙_ C ⟶ X j), x = ∑ j ∈ S, y j ≫ Sigma.ι X j
 
-/-- Morphisms from the unit to a tensor product `F ⊗ G` are finite sums of tensor products of
-morphisms `𝟙 ⟶ F` and `𝟙 ⟶ G`. -/
+/-- Morphisms from the unit to a tensor product `F ⊗ G` are finite sums of composites
+`𝟙 ⟶ 𝟙 ⊗ 𝟙 ⟶ F ⊗ G` of a morphism `uᵢ : 𝟙 ⟶ 𝟙 ⊗ 𝟙` with a tensor product of morphisms
+`sᵢ : 𝟙 ⟶ F` and `tᵢ : 𝟙 ⟶ G`. -/
 def UnitTensorFinite : Prop :=
-  ∀ (F G : C) (x : 𝟙_ C ⟶ F ⊗ G), ∃ (n : ℕ) (s : Fin n → (𝟙_ C ⟶ F)) (t : Fin n → (𝟙_ C ⟶ G)),
-    x = ∑ i, (λ_ (𝟙_ C)).inv ≫ (s i ⊗ₘ t i)
+  ∀ (F G : C) (x : 𝟙_ C ⟶ F ⊗ G), ∃ (n : ℕ) (u : Fin n → (𝟙_ C ⟶ 𝟙_ C ⊗ 𝟙_ C))
+    (s : Fin n → (𝟙_ C ⟶ F)) (t : Fin n → (𝟙_ C ⟶ G)), x = ∑ i, u i ≫ (s i ⊗ₘ t i)
 
 /-- **An elementwise five lemma.** In a preadditive category, consider a commutative ladder
 `A₁ ⟶ A₂ ⟶ A₃ ⟶ A₄ ⟶ A₅` over `B₁ ⟶ B₂ ⟶ B₃ ⟶ B₄ ⟶ B₅` whose rows are exact at the
@@ -146,13 +147,14 @@ tensor products `sᵢ ⊗ tᵢ` of morphisms to terms `M^{pᵢ}` and `F^{qᵢ}`,
 lemma exists_eq_sum_ιTensorObj (hC : UnitFactorsThroughFiniteCoproducts C)
     (hT : UnitTensorFinite C) (M F : CochainComplex C ℤ) (x : 𝟙_ C ⟶ (M ⊗ F).X 0) :
     ∃ (ι : Type) (_ : Fintype ι) (p q : ι → ℤ) (h : ∀ i, p i + q i = 0)
+      (u : ι → (𝟙_ C ⟶ 𝟙_ C ⊗ 𝟙_ C))
       (s : ∀ i, 𝟙_ C ⟶ M.X (p i)) (t : ∀ i, 𝟙_ C ⟶ F.X (q i)),
-      x = ∑ i, (λ_ (𝟙_ C)).inv ≫ (s i ⊗ₘ t i) ≫
+      x = ∑ i, u i ≫ (s i ⊗ₘ t i) ≫
         HomologicalComplex.ιTensorObj M F (p i) (q i) 0 (h i) := by
   obtain ⟨S, y, hy⟩ := hC _ (show 𝟙_ C ⟶ ∐ _ from x)
-  choose n s t hst using fun j ↦ hT _ _ (y j)
+  choose n u s t hst using fun j ↦ hT _ _ (y j)
   refine ⟨Σ j : S, Fin (n j), inferInstance, fun j ↦ j.1.1.1.1, fun j ↦ j.1.1.1.2,
-    fun j ↦ j.1.1.2, fun j ↦ s j.1 j.2, fun j ↦ t j.1 j.2, ?_⟩
+    fun j ↦ j.1.1.2, fun j ↦ u j.1 j.2, fun j ↦ s j.1 j.2, fun j ↦ t j.1 j.2, ?_⟩
   refine hy.trans ?_
   rw [Fintype.sum_sigma, ← Finset.sum_coe_sort S]
   refine Finset.sum_congr rfl fun j _ ↦ ?_
@@ -228,7 +230,7 @@ theorem exists_retract_of_exactPairing_of_projective_unit [Projective (𝟙_ C)]
     (eU.inv ≫ η_ K N ≫ e.hom ▷ N ≫ (T M).hom)
   let x : 𝟙_ C ⟶ (M ⊗ F).X 0 :=
     (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ C)).inv ≫ φ.f 0
-  obtain ⟨ι, _, p, q, hpq, s, t, hx⟩ := exists_eq_sum_ιTensorObj hC hT M F x
+  obtain ⟨ι, _, p, q, hpq, u, s, t, hx⟩ := exists_eq_sum_ιTensorObj hC hT M F x
   have hp (i : ι) : (ComplexShape.up ℤ).Rel (p i) (p i + 1) := rfl
   have hp' (i : ι) : p i ≠ p i + 1 := by omega
   let D (i : ι) : CochainComplex C ℤ := HomologicalComplex.double (𝟙 (𝟙_ C)) (hp i)
@@ -244,7 +246,7 @@ theorem exists_retract_of_exactPairing_of_projective_unit [Projective (𝟙_ C)]
       simp [j, g]
     simp only [s', Category.assoc, ← HomologicalComplex.comp_f, this, dm,
       HomologicalComplex.mkHomFromDouble_f₀, Iso.inv_hom_id_assoc]
-  let x' : 𝟙_ C ⟶ (L ⊗ F).X 0 := ∑ i, (λ_ (𝟙_ C)).inv ≫ (s' i ⊗ₘ t i) ≫
+  let x' : 𝟙_ C ⟶ (L ⊗ F).X 0 := ∑ i, u i ≫ (s' i ⊗ₘ t i) ≫
     HomologicalComplex.ιTensorObj L F (p i) (q i) 0 (hpq i)
   have hx' : x' ≫ (j ▷ F).f 0 = x := by
     rw [hx, Preadditive.sum_comp]
@@ -455,3 +457,261 @@ lemma finProj.isDualizable [MonoidalPreadditive C] [IsIdempotentComplete C] {P :
 end FinProj
 
 end CategoryTheory
+
+namespace DerivedCategory
+
+open Pretriangulated MonoidalClosed
+
+variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C]
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+/-- In a distinguished triangle `T` with `T.obj₁` and `T.obj₂` vanishing above `b`, if `Hᵇ` of the
+first map is an epimorphism then `T.obj₃` vanishes above `b - 1`. -/
+lemma isLE_obj₃_of_distTriang (T : Triangle (DerivedCategory C)) (hT : T ∈ distTriang _)
+    (b : ℤ) (h₁ : T.obj₁.IsLE b) (h₂ : T.obj₂.IsLE b) (h : Epi ((homologyFunctor C b).map T.mor₁)) :
+    T.obj₃.IsLE (b - 1) := by
+  rw [isLE_iff]
+  intro k hk
+  have h0 : (homologyFunctor C k).map T.mor₂ = 0 := by
+    by_cases hkb : k = b
+    · subst hkb
+      exact (HomologySequence.epi_homologyMap_mor₁_iff T hT k).1 h
+    · exact (isZero_of_isLE T.obj₂ b k (by omega)).eq_of_src _ _
+  have he : Epi ((homologyFunctor C k).map T.mor₂) :=
+    (HomologySequence.epi_homologyMap_mor₂_iff T hT k (k + 1)).2
+      ((isZero_of_isLE T.obj₁ b (k + 1) (by omega)).eq_of_tgt _ _)
+  rw [h0] at he
+  exact (IsZero.iff_id_eq_zero _).2 ((cancel_epi (0 : (homologyFunctor C k).obj T.obj₂ ⟶ _)).1
+    (by simp))
+
+variable [Projective (𝟙_ C)]
+
+/-- If the unit of `C` is projective, there are no nonzero morphisms from the unit of `D(C)` to an
+object vanishing above `-1`. -/
+lemma hom_unit_eq_zero {X : DerivedCategory C} [X.IsLE (-1)]
+    (f : 𝟙_ (DerivedCategory C) ⟶ X) : f = 0 := by
+  have : Subsingleton ((singleFunctor C 0).obj (𝟙_ C) ⟶ X) :=
+    (homSingleEquivOfProjective (𝟙_ C) 0 X).subsingleton_congr.2
+      ⟨fun a b ↦ (isZero_of_isLE X (-1) 0 (by omega)).eq_of_tgt a b⟩
+  rw [← cancel_epi (singleFunctorObjUnitIso C).hom]
+  exact Subsingleton.elim _ _
+
+section Finite
+
+variable (hC : UnitFactorsThroughFiniteCoproducts C) (hT : UnitTensorFinite C)
+include hC hT
+
+/-- A dualizable object `K` vanishing above `b` has a top cohomology `Hᵇ(K)` which is a quotient of
+a finite direct sum `𝟙ʳ`: `K` is a retract of `Q(L)` for a complex `L` vanishing above `b` whose
+terms are quotients of some `𝟙ʳ`, and `Hᵇ(L)` is a quotient of `Lᵇ`. -/
+theorem exists_epi_homology_of_isDualizable {K : DerivedCategory C} (hK : IsDualizable K)
+    (b : ℤ) [K.IsLE b] :
+    ∃ (r : ℕ) (π : (⨁ fun _ : Fin r ↦ 𝟙_ C) ⟶ (homologyFunctor C b).obj K), Epi π := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨M, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isLE b
+  obtain ⟨L, ι, _, -, -, -, -, hπ, w, hw⟩ :=
+    exists_retract_of_exactPairing_of_projective_unit hC hT K Kᘁ M e
+  have : L.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff L b).2 fun n hn ↦
+    IsZero.of_mono (ι.f n) (M.isZero_of_isStrictlyLE b n hn)
+  obtain ⟨r, π, _⟩ := hπ b
+  have : IsIso (L.iCycles b) := L.isIso_iCycles b (b + 1) (by simp)
+    ((L.isZero_of_isStrictlyLE b (b + 1) (by omega)).eq_of_tgt _ _)
+  let H := homologyFunctor C b
+  let ρ : Q.obj L ⟶ K := Q.map ι ≫ e.inv
+  have hwρ : w ≫ ρ = 𝟙 K := by simp [ρ, reassoc_of% hw]
+  have : Epi (H.map ρ) :=
+    (IsSplitEpi.mk' ⟨H.map w, by rw [← H.map_comp, hwρ, H.map_id]⟩).epi
+  exact ⟨r, π ≫ inv (L.iCycles b) ≫ L.homologyπ b ≫ ((homologyFunctorFactors C b).app L).inv ≫
+    H.map ρ, inferInstance⟩
+
+/-- A dualizable object is bounded: it is a retract of `Q(L)` for a bounded complex `L`. -/
+theorem bounded_of_isDualizable {K : DerivedCategory C} (hK : IsDualizable K) :
+    ∃ a b : ℤ, K.IsGE a ∧ K.IsLE b := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨L, ι, _, a, b, _, _, -, w, hw⟩ :=
+    exists_retract_of_exactPairing_of_projective_unit hC hT K Kᘁ (Q.objPreimage K)
+      (Q.objObjPreimageIso K).symm
+  let H (i : ℤ) := homologyFunctor C i
+  have hret (i : ℤ) : (H i).map w ≫ (H i).map (Q.map ι ≫ (Q.objObjPreimageIso K).hom) = 𝟙 _ := by
+    rw [← Functor.map_comp, reassoc_of% hw]
+    simp
+  have (i : ℤ) : Mono ((H i).map w) := (IsSplitMono.mk' ⟨_, hret i⟩).mono
+  refine ⟨a, b, ?_, ?_⟩
+  · rw [isGE_iff]
+    intro i hi
+    exact IsZero.of_mono ((H i).map w)
+      ((L.exactAt_of_isGE a i hi).isZero_homology.of_iso ((homologyFunctorFactors C i).app L))
+  · rw [isLE_iff]
+    intro i hi
+    exact IsZero.of_mono ((H i).map w)
+      ((L.exactAt_of_isLE b i hi).isZero_homology.of_iso ((homologyFunctorFactors C i).app L))
+
+/-- A dualizable object has finite Tor amplitude: it and its dual are bounded above. -/
+theorem exists_torAmplitudeIn_of_isDualizable {K : DerivedCategory C} (hK : IsDualizable K) :
+    ∃ a b : ℤ, torAmplitudeIn C a b K := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := nonempty_braidedCategory C
+  let := BraidedCategory.exactPairing_swap K Kᘁ
+  obtain ⟨-, b, -, _⟩ := bounded_of_isDualizable hC hT (K := K) ⟨inferInstance⟩
+  obtain ⟨-, b', -, _⟩ := bounded_of_isDualizable hC hT (K := Kᘁ) ⟨⟨K⟩⟩
+  exact ⟨-b', b, torAmplitudeIn_of_exactPairing_of_isLE (L := Kᘁ) b b'⟩
+
+/-- **Base case.** A dualizable object of Tor amplitude in `[b, b]` is `P[-b]` for a retract `P`
+of some `𝟙ʳ`. It is `Y[-b]` for `Y = Hᵇ(K)`, a quotient `π : 𝟙ʳ ⟶ Y`. Its dual `N` vanishes above
+`-b`, so maps `Y ⟶ X` are maps `𝟙 ⟶ X[-b] ⊗ N`; as the cone of `π[-b] ⊗ N` vanishes above `-1`,
+maps from `𝟙` lift along it, and the identity of `Y` lifts to a section of `π`. -/
+theorem exists_iso_single_of_torAmplitudeIn_single {K : DerivedCategory C} (hK : IsDualizable K)
+    (b : ℤ) (hKt : torAmplitudeIn C b b K) :
+    ∃ P : C, finProj C P ∧ Nonempty (K ≅ (singleFunctor C b).obj P) := by
+  obtain ⟨_, _⟩ := homologyConcentratedIn_of_torAmplitudeIn hKt
+  obtain ⟨Y, ⟨eY⟩⟩ := K.exists_iso_singleFunctor_obj_of_isGE_of_isLE b
+  obtain ⟨r, π, _⟩ := exists_epi_homology_of_isDualizable hC hT hK b
+  let B := ⨁ fun _ : Fin r ↦ 𝟙_ C
+  let S := singleFunctor C b
+  let π' : B ⟶ Y := π ≫ (homologyFunctor C b).map eY.hom ≫
+    ((singleFunctorCompHomologyFunctorIso C b).app Y).hom
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := nonempty_braidedCategory C
+  let := BraidedCategory.exactPairing_swap K Kᘁ
+  have hN := homologyConcentratedIn_of_torAmplitudeIn
+    (torAmplitudeIn_of_exactPairing (K := K) (L := Kᘁ) hKt)
+  have : (Kᘁ).IsLE (-b) := hN.2
+  obtain ⟨Co, g, h, hTr⟩ := distinguished_cocone_triangle (S.map π')
+  have hepi : Epi ((homologyFunctor C b).map (S.map π')) := by
+    have e := (singleFunctorCompHomologyFunctorIso C b).hom.naturality π'
+    have : Epi ((S ⋙ homologyFunctor C b).map π' ≫
+        (singleFunctorCompHomologyFunctorIso C b).hom.app Y) := by
+      rw [e]
+      infer_instance
+    exact (epi_comp_iff_of_isIso _ _).1 this
+  have : (S.obj B).IsLE b := inferInstanceAs (((singleFunctor C b).obj B).IsLE b)
+  have : (S.obj Y).IsLE b := inferInstanceAs (((singleFunctor C b).obj Y).IsLE b)
+  have : Co.IsLE (b - 1) := isLE_obj₃_of_distTriang _ hTr b
+    (inferInstanceAs (((singleFunctor C b).obj B).IsLE b))
+    (inferInstanceAs (((singleFunctor C b).obj Y).IsLE b)) hepi
+  have : (Co ⊗ Kᘁ).IsLE (-1) := by
+    have := isLE_tensor Co Kᘁ (b - 1) (-b)
+    exact TStructure.t.isLE_of_le _ (b - 1 + -b) (-1) (by omega)
+  have hTr' := (tensorRight Kᘁ).map_distinguished _ hTr
+  let t := tensorRightHomEquiv (𝟙_ _) K Kᘁ (S.obj Y) ((λ_ K).hom ≫ eY.hom)
+  obtain ⟨s', hs'⟩ := Triangle.coyoneda_exact₂ _ hTr' t (hom_unit_eq_zero (X := Co ⊗ Kᘁ) _)
+  let g' := (tensorRightHomEquiv (𝟙_ _) K Kᘁ (S.obj B)).symm s'
+  have hg' : g' ≫ S.map π' = (λ_ K).hom ≫ eY.hom := by
+    apply (tensorRightHomEquiv (𝟙_ _) K Kᘁ (S.obj Y)).injective
+    rw [tensorRightHomEquiv_naturality, Equiv.apply_symm_apply]
+    exact hs'.symm
+  let σ := eY.inv ≫ (λ_ K).inv ≫ g'
+  have hσ : σ ≫ S.map π' = 𝟙 _ := by simp [σ, hg']
+  exact ⟨Y, ⟨r, ⟨{ i := S.preimage σ, r := π', retract := S.map_injective (by rw [S.map_comp, S.map_preimage, hσ, S.map_id]) }⟩⟩,
+    ⟨eY⟩⟩
+
+/-- **Induction on the length of the Tor amplitude.** A dualizable object of Tor amplitude in
+`[a, b]` is isomorphic to `Q(P)` for a bounded complex `P` of retracts of finite direct sums `𝟙ʳ`.
+Kill the top cohomology by a map `f : 𝟙ʳ[-b] ⟶ K` inducing an epimorphism on `Hᵇ`; its cone `C'` is
+dualizable with Tor amplitude in `[a, b - 1]`, hence `Q(P')` by induction, and `K` is the cone of
+a map `C'[-1] ⟶ 𝟙ʳ[-b]`, which lifts to complexes since `P'[-1]` is K-projective. -/
+theorem exists_iso_Q_obj_of_isDualizable_aux (n : ℕ) :
+    ∀ {K : DerivedCategory C} (a b : ℤ), b - a = n → IsDualizable K → torAmplitudeIn C a b K →
+      ∃ (P : CochainComplex C ℤ) (a' b' : ℤ), P.IsStrictlyGE a' ∧ P.IsStrictlyLE b' ∧
+        (∀ k, finProj C (P.X k)) ∧ Nonempty (K ≅ Q.obj P) := by
+  induction n with
+  | zero =>
+    intro K a b hab hK hKt
+    obtain rfl : b = a := by omega
+    obtain ⟨Y, hY, ⟨e⟩⟩ := exists_iso_single_of_torAmplitudeIn_single hC hT hK b hKt
+    refine ⟨(HomologicalComplex.single C (.up ℤ) b).obj Y, b, b, inferInstance, inferInstance,
+      fun k ↦ ?_, ⟨e ≪≫ (singleFunctorIsoCompQ C b).app Y⟩⟩
+    by_cases hk : k = b
+    · subst hk
+      exact finProj_of_iso (HomologicalComplex.singleObjXSelf _ _ _).symm hY
+    · exact finProj_of_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hk)
+  | succ n ih =>
+    intro K a b hab hK hKt
+    obtain ⟨_, hKle⟩ := homologyConcentratedIn_of_torAmplitudeIn hKt
+    obtain ⟨r, π, _⟩ := exists_epi_homology_of_isDualizable hC hT hK b
+    let B := ⨁ fun _ : Fin r ↦ 𝟙_ C
+    have hB : finProj C B := ⟨r, ⟨Retract.refl _⟩⟩
+    have : Projective B := hB.projective
+    let Ssing := (HomologicalComplex.single C (.up ℤ) b).obj B
+    have hSsing (k : ℤ) : finProj C (Ssing.X k) := by
+      by_cases hk : k = b
+      · subst hk
+        exact finProj_of_iso (HomologicalComplex.singleObjXSelf _ _ _).symm hB
+      · exact finProj_of_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hk)
+    let S := (singleFunctor C b).obj B
+    let eS : S ≅ Q.obj Ssing := (singleFunctorIsoCompQ C b).app B
+    let f : S ⟶ K := (homSingleEquivOfProjective B b K).symm π
+    have hf : Epi ((homologyFunctor C b).map f) := by
+      have h := (homSingleEquivOfProjective B b K).apply_symm_apply π
+      rw [homSingleEquivOfProjective_apply, homSingleToHomology] at h
+      have : (homologyFunctor C b).map f =
+          ((singleFunctorCompHomologyFunctorIso C b).app B).hom ≫ π := by
+        rw [← h, Iso.hom_inv_id_assoc]
+      rw [this]
+      infer_instance
+    obtain ⟨Co, g, h, hTr⟩ := distinguished_cocone_triangle f
+    have hSd : IsDualizable S := IsDualizable.of_iso eS.symm
+      (isDualizable_Q_obj Ssing b b fun k ↦ (hSsing k).isDualizable)
+    have hCo : IsDualizable Co := isDualizable_obj₃_of_distTriang _ hTr hSd hK
+    have : Co.IsLE (b - 1) := isLE_obj₃_of_distTriang _ hTr b
+      (inferInstanceAs (((singleFunctor C b).obj B).IsLE b)) hKle hf
+    have hSt : torAmplitudeIn C b b S := (torAmplitudeIn C b b).prop_of_iso eS.symm
+      (torAmplitudeIn_Q_obj_of_flat Ssing b b fun k ↦ (hSsing k).isDualizable.flat)
+    have hCot : torAmplitudeIn C a (b - 1) Co := by
+      intro F
+      have hTF := rot_of_distTriang _
+        ((tensorRight ((singleFunctor C 0).obj F)).map_distinguished _ hTr)
+      refine ⟨TStructure.t.isGE₂ _ hTF a (hKt F).1 ?_, ?_⟩
+      · have h1 := (hSt F).1
+        have h2 := TStructure.t.isGE_shift (S ⊗ (singleFunctor C 0).obj F) b 1 (b - 1)
+        exact TStructure.t.isGE_of_ge ((S ⊗ (singleFunctor C 0).obj F)⟦(1 : ℤ)⟧) a (b - 1)
+          (by omega)
+      · have := isLE_tensor Co ((singleFunctor C 0).obj F) (b - 1) 0
+        exact TStructure.t.isLE_of_le _ (b - 1 + 0) (b - 1) (by omega)
+    obtain ⟨P, a', b', _, _, hP, ⟨eP⟩⟩ := ih a (b - 1) (by omega) hCo hCot
+    have hT₂ := inv_rot_of_distTriang _ hTr
+    let eC : Co⟦(-1 : ℤ)⟧ ≅ Q.obj (P⟦(-1 : ℤ)⟧) :=
+      (shiftFunctor _ (-1 : ℤ)).mapIso eP ≪≫ ((Q.commShiftIso (-1 : ℤ)).app P).symm
+    have := P.isStrictlyGE_shift a' (-1) (a' + 1) (by omega)
+    have := P.isStrictlyLE_shift b' (-1) (b' + 1) (by omega)
+    have : ∀ k, Projective ((P⟦(-1 : ℤ)⟧).X k) := fun k ↦ (hP (k + -1)).projective
+    have : (P⟦(-1 : ℤ)⟧).IsKProjective := CochainComplex.isKProjective_of_projective _ (b' + 1)
+    obtain ⟨ψ, hψ⟩ := CochainComplex.IsKProjective.exists_Q_map_eq (P⟦(-1 : ℤ)⟧) Ssing
+      (eC.inv ≫ (Triangle.mk f g h).invRotate.mor₁ ≫ eS.hom)
+    obtain ⟨e', -, -⟩ := exists_iso_of_arrow_iso _ _ hT₂ (mappingCone_triangle_distinguished ψ)
+      (Arrow.isoMk eC eS (by
+        change eC.hom ≫ Q.map ψ = _
+        rw [hψ, Iso.hom_inv_id_assoc]
+        rfl))
+    have : (CochainComplex.mappingCone ψ).IsStrictlyGE (min a' b) := by
+      rw [CochainComplex.isStrictlyGE_iff]
+      intro i hi
+      rw [CochainComplex.mappingCone.isZero_X_iff]
+      exact ⟨(P⟦(-1 : ℤ)⟧).isZero_of_isStrictlyGE (a' + 1) _ (by omega),
+        CochainComplex.isZero_of_isStrictlyGE Ssing b _ (by omega)⟩
+    have : (CochainComplex.mappingCone ψ).IsStrictlyLE (max b' b) := by
+      rw [CochainComplex.isStrictlyLE_iff]
+      intro i hi
+      rw [CochainComplex.mappingCone.isZero_X_iff]
+      exact ⟨(P⟦(-1 : ℤ)⟧).isZero_of_isStrictlyLE (b' + 1) _ (by omega),
+        CochainComplex.isZero_of_isStrictlyLE Ssing b _ (by omega)⟩
+    exact ⟨CochainComplex.mappingCone ψ, min a' b, max b' b, inferInstance, inferInstance,
+      fun k ↦ finProj_of_iso (HomologicalComplex.homotopyCofiber.XIsoBiprod ψ k (k + 1) rfl).symm
+        (finProj_biprod (hP (k + 1 + -1)) (hSsing k)), ⟨Triangle.π₃.mapIso e'⟩⟩
+
+/-- **Dualizable objects are perfect.** If the unit of `C` is projective, with finite morphisms
+to coproducts and tensor products, every dualizable object of `D(C)` is isomorphic to `Q(P)` for
+a bounded complex `P` of retracts of finite direct sums `𝟙ʳ`. -/
+theorem exists_iso_Q_obj_of_isDualizable {K : DerivedCategory C} (hK : IsDualizable K) :
+    ∃ (P : CochainComplex C ℤ) (a b : ℤ), P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
+      (∀ k, finProj C (P.X k)) ∧ Nonempty (K ≅ Q.obj P) := by
+  obtain ⟨a, b, h⟩ := exists_torAmplitudeIn_of_isDualizable hC hT hK
+  exact exists_iso_Q_obj_of_isDualizable_aux hC hT (max a b - a).toNat a (max a b) (by omega) hK
+    (torAmplitudeIn.mono le_rfl (le_max_left b a |>.trans_eq (max_comm b a)) h)
+
+end Finite
+
+end DerivedCategory
