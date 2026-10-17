@@ -2,7 +2,7 @@
  "id": "lem-coef-unmarked-cone-model-comparison",
  "kind": "statement",
  "title": "Cone model comparison after the ordinary-base target change",
- "statement": "Use simplicial sets, ordinary nerves, coherent realization, ordered cone pushouts and enriched diagrams as in [def-cbc-enhanced-diagrams-cones], [lem-coef-unmarked-straightening-quillen], [lem-coef-simplicial-right-fibration-presentation], [lem-coef-unmarked-straightening-target-change], [lem-coef-enriched-diagram-rectification], [lem-coef-simplicial-projective-model-calculus] and [lem-coef-simplicial-presheaf-projective-model]. Let $C$ be a small ordinary category, $B=N(C)$, $S=B^{\\mathrm{op}}$, let $X\\to B$ be any simplicial map, and let $D:C\\to\\mathsf{Kan}_{\\mathcal U}$ be a strict Kan-valued diagram. Put $A=\\mathfrak C[S]^{\\mathrm{op}}\\cong\\mathfrak C[B]$, let $u:A\\to C$ be the opposite coherent-nerve counit, and let $P=T_S(X^{\\mathrm{op}})$ be the ordered-cone diagram of [lem-coef-simplicial-right-fibration-presentation]. Then $u$ is a Dwyer--Kan equivalence, $P$ is projectively cofibrant, and the target-change isomorphism identifies $u_!P$ naturally with the cone diagram $H_C(X)$. If $w:u_!P\\to D^{\\mathrm{op}}$ is an objectwise weak homotopy equivalence, its enriched Kan-extension adjoint $P\\to u^*D^{\\mathrm{op}}$ is an objectwise weak equivalence; the cone Quillen-equivalence criterion then gives a contravariant weak equivalence $X^{\\mathrm{op}}\\to U_S(u^*D^{\\mathrm{op}})$ and, after taking opposites, a covariant weak equivalence $X\\to U_B^{\\mathrm{cov}}(u^*D^{\\mathrm{op}})$. All these maps are natural in $X$ and in maps of strict Kan diagrams.",
+ "statement": "Use simplicial sets, ordinary nerves, coherent realization, ordered cone pushouts and enriched diagrams as in [def-cbc-enhanced-diagrams-cones], [lem-coef-unmarked-straightening-quillen], [lem-coef-simplicial-right-fibration-presentation], [lem-coef-unmarked-straightening-target-change], [lem-coef-enriched-diagram-rectification], [lem-coef-simplicial-projective-model-calculus] and [lem-coef-simplicial-presheaf-projective-model]. Let $C$ be a small ordinary category, $B=N(C)$, $S=B^{\\mathrm{op}}$, let $p:X\\to B$ be any simplicial map, and let $D:C\\to\\mathsf{Kan}_{\\mathcal U}$ be a strict Kan-valued diagram, i.e. an ordinary functor to the category of $\\mathcal U$-small Kan complexes. Write $D^{\\mathrm{op}}:C\\to\\mathsf{sSet}$ for the valuewise opposite $c\\mapsto D(c)^{\\mathrm{op}}$, with the same indexing category $C$. Put $A=\\mathfrak C[S]^{\\mathrm{op}}\\cong\\mathfrak C[B]$, let $\\epsilon:\\mathfrak C[S]\\to C^{\\mathrm{op}}$ be the counit of $\\mathfrak C\\dashv N_{\\mathrm{hc}}$ (using $N_{\\mathrm{hc}}(C^{\\mathrm{op}})=N(C^{\\mathrm{op}})=S$) and $u=\\epsilon^{\\mathrm{op}}:A\\to C$, and let $P=T_S(X^{\\mathrm{op}})$ be the ordered-cone diagram of [lem-coef-simplicial-right-fibration-presentation]. Then $u$ is a Dwyer--Kan equivalence, $P$ is projectively cofibrant, and the target-change isomorphism identifies $u_!P$ naturally with the cone diagram $H_C(X)=L_\\epsilon(X^{\\mathrm{op}}):C\\to\\mathsf{sSet}$ of [lem-coef-unmarked-straightening-target-change], $c\\mapsto(\\mathfrak C[X^{\\mathrm{op}}\\star\\Delta^0]\\amalg_{\\mathfrak C[X^{\\mathrm{op}}]}C^{\\mathrm{op}})(c,v)$, with the pushout formed along $\\epsilon\\,\\mathfrak C[p^{\\mathrm{op}}]$. If $w:u_!P\\to D^{\\mathrm{op}}$ is an objectwise weak homotopy equivalence, its enriched Kan-extension adjoint $P\\to u^*D^{\\mathrm{op}}$ is an objectwise weak equivalence; the cone Quillen-equivalence criterion then gives a contravariant weak equivalence $X^{\\mathrm{op}}\\to U_S(u^*D^{\\mathrm{op}})$ and, after taking opposites, a covariant weak equivalence $X\\to U_B^{\\mathrm{cov}}(u^*D^{\\mathrm{op}})$. All these maps are natural in $X$ and in maps of strict Kan diagrams.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Remark 3.2.5.10 and Lemma 3.2.5.17(1), Proposition 3.2.5.18(1), together with the enriched projective Quillen criterion and the ordinary covariant presentation"
@@ -16,9 +16,108 @@
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-simplicial-presheaf-projective-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard $C^{\\mathrm{op}}$ as a simplicial category with discrete mapping sets. These sets are Kan: in every positive-dimensional horn all specified vertices have the same value, and the constant simplex is a filler (the empty set has no horn maps). The discrete-category clause of [lem-coef-coherent-nerve-comparison] identifies $N_{\\mathrm{hc}}(C^{\\mathrm{op}})$ with $N(C^{\\mathrm{op}})=S$. Hence the counit clause of [lem-coef-enriched-diagram-rectification], applied to $C^{\\mathrm{op}}$, says that $\\epsilon:\\mathfrak C[S]\\to C^{\\mathrm{op}}$ is a Dwyer--Kan equivalence. Its opposite is the specified $u:A\\to C$. For $a,b$, the map on mapping sets for $u$ is exactly that for $\\epsilon$ at $(b,a)$, and $\\pi_0(u)=\\pi_0(\\epsilon)^{\\mathrm{op}}$. Taking the opposite of an equivalence and its inverse preserves the inverse identities. The cited counit clause gives weak homotopy equivalences on mapping sets and essential surjectivity on $\\pi_0$; the former give bijections on components, so $\\pi_0(\\epsilon)$ is also fully faithful, hence an equivalence. Thus $u$ is Dwyer--Kan in the sense of [lem-coef-simplicial-projective-model-calculus]. The ordered-reversal isomorphism of [lem-coef-simplicial-right-fibration-presentation] identifies $A=\\mathfrak C[S]^{\\mathrm{op}}$ with $\\mathfrak C[B]$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Theorem 2.2.0.1, printed p.72; proof of Corollary 2.2.5.6, p.93; opposite of the counit."
+   }
+  },
+  {
+   "text": "In the contravariant slice model structure over $S$, every object is cofibrant by [lem-coef-simplicial-right-fibration-presentation]: the initial map $\\varnothing\\to X^{\\mathrm{op}}$ is a monomorphism. The same node gives the left Quillen functor $T_S$ into $A$-diagrams. Apply its preservation of cofibrations to that initial map. Since a left adjoint preserves the initial object, its image is the initial map into $P=T_S(X^{\\mathrm{op}})$, which is therefore projectively cofibrant. This uses no fibration hypothesis on $X\\to B$.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Remark 2.1.4.12 and Theorem 2.2.1.2, printed pp.71 and 74."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-unmarked-straightening-target-change] with its target categories $D=A$, $D'=C$, its $\\phi=\\mathrm{id}_{\\mathfrak C[S]}:\\mathfrak C[S]\\to A^{\\mathrm{op}}$, and its $\\pi=u$. Its composite $\\pi^{\\mathrm{op}}\\phi$ is $\\epsilon$. The identity-target ordered-cone functor is $T_S$, by its displayed pushout in [lem-coef-simplicial-right-fibration-presentation]. The changed-target cone functor is $L_\\epsilon$, so the target-change isomorphism is $\\beta_X:u_!P\\xrightarrow{\\cong}L_\\epsilon(X^{\\mathrm{op}})=H_C(X)$. Explicitly, the last value at $c$ is $(\\mathfrak C[X^{\\mathrm{op}}\\star\\Delta^0]\\amalg_{\\mathfrak C[X^{\\mathrm{op}}]}C^{\\mathrm{op}})(c,v)$, with action by precomposition. This is exactly the cone construction of [lem-coef-unmarked-straightening-quillen]. The attaching map is $\\epsilon\\mathfrak C[p^{\\mathrm{op}}]$, where $p:X\\to B$. The isomorphism is natural in $X$ by the cited target-change statement; no local Kan condition on $\\mathfrak C[S]$ is needed.",
+   "uses": [
+    "lem-coef-unmarked-straightening-target-change",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Section 2.2.1, printed p.73, and Proposition 2.2.1.1(2), p.74; ordinary-base specialization of Remark 3.2.5.10."
+   }
+  },
+  {
+   "text": "Here $D^{\\mathrm{op}}$ means the strict diagram $c\\mapsto D(c)^{\\mathrm{op}}$, applying the simplicial opposite to every value and every map, with indexing category still $C$. Opposite preserves Kan complexes by [lem-coef-infinity-opposite-subdivision-kan-zigzag]. Thus $D^{\\mathrm{op}}$ is objectwise Kan. Apply [lem-coef-simplicial-presheaf-projective-model] to the ordinary category $C^{\\mathrm{op}}$: its presheaves are precisely these covariant $C$-diagrams, and its fibrant-object clause makes $D^{\\mathrm{op}}$ projectively fibrant. Restriction gives $(u^*D^{\\mathrm{op}})(a)=D(u(a))^{\\mathrm{op}}$, again Kan; the projective fibrancy clause of [lem-coef-unmarked-straightening-quillen] makes this a fibrant $A$-diagram. The Kan-model category of simplicial sets is combinatorial and simplicial by the first clause of the presheaf-model node.",
+   "uses": [
+    "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Simplicial opposite convention; Example A.3.2.18 and Proposition A.3.3.2, with the objectwise projective fibrancy convention."
+   }
+  },
+  {
+   "text": "Use [lem-coef-simplicial-projective-model-calculus] with the combinatorial simplicial Kan-model category of simplicial sets, $I=A$, $J=C$ and $v=u$. Smallness of $A$ follows from the coherent-realization construction on the small simplicial set $S$, and $C$ is small by hypothesis. Step 1 verifies the Dwyer--Kan hypothesis. Its enriched Kan-extension/restriction adjunction $u_!\\dashv u^*$ is therefore a Quillen equivalence. Step 2 supplies the cofibrant source $P$, and step 4 the fibrant target $D^{\\mathrm{op}}$. The given $w:u_!P\\to D^{\\mathrm{op}}$ is a weak equivalence in the projective model structure, since these are objectwise weak homotopy equivalences. The exact cofibrant-source/fibrant-target criterion in the cited node now gives a projective weak equivalence $f:P\\to u^*D^{\\mathrm{op}}$, the adjoint of $w$. In unit notation it is $f=u^*w\\circ\\eta^u_P$. Consequently $f$ is an objectwise weak homotopy equivalence. No projective cofibrancy of $D$ is assumed.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition A.3.3.8(1), printed p.871, together with the Quillen-equivalence criterion."
+   }
+  },
+  {
+   "text": "For $T_S\\dashv U_S$, apply the Quillen-equivalence criterion in [lem-coef-simplicial-right-fibration-presentation] to $X^{\\mathrm{op}}$ and $F=u^*D^{\\mathrm{op}}$. Its hypotheses hold: all slice objects are cofibrant and step 4 gives fibrancy of $F$. Since $T_S(X^{\\mathrm{op}})=P$ and $f:P\\to F$ is weak by step 5, its adjoint $g:X^{\\mathrm{op}}\\to U_SF$ is a contravariant weak equivalence. It is specifically $g=U_S(f)\\circ\\eta^T_{X^{\\mathrm{op}}}$, and its target is a right fibration. The covariant clause of the same node defines the covariant weak equivalences by simplicial opposite and defines $U_B^{\\mathrm{cov}}F=(U_SF)^{\\mathrm{op}}$ after the identification $A\\cong\\mathfrak C[B]$. Thus $g^{\\mathrm{op}}:X\\to U_B^{\\mathrm{cov}}(u^*D^{\\mathrm{op}})$ is the required covariant weak equivalence. Its target is a left fibration. This inference uses the ordinary equivalence on opposite slices specified by the cited node.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Theorem 2.2.1.2 and Remark 2.1.4.12, printed pp.74 and 71; ordinary opposite-base dual."
+   }
+  },
+  {
+   "text": "The naturality claimed concerns compatible maps of the input data, including $w$. Write $P_X=T_S(X^{\\mathrm{op}})$ and $F_D=u^*D^{\\mathrm{op}}$. For $k:X\\to X'$ over $B$ and a strict transformation $a:D\\to D'$, suppose $w'\\,u_!P(k)=a^{\\mathrm{op}}w$. Naturality of the Kan-extension adjunction unit gives $f'P(k)=u^*(a^{\\mathrm{op}})f$. Naturality of the cone adjunction unit then gives $g'k^{\\mathrm{op}}=U_S(u^*(a^{\\mathrm{op}}))g$. These are equalities of actual maps, obtained by substituting the two unit formulas in steps 5 and 6. Taking simplicial opposites gives the corresponding covariant square. The adjunctions used are those stated in [lem-coef-unmarked-straightening-target-change] and [lem-coef-simplicial-right-fibration-presentation]. Moreover $\\beta_{X'}u_!P(k)=H_C(k)\\beta_X$ by the naturality assertion of the target-change node, so the same squares hold when $w$ is presented on $H_C(X)$. Identity maps and composites satisfy these equations by substitution. In particular maps of strict Kan diagrams need not themselves be weak equivalences to give these naturality squares.",
+   "uses": [
+    "lem-coef-unmarked-straightening-target-change",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 2.2.1.1(2), printed p.74, and naturality of the two specified adjunctions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-unmarked-straightening-target-change",
+  "lem-coef-unmarked-straightening-quillen",
+  "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, foundational straightening comparison in the ancestry through lem-coef-space-valued-straightening; explicit application of existing model-category statements, checked against online HTT Section 2.2.1 and Proposition A.3.3.8. HTT is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +160,52 @@
    "results": "{\"t\": \"2026-10-17T10:16:27Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched evaluation of a projectively fibrant simplicial set diagram agrees with its projectively cofibrant replacement as a coherent functor on the homotopy coherent nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\"], \"digest\": \"480fa728babf6c55\"}",
    "date": "2026-10-17",
    "verdict": "no match: read returned types. The hits give ordinary categorical extensions/equivalences, opposite simplicial sets, or nerve definitions; none gives this coherent derived construction comparison, its weak-equivalence statement, and its naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Dwyer Kan equivalence enriched left Kan extension is a Quillen equivalence and carries cofibrant cone straightening diagrams to ordinary category diagrams",
+   "results": "{\"t\": \"2026-10-17T12:57:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a Dwyer Kan equivalence enriched left Kan extension is a Quillen equivalence and carries cofibrant cone straightening diagrams to ordinary category diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.hasPointwiseLeftKanExtensionAt_of_equivalence\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"CategoryTheory.Functor.isLeftKanExtension_iff_postcomp₁\", \"CategoryTheory.Functor.hasPointwiseLeftKanExtensionAt_iff_of_equivalence\", \"CategoryTheory.Functor.isLeftKanExtension_iff_precomp\"], \"digest\": \"8b0e93173555e30f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary Kan-extension or model-category homotopy declarations do not state this enriched cone/ordinary-base comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "straighten|unstraighten|Dwyer.Kan|QuillenEquivalence",
+   "results": "{\"t\": \"2026-10-17T12:58:50Z\", \"tool\": \"grep\", \"query\": \"straighten|unstraighten|Dwyer.Kan|QuillenEquivalence\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary Kan-extension or model-category homotopy declarations do not state this enriched cone/ordinary-base comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered cone straightening to simplicial diagrams is left Quillen and left Kan extension along the homotopy coherent nerve counit gives the ordinary base cone diagram",
+   "results": "{\"t\": \"2026-10-17T12:58:50Z\", \"tool\": \"leansearch\", \"query\": \"Ordered cone straightening to simplicial diagrams is left Quillen and left Kan extension along the homotopy coherent nerve counit gives the ordinary base cone diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.Functor.coconeOfIsLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.LeftExtension.coconeAt\", \"CategoryTheory.Adjunction.functorialityLeftAdjoint\", \"CategoryTheory.Functor.LeftExtension.coconeAtFunctor\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension_desc\", \"CategoryTheory.Functor.coconeOfIsLeftKanExtension_pt\"], \"digest\": \"974c461882d33ece\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary Kan-extension or model-category homotopy declarations do not state this enriched cone/ordinary-base comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuillenEquivalence\"",
+   "results": "{\"t\": \"2026-10-17T12:58:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuillenEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary Kan-extension or model-category homotopy declarations do not state this enriched cone/ordinary-base comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint of a weak equivalence from a cofibrant object to a fibrant object under a Quillen equivalence is a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T12:59:38Z\", \"tool\": \"leanfinder\", \"query\": \"The adjoint of a weak equivalence from a cofibrant object to a fibrant object under a Quillen equivalence is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceICofibrationsTrivialFibrations\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalenceR\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\"], \"digest\": \"1c3f4a84e2028b58\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary Kan-extension or model-category homotopy declarations do not state this enriched cone/ordinary-base comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Quillen|Dwyer|straighten|coherent.*nerve",
+   "results": "{\"t\": \"2026-10-17T13:02:04Z\", \"tool\": \"grep\", \"query\": \"Quillen|Dwyer|straighten|coherent.*nerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\"], \"digest\": \"475eebf85d1db954\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary Kan-extension or model-category homotopy declarations do not state this enriched cone/ordinary-base comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-valued-straightening",
@@ -90,5 +231,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-unmarked-cone-model-comparison",
+  "worker": "stage1",
+  "summary": "Seven steps prove the counit equivalence, source cofibrancy, target-change identification, fibrancy, the enriched Kan-extension criterion, the cone criterion and its covariant dual, and explicit naturality equations. All technical inputs already exist in the DAG; no new nodes, no statement change, no Lean writes or compilation. Valuewise opposite and the cone H_C(X) are specified explicitly in the proof. Mathlib searches were run with msearch.py and read.",
+  "blueprint": "Realizes the model-level implication required in step 8 of lem-coef-space-valued-straightening, under proof paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction before derived inverse limit). Steps 1-6 give the model comparison; step 7 supplies its actual naturality squares. The chapter and unit route remain unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-af9764282",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-af9764282 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement, 7 steps, split_report, 12 searches), the full statements of all 9 cited nodes, all 10 steps of the parent lem-coef-space-valued-straightening, the unit record and the main-20261015 ancestor proof. The delivery adds 0 new nodes and leaves the statement unchanged. HTT is not archived locally, so the cited page numbers could not be opened. Checked against HTT from knowledge, the cited results are the right ones (2.2.1.1 target change, 2.2.1.2 and 2.2.0.1 Quillen equivalence and locally Kan counit, A.3.3.8(1) DK gives a projective Quillen equivalence). The proof uses only DAG statements and proof_origin=agent. Steps verified: (1) C^op is discrete, hence locally Kan (empty homs allowed); N_hc(C^op)=N(C^op)=S by the discrete clause of coherent-nerve-comparison; the rectification counit clause gives eps DK; u=eps^op; the reversal iso gives C[S]^op=C[B]. (2) The presentation node gives all objects cofibrant and T left Quillen, and T(empty)=empty, so P is cofibrant. (3) Target change with D=A, D'=C, phi=id, pi=u gives phi'=eps; L_id(X^op) is literally T_{p^op}; u_!P is naturally iso to L_eps(X^op), the parent's H_C. (4) Opposite preserves Kan (opposite-subdivision node); fibrancy is objectwise in all the projective structures, which agree. (5) The calculus node's cofibrant-source/fibrant-target criterion takes w to f, in the correct direction. (6) The presentation node's T-U_S criterion gives g; covariant over B is defined from contravariant over B^op=S by opposite, and U^cov_B F=(U_S F)^op. (7) Naturality recomputed from the unit formulas; it is elementary. Edge cases checked: C empty; X empty (forces D empty, consistent); C=[0] (Sing_Q/|.|_Q). No cycle (closures of 88-604 nodes). All cited statements are in the item's own unit, so no tool_uses. No SGA. Searches recorded honestly. No duplicates (grep for H_C and the item id). FIX (fixes/dag/nodes/sec-six-functors/lem-coef-unmarked-cone-model-comparison.json): (a) B2 clarification of the statement, same mathematics: it now names p:X->B, defines Kan_U, defines D^op as the valuewise opposite, defines eps as the counit with u=eps^op, and defines H_C(X)=L_eps(X^op) with its pushout formula. These were previously defined only in the parent's step 7 and the item's step 4. If the merge tool does not apply statement edits, the proof is still correct. (b) Step 1 now adds the one-line link from the rectification node's DK (essentially surjective on pi0) to the calculus node's DK (equivalence on pi0): weak equivalences on homs make pi0 fully faithful. The calculus node is added to step 1's uses; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

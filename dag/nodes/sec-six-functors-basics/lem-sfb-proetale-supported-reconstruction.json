@@ -17,9 +17,90 @@
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "lem-weil-pbc-proetale-ringed-open-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=i^{-1}$, $G=i_*$, $L=u_!$, $H=u^{-1}$ and $N=FA$; thus $\\sigma:HN\\xrightarrow{\\sim}M$. Apply the ringed open–closed theorem to the complementary pair $(i,k)$, over the ring sheaf $R$. Its hypotheses hold because $i$ is closed and $k$ is its quasi-compact open complement. It gives a short exact sequence $0\\to k_!k^{-1}A\\to A\\xrightarrow{\\eta'_{A}}GFA\\to0$, where $\\eta'$ is the unit of the adjunction used in that theorem. The specified adjunction of the statement has the same right adjoint $G$ (with its $R$-action through the ring unit) and a left adjoint isomorphic to $F$ (via $i^{-1}R\\otimes_{i^{-1}R}i^{-1}(-)\\cong i^{-1}$). By the conjugate-isomorphism unit equation with $\\delta=\\mathrm{id}_G$, there is a natural isomorphism $c$ with $\\eta_{i,A}=G(c_A)\\circ\\eta'_A$. So $\\eta_{i,A}$ is an isomorphism once $\\eta'_A$ is. Since $k^{-1}A=0$, its extension by zero is zero (extension by zero is exact). Hence $\\eta'_A$, and therefore $\\eta_{i,A}$, is an isomorphism. Explicitly, in this abelian module category the short exact sequence now makes $\\eta'_A$ a cokernel of $0\\to A$; the identity of $A$ is another such cokernel, so uniqueness of cokernels supplies its two-sided inverse.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, with the arbitrary-ring-sheaf module formulation of lem-weil-pbc-proetale-ringed-open-closed."
+   }
+  },
+  {
+   "text": "Apply the same ringed open–closed theorem on $Z$ to $(e,u)$ and the coefficient ring $i^{-1}R$; $u$ is precisely the quasi-compact complement of the closed immersion $e$. It gives $0\\to LHN\\xrightarrow{\\varepsilon_{u,N}}N\\to e_*e^{-1}N\\to0$. The hypothesis $e^{-1}N=0$ makes the right-hand term zero (closed direct image is exact). Thus $\\varepsilon_{u,N}$ is an isomorphism: it is a kernel of $N\\to0$, and the identity of $N$ is another such kernel. Functoriality carries the inverse pair $\\sigma,\\sigma^{-1}$ to an inverse pair under $L$. Consequently $\\lambda=\\varepsilon_{u,N}\\circ L(\\sigma^{-1}):LM\\to N$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, with the arbitrary-ring-sheaf module formulation of lem-weil-pbc-proetale-ringed-open-closed."
+   }
+  },
+  {
+   "text": "The transpose formula for $F\\dashv G$ sends $\\lambda^{-1}:FA\\to LM$ to $\\theta=G(\\lambda^{-1})\\circ\\eta_{i,A}$. Steps 1–2 show both factors are isomorphisms, so $\\theta$ is an isomorphism. Its inverse transpose is exactly $\\lambda^{-1}$: naturality of the closed counit and the left triangle identity give $\\varepsilon_{i,LM}\\circ F\\theta=\\lambda^{-1}\\circ\\varepsilon_{i,FA}\\circ F(\\eta_{i,A})=\\lambda^{-1}$. This uses the specified adjunction, rather than an independently chosen identification of $FG$ with the identity.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (transpose formulas); lemma-unit-counit-relations (triangle identities)."
+   }
+  },
+  {
+   "text": "For $L\\dashv H$, naturality of the unit at $\\sigma^{-1}:M\\to HN$ and the right triangle identity give $H\\lambda\\circ\\eta_{u,M}=H(\\varepsilon_{u,N})\\circ HL(\\sigma^{-1})\\circ\\eta_{u,M}=H(\\varepsilon_{u,N})\\circ\\eta_{u,HN}\\circ\\sigma^{-1}=\\sigma^{-1}$. Since $H\\lambda$ is invertible, this implies $H(\\lambda^{-1})=\\eta_{u,M}\\circ\\sigma$. Applying $H$ to the last equation of Step 3 yields the required restriction equation $H(\\varepsilon_{i,LM})\\circ HF\\theta=\\eta_{u,M}\\circ\\sigma$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (transpose formulas); lemma-unit-counit-relations (triangle identities)."
+   }
+  },
+  {
+   "text": "Let $h:A\\to GLM$ be any morphism with that restriction, and let $q=\\varepsilon_{i,LM}\\circ Fh:N\\to LM$ be its inverse transpose. The prescribed restriction says $Hq=\\eta_{u,M}\\circ\\sigma$. Naturality of the open counit and the left triangle identity imply $q\\circ\\lambda=q\\circ\\varepsilon_{u,N}\\circ L(\\sigma^{-1})=\\varepsilon_{u,LM}\\circ L(Hq\\circ\\sigma^{-1})=\\varepsilon_{u,LM}\\circ L(\\eta_{u,M})=\\mathrm{id}_{LM}$. Cancelling the isomorphism $\\lambda$ gives $q=\\lambda^{-1}$. Injectivity of the closed adjunction Hom bijection gives $h=\\theta$. This proves uniqueness among all morphisms.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (transpose formulas); lemma-unit-counit-relations (triangle identities)."
+   }
+  },
+  {
+   "text": "Let $a:A\\to A'$ and $b:M\\to M'$ satisfy $b\\circ\\sigma=\\sigma'\\circ HFa$, and put $N'=FA'$. Rearranging gives $HFa\\circ\\sigma^{-1}=(\\sigma')^{-1}\\circ b$. Naturality of the open counit gives $Fa\\circ\\lambda=\\varepsilon_{u,N'}\\circ L(HFa\\circ\\sigma^{-1})=\\lambda'\\circ Lb$. Hence $(\\lambda')^{-1}\\circ Fa=Lb\\circ\\lambda^{-1}$. Naturality of the closed unit now computes $GLb\\circ\\theta=G(Lb\\circ\\lambda^{-1})\\circ\\eta_{i,A}=G((\\lambda')^{-1})\\circ GF(a)\\circ\\eta_{i,A}=G((\\lambda')^{-1})\\circ\\eta_{i,A'}\\circ a=\\theta'\\circ a$. These are the asserted naturality squares for $\\lambda$ and $\\theta$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph (transpose formulas); lemma-unit-counit-relations (triangle identities)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH (lemma-ses-associated-to-open) applied twice, followed by explicit adjunction calculations from categories.tex, Tag 0037 and lemma-unit-counit-relations. Composite proof written by Q56, realizing parent Step 7 and blueprint pullback proof (2)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +143,52 @@
    "results": "0 hits: ",
    "date": "2026-10-17",
    "verdict": "no match: hits concern structure-sheaf modules on Zariski opens, sheafification, or abstract Serre quotients and complexes; none states reconstruction for two successive open/closed support conditions over arbitrary pro-etale ring sheaves with prescribed normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reconstruct a sheaf of modules on a proetale site from two successive open and closed support conditions using the unit and extension by zero counit, uniquely with prescribed restriction",
+   "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.lanSheafProfinite, SheafOfModules.Presentation.map_π_eq, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.Sheafify.instUniqueSMulCandidate, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafifyHomEquiv'",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification or adjunction formulas, Zariski structure-sheaf restriction, abstract Serre localization and derived-category bounds do not state this arbitrary pro-etale ring-sheaf reconstruction with normalization and naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|extensionByZero|extension_by_zero|support.*[Cc]losed",
+   "results": "25 hits: Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Computability/TuringMachine/PostTuringMachine.lean, Mathlib/Analysis/Complex/CanonicalDecomposition.lean, Mathlib/Analysis/Complex/JensenFormula.lean, Mathlib/Analysis/Complex/JensenFormula.lean, Mathlib/Analysis/Complex/JensenFormula.lean, Mathlib/Analysis/Complex/JensenFormula.lean, Mathlib/Analysis/Complex/JensenFormula.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification or adjunction formulas, Zariski structure-sheaf restriction, abstract Serre localization and derived-category bounds do not state this arbitrary pro-etale ring-sheaf reconstruction with normalization and naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf with zero restriction outside a closed subscheme is the pushforward of extension by zero of its restriction to an open stratum, uniquely normalized by adjunction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, stalkSkyscraperSheafAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.RingedSpace.res_zero",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification or adjunction formulas, Zariski structure-sheaf restriction, abstract Serre localization and derived-category bounds do not state this arbitrary pro-etale ring-sheaf reconstruction with normalization and naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"counit\"",
+   "results": "4 hits: PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction, PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification or adjunction formulas, Zariski structure-sheaf restriction, abstract Serre localization and derived-category bounds do not state this arbitrary pro-etale ring-sheaf reconstruction with normalization and naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|recollement",
+   "results": "0 hits: ; searched Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification or adjunction formulas, Zariski structure-sheaf restriction, abstract Serre localization and derived-category bounds do not state this arbitrary pro-etale ring-sheaf reconstruction with normalization and naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian recollement an object vanishing on the open complement is closed pushforward; if its closed restriction vanishes off an open stratum it is extension by zero, and the isomorphism is uniquely determined by restriction",
+   "results": "8 hits: CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification or adjunction formulas, Zariski structure-sheaf restriction, abstract Serre localization and derived-category bounds do not state this arbitrary pro-etale ring-sheaf reconstruction with normalization and naturality."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-locally-closed-extension-coherence",
@@ -84,5 +207,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-proetale-supported-reconstruction",
+  "worker": "stage1",
+  "summary": "Kept the full statement and all hypotheses. Applied the existing arbitrary-ring-sheaf open–closed theorem twice to obtain the specified invertible unit and counit. Wrote out transpose, restriction normalization, uniqueness among all morphisms, and naturality. Reused the Mathlib adjunction interface; no new nodes, no Lean writing or compilation. Added fresh logged Mathlib searches without removing inherited records.",
+  "blueprint": "det-prop-scalar-six-pullback proof (2), final composition-compatibility sentence, via lem-sfb-locally-closed-extension-coherence Step 7: normalized reconstruction in the mixed open/closed comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic arbitrary-ring-sheaf pro-etale localization sequence, used for two complementary pairs. The coefficient-comparison unit has no localization-sequence node of its own."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-4dcc1ca72",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-4dcc1ca72 (reviewer sub-agent of L); spot-checked: I read the whole item and all six steps; the delivery has no new nodes. I checked the statement of every cited node, Stacks proetale.tex Tag 09AH (lemma-ses-associated-to-open: closed subscheme with quasi-compact complement j, abelian sheaves), categories.tex Tag 0037 and the triangle identities, and Step 7 of the parent lem-sfb-locally-closed-extension-coherence. Hypotheses hold for both pairs: (i,k) over R on X, and (e,u) over i^{-1}R on Z, with k and u quasi-compact. Nothing uses Noetherian, qcqs or constant coefficients, and no SGA source is used. Steps 2-6 check symbol by symbol: lambda is invertible because eps_u is the kernel of N->0; the inverse transpose of theta is lambda^{-1}; H(lambda^{-1})=eta_{u,M}sigma gives the restriction equation; uniqueness holds among all morphisms (q lambda=id, then the hom bijection); both naturality squares hold. Edge cases hold: S empty forces N=A=M=0; i=id; u=id; the zero ring. A duplicate search over dag/nodes found nothing, and the statement is kept verbatim. The declared tool use of lem-weil-pbc-proetale-ringed-open-closed is accepted, since unit sk-prop-scalar-six has no localization-sequence node. One repair: Step 1 identified the unit in the open-closed theorem's exact sequence with the unit of the item's specified adjunction. That adjunction comes from lem-weil-pbc-ringed-topoi-module-adjunction, whose left adjoint is i^{-1}R tensor i^{-1}(-) and whose bijection is only called 'canonical', and no cited statement equates the two units (C3/C4). I rewrote Step 1 to name the theorem's unit eta' and to cite the Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation with delta=id: there is an isomorphism c with eta_{i,A}=G(c_A) eta'_A, so eta_{i,A} is invertible. The step's uses and the item's proof_deps are updated in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-proetale-supported-reconstruction.json. Cosmetic: the report mentions citations.json and searches.jsonl, which are not in the delivery commit.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -3,11 +3,110 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=\\operatorname{Kan}_{\\mathcal U}$, $B=\\operatorname{Kan}_{\\mathcal V}$ and $C=\\operatorname{Kan}_{\\mathcal V}^{\\mathrm{ess}\\mathcal U}$. For $X,Y\\in A$, the sets $\\operatorname{Hom}(X\\times\\Delta^n,Y)$ are unchanged on passing from $\\mathcal U$ to $\\mathcal V$: a simplicial map is the same family of component functions satisfying the same identities in either universe. These sets and their simplicial operators lie in $\\mathcal U$ by closure of a Grothendieck universe under the relevant products and subsets. Thus $A(X,Y)=B(X,Y)=C(X,Y)$, with the same composition and units. For any $X,Y\\in B$, [lem-cbc-kan-functor-space-kan] applies because $Y$ is Kan and $X$ is a simplicial set in $\\mathcal V$; hence $B(X,Y)$ is Kan. Its restrictions show that $A$ and $C$ are locally Kan too. The inclusion $i:A\\hookrightarrow C$ is therefore an isomorphism on each mapping simplicial set. Consequently their coherent nerves are quasicategories by [lem-coef-coherent-nerve-comparison].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-kan-functor-space-kan",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Definition 1.2.16.1 and Remarks 1.2.16.2 and 1.2.16.4; Kerodon Corollary 3.1.3.4 (00TN)."
+   }
+  },
+  {
+   "text": "For a weak homotopy equivalence $f:X\\to Y$ of $\\mathcal V$-small Kan complexes, [lem-coef-kan-weak-equivalence-space-edge] gives an inverse map and both inverse-triangle witnesses in $N_{\\mathrm{hc}}B$. Thus the actual edge $f$ is an equivalence. This also handles the zigzag interpretation of \"weakly homotopy equivalent.\" Indeed, factor every terminal map in $\\mathcal V$-small simplicial sets using the functorial Kan model structure [lem-coef-kan-quillen-right-proper], obtaining $T\\xrightarrow{r_T}RT$ with $r_T$ weak and $RT$ Kan. Naturality and two-out-of-three make $Rf$ weak for every weak map $f$. A finite zigzag can consequently be replaced by a zigzag of Kan complexes, and the original Kan endpoints are linked to their replacements by $r_X,r_Y$. All these objects remain $\\mathcal V$-small. Apply the preceding edge result to each arrow. By [lem-coef-infinity-mapping-composition], equivalence edges are exactly invertible morphisms of the homotopy category, so inverses and composites of these morphisms give an equivalence between the endpoints. In particular every object of $C$ is equivalent in $N_{\\mathrm{hc}}B$ to an object of $A$.",
+   "uses": [
+    "lem-coef-kan-weak-equivalence-space-edge",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06QR",
+    "place": "Kan-space edge comparison; functorial Kan replacement and two-out-of-three from the cited Kan-model statement; composition and inverse characterization from the cited homotopy-category statement. Agent expansion for finite zigzags."
+   }
+  },
+  {
+   "text": "Conversely, let an edge $f:X\\to Y$ be an equivalence in $N_{\\mathrm{hc}}B$. By the definition of equivalence in [def-cbc-enhanced-diagrams-cones], there are an inverse edge $g:Y\\to X$ and inverse triangles. Edges of this coherent nerve are actual simplicial maps. For a triangle, $\\mathfrak C[\\Delta^2](0,2)$ is the nerve of $\\{\\{0,2\\}\\subset\\{0,1,2\\}\\}$, hence $\\Delta^1$. Its image in $B(X,X)$ has endpoints $1_X$ and $gf$, because composition in the thickening is union; the second triangle similarly gives endpoints $1_Y$ and $fg$ in $B(Y,Y)$. By the internal-functor formula these are maps $X\\times\\Delta^1\\to X$ and $Y\\times\\Delta^1\\to Y$ with precisely those endpoint restrictions. Apply [lem-cbc-simplicial-homotopy-equivalence-weak], which allows either endpoint orientation, to conclude that $f$ is a weak homotopy equivalence. This computation uses only the two subsets defining the triangle, not a general comparison lemma left implicit.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00M5",
+    "place": "Proposition 2.4.6.10; explicit subset-poset triangle computation. Realization of the resulting homotopies: Kerodon Construction 3.6.5.1 (0148)."
+   }
+  },
+  {
+   "text": "By Step 1, $\\pi_0i$ is fully faithful. For $X\\in C$, choose $K\\in A$ and the equivalence between $X$ and $K$ from Step 2. Its inverse triangles, computed as in Step 3, give the equations $[g][f]=1$ and $[f][g]=1$ on components of the enriched mapping sets. Since $C$ is full and both endpoints belong to $C$, all the maps and paths in these equations belong to $C$. Thus $X$ is isomorphic to $iK$ in $\\pi_0C$, so $\\pi_0i$ is essentially surjective. Together with the isomorphisms on mapping simplicial sets in Step 1, this is exactly the definition of a Dwyer--Kan equivalence in [lem-coef-coherent-nerve-comparison].",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Sections 1.1.4-1.1.5; direct verification of the Dwyer--Kan conditions, using the definition in the cited node."
+   }
+  },
+  {
+   "text": "The coherent nerve of $C$ is the full simplicial subset of $N_{\\mathrm{hc}}B$ on its objects. In fact, an $n$-simplex is a simplicial functor $\\mathfrak C[\\Delta^n]\\to B$. It factors uniquely through the full simplicial subcategory $C$ if and only if its $n+1$ object values lie in $C$: all its mapping maps then already have the required targets, since the mapping sets of $C$ are the same as those of $B$. This criterion is preserved by restriction along every monotone map, hence identifies the entire simplicial subset, not only its vertices or edges. The full-subcategory convention of [def-cbc-enhanced-diagrams-cones] is exactly this vertex condition.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Section 1.2.11 and the subset-poset coherent-nerve formula in Section 1.1.5; direct degreewise factorization."
+   }
+  },
+  {
+   "text": "Let $E$ be the object class of the full replete essential image of $N_{\\mathrm{hc}}A\\to N_{\\mathrm{hc}}B$: its objects are those equivalent to a $\\mathcal U$-small Kan complex. Step 2 shows $\\operatorname{Ob}(C)\\subset E$. If $X\\in E$, an equivalence edge between $X$ and some $K\\in A$ is an actual simplicial map and is weak by Step 3, proving $X\\in C$. Consequently $E=\\operatorname{Ob}(C)$. This class is closed under equivalences: in the homotopy category of [lem-coef-infinity-mapping-composition], compose the given isomorphism $X\\cong K$ with an isomorphism $X\\cong Y$ (inverting it when necessary); the result is an isomorphism $Y\\cong K$, represented by an equivalence edge by that same statement. Step 5 now identifies $N_{\\mathrm{hc}}C$ with exactly the full replete subcategory specified in the conclusion.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Remark 1.2.16.4 and Section 1.2.11; explicit identification of object classes using Steps 2 and 3."
+   }
+  },
+  {
+   "text": "All three coherent nerves are quasicategories by local Kan-ness in Step 1 and [lem-coef-coherent-nerve-comparison]. Apply its natural mapping-space comparisons to the enriched inclusion $A\\to B$. For $X,Y\\in A$ they identify the induced mapping-space map with the identity $A(X,Y)=B(X,Y)$ from Step 1, up to the specified natural equivalences; hence $J:N_{\\mathrm{hc}}A\\to N_{\\mathrm{hc}}B$ is fully faithful. Apply [lem-coef-infinity-full-essential-image] in the further universe containing both entire categories: it supplies a coherent quasi-inverse and both coherent natural equivalences for the restriction of $J$ to its full replete essential image. By Steps 5 and 6 that restriction is precisely $N_{\\mathrm{hc}}i:N_{\\mathrm{hc}}A\\to N_{\\mathrm{hc}}C$. Since the left side is $\\mathcal S_{\\mathcal U}$ by the stipulated Kan-space model, this is the asserted equivalence, induced by the original inclusion.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01JX",
+    "place": "Theorem 4.8.4.1; natural mapping-space comparison is HTT Proposition 2.2.4.1 and Theorem 2.2.0.1, as stated by the cited coherent-nerve node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-weak-equivalence-space-edge"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, universe restriction in the coherent coefficient adjunction. Agent-written elementary repletion argument using the existing Kan-edge, coherent-nerve and full-essential-image statements; HTT and Kerodon read online, archival copies WANTED."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "title": "Universe change for essentially small Kan complexes",
  "statement": "Use spaces, weak homotopy equivalences and universes of [def-cbc-enhanced-diagrams-cones], locally Kan simplicial categories, Dwyer--Kan equivalences and coherent nerves of [lem-coef-coherent-nerve-comparison], and the Kan-enriched model of spaces of [lem-coef-simplicial-model-nerve-localization]. Fix universes $\\mathcal U\\in\\mathcal V$ and perform constructions involving whole categories in a further containing universe. Let $\\operatorname{Kan}_{\\mathcal U}$ and $\\operatorname{Kan}_{\\mathcal V}$ be the simplicial categories of Kan complexes in the indicated universes, with $n$-simplices in their mapping complexes the maps $X\\times\\Delta^n\\to Y$. Let $\\operatorname{Kan}_{\\mathcal V}^{\\mathrm{ess}\\mathcal U}$ be the full simplicial subcategory on those $\\mathcal V$-small Kan complexes weakly homotopy equivalent to $\\mathcal U$-small Kan complexes. The enriched inclusion $\\operatorname{Kan}_{\\mathcal U}\\hookrightarrow\\operatorname{Kan}_{\\mathcal V}^{\\mathrm{ess}\\mathcal U}$ is a Dwyer--Kan equivalence. Its coherent nerve is an equivalence $\\mathcal S_{\\mathcal U}\\simeq N_{\\mathrm{hc}}(\\operatorname{Kan}_{\\mathcal V}^{\\mathrm{ess}\\mathcal U})$, where $\\mathcal S_{\\mathcal U}=N_{\\mathrm{hc}}(\\operatorname{Kan}_{\\mathcal U})$; the latter nerve is the full replete subcategory of $\\mathcal S_{\\mathcal V}=N_{\\mathrm{hc}}(\\operatorname{Kan}_{\\mathcal V})$ on spaces equivalent to $\\mathcal U$-small ones.",
  "source": {
@@ -54,6 +153,41 @@
    "results": "{\"t\": \"2026-10-17T08:30:19Z\", \"tool\": \"leanfinder\", \"query\": \"Full locally Kan simplicial subcategory and its repletion have equivalent coherent nerves and functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.functorOfNerveMap\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\"], \"digest\": \"ffdf101bbe53f7c4\"}",
    "date": "2026-10-17",
    "verdict": "no match: Ordinary essentially-small category equivalences and ordinary nerves do not assert a Dwyer–Kan equivalence of Kan-enriched categories."
+  },
+  {
+   "tool": "grep",
+   "query": "Dwyer|coherentNerve|coherent.nerve|ess.*Kan|Kan.*universe",
+   "results": "{\"t\": \"2026-10-17T13:04:27Z\", \"tool\": \"grep\", \"query\": \"Dwyer|coherentNerve|coherent.nerve|ess.*Kan|Kan.*universe\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"260b133ff7f49fa1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the coherent-nerve hits define the nerve, while the other hits concern ordinary nerves or truncations; none gives the Dwyer--Kan universe-repletion equivalence. Read SimplicialNerve.lean:14-35 and 217-234; its Projects still list the locally-Kan quasicategory theorem and the Kan-space category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy coherent nerve of a full simplicial category of Kan complexes is equivalent to its repletion in a larger universe",
+   "results": "{\"t\": \"2026-10-17T13:04:28Z\", \"tool\": \"leansearch\", \"query\": \"The homotopy coherent nerve of a full simplicial category of Kan complexes is equivalent to its repletion in a larger universe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"3afcd2f7bf9ea6e6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the coherent-nerve hits define the nerve, while the other hits concern ordinary nerves or truncations; none gives the Dwyer--Kan universe-repletion equivalence. Read SimplicialNerve.lean:14-35 and 217-234; its Projects still list the locally-Kan quasicategory theorem and the Kan-space category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DwyerKan\"",
+   "results": "{\"t\": \"2026-10-17T13:04:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"DwyerKan\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the coherent-nerve hits define the nerve, while the other hits concern ordinary nerves or truncations; none gives the Dwyer--Kan universe-repletion equivalence. Read SimplicialNerve.lean:14-35 and 217-234; its Projects still list the locally-Kan quasicategory theorem and the Kan-space category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universe enlargement of Kan complexes gives a Dwyer Kan equivalence onto essentially small Kan complexes and an equivalence of coherent nerves",
+   "results": "{\"t\": \"2026-10-17T13:04:33Z\", \"tool\": \"leanfinder\", \"query\": \"Universe enlargement of Kan complexes gives a Dwyer Kan equivalence onto essentially small Kan complexes and an equivalence of coherent nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"SSet.stdSimplex.isoNerve\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"3c4666624f9bf234\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the coherent-nerve hits define the nerve, while the other hits concern ordinary nerves or truncations; none gives the Dwyer--Kan universe-repletion equivalence. Read SimplicialNerve.lean:14-35 and 217-234; its Projects still list the locally-Kan quasicategory theorem and the Kan-space category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful simplicially enriched inclusion of Kan complexes is essentially surjective onto all objects weakly equivalent to its source and gives an equivalence of infinity categories",
+   "results": "{\"t\": \"2026-10-17T13:05:13Z\", \"tool\": \"leanfinder\", \"query\": \"A fully faithful simplicially enriched inclusion of Kan complexes is essentially surjective onto all objects weakly equivalent to its source and gives an equivalence of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.cosk.fullyFaithful\", \"SSet.Truncated.sk.fullyFaithful\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.QCat\", \"SimplexCategory.Truncated.inclusion.fullyFaithful\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.nerveFunctor.full\"], \"digest\": \"6c0348ff63289666\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the coherent-nerve hits define the nerve, while the other hits concern ordinary nerves or truncations; none gives the Dwyer--Kan universe-repletion equivalence. Read SimplicialNerve.lean:14-35 and 217-234; its Projects still list the locally-Kan quasicategory theorem and the Kan-space category."
   }
  ],
  "created": {
@@ -79,5 +213,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-universe-repletion",
+  "worker": "stage1",
+  "summary": "Kept the statement and its universe hypotheses; proved local mapping-set identity, both directions of weak/equivalence comparison using existing nodes, the enriched Dwyer--Kan conditions, the full-subcategory nerve identity and repleteness, and the coherent equivalence via the existing full-essential-image theorem. No new nodes and no Mathlib leaf for the item. Checked all cited dependency closures for paths back to this item.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 (universe-size restriction), following the ancestry through lem-coef-space-transport-classification. This is foundational size calculus for that paragraph, without changing the coefficient or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Step 3 uses the general realization fact that a simplicial homotopy equivalence is a weak homotopy equivalence. This is a tool about arbitrary simplicial sets, independent of the proper-base-change unit; no statement of this unit supplies its realization argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-aef5448d1",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-aef5448d1 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full, plus the full statement of every cited node: def-cbc-enhanced-diagrams-cones, lem-cbc-kan-functor-space-kan, lem-cbc-simplicial-homotopy-equivalence-weak, lem-coef-coherent-nerve-comparison, lem-coef-infinity-full-essential-image, lem-coef-infinity-mapping-composition, lem-coef-kan-quillen-right-proper, lem-coef-kan-weak-equivalence-space-edge and lem-coef-simplicial-model-nerve-localization. I also read def-coef-infinity-category-of-spaces: its Kan_W, with n-simplices Hom(SxDelta^n,T), matches the item's convention. Statement unchanged and true. Small cases tested: the empty complex, maps from empty to nonempty, disconnected complexes, a large contractible complex (included) and a discrete set too large for U (excluded), so the subcategory is the repletion. Step 1: the mapping sets are literally equal, and Fun(X,Y) is Kan by the Mathlib leaf (Y Kan, X any simplicial set in V). Step 2: the weak-edge node with W=V. For a zigzag, the functorial factorization plus naturality and two-out-of-three, then invertible classes, which mapping-composition identifies with equivalence edges. Step 3: I checked that C[Delta^2](0,2) is the nerve of {02} inside {012}, which is Delta^1, with endpoints 1_X and gf. The homotopy-equivalence lemma allows either endpoint order and has no Kan hypothesis. Steps 4 and 5 are genuinely elementary: the Dwyer-Kan conditions using fullness, and the degreewise factorization through the full subcategory. Step 6 identifies the object classes. Step 7: naturality of the mapping-space comparison gives full faithfulness, and full-essential-image is applied in a containing universe. The off-unit lem-cbc-simplicial-homotopy-equivalence-weak is declared in tool_uses. It is a generic black-box fact and no node of the own unit supplies it, so the tool use is accepted. Every step's uses are in proof_deps and proof_deps equals their union. The four search kinds are recorded with verdicts. No SGA. HTT and Kerodon are not in literature: WANTED is filed and proof_origin.by is agent. No duplicate found by grep. Dependency traversal reaches 501 nodes and never returns to the item. No fixes."
  }
 }

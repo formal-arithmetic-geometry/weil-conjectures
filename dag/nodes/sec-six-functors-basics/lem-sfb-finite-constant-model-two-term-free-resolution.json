@@ -21,9 +21,106 @@
   "def-pc-cochain-complex-modules",
   "def-pc-quasi-iso-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First suppose $A=\\mathcal O_E$. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a discrete valuation ring and a domain. Choose a presentation $A^s\\xrightarrow{w}A^t\\xrightarrow{v}P\\to0$ as in the hypothesis, and set $K=\\ker(v)=\\operatorname{im}(w)$. The images under $w$ of the $s$ coordinate vectors generate $K$. Also $K$ is torsion-free: if $0\\ne r\\in A$ and $rx=0$ in $K\\subseteq A^t$, then each coordinate of $x$ is zero because $A$ is a domain. Thus [lem-sc-dvr-fg-torsionfree-free] gives a finite basis of $K$, say $K\\cong A^a$. Put $b=t$ and let $u:A^a\\to A^b$ be this basis isomorphism followed by the inclusion of $K$. It is injective, its image is $\\ker v$, and $v$ is surjective. This constructs the required scalar short exact sequence without any torsion-freeness assumption on $P$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), proof: finite projective scalar resolution, strengthened to length one using Stacks Tag 0AUW (more-algebra.tex, lemma-dedekind-torsion-free-flat), part (3)."
+   }
+  },
+  {
+   "text": "If $A=E$, the images of the $t$ coordinate vectors in a finite presentation span $P$. Delete a vector whenever it is a linear combination of the others. This finite procedure preserves the span and ends with an independent spanning family: any nontrivial linear relation would express a vector with nonzero coefficient as a combination of the others, since $E$ is a field. If $b$ vectors remain, the coordinate map $v:E^b\\to P$ is therefore bijective. Take $a=0$ and $u:0\\to E^b$. This gives the scalar sequence in the field case, including $P=0$ with the empty basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), scalar-resolution argument; elementary finite spanning-set argument for the field case."
+   }
+  },
+  {
+   "text": "On the chosen small site $T_{\\mathrm{pro\\acute et}}$, form the constant presheaves of the scalar short exact sequence just constructed. The sequence is exact sectionwise, with all restriction maps the identity. By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], its sheafification is an exact sequence of $\\underline A$-module sheaves. It is the constant-sheaf sequence by [def-weil-pbc-constant-sheaf]. The same sheafification theorem preserves finite limits and colimits; hence the sheafification of $A^n$ is $\\underline A^n$, with the usual coordinate maps, also for $n=0$. We obtain $0\\to\\underline A^a\\xrightarrow{\\underline u}\\underline A^b\\xrightarrow{\\underline v}\\underline P\\to0$.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI (lemma-sheafification-exact), with the constant presheaf of rings A; equivalently Tag 093J (lemma-constant-exact)."
+   }
+  },
+  {
+   "text": "For either coefficient ring, use the balanced coequalizer defining [def-sfb-modobj-relative-tensor]. The map $B_T\\otimes_{\\underline A}\\underline A^n\\to B_T^n$ sends $z\\otimes(x_i)$ to $(zx_i)$, using the canonical $\\underline A$-action on $B_T$. Its inverse sends $(z_i)$ to $\\sum_i z_i\\otimes e_i$. These formulas are balanced, commute with restrictions, and compose to the identity by additivity and $z\\otimes x e_i=zx\\otimes e_i$; equivalently they define inverse maps from the coequalizer. Thus they are isomorphisms of module sheaves [def-weil-sheaf-of-modules-category]. The formulas include $n=0$. For a matrix $h:A^n\\to A^m$, both composites send $z\\otimes e_j$ to the column $(z h_{ij})_i$, so this identification carries $1\\otimes\\underline h$ to its scalar-extended matrix. The final term after scalar extension is precisely $L=B_T\\otimes_{\\underline A}\\underline P$ as defined in the statement.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section tensor-product: balanced tensor construction; explicit finite-coordinate calculation."
+   }
+  },
+  {
+   "text": "Return to $A=\\mathcal O_E$, and choose a uniformizer $\\varpi$ using step 1. Since a DVR is a principal ideal domain, [lem-weil-pbc-pid-noetherian-normal] makes $A$ Noetherian. By [det-prop-sfb-qlbar-colimit-x-integral-limit] there is a canonical ring-sheaf isomorphism $B_T\\cong\\varprojlim_{n\\ge1}\\underline{A/(\\varpi^n)}$. It respects the constant $A$-algebra maps: the image of a constant scalar $r$ under its $n$th projection is the residue class of $r$, which characterizes the map into this limit. Apply [lem-weil-pbc-completed-constant-sheaf-reduction] with this Noetherian $A$ and $I=(\\varpi)$. Its flatness assertion says explicitly that tensoring with the limit over $\\underline A$ preserves short exact sequences. Transport this along the preceding $\\underline A$-algebra isomorphism and apply it to step 3. With the coordinate identifications of step 4 this gives the asserted exact sequence $0\\to B_T^a\\xrightarrow{1\\otimes\\underline u}B_T^b\\xrightarrow{1\\otimes\\underline v}L\\to0$. Its maps are $B_T$-linear, and kernels and cokernels in this module category are computed on the underlying sheaves as specified in [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M (lemma-completion-flat), via Bhatt–Scholze Lemma 6.8.2(1) and the existing condensed/limit identification. No hypothesis on the scheme beyond being a scheme is used."
+   }
+  },
+  {
+   "text": "In the field case step 2 made $v:E^b\\to P$ an isomorphism. Its constant sheafification has inverse the sheafification of $v^{-1}$; after extension of scalars the two inverses still compose to the identities by functoriality of tensor. Step 4 therefore gives $B_T^b\\xrightarrow{\\sim}L$, and with $a=0$ the asserted sequence is exact. In particular $L$ is finite free. This argument requires no flatness assertion for $B_T$ over the discrete constant sheaf $\\underline E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Elementary field case of the scalar-resolution argument, after the finite-coordinate identification in step 4."
+   }
+  },
+  {
+   "text": "Let $C^\\bullet$ have $C^{-1}=B_T^a$, $C^0=B_T^b$, differential $1\\otimes\\underline u$, and all other terms zero [def-pc-cochain-complex-modules]. The map to $L[0]$ has degree-zero component $1\\otimes\\underline v$ and all other components zero; it is a cochain map because $vu=0$. Steps 5 and 6 show $H^{-1}(C)=\\ker(1\\otimes\\underline u)=0$ and $H^0(C)=\\operatorname{coker}(1\\otimes\\underline u)\\cong L$, with the latter isomorphism induced by the specified augmentation. Every other cohomology sheaf is zero, as for $L[0]$. By [def-pc-quasi-iso-modules] this augmentation is a quasi-isomorphism. These computations take place in the ordinary module-sheaf category, so they require neither completion of the derived category nor Noetherianity of $T$.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), finite-resolution argument; direct cohomology calculation for the constructed augmented two-term complex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-sfb-modobj-relative-tensor",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3) scalar-resolution argument, expanded using Lemma 6.8.2(1), Stacks Tags 0AUW, 03EI and 093M, and existing DAG coefficient comparisons; length-one strengthening and field case written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +156,59 @@
    "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, Condensed.finFree, Module.FinitePresentation.exists_free_localizedModule_powers, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.isFinitePresentation",
    "date": "2026-10-17",
    "verdict": "no match: no returned declaration states this sheaf-theoretic comparison or resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "(constant|completion|proetale).*(resolution|[Ff]lat)|(resolution|[Ff]lat).*(constant|proetale)",
+   "results": "{\"t\": \"2026-10-17T12:28:58Z\", \"tool\": \"grep\", \"query\": \"(constant|completion|proetale).*(resolution|[Ff]lat)|(resolution|[Ff]lat).*(constant|proetale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/TotallySplit.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"7b394c5cf4149c52\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: none of the returned declarations states the full scalar-to-condensed-sheaf resolution with its specified augmentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite scalar local models for integral ell adic coefficients have a two term finite free resolution on a pro etale site",
+   "results": "{\"t\": \"2026-10-17T12:28:58Z\", \"tool\": \"leansearch\", \"query\": \"Finite scalar local models for integral ell adic coefficients have a two term finite free resolution on a pro etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"Algebra.FormallyEtale.of_restrictScalars\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"Module.free_of_flat_of_isLocalRing\", \"LocallyConstant.freeOfProfinite\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\"], \"digest\": \"a6d09b661baecc2e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: none of the returned declarations states the full scalar-to-condensed-sheaf resolution with its specified augmentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Module.Free",
+   "results": "{\"t\": \"2026-10-17T12:28:58Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, Module.Free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: none of the returned declarations states the full scalar-to-condensed-sheaf resolution with its specified augmentation"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Ee]xact|completion.*[Ff]lat|[Ff]ree.*[Rr]esolution",
+   "results": "{\"t\": \"2026-10-17T13:00:45Z\", \"tool\": \"grep\", \"query\": \"constant.*[Ee]xact|completion.*[Ff]lat|[Ff]ree.*[Rr]esolution\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: none of the returned declarations states the full scalar-to-condensed-sheaf resolution with its specified augmentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar local models for integral ell adic coefficients have a two term finite free resolution on a pro etale site",
+   "results": "{\"t\": \"2026-10-17T13:00:54Z\", \"tool\": \"leanfinder\", \"query\": \"Finite scalar local models for integral ell adic coefficients have a two term finite free resolution on a pro etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"StandardEtalePresentation\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.Etale\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.instEtaleRing\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"cbd925749b8aebdb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: none of the returned declarations states the full scalar-to-condensed-sheaf resolution with its specified augmentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a discrete valuation ring a finite presentation has a finite free kernel and extension to the sheaf of continuous ell adic coefficients preserves its short exact resolution",
+   "results": "{\"t\": \"2026-10-17T13:01:51Z\", \"tool\": \"leanfinder\", \"query\": \"Over a discrete valuation ring a finite presentation has a finite free kernel and extension to the sheaf of continuous ell adic coefficients preserves its short exact resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_exact\", \"BDeRham\", \"BDeRhamPlus\", \"instCommRingBDeRhamPlus\", \"IsAdicComplete\", \"AdicCompletion\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.map_injective\"], \"digest\": \"aa8daa9a54c1a59f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: none of the returned declarations states the full scalar-to-condensed-sheaf resolution with its specified augmentation"
+  },
+  {
+   "tool": "grep",
+   "query": "freeOfProfinite|isFinite_presentation|free_of_flat_of_isLocalRing",
+   "results": "{\"t\": \"2026-10-17T13:02:30Z\", \"tool\": \"grep\", \"query\": \"freeOfProfinite|isFinite_presentation|free_of_flat_of_isLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\"], \"digest\": \"ca2f57ebb07b0a14\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Nobeling concerns Z-valued locally constant functions; the quasicoherent presentation class is a predicate; finite flat local modules concern ordinary module freeness only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-constructible-internal-hom-continuity",
@@ -81,5 +227,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "worker": "stage1",
+  "summary": "Constructed the integral scalar resolution from the finite presentation kernel and the existing finite torsion-free DVR theorem. Proved exactness after constant sheafification and after coefficient extension using the existing canonical condensed/limit comparison and completion flatness. The field case uses a finite basis and a zero kernel term. Checked the actual augmentation on cohomology. Statement unchanged; no new nodes.",
+  "blueprint": "Expands the finite scalar-resolution input used in step 2 of lem-sfb-constructible-internal-hom-continuity, which serves the last integral/rational coefficient passage of lem-sfb-dc-hom-preserves.proof.md. It realizes the internal-Hom preservation component of unit sk-def-sfb-dc-restricted-functors, step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Coefficient-field algebra: supplies the DVR/domain and uniformizer of O_E, independently of any geometric or internal-Hom argument."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Identifies the specified pulled-back condensed coefficient ring on an arbitrary scheme with the completed constant ring; the restricted-functor unit does not prove this coefficient comparison."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Only its general flatness assertion for completed constant coefficients is used to preserve the constructed scalar resolution; this is a ringed-site algebra tool, not a replacement for any internal-Hom step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-ad0fbba90",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-ad0fbba90 (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps in full, the statements of the 11 cited nodes and the stmt_deps, the citer lem-sfb-constructible-internal-hom-continuity and the unit sk-def-sfb-dc-restricted-functors. Sources read: Bhatt–Scholze Lemma 6.8.2(1) and Proposition 6.8.11(3) with proofs, and Stacks 03EI, 093J, 093M (any site, Lambda Noetherian) and 0AUW(3). No new nodes; one commit with the item and its report. Statement and coefficient category: the statement keeps the discrete constant sheaf of A separate from B_T=p_T^*Lambda on the small pro-étale site, and L is the finite constant local model of sk-def-sfb-constructible, which is how the citer uses it. It is not a target, so there is no base-change morphism to compare. Step 1: the kernel is finitely generated by the relation images and torsion-free inside A^t; with the DVR lemma (PID plus local) this gives a finite free kernel. Step 2: the field-case basis argument is elementary. Steps 3-4: sheafification is exact and preserves finite products, and the unit/additivity of the relative tensor is elementary. Step 5: A is Noetherian as a PID, B_T is identified with the limit of the constant sheaves A/pi^n by det-prop (3), and 093M flatness applies. I checked the A-algebra compatibility of that identification; it is not automatic, since Galois-twisted reductions exist, and it follows from the representability in clauses (1)-(2), which the step uses as stated. Steps 6-7: the field case needs no flatness; H^{-1}=0 and H^0 is L through the augmentation. Small cases checked: P=0, P free, P=O_E/pi^n, s=0, field case; nothing is assumed on T. No cycle, and the dependency traversal does not reach the item. Duplicate search: lem-pur-constant-two-term-resolution covers only Z/l^N over Z_l, and det-lem-int-integral-heart-dualizable repeats the argument inside its proof but has no node for it, so there is no duplicate. Accepted tool_uses: lem-weil-l-adic-extension-integers-dvr, det-prop-sfb-qlbar-colimit-x-integral-limit and lem-weil-pbc-completed-constant-sheaf-reduction, all generic coefficient tools that replace no unit step. All three search kinds are recorded. No fixes."
  }
 }

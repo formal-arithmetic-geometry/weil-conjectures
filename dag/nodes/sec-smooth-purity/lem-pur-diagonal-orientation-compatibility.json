@@ -14,9 +14,75 @@
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $g$ is of finite type and $S$ is Noetherian, $V$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], so all hypotheses of [lem-pur-noetherian-etale-section-specialization] hold. Apply it separately for $R=A$ and $R=B$. It gives that $F_R[-2d]$ and $C_R[-2d]$ are locally constant free rank-one ordinary étale $R$-module sheaves. Since these sheaves are locally free, derived tensor with $B$ is concentrated in degree zero. The canonical tensor/pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies $S_{\\mathbf A^1_S}a^*C_A$ with $a^*S_SC_A$. By [lem-weil-pbc-derived-single-fully-faithful], after cancelling the common shift $[2d]$, equality of the derived maps in the claim is equivalent to equality of the corresponding ordinary sheaf maps.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pur-noetherian-etale-section-specialization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing paragraph: both family and section objects are shifts of locally constant rank-one sheaves; morphisms are ordinary sheaf maps"
+   }
+  },
+  {
+   "text": "Set $u=\\kappa_B\\circ e_F$ and $v=a^*e_C\\circ S_{\\mathbf A^1_S}(\\kappa_A)$. Their restrictions at $t=1$ agree by hypothesis. After Step 1, cancel $[2d]$ and use $\\kappa_A$ to regard $u-v$ as a map $a^*L\\to a^*M$ of finite locally constant $B$-module sheaves on $\\mathbf A^1_S$, where $L=S_SC_A[-2d]$ and $M=C_B[-2d]$. Let $H$ be the endomorphism of $a^*(L\\oplus M)=a^*L\\oplus a^*M$ whose diagonal components are $1_{a^*L}$ and $1_{a^*M}$, whose component $a^*L\\to a^*M$ is $u-v$, and whose component $a^*M\\to a^*L$ is $0$. Its restriction at $t=1$ is the identity. Pulling to the pro-étale sites, [lem-sf-proetale-locally-constant-origin] makes $\\nu_S^*(L\\oplus M)$ a finite locally constant sheaf, [lem-weil-pbc-comparison-pullback] identifies the pullback with the affine-line pullback there, and [lem-pur-a1-pullback-endomorphism-rigidity] forces $\\nu^*H=1$. The finite-level comparison unit [prop-weil-pbc-site-comparison-finite-level] is an isomorphism, so it reflects equality of the original étale maps. Hence $u=v$, proving the first displayed compatibility.",
+   "uses": [
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-pur-a1-pullback-endomorphism-rigidity",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing paragraph: normalized maps agree on overlaps because their difference is an automorphism of a rank-one locally constant sheaf fixed at t=1"
+   }
+  },
+  {
+   "text": "Restrict the equality of Step 2 along $i_0$. Writing $x_R=i_0^*\\kappa_R$, the fibre comparison gives $x_B\\circ e_0=e_C\\circ S_Sx_A$. Since each $x_R$ is an isomorphism, left multiplication by $x_B^{-1}=\\delta_B$ and right multiplication by $(S_Sx_A)^{-1}=S_S\\delta_A$ yield $\\delta_B\\circ e_C=e_0\\circ S_S(\\delta_A)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Restriction of the normalized comparison to t=0 and inversion"
+   }
+  },
+  {
+   "text": "The same matrix argument proves the final general assertion. For arbitrary finite locally constant $B$-module sheaves $L,M$ on $S$, two maps $a^*L\\to a^*M$ equal at $i_1$ have difference $q$; the endomorphism of $a^*(L\\oplus M)$ with diagonal components the identities, component $q:a^*L\\to a^*M$ and zero component $a^*M\\to a^*L$ restricts to the identity at $i_1$. The comparison and rigidity statements used in Step 2 force $q=0$. For equal shifts of these sheaves, [lem-weil-pbc-derived-single-fully-faithful] identifies derived maps with the sheaf maps after cancelling the common shift, so restriction along $i_1$ remains injective in the derived category.",
+   "uses": [
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-pur-a1-pullback-endomorphism-rigidity",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing paragraph: uniqueness of normalized rank-one comparisons on connected affine-line fibres"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-a1-pullback-endomorphism-rigidity",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Gluing paragraph: uniqueness of normalized rank-one comparisons on connected affine-line fibres; coefficient morphism version"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +114,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-smooth-adjunction-general-base",
@@ -68,5 +134,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-diagonal-orientation-compatibility",
+  "worker": "stage1",
+  "summary": "Q90 retained the imported ordinary-etale statement and split its proof into four steps. The normalized family and section objects are reduced to locally constant rank-one sheaves using the existing Noetherian specialization node; a unipotent matrix reduces equality of two coefficient maps to arbitrary-base affine-line rigidity after faithful ordinary-etale/pro-etale comparison; restriction to the zero fibre gives the delta identity, and the same matrix argument proves the final injectivity clause. No new nodes or Mathlib leaves were needed.",
+  "blueprint": "Realizes the gluing paragraph of main-20261015 sk-thm-dnc.proof.md, specifically uniqueness of normalized rank-one comparisons on connected affine-line fibres, extended to arbitrary coefficient morphisms as required by the imported item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor/pullback coherence identifies coefficient extension of an affine-line pullback with the pullback of the coefficient extension."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic full faithfulness of degree-zero sheaves identifies the derived maps after the common shift is removed."
+   },
+   {
+    "node": "lem-sf-proetale-locally-constant-origin",
+    "why": "Generic ordinary-to-pro-etale transfer supplies finite locally constant pro-etale sheaves to which affine-line rigidity applies."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison pullback coherence identifies the pro-etale pullback of the ordinary affine-line pullback."
+   },
+   {
+    "node": "lem-pur-a1-pullback-endomorphism-rigidity",
+    "why": "Arbitrary-base affine-line endomorphism rigidity is the black-box uniqueness input for the matrix argument."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Generic finite-level comparison unit isomorphism reflects equality of ordinary etale sheaf maps after pro-etale pullback."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-a1-pullback-endomorphism-rigidity",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-193832d85",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-193832d85 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, and the main-20261015 sk-thm-dnc proof (Gluing paragraph and the t=0 restriction). The statement is unchanged and correct, and the delivery adds no new node. Step 1: the specialization node needs both S and V Noetherian, but the item assumes only S, and V being Noetherian was not cited (error C1). Fixed by citing the Mathlib leaf lem-weil-pbc-finite-type-over-noetherian; it is also added to proof_deps. The tensor/pullback identification is B-linear by naturality, since everything is a sheaf in one degree. Step 2: the matrix argument holds. i_1^*H=id. lem-sf-proetale-locally-constant-origin(a) makes the pulled-back sheaf lisse on the pro-étale site. comparison-pullback is compatible with composites. The arbitrary-base A^1 rigidity lemma (finite B) applies because S is only Noetherian. The unit of prop-weil-pbc-site-comparison-finite-level is an isomorphism, so the comparison is faithful. Step 3 is elementary: I checked the types and the cancellation. Step 4 proves the stronger statement for arbitrary finite locally constant sheaves. TeX fault: the psmallmatrix row break was a single backslash (`\\u`, `\\q` in the decoded text), which renders as a breve macro. Rewritten as components in words in Steps 2 and 4. Edge cases checked: d=0, empty S, r=m, zero maps, disconnected or nonreduced S. Not a duplicate of lem-pur-lisse-uniqueness or prop-pur-a1-invariance, which are over a field base. All cited nodes are on the route of sk-thm-purity-transport (closure includes sk-thm-dnc, sk-prop-sf-comparison, sk-thm-properbasechange). The worker-written tool_uses are accepted. No SGA source is used. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-diagonal-orientation-compatibility.json.; 1 file(s) fixed by the reviewer"
  }
 }

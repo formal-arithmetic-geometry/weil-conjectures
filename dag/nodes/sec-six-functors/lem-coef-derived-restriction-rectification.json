@@ -3,11 +3,81 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the projective-model statement to the simplicial-set model category and the small simplicial categories $\\mathfrak C[A]$ and $\\mathfrak C[B]$. Its projective structures have objectwise weak equivalences and fibrations, and evaluation sends projectively cofibrant-fibrant diagrams to cofibrant-fibrant values. Hence every value $F(a)$ is bifibrant. Restriction gives $D(b)=F(u(b))$, so every value of $D$ is bifibrant; since the map $D\\to *$ is objectwise a fibration, $D$ is projectively fibrant.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 and Proposition A.3.3.2 (projective model structures and evaluation)."
+   }
+  },
+  {
+   "text": "Factor $\\varnothing\\to D$ functorially as the projective cofibration $\\varnothing\\to QD$ followed by the projective trivial fibration $a:QD\\to D$. The first map makes $QD$ cofibrant. By Step 1, $D\\to *$ is a projective fibration, so the composite $QD\\to D\\to *$ is a fibration and $QD$ is fibrant. Because projective weak equivalences are objectwise, $a$ is an objectwise weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 and Proposition A.3.3.2 (functorial projective factorization)."
+   }
+  },
+  {
+   "text": "Use the localized-evaluation comparison for $K=A$ and $K=B$. It supplies $E_K$ with $E_Kq_K\\simeq e_K$, identifies its restriction to projectively cofibrant-fibrant diagrams with the enriched-evaluation comparison $\\Phi_K$, and says that an objectwise weak equivalence of Kan-valued diagrams induces an equivalence under $e_K$. Thus $e_B(a):e_B(QD)\\to e_B(D)$ is an equivalence. The evaluation-restriction statement, applied with $K=A$, $K'=B$, $v=u$ and $P=F$, gives the exact identity $e_B(D)=e_B(u^*F)=e_A(F)\\circ u$ on every simplex, including its operators (directly: $N_{\\mathrm{hc}}(F\\circ\\mathfrak C[u])\\eta_B=N_{\\mathrm{hc}}(F)\\eta_Au$ by naturality of the unit $\\eta$). Since $QD$ is projectively cofibrant-fibrant, the two identifications with $E_K$ are $\\Phi_B$ and $\\Phi_A$, yielding $\\Phi_B(QD)\\simeq\\Phi_A(F)\\circ u$.",
+   "uses": [
+    "lem-coef-kan-diagram-localized-evaluation",
+    "lem-coef-kan-diagram-evaluation-restriction",
+    "lem-coef-enriched-diagram-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.4.4 and the localized enriched-evaluation construction."
+   }
+  },
+  {
+   "text": "Apply the evaluation-restriction statement with $K=A$, $K'=B$, $v=u$, and with the ordinary functorial projective cofibrant replacement $Q_B$ given by the functorial factorization of Step 2, restricted to $\\mathsf D_B^f$, with its natural trivial fibration $a_B:Q_B\\to1$; that statement assumes no simplicial enrichment of $Q_B$ and allows $Q_B(u^*P)\\to u^*P$ for $u^*P=D$. It states that $u^*$ preserves objectwise Kan diagrams and $W$ and induces $\\overline{u^*}:\\mathcal L_A\\to\\mathcal L_B$; that the identity $e_B(u^*P)=e_A(P)u$ induces a coherent natural equivalence $E_B\\overline{u^*}\\simeq u^*E_A$; that these comparisons are jointly coherent for identity maps, composites of indexing maps, ordinary diagram transformations and all higher simplices of the infinity localizations; and that the replacement equivalences $e_B(a_B)$, through $E_Bq_B\\simeq e_B$, are coherently compatible with restriction and independent of the replacement. The equivalence of Step 3 is the composite of $E_Bq_B(QD)\\simeq e_B(QD)$, of $e_B(a_B)$ at $D$, of the comparison $E_B\\overline{u^*}\\simeq u^*E_A$ at $q_AF$, and of $E_Aq_A\\simeq e_A$ at the cofibrant-fibrant $F$, where the last and first are the identifications with $\\Phi_A(F)$ and $\\Phi_B(QD)$. Each factor is one of these coherent comparisons, so the equivalence is a coherent transformation in the functor quasicategory $\\operatorname{Fun}(B,\\mathcal S_{\\mathcal V})$ of [def-cbc-enhanced-diagrams-cones], natural in $F$ after localization including transformations and higher simplices; for composable $w:C\\to B$ and $u$, joint coherence for composites makes the comparison for $uw$ the composite of the comparisons for $w$ and $u$, and for $u$ an identity the comparison is the replacement equivalence alone.",
+   "uses": [
+    "lem-coef-kan-diagram-evaluation-restriction",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.4.4; whole-functor-category localization universal property."
+   }
+  },
+  {
+   "text": "The covariant part of the right-fibration presentation defines $U^{\\mathrm{cov}}_S$ on projective simplicial diagrams, with left-fibration values. It states that $U^{\\mathrm{cov}}_S$ preserves objectwise weak equivalences between objectwise Kan diagrams and that for every map $u:B\\to A$ there is a natural base-change isomorphism $u^*U^{\\mathrm{cov}}_A(F)\\cong U^{\\mathrm{cov}}_B(F\\circ\\mathfrak C[u])$, compatible with composition. Apply this to the objectwise weak equivalence $a:QD\\to D$ from Step 2. It gives an equivalence $U^{\\mathrm{cov}}_B(QD)\\to U^{\\mathrm{cov}}_B(D)$ of left fibrations; composing with the base-change isomorphism identifies the target with $u^*U^{\\mathrm{cov}}_A(F)$ and proves the final assertion.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1 and Remarks 2.2.2.11--2.2.2.12 (covariant unstraightening and base change)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-kan-diagram-evaluation-restriction",
+  "lem-coef-kan-diagram-localized-evaluation",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-simplicial-right-fibration-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 4.2.4.4 and Proposition 2.2.1.1, with the derived-restriction argument written out from the localized evaluation and projective factorization statements; HTT is not archived in literature/."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "title": "Derived restriction and coherent evaluation for projective diagrams",
  "statement": "Use simplicial sets and coherent functors of [def-cbc-enhanced-diagrams-cones], the coherent realization, projective model structures and covariant unstraightening $U^{\\mathrm{cov}}$ of [lem-coef-simplicial-right-fibration-presentation], and the enriched-evaluation rectification comparison of [lem-coef-enriched-diagram-rectification], in fixed sufficiently large universes. Let $u:B\\to A$ be a map of small simplicial sets and let $F:\\mathfrak C[A]\\to\\mathsf{sSet}$ be a projectively cofibrant-fibrant simplicial functor. Put $D=F\\circ\\mathfrak C[u]$. Functorially factor $\\varnothing\\to D$ as a projective cofibration $\\varnothing\\to QD$ followed by a projective trivial fibration $QD\\to D$. Then $QD$ is cofibrant-fibrant and $QD\\to D$ is an objectwise weak homotopy equivalence. If $\\Phi_A$ and $\\Phi_B$ denote the enriched-evaluation rectification comparisons, there is a coherent equivalence $\\Phi_B(QD)\\simeq\\Phi_A(F)\\circ u$, natural in $F$ and $u$ after localization, including their transformations and higher simplices and compatible with composition of base maps. The map $U^{\\mathrm{cov}}_B(QD)\\to U^{\\mathrm{cov}}_B(D)\\cong u^*U^{\\mathrm{cov}}_A(F)$ is an equivalence of left fibrations over $B$.",
  "source": {
@@ -22,39 +92,53 @@
  ],
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "rectif|derivedRestriction|coherentEvaluation",
-   "results": "{\"t\": \"2026-10-17T08:30:08Z\", \"tool\": \"grep\", \"query\": \"rectif|derivedRestriction|coherentEvaluation\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "tool": "leanfinder",
+   "query": "Derived restriction and coherent evaluation for projective simplicial diagrams with covariant unstraightening",
+   "results": "8 hits (Profinite.NobelingProof.Products.evalFacProp; AlgebraicTopology.DoldKan.N₁_obj_p; SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂; AlgebraicTopology.DoldKan.natTransPInfty_f; CategoryTheory.Functor.mapProjectiveResolution_π; Profinite.NobelingProof.Products.evalFacProps; Profinite.NobelingProof.ProjRestricts_coe; CategoryTheory.ProjectiveResolution.leftDerived_app_eq); none states the item.",
    "date": "2026-10-17",
-   "verdict": "no match: Enriched composition and ordinary evaluation naturality do not compare projective replacements with coherent diagrams or unstraightening."
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"Rectification\"",
-   "results": "{\"t\": \"2026-10-17T08:30:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Rectification\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "CategoryTheory.Enriched.FunctorCategory, HomotopicalAlgebra.CofibrantObject",
+   "results": "0 hits; unknown identifier CategoryTheory.Enriched.FunctorCategory in the combined query.",
    "date": "2026-10-17",
-   "verdict": "no match: Enriched composition and ordinary evaluation naturality do not compare projective replacements with coherent diagrams or unstraightening."
+   "verdict": "unavailable: query rejected by Loogle"
+  },
+  {
+   "tool": "grep",
+   "query": "unstraighten|derived.*restriction|projective.*cofibrant",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Derived enriched evaluation of projective simplicial diagrams is natural under restriction",
-   "results": "{\"t\": \"2026-10-17T08:30:08Z\", \"tool\": \"leansearch\", \"query\": \"Derived enriched evaluation of projective simplicial diagrams is natural under restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.map_restrict\", \"CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app_assoc\", \"HomologicalComplex.restrictionToTruncGE'_naturality\", \"CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso\", \"CategoryTheory.Pi.comapEvalIsoEval\", \"CategoryTheory.Limits.limit_map_limitObjIsoLimitCompEvaluation_hom\", \"HomologicalComplex.forgetEval\", \"Profinite.NobelingProof.Products.evalFacProps\"], \"digest\": \"5267f616dbad8df3\"}",
+   "query": "A projective cofibrant replacement of a restricted simplicial diagram is naturally equivalent under coherent evaluation and covariant unstraightening",
+   "results": "8 hits (HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj; instIsCofibrantResolutionObj; HoCat.resolutionObj; HoCat.exists_resolution; instFibrationPResolutionObj; instWeakEquivalencePResolutionObj; HoCat.resolutionObj_hom_ext; SSet.modelCategoryQuillen.cofibrations_eq); none states the item.",
    "date": "2026-10-17",
-   "verdict": "no match: Enriched composition and ordinary evaluation naturality do not compare projective replacements with coherent diagrams or unstraightening."
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "Cofibrant replacement of restricted fibrant simplicial diagrams and naturality of homotopy coherent rectification",
-   "results": "{\"t\": \"2026-10-17T08:30:15Z\", \"tool\": \"leanfinder\", \"query\": \"Cofibrant replacement of restricted fibrant simplicial diagrams and naturality of homotopy coherent rectification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans\", \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"HomotopicalAlgebra.BifibrantObject.homMk_homMk_assoc\", \"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans_app\", \"SSet.Truncated.hoFunctor₂_naturality\", \"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\"], \"digest\": \"71575769671d23da\"}",
+   "query": "Restriction of projective simplicial diagrams commutes with coherent enriched evaluation and left unstraightening",
+   "results": "8 hits (CategoryTheory.Enriched.FunctorCategory.enrichedComp_π; CategoryTheory.SimplicialThickening.functor; Profinite.NobelingProof.Products.evalFacProps; SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂; CategoryTheory.SimplicialThickening.functor_comp; LightProfinite.proj_comp_transitionMapLE; ordinary evaluation lemmas); none states the item.",
    "date": "2026-10-17",
-   "verdict": "no match: Enriched composition and ordinary evaluation naturality do not compare projective replacements with coherent diagrams or unstraightening."
+   "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "Derived enriched evaluation comparison for projective diagrams commutes coherently with restriction of simplicial indexing sets",
-   "results": "{\"t\": \"2026-10-17T08:30:18Z\", \"tool\": \"leanfinder\", \"query\": \"Derived enriched evaluation comparison for projective diagrams commutes coherently with restriction of simplicial indexing sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.enrichedComp_π\", \"CategoryTheory.Enriched.FunctorCategory.enrichedId_π_assoc\", \"CategoryTheory.Enriched.FunctorCategory.enrichedComp_π_assoc\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_π_app\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π\", \"CategoryTheory.Enriched.FunctorCategory.enrichedId_π\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π_assoc\", \"AlgebraicTopology.DoldKan.natTransPInfty_f\"], \"digest\": \"aeda08dc1af189c8\"}",
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve",
+   "results": "CategoryTheory.SimplicialNerve (Mathlib.AlgebraicTopology.SimplicialNerve); this is the ordinary simplicial nerve and does not state derived restriction or unstraightening.",
    "date": "2026-10-17",
-   "verdict": "no match: Enriched composition and ordinary evaluation naturality do not compare projective replacements with coherent diagrams or unstraightening."
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "U_cov|left fibrat|projective cofibrant",
+   "results": "0 hits in Mathlib/AlgebraicTopology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "created": {
@@ -66,7 +150,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, restriction and pullback comparison",
+   "place": "Proof paragraph 2, coherent derived coefficient adjunction and its restriction/base-change naturality.",
    "via": [
     "lem-coef-space-transport-classification",
     "lem-coef-infinity-yoneda-presheaf-limits",
@@ -80,5 +164,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-derived-restriction-rectification",
+  "worker": "stage1",
+  "summary": "Kept the imported statement and dependencies. The proof first checks objectwise bifibrancy and projective fibrancy after restriction, then proves that the functorial projective trivial-fibration replacement is bifibrant and objectwise a weak equivalence. The localized enriched-evaluation comparison gives the coherent restriction identity and replacement independence, and the covariant right-fibration presentation transports the objectwise equivalence to left fibrations with its base-change isomorphism. No new nodes were needed.",
+  "blueprint": "Realizes the current main-20261015 ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, coherent derived coefficient adjunction and restriction/base-change naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-a1c657af0",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-a1c657af0 (reviewer sub-agent of L); spot-checked: I read the item, its five steps, every cited node's full statement, the parent lem-coef-space-transport-classification (whose step 3 is the only citation of the item), the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint. The statement is true. Its coefficient category is covariant projective sSet-diagrams on C[A]. This matches D_K in the localized-evaluation and evaluation-restriction nodes and D^cov_S in the right-fibration node. Phi_K is the comparison of the enriched-diagram rectification node with M=sSet, C=C[K] and u=id. Small cases checked: B empty, u=id, and A=B=Delta^0. Steps 1-2 use only stated clauses of lem-coef-simplicial-projective-model-calculus. Step 3's exact identity e_B(F C[u]) = e_A(F) u was checked through naturality of the unit eta. Its hypotheses hold: QD and D are objectwise Kan. Step 5 applies the covariant clauses of the right-fibration node (preserves objectwise weak equivalences between Kan diagrams; base change) to a:QD->D. The route stays inside the item's own unit, with no tool_uses and no SGA citation. A graph walk finds no cycle. No duplicate: the nearest nodes are the cited evaluation-restriction node and lem-coef-derived-restriction-bifibrant-nerve-equivalence, which is a different Quillen-equivalence statement. Three faults, repaired in fixes/dag/nodes/sec-six-functors/lem-coef-derived-restriction-rectification.json: (1) Step 3 used the exact restriction identity of lem-coef-kan-diagram-evaluation-restriction without listing that node in its uses (C1/C3); added. (2) Step 4 attributed the joint coherence and replacement compatibility to the localized-evaluation node, which does not state them (C3). They are clauses of the evaluation-restriction node, and the step is rewritten to apply that node with K=A, K'=B, v=u and the functorial replacement of step 2. It writes the step-3 equivalence as a composite of four coherent comparisons, from which naturality in F, the composite of base maps and the identity case follow. (3) blueprint.from.via began with the item itself; it now starts with lem-coef-space-transport-classification, followed by that node's own via list. The statement, stmt_deps, status and the set of proof_deps are unchanged. The report wrongly says created was corrected to Q34; the file keeps the correct creator, which is harmless. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

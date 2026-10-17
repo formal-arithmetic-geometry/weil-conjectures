@@ -16,9 +16,72 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-pbc-ambient-ringed-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every $N\\in D(T_{\\mathrm{proet}},A)$ has a K-flat resolution $P\\to N$ with flat terms [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings], $S_TN$ is represented by the termwise tensor $P\\otimes_{A_T}B_T$, canonically independent of $P$; this complex is again K-flat with flat terms over $B_T$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], for $u:T\\to V$ the inverse image $u^{-1}P$ is again K-flat with flat terms, so $S_Tu_A^{-1}N$ is represented by $u^{-1}P\\otimes B_T$, and by the item's normalization $\\lambda_{u,N}$ is the class of the termwise sheaf isomorphism $u^{-1}(P\\otimes B_V)\\to u^{-1}P\\otimes B_T$, $u^{-1}(x\\otimes b)\\mapsto u^{-1}x\\otimes b$. By [lem-weil-pbc-proetale-derived-pullback-composition] the composition isomorphisms $c$, hence the square isomorphisms $\\theta^A_\\square,\\theta^B_\\square$ built from them in [def-weil-pbc-ambient-ringed-exchange], are on such complexes the classes of the termwise canonical isomorphisms of inverse images. Hence for every $N\\in D(Y_{\\mathrm{proet}},A)$, represented by $Q$, the two composites $f'^{-1}_Bg_B^{-1}S_YN\\to S_{X'}h_A^{-1}f_A^{-1}N$,\n$$(\\lambda_hf_A^{-1})\\circ(h_B^{-1}\\lambda_f)\\circ(\\theta^BS_Y)\\quad\\text{and}\\quad(S_{X'}\\theta^A)\\circ(\\lambda_{f'}g_A^{-1})\\circ(f'^{-1}_B\\lambda_g),$$\nare classes of termwise maps of sheaf complexes that both send the inverse image of $q\\otimes b$ to $h^{-1}f^{-1}q\\otimes b$ under the canonical identification $f'^{-1}g^{-1}\\cong h^{-1}f^{-1}$; since such local sections generate, the two maps of complexes coincide. This cube identity is an equality of natural transformations of functors $D(Y_{\\mathrm{proet}},A)\\to D(X'_{\\mathrm{proet}},B)$, before taking any mates.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, coefficient inverse-image comparison on K-flat representatives"
+   }
+  },
+  {
+   "text": "For R=A and R=B, the ambient exchange Ex^R is defined as the mate of the pullback composition isomorphism theta_square^R for the cartesian square. For every scheme map u, chi_u is by definition the mate of lambda_u under the two inverse-image/direct-image adjunctions. Thus the left composite in the claimed equality is the mate obtained by first taking the coefficient square for f and then the geometric exchange square, while the right composite is obtained by first taking the coefficient square for g and then the geometric exchange square. Their underlying left-adjoint composites are the two routes around the coefficient/pullback cube from Step 1.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-base-change and the definition of the base-change map as an adjoint"
+   }
+  },
+  {
+   "text": "Apply clause 1 (pasting along $G,H$) of [lem-weil-pbc-mate-pasting] with $L_1=f_A^{-1}$, $L_2=f_B^{-1}$, $L_3=f'^{-1}_B$, $G=S_Y$, $H=S_X$, $G_2=g_B^{-1}$, $H_2=h_B^{-1}$, $\\alpha=\\lambda_f$, $\\beta=\\theta^B$: the square $(h_B^{-1}\\lambda_f)\\circ(\\theta^BS_Y)$ has mate $(\\operatorname{Ex}^BS_X)\\circ(g_B^{-1}\\chi_f)$. Apply the same clause with $L_1=f_A^{-1}$, $L_2=f'^{-1}_A$, $L_3=f'^{-1}_B$, $G=g_A^{-1}$, $H=h_A^{-1}$, $G_2=S_{Y'}$, $H_2=S_{X'}$, $\\alpha=\\theta^A$, $\\beta=\\lambda_{f'}$: the square $(S_{X'}\\theta^A)\\circ(\\lambda_{f'}g_A^{-1})$ has mate $(\\chi_{f'}h_A^{-1})\\circ(S_{Y'}\\operatorname{Ex}^A)$. Both computations are with respect to the adjunctions $f_A^{-1}\\dashv Rf_*^A$ and $f'^{-1}_B\\dashv Rf'^B_*$. Finally, from the component formula of [def-weil-pbc-adjunction-mate] and naturality of $\\eta_2,\\varepsilon_1$: for a square $\\alpha:L_2G\\to HL_1$ and transformations $\\sigma:H\\to H'$, $\\tau:G'\\to G$, the square $(\\sigma L_1)\\circ\\alpha\\circ(L_2\\tau)$ has mate $(R_2\\sigma)\\circ\\alpha^\\flat\\circ(\\tau R_1)$. With $\\sigma=\\lambda_h$ this gives: the mate of the first composite of Step 1 is $Rf'^B_*(\\lambda_h)\\circ(\\operatorname{Ex}^BS_X)\\circ(g_B^{-1}\\chi_f)$, the left side of the claim. With $\\tau=\\lambda_g$: the mate of the second composite of Step 1 is $(\\chi_{f'}h_A^{-1})\\circ(S_{Y'}\\operatorname{Ex}^A)\\circ(\\lambda_gRf_*^A)$, the right side.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal): the omitted verification, carried out by mate pasting (Mathlib CategoryTheory/Adjunction/Mates.lean, mateEquiv_vcomp, via lem-weil-pbc-mate-pasting)"
+   }
+  },
+  {
+   "text": "By Step 1 the two squares $f'^{-1}_Bg_B^{-1}S_Y\\to S_{X'}h_A^{-1}f_A^{-1}$ are equal, and the mate of [def-weil-pbc-adjunction-mate] is a function of the square (for the same functors $G=g_B^{-1}S_Y$, $H=S_{X'}h_A^{-1}$ and adjunctions), so by Step 3 their mates, the two sides of the claim evaluated at $M$, are equal. They are components of natural transformations, so the equality is natural in $M$. Only the K-flat computation of scalar extension, exactness of inverse images and the adjunction formalism were used; no properness, boundedness, constructibility, Tor-amplitude or flatness assumption on $A\\to B$ enters.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, final mate argument and naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E47 (remark-compose-base-change-horizontal), with the mate identities of Mathlib/CategoryTheory/Adjunction/Mates.lean"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-compact-support-coefficient-change",
@@ -74,5 +137,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fix-direct-image-scalar-exchange",
+  "worker": "stage1",
+  "summary": "Split the direct-image scalar exchange into the K-flat coefficient/pullback cube, the mate descriptions of chi and Ex, mates-pasting, and injectivity of the mate correspondence. The statement and hypotheses are unchanged; no new nodes were needed because the generic derived tensor-pullback and mate-pasting statements already exist.",
+  "blueprint": "The item realizes the direct-image coefficient/geometric exchange cube used in the final pullback paragraph of lem-fix-compact-support-coefficient-change.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Step 1 uses its K-flat computation and canonical independence for derived scalar extension."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Steps 1 and 3 use its natural tensor/pullback comparison on K-flat representatives."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Step 3 uses the generic mate-pasting and horizontal-composition identities."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Step 1 uses its K-flat description of the derived-pullback composition isomorphisms that build theta in the ambient exchange; the unit sk-prop-sf-trace-perfectness has no node for it."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 1 takes the existence of K-flat resolutions with flat terms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-ND-ef769ba5f",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-ef769ba5f (reviewer sub-agent of L); spot-checked: Read the whole item and its parent (step 9 uses the item with M=j_!^A K). Read every cited statement and the source at sites-cohomology.tex lines 4032–4113 (remark-base-change, and 0E46/0E47, the remarks on composing base change maps). The statement is true: take S_T = L h_T^* for (T,B)→(T,A); then chi_u is the Stacks base-change map, and the claim is 0E47 applied twice plus the coefficient/pullback cube. Checked the types of both sides, the mate instantiations for chi and Ex, and the cube on generators: both composites send f'^{-1}g^{-1}(q⊗b) to h^{-1}f^{-1}q⊗b. Edge cases checked: A=B, identity square, M=0, non-flat Z/4→Z/2, unbounded M. No duplicate found: the étale kun cubes, the single-coefficient pasting lemmas and the exceptional coefficient comparison all differ. There are no new nodes. Two faults, both repaired in fixes/dag/nodes/sec-smooth-purity/lem-fix-direct-image-scalar-exchange.json. (1) C1: step 1 used the K-flat form of the derived-pullback composition isomorphisms (which build theta) and the existence of flat-term K-flat resolutions without citing them; it now cites lem-weil-pbc-proetale-derived-pullback-composition, lem-pc-kflat-resolution and def-weil-pbc-ambient-ringed-exchange. (2) E5: step 3 said only 'apply mates-pasting' and 'the only inserted maps are naturality components'. It now instantiates clause 1 of lem-weil-pbc-mate-pasting twice with all of L1, L2, L3, G, H, G2, H2, alpha, beta, and states the whiskering rule: the mate of (σL1)α(L2τ) is (R2σ)α♭(τR1), with σ=λ_h and τ=λ_g. Step 4 now says equal squares have equal mates, and gives naturality in M. proof_deps is the union of the step uses. Statement, stmt_deps and blueprint are unchanged; nothing was weakened. Tool uses accepted: lem-pur-derived-change-of-rings, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-mate-pasting (a mathlib leaf), and two I added: lem-weil-pbc-proetale-derived-pullback-composition and lem-pc-kflat-resolution.; 1 file(s) fixed by the reviewer"
  }
 }

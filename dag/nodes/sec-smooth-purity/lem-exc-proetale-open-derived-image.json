@@ -1,9 +1,119 @@
 {
  "kind": "statement",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Identify $U_{\\mathrm{proet}}$ with $T_{\\mathrm{proet}}/U$ by clause (1) of [lem-weil-proetale-weakly-etale-localization], applied with auxiliary commutative coefficient ring $\\mathbf Z$; this clause concerns only the sites and their coverings. Apply clause (1) of [lem-sfb-proetale-object-inverse-image-restriction], again with auxiliary ring $\\mathbf Z$, to sets, abelian sheaves and rings. For an object $W\\to U$, its initial indexing pair $(W\\to T,(\\mathrm{str},\\mathrm{id}_W):W\\to U\\times_TW)$ gives the natural identification $j^{-1}N(W)=N(W\\to T)$. Only the ring-independent inverse-image clause is used, not that node's commutative module-pullback clause. These identifications hold on the compatible skeletons via the stated site equivalence.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CE, lemma-localize-given-products; localization restriction in Section 00XZ; proetale.tex Tag 09A5"
+   }
+  },
+  {
+   "text": "Let $P_S(V)=\\operatorname{Cont}(\\pi_0(|V|),A)$ be the ring-valued presheaf defining $A_S$ in [def-weil-pbc-proetale-modules]. Under the site identification, $P_T|_U=P_U$, including multiplication and restriction maps. Apply [lem-cbc-sieve-slice-sheafification] with values in rings: $A_T|_U=(P_T^\\#)|_U\\cong(P_T|_U)^\\#=A_U$, preserving the presheaf-to-sheaf maps. This is exactly the coefficient structure isomorphism of [prop-weil-pbc-proetale-constant-ring-map]: both send each local constant section $a$ to $a$ and glue on its open fibres, then extend by sheafification. Thus transport through this isomorphism in [prop-weil-pbc-proetale-constant-exact] gives $j^*N=N|_U$ as left module sheaves. In particular its action on $W/U$ is the original $A_T(W)$-action transported to $A_U(W)$. No permutation of factors in $A$ has been used.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-cbc-sieve-slice-sheafification",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX, definition-localize-ringed-site; coefficient action and sheafification comparison from the cited nodes"
+   }
+  },
+  {
+   "text": "Use $(j_*G)(V)=G(V\\times_TU)$ from [def-weil-proetale-inverse-image], with scalar action through $A_T(V)\\to A_U(V\\times_TU)$. The sheaf adjunction is explicit: a module map $\\phi:N|_U\\to G$ transposes to the map with component $\\phi_{V\\times_TU}\\circ\\operatorname{res}_{V\\times_TU/V}:N(V)\\to G(V\\times_TU)$; conversely $\\psi:N\\to j_*G$ transposes on $W/U$ to $\\psi_W$, using $W\\times_TU\\cong W$. The monomorphism clause (4) of [lem-weil-proetale-weakly-etale-localization] gives these identifications, and naturality at $V\\times_TU\\to V$ shows that the two formulas are inverse. Both are left-linear by the coefficient identification in step 2. For $\\phi=\\mathrm{id}_{N|_U}$ the first formula is $N(V)\\to N(V\\times_TU)$. It is also the unit of the specified inverse-image adjunction: in the colimit formula defining that adjunction, its coprojection indexed by $(V,\\mathrm{id}_{V\\times_TU})$ becomes restriction along $V\\times_TU\\to V$ under the initial-pair identification of step 1. Thus the adjunction, its action, and its unit have all been identified.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CE, lemma-localize-given-products; Tag 06UM, section-pullback, the colimit adjunction and unit"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-kinjective-restrict-localized] to the ring sheaf $A_T$ on the small site $T_{\\mathrm{proet}}$ and its object $U$. This result is stated for sheaves of rings, including noncommutative ones (its recorded interface uses RingCat). Restriction preserves zero maps because every component of a restricted zero map is still zero. With the module identification of step 2 its conclusion is precisely that $j^*I$ is K-injective. Also [prop-weil-pbc-proetale-constant-exact] makes $j^*$ exact and [lem-sf-exact-functor-derived-triangulated] therefore gives the termwise derived restriction with comparison $j^*Q_T=Q_Uj^*$.",
+   "uses": [
+    "lem-pur-kinjective-restrict-localized",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; Section 08FH, section-properties-K-injective"
+   }
+  },
+  {
+   "text": "For $S=T,U$, [lem-weil-pbc-ring-sheaves-grothendieck] applies to $A_S$ without a commutativity assumption, and [lem-sfb-grothendieck-k-injective] supplies K-injective resolutions of every complex. Apply [lem-weil-pbc-kinjective-total-derived] to $Q_Tj_*:K(\\operatorname{Mod}(A_U))\\to D(\\operatorname{Mod}(A_T))$. This functor is triangulated: termwise $j_*$ is additive by the section formula in [def-weil-proetale-inverse-image], hence takes a shifted complex to the shifted image and the cone $Y^n\\oplus X^{n+1}$ with its differential matrix to the identical cone matrix after $j_*$. Derived localization then takes these cone triangles to distinguished triangles. Consequently $Rj_*$ exists and its comparison $\\beta_J:Q_Tj_*J\\to Rj_*(Q_UJ)$ is an isomorphism for every K-injective $J$. Taking $J=j^*I$ gives the asserted representation.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-weil-proetale-inverse-image",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K and 070Y, lemma-enough-K-injectives-implies and lemma-K-injective-defined; injectives.tex Tags 079P and 079Q"
+   }
+  },
+  {
+   "text": "For a K-injective $J$ on $U$, [lem-weil-pbc-right-adjoint-preserves-kinjective] applied to $j^*\\dashv j_*$ and exactness of $j^*$ from [prop-weil-pbc-proetale-constant-exact] makes $j_*J$ K-injective. For every complex $M$ on $T$, [lem-weil-pbc-kinjective-hom-derived] now gives the natural bijections\n$$\\operatorname{Hom}_{D(U)}(Q_Uj^*M,Q_UJ)\\cong\\operatorname{Hom}_{K(U)}(j^*M,J)\\cong\\operatorname{Hom}_{K(T)}(M,j_*J)\\cong\\operatorname{Hom}_{D(T)}(Q_TM,Q_Tj_*J).$$\nFor the middle bijection use the formulas in step 3 degreewise. Naturality with respect to the two differentials carries the chain-map equation to the transposed chain-map equation. The same formulas applied to degree $-1$ maps carry $f-g=dh+hd$ to the identical equation for their transposes, since the formulas are additive; hence they give inverse maps on homotopy classes. Composing the last term with $\\beta_J$ from step 5 gives the derived adjunction: all target objects have these K-injective representatives, and the bijections are natural in $M,J$. This is the adjunction induced from the specified sheaf adjunction and right-derived comparison, rather than an independently chosen adjunction.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; Tag 070I, lemma-K-injective; Tag 09T5, lemma-derived-adjoint-functors"
+   }
+  },
+  {
+   "text": "Set $M=I$ and $J=j^*I$ in step 6; the latter is K-injective by step 4. Under the Hom bijection the identity of $Q_Uj^*I$ is represented by $\\mathrm{id}_{j^*I}$, whose sheaf-level transpose is $\\eta_I:I\\to j_*j^*I$ by step 3. Therefore its derived transpose, which defines the derived adjunction unit, is $\\beta_{j^*I}\\circ Q_T(\\eta_I)$. Under the representation of step 5 (identifying the target via $\\beta_{j^*I}$) this is exactly $Q_T(\\eta_I)$. Its component in each degree over $V/T$ is the restriction $I^q(V)\\to I^q(V\\times_TU)$ computed in step 3. All identifications are natural, so this proves the specified unit, as well as the representation of the object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, applied to the explicit adjunction of steps 3 and 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "def-weil-pbc-proetale-modules",
+  "lem-cbc-sieve-slice-sheafification",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FI and the proof of the blueprint ancestor; coefficient and unit normalization written explicitly using Stacks Tags 03CE, 070I, 070K, 070Y and 08BJ"
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -59,6 +169,41 @@
    "date": "2026-10-17",
    "verdict": "no match: generic infrastructure or different geometric/coefficient categories; no statement of this lemma",
    "sub": "Algebra/Homology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion of schemes identifies proetale module pullback with slice restriction, preserving K-injective complexes and computing the derived direct image adjunction unit",
+   "results": "Recorded command hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: generic homological infrastructure or Zariski structure-sheaf modules only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\"",
+   "results": "Recorded command hits: CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyEquiv.isKInjective, CochainComplex.isKInjective_of_iso, CochainComplex.isKInjective_iff_of_iso, CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: generic homological infrastructure or Zariski structure-sheaf modules only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*KInjective|KInjective.*restrict|derivedη_fac",
+   "results": "Recorded command hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: generic homological infrastructure or Zariski structure-sheaf modules only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open subsite of a complex of sheaves preserves homotopy injectivity and identifies the derived adjunction unit with the ordinary unit",
+   "results": "Recorded command hits: CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.plusPlusAdjunction_unit_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.Sheaf.adjunction. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: generic homological infrastructure or Zariski structure-sheaf modules only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-injective complexes of modules on a proetale site restrict to K-injective complexes on an open subscheme and compute the derived direct image unit",
+   "results": "Recorded command hits: AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.instIsGermInjectiveAtCoeContinuousMapCarrierCarrierCommRingCatHomTopCatBaseOfIsOpenImmersion. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: generic homological infrastructure or Zariski structure-sheaf modules only"
   }
  ],
  "source": {
@@ -67,10 +212,36 @@
  },
  "split_report": {
   "date": "2026-10-17",
-  "item": "lem-exc-proetale-support-triangle",
+  "item": "lem-exc-proetale-open-derived-image",
   "worker": "stage1",
-  "summary": "Statement-only hidden lemma extracted from the returned long item step.",
-  "blueprint": "## Proof, exact open restriction, K-injectivity, and the computation of Rj_*"
+  "summary": "Reused existing slice-site, arbitrary-ring coefficient, K-injective restriction, and derived localization statements. Wrote out coefficient-action transport, the sheaf adjunction and its unit, the homotopy adjunction, and the derived-unit formula; no new nodes and no statement change.",
+  "blueprint": "Realizes the archived ancestor Proof sentence “Exactness of the left adjoint j_! ... makes j^*I K-injective, so Rj_*j^*K ≃ j_*j^*I”, including its implicit coefficient and derived-unit identifications. The main-20261015 ancestor retains the statement but has no proof paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Geometric slice equivalence and open monomorphism, used with auxiliary coefficient Z; this unit has no site-localization tool."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "The ring-independent initial indexing pair and inverse-image identification; used as a generic site tool, not its proper-heart argument or commutative module clause."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "The canonical coefficient structure map for finite arbitrary rings, preserving local constant sections."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exactness and the definition of transported left action for finite arbitrary rings."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "General restriction of module complexes on a slice site preserves K-injectivity; supplies exactly the extension-by-zero argument needed by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "General existence and K-injective computation of a total right derived functor."
+   }
+  ]
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-localization",
@@ -82,5 +253,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-aa98150d1",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-aa98150d1 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement. Statement: unchanged and true. It matches the master ancestor Proof sentence (exactness of j_! makes j^*I K-injective, so Rj_*j^*K = j_*j^*I) and the same argument at main-20261015 sk-lem-formal-closed-support.proof.md line 27. Coefficients: left modules over (Cont(pi0,A))^# from def-weil-pbc-proetale-modules, never silently identified with commutative constant sheaves. Route: same as the source. For noncommutative A the delivery cites lem-pur-kinjective-restrict-localized (Stacks 08FI, sites-cohomology.tex l.4314, via exact j_! and 08BJ; RingCat interface) instead of the commutative-only prop-exc-open-adjoint. Steps 1-3: the site equivalence and coefficient-free initial-pair clause (taken with Z), the slice-sheafification leaf with ring values, and the unit via the coprojection at (V,id) all check out. I confirmed c_u equals the slice comparison using constants on clopen fibres. Steps 4-7: the K-injective transport along the equivalence, Q_T o j_* being exact, beta_J an isomorphism on K-injective J, the explicit 09T5-style adjunction using hom-derived and right-adjoint preservation, and the unit substitution are all correct. Edge cases: U=T, U empty, A=0, A=M_2(F_2), unbounded complexes, disconnected V. No new nodes. Duplicate candidates are all commutative-only and rejected: open-unit-evaluation, prop-exc-open-adjoint, derived-open-restriction, ringed-slice-evaluation-transpose. Accepted tool uses: object-inverse-image-restriction (clause 1 only), constant-ring-map, constant-exact, kinjective-total-derived. The weakly-etale-localization and kinjective-restrict-localized entries are on the route, so declaring them was unnecessary but harmless. Minor, not a fault: def-pur-kinjective-complex is phrased for commutative O, but the lemma's own statement and its interface cover noncommutative rings. No fixes were written."
  }
 }

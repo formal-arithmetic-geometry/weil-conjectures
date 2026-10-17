@@ -2,18 +2,221 @@
  "id": "lem-coef-split-functor-coend-filtration",
  "kind": "statement",
  "title": "Relative skeletal filtration for split functors",
- "statement": "Let $\\mathcal C$ be a cocomplete category, with all categories, Hom sets and colimits in containing universes. Use simplicial sets, standard simplices and boundaries of [def-weil-pbc-simplicial-set], and colimits of [def-weil-pbc-category-colimit]. Let $T:\\Delta^{\\mathrm{op}}\\to\\operatorname{Fun}(\\mathrm{sSet},\\mathcal C)$ be a simplicial diagram of functors preserving all small colimits. Suppose given colimit-preserving functors $N_q:\\mathrm{sSet}\\to\\mathcal C$ and natural transformations $N_q\\to T_q$ such that, for every $p$, the canonical degeneracy map\n$$\\coprod_{[p]\\twoheadrightarrow[q]}N_q\\longrightarrow T_p$$\nis an isomorphism of functors; its component indexed by a surjection $\\sigma$ is $N_q\\to T_q\\xrightarrow{T(\\sigma)}T_p$. The identity surjection is included. Define\n$$R_T(K)=\\int^{[p]\\in\\Delta}T_p(K\\times\\Delta^p),$$\nas the coequalizer of the two maps from $\\coprod_{\\alpha:[a]\\to[b]}T_b(K\\times\\Delta^a)$ to $\\coprod_pT_p(K\\times\\Delta^p)$ induced by $T(\\alpha)$ and $\\Delta^\\alpha$ respectively. For every map $i:K\\to L$ of simplicial sets, $R_T(i)$ admits a countable filtration $Z_{-1}=R_T(K)\\to Z_0\\to Z_1\\to\\cdots$ with colimit $R_T(L)$, whose $p$th transition is a pushout of\n$$N_p\\big((L\\times\\partial\\Delta^p)\\amalg_{K\\times\\partial\\Delta^p}(K\\times\\Delta^p)\\big)\\longrightarrow N_p(L\\times\\Delta^p).$$\nThe attaching map is induced by the face operators and the coend maps. The filtration is natural in $i$ and in maps respecting the specified splittings. It includes $p=0$ and empty $K,L$. No model structure or enrichment of $\\mathcal C$ is assumed.",
+ "statement": "Let $\\mathcal C$ be a cocomplete category, with all categories, Hom sets and colimits in containing universes. Use simplicial sets of [def-weil-pbc-simplicial-set], standard simplices and their boundaries as defined in the first sentence of [def-weil-pbc-trivial-kan-fibration], and colimits of [def-weil-pbc-category-colimit]. Let $T:\\Delta^{\\mathrm{op}}\\to\\operatorname{Fun}(\\mathrm{sSet},\\mathcal C)$ be a simplicial diagram of functors preserving all small colimits. Suppose given colimit-preserving functors $N_q:\\mathrm{sSet}\\to\\mathcal C$ and natural transformations $N_q\\to T_q$ such that, for every $p$, the canonical degeneracy map\n$$\\coprod_{[p]\\twoheadrightarrow[q]}N_q\\longrightarrow T_p$$\nis an isomorphism of functors; its component indexed by a surjection $\\sigma$ is $N_q\\to T_q\\xrightarrow{T(\\sigma)}T_p$. The identity surjection is included. Define\n$$R_T(K)=\\int^{[p]\\in\\Delta}T_p(K\\times\\Delta^p),$$\nas the coequalizer of the two maps from $\\coprod_{\\alpha:[a]\\to[b]}T_b(K\\times\\Delta^a)$ to $\\coprod_pT_p(K\\times\\Delta^p)$ induced by $T(\\alpha)$ and $\\Delta^\\alpha$ respectively. For every map $i:K\\to L$ of simplicial sets, $R_T(i)$ admits a countable filtration $Z_{-1}=R_T(K)\\to Z_0\\to Z_1\\to\\cdots$ with colimit $R_T(L)$, whose $p$th transition is a pushout of\n$$N_p\\big((L\\times\\partial\\Delta^p)\\amalg_{K\\times\\partial\\Delta^p}(K\\times\\Delta^p)\\big)\\longrightarrow N_p(L\\times\\Delta^p).$$\nThe attaching map is induced by the face operators and the coend maps. The filtration is natural in $i$ and in maps respecting the specified splittings. It includes $p=0$ and empty $K,L$. No model structure or enrichment of $\\mathcal C$ is assumed.",
  "source": {
   "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
   "place": "Section 3.4, proof of Theorem 3.5, printed p.10: skeletal pushout; Section 19, printed pp.90-93: realization by cosimplicial resolutions. Agent categorical extension to diagrams of colimit-preserving functors, not a literal assertion of the source. Source read in the sandbox; archival copy WANTED. No Stacks tag states this result."
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use right-to-left composition. Write $\\iota_q:N_q\\to T_q$ and $j_{p,\\rho}=T(\\rho)\\iota_q$ for $\\rho:[p]\\twoheadrightarrow[q]$. For a simplicial set $X$ put $W_a(X)=X\\times\\Delta^a$ and $W_\\alpha=1_X\\times\\Delta^\\alpha$. Let $E_n(X)$ be the defining coequalizer for $R_T(X)$ restricted to $a,b\\le n$, let $E_{-1}(X)$ be initial, and write $c_a^n:T_a(W_a(X))\\to E_n(X)$ for its summand maps. By the colimit definition, maps $E_n(X)\\to Y$ are exactly families $t_a:T_a(W_a(X))\\to Y$, $a\\le n$, satisfying\n$$t_aT(\\alpha)_{W_a(X)}=t_bT_b(W_\\alpha)\\quad(\\alpha:[a]\\to[b],\\ a,b\\le n).$$\nThe larger-degree summand maps induce $E_{n-1}(X)\\to E_n(X)\\to R_T(X)$. All their indices are small in the containing universes of the statement.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; truncated coequalizers in the proof of Theorem 3.5, printed p.10; agent universal-property formulation (Stacks 002F)."
+   }
+  },
+  {
+   "text": "The boundary defined in [def-weil-pbc-trivial-kan-fibration] is the colimit of the standard simplices over proper injective faces $\\delta:[r]\\hookrightarrow[p]$, with arrows given by face inclusions. In degree $m$, a nonsurjective $\\phi:[m]\\to[p]$ factors uniquely through its ordered image $\\delta_\\phi:[r]\\hookrightarrow[p]$ by a surjection. Every representation of $\\phi$ through any proper face factors through this image representation, so the colimit classes in that degree are exactly these $\\phi$. Precomposition preserves these identifications. Products $X\\times-$ preserve this colimit: degreewise, a compatible family on $X_m\\times\\Delta^r_m$ is precisely a family on the face colimit for each fixed $x\\in X_m$. The resulting maps commute with simplicial operators by their formulas. Consequently, because $T_p$ and $N_q$ preserve colimits, their values on $X\\times\\partial\\Delta^p$ are the corresponding colimits of their values on $W_r(X)$ over proper faces.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent proper-image calculation for the boundary; Stacks simplicial.tex Tags 0176 (example-simplex-simplicial-set) and 08NK (section-trivial-kan), boundary paragraph; contextual source: Theorem 3.5 skeletal square, printed p.10."
+   }
+  },
+  {
+   "text": "Fix $p\\ge0$ and abbreviate $c_r=c_r^{p-1}$ for $r<p$. Define a map $e_p(X):T_p(X\\times\\partial\\Delta^p)\\to E_{p-1}(X)$ on the face $\\delta:[r]\\hookrightarrow[p]$ by\n$$T_p(W_r(X))\\xrightarrow{T(\\delta)}T_r(W_r(X))\\xrightarrow{c_r}E_{p-1}(X).$$\nFor $\\delta=\\delta'\\gamma$ with proper faces $\\delta':[s]\\hookrightarrow[p]$ and $\\gamma:[r]\\hookrightarrow[s]$, functoriality gives $T(\\delta)=T(\\gamma)T(\\delta')$. The lower-degree relation for $\\gamma$ in Step 1 and naturality of $T(\\delta')$ therefore identify this map with the map for $\\delta'$ preceded by $T_p(W_\\gamma)$. Step 2 glues the face maps uniquely to $e_p(X)$. This also covers all face intersections because their image faces occur in the same diagram.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent construction of the face edge in the skeletal square of Theorem 3.5, printed p.10; Stacks 002F and 08NK."
+   }
+  },
+  {
+   "text": "Let $D_p=\\coprod_{\\rho:[p]\\twoheadrightarrow[q],\\ q<p}N_q$, and let $d_p:D_p\\to T_p$ have components $j_{p,\\rho}$. The splitting hypothesis identifies $T_p\\cong D_p\\amalg N_p$, with $\\iota_p$ the last coprojection. Define\n$$b_p(X):D_p(W_p(X))\\longrightarrow E_{p-1}(X)$$\non its $\\rho$ summand as $c_q\\iota_q N_q(W_\\rho)$. This needs no separate theorem identifying a latching object: it defines a map out of the displayed coproduct. For a proper surjection $\\sigma:[p]\\twoheadrightarrow[r]$ and any surjection $\\tau:[r]\\twoheadrightarrow[q]$ (including the identity), simplicial functoriality gives $T(\\sigma)j_{r,\\tau}=j_{p,\\tau\\sigma}$. The composite $\\tau\\sigma$ is proper whenever $\\sigma$ is proper.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent use of the specified splitting and degeneracy maps in the skeletal square, Theorem 3.5, printed p.10."
+   }
+  },
+  {
+   "text": "The maps $b_p(X)$ and $e_p(X)$ agree on $D_p(X\\times\\partial\\Delta^p)$ after applying $d_p$ on the face side. Test on the $\\rho:[p]\\twoheadrightarrow[q]$ summand and face $\\delta:[r]\\hookrightarrow[p]$, where $q,r<p$. Naturality of $\\iota_q$ identifies the degeneracy-first route with\n$$c_q\\iota_q N_q(W_{\\rho\\delta})=c_qT_q(W_{\\rho\\delta})\\iota_q.$$\n The face-first route is $c_rT(\\delta)T(\\rho)\\iota_q=c_rT(\\rho\\delta)\\iota_q$. These are equal by the relation of Step 1 for $\\rho\\delta:[r]\\to[q]$, whose degrees are both below $p$. Testing these components suffices by Step 2 and the coproduct property. Thus there is a glued map\n$$U_p(X):=D_p(W_p(X))\\amalg_{D_p(X\\times\\partial\\Delta^p)}T_p(X\\times\\partial\\Delta^p)\\longrightarrow E_{p-1}(X).$$",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent mixed face/degeneracy check in the skeletal square, Theorem 3.5, printed p.10; Stacks 002F."
+   }
+  },
+  {
+   "text": "Fix $h:E_{p-1}(X)\\to Y$ and $g:T_p(W_p(X))\\to Y$, and put $t_r=hc_r$ for $r<p$ and $t_p=g$. Agreement on $U_p(X)$ says precisely (i) the proper-face equations\n$$gT_p(W_\\delta)=t_rT(\\delta)\\quad(\\delta:[r]\\hookrightarrow[p],\\ r<p),$$\nand (ii) on each proper-surjection summand,\n$$gj_{p,\\rho}=t_q\\iota_q N_q(W_\\rho)\\quad(\\rho:[p]\\twoheadrightarrow[q],\\ q<p).$$\nThis equivalence follows by testing maps on the two legs of the pushout, then on the coproduct summands and proper-face colimit. These tests invoke only the colimit universal properties established in Steps 1–2.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent map-out characterization of the skeletal attaching corner, Theorem 3.5, printed p.10."
+   }
+  },
+  {
+   "text": "Condition (ii) is equivalent to every proper-surjection coend equation $gT(\\sigma)=t_rT_r(W_\\sigma)$ for $\\sigma:[p]\\twoheadrightarrow[r]$, $r<p$. To verify sufficiency, test that equation on every splitting summand $j_{r,\\tau}:N_q\\to T_r$. The left side is $gj_{p,\\tau\\sigma}$ by Step 4, hence $t_q\\iota_q N_q(W_{\\tau\\sigma})$. On the right, naturality gives\n$$t_rT_r(W_\\sigma)j_{r,\\tau}=t_rT(\\tau)j_{q,1}\\,N_q(W_\\sigma)=t_q\\iota_qN_q(W_\\tau)N_q(W_\\sigma),$$\nwhere the last equality is the lower-degree coend relation for $\\tau:[r]\\to[q]$; its degrees are $<p$. These expressions agree by functoriality of $W$ and $N_q$. Necessity follows by taking $\\sigma=\\rho$ and restricting its equation to $\\iota_q$. Thus no identification of a degenerate subobject has been assumed.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent verification that the split degeneracy conditions are exactly all surjection equations; Theorem 3.5, printed p.10."
+   }
+  },
+  {
+   "text": "The proper-surjection and proper-injection equations, together with the lower-degree equations, imply every relation of $E_p(X)$. Indeed list the image of any $\\alpha:[a]\\to[b]$, $a,b\\le p$, increasingly to obtain $\\alpha=\\delta\\sigma$ with $\\sigma:[a]\\twoheadrightarrow[r]$, $\\delta:[r]\\hookrightarrow[b]$, and $r\\le\\min(a,b)$. The relation for each factor is lower-degree, one of Steps 6–7, or an identity. Substituting the two relations and using naturality of $T(\\delta)$ in the argument $W_\\sigma$ gives\n$$t_aT(\\alpha)_{W_a}=t_aT(\\sigma)_{W_a}T(\\delta)_{W_a}=t_rT_r(W_\\sigma)T(\\delta)_{W_a}=t_bT_b(W_\\delta)T_b(W_\\sigma)=t_bT_b(W_\\alpha).$$\nA nonidentity endomorphism of $[p]$ has image dimension $<p$ and is included. Conversely all equations of Steps 6–7 are defining relations. Therefore compatible $h,g$ on $U_p(X)$ extend uniquely to $E_p(X)$ by Step 1. The square $U_p(X)\\to E_{p-1}(X)$ over $T_p(W_p(X))\\to E_p(X)$ is a pushout; it commutes by those same coend relations.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent full pushout verification, including nonidentity endomorphisms, for Theorem 3.5 skeletal square, printed p.10."
+   }
+  },
+  {
+   "text": "The splitting $T_p=D_p\\amalg N_p$ identifies\n$$U_p(X)\\cong D_p(W_p(X))\\amalg N_p(X\\times\\partial\\Delta^p).$$\nTo see this without cancelling a putative subobject, maps out of the pushout defining $U_p$ are a map out of $D_p(W_p)$ and maps out of $D_p(X\\times\\partial\\Delta^p)$ and $N_p(X\\times\\partial\\Delta^p)$; the first of the latter two is prescribed by the former map. Thus only the displayed two maps remain. Under this identification $U_p\\to T_p(W_p)$ is the identity on the $D_p(W_p)$ summand and the boundary map on the $N_p$ summand. The pushout of Step 8 consequently has the equivalent universal property\n$$E_p(X)\\cong E_{p-1}(X)\\amalg_{N_p(X\\times\\partial\\Delta^p)}N_p(W_p(X)).$$\nIts upper attaching map is $a_p(X)=e_p(X)\\iota_p$ restricted to the boundary. All identifications preserve the summand and attaching maps.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent reduction of the skeletal square by the specified coproduct splitting; contextual source Theorem 3.5, printed p.10."
+   }
+  },
+  {
+   "text": "The formulas for $c_r,e_p,b_p$ commute with every map $f:X\\to X'$: product maps commute with $W_\\alpha$, and each $\\iota_q$ and $T(\\alpha)$ is a natural transformation of functors on simplicial sets. For instance, on a face $\\delta:[r]\\hookrightarrow[p]$, both composites for $e_p$ are $c_rT_r(f\\times1)T(\\delta)$, using naturality and the induced $E_{p-1}(f)$. Uniqueness from the face colimit and coproducts proves equality on the whole domain. In particular the reduced pushout square of Step 9 is natural in $X$, with its specified attaching map. No choice of a factorization of a face of a nondegenerate summand was made.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent naturality of the skeletal attaching maps; Theorem 3.5, printed p.10."
+   }
+  },
+  {
+   "text": "Define, for every $p\\ge-1$,\n$$Z_p=R_T(K)\\amalg_{E_p(K)}E_p(L),$$\nusing the truncation-to-coend map and $E_p(i)$. Since $E_{-1}(K)$ and $E_{-1}(L)$ are initial, $Z_{-1}=R_T(K)$ canonically. The truncation maps induce $Z_{p-1}\\to Z_p$. A map $Z_p\\to Y$ is precisely a map $v:R_T(K)\\to Y$ and a map $u:E_p(L)\\to Y$ satisfying $uE_p(i)=v\\kappa_p$, where $\\kappa_p:E_p(K)\\to R_T(K)$ is the coend map. This defines actual categorical pushouts, regardless of whether $i$ or any transition is monic.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent relative filtration formed from the absolute skeletal square; Stacks 002F; contextual source Theorem 3.5, printed p.10."
+   }
+  },
+  {
+   "text": "Fix $h:Z_{p-1}\\to Y$. Write $v:R_T(K)\\to Y$ and $u:E_{p-1}(L)\\to Y$ for its restrictions. By Step 9, extension of $u$ to $E_p(L)$ amounts to a map $g:N_p(L\\times\\Delta^p)\\to Y$ whose boundary restriction is $u a_p(L)$. Compatibility with $v\\kappa_p$ on $E_p(K)$ is equivalent to compatibility on its $E_{p-1}(K)$ and $N_p(K\\times\\Delta^p)$ pieces, since Step 9 is a pushout also for $K$. The former is already given by $h$, and the latter says that $gN_p(i\\times1)$ is the prescribed map from the $p$th identity summand to $R_T(K)$ followed by $v$. The two prescribed restrictions of $g$ agree on $N_p(K\\times\\partial\\Delta^p)$: this follows from Step 10 and the compatibility of $u$ with $v$ on $E_{p-1}(K)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent relative map-out calculation from the two natural skeletal pushout squares; Stacks 002F."
+   }
+  },
+  {
+   "text": "Let $A_p=(L\\times\\partial\\Delta^p)\\amalg_{K\\times\\partial\\Delta^p}(K\\times\\Delta^p)$. As $N_p$ preserves small colimits,\n$$N_p(A_p)\\cong N_p(L\\times\\partial\\Delta^p)\\amalg_{N_p(K\\times\\partial\\Delta^p)}N_p(K\\times\\Delta^p).$$\nThe compatibility just proved, taking $Y=Z_{p-1}$ and $h=1$, defines the upper attaching map $N_p(A_p)\\to Z_{p-1}$: it is the face attaching map on the first leg and the full $K$-coend map on the second. Step 12 says for arbitrary $Y,h,g$ that agreement on $N_p(A_p)$ is exactly the condition for a unique map $Z_p\\to Y$. It also gives commutativity by taking the canonical maps to $Z_p$. Hence $Z_{p-1}\\to Z_p$ is a pushout of the arrow $N_p(A_p)\\to N_p(L\\times\\Delta^p)$ specified in the statement.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent relative boundary pushout; Stacks 002F; categorical counterpart of Theorem 3.5 skeletal attachment, printed p.10."
+   }
+  },
+  {
+   "text": "A compatible family $E_n(X)\\to Y$ is exactly a family on all summands $T_a(W_a(X))$ satisfying every coend relation: the relation for $\\alpha:[a]\\to[b]$ occurs once $n\\ge\\max(a,b)$. Thus the canonical map $\\operatorname{colim}_n E_n(X)\\to R_T(X)$ is an isomorphism, by the same coequalizer universal property as Step 1. Apply this for $X=K,L$. By Step 11 a compatible family $Z_n\\to Y$ consists of one map $v:R_T(K)\\to Y$ and compatible maps $E_n(L)\\to Y$ whose restrictions agree with $v\\kappa_n$. The latter maps determine a unique $w:R_T(L)\\to Y$; the restrictions force $v=wR_T(i)$ since the summands of every degree occur. Conversely every $w$ provides this family. This proves that the canonical $\\operatorname{colim}_{n\\ge-1} Z_n\\to R_T(L)$ is an isomorphism and that its initial map is exactly $R_T(i)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent sequential-colimit check; truncation colimit in Theorem 3.5, printed p.10; Stacks 002F."
+   }
+  },
+  {
+   "text": "A commutative square between $i:K\\to L$ and $i':K'\\to L'$ induces maps on $E_p(K),E_p(L)$ and the full coends by the summand formulas. Step 10 makes them commute with the attaching maps; pushout uniqueness then gives commuting maps on $Z_p$ and each square of Step 13. A map of split data $T\\to T'$, $N_q\\to N'_q$ commutes with $j_{p,\\rho}=T(\\rho)\\iota_q$ by its assumed compatibility, and with the face maps by simplicial naturality; the identical argument gives maps of filtrations. The maps to the full coends and the colimit comparison of Step 14 commute because they agree on every original coend summand. This proves both asserted naturalities.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent naturality verification for the relative skeletal filtration, using the explicit component formulas."
+   }
+  },
+  {
+   "text": "At $p=0$ there are no proper surjections or proper faces, so $D_0$ and $X\\times\\partial\\Delta^0$ are initial. Colimit preservation gives $N_0(\\varnothing)$ initial and $T_0=N_0$. Steps 9 and 13 give the first attachment $N_0(K)\\to N_0(L)$ exactly. If $K=\\varnothing$, all $E_p(K)$ and $R_T(K)$ are initial, since each $T_a$ preserves the initial object; the construction is the absolute filtration. If $L=\\varnothing$, existence of $i$ forces $K=\\varnothing$ degreewise, and every object is initial. For $K=L$ and $i=1$, every $Z_p$ is $R_T(K)$ and $A_p\\to K\\times\\Delta^p$ is an isomorphism, as follows directly by maps out of its pushout. All arguments used colimits, the stated splitting, and the explicit order maps alone, with no enrichment or model structure.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent edge-case and hypothesis check; Stacks 08NK, boundary in degree zero, and 002F, initial objects and pushouts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Proof of Theorem 3.5, printed p.10, and Section 19.1, printed p.90, motivate the skeletal square. Steps 1–16 prove its split-functor and relative form by componentwise colimit universal properties; this exact generalization is not asserted in the source."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +252,45 @@
    "results": "8 hits; ; AlgebraicTopology.DoldKan.Γ₀.splitting, SSet.modelCategoryQuillen.boundary_ι_mem_I, HomotopicalAlgebra.RelativeCellComplex.attachCells, SimplicialObject.Splitting.isColimit, HomotopicalAlgebra.RelativeCellComplex.Cells.k, SimplicialObject.Splitting.isColimit', SSet.modelCategoryQuillen.I, SSet.modelCategoryQuillen.J; digest aa19057d706ed53b",
    "date": "2026-10-17",
    "verdict": "no match: Split.lean:199-219 defines the coproduct splitting and its universal property; it does not give the relative coend filtration with product weights. Skeleton.lean concerns a simplicial set, and RelativeCellComplex.attachCells constructs given cells without identifying these coends."
+  },
+  {
+   "tool": "grep",
+   "query": "coend|latching|isColimit",
+   "results": "{\"t\": \"2026-10-17T13:08:31Z\", \"tool\": \"grep\", \"query\": \"coend|latching|isColimit\", \"sub\": \"AlgebraicTopology/SimplicialObject/Split.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"219\", \"221\", \"233\", \"259\", \"274\"], \"digest\": \"07d8d5a80d4ce9c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures and Split.lean:199-275, Skeleton.lean:14-30 and 45-105. Splitting.cofan and isColimit give the assumed degreewise coproduct, while Dold-Kan adds a preadditive chain-complex setting. Skeleton/sk concern simplicial objects or sets, not this product-weighted coend and arbitrary relative map. None gives the asserted filtration in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative skeletal filtration of the coend of a split simplicial functor and products with simplices",
+   "results": "{\"t\": \"2026-10-17T13:08:32Z\", \"tool\": \"leansearch\", \"query\": \"Relative skeletal filtration of the coend of a split simplicial functor and products with simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.recOn\", \"SimplicialObject.Split.mk'\", \"SimplicialObject.Splitting.casesOn\", \"SimplicialObject.Split.mk\", \"SimplicialObject.Split.forget_obj\", \"SimplicialObject.Splitting.mk\", \"SimplicialObject.Splitting.ι_desc\", \"SimplicialObject.Splitting.cofan\"], \"digest\": \"4bdbc0dadab64aa2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures and Split.lean:199-275, Skeleton.lean:14-30 and 45-105. Splitting.cofan and isColimit give the assumed degreewise coproduct, while Dold-Kan adds a preadditive chain-complex setting. Skeleton/sk concern simplicial objects or sets, not this product-weighted coend and arbitrary relative map. None gives the asserted filtration in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject.Splitting\"",
+   "results": "{\"t\": \"2026-10-17T13:08:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject.Splitting\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Splitting.IndexSet\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.id\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.EqId\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.instFintype\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.instInhabited\", \"CategoryTheory.SimplicialObject.Splitting\", \"CategoryTheory.SimplicialObject.Splitting.summand\", \"CategoryTheory.SimplicialObject.Splitting.N\"], \"digest\": \"611011639f9a6857\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures and Split.lean:199-275, Skeleton.lean:14-30 and 45-105. Splitting.cofan and isColimit give the assumed degreewise coproduct, while Dold-Kan adds a preadditive chain-complex setting. Skeleton/sk concern simplicial objects or sets, not this product-weighted coend and arbitrary relative map. None gives the asserted filtration in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split simplicial diagram of cocontinuous functors has a relative realization filtration by nondegenerate summands applied to simplex boundary pushout products",
+   "results": "{\"t\": \"2026-10-17T13:08:34Z\", \"tool\": \"leanfinder\", \"query\": \"A split simplicial diagram of cocontinuous functors has a relative realization filtration by nondegenerate summands applied to simplex boundary pushout products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.cofan\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"SimplicialObject.Splitting.cofan'\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"SimplicialObject.Splitting.N\", \"AlgebraicTopology.DoldKan.Γ₀.splitting\", \"AlgebraicTopology.DoldKan.Γ₀'\"], \"digest\": \"7bcf23620121cc4d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures and Split.lean:199-275, Skeleton.lean:14-30 and 45-105. Splitting.cofan and isColimit give the assumed degreewise coproduct, while Dold-Kan adds a preadditive chain-complex setting. Skeleton/sk concern simplicial objects or sets, not this product-weighted coend and arbitrary relative map. None gives the asserted filtration in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative skeletal filtration of the geometric realization of a split simplicial object is built by boundary attachments of its nondegenerate pieces in any cocomplete category",
+   "results": "{\"t\": \"2026-10-17T13:09:44Z\", \"tool\": \"leanfinder\", \"query\": \"The relative skeletal filtration of the geometric realization of a split simplicial object is built by boundary attachments of its nondegenerate pieces in any cocomplete category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.sk\", \"SSet.skeleton\", \"SSet.skeleton_succ\", \"CategoryTheory.SimplicialObject.sk\", \"SSet.iSup_skeleton\", \"SSet.skeletonOfMono\", \"SSet.skeletonOfMono_succ\", \"SSet.skeleton_obj_eq_top\"], \"digest\": \"b619c9213e684542\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures and Split.lean:199-275, Skeleton.lean:14-30 and 45-105. Splitting.cofan and isColimit give the assumed degreewise coproduct, while Dold-Kan adds a preadditive chain-complex setting. Skeleton/sk concern simplicial objects or sets, not this product-weighted coend and arbitrary relative map. None gives the asserted filtration in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-framed-projective-diagram-resolution",
@@ -87,5 +325,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-split-functor-coend-filtration",
+  "worker": "stage1",
+  "summary": "Kept the mathematical statement, corrected the standard-simplex/boundary definition citation, and wrote an explicit 16-step categorical proof with no new nodes. Truncated coequalizers, proper-face maps and split degeneracy summands give the absolute skeletal square; its map-out verification checks all simplex morphisms by ordered-image factorization. Coproduct cancellation by universal properties gives the N_p boundary square. Relative pushouts then give the specified cells, the full coend colimit and both naturalities, including p=0 and empty inputs. No subobject, model-category or enrichment hypothesis was used.",
+  "blueprint": "Realizes the existing ancestry of prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction), through the framed simplicial replacement used by lem-coef-framed-projective-diagram-resolution. Supplies its relative split-functor skeletal pushout input; no unit or chapter route change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-85eef5d66",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-85eef5d66 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 16 steps, its three cited definition leaves (simplicial-set, category-colimit, and trivial-kan-fibration's simplex/boundary sentence), the parent framed-projective-diagram-resolution steps 4 and 8, which use the item with i=∂Δ^n→Δ^n and i=K×{k}→K×Δ^1, and unit sk-prop-sf-biduality-general. The statement is unchanged apart from the added boundary-definition citation: no hypothesis added or dropped. It is the classical latching pushout-product skeletal filtration for a split simplicial diagram of colimit-preserving functors, and its cell N_p(A_p)→N_p(L×Δ^p) is right. I recomputed every step: the boundary is the colimit of its proper faces (ordered-image factorisation); the cocone condition for e_p; the b_p/e_p overlap via the relation for ρδ; Step 7's reduction of the proper-surjection relations to the ι_q components via j_{r,τ}, T(σ)j_{r,τ}=j_{p,τσ} and the lower relation for τ; Step 8's epi-mono factorisation covering every α with a or b equal to p; the coproduct reduction to E_{p-1}⊔_{N_p(X×∂)}N_p(X×Δ^p); the relative pushouts Z_p and their colimit with initial map R_T(i); and naturality. Edge cases checked: p=0, empty K or L, i=id, p=1 and non-monic i. Every step is elementary from the definitions. There are no new nodes. Not duplicates: tensor-coend-skeletal-pushouts (needs enriched tensors), weighted-coend-skeletal-filtration (weighted ⊙_J form) and truncated-coend-skeleton-image (simplicial sets only). No cycle and no route departure, because only definitions and Mathlib leaves are cited; tool_uses is empty. Dugger is not local: it is recorded as WANTED and proof_origin is agent, which is acceptable since the proof is self-contained. Mathlib searches are recorded in all three kinds with no match. No fixes."
  }
 }
