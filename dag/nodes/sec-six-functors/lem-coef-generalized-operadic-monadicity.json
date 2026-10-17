@@ -26,7 +26,11 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "lem-coef-inert-operad-color-reconstruction",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-infinity-monadic-bar",
+  "lem-coef-infinity-sifted-colimit-calculus"
  ],
  "proof": [
   {
@@ -242,5 +246,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GeneralizedOperadicMonadicity",
+  "declaration": "SSet.Enhanced.generalized_operadic_monadicity",
+  "file": "lean/Sheaf/CategoryTheory/GeneralizedOperadicMonadicity.lean",
+  "statement": "theorem generalized_operadic_monadicity {M E : SSet.{max (u + 1) v}} (p : M ⟶ monoidalSimplexBase.{max (u + 1) v}) (q : E ⟶ monoidalSimplexBase.{max (u + 1) v}) [Quasicategory E] (hsmall : SSet.Presentability.IsSmall.{u, max (u + 1) v} M) (hM : InertOperad.IsGeneralizedOperad p) (hM0 : SSet.KanComplex (fiber p (monoidalBaseVertex 0))) (hV : IsMonoidalInfinityCategory q) (hVcolim : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (monoidalUnderlying q)) (hsep : ∀ tensor : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying q)) ⟶ monoidalUnderlying q, IsMonoidalTensorOperation q 2 tensor → ∀ (x : (monoidalUnderlying q) _⦋0⦌) (i : Fin 2), SSet.Presentability.PreservesColimitsIn (Algebroid.tensorWith tensor x i) (fun I _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} I)) : ∃ (U : InertOperad.algebras p q ⟶ (ihom (monoidalUnderlying p)).obj (monoidalUnderlying q)) (F : (ihom (monoidalUnderlying p)).obj (monoidalUnderlying q) ⟶ InertOperad.algebras p q) (adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction F U) (T : CoherentMonad ((ihom (monoidalUnderlying p)).obj (monoidalUnderlying q))) (K : InertOperad.algebras p q ⟶ coherentMonadModules T), U ≫ (ihom (monoidalUnderlying p)).map (monoidalFiberInclusion q 1) = InertOperad.algebraInclusion p q ≫ (MonoidalClosed.pre (monoidalFiberInclusion p 1)).app E ∧ coherentMonadFunctor T = F ≫ U ∧ (coherentMonadUnitIndex ▷ ((ihom (monoidalUnderlying p)).obj (monoidalUnderlying q))) ≫ T.action = monadicEdgeFamily adj.unitEdge ∧ monadicMultiplication T = monadicWhisker F U adj.counitEdge ∧ K ≫ coherentModuleForget T = U ∧ monadicComparisonAction T K = monadicWhisker (𝟙 (InertOperad.algebras p q)) U adj.counitEdge ∧ IsFunctorEquivalence K ∧ ∀ I : SSet.{max (u + 1) v}, SSet.Presentability.IsSmall.{u, max (u + 1) v} I → IsInfinitySifted I → HasInfinityColimitsOfShape I (InertOperad.algebras p q) ∧ PreservesInfinityColimitsOfShape I U",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 199141f3c54c. Reuses the landed Q94 generalized operad and fixed-base algebra category; removes both superseded dependency modules. Underlying-color colimits, separate small/ambient universes, normalized restriction on all simplices, and induced-monad unit/multiplication/comparison action are explicit. Statement text and proof route unchanged; statement dependencies gain only landed nodes whose declarations occur in this signature.",
+  "fixed_by": "NT-stage2-Codex-387564420"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-387564420",
+  "group": "Q119",
+  "result": "fix",
+  "note": "Mathematical statement accepted. Complete fixes add required proof-dependency imports and replace the placeholder second reading. Original and corrected modules compile cleanly through scompile.py; signatures match lean.statement verbatim. Findings and evidence are recorded in review.md."
  }
 }

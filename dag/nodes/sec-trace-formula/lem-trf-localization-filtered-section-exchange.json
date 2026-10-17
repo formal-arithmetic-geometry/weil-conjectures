@@ -15,7 +15,10 @@
   "def-weil-closed-immersion",
   "def-weil-open-immersion",
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "lem-trf-filtered-derived-hom-calculus",
+  "lem-trf-open-square-exchange",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -312,5 +315,34 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-c0c018a7b (reviewer sub-agent of L); spot-checked: I read the full delivery: the item, its 7 steps and every cited statement, the parent prop-trf-trace-additivity-open-closed Steps 2/6/7, and the unit sk-i-global-additivity. Sources checked: Varshavsky Ex. 5.2.3 (F^1=j_!j^*, gr^0=i_*i^*, gr^1=j_!j^*, descended by exactness) and Stacks proetale 09AH (line 5135) and 09BM (line 5020), which need j quasi-compact, as the item assumes. The statement is unchanged and not weakened. Small cases checked: U=X, Z=X, K=0, u=0, t=id, and absolute Frobenius on A^1 with Z=V(x), where t^{-1}Z=V(x^p) is a non-Cartesian closed square with the same support, so the forced invertibility of the closed mate is consistent. I recomputed the transposes: Step 5 gives a_{t^*C}B_C=t^*a_C, and Step 6 gives m_C t^*p_C=p_{t^*C} by naturality of theta and the triangle identity. Both are correct. Two faults, both repaired in the fixed item file. (1) E1/C4: Steps 5 and 6 cited prop-weil-open-closed-recollement-adjunctions, which holds only for A=A_{E,n} with ell invertible, while the item allows any finite A on any scheme. The sheaf adjunctions now come from lem-weil-pbc-proetale-ringed-open-closed (j_! -| j^*) and def-weil-pbc-proetale-operations (i^* -| i_*). (2) E5: the statement fixes e_{t,i} and the triangle's unit through the derived adjunction Li^* -| Ri_*, but the proof computed with the termwise sheaf unit and counit without identifying the two. Step 1 now shows they agree, using lem-sfb-adjunction-localization and the characterization in lem-pc-pre-derived-adjoint-functors-general at s,t=id. Steps 4 and 6 now refer to Step 1, and Step 6 also says the termwise c_i represents the derived comparison. proof_deps is updated. I accept the 7 declared tool_uses and added lem-pc-pre-derived-adjoint-functors-general as an eighth. No new nodes, no duplicate (lem-trf-invariant-localization-filtered-lift and lem-trf-open-square-exchange state different things), no cycle, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocalizationFilteredSection",
+  "declaration": "AlgebraicGeometry.Scheme.TrfLocalization.localizationFilteredSectionExchange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.TrfLocalization.closedAdjunction",
+   "AlgebraicGeometry.Scheme.TrfLocalization.openCounit",
+   "AlgebraicGeometry.Scheme.TrfLocalization.openFactors",
+   "AlgebraicGeometry.Scheme.TrfLocalization.closedMate",
+   "AlgebraicGeometry.Scheme.TrfLocalization.SectionData",
+   "AlgebraicGeometry.Scheme.TrfLocalization.PullbackData",
+   "AlgebraicGeometry.Scheme.TrfLocalization.ExchangeData",
+   "AlgebraicGeometry.Scheme.TrfLocalization.localizationFilteredSectionExchange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocalizationFilteredSection.lean",
+  "statement": "theorem localizationFilteredSectionExchange (A : Type u) [CommRing A] [Finite A] {U Z X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X) [IsClosedImmersion i] (h : Set.range j = (Set.range i)ᶜ) : ∃ s : SectionData (sfIntrinsicPullback A j) (sfIntrinsicExtensionByZero j A) (sfIntrinsicPullback A i) (proEtaleConstantModuleDirectImage i A) (sfIntrinsicOpenAdjunction A j) (sfIntrinsicConstantModuleAdjunction i A) (proEtaleConstantDerivedDirectImage i A) (closedAdjunction A i), ∀ (t : X ⟶ X) (tU : U ⟶ U) (tZ : Z ⟶ Z) (wU : tU ≫ j = j ≫ t) (wZ : tZ ≫ i = i ≫ t), IsPullback tU j j t → Nonempty (ExchangeData (sfIntrinsicPullback A j) (sfIntrinsicExtensionByZero j A) (sfIntrinsicPullback A i) (proEtaleConstantModuleDirectImage i A) (sfIntrinsicOpenAdjunction A j) (sfIntrinsicConstantModuleAdjunction i A) s (sfIntrinsicPullback A t) (sfIntrinsicDerivedPullback A tU) (sfIntrinsicDerivedPullback A tZ) (sfIntrinsicDerivedSquarePullback A tU j j t wU) (sfIntrinsicDerivedSquarePullback A tZ i i t wZ) (sfIntrinsicDerivedOpenMate A tU j j t wU))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper structures package the witnesses of this same statement, with their chain-level constructions, localization comparisons, and all normalization equations. No object is selected from the existence theorem. Three already landed statement dependencies expose the finite-filtered localization and the finite-coefficient, section-normalized operations and comparisons used by the statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3aef3d17e",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Reviewed the immutable node, all statement dependencies, sources, and exact Lean declarations. Mathematics and signature are correct; scompile.py passed without diagnostics. Wrote review.md and a complete replacement report under fixes/ correcting the H11 placeholder second reading. No Lean, node, or branch changes."
  }
 }

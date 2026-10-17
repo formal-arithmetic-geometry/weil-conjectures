@@ -409,5 +409,40 @@
   "group": "Q78",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-938ca0e0d (reviewer sub-agent of L); spot-checked: I read the item, all five steps, every cited statement, the parent lem-weil-delta-restriction (steps 9-10 use the item), the main-20261015 blueprint proof paragraph and Stacks 07A4 (sites-cohomology l.3684), 08JB (l.8934), 08J9 (l.8896) and 03EL (sites-modules l.3649). The statement is right as given: arbitrary small ringed site, unbounded objects, identity ring map on the slice, no perfectness. It is not a target and nothing is weakened. Hand checks: the chain-map identity for the counit x⊗p↦q(x)(p), the step-4 adjunction calculation (eq 1 plus naturality of rho gives the transpose), the Koszul sign check, and the small cases (U terminal, zero objects, degree 0, odd degrees). One fault, C3/C4: the statement defined rho only as the canonical comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback, whose statement does not fix its model form; that form appears only in its proof. The equations depend on it, since -rho is also natural. Repaired in fixes/: rho is now normalized on K-flat flat-term models by the summand isomorphisms of the existing reviewed node lem-sfb-localized-site-tensor-restriction (03EL, x⊗y↦x⊗y), as 07A4's proof builds it. Step 2 now proves rho is well defined and natural: direct sums commute with restriction via lem-cbc-sieve-slice-sheafification (a Mathlib leaf) and def-weil-presheaf-modules-sheafification, and the descent node extends the chain isomorphism to D×D. Step 4 takes naturality from step 2; step 5 cites lem-sfb. stmt_deps and proof_deps updated; tool_uses gains lem-sfb. No cycle, no new nodes, no duplicate found. eta's explicit normalization agrees with the internal-Hom node's identity comparison. The declared tool_uses are accepted as generic ringed-site tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose",
+  "declaration": "CategoryTheory.ringedSlice_evaluation_transpose",
+  "declarations": [
+   "CategoryTheory.ringedSliceComplexRestriction",
+   "CategoryTheory.coefficientHomAugmentation",
+   "CategoryTheory.ringedSliceDerivedRestriction",
+   "CategoryTheory.ringedSliceLocalizationIso",
+   "CategoryTheory.RingedKInjectiveHomModel",
+   "CategoryTheory.RingedSliceFlatRestriction",
+   "CategoryTheory.RingedSliceEvaluationComparisons",
+   "CategoryTheory.RingedSliceTensorModel",
+   "CategoryTheory.RingedSliceHomModel",
+   "CategoryTheory.RingedSliceKoszulModel",
+   "CategoryTheory.RingedSliceKoszulModelU",
+   "CategoryTheory.RingedSliceEvaluationNormalized",
+   "CategoryTheory.ringedSlice_evaluation_transpose"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceEvaluationTranspose.lean",
+  "statement": "theorem ringedSlice_evaluation_transpose (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))] (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J A)) (T : CoefficientTensorModels.{u, c, v, w} J A S) (SU : CoefficientClosedStructure (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U))) (TU : CoefficientTensorModels.{u, max c v, v, w'} (J.over U) (A.over U) SU) : Nonempty {d : RingedSliceEvaluationComparisons (derivedInternalHomOfUniverses.{c, v, u, w} J A) (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)) (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U) S SU (RingedSliceFlatRestriction.{c, v, u} J A U) // RingedSliceEvaluationNormalized.{c, v, u, w, w'} J A U S T SU TU d} ∧ ∀ (d : RingedSliceEvaluationComparisons (derivedInternalHomOfUniverses.{c, v, u, w} J A) (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)) (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U) S SU (RingedSliceFlatRestriction.{c, v, u} J A U)) (_hd : RingedSliceEvaluationNormalized.{c, v, u, w, w'} J A U S T SU TU d) (V L M : DerivedCategory (SheafOfModules.{max c v u} ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))) (f : S.tensor.obj (V, L) ⟶ M), ((d.rho ((derivedInternalHomOfUniverses.{c, v, u, w} J A).obj (op L, M)) L).inv ≫ (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).map (S.evaluation L M) = SU.tensor.map (X := ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj ((derivedInternalHomOfUniverses.{c, v, u, w} J A).obj (op L, M)), (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L)) (Y := ((derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)).obj (op ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L), (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj M), (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L)) ((d.eta L M).hom, 𝟙 _) ≫ SU.evaluation ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L) ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj M)) ∧ (SU.transpose _ _ _ ((d.rho V L).inv ≫ (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).map f) = (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).map (S.transpose V L M f) ≫ (d.eta L M).hom) ∧ ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).map (d.sigma L M).hom ≫ (d.rho M L).hom = (d.rho L M).hom ≫ (d.sigmaU ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L) ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj M)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The comparison data and normalization predicates retain the pure-tensor, local Hom-family and Koszul normalizations. The theorem asserts existence of these normalized data and all three equations for every such datum. The derived restriction wrapper only supplies the same localization instance at the two definitionally equal presentations of the slice ring; no new derived category or tensor is chosen. Returned H3 repaired: both symmetry families now include simultaneous naturality on all derived objects, so their Koszul representative formulas determine all components under isomorphisms.",
+  "fixed_by": "NT-stage2-Codex-ed46ece0c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ed46ece0c",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Full review recorded in review.md. Mathematics, canonical normalizations, universes and signatures are correct. Complete fixes repair H9 missing proof-dependency imports and update the report. Original and replacement modules compile cleanly through scompile.py. Branch head unchanged."
  }
 }
