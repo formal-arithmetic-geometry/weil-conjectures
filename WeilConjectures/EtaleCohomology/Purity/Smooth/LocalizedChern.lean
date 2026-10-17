@@ -35,8 +35,11 @@ independence; here the gluing has been done once and for all for the Thom class.
 
 - `AlgebraicGeometry.VectorBundle.restrictSupportedClass_localizedTopChern`: (L1), the class in
   a chart.
-- `AlgebraicGeometry.VectorBundle.restrictSupportedClass_localizedTopChern_comp`: (L2), base
-  change.
+- `AlgebraicGeometry.VectorBundle.restrictSupportedClass_localizedTopChern_comp`,
+  `AlgebraicGeometry.VectorBundle.restrictSupportedClass_localizedTopChern_ofIsPullback`: (L2),
+  base change.
+- (L3), direct sums: `AlgebraicGeometry.VectorBundle.localizedTopChern_sum` in
+  `WeilConjectures.EtaleCohomology.Purity.Smooth.VectorBundleSumThom`.
 -/
 
 @[expose] public section

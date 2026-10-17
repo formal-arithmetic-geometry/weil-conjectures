@@ -222,7 +222,8 @@ lemma sndRes_morphismRestrict (A B : S.Opens) (h : A ≤ B) :
 /-- The direct sum restricted to an open `W` of the base is the fibre product of the
 restrictions. -/
 lemma isPullback_fstRes_sndRes (W : S.Opens) :
-    IsPullback (fstRes (π := π) (ρ := ρ) W W le_rfl) (sndRes (π := π) (ρ := ρ) W W le_rfl) (π ∣_ W) (ρ ∣_ W) := by
+    IsPullback (fstRes (π := π) (ρ := ρ) W W le_rfl)
+      (sndRes (π := π) (ρ := ρ) W W le_rfl) (π ∣_ W) (ρ ∣_ W) := by
   have w : fstRes (π := π) (ρ := ρ) W W le_rfl ≫ π ∣_ W
       = sndRes (π := π) (ρ := ρ) W W le_rfl ≫ ρ ∣_ W := by
     rw [fstRes_morphismRestrict, sndRes_morphismRestrict]
@@ -233,7 +234,8 @@ lemma isPullback_fstRes_sndRes (W : S.Opens) :
     exact this
   have hB : IsPullback (pullback.fst π ρ) (pullback.snd π ρ) π ρ :=
     IsPullback.of_hasPullback π ρ
-  have hout : IsPullback (fstRes (π := π) (ρ := ρ) W W le_rfl ≫ (π ⁻¹ᵁ W).ι) (sndRes (π := π) (ρ := ρ) W W le_rfl) π
+  have hout : IsPullback (fstRes (π := π) (ρ := ρ) W W le_rfl ≫ (π ⁻¹ᵁ W).ι)
+      (sndRes (π := π) (ρ := ρ) W W le_rfl) π
       (ρ ∣_ W ≫ W.ι) := by
     rw [fstRes_ι, morphismRestrict_ι]
     exact hR.paste_horiz hB
