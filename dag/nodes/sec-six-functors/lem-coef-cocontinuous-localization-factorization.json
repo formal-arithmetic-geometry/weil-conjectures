@@ -247,17 +247,18 @@
   "file": "lean/Sheaf/CategoryTheory/CocontinuousLocalizationFactorization.lean",
   "statement": "theorem cocontinuous_localization_factorization (A : SSet.{max (u + 1) v}) [SSet.Quasicategory A] (hA : IsPresentable.{u, v} A) (S : Set (A _⦋1⦌)) (hS : Small.{u} S) (P : A _⦋0⦌ → Prop) (hP : ∀ Z : A _⦋0⦌, P Z ↔ ∀ s : A _⦋1⦌, s ∈ S → SSet.Enhanced.IsWeakHomotopyEquivalence (SSet.Enhanced.canonicalPrecompositionMap (A.δ 1 s) (A.δ 0 s) Z s rfl rfl)) (L : A ⟶ (SSet.Enhanced.fullSubcomplex A P).toSSet) (adj : CoherentAdjunction L (SSet.Enhanced.fullSubcomplex A P).ι) (E : SSet.{max (u + 1) v}) [SSet.Quasicategory E] (hE : IsLocallySmall.{u, max (u + 1) v} E) (hcE : HasSmallColimits.{u, max (u + 1) v} E) : ∃ d : Data.{u, v} S L (SSet.Enhanced.fullSubcomplex A P).ι adj E, ∀ (E' : SSet.{max (u + 1) v}) [SSet.Quasicategory E'], IsLocallySmall.{u, max (u + 1) v} E' → HasSmallColimits.{u, max (u + 1) v} E' → ∀ (H : E ⟶ E'), PreservesColimitsIn H (fun I _ _ ↦ IsSmall.{u, max (u + 1) v} I) → ∃ d' : Data.{u, v} S L (SSet.Enhanced.fullSubcomplex A P).ι adj E', Nonempty (Naturality d d' H)",
   "branch": "newtargets-dag",
-  "by": "NN",
+  "by": "Q26",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Full coherent functor subcomplexes use the existing colimit preservation predicate. Precomposition and restriction are specified on all simplices by inclusion equations. The comparison edges are normalized to whiskering the given adjunction unit and counit by the entire functor parameter. Target postcomposition preserves these maps and edges. The two added statement dependencies are already landed definitions used in the signature. No new notion, dependency repair, or statement correction."
+  "note": "Full coherent functor subcomplexes use the existing colimit preservation predicate. Precomposition and restriction are specified on all simplices by inclusion equations. The comparison edges are normalized to whiskering the given adjunction unit and counit by the entire functor parameter. Target postcomposition preserves these maps and edges. The two added statement dependencies are already landed definitions used in the signature. No new notion, dependency repair, or statement correction.",
+  "fixed_by": "NT-stage2-Codex-8f71c37b3"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-7c98459ef",
-  "group": "NN",
+  "reviewer": "NT-stage2-Codex-8f71c37b3",
+  "group": "Q26",
   "result": "fix",
-  "note": "Lean and mathematics pass; per-file sandbox and library compiles reproduced cleanly. Repaired H11’s placeholder second reading with a complete replacement report under fixes/. Full findings are in review.md. Branch head unchanged."
+  "note": "Review recorded in review.md. Mathematics and Lean clauses pass. Complete fixes replace the placeholder Q26 reading, copy the signature verbatim into the Lean record, and add the landed saturation proof import. Original and fixed modules compile cleanly through scompile.py. Branch head unchanged."
  }
 }

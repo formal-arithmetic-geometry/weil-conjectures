@@ -13,7 +13,8 @@
   "lem-coef-ind-kappa-presentability",
   "lem-coef-presentable-infinity-adjoints",
   "lem-coef-ind-kappa-extension",
-  "def-cbc-enhanced-cartesian-fibration"
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-small-right-adjoint-diagram-compact-model"
  ],
  "proof": [
   {
@@ -259,5 +260,23 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-85219b0d5 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited node statement, the parent lem-coef-ind-presheaf-fibration-accessibility (step 1), the citer lem-coef-ghn-ind-presheaf-cartesian-realization, the unit sk-prop-sf-biduality-general and the ancestor prop-coef-integral-exceptional-adjoint. GHN v3 Def 9.11/10.4 and HTT are online-only and network access is blocked here, so I could not open them. I checked the mathematics independently against HTT 5.3.5.4/5.3.5.10/5.3.5.13/5.5.2.9. The statement is true (u^* is restriction along u) and is not weakened. Small cases: lambda=omega with FinSet->* (Ind(FinSet)=Set, u^* gives the singleton); C=D=*; identity and composite functors; the colimit hypothesis on u is necessary. Step checks: step 2 applies the Ind criterion forward in D and backward in C, including K empty. Step 3 meets all hypotheses of the presentability, extension (final clause) and adjoint nodes. Step 4's Yoneda/adjunction chain is natural in (c,X) and lifts by fullness. Step 5 uses compactness of j_C c and j_D u(c). Step 6 restricts to invariant replete full subcategories in the right order, P_uP_v=P_{vu}. Two faults repaired. (1) B3: the statement's target Cat_infty cited no definition; I added def-cbc-enhanced-cartesian-fibration to stmt_deps plus one cited clause, meaning unchanged. (2) C1: step 1 needs the coherent functor C->C^op on Cat_infty, which is not elementary in the coherent-nerve model and is stated by no DAG node (rg/blueprint search). I added the statement-only node lem-coef-cat-infinity-opposite-involution (created.item = this item; blueprint from prop-coef-integral-exceptional-adjoint, via [item]+its via; same_as []). Its Mathlib grep finds only the strict SSet.opFunctor; LeanSearch and Loogle are recorded as unavailable. Step 1 now cites it and proof_deps was recomputed. Acyclicity was checked and all ids exist. Not a duplicate: the compact-model and small-right-adjoint-diagram nodes cover only uncountable lambda. Accepted tool use for the maintainer to record: lem-cbc-enhanced-functor-cone-calculus (generic componentwise-equivalence and full-subcategory criterion, steps 4-6). Minor and left unchanged: HTT 5.1.3.1 is cited for Yoneda evaluation where Lemma 5.5.2.1 is meant.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IndRightAdjointCoherent",
+  "declaration": "SSet.Presentability.ind_right_adjoint_coherent",
+  "statement": "theorem ind_right_adjoint_coherent (κ : Cardinal.{u}) (hκ : κ.IsRegular) : Nonempty (CompactIndRight.{u, v} κ)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/IndRightAdjointCoherent.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-05fc5aba4",
+  "group": "NI",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, universes, edge cases, and pilot gates. Both immutable Lean files compiled cleanly through scompile.py, with the consumer using the repaired dependency. No fixes required."
  }
 }

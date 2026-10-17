@@ -179,17 +179,17 @@
   "file": "lean/Sheaf/CategoryTheory/SmallRightAdjointDiagramCompactModel.lean",
   "statement": "theorem small_right_adjoint_diagram_compact_model (A : SSet.{u}) [Quasicategory A] (H : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op ⟶ Enhanced.CatInfinity.{max (u + 1) v}) (hH : ∀ a : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op _⦋0⦌, @IsPresentable.{u, v} (compactDiagramValue H a) (compactCatQuasicategory (H.app _ a))) (hR : ∀ e : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op _⦋1⦌, ∃ L : compactDiagramValue H ((SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op.δ 0 e) ⟶ compactDiagramValue H ((SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op.δ 1 e), Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L (compactDiagramArrow H e))) : ∃ κ : Cardinal.{u}, Cardinal.aleph0 < κ ∧ κ.IsRegular ∧ (∀ a : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op _⦋0⦌, @IsKappaAccessible _ (compactCatQuasicategory (H.app _ a)) κ) ∧ (∀ e : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op _⦋1⦌, PreservesKappaFiltered κ (compactDiagramArrow H e)) ∧ ∃ (R : CompactIndRight.{u, v} κ) (F0 : SSet.uliftFunctor.{max (u + 1) v + 1}.obj A ⟶ SSet.uliftFunctor.{max (u + 1) v + 1}.obj (compactRex κ)), Enhanced.AreNaturallyEquivalent H (SSet.opFunctor.map F0 ≫ R.diagram) ∧ ∀ a : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A) _⦋0⦌, ∃ k : SSet.uliftFunctor.{max (u + 1) v}.obj (compactRexValue (F0.app _ a).down) ⟶ (Enhanced.fullSubcomplex (compactDiagramValue H (SSet.opObjEquiv.symm a)) (@IsKappaCompact _ (compactCatQuasicategory (H.app _ (SSet.opObjEquiv.symm a))) κ)).toSSet, Enhanced.IsFunctorEquivalence k",
   "branch": "newtargets-dag",
-  "by": "Q97",
+  "by": "NI",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Uses the published CatInfinity, Ind completion, Yoneda and coherent-adjunction interfaces. Helpers belong to the compact-model notion introduced explicitly by this item; the only postponed theorem is the item itself. The containing universe remains independent of the small universe. Added statement dependencies are already landed nodes; no mathematical statement is changed."
+  "note": "Dependency interface repair requested by the return on lem-coef-ind-right-adjoint-coherent: CompactIndRight formerly required filtered-colimit preservation only for L_u. Its new right_preserves field requires it for the actual compactContravariantArrow diagram (ULift.up e), the same right adjoint in extensions. The canonical compact-model theorem and every existing field are retained; no mathematical statement is changed. Both the dependency module and the consumer are compiled in this delivery."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d1066c60a",
-  "group": "Q97",
+  "reviewer": "NT-stage2-Codex-05fc5aba4",
+  "group": "NI",
   "result": "pass",
-  "note": "Item node statement unchanged and lean.statement verbatim in the file; the 7 dep node copies are identical to the side clone; the 5 added stmt_deps are landed, reviewed and acyclic. Clause check: A quasicategory in u; H a whole simplicial map into CatInfinity.{max(u+1) v}; hH IsPresentable with CatInfinity's own quasicategory witness; hR is a CoherentAdjunction with L as left adjoint; κ:Cardinal.{u}, aleph0<κ, regular; IsKappaAccessible values and PreservesKappaFiltered (small κ-filtered) edges; compactRex is a real subcomplex with κ-small colimits on every vertex (empty diagram included) and preservation on every mapping 0-simplex; F0 a whole simplicial map; Ind via the published indKappa with Yoneda-normalized models and κ-filtered extensions whose right adjoints are the R-edges (variance checked); H ≃ F0^op≫R as an equivalence edge; per-vertex IsFunctorEquivalence to the IsKappaCompact full subcomplex. No extra assumptions or universe equalities; the only sorry is the item theorem; docstrings carry source and blueprint tags. nt_compile reproduces a clean 3.1 s compile. Non-blocking note: Ind^R's higher coherence is pinned only on objects and arrows, as far as the node states."
+  "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, universes, edge cases, and pilot gates. Both immutable Lean files compiled cleanly through scompile.py, with the consumer using the repaired dependency. No fixes required."
  }
 }
