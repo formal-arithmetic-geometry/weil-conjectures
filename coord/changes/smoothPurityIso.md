@@ -31,9 +31,9 @@ noncomputable def smoothPurityIso :
   sorry
 ```
 
-Identical declaration, with a STATEMENT-DISPUTED comment immediately before its docstring.
-No change to its elaborated signature, body, attributes, visibility or imports. The report
-requests authorization to retain the missing smoothness binder before attempting its proof.
+The delivered body is now a real Iso constructor from the normalized witness theorem. The
+written result type remains unchanged and the smoothness instance remains omitted from the
+elaborated signature; the witness is intentionally a separate theorem obligation.
 
 ## Users
 
@@ -48,4 +48,4 @@ proof is retained in scratch and is not part of this delivery. No forced adaptat
 
 ## Status
 
-landed 20261017T133353-L-2578124 2026-10-17 (merge of deliver/G1/WeilConjectures.SmoothPurity.Defs)
+landed 20261017T165115-L-3502871 2026-10-17 (merge of deliver/A4/WeilConjectures.SmoothPurity.Defs)
