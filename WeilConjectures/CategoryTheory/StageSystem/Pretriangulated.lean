@@ -69,12 +69,14 @@ def distinguishedTriangles : Set (Triangle S.PairCategory) :=
   fun T ↦ ∃ (i : I) (τ : Triangle (C i)), τ ∈ distTriang (C i) ∧
     Nonempty (T ≅ (S.ι i).mapTriangle.obj τ)
 
+omit [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated] in
 lemma isomorphic_distinguished (T₁ : Triangle S.PairCategory)
     (h₁ : T₁ ∈ distinguishedTriangles S) (T₂ : Triangle S.PairCategory) (e : T₂ ≅ T₁) :
     T₂ ∈ distinguishedTriangles S := by
   obtain ⟨i, τ, hτ, ⟨e'⟩⟩ := h₁
   exact ⟨i, τ, hτ, ⟨e ≪≫ e'⟩⟩
 
+omit [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated] in
 lemma mapTriangle_mem_distinguishedTriangles {i : I} (τ : Triangle (C i))
     (hτ : τ ∈ distTriang (C i)) : (S.ι i).mapTriangle.obj τ ∈ distinguishedTriangles S :=
   ⟨i, τ, hτ, ⟨Iso.refl _⟩⟩
@@ -95,16 +97,39 @@ lemma contractible_distinguished [Nonempty I] (X : S.PairCategory) :
   · exact (isZero_ι_obj (isZero_zero _)).eq_of_tgt _ _
   · exact (isZero_zero _).eq_of_src _ _
 
+variable (S) in
+/-- The *common-stage cone triangle* (blueprint `def-weil-pbc-common-stage-cones`): for a
+morphism of the pair category represented by `u : T x ⟶ T y` at a stage `n` and a triangle
+`u, v, w` of the stage `n`, the triangle `X ⟶ Y ⟶ (n, Z) ⟶ X⟦1⟧` of the pair category with first
+arrow represented by `u`, second arrow represented by `v` and third arrow represented by `w`
+followed by the shift comparison. -/
+noncomputable def coneTriangle {X Y : S.PairCategory} {n : I} (hX : X.stage ≤ n)
+    (hY : Y.stage ≤ n) (u : X.toStage hX ⟶ Y.toStage hY) {Z : C n} (v : Y.toStage hY ⟶ Z)
+    (w : Z ⟶ (X.toStage hX)⟦(1 : ℤ)⟧) : Triangle S.PairCategory :=
+  Triangle.mk (mkHom n hX hY u) ((S.isoToStage Y hY).hom ≫ (S.ι n).map v)
+    (((S.ι n).map w ≫ ((S.ι n).commShiftIso (1 : ℤ)).hom.app (X.toStage hX)) ≫
+      (S.isoToStage X hX).inv⟦(1 : ℤ)⟧')
+
+omit [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated] in
+/-- The common-stage cone triangle of a distinguished triangle of a stage is distinguished. -/
+lemma coneTriangle_mem_distinguishedTriangles {X Y : S.PairCategory} {n : I}
+    (hX : X.stage ≤ n) (hY : Y.stage ≤ n) (u : X.toStage hX ⟶ Y.toStage hY) {Z : C n}
+    (v : Y.toStage hY ⟶ Z) (w : Z ⟶ (X.toStage hX)⟦(1 : ℤ)⟧)
+    (h : Triangle.mk u v w ∈ distTriang (C n)) :
+    coneTriangle S hX hY u v w ∈ distinguishedTriangles S := by
+  have comm : (S.ι n).map u ≫ (S.isoToStage Y hY).inv =
+      (S.isoToStage X hX).inv ≫ mkHom n hX hY u := by
+    simp [mkHom_eq_isoToStage]
+  exact ⟨n, _, h, ⟨(triangleOfArrowIso ((S.ι n).mapTriangle.obj (Triangle.mk u v w))
+    (mkHom n hX hY u) (S.isoToStage X hX).symm (S.isoToStage Y hY).symm comm).symm⟩⟩
+
+omit [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated] in
 lemma distinguished_cocone_triangle {X Y : S.PairCategory} (f : X ⟶ Y) :
     ∃ (Z : S.PairCategory) (g : Y ⟶ Z) (h : Z ⟶ X⟦(1 : ℤ)⟧),
       Triangle.mk f g h ∈ distinguishedTriangles S := by
   obtain ⟨n, -, hX, hY, u, rfl⟩ := exists_le_mkHom_eq f X.stage
-  obtain ⟨Z, g, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle u
-  have comm : (S.ι n).map u ≫ (S.isoToStage Y hY).inv =
-      (S.isoToStage X hX).inv ≫ mkHom n hX hY u := by
-    simp [mkHom_eq_isoToStage]
-  exact ⟨_, _, _, n, _, hT, ⟨(triangleOfArrowIso ((S.ι n).mapTriangle.obj (Triangle.mk u g h))
-    (mkHom n hX hY u) (S.isoToStage X hX).symm (S.isoToStage Y hY).symm comm).symm⟩⟩
+  obtain ⟨Z, v, w, hT⟩ := Pretriangulated.distinguished_cocone_triangle u
+  exact ⟨_, _, _, coneTriangle_mem_distinguishedTriangles hX hY u v w hT⟩
 
 lemma rotate_distinguished_triangle (T : Triangle S.PairCategory) :
     T ∈ distinguishedTriangles S ↔ T.rotate ∈ distinguishedTriangles S := by
@@ -128,25 +153,40 @@ lemma exists_hom₃_ι {i j : I} (τ₁ : Triangle (C i)) (τ₂ : Triangle (C j
       ((S.ι i).map τ₁.mor₃ ≫ ((S.ι i).commShiftIso (1 : ℤ)).hom.app τ₁.obj₁) ≫ a⟦(1 : ℤ)⟧' =
         c ≫ ((S.ι j).map τ₂.mor₃ ≫ ((S.ι j).commShiftIso (1 : ℤ)).hom.app τ₂.obj₁) := by
   obtain ⟨m, hi, hj⟩ := exists_ge_ge i j
-  obtain ⟨n, -, hX, hY, hX', hY', u, u', rfl, rfl⟩ := exists_common_stage a b m
-  rw [ι_map_eq (hX : i ≤ n), ι_map_eq (hY : j ≤ n), mkHom_comp_mkHom, mkHom_comp_mkHom, mkHom_eq_mkHom_iff] at comm
+  obtain ⟨n, -, hX, hY, hX', hY', u, u', rfl, rfl⟩ := exists_common_stage (X := ⟨i, τ₁.obj₁⟩)
+    (Y := ⟨j, τ₂.obj₁⟩) (X' := ⟨i, τ₁.obj₂⟩) (Y' := ⟨j, τ₂.obj₂⟩) a b m
+  rw [ι_map_eq (i := i) hX, ι_map_eq (i := j) hY, mkHom_comp_mkHom, mkHom_comp_mkHom,
+    mkHom_eq_mkHom_iff] at comm
   obtain ⟨q, hq, e⟩ := comm
   rw [← tr_injective, tr_comp, tr_comp, tr_map, tr_map] at e
-  obtain ⟨c, hc₂, hc₃⟩ := Pretriangulated.complete_distinguished_triangle_morphism _ _
-    ((S.T (hX.trans hq)).map_distinguished _ h₁) ((S.T (hY.trans hq)).map_distinguished _ h₂)
+  have hiq : i ≤ q := hX.trans hq
+  have hjq : j ≤ q := hY.trans hq
+  have hd₁ : Triangle.mk ((S.T hiq).map τ₁.mor₁) ((S.T hiq).map τ₁.mor₂)
+      ((S.T hiq).map τ₁.mor₃ ≫ ((S.T hiq).commShiftIso (1 : ℤ)).hom.app τ₁.obj₁) ∈
+        distTriang (C q) := (S.T hiq).map_distinguished _ h₁
+  have hd₂ : Triangle.mk ((S.T hjq).map τ₂.mor₁) ((S.T hjq).map τ₂.mor₂)
+      ((S.T hjq).map τ₂.mor₃ ≫ ((S.T hjq).commShiftIso (1 : ℤ)).hom.app τ₂.obj₁) ∈
+        distTriang (C q) := (S.T hjq).map_distinguished _ h₂
+  obtain ⟨c, hc₂, hc₃⟩ := Pretriangulated.complete_distinguished_triangle_morphism _ _ hd₁ hd₂
     (S.tr hq u) (S.tr hq u') e
   refine ⟨mkHom q (hX.trans hq) (hY.trans hq) c, ?_, ?_⟩
-  · rw [← mkHom_tr hq u', ι_map_eq (hX.trans hq : i ≤ q), ι_map_eq (hY.trans hq : j ≤ q), mkHom_comp_mkHom,
-      mkHom_comp_mkHom]
-    exact congr_arg _ hc₂
-  · simp only [ι_commShiftIso_hom_app, comp_id]
-    rw [← mkHom_tr hq u, shiftFunctor_map_mkHom, ι_map_eq (hX.trans hq : i ≤ q), ι_map_eq (hY.trans hq : j ≤ q),
+  · rw [← mkHom_tr hq u', ι_map_eq (i := i) (hX.trans hq), ι_map_eq (i := j) (hY.trans hq),
       mkHom_comp_mkHom, mkHom_comp_mkHom]
+    exact congr_arg _ hc₂
+  · rw [ι_commShiftIso_hom_app, ι_commShiftIso_hom_app]
+    erw [comp_id, comp_id]
+    rw [← mkHom_tr hq u, shiftFunctor_map_mkHom, ι_map_eq (i := i) (hX.trans hq),
+      ι_map_eq (i := j) (hY.trans hq)]
+    erw [mkHom_comp_mkHom, mkHom_comp_mkHom]
     congr 1
-    simp only [Functor.mapTriangle_obj, Triangle.mk_mor₃, Triangle.mk_obj₁, Category.assoc]
-      at hc₃
-    rw [reassoc_of% hc₃]
-    simp
+    have hc₃' : (S.T hiq).map τ₁.mor₃ ≫ ((S.T hiq).commShiftIso (1 : ℤ)).hom.app τ₁.obj₁ ≫
+        (S.tr hq u)⟦(1 : ℤ)⟧' =
+          c ≫ (S.T hjq).map τ₂.mor₃ ≫ ((S.T hjq).commShiftIso (1 : ℤ)).hom.app τ₂.obj₁ := by
+      rw [← Category.assoc]
+      exact hc₃
+    have := hc₃' =≫ ((S.T hjq).commShiftIso (1 : ℤ)).inv.app τ₂.obj₁
+    simp only [Category.assoc, Iso.hom_inv_id_app] at this
+    exact this.trans (congr_arg (c ≫ ·) (comp_id _))
 
 lemma complete_distinguished_triangle_morphism (T₁ T₂ : Triangle S.PairCategory)
     (h₁ : T₁ ∈ distinguishedTriangles S) (h₂ : T₂ ∈ distinguishedTriangles S)

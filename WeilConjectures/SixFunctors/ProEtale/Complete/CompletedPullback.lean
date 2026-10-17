@@ -56,9 +56,15 @@ open Scheme
 
 section DerivedCompletion
 
+open MonoidalCategory
+
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R] (I : Ideal R)
   [HasCountableProducts (_root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))]
+
+noncomputable local instance (priority := high) completedPullbackMonoidalCategory :
+    MonoidalCategory (_root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
+  (_root_.DerivedCategory.sheafTensorStructure J R).monoidalCategory
 
 /-- A chosen homotopy limit cone `R lim_n (K ⊗ᴸ R/Iⁿ)` over the tower of reductions
 `DerivedCategory.derivedCompletionDiagram` of an object `K` of `D(J, R)`. -/
@@ -71,6 +77,54 @@ lemma _root_.DerivedCategory.isHomotopyLimit_derivedCompletionLimitCone
     (K : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     IsHomotopyLimit (_root_.DerivedCategory.derivedCompletionLimitCone J I K) :=
   isHomotopyLimit_homotopyLimitCone _
+
+
+/-- The derived completion `K^∧ = R lim_n (K ⊗ᴸ R/Iⁿ)` of an object `K` of `D(J, R)`: the
+point of the chosen homotopy limit `DerivedCategory.derivedCompletionLimitCone`. It is only
+determined up to non-unique isomorphism. -/
+noncomputable def _root_.DerivedCategory.derivedCompletion
+    (K : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
+    _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
+  (_root_.DerivedCategory.derivedCompletionLimitCone J I K).pt
+
+/-- The morphism `K ⊗ᴸ R/Iⁿ ⟶ K' ⊗ᴸ R/Iⁿ` of towers of reductions induced by `f : K ⟶ K'`. -/
+noncomputable def _root_.DerivedCategory.derivedCompletionDiagramMap
+    {K K' : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} (f : K ⟶ K') :
+    _root_.DerivedCategory.derivedCompletionDiagram J I K ⟶
+      _root_.DerivedCategory.derivedCompletionDiagram J I K' :=
+  { app n := f ▷ (_root_.DerivedCategory.quotPowFunctor J I).obj n
+    naturality _ _ φ := whisker_exchange f _ }
+
+instance _root_.DerivedCategory.isIso_derivedCompletionDiagramMap_app
+    {K K' : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} (f : K ⟶ K') [IsIso f]
+    (n : ℕᵒᵖ) : IsIso ((_root_.DerivedCategory.derivedCompletionDiagramMap J I f).app n) :=
+  inferInstanceAs (IsIso (f ▷ (_root_.DerivedCategory.quotPowFunctor J I).obj n))
+
+lemma _root_.DerivedCategory.derivedCompletionDiagramMap_comp
+    {K K' K'' : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} (f : K ⟶ K')
+    (f' : K' ⟶ K'') :
+    _root_.DerivedCategory.derivedCompletionDiagramMap J I (f ≫ f') =
+      _root_.DerivedCategory.derivedCompletionDiagramMap J I f ≫
+        _root_.DerivedCategory.derivedCompletionDiagramMap J I f' := by
+  ext n
+  rw [NatTrans.comp_app]
+  exact comp_whiskerRight f f' _
+
+/-- The map `K^∧ ⟶ K'^∧` of chosen derived completions induced by `f : K ⟶ K'`
+(`CategoryTheory.Pretriangulated.homotopyLimitMap`); it is a choice, and an isomorphism when
+`f` is. -/
+noncomputable def _root_.DerivedCategory.derivedCompletionMap
+    {K K' : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} (f : K ⟶ K') :
+    _root_.DerivedCategory.derivedCompletion J I K ⟶
+      _root_.DerivedCategory.derivedCompletion J I K' :=
+  homotopyLimitMap (_root_.DerivedCategory.derivedCompletionDiagramMap J I f)
+
+/-- The completion map `K ⟶ K^∧`, a lift of the reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ` to the chosen
+homotopy limit (`CategoryTheory.Pretriangulated.homotopyLimitLift`); it is a choice. -/
+noncomputable def _root_.DerivedCategory.derivedCompletionUnit
+    (K : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
+    K ⟶ _root_.DerivedCategory.derivedCompletion J I K :=
+  homotopyLimitLift _ (_root_.DerivedCategory.derivedCompletionCone J I K)
 
 end DerivedCompletion
 

@@ -123,8 +123,12 @@ theorem exists_open_isClosedImmersion_of_isLimit [∀ i, IsNoetherian (D.obj i)]
   set E := opensDiagram BC j₀ W₀
   set cE := opensCone BC c' j₀ W₀
   have hcE : IsLimit cE := isLimitOpensCone BC c' hc' j₀ W₀
-  set z' : Z ⟶ cE.pt := z ≫ ((pullback p (c.π.app i)).isoOfEq hW₀.symm).hom
-  have hz' : z' ≫ (c'.π.app j₀ ⁻¹ᵁ W₀).ι = z ≫ W.ι := by simp [z']
+  set z' : Z ⟶ cE.pt := z ≫ (c'.pt.isoOfEq hW₀.symm).hom
+  have hz' : z' ≫ (c'.π.app j₀ ⁻¹ᵁ W₀).ι = z ≫ W.ι := by
+    simp only [z', Category.assoc]
+    exact congrArg (z ≫ ·) (Scheme.isoOfEq_hom_ι c'.pt hW₀.symm)
+  have (j : Over j₀) : TopologicalSpace.NoetherianSpace (E.obj j) :=
+    inferInstanceAs (TopologicalSpace.NoetherianSpace (BC.map j.hom ⁻¹ᵁ W₀).toScheme)
   obtain ⟨k, Zk, zk, s, hzk₁, hzk₂, hs⟩ :=
     exists_isClosedImmersion_surjective_isPullback_of_isLimit hcE z'
   have hpre : c'.π.app k.left ⁻¹ᵁ (BC.map k.hom ⁻¹ᵁ W₀) = W := by
@@ -132,13 +136,16 @@ theorem exists_open_isClosedImmersion_of_isLimit [∀ i, IsNoetherian (D.obj i)]
   refine ⟨k.left.left, k.left.hom, BC.map k.hom ⁻¹ᵁ W₀, Zk, zk, s, hzk₁, hzk₂, hpre, ?_⟩
   have h₂ : IsPullback (cE.π.app k) (c'.π.app j₀ ⁻¹ᵁ W₀).ι (BC.map k.hom ⁻¹ᵁ W₀).ι
       (c'.π.app k.left) := by
-    refine IsOpenImmersion.isPullback _ _ _ _ (Scheme.Hom.resLE_comp_ι _ _) ?_
+    refine IsOpenImmersion.isPullback _ _ _ _ (Scheme.Hom.resLE_comp_ι ..).symm ?_
     rw [Scheme.Opens.opensRange_ι, Scheme.Opens.opensRange_ι, ← Scheme.Hom.comp_preimage,
       c'.w]
   have h₃ := isPullback_baseChangeCone_π D c p k.left
   have := (hs.paste_vert h₂).paste_vert h₃
-  rw [← hz']
-  simpa only [Category.assoc] using this
+  have e : (z' ≫ (c'.π.app j₀ ⁻¹ᵁ W₀).ι) ≫ pullback.snd p (c.π.app i) =
+      z ≫ W.ι ≫ pullback.snd p (c.π.app i) := by
+    rw [hz', Category.assoc]
+  rw [e] at this
+  exact this
 
 end
 

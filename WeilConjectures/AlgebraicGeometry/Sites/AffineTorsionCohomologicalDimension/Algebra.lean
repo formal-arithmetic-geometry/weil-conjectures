@@ -8,6 +8,10 @@ module
 public import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Unramified.Finite
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.Integral
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
@@ -131,3 +135,33 @@ theorem exists_ratFunc_ringHom_of_mem_maximalIdeal {u : R}
     simp [ψ]
 
 end RatFunc
+
+section Etale
+
+open TensorProduct
+
+/-- An étale algebra `B` over a domain `P` is algebraic: after base change to the fraction field
+`K` of `P` it becomes an étale, hence finite, `K`-algebra, so every element of `B` satisfies a
+nonzero polynomial over `K` after inverting a nonzero element of `P`. -/
+theorem Algebra.IsAlgebraic.of_etale (P : Type u) (B : Type v) [CommRing P] [IsDomain P]
+    [CommRing B] [Algebra P B] [Algebra.Etale P B] : Algebra.IsAlgebraic P B := by
+  let K := FractionRing P
+  have : Module.Finite K (K ⊗[P] B) := Algebra.FormallyUnramified.finite_of_free K _
+  refine ⟨fun b ↦ ?_⟩
+  have h₁ : IsAlgebraic K ((1 : K) ⊗ₜ[P] b) :=
+    (Algebra.IsIntegral.isIntegral (R := K) _).isAlgebraic
+  obtain ⟨p, hp, hpb⟩ := (IsFractionRing.isAlgebraic_iff P K (K ⊗[P] B)).2 h₁
+  have h₂ : TensorProduct.mk P K B 1 (aeval b p) = TensorProduct.mk P K B 1 0 := by
+    rw [TensorProduct.mk_apply, TensorProduct.mk_apply, tmul_zero, ← hpb,
+      ← Algebra.TensorProduct.includeRight_apply, ← Polynomial.aeval_algHom_apply]
+    rfl
+  have hloc : IsLocalizedModule (nonZeroDivisors P) (TensorProduct.mk P K B 1) :=
+    (isLocalizedModule_iff_isBaseChange (nonZeroDivisors P) K _).2
+      (TensorProduct.isBaseChange P B K)
+  obtain ⟨c, hc⟩ := hloc.exists_of_eq h₂
+  refine ⟨(c : P) • p, smul_ne_zero (nonZeroDivisors.coe_ne_zero c) hp, ?_⟩
+  rw [smul_zero] at hc
+  rw [map_smul]
+  exact hc
+
+end Etale

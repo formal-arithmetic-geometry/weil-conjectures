@@ -1472,6 +1472,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorizati
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
+public import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothLimit
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
@@ -2534,6 +2535,7 @@ public import WeilConjectures.Compactification.StrictTransformBlowup
 public import WeilConjectures.Compactification.StrictTransformChartModel
 public import WeilConjectures.Compactification.Tower
 public import WeilConjectures.Compactification.Triangle
+public import WeilConjectures.Compactification.TriangleOfIsPullback
 public import WeilConjectures.Compactification.TwoOpen
 public import WeilConjectures.Compactification.TwoOpenComparison
 public import WeilConjectures.Compactification.TwoOpenComparisonIso
@@ -3920,7 +3922,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BettiCardinalities
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CoefficientDevissage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportBaseChange
@@ -3951,11 +3955,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancell
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GenericConstructibility
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperBaseChangeHomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
