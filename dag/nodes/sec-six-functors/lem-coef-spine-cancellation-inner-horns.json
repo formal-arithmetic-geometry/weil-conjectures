@@ -29,7 +29,8 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
   "def-cbc-enhanced-diagrams-cones",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-cbc-spine-inner-anodyne"
  ],
  "proof": [
   {
@@ -330,5 +331,24 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-808343454 (reviewer sub-agent of L); spot-checked: Read the full item (statement, 13 steps), the three cited definition statements (def-weil-pbc-simplicial-set, def-cbc-enhanced-diagrams-cones, def-weil-pbc-category-colimit), the parent lem-coef-segal-vertical-restriction-inner step 5, and the source itself. The source is Joyal–Tierney arXiv:math/0607820: the right-cancellation definition and Lemma 3.5 with its full proof on pp.16–17, the n-chain definition before Lemma 1.21, Definition 1.10 and appendix Definition 7.4. The paper is not in literature/; the report has the WANTED line and proof_origin is agent. The statement is the source's inner-horn case. The item's closure hypotheses (including all arrow retracts) imply the source's saturation, and the parent uses exactly this conclusion. It is unchanged and not weakened. The steps follow the source's i_n/j_n/k_n pushouts and its double induction. They also fill in the m=2 case (I_1=Δ^1) and the n=3 case that the source glosses over, and they state the induction claim, base and step explicitly. Step 9's face-intersection identification is correct on all simplices. Every cancellation is in the correct direction and applied to subset inclusions. All steps marked elementary are justified. The citations say what the steps take from them, and since only definitions are cited there is no route issue. My own script checked every set identity used, for n=2..7 and every S and b: 300 cases, all passed. No duplicate in the DAG: lem-cbc-spine-inner-anodyne is the converse direction, and the labelled-spine node is a different statement. No Mathlib leaf: I checked Path.lean 369-384, StrictSegal and AnodyneExtensions. There are no new nodes, no fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SpineCancellationInnerHorns",
+  "declaration": "SSet.inner_horns_of_spines",
+  "file": "lean/Sheaf/AlgebraicTopology/SpineCancellationInnerHorns.lean",
+  "statement": "theorem inner_horns_of_spines (A : MorphismProperty SSet.{u}) (hmono : A ≤ monomorphisms SSet.{u}) (hiso : isomorphisms SSet.{u} ≤ A) [A.IsStableUnderComposition] [A.IsStableUnderCobaseChange] [MorphismProperty.IsStableUnderCoproducts.{u} A] [MorphismProperty.IsStableUnderTransfiniteComposition.{u} A] [A.IsStableUnderRetracts] (hcancel : ∀ {X Y Z : SSet.{u}} (f : X ⟶ Y) (g : Y ⟶ Z), Mono f → Mono g → A f → A (f ≫ g) → A g) (hspine : ∀ (n : ℕ), 2 ≤ n → A (simplexSpine.{u} n).ι) : ∀ (n : ℕ), 2 ≤ n → ∀ (i : Fin (n + 1)), 0 < i → i < Fin.last n → A (horn.{u} n i).ι",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already-landed SSet.simplexSpine of lem-cbc-spine-inner-anodyne; that node was added to stmt_deps to cite its construction, not its inner-anodyne assertion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ded9827ae",
+  "group": "Q66",
+  "result": "pass",
+  "note": "I matched all 12 node clauses to SSet.inner_horns_of_spines; none is weaker or stronger. simplexSpine (last vertex at most first+1) equals the consecutive-edge spine for n>=2, constant simplices included. Mathlib's coproduct, transfinite-composition and retract classes match the node's closures (transfinite is equivalent to the interval version given iso and composition closure). Cancellation is among monos in the correct direction. The conclusion covers exactly the inner horns for n>=2, 0<i<n. No extra hypotheses or universe restrictions. Edge cases n=2, n=0/1, empty objects and zero-length compositions are covered. The node changed only in lean and in stmt_deps, which gained the landed lem-cbc-spine-inner-anodyne (permitted, no cycle). lean.statement is verbatim. No duplicate, no definition, a single sorry, source and blueprint docstrings with all 13 steps. The citer SegalVerticalRestrictionInner uses it consistently. nt_compile --json on the snapshot file gave rc=0 with no errors. No findings."
  }
 }

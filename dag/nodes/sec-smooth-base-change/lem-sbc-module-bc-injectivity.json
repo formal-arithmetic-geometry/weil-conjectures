@@ -105,12 +105,14 @@
   "is": null
  },
  "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap",
+  "declaration": "AlgebraicGeometry.Etale.UniversalBaseChangeProperty.mono_baseChangeHomologyMap_and_cokernel",
+  "statement": "theorem Etale.UniversalBaseChangeProperty.mono_baseChangeHomologyMap_and_cokernel {q : ℤ}\n    (hq : 1 ≤ q) (huniv : Etale.UniversalBaseChangeProperty Λ p (q - 1)) {S' X' : Scheme.{u}}\n    {a : S' ⟶ S} {b : X' ⟶ X} {p' : X' ⟶ S'} (hp : IsPullback b p' p a) {g : T ⟶ S'}\n    {h : Y ⟶ X'} [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p') :\n    (∀ F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),\n      Mono (Etale.baseChangeHomologyMap Λ sq q F)) ∧\n    (∀ {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (α : F ⟶ G) [Mono α],\n      Mono (cokernel.map (Etale.baseChangeHomologyMap Λ sq q F)\n        (Etale.baseChangeHomologyMap Λ sq q G) ((Etale.baseChangeSourceFunctor Λ p' g q).map α)\n        ((Etale.baseChangeTargetFunctor Λ e h q).map α)\n        (Etale.baseChangeHomologyMap_naturality Λ sq q α))) ∧\n    (∀ {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (α : F ⟶ G) [Mono α]\n      [Injective G],\n      Mono (cokernel.desc (Etale.baseChangeHomologyMap Λ sq q F)\n        ((Etale.baseChangeTargetFunctor Λ e h q).map α)\n        (Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective Λ sq (by lia) α)))",
   "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.UniversalBaseChangeProperty.mono_baseChangeHomologyMap_and_cokernel",
-   "AlgebraicGeometry.Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 01:50 UTC for group Q100, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: The first declaration gives clauses (1), (2), and the indu"
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing arbitrary-commutative-ring version at CriticalMap.lean:204–223, also confirmed by scompile.py --source. Its three conjuncts give (1) the monomorphism for every coefficient sheaf, (2) the natural cokernel monomorphism for every coefficient monomorphism, and (3) the cokernel-desc monomorphism into the higher direct image for injective G. The proof argument to cokernel.desc is baseChangeHomologyMap_comp_map_eq_zero_of_injective, which supplies the stated vanishing of the coefficient composite. The section parameters are an arbitrary commutative Λ, schemes and scheme morphisms; there is no torsion or invertibility hypothesis. IsPullback encodes the two fibre products without choosing special representatives."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -140,5 +142,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9581e47b7",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Existing-declaration binding: only the node's lean field and the report change, no new Lean module. lean.statement is a verbatim copy of the upstream theorem signature (CriticalMap.lean:204-219; script comparison True; side and slopmaster2 copies identical). Every clause matches the node: any commutative ring Λ (u+1 size convention as in the landed sk-def-bc), q>=1, UniversalBaseChangeProperty in degree q-1 matching Defs.lean:199-210, g quasi-compact and quasi-separated only, fibre products as IsPullback squares. (1) Mono b_F for every F; (2) the cokernel map induced by naturality is mono; (3) with Injective G, the cokernel.desc map is mono, and the vanishing is supplied by the sorry-free lemma baseChangeHomologyMap_comp_map_eq_zero_of_injective (q != 0). No torsion or invertibility assumption and no extra universe equality. Edge cases checked: q=1, q<=0 excluded, zero ring, empty schemes, identity maps. Stacks Tag 0F03 extension is valid. lcompile probe (#check on both declarations, #print axioms): exit 0, signatures as recorded, axioms only propext/Classical.choice/Quot.sound. Report has real Worker and Second-reading-by-Q31 sections. No hollow definitions, no proofs added, no global build. The dropped declarations list is optional and not a fault."
  }
 }

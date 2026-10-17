@@ -366,5 +366,28 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-2cba2e2d9 (reviewer sub-agent of L); spot-checked: FIX: the split is correct (Stacks 0F07 adapted to arbitrary commutative Λ, all ten steps read). I made three repairs, written as whole files under fixes/. I read the main-20261015 statement (verbatim item statement, arbitrary commutative Λ, failure for f itself), the older unit route, Stacks 0F02/0F03/formal-argument/0F07 (etale-cohomology.tex 16846–17294), the main-20261015 sk-prop-injectivity text, CriticalMap.lean (about lines 179–223) and every cited statement. Coefficient category: Λ-module sheaves throughout, with the sk-def-bc/sbc-def-base-change-map map; transfer to abelian sheaves happens only through exchange-forget (1)–(3). Each step checks out: affine reduction with qcqs permanence; choice of ξ through new-node clause (1) and exact, conservative stalks; thickenings through the two transition isomorphisms plus a written mate/triangle calculation; limits through source descent and target zero detection (affine S', cofiltered, qcqs stages, affine transitions); closed–open through the embedding, open-zero (Leray edge, universal BC in degrees < q after the preliminary base change) and closed-range, then new-node clause (2); P(∅) false; the field square uses φ^*F; the separated ⇒ affine argument is correct; step 10 realizes the old unit formulation. New node lem-sbc-module-bc-injectivity: true (the 0F03 injective-resolution proof works for any Λ). Small cases checked: q=1, F=0, Λ=0, Λ=Z on Spec F_p, G=F injective. It is statement-only, real, and not a clause of the item. The main-20261015 blueprint node sk-prop-injectivity states the fixed-base Λ version, from which this node follows in one line. That blueprint node exists only as a unit record (realized empty), not as a DAG node, so creating this node is justified and same_as=[] is forced. The maintainer should merge or link it when sk-prop-injectivity is imported. The report's claim that no general-Λ blueprint statement exists is inaccurate. FIXES: (1) C4: step 2 took étale localization from a descriptive sentence inside the definition sk-def-bc. It now cites sbc-lem-etale-locality (0EZR (3), unit sk-def-bc, on route) instead of that sentence and lem-weil-pbc-etale-cover-detects-iso, whose tool_use is removed. (2) C4: step 7 coefficient naturality now cites sbc-lem-bc-naturality (unit sk-def-bc). (3) The new node now says kernels and cokernels are in Λ-module sheaf categories and that 'injective' means injective in Mod(T_et,Λ), matching 0F03(3) and the Lean declaration. proof_deps recomputed; no cycle (DFS over 1460 nodes). The other tool uses are accepted as generic black boxes. Maintainer notes: lem-sbc-open-injective-coefficient-zero cites the Z/n-only sbc-def-base-change-property while quantifying arbitrary Λ (its Lean uses UniversalBaseChangeProperty Λ), so its reference should become sk-def-bc; the new node has no lean_audit key, and the reported Lean attachment is left to the maintainer.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Detection",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_fieldFailure",
+  "declarations": [
+   "AlgebraicGeometry.Etale.FieldFailure",
+   "AlgebraicGeometry.Etale.nonempty_fieldFailure",
+   "AlgebraicGeometry.Etale.FieldFailure.isAffineHom_a"
+  ],
+  "statement": "theorem Etale.nonempty_fieldFailure (q : ℤ) (hq : 1 ≤ q)\n    (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q')\n    (hfail : ¬ Etale.BaseChangeProperty Λ p q) :\n    Nonempty (Etale.FieldFailure Λ p q) :=",
+  "branch": "slopmaster2",
+  "by": "Q111",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing upstream declarations in FailureOverField.Detection and its imported FieldFailure module state the same result. `nonempty_fieldFailure` takes q ≥ 1, universal base-change in every integer degree q' < q (equivalent to q' ≤ q−1), and failure at q, and returns Nonempty (FieldFailure Λ p q). FieldFailure records the affine S', its base-change square, field K and point, Cartesian fibre square, Λ-module sheaf, and non-isomorphic degree-q map. FieldFailure.isAffineHom_a supplies the parenthetical affine-morphism conclusion when S is separated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37d3e6b52",
+  "group": "Q111",
+  "result": "pass",
+  "note": "existing:true binding to slopmaster2 Etale.nonempty_fieldFailure (FailureOverField.Detection) + FieldFailure + FieldFailure.isAffineHom_a. Commit touches only the node lean record and the report (Worker report + Second reading by Q111 present). Every clause checked against the node and the main-20261015 _section.md (verbatim): arbitrary p, CommRing Λ (sk-def-bc universe convention), q≥1, ∀ q'<q UniversalBaseChangeProperty, ¬BaseChangeProperty at the fixed base, affine S', both IsPullback squares, any field K, Λ-module sheaf on Spec K, ¬IsIso of baseChangeHomologyMap, separated⇒IsAffineHom. No extra assumptions; edge cases q=1, Λ=0, F=0, empty schemes fine. lean.statement is verbatim in source; upstream identical in side clone and slopmaster2. Check file re-stating the signature compiled via lcompile.py (exit 0); nt_compile.py refused it as outside the side tree, and no file is delivered. No findings."
  }
 }

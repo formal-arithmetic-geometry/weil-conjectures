@@ -26,7 +26,8 @@
   "place": "Theorem 6.6.9 and Remark 6.6.11 (Yoneda/mapping-space criterion for a Cartesian square), Theorem 7.3.27 (finite limits from terminal objects and pullbacks). Online PDF read on 2026-10-17; local archival copy WANTED. No Stacks tag states this result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-pullback-comparison"
  ],
  "proof": [
   {
@@ -353,5 +354,26 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-b36f58518 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item in full; this split adds no new nodes. The statement is byte-identical to the side-project node, which is still unsplit, so no target was weakened. Statement checks: it is true (Cisinski CatLR 6.6.9 and 6.6.11 for the pullback criterion, 7.3.27 for finite limits). Small cases tested: ordinary nerves, where it becomes the ordinary pullback; the empty quasicategory; the empty diagram, whose limit is the terminal object; Delta^0+Delta^0, which gives products over the terminal object; and simplices with identified faces, which step 4 allows because it only needs A->D monic. No cycle: the dependency closure has 120 nodes, does not contain the item, and has no missing or merged node. I confirmed with BFS that both finite-shape-generation and yoneda-presheaf-limits reach the item through kan-quillen-right-proper and brown-fibrant-localization-pullbacks, so re-proving those calculations in the steps is justified. Steps: step 1 is the def-cbc terminality convention plus the cone criterion of cone-calculus. Step 2: the strict fibre map is exactly the map of right-fibration-space-fiber, and fiber-detection over 1_U finishes it; the orientation argument via P+(u,v)=P-(v,u) and opposites is sound. Step 3 uses 2-of-3 and fiber-detection twice, within that node's hypotheses. Step 4 uses strict degreewise gluing, isofibration-exponentiation (restriction along a mono is an isofibration, so H_D->H_A is a Kan fibration), and natural pinch equivalences. Step 5 dualizes final-index-colimit, handling the pinch convention through U_{Q^op}(a,b)=U_Q(b,a)^op. Steps 6-8 give the cospan criterion, naturality and invariance, and the gluing argument of HTT 4.4.2.2 without its completeness hypothesis. Step 9 reads the boundary-cells leaf correctly. Step 10 is a double induction with the correct base case. The parent's steps 7, 11 and 12 use only the stated clauses. Sources: Cisinski is not archived; WANTED is declared and proof_origin is agent; no SGA is used. Mathlib: LeanSearch, LeanFinder, Loogle and grep were all run; the only candidate is the ordinary-category theorem at LimitsOfProductsAndEqualizers.lean:270-276, which I read and which does not match. I accept the four declared tool uses from sk-prop-sf-cbc (cone-calculus, kan-fibration-fiber-criterion, right-fibration-space-fiber, composition-spine), which many existing sec-six-functors nodes already use. Maintenance note, not a fault of this delivery: finite-shape-generation now duplicates the finite-limit clause by a cyclic route."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityTerminalPullbackCriterion",
+  "declaration": "SSet.Enhanced.infinity_terminal_pullback_criterion",
+  "declarations": [
+   "SSet.Enhanced.infinity_terminal_pullback_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityTerminalPullbackCriterion.lean",
+  "statement": "theorem infinity_terminal_pullback_criterion (E : SSet.{u}) [Quasicategory E] : (∀ e : E _⦋0⦌, IsTerminal E e ↔ ∀ x : E _⦋0⦌, IsContractible (mappingSpace E x e)) ∧ (∀ e : E _⦋1⦌, IsEquivalenceEdge E e → (IsTerminal E (E.δ 1 e) ↔ IsTerminal E (E.δ 0 e))) ∧ (∃ hD : Quasicategory ((ihom (horn.{u} 2 2).toSSet).obj E), ∃ P : ∀ (F : (horn.{u} 2 2).toSSet ⟶ E) (x : E _⦋0⦌), PullbackComparisonPresentation F x, PullbackMappingCriterion E hD P ∧ PullbackChangingDiagramNaturality E hD P) ∧ PullbackEquivalenceInvariance E ∧ ((∃ e : E _⦋0⦌, IsTerminal E e) → (∀ F : (horn.{u} 2 2).toSSet ⟶ E, ∃ t : (coneCategory F) _⦋0⦌, IsLimiting F t) → ∀ (K : SSet.{u}) (_ : K.Finite) (F : K ⟶ E), ∃ t : (coneCategory F) _⦋0⦌, IsLimiting F t)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e8603eb4",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Read node, def-cbc dependency, new node def-coef-coherent-pullback-comparison, both modules, report (Worker report + Second reading by Q45 present), and the dependency declarations used (EnhancedDiagramsCones, SourceAttachmentGluing helper definitions, SuspensionComparison.ConeTransformation, right_pinch_comparison). Clause by clause: terminal iff contractible mapping spaces (definitional, as the node says); equivalence-edge invariance of terminality; Λ[2,2] legs checked (horn.ι 2 1 = 0→2, horn.ι 2 0 = 1→2); PullbackComparisonPresentation targets literally the path model A ×_{ev0} Fun(Δ1,C) ×_{ev1} B, projections fixed strictly, path pinned by a triangle with the cone's own retraction paths, so the comparison is canonical up to homotopy and exists (evaluation is a trivial fibration); limiting iff (L≫comparison) is a weak equivalence for all x and all composition representatives L, whose existence is asserted; naturality for fixed and changing cospans via the existing ConeTransformation (directions checked); apex/diagram equivalence invariance with endpoint equations in every degree; finite limits for K : SSet.{u} with K.Finite (nondegenerate simplices; empty K included). Edge cases (empty E, empty mapping spaces, degenerate legs, Δ0, products, identified faces) fine; one universe u, nothing unbound. Records: item changed only in lean and stmt_deps (+ the new node); new node has the §5 fields; lean.statement fields match the files; dependency closure 128 nodes, none missing, no cycle. nt_compile.py --json: both files compile with no errors or warnings; the theorem's only own sorry is its proof; the new structure and its helper maps are sorry-free; four predicates inherit sorryAx only through the existing canonical sourceAttachmentPinch (Classical.choose of right_pinch_comparison, fixed by its prism formula). Non-blocking notes: reused source-gluing and suspension-square helper definitions are not in the new node's stmt_deps (cycle avoidance, definitions only); the criterion is stated for one existing presentation P rather than for every P, which is faithful because all presentations give homotopic comparisons."
  }
 }
