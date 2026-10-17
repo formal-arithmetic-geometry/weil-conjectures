@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.UpperStarComp
+public import WeilConjectures.WeilSheaf.UpperStarDual
 public import WeilConjectures.WeilSheaf.UpperStarTensor
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseTensor
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 
 /-!
@@ -52,8 +54,23 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- The tensor product with a pro-étale Weil sheaf whose underlying sheaf is lisse is exact. -/
 instance preservesFiniteLimits_tensorFunctor (C : ProEtaleWeilSheaf k₀ l X)
     [Fact (IsAdicLisseSheaf C.carrier)] :
-    PreservesFiniteLimits (ProEtaleWeilSheaf.tensorFunctor k₀ l X C) :=
-  sorry
+    PreservesFiniteLimits (ProEtaleWeilSheaf.tensorFunctor k₀ l X C) := by
+  have : (ProEtaleWeilSheaf.tensorFunctor k₀ l X C).Additive :=
+    (tensorIhomAdjunction k₀ l X C).left_adjoint_additive
+  rw [Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono]
+  intro S hS
+  have : PreservesFiniteColimits (ProEtaleWeilSheaf.tensorFunctor k₀ l X C) := by
+    have := (tensorIhomAdjunction k₀ l X C).leftAdjoint_preservesColimits.{0, 0}
+    exact PreservesColimitsOfSize.preservesFiniteColimits _
+  refine ⟨((Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi _).1 inferInstance
+    S hS).1, ?_⟩
+  have := hS.mono_f
+  have : (Mod.tensorLeft C.carrier).PreservesMonomorphisms :=
+    IsAdicLisseSheaf.preservesMonomorphisms_tensorLeft (Fact.out)
+  have : Mono ((IsoAlgebra.forget _).map S.f) := inferInstance
+  have : Mono ((IsoAlgebra.forget _).map ((ProEtaleWeilSheaf.tensorFunctor k₀ l X C).map S.f)) :=
+    (Mod.tensorLeft C.carrier).map_mono ((IsoAlgebra.forget _).map S.f)
+  exact (IsoAlgebra.forget _).mono_of_mono_map this
 
 instance (C : ProEtaleWeilSheaf k₀ l X) : (ProEtaleWeilSheaf.tensorFunctor k₀ l X C).Additive :=
   (tensorIhomAdjunction k₀ l X C).left_adjoint_additive
@@ -141,8 +158,18 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 theorem WeilSheaf.nonempty_upperStar_dual_iso (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
     (G : WeilSheaf k₀ l Y) (hG : G.IsLisse) :
     Nonempty ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj (G.dual hG).obj ≅
-      (((WeilSheaf.upperStar φ).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj) :=
-  sorry
+      (((WeilSheaf.upperStar φ).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj) := by
+  have h₁ : (G.dual hG).obj =
+      ProEtaleWeilSheaf.ihom k₀ l Y G.obj (ProEtaleWeilSheaf.adicConstant k₀ l Y) := rfl
+  have h₂ : (ProEtaleWeilSheaf.upperStar k₀ l φ).obj G.obj = ((WeilSheaf.upperStar φ).obj G).obj :=
+    rfl
+  have h₃ : ProEtaleWeilSheaf.ihom k₀ l X ((WeilSheaf.upperStar φ).obj G).obj
+      (ProEtaleWeilSheaf.adicConstant k₀ l X) =
+      (((WeilSheaf.upperStar φ).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj := rfl
+  exact ⟨eqToIso (congrArg (ProEtaleWeilSheaf.upperStar k₀ l φ).obj h₁) ≪≫
+    WeilSheaf.upperStarDualIso φ G hG ≪≫
+    eqToIso ((congrArg (fun A ↦ ProEtaleWeilSheaf.ihom k₀ l X A
+      (ProEtaleWeilSheaf.adicConstant k₀ l X)) h₂).trans h₃)⟩
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [Fact (ringChar k₀ ≠ l)] in

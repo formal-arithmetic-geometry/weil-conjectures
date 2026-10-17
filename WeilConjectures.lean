@@ -4319,6 +4319,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseTensor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseUniversalCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
@@ -4666,6 +4667,7 @@ public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UpperStarComp
+public import WeilConjectures.WeilSheaf.UpperStarDual
 public import WeilConjectures.WeilSheaf.UpperStarExact
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
