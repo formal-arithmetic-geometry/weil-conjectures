@@ -7,7 +7,6 @@ module
 public import Sheaf.Paper.ContinuousCoefficientModuleEncoding
 import Sheaf.Paper.ContinuousModuleEncodingRestriction
 import all Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import all Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 
 /-! # Finite freeness on pro-etale slices
 Source: Stacks Project, Tags 03DM and 03DO.
@@ -107,10 +106,15 @@ theorem continuousRing_slice_free_iff
     (Profinite.continuousMapRingObj T) W.hom
   let Qraw := ((ProEtale.upperStar Ab.{u + 1} W.hom).mapMod _).obj P
   let ec := (Mod.extendScalarsIsoComapInv φ).app Qraw
+  let E := Mod.comapEquivalenceOfIsIso (inv φ)
+  have : E.functor.Additive := Functor.additive_of_preserves_binary_products E.functor
+  let ef (n : ℕ) : E.functor.obj (Mod.finiteFree _ n) ≅ Mod.finiteFree _ n :=
+    E.functor.mapBiproduct (fun _ : Fin n ↦ Mod.regular _) ≪≫
+      biproduct.mapIso (fun _ ↦ Mod.regularIsoOfIsIso φ)
   constructor
-  · intro h
-    exact ProEtale.free_of_comap (inv φ) (ProEtale.free_of_iso h ec)
-  · intro h
-    exact ProEtale.free_of_iso (ProEtale.free_comap (inv φ) h) ec.symm
+  · rintro ⟨n, ⟨en⟩⟩
+    exact ⟨n, ⟨E.fullyFaithfulFunctor.preimageIso (ec.symm ≪≫ en ≪≫ (ef n).symm)⟩⟩
+  · rintro ⟨n, ⟨en⟩⟩
+    exact ⟨n, ⟨ec ≪≫ E.functor.mapIso en ≪≫ ef n⟩⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
