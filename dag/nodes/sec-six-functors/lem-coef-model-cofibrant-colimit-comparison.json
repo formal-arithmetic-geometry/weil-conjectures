@@ -74,13 +74,35 @@
    }
   },
   {
-   "text": "For (c), we construct the needed ordinal-diagram model structure explicitly; the natural-number degree in [lem-coef-reedy-model-structure] is not sufficient for an arbitrary $\\theta$. On all diagrams $D:\\theta\\to\\mathcal M$, with no continuity condition, set $L_\\alpha D=\\operatorname{colim}_{\\beta<\\alpha}D_\\beta$ and $\\lambda_\\alpha(f):D_\\alpha\\amalg_{L_\\alpha D}L_\\alpha E\\to E_\\alpha$ for $f:D\\to E$, using [def-weil-pbc-category-colimit]. Fix either $\\mathcal L=C={}^{\\square}(F\\cap W)$ or $\\mathcal L=C\\cap W={}^{\\square}F$, as in [lem-coef-model-infinity-derived-adjunction], and suppose all $\\lambda_\\alpha(f)$ lie in $\\mathcal L$. To lift $f$ against an objectwise map $p:U\\to V$ in its corresponding right class, let $s:D\\to U,t:E\\to V$ give a square. Given compatible lifts $h_\\beta$ for $\\beta<\\alpha$, define the top map on $D_\\alpha$ by $s_\\alpha$ and on $L_\\alpha E$ by the cocone $E_\\beta\\xrightarrow{h_\\beta}U_\\beta\\to U_\\alpha$. These agree on $L_\\alpha D$ by $h_\\beta f_\\beta=s_\\beta$ and naturality of $s$. They form a square with left edge $\\lambda_\\alpha(f)$, right edge $p_\\alpha$, and bottom edge $t_\\alpha$: commutation on $E_\\beta$ is $p_\\alpha U(\\beta\\to\\alpha)h_\\beta=V(\\beta\\to\\alpha)t_\\beta=t_\\alpha E(\\beta\\to\\alpha)$, and on $D_\\alpha$ is the original square. A ground-category lift defines $h_\\alpha$, with its prescribed restriction ensuring naturality for every $\\beta\\to\\alpha$. Start with the empty family; at a limit of the recursion take the union of the previous compatible families. This is a union of partial transformations, not a continuity assertion about $D$ or $E$. It gives the lift on all of $\\theta$. For a square against a single right-class map $p$, apply this construction to its constant diagram and then the colimit universal property. Consequently $\\operatorname{colim}f\\in\\mathcal L$. Restricting the same construction to $\\beta<\\alpha$ gives $L_\\alpha f\\in\\mathcal L$: the latching object at each $\\beta<\\alpha$ still uses exactly the predecessors $\\gamma<\\beta$.",
+   "text": "For (c), use the ordinal latching objects and relative maps from [lem-coef-ordinal-latching-diagram-lifting]. Fix $\\mathcal L=C={}^{\\square}(F\\cap W)$ or $\\mathcal L=C\\cap W={}^{\\square}F$ by [lem-coef-model-infinity-derived-adjunction]. If every relative latching map lies in $\\mathcal L$, then for an objectwise map in the corresponding right class the child node applies at every ordinal stage and supplies a natural diagonal. No continuity of the four diagrams is used.",
    "uses": [
-    "lem-coef-model-infinity-derived-adjunction",
-    "def-weil-pbc-category-colimit",
-    "lem-coef-reedy-model-structure"
+    "lem-coef-ordinal-latching-diagram-lifting",
+    "lem-coef-model-infinity-derived-adjunction"
    ],
    "elementary": false,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Definition 5.1.1, Proposition 5.1.4 and Corollary 5.1.5, printed pp. 120-122; transfinite lifts and both right classes expanded."
+   }
+  },
+  {
+   "text": "For a square from $\\operatorname{colim}f$ to a ground right-class map $p:U\\to V$, compose its horizontal arrows with the colimit coprojections. These give a natural square from $f$ to the constant diagram on $p$. Step 4 supplies a natural diagonal $h:E\\to\\operatorname{const}U$. By [def-weil-pbc-category-colimit], its cocone induces $H:\\operatorname{colim}E\\to U$. Both diagonal equations for $H$ hold after composition with every coprojection, because $h_\\alpha f_\\alpha=s_\\alpha$ and $p h_\\alpha=t_\\alpha$; uniqueness in the colimit universal property proves the equations. Since $p$ was arbitrary, $\\operatorname{colim}f\\in\\mathcal L$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Definition 5.1.1, Proposition 5.1.4 and Corollary 5.1.5, printed pp. 120-122; transfinite lifts and both right classes expanded."
+   }
+  },
+  {
+   "text": "For $\\beta<\\alpha<\\theta$, restricting a diagram to $\\alpha$ leaves exactly the same objects $\\gamma<\\beta$ and arrows between them. Thus its predecessor diagram at $\\beta$ is unchanged. The universal property in [def-weil-pbc-category-colimit] identifies its latching objects, structure maps and pushout relative latching map with those defined in [lem-coef-ordinal-latching-diagram-lifting]. Apply steps 4 and 5 on the ordinal $\\alpha$: they give $L_\\alpha f\\in\\mathcal L$. This includes $\\alpha=0$, where the predecessor diagram is empty and $L_0 f$ is the identity of the initial object.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-ordinal-latching-diagram-lifting"
+   ],
+   "elementary": true,
    "source": {
     "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
     "place": "Definition 5.1.1, Proposition 5.1.4 and Corollary 5.1.5, printed pp. 120-122; transfinite lifts and both right classes expanded."
@@ -99,7 +121,7 @@
    }
   },
   {
-   "text": "The relative $C\\cap W$ maps are exactly the relative $C$ maps that are objectwise in $W$. If all $\\lambda_\\alpha(f)$ are in $C\\cap W$, step 4 on each predecessor segment shows $L_\\alpha f\\in C\\cap W$. Its pushout $D_\\alpha\\to P_\\alpha=D_\\alpha\\amalg_{L_\\alpha D}L_\\alpha E$ is in $C\\cap W$ by [lem-coef-lifting-class-closure]; composition with $\\lambda_\\alpha(f)$ shows $f_\\alpha\\in C\\cap W$. Conversely suppose $f$ is relative $C$ and objectwise in $W$. Induct on $\\alpha$ that $\\lambda_\\alpha(f)\\in C\\cap W$. The induction hypothesis and step 4 on the predecessor segment make $L_\\alpha f$ a trivial cofibration. Pushout closure makes $D_\\alpha\\to P_\\alpha$ trivial. Since $f_\\alpha$ is its composite with $\\lambda_\\alpha(f)$, two-out-of-three gives $\\lambda_\\alpha(f)\\in W$; it is already in $C$. The base $\\alpha=0$ uses the identity on the initial object for $L_0f$, which belongs to both left classes by [lem-coef-lifting-class-closure]. This same reasoning applies at every limit ordinal because step 4 already covers its whole predecessor segment. The forward argument with $C$ in place of $C\\cap W$ also proves that relative $C$ maps are objectwise cofibrations.",
+   "text": "The relative $C\\cap W$ maps are exactly the relative $C$ maps that are objectwise in $W$. If all $\\lambda_\\alpha(f)$ are in $C\\cap W$, step 6 on each predecessor segment shows $L_\\alpha f\\in C\\cap W$. Its pushout $D_\\alpha\\to P_\\alpha=D_\\alpha\\amalg_{L_\\alpha D}L_\\alpha E$ is in $C\\cap W$ by [lem-coef-lifting-class-closure]; composition with $\\lambda_\\alpha(f)$ shows $f_\\alpha\\in C\\cap W$. Conversely suppose $f$ is relative $C$ and objectwise in $W$. Induct on $\\alpha$ that $\\lambda_\\alpha(f)\\in C\\cap W$. The induction hypothesis and step 6 on the predecessor segment make $L_\\alpha f$ a trivial cofibration. Pushout closure makes $D_\\alpha\\to P_\\alpha$ trivial. Since $f_\\alpha$ is its composite with $\\lambda_\\alpha(f)$, two-out-of-three gives $\\lambda_\\alpha(f)\\in W$; it is already in $C$. The base $\\alpha=0$ uses the identity on the initial object for $L_0f$, which belongs to both left classes by [lem-coef-lifting-class-closure]. This same reasoning applies at every limit ordinal because step 6 already covers its whole predecessor segment. The forward argument with $C$ in place of $C\\cap W$ also proves that relative $C$ maps are objectwise cofibrations.",
    "uses": [
     "lem-coef-model-infinity-derived-adjunction",
     "def-weil-pbc-category-colimit",
@@ -112,7 +134,7 @@
    }
   },
   {
-   "text": "Put $W_\\theta,F_\\theta$ equal to the objectwise weak equivalences and fibrations, and $C_\\theta$ equal to the maps with all relative latching maps in $C$. Limits and colimits of diagrams are computed objectwise: maps between the component (co)limits are induced by the diagram arrows, their composition laws follow by equality on every projection or coprojection, and the component universal properties identify cones or cocones in the functor category. Thus this category is complete and cocomplete. The class $W_\\theta$ satisfies two-out-of-three and is retract closed componentwise. Relative left classes are retract closed because $f\\mapsto\\lambda_\\alpha(f)$ is a functor on arrow categories, so takes retract diagrams to retract diagrams, and the ground left classes are retract closed by [lem-coef-lifting-class-closure]. Objectwise right classes are retract closed by the right-class part of that node. Steps 4 and 5 give lifting and functorial factorizations for (relative $C$, objectwise $F\\cap W$) and (relative $C\\cap W$, objectwise $F$). They give mutual lifting characterizations too: factoring a map that lifts against every right-class map makes it a retract of its left factor, by the diagonal of the factorization square; factoring a map against which all left-class maps lift makes it a retract of its right factor by the other diagonal. The retract closures just checked put those maps in the indicated classes. These are therefore two WFS. By step 6 their left classes are $C_\\theta$ and $C_\\theta\\cap W_\\theta$, while the right classes are $F_\\theta\\cap W_\\theta$ and $F_\\theta$. This verifies every model-category axiom in [lem-coef-model-infinity-derived-adjunction], with functorial factorizations, for all $\\theta$-diagrams.",
+   "text": "Put $W_\\theta,F_\\theta$ equal to the objectwise weak equivalences and fibrations, and $C_\\theta$ equal to the maps with all relative latching maps in $C$. Limits and colimits of diagrams are computed objectwise: maps between the component (co)limits are induced by the diagram arrows, their composition laws follow by equality on every projection or coprojection, and the component universal properties identify cones or cocones in the functor category. Thus this category is complete and cocomplete. The class $W_\\theta$ satisfies two-out-of-three and is retract closed componentwise. Relative left classes are retract closed because $f\\mapsto\\lambda_\\alpha(f)$ is a functor on arrow categories, so takes retract diagrams to retract diagrams, and the ground left classes are retract closed by [lem-coef-lifting-class-closure]. Objectwise right classes are retract closed by the right-class part of that node. Steps 4 and 7 give lifting and functorial factorizations for (relative $C$, objectwise $F\\cap W$) and (relative $C\\cap W$, objectwise $F$). They give mutual lifting characterizations too: factoring a map that lifts against every right-class map makes it a retract of its left factor, by the diagonal of the factorization square; factoring a map against which all left-class maps lift makes it a retract of its right factor by the other diagonal. The retract closures just checked put those maps in the indicated classes. These are therefore two WFS. By step 8 their left classes are $C_\\theta$ and $C_\\theta\\cap W_\\theta$, while the right classes are $F_\\theta\\cap W_\\theta$ and $F_\\theta$. This verifies every model-category axiom in [lem-coef-model-infinity-derived-adjunction], with functorial factorizations, for all $\\theta$-diagrams.",
    "uses": [
     "lem-coef-model-infinity-derived-adjunction",
     "def-weil-pbc-category-colimit",
@@ -125,7 +147,7 @@
    }
   },
   {
-   "text": "In the model structure proved in steps 4-7, the constant functor preserves fibrations and trivial fibrations because these are objectwise classes. Step 1 therefore applies to $\\operatorname{colim}_{\\alpha<\\theta}$. For a chain $X$ in (c), the latching map at zero is the cofibrant initial map. At a successor $\\alpha=\\beta+1$ the predecessor category has terminal object $\\beta$, so its colimit is $X_\\beta$ by [def-weil-pbc-category-colimit], and its latching map is the assumed successor cofibration. At a nonzero limit $\\alpha<\\theta$, continuity makes $L_\\alpha X\\to X_\\alpha$ an isomorphism, hence a cofibration: its inverse supplies every lift. Thus $X$ is cofibrant in this diagram model category. Applying these three checks to $Y$ proves its diagram cofibrancy. The transformation $u$ is in $W_\\theta$ by its assumed component weak equivalences, so step 1 proves the colimit comparison and cofibrancy of both colimits. All constructions used only the two ground WFS, two-out-of-three, retract closure, and the displayed colimits. In particular, no properness hypothesis is needed in (a), (b), or (c).",
+   "text": "In the model structure proved in steps 4-9, the constant functor preserves fibrations and trivial fibrations because these are objectwise classes. Step 1 therefore applies to $\\operatorname{colim}_{\\alpha<\\theta}$. For a chain $X$ in (c), the latching map at zero is the cofibrant initial map. At a successor $\\alpha=\\beta+1$ the predecessor category has terminal object $\\beta$, so its colimit is $X_\\beta$ by [def-weil-pbc-category-colimit], and its latching map is the assumed successor cofibration. At a nonzero limit $\\alpha<\\theta$, continuity makes $L_\\alpha X\\to X_\\alpha$ an isomorphism, hence a cofibration: its inverse supplies every lift. Thus $X$ is cofibrant in this diagram model category. Applying these three checks to $Y$ proves its diagram cofibrancy. The transformation $u$ is in $W_\\theta$ by its assumed component weak equivalences, so step 1 proves the colimit comparison and cofibrancy of both colimits. All constructions used only the two ground WFS, two-out-of-three, retract closure, and the displayed colimits. In particular, no properness hypothesis is needed in (a), (b), or (c).",
    "uses": [
     "lem-coef-model-infinity-derived-adjunction",
     "def-weil-pbc-category-colimit"
@@ -141,7 +163,8 @@
   "lem-coef-model-infinity-derived-adjunction",
   "def-weil-pbc-category-colimit",
   "lem-coef-reedy-model-structure",
-  "lem-coef-lifting-class-closure"
+  "lem-coef-lifting-class-closure",
+  "lem-coef-ordinal-latching-diagram-lifting"
  ],
  "proof_origin": {
   "by": "agent",
@@ -235,7 +258,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-locally-cofibrant-dg-restriction",
@@ -247,16 +270,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-model-cofibrant-colimit-comparison",
   "worker": "stage1",
-  "summary": "Second reading repairs the one-leg span by a mixed Reedy calculation, cites the existing Reedy, colimit, model-adjunction and lifting-closure interfaces, and proves the arbitrary-ordinal model structure by explicit transfinite lifts, factorizations, trivial-class induction and retracts. No new child nodes.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: cell induction on the unit for free dg diagrams; the eight steps realize the discrete, mixed walking-span, transfinite-diagram, ordinal-continuity, and no-properness components of that foundation."
+  "summary": "Repair of the human return: original step 4 is replaced by a short application of the new statement-only ordinal-latching diagram-lifting lemma, followed by two elementary universal-property steps for colimit descent and predecessor restriction. The two auxiliary drafts are excluded because these are elementary arguments, not new nodes. Statement and Lean record are unchanged; all other original steps retain their arguments, with internal step numbers updated.",
+  "blueprint": "The original cell-induction foundation in the recorded ancestry of prop-coef-integral-exceptional-adjoint is retained. Steps 1-3 handle discrete and mixed-span comparisons; steps 4-6 replace the former long ordinal lifting step; steps 7-10 retain its factorization, model-axiom and continuous-chain applications. The current ancestor proof states the finite mapping-complex comparison, but does not itself contain this model-category foundation: its detailed proof is agent-written."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NV-a596dd794",
-  "group": "NV",
+  "reviewer": "NT-cc-Q28-b908cec89",
+  "group": "Q28",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-a596dd794 (reviewer sub-agent of L); spot-checked: Read the whole item: the statement, all 8 steps, the 4 cited node statements, the unit (it has no steps), the main-20261015 ancestor proof paragraph 2, and the downstream user lem-coef-locally-cofibrant-dg-restriction step 5. The statement is correct and keeps every hypothesis. (a) is coproducts; (b) is the cube lemma with only i,i' cofibrations and all objects cofibrant, with no condition on A->X; (c) is continuous chains of cofibrations with a cofibrant start. No properness is assumed and nothing is weakened. Step 1 transposes lifting squares across colim ⊣ const, then uses the clause of lem-coef-model-infinity-derived-adjunction that a left Quillen functor preserves weak equivalences between cofibrant objects. Step 2 uses the discrete Reedy structure; the empty index set is checked. Step 3 uses the mixed Reedy span with degrees 0/1/2. I checked: the factorizations are unique; the latching objects are 0, 0, A, so a cofibrant diagram means X and A cofibrant and i a cofibration; the matching maps of const(p) are p, p and an isomorphism; and the pushout's cofibrancy follows from pushout closure. Steps 4-7 build the direct-category model structure on θ-diagrams, needed because the Reedy node allows only ℕ-degrees. I re-derived the compatibility of the transfinite lifts, the recursive factorization, the identification of relative C∩W maps (both directions), retract closure via the functoriality of λ_α, and the model axioms. Step 8 checks the latching maps at 0, at successors and at limits (isomorphisms by continuity). Small cases checked: the empty coproduct; A initial; i = id; θ = ω and θ = ω+ω; constant chains. Duplicate check: the Reedy, small-direct-colimit-lifting, transfinite-left-lifting, finite-reedy-localization and brown-split nodes are not duplicates, and a DAG grep for cube/gluing/ordinal/coproduct with weak equivalence found nothing else. There are no new nodes, no off-route uses, no tool_uses and no SGA citation. As a generic lemma it fixes no coefficient category and no base-change morphism. Hovey is not archived in literature/ and I could not open it; I checked every claim against the cited DAG statements instead, and the WANTED line stands. Two fixes in fixes/dag/nodes/sec-six-functors/lem-coef-model-cofibrant-colimit-comparison.json: (1) step 1 changed from elementary:true to false, because it rests on the non-elementary preservation clause (C2); (2) proof_origin changed from by:document with an external URL to by:agent, with the blueprint ancestor as document and Hovey's places in the place field (brief §2/§4). Statement, steps, uses and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-b908cec89 (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps, the new node lem-coef-ordinal-latching-diagram-lifting and the statements of the four cited nodes (model-infinity-derived-adjunction, category-colimit, reedy-model-structure, lifting-class-closure). I also read the unit sk-prop-sf-biduality-general (it has no steps) and paragraph 2 of the main-20261015 ancestor proof prop-coef-integral-exceptional-adjoint. That paragraph does not contain this model-category foundation, so proof_origin by:agent is correct. Hovey §5.1-5.2 is not archived under literature/, so I checked the steps against its standard content and the cited statements; the WANTED line stands. New node: I re-derived it by transfinite recursion. The map out of D_a ⊔ L_aE agrees on L_aD, the square commutes with t_a, and naturality holds by construction. It is true with no continuity condition, and I tested it at θ=0, 1, 2, ω and ω+ω with discontinuous diagrams. Its form is correct: unsplit, statement only, self-contained, the right blueprint from/via, and all three kinds of search recorded. It is not a duplicate: small-direct-colimit-lifting and reedy-model-structure need a natural-number degree, which ordinals from ω+1 on do not have; direct-wfs-extension is finite only; transfinite-left-lifting covers one continuous chain against a fixed map. It is not a parent clause either. Item: step 1 transposes squares across colim ⊣ const and then uses the left-Quillen preservation clause. Step 2 (discrete diagrams, including the empty index set) is correct. Step 3: walking span with degrees 0/1/2, latching objects 0, 0, A and matching objects 1, X, 1; only i is required to be a cofibration. Step 4 uses the child's statement, not its proof. Steps 5-6 (descent of the diagonal, predecessor restriction) are genuinely elementary. Steps 7-9 (recursive functorial factorization, both directions for C∩W, retract and WFS axioms) and step 10 (latching maps at 0, at successors and at limits by continuity) are correct. The statement is unchanged and matches its Lean record. proof_deps equals the union of the uses, there is no cycle, everything stays on the unit route, no tool_uses are needed and there is no SGA citation. It is not a target node, so the base-change and coefficient checks do not apply. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
