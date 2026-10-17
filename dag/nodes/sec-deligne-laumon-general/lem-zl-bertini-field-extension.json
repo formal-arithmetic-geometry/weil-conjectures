@@ -13,9 +13,126 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-kun-transcendence-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\xi=\\sum_i g_i x_i$ and $\\delta=\\sum_i c_i g_i$. For each $a\\in k$, the substitution $\\sigma_a(x_i)=x_i+a c_i$ and $\\sigma_a|_K=\\mathrm{id}$ defines an automorphism of $\\Omega$; it sends $\\xi$ to $\\xi+a\\delta$ and fixes $\\delta$. Put $K_0=k(x_1,\\ldots,x_n)$, $K_1=K_0(\\xi)$, and $K_2=K_0(\\xi,\\delta)$. Then $\\sigma_a$ preserves $K_0$ and $K_2$, and $K_2/K_0$ is purely transcendental of degree two by the assumed algebraic independence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4D proof, lines 8924--8939"
+   }
+  },
+  {
+   "text": "By the geometric-irreducibility criterion [lem-zl-geometric-irreducibility-separable], it is enough to prove that every element $\\theta\\in\\Omega$ separably algebraic over $K_1$ lies in $K_1$. Fix such a $\\theta$.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4D proof, lines 8938--8942"
+   }
+  },
+  {
+   "text": "Let $K'_2$ be the subfield of elements of $\\Omega$ separably algebraic over $K_2$. The extension $\\Omega/K_2$ is finitely generated, so [lem-zl-finite-separable-closure] gives that $K'_2/K_2$ is finite. It is separable by construction. Hence [lem-zl-finite-intermediate-fields] gives only finitely many intermediate fields between $K_2$ and $K'_2$.",
+   "uses": [
+    "lem-zl-finite-separable-closure",
+    "lem-zl-finite-intermediate-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4D proof, lines 8942--8949"
+   }
+  },
+  {
+   "text": "Assume first that $k$ is infinite. The infinitely many fields $K_2(\\sigma_a(\\theta))$ therefore include two equal ones; choose distinct $a_1,a_2\\in k$ with this equality. Set $\\theta_i=\\sigma_{a_i}(\\theta)$ and $\\xi_i=\\sigma_{a_i}(\\xi)=\\xi+a_i\\delta$. Solving the two linear equations gives $K_2=K_0(\\xi_1,\\xi_2)$ and $\\xi_1,\\xi_2$ are algebraically independent over $K_0$. Since $\\theta_1$ is algebraic over $K_0(\\xi_1)$, $\\xi_2$ is transcendental over $K_0(\\xi_1,\\theta_1)$.",
+   "uses": [
+    "lem-zl-finite-intermediate-fields"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4D proof, lines 8950--8968"
+   }
+  },
+  {
+   "text": "The extension $\\Omega/K_0$ is geometrically irreducible by [lem-zl-geometric-irreducibility-transcendental], applied to the geometrically irreducible extension $K/k$ and the variables $x_1,\\ldots,x_n$. Its subextension $K_0(\\xi_1,\\theta_1)/K_0$ is geometrically irreducible by [lem-zl-geometric-irreducibility-subextension]. Applying [lem-zl-geometric-irreducibility-add-transcendental] with the transcendental element $\\xi_2$ gives that $K_0(\\xi_1,\\xi_2,\\theta_1)/K_0(\\xi_2)$ is geometrically irreducible.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-transcendental",
+    "lem-zl-geometric-irreducibility-subextension",
+    "lem-zl-geometric-irreducibility-add-transcendental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4D proof, lines 8970--8984"
+   }
+  },
+  {
+   "text": "By the choice of $a_1,a_2$, the field $K_0(\\xi_1,\\xi_2,\\theta_1)$ equals $K_2(\\theta_1)=K_2(\\theta_2)=K_0(\\xi_1,\\xi_2,\\theta_2)$. The element $\\theta_2$ is separably algebraic over $K_0(\\xi_2)$, so the converse direction of [lem-zl-geometric-irreducibility-separable] applied to the preceding geometrically irreducible extension gives $\\theta_2\\in K_0(\\xi_2)$. Applying $\\sigma_{a_2}^{-1}$ yields $\\theta\\in K_0(\\xi)=K_1$.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4D proof, lines 8984--8992"
+   }
+  },
+  {
+   "text": "Now suppose that $k$ is finite. Introduce a new indeterminate $t$. By [lem-zl-geometric-irreducibility-transcendental], $K(t)/k(t)$ is geometrically irreducible. The elements $x_1,\\ldots,x_n,\\xi,\\delta$ remain algebraically independent over $k(t)$, since clearing a denominator in a polynomial relation over $k(t)$ would give a relation over $k$ after comparing coefficients of the independent variable $t$.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-transcendental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4D proof, lines 8997--9003"
+   }
+  },
+  {
+   "text": "The infinite-field argument in Steps 2--6, applied with base field $k(t)$ and extension $K(t)$, proves that $K(t,x_1,\\ldots,x_n)$ is geometrically irreducible over $k(t,x_1,\\ldots,x_n,\\xi)$. Every hypothesis used there is preserved: $K(t)/k(t)$ is finitely generated, $k(t)$ is infinite, and the displayed algebraic independence was just checked.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-transcendental",
+    "lem-zl-finite-separable-closure",
+    "lem-zl-finite-intermediate-fields",
+    "lem-zl-geometric-irreducibility-separable",
+    "lem-zl-geometric-irreducibility-subextension",
+    "lem-zl-geometric-irreducibility-add-transcendental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4D proof, finite-field paragraph, lines 8997--9005"
+   }
+  },
+  {
+   "text": "Finally, apply the converse direction of [lem-zl-geometric-irreducibility-transcendental] to the transcendental extension obtained by adjoining $t$ to $\\Omega/k(x_1,\\ldots,x_n,\\xi)$. This descends geometric irreducibility from $K(t,x_1,\\ldots,x_n)/k(t,x_1,\\ldots,x_n,\\xi)$ to the required $\\Omega/k(x_1,\\ldots,x_n,\\xi)$.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-transcendental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4D proof, final sentence of finite-field paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-finite-intermediate-fields",
+  "lem-zl-finite-separable-closure",
+  "lem-zl-geometric-irreducibility-add-transcendental",
+  "lem-zl-geometric-irreducibility-separable",
+  "lem-zl-geometric-irreducibility-subextension",
+  "lem-zl-geometric-irreducibility-transcendental"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4D, lemma-amazing-bertini-lemma proof (lines 8924--9009)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,7 +168,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-bertini-irreducible-member",
@@ -70,5 +187,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-bertini-field-extension",
+  "worker": "stage1",
+  "summary": "Split Tag 0G4D into the explicit automorphism and infinite-field argument, with separate nodes for transcendental base change, geometric-irreducibility subextensions, adjoining a transcendental, the separable-element criterion, the finite separable closure, and finite intermediate-field finiteness. The finite-field paragraph is handled by adjoining an independent variable and applying the same argument, then descending via the transcendental-base-change equivalence.",
+  "blueprint": "Realizes the current blueprint proof paragraph 3 of lem-zl-bertini-finite-cover-curve where Tag 0G4F invokes the algebraic Bertini lemma; the steps follow Stacks Tag 0G4D in more-morphisms.tex.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-8893b2108",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-8893b2108 (reviewer sub-agent of L); spot-checked: I read the item and all six new nodes in full, and checked them against Stacks 0G4D (more-morphisms.tex l.8907-9009) and the lemmas it cites: algebra.tex 0G31 (l.11341), 0G32, 0G33, 037Q, 037N, and fields.tex 030N. The item statement matches 0G4D hypothesis by hypothesis and nothing is weakened. I tested small cases (n=1 forces trdeg K>=2; K=k(u,v), n=2 with a purely transcendental answer; delta=0 excluded). Steps 1-9 follow the proof. sigma_a is an automorphism preserving K_0 and K_2. In the pigeonhole step sigma_a(theta) lies in K'_2 (two lines, so elementary is acceptable) and a_1!=a_2. The tower in step 5 meets the hypotheses of the transcendental, subextension and add-transcendental lemmas. Step 6 uses direction (1)=>(2) of 0G33. In the finite-field case, independence over k(t) holds via coefficients in t, steps 2-6 are repeated over k(t) without circularity, and descent uses 0G31 (2)=>(1). The parent's application with n=r-1 matches. No duplicates: I grepped the DAG for 0G31/0G32/0G33/037N/037Q and keyword searches only found different statements; the existing 030N nodes state existence of a primitive element, not finiteness of intermediate fields. I read the Mathlib leaf at PrimitiveElement.lean l.209 (exists_primitive_element) and l.305 (finite_intermediateField_of_exists_primitive_element); the IsAlgebraic hypothesis is an inferred instance. All nodes are in the same unit, there are no tool_uses, and nothing cites SGA. Fixes, all in new-node files only: (1) B9: blueprint.from.via on all six new nodes set to [lem-zl-bertini-field-extension, lem-zl-bertini-irreducible-member]; (2) B4: lem-zl-geometric-irreducibility-separable had an unclosed $k., and its source place now names the full 0G33 equivalence; (3) B6/B7: lem-zl-finite-intermediate-fields recorded a false grep result ('0 hits'); I reran the grep and recorded the real hits, and how now gives lines 204/209/305. The item file is unchanged.; 6 file(s) fixed by the reviewer"
  }
 }

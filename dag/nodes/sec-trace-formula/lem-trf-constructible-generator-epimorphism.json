@@ -18,9 +18,115 @@
   "def-weil-pbc-scheme-conventions",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write G_U=(u_U)_!A_U for each affine etale object U over X. These form a separating family by [lem-weil-pbc-affine-etale-rank-one-separating], in the site and Hom-set universe specified there. Let I be the set of pairs (U,h:G_U\\to M). The coproduct exists by [lem-weil-pbc-module-sheaves-colimits-forgetful](2). Let q be the map whose summand (U,h) is h. If a q=b q, precomposition with every coprojection gives a h=b h for every U,h; the separating-family statement gives a=b. Thus q is epic. Each u_U is separated by [lem-weil-pbc-affine-source-morphism-separated]. Since X is Noetherian, it is locally Noetherian and hence quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; thus X is quasi-compact and quasi-separated. [lem-weil-pbc-qcqs-morphism-permanence](1) makes each affine-source etale map quasi-compact and of finite presentation. In particular it is locally of finite type, so is of finite type by [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-weil-pbc-affine-etale-rank-one-separating",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 093B(2), lemma-module-quotient-direct-sum, in Situation 0937; affine separating-family coproduct argument of 03EW(3)."
+   }
+  },
+  {
+   "text": "For each finite subset J\\subset I, let G_J=\\bigoplus_{i\\in J}(u_i)_!A_{U_i} and let g_J:G_J\\to C be the composite of the inclusion into the coproduct, q, and p. Recall from Step 1 that X is quasi-compact and quasi-separated, and each U_i is affine, hence quasi-compact and quasi-separated. Each summand is constructible by [lem-weil-pbc-etale-free-sheaf-constructible], and finite sums are constructible by the Serre closure theorem [thm-constructible-serre]. Therefore [lem-weil-pbc-constructible-module-surjectivity-locus] applies to g_J and shows that its geometric-stalk failure locus T_J={x\\in X\\mid (g_J)_{\\bar x} is not surjective} is constructible.",
+   "uses": [
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-module-surjectivity-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095N, lemma-category-constructible-modules, proof of the finite surjection (lines 12432--12459), with Tag 095E for constructible cokernels"
+   }
+  },
+  {
+   "text": "Fix a geometric point \\bar x. By [lem-weil-pbc-module-sheaves-colimits-forgetful], the forgetful functor to abelian sheaves is faithful and exact and carries the coproduct defining q to the coproduct of the underlying abelian sheaves; hence the underlying maps of q and p are epic. The stalk maps q_{\\bar x} and p_{\\bar x} are surjective because geometric stalks are exact [prop-weil-pbc-geometric-stalks-exact]. Moreover [lem-kun-stalks-commute-colimits] identifies the stalk of the coproduct with the coproduct of the stalks, so every element has finite support. The target stalk C_{\\bar x} is a finitely generated A-module by [lem-weil-pbc-constructible-module-finite-stalks]. Choose finitely many target generators and lifts first through p_{\\bar x}, then through q_{\\bar x}; all these lifts lie in (G_J)_{\\bar x} for one finite J. Hence x\\notin T_J, and the intersection of all T_J (over finite J\\subset I) is empty.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-kun-stalks-commute-colimits",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-constructible-module-finite-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095N, proof of lemma-category-constructible-modules, finite-type stalk and finite-support argument at lines 12455--12460"
+   }
+  },
+  {
+   "text": "Since X is quasi-compact and quasi-separated (Step 1), its underlying space is spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Apply [lem-weil-pbc-spectral-constructible-finite-intersection] to the family (T_J): there are finite subsets J_1,\\ldots,J_r of I whose failure loci have empty intersection. Let J_0=J_1\\cup\\cdots\\cup J_r. Since enlarging J can only add generators, T_{J_0}\\subseteq\\bigcap_kT_{J_k}=\\emptyset.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-constructible-finite-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095N, final constructible-topology compactness argument, lines 12455--12466"
+   }
+  },
+  {
+   "text": "For every x\\in X, with \\bar x the geometric point at an algebraic closure of \\kappa(x) used in Step 2, x\\notin T_{J_0}, so (g_{J_0})_{\\bar x} is surjective. Let K=coker(g_{J_0}) in the module-sheaf category. By [lem-weil-pbc-module-sheaves-colimits-forgetful], its underlying abelian sheaf is the cokernel of the underlying map, and exactness of geometric stalks identifies K_{\\bar x} with the cokernel of the surjective stalk map, so every geometric stalk of K is zero. For each scheme point s use the geometric point at the algebraic closure of \\kappa(s), as specified in the blueprint update of [lemma-weil-pbc-geometric-stalk-conservative]. Apply that conservative statement to the map from the underlying abelian sheaf of K to zero. Its stalk maps are isomorphisms, so that sheaf is zero; faithfulness of the forgetful functor then gives K=0. The abelian-category criterion epi iff zero cokernel makes g_{J_0} an epimorphism.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095N, finite-surjection conclusion after the constructible-topology argument"
+   }
+  },
+  {
+   "text": "Let e:G_{J_0}\\to M be the finite-coproduct inclusion followed by q; then p e=g_{J_0} is epic. Form U=\\coprod_{i\\in J_0}U_i and u:U\\to X using [lem-weil-pbc-scheme-coproduct-family]; its components are clopen and cover U. Etaleness, separatedness and finite type follow componentwise: there are no cross-component diagonal terms, and the finite union of finite affine covers over any affine open of X is finite. To check u_!A_U=\\bigoplus_i(u_i)_!A_{U_i}, use the sheafified sum-over-lifts construction [def-weil-pbc-etale-sum-extension]. A lift s:V\\to U partitions V into the clopen pieces V_i=s^{-1}(U_i). The coefficient section on V is exactly the tuple of its restrictions to these pieces, by the sheaf axiom [def-weil-pbc-etale-sheaves]. On this covering, the summand indexed by s belongs to the corresponding (u_i)_! summand; conversely the summands for lifts V\\to U_i map to those for V\\to U. These maps are inverse after restriction to the V_i, hence after sheafification. Sheafification of the finite presheaf sum is the sheaf coproduct by [lem-weil-pbc-module-sheaves-colimits-forgetful](2). This proves the asserted identification, including the empty union, whose extension is zero.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095N, finite-index conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-kun-stalks-commute-colimits",
+  "lem-weil-pbc-affine-etale-rank-one-separating",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-constructible-module-finite-stalks",
+  "lem-weil-pbc-constructible-module-surjectivity-locus",
+  "lem-weil-pbc-etale-free-sheaf-constructible",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-spectral-constructible-finite-intersection",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095N, proof of the finite surjection, using Modules on Sites Lemma 093B(2) in Situation 0937 for the initial free epimorphism."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +155,248 @@
    "results": "8 hits including SheafOfModules.GeneratingSections.epi, SheafOfModules.free, and CategoryTheory.Sheaf.isLocallySurjective_iff_epi'; no constructibility-specific theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "t": "2026-10-17T17:11:03Z",
+   "tool": "grep",
+   "query": "GeneratingSections|freeYoneda|isLocallySurjective_iff_epi",
+   "sub": "Mathlib",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "results": "0 hits: ",
+   "verdict": "invalid directory: extra Mathlib prefix; superseded by corrected grep with no subdirectory"
+  },
+  {
+   "t": "2026-10-17T17:11:04Z",
+   "tool": "leansearch",
+   "query": "Every epimorphism onto a constructible etale module sheaf is lifted by finitely many extension by zero constant generators",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "SheafOfModules.GeneratingSections.ofEpi_s",
+    "SheafOfModules.GeneratingSections.epi",
+    "SheafOfModules.GeneratingSections.ofEpi",
+    "PresheafOfModules.epi_of_surjective",
+    "CategoryTheory.Projective.instHasLiftingPropertyOfEpi",
+    "ModuleCat.range_eq_top_of_epi",
+    "PresheafOfModules.epi_iff_surjective",
+    "PresheafOfModules.instEpiModuleCatCarrierObjOppositeRingCatApp"
+   ],
+   "digest": "0cc079fbb42532cb",
+   "date": "2026-10-17",
+   "results": "8 hits: SheafOfModules.GeneratingSections.ofEpi_s; SheafOfModules.GeneratingSections.epi; SheafOfModules.GeneratingSections.ofEpi; PresheafOfModules.epi_of_surjective; CategoryTheory.Projective.instHasLiftingPropertyOfEpi; ModuleCat.range_eq_top_of_epi; PresheafOfModules.epi_iff_surjective; PresheafOfModules.instEpiModuleCatCarrierObjOppositeRingCatApp",
+   "verdict": "related generic results; none states finite affine-etale generator lifting"
+  },
+  {
+   "t": "2026-10-17T17:11:04Z",
+   "tool": "loogle",
+   "query": "SheafOfModules.GeneratingSections.epi, PresheafOfModules.freeYoneda, CategoryTheory.Sheaf.isLocallySurjective_iff_epi",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "results": "0 hits: ",
+   "verdict": "no match in this search"
+  },
+  {
+   "t": "2026-10-17T17:11:05Z",
+   "tool": "leanfinder",
+   "query": "A finite etale free generator family gives an epimorphism onto every etale module sheaf and lifts an epimorphism onto a constructible target",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "SheafOfModules.GeneratingSections.ofEpi",
+    "SheafOfModules.GeneratingSections.ofEpi_I",
+    "SheafOfModules.GeneratingSections.epi",
+    "SheafOfModules.GeneratingSections.ofEpi_s",
+    "Algebra.Etale.exists_subalgebra_fg",
+    "StandardEtalePresentation",
+    "StandardEtalePresentation.lift_bijective",
+    "Algebra.Etale.finitePresentation"
+   ],
+   "digest": "3802a7be042543ec",
+   "date": "2026-10-17",
+   "results": "8 hits: SheafOfModules.GeneratingSections.ofEpi; SheafOfModules.GeneratingSections.ofEpi_I; SheafOfModules.GeneratingSections.epi; SheafOfModules.GeneratingSections.ofEpi_s; Algebra.Etale.exists_subalgebra_fg; StandardEtalePresentation; StandardEtalePresentation.lift_bijective; Algebra.Etale.finitePresentation",
+   "verdict": "related generic results; none states finite affine-etale generator lifting"
+  },
+  {
+   "t": "2026-10-17T17:11:13Z",
+   "tool": "grep",
+   "query": "GeneratingSections|freeYoneda|isLocallySurjective_iff_epi",
+   "sub": "Mathlib/Algebra/Category/ModuleCat",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "results": "0 hits: ",
+   "verdict": "invalid directory: extra Mathlib prefix; superseded by corrected grep with no subdirectory"
+  },
+  {
+   "t": "2026-10-17T17:11:14Z",
+   "tool": "leansearch",
+   "query": "A sheaf of modules has a free Yoneda coproduct epimorphism and a finite constructible generator lifting theorem",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "SheafOfModules.ιFree",
+    "PresheafOfModules.instEpiFromFreeYonedaCoproduct",
+    "SheafOfModules.free",
+    "CategoryTheory.Sheaf.freeYoneda",
+    "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+    "SheafOfModules.GeneratingSections.epi",
+    "CategoryTheory.Sheaf.isSeparator",
+    "SheafOfModules.GeneratingSections.mk"
+   ],
+   "digest": "daed9ced56c70c14",
+   "date": "2026-10-17",
+   "results": "8 hits: SheafOfModules.ιFree; PresheafOfModules.instEpiFromFreeYonedaCoproduct; SheafOfModules.free; CategoryTheory.Sheaf.freeYoneda; CategoryTheory.Sheaf.freeYonedaHomEquiv; SheafOfModules.GeneratingSections.epi; CategoryTheory.Sheaf.isSeparator; SheafOfModules.GeneratingSections.mk",
+   "verdict": "related generic results; none states finite affine-etale generator lifting"
+  },
+  {
+   "t": "2026-10-17T17:11:14Z",
+   "tool": "loogle",
+   "query": "SheafOfModules.GeneratingSections.epi",
+   "sub": "",
+   "ok": true,
+   "n_hits": 1,
+   "note": "",
+   "top": [
+    "SheafOfModules.GeneratingSections.epi"
+   ],
+   "digest": "20f4afdaf51b270c",
+   "date": "2026-10-17",
+   "results": "1 hits: SheafOfModules.GeneratingSections.epi",
+   "verdict": "related generic results; none states finite affine-etale generator lifting"
+  },
+  {
+   "t": "2026-10-17T17:11:15Z",
+   "tool": "leanfinder",
+   "query": "An arbitrary sheaf of modules on a small etale site has an epimorphism from a coproduct of extension by zero constant rank one sheaves",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "SheafOfModules.GeneratingSections.epi",
+    "SheafOfModules.GeneratingSections.ofEpi",
+    "SheafOfModules.generatorsOfIsCokernelFree",
+    "PresheafOfModules.instEpiFromFreeYonedaCoproduct",
+    "SheafOfModules.generatorsOfIsCokernelFree_s",
+    "SheafOfModules.GeneratingSections.opEpi_comp",
+    "SheafOfModules.generatorsOfIsCokernelFree_I",
+    "SheafOfModules.GeneratingSections.ofEpi_I"
+   ],
+   "digest": "050f7aef3c15d9fc",
+   "date": "2026-10-17",
+   "results": "8 hits: SheafOfModules.GeneratingSections.epi; SheafOfModules.GeneratingSections.ofEpi; SheafOfModules.generatorsOfIsCokernelFree; PresheafOfModules.instEpiFromFreeYonedaCoproduct; SheafOfModules.generatorsOfIsCokernelFree_s; SheafOfModules.GeneratingSections.opEpi_comp; SheafOfModules.generatorsOfIsCokernelFree_I; SheafOfModules.GeneratingSections.ofEpi_I",
+   "verdict": "related generic results; none states finite affine-etale generator lifting"
+  },
+  {
+   "t": "2026-10-17T17:11:24Z",
+   "tool": "grep",
+   "query": "freeYoneda",
+   "sub": "Mathlib",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "results": "0 hits: ",
+   "verdict": "invalid directory: extra Mathlib prefix; superseded by corrected grep with no subdirectory"
+  },
+  {
+   "t": "2026-10-17T17:11:24Z",
+   "tool": "grep",
+   "query": "GeneratingSections",
+   "sub": "Mathlib",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "results": "0 hits: ",
+   "verdict": "invalid directory: extra Mathlib prefix; superseded by corrected grep with no subdirectory"
+  },
+  {
+   "t": "2026-10-17T17:11:24Z",
+   "tool": "grep",
+   "query": "isLocallySurjective_iff_epi",
+   "sub": "Mathlib",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "results": "0 hits: ",
+   "verdict": "invalid directory: extra Mathlib prefix; superseded by corrected grep with no subdirectory"
+  },
+  {
+   "t": "2026-10-17T17:14:45Z",
+   "tool": "grep",
+   "query": "GeneratingSections|freeYoneda",
+   "sub": "",
+   "ok": true,
+   "n_hits": 25,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean"
+   ],
+   "digest": "deed4c8364038ec9",
+   "date": "2026-10-17",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "verdict": "related generic results; none states finite affine-etale generator lifting"
+  },
+  {
+   "t": "2026-10-17T17:14:45Z",
+   "tool": "grep",
+   "query": "isLocallySurjective_iff_epi",
+   "sub": "",
+   "ok": true,
+   "n_hits": 15,
+   "note": "",
+   "top": [
+    "Mathlib/Condensed/Epi.lean",
+    "Mathlib/Condensed/Epi.lean",
+    "Mathlib/Condensed/Light/Epi.lean",
+    "Mathlib/Condensed/Light/Epi.lean",
+    "Mathlib/Condensed/Light/Epi.lean",
+    "Mathlib/Condensed/Light/Epi.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Conservative.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Conservative.lean"
+   ],
+   "digest": "1ed9380d53f4fa41",
+   "date": "2026-10-17",
+   "results": "15 hits: Mathlib/Condensed/Epi.lean; Mathlib/Condensed/Epi.lean; Mathlib/Condensed/Light/Epi.lean; Mathlib/Condensed/Light/Epi.lean; Mathlib/Condensed/Light/Epi.lean; Mathlib/Condensed/Light/Epi.lean; Mathlib/CategoryTheory/Sites/Point/Conservative.lean; Mathlib/CategoryTheory/Sites/Point/Conservative.lean",
+   "verdict": "related generic results; none states finite affine-etale generator lifting"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-constructible-free-etale-resolution",
@@ -71,5 +415,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-constructible-generator-epimorphism",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by folding the generic free-generator epimorphism into Step 1 using the existing affine separating-family and colimit-existence nodes, with right cancellation proved inline. Step 3 now cites stalk-colimit preservation and the exact forgetful functor to abelian sheaves; Step 5 cites the same forgetful comparison and explicitly uses the blueprint-updated algebraic-closure geometric points; Step 6 cites the extension-by-zero definition for the finite disjoint-union identification. The source was corrected from Modules Tag 0CAH to Lemma 093B(2) in Situation 0937, and all Mathlib search records now retain their actual generic hits.",
+  "blueprint": "Realizes the finite-etale-generator lifting assertion used to start the bounded-above resolution in the imported Theorem 5.1 proof, with the initial free epimorphism supplied directly by the affine separating-family route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-free-sheaf-constructible",
+    "why": "Generic constructibility of etale extension-by-zero generators is not a trace-formula-specific lemma."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Closure of constructible sheaves under finite sums is generic sheaf infrastructure absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-surjectivity-locus",
+    "why": "Constructibility of finite-map failure loci is generic etale-sheaf infrastructure absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-finite-stalks",
+    "why": "Finite generation of constructible geometric stalks is generic etale-sheaf infrastructure absent from this unit."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness of geometric stalks is generic site infrastructure absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Spectrality of the Noetherian scheme underlying space is generic scheme infrastructure absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-constructible-finite-intersection",
+    "why": "Constructible-topology compactness is generic spectral-space infrastructure absent from this unit."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Conservativity of geometric stalks is generic etale-sheaf infrastructure absent from this unit."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic site, scheme, or module-sheaf infrastructure used in the finite-generator argument; this trace-formula unit has no replacement for the cited statement."
+   },
+   {
+    "node": "def-weil-pbc-etale-sheaves",
+    "why": "Generic site, scheme, or module-sheaf infrastructure used in the finite-generator argument; this trace-formula unit has no replacement for the cited statement."
+   },
+   {
+    "node": "def-weil-pbc-etale-sum-extension",
+    "why": "Generic site, scheme, or module-sheaf infrastructure used in the finite-generator argument; this trace-formula unit has no replacement for the cited statement."
+   },
+   {
+    "node": "lem-kun-stalks-commute-colimits",
+    "why": "Generic site, scheme, or module-sheaf infrastructure used in the finite-generator argument; this trace-formula unit has no replacement for the cited statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-etale-rank-one-separating",
+    "why": "Generic site, scheme, or module-sheaf infrastructure used in the finite-generator argument; this trace-formula unit has no replacement for the cited statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic site, scheme, or module-sheaf infrastructure used in the finite-generator argument; this trace-formula unit has no replacement for the cited statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic site, scheme, or module-sheaf infrastructure used in the finite-generator argument; this trace-formula unit has no replacement for the cited statement."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic site, scheme, or module-sheaf infrastructure used in the finite-generator argument; this trace-formula unit has no replacement for the cited statement."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic site, scheme, or module-sheaf infrastructure used in the finite-generator argument; this trace-formula unit has no replacement for the cited statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-free-sheaf-constructible",
+  "thm-constructible-serre",
+  "lem-weil-pbc-constructible-module-surjectivity-locus",
+  "lem-weil-pbc-constructible-module-finite-stalks",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-constructible-finite-intersection",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-kun-stalks-commute-colimits",
+  "lem-weil-pbc-affine-etale-rank-one-separating",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-c2949fa92",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-c2949fa92 (reviewer sub-agent of L); spot-checked: I read the whole item. It has 6 steps and no new nodes; the former helper was folded into Step 1. I checked it against Stacks 095N (etale-cohomology.tex lines 12412-12466) and 093B(2) (sites-modules.tex line 5203, Situation 0937). The item applies the 095N argument to p∘q, so the epimorphism M->C can be arbitrary, which is what the parent lem-trf-constructible-free-etale-resolution needs. The statement is unchanged and not weakened. Edge cases checked: X empty, C=0, I empty (forces M=0), M of infinite rank, p an isomorphism. The only near-duplicate candidate, new-constructible-affine-free-presentation-general, is a finite presentation of F itself and not this lift through an arbitrary epimorphism. Each cited statement's hypotheses hold where it is used: the separating family needs no hypotheses; colimits-forgetful (1)-(3); affine-source separated; qcqs permanence (1); free-sheaf-constructible and surjectivity-locus need X qcqs, U affine and A finite; Serre closure (finite sums are extensions); stalks commute with colimits; constructible stalks are finite; spectral space and finite intersection; the conservative lemma in its blueprint_update form at algebraic-closure points. Step 6's disjoint-union identification is accepted. I repaired two faults (fix file written). (C1) 'Noetherian ⇒ quasi-separated' was used without a citation in Step 1 and implicitly in Steps 2 and 4: Step 1 now cites the existing Mathlib leaf lem-weil-pbc-locally-noetherian-quasi-separated (added to uses and proof_deps), and Steps 2 and 4 now say that X and the affine U_i are qcqs. Step 5 claimed surjectivity at every geometric point, which is more than Step 4 gives; it now claims it only at the algebraic-closure point of each x. I accept the declared tool uses: generic infrastructure that unit sk-i-curve-zero does not replace. No SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }
