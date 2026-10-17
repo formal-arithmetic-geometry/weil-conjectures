@@ -22,7 +22,9 @@
   "def-weil-irreducible-components",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification"
  ],
  "proof": [
   {
@@ -222,5 +224,29 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-27478569f (reviewer sub-agent of L); spot-checked: Read the item, all new nodes, cited statements, and Temkin’s normalization and specialization arguments. Repaired C1 by adding the missing nodal geometric-reducedness lemma from Stacks 0E37 and citing it in steps 3 and 6. Target statement unchanged. Corrected JSON files and full source checks are in fixes/ and review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ValuationExceptionalClosedImageCriterion",
+  "declaration": "AlgebraicGeometry.Temkin.valuation_exceptional_closed_image_criterion",
+  "declarations": [
+   "AlgebraicGeometry.MultipointedCurve.geometricComponentInclusion",
+   "AlgebraicGeometry.MultipointedCurve.Hom.closedImageFiberGenericPoints",
+   "AlgebraicGeometry.MultipointedCurve.Hom.IsExceptionalFiberGenericPoint",
+   "AlgebraicGeometry.Temkin.valuation_exceptional_closed_image_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuationExceptionalClosedImageCriterion.lean",
+  "statement": "theorem valuation_exceptional_closed_image_criterion (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (X Y : MultipointedCurve (Spec (.of V))) (hX : Smooth (pullback.snd X.x (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (hD : Etale (pullback.snd X.d (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (f : Y.Hom X) (hf : f.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype))) (hY : Y.IsSemistable) : f.closedImageFiberGenericPoints.Finite ∧ (f.IsStable (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) ↔ ∀ z ∈ f.closedImageFiberGenericPoints, ¬ f.IsExceptionalFiberGenericPoint z) ∧ (¬ f.IsStable (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) → ∃ z ∈ f.closedImageFiberGenericPoints, f.IsExceptionalFiberGenericPoint z)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-de1ea9158",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, docstrings, edge cases, route-pivot compliance, report sections, and reproducible per-file compilation all checked; no findings."
  }
 }

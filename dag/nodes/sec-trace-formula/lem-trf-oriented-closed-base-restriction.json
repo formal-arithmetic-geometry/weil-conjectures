@@ -15,7 +15,9 @@
   "def-pc-fibre-product",
   "lem-trf-oriented-product-universal",
   "def-trf-oriented-nearby-cycles",
-  "def-trf-oriented-constructible-sheaf"
+  "def-trf-oriented-constructible-sheaf",
+  "def-trf-oriented-constructible-set-sheaf",
+  "lem-trf-topos-complement-factorization"
  ],
  "proof": [
   {
@@ -354,5 +356,36 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-e9b827156 (reviewer sub-agent of L); spot-checked: Read the item, all twelve steps, every cited node statement, unit/chapter route, report, and cited source material. Verified hypotheses, oriented base-change morphisms, finite constant-ring module coefficients, constructibility transfers, closed-subscheme variant, edge cases, route-pivot compliance, absence of SGA 4 usage, and no long-step hidden lemma. No duplicate or repair node is needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedClosedBaseRestriction",
+  "declaration": "AlgebraicGeometry.OrientedClosedBaseRestriction.orientedClosedBaseRestriction",
+  "declarations": [
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.productDatum",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.restrictionSite",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.comparisonBeta",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.comparisonSite",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.site_properties",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.restriction",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.comparison",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.restrictionModules",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.comparisonModules",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.Assertions",
+   "AlgebraicGeometry.OrientedClosedBaseRestriction.orientedClosedBaseRestriction"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedClosedBaseRestriction.lean",
+  "statement": "theorem orientedClosedBaseRestriction {X T S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (k : T ⟶ S) [IsClosedImmersion k] : Assertions.{u, v} f k ∧ ∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i], Assertions.{u, v} (i ≫ f) k",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d2f2525fa",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source references, Lean declarations, docstrings, edge cases, route compliance, report sections, and combined scompile.py evidence; no substantive or mechanical defects found."
  }
 }

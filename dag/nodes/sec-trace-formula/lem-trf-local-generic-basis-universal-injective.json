@@ -137,5 +137,29 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-dc71c8196 (reviewer sub-agent of L); spot-checked: I read Stacks 05I3 in full: the statement and the whole proof (flat.tex lemma-induction-step). I also read 05FT, 05FQ with its proof, and algebra 05CM, 05CJ and 058P. The item is exactly 05I3 (1)⇒(2) and is not weakened. The parent's two uses fit its hypotheses. Step 1 uses 05FT, whose hypotheses (finitely presented, flat, all fibres geometrically integral) match. Step 2 applies 05FQ to S^r→N_q, where the source uses N_p. This is valid: since ξ⊂q and N_ξ/mN_ξ=N⊗κ(ξ), the reduction (S/mS)^r→N_q/mN_q followed by the map to N⊗κ(ξ) equals the injective map through κ(ξ)^r. Step 3 writes out 05CJ inline, which is one line, then uses 05CM(1) at S∖q and 058P on the localized sequence, which is exact and universally exact. The four new nodes are 05FT, 05FQ, 05CM(1) and the M_3 half of 058P. Each is strictly smaller than the item; none restates a clause of it. Small cases all behave correctly: k[x] over k; R[x]/(x) over k[t]_(t) with r=0; S/(t), where the hypothesis rightly fails; and multiplication by t, where 05FQ's hypothesis rightly fails. rg over the DAG found no duplicates; lem-trf-universal-injective-check-stalks states something different (R_p-local). A grep of Mathlib found no match. Everything stays in unit sk-i-curve-zero, there are no tool_uses, and no SGA is cited. Repaired in fixes/: (1) definition citations: missing finite presentation, residue field, spectrum and geometric integrality added to fibres-integral-projective; unused projective/finitely-generated citations removed from the new nodes; localization citation and an inline definition of universal injectivity added to the localization node and the item. (2) An ill-typed, unused 'R_T-module' clause removed from lem-trf-local-universal-injective-localization. (3) blueprint.from.place of the item and the new nodes changed from Stacks tags to the place in lem-trf-local-term-locality's proof, plus the exact 05I3 sentence each node serves. No node was dropped.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LocalGenericBasisUniversalInjective",
+  "declaration": "RingHom.local_generic_basis_universal_injective",
+  "declarations": [
+   "RingHom.geometricFibres_domain_baseChange",
+   "RingHom.maximalIdeal_map_isPrime_of_geometricFibres",
+   "RingHom.local_generic_basis_universal_injective"
+  ],
+  "statement": "theorem local_generic_basis_universal_injective {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [IsLocalRing R] (hflat : RingHom.Flat (algebraMap R S)) (hfp : RingHom.FinitePresentation (algebraMap R S)) (hgeom : ∀ (p : PrimeSpectrum R) (K : Type (max u v w)) [Field K] [Algebra R K] (ι : p.asIdeal.ResidueField →+* K), algebraMap R K = ι.comp (algebraMap R p.asIdeal.ResidueField) → IsDomain (K ⊗[R] S)) (r : ℕ) (N : Type t) [AddCommGroup N] [Module S N] [Module R N] [IsScalarTower R S N] [Module.Finite S N] (q : PrimeSpectrum S) (hq : q.asIdeal.comap (algebraMap R S) = IsLocalRing.maximalIdeal R) (hNq : @Module.Flat R (LocalizedModule q.asIdeal.primeCompl N) _ _ (Module.compHom (LocalizedModule q.asIdeal.primeCompl N) (algebraMap R S))) (α : (Fin r → S) →ₗ[S] N) (hα : Function.Bijective (LinearMap.lTensor (@Ideal.ResidueField S _ (Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) (maximalIdeal_map_isPrime_of_geometricFibres (R := R) (S := S) hgeom)) α)) : (∀ (L : Type z) [AddCommGroup L] [Module R L], Function.Injective (LinearMap.lTensor L (α.restrictScalars R))) ∧ @Module.Flat R (LocalizedModule q.asIdeal.primeCompl (N ⧸ LinearMap.range α)) _ _ (Module.compHom (LocalizedModule q.asIdeal.primeCompl (N ⧸ LinearMap.range α)) (algebraMap R S))",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/LocalGenericBasisUniversalInjective.lean",
+  "note": "Repair of H3 at immutable head 53591ecc6125: primality is derived by maximalIdeal_map_isPrime_of_geometricFibres and supplied explicitly to Ideal.ResidueField. geometricFibres_domain_baseChange transports the geometric-fibre domain condition to field extensions in every universe. Both helpers render clauses of this node (geometric integrality and primality), with their own source/proof docstrings; neither is an added hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-900275086",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Immutable delivery matches Stacks 05I3, uses canonical constructions and dependencies, includes required report sections, and compiles successfully via scompile.py."
  }
 }
