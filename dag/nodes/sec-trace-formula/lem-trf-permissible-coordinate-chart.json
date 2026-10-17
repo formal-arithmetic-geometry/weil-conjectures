@@ -14,7 +14,8 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-nagata-strict-transform",
   "def-weil-pbc-regular-system-of-parameters",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "def-nagata-blowup-chart-ring"
  ],
  "proof": [
   {
@@ -237,5 +238,39 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-ce538cc1c (reviewer sub-agent of L); spot-checked: Read the required governance, unit/chapter route, item, report, every new node, cited statements, ILO Lemma 4.2.9, Stacks Tags 0BIQ and 00NU, and Mathlib polynomial source. Checked all five proof steps, hypotheses, edge cases, chart algebra, regularity, intersections, strict-transform closures, duplicate candidates, searches, blueprint fields, and route-pivot/SGA restrictions. Wrote review.md with concrete source and step checks; no mathematical or procedural fault found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PermissibleCoordinateChart",
+  "declaration": "AlgebraicGeometry.PermissibleCoordinateChart.permissible_coordinate_chart",
+  "declarations": [
+   "AlgebraicGeometry.PermissibleCoordinateChart.center",
+   "AlgebraicGeometry.PermissibleCoordinateChart.relations",
+   "AlgebraicGeometry.PermissibleCoordinateChart.Chart",
+   "AlgebraicGeometry.PermissibleCoordinateChart.ratio",
+   "AlgebraicGeometry.PermissibleCoordinateChart.strictEquation",
+   "AlgebraicGeometry.PermissibleCoordinateChart.equation",
+   "AlgebraicGeometry.PermissibleCoordinateChart.labels",
+   "AlgebraicGeometry.PermissibleCoordinateChart.intersection",
+   "AlgebraicGeometry.PermissibleCoordinateChart.unionIdeal",
+   "AlgebraicGeometry.PermissibleCoordinateChart.centerSheaf",
+   "AlgebraicGeometry.PermissibleCoordinateChart.hyperplane",
+   "AlgebraicGeometry.PermissibleCoordinateChart.projection",
+   "AlgebraicGeometry.PermissibleCoordinateChart.permissible_coordinate_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PermissibleCoordinateChart.lean",
+  "statement": "theorem permissible_coordinate_chart (R : Type u) [CommRing R] [IsRegularLocalRing R] (d r : ℕ) (t : Fin d → R) (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t)) (hr : 1 ≤ r) (hrd : r ≤ d) (J I : Finset (Fin d)) (hJ : J.Nonempty) (hJB : (J ∩ Finset.univ.filter (fun i : Fin d ↦ i.val < r)).Nonempty) (hI : I ⊆ Finset.univ.filter (fun i : Fin d ↦ i.val < r)) (j : Fin d) (hj : j ∈ J) : (∃ e : Chart t J j ≃ₐ[R] AffineBlowup.chartRing (center t J) (t j), ∀ i : ↥(J.erase j), (e (ratio t J j i) : Localization.Away (t j)) = AffineBlowup.chartFraction (t j) 1 (t i)) ∧ IsRegularRing (Chart t J j) ∧ (Ideal.span {algebraMap R (Chart t J j) (∏ i ∈ Finset.univ.filter (fun i : Fin d ↦ i.val < r), t i)}).radical = unionIdeal t J j (labels (Finset.univ.filter (fun i : Fin d ↦ i.val < r)) j) ∧ (∀ p : PrimeSpectrum (Chart t J j), ∃ s : List (Localization.AtPrime p.asIdeal), IsLocalRing.IsRegularSystemOfParameters s ∧ ∃ f : {k : Option (Fin d) // k ∈ labels (Finset.univ.filter (fun i : Fin d ↦ i.val < r)) j ∧ equation t J j k ∈ p.asIdeal} → Fin s.length, Function.Injective f ∧ ∀ k, s.get (f k) = algebraMap (Chart t J j) (Localization.AtPrime p.asIdeal) (equation t J j k)) ∧ (∀ S : Finset (Option (Fin d)), S ⊆ labels (Finset.univ.filter (fun i : Fin d ↦ i.val < r)) j → (Subsingleton (Chart t J j ⧸ intersection t J j S) ∨ IsRegularRing (Chart t J j ⧸ intersection t J j S)) ∧ ∀ p : PrimeSpectrum (Chart t J j), intersection t J j S ≤ p.asIdeal → ringKrullDim (Localization.AtPrime p.asIdeal) = ringKrullDim (Localization.AtPrime p.asIdeal ⧸ (intersection t J j S).map (algebraMap (Chart t J j) (Localization.AtPrime p.asIdeal))) + (S.card : WithBot ℕ∞)) ∧ (((Ideal.span {∏ i ∈ I, t i} ⊓ center t J).map (algebraMap R (Chart t J j))).radical = unionIdeal t J j (labels I j)) ∧ (∀ i ∈ I, (strictTransformMap (hyperplane (t i)) (projection t J j) (centerSheaf t J).support.compl).ker = (hyperplane (strictEquation t J j i)).ker)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The quotient presentation is identified as an R-algebra with the existing AffineBlowup.chartRing. Reduced unions use affine radical ideals, intersections use quotient rings and prime local dimension drops, and strict transforms use the recorded strictTransformMap kernel. Helpers specialize the objects in this node; they contain real data. Adds the already recorded definition node def-nagata-blowup-chart-ring to statement dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dd14df582",
+  "group": "NC",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source mapping, definitions, edge cases, route-pivot compliance, and reproduced scompile successfully; no findings."
  }
 }
