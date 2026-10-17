@@ -86,7 +86,7 @@ Let `C` be a smooth separated curve of finite type over an algebraically closed 
 `𝒢ₘ^cl = ν^* 𝔾ₘ` the classical multiplicative sheaf on the small pro-étale site of `C`. Then
 `H¹(C_proét, 𝒢ₘ^cl) ≅ Pic(C)` and `Hᵠ(C_proét, 𝒢ₘ^cl) = 0` for `q ≥ 2`: the comparison
 `RΓ(C_proét, ν^* F) ≅ RΓ(C_ét, F)`
-(`ProEtale.nonempty_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj_iso`)
+(`ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso`)
 transports `AlgebraicGeometry.IsCurve.sheafH_gmSheaf_of_smooth`. -/
 theorem rightDerived_globalSections_comparisonUpperStar_gmSheaf (f : C ⟶ Spec (.of k))
     [IsCurve f] [Smooth f] :
@@ -97,12 +97,12 @@ theorem rightDerived_globalSections_comparisonUpperStar_gmSheaf (f : C ⟶ Spec 
         IsZero (((ProEtale.globalSectionsFunctor AddCommGrpCat.{u + 1} C).rightDerived q).obj
           ((ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} C).obj C.gmSheaf)) := by
   refine ⟨?_, fun q hq ↦ ?_⟩
-  · obtain ⟨e₁⟩ := ProEtale.nonempty_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj_iso
+  · let e₁ := ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso
       AddCommGrpCat.{u + 1} C C.gmSheaf 1
     obtain ⟨e₂⟩ := nonempty_rightDerived_sectionsFunctor_iso_sheafH C 1 C.gmSheaf
     exact ⟨e₁ ≪≫ e₂ ≪≫
       (Scheme.Pic.toCohomologicalPicardGroupAddEquiv C).symm.toAddCommGrpIso⟩
-  · obtain ⟨e₁⟩ := ProEtale.nonempty_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj_iso
+  · let e₁ := ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso
       AddCommGrpCat.{u + 1} C C.gmSheaf q
     obtain ⟨e₂⟩ := nonempty_rightDerived_sectionsFunctor_iso_sheafH C q C.gmSheaf
     have := subsingleton_sheafH_gmSheaf_of_smooth f q hq

@@ -160,10 +160,10 @@ noncomputable def comparisonUpperStarCompUpperStarIso {Y X : Scheme.{u}} (g : Y 
 /-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
 `ν^* M` of an étale sheaf are those of `M`: `RΓ(X_proét, ν^* M) ≅ RΓ(X_ét, M)`, by the
 invertibility of the derived unit `M ⟶ Rν_* ν^* M`. -/
-lemma nonempty_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj_iso (X : Scheme.{u})
+noncomputable def rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso (X : Scheme.{u})
     (M : Sheaf X.smallEtaleTopology A) (q : ℕ) :
-    Nonempty (((globalSectionsFunctor A X).rightDerived q).obj ((comparisonUpperStar A X).obj M) ≅
-      ((Etale.sectionsFunctor A X).rightDerived q).obj M) := by
+    ((globalSectionsFunctor A X).rightDerived q).obj ((comparisonUpperStar A X).obj M) ≅
+      ((Etale.sectionsFunctor A X).rightDerived q).obj M := by
   have := isIso_comparisonAdjunction_unit A X
   have : (comparisonLowerStar A X).PreservesInjectiveObjects :=
     Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
@@ -193,21 +193,21 @@ lemma nonempty_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj_iso (X
           ((comparisonLowerStar A X).rightDerivedFunctorPlus.mapIso
             (((comparisonUpperStar A X).mapDerivedCategoryPlusSingleFunctor 0).app M).symm ≪≫
           (asIso ((comparisonAdjunction A X).derivedPlus.unit.app _)).symm))
-  exact ⟨eR.symm.app _ ≪≫
+  exact eR.symm.app _ ≪≫
     ((comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X)
       |>.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).symm.app _ ≪≫ e ≪≫
     ((Etale.sectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
-      q).app M⟩
+      q).app M
 
 /-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
 `ν^* M` of an étale sheaf vanish in degree `q` if those of `M` do
-(`nonempty_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj_iso`). -/
+(`rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso`). -/
 lemma isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj (X : Scheme.{u})
     (M : Sheaf X.smallEtaleTopology A) (q : ℕ)
     (h : IsZero (((Etale.sectionsFunctor A X).rightDerived q).obj M)) :
     IsZero (((globalSectionsFunctor A X).rightDerived q).obj
       ((comparisonUpperStar A X).obj M)) :=
-  h.of_iso (nonempty_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj_iso A X M q).some
+  h.of_iso (rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso A X M q)
 
 end Acyclicity
 

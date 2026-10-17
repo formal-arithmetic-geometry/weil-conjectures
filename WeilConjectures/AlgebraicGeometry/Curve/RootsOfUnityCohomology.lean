@@ -68,6 +68,48 @@ lemma injective_map_rootsOfUnitySheafι_zero (X : Scheme.{u}) (n : ℕ) :
     Abelian.Ext.mk₀_comp_mk₀] at h
   rw [(cancel_mono (X.rootsOfUnitySheafι n)).1 ((Abelian.Ext.mk₀_bijective _ _).1 h)]
 
+lemma gmSection_one (X : Scheme.{u}) : gmSection (1 : Γ(X, ⊤)ˣ) = 0 := by
+  simp only [gmSection, map_one, ofMul_one]
+  rfl
+
+lemma gmSection_pow {X : Scheme.{u}} (a : Γ(X, ⊤)ˣ) (n : ℕ) :
+    gmSection (a ^ n) = n • gmSection a := by
+  simp only [gmSection, map_pow, ofMul_pow]
+  rfl
+
+/-- The section of `𝔾ₘ` over the terminal object of `X_ét` determines the unit. -/
+lemma gmSection_injective (X : Scheme.{u}) : Function.Injective (gmSection (X := X)) := by
+  have : IsIso (⊤_ X.Etale).hom := by
+    let e : ⊤_ X.Etale ≅ _ := (terminalIsTerminal : IsTerminal (⊤_ X.Etale)).uniqueUpToIso
+      (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)
+    have h : e.hom.left ≫ 𝟙 X = (⊤_ X.Etale).hom := by simpa using e.hom.w
+    have : IsIso e.hom.left :=
+      (MorphismProperty.Over.forget _ _ X ⋙ CategoryTheory.Over.forget X).map_isIso e.hom
+    exact ((Category.comp_id _).symm.trans h : e.hom.left = _) ▸ this
+  intro a b hab
+  have hab' := congrArg (fun x ↦ (Additive.toMul x.down : Γ((⊤_ X.Etale).left, ⊤)ˣ)) hab
+  ext
+  exact (ConcreteCategory.bijective_of_isIso (⊤_ X.Etale).hom.appTop).1 (congrArg Units.val hab')
+
+/-- `H⁰(X, μₙ) ⟶ H⁰(X, 𝔾ₘ) = Γ(X, 𝒪)ˣ` has image the `n`-th roots of unity, for `n` invertible
+on `X`: this is exactness of the Kummer sequence on global sections. -/
+lemma exists_equiv₀_map_rootsOfUnitySheafι_zero_iff (X : Scheme.{u}) {n : ℕ}
+    (hn : IsUnit (n : Γ(X, ⊤))) (a : Γ(X, ⊤)ˣ) :
+    (∃ x, Sheaf.H.equiv₀ _ terminalIsTerminal (Sheaf.H.map (X.rootsOfUnitySheafι n) 0 x) =
+      gmSection a) ↔ a ^ n = 1 := by
+  have key (y : Sheaf.H X.gmSheaf 0) :
+      y ∈ Set.range (Sheaf.H.map (X.rootsOfUnitySheafι n) 0) ↔ n • y = 0 := by
+    rw [← sheafH_map_kummerSequence_g_apply]
+    exact (Sheaf.H.exact_map_map (X.kummerSequence_shortExact n hn) 0 y).symm
+  let E := Sheaf.H.equiv₀ X.gmSheaf terminalIsTerminal
+  calc (∃ x, E (Sheaf.H.map (X.rootsOfUnitySheafι n) 0 x) = gmSection a)
+      ↔ E.symm (gmSection a) ∈ Set.range (Sheaf.H.map (X.rootsOfUnitySheafι n) 0) := by
+        simp only [Set.mem_range, ← E.eq_symm_apply]
+    _ ↔ n • gmSection a = 0 := by
+        rw [key, ← E.map_eq_zero_iff, map_nsmul, AddEquiv.apply_symm_apply]
+    _ ↔ a ^ n = 1 := by
+        rw [← gmSection_pow, ← gmSection_one, (gmSection_injective X).eq_iff]
+
 end Scheme
 
 namespace IsConnectedCurve
@@ -81,7 +123,8 @@ Let `C` be a smooth proper connected curve of genus `g` over an algebraically cl
 and `n ≥ 1` prime to `char k`. Write `δ² : Pic(C) = H¹(C, 𝔾ₘ) → H²(C, μₙ)` for the Kummer
 boundary (`AlgebraicGeometry.Scheme.kummerδ₁`). Then
 
-1. `H⁰(C, μₙ) ≅ μₙ(k)`; the map `H⁰(C, μₙ) → H⁰(C, 𝔾ₘ) = 𝒪(C)ˣ` is injective;
+1. `H⁰(C, μₙ) = μₙ(k)`: the map `H⁰(C, μₙ) → H⁰(C, 𝔾ₘ) = 𝒪(C)ˣ` is injective with image the
+   units `a` with `aⁿ = 1`, which are `μₙ(k)` as `𝒪(C) = k`;
 2. the map `H¹(C, μₙ) → H¹(C, 𝔾ₘ) = Pic(C)` is injective with image `Pic(C)[n]`, a group of
    order `n^{2g}`;
 3. `δ²` is surjective, and there is a unique isomorphism `degₙ : H²(C, μₙ) ≅ ℤ/n` with
@@ -96,7 +139,8 @@ sequence `0 → Pic⁰(C) → Pic(C) → ℤ → 0` with `Pic⁰(C) = J(k)` `n`-
 theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
     [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     (Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 0) ∧
-        Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 0 ≃+ Additive (rootsOfUnity n k))) ∧
+        ∀ a : Γ(C, ⊤)ˣ, (∃ x, Sheaf.H.equiv₀ _ terminalIsTerminal
+          (Sheaf.H.map (C.rootsOfUnitySheafι n) 0 x) = Scheme.gmSection a) ↔ a ^ n = 1) ∧
       (Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 1) ∧
         (Sheaf.H.map (C.rootsOfUnitySheafι n) 1).range =
           AddSubgroup.torsionBy C.CohomologicalPicardGroup n ∧
@@ -116,11 +160,7 @@ theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnect
     IsConnectedCurve.smoothOfRelativeDimension_one f
   have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
   refine ⟨⟨C.injective_map_rootsOfUnitySheafι_zero n, ?_⟩, ⟨?_, ?_, ?_⟩, ?_, ?_⟩
-  · -- `H⁰(C, μₙ) ≅ H⁰(C, ℤ/n) ≅ ℤ/n ≅ μₙ(k)`
-    obtain ⟨e₁⟩ := Scheme.nonempty_addEquiv_sheafH_constantZMod_rootsOfUnitySheaf f n hn 0
-    obtain ⟨e₂⟩ := IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero f n hn
-    obtain ⟨-, -, ζ, hζ, -⟩ := IsSepClosed.exists_isPrimitiveRoot.{u, u} k n
-    exact ⟨e₁.symm.trans (e₂.trans (hζ.isUnit_unit NeZero.out).zmodAddEquivRootsOfUnity)⟩
+  · exact C.exists_equiv₀_map_rootsOfUnitySheafι_zero_iff hn'
   · -- the global units are `n`-divisible, so the Kummer map on them vanishes
     obtain ⟨hα, hαβ, -⟩ := C.exact_sheafH_rootsOfUnitySheaf_one n hn'
     let := (Scheme.globalSectionsRingHom k (X := C)).toAlgebra
@@ -210,12 +250,6 @@ theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnect
     rw [hd', hd, hD]
   · intro q hq
     exact IsCurve.subsingleton_sheafH_of_three_le f _ (C.isTorsion_rootsOfUnitySheaf hn0) q hq
-
-/-- A morphism of sheaves which is an isomorphism induces bijections on cohomology. -/
-lemma _root_.CategoryTheory.Sheaf.H.bijective_map_of_isIso {X : Scheme.{u}}
-    {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G) [IsIso φ] (q : ℕ) :
-    Function.Bijective (Sheaf.H.map φ q) :=
-  ((Sheaf.functorH _ q).mapIso (asIso φ)).addCommGroupIsoToAddEquiv.bijective
 
 /-- Blueprint `det-curveestimate-canonical-mu`, part 5: invariance under extension of
 algebraically closed fields.
@@ -453,7 +487,8 @@ These are statements about the small étale site; the comparison with the pro-é
 theorem sheafH_rootsOfUnitySheaf_canonical_of_isProper (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     ((Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 0) ∧
-        Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 0 ≃+ Additive (rootsOfUnity n k))) ∧
+        ∀ a : Γ(C, ⊤)ˣ, (∃ x, Sheaf.H.equiv₀ _ terminalIsTerminal
+          (Sheaf.H.map (C.rootsOfUnitySheafι n) 0 x) = Scheme.gmSection a) ↔ a ^ n = 1) ∧
       (Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 1) ∧
         (Sheaf.H.map (C.rootsOfUnitySheafι n) 1).range =
           AddSubgroup.torsionBy C.CohomologicalPicardGroup n ∧
