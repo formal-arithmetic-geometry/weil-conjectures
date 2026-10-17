@@ -14,6 +14,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SingleReduction
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
+public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
@@ -58,7 +61,9 @@ This file also introduces the constant complex functor `D(Λ) ⥤ D(X_ét, Λ)` 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.kunnethMap` (`def-kun-kunneth-map`): the Künneth map.
-- `AlgebraicGeometry.Etale.tensorBaseChangeMap`: the map of `lem-kun-0f1j` and `lem-kun-0f1n`.
+- `AlgebraicGeometry.Etale.tensorBaseChangeMap` (in
+  `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange`): the map of
+  `lem-kun-0f1j` and `lem-kun-0f1n`.
 - `AlgebraicGeometry.Etale.constantFunctor` (`def-kun-constant-sheaf`): `K ↦ K_X`.
 - `AlgebraicGeometry.Etale.HasFiniteCohomologicalDimension`,
   `AlgebraicGeometry.Etale.HasFiniteCohomologicalDimensionMorphism` (`def-kun-cd`).
@@ -118,86 +123,6 @@ noncomputable def kunnethMap (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y �
       ((-⊗ᴸ-(W)[A]).obj _).map ((leftDerivedUpperStarComp A p f c hp.symm).inv.app _ ≫
         (leftDerivedUpperStarComp A q g c hq.symm).hom.app _ ≫
           L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app K)))
-
-variable {X' S' T : Scheme.{u}}
-
-/-- The base change map for a pushforward tensored with a complex (`lem-kun-0f1j`,
-`lem-kun-0f1n`): for a commutative square `h ≫ f' = e ≫ g` (with `h : Y ⟶ X'`, `e : Y ⟶ T`,
-`f' : X' ⟶ S'`, `g : T ⟶ S'`) and `M ∈ D(X'_ét)`, `F ∈ D(T_ét)`, the morphism
-
-`M ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* M ⊗ᴸ Le^* F)`
-
-is the transpose along `Lh^* ⊣ Rh_*` of the composite
-
-`Lh^*(M ⊗ᴸ Lf'^* Rg_* F) ≅ Lh^* M ⊗ᴸ Lh^* Lf'^* Rg_* F ≅ Lh^* M ⊗ᴸ Le^* Lg^* Rg_* F
-  ⟶ Lh^* M ⊗ᴸ Le^* F`
-
-of the monoidality of `Lh^*`, the composition isomorphisms through `L(h ≫ f')^*` and the counit
-of `Lg^* ⊣ Rg_*`. -/
-noncomputable def tensorBaseChangeMap (h : Y ⟶ X') (e : Y ⟶ T) (f' : X' ⟶ S') (g : T ⟶ S')
-    (w : h ≫ f' = e ≫ g) (M : DerivedCategory (Sheaf X'.smallEtaleTopology A))
-    (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    ((-⊗ᴸ-(X')[A]).obj M).obj (L((f')^*[A]).obj (R((g)_*[A]).obj F)) ⟶
-      R((h)_*[A]).obj (((-⊗ᴸ-(Y)[A]).obj (L((h)^*[A]).obj M)).obj (L((e)^*[A]).obj F)) :=
-  (derivedUpperStarLowerStarAdjunction A h).homEquiv _ _
-    (((leftDerivedUpperStarTensorComparison A h).app _).app _ ≫
-      ((-⊗ᴸ-(Y)[A]).obj _).map ((leftDerivedUpperStarComp A h f').inv.app _ ≫
-        (leftDerivedUpperStarComp A e g (h ≫ f') w).hom.app _ ≫
-          L((e)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app F)))
-
-/-- The base change map `M ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* M ⊗ᴸ Le^* F)` is natural in `M` and
-`F`. -/
-@[reassoc]
-lemma tensorBaseChangeMap_naturality (h : Y ⟶ X') (e : Y ⟶ T) (f' : X' ⟶ S') (g : T ⟶ S')
-    (w : h ≫ f' = e ≫ g) {M M' : DerivedCategory (Sheaf X'.smallEtaleTopology A)}
-    {F F' : DerivedCategory (Sheaf T.smallEtaleTopology A)} (φ : M ⟶ M') (ψ : F ⟶ F') :
-    ((-⊗ᴸ-(X')[A]).map φ).app _ ≫
-        ((-⊗ᴸ-(X')[A]).obj M').map (L((f')^*[A]).map (R((g)_*[A]).map ψ)) ≫
-          tensorBaseChangeMap A h e f' g w M' F' =
-      tensorBaseChangeMap A h e f' g w M F ≫ R((h)_*[A]).map
-        (((-⊗ᴸ-(Y)[A]).map (L((h)^*[A]).map φ)).app _ ≫
-          ((-⊗ᴸ-(Y)[A]).obj _).map (L((e)^*[A]).map ψ)) := by
-  rw [tensorBaseChangeMap, tensorBaseChangeMap, ← Adjunction.homEquiv_naturality_left,
-    ← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_right]
-  congr 1
-  have h₁ := NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A h).naturality φ)
-    (L((f')^*[A]).obj (R((g)_*[A]).obj F))
-  have h₂ := ((leftDerivedUpperStarTensorComparison A h).app M').naturality
-    (L((f')^*[A]).map (R((g)_*[A]).map ψ))
-  have hv : L((h)^*[A]).map (L((f')^*[A]).map (R((g)_*[A]).map ψ)) ≫
-      (leftDerivedUpperStarComp A h f').inv.app _ ≫
-        (leftDerivedUpperStarComp A e g (h ≫ f') w).hom.app _ ≫
-          L((e)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app F') =
-      ((leftDerivedUpperStarComp A h f').inv.app _ ≫
-        (leftDerivedUpperStarComp A e g (h ≫ f') w).hom.app _ ≫
-          L((e)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app F)) ≫
-        L((e)^*[A]).map ψ := by
-    have n₁ := (leftDerivedUpperStarComp A h f').inv.naturality (R((g)_*[A]).map ψ)
-    have n₂ := (leftDerivedUpperStarComp A e g (h ≫ f') w).hom.naturality (R((g)_*[A]).map ψ)
-    simp only [Functor.comp_map] at n₁ n₂
-    rw [reassoc_of% n₁, reassoc_of% n₂]
-    simp only [Category.assoc, ← Functor.map_comp]
-    congr 3
-    exact (derivedUpperStarLowerStarAdjunction A _).counit.naturality _
-  simp only [derivedTensor, curriedTensor_obj_map, curriedTensor_map_app,
-    Category.assoc, leftDerivedUpperStarDerivedTensor,
-    derivedTensorLeftDerivedUpperStar] at h₁ h₂ hv ⊢
-  have h₁' : L((h)^*[A]).map (φ ▷ L((f')^*[A]).obj (R((g)_*[A]).obj F)) ≫
-      ((leftDerivedUpperStarTensorComparison A h).app M').app
-        (L((f')^*[A]).obj (R((g)_*[A]).obj F)) =
-      ((leftDerivedUpperStarTensorComparison A h).app M).app
-          (L((f')^*[A]).obj (R((g)_*[A]).obj F)) ≫
-        L((h)^*[A]).map φ ▷ L((h)^*[A]).obj (L((f')^*[A]).obj (R((g)_*[A]).obj F)) := h₁
-  have h₂' : L((h)^*[A]).map (M' ◁ L((f')^*[A]).map (R((g)_*[A]).map ψ)) ≫
-      ((leftDerivedUpperStarTensorComparison A h).app M').app
-        (L((f')^*[A]).obj (R((g)_*[A]).obj F')) =
-      ((leftDerivedUpperStarTensorComparison A h).app M').app
-          (L((f')^*[A]).obj (R((g)_*[A]).obj F)) ≫
-        L((h)^*[A]).obj M' ◁ L((h)^*[A]).map (L((f')^*[A]).map (R((g)_*[A]).map ψ)) := h₂
-  rw [reassoc_of% h₂', reassoc_of% h₁']
-  congr 1
-  rw [← whiskerLeft_comp, hv, whiskerLeft_comp, whisker_exchange_assoc]
-  simp only [whiskerLeft_comp, Category.assoc]
 
 /-- The composition isomorphism `Rp_* ⋙ Rf_* ≅ Rc_*` for `p ≫ f = c`: the conjugate of the
 composition isomorphism `Lc^* ≅ Lf^* ⋙ Lp^*` (`AlgebraicGeometry.Etale.leftDerivedUpperStarComp`)
@@ -352,6 +277,27 @@ instance preservesColimitsOfShape_derivedTensor_obj
     PreservesColimitsOfShape (Discrete J) ((-⊗ᴸ-(X)[A]).obj K) :=
   (derivedTensorHomAdjunction A K).leftAdjoint_preservesColimits.preservesColimitsOfShape
 
+/-- The derived tensor product `- ⊗ᴸ K` with a fixed complex commutes with direct sums: it is
+isomorphic to `K ⊗ᴸ -` by the symmetry of the derived tensor product
+(`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`). -/
+instance preservesColimitsOfShape_derivedTensor_flip_obj
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (J : Type*) :
+    PreservesColimitsOfShape (Discrete J) ((-⊗ᴸ-(X)[A]).flip.obj K) := by
+  obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip A X
+  exact preservesColimitsOfShape_of_natIso (β.app K)
+
+/-- A strictly bounded complex `P` of flat sheaves, concentrated in degrees `≥ m`, has Tor
+amplitude in `[m, ∞)`: the derived tensor products `P ⊗ᴸ M` with sheaves vanish in degrees
+`< m`. -/
+lemma isZero_homology_derivedTensor_Q_obj_of_flat
+    (P : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) (m n : ℤ)
+    [P.IsStrictlyGE m] [P.IsStrictlyLE n] (hP : ∀ i, ObjectProperty.flat (P.X i))
+    (M : Sheaf X.smallEtaleTopology A) (q : ℤ) (hq : q < m) :
+    IsZero ((DerivedCategory.homologyFunctor _ q).obj (((derivedTensor A X).obj
+      (DerivedCategory.Q.obj P)).obj ((DerivedCategory.singleFunctor _ 0).obj M))) :=
+  have := (DerivedCategory.torAmplitudeIn_Q_obj_of_flat P m n hP M).1
+  DerivedCategory.isZero_of_isGE _ m q hq (hX := this)
+
 end DirectSums
 
 section Constant
@@ -393,6 +339,35 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 section Inputs
 
+/-- First step of the proof of blueprint `lem-kun-0f1j`: reduction to single sheaves.
+
+Under the hypotheses of `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE`, the base
+change map `Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)` is an isomorphism provided it
+is an isomorphism when `E` is a flat sheaf and `F` is a sheaf, both placed in degree `0`
+(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_single`). -/
+theorem isIso_tensorBaseChangeMap_of_isGE_of_single [Finite Λ] {K : Type u} [Field K]
+    [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
+    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K))
+    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact g]
+    [QuasiSeparated g] (_sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m n : ℤ)
+    (_hE : DerivedCategory.TStructure.t.IsGE E m)
+    (hEt : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), q < n →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj (((derivedTensor (ModuleCat.{u + 1} Λ)
+        X).obj E).obj ((DerivedCategory.singleFunctor _ 0).obj M))))
+    (hF : DerivedCategory.TStructure.t.IsGE F m)
+    (hsingle : ∀ 𝓔 : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), ObjectProperty.flat 𝓔 →
+      ∀ 𝓕 : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),
+        IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
+          ((L((p)^*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓔))
+          ((DerivedCategory.singleFunctor _ 0).obj 𝓕))) :
+    IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
+      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
+  have := hF
+  isIso_tensorBaseChangeMap_of_single (ModuleCat.{u + 1} Λ) h e f' g sq₂.w p E F m n
+    hEt hsingle
+
 /-- Blueprint `lem-kun-0f1j`: base change for a pushforward tensored with a bounded below complex
 of finite Tor amplitude.
 
@@ -427,7 +402,49 @@ theorem isIso_tensorBaseChangeMap_of_isGE [Finite Λ] {K : Type u} [Field K]
     (_hF : DerivedCategory.TStructure.t.IsGE F m) :
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
       ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
-  sorry
+  isIso_tensorBaseChangeMap_of_isGE_of_single Λ a b p f' h e g _sq₁ sq₂ E F m n _hE _hEt _hF
+    (fun _ _ _ ↦ sorry)
+
+/-- A derived pushforward of finite cohomological dimension along a quasi-compact
+quasi-separated morphism commutes with countable direct sums
+(`AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedLowerStar`). -/
+lemma preservesColimitsOfShape_nat_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [QuasiCompact f] [QuasiSeparated f] (hf : HasFiniteCohomologicalDimensionMorphism Λ f) :
+    PreservesColimitsOfShape (Discrete ℕ) (R((f)_*[ModuleCat.{u + 1} Λ])) :=
+  have := preservesCoproducts_rightDerivedLowerStar Λ f hf (ULift.{u + 1} ℕ)
+  preservesColimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) _
+
+/-- The derived pullback commutes with direct sums, being a left adjoint. -/
+instance preservesColimitsOfShape_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (J : Type*) : PreservesColimitsOfShape (Discrete J) (L((f)^*[ModuleCat.{u + 1} Λ])) :=
+  (derivedUpperStarLowerStarAdjunction _ f).leftAdjoint_preservesColimits.preservesColimitsOfShape
+
+variable {Λ} in
+/-- Blueprint `lem-kun-0f1n`, for `E` a strictly bounded complex of flat sheaves: the
+reduction of `F` to strictly bounded complexes, which are bounded below, and an application of
+blueprint `lem-kun-0f1j` (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE`). -/
+lemma isIso_tensorBaseChangeMap_Q_obj_of_flat [Finite Λ] {K : Type u} [Field K]
+    [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
+    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K))
+    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact g]
+    [QuasiSeparated g] [QuasiCompact h] [QuasiSeparated h]
+    (hg : HasFiniteCohomologicalDimensionMorphism Λ g)
+    (hh : HasFiniteCohomologicalDimensionMorphism Λ h)
+    (sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)
+    (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (m n : ℤ)
+    [P.IsStrictlyGE m] [P.IsStrictlyLE n] (hP : ∀ i, ObjectProperty.flat (P.X i))
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
+      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj (DerivedCategory.Q.obj P)) F) := by
+  have := preservesColimitsOfShape_nat_rightDerivedLowerStar Λ g hg
+  have := preservesColimitsOfShape_nat_rightDerivedLowerStar Λ h hh
+  refine DerivedCategory.isIso_app_of_isIso_app_Q_obj_bounded
+    (tensorBaseChangeMapRight (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
+      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj (DerivedCategory.Q.obj P))) (fun L m' _ _ _ ↦ ?_) F
+  exact isIso_tensorBaseChangeMap_of_isGE Λ a b p f' h e g sq₁ sq₂ _ _ (min m m') m
+    (DerivedCategory.TStructure.t.isGE_of_ge _ _ m (min_le_left _ _))
+    (isZero_homology_derivedTensor_Q_obj_of_flat _ P m n hP)
+    (DerivedCategory.TStructure.t.isGE_of_ge _ _ m' (min_le_right _ _))
 
 /-- Blueprint `lem-kun-0f1n`: base change for a pushforward tensored with an arbitrary complex.
 
@@ -452,13 +469,40 @@ theorem isIso_tensorBaseChangeMap [Finite Λ] {K : Type u} [Field K]
     (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K)) (t : T ⟶ Spec (.of K))
     [LocallyOfFiniteType a] [QuasiCompact a] [LocallyOfFiniteType b] [QuasiCompact b]
     [LocallyOfFiniteType t] [QuasiCompact t]
-    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') (_hg : g ≫ b = t)
-    (_sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)
+    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') (hg : g ≫ b = t)
+    (sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
-      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
-  sorry
+      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) := by
+  have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
+  -- the schemes `X'`, `Y`, `T` and `S'` are of finite type over `K`, hence locally Noetherian
+  have : LocallyOfFiniteType f' := MorphismProperty.of_isPullback sq₁ ‹LocallyOfFiniteType a›
+  have : QuasiCompact f' := MorphismProperty.of_isPullback sq₁ ‹QuasiCompact a›
+  have : LocallyOfFiniteType e := MorphismProperty.of_isPullback sq₂ ‹LocallyOfFiniteType f'›
+  have : QuasiCompact e := MorphismProperty.of_isPullback sq₂ ‹QuasiCompact f'›
+  have : IsLocallyNoetherian S' := LocallyOfFiniteType.isLocallyNoetherian b
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian t
+  have : IsLocallyNoetherian X' := LocallyOfFiniteType.isLocallyNoetherian (f' ≫ b)
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian (e ≫ t)
+  have hw : h ≫ f' ≫ b = e ≫ t := by rw [← Category.assoc, sq₂.w, Category.assoc, hg]
+  -- hence `g` and `h` are quasi-compact and quasi-separated
+  have : QuasiCompact g := by
+    have : QuasiCompact (g ≫ b) := by rw [hg]; infer_instance
+    exact QuasiCompact.of_comp g b
+  have : QuasiCompact h := by
+    have : QuasiCompact (h ≫ f' ≫ b) := by rw [hw]; infer_instance
+    exact QuasiCompact.of_comp h (f' ≫ b)
+  -- and of finite cohomological dimension, so that `Rg_*` and `Rh_*` commute with direct sums
+  have hgd := hasFiniteCohomologicalDimensionMorphism Λ hΛ t b g hg
+  have hhd := hasFiniteCohomologicalDimensionMorphism Λ hΛ (e ≫ t) (f' ≫ b) h hw
+  have := preservesColimitsOfShape_nat_rightDerivedLowerStar Λ h hhd
+  -- reduce `E` to strictly bounded complexes of flat sheaves
+  exact DerivedCategory.isIso_app_of_isIso_app_Q_obj_flat
+    (Functor.whiskerLeft L((p)^*[ModuleCat.{u + 1} Λ])
+      (tensorBaseChangeMapLeft (ModuleCat.{u + 1} Λ) h e f' g sq₂.w F))
+    (fun P m n _ _ hP ↦ isIso_tensorBaseChangeMap_Q_obj_of_flat a b p f' h e g hgd hhd sq₁ sq₂
+      P m n hP F) E
 
 /-- The terminal object `𝟙 X` of the small étale site of `X`. -/
 noncomputable def etaleTerminal (X : Scheme.{u}) : X.Etale :=

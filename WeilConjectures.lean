@@ -2170,6 +2170,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.ShiftIdentification
+public import WeilConjectures.CategoryTheory.DerivedCategory.Telescope
+public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidue
@@ -3989,6 +3991,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryProper
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationBaseChange
