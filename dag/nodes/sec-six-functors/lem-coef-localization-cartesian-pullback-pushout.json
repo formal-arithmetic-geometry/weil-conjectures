@@ -26,7 +26,11 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-cat-infinity-opposite-involution",
+  "lem-coef-suspension-square-comparison",
+  "lem-coef-cartesian-colimit-descent-criterion"
  ],
  "proof": [
   {
@@ -428,5 +432,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3049313c8",
+  "group": "NH",
+  "result": "fix",
+  "note": "Mathematical statement, dependencies, universes, and source checks pass; scompile.py succeeded cleanly. Wrote review.md and a complete report replacement under fixes/ to replace the placeholder second reading (H11/H1). Lean and node records unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianFibrationBaseChangePushout",
+  "declaration": "SSet.Enhanced.cartesianFibration_baseChange_pushout",
+  "file": "lean/Sheaf/CategoryTheory/CartesianFibrationBaseChangePushout.lean",
+  "statement": "theorem cartesianFibration_baseChange_pushout (α : SuspensionComparison.square.{u + 1} ⟶ (ihom Δ[1]).obj CatInfinity.{u}) (p : CatInfinity.{u} _⦋1⦌) (hapex : α.app (op ⦋0⦌) (SuspensionComparison.corner 1 1) = diagramVertex (SSet.yonedaEquiv.symm p)) (hp : @cartesianFibration _ _ (catInfinityArrow p) ((CatInfinity.δ 1 p).property.1 (.mk (ULift.up 0))) ((CatInfinity.δ 0 p).property.1 (.mk (ULift.up 0)))) (hbaseChange : IsDescentCartesianTransformation α) (c : SuspensionComparison.SquareCocone (α ≫ evaluation Δ[1] CatInfinity (stdSimplex.obj₀Equiv.symm 1))) (hpushout : IsColimiting (SuspensionComparison.boundary (α ≫ evaluation Δ[1] CatInfinity (stdSimplex.obj₀Equiv.symm 1)) false) c.cocone) : ∃ c' : SuspensionComparison.SquareCocone (α ≫ evaluation Δ[1] CatInfinity (stdSimplex.obj₀Equiv.symm 0)), IsColimiting (SuspensionComparison.boundary (α ≫ evaluation Δ[1] CatInfinity (stdSimplex.obj₀Equiv.symm 0)) false) c'.cocone",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The coherent natural transformation is the base-change cube: every naturality square is an intrinsic pullback, and its terminal component is the specified Cartesian fibration. The original square is arbitrary and retains both coherent triangles. Existing final-horn Cartesian lifts express the equivalent mapping-space convention via the opposite of the recorded cocartesian mapping criterion. Added dependencies are already landed interfaces for Cat infinity, its object/arrow extraction, coherent square cocones and cartesian transformations."
  }
 }

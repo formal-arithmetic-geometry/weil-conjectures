@@ -201,5 +201,29 @@
   "result": "pass"
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-weil4"
+ "unit": "sk-thm-weil4",
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-86f5d24db",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, documentation, report sections, and exact per-file compilation were verified; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.RationalFunctionOrderProduct",
+  "declaration": "RatFunc.rootMultiplicity_prod_zpow",
+  "declarations": [
+   "Polynomial.rootMultiplicity_orderProduct_facts",
+   "RatFunc.rootMultiplicity_prod_zpow",
+   "RatFunc.rootMultiplicity_denom_prod_zpow_eq_one"
+  ],
+  "file": "lean/Sheaf/FieldTheory/RationalFunctionOrderProduct.lean",
+  "statement": "theorem rootMultiplicity_prod_zpow {K : Type u} [Field K] (c : K) (n : ℕ) (P : Fin (n + 1) → K[X]) (e : Fin (n + 1) → ℤ) (hP : ∀ j : Fin (n + 1), P j ≠ 0) (R : RatFunc K) (hR : R = ∏ j : Fin (n + 1), (algebraMap K[X] (RatFunc K) (P j)) ^ e j) : R ≠ 0 ∧ (rootMultiplicity c R.num : ℤ) - (rootMultiplicity c R.denom : ℤ) = ∑ j : Fin (n + 1), e j * (rootMultiplicity c (P j) : ℤ) ∧ (rootMultiplicity c R.num = 0 ∨ rootMultiplicity c R.denom = 0) ∧ (∀ m : ℤ, 1 ≤ m → ((rootMultiplicity c R.denom : ℤ) = m ↔ (∑ j : Fin (n + 1), e j * (rootMultiplicity c (P j) : ℤ)) = -m)) ∧ (R.denom.eval c ≠ 0 ↔ 0 ≤ ∑ j : Fin (n + 1), e j * (rootMultiplicity c (P j) : ℤ))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The three declarations state clauses 1, 2 and 3 respectively. Pole order is the multiplicity of R.denom, as in the recorded Mathlib match; regularity is R.denom.eval c ≠ 0. R.num and R.denom are the canonical reduced presentation."
+ }
 }
