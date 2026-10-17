@@ -17,6 +17,9 @@ namespace CategoryTheory
 
 attribute [local instance] derived_hasCoproducts
 
+-- STATEMENT-DISPUTED: for uncountable α, presentability yields support below α,
+-- which need not be finite. In D(k), a countable free object in degree zero is
+-- ℵ₁-presentable, and its coproduct isomorphism cannot have finite support.
 /-- Alpha-presentability factors a map to a coproduct through a finite subcoproduct.
 
 Source: Krause, Localization theory, Sections 6.2--6.3. The coproduct is the
