@@ -199,5 +199,24 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q102-2ab0177cc (reviewer sub-agent of L); spot-checked: The delivery’s mathematics is correct after one repair. It incorrectly cites the scheme-point residue-field node for κ(p) of a ring prime, although that node does not define κ(p)=Frac(A/p). A corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-fibre-module-localization.json, explicitly defining κ(p) and removing the mismatched dependency/citations. Full review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreModuleLocalization",
+  "declaration": "RingTheory.fibreModuleLocalization",
+  "file": "lean/Sheaf/RingTheory/FibreModuleLocalization.lean",
+  "statement": "theorem fibreModuleLocalization (A : Type u) (B : Type v) [CommRing A] [CommRing B] (φ : A →+* B) (p : Ideal A) [p.IsPrime] (N : Type w) [AddCommGroup N] [Module B N] : letI : Algebra A B := φ.toAlgebra letI : Module A N := Module.compHom N φ haveI : IsScalarTower A B N := IsScalarTower.of_algebraMap_smul fun _ _ => rfl ∃ e : TensorProduct A N p.ResidueField ≃ₗ[B] LocalizedModule (Submonoid.map φ p.primeCompl) (N ⧸ Submodule.span B {x : N | ∃ (a : A) (n : N), a ∈ p ∧ x = φ a • n}), (∀ (n : N) (a : A) (s : p.primeCompl), e (TensorProduct.tmul A n (algebraMap A p.ResidueField a * (algebraMap A p.ResidueField s.1)⁻¹)) = LocalizedModule.mk (Submodule.Quotient.mk (p := Submodule.span B {x : N | ∃ (a : A) (n : N), a ∈ p ∧ x = φ a • n}) (φ a • n)) (⟨φ s.1, Submonoid.mem_map_of_mem φ s.property⟩ : Submonoid.map φ p.primeCompl)) ∧ (∀ (n : N) (s : p.primeCompl), e.symm (LocalizedModule.mk (Submodule.Quotient.mk (p := Submodule.span B {x : N | ∃ (a : A) (n : N), a ∈ p ∧ x = φ a • n}) n) (⟨φ s.1, Submonoid.mem_map_of_mem φ s.property⟩ : Submonoid.map φ p.primeCompl)) = TensorProduct.tmul A n (algebraMap A p.ResidueField 1 * (algebraMap A p.ResidueField s.1)⁻¹)) ∧ (∀ (q : Ideal B), q.IsPrime → q.comap φ = p → ∀ z : N ⧸ Submodule.span B {x : N | ∃ (a : A) (n : N), a ∈ p ∧ x = φ a • n}, (⊥ : Submodule B (N ⧸ Submodule.span B {x : N | ∃ (a : A) (n : N), a ∈ p ∧ x = φ a • n})).colon {z} = q → (⊥ : Submodule B (LocalizedModule (Submonoid.map φ p.primeCompl) (N ⧸ Submodule.span B {x : N | ∃ (a : A) (n : N), a ∈ p ∧ x = φ a • n}))).colon {LocalizedModule.mk z 1} = q ∧ (⊥ : Submodule B (TensorProduct A N p.ResidueField)).colon {e.symm (LocalizedModule.mk z 1)} = q)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-8345c8564"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8345c8564",
+  "group": "N8",
+  "result": "fix",
+  "note": "Delivered statement omits the node's annihilator clause (q prime over p, Ann_B(z)=q ⇒ Ann_B(z/1)=q in U⁻¹M and in the fibre; Stacks 05BZ(2)), forces A,B into one universe u, and its docstring lacks the proof steps. fixes/lean/Sheaf/RingTheory/FibreModuleLocalization.lean is a complete replacement: separate universes u/v/w; canonical φ.toAlgebra, Module.compHom and IsScalarTower (rfl) in the statement; e : N ⊗[A] κ(p) ≃ₗ[B] U⁻¹M; both formula clauses unchanged; annihilator clause added in the colon {z} form of RingTheory.annihilatorAssociatedPrimes; source place, blueprint id and 5-step proof docstring. Delivered and fixed files compile cleanly via nt_compile.py --json, and a deliberately broken copy shows the tool reports errors. refit_record and check_lean_text give no refusals; lean.statement is re-read from the fixed file."
  }
 }

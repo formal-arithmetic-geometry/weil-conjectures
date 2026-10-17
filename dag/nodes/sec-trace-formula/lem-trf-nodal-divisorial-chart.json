@@ -233,5 +233,39 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-f8534545a (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full. Compared with the unsplit side-DAG copy, the statement, stmt_deps, unit, chapter and created fields are unchanged; only the proof, proof_deps, proof_origin, status, split_report, appended searches and the from.place wording differ. Source check: ILO Exposé VI Prop. 1.9 proof, printed p. 71. The item matches the source's cocartesian square (N->N^2 by 1->(1,1), N->Z x P by 1->(1,a)), the cartesian square with c' sending 1 to epsilon, and 'g injectif, Coker g^gp = Z'. The item takes the pushout in commutative monoids and proves it is already integral and saturated, so it is at least as strong as the source's fs pushout; nothing is weakened. Step 1: h(u+v) = (0,1,a) = h(g(1,a)), and a representative maps to (x-y, n+y, p+ya). Step 2: the reduced representative is (m_+, m_-, t-m_-, b-m_-a), which gives injectivity and the exact image criterion b - m_- a in P. Step 3: the inverse of h^gp checks out using v = e + g(0,a) - u, and the three fs clauses are exactly those of def-trf-fs-log-blowup, with (rm)_- = r m_- and saturation of P. Step 4: the cokernel Z comes from projecting to the first coordinate. Steps 5-6: mutually inverse algebra maps; balancing holds because Z[Q]->B restricted to Z[R] is the structure map, and 1 tensor [u+v] = epsilon alpha(a) tensor 1. I tested P=0 (Q is the group Z^2 and the algebra is A[u^{+-1}]), P=N with a=1 and with a=2 (image b >= a*max(-m,0), saturated), P a finite group, and A=0 or alpha(a)=0: all consistent. The elementary labels are justified, and no proof is used in place of a statement. There are no new nodes. rg searches for cocartesian, monoid ring, fs, cokernel Z and uv-epsilon found no duplicate or generalization among the fs-monoid nodes of sec-trace-formula. Route: the only dependency is a definition node of the same unit; no tool_uses are declared and I accepted none. The unit binding is historical ancestry, which the report flags openly; it is not a delivery fault. Its citer lem-trf-nodal-log-regularity, steps 3-4, uses exactly the stated clauses. Minor issue left alone: the tensor-product notion is not cited in the unchanged imported statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NodalDivisorialChart",
+  "declaration": "AlgebraicGeometry.nodalDivisorialChart",
+  "declarations": [
+   "AlgebraicGeometry.nodalDivisorialBase",
+   "AlgebraicGeometry.nodalDivisorialRelation",
+   "AlgebraicGeometry.nodalDivisorialMonoid",
+   "AlgebraicGeometry.nodalDivisorialQuotient",
+   "AlgebraicGeometry.nodalDivisorialBaseMap",
+   "AlgebraicGeometry.nodalDivisorialBranchMap",
+   "AlgebraicGeometry.nodalDivisorialGroupMap",
+   "AlgebraicGeometry.nodalDivisorialBaseEvaluation",
+   "AlgebraicGeometry.nodalDivisorialCoefficientAlgebra",
+   "AlgebraicGeometry.nodalDivisorialMonoidAlgebraBaseAlgebra",
+   "AlgebraicGeometry.nodalDivisorialTensorAlgebra",
+   "AlgebraicGeometry.nodalDivisorialTensorMonomial",
+   "AlgebraicGeometry.nodalDivisorialChart"
+  ],
+  "file": "lean/Sheaf/TraceFormula/NodalDivisorialChart.lean",
+  "statement": "theorem nodalDivisorialChart {P : Type u} [CommMonoid P] (hP : IsFineSaturatedMonoid P) (a : P) : IsFineSaturatedMonoid (nodalDivisorialMonoid a) ∧ Function.Injective (nodalDivisorialGroupMap a) ∧ Nonempty ((Algebra.GrothendieckGroup (nodalDivisorialMonoid a) ⧸ Subgroup.map (nodalDivisorialGroupMap a) ⊤) ≃* Multiplicative ℤ) ∧ ∀ (A : Type v) [CommRing A] (α : P →* A) (ε : Aˣ), ∃ φ : @AlgEquiv A (@TensorProduct (MonoidAlgebra ℤ (nodalDivisorialBase P)) _ A (MonoidAlgebra ℤ (nodalDivisorialMonoid a)) _ _ (nodalDivisorialCoefficientAlgebra α ε).toModule (nodalDivisorialMonoidAlgebraBaseAlgebra a).toModule) ((MvPolynomial (Fin 2) A) ⧸ Ideal.span ({MvPolynomial.X 0 * MvPolynomial.X 1 - MvPolynomial.C (((ε : Aˣ) : A) * α a)} : Set (MvPolynomial (Fin 2) A))) _ _ _ (nodalDivisorialTensorAlgebra a α ε) inferInstance, φ (nodalDivisorialTensorMonomial a α ε (nodalDivisorialBranchMap a (1, 0))) = Ideal.Quotient.mk _ (MvPolynomial.X 0) ∧ φ (nodalDivisorialTensorMonomial a α ε (nodalDivisorialBranchMap a (0, 1))) = Ideal.Quotient.mk _ (MvPolynomial.X 1) ∧ ∀ r : nodalDivisorialBase P, φ (nodalDivisorialTensorMonomial a α ε (nodalDivisorialBaseMap a r)) = Ideal.Quotient.mk _ (MvPolynomial.C (((ε ^ r.1.toAdd : Aˣ) : A) * α r.2))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-32b9cad6e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32b9cad6e",
+  "group": "NA",
+  "result": "fix",
+  "note": "F1: nodalDivisorialRelation used (1 : Multiplicative ℤ), which is ofAdd 0 (confirmed by rfl probes), so the Lean Q glued u+v to (0,a) instead of the node's (1,a) and the final AlgEquiv clause was false for ε≠1 (A=ℤ, α≡1, ε=-1 gives 1=-1 in ℤ[X,Y]/(XY+1)); fixed to ofAdd (1,1) ~ (ofAdd (1:ℤ), a), and a probe proves branch(1,1)=g(1,a) in the fixed file. F2: silent universe restriction A : Type u (same as P); generalized to A : Type v in the four helpers and the theorem. F3: theorem docstring now follows the node's six proof steps. All other clauses match the node and ILO VI 1.9: fs via IsFineSaturatedMonoid (matches def-trf-fs-log-blowup), gᵍᵖ injective via GrothendieckGroup.lift, cokernel ≃* Multiplicative ℤ, canonical ℤ[R]-algebra via MonoidAlgebra.lift of ε^n·α p, mapDomainRingHom, includeLeft, generator images. No hollow definitions, nothing proved beyond the theorem's sorry, no Lean citers. Delivered and fixed files compile clean with nt_compile.py; lean.statement is re-read from the fixed file by refit_record."
  }
 }

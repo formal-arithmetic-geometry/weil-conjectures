@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-nagata-category",
   "def-weil-pbc-simplicial-set",
-  "lem-coef-extra-degeneracy-contraction"
+  "lem-coef-extra-degeneracy-contraction",
+  "lem-coef-fixed-object-scat-pushout-coproduct"
  ],
  "proof": [
   {
@@ -227,5 +228,32 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-56b495916 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full. The mathematics is correct, but steps 2-7 had corrupted TeX (fault B4). I repaired them in fixes/dag/nodes/sec-six-functors/lem-coef-split-coproduct-bar-extra-degeneracy.json; nothing else in the node changed. Checks: (1) The delivery is one commit with no new nodes. The statement is unchanged, which is right because it is true and needs no freeness hypothesis. (2) Cited statements: def-nagata-category (category laws), def-weil-pbc-simplicial-set (contravariant functor; delta_i omits i, sigma_i repeats i) and lem-coef-extra-degeneracy-contraction. That node's five equation families match Mathlib ExtraDegeneracy.lean:72-83 (s'_comp_ε, s₀_comp_δ₁, s_comp_δ₀, s_comp_δ with i:Fin(n+2), s_comp_σ with i:Fin(n+1)). Each step takes only what these statements say. (3) The route stays inside unit sk-prop-sf-biduality-general: the only statement used is a Mathlib leaf of the same unit, so no tool_uses. Parent lem-coef-fixed-object-scat-left-proper step 6 uses exactly this statement. The item is the parent's extracted lemma, not a restatement of a parent clause. (4) By hand I checked t_alpha(k)=min{j: k<=alpha(j)}: it composes contravariantly because the set is upward closed, and V absorbs. The faces fold at i<n and the last face applies v; the degeneracies insert after A_i; augmentation is natural. d_0h_n=1, d_1h_0=h_{-1}eps_0, d_{i+1}h_{n+1}=h_n d_i (0<=i<=n+1) and s_{i+1}h_n=h_{n+1}s_i (0<=i<=n) all hold. A script confirmed these label identities over 520729 composition cases in degrees up to 5. Step 1's word-quotient universal property reduces functor equality to these factor labels, so marking the steps elementary is justified. (5) Edge cases: empty O, empty hom-sets, one-object categories with relations, a collapsing v, n=0. (6) Duplicate search: rg over dag/nodes found no duplicate. Mathlib's ExtraDegeneracy is generic and its Cech instances use pullback powers, so 'no match' is correct. (7) Dwyer-Kan Prop 8.2 is absent from literature/; the report has a WANTED line and the proof is correctly marked by:agent. No SGA source is used. This is not a target node, so the base-change morphism check does not apply. Fix applied: in steps 2-7, backslash escapes were swallowed (\\to became a tab, \\beta a backspace, \\varepsilon a vertical tab; \\alpha, \\leq, \\infty, \\min, \\{\\}, \\in, \\delta, \\sigma lost their backslashes), leaving 19 control characters. I rewrote those step texts with the same words and correct TeX; uses, proof_deps and every other field are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SplitCoproductBarExtraDegeneracy",
+  "declaration": "FixedObject.SplitCoproductBar.split_coproduct_bar_extra_degeneracy",
+  "declarations": [
+   "FixedObject.SplitCoproductBar.factorCofan",
+   "FixedObject.SplitCoproductBar.initialSection",
+   "FixedObject.SplitCoproductBar.initialInsertion",
+   "FixedObject.SplitCoproductBar.homSetEvaluation",
+   "FixedObject.SplitCoproductBar.mappingAugmentation",
+   "FixedObject.SplitCoproductBar.split_coproduct_bar_extra_degeneracy"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SplitCoproductBarExtraDegeneracy.lean",
+  "statement": "theorem split_coproduct_bar_extra_degeneracy {O : Type u} (F A V : Category.{v} O) (v : A ⟶ V) (cFV : BinaryCofan F V) (hcFV : IsColimit cFV) (R : SimplicialObject (Category.{v} O)) (ε : R ⟶ (SimplicialObject.const (Category.{v} O)).obj cFV.pt) (f : ∀ n : ℕ, F ⟶ R.obj (op ⦋n⦌)) (a : ∀ n : ℕ, Fin (n + 1) → (A ⟶ R.obj (op ⦋n⦌))) (z : ∀ n : ℕ, V ⟶ R.obj (op ⦋n⦌)) (hc : ∀ n : ℕ, IsColimit (factorCofan n (f n) (a n) (z n))) (hfaceF : ∀ (n : ℕ) (i : Fin (n + 2)), f (n + 1) ≫ R.δ i = f n) (hfaceV : ∀ (n : ℕ) (i : Fin (n + 2)), z (n + 1) ≫ R.δ i = z n) (hfaceA : ∀ (n : ℕ) (i k : Fin (n + 2)), a (n + 1) k ≫ R.δ i = if h : k.val = n + 1 ∧ i.val = n + 1 then v ≫ z n else if h' : k.val ≤ i.val then a n ⟨k.val, by omega⟩ else a n ⟨k.val - 1, by omega⟩) (hdegeneracyF : ∀ (n : ℕ) (i : Fin (n + 1)), f n ≫ R.σ i = f (n + 1)) (hdegeneracyV : ∀ (n : ℕ) (i : Fin (n + 1)), z n ≫ R.σ i = z (n + 1)) (hdegeneracyA : ∀ (n : ℕ) (i k : Fin (n + 1)), a n k ≫ R.σ i = if k.val ≤ i.val then a (n + 1) k.castSucc else a (n + 1) k.succ) (haugmentationF : ∀ n : ℕ, f n ≫ ε.app (op ⦋n⦌) = cFV.inl) (haugmentationV : ∀ n : ℕ, z n ≫ ε.app (op ⦋n⦌) = cFV.inr) (haugmentationA : ∀ (n : ℕ) (k : Fin (n + 1)), a n k ≫ ε.app (op ⦋n⦌) = v ≫ cFV.inr) : initialSection cFV hcFV (f 0) (z 0) ≫ ε.app (op ⦋0⦌) = 𝟙 cFV.pt ∧ (∀ n : ℕ, initialInsertion R f a z hc n ≫ R.δ 0 = 𝟙 (R.obj (op ⦋n⦌))) ∧ initialInsertion R f a z hc 0 ≫ R.δ 1 = ε.app (op ⦋0⦌) ≫ initialSection cFV hcFV (f 0) (z 0) ∧ (∀ (n : ℕ) (i : Fin (n + 2)), initialInsertion R f a z hc (n + 1) ≫ R.δ i.succ = R.δ i ≫ initialInsertion R f a z hc n) ∧ (∀ (n : ℕ) (i : Fin (n + 1)), initialInsertion R f a z hc n ≫ R.σ i.succ = R.σ i ≫ initialInsertion R f a z hc (n + 1)) ∧ ∀ x y : O, ∃ ed : (mappingAugmentation { left := R, right := cFV.pt, hom := ε } x y).ExtraDegeneracy, ed.s' = (homSetEvaluation x y).map (initialSection cFV hcFV (f 0) (z 0)) ∧ ∀ n : ℕ, ed.s n = (homSetEvaluation x y).map (initialInsertion R f a z hc n)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the permitted fixed-object category and functor interface from lem-coef-fixed-object-scat-pushout-coproduct, added under the landed-node rule. The simplicial object, cofans and factorwise operator equations are written directly with Mathlib notions: no dependency on the route-pivot-dropped bar-reordering node, and no replacement Bar or Operators structure. Insertion maps are actual coproduct eliminators; all five identities and mapping-set extra-degeneracy data are conclusions. No freeness or nonemptiness hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb1333d84",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps (Mathlib Category, SSet/SimplicialObject, ExtraDegeneracy fields 72-83 and .map, landed FixedObject.Functor/fixedCategory), report and module. Hypotheses hfaceA/hdegeneracyA/augmentation match the node's face, degeneracy and augmentation formulas, including the last face and n=0. initialSection and initialInsertion are real coproduct eliminators. The five conjuncts are exactly Mathlib's ExtraDegeneracy fields with correct Fin ranges; all identities hand-checked on factors. The hom-set clause pins ed.s' and ed.s to the evaluated insertions. No freeness or extra assumptions; u,v independent and bound; empty O and empty hom-sets fine. No hollow defs, docstrings present, one sorry, statement verbatim, only added stmt_dep is a landed node. Compiled through nt_compile --json at the module path: clean, and an injected-error control shows diagnostics. Note: the item and its consumer are route-pivot dropped, but the delivery cites and imports no dropped node. The second reading is the author's own clause check, accepted with this review as the independent reading."
  }
 }
