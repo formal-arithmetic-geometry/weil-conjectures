@@ -14,9 +14,121 @@
   "def-coef-left-module-operadic-encoding",
   "lem-coef-colored-operation-section-reconstruction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the ordered-fibre definition [def-coef-left-module-operadic-encoding], each vertex with output $m$ has exactly one input of colour $m$, last in its order. Starting at a module-output root and repeatedly following that input gives one branch ending in the unique external module input. Every vertex off this branch is purely algebraic: an $a$ output has no $m$ input. This remains true after any contraction, including contraction next to a nullary algebra vertex. Thus a module tree consists of a chain of module vertices with pure algebra trees attached in the preceding input positions. A pure algebra tree will always retain exactly the operation data of $B$.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 4.2.1.6; unique module branch in the ordered LM operations"
+   }
+  },
+  {
+   "text": "Restrict $B,C,h,L_C$ to the operation and tree coordinates of [lem-coef-colored-operation-section-reconstruction]. Denote the algebra operations by $\\mu^B_r,\\mu^C_r$. The coherent algebra transformation supplies operation-naturality prisms\n$$h\\mu^B_r\\simeq\\mu^C_r h^{\\otimes r}.$$\nHere these are the restrictions of the given transformation, with its higher prisms on every chain of algebra-tree contractions; we retain those higher coordinates as well. At $r=0$ the prism is $h\\eta_B\\simeq\\eta_C$. The section $L_C$ supplies its module-tree substitution simplices, and the coherent left tensoring supplies their tensor/action whiskerings by the definition [def-coef-left-module-operadic-encoding]. When arrows and these simplices are composed below, use [lem-cbc-simplicial-composition-spine]: its trivial Kan spine maps and their face and degeneracy operations supply coherent composition, including units and associativity, natural in simplicial functors. Thus the pasting means composition of the given coherent diagrams, retaining higher simplices, rather than choosing an unrelated composite for each face.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "def-coef-left-module-operadic-encoding",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.2.1.13 and 4.2.1.19; operation coordinates; coherent composition uses Kerodon 01PF as the cited generic tool"
+   }
+  },
+  {
+   "text": "Assign the colour objects $B(a)$ and $x$. At a module corolla with $r$ algebra inputs assign the composite\n$$b^h_r=b^{L_C}_r(h^{\\otimes r}\\otimes1_x).$$\nFor a general module tree first expand this expression at each module vertex. Each algebra input to that vertex now has a conversion $h$ immediately above its attached $B$-algebra subtree. Apply the algebra-transformation prism of step 2 to that entire subtree: its $B$ evaluation followed by $h$ is compared with the $C$ evaluation preceded by $h$ on every external algebra input. Whisker this prism with the other inputs using the specified action functors. Do this at each vertex on the module branch. The resulting diagram has only $C$ operations on that branch and its attached trees, with $h$ on the external algebra inputs and the identity on the external module input. Apply the given $L_C$ tree comparison to contract it. Its endpoint is $b^{L_C}_r(h^{\\otimes r}\\otimes1_x)=b^h_r$, where $r$ is the number of external algebra inputs. This specifies a comparison from the successive evaluation to the contracted evaluation; it uses all of the given subtree prisms, not merely their binary equations.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding",
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Explicit tree-data refinement of the scalar-restriction lift"
+   }
+  },
+  {
+   "text": "Specify the higher comparisons by the same recipe on a chain $T_0\\to\\cdots\\to T_n$ of contractions. For every pure algebra subtree attached to the module branch, take the restriction of $h$ to the induced contraction chain; for the module branch take the restriction of $L_C$ to that chain. Evaluate these prisms by the tensor/action functors, restricting all their simplicial coordinates along one common diagonal. The composite simplices are chosen by induction on $n$, so that faces agree on the nose, not merely up to homotopy. For $n=0,1$ choose composites by [lem-cbc-simplicial-composition-spine]. Suppose composites have been chosen for all chains of length less than $n$, with degenerate chains assigned the degeneracies of the composites already chosen. For a nondegenerate chain of length $n$ the composites on every face are then fixed, and they form a map from $\\partial\\Delta^n$ compatible with the given input diagrams. The restriction map of [lem-cbc-simplicial-composition-spine] is a trivial Kan fibration, so it lifts against $\\partial\\Delta^m\\hookrightarrow\\Delta^m$. Choose the composite for the chain as such a lift extending the fixed boundary. Thus omitting an intermediate $T_i$ gives exactly the comparison already chosen for the shorter chain. Its inputs are the corresponding face of the supplied higher prism of $h$ on each algebra subtree and the face of the supplied $L_C$ simplex on the branch. The first and last faces restrict the first and last evaluations. Repeating a $T_i$ gives the degeneracy, by the choice above. Consequently all faces and degeneracies, including a face contracting several consecutive levels, have the required restrictions. The fibres of a trivial Kan fibration are contractible, so the space of such choices is contractible. This argument applies to every $n$; it does not rely on binary compatibility alone.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding",
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Explicit tree-data refinement of the scalar-restriction lift"
+   }
+  },
+  {
+   "text": "Grafting gives the same recipe: the attached pure algebra subtree prisms are substituted into those at the grafting vertex, and the module-branch diagrams are concatenated. The substitution compatibility already present in the full transformation data of $h$ identifies the pure algebra factors with the prisms for the grafted tree; the substitution compatibility already present in $L_C$ identifies the branch factors. Their higher identifications are retained by the coherent composition of step 2. A permutation only reindexes the ordered inputs and their corresponding factors, so equivariance follows from the given permutation coordinates of these two systems and the action. Inserting a unary identity uses their identity degeneracies. The purely algebraic restriction was fixed to be $B$ in step 1, so none of these constructions changes it. An empty algebra subtree uses precisely the nullary prism $h\\eta_B\\simeq\\eta_C$ of step 2. With no algebra input at all, $h^{\\otimes0}$ is the unit identity, and $b^h_0$ is the identity constraint of $x$. This also checks the empty-input boundary of the construction.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding",
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Explicit tree-data refinement of the scalar-restriction lift"
+   }
+  },
+  {
+   "text": "For transformation data to $L_C$, put $h$ on colour $a$ and $1_x$ on colour $m$. At a module corolla the operation-naturality comparison has its two sides\n$$1_x b^h_r,\\qquad b^{L_C}_r(h^{\\otimes r}\\otimes1_x);$$\nthey are the composite specified in step 3 with its unit comparison. For an arbitrary module tree take the very same conversion prisms of steps 3 and 4, retaining the conversion direction as the transformation coordinate and then evaluating the $L_C$ branch. Its initial face is the constructed $B$-module evaluation and its terminal face the $C$-module evaluation; its colour edges are $(h,1_x)$. Its contraction faces are exactly the comparisons of step 4 and the given $L_C$ comparisons. Pure algebra faces are the given higher transformation data of $h$. The grafting and identity checks of step 5 therefore apply with this extra direction retained. These are all transformation coordinates required in [lem-coef-colored-operation-section-reconstruction], so the construction supplies the full compatible transformation system, not just an equation in the homotopy category.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding",
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Explicit tree-data refinement of the scalar-restriction lift"
+   }
+  },
+  {
+   "text": "For inert shapes choose the actual inert projection arrows on the tuple of $B$ and $x$ objects. By [def-coef-left-module-operadic-encoding] these are the specified $q$-cocartesian projection lifts; their singleton structure operations are identities. On a coherent inert pruning, apply the same projection to the input prisms in steps 3--6. It retains the factors feeding that output, and removes the other factors. Hence its tree and pruning faces agree on common restrictions. On a pure algebra output these are the inert arrows of $B$; on a module singleton they are the chosen projection with the identity of $x$. For several outputs use the product of the separate output-tree data and omit inputs discarded to the basepoint, exactly as in [lem-coef-colored-operation-section-reconstruction]. No tensor operation on a discarded input is inserted. Thus the associated total inert arrows are the chosen $q$-cocartesian arrows, with their specified inert composition compatibilities.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding",
+    "lem-coef-colored-operation-section-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Explicit tree-data refinement of the scalar-restriction lift"
+   }
+  },
+  {
+   "text": "Finally perform steps 1--7 on the supplied diagrams over a simplicial set $K$, retaining $K$ throughout. Products are degreewise and tensor/action evaluation is functorial; repeated occurrences of a parameter are pulled back along $K\\to K^s$, not chosen independently. If $u:K'\\to K$, then $u^s\\Delta_{K'}=\\Delta_Ku$, so evaluation, every tree restriction and every pruning restriction of the given data commute with $u$. The composites of step 4 are chosen over $K$ by the same induction. $\\operatorname{Fun}(K,-)$ preserves trivial Kan fibrations, so the relative lifts exist with the parameter retained. They are not chosen separately at each point of $K$. Restricting a relative lift along $u$ gives a relative lift for the restricted data. Hence the restriction of the system built over $K$ is a valid system over $K'$ with the same boundary conditions. It agrees with any other choice over $K'$ up to the contractible space of choices of step 4. The parameterized operation/transformation clause of [lem-coef-colored-operation-section-reconstruction] and the natural coherent composition clause of [lem-cbc-simplicial-composition-spine] retain this on higher simplices as well. This proves the stated compatibility for every simplicial family, including $K=\\varnothing$. Only the given coherent operations, transformation prisms, tensor/action functors, and their compositions were used. In particular no limit, colimit, or presentability assumption was introduced.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding",
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-cbc-simplicial-composition-spine",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Explicit tree-data refinement of the scalar-restriction lift"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-left-module-operadic-encoding",
+  "lem-coef-colored-operation-section-reconstruction",
+  "lem-cbc-simplicial-composition-spine",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Explicit operation-tree refinement of scalar restriction; Definitions 4.2.1.7, 4.2.1.13, 4.2.1.19; Corollary 4.2.3.2 is motivation, not a black-box dependency. Coherent composition: Kerodon 01PF."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,10 +164,45 @@
    "results": "8 hits: CategoryTheory.Mod_.scalarRestriction, RestrictScalars, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalarsObj, RestrictScalars.module, Submodule.restrictScalars, AlgHom.coe_restrictScalars', RestrictScalars.algebra.  Retained previous successful search: ordinary scalar restriction only.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRestriction|def comap|comap_obj_mod",
+   "results": "{\"t\": \"2026-10-17T10:06:45Z\", \"tool\": \"grep\", \"query\": \"scalarRestriction|def comap|comap_obj_mod\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\"], \"digest\": \"bd297b0f6d3cc421\"}; Read scalarRestriction and comap in Mathlib/CategoryTheory/Monoidal/Mod.lean:355-414. Hits concern ordinary module objects or unrelated precomposition, not all LM tree coherences.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_.comap",
+   "results": "{\"t\": \"2026-10-17T10:06:46Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Mod_.comap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.comap\"], \"digest\": \"0fb8ac47ea71948b\"}; Read scalarRestriction and comap in Mathlib/CategoryTheory/Monoidal/Mod.lean:355-414. Hits concern ordinary module objects or unrelated precomposition, not all LM tree coherences.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra homomorphism induces restriction of scalars on homotopy coherent left modules with all operadic substitution coherences",
+   "results": "{\"t\": \"2026-10-17T10:06:46Z\", \"tool\": \"leansearch\", \"query\": \"An algebra homomorphism induces restriction of scalars on homotopy coherent left modules with all operadic substitution coherences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.restrictScalars\", \"CategoryTheory.Mod_.scalarRestriction\", \"ModuleCat.restrictScalars\", \"AlgHom.restrictScalars.congr_simp\", \"AlgHom.coe_restrictScalars'\", \"ModuleCat.RestrictScalars.obj'\", \"ContinuousAlgHom.restrictScalars\", \"AlgHom.restrictScalars_apply\"], \"digest\": \"aa8975ef1346d3af\"}; Read scalarRestriction and comap in Mathlib/CategoryTheory/Monoidal/Mod.lean:355-414. Hits concern ordinary module objects or unrelated precomposition, not all LM tree coherences.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy coherent scalar restriction of modules along a morphism of associative algebras in a monoidal infinity category",
+   "results": "{\"t\": \"2026-10-17T10:06:48Z\", \"tool\": \"leanfinder\", \"query\": \"homotopy coherent scalar restriction of modules along a morphism of associative algebras in a monoidal infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.scalarRestriction\", \"CategoryTheory.Mod_.scalarRestriction_hom\", \"CategoryTheory.Mod_.scalarRestriction_smul\", \"CategoryTheory.Mod_.comap_obj_mod\", \"CategoryTheory.Mod_.comap\", \"ModuleCat.RestrictScalars.map'\", \"ModuleCat.Algebra.instLinearRestrictScalars\", \"ModuleCat.restrictScalarsComp'_hom_app\"], \"digest\": \"2995ab94de384ef4\"}; Read scalarRestriction and comap in Mathlib/CategoryTheory/Monoidal/Mod.lean:355-414. Hits concern ordinary module objects or unrelated precomposition, not all LM tree coherences.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "precompose a homotopy coherent operadic action with an algebra morphism using tree substitution and unit compatibility",
+   "results": "{\"t\": \"2026-10-17T10:11:49Z\", \"tool\": \"leanfinder\", \"query\": \"precompose a homotopy coherent operadic action with an algebra morphism using tree substitution and unit compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.MorphComponents.preComp\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp_a\", \"AlgebraicTopology.DoldKan.MorphComponents.postComp\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp_b\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp_φ\", \"Action.Hom.comp\", \"SSet.RelativeMorphism.Homotopy.precomp_h\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.precomp_h\"], \"digest\": \"a5d41d1c7abfabf6\"}; Read scalarRestriction and comap in Mathlib/CategoryTheory/Monoidal/Mod.lean:355-414. Hits concern ordinary module objects or unrelated precomposition, not all LM tree coherences.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-module-operad-encoding",
@@ -80,5 +227,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-module-scalar-restriction-coherence",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all metadata. Wrote eight explicit tree-data construction and compatibility steps, retaining all contraction-chain prisms and simplicial parameters. Reused the existing operation reconstruction, LM definition and coherent composition-spine tool; no new nodes. Checked ordinary Mathlib scalar restriction is insufficient and found no project Lean attachment.",
+  "blueprint": "The existing ancestry reaches prop-coef-integral-exceptional-adjoint, proof paragraph 2 (coherent derived mapping-complex comparison). The immediate parent lem-coef-module-operad-encoding step 6 requires this construction before reconstruction of the scalar-restriction lift; all eight steps realize that specific subargument.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic coherent composition of arrows and higher simplices, including the natural face/degeneracy homotopies, used to paste the given operation prisms. No statement of this unit supplies this basic quasicategorical composition tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NN-4c9cbbffe",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-4c9cbbffe (reviewer sub-agent of L); spot-checked: FIX: I read the item, all 8 steps and every cited statement in full: def-coef-left-module-operadic-encoding, lem-coef-colored-operation-section-reconstruction, lem-cbc-simplicial-composition-spine and the notion definitions. I also read parent lem-coef-module-operad-encoding step 6, sibling lem-coef-module-scalar-restriction-mapping and unit sk-prop-sf-biduality-general. Higher Algebra is not archived here; I checked against HA 4.2.1.6/4.2.1.7/4.2.1.13/4.2.1.19 from my own knowledge (LM^⊗ ordered fibres, module input unique and last). Cor 4.2.3.2 is correctly used only as motivation, since citing it would be circular. No SGA. No coefficient category or base change is involved, and no target is touched. I found no false statement and checked these cases: h=id, r=0 (b_0 is the unary identity), the nullary unit h η_B ≃ η_C, forests and discarded inputs, and K empty. Steps 1, 2, 3, 5, 6 and 7 are correct; step 3's endpoint b^{L_C}_r(h^{⊗r}⊗1) checks out. One repairable gap (E5): step 4 chose composites of prisms and said their faces 'identify' with the shorter-chain composites, which holds only up to homotopy, but reconstruction needs faces that are equal. I rewrote step 4 to choose the composites by induction on chain length, as relative lifts against ∂Δ^m⊂Δ^m through the trivial Kan fibration of the spine tool, with degenerate chains given degeneracies and a contractible space of choices. I rewrote step 8 to make those lifts with the parameter K retained (Fun(K,-) keeps trivial Kan fibrations) and to show that restriction along u gives a valid system again. Uses and deps are unchanged. There are no new nodes, no duplicates (rg over dag/nodes) and no cycle (DFS run). proof_deps equals the union of the uses. I accept the tool use of lem-cbc-simplicial-composition-spine (generic quasicategorical composition, already used this way by many sec-six-functors nodes). The corrected item is in fixes/dag/nodes/sec-six-functors/lem-coef-module-scalar-restriction-coherence.json; details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
