@@ -268,6 +268,113 @@ lemma exists_unitHom_eq (F : Sheaf J (ModuleCat.{max u v} R)) (s : F.obj.obj (op
   simp only [ModuleCat.hom_id, LinearMap.id_apply]
   exact one_smul R s
 
+include hW in
+/-- The section over the terminal object of `λ⁻¹ ≫ (s ⊗ t) : 𝟙 ⟶ F ⊗ G` is the image of
+`s(1) ⊗ t(1)` under the comparison `F(W) ⊗ G(W) ⟶ (F ⊗ G)(W)`. -/
+lemma leftUnitor_inv_comp_tensorHom_app {F G : Sheaf J (ModuleCat.{max u v} R)}
+    (s : 𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ F) (t : 𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ G) :
+    ((λ_ (𝟙_ (Sheaf J (ModuleCat.{max u v} R)))).inv ≫ (s ⊗ₘ t)).hom.app (op W)
+        (unitSection J W) =
+      (tensorObjComparison J F G).app (op W)
+        (s.hom.app (op W) (unitSection J W) ⊗ₜ t.hom.app (op W) (unitSection J W)) := by
+  have hl : (λ_ (𝟙_ (Sheaf J (ModuleCat.{max u v} R)))).inv.hom.app (op W) (unitSection J W) =
+      (tensorObjComparison J _ _).app (op W) (unitSection J W ⊗ₜ[R] unitSection J W) := by
+    rw [leftUnitor_inv_hom]
+    rfl
+  have hn := congr_arg (fun φ ↦ φ.app (op W) (unitSection J W ⊗ₜ[R] unitSection J W))
+    (tensorObjComparison_naturality s t)
+  simp only [NatTrans.comp_app, ConcreteCategory.comp_apply] at hn
+  rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply, hl,
+    hn]
+  rfl
+
+variable [HasSheafify J (ModuleCat.{max u v} R)]
+  [J.HasSheafCompose (forget (ModuleCat.{max u v} R))]
+  [J.WEqualsLocallyBijective (ModuleCat.{max u v} R)]
+  [Balanced (Sheaf J (ModuleCat.{max u v} R))]
+
+include hW in
+/-- If the terminal object has finite disjoint refinements, the unit of sheaves of modules is
+projective: morphisms out of it are sections over the terminal object, and epimorphisms are
+surjective on these. -/
+theorem projective_unit (hfd : J.HasFiniteDisjointRefinements W) :
+    Projective (𝟙_ (Sheaf J (ModuleCat.{max u v} R))) where
+  factors {E G} f e _ := by
+    have : Presheaf.IsLocallySurjective J e.hom :=
+      (Sheaf.isLocallySurjective_iff_epi' _ e).2 inferInstance
+    obtain ⟨t, ht⟩ := Presheaf.surjective_app_of_hasFiniteDisjointRefinements e.hom
+      (Sheaf.isSeparated G) hfd (fun _ _ _ hf t ↦ hf.exists_map_eq E t)
+      (f.hom.app (op W) (unitSection J W))
+    obtain ⟨x, hx⟩ := exists_unitHom_eq hW E t
+    refine ⟨x, unit_hom_ext hW ?_⟩
+    rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply, hx, ht]
+
+omit [HasSheafify J (ModuleCat.{max u v} R)] [J.WEqualsLocallyBijective (ModuleCat.{max u v} R)]
+  [Balanced (Sheaf J (ModuleCat.{max u v} R))] in
+/-- Taking the image of the unit section is additive. -/
+lemma sum_hom_app_unitSection {F : Sheaf J (ModuleCat.{max u v} R)} {ι : Type*} (S : Finset ι)
+    (x : ι → (𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ F)) :
+    (∑ i ∈ S, x i).hom.app (op W) (unitSection J W) =
+      ∑ i ∈ S, (x i).hom.app (op W) (unitSection J W) := by
+  let E := sheafToPresheaf J (ModuleCat.{max u v} R) ⋙ (evaluation _ _).obj (op W)
+  have h := congr_arg (fun φ ↦ φ (unitSection J W)) (E.map_sum x S)
+  simpa [E] using h
+
+omit [HasSheafify J (ModuleCat.{max u v} R)] [J.WEqualsLocallyBijective (ModuleCat.{max u v} R)]
+  [Balanced (Sheaf J (ModuleCat.{max u v} R))] in
+/-- Taking the image of the unit section is additive. -/
+lemma sub_hom_app_unitSection {F : Sheaf J (ModuleCat.{max u v} R)}
+    (x y : 𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ F) :
+    (x - y).hom.app (op W) (unitSection J W) =
+      x.hom.app (op W) (unitSection J W) - y.hom.app (op W) (unitSection J W) := by
+  let E := sheafToPresheaf J (ModuleCat.{max u v} R) ⋙ (evaluation _ _).obj (op W)
+  have h := congr_arg (fun φ : E.obj _ ⟶ E.obj F ↦ φ (unitSection J W)) (E.map_sub (f := x) (g := y))
+  simpa [E] using h
+
+include hW in
+/-- If the terminal object has finite disjoint refinements, morphisms from the unit of sheaves
+of modules to a tensor product are finite sums of tensor products. -/
+theorem unitTensorFinite (hfd : J.HasFiniteDisjointRefinements W) :
+    UnitTensorFinite (Sheaf J (ModuleCat.{max u v} R)) := by
+  intro F G x
+  have hθ : ((sheafificationAdjunction J _).homEquiv _ _).symm (tensorObjComparison J F G) =
+      Functor.OplaxMonoidal.δ (presheafToSheaf J (ModuleCat.{max u v} R)) _ _ ≫
+        ((sheafificationAdjunction J _).counit.app F ⊗ₘ
+          (sheafificationAdjunction J _).counit.app G) :=
+    Equiv.symm_apply_apply _ _
+  have hiso : IsIso ((presheafToSheaf J _).map (tensorObjComparison J F G)) := by
+    have : IsIso (((sheafificationAdjunction J _).homEquiv _ _).symm
+        (tensorObjComparison J F G)) := by
+      rw [hθ]
+      infer_instance
+    rw [Adjunction.homEquiv_counit] at this
+    exact IsIso.of_isIso_comp_right _ ((sheafificationAdjunction J _).counit.app _)
+  have : Presheaf.IsLocallySurjective J (tensorObjComparison J F G) :=
+    ((J.W_iff _).2 hiso).isLocallySurjective
+  obtain ⟨p, hp⟩ := Presheaf.surjective_app_of_hasFiniteDisjointRefinements
+    (tensorObjComparison J F G) (Sheaf.isSeparated _) hfd
+    (fun _ _ _ hf t ↦ hf.exists_map_tensorObj_eq F G t) (x.hom.app (op W) (unitSection J W))
+  clear hθ hiso
+  induction p using TensorProduct.induction_on generalizing x with
+  | zero =>
+    refine ⟨0, Fin.elim0, Fin.elim0, unit_hom_ext hW ?_⟩
+    rw [sum_hom_app_unitSection, ← hp, map_zero, Finset.univ_eq_empty, Finset.sum_empty]
+  | tmul a b =>
+    obtain ⟨s, hs⟩ := exists_unitHom_eq hW F a
+    obtain ⟨t, ht⟩ := exists_unitHom_eq hW G b
+    refine ⟨1, fun _ ↦ s, fun _ ↦ t, unit_hom_ext hW ?_⟩
+    rw [Fin.sum_univ_one, leftUnitor_inv_comp_tensorHom_app hW, hs, ht, ← hp]
+  | add p₁ p₂ h₁ h₂ =>
+    obtain ⟨x₁, hx₁⟩ := exists_unitHom_eq hW (F ⊗ G) ((tensorObjComparison J F G).app (op W) p₁)
+    obtain ⟨n₁, s₁, t₁, e₁⟩ := h₁ x₁ hx₁.symm
+    obtain ⟨n₂, s₂, t₂, e₂⟩ := h₂ (x - x₁) (by
+      rw [sub_hom_app_unitSection, ← hp, hx₁, map_add]
+      abel)
+    refine ⟨n₁ + n₂, Fin.append s₁ s₂, Fin.append t₁ t₂, ?_⟩
+    rw [Fin.sum_univ_add]
+    simp only [Fin.append_left, Fin.append_right, ← e₁, ← e₂]
+    abel
+
 end Terminal
 
 end Sheaf
