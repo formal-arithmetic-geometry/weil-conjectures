@@ -265,5 +265,23 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-e53137e79 (reviewer sub-agent of L); spot-checked: Read the item and new node in full, the statements of all five cited nodes, the citer lem-coef-simplicial-localization-existence, and the Mathlib source (Presentable.lean:51, Presentable/Finite.lean:67, SimplicialSet/Finite.lean:31, Inner/Basic.lean:89). The item statement is unchanged and not weakened: its index condition is exactly filtered, and it has strict functoriality, both naturality equations, both legs, and stays in one universe. Steps 1-8 are correct. Step 2: horn finiteness holds because deleting repeated vertices keeps the image, so the shorter chain stays in the horn. Step 5: inner anodyne by the cell-generation Mathlib leaf (a cell map is its own retract); the fibration filler comes from factoring the horn map through a finite stage of the sequential colimit (by the finite-Hom node) and using that stage's attached simplex, with both triangles checked. Step 6: finite-Hom node plus Stacks 002W for the cospan, valid for any small filtered I. Steps 7-8: colimits exchanged by their universal properties, and the comparison is identified as the canonical one. The new node lem-coef-finite-simplicial-hom-filtered-colimit is an exact Mathlib leaf (SSet.Finite.instIsFinitelyPresentable, unfolded with isFinitelyPresentable_iff_preservesFilteredColimitsOfSize, universes matching). It is statement-only and self-contained; tested at K empty (needs nonempty I, which filtered gives), K = point, and noninjective transitions. No duplicate (checked small-inner-horn-completion, pointwise-compact-diagrams, joyal-filtered-equivalences, hypercover lifting, inner-horn-cell-generation) and no blueprint same_as. Off-unit citations are only definitions or Mathlib leaves, so no tool_uses. No SGA, target or coefficient changes. Kerodon 01BP is WANTED and the proof is marked agent-written. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b579e9e0d",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: Mathlib innerFibrations (innerHornInclusions.rlp, all n>=2, 0<i<n) and innerAnodyneExtensions (.llp); FunctorialFactorizationData gives T, u, v, v∘u=f, both lifting conditions, naturality and exact functor laws; I : Type u with SmallCategory and IsFiltered matches 'small, nonempty, finite diagrams have cocones'; IsIso (colimit.post F data.Z) is the canonical comparison; both leg equations have correct types and direction (they follow from naturality, as the node's clauses do). No extra hypotheses; everything in universe u. Edge cases checked: empty sets, dimensions 0 and 1, empty I excluded, parallel and non-injective transitions allowed. Only the node's lean field changed; statement verbatim, appearing once; no definitions or proofs beyond sorry; no duplicate in Mathlib or the side tree; docstrings cite Kerodon 01BP and the blueprint item and carry all 8 proof steps. nt_compile --json on the snapshot file against the side overlay exits clean (module 1.2 s). Minor: the second reading is the author's own pass, stated as such; report text artefact 'Proposition the project server'. Neither blocks; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialSet.FilteredInnerHornFactorization",
+  "declaration": "SSet.exists_filtered_inner_horn_factorization",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialSet/FilteredInnerHornFactorization.lean",
+  "statement": "theorem exists_filtered_inner_horn_factorization : ∃ data : MorphismProperty.FunctorialFactorizationData innerAnodyneExtensions.{u} innerFibrations.{u}, ∀ (I : Type u) [SmallCategory I] [IsFiltered I] (F : I ⥤ Arrow SSet.{u}), IsIso (colimit.post F data.Z) ∧ colimMap (Functor.whiskerLeft F data.i) ≫ colimit.post F data.Z = colimit.post F Arrow.leftFunc ≫ data.i.app (colimit F) ∧ colimit.post F data.Z ≫ data.p.app (colimit F) = colimMap (Functor.whiskerLeft F data.p) ≫ colimit.post F Arrow.rightFunc",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
