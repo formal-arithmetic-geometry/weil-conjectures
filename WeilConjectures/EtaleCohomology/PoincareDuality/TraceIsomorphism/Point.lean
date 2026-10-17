@@ -40,25 +40,6 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-section Stubs
-
-variable {Λ : Type (u + 1)} [CommRing Λ]
-
--- TEMPORARY stubs (to be replaced by the lemmas of the constant-sheaf file)
-theorem stub_bijective_smul_id_unit (X : Scheme.{u}) [ConnectedSpace X] :
-    Function.Bijective (fun r : Λ ↦ r • 𝟙 (𝟙_ (DerivedCategoryModule Λ X))) := sorry
-
-theorem stub_injective {k : Type u} [Field k] [IsSepClosed k] [Module.Injective Λ Λ] :
-    Injective ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-      (ModuleCat.of Λ Λ)) := sorry
-
-theorem stub_iso {k : Type u} [Field k] [IsSepClosed k]
-    (L : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (e : (Scheme.pointSmallEtale (𝟙 (Spec (.of k)))).sheafFiber.obj L ≅ ModuleCat.of Λ Λ) :
-    Nonempty (L ≅ (constantSheaf _ _).obj (ModuleCat.of Λ Λ)) := sorry
-
-end Stubs
-
 variable {Λ : Type (u + 1)} [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
 
 /-- For `a : X ⟶ s` with `X` connected, `g ↦ e⁻¹ ≫ La^* g ≫ e` is a bijection
@@ -68,8 +49,8 @@ theorem bijective_leftDerivedUpperStar_map_comp {X : Scheme.{u}} [ConnectedSpace
     (a : X ⟶ Spec (.of k)) (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) :
     Function.Bijective (fun g : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ 𝟙_ _ ↦
       (L((a)^*[ModuleCat.{u + 1} Λ])).map g ≫ e.hom) := by
-  have hs := stub_bijective_smul_id_unit (Λ := Λ) (Spec (.of k))
-  have hX := stub_bijective_smul_id_unit (Λ := Λ) X
+  have hs := bijective_smul_id_unit Λ (Spec (.of k))
+  have hX := bijective_smul_id_unit Λ X
   have h : ((fun z ↦ e.inv ≫ z ≫ (Iso.refl _).hom) ∘
       (fun g : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ 𝟙_ _ ↦
         (L((a)^*[ModuleCat.{u + 1} Λ])).map g ≫ e.hom)) ∘ (fun r : Λ ↦ r • 𝟙 (𝟙_ _)) =
@@ -116,7 +97,6 @@ theorem bijective_comp_unit_rightDerivedLowerStar [Module.Injective Λ Λ] {X : 
   obtain ⟨Z, v, w, hT⟩ := distinguished_cocone_triangle u
   have : Z.IsGE 1 := isGE_one_of_bijective_comp_of_isSepClosed (Triangle.mk u v w) hT
     (Iso.refl _) hu
-  have := stub_injective (Λ := Λ) (k := k)
   have hb := DerivedCategory.bijective_comp_singleFunctor_of_injective_of_isGE
     (Triangle.mk u v w) hT ((constantSheaf (Spec (.of k)).smallEtaleTopology
       (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
@@ -140,7 +120,7 @@ theorem nonempty_tateObject_iso_unit (m : ℤ) :
   obtain ⟨L, -, hL, ⟨e⟩⟩ :=
     HasTateTwist.exists_isLocallyConstantSheaf_twistObject (Λ := Λ) (Spec (.of k)) m
   obtain ⟨f⟩ := hL k (𝟙 _)
-  obtain ⟨g⟩ := stub_iso L f
+  obtain ⟨g⟩ := Scheme.nonempty_iso_constantSheaf_of_sheafFiber_iso L f
   exact ⟨e ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso g ≪≫
     (unitIsoSingleFunctorConstantSheaf Λ _).symm⟩
 
