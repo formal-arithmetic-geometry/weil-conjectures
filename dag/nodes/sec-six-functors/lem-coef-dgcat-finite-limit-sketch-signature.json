@@ -230,5 +230,49 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-1423abf84 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the verdict is PASS; no fixes were written. The item's statement is byte-identical to the base newtargets node (compared read-only), as are its blueprint and stmt_deps. Only the proof, searches, status and split_report changed, and no target is weakened. Tabuada arXiv:0710.4303 is not in literature/; the report files a WANTED line and proof_origin.by is agent, which is right. Steps 1-6: I checked every vertex, endpoint equation and relation. The product/pullback vertices and the endpoint-equality pullback along the diagonal (checked in Sets: elements (t,x) with u(t)=v(t)=x) use only finite cones. The relations cover the fibrewise R-module axioms, associativity and both unit laws (the tuple <1 t_p, id> into C_{0,p} is derivable), bilinearity, linearity of d, d(1)=0 as d_0 1 = z_1 Delta, d^2 = z p, and Leibniz with sign (-1)^q for the left factor; composability of <d pi_1, pi_2> follows from s d = s and the square. Tuple arrows are generators with projection relations, and pullback tuples are admitted only after a finite derivation of their base equality. Closure is by finite stages with a stated induction on tree height. Step 7: size holds by finite strings over R, Z and the constructor labels; this needs N in U, which the convention gives. Step 8 applies the leaf to the explicit path category. Step 9 uses only the definitional sentence of lem-coef-finite-limit-sketch-models; there is no cycle, since that node's proof cites only orthogonality/presheaf presentability, Yoneda and filtered/finite commutation. New node lem-coef-category-quotient-relations is a valid Mathlib leaf: Quotient.lean lines 121, 131, 146, 151, 192, 226 and 231 match the cited declarations, and EqvGen(CompClosure r) is the least composition-stable equivalence containing r (one line from lines 63-65 and 231). Its searches are recorded in four kinds. The DAG and blueprint candidates are quasicategory-, groupoid- or free-comonad-specific, so the node is not a duplicate, and it is not a restated clause of the item. Blueprint from/via/created fields are correct. Edge cases tested: empty object set, R=0, characteristic 2, negative degrees; for the leaf, empty or total r and empty C. Tool uses: none, correctly. Details are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f2090c463",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Statement, dependencies, syntax, cone recipes, edge cases, docstrings, report sections, and scompile.py evidence checked; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCategorySketchSignature",
+  "declaration": "CategoryTheory.DgSketchSignature.exists_signature",
+  "declarations": [
+   "CategoryTheory.DgSketchSignature.Context",
+   "CategoryTheory.DgSketchSignature.objectContext",
+   "CategoryTheory.DgSketchSignature.arrowContext",
+   "CategoryTheory.DgSketchSignature.pairContext",
+   "CategoryTheory.DgSketchSignature.parallelContext",
+   "CategoryTheory.DgSketchSignature.composableContext",
+   "CategoryTheory.DgSketchSignature.Context.addObject",
+   "CategoryTheory.DgSketchSignature.Context.addArrow",
+   "CategoryTheory.DgSketchSignature.Operation",
+   "CategoryTheory.DgSketchSignature.Operation.domain",
+   "CategoryTheory.DgSketchSignature.Operation.source",
+   "CategoryTheory.DgSketchSignature.Operation.target",
+   "CategoryTheory.DgSketchSignature.Raw",
+   "CategoryTheory.DgSketchSignature.Term",
+   "CategoryTheory.DgSketchSignature.Law",
+   "CategoryTheory.DgSketchSignature.Typed",
+   "CategoryTheory.DgSketchSignature.Equal",
+   "CategoryTheory.DgSketchSignature.ConeRecipe",
+   "CategoryTheory.DgSketchSignature.ConeIndex",
+   "CategoryTheory.DgSketchSignature.coneRecipe",
+   "CategoryTheory.DgSketchSignature.Presentation",
+   "CategoryTheory.DgSketchSignature.Presentation.Represents",
+   "CategoryTheory.DgSketchSignature.RealizesCone",
+   "CategoryTheory.DgSketchSignature.exists_signature"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgCategorySketchSignature.lean",
+  "statement": "theorem exists_signature (R : Type u) [CommRing R] : ∃ (A : Type u) (_ : SmallCategory A) (P : Presentation R A) (S : FiniteLimitSketch A) (e : S.index ≃ ConeIndex), ∀ i : S.index, RealizesCone P S i (coneRecipe R (e i))",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

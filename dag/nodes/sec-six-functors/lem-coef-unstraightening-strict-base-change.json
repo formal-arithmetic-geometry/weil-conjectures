@@ -280,5 +280,37 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-e48c0b2c9 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, the corrected paragraph and all six steps. I also read all five cited statements, the citer homotopy-descent Step 3, and HTT §2.2.1, Prop 2.2.1.1 (pp.73-74), Rem 2.2.2.12 (p.78) and Prop 2.2.3.11 (pp.83-84). The worker's statement correction is right and is not a weakening. Raw U_S simplices are transformations indexed by the objects of C[S], so for S two points, T one point and F terminal, the sets are different singletons, and HTT 2.2.1.1 claims only isomorphisms. The added paragraph asserts equality for normalized cone labels b_i:B_n(i,v)->F(σi) and keeps the canonical isomorphism for raw labels. Every clause is kept, and the citer, which needs only a strictly base-natural model, is unaffected. Step checks: Step 1: the collage E_F plus the cone-boundary clauses (A=C[S], old subcategory exact, M(v,c) empty, M(v,v)=pt) and the pushout universal property give exactly the labels and action equations. Step 2: both sides use F(uτi) and F(C[u]C[τ]h)=F(C[uτ]h), so they are equal. Step 3: C[J^n]=C[Δ^{n+1}] glued to C[Δ^0] along C[Δ^n], and cone-boundary with S=Δ^0 gives labels Hom(Q^n,K) and total object S×Sing_Q K. Step 4: π_i(z∘h)=π_j(z) holds, the action equation for a(b_i, kq_nπ_i) holds, and composition and units agree, matching HTT 2.2.2.12. Step 5: strict functoriality by precomposition. Step 6: Kan values are preserved, right-horn fillers come by pairing, and fibers are E_{u(t)}. Edge cases checked: empty S, S=Δ^0, n=0, and the discrete two-point base. All citations are in unit sk-prop-sf-biduality-general, there is no SGA, no cycle and no new node. rg over the DAG for unstraighten and Sing_Q found no duplicate. FIX: source.place still claimed a local HTT reading copy, contradicting the report and literature/. I corrected it in fixes/dag/nodes/sec-six-functors/lem-coef-unstraightening-strict-base-change.json. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0ce834eb5",
+  "group": "Q17",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/. Mathematics and Lean statements match; per-file compilation passed without diagnostics. Replaced the H11 second-reading placeholder and repaired corrupted report citations. No Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.UnstraighteningStrictBaseChange",
+  "declaration": "SSet.StrictUnstraightening.unstraightening_strict_base_change",
+  "declarations": [
+   "SSet.StrictUnstraightening.ConeComponent",
+   "SSet.StrictUnstraightening.Label",
+   "SSet.StrictUnstraightening.fibers",
+   "SSet.StrictUnstraightening.fiberFunctor",
+   "SSet.StrictUnstraightening.pull",
+   "SSet.StrictUnstraightening.parameters",
+   "SSet.StrictUnstraightening.coneOperator",
+   "SSet.StrictUnstraightening.coneQuotient",
+   "SSet.StrictUnstraightening.coneLeg",
+   "SSet.StrictUnstraightening.StrictModel",
+   "SSet.StrictUnstraightening.unstraightening_strict_base_change"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/UnstraighteningStrictBaseChange.lean",
+  "statement": "theorem unstraightening_strict_base_change : Nonempty StrictModel.{u} ∧ (∀ (T S : SSet.{u}) (u : T ⟶ S) (F : Presheaf S), (∀ c : PinchedCube.rigidification.obj S, KanComplex (obj F c)) → ∀ c : PinchedCube.rigidification.obj T, KanComplex (obj (ConePresheaf.restrict u F) c)) ∧ (∀ (T S : SSet.{u}) (u : T ⟶ S) (F G : Presheaf S) (f : F ⟶ G), weakEquivalences S f → weakEquivalences T (restrictHom u f)) ∧ (∀ (T S : SSet.{u}) (u : T ⟶ S) (a : Over S), Enhanced.rightFibration a.hom → Enhanced.rightFibration ((Over.pullback u).obj a).hom) ∧ (∀ (T S : SSet.{u}) (u : T ⟶ S) (a b : Over S) (f : a ⟶ b), Enhanced.rightFibration a.hom → Enhanced.rightFibration b.hom → Enhanced.FiberwiseWeakEquivalence f → Enhanced.FiberwiseWeakEquivalence ((Over.pullback u).map f))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Full normalized cone-label coordinates and a structured conclusion fixing the functors, raw comparison, tensor/product comparison and parameter maps on every component. No data is chosen from the existence theorem. Reuses the recorded cone adjunction, coherent simplices, full enriched transformations, diagram restriction and pinched-cube comparison; all four preservation clauses are stated over arbitrary bases."
  }
 }

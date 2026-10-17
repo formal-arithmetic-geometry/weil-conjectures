@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-weil-size-convention",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-coef-bounded-filtered-subcategory-system"
  ],
  "proof": [
   {
@@ -248,5 +249,23 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-1dd8ed193 (reviewer sub-agent of L); spot-checked: I read the whole item and all eight steps. The statement, stmt_deps and blueprint are identical to the side DAG, where the item is still unsplit; only the proof-side fields changed, and there are no new nodes. I checked the three cited nodes: def-weil-pbc-category-colimit gives filteredness and the uniqueness of colimit factorizations; lem-coef-infinite-cardinal-square-power gives theta*theta=theta for an infinite theta in U; def-weil-size-convention gives the universes. Stacks categories.tex labels definition-directed (002V, l.2131) and definition-colimit (002F, l.1310) are cited correctly. HA B.0.20 is not under literature/, so the WANTED line and proof_origin.by=agent are right. Steps 1-3: a countable closure that adds identities, composites, common-target arrows and equalizing arrows gives a non-full filtered K with |E|<lambda. The count uses theta=max(aleph0,|E_n|)<lambda, the square leaf and regularity. I checked the finite-diagram filteredness reduction, including the empty diagram. Step 4: P_J is small by universe power sets; upper bounds of fewer than lambda members come from closing the union of their arrows (objects enter through identities); the empty family is covered. Steps 5-8: the transition maps, the map q, the cocone b (independent of the chosen member, using an upper bound of two members) and the identities qr=1 and rq=1 all follow from uniqueness; I checked every composition direction. Small cases tested: terminal J; J=omega with lambda=aleph1; parallel arrows a->b with a terminal t, which shows why non-full subcategories are needed. Duplicate search found nothing that states this item: small-directed-superset, presentable-presentation-comparison, accessible-subdiagram-criterion, filtered-presentation-common-refinement, colimit-subdiagram-approximation (the infinity-categorical version, with no filteredness of the pieces) and infinity-cofinal-kappa-poset all differ. Parent categorical-pattern-model-calculus step 4 uses the item exactly as stated. There is no route departure, no tool_uses, and no SGA or coefficient question applies. One harmless wording point: step 7 says 'by step 3' for the arrow-containment fact, which is stated at the end of step 4. No fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9949ea6cd",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Statements, dependencies, definitions, docstrings, edge cases, source records, and canonical colimit constructions checked; both delivered files compiled successfully with scompile.py."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredColimitCardinalRegrouping",
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitCardinalRegrouping.lean",
+  "declaration": "CategoryTheory.filteredColimit_cardinal_regrouping",
+  "statement": "theorem filteredColimit_cardinal_regrouping (κ : Cardinal.{u}) (hκ : κ.IsRegular) (huncountable : Cardinal.aleph0 < κ) (J : Type u) [SmallCategory J] [IsFiltered J] : (∀ (S : Set (Σ x y : J, x ⟶ y)), Cardinal.mk S < κ → ∃ K : BoundedFilteredSubcategory J κ, S ⊆ K.val.arrows) ∧ Nonempty (BoundedFilteredSubcategory J κ) ∧ (∀ (I : Type u) (K : I → BoundedFilteredSubcategory J κ), Cardinal.mk I < κ → ∃ L : BoundedFilteredSubcategory J κ, ∀ i : I, K i ≤ L) ∧ (∀ (A : Type v) [Category.{w} A] [Limits.HasColimitsOfSize.{u, u} A] (X : J ⥤ A), IsIso (BoundedFilteredSubcategory.comparison (κ := κ) X))",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
