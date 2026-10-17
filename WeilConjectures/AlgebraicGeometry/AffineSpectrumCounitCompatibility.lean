@@ -26,8 +26,6 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-attribute [local irreducible] derivedPullback
-
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 

@@ -30,7 +30,7 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-attribute [local irreducible] derivedPullback mixedHomTensorPullbackIso
+attribute [local irreducible] mixedHomTensorPullbackIso
   schemeDerivedTensorMonoidal
 
 set_option backward.isDefEq.respectTransparency true

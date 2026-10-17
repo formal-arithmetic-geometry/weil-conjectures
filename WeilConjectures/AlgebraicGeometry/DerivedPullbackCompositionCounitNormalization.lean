@@ -27,7 +27,7 @@ namespace AlgebraicGeometry
 -- Compare the recorded functors through their interfaces, without unfolding the
 -- chosen resolutions or adjunction witnesses during statement elaboration.
 -- Open the pinned adjunction explicitly only at its defining Hom equation.
-attribute [local irreducible] derivedPullback Scheme.Modules.tensorPullback
+attribute [local irreducible] Scheme.Modules.tensorPullback
   CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.Functor.rightDerivedFunctorUnit
   DerivedCategory.Qh canonicalDerivedPullbackComposition schemeHomPullbackAdjunction
 variable [∀ S : Scheme.{u},
