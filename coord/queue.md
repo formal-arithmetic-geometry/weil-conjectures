@@ -13,11 +13,11 @@
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | disputed |
-| `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | proof |
 | `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | proof |
 | `WeilConjectures.WeilSheaf.PoincareDuality` | 3 | 1 | proof |
 | `Sheaf.WeilSheaf.AdicFiniteCoefficientBound` | 4 | 1 | proof |
+| `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension` | 4 | 1 | proof |
 | `Sheaf.WeilSheaf.AffineCurveRangePositive` | 5 | 1 | proof |
 | `WeilConjectures.WeilSheaf.CurveEndpoints` | 6 | 4 | proof |
@@ -45,8 +45,8 @@ Not items: a node in the proof dependencies has no Lean statement yet (the human
 | `Sheaf.SmoothPurity.NormalizedWitness` | 1 | 1 | `lem-pur-finite-smooth-adjunction-general-base` |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `sk-def-sfb-qlbar-condensed` |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `sk-def-sfb-dc-setting` |
+| `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | `lem-pd-module-ringed-topos-derived-comparison` |
 | `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | `def-weil-frobenius-cohomology-transport` |
-| `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | `def-weil-ordinary-compact-cohomology` |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | 4 | 2 | `def-wf-fundamental-representation` |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | 4 | 1 | `thm-sf-ctf-stability` |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-ambient-ind-derived-sums` |
