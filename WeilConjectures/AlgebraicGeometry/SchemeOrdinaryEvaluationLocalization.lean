@@ -38,7 +38,7 @@ Source: Stacks Project, Tag 08DJ.
 def schemeOrdinaryHomComparison (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (P M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
-    DerivedCategory.Q.obj (homComplex (R := Y.sheaf) P M) ⟶
+    DerivedCategory.Q.obj (homComplex.{u, u, u, u} (R := Y.sheaf) P M) ⟶
       (derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf).obj
         (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj M) := by
   haveI := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
@@ -71,7 +71,7 @@ set_option maxHeartbeats 1000000 in
 private theorem uncurry_representative (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (A P M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (φ : A ⟶ homComplex (R := Y.sheaf) P
+    (φ : A ⟶ homComplex.{u, u, u, u} (R := Y.sheaf) P
       ((schemeHomKInjectiveResolution Y).obj M)) :
     schemeDerivedTensorHomEquiv Y (DerivedCategory.Q.obj A) (DerivedCategory.Q.obj P)
         (DerivedCategory.Q.obj M)
@@ -161,15 +161,15 @@ theorem schemeOrdinaryEvaluation_localization (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (eK : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj F ≅ N)
     (f : pullbackTensorTotal Y F
-        (homComplex (R := Y.sheaf) P
+        (homComplex.{u, u, u, u} (R := Y.sheaf) P
           ((HomologicalComplex.single _ (.up ℤ) 0).obj
             (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) ⟶
-      homComplex (R := Y.sheaf) P F)
+      homComplex.{u, u, u, u} (R := Y.sheaf) P F)
     (hf : IsSchemeOrdinaryEvaluation Y P F f) :
     let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf
     let O := (HomologicalComplex.single _ (.up ℤ) 0).obj
       (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-    let V := homComplex (R := Y.sheaf) P O
+    let V := homComplex.{u, u, u, u} (R := Y.sheaf) P O
     let c := schemeOrdinaryHomComparison Y P F ≫ H.map (eK.inv.op, eN.hom)
     let d := schemeOrdinaryHomComparison Y P O ≫
       H.map (eK.inv.op, ((DerivedCategory.quotientCompQhIso _).app O).inv)
@@ -184,7 +184,7 @@ theorem schemeOrdinaryEvaluation_localization (Y : Scheme.{u})
   let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf
   let O := (HomologicalComplex.single _ (.up ℤ) 0).obj
     (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-  let V := homComplex (R := Y.sheaf) P O
+  let V := homComplex.{u, u, u, u} (R := Y.sheaf) P O
   let eta := CochainComplex.toKInjectiveResolution.{u}
     (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
   let phiF := f ≫ ((homComplexFunctor (R := Y.sheaf)).obj (op P)).map (eta.app F)

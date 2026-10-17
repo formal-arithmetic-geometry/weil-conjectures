@@ -114,7 +114,7 @@ theorem schemeHomOriginalTensorSpec {X Y : Scheme.{u}} (f : X ⟶ Y) :
         ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
           CochainComplex.IsKFlatTensor (R := Y.sheaf) P →
             IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
-  have s₀ := Classical.choose_spec (exists_derivedPullback.{u, w} f)
+  have s₀ := (derivedPullback_spec.{u, w} f)
   have s₁ := Classical.choose_spec s₀
   have s₂ := Classical.choose_spec s₁
   have s₃ := Classical.choose_spec s₂

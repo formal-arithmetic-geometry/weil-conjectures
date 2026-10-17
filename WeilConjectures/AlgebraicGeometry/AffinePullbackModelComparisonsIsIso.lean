@@ -125,7 +125,7 @@ theorem affinePullbackModelComparisons_isIso
         (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF)).2
     obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
       E, hE, hEmap, hEadd, ε, hL, htri, hflat⟩ :=
-      Classical.choose_spec (exists_derivedPullback g)
+      (derivedPullback_spec g)
     have hEq : E = Scheme.Modules.tensorPullback g :=
       CategoryTheory.Functor.ext hE (fun _ _ a ↦ hEmap a)
     clear hE hEmap hI hImap hIadd hIlim hIcolim hIres I htri

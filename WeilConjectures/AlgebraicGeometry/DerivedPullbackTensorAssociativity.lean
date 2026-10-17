@@ -200,7 +200,7 @@ private theorem pullback_counit_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
   subst F
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
       F₀, hF₀, hmap₀, hF₀add, ε₀, hderived₀, htri, hε₀⟩ :=
-    derivedPullback_spec g
+    (derivedPullback_spec g)
   have hF₀E : F₀ = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF₀ (fun _ _ a ↦ hmap₀ a)
   subst F₀
@@ -259,7 +259,7 @@ and section-derived-pullback; parent associativity proof, steps 1 and 2.
 (blueprint: lem-pc-derived-pullback-tensor-associativity).
 Proof: the tensor products P tensor N and N tensor R are K-flat by 079R.
 The counit epsilon is invertible on K-flat objects: identify F with tensorPullback
-using hF and hmap, and compare epsilon with the counit in derivedPullback_spec
+using hF and hmap, and compare epsilon with the counit in exists_derivedPullback
 by uniqueness of left-derived functors. The localization tensorator is invertible
 on K-flat pairs, including the images under F, since pullback preserves K-flatness.
 Use naturality of mu to replace its components at Q(P) tensor Q(N), and at
