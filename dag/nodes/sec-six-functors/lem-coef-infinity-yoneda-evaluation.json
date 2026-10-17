@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite-coefficient derived adjunction before the displayed derived inverse limit: Lemma 5.1.5.2 and the correctly oriented Yoneda-evaluation assertion needed in Lemma 5.5.2.1, printed pp. 324-325 and 462-463. The printed corepresented formulation of Lemma 5.5.2.1 has a variance error; the formula here is the representable-presheaf evaluation formula. Also Kerodon Subsection 8.3.1 (Tag 03M2), Proposition 8.3.1.3 and Remark 8.3.1.5, applied to the opposite category",
+   "place": "Current main-20261015 proof, paragraph beginning For K in D^b_c(X,R): reduction of integral compact supports and derived coefficient adjunction immediately before the displayed Rlim adjunction chain; literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md. This is the general coherent representability prerequisite along the recorded via chain.",
    "via": [
     "lem-coef-infinity-continuous-presheaf-representability",
     "lem-coef-presentable-infinity-adjoints",
@@ -27,9 +27,140 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K_d=D_{/d}$, with projection $r_d:K_d\\to D$, and let $e_d$ be its vertex $\\operatorname{id}_d$. By [lem-coef-infinity-slice-right-fibration], $r_d$ is a right fibration, its fiber at $x$ is the right-pinched space $\\operatorname{Map}_D(x,d)$, and $K_d$ is small. The right-fibration clause and representable compatibility of [lem-coef-space-transport-classification] identify $r_d$ with the presheaf $j(d)$, taking $e_d$ to the identity element. Choose a small right-fibration representative $q_F:E_F\\to D$ for $F$. The same node gives equivalences of Kan spaces\n$$\\operatorname{Map}_{\\mathcal P(D)}(j(d),F)\\simeq\\operatorname{Fun}_{/D}(K_d,E_F),\\qquad (E_F)_d\\simeq F(d).$$\nHere an $n$-simplex of the middle space is a map $K_d\\times\\Delta^n\\to E_F$ over $D$, with all simplicial parameters retained. The comparison is coherent in its two presheaves and respects restriction and identities.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.2, printed pp.324-325, right-fibration version of the proof; the already cited classification supplies the coherent model comparison."
+   }
+  },
+  {
+   "text": "We prove the particular right-anodyne inclusion $i_d:\\{e_d\\}\\hookrightarrow K_d$ explicitly, rather than assuming a general final-object theorem. An $n$-simplex $\\sigma$ of $K_d$ is an $(n+1)$-simplex of $D$ with last vertex $d$. Set $h_n(\\sigma)=s_{n+1}^D\\sigma$, and set $h_{-1}(*)=e_d$. The faces and degeneracies of $K_d$ are the corresponding operators of $D$ excluding the last face and last degeneracy. Thus the simplicial identities give\n$$d_{n+1}h_n=1,\\quad d_i h_n=h_{n-1}d_i\\ (0\\leq i\\leq n),\\quad h_n s_i=s_i h_{n-1}\\ (0\\leq i<n),\\quad h_{n+1}h_n=s_{n+1}h_n,$$\nwhere in degree zero the second equation reads $d_0h_0=e_d$. These identities append a repeated final vertex, and are valid even when $D$ is not a quasicategory.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018F",
+    "place": "Join-slice definition in Proposition 4.3.6.1; explicit agent calculation of the terminal extra degeneracy."
+   }
+  },
+  {
+   "text": "Call a nondegenerate $n$-simplex $\\sigma$ of $K_d$ basic if it is not $e_d$ and is not $h_{n-1}(\\tau)$ for any $(n-1)$-simplex (in degree zero only exclude $e_d$). For basic $\\sigma$, $h_n\\sigma$ is nondegenerate: if $h_n\\sigma=s_i\\rho$ with $i<n$, applying $d_{n+1}$ makes $\\sigma$ degenerate; if $i=n$, first $\\rho=\\sigma$ and then applying $d_n$ gives $\\sigma=h_{n-1}d_n\\sigma$, contrary to basicness. In degree zero the latter argument gives $\\sigma=e_d$. Conversely, if a nondegenerate simplex is $h\\tau$, then $\\tau$ is nondegenerate because $h$ commutes with degeneracies, and $\\tau$ is basic because $hh$ is degenerate; its preimage $\\tau$ is unique by $d_{n+1}h_n=1$. Thus the nondegenerate simplices other than $e_d$ are partitioned into pairs $(\\sigma,h_n\\sigma)$ with $\\sigma$ basic.\nStarting with $\\{e_d\\}$, attach these pairs in increasing dimension $n$ of $\\sigma$. For a basic $n$-simplex use its characteristic map $\\Delta^{n+1}\\to K_d$ corresponding to $h_n\\sigma$, and attach along $\\Lambda_{n+1}^{n+1}$. Its missing face is $\\sigma$; every other face is $h_{n-1}d_i\\sigma$ and is already present, as is every proper face of $\\sigma$. Distinct pairs have distinct new nondegenerate simplices. The unique nondegenerate decomposition of [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] therefore identifies each stage, degree by degree, with the pushout of the indicated horns: all other simplices are uniquely their degeneracies. All simplices occur after countably many dimension stages. Each attachment is a right horn ($n+1>0$), so closure under pushouts and transfinite composites in [def-coef-infinity-right-anodyne] proves $i_d$ right anodyne. Coproducts of the attachments may equivalently be attached one at a time in any well-order of the small indexing set.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets, for uniqueness of degeneracy decompositions; agent horn-pair filtration of the join slice, expanding the anodyne step in HTT Lemma 5.1.5.2."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-right-fibration-exponentiation] with $A=\\{e_d\\}$, $B=K_d$, $S=D$, $E=E_F$, and $q=q_F$. Step 3 verifies its right-anodyne hypothesis; step 1 verifies the right-fibration hypothesis. Pull its displayed trivial Kan fibration back along the map\n$$(E_F)_d\\longrightarrow\\operatorname{Fun}(K_d,D)\\times_{\\operatorname{Fun}(\\{e_d\\},D)}\\operatorname{Fun}(\\{e_d\\},E_F),\\qquad z\\longmapsto(r_d,z),$$\nwhere $r_d$ is constant in the simplicial parameter. The resulting map is exactly restriction\n$$\\rho_{d,F}:\\operatorname{Fun}_{/D}(K_d,E_F)\\longrightarrow(E_F)_d,\\qquad u\\longmapsto u(e_d).$$\nIt is a trivial Kan fibration: a boundary lifting problem for a pullback is the same boundary lifting problem for the original map with its base map fixed, so its filler still lies in the pullback. This also covers the empty boundary in dimension zero, as required by [def-weil-pbc-trivial-kan-fibration].",
+   "uses": [
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Proposition 4.2.5.4, right-fibration assertion, followed by the explicit pullback to maps over D."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-trivial-kan-homotopy-equivalence], the map $\\rho_{d,F}$ has a section and a simplicial homotopy inverse. Transport it through the two equivalences of step 1. The pullback compatibility in [lem-coef-space-transport-classification], applied to the vertex inclusion $\\{d\\}\\to D$, identifies restriction of a map over $D$ with its component at $d$; its identity compatibility then identifies the resulting map with\n$$\\varepsilon_{d,F}:\\operatorname{Map}_{\\mathcal P(D)}(j(d),F)\\longrightarrow F(d),\\qquad\\eta\\longmapsto\\eta_d(\\operatorname{id}_d).$$\nThis proves that the specified evaluation map, with its entire Kan space of parameters, is an equivalence. It does not merely show a bijection on components. The section supplied by the trivial-fibration lemma is used only to verify that this canonical map is an equivalence; no natural choice of those sections is asserted.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NS, lemma-trivial-kan-homotopy; HTT Lemma 5.1.5.2 identifies the map as evaluation on the distinguished identity."
+   }
+  },
+  {
+   "text": "For coherence, use a strict enriched presentation supplied by existing general model-comparison theorems, rather than make the join slices strictly functorial. By [lem-coef-coherent-nerve-comparison], take a small locally Kan simplicial category $A=R\\mathfrak C[D]$ and the derived-unit equivalence $q:D\\simeq N_{\\mathrm{hc}}A$. The Quillen equivalence in that statement gives this derived unit since every simplicial set is Joyal-cofibrant and $D$ is fibrant. It also supplies the counit comparison $\\mathfrak C[N_{\\mathrm{hc}}(A^{\\mathrm{op}})]\\to A^{\\mathrm{op}}$ as a Dwyer--Kan equivalence by [lem-coef-enriched-diagram-rectification]. Opposites and products of these coherent nerves agree with nerves of opposites and products: reversing the ordered vertices in the defining thickenings gives the former identification and an enriched functor into a product is a pair for the latter.\nThe Kan model category of simplicial sets is combinatorial and simplicial by the first clause of [lem-coef-simplicial-presheaf-projective-model]. Apply [lem-coef-simplicial-projective-model-calculus] to its enriched $A^{\\mathrm{op}}$-diagrams. Write $\\mathsf M$ for this projective model category and $B=\\mathsf M^{cf}$ for its full simplicial subcategory of cofibrant-fibrant diagrams. It has Kan mapping complexes by [lem-coef-simplicial-model-nerve-localization]. Enriched rectification, with $K=N_{\\mathrm{hc}}(A^{\\mathrm{op}})$ and the preceding counit as $u$, supplies an equivalence\n$$\\Theta:N_{\\mathrm{hc}}B\\simeq\\operatorname{Fun}(N_{\\mathrm{hc}}(A^{\\mathrm{op}}),\\mathcal S)\\simeq\\mathcal P(D).$$\nThe last equivalence is restriction along $q^{\\mathrm{op}}$; a quasi-inverse and its two natural equivalences are obtained by precomposition with a quasi-inverse of $q$. The comparison $\\Theta$ is the enriched-evaluation comparison of the cited theorem, so it identifies evaluation on objects, transformations, and coherent compositions, not just isomorphism classes of diagrams. These are the hypotheses and the exact compatibility needed below. All objects of $A$ and every individual diagram value stay $\\mathcal U$-small; $B$, its nerve, and the equivalence $\\Theta$ are formed in $\\mathcal U'$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 4.2.4.4 (printed pp.89 and 258), with the projective simplicial diagram model of Appendix A.3.3. The coherence argument here is the explicit enriched evaluation construction, not the free-cocompletion universal property."
+   }
+  },
+  {
+   "text": "For $a\\in A$, let $Y_a(x)=A(x,a)$, with action by composition. These are cofibrant-fibrant objects of $\\mathsf M$. Fibrancy is objectwise because $A$ is locally Kan. For cofibrancy use the free enriched diagram left adjoint to evaluation at $a$ in [lem-coef-simplicial-projective-model-calculus], with $I=A^{\\mathrm{op}}$ and $X=\\Delta^0$: it is exactly $Y_a$. Evaluation preserves fibrations and trivial fibrations because those are objectwise; by adjunction the free diagram functor preserves cofibrations. Since $\\varnothing\\to\\Delta^0$ is a cofibration, $\\varnothing\\to Y_a$ is one. Composition in $A$ therefore defines a genuine simplicial functor $Y:A\\to B$.\nDefine two simplicial functors $\\widetilde L,\\widetilde R:A^{\\mathrm{op}}\\times B\\to\\operatorname{Kan}_{\\mathcal U}$ by\n$$\\widetilde L(a,P)=\\underline{\\operatorname{Map}}_{\\mathsf M}(Y_a,P),\\qquad\\widetilde R(a,P)=P(a).$$\nThe former acts on mapping complexes by precomposition with $Y$ and postcomposition in $\\mathsf M$. The latter acts on a pair $u\\in A(a,b)$, $\\beta\\in\\underline{\\operatorname{Map}}_{\\mathsf M}(P,Q)$ by the map $P(b)\\to Q(a)$ given by $Q(u)\\beta_b=\\beta_aP(u)$, with all simplicial parameters taken by the diagonal. The enriched naturality equation for $\\beta$ is exactly that equality, so both constructions preserve composition and units as simplicial maps.\nDefine $\\widetilde\\varepsilon_{a,P}:\\widetilde L(a,P)\\to P(a)$ on an $n$-simplex $\\alpha:Y_a\\times\\Delta^n\\to P$ by restriction of $\\alpha_a:A(a,a)\\times\\Delta^n\\to P(a)$ to $(1_a,\\operatorname{id}_{\\Delta^n})$, where $1_a$ denotes the constant simplex at the enriched identity. This is a simplicial map: precomposing by any $\\Delta^m\\to\\Delta^n$ commutes with that restriction.\nHere is the full enriched naturality check. For simplicial parameters $u:a\\to b$, $\\alpha:Y_b\\to P$ and $\\beta:P\\to Q$, enriched naturality of $\\alpha$ and $\\beta$ gives, as equalities of maps on the product of their parameter simplicial sets,\n$$\\widetilde\\varepsilon_{a,Q}(\\beta\\alpha Y(u))=\\beta_a\\alpha_a(u)=\\beta_aP(u)\\alpha_b(1_b)=Q(u)\\beta_b\\widetilde\\varepsilon_{b,P}(\\alpha).$$\nThe first equality uses $Y(u)_a(1_a)=u$, an actual unit equality in $A$. This proves naturality on entire mapping complexes; diagonal restriction gives the equality on equal-degree simplices and arbitrary faces and degeneracies give all mixed parameter degrees. Associativity and unit equalities in $A$ and in enriched diagram composition make the same equality compatible with iterated composition. Thus $\\widetilde\\varepsilon$ is an enriched natural transformation, not merely a family of maps with chosen edge homotopies. The enriched mapping-end description and objectwise tensor in the cited projective-model statement justify the descriptions of $\\alpha$ and $\\beta$ used here.\nFor completeness the strict enriched inverse is also explicit. Given an $n$-simplex $p:\\Delta^n\\to P(a)$, define $\\sigma(p)_x:A(x,a)\\times\\Delta^n\\to P(x)$ by the enriched action $(f,t)\\mapsto P(f)(p(t))$. Associativity of the action gives its enriched naturality in $x$, and restriction of the parameter gives its faces and degeneracies. The unit equality gives $\\widetilde\\varepsilon\\sigma=1$. Conversely enriched naturality of $\\alpha$ at $f:x\\to a$, evaluated at $1_a$, gives $\\alpha_x(f,t)=P(f)(\\alpha_a(1_a,t))$, so $\\sigma\\widetilde\\varepsilon=1$ as a simplicial equality. This verifies the evaluation construction on the full parameter spaces directly; it uses only the mapping-end description and the associative unital enriched actions already present in the cited projective model statement.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 4.2.4.4 (printed pp.89 and 258), with the projective simplicial diagram model of Appendix A.3.3. The coherence argument here is the explicit enriched evaluation construction, not the free-cocompletion universal property."
+   }
+  },
+  {
+   "text": "Take coherent nerves of the transformation just constructed. Explicitly let $C=A^{\\mathrm{op}}\\times B$ and regard $[1]$ as simplicially enriched with discrete mapping sets. An enriched natural transformation $\\tau:T_0\\to T_1$ gives a simplicial functor $C\\times[1]\\to\\operatorname{Kan}_{\\mathcal U}$: send $(c,i)$ to $T_i(c)$; on the same-endpoint mapping complexes use $T_i$; on the cross complex $C(c,c\\prime)\\times\\{0\\to1\\}$ send a parameter $v$ to $T_1(v)\\tau_c=\\tau_{c\\prime}T_0(v)$. The opposite cross complex is empty. Enriched naturality is precisely the displayed equality, and associativity of $T_0,T_1$ checks composition with arrows at either endpoint. Units are preserved because those of $T_0,T_1$ are. These are equalities on whole mapping simplicial sets, so this construction supplies the interval functor without any further chosen cells. Composing each functor $\\mathfrak C[\\Delta^n]\\to(A^{\\mathrm{op}}\\times B)\\times[1]$ with this simplicial functor gives the desired $n$-simplex in $N_{\\mathrm{hc}}\\operatorname{Kan}_{\\mathcal U}$. The coherent-nerve definition in [lem-coef-coherent-nerve-comparison] therefore supplies an actual coherent transformation on $N_{\\mathrm{hc}}(A^{\\mathrm{op}})\\times N_{\\mathrm{hc}}B$, retaining all simplicial cells.\nWe identify its two endpoints and its specified map, not just their object values. The enriched mapping-space comparison of [lem-coef-simplicial-model-nerve-localization] is natural in the localized variables and respects enriched compositions. Restricting its first variable along the actual simplicial functor $Y$ identifies $N_{\\mathrm{hc}}\\widetilde L$ with the mapping bifunctor restricted along $Y$. The enriched-evaluation comparison of [lem-coef-enriched-diagram-rectification] identifies $N_{\\mathrm{hc}}\\widetilde R$ with evaluation. Under the same comparison $Y_a=A(-,a)$ presents the coherent representable: the natural mapping-space comparisons of [lem-coef-coherent-nerve-comparison] send $A(x,a)$ to $\\operatorname{Map}_{N_{\\mathrm{hc}}A}(x,a)$, carry the enriched identity to the identity edge, and preserve composition and its coherent homotopies. Thus the entire diagram $\\Theta Y$ is the Yoneda diagram along $q$, with this identity compatibility. No choice of right-pinched composition, and no strict functor $d\\mapsto D_{/d}$, is used in this comparison.\nWhisker the resulting coherent transformation with quasi-inverses to the equivalences in step 6 and with their unit and counit equivalences. The two endpoint identifications just specified give\n$$\\varepsilon:L\\longrightarrow R,\\qquad L(d,F)=\\operatorname{Map}_{\\mathcal P(D)}(j(d),F),\\quad R(d,F)=F(d)$$\non $D^{\\mathrm{op}}\\times\\mathcal P(D)$. Its component is evaluation of a transformation at the identity: in the strict model this is literally the restriction defining $\\widetilde\\varepsilon$; the cited evaluation and identity comparisons identify it with $\\eta\\mapsto\\eta_d(\\operatorname{id}_d)$ after passage to coherent diagrams. This also identifies it with the component proved equivalent in step 5, whose vertex-restriction and identity comparison were checked there. All naturality and higher cells come from the one enriched natural transformation and its nerve, followed by these functors and equivalences; they are not inferred from edgewise formulas. The construction only uses the general model-comparison lemmas, not the universal property of free cocompletion (which currently depends on this item).",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-enriched-diagram-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 4.2.4.4 (printed pp.89 and 258), with the projective simplicial diagram model of Appendix A.3.3. The coherence argument here is the explicit enriched evaluation construction, not the free-cocompletion universal property."
+   }
+  },
+  {
+   "text": "Apply the pointwise equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] to the actual transformation $\\varepsilon$ of step 8. Use that statement with $\\mathcal U'$ as its smallness universe: $D^{\\mathrm{op}}\\times\\mathcal P(D)$ is $\\mathcal U'$-small, as are the model $B$ and the category $\\operatorname{Kan}_{\\mathcal U}$ used above, since $\\mathcal U\\in\\mathcal U'$. Thus its hypothesis that the parameter simplicial set be small is satisfied. Every component of $\\varepsilon$ is the equivalence of step 5, so $\\varepsilon$ is an equivalence in the functor category. The values $F(d)$ and the mapping spaces in the assertion remain $\\mathcal U$-small. No nonempty-value assumption was made. If $F(d)$ is empty then the map in step 4 has both source and target empty; if $D$ is empty the parameter category is empty and its unique transformation is an equivalence.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 4.2.4.4 (printed pp.89 and 258), with the projective simplicial diagram model of Appendix A.3.3. The coherence argument here is the explicit enriched evaluation construction, not the free-cocompletion universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-space-transport-classification",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Lemma 5.1.5.2 for the pointwise right-fibration argument. The explicit slice filtration is retained. Two-variable coherence is repaired by enriched diagram rectification (Proposition 4.2.4.4) and a fully written simplicial evaluation transformation. Sources read online; not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +203,360 @@
    "results": "{\"t\": \"2026-10-16T16:17:06Z\", \"tool\": \"grep\", \"query\": \"yoneda|presheaf|presentab|localization|cocomplet\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"700e11c067c34ace\"}",
    "date": "2026-10-17",
    "verdict": "no match: read CategoryTheory/Yoneda.lean:720-739, especially yonedaEquiv at line 724. It is a bijection for ordinary Type-valued presheaves. SSet.yonedaEquiv identifies maps from a standard simplex with simplices, not coherent transformations of space-valued presheaves. The Quasicategory grep finds only uses of this ordinary simplicial-set Yoneda lemma, not the required mapping-space equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda|presheaf|right.?fibration",
+   "results": "{\"t\": \"2026-10-16T18:31:38Z\", \"tool\": \"grep\", \"query\": \"yoneda|presheaf|right.?fibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"700e11c067c34ace\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical Yoneda evaluation equivalence of spaces for arbitrary space valued presheaves",
+   "results": "{\"t\": \"2026-10-16T18:31:38Z\", \"tool\": \"leansearch\", \"query\": \"Infinity categorical Yoneda evaluation equivalence of spaces for arbitrary space valued presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaLemma\", \"CategoryTheory.curriedYonedaLemma\", \"CategoryTheory.Presheaf.freeYonedaHomEquiv\", \"ContinuousMap.comp_yonedaPresheaf'\", \"ContinuousMap.yonedaPresheaf\", \"ContinuousMap.yonedaPresheaf'\", \"CategoryTheory.Presheaf.yonedaAdjunction\", \"CategoryTheory.typeEquiv\"], \"digest\": \"9183dfa072d96af5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaEquiv\"",
+   "results": "{\"t\": \"2026-10-16T18:31:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"yonedaEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.coyonedaEquiv\", \"CategoryTheory.uliftCoyonedaEquiv\", \"CategoryTheory.uliftYonedaEquiv\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.yonedaEquiv_symm_app_apply\", \"CategoryTheory.uliftCoyonedaEquiv_symm_apply_app\", \"CategoryTheory.uliftCoyonedaEquiv_apply\", \"CategoryTheory.coyonedaEquiv_symm_app_apply\"], \"digest\": \"2e2fb287f7b111ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "grep",
+   "query": "def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma",
+   "results": "{\"t\": \"2026-10-16T18:31:48Z\", \"tool\": \"grep\", \"query\": \"def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma\", \"sub\": \"CategoryTheory/Yoneda.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"724\", \"839\", \"854\", \"888\"], \"digest\": \"390008f18dfa8003\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda lemma for quasicategories: mapping space of coherent transformations from the representable presheaf at d to a space valued presheaf F is equivalent to F d",
+   "results": "{\"t\": \"2026-10-16T18:31:50Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda lemma for quasicategories: mapping space of coherent transformations from the representable presheaf at d to a space valued presheaf F is equivalent to F d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"SSet.stdSimplex.objEquiv\", \"SSet.Subcomplex.yonedaEquiv_coe\", \"SSet.stdSimplex.yonedaEquiv_map\", \"SSet.unitHomEquiv\", \"SSet.yonedaEquiv_comp\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"SSet.toTopSimplex\"], \"digest\": \"ff443d689239522a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable right fibrations over a quasicategory represent evaluation of all space valued presheaves on the level of Kan mapping complexes",
+   "results": "{\"t\": \"2026-10-16T18:32:00Z\", \"tool\": \"leanfinder\", \"query\": \"Representable right fibrations over a quasicategory represent evaluation of all space valued presheaves on the level of Kan mapping complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.representableBy\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Truncated.rightExtensionInclusion\", \"HomotopicalAlgebra.FibrantObject.ι\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.yonedaEquiv\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"16d85dfce7331fe0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "grep",
+   "query": "def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma",
+   "results": "{\"t\": \"2026-10-16T18:33:51Z\", \"tool\": \"grep\", \"query\": \"def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\"], \"digest\": \"58f084a68ef4b87c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "grep",
+   "query": "def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma",
+   "results": "{\"t\": \"2026-10-16T19:16:15Z\", \"tool\": \"grep\", \"query\": \"def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\"], \"digest\": \"0f4f78b65713a9c7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Type-valued Yoneda at CategoryTheory/Yoneda.lean:724,839,854 and standard-simplex Yoneda at AlgebraicTopology/SimplicialSet/StdSimplex.lean:156 do not give mapping spaces of coherent space-valued presheaves on a quasicategory. The other hits concern ordinary presheaves, simplicial Hom functors, or coskeletal right Kan extensions, rather than the stated infinity Yoneda theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical Yoneda evaluation equivalence of spaces for arbitrary space valued presheaves",
+   "results": "{\"t\": \"2026-10-16T19:16:16Z\", \"tool\": \"leansearch\", \"query\": \"Infinity categorical Yoneda evaluation equivalence of spaces for arbitrary space valued presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaLemma\", \"CategoryTheory.curriedYonedaLemma\", \"CategoryTheory.Presheaf.freeYonedaHomEquiv\", \"ContinuousMap.comp_yonedaPresheaf'\", \"ContinuousMap.yonedaPresheaf\", \"ContinuousMap.yonedaPresheaf'\", \"CategoryTheory.Presheaf.yonedaAdjunction\", \"CategoryTheory.typeEquiv\"], \"digest\": \"9183dfa072d96af5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Type-valued Yoneda at CategoryTheory/Yoneda.lean:724,839,854 and standard-simplex Yoneda at AlgebraicTopology/SimplicialSet/StdSimplex.lean:156 do not give mapping spaces of coherent space-valued presheaves on a quasicategory. The other hits concern ordinary presheaves, simplicial Hom functors, or coskeletal right Kan extensions, rather than the stated infinity Yoneda theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaEquiv\"",
+   "results": "{\"t\": \"2026-10-16T19:16:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"yonedaEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.coyonedaEquiv\", \"CategoryTheory.uliftCoyonedaEquiv\", \"CategoryTheory.uliftYonedaEquiv\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.yonedaEquiv_symm_app_apply\", \"CategoryTheory.uliftCoyonedaEquiv_symm_apply_app\", \"CategoryTheory.uliftCoyonedaEquiv_apply\", \"CategoryTheory.coyonedaEquiv_symm_app_apply\"], \"digest\": \"2e2fb287f7b111ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Type-valued Yoneda at CategoryTheory/Yoneda.lean:724,839,854 and standard-simplex Yoneda at AlgebraicTopology/SimplicialSet/StdSimplex.lean:156 do not give mapping spaces of coherent space-valued presheaves on a quasicategory. The other hits concern ordinary presheaves, simplicial Hom functors, or coskeletal right Kan extensions, rather than the stated infinity Yoneda theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda lemma for quasicategories: mapping space of coherent transformations from the representable presheaf at d to a space valued presheaf F is equivalent to F d",
+   "results": "{\"t\": \"2026-10-16T19:16:20Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda lemma for quasicategories: mapping space of coherent transformations from the representable presheaf at d to a space valued presheaf F is equivalent to F d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'\", \"SSet.stdSimplex.yonedaEquiv_map\", \"CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst\", \"SSet.yonedaEquiv_comp\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv\", \"CategoryTheory.SimplicialCategory.sHomFunctor\"], \"digest\": \"96ca30b5b11fb8c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Type-valued Yoneda at CategoryTheory/Yoneda.lean:724,839,854 and standard-simplex Yoneda at AlgebraicTopology/SimplicialSet/StdSimplex.lean:156 do not give mapping spaces of coherent space-valued presheaves on a quasicategory. The other hits concern ordinary presheaves, simplicial Hom functors, or coskeletal right Kan extensions, rather than the stated infinity Yoneda theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable right fibrations over a quasicategory represent evaluation of all space valued presheaves on the level of Kan mapping complexes",
+   "results": "{\"t\": \"2026-10-16T19:16:22Z\", \"tool\": \"leanfinder\", \"query\": \"Representable right fibrations over a quasicategory represent evaluation of all space valued presheaves on the level of Kan mapping complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.yonedaEquiv\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"CategoryTheory.nerve.representableBy\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\"], \"digest\": \"456a41e884fd028a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Type-valued Yoneda at CategoryTheory/Yoneda.lean:724,839,854 and standard-simplex Yoneda at AlgebraicTopology/SimplicialSet/StdSimplex.lean:156 do not give mapping spaces of coherent space-valued presheaves on a quasicategory. The other hits concern ordinary presheaves, simplicial Hom functors, or coskeletal right Kan extensions, rather than the stated infinity Yoneda theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration|yonedaEvaluation|curriedYonedaLemma",
+   "results": "{\"t\": \"2026-10-16T19:34:59Z\", \"tool\": \"grep\", \"query\": \"right.?fibration|yonedaEvaluation|curriedYonedaLemma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Preserves/Yoneda.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\"], \"digest\": \"8a15da6799f39d68\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern generic model-category fibrations, including HomotopicalAlgebra.trivialFibrations_over_eq, rather than right-fibration restriction or infinity Yoneda; source grep gives the ordinary Type-valued evaluation and Yoneda theorem at Mathlib/CategoryTheory/Yoneda.lean:808,839,854, whose statements were read. No declaration covers space-valued coherent presheaves on arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an infinity category, restriction of sections of a right fibration over the slice at an object to its identity arrow is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-16T19:35:06Z\", \"tool\": \"leanfinder\", \"query\": \"For an infinity category, restriction of sections of a right fibration over the slice at an object to its identity arrow is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialFibrations_over_eq\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverFibrations\", \"HomotopicalAlgebra.fibrations_over_def\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.IsFibrant\"], \"digest\": \"3665eda2a676d038\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern generic model-category fibrations, including HomotopicalAlgebra.trivialFibrations_over_eq, rather than right-fibration restriction or infinity Yoneda; source grep gives the ordinary Type-valued evaluation and Yoneda theorem at Mathlib/CategoryTheory/Yoneda.lean:808,839,854, whose statements were read. No declaration covers space-valued coherent presheaves on arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda lemma for quasicategories: mapping space of coherent transformations from the representable presheaf at d to a space valued presheaf F is equivalent to F d",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.yonedaEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"{X : SSet} → {n : SimplexCategory} → (SSet.stdSimplex.obj n ⟶ X) ≃ X.obj (Opposite.op n)\", \"doc\": \"For any simplicial set $X$ and finite ordinal $[n]$, there is a natural bijection between the set of morphisms from the standard $n$-simplex to $X$ and the evaluation of $X$ at $[n]$. This establishes\"}\n  {\"name\": \"CategoryTheory.yonedaEquiv\", \"module\": \"Mathlib/CategoryTheory/Yoneda\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {X : C} → {F : CategoryTheory.Functor Cᵒᵖ (Type v₁)} → (CategoryTheory.yoneda.obj X ⟶ F) ≃ F.obj (Opposite.op X)\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$ and any functor $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}\\\\, v_1$, there is a natural bijection between natural transformations $\\\\text{Hom}(-, X) \\\\Right\"}\n  {\"name\": \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'\", \"module\": \"Mathlib/CategoryTheory/Limits/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {ℰ : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} ℰ] →\\n        (A : CategoryTheory.Functor C ℰ) →\\n          (P : CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))) →\\n            (E : ℰ) →\\n              ((CategoryTheory.\", \"doc\": \"For any category $\\\\mathcal{C}$, a functor $A: \\\\mathcal{C} \\\\to \\\\mathcal{E}$, and a presheaf $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}_{\\\\max(w, v)}$, the restricted universe-lifted Yoneda embedding in\"}\n  {\"name\": \"SSet.stdSimplex.yonedaEquiv_map\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"∀ {n m : SimplexCategory} (f : n ⟶ m), SSet.yonedaEquiv (SSet.stdSimplex.map f) = SSet.stdSimplex.objEquiv.symm f\", \"doc\": \"For any morphism $f: n \\to m$ in the simplex category $\\\\Delta$, the Yoneda equivalence between morphisms from the standard $n$-simplex to a simplicial set and $n$-simplices commutes with the action of \"}\n  {\"name\": \"CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst\", \"module\": \"Mathlib/CategoryTheory/Comma/Presheaf/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {A : CategoryTheory.Functor Cᵒᵖ (Type v)} →\\n      {F : CategoryTheory.Functor (CategoryTheory.CostructuredArrow CategoryTheory.yoneda A)ᵒᵖ (Type v)} →\\n        {X : C} → CategoryTheory.OverPresheafAux.YonedaCollection F X → A.obj (Oppos\", \"doc\": \"The function maps an element $ p $ of the Yoneda collection type to the image of its first component $ p.1 $ under the Yoneda equivalence, producing a natural transformation from the hom-functor $ \\\\te\"}\n  {\"name\": \"SSet.yonedaEquiv_comp\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"∀ {X Y : SSet} {n : SimplexCategory} (f : SSet.stdSimplex.obj n ⟶ X) (g : X ⟶ Y),\\n  SSet.yonedaEquiv (CategoryTheory.CategoryStruct.comp f g) = g.app (Opposite.op n) (SSet.yonedaEquiv f)\", \"doc\": \"Let $X$ and $Y$ be simplicial sets, $g: X \\\\to Y$ be a morphism, and $f: \\\\Delta[n] \\\\to X$ be a morphism from the standard $n$-simplex. The Yoneda equivalence, $\\\\operatorname{yonedaEquiv}$, identifies m\"}\n  {\"name\": \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Limits/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {ℰ : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} ℰ] →\\n        {A : CategoryTheory.Functor C ℰ} →\\n          [CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.HasPointwiseLeftKanExtension A] →\\n            (L : CategoryThe\", \"doc\": \"For any category $\\\\mathcal{C}$, a functor $A: \\\\mathcal{C} \\\\to \\\\mathcal{E}$, and a presheaf $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}_{\\\\max(w, v)}$, the restricted universe-lifted Yoneda embedding in\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.SimplicialCategory C] → CategoryTheory.Functor Cᵒᵖ (CategoryTheory.Functor C SSet)\", \"doc\": \"The simplicial hom-functor is a functor from the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of functors $[\\\\mathcal{C}, \\\\mathbf{SSet}]$, assigning to each object $X \\\\in \\\\mathcal{C}^{\\\\t\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Type-valued Yoneda, simplicial-set Yoneda, or model fibration theory, not the space-valued quasicategory formula. Read ordinary Mathlib/CategoryTheory/Yoneda.lean:724-739 and 839-860; no attachment or Mathlib leaf for this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable right fibrations over a quasicategory represent evaluation of all space valued presheaves on the level of Kan mapping complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{X : SSet} →\\n  X.StrictSegal →\\n    (n : ℕ) →\\n      (SSet.Truncated.rightExtensionInclusion X 2).IsPointwiseRightKanExtensionAt (Opposite.op (SimplexCategory.mk n))\", \"doc\": \"For a strict Segal space $X$ and natural number $n$, the right Kan extension of $X$ along the inclusion of the truncated simplex category $\\\\Delta_{\\\\leq 2}$ is pointwise at the object $[n]$. This means\"}\n  {\"name\": \"SSet.yonedaEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"{X : SSet} → {n : SimplexCategory} → (SSet.stdSimplex.obj n ⟶ X) ≃ X.obj (Opposite.op n)\", \"doc\": \"For any simplicial set $X$ and finite ordinal $[n]$, there is a natural bijection between the set of morphisms from the standard $n$-simplex to $X$ and the evaluation of $X$ at $[n]$. This establishes\"}\n  {\"name\": \"SSet.stdSimplex.isoOfRepresentableBy\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"{X : SSet} →\\n  {m : ℕ} →\\n    CategoryTheory.Functor.RepresentableBy X (SimplexCategory.mk m) → (SSet.stdSimplex.obj (SimplexCategory.mk m) ≅ X)\", \"doc\": \"If a simplicial set $ X $ is representable by the standard simplex $ \\\\Delta^m $, then there exists a natural isomorphism between $ \\\\Delta^m $ and $ X $, established via the Yoneda lemma equivalence th\"}\n  {\"name\": \"CategoryTheory.nerve.representableBy\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"{n : ℕ} →\\n  (α : Type u) →\\n    [inst : Preorder α] →\\n      α ≃o Fin (n + 1) → CategoryTheory.Functor.RepresentableBy (CategoryTheory.nerve α) (SimplexCategory.mk n)\", \"doc\": \"For any natural number $n$ and preordered type $\\\\alpha$ order-isomorphic to $\\\\mathrm{Fin}(n+1)$, the nerve of $\\\\alpha$ is representable by the object $[n]$ in the simplex category $\\\\Delta$. This is es\"}\n  {\"name\": \"SSet.Truncated.rightExtensionInclusion\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"(X : SSet) →\\n  (n : ℕ) →\\n    (SimplexCategory.Truncated.inclusion n).op.RightExtension ((SimplexCategory.Truncated.inclusion n).op.comp X)\", \"doc\": \"For a simplicial set $X$ and natural number $n$, this constructs the right Kan extension of $X$ along the inclusion functor from the truncated simplex category $\\\\Delta_{\\\\leq n}$ to the full simplex ca\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.SimplicialCategory C] → CategoryTheory.Functor Cᵒᵖ (CategoryTheory.Functor C SSet)\", \"doc\": \"The simplicial hom-functor is a functor from the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of functors $[\\\\mathcal{C}, \\\\mathbf{SSet}]$, assigning to each object $X \\\\in \\\\mathcal{C}^{\\\\t\"}\n  {\"name\": \"SSet.StrictSegal.isRightKanExtension\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal),\\n  CategoryTheory.Functor.IsRightKanExtension X\\n    (CategoryTheory.CategoryStruct.id ((SimplexCategory.Truncated.inclusion 2).op.comp X))\", \"doc\": \"For a strict Segal space $ X $, the simplicial set $ X $ is the right Kan extension of the composition of the opposite of the inclusion functor $ \\\\Delta_{\\\\leq 2} \\\\to \\\\Delta $ with $ X $. This characte\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{i n : ℕ} →\\n  (SimplexCategory.mk i ⟶ SimplexCategory.mk n) →\\n    autoParam (i ≤ 2) SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂._auto_1 →\\n      CategoryTheory.StructuredArrow (Opposite.op (SimplexCategory.mk n)) (SimplexCategory.Truncated.inclusion 2).op\", \"doc\": \"For natural numbers $i,n$ with $i \\\\leq 2$, given a morphism $[i] \\\\to [n]$ in the simplex category $\\\\Delta$, this constructs a structured arrow in the comma category formed by the opposite of the inclu\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Type-valued Yoneda, simplicial-set Yoneda, or model fibration theory, not the space-valued quasicategory formula. Read ordinary Mathlib/CategoryTheory/Yoneda.lean:724-739 and 839-860; no attachment or Mathlib leaf for this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaEquiv\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.coyonedaEquiv\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} {F : CategoryTheory.Functor C (Type v₁)} : (CategoryTheory.coyoneda.obj (Opposite.op X) ⟶ F) ≃ F.obj X\", \"doc\": \"We have a type-level equivalence between natural transformations from the coyoneda embedding\\nand elements of `F.obj X.unop`, without any universe switching.\\n\"}\n  {\"name\": \"CategoryTheory.uliftCoyonedaEquiv\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : Cᵒᵖ} {F : CategoryTheory.Functor C (Type (max w v₁))} : (CategoryTheory.uliftCoyoneda.{w, v₁, u₁}.obj X ⟶ F) ≃ F.obj (Opposite.unop X)\", \"doc\": \"Coyoneda's lemma as a bijection `(uliftCoyoneda.{w}.obj X ⟶ F) ≃ F.obj (op X)`\\nfor any presheaf of type `F : Cᵒᵖ ⥤ Type (max w v₁)` for some\\nauxiliary universe `w`. \"}\n  {\"name\": \"CategoryTheory.uliftYonedaEquiv\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} {F : CategoryTheory.Functor Cᵒᵖ (Type (max w v₁))} : (CategoryTheory.uliftYoneda.{w, v₁, u₁}.obj X ⟶ F) ≃ F.obj (Opposite.op X)\", \"doc\": \"Yoneda's lemma as a bijection `(uliftYoneda.{w}.obj X ⟶ F) ≃ F.obj (op X)`\\nfor any presheaf of type `F : Cᵒᵖ ⥤ Type (max w v₁)` for some\\nauxiliary universe `w`. \"}\n  {\"name\": \"CategoryTheory.yonedaEquiv\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} {F : CategoryTheory.Functor Cᵒᵖ (Type v₁)} : (CategoryTheory.yoneda.obj X ⟶ F) ≃ F.obj (Opposite.op X)\", \"doc\": \"We have a type-level equivalence between natural transformations from the yoneda embedding\\nand elements of `F.obj X`, without any universe switching.\\n\"}\n  {\"name\": \"CategoryTheory.yonedaEquiv_symm_app_apply\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} {F : CategoryTheory.Functor Cᵒᵖ (Type v₁)} (x : F.obj (Opposite.op X)) (Y : Cᵒᵖ) (f : Opposite.unop Y ⟶ X) : (CategoryTheory.ConcreteCategory.hom (F.map f.op)) x = (CategoryTheory.ConcreteCategory.hom (F.map f.op)) x\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.uliftCoyonedaEquiv_symm_apply_app\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : Cᵒᵖ} {F : CategoryTheory.Functor C (Type (max w v₁))} (x : F.obj (Opposite.unop X)) (Y : C) : (CategoryTheory.uliftCoyonedaEquiv.symm x).app Y = TypeCat.ofHom fun y => (CategoryTheory.ConcreteCategory.hom (F.map y.down)) x\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.uliftCoyonedaEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : Cᵒᵖ} {F : CategoryTheory.Functor C (Type (max w v₁))} (τ : CategoryTheory.uliftCoyoneda.{w, v₁, u₁}.obj X ⟶ F) : CategoryTheory.uliftCoyonedaEquiv τ = (CategoryTheory.ConcreteCategory.hom (τ.app (Opposite.unop X))) { down := CategoryTheory.Cat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.coyonedaEquiv_symm_app_apply\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} {F : CategoryTheory.Functor C (Type v₁)} (x : F.obj X) (Y : C) (f : X ⟶ Y) : (CategoryTheory.ConcreteCategory.hom ((CategoryTheory.coyonedaEquiv.symm x).app Y)) f = (CategoryTheory.ConcreteCategory.hom (F.map f)) x\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.coyonedaEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} {F : CategoryTheory.Functor C (Type v₁)} (f : CategoryTheory.coyoneda.obj (Opposite.op X) ⟶ F) : CategoryTheory.coyonedaEquiv f = (CategoryTheory.ConcreteCategory.hom (f.app X)) (CategoryTheory.CategoryStruct.id X)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.uliftCoyonedaEquiv_uliftCoyoneda_map\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X Y : Cᵒᵖ} (f : X ⟶ Y) : CategoryTheory.uliftCoyonedaEquiv (CategoryTheory.uliftCoyoneda.{w, v₁, u₁}.map f) = { down := f.unop }\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.coyonedaEquiv_coyoneda_map\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X Y : C} (f : X ⟶ Y) : CategoryTheory.coyonedaEquiv (CategoryTheory.coyoneda.map f.op) = f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.uliftYonedaEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} {F : CategoryTheory.Functor Cᵒᵖ (Type (max w v₁))} (τ : CategoryTheory.uliftYoneda.{w, v₁, u₁}.obj X ⟶ F) : CategoryTheory.uliftYonedaEquiv τ = (CategoryTheory.ConcreteCategory.hom (τ.app (Opposite.op X))) { down := CategoryTheory.CategoryS\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Type-valued Yoneda, simplicial-set Yoneda, or model fibration theory, not the space-valued quasicategory formula. Read ordinary Mathlib/CategoryTheory/Yoneda.lean:724-739 and 839-860; no attachment or Mathlib leaf for this item."
+  },
+  {
+   "tool": "grep",
+   "query": "def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"line\": \"724\", \"text\": \"def yonedaEquiv {X : C} {F : Cᵒᵖ ⥤ Type v₁} : (yoneda.obj X ⟶ F) ≃ F.obj (op X) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"line\": \"839\", \"text\": \"def yonedaLemma : yonedaPairing C ≅ yonedaEvaluation C :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"line\": \"854\", \"text\": \"def curriedYonedaLemma {C : Type u₁} [SmallCategory C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"line\": \"888\", \"text\": \"def curriedYonedaLemma' {C : Type u₁} [SmallCategory C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"line\": \"284\", \"text\": \"def yonedaEquivFst (p : YonedaCollection F X) : A.obj (op X) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"line\": \"35\", \"text\": \"def yonedaEquiv {X : C} {F : Sheaf J (Type v)} : (J.yoneda.obj X ⟶ F) ≃ F.obj.obj (op X) :=\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Type-valued Yoneda, simplicial-set Yoneda, or model fibration theory, not the space-valued quasicategory formula. Read ordinary Mathlib/CategoryTheory/Yoneda.lean:724-739 and 839-860; no attachment or Mathlib leaf for this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical Yoneda evaluation equivalence of spaces for arbitrary space valued presheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.yonedaLemma\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \": yonedaPairing C ≅ yonedaEvaluation C\", \"doc\": \"The Yoneda pairing functor is naturally isomorphic to the Yoneda evaluation functor, establishing a natural bijection between natural transformations from the hom-functor $ \\text{Hom}(-, X) $ to a func\"}\n  {\"name\": \"CategoryTheory.curriedYonedaLemma\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \"{C : Type u₁} [SmallCategory C] : (yoneda.op ⋙ coyoneda : Cᵒᵖ ⥤ (Cᵒᵖ ⥤ Type u₁) ⥤ Type u₁) ≅ evaluation Cᵒᵖ (Type u₁)\", \"doc\": \"For any small category $\\\\mathcal{C}$, the composition of the Yoneda embedding (applied to the opposite category) with the Coyoneda embedding induces a natural isomorphism between the evaluation functo\"}\n  {\"name\": \"CategoryTheory.Presheaf.freeYonedaHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Generator.Presheaf\", \"type\": \"{X : C} {M : A} {F : Cᵒᵖ ⥤ A} : (freeYoneda X M ⟶ F) ≃ (M ⟶ F.obj (op X))\", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}$, object $M$ in a category $\\\\mathcal{A}$ with coproducts, and presheaf $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$, there is a natural bijection between na\"}\n  {\"name\": \"ContinuousMap.comp_yonedaPresheaf'\", \"module\": \"Mathlib.Topology.Category.TopCat.Yoneda\", \"type\": \": yonedaPresheaf F Y = F.op ⋙ yonedaPresheaf' Y\", \"doc\": \"The Yoneda presheaf construction establishes a natural isomorphism between the set of natural transformations from the representable functor $\\\\mathbf{Top}(-, X)$ to a contravariant functor $F : \\\\mathb\"}\n  {\"name\": \"ContinuousMap.yonedaPresheaf\", \"module\": \"Mathlib.Topology.Category.TopCat.Yoneda\", \"type\": \": Cᵒᵖ ⥤ Type (max w w')\", \"doc\": \"The Yoneda presheaf construction for the category of topological spaces establishes a natural isomorphism between the set of natural transformations from the representable functor $\\\\mathbf{Top}(-, X)$\"}\n  {\"name\": \"ContinuousMap.yonedaPresheaf'\", \"module\": \"Mathlib.Topology.Category.TopCat.Yoneda\", \"type\": \": TopCat.{w}ᵒᵖ ⥤ Type (max w w')\", \"doc\": \"The functor from the opposite category of topological spaces $\\\\mathbf{Top}^{\\\\text{op}}$ to the category of types, which sends a topological space $X$ to the set of continuous maps $C(X,Y)$ for a fixed\"}\n  {\"name\": \"CategoryTheory.Presheaf.yonedaAdjunction\", \"module\": \"Mathlib.CategoryTheory.Limits.Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {ℰ : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} ℰ] →\\n        {A : CategoryTheory.Functor C ℰ} →\\n          [CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.HasPointwiseLeftKanExtension A] →\\n            (L : CategoryThe\", \"doc\": \"An adjunction between a functor $ L $ and the restricted universe-lifted Yoneda embedding, establishing a natural equivalence between morphisms from the lifted presheaf $ L(P) $ to an object $ E $ in \"}\n  {\"name\": \"CategoryTheory.typeEquiv\", \"module\": \"Mathlib.CategoryTheory.Sites.Types\", \"type\": \": Type u ≌ Sheaf typesGrothendieckTopology (Type u)\", \"doc\": \"An equivalence of categories between the category of types $\\\\mathrm{Type}\\\\, u$ and the category of sheaves on $\\\\mathrm{Type}\\\\, u$ with respect to its canonical Grothendieck topology. This equivalence \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Type-valued Yoneda, simplicial-set Yoneda, or model fibration theory, not the space-valued quasicategory formula. Read ordinary Mathlib/CategoryTheory/Yoneda.lean:724-739 and 839-860; no attachment or Mathlib leaf for this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda lemma for quasicategories: mapping space of coherent transformations from the representable presheaf at d to a space valued presheaf F is equivalent to F d",
+   "results": "{\"t\": \"2026-10-16T20:13:06Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda lemma for quasicategories: mapping space of coherent transformations from the representable presheaf at d to a space valued presheaf F is equivalent to F d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'\", \"SSet.stdSimplex.yonedaEquiv_map\", \"CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst\", \"SSet.yonedaEquiv_comp\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv\", \"CategoryTheory.SimplicialCategory.sHomFunctor\"], \"digest\": \"96ca30b5b11fb8c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable right fibrations over a quasicategory represent evaluation of all space valued presheaves on the level of Kan mapping complexes",
+   "results": "{\"t\": \"2026-10-16T20:13:09Z\", \"tool\": \"leanfinder\", \"query\": \"Representable right fibrations over a quasicategory represent evaluation of all space valued presheaves on the level of Kan mapping complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.yonedaEquiv\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"CategoryTheory.nerve.representableBy\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\"], \"digest\": \"456a41e884fd028a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaEquiv\"",
+   "results": "{\"t\": \"2026-10-16T20:13:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"yonedaEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.coyonedaEquiv\", \"CategoryTheory.uliftCoyonedaEquiv\", \"CategoryTheory.uliftYonedaEquiv\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.yonedaEquiv_symm_app_apply\", \"CategoryTheory.uliftCoyonedaEquiv_symm_apply_app\", \"CategoryTheory.uliftCoyonedaEquiv_apply\", \"CategoryTheory.coyonedaEquiv_symm_app_apply\"], \"digest\": \"2e2fb287f7b111ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "grep",
+   "query": "def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma",
+   "results": "{\"t\": \"2026-10-16T20:13:11Z\", \"tool\": \"grep\", \"query\": \"def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\"], \"digest\": \"58f084a68ef4b87c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical Yoneda evaluation equivalence of spaces for arbitrary space valued presheaves",
+   "results": "{\"t\": \"2026-10-16T20:13:12Z\", \"tool\": \"leansearch\", \"query\": \"Infinity categorical Yoneda evaluation equivalence of spaces for arbitrary space valued presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaLemma\", \"CategoryTheory.curriedYonedaLemma\", \"CategoryTheory.Presheaf.freeYonedaHomEquiv\", \"ContinuousMap.comp_yonedaPresheaf'\", \"ContinuousMap.yonedaPresheaf\", \"ContinuousMap.yonedaPresheaf'\", \"CategoryTheory.Presheaf.yonedaAdjunction\", \"CategoryTheory.typeEquiv\"], \"digest\": \"9183dfa072d96af5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "grep",
+   "query": "enrichedYoneda|yoneda.*[Ee]quiv|[Qq]uasicategory.*[Yy]oneda",
+   "results": "{\"t\": \"2026-10-16T20:23:47Z\", \"tool\": \"grep\", \"query\": \"enrichedYoneda|yoneda.*[Ee]quiv|[Qq]uasicategory.*[Yy]oneda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\"], \"digest\": \"828cd718dea7e569\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaLemma\"",
+   "results": "{\"t\": \"2026-10-16T20:23:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"yonedaLemma\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaLemma\", \"CategoryTheory.coyonedaLemma\", \"CategoryTheory.curriedCoyonedaLemma\", \"CategoryTheory.curriedYonedaLemma\", \"CategoryTheory.curriedCoyonedaLemma'\", \"CategoryTheory.largeCurriedCoyonedaLemma\", \"CategoryTheory.curriedYonedaLemma'\", \"CategoryTheory.largeCurriedYonedaLemma\"], \"digest\": \"e1e76baa1e7e9cd5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched Yoneda evaluation is a natural equivalence between the simplicial mapping complex from a representable and evaluation of a Kan-valued enriched presheaf",
+   "results": "{\"t\": \"2026-10-16T20:23:54Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched Yoneda evaluation is a natural equivalence between the simplicial mapping complex from a representable and evaluation of a Kan-valued enriched presheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality\", \"SSet.yonedaEquiv\", \"CategoryTheory.enrichedNatTransYoneda\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\", \"CategoryTheory.enrichedNatTransYoneda_map_app\", \"SSet.stdSimplex.yonedaEquiv_map\", \"SSet.yonedaEquiv_comp\"], \"digest\": \"6e46fcf03128b73c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic right fibration classifier identity section naturality of evaluation mapping spaces",
+   "results": "{\"t\": \"2026-10-16T22:35:00Z\", \"tool\": \"leanfinder\", \"query\": \"generic right fibration classifier identity section naturality of evaluation mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.homLift\", \"CategoryTheory.OverPresheafAux.unitForward_unitBackward\", \"CategoryTheory.Grothendieck.ιNatTrans_app_fiber\", \"CategoryTheory.OverPresheafAux.unitBackward_unitForward\", \"CategoryTheory.Functor.Fiber.instIsHomLiftIdMapFiberInclusion\", \"HasFibers.comp_const\", \"CategoryTheory.Functor.IsStronglyCartesian.map_self\", \"CategoryTheory.Functor.Fiber.fiberInclusion_comp_eq_const\"], \"digest\": \"85fe85b6803e2719\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yonedaEquiv, SSet.yonedaEquiv",
+   "results": "{\"t\": \"2026-10-16T22:35:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.yonedaEquiv, SSet.yonedaEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration.*identity|evaluation.*mapping",
+   "results": "{\"t\": \"2026-10-16T22:35:01Z\", \"tool\": \"grep\", \"query\": \"right.?fibration.*identity|evaluation.*mapping\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent mapping bifunctor composition unit action on a presheaf",
+   "results": "{\"t\": \"2026-10-16T22:35:18Z\", \"tool\": \"leanfinder\", \"query\": \"coherent mapping bifunctor composition unit action on a presheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.map_comp_c_app\", \"CategoryTheory.Presieve.FamilyOfElements.compPresheafMap_comp\", \"CategoryTheory.OverPresheafAux.YonedaCollection.map₁_map₂\", \"CategoryTheory.OverPresheafAux.unitAuxAux_hom_app\", \"CategoryTheory.OverPresheafAux.YonedaCollection.map₁_comp\", \"CategoryTheory.OverPresheafAux.app_unitForward\", \"CategoryTheory.Functor.mapPresheaf_map_c\", \"CategoryTheory.Presieve.FamilyOfElements.map_comp\"], \"digest\": \"5f0dfd266387291c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_id, CategoryTheory.yonedaEquiv_symm_app_apply",
+   "results": "{\"t\": \"2026-10-16T22:35:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.map_id, CategoryTheory.yonedaEquiv_symm_app_apply\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "grep",
+   "query": "mapping.*bifunctor|coherent.*composition|identity.*section",
+   "results": "{\"t\": \"2026-10-16T22:35:19Z\", \"tool\": \"grep\", \"query\": \"mapping.*bifunctor|coherent.*composition|identity.*section\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Yoneda lemma for infinity categories identifies the mapping space from a representable space valued presheaf to F with F evaluated at its representing object",
+   "results": "OK 8 hits: CategoryTheory.yonedaEquiv_apply; CategoryTheory.Functor.reprW; CategoryTheory.uliftYonedaEquiv; CategoryTheory.uliftYonedaEquiv_apply; CategoryTheory.yonedaLemma; CategoryTheory.Functor.RepresentableBy.toIso; CategoryTheory.yonedaEquiv; SSet.yonedaEquiv.",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: ordinary Type-valued Yoneda and standard-simplex Yoneda do not provide mapping spaces of coherent presheaves on an arbitrary quasicategory. Read Mathlib/CategoryTheory/Yoneda.lean:724-739,839-860 and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yonedaEquiv, SSet.yonedaEquiv",
+   "results": "OK 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: ordinary Type-valued Yoneda and standard-simplex Yoneda do not provide mapping spaces of coherent presheaves on an arbitrary quasicategory. Read Mathlib/CategoryTheory/Yoneda.lean:724-739,839-860 and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda|presheaf|presentab|localization|cocomplet",
+   "results": "OK 6 hits in AlgebraicTopology/Quasicategory: StrictSegal.lean:51,52,60,61,92 (SSet.yonedaEquiv_map and Subcomplex.yonedaEquiv_coe); Basic.lean:64 (yonedaEquiv.symm).",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: ordinary Type-valued Yoneda and standard-simplex Yoneda do not provide mapping spaces of coherent presheaves on an arbitrary quasicategory. Read Mathlib/CategoryTheory/Yoneda.lean:724-739,839-860 and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda evaluation equivalence of spaces for presheaves on a small quasicategory",
+   "results": "OK 8 hits: CategoryTheory.yonedaLemma; CategoryTheory.yonedaEquiv_apply; CategoryTheory.evalEquiv; CategoryTheory.Presheaf.freeYonedaHomEquiv; CategoryTheory.yonedaEvaluation; CategoryTheory.curriedYonedaLemma; CategoryTheory.GrothendieckTopology.yonedaEquiv_apply; CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv.",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: ordinary Type-valued Yoneda and standard-simplex Yoneda do not provide mapping spaces of coherent presheaves on an arbitrary quasicategory. Read Mathlib/CategoryTheory/Yoneda.lean:724-739,839-860 and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasicategory of space valued presheaves natural transformations from the representable at d to F form the space F d",
+   "results": "OK 8 hits: SSet.yonedaEquiv; SSet.stdSimplex.objEquiv; TopCat.toSSet; SSet.stdSimplex.isoOfRepresentableBy; SSet.unitHomEquiv; SSet.toTopSimplex; CategoryTheory.SimplicialCategory.sHomFunctor; CategoryTheory.nerve.representableBy.",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: ordinary Type-valued Yoneda and standard-simplex Yoneda do not provide mapping spaces of coherent presheaves on an arbitrary quasicategory. Read Mathlib/CategoryTheory/Yoneda.lean:724-739,839-860 and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160."
+  },
+  {
+   "tool": "grep",
+   "query": "def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma",
+   "results": "{\"t\": \"2026-10-16T19:16:15Z\", \"tool\": \"grep\", \"query\": \"def yonedaEquiv|def yonedaLemma|def curriedYonedaLemma\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\"], \"digest\": \"0f4f78b65713a9c7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical Yoneda evaluation equivalence of spaces for arbitrary space valued presheaves",
+   "results": "{\"t\": \"2026-10-16T19:16:16Z\", \"tool\": \"leansearch\", \"query\": \"Infinity categorical Yoneda evaluation equivalence of spaces for arbitrary space valued presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaLemma\", \"CategoryTheory.curriedYonedaLemma\", \"CategoryTheory.Presheaf.freeYonedaHomEquiv\", \"ContinuousMap.comp_yonedaPresheaf'\", \"ContinuousMap.yonedaPresheaf\", \"ContinuousMap.yonedaPresheaf'\", \"CategoryTheory.Presheaf.yonedaAdjunction\", \"CategoryTheory.typeEquiv\"], \"digest\": \"9183dfa072d96af5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaEquiv\"",
+   "results": "{\"t\": \"2026-10-16T19:16:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"yonedaEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.coyonedaEquiv\", \"CategoryTheory.uliftCoyonedaEquiv\", \"CategoryTheory.uliftYonedaEquiv\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.yonedaEquiv_symm_app_apply\", \"CategoryTheory.uliftCoyonedaEquiv_symm_apply_app\", \"CategoryTheory.uliftCoyonedaEquiv_apply\", \"CategoryTheory.coyonedaEquiv_symm_app_apply\"], \"digest\": \"2e2fb287f7b111ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda lemma for quasicategories: mapping space of coherent transformations from the representable presheaf at d to a space valued presheaf F is equivalent to F d",
+   "results": "{\"t\": \"2026-10-16T19:16:20Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda lemma for quasicategories: mapping space of coherent transformations from the representable presheaf at d to a space valued presheaf F is equivalent to F d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'\", \"SSet.stdSimplex.yonedaEquiv_map\", \"CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst\", \"SSet.yonedaEquiv_comp\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv\", \"CategoryTheory.SimplicialCategory.sHomFunctor\"], \"digest\": \"96ca30b5b11fb8c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable right fibrations over a quasicategory represent evaluation of all space valued presheaves on the level of Kan mapping complexes",
+   "results": "{\"t\": \"2026-10-16T19:16:22Z\", \"tool\": \"leanfinder\", \"query\": \"Representable right fibrations over a quasicategory represent evaluation of all space valued presheaves on the level of Kan mapping complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.yonedaEquiv\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"CategoryTheory.nerve.representableBy\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\"], \"digest\": \"456a41e884fd028a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration|yonedaEvaluation|curriedYonedaLemma",
+   "results": "{\"t\": \"2026-10-16T19:34:59Z\", \"tool\": \"grep\", \"query\": \"right.?fibration|yonedaEvaluation|curriedYonedaLemma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Preserves/Yoneda.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\"], \"digest\": \"8a15da6799f39d68\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an infinity category, restriction of sections of a right fibration over the slice at an object to its identity arrow is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-16T19:35:06Z\", \"tool\": \"leanfinder\", \"query\": \"For an infinity category, restriction of sections of a right fibration over the slice at an object to its identity arrow is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialFibrations_over_eq\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverFibrations\", \"HomotopicalAlgebra.fibrations_over_def\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.IsFibrant\"], \"digest\": \"3665eda2a676d038\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda|presheaf|presentab|localization|cocomplet",
+   "results": "{\"t\": \"2026-10-16T23:06:02Z\", \"tool\": \"grep\", \"query\": \"yoneda|presheaf|presentab|localization|cocomplet\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"700e11c067c34ace\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda evaluation equivalence of spaces for presheaves on a small quasicategory",
+   "results": "{\"t\": \"2026-10-16T23:06:03Z\", \"tool\": \"leansearch\", \"query\": \"Yoneda evaluation equivalence of spaces for presheaves on a small quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaLemma\", \"CategoryTheory.yonedaEquiv_apply\", \"CategoryTheory.evalEquiv\", \"CategoryTheory.Presheaf.freeYonedaHomEquiv\", \"CategoryTheory.yonedaEvaluation\", \"CategoryTheory.curriedYonedaLemma\", \"CategoryTheory.GrothendieckTopology.yonedaEquiv_apply\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv\"], \"digest\": \"d9b8e5755a16234f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yonedaEquiv, SSet.yonedaEquiv",
+   "results": "{\"t\": \"2026-10-16T23:06:03Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.yonedaEquiv, SSet.yonedaEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Yoneda lemma for infinity categories identifies the mapping space from a representable space valued presheaf to F with F evaluated at its representing object",
+   "results": "{\"t\": \"2026-10-16T23:06:05Z\", \"tool\": \"leanfinder\", \"query\": \"The Yoneda lemma for infinity categories identifies the mapping space from a representable space valued presheaf to F with F evaluated at its representing object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaEquiv_apply\", \"CategoryTheory.Functor.reprW\", \"CategoryTheory.uliftYonedaEquiv\", \"CategoryTheory.uliftYonedaEquiv_apply\", \"CategoryTheory.yonedaLemma\", \"CategoryTheory.Functor.RepresentableBy.toIso\", \"CategoryTheory.yonedaEquiv\", \"SSet.yonedaEquiv\"], \"digest\": \"386610e88e3be83c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasicategory of space valued presheaves natural transformations from the representable at d to F form the space F d",
+   "results": "{\"t\": \"2026-10-16T23:06:32Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory of space valued presheaves natural transformations from the representable at d to F form the space F d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"SSet.stdSimplex.objEquiv\", \"TopCat.toSSet\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"SSet.unitHomEquiv\", \"SSet.toTopSimplex\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.nerve.representableBy\"], \"digest\": \"54fe81b0a8fd461f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:724-739 and 839-860 (ordinary Type-valued Yoneda), and AlgebraicTopology/SimplicialSet/StdSimplex.lean:155-160 (maps from standard simplices). Neither covers coherent transformations of space-valued presheaves on arbitrary quasicategories. The Quasicategory source grep gives only ordinary simplicial-set Yoneda uses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-continuous-presheaf-representability",
@@ -95,5 +576,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-yoneda-evaluation",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: retained the accepted pointwise horn-filtration proof, added the classification pullback clause in step 5, replaced the unsupported coherence assertion by a strict enriched evaluation construction and existing general rectification/model-localization comparisons in steps 6-8, and made the U-prime smallness universe explicit in step 9. No new nodes, leaves, weakened statement, Lean work, or delivery push. Fresh repair audit: wrote the strict enriched inverse and its two simplicial equality checks in step 7, and rebased every nonsplit field to the current shared node. Existing prerequisite circularity is reported explicitly rather than concealed by dropping citations. Current repair makes the interval enriched functor explicit on both same-endpoint and cross mapping complexes; its composition check uses the full enriched naturality equality.",
+  "blueprint": "Realizes the coherent representability prerequisite for prop-coef-integral-exceptional-adjoint through the recorded continuous-presheaf-representability ancestry. Current main-20261015, sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md, paragraph beginning For K in D^b_c(X,R), immediately before its displayed Rlim mapping-complex chain. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial lifting tool: a trivial Kan fibration is a simplicial homotopy equivalence. It converts the explicit restriction fibration to an equivalence; the coefficient unit has no replacement statement giving this general elementary homotopy-theoretic conclusion."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor-category tool, used only for its exact statement that a transformation is an equivalence iff its vertex components are. This does not substitute any geometric step of the coefficient unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-b54b49885",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-b54b49885 (reviewer sub-agent of L); spot-checked: I read all nine steps against the full statements of the 14 cited nodes, plus Stacks 017R and 08NS in simplicial.tex and the main-20261015 ancestor paragraph 'For K in D^b_c(X,R)'. HTT and Kerodon are not archived locally, so I checked those from memory only (the proof is marked agent-written). Steps 2-3: I recomputed the extra degeneracy h=s_{n+1} identities and the right-horn (Lambda^{n+1}_{n+1}) pairing filtration; nondegeneracy and face presence hold. Step 4: the pullback of the exponentiation trivial fibration along z->(r_d,z) is valid. Step 5: classification pullback and identity clauses are used correctly. Step 6: the derived unit of the C -| N_hc Quillen equivalence, the counit DK-equivalence for locally Kan A^op, and the projective structure on sSet^{A^op} are all used within their hypotheses; N_hc(A^op)=N_hc(A)^op by vertex reversal. Step 7: the strict enriched Yoneda lemma is correct; Y_a = I(a,-) tensor Delta^0 is bifibrant; the naturality chain and inverse are checked, with variance P(b)->Q(a). Step 8: the interval simplicial functor is correct; the endpoint identifications rest on the nerve-localization and coherent-nerve clauses, which state composition-compatibility with coherent homotopies, as in HTT 5.1.3. Step 9: the cone-calculus criterion is used at U'. Edge cases checked: empty D, a point, an empty value, a single arrow, and an S^1 value. The statement and stmt_deps are unchanged, and proof_deps equals the union of uses. A transitive-closure check on the snapshot shows no dependency reaches the item, so the reported cycle is gone. I accepted both tool_uses (trivial-Kan homotopy equivalence; pointwise functor-equivalence criterion). No fixes and no new nodes. Maintainer note: lem-coef-space-yoneda-density (split, reviewed 2026-10-16) states this item verbatim as its first clause and does not reach it, contrary to the report's stale claim. The two existing nodes should be merged, and the better direction is for that node to cite this more explicit coherence proof."
  }
 }

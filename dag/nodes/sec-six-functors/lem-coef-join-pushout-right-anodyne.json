@@ -31,9 +31,128 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-right-anodyne"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\theta(i,j):D(i,j)\\hookrightarrow A\\star B$, with $D(i,j)=(A_0\\star B)\\cup(A\\star B_0)$. By the ordered join formula, in degree $r$ this subset contains the pure summands $A_r$ and $B_r$, and in each mixed summand $A_u\\times B_v$ it contains precisely $(A_{0,u}\\times B_v)\\cup(A_u\\times B_{0,v})$. The intersection of the two joined subsets is $A_0\\star B_0$, on pure as well as mixed summands. Thus their degreewise union is the stated pushout: a pair of simplicial maps agreeing on the intersection gives the unique map on the union. More generally all simplicial pushouts and ordinal colimits are computed degreewise: the set-theoretic quotient or colimit inherits its operators from those of the diagram, and compatible maps out of it are precisely natural transformations. This follows directly from the functor definition of simplicial sets in [def-weil-pbc-simplicial-set].",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  },
+  {
+   "text": "Let $R$ denote the class in [def-coef-infinity-right-anodyne]. Fix either variable of $\\theta$, and let $\\mathcal C$ be the class of monomorphisms in the other variable whose $\\theta$ belongs to $R$. An isomorphism in either variable makes $\\theta$ an isomorphism, because the mixed subset of Step 1 is then the whole product. A square of maps in either variable induces a square of $\\theta$-maps: on mixed summands it applies the two coordinate maps, and on pure summands the corresponding single coordinate map. Identities and compositions hold coordinatewise and therefore also on $D$. Consequently an arrow retract in either variable induces an arrow retract of $\\theta$. Thus $\\mathcal C$ contains all isomorphisms and is retract closed. The map in a retract is still a monomorphism: apply the source section, cancel in the larger injection and then apply the source retraction.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  },
+  {
+   "text": "Fix $j$. Push out $i:A_0\\hookrightarrow A$ along $A_0\\to A'_0$, giving $i':A'_0\\hookrightarrow A'=A\\amalg_{A_0}A'_0$. Degreewise $A'_u$ is the disjoint union of $A'_{0,u}$ and $A_u\\setminus A_{0,u}$. The natural square from $\\theta(i,j)$ to $\\theta(i',j)$ is a pushout: the new elements in its top row are exactly $(A_u\\setminus A_{0,u})\\times(B_v\\setminus B_{0,v})$, and its bottom row adds precisely the same elements. Its pure summands are already in the domains. The bijections are induced by the square, so commute with simplicial operators. Hence $\\theta(i',j)$ is a pushout of $\\theta(i,j)$ and belongs to $R$ whenever the latter does. For the second variable, push out $B_0\\hookrightarrow B$ along $B_0\\to B'_0$; then $B'_v=B'_{0,v}\\amalg(B_v\\setminus B_{0,v})$, and the same argument with new pairs $(A_u\\setminus A_{0,u})\\times(B_v\\setminus B_{0,v})$ proves pushout closure in that variable too. Both pushed-out maps remain degreewise injective.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  },
+  {
+   "text": "Fix $j:B_0\\hookrightarrow B$ and a continuous chain of monomorphisms $X_0\\hookrightarrow\\cdots\\hookrightarrow X_\\lambda$. Each stage embeds in the colimit: equality in a set colimit over an ordinal is witnessed at a common later stage, where injectivity cancels it. Thus identify stages with subsets of $X_\\lambda$. Put $P_\\alpha=(X_\\alpha\\star B)\\cup(X_\\lambda\\star B_0)$. Its intersection with $X_{\\alpha+1}\\star B$ is $(X_\\alpha\\star B)\\cup(X_{\\alpha+1}\\star B_0)$ and its union with that joined subset is $P_{\\alpha+1}$, by Step 1. Therefore $P_\\alpha\\hookrightarrow P_{\\alpha+1}$ is a pushout of $\\theta(X_\\alpha\\hookrightarrow X_{\\alpha+1},j)$. At a nonzero limit $\\delta$, every mixed simplex involving $X_\\delta$ has its first coordinate in some earlier stage, while $X_\\lambda\\star B_0$ is present at every stage. Hence $P_\\delta=\\bigcup_{\\alpha<\\delta}P_\\alpha$. This continuous chain starts at $D(X_0\\hookrightarrow X_\\lambda,j)$ and ends at $X_\\lambda\\star B$. If all successor $\\theta$-maps belong to $R$, its composite belongs to $R$ by transfinite-composition and pushout closure. The zero-length chain gives an identity.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  },
+  {
+   "text": "For the other variable, fix $i:A_0\\hookrightarrow A$ and a continuous chain of inclusions $Y_\\alpha\\subseteq Y_\\lambda$. Put $Q_\\alpha=(A\\star Y_\\alpha)\\cup(A_0\\star Y_\\lambda)$. Then $Q_\\alpha\\cap(A\\star Y_{\\alpha+1})=(A\\star Y_\\alpha)\\cup(A_0\\star Y_{\\alpha+1})$, and their union is $Q_{\\alpha+1}$. Thus $Q_\\alpha\\hookrightarrow Q_{\\alpha+1}$ is a pushout of $\\theta(i,Y_\\alpha\\hookrightarrow Y_{\\alpha+1})$. At a nonzero limit the second coordinate of a mixed simplex occurs at some earlier stage, so $Q_\\delta=\\bigcup_{\\alpha<\\delta}Q_\\alpha$. The endpoints are $D(i,Y_0\\hookrightarrow Y_\\lambda)$ and $A\\star Y_\\lambda$. Closure of $R$ again proves transfinite-composition closure in the second variable. Together with Steps 2 and 3, the class $\\mathcal C$ for either fixed variable contains isomorphisms and is closed under pushouts, transfinite compositions and retracts.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  },
+  {
+   "text": "Each class $\\mathcal C$ of Step 2 is also closed under small coproducts of its maps. Indeed, well-order a family $f_t:U_t\\hookrightarrow V_t$ in $\\mathcal C$. Starting with $\\coprod_tU_t$, replace the $t$th summand by $V_t$ in that order. The successor map is a pushout of $f_t$ along the summand inclusion, every limit is the degreewise colimit, and the final object is $\\coprod_tV_t$. Thus the coproduct map is a transfinite composite of pushouts of the $f_t$, so lies in $\\mathcal C$ by Steps 3--5. The empty family gives an identity. Choose the well-order with small ordinal type in the fixed universe; every coproduct and chain used here is small.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  },
+  {
+   "text": "Consider $i:\\partial\\Delta^n\\hookrightarrow\\Delta^n$ with $n\\geq0$ and $j:\\Lambda_k^m\\hookrightarrow\\Delta^m$ with $m\\geq1$ and $0\\leq k\\leq m$. There is a simplicial isomorphism $\\Delta^n\\star\\Delta^m\\cong\\Delta^N$, $N=n+m+1$: a monotone map into $[N]$ splits uniquely into its initial block with values at most $n$ and its final block with values at least $n+1$; subtract $n+1$ on the second block. Empty blocks give the pure summands. Restricting a monotone map restricts these blocks, so this bijection commutes with all operators. Write $p=n+1+k$. Using the boundary definition (union of proper faces) in [lem-coef-kan-quillen-right-proper], a mixed simplex lies in $\\partial\\Delta^n\\star\\Delta^m$ exactly when its image omits a first-block vertex, and in $\\Delta^n\\star\\Lambda_k^m$ exactly when it omits a second-block vertex other than $p$. Hence the mixed simplices of $D(i,j)$ are exactly those omitting some vertex other than $p$. A pure second-block simplex omits a first-block vertex, since $n+1\\geq1$. A pure first-block simplex omits a second-block vertex other than $p$, since $m+1\\geq2$. Both pure factors therefore satisfy the same criterion. By the horn definition of [def-cbc-enhanced-diagrams-cones], $D(i,j)$ is exactly $\\Lambda_p^N$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  },
+  {
+   "text": "Since $p=n+1+k\\geq1$ and $p\\leq n+1+m=N$, the map computed in Step 7 is a right horn generator of [def-coef-infinity-right-anodyne]. It therefore belongs to $R$. This includes $n=0$, $k=0$ and $k=m$; there is no restriction to inner horns.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  },
+  {
+   "text": "Fix a boundary inclusion $i:\\partial\\Delta^n\\hookrightarrow\\Delta^n$. Steps 7--8 show that the class $\\mathcal C_i$ of second-variable monomorphisms whose $\\theta(i,-)$ belongs to $R$ contains every horn inclusion. Steps 2--6 make this class closed under pushouts, small coproducts, transfinite compositions and retracts. The statement of [lem-coef-kan-quillen-right-proper] says that cofibrations are the monomorphisms and that trivial cofibrations are retracts of transfinite composites of pushouts of coproducts of horn inclusions. Consequently any degreewise injective weak homotopy equivalence $j$ lies in $\\mathcal C_i$: it is a cofibration and a weak equivalence in exactly that model structure, hence a trivial cofibration, to which the stated horn-cell/retract description applies. The weak-equivalence notion there is realization-based, exactly the notion in the item; neither source nor target has to be Kan.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  },
+  {
+   "text": "Now fix the given degreewise injective weak homotopy equivalence $j:B_0\\hookrightarrow B$. Step 9 puts every boundary inclusion, including $\\varnothing=\\partial\\Delta^0\\hookrightarrow\\Delta^0$, in the first-variable class $\\mathcal C_j$. By [lem-coef-kan-quillen-right-proper], every monomorphism $i$ is a transfinite composite of pushouts of coproducts of boundary inclusions. The first-variable closure and coproduct arguments of Steps 2--6 therefore put $i$ in $\\mathcal C_j$. Thus $\\theta(i,j)$ is right anodyne. Step 1 identifies its domain with the displayed union and simplicial pushout, proving every clause of the statement.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.5, printed p. 251, PDF page 269 (zero-based page 268); two saturation reductions and boundary-horn calculation. Read online; not archived locally. Degreewise details supplied by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-coef-infinity-right-anodyne",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Lemma 4.2.3.5, printed p. 251; read online, not archived under literature/. Expanded degreewise saturation proof, using the existing Kan-Quillen generation node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -111,10 +230,87 @@
    "results": "{\"t\": \"2026-10-16T23:14:24Z\", \"tool\": \"leanfinder\", \"query\": \"The Leibniz join of a simplicial subset inclusion and a weak homotopy equivalence is generated by horns with positive missing vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.Quasicategory.hornFilling\", \"SSet.horn\", \"SSet.horn_eq_iSup\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.quasicategory_of_filler\"], \"digest\": \"474ebcaab0a50f90\"}",
    "date": "2026-10-16",
    "verdict": "Second reader: no match. Semantic results concern all-horn Quillen generators or inner-horn filling, not the ordered join theorem for right horns. Loogle anodyne results were checked at Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:66-92: they use every horn, without a right-horn restriction. Grep star hits denote the augmented simplex initial object or a constant functor, not a simplicial join or this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pushout join of a simplicial monomorphism and a weak homotopy equivalence monomorphism is right anodyne",
+   "results": "{\"t\": \"2026-10-17T00:06:03Z\", \"tool\": \"leanfinder\", \"query\": \"The pushout join of a simplicial monomorphism and a weak homotopy equivalence monomorphism is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\"], \"digest\": \"ad3a6ba2d9801532\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the hits. Quillen all-horn/cofibration generators, all-horn anodyne closure, and face/horn inclusions do not state the ordered join/right-horn conclusion. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:64-88 uses all horns; CategoryWithFibrations.lean:46-79 supplies horn generators and classes only. The precise join/right-anodyne source grep returned zero hits. The second semantic phrasing also found no join theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(rightAnodyne|RightAnodyne|right_anodyne|join|Join)\\b",
+   "results": "{\"t\": \"2026-10-17T00:06:23Z\", \"tool\": \"grep\", \"query\": \"\\\\b(rightAnodyne|RightAnodyne|right_anodyne|join|Join)\\\\b\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the hits. Quillen all-horn/cofibration generators, all-horn anodyne closure, and face/horn inclusions do not state the ordered join/right-horn conclusion. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:64-88 uses all horns; CategoryWithFibrations.lean:46-79 supplies horn generators and classes only. The precise join/right-anodyne source grep returned zero hits. The second semantic phrasing also found no join theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordered join of a boundary inclusion and a horn inclusion is a right horn inclusion of simplicial sets",
+   "results": "{\"t\": \"2026-10-17T00:06:24Z\", \"tool\": \"leansearch\", \"query\": \"An ordered join of a boundary inclusion and a horn inclusion is a right horn inclusion of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I\", \"SSet.horn.faceι_ι\", \"SSet.horn₃₂.ι₀_desc_assoc\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn.ι_ι\"], \"digest\": \"dd06f5bc72e5adfa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the hits. Quillen all-horn/cofibration generators, all-horn anodyne closure, and face/horn inclusions do not state the ordered join/right-horn conclusion. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:64-88 uses all horns; CategoryWithFibrations.lean:46-79 supplies horn generators and classes only. The precise join/right-anodyne source grep returned zero hits. The second semantic phrasing also found no join theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\", SSet",
+   "results": "{\"t\": \"2026-10-17T00:06:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsAnodyneExtensions\", \"SSet.instIsStableUnderRetractsAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionAnodyneExtensions\", \"SSet.instRespectsIsoAnodyneExtensions\", \"SSet.instRespectsIsoStrongAnodyneExtensions\", \"SSet.anodyneExtensions\"], \"digest\": \"e628c2cf94db43d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the hits. Quillen all-horn/cofibration generators, all-horn anodyne closure, and face/horn inclusions do not state the ordered join/right-horn conclusion. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:64-88 uses all horns; CategoryWithFibrations.lean:46-79 supplies horn generators and classes only. The precise join/right-anodyne source grep returned zero hits. The second semantic phrasing also found no join theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Leibniz ordered join of a boundary inclusion and any horn inclusion is a horn with positive missing vertex",
+   "results": "{\"t\": \"2026-10-17T00:07:40Z\", \"tool\": \"leanfinder\", \"query\": \"The Leibniz ordered join of a boundary inclusion and any horn inclusion is a horn with positive missing vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.face_le_horn\", \"SSet.horn.face\", \"SSet.horn.faceι\", \"SSet.horn_eq_iSup\", \"SSet.horn.edge\", \"SSet.horn.ι\", \"SSet.horn.faceι_ι\", \"SSet.horn.ι_ι\"], \"digest\": \"203adff6dbb85cc6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the hits. Quillen all-horn/cofibration generators, all-horn anodyne closure, and face/horn inclusions do not state the ordered join/right-horn conclusion. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:64-88 uses all horns; CategoryWithFibrations.lean:46-79 supplies horn generators and classes only. The precise join/right-anodyne source grep returned zero hits. The second semantic phrasing also found no join theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(rightAnodyne|RightAnodyne|right_anodyne|join|Join)\\b",
+   "results": "{\"t\": \"2026-10-17T00:33:09Z\", \"tool\": \"grep\", \"query\": \"\\\\b(rightAnodyne|RightAnodyne|right_anodyne|join|Join)\\\\b\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and the sources of the candidate all-horn anodyne classes and Quillen horn generators. CategoryWithFibrations.lean:46-51 allows every missing vertex and AnodyneExtensions/Basic.lean:64-88 defines the all-horn class. Neither states the ordered join theorem or a right-horn restriction. The exact join/right-anodyne grep found no hits; a second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\", SSet",
+   "results": "{\"t\": \"2026-10-17T00:33:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsAnodyneExtensions\", \"SSet.instIsStableUnderRetractsAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionAnodyneExtensions\", \"SSet.instRespectsIsoAnodyneExtensions\", \"SSet.instRespectsIsoStrongAnodyneExtensions\", \"SSet.anodyneExtensions\"], \"digest\": \"e628c2cf94db43d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and the sources of the candidate all-horn anodyne classes and Quillen horn generators. CategoryWithFibrations.lean:46-51 allows every missing vertex and AnodyneExtensions/Basic.lean:64-88 defines the all-horn class. Neither states the ordered join theorem or a right-horn restriction. The exact join/right-anodyne grep found no hits; a second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordered join pushout of a boundary inclusion and a horn inclusion is a horn inclusion with positive missing vertex",
+   "results": "{\"t\": \"2026-10-17T00:33:10Z\", \"tool\": \"leansearch\", \"query\": \"The ordered join pushout of a boundary inclusion and a horn inclusion is a horn inclusion with positive missing vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.horn₂₂.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.KanComplex.hornFilling\", \"SSet.horn₂₀.isPushout\", \"CategoryTheory.Limits.Types.Pushout.inl\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\"], \"digest\": \"314db28a79630290\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and the sources of the candidate all-horn anodyne classes and Quillen horn generators. CategoryWithFibrations.lean:46-51 allows every missing vertex and AnodyneExtensions/Basic.lean:64-88 defines the all-horn class. Neither states the ordered join theorem or a right-horn restriction. The exact join/right-anodyne grep found no hits; a second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Leibniz join of a simplicial subset inclusion and a monomorphism that is a weak homotopy equivalence is right anodyne",
+   "results": "{\"t\": \"2026-10-17T00:33:14Z\", \"tool\": \"leanfinder\", \"query\": \"The Leibniz join of a simplicial subset inclusion and a monomorphism that is a weak homotopy equivalence is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.cofibration_iff\"], \"digest\": \"6f19fada80314d86\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and the sources of the candidate all-horn anodyne classes and Quillen horn generators. CategoryWithFibrations.lean:46-51 allows every missing vertex and AnodyneExtensions/Basic.lean:64-88 defines the all-horn class. Neither states the ordered join theorem or a right-horn restriction. The exact join/right-anodyne grep found no hits; a second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "grep",
+   "query": "def anodyneExtensions|def strongAnodyneExtensions|lemma horn_ι_mem_J|def J",
+   "results": "{\"t\": \"2026-10-17T00:34:13Z\", \"tool\": \"grep\", \"query\": \"def anodyneExtensions|def strongAnodyneExtensions|lemma horn_ι_mem_J|def J\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"24b601021516584f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and the sources of the candidate all-horn anodyne classes and Quillen horn generators. CategoryWithFibrations.lean:46-51 allows every missing vertex and AnodyneExtensions/Basic.lean:64-88 defines the all-horn class. Neither states the ordered join theorem or a right-horn restriction. The exact join/right-anodyne grep found no hits; a second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A boundary simplex inclusion joined by pushout with a horn inclusion is the horn whose missing vertex is shifted by the number of vertices in the first simplex",
+   "results": "{\"t\": \"2026-10-17T00:34:24Z\", \"tool\": \"leanfinder\", \"query\": \"A boundary simplex inclusion joined by pushout with a horn inclusion is the horn whose missing vertex is shifted by the number of vertices in the first simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₁.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.horn.faceι\", \"SSet.horn.faceι_ι\", \"SSet.horn.face\", \"SSet.horn.ι_ι\", \"SSet.horn.ι\"], \"digest\": \"1132c992be1b14f6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and the sources of the candidate all-horn anodyne classes and Quillen horn generators. CategoryWithFibrations.lean:46-51 allows every missing vertex and AnodyneExtensions/Basic.lean:64-88 defines the all-horn class. Neither states the ordered join theorem or a right-horn restriction. The exact join/right-anodyne grep found no hits; a second semantic phrasing also gave no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-contractible-join-right-anodyne",
@@ -122,5 +318,34 @@
   "group": "NH"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-join-pushout-right-anodyne",
+  "worker": "stage1",
+  "summary": "Retained the statement and supplied the degreewise pushout, transfinite-composition, retract and coproduct calculations in both variables; computed the boundary-horn join as the right horn with missing vertex n+1+k; then applied the two existing Kan-Quillen cell-generation clauses. No new nodes; no Mathlib match; no project attachment. On completing the earlier attempt, added the explicit boundary-definition citation to the generator calculation and checked all cited clauses against the current DAG.",
+  "blueprint": "Preserves the existing prop-coef-integral-exceptional-adjoint paragraph-2 ancestry through the finite-coefficient mapping-complex adjunction infrastructure. Realizes the HTT 4.2.3.5 input to the second inclusion in HTT 4.2.3.6 used by lem-coef-contractible-join-right-anodyne; the item has no independent imported blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-simplicial-set",
+    "why": "The functor definition justifies the explicit degreewise colimit computation; it is a notion from another unit, not a replacement proof route."
+   },
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic standard simplex, horn and realization conventions from another unit; no geometric biduality step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-3fc431986",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-3fc431986 (reviewer sub-agent of L); spot-checked: I read the item, all four cited statements (def-cbc-enhanced-diagrams-cones, def-coef-infinity-right-anodyne, def-weil-pbc-simplicial-set, lem-coef-kan-quillen-right-proper), the parent lem-coef-contractible-join-right-anodyne and how its Step 3 uses the item, the unit, the chapter and the blueprint ancestor. Source: HTT 4.2.3.5 is not archived under literature/ and network access is blocked here, so I could not read the cited page. The proof is correctly marked by=agent with a WANTED line. I checked every step myself from the cited statements. Statement: monomorphisms i and j with j a realization weak equivalence, conclusion right anodyne (horns 0<i<=n). It is the Joyal lemma, unweakened, with no Kan hypothesis. Small cases checked: n=0,m=1,k=0 gives Lambda^2_1 and k=1 gives Lambda^2_2; identity maps; A empty; B empty. Steps: 1, the degreewise union and intersection A0*B0 are correct. 2, isomorphisms and retracts are handled. 3, pushouts: the complement (A-A0)x(B-B0) maps bijectively, also for a non-injective attaching map, in both variables. 4-5, the P and Q chains: the successor intersections are D(X_a->X_{a+1},j), the chains are continuous, and the endpoints are right. 6, coproduct closure follows from pushouts and transfinite composition. 7, Delta^n*Delta^m is Delta^N and the domain is Lambda^N_{n+1+k}, checked for pure and mixed simplices and for n=0. 8, the horn index p lies between 1 and N. 9-10 use only the statement of the Kan-Quillen node: trivial cofibrations are horn-cell retracts and monomorphisms are boundary-cell composites. proof_deps equals the union of the uses, and there is no cycle. There are no new nodes. No duplicate: pushout-join-saturation and anodyne-cocones are for inner anodyne maps, the product nodes are not joins, and cone-mono covers only B=Delta^0. The only cited statement is in the item's own unit. Accepted tool uses: the two definition nodes, as notions only. Not a target node, so the base-change morphism and coefficient category checks do not apply. No SGA source is used. No fixes."
+ }
 }
