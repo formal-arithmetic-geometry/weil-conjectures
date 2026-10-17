@@ -14,9 +14,123 @@
   "def-pc-fibre-product",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The identity $T\\to T$ is etale, separated and of finite presentation directly from the definitions (its diagonal and all its affine restrictions are identities), and is terminal in the full subcategory $E(T)$. For $A\\to T$ in $E(T)$, clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] makes $A$ quasi-compact and quasi-separated. If $a:A\\to C$ is a $T$-map between objects of $E(T)$, then $a$ is etale by [lem-weil-pbc-etale-composition-cancellation], and separated by [lem-weil-pbc-separated-cancellation], applied to $A\\to C\\to T$. Its source is quasi-compact and quasi-separated and its target is quasi-separated, so clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes it quasi-compact and quasi-separated. Together with local finite presentation from etaleness, this says $a$ is of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-separated-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021D (lemma-fibre-products-etale); morphisms.tex Tag 02GW (lemma-etale-permanence); schemes.tex Tag 01KV (lemma-compose-after-separated)."
+   }
+  },
+  {
+   "text": "For $A\\to C\\leftarrow B$ in $E(T)$, form $P=A\\times_C B$. By step 1, $B\\to C$ is separated and of finite presentation. Its base change $P\\to A$ is separated by [lem-weil-pbc-separated-base-change] and of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Compose with $A\\to T$: clauses (d),(e) of [lem-weil-pbc-proper-fp-permanence] give separated finite presentation of $P\\to T$. The full-site finite-limit result [lem-weil-pbc-etale-base-change-finite-limits] says it is etale and that this scheme fibre product is the full-site fibre product. Thus $P$ belongs to $E(T)$, and fullness gives its universal property there. The terminal object of step 1 and these pullbacks give all finite limits by [lem-weil-pbc-finite-limits-from-terminal-pullbacks]; the inclusion preserves them by the same result. Transport objects and limit cones to the selected small skeletons of [def-weil-size-convention]. All subsequent constructions may first be made before this transport.",
+   "uses": [
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021D (lemma-fibre-products-etale); schemes.tex Tag 01KU (lemma-separated-permanence); morphisms.tex Tags 01TR (lemma-composition-finite-presentation), 01TS (lemma-base-change-finite-presentation)."
+   }
+  },
+  {
+   "text": "Every full-site object $U\\to T$ has an affine open cover: schemes are locally affine. For each affine open $W\\subseteq U$, the map $W\\to T$ is etale, since open immersions and composites of etale maps are etale by [lem-weil-pbc-etale-composition-cancellation]. It is separated by [lem-weil-pbc-affine-source-morphism-separated] and of finite presentation by the affine-source clause (1) of [lem-weil-pbc-qcqs-morphism-permanence], since $T$ is quasi-separated. Thus these $W$ belong to $E(T)$ and cover $U$. More generally, given any full-site covering family $\\{U_i\\to A\\}$ with $A\\in E(T)$, take all affine opens $W\\subseteq U_i$. They too belong to $E(T)$ and their maps to $A$ are etale by the same composition result. By [lem-weil-pbc-etale-morphism-open-map] their images are open in $A$, and they cover $A$ because the original family is jointly surjective. Quasi-compactness of $A$ from step 1 selects finitely many such images. The corresponding affine maps give a finite jointly surjective family in $E(T)$ refining the original covering. This uses only the open-cover definition of quasi-compactness; for $A=\\varnothing$ take the empty family.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 04HR (lemma-alternative), proof by comparison with Tag 021E (lemma-affine-big-site-etale); schemes.tex Tags 01KN (lemma-affine-separated), 01KV (lemma-compose-after-separated)."
+   }
+  },
+  {
+   "text": "Let $\\mathrm{Cov}$ consist of finite jointly surjective families with target and sources in $E(T)$. All arrows are etale by step 1. Isomorphism families are jointly surjective. A composite of two such covering families is again etale and jointly surjective by [lem-weil-pbc-etale-covering-composition], and its index set is a finite union of finite sets. Pulling back a family along any arrow of $E(T)$ stays inside $E(T)$ by step 2, and is etale and jointly surjective by [lem-weil-pbc-etale-covering-base-change]; the index set remains finite. These are the three pretopology axioms, including the empty cover of the empty scheme. By [lem-weil-pbc-pretopology-sheaf-condition], its generated Grothendieck topology $J$ has the characterization: a sieve is $J$-covering exactly when it contains a family in $\\mathrm{Cov}$.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-composition",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-pretopology-sheaf-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 0217 (lemma-etale) and 021C (lemma-verify-site-etale); sites.tex pretopology construction as recorded in lem-weil-pbc-pretopology-sheaf-condition."
+   }
+  },
+  {
+   "text": "Write $K$ for the full small etale topology and $i:E(T)\\hookrightarrow T_{\\mathrm{Et}}$. For a sieve $R$ on $A\\in E(T)$, let $\\overline{iR}$ be the full-site sieve generated by its arrows. If $R$ is $J$-covering, step 4 supplies a finite jointly surjective family in $R$, hence $\\overline{iR}$ is $K$-covering by [def-weil-pbc-etale-site] and [lem-weil-pbc-pretopology-sheaf-condition]. Conversely suppose $\\overline{iR}$ is $K$-covering. The same pretopology characterization on the full site supplies an etale jointly surjective family $\\{U_i\\to A\\}$ contained in $\\overline{iR}$. Refine it by the finite affine covering $\\{W_j\\to A\\}$ of step 3. Each $W_j\\to A$ factors through some $U_i\\to A$, and that arrow factors through a member $B\\to A$ of $R$. Both $W_j$ and $B$ lie in $E(T)$, so the composite $W_j\\to B$ is a morphism there by fullness; downward closure of $R$ gives $W_j\\to A\\in R$. Thus $R$ contains a family in $\\mathrm{Cov}$ and is $J$-covering. This proves that $J$ is exactly the topology induced from $K$.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-pretopology-sheaf-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 04HR (lemma-alternative), with the covering-refinement check of Tag 021E (lemma-affine-big-site-etale); sites.tex generated topology."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-fppf-dense-sheaf-equivalence] to the fully faithful inclusion $i$ and the topologies $J,K$. Step 3 covers every full-site object by objects in the image, and step 5 verifies exactly its sieve criterion for the induced topology. The small skeletons fixed in step 2 make all comma categories in that lemma small; sets admit their limits. Its conclusion is precisely that restriction is an equivalence $\\operatorname{Sh}(T_{\\mathrm{Et}})\\simeq\\operatorname{Sh}(E(T))$ for sheaves of sets.",
+   "uses": [
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 04HR (lemma-alternative) and sites.tex Tag 03A0 (lemma-equivalence), via the general dense-subsite comparison theorem."
+   }
+  },
+  {
+   "text": "Let $e:T^{\\prime}\\to T$ be arbitrary with both bases qcqs. By [lem-weil-pbc-etale-base-change-finite-limits], scheme base change is a functor on the full small etale sites and preserves their finite limits. By [lem-weil-pbc-separated-base-change] and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], it carries separated finite-presentation objects to separated finite-presentation objects. It therefore restricts to $E(T)\\to E(T^{\\prime})$. Since step 2 computes limits in both restricted categories as in their full sites, the restricted functor preserves finite limits. For a finite covering family its base change is etale and jointly surjective by [lem-weil-pbc-etale-covering-base-change], and finite with the same index set. These are exactly the required finite covering families. No quasi-compactness, quasi-separatedness or finite-type condition on $e$ was used.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021D (lemma-fibre-products-etale), 021I (lemma-morphism-big-small-etale), 0217 (lemma-etale); schemes.tex Tag 01KU; morphisms.tex Tag 01TS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+  "def-weil-size-convention",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-pretopology-sheaf-condition",
+  "def-weil-pbc-etale-site",
+  "lem-pc-fppf-dense-sheaf-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Tags 021D, 021E and 04HR. The intermediate separated finite-presentation site is verified here by the cited permanence and dense-subsite statements; this supplies the ordinary scheme input to ILO Expose XI, Lemma 2.5, printed p. 179."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +166,45 @@
    "results": "{\"t\": \"2026-10-17T18:39:48Z\", \"tool\": \"leanfinder\", \"query\": \"A finite limit closed basis of quasi compact separated etale objects presents the etale topos with the topology of finite jointly surjective families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.jointlySurjectiveTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"d8eddda56b571973\"}",
    "date": "2026-10-18",
    "verdict": "no match: ordinary full or affine etale sites and generic density APIs only; AffineEtale.lean:46-81 was read. The affine category does not contain a non-affine terminal T or give this finite-limit-closed separated finite-presentation category. No exact theorem or one-line specialization supplies all clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "separated|[Ff]inite[Pp]resentation|[Dd]ense",
+   "results": "{\"t\": \"2026-10-17T18:56:30Z\", \"tool\": \"grep\", \"query\": \"separated|[Ff]inite[Pp]resentation|[Dd]ense\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\"], \"digest\": \"10bce93b9998e7f5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give the full or affine etale sites, not the separated finite-presentation intermediate category with all stated clauses. Read AffineEtale.lean:44-83; the non-affine terminal T need not lie in the affine category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The separated finitely presented etale objects over a qcqs scheme give the etale topos with finite surjective covers",
+   "results": "{\"t\": \"2026-10-17T18:56:30Z\", \"tool\": \"leansearch\", \"query\": \"The separated finitely presented etale objects over a qcqs scheme give the etale topos with finite surjective covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"], \"digest\": \"ace873ecd20c203e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give the full or affine etale sites, not the separated finite-presentation intermediate category with all stated clauses. Read AffineEtale.lean:44-83; the non-affine terminal T need not lie in the affine category."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Etale, CategoryTheory.Functor.IsDenseSubsite",
+   "results": "{\"t\": \"2026-10-17T18:56:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Etale, CategoryTheory.Functor.IsDenseSubsite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineEtale.instIsDenseSubsiteEtaleTopologySmallEtaleTopologySpec\"], \"digest\": \"88de6921c8af2c28\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give the full or affine etale sites, not the separated finite-presentation intermediate category with all stated clauses. Read AffineEtale.lean:44-83; the non-affine terminal T need not lie in the affine category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme separated etale morphisms of finite presentation form a finite limit closed site equivalent to the small etale site",
+   "results": "{\"t\": \"2026-10-17T18:56:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact quasi separated scheme separated etale morphisms of finite presentation form a finite limit closed site equivalent to the small etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.instHasFiniteLimitsScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"316b279dfd424dfc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give the full or affine etale sites, not the separated finite-presentation intermediate category with all stated clauses. Read AffineEtale.lean:44-83; the non-affine terminal T need not lie in the affine category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite limit closed basis of compact separated etale schemes presents the etale topos using finite jointly surjective covering families",
+   "results": "{\"t\": \"2026-10-17T18:57:21Z\", \"tool\": \"leanfinder\", \"query\": \"A finite limit closed basis of compact separated etale schemes presents the etale topos using finite jointly surjective covering families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.jointlySurjectiveTopology\", \"AlgebraicGeometry.Scheme.surjectiveFamiliesPretopology\", \"AlgebraicGeometry.Scheme.Etale.forget\"], \"digest\": \"51a15c3d80c32fbb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give the full or affine etale sites, not the separated finite-presentation intermediate category with all stated clauses. Read AffineEtale.lean:44-83; the non-affine terminal T need not lie in the affine category."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-qcqs-oriented-triple-presentation",
@@ -80,5 +229,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-qcqs-etale-finitary-site",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied seven steps proving morphism permanence, finite limits, affine density and finite refinements, the finite-cover pretopology, equality of induced topologies, the sheaf restriction equivalence, and arbitrary base change. All ingredients are existing DAG nodes, predominantly Mathlib leaves; no new nodes. No exact project attachment was found.",
+  "blueprint": "Realizes the ordinary-site input in the existing blueprint.from.place, below lem-trf-local-term-locality: finite-limit-closed sites of compact objects in the first paragraph of the proof of ILO XI Lemma 2.5. The main-20261015 local-term normal-cone route and its unit are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-ffba2c81a",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-ffba2c81a (reviewer sub-agent of L); spot-checked: I read the item and all 18 cited node statements, unit sk-i-curve-zero, chapter sec-trace-formula and the citer lem-trf-qcqs-oriented-triple-presentation. Sources: Stacks topologies.tex 021D (l.946), 021E (l.979), 04HR (l.1008); labels 01KU/01KV/01KN/01TR/01TS/02GW/0217/021C/021I/03A0 checked in the tag file; ILO XI proof of 2.5, printed p.179. The statement is unchanged and is not a target, and the citer still gets everything it uses from it. No new nodes, no SGA citation, and proof_deps equals the union of the step uses. Every cited statement node is a Mathlib leaf, so no tool_uses are needed and none were added. Step by step: (1) A is qcqs by permanence (2). A map a:A->C is étale by 02GW cancellation, separated by separated-cancellation (b), and qc/qs by permanence (1), so it is of finite presentation. (2) The fibre product P is separated and of finite presentation through base change, permanence (3) and proper-fp (d),(e). It is étale and a T_Et fibre product by etale-base-change-finite-limits (2). Terminal object plus pullbacks give all finite limits, and the inclusion preserves them. (3) Affine opens are étale (open immersion composed with étale), separated (affine source) and of finite presentation, which needs only T quasi-separated. A full-site cover of A in E(T) is refined by finitely many affine opens: images are open and A is quasi-compact. (4) The three pretopology axioms hold, using covering-composition, covering-base-change and pullbacks from step 2. (5) Both directions of the induced-sieve criterion hold: each W_j is an affine open inside some U_i, and fullness puts W_j->B in E(T). (6) The hypotheses of the dense-subsite equivalence match exactly, with small comma categories coming from the skeleton convention. (7) Base change along an arbitrary e between qcqs schemes preserves separated étale finite presentation, finite limits (computed in the full sites, inclusions fully faithful) and finite covers. Edge cases: T empty; T non-affine or non-separated; U_i not qc; e not qc; T=Spec k, which gives finite étale k-schemes. No duplicate in the DAG; related but distinct: etale-qcqs-cofinal-finite-coverings, finitary-site-coherent-generators and the affine-site comparison nodes. No fixes were made."
  }
 }
