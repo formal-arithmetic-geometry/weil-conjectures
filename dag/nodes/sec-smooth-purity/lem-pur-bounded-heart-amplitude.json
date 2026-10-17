@@ -12,9 +12,82 @@
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $a\\le b$ and $K$ as in the statement, and choose a representing complex $C$ for $K$. Put $K_q=\\tau_{\\le q}C$ in $D(\\mathcal A)$. By [lem-weil-pbc-truncation-descends], $H^r(K_q)=H^r(K)$ for $r\\le q$, and $H^r(K_q)=0$ for $r>q$, naturally. We will prove, by induction on the nonnegative integer $n$, that $T K_{a-1+n}$ has zero cohomology outside the fixed interval $[a+c,b+d]$, for $0\\le n\\le b-a+1$. This induction concerns only finitely many truncations of the chosen representative; it uses no limit.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-descends"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle; canonical truncation cohomology as in homology.tex Section 0118"
+   }
+  },
+  {
+   "text": "For $a\\le q\\le b$, the hypothesis applies to $H^q(K)\\in\\mathcal S$. The shift comparison of the exact functor and [lem-sp-derived-cohomology-shift] give $T(H^q(K)[-q])\\cong T(H^q(K)[0])[-q]$ and hence $H^i(T(H^q(K)[-q]))\\cong H^{i-q}(T(H^q(K)[0]))$. This is zero for $i<q+c$ or $i>q+d$. Since $a+c\\le q+c$ and $q+d\\le b+d$, it is in particular zero whenever $i\\notin[a+c,b+d]$. The sign is $i-q$, in accordance with the stipulated convention $H^i(M[r])=H^{i+r}(M)$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, successive cohomology object H^q(K)[-q]; shifts as in homology.tex Tags 011G and 011H"
+   }
+  },
+  {
+   "text": "For $n=0$, $K_{a-1}$ has zero cohomology in every degree: below $a$ this follows from the bound on $K$, and above $a-1$ from truncation. Thus the map $0\\to\\tau_{\\le a-1}C$ is a quasi-isomorphism of complexes, so $K_{a-1}\\cong0$ in the localization defining $D(\\mathcal A)$. The functor $T$ is additive, so it preserves zero: indeed $\\mathrm{id}_{T0}=T(\\mathrm{id}_0)=T(0)=0$. Hence all cohomology of $T K_{a-1}$ vanishes, proving the base case.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category; Tag 08J5, start of finite truncation induction"
+   }
+  },
+  {
+   "text": "For the induction step, suppose $0\\le n<b-a+1$ and set $q=a+n$, so $a\\le q\\le b$. The induction hypothesis bounds $T K_{q-1}$. Apply $T$ to the distinguished triangle $K_{q-1}\\to K_q\\to H^q(K)[-q]\\to K_{q-1}[1]$ of [lem-weil-pbc-truncation-triangle]; it is still distinguished because $T$ is exact. By [lem-sf-derived-homology-long-exact], for each $i$ the segment $H^i(T K_{q-1})\\to H^i(T K_q)\\to H^i(T(H^q(K)[-q]))$ is exact. If $i\\notin[a+c,b+d]$, its first term is zero by induction and its third term is zero by Step 2. Exactness then forces the middle term to be zero: its kernel for the map to zero is the whole middle object and equals the zero image of the preceding map. This proves the claim for $n+1$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle, second displayed triangle; finite induction also explicit in more-etale.tex Tag 0G2A, lemma-derived-lower-shriek-bounded, proof of (3)"
+   }
+  },
+  {
+   "text": "At $n=b-a+1$ the induction bounds $T K_b$. The canonical inclusion $\\tau_{\\le b}C\\to C$ induces an isomorphism on every cohomology object: in degrees $\\le b$ by the truncation calculation, and in degrees $>b$ both sides have zero cohomology. It is a quasi-isomorphism and therefore $K_b\\cong K$ in $D(\\mathcal A)$. Applying $T$ and then $H^i$ transfers the bound from $T K_b$ to $T K$. This is exactly the claimed interval $[a+c,b+d]$; the construction has used neither infinite products nor completeness.",
+   "uses": [
+    "lem-weil-pbc-truncation-descends",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, finite truncation argument, with quasi-isomorphisms inverted by Tag 05RU, definition-unbounded-derived-category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-truncation-descends",
+  "def-weil-triangulated-category",
+  "lem-sp-derived-cohomology-shift",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08J5, remark-truncation-distinguished-triangle, successive cohomology triangles and finite induction; compare more-etale.tex Tag 0G2A, proof of lemma-derived-lower-shriek-bounded (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -71,10 +144,45 @@
    "results": "{\"t\": \"2026-10-17T07:05:26Z\", \"tool\": \"grep\", \"query\": \"isLE.*[Ff]unctor|isGE.*[Ff]unctor|[Hh]eart|[Bb]ounded.*[Ii]nduction\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean\"], \"digest\": \"c11c66411bff778c\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits give general support, exact-functor, scalar-restriction or adjunction notions, not this derived comparison/interval statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact triangulated functor with cohomological bounds c to d on a class of heart objects sends complexes with cohomology in that class in degrees a to b to degrees a+c to b+d",
+   "results": "{\"t\": \"2026-10-17T08:05:14Z\", \"tool\": \"leanfinder\", \"query\": \"An exact triangulated functor with cohomological bounds c to d on a class of heart objects sends complexes with cohomology in that class in degrees a to b to degrees a+c to b+d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Functor.IsHomological\", \"DerivedCategory.TStructure.t\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Functor.IsHomological.exact\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.instIsLEObjSingleFunctor\"], \"digest\": \"89664abb655dd512\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern t-structure support, homological functors, exact-functor derivation or single/short-exact triangles; none states the class-relative finite interval estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"IsLE\"",
+   "results": "{\"t\": \"2026-10-17T08:05:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsTriangulated\\\", \\\"IsLE\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.Derives.isTriangulated_of_isLeftDerivedFunctor\"], \"digest\": \"cc7c8e502dd48725\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern t-structure support, homological functors, exact-functor derivation or single/short-exact triangles; none states the class-relative finite interval estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]mplitude|[Hh]eart|[Bb]ounded.*[Ii]nduction",
+   "results": "{\"t\": \"2026-10-17T08:05:56Z\", \"tool\": \"grep\", \"query\": \"[Aa]mplitude|[Hh]eart|[Bb]ounded.*[Ii]nduction\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean\"], \"digest\": \"68e93ab99f13ba8e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern t-structure support, homological functors, exact-functor derivation or single/short-exact triangles; none states the class-relative finite interval estimate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Postnikov induction bounds the cohomology of a triangulated functor from its values on cohomology objects",
+   "results": "{\"t\": \"2026-10-17T08:05:57Z\", \"tool\": \"leansearch\", \"query\": \"Finite Postnikov induction bounds the cohomology of a triangulated functor from its values on cohomology objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsTriangulated\", \"CategoryTheory.Functor.IsTriangulated.rec\", \"CategoryTheory.Functor.IsTriangulated.recOn\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology\"], \"digest\": \"0484684b360e0d7d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern t-structure support, homological functors, exact-functor derivation or single/short-exact triangles; none states the class-relative finite interval estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological amplitude of a triangulated functor on bounded objects follows from its amplitude on the heart by induction on truncations",
+   "results": "{\"t\": \"2026-10-17T08:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomological amplitude of a triangulated functor on bounded objects follows from its amplitude on the heart by induction on truncations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"CategoryTheory.Triangulated.TStructure.IsGE\", \"CategoryTheory.Triangulated.TStructure.ge\", \"CategoryTheory.Triangulated.TStructure.le\", \"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"CategoryTheory.Functor.IsHomological.mk'\"], \"digest\": \"94d9f50a25125e22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern t-structure support, homological functors, exact-functor derivation or single/short-exact triangles; none states the class-relative finite interval estimate"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-finite-compact-support-constructibility",
@@ -91,5 +199,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-bounded-heart-amplitude",
+  "worker": "stage1",
+  "summary": "Q139 proves the class-relative finite amplitude estimate by explicit finite induction on upper truncations. Reuses existing truncation descent, successive cohomology triangle, cohomology shift and long exact sequence nodes; no new nodes, no extra hypotheses, and no Lean attachment. The statement is unchanged.",
+  "blueprint": "Realizes the finite devissage behind current main-20261015 prop-finite-compact-support-constructibility proof Step 3 (complexes with cohomology in [a,b]) and Step 4 (the complex case follows as in Step 3). The five steps expose truncation cohomology, shifted-factor bounds, zero base, exact-sequence induction, and the final quasi-isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-descends",
+    "why": "Generic canonical truncation cohomology and descent tool; the compact-support unit does not supply this abstract derived-category calculation."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic successive cohomology triangle for any abelian category, the exact finite-devissage tool required by the source route; no node in this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-descends",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-2f00da32c",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-2f00da32c (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 cited statements, the parent prop-finite-compact-support-constructibility (its step 5 is the only citer, with T=Rf^c_{!,n}, c=0, d=2e), the unit sk-prop-sf-cbc, the main-20261015 blueprint proof Steps 3-4 (from.place matches verbatim), Stacks derived.tex 08J5 (remark-truncation-distinguished-triangle, second displayed triangle) and more-etale.tex 0G2A (proof of (3): induction on b-a, details omitted, now written out). The statement is true and unchanged. Tested on a=b, T=[r], K=0, S={0} and negative indices. Step checks: step 1 uses truncation-descends clause (a) as stated; step 2 gets the shift sign i-q right via commShift and lem-sp-derived-cohomology-shift (k=-q), and [q+c,q+d] lies in [a+c,b+d] because a<=q<=b; step 3 base case: K_{a-1} is quasi-isomorphic to 0; step 4 combines the truncation-triangle statement, exactness of T and LES exactness at the middle term (HomologySequence.exact2 leaf), with q<=b guaranteed by n<b-a+1; step 5: tau_{<=b}C->C is a quasi-isomorphism. proof_deps equals the union of uses; no cycle, no new nodes, no SGA. Duplicate search (amplitude, heart-bound, devissage, way-out): lem-sfb-left-complete-heart-upper-bound is one-sided and needs products and completeness, so it is not a duplicate; no other candidate. Accepted tool_uses: lem-weil-pbc-truncation-descends and lem-weil-pbc-truncation-triangle, both generic abstract derived-category tools outside sk-prop-sf-cbc with no replacement of the route. Fix (one B5 citation fault): the step 3 source named Tag 05RU as 'definition-derived-category', but its label is definition-unbounded-derived-category (tags/tags 7423, derived.tex 3690). I corrected it and added the label to the step 5 05RU mention; the whole item is in fixes/dag/nodes/sec-smooth-purity/lem-pur-bounded-heart-amplitude.json.; 1 file(s) fixed by the reviewer"
  }
 }
