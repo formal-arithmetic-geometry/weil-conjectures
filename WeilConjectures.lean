@@ -29,6 +29,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
@@ -81,6 +82,7 @@ public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Over
+public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Defs
@@ -246,6 +248,10 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.PoincareDuality.Abstract
+public import WeilConjectures.PoincareDuality.Poincare
+public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.MorphismDefs
@@ -298,6 +304,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
