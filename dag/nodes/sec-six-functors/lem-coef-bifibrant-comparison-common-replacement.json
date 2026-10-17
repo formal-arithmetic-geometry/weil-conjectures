@@ -11,9 +11,92 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-simplicial-model-nerve-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=N_{\\mathrm{hc}}P$ and $B=N_{\\mathrm{hc}}Q$. For any simplicial category $C$, there is a canonical simplicial map $a_C:N(C_0)\\to N_{\\mathrm{hc}}C$: a string of arrows gives the functor from the thickening of $[n]$ whose map on each mapping-poset nerve is constant at the composite arrow. Union of subsets respects these composites, so this construction commutes with faces and degeneracies. Write $a_P,a_Q,a_E$ for these maps. Apply [lem-coef-simplicial-model-nerve-localization] separately to $\\mathcal D_p,\\mathcal D_q$. It makes $A,B$ quasicategories, and makes $N(P_0)\\to\\mathcal L$ and $N(Q_0)\\to\\mathcal L$ coherent localizations at the restricted $W$: each is the localization of that ordinary subcategory followed by its inclusion-induced equivalence to $\\mathcal L$. By the stipulated comparison compatibilities these maps are $\\psi_p a_P$ and $\\psi_q a_Q$, up to coherent equivalence. Consequently $a_P,a_Q$ themselves are coherent localizations. Indeed precomposition with $\\psi_p$ or $\\psi_q$ is an equivalence on functor quasicategories: precomposition with its chosen inverse supplies a quasi-inverse, with the whiskered inverse equations. Composing this equivalence with the localization restriction gives precisely restriction along $a_P$ or $a_Q$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 1.3.4.1, Remark 1.3.4.16, Construction 1.3.4.18 and Theorem 1.3.4.20; explicit canonical nerve map."
+   }
+  },
+  {
+   "text": "The ordinary functor $R$ preserves $W$. If $f:G\\to H$ belongs to $W$ in $Q_0$, naturality gives $c_H\\circ R(f)=f\\circ c_G$ in $\\mathcal D$. The right side and $c_H$ are in $W$, so two-out-of-three gives $R(f)\\in W$. This uses the model-category axioms stated in [lem-coef-simplicial-model-nerve-localization], not enriched naturality. The ordinary transformation $c$ is a functor $\\widetilde c:Q_0\\times[1]\\to E_0$, with endpoints $\\iota_PR$ and $\\iota_Q$; on a mixed arrow associated to $f:G\\to H$ it is $c_H R(f)=f c_G$. This equality verifies composition across the two levels. Degreewise a nerve simplex in a product category is a pair of strings, so $N(Q_0\\times[1])=N(Q_0)\\times\\Delta^1$. Thus $a_E N(\\widetilde c)$ is an actual coherent transformation in $N_{\\mathrm{hc}}E$ between the two ordinary restrictions. No quasicategory property of $N_{\\mathrm{hc}}E$ and no enriched functor structure on $R$ is needed.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.16 and the natural-transformation argument in the proof of Lemma 1.3.4.21; elementary expansion."
+   }
+  },
+  {
+   "text": "The diagram $a_P N(R):N(Q_0)\\to A$ inverts $W$ by Step 2 and the localization property of $a_P$. Apply the entire-functor-category localization property of $a_Q$ from Step 1, with target $A$. Its essential-image assertion supplies $r:B\\to A$ and a coherent natural equivalence $\\eta:r a_Q\\simeq a_P N(R)$. This is an application of [lem-coef-simplicial-model-nerve-localization] with the meaning of localization in [def-coef-coherent-localization-interface]. The functor $r$ is obtained after localization; it is not asserted to be the coherent nerve of the ordinary $R$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-coef-coherent-localization-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 1.3.4.1 and Theorem 1.3.4.20; extension across the ordinary bifibrant localization."
+   }
+  },
+  {
+   "text": "Let $q:N(\\mathcal D)\\to\\mathcal L$ be the localization. The ordinary transformation $c$, included in $\\mathcal D$, gives a transformation $qN(\\iota_PR)\\to qN(\\iota_Q)$ with components $q(c_G)$. Every component is an equivalence because $c_G\\in W$. By [lem-coef-infinity-pointwise-equivalences] it is a coherent natural equivalence. The comparison compatibilities and $\\eta$ identify its endpoints with $(\\psi_p r)a_Q$ and $\\psi_q a_Q$. Restriction along $a_Q$ identifies the entire functor category $\\operatorname{Fun}(B,\\mathcal L)$ with the full subcategory of $W$-inverting diagrams, by [lem-coef-simplicial-model-nerve-localization]. Hence these equivalent restricted objects come from equivalent objects: apply a quasi-inverse of this restriction equivalence and its unit equivalences. This gives $\\psi_p r\\simeq\\psi_q$. Whiskering by a chosen inverse of $\\psi_p$ and using its inverse equation gives $r\\simeq\\psi_p^{-1}\\psi_q=\\Phi$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-infinity-pointwise-equivalences",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 1.3.4.1 and Theorem 1.3.4.20; pointwise equivalence criterion is Kerodon Theorem 4.4.4.4 (01DK)."
+   }
+  },
+  {
+   "text": "Postcompose the explicit transformation $a_E N(\\widetilde c)$ of Step 2 with $e$. Its endpoints are exactly $e_p a_P N(R)$ and $e_q a_Q$, because $e_p,e_q$ are restrictions of the same map $e$ and the canonical ordinary-to-coherent nerve maps commute with inclusions. Its component at $G$ is $e(c_G)$, an equivalence by the stated hypothesis on $e$. Therefore [lem-coef-infinity-pointwise-equivalences] makes this a coherent natural equivalence. Whiskering $\\eta$ by $e_p$ now gives $(e_p r)a_Q\\simeq e_q a_Q$. Use the entire-functor-category localization property of $a_Q$ with target $\\mathcal T$, as in Step 4, to obtain $e_p r\\simeq e_q$. All transformations and their inverse witnesses are descended through the full coherent functor category, not merely through its ordinary homotopy category.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-infinity-pointwise-equivalences",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4 (01DK), together with HA Definition 1.3.4.1 and Theorem 1.3.4.20."
+   }
+  },
+  {
+   "text": "Postcompose $r\\simeq\\Phi$ from Step 4 by $e_p$ and combine with Step 5 to obtain $e_q\\simeq e_p\\Phi$. If $e_p$ is an equivalence, then so is $e_p\\Phi$, since $\\Phi=\\psi_p^{-1}\\psi_q$ is a composite of equivalences. Explicitly its inverse is $\\psi_q^{-1}\\psi_p e_p^{-1}$, and cancelling consecutive inverse pairs gives the two inverse equations. The natural equivalence just proved replaces $e_p\\Phi$ by $e_q$ in those equations. This proves the final clause using the quasi-inverse definition in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 1.3.4.1; formal quasi-inverse calculation completing the agent argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-model-nerve-localization",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface",
+  "lem-coef-infinity-pointwise-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Common-localization argument using Definition 1.3.4.1, Remark 1.3.4.16 and Theorem 1.3.4.20; proves the supporting comparison underlying HTT Remark 4.2.4.5. Online sources read 2026-10-17; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +132,45 @@
    "results": "{\"t\": \"2026-10-17T08:06:55Z\", \"tool\": \"leanfinder\", \"query\": \"Two simplicial model structures with the same weak equivalences give equivalent coherent nerves of bifibrant objects, and a comparison functor agrees through a natural weak equivalence of replacements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.Nerve.cosk₂Iso\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\", \"CategoryTheory.nerve.functorOfNerveMap_obj\"], \"digest\": \"6e9ced0d7f9f0f55\"}",
    "date": "2026-10-17",
    "verdict": "no match: the localization equivalences returned are for ordinary categories and do not compare coherent nerves or coherent transformations; nerve-adjunction hits concern truncations. Read Predicate.lean and Equivalence.lean; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two simplicial model structures with common weak equivalences and naturally weakly equivalent ordinary replacements induce naturally equivalent functors from bifibrant coherent nerves",
+   "results": "{\"t\": \"2026-10-17T10:12:55Z\", \"tool\": \"leanfinder\", \"query\": \"Two simplicial model structures with common weak equivalences and naturally weakly equivalent ordinary replacements induce naturally equivalent functors from bifibrant coherent nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\"], \"digest\": \"2045b306caec3d4f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; ordinary Localization.functorEquivalence (Predicate.lean:236), isoUniqFunctor (:466) and Equivalence.lean:45-63 concern ordinary categories. Truncated nerve results do not give coherent model localizations. SimplicialNerve.lean:14-34 explicitly leaves its quasicategory theorem as future work."
+  },
+  {
+   "tool": "grep",
+   "query": "functorEquivalence|isEquivalence|SimplicialNerve",
+   "results": "{\"t\": \"2026-10-17T10:13:33Z\", \"tool\": \"grep\", \"query\": \"functorEquivalence|isEquivalence|SimplicialNerve\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/Composition.lean\"], \"digest\": \"73ef00683840528f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; ordinary Localization.functorEquivalence (Predicate.lean:236), isoUniqFunctor (:466) and Equivalence.lean:45-63 concern ordinary categories. Truncated nerve results do not give coherent model localizations. SimplicialNerve.lean:14-34 explicitly leaves its quasicategory theorem as future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturally weakly equivalent replacement functors induce coherent natural equivalences on infinity localizations of simplicial model categories",
+   "results": "{\"t\": \"2026-10-17T10:13:33Z\", \"tool\": \"leansearch\", \"query\": \"Naturally weakly equivalent replacement functors induce coherent natural equivalences on infinity localizations of simplicial model categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"CategoryTheory.Functor.IsLocalization.of_equivalence_target\", \"CategoryTheory.Localization.isoUniqFunctor\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Localization.functorEquivalence\"], \"digest\": \"e720586074257760\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; ordinary Localization.functorEquivalence (Predicate.lean:236), isoUniqFunctor (:466) and Equivalence.lean:45-63 concern ordinary categories. Truncated nerve results do not give coherent model localizations. SimplicialNerve.lean:14-34 explicitly leaves its quasicategory theorem as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.functorEquivalence",
+   "results": "{\"t\": \"2026-10-17T10:13:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.functorEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.functorEquivalence\"], \"digest\": \"017a5e444b78ffaf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; ordinary Localization.functorEquivalence (Predicate.lean:236), isoUniqFunctor (:466) and Equivalence.lean:45-63 concern ordinary categories. Truncated nerve results do not give coherent model localizations. SimplicialNerve.lean:14-34 explicitly leaves its quasicategory theorem as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal infinity localization extends weak equivalence preserving replacement functors and detects natural equivalences by restriction",
+   "results": "{\"t\": \"2026-10-17T10:14:47Z\", \"tool\": \"leanfinder\", \"query\": \"Universal infinity localization extends weak equivalence preserving replacement functors and detects natural equivalences by restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\", \"CategoryTheory.Functor.IsLocalization.of_equivalences\", \"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_equivalence\"], \"digest\": \"9413a52f4741d082\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; ordinary Localization.functorEquivalence (Predicate.lean:236), isoUniqFunctor (:466) and Equivalence.lean:45-63 concern ordinary categories. Truncated nerve results do not give coherent model localizations. SimplicialNerve.lean:14-34 explicitly leaves its quasicategory theorem as future work."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-model-coherent-diagrams",
@@ -79,5 +197,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-bifibrant-comparison-common-replacement",
+  "worker": "stage1",
+  "summary": "Proved the comparison through the ordinary bifibrant localizations, without treating the ordinary replacement R as enriched. Reused the existing model-nerve-localization and pointwise-equivalence nodes; no new nodes, no statement change, no Lean attachment.",
+  "blueprint": "Realizes the common-localization supporting argument for lem-coef-simplicial-model-coherent-diagrams, serving the finite-adjunction-diagram realization beneath prop-coef-integral-exceptional-adjoint, proof paragraph 2. The six steps construct the descended comparison, identify it with Phi, and compare the two evaluation functors."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-d11e0e52f",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-d11e0e52f (reviewer sub-agent of L); spot-checked: Pass with no changes: I read the item, all six steps and the full statements of the four cited nodes. The delivery is one commit containing only the item and its report, with no new nodes. The statement and its ancestry are unchanged and not weakened. proof_deps is exactly the union of the step uses. Both statement nodes it cites (lem-coef-simplicial-model-nerve-localization and lem-coef-infinity-pointwise-equivalences) are in the item's own unit, sk-prop-sf-biduality-general; the two definition nodes are only notions, so no tool use is needed. The dependency closure (16 nodes) does not contain the item, so there is no cycle. No SGA source is cited; the HA, HTT and Kerodon sources are listed as WANTED, and proof_origin.by is agent. Mathlib searches cover LeanFinder, Loogle, grep and LeanSearch (one run recorded as unavailable, a second run executed), with verdict no match, which I agree with. Steps: (1) The canonical map from the ordinary nerve to the coherent nerve is correctly built, constant at the composite on each mapping poset. a_P and a_Q are localizations because ψ_p a_P ≃ q N(ι_P) and precomposition with ψ_p is an equivalence. (2) R preserves W by two-out-of-three applied to c_H R(f) = f c_G; c gives a functor Q_0 × [1] → E_0 with no enriched structure needed; correctly marked elementary. (3) r and η come from the essential-surjectivity clause of a_Q's localization, with target the quasicategory A; r is not claimed to be the coherent nerve of R. (4) q N(c) is a pointwise, hence coherent, equivalence; restricting along a_Q reflects equivalences, giving ψ_p r ≃ ψ_q and so r ≃ Φ. (5) e ∘ a_E N(c) has endpoints e_p a_P N(R) and e_q a_Q and components e(c_G), which are equivalences by the hypothesis on e; only T needs to be a quasicategory, never N_hc E. Descent then gives e_p r ≃ e_q. (6) Assembling these and using the quasi-inverse definition proves both conclusions. Checks: equal model structures with R = id and c = id gives e_q ≃ e_p; empty Q and terminal T are trivial; the item's one user, lem-coef-simplicial-model-coherent-diagrams step 5, satisfies every hypothesis. Minor notes, not counted as faults: the pointwise-equivalences lemma is applied to the large nerve N(Q_0), but the item states nested universes, that lemma's proof does not depend on size, and the localization node itself uses functor categories on large nerves. Separately, the item lacks a lean_audit field, which predates this delivery (Q49 created it)."
  }
 }

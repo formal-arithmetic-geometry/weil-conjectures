@@ -11,9 +11,56 @@
   "def-weil-abstract-derived-category",
   "lem-coef-dg-model-mapping-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the tensor consequences of the stated axioms. A left adjoint preserves initial objects, so $H$ sends cofibrant objects to cofibrant objects. Since tensoring has a right adjoint, $0\\otimes X$ and $X\\otimes0$ are initial. The pushout product of $0\\to K$ with $i$ is therefore $K\\otimes i$ (or $i\\otimes K$); for cofibrant $K$, both tensor functors preserve cofibrations and trivial cofibrations. Taking $i=0\\to L$ also shows that $K\\otimes L$ is cofibrant when $K,L$ are cofibrant. For a weak equivalence $f:X\\to Y$ between cofibrant objects, apply [lem-coef-brown-split-factorizations] to obtain $pi=f$ and $ps=1_Y$, with $i,s$ cofibrations and $p$ a trivial fibration. Two-out-of-three makes $i,s$ trivial cofibrations. For either tensor functor $T$, $T(i),T(s)$ are weak equivalences; $T(p)T(s)=1$ makes $T(p)$ a weak equivalence, and $T(f)=T(p)T(i)$ is one too. This is a direct two-out-of-three deduction from the cited factorization statement, not an extra preservation assertion attributed to it.",
+   "uses": [
+    "lem-coef-brown-split-factorizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, monoidal derived-unit condition: transport of unit-cube edges after applying a strong monoidal left Quillen functor."
+   }
+  },
+  {
+   "text": "Put $A=H(Q\\mathbf1_{\\mathcal M})$ and choose a trivial fibration $q_{\\mathcal N}:U\\to\\mathbf1_{\\mathcal N}$ with $U$ cofibrant by factoring the initial map. Step 1 makes $A$ cofibrant. The lifting axiom applied to $0\\to A$ and $q_{\\mathcal N}$ gives $s:A\\to U$ with $q_{\\mathcal N}s=v$. Since $q_{\\mathcal N}$ and $v$ are weak equivalences, so is $s$. Both ends of $s$ are cofibrant, so step 1 shows that $s\\otimes K$ and $K\\otimes s$ are weak equivalences for cofibrant $K$. The assumed target unit axiom gives the same for $q_{\\mathcal N}\\otimes K$ and $K\\otimes q_{\\mathcal N}$. If the axiom is read as given only for one cofibrant replacement $t:U'\\to\\mathbf1_{\\mathcal N}$, lift $0\\to U'$ against $q_{\\mathcal N}$ to $u:U'\\to U$ with $q_{\\mathcal N}u=t$; $u$ is a weak equivalence between cofibrant objects by two-out-of-three, so $u\\otimes K$ and $K\\otimes u$ are weak equivalences by step 1, and two-out-of-three applied to $(q_{\\mathcal N}\\otimes K)(u\\otimes K)=t\\otimes K$ and its mirror gives the claim for $q_{\\mathcal N}$. The composites $(q_{\\mathcal N}\\otimes K)(s\\otimes K)$ and $(K\\otimes q_{\\mathcal N})(K\\otimes s)$ are $v\\otimes1_K$ and $1_K\\otimes v$. Composing with the unit isomorphisms proves both displayed assertions. No cofibrancy of either monoidal unit is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, monoidal derived-unit condition: transport of unit-cube edges after applying a strong monoidal left Quillen functor."
+   }
+  },
+  {
+   "text": "Fix any cube edge. Iterating the specified tensor comparisons identifies its image with a tensor word containing exactly one map $v:A\\to\\mathbf1_{\\mathcal N}$ and identities on all other factors. Erase the other unit factors by the unitors, and reassociate the remaining factors on each side of this occurrence; the two resulting blocks $L,R$, when nonempty, are cofibrant by step 1. If both blocks occur, the edge becomes $1_L\\otimes(v\\otimes1_R)$. By step 2 the inner map is a weak equivalence between the cofibrant objects $A\\otimes R$ and $\\mathbf1_{\\mathcal N}\\otimes R\\cong R$, so the tensor-preservation deduction from [lem-coef-brown-split-factorizations] in step 1 applies once more to $L\\otimes-$. If exactly one block occurs, step 2 applies directly. If neither occurs, the edge is $v$, which is a weak equivalence by hypothesis. Conjugating by the associators and unitors preserves weak equivalences. This treats every partially replaced vertex, including a word consisting entirely of unit replacements, without treating an empty block as a cofibrant unit or permuting factors.",
+   "uses": [
+    "lem-coef-brown-split-factorizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, monoidal derived-unit condition: transport of unit-cube edges after applying a strong monoidal left Quillen functor."
+   }
+  },
+  {
+   "text": "The comparisons identify the actual edge maps, not just their endpoints: naturality of the binary tensor comparison gives $H(f\\otimes g)$ as the conjugate of $H(f)\\otimes H(g)$, and iteration gives the same identity for the finite word, with $H(q)$ followed by the unit comparison equal to $v$. For distinct replacement positions the two orders agree by the bifunctor identity $(f\\otimes1)(1\\otimes g)=f\\otimes g=(1\\otimes g)(f\\otimes1)$, inserted in the word. Naturality of associators and unitors then makes every replacement square with a change of brackets or removal of a unit commute. The stipulated associativity and unit diagrams of the strong monoidal functor identify these squares before and after $H$. When $H$ is symmetric monoidal its stipulated symmetry diagram, together with naturality of the braiding, gives the same assertion for the symmetry faces. These are precisely the coherence diagrams required in the conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, monoidal derived-unit condition: transport of unit-cube edges after applying a strong monoidal left Quillen functor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-brown-split-factorizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, monoidal derived-unit condition: transport of unit-cube edges after applying a strong monoidal left Quillen functor."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +103,45 @@
    "results": "0 hits: ",
    "date": "2026-10-17",
    "verdict": "no match: inspected results supply ordinary model, monoidal or categorical mate infrastructure, not this model-enriched statement with its stated hypotheses and coherent conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*axiom|tensor.*unit|strong.*monoidal [Mathlib/CategoryTheory]",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal unit and localization infrastructure or ordinary cofibrant model objects do not supply the monoidal model unit-axiom transport asserted here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a monoidal model category a weak equivalence from a cofibrant object to the tensor unit tensors with every cofibrant object to a weak equivalence",
+   "results": "OK 8 hits: CategoryTheory.MonoidalCategoryStruct.tensorUnit, CategoryTheory.MonoidalCategory.tensorUnitLeft, HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff, CategoryTheory.Monoidal.transportStruct_tensorUnit, HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff, CategoryTheory.MonoidalCategory.tensor_left_iff, CategoryTheory.Mon.mon, CategoryTheory.MonoidalCategoryStruct.leftUnitor",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal unit and localization infrastructure or ordinary cofibrant model objects do not supply the monoidal model unit-axiom transport asserted here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory tensorUnit IsIso weak equivalence cofibrant",
+   "results": "OK 0 hits: ; loogle: Unknown identifier `tensorUnit`",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal unit and localization infrastructure or ordinary cofibrant model objects do not supply the monoidal model unit-axiom transport asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal left Quillen functor sends a cofibrant unit replacement to a weakly equivalent target unit and tensors that weak equivalence with cofibrant objects",
+   "results": "OK 8 hits: SSet.hoFunctor.unitHomEquiv_eq, CategoryTheory.Localization.Monoidal.ε', HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism, CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_ε, CategoryTheory.Monoidal.InducingFunctorData.leftUnitor_eq, CategoryTheory.Monoidal.InducingFunctorData.εIso, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_hom, CategoryTheory.Functor.Monoidal.whiskerLeft_ε_η",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal unit and localization infrastructure or ordinary cofibrant model objects do not supply the monoidal model unit-axiom transport asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product unit axiom in a closed monoidal model category for a weak equivalence from a cofibrant object to the unit",
+   "results": "OK 8 hits: HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans, HomotopicalAlgebra.CofibrantObject.localizerMorphism, CategoryTheory.unitClosed, HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj, HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization, HomotopicalAlgebra.BifibrantObject.homMk_homMk, HomotopicalAlgebra.CofibrantObject.homMk_id, HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal unit and localization infrastructure or ordinary cofibrant model objects do not supply the monoidal model unit-axiom transport asserted here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-derived-quillen-calculus",
@@ -80,5 +162,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-monoidal-unit-image",
+  "worker": "stage1",
+  "summary": "Q39 resumed the retained split against the current repository without changing the statement or ancestry. Expanded Brown tensor preservation into its split-factorization and two-out-of-three argument, derived tensor cofibrancy from the pushout-product axiom, and treated both blocks around an interior unit edge explicitly. The target-unit lift proves both tensor orientations without assuming a cofibrant unit; finite unit-only words use the assumed weak equivalence v. Naturality and the stipulated monoidal diagrams give the cube and coherence identities. No new nodes or Mathlib leaves are introduced.",
+  "blueprint": "Realizes the monoidal derived-unit transport paragraph in prop-coef-integral-exceptional-adjoint, specifically the assertion that strong monoidal images of unit-replacement cubes have weak-equivalence edges and inherited coherence."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-50e742225",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-50e742225 (reviewer sub-agent of L); spot-checked: I read the whole item (statement and steps 1-4), the statements of the cited nodes lem-coef-brown-split-factorizations, lem-coef-dg-model-mapping-comparison and def-weil-abstract-derived-category, the step of the consumer lem-coef-dg-derived-quillen-calculus that cites this item, paragraph 2 of the proof of master prop-coef-integral-exceptional-adjoint, and Mathlib BrownLemma.lean:40-90. The statement is unchanged and not weakened. Its extra assumption that v is a weak equivalence is needed and matches the consumer's derived-unit condition. Step 1 is correct: initial objects tensor to initial objects, the pushout product with 0->K equals K tensor i, and the Brown factorization (pi=f, ps=1) plus two-out-of-three gives the result. It uses only Brown's statement, and Brown's hypotheses are supplied by the model axioms. Step 3's cases with two blocks, one block and no block are correct. It assumes no cofibrant unit and no symmetry. Step 4 is honest naturality bookkeeping. Small cases tested: a word that is a single replacement, a word of units only, a replacement at an end, an interior replacement, a zero factor, and Ch(R) with H the identity. No duplicate in the DAG. The only proof dependency is a Mathlib leaf in the same unit, so the route is fine and no tool_uses are needed. No new nodes and no SGA source. One repair: the unit axiom says 'for a cofibrant replacement t', and step 2 used the replacement q_N that it chose itself. The corrected item file at fixes/dag/nodes/sec-six-functors/lem-coef-dg-monoidal-unit-image.json changes only step 2's text. It adds the reduction from any single replacement t to q_N: lift t to u:U'->U, which is a weak equivalence between cofibrant objects, then apply step 1 and two-out-of-three. It also names the composites explicitly. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
