@@ -126,7 +126,8 @@ lemma derivedExtendScalarsComp_assoc (X : DerivedCategory (ModuleCat.{u + 1} A))
     (Ef.mapDerivedCategoryFactors.hom.app K)
   dsimp only at h₁ h₂ h₃ h₄
   have n₂ := Eh.mapDerivedCategoryFactors_hom_naturality
-    ((NatTrans.mapHomologicalComplex (extendScalarsComp.{u + 1, u + 1} f g).hom (ComplexShape.up ℤ)).app K)
+    ((NatTrans.mapHomologicalComplex (extendScalarsComp.{u + 1, u + 1} f g).hom
+      (ComplexShape.up ℤ)).app K)
   simp only [τ₁, τ₂, Ψ, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
   have e₁ : (derivedExtendScalarsComp g h hg hh hhg).hom.app

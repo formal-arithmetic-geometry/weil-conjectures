@@ -45,8 +45,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- Any ring morphism between fields is flat. -/
 lemma flat_of_field {K L : Type*} [Field K] [CommRing L] (f : K →+* L) : f.Flat := by
-  letI := f.toAlgebra
-  show Module.Flat K L
+  let _ : Algebra K L := f.toAlgebra
+  change Module.Flat K L
   infer_instance
 
 /-- The ring map `E ⟶ F` between the universe `u + 1` copies of finite subextensions
@@ -161,6 +161,14 @@ theorem fdCocone_homInj : (fdCocone.{u} ℓ).HomInj := by
       (congr_arg (fun t ↦ t.hom) h)
   rw [this]
 
+/-- Scalars pass through a conjugation in `D(ℚ̄_ℓ)`. -/
+private lemma smul_comp_comp_eq (c : ULift.{u + 1} (PadicAlgCl ℓ))
+    {X Y X' Y' : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl ℓ)))}
+    (g : X' ⟶ X) (φ : X ⟶ Y) (h : Y ⟶ Y') : c • (g ≫ φ ≫ h) = g ≫ (c • φ) ≫ h := by
+  rw [Linear.smul_comp, Linear.comp_smul]
+
+set_option maxHeartbeats 400000 in
+-- the iso coherences between the derived extensions of scalars are expensive to elaborate
 /-- **(Hom), surjectivity**: every morphism between extensions of scalars to `ℚ̄_ℓ` is defined
 over a finite subextension. -/
 theorem fdCocone_homSurj : (fdCocone.{u} ℓ).HomSurj := by
@@ -199,13 +207,37 @@ theorem fdCocone_homSurj : (fdCocone.{u} ℓ).HomSurj := by
         (stageCompIso ℓ hmL).app ((stageDerived ℓ hj).obj y.obj)) =
       ((stageCompIso ℓ (hj.trans hmL)).app y.obj ≪≫
         (algClDerived ℓ L).mapIso ((stageStageIso ℓ hj hmL).app y.obj)))).symm
-  have Knat (φ : x'.obj ⟶ y'.obj) : (algClDerived ℓ L).map ((stageDerived ℓ hmL).map φ) =
-      (stageCompIso ℓ hmL).inv.app x'.obj ≫ (algClDerived ℓ m).map φ ≫
-        (stageCompIso ℓ hmL).hom.app y'.obj := by
-    rw [← cancel_epi ((stageCompIso ℓ hmL).hom.app x'.obj), Iso.hom_inv_id_app_assoc]
+  have Knat {X Y : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} m.1))} (φ : X ⟶ Y) :
+      (algClDerived ℓ L).map ((stageDerived ℓ hmL).map φ) =
+      (stageCompIso ℓ hmL).inv.app X ≫ (algClDerived ℓ m).map φ ≫
+        (stageCompIso ℓ hmL).hom.app Y := by
+    rw [← cancel_epi ((stageCompIso ℓ hmL).hom.app X), Iso.hom_inv_id_app_assoc]
     exact ((stageCompIso ℓ hmL).hom.naturality φ).symm
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% K1x, K1y]
-  done
+  have : (algClDerived ℓ L).Additive := by unfold algClDerived; infer_instance
+  have key : (∑ p : s, p.1.1 • (algClDerived ℓ m).map p.1.2 :
+      (algClDerived ℓ m).obj x'.obj ⟶ (algClDerived ℓ m).obj y'.obj) =
+      (stageCompIso ℓ hi).inv.app x.obj ≫ f.hom ≫ (stageCompIso ℓ hj).hom.app y.obj :=
+    hf'.symm.trans ef'
+  have hsum : (algClDerived ℓ L).map (∑ p : s, a p • (stageDerived ℓ hmL).map p.1.2) =
+      (stageCompIso ℓ hmL).inv.app x'.obj ≫
+        (∑ p : s, p.1.1 • (algClDerived ℓ m).map p.1.2) ≫
+          (stageCompIso ℓ hmL).hom.app y'.obj := by
+    refine ((algClDerived ℓ L).map_sum ..).trans ?_
+    refine Eq.trans ?_ (congrArg (fun t ↦ (stageCompIso ℓ hmL).inv.app x'.obj ≫ t)
+      (Preadditive.sum_comp ..)).symm
+    refine Eq.trans ?_ (Preadditive.comp_sum ..).symm
+    refine Finset.sum_congr rfl fun p _ ↦ (algClDerived_map_smul ℓ L (a p) _).trans ?_
+    refine (congrArg (fun t ↦ toAlgCl ℓ L (a p) • t) (Knat p.1.2)).trans ?_
+    exact (congrArg (· • _) (ha p)).trans (smul_comp_comp_eq ℓ _ _ _ _)
+  have hM := hsum.trans (congrArg (fun t ↦
+    (stageCompIso ℓ hmL).inv.app x'.obj ≫ t ≫
+      (stageCompIso ℓ hmL).hom.app y'.obj) key)
+  refine Eq.trans ?_ (congrArg (fun t ↦ (stageCompIso ℓ hi).hom.app x.obj ≫
+    (stageCompIso ℓ hmL).hom.app x'.obj ≫ t ≫ (stageCompIso ℓ hmL).inv.app y'.obj ≫
+        (stageCompIso ℓ hj).inv.app y.obj) hM).symm
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
+  exact (Category.comp_id f.hom).symm
 
 end PadicAlgCl

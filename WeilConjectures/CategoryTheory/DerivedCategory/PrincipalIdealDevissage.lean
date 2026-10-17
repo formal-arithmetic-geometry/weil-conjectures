@@ -108,9 +108,10 @@ instance : (boundedFiniteCohomology R).IsTriangulated where
   isStableUnderShiftBy a := ⟨fun X hX ↦ ⟨TStructure.t.bounded.le_shift a X hX.1, fun n ↦ by
     have := hX.2 (a + n)
     exact Module.Finite.equiv (M := (homologyFunctor (ModuleCat.{u + 1} R) (a + n)).obj X)
-      (((homologyFunctor (ModuleCat.{u + 1} R) 0).shiftIso a n (a + n) rfl).app X).symm.toLinearEquiv⟩⟩
-  toIsTriangulatedClosed₂ := .mk' fun T hT h₁ h₃ ↦ ⟨TStructure.t.bounded.ext_of_isTriangulatedClosed₂
-    T hT h₁.1 h₃.1, fun n ↦ by
+      (((homologyFunctor (ModuleCat.{u + 1} R) 0).shiftIso a n (a + n) rfl).app
+        X).symm.toLinearEquiv⟩⟩
+  toIsTriangulatedClosed₂ := .mk' fun T hT h₁ h₃ ↦
+    ⟨TStructure.t.bounded.ext_of_isTriangulatedClosed₂ T hT h₁.1 h₃.1, fun n ↦ by
       have := h₁.2 n
       have := h₃.2 n
       exact moduleFinite_of_exact (f := ((homologyFunctor (ModuleCat.{u + 1} R) n).map T.mor₁).hom)

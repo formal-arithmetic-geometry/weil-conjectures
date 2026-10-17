@@ -44,7 +44,8 @@ noncomputable abbrev fieldExtendScalars :
 
 lemma fieldExtendScalars_map_smul (c : F) {X Y : DerivedCategory (ModuleCat.{u + 1} F)}
     (f : X ⟶ Y) :
-    (fieldExtendScalars F F').map (c • f) = algebraMap F F' c • (fieldExtendScalars F F').map f := by
+    (fieldExtendScalars F F').map (c • f) =
+      algebraMap F F' c • (fieldExtendScalars F F').map f := by
   rw [show c • f = (c • 𝟙 X) ≫ f by rw [Linear.smul_comp, Category.id_comp], Functor.map_comp,
     derivedExtendScalars_map_smul_id, Linear.smul_comp, Category.id_comp]
 
