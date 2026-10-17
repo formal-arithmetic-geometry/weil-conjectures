@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-marked-point-cartesian-model"
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-relative-cartesian-model"
  ],
  "proof": [
   {
@@ -230,5 +231,28 @@
   "group": "Q153",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-8865c0c08 (reviewer sub-agent of L); spot-checked: Read the item in full: its statement, all six steps, the split_report and the report. The statement and stmt_deps are byte-identical to the live and side copies, where the node is still unsplit. Only the proof fields changed, and there are no new nodes. I read both cited statements in full. def-cbc-enhanced-diagrams-cones supplies the degreewise products, Delta^n operators and parameter-restriction convention used in Steps 1, 2, 4 and 5. lem-coef-marked-point-cartesian-model is used only for its definitions of marked sets, marked maps, coordinatewise product marking and flat/sharp markings, in Steps 1, 3 and 6. I accept its declared tool_use because the statement already cited it and no node of unit sk-prop-sf-cbc defines marked simplicial sets. I checked the source in a local HTT copy at section 3.1.3, printed p.154, just before Remark 3.1.3.1. Its Map^flat_S and Map^sharp_S conventions match the item's definitions. The Phi_H construction is correctly marked as agent-written. I verified every step: restriction keeps flat and sharp markings; b(u,v)=a(H(u,tau v),v) is simplicial; for a marked edge (e,d), tau(d) is degenerate, so the image is marked and the map lies over S; parameter naturality holds; the endpoints are h_i^* and the component at a is a∘H via (s_0 a, id); with a sharp H, a∘H lies in Map^sharp_S(U,W)_1. Small cases checked: k=0, a constant H, empty U or W, and the flat-vs-sharp example V=W=(Delta^1)^flat with H=id, where the sharp clause is correctly not claimed. The parent lem-cbc-marked-mapping-simplex-descent uses the lemma in Steps 8-10 exactly as stated, since F_S(X,Z) there equals Map^flat_S(X,Z^natural). Closest possible duplicate: lem-coef-infinity-homotopy-precomp-equivalence. It is unmarked, not relative to S, and has a different hypothesis and conclusion, so it is not a duplicate. There is no SGA citation and this is not a target node. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedHomotopyPrecomposition",
+  "declaration": "SSet.Marked.Over.marked_homotopy_precomposition",
+  "declarations": [
+   "SSet.Marked.Over.mapFlatVertex",
+   "SSet.Marked.Over.marked_homotopy_precomposition"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedHomotopyPrecomposition.lean",
+  "statement": "theorem marked_homotopy_precomposition {S : SSet.{u}} (U V W : Over S) (h₀ h₁ : U ⟶ V) (H : (productLeft U).obj (flat (Δ[1] : SSet.{u})) ⟶ V) (endpoints : ∀ (i : Fin 2) (n : SimplexCategoryᵒᵖ) (x : U.left.underlying.obj n), H.left.val.app n (x, stdSimplex.const 1 i n) = (if i = 0 then h₀ else h₁).left.val.app n x) : ∃ Φ : mapFlat V W ⊗ (Δ[1] : SSet.{u}) ⟶ mapFlat U W, (∀ (n m : SimplexCategoryᵒᵖ) (a : (mapFlat V W).obj n) (τ : (Δ[1] : SSet.{u}).obj n) (x : U.left.underlying.obj m) (v : (stdSimplex.obj n.unop).obj m), (Φ.app n (a, τ)).left.val.app m (x, v) = a.left.val.app m (H.left.val.app m (x, (yonedaEquiv.symm τ).app m v), v)) ∧ (∀ (i : Fin 2) (n : SimplexCategoryᵒᵖ) (a : (mapFlat V W).obj n), Φ.app n (a, stdSimplex.const 1 i n) = productMapLeft (if i = 0 then h₀ else h₁) (flat (stdSimplex.obj n.unop)) ≫ a) ∧ (∀ a : V ⟶ W, (Φ.app _ ((mapFlat V W).σ 0 (mapFlatVertex a), yonedaEquiv (𝟙 (Δ[1] : SSet.{u})))).left.val = H.left.val ≫ a.left.val) ∧ ((∀ (e : U.left.underlying _⦋1⦌), e ∈ U.left.marking → ∀ d : (Δ[1] : SSet.{u}) _⦋1⦌, H.left.val.app _ (e, d) ∈ V.left.marking) → ∀ a : V ⟶ W, ∃ b : (mapSharp U W) _⦋1⦌, b.left.val = (Φ.app _ ((mapFlat V W).σ 0 (mapFlatVertex a), yonedaEquiv (𝟙 (Δ[1] : SSet.{u})))).left.val)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed relative marked mapping objects, adding their owning node to stmt_deps. The sole helper embeds an ordinary marked map as a flat vertex. The existential map is completely specified by the degreewise formula; no object is chosen from an unproved existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7abdaadc6",
+  "group": "NK",
+  "result": "pass",
+  "note": "The Lean statement matches the node clause by clause: S : SSet.{u}; U,V,W : Over (sharp S); h0,h1; H : productLeft U (flat Δ1) ⟶ V with an exact endpoint hypothesis; ∃Φ : mapFlat V W ⊗ Δ1 ⟶ mapFlat U W determined uniquely by the degreewise formula a(H(x,τ v),v); endpoints equal productMapLeft h_i ≫ a; the component at a vertex is H≫a; the sharp clause (H marks every (e,d)) gives b ∈ mapSharp U W _1. The statement is mathematically true. No extra assumptions or universe restriction; edge cases (empty sets, n=0, degenerate τ, non-sharp H) are covered. Reuses the landed Over.mapFlat/mapSharp/productLeft/productMapLeft; the one new helper, mapFlatVertex, has real data and duplicates nothing. The added stmt_dep lem-coef-marked-relative-cartesian-model is landed with a lean record and creates no cycle (allowed by §5). lean.statement matches the file verbatim; docstrings carry the source place, blueprint id and all six proof steps; only sorry. nt_compile --json with the side overlay: 9.8 s, exit 0, no errors or warnings. Cosmetic only: one garbled source phrase in the worker report."
  }
 }
