@@ -26,7 +26,8 @@
   "place": "Dual of Proposition 4.6.11, using the overcategory form of the local-constancy test in Lemma 4.6.9; applied to nerves of ordinary categories, since the nerve of a discrete fibration is a right fibration. Compare Corollary 4.6.12. Online PDF read on 2026-10-17; local archival copy WANTED. No Stacks tag states this result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-discrete-fibration"
  ],
  "proof": [
   {
@@ -346,5 +347,33 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-cf7440b4d (reviewer sub-agent of L); spot-checked: I read every step and the full statements of all ten cited nodes. The item is Cisinski Prop. 4.6.11 dualised to overcategories, and its statement is unchanged. The source is not in the literature folder and is correctly listed as WANTED. Step 2: I redid the unique-lift calculation; (pi down d) is isomorphic to (U down Vd), compatibly with transition maps, so pi inherits the Quillen B hypothesis. Step 3: Sing|-| is Kan by the horn-pair retraction, and its unit is weak for every simplicial set. Step 4: the naturality square (F=a, G=V) gives exactly Phi_d and the strict-square fiber map. Step 5: Q is the pullback of the path fibration, so it is Kan. I checked that the min/max homotopy is made of monotone maps of [n]x[1], with correct endpoints h_z and j_z g_z. The cylinder projection is weak by the simplicial homotopy-equivalence lemma. Step 6: every singular vertex has a straight-segment edge to an object vertex. Realizations of Kan fibrations over Delta^1 are Serre fibrations (non-Kan base allowed), and the exact sequence over [0,1] gives the endpoint inclusions, empty fibers included. Step 7: fiber detection with X,Q,Z,Z Kan, v=id and a constant homotopy. The new node lem-coef-quillen-b-comma-homotopy-fiber is the classical point form of Theorem B. I tested it on E=* -> BG (discrete G = Omega BG) and on empty comma categories, and checked the path direction against the def-cbc homotopy-fiber convention. It is self-contained, statement-only, and strictly weaker than the item (it follows from the item applied to B/b -> B), not a restated clause. Whoever later splits it must avoid the route through the downstream Kan theorem. A DAG-wide grep for Quillen/Theorem B/4.6.11-12/discrete fibration/comma found no duplicate; I read the aspherical-base-change, special-resolutions, equifibered-diagonal and arrow-source-fibers candidates. No cycle: the dependency closure has 67 nodes and does not contain the item. The blueprint ancestor and via chain are correct, and the unit has no steps. I accept the three declared off-unit cbc tools (realization-singular-unit-weak, right-fibration-space-fiber, simplicial-homotopy-equivalence-weak) for the maintainer to record in tool_uses. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.QuillenBDiscreteFibrationBaseChange",
+  "declaration": "SSet.Enhanced.quillenB_discreteFibration_baseChange",
+  "file": "lean/Sheaf/CategoryTheory/QuillenBDiscreteFibrationBaseChange.lean",
+  "statement": "theorem quillenB_discreteFibration_baseChange {E D B : Cat.{u, u}} (U : E ⟶ B) (V : D ⟶ B) (hU : ∀ (b₀ b₁ : B) (β : b₀ ⟶ b₁), IsWeakHomotopyEquivalence (nerveMap (CostructuredArrow.map (S := U.toFunctor) β))) (hV : V.toFunctor.IsDiscreteFibration) : IsWeakHomotopyEquivalence (quillenBBaseChangeComparison U V) ∧ ∀ (E' D' B' : Cat.{u, u}) (U' : E' ⟶ B') (V' : D' ⟶ B'), (∀ (b₀ b₁ : B') (β : b₀ ⟶ b₁), IsWeakHomotopyEquivalence (nerveMap (CostructuredArrow.map (S := U'.toFunctor) β))) → V'.toFunctor.IsDiscreteFibration → ∀ (a : E ⟶ E') (b : D ⟶ D') (c : B ⟶ B') (hu : U ≫ c = a ≫ U') (hv : V ≫ c = b ≫ V'), ∃ t : quillenBPathPullback U V ⟶ quillenBPathPullback U' V', t ≫ quillenBPathFst U' V' = quillenBPathFst U V ≫ quillenBNerveFunctor.map a ∧ t ≫ quillenBPathSnd U' V' = quillenBPathSnd U V ≫ quillenBNerveFunctor.map b ∧ t ≫ quillenBPathEdge U' V' = quillenBPathEdge U V ≫ (ihom Δ[1]).map (quillenBNerveFunctor.map c) ∧ quillenBNerveFunctor.map (pullback.map U V U' V' a b c hu hv) ≫ quillenBBaseChangeComparison U' V' = quillenBBaseChangeComparison U V ≫ t",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.quillenBNerveFunctor",
+   "SSet.Enhanced.quillenBPathPullback",
+   "SSet.Enhanced.quillenBPathFst",
+   "SSet.Enhanced.quillenBPathSnd",
+   "SSet.Enhanced.quillenBPathEdge",
+   "SSet.Enhanced.quillenBBaseChangeComparison",
+   "SSet.Enhanced.quillenB_discreteFibration_baseChange"
+  ],
+  "note": "Uses the actual Cat pullback, the explicit Sing-realized nerve and constant-path comparison. Naturality specifies all three path-model coordinates and the comparison equation. Generic path-pullback modules are downstream of this item, so the specialized helpers are built directly from Mathlib pullbacks and the recorded endpoints without importing those modules."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8633a499",
+  "group": "NY",
+  "result": "pass",
+  "note": "Item node differs from the side clone only in lean and stmt_deps (adds the new def-coef-discrete-fibration); lean.statement matches both files exactly. Every clause checked: CostructuredArrow comma in the over direction, hU over all arrows, strict Cat pullback, Sing|N| replacement, path model with ev0 on the E side and ev1 on the D side matching def-cbc, actual constant-path comparison, naturality t uniquely fixed by its three coordinate equations. IsDiscreteFibration is a genuine definition with unique Sigma-pair lifts; no duplicate in Mathlib, side Lean or slopmaster2. Edge cases (empty D, B, E; point over BG with a G-set) fine. Cat.{u,u} is the standard small-category convention. Docstrings complete; the only sorry is the item theorem; report sections present. nt_compile.py --json on both files exited 0 with no diagnostics, twice. No findings."
  }
 }

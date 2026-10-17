@@ -199,5 +199,23 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-5b31c5ca9 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited node statement, and Joyal–Tierney (arXiv math/0607820, fetched PDF), Thm 1.9 and Prop 1.13. Prop 1.13 says a mid fibration between quasicategories is a quasi-fibration iff it has RLP against {0}⊂J. The item states this faithfully: both quasicategories, full nerve J, no surjectivity. Statement unchanged. Steps 1-3 are correct. Step 1: the contraction k gives a natural iso h(cE)≅1, so u0 is a trivial cofibration. Step 2: v:Δ1→J is mono and a simplicial homotopy equivalence, hence a Kan trivial cofibration (accepted tool use of lem-cbc-simplicial-homotopy-equivalence-weak). Step 3: D^≃ is Kan, the exact edge extends over J and the u0 lift gives prescribed-source equivalence lifting, so p is an isofibration. The retract argument of Steps 4-6 (factorization, relative cylinder, exponential-corner correction r→r') is also correct; I checked every hypothesis. But it re-proves the converse of clause (1) of the existing split node lem-coef-joyal-quasicategory-characterizations in the same unit, and that node's closure does not contain the item, so there is no cycle. FIX: Steps 1-3 kept verbatim; Steps 4-6 replaced by one step citing that clause, with its hypotheses checked. proof_deps updated: lem-coef-relative-categorical-cylinder-criterion dropped, the characterizations node added. proof_origin.place and split_report.summary noted. No duplicate of the item itself: interval-boundary-tests uses a finite J and different tests. Edge cases checked: empty Q, a point into a discrete two-point set, a point into J, and Q'=∗. No new nodes, no SGA. Details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.JoyalWalkingIsomorphismFibrationTest",
+  "declaration": "SSet.joyal_walking_isomorphism_fibration_test",
+  "file": "lean/Sheaf/AlgebraicTopology/JoyalWalkingIsomorphismFibrationTest.lean",
+  "statement": "theorem joyal_walking_isomorphism_fibration_test (M : HomotopicalAlgebra.ModelCategory SSet.{u}) (hcof : ∀ {A B : SSet.{u}} (i : A ⟶ B), M.categoryWithCofibrations.cofibrations i ↔ ∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) (hweak : ∀ {A B : SSet.{u}} (i : A ⟶ B), M.categoryWithWeakEquivalences.weakEquivalences i ↔ ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map i)).app C)).toFunctor).IsEquivalence) {Q Q' : SSet.{u}} [Quasicategory Q] [Quasicategory Q'] (p : Q ⟶ Q') : M.categoryWithFibrations.fibrations p ↔ innerHornInclusions.rlp p ∧ HasLiftingProperty (SSet.const (X := SSet.stdSimplex.obj ⦋0⦌) SSet.coherentIso.x₀) p",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7001a8f74",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps (Joyal model-structure Lean signature), the source Joyal–Tierney Prop 1.13, the module, report and node record. The Lean has the same hcof/hweak interface as exists_joyal_model_structure and joyal_quasicategory_characterizations, Q Q' : SSet.{u} quasicategories, and the conclusion fibrations p ↔ innerHornInclusions.rlp p ∧ HasLiftingProperty (const coherentIso.x₀) p. coherentIso is the nerve of Codiscrete (ULift Bool), the full walking-isomorphism nerve. No surjectivity clause, strict lifts, universes u and v bound and unrestricted. Edge cases checked: empty Q or Q', point into a discrete two-point set, x₀ into J, point target. Statement verbatim, node differs only in its lean field, docstrings carry the source, blueprint tag and 4 proof steps, sorry only, no definitions, no duplicate. Worker report and second reading present. nt_compile.py --json on the snapshot module: exit 0, no warnings. No findings."
  }
 }

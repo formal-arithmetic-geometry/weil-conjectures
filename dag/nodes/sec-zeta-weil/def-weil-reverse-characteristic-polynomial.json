@@ -72,5 +72,23 @@
   "by": "L",
   "result": "pass",
   "note": "Mathlib leaf created by the split of def-weil-smooth-proper-cohomological-family; the match was verified by the lead against the Mathlib source at that item's review"
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix",
+  "declaration": "LinearMap.charpolyRev",
+  "statement": "noncomputable def charpolyRev (f : M →ₗ[R] M) : R[X]",
+  "branch": "slopmaster2",
+  "by": "Q64",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The recorded Mathlib match `Matrix.charpolyRev` is matrix-specialized, while this dependency states the basis-free endomorphism construction on a finite-dimensional vector space. The published slopmaster2 module provides the exact notion as `LinearMap.charpolyRev`; its docstring identifies it with det (1 - T F) and with the reverse characteristic polynomial."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c6ae8ac9",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: K field, V finite-dimensional (independent universes), F endomorphism, P = F.charpolyRev (upstream WeilConjectures LinearMap.charpolyRev := charpoly.reverse, documented as det(1 - tF)); coeff 0 = 1; natDegree <= finrank; coeff at finrank = (-1)^n det F; IsUnit F gives full degree and leading coefficient; not IsUnit F gives natDegree < finrank. No added hypotheses. Edge cases n=0, F=0, id and char 2 checked; statement true by upstream lemmas plus coeff_reverse and reverse_natDegree. Source sentence (order 2856) matches. Dependency def-weil-reverse-characteristic-polynomial: lean-only existing:true repair with lean.note, signature verbatim, no other field changed. Item lean.statement verbatim. Docstrings carry source place, blueprint id and the six steps; no defs; sorry only; lines <= 100. Report has Worker report, Dependency modules, Second reading by Q64. One commit, four files; snapshot matches the commit. nt_compile.py --json on the snapshot module: exit 0, no errors or warnings, 1.2 s. No findings."
  }
 }

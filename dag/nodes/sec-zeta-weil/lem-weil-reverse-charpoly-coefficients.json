@@ -173,5 +173,23 @@
   "result": "pass"
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-def-cohfamily"
+ "unit": "sk-def-cohfamily",
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.ReverseCharpolyCoefficients",
+  "declaration": "LinearMap.charpoly_reverse_coefficients",
+  "file": "lean/Sheaf/LinearAlgebra/ReverseCharpolyCoefficients.lean",
+  "statement": "theorem charpoly_reverse_coefficients {K : Type u} [Field K] {V : Type v} [AddCommGroup V] [Module K V] [FiniteDimensional K V] (F : V →ₗ[K] V) : F.charpolyRev.coeff 0 = 1 ∧ F.charpolyRev.natDegree ≤ Module.finrank K V ∧ F.charpolyRev.coeff (Module.finrank K V) = (-1 : K) ^ Module.finrank K V * LinearMap.det F ∧ (IsUnit F → F.charpolyRev.natDegree = Module.finrank K V ∧ F.charpolyRev.leadingCoeff = (-1 : K) ^ Module.finrank K V * LinearMap.det F) ∧ (¬ IsUnit F → F.charpolyRev.natDegree < Module.finrank K V)",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c6ae8ac9",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: K field, V finite-dimensional (independent universes), F endomorphism, P = F.charpolyRev (upstream WeilConjectures LinearMap.charpolyRev := charpoly.reverse, documented as det(1 - tF)); coeff 0 = 1; natDegree <= finrank; coeff at finrank = (-1)^n det F; IsUnit F gives full degree and leading coefficient; not IsUnit F gives natDegree < finrank. No added hypotheses. Edge cases n=0, F=0, id and char 2 checked; statement true by upstream lemmas plus coeff_reverse and reverse_natDegree. Source sentence (order 2856) matches. Dependency def-weil-reverse-characteristic-polynomial: lean-only existing:true repair with lean.note, signature verbatim, no other field changed. Item lean.statement verbatim. Docstrings carry source place, blueprint id and the six steps; no defs; sorry only; lines <= 100. Report has Worker report, Dependency modules, Second reading by Q64. One commit, four files; snapshot matches the commit. nt_compile.py --json on the snapshot module: exit 0, no errors or warnings, 1.2 s. No findings."
+ }
 }
