@@ -13,9 +13,100 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Give the walking arrow category $I=(0\\to1)$ its direct Reedy structure, with degrees zero and one. By [lem-coef-reedy-model-structure], its model category $\\mathcal N=\\mathcal M^I$ has objectwise weak equivalences and fibrations, and a cofibrant object is exactly an arrow $a:Q_A\\to Q_B$ with $Q_A$ cofibrant and $a$ a cofibration. Factor $0\\to s$ in this model category as a cofibration followed by a trivial fibration. This produces such an $a$ and commuting weak-equivalence augmentations $Q_A\\to A$, $Q_B\\to B$. Apply [lem-coef-cosimplicial-frame-mapping] in $\\mathcal N$ to the cofibrant object $a$, obtaining a frame $a^\\bullet$ with degree zero $a$ and augmentation to $\\operatorname{const}a$. Write its endpoints as $A^\\bullet,B^\\bullet$. Latching colimits in $\\mathcal N$ are computed at the endpoints. The arrow-model cofibration conditions for $L_na^\\bullet\\to a^n$ are precisely $L_nA\\to A^n$ and $A^n\\amalg_{L_nA}L_nB\\to B^n$ being cofibrations in $\\mathcal M$. Thus $A^\\bullet$ is Reedy cofibrant and $s^\\bullet$ is a Reedy cofibration; composing the initial cofibration of $A^\\bullet$ with it proves $B^\\bullet$ Reedy cofibrant. The two endpoint diagrams are frames on $Q_A,Q_B$, and composing their augmentations with the weak equivalences above gives the required resolutions of the original, possibly noncofibrant, $A,B$. Functorial factorization in the Reedy model and the functorial extension construction in the cited Reedy statement allow these choices for every member of a small family, in universes enlarged according to [def-weil-size-convention].",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-cosimplicial-frame-mapping",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Proposition 16.1.22(1), printed p. 322; explicit arrow-model/frame construction using the cited existing nodes."
+   }
+  },
+  {
+   "text": "The coend $V_X(K)=X^\\bullet\\otimes_\\Delta K$ preserves colimits: its coequalizer formula is built from coproducts, and maps out of it are compatible families of maps from the degrees of $X$. The co-Yoneda relations give $V_X(\\Delta^n)=X^n$. A simplex of $\\partial\\Delta^n$ has image a proper face, so its simplex operators reduce the same coend to the colimit over nonempty proper subsets of $\\{0,\\ldots,n\\}$; this is $L_nX$. Hence $h_{s,n}$ is exactly the relative latching map $A^n\\amalg_{L_nA}L_nB\\to B^n$, a cofibration by [lem-coef-reedy-model-structure]. The individual $L_nA,L_nB$ are cofibrant: in their finite face-poset diagrams, insert faces in increasing dimension. Inserting a $k$-face attaches $X^k$ along its latching cofibration $L_kX\\to X^k$. Starting at the initial object, these finite coproducts and pushouts preserve cofibrations, as seen by assembling componentwise diagonal lifts against any trivial fibration. The same Reedy statement makes $A^n,B^n$ cofibrant. Since $L_nA\\to A^n$ is a cofibration, its pushout $L_nB\\to A^n\\amalg_{L_nA}L_nB$ is one, proving the corner domain cofibrant. For $n=0$ the face poset is empty, both latching objects are initial, and $h_{s,0}=Q_A\\to Q_B$.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Definition 3.3.8(1), Proposition 3.3.9(1), printed p. 60; Lemma 16.3.7(1), Proposition 16.3.10(1), Corollary 16.3.11(1), printed pp. 325-326."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-boundary-collapse-test] to the colimit-preserving coend functor $V_a:\\mathrm{sSet}\\to\\mathcal N$ of the arrow frame from Step 1. Its boundary maps are cofibrations in $\\mathcal N$: at the source endpoint they are $L_nA\\to A^n$, and their arrow-relative corner is $h_{s,n}$, both cofibrations by Step 2. Its simplex collapses are objectwise weak equivalences, since the endpoint frames augment to $Q_A,Q_B$ with identity in degree zero. Thus $V_a$ sends every horn inclusion to a trivial cofibration in the arrow model. In particular the relative corner $V_A(\\Delta^r)\\amalg_{V_A(\\Lambda_i^r)}V_B(\\Lambda_i^r)\\to V_B(\\Delta^r)$ is an original trivial cofibration. A horn lifting problem for $H(B^\\bullet,Z)\\to H(A^\\bullet,Z)$ is, by the coend adjunction, exactly a lifting problem from this corner to $Z\\to1$. Original fibrancy of $Z$ gives a diagonal by the model lifting axiom. The Kan-Quillen characterization in [lem-coef-kan-quillen-right-proper] therefore makes this map a Kan fibration. By [lem-coef-cosimplicial-frame-mapping], the endpoint frames represent derived maps from $Q_A,Q_B$ to $Z$. Their augmentations to $A,B$ are weak equivalences, so naturality identifies the resulting map with $\\operatorname{Map}^h(B,Z)\\to\\operatorname{Map}^h(A,Z)$.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Corollary 16.5.4(1), printed p. 332; relative horn calculation spelled out using the boundary-collapse criterion."
+   }
+  },
+  {
+   "text": "Under the coend adjunction, a lift of a boundary inclusion $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ into the map $H(B^\\bullet,Z)\\to H(A^\\bullet,Z)$ is exactly a lift against the corner map $h_{s,n}$. The Kan fibration from Step 3 is a trivial Kan fibration exactly when it has the right lifting property against all boundary inclusions, including the empty boundary in dimension zero, by [lem-coef-kan-quillen-right-proper]. Therefore it is a trivial Kan fibration if and only if $Z\\to1$ lifts against every $h_{s,n}$. The frame mapping identification from [lem-coef-cosimplicial-frame-mapping] turns this into the equivalence of $\\operatorname{Map}^h(B,Z)\\to\\operatorname{Map}^h(A,Z)$, and conversely that equivalence of Kan models makes the map a trivial Kan fibration.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Corollary 16.3.11(1), Corollary 16.5.4(1), printed pp. 325-326 and 332; Theorem 17.8.4(2)-(3), printed pp. 369-371; Proposition 17.8.8(2)-(3), printed pp. 371-372."
+   }
+  },
+  {
+   "text": "Assume the equivalent conditions of Step 4. Naturality of the augmentations gives, for every $k$, a commutative square from $s^k:A^k\\to B^k$ to $s:A\\to B$ whose endpoint maps are weak equivalences. Therefore $\\operatorname{Map}^h(B^k,Z)\\to\\operatorname{Map}^h(A^k,Z)$ is an equivalence. For $n>0$ let $F_n$ be the finite direct poset of nonempty proper subsets of $\\{0,\\ldots,n\\}$, ordered by inclusion. Associate to a subset of size $k+1$ the degree $A^k$ or $B^k$, with maps given by the corresponding ordered face inclusions. Their latching maps are exactly $L_kA\\to A^k$ and $L_kB\\to B^k$, so these are cofibrant diagrams; the relative latching maps of their comparison are $h_{s,k}$. By [lem-coef-finite-reedy-localization], their ordinary colimits $L_nA,L_nB$ are their colimits after localization, including the cocone, and $L_nA\\to L_nB$ is a cofibration: for this direct category colimit is left Quillen because its right adjoint, the constant-diagram functor, preserves the objectwise fibrations and trivial fibrations. By the colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits], mapping the two localized colimit cocones into $Z$ identifies $\\operatorname{Map}^h(L_nB,Z)$ and $\\operatorname{Map}^h(L_nA,Z)$ with the limits over $F_n^{\\mathrm{op}}$ of the diagrams $\\operatorname{Map}^h(B^k,Z)$ and $\\operatorname{Map}^h(A^k,Z)$, naturally in the diagrams. The comparison of these diagrams of spaces is an equivalence at every vertex by the first sentences, hence an equivalence of diagrams by [lem-coef-infinity-pointwise-equivalences], and so it induces an equivalence of limits: $\\operatorname{Map}^h(L_nB,Z)\\to\\operatorname{Map}^h(L_nA,Z)$ is an equivalence. This also holds for $n=0$, when both objects are initial and both mapping spaces are terminal.",
+   "uses": [
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Proposition 17.8.14(1) and proof, printed pp. 373-374 (the latching-object part of the face-poset induction); expressed through the existing finite-Reedy localization and infinity-colimit statements."
+   }
+  },
+  {
+   "text": "Put $P_n=A^n\\amalg_{L_nA}L_nB$. The span $A^n\\leftarrow L_nA\\to L_nB$ is Reedy cofibrant: its central object is cofibrant and both outgoing arrows are cofibrations by Step 2 and Step 5. Apply [lem-coef-finite-reedy-localization] to this three-object direct category. It says that $P_n$, with this cocone, is a pushout in the localization. Consequently, by [lem-coef-infinity-yoneda-presheaf-limits], $\\operatorname{Map}^h(P_n,Z)$ is the homotopy pullback of $\\operatorname{Map}^h(A^n,Z)\\to\\operatorname{Map}^h(L_nA,Z)\\leftarrow\\operatorname{Map}^h(L_nB,Z)$. Its projection to $\\operatorname{Map}^h(A^n,Z)$ is an equivalence because the second leg is, by Step 5. The composite $\\operatorname{Map}^h(B^n,Z)\\to\\operatorname{Map}^h(P_n,Z)\\to\\operatorname{Map}^h(A^n,Z)$ is induced by $s^n$ and is an equivalence by Step 5. Two-out-of-three therefore proves that its first map, induced by $h_{s,n}$, is an equivalence. For $n=0$, $P_0=A^0$ and $h_{s,0}=s^0$, so this is the first sentence of Step 5. This proves the final clause without a simplicial enrichment or a properness assumption.",
+   "uses": [
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Proposition 17.8.14(1) and proof, printed pp. 373-374 (the pushout and two-out-of-three part); expressed through the existing finite-Reedy localization and infinity-colimit statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-finite-reedy-localization",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-boundary-collapse-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+  "place": "Hirschhorn, Definition 3.3.8(1), Proposition 3.3.9(1), Lemma 3.3.11(1); Proposition 16.1.22(1), Corollary 16.3.11(1), Corollary 16.5.4(1); Theorem 17.8.4(2)-(3), Proposition 17.8.8(2)-(3) and Proposition 17.8.14(1), printed pp. 60-61, 322, 325-326, 332, 369-374. Read online 2026-10-17; WANTED: archive in literature/. No Stacks tag states this model-category result. Second reader read the scanned Edinburgh copy at printed pp. 60-61, 322, 325-326, 332, 369-374. Explicit arrow-model and finite-face-colimit arguments are written by the agent from the cited existing statements; the source is not archived in the project."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +156,24 @@
    "results": "{\"t\": \"2026-10-17T02:56:01Z\", \"tool\": \"leanfinder\", \"query\": \"A Reedy cofibration between cosimplicial resolutions induces a fibration of left homotopy function complexes, and its relative latching maps are homotopy orthogonal to local fibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopyRel\", \"HomotopicalAlgebra.LeftHomotopyRel.exists_very_good_cylinder\", \"HomotopicalAlgebra.BifibrantObject.homMk_surjective\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_cofibration_of_weakEquivalence\"], \"digest\": \"5b05379e8e15adf7\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search; the hits concern cofibrant replacements, ordinary homotopy classes or path-object extension, and do not state the cosimplicial boundary-corner or right-resolution matching criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Cosimplicial.*(Cofibration|Resolution)|relative.*[Ll]atching|[Ll]atching.*[Cc]ofibration",
+   "results": "{\"t\": \"2026-10-17T03:58:46Z\", \"tool\": \"grep\", \"query\": \"Cosimplicial.*(Cofibration|Resolution)|relative.*[Ll]atching|[Ll]atching.*[Cc]ofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader query. The eight semantic hits concern ordinary cofibrant replacements, homotopy relations and Brown factorizations; none states a Reedy cosimplicial arrow frame, its boundary corner criterion, or the final derived mapping-space assertion. The source grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cosimplicial cofibrant replacements of arrows yield relative latching cofibrations detecting homotopy function complex weak equivalences",
+   "results": "{\"t\": \"2026-10-17T03:58:48Z\", \"tool\": \"leanfinder\", \"query\": \"Cosimplicial cofibrant replacements of arrows yield relative latching cofibrations detecting homotopy function complex weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\"], \"digest\": \"4a600382ec98a4ff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader query. The eight semantic hits concern ordinary cofibrant replacements, homotopy relations and Brown factorizations; none states a Reedy cosimplicial arrow frame, its boundary corner criterion, or the final derived mapping-space assertion. The source grep returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "created": {
@@ -95,5 +200,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-framed-horn-criterion",
+  "worker": "stage1",
+  "summary": "Second reading repairs the five-step split with an explicit cofibrant-arrow frame construction, relative horn lifting in the arrow model, and a finite-face-poset homotopy-colimit argument for the final orthogonality clause. Statement unchanged; no new nodes. Every non-elementary input is an existing DAG statement. Maintainer reader FIX: Step 5 split into Steps 5 and 6, citing lem-coef-infinity-yoneda-presheaf-limits and lem-coef-infinity-pointwise-equivalences for the mapping-space limit formula and the objectwise detection of equivalences used there; Step 4 source place corrected to Corollary 16.3.11(1) and Proposition 17.8.8(2)-(3).",
+  "blueprint": "The auxiliary argument in the opening 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale: boundary pushout corners of resolved arrows provide explicit local-object lifting tests below lem-cbc-general-bousfield-localization.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-reedy-model-structure",
+    "why": "The arbitrary-model Reedy structures construct arrow frames and identify relative latching maps; no node of the compact-support unit supplies this general diagram-model infrastructure."
+   },
+   {
+    "node": "lem-coef-cosimplicial-frame-mapping",
+    "why": "Frames in the arrow model and endpoint mapping spaces provide derived maps; no compact-support-unit node gives this model-category mapping comparison."
+   },
+   {
+    "node": "lem-coef-simplicial-boundary-collapse-test",
+    "why": "Applied to the arrow-frame coend, it makes relative horn corners trivial cofibrations without enrichment; the compact-support unit has no boundary-collapse criterion."
+   },
+   {
+    "node": "lem-coef-kan-quillen-right-proper",
+    "why": "Its horn and boundary lifting tests characterize Kan and trivial Kan fibrations; no compact-support-unit node supplies the Kan model structure."
+   },
+   {
+    "node": "lem-coef-finite-reedy-localization",
+    "why": "Its finite direct diagram comparison identifies face colimits and the cofibrant span pushout in the localization; no compact-support-unit node gives this general comparison without properness or combinatoriality."
+   },
+   {
+    "node": "lem-coef-infinity-yoneda-presheaf-limits",
+    "why": "Steps 5-6 take from its statement that a colimiting (pushout) cocone in the localization turns mapping spaces into the limit (homotopy pullback) of mapping spaces; no compact-support-unit node states this infinity-categorical colimit criterion."
+   },
+   {
+    "node": "lem-coef-infinity-pointwise-equivalences",
+    "why": "Step 5 takes from its statement that an objectwise equivalence of diagrams of spaces is an equivalence of diagrams, so it induces an equivalence of limits; no compact-support-unit node gives this."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-reedy-model-structure",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-finite-reedy-localization",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-pointwise-equivalences"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NM-14e699709",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-14e699709 (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements and their definition dependencies, the unit sk-prop-sf-cbc (empty steps, so all model-category inputs are off-unit tools), the chapter, and the citer lem-cbc-framed-localizing-cofibrations. The mathematics is correct. Step 1: in the arrow-model Reedy structure on M^(0->1), the relative latching conditions are exactly L_nA->A^n and A^n+_{L_nA}L_nB->B^n. Step 2: co-Yoneda, and the face poset is equivalent to the injection category, so h_{s,n} is the relative latching map; L_nX is cofibrant by attaching faces in increasing dimension. Step 3: the boundary-collapse hypotheses hold in the arrow model (the codegeneracies are the augmentations), so the relative horn corners are trivial cofibrations and H(s,Z) is a Kan fibration. Step 4: transposition plus the boundary criterion including dimension 0. Step 5: the finite-Reedy localization makes the face colimits and the cofibrant span homotopy colimits, then two-out-of-three. Edge cases n=0, s an identity, empty family and the terminal category are all fine. No new nodes, no duplicate in the DAG (rg for horns/boundary corner/cosimplicial resolution/S-local), no cycle. Fault C1 in step 5: two non-elementary ∞-category facts had no node. Mapping a colimit or pushout cocone into Z giving the limit or homotopy pullback of mapping spaces is lem-coef-infinity-yoneda-presheaf-limits. Objectwise equivalence of space diagrams being an equivalence is lem-coef-infinity-pointwise-equivalences. Both are now cited. Long step 5 (2331 characters) was two separate arguments, latching orthogonality and the pushout plus two-out-of-three. It is now split into Steps 5 and 6 (1779 and 1083 characters); neither hides a further lemma. The Step 4 source place now reads Corollary 16.3.11(1) instead of 'Proposition', with Prop. 17.8.8(2)-(3) added. proof_deps and split_report.tool_uses are updated; the statement is unchanged. All seven off-unit tool uses are accepted as generic infrastructure. Hirschhorn is not archived, so I did not read it at the cited places: the source check is from my own knowledge of the book. proof_origin=agent and the WANTED line stay. citations.json was not in the packet, so the citation check should be rerun on Steps 5 and 6.; 1 file(s) fixed by the reviewer"
  }
 }
