@@ -5,7 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Datum
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Normalization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuritySmooth
 public import WeilConjectures.AlgebraicGeometry.Regular
 
@@ -22,9 +22,10 @@ Indeed the fibre `C_s` is irreducible (smooth with geometrically connected fibre
 generic point `ξ_s` specializes to `σ(s)`; as `N ⟶ C` is integral, the set of points of `C`
 over which it is étale is stable under generization, so `N` is étale over `ξ_s`, hence over a
 dense subset of `C_s`. Purity
-(`AlgebraicGeometry.Scheme.Hom.mem_etaleLocus_fromNormalization_of_smooth`, [Stacks 0EYE] and
-[Stacks 0EYB]) then gives étaleness over all of `C_s`; it applies since `N` is the normalization
-of `C` in the regular (smooth over `κ(η)`) scheme `Z.P`, which lies over the generic point of `S`.
+(`AlgebraicGeometry.Scheme.Hom.mem_etaleLocus_fromNormalization_of_smooth`, through the
+commutative algebra of the diagonal of `C ×_S C`) then gives étaleness over all of `C_s`; it
+applies since `N` is the normalization of `C` in `Z.P`, which is affine over `C` and lies over
+the generic point of `S`.
 
 This is the common final step of the trait case and of the case of depth at least two in the
 proof of [Stacks 0EYJ].
@@ -111,7 +112,7 @@ theorem etaleOver_of_etaleOverSection [IsNoetherian D.S] {s : D.S} (hs : s ≠ g
     D.EtaleOver s := by
   rw [etaleOver_iff]
   refine Scheme.Hom.mem_etaleLocus_fromNormalization_of_smooth D.isIntegrallyClosed_stalk D.c
-    D.ν D.isDomain_isIntegrallyClosed_stalk D.c_ν s hs
+    D.ν D.c_ν s hs
     (fun y h₁ h₂ ↦ (D.etaleOver_iff _).1 (H _ h₁ h₂) y rfl) (fun x hx ↦ ?_)
   exact ⟨D.fibreGenericPoint s, D.fibreGenericPoint_specializes hx, D.c_fibreGenericPoint s,
     D.mem_etaleLocus_of_fibreGenericPoint hsec⟩
