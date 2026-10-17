@@ -272,5 +272,32 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-0b9f75a3c (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited DAG statements, and Stacks sources 0F15, 02WO, 00WI, and 00WK. Verified all nine proof steps, hypotheses, empty and infinite-index edge cases, fppf openness, base-change morphisms, coefficient category, Mathlib searches, and route compliance. Wrote review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfSheafCoproductPartition",
+  "declaration": "AlgebraicGeometry.Scheme.fppfSheaf_coproduct_partition",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fppfPartitionOpen",
+   "AlgebraicGeometry.Scheme.fppfPartitionInclusion",
+   "AlgebraicGeometry.Scheme.fppfPartitionRestriction",
+   "AlgebraicGeometry.Scheme.FppfCoproductPartition",
+   "AlgebraicGeometry.Scheme.FppfCoproductPartition.MapsTo",
+   "AlgebraicGeometry.Scheme.fppfSheaf_coproduct_partition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfSheafCoproductPartition.lean",
+  "statement": "theorem fppfSheaf_coproduct_partition {S : Scheme.{u}} {I : Type (max u v)} (G : I → Sheaf (fppfTopology.over S) (Type (max u v))) : (∃ (C : Sheaf (fppfTopology.over S) (Type (max u v))) (c : ∀ i, G i ⟶ C), Nonempty (IsColimit (Cofan.mk C c))) ∧ (∀ (C : Sheaf (fppfTopology.over S) (Type (max u v))) (c : ∀ i, G i ⟶ C), IsColimit (Cofan.mk C c) → (∀ i, Mono (c i) ∧ ∀ T : Over S, Function.Injective ((c i).hom.app (op T))) ∧ (∀ (T : Over S) (a : C.obj.obj (op T)), ∃! d : FppfCoproductPartition G T, d.MapsTo c a) ∧ (∀ (T : Over S) (a : C.obj.obj (op T)) (d : FppfCoproductPartition G T), d.MapsTo c a → (Nonempty (IsColimit (Cofan.mk T.left (fun i ↦ (d.opens i).ι)))) ∧ (∀ i, IsPullback (uliftYoneda.{v}.map (fppfPartitionInclusion T (d.opens i))) (uliftYonedaEquiv.{v}.symm (d.sections i)) (uliftYonedaEquiv.{v}.symm a) (c i).hom) ∧ (∀ (Z : Over S) (b : Z ⟶ T), ∃ e : FppfCoproductPartition G Z, e.MapsTo c (C.obj.map b.op a) ∧ ∀ i, e.opens i = b.left ⁻¹ᵁ d.opens i ∧ HEq (e.sections i) ((G i).obj.map (fppfPartitionRestriction b (d.opens i)).op (d.sections i)))) ∧ (∀ (T : Over S) (d : FppfCoproductPartition G T), ∃! a : C.obj.obj (op T), d.MapsTo c a) ∧ (IsEmpty I → ∀ T : Over S, (IsEmpty T.left → Nonempty (Unique (C.obj.obj (op T)))) ∧ (Nonempty T.left → IsEmpty (C.obj.obj (op T)))))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary record packages exactly the clopen pieces and their sections; MapsTo is their component equation. Coproduct existence is existential, and all further assertions apply to every colimit cofan, without assuming a global sheafification instance on the big site. The summand squares are expressed in presheaves, equivalently in sheaves, since representables are fppf sheaves and sheaf inclusion creates limits. ULift only places representables in the common coefficient universe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-852c53f52",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/, repairing the H11 second-reading placeholder. All statement clauses, dependencies, universes, edge cases, and docstrings checked; signature matches verbatim. scompile.py passed sandbox and library-path checks without warnings. No substantive faults or branch changes."
  }
 }
