@@ -181,3 +181,71 @@ theorem residue_mapIso_symm_eq_smul (EC : C ≅ C) (EU : U ≅ U) (hE : EU.hom �
 end Transport
 
 end AlgebraicGeometry.Scheme.EtaleTorsor
+
+namespace AlgebraicGeometry.Scheme.EtaleTorsor
+
+section BoundaryModule
+
+variable {k : Type u} [Field k] [IsAlgClosed k] {l : ℕ}
+
+/-- Iterating the transition maps `Hom(μ_{lⁿ⁺¹}, ℤ / lⁿ⁺¹) → Hom(μ_{lⁿ}, ℤ / lⁿ)` of a
+compatible system. -/
+lemma castHom_eq_of_compatible (hl : l.Prime)
+    (r : ∀ n : ℕ, Additive (rootsOfUnity (l ^ n) k) →+ ZMod (l ^ n))
+    (hr : ∀ n (ξ : rootsOfUnity (l ^ (n + 1)) k) (ξ' : rootsOfUnity (l ^ n) k),
+      ((ξ' : kˣ) : k) = ((ξ : kˣ) : k) ^ l →
+        r n (Additive.ofMul ξ') = ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1))
+          (ZMod (l ^ n)) (r (n + 1) (Additive.ofMul ξ)))
+    (n v : ℕ) (ξ : rootsOfUnity (l ^ (n + v)) k) (ξ' : rootsOfUnity (l ^ n) k)
+    (h : ((ξ' : kˣ) : k) = ((ξ : kˣ) : k) ^ (l ^ v)) :
+    r n (Additive.ofMul ξ') = ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n v))
+      (ZMod (l ^ n)) (r (n + v) (Additive.ofMul ξ)) := by
+  induction v with
+  | zero =>
+    rw [pow_zero, pow_one] at h
+    have : ξ' = ξ := Subtype.ext (Units.ext h)
+    subst this
+    rw [ZMod.castHom_apply]
+    exact (ZMod.cast_id _ _).symm
+  | succ v ih =>
+    have : NeZero (l ^ (n + v)) := ⟨pow_ne_zero _ hl.ne_zero⟩
+    have hξ1 : (ξ : kˣ) ^ (l ^ (n + v + 1)) = 1 := (mem_rootsOfUnity _ _).1 ξ.2
+    have hη : (((ξ : kˣ) : k) ^ l) ^ (l ^ (n + v)) = 1 := by
+      rw [← pow_mul, ← pow_succ', ← Units.val_pow_eq_pow_val, hξ1, Units.val_one]
+    let η : rootsOfUnity (l ^ (n + v)) k := rootsOfUnity.mkOfPowEq _ hη
+    have hηk : ((η : kˣ) : k) = ((ξ : kˣ) : k) ^ l := rootsOfUnity.coe_mkOfPowEq hη
+    rw [ih η (by rw [hηk, ← pow_mul, ← pow_succ', h]), hr (n + v) ξ η hηk,
+      ← RingHom.comp_apply, ZMod.castHom_comp]
+    rfl
+
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: the inverse-limit boundary module
+`lim_n Hom(μ_{lⁿ}, ℤ / lⁿ) = ℤ_l(-1)` has no nonzero element fixed by `Φ_Q`, which acts on it as
+multiplication by `Q ≥ 2`: a compatible system `(r_n)` with `Q r_n = r_n` for all `n` is zero. -/
+theorem eq_zero_of_compatible_of_smul_eq_self (hl : l.Prime) {Q : ℕ} (hQ : 2 ≤ Q)
+    (r : ∀ n : ℕ, Additive (rootsOfUnity (l ^ n) k) →+ ZMod (l ^ n))
+    (hr : ∀ n (ξ : rootsOfUnity (l ^ (n + 1)) k) (ξ' : rootsOfUnity (l ^ n) k),
+      ((ξ' : kˣ) : k) = ((ξ : kˣ) : k) ^ l →
+        r n (Additive.ofMul ξ') = ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1))
+          (ZMod (l ^ n)) (r (n + 1) (Additive.ofMul ξ)))
+    (hfix : ∀ n, Q • r n = r n) (n : ℕ) : r n = 0 := by
+  obtain ⟨v, hv⟩ := ZMod.exists_natCast_pow_mul_eq_zero_of_natCast_sub_one_mul_eq_zero hl hQ
+  refine AddMonoidHom.ext fun ξ' ↦ ?_
+  have : NeZero (l ^ (n + v)) := ⟨pow_ne_zero _ hl.ne_zero⟩
+  obtain ⟨y, hy⟩ := IsAlgClosed.exists_pow_nat_eq ((ξ'.toMul : kˣ) : k)
+    (pow_pos hl.pos v)
+  have hyN : y ^ (l ^ (n + v)) = 1 := by
+    rw [pow_add, mul_comm, pow_mul, hy, ← Units.val_pow_eq_pow_val,
+      (mem_rootsOfUnity _ _).1 ξ'.toMul.2, Units.val_one]
+  let ξ : rootsOfUnity (l ^ (n + v)) k := rootsOfUnity.mkOfPowEq _ hyN
+  have h := castHom_eq_of_compatible hl r hr n v ξ ξ'.toMul
+    (by rw [rootsOfUnity.coe_mkOfPowEq hyN, hy])
+  rw [ofMul_toMul] at h
+  rw [h, AddMonoidHom.zero_apply]
+  refine ZMod.castHom_eq_zero_of_pow_mul_eq_zero hl (hv _ _ ?_)
+  have := DFunLike.congr_fun (hfix (n + v)) (Additive.ofMul ξ)
+  rw [AddMonoidHom.smul_apply, nsmul_eq_mul] at this
+  rw [sub_mul, one_mul, this, sub_self]
+
+end BoundaryModule
+
+end AlgebraicGeometry.Scheme.EtaleTorsor
