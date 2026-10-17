@@ -13,9 +13,47 @@
   "def-weil-pbc-sheafification",
   "def-trf-coherent-topos"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume (i), and let $p:\\coprod_{i\\in I}F_i\\to H_U$ be an epimorphism of sheaves. By the epimorphism/local-surjectivity criterion [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], the section $\\operatorname{id}_U\\in H_U(U)$ lifts locally: there are a covering $(U_a\\to U)_{a\\in A}$ and sections $t_a\\in(\\coprod_iF_i)(U_a)$ mapping to $\\operatorname{id}_U|_{U_a}$. The coproduct is the sheafification of the objectwise disjoint union, so [def-weil-pbc-sheafification] and [lem-weil-pbc-site-sheafification-sections-local] let us refine each $U_a$ by a covering $(U_{ab}\\to U_a)_{b\\in B_a}$ on which $t_a$ is represented by a section $s_{ab}\\in F_{\\iota(a,b)}(U_{ab})$. The composite family $(U_{ab}\\to U)$ is a covering by the site axioms [def-weil-pbc-sites-and-cohomology]. Apply (i) to it. We obtain a covering $(V_c\\to U)_{c\\in C}$, maps $V_c\\to U_{\\alpha(c)}$ over $U$, and a finite image $K=\\operatorname{im}(\\alpha)\\subseteq\\coprod_a\\{a\\}\\times B_a$. Pulling $s_{\\alpha(c)}$ to $V_c$ gives a section of $F_{\\iota(\\alpha(c))}$ lifting $\\operatorname{id}_U|_{V_c}$. Hence the map $H_{V_c}\\to H_U$ factors through $F_{\\iota(\\alpha(c))}$. The family $(H_{V_c}\\to H_U)_c$ is epimorphic: every section $x\\in H_U(W)$ is, on a covering $(W_e\\to W)_e$, the image of arrows $f_e:W_e\\to U$ by [lem-weil-pbc-site-sheafification-sections-local]; the pulled-back coverings $(W_e\\times_UV_c\\to W_e)_c$ exist and compose to a covering $(W_e\\times_UV_c\\to W)_{e,c}$ by the site axioms [def-weil-pbc-sites-and-cohomology], and on $W_e\\times_UV_c$ the restriction of $x$ is the image of the projection to $V_c$, a section of $h_{V_c}$; so the map $\\coprod_cH_{V_c}\\to H_U$ is surjective in the sense of sheaves and [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] gives that it is an epimorphism. Therefore the finite family of indices $I_0=\\{\\iota(k):k\\in K\\}$ has epimorphic coproduct onto $H_U$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0D06, proof of (1) => (2), first three paragraphs"
+   }
+  },
+  {
+   "text": "Assume (ii), and let $(U_i\\to U)_{i\\in I}$ be a covering. The maps $H_{U_i}\\to H_U$ form an epimorphic family: for any section of $H_U$, [lem-weil-pbc-site-sheafification-sections-local] gives local representatives by arrows to $U$, and after pulling the covering $(U_i\\to U)_i$ back along those arrows the sections lift; the local-surjectivity criterion [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] applies. By (ii), there is a finite subset $I_0\\subseteq I$ for which $\\coprod_{i\\in I_0}H_{U_i}\\to H_U$ is still epimorphic. Applying the same criterion to the identity section, there is a covering $(W_a\\to U)_{a\\in A}$ and sections of $\\coprod_{i\\in I_0}H_{U_i}$ over $W_a$ mapping to $\\operatorname{id}_U|_{W_a}$. As in step 1, this coproduct is the sheafification of the objectwise disjoint union [def-weil-pbc-sheafification], so by [lem-weil-pbc-site-sheafification-sections-local] each $W_a$ has a covering $(W_{ad}\\to W_a)_d$ on which the section is represented by $r_{ad}\\in H_{U_{i(a,d)}}(W_{ad})$ with $i(a,d)\\in I_0$, still mapping to $\\operatorname{id}_U|_{W_{ad}}$. Applying the first clause of [lem-weil-pbc-site-sheafification-sections-local] to $h_{U_{i(a,d)}}$, refine further to a covering $(W_{ade}\\to W_{ad})_e$ on which $r_{ad}$ is the image of an arrow $g:W_{ade}\\to U_{i(a,d)}$. Then the composite $W_{ade}\\to U_{i(a,d)}\\to U$ and the structure map $W_{ade}\\to U$ are two elements of $h_U(W_{ade})$ with the same image in $H_U(W_{ade})$, so the equality clause of [lem-weil-pbc-site-sheafification-sections-local] gives a covering $(V_{b}\\to W_{ade})_{b}$ on which they agree. Index the resulting family $(V_b\\to U)$, composed through $W_{ade}$, $W_{ad}$, $W_a$, by $b$, with $\\alpha(b)=i(a,d)$ and the arrow $V_b\\to W_{ade}\\xrightarrow{g}U_{\\alpha(b)}$, which lies over $U$. This composite family is a covering by the site axioms [def-weil-pbc-sites-and-cohomology], it refines $(U_i\\to U)$, and its index map has image contained in the finite set $I_0$. This is condition (i).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0D06, proof of (2) => (1), final two paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0D06, lemma-quasi-compact proof; Definition 090H for the site condition"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finitary-site-coherent-generators",
@@ -66,7 +104,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Constructibility input of lem-trf-local-term-locality, through the nearby-cycle constructibility descent chain: finite-cover-site coherence and coherent base-change in Orgogozo §8.1 and Lemma 9.1.5, as used in lem-trf-proper-base-change-coherent-conservative. The site-to-topos translation of quasi-compactness.",
+   "place": "The site-to-topos translation of quasi-compactness: Tag 0D06 identifies the finite-image refinement condition on covers with quasi-compactness of the sheafified representable.",
    "via": [
     "lem-trf-finitary-site-coherent-generators",
     "lem-trf-proper-base-change-coherent-conservative",
@@ -79,5 +117,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-site-quasicompact-sheafification-criterion",
+  "worker": "stage1",
+  "summary": "Read the Stacks proof of Tag 0D06 in sites.tex and split it into the two directions of the equivalence. The forward direction localizes an epimorphic coproduct over the identity section, applies the finite-image refinement condition, and proves the resulting finite subfamily is epimorphic. The reverse direction applies quasi-compactness of H_U to the sheafified representable cover, then refines local sheafified lifts to actual arrows over U. No new nodes were needed: all non-elementary sheafification and local-surjectivity facts are existing DAG nodes.",
+  "blueprint": "Realizes the site-to-topos quasi-compactness translation used in the constructibility/coherence chain: Tag 0D06, the proof of both implications between Definition 090H and finite epimorphic subfamilies of h_U^#.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-8fa62d8a9",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-8fa62d8a9 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks sites.tex lines 3240-3366: Definition 090H, and Lemma 0D06 with its whole proof. I also read the statements of all six cited nodes. The statement matches 090H and 0D06 exactly and was not changed. The delivery creates no new nodes. Off-unit uses are a Mathlib leaf (epi = locally surjective) and the Lean-closed node lem-weil-pbc-site-sheafification-sections-local, so tool_uses [] is correct. No duplicate exists: I searched dag/nodes for 0D06, 090H, 00WI and 00WT. Step 1, (i)=>(ii), is correct. The coproduct as sheafification of the objectwise union follows from the left-adjoint definition in a few lines, and the 00WT joint-epimorphy argument is proved inline. Step 2, (ii)=>(i), has one repairable gap. It took the local lift of id_U as a section of a single H_{U_i}, but the criterion only gives a section of the sheaf coproduct, so a refinement through the presheaf coproduct is needed. It also credited the equality clause alone with producing actual arrows over U, when the first clause of sections-local and then the equality clause are both needed. I rewrote the step 2 text, and expanded the step 1 epimorphy argument, in fixes/dag/nodes/sec-trace-formula/lem-trf-site-quasicompact-sheafification-criterion.json. The uses lists, proof_deps and all other fields are unchanged. Edge cases checked: an empty covering, a singleton covering, finite I, and Stacks' [0,1] example showing (i) is weaker than finite subcovers.; 1 file(s) fixed by the reviewer"
  }
 }
