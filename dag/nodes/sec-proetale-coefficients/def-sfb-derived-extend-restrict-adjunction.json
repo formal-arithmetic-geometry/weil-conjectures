@@ -3,41 +3,178 @@
  "blueprint": {
   "is": "def-sfb-derived-extend-restrict-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived adjunction between extension and restriction of scalars",
- "statement": "In the situation of [lem-sfb-extend-scalars-kflat], the adjunction\n$\\operatorname{Ext}_\\varphi\\dashv\\operatorname{Res}_\\varphi$ [sk-def-sfb-change-of-scalars]\nderives to an adjunction\n$$\nL(\\operatorname{Ext}_\\varphi)\\dashv R(\\operatorname{Res}_\\varphi)\n$$\nbetween the left derived extension of scalars and the right derived restriction of\nscalars on the unbounded derived categories.",
+ "statement": "Let $\\mathcal C$ be a closed symmetric monoidal Grothendieck abelian category (closed means that\n each fixed-factor tensor functor has a right adjoint) whose tensor product is additive in each variable, and which has a functorial flat resolution, meaning a functor $P\\colon\\mathcal C\\to\\mathcal C$\nwith flat values and a natural epimorphism $P(M)\\twoheadrightarrow M$ (flat means that tensoring on either\nside is exact). Let $\\varphi\\colon\\mathcal R\\to\\mathcal S$ be a morphism of commutative ring objects\n(commutative monoid objects) of $\\mathcal C$. For $T=\\mathcal R,\\mathcal S$, let $\\Mod_T(\\mathcal C)$ be\nthe category of $T$-module objects (objects with unital associative $T$-actions). For an $\\mathcal R$-module $M$, define extension of scalars by the relative tensor product\n$$\n\\operatorname{Ext}_\\varphi(M)=\\mathcal S\\otimes_{\\mathcal R}M\n=\\operatorname{coeq}\\Bigl((\\mu_{\\mathcal S}\\circ(1_{\\mathcal S}\\otimes\\varphi))\\otimes1_M,\n(1_{\\mathcal S}\\otimes\\gamma_M)\\circ\\alpha\\Bigr),\n$$\nwhere $\\gamma_M$ is the $\\mathcal R$-action and $\\alpha$ is the canonical associator; let $\\mathcal S$\nact on the first factor. For an $\\mathcal S$-module $N$, define restriction of scalars by leaving the\nunderlying object and morphism unchanged and giving it the $\\mathcal R$-action\n$\\mathcal R\\otimes N\\xrightarrow{\\varphi\\otimes N}\\mathcal S\\otimes N\\xrightarrow{\\gamma_N}N$. These functors have the\ncanonical adjunction $\\operatorname{Ext}_\\varphi\\dashv\\operatorname{Res}_\\varphi$. For an abelian\ncategory $\\mathcal A$, write $D(\\mathcal A)$ for the unbounded localization of cochain complexes at\nquasi-isomorphisms; a complex of $T$-modules is K-flat if it is K-flat for the relative tensor product $\\otimes_T$ of [def-sfb-modobj-relative-tensor] in the sense of [def-sfb-preserves-kflat-quasi-iso], i.e. tensoring with it on either side sends quasi-isomorphisms to quasi-isomorphisms,\nand a K-injective complex is one receiving only null-homotopic maps from acyclic complexes. The symbols $L$\nand $R$ denote total left and right derived functors computed on K-flat and K-injective resolutions,\nrespectively, whenever the corresponding resolutions and preservation hypotheses hold. Then the adjunction derives to\n$$\nL(\\operatorname{Ext}_\\varphi)\\dashv R(\\operatorname{Res}_\\varphi)\n$$\nbetween $D(\\Mod_{\\mathcal R}(\\mathcal C))$ and $D(\\Mod_{\\mathcal S}(\\mathcal C))$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-restrict-adjunction.md",
   "place": "node def-sfb-derived-extend-restrict-adjunction, order 1627"
  },
  "stmt_deps": [
   "lem-sfb-extend-scalars-kflat",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-objects",
+  "det-def-sfb-ring-object-monoid",
+  "def-sp-grothendieck-abelian",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-modobj-relative-tensor"
  ],
  "proof": [
   {
-   "text": "$\\operatorname{Ext}_\\varphi$ preserves K-flat quasi-isomorphisms\n[lem-sfb-extend-scalars-kflat]. $\\Mod_{\\mathcal R}$ satisfies the hypotheses for left\nderived functors, and $\\Mod_{\\mathcal S}$ is Grothendieck abelian, hence has K-injective\nresolutions [sk-prop-sfb-module-category]. So the derived adjunction of\n[sk-def-sfb-derived-categories] applies to\n$\\operatorname{Ext}_\\varphi\\dashv\\operatorname{Res}_\\varphi$.",
+   "text": "Write $\\mathcal A_T=\\Mod_T(\\mathcal C)$ for $T=\\mathcal R,\\mathcal S$, with exactly the ambient hypotheses of [lem-sfb-extend-scalars-kflat]. For each of these commutative ring objects, [lem-sfb-modobj-grothendieck] makes $\\mathcal A_T$ Grothendieck abelian. By [def-sfb-modobj-internal-hom] its relative tensor is closed symmetric monoidal: $M\\otimes_T-$ has right adjoint $\\Hom_T(M,-)$. By [lem-sfb-modobj-flat-resolutions], the assumed functorial flat resolution of $\\mathcal C$ supplies a functorial flat resolution in $\\mathcal A_T$. All three statements assume a closed symmetric monoidal Grothendieck abelian ambient category with additive tensor and a commutative ring object; those are precisely the present hypotheses. The last statement additionally assumes the ambient functorial flat resolution, which is also given.",
    "uses": [
     "lem-sfb-extend-scalars-kflat",
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-internal-hom",
+    "lem-sfb-modobj-flat-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-restrict-adjunction.proof.md",
+    "place": "second sentence: structural hypotheses, expanded using sk-prop-sfb-module-category, proof Part 3"
+   }
+  },
+  {
+   "text": "Verify the remaining source hypotheses of [sk-def-sfb-derived-categories]. By [def-sp-grothendieck-abelian], each $\\mathcal A_T$ has small colimits and exact filtered colimits. Thus it has countable coproducts and exact ordered-$\\mathbf Z$ colimits: any finite set of integers has an upper bound, so this index category is filtered. For any adjunction $H\\dashv J$ and small diagram $D$, the natural bijections $\\Hom(H(\\operatorname{colim}D),Y)\\cong\\Hom(\\operatorname{colim}D,JY)\\cong\\lim_i\\Hom(D_i,JY)\\cong\\lim_i\\Hom(HD_i,Y)$ show directly that $H$ preserves this colimit. Apply this to the fixed-factor tensor functors in $\\mathcal C$, using its assumed closedness and symmetry, and in $\\mathcal A_T$, using [def-sfb-modobj-internal-hom]. In particular these functors preserve countable coproducts and ordered-$\\mathbf Z$ colimits. They also preserve zero and finite coproducts, hence finite biproducts. They are additive: the biproduct injection/projection equations determine the diagonal $\\Delta$, codiagonal $\\nabla$, and $a\\oplus b$, and under the canonical biproduct identifications their images are those same maps. Applying the functor to $a+b=\\nabla(a\\oplus b)\\Delta$ therefore gives $H(a+b)=H(a)+H(b)$; the zero map factors through the preserved zero object. This verifies tensor additivity in both variables without assuming that arbitrary tensor functors are exact.",
+   "uses": [
+    "sk-def-sfb-derived-categories",
+    "def-sp-grothendieck-abelian",
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-restrict-adjunction.proof.md",
+    "place": "second sentence: full left-derived source hypotheses"
+   }
+  },
+  {
+   "text": "Put $E=\\operatorname{Ext}_\\varphi$ and $U=\\operatorname{Res}_\\varphi$. Clause 2 of [sk-def-sfb-change-of-scalars] supplies $E\\dashv U$: the ambient category is symmetric, has coequalizers since it is abelian, and tensoring preserves colimits by step 2; $\\mathcal R$ is commutative. This left adjoint $E$ preserves zero and binary coproducts by the explicit adjoint-colimit argument in step 2. The biproduct formula from that step therefore gives $E(a+b)=E(a)+E(b)$ and $E(0)=0$. Restriction is the identity on underlying objects and morphisms by clause 1 of the cited statement, so it preserves the sums and zero of module morphisms and is additive as well. Thus this is an adjunction of additive functors between the abelian module categories of step 1.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-restrict-adjunction.proof.md",
+    "place": "last sentence: the underived additive adjunction"
+   }
+  },
+  {
+   "text": "For every quasi-isomorphism $s:P\\to P'$ between K-flat $\\mathcal R$-module complexes, [lem-sfb-extend-scalars-kflat] gives that $E(s)=\\mathcal S\\otimes_{\\mathcal R}s$ is a quasi-isomorphism in $\\mathcal S$-modules. Consequently the left-derived clause of [sk-def-sfb-derived-categories] applies to $E$, by steps 1–3, giving $LE$ on the unbounded derived category computed on K-flat resolutions. The category $\\mathcal A_{\\mathcal S}$ is Grothendieck by step 1, so [lem-sfb-grothendieck-k-injective] supplies K-injective resolutions of all its unbounded complexes. The right-derived clause of [sk-def-sfb-derived-categories] therefore supplies $RU$, computed by applying $U$ to those resolutions. The resolution category for this right derived functor is $\\mathcal S$-modules, not $\\mathcal R$-modules. No claim that $U$ preserves K-injectives is needed.",
+   "uses": [
+    "lem-sfb-extend-scalars-kflat",
+    "sk-def-sfb-derived-categories",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-restrict-adjunction.proof.md",
+    "place": "first two sentences: preservation of K-flat quasi-isomorphisms and K-injective resolutions"
+   }
+  },
+  {
+   "text": "Apply the derived-adjunction clause of [sk-def-sfb-derived-categories] with $f=E:\\mathcal A_{\\mathcal R}\\to\\mathcal A_{\\mathcal S}$ and $g=U$ and the ordinary adjunction from step 3. Its hypotheses on the monoidal source, functorial flat resolution and colimits are steps 1–2; additivity is step 3; preservation of quasi-isomorphisms between K-flat complexes and target K-injective resolutions are step 4. It provides the natural Hom bijections $a_{K,N}:\\Hom_{D(\\mathcal A_{\\mathcal S})}(LE(K),N)\\xrightarrow{\\sim}\\Hom_{D(\\mathcal A_{\\mathcal R})}(K,RU(N))$. Define the indicated derived adjunction to be this adjunction for the functors $LE$ and $RU$. Explicitly its unit is $a_{K,LE(K)}(1_{LE(K)})$ and its counit is $a_{RU(N),N}^{-1}(1_{RU(N)})$; naturality and the inverse identities of these bijections give the triangle identities. This defines exactly $L(\\operatorname{Ext}_\\varphi)\\dashv R(\\operatorname{Res}_\\varphi)$, before any identification of the right adjoint with termwise restriction.",
+   "uses": [
     "sk-def-sfb-derived-categories"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-restrict-adjunction.proof.md",
+    "place": "last sentence: apply the general derived adjunction"
+   }
   }
  ],
  "proof_deps": [
   "lem-sfb-extend-scalars-kflat",
-  "sk-def-sfb-derived-categories"
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
+  "sk-def-sfb-derived-categories",
+  "def-sp-grothendieck-abelian",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-grothendieck-k-injective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-restrict-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-restrict-adjunction.proof.md",
+  "place": "only paragraph, expanded with the existing module-structure statements and the full hypotheses of sk-def-sfb-derived-categories"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction between extension of scalars and restriction of scalars on unbounded derived categories, assuming K-flat preservation and K-injective resolutions",
+   "results": "Eight hits headed CategoryTheory.Adjunction.derived and derived'. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:134–151: derived requires additional composite-derived-functor instances, not supplied by the item in one line.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.derivedAdjunction, leftDerivedFunctor, rightDerivedFunctor",
+   "results": "Zero hits; unknown identifier CategoryTheory.Functor.derivedAdjunction.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedAdjunction|leftDerivedFunctor|rightDerivedFunctor",
+   "results": "Zero hits in the requested Mathlib/CategoryTheory subdirectory search; this result alone is not used as evidence of absence.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction of additive functors derives to an adjunction between total left and right derived functors",
+   "results": "Eight hits include CategoryTheory.Adjunction.derived and derived', totalLeftDerived and ordinary leftDerived. The derived theorem requires additional composite-derived-functor instances; it does not construct the K-flat and K-injective inputs.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an adjunction of additive functors, total left and right derived functors form an adjunction",
+   "results": "Eight hits again headed CategoryTheory.Adjunction.derived and derived'. The source requires the extra absolute/composite derivation hypotheses.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.derived, IsLeftDerivedFunctor, IsRightDerivedFunctor",
+   "results": "Zero hits; unknown identifier Adjunction.derived.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction\\.derived|totalLeftDerived|IsLeftDerivedFunctor",
+   "results": "Zero hits in the requested Mathlib/CategoryTheory/Functor/Derived subdirectory search; subsequently checked the source and repeated an unrestricted grep.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived adjunction theorem for localization functors and left and right derived functors",
+   "results": "Eight hits include CategoryTheory.Adjunction.derived, derived', and IsRightDerivedFunctor. Neither constructs this unbounded extension/restriction adjunction without further proof of its derivation hypotheses.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def derived|derivedAdjunction|leftDerivedFunctor|rightDerivedFunctor",
+   "results": "25 hits include Adjunction.lean:52 derived', :96 derivedη, :118 derivedε and generic left/right derived classes. Read Adjunction.lean:39–151, in particular derived at :144–151: it assumes composite-derived-functor compatibility, which must be proved from resolutions. No direct module-scalar unbounded derived adjunction declaration.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "Three hits: CategoryTheory.Adjunction.derived, derived_counit, derived_unit, in Mathlib.CategoryTheory.Functor.Derived.Adjunction. Read the declaration at Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144–151: its two composite-derived-functor compatibility instances are extra inputs, not consequences of the present hypotheses in one line.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -127,5 +264,34 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-derived-extend-restrict-adjunction",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Expanded the imported application into five steps checking the module structures, every colimit and additivity condition, both derived-functor existence hypotheses, and the general derived-adjunction clause. Reused existing nodes throughout; no new nodes. The local project source has no corresponding declaration although its imported audit records a stale source attachment. The master reference contains the definition but relies on sorry inputs and is not an attachment.",
+  "blueprint": "Steps 1–2 realize the structural-hypothesis sentence via Part 3 of sk-prop-sfb-module-category; step 3 verifies the ordinary additive adjunction; step 4 realizes preservation and resolution existence; step 5 realizes the final derived-adjunction application.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic module-category Grothendieck theorem explicitly invoked through sk-prop-sfb-module-category in the blueprint proof; the current unit has no independent structural theorem."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Generic transfer of functorial flat resolutions to commutative module objects, needed for the blueprint structural-hypothesis sentence and not supplied by the current unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-modobj-flat-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-5497b975c",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-5497b975c (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit with the item and its report, no new nodes, no cycle (328 dependencies walked). Statement: the expanded statement matches the blueprint's 'situation of lem-sfb-extend-scalars-kflat' hypothesis by hypothesis. Its Ext/Res definitions are the same as clauses 1 and 2 of sk-def-sfb-change-of-scalars, and the unbounded conclusion is not weakened. Step 1: I read lem-sfb-modobj-grothendieck, def-sfb-modobj-internal-hom, lem-sfb-modobj-flat-resolutions and lem-sfb-extend-scalars-kflat; their hypotheses hold for T=R and T=S. Step 2: the colimit checks (Z is directed, left adjoints preserve colimits) and the biproduct additivity argument are elementary and correct. Step 3: clause 2 of change-of-scalars applies (symmetric, has coequalizers, tensor preserves colimits, R commutative); both functors are additive. Step 4: K-flat quasi-isomorphisms are preserved, and the K-injective resolutions are taken in Mod_S. Step 5: I checked the derived-adjunction clause of sk-def-sfb-derived-categories, whose proof steps 5 and 9 really construct the Hom bijection, so the item's data is not hollow. Route: I accept the declared tool_uses lem-sfb-modobj-grothendieck and lem-sfb-modobj-flat-resolutions; the blueprint proof cites sk-prop-sfb-module-category for exactly this, and sk-def-sfb-derived-categories already carries them. Duplicates: none. The key node and def-sfb-derived-extend-levelwise-adjunction both have termwise restriction as the right adjoint, so they state something different. Edge cases checked: Z to Z/n, identity map, zero ring, unbounded complexes. FIX: one statement-wording repair in fixes/dag/nodes/sec-proetale-coefficients/def-sfb-derived-extend-restrict-adjunction.json, with no change to any hypothesis or conclusion. K-flat is now defined through [def-sfb-preserves-kflat-quasi-iso] for the relative tensor product of [def-sfb-modobj-relative-tensor], which is added to stmt_deps. This replaces a one-sided 'tensor with acyclic' wording that did not say which tensor product (a B3 inconsistency). Also corrected the grammar that attached the flat resolution to the tensor product instead of to C.; 1 file(s) fixed by the reviewer"
  }
 }
