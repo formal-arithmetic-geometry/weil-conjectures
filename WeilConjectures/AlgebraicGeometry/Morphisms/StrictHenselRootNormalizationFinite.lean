@@ -140,18 +140,15 @@ closures are finite by the trace-dual-lattice argument of 032L; the closure in
 sections injects into that finite module. Mathlib fromNormalization_app and
 normalizationObjIso identify the section map of the explicit normalization with
 this finite algebra map followed by a ring isomorphism. These finite affine
-section maps prove finiteness. This part uses neither the unit group-order
-hypothesis nor the projection equation for beta; ramification is only needed
-for the separate generic-etaleness statement. No normalization witness is chosen. -/
+section maps prove finiteness. Neither the unit group order nor an identification
+of the punctured chart is needed; ramification is only needed for the separate
+generic-etaleness statement. No normalization witness is chosen. -/
 theorem GaloisCover.strict_hensel_root_normalization_finite
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)
     (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)
-    (_hG : IsUnit (Nat.card G : R))
     [IsRegularRing R] (hf : IsSMulRegular R f)
     [IsRegularRing (R ⧸ Ideal.span {f})]
-    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))
-    (_hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)
     (b : R ⟶ strictHenselization barY)
     (hb : Spec.map b = strictLocalizationToBase barY) :

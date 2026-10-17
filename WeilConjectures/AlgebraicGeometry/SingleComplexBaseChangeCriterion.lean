@@ -48,8 +48,8 @@ private theorem complex_qcoh (X : Scheme.{u})
   exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
     (((DerivedCategory.homologyFunctorFactors _ n).app G) ≪≫ e).symm inferInstance
 
-/-- The single-complex base-change criterion, with G an actual bounded-above
-complex of quasi-coherent modules and its ordinary termwise tensor pullback.
+/-- The single-complex base-change criterion, with G an actual complex of
+quasi-coherent modules (no boundedness is needed) and its ordinary termwise tensor pullback.
 
 Proof (the three steps of the node):
 1. Apply lem-pc-rf-single-complex-inherited-tensor-condition (Tag 0DJA(1)) to
@@ -75,7 +75,6 @@ theorem singleComplexBaseChangeCriterion
     (sq : IsPullback g' f' f g) [QuasiCompact f] [QuasiSeparated f]
     (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E)
     (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hG_bound : ∃ b : ℤ, G.IsStrictlyLE b)
     (hG_qcoh : ∀ i : ℤ, (G.X i).IsQuasicoherent)
     (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq
       (DerivedCategory.Q.obj G)
@@ -93,8 +92,6 @@ theorem singleComplexBaseChangeCriterion
           (derivedPullback g').obj E ◁ (SingleComplexBaseChange.counit g').app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj G))) := by
   classical
-  obtain ⟨b, hb⟩ := hG_bound
-  have _ := hb
   have hG : schemeDerivedQCohProperty X (DerivedCategory.Q.obj G) :=
     complex_qcoh X G hG_qcoh
   let G' := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj G

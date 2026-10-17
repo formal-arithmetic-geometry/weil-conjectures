@@ -149,7 +149,7 @@ theorem cartesianHigherImage_section_eq_zero_of_finite_cover
     (D : I ⥤ Over (Spec (.of k)))
     [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]
     [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]
-    (c : Cone D) (_hc : IsLimit ((Over.forget _).mapCone c))
+    (c : Cone D)
     [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

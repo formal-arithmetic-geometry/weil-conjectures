@@ -61,8 +61,8 @@ theorem exists_strictlyPerfect_evaluation_local_section (X : Scheme.{u})
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (K N : schemeDerivedCategory X) (U : X.Opens)
     (P : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
-    (_hstrict : Scheme.IsStrictlyPerfect X U P)
-    (_eK : (SheafOfModules.overFunctor.{u}
+    (hstrict : Scheme.IsStrictlyPerfect X U P)
+    (eK : (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj P) :
     let R := (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory
@@ -89,7 +89,7 @@ theorem exists_strictlyPerfect_evaluation_local_section (X : Scheme.{u})
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
   let F := Q.objPreimage (R.obj N)
   let eN : R.obj N ≅ Q.obj F := (Q.objObjPreimageIso (R.obj N)).symm
-  obtain ⟨hhom, hdual⟩ := strictlyPerfect_localHom_computations X U P _hstrict
+  obtain ⟨hhom, hdual⟩ := strictlyPerfect_localHom_computations X U P hstrict
   let f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F :=
     { f := localEvaluationDegreeMap X U P F
       comm' := fun n m h ↦ localEvaluationDegreeMap_comm X U P F n m h }
@@ -97,9 +97,9 @@ theorem exists_strictlyPerfect_evaluation_local_section (X : Scheme.{u})
     intro p q n r hpq
     exact localEvaluationDegreeMap_formula X U P F p q n r hpq
   obtain ⟨a, b, hab⟩ := exists_exactSource_evaluation_local_comparisons
-    X K N U P F hhom hdual _eK eN f hf
+    X K N U P F hhom hdual eK eN f hf
   have : ∀ n : ℤ, IsIso (f.f n) :=
-    fun n ↦ isIso_localOrdinaryEvaluation_degree X U P F _hstrict f hf n
+    fun n ↦ isIso_localOrdinaryEvaluation_degree X U P F hstrict f hf n
   have : IsIso f := HomologicalComplex.Hom.isIso_of_components f
   have : IsIso (Q.map f) := inferInstance
   refine ⟨b.hom ≫ inv (Q.map f) ≫ a.inv, ?_⟩

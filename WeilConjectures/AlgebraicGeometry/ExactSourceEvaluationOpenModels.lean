@@ -121,9 +121,9 @@ theorem exists_exactSource_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (K N : schemeDerivedCategory U.toScheme)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
-    (_hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
+    (hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
       QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t))
-    (_hdual : (localEvaluationDual X U P).IsKFlatTensor)
+    (hdual : (localEvaluationDual X U P).IsKFlatTensor)
     (_eK : (Equivalence.functor
       (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
       (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
@@ -187,14 +187,14 @@ theorem exists_exactSource_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
   let t := HomologicalComplex.mapBifunctorMap η (𝟙 (localEvaluationDual X U P))
     (curriedTensor _) (.up ℤ)
   let h := ((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map η
-  have : QuasiIso h := _hhom F I η hη
+  have : QuasiIso h := hhom F I η hη
   have : QuasiIso t :=
-    tensor_quasiIso_of_isKFlat (R := X.sheaf.over U) η hη _hdual
+    tensor_quasiIso_of_isKFlat (R := X.sheaf.over U) η hη hdual
   have : IsIso (E.map (Q.map t)) := inferInstance
   have : IsIso (E.map (Q.map h)) := inferInstance
   let eI : E.obj (Q.obj I) ≅ N := (E.mapIso (asIso (Q.map η))).symm ≪≫ _eN
   have hmodel := exists_exactSource_kInjective_evaluation_open_models
-    X U K N P I _hhom _hdual _eK eI fI hfI
+    X U K N P I hhom hdual _eK eI fI hfI
   change ∃ a : N ⊗ D ≅ E.obj (Q.obj (localEvaluationTensor X U P I)),
     ∃ b : H.obj (op K, N) ≅ E.obj (Q.obj (homComplex (R := X.sheaf.over U) P I)),
       g ≫ b.hom = a.hom ≫ E.map (Q.map fI) at hmodel

@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedPushforwardConservative
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import WeilConjectures.AlgebraicGeometry.FiniteAffineDerivedEquivalence
 import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
 
 /-! # Affine pullback of a perfect generator
 
@@ -33,7 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The derived pullback of a perfect generator along an affine morphism of qcqs schemes
-is a generator of the quasi-coherent derived category of the source.
+is a perfect generator of the quasi-coherent derived category of the source.
 Source: Stacks Project, Tag 0BQT (blueprint: lem-pc-perfect-generator-pullback).
 
 Proof:
@@ -49,7 +50,8 @@ to E with Hom from the shifted M to the derived pushforward of E.
 isomorphisms between quasi-coherent objects. The zero endomorphism of E becomes an
 isomorphism because its image has zero source and target. Thus it is itself invertible,
 forcing the identity of E to be zero. Conversely, Hom into a zero object is subsingleton.
-This is precisely the generator criterion on the source. -/
+This is precisely the generator criterion on the source.
+4. The pullback is perfect by `lem-pc-derived-pullback-perfect`. -/
 theorem perfect_generator_pullback {X X' : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace X'] [QuasiSeparatedSpace X']
@@ -57,20 +59,23 @@ theorem perfect_generator_pullback {X X' : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace))]
     [∀ U : X.Opens,
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    [∀ U : X'.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X'.toRingedSpace).over U))]
     (g : X' ⟶ X) [IsAffineHom g] (M : schemeDerivedQCohCategory X)
     (hperfect : Scheme.IsPerfect X M.obj)
     (hgen : ∀ E : schemeDerivedQCohCategory X,
       IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (M.obj⟦n⟧ ⟶ E.obj)) :
+    Scheme.IsPerfect X' ((derivedPullback g).obj M.obj) ∧
     schemeDerivedQCohProperty X' ((derivedPullback g).obj M.obj) ∧
       ∀ E : schemeDerivedQCohCategory X',
         IsZero E.obj ↔ ∀ n : ℤ,
           Subsingleton (((derivedPullback g).obj M.obj)⟦n⟧ ⟶ E.obj) := by
   classical
-  have _ := hperfect
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, ⟨cs, ht⟩, _⟩ :=
     Classical.choose_spec (exists_derivedPullback g)
   let : (derivedPullback g).CommShift ℤ := cs
   obtain ⟨adj⟩ := nonempty_derivedPullbackAdjunction g
+  refine ⟨derivedPullback_preserve_perfect g M.obj hperfect, ?_⟩
   constructor
   · exact (derivedPullback_tensor_preserve_QCoh g).1 M.obj M.property
   · intro E

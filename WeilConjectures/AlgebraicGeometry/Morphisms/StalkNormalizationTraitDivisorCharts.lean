@@ -174,7 +174,6 @@ private theorem smooth_trait_affine_generic_open_over
   exact ⟨β, IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _⟩
 
 
-set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
 -- Elaborating the nested pullbacks and product root algebras exceeds the default budget.
 /-- A tame affine chart using the pullback of an actual trait uniformizer.
@@ -206,8 +205,6 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
     (hG : IsUnit (Nat.card G : Γ(S, ⊤)))
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
-    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)
-    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)
     (Z : GaloisCover G Cη)
     (U : S.Opens) (hηU : genericPoint S ∈ U)
     (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
@@ -292,7 +289,7 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
   obtain ⟨T, χ, z, hχ, hz, m, e, he, hT, hg, hTg, γ, hγ⟩ :=
     GaloisCover.regular_divisor_prescribed_punctured_root_chart
       (pullback.fst d b) G W R φ (algebraMap (S.presheaf.stalk s) R ϖ)
-      hGR hf γ₀ hγ₀ y hRy
+      hGR hf γ₀ hγ₀ y
   let ρ := (Spec.preimage χ).hom.comp (algebraMap (S.presheaf.stalk s) R)
   let f : T := ρ ϖ
   have : Etale φ := hφ
@@ -315,7 +312,8 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
       change (Spec.map (Spec.preimage χ)) z = y
       rw [Spec.map_preimage]
       exact hz
-    rwa [hz']
+    rw [hz']
+    exact hRy
   have : IsRegularRing T := hT
   have : IsRegularRing (T ⧸ Ideal.span {f}) := hTg
   let B := ∀ k : Fin m,

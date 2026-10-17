@@ -21,7 +21,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 -- The fixed rectangle interface names U and V although this comparison does not use them.
-set_option linter.unusedVariables false in
 /-- Canonical ordinary rectangle comparisons on the quasi-coherent subcategories.
 Source: Stacks Project, Tags 0D5S (pullback composition), 0ATM (pasting), and
 08HY (adjunctions defining the mate).
@@ -52,10 +51,7 @@ theorem rectangle_qcoh_comparison_lifts
     (hk₁ : k ≫ pullback.fst f (h ≫ g) =
       pullback.fst (pullback.snd f g) h ≫ pullback.fst f g)
     (hk₂ : k ≫ pullback.snd f (h ≫ g) = pullback.snd (pullback.snd f g) h) :
-    let U := qcPullback (pullback.fst f (h ≫ g))
     let L := qcPullback k
-    let V := qcPullback (pullback.fst f g) ⋙
-      qcPullback (pullback.fst (pullback.snd f g) h)
     let P := @qcDirectImage _ _ _ _
       (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))) _ _
       (pullback.snd f (h ≫ g))

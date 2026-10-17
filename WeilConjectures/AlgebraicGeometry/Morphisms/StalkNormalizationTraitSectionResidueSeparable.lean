@@ -158,8 +158,6 @@ theorem GaloisCover.stalk_normalization_trait_section_residue_separable {S C : S
     (hG : IsUnit (Nat.card G : Γ(S, ⊤)))
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
-    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)
-    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)
     (Z : GaloisCover G Cη)
     (U : S.Opens) (hηU : genericPoint S ∈ U)
     (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
@@ -191,8 +189,6 @@ theorem GaloisCover.stalk_normalization_trait_section_residue_separable {S C : S
           ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
             (pullback.fst c a)).presheaf.stalk x)) := by
   classical
-  have _ := hsq
-  have _ := hsj
   let : IsFinite PA.obj.hom := PA.property
   let : QuasiCompact (c ⁻¹ᵁ U).ι :=
     MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)

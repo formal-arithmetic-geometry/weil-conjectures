@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
-set_option linter.unusedVariables false in
 /-- A supported perfect global object whose derived restriction detects the supported
 quasi-coherent objects on the smaller open. No assertion of global detection is made.
 Source: Stacks Project, Tag 0A9A, induction paragraphs and retract argument.

@@ -35,7 +35,7 @@ noncomputable def cartesianChartRestrictedRawClass
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
     (i : I) (V : (D.obj i).left.Etale) (U : c.pt.left.Etale)
-    (r : U.left ⟶ V.left) (_hr : IsPullback r U.hom V.hom (c.π.app i).left)
+    (r : U.left ⟶ V.left)
     (j : Over i)
     (x : restrictedOverCohomology (pullback.snd f (D.obj i).hom)
       (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
@@ -83,7 +83,7 @@ theorem cartesianChartRestrictedRawClass_eq
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
     (i : I) (V : (D.obj i).left.Etale) (U : c.pt.left.Etale)
-    (r : U.left ⟶ V.left) (hr : IsPullback r U.hom V.hom (c.π.app i).left)
+    (r : U.left ⟶ V.left)
     (j : Over i)
     (x : restrictedOverCohomology (pullback.snd f (D.obj i).hom)
       (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
@@ -91,7 +91,7 @@ theorem cartesianChartRestrictedRawClass_eq
     (hl₂ : ((cartesianChartCone f D c i).π.app j).left ≫
       pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) =
       pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom)) :
-    cartesianChartRestrictedRawClass f D c F q i V U r hr j x hl₂ =
+    cartesianChartRestrictedRawClass f D c F q i V U r j x hl₂ =
   let h := pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) ≫
     pullback.snd f (D.obj i).hom
   let h' := pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom) ≫
@@ -115,7 +115,7 @@ theorem cartesianChartRestrictedRawClass_eq
   let z := rawRestrictedCohomologyClass h q G V x
   let z' := abelianHigherDirectImageRawPullback l h h' wl q G G' φ V z
   z' := by
-  exact cartesianChartRestrictedRawClass.eq_def f D c F q i V U r hr j x hl₂
+  exact cartesianChartRestrictedRawClass.eq_def f D c F q i V U r j x hl₂
 
 attribute [local irreducible] cartesianChartCohomologyIso cartesianChartRawAdjunctionIso
   rawRestrictedCohomologyComparison abelianHigherDirectImageRawPullback
@@ -160,7 +160,7 @@ theorem cartesianChartRestrictedCohomologyMap_eval
     (abelianFreeRepresentablePullbackSquareIso (c.π.app i).left V U r hr).hom ≫
     (cartesianChartRawAdjunctionIso f (D.obj i).hom (c.π.app i).left c.pt.hom
       (Over.w (c.π.app i)).symm F q V).hom
-      (cartesianChartRestrictedRawClass f D c F q i V U r hr j x hl₂) := by
+      (cartesianChartRestrictedRawClass f D c F q i V U r j x hl₂) := by
   let h := pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) ≫
     pullback.snd f (D.obj i).hom
   let h' := pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom) ≫
@@ -185,8 +185,8 @@ theorem cartesianChartRestrictedCohomologyMap_eval
   have hn := rawRestrictedCohomologyClass_map l h h' wl q G G' φ V x
   have he := chartCohomologyIso_eval f (D.obj i).hom (c.π.app i).left c.pt.hom
     (Over.w (c.π.app i)).symm F q V U r hr
-    (cartesianChartRestrictedRawClass f D c F q i V U r hr j x hl₂)
-  have hz := cartesianChartRestrictedRawClass_eq f D c F q i V U r hr j x hl₂
+    (cartesianChartRestrictedRawClass f D c F q i V U r j x hl₂)
+  have hz := cartesianChartRestrictedRawClass_eq f D c F q i V U r j x hl₂
   dsimp only [] at hz
   have hn' := (hm.trans hn).trans
     (congrArg (fun y ↦ rawRestrictedCohomologyComparison h' q G' V y) hz.symm)

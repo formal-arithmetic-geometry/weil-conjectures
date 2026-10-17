@@ -74,8 +74,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
 -- The total tensor and restriction instances require extra elaboration heartbeats.
 set_option synthInstance.maxSize 512 in
-set_option linter.unusedVariables false in
--- Keep the supplied K-flatness hypothesis on J, although naturality needs only hP.
 /-- Tensor-Hom transposition converts a supplied section representative into a map
 from the total tensor model. The augmentation and its representative are inputs;
 no affine hypothesis, quasi-coherence, or existence of a perfect roof is asserted.

@@ -160,13 +160,13 @@ theorem exists_strictlyPerfect_evaluation_comparisons (X : Scheme.{u})
     (K N : schemeDerivedCategory X) (U : X.Opens)
     (P : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (F : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
-    (_hstrict : Scheme.IsStrictlyPerfect X U P)
-    (_eK : (SheafOfModules.overFunctor.{u}
+    (hstrict : Scheme.IsStrictlyPerfect X U P)
+    (eK : (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj P)
     (_eN : (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj N ≅ DerivedCategory.Q.obj F)
     (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)
-    (_hf : IsLocalOrdinaryEvaluation X U P F f) :
+    (hf : IsLocalOrdinaryEvaluation X U P F f) :
     let R := (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory
     let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
@@ -197,17 +197,17 @@ theorem exists_strictlyPerfect_evaluation_comparisons (X : Scheme.{u})
     intro p q n r h
     exact localEvaluationDegreeMap_formula X U P I p q n r h
   have : ∀ n : ℤ, IsIso (f.f n) :=
-    fun n ↦ isIso_localOrdinaryEvaluation_degree X U P F _hstrict f _hf n
+    fun n ↦ isIso_localOrdinaryEvaluation_degree X U P F hstrict f hf n
   have : IsIso f := HomologicalComplex.Hom.isIso_of_components f
   have : ∀ n : ℤ, IsIso (fI.f n) :=
-    fun n ↦ isIso_localOrdinaryEvaluation_degree X U P I _hstrict fI hfI n
+    fun n ↦ isIso_localOrdinaryEvaluation_degree X U P I hstrict fI hfI n
   have : IsIso fI := HomologicalComplex.Hom.isIso_of_components fI
   let h := ((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map η
-  have : QuasiIso h := strictlyPerfect_hom_quasiIso X U P _hstrict η
+  have : QuasiIso h := strictlyPerfect_hom_quasiIso X U P hstrict η
   have : IsIso (Q.map h) := inferInstance
   let eI := _eN ≪≫ asIso (Q.map η)
   obtain ⟨aI, bI, habI⟩ := exists_strictlyPerfect_kInjective_evaluation_comparisons
-    X K N U P I _hstrict _eK eI fI hfI
+    X K N U P I hstrict eK eI fI hfI
   refine ⟨aI ≪≫ asIso (Q.map fI) ≪≫ (asIso (Q.map h)).symm ≪≫
       (asIso (Q.map f)).symm, bI ≪≫ (asIso (Q.map h)).symm, ?_⟩
   dsimp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]

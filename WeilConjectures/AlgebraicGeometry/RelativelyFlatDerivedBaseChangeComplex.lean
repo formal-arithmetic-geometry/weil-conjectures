@@ -184,11 +184,8 @@ theorem relativelyFlat_derivedBaseChange_complex
           f (pullback.snd f g) g (pullback.fst f g) sq z)).1
       · exact (Classical.choose_spec (SingleComplexBaseChange.exists_tensorMap
           f (pullback.snd f g) g (pullback.fst f g) sq z)).2)
-  have hbound : ∃ b : ℤ, G.IsStrictlyLE b := by
-    obtain ⟨b, hb⟩ := hbounded
-    exact ⟨b, (G.isStrictlyLE_iff b).mpr hb⟩
   have hi := singleComplexBaseChangeCriterion f (pullback.snd f g) g
-    (pullback.fst f g) sq E hE G hbound hqc hstalk τ hτ
+    (pullback.fst f g) sq E hE G hqc hstalk τ hτ
   obtain ⟨a₀, b₀, hab₀⟩ := tensorCounit_oneKFlat_coordinates
     (pullback.fst f g) P G hP τ hτ
   let a := tensorIso e.symm (Iso.refl (DerivedCategory.Q.obj G)) ≪≫ a₀

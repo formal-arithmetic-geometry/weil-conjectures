@@ -23,7 +23,6 @@ Source: Stacks Project, Tags 08DH, 08I3, 08KS, 0BQY and 068G.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedVariables false
 universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry

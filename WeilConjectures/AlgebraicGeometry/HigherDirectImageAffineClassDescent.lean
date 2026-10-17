@@ -133,10 +133,7 @@ theorem exists_higher_image_affine_class_rep
   have : Mono ψ := @Functor.mono_of_mono_map _ _ _ _ R
     (Functor.reflectsMonomorphisms_of_faithful R) _ _ _ inferInstance
   have : Epi ψ := epi_higher_image_colimit_comparison Λ k G q D c hc K
-    (fun _ ↦ Iso.refl _) (fun _ ↦ by
-      simp only [K, t, Iso.refl_hom, Iso.refl_inv, Category.id_comp, Category.comp_id]
-      rfl)
-    B (Iso.refl _) (fun _ ↦ by
+    (fun _ ↦ Iso.refl _) B (Iso.refl _) (fun _ ↦ by
       simp only [B, t, Iso.refl_hom, Iso.refl_inv, Category.id_comp]
       exact (Category.comp_id _).symm)
   have : IsIso ψ := isIso_of_mono_of_epi ψ

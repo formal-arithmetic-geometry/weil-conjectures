@@ -329,10 +329,10 @@ theorem exists_derivedInternalHom_pullback_mate_sections
     S.toRingedSpace.sheaf
   let QT := ringedSiteZerothHypercohomology.{u, w} (Opens.grothendieckTopology T)
     T.toRingedSpace.sheaf
-  refine (exists_derivedPullbackMonoidalModel.{u, w} g).elim fun m hm ↦ ?_
+  refine (exists_derivedPullbackMonoidalModel.{u, w} g).elim fun m _ ↦ ?_
   refine (exists_canonicalDerivedTensorHom.{u, w} S).elim fun qS hqS ↦ ?_
   refine (exists_canonicalDerivedTensorHom.{u, w} T).elim fun qT hqT ↦ ?_
-  refine (exists_derivedPullback_evaluation_sections.{u, w} g m hm qS hqS qT hqT).elim
+  refine (exists_derivedPullback_evaluation_sections.{u, w} g m qS hqS qT hqT).elim
     fun a ha ↦ ?_
   refine ha.elim fun z hz ↦ ?_
   refine hz.elim fun eS hS ↦ ?_

@@ -211,7 +211,6 @@ private theorem fibreExchangeSectionComparison
   rfl
 
 -- The existing existential witness `ht` is intentionally unused in the statement.
-set_option linter.unusedVariables false in
 set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The module stalk comparison with strict henselization sections, together with

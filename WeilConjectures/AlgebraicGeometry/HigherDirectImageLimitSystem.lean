@@ -98,7 +98,7 @@ theorem isIso_higherDirectImage_limit_system {S : Scheme.{v}}
   let T := (S.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{v + 1})
   let B := T.mapCocone (Cocone.mk _ η)
   have hsurj := exists_higherDirectImage_limit_fiber_rep
-    D c hc F φ hφid hφcomp H eH hH p K eK hK η hη s
+    D c hc F φ hφid hφcomp H eH hH p K eK η hη s
   have hzero := exists_higherDirectImage_limit_fiber_eq_zero
     D c hc F φ hφid hφcomp H eH hH p K eK hK η hη s
   have := preservesFilteredColimitsOfSize_shrink.{v, v + 1, v, v + 1}

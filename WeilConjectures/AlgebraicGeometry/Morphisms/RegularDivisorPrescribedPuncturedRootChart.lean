@@ -53,8 +53,7 @@ and base change preserve regularity of the base and divisor, while flatness
 preserves injectivity of multiplication by g. Enumerate the finite components
 by Fin m. Their union is D(g) in the spectrum of the product of the full root
 algebras. Pullback pasting gives gamma over the new affine base, hence hgamma.
-The empty product gives an empty cover; the hypothesis f in y excludes the
-unit-equation case and also excludes the zero ring. No normalization or trait
+The empty product gives an empty cover. No normalization or trait
 localization occurs in this statement. -/
 theorem GaloisCover.regular_divisor_prescribed_punctured_root_chart
     {L U : Scheme.{u}} (i : U ⟶ L)
@@ -65,7 +64,7 @@ theorem GaloisCover.regular_divisor_prescribed_punctured_root_chart
     [IsRegularRing (R ⧸ Ideal.span {f})]
     (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))
     (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)
-    (y : Spec R) (hy : f ∈ y.asIdeal) :
+    (y : Spec R) :
     ∃ (S : CommRingCat.{u}) (ψ : Spec S ⟶ Spec R) (z : Spec S),
       Etale ψ ∧ ψ z = y ∧
       let g := (Spec.preimage ψ).hom f
@@ -109,16 +108,11 @@ theorem GaloisCover.regular_divisor_prescribed_punctured_root_chart
       Scheme.Opens.toScheme (X := Spec S) (PrimeSpectrum.basicOpen g),
       j ≫ Scheme.Opens.ι (X := Spec S) (PrimeSpectrum.basicOpen g) = p :=
     ⟨IsOpenImmersion.lift _ p hp, IsOpenImmersion.lift_fac _ p hp⟩
-  have hgz : g ∈ z.asIdeal := by
-    change f ∈ (PrimeSpectrum.comap a.hom z).asIdeal
-    change f ∈ ((Spec.map a) z).asIdeal
-    rw [hz]
-    exact hy
   have : IsRegularRing S := hS
   have : IsRegularRing (S ⧸ Ideal.span {g}) := hSg
   obtain ⟨T, θ, w, hθ, hw, m, e, he, hT, hh, hTh, γ, hγ⟩ :=
     root_split_cover_prescribed_cyclic_charts S g n hn hg
-      (pullback.snd (W.π ≫ i) (ψ ≫ φ)) hj d z hgz δ hδ
+      (pullback.snd (W.π ≫ i) (ψ ≫ φ)) hj d z δ hδ
   have : Etale ψ := hψ
   have : Etale θ := hθ
   let ε := pullback.congrHom (rfl : W.π ≫ i = W.π ≫ i) (Category.assoc θ ψ φ)

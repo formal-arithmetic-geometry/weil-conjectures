@@ -50,17 +50,13 @@ theorem smoothProper_tensor_perfect_case_core
     [∀ U : Y.Opens,
       HasDerivedCategory.{w} (SheafOfModules.{u}
         ((moduleRings Y.toRingedSpace).over U))]
-   
     (hRf : ∀ E : schemeDerivedQCohCategory X,
       schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj))
     (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y)))
-   
     (hTensor : ∀ (K : schemeDerivedQCohCategory Y)
       (E : schemeDerivedQCohCategory X),
-      schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj))
-    (hm : Functor.Monoidal (derivedPullback f))
-    (ha : derivedPullback f ⊣ schemeDerivedDirectImage f):
-          ∀ (_ : Functor.Monoidal (derivedPullback f))
+      schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj)) :
+        ∀ (_ : Functor.Monoidal (derivedPullback f))
         (a : derivedPullback f ⊣ schemeDerivedDirectImage f)
         (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)
         (adj : (schemeDerivedQCohProperty Y).lift
@@ -78,8 +74,6 @@ theorem smoothProper_tensor_perfect_case_core
               hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
             (ObjectProperty.homMk (pf.hom ≫
               K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))) := by
-  have _ := hm
-  have _ := ha
   intro m a c adj K hK
   let := m
   obtain ⟨D, ⟨pairKD⟩, ⟨pairDK⟩, _, _, _, _⟩ := perfect_tensor_hom_duality Y K hK

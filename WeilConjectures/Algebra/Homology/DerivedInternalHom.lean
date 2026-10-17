@@ -90,7 +90,9 @@ theorem derivedInternalHom_inverts
 functor induced through the localization `Q.op.prod Q` by
 `(L, M) ↦ Q (𝓗om^•(L, I(M)))`, with `I` the functorial K-injective resolution
 `CochainComplex.kInjectiveResolutionFunctor` of the Grothendieck abelian category of
-`O`-modules. The Hom complex is `homComplexFunctor` (`def-pur-hom-complex`).
+`O`-modules. The Hom complex is `homComplexFunctor` (`def-pur-hom-complex`). For a fixed
+first variable it agrees with the internal hom `DerivedCategory.internalHomQhObj` of the derived
+tensor product (`derivedInternalHomIsoInternalHomQhObj`).
 
 Source: Stacks Project, sites-cohomology.tex, Sections 08J7, 0A8X and 07A5
 (blueprint: def-pur-derived-internal-hom). -/
