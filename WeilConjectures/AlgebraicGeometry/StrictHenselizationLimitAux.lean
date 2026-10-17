@@ -90,11 +90,12 @@ lemma SpecPointedEtaleNeighborhood.exists_range_subset (N₁ N₂ : SpecPointedE
 /-- If the geometric point `s` of a scheme `S` locally of finite type over a field `K` lies over
 a non-closed point, then some pointed étale neighbourhood `Spec R` of `s` has a function `c ∈ R`
 whose value at `s` is transcendental over `K`. -/
+omit [IsSepClosed Ω] in
 lemma exists_transcendental_pt {K : Type u} [Field K] (aS : S ⟶ Spec (.of K))
     [LocallyOfFiniteType aS] (hs : ¬ IsClosed {s (IsLocalRing.closedPoint Ω)}) :
     letI : Algebra K Ω := (Spec.preimage (s ≫ aS)).hom.toAlgebra
     ∃ (N : SpecPointedEtaleNeighborhood s) (c : N.R), Transcendental K (N.pt c) := by
-  letI : Algebra K Ω := (Spec.preimage (s ≫ aS)).hom.toAlgebra
+  let : Algebra K Ω := (Spec.preimage (s ≫ aS)).hom.toAlgebra
   obtain ⟨R₀, j, hj, hmem, -⟩ := exists_affine_mem_range_and_range_subset
     (x := s (IsLocalRing.closedPoint Ω)) (U := ⊤) trivial
   have hsub : Set.range s ⊆ Set.range j := by
@@ -104,12 +105,12 @@ lemma exists_transcendental_pt {K : Type u} [Field K] (aS : S ⟶ Spec (.of K))
   let N : SpecPointedEtaleNeighborhood s :=
     ⟨R₀, j, inferInstance, Spec.preimage (IsOpenImmersion.lift j s hsub),
       by rw [Spec.map_preimage, hl]⟩
-  letI : Algebra K R₀ := (Spec.preimage (N.hom ≫ aS)).hom.toAlgebra
+  let : Algebra K R₀ := (Spec.preimage (N.hom ≫ aS)).hom.toAlgebra
   let f : R₀ →ₐ[K] Ω :=
     { N.pt.hom with
       commutes' k := congr($(N.preimage_comp_pt aS) k) }
   by_contra hcon
-  push_neg at hcon
+  push Not at hcon
   have halg : Algebra.IsAlgebraic K f.range := ⟨fun ⟨_, c, rfl⟩ ↦
     (isAlgebraic_algHom_iff f.range.val Subtype.val_injective).1
       (not_not.1 (hcon N c))⟩

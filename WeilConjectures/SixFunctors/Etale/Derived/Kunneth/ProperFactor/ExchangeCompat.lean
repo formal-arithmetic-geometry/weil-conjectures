@@ -238,11 +238,14 @@ lemma kunnethMap_derivedBaseChangeMap (aX : X ⟶ S) (aY : Y ⟶ S) (aU : U ⟶ 
     whisker_exchange_assoc, whisker_exchange]
   simp only [← comp_whiskerRight_assoc, ← MonoidalCategory.whiskerLeft_comp]
   congr 2
-  · rw [leftDerivedUpperStarComp_hom_app_map_counit_comp_derivedSquareUpperStarIso A j aX aU hj q c
-      hq p h sq c' hc' hp F, derivedUpperStar_map_derivedBaseChangeMap_app_counit,
-      Functor.map_comp, Category.assoc]
-  · rw [leftDerivedUpperStarComp_hom_app_map_counit_comp A h r aY c r' c' hr hr' hc' hr'c K,
-      Functor.map_comp, Category.assoc, Category.assoc]
+  · rw [derivedUpperStar_map_derivedBaseChangeMap_app_counit]
+    have := leftDerivedUpperStarComp_hom_app_map_counit_comp_derivedSquareUpperStarIso A j aX aU hj
+      q c hq p h sq c' hc' hp F
+    simp only [Functor.map_comp, Category.assoc] at this ⊢
+    exact this
+  · have := leftDerivedUpperStarComp_hom_app_map_counit_comp A h r aY c r' c' hr hr' hc' hr'c K
+    simp only [Functor.map_comp, Category.assoc] at this ⊢
+    exact this
 
 end General
 

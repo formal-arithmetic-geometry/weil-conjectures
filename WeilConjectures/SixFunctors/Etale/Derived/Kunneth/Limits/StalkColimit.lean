@@ -37,8 +37,8 @@ transition maps `τ`, elementwise: every element of `B` comes from some `A i`, a
 `A i` dying in `B` dies in some `A j` along a transition map. -/
 def IsElementwiseColimit {I : Type*} [Category I] (A : I → ModuleCat R) (B : ModuleCat R)
     (σ : ∀ i, A i ⟶ B) (τ : ∀ {i j : I}, (i ⟶ j) → (A j ⟶ A i)) : Prop :=
-  (∀ b : B, ∃ i (a : A i), (σ i).hom a = b) ∧
-    ∀ i (a : A i), (σ i).hom a = 0 → ∃ j (f : j ⟶ i), (τ f).hom a = 0
+  (∀ b : B, ∃ (i : I) (a : A i), (σ i).hom a = b) ∧
+    ∀ (i : I) (a : A i), (σ i).hom a = 0 → ∃ (j : I) (f : j ⟶ i), (τ f).hom a = 0
 
 namespace IsElementwiseColimit
 
@@ -174,7 +174,7 @@ noncomputable def isColimitOfIsElementwiseColimit
     IsColimit c :=
   have : HasColimitsOfShape Iᵒᵖ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
     Sheaf.instHasColimitsOfShape
-  have : IsIso (colimit.desc F c) := Scheme.isIso_of_isIso_sheafFiber_map _ fun x ↦ by
+  have : IsIso ((colimit.isColimit F).desc c) := Scheme.isIso_of_isIso_sheafFiber_map _ fun x ↦ by
     have : PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
       preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
     have hc := isColimitOfPreserves (X.uliftPointSmallEtale x).sheafFiber (colimit.isColimit F)
@@ -184,17 +184,16 @@ noncomputable def isColimitOfIsElementwiseColimit
       rw [← map_sub] at hz
       obtain ⟨⟨i⟩, a, ha⟩ := Concrete.isColimit_exists_rep _ hc (z₁ - z₂)
       rw [← ha] at hz ⊢
-      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp] at hz
-      simp only [Functor.mapCocone_ι_app, colimit.cocone_ι, colimit.ι_desc] at hz
+      simp only [Functor.mapCocone_ι_app, colimit.cocone_ι] at hz ⊢
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, colimit.isColimit_desc,
+        colimit.ι_desc] at hz
       obtain ⟨j, f, hf⟩ := (h x).2 i a hz
-      have := (colimit.cocone F).w f.op
-      simp only [Functor.mapCocone_ι_app, colimit.cocone_ι]
       rw [← colimit.w F f.op, Functor.map_comp, ConcreteCategory.comp_apply]
       erw [hf, map_zero]
     · obtain ⟨i, a, rfl⟩ := (h x).1 b
       refine ⟨((X.uliftPointSmallEtale x).sheafFiber.map (colimit.ι F (op i))).hom a, ?_⟩
-      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, colimit.ι_desc]
-      rfl
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, colimit.isColimit_desc,
+        colimit.ι_desc]
   IsColimit.ofPointIso (colimit.isColimit F)
 
 end AlgebraicGeometry.Etale

@@ -63,7 +63,8 @@ theorem exists_aeval_mem_of_isMaximal (K : Type*) {C : Type*} [Field K] [CommRin
   have : Module.Finite K (C ⧸ m) := finite_of_finite_type_of_isJacobsonRing K (C ⧸ m)
   have hint : IsIntegral K (Ideal.Quotient.mk m c) := Algebra.IsIntegral.isIntegral _
   refine ⟨minpoly K (Ideal.Quotient.mk m c), minpoly.ne_zero hint, ?_⟩
-  rw [← Ideal.Quotient.eq_zero_iff_mem, ← Ideal.Quotient.mkₐ_eq_mk K, ← Polynomial.aeval_algHom_apply,
+  rw [← Ideal.Quotient.eq_zero_iff_mem, ← Ideal.Quotient.mkₐ_eq_mk K,
+    ← Polynomial.aeval_algHom_apply,
     Ideal.Quotient.mkₐ_eq_mk, minpoly.aeval]
 
 /-- **The dimension drops when a transcendental element becomes a constant.** Let `C` be of finite
@@ -77,7 +78,7 @@ theorem ringKrullDim_adjoin_range_add_one_le {K L C R : Type*} [Field K] [Field 
     ringKrullDim (Algebra.adjoin L (Set.range ι)) + 1 ≤ ringKrullDim C := by
   classical
   let F := FractionRing K[X]
-  letI : Algebra K[X] C := (aeval c).toRingHom.toAlgebra
+  let : Algebra K[X] C := (aeval c).toRingHom.toAlgebra
   have : IsScalarTower K K[X] C := .of_algebraMap_eq fun x ↦ by
     change algebraMap K C x = aeval c (Polynomial.C x)
     rw [aeval_C]
@@ -85,7 +86,7 @@ theorem ringKrullDim_adjoin_range_add_one_le {K L C R : Type*} [Field K] [Field 
   -- the localization `E = F ⊗_{K[X]} C` of `C`
   let E := F ⊗[K[X]] C
   have hE : ringKrullDim E + 1 ≤ ringKrullDim C := by
-    letI : Algebra C E := Algebra.TensorProduct.rightAlgebra
+    let : Algebra C E := Algebra.TensorProduct.rightAlgebra
     have := IsLocalization.tensorRight (R := K[X]) (S := C) (A := F) (nonZeroDivisors K[X])
     refine ringKrullDim_add_one_le_of_isLocalization
       (Algebra.algebraMapSubmonoid C (nonZeroDivisors K[X])) fun m hm ↦ ?_
@@ -94,9 +95,9 @@ theorem ringKrullDim_adjoin_range_add_one_le {K L C R : Type*} [Field K] [Field 
   -- the field `F = K(t)` maps to `L`
   have hinj : Function.Injective (aeval t : K[X] →ₐ[K] L) := transcendental_iff_injective.1 ht
   let ρ : F →+* L := IsFractionRing.lift hinj
-  letI : Algebra F L := ρ.toAlgebra
-  letI : Algebra F R := ((algebraMap L R).comp ρ).toAlgebra
-  letI : Algebra K[X] R := ((algebraMap F R).comp (algebraMap K[X] F)).toAlgebra
+  let : Algebra F L := ρ.toAlgebra
+  let : Algebra F R := ((algebraMap L R).comp ρ).toAlgebra
+  let : Algebra K[X] R := ((algebraMap F R).comp (algebraMap K[X] F)).toAlgebra
   have : IsScalarTower K[X] F R := .of_algebraMap_eq fun _ ↦ rfl
   have : IsScalarTower F L R := .of_algebraMap_eq fun _ ↦ rfl
   have hρ (p : K[X]) : ρ (algebraMap K[X] F p) = aeval t p := IsFractionRing.lift_algebraMap _ _
@@ -170,5 +171,5 @@ theorem Algebra.finiteType_adjoin_range {K L C R : Type*} [CommRing K] [CommRing
     rw [AlgHom.map_adjoin] at hc
     have hle : Algebra.adjoin K (ι '' s) ≤
         (Algebra.adjoin L ((s.image ι : Finset R) : Set R)).restrictScalars K :=
-      Algebra.adjoin_le (by simpa using Algebra.subset_adjoin (R := L))
+      Algebra.adjoin_le (by simp [Algebra.subset_adjoin (R := L)])
     exact hle hc

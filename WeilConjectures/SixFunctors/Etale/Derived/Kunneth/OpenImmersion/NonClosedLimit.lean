@@ -177,7 +177,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_snd {L : Type u} [Field L]
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
   have : IsConnected I := IsCofiltered.isConnected I
   have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_field aX
-  have : QuasiSeparated aX := quasiSeparated_of_quasiSeparatedSpace aX
+  have : QuasiSeparated aX := QuasiSeparated.of_quasiSeparatedSpace aX
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
   let a' := (Functor.const I).map aX
   let XD := pullback a' qD
@@ -254,7 +254,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
     (F : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
   have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_field aY
-  have : QuasiSeparated aY := quasiSeparated_of_quasiSeparatedSpace aY
+  have : QuasiSeparated aY := QuasiSeparated.of_quasiSeparatedSpace aY
   -- descend the open `U'` to an open `U₀` of some `X_{i₀}`
   obtain ⟨i₀, U₀, hU₀c, hU₀⟩ := Scheme.exists_preimage_eq_of_isAffine D hc j.opensRange
     (by simpa using isCompact_range j.continuous)
@@ -359,11 +359,13 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
     · rw [Category.assoc, Category.assoc, heD₁ k]
       simp [cT, cY]
     · rw [Category.assoc, Category.assoc, heD₂ k]
-      simp [cT, cY, cX, sq.w_assoc, pD, hD]
-  · simp [cY, hD]
+      simp [cT, cY, cX, pD, hD]
+  · exact (constPullbackCone_π_app_snd U₀.ι (pD ≫ w') cX (e ≫ uU) h hwX hYpb.w k).symm
   · have : LocallyOfFiniteType (qD'.app k) :=
       inferInstanceAs (LocallyOfFiniteType (qD.app k.left))
-    have : QuasiCompact (qD'.app k) := inferInstance
+    have : QuasiSeparatedSpace (((Functor.const (Over i₀)).obj (Spec (.of L))).obj k) :=
+      inferInstanceAs (QuasiSeparatedSpace (Spec (.of L)))
+    have : QuasiCompact (qD'.app k) := quasiCompact_of_compactSpace _
     exact IH (qD'.app k) aY (gD.app k) (pD.app k) ((pullback.fst aY' qD').app k) (hX k).flip
       (eD.app k) (hD.app k) (hsq k) n hn hΛ (hdim k.left) q G
 

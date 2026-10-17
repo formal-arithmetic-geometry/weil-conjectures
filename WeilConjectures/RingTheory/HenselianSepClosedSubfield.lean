@@ -40,7 +40,7 @@ lemma HenselianLocalRing.isSepClosed_of_maximal {R : Type u} [CommRing R] [Hense
     (hM : Maximal (fun T : Subring R ↦ T₀ ≤ T ∧ IsField T) M) :
     letI := hM.prop.2.toField
     IsSepClosed M := by
-  letI := hM.prop.2.toField
+  let := hM.prop.2.toField
   refine IsSepClosed.of_exists_root _ fun p hpm hpi hps ↦ ?_
   let P : R[X] := p.map M.subtype
   have hPm : P.Monic := hpm.map _
@@ -56,7 +56,7 @@ lemma HenselianLocalRing.isSepClosed_of_maximal {R : Type u} [CommRing R] [Hense
       Polynomial.eval₂_map]
     exact hps.eval₂_derivative_ne_zero ι (by rwa [Polynomial.IsRoot.def, Polynomial.eval_map] at hb)
   obtain ⟨r, hr, -⟩ := HenselianLocalRing.is_henselian P hPm a₀ h₁ h₂
-  letI : Algebra M R := M.subtype.toAlgebra
+  let : Algebra M R := M.subtype.toAlgebra
   have : Fact (Irreducible p) := ⟨hpi⟩
   have hr' : aeval r p = 0 := by
     rw [aeval_def]

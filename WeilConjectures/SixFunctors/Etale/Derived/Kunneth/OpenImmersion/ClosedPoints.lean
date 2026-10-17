@@ -21,7 +21,8 @@ closed point `z`, restrict to affine open neighbourhoods `X₀` and `Y₀` of th
 (blueprint `lem-kun-compactification-affine`), and apply the projective case.
 
 In the formalisation, the restriction to the affine open neighbourhoods is done by étale
-locality of the base change map (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale_cover`),
+locality of the base change map
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale_cover`),
 applied to the open cover of `X ×_K Y` by the products `X₀ ×_K Y₀` of affine opens; on each
 of them the base change map is the restriction of the base change map over `X₀ ×_K Ȳ`, which
 is an isomorphism by the projective case.
@@ -63,7 +64,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_atNonClosed_of_isAffine {N : WithBo
   have sqα : IsPullback α q₂ (pullback.snd aX aY') jY :=
     IsPullback.of_right (by rw [pullback.lift_fst, hcomm]; exact hW) (pullback.lift_snd _ _ _)
       hW'
-  have : IsOpenImmersion α := MorphismProperty.of_isPullback sqα inferInstance
+  have : IsOpenImmersion α := MorphismProperty.of_isPullback sqα.flip inferInstance
   have sq₂ := IsPullback.of_hasPullback j (pullback.fst aX aY')
   have hF₂ := Etale.isIso_baseChangeHomologyMap_of_isProper_of_forall_not_isClosed Λ aX aY' j
     (pullback.fst aX aY') (pullback.snd aX aY') hW' _ _ sq₂ n hn hΛ F
@@ -109,7 +110,8 @@ theorem Etale.openImmersionBaseChangeAtMost_of_atNonClosed {N : WithBot ℕ∞}
   · have hW₀ : IsPullback (f z) (pullback.snd (s z) (ιY z)) (ιX z ≫ aX) (ιY z ≫ aY) :=
       (IsPullback.of_hasPullback (s z) (ιY z)).paste_horiz
         ((IsPullback.of_hasPullback q₁ (ιX z)).paste_horiz hW.flip).flip
-    have : QuasiCompact (ιX z ≫ aX) := HasAffineProperty.iff_of_isAffine.mpr inferInstance
+    have : QuasiCompact (ιX z ≫ aX) :=
+      (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).mpr inferInstance
     exact Etale.isIso_baseChangeHomologyMap_of_atNonClosed_of_isAffine H (ιX z ≫ aX)
       (ιY z ≫ aY) (pullback.snd j (ιX z)) (f z) _ hW₀ _ _ (IsPullback.of_hasPullback _ _) n hn
       hΛ ((add_le_add (ιX z).isOpenEmbedding.isInducing.topologicalKrullDim_le

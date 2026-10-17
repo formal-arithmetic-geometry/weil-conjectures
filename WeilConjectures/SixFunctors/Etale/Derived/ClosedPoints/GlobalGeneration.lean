@@ -190,8 +190,13 @@ lemma epi_upperStar_map_globalSectionsEvaluation {X : Scheme.{u}} {k : Type u} [
       (globalSectionsEvaluation Λ X G ≫ adj.unit.app G)) := by
     rw [Functor.map_comp, ModuleCat.hom_comp, LinearMap.coe_comp]
     exact h.comp (surjective_terminalSections_map_globalSectionsEvaluation Λ X G)
-  rw [← adj.unit.naturality, Functor.map_comp, ModuleCat.hom_comp, LinearMap.coe_comp] at hc
-  exact Function.Surjective.of_comp hc
+  have hn : globalSectionsEvaluation Λ X G ≫ adj.unit.app G = adj.unit.app _ ≫
+      (f)_*[ModuleCat.{u + 1} Λ].map ((f)^*[ModuleCat.{u + 1} Λ].map
+        (globalSectionsEvaluation Λ X G)) := adj.unit.naturality _
+  rw [hn, Functor.map_comp] at hc
+  intro y
+  obtain ⟨x, hx⟩ := hc y
+  exact ⟨_, (ConcreteCategory.comp_apply _ _ x).symm.trans hx⟩
 
 /-- **Sheaves supported on finitely many closed points are globally generated.** Let `U` be
 an open subset of a scheme `X` whose complement is a finite set of closed points with separably
@@ -277,10 +282,12 @@ theorem isGloballyGenerated_of_isZero_upperStar {X : Scheme.{u}} (U : X.Opens)
       exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ hπ this
   -- each unit `G ⟶ iₓ_* iₓ^* G` is a split epimorphism, hence surjective on global sections
   have hsurj (x : ι) : Function.Surjective ((terminalSections Λ X).map ((adj x).unit.app G)) := by
+    have hφπ : φ ≫ biproduct.π G' x = (adj x).unit.app G := biproduct.lift_π _ x
     have : IsSplitEpi ((adj x).unit.app G) :=
       ⟨⟨biproduct.ι G' x ≫ inv φ, by
-        rw [Category.assoc, ← biproduct.lift_π (fun x ↦ (adj x).unit.app G) x,
-          IsIso.inv_hom_id_assoc, biproduct.ι_π_self]⟩⟩
+        rw [Category.assoc, ← hφπ,
+          IsIso.inv_hom_id_assoc, biproduct.ι_π_self]
+        rfl⟩⟩
     rw [← ModuleCat.epi_iff_surjective]
     infer_instance
   -- the cokernel of the evaluation morphism vanishes after pullback along every `a o`

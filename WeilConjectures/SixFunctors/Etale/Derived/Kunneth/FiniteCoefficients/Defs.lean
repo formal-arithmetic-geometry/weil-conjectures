@@ -193,20 +193,12 @@ finite-field coefficients.
 For `X`, `Y` over `S`, `Z = X ×_S Y`, `K ∈ D(X_ét, F)` and `L ∈ D(Y_ét, F)`,
 `K ⊠ᴸ_F L := Lp_X^* K ⊗ᴸ_F Lp_Y^* L ∈ D(Z_ét, F)`, with the functors
 `AlgebraicGeometry.Etale.leftDerivedUpperStarFiniteField` and
-`AlgebraicGeometry.Etale.derivedTensorFiniteField`. -/
+`AlgebraicGeometry.Etale.derivedTensorFiniteField`: the exterior product
+`AlgebraicGeometry.Etale.exteriorProduct` at the coefficient ring `F`. -/
 noncomputable abbrev exteriorProductFiniteField {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (K : DerivedCategoryFiniteField F X) (L : DerivedCategoryFiniteField F Y) :
     DerivedCategoryFiniteField F (pullback f g) :=
-  ((derivedTensorFiniteField F (pullback f g)).obj
-    ((leftDerivedUpperStarFiniteField F (pullback.fst f g)).obj K)).obj
-      ((leftDerivedUpperStarFiniteField F (pullback.snd f g)).obj L)
-
-/-- The exterior product with finite-field coefficients is the exterior product
-`AlgebraicGeometry.Etale.exteriorProduct` at the coefficient ring `F`. -/
-lemma exteriorProductFiniteField_eq {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
-    (K : DerivedCategoryFiniteField F X) (L : DerivedCategoryFiniteField F Y) :
-    exteriorProductFiniteField F f g K L = exteriorProduct F f g K L :=
-  rfl
+  exteriorProduct F f g K L
 
 end FiniteField
 

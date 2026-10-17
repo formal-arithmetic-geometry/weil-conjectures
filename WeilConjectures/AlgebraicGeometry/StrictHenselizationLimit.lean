@@ -71,15 +71,16 @@ theorem exists_isLimit_strictLocalization_of_not_isClosed {K Ω : Type u} [Field
       ∀ i, topologicalKrullDim (D.obj i) < topologicalKrullDim X := by
   classical
   let κR : K →+* strictHenselization s := (Spec.preimage (strictLocalizationToBase s ≫ aX)).hom
-  letI : Algebra K (strictHenselization s) := κR.toAlgebra
-  letI : Algebra K Ω := (Spec.preimage (s ≫ aX)).hom.toAlgebra
+  let : Algebra K (strictHenselization s) := κR.toAlgebra
+  let : Algebra K Ω := (Spec.preimage (s ≫ aX)).hom.toAlgebra
   obtain ⟨N₀, c₀, hc₀⟩ := exists_transcendental_pt aX hs
   let ev : strictHenselization s →ₐ[K] Ω :=
     { (strictHenselizationEval s).hom with
       commutes' k := congr($(preimage_comp_strictHenselizationEval aX) k) }
   let tR := N₀.ι c₀
   have hunit (g : nonZeroDivisors K[X]) : IsUnit (aeval tR (g : K[X])) := by
-    refine isUnit_of_strictHenselizationEval_ne_zero fun h ↦ hc₀ ⟨g, nonZeroDivisors.ne_zero g.2, ?_⟩
+    refine isUnit_of_strictHenselizationEval_ne_zero fun h ↦
+      hc₀ ⟨g, nonZeroDivisors.ne_zero g.2, ?_⟩
     have hev : ev tR = N₀.pt c₀ := SpecPointedEtaleNeighborhood.strictHenselizationEval_ι N₀ c₀
     have : ev (aeval tR (g : K[X])) = 0 := h
     rwa [← Polynomial.aeval_algHom_apply, hev] at this
@@ -88,8 +89,8 @@ theorem exists_isLimit_strictLocalization_of_not_isClosed {K Ω : Type u} [Field
     IsLocalization.lift (M := nonZeroDivisors K[X]) (g := (aeval tR).toRingHom) hunit
   have hφ (p : K[X]) : φ (algebraMap K[X] F p) = aeval tR p := IsLocalization.lift_eq _ _
   obtain ⟨L, _, _, ψ, ρ, hψρ⟩ := HenselianLocalRing.exists_isSepClosed_factor φ
-  letI : Algebra K L := (ρ.comp ((algebraMap K[X] F).comp Polynomial.C)).toAlgebra
-  letI : Algebra L (strictHenselization s) := ψ.toAlgebra
+  let : Algebra K L := (ρ.comp ((algebraMap K[X] F).comp Polynomial.C)).toAlgebra
+  let : Algebra L (strictHenselization s) := ψ.toAlgebra
   have hψK (k : K) : ψ (algebraMap K L k) = κR k := by
     change (ψ.comp ρ) _ = _
     rw [hψρ, RingHom.comp_apply, hφ, aeval_C]
@@ -127,7 +128,7 @@ theorem exists_isLimit_strictLocalization_of_not_isClosed {K Ω : Type u} [Field
   have hD (D : Subalgebra L (strictHenselization s)) (hD : D ∈ Dset) :
       Algebra.FiniteType L D ∧ ringKrullDim D + 1 ≤ topologicalKrullDim X := by
     obtain ⟨N, ⟨c, hc⟩, rfl⟩ := hD
-    letI : Algebra K N.R := (Spec.preimage (N.hom ≫ aX)).hom.toAlgebra
+    let : Algebra K N.R := (Spec.preimage (N.hom ≫ aX)).hom.toAlgebra
     have : Algebra.FiniteType K N.R := N.finiteType_preimage aX
     let ιN : N.R →ₐ[K] strictHenselization s :=
       { N.ι.hom with commutes' k := congr($(N.preimage_comp_ι aX) k) }
@@ -197,7 +198,7 @@ lemma not_isClosed_singleton_of_residueFieldTrdeg_pos {K : Type u} [Field K] {X 
     (aX.isClosed_singleton_iff_isAlgebraic_residueField x).1 hc
   have h : residueFieldTrdeg aX x = Algebra.trdeg K (X.residueField x) := by
     rw [residueFieldTrdeg, residueFieldHomOfOver_eq_residueFieldAlgebraMap]
-  rw [h, Algebra.trdeg_eq_zero] at hx
+  rw [h, trdeg_eq_zero] at hx
   exact lt_irrefl _ hx
 
 /-- Blueprint `lem-kun-0f0u`, in the form of the blueprint: the strict henselization at a

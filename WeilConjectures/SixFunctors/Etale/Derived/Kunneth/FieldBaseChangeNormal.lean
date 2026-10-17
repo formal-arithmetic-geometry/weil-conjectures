@@ -272,13 +272,20 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
   letI : Algebra K Γ(S', ⊤) := (s.appTop.hom.comp (Scheme.ΓSpecIso (.of K)).inv.hom).toAlgebra
   letI : Algebra K Γ(T, ⊤) := (t.appTop.hom.comp (algebraMap K Γ(S', ⊤))).toAlgebra
   let φ : Γ(S', ⊤) →ₐ[K] Γ(T, ⊤) := { t.appTop.hom with commutes' := fun _ ↦ rfl }
-  let FB : (Finset Γ(S', ⊤) × Finset Γ(T, ⊤)) →o Subalgebra K Γ(S', ⊤) :=
-    ⟨fun i ↦ Algebra.adjoin K ↑i.1, fun i j hij ↦ Algebra.adjoin_mono (Finset.coe_subset.2 hij.1)⟩
-  let FC : (Finset Γ(S', ⊤) × Finset Γ(T, ⊤)) →o Subalgebra K Γ(T, ⊤) :=
-    ⟨fun i ↦ Algebra.adjoin K (↑i.2 ∪ φ '' ↑i.1), fun i j hij ↦ Algebra.adjoin_mono
-      (Set.union_subset_union (Finset.coe_subset.2 hij.2)
-        (Set.image_mono (Finset.coe_subset.2 hij.1)))⟩
-  have hφ (i : Finset Γ(S', ⊤) × Finset Γ(T, ⊤)) (x : FB i) : φ x ∈ FC i := by
+  let l (i : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤))) : Finset Γ(S', ⊤) :=
+    i.preimage Sum.inl Sum.inl_injective.injOn
+  let r (i : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤))) : Finset Γ(T, ⊤) :=
+    i.preimage Sum.inr Sum.inr_injective.injOn
+  have hl {i j : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤))} (hij : i ≤ j) : (l i : Set Γ(S', ⊤)) ⊆ l j :=
+    Finset.coe_subset.2 fun x hx ↦ Finset.mem_preimage.2 (hij (Finset.mem_preimage.1 hx))
+  have hr {i j : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤))} (hij : i ≤ j) : (r i : Set Γ(T, ⊤)) ⊆ r j :=
+    Finset.coe_subset.2 fun x hx ↦ Finset.mem_preimage.2 (hij (Finset.mem_preimage.1 hx))
+  let FB : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)) →o Subalgebra K Γ(S', ⊤) :=
+    ⟨fun i ↦ Algebra.adjoin K ↑(l i), fun i j hij ↦ Algebra.adjoin_mono (hl hij)⟩
+  let FC : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)) →o Subalgebra K Γ(T, ⊤) :=
+    ⟨fun i ↦ Algebra.adjoin K (↑(r i) ∪ φ '' ↑(l i)), fun i j hij ↦ Algebra.adjoin_mono
+      (Set.union_subset_union (hr hij) (Set.image_mono (hl hij)))⟩
+  have hφ (i : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤))) (x : FB i) : φ x ∈ FC i := by
     have hx : φ x ∈ (FB i).map φ := Subalgebra.mem_map.2 ⟨x, x.2, rfl⟩
     rw [AlgHom.map_adjoin] at hx
     exact Algebra.adjoin_mono Set.subset_union_right hx
@@ -309,11 +316,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
                rfl } }
   have hS : IsLimit cS :=
     (isLimitOfPreserves Scheme.Spec (Subalgebra.isColimitCoconeOfMonotone FB
-      fun x ↦ ⟨({x}, ∅), Algebra.subset_adjoin (by simp)⟩).op).ofIsoLimit
+      fun x ↦ ⟨{Sum.inl x}, Algebra.subset_adjoin (by simp [l])⟩).op).ofIsoLimit
       (Cones.ext S'.isoSpec.symm fun i ↦ by simp [cS])
   have hT : IsLimit cT :=
     (isLimitOfPreserves Scheme.Spec (Subalgebra.isColimitCoconeOfMonotone FC
-      fun x ↦ ⟨(∅, {x}), Algebra.subset_adjoin (by simp)⟩).op).ofIsoLimit
+      fun x ↦ ⟨{Sum.inr x}, Algebra.subset_adjoin (by simp [r])⟩).op).ofIsoLimit
       (Cones.ext T.isoSpec.symm fun i ↦ by simp [cT])
   have hsK : S'.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (algebraMap K Γ(S', ⊤))) = s := by
     have : CommRingCat.ofHom (algebraMap K Γ(S', ⊤)) =
@@ -329,10 +336,10 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
     dsimp [cS, cT, g]
     rw [Scheme.toSpecΓ_naturality_assoc, Category.assoc, ← Spec.map_comp, ← Spec.map_comp]
     rfl
-  have hfinB (i : Finset Γ(S', ⊤) × Finset Γ(T, ⊤)) : Algebra.FiniteType K (FB i) :=
+  have hfinB (i : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤))) : Algebra.FiniteType K (FB i) :=
     (Subalgebra.fg_iff_finiteType _).1 (Subalgebra.fg_adjoin_finset _)
-  have hfinC (i : Finset Γ(S', ⊤) × Finset Γ(T, ⊤)) : Algebra.FiniteType K (FC i) :=
-    (Subalgebra.fg_iff_finiteType _).1 ⟨i.2 ∪ i.1.image φ, by simp [FC]⟩
+  have hfinC (i : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤))) : Algebra.FiniteType K (FC i) :=
+    (Subalgebra.fg_iff_finiteType _).1 ⟨r i ∪ (l i).image φ, by simp [FC]⟩
   have (i) : LocallyOfFiniteType (w.app i) :=
     HasRingHomProperty.Spec_iff.2 (RingHom.finiteType_algebraMap.2 (hfinB i.unop))
   have (i) : QuasiCompact (w.app i) := inferInstanceAs (QuasiCompact (Spec.map _))

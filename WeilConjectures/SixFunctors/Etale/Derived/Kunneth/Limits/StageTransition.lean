@@ -162,10 +162,89 @@ lemma transition_comp {α β γ : LimitStage B W} (φ : Hom α β) (ψ : Hom β 
   have n3 := congrArg (fun x ↦ D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
     (R+((α.g)_*[ModuleCat.{u + 1} Λ]).map x)) hW'
   simp only [Functor.comp_map, Functor.map_comp] at n1 n2 n3
-  rw [reassoc_of% n1, ← reassoc_of% hS]
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% n1, ← reassoc_of% hS]
   rw [reassoc_of% n2, reassoc_of% n3]
 
+/-- The identity morphism of a stage. -/
+abbrev Hom.id (α : LimitStage B W) : Hom α α where
+  t := 𝟙 _
+  s := 𝟙 _
+  wg := by simp
+  wπ := by simp
+  ww := by simp
+
+/-- The transition map of the identity morphism of a stage is the identity. -/
+lemma transition_id (α : LimitStage B W) : transition Λ (Hom.id α) = 𝟙 _ := by
+  refine NatTrans.ext (funext fun K ↦ ?_)
+  have h1 := NatTrans.congr_app (Etale.upperStarCompDerivedPlus_id_right (ModuleCat.{u + 1} Λ)
+    α.π) (R+((α.g)_*[ModuleCat.{u + 1} Λ]).obj (D+((α.w)^*[ModuleCat.{u + 1} Λ]).obj K))
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.leftUnitor_inv_app] at h1
+  have h2 := Etale.upperStarCompDerivedPlus_id_left_inv_app (ModuleCat.{u + 1} Λ) α.w K
+  have h3 : (Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨(Hom.id α).wg⟩).app
+      (D+((α.w)^*[ModuleCat.{u + 1} Λ]).obj K) =
+      (upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) α.S).hom.app
+          (R+((α.g)_*[ModuleCat.{u + 1} Λ]).obj (D+((α.w)^*[ModuleCat.{u + 1} Λ]).obj K)) ≫
+        R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
+          ((upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) α.T).inv.app
+            (D+((α.w)^*[ModuleCat.{u + 1} Λ]).obj K)) := by
+    rw [Etale.baseChange_eq_derivedBaseChangeMapPlus, Etale.derivedBaseChangeMapPlus_id]
+    simp
+  rw [transition_app, h3, Category.assoc, ← Functor.map_comp (R+((α.g)_*[ModuleCat.{u + 1} Λ])),
+    h2, CategoryTheory.Functor.map_id, Category.comp_id, Functor.map_comp, reassoc_of% h1]
+  erw [CategoryTheory.Functor.map_id]
+  rfl
+
 end LimitStage
+
+/-- A cofiltered system of stages over `B` with coefficients from `W`, indexed by `I`, together
+with a cone of stages over it (the *limit stage* `pt`). -/
+structure LimitStageSystem (B W : Scheme.{u}) (I : Type u) [Category.{u} I] where
+  /-- The stages. -/
+  obj : I → LimitStage B W
+  /-- The transition morphisms. -/
+  map : ∀ {i j : I}, (i ⟶ j) → LimitStage.Hom (obj i) (obj j)
+  map_id : ∀ i, map (𝟙 i) = LimitStage.Hom.id (obj i)
+  map_comp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), map (f ≫ g) = (map f).comp (map g)
+  /-- The limit stage. -/
+  pt : LimitStage B W
+  /-- The projections from the limit stage. -/
+  π : ∀ i, LimitStage.Hom pt (obj i)
+  w : ∀ {i j : I} (f : i ⟶ j), (π i).comp (map f) = π j
+
+namespace LimitStageSystem
+
+variable {B W : Scheme.{u}} {I : Type u} [Category.{u} I] (Λ : Type (u + 1)) [CommRing Λ]
+  (𝒮 : LimitStageSystem B W I)
+  (K : DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (q : ℤ)
+
+/-- The diagram `i ↦ H^q(π_i^* Rg_{i*} w_i^* K)` of sheaves on `B`. -/
+@[simps]
+noncomputable def diagram : Iᵒᵖ ⥤ Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ) where
+  obj i := (DerivedCategory.Plus.homologyFunctor _ q).obj
+    ((LimitStage.functor Λ (𝒮.obj i.unop)).obj K)
+  map f := (DerivedCategory.Plus.homologyFunctor _ q).map
+    ((LimitStage.transition Λ (𝒮.map f.unop)).app K)
+  map_id i := by
+    rw [unop_id, 𝒮.map_id, LimitStage.transition_id, NatTrans.id_app,
+      CategoryTheory.Functor.map_id]
+  map_comp f g := by
+    rw [← Functor.map_comp, ← NatTrans.comp_app, LimitStage.transition_comp, unop_comp,
+      𝒮.map_comp]
+
+/-- The cocone `H^q(π_i^* Rg_{i*} w_i^* K) ⟶ H^q(π^* Rg_* w^* K)` over
+`AlgebraicGeometry.Etale.LimitStageSystem.diagram`. -/
+@[simps]
+noncomputable def cocone : Cocone (𝒮.diagram Λ K q) where
+  pt := (DerivedCategory.Plus.homologyFunctor _ q).obj ((LimitStage.functor Λ 𝒮.pt).obj K)
+  ι :=
+    { app i := (DerivedCategory.Plus.homologyFunctor _ q).map
+        ((LimitStage.transition Λ (𝒮.π i.unop)).app K)
+      naturality i j f := by
+        simp only [diagram_obj, diagram_map, Functor.const_obj_obj, Functor.const_obj_map,
+          Category.comp_id, ← Functor.map_comp, ← NatTrans.comp_app, LimitStage.transition_comp,
+          𝒮.w] }
+
+end LimitStageSystem
 
 end AlgebraicGeometry.Etale

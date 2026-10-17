@@ -51,7 +51,17 @@ lemma tensorBaseChangeCounitApp_eq {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : 
     tensorBaseChangeCounitApp A h e f' g w F =
       L((h)^*[A]).map ((derivedBaseChangeMap A (CommSq.mk w.symm)).app F) ≫
         (derivedUpperStarLowerStarAdjunction A h).counit.app _ := by
-  sorry
+  have key (d : Y ⟶ S') (h₁ : d = h ≫ f') (h₂ : d = e ≫ g) :
+      (leftDerivedUpperStarComp A h f' d h₁).inv.app (R((g)_*[A]).obj F) ≫
+        (leftDerivedUpperStarComp A e g d h₂).hom.app (R((g)_*[A]).obj F) =
+      (leftDerivedUpperStarComp A h f').inv.app (R((g)_*[A]).obj F) ≫
+        (leftDerivedUpperStarComp A e g (h ≫ f') w).hom.app (R((g)_*[A]).obj F) := by
+    subst h₁
+    rfl
+  rw [derivedUpperStar_map_derivedBaseChangeMap_app_counit]
+  simp only [tensorBaseChangeCounitApp, derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Category.assoc]
+  rw [← reassoc_of% (key (e ≫ g) w.symm rfl)]
 
 /-- **The base change map at the unit**: for a commutative square `h ≫ f' = e ≫ g`, the base change
 map `Λ ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Λ ⊗ᴸ Le^* F)` is the derived base change map
@@ -63,7 +73,14 @@ lemma tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e 
         R((h)_*[A]).map ((leftDerivedUpperStarUnitIso A h).hom ▷ L((e)^*[A]).obj F ≫
           (λ_ _).hom) =
       (λ_ _).hom ≫ (derivedBaseChangeMap A (CommSq.mk w.symm)).app F := by
-  sorry
+  apply ((derivedUpperStarLowerStarAdjunction A h).homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_naturality_right_symm, Adjunction.homEquiv_naturality_left_symm,
+    Adjunction.homEquiv_counit, tensorBaseChangeMap, Equiv.symm_apply_apply,
+    ← tensorBaseChangeCounitApp_eq]
+  dsimp only [derivedTensor_obj_map]
+  rw [Category.assoc, ← whisker_exchange_assoc, leftUnitor_naturality,
+    ← leftDerivedUpperStarTensorComparison_leftUnitor_hom_assoc]
+  rfl
 
 /-- **Pasting of base change maps**: for two commutative squares pasted horizontally,
 

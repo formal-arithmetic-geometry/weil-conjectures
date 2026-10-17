@@ -89,7 +89,8 @@ lemma map {X : ℕ ⥤ T} {s : Cofan X.obj} {hs : IsColimit s} {H : T} {π : s.p
       have h₁ := Cofan.inj_telescopeShift hs n
       have h₂ := Cofan.inj_telescopeShift hs' n
       dsimp at h₂ ⊢
-      rw [Category.comp_id, Category.comp_id, ← F.map_comp, h₁, h₂, F.map_comp]
+      rw [Functor.map_sub, Functor.map_id, Preadditive.comp_sub, Preadditive.comp_sub,
+        Category.comp_id, ← F.map_comp, h₁, h₂, F.map_comp]
   refine ⟨F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app s.pt, ?_⟩
   have e : F.mapTriangle.obj (Triangle.mk (𝟙 _ - Cofan.telescopeShift hs) π δ) =
       Triangle.mk (𝟙 _ - Cofan.telescopeShift hs') (F.map π)
