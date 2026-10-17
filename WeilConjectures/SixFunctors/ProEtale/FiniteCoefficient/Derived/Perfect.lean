@@ -437,6 +437,23 @@ def IsLocallyPerfect (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X
         Nonempty ((L((g i)^*[ModuleCat.{u + 1} Λ])).obj K ≅ _root_.DerivedCategory.Q.obj P)
 
 omit [Finite Λ] in
+/-- A perfect, that is dualizable, object of `D(X_proét, Λ)` is locally quasi-isomorphic to a
+bounded complex of finite projective `Λ_X`-modules (`sk-def-perfect`, Stacks, Tag 0FPV). -/
+theorem isLocallyPerfect_of_isDualizable
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : IsDualizable K) : IsLocallyPerfect Λ K :=
+  sorry
+
+omit [Finite Λ] in
+/-- An object of `D(X_proét, Λ)` which is locally quasi-isomorphic to a bounded complex of
+finite projective `Λ_X`-modules is perfect, that is dualizable (`sk-def-perfect`, Stacks,
+Tag 0FPP). -/
+theorem isDualizable_of_isLocallyPerfect
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : IsLocallyPerfect Λ K) : IsDualizable K :=
+  sorry
+
+omit [Finite Λ] in
 /-- Blueprint `sk-def-perfect`: Perfectness at the point and on `X`.
 
 An object `K ∈ D(X_proét, Λ)` is perfect over `Λ_X`, that is dualizable for the derived tensor
@@ -447,15 +464,7 @@ product, if and only if it is locally quasi-isomorphic to a bounded complex of f
 theorem isDualizable_iff_isLocallyPerfect
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))} :
     IsDualizable K ↔ IsLocallyPerfect Λ K :=
-  sorry
-
-omit [Finite Λ] in
-/-- A perfect, that is dualizable, object of `D(X_proét, Λ)` is locally quasi-isomorphic to a
-bounded complex of finite projective `Λ_X`-modules (`sk-def-perfect`). -/
-theorem isLocallyPerfect_of_isDualizable
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsDualizable K) : IsLocallyPerfect Λ K :=
-  (isDualizable_iff_isLocallyPerfect Λ).1 hK
+  ⟨isLocallyPerfect_of_isDualizable Λ, isDualizable_of_isLocallyPerfect Λ⟩
 
 variable {Λ}
 
