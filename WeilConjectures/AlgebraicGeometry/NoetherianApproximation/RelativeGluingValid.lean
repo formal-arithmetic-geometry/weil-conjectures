@@ -39,6 +39,7 @@ variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc :
   [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
   {X : Scheme.{u}} {g : X ⟶ c.pt} {R : RelativeAffinePresentation c g} (M : R.ChartModels)
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 lemma stage_w {j j' : Over M.stage} (f : j' ⟶ j) :
     D.map f.left ≫ D.map j.hom = D.map j'.hom := by
   rw [← D.map_comp, Over.w f]
@@ -48,11 +49,13 @@ noncomputable abbrev stageTransport {j j' : Over M.stage} (f : j' ⟶ j)
     (d : RelativeGluingDatum M.p (D.map j.hom)) : RelativeGluingDatum M.p (D.map j'.hom) :=
   d.transport (D.map f.left) (M.stage_w f)
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 lemma chartMap_stage_eq {j j' : Over M.stage} (f : j' ⟶ j) (a : R.J) :
     RelativeGluingDatum.chartMap M.p (D.map f.left) (M.stage_w f) a =
       (baseChangeDiagram D (M.p a)).map f :=
   rfl
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 /-- Compatibility of the limit transport is inherited by later stages. -/
 lemma isCompatible_limitTransport_stageTransport {j j' : Over M.stage} (f : j' ⟶ j)
     {d : RelativeGluingDatum M.p (D.map j.hom)}
@@ -64,14 +67,15 @@ lemma isCompatible_limitTransport_stageTransport {j j' : Over M.stage} (f : j' �
       (RelativeGluingDatum.isTransport_transport _ _ d))
     (c.w f.left).symm hd
 
-variable [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
-
+omit [IsCofiltered I] in
 lemma isCompact_stageTransport_V {j j' : Over M.stage} (f : j' ⟶ j)
     {d : RelativeGluingDatum M.p (D.map j.hom)}
     (hd : ∀ a b, IsCompact (d.V a b : Set ↥(pullback (M.p a) (D.map j.hom)))) (a b : R.J) :
     IsCompact ((M.stageTransport f d).V a b : Set ↥(pullback (M.p a) (D.map j'.hom))) :=
-  QuasiCompact.isCompact_preimage ((baseChangeDiagram D (M.p a)).map f) (d.V a b).2 (hd a b)
+  QuasiCompact.isCompact_preimage (f := (baseChangeDiagram D (M.p a)).map f) _ (d.V a b).2
+    (hd a b)
 
+omit [IsCofiltered I] in
 lemma isCompact_ι_preimage {j : Over M.stage} (a : R.J)
     {V W : (pullback (M.p a) (D.map j.hom)).Opens}
     (hV : IsCompact (V : Set ↥(pullback (M.p a) (D.map j.hom))))
@@ -79,12 +83,13 @@ lemma isCompact_ι_preimage {j : Over M.stage} (a : R.J)
     IsCompact (V.ι ⁻¹ᵁ W : Set V.toScheme) := by
   have e : (V.ι ⁻¹ᵁ W : Set V.toScheme) = V.ι ⁻¹' ((V : Set _) ∩ W) := by
     ext x
-    simp [Scheme.Opens.ι_apply, x.2]
+    simp [Scheme.Opens.ι_apply]
   rw [e, V.ι.isOpenEmbedding.isInducing.isCompact_preimage_iff (by
     rw [Scheme.Opens.range_ι]
     exact Set.inter_subset_left)]
   exact QuasiSeparatedSpace.inter_isCompact _ _ V.2 hV W.2 hW
 
+include hc in
 /-- First round: the open gluing axioms hold past some stage. -/
 theorem exists_isOpenValid {j : Over M.stage} (d : RelativeGluingDatum M.p (D.map j.hom))
     (hd : RelativeGluingDatum.IsCompatible M.ℓ (M.limitTransport d))
@@ -117,6 +122,7 @@ theorem exists_isOpenValid {j : Over M.stage} (d : RelativeGluingDatum M.p (D.ma
   · rw [hT'.preimage_ι_eq, hT'.preimage_map_eq]
     exact hkcoc (a, b, c) k (f ≫ (hk₀ (Sum.inr (a, b, c))).some)
 
+include hc in
 /-- Second round: if the open gluing axioms hold, all gluing axioms hold past some stage. -/
 theorem exists_isValid {j : Over M.stage} (d : RelativeGluingDatum M.p (D.map j.hom))
     (hd : RelativeGluingDatum.IsCompatible M.ℓ (M.limitTransport d)) (hov : d.IsOpenValid)
@@ -129,47 +135,51 @@ theorem exists_isValid {j : Over M.stage} (d : RelativeGluingDatum M.p (D.map j.
     (M.p a) (d.ψ a a) ((d.V a a).ι ≫ pullback.fst _ _) (by rw [d.ψ_comp]; rfl) (by simp) (by
       calc _ = (M.limitTransport d).ψ a a := rfl
         _ = _ := hv.ψ_self a
-        _ = _ := by rw [Scheme.Hom.resLE_comp_ι_assoc, baseChangeCone_π_app_fst])
+        _ = _ := by
+          rw [Scheme.Hom.resLE_comp_ι_assoc, baseChangeCone_π_app_fst]
+          rfl)
   choose kcoc hkcoc using fun x : R.J × R.J × R.J ↦ exists_forall_resLE_comp_eq
     (isLimitBaseChangeCone D c (M.p x.1) hc) (baseChangeDiagramStructure D (M.p x.1))
     (QuasiSeparatedSpace.inter_isCompact _ _ (d.V _ _).2 (hVc _ _) (d.V _ _).2 (hVc _ _))
     (M.p x.2.2) (RelativeGluingDatum.cocycleMap hov x.1 x.2.1 x.2.2 ≫ d.ψ x.2.1 x.2.2)
     ((pullback (M.p x.1) (D.map j.hom)).homOfLE inf_le_right ≫ d.ψ x.1 x.2.2)
     (by
-      rw [Category.assoc, d.ψ_comp, RelativeGluingDatum.cocycleMap_ι_assoc, Category.assoc,
+      rw [Category.assoc, d.ψ_comp, RelativeGluingDatum.cocycleMap_ι_assoc,
         RelativeGluingDatum.map_fst_assoc, d.ψ_comp, Scheme.homOfLE_ι_assoc]
       rfl)
     (by
       rw [Category.assoc, d.ψ_comp, Scheme.homOfLE_ι_assoc]
       rfl)
     (by
-      rw [hT.resLE_cocycle_left hov hv.isOpenValid _ _ _ _ _ le_rfl,
-        hT.resLE_cocycle_right _ _ _ _ _ le_rfl, hv.cocycle])
+      have h₁ := hT.resLE_cocycle_left hov hv.isOpenValid x.1 x.2.1 x.2.2
+        ((M.limitTransport d).V x.1 x.2.1 ⊓ (M.limitTransport d).V x.1 x.2.2) le_rfl le_rfl
+      have h₂ := hT.resLE_cocycle_right x.1 x.2.1 x.2.2
+        ((M.limitTransport d).V x.1 x.2.1 ⊓ (M.limitTransport d).V x.1 x.2.2) le_rfl le_rfl
+      rw [hv.cocycle] at h₁
+      exact h₁.trans h₂.symm)
   obtain ⟨k₀, hk₀⟩ := IsCofiltered.exists_forall_nonempty_hom (Sum.elim kself kcoc)
   refine ⟨k₀, fun k f ↦ ?_⟩
   have hT' := RelativeGluingDatum.isTransport_transport (D.map k.hom.left) (M.stage_w k.hom) d
   have hov' := hT'.isOpenValid hov
   refine ⟨hov', fun a ↦ ?_, fun a b c ↦ ?_⟩
   · have := hkself a k (f ≫ (hk₀ (Sum.inl a)).some)
-    rw [Scheme.Hom.resLE_comp_ι_assoc] at this
-    refine this.trans ?_
-    rw [← chartMap_stage_eq, RelativeGluingDatum.chartMap_fst]
+    rw [Scheme.Hom.resLE_comp_ι_assoc, baseChangeDiagram_map_fst] at this
+    exact this
   · have := hkcoc (a, b, c) k (f ≫ (hk₀ (Sum.inr (a, b, c))).some)
-    have e := congrArg ((pullback (M.p a) (D.map k.left.hom)).homOfLE
-      (le_rfl : (M.stageTransport k.hom d).V a b ⊓ (M.stageTransport k.hom d).V a c ≤ _) ≫ ·)
-      this
-    simp only [Scheme.homOfLE_comp_resLE_assoc] at e
-    rw [← chartMap_stage_eq, hT'.resLE_cocycle_left hov hov' _ _ _ _ _ le_rfl,
-      hT'.resLE_cocycle_right _ _ _ _ _ le_rfl, Scheme.homOfLE_rfl, Category.id_comp,
-      Category.id_comp] at e
-    exact e
+    have h₁ := hT'.resLE_cocycle_left hov hov' a b c
+      ((M.stageTransport k.hom d).V a b ⊓ (M.stageTransport k.hom d).V a c) le_rfl le_rfl
+    have h₂ := hT'.resLE_cocycle_right a b c
+      ((M.stageTransport k.hom d).V a b ⊓ (M.stageTransport k.hom d).V a c) le_rfl le_rfl
+    rw [Scheme.homOfLE_rfl, Category.id_comp] at h₁ h₂
+    exact h₁.symm.trans (this.trans h₂)
 
 variable [QuasiSeparatedSpace X]
 
 lemma isCompact_rawDatum_V (a b : R.J) :
     IsCompact ((M.rawDatum hc).V a b : Set ↥(pullback (M.p a) (D.map (M.rawStage hc).hom))) :=
-  QuasiCompact.isCompact_preimage _ (Scheme.Hom.preimage _ _).2
-    (QuasiCompact.isCompact_preimage _ (M.overlapOpen hc a b).2 (M.isCompact_overlapOpen hc a b))
+  ((baseChangeDiagram D (M.p a)).map (M.rawStageHom hc a b)).isCompact_preimage
+    (((baseChangeDiagram D (M.p a)).map (M.overlapMapStage hc a b).hom).isCompact_preimage
+      (M.isCompact_overlapOpen hc a b))
 
 /-- The selected stage past `λ_raw` at which the open gluing axioms hold. -/
 noncomputable def openStage : Over (M.rawStage hc) :=

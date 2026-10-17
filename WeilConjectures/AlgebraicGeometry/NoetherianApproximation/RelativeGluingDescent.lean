@@ -151,14 +151,17 @@ instance (a : R.J) : IsOpenImmersion (M.ℓ a) := by
   dsimp [ℓ]
   infer_instance
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 @[reassoc (attr := simp)]
 lemma ℓ_comp (a : R.J) : M.ℓ a ≫ g = pullback.snd (M.p a) (c.π.app M.stage) := by
   simp [ℓ, chartIso]
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 lemma opensRange_ℓ (a : R.J) : (M.ℓ a).opensRange = R.chart a := by
   dsimp only [ℓ]
   rw [Scheme.Hom.opensRange_comp_of_isIso, Scheme.Opens.opensRange_ι]
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 lemma iSup_opensRange_ℓ : ⨆ a, (M.ℓ a).opensRange = ⊤ := by
   simp only [opensRange_ℓ]
   exact R.iSup_chart
@@ -172,6 +175,7 @@ instance (a : R.J) : CompactSpace ↥(pullback (M.p a) (c.π.app M.stage)) :=
 noncomputable def limitOverlap (a b : R.J) : (pullback (M.p a) (c.π.app M.stage)).Opens :=
   M.ℓ a ⁻¹ᵁ (M.ℓ b).opensRange
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 lemma isCompact_limitOverlap [QuasiSeparatedSpace X] (a b : R.J) :
     IsCompact (M.limitOverlap a b : Set ↥(pullback (M.p a) (c.π.app M.stage))) :=
   QuasiCompact.isCompact_preimage _ (M.ℓ b).opensRange.2
@@ -185,11 +189,13 @@ noncomputable def limitOverlapMap (a b : R.J) :
     rw [Scheme.Hom.comp_apply]
     exact x.2)
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 @[reassoc (attr := simp)]
 lemma limitOverlapMap_ℓ (a b : R.J) :
     M.limitOverlapMap a b ≫ M.ℓ b = (M.limitOverlap a b).ι ≫ M.ℓ a :=
   IsOpenImmersion.lift_fac _ _ _
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 @[reassoc (attr := simp)]
 lemma limitOverlapMap_snd (a b : R.J) :
     M.limitOverlapMap a b ≫ pullback.snd _ _ = (M.limitOverlap a b).ι ≫ pullback.snd _ _ := by
@@ -197,8 +203,7 @@ lemma limitOverlapMap_snd (a b : R.J) :
 
 /-! ### Descending the overlaps -/
 
-variable [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
-  [QuasiSeparatedSpace X]
+variable [QuasiSeparatedSpace X]
 
 /-- Part of blueprint `def-nagata-relative-gluing-datum-descent`: the stage `μ_{ab}` to which
 the overlap `Lₐ ∩ ℓₐ⁻¹(L_b)` descends (`lemma-nagata-qc-open-descends`). -/
@@ -305,6 +310,8 @@ noncomputable abbrev limitTransport {j : Over M.stage}
     (d : RelativeGluingDatum M.p (D.map j.hom)) : RelativeGluingDatum M.p (c.π.app M.stage) :=
   d.transport (c.π.app j.left) (c.w j.hom)
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
+  [QuasiSeparatedSpace X] in
 lemma chartMap_limit_eq {j : Over M.stage} (a : R.J) :
     RelativeGluingDatum.chartMap M.p (c.π.app j.left) (c.w j.hom) a =
       (baseChangeCone D c (M.p a)).π.app j :=
