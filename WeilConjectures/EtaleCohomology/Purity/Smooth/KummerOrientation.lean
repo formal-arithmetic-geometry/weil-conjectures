@@ -106,7 +106,8 @@ theorem isIso_homEquiv_supportedRestrictionMap {B X Z : Scheme.{u}} (p : X ⟶ B
 /-- The derived pushforward along an isomorphism is an equivalence. -/
 instance isEquivalence_rightDerivedLowerStar_of_isIso {X Y : Scheme.{u}} (e : X ⟶ Y) [IsIso e] :
     (R((e)_*[ModuleCat.{u + 1} Λ])).IsEquivalence :=
-  (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) e).isEquivalence_right_of_isEquivalence_left
+  (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+    e).isEquivalence_right_of_isEquivalence_left
 
 /-- For a closed immersion `i : Z ⟶ X` and `p : X ⟶ B` with `i ≫ p` invertible, the adjoint
 `Λ_Z ⟶ N` of a class `γ : Λ_X ⟶ Ri_! N` is an isomorphism if and only if the adjoint
@@ -237,8 +238,12 @@ lemma unit_comp_rightDerivedLowerStar_map_unit {X Y G : Scheme.{u}} (p : X ⟶ Y
 
 set_option maxRecDepth 20000 in
 set_option maxHeartbeats 1000000 in
+-- the composites of derived functors between the derived categories of the two bases are large
 include aY in
-/-- Blueprint `thm-pur-affine-line-orientation`: Global orientation and its normalization -/
+/-- The global orientation (`thm-pur-affine-line-orientation`) for a rank-one datum whose Kummer
+class of the coordinate generates over every algebraically closed field, given the cohomology of
+`𝔸¹_k` and `𝔾_{m,k}`: the adjoint `Λ_{V(t)} ⟶ Rs^!(Λ(1)[2])` of the Kummer boundary `∂κ(t)` is
+an isomorphism. -/
 theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
     (hKum : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [HasInvertibleExponent Λ (Spec (.of Ω))]
       (G' : Scheme.{u}) (j' : G' ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of Ω))) [IsOpenImmersion j']

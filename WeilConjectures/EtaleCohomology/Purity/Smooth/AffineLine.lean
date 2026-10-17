@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineInputs
 
 /-!
 # The affine line, `𝔾ₘ`, and the model purity
@@ -164,13 +164,29 @@ include aY in
 *Degree zero.* Let `j : G ↪ 𝔸¹_Y` be the open complement of the zero section — so
 `G = 𝔾_{m,Y}` — and let `π = p ∘ j`. Then `R⁰π_* Λ(1) ≅ Λ_Y(1)`; on a geometric fibre this is
 the Kummer computation `H⁰(𝔾_{m,k}, μ_n) = μ_n(k)`. -/
-theorem nonempty_iso_homology_zero_multiplicativeGroup [IsAlgClosed k]
+theorem nonempty_iso_homology_zero_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
+    [HasInvertibleExponent Λ (Spec (.of k))]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ) :
     Nonempty ((_root_.DerivedCategory.homologyFunctor _ 0).obj
         ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
           ((tateTwist Λ G 1).obj (constantComplex Λ G))) ≅
-      (_root_.DerivedCategory.homologyFunctor _ 0).obj (tateObject Λ Y 1)) :=
-  sorry
+      (_root_.DerivedCategory.homologyFunctor _ 0).obj (tateObject Λ Y 1)) := by
+  have : HasInvertibleExponent Λ G := .of_hom (j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
+  let j₀ := (multiplicativeGroupModel k).ι
+  have hj₀ := range_multiplicativeGroupModel_ι k
+  have : HasInvertibleExponent Λ (multiplicativeGroupModel k) := .of_hom j₀
+  obtain ⟨eG₀⟩ := nonempty_iso_cohomology_zero_multiplicativeGroup Λ j₀ hj₀
+  obtain ⟨eG₁⟩ := nonempty_iso_cohomology_one_multiplicativeGroup Λ j₀ hj₀
+  obtain ⟨LT, -, hLT, ⟨eTY⟩⟩ := HasTateTwist.exists_isLocallyConstantSheaf_twistObject
+    (Λ := Λ) Y 1
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerStar_multiplicativeGroup_of_cohomology Λ aY j₀ hj₀
+    (isZero_cohomology_multiplicativeGroup Λ j₀ hj₀) eG₀ eG₁ j hj
+    (boundedConstructibleFiniteTor_tateObject Λ Y 1)
+  exact ⟨(_root_.DerivedCategory.homologyFunctor _ 0).mapIso
+    ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).mapIso
+      (derivedTensorLeftUnitor _ _ _ ≪≫
+        (leftDerivedUpperStarTateObjectIso (j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y) 1).symm) ≪≫ e) ≪≫
+    homologyZeroBiprodShiftIso Λ _ (homology_props_of_iso_singleFunctor Λ eTY hLT).1⟩
 
 include aY in
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section

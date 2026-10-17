@@ -42,15 +42,17 @@ variable (k : Type u) [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec 
 
 /-- The model `𝔾_{m,k}` of the multiplicative group: the basic open of the coordinate of
 `𝔸¹_k`. -/
-noncomputable abbrev multiplicativeGroupModel : Scheme.{u} :=
-  (𝔸(ULift.{u} (Fin 1); Spec (.of k)).basicOpen (AffineSpace.coord (Spec (.of k)) (ULift.up 0)))
+noncomputable abbrev multiplicativeGroupModel : 𝔸(ULift.{u} (Fin 1); Spec (.of k)).Opens :=
+  𝔸(ULift.{u} (Fin 1); Spec (.of k)).basicOpen (AffineSpace.coord (Spec (.of k)) (ULift.up 0))
 
+omit [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))] in
 lemma range_multiplicativeGroupModel_ι :
     Set.range (𝔸(ULift.{u} (Fin 1); Spec (.of k)).basicOpen
       (AffineSpace.coord (Spec (.of k)) (ULift.up 0))).ι.base =
       (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k))).base)ᶜ :=
   AffineSpace.range_basicOpen_ι_coord _
 
+omit [HasInvertibleExponent Λ (Spec (.of k))] in
 variable {k} in
 /-- `H¹(𝔾_{m,k}, Λ) ≅ Λ` as a `Λ`-module, for the constant coefficients. -/
 theorem nonempty_iso_cohomology_one_multiplicativeGroup {G : Scheme.{u}}

@@ -344,6 +344,7 @@ theorem kummer_affineLine_multiplicativeGroup :
     fun q hq0 hq1 ↦ (isZero_cohomology_multiplicativeGroup Λ j hj q hq0 hq1).of_iso
       ((cohomology _ _ q).mapIso eG), bijective_smul_kummerClassOf Λ j hj⟩
 
+omit [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))] in
 include hj in
 /-- Untwisted form of `H¹(𝔾_{m,k}, Λ) ≅ Λ`: `Hom(Λ, Λ[1])` is free of rank one over `Λ`. -/
 theorem exists_bijective_smul_constantComplex_shift_one :

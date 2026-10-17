@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerOrientation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyHom
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
@@ -38,7 +39,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 section SupportHom
 
-variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
+variable [Finite Λ] {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 /-- `Ri_! Λ_Z ≅ i_* Λ_Z`, placed in degree zero, for a closed immersion `i`. -/
 noncomputable def rightDerivedLowerShriekConstantComplexIso :
@@ -65,6 +66,47 @@ noncomputable def supportCohomologyAddEquiv
       ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).homAddEquiv _ _))
 
 end SupportHom
+
+section Endomorphisms
+
+variable {Z : Scheme.{u}}
+
+/-- On a connected scheme, the endomorphisms of the constant complex `Λ_Z` are the scalars. -/
+theorem bijective_smul_id_constantComplex [Finite Λ] [ConnectedSpace Z] :
+    Function.Bijective (fun c : Λ ↦ c • 𝟙 (constantComplex Λ Z)) := by
+  let S := _root_.DerivedCategory.singleFunctor (Sheaf Z.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)) 0
+  let P := (constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)
+  let e : constantComplex Λ Z ≅ S.obj P := constantComplexIsoSingleFunctor Λ Z
+  have hS : ∀ c : Λ, c • 𝟙 (constantComplex Λ Z) = e.hom ≫ S.map (c • 𝟙 P) ≫ e.inv := by
+    intro c
+    rw [Functor.map_smul, CategoryTheory.Functor.map_id, Linear.smul_comp, Linear.comp_smul,
+      Category.id_comp, e.hom_inv_id]
+  constructor
+  · intro c c' h
+    simp only at h
+    rw [hS, hS] at h
+    have h' : S.map (c • 𝟙 P) = S.map (c' • 𝟙 P) := by
+      simpa using congrArg (fun φ ↦ e.inv ≫ φ ≫ e.hom) h
+    have h'' := S.map_injective h'
+    have hz : (constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map
+        ((c - c') • 𝟙 (ModuleCat.of Λ Λ)) = 0 := by
+      rw [Functor.map_smul, CategoryTheory.Functor.map_id, sub_smul]
+      exact sub_eq_zero.2 h''
+    have := (ConnectedSpace.toNonempty (α := Z))
+    have h0 := eq_zero_of_constantSheaf_map_eq_zero Λ _ hz
+    have h1 := congrArg (fun φ : ModuleCat.of Λ Λ ⟶ ModuleCat.of Λ Λ ↦ φ.hom (1 : Λ)) h0
+    simp only [ModuleCat.hom_smul, LinearMap.smul_apply, ModuleCat.hom_id, LinearMap.id_apply,
+      smul_eq_mul, mul_one, ModuleCat.hom_zero, LinearMap.zero_apply] at h1
+    exact sub_eq_zero.1 h1
+  · intro f
+    obtain ⟨c, hc⟩ := exists_eq_smul_id_constantSheaf Λ (S.preimage (e.inv ≫ f ≫ e.hom))
+    refine ⟨c, ?_⟩
+    simp only
+    rw [hS, ← hc, S.map_preimage]
+    simp
+
+end Endomorphisms
 
 end Etale
 

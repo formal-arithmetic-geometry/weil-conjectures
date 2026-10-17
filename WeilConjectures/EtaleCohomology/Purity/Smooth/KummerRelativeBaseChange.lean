@@ -12,7 +12,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerOrientation
 
 For a morphism `g : Y' ⟶ Y` of separated `k`-schemes of finite type, `k` algebraically closed,
 the derived base change maps `Lg^* Rp_* Λ(1) ⟶ Rp'_* Λ(1)` of the affine line
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_tateObject_affineLine`) and
+(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_tateObject_affineLine_of_cohomology`)
+and
 `Lg^* Rπ_* Λ(1) ⟶ Rπ'_* Λ(1)` of the complement of the zero section
 (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_tateObject_multiplicativeGroup`) are
 isomorphisms: both sides have cohomology sheaves only in degree `0` (resp. `0` and `1`), where
@@ -52,12 +53,9 @@ variable [Finite Λ] [HasTateTwist Λ] {k : Type u} [Field k] [IsAlgClosed k]
   [HasInvertibleExponent Λ Y] [HasInvertibleExponent Λ Y']
 
 include aY aY' in
-/-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base
-(clause (4), the affine line).
-
-For `g : Y' ⟶ Y`, the derived base change map `Lg^* Rp_* Λ(1) ⟶ Rp'_* Λ(1)` of the projections
+/-- For `g : Y' ⟶ Y`, the derived base change map `Lg^* Rp_* Λ(1) ⟶ Rp'_* Λ(1)` of the projections
 `p : 𝔸¹_Y ⟶ Y` and `p' : 𝔸¹_{Y'} ⟶ Y'` is an isomorphism. -/
-theorem isIso_derivedBaseChangeMap_app_tateObject_affineLine
+theorem isIso_derivedBaseChangeMap_app_tateObject_affineLine_of_cohomology
     (hA : ∀ q : ℤ, q ≠ 0 → IsZero ((cohomology (ModuleCat.{u + 1} Λ)
       𝔸(ULift.{u} (Fin 1); Spec (.of k)) q).obj (constantComplex Λ _)))
     (eA : (cohomology (ModuleCat.{u + 1} Λ) 𝔸(ULift.{u} (Fin 1); Spec (.of k)) 0).obj

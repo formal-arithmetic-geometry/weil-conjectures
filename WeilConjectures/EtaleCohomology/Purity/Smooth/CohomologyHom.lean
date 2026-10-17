@@ -29,7 +29,8 @@ open scoped CategoryTheory.Functor
 namespace CategoryTheory.Functor
 
 variable (R : Type*) [Ring R] {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-  [CategoryTheory.Linear R C] [CategoryTheory.Linear R D] [HasDerivedCategory C] [HasDerivedCategory D] (F : C ⥤ D)
+  [CategoryTheory.Linear R C] [CategoryTheory.Linear R D] [HasDerivedCategory C]
+  [HasDerivedCategory D] (F : C ⥤ D)
   [F.Additive] [F.Linear R] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
 /-- The functor induced on derived categories by an exact `R`-linear functor is `R`-linear. -/
