@@ -14,9 +14,235 @@
   "def-pc-scheme-fibre",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any coordinate $c\\in S$, the same finite set of $R$-algebra generators generates $S$ over $R[t]$ with $t\\mapsto c$. Thus each coordinate morphism is locally of finite type by [lem-weil-pbc-lft-pointwise-criterion], affine by [lem-weil-pbc-morphism-affine-schemes-affine], and quasi-compact by [lem-weil-pbc-affine-morphism-permanence], hence finite type. We use [lem-weil-pbc-fibre-product-affine-spectra] to compute every affine fibre as $\\operatorname{Spec}(S\\otimes_{R[t]}\\kappa(Q))$. Quotients and localizations below have the same finite-generation property (a localization adds the inverse of its inverted element).",
+   "uses": [
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; affine setup throughout the proof"
+   }
+  },
+  {
+   "text": "Write $S=R[A,B,x_1,\\ldots,x_m]/J$, with $A,B$ mapping to $a,b$, using [def-weil-pbc-finite-type-algebra]. For the small directed poset of finitely generated subideals $J_\\lambda\\subseteq J$ put $S_\\lambda=R[A,B,x_1,\\ldots,x_m]/J_\\lambda$ and let $a_\\lambda,b_\\lambda$ be the images of $A,B$. Sums give upper bounds, transition maps are surjective, and the colimit is $S$, since every relation lies in one such subideal. Apply [lem-weil-pbc-affine-limit-fibre-dimension-bound] to the constant base $R[t]$ and maps $t\\mapsto a_\\lambda$; their transition maps are surjective and they are finite type. A stage has all fibre dimensions at most $d$. It is finitely presented over $R$ [def-weil-pbc-finitely-presented-algebra]. For any $n$, the fibre ring for $a^n+b$ is a quotient of the corresponding stage fibre ring. A strict prime chain in the quotient lifts by inverse image to a strict chain in the stage ring, so its dimension cannot increase [def-weil-pbc-krull-dimension-ring]. A threshold for the stage therefore works for $S$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; first reduction paragraph; Limits Tag 05M5"
+   }
+  },
+  {
+   "text": "For finitely presented $R\\to S$, apply [lem-weil-pbc-limit-module-finite-presentation] to the zero module. It gives a directed system $R_i\\to S_i$ with colimit $R\\to S$, finite-type $\\mathbf Z$-bases $R_i$, finite-type $R_i$-algebras $S_i$, and $S_j\\cong S_i\\otimes_{R_i}R_j$ and $S\\cong S_i\\otimes_{R_i}R$. After a universe enlargement the index is small. Choose a common stage carrying representatives $a_i,b_i$. The maps $R_i[t]\\to S_i$, $t\\mapsto a_i$, form a system with surjective comparison maps: $R_j[t]\\otimes_{R_i[t]}S_i\\cong R_j\\otimes_{R_i}S_i\\cong S_j$. The first isomorphism sends $(r t^k)\\otimes s$ to $r\\otimes a_i^k s$ and the inverse sends $r\\otimes s$ to $r\\otimes s$. The colimit base is $R[t]$, by taking coefficients of each finite polynomial. Apply [lem-weil-pbc-affine-limit-fibre-dimension-bound] to get a stage with the bound $d$. Every $S_i$ is finite type over $\\mathbf Z$ by adjoining its generators to those of $R_i$.",
+   "uses": [
+    "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-weil-pbc-affine-limit-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; second reduction paragraph; Algebra Tag 00R1 and Limits Tag 05M5"
+   }
+  },
+  {
+   "text": "A threshold at the stage in Step 3 passes to $R\\to S$: for each exponent the ring map $t\\mapsto a^n+b$ is the base change of $t\\mapsto a_i^n+b_i$, using $R_i[t]\\otimes_{R_i}R\\cong R[t]$ and $S_i\\otimes_{R_i}R\\cong S$. At a point of any new fibre, [lem-sc-fibre-dimension-after-base-change] identifies its local dimension with that at the corresponding point of the old fibre. Each is at most $d$, and [lem-weil-pbc-dimension-supremum-local-dimensions] gives the whole new fibre bound, including an empty fibre. We may therefore restrict the remaining argument to $R,S$ of finite type over $\\mathbf Z$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; end of second reduction paragraph; Morphisms Tag 02FY (lemma-dimension-fibre-after-base-change) and Topology Tag 0B7I"
+   }
+  },
+  {
+   "text": "Induct strongly on $\\dim R$, simultaneously for every finite-type $\\mathbf Z$ ring map and every $d\\ge0,a,b$ satisfying the hypothesis. The dimension is a finite nonnegative integer for $R\\ne0$: $R$ is a quotient of $\\mathbf Z[z_1,\\ldots,z_m]$. Every ideal of $\\mathbf Z$ is principal (take its least positive element), which also makes $\\mathbf Z$ Noetherian; [lem-trf-principal-ideal-ring-dimension-bound] gives dimension at most one, and [lem-sf-noetherian-polynomial-dimension] gives a finite polynomial dimension. Prime chains of a quotient lift strictly [def-weil-pbc-krull-dimension-ring]. For $R=0$ its unital algebra $S$ is zero, and all fibres are empty; likewise $S=0$ is immediate. The induction hypothesis covers all nonzero bases of smaller dimension, with the same nonnegative $d$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-trf-principal-ideal-ring-dimension-bound",
+    "lem-sf-noetherian-polynomial-dimension",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; third paragraph: finite base dimension and induction setup"
+   }
+  },
+  {
+   "text": "At a fixed base dimension it suffices to handle $S$ a domain. Indeed $S$ is Noetherian: [lem-trf-mvpolynomial-noetherian] applies to a polynomial presentation over $\\mathbf Z$, and an ideal in a quotient is generated by the images of generators of its inverse image. By [lem-sc-finite-minimal-primes-over-ideal] there are finitely many minimal primes $P_1,\\ldots,P_r$ of $S$. Each $S/P_i$ is a finite-type domain and its coordinate fibres are quotient fibres, hence satisfy the assumed bound. Their thresholds have a finite maximum. Every prime in a fibre ring contracts to a prime of $S$, which contains some $P_i$ by [lem-weil-pbc-prime-contains-minimal-prime]. A strict prime chain in that fibre whose smallest prime contracts to a prime containing $P_i$ lies wholly in the closed piece for $S/P_i$. Thus the pieces cover the fibre and bound all its prime chains. This proves the desired transfer without the unnecessary normalization step of the source.",
+   "uses": [
+    "lem-trf-mvpolynomial-noetherian",
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; reduction to an integral source; fourth and fifth paragraphs simplified by closed irreducible components"
+   }
+  },
+  {
+   "text": "For $S$ a domain replace $R$ by its image $R\\prime\\subseteq S$. The image is a finite-type $\\mathbf Z$ domain, its dimension is at most that of $R$, and $S$ is still finite type over it. If $K=\\ker(R\\to S)$, coordinate fibres over primes $Q\\subset R[t]$ not containing $K R[t]$ are empty: an element of $K$ maps both to zero in $S$ and to a unit in $\\kappa(Q)$. Over primes containing $K R[t]$, the quotient identifies the residue field and fibre ring with those for $R\\prime[t]$. Thus both the hypothesis and conclusion transfer exactly. If $\\dim R\\prime<\\dim R$, apply the strong induction hypothesis already stated; otherwise solve the injective-domain case below at this same dimension. Combined with Step 6 this reduces the inductive step to $R\\subseteq S$ domains.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; sixth paragraph: replace the base by its image"
+   }
+  },
+  {
+   "text": "We will use $\\dim_z\\mathbf A^r_k=r$ for $r=1,2$. A field has only the ideals $0$ and $k$, so is Noetherian and has dimension zero. [lem-sf-noetherian-polynomial-dimension], together with the spectrum equality in [def-weil-pbc-krull-dimension-ring], gives $\\dim\\mathbf A^r_k=r$. The polynomial ring is a domain; [lem-sc-integral-locally-algebraic-opens-dimension] says every nonempty open has that same dimension. Taking the minimum over neighbourhoods in [def-kun-dimension] gives the asserted local dimensions. Now put $X=\\operatorname{Spec}S$ and $h:X\\to\\operatorname{Spec}R$. Apply [lem-trf-composite-fibre-dimension-inequality] to $X\\xrightarrow{f_a}\\mathbf A^1_R\\to\\operatorname{Spec}R$. At each point of $X_p$ its local dimension is at most $d+1$. [lem-weil-pbc-dimension-supremum-local-dimensions] gives $\\dim X_p\\le d+1$ for every $p$.",
+   "uses": [
+    "lem-sf-noetherian-polynomial-dimension",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "def-kun-dimension",
+    "lem-trf-composite-fibre-dimension-inequality",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; integral affine case before the dominant/non-dominant dichotomy; Tag 02JS"
+   }
+  },
+  {
+   "text": "Let $\\phi:X\\to\\mathbf A^2_R$ correspond to $x\\mapsto a,y\\mapsto b$, and let $\\pi_n:\\mathbf A^2_R\\to\\mathbf A^1_R$ send the target coordinate to $x^n+y$. Then $f_{a^n+b}=\\pi_n\\phi$. First suppose $R[x,y]\\to S$ is injective. By [lem-sbc-generic-flat-finite-presentation], applied to this finite-type map with integral target, there is a nonempty open $W\\subseteq\\mathbf A^2_R$ on which $\\phi$ is flat. Choose a nonzero polynomial $H$ with $D(H)\\subseteq W$; injectivity makes $H(a,b)\\ne0$, so $U=D(H(a,b))\\subseteq X$ is nonempty and $\\phi|_U$ is flat. Its generic fibre over $\\operatorname{Spec}R$ is a nonempty open in the spectrum of the domain $S\\otimes_R\\operatorname{Frac}R$: localization keeps $H(a,b)$ nonzero. It is dense. Apply [lem-sbc-generic-open-fibre-density] to $h$ and $U$ to obtain a nonempty open $V\\subseteq\\operatorname{Spec}R$ such that $U_p$ is dense in $X_p$ for every $p\\in V$.",
+   "uses": [
+    "lem-sbc-generic-flat-finite-presentation",
+    "lem-sbc-generic-open-fibre-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; dominant case; Tags 052A and 054X"
+   }
+  },
+  {
+   "text": "Fix any $n\\ge0$, a point $q\\in\\mathbf A^1_R$ over $p$, and a point $u\\in U_q$. Let $z=\\phi(u)$ and put $e=\\dim_u(U_z)$. Apply [lem-sbc-flat-composite-fibre-dimension-at-point] twice, with flat first morphism $\\phi|_U$, once followed by $\\mathbf A^2_R\\to\\operatorname{Spec}R$ and once by $\\pi_n$. The first target fibre is $\\mathbf A^2_{\\kappa(p)}$ with local dimension $2$. The second has coordinate ring $\\kappa(q)[x,y]/(x^n+y-\\tau)\\cong\\kappa(q)[x]$, where $\\tau$ is the image of the target coordinate; the maps substitute $y=\\tau-x^n$ and keep $x$. It has local dimension $1$ by Step 8. Consequently $\\dim_u U_p=e+2$ and $\\dim_u U_q=e+1$. Since $U_p$ is open in $X_p$, [lem-weil-pbc-open-subspace-dimension-monotone] and Step 8 give $e+2\\le d+1$. Thus $\\dim_u U_q\\le d$, and [lem-weil-pbc-dimension-supremum-local-dimensions] gives $\\dim U_q\\le d$.",
+   "uses": [
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; dominant case: write the additive fibre-dimension calculation without needing composition-flatness"
+   }
+  },
+  {
+   "text": "For $p\\in V$ let $Z_p=X_p\\setminus U_p$, with its closed-subscheme structure. If $X_p$ is empty there is nothing to check. Otherwise it is finite type over the field $\\kappa(p)$, hence locally Noetherian by [pqf-lem-locnoeth-lft] (a field is Noetherian), and has finite dimension at most $d+1$. The density in Step 9 makes $Z_p$ nowhere dense. [lem-sc-hilbert-nowhere-dense-dimension-drop] gives $\\dim Z_p<\\dim X_p\\le d+1$, hence $\\dim Z_p\\le d$. For $q$ over $p$, the coordinate fibre on $Z_p$ has dimension at most $d$: its affine fibre ring over a prime of $\\kappa(p)[t]$ is a localization followed by a quotient of the ring of $Z_p$, so prime chains lift. Denote this fibre by $Z_q$. Both $U_q$ and $Z_q$ are finite type over $\\kappa(q)$: $U$ is principal open and $Z=X\\setminus U$ is closed. The map $U_q\\amalg Z_q\\to X_q$ is surjective on points. A chain of irreducible closed subsets of the disjoint union lies in one summand, so its dimension is at most $d$. The image-dimension assertion of [lem-zl-finite-type-fibre-image-dimension-bounds] now gives $\\dim X_q\\le d$. This proves the dense-base-open claim in the dominant case for all $n$, with $n_0=0$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-zl-finite-type-fibre-image-dimension-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; dominant case: closed complement and recombination of the two fibre pieces"
+   }
+  },
+  {
+   "text": "If $R[x,y]\\to S$ is not injective, choose a nonzero relation $g(x,y)=\\sum c_{ij}x^iy^j$ in its kernel. Let $s$ be its $y$-degree, let $t$ be the largest $x$-degree among terms with $y$-degree $s$, and let $c=c_{ts}\\ne0$. Put $M=\\max\\{i:c_{ij}\\ne0\\}$ and take $n>M$. For every scalar $\\tau$ in any residue field where $c\\ne0$, the polynomial $g(x,\\tau-x^n)$ has unique highest term $(-1)^s c x^{t+sn}$. Indeed a term obtained from $c_{ij}x^i(\\tau-x^n)^j$ has exponent $i+nk$ for $0\\le k\\le j$. If $k<s$, then $i+nk\\le M+n(s-1)<ns\\le t+ns$; if $k=s$, then $j=s$ and its largest exponent is achieved only at $i=t$. This also handles $s=0$: substitution does nothing and the leading term is $c x^t$. Thus the polynomial never becomes zero on $D(c)$, uniformly in $\\tau$ and $n>M$. No irreducibility assumption on $g$ is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; non-dominant case: the omitted degree calculation, including nonzero fibre values and the case g in R[x]"
+   }
+  },
+  {
+   "text": "Put $R_c=R[1/c]$, $Y=\\operatorname{Spec}(R_c[x,y]/(g))$, and factor $X_{D(c)}\\to Y\\xrightarrow{\\rho_n}\\mathbf A^1_{R_c}$. For $n>M$ and $q$ in the target, the fibre of $\\rho_n$ is $\\operatorname{Spec}(\\kappa(q)[x]/(g(x,\\tau-x^n)))$, by the substitution of Step 12. A nonzero polynomial over a field has only maximal primes above it: divide by an irreducible factor to see that the corresponding quotient is a field (the Euclidean algorithm). Thus this fibre is empty or zero-dimensional; every local dimension is zero when nonempty. At a point $z\\in Y$, the fibre of $X_{D(c)}\\to Y$ is a quotient of the base change of the $f_a$-fibre at its image in $\\mathbf A^1_R$: the extra coordinate imposes $b=y(z)$. [lem-sc-fibre-dimension-after-base-change] and [lem-weil-pbc-dimension-supremum-local-dimensions] bound that base change by $d$, and prime chains show the quotient has the same upper bound. Apply [lem-trf-composite-fibre-dimension-inequality] to the displayed factorization and take the supremum of local dimensions. The fibres of $f_{a^n+b}$ over $D(c)$ have dimension at most $d$. This proves the dense-open claim in the non-dominant case with $V=D(c)$ and $n_0=M+1$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-trf-composite-fibre-dimension-inequality",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; non-dominant case: make the conclusion from the polynomial calculation explicit; Tag 02JS"
+   }
+  },
+  {
+   "text": "In either case choose a nonzero $f\\in R$ with $D(f)\\subseteq V$; nonempty opens of an affine spectrum contain a basic open, and $R$ is a domain. The open-base bound then holds on $D(f)$. If $f$ is a unit this covers the base. Otherwise $R/fR$ has strictly smaller dimension: every prime chain containing $f$ begins with a nonzero prime, so adjoining the zero prime increases its length by one [def-weil-pbc-krull-dimension-ring]. The rings $R/fR$ and $S/fS$ are finite type over $\\mathbf Z$. Their $a$-coordinate fibres over primes $Q\\subseteq(R/fR)[t]$ are exactly the original fibres over the inverse-image primes in $R[t]$: both residue fields are the fraction field of the same quotient domain, and the tensor map sends $\\bar s\\otimes u$ to $s\\otimes u$. Hence their hypothesis retains the bound $d$. Apply the strong induction hypothesis to obtain a threshold $n_1$. For dimension-zero domains a nonzero $f$ is a unit: otherwise a maximal prime containing $f$ would give a chain of length one. This supplies the base of the induction.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; last paragraph: dimension decrease and induction on the closed complement"
+   }
+  },
+  {
+   "text": "Take $N=\\max(n_0,n_1)$, omitting $n_1$ when the complement is empty. For each $n\\ge N$ and prime $Q\\subseteq R[t]$, set $p=Q\\cap R$. If $f\\notin p$, the fibre for $a^n+b$ is unchanged by inverting $f$, since $f$ is already a unit in $\\kappa(Q)$; the tensor isomorphism is induced by $s/f^k\\otimes u\\mapsto s\\otimes f^{-k}u$. The open-base bound applies. If $f\\in p$, the fibre is $(S/fS)\\otimes_{(R/fR)[t]}\\kappa(Q/fR[t])$, canonically the original fibre as in Step 14; the closed-base induction bound applies. These two cases cover all target points, giving the threshold for the injective-domain case. Steps 6–7 give the threshold for all finite-type $\\mathbf Z$ rings; Steps 2–4 give it for every finite-type $R\\to S$ in the statement. Empty fibres satisfy the bound throughout.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTF, label lemma-sum-is-ok; last paragraph: combine the thresholds and reverse the reductions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-limit-module-finite-presentation",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-trf-principal-ideal-ring-dimension-bound",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-trf-mvpolynomial-noetherian",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "def-kun-dimension",
+  "lem-trf-composite-fibre-dimension-inequality",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sbc-generic-open-fibre-density",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "pqf-lem-locnoeth-lft",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-zl-finite-type-fibre-image-dimension-bounds"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GTF, lemma-sum-is-ok, all reduction paragraphs and both cases; normalization is bypassed by finite closed component quotients, and the omitted calculations are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +285,45 @@
    "results": "0 hits in Mathlib/AlgebraicGeometry.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "power.*perturb|perturb.*(dimension|fibre|fiber)|sum.is.ok",
+   "results": "{\"t\": \"2026-10-17T19:09:47Z\", \"tool\": \"grep\", \"query\": \"power.*perturb|perturb.*(dimension|fibre|fiber)|sum.is.ok\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "High power perturbations of regular functions preserve a bound on fibre dimension",
+   "results": "{\"t\": \"2026-10-17T19:09:47Z\", \"tool\": \"leansearch\", \"query\": \"High power perturbations of regular functions preserve a bound on fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffOn.pow\", \"ContDiffWithinAt.pow\", \"AnalyticOn.zpow_nonneg\", \"AnalyticWithinAt.fun_zpow_nonneg\", \"AnalyticWithinAt.fun_pow\", \"Function.HasTemperateGrowth.fun_pow\", \"Filter.Germ.instPow\", \"Function.HasTemperateGrowth.pow\"], \"digest\": \"aa928503425f9c48\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.aeval, \"dimension\"",
+   "results": "{\"t\": \"2026-10-17T19:09:47Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.aeval, \\\"dimension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventual fibre dimension bound for high power perturbation a^n+b on an affine scheme of finite type",
+   "results": "{\"t\": \"2026-10-17T19:09:55Z\", \"tool\": \"leanfinder\", \"query\": \"Eventual fibre dimension bound for high power perturbation a^n+b on an affine scheme of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.numBound\", \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"ChevalleyThm.MvPolynomialC.degBound_succ\", \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"ChevalleyThm.MvPolynomialC.numBound_casesOn_succ\"], \"digest\": \"8ff2bbc5042e499d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type ring map R to S if a function a has fibres of dimension at most d then a to the power n plus b has fibres of dimension at most d for every sufficiently large n",
+   "results": "{\"t\": \"2026-10-17T19:09:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type ring map R to S if a function a has fibres of dimension at most d then a to the power n plus b has fibres of dimension at most d for every sufficiently large n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"ChevalleyThm.MvPolynomialC.degBound_succ\", \"chevalley_mvPolynomial_mvPolynomial\", \"ChevalleyThm.degBound\", \"ChevalleyThm.MvPolynomialC.degBound_casesOn_succ\", \"ChevalleyThm.MvPolynomialC.numBound_succ\"], \"digest\": \"94f4f6a61d6d5da7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-weak-relative-noether-normalization",
@@ -89,5 +350,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-power-perturbation-fibre-dimension",
+  "worker": "stage1",
+  "summary": "Checked Tag 0GTF and preserved its statement. Split the approximation and strong induction argument using existing generic-flatness and generic-fibre-density nodes. One new statement-only node isolates the nonflat local fibre-dimension inequality (02JS); the existing flat equality is not misused. Wrote the leading-term substitution for every fibre value, the complement bound, the domain reduction and both tensor identifications.",
+  "blueprint": "No direct sentence of the ancestor states the item. Through its recorded trace-specialization/nearby-cycle/local-model chain, this proves the power-perturbation input in Stacks 0GTG used by weak relative Noether normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+    "why": "General Fibre dimension bounds descend in affine inverse systems input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-limit-module-finite-presentation",
+    "why": "General Noetherian approximation of a finitely presented algebra and module (Stacks 00R1) input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "General Fibre dimensions are preserved by base change input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "General The dimension of a space is the supremum of its local dimensions input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "General Nonempty opens of an integral locally algebraic scheme have its dimension input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   },
+   {
+    "node": "lem-sbc-generic-flat-finite-presentation",
+    "why": "General Generic flatness and local finite presentation over an integral base input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   },
+   {
+    "node": "lem-sbc-generic-open-fibre-density",
+    "why": "General Spread density of an open in ordinary fibres input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "General Pointwise fibre dimension is additive for a flat first morphism input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   },
+   {
+    "node": "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "why": "General Nowhere-dense closed subsets have smaller dimension input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   },
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "General Fibre and image dimension bounds for finite-type schemes over a field input used in the indicated proof steps; the trace unit has no node giving this generic algebraic-geometric tool and its normalization route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+  "lem-weil-pbc-limit-module-finite-presentation",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sbc-generic-open-fibre-density",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-zl-finite-type-fibre-image-dimension-bounds"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-8057350b5",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-8057350b5 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks 0GTF (more-morphisms.tex lemma-sum-is-ok, lines 8595-8800) and 02JS (morphisms.tex lemma-dimension-fibre-at-a-point-additive, lines 5396-5420), plus the full statement of every one of the 26 cited nodes. The item statement matches 0GTF exactly and is not weakened. All 15 steps are correct, and I re-derived each one. Step 6 replaces the source's normalization with the finitely many minimal primes of S and a chain-covering argument, which is valid. Step 12's leading term is right for every value tau in the fibre, not just tau=0: exponents i+nk<ns when k<s, and the unique top term is (-1)^s c_ts x^{t+ns}. Steps 10 and 13 apply the flat equality only where flatness holds, and use the new nonflat inequality where it does not. Step 11 fills the source's gap in recombining the open and closed pieces. The induction on dim R/fR is set up correctly and is not circular; the base case is covered because a nonzero f is a unit when dim R=0. There is no cycle and no missing or merged citation. The new node lem-trf-composite-fibre-dimension-inequality is exactly the first assertion of 02JS. It is self-contained, statement-only and searched with all three kinds of search. It is not a duplicate: the nearest node, lem-sbc-flat-composite-fibre-dimension-at-point, is the flat equality, and the new node is not elementary. I tested it on small cases, including a point in A^1, where the inequality is strict without flatness. I accept the 10 declared tool_uses. FIX: step 4's source.place cited Morphisms Tag 02JU (lemma-dimension-formula); I corrected it to 02FY (lemma-dimension-fibre-after-base-change). Nothing else changed. A minor point, not a fault: 00R1 gives a directed set while the 05M5 node asks for a partially ordered set; Stacks' construction indexes by a poset.; 1 file(s) fixed by the reviewer"
  }
 }

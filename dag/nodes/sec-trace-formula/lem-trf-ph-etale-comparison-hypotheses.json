@@ -18,9 +18,156 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record explicitly that torsion small etale sheaves contain zero and are closed under kernels, cokernels and extensions. A section of a kernel is a section of the source, so its local annihilator also annihilates it in the kernel. A section of a cokernel locally lifts to the target of the original map, since an epimorphism of abelian sheaves is locally surjective; a local annihilator of that lift kills its image. For an extension $0\\to F\\to E\\to F'\\to0$ and $e\\in E(U)$, first refine $U$ until an integer $n>0$ kills the image of $e$ in $F'$. Then $ne$ is a section of the kernel, identified with $F$; refine again and choose $m>0$ killing this section. Thus $mn$ kills $e$. These coverings and integers may depend on the section; no uniform bound is used. Closure under isomorphism is immediate from the same definition.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, first proof paragraph, torsion closure implicit in conditions (1)-(4) of the weak Serre criterion."
+   }
+  },
+  {
+   "text": "Fix $X$ and put $L=\\pi_X^{-1}$ and $R=\\pi_{X,*}$. Both are exact: $L$ by exactness of inverse image for a morphism of sites, and $R$ by the exact-retraction lemma. The latter also gives the unit $F\\xrightarrow{\\sim}RL F$. The adjunction therefore identifies $\\operatorname{Hom}(LF,LF')$ with $\\operatorname{Hom}(F,RL F')=\\operatorname{Hom}(F,F')$. Every morphism between objects of $\\mathcal A'_X$ consequently comes, after their chosen isomorphisms, from a small-etale morphism $u:F\\to F'$. Exactness gives $\\ker(Lu)=L\\ker(u)$ and $\\operatorname{coker}(Lu)=L\\operatorname{coker}(u)$. Step 1 shows the small sheaves on the right are torsion. Exactness also sends zero to zero. This proves zero, isomorphism, kernel and cokernel closure.",
+   "uses": [
+    "lem-trf-big-small-etale-exact-retraction",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, first proof paragraph, conditions (1)-(3)."
+   }
+  },
+  {
+   "text": "Given $0\\to LF\\to H\\to LF'\\to0$ with $F,F'$ torsion, exact $R$ and the unit isomorphisms give $0\\to F\\to RH\\to F'\\to0$. Step 1 makes $RH$ torsion. Apply exact $L$ to this row, and map the resulting short exact sequence to the original one using the adjunction counit $LR\\to\\mathrm{id}$. Naturality gives the commutative diagram. Its endpoint maps $LRLF\\to LF$ and $LRLF'\\to LF'$ are isomorphisms: by the triangle identity they are inverse to $L$ applied to the respective unit isomorphisms. The short five lemma now makes the middle counit $LRH\\to H$ an isomorphism. Thus $H\\cong L(RH)$ lies in $\\mathcal A'_X$, proving extension closure and the weak Serre assertion.",
+   "uses": [
+    "lem-trf-big-small-etale-exact-retraction",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "def-trf-geometric-morphism",
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, first proof paragraph, condition (4); the counit diagram fills the omitted justification of G=pi^{-1}pi_*G."
+   }
+  },
+  {
+   "text": "For a proper $f:X\\to Y$ and arbitrary $Y'\\to Y$, the fibre product $X\\times_Y Y'$ exists by the scheme fibre-product statement. Properness is stable under this base change, by the cited proper-base-change lemma. The induced structure map to $S$ makes the fibre product an object of $\\mathrm{Sch}/S$. This is property (1).",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, base-change-P paragraph."
+   }
+  },
+  {
+   "text": "For $H'\\cong\\pi_Y^{-1}F$, the small/big pullback formula gives $f_{\\mathrm{Et}}^{-1}H'\\cong\\pi_X^{-1}f_s^{-1}F$ for every $f:X\\to Y$. The small pullback $f_s^{-1}F$ is torsion: at each geometric point its stalk is a stalk of $F$, by the inverse-image stalk isomorphism. The local definition of torsion is equivalent to every stalk element having a positive annihilator: one implication takes germs; for the other, represent a germ by a section and shrink its pointed etale neighbourhood until the annihilating equality holds, then let the geometric point vary. The resulting etale neighbourhoods cover. This proves (2), with no restriction on $f$.",
+   "uses": [
+    "lem-trf-big-small-etale-pullback-formula",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, restriction-A paragraph (021I(3))."
+   }
+  },
+  {
+   "text": "Let $H=\\pi_X^{-1}F$, and let $a:U\\to X$ and $p:V\\to U$ be any proper surjection. Set $G=a_s^{-1}F$ on $U_{\\mathrm{Et}}$. Evaluation of $H$ identifies $H(U)$, $H(V)$ and $H(V\\times_UV)$ with the sections of $G$, $p_s^{-1}G$ and $q_s^{-1}G$, respectively, where $q:V\\times_UV\\to U$. Naturality in that formula identifies both arrows with pullback along the two projections. The proper-surjection section-equalizer lemma therefore proves that $H(U)\\to H(V)\\rightrightarrows H(V\\times_UV)$ is an equalizer. This uses no torsion hypothesis on $F$.",
+   "uses": [
+    "lem-trf-big-small-etale-pullback-formula",
+    "lem-trf-proper-surjection-etale-section-equalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, A-sheaf paragraph, reducing 0DDW to its proper-surjection equalizer."
+   }
+  },
+  {
+   "text": "We verify ph gluing rather than treating a tag as a proof. The affine standard-sieve basis also says etale coverings are ph, which is the asserted topology comparison. (a) Separatedness for every ph covering $\\{Y_l\\to Y\\}$ of every object $Y$: choose an affine open cover $\\{Y'_j\\to Y\\}$; by the basis lemma the pulled-back sieve on $Y'_j$ contains a proper surjection $W'_j\\to Y'_j$ with a finite affine open cover $\\{W'_{jk}\\}$ whose members factor through some $Y_l$. A section of $H(Y)$ restricting to zero on all $Y_l$ restricts to zero on all $W'_{jk}$, hence on $W'_j$ (Zariski separatedness), hence on $Y'_j$ (injectivity in Step 6), hence on $Y$. (b) Let $\\{U_i\\to U\\}$ be ph covering and $s_i\\in H(U_i)$ matching. Choose an affine open cover $\\{V_j\\to U\\}$ and, as in (a), $W_j\\to V_j$ proper surjective with finite affine open cover $\\{W_{jk}\\}$ and maps $W_{jk}\\to U_{i(k)}$ over $U$. The pullbacks $s_{i(k)}|_{W_{jk}}$ agree on $W_{jk}\\cap W_{jl}$, which maps to $U_{i(k)}\\times_UU_{i(l)}$; the etale sheaf condition glues them to $t_j\\in H(W_j)$. Its two pullbacks to $W_j\\times_{V_j}W_j$ agree on each open $W_{jk}\\times_{V_j}W_{jl}$ by the same matching, hence agree. Step 6 descends $t_j$ to $v_j\\in H(V_j)$. (c) $v_j=s_i$ on $Y=U_i\\times_UV_j$: the family $\\{W_{jk}\\times_UU_i\\to Y\\}_k$ is a ph covering (base change of the composite covering $\\{W_{jk}\\to V_j\\}$, site axioms), and on $W_{jk}\\times_UU_i$ both sections are pullbacks of $s_{i(k)}$ and $s_i$, which match; apply (a). (d) On $V_j\\times_UV_{j'}$, $v_j$ and $v_{j'}$ both restrict to $s_i$ on the ph covering by the $U_i\\times_UV_j\\times_UV_{j'}$, by (c); so they agree by (a), and glue to $v\\in H(U)$. By (c), $v|_{U_i}$ and $s_i$ agree on the Zariski cover $\\{U_i\\times_UV_j\\}_j$, so $v|_{U_i}=s_i$; uniqueness is (a). Thus $H$ is a ph sheaf, and so is every presheaf isomorphic to it, giving (3).",
+   "uses": [
+    "lem-trf-ph-affine-standard-sieve-basis",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-trf-ph-scheme-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, A-sheaf paragraph; 0DDW and topologies.tex 0DBQ, with the overlap and uniqueness details written out."
+   }
+  },
+  {
+   "text": "For proper $f:X\\to Y$ and $H'\\cong\\pi_X^{-1}F$ with $F$ torsion, apply the proper derived small/big comparison to $K=F[0]$. Taking degree $i$ gives\n$$R^if_{\\mathrm{Et},*}H'\\cong\\pi_Y^{-1}(R^if_{s,*}F).$$\nIndeed $\\pi_Y^{-1}$ is exact, so it preserves the kernels, images and cokernels in the formula $H^i=\\ker d^i/\\operatorname{im}d^{i-1}$. The degree-$i$ cohomology of a derived direct image of $F[0]$ is its ordinary $R^i$, by definition. A proper map is quasi-compact because it is of finite type, and quasi-separated because it is separated. Apply the existing qcqs higher-image theorem with the set of all primes. Its input is exactly elementwise torsion of the geometric stalks of $F$, equivalent to the local torsion definition by the germ argument of Step 5; its output says that $R^if_{s,*}F$ is torsion. Therefore the displayed big sheaf lies in $\\mathcal A'_Y$ for every $i\\geq0$. This is (4), including $i=0$.",
+   "uses": [
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-sbc-qcqs-higher-images-prime-torsion",
+    "lem-pc-separated-quasi-separated",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, A-and-P paragraph: 0DDJ(2) and 0DDD, keeping the qcqs hypotheses explicit."
+   }
+  },
+  {
+   "text": "For (5), take an affine open cover $\\{V_j\\to U\\}$. Pull back the sieve generated by the given ph covering to each $V_j$. The affine standard-sieve basis supplies a proper surjection $W_j\\to V_j$ and a finite affine open covering $\\{W_{jk}\\to W_j\\}$ whose composites belong to that sieve. Membership means precisely that the composite $W_{jk}\\to U$ factors through one of the original $U_i$; thus the required refinement maps exist. Both open covers are etale by the basis lemma. Each singleton $\\{W_j\\to V_j\\}$ is ph covering directly from the generating definition of the ph topology, and its arrow is proper. Composition of these three covering levels is a covering, by the site axioms. The chosen presentations and basis lemma make all index sets small; $J$ need not be finite. For empty $U$ one may take $J=\\varnothing$. This proves all of (5).",
+   "uses": [
+    "lem-trf-ph-affine-standard-sieve-basis",
+    "def-trf-ph-scheme-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, refine-tau-by-P paragraph; the standard affine basis (0DBG) gives the refinement directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-trf-big-small-etale-exact-retraction",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "def-trf-geometric-morphism",
+  "lem-weil-pbc-short-five-lemma",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-base-change",
+  "lem-trf-big-small-etale-pullback-formula",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-pbc-geometric-stalks",
+  "lem-trf-proper-surjection-etale-section-equalizer",
+  "lem-trf-ph-affine-standard-sieve-basis",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-proper-small-big-etale-derived-comparison",
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "lem-pc-separated-quasi-separated",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-trf-ph-scheme-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0I, lemma-compare-ph-etale; details of extension counit and ph matching gluing expanded. Property (5) uses the defining affine standard basis, topologies.tex Tags 0DBD/0DBG, rather than the fppf-refinement shortcut."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +196,38 @@
    "results": "{\"t\": \"2026-10-17T18:52:01Z\", \"tool\": \"leansearch\", \"query\": \"Proper morphisms and small etale torsion sheaves satisfy the five axioms for comparing ph and etale cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.recOn\", \"AlgebraicGeometry.IsProper.casesOn\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\"], \"digest\": \"9d5314495bc19e7d\"}",
    "date": "2026-10-17",
    "verdict": "no match: etale topology definitions and proper morphism definitions do not state the weak Serre and five-property ph comparison package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small etale torsion sheaves on the big etale site form a weak Serre category and satisfy ph descent and proper higher direct image comparison",
+   "results": "{\"t\": \"2026-10-17T19:05:40Z\", \"tool\": \"leanfinder\", \"query\": \"Small etale torsion sheaves on the big etale site form a weak Serre category and satisfy ph descent and proper higher direct image comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\"], \"digest\": \"db3afe88cc0516fc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only etale site, proper morphism, or general sheaf-category APIs; none gives the five-property comparison package."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etale\", \"proper\"",
+   "results": "{\"t\": \"2026-10-17T19:06:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"etale\\\", \\\"proper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Etale.instHasRingHomPropertyEtale\", \"AlgebraicGeometry.Etale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.instDescendsAlongSchemeEtaleMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.WeaklyEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"6def635b1d3028aa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only etale site, proper morphism, or general sheaf-category APIs; none gives the five-property comparison package."
+  },
+  {
+   "tool": "grep",
+   "query": "phTopology|comparePhEtale|bigEtale|WeakSerre",
+   "results": "{\"t\": \"2026-10-17T19:06:00Z\", \"tool\": \"grep\", \"query\": \"phTopology|comparePhEtale|bigEtale|WeakSerre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only etale site, proper morphism, or general sheaf-category APIs; none gives the five-property comparison package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparison of ph and etale cohomology using proper morphisms and torsion sheaves",
+   "results": "{\"t\": \"2026-10-17T19:06:00Z\", \"tool\": \"leansearch\", \"query\": \"Comparison of ph and etale cohomology using proper morphisms and torsion sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.instCompScheme\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.stableUnderComposition\"], \"digest\": \"d1f58cc1dc672f93\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only etale site, proper morphism, or general sheaf-category APIs; none gives the five-property comparison package."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-big-etale-torsion-acyclicity",
@@ -78,5 +253,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ph-etale-comparison-hypotheses",
+  "worker": "stage1",
+  "summary": "Proved the weak Serre assertion and all five comparison properties in nine steps along Stacks 0F0I. Reused exact small/big retraction, proper base-change stability, local epimorphism lifting, short five lemma, inverse-image stalks and the more general prime-support torsion higher-image node. Four new independent tools state small/big evaluation, proper derived small/big comparison, proper-surjection section descent and the affine standard ph-sieve basis. The counit and matching-family gluing details are explicit. No statement change and no SGA route.",
+  "blueprint": "Normal-cone specialization via Orgogozo Lemma 3.1.1: the ph/etale comparison used in the first descent isomorphism; hypotheses supplied by lemma-compare-ph-etale for the vanishing input of 0DE4(1). The nine steps supply the weak Serre and five-condition hypotheses of the ph/etale comparison used for the normal-cone descent isomorphism; the current blueprint remains on its contracting-correspondence/normal-cone route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic exactness of site inverse image, used for pi^{-1} and its counit extension diagram; no trace-unit node states this tool."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "why": "Generic local lifting of small-etale sheaf epimorphisms, needed only for the local torsion cokernel argument."
+   },
+   {
+    "node": "lem-sbc-qcqs-higher-images-prime-torsion",
+    "why": "The 0DDD torsion higher-image input explicitly cited by 0F0I, specialized to all primes. It is independent of ph comparison, and no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-sbc-qcqs-higher-images-prime-torsion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NY-e2f9e1357",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-e2f9e1357 (reviewer sub-agent of L); spot-checked: I read Stacks 0F0I (with its whole proof) against 0EZ3. The item statement matches: proper morphisms, A'_X = pi_X^{-1} of torsion abelian sheaves on X_et with no common annihilator, ordinary abelian coefficients, relocalization f_Et, and the five properties for tau=ph and tau'=etale. They match word for word the hypotheses of the consumer lem-trf-refined-topology-comparison-vanishing. The statement is unchanged and not weakened. I checked steps 1-6 and 8-9 against their cited statements: local torsion closure, full faithfulness from the unit isomorphism, the counit/short-five argument for extensions, proper base change, the 021I(3) square with stalk-germ torsion, the 0DDW reduction to the small-site equalizer, 0DDJ(2) on F[0] together with proper => qcqs and 0DDD with all primes, and the standard-ph refinement for property (5). The four new nodes are true, statement-only, correctly sourced and not duplicates: 09XN+021I(3) evaluation; 0DDJ(2) with the canonical base-change map; the 0DDW/0A3T equalizer for any abelian G; the 0DBD/0DBF/0DBI/0DBQ standard-sieve basis. I tested them on small cases: empty U, p=id, a non-surjective p (excluded), and m=0. My searches of the DAG and of blueprint main-20261015 found no duplicate. I accept the tool_uses lem-weil-pbc-site-pullback-abelian-exact, lem-sbc-qcqs-higher-images-prime-torsion and lem-weil-pbc-abelian-sheaf-epi-locally-surjective. There is no SGA citation and no cycle. FIX: step 7's uniqueness bookkeeping was out of order. It applied a separatedness check over V_j x_U V_j' that presupposed v_j = s_i on U_i x_U V_j, which was never proved. I rewrote it as (a) separatedness for every ph covering, (b) the construction of v_j, (c) v_j = s_i via the ph covering {W_jk x_U U_i}, and (d) agreement, gluing and uniqueness. I also added def-trf-ph-scheme-site to the step's uses. The corrected item JSON is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }

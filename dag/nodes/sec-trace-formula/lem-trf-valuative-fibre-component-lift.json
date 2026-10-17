@@ -17,9 +17,74 @@
   "def-pc-base-change",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $x$ lies in the fibre of the reduced closure $Y=\\overline{\\{y\\}}$, the point $y$ specializes to $x$. Apply [lem-trf-valuation-ring-specialization-lift] to obtain a valuation ring $A$, its spectrum $S' =\\operatorname{Spec}A$, and a morphism $h:S'\\to X$ whose generic point maps to $y$ and whose closed point maps to $x$. Define $g=f\\circ h$. Then $g(t')=t$ and $g(s')=s$, where $t'$ and $s'$ are the generic and closed points of $S'.$",
+   "uses": [
+    "lem-trf-valuation-ring-specialization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSH, proof first paragraph: choose a valuation ring and a morphism from its spectrum realizing the specialization (Schemes, Lemma 01J8, schemes-lemma-points-specialize); set g=f∘h."
+   }
+  },
+  {
+   "text": "Form the Cartesian square $X'=X\\times_SS'$ with projections $g':X'\\to X$ and $f':X'\\to S'.$ The map $h$ gives a section $\\sigma:S'\\to X'$ of $f'$ by the universal property of the fibre product, and since $h$ factors through $Y$, the section factors through $S'\\times_SY$.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSH, proof first paragraph: consider the base change and obtain a section; the section factors through the base change of Y."
+   }
+  },
+  {
+   "text": "Choose an irreducible component of the fibre $(S'\\times_SY)_{t'}=Y_t\\times_{\\operatorname{Spec}\\kappa(t)}\\operatorname{Spec}\\kappa(t')$ containing $\\sigma(t')$, and let $y'$ be its generic point. Since $g'(y')$ lies in $Y_t$ and specializes to $g'(\\sigma(t'))=y$, while $y$ is the generic point of the irreducible fibre $Y_t$ (every point of $Y_t$ is a specialization of the generic point $y$), one has $g'(y')=y$. Thus $y'$ is generic in an irreducible component of the indicated generic fibre and maps to $y$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSH, proof second paragraph: choose y′ over the component containing σ(t′), then use genericity of y to conclude g′(y′)=y."
+   }
+  },
+  {
+   "text": "Let $Y'\\subseteq X'$ be the reduced closure of $\\{y'\\}$. The section $\\sigma$ factors through $Y'$ because $\\sigma(t')$ lies in the closure of $\\{y'\\}$. Choose an irreducible component of $Y'_{s'}$ containing $\\sigma(s')$ and let $x'$ be its generic point. Then $x'$ specializes to $\\sigma(s')$, so $g'(x')$ specializes to $g'(\\sigma(s'))=x$. Since $g'(Y')\\subseteq Y$ and $x$ is the generic point of an irreducible component of $Y_s$, this forces $g'(x')=x$. This gives the required special-fibre component lift and completes all clauses.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-pc-scheme-fibre",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSH, proof third paragraph: form Y′, choose x′ over the component containing σ(s′), and conclude g′(x′)=x by genericity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-trf-valuation-ring-specialization-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSH (lemma-make-base-change), proof all paragraphs; the valuation-ring realization of a specialization is Stacks Tag 01J8 (schemes-lemma-points-specialize), cited in the source proof and stated by lem-trf-valuation-ring-specialization-lift."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +123,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-relative-associated-specialization",
@@ -70,7 +135,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first paragraph: choose the diagram of 0GSH.",
+   "place": "Step 5 of its split (Theorem 2.1.3(b), normal-cone vanishing paragraph), through the flat-family dimension chain; Stacks Tag 0GSH is the valuative base-change input of 0GSI used by lem-trf-flat-relative-associated-specialization: choose the valuation-ring diagram, lift the generic-fibre component, and lift the special-fibre component.",
    "via": [
     "lem-trf-flat-relative-associated-specialization",
     "lem-trf-flat-associated-equidimensional",
@@ -87,5 +152,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuative-fibre-component-lift",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Tag 0GSH clause by clause and expanded its proof into the valuation-ring specialization, Cartesian base-change section, generic-fibre component, and special-fibre component steps. Added one strictly smaller node for the valuation-ring realization of a specialization, attached to the sorry-free project declaration AlgebraicGeometry.Scheme.exists_valuationSubring_of_specializes. No Mathlib leaf or duplicate was found. The image equalities and fibre descriptions were checked from the closure and fibre definitions.",
+  "blueprint": "Realizes the ancestor proof input corresponding to Stacks Tag 0GSH: valuation-ring diagram and both generic and special fibre component lifts."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-227d38273",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-227d38273 (reviewer sub-agent of L); spot-checked: I read all of the mathematics; it is correct, and I made three metadata fixes. Source check: the item matches Stacks 0GSH (more-morphisms.tex l.5093-5160) clause by clause, with no hypothesis added and no conclusion weakened. Steps 1-4 follow the three proof paragraphs. Step 1: the new node, applied to X with y specializing to x, gives h(t')=y and h(s')=x. Step 2: the section comes from the fibre-product universal property. Step 3: y is the unique generic point of Y_t. Step 4: sigma(s') lies in Y', so x' exists; g'(x') lies in Y_s and specializes to x; maximality of the component and uniqueness of generic points give g'(x')=x. Steps 2-4 are correctly marked elementary. New node lem-trf-valuation-ring-specialization-lift: it is Stacks 01J8 (1)+(2) with K the algebraic closure of kappa(y'). It is true, including the case y'=y where A is a field. It matches the sorry-free Lean lemma AlgebraicGeometry.Scheme.exists_valuationSubring_of_specializes (ValuativeCriterion.lean l.218-235) line by line. It is strictly smaller than the item and statement-only. It is not a duplicate: lem-sbc-noetherian-specialization-trait needs a noetherian X, and lem-sc-picard-valuation-probe-specializes does not fix where the generic point goes; no blueprint node matches. Both nodes are in unit sk-i-curve-zero, so no tool_uses are needed. FIX: (1) the new node's source and the item's proof_origin cited Stacks 01KE (lift-specializations-valuative), but the fact used is 01J8 (lemma-points-specialize). I corrected both, cited 01J8 in step 1's source, and corrected the Lean lines from 214-238 to 214-235. (2) The item's blueprint.from.via was [itself]; I set it to the computed 11-node chain up to lem-trf-local-term-locality, set the new node's via to [item]+chain, and made both places name step 5 of that node's split. (3) The new node had no lean_audit field; I added none/none and recorded the closed declaration under lean_candidates. Statements, proofs and searches are unchanged.; 2 file(s) fixed by the reviewer"
  }
 }
