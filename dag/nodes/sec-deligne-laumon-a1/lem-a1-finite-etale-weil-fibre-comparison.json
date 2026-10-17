@@ -26,9 +26,185 @@
   "def-weil-global-geometric-frobenius",
   "def-weil-ordinary-compact-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work at finite coefficients $A_n=\\mathcal O_E/\\varpi_E^n$. A finite etale map is etale-locally a finite disjoint union of identity maps, including the empty union [lem-weil-pbc-finite-etale-etale-local-split]. On such a neighborhood its pro-etale direct image is the finite product of the restrictions to the sheets: evaluation on $T\\to U$ gives the product of sections on the copies of $T$. Restriction to these etale neighborhoods is exact and preserves injectives [lem-weil-pbc-proetale-restriction-injectives], so the same calculation computes the derived image of a bounded complex. Thus it is exact and preserves its cohomological interval. The finite products commute with derived change $A_m\\to A_n$ (finite products are finite sums, and tensor is additive); consequently the canonical coefficient-exchange maps for this direct image are isomorphisms. These identities glue, since their maps are the restriction and coefficient maps themselves. For constructibility, represent a finite-level constructible pro-etale complex by its etale antecedent [lem-sf-proetale-constructible-origin]. The sheaf comparison $\\nu_Y^*g_*\\to g_*\\nu_X^*$ is the identity on every sheet in the preceding calculation, hence is an isomorphism. The etale direct image is exact and constructible by [fin4-thm-finite-morphisms-constructible]. This proves finite-level constructibility on $Y$ without assuming $X$ or $Y$ separated.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-sf-proetale-constructible-origin",
+    "fin4-thm-finite-morphisms-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 04HN, lemma-finite-etale-etale-local; finite-level constructibility supplied by the cited existing fin4 theorem."
+   }
+  },
+  {
+   "text": "Let $K$ be an integral constructible complex representing an object at coefficient field $E$. Its reductions $K_n$ are constructible in a single interval $[a,b]$, by [def-weil-derived-complete-integral-detailed]. By Step 1 the tower $M_n=Rg_*K_n$ is constructible in that same interval, and its canonical quotient comparisons $M_m\\otimes^L_{A_m}A_n\\to M_n$ are isomorphisms. Apply the direct image to the strict coefficient tower representing $K$; this supplies the coherent tower and quotient cocycle, not merely an inverse system in a homotopy category. Thus it is a normalized tower in the sense of [def-coef-normalized-dvr-tower]. The effectivity theorem [lem-coef-normalized-dvr-effectivity] identifies every reduction of $M=R\\varprojlim_n\\operatorname{Res}_nM_n$ with $M_n$ and makes $M$ derived complete. Together with the already proved constructibility and uniform interval this is exactly membership in the integral category. This $M$ is the integral $Rg_*K$ of [def-weil-derived-direct-image]. Localizing scalars therefore gives $Rg_*$ on the required rational constructible category. No finite-Tor bound on the reductions was used.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-coef-normalized-dvr-tower",
+    "lem-coef-normalized-dvr-effectivity",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-map-purity.proof.md",
+    "place": "First paragraph, finite pushforward; agent coefficient-tower construction from the cited effectivity theorem."
+   }
+  },
+  {
+   "text": "Choose a finite affine open cover $U_{i,0}$ of $Y_0$ and put $U_i=U_{i,0}\\times_{k_0}k$: these are affine opens covering $Y$, stable under the base-field Frobenius $\\operatorname{id}_{Y_0}\\times\\operatorname{Spec}(\\gamma)$. Their inverse images $V_i$ are affine since $g$ is finite [lem-weil-pbc-finite-morphism-permanence]; these are separated finite-type $k$-schemes. Finite-level open restriction commutes with derived image [lem-exc-proetale-derived-open-restriction]. It also commutes with the derived limit defining the integral image: ringed-site open restriction is exact with exact left adjoint extension by zero [lem-pur-site-restriction-module-adjunction-exact], hence preserves injectives and limits, also on towers. Completed restriction is the same restriction [lem-sf-pf-open-factor-coherence](1). These comparisons pass to rational localization. Consequently $(Rg_*\\mathcal F)|_{U_i}=R(g|_{V_i})_*(\\mathcal F|_{V_i})$. Apply [lem-zl-finite-adic-direct-image] to each $V_i\\to U_i$: this lies in degree zero. This is a local assertion for the standard constructible t-structure [prop-constructible-truncations]; its sheaf interpretation and checking on separated open covers are [lem-dl-a1-constructible-fibres-exact]. Explicitly, at an integral representative each cohomology sheaf outside degree zero is killed locally by a power of $\\varpi_E$; a finite cover gives a single power, so it vanishes after rational localization. Hence $Rg_*\\mathcal F$ is in the constructible heart. The same local finite-adic lemma supplies the canonical stalk-to-fibre-sections isomorphism, natural also for semilinear isomorphisms of diagrams. It is independent of the affine neighborhood because all its arrows are restriction maps.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-exc-proetale-derived-open-restriction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-pf-open-factor-coherence",
+    "lem-zl-finite-adic-direct-image",
+    "prop-constructible-truncations",
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-map-purity.proof.md",
+    "place": "First paragraph: rational finite-stalk comparison; agent refinement of the coefficient and equivariance details."
+   }
+  },
+  {
+   "text": "Write $\\phi_X,\\phi_Y$ for the geometric base-field Frobenius automorphisms, to distinguish them from $g$. The finite morphism $g_0$ is proper and in particular separated [lem-weil-pbc-finite-proper]. Steps 1--3 have verified the bounded-constructibility domain; therefore [lem-fix-weil-operations] applies. If $\\theta:\\phi_X^*\\mathcal F\\to\\mathcal F$ is its Weil structure, the induced structure on the degree-zero image is $\\phi_Y^*g_*\\mathcal F\\xrightarrow{\\mathrm{Ex}}g_*\\phi_X^*\\mathcal F\\xrightarrow{g_*\\theta}g_*\\mathcal F$. Its iterates use the iterated exchanges and $\\theta^{[n]}$. The composition comparisons and exchanges are equivariant by the same cited lemma. This proves the claimed induced Weil structure, having established constructibility separately rather than inferring it from equivariance.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-fix-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-map-purity.proof.md",
+    "place": "First paragraph: rational finite-stalk comparison; agent refinement of the coefficient and equivariance details."
+   }
+  },
+  {
+   "text": "The field $L=\\kappa(y)$ has finite degree $d_y$ over $k_0$ by [lem-kun-closed-point-field](a). Base change of a finite morphism is finite [lem-weil-pbc-finite-morphism-permanence], so $Z_0$ is finite over $L$ and proper [lem-weil-pbc-finite-proper]. The map $Z_0\\to X_0$ is the base change of the closed immersion $\\operatorname{Spec}L\\to Y_0$, and hence is a closed immersion [lem-weil-pbc-closed-immersion-base-change]. In an affine neighborhood of $y$, write $Y_0=\\operatorname{Spec}A$ and its finite inverse image as $\\operatorname{Spec}B$. Then $Z_0=\\operatorname{Spec}(B\\otimes_A\\kappa(y))$. Prime ideals in this quotient correspond exactly to primes of $B$ over the maximal ideal of $y$. Their residue fields are unchanged, also as $L$-fields [lem-weil-pbc-closed-immersion-residue-field-iso]. Each is finite over $L$: the corresponding quotient of the finite-dimensional $L$-algebra is a finite-dimensional domain and hence a field, since multiplication by any nonzero element is injective and therefore surjective. Thus these $x$ are closed also in $X_0$ by [lem-kun-closed-point-field](a). This proves the point correspondence and all residue-field assertions, without a surjectivity assumption.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, finite-fibre setup; elementary affine fibre calculation spelling out the residue fields."
+   }
+  },
+  {
+   "text": "Let $i:Z\\to X$ be the fibre inclusion with the chosen embedding $L\\hookrightarrow k$. The pullback $i^*\\mathcal F$ is constructible: integral pullback preserves constructibility and reduces to ordinary inverse image [lem-pur-integral-operations-preserve-constructible](1). It lies in the constructible heart, because pullback along the morphism $i$ of finite-type $k$-schemes is $t$-exact and commutes with $\\mathcal H^j$ [lem-a1-constructible-pullback-t-exact]. By the same lemma and pullback composition its geometric fibres are those of $\\mathcal F$, which on the separated affine charts $V_i$ of Step 3 are the exact fibre functors of [lem-dl-a1-constructible-fibres-exact]. Put $\\psi_Z=\\operatorname{id}_{Z_0}\\times\\operatorname{Spec}(\\gamma^{d_y})$, the base-field Frobenius for $L$. Since $\\gamma^{d_y}$ fixes $L$, $i\\psi_Z=\\phi_X^{d_y}i$. Pull back $\\theta^{[d_y]}$ along $i$ and use this equality to define $\\eta:\\psi_Z^*i^*\\mathcal F\\xrightarrow{\\sim}i^*\\mathcal F$. Iterates and reparametrizations are precisely those of [def-weil-local-frobenius-trace], with the associative pullback comparisons [lem-pod-integral-pullback-composition], localized at $E$. This gives the asserted Weil sheaf $\\mathcal G=(i^*\\mathcal F,\\eta)$ on $Z_0/L$.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-dl-a1-constructible-fibres-exact",
+    "def-weil-local-frobenius-trace",
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), printed pp.150--152: Frobenius and change of finite base field; agent construction with the specified pullback comparisons."
+   }
+  },
+  {
+   "text": "Let $a_y:(g_*\\mathcal F)_{\\bar y}\\to H^0(Z,i^*\\mathcal F)$ be the restriction isomorphism from Step 3 and [lem-zl-finite-adic-direct-image]. Since $Z_0/L$ is proper, [lem-pod-proper-coincidence-frobenius] gives a natural isomorphism $c:H_c^0(Z,i^*\\mathcal F)\\to H^0(Z,i^*\\mathcal F)$ compatible with Frobenius transport. Define $b_y=c^{-1}a_y$. This is the usual finite-fibre base-change map followed by proper compact/ordinary identification. It remains to check its operator, rather than only its underlying vector space.",
+   "uses": [
+    "lem-zl-finite-adic-direct-image",
+    "lem-pod-proper-coincidence-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-map-purity.proof.md",
+    "place": "First paragraph: rational finite-stalk comparison; agent refinement of the coefficient and equivariance details."
+   }
+  },
+  {
+   "text": "On the chart $V_i\\to U_i$ of Step 3 containing $\\bar y$, which $\\phi_X,\\phi_Y$ preserve, apply the semilinear diagram-naturality of [lem-zl-finite-adic-direct-image] to $\\phi_X^{d_y},\\phi_Y^{d_y}$ and the point return $\\phi_Y^{d_y}\\bar y=\\bar y\\gamma_s^{d_y}$. It identifies the transport of the source of $a_y$ with cohomology transport along $\\psi_Z$ on its target. Concretely every restriction to a geometric lift in the fibre is reindexed by $\\phi_X^{d_y}$ and has the induced point transport; these are the same restrictions on both routes. Naturality for the sheaf morphism $\\theta^{[d_y]}$ then identifies the subsequent source action with $H^0(\\eta)$. The point-transport naturality identity [lem-weil-frobenius-point-transport-natural](2) permits exactly these restriction and structure maps to pass through the transports. Thus the composite on the source is $F_y$ by [def-weil-local-frobenius-trace], whereas the target composite is ordinary $L$-Frobenius by [def-weil-global-geometric-frobenius]. The transports used here are the specified isomorphisms [lem-weil-frobenius-cohomology-transport-iso], applied with finite base $L$. Hence $a_yF_y=F_{Z/L}^{\\mathrm{ord}}a_y$. Proper-coincidence transport compatibility [lem-pod-proper-coincidence-frobenius](2), followed by naturality for $\\eta$, gives $cF_{Z/L}=F_{Z/L}^{\\mathrm{ord}}c$. Combining the two equalities proves $b_yF_y=F_{Z/L}b_y$.",
+   "uses": [
+    "lem-zl-finite-adic-direct-image",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-local-frobenius-trace",
+    "def-weil-global-geometric-frobenius",
+    "lem-weil-frobenius-cohomology-transport-iso",
+    "lem-pod-proper-coincidence-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-map-purity.proof.md",
+    "place": "First paragraph: rational finite-stalk comparison; agent refinement of the coefficient and equivariance details."
+   }
+  },
+  {
+   "text": "For a point $z_0$ corresponding to $x$ put $e=[\\kappa(x):L]$. Step 5 identifies the fields, and the elementary tower formula gives $[\\kappa(x):k_0]=ed_y$. At a chosen geometric lift, pullback composition identifies the stalk of $\\mathcal G$ with that of $\\mathcal F$. In the formula [def-weil-local-frobenius-trace] for its local operator over $L$, the structure map is the $e$-fold iterate of $\\eta$. Expanding $\\eta$ gives the same ordered string of $ed_y$ factors $\\theta$ as $\\theta^{[ed_y]}$. The point transport is likewise the ordered string of $ed_y$ one-step transports, grouped into $e$ blocks of length $d_y$; the point reparametrization is $\\gamma_s^{ed_y}$ in either expression. Associativity of the specified pullback comparisons [lem-pod-integral-pullback-composition] removes the parentheses, and naturality [lem-weil-frobenius-point-transport-natural] identifies the intervening pullback maps. The two composites are therefore identical, which proves that the relative-$L$ local operator is the original $F_x$. This checks the operator itself, with its geometric-Frobenius convention, rather than merely its trace or eigenvalues.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-pod-integral-pullback-composition",
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.8)--(1.1.10), printed pp.150--152; agent expansion of the iterates."
+   }
+  },
+  {
+   "text": "For $\\Qlb$ choose a common finite extension $E/\\mathbf Q_\\ell$ representing $\\mathcal F$, its Weil isomorphism and inverse, and their inverse identities. Such a stage exists by [def-weil-algebraically-closed-coefficients]. All constructions above commute with enlarging this field: for the stalk formula this is part of [lem-zl-finite-adic-direct-image], and for point transports it is part of [lem-weil-frobenius-point-transport-natural](2). All other arrows are canonical coefficient-stage pullbacks, direct images and their comparisons already constructed at that stage. Extend the equalities to $\\Qlb$. Empty fibres give zero on both sides; degree-one points give the one-step action; disconnected fibres require no choice of ordering. Nothing in the argument uses purity, lissity or semisimplicity.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-zl-finite-adic-direct-image",
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), printed p.150: finite fields of coefficients; common-stage interpretation as defined in the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-sf-proetale-constructible-origin",
+  "fin4-thm-finite-morphisms-constructible",
+  "def-weil-derived-complete-integral-detailed",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-normalized-dvr-effectivity",
+  "def-weil-derived-direct-image",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-exc-proetale-derived-open-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-pf-open-factor-coherence",
+  "lem-zl-finite-adic-direct-image",
+  "prop-constructible-truncations",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-pbc-finite-proper",
+  "lem-fix-weil-operations",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-a1-constructible-pullback-t-exact",
+  "def-weil-local-frobenius-trace",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-proper-coincidence-frobenius",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-global-geometric-frobenius",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-map-purity.proof.md",
+  "place": "First paragraph, refined using Stacks Tags 03QP and 04HN and Deligne Weil II (1.1.3), (1.1.7)--(1.1.10)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -120,10 +296,45 @@
    "results": "Hits: AlgebraicGeometry.IsFinite.finite_preimage_singleton, TopCat.Presheaf.stalkPushforward, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale. ",
    "date": "2026-10-17",
    "verdict": "no match: residue-field structure maps, ordinary topological stalk maps, and fibre finiteness do not identify rational Weil stalks with finite-fibre cohomology or identify their Frobenius operators"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|finiteLowerStar|lowerStarSheafFiberIsoPi",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary topological stalk maps, finite scheme fibres, and arithmetic Frobenius of fields do not give the rational Weil direct-image comparison and its two operator compatibilities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalks of finite pushforward constructible ell adic sheaves and local Frobenius",
+   "results": "TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalk, TopCat.Presheaf.stalkPushforward_germ_apply, TopCat.Presheaf.stalkPushforward.comp, TopCat.Presheaf.stalkPushforward.id, TopCat.Presheaf.stalkPushforward_germ, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, TopCat.Presheaf.stalkPullbackHom",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary topological stalk maps, finite scheme fibres, and arithmetic Frobenius of fields do not give the rational Weil direct-image comparison and its two operator compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkPushforward\"",
+   "results": "TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing, TopCat.Presheaf.stalkPushforward.id, TopCat.Presheaf.stalkSpecializes_stalkPushforward, TopCat.Presheaf.stalkPushforward_germ, TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc, TopCat.Presheaf.stalkPushforward.comp, TopCat.Presheaf.stalkPushforward_germ_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary topological stalk maps, finite scheme fibres, and arithmetic Frobenius of fields do not give the rational Weil direct-image comparison and its two operator compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image along a finite etale morphism is exact on rational constructible sheaves and its geometric fibre is the finite sum of stalks",
+   "results": "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.Scheme.Hom.discrete_fiber, Condensed.hasExactColimitsOfShape, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary topological stalk maps, finite scheme fibres, and arithmetic Frobenius of fields do not give the rational Weil direct-image comparison and its two operator compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale rational Weil direct image stalk is finite fibre cohomology compatibly with geometric Frobenius",
+   "results": "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, IsArithFrobAt.arithFrobAt, arithFrobAt, IsArithFrobAt.exists_of_isInvariant, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary topological stalk maps, finite scheme fibres, and arithmetic Frobenius of fields do not give the rational Weil direct-image comparison and its two operator compatibilities."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-finite-map-purity",
@@ -140,5 +351,129 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-finite-etale-weil-fibre-comparison",
+  "worker": "stage1",
+  "summary": "Retained the full statement, including nonseparated finite-type schemes. Proved finite-etale direct-image preservation using finite coefficient sheets and normalized-tower effectivity; localized the existing rational finite-stalk theorem on affine opens. Constructed the residue-field Weil structure and checked both the fibre comparison and closed-point return maps with the specified point transports. No new nodes, no axioms or Lean changes.",
+  "blueprint": "Realizes the first paragraph of lem-a1-finite-map-purity: the finite-stalk comparison at y and the identification of each return map with F_x; the finite-cycle linear algebra remains in the existing lem-a1-finite-weil-sections-decomposition.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-etale-etale-local-split",
+    "why": "Generic A finite etale morphism is etale locally a finite disjoint union of copies of the base used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Generic Pro-etale localization preserves injectives used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "fin4-thm-finite-morphisms-constructible",
+    "why": "Generic Finite morphisms preserve constructibility used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Generic Effectivity of a normalized DVR tower used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic Base change, affineness and properness for finite morphisms used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-exc-proetale-derived-open-restriction",
+    "why": "Generic Unbounded pro-etale direct image commutes with open restriction used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-sf-pf-open-factor-coherence",
+    "why": "Generic Completed open restriction, constructibility and normalization of the open maps used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic Construction of constructible truncations used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Generic Geometric fibres detect exactness in the constructible adic heart used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic Finite morphisms are proper used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Generic Weil structures on operations and their basic maps used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic Residue fields of closed points used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic Base change of a closed immersion is a closed immersion used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic A closed immersion induces an isomorphism on residue fields used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic Integral pullback and completed tensor product preserve constructibility used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Generic Composition isomorphism for integral derived pullbacks used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-pod-proper-coincidence-frobenius",
+    "why": "Generic The proper coincidence of compact-support and ordinary cohomology commutes with the Frobenius transport used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Generic The point transport along Frobenius is linear and natural used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   },
+   {
+    "node": "lem-weil-frobenius-cohomology-transport-iso",
+    "why": "Generic The transport of cohomology along the geometric Frobenius is an isomorphism used in the indicated proof steps for coefficient transport, finite-map geometry, or Frobenius coherence; the unit does not supply this foundational statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-sf-proetale-constructible-origin",
+  "fin4-thm-finite-morphisms-constructible",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-exc-proetale-derived-open-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-pf-open-factor-coherence",
+  "prop-constructible-truncations",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-pbc-finite-proper",
+  "lem-fix-weil-operations",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-proper-coincidence-frobenius",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-frobenius-cohomology-transport-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-e10b22735",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-e10b22735 (reviewer sub-agent of L); spot-checked: I read the item, its parent lem-a1-finite-map-purity (main-20261015, proof first paragraph), all 28 dependency statements, Stacks 03QP/04HN and Bhatt-Scholze 6.8.10-6.8.15. The statement is true and not weakened. It keeps non-separated X0/Y0 and the rational/common-stage coefficients, and its base-change map is fibre restriction from lem-zl-finite-adic-direct-image followed by the inverse of the proper coincidence. I checked Z = X x_Y ybar, the identity i psi_Z = phi_X^{d_y} i, e*d_y = [kappa(x):k0], and the small cases id, Spec F_{q^2}->Spec F_q and the empty fibre. Two faults, both repaired. (1) E1/E5: Step 8 uses lem-zl's semilinear naturality under phi^{d_y}, which needs a Frobenius-stable chart, but Step 3 took an arbitrary affine cover of Y. Steps 3 and 8 now use U_{i,0} x_{k0} k from an affine cover of Y0. (2) C1/C4: Step 6 put i^*F in the heart using fibre functors that lem-dl-a1-constructible-fibres-exact gives only on the heart; this needs t-exactness of pullback, and no node stated it. I added the statement-only node lem-a1-constructible-pullback-t-exact (source Bhatt-Scholze Def 6.8.10, Prop 6.8.11(3), Rem 6.8.15; from lem-a1-finite-map-purity via the item; only a Mathlib grep was recorded, so LeanSearch and Loogle/LeanFinder are still owed). Step 6 now cites it. Batch-5 check: lem-fix-weil-operations (general Weil six operations), lem-pod-integral-pullback-composition (pullback composition coherence, already cited by def-weil-local-frobenius-trace) and lem-pod-proper-coincidence-frobenius (Frobenius compatibility of Ra_! = Ra_* for proper schemes, from the H_c-finiteness proposition) are all outside both assumed statements and their proofs. Their closures reach only foundational pod/trf nodes. I accept the 21 tool_uses as generic foundations. No SGA is cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
