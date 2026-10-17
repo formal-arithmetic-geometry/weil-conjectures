@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -51,26 +51,26 @@ Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph, lift inde
 theorem determinant_wedge_quotient_factor {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ)
     (hr : r₂ = r₁ + r₃) [S.X₁.IsFiniteLocallyFreeOfRank r₁]
-    (q : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶
-      exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃)
-    (ψ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶ exteriorSheaf S.X₂ r₂)
+    (q : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₂ r₃ ⟶
+      exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃)
+    (ψ : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₂ r₃ ⟶ exteriorPower S.X₂ r₂)
     (hq : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
       (c : Fin r₃ → S.X₂.val.obj (op U)),
       q.val.app (op U)
-        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
-          (exteriorSheafSection S.X₂ r₃ U c)) =
-        tmulSection (M := exteriorSheaf S.X₁ r₁)
-          (N := exteriorSheaf S.X₃ r₃) (U := U)
-          (exteriorSheafSection S.X₁ r₁ U a)
-          (exteriorSheafSection S.X₃ r₃ U (fun i ↦ S.g.val.app (op U) (c i))))
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₂) (r := r₃) (U := U) c)) =
+        tmulSection (M := exteriorPower S.X₁ r₁)
+          (N := exteriorPower S.X₃ r₃) (U := U)
+          (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₃) (r := r₃) (U := U) (fun i ↦ S.g.val.app (op U) (c i))))
     (hψ : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
       (c : Fin r₃ → S.X₂.val.obj (op U)),
       ψ.val.app (op U)
-        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
-          (exteriorSheafSection S.X₂ r₃ U c)) =
-        exteriorSheafSection S.X₂ r₂ U
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₂) (r := r₃) (U := U) c)) =
+        wedge (M := S.X₂) (r := r₂) (U := U)
           (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))) :
-    ∃ φ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ⟶ exteriorSheaf S.X₂ r₂,
+    ∃ φ : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃ ⟶ exteriorPower S.X₂ r₂,
       q ≫ φ = ψ := by
   have hgepi : Epi S.g := hS.epi_g
   obtain ⟨q₀, hq₀epi, hq₀⟩ :=
@@ -79,16 +79,16 @@ theorem determinant_wedge_quotient_factor {X : Scheme.{v}}
     apply exteriorTensor_lift_hom_ext (𝟙 S.X₂) r₁ r₃ q q₀
     intro U a c
     change q.val.app (op U)
-        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
-          (exteriorSheafSection S.X₂ r₃ U c)) =
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₂) (r := r₃) (U := U) c)) =
       q₀.val.app (op U)
-        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
-          (exteriorSheafSection S.X₂ r₃ U c))
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₂) (r := r₃) (U := U) c))
     rw [hq U a c, hq₀ U a c]
   have : Epi q := hqq ▸ hq₀epi
   have hzero : CategoryTheory.Limits.kernel.ι q ≫ ψ = 0 := by
     apply exteriorTensor_kernel_eq_zero_of_relations S hS S.X₁
-      (exteriorSheaf S.X₂ r₂) r₁ r₃ q ψ hq
+      (exteriorPower S.X₂ r₂) r₁ r₃ q ψ hq
     intro U a c j d hc
     rw [hψ U a c]
     exact exteriorSheaf_rank_wedge_eq_zero S.f r₁ r₂ r₃ hr U a c j d hc

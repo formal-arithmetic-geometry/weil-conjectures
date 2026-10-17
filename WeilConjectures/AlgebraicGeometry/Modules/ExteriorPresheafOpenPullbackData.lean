@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 
 /-! Component data for exterior presheaf pullback. -/
 
@@ -306,11 +306,11 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Expose the defining wedge formula of the exterior-power restriction. -/
 private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     {V W : X.Opensᵒᵖ} (f : V ⟶ W) (a : Fin n → M.val.obj V) :
-    exteriorSheafRestriction M n f
+    ((_root_.PresheafOfModules.exteriorPower (R := _) M.val n).map f)
       (exteriorPower.ιMulti (X.presheaf.obj V) n (M := M.val.obj V) a) =
         exteriorPower.ιMulti (X.presheaf.obj W) n (M := M.val.obj W)
           (fun i ↦ M.val.map f (a i)) :=
-  (Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f)).1 a
+  (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f) a
 
 set_option maxHeartbeats 800000 in
 -- The comparison unfolds section modules and their transported scalar actions.
@@ -330,21 +330,22 @@ theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n 
     (U : X.Opens) :
     ∃ (app : ∀ V : U.toScheme.Opensᵒᵖ,
       ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj
-        (exteriorSheafPresheaf M n)).obj V ≅
-        (exteriorSheafPresheaf (M.restrict U.ι) n).obj V),
+        (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).obj V ≅
+        (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).obj V),
       ∀ {V W : U.toScheme.Opensᵒᵖ} (f : V ⟶ W),
         ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj
-          (exteriorSheafPresheaf M n)).map f ≫
+          (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).map f ≫
             (ModuleCat.restrictScalars
               ((U.toScheme.ringCatSheaf.obj.map f).hom)).map (app W).hom =
-          (app V).hom ≫ (exteriorSheafPresheaf (M.restrict U.ι) n).map f := by
-  let P := exteriorSheafPresheaf M n
+          (app V).hom ≫
+            (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).map f := by
+  let P := (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)
   let Q := (openPresheafRestriction U.ι).obj P
   let e₀ : (PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj P ≅ Q :=
     ((openPresheafRestrictionAdjunction U.ι).leftAdjointUniq
       (PresheafOfModules.pullbackPushforwardAdjunction.{v}
         U.ι.toRingCatSheafHom.hom)).symm.app P
-  let e₁ : Q ≅ exteriorSheafPresheaf (M.restrict U.ι) n :=
+  let e₁ : Q ≅ (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n) :=
     PresheafOfModules.isoMk
       (fun V ↦ ringTransportIso
         (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
@@ -358,16 +359,19 @@ theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n 
         change ringTransportInverse
             (X.presheaf.obj (U.ι.opensFunctor.op.obj W)) (U.toScheme.presheaf.obj W)
             (U.ι.appIso W.unop) (M.val.obj (U.ι.opensFunctor.op.obj W)) n
-            (exteriorSheafRestriction M n (U.ι.opensFunctor.op.map f)
+            (((_root_.PresheafOfModules.exteriorPower (R := _) M.val n).map
+                (U.ι.opensFunctor.op.map f))
               (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n
                 (M := M.val.obj (U.ι.opensFunctor.op.obj V)) a)) =
-          exteriorSheafRestriction (M.restrict U.ι) n f
+          ((_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).map f)
             (ringTransportInverse
               (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
               (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
               (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n
                 (M := M.val.obj (U.ι.opensFunctor.op.obj V)) a))
-        erw [restriction_wedge, ringTransportInverse_wedge, ringTransportInverse_wedge]
+        rw [restriction_wedge]
+        refine (ringTransportInverse_wedge _ _ _ _ n _).trans ?_
+        conv_rhs => rw [ringTransportInverse_wedge]
         exact (restriction_wedge (M.restrict U.ι) n f a).symm)
   let e := e₀ ≪≫ e₁
   exact ⟨fun V ↦ (PresheafOfModules.evaluation _ V).mapIso e, fun f ↦ e.hom.naturality f⟩

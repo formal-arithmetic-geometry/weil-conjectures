@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
 import WeilConjectures.LinearAlgebra.GenericExteriorPowerLocalization
@@ -31,20 +31,21 @@ Source: Stacks Project, Section 26.7, Lemmas 26.7.1, 26.7.2(2), and 26.7.4, Tag 
 
 Proof: On an affine open W and its principal open D(f), quasi-coherence of M
 makes restriction of M a localization. The algebraic exterior-power localization
-lemma applies to exteriorSheafRestriction because its value on every pure wedge
-is the wedge of the restrictions. The exterior sheafification unit is bijective
-on both affine opens. Its naturality identifies restriction in the exterior
-sheaf with the exterior-power localization map. Surjectivity up to a power of
-f transports across these bijections, as does the assertion that a section
-vanishing after restriction is killed by a power of f. The principal-open
-criterion for quasi-coherence now applies. No finiteness or freeness is needed;
+lemma applies to the restriction maps of `PresheafOfModules.exteriorPower`, whose
+value on every pure wedge is the wedge of the restrictions. The exterior
+sheafification unit is bijective on both affine opens. Its naturality identifies
+restriction in the exterior sheaf with the exterior-power localization map.
+Surjectivity up to a power of f transports across these bijections, as does the
+assertion that a section vanishing after restriction is killed by a power of f.
+The principal-open criterion for quasi-coherence now applies. No finiteness or
+freeness is needed;
 the localization theorem also includes degree zero and the zero ring.
 -/
 theorem isQuasicoherent_exteriorSheaf_of_isAffine {X : Scheme.{u}} [IsAffine X]
     (M : X.Modules) [M.IsQuasicoherent] (n : ℕ) :
-    (exteriorSheaf M n).IsQuasicoherent := open CategoryTheory Opposite in by
-  let E := exteriorSheaf M n
-  let P := exteriorSheafPresheaf M n
+    (exteriorPower M n).IsQuasicoherent := open CategoryTheory Opposite in by
+  let E := exteriorPower M n
+  let P := (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)
   let η := ((PresheafOfModules.sheafificationAdjunction.{u}
     (CategoryTheory.CategoryStruct.id X.ringCatSheaf.obj)).unit.app P)
   have hloc (W : X.Opens) (hW : IsAffineOpen W) (f : Γ(X, W)) :
@@ -66,8 +67,8 @@ theorem isQuasicoherent_exteriorSheaf_of_isAffine {X : Scheme.{u}} [IsAffine X]
       (M := Γ(M, W)) (N := Γ(M, X.basicOpen f))
       (.powers f) (M.val.map (homOfLE (X.basicOpen_le f)).op).hom n _ ?_
     intro a
-    exact (Classical.choose_spec
-      (exteriorSheafRestriction_existsUnique M n (homOfLE (X.basicOpen_le f)).op)).1 a
+    exact (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n
+      (homOfLE (X.basicOpen_le f)).op) a
   apply isQuasicoherent_of_forall_isAffineOpen E
   · intro W hW f s
     obtain ⟨s', hs'⟩ := (exteriorSheaf_affine_unit_bijective M n

@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Abelian
@@ -31,29 +31,28 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 private theorem exterior_section_map {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     {U V : X.Opens} (f : V ⟶ U) (a : Fin n → M.val.obj (op U)) :
-    (exteriorSheaf M n).val.map f.op (exteriorSheafSection M n U a) =
-      exteriorSheafSection M n V (fun i ↦ M.val.map f.op (a i)) := by
+    (exteriorPower M n).val.map f.op (wedge (M := M) (r := n) (U := U) a) =
+      wedge (M := M) (r := n) (U := V) (fun i ↦ M.val.map f.op (a i)) := by
   let η := (PresheafOfModules.sheafificationAdjunction.{v}
-    (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf M n)
+    (𝟙 X.ringCatSheaf.obj)).unit.app (M.val.exteriorPower (R := X.presheaf) n)
   have hn := PresheafOfModules.naturality_apply η f.op
-    (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)
-  have hr := (Classical.choose_spec
-    (exteriorSheafRestriction_existsUnique M n f.op)).1 a
+    (_root_.exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)
+  have hr := (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := X.presheaf) M.val n f.op) a
   exact hn.symm.trans (congrArg (η.app (op V)) hr)
 
 private theorem exterior_section_induction {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
-    (P : ∀ U : X.Opens, (exteriorSheaf M n).val.obj (op U) → Prop)
+    (P : ∀ U : X.Opens, (exteriorPower M n).val.obj (op U) → Prop)
     (hzero : ∀ U, P U 0)
     (hadd : ∀ U x y, P U x → P U y → P U (x + y))
     (hsmul : ∀ U (c : X.presheaf.obj (op U)) x, P U x → P U (c • x))
-    (hwedge : ∀ U a, P U (exteriorSheafSection M n U a))
+    (hwedge : ∀ U a, P U (wedge (M := M) (r := n) (U := U) a))
     (hlocal : ∀ U x (S : Sieve U), S ∈ Opens.grothendieckTopology X U →
       (∀ (V : X.Opens) (f : V ⟶ U), S f →
-        P V ((exteriorSheaf M n).val.map f.op x)) → P U x) :
+        P V ((exteriorPower M n).val.map f.op x)) → P U x) :
     ∀ U x, P U x := by
   intro U x
   let η := (PresheafOfModules.sheafificationAdjunction.{v}
-    (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf M n)
+    (𝟙 X.ringCatSheaf.obj)).unit.app (M.val.exteriorPower (R := X.presheaf) n)
   have : Presheaf.IsLocallySurjective (Opens.grothendieckTopology X)
       ((PresheafOfModules.toPresheaf _).map η) := by
     rw [PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
@@ -62,11 +61,11 @@ private theorem exterior_section_induction {X : Scheme.{v}} (M : X.Modules) (n :
     (Presheaf.imageSieve_mem _ _ _)
   intro V f hf
   obtain ⟨z, hz⟩ := hf
-  change η.app (op V) z = (exteriorSheaf M n).val.map f.op x at hz
+  change η.app (op V) z = (exteriorPower M n).val.map f.op x at hz
   rw [← hz]
   have hzspan : z ∈ Submodule.span (X.presheaf.obj (op V))
-      (Set.range (exteriorPower.ιMulti (X.presheaf.obj (op V)) n)) := by
-    rw [exteriorPower.ιMulti_span]
+      (Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj (op V)) n)) := by
+    rw [_root_.exteriorPower.ιMulti_span]
     trivial
   clear hz
   induction hzspan using Submodule.span_induction with
@@ -148,8 +147,8 @@ family of sections of `C`, lift each section under `g` on a covering and take a 
 refinement of the finitely many coverings. The displayed hypothesis and naturality
 then imply equality on the tensor of any two pure wedges, by separatedness of `D`.
 The case `s = 0` requires no lifts. Pure wedges span sectionwise exterior powers.
-The sheafification maps are locally surjective, so sections of `exteriorSheaf A r`
-and `exteriorSheaf C s` are locally finite linear combinations of pure wedges.
+The sheafification maps are locally surjective, so sections of `exteriorPower A r`
+and `exteriorPower C s` are locally finite linear combinations of pure wedges.
 The tensor sheafification map is also locally surjective, so every section of their
 tensor product is locally a finite sum of elementary tensors. Bilinearity and
 linearity extend the equality to these sums, and separatedness glues it. Finally
@@ -157,22 +156,22 @@ extensionality of sheaf morphisms gives `φ = ψ`. This uses neither finite loca
 freeness, nor a rank relation, nor injectivity of any map. -/
 theorem exteriorTensor_lift_hom_ext {X : Scheme.{v}} {A B C D : X.Modules}
     (g : B ⟶ C) [Epi g] (r s : ℕ)
-    (φ ψ : exteriorSheaf A r ⊗ exteriorSheaf C s ⟶ D)
+    (φ ψ : exteriorPower A r ⊗ exteriorPower C s ⟶ D)
     (h : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))
       (c : Fin s → B.val.obj (op U)),
       φ.val.app (op U)
-          (tmulSection (exteriorSheafSection A r U a)
-            (exteriorSheafSection C s U (fun i ↦ g.val.app (op U) (c i)))) =
+          (tmulSection (wedge (M := A) (r := r) (U := U) a)
+            (wedge (M := C) (r := s) (U := U) (fun i ↦ g.val.app (op U) (c i)))) =
         ψ.val.app (op U)
-          (tmulSection (exteriorSheafSection A r U a)
-            (exteriorSheafSection C s U (fun i ↦ g.val.app (op U) (c i))))) :
+          (tmulSection (wedge (M := A) (r := r) (U := U) a)
+            (wedge (M := C) (r := s) (U := U) (fun i ↦ g.val.app (op U) (c i))))) :
     φ = ψ := by
   have hpure (U : X.Opens) (a : Fin r → A.val.obj (op U))
       (c : Fin s → C.val.obj (op U)) :
-      φ.val.app (op U) (tmulSection (exteriorSheafSection A r U a)
-        (exteriorSheafSection C s U c)) =
-      ψ.val.app (op U) (tmulSection (exteriorSheafSection A r U a)
-        (exteriorSheafSection C s U c)) := by
+      φ.val.app (op U) (tmulSection (wedge (M := A) (r := r) (U := U) a)
+        (wedge (M := C) (r := s) (U := U) c)) =
+      ψ.val.app (op U) (tmulSection (wedge (M := A) (r := r) (U := U) a)
+        (wedge (M := C) (r := s) (U := U) c)) := by
     apply D.isSheaf.section_ext
     intro x hx
     obtain ⟨V, hV, hxV, b, hb⟩ := finite_local_lifts g s U c x hx
@@ -180,7 +179,7 @@ theorem exteriorTensor_lift_hom_ext {X : Scheme.{v}} {A B C D : X.Modules}
     change D.presheaf.map (homOfLE hV).op (φ.app U _) =
       D.presheaf.map (homOfLE hV).op (ψ.app U _)
     rw [← Hom.app_presheaf_map, ← Hom.app_presheaf_map,
-        tensor_section_map (M := exteriorSheaf A r) (N := exteriorSheaf C s)
+        tensor_section_map (M := exteriorPower A r) (N := exteriorPower C s)
           (homOfLE hV)]
     rw [exterior_section_map A r (homOfLE hV) a,
       exterior_section_map C s (homOfLE hV) c]
@@ -188,12 +187,12 @@ theorem exteriorTensor_lift_hom_ext {X : Scheme.{v}} {A B C D : X.Modules}
     exact h V (fun i ↦ A.val.map (homOfLE hV).op (a i)) b
   have hsecond := exterior_section_induction C s
     (fun U y ↦ ∀ a : Fin r → A.val.obj (op U),
-      φ.val.app (op U) (tmulSection (exteriorSheafSection A r U a) y) =
-        ψ.val.app (op U) (tmulSection (exteriorSheafSection A r U a) y))
+      φ.val.app (op U) (tmulSection (wedge (M := A) (r := r) (U := U) a) y) =
+        ψ.val.app (op U) (tmulSection (wedge (M := A) (r := r) (U := U) a) y))
     (by intro U a; simp only [tmulSection_zero, map_zero])
     (by
       intro U x y hx hy a
-      rw [tmulSection_add (M := exteriorSheaf A r) (N := exteriorSheaf C s),
+      rw [tmulSection_add (M := exteriorPower A r) (N := exteriorPower C s),
         map_add, map_add, hx a, hy a])
     (by
       intro U c x hx a
@@ -206,18 +205,18 @@ theorem exteriorTensor_lift_hom_ext {X : Scheme.{v}} {A B C D : X.Modules}
       intro V f hf
       change D.presheaf.map f.op (φ.app U _) = D.presheaf.map f.op (ψ.app U _)
       rw [← Hom.app_presheaf_map, ← Hom.app_presheaf_map,
-        tensor_section_map (M := exteriorSheaf A r) (N := exteriorSheaf C s)
-          f (exteriorSheafSection A r U a) y]
+        tensor_section_map (M := exteriorPower A r) (N := exteriorPower C s)
+          f (wedge (M := A) (r := r) (U := U) a) y]
       rw [exterior_section_map A r f a]
       exact hl V f hf (fun i ↦ A.val.map f.op (a i)))
   apply tensor_section_ext
   apply exterior_section_induction A r
-    (fun U x ↦ ∀ y : (exteriorSheaf C s).val.obj (op U),
+    (fun U x ↦ ∀ y : (exteriorPower C s).val.obj (op U),
       φ.val.app (op U) (tmulSection x y) = ψ.val.app (op U) (tmulSection x y))
   · intro U y
     simp only [zero_tmulSection, map_zero]
   · intro U x y hx hy z
-    rw [add_tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf C s),
+    rw [add_tmulSection (M := exteriorPower A r) (N := exteriorPower C s),
       map_add, map_add, hx z, hy z]
   · intro U c x hx y
     rw [smul_tmulSection, (φ.val.app (op U)).hom.map_smul,
@@ -229,7 +228,7 @@ theorem exteriorTensor_lift_hom_ext {X : Scheme.{v}} {A B C D : X.Modules}
     intro V f hf
     change D.presheaf.map f.op (φ.app U _) = D.presheaf.map f.op (ψ.app U _)
     rw [← Hom.app_presheaf_map, ← Hom.app_presheaf_map,
-        tensor_section_map (M := exteriorSheaf A r) (N := exteriorSheaf C s) f x y]
-    exact hl V f hf ((exteriorSheaf C s).val.map f.op y)
+        tensor_section_map (M := exteriorPower A r) (N := exteriorPower C s) f x y]
+    exact hl V f hf ((exteriorPower C s).val.map f.op y)
 
 end AlgebraicGeometry.Scheme.Modules
