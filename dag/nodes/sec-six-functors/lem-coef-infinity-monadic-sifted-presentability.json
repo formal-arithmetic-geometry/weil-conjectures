@@ -26,11 +26,151 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinity-free-module-bar"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First arrange the rank needed for the functor-category clause. By presentability choose an infinite regular $\\lambda$ for which $\\mathcal V$ is $\\lambda$-accessible. Choose an infinite cardinal $\\theta$ at least $\\lambda$ and at least the cardinality of the nondegenerate simplices of $K$, and put $\\kappa=(2^\\theta)^+$. The cardinal square-power and successor-regularity statements show that $\\kappa$ is an uncountable regular cardinal in the smaller universe. If $\\mu<\\kappa$ and $\\nu<\\lambda$, then $\\mu\\leq2^\\theta$ and $\\mu^\\nu\\leq(2^\\theta)^\\theta=2^\\theta<\\kappa$. Sharp accessibility enlargement therefore makes $\\mathcal V$ also $\\kappa$-accessible, and $K$ is $\\kappa$-small.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinite-cardinal-square-power",
+    "lem-coef-infinite-cardinal-successor-regular",
+    "lem-coef-infinity-sharp-accessibility-enlargement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.4.3, rank choice before the proof of Proposition 5.5.3.6"
+   }
+  },
+  {
+   "text": "Apply the accessible-diagram-presentations statement with precisely these $\\lambda,\\kappa,K,\\mathcal V$; all its cardinal and accessibility hypotheses were established in step 1. It gives accessibility of $\\operatorname{Fun}(K,\\mathcal V)$. To obtain existence of colimits as well as their objectwise characterization, apply the local-transport section-colimit theorem to the product projection $K\\times\\mathcal V\\to K$. Its sections are $\\operatorname{Fun}(K,\\mathcal V)$; projection is a categorical and cocartesian fibration, with lifts $(a,v)\\to(b,v)$ and identity transport on $\\mathcal V$. For any small diagram of sections, choose its evaluated colimit cocone at each vertex of $K$, using cocompleteness of $\\mathcal V$. Identity transports preserve these cocones, so the cited theorem assembles them into a colimiting cocone of sections. Thus the functor category has all small colimits and is presentable by the definition. This also covers $K=\\varnothing$, whose functor category is terminal.",
+   "uses": [
+    "lem-coef-accessible-diagram-presentations",
+    "lem-coef-local-transport-section-colimits",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.3.6, using Propositions 5.4.4.3 and 5.1.2.2"
+   }
+  },
+  {
+   "text": "Now consider the monadic adjunction and set $T=UF$. The free-module bar statement applies to the coherent monad $T$, and the assumed comparison equivalence over $\\mathcal C$ identifies its free adjoint with $F$ through their mapping-space adjunctions. Hence every $d\\in\\mathcal D$ has a natural colimiting bar resolution $B_r d=F(T^rUd)$ indexed by $\\Delta^{\\mathrm{op}}$. The sifted-index statement says that $N(\\Delta^{\\mathrm{op}})$ is sifted, so geometric realizations of any simplicial object exist in $\\mathcal D$ by hypothesis. Equivalence transport here means precomposing and postcomposing the mapping-space test for colimits with the given comparison and its inverse.",
+   "uses": [
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-sifted-colimit-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Lemma A.5.8, free resolutions; Higher Algebra Proposition 4.7.4.14 as realized by the existing free-module-bar node"
+   }
+  },
+  {
+   "text": "For any small coherent diagram $p:J\\to\\mathcal C$ with colimit $c$, the adjunction and the mapping-space colimit criterion give, naturally in $z\\in\\mathcal D$,\n$$\\operatorname{Map}_{\\mathcal D}(Fc,z)\\simeq\\operatorname{Map}_{\\mathcal C}(c,Uz)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(p(j),Uz)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal D}(Fp(j),z).$$\nThus $F$ sends every colimiting cocone of $\\mathcal C$ to a colimiting cocone in $\\mathcal D$, without assuming cocompleteness of $\\mathcal D$. In particular, any finite family of free objects $F(c_i)$ has coproduct $F(\\coprod_i c_i)$; for the empty family this gives the initial object $F(0_{\\mathcal C})$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Lemma A.5.8, coproducts in the essential image of the free functor"
+   }
+  },
+  {
+   "text": "For a finite family $d_1,\\ldots,d_n$, take its natural bar diagrams $B^i_\\bullet$ from step 3. Their levelwise coproducts exist by step 4; Apply the opposite universal-arrow assertion of [lem-coef-parametric-universal-arrows] to the diagonal functor from $\\mathcal D$ to its $n$-fold product, restricted to the full subcategory of tuples of free objects. Step 4 supplies the required universal arrows on every such tuple. The resulting partial left adjoint takes the tuple of bar diagrams to a coherent simplicial diagram of their coproducts; thus all face, degeneracy and higher maps exist coherently. Put $P=|\\coprod_i B^i_\\bullet|$, which exists by step 3. For every $z$, the mapping-space colimit criterion gives\n$$\\operatorname{Map}_{\\mathcal D}(P,z)\\simeq\\lim_{[r]\\in\\Delta}\\prod_{i=1}^n\\operatorname{Map}_{\\mathcal D}(B^i_r,z)\\simeq\\prod_{i=1}^n\\lim_{[r]\\in\\Delta}\\operatorname{Map}_{\\mathcal D}(B^i_r,z)\\simeq\\prod_{i=1}^n\\operatorname{Map}_{\\mathcal D}(d_i,z).$$\nThe middle equivalence is interchange of limits: both sides are the space of tuples of compatible cones, with their higher homotopies. These equivalences are induced by the bar augmentations and coproduct inclusions. Thus $P$ is the finite coproduct of the $d_i$. Together with the empty case of step 4, this proves all finite coproducts.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Lemma A.5.8; mapping-space expansion of its appeal to HTT Lemma 5.5.2.3"
+   }
+  },
+  {
+   "text": "The sifted-coproduct cocompleteness lemma now applies: $\\mathcal D$ has all small sifted colimits by hypothesis and all finite coproducts, including the empty one, by steps 4–5. It follows that $\\mathcal D$ has colimits indexed by every small simplicial set. This is the first part of the source's monadic argument; presentability of $\\mathcal D$ has not been used.",
+   "uses": [
+    "lem-coef-infinity-sifted-coproduct-cocompleteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Lemma A.5.8, first sentence of its proof; HTT Remark 5.5.8.16"
+   }
+  },
+  {
+   "text": "Choose an uncountable regular $\\rho$ for which $\\mathcal C$ is $\\rho$-accessible, with an essentially small full subcategory of $\\rho$-compact objects, by cardinal enlargement with the small arrow set empty. A small $\\rho$-filtered infinity category is filtered. The spaces comparison at $\\aleph_0$ with a finite discrete limit shape says that its colimits commute with finite products of spaces, including the empty product, so it is sifted. Therefore $U$ preserves small $\\rho$-filtered colimits by hypothesis. Fix a small family $G_{\\mathcal C}$ of compact generators from this accessibility presentation.",
+   "uses": [
+    "lem-coef-presentable-cardinal-enlargement",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Proposition A.5.9, accessibility rank and preservation of filtered colimits"
+   }
+  },
+  {
+   "text": "For $c\\in G_{\\mathcal C}$ and any small $\\rho$-filtered diagram $q:I\\to\\mathcal D$, the adjunction, preservation by $U$ and compactness of $c$ give\n$$\\operatorname{Map}_{\\mathcal D}(Fc,\\operatorname{colim}_I q)\\simeq\\operatorname{Map}_{\\mathcal C}(c,\\operatorname{colim}_I Uq)\\simeq\\operatorname{colim}_I\\operatorname{Map}_{\\mathcal C}(c,Uq(i))\\simeq\\operatorname{colim}_I\\operatorname{Map}_{\\mathcal D}(Fc,q(i)).$$\nThe comparisons are those induced by the diagram cocones, so $Fc$ is $\\rho$-compact. This is the complete elementary proof of compact preservation, rather than a new lemma. The image family $G=F(G_{\\mathcal C})$ is small.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Proposition A.5.9, its use of Lemma 3.3.5; HTT Lemma 5.5.1.4"
+   }
+  },
+  {
+   "text": "Apply the compact-generated-filtered-hull lemma inside $\\mathcal D$, which is locally small by hypothesis and cocomplete by step 6, to the small family $G$ of step 8 and its uncountable regular rank $\\rho$. Obtain a replete full $\\rho$-accessible subcategory $\\mathcal H$ containing $G$ and closed under all small colimits computed in $\\mathcal D$. For every $c\\in\\mathcal C$, its accessibility presentation is a small $\\rho$-filtered diagram in $G_{\\mathcal C}$. Step 4 sends its cocone to a colimiting cocone with apex $Fc$, so $Fc\\in\\mathcal H$. Every term $F(T^rUd)$ of the bar resolution of any $d$ therefore belongs to $\\mathcal H$; its colimit is $d$ by step 3, so closure under geometric realizations implies $d\\in\\mathcal H$. Thus the full subcategory $\\mathcal H$ is all of $\\mathcal D$, proving accessibility. This uses colimit closure rather than identifying an arbitrary colimit presentation with a filtered one.",
+   "uses": [
+    "lem-coef-infinity-compact-generated-filtered-hull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Proposition A.5.9; HTT Theorem 5.5.1.1, compact-generation argument"
+   }
+  },
+  {
+   "text": "We have established accessibility of $\\mathcal D$ in step 9 and all small colimits in step 6. The presentability definition therefore proves that $\\mathcal D$ is presentable. The rank chosen for the functor-category argument was independent of the one used for $\\mathcal C$ and $\\mathcal D$, so no equality between their ranks is asserted.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Proposition A.5.9 and Corollary A.5.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-coef-accessible-diagram-presentations",
+  "lem-coef-infinite-cardinal-square-power",
+  "lem-coef-infinite-cardinal-successor-regular",
+  "lem-coef-infinity-compact-generated-filtered-hull",
+  "lem-coef-infinity-free-module-bar",
+  "lem-coef-infinity-sharp-accessibility-enlargement",
+  "lem-coef-infinity-sifted-colimit-calculus",
+  "lem-coef-infinity-sifted-coproduct-cocompleteness",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-local-transport-section-colimits",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-presentable-cardinal-enlargement",
+  "lem-coef-spaces-kappa-limit-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting presentability input before the coherent finite-coefficient adjunction in proof paragraph 2; expands Gepner–Haugseng Lemma A.5.8 and Proposition A.5.9 and HTT Proposition 5.5.3.6. External sources read online, archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -73,10 +213,38 @@
    "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
    "date": "2026-10-17",
    "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monadic adjunction of infinity categories with presentable source and sifted colimit preserving right adjoint has presentable target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a locally $\\\\kappa$-presentable category for a regular cardinal $\\\\kappa$, and $G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a $\\\\kappa$-accessible, full, and faithful functor, then $\\\\mathcal{D\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] (X : C) [CategoryTheory.IsCardinalPresentable X κ] [\", \"doc\": \"In an adjunction between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, if an object $X \\\\in \\\\mathcal{C}$ is $\\\\kappa$-presentable and the right adjoint functor $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is $\\\\kappa$\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"module\": \"Mathlib/CategoryTheory/Limits/Presheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {ℰ : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} ℰ]\\n  (L : CategoryTheory.Functor (CategoryTheory.Functor C (Type (max w v₁ v₂))) ℰ)\\n  [CategoryTheory.Limits.PreservesColimitsOfSize.{v₁, max w u₁ v₁ v₂, max (max (max u₁ v₁) v₂) w, v\", \"doc\": \"If a functor $ L $ from the category of presheaves on $ C $ to a category $ \\\\mathcal{E} $ preserves colimits of a given size and the composition of the universe-lifted Yoneda embedding with $ L $ admi\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_isRightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Functor/Flat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D) [F.IsRightAdjoint], CategoryTheory.RepresentablyFlat F\", \"doc\": \"Every right adjoint functor between categories is representably flat.\"}\n  {\"name\": \"CategoryTheory.solutionSetCondition_of_isRightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u} [inst_1 : CategoryTheory.Category.{v, u} D]\\n  (G : CategoryTheory.Functor D C) [G.IsRightAdjoint], CategoryTheory.SolutionSetCondition G\", \"doc\": \"If $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ is a right adjoint functor between categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, then $ G $ satisfies the solution set condition. This means that for every obj\"}\n  {\"name\": \"CategoryTheory.Adjunction.hasExactColimitsOfShape\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u''} [inst_1 : CategoryTheory.Category.{v'', u''} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [G.Full] [G.Faithful] (J : Type u')\\n  [inst_4 : CategoryTheory.Category.{v', u'} J] [inst_5 : Cate\", \"doc\": \"Let $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ be functors forming an adjunction $ F \\\\dashv G $, with $ G $ fully faithful. Suppose that $ \\\\mathcal{C} $ admits colimit\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalAccessibleCategory C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a $\\\\kappa$-accessible category and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is a $\\\\kappa$-accessible, full, and faithful functor in an adjunction, then $\\\\mathcal{D}$ is also a $\\\\kappa$-ac\"}\n  {\"name\": \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C)\\n  [inst_1 : CategoryTheory.Limits.HasPushouts C]\\n  [inst_2 : ∀ (Z : C), CategoryTheory.Limits.HasCoproduct CategoryTheory.OrthogonalReflection.D₁.obj₁]\\n  [inst_3 : ∀ (Z : C), CategoryTheory.Limits.HasCop\", \"doc\": \"The inclusion functor $ \\\\iota $ from the full subcategory of objects local with respect to a morphism property $ W $ into the original category $ \\\\mathcal{C} $ admits a left adjoint. This establishes \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned ordinary-category presentability, set-valued colimit, strict-monad and simplicial-set declarations; none states this result for mapping-space compactness and coherent colimits inside a quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonadicRightAdjoint, CategoryTheory.IsLocallyPresentable",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned ordinary-category presentability, set-valued colimit, strict-monad and simplicial-set declarations; none states this result for mapping-space compactness and coherent colimits inside a quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "monadic|quasicategory",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned ordinary-category presentability, set-valued colimit, strict-monad and simplicial-set declarations; none states this result for mapping-space compactness and coherent colimits inside a quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presentability of homotopy coherent monad algebras when the forgetful functor preserves sifted colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Presentable.Finite\", \"type\": \"{X : C} : IsFinitelyPresentable.{v} X ↔ PreservesFilteredColimits (coyoneda.obj (op X))\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$, $X$ is finitely presentable if and only if the hom-functor $\\\\mathrm{Hom}(X, -)$ preserves filtered colimits.\"}\n  {\"name\": \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \": IsColimit (liftedCocone c t)\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if the forgetful functor $ U: T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{C} $ preserves colimits, then any colimit cocone in $ \\\\mathcal{C} $ can be uniquely \"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimit\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"(D : J ⥤ Algebra T) [PreservesColimit (D ⋙ forget T) (T : C ⥤ C)]\\n  [PreservesColimit ((D ⋙ forget T) ⋙ ↑T) (T : C ⥤ C)] : CreatesColimit D (forget T)\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if the forgetful functor $ U: T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{C} $ preserves colimits, then any colimit cocone in $ \\\\mathcal{C} $ can be uniquely \"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"[PreservesColimitsOfShape J (T : C ⥤ C)] : CreatesColimitsOfShape J (forget T)\", \"doc\": \"Given a category $\\\\mathcal{C}$, a monad $T$ on $\\\\mathcal{C}$, and a small category $J$, if the underlying endofunctor $T : \\\\mathcal{C} \\\\to \\\\mathcal{C}$ preserves colimits of shape $J$, then the forget\"}\n  {\"name\": \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit_desc_f\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {T : CategoryTheory.Monad C} {J : Type u}\\n  [inst_1 : CategoryTheory.Category.{v, u} J] {D : CategoryTheory.Functor J T.Algebra}\\n  (c : CategoryTheory.Limits.Cocone (D.comp T.forget)) (t : CategoryTheory.Limits.IsColimit c)\\n  [inst_2 : Cate\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if the forgetful functor $ U: T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{C} $ preserves colimits, then for any colimit cocone $ c $ in $ \\\\mathcal{C} $, the m\"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimits\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"[PreservesColimitsOfSize.{v, u} (T : C ⥤ C)] : CreatesColimitsOfSize.{v, u} (forget T)\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a monad $T$ on $\\\\mathcal{C}$, if the underlying endofunctor $T : \\\\mathcal{C} \\\\to \\\\mathcal{C}$ preserves colimits of a specified size, then the forgetful functor $\\\\ma\"}\n  {\"name\": \"CategoryTheory.IsPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"(X : C) : Prop\", \"doc\": \"An object $ X $ in a category $ \\\\mathcal{C} $ is presentable if the hom-functor $ \\\\text{Hom}(-, X) : \\\\mathcal{C} \\\\to \\\\text{Type} $ is accessible, meaning it preserves sufficiently filtered colimits. T\"}\n  {\"name\": \"MonCat.FilteredColimits.forget_preservesFilteredColimits\", \"module\": \"Mathlib.Algebra.Category.MonCat.FilteredColimits\", \"type\": \": PreservesFilteredColimits (forget MonCat.{u})\", \"doc\": \"The canonical forgetful functor from the category of monoids to the category of types preserves filtered colimits. This means that for any filtered diagram of monoids, the underlying set of the colimi\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned ordinary-category presentability, set-valued colimit, strict-monad and simplicial-set declarations; none states this result for mapping-space compactness and coherent colimits inside a quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-algebra-presentability",
@@ -96,5 +264,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-monadic-sifted-presentability",
+  "worker": "stage1",
+  "summary": "Replaced an incomplete four-step attempt by ten steps. Reused accessible diagram presentations and explicit sharp-cardinal enlargement for the functor clause, computed finite coproducts by mapping spaces of free bars, and obtained cocompleteness from the generic sifted/coproduct lemma. Folded compact preservation into its three-equivalence calculation. A generic compact-generated filtered-hull theorem supplies the missing accessibility step without assuming the ambient category presentable. Statement unchanged; all new dependencies are statement-only.",
+  "blueprint": "Realizes the supporting operadic-algebra presentability input in the ancestor proof paragraph 2 through the retained ancestry. The functor-category clause follows the two ingredients of HTT Proposition 5.5.3.6; steps 3–6 expand Gepner–Haugseng Lemma A.5.8, and steps 7–10 expand Proposition A.5.9 without replacing the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-177b3ee49",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-177b3ee49 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the statement of every cited node, the citer lem-coef-operadic-algebra-presentability step 2, and the ancestor blueprint proof. I could not open HTT or Gepner–Haugseng myself: they are not archived (the report lists them as WANTED) and network access is blocked. So every step and both new statements were checked mathematically instead. In particular, I could not confirm the exact numbering HTT 5.5.8.15/5.5.8.16 for the fact that sifted colimits plus finite coproducts give cocompleteness; the fact itself is true by the Bousfield–Kan formula. Step 1: the cardinal arithmetic is right (lambda <= theta < 2^theta < kappa, mu^nu <= (2^theta)^theta = 2^theta). Step 2: the projection K x V -> K satisfies the hypotheses of local-transport-section-colimits (inner fibration, equivalence lifts, cocartesian over edges, identity transport), and that node states existence of the colimit. Step 3: the comparison is over C, so the free functors agree by the mapping-space adjunctions and Yoneda, and the bar resolution transports. Steps 4, 5 and 8 are correct elementary mapping-space calculations; step 5 applies the opposite parametric universal-arrow clause to the diagonal on tuples of free objects. Step 7: rho-filtered implies filtered implies sifted, via the spaces comparison at aleph_0 including the empty product. Step 9: the hull hypotheses (local smallness, cocompleteness from step 6, compactness from step 8) all hold, the free objects and bar realizations lie in the hull, so the hull is all of D. New node sifted-coproduct-cocompleteness is true, self-contained, and not the existing small-colimit-generation node (which assumes all coproducts and pushouts). New node compact-generated-filtered-hull is true (Ind_kappa extension is fully faithful and has a restricted-Yoneda right adjoint because E is locally small) and is not accessible-ind-colimit-extension (which assumes the ambient category presentable). Edge cases checked: empty K, empty G, terminal E, the empty category and nonempty spaces for the initial-object hypothesis. Every cited node is in the item's unit; there are no tool uses and no cycle (470-node closure). This is not a target node, so the base-change and coefficient-category check does not apply. No SGA source is cited. No changes made."
  }
 }
