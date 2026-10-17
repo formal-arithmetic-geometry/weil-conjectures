@@ -9,13 +9,94 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-terminal-pullback-criterion",
   "lem-coef-cat-infinity-colimits-cartesian-closure",
-  "lem-coef-infinity-pointwise-equivalences"
+  "lem-coef-infinity-pointwise-equivalences",
+  "def-cbc-enhanced-cartesian-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a small quasicategory $Q$. By [def-cbc-enhanced-cartesian-fibration], $\\mathrm{Cat}_\\infty$ is the coherent nerve of the locally Kan simplicial category of small quasicategories with mapping Kan complexes $\\operatorname{Fun}(X,Y)^\\simeq$, and [lem-coef-coherent-nerve-comparison] gives natural equivalences $\\operatorname{Fun}(X,Y)^\\simeq\\simeq\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(X,Y)$ sending a functor to its edge and preserving composition with its coherent homotopies. Hence the homotopy category of $\\mathrm{Cat}_\\infty$ has as morphisms the classes of functors up to natural equivalence, with composition of functors, and each component $A\\to A\\prime$, $B\\to B\\prime$, $C\\to C\\prime$ of the objectwise equivalence, being an equivalence edge, is a functor equivalence: it has a quasi-inverse and coherent natural equivalences of both composites with the identities. By the cartesian-closure statement, postcomposition with each component is a map of coherent functor quasicategories $\\operatorname{Fun}(Q,-)$, and passage to cores gives a map of the corresponding spaces. The quasi-inverse functors and the coherent inverse transformations give inverses after postcomposition; a natural equivalence restricts to a homotopy of cores because its components are equivalences ([lem-coef-infinity-pointwise-equivalences]). So each of the three vertex maps $\\operatorname{Fun}(Q,A)^\\simeq\\to\\operatorname{Fun}(Q,A\\prime)^\\simeq$, and likewise for $B$ and $C$, is an equivalence of spaces. The 2-simplices of the edge of cospan diagrams give, under the same identification, specified homotopies making the two squares of these postcomposition maps commute. The cone and core conventions are those of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N7",
+    "place": "Proposition 6.3.5.3 proof, lines 77–80: functor-core diagrams and their componentwise equivalences; the coherent postcomposition expansion is written here."
+   }
+  },
+  {
+   "text": "Apply the limiting-cone mapping-space criterion in [lem-coef-infinity-terminal-pullback-criterion] to the first cone, with ambient quasicategory $\\mathrm{Cat}_\\infty$ and test object $Q$. It makes $\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(Q,L)\\to\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(Q,A)\\times^h_{\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(Q,C)}\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(Q,B)$ an equivalence, using the specified cone coherence. The natural composition-compatible equivalences $\\operatorname{Fun}(Q,X)^\\simeq\\simeq\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(Q,X)$ of [lem-coef-coherent-nerve-comparison] (for $\\mathrm{Cat}_\\infty$ as in [def-cbc-enhanced-cartesian-fibration]) carry postcomposition of functors to postcomposition with the corresponding edges; by [lem-coef-kan-homotopy-commuting-pullback-invariance] they induce an equivalence of the path pullbacks. Thus $\\operatorname{Fun}(Q,L)^\\simeq$ is identified with the homotopy pullback of $\\operatorname{Fun}(Q,A)^\\simeq$ and $\\operatorname{Fun}(Q,B)^\\simeq$ over $\\operatorname{Fun}(Q,C)^\\simeq$. Applying the same to the second limiting cone gives the analogous comparison for $L\\prime$ and the primed cospan.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-infinity-terminal-pullback-criterion",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N7",
+    "place": "Proposition 6.3.5.3 proof, lines 77–80 and the cited mapping-space criterion; specialize the universal cospan comparison to each limiting cone."
+   }
+  },
+  {
+   "text": "The compatible map of cones makes the two comparisons of Step 2 commute up to specified homotopy, by the naturality of the comparisons in maps of cones in [lem-coef-infinity-terminal-pullback-criterion]; this map is the one induced by the supplied cone map, including its square coherence. The right-hand map between the two path pullbacks is an equivalence: its three vertex maps are equivalences and its two squares commute by the specified homotopies of Step 1, so [lem-coef-kan-homotopy-commuting-pullback-invariance] applies.",
+   "uses": [
+    "lem-coef-infinity-terminal-pullback-criterion",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N7",
+    "place": "Proposition 6.3.5.3 proof, lines 77–80: invariance of the homotopy-pullback cospan and naturality of the cone comparison."
+   }
+  },
+  {
+   "text": "In the resulting square, commutative up to homotopy by Step 3, the two comparison maps from $\\operatorname{Fun}(Q,L)^\\simeq$ and $\\operatorname{Fun}(Q,L\\prime)^\\simeq$ to the path pullbacks are equivalences by Step 2 and the map between the path pullbacks is an equivalence by Step 3. The two-out-of-three property for equivalences of spaces therefore makes the top map $\\operatorname{Fun}(Q,L)^\\simeq\\to\\operatorname{Fun}(Q,L\\prime)^\\simeq$ an equivalence. This holds for every small quasicategory $Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01N7",
+    "place": "Proposition 6.3.5.3 proof, lines 81–94: equivalence of the test-core maps after comparing the two homotopy pullbacks."
+   }
+  },
+  {
+   "text": "Since the test-core criterion [lem-coef-infinity-test-equivalence-by-functor-cores] applies to every small $Q$, the apex map $L\\to L\\prime$ is a functor equivalence, hence an equivalence edge of $\\mathrm{Cat}_\\infty$, since by [lem-coef-coherent-nerve-comparison] the homotopy category of $\\mathrm{Cat}_\\infty$ composes classes of functors up to natural equivalence. Conversely, a functor equivalence has a coherent quasi-inverse; postcomposing with it and with the original map gives inverse maps on every coherent functor quasicategory and hence on their cores, by the coherent functor and cartesian-closure constructions of [def-cbc-enhanced-diagrams-cones] and [lem-coef-cat-infinity-colimits-cartesian-closure]. Thus the functor-equivalence assertion and the displayed all-$Q$ mapping-space assertion are equivalent.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-infinity-test-equivalence-by-functor-cores",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N7",
+    "place": "Proposition 6.3.5.3 proof, lines 91–94, together with the functor-core equivalence criterion; converse expanded from the coherent quasi-inverse data."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-terminal-pullback-criterion",
+  "lem-coef-kan-homotopy-commuting-pullback-invariance",
+  "lem-coef-infinity-test-equivalence-by-functor-cores"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01N7",
+  "place": "Proposition 6.3.5.3 proof, cospan-limit comparison on functor cores (lines 77–94); proof expanded through the existing coherent-cone interfaces. Archived source WANTED."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-localization-monomorphic-pushout",
@@ -25,35 +106,63 @@
  "id": "lem-coef-infinity-equivalence-of-cospan-limits",
  "kind": "statement",
  "title": "Equivalences of cospan diagrams induce equivalences of limiting apices",
- "statement": "Use quasicategories, coherent functors, coherent cones, cores and equivalence edges of [def-cbc-enhanced-diagrams-cones], and the limiting-cone mapping-space criterion of [lem-coef-infinity-terminal-pullback-criterion]. Let $\\mathcal C$ and $\\mathcal C\\prime$ be quasicategories. Consider two cospans $A\\to C\\leftarrow B$ and $A\\prime\\to C\\prime\\leftarrow B\\prime$ in $\\mathrm{Cat}_\\infty$, together with an objectwise equivalence between the cospans and a compatible map between coherent cones with apices $L$ and $L\\prime$. If both cones are limiting, then the apex map $L\\to L\\prime$ is an equivalence in $\\mathrm{Cat}_\\infty$. Equivalently, for every small quasicategory $Q$, postcomposition induces an equivalence of spaces $\\operatorname{Fun}(Q,L)^\\simeq\\to\\operatorname{Fun}(Q,L\\prime)^\\simeq$.",
+ "statement": "Use quasicategories, coherent functors, coherent cones, cores and equivalence edges of [def-cbc-enhanced-diagrams-cones], the infinity category $\\mathrm{Cat}_\\infty$ of small quasicategories of [def-cbc-enhanced-cartesian-fibration], and the limiting-cone mapping-space criterion of [lem-coef-infinity-terminal-pullback-criterion]. Consider two cospans $A\\to C\\leftarrow B$ and $A\\prime\\to C\\prime\\leftarrow B\\prime$ in $\\mathrm{Cat}_\\infty$, together with an objectwise equivalence between the cospans and a compatible map between coherent cones with apices $L$ and $L\\prime$. If both cones are limiting, then the apex map $L\\to L\\prime$ is an equivalence in $\\mathrm{Cat}_\\infty$. Equivalently, for every small quasicategory $Q$, postcomposition induces an equivalence of spaces $\\operatorname{Fun}(Q,L)^\\simeq\\to\\operatorname{Fun}(Q,L\\prime)^\\simeq$.",
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "An objectwise equivalence of cospans of infinity categories induces an equivalence between their limiting apices",
-   "results": "Hits CategoryTheory.Limits.cospanIsoMk and CatCospanTransform.isIso_iff for ordinary categorical cospans; no infinity-categorical coherent-cone theorem.",
+   "tool": "grep",
+   "query": "cospan.*limit|limit.*cospan|objectwise.*equivalence [Mathlib/CategoryTheory]",
+   "results": "{\"t\": \"2026-10-17T15:23:49Z\", \"tool\": \"grep\", \"query\": \"cospan.*limit|limit.*cospan|objectwise.*equivalence\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Functor equivalence, pullback, cospan, limit",
-   "results": "0 hits; service returned unknown identifier equivalence.",
+   "query": "CategoryTheory.Limits cospan equivalence limiting cone apex equivalence",
+   "results": "{\"t\": \"2026-10-17T15:23:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits cospan equivalence limiting cone apex equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `CategoryTheory.Limits`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "equivalence.*cospan|cospan.*equivalence|limit.*equivalence",
-   "results": "Hits ordinary ObjectProperty limit invariance and adjunction lemmas, not coherent infinity-categorical cospan limits.",
-   "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: loogle: Unknown identifier `CategoryTheory.Limits`"
   },
   {
    "tool": "leansearch",
-   "query": "A map of limiting cones over equivalent cospans has an equivalence as its apex map",
-   "results": "Hits ordinary IsLimit.conePointsIsoOfEquivalence and related ordinary-category results; no coherent infinity-category declaration.",
+   "query": "A compatible objectwise equivalence between two cospans with limiting coherent cones induces an equivalence of their apex objects",
+   "results": "{\"t\": \"2026-10-17T15:23:50Z\", \"tool\": \"leansearch\", \"query\": \"A compatible objectwise equivalence between two cospans with limiting coherent cones induces an equivalence of their apex objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence_hom\", \"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence\", \"CategoryTheory.Limits.instIsIsoHomHomCocone\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.Cones.whiskeringEquivalence\", \"CategoryTheory.Limits.cospanIsoMk\", \"CategoryTheory.Limits.IsLimit.whiskerEquivalenceEquiv\"], \"digest\": \"1bd8b70cc0746fbc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary-category cospan/limit declarations and do not state the infinity-categorical coherent-cone theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An objectwise equivalence of cospan diagrams in infinity categories induces an equivalence between the apices of limiting coherent cones",
+   "results": "{\"t\": \"2026-10-17T15:23:51Z\", \"tool\": \"leanfinder\", \"query\": \"An objectwise equivalence of cospan diagrams in infinity categories induces an equivalence between the apices of limiting coherent cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence\", \"CategoryTheory.Limits.cospanIsoMk_hom_app\", \"CategoryTheory.Limits.cospanIsoMk\", \"CategoryTheory.Limits.diagramIsoCospan\", \"CategoryTheory.Limits.IsLimit.ofConeEquiv\", \"CategoryTheory.Limits.IsLimit.ofConeEquiv_apply_desc\", \"CategoryTheory.Limits.cospanExt\", \"CategoryTheory.Limits.WalkingCospan.ext\"], \"digest\": \"48e25bc76440a072\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary-category cospan/limit declarations and do not state the infinity-categorical coherent-cone theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLimit.*cospan|cospan.*IsLimit|conePointsIsoOfEquivalence [Mathlib/CategoryTheory]",
+   "results": "{\"t\": \"2026-10-17T15:24:27Z\", \"tool\": \"grep\", \"query\": \"IsLimit.*cospan|cospan.*IsLimit|conePointsIsoOfEquivalence\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLimit cospanIso apex equivalence",
+   "results": "{\"t\": \"2026-10-17T15:24:27Z\", \"tool\": \"loogle\", \"query\": \"IsLimit cospanIso apex equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `IsLimit`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: loogle: Unknown identifier `IsLimit`"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map between limiting cones over equivalent cospans is an equivalence on the cone apices in Cat infinity",
+   "results": "{\"t\": \"2026-10-17T15:24:27Z\", \"tool\": \"leansearch\", \"query\": \"A map between limiting cones over equivalent cospans is an equivalence on the cone apices in Cat infinity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence_hom\", \"CategoryTheory.Limits.IsLimit.whiskerEquivalenceEquiv\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence\", \"CategoryTheory.Limits.isLimitMapConeFanMkEquiv\", \"CategoryTheory.Limits.isLimitChangeEmptyCone\", \"CategoryTheory.Limits.WalkingCospan.ext\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\"], \"digest\": \"8ef8277003b47aed\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary-category cospan/limit declarations and do not state the infinity-categorical coherent-cone theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In Cat infinity, a natural equivalence of cospans carries a limiting cone to a limiting cone and induces equivalence on apices",
+   "results": "{\"t\": \"2026-10-17T15:24:29Z\", \"tool\": \"leanfinder\", \"query\": \"In Cat infinity, a natural equivalence of cospans carries a limiting cone to a limiting cone and induces equivalence on apices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence\", \"CategoryTheory.Limits.IsLimit.mapConeEquiv\", \"CategoryTheory.Limits.IsLimit.ofConeEquiv\", \"CategoryTheory.Limits.IsLimit.ofConeEquiv_apply_desc\", \"CategoryTheory.Limits.IsLimit.ofConeEquiv_symm_apply_desc\", \"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence_hom\", \"CategoryTheory.Limits.IsLimit.postcomposeHomEquiv\", \"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence_inv\"], \"digest\": \"77a1e1c0a8961763\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary-category cospan/limit declarations and do not state the infinity-categorical coherent-cone theorem."
   }
  ],
  "blueprint": {
@@ -82,5 +191,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-equivalence-of-cospan-limits",
+  "worker": "stage1",
+  "summary": "Statement retained. The proof is split into five steps: map each cospan and cone to functor cores, apply the limiting-cone mapping-space criterion to both cones, use naturality and invariance under objectwise equivalences, apply two-out-of-three on the resulting homotopy-pullback square, and invoke the all-test-core criterion for the apex equivalence. No new nodes were needed; the existing statements provide every non-elementary interface.",
+  "blueprint": "Supporting cell-gluing input at Kerodon Proposition 6.3.5.3 proof (01N7), lines 77–94: equivalence of the functor-core cospan limits and the mapping-space universal property.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NN-51eab66e9",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-51eab66e9 (reviewer sub-agent of L); spot-checked: Read in full: the item, the five cited nodes (including all ten proof steps of terminal-pullback-criterion and all ten of cartesian-closure), the citer lem-coef-localization-monomorphic-pushout and the unit sk-prop-sf-biduality-general. Source: Kerodon 01N7 (Prop. 6.3.5.3), read online since there is no archived copy; its proof compares homotopy pullback squares of the cores Fun(-,E)^≃ through Cor. 3.4.1.13, and the item is the covariant analogue for cospan limits. The statement is true (limits are invariant under equivalence of diagrams) and not a duplicate. I tested it on the identity equivalence, an empty apex, Q=Δ^0, Q=∅ and the degenerate cospan. It has no new nodes. There were three repairable faults; the corrected item is in fixes/dag/nodes/sec-six-functors/. (1) C1/C3, steps 1, 2 and 5: the identification Map_{Cat∞}(Q,X) ≃ Fun(Q,X)^≃ compatible with composition, and 'equivalence edge of Cat∞ = functor equivalence', were used without a citation; that identification appears only in the proof of cartesian-closure. I now cite def-cbc-enhanced-cartesian-fibration (which defines Cat∞ as a coherent nerve) and lem-coef-coherent-nerve-comparison (mapping spaces of the coherent nerve, composition-compatible). (2) C4, steps 2 and 3: step 3 cited terminal-pullback-criterion for the claim that the map of path pullbacks is an equivalence, but that node only states that the limiting criterion is invariant. I now cite lem-coef-kan-homotopy-commuting-pullback-invariance, whose specified homotopies come from step 1. (3) B4, steps 4 and 5: a JSON '\\to' had become a TAB followed by 'o'; fixed. I also added def-cbc-enhanced-cartesian-fibration to stmt_deps for Cat∞ and removed the unused sentence 'Let C and C′ be quasicategories', which clashed with the cospan vertex C′; no hypothesis or conclusion changed. The added nodes are in the item's own unit or are definitions, and none of them reaches the item or its parent, so there is no cycle. No tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
