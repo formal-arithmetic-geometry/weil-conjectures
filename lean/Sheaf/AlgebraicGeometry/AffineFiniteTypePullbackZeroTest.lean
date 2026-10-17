@@ -59,7 +59,7 @@ theorem exists_affine_finiteType_pullback_zero_test
   classical
   let : F.IsFiniteType := hF_ft
   let : F.IsQuasicoherent := hF_qc
-  have := finite_sections_of_finiteType F hV
+  let : Module.Finite Γ(Y, V) Γ(F, V) := finite_sections_of_finiteType F hV
   obtain ⟨s, hs⟩ := (Module.Finite.fg_top : (⊤ : Submodule Γ(Y, V) Γ(F, V)).FG)
   refine ⟨s, ?_⟩
   intro G hG_qc δ X g hzero
