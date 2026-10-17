@@ -25,7 +25,8 @@
   "def-sc-relative-differential-sheaf",
   "def-weil-residue-field",
   "def-weil-etale-morphism",
-  "def-weil-module-base-change"
+  "def-weil-module-base-change",
+  "def-pc-module-stalk-functor"
  ],
  "proof": [
   {
@@ -301,5 +302,24 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-c79ae8a37 (reviewer sub-agent of L); spot-checked: PASS: I read the item, all 17 cited node statements, the blueprint ancestor's proof (second paragraph) and Stacks 02GU(8) (morphisms.tex l.8318), 01V7 (l.7191) and 00T7(2) (algebra.tex l.37274). All six steps hold. Step 1: the chart lemma applied over Spec k gives V=Spec k and a standard smooth A. Step 2: the fibre is Omega_{A/k} tensored with K, so d=n-r. Step 3: the graph presentation A = R[y]/(F, H-T), with n equations. Step 4: the Schur complement E-DB^{-1}C is invertible over K, so det J is nonzero at q. Steps 3-5 are elementary as labelled. Step 5: adjoining t with Delta*t-1 gives an (n+1)x(n+1) Jacobian with determinant Delta^2, a unit in A_delta. Step 6: Lean-closed square-Jacobian => etale (both nodes use Algebra.Etale), the Spec equivalence, the principal open D(delta) containing u, and uniqueness of the ring map. Edge cases tested: d=0, char-p x^p (the hypothesis fails as it should), A^2 with one function (the hypothesis fails), a non-closed point. No new nodes. Duplicate search over dag/nodes (etale/basis/differential, 02GU/00U9/02GJ) found only existential or algebra-level nodes. The tool_use of lem-weil-pbc-smooth-locally-standard-smooth is accepted and harmless: sk-thm-p1 is in sk-prop-an's transitive route. No SGA citation. proof_deps equals the union of the step uses, and every cited id exists and is not merged. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7a7006ba",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_deps records, the module and report.md (it has a Worker report and a Second reading by Q49), and Stacks 02GU(8)/01V7/00T7(2). Every clause matches: k:Type u Field; U:Scheme.{u} Over Spec k; LocallyOfFiniteType+QuasiCompact (recorded finite-type convention); Smooth; x, d:ℕ; h:Fin d→Γ(U,⊤); canonical AffineSpace.homOfVector with ULift index; ResidueField(stalk) ⊗ moduleStalkFunctor obj of relativeDifferentials (left order allowed by the base-change record); classes 1⊗germ(d h_j); prescribed family is a Basis; ∃ open V∋x with V.ι≫homOfVector Etale. rfl confirms ResidueField(stalk x)=U.residueField x and module-stalk obj = Ω.presheaf.stalk x. Edge cases fine: d=0, empty U, non-closed points, char p Frobenius, universes. No definitions, proof only sorry (sorryAx confirmed), docstrings have the source place, the blueprint tag and the six steps, nothing pro-etale. The node changes only lean and the added landed def-pc-module-stalk-functor; lean.statement verbatim. Own Mathlib/side search found no duplicate (the nearest is the algebra-level exists_etale_polynomial_chart_of_conormal_basis). nt_compile.py --json on the snapshot file: rc 0, 1.8 s, no errors or warnings. No findings, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAtPointFromDifferentials",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_open_of_coordinate_differentials_basis",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAtPointFromDifferentials.lean",
+  "statement": "theorem Scheme.exists_etale_open_of_coordinate_differentials_basis (k : Type u) [Field k] (U : Scheme.{u}) [U.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [Smooth (U ↘ Spec (.of k))] (x : U) (d : ℕ) (h : Fin d → Γ(U, ⊤)) (hbasis : ∃ b : Module.Basis (Fin d) (IsLocalRing.ResidueField (U.presheaf.stalk x)) (IsLocalRing.ResidueField (U.presheaf.stalk x) ⊗[U.presheaf.stalk x] ((RingedSpace.moduleStalkFunctor U.toRingedSpace x).obj (U ↘ Spec (.of k)).relativeDifferentials)), ∀ j : Fin d, b j = TensorProduct.tmul (U.presheaf.stalk x) (N := (RingedSpace.moduleStalkFunctor U.toRingedSpace x).obj (U ↘ Spec (.of k)).relativeDifferentials) (1 : IsLocalRing.ResidueField (U.presheaf.stalk x)) ((U ↘ Spec (.of k)).relativeDifferentials.presheaf.germ ⊤ x trivial ((U ↘ Spec (.of k)).relativeDifferentialsDerivation.d (h j)))) : ∃ V : U.Opens, x ∈ V ∧ Etale (V.ι ≫ AffineSpace.homOfVector (U ↘ Spec (.of k)) (fun j : ULift.{u} (Fin d) ↦ h j.down))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The cotangent fibre uses the recorded module-stalk functor and the canonical local-ring residue field, definitionally Scheme.residueField. AffineSpace.homOfVector constructs the prescribed k-morphism from the functions. Added the already-landed def-pc-module-stalk-functor to stmt_deps (brief-stage2 section 5, STMT_DEPS MAY GAIN LANDED NODES)."
  }
 }

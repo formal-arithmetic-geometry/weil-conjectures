@@ -217,5 +217,29 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-85d6a34d3 (reviewer sub-agent of L); spot-checked: I read the whole item, all five steps and every cited node statement. Against Cisinski CatLR (fetched online and read with pdftotext), the item is Corollary 3.5.13 with Y=Delta^0. Cisinski's h(B,X) in §3.5.7, from (3.5.7.1)-(3.5.7.2), equals the item's full edge-inverting subcategory H. Theorem 3.5.11 and Corollary 3.5.12 give the core Kan fibration and the objectwise criterion. The anodyne class (all horns, weakly saturated) and the boundary-lifting convention match, so the statement is faithful and not weakened. Step 1's interchange, the orientation of Step 3's square and its strict triangle identities, Step 4's lifting closure (pushouts, transfinite compositions, retracts via r_A, r_B, s_B) and Step 5's naturality are all correct. Step 2 correctly combines the exponentiation particular case (including A empty for m=0) with the core-fibration node, and both use the same isofibration definition. Edge cases P, K, E empty, m=0 and the outer horn Lambda^1_0 all hold. The citer lem-coef-trivial-fibration-fraction-model uses the statement correctly. There are no new nodes, no duplicate in the DAG (rg for anodyne, edge-inverting, 3.5.13), and no cycle: none of the four dependency closures contains the item. No SGA source is cited. One repair (C7/C8): Step 1 used the off-unit tool lem-cbc-enhanced-functor-cone-calculus for the componentwise criterion, which the in-unit node lem-coef-infinity-pointwise-equivalences states exactly. The quasicategory-closure clause it was also cited for is not needed in Step 1. I re-pointed Step 1, recomputed proof_deps and set split_report.tool_uses=[]; the corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-edge-inverting-anodyne-extension.json. No tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e97c616e",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Clause check: anodyneExtensions = J.rlp.llp (all horns incl. outer) = node's closure; H(K,E) = existing equivalenceDiagrams full subcomplex (vertex test, parameter edges free); edgeInvertingRestriction = Subcomplex.lift of pre i with real membership proof; I.rlp = strict lifts vs all boundary inclusions incl. m=0; postcomposition square stated for q between quasicategories (node step 5); parameter compatibility via simplicial-map naturality. Universes single u, all bound; edge cases m=0, empty K/K'/E, K=Delta0, outer horns OK. Helpers have real data and filled proofs, sole sorry is main theorem; docstrings cite source and blueprint and carry all 5 steps; lean.statement verbatim, 3 declarations recorded; no statement_change; no duplicate (QuasicategoryInvertibleInterval states a different result). nt_compile.py --json on the snapshot file: exit 0, no errors or warnings. Report has real Worker report and Second reading by Q01."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EdgeInvertingAnodyneExtension",
+  "declaration": "SSet.Enhanced.edge_inverting_anodyne_extension",
+  "file": "lean/Sheaf/CategoryTheory/EdgeInvertingAnodyneExtension.lean",
+  "statement": "theorem edge_inverting_anodyne_extension {K K' E : SSet.{u}} [Quasicategory E] (i : K ⟶ K') (hi : SSet.anodyneExtensions i) : modelCategoryQuillen.I.rlp (edgeInvertingRestriction (E := E) i) ∧ (∀ {F : SSet.{u}} [Quasicategory F] (q : E ⟶ F), edgeInvertingRestriction (E := E) i ≫ edgeInvertingPostcomposition (K := K) q = edgeInvertingPostcomposition (K := K') q ≫ edgeInvertingRestriction (E := F) i)",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "branch": "newtargets-dag",
+  "declarations": [
+   "SSet.Enhanced.edgeInvertingRestriction",
+   "SSet.Enhanced.edgeInvertingPostcomposition",
+   "SSet.Enhanced.edge_inverting_anodyne_extension"
+  ],
+  "note": "Parameter restriction compatibility is the naturality field of the canonical simplicial restriction map; the theorem records all strict boundary lifts and the postcomposition square. Both canonical maps have real data and proof-only membership fields; the sole postponed theorem is the node statement."
  }
 }
