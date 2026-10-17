@@ -36,7 +36,7 @@ geometric point is such a pullback map, between the projective lines over the re
 of two strict henselisations.
 
 The case of algebraically closed fields is the real content; it is reached from the curve
-calculations by dévissage and is stated here without proof. The separably closed case is
+calculations by dévissage. The separably closed case is
 deduced from it, the extensions `k̄/k` and `k̄'/k'` being purely inseparable, so that the
 corresponding base changes are universal homeomorphisms, which do not change étale cohomology.
 
@@ -62,6 +62,8 @@ is that of the underlying sheaf of abelian groups.
   passage from algebraically closed to separably closed fields.
 - `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed`: the separably closed
   case.
+- `AlgebraicGeometry.Etale.bijective_cohomologyMap_comp_iff`: pulling back in two steps is
+  bijective on étale cohomology exactly when pulling back along the composite is.
 
 ## References
 
@@ -97,7 +99,6 @@ sheaves is bijective for every `q`. This is the assertion `C₇(C, F)` of the ei
 calculations; it is proved by reducing to reduced curves and constructible `𝐅_r`-coefficients,
 splitting off the zero-dimensional components, localising to a dense open, passing to the
 normalisation and to the smooth constant case of the curve calculations.
-(blueprint: `prop-weil-pbc-algebraically-closed-extension`) 
 (blueprint: prop-weil-pbc-algebraically-closed-extension)
 -/
 @[stacks 0A5E]
@@ -134,7 +135,6 @@ universal homeomorphisms and are bijective on étale cohomology
 (`AlgebraicGeometry.Etale.cohomologyMap_bijective`). The square of pullback maps between the
 four cohomology groups commutes, and its bottom row `Hᵠ(C_{k̄}) ⟶ Hᵠ(C_{k̄'})` is bijective by
 `H`.
-(blueprint: `lemma-weil-pbc-curve-separably-closed-passage`) 
 (blueprint: lemma-weil-pbc-curve-separably-closed-passage)
 -/
 theorem bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed
@@ -237,7 +237,6 @@ sheaves is bijective for every `q`: the algebraically closed case
 `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`, transported to separably
 closed fields by
 `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`.
-(blueprint: `prop-weil-pbc-proper-curve-sepclosed-invariance`) 
 (blueprint: prop-weil-pbc-proper-curve-sepclosed-invariance)
 -/
 @[stacks 0A5E]
@@ -252,61 +251,6 @@ theorem bijective_cohomologyMap_of_isSepClosed {k k' : Type u} [Field k] [IsSepC
     (fun f _ _ _ _ _ h F _ q ↦ bijective_cohomologyMap_of_isAlgClosed Λ f h F q) f h F q
 
 end AlgebraicGeometry.IsCurve
-
-section
-
-/-!
-# Invariance of the cohomology of a proper curve under extension of the base field
-
-Let `k ⊆ k'` be separably closed fields, `C` a proper curve over `k` (a proper `k`-scheme of
-dimension at most one), and `F` a torsion étale sheaf on `C`. Then the pullback map
-`Hᵠ(C, F) ⟶ Hᵠ(C_{k'}, F|)` is bijective in every degree. This is the input of the proof of
-proper base change for the projective line: there the stalk of the exchange morphism at a
-geometric point is such a pullback map, between the projective lines over the residue fields
-of two strict henselisations.
-
-The case of algebraically closed fields is the real content; it is reached from the curve
-calculations by dévissage and is stated here without proof. The separably closed case is
-deduced from it, the extensions `k̄/k` and `k̄'/k'` being purely inseparable, so that the
-corresponding base changes are universal homeomorphisms, which do not change étale cohomology.
-
-The base change `C_{k'}` is given by an arbitrary cartesian square
-
-```
-C' --ι'--> C
-|          |
-f'         f
-v          v
-Spec k' -ι-> Spec k
-```
-
-and the coefficient sheaf is a torsion sheaf of `Λ`-modules
-(`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf`, torsion of the geometric stalks); its cohomology
-is that of the underlying sheaf of abelian groups.
-
-## Main statements
-
-- `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`: the algebraically closed
-  case.
-- `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`: the
-  passage from algebraically closed to separably closed fields.
-- `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed`: the separably closed
-  case.
-- `AlgebraicGeometry.Etale.bijective_cohomologyMap_comp_iff`: pulling back in two steps is
-  bijective on étale cohomology exactly when pulling back along the composite is.
-
-## References
-
-- Stacks Project, Lemma 59.80.4 (invariance of the cohomology of a proper curve),
-  <https://stacks.math.columbia.edu/tag/0A5E>
-- Stacks Project, Theorem 59.83.1, <https://stacks.math.columbia.edu/tag/03SC>
--/
-
-@[expose] public section
-
-
-
-open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
@@ -361,5 +305,3 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 
 end AlgebraicGeometry.IsCurve
-
-end

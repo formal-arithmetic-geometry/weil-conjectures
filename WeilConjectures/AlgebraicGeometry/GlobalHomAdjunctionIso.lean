@@ -283,20 +283,15 @@ private theorem lerayCore
     CategoryTheory.Functor.map_comp, Category.assoc] using hd'
 
 
-variable [∀ Z : Scheme.{u},
-  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)]
-
 /-- Exact restriction along the map on global functions.
 Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
-def schemeGlobalScalarRestriction {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+def schemeGlobalScalarRestriction
+    [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (ModuleCat.restrictScalars.{u}
     (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))
     (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom).mapDerivedCategory
 
-omit [∀ Z : Scheme.{u},
-  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-  [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- The normalized Leray comparison with independent module and sheaf localization universes.
 Source: Stacks Tags 0D5T and 0B6I. Its derived-unit equation determines the comparison.
 (blueprint: lem-sc-mixed-global-sections-direct-image-iso). -/
@@ -355,9 +350,6 @@ theorem exists_mixedGlobalSectionsDirectImageIso
   intro M x
   rfl
 
-omit [∀ Z : Scheme.{u},
-  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-  [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- The canonical derived Leray isomorphism, chosen with its unit compatibility.
 Source: Stacks, Tags 0B6I and 0D5T (blueprint: lem-pc-global-hom-adjunction). -/
 def mixedGlobalSectionsDirectImageIso
@@ -368,6 +360,11 @@ def mixedGlobalSectionsDirectImageIso
     schemeDerivedDirectImage f ⋙ schemeDerivedGlobalSections Y ≅
       schemeDerivedGlobalSections X ⋙ schemeGlobalScalarRestriction f :=
   Classical.choose (Classical.choose_spec (exists_mixedGlobalSectionsDirectImageIso f))
+
+variable [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)]
+
 
 
 set_option backward.isDefEq.respectTransparency true in
@@ -430,6 +427,7 @@ private theorem schemeHomTensorHom_naturality (X : Scheme.{u})
 
 attribute [local irreducible] schemeHomPullbackAdjunction mixedHomTensorPullbackIso
 
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- Existence of the evaluation-mate direct-image internal Hom comparison.
 Fixed-data form of the existing `exists_derivedDirectImage_internalHom_comparison`,
 using the pinned tensor-Hom family.
@@ -468,6 +466,7 @@ theorem exists_schemeHomDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (schemeDerivedTensorHomEquiv X) (schemeDerivedTensorHomEquiv Y)
     (schemeHomTensorHom_naturality X) (schemeHomTensorHom_naturality Y)
 
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- The fixed direct-image internal-Hom comparison also satisfies the mate equation
 when the pullback adjunction and tensor iso are transported together. In particular
 this applies to the unique change from the composition counit to the original one.

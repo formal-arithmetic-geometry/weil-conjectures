@@ -97,7 +97,6 @@ cohomology in degrees `q > n`.
 
 Here torsion is required, as in Gabber's affine comparison, which is the input of the case
 `n = 0`; the induction on `n` is the Mayer–Vietoris sequence of the closed fibre.
-(blueprint: `lemma-weil-pbc-injective-restriction-acyclicity`) 
 (blueprint: lemma-weil-pbc-injective-restriction-acyclicity)
 -/
 theorem Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top
@@ -136,7 +135,6 @@ sheaf of `𝔽_r`-modules on `X`. Every class `c ∈ H¹(X₀, I₀)` is a finit
 and of finite presentation, `Mⱼ` is a finite `𝔽_r`-module with constant sheaf `Mⱼ` on `Vⱼ`,
 and `ψⱼ : (hⱼ)_* Mⱼ ⟶ I` is a morphism of sheaves. (Equivalently `c` is the image of a class
 of `H¹(X₀, (⊕ⱼ (hⱼ)_* Mⱼ)₀)` under a map `⊕ⱼ (hⱼ)_* Mⱼ ⟶ I`.)
-(blueprint: `lemma-weil-pbc-h1-constructible-representation`) 
 (blueprint: lemma-weil-pbc-h1-constructible-representation)
 -/
 theorem Etale.exists_sum_eq_of_injective_projectiveLine (r : ℕ) [Fact r.Prime]
@@ -249,7 +247,6 @@ degree `1`, write a class as `∑ⱼ ψⱼ(xⱼ)` with `xⱼ ∈ H¹(X₀, ((h�
 (`AlgebraicGeometry.Etale.surjective_cohomologyMap_one_lowerStar_constantSheaf`),
 and its image in `H¹(X, I)` vanishes since the underlying abelian sheaf of `I` is acyclic
 (`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`).
-(blueprint: `prop-weil-pbc-p1-acyclicity`) 
 (blueprint: prop-weil-pbc-p1-acyclicity)
 -/
 theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [Fact r.Prime]
@@ -395,7 +392,6 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod (r : ℕ)
 residue field `κ` and `ι : ℙ¹_κ ⟶ ℙ¹_A` the closed fibre. For every torsion sheaf `F` of
 `Λ`-modules on `ℙ¹_A` and every `q ≥ 0`, restriction `Hᵠ(ℙ¹_A, F) ⟶ Hᵠ(ℙ¹_κ, F₀)` is
 bijective.
-(blueprint: `prop-weil-pbc-p1-strict-henselian-comparison`) 
 (blueprint: prop-weil-pbc-p1-strict-henselian-comparison)
 -/
 theorem Etale.bijective_cohomologyMap_projectiveLine_residueField
@@ -466,7 +462,6 @@ the strictly henselian comparisons on the two closed fibres.
 **Form of the statement.** The statement asserts the existence of additive
 isomorphisms of the two stalks with closed-fibre cohomology that make the
 exchange square commute.
-(blueprint: `prop-weil-pbc-strict-local-exchange`) 
 (blueprint: prop-weil-pbc-strict-local-exchange)
 -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal

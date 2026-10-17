@@ -130,11 +130,8 @@ theorem horizontal_transfer_eq_of_inverse_formula
     dsimp only [horizontalMatePushforward, ObjectProperty.ι_obj_lift_map,
       Functor.comp_map]
     simp only [horizontalMateAdjunction, restricted_unit_map, restricted_counit_map]
-    dsimp only [horizontalMateComp, horizontalMateLiftIso,
-      Functor.FullyFaithful.preimageIso, NatIso.ofComponents_hom_app,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.app_hom]
-    dsimp only [ObjectProperty.ι_map, ObjectProperty.homMk_hom]
-    rfl
+    simp only [horizontalMateComp, Functor.fullyFaithfulCancelRight_hom_app,
+      Functor.map_preimage, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
   apply (cancel_epi (j.inv.app D)).mp
   rw [j.inv_hom_id_app]
   apply (schemeDerivedQCohProperty Z).fullyFaithfulι.map_injective

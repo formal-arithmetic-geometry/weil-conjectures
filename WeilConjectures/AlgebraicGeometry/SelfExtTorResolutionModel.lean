@@ -13,7 +13,13 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-import WeilConjectures.AlgebraicGeometry.SelfExtTorResolutionCore
+import Mathlib.Algebra.Homology.SingleHomology
+import Mathlib.CategoryTheory.Adjunction.Additive
+import WeilConjectures.Algebra.Homology.KFlatResolution
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.AlgebraicGeometry.SelfExtPushforwardHomology
+import WeilConjectures.AlgebraicGeometry.SelfTorPushforwardHomology
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import WeilConjectures.AlgebraicGeometry.SelfExtTorResolutionLocal
 
 /-! # A common complex model for self Ext and self Tor
@@ -39,7 +45,9 @@ Koszul computation with quotient coefficients; more-algebra.tex,
 equation-simple-tor-product (068G), resolution computation of Tor.
 (blueprint: lem-sc-self-ext-tor-resolution-model).
 
-Proof: Represent the derived pullback Li*B on Z by the ordinary tensor pullback
+Proof: Choose a K-flat resolution P of B[0] with flat terms and a K-injective
+resolution J of O_Z[0]; the tensor pullback is additive by its adjunction with
+pushforward. Represent the derived pullback Li*B on Z by the ordinary tensor pullback
 of a K-flat resolution of B=i_*O_Z on Y; call this complex T. Choose a K-injective
 resolution J of O_Z. It has cohomology O_Z in degree zero and zero elsewhere.
 The internal derived pullback/direct-image adjunction identifies RHom_Y(B,i_*O_Z)
@@ -81,11 +89,11 @@ theorem exists_selfExt_tor_resolution_model
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj
           (S.obj B ⊗ S.obj B))
     ∃ (T J : CochainComplex Z.Modules ℤ)
-      (hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k))
-      (e0 : J.homology 0 ≅ SheafOfModules.unit Z.ringCatSheaf)
-      (eG : (Scheme.Modules.tensorPullback i).obj G ≅
+      (_ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k))
+      (_ : J.homology 0 ≅ SheafOfModules.unit Z.ringCatSheaf)
+      (_ : (Scheme.Modules.tensorPullback i).obj G ≅
         (homComplex (R := Z.sheaf) T J).homology (n : ℤ))
-      (eQ : Q ≅ T.homology (-(n : ℤ))),
+      (_ : Q ≅ T.homology (-(n : ℤ))),
       ∀ (V : Z.Opens) (U : Y.affineOpens)
         (_hU : ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),
           Ideal.span (Set.range f) = i.ker.ideal U ∧
@@ -94,12 +102,42 @@ theorem exists_selfExt_tor_resolution_model
         let Fc := moduleOpenOverComplexFunctor Z V W
         CochainComplex.IsKInjective (Fc.obj J) ∧
           HasFiniteFreeZeroModel (V.toScheme.ringCatSheaf.over W) (Fc.obj T) := by
+  classical
   dsimp
-  obtain ⟨add, P, J, a, b, hP, hflat, hb, hKI, hJ, e0, eG, eQ, _⟩ :=
-    exists_selfExt_tor_resolution_core i n
-  let := add
+  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction i
+  have hAdd : (Scheme.Modules.tensorPullback i).Additive := adj.left_adjoint_additive
+  obtain ⟨P, a, hP, hflat, ha, _⟩ := CochainComplex.exists_isKFlatResolution
+    (R := Y.sheaf) ((HomologicalComplex.single Y.Modules (.up ℤ) 0).obj B)
+  obtain ⟨_, _, I, η, hI⟩ :=
+    SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
+      (Opens.grothendieckTopology Z) Z.sheaf
+  let O := (HomologicalComplex.single Z.Modules (.up ℤ) 0).obj
+    (SheafOfModules.unit Z.ringCatSheaf)
+  let J := I.obj O
+  let b := η.app O
+  obtain ⟨hb, hKI, _⟩ := hI O
+  have : QuasiIso b := hb
+  have hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k) := by
+    intro k hk
+    exact (HomologicalComplex.isZero_single_obj_homology (.up ℤ) 0
+      (SheafOfModules.unit Z.ringCatSheaf) k hk).of_iso
+        (isoOfQuasiIsoAt b k).symm
+  let e0 : J.homology 0 ≅ SheafOfModules.unit Z.ringCatSheaf :=
+    (isoOfQuasiIsoAt b 0).symm ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 _
   let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P
-  refine ⟨T, J, hJ, e0, eG, eQ, ?_⟩
-  exact selfExt_tor_resolution_local i P J a b hP hflat hb hKI
+  obtain ⟨g⟩ := nonempty_selfExt_pushforward_homology i P J a b ⟨ha, hP⟩ hb hKI (n : ℤ)
+  obtain ⟨q⟩ := nonempty_selfTor_pushforward_homology i P a ⟨ha, hP⟩ (-(n : ℤ))
+  let e : Scheme.Modules.tensorPullback i ⊣ Scheme.Modules.pushforward i :=
+    Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction i)
+  have hc : ∀ N : Z.Modules, IsIso (e.counit.app N) :=
+    (closedImmersion_pushforward_fullyFaithful i).1
+  let eG := (Scheme.Modules.tensorPullback i).mapIso g ≪≫
+    asIso (e.counit.app ((homComplex (R := Z.sheaf) T J).homology (n : ℤ)))
+  let eQ := (Scheme.Modules.tensorPullback i).mapIso q ≪≫
+    asIso (e.counit.app (T.homology (-(n : ℤ))))
+  exact ⟨T, J, hJ, e0, eG, eQ,
+    selfExt_tor_resolution_local i P J a b ⟨ha, hP⟩ hflat hb hKI⟩
 
 end AlgebraicGeometry
