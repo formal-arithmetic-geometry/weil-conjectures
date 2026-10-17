@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ProductsMapDerivedC
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleExactProducts
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ExtensionZeroProducts
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ExtensionZeroProducts
 
 /-!
 # Extension by zero preserves derived products and derived limits

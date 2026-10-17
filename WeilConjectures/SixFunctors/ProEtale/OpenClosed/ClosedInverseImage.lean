@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedPullbackLimits
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedPullbackLimits
 
 /-!
 # A presheaf formula for the closed inverse image

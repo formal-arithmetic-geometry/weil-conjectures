@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.OpenClosedSequence
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.Sequence
 
 /-!
 # The projection formula for the extension by zero along a quasi-compact open immersion

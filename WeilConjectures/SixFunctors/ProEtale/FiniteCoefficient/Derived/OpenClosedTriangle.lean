@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Localization
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.OpenClosedSequence
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.Sequence
 
 /-!
 # The open–closed triangle on the pro-étale site

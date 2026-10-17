@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedLiftSections
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedLiftSections
 
 /-!
 # The closed inverse image preserves limits

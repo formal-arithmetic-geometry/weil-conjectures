@@ -5,24 +5,26 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.MonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.OpenClosed
 
 /-!
-# Base change of the extension by zero of module sheaves over a sheaf of rings
+# Base change of `j_!` and `i_*` on module sheaves over a sheaf of rings: supports
 
-Let `B` be a sheaf of `R`-algebras on `X_proét`. For a commutative square `a ≫ b = c ≫ d` of
-schemes, the coefficient rings `a^* b^* B` and `c^* d^* B` are identified by a ring isomorphism
-(`ProEtale.RingSheaf.upperStarCompAlgHom`), and the transports of module sheaves agree:
-`a^* ∘ b^* ≅ Res ∘ c^* ∘ d^*` (`ProEtale.RingSheaf.upperStarCompIso`).
+Let `B` be a sheaf of `R`-algebras on `X_proét`, `i : Z ⟶ X` a closed immersion with
+quasi-compact open complement `j : U ⟶ X`, `g : X' ⟶ X` a morphism and `i' : Z' ⟶ X'`,
+`j' : U' ⟶ X'` the base changes. For the `g^* B`-module sheaves obtained by pulling back:
 
-For a morphism `g : X' ⟶ X` and base changes `j' : U' ⟶ X'`, `g_U : U' ⟶ U` of a quasi-compact
-open immersion `j` with closed complement `i`, this gives the base change isomorphism
-`g^* j_! ≅ j'_! g_U^*` on module sheaves, the `j^* B`-module sheaf `g_U^* N` being regarded as a
-`j'^* g^* B`-module sheaf along the ring isomorphism
-(`ProEtale.RingSheaf.openImmersionLowerShriekBaseChangeIso`). This is part (4) of blueprint
-`det-sf-open-closed-sequence-ring-sheaf`. As in the blueprint, it is formal: `g^* j_! N` is
-supported on `U'`, so it is `j'_! j'^* g^* j_! N`, and `j'^* g^* j_! N ≅ g_U^* j^* j_! N ≅ g_U^* N`.
+* `g^* j_! N` is the extension by zero of its restriction to `U'`: the counit
+  `j'_! j'^* g^* j_! N ⟶ g^* j_! N` is an isomorphism of `g^* B`-module sheaves
+  (`ProEtale.RingSheaf.isIso_counit_app_upperStar_obj_openImmersionLowerShriek_obj`);
+* `g^* i_* G` is the pushforward of its restriction to `Z'`: the unit
+  `g^* i_* G ⟶ i'_* i'^* g^* i_* G` is an isomorphism of `g^* B`-module sheaves
+  (`ProEtale.RingSheaf.isIso_unit_app_upperStar_obj_lowerStar_obj`).
+
+Together with the identifications of the underlying sheaves of the restrictions
+(`j'^* g^* j_! N ≅ g_U^* N`, `i'^* g^* i_* G ≅ g_Z^* G`, see
+`AlgebraicGeometry.ProEtale.upperStarLowerStarClosedBaseChangeIso`) this is the module-level
+content of part (4) of blueprint `det-sf-open-closed-sequence-ring-sheaf`.
 -/
 
 @[expose] public section
@@ -37,65 +39,59 @@ namespace AlgebraicGeometry.ProEtale.RingSheaf
 
 open Scheme
 
-variable {R : Type (u + 1)} [CommRing R] {X : Scheme.{u}}
+variable {R : Type (u + 1)} [CommRing R] {Z U X Z' U' X' : Scheme.{u}}
   (B : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) [MonObj B]
+  (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+  (g : X' ⟶ X) (i' : Z' ⟶ X') [IsClosedImmersion i'] (j' : U' ⟶ X') [IsOpenImmersion j']
+  [QuasiCompact j'] (gZ : Z' ⟶ Z) (gU : U' ⟶ U)
+  (hij : IsCompl (Set.range i.base) (Set.range j.base))
+  (hij' : IsCompl (Set.range i'.base) (Set.range j'.base))
 
-section Coefficients
+/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (4), for `j_!`: the pullback
+`g^* j_! N` of an extension by zero of module sheaves is the extension by zero of its
+restriction to `U' = g⁻¹ U`, i.e. the counit `j'_! j'^* g^* j_! N ⟶ g^* j_! N` is an isomorphism
+of `g^* B`-module sheaves. -/
+theorem isIso_counit_app_upperStar_obj_openImmersionLowerShriek_obj (hi : i' ≫ g = gZ ≫ i)
+    (N : Mod (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R))
+      ((j)^*[ModuleCat.{u + 1} R].obj B)) :
+    IsIso ((openImmersionLowerShriekUpperStarAdjunction ((g)^*[ModuleCat.{u + 1} R].obj B)
+      i' j' hij').counit.app
+        ((upperStar B g).obj ((openImmersionLowerShriek B i j hij).obj N))) := by
+  set adj := ProEtale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} R) j'
+  set M := (g)^*[ModuleCat.{u + 1} R].obj ((j)_!open[ModuleCat.{u + 1} R].obj N.X)
+  have : IsIso (adj.counit.app M) := by
+    have : IsIso ((i')^*[ModuleCat.{u + 1} R].map (adj.counit.app M)) :=
+      ⟨⟨0, (isZero_upperStar_openImmersionLowerShriek _ j' i'
+          (Set.disjoint_iff_inter_eq_empty.1 hij'.disjoint.symm) _).eq_of_src _ _,
+        (isZero_upperStar_upperStar_openImmersionLowerShriek i j g i' gZ hij hi
+          N.X).eq_of_src _ _⟩⟩
+    exact isIso_of_isIso_upperStar_of_isCompl i' j' hij' _
+  have : IsIso ((Mod.forget _).map
+      ((openImmersionLowerShriekUpperStarAdjunction ((g)^*[ModuleCat.{u + 1} R].obj B)
+        i' j' hij').counit.app
+        ((upperStar B g).obj ((openImmersionLowerShriek B i j hij).obj N)))) := by
+    rw [Mod.forget_map, openImmersionLowerShriekUpperStarAdjunction_counit_app_hom]
+    exact this
+  exact isIso_of_reflects_iso _ (Mod.forget _)
 
-variable {V X' U : Scheme.{u}} {a : V ⟶ X'} {b : X' ⟶ X} {c : V ⟶ U} {d : U ⟶ X}
-  (h : a ≫ b = c ≫ d)
-
-/-- For `k = k'`, the identification `k^* B ≅ k'^* B` is a morphism of monoid objects. -/
-lemma isMonHom_upperStarCongr_hom_app {k k' : V ⟶ X} (e : k = k') :
-    IsMonHom ((upperStarCongr (ModuleCat.{u + 1} R) e).hom.app B) := by
-  subst e
-  exact NatTrans.isMonHom_app _ _
-
-/- The identification `a^* b^* B ⟶ (a ≫ b)^* B = (c ≫ d)^* B ⟶ c^* d^* B` of the coefficient
-rings of a commutative square `a ≫ b = c ≫ d`. It is written out (rather than being a
-definition) because the kernel fails to check the monoid morphism property through a
-definition. -/
-set_option hygiene false in
-local notation "ψ[" h "]" =>
-  Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) a b).inv B ≫
-    (upperStarCongr (ModuleCat.{u + 1} R) h).hom.app B ≫
-      inv (Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) c d).inv B)
-
-/-- The identification of the coefficient rings `a^* b^* B ⟶ c^* d^* B` of a commutative square
-`a ≫ b = c ≫ d` is a morphism of monoid objects. -/
-instance isMonHom_upperStarCompAlgHom : IsMonHom ψ[h] :=
-  have := isMonHom_upperStarCongr_hom_app B h
-  have : IsMonHom (inv (Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) c d).inv B)) :=
-    IsMonHom.inv _
-  have : IsMonHom ((upperStarCongr (ModuleCat.{u + 1} R) h).hom.app B ≫
-      inv (Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) c d).inv B)) :=
-    inferInstance
-  inferInstance
-
-/-- For a commutative square `a ≫ b = c ≫ d`, the transports of module sheaves agree:
-`a^* ∘ b^* ≅ Res ∘ c^* ∘ d^*`, the restriction of scalars being along the identification
-`a^* b^* B ⟶ c^* d^* B` of the coefficient rings. -/
-set_option maxHeartbeats 2000000 in
-noncomputable def upperStarCompIso :
-    upperStar B b ⋙ upperStar ((b)^*[ModuleCat.{u + 1} R].obj B) a ≅
-      upperStar B d ⋙ upperStar ((d)^*[ModuleCat.{u + 1} R].obj B) c ⋙ Mod.comap ψ[h] :=
-  have := isMonHom_upperStarCongr_hom_app B h
-  Functor.mapModCompIso _ _ (upperStarComp (ModuleCat.{u + 1} R) a b).inv B ≪≫
-    Functor.isoWhiskerRight (Functor.mapModNatIso (upperStarCongr (ModuleCat.{u + 1} R) h) B)
-      _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (Mod.comapComp
-      (Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) a b).inv B)
-      ((upperStarCongr (ModuleCat.{u + 1} R) h).hom.app B)).symm ≪≫
-    Functor.isoWhiskerLeft _ (Mod.comapCongr (by
-      simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id])) ≪≫
-    Functor.isoWhiskerLeft _ (Mod.comapComp ψ[h]
-      (Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) c d).inv B)) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight
-      (Functor.mapModCompIso _ _ (upperStarComp (ModuleCat.{u + 1} R) c d).inv B).symm _ ≪≫
-    Functor.associator _ _ _
-
-end Coefficients
+omit [IsClosedImmersion i] [QuasiCompact j] in
+include hij hij' in
+/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (4), for `i_*`: the pullback
+`g^* i_* G` of a pushforward of module sheaves along `i` is the pushforward of its restriction
+to `Z' = g⁻¹ Z`, i.e. the unit `g^* i_* G ⟶ i'_* i'^* g^* i_* G` is an isomorphism of
+`g^* B`-module sheaves. -/
+theorem isIso_unit_app_upperStar_obj_lowerStar_obj (hj : j' ≫ g = gU ≫ j)
+    (G : Mod (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} R))
+      ((i)^*[ModuleCat.{u + 1} R].obj B)) :
+    IsIso ((upperStarLowerStarAdjunction ((g)^*[ModuleCat.{u + 1} R].obj B) i').unit.app
+      ((upperStar B g).obj ((lowerStar B i).obj G))) := by
+  have := ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl i' j' hij' _
+    (isZero_upperStar_upperStar_lowerStar i j g j' gU hij hj G.X)
+  have : IsIso ((Mod.forget _).map
+      ((upperStarLowerStarAdjunction ((g)^*[ModuleCat.{u + 1} R].obj B) i').unit.app
+        ((upperStar B g).obj ((lowerStar B i).obj G)))) := by
+    rw [Mod.forget_map, upperStarLowerStarAdjunction_unit_app_hom]
+    exact this
+  exact isIso_of_reflects_iso _ (Mod.forget _)
 
 end AlgebraicGeometry.ProEtale.RingSheaf

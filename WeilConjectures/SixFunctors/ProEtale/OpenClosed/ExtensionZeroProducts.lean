@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedPullbackLimitsGlobal
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedPullbackLimitsGlobal
 
 /-!
 # Extension by zero preserves products

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftAdjunction
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.OpenClosedSequence
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.Sequence
 
 /-!
 # Sections over henselian lifts of weakly contractible objects

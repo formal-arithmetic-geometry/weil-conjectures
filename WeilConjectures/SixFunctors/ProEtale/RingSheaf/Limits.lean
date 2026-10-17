@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ExtensionZeroProducts
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ExtensionZeroProducts
 public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.Defs
 
 /-!
