@@ -29,7 +29,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category",
   "lem-coef-marked-point-cartesian-model",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-space-base-change",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -347,5 +349,64 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-18196e680 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the new node and every cited statement (16 proof deps, 4 statement deps) in full; review.md has the details. The proof checks out. Steps 1-2 build Cat∞ limits and colimits from the marked model plus the coherent-diagrams theorem; corepresentable R_n preserves limits; the pointwise colimit Z is Segal by spaces exactness at aleph_0 and complete by the new lemma, and fullness of CSS then gives R(C)≃Z. Step 3 checks the comparison degreewise, including K=∅. Step 4 gives base change with the structural map C→B induced by the cocone, via the fixed-object clause for constant B and T. Step 5 is a correctly set-up double induction using glue-simplex, exponentiation along the mono ∂Δ^d→Δ^d and the isofibration-pullback theorem. Step 6 uses the simplicial isomorphism Fun(Δ^n,Fun(L,C))≅Fun(Δ^n×L,C) with the dimension bound proved. Steps 7-8 are genuinely elementary component arguments. Step 9: the comma J×^h_I I_{a/} is the cocone category on {i,a}, which is filtered and hence weakly contractible, so J→I is cofinal. Steps 10-11 are homotopy fibres of R_1→R_0^2 and over f in a fixed M, both finite limits. The ℵ0-small definition matches 'finite'. The parent filtered-operadic-unstraightening uses only clauses that are present, so nothing is weakened. New node lem-coef-segal-equivalence-subspace-filtered is true: filtered colimits preserve monomorphisms, maps of Segal objects preserve invertible edges, and an inverse with its two pi_0 equations lifts to a common stage because pi_0 Map commutes with filtered colimits. Small cases tested: incomplete nerves where the inverse appears later, empty stages, non-injective transitions. B1-B9 hold; all three search kinds are recorded; scanning all DAG statements found no duplicate; it is not a clause of the item. Route: the two sk-prop-h2 simplicial combinatorics tool_uses (nondegenerate decomposition, glue simplex) are accepted. No SGA is used. The Gepner–Haugseng, Rezk and Joyal–Tierney online sources are not archived and I did not fetch them; they are WANTED, proof_origin is agent, and I checked the mathematics independently. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CatInfinityFilteredFiniteCalculus",
+  "declaration": "SSet.CatInfinityCalculus.cat_infinity_filtered_finite_calculus",
+  "declarations": [
+   "SSet.CatInfinityCalculus.nerveObject",
+   "SSet.CatInfinityCalculus.nerveArrow",
+   "SSet.CatInfinityCalculus.coconeArrow",
+   "SSet.CatInfinityCalculus.coconeLeg_endpoints",
+   "SSet.CatInfinityCalculus.coconeLeg",
+   "SSet.CatInfinityCalculus.PreservesSmallFilteredColimits",
+   "SSet.CatInfinityCalculus.HasFiniteCoherentLimits",
+   "SSet.CatInfinityCalculus.totalCones",
+   "SSet.CatInfinityCalculus.totalApex",
+   "SSet.CatInfinityCalculus.totalDiagram",
+   "SSet.CatInfinityCalculus.totalArrow",
+   "SSet.CatInfinityCalculus.IsUniversalCone",
+   "SSet.CatInfinityCalculus.limitCones",
+   "SSet.CatInfinityCalculus.limitApex",
+   "SSet.CatInfinityCalculus.limitDiagram",
+   "SSet.CatInfinityCalculus.FilteredFiniteExact",
+   "SSet.CatInfinityCalculus.FunctorImplementation",
+   "SSet.CatInfinityCalculus.CoreImplementation",
+   "SSet.CatInfinityCalculus.FiniteStageRepresentatives",
+   "SSet.CatInfinityCalculus.coslice",
+   "SSet.CatInfinityCalculus.FilteredCoslices",
+   "SSet.CatInfinityCalculus.PairImplementation",
+   "SSet.CatInfinityCalculus.EndpointImplementation",
+   "SSet.CatInfinityCalculus.squareEvaluation",
+   "SSet.CatInfinityCalculus.cosliceProjection",
+   "SSet.CatInfinityCalculus.squareFamily",
+   "SSet.CatInfinityCalculus.pairInclusion",
+   "SSet.CatInfinityCalculus.HasSquareEndpoints",
+   "SSet.CatInfinityCalculus.IsMappingSquare",
+   "SSet.CatInfinityCalculus.CosliceMappingColimits",
+   "SSet.CatInfinityCalculus.MappingColimits",
+   "SSet.CatInfinityCalculus.RelativeMappingColimits",
+   "SSet.CatInfinityCalculus.spaceSliceProjection",
+   "SSet.CatInfinityCalculus.MappingFiberColimits",
+   "SSet.CatInfinityCalculus.BaseChange",
+   "SSet.CatInfinityCalculus.FiniteLimitAssembly",
+   "SSet.CatInfinityCalculus.Calculus",
+   "SSet.CatInfinityCalculus.cat_infinity_filtered_finite_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CatInfinityFilteredFiniteCalculus.lean",
+  "statement": "theorem cat_infinity_filtered_finite_calculus (M : Marked.CartesianModelStatement.{u}) : @Calculus.{u} M.qcat_enrichment M.qcat_mapping",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical square-cocone formulation, with fixed-base base change; the actual coslice mapping cocone uses a full normalized enriched endpoint cylinder, its image on the supplied cocone, and right-pinch prism identifications in every degree. MappingFiberColimits uses the literal fixed arrow in the base mapping space and canonical coherent slice base change. No arbitrary mapping-space diagram or arbitrary map to a fiber is substituted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5dc832b9d",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Read the node, all 11 proof steps, the full 790-line module, the report (Worker report and Second reading by Q28 both present) and every dependency declaration in the side clone. Every node clause has a faithful Lean rendering: Cat∞ filtered colimits and finite limits; filtered/finite exactness incl. K=∅; base change keeping the induced C→B (edge orientation checked); core and Fun(L,-) preservation via uniquely specified implementations; common-stage finite representatives; coslice small and filtered; the coslice mapping comparison via the pinned endpoint cylinder and right-pinch prism (the existential is determined up to equivalence); the fibre over a literal f via SpaceBaseChange; no fully faithful transitions. This answers the previous H3 RETURN. No hollow defs; the only sorries are the named coconeLeg_endpoints and the item theorem; docstrings complete; lean.statement verbatim; node changed only in lean and two landed stmt_deps. nt_compile --json exit 0, no errors or warnings. Non-blocking: stmt_deps lacks lem-coef-hammock-infinity-localization although hammockCoherentNerveMap is used (the report wrongly says it is kept; the maintainer may add it, no cycle); extra true space-level conjuncts MappingColimits/RelativeMappingColimits on Spaces; duplicate variable [E] declaration."
  }
 }

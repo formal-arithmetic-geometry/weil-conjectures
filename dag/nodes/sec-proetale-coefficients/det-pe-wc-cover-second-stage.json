@@ -315,5 +315,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StoneanCoverSecondStage",
+  "declaration": "Algebra.stonean_cover_second_stage",
+  "file": "lean/Sheaf/RingTheory/StoneanCoverSecondStage.lean",
+  "statement": "theorem stonean_cover_second_stage (C : Type u) [CommRing C] [IsWStrictlyLocalRing C] (S : Type u) [TopologicalSpace S] [CompactSpace S] [T2Space S] [TotallyDisconnectedSpace S] [ExtremallyDisconnected S] (f : C(S, ConnectedComponents (PrimeSpectrum C))) (hf : Function.Surjective f) : (∃ e : (colimit (stoneanPartitionDiagram C S f) : CommAlgCat C) ≃ₐ[C] WContractification.PullbackProfinite C S f, ∀ (Q : DiscreteQuotient S) (r : Q → C), e ((colimit.ι (stoneanPartitionDiagram C S f) (Opposite.op Q)).hom (fun a => algebraMap C _ (r a))) = algebraMap (LocallyConstant S C) (WContractification.PullbackProfinite C S f) (LocallyConstant.comapₐ C ⟨Q.proj, Q.proj_continuous⟩ ⟨r, IsLocallyConstant.of_discrete r⟩)) ∧ Algebra.IsIndPrincipalZariski C (WContractification.PullbackProfinite C S f) ∧ RingHom.FaithfullyFlat (algebraMap C (WContractification.PullbackProfinite C S f)) ∧ Algebra.IndEtale C (WContractification.PullbackProfinite C S f) ∧ Function.Bijective (stoneanCoverPointMap C S f) ∧ (∀ q : PrimeSpectrum (WContractification.PullbackProfinite C S f), Function.Bijective (Localization.localRingHom (q.asIdeal.comap (algebraMap C (WContractification.PullbackProfinite C S f))) q.asIdeal (algebraMap C (WContractification.PullbackProfinite C S f)) rfl)) ∧ IsWLocalRing (WContractification.PullbackProfinite C S f) ∧ closedPoints (PrimeSpectrum (WContractification.PullbackProfinite C S f)) = PrimeSpectrum.comap (algebraMap C (WContractification.PullbackProfinite C S f)) ⁻¹' closedPoints (PrimeSpectrum C) ∧ IsHomeomorph (fun q : closedPoints (PrimeSpectrum (WContractification.PullbackProfinite C S f)) => (stoneanCoverPointMap C S f q.1).1.2) ∧ IsWContractibleRing (WContractification.PullbackProfinite C S f)",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "Algebra.stoneanRestrictionMap",
+   "Algebra.stoneanPartitionStage",
+   "Algebra.stoneanPartitionMap",
+   "Algebra.stoneanPartitionDiagram",
+   "Algebra.stoneanCoverPointMap",
+   "Algebra.stonean_cover_second_stage"
+  ],
+  "note": "Second reading: uses recorded Algebra.IsIndPrincipalZariski, existing WContractification.Restriction and PullbackProfinite, and Mathlib DiscreteQuotient. The first conjunct identifies the actual refinement colimit with the graph-restriction model by a C-algebra equivalence characterized on every finite-stage function. It records the construction of D in the node, not an additional hypothesis. No definitional equality between those constructions is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96c38f2cd",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the 9 dependency nodes are byte-identical to the base. lean.statement is verbatim, all 6 declarations are listed, no name clashes, max line 96. The single sorry is the theorem's proof; #print axioms shows the defs are sorry-free (no hollow definitions). Docstrings have the source place, blueprint tag and all 12 proof steps; imports are allowed under brief-stage2 rule 7. Clauses checked one by one: IsWStrictlyLocalRing C; S compact T2, totally disconnected, extremally disconnected; f continuous and surjective. C_Z is upstream Restriction; the restriction map is colimit.pre (canonical). Partitions are Mathlib DiscreteQuotient (finite, nonempty clopen fibres); the stage is the product of C_{f(A)}; the refinement maps are correct. The first conjunct gives a C-algebra iso from the partition colimit to PullbackProfinite, uniquely determined on each stage because C->C_Z is surjective, with the correct normalization. Clause 1: IsIndPrincipalZariski (the recorded predicate), FaithfullyFlat, IndEtale. Clause 2: point map onto Spec C x_P S built from fiberHomeo (projSpec and projT), plus localRingHom bijective at every prime. Clause 3: IsWLocalRing, closed-point equality in both directions, IsHomeomorph to S. Clause 4: IsWContractibleRing. Edge cases: C=0 and S=empty give an empty partition, a zero stage and vacuous prime clauses. The shared universe u is the framework convention forced by the recorded IsIndPrincipalZariski/IndEtale, consistent with stonean_cover and the citers, and disclosed in the report. nt_compile.py (local side overlay) exit 0 in 2.6 s, no errors or warnings. No findings requiring repair; minor: the retained worker report names first-round declarations but says it is superseded."
  }
 }

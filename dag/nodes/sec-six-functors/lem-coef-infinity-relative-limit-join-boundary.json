@@ -12,7 +12,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "def-coef-infinity-relative-cone"
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-relative-initial-boundary"
  ],
  "proof": [
   {
@@ -219,5 +221,29 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-0d2b81411 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, every cited node's statement, the citer lem-coef-operadic-correspondence-kan-filling (type-(c), d>0) and Kerodon 02WS (Cor 7.1.5.17), 018J (Prop 4.3.6.4) and 02X1 (Prop 7.1.6.19). The delivery has no new nodes; the second reader's removal of the helper is justified because it is just the two lifts written out in step 1. The statement is the dual of Kerodon Def 7.1.6.1 combined with 02WS(3); it is true and matches the citer's use. Small cases checked: K empty, d=1, q=id, D a point, E empty; d=0 is rightly excluded. Step 1: the apex inner-horn lift, then the pushout-join with right-anodyne Λ_i^n→Δ^n and ∅→K; the join orientation is correct. Step 2: J(f^op)^op≅E_{/f}, the cocone category's opposite is the cone category, and the mapping formula orientation matches cone-calculus. Step 3: dual constant test, then path-pullback invariance and pasting give hofib_λ(A→B)≃hofib_{qλ}(C→H). Step 4: final clause of relative-initial-boundary, with the inner fibration from step 1. Step 5: exact currying; for d>0, ∂Δ^d⋆K is the union of the face⋆K, so both exact equations hold. No duplicate found (checked the relative-cone-initial-corner, operadic-colimit-active-join-boundary, relative-limit-initial-components and parameter-cone-extension nodes, among others). No cycle and no SGA citation. One off-route citation, lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), is accepted as a generic tool use; the same unit already records it on the constant-test node. FIX: the item is resubmitted verbatim with split_report.tool_uses declaring that node; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeLimitJoinBoundary",
+  "declaration": "SSet.Enhanced.relative_limit_join_boundary",
+  "declarations": [
+   "SSet.Enhanced.relativeLimitBoundaryLastVertex",
+   "SSet.Enhanced.relativeLimitSlicePostcomp",
+   "SSet.Enhanced.relative_limit_join_boundary"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeLimitJoinBoundary.lean",
+  "statement": "theorem relative_limit_join_boundary {E D K : SSet.{u}} [Quasicategory E] [Quasicategory D] (q : E ⟶ D) [InnerFibration q] (c : leftJoinCone K ⟶ E) (hc : IsRelativeLimitDiagram q c) : (∀ (d : ℕ) (hd : 0 < d) (u : orderedJoinFunctor.obj (∂Δ[d], K) ⟶ E), orderedJoinFunctor.map (relativeLimitBoundaryLastVertex d hd, 𝟙 K) ≫ u = c → ∀ (a : orderedJoinFunctor.obj (Δ[d], K) ⟶ D), orderedJoinFunctor.map ((boundary d).ι, 𝟙 K) ≫ a = u ≫ q → ∃ tildeU : orderedJoinFunctor.obj (Δ[d], K) ⟶ E, orderedJoinFunctor.map ((boundary d).ι, 𝟙 K) ≫ tildeU = u ∧ tildeU ≫ q = a) ∧ InnerFibration (relativeLimitSlicePostcomp q (orderedJoinInr Δ[0] K ≫ c)) ∧ ∃ x : (joinSlice (orderedJoinInr Δ[0] K ≫ c)) _⦋0⦌, x.extension = c ∧ IsRelativeFinal (relativeLimitSlicePostcomp q (orderedJoinInr Δ[0] K ≫ c)) x",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The theorem states the positive-dimensional fixed-K sharp join boundary filler and the equivalent fixed join-slice formulation. The final boundary vertex and canonical postcomposition map are explicit constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00c906f16",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read the node, report, module, five stmt_deps and their side-clone declarations (leftJoinCone, IsRelativeLimitDiagram with incoming Map(t,c) square, joinSlice/JoinSliceSimplex over Δ[n]⋆K, IsRelativeFinal with incoming maps, Mathlib InnerFibration). Every hypothesis and conclusion clause matches the node in the same quantifier order with no stronger assumptions; both equivalent forms are stated as a conjunction. Helpers relativeLimitBoundaryLastVertex and relativeLimitSlicePostcomp are real, canonical and carry source/blueprint docstrings. Edge cases K=∅, d=1, d=0 excluded, q=id, single universe checked. lean.statement verbatim equal to the file, no statement_change, report sections present. nt_compile --json on the local side overlay: rc=0, no diagnostics; an injected error was reported, #check matches the record, only sorryAx beyond standard axioms. No findings."
  }
 }

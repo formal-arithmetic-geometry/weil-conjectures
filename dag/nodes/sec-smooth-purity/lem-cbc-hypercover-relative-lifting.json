@@ -10,7 +10,10 @@
  "stmt_deps": [
   "def-weil-size-convention",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-derived-hypersheaf-presentation",
+  "def-cbc-bounded-representable-hypercover",
+  "def-cbc-local-simplicial-presheaf-maps"
  ],
  "proof": [
   {
@@ -219,5 +222,29 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-bdcd92e66 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, every cited statement, and DHI arXiv:math/0205027v2 (fetched read-only to /tmp/rv-dhi-nl, not added to the project). Places read: section 2 objectwise cotensor; section 3 local liftings; Prop 3.2 and 3.3, generalized cover and (3.4) on pp. 7-8; Def 4.2/4.8 and Lemma 4.9; Prop 5.1, Lemma 5.4 and Prop 5.5 with proofs on pp. 13-14. The item statement is unchanged and is Prop 5.1 specialized to objectwise-Kan F,G, so the homotopy-sheaf definition of local weak equivalence applies; nothing is added or weakened. Its only citer (fibration-test, with h_T->h_T and the boundary inclusion of the n-simplex) stays within it. Step 1: currying and the pullback condition are correct. Step 2: the cotensor node's hypotheses are exactly the item's, and its conclusion supplies the matching node's hypotheses, including the degree-0 case. Steps 4-5: Lemma 5.4 written out with two covering sieves and the transitivity argument. The augmented matching object is used, including V0 x_{h_T} V0 when m=1, and the boundary compatibility pd=cv is checked. Step 6: the hypotheses of the attachment-operators and attachment-split lemmas are satisfied. I recomputed naturality on new summands, old summands, degeneracies and the epi-mono factorization. The new matching map has Z->M as a summand. Steps 7-8: stagewise assembly and strict uncurrying, including K empty. New nodes: def-cbc-generalized-cover is an exact Mathlib leaf (Presheaf.imageSieve l.49, IsLocallySurjective l.94, verified in the pinned Mathlib). The cotensor node is Prop 3.3; its extra claim that both sides are objectwise Kan is true by SM7 plus pullback. The matching node is the only-if half of 3.2/(3.4). All were tested on the trivial site, K=L, K empty, n=0 and empty presheaves. An rg search of the whole DAG found no duplicates. The two dropped nodes were correctly folded into the steps, so there is no D1/D2 problem. Route: I accept tool_uses for lem-weil-pbc-site-split-attachment-operators and lem-weil-pbc-site-split-attachment-split as generic attachment tools from sk-thm-properbasechange, the same acceptance already made on lem-cbc-dense-hypercover-set. No SGA source, no cycle. Minor and not changed: the matching node's source place cites v2 HTML line numbers rather than pages."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HypercoverRelativeLifting",
+  "declaration": "CategoryTheory.LocalSimplicialPresheaf.hypercover_relative_lifting",
+  "declarations": [
+   "CategoryTheory.LocalSimplicialPresheaf.constant",
+   "CategoryTheory.LocalSimplicialPresheaf.underlying",
+   "CategoryTheory.LocalSimplicialPresheaf.underlyingMap",
+   "CategoryTheory.LocalSimplicialPresheaf.hypercover_relative_lifting"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HypercoverRelativeLifting.lean",
+  "statement": "theorem hypercover_relative_lifting {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (F G : Cᵒᵖ ⥤ SSet.{max u w}) (hF : ∀ V : C, SSet.KanComplex (F.obj (op V))) (hG : ∀ V : C, SSet.KanComplex (G.obj (op V))) (f : F ⟶ G) (hf : IsLocalKanFibration J f) (hw : IsLocalWeakEquivalence J f) (T : C) (U : DerivedHypersheaf.AugmentedOver.{u, w} C T) (hU : DerivedHypersheaf.IsHypercover J (DerivedHypersheaf.augmentedOverToAugmented U)) (K L : SSet.{max u w}) [SSet.Finite K] [SSet.Finite L] (i : K ⟶ L) [Mono i] (a : constant C K ⊗ underlying U ⟶ F) (b : constant C L ⊗ underlying U ⟶ G) (hab : a ≫ f = ((Functor.const Cᵒᵖ).map i ⊗ₘ 𝟙 (underlying U)) ≫ b) : ∃ (V : DerivedHypersheaf.AugmentedOver.{u, w} C T), DerivedHypersheaf.IsHypercover J (DerivedHypersheaf.augmentedOverToAugmented V) ∧ ∃ (v : V ⟶ U) (l : constant C L ⊗ underlying V ⟶ F), ((Functor.const Cᵒᵖ).map i ⊗ₘ 𝟙 (underlying V)) ≫ l = (𝟙 (constant C K) ⊗ₘ underlyingMap v) ≫ a ∧ l ≫ f = (𝟙 (constant C L) ⊗ₘ underlyingMap v) ≫ b",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c12023b9",
+  "group": "N1",
+  "result": "pass",
+  "note": "Item statement matches the node clause by clause: small site, universes max u w, Kan at every object, local Kan fibration on all horns n>=1 with separate fillers per covering arrow, local weak equivalence as sheafified pi0 iso plus local surjectivity/injectivity on Mathlib RelativeMorphism.HomotopyClass (equivalent to slice homotopy-sheaf isos), landed AugmentedOver/IsHypercover over h_T, finite inclusion via SSet.Finite and Mono, objectwise product checked by rfl probe, strict conclusion with refinement in Over. New def node is faithful to DHI Sec. 3, not hollow, no duplicate in the side clone. Node diff is lean and stmt_deps only; statements verbatim; sorry only in the theorem (axiom check); docstrings carry source, blueprint and all 8 proof steps; report has Worker report and Second reading by N1. nt_compile --json on both files: rc=0, clean; control error reported rc=1. No blocking findings."
  }
 }

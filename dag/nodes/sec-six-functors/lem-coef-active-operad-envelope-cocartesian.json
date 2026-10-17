@@ -284,5 +284,31 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-39519ba6f (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, both new nodes and every cited statement in full, against HA (Sept 2017) Construction 2.2.4.1, Prop. 2.2.4.4 with its proof on pp. 217-218, Lemmas 2.2.4.11-16 and Prop. 2.1.2.4-5, and HTT Cor. 2.4.7.11-12. The item statement is unchanged from the side DAG and matches HA. 'Fibration of infinity-operads' (Def. 2.1.2.10) is exactly the stated hypotheses: inert-preserving, inner fibration, lifts equivalences. Act is the full subcategory, r is ev_1, and the edge criterion is Lemma 2.2.4.15(4). Steps 1-7 are correct. I checked: inner horns contain every vertex, so the full subcategory inherits fillers; the cancellation direction of the pasting in step 2; the exact inert lift via the equivalence-lifting hypothesis; that step 3's filler space is inert-active orthogonality with p(f) on the left and b on the right; the index bijection alpha v = u beta in step 7, including dropped inputs and empty blocks; and the n=0 case. New node lem-coef-infinity-lax-comma-target-fibration is the true cocartesian dual of HTT 2.4.7.12; I rederived its mapping formula, and the edge cases A empty and B a point hold. New node lem-coef-operadic-inert-active-factorization is true by HA 2.1.2.4-5 with HTT 5.2.8 orientation; tested on Fin_*, the collapse to arity zero and permutations. Duplicate search by rg over the whole DAG (HTT 2.4.7.11/12, Kerodon 01KE, ev/Fun(Delta^1) cocartesian, HA 2.1.2.4, inert/active factorization) opened about 12 candidates; none duplicates either node. No circularity and no restated clauses. Route: every cited statement is in unit sk-prop-sf-biduality-general. The declared tool use of def-cbc-enhanced-diagrams-cones is a definition and is accepted. FIX: step 8 claimed full faithfulness from step 7 without the identification Map^{rho_i}_H(x,y_i) = Map_{H<1>}(x_i,y_i). I added that sentence and cited lem-coef-infinity-cocartesian-mapping-criterion in step 8; it was already in proof_deps. Corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-active-operad-envelope-cocartesian.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ActiveOperadEnvelopeCocartesian",
+  "declaration": "SSet.Enhanced.activeOperadEnvelope_cocartesian",
+  "declarations": [
+   "SSet.Enhanced.activeOperadicArrows",
+   "SSet.Enhanced.activeOperadicArrowSource",
+   "SSet.Enhanced.activeOperadEnvelope",
+   "SSet.Enhanced.activeOperadEnvelopeSource",
+   "SSet.Enhanced.activeOperadEnvelopeTarget",
+   "SSet.Enhanced.activeOperadEnvelope_cocartesian"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ActiveOperadEnvelopeCocartesian.lean",
+  "statement": "theorem activeOperadEnvelope_cocartesian {C O : SSet.{u}} (bC : C ⟶ finStarBase.{u}) (bO : O ⟶ finStarBase.{u}) (p : C ⟶ O) (hC : IsSymmetricInfinityOperad bC) (hO : IsSymmetricInfinityOperad bO) (hp : IsSymmetricOperadMap bC bO p) (hinner : InnerFibration p) (hlift : ∀ (c : C _⦋0⦌) (h : O _⦋1⦌), O.δ 1 h = p.app _ c → IsEquivalenceEdge O h → ∃ h' : C _⦋1⦌, C.δ 1 h' = c ∧ IsEquivalenceEdge C h' ∧ p.app _ h' = h) : IsSymmetricInfinityOperad (activeOperadEnvelopeTarget bO p ≫ bO) ∧ IsSymmetricOperadMap (activeOperadEnvelopeTarget bO p ≫ bO) bO (activeOperadEnvelopeTarget bO p) ∧ cocartesianFibrationOver (activeOperadEnvelopeTarget bO p) ∧ ∀ e : Δ[1] ⟶ activeOperadEnvelope bO p, IsCocartesianEdge (activeOperadEnvelopeTarget bO p) e ↔ IsSymmetricInertEdge bC (e ≫ activeOperadEnvelopeSource bO p)",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae0d95bd8",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Node and HA 2.1.2.10/2.2.4.1/2.2.4.4/2.2.4.15(3)-(4) matched clause by clause. Hypotheses: IsSymmetricInfinityOperad for both operads, IsSymmetricOperadMap (p over the base, inert-preserving), InnerFibration p, and an exact equivalence-lifting hlift (source fixed, targets free). Construction: the full active subcomplex of ihom Δ[1] O, the pullback along ev0, r = ev1, source = pullback.fst. Conclusions: H is an operad, r is inert-preserving, cocartesianFibrationOver r, and for every edge, r-cocartesian iff the C-component is inert. No extra assumptions; single universe u, nothing unbound. Edge cases n=0, empty blocks, equivalences and empty C covered. Only recorded dependency declarations are used; my own searches found no duplicate (relativeActiveSlice fixes the target). The 5 helpers have real data and are listed; all docstrings give source and blueprint, and the theorem docstring has all 8 proof steps. Only sorry. lean.statement is verbatim. nt_compile --json: 61 dependency modules plus this module, exit 0, no warnings, twice. Cosmetic, not fixed: report.md has HA numbers replaced by 'the project server' (an IP-redaction artifact, also in the commit); the node and Lean carry the correct citations."
  }
 }
