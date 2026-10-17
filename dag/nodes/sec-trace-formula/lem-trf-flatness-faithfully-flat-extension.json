@@ -12,9 +12,63 @@
   "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Faithful flatness detects injectivity of a $B$-linear map $g:P\\to Q$: by [def-weil-pbc-faithfully-flat-ring-map], the complex $0\\to P\\xrightarrow{g}Q$ is exact at $P$ if and only if $0\\to C\\otimes_BP\\xrightarrow{1_C\\otimes g}C\\otimes_BQ$ is exact at $C\\otimes_BP$. These two exactness conditions say respectively $\\ker g=0$ and $\\ker(1_C\\otimes g)=0$, which are precisely injectivity. Here $C\\otimes_B0=0$ because its pure tensors are all zero, by the defining bilinearity and generation in [def-weil-pbc-module-tensor-product]. Thus $g$ is injective if and only if $1_C\\otimes g$ is injective.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HB (definition-flat), item (2), applied to the three-term complex with first term zero; Tag 0584 (lemma-flatness-descends-more-general), proof, faithful-flatness argument"
+   }
+  },
+  {
+   "text": "Put $N_C=C\\otimes_BN$. For any $A$-module $U$, give $U\\otimes_AN$ the $B$-action $b(u\\otimes n)=u\\otimes bn$. By the universal property in [def-weil-pbc-module-tensor-product], the formula $\\theta_U(c\\otimes(u\\otimes n))=u\\otimes(c\\otimes n)$ defines an $A$-linear map $C\\otimes_B(U\\otimes_AN)\\to U\\otimes_AN_C$. It respects $B$-balancing because $u\\otimes(bc\\otimes n)=u\\otimes(c\\otimes bn)$, and $A$-balancing because $(au)\\otimes(c\\otimes n)=u\\otimes(c\\otimes an)$. The reverse formula $u\\otimes(c\\otimes n)\\mapsto c\\otimes(u\\otimes n)$ respects the same relations, so defines its inverse; the two composites fix every pure tensor and hence are identities. For an $A$-linear $f:U\\to V$, the map $g=f\\otimes_A1_N$ is $B$-linear, and $\\theta_V\\circ(1_C\\otimes_Bg)=(f\\otimes_A1_{N_C})\\circ\\theta_U$: both sides send $c\\otimes(u\\otimes n)$ to $f(u)\\otimes(c\\otimes n)$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0584 (lemma-flatness-descends-more-general), proof, tensor identification; the balancing calculation underlying Tag 00D2 (lemma-tensor-with-bimodule), written out using the tensor universal property"
+   }
+  },
+  {
+   "text": "Assume $N$ is flat over $A$, and take any injective $A$-linear map $f:U\\to V$. By the injectivity definition [def-weil-pbc-flat-ring-map], $g=f\\otimes_A1_N$ is injective. It is a $B$-linear map by Step 2, so Step 1 shows that $1_C\\otimes_Bg$ is injective. The commuting square with the isomorphisms $\\theta_U,\\theta_V$ in Step 2 then makes $f\\otimes_A1_{N_C}$ injective: if it kills $x$, write $x=\\theta_U(z)$, use the square to get $\\theta_V((1_C\\otimes_Bg)z)=0$, and apply injectivity of $\\theta_V$ and $1_C\\otimes_Bg$ to get $z=0$. Since $f$ was arbitrary, the same flatness definition gives that $N_C$ is flat over $A$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0584 (lemma-flatness-descends-more-general), part (1) and forward direction of part (2), using the injectivity characterization rather than kernels"
+   }
+  },
+  {
+   "text": "Conversely, assume $N_C$ is flat over $A$ and let $f:U\\to V$ be any injective $A$-linear map. By [def-weil-pbc-flat-ring-map], $f\\otimes_A1_{N_C}$ is injective. Step 2 identifies $1_C\\otimes_B(f\\otimes_A1_N)$ with $\\theta_V^{-1}\\circ(f\\otimes_A1_{N_C})\\circ\\theta_U$, a composite of injective maps. Apply Step 1 to the $B$-linear map $f\\otimes_A1_N$ to conclude that it is injective. This holds for every injective $f$, so [def-weil-pbc-flat-ring-map] gives that $N$ is flat over $A$. The two directions prove the asserted equivalence with the induced $A$-actions.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0584 (lemma-flatness-descends-more-general), part (2), converse, using faithful-flatness reflection on the injection test"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0584 (lemma-flatness-descends-more-general), part (2) and its proof; faithful-flatness reflection unpacked from Definition Tag 00HB(2), and tensor interchange proved on generators"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +97,52 @@
    "results": "Hits Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct and Module.FaithfullyFlat.instTensorProduct; none states the intermediate-ring version.",
    "date": "2026-10-18",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "iff_flat_tensorProduct|of_flat_tensorProduct|lTensor_injective_iff_injective|of_flat_of_faithfullyFlat",
+   "results": "7 hits. Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean; Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean. Read the returned signatures and Flat/FaithfullyFlat/Basic.lean:385,588-603; the descent equivalence concerns flatness over the scalar-extension ring, not the smaller base A. Flat.trans and Flat.instTensorProduct have different tensor bases/hypotheses. No exact intermediate-ring module criterion found.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a module over a smaller base ring is preserved and reflected by faithfully flat extension of scalars along an intermediate algebra",
+   "results": "8 hits. Module.Flat.of_flat_tensorProduct; Module.Flat.iff_flat_tensorProduct; Module.FaithfullyFlat.instTensorProduct; Module.Flat.isBaseChange; RingHom.FaithfullyFlat.flat; Module.FaithfullyFlat.toFlat; Algebra.FormallyUnramified.flat_of_restrictScalars; Module.Flat.of_isLocalizedModule. Read the returned signatures and Flat/FaithfullyFlat/Basic.lean:385,588-603; the descent equivalence concerns flatness over the scalar-extension ring, not the smaller base A. Flat.trans and Flat.instTensorProduct have different tensor bases/hypotheses. No exact intermediate-ring module criterion found.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, TensorProduct",
+   "results": "12 hits. Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left; Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right; LinearIndependent.tmul_of_flat_left; LinearIndependent.tmul_of_flat_right; TensorProduct.LinearIndepOn.tmul_of_flat_left; TensorProduct.LinearIndepOn.tmul_of_flat_right; TensorProduct.nontrivial_of_linearMap_injective_of_flat_left; TensorProduct.nontrivial_of_linearMap_injective_of_flat_right. Read the returned signatures and Flat/FaithfullyFlat/Basic.lean:385,588-603; the descent equivalence concerns flatness over the scalar-extension ring, not the smaller base A. Flat.trans and Flat.instTensorProduct have different tensor bases/hypotheses. No exact intermediate-ring module criterion found.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ring maps A to B to C, C faithfully flat over B, a B module N is flat over A if and only if C tensor over B N is flat over A",
+   "results": "8 hits. Module.Flat.iff_flat_tensorProduct; Module.Flat.of_flat_tensorProduct; RingHom.FaithfullyFlat.isStableUnderBaseChange; RingHom.FaithfullyFlat.flat; Module.FaithfullyFlat.instTensorProduct; Module.FaithfullyFlat.toFlat; Module.FaithfullyFlat.iff_flat_and_rTensor_faithful; Module.FaithfullyFlat.iff_flat_and_lTensor_faithful. Read the returned signatures and Flat/FaithfullyFlat/Basic.lean:385,588-603; the descent equivalence concerns flatness over the scalar-extension ring, not the smaller base A. Flat.trans and Flat.instTensorProduct have different tensor bases/hypotheses. No exact intermediate-ring module criterion found.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a B module N is flat over A and C is flat over B then C tensor B N is flat over A; faithfully flat tensor detects injectivity",
+   "results": "8 hits. Module.Flat.of_flat_tensorProduct; Module.Flat.iff_flat_tensorProduct; Module.Flat.instTensorProduct; Module.FaithfullyFlat.instTensorProduct; Module.Flat.trans; Module.FaithfullyFlat.trans; Module.FaithfullyFlat.injective_of_tensorProduct; Module.FaithfullyFlat.iff_flat_and_lTensor_faithful. Read the returned signatures and Flat/FaithfullyFlat/Basic.lean:385,588-603; the descent equivalence concerns flatness over the scalar-extension ring, not the smaller base A. Flat.trans and Flat.instTensorProduct have different tensor bases/hypotheses. No exact intermediate-ring module criterion found.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Flat.*(assoc|trans|Tensor)|flat.*(assoc|trans)|lemma.*Flat|theorem.*Flat",
+   "results": "25 hits. Mathlib/RingTheory/Flat/Stability.lean; Mathlib/RingTheory/Flat/Stability.lean; Mathlib/RingTheory/Flat/Stability.lean; Mathlib/RingTheory/Flat/Stability.lean; Mathlib/RingTheory/Flat/Stability.lean; Mathlib/RingTheory/Flat/LocallyFree.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean. Read the returned signatures and Flat/FaithfullyFlat/Basic.lean:385,588-603; the descent equivalence concerns flatness over the scalar-extension ring, not the smaller base A. Flat.trans and Flat.instTensorProduct have different tensor bases/hypotheses. No exact intermediate-ring module criterion found.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-flatness-source-cover",
@@ -58,12 +154,37 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), final sentence: relative flatness is detected after the jointly surjective flat source charts",
+   "place": "Proof of clauses (1)--(2), specialization to the normal cone: the source-cover flatness detection used in the semistable-alteration/flattening branch of the DAG refinement; specifically lem-trf-relative-flatness-source-cover Step 2, which applies Algebra Tag 0584(2) to the stalk rings.",
    "via": [
-    "lem-trf-relative-flatness-source-cover"
+    "lem-trf-relative-flatness-source-cover",
+    "lem-trf-etale-flattening-descent",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flatness-faithfully-flat-extension",
+  "worker": "stage1",
+  "summary": "Kept the exact Stacks 0584(2) statement. Gave four explicit elementary steps: faithful flatness reflects injections by its exactness definition, tensor interchange and naturality on generators, and the two injectivity tests for flatness. Reused the three existing Mathlib definition leaves; no new nodes. Distinguished the same-base Mathlib descent theorem and the source-library algebra-only descent theorem. Corrected the inherited blueprint place description and expanded the via chain to match the current parent.",
+  "blueprint": "Realizes the algebraic flatness input in lem-trf-relative-flatness-source-cover Step 2, below the specialization-to-normal-cone proof of lem-trf-local-term-locality clauses (1)--(2). The inherited locator called this the final sentence; the current blueprint instead quotes the normal-cone argument, and the intervening DAG branch supplies the flattening application."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-b278d0354",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-b278d0354 (reviewer sub-agent of L); spot-checked: I read the item in full; this is a PASS with no fixes. The statement is exactly Stacks Algebra Tag 0584(2) (algebra-lemma-flatness-descends-more-general, algebra.tex ~8930) with R=A, S=B, S'=C, M=N: hypotheses one for one, nothing added or dropped. The delivery has no new nodes. The three cited definitions (flat via injections, faithfully flat via exactness of complexes, tensor product with universal property, generators and f⊗id) are Mathlib leaves, and each says what the step uses. Step 1: the complex 0→P→Q, together with C⊗_B 0=0, gives that faithful flatness both preserves and reflects injectivity. Step 2: I re-derived that the interchange C⊗_B(U⊗_A N)≅U⊗_A(C⊗_B N) and its inverse are well defined, that both composites fix the generating pure tensors, and that the naturality square holds on generators. It is routine and acceptable as elementary. Steps 3 and 4 are correct and not circular; faithful-flatness reflection is used only in the converse. Edge cases checked: N=0; B=C; B=0; A=Z, B=Z/2, C=B[t], N=B (both sides non-flat, as the lemma says); and without faithful flatness (Z→Q, N=Z/2) the converse fails, so the hypothesis is needed. No duplicates: 00HJ, 039V and the tensor-cancel node in the DAG are different statements. Mathlib's Flat.of_flat_tensorProduct and iff_flat_tensorProduct (FaithfullyFlat/Basic.lean:588-603) compare flatness over two different rings, R and S, so they are not this statement. Only definitions are used, so there is no route issue and no tool_uses. The blueprint via is consistent with the parent, and no SGA source is used. One minor inaccuracy in the report: it lists citations.json and searches.jsonl as written, but neither is in the delivery."
  }
 }
