@@ -129,7 +129,8 @@ theorem exists_eq_of_isLocalizedModule (hr : IsSMulRegular M r) (hs' : IsSMulReg
     rw [map_smul, map_smul, e1, e2, ← hx, ← hy, map_smul, map_smul, hxy, smul_comm]
   obtain ⟨⟨_, N, rfl⟩, hN⟩ := IsLocalizedModule.exists_of_eq (S := Submonoid.powers (r * s)) heq
   obtain ⟨z, rfl, rfl⟩ := exists_eq_smul_of_pow_smul_sub hr hs' hs
-    (k := k) (l := l) (N := N) (m := m) (n := n) (by simpa [smul_sub, sub_eq_zero, Submonoid.smul_def] using hN)
+    (k := k) (l := l) (N := N) (m := m) (n := n)
+    (by simpa [smul_sub, sub_eq_zero, Submonoid.smul_def] using hN)
   refine ⟨z, ?_, ?_⟩
   · refine (IsLocalizedModule.mk'_eq_iff.2 ?_).symm
     rw [map_smul, Submonoid.smul_def, hk]

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleLocus
-public import WeilConjectures.Mathlib.AlgebraicGeometry.NormalizationBasicOpen
+public import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationBasicOpen
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
 
 /-!
