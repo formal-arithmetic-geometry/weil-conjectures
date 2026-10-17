@@ -22,7 +22,8 @@
   "sk-def-pe-site",
   "sk-def-pe-weak-contractible",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "det-pe-sections-limits-colimits"
  ],
  "proof": [
   {
@@ -194,5 +195,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperHeartContinuitySections",
+  "declaration": "CategoryTheory.properHeartContinuitySections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperHeartContinuitySections.lean",
+  "statement": "theorem properHeartContinuitySections {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) RingCat.{r}) (W : X.ProEt) [IsAffine W.left] (hW : (Scheme.ProEt.topology X).IsWeaklyContractible.{max (u + 1) r v} W) : exactFunctor (SheafOfModules.{max (u + 1) r v} R) (AddCommGrpCat.{max (u + 1) r v}) (SheafOfModules.evaluation R (op W) ⋙ forget₂ _ AddCommGrpCat.{max (u + 1) r v}) ∧ PreservesColimitsOfSize.{wJ, uJ} (SheafOfModules.evaluation R (op W) ⋙ forget₂ _ AddCommGrpCat.{max (u + 1) r v})",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45e43281e",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Item properHeartContinuitySections matches the node clause by clause: ProEt site object W, IsAffine W.left, IsWeaklyContractible (recorded sk-def-pe-weak-contractible decl; universe max(u+1) r v >= u gives an equivalent condition and matches the dependency), arbitrary noncommutative RingCat.{r} sheaf, exactFunctor (finite limits and colimits) plus PreservesColimitsOfSize.{wJ,uJ} of evaluation then forget2 AddCommGrpCat, same functor and universes in both conjuncts. All five universes bound, module universe follows def-weil-size-convention, site universes not equated. Dependency module peSectionsLimitsColimits states the det-pe-sections-limits-colimits node exactly; that node changed only in lean, with a note; both lean.statement verbatim; adding it to stmt_deps is acyclic and permitted by the 2026-10-16 rule and stage2_delivery.py. Near-duplicate affine_weaklyContractible_evaluation_colimits needs CommRingCat.{u+1}, so not an exact match; no name clashes. No defs, sorry-only proofs, docstrings carry source place, blueprint id and proof steps, lines <=100, imports are Mathlib/WeilConjectures/Sheaf, real pro-etale site, real Worker report and Second reading by Q31. nt_compile --json compiled both files separately, clean except sorry; pp.universes and #print axioms probe confirmed universes and axioms (propext, sorryAx, choice, Quot.sound). No fixes needed."
  }
 }
