@@ -4589,6 +4589,7 @@ public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
+public import WeilConjectures.WeilSheaf.ProjectionFormula
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
@@ -4613,6 +4614,7 @@ public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import WeilConjectures.WeilSheaf.TensorObjPairing
 public import WeilConjectures.WeilSheaf.TensorPower
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
@@ -4626,6 +4628,7 @@ public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarExact
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
+public import WeilConjectures.WeilSheaf.UpperStarTensor
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.BettiSymmetry
