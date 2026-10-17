@@ -94,7 +94,7 @@ lemma unitSheafSingleIso_comp {X Y Z : Scheme.{u}} (u : X ⟶ Y) (v : Y ⟶ Z) :
   simp only [Category.assoc]
   rw [h₂, h₁]
   erw [Iso.inv_hom_id_app_assoc]
-  simp only [← Functor.map_comp_assoc, Category.assoc, Iso.inv_hom_id_app, Functor.comp_obj,
+  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.comp_obj,
     Category.comp_id]
   have hn := ((upperStar AddCommGrpCat.{u + 1} u).mapDerivedCategorySingleFunctor 0).hom.naturality
     ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} v).inv.app

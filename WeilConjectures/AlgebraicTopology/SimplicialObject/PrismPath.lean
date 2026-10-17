@@ -42,13 +42,14 @@ lemma prismFun_monotone {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1))
   · exact Fin.castSucc_le_castSucc_iff.2 (θ.toOrderHom.monotone (by
       rw [Fin.le_iff_val_le_val]; exact hii''))
   · rw [Fin.le_iff_val_le_val, Fin.val_castSucc, Fin.val_succ]
-    have := θ.toOrderHom.monotone (show (⟨i.val, by rw [len_mk]; omega⟩ : Fin (m + 1)) ≤ ⟨i'.val - 1, by omega⟩
+    have := θ.toOrderHom.monotone (show (⟨i.val, by omega⟩ : Fin (m + 1)) ≤
+      ⟨i'.val - 1, by omega⟩
       by rw [Fin.le_iff_val_le_val]; simp only; omega)
     rw [Fin.le_iff_val_le_val] at this
     omega
   · omega
   · rw [Fin.le_iff_val_le_val, Fin.val_succ, Fin.val_succ]
-    have := θ.toOrderHom.monotone (show (⟨i.val - 1, by rw [len_mk]; omega⟩ : Fin (m + 1)) ≤
+    have := θ.toOrderHom.monotone (show (⟨i.val - 1, by omega⟩ : Fin (m + 1)) ≤
       ⟨i'.val - 1, by omega⟩ by rw [Fin.le_iff_val_le_val]; simp only; omega)
     rw [Fin.le_iff_val_le_val] at this
     omega
@@ -64,9 +65,52 @@ lemma prism_apply {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1)) (i : 
 lemma prism_id {m : ℕ} (k : Fin (m + 1)) : prism (𝟙 ⦋m⦌) k = 𝟙 _ := by
   ext i : 3
   rw [prism_apply, prismFun]
-  split_ifs with h
-  · simp
-  · simp only [CategoryStruct.id, Fin.val_succ, OrderHom.id_coe, id_eq]
-    omega
+  split_ifs with h <;> (apply Fin.ext; simp) <;> omega
+
+lemma prismFun_of_le {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1)) (i : Fin (m + 2))
+    (h : i.val ≤ k.val) :
+    prismFun θ k i = (θ.toOrderHom ⟨i.val, by rw [len_mk]; omega⟩).castSucc := dif_pos h
+
+lemma prismFun_of_lt {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1)) (i : Fin (m + 2))
+    (h : k.val < i.val) :
+    prismFun θ k i = (θ.toOrderHom ⟨i.val - 1, by rw [len_mk]; omega⟩).succ :=
+  dif_neg (by omega)
+
+lemma toOrderHom_congr {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) {a b : Fin (⦋m⦌.len + 1)} (h : a.val = b.val) :
+    θ.toOrderHom a = θ.toOrderHom b := congrArg _ (Fin.ext h)
+
+lemma toOrderHom_val_mono {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) {a b : Fin (⦋m⦌.len + 1)}
+    (h : a.val ≤ b.val) : (θ.toOrderHom a).val ≤ (θ.toOrderHom b).val :=
+  θ.toOrderHom.monotone h
+
+lemma prism_comp {l m n : ℕ} (θ' : ⦋l⦌ ⟶ ⦋m⦌) (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (l + 1)) :
+    prism θ' k ≫ prism θ (θ'.toOrderHom k) = prism (θ' ≫ θ) k := by
+  ext i : 3
+  simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply, prism_apply]
+  by_cases hi : i.val ≤ k.val
+  · have h1 : (θ'.toOrderHom ⟨i.val, by simp at *; omega⟩).val ≤ (θ'.toOrderHom k).val :=
+      toOrderHom_val_mono θ' (by simp only; omega)
+    rw [prismFun_of_le θ' k i hi, prismFun_of_le _ _ _ (by simpa using h1),
+      prismFun_of_le _ k i hi]
+    rfl
+  · have h1 : (θ'.toOrderHom k).val ≤ (θ'.toOrderHom ⟨i.val - 1, by simp at *; omega⟩).val :=
+      toOrderHom_val_mono θ' (by simp only; omega)
+    rw [prismFun_of_lt θ' k i (by omega), prismFun_of_lt _ _ _ (by simp; omega),
+      prismFun_of_lt _ k i (by omega)]
+    simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply]
+    congr 2
+
+/-- The faces between consecutive prism simplices agree. -/
+lemma δ_comp_prism_succ {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (j : Fin m) :
+    δ j.succ.castSucc ≫ prism θ j.succ = δ j.succ.castSucc ≫ prism θ j.castSucc := by
+  ext x : 3
+  simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply, prism_apply]
+  by_cases hx : x.val ≤ j.val
+  · have hδ : ((δ j.succ.castSucc).toOrderHom x).val = x.val := by
+      simp [δ, Fin.succAbove, Fin.lt_def]; omega
+    rw [prismFun_of_le _ _ _ (by simp; omega), prismFun_of_le _ _ _ (by simp; omega)]
+  · have hδ : ((δ j.succ.castSucc).toOrderHom x).val = x.val + 1 := by
+      simp [δ, Fin.succAbove, Fin.lt_def]; omega
+    rw [prismFun_of_lt _ _ _ (by simp; omega), prismFun_of_lt _ _ _ (by simp; omega)]
 
 end SimplexCategory

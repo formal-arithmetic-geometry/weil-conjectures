@@ -42,8 +42,8 @@ noncomputable def overPostcomp (T : Over S)
     (β : ShiftedHom K L m) (h : m + n = n') :
     hyperH ((overPullback T).obj K) n →+ hyperH ((overPullback T).obj L) n' where
   toFun x := x.comp (β.map (overPullback T)) h
-  map_zero' := ShiftedHom.zero_comp _ _ _
-  map_add' _ _ := ShiftedHom.add_comp _ _ _ _
+  map_zero' := by simp [ShiftedHom.zero_comp]
+  map_add' _ _ := by simp [ShiftedHom.add_comp]
 
 lemma overRestrict_overPostcomp {T T' : Over S} (g : T' ⟶ T)
     {K L : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})} {m n n' : ℤ}
@@ -53,23 +53,28 @@ lemma overRestrict_overPostcomp {T T' : Over S} (g : T' ⟶ T)
 
 lemma overPostcomp_overPostcomp (T : Over S)
     {K L M : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})}
-    {m m' n n' n'' : ℤ} (β : ShiftedHom K L m) (γ : ShiftedHom L M m') (h : m + n = n')
-    (h' : m' + n' = n'') (x : hyperH ((overPullback T).obj K) n) :
+    {m m' mm n n' n'' : ℤ} (β : ShiftedHom K L m) (γ : ShiftedHom L M m') (h : m + n = n')
+    (h' : m' + n' = n'') (hm : m' + m = mm) (x : hyperH ((overPullback T).obj K) n) :
     overPostcomp T γ h' (overPostcomp T β h x) =
-      overPostcomp T (β.comp γ rfl) (by omega) x := by
+      overPostcomp T (β.comp γ hm) (by omega) x := by
   simp only [overPostcomp, AddMonoidHom.coe_mk, ZeroHom.coe_mk]
-  rw [ShiftedHom.map_comp, ShiftedHom.comp_assoc _ _ _ h h' (by omega)]
+  rw [ShiftedHom.map_comp, ShiftedHom.comp_assoc _ _ _ h hm (by omega)]
 
 lemma overPostcomp_mk₀_id (T : Over S)
-    (K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) {n n' : ℤ}
-    (h : 0 + n = n') (x : hyperH ((overPullback T).obj K) n) :
-    overPostcomp T (ShiftedHom.mk₀ 0 rfl (𝟙 K)) h x = h ▸ x := by
-  subst h
+    (K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) {n : ℤ}
+    (h : 0 + n = n) (x : hyperH ((overPullback T).obj K) n) :
+    overPostcomp T (ShiftedHom.mk₀ 0 rfl (𝟙 K)) h x = x := by
   simp [overPostcomp, ShiftedHom.map_mk₀]
 
 end Postcomp
 
 variable {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S) (c : Cone D)
+
+/-- The projection `c.pt ⟶ Dᵢ` of a cone, with its source written as `c.pt`. -/
+abbrev coneπ (i : I) : c.pt ⟶ D.obj i := c.π.app i
+
+omit [IsCofiltered I] in
+lemma coneπ_comp {i j : I} (g : j ⟶ i) : coneπ D c j ≫ D.map g = coneπ D c i := c.w g
 
 /-- Continuity of `Hⁿ(-, K)` along the cofiltered system `D` with cone `c`: every class on
 the cone point comes from some `Dᵢ`, and a class on `Dᵢ` vanishing on the cone point vanishes
@@ -77,8 +82,10 @@ on some `Dⱼ`. -/
 def IsHyperHContinuousAt (K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (n : ℤ) : Prop :=
   (∀ x : hyperH ((overPullback c.pt).obj K) n,
-    ∃ (i : I) (y : hyperH ((overPullback (D.obj i)).obj K) n), overRestrict (c.π.app i) K n y = x) ∧
-  ∀ (i : I) (y : hyperH ((overPullback (D.obj i)).obj K) n), overRestrict (c.π.app i) K n y = 0 →
+    ∃ (i : I) (y : hyperH ((overPullback (D.obj i)).obj K) n),
+      overRestrict (coneπ D c i) K n y = x) ∧
+  ∀ (i : I) (y : hyperH ((overPullback (D.obj i)).obj K) n),
+    overRestrict (coneπ D c i) K n y = 0 →
     ∃ (j : I) (g : j ⟶ i), overRestrict (D.map g) K n y = 0
 
 variable {D c}
@@ -100,13 +107,14 @@ lemma IsHyperHContinuousAt.of_shiftedHom
   have h' : m' + n' = n := by omega
   have hγβ' (T : Over S) (x : hyperH ((overPullback T).obj L) n') :
       overPostcomp T β h (overPostcomp T γ h' x) = x := by
-    rw [overPostcomp_overPostcomp, hγβ, overPostcomp_mk₀_id]
+    rw [overPostcomp_overPostcomp _ _ _ _ _ hm', hγβ, overPostcomp_mk₀_id]
   refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
   · obtain ⟨i, y, hy⟩ := hK.1 (overPostcomp _ γ h' x)
     exact ⟨i, overPostcomp _ β h y, by rw [overRestrict_overPostcomp, hy, hγβ']⟩
   · obtain ⟨j, g, hg⟩ := hK.2 i (overPostcomp _ γ h' y)
-      (by rw [← overRestrict_overPostcomp, hy, map_zero])
+      (by rw [overRestrict_overPostcomp, hy, map_zero])
     refine ⟨j, g, ?_⟩
+    rw [overRestrict_overPostcomp] at hg
     rw [← hγβ' _ y, overRestrict_overPostcomp, overRestrict_overPostcomp, hg, map_zero]
 
 lemma IsHyperHContinuousAt.of_iso
@@ -131,35 +139,36 @@ lemma isHyperHContinuousAt_five
     IsHyperHContinuousAt D c K₃ n₃ := by
   refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
   · obtain ⟨i, yD, hyD⟩ := c₄.1 (overPostcomp _ β₃ h₃ x)
-    have h5 : overRestrict (c.π.app i) K₅ n₅ (overPostcomp _ β₄ h₄ yD) = 0 := by
+    have h5 : overRestrict (coneπ D c i) K₅ n₅ (overPostcomp _ β₄ h₄ yD) = 0 := by
       rw [overRestrict_overPostcomp, hyD]
       exact (ex₃ c.pt).apply_apply_eq_zero x
     obtain ⟨j, g, hg⟩ := c₅.2 i _ h5
     rw [overRestrict_overPostcomp] at hg
     obtain ⟨z, hz⟩ := (ex₃ (D.obj j) (overRestrict (D.map g) K₄ n₄ yD)).1 hg
-    have hker : overPostcomp c.pt β₃ h₃ (x - overRestrict (c.π.app j) K₃ n₃ z) = 0 := by
-      rw [map_sub, ← overRestrict_overPostcomp, hz, overRestrict_comp, c.w g, hyD, sub_self]
+    have hker : overPostcomp c.pt β₃ h₃ (x - overRestrict (coneπ D c j) K₃ n₃ z) = 0 := by
+      rw [map_sub, ← overRestrict_overPostcomp, hz, overRestrict_comp, coneπ_comp D c g, hyD,
+        sub_self]
     obtain ⟨w, hw⟩ := (ex₂ c.pt _).1 hker
     obtain ⟨k, w', hw'⟩ := c₂.1 w
-    obtain ⟨l, a, b, -⟩ := IsCofiltered.cone_objs j k
+    obtain ⟨l, a, b, -⟩ := IsCofilteredOrEmpty.cone_objs j k
     refine ⟨l, overRestrict (D.map a) K₃ n₃ z +
       overPostcomp _ β₂ h₂ (overRestrict (D.map b) K₂ n₂ w'), ?_⟩
-    rw [map_add, overRestrict_comp, c.w a, overRestrict_overPostcomp, overRestrict_comp, c.w b,
-      hw', hw, add_sub_cancel]
-  · have h4 : overRestrict (c.π.app i) K₄ n₄ (overPostcomp _ β₃ h₃ y) = 0 := by
+    rw [map_add, overRestrict_comp, coneπ_comp D c a, overRestrict_overPostcomp, overRestrict_comp,
+      coneπ_comp D c b, hw', hw, add_sub_cancel]
+  · have h4 : overRestrict (coneπ D c i) K₄ n₄ (overPostcomp _ β₃ h₃ y) = 0 := by
       rw [overRestrict_overPostcomp, hy, map_zero]
     obtain ⟨j, g, hg⟩ := c₄.2 i _ h4
     rw [overRestrict_overPostcomp] at hg
     obtain ⟨b, hb⟩ := (ex₂ (D.obj j) _).1 hg
-    have h2 : overPostcomp c.pt β₂ h₂ (overRestrict (c.π.app j) K₂ n₂ b) = 0 := by
-      rw [← overRestrict_overPostcomp, hb, overRestrict_comp, c.w g, hy]
+    have h2 : overPostcomp c.pt β₂ h₂ (overRestrict (coneπ D c j) K₂ n₂ b) = 0 := by
+      rw [← overRestrict_overPostcomp, hb, overRestrict_comp, coneπ_comp D c g, hy]
     obtain ⟨a, ha⟩ := (ex₁ c.pt _).1 h2
     obtain ⟨k, a', ha'⟩ := c₁.1 a
-    obtain ⟨l, p, q, -⟩ := IsCofiltered.cone_objs j k
+    obtain ⟨l, p, q, -⟩ := IsCofilteredOrEmpty.cone_objs j k
     obtain ⟨m, r, hr⟩ := c₂.2 l (overRestrict (D.map p) K₂ n₂ b -
         overPostcomp _ β₁ h₁ (overRestrict (D.map q) K₁ n₁ a')) (by
-      rw [map_sub, overRestrict_comp, c.w p, overRestrict_overPostcomp, overRestrict_comp, c.w q,
-        ha', ha, sub_self])
+      rw [map_sub, overRestrict_comp, coneπ_comp D c p, overRestrict_overPostcomp,
+        overRestrict_comp, coneπ_comp D c q, ha', ha, sub_self])
     refine ⟨m, r ≫ p ≫ g, ?_⟩
     rw [map_sub, sub_eq_zero, overRestrict_overPostcomp] at hr
     rw [D.map_comp, D.map_comp, ← overRestrict_comp, ← overRestrict_comp, ← hb,
@@ -321,11 +330,12 @@ lemma isHyperHContinuousAt_of_isGE (hs : SingleContinuity D c) (a : ℤ)
   have : ((t.truncLE (n + 1)).obj K).IsLE (a + ((n + 1 - a).toNat : ℕ)) := by
     have : ((t.truncLE (n + 1)).obj K).IsLE (n + 1) := by change t.IsLE _ _; infer_instance
     exact t.isLE_of_le _ (n + 1) _ (by omega)
-  have : ((t.truncGE (n + 2)).obj K).IsGE (n - 1 + 1) := by
-    change t.IsGE _ _; exact t.isGE_of_ge _ _ (n + 2) (by omega)
-  have : ((t.truncGE (n + 2)).obj K).IsGE (n + 1) := by
-    change t.IsGE _ _; exact t.isGE_of_ge _ _ (n + 2) (by omega)
-  have h₁ (m : ℤ) := isHyperHContinuousAt_of_isGE_of_isLE hs _ a ((t.truncLE (n + 1)).obj K) m
+  have : ((t.triangleLEGE (n + 1) (n + 2) (by ring)).obj K).obj₃.IsGE (n - 1 + 1) := by
+    change t.IsGE ((t.truncGE (n + 2)).obj K) _; exact t.isGE_of_ge _ _ (n + 2) (by omega)
+  have : ((t.triangleLEGE (n + 1) (n + 2) (by ring)).obj K).obj₃.IsGE (n + 1) := by
+    change t.IsGE ((t.truncGE (n + 2)).obj K) _; exact t.isGE_of_ge _ _ (n + 2) (by omega)
+  have h₁ (m : ℤ) := isHyperHContinuousAt_of_isGE_of_isLE hs (n + 1 - a).toNat a
+    ((t.truncLE (n + 1)).obj K) m
   exact isHyperHContinuousAt_obj₂ hTr n
     (isHyperHContinuousAt_of_subsingleton fun T ↦ subsingleton_hyperH_of_isGE T _ (n - 1))
     (h₁ n) (isHyperHContinuousAt_of_subsingleton fun T ↦ subsingleton_hyperH_of_isGE T _ n)
@@ -354,8 +364,9 @@ lemma singleContinuity_of_isLimit (hc : IsLimit ((Over.forget S).mapCone c)) :
     · obtain ⟨e, rfl⟩ := (sheafHEquivHyperH F c.pt q).bijective.2 x
       obtain ⟨i, y, hy⟩ := hs e
       refine ⟨i, sheafHEquivHyperH F (D.obj i) q y, ?_⟩
-      rw [overRestrict_sheafHEquivHyperH, hy, ← Sheaf.H.map_comp_apply, Iso.hom_inv_id_app,
-        Sheaf.H.map_id_apply]
+      rw [overRestrict_sheafHEquivHyperH]
+      dsimp only [coneπ]
+      rw [hy, ← Sheaf.H.map_comp_apply, Iso.hom_inv_id_app, Sheaf.H.map_id_apply]
     · obtain ⟨e, rfl⟩ := (sheafHEquivHyperH F (D.obj i) q).bijective.2 y
       rw [overRestrict_sheafHEquivHyperH, ← sheafHEquivHyperH_zero F c.pt q] at hy
       have h0 := (sheafHEquivHyperH F c.pt q).bijective.1 hy
