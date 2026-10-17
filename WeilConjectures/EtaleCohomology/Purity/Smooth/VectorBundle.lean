@@ -461,6 +461,48 @@ theorem isIso_thomClassMap : IsIso (E.thomClassMap Λ aS) := by
     rw [h]
     exact E.isIso_supportedClassMap_frameClass Λ aS i
 
+include aS in
+/-- **Uniqueness of the Thom class.** Two classes with supports in the zero section which agree
+on every chart are equal: classes with supports in the zero section are sections of a sheaf
+(`AlgebraicGeometry.VectorBundle.exists_iso_singleFunctor_thomTarget`), determined by their
+pullbacks to the geometric points, each of which lies in a chart, where the restriction of
+supports is invertible. -/
+theorem eq_of_frameRestriction_eq
+    {γ γ' : constantComplex Λ V ⟶ (R(E.zero)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d)))}
+    (h : ∀ i, frameRestriction Λ (E.frame i) γ = frameRestriction Λ (E.frame i) γ') :
+    γ = γ' := by
+  obtain ⟨G, ⟨eM⟩⟩ := E.exists_iso_singleFunctor_thomTarget Λ aS
+  refine hom_ext_of_leftDerivedUpperStar_map_eq (constantComplexIsoSingleFunctor Λ V) eM
+    fun Ω _ _ x ↦ ?_
+  have : Subsingleton (Spec (.of Ω)) := inferInstanceAs (Subsingleton (PrimeSpectrum Ω))
+  obtain ⟨y⟩ : Nonempty (Spec (.of Ω)) := inferInstanceAs (Nonempty (PrimeSpectrum Ω))
+  obtain ⟨i, w, hw⟩ := E.mem_range_frame_e (x.base y)
+  have hxe : Set.range x.base ⊆ Set.range (E.frame i).e.base := by
+    rintro _ ⟨y', rfl⟩
+    exact ⟨w, by rw [hw, Subsingleton.elim y' y]⟩
+  have he : (L(((E.frame i).e)^*[ModuleCat.{u + 1} Λ])).map γ =
+      (L(((E.frame i).e)^*[ModuleCat.{u + 1} Λ])).map γ' := by
+    have := E.isIso_supportedRestriction_frame Λ i
+    have h' := h i
+    simp only [frameRestriction, restrictSupportedClass] at h'
+    rwa [cancel_epi, cancel_mono] at h'
+  have hx' := IsOpenImmersion.lift_fac (E.frame i).e x hxe
+  let comp := leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+    (IsOpenImmersion.lift (E.frame i).e x hxe) (E.frame i).e x hx'.symm
+  rw [← NatIso.naturality_2 comp γ, ← NatIso.naturality_2 comp γ', Functor.comp_map,
+    Functor.comp_map, he]
+
+include aS in
+/-- The Thom class is the unique class with supports in the zero section restricting to the
+frame class on every chart. -/
+theorem eq_thomClass_of_frameRestriction
+    {γ : constantComplex Λ V ⟶ (R(E.zero)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d)))}
+    (h : ∀ i, frameRestriction Λ (E.frame i) γ = frameClass Λ (E.frame i)) :
+    γ = E.thomClass Λ aS :=
+  E.eq_of_frameRestriction_eq Λ aS fun i ↦ by rw [h, frameRestriction_thomClass]
+
 end Thom
 
 end VectorBundle
