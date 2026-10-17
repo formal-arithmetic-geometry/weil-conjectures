@@ -116,22 +116,58 @@
    }
   },
   {
-   "text": "Fix $a\\in A$ and an object $d=(R\\to F(a))$ of $R_{F(a)}$. Let $E=(d\\downarrow e_a)$, the coherent comma category of pairs $(H\\to F,\\,d\\to H(a))$. The source-fixed arrow left fibration classified by the mapping-space functor, pulled back along $e_a$, presents $E$. It is a quasicategory: fill an inner horn in the base $D$ and then lift through this left fibration. On small representatives of $D$ and $R_{F(a)}$ its classifier has a small base and small space values, so transport classification supplies a small representative for $E$. We verify the poset-cone test for $E$, supplying the variation omitted in HTT. Work in the equivalent join-coslice model of the comma data, using the join/cone comparison with its source and boundary fixed. This change of model suffices for the original diagram: apply the coherent inverse comparison to it, construct a cocone there, and precompose the image cocone with the unit natural equivalence on the original boundary. Given $N(B)\\to E$ with $|B|<\\kappa$, carry out the induction of Steps 5-6. For each vertex preceding $a$ in the chosen linear extension, form its lower link and tail slice as in Step 5, choose the cocone of its restriction in the corresponding $R_{F(a_k)}$, and lift it with the lower-link boundary fixed as in Step 6. The prescribed arrows from $d$ concern only the $a$-row, so none of these earlier insertions changes them. At that insertion the data in $E$ give a map $N(B)^{\\triangleleft}\\to R_{F(a)}$ with initial vertex $d$ and boundary the $a$-evaluations of the $B$ rows, including the entire prescribed triangle to $F(a)$. Restriction $r:C_{0,/F|_{N(A_{\\geq a})}}\\to R_{F(a)}$ lifts this map fixing $N(B)$, where the existing map is the restriction of $v$ in Step 5 to $\\{a\\}\\times B$. Adjoin a vertex $z$ to $M$ lying below exactly the vertices $(a,b)$ and their successors within $M$. Since $a$ is maximal among the first coordinates occurring in $M$ at a $B$ vertex, these successors are again $(a,b')$; there are no edges from $z$ to the previously inserted $\\infty$ vertices. Its nerve is $N(M)\\cup_{N(B)}N(B)^{\\triangleleft}$. The lifted data therefore give a diagram on this union in the tail join slice. This union is $\\kappa$-small, by the same chain count as Step 6. Cone off its restriction to $R_{F(a)}$, then lift that cone through $r$ fixing the union. The resulting new source at $(a,\\infty)$ comes with a map from $d$, and the cone contains the prescribed homotopies $d\\to H_b(a)\\to H_\\infty(a)$ for all $b$, together with all higher compatibilities. For every later vertex $a_k$, form the lower link $M_k=(A_{\\leq a_k}\\times B)\\cup(A_{<a_k}\\times\\{\\infty\\})$ and the tail slice over $F|_{N(A_{\\geq a_k})}$. The rows already constructed give its boundary diagram. Choose a cocone after restriction to $R_{F(a_k)}$ and lift it fixing all of $N(M_k)$. Concatenating the lower-link, new-vertex and tail chains gives the next extension. In particular the existing $a$-row, its map from $d$, and the triangles from that map to every $B$-row evaluation remain fixed; no additional comma data are required at $a_k$. This gives a cocone in $E$ on the original diagram. When $B=\\varnothing$ the augmented lower link at $a$ still contains $z$, so the argument gives an object of $E$. Thus $E$ is $\\kappa$-filtered.",
+   "text": "Fix $a\\in A$ and $d=(R\\to F(a))\\in R_{F(a)}$. Put $E=(d\\downarrow e_a)$, with objects $(H\\to F,d\\to H(a))$ and all coherent triangles. By space-transport classification it is the pullback along $e_a$ of the source-fixed arrow left fibration over $R_{F(a)}$ classified by $\\operatorname{Map}(d,-)$. Pullback preserves the stated horn-lifting properties degreewise. An inner horn in $E$ is filled by first filling its projection in the quasicategory $D$ and then lifting through this left fibration. Thus $E$ is a quasicategory. The categories $D$ and $R_{F(a)}$ are essentially small by Steps 2 and 4, hence locally small. On small representatives the classifier has small space values; the small-representative clause of space-transport classification makes its total space small. Consequently $E$ is essentially small.",
    "uses": [
-    "lem-coef-filtered-poset-cone-test",
-    "lem-coef-initial-poset-slice-restriction",
-    "lem-coef-infinity-join-cone-calculus",
-    "def-coef-presentable-infinity-category",
-    "lem-coef-space-transport-classification"
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-relative-slice-sections",
+    "lem-coef-infinity-presheaf-representable-slice-density"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 5.3.5.15, proof (b), explicit expansion of the minor variation establishing filteredness of each evaluation comma category; read online, archive WANTED."
+    "place": "Proposition 5.3.5.15, proof (b), printed p.411 (PDF p.428), local relative version of the vertex insertion in proof (a). The source calls the comma argument a minor variation; this statement makes its distinguished-vertex extension precise. Read online; archive WANTED. No Stacks tag states this quasicategorical result."
    }
   },
   {
-   "text": "Choose small representatives for $D$, $R_{F(a)}$ and each comma category when invoking the small-index cofinality statements. A small $\\kappa$-filtered quasicategory is weakly contractible by the coslice-colimit theorem. Step 7 therefore makes every comma $(d\\downarrow e_a)$ weakly contractible. The coherent cofinal-comma criterion shows that restriction along $e_a$ preserves and detects colimiting cocones, with the same vertex and the specified legs. Apply it to the tautological source diagram $R_{F(a)}\\to P$, whose cocone to $F(a)$ is colimiting by Steps 2-3. Its restriction is precisely evaluation at $a$ of the source cocone on $D$. Hence every evaluation of that cocone is colimiting. The pointwise-colimit criterion then says that the cocone on $D\\to\\operatorname{Fun}(N(A),P)$ itself is colimiting with apex $F$. No colimit is formed in $C$ or $C_0$.",
+   "text": "Apply the poset-cone test to $E$. Given $N(B)\\to E$ with $|B|<\\kappa$, use the join/cone comparison, first for the transformation to $F$ and then for the fixed-source comma data in $R_{F(a)}$. Its fixed-boundary and product base-change clauses let us work with the following joint data: the diagram $U_0$ of Step 5 and a map $\\beta:N(B^{\\triangleleft})\\to R_{F(a)}$ with initial value $d$, whose $B$ boundary is the evaluation at $a$ of $U_0$. This includes the specified triangles to $F(a)$, not only arrows in the homotopy category. A joint extension to $B^{\\triangleright}$ gives a cocone in this join model of $E$. To obtain a cocone on the original diagram, apply a coherent inverse comparison and compose its legs with the unit equivalence on that diagram. Functor/cone calculus supplies the coherent composition and equivalence data. Thus it suffices to construct the joint extension with its boundary fixed.",
+   "uses": [
+    "lem-coef-filtered-poset-cone-test",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, proof (b), printed p.411 (PDF p.428), local relative version of the vertex insertion in proof (a). The source calls the comma argument a minor variation; this statement makes its distinguished-vertex extension precise. Read online; archive WANTED. No Stacks tag states this quasicategorical result."
+   }
+  },
+  {
+   "text": "Choose the same linear extension $a_1,\\ldots,a_n$ of $A$ as in Step 5. For every vertex preceding $a$, perform exactly the ordinary lower-link insertion of Steps 5-6: choose a cocone in $R_{F(a_k)}$ and lift it through the least-vertex restriction with the entire lower-link boundary fixed. The $a$ row has not changed, so its prescribed map $\\beta$ remains fixed. At $a$, apply relative vertex insertion with $\\mathcal E=P$, $\\mathcal E_0=C_0$, $L=\\{a_k:a_k\\text{ precedes }a\\}$, and the just constructed $U$. This $L$ is an order ideal and $a$ is minimal in its complement. The node's filteredness hypothesis is Step 3 for $R_{F(a)}$; all nonfinal-row vertices of $U$ lie in $C_0$. The result is the next extension $U'$ and a map $\\beta':N((B^{\\triangleright})^{\\triangleleft})\\to R_{F(a)}$ restricting to $\\beta$ and to the new $a$ row. In particular the new row object has an arrow from $d$ with the entire prescribed family of triangles and higher simplices.",
+   "uses": [
+    "lem-coef-initial-poset-slice-restriction",
+    "lem-coef-poset-relative-vertex-insertion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, proof (b), printed p.411 (PDF p.428), local relative version of the vertex insertion in proof (a). The source calls the comma argument a minor variation; this statement makes its distinguished-vertex extension precise. Read online; archive WANTED. No Stacks tag states this quasicategorical result."
+   }
+  },
+  {
+   "text": "For each remaining vertex $a_k$, use the ordinary insertion of Steps 5-6 with lower link $M_k=(A_{\\leq a_k}\\times B)\\cup(A_{<a_k}\\times\\{\\infty\\})$ and tail $A_{\\geq a_k}$. Step 3 supplies filteredness at $F(a_k)$; the chain count of Step 6 makes $N(M_k)$ $\\kappa$-small. Least-vertex slice restriction lifts the chosen cocone while fixing the whole existing diagram. Hence the already completed $a$ row stays exactly fixed, and the previously obtained $\\beta'$ stays fixed as a map to $R_{F(a)}$. At the last vertex, the completed $U_n$ and this same $\\beta'$ are the joint extension required in Step 8. They give a cocone in $E$ on the original diagram, including all its comma triangles, by that step's comparison. For $B=\\varnothing$, relative vertex insertion still supplies the edge from $d$, so it supplies an object of $E$ as well. The poset-cone test proves that $E$ is $\\kappa$-filtered.",
+   "uses": [
+    "lem-coef-initial-poset-slice-restriction",
+    "lem-coef-filtered-poset-cone-test",
+    "lem-coef-poset-relative-vertex-insertion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, proof (b), printed p.411 (PDF p.428), local relative version of the vertex insertion in proof (a). The source calls the comma argument a minor variation; this statement makes its distinguished-vertex extension precise. Read online; archive WANTED. No Stacks tag states this quasicategorical result."
+   }
+  },
+  {
+   "text": "Choose small representatives for $D$, $R_{F(a)}$ and each comma category when invoking the small-index cofinality statements. A small $\\kappa$-filtered quasicategory is weakly contractible by the coslice-colimit theorem. Steps 7-10 therefore makes every comma $(d\\downarrow e_a)$ weakly contractible. The coherent cofinal-comma criterion shows that restriction along $e_a$ preserves and detects colimiting cocones, with the same vertex and the specified legs. Apply it to the tautological source diagram $R_{F(a)}\\to P$, whose cocone to $F(a)$ is colimiting by Steps 2-3. Its restriction is precisely evaluation at $a$ of the source cocone on $D$. Hence every evaluation of that cocone is colimiting. The pointwise-colimit criterion then says that the cocone on $D\\to\\operatorname{Fun}(N(A),P)$ itself is colimiting with apex $F$. No colimit is formed in $C$ or $C_0$.",
    "uses": [
     "lem-coef-infinity-coslice-colimit-formula",
     "lem-coef-infinity-cofinal-comma-criterion",
@@ -145,7 +181,7 @@
    }
   },
   {
-   "text": "Choose a small quasicategory $I$ and an equivalence $u:I\\to D$, with coherent inverse $v:D\\to I$ and unit $\\eta:1_I\\simeq vu$. For a $\\kappa$-small simplicial set $K$ and diagram $q:K\\to I$, filteredness of $D$ gives a cocone on $uq$. Applying $v$ gives a cocone on $vuq$; precomposing its legs with $\\eta q$ gives a coherent cocone on the original diagram $q$. Thus $I$ is $\\kappa$-filtered. Write $S:D\\to\\operatorname{Fun}(N(A),C_0)$ for the source functor. Restrict the tautological cocone along $u$, giving its specified apex $F$ and source $Su$. For each testing target, restriction along $u$ induces an equivalence of cocone spaces: reindexing along $v$ and whiskering with the unit and counit give an inverse. The mapping-space colimit criterion therefore shows that this reindexed cocone and each of its evaluations remain colimiting. Compose the source functor $I\\to\\operatorname{Fun}(N(A),C_0)$ with postcomposition by the quasi-inverse $h:C_0\\to C$ from Step 1. This defines $G:I\\to\\operatorname{Fun}(N(A),C)$. The coherent natural equivalence $jh\\simeq1_{C_0}$, whiskered with the source functor, composes with the tautological transformation to give $j_*G\\to\\Delta_I F$. Its evaluation cocones differ from those of Step 8 by this natural equivalence. Mapping-space equivalences and the colimit criterion show that they remain colimiting, with their prescribed apex $F(a)$. This constructs the same filtered index, all arrows and all higher compatibility simplices required in the statement.",
+   "text": "Choose a small quasicategory $I$ and an equivalence $u:I\\to D$, with coherent inverse $v:D\\to I$ and unit $\\eta:1_I\\simeq vu$. For a $\\kappa$-small simplicial set $K$ and diagram $q:K\\to I$, filteredness of $D$ gives a cocone on $uq$. Applying $v$ gives a cocone on $vuq$; precomposing its legs with $\\eta q$ gives a coherent cocone on the original diagram $q$. Thus $I$ is $\\kappa$-filtered. Write $S:D\\to\\operatorname{Fun}(N(A),C_0)$ for the source functor. Restrict the tautological cocone along $u$, giving its specified apex $F$ and source $Su$. For each testing target, restriction along $u$ induces an equivalence of cocone spaces: reindexing along $v$ and whiskering with the unit and counit give an inverse. The mapping-space colimit criterion therefore shows that this reindexed cocone and each of its evaluations remain colimiting. Compose the source functor $I\\to\\operatorname{Fun}(N(A),C_0)$ with postcomposition by the quasi-inverse $h:C_0\\to C$ from Step 1. This defines $G:I\\to\\operatorname{Fun}(N(A),C)$. The coherent natural equivalence $jh\\simeq1_{C_0}$, whiskered with the source functor, composes with the tautological transformation to give $j_*G\\to\\Delta_I F$. Its evaluation cocones differ from those of Step 11 by this natural equivalence. Mapping-space equivalences and the colimit criterion show that they remain colimiting, with their prescribed apex $F(a)$. This constructs the same filtered index, all arrows and all higher compatibility simplices required in the statement.",
    "uses": [
     "lem-coef-infinity-full-essential-image",
     "lem-cbc-enhanced-functor-cone-calculus",
@@ -176,14 +212,15 @@
   "lem-coef-filtered-poset-cone-test",
   "lem-coef-initial-poset-slice-restriction",
   "lem-coef-space-transport-classification",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-poset-relative-vertex-insertion",
   "lem-coef-infinity-coslice-colimit-formula",
-  "lem-coef-infinity-cofinal-comma-criterion",
-  "lem-cbc-enhanced-functor-cone-calculus"
+  "lem-coef-infinity-cofinal-comma-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-  "place": "Proposition 5.3.5.15, proof (a)-(b), printed pp.410-411, read online. HTT is not archived in literature/; canonical-slice and relative-comma arguments expanded by Q90."
+  "place": "Proposition 5.3.5.15, proof (a)-(b), printed pp.410-411, read online. HTT is not archived in literature/; canonical-slice and relative-comma arguments expanded by Q90. Q87 repair extracts the distinguished-vertex relative extension as a statement-only node and uses existing comma, comparison and slice-lifting statements for the other parts of former Step 7."
  },
  "mathlib_searches": [
   {
@@ -293,7 +330,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ind-kappa-presentability",
@@ -306,8 +343,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-ind-finite-poset-realization",
   "worker": "stage1",
-  "summary": "Kept the statement. Proved canonical representable-slice density and filteredness inside the proof, then performed the finite-poset vertex induction and wrote out its relative comma variant. Added only the general poset filteredness test and initial-vertex join-slice restriction as statement-only lemmas, with actual logged Mathlib searches and no matches. Checked smallness, empty shapes, exact boundary data, all cited statements and absence of dependency cycles.",
-  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction: auxiliary presentable-category infrastructure reached through the retained finite-adjunction-realization, enrichment, presentable-adjoint and saturated-arrow ancestry. The Ind argument is a supporting HTT lemma, not text explicitly in that blueprint paragraph. Supporting finite-poset diagram realization for the Ind construction, used to construct pushouts; HTT Proposition 5.3.5.15. Steps 1-3 provide the canonical slices, Steps 4-7 realize the auxiliary HTT finite-poset construction, and Steps 8-9 yield its simultaneous realization. This is supporting infrastructure for the retained derived-adjunction ancestry; it does not replace the unit route.",
+  "summary": "Q87 repair of the returned 3292-character Step 7. Kept the statement, stmt_deps and Lean record unchanged, retained original Steps 1-6 and the last two arguments, and replaced Step 7 by four short steps. The non-elementary distinguished-vertex extension is now lem-coef-poset-relative-vertex-insertion; the comma model/smallness and model comparison cite existing nodes, and the earlier/later vertices retain the original lower-link induction. All new searches were actually run and read; the new node is statement-only and has no Mathlib match.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction: auxiliary presentable-category infrastructure reached through the retained finite-adjunction-realization, enrichment, presentable-adjoint and saturated-arrow ancestry. The Ind argument is a supporting HTT lemma, not text explicitly in that blueprint paragraph. Supporting finite-poset diagram realization for the Ind construction, used to construct pushouts; HTT Proposition 5.3.5.15. Steps 1-3 provide the canonical slices, Steps 4-7 realize the auxiliary HTT finite-poset construction, and Steps 8-9 yield its simultaneous realization. This is supporting infrastructure for the retained derived-adjunction ancestry; it does not replace the unit route. Q87 repair: former Step 7 is now Steps 7-10; the new local insertion supplies only the distinguished-vertex extension, and Steps 11-12 are the retained cofinality and extraction arguments.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -321,10 +358,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q90-ea47ee218",
-  "group": "Q90",
+  "reviewer": "NT-cc-Q87-833408528",
+  "group": "Q87",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-ea47ee218 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, both new nodes and every cited statement in full. HTT is not in literature/, so I checked the online-sourced, agent-written proof (with its WANTED line) against my own knowledge of HTT 5.3.5.15, 5.3.1.12 and 2.1.2.5. The item statement is unchanged against the side DAG and matches HTT 5.3.5.15 essential surjectivity: finite poset A, infinite regular kappa including aleph-0, no colimits in C. Steps 1, 3, 4, 8 and 9 use only what the cited statements say. I checked the product-order links in Step 5 myself: the lower link is A<=a x B together with A<a x {inf}, the upper link is A>=a x {inf'}, M lies entirely below T, and the nerve splits as stated. Step 6 is right on chain counts and on the empty B case. Step 7 is right on comma orientation, the vertex z (its successors in M are exactly {a} x B) and preservation of the a-row. The new node lem-coef-filtered-poset-cone-test is true (HTT Remark 5.3.1.12) and is neither a duplicate nor a restatement. The new node lem-coef-initial-poset-slice-restriction is true: the least-element inclusion is left anodyne and restricting the source to E0 is a base change. It is not a duplicate; I compared it with initial-evaluation-trivial-fibration, slice-right-fibration and marked-initial-vertex. Small cases checked: B empty, T a point, E0 empty, kappa = aleph-0. FIX (C5): Step 2 re-proved the statement of the existing same-unit node lem-coef-infinity-presheaf-representable-slice-density. I rewrote Step 2 to cite it, together with slice-right-fibration for the quasicategory claim, and dropped coherent-nerve-comparison from proof_deps because only the old Step 2 used it. The closure has 452 nodes and no cycle; in the side DAG the density node's closure contains neither the item nor its parent. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, generic, for Step 9. No node dropped, no statement changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-833408528 (reviewer sub-agent of L); spot-checked: I read in full the item, its new Steps 7-10, the renumbered Steps 11-12 and the new node lem-coef-poset-relative-vertex-insertion, together with the statements of every node those steps cite. HTT 5.3.5.15 is not archived, so the node keeps proof_origin=agent and the report carries the WANTED line; I checked the argument against HTT's proof of (b) as I know it. I proved the new node myself. Since L is an order ideal and a is minimal in its complement, the lower link of (a,inf) is M=A_{<=a}xB u A_{<a}x{inf} and the upper link is A_{>=a}x{inf'}. Adding z below {a}xB gives N(M+z) as the pushout of N(M) and N(B^<|) over N({a}xB). The poset-cone test in R gives a cocone, which lifts through the trivial fibration of initial-poset-slice-restriction with N(M) fixed. Restricting gives beta' with exact restrictions to beta and rho_{U'}. The node is true. I tested it on B empty, L empty, A={a}, kappa=aleph0 and E0 empty. It is self-contained, has three kinds of recorded Mathlib search, is not a duplicate (rg over dag/nodes; nearest candidates read) and does not restate a clause of the item. Step 7: the comma is a pullback of the source-fixed arrow left fibration, which gives a quasicategory and essential smallness. Step 8: the fixed-vertex and fixed-boundary join/cone comparison turns the comma data into beta with B boundary rho_{U_0}. Step 9: the predecessors of a in the linear extension form an order ideal with a minimal in the complement, and row a is unchanged. Step 10: the later insertions fix row a and beta'. proof_deps equals the union of the uses lists; the route is in the unit apart from the already-accepted tool use lem-cbc-enhanced-functor-cone-calculus; no cycle, no SGA, statement unchanged. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.IndFinitePosetRealization",
