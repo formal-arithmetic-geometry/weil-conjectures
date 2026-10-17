@@ -66,10 +66,10 @@ lemma exact_map_presheafToSheaf_of_isLocallySurjective_toCycles
 
 variable [∀ X, AddCommGroup (CA X)] [(forget A).PreservesMonomorphisms]
 
-/-- If every cycle of a short complex of presheaves is locally a boundary, then
-`S.toCycles` is locally surjective. -/
 omit [HasSheafify J A] [J.WEqualsLocallyBijective A] [J.HasSheafCompose (forget A)]
   [(presheafToSheaf J A).PreservesHomology] in
+/-- If every cycle of a short complex of presheaves is locally a boundary, then
+`S.toCycles` is locally surjective. -/
 lemma isLocallySurjective_toCycles_of_imageSieve_mem (S : ShortComplex (Cᵒᵖ ⥤ A))
     (hsub : ∀ {X Y : A} (f g : X ⟶ Y) (x : ToType X), (f - g) x = f x - g x)
     (hS : ∀ (U : C) (x : ToType (S.X₂.obj (op U))), S.g.app (op U) x = 0 →

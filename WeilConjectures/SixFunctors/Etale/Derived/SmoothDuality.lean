@@ -8,6 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLine
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 
@@ -32,10 +33,18 @@ of `Rf^!` commutes with arbitrary base change.
 
 ## Implementation notes
 
-The blueprint states `thm-asd-smooth-tensor` for a Noetherian base; its proof, through the
-étale local normal form `fu = p_d e` of a smooth morphism and the adjunctions for étale
-morphisms and for the affine-space projections, does not use it, and the statement here is made
-for an arbitrary base, as everywhere in `WeilConjectures.SixFunctors.Etale.Derived`. The
+The proof follows the blueprint: by the étale local normal form `fu = p_d e` of a smooth
+morphism, smooth duality reduces to étale morphisms and to the affine line
+(`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine`). Étale
+morphisms are treated in `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale`
+(`AlgebraicGeometry.Etale.etaleSmoothDuality`), the affine line, through the projective-line
+adjunction `thm-amb-p1-adjunction` with its trace counit, in
+`WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLine`
+(`AlgebraicGeometry.Etale.affineLineSmoothDuality`).
+
+The blueprint states `thm-asd-smooth-tensor` for a Noetherian base; the statement here is made
+for an arbitrary base, as everywhere in `WeilConjectures.SixFunctors.Etale.Derived` (the
+projective-line adjunction is stated over an arbitrary base as well). The
 canonical tensor morphism is `AlgebraicGeometry.Etale.dualizingComplexTensorMap`, with the
 tensor factors in the order `ω_f ⊗ᴸ Lf^* K` of the projection formula.
 
@@ -85,7 +94,8 @@ theorem exists_dualizingComplex_iso_and_tensor :
         ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * d : ℤ)⟧) ∧
       ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         IsIso (dualizingComplexTensorMap Λ f K) :=
-  sorry
+  exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine (etaleSmoothDuality Λ)
+    (affineLineSmoothDuality Λ) f d
 
 include d in
 /-- The tensor formula of `thm-asd-smooth-tensor` with the factors in the other order:

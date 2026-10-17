@@ -87,6 +87,48 @@ theorem height_comap_of_isIntegral [Algebra.HasGoingDown R S] (P : PrimeSpectrum
 
 end Integral
 
+section Quotient
+
+variable {R : Type*} [CommRing R] {I : Ideal R}
+
+variable (I) in
+/-- The primes of `R ⧸ I` are the primes of `R` containing `I`, compatibly with inclusion. -/
+theorem strictMono_comap_quotient_mk : StrictMono (comap (Ideal.Quotient.mk I)) :=
+  fun x y h ↦ by
+    refine lt_of_le_of_ne (Ideal.comap_mono h.le) fun e ↦ h.ne ?_
+    ext1
+    exact Ideal.comap_injective_of_surjective _ Ideal.Quotient.mk_surjective
+      (congrArg PrimeSpectrum.asIdeal e)
+
+theorem lt_of_comap_quotient_mk_lt {a a' : PrimeSpectrum (R ⧸ I)}
+    (h : comap (Ideal.Quotient.mk I) a < comap (Ideal.Quotient.mk I) a') : a < a' :=
+  lt_of_le_of_ne ((Ideal.comap_le_comap_iff_of_surjective _ Ideal.Quotient.mk_surjective _ _).1
+    h.le) fun e ↦ h.ne (by rw [e])
+
+theorem le_comap_quotient_mk (a : PrimeSpectrum (R ⧸ I)) :
+    I ≤ (comap (Ideal.Quotient.mk I) a).asIdeal := fun x hx ↦ by
+  change Ideal.Quotient.mk I x ∈ a.asIdeal
+  rw [Ideal.Quotient.eq_zero_iff_mem.2 hx]
+  exact zero_mem _
+
+theorem exists_comap_quotient_mk_eq {b : PrimeSpectrum R} (hb : I ≤ b.asIdeal) :
+    ∃ a : PrimeSpectrum (R ⧸ I), comap (Ideal.Quotient.mk I) a = b :=
+  ⟨⟨b.asIdeal.map (Ideal.Quotient.mk I), Ideal.map_isPrime_of_surjective
+    Ideal.Quotient.mk_surjective (by simpa using hb)⟩, by
+    ext1
+    change Ideal.comap _ (Ideal.map _ _) = _
+    rw [Ideal.comap_map_of_surjective _ Ideal.Quotient.mk_surjective, ← RingHom.ker_eq_comap_bot,
+      Ideal.mk_ker, sup_eq_left.2 hb]⟩
+
+/-- The coheight of a prime of `R ⧸ I` is the coheight of the corresponding prime of `R`. -/
+theorem coheight_comap_quotient_mk (a : PrimeSpectrum (R ⧸ I)) :
+    coheight (comap (Ideal.Quotient.mk I) a) = coheight a := by
+  refine (coheight_eq_of_strictMono _ (strictMono_comap_quotient_mk I) (fun a b hab ↦ ?_) a).symm
+  obtain ⟨a', rfl⟩ := exists_comap_quotient_mk_eq ((le_comap_quotient_mk a).trans hab.le)
+  exact ⟨a', lt_of_comap_quotient_mk_lt hab, rfl⟩
+
+end Quotient
+
 end PrimeSpectrum
 
 section FiniteType
@@ -100,7 +142,7 @@ theorem exists_ringKrullDim_eq_natCast_of_finiteType (B : Type*) [CommRing B] [N
   rcases hB : ringKrullDim B with _ | _ | n
   · have := ringKrullDim_nonneg_of_nontrivial (R := B)
     rw [hB] at this
-    exact absurd this (by simp)
+    exact absurd this (not_le.2 (WithBot.bot_lt_coe _))
   · exact absurd hB h
   · exact ⟨n, rfl⟩
 
@@ -244,49 +286,97 @@ theorem PrimeSpectrum.height_add_coheight_eq_of_finiteType :
     rw [← PrimeSpectrum.coheight_eq_ringKrullDim_quotient Q, hQm]
     rfl
   let f : PrimeSpectrum (B ⧸ q) → PrimeSpectrum B := comap (Ideal.Quotient.mk q)
-  have hf : StrictMono f := fun x y h ↦ by
-    refine lt_of_le_of_ne (Ideal.comap_mono h.le) fun e ↦ h.ne ?_
-    ext1
-    exact Ideal.comap_injective_of_surjective _ Ideal.Quotient.mk_surjective e
-  have hsurj : ∀ b : PrimeSpectrum B, q ≤ b.asIdeal → ∃ a, f a = b := fun b hb ↦
-    ⟨⟨b.asIdeal.map (Ideal.Quotient.mk q), Ideal.map_isPrime_of_surjective
-      Ideal.Quotient.mk_surjective (by simpa using hb)⟩, by
-      ext1
-      change Ideal.comap _ (Ideal.map _ _) = _
-      rw [Ideal.comap_map_of_surjective _ Ideal.Quotient.mk_surjective, ← RingHom.ker_eq_comap_bot,
-        Ideal.mk_ker, sup_eq_left.2 hb]⟩
-  obtain ⟨p', hp'⟩ := hsurj p hqp
-  have hco : coheight p' = coheight p := by
-    rw [← hp']
-    refine coheight_eq_of_strictMono f hf (fun a b hab ↦ ?_) p'
-    obtain ⟨a', rfl⟩ := hsurj b ((show q ≤ (f a).asIdeal from fun x hx ↦ by
-      change Ideal.Quotient.mk q x ∈ a.asIdeal
-      rw [Ideal.Quotient.eq_zero_iff_mem.2 hx]
-      exact zero_mem _).trans hab.le)
-    exact ⟨a', hf.lt_iff_lt.1 hab, rfl⟩
+  have hf : StrictMono f := strictMono_comap_quotient_mk q
+  obtain ⟨p', hp'⟩ := exists_comap_quotient_mk_eq hqp
+  have hco : coheight p' = coheight p := hp' ▸ (coheight_comap_quotient_mk p').symm
   have hht : height p' + 1 ≤ height p := by
     have hfin : height p' ≠ ⊤ := by
       have := height_le_krullDim p'
       rw [← ringKrullDim, hBq] at this
-      exact fun h ↦ by simp [h] at this
+      have : height p' ≤ (m : ℕ∞) := by exact_mod_cast this
+      exact ne_top_of_le_ne_top (ENat.natCast_ne_top m) this
     obtain ⟨k, hk⟩ := WithTop.ne_top_iff_exists.1 hfin
     obtain ⟨l, hlast, hlen⟩ := exists_series_of_height_eq_coe p' hk.symm
     have hlt : (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum B) < f l.head := by
-      refine lt_of_le_of_ne (show (⊥ : Ideal B) ≤ (f l.head).asIdeal from bot_le) fun e ↦ hq0 (le_bot_iff.1 ?_)
+      refine lt_of_le_of_ne (show (⊥ : Ideal B) ≤ (f l.head).asIdeal from bot_le)
+        fun e ↦ hq0 (le_bot_iff.1 ?_)
       rw [show (⊥ : Ideal B) = (f l.head).asIdeal from congrArg PrimeSpectrum.asIdeal e]
-      intro x hx
-      change Ideal.Quotient.mk q x ∈ l.head.asIdeal
-      rw [Ideal.Quotient.eq_zero_iff_mem.2 hx]
-      exact zero_mem _
+      exact PrimeSpectrum.le_comap_quotient_mk _
     let L := (l.map f hf).cons _ hlt
     have := length_le_height_last (p := L)
     rw [RelSeries.cons_length, LTSeries.map_length, hlen] at this
     rw [← hk]
-    simpa [L, RelSeries.last_cons, LTSeries.last_map, hlast, hp'] using this
+    simpa [L, f, RelSeries.last_cons, LTSeries.last_map, hlast, hp'] using this
   have ih' := ih m (by omega) hBq p'
   refine le_antisymm hle' ?_
-  rw [← hco, ← ih', Nat.cast_add, Nat.cast_one]
-  calc height p' + coheight p' + 1 = height p' + 1 + coheight p' := by ring
-    _ ≤ height p + coheight p' := by gcongr
+  calc ((m + 1 : ℕ) : ℕ∞) = height p' + coheight p' + 1 := by rw [ih']; push_cast; rfl
+    _ = height p' + 1 + coheight p' := by ring
+    _ ≤ height p + coheight p := by rw [hco]; gcongr
+
+
+/-- In a finitely generated algebra `A` over a field, primes `q ≤ p` satisfy
+`dim (A ⧸ q) ≤ ht p + dim (A ⧸ p)`: in the domain `A ⧸ q` the image of `p` has height plus
+coheight `dim (A ⧸ q)`. -/
+theorem PrimeSpectrum.coheight_le_height_add_coheight_of_finiteType {A : Type*} [CommRing A]
+    [Algebra K A] [Algebra.FiniteType K A] {q p : PrimeSpectrum A} (hqp : q ≤ p) :
+    coheight q ≤ height p + coheight p := by
+  obtain ⟨m, hm⟩ := exists_ringKrullDim_eq_natCast_of_finiteType K (A ⧸ q.asIdeal)
+  obtain ⟨p', hp'⟩ := exists_comap_quotient_mk_eq (I := q.asIdeal) (b := p) hqp
+  have h := height_add_coheight_eq_of_finiteType (K := K) m hm p'
+  have hq : coheight q = m := by
+    have := coheight_eq_ringKrullDim_quotient q
+    rw [hm] at this
+    exact_mod_cast this
+  rw [hq, ← h, ← hp', coheight_comap_quotient_mk]
+  gcongr
+  exact height_le_height_apply_of_strictMono _ (strictMono_comap_quotient_mk _) p'
+
+/-- Let `A` be a finitely generated algebra over a field, `p` a prime of `A`, and `g ∈ A` such
+that every minimal prime of `A` not containing `g` is contained in `p`. Then
+`dim A[1/g] ≤ ht p + dim (A ⧸ p)`. -/
+theorem ringKrullDim_localization_away_le_of_finiteType {A : Type*} [CommRing A] [Algebra K A]
+    [Algebra.FiniteType K A] (p : PrimeSpectrum A) {g : A}
+    (hg : ∀ q ∈ minimalPrimes A, g ∉ q → q ≤ p.asIdeal) :
+    ringKrullDim (Localization.Away g) ≤ ((height p + coheight p : ℕ∞) : WithBot ℕ∞) := by
+  let c : PrimeSpectrum (Localization.Away g) → PrimeSpectrum A :=
+    PrimeSpectrum.comap (algebraMap A _)
+  have hc : StrictMono c := Monotone.strictMono_of_injective (fun _ _ h ↦ Ideal.comap_mono h)
+    (PrimeSpectrum.localization_comap_injective _ (Submonoid.powers g))
+  refine iSup_le fun L ↦ ?_
+  have hgL : g ∉ (c L.head).asIdeal := fun h ↦ L.head.2.ne_top
+    (Ideal.eq_top_of_isUnit_mem _ h (IsLocalization.Away.algebraMap_isUnit g))
+  obtain ⟨q, hq, hqL⟩ := Ideal.exists_minimalPrimes_le (bot_le : ⊥ ≤ (c L.head).asIdeal)
+  have hqprime : q.IsPrime := hq.1.1
+  have hqp := hg q hq fun h ↦ hgL (hqL h)
+  calc (L.length : WithBot ℕ∞) = ((L.map c hc).length : ℕ∞) := by simp
+    _ ≤ (coheight (L.map c hc).head : WithBot ℕ∞) := by
+      exact_mod_cast length_le_coheight_head
+    _ ≤ (coheight (⟨q, hqprime⟩ : PrimeSpectrum A) : WithBot ℕ∞) := by
+      exact_mod_cast coheight_anti (show (⟨q, hqprime⟩ : PrimeSpectrum A) ≤ (L.map c hc).head
+        by rw [LTSeries.head_map]; exact hqL)
+    _ ≤ _ := by
+      exact_mod_cast PrimeSpectrum.coheight_le_height_add_coheight_of_finiteType (K := K)
+        (show (⟨q, hqprime⟩ : PrimeSpectrum A) ≤ p from hqp)
+
+/-- In a noetherian ring `A`, every prime `p` admits `g ∉ p` such that every minimal prime of `A`
+not containing `g` is contained in `p`: take for `g` a product of elements of the finitely many
+minimal primes not contained in `p`, chosen outside `p`. -/
+theorem exists_notMem_forall_minimalPrimes_le {A : Type*} [CommRing A] [IsNoetherianRing A]
+    (p : Ideal A) [p.IsPrime] :
+    ∃ g ∉ p, ∀ q ∈ minimalPrimes A, g ∉ q → q ≤ p := by
+  classical
+  have hfin : {q ∈ minimalPrimes A | ¬ q ≤ p}.Finite :=
+    (minimalPrimes.finite_of_isNoetherianRing A).subset (Set.sep_subset _ _)
+  have : ∀ q ∈ {q ∈ minimalPrimes A | ¬ q ≤ p}, ∃ x ∈ q, x ∉ p := fun q hq ↦
+    Set.not_subset.1 hq.2
+  choose! s hs using this
+  refine ⟨∏ q ∈ hfin.toFinset, s q, ?_, fun q hq hg ↦ ?_⟩
+  · rw [Ideal.IsPrime.prod_mem_iff]
+    rintro ⟨q, hq, hmem⟩
+    exact (hs q (hfin.mem_toFinset.1 hq)).2 hmem
+  · by_contra hle
+    have hqS : q ∈ hfin.toFinset := hfin.mem_toFinset.2 ⟨hq, hle⟩
+    obtain ⟨c, hc⟩ := Finset.dvd_prod_of_mem s hqS
+    exact hg (hc ▸ Ideal.mul_mem_right _ _ (hs q (hfin.mem_toFinset.1 hqS)).1)
 
 end FiniteType

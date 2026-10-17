@@ -153,12 +153,14 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : 
 
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-etale locality, without derived descent
 
-*Étale morphisms.* Every étale morphism `e : X ⟶ Y` is cohomologically smooth, with trivial
-dualizing complex `ω_e = Re^! Λ_Y ≅ Λ_X`. -/
+*Étale morphisms.* Every étale morphism `e : X ⟶ Y` admitting a compactification, with the
+exponent of `Λ` invertible on `X` (the purity conventions), is cohomologically smooth, with
+trivial dualizing complex `ω_e = Re^! Λ_Y ≅ Λ_X`
+(`AlgebraicGeometry.Etale.nonempty_dualizingComplex_iso_of_etale`). -/
 theorem nonempty_dualizingComplex_iso_constantComplex_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
-    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] :
+    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ X] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ constantComplex Λ X) :=
-  sorry
+  nonempty_dualizingComplex_iso_of_etale e
 
 /-- For `e : X ⟶ Y` étale and `K ∈ D^b_{ctf}(Y, Λ)`, the exceptional inverse image is the
 ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of `sk-prop-cohsm` (b) for `e`,

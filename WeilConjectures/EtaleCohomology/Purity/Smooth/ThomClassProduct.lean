@@ -427,8 +427,10 @@ lemma exists_iso_forget_restrictSupportedClass
     dsimp only
     rw [supportedRestrictionMap_comp_map_supportedTranspose, ← Category.assoc, hσ]
     simp only [v, restrictSupportedClass, Category.assoc, ← Functor.map_comp_assoc, hβ']
-  rw [key]
-  simp only [Category.assoc, Functor.map_comp, hψ]
+  rw [key, Category.assoc, Category.assoc]
+  erw [hψ]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
 
 end Restriction
 
@@ -437,6 +439,8 @@ section Product
 variable [Finite Λ] {U Z₁ Z₂ Z : Scheme.{u}} (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
   [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
 
+set_option maxHeartbeats 1000000 in
+-- the kernel rechecks the defeqs of the transport along the projection formula
 /-- **The cup product of Thom classes.** Let `i₁ : Z₁ ⟶ U`, `i₂ : Z₂ ⟶ U` be closed immersions
 meeting in `i : Z ⟶ U` (with `Z ⊆ Z₁` and `Z ⊆ Z₂` scheme-theoretically), `b : Z' ⟶ Z₁` the
 base change of `i₂` along `i₁`, and let `α ∈ H_{Z₁}(U, L₁)`, `β ∈ H_{Z₂}(U, L₂)` be classes with
@@ -601,12 +605,24 @@ theorem isIso_supportedTranspose_cupWithSupports
     let θ := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i₁
     let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i₁
     let lZ := derivedTensorLeftUnitorNatIso (ModuleCat.{u + 1} Λ) Z₁
+    -- the isomorphism `ν : E₁ ⊗ X ≅ Ri₁_* Li₁^* X`, natural in `X`
+    let ν : (derivedTensor (ModuleCat.{u + 1} Λ) U).obj
+        ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁)) ⟶
+          L((i₁)^*[ModuleCat.{u + 1} Λ]) ⋙ R((i₁)_*[ModuleCat.{u + 1} Λ]) :=
+      PF ≫ Functor.whiskerLeft L((i₁)^*[ModuleCat.{u + 1} Λ])
+          (Functor.whiskerRight lZ.hom R(i₁)_![ModuleCat.{u + 1} Λ]) ≫
+        Functor.whiskerLeft L((i₁)^*[ModuleCat.{u + 1} Λ]) θ.hom
+    have hνi : ∀ X, IsIso (ν.app X) := fun X ↦ by
+      dsimp only [ν, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+      infer_instance
     let Φ : ∀ X, (S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
         ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj X) ≃
         ((L((i₁)^*[ModuleCat.{u + 1} Λ])).obj S ⟶ (L((i₁)^*[ModuleCat.{u + 1} Λ])).obj X) :=
-      fun X ↦ ((Iso.refl S).homCongr (asIso (PF.app X) ≪≫
-        (R(i₁)_![ModuleCat.{u + 1} Λ]).mapIso (lZ.app _) ≪≫ θ.app _)).trans
-          (adj.homEquiv _ _).symm
+      fun X ↦
+        { toFun := fun f ↦ (adj.homEquiv _ _).symm (f ≫ ν.app X)
+          invFun := fun g ↦ adj.homEquiv _ _ g ≫ inv (ν.app X)
+          left_inv := fun f ↦ by simp
+          right_inv := fun g ↦ by simp }
     have hΦ : ∀ (f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
         ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj
           ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂))),
@@ -614,18 +630,12 @@ theorem isIso_supportedTranspose_cupWithSupports
           ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).map χ₂) =
           Φ _ f ≫ (L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂ := by
       intro f
-      have n₁ := PF.naturality χ₂
-      have n₂ := lZ.hom.naturality ((L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂)
-      have n₃ := θ.hom.naturality ((L((i₁)^*[ModuleCat.{u + 1} Λ])).map χ₂)
-      simp only [Φ, Equiv.trans_apply, Iso.homCongr_apply, Iso.refl_inv, Category.id_comp,
-        Iso.trans_hom, asIso_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc]
-      rw [← Adjunction.homEquiv_naturality_right_symm]
-      congr 1
-      dsimp only [Functor.id_obj, Functor.id_map] at n₂
-      erw [reassoc_of% n₁]
-      rw [← Functor.map_comp_assoc]
-      erw [n₂]
-      rw [Functor.map_comp_assoc, n₃]
+      change (adj.homEquiv _ _).symm ((f ≫ _) ≫ ν.app L₂) =
+        (adj.homEquiv _ _).symm (f ≫ ν.app _) ≫ _
+      rw [← Adjunction.homEquiv_naturality_right_symm, Category.assoc]
+      erw [ν.naturality χ₂]
+      rw [Category.assoc]
+      rfl
     have : (fun f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
           ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj
             ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂)) ↦
@@ -641,8 +651,10 @@ theorem isIso_supportedTranspose_cupWithSupports
       (fun f : S ⟶ ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj
           ((R(i₁)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₁))).obj
             ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂)) ↦ f ≫ Q) :=
-    fun S hS ↦ bijective_comp_of_bijective_comp_comp (by simpa only [hQε] using
-      bijective_comp_comp (h₂ S hS) (h₁ S hS)) (bijective_comp_counit Λ i hS _)
+    fun S hS ↦ by
+      have h := bijective_comp_comp (h₂ S hS) (h₁ S hS)
+      rw [← hQε] at h
+      exact bijective_comp_of_bijective_comp_comp h (bijective_comp_counit Λ i hS _)
   exact isIso_of_bijective_comp_right _ (hbQ _ (isSupported_rightDerivedLowerShriek Λ i _)).2
     (hbQ _ hT).1
 

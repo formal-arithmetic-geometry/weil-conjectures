@@ -40,11 +40,13 @@ open ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
-local notation "𝐒" => Spec (CommRingCat.of k₀)
+
 
 section Forget
 
-variable {U W : Scheme.{u}} [U.Over 𝐒] [W.Over 𝐒] (a : U ⟶ W) [IsOpenImmersion a] [a.IsOver 𝐒]
+variable {U W : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
+  [W.Over (Spec (CommRingCat.of k₀))] (a : U ⟶ W) [IsOpenImmersion a]
+  [a.IsOver (Spec (CommRingCat.of k₀))]
 
 variable (k₀ l) in
 /-- Forgetting the Weil structure commutes with the extension by zero `a_!` on the derived
@@ -53,23 +55,29 @@ noncomputable def ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroCompForgetI
     (ProEtaleWeilSheaf.extensionByZero k₀ l a).mapDerivedCategory ⋙
         (IsoAlgebra.forget _).mapDerivedCategory ≅
       (IsoAlgebra.forget _).mapDerivedCategory ⋙
-        ((Scheme.Hom.geometricFiberMap a (comp_over a 𝐒))_!ᵃ[l]).mapDerivedCategory :=
+        (adicOpenImmersionLowerShriek l (Scheme.Hom.geometricFiberMap a
+          (comp_over a (Spec (CommRingCat.of k₀))))).mapDerivedCategory :=
   (Functor.mapDerivedCategoryCompIso (ProEtaleWeilSheaf.extensionByZero k₀ l a)
       (IsoAlgebra.forget _)).symm ≪≫
     Functor.mapDerivedCategoryNatIso
       (Iso.refl (ProEtaleWeilSheaf.extensionByZero k₀ l a ⋙ IsoAlgebra.forget _) :
         ProEtaleWeilSheaf.extensionByZero k₀ l a ⋙ IsoAlgebra.forget _ ≅
-          IsoAlgebra.forget _ ⋙ (Scheme.Hom.geometricFiberMap a (comp_over a 𝐒))_!ᵃ[l]) ≪≫
+          IsoAlgebra.forget _ ⋙ adicOpenImmersionLowerShriek l
+            (Scheme.Hom.geometricFiberMap a (comp_over a (Spec (CommRingCat.of k₀))))) ≪≫
     Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
-      ((Scheme.Hom.geometricFiberMap a (comp_over a 𝐒))_!ᵃ[l])
+      (adicOpenImmersionLowerShriek l
+        (Scheme.Hom.geometricFiberMap a (comp_over a (Spec (CommRingCat.of k₀)))))
 
 end Forget
 
 section Compactification
 
 variable [Fact (ringChar k₀ ≠ l)]
-variable {Z U W X : Scheme.{u}} [Z.Over 𝐒] [U.Over 𝐒] [W.Over 𝐒] [X.Over 𝐒]
-  [LocallyOfFiniteType (X ↘ 𝐒)] [QuasiCompact (X ↘ 𝐒)]
+variable {Z U W X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+  [U.Over (Spec (CommRingCat.of k₀))] [W.Over (Spec (CommRingCat.of k₀))]
+  [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- **`i^* Rg_* a_! M = 0`.** Let `U ⟶[a] W ⟶[g] X` be a factorization of an open immersion `j`
 into a quasi-compact open immersion `a` and a proper morphism `g`, and let `i : Z ⟶ X` be a
@@ -79,17 +87,19 @@ closed immersion whose range misses that of `j`. For a Weil complex `M` on `U`,
 direct image of the restriction of `ā_! M̄` to `ḡ⁻¹(Z̄)`, which is zero as `ā(Ū)` lies over `Ū`. -/
 theorem ProEtaleWeilSheaf.isZero_upperStar_rightDerivedLowerStar_extensionByZero
     (j : U ⟶ X) (i : Z ⟶ X) (a : U ⟶ W) (g : W ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
-    [IsOpenImmersion a] [QuasiCompact a] [IsProper g] [j.IsOver 𝐒] [i.IsOver 𝐒] [a.IsOver 𝐒]
-    [g.IsOver 𝐒] (hag : a ≫ g = j) (hij : Disjoint (Set.range j.base) (Set.range i.base))
+    [IsOpenImmersion a] [QuasiCompact a] [IsProper g] [j.IsOver (Spec (CommRingCat.of k₀))]
+    [i.IsOver (Spec (CommRingCat.of k₀))] [a.IsOver (Spec (CommRingCat.of k₀))]
+    [g.IsOver (Spec (CommRingCat.of k₀))] (hag : a ≫ g = j)
+    (hij : Disjoint (Set.range j.base) (Set.range i.base))
     (M : DerivedCategory (ProEtaleWeilSheaf k₀ l U)) (hM : WeilComplex.objectProperty k₀ l U M) :
     IsZero ((ProEtaleWeilSheaf.upperStar k₀ l i).mapDerivedCategory.obj
       ((ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor.obj
         ((ProEtaleWeilSheaf.extensionByZero k₀ l a).mapDerivedCategory.obj M))) := by
   subst hag
   have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (W ↘ 𝐒).geometricFiber) ℤ
+    (ProEtale.AdicSheaf l (W ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
   have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (W ↘ 𝐒).geometricFiber) ℤ
+    (ProEtale.AdicSheaf l (W ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
   let E := (ProEtaleWeilSheaf.extensionByZero k₀ l a).mapDerivedCategory.obj M
   have hE : WeilComplex.objectProperty k₀ l W E :=
     ⟨(ProEtaleWeilSheaf.extensionByZero k₀ l a).bounded_mapDerivedCategory_obj hM.1,
@@ -97,10 +107,11 @@ theorem ProEtaleWeilSheaf.isZero_upperStar_rightDerivedLowerStar_extensionByZero
         (((ProEtaleWeilSheaf.extensionByZero k₀ l a).mapDerivedCategoryHomologyFunctorIso
           n).app M) (WeilSheaf.isAdicConstructibleSheaf_extensionByZero a _ (hM.2 n))⟩
   -- the base changes to the geometric fibers
-  let gb := Scheme.Hom.geometricFiberMap g (comp_over g 𝐒)
-  let ib := Scheme.Hom.geometricFiberMap i (comp_over i 𝐒)
-  let ab := Scheme.Hom.geometricFiberMap a (comp_over a 𝐒)
-  let jb := Scheme.Hom.geometricFiberMap (a ≫ g) (comp_over (a ≫ g) 𝐒)
+  let gb := Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))
+  let ib := Scheme.Hom.geometricFiberMap i (comp_over i (Spec (CommRingCat.of k₀)))
+  let ab := Scheme.Hom.geometricFiberMap a (comp_over a (Spec (CommRingCat.of k₀)))
+  let jb := Scheme.Hom.geometricFiberMap (a ≫ g)
+    (comp_over (a ≫ g) (Spec (CommRingCat.of k₀)))
   have : IsProper gb :=
     Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) g _ inferInstance
   have hsq : IsPullback (pullback.fst gb ib) (pullback.snd gb ib) gb ib :=
@@ -119,16 +130,20 @@ theorem ProEtaleWeilSheaf.isZero_upperStar_rightDerivedLowerStar_extensionByZero
     rw [← hc, hp, hjb, Scheme.Hom.comp_apply]
   refine ProEtaleWeilSheaf.isZero_of_isZero_forget _ ?_
   have hK := (WeilComplex.objectProperty_iff E).1 hE
-  have h₁ : IsZero ((pullback.fst gb ib)^*ᵃ[l].mapDerivedCategory.obj
+  let fb := pullback.fst gb ib
+  have h₁ : IsZero ((adicUpperStar l fb).mapDerivedCategory.obj
       ((IsoAlgebra.forget _).mapDerivedCategory.obj E)) := by
-    refine IsZero.of_iso ?_ ((pullback.fst gb ib)^*ᵃ[l].mapDerivedCategory.mapIso
+    refine IsZero.of_iso ?_ ((adicUpperStar l fb).mapDerivedCategory.mapIso
       ((ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroCompForgetIso k₀ l a).app M))
-    exact (Functor.isZero_mapDerivedCategory_obj ((ab)_!ᵃ[l] ⋙ (pullback.fst gb ib)^*ᵃ[l]) _
+    exact (Functor.isZero_mapDerivedCategory_obj
+      (adicOpenImmersionLowerShriek l ab ⋙ adicUpperStar l fb) _
       fun F ↦ isZero_adicUpperStar_adicOpenImmersionLowerShriek _ _ hdisj F).of_iso
-        (((ab)_!ᵃ[l]).mapDerivedCategoryCompIso ((pullback.fst gb ib)^*ᵃ[l])).symm.app _)
+        (((adicOpenImmersionLowerShriek l ab).mapDerivedCategoryCompIso
+          (adicUpperStar l fb)).symm.app _)
   have h₂ := isZero_adicUpperStar_rightDerivedLowerStar_of_isProper
-    (X ↘ 𝐒).geometricFiberToAlgebraicClosure ringChar_algebraicClosure_ne hsq _ hK h₁
-  have h₃ := h₂.of_iso ((ib)^*ᵃ[l].mapDerivedCategory.mapIso
+    (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure ringChar_algebraicClosure_ne
+    hsq _ hK h₁
+  have h₃ := h₂.of_iso ((adicUpperStar l ib).mapDerivedCategory.mapIso
     ((IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso
       (e := adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _))).app E))
   exact h₃.of_iso ((ProEtaleWeilSheaf.mapDerivedCategoryUpperStarCompForgetIso k₀ l i).app _)
@@ -144,7 +159,8 @@ so `N ≅ j_! j^* N`, and `j^* N ≅ M`. -/
 theorem ProEtaleWeilSheaf.nonempty_rightDerivedLowerStar_extensionByZero_iso
     (j : U ⟶ X) (i : Z ⟶ X) (a : U ⟶ W) (g : W ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     [IsClosedImmersion i] [IsOpenImmersion a] [QuasiCompact a] [IsProper g] [IsNoetherian W]
-    [j.IsOver 𝐒] [i.IsOver 𝐒] [a.IsOver 𝐒] [g.IsOver 𝐒] (hag : a ≫ g = j)
+    [j.IsOver (Spec (CommRingCat.of k₀))] [i.IsOver (Spec (CommRingCat.of k₀))]
+    [a.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))] (hag : a ≫ g = j)
     (hij : IsCompl (Set.range j.base) (Set.range i.base))
     (M : DerivedCategory (ProEtaleWeilSheaf k₀ l U)) (hM : WeilComplex.objectProperty k₀ l U M) :
     Nonempty ((ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor.obj

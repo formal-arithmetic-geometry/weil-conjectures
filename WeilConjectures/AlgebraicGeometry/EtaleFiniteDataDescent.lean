@@ -43,13 +43,33 @@ lemma paths_naturality_of_generators {V : Type*} [Quiver V] {C : Type*} [Categor
   · intro v
     simp
   · intro u v w p q ih
-    rw [F.map_comp, G.map_comp, Category.assoc, h, reassoc_of% ih]
+    rw [F.map_comp, G.map_comp, Category.assoc,
+      show F.map ((Paths.of V).map q) ≫ app ((Paths.of V).obj w) =
+        app ((Paths.of V).obj v) ≫ G.map ((Paths.of V).map q) from h q, reassoc_of% ih]
 
 /-- A morphism between étale schemes over a base is étale. -/
 lemma etale_left_of_etale_hom {S : Scheme.{u}} {U V : Over S} (φ : U ⟶ V) (hU : Etale U.hom)
     (hV : Etale V.hom) : Etale φ.left := by
   have : Etale (φ.left ≫ V.hom) := by rw [Over.w φ]; exact hU
   exact Etale.of_comp φ.left V.hom
+
+/-- A point of the base change of `V` whose projection to `V` lies in the image of `φ : U ⟶ V`
+lies in the image of the base change of `φ`. -/
+lemma exists_overPullback_map_left_eq {S T : Scheme.{u}} (g : T ⟶ S) {U V : Over S}
+    (φ : U ⟶ V) (x : ((Over.pullback g).obj V).left) (z : U.left)
+    (hz : φ.left z = pullback.fst V.hom g x) :
+    ∃ y : ((Over.pullback g).obj U).left, ((Over.pullback g).map φ).left y = x := by
+  have hs : IsPullback (((Over.pullback g).map φ).left ≫ pullback.snd V.hom g)
+      (pullback.fst U.hom g) g (φ.left ≫ V.hom) := by
+    have e1 : ((Over.pullback g).map φ).left ≫ pullback.snd V.hom g =
+        pullback.snd U.hom g := by simp
+    rw [e1, Over.w φ]
+    exact (IsPullback.of_hasPullback U.hom g).flip
+  have houter : IsPullback ((Over.pullback g).map φ).left (pullback.fst U.hom g)
+      (pullback.fst V.hom g) φ.left :=
+    IsPullback.of_right hs (by simp) (IsPullback.of_hasPullback V.hom g).flip
+  obtain ⟨y, hy, -⟩ := Scheme.exists_preimage_of_isPullback houter x z hz.symm
+  exact ⟨y, hy⟩
 
 section General
 
@@ -98,11 +118,15 @@ theorem exists_paths_functor_descent (A : Type v) [Finite A] [Quiver.{v} A]
   have hG₁ : ∀ a, IsQcqsEtale (G₁.obj a) := fun a ↦ (hV a).overPullback _
   let α₁ : G₁ ⋙ Over.pullback (c.π.app k₁) ≅ F :=
     NatIso.ofComponents (fun a ↦ (overPullbackStageIso D c h₁).app (V a) ≪≫ eV a)
-      (fun f ↦ paths_naturality_of_generators _ (fun a b e ↦ by
-        have := hφ ⟨a, b, e⟩
-        simp only [Functor.comp_map, G₁, Paths.lift_toPath, Iso.trans_hom, Iso.app_hom]
-        rw [reassoc_of% this]
-        simp [ψ]) f)
+      (fun f ↦ paths_naturality_of_generators (F := G₁ ⋙ Over.pullback (c.π.app k₁))
+        (G := F) (fun a ↦ ((overPullbackStageIso D c h₁).app (V a) ≪≫ eV a).hom)
+        (fun a b e ↦ by
+          have := hφ ⟨a, b, e⟩ =≫ (eV b).hom
+          simp only [Category.assoc] at this
+          simp only [Functor.comp_map, G₁, Paths.of_map, Paths.lift_toPath, Iso.trans_hom,
+            Iso.app_hom]
+          refine this.trans ?_
+          simp [ψ]) f)
   -- descend the relations to a stage `k₂`
   have hrel : ∀ r, (Over.pullback (c.π.app k₁)).map (G₁.map (p r)) =
       (Over.pullback (c.π.app k₁)).map (G₁.map (q r)) := fun r ↦ by
@@ -153,46 +177,38 @@ theorem exists_stage_jointly_surjective {i : J} {ι : Type*} (B : Finset ι) (X 
     rintro _ ⟨x, rfl⟩
     obtain ⟨e, he, y, hy⟩ := hsurj x
     refine Set.mem_iUnion.mpr ⟨⟨e, he⟩, pullback.fst (Y e).hom (c.π.app i) y, ?_⟩
-    have h1 := congrArg (fun φ ↦ φ x) (baseChangeCone_π_app_fst D c X.hom (Over.mk (𝟙 i)))
-    have h2 := congrArg (fun φ ↦ φ y) (pullback.lift_fst
-      (pullback.fst (Y e).hom (c.π.app i) ≫ (f e).left) (pullback.snd (Y e).hom (c.π.app i))
-      (by simp [pullback.condition]))
-    simp only [Scheme.Hom.comp_apply] at h1 h2
-    simp only [Set.mem_preimage, h1]
-    rw [← hy]
-    exact h2.symm
+    have h1 : pullback.fst X.hom (D.map (𝟙 i))
+        ((baseChangeCone D c X.hom).π.app (Over.mk (𝟙 i)) x) =
+          pullback.fst X.hom (c.π.app i) x :=
+      congrArg (fun φ ↦ φ x) (baseChangeCone_π_app_fst D c X.hom (Over.mk (𝟙 i)))
+    have h2 : (f e).left (pullback.fst (Y e).hom (c.π.app i) y) =
+        pullback.fst X.hom (c.π.app i) (((Over.pullback (c.π.app i)).map (f e)).left y) := by
+      have : ((Over.pullback (c.π.app i)).map (f e)).left ≫ pullback.fst X.hom (c.π.app i) =
+          pullback.fst (Y e).hom (c.π.app i) ≫ (f e).left := by simp
+      exact (congrArg (fun φ ↦ φ y) this).symm
+    rw [h1, h2, hy]
   obtain ⟨k, m, hk⟩ := exists_range_subset_of_isConstructible_of_isLimit
     (baseChangeDiagram D X.hom) (baseChangeCone D c X.hom) (isLimitBaseChangeCone D c X.hom hc)
     (Over.mk (𝟙 i)) _ ((pullback.fst X.hom (D.map (𝟙 i))).isConstructible_preimage hE) himage
-  have hstage : ∀ z : pullback X.hom (D.map k.hom), pullback.fst X.hom (D.map k.hom) z ∈ E := by
+  have hstage : ∀ z : (baseChangeDiagram D X.hom).obj k,
+      pullback.fst X.hom (D.map k.hom) z ∈ E := by
     intro z
-    have h1 := congrArg (fun φ ↦ φ z) (baseChangeDiagram_map_fst D X.hom m)
-    simp only [Scheme.Hom.comp_apply] at h1
+    have h1 : pullback.fst X.hom (D.map (𝟙 i)) ((baseChangeDiagram D X.hom).map m z) =
+        pullback.fst X.hom (D.map k.hom) z :=
+      congrArg (fun φ ↦ φ z) (baseChangeDiagram_map_fst D X.hom m)
     have := hk ⟨z, rfl⟩
-    simp only [Set.mem_preimage, h1] at this
+    rw [Set.mem_preimage, h1] at this
     exact this
   refine ⟨k.left, k.hom, fun j h x ↦ ?_⟩
-  set g := D.map (h ≫ k.hom) with hg
-  have hx : pullback.fst X.hom g x ∈ E := by
-    let z := pullback.map X.hom g X.hom (D.map k.hom) (𝟙 _) (D.map h) (𝟙 _) (by simp)
-      (by simp [hg])
-    have h1 := congrArg (fun φ ↦ φ x) (pullback.lift_fst (pullback.fst X.hom g ≫ 𝟙 _)
-      (pullback.snd X.hom g ≫ D.map h) (by simp [hg, pullback.condition]))
-    simp only [Scheme.Hom.comp_apply, Category.comp_id] at h1
-    have := hstage z
-    rw [show pullback.fst X.hom (D.map k.hom) z = pullback.fst X.hom g x from h1] at this
-    exact this
+  let n : Over.mk (h ≫ k.hom) ⟶ k := Over.homMk h
+  have hx : pullback.fst X.hom (D.map (h ≫ k.hom)) x ∈ E := by
+    have h1 : pullback.fst X.hom (D.map k.hom) ((baseChangeDiagram D X.hom).map n x) =
+        pullback.fst X.hom (D.map (h ≫ k.hom)) x :=
+      congrArg (fun φ ↦ φ x) (baseChangeDiagram_map_fst D X.hom n)
+    rw [← h1]
+    exact hstage _
   obtain ⟨⟨e, he⟩, z, hz⟩ := Set.mem_iUnion.mp hx
-  have hs : IsPullback (((Over.pullback g).map (f e)).left ≫ pullback.snd X.hom g)
-      (pullback.fst (Y e).hom g) g ((f e).left ≫ X.hom) := by
-    have e1 : ((Over.pullback g).map (f e)).left ≫ pullback.snd X.hom g =
-        pullback.snd (Y e).hom g := by simp
-    rw [e1, Over.w (f e)]
-    exact (IsPullback.of_hasPullback (Y e).hom g).flip
-  have houter : IsPullback ((Over.pullback g).map (f e)).left (pullback.fst (Y e).hom g)
-      (pullback.fst X.hom g) (f e).left :=
-    IsPullback.of_right hs (by simp) (IsPullback.of_hasPullback X.hom g).flip
-  obtain ⟨y, hy, -⟩ := Scheme.exists_preimage_of_isPullback houter x z hz.symm
+  obtain ⟨y, hy⟩ := exists_overPullback_map_left_eq _ (f e) x z hz
   exact ⟨e, he, y, hy⟩
 
 end General
@@ -300,19 +316,26 @@ theorem etale_finite_data_descent
           ((Over.pullback (c.π.app i)).map (G.map ((Paths.of A).map e.2))).left y = x := by
       intro x
       obtain ⟨e, he, y, hy⟩ := hsurj ((α.hom.app b).left x)
-      refine ⟨e, he, (α.inv.app e.1).left y, ?_⟩
-      have hn := NatIso.naturality_1 α ((Paths.of A).map e.2)
-      simp only [Functor.comp_map] at hn
-      rw [← hn]
-      simp only [Over.comp_left, Scheme.Hom.comp_apply]
-      have h1 := Scheme.inv_hom_apply ((Over.forget _).mapIso (α.app e.1)) y
-      have h2 := Scheme.hom_inv_apply ((Over.forget _).mapIso (α.app b)) x
+      refine ⟨e, he, (α.inv.app ((Paths.of A).obj e.1)).left y, ?_⟩
+      have key := congrArg Over.Hom.left (NatIso.naturality_2 α ((Paths.of A).map e.2))
+      simp only [Functor.comp_map, Over.comp_left] at key
+      refine (congrArg (fun φ ↦ φ ((α.inv.app ((Paths.of A).obj e.1)).left y))
+        key.symm).trans ?_
+      simp only [Scheme.Hom.comp_apply]
+      have h1 :=
+        Scheme.inv_hom_apply ((Over.forget _).mapIso (α.app ((Paths.of A).obj e.1))) y
+      have h2 := Scheme.hom_inv_apply ((Over.forget _).mapIso (α.app ((Paths.of A).obj b))) x
       simp only [Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv,
         Over.forget_map] at h1 h2
-      rw [h1, hy, h2]
+      refine (congrArg (fun w ↦ (α.inv.app ((Paths.of A).obj b)).left
+        ((F.map ((Paths.of A).map e.2)).left w)) h1).trans ?_
+      rw [hy]
+      exact h2
     obtain ⟨i₁, h₁, H⟩ := exists_stage_jointly_surjective D hc B (G.obj b)
-      (fun e ↦ G.obj e.1) (fun e ↦ G.map ((Paths.of A).map e.2)) (hG b) (fun e ↦ hG e.1) hsurj'
+      (fun e ↦ G.obj e.1) (fun e ↦ G.map ((Paths.of A).map e.2)) (hG b) (fun e ↦ hG e.1)
+      hsurj'
     refine ⟨i₁, h₁, fun j h ↦ ⟨fun e _ ↦ ?_, H j h⟩⟩
-    exact etale_left_of_etale_hom _ ((hG e.1).overPullback _).1 ((hG b).overPullback _).1
+    exact etale_left_of_etale_hom _ (IsQcqsEtale.overPullback (hG e.1) _).1
+      (IsQcqsEtale.overPullback (hG b) _).1
 
 end AlgebraicGeometry

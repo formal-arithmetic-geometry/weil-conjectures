@@ -55,7 +55,7 @@ include d in
 /-- Blueprint `prop-asd-smooth-base-change`: Arbitrary base change for smooth ambient duality.
 
 Let `f : X ⟶ Y` be as in `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`
-(`thm-asd-smooth-tensor`) and let `g : Y' ⟶ Y` be arbitrary, with base change `f' : X' ⟶ Y'`
+and let `g : Y' ⟶ Y` be arbitrary, with base change `f' : X' ⟶ Y'`
 and `g' : X' ⟶ X`:
 
 ```
@@ -80,7 +80,7 @@ include d in
 /-- Blueprint `prop-asd-smooth-base-change`: Arbitrary base change for smooth ambient duality.
 
 Let `f : X ⟶ Y` be as in `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`
-(`thm-asd-smooth-tensor`) and let `g : Y' ⟶ Y` be arbitrary, with base change `f' : X' ⟶ Y'`
+and let `g : Y' ⟶ Y` be arbitrary, with base change `f' : X' ⟶ Y'`
 and `g' : X' ⟶ X`:
 
 ```

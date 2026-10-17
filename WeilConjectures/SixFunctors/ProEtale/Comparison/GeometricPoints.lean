@@ -45,15 +45,14 @@ theorem isIso_iff_forall_isIso_mapDerivedCategoryPlus_upperStar_map
     {K L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : K ⟶ L) :
     IsIso φ ↔ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ X),
-      IsIso (((x)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map φ) := by
+      IsIso ((Etale.upperStar (ModuleCat.{u + 1} Λ) x).mapDerivedCategoryPlus.map φ) := by
   refine ⟨fun _ _ _ _ _ ↦ inferInstance, fun h ↦ ?_⟩
   rw [DerivedCategory.Plus.isIso_iff]
   intro n
   refine Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ)
     (fun s : X ↦ X.algClosurePoint s) (fun s ↦ ⟨s, default, by simp⟩) _ fun s ↦ ?_
-  exact (NatIso.isIso_map_iff
-    (((X.algClosurePoint s)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso n)
-      φ).2 (Functor.map_isIso (DerivedCategory.Plus.homologyFunctor _ n) _)
+  exact (NatIso.isIso_map_iff ((Etale.upperStar (ModuleCat.{u + 1} Λ)
+    (X.algClosurePoint s)).mapDerivedCategoryPlusHomologyFunctorIso n) φ).2 (Functor.map_isIso (DerivedCategory.Plus.homologyFunctor _ n) _)
 
 /-- Blueprint `lem-cbc-proetale-stalk-conservative` (3): *complexes of étale origin*.
 
@@ -66,7 +65,7 @@ theorem isIso_mapDerivedCategoryPlus_comparisonUpperStar_map_iff
     (φ : K ⟶ L) :
     IsIso (D+(ν^*(X)[ModuleCat.{u + 1} Λ]).map φ) ↔
       ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ X),
-        IsIso (((x)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map φ) := by
+        IsIso ((Etale.upperStar (ModuleCat.{u + 1} Λ) x).mapDerivedCategoryPlus.map φ) := by
   rw [← isIso_iff_forall_isIso_mapDerivedCategoryPlus_upperStar_map]
   exact ⟨fun _ ↦ isIso_of_fully_faithful D+(ν^*(X)[ModuleCat.{u + 1} Λ]) φ,
     fun _ ↦ inferInstance⟩

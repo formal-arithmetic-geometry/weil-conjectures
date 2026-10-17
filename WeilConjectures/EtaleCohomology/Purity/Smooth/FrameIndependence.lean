@@ -363,22 +363,22 @@ theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix {k : Type u} [Fiel
 
 omit [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ S] in
 /-- The point `(M, f)` of `𝔸^c_{GL_c}` defined by an invertible matrix and a vector of functions. -/
-lemma exists_glAffine_point {U : Scheme.{u}} (f : Fin c → Γ(U, ⊤))
+lemma exists_glAffine_point {U : Scheme.{u}} (aU : U ⟶ S) (f : Fin c → Γ(U, ⊤))
     (M : Matrix (Fin c) (Fin c) Γ(U, ⊤)) (hM : IsUnit M.det) :
-    ∃ Φ : U ⟶ glAffine c U, (∀ a, Φ.appTop (glCoord c U a) = f a) ∧
-      ∀ a, Φ.appTop ((glMatrix c U).mulVec (glCoord c U) a) = M.mulVec f a := by
-  let Φ := AffineSpace.homOfVector (generalLinearOpen.lift (𝟙 U) M hM)
+    ∃ Φ : U ⟶ glAffine c S, (∀ a, Φ.appTop (glCoord c S a) = f a) ∧
+      ∀ a, Φ.appTop ((glMatrix c S).mulVec (glCoord c S) a) = M.mulVec f a := by
+  let Φ := AffineSpace.homOfVector (generalLinearOpen.lift aU M hM)
     fun a : ULift.{u} (Fin c) ↦ f a.down
-  have h₁ : ∀ a, Φ.appTop (glCoord c U a) = f a := fun a ↦
+  have h₁ : ∀ a, Φ.appTop (glCoord c S a) = f a := fun a ↦
     AffineSpace.homOfVector_appTop_coord _ _ _
   refine ⟨Φ, h₁, fun a ↦ ?_⟩
-  have hM' : ∀ a b, Φ.appTop (glMatrix c U a b) = M a b := by
+  have hM' : ∀ a b, Φ.appTop (glMatrix c S a b) = M a b := by
     intro a b
-    have h : Φ ≫ glProj c U ≫ (generalLinearOpen c U).ι =
-        AffineSpace.homOfVector (𝟙 U)
+    have h : Φ ≫ glProj c S ≫ (generalLinearOpen c S).ι =
+        AffineSpace.homOfVector aU
           (fun ab : ULift.{u} (Fin c × Fin c) ↦ M ab.down.1 ab.down.2) := by
       rw [← Category.assoc, AffineSpace.homOfVector_over, generalLinearOpen.lift_ι]
-    have h' := congrArg (fun φ ↦ φ.appTop (matrixCoord c U a b)) h
+    have h' := congrArg (fun φ ↦ φ.appTop (matrixCoord c S a b)) h
     simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply] at h'
     simp only [glMatrix, RingHom.mapMatrix_apply, Matrix.map_apply, Scheme.Hom.comp_appTop,
       CommRingCat.hom_comp]
@@ -390,9 +390,9 @@ lemma exists_glAffine_point {U : Scheme.{u}} (f : Fin c → Γ(U, ⊤))
 frames `f` and `M f` cut out the same closed subscheme and have the same class: restricting
 `∂κ((Mf)₁) ∪ ⋯ ∪ ∂κ((Mf)_c)` to the support `V(f)` gives `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)`. This is the
 pullback of the universal case along `(M, f) : U ⟶ 𝔸^c_{GL_c}`. -/
-theorem restrictSupportedClass_kummerBoundaryProduct_mulVec {U : Scheme.{u}}
-    [HasInvertibleExponent Λ U] (f : Fin c → Γ(U, ⊤)) (M : Matrix (Fin c) (Fin c) Γ(U, ⊤))
-    (hM : IsUnit M.det)
+theorem restrictSupportedClass_kummerBoundaryProduct_mulVec {k : Type u} [Field k]
+    {U : Scheme.{u}} [HasInvertibleExponent Λ U] (aU : U ⟶ Spec (.of k)) (f : Fin c → Γ(U, ⊤))
+    (M : Matrix (Fin c) (Fin c) Γ(U, ⊤)) (hM : IsUnit M.det)
     (g : U.zeroLocusSubscheme (Set.range f) ⟶ U.zeroLocusSubscheme (Set.range (M.mulVec f)))
     (hg : IsPullback g (U.zeroLocusSubschemeι (Set.range f))
       (U.zeroLocusSubschemeι (Set.range (M.mulVec f))) (𝟙 _)) :
@@ -400,17 +400,23 @@ theorem restrictSupportedClass_kummerBoundaryProduct_mulVec {U : Scheme.{u}}
         (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
         (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c) (kummerBoundaryProduct Λ (M.mulVec f)) =
       kummerBoundaryProduct Λ f := by
-  obtain ⟨Φ, hΦt, hΦA⟩ := exists_glAffine_point f M hM
+  by_cases hU : IsEmpty U
+  · exact (isZero_derivedCategory_of_isEmpty (ModuleCat.{u + 1} Λ) U _).eq_of_tgt _ _
+  have : Nonempty U := not_isEmpty_iff.1 hU
+  have : HasInvertibleExponent Λ (Spec (.of k)) := .of_hom_of_nonempty aU
+  obtain ⟨Φ, hΦt, hΦA⟩ := exists_glAffine_point aU f M hM
   obtain ⟨g₁, hg₁⟩ : ∃ g, IsPullback g _ _ _ :=
     ⟨_, isPullback_zeroLocusSubschemeι Φ
-      (Set.range ((glMatrix c U).mulVec (glCoord c U))) (Set.range (M.mulVec f)) (by
+      (Set.range ((glMatrix c (Spec (.of k))).mulVec (glCoord c (Spec (.of k)))))
+      (Set.range (M.mulVec f)) (by
         rw [← Set.range_comp]; exact congrArg Set.range (funext hΦA))⟩
   obtain ⟨g₂, hg₂⟩ : ∃ g, IsPullback g _ _ _ :=
     ⟨_, isPullback_zeroLocusSubschemeι Φ
-      (Set.range (glCoord c U)) (Set.range f) (by
+      (Set.range (glCoord c (Spec (.of k)))) (Set.range f) (by
         rw [← Set.range_comp]; exact congrArg Set.range (funext hΦt))⟩
   obtain ⟨gE, hgE⟩ := Scheme.exists_isPullback_zeroLocusSubschemeι_of_span_eq
-    (Ideal.span_range_mulVec_of_isUnit_det _ (isUnit_det_glMatrix c U) (glCoord c U))
+    (Ideal.span_range_mulVec_of_isUnit_det _ (isUnit_det_glMatrix c (Spec (.of k)))
+      (glCoord c (Spec (.of k))))
   have hcomp₁ : Φ = 𝟙 U ≫ Φ := by simp
   have hcomp₂ : Φ = Φ ≫ 𝟙 _ := by simp
   have e₁ := restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) Φ (𝟙 U) Φ
@@ -418,15 +424,15 @@ theorem restrictSupportedClass_kummerBoundaryProduct_mulVec {U : Scheme.{u}}
     (leftDerivedUpperStarConstantComplexIso Λ Φ).inv
     (leftDerivedUpperStarConstantComplexIso Λ (𝟙 U)).inv
     (leftDerivedUpperStarTateShiftIso Λ Φ c) (leftDerivedUpperStarTateShiftIso Λ (𝟙 U) c)
-    (kummerBoundaryProduct Λ ((glMatrix c U).mulVec (glCoord c U)))
+    (kummerBoundaryProduct Λ ((glMatrix c (Spec (.of k))).mulVec (glCoord c (Spec (.of k)))))
   rw [restrictSupportedClass_kummerBoundaryProduct Λ Φ _ _ hΦA g₁ hg₁] at e₁
   have e₂ := restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _) Φ Φ
     hcomp₂ _ _ _ gE hgE g₂ hg₂ (g₂ ≫ gE) ((Category.comp_id Φ) ▸ hg₂.paste_horiz hgE)
     (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
     (leftDerivedUpperStarConstantComplexIso Λ Φ).inv
     (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c) (leftDerivedUpperStarTateShiftIso Λ Φ c)
-    (kummerBoundaryProduct Λ ((glMatrix c U).mulVec (glCoord c U)))
-  rw [restrictSupportedClass_kummerBoundaryProduct_glMatrix Λ gE hgE,
+    (kummerBoundaryProduct Λ ((glMatrix c (Spec (.of k))).mulVec (glCoord c (Spec (.of k)))))
+  rw [restrictSupportedClass_kummerBoundaryProduct_glMatrix Λ (𝟙 _) gE hgE,
     restrictSupportedClass_kummerBoundaryProduct Λ Φ _ _ hΦt g₂ hg₂] at e₂
   have hσ₁ : (leftDerivedUpperStarConstantComplexIso Λ (𝟙 U)).inv ≫
       (L((𝟙 U)^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarConstantComplexIso Λ Φ).inv ≫

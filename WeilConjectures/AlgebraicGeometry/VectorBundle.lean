@@ -195,6 +195,80 @@ include E in
 lemma locallyOfFiniteType : LocallyOfFiniteType π :=
   IsZariskiLocalAtTarget.of_iSup_eq_top _ E.iSup_U E.locallyOfFiniteType_morphismRestrict
 
+/-! ### The zero section over an open of the base -/
+
+/-- The zero section over an open `W` of the base, `W ⟶ π⁻¹ W`. -/
+noncomputable def zeroRes (W : S.Opens) : W.toScheme ⟶ (π ⁻¹ᵁ W).toScheme :=
+  E.zero.resLE (π ⁻¹ᵁ W) W (Scheme.Hom.le_preimage_preimage_of_comp_eq_id E.zero_comp _)
+
+@[reassoc (attr := simp)]
+lemma zeroRes_ι (W : S.Opens) : E.zeroRes W ≫ (π ⁻¹ᵁ W).ι = W.ι ≫ E.zero :=
+  Scheme.Hom.resLE_comp_ι _ _
+
+@[reassoc (attr := simp)]
+lemma zeroRes_comp_morphismRestrict (W : S.Opens) : E.zeroRes W ≫ π ∣_ W = 𝟙 _ := by
+  rw [← cancel_mono W.ι, Category.assoc, morphismRestrict_ι, zeroRes_ι_assoc, zero_comp,
+    Category.comp_id, Category.id_comp]
+
+lemma zeroRes_eq_zeroRestrict (i : E.ι) : E.zeroRes (E.U i) = E.zeroRestrict i := rfl
+
+@[reassoc]
+lemma zeroRes_homOfLE {W W' : S.Opens} (h : W ≤ W') :
+    E.zeroRes W ≫ V.homOfLE (π.preimage_mono h) = S.homOfLE h ≫ E.zeroRes W' := by
+  rw [← cancel_mono (π ⁻¹ᵁ W').ι, Category.assoc, Scheme.homOfLE_ι, zeroRes_ι, Category.assoc,
+    zeroRes_ι, Scheme.homOfLE_ι_assoc]
+
+instance isClosedImmersion_zeroRes (W : S.Opens) : IsClosedImmersion (E.zeroRes W) := by
+  have := E.isAffineHom
+  have : IsSeparated π := inferInstance
+  have : IsSeparated (π ∣_ W) := IsZariskiLocalAtTarget.restrict ‹_› W
+  have : IsClosedImmersion (E.zeroRes W ≫ π ∣_ W) := by
+    rw [zeroRes_comp_morphismRestrict]
+    infer_instance
+  exact IsClosedImmersion.of_comp _ (π ∣_ W)
+
+/-- Every point of `π⁻¹ W` lies in a preconnected set meeting the zero section: its fibre, which
+the charts identify with an affine space over a point. -/
+lemma exists_isPreconnected_zeroRes (W : S.Opens) (x : (π ⁻¹ᵁ W).toScheme) :
+    ∃ T : Set (π ⁻¹ᵁ W).toScheme, _root_.IsPreconnected T ∧ x ∈ T ∧
+      (T ∩ Set.range (E.zeroRes W).base).Nonempty := by
+  have hx : π.base x.1 ∈ iSup E.U := by rw [E.iSup_U]; trivial
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+  let x' : (π ⁻¹ᵁ E.U i).toScheme := ⟨x.1, hi⟩
+  let y : (E.U i).toScheme := (π ∣_ E.U i).base x'
+  have hy : (E.U i).ι.base y = π.base x.1 := by
+    change ((π ∣_ E.U i) ≫ (E.U i).ι).base x' = _
+    rw [morphismRestrict_ι, Scheme.Hom.comp_apply]
+    rfl
+  let F : Set 𝔸(ULift.{u} (Fin d); E.U i) := (𝔸(ULift.{u} (Fin d); E.U i) ↘ E.U i).base ⁻¹' {y}
+  have hF : IsIrreducible F :=
+    (𝔸(ULift.{u} (Fin d); E.U i) ↘ E.U i).isIrreducible_preimage
+      (AffineSpace.isOpenMap_over (n := ULift.{u} (Fin d)) (E.U i)) isIrreducible_singleton
+  let FV : Set V := (π ⁻¹ᵁ E.U i).ι.base '' ((E.chart i).hom.base ⁻¹' F)
+  have hFV : IsPreirreducible FV :=
+    (hF.isPreirreducible.preimage (E.chart i).hom.isOpenEmbedding).image _
+      (π ⁻¹ᵁ E.U i).ι.continuous.continuousOn
+  have hmem : ∀ x'' : (π ⁻¹ᵁ E.U i).toScheme, (π ∣_ E.U i).base x'' = y →
+      (π ⁻¹ᵁ E.U i).ι.base x'' ∈ FV := by
+    intro x'' h
+    refine ⟨x'', ?_, rfl⟩
+    change ((E.chart i).hom ≫ 𝔸(ULift.{u} (Fin d); E.U i) ↘ E.U i).base x'' = y
+    rw [E.chart_over]
+    exact h
+  refine ⟨(π ⁻¹ᵁ W).ι.base ⁻¹' FV,
+    (hFV.preimage (π ⁻¹ᵁ W).ι.isOpenEmbedding).isPreconnected, hmem x' rfl, ?_⟩
+  refine ⟨E.zeroRes W ⟨π.base x.1, x.2⟩, ?_, ⟨_, rfl⟩⟩
+  have h₁ : (π ⁻¹ᵁ W).ι.base (E.zeroRes W ⟨π.base x.1, x.2⟩) =
+      (π ⁻¹ᵁ E.U i).ι.base (E.zeroRestrict i y) := by
+    rw [← Scheme.Hom.comp_apply, zeroRes_ι, ← Scheme.Hom.comp_apply, zeroRestrict_ι,
+      Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, hy]
+    rfl
+  change (π ⁻¹ᵁ W).ι.base (E.zeroRes W ⟨π.base x.1, x.2⟩) ∈ FV
+  rw [h₁]
+  refine hmem _ ?_
+  rw [← Scheme.Hom.comp_apply, zeroRestrict_comp_morphismRestrict]
+  rfl
+
 end VectorBundle
 
 end AlgebraicGeometry

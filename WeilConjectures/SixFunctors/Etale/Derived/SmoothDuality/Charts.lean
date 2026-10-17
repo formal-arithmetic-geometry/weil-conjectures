@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 
 /-!
 # Smooth duality from the étale and the affine-space cases
@@ -68,21 +68,17 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-omit [CommRing Λ] in
-/-- The unit `Λ_X` of `D(X_ét, Λ)` is invertible. -/
-lemma DerivedCategory.isInvertible_unit [CommRing Λ] (X : Scheme.{u}) :
-    DerivedCategory.isInvertible Λ X (𝟙_ _) :=
-  ⟨𝟙_ _, ⟨derivedTensorLeftUnitor _ X _⟩, ⟨derivedTensorLeftUnitor _ X _⟩⟩
-
 variable [Finite Λ]
 
-/-- *Smooth duality for étale morphisms*: for every étale morphism `e : V ⟶ W` admitting a
-compactification, the canonical tensor map `θ_{e,K} : ω_e ⊗ᴸ Le^* K ⟶ Re^! K` is an
+/-- *Smooth duality for étale morphisms*: for every quasi-compact étale morphism `e : V ⟶ W`
+admitting a compactification, with the exponent of `Λ` invertible on `V`, the canonical tensor
+map `θ_{e,K} : ω_e ⊗ᴸ Le^* K ⟶ Re^! K` is an
 isomorphism for every `K`, and the dualizing complex is trivial, `ω_e ≅ Λ_V`. Together this says
 that `Re^! ≅ Le^*` through the canonical maps: the étale adjoint locality
 `lem-amb-etale-adjoint-locality` with its compatibility with the tensor maps. -/
 def EtaleSmoothDuality : Prop :=
-  ∀ ⦃V W : Scheme.{u}⦄ (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [HasCompactification e],
+  ∀ ⦃V W : Scheme.{u}⦄ (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e]
+    [HasCompactification e] [HasInvertibleExponent Λ V],
     (∀ K : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       IsIso (dualizingComplexTensorMap Λ e K)) ∧
       Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ 𝟙_ _)
@@ -114,14 +110,29 @@ def SatisfiesSmoothDuality {W Y : Scheme.{u}} (g : W ⟶ Y) (n : ℤ) : Prop :=
 variable {Λ}
 
 lemma EtaleSmoothDuality.isInvertible (hE : EtaleSmoothDuality Λ) {V W : Scheme.{u}}
-    (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] :
+    (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e] [HasCompactification e]
+    [HasInvertibleExponent Λ V] :
     DerivedCategory.isInvertible Λ V (dualizingComplex (ModuleCat.{u + 1} Λ) e) :=
   DerivedCategory.isInvertible.of_iso (hE e).2.some.symm (DerivedCategory.isInvertible_unit Λ V)
 
-section Chart
+/-- Smooth duality for open immersions, which need not be quasi-compact: for an open immersion
+`j : U ⟶ X`, with the exponent of `Λ` invertible on `U`, the canonical tensor maps `θ_{j,K}`
+are isomorphisms and `ω_j ≅ Λ_U`
+(`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_isOpenImmersion`). -/
+lemma smoothDuality_of_isOpenImmersion {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    [HasCompactification j] [HasInvertibleExponent Λ U] :
+    (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      IsIso (dualizingComplexTensorMap Λ j K)) ∧
+      Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) j ≅ 𝟙_ _) :=
+  ⟨isIso_dualizingComplexTensorMap_of_isOpenImmersion j,
+    nonempty_dualizingComplex_iso_of_isOpenImmersion j⟩
 
-variable (hE : EtaleSmoothDuality Λ) (hA : AffineSpaceSmoothDuality Λ)
-include hE
+variable (Λ) in
+/-- **Smooth duality for étale morphisms** holds
+(`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_etale`,
+`AlgebraicGeometry.Etale.nonempty_dualizingComplex_iso_of_etale`). -/
+theorem etaleSmoothDuality : EtaleSmoothDuality Λ := fun _ _ e _ _ _ _ ↦
+  ⟨isIso_dualizingComplexTensorMap_of_etale e, nonempty_dualizingComplex_iso_of_etale e⟩
 
 /-- Smooth duality glues along open covers: if every point `x` of `X` lies in an open subscheme
 `u : W ⟶ X` such that `u ≫ f` satisfies smooth duality in degree `-n`, then so does `f`. The
@@ -131,7 +142,7 @@ shape of the dualizing complex
 (`AlgebraicGeometry.Etale.IsShiftedRankOneLocalSystem.of_jointlySurjective`), through
 `ω_{u ≫ f} ≅ Lu^* ω_f`. -/
 theorem satisfiesSmoothDuality_of_forall_exists_isOpenImmersion {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (n : ℤ)
+    [HasInvertibleExponent Λ X] (f : X ⟶ Y) (n : ℤ)
     (h : ∀ x : X, ∃ (W : Scheme.{u}) (u : W ⟶ X), IsOpenImmersion u ∧ x ∈ Set.range u.base ∧
       SatisfiesSmoothDuality Λ (u ≫ f) n) :
     SatisfiesSmoothDuality Λ f n := by
@@ -142,17 +153,22 @@ theorem satisfiesSmoothDuality_of_forall_exists_isOpenImmersion {X Y : Scheme.{u
   have (x : X) : HasCompactification (u x ≫ f) :=
     ((HasCompactification.compactification f).precomp (u x)).hasCompactification
   have hg' (x : X) := @hg x (this x)
+  have (x : X) : HasInvertibleExponent Λ (W x) := .of_hom (u x)
   have hsurj (x : X) : ∃ (i : X) (y : W i), (u i).base y = x := by
     obtain ⟨y, hy⟩ := hx x
     exact ⟨x, y, hy⟩
   refine ⟨IsShiftedRankOneLocalSystem.of_jointlySurjective u hsurj fun x ↦ ?_,
     fun K ↦ isIso_dualizingComplexTensorMap_of_jointlySurjective Λ u hsurj f
-      (fun x ↦ (hE (u x)).1) (fun x ↦ hE.isInvertible (u x)) K fun x ↦ (hg' x).2 K⟩
+      (fun x ↦ (smoothDuality_of_isOpenImmersion (u x)).1)
+      (fun x ↦ isInvertible_dualizingComplex_of_isOpenImmersion (u x)) K fun x ↦ (hg' x).2 K⟩
   obtain ⟨e⟩ := nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar Λ (u x) f _ rfl
-    ((hE (u x)).1 _) (hE (u x)).2
+    ((smoothDuality_of_isOpenImmersion (u x)).1 _) (smoothDuality_of_isOpenImmersion (u x)).2
   exact (hg' x).1.of_iso e
 
-include hA
+section Chart
+
+variable (hE : EtaleSmoothDuality Λ) (hA : AffineSpaceSmoothDuality Λ)
+include hE hA
 
 /-- Smooth duality on a chart of the étale-local normal form: if `f` restricted to an affine open
 `V` of `X` is the composite `V --e--> 𝔸^d_U --p_d--> U ⊆ Y` of an étale morphism, an
@@ -171,8 +187,9 @@ theorem satisfiesSmoothDuality_chart {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) 
   have : HasCompactification (e ≫ (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme)) :=
     HasCompactification.of_isQuasiAffine _
   have : HasCompactification U.ι := (Compactification.ofIsOpenImmersion _).hasCompactification
+  have : HasInvertibleExponent Λ V.toScheme := .of_hom (f.resLE U V hVU)
   obtain ⟨hθe, hωe⟩ := hE e
-  obtain ⟨hθι, hωι⟩ := hE U.ι
+  obtain ⟨hθι, hωι⟩ := smoothDuality_of_isOpenImmersion (Λ := Λ) U.ι
   obtain ⟨hθp, hωp⟩ := hA d U.toScheme
   -- the composite `q = e ≫ p_d : V ⟶ U`
   have hθq (K) : IsIso (dualizingComplexTensorMap Λ
@@ -188,7 +205,7 @@ theorem satisfiesSmoothDuality_chart {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) 
   have w : (e ≫ (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme)) ≫ U.ι = V.ι ≫ f := by
     rw [hfe, Scheme.Hom.resLE_comp_ι]
   refine ⟨?_, fun K ↦ isIso_dualizingComplexTensorMap_comp_of_forall Λ _ U.ι _ w hθq
-    (hE.isInvertible U.ι) K (hθι K)⟩
+    (isInvertible_dualizingComplex_of_isOpenImmersion U.ι) K (hθι K)⟩
   obtain ⟨c⟩ := nonempty_dualizingComplex_comp_iso_of_unit Λ _ U.ι _ w (hθq _) hωι
   exact hωq.of_iso c.symm
 
@@ -198,7 +215,8 @@ open cover of `X` by their sources. -/
 theorem satisfiesSmoothDuality_of_hasInvertibleExponent {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f] :
     SatisfiesSmoothDuality Λ f (2 * d : ℤ) := by
-  refine satisfiesSmoothDuality_of_forall_exists_isOpenImmersion hE f _ fun x ↦ ?_
+  have : HasInvertibleExponent Λ X := .of_hom f
+  refine satisfiesSmoothDuality_of_forall_exists_isOpenImmersion f _ fun x ↦ ?_
   obtain ⟨U, V, hU, hV, -, hxV, hVU, e, he, hfe⟩ := Smooth.exists_etale_to_affineSpace f d x
   have : HasInvertibleExponent Λ U.toScheme := .of_hom U.ι
   exact ⟨V.toScheme, V.ι, inferInstance, ⟨⟨x, hxV⟩, rfl⟩,
@@ -247,8 +265,10 @@ theorem satisfiesSmoothDuality_of_etaleSmoothDuality_of_affineSpaceSmoothDuality
   obtain ⟨hω', hθ'⟩ := satisfiesSmoothDuality_of_hasInvertibleExponent hE hA
     (IsOpenImmersion.lift Y'.ι f hf) d
   refine ⟨?_, fun K ↦ isIso_dualizingComplexTensorMap_comp_of_forall Λ _ Y'.ι f w hθ'
-    (hE.isInvertible _) K ((hE Y'.ι).1 K)⟩
-  obtain ⟨c⟩ := nonempty_dualizingComplex_comp_iso_of_unit Λ _ Y'.ι f w (hθ' _) (hE Y'.ι).2
+    (isInvertible_dualizingComplex_of_isOpenImmersion _) K
+    ((smoothDuality_of_isOpenImmersion Y'.ι).1 K)⟩
+  obtain ⟨c⟩ := nonempty_dualizingComplex_comp_iso_of_unit Λ _ Y'.ι f w (hθ' _)
+    (smoothDuality_of_isOpenImmersion Y'.ι).2
   exact hω'.of_iso c.symm
 
 /-- **Smooth duality from the étale and affine-space cases**, in the form of blueprint

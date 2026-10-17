@@ -252,6 +252,201 @@ theorem exists_iso_singleFunctor_thomTarget :
   have : K.IsLE 0 := (_root_.DerivedCategory.isLE_iff K 0).2 fun n hn ↦ hK n hn.ne'
   exact _root_.DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE K 0
 
+/-! ### Gluing the frame classes -/
+
+omit [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] in
+/-- On a scheme `W` mapping to two charts, the coordinates of the second chart are an invertible
+linear combination of those of the first: this is the linearity of the transition maps. -/
+lemma exists_mulVec_coord {W : Scheme.{u}} (i j : E.ι) (a : W ⟶ (π ⁻¹ᵁ E.U i).toScheme)
+    (b : W ⟶ (π ⁻¹ᵁ E.U j).toScheme) (hab : a ≫ (π ⁻¹ᵁ E.U i).ι = b ≫ (π ⁻¹ᵁ E.U j).ι) :
+    ∃ M : Matrix (Fin d) (Fin d) Γ(W, ⊤), IsUnit M.det ∧
+      (fun t ↦ b.appTop (E.coord j t)) = M.mulVec fun t ↦ a.appTop (E.coord i t) := by
+  obtain ⟨M, hM, hlin⟩ := E.linear i j
+  have hr : Set.range (a ≫ (π ⁻¹ᵁ E.U i).ι).base ⊆
+      Set.range (π ⁻¹ᵁ (E.U i ⊓ E.U j)).ι.base := by
+    rintro _ ⟨y, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    have h₁ : (a ≫ (π ⁻¹ᵁ E.U i).ι).base y ∈ π ⁻¹ᵁ E.U i := by
+      rw [Scheme.Hom.comp_apply]
+      exact (a.base y).2
+    have h₂ : (a ≫ (π ⁻¹ᵁ E.U i).ι).base y ∈ π ⁻¹ᵁ E.U j := by
+      rw [hab, Scheme.Hom.comp_apply]
+      exact (b.base y).2
+    exact ⟨h₁, h₂⟩
+  let c := IsOpenImmersion.lift (π ⁻¹ᵁ (E.U i ⊓ E.U j)).ι _ hr
+  have hc : c ≫ (π ⁻¹ᵁ (E.U i ⊓ E.U j)).ι = a ≫ (π ⁻¹ᵁ E.U i).ι :=
+    IsOpenImmersion.lift_fac _ _ _
+  have hca : c ≫ V.homOfLE (π.preimage_mono inf_le_left) = a := by
+    rw [← cancel_mono (π ⁻¹ᵁ E.U i).ι, Category.assoc, Scheme.homOfLE_ι, hc]
+  have hcb : c ≫ V.homOfLE (π.preimage_mono inf_le_right) = b := by
+    rw [← cancel_mono (π ⁻¹ᵁ E.U j).ι, Category.assoc, Scheme.homOfLE_ι, hc, hab]
+  have key : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (x : Γ(Z, ⊤)),
+      (f ≫ g).appTop x = f.appTop (g.appTop x) := fun f g x ↦ by
+    rw [Scheme.Hom.comp_appTop]
+    rfl
+  refine ⟨M.map (c ≫ π ∣_ (E.U i ⊓ E.U j)).appTop.hom, ?_, ?_⟩
+  · rw [← RingHom.map_det]
+    exact hM.map _
+  · funext t
+    simp only [Matrix.mulVec, dotProduct, Matrix.map_apply, coord]
+    rw [← key, ← hcb, Category.assoc, key, hlin t, map_sum]
+    refine Finset.sum_congr rfl fun s _ ↦ ?_
+    rw [map_mul, ← key, ← key, ← key, ← hca, Category.assoc]
+
+omit [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] in
+/-- **Frame classes agree on overlaps.** Two frames of a closed immersion whose functions differ,
+on a scheme `W` étale over both, by an invertible matrix, have the same restriction to `W`
+(`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`). -/
+theorem _root_.AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_mulVec
+    {X Z : Scheme.{u}} {c : ℕ} {i : Z ⟶ X} [IsClosedImmersion i] [HasInvertibleExponent Λ X]
+    (F₁ F₂ : i.EtaleFrame c) {W : Scheme.{u}} [HasInvertibleExponent Λ W] (a : W ⟶ F₁.U)
+    (b : W ⟶ F₂.U) [AlgebraicGeometry.Etale a] [AlgebraicGeometry.Etale b]
+    (M : Matrix (Fin c) (Fin c) Γ(W, ⊤)) (hM : IsUnit M.det)
+    (hMf : (fun t ↦ b.appTop (F₂.f t)) = M.mulVec fun t ↦ a.appTop (F₁.f t))
+    (g₁ : W.zeroLocusSubscheme (Set.range fun t ↦ a.appTop (F₁.f t)) ⟶ _)
+    (hg₁ : IsPullback g₁ (W.zeroLocusSubschemeι (Set.range fun t ↦ a.appTop (F₁.f t)))
+      (F₁.U.zeroLocusSubschemeι (Set.range F₁.f)) a)
+    (g₂ : W.zeroLocusSubscheme (Set.range fun t ↦ a.appTop (F₁.f t)) ⟶ _)
+    (hg₂ : IsPullback g₂ (W.zeroLocusSubschemeι (Set.range fun t ↦ a.appTop (F₁.f t)))
+      (F₂.U.zeroLocusSubschemeι (Set.range F₂.f)) b) :
+    haveI : HasInvertibleExponent Λ F₁.U := .of_hom F₁.e
+    haveI : HasInvertibleExponent Λ F₂.U := .of_hom F₂.e
+    restrictSupportedClass (ModuleCat.{u + 1} Λ) a _ _ g₁ hg₁
+        (leftDerivedUpperStarConstantComplexIso Λ a).inv (leftDerivedUpperStarTateShiftIso Λ a c)
+        (frameClass Λ F₁) =
+      restrictSupportedClass (ModuleCat.{u + 1} Λ) b _ _ g₂ hg₂
+        (leftDerivedUpperStarConstantComplexIso Λ b).inv (leftDerivedUpperStarTateShiftIso Λ b c)
+        (frameClass Λ F₂) := by
+  have : HasInvertibleExponent Λ F₁.U := .of_hom F₁.e
+  have : HasInvertibleExponent Λ F₂.U := .of_hom F₂.e
+  set v : Fin c → Γ(W, ⊤) := fun t ↦ a.appTop (F₁.f t)
+  set w : Fin c → Γ(W, ⊤) := fun t ↦ b.appTop (F₂.f t)
+  obtain ⟨gw, hgw⟩ : ∃ g, IsPullback g _ _ _ :=
+    ⟨_, isPullback_zeroLocusSubschemeι b (Set.range F₂.f) (Set.range w)
+      (by rw [← Set.range_comp]; rfl)⟩
+  obtain ⟨g₀, hg₀⟩ := Scheme.exists_isPullback_zeroLocusSubschemeι_of_span_eq
+    (U := W) (s := Set.range w) (s' := Set.range v)
+    (by rw [hMf, Ideal.span_range_mulVec_of_isUnit_det _ hM])
+  rw [restrictSupportedClass_comp_tateShift Λ (𝟙 _) b _ (Category.id_comp _).symm _ _ _
+    gw hgw g₀ hg₀ g₂ hg₂, frameClass, frameClass,
+    restrictSupportedClass_kummerBoundaryProduct Λ a F₁.f v (fun _ ↦ rfl) g₁ hg₁,
+    restrictSupportedClass_kummerBoundaryProduct Λ b F₂.f w (fun _ ↦ rfl) gw hgw]
+  have key : ∀ (w' : Fin c → Γ(W, ⊤)) (_ : w' = M.mulVec v) (g : _ ⟶ _)
+      (hg : IsPullback g (W.zeroLocusSubschemeι (Set.range v))
+        (W.zeroLocusSubschemeι (Set.range w')) (𝟙 _)),
+      kummerBoundaryProduct Λ v =
+        restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _) _ _ g hg
+          (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
+          (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c) (kummerBoundaryProduct Λ w') := by
+    rintro _ rfl g hg
+    exact (restrictSupportedClass_kummerBoundaryProduct_mulVec Λ v M hM g hg).symm
+  exact key w hMf g₀ hg₀
+
+/-- The restriction of supports along the inclusion of a chart is invertible. -/
+lemma isIso_supportedRestriction_frame (i : E.ι) :
+    IsIso (supportedRestriction (ModuleCat.{u + 1} Λ) (E.frame i).e E.zero _ (E.frame i).toZ
+      (E.frame i).isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ (E.frame i).e d)) :=
+  isIso_supportedRestriction_of_isOpenImmersion _ _ _ _ _ _ _ _ _
+
+/-- The frame classes of the charts glue: there is a class with supports in the zero section
+restricting to `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_d)` on every chart. By
+`AlgebraicGeometry.VectorBundle.exists_iso_singleFunctor_thomTarget` classes with supports in
+the zero section are sections of a sheaf, and the frame classes agree on overlaps, the
+transition maps being linear (`AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_mulVec`).
+-/
+theorem exists_thomClass :
+    ∃ γ : constantComplex Λ V ⟶ (R(E.zero)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d))),
+      ∀ i, frameRestriction Λ (E.frame i) γ = frameClass Λ (E.frame i) := by
+  obtain ⟨G, ⟨eM⟩⟩ := E.exists_iso_singleFunctor_thomTarget Λ
+  have hΨ := E.isIso_supportedRestriction_frame Λ
+  let δ : ∀ i, (L(((E.frame i).e)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ V) ⟶
+      (L(((E.frame i).e)^*[ModuleCat.{u + 1} Λ])).obj ((R(E.zero)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d)))) := fun i ↦
+    (leftDerivedUpperStarConstantComplexIso Λ (E.frame i).e).hom ≫ frameClass Λ (E.frame i) ≫
+      inv (supportedRestriction (ModuleCat.{u + 1} Λ) (E.frame i).e E.zero _ (E.frame i).toZ
+        (E.frame i).isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ (E.frame i).e d))
+  have hδ : ∀ i, δ i ≫ supportedRestriction (ModuleCat.{u + 1} Λ) (E.frame i).e E.zero _
+      (E.frame i).toZ (E.frame i).isPullback _ _
+        (leftDerivedUpperStarTateShiftIso Λ (E.frame i).e d) =
+        (leftDerivedUpperStarConstantComplexIso Λ (E.frame i).e).hom ≫
+          frameClass Λ (E.frame i) := by
+    intro i
+    simp [δ]
+  obtain ⟨γ, hγ⟩ := exists_hom_of_isOpenImmersion_cover (constantComplexIsoSingleFunctor Λ V) eM
+    (fun i ↦ (E.frame i).e) (fun x ↦ E.mem_range_frame_e x) δ (by
+    intro i j W a b _ _ h
+    have : HasInvertibleExponent Λ W := .of_hom (a ≫ (E.frame i).e)
+    have : HasInvertibleExponent Λ (E.frame i).U := .of_hom (E.frame i).e
+    have : HasInvertibleExponent Λ (E.frame j).U := .of_hom (E.frame j).e
+    obtain ⟨g₁, hg₁⟩ : ∃ g, IsPullback g _ _ _ :=
+      ⟨_, isPullback_zeroLocusSubschemeι a (Set.range (E.frame i).f)
+        (Set.range fun t ↦ a.appTop ((E.frame i).f t)) (by rw [← Set.range_comp]; rfl)⟩
+    have hg' := hg₁.paste_horiz (E.frame i).isPullback
+    have hout : IsPullback (g₁ ≫ (E.frame i).toZ)
+        (W.zeroLocusSubschemeι (Set.range fun t ↦ a.appTop ((E.frame i).f t))) E.zero
+        (b ≫ (E.frame j).e) := h ▸ hg'
+    let g₂ := (E.frame j).isPullback.lift (g₁ ≫ (E.frame i).toZ)
+      (W.zeroLocusSubschemeι (Set.range fun t ↦ a.appTop ((E.frame i).f t)) ≫ b)
+      (by rw [hout.w, Category.assoc])
+    have hg₂ : IsPullback g₂
+        (W.zeroLocusSubschemeι (Set.range fun t ↦ a.appTop ((E.frame i).f t))) _ b :=
+      IsPullback.of_right (by rw [IsPullback.lift_fst]; exact hout)
+        ((E.frame j).isPullback.lift_snd _ _ _) (E.frame j).isPullback
+    have := isIso_supportedRestriction_of_isOpenImmersion (ModuleCat.{u + 1} Λ)
+      (a ≫ (E.frame i).e) E.zero _ _ hg' _ _ (leftDerivedUpperStarTateShiftIso Λ _ d)
+    obtain ⟨M, hM, hMf⟩ := E.exists_mulVec_coord i j a b h
+    rw [← cancel_epi (leftDerivedUpperStarConstantComplexIso Λ (a ≫ (E.frame i).e)).inv,
+      ← cancel_mono (supportedRestriction (ModuleCat.{u + 1} Λ) (a ≫ (E.frame i).e) E.zero _ _
+        hg' _ _ (leftDerivedUpperStarTateShiftIso Λ (a ≫ (E.frame i).e) d))]
+    simp only [Category.assoc]
+    exact (constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestriction Λ
+      (E.frame i).e a _ rfl E.zero _ _ (E.frame i).toZ (E.frame i).isPullback g₁ hg₁ _ hg' _ _
+        (hδ i)).trans
+      ((restrictSupportedClass_frameClass_eq_of_mulVec Λ (E.frame i) (E.frame j) a b M hM hMf
+        g₁ hg₁ g₂ hg₂).trans
+      (constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestriction Λ
+        (E.frame j).e b _ h E.zero _ _ (E.frame j).toZ (E.frame j).isPullback g₂ hg₂ _ hg' _ _
+          (hδ j)).symm))
+  refine ⟨γ, fun i ↦ ?_⟩
+  have h : (L(((E.frame i).e)^*[ModuleCat.{u + 1} Λ])).map γ = δ i := hγ i
+  simp only [frameRestriction, restrictSupportedClass, h, δ, Category.assoc, IsIso.inv_hom_id,
+    Category.comp_id, Iso.inv_hom_id_assoc]
+
+/-- Blueprint `def-pur-vector-bundle-thom-class`: the *Thom class*
+`th(V) ∈ H^{2d}_{z(S)}(V, Λ(d))` of a vector bundle, the class with supports in the zero section
+restricting to `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_d)` on every chart
+(`AlgebraicGeometry.VectorBundle.frameRestriction_thomClass`). -/
+noncomputable def thomClass : constantComplex Λ V ⟶ (R(E.zero)_![ModuleCat.{u + 1} Λ]).obj
+    ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d))) :=
+  (E.exists_thomClass Λ).choose
+
+/-- The Thom class restricts to the frame class on every chart. -/
+lemma frameRestriction_thomClass (i : E.ι) :
+    frameRestriction Λ (E.frame i) (E.thomClass Λ) = frameClass Λ (E.frame i) :=
+  (E.exists_thomClass Λ).choose_spec i
+
+/-- The adjoint `Λ_S ⟶ Rz^! (Λ_V(d)[2d])` of the Thom class. -/
+noncomputable def thomClassMap : constantComplex Λ S ⟶
+    (R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d)) :=
+  supportedClassMap Λ E.zero (E.thomClass Λ)
+
+/-- **The Thom isomorphism.** The adjoint `Λ_S ⟶ Rz^! (Λ_V(d)[2d])` of the Thom class is an
+isomorphism: over every chart it is the adjoint of the class of the zero section of `𝔸^d_U`
+(`AlgebraicGeometry.VectorBundle.isIso_supportedClassMap_frameClass`). -/
+theorem isIso_thomClassMap : IsIso (E.thomClassMap Λ) := by
+  refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ
+    (fun i ↦ (E.frame i).toZ) (fun s ↦ ?_) _ fun i ↦ ?_
+  · obtain ⟨i, y, hy⟩ := E.mem_range_frame_toZ s
+    exact ⟨i, y, hy⟩
+  · refine (isIso_supportedClassMap_restrictSupportedClass_iff Λ (E.frame i).e E.zero _
+      (E.frame i).toZ (E.frame i).isPullback _ _ _ (E.thomClass Λ)
+      (E.isIso_supportedRestriction_frame Λ i)).1 ?_
+    have h := E.frameRestriction_thomClass Λ i
+    rw [frameRestriction] at h
+    rw [h]
+    exact E.isIso_supportedClassMap_frameClass Λ i
+
 end Thom
 
 end VectorBundle

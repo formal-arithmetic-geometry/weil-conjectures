@@ -84,6 +84,7 @@ theorem exists_etaleFrame_isIso_leftDerivedUpperStar_map_fundamentalClassMap
   have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin c); B) := .of_hom (𝔸(ULift.{u} (Fin c); B) ↘ B)
   let t : Fin c → Γ(𝔸(ULift.{u} (Fin c); B), ⊤) := fun a ↦ AffineSpace.coord B (ULift.up a)
   have hmodel := isIso_supportedClassMap_kummerBoundaryProduct_coord Λ c B
+    (𝔸(ULift.{u} (Fin m); Spec (.of k)) ↘ Spec (.of k))
   have hvt : ∀ a, v.appTop (t a) = F.f a := hvf
   obtain ⟨gv, hgv⟩ : ∃ g, IsPullback g (F.U.zeroLocusSubschemeι (Set.range F.f))
       (𝔸(ULift.{u} (Fin c); B).zeroLocusSubschemeι (Set.range t)) v :=

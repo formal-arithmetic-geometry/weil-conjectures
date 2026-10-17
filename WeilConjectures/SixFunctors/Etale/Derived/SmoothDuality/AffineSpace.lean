@@ -140,7 +140,7 @@ def AffineLineSmoothDuality : Prop :=
 
 /-- Smooth duality for an isomorphism, in degree `0`, from smooth duality for étale morphisms. -/
 theorem satisfiesSmoothDuality_of_isIso (hE : EtaleSmoothDuality Λ) {V W : Scheme.{u}}
-    (e : V ⟶ W) [IsIso e] : SatisfiesSmoothDuality Λ e 0 := by
+    (e : V ⟶ W) [IsIso e] [HasInvertibleExponent Λ V] : SatisfiesSmoothDuality Λ e 0 := by
   intro _
   obtain ⟨hθ, ⟨hω⟩⟩ := hE e
   exact ⟨(isShiftedRankOneLocalSystem_unit V).of_iso hω.symm, hθ⟩
@@ -161,6 +161,8 @@ theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDua
   induction d with
   | zero =>
     rw [Nat.cast_zero, mul_zero]
+    have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 0); S) :=
+      .of_hom (𝔸(ULift.{u} (Fin 0); S) ↘ S)
     exact satisfiesSmoothDuality_of_isIso hE (𝔸(ULift.{u} (Fin 0); S) ↘ S)
   | succ d ih =>
     intro _
@@ -174,6 +176,8 @@ theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDua
       rw [Category.assoc, Iso.trans_hom, Category.assoc, AffineSpace.sumIso_hom_over_over,
         AffineSpace.reindexIso_hom, AffineSpace.reindex_over]
     have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin d); S) := .of_hom p
+    have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin (d + 1)); S) :=
+      .of_hom (𝔸(ULift.{u} (Fin (d + 1)); S) ↘ S)
     obtain ⟨hωφ, hθφ⟩ := satisfiesSmoothDuality_of_isIso hE φ.hom
     obtain ⟨hωq, hθq⟩ := h₁ 𝔸(ULift.{u} (Fin d); S)
     obtain ⟨hωp, hθp⟩ := ih

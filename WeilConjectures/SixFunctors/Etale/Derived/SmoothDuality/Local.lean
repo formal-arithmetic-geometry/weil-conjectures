@@ -64,6 +64,11 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 -- definitions of the derived tensor product.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
+/-- The unit `Λ_X` of `D(X_ét, Λ)` is invertible. -/
+lemma DerivedCategory.isInvertible_unit (X : Scheme.{u}) :
+    DerivedCategory.isInvertible Λ X (𝟙_ _) :=
+  ⟨𝟙_ _, ⟨derivedTensorLeftUnitor _ X _⟩, ⟨derivedTensorLeftUnitor _ X _⟩⟩
+
 section Descent
 
 variable {X : Scheme.{u}} {ι : Type u} {U : ι → Scheme.{u}} (u : ∀ i, U i ⟶ X)

@@ -60,7 +60,8 @@ lemma homEquiv_whiskerRight_comp_projectionTensorMap
   have h := hπ (adj.homEquiv _ _ t) N
   rw [← cancel_epi (inv (π ω N)), ← cancel_mono (inv (π _ N))] at h
   simp only [IsIso.inv_hom_id_assoc, Category.assoc, IsIso.hom_inv_id, Category.comp_id] at h
-  rw [reassoc_of% h.symm, ← comp_whiskerRight_assoc, ← homEquiv_counit, Equiv.symm_apply_apply]
+  simp only [Category.assoc]
+  rw [← reassoc_of% h, ← comp_whiskerRight_assoc, ← homEquiv_counit, Equiv.symm_apply_apply]
 
 /-- If the functor `N ↦ ω ⊗ F N` is right adjoint to `L` with the linear counit attached to
 `t : L ω ⟶ 𝟙`, that is, if every `L P ⟶ N` factors uniquely through the linear counit, then the
@@ -92,22 +93,28 @@ theorem isIso_projectionTensorMap_of_bijective
   have hκ (N : D) := isIso_homEquiv_linearCounit adj π ω t h N
   have hτ₁ : IsIso (adj.projectionTensorMap π (𝟙_ D) (𝟙_ D)) :=
     isIso_projectionTensorMap_of_isInvertible adj π hπ isInvertible_unit hF _
+  have hc (N : D) :
+      IsIso (adj.homEquiv _ _ t ▷ F.obj N ≫ adj.projectionTensorMap π (𝟙_ D) N) := by
+    have h₁ : IsIso (adj.homEquiv _ _ t ▷ F.obj N ≫ adj.projectionTensorMap π (𝟙_ D) N ≫
+        R.map (λ_ N).hom) := by
+      rw [key]
+      exact hκ N
+    have h₂ : IsIso ((adj.homEquiv _ _ t ▷ F.obj N ≫ adj.projectionTensorMap π (𝟙_ D) N) ≫
+        R.map (λ_ N).hom) := by
+      rw [Category.assoc]
+      exact h₁
+    exact IsIso.of_isIso_comp_right _ (R.map (λ_ N).hom)
   have hψ : IsIso (adj.homEquiv _ _ t) := by
-    have h₁ : IsIso (adj.homEquiv _ _ t ▷ F.obj (𝟙_ D)) := by
-      have := hκ (𝟙_ D)
-      rw [← key] at this
-      have : IsIso (adj.homEquiv _ _ t ▷ F.obj (𝟙_ D) ≫
-          adj.projectionTensorMap π (𝟙_ D) (𝟙_ D)) :=
-        IsIso.of_isIso_comp_right _ (R.map (λ_ (𝟙_ D)).hom)
-      exact IsIso.of_isIso_comp_right _ (adj.projectionTensorMap π (𝟙_ D) (𝟙_ D))
+    have h₁ : IsIso (adj.homEquiv _ _ t ▷ F.obj (𝟙_ D)) :=
+      have := hc (𝟙_ D)
+      IsIso.of_isIso_comp_right _ (adj.projectionTensorMap π (𝟙_ D) (𝟙_ D))
     obtain ⟨Y, ⟨e₁⟩, ⟨e₂⟩⟩ := hF
+    have : IsIso ((tensorRightEquivalenceOfTensorIso e₁ e₂).functor.map (adj.homEquiv _ _ t)) :=
+      h₁
     exact isIso_of_reflects_iso (adj.homEquiv _ _ t)
       (tensorRightEquivalenceOfTensorIso e₁ e₂).functor
   refine ⟨?_, hψ⟩
-  have := hκ N
-  rw [← key] at this
-  have : IsIso (adj.homEquiv _ _ t ▷ F.obj N ≫ adj.projectionTensorMap π (𝟙_ D) N) :=
-    IsIso.of_isIso_comp_right _ (R.map (λ_ N).hom)
+  have := hc N
   exact IsIso.of_isIso_comp_left (adj.homEquiv _ _ t ▷ F.obj N) _
 
 end CategoryTheory.Adjunction

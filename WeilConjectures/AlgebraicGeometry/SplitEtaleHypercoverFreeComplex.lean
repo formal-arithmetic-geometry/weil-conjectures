@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.AlgebraicGeometry.SplitEtaleHypercoverLocalCone
 public import WeilConjectures.AlgebraicTopology.FreeComplexCone
@@ -59,7 +60,7 @@ lemma faceClosure_finite {V : X.Etale} {m : ℕ} {F : Set (V ⟶ U.simplicial _�
       (fun p : (V ⟶ U.simplicial _⦋m⦌) × (⦋k⦌ ⟶ ⦋m⦌) ↦ p.1 ≫ U.simplicial.map p.2.op) ''
         (F ×ˢ Set.univ) := by
     ext σ
-    simp only [faceClosure, Set.mem_setOf_eq, Set.mem_image, Set.mem_prod, Set.mem_univ,
+    simp only [faceClosure, Set.mem_image, Set.mem_prod, Set.mem_univ,
       and_true, Prod.exists]
     constructor
     · rintro ⟨τ, hτ, θ, rfl⟩
@@ -86,7 +87,8 @@ section Free
 
 variable {A : Type u'} [Category.{w + 1} A] [Abelian A] {FA : A → A → Type*}
   {CA : A → Type (w + 1)} [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{w + 1} A FA]
-  [∀ X, AddCommGroup (CA X)] (Free : Type (w + 1) ⥤ A)
+  [∀ X, AddCommGroup (CA X)] [∀ X Y, AddMonoidHomClass (FA X Y) (CA X) (CA Y)]
+  (Free : Type (w + 1) ⥤ A)
 
 /-- The presheaf functor `V ↦ Free[Hom(-, V)]`. -/
 noncomputable abbrev freePresheaf : X.Etale ⥤ X.Etaleᵒᵖ ⥤ A :=
@@ -107,6 +109,7 @@ variable (hsub : ∀ {X Y : A} (f g : X ⟶ Y) (x : ToType X), (f - g) x = f x -
   (hfin : ∀ (S : Type (w + 1)) (x : ToType (Free.obj S)), ∃ F : Set S, F.Finite ∧
     x ∈ Set.range (Free.map (↾(Subtype.val : F → S))))
 
+omit [CompactSpace X] [QuasiSeparatedSpace X] in
 /-- A single surjective étale map generates a covering sieve. -/
 lemma ofArrows_unit_mem {V T : X.Etale} (π : T ⟶ V) (hπ : Surjective π.left) :
     Sieve.ofArrows (fun _ : Unit ↦ T) (fun _ ↦ π) ∈ X.smallEtaleTopology V := by
@@ -179,11 +182,16 @@ lemma isLocallySurjective_augmentation :
     rw [Sieve.ofArrows, Sieve.generate_le_iff]
     rintro _ _ ⟨⟩
     refine ⟨Free.map (↾fun _ ↦ ULift.up s) y, ?_⟩
-    change (Free.map _ ≫ Free.map _) y = Free.map _ y
-    rw [← Free.map_comp]
-    congr 2
-    ext a
-    exact Subsingleton.elim (α := ULift (T' ⟶ ⊤_ X.Etale)) _ _
+    have e : Free.map (↾fun _ ↦ ULift.up s) ≫
+        ((freePresheaf Free).map (terminal.from (U.simplicial _⦋0⦌))).app (op T') =
+          ((freePresheaf Free).obj (⊤_ X.Etale)).map π.op := by
+      change Free.map _ ≫ Free.map _ = Free.map _
+      rw [← Free.map_comp]
+      congr 1
+      ext a
+      exact Subsingleton.elim (α := ULift (T' ⟶ ⊤_ X.Etale)) _ _
+    rw [← e, ConcreteCategory.comp_apply]
+    rfl
 
 section Sheaf
 
@@ -201,28 +209,42 @@ noncomputable abbrev freeSheaf : X.Etale ⥤ Sheaf X.smallEtaleTopology A :=
 noncomputable abbrev freeSheafComplex : ChainComplex (Sheaf X.smallEtaleTopology A) ℕ :=
   (AlgebraicTopology.alternatingFaceMapComplex _).obj (U.simplicial ⋙ freeSheaf Free)
 
+omit [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
 lemma freeSheafComplex_d (n : ℕ) :
     (U.freeSheafComplex Free).d (n + 1) n =
       (presheafToSheaf X.smallEtaleTopology A).map ((U.freeComplex Free).d (n + 1) n) := by
-  simp only [AlgebraicTopology.alternatingFaceMapComplex_obj_d,
-    AlgebraicTopology.AlternatingFaceMapComplex.objD, Functor.map_sum, Functor.map_zsmul]
+  rw [AlgebraicTopology.alternatingFaceMapComplex_obj_d,
+    AlgebraicTopology.alternatingFaceMapComplex_obj_d,
+    AlgebraicTopology.AlternatingFaceMapComplex.objD,
+    AlgebraicTopology.AlternatingFaceMapComplex.objD, Functor.map_sum]
+  simp only [Functor.map_zsmul]
   rfl
+
+omit [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
+lemma freeSheafComplex_d_one_zero :
+    (U.freeSheafComplex Free).d 1 0 =
+      (presheafToSheaf X.smallEtaleTopology A).map ((U.freeComplex Free).d 1 0) :=
+  U.freeSheafComplex_d Free 0
 
 include hsub hfin in
 lemma freeSheafComplex_exactAt (n : ℕ) : (U.freeSheafComplex Free).ExactAt (n + 1) := by
   rw [HomologicalComplex.exactAt_iff' _ (n + 2) (n + 1) n (by simp) (by simp)]
   let S : ShortComplex (X.Etaleᵒᵖ ⥤ A) := ShortComplex.mk ((U.freeComplex Free).d (n + 2) (n + 1))
-    ((U.freeComplex Free).d (n + 1) n) (by simp)
+    ((U.freeComplex Free).d (n + 1) n) (HomologicalComplex.d_comp_d _ _ _ _)
   have hS := Presheaf.exact_map_presheafToSheaf_of_imageSieve_mem X.smallEtaleTopology S hsub
     (fun V x hx ↦ U.imageSieve_freeComplex_d_mem Free hsub hfin n V x hx)
   refine (ShortComplex.exact_iff_of_iso ?_).1 hS
-  exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _)
-    (by simp [S, freeSheafComplex_d]) (by simp [S, freeSheafComplex_d])
+  refine ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_
+  · rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
+    exact U.freeSheafComplex_d Free (n + 1)
+  · rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
+    exact U.freeSheafComplex_d Free n
 
 lemma freeComplex_d_comp_augmentation :
     (U.freeComplex Free).d 1 0 ≫ (freePresheaf Free).map (terminal.from (U.simplicial _⦋0⦌)) =
       0 := by
-  have h₀ := AlgebraicTopology.alternatingFaceMapComplex_obj_d (U.simplicial ⋙ freePresheaf Free) 0
+  have h₀ :=
+    AlgebraicTopology.alternatingFaceMapComplex_obj_d (U.simplicial ⋙ freePresheaf Free) 0
   rw [h₀, AlgebraicTopology.AlternatingFaceMapComplex.objD, Fin.sum_univ_two]
   simp only [Fin.val_zero, pow_zero, one_smul, Fin.val_one, pow_one, neg_smul,
     Preadditive.add_comp, Preadditive.neg_comp, SimplicialObject.δ, Functor.comp_map,
@@ -230,13 +252,37 @@ lemma freeComplex_d_comp_augmentation :
   rw [Subsingleton.elim (U.simplicial.map (SimplexCategory.δ 0).op ≫ terminal.from _)
     (U.simplicial.map (SimplexCategory.δ 1).op ≫ terminal.from _), add_neg_cancel]
 
+omit [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
+lemma freeSheafComplex_d_comp_augmentation :
+    (U.freeSheafComplex Free).d 1 0 ≫ (freeSheaf Free).map (terminal.from (U.simplicial _⦋0⦌)) =
+      0 := by
+  have h := congrArg (presheafToSheaf X.smallEtaleTopology A).map
+    (U.freeComplex_d_comp_augmentation Free)
+  rw [Functor.map_comp, Functor.map_zero] at h
+  rw [freeSheafComplex_d_one_zero]
+  exact h
+
 include hsub hfin in
 lemma freeSheafComplex_exact_zero :
-    (ShortComplex.mk ((U.freeSheafComplex Free).d 1 0)
-      ((freeSheaf Free).map (terminal.from (U.simplicial _⦋0⦌))) (by
-        rw [freeSheafComplex_d, Functor.map_comp.symm]
-        sorry)).Exact := by
-  sorry
+    (ShortComplex.mk _ _ (U.freeSheafComplex_d_comp_augmentation Free)).Exact := by
+  let S : ShortComplex (X.Etaleᵒᵖ ⥤ A) := ShortComplex.mk ((U.freeComplex Free).d 1 0)
+    ((freePresheaf Free).map (terminal.from (U.simplicial _⦋0⦌)))
+    (U.freeComplex_d_comp_augmentation Free)
+  have hS := Presheaf.exact_map_presheafToSheaf_of_imageSieve_mem X.smallEtaleTopology S hsub
+    (fun V x hx ↦ U.imageSieve_freeComplex_d_zero_mem Free hsub hfin V x hx)
+  refine (ShortComplex.exact_iff_of_iso ?_).1 hS
+  refine ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_
+  · rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
+    exact U.freeSheafComplex_d_one_zero Free
+  · rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
+    rfl
+
+include FA CA in
+omit [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
+lemma epi_freeSheaf_map_augmentation :
+    Epi ((freeSheaf Free).map (terminal.from (U.simplicial _⦋0⦌))) := by
+  have := U.isLocallySurjective_augmentation Free
+  exact Presheaf.epi_presheafToSheaf_map_of_isLocallySurjective X.smallEtaleTopology _
 
 end Sheaf
 

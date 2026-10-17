@@ -792,7 +792,8 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
         (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c) (kummerBoundaryProduct Λ w'') =
       kummerBoundaryProduct Λ f := by
     rintro _ rfl g hg
-    exact restrictSupportedClass_kummerBoundaryProduct_mulVec Λ f M' hdet' g hg
+    exact restrictSupportedClass_kummerBoundaryProduct_mulVec Λ (B.ι ≫ D.ι ≫ a ≫ F₁.e ≫ aX) f M'
+      hdet' g hg
   have h₂ : frameRestriction Λ H (restrictSupportedClass (ModuleCat.{u + 1} Λ) b _ i' g₂ hg₂
       (leftDerivedUpperStarConstantComplexIso Λ b).inv (leftDerivedUpperStarTateShiftIso Λ b c)
       (frameClass Λ F₂)) = kummerBoundaryProduct Λ f := by

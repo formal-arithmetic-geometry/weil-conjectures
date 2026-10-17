@@ -60,7 +60,8 @@ lemma map_comp_d_succ {n : ℕ} (F : Set (S _⦋n + 1⦌)) (h₁ : S _⦋n + 1�
   rw [alternatingFaceMapComplex_obj_d, alternatingFaceMapComplex_obj_d,
     AlternatingFaceMapComplex.objD, AlternatingFaceMapComplex.objD, Fin.sum_univ_succ]
   simp only [Preadditive.comp_add, Preadditive.comp_sum, Preadditive.sum_comp,
-    Preadditive.comp_zsmul, Preadditive.zsmul_comp, δ_comp_eq, ← Functor.map_comp, h0', hs',
+    Preadditive.comp_zsmul, Preadditive.zsmul_comp, Preadditive.comp_neg, δ_comp_eq,
+    ← Functor.map_comp, h0', hs',
     Fin.val_zero, pow_zero, one_smul, Fin.val_succ, pow_succ, mul_neg, mul_one, neg_smul,
     Finset.sum_neg_distrib, sub_eq_add_neg]
 
@@ -106,7 +107,8 @@ lemma d_map_succ
   obtain ⟨z, rfl⟩ := hz
   have := congrArg (fun f ↦ f z) (map_comp_d_succ Free r F h₁ h₀ hc₀ hc)
   simp only [hsub, ConcreteCategory.comp_apply] at this
-  rw [hd, map_zero, sub_zero] at this
+  erw [hd] at this
+  rw [map_zero, sub_zero] at this
   exact this
 
 /-- If `z` is a degree `0` chain with vanishing augmentation, supported on `F`, and `h₀` is
@@ -125,7 +127,8 @@ lemma d_map_zero
   obtain ⟨z, rfl⟩ := hz
   have := congrArg (fun f ↦ f z) (map_comp_d_zero Free r F h₀ e c hc₀ hc₁)
   simp only [hsub, ConcreteCategory.comp_apply] at this
-  rw [hd, map_zero, sub_zero] at this
+  erw [hd] at this
+  rw [map_zero, sub_zero] at this
   exact this
 
 end AlgebraicTopology.FreeComplexCone

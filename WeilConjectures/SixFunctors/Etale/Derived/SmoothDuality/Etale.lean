@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsId
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
@@ -17,8 +17,8 @@ For an étale morphism `e : V ⟶ W` admitting a compactification, with the expo
 invertible on `V`, the canonical tensor map `θ_{e,K} : ω_e ⊗ᴸ Le^* K ⟶ Re^! K` is an isomorphism
 for every `K` and `ω_e ≅ Λ_V`.
 
-* For an isomorphism `e`, the adjunction `Re_! ⊣ Re^!` is an adjoint equivalence, and the tensor
-  maps, adjoint transposes of isomorphisms, are isomorphisms.
+* For the identity `𝟙`, the adjunction `R(𝟙)_! ⊣ R(𝟙)^!` is an adjoint equivalence, and the
+  tensor maps, adjoint transposes of isomorphisms, are isomorphisms.
 * In general, the base change of `e` along itself has the diagonal `Δ : V ⟶ V ×_W V` as a
   section, which is an open immersion. The canonical base change map of `R^!` is an isomorphism
   (`prop-asd-smooth-base-change`) and respects the tensor maps, so `θ_e` pulled back to
@@ -28,9 +28,10 @@ for every `K` and `ω_e ≅ Λ_V`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_isIso`
+- `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_id`
 - `AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_dualizingComplexTensorMap_of_isPullback`
-- `AlgebraicGeometry.Etale.etaleSmoothDuality`
+- `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_etale`,
+  `AlgebraicGeometry.Etale.nonempty_dualizingComplex_iso_of_etale`
 -/
 
 @[expose] public section
@@ -52,62 +53,6 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 -- Search the braiding of `ModuleCat Λ` through its symmetric structure, as in the generic
 -- definitions of the derived tensor product.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
-
-section Iso
-
-/-- A derived pullback along an isomorphism is essentially surjective:
-`P ≅ Lf^* L(f⁻¹)^* P`. -/
-noncomputable def leftDerivedUpperStarInvIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
-    (P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    P ≅ (L((f)^*[ModuleCat.{u + 1} Λ])).obj ((L((inv f)^*[ModuleCat.{u + 1} Λ])).obj P) :=
-  (leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).symm.app P ≪≫
-    (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f (inv f) (𝟙 X) (by simp)).app P
-
-/-- For an isomorphism `f`, the unit of `Rf_! ⊣ Rf^!` is an isomorphism: its counit is one, and
-`Rf^! ≅ Lf^*` is essentially surjective. -/
-theorem isIso_rightDerivedUpperShriekAdjunction_unit_of_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [IsIso f] [HasCompactification f] :
-    IsIso (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).unit := by
-  have := isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso (ModuleCat.{u + 1} Λ) f
-  have hR (M) : IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).unit.app
-      ((R(f)^![ModuleCat.{u + 1} Λ]).obj M)) := by
-    have h :=
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).right_triangle_components M
-    have : IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).unit.app
-        ((R(f)^![ModuleCat.{u + 1} Λ]).obj M) ≫ (R(f)^![ModuleCat.{u + 1} Λ]).map
-        ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app M)) := by
-      rw [h]
-      exact IsIso.id _
-    exact IsIso.of_isIso_comp_right _ ((R(f)^![ModuleCat.{u + 1} Λ]).map
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app M))
-  refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun P ↦ ?_
-  let e : P ≅ (R(f)^![ModuleCat.{u + 1} Λ]).obj ((L((inv f)^*[ModuleCat.{u + 1} Λ])).obj P) :=
-    leftDerivedUpperStarInvIso f P ≪≫
-      (rightDerivedUpperShriekIsoOfIso (ModuleCat.{u + 1} Λ) (asIso f)).symm.app _
-  exact (NatTrans.isIso_app_iff_of_iso _ e).2 (hR _)
-
-/-- For an isomorphism `f`, the canonical tensor map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an
-isomorphism: it is the adjoint transpose of an isomorphism along the adjoint equivalence
-`Rf_! ⊣ Rf^!`. -/
-theorem isIso_dualizingComplexTensorMap_of_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
-    [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (dualizingComplexTensorMap Λ f K) := by
-  have := isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso (ModuleCat.{u + 1} Λ) f
-  have := isIso_rightDerivedUpperShriekAdjunction_unit_of_isIso (Λ := Λ) f
-  change IsIso (dualizingComplexTensorMapOfIsIso f K)
-  rw [isIso_dualizingComplexTensorMapOfIsIso_iff, rightDerivedUpperShriekTensorMap,
-    Adjunction.projectionTensorMap, Adjunction.homEquiv_unit]
-  infer_instance
-
-/-- For an isomorphism `f`, the dualizing complex is trivial: `ω_f ≅ Lf^* Λ_Y ≅ Λ_X`. -/
-noncomputable def dualizingComplexIsoOfIsIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
-    [HasCompactification f] :
-    dualizingComplex (ModuleCat.{u + 1} Λ) f ≅ 𝟙_ _ :=
-  (rightDerivedUpperShriekIsoOfIso (ModuleCat.{u + 1} Λ) (asIso f)).app _ ≪≫
-    leftDerivedUpperStarUnitIso _ f
-
-end Iso
 
 section BaseChange
 
@@ -150,6 +95,42 @@ theorem leftDerivedUpperStar_map_rightDerivedUpperShriekTensorMap
     (fun N ↦ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq N)
     (rightDerivedLowerShriekBaseChangeMap Λ sq) (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))
     (fun M ↦ by simp [NatIso.isIso_inv_app]) hlib M N
+
+/-- Blueprint `det-sf-cohsm-base-change`: Base change for the exceptional inverse image of a
+smooth morphism.
+
+Let `f : X ⟶ Y` be smooth of pure relative dimension `d`, admitting a compactification, with the
+exponent of `Λ` invertible on `X`, and let `g' ≫ f = f' ≫ g` be a cartesian square with `f'`
+quasi-compact. Then:
+1. the canonical base change map `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*`
+   (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`, the transpose of the inverse
+   compact-support base change followed by the pulled back counit) is an isomorphism; in
+   particular `β_Λ : Lg'^* ω_f ≅ ω_{f'}`;
+2. for every `N`, the square formed by `Lg'^*` of the tensor map `ω_f ⊗ᴸ Lf^* N ⟶ Rf^! N`, the
+   tensor map of `f'` at `Lg^* N`, `β_N` and `β_Λ ⊗ 1` (through `Lg'^* Lf^* N ≅ Lf'^* Lg^* N`)
+   commutes. The tensor maps are written as
+   `AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`
+   at `(Λ_Y, N)`, of which the canonical tensor map is the composite with the left unitor.
+
+The blueprint asks `g` to be of finite type; what is used is that the base change `f'` is
+quasi-compact and admits a compactification. Clause 1 is smooth base change for `R^!`
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`,
+`prop-asd-smooth-base-change`), clause 2 is
+`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_rightDerivedUpperShriekTensorMap`. -/
+theorem isIso_rightDerivedUpperShriekBaseChangeMap_and_tensorMap (d : ℕ)
+    [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] :
+    IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) ∧
+      ∀ N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+        (L((g')^*[ModuleCat.{u + 1} Λ])).map (rightDerivedUpperShriekTensorMap f (𝟙_ _) N) ≫
+            (rightDerivedUpperShriekBaseChangeMap Λ sq).app (𝟙_ _ ⊗ N) ≫
+            (R(f')^![ModuleCat.{u + 1} Λ]).map (leftDerivedUpperStarTensorIso _ g (𝟙_ _) N).hom =
+          (leftDerivedUpperStarTensorIso _ g' _ _).hom ≫
+            (rightDerivedUpperShriekBaseChangeMap Λ sq).app (𝟙_ _) ▷ _ ≫
+            _ ◁ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq N ≫
+            rightDerivedUpperShriekTensorMap f' ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _))
+              ((L((g)^*[ModuleCat.{u + 1} Λ])).obj N) :=
+  ⟨isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ f d sq,
+    fun N ↦ leftDerivedUpperStar_map_rightDerivedUpperShriekTensorMap sq (𝟙_ _) N⟩
 
 /-- **Base change of the tensor maps.** For a cartesian square `g' ≫ f = f' ≫ g` with
 quasi-compact `f'` whose base change map `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism, and a
@@ -204,7 +185,8 @@ theorem isIso_map_leftDerivedUpperStar_map_dualizingComplexTensorMap_of_isPullba
 
 /-- The base change map of the dualizing complexes is an isomorphism when the base change map
 of `R^!` is. -/
-noncomputable def dualizingComplexBaseChangeIso [IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)] :
+noncomputable def dualizingComplexBaseChangeIso
+    [IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)] :
     (L((g')^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
       dualizingComplex (ModuleCat.{u + 1} Λ) f' :=
   have := (isIso_dualizingComplexBaseChangeMap_iff Λ sq).2 inferInstance
@@ -229,7 +211,7 @@ theorem isIso_dualizingComplexTensorMap_of_isOpenImmersion {U X : Scheme.{u}} (j
   have sq : IsPullback (𝟙 U) (𝟙 U) j j := IsKernelPair.id_of_mono j
   have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ j 0 sq
   have h := isIso_map_leftDerivedUpperStar_map_dualizingComplexTensorMap_of_isPullback sq
-    (𝟭 _) K (isIso_dualizingComplexTensorMap_of_isIso (𝟙 U) _)
+    (𝟭 _) K (isIso_dualizingComplexTensorMap_id Λ U _)
   exact (NatIso.isIso_map_iff (leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) U) _).1 h
 
 /-- For an open immersion `j : U ⟶ X`, with the exponent of `Λ` invertible on `U`, the dualizing
@@ -240,13 +222,7 @@ theorem nonempty_dualizingComplex_iso_of_isOpenImmersion {U X : Scheme.{u}} (j :
   have sq : IsPullback (𝟙 U) (𝟙 U) j j := IsKernelPair.id_of_mono j
   have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ j 0 sq
   exact ⟨(leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) U).symm.app _ ≪≫
-    dualizingComplexBaseChangeIso sq ≪≫ dualizingComplexIsoOfIsIso (𝟙 U)⟩
-
-omit [Finite Λ] in
-/-- The unit `Λ_X` of `D(X_ét, Λ)` is invertible. -/
-lemma DerivedCategory.isInvertible_unit (X : Scheme.{u}) :
-    DerivedCategory.isInvertible Λ X (𝟙_ _) :=
-  ⟨𝟙_ _, ⟨derivedTensorLeftUnitor _ X _⟩, ⟨derivedTensorLeftUnitor _ X _⟩⟩
+    dualizingComplexBaseChangeIso sq ≪≫ (nonempty_dualizingComplex_id_iso Λ U).some⟩
 
 /-- The dualizing complex of an open immersion `j`, with the exponent of `Λ` invertible on its
 source, is invertible. -/
@@ -254,7 +230,44 @@ lemma isInvertible_dualizingComplex_of_isOpenImmersion {U X : Scheme.{u}} (j : U
     [IsOpenImmersion j] [HasCompactification j] [HasInvertibleExponent Λ U] :
     DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) j) :=
   .of_iso (nonempty_dualizingComplex_iso_of_isOpenImmersion j).some.symm
-    (DerivedCategory.isInvertible_unit U)
+    (DerivedCategory.isInvertible_unit Λ U)
+
+/-- The diagonal step of smooth duality for étale morphisms, before pullback: for a
+quasi-compact étale `e : V ⟶ W`, with the exponent of `Λ` invertible on `V`, the tensor maps of
+the second projection `pr₂ : V ×_W V ⟶ V` become isomorphisms after `RΔ^!` along the diagonal
+`Δ`, an open immersion with `Δ ≫ pr₂ = 𝟙_V`. -/
+theorem isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd
+    {V W : Scheme.{u}} (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e]
+    [HasCompactification e] [HasCompactification (pullback.diagonal e)]
+    [HasInvertibleExponent Λ V]
+    (P : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((R(pullback.diagonal e)^![ModuleCat.{u + 1} Λ]).map
+      (dualizingComplexTensorMap Λ (pullback.snd e e) P)) := by
+  obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
+  exact isIso_map_dualizingComplexTensorMapOfIsIso_of_comp (pullback.diagonal e)
+    (pullback.snd e e) (𝟙 V) (pullback.diagonal_snd e) (E _ _ _ (pullback.diagonal_snd e))
+    (hPF _ _ _ (pullback.diagonal_snd e))
+    (projectionMapAssociativity Λ (pullback.diagonal e))
+    (isIso_dualizingComplexTensorMap_of_isOpenImmersion (pullback.diagonal e)) P
+    (isIso_dualizingComplexTensorMap_id Λ V P)
+
+/-- The diagonal step of smooth duality for étale morphisms: for a quasi-compact étale
+`e : V ⟶ W`, with the exponent of `Λ` invertible on `V`, the tensor maps of the second
+projection `pr₂ : V ×_W V ⟶ V` become isomorphisms after pullback along the diagonal `Δ`, an open
+immersion with `Δ ≫ pr₂ = 𝟙_V`. -/
+theorem isIso_leftDerivedUpperStar_diagonal_map_dualizingComplexTensorMap_snd {V W : Scheme.{u}}
+    (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e] [HasCompactification e]
+    [HasInvertibleExponent Λ V]
+    (P : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((L((pullback.diagonal e)^*[ModuleCat.{u + 1} Λ])).map
+      (dualizingComplexTensorMap Λ (pullback.snd e e) P)) := by
+  have : HasCompactification (pullback.diagonal e) :=
+    (Compactification.ofIsOpenImmersion _).hasCompactification
+  exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map
+    (pullback.diagonal e) (isIso_dualizingComplexTensorMap_of_isOpenImmersion (pullback.diagonal e))
+    ((isInvertible_iff_exists_derivedTensor _).2
+      (isInvertible_dualizingComplex_of_isOpenImmersion (pullback.diagonal e))) _
+    (isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd e P)
 
 /-- **Smooth duality for étale morphisms.** For a quasi-compact étale morphism `e : V ⟶ W`
 admitting a compactification, with the exponent of `Λ` invertible on `V`, the canonical tensor
@@ -272,36 +285,23 @@ theorem isIso_dualizingComplexTensorMap_of_etale {V W : Scheme.{u}} (e : V ⟶ W
     IsIso (dualizingComplexTensorMap Λ e K) := by
   have sq := IsPullback.of_hasPullback e e
   have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ e 0 sq
-  have : HasCompactification (pullback.diagonal e) :=
-    (Compactification.ofIsOpenImmersion _).hasCompactification
-  obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
-  have hθΔ (P) := isIso_dualizingComplexTensorMap_of_isOpenImmersion (Λ := Λ)
-    (pullback.diagonal e) P
   -- the object `Le^* K` is left to unification, so that it is the one of the base change lemma
   have h₃ := isIso_map_leftDerivedUpperStar_map_dualizingComplexTensorMap_of_isPullback sq
     (L((pullback.diagonal e)^*[ModuleCat.{u + 1} Λ])) K
-    (isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map
-      (pullback.diagonal e) hθΔ
-      ((isInvertible_iff_exists_derivedTensor _).2
-        (isInvertible_dualizingComplex_of_isOpenImmersion (pullback.diagonal e))) _
-      (isIso_map_dualizingComplexTensorMapOfIsIso_of_comp (pullback.diagonal e)
-        (pullback.snd e e) (𝟙 V) (pullback.diagonal_snd e) (E _ _ _ (pullback.diagonal_snd e))
-        (hPF _ _ _ (pullback.diagonal_snd e))
-        (projectionMapAssociativity Λ (pullback.diagonal e)) hθΔ _
-        (isIso_dualizingComplexTensorMap_of_isIso (𝟙 V) _)))
+    (isIso_leftDerivedUpperStar_diagonal_map_dualizingComplexTensorMap_snd e _)
   exact (NatIso.isIso_map_iff ((leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) V).symm ≪≫
     leftDerivedUpperStarComp _ (pullback.diagonal e) (pullback.fst e e) (𝟙 V)
       (pullback.diagonal_fst e).symm) _).2 h₃
 
-/-- For a quasi-compact étale morphism `e : V ⟶ W` admitting a compactification, with the
-exponent of `Λ` invertible on `V`, the dualizing complex is trivial:
-`ω_e ≅ LΔ^* Lpr₁^* ω_e ≅ LΔ^* ω_{pr₂} ≅ ω_{Δ ≫ pr₂} = ω_{𝟙_V} ≅ Λ_V`. -/
+/-- For an étale morphism `e : V ⟶ W` admitting a compactification, with the exponent of `Λ`
+invertible on `V`, the dualizing complex is trivial:
+`ω_e ≅ LΔ^* Lpr₁^* ω_e ≅ LΔ^* ω_{pr₂} ≅ ω_{Δ ≫ pr₂} = ω_{𝟙_V} ≅ Λ_V`, through the base change
+isomorphism of `R^!` (`prop-asd-smooth-base-change`) for the square of `e` along itself. -/
 theorem nonempty_dualizingComplex_iso_of_etale {V W : Scheme.{u}} (e : V ⟶ W)
-    [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e] [HasCompactification e]
-    [HasInvertibleExponent Λ V] :
+    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ V] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ 𝟙_ _) := by
   have sq := IsPullback.of_hasPullback e e
-  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ e 0 sq
+  obtain ⟨b⟩ := nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ e 0 sq
   have : HasCompactification (pullback.diagonal e) :=
     (Compactification.ofIsOpenImmersion _).hasCompactification
   obtain ⟨c⟩ := nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar Λ (pullback.diagonal e)
@@ -311,8 +311,10 @@ theorem nonempty_dualizingComplex_iso_of_etale {V W : Scheme.{u}} (e : V ⟶ W)
   exact ⟨(leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) V).symm.app _ ≪≫
     (leftDerivedUpperStarComp _ (pullback.diagonal e) (pullback.fst e e) (𝟙 V)
       (pullback.diagonal_fst e).symm).app _ ≪≫
-    (L((pullback.diagonal e)^*[ModuleCat.{u + 1} Λ])).mapIso (dualizingComplexBaseChangeIso sq) ≪≫
-    c.symm ≪≫ dualizingComplexIsoOfIsIso (𝟙 V)⟩
+    (L((pullback.diagonal e)^*[ModuleCat.{u + 1} Λ])).mapIso (b.app (𝟙_ _) ≪≫
+      (R(pullback.snd e e)^![ModuleCat.{u + 1} Λ]).mapIso
+        (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) e)) ≪≫
+    c.symm ≪≫ (nonempty_dualizingComplex_id_iso Λ V).some⟩
 
 end Etale
 

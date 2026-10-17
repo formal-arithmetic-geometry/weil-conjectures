@@ -45,7 +45,7 @@ lemma surjective_pullback_fst_left {Y Z W : X.Etale} (f : Y ⟶ W) (g : Z ⟶ W)
     [Surjective g.left] : Surjective (pullback.fst f g).left := by
   have h : IsPullback (pullback.fst f g).left (pullback.snd f g).left f.left g.left :=
     (IsPullback.of_hasPullback f g).map (Scheme.Etale.forget X ⋙ Over.forget X)
-  exact MorphismProperty.of_isPullback (P := @Surjective) h ‹_›
+  exact MorphismProperty.of_isPullback (P := @Surjective) h.flip ‹_›
 
 lemma surjective_id_left (T : X.Etale) : Surjective (𝟙 T : T ⟶ T).left :=
   inferInstanceAs (Surjective (𝟙 T.left))
@@ -83,6 +83,7 @@ lemma exists_cover_lift (m : ℕ) {T : X.Etale}
   apply G.map_injective
   rw [G.map_comp, Functor.map_preimage, hf]
 
+omit [CompactSpace X] [QuasiSeparatedSpace X] in
 /-- Finitely many conditions, each of which can be achieved after a surjective étale cover
 (of any étale `T`-scheme), can be achieved simultaneously after one surjective étale cover. -/
 lemma exists_cover_forall {T : X.Etale} {ι : Type*} {s : Set ι} (hs : s.Finite)
@@ -124,7 +125,8 @@ private lemma exists_cone_one {T₁ : X.Etale} (π₁ : T₁ ⟶ T) (v : T₁ �
     ∃ (T₂ : X.Etale) (π₂ : T₂ ⟶ T₁) (e : (T ⟶ U.simplicial _⦋0⦌) → (T₂ ⟶ U.simplicial _⦋1⦌)),
       Surjective π₂.left ∧ ∀ τ ∈ F 0, e τ ≫ U.simplicial.δ 0 = π₂ ≫ π₁ ≫ τ ∧
         e τ ≫ U.simplicial.δ 1 = π₂ ≫ v := by
-  obtain ⟨T₂, π₂, hπ₂, hQ⟩ := U.exists_cover_forall (hF 0)
+  classical
+  obtain ⟨T₂, π₂, hπ₂, hQ⟩ := exists_cover_forall (hF 0)
     (fun {T''} (π' : T'' ⟶ T₁) τ ↦ ∃ e : T'' ⟶ U.simplicial _⦋1⦌,
       e ≫ U.simplicial.δ 0 = π' ≫ π₁ ≫ τ ∧ e ≫ U.simplicial.δ 1 = π' ≫ v)
     (fun π π' τ ⟨e, he₀, he₁⟩ ↦ ⟨π' ≫ e, by simp [he₀], by simp [he₁]⟩)
@@ -155,8 +157,9 @@ private lemma exists_cone_succ (k : ℕ) {T₁ : X.Etale} (π₁ : T₁ ⟶ T)
       (e : (T ⟶ U.simplicial _⦋k + 1⦌) → (T₂ ⟶ U.simplicial _⦋k + 2⦌)),
       Surjective π₂.left ∧ ∀ τ ∈ F (k + 1), e τ ≫ U.simplicial.δ 0 = π₂ ≫ π₁ ≫ τ ∧
         ∀ i : Fin (k + 2), e τ ≫ U.simplicial.δ i.succ = π₂ ≫ h k (τ ≫ U.simplicial.δ i) := by
+  classical
   obtain ⟨hc₁, hc₂, hc₃⟩ := hc
-  obtain ⟨T₂, π₂, hπ₂, hQ⟩ := U.exists_cover_forall (hF (k + 1))
+  obtain ⟨T₂, π₂, hπ₂, hQ⟩ := exists_cover_forall (hF (k + 1))
     (fun {T''} (π' : T'' ⟶ T₁) τ ↦ ∃ e : T'' ⟶ U.simplicial _⦋k + 2⦌,
       e ≫ U.simplicial.δ 0 = π' ≫ π₁ ≫ τ ∧
         ∀ i : Fin (k + 2), e ≫ U.simplicial.δ i.succ = π' ≫ h k (τ ≫ U.simplicial.δ i))
@@ -182,9 +185,10 @@ private lemma exists_cone_succ (k : ℕ) {T₁ : X.Etale} (π₁ : T₁ ⟶ T)
             congr 1
             cases k with
             | zero =>
-              obtain rfl := Subsingleton.elim i 0
-              obtain rfl := Subsingleton.elim j 0
-              rw [hc₂ (Nat.succ_pos 0) _ (hcl 0 τ hτ _), hc₂ (Nat.succ_pos 0) _ (hcl 0 τ hτ _)]
+              obtain rfl : i = 0 := Subsingleton.elim (α := Fin 1) _ _
+              obtain rfl : j = 0 := Subsingleton.elim (α := Fin 1) _ _
+              exact (hc₂ (Nat.succ_pos 0) _ (hcl 0 τ hτ _)).trans
+                (hc₂ (Nat.succ_pos 0) _ (hcl 0 τ hτ _)).symm
             | succ k =>
               rw [hc₃ k (Nat.lt_succ_self _) _ (hcl _ τ hτ _),
                 hc₃ k (Nat.lt_succ_self _) _ (hcl _ τ hτ _), Category.assoc, Category.assoc,
