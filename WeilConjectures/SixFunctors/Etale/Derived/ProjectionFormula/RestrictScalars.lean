@@ -58,6 +58,28 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} {X Y : Scheme.{u}}
 
+/-- The component `PF_{f, K, L}` of the projection map over a coefficient ring `Λ'`.
+
+Stating results at a quotient ring `Λ ⧸ (ϖ)ⁿ` through this constant keeps the monoidal structure
+of the derived categories out of their statements: comparing a freshly elaborated projection map
+over `Λ ⧸ (ϖ)ⁿ` with an instance of a generic one makes the kernel compare the nested proofs of
+the two elaborated monoidal instances, which does not terminate in practice. -/
+noncomputable def projectionMapApp (Λ' : Type (u + 1)) [CommRing Λ'] (f : X ⟶ Y)
+    [HasCompactification f] (K : 𝐃(X, Λ')) (L : 𝐃(Y, Λ')) :=
+  ((projectionMap (ModuleCat.{u + 1} Λ') f).app K).app L
+
+lemma projectionMapApp_eq (Λ' : Type (u + 1)) [CommRing Λ'] (f : X ⟶ Y)
+    [HasCompactification f] (K : 𝐃(X, Λ')) (L : 𝐃(Y, Λ')) :
+    projectionMapApp Λ' f K L = ((projectionMap (ModuleCat.{u + 1} Λ') f).app K).app L :=
+  rfl
+
+/-- The finite-level projection formula (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`)
+for `AlgebraicGeometry.Etale.projectionMapApp`. -/
+instance isIso_projectionMapApp_of_finite (Λ' : Type (u + 1)) [CommRing Λ'] [Finite Λ']
+    (f : X ⟶ Y) [HasCompactification f] (K : 𝐃(X, Λ')) (L : 𝐃(Y, Λ')) :
+    IsIso (projectionMapApp Λ' f K L) :=
+  hasProjectionFormula_of_finite Λ' f K L
+
 /-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction; the
 compatibility of the reduction `Λ → Λ ⧸ (ϖ)ⁿ` (for `Λ = 𝒪_E`, the reduction `𝒪_E → A_{E,n}`) with
 the projection transformation.
@@ -84,7 +106,7 @@ theorem exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap
         Nonempty (Arrow.mk ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ n)).map
             (((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L)) ≅
           Arrow.mk ((derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) Y).map
-            (((projectionMap (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) f).app Kn).app Ln))) :=
+            (projectionMapApp (Λ ⧸ Ideal.span {ϖ} ^ n) f Kn Ln))) :=
   sorry
 
 /-- **The reduction of the projection map at a finite quotient.** For a nonzerodivisor `ϖ` of
@@ -102,9 +124,6 @@ theorem isIso_reductionModIdeal_map_projectionMap_of_finite (hϖ : ϖ ∈ nonZer
       (((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L)) := by
   obtain ⟨Kn, -, Ln, -, -, -, ⟨e⟩⟩ :=
     exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap hϖ n f K L
-  have : IsIso (((projectionMap (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) f).app Kn).app
-      Ln) :=
-    hasProjectionFormula_of_finite (Λ ⧸ Ideal.span {ϖ} ^ n) f Kn Ln
   exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff e).2
     (Functor.map_isIso (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) Y) _)
 

@@ -4077,6 +4077,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduct
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.PullbackIntTensorFamily
+public import WeilConjectures.SixFunctors.Etale.Derived.RationalOperations
 public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange

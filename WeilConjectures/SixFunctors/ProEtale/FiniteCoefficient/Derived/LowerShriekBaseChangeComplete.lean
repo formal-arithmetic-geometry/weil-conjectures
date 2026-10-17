@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Complete pro-étale compact-support base change
@@ -93,28 +92,56 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 section Reduction
 
+/- The monoidal structure of `D(X_proét, Λ)` is taken from the fields of the constant
+`DerivedCategory.sheafTensorStructure`, as in the files on derived completeness (see the
+implementation notes of `WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs`). -/
+attribute [-instance] _root_.DerivedCategory.commShift₂CurriedTensor
+  _root_.DerivedCategory.commShiftTensorLeft _root_.DerivedCategory.commShiftTensorRight
+  _root_.DerivedCategory.isTriangulated_tensorLeft
+  _root_.DerivedCategory.isTriangulated_tensorRight
+  _root_.DerivedCategory.monoidalPreadditive _root_.DerivedCategory.monoidalLinear
+
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
+
+noncomputable local instance (priority := high) : MonoidalCategory 𝐃(X, Λ) :=
+  (_root_.DerivedCategory.sheafTensorStructure (Scheme.ProEt.topology X) Λ).monoidalCategory
+
+noncomputable local instance (priority := high) : MonoidalPreadditive 𝐃(X, Λ) :=
+  (_root_.DerivedCategory.sheafTensorStructure (Scheme.ProEt.topology X) Λ).monoidalPreadditive
+
+noncomputable local instance (priority := high) : MonoidalLinear Λ 𝐃(X, Λ) :=
+  (_root_.DerivedCategory.sheafTensorStructure (Scheme.ProEt.topology X) Λ).monoidalLinear
+
+noncomputable local instance (priority := high) : (curriedTensor 𝐃(X, Λ)).CommShift₂Int :=
+  (_root_.DerivedCategory.sheafTensorStructure (Scheme.ProEt.topology X) Λ).commShift₂
+
+noncomputable local instance (priority := high) (K : 𝐃(X, Λ)) :
+    ((curriedTensor 𝐃(X, Λ)).obj K).IsTriangulated :=
+  (_root_.DerivedCategory.sheafTensorStructure (Scheme.ProEt.topology X)
+    Λ).isTriangulated_tensorLeft K
+
+noncomputable local instance (priority := high) (K : 𝐃(X, Λ)) :
+    ((curriedTensor 𝐃(X, Λ)).flip.obj K).IsTriangulated :=
+  (_root_.DerivedCategory.sheafTensorStructure (Scheme.ProEt.topology X)
+    Λ).isTriangulated_tensorRight K
 
 /-- Reduction of coefficients along a quotient of the coefficient ring: the functor
 `K ↦ K ⊗ᴸ (Λ/J)_X` on `D(X_proét, Λ)`. For `Λ = 𝒪_E` and `J = (ϖⁿ)` this is the finite
 reduction `K ↦ K_n` of the adic formalism. -/
 noncomputable def reductionModIdeal (J : Ideal Λ) : 𝐃(X, Λ) ⥤ 𝐃(X, Λ) :=
-  (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj
+  (curriedTensor 𝐃(X, Λ)).flip.obj
     ((_root_.DerivedCategory.singleFunctor _ 0).obj
       ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (Λ ⧸ J))))
 
 /-- The reduction `K ↦ K ⊗ᴸ (Λ/J)_X` commutes with shifts. -/
 noncomputable instance (J : Ideal Λ) : (reductionModIdeal Λ X J).CommShift ℤ :=
-  inferInstanceAs (((curriedTensor
-    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))).flip.obj
-      _).CommShift ℤ)
+  Functor.CommShift₂.commShiftFlipObj (h := .int) _
 
 /-- The reduction `K ↦ K ⊗ᴸ (Λ/J)_X` is triangulated. -/
 instance (J : Ideal Λ) : (reductionModIdeal Λ X J).IsTriangulated :=
-  inferInstanceAs (((curriedTensor
-    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))).flip.obj
-      _).IsTriangulated)
+  (_root_.DerivedCategory.sheafTensorStructure (Scheme.ProEt.topology X)
+    Λ).isTriangulated_tensorRight _
 
 variable {Λ X}
 
@@ -126,28 +153,26 @@ map is the multiplication by `ϖ`. -/
 theorem isIso_smul_id_of_isZero_reductionModIdeal {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (K : 𝐃(X, Λ)) (hK : IsZero ((reductionModIdeal Λ X (Ideal.span {ϖ})).obj K)) :
     IsIso (ϖ • 𝟙 K) := by
-  let F := (curriedTensor 𝐃(X, Λ)).obj K
-  let T := _root_.DerivedCategory.quotPowTriangle (Scheme.ProEt.topology X) hϖ rfl 1
-  have hT : F.mapTriangle.obj T ∈ distTriang _ :=
-    F.map_distinguished _
-      (_root_.DerivedCategory.quotPowTriangle_distinguished _ hϖ rfl 1)
+  let T := _root_.DerivedCategory.tensorQuotPowTriangle hϖ rfl K 1
+  have hT : T ∈ distTriang _ :=
+    _root_.DerivedCategory.tensorQuotPowTriangle_distinguished hϖ rfl K 1
   -- the third vertex of the tensored triangle is the reduction of `K` modulo `ϖ`
   let e : (Ideal.quotPowFunctor (Ideal.span {ϖ})).obj (op 1) ≅
       ModuleCat.of Λ (Λ ⧸ Ideal.span {ϖ}) :=
     (Submodule.quotEquivOfEq _ _ (pow_one _)).toModuleIso
-  have h₃ : IsZero (F.mapTriangle.obj T).obj₃ :=
-    hK.of_iso (F.mapIso ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
+  have h₃ : IsZero T.obj₃ :=
+    hK.of_iso (whiskerLeftIso K ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
       ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).mapIso e)))
-  have h₁ : IsIso (F.mapTriangle.obj T).mor₁ := (Triangle.isZero₃_iff_isIso₁ _ hT).1 h₃
-  have hmor : (F.mapTriangle.obj T).mor₁ = ϖ • 𝟙 (F.obj T.obj₁) := by
-    change F.map T.mor₁ = _
-    rw [_root_.DerivedCategory.quotPowTriangle_mor₁, pow_one, Functor.map_smul,
-      CategoryTheory.Functor.map_id]
-  rw [hmor] at h₁
-  let v : F.obj T.obj₁ ≅ K :=
-    F.mapIso (_root_.DerivedCategory.singleFunctorObjUnitIso _) ≪≫ ρ_ K
-  have : ϖ • 𝟙 K = v.inv ≫ (ϖ • 𝟙 (F.obj T.obj₁)) ≫ v.hom := by
-    rw [Linear.smul_comp, Category.id_comp, Linear.comp_smul, Iso.inv_hom_id]
+  have h₁ : IsIso T.mor₁ := (Triangle.isZero₃_iff_isIso₁ _ hT).1 h₃
+  have hmor : T.mor₁ = (_root_.DerivedCategory.unitIso K).inv ≫ (ϖ • 𝟙 K) ≫
+      (_root_.DerivedCategory.unitIso K).hom := by
+    change K ◁ (_root_.DerivedCategory.quotPowTriangle _ hϖ rfl 1).mor₁ = _
+    rw [_root_.DerivedCategory.quotPowTriangle_mor₁, pow_one, MonoidalLinear.whiskerLeft_smul,
+      MonoidalCategory.whiskerLeft_id, Linear.smul_comp, Category.id_comp, Linear.comp_smul,
+      Iso.inv_hom_id]
+  have : ϖ • 𝟙 K = (_root_.DerivedCategory.unitIso K).hom ≫ T.mor₁ ≫
+      (_root_.DerivedCategory.unitIso K).inv := by
+    rw [hmor]; simp
   rw [this]
   infer_instance
 

@@ -70,7 +70,7 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
-variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ}
+variable {Λ : Type (u + 1)} [CommRing Λ] (M : Submonoid Λ) {I : Ideal Λ}
 
 section Integral
 
@@ -159,7 +159,7 @@ end Integral
 
 section Rational
 
-variable (M : Submonoid Λ) [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
+variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
   [Finite (Λ ⧸ I)] [hϖI : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
   {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
@@ -173,22 +173,18 @@ local instance {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated :=
   isTriangulated_rightDerivedUpperShriek f
 
-set_option hygiene false in
-/-- The rational stage `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[M⁻¹]`. -/
-local notation "𝐃ᵇc(" X ")" =>
-  Rationalization M (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory
-
 variable (I) in
 /-- The compact-support direct image `Rf_{!,E} : Dᵇc(X, E) ⥤ Dᵇc(Y, E)` at the rational stage,
 induced by the integral `Rf_!`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegralRightDerivedLowerShriek`). -/
-noncomputable abbrev boundedConstructibleRationalRightDerivedLowerShriek : 𝐃ᵇc(X) ⥤ 𝐃ᵇc(Y) :=
+noncomputable abbrev boundedConstructibleRationalRightDerivedLowerShriek :=
   Rationalization.map M (boundedConstructibleIntegralRightDerivedLowerShriek I aX aY f hf)
 
 variable (I) in
 /-- The exceptional inverse image `Rf_E^! : Dᵇc(Y, E) ⥤ Dᵇc(X, E)` at the rational stage, induced
-by the integral `Rf^!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegralExceptionalInverseImage`). -/
-noncomputable abbrev boundedConstructibleRationalExceptionalInverseImage : 𝐃ᵇc(Y) ⥤ 𝐃ᵇc(X) :=
+by the integral `Rf^!`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegralExceptionalInverseImage`). -/
+noncomputable abbrev boundedConstructibleRationalExceptionalInverseImage :=
   Rationalization.map M (boundedConstructibleIntegralExceptionalInverseImage I aX aY f hf)
 
 /-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
@@ -206,6 +202,7 @@ noncomputable def boundedConstructibleRationalLowerShriekUpperShriekAdjunction :
   Rationalization.mapAdjunction M
     (boundedConstructibleIntegralLowerShriekUpperShriekAdjunction (I := I) aX aY f hf)
 
+omit [IsAlgClosed k] in
 /-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
 exceptional inverse image, the dual formula `Rf_E^! M ≅ 𝔻_{X,E} f^* 𝔻_{Y,E} M`.
 
