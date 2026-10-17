@@ -14,9 +14,107 @@
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Refine the given etale covering so that on each chart U the object P is represented by a bounded complex E of constant finite projective A-modules in degrees [a,b]. The charts U'=U\\times_SS' form an etale covering of S', and g restricts to g_U:U'\\to U. The exact constant-coefficient inverse-image theorem [prop-weil-pbc-inverse-image-modules-exact] makes g^* and g_U^* exact, so g_U^*E is a complex of constant finite projective A-modules in the same degree range. Since restriction to a chart is inverse image along the etale morphism and g\\circ j'=j\\circ g_U for the chart maps j:U\\to S, j':U'\\to S', the monoidal composition comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] identify (g^*K)|_{U'} with g_U^*(K|_U) for every K, compatibly with the tensor comparisons; hence g^*P is represented on U' by g_U^*E and (g^*N)|_{U'}=g_U^*(N|_U). The restriction comparison for derived internal Hom [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies the restriction of each global RHom object with RHom on each localized chart; consequently the local models compute the restrictions of both objects in the claimed comparison.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM7, case (1), first paragraph: locality on the base and exact inverse-image of the local model"
+   }
+  },
+  {
+   "text": "On a chart choose any representative of N|_U and replace it by its good truncation F=\\tau_{\\ge c}N|_U; since H^j(N|_U)=0 for j<c, the truncation map is a quasi-isomorphism, and F^j=0 for j<c. Apply the bounded-free RHom-model lemma [lem-weil-pbc-ringed-site-bounded-free-rhom-model] on U to (E,F), and on the inverse-image chart U' to (g^*E,g^*F): E and g^*E are bounded above with finite-projective terms, while F and g^*F are bounded below, so the ordinary Hom complexes represent the two derived internal Homs. The general chain map c_{E,F} of [lem-sf-etale-hom-complex-pullback] assembles the degreewise maps. For every term E^i and F^j, [lem-sf-etale-finite-projective-pullback-hom] says that this map is an isomorphism and carries the pulled-back evaluation to the evaluation after pullback. The finite direct sums in each total degree therefore give a chain isomorphism, and it is the local canonical comparison because it is induced by evaluation and currying.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-sf-etale-hom-complex-pullback",
+    "lem-sf-etale-finite-projective-pullback-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM7, case (1), strictly perfect E and bounded-below truncation of N; Tag 08JI for the ordinary Hom model"
+   }
+  },
+  {
+   "text": "Put P^\\vee=\\mathscr H_S(P,A_S). By [lem-sf-etale-local-dual-interval] (with T=S, L=A_S, m=0) it is represented on the charts by the dual complex D=\\mathrm{Hom}^\\bullet_A(E,A) with constant finite projective terms in [-b,-a], and it has Tor amplitude [-b,-a]: \\mathcal H^i(P^\\vee\\otimes_A^LM)=0 outside [-b,-a] for every module sheaf M in degree zero. P is perfect in the sense of [lem-sfb-ringed-site-perfect-duality] (locally a bounded complex of direct summands of finite free A_S-modules), so its canonical evaluation comparison P^\\vee\\otimes_A^LN\\to\\mathscr H_S(P,N) is an isomorphism. Since H^j(N)=0 outside [c,d], \\tau_{\\le c}N=H^c(N)[-c] and \\tau_{\\le d}N=N; apply the successive truncation triangles \\tau_{\\le n-1}N\\to\\tau_{\\le n}N\\to H^n(N)[-n] of [def-kun-truncations] for n=c+1,\\dots,d. Tensoring each triangle by P^\\vee remains distinguished by [lem-kun-derived-tensor-triangulated]; P^\\vee\\otimes^L H^n(N)[-n] has cohomology in [n-b,n-a] by the Tor amplitude, and the long exact cohomology sequence [lem-sf-derived-homology-long-exact] gives inductively that P^\\vee\\otimes^L\\tau_{\\le n}N has cohomology in [c-b,n-a]. Hence \\mathscr H_S(P,N) has cohomology only in [c-b,d-a]. By step 1, g^*P satisfies the same hypothesis on the covering U' with models g_U^*E in [a,b], and g^*N has cohomology only in [c,d] because g^* is exact [prop-weil-pbc-inverse-image-modules-exact]; the same argument on S' bounds \\mathscr H_{S'}(g^*P,g^*N).",
+   "uses": [
+    "lem-sf-etale-local-dual-interval",
+    "lem-sfb-ringed-site-perfect-duality",
+    "def-kun-truncations",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM7, case (1), with the bounded cohomology interval obtained by finite truncation and the long exact cohomology sequence"
+   }
+  },
+  {
+   "text": "The local chain isomorphisms in step 2 agree on refinements: the RHom restriction comparison of [lem-weil-pbc-ringed-internal-hom-exact-restriction] together with the evaluation and transpose restriction identities of [lem-weil-pbc-ringed-slice-evaluation-transpose] identifies every refinement with the same canonical map. Choose representatives and take cohomology; exact inverse image from [prop-weil-pbc-inverse-image-modules-exact] identifies the cohomology of a restriction with the restriction of the cohomology. Each cohomology-sheaf map of the global map beta (step 5) is an isomorphism on the covering localized charts U', so [lem-sfb-sheaf-cover-local-isomorphism] makes it an isomorphism globally; a map of complexes inducing isomorphisms on all cohomology sheaves is an isomorphism in D(S'_{\\mathrm{et}},A).",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-sheaf-cover-local-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM7, case (1), final locality and gluing step; slice evaluation-transpose compatibility"
+   }
+  },
+  {
+   "text": "The derived evaluation and transpose are those of the closed structure of [lem-sf-ringed-derived-closed-symmetric-monoidal]: a morphism u:T\\to\\mathscr H(L,M) corresponds to \\mathrm{ev}\\circ(u\\otimes1_L), so beta_{P,N} is the unique morphism with \\mathrm{ev}\\circ(\\beta\\otimes1)=g^*\\mathrm{ev}_{P,N} after the identification of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. On a chart, with the representative normalization of [def-coef-ringed-tensor-hom-model] and the representative evaluation of [def-coef-hom-representative-evaluation], the derived evaluation on \\mathcal Hom^\\bullet(E,I(F))\\otimes E is represented (after a K-flat replacement of the first factor; E is bounded with flat terms) by componentwise evaluation x\\otimes y\\mapsto\\phi(x)(y); the bounded-free model map \\mathcal Hom^\\bullet(E,F)\\to\\mathcal Hom^\\bullet(E,I(F)) of [lem-weil-pbc-ringed-site-bounded-free-rhom-model] is induced by F\\to I(F) and so commutes with componentwise evaluation. The same holds on U' for g_U^*E and g_U^*F. The map c_{E,F} of [lem-sf-etale-hom-complex-pullback] is defined by currying the pulled-back termwise evaluation, and [lem-sf-etale-finite-projective-pullback-hom] makes the evaluation square commute on each E^i and F^j; summing the finitely many bidegrees and representing the tensor pullback comparison termwise on these K-flat models [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives \\mathrm{ev}\\circ(Q(c_{E,F})\\otimes1)=g_U^*\\mathrm{ev} on U'. By uniqueness of transposes Q(c_{E,F}) represents the restriction of beta to U', using the restriction identities of [lem-weil-pbc-ringed-slice-evaluation-transpose] and step 1 to identify restriction of the global evaluation and transpose with the chart ones. Thus beta is the evaluation-induced comparison of the statement, and step 2 shows it is a chart-wise isomorphism.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-coef-ringed-tensor-hom-model",
+    "def-coef-hom-representative-evaluation",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-sf-etale-hom-complex-pullback",
+    "lem-sf-etale-finite-projective-pullback-hom",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM7, case (1), evaluation compatibility and identification of the canonical comparison; Tag 08JI Hom-model normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-hom-representative-evaluation",
+  "def-coef-ringed-tensor-hom-model",
+  "def-kun-truncations",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-etale-finite-projective-pullback-hom",
+  "lem-sf-etale-hom-complex-pullback",
+  "lem-sf-etale-local-dual-interval",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0GM7, lemma-pullback-internal-hom, case (1), expanded using Tag 08DM strictly-perfect Hom models."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,7 +167,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-generic-exchange-algclosed",
@@ -86,7 +184,38 @@
     "lem-sf-etale-generic-exchange-algclosed"
    ]
   },
-  "same_as": [],
+  "same_as": [
+   "sk-thm-sf-internal-hom-pullback"
+  ],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-etale-generic-perfect-hom",
+  "worker": "stage1",
+  "summary": "Follows Stacks Tag 0GM7(1) on each chart with a strictly perfect finite-projective complex E and the good truncation F=tau_{>=c}N, using the bounded-free Hom model (08JI) on the chart and its inverse image. Added one statement-only node for the finite-projective pullback-Hom identity with its evaluation compatibility. The interval bound is obtained globally from the Tor amplitude of the dual and perfect duality; the identification of the chain map with beta uses the closed-structure transpose and the representative evaluation normalization; cover-local gluing is non-elementary. Maintainer FIX (2026-10-18): cited perfect duality and defined D in step 3, replaced the unsupported perfect-duality citation in step 5 by the closed structure and Hom-model normalization nodes, and cited the inverse-image composition comparison in step 1. The statement and all hypotheses are unchanged.",
+  "blueprint": "Realizes thm-weil-etale-geometric-biduality, Proof paragraph 4, finite-projective Hom comparison on each stratum, with the local pullback identity made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-derived-tensor-triangulated",
+    "why": "The truncation induction needs exactness of derived tensor on distinguished triangles; the item route has no separate local node for this generic triangulated-functor fact."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Step 1 needs the monoidal comparison (g^*K)|_{U'}=g_U^*(K|_U) for the composite inverse images along the chart square; already accepted as a tool for this unit in lem-sf-etale-generic-evaluation-coherence, and no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-derived-tensor-triangulated",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-f6bd68415",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-f6bd68415 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sf-etale-finite-projective-pullback-hom, every cited statement, Stacks 0GM7 proof of (1) (cohomology.tex l.13407ff) and 08JI (sites-cohomology.tex l.11959). The statement is unchanged and true. Checked on P=0, N=0, P=A[-a], P concentrated in degree b, S' empty, g=id, and the idempotent summand of F_2xF_2; the interval is sharp. The new node is true (finite free case plus retract), unsplit, and not a duplicate of etale-pullback-internal-hom, hom-comparison-finite-free (nu), ringed-finite-free-hom-base-change, pc-finite-projective-internal-hom-evaluation, or sk-thm-sf-internal-hom-pullback/thm-trf. Repaired 3 citation faults in the item. (1) C1, step 1: the inverse-image/chart composition (g^*K)|_{U'}=g_U^*(K|_U) had no citing node; now cites lem-sfb-ringed-derived-monoidal-comparisons, declared in tool_uses (already accepted for this unit). (2) C4/E5, step 3: D was undefined and RHom(P,N)=P^vee(x)N was wrongly taken from step 2; now cites lem-sfb-ringed-site-perfect-duality and lem-sf-etale-local-dual-interval, with the truncation induction written out globally on S and S'. (3) C4, step 5: perfect-duality was cited for the Hom-model evaluation normalization, which it does not state; now cites lem-sf-ringed-derived-closed-symmetric-monoidal, def-coef-ringed-tensor-hom-model and def-coef-hom-representative-evaluation, with uniqueness of transposes. Also rewrote the stale split_report summary. No cycle; proof_deps equals the union of uses; no SGA. Accepted tool_uses: lem-kun-derived-tensor-triangulated, lem-sfb-ringed-derived-monoidal-comparisons.; 1 file(s) fixed by the reviewer"
  }
 }
