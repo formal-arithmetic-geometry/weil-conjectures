@@ -2734,6 +2734,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresenta
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSections
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafWeightOperations
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.UnramifiedBoundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationData
@@ -4321,6 +4322,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverLoop
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverRepresentation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExtension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
@@ -4611,6 +4613,7 @@ public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.LFunction
 public import WeilConjectures.WeilSheaf.LisseAbelian
 public import WeilConjectures.WeilSheaf.LisseDuality
+public import WeilConjectures.WeilSheaf.LisseExtension
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.LocalFrobenius
