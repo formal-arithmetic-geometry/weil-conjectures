@@ -19,7 +19,10 @@ part). Hence the normal cone lies over the closed subscheme `V(I) ≅ Z`
 (`AlgebraicGeometry.Scheme.Hom.normalBundleProj`), and the augmentation
 `⨁_{r ≥ 0} I^r / I^{r+1} ⟶ 𝒪_X / I` defines its *zero section*
 `AlgebraicGeometry.Scheme.Hom.normalConeZeroSection`, a closed immersion and a section of the
-projection (`AlgebraicGeometry.Scheme.Hom.normalConeZeroSection_normalBundleProj`).
+projection (`AlgebraicGeometry.Scheme.Hom.normalConeZeroSection_normalBundleProj`). For a regular
+immersion of pure codimension `c` the normal cone is a vector bundle of rank `c`
+(`AlgebraicGeometry.Scheme.Hom.isVectorBundle_normalBundleProj` in
+`WeilConjectures.AlgebraicGeometry.NormalBundleRegular`).
 -/
 
 @[expose] public section

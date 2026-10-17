@@ -62,7 +62,8 @@ lemma C_comp_normalConeChartRingIso_hom :
 lemma normalConeChartRingIso_X (k : ULift.{u} (Fin c)) :
     (I.normalConeChartRingIso W a ha hspan).hom (MvPolynomial.X k) =
       Ideal.Quotient.mk _ ⟨LaurentPolynomial.C (a k.down) * LaurentPolynomial.T (-1),
-        Ideal.C_mul_T_neg_one_mem_extendedReesAlgebra (hspan ▸ Ideal.subset_span ⟨k.down, rfl⟩)⟩ := by
+        Ideal.C_mul_T_neg_one_mem_extendedReesAlgebra
+          (hspan ▸ Ideal.subset_span ⟨k.down, rfl⟩)⟩ := by
   change Ideal.mvPolynomialEquivReesQuotOfEq a ha hspan
     (MvPolynomial.rename Equiv.ulift (MvPolynomial.X _)) = _
   rw [MvPolynomial.rename_X, Ideal.mvPolynomialEquivReesQuotOfEq_X]
@@ -78,7 +79,8 @@ lemma normalConeChartRingIso_hom_comp_normalConeToQuotient :
     rw [CommRingCat.hom_comp, RingHom.comp_apply, normalConeChartRingIso_C]
     simpa using this
   · rw [CommRingCat.hom_comp, RingHom.comp_apply, normalConeChartRingIso_X]
-    change Polynomial.eval 0 ((I.siteIdeal W).extendedReesAlgebraToPolynomial _ Ideal.mk_ker.ge _) = _
+    change Polynomial.eval 0
+      ((I.siteIdeal W).extendedReesAlgebraToPolynomial _ Ideal.mk_ker.ge _) = _
     rw [Ideal.extendedReesAlgebraToPolynomial_C_mul_T_neg_one _ _
       (hspan ▸ Ideal.subset_span ⟨k.down, rfl⟩)]
     simp
@@ -231,6 +233,7 @@ lemma normalBundleChart_hom_appTop_coord (k : Fin c) :
     IdealSheafData.normalConeChartRingIso_X] at this
   exact this.symm
 
+omit [IsClosedImmersion i] in
 /-- Two chart coordinates are related linearly over a smaller affine open `W ⊆ W₁ ∩ W₂`: the
 generators `a₂` of the ideal of `Z` are linear combinations of the generators `a₁`, so
 `a₂ₖ t⁻¹ = ∑ βₗ a₁ₗ t⁻¹`. -/
@@ -261,29 +264,222 @@ lemma exists_normalConeCoord_relation {W₁ W₂ W : X.AffineZariskiSite} (h₁ 
   -- transport to the algebra `⨁_r I^r / I^{r+1}` over `W`
   have hnat {V : X.AffineZariskiSite} (h : W ⟶ V) (y) :
       i.ker.normalCone.presheaf.map (homOfLE
-          ((relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase.preimage_mono (toOpens_mono h.le))).op
+          ((relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase.preimage_mono
+            (toOpens_mono h.le))).op
         ((sectionsIso i.ker.coequifibered_toNormalConePresheaf V).inv y) =
-        (sectionsIso i.ker.coequifibered_toNormalConePresheaf W).inv ((i.ker.normalConePresheaf.map h.op) y) := by
+        (sectionsIso i.ker.coequifibered_toNormalConePresheaf W).inv
+          ((i.ker.normalConePresheaf.map h.op) y) := by
     have := sectionsIso_hom_naturality i.ker.coequifibered_toNormalConePresheaf h
     rw [← Iso.eq_comp_inv] at this
     rw [this]
     simp
-  have hbase (b : Γ(X, W.1)) : (relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase.app W.1 b =
-      (sectionsIso i.ker.coequifibered_toNormalConePresheaf W).inv (((i.ker.toReesPresheaf ≫ toQuotientPresheaf i.ker.tIdeal i.ker.map_tIdeal).app (.op W)) b) := by
+  have hbase (b : Γ(X, W.1)) :
+      (relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase.app W.1 b =
+      (sectionsIso i.ker.coequifibered_toNormalConePresheaf W).inv
+        (((i.ker.toReesPresheaf ≫ toQuotientPresheaf i.ker.tIdeal i.ker.map_tIdeal).app (.op W))
+          b) := by
     have := toBase_appLE_sectionsIso_hom i.ker.coequifibered_toNormalConePresheaf W
     rw [← Iso.eq_comp_inv] at this
     rw [Scheme.Hom.app_eq_appLE]
     exact congr($this b)
   simp only [normalConeCoord]
-  simp only [hnat, hbase, ← map_mul, ← map_sum]
+  rw [hnat h₂]
+  simp_rw [hnat h₁, hbase, ← map_mul, ← map_sum]
   congr 1
-  simp only [Scheme.quotientPresheaf_map, CommRingCat.hom_ofHom, Ideal.quotientMap_mk,
-    NatTrans.comp_app, CommRingCat.comp_apply, Scheme.toQuotientPresheaf_app,
-    IdealSheafData.toReesPresheaf_app, ← map_mul, ← map_sum]
+  let φ₁ : (i.ker.siteIdeal W₁).extendedReesAlgebra →+* (i.ker.siteIdeal W).extendedReesAlgebra :=
+    (i.ker.reesPresheaf.map h₁.op).hom
+  let φ₂ : (i.ker.siteIdeal W₂).extendedReesAlgebra →+* (i.ker.siteIdeal W).extendedReesAlgebra :=
+    (i.ker.reesPresheaf.map h₂.op).hom
+  have key : φ₂ ⟨LaurentPolynomial.C (a₂ k) * LaurentPolynomial.T (-1),
+        Ideal.C_mul_T_neg_one_mem_extendedReesAlgebra (hs₂ ▸ Ideal.subset_span ⟨k, rfl⟩)⟩ =
+      ∑ x, algebraMap Γ(X, W.1) (i.ker.siteIdeal W).extendedReesAlgebra (β x) *
+        φ₁ ⟨LaurentPolynomial.C (a₁ x) * LaurentPolynomial.T (-1),
+            Ideal.C_mul_T_neg_one_mem_extendedReesAlgebra (hs₁ ▸ Ideal.subset_span ⟨x, rfl⟩)⟩ := by
+    apply Subtype.ext
+    simp only [AddSubmonoidClass.coe_finsetSum, MulMemClass.coe_mul,
+      Ideal.coe_algebraMap_extendedReesAlgebra]
+    change LaurentPolynomial.mapRingHom res₂
+        (LaurentPolynomial.C (a₂ k) * LaurentPolynomial.T (-1)) =
+      ∑ x, LaurentPolynomial.C (β x) *
+        LaurentPolynomial.mapRingHom res₁ (LaurentPolynomial.C (a₁ x) * LaurentPolynomial.T (-1))
+    rw [map_mul, LaurentPolynomial.mapRingHom_T]
+    erw [LaurentPolynomial.mapRingHom_C]
+    rw [← hβ, map_sum, Finset.sum_mul]
+    refine Finset.sum_congr rfl fun x _ ↦ ?_
+    rw [map_mul (LaurentPolynomial.mapRingHom res₁), LaurentPolynomial.mapRingHom_T]
+    erw [LaurentPolynomial.mapRingHom_C]
+    rw [← mul_assoc, ← map_mul]
+    rfl
+  change Ideal.Quotient.mk _ (φ₂ _) =
+    ∑ x, Ideal.Quotient.mk _ (algebraMap Γ(X, W.1) (i.ker.siteIdeal W).extendedReesAlgebra (β x)) *
+      Ideal.Quotient.mk _ (φ₁ _)
+  rw [key, map_sum]
+  exact Finset.sum_congr rfl fun x _ ↦ map_mul _ _ _
+
+omit [IsClosedImmersion i] in
+/-- Pulling back sections along `f` after `g.appLE U ⊤`. -/
+lemma appTop_appLE_apply {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C) (U : C.Opens)
+    (e : ⊤ ≤ g ⁻¹ᵁ U) (x : Γ(C, U)) :
+    f.appTop (g.appLE U ⊤ e x) = (f ≫ g).appLE U ⊤ (by
+      rw [Scheme.Hom.comp_preimage]; exact le_top.trans (Scheme.Hom.preimage_mono _ e)) x := by
+  rw [← CommRingCat.comp_apply]
+  have : f.appTop = f.appLE ⊤ ⊤ (by simp) := by simp [Scheme.Hom.appLE]
+  rw [this, Scheme.Hom.appLE_comp_appLE]
+
+omit [IsClosedImmersion i] in
+/-- A linear relation `σ₂ = ∑ t^*(βₗ) σ₁ₗ` between sections of `N` over `t⁻¹ W` pulls back along
+`F : T ⟶ N` to a linear relation over `s⁻¹ g⁻¹ W`, when `F ≫ t = s ≫ g`. -/
+lemma appLE_relation {T N P Y : Scheme.{u}} (F : T ⟶ N) (s : T ⟶ P) (g : P ⟶ Y) (t : N ⟶ Y)
+    (hF : F ≫ t = s ≫ g) (W : Y.Opens) {U₁ U₂ : N.Opens} (hU₁ : t ⁻¹ᵁ W ≤ U₁)
+    (hU₂ : t ⁻¹ᵁ W ≤ U₂) (σ₁ : Fin c → Γ(N, U₁)) (σ₂ : Γ(N, U₂)) (β : Fin c → Γ(Y, W))
+    (h : N.presheaf.map (homOfLE hU₂).op σ₂ =
+      ∑ l, t.app W (β l) * N.presheaf.map (homOfLE hU₁).op (σ₁ l))
+    (e₁ : ⊤ ≤ F ⁻¹ᵁ U₁) (e₂ : ⊤ ≤ F ⁻¹ᵁ U₂) :
+    T.presheaf.map (homOfLE (le_top : s ⁻¹ᵁ g ⁻¹ᵁ W ≤ ⊤)).op (F.appLE U₂ ⊤ e₂ σ₂) =
+      ∑ l, s.app (g ⁻¹ᵁ W) (g.app W (β l)) *
+        T.presheaf.map (homOfLE (le_top : s ⁻¹ᵁ g ⁻¹ᵁ W ≤ ⊤)).op (F.appLE U₁ ⊤ e₁ (σ₁ l)) := by
+  have hV : s ⁻¹ᵁ g ⁻¹ᵁ W ≤ F ⁻¹ᵁ t ⁻¹ᵁ W := by
+    rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, hF]
+  have hres (U : N.Opens) (hU : t ⁻¹ᵁ W ≤ U) (e : ⊤ ≤ F ⁻¹ᵁ U) (σ : Γ(N, U)) :
+      T.presheaf.map (homOfLE (le_top : s ⁻¹ᵁ g ⁻¹ᵁ W ≤ ⊤)).op (F.appLE U ⊤ e σ) =
+        F.appLE (t ⁻¹ᵁ W) _ hV (N.presheaf.map (homOfLE hU).op σ) := by
+    rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_map, ← CommRingCat.comp_apply,
+      Scheme.Hom.map_appLE]
+  have hcoef (b : Γ(Y, W)) :
+      F.appLE (t ⁻¹ᵁ W) _ hV (t.app W b) = s.app (g ⁻¹ᵁ W) (g.app W b) := by
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appLE,
+      Scheme.Hom.appLE_congr_hom hF _ _ _ (by rw [← hF, Scheme.Hom.comp_preimage]; exact hV),
+      Scheme.Hom.comp_appLE, CommRingCat.comp_apply]
+    simp [Scheme.Hom.appLE]
+  rw [hres _ hU₂, h, map_sum]
+  refine Finset.sum_congr rfl fun l _ ↦ ?_
+  rw [map_mul, hcoef, hres _ hU₁]
+
+omit [IsClosedImmersion i] in
+lemma normalBundleBase_comp (W : X.AffineZariskiSite) [IsClosedImmersion i] :
+    i.normalBundleBase W ≫ i =
+      colimit.ι (relativeGluingData i.ker.coequifibered_toQuotientAlgebra).functor W ≫
+        (relativeGluingData i.ker.coequifibered_toQuotientAlgebra).toBase := by
+  rw [normalBundleBase, Category.assoc]
   congr 1
-  apply Subtype.ext
-  simp [IdealSheafData.reesPresheaf, Ideal.coe_extendedReesAlgebraMap, ← hβ, map_sum,
-    Finset.sum_mul, mul_assoc, res₂, res₁]
+  rw [IsIso.inv_comp_eq, toQuotientSpec_toBase]
+
+lemma normalBundleBase_comp_apply_mem (W : X.AffineZariskiSite)
+    (w : Spec (i.ker.quotientAlgebra.obj (.op W))) :
+    (i.normalBundleBase W ≫ i) w ∈ W.1 := by
+  rw [normalBundleBase_comp]
+  have : colimit.ι (relativeGluingData i.ker.coequifibered_toQuotientAlgebra).functor W w ∈
+      (relativeGluingData i.ker.coequifibered_toQuotientAlgebra).toBase ⁻¹ᵁ W.1 := by
+    rw [toBase_preimage]; exact ⟨w, rfl⟩
+  exact this
+
+/-- The coordinate changes between two charts of the normal cone are linear, locally on the
+overlap. -/
+theorem normalBundle_linear (W₁ : X.AffineZariskiSite) (a₁ : Fin c → Γ(X, W₁.1))
+    (ha₁ : MvPolynomial.IsRevRegular a₁) (hs₁ : Ideal.span (Set.range a₁) = i.ker.siteIdeal W₁)
+    (W₂ : X.AffineZariskiSite) (a₂ : Fin c → Γ(X, W₂.1))
+    (ha₂ : MvPolynomial.IsRevRegular a₂) (hs₂ : Ideal.span (Set.range a₂) = i.ker.siteIdeal W₂)
+    (k : Fin c) (y : ↥(pullback (i.normalBundleBase W₁) (i.normalBundleBase W₂))) :
+    ∃ (U : (pullback (i.normalBundleBase W₁) (i.normalBundleBase W₂)).Opens) (_ : y ∈ U)
+      (a : Fin c → Γ(pullback (i.normalBundleBase W₁) (i.normalBundleBase W₂), U)),
+      (pullback i.normalBundleProj (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫
+        i.normalBundleBase W₁)).presheaf.map (homOfLE le_top).op
+        ((pullback.map i.normalBundleProj
+          (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫ i.normalBundleBase W₁)
+          i.normalBundleProj (i.normalBundleBase W₂) (𝟙 _)
+          (pullback.snd (i.normalBundleBase W₁) (i.normalBundleBase W₂)) (𝟙 Z) (by simp)
+          (by simp [pullback.condition])).appTop
+          ((i.normalBundleChart W₂ a₂ ha₂ hs₂).hom.appTop
+            (AffineSpace.coord _ (ULift.up k)))) =
+      ∑ l, (pullback.snd i.normalBundleProj
+          (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫
+            i.normalBundleBase W₁)).app U (a l) *
+        (pullback i.normalBundleProj (pullback.fst (i.normalBundleBase W₁)
+          (i.normalBundleBase W₂) ≫ i.normalBundleBase W₁)).presheaf.map (homOfLE le_top).op
+          ((pullback.map i.normalBundleProj
+            (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫ i.normalBundleBase W₁)
+            i.normalBundleProj (i.normalBundleBase W₁) (𝟙 _)
+            (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂)) (𝟙 Z) (by simp)
+            (by simp)).appTop
+            ((i.normalBundleChart W₁ a₁ ha₁ hs₁).hom.appTop
+              (AffineSpace.coord _ (ULift.up l)))) := by
+  have hx₁ := i.normalBundleBase_comp_apply_mem W₁
+    (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) y)
+  have hx₂ : (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫
+      i.normalBundleBase W₁ ≫ i) y ∈ W₂.1 := by
+    rw [← Category.assoc, pullback.condition, Category.assoc]
+    exact i.normalBundleBase_comp_apply_mem W₂
+      (pullback.snd (i.normalBundleBase W₁) (i.normalBundleBase W₂) y)
+  have hx₁' : (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫
+      i.normalBundleBase W₁ ≫ i) y ∈ W₁.1 := by
+    rw [Scheme.Hom.comp_apply]; exact hx₁
+  obtain ⟨f, f', hff', hxf⟩ := exists_basicOpen_le_affine_inter (X := X) W₁.2 W₂.2
+    ((pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫
+      i.normalBundleBase W₁ ≫ i) y) ⟨hx₁', hx₂⟩
+  have h₁ : W₁.basicOpen f ⟶ W₁ := homOfLE (W₁.basicOpen_le f)
+  have h₂ : W₁.basicOpen f ⟶ W₂ := homOfLE ⟨f', hff'.symm⟩
+  obtain ⟨β, hβ⟩ := i.exists_normalConeCoord_relation h₁ h₂ a₁ hs₁ a₂ hs₂ k
+  refine ⟨(pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫
+      i.normalBundleBase W₁ ≫ i) ⁻¹ᵁ (W₁.basicOpen f).1, hxf,
+    fun l ↦ (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫
+      i.normalBundleBase W₁ ≫ i).app _ (β l), ?_⟩
+  have hF : pullback.fst i.normalBundleProj
+      (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫ i.normalBundleBase W₁) ≫
+        (relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase =
+      pullback.snd _ _ ≫ (pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫
+        i.normalBundleBase W₁ ≫ i) := by
+    rw [← normalBundleProj_comp, ← Category.assoc, pullback.condition (f := i.normalBundleProj)
+      (g := pullback.fst (i.normalBundleBase W₁) (i.normalBundleBase W₂) ≫ i.normalBundleBase W₁)]
+    simp only [Category.assoc]
+  simp only [normalBundleChart_hom_appTop_coord, appTop_appLE_apply]
+  simp only [pullback.lift_fst, pullback.map, Category.comp_id]
+  exact appLE_relation _ (pullback.snd _ _) _ _ hF _ _ _ _ _ β hβ _ _
+
+set_option linter.overlappingInstances false in
+/-- Blueprint `def-pur-normal-bundle`: Normal bundle and zero section
+
+**The normal cone of a regular immersion is a vector bundle.** If `i : Z ⟶ X` is a regular closed
+immersion of pure codimension `c` (`def-pur-regular-immersion`), the normal cone
+`N_{Z/X} = Spec_Z (⨁_{r ≥ 0} I^r / I^{r+1}) ⟶ Z` is a vector bundle of rank `c`
+(`def-pur-vector-bundle-zero-section`) with zero section the augmentation: over an affine open
+`W` of `X` on which `I` is generated by a regular sequence `a₁, …, a_c`, it is `𝔸^c` with
+coordinates the classes of `aₖ t⁻¹` (quasi-regularity), and these coordinates change linearly.
+The conormal sheaf `I / I²`, the degree one part, is accordingly locally free of rank `c`. -/
+theorem isVectorBundle_normalBundleProj (c : ℕ) [IsRegularImmersion c i] :
+    IsVectorBundle c i.normalBundleProj i.normalConeZeroSection where
+  zeroSection_comp := i.normalConeZeroSection_normalBundleProj
+  isClosedImmersion_zeroSection := inferInstance
+  nonempty_atlas := by
+    refine ⟨{
+      ι := Σ W : X.AffineZariskiSite, {a : Fin c → Γ(X, W.1) //
+        MvPolynomial.IsRevRegular a ∧ Ideal.span (Set.range a) = i.ker.siteIdeal W}
+      V := fun j ↦ Spec (i.ker.quotientAlgebra.obj (.op j.1))
+      v := fun j ↦ i.normalBundleBase j.1
+      isOpenImmersion := fun j ↦ inferInstance
+      exists_mem_range := fun z ↦ ?_
+      chart := fun j ↦ i.normalBundleChart j.1 j.2.1 j.2.2.1 j.2.2.2
+      chart_hom_over := fun j ↦ i.normalBundleChart_hom_over j.1 j.2.1 j.2.2.1 j.2.2.2
+      zeroSection_chart := fun j ↦
+        i.exists_normalBundleChart_zeroSection j.1 j.2.1 j.2.2.1 j.2.2.2
+      linear := fun j₁ j₂ k y ↦ ?_ }⟩
+    · obtain ⟨U, hxU, r, hlen, hr, hrI⟩ :=
+        IsRegularImmersion.exists_isWeaklyRegular_generators (c := c) (i := i) (i z)
+      obtain ⟨a, ha, hspan⟩ := MvPolynomial.exists_isRevRegular_of_isWeaklyRegular r hr c hlen
+      let W : X.AffineZariskiSite := ⟨U.1, U.2⟩
+      refine ⟨⟨W, a, ha, hspan.trans hrI⟩, ?_⟩
+      have : i.toQuotientSpec z ∈
+          (relativeGluingData i.ker.coequifibered_toQuotientAlgebra).toBase ⁻¹ᵁ W.1 := by
+        change ((i.toQuotientSpec ≫
+          (relativeGluingData i.ker.coequifibered_toQuotientAlgebra).toBase) z) ∈ W.1
+        rw [toQuotientSpec_toBase]
+        exact hxU
+      rw [toBase_preimage] at this
+      obtain ⟨w, hw⟩ := this
+      refine ⟨w, ?_⟩
+      change (colimit.ι _ W ≫ inv i.toQuotientSpec) w = z
+      rw [Scheme.Hom.comp_apply, hw, ← Scheme.Hom.comp_apply, IsIso.hom_inv_id]
+      rfl
+    · exact i.normalBundle_linear j₁.1 j₁.2.1 j₁.2.2.1 j₁.2.2.2 j₂.1 j₂.2.1 j₂.2.2.1 j₂.2.2.2 k y
 
 end Scheme.Hom
 
