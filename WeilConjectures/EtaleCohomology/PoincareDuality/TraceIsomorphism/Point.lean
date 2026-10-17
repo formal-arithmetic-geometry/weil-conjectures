@@ -58,7 +58,7 @@ theorem bijective_leftDerivedUpperStar_map_comp {X : Scheme.{u}} [ConnectedSpace
     funext r
     simp
   rw [← h] at hX
-  exact (bijective_conj e.symm (Iso.refl _)).of_comp_iff'.1
+  exact ((bijective_conj e.symm (Iso.refl _)).of_comp_iff' _).1
     ((Function.Bijective.of_comp_iff _ hs).1 hX)
 
 /-- **Evaluation at `1` is bijective.** Let `k` be separably closed, `Λ` self-injective, and
@@ -95,8 +95,9 @@ theorem bijective_comp_unit_rightDerivedLowerStar [Module.Injective Λ Λ] {X : 
     rw [this]
     exact (Equiv.bijective _).comp (bijective_leftDerivedUpperStar_map_comp a e)
   obtain ⟨Z, v, w, hT⟩ := distinguished_cocone_triangle u
-  have : Z.IsGE 1 := isGE_one_of_bijective_comp_of_isSepClosed (Triangle.mk u v w) hT
-    (Iso.refl _) hu
+  have : (Triangle.mk u v w).obj₂.IsGE 0 := hP
+  have : (Triangle.mk u v w).obj₃.IsGE 1 :=
+    isGE_one_of_bijective_comp_of_isSepClosed (Triangle.mk u v w) hT (Iso.refl _) hu
   have hb := DerivedCategory.bijective_comp_singleFunctor_of_injective_of_isGE
     (Triangle.mk u v w) hT ((constantSheaf (Spec (.of k)).smallEtaleTopology
       (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
@@ -111,7 +112,7 @@ theorem bijective_comp_unit_rightDerivedLowerStar [Module.Injective Λ Λ] {X : 
 
 variable [HasTateTwist Λ]
 
-variable (Λ k) in
+variable (Λ k) [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- Over a separably closed field the Tate twists are trivial, `Λ_s(m) ≅ Λ_s`: the twisting
 object is a locally constant sheaf in degree `0` whose stalk is free of rank one, and on
 `Spec k` such a sheaf is constant. -/
@@ -126,7 +127,9 @@ theorem nonempty_tateObject_iso_unit (m : ℤ) :
 
 namespace TateOrientation
 
-variable [Finite Λ] {X : Scheme.{u}} {a : X ⟶ Spec (.of k)} [HasCompactification a] {d : ℕ}
+variable [Finite Λ] [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}}
+  [HasInvertibleExponent Λ X]
+  {a : X ⟶ Spec (.of k)} [HasCompactification a] {d : ℕ}
 
 /-- Over a separably closed field the untwisted trace `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is
 bijective as soon as the twisted trace `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` is: the twists `Λ_s(±d)`
