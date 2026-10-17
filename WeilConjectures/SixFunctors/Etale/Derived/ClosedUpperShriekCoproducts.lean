@@ -70,7 +70,8 @@ the complementary open immersion `j` has finite cohomological dimension. -/
 theorem isIso_sigmaComparison_rightDerivedFunctor_closedUpperShriek
     (hj : HasFiniteCohomologicalDimensionMorphism Λ j) {J : Type (u + 1)}
     (M : J → _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (sigmaComparison (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor M) := by
+    IsIso (sigmaComparison
+      (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor M) := by
   let F := ((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor
   let G := (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor
   let adj : F ⊣ G := derivedLowerStarClosedUpperShriekAdjunction i j hij
@@ -78,8 +79,8 @@ theorem isIso_sigmaComparison_rightDerivedFunctor_closedUpperShriek
   let R := R((j)_*[ModuleCat.{u + 1} Λ])
   let adj' : L ⊣ R := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j
   have := preservesCoproducts_rightDerivedLowerStar Λ j hj J
-  have := adj'.leftAdjoint_preservesColimits
-  have := adj.leftAdjoint_preservesColimits
+  have : PreservesColimitsOfShape (Discrete J) L := adj'.leftAdjoint_preservesColimits.1
+  have : PreservesColimitsOfShape (Discrete J) F := adj.leftAdjoint_preservesColimits.1
   have hgi : Disjoint (Set.range j.base) (Set.range i.base) := hij ▸ disjoint_compl_right
   -- the closed-support triangles of the family and of its coproduct
   choose w hw using fun t ↦ exists_distTriang_closedSupport i j hij (M t)
@@ -95,7 +96,7 @@ theorem isIso_sigmaComparison_rightDerivedFunctor_closedUpperShriek
     hw₀ (𝟙 (∐ M)) c (hcomm.trans (id_comp _).symm)
   have ha : IsIso a := isIso₁_of_isIso₂₃ (Triangle.homMk _ _ a (𝟙 _) c ha₁
     (hcomm.trans (id_comp _).symm) ha₃) hcp hw₀ 
-    (by simpa using (inferInstance : IsIso (𝟙 (∐ M))))
+    ⟨⟨𝟙 _, comp_id _, comp_id _⟩⟩
     (by simpa using (inferInstance : IsIso c))
   let a' : (∐ fun t ↦ F.obj (G.obj (M t))) ⟶ F.obj (G.obj (∐ M)) := a
   have ha' : a' ≫ adj.counit.app (∐ M) = Limits.Sigma.map fun t ↦ adj.counit.app (M t) :=
@@ -145,6 +146,45 @@ theorem preservesColimitsOfShape_rightDerivedFunctor_closedUpperShriek
       (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor :=
     PreservesCoproduct.of_iso_comparison _ _
   preservesColimitsOfShape_of_discrete _
+
+omit [QuasiCompact j] in
+include hij in
+/-- The exceptional inverse image `Ri^!` along a closed immersion has bounded amplitude, when the
+complementary open immersion `j` has finite cohomological dimension: from the closed-support
+triangle `Ri_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶`, if `K` lies in degrees `≤ n` then so does
+`Ri_* Ri^! K` up to `d + 1`, and `i_*` is exact and faithful. -/
+theorem exists_isLE_rightDerivedFunctor_closedUpperShriek
+    (hj : HasFiniteCohomologicalDimensionMorphism Λ j) :
+    ∃ c : ℤ, ∀ (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (n : ℤ), K.IsLE n →
+        ((closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor.obj K).IsLE (n + c) := by
+  obtain ⟨d, hd⟩ := hj
+  have hcd : (Etale.lowerStar (ModuleCat.{u + 1} Λ) j).HasRightCohomologicalDimensionLE
+      d.toNat := fun q F hq ↦
+    Functor.isZero_rightDerived_of_isZero_homology _ F q (hd F q (by lia))
+  refine ⟨d.toNat + 1, fun K n hK ↦ ?_⟩
+  let F := ((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor
+  let G := (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor
+  let adj : F ⊣ G := derivedLowerStarClosedUpperShriekAdjunction i j hij
+  obtain ⟨w, hw⟩ := exists_distTriang_closedSupport i j hij K
+  have := ((j)^*[ModuleCat.{u + 1} Λ]).isLE_mapDerivedCategory_obj K n
+  have hL : ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K).IsLE n :=
+    DerivedCategory.TStructure.t.isLE_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).app K).symm n
+  have hB := hcd.isLE_rightDerivedFunctor_obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K) n
+  have hB' : (((R((j)_*[ModuleCat.{u + 1} Λ])).obj
+      ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K))⟦(-1 : ℤ)⟧).IsLE (n + (d.toNat + 1)) :=
+    DerivedCategory.TStructure.t.isLE_shift _ (n + d.toNat) (-1) _ (by lia)
+  have hK' : K.IsLE (n + (d.toNat + 1)) := DerivedCategory.TStructure.t.isLE_of_le K n _ (by lia)
+  have hA : (F.obj (G.obj K)).IsLE (n + (d.toNat + 1)) :=
+    DerivedCategory.TStructure.t.isLE₂ _ (inv_rot_of_distTriang _ hw) _ hB' hK'
+  have hA' : (((i)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj (G.obj K)).IsLE
+      (n + (d.toNat + 1)) :=
+    DerivedCategory.TStructure.t.isLE_of_iso
+      (((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorIsoMapDerivedCategory.app _) _
+  exact (DerivedCategory.isLE_iff _ _).2 fun q hq ↦
+    Functor.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj _
+      ((DerivedCategory.isLE_iff _ _).1 hA' q hq)
 
 end Etale
 

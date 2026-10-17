@@ -56,7 +56,7 @@ noncomputable def coproductTriangle.desc {T' : Triangle C} (φ : ∀ j, T j ⟶ 
   comm₁ := Sigma.hom_ext _ _ fun j ↦ by simp [coproductTriangle]
   comm₂ := Sigma.hom_ext _ _ fun j ↦ by simp [coproductTriangle]
   comm₃ := Sigma.hom_ext _ _ fun j ↦ by
-    simp [coproductTriangle, ← Functor.map_comp]
+    simp [coproductTriangle]
 
 variable [HasZeroObject C] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
   [Pretriangulated C]
