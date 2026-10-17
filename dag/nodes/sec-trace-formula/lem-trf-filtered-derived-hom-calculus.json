@@ -9,13 +9,137 @@
  },
  "stmt_deps": [
   "def-sp-abelian",
+  "def-sp-enough-injectives",
   "def-weil-abstract-derived-category",
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The localization of filtered complexes in the statement equals the localization of their filtered homotopy category at the same maps. Indeed, for a filtration-preserving homotopy $h$ with $f-g=d_Qh+hd_P$ let $\\operatorname{Cyl}(P)^n=P^n\\oplus P^{n+1}\\oplus P^n$, with direct-sum filtration and $d(a,b,c)=(da+b,-db,dc-b)$. The maps $i_0(a)=(a,0,0)$, $i_1(c)=(0,0,c)$, $p(a,b,c)=a+c$ and $H(a,b,c)=f(a)+h(b)+g(c)$ are filtered chain maps, with $Hi_0=f$, $Hi_1=g$ and $pi_0=pi_1=1$. On each $\\operatorname{gr}^c$, $p$ is surjective with kernel $\\{(a,b,-a)\\}$, isomorphic to the contractible cone of the identity of $\\operatorname{gr}^cP$ [def-weil-abstract-derived-category]; so $p$ is a graded quasi-isomorphism and $f=g$ after localization. Hence every functor inverting graded quasi-isomorphisms factors uniquely through the homotopy category, and both localizations have the same universal property [lem-weil-pbc-localization-universal-property].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 05S2 (definition-filtered-derived): DF(A) is the localization of the homotopy category K(Fil^f(A)); the cylinder identification with the localization of complexes is written out here."
+   }
+  },
+  {
+   "text": "Work first in the bounded-below filtered localization. By [lem-trf-filtered-localization-injective-model] it is the homotopy category of bounded-below complexes of filtered injectives, with resolutions preserving every fixed finite filtration interval. By [lem-trf-bounded-filtered-localization-embedding], the localization of bounded filtered complexes used in the statement embeds fully faithfully and exactly in this category. Thus morphisms between bounded objects can be computed in the injective model without asserting that an injective resolution is bounded above. For a graded quasi-isomorphism, each truncated graded map is either the original graded map or a map between zero complexes, so filtration truncations preserve these quasi-isomorphisms. The localization universal property [lem-weil-pbc-localization-universal-property] descends the truncations and their inclusion and quotient transformations. On filtered-injective representatives they commute with cochain shifts and finite-sum mapping cones, proving exactness. The same holds for each graded functor. Forgetting the filtration is exact on the model and hence on the localization, by the commuting diagram of the model theorem. Bounded inputs have bounded truncations, so these functors restrict to the bounded localization.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "lem-trf-bounded-filtered-localization-embedding",
+    "lem-weil-pbc-localization-universal-property",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.2(a)–(b); Stacks Tags 015Q and 05S6"
+   }
+  },
+  {
+   "text": "Let $P\\to I$ be a filtered-injective resolution in a fixed interval $[a,b]$. Every filtered-injective object is a finite split flag: starting with $F^bI^n=\\operatorname{gr}^bI^n$, split its inclusion into $F^{b-1}I^n$ by injectivity, then repeat; finite sums of injectives are injective since finitely many extension problems can be solved separately. Hence $F^rI$ and $I/F^rI$ are again bounded-below complexes of filtered injectives. Their inclusions and quotients give the cone triangle. Its cone-to-quotient map $(y,x)\\mapsto y\\bmod F^rI$ is a graded quasi-isomorphism: in grade $c<r$ it is the identity on $\\operatorname{gr}^cI$, and in grade $c\\ge r$ its source is the contractible cone of the identity and its target is zero. For the convention $d(y,x)=(dy+x,-dx)$, the contraction is $(y,x)\\mapsto(0,y)$. This proves the asserted distinguished triangle, with the actual inclusion and quotient maps; forgetting gives the ordinary cone/quotient triangle. To prove uniqueness, first note that an object with zero grades below $r$ is isomorphic to its $t_{\\ge r}$ truncation: its natural inclusion is a graded quasi-isomorphism. Likewise an object with zero grades at least $r$ is isomorphic to its $t_{<r}$ truncation. Resolve both in their respective fixed intervals. Every filtered chain map or homotopy from the first kind to the second is zero, since $F^rL=L$ and $F^rR=0$. The model theorem therefore gives $\\operatorname{Hom}(L,R[q])=0$ for every $q$. For two candidate triangles $L\\to P\\to R\\to L[1]$ and $L_1\\to P\\to R_1\\to L_1[1]$, apply [lem-weil-pbc-triangle-morphism-extension] with $g=1_P$. Its condition (a) holds since the composite $L\\to P\\to R_1$ lies in $\\operatorname{Hom}(L,R_1)=0$, so by (1) there is a morphism of triangles $(\\lambda,1_P,\\rho)$. Since $\\operatorname{Hom}(L[1],R_1)=\\operatorname{Hom}(L,R_1[-1])=0$, part (2) makes $\\lambda$ and $\\rho$ unique. Exchanging the triangles gives $(\\mu,1_P,\\sigma)$. Both $(\\mu\\lambda,1_P,\\sigma\\rho)$ and the identity are morphisms of the first triangle to itself extending $1_P$; since $\\operatorname{Hom}(L[1],R)=0$, part (2) gives $\\mu\\lambda=1$ and $\\sigma\\rho=1$, and symmetrically $\\lambda\\mu=1$, $\\rho\\sigma=1$. This proves uniqueness up to unique isomorphism fixing $P$. Inclusions and quotients commute with chain maps, and their descended natural transformations and this uniqueness give functoriality for all localized morphisms.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "def-sp-injective-resolutions",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-triangle-morphism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.1.1–5.1.2(c), expanded using filtered-injective representatives (Stacks Tags 05TY, 015Q)"
+   }
+  },
+  {
+   "text": "Choose bounded filtered representatives $P,Q$ and a filtered-injective resolution $Q\\to I$ in the same finite filtration interval as $Q$. Set\n$$C^n=\\bigoplus_i\\operatorname{Hom}_{\\mathcal A}(P^i,I^{i+n}),\\qquad d(f)=d_If-(-1)^nf d_P,$$\nwhere only finitely many $i$ occur because $P$ is bounded. Define $F^rC^n$ to consist of the families $f$ satisfying $f(F^aP^i)\\subseteq F^{a+r}I^{i+n}$ for every $a,i$. This is a subcomplex, since both differentials preserve their filtrations. If $P$ has grades in $[a,b]$ and $I$ has grades in $[c,e]$, then $F^{c-b}C=C$ and $F^{e-a+1}C=0$, so the filtration is uniformly finite. If $P^i=0$ for $i>v$ and $I^j=0$ for $j<w$, then $C^n=0$ for $n<w-v$. Thus $C$ is a bounded-below complex of abelian groups with a finite decreasing filtration. Its underlying complex is the ordinary Hom complex of $\\omega P$ and $\\omega I$. The latter target and each $\\operatorname{gr}^aI$ are bounded-below complexes of injectives by the model theorem; [lem-weil-pbc-dplus-injective-representative](2) makes them K-injective. By [lem-weil-pbc-kinjective-hom-derived], the elementary cocycle/chain-map identification yields\n$$H^q\\operatorname{Hom}^\\bullet(N,\\omega I)=\\operatorname{Hom}_{K(\\mathcal A)}(N,\\omega I[q])=\\operatorname{Hom}_{D(\\mathcal A)}(N,\\omega Q[q])$$\nfor any bounded complex $N$, with the same formula for each graded target. Indeed $df=0$ in degree $q$ is $d_If=(-1)^q f d_N$, the chain-map equation to $I[q]$; if $f=dg=d_Ig+(-1)^qg d_N$ for $g$ of degree $q-1$, then $h=(-1)^qg$ is a null-homotopy of the associated map $N\\to I[q]$, because $d_{I[q]}h+h d_N=f$. Conversely any such homotopy yields this boundary by $g=(-1)^qh$. Hence this underlying complex is a model for the ordinary global derived Hom, with precisely the cohomology interpretation stated in the item.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "def-sp-injective-resolutions",
+    "def-sp-filtration",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5: concrete Hom-complex model; Stacks Tags 070J and 070I"
+   }
+  },
+  {
+   "text": "The degreewise map taking associated graded morphisms gives\n$$F^rC^n/F^{r+1}C^n\\longrightarrow\\bigoplus_{i,a}\\operatorname{Hom}_{\\mathcal A}(\\operatorname{gr}^aP^i,\\operatorname{gr}^{a+r}I^{i+n}).$$\nIts kernel before quotienting is exactly $F^{r+1}C^n$: zero on the displayed quotients means $f(F^aP^i)\\subseteq F^{a+r+1}I^{i+n}$. For surjectivity, use the finite split flag of each target term $I^{i+n}$ proved in Step 3. For a prescribed map $\\operatorname{gr}^aP^i\\to J$ into the injective summand $J=\\operatorname{gr}^{a+r}I^{i+n}$, extend it across the monomorphism $\\operatorname{gr}^aP^i\\hookrightarrow P^i/F^{a+1}P^i$ using injectivity [def-sp-injective-resolutions], then precompose with $P^i\\to P^i/F^{a+1}P^i$ and include $J$ in $I^{i+n}$. This map preserves filtration with shift $r$: it kills $F^{a+1}$, while for $h\\le a$ its image lies in target grade $a+r\\ge h+r$. Sum over the finitely many $a$. The resulting map has exactly the prescribed graded components. This proves a canonical isomorphism; the splittings were used only to prove surjectivity, so the isomorphism is independent of them and natural. Applying associated graded to $d_If-(-1)^nf d_P$ gives the ordinary Hom-complex differential on each summand. Consequently\n$$\\operatorname{gr}^r C\\cong\\bigoplus_a\\operatorname{Hom}^\\bullet(\\operatorname{gr}^aP,\\operatorname{gr}^{a+r}I).$$\nThe K-injective computation from Step 4 identifies each summand with the corresponding ordinary derived Hom in the statement. The indices are target grade minus source grade, as required by Varshavsky Lemma 5.1.4(i).",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "def-sp-injective-resolutions",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.1.4(i), contravariant/covariant sign of filtration, and §5.1.5; direct injective-extension proof of the graded formula"
+   }
+  },
+  {
+   "text": "First the Hom construction respects homotopies in both variables. For filtration-preserving maps $s,t:P'\\to P$ and a filtration-preserving homotopy $h$ with $s-t=d_Ph+h d_{P'}$, put $S(f)=(-1)^nfh$ on degree-$n$ elements of $\\operatorname{Hom}^\\bullet(P,I)$. Substitution in $d(f)=d_If-(-1)^nf d_P$ gives $dS+Sd=s^*-t^*$. For maps $u,v:I\\to J$ and a filtered homotopy $k$ with $u-v=d_Jk+k d_I$, the formula $T(f)=kf$ gives $dT+Td=u_*-v_*$. Both homotopies preserve every $F^r$, since $h,k$ preserve filtration and $f$ shifts it by $r$. Thus composition defines a bifunctor on the relevant homotopy categories. The construction then descends to the localizations as follows. For a graded quasi-isomorphism $s:P'\\to P$ between bounded sources, Step 5 identifies the induced map on grade $r$ of $C$ with the sum of maps $\\operatorname{Hom}^\\bullet(\\operatorname{gr}^aP,\\operatorname{gr}^{a+r}I)\\to\\operatorname{Hom}^\\bullet(\\operatorname{gr}^aP',\\operatorname{gr}^{a+r}I)$. Its degree-$q$ cohomology is precomposition with the invertible morphism $\\operatorname{gr}^as$ in the derived category, by [lem-weil-pbc-kinjective-hom-derived]; therefore it is an isomorphism in every degree. Thus the map of filtered Hom complexes is a graded quasi-isomorphism. In the second variable choose the quasi-inverse to the exact equivalence [lem-trf-filtered-localization-injective-model]. Its maps are filtration-preserving maps between injective representatives, unique up to filtration-preserving homotopy. Postcomposition induces maps of filtered Hom complexes; the formula $T$ above gives the induced Hom-complex homotopy preserving every $F^r$. Two choices of resolutions are inverse up to such homotopy by the same equivalence, so their Hom complexes are filtered homotopy equivalent. The localization universal property is applied one variable at a time. For fixed $I$, part (1) descends $P\\mapsto C(P,I)$ to the opposite of the bounded localization. A homotopy class $I\\to I'$ gives a natural transformation, and part (2) descends it uniquely, compatibly with identities and composition. Composing in the second variable with the embedding into $DF^+(\\mathcal A)$ and the quasi-inverse equivalence gives a well-defined bifunctor on the two bounded filtered localizations, denoted $R\\operatorname{Hom}_F$, and the natural underlying and graded comparisons of Steps 4–5 descend along with it. All output filtrations and lower cochain bounds are those established in Step 4. This constructs the asserted object in $DF^+(\\mathbf{Ab})$ without any assumption of finite injective dimension.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, with Stacks Tags 05TY and 015Q; invariance of the explicit resolution model"
+   }
+  },
+  {
+   "text": "A degree-zero cocycle of $F^0C$ is precisely a filtration-preserving chain map $P\\to I$. A boundary in $F^0C$ is precisely a filtration-preserving chain null-homotopy. The model theorem and the bounded embedding therefore identify\n$$H^0(F^0C)=\\operatorname{Hom}_{K_F}(P,I)=\\operatorname{Hom}_{DF(\\mathcal A)}(P,Q).$$\nBy Step 2, $F^0C$ with its induced filtration represents $t_{\\ge0}H$, giving the required $H^0(\\omega t_{\\ge0}H)$ formula. Inclusion $F^0C\\hookrightarrow C$ forgets exactly the filtration-preserving requirement on the same map and homotopy. The ordinary K-injective Hom bijection of Step 4 consequently identifies its $H^0$ map with the specified forgetful map to $\\operatorname{Hom}_{D(\\mathcal A)}(\\omega P,\\omega Q)$. The quotient $F^0C\\to F^0C/F^1C=\\operatorname{gr}^0C$ takes a chain map to the family $\\operatorname{gr}^aP\\to\\operatorname{gr}^aI$ by the explicit canonical map in Step 5. Passing to $H^0$ and inverting $\\operatorname{gr}^a(Q\\to I)$ gives exactly the graded morphisms $\\operatorname{gr}^aP\\to\\operatorname{gr}^aQ$, including the stated naturality. The truncation and uniqueness proof of Steps 2–3 works for bounded-below complexes as well. The Hom output asserted here uses bounded $P,Q$, as the statement specifies; the notation $DF^+$ for filtration truncations does not assert that RHom of two arbitrary bounded-below complexes is bounded below.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "lem-trf-bounded-filtered-localization-embedding",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, H^0 interpretation and final graded-projection clause; §5.1.1(e) for bounded-below truncations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-trf-filtered-localization-injective-model",
+  "lem-trf-bounded-filtered-localization-embedding",
+  "def-sp-injective-resolutions",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1.1–5.1.5, expanded via the Stacks filtered-injective model and an explicit shift-filtration Hom complex; no appeal to the unarchived Illusie proof."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,7 +178,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-invariant-localization-filtered-lift",
@@ -73,5 +197,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-derived-hom-calculus",
+  "worker": "stage1",
+  "summary": "Six constructive steps prove the truncation triangles and their unique functoriality by filtered-injective models and orthogonality, then construct the filtered Hom complex with its differential, bounds, graded quotient, invariance, H^0 interpretation and precise forgetful and projection maps. The only new node is the strict bounded/bounded-below filtered-localization embedding (Stacks 05S6); the existing localization-injective-model is reused. The statement is unchanged; enough injectives is now also an explicit statement dependency. Second reading makes triangle comparison uniqueness a direct TR3 argument and writes the signed Hom-complex homotopies explicitly; no statement change. Maintainer reader (2026-10-17): a new first step proves by the filtered cylinder that the localization of complexes equals that of the homotopy category; Step 3 (old Step 2) cites lem-weil-pbc-triangle-morphism-extension for the triangle comparison instead of reproving it; Step 6 (old Step 5) states the one-variable-at-a-time descent. The later steps are renumbered by one.",
+  "blueprint": "Ancestor lem-trf-local-term-locality proof paragraphs (1) and (2), via lem-trf-invariant-localization-filtered-lift: the filtered truncation and RHom calculus of Varshavsky §§5.1.1–5.1.5 underlying the localization-filtration argument.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-filtered-localization-injective-model",
+    "why": "Generic filtered-injective equivalence used to compute filtered morphisms; the unit route does not supply this homological-algebra model."
+   },
+   {
+    "node": "lem-weil-pbc-triangle-morphism-extension",
+    "why": "Generic pre-triangulated lemma (existence and uniqueness of the third map of a triangle morphism when Hom(X[1],Z')=0), used as a black box for the uniqueness of the truncation triangle; no node of sk-i-curve-zero states it. The maintainer reader added it in place of the step's inline TR3 reproof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-filtered-localization-injective-model",
+  "lem-weil-pbc-triangle-morphism-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-a79073a8b",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-a79073a8b (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, Varshavsky pp.39-41 (5.1.1-5.1.5, Lemma 5.1.4 with its proof), Stacks derived.tex 05S2-05S6, the unit sk-i-curve-zero and the parent's use of the item. The statement matches Varshavsky 5.1.5 and 5.1.4(i) in the contravariant case: the index is target minus source, the filtration bounds are c-b and e-a+1, and RHom is kept to bounded P,Q. The reported source error is confirmed: in 5.1.1(c), t>=a is the right adjoint of the embedding, not the left one (k in grade 0 mapping to k in grade 1); the proof never uses that sentence. Every step was checked by hand: the split flag, the cone-to-quotient contraction, orthogonality, the Hom-complex signs (cocycle, boundary, S and T homotopies), the bounds, the graded-quotient kernel and surjectivity by injective extension, and the H^0, forgetful and projection identifications. All correct. The new node is true without enough injectives, by Stacks 05S6(1),(3) and the 05S5 truncation, which keeps the filtration interval. It is not a duplicate: I searched the DAG for 05S5, 05S6 and filtered/bounded/uniqueness terms; lem-trf-filtered-operations-hom is a sheaf-level specialization of the item, not a merge. FIXES: (1) Gap: the statement localizes filtered complexes, the cited nodes localize the homotopy category. A new Step 1 proves they agree with the filtered cylinder, so steps are renumbered. (2) Long step 2 (now Step 3) re-proved inline the existing lem-weil-pbc-triangle-morphism-extension(2). It now cites that node, with the tool use declared, and drops lem-weil-pbc-hom-into-triangle-exact. The rest of the step is one argument. (3) Long step 5 (now Step 6) is one construction and stays; its two-variable descent is now spelled out one variable at a time. (4) The new node's statement now cites def-weil-triangulated-category for 'exact'. Accepted tool uses: lem-trf-filtered-localization-injective-model and lem-weil-pbc-triangle-morphism-extension, both generic homological algebra used as black boxes.; 2 file(s) fixed by the reviewer"
  }
 }

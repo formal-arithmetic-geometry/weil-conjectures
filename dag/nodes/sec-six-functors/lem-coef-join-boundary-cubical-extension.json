@@ -11,9 +11,109 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the unique bead words of [lem-coef-coherent-realization-bead-normal-form]. A nondegenerate mixed simplex of $X\\star Y$ is uniquely $\\sigma\\star\\tau$, where $\\sigma$ and $\\tau$ are nondegenerate simplices of the two factors: a simplicial degeneracy repeats adjacent ordinal positions, necessarily within one block; equality of vertex values alone does not imply degeneracy. A bead therefore goes within one block or crosses once from X to Y; none goes backwards. A word between two X vertices, or between two Y vertices, consists entirely of beads in that block. The subcomplex-detection clause proves that the two realizations are full and the reverse mapping sets are empty. Every cross word consists of a pure X word, exactly one mixed bead, and a pure Y word.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "§5.1 Proposition 5.1.12 applied to the ordered join; §5.3 Remark 5.3.21, block structure."
+   }
+  },
+  {
+   "text": "The two collapse maps $X\\star Y\\to X\\star\\Delta^0$ and $X\\star Y\\to\\Delta^0\\star Y$ define the cross-mapping map in the statement. On a mixed bead with simplex $\\sigma\\star\\tau$ and flag $T_\\bullet$, the first collapse retains $T_a\\cap X$ and adds the last vertex v; the second retains $T_a\\cap Y$ and adds the first vertex b. Both resulting flags begin with their two endpoints and finish with the full vertex set, so they are beads. Conversely, a bead ending at v and one starting at b have underlying simplices $\\sigma\\star v$ and $b\\star\\tau$. Remove v and b from their flags and take their ordered union at each index a. This gives the unique bead on $\\sigma\\star\\tau$ projecting to that pair; weak flags allow repetitions in either factor. A word ending at v has a unique pure X prefix and a final mixed bead, since v has only its identity endomorphism. A word starting at b has an initial mixed bead and a pure Y suffix. Joining their two mixed beads therefore gives the unique inverse on cross words. This proves bijectivity in every simplicial degree, including nondegenerate simplices of X or Y whose endpoint vertices coincide.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Theorem 5.3.19 and Remark 5.3.21; direct proof using the general bead normal form, rather than assuming connected-colimit preservation."
+   }
+  },
+  {
+   "text": "The forward map in Step 2 is induced by actual simplicial collapse maps, so its degreewise inverse is a simplicial inverse. Pre- and postcomposition append beads only in the corresponding pure block, proving the asserted two actions. The collapse squares commute for all maps of X and Y; their inverses are therefore natural too, even when a map makes a bead simplex degenerate. For $X=\\Delta^0$ the first block is a single object with endomorphism $\\Delta^0$. Hence the whole category has exactly the stated collage hom-objects. Assigning F and L leaves maps $W_Y(a)\\to\\mathcal D(L,F(a))$ to specify. The only nonidentity composition equations left are $\\lambda_{a'}(g w)=F(g)\\lambda_a(w)$; these are exactly enriched naturality. Restriction and this assignment are inverse, proving the collage assertion.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Remark 5.3.21; Definition 5.2.2 and Corollary 5.2.4, with the enriched functor equations written explicitly."
+   }
+  },
+  {
+   "text": "In $\\mathfrak C[\\Delta^n](0,n)$ a degree-r simplex is a flag $S_0\\subseteq\\cdots\\subseteq S_r$ of endpoint-containing subsets of $[n]$, by [lem-coef-pinched-cube-latching]. Its interior characteristic coordinates are the cube Q. Split it at the vertices of $S_0$ into its unique beads. The subcomplex criterion says it is in $\\mathfrak C[\\partial\\Delta^n]$ precisely when every bead has proper support. If an interior vertex is in $S_0$, there are at least two beads, each on a proper face. If none is in $S_0$, there is one bead, and its support is proper exactly when an interior vertex is absent from $S_r$. Thus membership means some coordinate is constantly 1 or constantly 0, exactly $\\partial Q$. For $n=1$ there are no interior coordinates and no such flags, so this is the empty boundary of $Q=\\Delta^0$.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Example 5.1.10(i), boundary cube, derived using the cited bead normal form."
+   }
+  },
+  {
+   "text": "Write $v=n+1$ and $K=\\partial\\Delta^n\\star\\{v\\}\\subset\\Delta^{n+1}$. The missing nondegenerate simplices are exactly $[0,n]$ and $[0,n+1]$, with endpoints $(0,n)$ and $(0,v)$. The bead criterion therefore makes every other mapping set unchanged. For a flag from 0 to v, if an index j with $1\\leq j<n$ is constantly absent, its support is contained in an allowed face; if j is constantly present, splitting there gives two proper supports, both in K. If there is no such j, all coordinates $1,\\ldots,n-1$ begin at 0 and end at 1. When coordinate n is constantly 0, the support omits n and lies in K. When coordinate n starts at 0 and ends at 1, the single bead has forbidden full support. When coordinate n is constantly 1, the factor from 0 to n is the forbidden bead on $[0,n]$. These cases exhaust the flags, so the allowed set is $V=(\\partial Q\\times\\Delta^1)\\cup(Q\\times\\{0\\})$. In the full category composition through n is insertion of that vertex into every subset, exactly the inclusion $Q\\times\\{1\\}\\hookrightarrow Q\\times\\Delta^1$.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Example 5.1.10(ii); Proposition 6.1.8 and the explicit cube display at the end of printed p.45."
+   }
+  },
+  {
+   "text": "Apply the natural join factorization of Steps 1–3 to X equal to $\\partial\\Delta^n$ and to $\\Delta^n$. The first-cone factor at 0 changes from V to $Q\\times\\Delta^1$, while the second factor is always $W_Y(y)$. H supplies maps $V\\times W_Y(y)\\to\\mathcal D(z_0,F(y))$ satisfying the Y-action equations. Transposition in each simplicial degree identifies these maps with $\\beta:V\\to T$: an r-simplex of T is, by its definition, a natural family $W_Y(y)\\times\\Delta^r\\to\\mathcal D(z_0,F(y))$. Similarly restriction on the 0-to-n mapping set gives $\\alpha:\\partial Q\\to M$. Composition through n, identified in Step 5 with the last coordinate 1, is $\\lambda_n(w)\\circ\\alpha(q)$ for every w. Therefore the exact boundary equation is $\\beta|_{\\partial Q\\times\\{1\\}}=u\\alpha$, with u as in the statement.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Proposition 6.1.8, equations (6.1.10) and its composition square, printed pp.44–45."
+   }
+  },
+  {
+   "text": "Any extension restricts to a on $\\mathfrak C[\\Delta^n](0,n)=Q$ and to c on the first-cone factor $Q\\times\\Delta^1$, transposed over $W_Y$. Agreement with H gives $a|_{\\partial Q}=\\alpha$ and $c|_V=\\beta$; composition through n gives $c|_{Q\\times\\{1\\}}=ua$. Conversely use such a and c on the two changed types of mapping sets, and retain H everywhere else. There are no incoming nonidentity maps to vertex 0. A composition from 0 through j, $0<j<n$, lies on coordinate j constantly 1 and hence on $\\partial Q$ or V, so its equation already holds for H. Composition from 0 through n and then into Y is exactly the equation $c(q,1)(w)=\\lambda_n(w)\\circ a(q)$. Compositions entirely within Y, or postcomposing a changed cross map by a Y-map, hold because every simplex of c is enriched natural. These are all possible nonidentity composition types by the ordered block structure; identities are retained. Thus the pair defines an enriched functor extending H. This also proves uniqueness: all its hom-maps are now specified.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Proposition 6.1.8, proof and composition square, with every possible changed composition checked."
+   }
+  },
+  {
+   "text": "Restriction recovers exactly the a and c used to construct the extension, while construction retains every hom-map of an original extension. Thus this is a bijection fixing the entire prescribed subcategory, in particular all boundary cones. If $n=1$, then $\\partial Q=\\varnothing$ and $V=\\{0\\}$; the data are an edge $a\\in\\mathcal D(z_0,z_1)_0$ and a simplicial path c from the first cone to its composite with the last cone, with no assumption that either mapping set is Kan. If $Y=\\varnothing$, T is the one-point natural-transformation simplicial set on the empty category, and c is unique; the correspondence reduces to extension of the sole changed hom-object $\\partial Q\\hookrightarrow Q$. If one factor X or Y is empty, the general join assertion has only its pure block and no cross vertex pair. These cases require no nonemptiness or fibrancy hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Proposition 6.1.8, terminal-base specialization; explicit n=1 and empty-factor checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-realization-bead-normal-form",
+  "lem-coef-pinched-cube-latching"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+  "place": "Direct bead-word proof of Theorem 5.3.19 and Remark 5.3.21, followed by the cube/composition calculation of Proposition 6.1.8 (printed pp.41–45); read the authors’ online PDF. Uses a statement-only general bead-normal-form prerequisite from §5.1. Archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +163,52 @@
    "results": "{\"t\": \"2026-10-17T04:02:17Z\", \"tool\": \"grep\", \"query\": \"SimplicialThickening|SimplicialNerve|coherentRealization\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"3358c6b085bd02b6\"}",
    "date": "2026-10-17",
    "verdict": "No match. Independent second reading: SimplicialNerve.lean:12–33,54–120 defines subset paths and the nerve; ProdStdSimplex.lean:38–80 computes products of ordinary simplices; CategoryWithFibrations.lean:35–60 defines horn/boundary generators. These supply neither the realized-join cross mapping product nor its coupled extension dictionary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent realization of the join of two simplicial sets has cross hom objects equal to the product of outgoing and incoming cone hom objects; its boundary extensions are compatible cube maps",
+   "results": "{\"t\": \"2026-10-17T04:55:17Z\", \"tool\": \"leanfinder\", \"query\": \"The coherent realization of the join of two simplicial sets has cross hom objects equal to the product of outgoing and incoming cone hom objects; its boundary extensions are compatible cube maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.prodStdSimplex.objEquiv\", \"SSet.instCartesianMonoidalCategory\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SSet.PtSimplex.MulStruct.map\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"SSet.prodStdSimplex.isoNerve\", \"SSet.Subcomplex.ofSimplexProd_eq_range\"], \"digest\": \"08d7e0fb7280e034\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types, SimplicialNerve.lean:54–127,185–207 and ProdStdSimplex.lean:38–80. The hits describe ordinary simplex products, topological loop homotopies, ordinary strict Segal paths, geometric realization, or the simplex thickening definition. None computes coherent-realization join hom-objects or its coupled boundary-extension data. Targeted SimplicialNerve grep has zero hits; both semantic phrasings were checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\", \"Path\"",
+   "results": "{\"t\": \"2026-10-17T04:55:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\", \\\"Path\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.Path\", \"CategoryTheory.SimplicialThickening.instCategoryPath\", \"CategoryTheory.SimplicialThickening.Path.I\", \"CategoryTheory.SimplicialThickening.Path.left\", \"CategoryTheory.SimplicialThickening.Path.right\", \"CategoryTheory.SimplicialThickening.Path.le\", \"CategoryTheory.SimplicialThickening.Path.ext\", \"CategoryTheory.SimplicialThickening.Path.ext_iff\"], \"digest\": \"01093af2feeacbba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types, SimplicialNerve.lean:54–127,185–207 and ProdStdSimplex.lean:38–80. The hits describe ordinary simplex products, topological loop homotopies, ordinary strict Segal paths, geometric realization, or the simplex thickening definition. None computes coherent-realization join hom-objects or its coupled boundary-extension data. Targeted SimplicialNerve grep has zero hits; both semantic phrasings were checked."
+  },
+  {
+   "tool": "grep",
+   "query": "join|boundary|horn|cube",
+   "results": "{\"t\": \"2026-10-17T04:55:13Z\", \"tool\": \"grep\", \"query\": \"join|boundary|horn|cube\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types, SimplicialNerve.lean:54–127,185–207 and ProdStdSimplex.lean:38–80. The hits describe ordinary simplex products, topological loop homotopies, ordinary strict Segal paths, geometric realization, or the simplex thickening definition. None computes coherent-realization join hom-objects or its coupled boundary-extension data. Targeted SimplicialNerve grep has zero hits; both semantic phrasings were checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor on the coherent realization of a simplex boundary joined with a simplicial set extends exactly when two maps on cubes with matching faces extend",
+   "results": "{\"t\": \"2026-10-17T04:55:13Z\", \"tool\": \"leansearch\", \"query\": \"A functor on the coherent realization of a simplex boundary joined with a simplicial set extends exactly when two maps on cubes with matching faces extend\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.Limits.WalkingMulticospan.functorExt\", \"SSet.cosk\", \"sSetTopAdj\", \"CategoryTheory.Limits.WalkingMultispan.functorExt\", \"SSet.toTopSimplex\", \"SSet.Augmented.stdSimplex\"], \"digest\": \"846e217deb96d630\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types, SimplicialNerve.lean:54–127,185–207 and ProdStdSimplex.lean:38–80. The hits describe ordinary simplex products, topological loop homotopies, ordinary strict Segal paths, geometric realization, or the simplex thickening definition. None computes coherent-realization join hom-objects or its coupled boundary-extension data. Targeted SimplicialNerve grep has zero hits; both semantic phrasings were checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy coherent join boundary extension is specified by a cube in a mapping space and a cube in the enriched natural transformation space with a composition face",
+   "results": "{\"t\": \"2026-10-17T04:55:18Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy coherent join boundary extension is specified by a cube in a mapping space and a cube in the enriched natural transformation space with a composition face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GenLoop.homotopyTo\", \"GenLoop.homotopyTo_apply\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.Truncated.Edge.CompStruct.tensor\", \"SSet.Truncated.Path.mk₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\"], \"digest\": \"1eb1c6c5aba2d590\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types, SimplicialNerve.lean:54–127,185–207 and ProdStdSimplex.lean:38–80. The hits describe ordinary simplex products, topological loop homotopies, ordinary strict Segal paths, geometric realization, or the simplex thickening definition. None computes coherent-realization join hom-objects or its coupled boundary-extension data. Targeted SimplicialNerve grep has zero hits; both semantic phrasings were checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping objects of the simplicial rigidification of an ordered join factor as products, and boundary inclusions become compatible cubical horn extension data",
+   "results": "{\"t\": \"2026-10-17T05:08:49Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping objects of the simplicial rigidification of an ordered join factor as products, and boundary inclusions become compatible cubical horn extension data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.MulStruct.map\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn.spineId_map_hornInclusion\", \"SSet.horn.ι\", \"SSet.StrictSegalCore.concat\", \"SSet.horn.multicoequalizerDiagram\"], \"digest\": \"8e8242d7d8b772ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. Read SimplicialNerve.lean:54–216: subset-poset thickening of linear orders and the nerve, no arbitrary-K atomic-word/subcomplex theorem or ordered-join/cubical extension bijection. Returned ordinary-nerve, simplex-category factorization, product-simplex, horn and strict-Segal declarations concern different statements; circular-order grep hits are unrelated."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-weight-limit-recognition",
@@ -97,5 +239,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-join-boundary-cubical-extension",
+  "worker": "stage1",
+  "summary": "Eight-step direct proof from bead normal forms: split the unique mixed bead to prove the arbitrary-join cross product, compute the two missing boundary/horn hom-objects by bead supports, and check all changed composition types in both directions of the cube-extension dictionary. One new statement-only general bead-normal-form prerequisite; zero Mathlib leaves. Item statement unchanged. Self-review replaced an unsupported arbitrary-join chain argument and irrelevant citation quotes with a general word-normal-form input and exact statement evidence. Second reader clarified the positional degeneracy argument, corrected the collage source label, and independently rechecked semantic searches and source grep; mathematical statements unchanged.",
+  "blueprint": "Proof paragraph 2, displayed inverse-limit mapping calculation: technical realization-of-joins and cubical boundary calculation for the coherent weighted cone recognition, Riehl–Verity Proposition 6.1.8, before using its universal mapping property. Steps 1–3 supply the join collage needed by coherent weighted-cone recognition; Steps 4–8 supply its exact boundary/cube calculation. Current main-20261015 ancestor proof paragraph 2 remains the derived coefficient adjunction before R lim.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-492949f5c",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-492949f5c (reviewer sub-agent of L); spot-checked: I read the item, its eight steps, the new node lem-coef-coherent-realization-bead-normal-form, the cited statements (lem-coef-pinched-cube-latching, def-cbc-enhanced-diagrams-cones), the parent's use of the item, and the unit/chapter, all in full. The helper is the computad description of C[K]: each degree is free on beads (σ nondegenerate, weak flag {0,m}=T_0⊆…⊆T_r=[m]), and a subcomplex is detected by its beads. It is correct: T_0={0,m} is right because a flag with an interior vertex in S_0 is a union composite. I tested it on a loop, on Δ^2 with edge 02 collapsed, and on empty K. It is statement-only with B1–B7 satisfied and is not a duplicate: I checked pinched-cube-latching, rigidification-boundary-cube, kan-coherent-nerve-cell-filtration, cone-boundary-projective-cells, coherent-nerve-relative-cube-comparison, fixed-vertex-cofibrations and the marked-cone nodes. Steps 1–3 (unique mixed bead, collapse/union bijection, naturality, collage) are correct; I checked them on Δ^p⋆Δ^q. Steps 4–5 (∂Q and V=∂Q×Δ^1∪Q×{0}, missing simplices [0,n] and [0,n+1]) are correct, checked at n=1 and n=2; Step 4 agrees with the reviewed rigidification-boundary-cube. In Steps 6–8 the composition list is complete (through j<n, through n, Y-postcomposition, nothing into 0), and β|∂Q×{1}=uα holds. No Kan or nonemptiness hypothesis is needed. proof_deps equals the union of the uses, both cited nodes are in the same unit, tool_uses is empty, there is no cycle and no SGA source. It is not a target node, so there is no base change or coefficient category to compare. Riehl–Verity is not in literature/ and I had no network access, so I checked the steps from the DAG statements and small cases rather than the source; the proof is marked agent-written and the paper is WANTED. Minor: the item's source.place still names Def 5.2.8 for the collage while Step 3 cites 5.2.2; this is only a label and is left unchanged. No fixes written."
  }
 }

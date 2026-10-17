@@ -14,9 +14,69 @@
   "def-coef-infinity-fibrations",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct an increasing sequence $S_0\\subseteq S_1\\subseteq\\cdots$ over $\\Delta^3$, starting with $S_0=E$ and its given map $\\iota r$. The induction invariants are: $E\\hookrightarrow S_m$ is a categorical equivalence and $E\\to S_m\\times_{\\Delta^3}\\Lambda^3_2$ is the canonical isomorphism. They hold at $m=0$ because both maps are identities. For fixed $m$, index by all triples $(n,i,\\alpha)$ with $n\\geq2$, $0<i<n$ and $\\alpha:\\Lambda_i^n\\to S_m$. This is a small set: for each $n,i$ it is a set of maps of small simplicial sets, and there are countably many pairs $n,i$. Apply [lem-coef-single-horn-relative-completion] to $E\\hookrightarrow S_m$ and each such $\\alpha$. Its original-base hypotheses are that $r:E\\to\\Lambda^3_2$ is an inner fibration of small simplicial sets and that every vertex of $E$ over $1$ is the source of an $r$-cocartesian edge over $1\\to2$; these are exactly the hypotheses displayed above. Its two intermediate-stage hypotheses are precisely the induction invariants. It gives a monomorphism and categorical equivalence $S_m\\hookrightarrow S_{m,\\alpha}$ over $\\Delta^3$, unchanged inverse horn $E$, and a filler for this one $\\alpha$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-single-horn-relative-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "HA Lemma 3.1.2.4, printed p.331, induction and individual-extension subclaim (i-prime),(ii-prime)."
+   }
+  },
+  {
+   "text": "Let $S_{m+1}$ be the degreewise amalgamation of all $S_{m,\\alpha}$ over their common $S_m$, retaining $S_m$ itself when the indexing set is empty. This is small. The map $S_m\\hookrightarrow S_{m+1}$ is a monomorphism and a categorical equivalence: by the weak factorization system in [lem-coef-joyal-model-structure], each $S_m\\hookrightarrow S_{m,\\alpha}$ has the left lifting property against every Joyal fibration. In a lifting problem for the amalgamation, extend the prescribed map on $S_m$ to each piece with that property; these extensions agree on their common $S_m$ and hence define a lift on the amalgamation. The same weak factorization system identifies this resulting left lifting property with being a trivial cofibration. Degreewise, the new simplices are the disjoint union of the complements of $S_m$ in its pieces; every such simplex has base outside $\\Lambda^3_2$. Thus the inverse image of the horn remains $E$. Two-out-of-three gives that $E\\hookrightarrow S_{m+1}$ is a categorical equivalence. Every inner horn into $S_m$ is filled in its corresponding piece and hence in $S_{m+1}$. This establishes the induction invariants and the one-stage filling property.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-single-horn-relative-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "HA Lemma 3.1.2.4, printed p.331, amalgamation over all alpha; closure and degreewise pullback details expanded."
+   }
+  },
+  {
+   "text": "Set $E'=\\bigcup_{m\\geq0}S_m$, with the induced map $r':E'\\to\\Delta^3$. This is a countable union of small simplicial sets, with degreewise inclusions, so is small. The map $a:E=S_0\\hookrightarrow E'$ is a categorical equivalence by the following direct lifting argument using [lem-coef-joyal-model-structure]. Given any Joyal fibration and a lifting square against $a$, extend its upper map successively from $S_m$ to $S_{m+1}$, since each stage inclusion is a trivial cofibration by step 2. The extensions agree on preceding stages, so their union is a diagonal for the square. The weak factorization system therefore makes $a$ a trivial cofibration, in particular a monomorphism and a categorical equivalence. No assertion that arbitrary weak equivalences are closed under unions is being assumed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "HA Lemma 3.1.2.4, printed p.331, sequence of categorical equivalences; explicit lifting proof for the union."
+   }
+  },
+  {
+   "text": "Each inner horn has finitely many nondegenerate simplices: its nondegenerate simplices are the proper ordered faces allowed by the horn definition. Hence a map $\\Lambda_i^n\\to E'$ factors through some $S_m$: take the maximum of the finitely many stages containing the images of these generators, after which all their degeneracies also lie in that stage. Step 2 supplies its filler in $S_{m+1}$. By the definition in [def-cbc-enhanced-diagrams-cones], $E'$ is a quasicategory. In each degree, the inverse image of $\\Lambda^3_2$ in every $S_m$ is exactly the original copy of $E$, and taking their union leaves that copy unchanged. Consequently the map $E\\to E'\\times_{\\Delta^3}\\Lambda^3_2$ induced by $a$ is an isomorphism of simplicial sets, with degreewise inverse given by the same copy of $E$. Every stage was constructed over $\\Delta^3$, so $r'a=\\iota r$. Together with step 3 these are all asserted conclusions. The construction introduces no map to any previously given total space.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "HA Lemma 3.1.2.4, printed p.331, properties (i),(ii) and their consequence for the union."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-single-horn-relative-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+  "place": "Lemma 3.1.2.4, printed pp.330-332: single-horn completion, amalgamation and countable union. The technical individual-extension subclaim is an unsplit child, not treated as an established explicit K2 proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -111,7 +171,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cocartesian-inner-horn-comparison",
@@ -138,5 +198,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-joyal-factorization",
+  "worker": "stage1",
+  "summary": "Second reading replaced the arbitrary-dimensional full-completion restatement by the strictly local one-prescribed-horn subclaim from the source induction. Four steps give the global completion via amalgamations and a countable union; Joyal closure and finite-domain arguments are written out. Item statement unchanged. One new unsplit technical node, no Mathlib leaves. The source local gluing gap is recorded for its future splitter.",
+  "blueprint": "Realizes the inherited operadic-extension branch of prop-coef-integral-exceptional-adjoint at the HA 3.1.2.4 completion used in HA 2.4.4.6 final (n,i)=(3,2) case. Step 1 realizes the individual-extension subclaim on HA p.331 using the new strictly local child; step 2 realizes the amalgamation; steps 3-4 realize the sequence union and properties (i),(ii). No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-bd6eee98c",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-bd6eee98c (reviewer sub-agent of L); spot-checked: I read HA Lemma 3.1.2.4 and its proof (printed pp.330-332) from an HA PDF already on this machine; the literature tree has no HA, so the archival-copy WANTED stays. The item matches HA hypothesis by hypothesis: an inner fibration over Lambda^3_2 with cocartesian lifts over 1->2, using the horn definition of cocartesian from def-coef-infinity-fibrations. It concludes a quasicategory E' over Delta^3, a monomorphism and categorical equivalence E -> E', and an isomorphism onto the inverse horn. Nothing is added, dropped or weakened. This is not a target node, so the base-change and coefficient checks do not apply, and no SGA source is cited. Step 1 sets up the induction invariants, and the index set of horns is small. Step 2 amalgamates over S_m; the result is a trivial cofibration by the lifting argument and the weak factorization system in lem-coef-joyal-model-structure, and the inverse horn stays E because the child keeps it fixed. Step 3 takes the countable union and lifts stage by stage. Step 4 uses that horns are finite, so they factor through a finite stage; E' is a quasicategory and E'|_H = E. All steps are correct and proof_deps equals the union of uses. The new node lem-coef-single-horn-relative-completion is HA's own local claim (i'),(ii') under the source's induction invariants. It is statement only and self-contained, cites the defining nodes, is single-escaped, uses the item's blueprint ancestor and via, and has four logged search kinds. I found no duplicate by rg over the DAG and no cycle. It does not restate a clause of the item, since it gives neither a quasicategory nor the global completion. I independently confirmed the reported HA gap: K1 meets A*y*B*C in (A*y*B) u (y*B*C) u boundary(A*B*C), so with A={0}, B={2}, C={3}, i=1 the edge {0,3} need not agree with delta-bar. This cannot be fixed by choosing delta-bar differently, because the enlarged subcomplex has a loop. Without the equivalence invariant the local claim fails: for E=H, S = boundary of Delta^3 and the horn Lambda^3_1, the 2-sphere dies. The node therefore correctly includes that invariant, and with it a homotopy-category check rules out the wrong-composite example. I found no counterexample; the statement is plausible and is exactly what HA asserts, and it is left unsplit with a warning about the gap. The parent comparison lemma uses only what the item states. No fixes, no tool_uses, no drops."
  }
 }
