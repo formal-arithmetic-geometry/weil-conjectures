@@ -10,41 +10,181 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "HTT Variant 4.2.3.16's induction requires a lift $\\partial\\Delta^n\\to Q_0$ through a cofinal $Q_0\\to X_0$ that is not supplied. Cofinality does not imply this: the final-vertex inclusion $\\Delta^0\\to\\Delta^1$ is cofinal, but the endpoint map $\\partial\\Delta^1\\to\\Delta^1$ does not lift through it. We use Kerodon 02MQ's pullback-and-cone correction of that construction. Call a simplicial set nonsingular when all its nondegenerate simplex maps are monomorphisms. Induct on the total number of nondegenerate simplices to prove the stronger assertion that every finite $X$ has a finite nonsingular $Q$ with a universally localizing $q:Q\\to X$ [def-coef-universally-localizing-simplicial-map]. Identities are universally localizing, since all their pullbacks are identities and their restriction functors are identities, with the collection $W$ empty. For $X=\\varnothing$ choose the identity of $\\varnothing$, which is finite and nonsingular; its cocone restriction is the identity required by the item.",
+   "uses": [
+    "def-coef-universally-localizing-simplicial-map",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02MQ",
+    "place": "HTT Variant 4.2.3.16, failed boundary lift; corrected induction from Proposition 6.3.6.14 (02MQ), Remark 6.3.6.16 (02MT). Statement unchanged.; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "For nonempty finite $X$, choose a maximal-dimensional nondegenerate simplex $\\sigma:\\Delta^n\\to X$. Remove exactly its degeneracies, obtaining $X_0$. This is a simplicial subset: write a remaining simplex as a degeneracy of $\\tau\\ne\\sigma$ by [lem-weil-pbc-simplicial-set-nondegenerate-decomposition]. Applying an operator factors through a face of $\\tau$; a proper face has dimension less than $\\dim\\tau\\le n$ and cannot have ancestor $\\sigma$, whereas an improper face retains ancestor $\\tau$. A simplex of $X_0$ degenerate in $X$ has its ancestor in $X_0$, by applying a section of its surjective degeneracy operator. Thus $X_0$ is finite with exactly one fewer nondegenerate simplex. Its degrees below $n$ agree with $X$; degree $n$ adds only $\\sigma$; and all higher simplices are degenerate. Apply [lem-weil-pbc-simplicial-set-glue-simplex] to obtain $X=X_0\\amalg_B D$, where $B=\\partial\\Delta^n$ and $D=\\Delta^n$. The boundary map $B\\hookrightarrow D$ is degreewise injective. By the strengthened induction hypothesis choose a finite nonsingular $A$ and a universally localizing $a:A\\to X_0$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-weil-pbc-simplicial-set-glue-simplex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02MQ",
+    "place": "Single-cell version of the skeletal attachment in 02MQ; Stacks 017R (lemma-splitting-simplicial-sets) and 018R (lemma-glue-simplex).; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "Put $H=B\\times_{X_0}A$, with projections $b:H\\to B$ and $r:H\\to A$. The map $b$ is universally localizing directly from the definition: for every $T\\to B$, $T\\times_BH=T\\times_{X_0}A$, with the same projection and localization data. Define $C=H\\star\\Delta^0$ as the right cone, and write $j:H\\hookrightarrow C$ for its initial-block inclusion. In degree $m$, $C_m=H_m\\amalg\\{*\\}\\amalg\\coprod_{s+t+1=m}H_s\\times\\{*\\}_t$, with operators restricting the initial $H$ block and final apex block. Define graph embeddings $i_A=(r,j):H\\to A\\times C$ and $i_D=((B\\hookrightarrow D)b,j):H\\to D\\times C$. Each is injective because its second coordinate $j$ is injective. The maps $a\\operatorname{pr}_A:A\\times C\\to X_0$, $b:H\\to B$ and $\\operatorname{pr}_D:D\\times C\\to D$ give a strictly commuting map of spans, by the pullback equation $ar=(B\\to X_0)b$. Consequently the degreewise pushout defines an actual map\n$$q:Q=(A\\times C)\\amalg_H(D\\times C)\\longrightarrow X_0\\amalg_B D=X.$$\nAll attaching maps are defined on $H$; no boundary lift has been assumed.",
+   "uses": [
+    "def-coef-universally-localizing-simplicial-map",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02MQ",
+    "place": "02MQ, diagram (6.19), with one maximal cell; explicit graph maps.; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "Nonsingularity passes to simplicial subsets: the ancestor of a simplex is obtained by a face section of its degeneracy surjection, so the subset has the same nondegenerate simplices as the ambient set within it. It passes to binary products as follows. Write the components of a nondegenerate $m$-simplex $(x,y)$ as $\\bar x\\alpha,\\bar y\\beta$ for monotone surjections $\\alpha,\\beta$, using [lem-weil-pbc-simplicial-set-nondegenerate-decomposition]. They cannot both repeat any consecutive pair of indices, or the pair would be degenerate. Thus the monotone pair $i\\mapsto(\\alpha(i),\\beta(i))$ is injective: equality at two distinct indices forces repetition on all intervening consecutive pairs. Since $\\bar x,\\bar y$ are embeddings, this gives a degreewise injective simplex map for $(x,y)$. Both $B,D$ are nonsingular, since their nondegenerate simplices are injective ordinal maps. Thus $H\\subseteq B\\times A$ is nonsingular. The cone $C$ is nonsingular: its mixed nondegenerate simplex is a nondegenerate simplex of $H$ followed by the distinct apex. The associated map is injective on the pure and mixed blocks, which are disjoint in the displayed join formula. Hence $A\\times C$ and $D\\times C$ are nonsingular. The two graph inclusions are injections, so each factor embeds in $Q$: degreewise, their pushout identifies only the two copies of the common subset. Every simplex of $Q$ lies in one factor; if nondegenerate in $Q$, it is nondegenerate in that factor. Its standard simplex map is therefore a composite of two injections. This proves that $Q$ is nonsingular.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02MQ",
+    "place": "02MQ final paragraph; Lemma 6.3.6.15 (02MR) and Remarks 6.3.6.9–11, with the elementary component calculations written out.; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "We verify finiteness. A subset of a finite simplicial set has only finitely many nondegenerate simplices by the ancestor argument in step 4. Each degree of a finite simplicial set is finite, since [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] encodes its degree-$m$ simplices by a nondegenerate ancestor and a surjection out of $[m]$. If $U,V$ are finite of dimensions at most $d,e$, a nondegenerate simplex of their product has dimension at most $d+e$: in the two component degeneracy surjections at least one index must increase at each consecutive pair, as in step 4. Product degree sets are finite and there are only these finitely many possible nondegenerate degrees. Thus $B\\times A$, and its subset $H$, are finite. The cone adds just the apex and a mixed nondegenerate simplex for each nondegenerate simplex of $H$, so $C$ is finite, including $H$ empty. Thus both product factors of $Q$ are finite. Each nondegenerate simplex of $Q$ has a preimage in one of them, and that preimage cannot be degenerate. The two finite lists therefore surject onto the nondegenerate simplices of $Q$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02MT",
+    "place": "Remark 6.3.6.16 (02MT); explicit dimension and degeneracy count.; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "The cone $C$ is weakly contractible, including $H=\\varnothing$: its realization contracts to the apex by multiplying the coordinates on its $H$ block by $1-t$ and adding their lost mass to the apex coordinate. This simplexwise formula respects face and degeneracy identifications and descends continuously to the quotient. Apply [lem-coef-contractible-factor-universal-localization] to $a:A\\to X_0$ and $C$, and to $1_D$ and $C$. It gives the two outer vertical universal localizations $A\\times C\\to X_0$ and $D\\times C\\to D$. The middle map $b$ is universally localizing by step 3. Apply [lem-coef-universal-localization-pushout] with its subscript-0 side taken to be $D\\times C\\to D$. Its monomorphism hypotheses are precisely $H\\hookrightarrow D\\times C$ and $B\\hookrightarrow D$, established in steps 2–3. It concludes that the induced $q:Q\\to X$ is universally localizing. Steps 4–5 prove the other two clauses of the strengthened induction, completing it.",
+   "uses": [
+    "lem-coef-contractible-factor-universal-localization",
+    "lem-coef-universal-localization-pushout",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02MQ",
+    "place": "02MQ, diagram (6.19), using Corollary 6.3.5.12 (02M8) and Proposition 6.3.5.14 (02MA).; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "Take the base change of $q$ along $1_X$ in [def-coef-universally-localizing-simplicial-map]. For each quasicategory $\\mathcal E$, restriction is a functor equivalence from $\\operatorname{Fun}(X,\\mathcal E)$ to a full subcategory of $\\operatorname{Fun}(Q,\\mathcal E)$. It induces equivalences on mapping spaces by [lem-cbc-enhanced-functor-cone-calculus]. The inclusion of the full subcategory has exactly the same right-pinched mapping spaces between its objects: each simplex of such a map has only those objects as vertices. Apply this to $p$ and $\\Delta_XT$. Restriction sends them exactly to $pq$ and $\\Delta_QT$, because precomposition preserves constants degreewise. Hence the induced equivalence is restriction itself, the map in the item. Both mapping spaces are Kan by the same calculus. No colimits in $\\mathcal E$ and no quasicategory hypotheses on either indexing simplicial set have been used.",
+   "uses": [
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01MS",
+    "place": "Definition 6.3.5.1 (02M0), functor-category criterion 6.3.1.13(2) (01MS), and Remark 6.3.6.16 (02MT).; read online 2026-10-17, archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-universally-localizing-simplicial-map",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-contractible-factor-universal-localization",
+  "lem-coef-universal-localization-pushout",
+  "lem-weil-pbc-simplicial-set-glue-simplex",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02MQ",
+  "place": "Single-cell pullback-and-cone expansion of Proposition 6.3.6.14 and Remark 6.3.6.16; repair of undefined boundary lift in HTT Variant 4.2.3.16. Online sources read, archive WANTED."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Every finite simplicial set has a cofinal finite resolution in which every nondegenerate simplex is an embedding",
-   "results": "Eight hits: SSet.Finite.instIsFinitelyPresentable, Finite.exists_epi_from_isCardinalPresentable, finite subcomplexes and dimension bounds. None asserts a cofinal nonsingular resolution.",
+   "tool": "grep",
+   "query": "cofinal|nonsingular|non.?singular|embedded",
+   "results": "{\"t\": \"2026-10-17T03:42:58Z\", \"tool\": \"grep\", \"query\": \"cofinal|nonsingular|non.?singular|embedded\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: finite/nondegenerate simplicial primitives only; no cofinal finite nonsingular replacement. Two distinct semantic queries and two Loogle/grep queries read."
   },
   {
    "tool": "leansearch",
    "query": "finite simplicial set cofinal nonsingular resolution embedded nondegenerate simplices",
-   "results": "Eight hits concern SSet.N, nonDegenerate, degenerate and SSet.Finite.mk; no resolution theorem.",
+   "results": "{\"t\": \"2026-10-17T03:42:58Z\", \"tool\": \"leansearch\", \"query\": \"finite simplicial set cofinal nonsingular resolution embedded nondegenerate simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.N.mk\", \"SSet.N.mk'.hcongr_3\", \"SSet.mem_degenerate_iff_notMem_nonDegenerate\", \"SSet.nonDegenerate\", \"SSet.N\", \"SSet.N.mk'\", \"SSet.degenerate\", \"SSet.Finite.mk\"], \"digest\": \"a9233d0f2b45c64e\"}",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: finite/nondegenerate simplicial primitives only; no cofinal finite nonsingular replacement. Two distinct semantic queries and two Loogle/grep queries read."
   },
   {
    "tool": "loogle",
-   "query": "SSet.Finite",
-   "results": "SSet.Finite and finiteness of degrees/subcomplexes/ranges and under epimorphisms, plus hasDimensionLT_of_finite; no cofinal resolution.",
+   "query": "SSet.Finite, SSet.nonDegenerate, cofinal, Nerve",
+   "results": "{\"t\": \"2026-10-17T03:42:58Z\", \"tool\": \"loogle\", \"query\": \"SSet.Finite, SSet.nonDegenerate, cofinal, Nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'cofinal'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: finite/nondegenerate simplicial primitives only; no cofinal finite nonsingular replacement. Two distinct semantic queries and two Loogle/grep queries read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite simplicial set has a cofinal finite resolution in which every nondegenerate simplex is an embedding",
+   "results": "{\"t\": \"2026-10-17T03:42:58Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite simplicial set has a cofinal finite resolution in which every nondegenerate simplex is an embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFiniteObjOppositeSimplexCategoryOfFinite\", \"SSet.finite_of_hasDimensionLT\", \"SSet.Finite\", \"SSet.Finite.finite\", \"SSet.finite_subcomplex_top_iff\", \"SSet.instFiniteElemObjOppositeSimplexCategoryOpMkNonDegenerateOfFinite\", \"SSet.stdSimplex.instFiniteToSSetOfSimplex\", \"SSet.instFiniteToSSet\"], \"digest\": \"57f727df47619eac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: finite/nondegenerate simplicial primitives only; no cofinal finite nonsingular replacement. Two distinct semantic queries and two Loogle/grep queries read."
+  },
+  {
+   "tool": "grep",
+   "query": "Nonsingular|nonDegenerate.*mono|mono.*nonDegenerate",
+   "results": "{\"t\": \"2026-10-17T03:43:19Z\", \"tool\": \"grep\", \"query\": \"Nonsingular|nonDegenerate.*mono|mono.*nonDegenerate\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: finite/nondegenerate simplicial primitives only; no cofinal finite nonsingular replacement. Two distinct semantic queries and two Loogle/grep queries read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite simplicial set admits final map from finite nerve of a poset with monomorphic nondegenerate simplices",
+   "results": "{\"t\": \"2026-10-17T03:43:19Z\", \"tool\": \"leansearch\", \"query\": \"finite simplicial set admits final map from finite nerve of a poset with monomorphic nondegenerate simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite\", \"SSet.nonDegenerate_iff_of_mono\", \"SSet.Finite.mk\", \"CategoryTheory.SimplicialNerve\", \"PartialOrder.mem_nerve_nonDegenerate_iff_injective\", \"SSet.Finite.finite\", \"SSet.Finite.instIsFinitelyPresentable\", \"SSet.instFiniteObjOppositeSimplexCategoryOfFinite\"], \"digest\": \"91e839ea9db89bb1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: finite/nondegenerate simplicial primitives only; no cofinal finite nonsingular replacement. Two distinct semantic queries and two Loogle/grep queries read."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.N, SSet.Finite, SimplexCategory",
+   "results": "{\"t\": \"2026-10-17T03:43:19Z\", \"tool\": \"loogle\", \"query\": \"SSet.N, SSet.Finite, SimplexCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: finite/nondegenerate simplicial primitives only; no cofinal finite nonsingular replacement. Two distinct semantic queries and two Loogle/grep queries read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite nonsingular simplicial replacement final map every simplex injective",
+   "results": "{\"t\": \"2026-10-17T03:43:19Z\", \"tool\": \"leanfinder\", \"query\": \"finite nonsingular simplicial replacement final map every simplex injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFiniteObjOppositeSimplexCategoryOfFinite\", \"SSet.exists_nonDegenerate\", \"SSet.instFiniteElemObjOppositeSimplexCategoryOpMkNonDegenerateOfFinite\", \"SSet.stdSimplex.instFiniteToSSetOfSimplex\", \"SSet.Finite\", \"SSet.finite_of_hasDimensionLT\", \"SSet.N.mk'_surjective\", \"SSet.Finite.finite\"], \"digest\": \"6994c639eedc1f58\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: finite/nondegenerate simplicial primitives only; no cofinal finite nonsingular replacement. Two distinct semantic queries and two Loogle/grep queries read."
   },
   {
    "tool": "grep",
    "query": "[Cc]ofinal|[Nn]onsingular|[Nn]on.?singular|[Ee]mbedded",
-   "results": "Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean and NonsingularColimit.lean, plus PairingCore.lean. Read Nonsingular.lean:11-22,42-48 and NonsingularColimit.lean:13-23,38-84: definitions, inheritance, and ordinary colimit presentations; no existence of a finite cofinal nonsingular replacement.",
+   "results": "{\"t\": \"2026-10-17T04:04:02Z\", \"tool\": \"grep\", \"query\": \"[Cc]ofinal|[Nn]onsingular|[Nn]on.?singular|[Ee]mbedded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/PadicNumbers.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/Algebra/Lie/TraceForm.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Killing.lean\"], \"digest\": \"2cb924dd9c8daf80\"}",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: read Nonsingular.lean:11-95, NonsingularColimit.lean:13-84 and Degenerate.lean:375-385. They define nonsingularity, subsets/standard simplices and ordinary simplex colimits; no finite universally localizing resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "nonDegenerate_iff_of_mono|mem_nerve_nonDegenerate_iff_injective|class Finite",
+   "results": "{\"t\": \"2026-10-17T04:04:02Z\", \"tool\": \"grep\", \"query\": \"nonDegenerate_iff_of_mono|mem_nerve_nonDegenerate_iff_injective|class Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Order/RelSeries.lean\", \"Mathlib/Combinatorics/Matroid/Basic.lean\", \"Mathlib/GroupTheory/Index.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveNondegenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/ProdStdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/ProdStdSimplex.lean\"], \"digest\": \"68511f962aaa630e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Nonsingular.lean:11-95, NonsingularColimit.lean:13-84 and Degenerate.lean:375-385. They define nonsingularity, subsets/standard simplices and ordinary simplex colimits; no finite universally localizing resolution."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-poset-nerve-cofinal-replacement",
@@ -75,5 +215,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-finite-embedded-simplex-resolution",
+  "worker": "stage1",
+  "group": "Q34",
+  "summary": "Statement unchanged. Repaired the undefined boundary lift in the HTT source by the explicit pullback-and-cone spans of Kerodon 02MQ. Seven steps prove a stronger universally localizing finite nonsingular resolution, with graph maps, componentwise closure and finite-degree counts, then derive the actual mapping-space restriction. Three new nodes supply a definition and two generic localization tools, not a resolution clause.",
+  "blueprint": "Realizes the finite intermediate resolution in HTT Variant 4.2.3.16 used by lem-coef-infinity-poset-nerve-cofinal-replacement along the inherited ancestry to prop-coef-integral-exceptional-adjoint. The undefined attaching map in that source is repaired by Kerodon 02MQ; the target statement and route through finite nonsingular resolution are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic functor/mapping-space Kan structure and preservation of mapping spaces under equivalence; no node of this unit replaces this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-simplicial-set-glue-simplex",
+    "why": "Generic combinatorial pushout of one nondegenerate top simplex along its boundary (step 2, X = X_0 amalg_{boundary} Delta^n); unit sk-prop-sf-biduality-general has no such simplicial lemma, and the same tool is already accepted for lem-coef-infinity-finite-shape-generation and lem-coef-cat-infinity-filtered-finite-calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-weil-pbc-simplicial-set-glue-simplex"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-464c4fb8a",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-464c4fb8a (reviewer sub-agent of L); spot-checked: I read the whole item, all three new nodes and every cited statement (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, glue-simplex, the nondegenerate-decomposition Mathlib leaf, and the parent poset-nerve replacement). The item statement is unchanged and matches HTT Variant 4.2.3.16 (*)/(*') with no added or dropped hypotheses. The worker's source error is real: I checked HTT p.256 with pdftotext. HTT's pushout (K~0 x Delta^n) amalg over boundary Delta^n needs a lift of the boundary through the cofinal K~0 -> K0, and HTT does not supply it. The replacement follows Kerodon 02MQ diagram (6.19) for a single cell; I read 02M0, 02M8, 02MA, 02MQ and 02MT online. The new nodes state exactly Def 6.3.5.1, Cor 6.3.5.12 and Prop 6.3.5.14 (monomorphisms on the 0-legs; the item uses the 0-side D x C -> D, which matches Kerodon's (b)). I checked step by step: the X0 subset argument and glue-simplex hypotheses (1)-(3); base change of the H pullback; the graph embeddings and span commutation; nonsingularity of products (the (alpha,beta) injectivity argument), cones and pushouts; finiteness; weak contractibility of the cone; and that Fun(X,E) -> Fun_W(Q,E) is an equivalence onto a full subcategory with the same pinched mapping spaces. Small cases tested: X empty, n=0, the loop Delta^1/boundary, H empty. No duplicates in the DAG (grepped for universally localizing, the Kerodon tags and localization nodes). The new nodes are statement-only, self-contained and correctly referenced. Fix: step 2 uses lem-weil-pbc-simplicial-set-glue-simplex (unit sk-prop-h2, split and not closed) without a tool_uses declaration. I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors/lem-coef-finite-embedded-simplex-resolution.json; the same tool is already accepted elsewhere in this unit. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-weil-pbc-simplicial-set-glue-simplex. The item is not a target and involves no base change or coefficient category. No SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }
