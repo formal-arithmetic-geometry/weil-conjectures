@@ -11,13 +11,51 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-etale-constructible-sheaf",
   "lem-weil-pbc-constructible-module-finite-zero-cokernel",
-  "thm-constructible-serre",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-sum-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix r≥1 and argue by induction on a=0,…,r−1. The base K₀=F is constructible by hypothesis. If Kₐ is constructible, apply [lem-weil-pbc-constructible-module-finite-zero-cokernel] with the same qcqs scheme X and finite commutative ring Λ. It supplies finitely many affine étale objects U_{a+1,t} and a morphism from the coproduct of the corresponding sheafifications P_{U_{a+1,t}} of the free Λ-module presheaves V↦Λ^{(Hom_X(V,U_{a+1,t}))} onto Kₐ whose cokernel is zero. By [lem-weil-pbc-free-etale-module-shriek-comparison] (no hypothesis on W or Λ), each P_{U_{a+1,t}} is isomorphic to j_{U_{a+1,t}!}Λ_{U_{a+1,t}}, the étale extension by zero of [def-weil-pbc-etale-sum-extension]; composing with these isomorphisms, call the finite direct sum Eₐ=⊕_t j_{U_{a+1,t}!}Λ_{U_{a+1,t}} and its map eₐ:Eₐ→Kₐ, which still has zero cokernel. In the abelian category [def-weil-pbc-etale-sheaves], zero cokernel makes eₐ an epimorphism, so its kernel K_{a+1}=ker(eₐ) exists. Each U_{a+1,t} is affine, hence quasi-compact and quasi-separated, and étale over the qcqs scheme X, so [lem-weil-pbc-etale-free-sheaf-constructible] with M=Λ shows that each summand j_{U_{a+1,t}!}Λ_{U_{a+1,t}} is constructible (Stacks 03S8 (3)). A finite direct sum of constructible sheaves is constructible by the extension clause (2) of [thm-constructible-serre], applied to the split short exact sequences 0→G→G⊕G'→G'→0 and induction on the number of summands; the empty sum 0=Ker(id_{Kₐ}) is constructible by clause (1). So eₐ is a morphism between constructible sheaves, and the kernel clause (1) of [thm-constructible-serre] shows K_{a+1} is constructible, completing the induction step.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-finite-zero-cokernel",
+    "lem-weil-pbc-free-etale-module-shriek-comparison",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095N (lemma-category-constructible-modules), finite affine epimorphism; Tag 03S8 (lemma-jshriek-constructible), part (3); Tag 03RZ (lemma-constructible-abelian), closure under kernels."
+   }
+  },
+  {
+   "text": "For each a<r, the kernel definition and the epimorphism eₐ give a short exact sequence 0→K_{a+1}→Eₐ→Kₐ→0. Define the map Eₐ→E_{a−1} as Eₐ→Kₐ followed by the kernel inclusion Kₐ→E_{a−1}; consecutive composites are zero. At Eₐ, the image of E_{a+1}→Eₐ is K_{a+1}, because E_{a+1}→K_{a+1} is epi, while the kernel of Eₐ→Kₐ is exactly K_{a+1}; at the last term the same assertion is the kernel definition. At Kₐ the incoming map is epi and the outgoing kernel inclusion is monic. Thus finite splicing gives 0→Kᵣ→E_{r−1}→⋯→E₀→F→0 in Mod(X_et,Λ), and the induction gives constructibility of every Kₐ.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095N, finite presentation; finite iteration together with the abelian-category exactness in Tag 03RZ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-constructible-module-finite-zero-cokernel",
+  "lem-weil-pbc-etale-free-sheaf-constructible",
+  "lem-weil-pbc-free-etale-module-shriek-comparison",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095N (lemma-category-constructible-modules), finite affine-free epimorphism; Tag 03RZ (lemma-constructible-abelian), closure under kernels; Tag 03S8 (lemma-jshriek-constructible), constructibility of affine-etale extension by zero; finite iteration."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +87,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-constructible-etale-ext-continuity",
@@ -61,7 +99,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The finite-degree affine-free resolution used in the Ext-continuity input to the nearby-duality/local-term argument.",
+   "place": "The finite affine-free syzygy resolution used in the Ext-continuity input to the nearby-duality/local-term argument.",
    "via": [
     "lem-trf-constructible-etale-ext-continuity",
     "lem-trf-nearby-duality-operation-squares",
@@ -72,5 +110,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-constructible-etale-finite-affine-syzygy",
+  "worker": "stage1",
+  "summary": "Split the finite affine-free syzygy construction into the inductive finite affine epimorphism/kernel step and the elementary finite splicing step. The induction uses the existing Tag 095N finite affine epimorphism node, identifies its sheafification with j_!Λ via the existing extension-by-zero definition, and applies the existing weak-Serre kernel closure theorem from Tag 03RZ. No new DAG nodes were needed. Maintainer review (Q52 reader, 2026-10-18): step 1 now cites lem-weil-pbc-free-etale-module-shriek-comparison for P_U ≅ j_{U!}Λ_U (the extension-by-zero definition alone does not state it) and lem-weil-pbc-etale-free-sheaf-constructible plus the extension clause of thm-constructible-serre for constructibility of E_a, which the kernel clause needs; thm-constructible-serre removed from stmt_deps since the statement does not use it.",
+  "blueprint": "Realizes the finite affine-free syzygy resolution used by the Ext-continuity input to the nearby-duality/local-term argument."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-9334bf663",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-9334bf663 (reviewer sub-agent of L); spot-checked: I read the item, every cited node's full statement (including the blueprint_update texts), the parent lem-trf-constructible-etale-ext-continuity, unit sk-i-curve-zero, and Stacks etale-cohomology.tex at 095N (l.12412), 03RZ (l.11828) and 03S8 (l.12185). The statement is correct and unchanged; it matches what 095N's own proof does (a finite affine j_!Λ surjection, a constructible kernel, then iterate). I tested it on small cases: r=1, F=0 (empty family), X empty or Λ=0, and F=j_!Λ_U. Step 2 (splicing) is genuinely elementary. There are no new nodes and no duplicates. The nearest nodes, new-constructible-affine-free-presentation-general (a 2-term presentation only) and lem-trf-constructible-free-etale-resolution (Noetherian X with separated finite-type U, not affine), are different, and the blueprint has no same_as. Every cited statement is on the unit route (sk-thm-p1, sk-thm-properbasechange and sk-thm-iff are in the transitive uses of sk-i-curve-zero), so no tool_uses were needed. Two repairable faults, both in step 1: (C4) the identification P_U = j_{U!}Λ_U was credited to def-weil-pbc-etale-sum-extension, which does not state it; it now cites the reviewed node lem-weil-pbc-free-etale-module-shriek-comparison. (C1) The kernel clause of thm-constructible-serre needs E_a to be constructible, and no node supplied this (03S8 appeared only in the source string); it now cites lem-weil-pbc-etale-free-sheaf-constructible (affine U is qcqs, Λ finite, M=Λ) plus clause (2) for finite sums and clause (1) for the empty sum. proof_deps was updated, and thm-constructible-serre was removed from stmt_deps because the statement does not use it. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-constructible-etale-finite-affine-syzygy.json and the review is review.md.; 1 file(s) fixed by the reviewer"
  }
 }

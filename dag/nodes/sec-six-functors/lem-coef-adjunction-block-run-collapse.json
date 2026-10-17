@@ -10,9 +10,50 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Write s_i for the direction of the inequality between x_i and x_{i+1} (0\\le i<w). By the alternating hypothesis, when p=- the step s_i is upward exactly for even i, and when p=+ exactly for odd i. At a boundary between two different labels, a 0-to-1 transition at k (x_k\\le h<x_{k+1}) has s_k upward, and a 1-to-0 transition at k (x_k>h\\ge x_{k+1}) has s_k downward. We also fix the directions at the two ends: s_0 is upward if p=- (x_0=0 is minimal) and downward if p=+ (x_0=r+1 is maximal), and, when w\\geq1, s_{w-1} is downward if q=- (x_w=0 is minimal) and upward if q=+ (x_w=r+1 is maximal). The first entry has label 0 when p=- and label 1 when p=+ (as 0\\le h\\le r), and the last entry has label 0 when q=- and 1 when q=+. Now take a maximal run x_i,\\ldots,x_k. Its length k-i+1 is odd iff k-i is even. (a) Interior run (0<i, k<w): the transitions at i-1 and k go into and out of the same label, so one is 0-to-1 and the other 1-to-0; s_{i-1} and s_k have opposite directions, hence k-(i-1) is odd and k-i is even. (b) First run with k<w: its label is that of x_0 and the transition at k leaves it, so s_k has the same direction as s_0 (0-to-1 and s_0 upward when p=-; 1-to-0 and s_0 downward when p=+); hence k is even. (c) Last run with i>0: the transition at i-1 enters the label of x_w, so s_{i-1} has the same direction as s_{w-1} (1-to-0 and s_{w-1} downward when q=-; 0-to-1 and s_{w-1} upward when q=+); hence (w-1)-(i-1)=w-i is even. (d) A single run (i=0, k=w): if w=0 the length is 1; if w\\geq1, x_0 and x_w have the same label, so p=q, and s_0, s_{w-1} have opposite directions (upward then downward for p=q=-, downward then upward for p=q=+), so w-1 is odd and w is even. In all cases every maximal run has odd length.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Riehl--Verity, Proposition 3.2.2 proof, pp. 824--825; the parity and collapse calculation for the two interval restrictions."
+   }
+  },
+  {
+   "text": "For a constant word of odd length, the leftmost-equal-pair reduction deletes two entries at each move and therefore leaves exactly one copy of that constant. Under C_h, every entry in a 0-run is unchanged and every entry in a 1-run becomes h+1. Thus each 1-run reduces to one h+1, while each 0-run retains all of its entries. At a run boundary the two labels differ, so one side is at most h and the other is h+1; the boundary entries are unequal and no deletion crosses the boundary. Strict inequalities inside each surviving 0-run are unchanged, so the run order and alternating directions remain as asserted for R(C_{h*}x).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Riehl--Verity, Proposition 3.2.2 proof, pp. 824--825; the parity and collapse calculation for the two interval restrictions."
+   }
+  },
+  {
+   "text": "Under D_h, every entry in a 0-run becomes 0, while an entry j>h in a 1-run becomes j-h. Hence each odd 0-run reduces to one 0, and each 1-run keeps its entrywise shifted word with all strict inequalities preserved. At a boundary, a 0-side has value 0 and a 1-side has a positive value, so the boundary entries are unequal and no cancellation crosses a run. Therefore R(D_{h*}x) has exactly the stated replacements, with the original run order and alternating inequality directions unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Riehl--Verity, Proposition 3.2.2 proof, pp. 824--825; the parity and collapse calculation for the two interval restrictions."
+   }
+  },
+  {
+   "text": "The preceding three calculations apply also to the first and last runs, including singleton runs. Since the reduction algorithm always deletes the leftmost adjacent equal pair and every possible equal pair lies inside one of the constant image runs, reducing the whole word is the same as reducing its runs independently in order. This proves all clauses of the statement for every 0\\le h\\le r, including r=0 and either endpoint sign.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Riehl--Verity, Proposition 3.2.2 proof, pp. 824--825; the parity and collapse calculation for the two interval restrictions."
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Proposition 3.2.2 and proof, pp. 824--825; explicit parity and run-collapse argument supplied here because the paper is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +85,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-adjunction-two-block-splicing",
@@ -70,5 +111,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-adjunction-block-run-collapse",
+  "worker": "stage1",
+  "summary": "Split the finite alternating-word run calculation into four elementary steps. The first proves odd run lengths from the parity of alternating inequalities and the threshold-crossing directions; the next two compute C_h and D_h run images and rule out cross-run cancellation; the last records that deterministic leftmost reduction acts independently on the runs, including endpoint and singleton cases. No new nodes were needed.",
+  "blueprint": "Nearest blueprint ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: finite-coordinate parity and run-collapse calculation for the two interval restrictions in the two-block string splice."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NP-8ca7e13c2",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-8ca7e13c2 (reviewer sub-agent of L); spot-checked: I read the item, its only citer lem-coef-adjunction-two-block-splicing (all 5 steps), def-cbc-enhanced-diagrams-cones, the squiggle-normal-form statement (it uses the same two-letter deletion), unit sk-prop-sf-biduality-general and chapter sec-six-functors. Riehl-Verity Prop. 3.2.2 is not in literature/ (WANTED is already recorded and proof_origin is agent), so I could not check the cited place and checked the mathematics independently instead. An exhaustive script covered r<=4, all four (p,q), width<=10 and every 0<=h<=r: 1,654,284 cases. In every case each maximal chi_h-run has odd length, R(C_h x) collapses each 1-run to h+1 and keeps the 0-runs, and R(D_h x) collapses each 0-run to 0 and shifts each 1-run by -h. This includes r=0, h=0, h=r, singletons and single runs. Steps 2-4 are correct and genuinely elementary: boundary letters are unequal, an odd constant run reduces to one letter, and the leftmost-pair algorithm reduces the runs independently. Step 1 left out the last run's parity: it needs the direction of s_{w-1} fixed by q, which the step never used outside the single-run case. I rewrote step 1 as an explicit case analysis (interior, first, last, single run) in fixes/dag/nodes/sec-six-functors/lem-coef-adjunction-block-run-collapse.json; only the step 1 text changed. There are no new nodes. rg over dag/nodes found no duplicate or generalization. The statement is self-contained and strictly smaller than the parent's bijection. No route departure, no tool_uses, no SGA. The statement is unchanged and no target is touched.; 1 file(s) fixed by the reviewer"
  }
 }
