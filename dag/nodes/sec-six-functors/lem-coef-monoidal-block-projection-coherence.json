@@ -30,9 +30,142 @@
   "def-coef-monoidal-infinity-category",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $p:X\\to N(\\Delta^{\\mathrm{op}})$ be a monoidal infinity category and $A=X_{[1]}$. Straighten $p$ to $F$. The inert transport equivalences in the definition say exactly that $F([n])\\to A^n$ is a Segal product cone, including $F([0])\\simeq *$. Conversely the unstraightening of any such Segal diagram satisfies also the relative-limit clause of the stated monoidal convention: for $d\\in F([m])$, $x\\in F([n])$ and $\\phi:[m]\\to[n]$, cocartesian transport identifies the mapping space over $\\phi$ with $\\operatorname{Map}_{F([n])}(F(\\phi)d,x)$. Under the product equivalence this is $\\prod_i\\operatorname{Map}_A(F(\\rho_i\\phi)d,x_i)$, precisely the required relative-limit map. This mapping-space formula is obtained by taking the fiber over $\\phi$ in the cocartesian mapping square in the straightening statement. When $n=0$ the product is contractible. Thus this convention and Segal classifying diagrams encode the same objects.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 4.1.2.5 and the cocartesian/Segal interpretation; the relative-limit verification is written here."
+   }
+  },
+  {
+   "text": "The straightening statement supplies finite products in $\\operatorname{Cat}_\\infty$. Form its cartesian structure in the product-diagram model $P\\to N(\\mathsf{Fin}_*)$ of [lem-coef-cartesian-envelope-product-diagram-recognition], which is the model fixed in [lem-coef-cartesian-associative-segal-comparison], and the pullback $q:E^\\otimes\\to N(\\mathsf{Ass}^\\otimes)$ described there, where $\\mathsf{Ass}$ has one operation for each ordering of a labeled input set. Cocartesian lifts pull back from the cocartesian fibration $P\\to N(\\mathsf{Fin}_*)$. Its fibers are powers of $\\operatorname{Cat}_\\infty$ via the inert projections, its inert maps are projections, and its operation transports are products in the prescribed input order, by the singleton-restriction equivalences, the transport formula and the block mapping-space formula of [lem-coef-cartesian-envelope-product-diagram-recognition]; these are the same formulas as for the cartesian structure of [lem-coef-cartesian-operadic-envelope]. The block mapping-space formula of the product-diagram model, applied over each ordered pointed map, is exactly the output Segal axiom; hence this pullback is a map of infinity-operads and meets the hypotheses of the reconstruction theorem. The comparison sends $F$ to an inert-preserving section $s$ of $q$. Apply [lem-coef-colored-operation-section-reconstruction] to this ordinary symmetric operad and $q$. Its color object is $A$. For the standard order on $r$ inputs, its structure arrow is $t_r:A^r\\to A$, with all the stated tree contraction, grafting, identity and nullary data. These are functors, and their coherence paths are natural equivalences: [def-cbc-enhanced-cartesian-fibration] models $\\operatorname{Cat}_\\infty$ by cores of functor categories, and [lem-coef-coherent-nerve-comparison] identifies these enriched mapping spaces with the intrinsic ones. All these products are ambient products of categories; no product in $A$ is assumed.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "lem-coef-colored-operation-section-reconstruction",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-cartesian-envelope-product-diagram-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA 2.4.2.5 and 4.1.2.10; the cited existing reconstruction theorem applied to the ordinary associative operad."
+   }
+  },
+  {
+   "text": "Conversely extend the supplied planar system to the ordered operations of $\\mathsf{Ass}$. On an input set ordered as $i_1,\\ldots,i_r$, use $t_r$ after reindexing the product factors into this order. For a tree labeled by such orders, order its external leaves recursively by the input order at every vertex and use the given planar coherence on that ordered list, precomposed with its reindexing map. A contraction replaces ordered lists by their concatenation; thus it gives the same leaf ordering before and after contraction. Grafting also concatenates the same lists. Relabeling inputs only composes the reindexing maps, and a unary identity inserts the singleton list. These equalities of coordinate maps show that all permutation, contraction, grafting and identity compatibility diagrams, including their higher simplices, are the given planar diagrams pulled back by a fixed reindexing. The empty list uses $t_0$. Hence these data meet every hypothesis of [lem-coef-colored-operation-section-reconstruction] for the $q$ of step 2. Its reconstruction equivalence gives an inert-preserving section $s$ with the specified data and all their parameter families. Its unary operation is identified with the identity, as required by that theorem; an initial specified $t_1\\simeq\\mathrm{id}_A$ is retained in this identification. Applying the cartesian associative--Segal comparison gives a Segal diagram $H$. We now identify this particular diagram's complete block and higher-simplex formulas.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Apply the existing outputwise section reconstruction to the symmetric associative operad, then HA 2.4.2.5 and 4.1.2.10; explicit ordered-list extension is written here."
+   }
+  },
+  {
+   "text": "Set $G([n])=A^n$. For $\\alpha:[n]\\to[m]$ and $a=\\alpha^{\\mathrm{op}}$, write $I_i=\\{a(i-1)+1,\\ldots,a(i)\\}$. Define the $i$th component of $G(\\alpha)$ to be $t_{|I_i|}\\operatorname{pr}_{I_i}$. The $I_i$ are disjoint consecutive lists; the entries outside $(a(0),a(m)]$ are discarded. For a second arrow $\\beta:[m]\\to[\\ell]$, with opposite $b$, the $j$th composite component applies $t_{b(j)-b(j-1)}$ to the outputs with $b(j-1)<i\\leq b(j)$. Their external inputs concatenate, in order, to $\\{a(b(j-1))+1,\\ldots,a(b(j))\\}$. Its length is the telescoping sum $\\sum_i(a(i)-a(i-1))=a(b(j))-a(b(j-1))$. Pull back the specified substitution equivalence on that ordered input list along its projection from $A^n$. This defines the comparison with $G(\\beta\\alpha)$; for an empty list it is pulled back along $A^n\\to *$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9, block formula; explicit interval calculation from the given operation system."
+   }
+  },
+  {
+   "text": "Let $\\pi$ be the coherent product-evaluation functor of [lem-coef-cartesian-envelope-product-diagram-recognition] and define $G=\\pi sN(\\operatorname{Cut})$. This is a coherent diagram by composition of the specified coherent functors. Its value at $[n]$ is $A^n$ under the section's specified Segal identifications. The reconstruction theorem states that the whole composition data of $s$ are the supplied tree data, output by output, and that forest coherences are their products pulled back along the corresponding input projections. Apply this clause to a chain $[n_0]\\to\\cdots\\to[n_q]$: draw the consecutive-block corolla for each output at each stage and join its inputs to the preceding outputs. For a chosen final output retain the branches feeding it and retain nullary vertices even when there is no external input. By step 4 its ordered external leaves are precisely its composite input interval. The reconstruction assigns the given contraction diagram of this rooted planar tree; $\\pi$ evaluates each of its entire parameter simplices after precomposition with $\\operatorname{pr}_{L_j}:A^{n_0}\\to A^{|L_j|}$, where $L_j$ is that ordered interval, and then forms the tuple of outputs. This uses the stated forest clause on the simplices themselves, not a factorization of their endpoints.\n\nFor a face composing adjacent stages, consecutive input intervals concatenate by step 4 and the corresponding tree edges contract. For a face separating the chain into two subchains, substitution grafts the two trees, and the supplied grafting compatibility identifies the resulting diagrams. A repeated stage inserts unary identities, with the specified identity coherences. Removing an endpoint restricts the forest to the remaining stages; precomposition by a removed initial stage is the same substitution of its input trees. On intersections of these faces, the iterated contractions and graftings are exactly the higher compatibilities already included in the given tree datum and in the reconstruction theorem. Further block substitutions graft the same ordered lists. Thus the assigned full simplices have all required faces, degeneracies and substitution compatibilities, including empty lists. The theorem's arbitrary-parameter and restriction clauses ensure these are the complete coherent diagram data of $G$.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-cartesian-envelope-product-diagram-recognition",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA 2.4.1 product-evaluation model and 4.1.2.9 Cut; use the existing reconstruction theorem on complete forest coherences and arbitrary parameters. The block/face calculation is explicit here."
+   }
+  },
+  {
+   "text": "The preceding definition of $G$ is exactly the comparison functor of [lem-coef-cartesian-associative-segal-comparison] applied to the reconstructed section $s$: that functor is the specified composition with $N(\\operatorname{Cut})$ and $\\pi$. Consequently $G\\simeq H$ as complete diagrams. For an inert arrow every block is a singleton, so step 4 gives the coordinate projection followed by the specified unary identity equivalence; the inert maps exhibit the Segal product cones. If the planar system came from the original $F$, the ordered-list extension in step 3 recovers the section data of step 2: an operation of $\\mathsf{Ass}$ with any input order is the standard-order operation composed with its input permutation, and the section's permutation compatibilities identify precisely these reindexings, including their full tree diagrams. The restriction/reconstruction equivalence, not merely equality of the arity maps, therefore identifies the reconstructed section with the original section. Applying the comparison gives $G\\simeq F$. Straightening sends this coherent diagram equivalence to an equivalence of total categories over $N(\\Delta^{\\mathrm{op}})$.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "lem-coef-cocartesian-straightening",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "The specified comparison functor of HA 2.4.2.5 and 4.1.2.10 on the full reconstructed section, followed by straightening."
+   }
+  },
+  {
+   "text": "Unstraighten $G$. Its fibers are $A^n$ and its transports are the block formulas by the straightening equivalence. Its inert maps are the coordinate projections up to the specified unary identity equivalence. The mapping-space computation of step 1 verifies the relative-limit clause, so its total category is monoidal in the exact convention used by the item, including the empty fiber product at $[0]$.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Cocartesian straightening with the defining Segal conditions; relative-limit check in step 1."
+   }
+  },
+  {
+   "text": "Let $f:A\\to B$ have the specified coherent operation equivalences $ft_r\\simeq u_rf^r$ and all their planar tree compatibilities. Extend them to ordered labeled inputs by the reindexings of step 3: $\\operatorname{pr}_{I}f^n=f^{|I|}\\operatorname{pr}_{I}$, so these reindexings commute with $f$ and compose identically on every compatibility simplex. Apply the transformation and arbitrary-parameter clauses of [lem-coef-colored-operation-section-reconstruction] to obtain a coherent transformation of the two reconstructed sections of the same $q$. Its component on a tuple of $n$ colors is the tuple of $n$ copies of $f$. Postcompose with $\\pi$ and restrict along $N(\\operatorname{Cut})$. These are functors on the entire section/diagram categories, so they give a transformation of the particular diagrams $G_A\\to G_B$ from step 5, with all higher families; the comparison also identifies it as the image of the given algebra morphism. Its degree-$n$ component is $f^n$. On a block $I$ its naturality equivalence is $ft_{|I|}\\simeq u_{|I|}f^{|I|}$ pulled back along $\\operatorname{pr}_{I}$. On a chain its full naturality diagram is the given tree-compatible family on the retained ordered tree, pulled back along the same projection as in step 5, by the reconstruction theorem's forest and parameter clauses. Finally straightening sends this transformation to a functor of total categories preserving all cocartesian edges. No map between endomorphism operads of different colors is used.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "lem-coef-cartesian-envelope-product-diagram-recognition",
+    "lem-coef-cocartesian-straightening",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Existing coherent section reconstruction on transformations and arbitrary parameters; HA cartesian algebra--monoid/Cut comparison, then cocartesian straightening."
+   }
+  },
+  {
+   "text": "All nullary cases were included: a block of length zero uses $t_0$ and the unique projection to $*$; an arrow with target $[0]$ has no output components; a chain passing through $[0]$ uses only unit trees thereafter. A unit can exist only if $A$ has an object, so the argument asserts no unital structure on an empty category. Finite products have been taken in $\\operatorname{Cat}_\\infty$, never in $A$ or $B$; no limit or colimit of $A$ or $B$ entered the construction. The projection formulas specify the simplices themselves and do not require or assert full faithfulness of precomposition with any projection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Boundary-case audit of the explicit construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cartesian-operadic-envelope",
+  "lem-coef-cartesian-associative-segal-comparison",
+  "lem-coef-colored-operation-section-reconstruction",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-coherent-nerve-comparison",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-cartesian-envelope-product-diagram-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Sections 2.4.1-2.4.2 and 4.1.2-4.1.3, with Berger--Moerdijk sections 1, 4, Theorem 5.1 and section 8.2 for the tree presentation; explicit forest and projection argument by Q23. Sources read online, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +201,66 @@
    "results": "{\"t\": \"2026-10-16T21:27:51Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy coherent nonsymmetric monoidal structures are encoded by planar trees with grafting contraction and unit coherences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategoryStruct\", \"Mathlib.Tactic.Monoidal.tacticMonoidal_coherence\", \"CategoryTheory.Mon_\", \"Mathlib.Tactic.Coherence.tacticMonoidal_coherence\", \"CategoryTheory.MonoidalCategory\", \"CategoryTheory.MonoidalCategoryStruct.noConfusionType\", \"CategoryTheory.MonoidalCategory.casesOn\", \"CategoryTheory.MonoidalCategory.recOn\"], \"digest\": \"261295baebae718d\"}",
    "date": "2026-10-17",
    "verdict": "no match: source-read hits are ordinary MonoidalCategoryStruct/MonoidalCategory and free ordinary monoidal coherence (Mathlib/CategoryTheory/Monoidal/Category.lean:80-100; Free/Coherence.lean:10-30), the ordinal-sum monoidal category (AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:12-27), or simplicial-set associators. None states equivalence of homotopy coherent planar operation systems with monoidal infinity fibrations, or the specified projection-pullback compatibility simplices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonsymmetric monoidal infinity category cocartesian fibration over the opposite simplex category has planar operations whose higher coherence simplices are pullbacks along consecutive coordinate projections",
+   "results": "{\"t\": \"2026-10-16T22:26:54Z\", \"tool\": \"leanfinder\", \"query\": \"Nonsymmetric monoidal infinity category cocartesian fibration over the opposite simplex category has planar operations whose higher coherence simplices are pullbacks along consecutive coordinate projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"SSet.prodStdSimplex.isoNerve\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.Arrow.cechNerve\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.Quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\"], \"digest\": \"e14c1fd3a3860181\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal coherence, strict Segal nerves and simplicial-set products do not state monoidal infinity-category normal forms with specified projection-pullback higher simplices; candidate sources were read as described in report.md."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monoidal infinity categories admit coherent planar block operation normal forms including all higher projection pullback simplices",
+   "results": "{\"t\": \"2026-10-16T22:27:35Z\", \"tool\": \"leansearch\", \"query\": \"Monoidal infinity categories admit coherent planar block operation normal forms including all higher projection pullback simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FreeMonoidalCategory.normalizeObj\", \"Mathlib.Tactic.Monoidal.tacticMonoidal_nf\", \"CategoryTheory.MonoidalCategory.mk\", \"CategoryTheory.MonoidalCategoryStruct.mk\", \"CategoryTheory.MonoidalCategory.noConfusionType\", \"CategoryTheory.MonoidalCategoryStruct.noConfusionType\", \"CategoryTheory.MonoidalCategoryStruct\", \"CategoryTheory.MonoidalCategory\"], \"digest\": \"9c91a91155af5e97\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal coherence, strict Segal nerves and simplicial-set products do not state monoidal infinity-category normal forms with specified projection-pullback higher simplices; candidate sources were read as described in report.md."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.Mon_",
+   "results": "{\"t\": \"2026-10-16T22:25:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory, CategoryTheory.Mon_\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Mon_'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: Loogle rejected the legacy identifier CategoryTheory.Mon_; this query provides no absence evidence. The valid MonoidalCategory and quoted Segal searches were run separately and inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal|[Aa]ssoc.*[Oo]perad|planar.*[Tt]ree",
+   "results": "{\"t\": \"2026-10-16T22:26:50Z\", \"tool\": \"grep\", \"query\": \"Segal|[Aa]ssoc.*[Oo]perad|planar.*[Tt]ree\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"f8959893c2451db5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal coherence, strict Segal nerves and simplicial-set products do not state monoidal infinity-category normal forms with specified projection-pullback higher simplices; candidate sources were read as described in report.md."
+  },
+  {
+   "tool": "grep",
+   "query": "AInfinity|A_infty|Boardman|WConstruction|MonObj|Monoidal.*Segal",
+   "results": "{\"t\": \"2026-10-17T00:03:01Z\", \"tool\": \"grep\", \"query\": \"AInfinity|A_infty|Boardman|WConstruction|MonObj|Monoidal.*Segal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Basic.lean\"], \"digest\": \"e73cc073b5566598\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25,42-60, Mathlib/CategoryTheory/Monoidal/Mon.lean:56-86 and Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-37. These give strict simplicial-set Segal bijections, ordinary MonObj, and the coherent-nerve definition, not either recognition theorem or the projection normal form in infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An A infinity monoid in a cartesian infinity category can be described by a reduced Segal object and coherent multilinear products with units",
+   "results": "{\"t\": \"2026-10-17T00:03:03Z\", \"tool\": \"leanfinder\", \"query\": \"An A infinity monoid in a cartesian infinity category can be described by a reduced Segal object and coherent multilinear products with units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.PtSimplex.MulStruct\", \"SSet.QCat\", \"SSet.StrictSegal.ofCore\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.IsStrictSegal\", \"SSet.StrictSegalCore\"], \"digest\": \"07e156cafdcc6630\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25,42-60, Mathlib/CategoryTheory/Monoidal/Mon.lean:56-86 and Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-37. These give strict simplicial-set Segal bijections, ordinary MonObj, and the coherent-nerve definition, not either recognition theorem or the projection normal form in infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\"",
+   "results": "{\"t\": \"2026-10-17T00:03:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"7ad685949eb87375\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25,42-60, Mathlib/CategoryTheory/Monoidal/Mon.lean:56-86 and Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-37. These give strict simplicial-set Segal bijections, ordinary MonObj, and the coherent-nerve definition, not either recognition theorem or the projection normal form in infinity categories."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*coherent|infinity.*operad|Segal.*object|associative.*algebra",
+   "results": "{\"t\": \"2026-10-17T00:04:12Z\", \"tool\": \"grep\", \"query\": \"homotopy.*coherent|infinity.*operad|Segal.*object|associative.*algebra\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\"], \"digest\": \"10b4bd17df70861e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25,42-60, Mathlib/CategoryTheory/Monoidal/Mon.lean:56-86 and Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-37. These give strict simplicial-set Segal bijections, ordinary MonObj, and the coherent-nerve definition, not either recognition theorem or the projection normal form in infinity categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-monoidal-yoneda-embedding",
@@ -91,5 +280,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-monoidal-block-projection-coherence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Nine steps: straighten; compare with associative algebra sections; extend/recover planar data through the existing colored-operation-section reconstruction; calculate consecutive blocks and all forest projection pullbacks; compare the complete diagrams; unstraighten and handle morphisms and boundary cases. One new statement-only standard cartesian associative/Segal comparison. Second reading removes the two duplicate tree lemmas and the bespoke W-operad operator-category comparison, replacing them with the existing reviewed reconstruction theorem. No Mathlib leaf or finished project declaration found.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent realization of the finite adjunction diagram before derived inverse limit, through the inherited enriched-localization and monoidal-Yoneda chain. The item is a general foundational tool for that chain, not a new geometric route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-8438a08d9",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-8438a08d9 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, steps 1-9), the new node lem-coef-cartesian-associative-segal-comparison, all nine cited statements, the unit, the chapter, and the main-20261015 prop-coef-integral-exceptional-adjoint statement and proof. HA is not archived (WANTED), so I checked against my knowledge of HA: 2.4.2.5, 4.1.1.3, 4.1.2.5, 4.1.2.9-11 and 4.1.3.19. The steps are correct. Step 1's fibre-over-phi argument gives exactly the relative p-limit clause, including n=0. Step 3's reindexing extension works because Ass is Sigma-free. I recomputed step 4's block telescoping under the a∘b variance, with cases for inert maps, maps to [0], constant opposite maps and discarded ends. In step 5, G = pi s N(Cut): recognition's evaluation formula plus the reconstruction's forest clause give genuine projection-pullback simplices. Step 6 gets G=H by definition and G≃F from the reconstruction equivalence, not from bare operations. Step 8 uses a transformation of sections of one q with components f^n and no endomorphism-operad maps. The new node is true, standard, assumes only finite products, is statement-only and self-contained, and is not a clause of the item. I tested it on terminal C, n=0 and a noncommutative word monoid. The dependency closure has no cycle, every citation is in the item's unit, and no tool_uses are needed. One C4 fault, fixed: the new node fixes the product-diagram model P of lem-coef-cartesian-envelope-product-diagram-recognition, but step 2 attributed P's fibres, transports and block mapping formula to lem-coef-cartesian-operadic-envelope, a different model. Step 2 now cites recognition for these facts and keeps the envelope as the same formulas; the id is added to step 2's uses and proof_deps is unchanged. Note for the next splitter: the new node's first equivalence (restriction along Cut) follows from the existing lem-coef-lm-prism-approximation plus lem-coef-operadic-approximation-restriction. The node's composite with pi is not stated anywhere else, so it is not a duplicate. The report's 'Files written' list is stale: it still names the two tree nodes that were removed, which are not on the branch and are not cited.; 1 file(s) fixed by the reviewer"
  }
 }

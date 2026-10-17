@@ -1,0 +1,198 @@
+{
+ "id": "lem-coef-cartesian-associative-segal-comparison",
+ "kind": "statement",
+ "title": "Cartesian associative algebras and Segal simplicial objects",
+ "statement": "Use quasicategories, coherent functors, mapping spaces and universes of [def-cbc-enhanced-diagrams-cones], cocartesian fibrations and edges of [def-coef-infinity-fibrations], the simplex category and inert maps of [def-coef-monoidal-infinity-category], and the cartesian monoidal envelope of [lem-coef-cartesian-operadic-envelope]. Let $\\mathcal C$ be an infinity category with finite products, including a terminal object for the empty product. Write $\\mathsf{Fin}_*$ for finite pointed sets and $\\langle n\\rangle=\\{*,1,\\ldots,n\\}$. Choose the product-diagram model $\\mathcal C^\\times\\to N(\\mathsf{Fin}_*)$ and its coherent product-evaluation functor $\\pi:\\mathcal C^\\times\\to\\mathcal C$ from [lem-coef-cartesian-envelope-product-diagram-recognition]: a tuple has image its product, and an arrow has image the tuple of its block maps precomposed with the input projections.\n\nLet $\\mathsf{Ass}$ be the ordinary symmetric operad with one color whose operations on a finite labeled input set are its linear orders; substitution concatenates the ordered input lists, the nullary operation is the empty list and the unary identity is the singleton list. Its category of operators $\\mathsf{Ass}^\\otimes$ has objects $\\langle n\\rangle$, and a morphism is a pointed map together with a linear order on each non-basepoint fiber; composition substitutes these lists and discards inputs sent to the basepoint. Write $u:\\mathsf{Ass}^\\otimes\\to\\mathsf{Fin}_*$ for the forgetful functor. Put $\\mathcal C^\\times_{\\mathsf{Ass}}=\\mathcal C^\\times\\times_{N(\\mathsf{Fin}_*)}N(\\mathsf{Ass}^\\otimes)$. Let $\\operatorname{Alg}_{\\mathsf{Ass}}(\\mathcal C^\\times)$ denote the full infinity category of sections of this pullback carrying inert arrows to cocartesian arrows, with coherent transformations over the identity of the base; inert means that each non-basepoint output has exactly one preimage.\n\nDefine $\\operatorname{Cut}:\\Delta^{\\mathrm{op}}\\to\\mathsf{Ass}^\\otimes$ by $\\operatorname{Cut}([n])=\\langle n\\rangle$. For $\\alpha:[n]\\to[m]$ with opposite $a:[m]\\to[n]$, it sends $j$ to $i$ if $a(i-1)<j\\leq a(i)$ and to $*$ otherwise, ordering each fiber by its input indices. Let $\\mathcal C^\\times_{\\mathrm{pl}}$ be the pullback along $N(\\operatorname{Cut})$, and let $\\operatorname{Alg}_{\\mathrm{pl}}$ be its infinity category of inert-preserving sections, in the nonsymmetric convention of [def-coef-monoidal-infinity-category]. Let $\\operatorname{Mon}_\\Delta(\\mathcal C)$ be the full subcategory of $\\operatorname{Fun}(N(\\Delta^{\\mathrm{op}}),\\mathcal C)$ on diagrams $F$ whose inert edge maps exhibit $F([n])\\simeq F([1])^n$ as a product cone for every $n\\geq0$.\n\nRestriction along $N(\\operatorname{Cut})$ induces an equivalence $\\operatorname{Alg}_{\\mathsf{Ass}}(\\mathcal C^\\times)\\simeq\\operatorname{Alg}_{\\mathrm{pl}}$. Composition with the specified $\\pi$ after restriction induces an equivalence\n$$\\operatorname{Alg}_{\\mathsf{Ass}}(\\mathcal C^\\times)\\simeq\\operatorname{Mon}_\\Delta(\\mathcal C).$$\nThese equivalences preserve the underlying-object functor to $\\mathcal C$. They identify the $r$-ary operation $x^r\\to x$ for the standard input order with the transport along the endpoint-preserving arrow $[r]\\to[1]$, under the Segal product cone; arity zero gives the unit. They identify the entire infinity categories, including mapping spaces and all higher families. For an algebra morphism with underlying map $f:x\\to y$, the corresponding transformation has degree-$n$ component $f^n$ under the product-cone identifications. The equivalences are natural in finite-product-preserving functors. No other limits or any colimits are required.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra (2017), Construction 2.1.1.7 and Definition 4.1.1.3 / Remark 4.1.1.4 (the ordered-fiber associative operator category), Proposition 2.4.2.5 (composition with the cartesian-structure functor), Construction 4.1.2.9 (Cut), Proposition 4.1.2.10 (restriction of associative monoids), and Definition 4.1.3.16 and Proposition 4.1.3.19 (planar algebra restriction). Read in the retained sandbox HA.txt. Source archive WANTED in report.md; no Stacks tag states this infinity-categorical comparison. The statement contains only these standard comparison equivalences; tree/forest reconstruction is supplied by the existing colored-operation-section node in the item proof."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cartesian-operadic-envelope",
+  "lem-coef-cartesian-envelope-product-diagram-recognition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoid object in an infinity category with finite products is a simplicial object satisfying the Segal product condition and is equivalent to an associative algebra for the cartesian monoidal structure",
+   "results": "{\"t\": \"2026-10-16T22:26:19Z\", \"tool\": \"leanfinder\", \"query\": \"A monoid object in an infinity category with finite products is a simplicial object satisfying the Segal product condition and is equivalent to an associative algebra for the cartesian monoidal structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instCartesianMonoidalCategory\", \"AugmentedSimplexCategory.instMonoidalCategory\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"AugmentedSimplexCategory.instMonoidalCategoryStruct\", \"SSet.Truncated.instMonoidalTruncation\", \"SSet.Truncated.hoFunctor.monoidal\", \"AugmentedSimplexCategory.tensorObjOf\", \"SSet.Truncated.instMonoidalOfNatNatCatHoFunctor₂\"], \"digest\": \"70b7ed2c03740b35\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: candidates are ordinary monoid objects, simplicial objects, and strict Segal simplicial sets. Source read: Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25 and 42-60, CategoryTheory/Monoidal/Category.lean:80-110; Monoidal/Mon_.lean only reexports Mon. These concern ordinary categories or strict bijections, not cartesian associative infinity algebras and Segal diagrams in an arbitrary infinity category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian associative algebra objects and reduced Segal simplicial diagrams are equivalent naturally on morphisms",
+   "results": "{\"t\": \"2026-10-16T22:26:54Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian associative algebra objects and reduced Segal simplicial diagrams are equivalent naturally on morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.prodStdSimplex.isoNerve\", \"SSet.StrictSegal.ofIsStrictSegal\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"SSet.Truncated.StrictSegal.ofIsStrictSegal\"], \"digest\": \"87475cdb36d8838e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: candidates are ordinary monoid objects, simplicial objects, and strict Segal simplicial sets. Source read: Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25 and 42-60, CategoryTheory/Monoidal/Category.lean:80-110; Monoidal/Mon_.lean only reexports Mon. These concern ordinary categories or strict bijections, not cartesian associative infinity algebras and Segal diagrams in an arbitrary infinity category."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal|monoid object|cartesian.*monoidal",
+   "results": "{\"t\": \"2026-10-16T22:26:18Z\", \"tool\": \"grep\", \"query\": \"Segal|monoid object|cartesian.*monoidal\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\"], \"digest\": \"c44c8abf889f81a1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: candidates are ordinary monoid objects, simplicial objects, and strict Segal simplicial sets. Source read: Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25 and 42-60, CategoryTheory/Monoidal/Category.lean:80-110; Monoidal/Mon_.lean only reexports Mon. These concern ordinary categories or strict bijections, not cartesian associative infinity algebras and Segal diagrams in an arbitrary infinity category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Segal simplicial objects classify cartesian associative algebra objects in infinity categories",
+   "results": "{\"t\": \"2026-10-16T22:26:19Z\", \"tool\": \"leansearch\", \"query\": \"Segal simplicial objects classify cartesian associative algebra objects in infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore.mk\", \"CategoryTheory.SimplicialObject\", \"SSet.StrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"SSet\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal.quasicategory'\"], \"digest\": \"b77e5bf0b1e0ab06\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: candidates are ordinary monoid objects, simplicial objects, and strict Segal simplicial sets. Source read: Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25 and 42-60, CategoryTheory/Monoidal/Category.lean:80-110; Monoidal/Mon_.lean only reexports Mon. These concern ordinary categories or strict bijections, not cartesian associative infinity algebras and Segal diagrams in an arbitrary infinity category."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal|[Aa]ssoc.*[Oo]perad|planar.*[Tt]ree",
+   "results": "{\"t\": \"2026-10-16T22:26:50Z\", \"tool\": \"grep\", \"query\": \"Segal|[Aa]ssoc.*[Oo]perad|planar.*[Tt]ree\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"f8959893c2451db5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: candidates are ordinary monoid objects, simplicial objects, and strict Segal simplicial sets. Source read: Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25 and 42-60, CategoryTheory/Monoidal/Category.lean:80-110; Monoidal/Mon_.lean only reexports Mon. These concern ordinary categories or strict bijections, not cartesian associative infinity algebras and Segal diagrams in an arbitrary infinity category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-16T23:47:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory\", \"CategoryTheory.MonoidalCategory.toMonoidalCategoryStruct\", \"CategoryTheory.MonoidalCategory.tensorUnitLeft\", \"CategoryTheory.MonoidalCategory.tensorUnitRight\", \"CategoryTheory.MonoidalCategory.tensorLeft\", \"CategoryTheory.MonoidalCategory.tensorRight\", \"CategoryTheory.MonoidalCategory.tensor\", \"CategoryTheory.MonoidalCategory.curriedTensor\"], \"digest\": \"4aabfbfecc058904\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the 12 hits are ordinary CategoryTheory.MonoidalCategory and its tensor functors/instances (Mathlib/CategoryTheory/Monoidal/Category.lean); none states the infinity-categorical unital tree recognition or cartesian associative/Segal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "AInfinity|A_infty|Boardman|WConstruction|MonObj|Monoidal.*Segal",
+   "results": "{\"t\": \"2026-10-17T00:03:01Z\", \"tool\": \"grep\", \"query\": \"AInfinity|A_infty|Boardman|WConstruction|MonObj|Monoidal.*Segal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/CommBialgCat.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Basic.lean\"], \"digest\": \"e73cc073b5566598\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25,42-60, Mathlib/CategoryTheory/Monoidal/Mon.lean:56-86 and Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-37. These give strict simplicial-set Segal bijections, ordinary MonObj, and the coherent-nerve definition, not either recognition theorem or the projection normal form in infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An A infinity monoid in a cartesian infinity category can be described by a reduced Segal object and coherent multilinear products with units",
+   "results": "{\"t\": \"2026-10-17T00:03:03Z\", \"tool\": \"leanfinder\", \"query\": \"An A infinity monoid in a cartesian infinity category can be described by a reduced Segal object and coherent multilinear products with units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.PtSimplex.MulStruct\", \"SSet.QCat\", \"SSet.StrictSegal.ofCore\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.IsStrictSegal\", \"SSet.StrictSegalCore\"], \"digest\": \"07e156cafdcc6630\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25,42-60, Mathlib/CategoryTheory/Monoidal/Mon.lean:56-86 and Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-37. These give strict simplicial-set Segal bijections, ordinary MonObj, and the coherent-nerve definition, not either recognition theorem or the projection normal form in infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\"",
+   "results": "{\"t\": \"2026-10-17T00:03:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"7ad685949eb87375\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25,42-60, Mathlib/CategoryTheory/Monoidal/Mon.lean:56-86 and Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-37. These give strict simplicial-set Segal bijections, ordinary MonObj, and the coherent-nerve definition, not either recognition theorem or the projection normal form in infinity categories."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*coherent|infinity.*operad|Segal.*object|associative.*algebra",
+   "results": "{\"t\": \"2026-10-17T00:04:12Z\", \"tool\": \"grep\", \"query\": \"homotopy.*coherent|infinity.*operad|Segal.*object|associative.*algebra\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\"], \"digest\": \"10b4bd17df70861e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-25,42-60, Mathlib/CategoryTheory/Monoidal/Mon.lean:56-86 and Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-37. These give strict simplicial-set Segal bijections, ordinary MonObj, and the coherent-nerve definition, not either recognition theorem or the projection normal form in infinity categories."
+  },
+  {
+   "tool": "grep",
+   "query": "Boardman|associahedron|Segal",
+   "results": "{\"t\": \"2026-10-17T00:48:50Z\", \"tool\": \"grep\", \"query\": \"Boardman|associahedron|Segal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/CStarAlgebra/GelfandNaimarkSegal.lean\", \"Mathlib/Analysis/CStarAlgebra/GelfandNaimarkSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"e004c9d1b15f6bd2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits are strict Segal simplicial sets, nerves, and the quasicategory bicategory; Loogle returns ordinary monoid declarations; source grep finds strict Segal or unrelated Gelfand-Naimark-Segal. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60: these statements assert strict spine bijections for simplicial sets, not either unital infinity-operadic tree recognition or cartesian associative/Segal classification in an arbitrary infinity category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent associative multiplication with a unit in a quasicategory is described by a monoid object satisfying the Segal equivalences",
+   "results": "{\"t\": \"2026-10-17T00:48:51Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent associative multiplication with a unit in a quasicategory is described by a monoid object satisfying the Segal equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.StrictSegal.quasicategory'\", \"SSet.StrictSegal.quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.IsStrictSegal\", \"SSet.QCat.bicategory\"], \"digest\": \"af9a7fef6362a551\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits are strict Segal simplicial sets, nerves, and the quasicategory bicategory; Loogle returns ordinary monoid declarations; source grep finds strict Segal or unrelated Gelfand-Naimark-Segal. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60: these statements assert strict spine bijections for simplicial sets, not either unital infinity-operadic tree recognition or cartesian associative/Segal classification in an arbitrary infinity category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"monoid\"",
+   "results": "{\"t\": \"2026-10-17T00:48:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"monoid\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Grind.AddCommMonoid\", \"Lean.Grind.AddCommGroup.toAddCommMonoid\", \"Lean.Grind.AddCommMonoid.toAdd\", \"Lean.Grind.AddCommMonoid.toZero\", \"Lean.Grind.NatModule.toAddCommMonoid\", \"Lean.Grind.AddCommMonoid.add_zero\", \"Lean.Grind.AddCommMonoid.zero_add\", \"Lean.Grind.AddCommMonoid.add_comm\"], \"digest\": \"1f36f3df922081c8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits are strict Segal simplicial sets, nerves, and the quasicategory bicategory; Loogle returns ordinary monoid declarations; source grep finds strict Segal or unrelated Gelfand-Naimark-Segal. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60: these statements assert strict spine bijections for simplicial sets, not either unital infinity-operadic tree recognition or cartesian associative/Segal classification in an arbitrary infinity category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian associative algebra Segal diagram equivalence including all chain-level higher simplices and cut-cube tree data",
+   "results": "{\"t\": \"2026-10-17T03:25:35Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian associative algebra Segal diagram equivalence including all chain-level higher simplices and cut-cube tree data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore\", \"SSet.StrictSegal\", \"SSet.IsStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegalCore.concat\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\"], \"digest\": \"83f103a2fb5573eb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict Segal simplicial sets and do not state the requested infinity-categorical comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve, SSet.StrictSegal, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-17T03:25:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialNerve, SSet.StrictSegal, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cut.?cube|tree.?parameter|higher.?simplex|Segal",
+   "results": "{\"t\": \"2026-10-17T03:25:35Z\", \"tool\": \"grep\", \"query\": \"cut.?cube|tree.?parameter|higher.?simplex|Segal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"8043a03b706a34ae\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only strict Segal simplicial-set results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cartesian associative algebra and its Segal diagram have equivalent higher simplices on every chain, with cut tree contraction and grafting",
+   "results": "{\"t\": \"2026-10-17T03:25:35Z\", \"tool\": \"leansearch\", \"query\": \"A cartesian associative algebra and its Segal diagram have equivalent higher simplices on every chain, with cut tree contraction and grafting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\", \"SSet.associator_hom_app_apply\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"SSet.whiskerRight_app_apply\", \"SSet.instCartesianMonoidalCategory\", \"SSet.StrictSegalCore.mk\", \"SSet.instFiniteTensorUnit\"], \"digest\": \"77c5e09cf8abfc34\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of operators of the Boardman Vogt unital associative operad is Dwyer Kan equivalent to the rigidification of the opposite simplex category by assigning cut cubes to forests",
+   "results": "{\"t\": \"2026-10-17T03:25:26Z\", \"tool\": \"leanfinder\", \"query\": \"The category of operators of the Boardman Vogt unital associative operad is Dwyer Kan equivalent to the rigidification of the opposite simplex category by assigning cut cubes to forests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.SimplicialNerve\", \"SSet.stdSimplex.isoNerve\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\"], \"digest\": \"2c6f744b9c9027c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve adjunctions and the simplicial nerve definition; inspected SimplicialNerve.lean:12-37. No unital operad operator category or cut-forest comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidObject|AssociativeAlgebra|Boardman|DwyerKan|PlanarTree",
+   "results": "{\"t\": \"2026-10-17T03:38:40Z\", \"tool\": \"grep\", \"query\": \"MonoidObject|AssociativeAlgebra|Boardman|DwyerKan|PlanarTree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/OfAssociative.lean\", \"Mathlib/Algebra/Lie/OfAssociative.lean\", \"Mathlib/Algebra/Lie/OfAssociative.lean\", \"Mathlib/Algebra/Lie/OfAssociative.lean\"], \"digest\": \"b3f17e4f5b6945c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary monoidal category and strict nerve Segal declarations; none compares infinity-categorical associative algebra sections with Segal diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra object in a cartesian monoidal infinity category is equivalent to a simplicial object satisfying the Segal product condition, including coherent algebra morphisms.",
+   "results": "{\"t\": \"2026-10-17T03:39:13Z\", \"tool\": \"leanfinder\", \"query\": \"An algebra object in a cartesian monoidal infinity category is equivalent to a simplicial object satisfying the Segal product condition, including coherent algebra morphisms.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instCartesianMonoidalCategory\", \"SSet.prodStdSimplex.isoNerve\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"AugmentedSimplexCategory.tensorObjOf\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\"], \"digest\": \"7b04a5ff363153ca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary monoidal category and strict nerve Segal declarations; none compares infinity-categorical associative algebra sections with Segal diagrams."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-17T03:39:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.tensorUnitLeft\", \"CategoryTheory.MonoidalCategory.tensorUnitRight\", \"CategoryTheory.MonoidalCategory.tensorLeft\", \"CategoryTheory.MonoidalCategory.tensorRight\", \"CategoryTheory.MonoidalCategory.tensor\", \"CategoryTheory.MonoidalCategory.curriedTensor\", \"CategoryTheory.MonoidalCategory.tensoringLeft\", \"CategoryTheory.MonoidalCategory.tensoringRight\"], \"digest\": \"95ee5af2f450ae35\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary monoidal category and strict nerve Segal declarations; none compares infinity-categorical associative algebra sections with Segal diagrams."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-monoidal-block-projection-coherence",
+  "date": "2026-10-17",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent realization before derived inverse limit; through the inherited monoidal-Yoneda chain: compare associative algebra data in cartesian Cat-infinity with its Segal classifying diagram.",
+   "via": [
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-monoidal-yoneda-embedding",
+    "lem-coef-algebroid-object-space-fibration",
+    "lem-coef-enriched-completion-localization",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

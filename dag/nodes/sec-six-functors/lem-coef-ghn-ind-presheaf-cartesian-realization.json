@@ -1,0 +1,100 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "def-coef-infinity-fibrations",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-ind-right-adjoint-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-ind-presheaf-fibration-accessibility",
+  "date": "2026-10-17",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-coef-ghn-ind-presheaf-cartesian-realization",
+ "title": "Relative-cone presheaf realization of the Ind Cartesian fibration",
+ "statement": "Use small infinity categories and coherent functors from [def-cbc-enhanced-diagrams-cones], the filtered Ind construction from [def-coef-presentable-infinity-category] and [lem-coef-ind-kappa-presentability], the coherent right-adjoint Ind diagram from [lem-coef-ind-right-adjoint-coherent], and Cartesian and cocartesian fibrations from [def-coef-infinity-fibrations]. For a small simplicial set $D$, put $\\mathcal P(D)=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$, where $\\mathcal S$ is the infinity category of small spaces. Let $A$ be a small infinity category, write $y:A\\to\\mathcal P(A)$ for the Yoneda functor $a\\mapsto\\operatorname{Map}_A(-,a)$, let $F_0:A\\to\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$ be a coherent functor for an infinite regular cardinal $\\lambda$ in the smaller universe, and let $p:E\\to A$ be its associated cocartesian fibration. Define the relative left cone\n$$E_A^{\\triangleleft}:=A\\amalg_{E\\times\\{0\\}}(E\\times\\Delta^1),$$\nwhere $E\\times\\{0\\}\\to A$ is $p$ and $E\\times\\{0\\}\\hookrightarrow E\\times\\Delta^1$ is the inclusion at $0$; write $j:A\\hookrightarrow E_A^{\\triangleleft}$ for the other inclusion, and write $-\\infty_a$ for the image in $E_A^{\\triangleleft}$ of $a\\in A$. Let $H:A^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ be the coherent functor supplied by [lem-coef-ind-right-adjoint-coherent]: $H(a)=\\operatorname{Ind}_\\lambda(F_0(a))$, and for $f:a\\to a'$ the morphism $H(f^{\\mathrm{op}}):H(a')\\to H(a)$ is the right adjoint of the $\\lambda$-filtered-colimit-preserving extension of $F_0(f)$. Let $\\mathcal P^{\\mathrm{cocart}}_\\lambda(E_A^{\\triangleleft})$ be the full subcategory of $\\mathcal P(E_A^{\\triangleleft})$ spanned by presheaves $\\phi:(E_A^{\\triangleleft})^{\\mathrm{op}}\\to\\mathcal S$ satisfying both conditions below. (i) For every cocartesian edge $\\bar\\alpha:e\\to\\alpha_!e$ of $p$ over $\\alpha:a\\to b$ in $A$, the square\n$$\\begin{CD}\n\\phi(\\alpha_!e) @>>> \\phi(e)\\\\\n@VVV @VVV\\\\\n\\phi(-\\infty_b) @>>> \\phi(-\\infty_a)\n\\end{CD}$$\ninduced by $\\bar\\alpha$ and the cone arrows is a pullback square of spaces. (ii) For every $\\lambda$-small colimit diagram $\\bar q:K^{\\triangleright}\\to E_a$ in a fiber, with colimit vertex $q(\\infty)$, the composite\n$$(K^{\\triangleleft\\triangleright})^{\\mathrm{op}}\\to(E_a^{\\triangleleft})^{\\mathrm{op}}\\to(E_A^{\\triangleleft})^{\\mathrm{op}}\\xrightarrow{\\phi}\\mathcal S,$$\nwhere the initial cone point maps to $-\\infty_a$, the $K$-part maps by $q$, and the terminal cone point maps to $q(\\infty)$, is a limit diagram. Then restriction along $j$ is a Cartesian fibration\n$$j^*:\\mathcal P^{\\mathrm{cocart}}_\\lambda(E_A^{\\triangleleft})\\to\\mathcal P(A),$$\nwhose classifying functor is the unique limit-preserving extension $\\widehat H:\\mathcal P(A)^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ of the explicitly defined $H$ along $y^{\\mathrm{op}}$. The statement includes the coherent higher simplices and is relative to the fixed universe; $E$ and the presheaf categories may lie in a containing universe.",
+ "source": {
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "Definition 9.1 (relative cone), Proposition 9.12 (cocartesian-edge pullback squares), Proposition 9.16 (fiberwise relative-limit condition), and Corollary 9.17 (Ind Cartesian-fibration classification). Read online 2026-10-17; no Stacks tag states this infinity-categorical result."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a small infinity category A and a cocartesian fibration E to A, presheaves on the relative left cone satisfying the pullback square for cocartesian edges and relative fiber colimit limit conditions classify the limit preserving Ind extension",
+   "results": "[leanfinder] OK 8 hits: ordinary CategoryTheory.RanIsSheafOfIsCocontinuous.lift, FiberedCategory.IsStronglyCocartesian, Presheaf.uniqueExtensionAlongYoneda, and related ordinary declarations; no coherent infinity-categorical relative-cone Ind realization.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations are ordinary categories or presheaf Kan extensions and do not state the required quasicategorical theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.uniqueExtensionAlongYoneda, CategoryTheory.Functor.IsCocartesian, CategoryTheory.Functor.IsStronglyCocartesian",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Presheaf.uniqueExtensionAlongYoneda'",
+   "date": "2026-10-17",
+   "verdict": "no match: no relevant declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeCone|E.*triangleleft|cocartesian.*pullback|P.*cocart [Mathlib/CategoryTheory]",
+   "results": "[grep] OK 7 hits: Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:79,93,94,98,105; Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:16; Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean:27.",
+   "date": "2026-10-17",
+   "verdict": "no match: no relative-cone infinity-categorical result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presheaves on a relative left cone whose cocartesian edge squares are pullbacks and whose fiber colimit diagrams are relative limit diagrams classify the Ind extension",
+   "results": "[leansearch] OK 8 hits: CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits, CategoryTheory.Ind.leftExactFunctorEquivalence, IndObjectPresentation declarations, and ordinary Ind limit instances; no relative-cone infinity theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary Ind-category results do not state the required theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind.*(rightAdjoint|IsRightAdjoint)|relative.*cone.*presheaf|Quasicategory.*(Ind|Accessible)",
+   "results": "{\"t\": \"2026-10-17T03:34:36Z\", \"tool\": \"grep\", \"query\": \"Ind.*(rightAdjoint|IsRightAdjoint)|relative.*cone.*presheaf|Quasicategory.*(Ind|Accessible)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Topology/Basic.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\"], \"digest\": \"89ef59dca5a83ed9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reader inspected the returned types; they concern ordinary module or representation adjunctions and ordinary categorical stacks, not the coherent infinity-categorical Ind or relative-cone statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"IsRightAdjoint\"",
+   "results": "{\"t\": \"2026-10-17T03:34:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ind\\\", \\\"IsRightAdjoint\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"TopModuleCat.instIsRightAdjointModuleCatIndiscrete\", \"Rep.instIsRightAdjointCoindFunctor\", \"Rep.instIsRightAdjointSubtypeMemSubgroupIndFunctorSubtype\"], \"digest\": \"d459d5c85cdf7807\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reader inspected the returned types; they concern ordinary module or representation adjunctions and ordinary categorical stacks, not the coherent infinity-categorical Ind or relative-cone statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presheaf model for Grothendieck construction of infinity categories satisfying relative finite limit and cocartesian descent conditions",
+   "results": "{\"t\": \"2026-10-17T03:34:58Z\", \"tool\": \"leanfinder\", \"query\": \"Presheaf model for Grothendieck construction of infinity categories satisfying relative finite limit and cocartesian descent conditions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsPrestackFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\"], \"digest\": \"8d1987969c96ff22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reader inspected the returned types; they concern ordinary module or representation adjunctions and ordinary categorical stacks, not the coherent infinity-categorical Ind or relative-cone statement."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the presentable Cartesian-fibration construction before the finite-coefficient mapping-complex adjunction: GHN Proposition 9.12/9.16 and Corollary 9.17 identify the relative-cone presheaf subcategory with the Ind extension.",
+   "via": [
+    "lem-coef-ind-presheaf-fibration-accessibility",
+    "lem-coef-presentable-cartesian-fibration",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
