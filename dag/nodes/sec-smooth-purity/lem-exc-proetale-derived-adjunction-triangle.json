@@ -143,7 +143,9 @@
   "def-weil-proetale-inverse-image",
   "prop-weil-pbc-proetale-constant-exact",
   "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived"
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-exc-proetale-supported-kernel-complex",
+  "lem-pur-proetale-open-unit-evaluation"
  ],
  "mathlib_searches": [
   {
@@ -270,5 +272,24 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-0173aa8b1 (reviewer sub-agent of L); spot-checked: Audited the complete item, eight proof steps, all cited DAG statements and sources, unit route, packet, report, and edge cases. The left-module/noncommutative coefficient setting, base-change maps, supported kernel adjunction, K-injective derivation, and derived counit are correct. No new nodes or repair files are needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0925567b7",
+  "group": "Q103",
+  "result": "fix",
+  "note": "Statement, dependencies, universes, canonical counits and per-file compilation pass. H11: replaced the placeholder second reading with a complete independent review in fixes/lem-exc-proetale-derived-adjunction-triangle.report.md. Full findings are in review.md; no Lean changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedSupportAdjunction",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteSupportedH_derivedAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDerivedSupportAdjunction.lean",
+  "statement": "theorem finiteSupportedH_derivedAdjunction {T Z U : Scheme.{u}} (i : Z ⟶ T) (j : U ⟶ T) [IsLocallyNoetherian T] [CompactSpace T] [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ) (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] [PreservesFiniteLimits (finiteModulePushforward i A)] [PreservesFiniteColimits (finiteModulePushforward i A)] [(finiteModulePushforward i A).Full] [(finiteModulePushforward i A).Faithful] (hRestriction : ∃ d : (finiteCoefficientRingSheaf U A).obj ≅ (Scheme.proEtaleOpenComposition j).op ⋙ (finiteCoefficientRingSheaf T A).obj, (∀ (W : U.ProEt) (a : A), (d.hom.app (op W)) ((finiteCoefficientScalarMap U A).app (op W) a) = (finiteCoefficientScalarMap T A).app (op ((Scheme.proEtaleOpenComposition j).obj W)) a) ∧ ∃ rho : ∀ (N : FiniteCoefficientModules T A) (W : U.ProEt), ((finiteCoefficientModulePullback j A).obj N).val.obj (op W) ≃+ N.val.obj (op ((Scheme.proEtaleOpenComposition j).obj W)), (∀ (N : FiniteCoefficientModules T A) (W : U.ProEt) (r : (finiteCoefficientRingSheaf U A).obj.obj (op W)) (m : ((finiteCoefficientModulePullback j A).obj N).val.obj (op W)), rho N W (r • m) = (d.hom.app (op W) r) • rho N W m) ∧ (∀ (N : FiniteCoefficientModules T A) (W W' : U.ProEt) (b : W' ⟶ W) (m : ((finiteCoefficientModulePullback j A).obj N).val.obj (op W)), rho N W' (((finiteCoefficientModulePullback j A).obj N).val.map b.op m) = N.val.map ((Scheme.proEtaleOpenComposition j).map b).op (rho N W m)) ∧ (∀ (N N' : FiniteCoefficientModules T A) (h : N ⟶ N') (W : U.ProEt) (m : ((finiteCoefficientModulePullback j A).obj N).val.obj (op W)), rho N' W (((finiteCoefficientModulePullback j A).map h).val.app (op W) m) = h.val.app (op ((Scheme.proEtaleOpenComposition j).obj W)) (rho N W m)) ∧ (∀ (N : FiniteCoefficientModules T A) (V : T.ProEt) (m : N.val.obj (op V)), rho N ((Scheme.proEtaleBaseChange j).obj V) (((finiteModuleAdjunction j A).unit.app N).val.app (op V) m) = N.val.map (Scheme.proEtaleOpenSectionProjection j V).op m)) (hVanishing : ∀ M : FiniteCoefficientModules Z A, IsZero ((finiteCoefficientModulePullback j A).obj ((finiteModulePushforward i A).obj M))) (hSupported : ∀ N : FiniteCoefficientModules T A, IsZero ((finiteCoefficientModulePullback j A).obj N) → IsIso ((finiteModuleAdjunction i A).unit.app N)) : ∃ theta : finiteSupportedKernel j A ≅ finiteSupportedH i j A ⋙ finiteModulePushforward i A, (∀ N : FiniteCoefficientModules T A, theta.hom.app N = (finiteModuleAdjunction i A).unit.app ((finiteSupportedKernel j A).obj N)) ∧ ∃ adj : finiteModulePushforward i A ⊣ finiteSupportedH i j A, (∀ N : FiniteCoefficientModules T A, adj.counit.app N = theta.inv.app N ≫ kernel.ι ((finiteModuleAdjunction j A).unit.app N)) ∧ ∃ (RH : FiniteCoefficientDerivedCategory T A ⥤ FiniteCoefficientDerivedCategory Z A) (beta : (finiteSupportedH i j A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RH), RH.IsRightDerivedFunctor beta (HomologicalComplex.quasiIso (FiniteCoefficientModules T A) (.up ℤ)) ∧ ∃ derivedAdj : (finiteModulePushforward i A).mapDerivedCategory ⊣ RH, ∀ (I : CochainComplex (FiniteCoefficientModules T A) ℤ) [I.IsKInjective], CochainComplex.IsKInjective (((finiteSupportedH i j A).mapHomologicalComplex (.up ℤ)).obj I) ∧ IsIso (beta.app I) ∧ ∃ c : DerivedCategory.Q.obj (((finiteModulePushforward i A).mapHomologicalComplex (.up ℤ)).obj (((finiteSupportedH i j A).mapHomologicalComplex (.up ℤ)).obj I)) ≅ (finiteModulePushforward i A).mapDerivedCategory.obj (RH.obj (DerivedCategory.Q.obj I)), c.hom = (finiteModulePushforward i A).mapDerivedCategoryFactors.inv.app (((finiteSupportedH i j A).mapHomologicalComplex (.up ℤ)).obj I) ≫ (finiteModulePushforward i A).mapDerivedCategory.map (beta.app I) ∧ c.hom ≫ derivedAdj.counit.app (DerivedCategory.Q.obj I) = DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).counit.app I)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the already landed finiteSupportedKernel, finiteSupportedH and canonical finiteModuleAdjunction. The two added landed statement dependencies supply these constructions and the coefficient-independent open-site composition/projection helpers; no theorem of either dependency is assumed beyond the original hypotheses. All derived equalities are expressed by the specified comparison maps and the counit equation."
  }
 }
