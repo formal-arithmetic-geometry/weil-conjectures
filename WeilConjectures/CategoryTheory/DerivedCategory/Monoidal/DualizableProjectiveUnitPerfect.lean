@@ -265,8 +265,7 @@ lemma finProj_of_isDualizable_singleFunctor_obj [Projective (𝟙_ C)]
   exact ⟨r, ⟨{ i := s', r := π, retract := (singleFunctor C 0).map_injective (by
     rw [Functor.map_comp, CategoryTheory.Functor.map_id]
     exact hs.symm) }⟩⟩
-omit [IsGrothendieckAbelian.{v} C] [MonoidalPreadditive C] [MonoidalClosed C]
-  [BraidedCategory C] in
+
 /-- If `K ⊗ G[0]` vanishes below `a` for every `G : C`, then so does `K`: take `G = 𝟙`. -/
 lemma isGE_of_forall_isGE_tensor_singleFunctor_obj {K : DerivedCategory C} {a : ℤ}
     (hK : ∀ G : C, (K ⊗ (singleFunctor C 0).obj G).IsGE a) : K.IsGE a :=
@@ -309,6 +308,8 @@ lemma finProjComplex_of_isDualizable_of_isLE [Projective (𝟙_ C)]
       · have := hGE G
         have : ((K ⊗ (singleFunctor C 0).obj G)⟦b⟧).IsGE 0 :=
           TStructure.t.isGE_shift _ b b 0 (by omega)
+        have : ((tensorRight ((singleFunctor C 0).obj G) ⋙ shiftFunctor _ b).obj K).IsGE 0 :=
+          this
         exact TStructure.t.isGE_of_iso (whiskerRightIso e' _ ≪≫
           ((tensorRight ((singleFunctor C 0).obj G)).commShiftIso b).app K).symm 0
     · -- kill the top homology `Hᵇ(K)` by a map `𝟙ʳ[-b] ⟶ K`
@@ -322,9 +323,11 @@ lemma finProjComplex_of_isDualizable_of_isLE [Projective (𝟙_ C)]
       have hZ : IsDualizable Z :=
         isDualizable_obj₃_of_distTriang (Triangle.mk f g h) hT' h₁.isDualizable hK
       have hf' : Epi ((homologyFunctor C b).map f) := by
-        rw [homSingleEquivOfProjective_apply, homSingleToHomology] at hf
-        rw [← Iso.inv_hom_id_assoc ((singleFunctorCompHomologyFunctorIso C b).app F)
-          ((homologyFunctor C b).map f), hf]
+        have : (homologyFunctor C b).map f =
+            ((singleFunctorCompHomologyFunctorIso C b).app F).hom ≫ π := by
+          rw [← hf]
+          simp [homSingleToHomology]
+        rw [this]
         infer_instance
       have hZle : Z.IsLE (b - 1) := by
         rw [isLE_iff]
@@ -337,7 +340,7 @@ lemma finProjComplex_of_isDualizable_of_isLE [Projective (𝟙_ C)]
           · exact (HomologySequence.epi_homologyMap_mor₁_iff _ hT' i).1 hf'
           · exact (isZero_of_isLE K b i (by omega)).eq_of_src _ _
         rw [hzero] at hepi
-        exact IsZero.of_epi_zero _ _
+        exact IsZero.of_epi_zero ((homologyFunctor C i).obj K) ((homologyFunctor C i).obj Z)
       have hZge (G : C) : (Z ⊗ (singleFunctor C 0).obj G).IsGE a := by
         have hT₂ := (tensorRight ((singleFunctor C 0).obj G)).map_distinguished _
           (rot_of_distTriang _ hT')

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelationsGeneral
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
 /-!
 # Pullback along a weakly étale morphism preserves flat sheaves of modules
@@ -40,7 +41,8 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {W X : Scheme.{u}} (g : W ⟶ X) [WeaklyEtale g]
 
-set_option synthInstance.maxHeartbeats 400000 in
+set_option maxHeartbeats 1000000 in
+set_option synthInstance.maxHeartbeats 1000000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale sites
 -- take long to synthesize
 /-- **Pullback along a weakly étale morphism preserves flat sheaves of modules**, over an
@@ -49,11 +51,16 @@ functor, which preserves locally trivial relations. -/
 theorem flat_upperStar_obj_of_weaklyEtale
     {F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (hF : ObjectProperty.flat F) :
     ObjectProperty.flat (((g)^*[ModuleCat.{u + 1} Λ]).obj F) := by
+  have i1 : (Scheme.ProEt.topology W).WEqualsLocallyBijective (ModuleCat.{u + 1} Λ) :=
+    inferInstance
+  have i2 : (Scheme.ProEt.topology W).HasSheafCompose (forget (ModuleCat.{u + 1} Λ)) :=
+    inferInstance
+  have := Scheme.ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale g)
+  have h := ((Sheaf.flat_iff_hasLocallyTrivialRelations' F).1 hF).comp (J := Scheme.ProEt.topology W)
+    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale g))
   refine ObjectProperty.prop_of_iso _
     ((upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) g inferInstance).app F).symm ?_
-  rw [Sheaf.flat_iff_hasLocallyTrivialRelations']
-  exact ((Sheaf.flat_iff_hasLocallyTrivialRelations' F).1 hF).comp
-    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale g))
+  exact (Sheaf.flat_iff_hasLocallyTrivialRelations' _).2 h
 
 /-- **Pullback along a weakly étale morphism preserves flat sheaves of modules**, over an
 arbitrary commutative ring `Λ`. -/
