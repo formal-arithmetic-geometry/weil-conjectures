@@ -40,8 +40,6 @@ universe u v w
 
 open CategoryTheory Limits
 
-
-
 namespace CategoryTheory.NatTrans
 
 variable {C : Type*} [Category* C] [Preadditive C] {F G : C ⥤ AddCommGrpCat.{w}}
@@ -84,8 +82,6 @@ theorem exists_iso_biproduct_zmod (A : AddCommGrpCat.{v}) [Finite A] (n : ℕ)
       (biproductIsoPi _).symm
 
 end AddCommGrpCat
-
-
 
 namespace AlgebraicGeometry.AffineSpace
 
@@ -210,8 +206,6 @@ theorem exists_sheafH_rootsOfUnitySheaf_one_addEquiv {n : ℕ} (hn : (n : k) ≠
 
 end AlgebraicGeometry.AffineSpace
 
-
-
 namespace AlgebraicGeometry
 
 variable (X : Scheme.{u})
@@ -223,7 +217,8 @@ lemma _root_.CategoryTheory.Functor.subsingleton_obj_biproduct {C : Type*} [Cate
     [HasBiproduct B] (h : ∀ i, Subsingleton (F.obj (B i))) : Subsingleton (F.obj (⨁ B)) :=
   have : ∀ i, Subsingleton ((F.obj ∘ B) i) := h
   have : Subsingleton (∀ i, (F.obj ∘ B) i) := inferInstance
-  ((F.mapBiproduct B ≪≫ AddCommGrpCat.biproductIsoPi _).addCommGroupIsoToAddEquiv).toEquiv.subsingleton
+  ((F.mapBiproduct B ≪≫
+    AddCommGrpCat.biproductIsoPi _).addCommGroupIsoToAddEquiv).toEquiv.subsingleton
 
 /-- A natural transformation between additive functors on abelian groups is bijective on every
 finite abelian group killed by `n` as soon as it is bijective on the cyclic groups `ℤ/m`,
@@ -261,7 +256,6 @@ lemma isTorsion_constantSheaf (A : AddCommGrpCat.{u + 1}) {n : ℕ} (hn : 0 < n)
       ext a
       simpa using hA a
     rw [← (constantSheaf _ _).map_id, ← Functor.map_nsmul, this, Functor.map_zero])
-
 
 /-- A constant sheaf with value a group `A` with `n • 𝟙 = 0`, `n > 0`, is a torsion sheaf. -/
 lemma isTorsion_constantSheaf' (A : AddCommGrpCat.{u + 1}) {n : ℕ} (hn : 0 < n)
@@ -302,6 +296,7 @@ lemma nonempty_constantZModIsoRootsOfUnitySheaf {Y : Scheme.{u}} (f : Y ⟶ Spec
   obtain ⟨-, -, ζ, hζ, -⟩ := IsSepClosed.exists_isPrimitiveRoot.{u, u} k m
   exact ⟨Y.constantZModIsoRootsOfUnitySheaf m f hζ⟩
 
+omit [IsAlgClosed k] in
 lemma natCast_ne_zero_of_dvd {m n : ℕ} (hm : m ∣ n) (hn : (n : k) ≠ 0) : (m : k) ≠ 0 := by
   obtain ⟨c, rfl⟩ := hm
   intro h
@@ -357,7 +352,6 @@ theorem surjective_sheafH_map_constantSheaf_multiplicativeGroup {A B : AddCommGr
   exact (Sheaf.H.exact_map_δSucc hS' 1 y).1 (@Subsingleton.elim _ this _ _)
 
 end AffineSpace
-
 
 namespace AffineSpace
 
@@ -427,3 +421,72 @@ lemma eq_nsmul_zmodReduction {n m : ℕ} [NeZero n] (hm : m ∣ n)
 end AffineSpace
 
 end AlgebraicGeometry
+
+namespace AlgebraicGeometry.AffineSpace
+
+open Scheme
+
+variable {k : Type u} [Field k] [IsAlgClosed k]
+variable {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsOpenImmersion j]
+  (hj : Set.range j.base = (Set.range (zeroSection (ULift.{u} (Fin 1)) (Spec (.of k))).base)ᶜ)
+
+omit [IsAlgClosed k] in
+lemma nsmul_id_zmod (n : ℕ) : n • 𝟙 (AddCommGrpCat.of (ULift.{u + 1} (ZMod n))) = 0 := by
+  ext ⟨a⟩
+  change n • a = 0
+  rw [nsmul_eq_mul, ZMod.natCast_self, zero_mul]
+
+include hj
+
+/-- On `𝔾_{m,k}`, the map `Hom(ℤ/n, ℤ/m) → H¹(𝔾_{m,k}, ℤ/m)`, `φ ↦ φ_* θ`, is bijective for
+`m ∣ n`. -/
+theorem bijective_sheafHConstantSheafNatTrans_zmod {n : ℕ} (hn : (n : k) ≠ 0) {m : ℕ}
+    (hm : m ∣ n) :
+    Function.Bijective ((sheafHConstantSheafNatTrans G n 1 (kummerClassZMod j hj hn)).app
+      (.of (ULift.{u + 1} (ZMod m)))) := by
+  have : NeZero n := ⟨fun h ↦ hn (by simp [h])⟩
+  have hm' := natCast_ne_zero_of_dvd hm hn
+  have : NeZero m := ⟨fun h ↦ hm' (by simp [h])⟩
+  set η := sheafHConstantSheafNatTrans G n 1 (kummerClassZMod j hj hn)
+  let r := zmodReduction.{u} hm
+  have hr : Epi r := by
+    rw [AddCommGrpCat.epi_iff_surjective]
+    rintro ⟨b⟩
+    obtain ⟨a, rfl⟩ := ZMod.ringHom_surjective (ZMod.castHom hm (ZMod m)) b
+    exact ⟨ULift.up a, rfl⟩
+  have hg : ∀ y : Sheaf.H (G.constantZMod m) 1, ∃ c : ℕ, y = c • (η.app _).hom r := by
+    intro y
+    obtain ⟨x, rfl⟩ := surjective_sheafH_map_constantSheaf_multiplicativeGroup j hj r
+      (pos_of_natCast_ne_zero hn) (nsmul_id_zmod n) y
+    obtain ⟨c, rfl⟩ := exists_nsmul_eq_kummerClassZMod j hj hn x
+    exact ⟨c, by rw [map_nsmul]; rfl⟩
+  obtain ⟨e, -⟩ := exists_addEquiv_kummerClassZMod j hj hm'
+  obtain ⟨c₀, hc₀⟩ := hg (e.symm 1)
+  have h2 : e (c₀ • (η.app _).hom r) = 1 := by rw [← hc₀, AddEquiv.apply_symm_apply]
+  constructor
+  · rw [injective_iff_map_eq_zero]
+    intro φ hφ0
+    rw [eq_nsmul_zmodReduction hm φ] at hφ0 ⊢
+    set c := (φ.hom (ULift.up 1)).down.val
+    rw [map_nsmul] at hφ0
+    have h1 : (c : ZMod m) = 0 := by
+      calc (c : ZMod m) = c • e (c₀ • (η.app _).hom r) := by rw [h2, nsmul_eq_mul, mul_one]
+        _ = e (c₀ • (c • (η.app _).hom r)) := by rw [← map_nsmul, smul_comm]
+        _ = 0 := by rw [hφ0, smul_zero, map_zero]
+    refine AddCommGrpCat.hom_ext (AddMonoidHom.ext fun ⟨a⟩ ↦ ULift.ext _ _ ?_)
+    change c • (ZMod.castHom hm (ZMod m) a) = (0 : ZMod m)
+    rw [nsmul_eq_mul, h1, zero_mul]
+  · intro y
+    obtain ⟨c, rfl⟩ := hg y
+    exact ⟨c • r, by rw [map_nsmul]⟩
+
+/-- **`H¹(𝔾_{m,k}, A) = Hom(ℤ/n, A)`.** For a finite abelian group `A` killed by `n`, invertible
+in `k`, the map `Hom(ℤ/n, A) → H¹(𝔾_{m,k}, A)`, `φ ↦ φ_* θ`, is bijective, where
+`θ ∈ H¹(𝔾_{m,k}, ℤ/n)` is the Kummer class of the coordinate. -/
+theorem bijective_sheafHConstantSheafNatTrans {n : ℕ} (hn : (n : k) ≠ 0)
+    (A : AddCommGrpCat.{u + 1}) [Finite A] (hA : ∀ a : A, n • a = 0) :
+    Function.Bijective ((sheafHConstantSheafNatTrans G n 1 (kummerClassZMod j hj hn)).app A) :=
+  NatTrans.bijective_app_of_zmod _ n
+    (fun _ hm ↦ bijective_sheafHConstantSheafNatTrans_zmod j hj hn hm) A hA
+
+end AlgebraicGeometry.AffineSpace

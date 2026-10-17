@@ -67,8 +67,314 @@ one-dimensional Noetherian local ring `R`; the definition makes sense in general
 abbrev branchAlgebra : Type u :=
   ∀ p : minimalPrimes R, branch R p
 
+instance isPrime_minimalPrimes (p : minimalPrimes R) : (p : Ideal R).IsPrime := p.2.1.1
+
+example (p : minimalPrimes R) : IsDomain (branch R p) := inferInstance
 example : Algebra R (branchAlgebra R) := inferInstance
 example : Algebra R (branchFractionRing R) := inferInstance
 example : Algebra (branchAlgebra R) (branchFractionRing R) := inferInstance
+
+section dimOne
+
+variable {R} [IsLocalRing R]
+
+/-- In a local ring of dimension one, the maximal ideal has height one. -/
+lemma height_maximalIdeal_of_ringKrullDim_eq_one (hdim : ringKrullDim R = 1) :
+    (maximalIdeal R).height = 1 := by
+  have := IsLocalRing.maximalIdeal_height_eq_ringKrullDim (R := R)
+  rw [hdim] at this
+  exact_mod_cast this
+
+/-- In a local ring of dimension one, every prime other than the maximal ideal is minimal. -/
+lemma mem_minimalPrimes_of_ne_maximalIdeal (hdim : ringKrullDim R = 1) (q : Ideal R)
+    [q.IsPrime] (hq : q ≠ maximalIdeal R) : q ∈ minimalPrimes R := by
+  have hm := height_maximalIdeal_of_ringKrullDim_eq_one hdim
+  have : (maximalIdeal R).FiniteHeight := ⟨Or.inr (by rw [hm]; exact ENat.one_ne_top)⟩
+  have hlt := Ideal.height_strict_mono_of_isPrime_of_isPrime
+    (lt_of_le_of_ne (le_maximalIdeal (Ideal.IsPrime.ne_top ‹_›)) hq)
+  rw [hm, Order.lt_one_iff] at hlt
+  exact Ideal.height_eq_zero_iff.1 hlt
+
+/-- In a local ring of dimension one, a minimal prime is not the maximal ideal. -/
+lemma ne_maximalIdeal_of_mem_minimalPrimes (hdim : ringKrullDim R = 1) {p : Ideal R}
+    (hp : p ∈ minimalPrimes R) : p ≠ maximalIdeal R := by
+  rintro rfl
+  have : (maximalIdeal R).IsPrime := inferInstance
+  have h0 := Ideal.height_eq_zero_iff.2 hp
+  rw [height_maximalIdeal_of_ringKrullDim_eq_one hdim] at h0
+  exact one_ne_zero h0
+
+end dimOne
+
+section branch
+
+variable {R} [IsNoetherianRing R] [HenselianLocalRing R] (p : minimalPrimes R)
+
+omit [IsNoetherianRing R] [HenselianLocalRing R] in
+lemma isPrime_of_mem_minimalPrimes' : p.1.IsPrime := p.2.1.1
+
+lemma isLocalRing_quotient_minimalPrimes : IsLocalRing (R ⧸ p.1) :=
+  have := isPrime_of_mem_minimalPrimes' p
+  IsLocalRing.of_surjective' (Ideal.Quotient.mk p.1) Ideal.Quotient.mk_surjective
+
+/-- In a one-dimensional local ring, the nonzero primes of `R / p` (`p` minimal) are maximal. -/
+lemma eq_maximalIdeal_quotient_of_ne_bot (hdim : ringKrullDim R = 1)
+    (q : Ideal (R ⧸ p.1)) [q.IsPrime] (hq : q ≠ ⊥) :
+    letI := isLocalRing_quotient_minimalPrimes p
+    q = maximalIdeal (R ⧸ p.1) := by
+  letI := isLocalRing_quotient_minimalPrimes p
+  have := isPrime_of_mem_minimalPrimes' p
+  set Q := q.comap (Ideal.Quotient.mk p.1)
+  have hpQ : p.1 ≤ Q := fun x hx ↦ by
+    simp [Q, Ideal.Quotient.eq_zero_iff_mem.2 hx]
+  have hQm : Q = maximalIdeal R := by
+    by_contra hne
+    have hQmin := mem_minimalPrimes_of_ne_maximalIdeal hdim Q hne
+    have hQp : p.1 = Q := (show Minimal (fun q : Ideal R ↦ q.IsPrime ∧ ⊥ ≤ q) Q from hQmin).eq_of_le
+      ⟨inferInstance, bot_le⟩ hpQ
+    apply hq
+    rw [← Ideal.map_comap_of_surjective _ Ideal.Quotient.mk_surjective q]
+    change Ideal.map _ Q = ⊥
+    rw [← hQp]
+    exact Ideal.map_quotient_self p.1
+  refine le_antisymm (le_maximalIdeal (Ideal.IsPrime.ne_top ‹_›)) fun x hx ↦ ?_
+  obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x
+  have hr : r ∈ maximalIdeal R := by
+    rw [mem_maximalIdeal, mem_nonunits_iff] at hx ⊢
+    exact fun h ↦ hx (h.map _)
+  rw [← hQm] at hr
+  exact hr
+
+lemma henselianLocalRing_quotient_minimalPrimes : HenselianLocalRing (R ⧸ p.1) :=
+  have := isLocalRing_quotient_minimalPrimes p
+  HenselianLocalRing.finite_local_henselian R (R ⧸ p.1)
+
+lemma isDomain_quotient_minimalPrimes : IsDomain (R ⧸ p.1) :=
+  have := isPrime_of_mem_minimalPrimes' p
+  inferInstance
+
+lemma isLocalRing_branch : IsLocalRing (branch R p) :=
+  have := henselianLocalRing_quotient_minimalPrimes p
+  have := isDomain_quotient_minimalPrimes p
+  IsLocalRing.of_henselianLocalRing_of_isIntegral_of_isDomain (R := R ⧸ p.1)
+
+lemma isLocalHom_algebraMap_branch :
+    letI := isLocalRing_quotient_minimalPrimes p
+    letI := isLocalRing_branch p
+    IsLocalHom (algebraMap (R ⧸ p.1) (branch R p)) := by
+  letI := isLocalRing_quotient_minimalPrimes p
+  letI := isLocalRing_branch p
+  have := isDomain_quotient_minimalPrimes p
+  have : FaithfulSMul (R ⧸ p.1) (branch R p) := by
+    rw [faithfulSMul_iff_algebraMap_injective]
+    intro a b h
+    apply IsFractionRing.injective (R ⧸ p.1) (FractionRing (R ⧸ p.1))
+    have := congrArg (algebraMap (branch R p) (FractionRing (R ⧸ p.1))) h
+    simpa only [← IsScalarTower.algebraMap_apply] using this
+  infer_instance
+
+variable (hdim : ringKrullDim R = 1)
+include hdim
+
+lemma maximalIdeal_quotient_ne_bot :
+    letI := isLocalRing_quotient_minimalPrimes p
+    maximalIdeal (R ⧸ p.1) ≠ ⊥ := by
+  letI := isLocalRing_quotient_minimalPrimes p
+  have := isPrime_of_mem_minimalPrimes' p
+  obtain ⟨r, hrm, hrp⟩ := SetLike.exists_of_lt (lt_of_le_of_ne
+    (le_maximalIdeal (Ideal.IsPrime.ne_top ‹_›)) (ne_maximalIdeal_of_mem_minimalPrimes hdim p.2))
+  intro h
+  apply hrp
+  rw [← Ideal.Quotient.eq_zero_iff_mem, ← Ideal.mem_bot, ← h, mem_maximalIdeal,
+    mem_nonunits_iff]
+  exact fun hu ↦ (mem_maximalIdeal _).1 hrm (by
+    obtain ⟨v, hv⟩ := hu.exists_right_inv
+    obtain ⟨s, rfl⟩ := Ideal.Quotient.mk_surjective v
+    by_contra hr
+    have hrs : r * s ∈ maximalIdeal R := Ideal.mul_mem_right _ _ ((mem_maximalIdeal _).2 hr)
+    have : r * s - 1 ∈ p.1 := by
+      rw [← Ideal.Quotient.eq_zero_iff_mem, map_sub, map_mul, hv, map_one, sub_self]
+    have hp := le_maximalIdeal (Ideal.IsPrime.ne_top (isPrime_of_mem_minimalPrimes' p)) this
+    exact (mem_maximalIdeal (1 : R)).1 (by simpa using (maximalIdeal R).sub_mem hrs hp) isUnit_one)
+
+/-- A branch is not a field. -/
+lemma not_isField_branch : ¬ IsField (branch R p) := by
+  letI := isLocalRing_quotient_minimalPrimes p
+  letI := isLocalRing_branch p
+  have := isLocalHom_algebraMap_branch p
+  intro hF
+  apply maximalIdeal_quotient_ne_bot p hdim
+  rw [eq_bot_iff]
+  intro x hx
+  have h1 : algebraMap _ (branch R p) x ∈ maximalIdeal (branch R p) :=
+    map_nonunit (algebraMap _ _) x hx
+  rw [IsLocalRing.isField_iff_maximalIdeal_eq.1 hF, Ideal.mem_bot] at h1
+  rw [Ideal.mem_bot]
+  have := isDomain_quotient_minimalPrimes p
+  exact (FaithfulSMul.algebraMap_injective _ (branch R p)) (by rw [h1, map_zero])
+
+/-- The nonzero primes of a branch are maximal: they lie over the maximal ideal of `R / p`. -/
+lemma eq_maximalIdeal_branch_of_ne_bot (Q : Ideal (branch R p)) [Q.IsPrime] (hQ : Q ≠ ⊥) :
+    letI := isLocalRing_branch p
+    Q = maximalIdeal (branch R p) := by
+  letI := isLocalRing_quotient_minimalPrimes p
+  letI := isLocalRing_branch p
+  have := isDomain_quotient_minimalPrimes p
+  obtain ⟨x, hxQ, hx0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hQ
+  have hc : Q.comap (algebraMap (R ⧸ p.1) (branch R p)) ≠ ⊥ :=
+    Ideal.comap_ne_bot_of_integral_mem hx0 hxQ (Algebra.IsIntegral.isIntegral x)
+  have hcm := eq_maximalIdeal_quotient_of_ne_bot p hdim _ hc
+  have : (Q.comap (algebraMap (R ⧸ p.1) (branch R p))).IsMaximal := by
+    rw [hcm]
+    exact maximalIdeal.isMaximal _
+  have := Ideal.isMaximal_of_isIntegral_of_isMaximal_comap Q this
+  exact IsLocalRing.eq_maximalIdeal this
+
+variable (hfin : Module.Finite (R ⧸ p.1) (branch R p))
+include hfin
+
+lemma henselianLocalRing_branch : HenselianLocalRing (branch R p) :=
+  have := henselianLocalRing_quotient_minimalPrimes p
+  have := isLocalRing_branch p
+  HenselianLocalRing.finite_local_henselian (R ⧸ p.1) (branch R p)
+
+omit hdim in
+lemma isNoetherianRing_branch : IsNoetherianRing (branch R p) :=
+  IsNoetherianRing.of_finite (R ⧸ p.1) (branch R p)
+
+/-- Blueprint `lem-exc-punctured-curve-branches` (branches): every branch of a reduced
+one-dimensional Noetherian henselian local ring with finite normalization is a discrete
+valuation ring. -/
+theorem isDiscreteValuationRing_branch : IsDiscreteValuationRing (branch R p) := by
+  letI := isLocalRing_branch p
+  have := isDomain_quotient_minimalPrimes p
+  have := isNoetherianRing_branch p hfin
+  have hint : IsIntegrallyClosed (branch R p) :=
+    integralClosure.isIntegrallyClosedOfFiniteExtension (FractionRing (R ⧸ p.1))
+  have h := (IsDiscreteValuationRing.TFAE (branch R p) (not_isField_branch p hdim)).out 0 3
+  refine h.2 ⟨hint, ⟨maximalIdeal _, ⟨?_, inferInstance⟩, fun Q ⟨hQ, hQp⟩ ↦
+    eq_maximalIdeal_branch_of_ne_bot p hdim Q hQ⟩⟩
+  intro h0
+  exact not_isField_branch p hdim (IsLocalRing.isField_iff_maximalIdeal_eq.2 h0)
+
+omit hdim hfin in
+lemma mk_mem_maximalIdeal_quotient_iff (r : R) :
+    letI := isLocalRing_quotient_minimalPrimes p
+    Ideal.Quotient.mk p.1 r ∈ maximalIdeal (R ⧸ p.1) ↔ r ∈ maximalIdeal R := by
+  letI := isLocalRing_quotient_minimalPrimes p
+  constructor
+  · intro hx
+    rw [mem_maximalIdeal, mem_nonunits_iff] at hx ⊢
+    exact fun h ↦ hx (h.map _)
+  · intro hr
+    rw [mem_maximalIdeal, mem_nonunits_iff]
+    intro hu
+    obtain ⟨v, hv⟩ := hu.exists_right_inv
+    obtain ⟨s, rfl⟩ := Ideal.Quotient.mk_surjective v
+    have hrs : r * s ∈ maximalIdeal R := Ideal.mul_mem_right _ _ hr
+    have : r * s - 1 ∈ p.1 := by
+      rw [← Ideal.Quotient.eq_zero_iff_mem, map_sub, map_mul, hv, map_one, sub_self]
+    have hp := le_maximalIdeal (Ideal.IsPrime.ne_top inferInstance) this
+    exact (mem_maximalIdeal (1 : R)).1 (by simpa using (maximalIdeal R).sub_mem hrs hp)
+      isUnit_one
+
+omit hdim hfin in
+lemma isAlgClosed_residueField_quotient [IsAlgClosed (ResidueField R)] :
+    letI := isLocalRing_quotient_minimalPrimes p
+    IsAlgClosed (ResidueField (R ⧸ p.1)) := by
+  letI := isLocalRing_quotient_minimalPrimes p
+  let φ : R →+* ResidueField (R ⧸ p.1) := (residue _).comp (Ideal.Quotient.mk p.1)
+  have hφ : Function.Surjective φ :=
+    residue_surjective.comp Ideal.Quotient.mk_surjective
+  have hker : RingHom.ker φ = maximalIdeal R := by
+    ext r
+    simp only [RingHom.mem_ker, φ, RingHom.comp_apply, residue_eq_zero_iff]
+    exact mk_mem_maximalIdeal_quotient_iff p r
+  let e : ResidueField R ≃+* ResidueField (R ⧸ p.1) :=
+    (Ideal.quotEquivOfEq hker.symm).trans (RingHom.quotientKerEquivOfSurjective hφ)
+  exact IsAlgClosed.of_ringEquiv _ _ e
+
+omit hfin in
+/-- Blueprint `lem-exc-punctured-curve-branches` (residue fields): the residue field of a
+branch is the (algebraically closed) residue field of `R`: every element of a branch is
+congruent to an element of `R` modulo its maximal ideal. -/
+theorem isAlgClosed_residueField_branch [IsAlgClosed (ResidueField R)] :
+    letI := isLocalRing_branch p
+    IsAlgClosed (ResidueField (branch R p)) ∧
+      ∀ b : branch R p, ∃ r : R, b - algebraMap R (branch R p) r ∈ maximalIdeal _ := by
+  letI := isLocalRing_quotient_minimalPrimes p
+  letI := isLocalRing_branch p
+  have := isLocalHom_algebraMap_branch p
+  have := isAlgClosed_residueField_quotient p
+  have := Algebra.IsAlgebraic.residueField_of_isIntegral (R := R ⧸ p.1) (S := branch R p)
+  have hbij : Function.Bijective
+      (algebraMap (ResidueField (R ⧸ p.1)) (ResidueField (branch R p))) :=
+    IsAlgClosed.algebraMap_bijective_of_isIntegral
+  refine ⟨IsAlgClosed.of_ringEquiv _ _ (RingEquiv.ofBijective _ hbij), fun b ↦ ?_⟩
+  obtain ⟨a, ha⟩ := hbij.2 (residue _ b)
+  obtain ⟨a, rfl⟩ := residue_surjective a
+  obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective a
+  refine ⟨r, ?_⟩
+  rw [← residue_eq_zero_iff, map_sub, ← ha, ResidueField.algebraMap_residue,
+    IsScalarTower.algebraMap_apply R (R ⧸ p.1) (branch R p)]
+  exact sub_eq_zero.2 rfl
+
+end branch
+
+section punctured
+
+variable {R} [IsNoetherianRing R] [HenselianLocalRing R] (hdim : ringKrullDim R = 1)
+include hdim
+
+/-- By prime avoidance, some `f` in the maximal ideal lies outside every minimal prime. -/
+lemma exists_mem_maximalIdeal_forall_notMem :
+    ∃ f ∈ maximalIdeal R, ∀ p ∈ minimalPrimes R, f ∉ p := by
+  classical
+  have hfin := minimalPrimes.finite_of_isNoetherianRing R
+  by_contra! h
+  have hsub : ((maximalIdeal R : Ideal R) : Set R) ⊆
+      ⋃ i ∈ (hfin.toFinset : Set (Ideal R)), ((id i : Ideal R) : Set R) := by
+    intro x hx
+    obtain ⟨p, hp, hxp⟩ := h x hx
+    exact Set.mem_biUnion (by simpa using hp) hxp
+  obtain ⟨p, hp, hle⟩ := (Ideal.subset_union_prime (f := id) ⊥ ⊥
+    (fun i hi _ _ ↦ (hfin.mem_toFinset.1 hi).1.1)).1 hsub
+  have hp' := hfin.mem_toFinset.1 hp
+  have : p.IsPrime := hp'.1.1
+  exact ne_maximalIdeal_of_mem_minimalPrimes hdim hp'
+    (le_antisymm (le_maximalIdeal (Ideal.IsPrime.ne_top this)) hle)
+
+/-- In a one-dimensional local ring, an element of the maximal ideal outside the minimal primes
+cuts out the punctured spectrum. -/
+lemma notMem_iff_ne_maximalIdeal {f : R} (hfm : f ∈ maximalIdeal R)
+    (hf : ∀ p ∈ minimalPrimes R, f ∉ p) (q : Ideal R) [q.IsPrime] :
+    f ∉ q ↔ q ≠ maximalIdeal R := by
+  constructor
+  · rintro hfq rfl
+    exact hfq hfm
+  · intro hq
+    exact hf q (mem_minimalPrimes_of_ne_maximalIdeal hdim q hq)
+
+/-- For `s ∉ p` (`p` minimal), some power of `f` is a multiple of `s` modulo `p`. -/
+lemma exists_mul_sub_pow_mem {f : R} (hfm : f ∈ maximalIdeal R) (p : minimalPrimes R) {s : R}
+    (hs : s ∉ p.1) : ∃ (t : R) (n : ℕ), s * t - f ^ n ∈ p.1 := by
+  letI := isLocalRing_quotient_minimalPrimes p
+  have hrad : Ideal.Quotient.mk p.1 f ∈ (Ideal.span {Ideal.Quotient.mk p.1 s}).radical := by
+    rw [Ideal.radical_eq_sInf, Submodule.mem_sInf]
+    rintro J ⟨hsJ, hJ⟩
+    have hJ0 : J ≠ ⊥ := by
+      intro h0
+      apply hs
+      rw [← Ideal.Quotient.eq_zero_iff_mem, ← Ideal.mem_bot, ← h0]
+      exact hsJ (Ideal.mem_span_singleton_self _)
+    rw [eq_maximalIdeal_quotient_of_ne_bot p hdim J hJ0]
+    exact (mk_mem_maximalIdeal_quotient_iff p f).2 hfm
+  obtain ⟨n, hn⟩ := hrad
+  obtain ⟨c, hc⟩ := Ideal.mem_span_singleton'.1 hn
+  obtain ⟨t, rfl⟩ := Ideal.Quotient.mk_surjective c
+  refine ⟨t, n, ?_⟩
+  rw [← Ideal.Quotient.eq_zero_iff_mem, map_sub, map_mul, map_pow, mul_comm, hc, sub_self]
+
+end punctured
 
 end IsLocalRing

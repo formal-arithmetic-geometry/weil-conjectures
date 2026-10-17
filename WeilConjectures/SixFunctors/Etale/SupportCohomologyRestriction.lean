@@ -107,8 +107,9 @@ end UpperShriek
 
 section Triangle
 
-variable [HasSmallSiteSheafify A]
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
 /-- `Ri^!` of a zero object is zero. -/
 lemma isZero_rightDerivedUpperShriek_obj {Z X : Scheme.{u}} (i : Z ⟶ X) [HasCompactification i]
     [(R(i)_![A]).IsLeftAdjoint] {Y : DerivedCategory (Sheaf X.smallEtaleTopology A)}
@@ -128,6 +129,7 @@ lemma disjoint_range_openComplement_ι_of_subset {Z Z' : Scheme.{u}} (i : Z ⟶ 
   rw [i'.range_eq_compl_range_openComplement_ι]
   exact disjoint_compl_left
 
+omit [IsClosedImmersion c] in
 include hd in
 /-- The supported term of `D` is supported on `B`. -/
 lemma isZero_leftDerivedUpperStar_openComplement_supported_of_inter
@@ -146,6 +148,7 @@ noncomputable def supportedInclusion (F : DerivedCategory (Sheaf T.smallEtaleTop
     (isZero_leftDerivedUpperStar_openComplement_supported_of_inter A b c d hd F)
     ((rightDerivedUpperShriekAdjunction A d).counit.app F)).exists.choose
 
+omit [IsClosedImmersion c] in
 @[reassoc (attr := simp)]
 lemma supportedInclusion_comp_counit (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
     supportedInclusion A b c d hd F ≫ (rightDerivedUpperShriekAdjunction A b).counit.app F =
@@ -317,7 +320,9 @@ theorem exists_distTriang_supportRestriction
   let e₁ := (rightDerivedSectionsWithSupportIso A d).app F
   let e₂ := (rightDerivedSectionsWithSupportIso A b).app F
   let e₃ := supportRestrictionIso₃ A b c F
-  refine ⟨e₃.hom ≫ G.map δ ≫ (G.commShiftIso (1 : ℤ)).hom.app _ ≫ e₁.inv⟦(1 : ℤ)⟧',
+  refine ⟨e₃.hom ≫ (G.mapTriangle.obj (Triangle.mk (supportedInclusion A b c d hd F)
+      ((derivedUpperStarLowerStarAdjunction A c.openComplement.ι).unit.app
+        ((R(b)_![A]).obj ((R(b)^![A]).obj F))) δ)).mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧',
     isomorphic_distinguished _ (G.map_distinguished _ hδ) _
       (Triangle.isoMk _ _ e₁ e₂ e₃ ?_ ?_ ?_)⟩
   · simp [supportInclusionMap, e₁, e₂]
@@ -326,7 +331,6 @@ theorem exists_distTriang_supportRestriction
     rfl
   · simp only [Triangle.mk_mor₃, assoc, ← Functor.map_comp, Iso.inv_hom_id,
       CategoryTheory.Functor.map_id, comp_id]
-    rfl
 
 end Triangle
 

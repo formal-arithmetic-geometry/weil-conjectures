@@ -49,12 +49,10 @@ lemma IsHomogeneous.eval_mem_mul_pow {K : Ideal R} {G : MvPolynomial σ R} {d : 
   have := Fintype.ofFinite σ
   rw [eval_eq]
   refine Ideal.sum_mem _ fun m hm ↦ Ideal.mul_mem_mul (hK m) ?_
-  have hdeg : ∑ i, m i = d := by
-    rw [hG.degree_eq_sum_deg_support hm]
-    exact (Finset.sum_subset (Finset.subset_univ _)
-      fun i _ hi ↦ Finsupp.notMem_support_iff.1 hi).symm
+  have hdeg : ∑ i ∈ m.support, m i = d := (hG.degree_eq_sum_deg_support hm).symm
   rw [← hdeg, ← Finset.prod_pow_eq_pow_sum]
-  exact Ideal.prod_mem_prod fun i _ ↦ Ideal.pow_mem_pow (Ideal.subset_span (Set.mem_range_self i)) _
+  exact Ideal.prod_mem_prod fun i _ ↦ Ideal.pow_mem_pow
+    (show a i ∈ Ideal.span (Set.range a) from Ideal.subset_span ⟨i, rfl⟩) _
 
 /-- The value at `a` of a homogeneous polynomial of degree `d` lies in `(a)^d`. -/
 lemma IsHomogeneous.eval_mem_pow {G : MvPolynomial σ R} {d : ℕ} (hG : G.IsHomogeneous d) :
@@ -108,7 +106,7 @@ lemma coeff_mem_of_eval_mem_pow_succ_of_eval_eq_zero {n : ℕ} {a : Fin n → R}
     obtain ⟨H, hH, rfl⟩ := exists_isHomogeneous_eval_eq hy
     obtain ⟨c, rfl⟩ := (Ideal.mem_span_range_iff_exists_fun).1 hz
     exact ⟨fun i ↦ C (c i) * H, fun i ↦ hH.C_mul _, by
-      rw [Finset.sum_mul]
+      rw [Finset.mul_sum]
       exact Finset.sum_congr rfl fun i _ ↦ by simp only [map_mul, eval_C]; ring⟩
   obtain ⟨G, hG, hFG⟩ := key _ (by rwa [← pow_succ])
   have hF' : (F - ∑ i, C (a i) * G i).IsHomogeneous d :=
@@ -205,9 +203,14 @@ theorem coeff_mem_of_eval_mem_pow_succ : ∀ {n : ℕ} {a : Fin n → R}, IsRevR
         have e1 := eval_eq_eval_mv_eval' a' (a 0) F
         have e2 := eval_eq_eval_mv_eval' a' (a 0) G
         rw [ha', Fin.cons_self_tail] at e1 e2
-        rw [e1, e2, hPG, ← hP]
-        conv_lhs => rw [← Polynomial.X_mul_divX_add P]
-        simp
+        rw [e1, e2, hPG, ← hP, ← ha']
+        calc _ = Polynomial.eval (a 0) (Polynomial.map (eval a')
+              (Polynomial.X * P.divX + Polynomial.C (P.coeff 0))) := by
+                rw [Polynomial.X_mul_divX_add]
+          _ = _ := by
+            simp only [Polynomial.map_add, Polynomial.map_mul, Polynomial.map_X,
+              Polynomial.map_C, Polynomial.eval_add, Polynomial.eval_mul, Polynomial.eval_X,
+              Polynomial.eval_C]
       have hQ0J : eval a' (P.coeff 0) ∈ J ^ (d + 1) := hQ0.eval_mem_pow
       have hGJ : eval a G ∈ J ^ (d + 1) := by
         refine hreg (d + 1) _ ?_

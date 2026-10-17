@@ -109,4 +109,13 @@ lemma isPullback_complementMap_over :
       (j ≫ 𝔸(ULift.{u} (Fin 1); S) ↘ S) g :=
   (isPullback_complementMap g j j' hj hj').paste_vert (isPullback_map g)
 
+omit [IsOpenImmersion j'] [IsOpenImmersion j] in
+include hj in
+/-- The base change of the complement of the zero section is the complement of the zero
+section. -/
+lemma range_pullback_snd_map :
+    Set.range (pullback.snd j (map (ULift.{u} (Fin 1)) g)).base =
+      (Set.range (zeroSection (ULift.{u} (Fin 1)) S').base)ᶜ := by
+  rw [Scheme.Pullback.range_snd, hj, Set.preimage_compl, preimage_range_zeroSection]
+
 end AlgebraicGeometry.AffineSpace
