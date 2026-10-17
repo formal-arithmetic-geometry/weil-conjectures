@@ -12,9 +12,107 @@
   "def-pc-module-kflat-complex",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an $R$-module $N$, placed in degree zero. By [lem-pc-source-module-kflat-resolution] choose K-flat quasi-isomorphisms $P^\\bullet\\to N[0]$ and $F^\\bullet\\to\\operatorname{Res}_R K^\\bullet$. The tensor-model theorem [lem-pc-source-kflat-module-tensor-model] computes $K^\\bullet\\otimes_R^{\\mathbf L}N$ by $\\operatorname{Tot}(F^\\bullet\\otimes_R N[0])$. K-flatness [def-pc-module-kflat-complex] says tensoring on either side preserves quasi-isomorphisms. Since $P^\\bullet$ is K-flat, the map $\\operatorname{Tot}(F^\\bullet\\otimes_R P^\\bullet)\\to\\operatorname{Tot}(K^\\bullet\\otimes_R P^\\bullet)$ is a quasi-isomorphism; since $F^\\bullet$ is K-flat, the map $\\operatorname{Tot}(F^\\bullet\\otimes_R P^\\bullet)\\to\\operatorname{Tot}(F^\\bullet\\otimes_R N[0])$ is also one. Hence $C_N^\\bullet=\\operatorname{Tot}(K^\\bullet\\otimes_R P^\\bullet)$ computes the desired derived tensor. This argument applies to any supplied K-flat resolution of the test module. With the total differential of [def-pc-tensor-complex-sheaves], multiplication on the unchanged $K$ factor commutes with both differential terms, making $C_N^\\bullet$ and $H^i(C_N^\\bullet)$ actual $A$-modules. The auxiliary $F^\\bullet$ is resolved over $R$; we never assert that an $A$-K-flat resolution is $R$-K-flat.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pc-source-kflat-module-tensor-model",
+    "def-pc-module-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, proof: H^i is a module over the source algebra; expanded using Tag 06Y4 (lemma-K-flat-resolution) and more-algebra.tex definition-derived-tor and lemma-flip-douoble-tensor-product."
+   }
+  },
+  {
+   "text": "For any commutative ring $B$, multiplicative subset $T\\subseteq B$ and arbitrary $B$-complex $D^\\bullet$, [lem-weil-pbc-localization-module-exact] says that termwise localization is exact. It is additive by the fraction formulas, so [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^i(T^{-1}D^\\bullet)\\cong T^{-1}H^i(D^\\bullet)$ in every degree. In particular localization preserves quasi-isomorphisms. We will use this first over $R$ with $T=R\\setminus\\mathfrak p$ and then over $A$ with $T=A\\setminus\\mathfrak q$; neither application needs a bounded complex.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, displayed localization of cohomology; algebra.tex Tag 00CS (proposition-localization-exact) and homology.tex Tag 010N (lemma-exact-functor)."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q\\subset A$, put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ for the given map $\\varphi:R\\to A$, and set $P_{\\mathfrak p}^\\bullet=R_{\\mathfrak p}\\otimes_R P^\\bullet$. The extension theorem [lem-pc-kflat-extension-of-scalars] makes this complex K-flat over $R_{\\mathfrak p}$. Step 2 makes its augmentation to $N_{\\mathfrak p}[0]$ a quasi-isomorphism. Here scalar extension equals termwise localization: $(r/t)\\otimes u\\mapsto ru/t$, with inverse $u/t\\mapsto(1/t)\\otimes u$, as the tensor and fraction relations verify. Consequently [lem-pc-source-kflat-module-tensor-model], with the two-resolution computation of Step 1 (now over $R_{\\mathfrak p}$), computes $K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}N_{\\mathfrak p}$ by $\\operatorname{Tot}(K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}P^\\bullet_{\\mathfrak p})$. The map $R_{\\mathfrak p}\\to A_{\\mathfrak q}$ sends $r/t$ to $\\varphi(r)/\\varphi(t)$; it exists because $t\\notin\\mathfrak p$ implies $\\varphi(t)\\notin\\mathfrak q$.",
+   "uses": [
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-pc-source-module-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, displayed tensor over the contracted-prime base localization; omitted forward implication expanded using Tag 06Y1 (lemma-base-change-K-flat)."
+   }
+  },
+  {
+   "text": "The ordinary tensor complexes in Steps 1 and 3 are related by an explicit $A_{\\mathfrak q}$-linear chain isomorphism $$(C_N^\\bullet)_{\\mathfrak q}\\longrightarrow\\operatorname{Tot}(K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}P^\\bullet_{\\mathfrak p}),\\qquad (k\\otimes u)/s\\longmapsto(k/s)\\otimes(u/1).$$ Its inverse on a homogeneous generator is $$(k/s)\\otimes(u/t)\\longmapsto(k\\otimes u)/(s\\varphi(t)),$$ where $s\\notin\\mathfrak q$ and $t\\notin\\mathfrak p$. The fraction relations of [def-weil-pbc-module-localization] and tensor balancing give well-defined maps: moving $r/t$ between the factors multiplies the numerator by $\\varphi(r)$ or $r$ and introduces the same denominator $\\varphi(t)$. The two composites fix every generator. Apply these formulas to finite sums of homogeneous generators; a common product of denominators puts any such sum over one denominator, so the maps also cover the direct sums in every total degree. Both maps commute separately with $d_K\\otimes1$ and $(-1)^r1\\otimes d_P$, with the same $r$ before and after localization. Thus they commute with the total differential, including for unbounded complexes.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, displayed derived-tensor localization identity: elementary fraction and total-differential verification."
+   }
+  },
+  {
+   "text": "Apply cohomology to the chain isomorphism of Step 4, use Step 2 on its left side, and use the tensor models of Steps 1 and 3. This gives, for every $R$-module $N$, prime $\\mathfrak q$ and integer $i$, the comparison $$H^i(K^\\bullet\\otimes_R^{\\mathbf L}N)_{\\mathfrak q}\\cong H^i(K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}N_{\\mathfrak p}).$$ The left side is localization of the actual $A$-module $H^i(C_N^\\bullet)$, and the right side uses the specific structural map $R_{\\mathfrak p}\\to A_{\\mathfrak q}$ of Step 3. This is a combination of the preceding computations, with no change from relative to absolute Tor amplitude.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, the cohomology localization identity in its proof."
+   }
+  },
+  {
+   "text": "Assume (1), fix $\\mathfrak q$, and let $L$ be any $R_{\\mathfrak p}$-module. Use $N=L$ by restriction to $R$ in Step 5. Its localization satisfies $N_{\\mathfrak p}\\cong L$: send $l/t$ to $t^{-1}l$ and send $l$ back to $l/1$; these maps are inverse because each $t\\notin\\mathfrak p$ already acts invertibly. For $i\\notin[a,b]$, assumption (1) makes the left side of Step 5 zero. Its right side, after this module isomorphism, is exactly $H^i(K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}L)$. It is zero. Since $\\mathfrak q$ and $L$ were arbitrary, this proves (2), including the implication omitted in the source.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, omitted implication (1) implies (2), using restricted localized test modules."
+   }
+  },
+  {
+   "text": "Assume (2), fix $N$ and $i\\notin[a,b]$, and put $H=H^i(C_N^\\bullet)$. Step 5 and (2), tested with $L=N_{\\mathfrak p}$, give $H_{\\mathfrak q}=0$ for every prime $\\mathfrak q\\subset A$. To conclude without a finiteness hypothesis, suppose $0\\ne x\\in H$. Its annihilator $I=\\{a\\in A:ax=0\\}$ is a proper ideal. By [lem-weil-pbc-proper-ideal-contained-in-maximal] choose a maximal ideal $\\mathfrak m\\supseteq I$. It is prime: if $uv\\in\\mathfrak m$ and $u\\notin\\mathfrak m$, write $1=c+du$ with $c\\in\\mathfrak m$ and multiply by $v$ to get $v\\in\\mathfrak m$. As $H_{\\mathfrak m}=0$, the fraction criterion of [def-weil-pbc-module-localization] gives $s\\notin\\mathfrak m$ with $sx=0$, contradicting $s\\in I\\subseteq\\mathfrak m$. Hence $H=0$. All $N$ and all degrees outside the interval were arbitrary, so (1) holds. If $A$ is the zero ring, every $A$-module is zero already; the same argument is vacuous. The zero complex, $a=b$, and the identity ring map cause no exceptional step.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, proof of (3) implies (1), here using all primes; algebra.tex Tag 00HN (lemma-characterize-zero-local), proof of (1) and (2), with Tag 00E0 (lemma-Zariski-topology)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-pc-module-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-kflat-extension-of-scalars",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B67, lemma-tor-amplitude-localization: the displayed identity and reverse implication follow the source; the omitted forward implication and tensor identity are expanded using existing K-flat-resolution, scalar-extension and exact-localization nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +155,52 @@
    "results": "{\"t\": \"2026-10-17T22:04:16Z\", \"tool\": \"grep\", \"query\": \"Tor.*localiz|localiz.*Tor|tor.?amplitude\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\"], \"digest\": \"4476395401d26ed0\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits; ordinary prime localization, exactness, free loci, generic cohomological bounds, and projective Tor vanishing do not give a relative Tor-amplitude localization equivalence for arbitrary unbounded complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|Tor.*localiz|localiz.*Tor",
+   "results": "{\"t\": \"2026-10-17T22:21:33Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|TorAmplitude|Tor.*localiz|localiz.*Tor\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\"], \"digest\": \"18a348b383ca7bb3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module localization, support, free loci, cotangent homology or derived cohomological bounds, not relative Tor-amplitude localization for arbitrary unbounded complexes. Loogle returned no declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of derived tensor product of a complex and every module outside an interval can be tested at prime localizations",
+   "results": "{\"t\": \"2026-10-17T22:21:34Z\", \"tool\": \"leansearch\", \"query\": \"Vanishing of derived tensor product of a complex and every module outside an interval can be tested at prime localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isLE_Q_obj_iff\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"Module.support\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"IsLocalRing.subsingleton_tensorProduct\", \"LocalizedModule.AtPrime\", \"IsLocalizedModule.rTensor\", \"Module.mem_support_iff\"], \"digest\": \"75a2d20c33ec23e8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module localization, support, free loci, cotangent homology or derived cohomological bounds, not relative Tor-amplitude localization for arbitrary unbounded complexes. Loogle returned no declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, DerivedCategory",
+   "results": "{\"t\": \"2026-10-17T22:21:34Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module localization, support, free loci, cotangent homology or derived cohomological bounds, not relative Tor-amplitude localization for arbitrary unbounded complexes. Loogle returned no declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Tor amplitude of an unbounded complex of modules over an algebra is detected after localization at all primes of the algebra and contracted primes of the base ring",
+   "results": "{\"t\": \"2026-10-17T22:21:35Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Tor amplitude of an unbounded complex of modules over an algebra is detected after localization at all primes of the algebra and contracted primes of the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsGE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjSingleFunctor\"], \"digest\": \"da714fcaca5ed361\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module localization, support, free loci, cotangent homology or derived cohomological bounds, not relative Tor-amplitude localization for arbitrary unbounded complexes. Loogle returned no declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor|torAmplitude|TorAmplitude",
+   "results": "{\"t\": \"2026-10-17T22:21:57Z\", \"tool\": \"grep\", \"query\": \"Tor|torAmplitude|TorAmplitude\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\"], \"digest\": \"1804d8d5e6c8634c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module localization, support, free loci, cotangent homology or derived cohomological bounds, not relative Tor-amplitude localization for arbitrary unbounded complexes. Loogle returned no declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any ring homomorphism R to A, cohomology of derived tensor with an arbitrary R module vanishes in fixed degrees if and only if the analogous condition holds over all prime localizations of A and R",
+   "results": "{\"t\": \"2026-10-17T22:22:06Z\", \"tool\": \"leanfinder\", \"query\": \"For any ring homomorphism R to A, cohomology of derived tensor with an arbitrary R module vanishes in fixed degrees if and only if the analogous condition holds over all prime localizations of A and R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.comap_freeLocus_le\", \"Module.mem_freeLocus_iff_tensor\", \"Algebra.H1Cotangent.isLocalizedModule\", \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\", \"Algebra.formallySmooth_iff\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"faffb4ce153c2eb0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module localization, support, free loci, cotangent homology or derived cohomological bounds, not relative Tor-amplitude localization for arbitrary unbounded complexes. Loogle returned no declarations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-affine-relative-tor-amplitude-criterion",
@@ -92,5 +232,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-relative-tor-amplitude-localization",
+  "worker": "stage1",
+  "summary": "Preserved the unrestricted relative statement of Stacks 0B67. Gave seven steps using resolutions over the actual tensor base, proving the localized tensor identity with explicit fractions and total differentials, proving the omitted forward implication, and proving detection by annihilators. Reused existing resolution, K-flat scalar-extension, exact-localization, cohomology and maximal-ideal nodes; no new nodes, Lean writing or compilation.",
+  "blueprint": "Realizes the existing blueprint.from place: algebraic localization in the affine relative-Tor comparison (0DHY invoking 0B67), in the coherent relative-duality auxiliary branch of lem-trf-local-term-locality, proof (1)--(2). No unit route or blueprint ancestry changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-source-module-kflat-resolution",
+    "why": "Generic unbounded module-resolution existence over the actual tensor base, used for the test module and an auxiliary R-resolution in the explicit tensor-computation roof; the local-term unit has no ring-level replacement."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic K-flat tensor computation with an arbitrary other complex, used over R and R_p; it supplies no Tor-amplitude assertion."
+   },
+   {
+    "node": "lem-pc-kflat-extension-of-scalars",
+    "why": "Generic preservation of module K-flatness under any scalar extension, used for the resolution of N at R_p; it supplies no localization criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-kflat-extension-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-7d9561be4",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-7d9561be4 (reviewer sub-agent of L); spot-checked: Read the complete item, packet, required guidance, unit/chapter route, Stacks 0B67 source, and every cited node statement. The seven-step proof correctly handles unbounded complexes, explicit base-change R_p→A_q, K-flat resolutions, localization, and annihilator detection without extra hypotheses. No new nodes, duplicates, circularity, route-pivot machinery, SGA violation, or batch-5 dependency found. Review written to review.md."
  }
 }

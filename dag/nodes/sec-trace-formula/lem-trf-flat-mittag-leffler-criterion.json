@@ -12,48 +12,157 @@
   "def-trf-mittag-leffler-module",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume first that $M$ is Mittag-Leffler. Since $M$ is flat, the auxiliary least-support lemma [lem-trf-flat-ml-minimal-support] applies to the finite free module $F$ and the element $x$. It gives a smallest submodule $F_0\\subseteq F$ whose tensor image contains $x$, exactly the property required in the statement.",
+   "uses": [
+    "lem-trf-flat-ml-minimal-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S proof, implication (1) to (2), invoking Tag 0AS6 (lemma-minimal-contains)."
+   }
+  },
+  {
+   "text": "Conversely, assume the least-submodule property for every finite free $F$. The flat-tensor exactness statement [lem-weil-pbc-flat-tensor-exact], applied at each term of a short exact sequence including its zero endpoints, shows that $-\\otimes_R M$ preserves short exact sequences. Thus [lem-kun-lazard-flat-module] gives a small nonempty directed partially ordered set $I$, finite free modules $(M_i,f_{ij})$, and canonical maps $f_i:M_i\\to M$ exhibiting $M$ as their colimit [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-kun-lazard-flat-module",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S proof, paragraph beginning \"By Theorem theorem-lazard\"; Tag 00HD for flat tensor exactness."
+   }
+  },
+  {
+   "text": "Fix $i$. For $j\\ge i$ let $Q_j$ be the image of precomposition $\\operatorname{Hom}_R(M_j,R)\\to\\operatorname{Hom}_R(M_i,R)$. Put $H=\\operatorname{Hom}_R(M_i,R)$. For a basis $(e_a)$ of $M_i$, the inverse to $H\\otimes_R N\\to\\operatorname{Hom}_R(M_i,N)$, $h\\otimes n\\mapsto(v\\mapsto h(v)n)$, sends $g$ to $\\sum_a e_a^*\\otimes g(e_a)$, for any $N$. Choose also a basis $(b_s)$ of $M_j$ and write $f_{ij}=\\sum_s h_s\\otimes b_s$. The $h_s=b_s^*f_{ij}$ generate $Q_j$. The identification $H\\otimes_R M_j\\simeq\\bigoplus_s H$ identifies the image of $G\\otimes_R M_j$ with $\\bigoplus_s G$ for every submodule $G\\subseteq H$. Consequently that image contains $f_{ij}$ exactly when every $h_s$ lies in $G$, equivalently $Q_j\\subseteq G$. This proves the least-submodule characterization of $Q_j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S proof, paragraph beginning \"Since $M_i$ is free and finite\"."
+   }
+  },
+  {
+   "text": "The same finite-free identification puts the canonical map $f_i:M_i\\to M$ in $\\operatorname{Hom}_R(M_i,R)\\otimes_R M$. By the assumed least-submodule property there is a smallest submodule $Q\\subseteq\\operatorname{Hom}_R(M_i,R)$ with $f_i\\in Q\\otimes_R M$. Compatibility $f_i=f_jf_{ij}$ shows that $f_i$ lies in $Q_j\\otimes_R M$ for every $j\\ge i$, so minimality gives $Q\\subseteq Q_j$. Thus the decreasing family $(Q_j)_{j\\ge i}$ all contains $Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S proof, paragraph beginning \"Under the identification\" through \"we have $Q\\subset Q_j$\"."
+   }
+  },
+  {
+   "text": "Write $H=\\operatorname{Hom}_R(M_i,R)$. The tensor-colimit comparison [lem-weil-pbc-tensor-commutes-with-colimits], using the elementary symmetry $h\\otimes m\\leftrightarrow m\\otimes h$, gives $H\\otimes_R M=\\operatorname{colim}_j(H\\otimes_R M_j)$ and $Q\\otimes_R M=\\operatorname{colim}_j(Q\\otimes_R M_j)$. Finite free modules are flat: under $N\\otimes_R R^r\\simeq N^r$, tensoring an injection is a componentwise injection. Thus [lem-weil-pbc-flat-tensor-exact] makes each $Q\\otimes_R M_j\\to H\\otimes_R M_j$ injective. By [lem-weil-pbc-filtered-colimit-modules-elementwise], choose $t\\in Q\\otimes_R M_l$ mapping to $f_i$. Its image and $f_{ii}\\in H\\otimes_R M_i$ have equal colimit images, so the same cited equality criterion gives a common stage $j\\ge l,i$ where their images agree. Hence $f_{ij}$ belongs to the image of $Q\\otimes_R M_j$. Step 3 gives $Q_j\\subseteq Q$, while Step 4 gives $Q\\subseteq Q_j$, so $Q_j=Q$. For every $k\\ge j$, composition of precomposition maps gives $Q_k\\subseteq Q_j$, and Step 4 gives $Q\\subseteq Q_k$. Therefore $Q_k=Q$ for every $k\\ge j$.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S proof, paragraph beginning \"Since the $Q_j$ are decreasing\" through the conclusion that the $Q_j$ stabilize."
+   }
+  },
+  {
+   "text": "Therefore, for every $i$, the inverse system of duals $(\\operatorname{Hom}_R(M_i,R),\\operatorname{Hom}_R(f_{ij},R))$ is Mittag-Leffler. The dual criterion [lem-trf-flat-ml-dual-criterion] then implies that $M$ is Mittag-Leffler in the tensor-product sense.",
+   "uses": [
+    "lem-trf-flat-ml-dual-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S proof, first sentence after the stabilization argument, invoking Tag 059G (remark-flat-ML)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map",
+  "lem-kun-lazard-flat-module",
+  "lem-trf-flat-ml-dual-criterion",
+  "lem-trf-flat-ml-minimal-support",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059S (lemma-flat-ML-criterion), proof; supporting Tags 0AS6 and 059G."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A flat module is Mittag Leffler exactly when each tensor in a finite free module has a least supporting submodule",
-   "results": "{\"t\": \"2026-10-17T21:54:08Z\", \"tool\": \"leanfinder\", \"query\": \"A flat module is Mittag Leffler exactly when each tensor in a finite free module has a least supporting submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Module.flat_iff\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.Flat.out\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.iff_lTensor_injectiveₛ\"], \"digest\": \"638a978b935ed8ca\"}",
+   "query": "flat module is Mittag Leffler iff every tensor in a finite free module has a least supporting submodule",
+   "results": "{\"t\": \"2026-10-17T22:14:29Z\", \"tool\": \"leanfinder\", \"query\": \"flat module is Mittag Leffler iff every tensor in a finite free module has a least supporting submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Module.flat_iff\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.Flat.out\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.iff_lTensor_injective'\"], \"digest\": \"b77c7cacc6a54de7\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inverse-system Mittag-Leffler results concern stabilization of images, not the tensor condition on one module; flatness criteria do not give least tensor-supporting submodules."
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsMittagLeffler, TensorProduct.piRightHom, least submodule",
+   "results": "{\"t\": \"2026-10-17T22:14:30Z\", \"tool\": \"loogle\", \"query\": \"Module.IsMittagLeffler, TensorProduct.piRightHom, least submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Module.IsMittagLeffler'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|least.*submodule|smallest.*submodule [RingTheory]",
+   "results": "{\"t\": \"2026-10-17T22:14:30Z\", \"tool\": \"grep\", \"query\": \"Mittag|least.*submodule|smallest.*submodule\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\"], \"digest\": \"ef1fec8336c85e40\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat module Mittag Leffler criterion least submodule finite free tensor",
+   "results": "{\"t\": \"2026-10-17T22:14:31Z\", \"tool\": \"leansearch\", \"query\": \"flat module Mittag Leffler criterion least submodule finite free tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.mk\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_injective'\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_injectiveₛ\"], \"digest\": \"a2147dfa489b693d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "flat module Mittag-Leffler criterion smallest submodule finite free tensor",
-   "results": "{\"t\": \"2026-10-17T21:43:33Z\", \"tool\": \"leanfinder\", \"query\": \"flat module Mittag-Leffler criterion smallest submodule finite free tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_iff\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.out\", \"Module.Flat.iff_rTensor_injectiveₛ\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.iff_rTensor_injective\"], \"digest\": \"a85f5c158a0cd99b\"}",
+   "query": "A flat module is Mittag Leffler exactly when each tensor in a finite free module has a least supporting submodule",
+   "results": "{\"t\": \"2026-10-17T22:15:05Z\", \"tool\": \"leanfinder\", \"query\": \"A flat module is Mittag Leffler exactly when each tensor in a finite free module has a least supporting submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Module.flat_iff\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.Flat.out\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.iff_lTensor_injectiveₛ\"], \"digest\": \"638a978b935ed8ca\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inverse-system Mittag-Leffler results concern stabilization of images, not the tensor condition on one module; flatness criteria do not give least tensor-supporting submodules."
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat module Mittag Leffler criterion smallest submodule finite free tensor",
+   "results": "{\"t\": \"2026-10-17T22:15:12Z\", \"tool\": \"leanfinder\", \"query\": \"flat module Mittag Leffler criterion smallest submodule finite free tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_iff\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.out\", \"Module.Flat.iff_rTensor_injectiveₛ\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.iff_lTensor_injective\"], \"digest\": \"9b1f9098431bdc94\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "\"Mittag\"",
-   "results": "{\"t\": \"2026-10-17T21:54:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Mittag\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Lean.IR.EmitLLVM.emitTag\", \"CategoryTheory.Functor.IsMittagLeffler\", \"CategoryTheory.Functor.IsMittagLeffler.toPreimages\", \"CategoryTheory.Functor.isMittagLeffler_of_surjective\", \"CategoryTheory.Functor.IsMittagLeffler.eq_image_eventualRange\", \"CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range\", \"CategoryTheory.Functor.isMittagLeffler_iff_eventualRange\", \"CategoryTheory.Functor.IsMittagLeffler.subset_image_eventualRange\"], \"digest\": \"4c4505e3803ac15c\"}",
+   "results": "{\"t\": \"2026-10-17T22:15:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Mittag\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Lean.IR.EmitLLVM.emitTag\", \"CategoryTheory.Functor.IsMittagLeffler\", \"CategoryTheory.Functor.IsMittagLeffler.toPreimages\", \"CategoryTheory.Functor.isMittagLeffler_of_surjective\", \"CategoryTheory.Functor.IsMittagLeffler.eq_image_eventualRange\", \"CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range\", \"CategoryTheory.Functor.isMittagLeffler_iff_eventualRange\", \"CategoryTheory.Functor.IsMittagLeffler.subset_image_eventualRange\"], \"digest\": \"4c4505e3803ac15c\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inverse-system Mittag-Leffler results concern stabilization of images, not the tensor condition on one module; flatness criteria do not give least tensor-supporting submodules."
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "Mittag|smallest.*submodule",
-   "results": "{\"t\": \"2026-10-17T21:54:09Z\", \"tool\": \"grep\", \"query\": \"Mittag|smallest.*submodule\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\"], \"digest\": \"ef1fec8336c85e40\"}",
+   "query": "Mittag|smallest.*submodule [RingTheory]",
+   "results": "{\"t\": \"2026-10-17T22:15:12Z\", \"tool\": \"grep\", \"query\": \"Mittag|smallest.*submodule\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\"], \"digest\": \"ef1fec8336c85e40\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inverse-system Mittag-Leffler results concern stabilization of images, not the tensor condition on one module; flatness criteria do not give least tensor-supporting submodules."
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "flat module is Mittag-Leffler iff smallest submodule condition",
-   "results": "{\"t\": \"2026-10-17T21:43:34Z\", \"tool\": \"leansearch\", \"query\": \"flat module is Mittag-Leffler iff smallest submodule condition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.mk\", \"Module.Flat.of_forall_isTrivialRelation\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.iff_characterModule_baer\"], \"digest\": \"2fc773af3e858579\"}",
+   "results": "{\"t\": \"2026-10-17T22:15:13Z\", \"tool\": \"leansearch\", \"query\": \"flat module is Mittag-Leffler iff smallest submodule condition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.mk\", \"Module.Flat.of_forall_isTrivialRelation\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.iff_characterModule_baer\"], \"digest\": \"2fc773af3e858579\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inverse-system Mittag-Leffler results concern stabilization of images, not the tensor condition on one module; flatness criteria do not give least tensor-supporting submodules."
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-product-noetherian-flat-mittag-leffler",
@@ -65,7 +174,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Ancestor proof (1)--(2), semistable-alteration input, through 05DJ and Algebra 05D0: second sentence and final coordinate-span argument invoke the criterion of Algebra 059S.",
+   "place": "Ancestor proof (1)--(2), semistable-alteration input: the supporting algebra invokes the flat Mittag-Leffler criterion of Tag 059S; this item realizes that criterion.",
    "via": [
     "lem-trf-product-noetherian-flat-mittag-leffler",
     "lem-trf-completion-flat-mittag-leffler",
@@ -86,5 +195,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-mittag-leffler-criterion",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 059S together with its supporting Tags 0AS6 (least tensor-supporting submodule) and 059G (dual Hom-system criterion). The forward implication is one application of the least-support lemma. The reverse implication uses flatness and Lazard to obtain a directed finite-free presentation, the finite-free Hom/tensor coordinate calculation, stabilization of the least coefficient submodules by tensor-colimit and elementwise filtered-colimit detection, and the dual criterion. The statement and hypotheses are unchanged; two genuine supporting lemmas were added as statement-only nodes.",
+  "blueprint": "Realizes the inherited ancestor proof route through the Tag 059S flat Mittag-Leffler criterion, including its forward least-submodule argument and reverse finite-free Lazard/Hom-system stabilization.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-lazard-flat-module",
+    "why": "Step 2 uses the generic Lazard theorem to obtain a small directed finite-free presentation of a flat module. This is the algebraic black box explicitly invoked in Stacks 059S; sk-i-curve-zero supplies no replacement. It does not replace the unit’s geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-lazard-flat-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q82-3fb8ba1f0",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-3fb8ba1f0 (reviewer sub-agent of L); spot-checked: Read all three nodes and checked every step against Stacks 059S, 0AS6 and 059G. Repaired the countable-only ML citation, malformed TeX arrows, and missing Lazard tool declaration. Mathematical argument, edge cases, duplicate checks and dependency checks pass. Full findings in review.md; corrected JSON files under fixes/dag/nodes/sec-trace-formula/.; 3 file(s) fixed by the reviewer"
  }
 }
