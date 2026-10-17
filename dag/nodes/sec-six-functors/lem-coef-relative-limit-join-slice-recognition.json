@@ -12,9 +12,118 @@
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First verify the slice assertions. The join-slice theorem says that $X_{/f}$ and $C_{/qf}$ are quasicategories. To lift an inner horn $\\Lambda_i^n\\to X_{/f}$ over $\\Delta^n\\to C_{/qf}$, transpose to a map $\\Lambda_i^n\\star K\\to X$ over $\\Delta^n\\star K\\to C$. First use the inner-fibration property of $q$ to extend its restriction on the pure first block to $\\Delta^n\\to X$. Glue that filler to the prescribed map. The remaining inclusion is\n$$(\\Lambda_i^n\\star K)\\amalg_{\\Lambda_i^n}\\Delta^n\\longrightarrow\\Delta^n\\star K.$$\nIt is inner anodyne by the right-anodyne pushout-join assertion, taking $\\varnothing\\hookrightarrow K$ as the second monomorphism (an inner horn is one of the right-anodyne generators). An inner fibration lifts inner anodyne maps: right lifting is preserved when the left map is pushed out, composed transfinitely, or retracted. Hence the glued lifting problem has a filler. Transposing back proves that $q_f$ is inner. This argument also works for empty $K$, when the remaining inclusion is the identity.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-anodyne-cocones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Preliminary slice fibrancy; join lifting as in Proposition 4.3.6.4 (018J), followed by the fixed-diagram comparison used in Proposition 7.1.6.13."
+   }
+  },
+  {
+   "text": "Put $T=\\Delta^0\\star K$, $A=\\operatorname{Fun}(T,X)$, $B=\\operatorname{Fun}(K,X)$, $A_C=\\operatorname{Fun}(T,C)$ and $B_C=\\operatorname{Fun}(K,C)$. Write $r_X:A\\to B$ and $r_C:A_C\\to B_C$ for restriction. Form\n$$D=B\\times_{B_C}A_C,\\qquad \\pi:D\\to B,\\qquad R:A\\to D,\\quad u\\mapsto(u|_K,qu).$$\nThe left-cone restriction lemma gives that $r_X$ and $r_C$ are cocartesian fibrations, with cocartesian edges exactly those whose apex component is an equivalence. Its base-change clause, applied to $E=C$ and $h=\\operatorname{Fun}(K,q):B\\to B_C$, gives that $D$ is a quasicategory and $\\pi$ is a cocartesian fibration. If an edge of $A$ is $r_X$-cocartesian, its apex component is an equivalence in $X$, so its image under $q$ is an equivalence in $C$ (apply $q$ to its inverse and the two triangle witnesses). The same criterion in $D$ therefore shows that $R$ preserves cocartesian edges. All these categories are quasicategories by the cited restriction lemma and functor-category closure.",
+   "uses": [
+    "lem-coef-left-cone-restriction-cocartesian",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Proposition 7.1.6.13, last paragraph, applying Corollary 5.3.7.5 (02VW) and cocartesian base change (01UF)."
+   }
+  },
+  {
+   "text": "The functor $R$ is an inner fibration even though $q$ need not be an isofibration. Indeed, transpose an inner-horn lifting problem for $R$ to a lifting problem for $q$. Its prescribed part is\n$$(\\Lambda_i^n\\times T)\\amalg_{\\Lambda_i^n\\times K}(\\Delta^n\\times K)\\longrightarrow\\Delta^n\\times T.$$\nThis is the cartesian pushout-product of the inner horn with the degreewise injection $K\\hookrightarrow T$, so it is inner anodyne by the cited pushout-product theorem. Its defining left lifting property against the inner fibration $q$ supplies precisely the filler for $R$. No equivalence-lifting hypothesis on $q$ has been introduced.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Inner-fibration check for the exponential corner; HTT Corollary 2.3.2.4, before the fiberwise-finality argument of Proposition 7.1.6.13."
+   }
+  },
+  {
+   "text": "Let $A_f=A\\times_B\\{f\\}$ and identify $D_f=D\\times_B\\{f\\}$ with $A_C\\times_{B_C}\\{qf\\}$. Let $P_f$ be the coherent cone category $(\\Delta_K\\downarrow f)$ and $P_{qf}$ its analogue in $C$. The dual of the join-slice/cocone comparison gives equivalences $X_{/f}\\to P_f$ and $C_{/qf}\\to P_{qf}$, natural under $q$. Here duality reverses the two blocks: $(\\Delta^n\\star K)^{\\mathrm{op}}=K^{\\mathrm{op}}\\star\\Delta^n$ after reindexing the simplex, so the stated cocone comparison applies to $f^{\\mathrm{op}}:K^{\\mathrm{op}}\\to X^{\\mathrm{op}}$ and then is reversed. On the other hand the fixed-boundary clause of the join-cone calculus gives equivalences $A_f\\to P_f$ and $D_f\\to P_{qf}$, again natural under $q$. Both constructions send $s$ to the same coherent cone, obtained by precomposing $s$ with $K\\times\\Delta^1\\to T$. Thus we have a commuting zigzag of functor equivalences between the functors $q_f$ and $R_f:A_f\\to D_f$, with the specified vertices corresponding.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Proposition 7.1.6.13, first comparison square; Example 4.6.6.8 (04J5). Existing natural sharp/fat and coherent-cone comparisons implement this square."
+   }
+  },
+  {
+   "text": "A commuting square of functor equivalences preserves and reflects the predicate that every incoming mapping-space map to a specified vertex is a weak equivalence. For objects in the image, its mapping-space comparison square has equivalences on the two horizontal sides by functor-equivalence invariance of mapping spaces, so the two vertical maps are weak equivalences simultaneously by two-out-of-three. Every other source object is equivalent to one in the image by a quasi-inverse; precomposing with that equivalence and its inverse gives inverse maps of incoming mapping spaces: the cited composition theorem identifies the two composites with precomposition by the identity, up to simplicial homotopy. Apply this argument along the zigzag in step 4. The assumed $q_f$-finality of $s$ therefore gives\n$$\\operatorname{Map}_{A_f}(u,s)\\longrightarrow\\operatorname{Map}_{D_f}(R_fu,R_fs)$$\na weak equivalence for every $u\\in A_f$. This is a statement about all incoming spaces, not just endomorphisms of $s$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Equivalence invariance in the first comparison square of Proposition 7.1.6.13; the mapping-space argument is written out here."
+   }
+  },
+  {
+   "text": "Apply the opposite-category dual of the cartesian-initial boundary-lifting lemma to $r_X:A\\to B$, $\\pi:D\\to B$, and $R$. Its hypotheses are supplied by steps 2 and 3, and its fiberwise mapping hypothesis by step 5. For every $n\\geq1$ and every $R$-lifting problem with upper map $a:\\partial\\Delta^n\\to A$ whose last vertex is $s$, it yields a filler with both boundary and image fixed exactly. Under opposites, cocartesian edges become cartesian edges, the last vertex becomes the first, and incoming mapping spaces become outgoing ones. To compare the right-pinched models under this reversal, use the natural pinch equivalences to arrow spaces: degreewise order reversal identifies $U_{E^{\\mathrm{op}}}(x,y)$ with $U_E(y,x)^{\\mathrm{op}}$. The realizations of a simplicial set and its opposite are homeomorphic by reversing barycentric coordinates on every simplex. Consequently reversal preserves weak homotopy equivalences, and the fiberwise hypothesis is unchanged. Applying the relative-final boundary criterion to the inner fibration $R$ now proves\n$$\\operatorname{Map}_A(t,s)\\longrightarrow\\operatorname{Map}_D(Rt,Rs)$$\nis a weak equivalence for every $t\\in A$. No prior limit property or preservation of final objects by transport is needed.",
+   "uses": [
+    "lem-coef-infinity-cartesian-initial-boundary-lift",
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Proposition 7.1.6.13, last paragraph; opposite dual of Proposition 7.1.5.19(2) (02WU), then Corollary 7.1.5.17 (02WS)."
+   }
+  },
+  {
+   "text": "Fix any $t:T\\to X$; its boundary $t|_K$ is arbitrary. The definition of right-pinched mapping spaces and the degreewise pullback defining $D$ identify\n$$\\operatorname{Map}_D(Rt,Rs)=\\operatorname{Map}_B(t|_K,f)\\times_{\\operatorname{Map}_{B_C}(qt|_K,qf)}\\operatorname{Map}_{A_C}(qt,qs).$$\nThis is an equality of simplicial sets: in each degree a map to the pullback is a pair of maps with identical image, and the constant-initial-face and final-vertex conditions hold coordinatewise. Since $r_C$ is an inner fibration, the inner-fibration mapping-space theorem says that the second factor's map to the base is a Kan fibration. The strict-pullback/path-pullback comparison theorem therefore identifies this strict pullback with the homotopy pullback of those same two mapping spaces. Its comparison inserts the constant path. Compose it with the equivalence from step 6. The resulting map from $\\operatorname{Map}_A(t,s)$ is exactly the comparison to the path model in the mapping-square definition: its coordinates are restriction and postcomposition with $q$, and its path is constant because these commute strictly. Hence that square is a homotopy pullback for every $t$, which is precisely that $s$ is a $q$-limit diagram. For $K=\\varnothing$, $B$ and $B_C$ are terminal, so this reduces to the assumed incoming mapping-space equivalences for $q$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-inner-mapping-fiber",
+    "lem-coef-kan-pullback-path-comparison",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Proposition 7.1.6.13 combined with Proposition 7.1.6.19(2) (02X1); the strict-pullback and path-model comparison is made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-anodyne-cocones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-left-cone-restriction-cocartesian",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-cartesian-initial-boundary-lift",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-pinch-comparison",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-kan-pullback-path-comparison",
+  "def-coef-infinity-relative-cone"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02XB",
+  "place": "Detailed realization of the proof of Proposition 7.1.6.13, with Proposition 7.1.6.19(2), the fixed-boundary sharp/fat comparisons, and explicit inner-fibration and path-model checks. Online references are not archived in literature/; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +180,24 @@
    "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"SSet.quasicategory_iff_of_isTerminal\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.InnerFibration\", \"type\": \" {X Y : SSet} (p : X ⟶ Y) (hY : CategoryTheory.Limits.IsTerminal Y) : X.Quasicategory ↔ SSet.InnerFibration p\", \"doc\": \"[Kerodon Tag 01BB](https://kerodon.net/tag/01BB)\"}\n  {\"name\": \"SSet.instQuasicategoryObjIhomTerminal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Inner.PushoutProduct\", \"type\": \" (A : SSet) : (A ⟹ ⊤_ SSet).Quasicategory\", \"doc\": \"\"}",
    "date": "2026-10-17",
    "verdict": "no match: Ordinary categorical Kan extensions and quasicategory-over-terminal criteria do not recognize relative limits in fixed-diagram join slices."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Ll]imit|[Jj]oin.*[Ss]lice",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categories, strict Segal coskeleta and finite simplicial pullbacks do not state relative limit recognition for quasicategories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative terminality in a fixed diagram join slice implies the mapping space pullback criterion for a relative limit of quasicategories",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.Functor.relativelyRepresentable.toPullbackTerminal, CategoryTheory.CechNerveTerminalFrom.hasWidePullback, CategoryTheory.CechNerveTerminalFrom.hasWidePullback', SSet.StrictSegal.isPointwiseRightKanExtensionAt, CategoryTheory.CechNerveTerminalFrom.wideCospan, SSet.StrictSegal.isRightKanExtension, SSet.instFinitePullback, SSet.StrictSegal.isPointwiseRightKanExtension",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categories, strict Segal coskeleta and finite simplicial pullbacks do not state relative limit recognition for quasicategories"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pattern-anodyne-lifting-products",
@@ -102,5 +225,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-limit-join-slice-recognition",
+  "worker": "stage1",
+  "summary": "Verified the unchanged inner-fibration statement, including empty K and arbitrary test boundaries. Reused the join/coherent-cone comparisons and the dual cartesian-initial boundary-lifting theorem; created only the general cocartesian cone-restriction and base-change lemma. Wrote the exponential-corner horn adjunction and final strict-pullback/path-model comparison explicitly. No Lean attachment or Mathlib match found. Second reading: cited mapping composition for the quasi-inverse argument, expanded the opposite mapping-space comparison, and independently repeated Mathlib and duplicate searches; statements unchanged.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the derived inverse limit; auxiliary construction of the marked operadic models used by lem-coef-marked-operadic-model-structures. Higher Algebra, Definition B.1.1, Proposition B.1.6, Proposition B.1.9 specialized to a second pattern trivial on a point, and Proposition B.1.14, printed pp.1470-1482. For triviality of restriction along a P-anodyne map, use the proof of B.1.14 together with B.1.9, as in Example B.2.2. The point-pattern identification is Example B.0.21 and the definition of cocartesian edges over a point. Auxiliary lemma used by the explicit lifting-recognition proof of lem-coef-pattern-anodyne-lifting-products. The seven steps justify the auxiliary fixed-diagram relative-limit recognition used in the pattern-anodyne lifting argument; the finite-coefficient adjunction route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General quasicategory functor-category closure and mapping-space invariance under functor equivalences, used in steps 2 and 5. No lemma of this unit states those general foundational facts; this does not replace any step of its adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-248f351d1",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-248f351d1 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-left-cone-restriction-cocartesian and all 16 cited node statements in full. I checked Kerodon 02XB, 02VW and 01UF online, since they are not archived. The proof follows the route of Kerodon 02XB (Prop. 7.1.6.13). Step 1: the pushout-join clause applies literally with A=Λ_i^n, B=Δ^n and the mono ∅→K. Steps 2–3: cocartesian structure and preservation come from the new node plus its base change; R is inner by the Mathlib pushout-product leaf, and q is only assumed inner. Step 4: the fixed-boundary join-cone equivalence and the dualized join-slice/cocone comparison both send s to the same fat cone. Step 5: two-out-of-three plus equivalence invariance through the mapping-composition node. Step 6: every hypothesis of the dual cartesian-initial boundary lift is met, the opposite/pinch comparison is valid, and the final-vertex boundary criterion is used for n>0 only. Step 7: the strict pullback of mapping spaces, the Kan fibration from the inner-mapping-fiber node and the path-pullback comparison match exactly the square in def-coef-infinity-relative-cone. The new node equals Kerodon 02VW(1) plus 01UF; I tested it on K=∅, K=Δ^0 (target evaluation on arrows) and B=∅. A whole-DAG search found no duplicate, and the node does not restate the item. Its searches are recorded, it carries a statement only, and its blueprint ancestry is correct. There is no cycle, proof_deps equals the union of the step uses, the item statement is unchanged and not weakened, and no SGA source is used. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a generic foundation. No fixes were made. Details are in review.md."
  }
 }
