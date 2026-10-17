@@ -288,5 +288,43 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-2bd7c7a94 (reviewer sub-agent of L); spot-checked: Read in full: the item (all 10 steps), both new nodes, and the full statement of every cited node (operadic-algebra-presentability axioms (i)-(iii), cocartesian-mapping-criterion, spaces-homotopy-fiber-detection, infinity-mapping-composition, def-cbc-enhanced-diagrams-cones, def-coef-complete-algebroid). Source: I fetched Gepner–Haugseng arXiv:1312.3178 and read Def. 2.4.1(iii), Def. 3.1.13, the Appendix E paragraph before E.0.1 (source changes lie over identities and are equivalences when M[1] is a space), and the proof of E.0.1 ('as M[0] is a space ... M_triv,act/C ≃ ∏ M_triv,act/C_i'). The item's hypotheses (Q[0] and Q[1] spaces) match the source and nothing is weakened. The item is not a target, so no base-change morphism is involved. Checks: step 2 base identity ρ_iα=β_iσ_i; step 3 k=0 forces n=0, giving a contractible path space; steps 4-5 endpoint and junction choices are contractible homotopy fibres; step 6 uses the block-incidence equivalence; step 7 uses L(b)≃hofib_b(R); step 8 applies fibre detection layer by layer with u=r=p, q=v=id; step 9 shows R is an equivalence, empty case allowed; step 10 covers grading and naturality. Block-incidence is GH 2.4.1(iii) with the edge terms replaced by cocartesian precomposition. It is true and not a restatement; I checked η'β_iσ_i=η_jα, k=1, blocks (0,2,0) and Q=Δ^op. Lifting-fiber gives a layered description of hofib_b(R). It is true, has no contractibility claim and does not depend on the item, so it is not circular. I rg-searched the DAG and read 6 nearby nodes: no duplicates, no cycle, all citations in unit sk-prop-sf-biduality-general, no tool_uses, no SGA. Fix: lem-coef-operadic-block-incidence-lifting uses holim and homotopy fibre but cited def-cbc-enhanced-diagrams-cones only transitively; I added it to the statement and stmt_deps in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c30b30ec7",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement, dependencies, declarations, edge cases, docstrings, report sections, and immutable per-file scompile evidence all checked; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicOperationSegalProduct",
+  "declaration": "SSet.Enhanced.Nonsymmetric.operadic_operation_segal_product",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.IsActive",
+   "SSet.Enhanced.Nonsymmetric.operationAmbient",
+   "SSet.Enhanced.Nonsymmetric.operationAmbientSource",
+   "SSet.Enhanced.Nonsymmetric.constantOrdinalSubcomplex",
+   "SSet.Enhanced.Nonsymmetric.operationSubcomplex",
+   "SSet.Enhanced.Nonsymmetric.operations",
+   "SSet.Enhanced.Nonsymmetric.operationArrows",
+   "SSet.Enhanced.Nonsymmetric.operationSource",
+   "SSet.Enhanced.Nonsymmetric.ordinalLength",
+   "SSet.Enhanced.Nonsymmetric.inputArity",
+   "SSet.Enhanced.Nonsymmetric.inertTarget",
+   "SSet.Enhanced.Nonsymmetric.IsOutputProjectionFamily",
+   "SSet.Enhanced.Nonsymmetric.IsInputBlock",
+   "SSet.Enhanced.Nonsymmetric.IsOperationRestriction",
+   "SSet.Enhanced.Nonsymmetric.IsOperationMap",
+   "SSet.Enhanced.Nonsymmetric.OperationSegalConclusions",
+   "SSet.Enhanced.Nonsymmetric.operadic_operation_segal_product"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicOperationSegalProduct.lean",
+  "statement": "theorem operadic_operation_segal_product {Q : SSet.{w}} (q : Q ⟶ monoidalSimplexBase.{w}) (hsmall : Presentability.IsSmall.{u} Q) (hq : IsGeneralizedOperad q) (hzero : KanComplex (fiber q (monoidalBaseVertex 0))) (hone : KanComplex (fiber q (monoidalBaseVertex 1))) (k : ℕ) (C : Q _⦋0⦌) (hC : q.app _ C = monoidalBaseVertex k) (e : Fin k → (Δ[1] ⟶ Q)) (he : IsOutputProjectionFamily q k C e) : ∃ R : operations q C ⟶ ∏ᶜ (fun i : Fin k ↦ operations q (inertTarget (e i))), OperationSegalConclusions.{u, w} q k C e R",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The operation groupoid and the canonical restriction belong to the notion introduced in this node. Uses the recorded generalized-operad axioms and coherent comma, core, equivalence and natural-transformation constructions. Restriction is normalized on entire coherent square families with source side the cocartesian projection to the exact input block. Includes spaces, empty outputs, all arities, edgewise arity constancy, and naturality under inert-preserving functors. All helper data are explicit; only the named main theorem is postponed."
  }
 }
