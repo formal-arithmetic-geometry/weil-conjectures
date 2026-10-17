@@ -304,7 +304,7 @@ dimension at most `a` form a directed system under finite unions, this says that
 map `colim_Z N_Z ⟶ N` is an isomorphism, which is the blueprint's formulation. -/
 theorem exists_covering_supportedIn {K : Type u} [Field K] (b : B ⟶ Spec (.of K))
     [LocallyOfFiniteType b] [QuasiCompact b] (a : ℕ)
-    (N : Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1}) (hN : N.IsTorsion)
+    (N : Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1}) (_hN : N.IsTorsion)
     (hstalk : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ B),
       (a : Cardinal.{u}) < Scheme.residueFieldTrdeg b (s (IsLocalRing.closedPoint Ω)) →
         IsZero ((s)^*[AddCommGrpCat.{u + 1}].obj N)) :

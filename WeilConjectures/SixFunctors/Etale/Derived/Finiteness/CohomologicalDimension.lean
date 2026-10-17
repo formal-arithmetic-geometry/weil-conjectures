@@ -169,7 +169,7 @@ this is not needed, proper base change holding for all torsion coefficients. -/
 theorem isZero_homology_rightDerivedLowerShriek_singleFunctor_of_two_mul_lt {k : Type u}
     [Field k] {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
-    [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX) (d : ℕ)
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (_hf : f ≫ aY = aX) (d : ℕ)
     (hd : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       topologicalKrullDim (pullback f s : Scheme.{u}) ≤ (d : WithBot ℕ∞))
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (hq : (2 * d : ℤ) < q) :

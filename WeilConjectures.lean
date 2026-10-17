@@ -624,6 +624,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.FunctionFieldUnits
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericModel
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericModelAssembly
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericModelAux
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericModelField
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericModelSpread
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericRestriction
 public import WeilConjectures.AlgebraicGeometry.Curve.GmCohomology
 public import WeilConjectures.AlgebraicGeometry.Curve.GmHigherVanishing
