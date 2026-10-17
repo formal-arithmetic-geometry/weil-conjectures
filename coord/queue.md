@@ -1,6 +1,6 @@
 # Work queue
 
-8 items; claim with `tools/claim.py next <group> [--stage N]`.
+9 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (8)
+## Stage 3: modules to prove (9)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -20,6 +20,7 @@
 | `Sheaf.CategoryTheory.DerivedPerfectSmallClass` | 6 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitCore` | 14 | 1 | proof |
+| `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 14 | 1 | proof |
 
 ## Stage 3: waiting for statements of proof dependencies (3)
 
