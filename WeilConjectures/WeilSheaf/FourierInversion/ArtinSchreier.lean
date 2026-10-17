@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.FourierInversion.Defs
+public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 
 /-!
 # Fourier inversion: Artin–Schreier sheaves of functions
@@ -42,8 +42,17 @@ theorem nonempty_iso_artinSchreierOf_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a :
 /-- Blueprint `lem-fd-as-characters` (`ℒ_{ψ,0}` is the constant sheaf, the Artin–Schreier
 cover of the zero function being the trivial torsor): `ℒ_{ψ,0} ≅ ℚ̄_ℓ`. -/
 theorem nonempty_iso_artinSchreierOf_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
-    Nonempty (artinSchreierOf ψ (0 : Γ(X, ⊤)) ≅ WeilSheaf.adicConstant k₀ l X) :=
-  sorry
+    Nonempty (artinSchreierOf ψ (0 : Γ(X, ⊤)) ≅ WeilSheaf.adicConstant k₀ l X) := by
+  letI := Fintype.ofFinite k₀
+  -- the zero function factors through the Artin–Schreier map, `0 ^ q - 0 = 0`
+  have h : affineLine.homOfSection k₀ (0 : Γ(X, ⊤)) ≫ affineLine.smul k₀ 1 =
+      affineLine.homOfSection k₀ (0 : Γ(X, ⊤)) ≫ affineLine.artinSchreierMap k₀ := by
+    rw [affineLine.homOfSection_comp_smul, affineLine.homOfSection_comp_artinSchreierMap,
+      mul_zero, zero_pow Fintype.card_ne_zero, sub_zero]
+  exact ⟨(WeilSheaf.upperStarCompIso _ _).symm.app _ ≪≫ (WeilSheaf.upperStarCongrIso h).app _ ≪≫
+    (WeilSheaf.upperStarCompIso _ _).app _ ≪≫
+    (WeilSheaf.upperStar _).mapIso (WeilSheaf.upperStarArtinSchreierMapImageIso ψ) ≪≫
+    WeilSheaf.upperStarAdicConstantIso _⟩
 
 /-- Pullback of Artin–Schreier sheaves of functions: `φ^* ℒ_{ψ,a} ≅ ℒ_{ψ,φ^* a}`, from
 `φ ≫ a = φ^* a` as morphisms to `𝔸¹` and the composition of pullbacks of Weil sheaves. -/
@@ -52,7 +61,8 @@ theorem nonempty_iso_upperStar_artinSchreierOf {X Y : Scheme.{u}}
     [φ.IsOver (Spec (CommRingCat.of k₀))] (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     Nonempty ((WeilSheaf.upperStar φ).obj (artinSchreierOf ψ a) ≅
       artinSchreierOf ψ (φ.appTop a)) :=
-  sorry
+  ⟨(WeilSheaf.upperStarCompIso φ (affineLine.homOfSection k₀ a)).symm.app _ ≪≫
+    (WeilSheaf.upperStarCongrIso (affineLine.comp_homOfSection φ a)).app _⟩
 
 
 end AlgebraicGeometry
