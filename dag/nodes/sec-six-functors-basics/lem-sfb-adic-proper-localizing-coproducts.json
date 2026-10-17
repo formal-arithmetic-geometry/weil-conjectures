@@ -1,0 +1,160 @@
+{
+ "id": "lem-sfb-adic-proper-localizing-coproducts",
+ "kind": "statement",
+ "title": "Proper adic direct image preserves coproducts on the hull",
+ "statement": "Fix a universe u, a prime $\\ell$, and a field $k$ in universe u of positive\ncharacteristic different from $\\ell$. Let $Z,Y$ be separated finite-type $k$-schemes\nand let $g:Z\\to Y$ be a proper $k$-morphism [sk-def-sfb-dc-setting]. Let $\\Lambda$ be\na commutative condensed ring with its specified multiplication and a certificate\nof one of the three adic coefficient families [def-sfb-adic-coefficient-certificate].\nFor $T=Z,Y$, put $\\Lambda_T=p_T^*\\Lambda$, let $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$\nbe the ordinary unbounded module-object derived category\n[sk-def-sfb-module-derived-pushpull], let $\\mathcal B_T$ be its bounded constructible\nfull subcategory [sk-def-sfb-bounded-constructible], and let\n$\\mathcal L_T=\\operatorname{Loc}(\\mathcal B_T)$ be the full localizing hull, using\nambient coproducts indexed in universe u+1\n[def-sfb-bounded-constructible-localizing-closure].\nLet $i_Z:\\mathcal L_Z\\to D_Z$ be the full inclusion and let\n$Rg_*:D_Z\\to D_Y$ be the actual total right derived module-object pushforward.\nFor every type I in universe u+1, the functor $Rg_*\\circ i_Z$ preserves\nI-indexed coproducts. Preservation refers to the canonical comparison induced by\nthe coprojections, including I empty. No claim is made about arbitrary objects\nof $D_Z$.",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sfb-adic-coefficient-certificate",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-bounded-constructible",
+  "def-sfb-bounded-constructible-localizing-closure"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
+  "place": "Parts (1)-(2): coproduct preservation of the identity-compactification functor."
+ },
+ "proof": [
+  {
+   "text": "The standing schemes and locally closed strata are Noetherian. Identify the local finite presentations in Lean with the adic local models: for E and Qlbar use the finite-free local-triviality theorems; for OE use the local torsion charts and the two-term locally free resolution. The comparison concerns ordinary module sheaves, not completed coproducts.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "lem-weil-pbc-integral-lfp-local-torsion-charts",
+    "lem-weil-pbc-integral-lfp-locally-free-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For E and Qlbar, use equality Dctf=Dbc. The class Dic of complexes with ind-constructible cohomology contains Dbc and is triangulated, replete and closed under ambient sums, so the intersection universal property puts Loc(Dbc) inside Dic. Use the finite-subextension Qlbar coefficient object.",
+   "uses": [
+    "def-sfb-adic-coefficient-certificate",
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-ambient-ind-derived-sums",
+    "def-sfb-bounded-constructible-localizing-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In these rational cases apply the proper unbounded-window sum theorem to families in Dic. Its comparison is the comparison defined by the coprojections, and restriction of the family gives the asserted preservation on Loc(Dbc).",
+   "uses": [
+    "sk-lem-proper-unbounded-window-ii"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For OE, choose a uniform finite upper bound d on the dimensions of geometric fibres. The integral direct-sum theorem gives the bound [0,2d+1] for ind-constructible sheaves, reduces each cohomology degree to the corresponding finite truncation window, and gives preservation on Loc(Dbc). Use only its direct-sum clauses, not any assertion that the bounded generators are compact.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "det-prop-int-compactness-direct-sums"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In every certificate case the resulting image cocone is the colimit cocone because its canonical comparison is invertible. For the empty family this is the zero-to-zero comparison of an exact functor.",
+   "uses": [
+    "def-sfb-adic-coefficient-certificate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "lem-weil-pbc-integral-lfp-local-torsion-charts",
+  "lem-weil-pbc-integral-lfp-locally-free-resolution",
+  "def-sfb-adic-coefficient-certificate",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-ambient-ind-derived-sums",
+  "def-sfb-bounded-constructible-localizing-closure",
+  "sk-lem-proper-unbounded-window-ii",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "det-prop-int-compactness-direct-sums"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
+  "place": "Parts (1)-(2): coproduct preservation of the identity-compactification functor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a proper morphism of schemes derived pushforward of ell-adic sheaves preserves direct sums on the localizing category generated by bounded constructible objects",
+   "results": "8 hits: TopCat.Sheaf.pushforward; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; SheafOfModules.pushforward; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map; AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+   "date": "2026-10-17",
+   "verdict": "No exact match: underived structure-sheaf pushforward functors only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated",
+   "results": "12 hits: CategoryTheory.Functor.IsTriangulated.instId; CategoryTheory.Functor.IsTriangulated; CategoryTheory.Functor.IsTriangulated.instAdditive; CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair; CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms; CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor; CategoryTheory.Functor.isTriangulated_of_iso; CategoryTheory.Functor.isTriangulated_iff_of_iso",
+   "date": "2026-10-17",
+   "verdict": "Component match: exact functors preserve finite sums, not the required arbitrary sums."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|upperShriek|exceptional|well.generated|Brown representability",
+   "results": "0 hits: ; searched Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "No match in Mathlib/CategoryTheory."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek",
+  "date": "2026-10-17",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Parts (1)-(2): coproduct preservation of the identity-compactification functor.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicProperLocalizingCoproducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicProperLocalizingCoproducts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_localizingLowerStar_preservesCoproducts",
+  "statement": "theorem ellAdic_localizingLowerStar_preservesCoproducts (I : Type (u + 1)) :\n    PreservesColimitsOfShape (Discrete I)\n      ((boundedConstructibleLocalizingClosure Λ Z.left).ι ⋙ R((g.left)_*⟦Λ⟧))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261017T120638-L-306766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261017T120638-L-306766",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

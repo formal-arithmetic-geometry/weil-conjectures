@@ -1,0 +1,143 @@
+{
+ "id": "def-sfb-bounded-constructible-localizing-closure",
+ "kind": "definition",
+ "title": "The bounded constructible localizing hull as an intersection",
+ "statement": "Let u be a universe, let $\\Lambda$ be a condensed ring with a specified\nmonoid-object structure [sk-def-sfb-ring-object], and let $X$ be a scheme in universe u.\nWrite $\\Lambda_X=p_X^*\\Lambda$ for the pulled-back ring object\n[sk-def-sfb-pulled-back-coefficients] and $D_X=D(\\operatorname{Mod}_{\\Lambda_X})$\nfor its ordinary unbounded derived category [sk-def-sfb-module-objects;\ndef-weil-abstract-derived-category]. Let $\\mathcal B_X$ be the object property of\nbounded complexes with constructible cohomology [sk-def-sfb-bounded-constructible].\nDefine $\\operatorname{Loc}(\\mathcal B_X)$ to be the intersection of all object\nproperties of $D_X$ which contain $\\mathcal B_X$, are invariant under isomorphism,\nare triangulated, and are closed under ambient coproducts indexed by types in\nuniverse u+1. The associated category is the full subcategory on this property.\nThere is no derived-completeness condition. For the certified adic coefficient\nfamilies this is the bounded-constructible specialization of\n[sk-def-localizing-closure].",
+ "stmt_deps": [
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-localizing-closure"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+  "place": "Part (1): the two localizing hulls used to restrict proper direct image."
+ },
+ "proof": [
+  {
+   "text": "Form the stated intersection. Its minimality, repleteness, zero, shift, triangle and coproduct closure follow by checking each property in every member of the intersection.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The ambient module category is Grothendieck abelian, so its derived category has the required coproducts. Closure under those coproducts gives coproducts in the full subcategory.",
+   "uses": [
+    "lem-grothendieck-derived-has-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply countable-coproduct idempotent completeness inside the hull. For an ambient retraction of a hull object, split its idempotent inside the hull and identify the two splitting objects by the explicit composites of their splitting maps. Repleteness gives retract closure.",
+   "uses": [
+    "lem-countable-coproducts-idempotent-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-grothendieck-derived-has-coproducts",
+  "lem-countable-coproducts-idempotent-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+  "place": "Part (1): the two localizing hulls used to restrict proper direct image."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The intersection of replete triangulated subcategories closed under arbitrary coproducts is the smallest localizing subcategory containing a given family of objects",
+   "results": "8 hits: CategoryTheory.Triangulated.Subcategory; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'",
+   "date": "2026-10-17",
+   "verdict": "No exact localizing-hull definition; triangulated subcategory classes are available."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape",
+   "results": "12 hits: CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape; CategoryTheory.ObjectProperty.instIsStableUnderRetractsOfIsClosedUnderColimitsOfShapeWalkingParallelPair; CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeTop; CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeBotOfNonempty; CategoryTheory.ObjectProperty.ColimitOfShape.prop; CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence; CategoryTheory.ObjectProperty.isClosedUnderColimitsOfShape_iff_of_equivalence; CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeOppositeOpOfIsClosedUnderLimitsOfShape",
+   "date": "2026-10-17",
+   "verdict": "Component match only: closure under a shape of colimits."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizing|localizingClosure|isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top",
+   "results": "12 hits: Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/Probability/Process/LocalProperty.lean",
+   "date": "2026-10-17",
+   "verdict": "No localizing-hull definition; PartialAdjoint and unrelated localizations returned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek",
+  "date": "2026-10-17",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Part (1): the two localizing hulls used to restrict proper direct image.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleLocalizingClosure.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLocalizingClosure",
+  "statement": "def boundedConstructibleLocalizingClosure :\n    ObjectProperty (DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-17",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_le_localizingClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLocalizingClosure_le",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isClosedUnderIsomorphisms_boundedConstructibleLocalizingClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.containsZero_boundedConstructibleLocalizingClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isStableUnderShift_boundedConstructibleLocalizingClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isTriangulated_boundedConstructibleLocalizingClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isClosedUnderCoproducts_boundedConstructibleLocalizingClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.hasCoproducts_boundedConstructibleLocalizingClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIdempotentComplete_boundedConstructibleLocalizingClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isStableUnderRetracts_boundedConstructibleLocalizingClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLocalizingClosure_map_of_preservesOnClosure",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleToLocalizing"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261017T120638-L-306766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261017T120638-L-306766",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

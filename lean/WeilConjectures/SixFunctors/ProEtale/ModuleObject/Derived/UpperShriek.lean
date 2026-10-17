@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
+import Sheaf.AlgebraicGeometry.EllAdicLocalizingBrownRepresentability
+import Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructible
 
 /-!
 
@@ -187,13 +188,43 @@ variable {Z Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (g : Z ⟶ Y) [IsProper g.left]
 
+/-- Restrict the localizing adjunction along the full bounded constructible inclusions. -/
+private theorem isLeftAdjoint_boundedConstructibleLowerStar_of_ellAdic
+    [IsFinitenessCoefficient ℓ Λ]
+    (hΛ : IsEllAdicCoefficient ℓ Λ inferInstance) :
+    (boundedConstructibleLowerStar Λ ℓ g).IsLeftAdjoint := by
+  let F := ellAdicLocalizingLowerStar Λ ℓ g hΛ
+  have : F.IsLeftAdjoint := ellAdic_isLeftAdjoint_localizingLowerStar Λ ℓ g hΛ
+  let G := F.rightAdjoint
+  let adj : F ⊣ G := Adjunction.ofIsLeftAdjoint F
+  let Gbc : Dᵇc(Y.left)⟦Λ⟧ ⥤ Dᵇc(Z.left)⟦Λ⟧ :=
+    (boundedConstructible (condensedRingObj Λ Z.left)).lift
+      (boundedConstructibleToLocalizing Λ Y.left ⋙ G ⋙
+        (boundedConstructibleLocalizingClosure Λ Z.left).ι)
+      (fun K ↦ ellAdic_localizing_rightAdjoint_obj_boundedConstructible Λ ℓ g hΛ G adj K)
+  let iZ := boundedConstructibleToLocalizing Λ Z.left
+  let iY := boundedConstructibleToLocalizing Λ Y.left
+  have hiZ : iZ.FullyFaithful :=
+    ObjectProperty.fullyFaithfulιOfLE (boundedConstructible_le_localizingClosure Λ Z.left)
+  have hiY : iY.FullyFaithful :=
+    ObjectProperty.fullyFaithfulιOfLE (boundedConstructible_le_localizingClosure Λ Y.left)
+  have eF : iZ ⋙ F ≅ boundedConstructibleLowerStar Λ ℓ g ⋙ iY :=
+    NatIso.ofComponents (fun K ↦ Iso.refl _) (fun a ↦ by
+      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl)
+  have eG : iY ⋙ G ≅ Gbc ⋙ iZ :=
+    NatIso.ofComponents (fun K ↦ Iso.refl _) (fun a ↦ by
+      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl)
+  exact (Adjunction.restrictFullyFaithful adj hiZ hiY eF eG).isLeftAdjoint
+
 /-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E` of `ℚ_ℓ`, the derived
 pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
 adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
-    (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g).IsLeftAdjoint :=
-  sorry
+    (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g).IsLeftAdjoint := by
+  exact isLeftAdjoint_boundedConstructibleLowerStar_of_ellAdic _ ℓ g (.continuous E)
 
 /-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
 pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded constructible `𝒪_E`-sheaves is a
@@ -201,15 +232,15 @@ left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
-    (boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ g).IsLeftAdjoint :=
-  sorry
+    (boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ g).IsLeftAdjoint := by
+  exact isLeftAdjoint_boundedConstructibleLowerStar_of_ellAdic _ ℓ g (.integral E)
 
 /-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward
 `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded constructible `ℚ̄_ℓ`-sheaves is a left adjoint;
 its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj :
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).IsLeftAdjoint :=
-  sorry
+    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).IsLeftAdjoint := by
+  exact isLeftAdjoint_boundedConstructibleLowerStar_of_ellAdic _ ℓ g .algebraicClosure
 
 end EllAdic
 

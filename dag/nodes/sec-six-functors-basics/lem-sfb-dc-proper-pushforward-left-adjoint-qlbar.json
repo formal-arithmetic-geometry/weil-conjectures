@@ -19,22 +19,22 @@
  ],
  "proof": [
   {
-   "text": "Select the qlbar coefficient certificate [def-sfb-adic-coefficient-certificate]. The source and target are the standing schemes and g is proper, so [lem-sfb-adic-proper-localizing-pushforward] supplies the actual coproduct-preserving localizing restriction F_g.",
+   "text": "Select the coefficient certificate algebraicClosure. Use the canonical actual pushforward F_g on the two localizing hulls.",
    "uses": [
     "def-sfb-adic-coefficient-certificate",
     "lem-sfb-adic-proper-localizing-pushforward"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply [lem-sfb-adic-localizing-brown-representability] at each target object. A representing object of every Hom functor assembles by its universal property into a right adjoint: maps are the transposes of postcomposition. In Lean this is Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top. This constructs an adjunction on the localizing categories, rather than on the entire ambient derived categories.",
+   "text": "The proved Brown assembly theorem gives F_g.IsLeftAdjoint. Choose its right adjoint G and the adjunction Adjunction.ofIsLeftAdjoint F_g; this choice is governed by the adjunction universal property.",
    "uses": [
     "lem-sfb-adic-localizing-brown-representability"
    ],
    "elementary": true
   },
   {
-   "text": "By [lem-sfb-adic-localizing-exceptional-constructible], the selected right adjoint carries bounded constructible target objects into bounded constructible source objects. Lift its composite with the bounded target inclusion to the bounded source category. The left and right functor squares with the full inclusions commute by construction. Restrict the adjunction along those fully faithful inclusions (Adjunction.restrictFullyFaithful). The resulting left functor is the existing boundedConstructibleLowerStar, with unchanged statement; its Hom equivalences are the Hom equivalences of the localizing adjunction on the same ambient objects.",
+   "text": "The geometric restriction input sends each bounded target object under G to a bounded source object. Define Gbc by the ObjectProperty.lift of the bounded target inclusion, G, and the ambient source inclusion. The two functor squares commute with identity components because all object and morphism maps are the same ambient ones. The canonical bounded inclusions into the hulls are fully faithful. Apply Adjunction.restrictFullyFaithful to obtain an adjunction with the existing boundedConstructibleLowerStar as its left functor. Its IsLeftAdjoint property is the unchanged original conclusion.",
    "uses": [
     "lem-sfb-adic-localizing-exceptional-constructible",
     "def-sfb-bounded-constructible-localizing-closure"
@@ -52,7 +52,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-  "place": "parts (1)-(2), implemented by source/target lifts and fully faithful adjunction restriction"
+  "place": "Parts (1)-(2), with the well-generated Brown input and the fully faithful restriction implemented in Lean."
  },
  "mathlib_searches": [
   {
@@ -204,9 +204,9 @@
   "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261017T021601-L-694163",
+  "landing": "20261017T120638-L-306766",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
