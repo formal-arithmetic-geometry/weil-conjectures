@@ -226,5 +226,28 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-833331f9d (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is unchanged and true, and the delivery has 5 steps and no new nodes. Step 1: the mapping set C[Δ^r](i,j) is the nerve of P_{i,j}, the subsets of {i..j} containing i and j; this is literally the defining paragraph in the statement of lem-coef-coherent-nerve-comparison, and it agrees with HTT Def 1.1.5.1 and Rem 1.1.5.2 as I know them. There is no local HTT copy, so the page numbers rest on the report's WANTED. Its least element is m={i,j}. Step 2: I checked the explicit homotopy H on N(P)×Δ^1. The output is a chain for every case of ε(k),ε(k+1) (the case 1,0 cannot occur). It is natural in every monotone α, and its endpoints are the constant map at m and the identity. Step 3: every hypothesis of lem-cbc-simplicial-homotopy-equivalence-weak holds with u=p, v=s, B=Δ^0 (either endpoint order is allowed, no Kan condition), so p is a weak equivalence, which is weak contractibility by def-cbc. Step 4: cancellation from p_Y f=p_X on π_0 and on π_n at the basepoint |f|x is correct and elementary. Step 5: postcomposition with the edge r-1→r is the nerve of S↦S∪{r-1,r}, so step 4 applies; this is exactly the clause the parent lem-cbc-mapping-simplex-universal-equivalence uses for p(a)≤r-1. Small cases tested: r=0; i=j; r=1; r=2,i=0 (point→Δ^1); r=3,i=0 (edge→square). Against A–F: no cycle (the item's 499-node dependency closure does not contain it). My grep of the DAG and the main-20261015 blueprint found no node stating this result, though pinched-cube nodes repeat the definition of C[Δ^m]. No SGA source; not a target node. Accepted tool use: lem-coef-coherent-nerve-comparison (unit sk-prop-sf-biduality-general, which sk-prop-sf-cbc does not cite), used only for its defining clause of C[Δ^n]; it is already a statement dependency and was correctly declared in split_report.tool_uses. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StandardSimplexMappingContractible",
+  "declaration": "CategoryTheory.SimplicialThickening.standard_simplex_mapping_contractible",
+  "declarations": [
+   "CategoryTheory.SimplicialThickening.standardSimplexLastEdge",
+   "CategoryTheory.SimplicialThickening.standard_simplex_mapping_contractible"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/StandardSimplexMappingContractible.lean",
+  "statement": "theorem standard_simplex_mapping_contractible : (∀ (r : ℕ) (i j : Fin (r + 1)), i ≤ j → sHom (mk (ULift.up.{u} i)) (mk (ULift.up.{u} j)) = nerve (Path (ULift.up.{u} i) (ULift.up.{u} j)) ∧ SSet.Enhanced.IsContractible (sHom (mk (ULift.up.{u} i)) (mk (ULift.up.{u} j)))) ∧ (∀ (r s : ℕ) (i j : Fin (r + 1)) (k l : Fin (s + 1)), i ≤ j → k ≤ l → ∀ f : sHom (mk (ULift.up.{u} i)) (mk (ULift.up.{u} j)) ⟶ sHom (mk (ULift.up.{u} k)) (mk (ULift.up.{u} l)), SSet.Enhanced.IsWeakHomotopyEquivalence f) ∧ (∀ (r : ℕ) (i : Fin (r + 1)), SSet.Enhanced.IsWeakHomotopyEquivalence (eHomWhiskerLeft SSet (mk (ULift.up.{u} i.castSucc)) (standardSimplexLastEdge.{u} r)))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-6679fbf86"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6679fbf86",
+  "group": "NB",
+  "result": "fix",
+  "note": "Mathematics and verbatim Lean signature verified; original and corrected modules compile cleanly. Complete fixes replace the placeholder second reading, repair source references, and add the module declaration list. Findings and evidence are in review.md; branch head unchanged."
  }
 }
