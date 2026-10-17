@@ -206,5 +206,28 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-1e3668495 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 8 stmt_deps and 7 proof_deps, the proofs of thm-sf-ambient-adjoint-class (and its main-20261015 update) and lem-sf-class-compact-support-comparison, and the main-20261015 thm-sf-ambient-adjoint-class.proof.md Hom chain. Coefficients are ordinary constant R=O_E/ϖ^n modules on the small étale and pro-étale sites in every cited node; no condensed coefficients are substituted. c=(id,i) is a valid compactification, and J=S_Z I U_P is exactly R_c / Rf_n^! for it. δ is b_{i,L} of the canonical-mate lemma with the right direction. Step 1: the witness (IH,α_H) is correct, since I(η_H) iso puts IU_PS_PH in D^+. Step 2: the chain matches the bijection that def-weil-exceptional-inverse-image's statement pins down (compact-support comparison, comparison adjunction, β, full faithfulness). At identity-open, a^{-1}=δ_L. The id_!=id normalization is not cited, but it is elementary and matches the statement's notation. Steps 3 and 4: I recomputed them; unit naturality, target and source naturality, and injectivity give the general adjunct formula and (*). Small cases: Z=P gives the triangle identity ε∘S(η)=1; Z=∅ and H=0 are trivial. The hypothesis IH∈D^+ is redundant but harmless; nothing is weakened. No duplicate: lem-coef-fully-faithful-counit-descent, lem-sf-etale-proetale-exceptional-transport, lem-pur-finite-coefficient-adjoint-comparisons and prop-sf-closed-immersion-unit state different things. No cycle; the only citer is lem-coef-finite-dualizing step 12, which uses (*) verbatim. All five declared tool_uses are accepted as black-box inputs: lem-exc-closed-ambient, thm-weil-pbc-site-comparison, thm-sf-ambient-adjoint-class, lem-sf-class-compact-support-comparison, lem-weil-pbc-comparison-direct-image-canonical-mate. No fixes; review.md written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SiteClosedCounitTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.siteClosedCounitTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.siteClosedCounitTransport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SiteClosedCounitTransport.lean",
+  "statement": "theorem siteClosedCounitTransport (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) [Finite (Padic.coefficientExtensionRing l E n)] {Z P : Scheme.{u}} (aZ : Z ⟶ Spec (.of D.k)) (aP : P ⟶ Spec (.of D.k)) [IsSeparated aZ] [LocallyOfFiniteType aZ] [QuasiCompact aZ] [IsSeparated aP] [LocallyOfFiniteType aP] [QuasiCompact aP] (i : Z ⟶ P) [IsClosedImmersion i] (_hi : i ≫ aP = aZ) : let Λ := Padic.coefficientExtensionRing l E n let A := ModuleCat.{u + 1} Λ let c₀ := Compactification.ofIsProper i let S := fun T : Scheme.{u} ↦ (comparisonUpperStar A T).mapDerivedCategory let U := fun T : Scheme.{u} ↦ (comparisonLowerStar A T).rightDerivedFunctor let F := Etale.rightDerivedLowerShriekOfCompactification A c₀ let Fpro := rightDerivedLowerShriekOfCompactification A c₀ ∀ (G : _root_.DerivedCategory (Sheaf P.smallEtaleTopology A) ⥤ _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (adj : F ⊣ G) (C : ComparisonClassAdjunction Λ i c₀ G adj (DerivedCategory.plusEtaleOrigin A Z) _root_.DerivedCategory.TStructure.t.plus) (H : DerivedCategory.Plus (Sheaf P.smallEtaleTopology A)) (hIH : _root_.DerivedCategory.TStructure.t.plus (G.obj H.obj)), let J := U P ⋙ G ⋙ S Z let α := (S Z).map (G.map ((derivedComparisonAdjunction A P).unit.app H.obj)) let δ := fun L : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ↦ ((compactSupportSiteComparison Λ c₀).app L).symm IsIso α ∧ ∃ hJ : DerivedCategory.plusEtaleOrigin A Z (J.obj ((S P).obj H.obj)), let E := (C.homEquiv c₀ _ hJ _ (DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj H.property).plus).symm (𝟙 (J.obj ((S P).obj H.obj))) (δ ⟨G.obj H.obj, hIH⟩).hom ≫ Fpro.map α ≫ E = (S P).map (adj.counit.app H.obj) ∧ ∀ (L : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A)) (f : F.obj L.obj ⟶ H.obj), C.homEquiv c₀ _ (DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj L.property) _ (DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj H.property).plus ((δ L).inv ≫ (S P).map f) = (S Z).map (adj.homEquiv L.obj H.obj f) ≫ α",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of F1-F4: the relative counit is the inverse image of the identity under the specified ComparisonClassAdjunction at Compactification.ofIsProper i; its homEquiv_normalized uses the canonical counit-mate compact-support comparison. The identity-open compactification is retained explicitly, so the adjunction and direct-image mate appear in these canonically identified coordinates. Separated finite-type k-scheme hypotheses and the k-morphism equation are explicit. No duplicate exceptional functor is defined.",
+  "fixed_by": "NT-stage2-Codex-ee25470e6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ee25470e6",
+  "group": "Q97",
+  "result": "fix",
+  "note": "Substantive audit passed. Fixed the item’s private import of CanonicalCompactSupportSiteComparison; the complete replacement under fixes/lean/Sheaf/AlgebraicGeometry compiles cleanly with scompile.py."
  }
 }
