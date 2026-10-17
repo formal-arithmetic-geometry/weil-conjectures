@@ -153,16 +153,18 @@ theorem GaloisCover.stalk_normalization_trait_section_localized_root_chart {S C 
     (ρ ϖ₀) hf m e he α hα
   dsimp only at hlocal
   obtain ⟨k, R₀, hR₀, f₀, hf₀, P, hP, β, hβ, hflat, hJ⟩ := hlocal
-  letI : IsDiscreteValuationRing (S.presheaf.stalk s) := hdvr
-  obtain ⟨A, hAd, hAdvr, δ, -, -, hAmax, -, -, ε, -, g, hg, hgπ⟩ :=
-    GaloisCover.trait_divisor_chart_section_generic_factor (G := G) c σ hσ j sη hsj Z U jU PA ψ
-      hjU hψ s x hx R φ y ρ ϖ₀ hφ hy hϖ₀ hρ m e α hα k
+  have : IsDiscreteValuationRing (S.presheaf.stalk s) := hdvr
+  have hgen := GaloisCover.trait_divisor_chart_section_generic_factor (G := G) c σ hσ j sη hsj Z U
+    jU PA ψ hjU hψ s
+  dsimp only at hgen
+  have hgen2 := hgen x hx R φ y ρ ϖ₀ hφ hy hϖ₀ hρ m e α hα k
+  obtain ⟨A, hAd, hAdvr, δ, _, _, hAmax, _, _, ε, _, g, hg, hgπ⟩ := hgen2
   have hϖ : algebraMap A (FractionRing A) (δ ϖ₀) ≠ 0 := by
     refine (map_ne_zero_iff _ (IsFractionRing.injective A (FractionRing A))).mpr fun h0 ↦ ?_
-    exact IsDiscreteValuationRing.not_a_field' (R := A) (by rw [hAmax, h0, Ideal.span_zero])
+    exact IsDiscreteValuationRing.not_a_field' (R := A)
+      (by rw [hAmax, h0, Ideal.span_singleton_eq_bot])
   exact ⟨R₀, hR₀, f₀, e k, he k, hf₀, P, hP, β, hβ, hflat, hJ, A, hAd, hAdvr, FractionRing A,
     inferInstance, inferInstance, inferInstance, δ ϖ₀, Units.mk0 _ hϖ,
     Spec.map (CommRingCat.ofHom ε), hAmax, rfl, g, hg, hgπ⟩
-
 
 end AlgebraicGeometry.Scheme
