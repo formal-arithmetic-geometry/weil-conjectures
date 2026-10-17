@@ -1,0 +1,135 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
+public import WeilConjectures.SixFunctors.Etale.SupportCohomologyHom
+
+/-!
+# The restriction triangle inside a closed support
+
+Let `b : B ⟶ T` and `c : C ⟶ T` be closed immersions, `v : V ⟶ T` the open complement of `C`,
+`d : D ⟶ T` a closed immersion onto `B ∩ C` and `b' : B ×_T V ⟶ V` the base change of `b`. For
+a complex `F` of étale sheaves on `T` there is a distinguished triangle
+
+`RΓ_{B ∩ C}(T, F) ⟶ RΓ_B(T, F) ⟶ RΓ_{B ∩ V}(V, v^* F) ⟶ RΓ_{B ∩ C}(T, F)[1]`.
+
+## The argument
+
+The derived sections with support are computed by the exceptional formalism:
+`RΓ_B(T, -) ≅ RΓ(T, Rb_! Rb^! -)` (`AlgebraicGeometry.Etale.rightDerivedSectionsWithSupportIso`),
+because `RΓ_B(T, -) ≅ RΓ(B, Rb^!_{sh} -)` for the derived functor of the sheaf functor `b^!`
+(`AlgebraicGeometry.Etale.rightDerivedClosedUpperShriekCompIso`), which is right adjoint to
+`b_* = Rb_!`, hence is `Rb^!`.
+
+Put `E = Rb_! Rb^! F`. The supported localization triangle of `E` for the pair `(C, V)` is
+
+`Rc_! Rc^! E ⟶ E ⟶ Rv_* Lv^* E ⟶ (Rc_! Rc^! E)[1]`,
+
+and `Rc_! Rc^! E ≅ Rd_! Rd^! F` over `E`: both are supported on `D` and represent maps to `F`
+out of objects supported on `D`. Applying `RΓ(T, -)`, the last term is
+`RΓ(V, Lv^* E) ≅ RΓ(V, Rb'_! Rb'^! Lv^* F) ≅ RΓ_{B ∩ V}(V, v^* F)`, as restriction to an open
+commutes with supports (`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_isOpenImmersion`).
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.rightDerivedSectionsWithSupportIso`
+- `AlgebraicGeometry.Etale.supportRestrictionTriangle_distinguished`
+-/
+
+@[expose] public section
+
+universe u' u
+
+open CategoryTheory Category Limits Pretriangulated
+
+open scoped CategoryTheory.Functor
+
+namespace AlgebraicGeometry
+
+open Scheme
+
+namespace Etale
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+section UpperShriek
+
+variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
+
+/-- The derived pushforward `Ri_!` along a closed immersion is the functor induced by the exact
+functor `i_*`. -/
+noncomputable def mapDerivedCategoryLowerStarIsoRightDerivedLowerShriek :
+    ((i)_*[A]).mapDerivedCategory ≅ R(i)_![A] :=
+  ((i)_*[A]).rightDerivedFunctorIsoMapDerivedCategory.symm ≪≫
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar A i).symm
+
+/-- `i_* ⊣ Ri^!_{sh}`: the derived adjunction of `i_* ⊣ i^!`. -/
+noncomputable def mapDerivedCategoryLowerStarClosedUpperShriekAdjunction :
+    ((i)_*[A]).mapDerivedCategory ⊣
+      (closedUpperShriek A i.openComplement.ι i).rightDerivedFunctor :=
+  (lowerStarClosedUpperShriekAdjunction A i.openComplement.ι i
+    i.range_eq_compl_range_openComplement_ι).mapDerivedCategoryRightDerivedAdjunction
+
+/-- For a closed immersion `i`, the derived lower shriek `Ri_!` is a left adjoint, with right
+adjoint the derived functor of the sheaf functor `i^!` of sections supported on `Z`. -/
+instance isLeftAdjoint_rightDerivedLowerShriek_of_isClosedImmersion :
+    (R(i)_![A]).IsLeftAdjoint :=
+  ((mapDerivedCategoryLowerStarClosedUpperShriekAdjunction A i).ofNatIsoLeft
+    (mapDerivedCategoryLowerStarIsoRightDerivedLowerShriek A i)).isLeftAdjoint
+
+/-- For a closed immersion `i`, the exceptional inverse image `Ri^!` is the right derived functor
+of the sheaf functor `i^!` of sections supported on `Z`, both being right adjoint to
+`Ri_! ≅ i_*`. -/
+noncomputable def rightDerivedClosedUpperShriekIso :
+    (closedUpperShriek A i.openComplement.ι i).rightDerivedFunctor ≅ R(i)^![A] :=
+  ((mapDerivedCategoryLowerStarClosedUpperShriekAdjunction A i).ofNatIsoLeft
+    (mapDerivedCategoryLowerStarIsoRightDerivedLowerShriek A i)).rightAdjointUniq
+      (rightDerivedUpperShriekAdjunction A i)
+
+/-- `RΓ_Z(X, K) ≅ RΓ(X, Ri_! Ri^! K)`: the derived sections with support in `Z` are the derived
+global sections of the supported term of the localization triangle. -/
+noncomputable def rightDerivedSectionsWithSupportIso :
+    rightDerivedSectionsWithSupport A i ≅
+      R(i)^![A] ⋙ R(i)_![A] ⋙ rightDerivedGlobalSections A X :=
+  (rightDerivedClosedUpperShriekCompIso A i).symm ≪≫
+    Functor.isoWhiskerRight (rightDerivedClosedUpperShriekIso A i) _ ≪≫
+    Functor.isoWhiskerLeft _ ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A i).symm ≪≫
+      Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar A i).symm _)
+
+end UpperShriek
+
+section Triangle
+
+variable {T B C D : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T) (d : D ⟶ T)
+  [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d]
+  (hd : Set.range d.base = Set.range b.base ∩ Set.range c.base)
+
+/-- `Ri_! Ri^! L` vanishes on any open immersion whose range misses the range of `i`. -/
+lemma isZero_leftDerivedUpperStar_supported_of_subset {W Z : Scheme.{u}} (i : Z ⟶ T)
+    [IsClosedImmersion i] (h : W ⟶ T) [IsOpenImmersion h]
+    (hh : Disjoint (Set.range i.base) (Set.range h.base))
+    (L : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
+    IsZero ((L((h)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L))) :=
+  isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i h hh h subset_rfl _
+
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
+/-- A subset of the range of a closed immersion is disjoint from its open complement. -/
+lemma disjoint_range_openComplement_of_subset {Z : Scheme.{u}} {i : Z ⟶ T} [IsClosedImmersion i]
+    {S : Set T} (h : S ⊆ Set.range i.base) :
+    Disjoint S (Set.range i.openComplement.ι.base) := by
+  rw [← compl_compl (Set.range i.openComplement.ι.base), ← i.range_eq_compl_range_openComplement_ι]
+  exact Set.disjoint_compl_right_iff_subset.mpr h
+
+end Triangle
+
+end Etale
+
+end AlgebraicGeometry

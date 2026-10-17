@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -81,6 +82,7 @@ lemma isIso_mapDerivedCategoryNatTrans_app (τ : F ⟶ G) (K : DerivedCategory C
   have : IsIso (τ.app ((K'.sc n).homology)) :=
     (NatTrans.isIso_app_iff_of_iso τ ((DerivedCategory.homologyFunctor C n).mapIso e.symm ≪≫
       (DerivedCategory.homologyFunctorFactors C n).app K')).1 (h n)
+  rw [ShortComplex.quasiIso_iff]
   change IsIso (ShortComplex.homologyMap ((K'.sc n).mapNatTrans τ))
   rw [ShortComplex.homologyMap_mapNatTrans]
   infer_instance
@@ -97,6 +99,7 @@ limits: short exact sequences of vector spaces split. -/
 lemma preservesFiniteLimits_of_moduleCat : PreservesFiniteLimits F := by
   rw [Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono]
   intro S hS
+  have : Module.Projective K S.X₃ := Module.Projective.of_free
   let s := (hS.splittingOfProjective).map F
   exact ⟨s.exact, s.shortExact.mono_f⟩
 
@@ -105,6 +108,7 @@ colimits: short exact sequences of vector spaces split. -/
 lemma preservesFiniteColimits_of_moduleCat : PreservesFiniteColimits F := by
   rw [Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi]
   intro S hS
+  have : Module.Projective K S.X₃ := Module.Projective.of_free
   let s := (hS.splittingOfProjective).map F
   exact ⟨s.exact, s.shortExact.epi_g⟩
 

@@ -383,6 +383,7 @@ noncomputable def localizationTriangleLowerStarObj₃Iso :
   (rightDerivedLowerStarComp _ j p).app _
 
 include hij in
+include hij in
 /-- In the direct image along `p` of the localization triangle of `(i, j)`, if `Hⁿ(Rp_* L)` and
 `Hⁿ⁺¹(Rp_* L)` vanish, the boundary is an isomorphism
 `Hⁿ(R(j ≫ p)_* Lj^* L) ≅ Hⁿ⁺¹(R(i ≫ p)_* Ri^! L)`. -/

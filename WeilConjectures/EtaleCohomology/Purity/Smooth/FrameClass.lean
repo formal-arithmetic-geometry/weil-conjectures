@@ -53,6 +53,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {X Z Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X) [IsClosedImmersion i]
   [IsClosedImmersion i'] [(R(i)_![A]).IsLeftAdjoint] [(R(i')_![A]).IsLeftAdjoint]
 
+omit [(R(i')_![A]).IsLeftAdjoint] in
 /-- `Ri_! Ri^! L` is supported on the range of `i`, hence on the range of any closed immersion
 `i'` with the same range. -/
 lemma isZero_leftDerivedUpperStar_openComplement_obj_of_range_eq

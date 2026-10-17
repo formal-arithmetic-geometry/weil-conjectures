@@ -84,4 +84,161 @@ def IsRevRegular : {n : ℕ} → (Fin n → R) → Prop
       ∀ x : R, a 0 * x ∈ Ideal.span (Set.range (Fin.tail a)) →
         x ∈ Ideal.span (Set.range (Fin.tail a))
 
+section QuasiRegular
+
+/-- The reduction step: if every homogeneous polynomial of degree `d` vanishing at `a` has its
+coefficients in `I = (a)`, so does every homogeneous `F` of degree `d` with `F(a) ∈ I^{d+1}`: write
+`F(a) = ∑ aᵢ Gᵢ(a)` with `Gᵢ` homogeneous of degree `d`, and pass to `F - ∑ aᵢ Gᵢ`. -/
+lemma coeff_mem_of_eval_mem_pow_succ_of_eval_eq_zero {n : ℕ} {a : Fin n → R} {d : ℕ}
+    (hZ : ∀ F : MvPolynomial (Fin n) R, F.IsHomogeneous d → eval a F = 0 →
+      ∀ m, F.coeff m ∈ Ideal.span (Set.range a))
+    {F : MvPolynomial (Fin n) R} (hF : F.IsHomogeneous d)
+    (hev : eval a F ∈ Ideal.span (Set.range a) ^ (d + 1)) (m : Fin n →₀ ℕ) :
+    F.coeff m ∈ Ideal.span (Set.range a) := by
+  set I := Ideal.span (Set.range a)
+  have key : ∀ x ∈ I ^ d * I, ∃ G : Fin n → MvPolynomial (Fin n) R,
+      (∀ i, (G i).IsHomogeneous d) ∧ x = ∑ i, a i * eval a (G i) := by
+    intro x hx
+    refine Submodule.mul_induction_on hx (fun y hy z hz ↦ ?_) fun y z ⟨G, hG, hy⟩ ⟨H, hH, hz⟩ ↦
+      ⟨G + H, fun i ↦ (hG i).add (hH i), by
+        simp [hy, hz, mul_add, Finset.sum_add_distrib]⟩
+    obtain ⟨H, hH, rfl⟩ := exists_isHomogeneous_eval_eq hy
+    obtain ⟨c, rfl⟩ := (Ideal.mem_span_range_iff_exists_fun).1 hz
+    exact ⟨fun i ↦ C (c i) * H, fun i ↦ hH.C_mul _, by
+      simp [Finset.mul_sum, mul_comm, mul_left_comm]⟩
+  obtain ⟨G, hG, hFG⟩ := key _ (by rwa [← pow_succ])
+  have hF' : (F - ∑ i, C (a i) * G i).IsHomogeneous d :=
+    hF.sub (IsHomogeneous.sum _ _ _ fun i _ ↦ (hG i).C_mul _)
+  have h0 : eval a (F - ∑ i, C (a i) * G i) = 0 := by simp [hFG]
+  have h1 := hZ _ hF' h0 m
+  have h2 : (∑ i, C (a i) * G i).coeff m ∈ I := by
+    rw [coeff_sum]
+    exact Ideal.sum_mem _ fun i _ ↦ by
+      rw [coeff_C_mul]; exact Ideal.mul_mem_right _ _ (Ideal.subset_span ⟨i, rfl⟩)
+  have h3 := I.add_mem h1 h2
+  rwa [coeff_sub, sub_add_cancel] at h3
+
+/-- **Regular sequences are quasi-regular.** Let `a₀, …, a_{n-1}` be regular, read from the end
+(`MvPolynomial.IsRevRegular`), and `I = (a₀, …, a_{n-1})`. If `F` is homogeneous of degree `d` and
+`F(a) ∈ I^{d+1}`, then every coefficient of `F` lies in `I`. (Matsumura, Theorem 16.2.) -/
+theorem coeff_mem_of_eval_mem_pow_succ : ∀ {n : ℕ} {a : Fin n → R}, IsRevRegular a →
+    ∀ (d : ℕ) {F : MvPolynomial (Fin n) R}, F.IsHomogeneous d →
+      eval a F ∈ Ideal.span (Set.range a) ^ (d + 1) →
+        ∀ m, F.coeff m ∈ Ideal.span (Set.range a)
+  | 0, a, _, d, F, _, hev, m => by
+    have hI : Ideal.span (Set.range a) = ⊥ := by simp [Set.range_eq_empty]
+    rw [hI] at hev ⊢
+    rw [Ideal.bot_pow (Nat.succ_ne_zero d)] at hev
+    have hm : m = 0 := Subsingleton.elim _ _
+    subst hm
+    have : eval a F = F.coeff 0 := by
+      conv_lhs => rw [F.eq_C_of_isEmpty]
+      exact eval_C _
+    rwa [this] at hev
+  | n + 1, a, ha, d, F, hF, hev, m => by
+    set a' : Fin n → R := Fin.tail a with ha'
+    set I := Ideal.span (Set.range a)
+    set J := Ideal.span (Set.range a')
+    have hrange : Set.range a = insert (a 0) (Set.range a') := by
+      ext x
+      constructor
+      · rintro ⟨i, rfl⟩
+        obtain rfl | ⟨j, rfl⟩ := Fin.eq_zero_or_eq_succ i
+        · exact Set.mem_insert _ _
+        · exact Set.mem_insert_of_mem _ ⟨j, rfl⟩
+      · rintro (rfl | ⟨j, rfl⟩)
+        exacts [⟨0, rfl⟩, ⟨j.succ, rfl⟩]
+    have hIJ : I = Ideal.span {a 0} ⊔ J := by
+      simp only [I, J, hrange, Ideal.span_insert]
+    have hJI : J ≤ I := hIJ ▸ le_sup_right
+    have ha0I : a 0 ∈ I := Ideal.subset_span ⟨0, rfl⟩
+    -- `a₀` is a nonzerodivisor modulo every power of `J`
+    have hreg : ∀ d x, a 0 * x ∈ J ^ d → x ∈ J ^ d := by
+      intro d
+      induction d with
+      | zero => intro x _; simp
+      | succ d ihd =>
+        intro x hx
+        have hxd := ihd x (Ideal.pow_le_pow_right (Nat.le_succ d) hx)
+        obtain ⟨G, hG, rfl⟩ := exists_isHomogeneous_eval_eq (a := a') hxd
+        have hc := coeff_mem_of_eval_mem_pow_succ ha.1 d (hG.C_mul (a 0)) (by simpa using hx)
+        have hcoeff : ∀ m, G.coeff m ∈ J := fun m ↦ ha.2 _ (by simpa [coeff_C_mul] using hc m)
+        simpa [pow_succ'] using hG.eval_mem_mul_pow (a := a') hcoeff
+    -- the vanishing statement in degree `0`
+    have hZ0 : ∀ F : MvPolynomial (Fin (n + 1)) R, F.IsHomogeneous 0 → eval a F = 0 →
+        ∀ m, F.coeff m ∈ I := by
+      intro F hF h0 m
+      have hC : F = C (F.coeff 0) :=
+        totalDegree_eq_zero_iff_eq_C.1 (Nat.le_zero.1 hF.totalDegree_le)
+      rw [hC, eval_C] at h0
+      rw [hC, coeff_C]
+      split_ifs <;> simp [h0]
+    -- the vanishing statement in degree `d + 1`, from quasi-regularity in degree `d`
+    have hZ : ∀ d, (∀ F : MvPolynomial (Fin (n + 1)) R, F.IsHomogeneous d →
+        eval a F ∈ I ^ (d + 1) → ∀ m, F.coeff m ∈ I) →
+        ∀ F : MvPolynomial (Fin (n + 1)) R, F.IsHomogeneous (d + 1) → eval a F = 0 →
+          ∀ m, F.coeff m ∈ I := by
+      intro d ihS F hF h0 m
+      set P := finSuccEquiv R n F with hP
+      set G := (finSuccEquiv R n).symm P.divX
+      have hPG : finSuccEquiv R n G = P.divX := AlgEquiv.apply_symm_apply _ _
+      have hQ0 : (P.coeff 0).IsHomogeneous (d + 1) :=
+        hF.finSuccEquiv_coeff_isHomogeneous 0 (d + 1) (zero_add _)
+      have hcoeffG (k : ℕ) (t : Fin n →₀ ℕ) :
+          G.coeff (Finsupp.cons k t) = F.coeff (Finsupp.cons (k + 1) t) := by
+        rw [← finSuccEquiv_coeff_coeff, hPG, Polynomial.coeff_divX, finSuccEquiv_coeff_coeff]
+      have hG : G.IsHomogeneous d := by
+        intro m' hm'
+        have hm'' := hm'
+        rw [← Finsupp.cons_tail m', hcoeffG] at hm''
+        have h1 := hF hm''
+        have h2 : (weight 1) m' = (weight 1) (Finsupp.cons (m' 0) (Finsupp.tail m')) := by
+          rw [Finsupp.cons_tail]
+        simp only [weight_apply, Pi.one_apply, smul_eq_mul, mul_one, Finsupp.sum_cons] at h1 h2 ⊢
+        omega
+      have hev : eval a F = a 0 * eval a G + eval a' (P.coeff 0) := by
+        have e1 := eval_eq_eval_mv_eval' a' (a 0) F
+        have e2 := eval_eq_eval_mv_eval' a' (a 0) G
+        rw [ha', Fin.cons_self_tail] at e1 e2
+        rw [e1, e2, hPG]
+        conv_lhs => rw [← Polynomial.X_mul_divX_add P]
+        simp
+      have hQ0J : eval a' (P.coeff 0) ∈ J ^ (d + 1) := hQ0.eval_mem_pow
+      have hGJ : eval a G ∈ J ^ (d + 1) := by
+        refine hreg (d + 1) _ ?_
+        have : a 0 * eval a G = -eval a' (P.coeff 0) := by
+          rw [hev] at h0; linear_combination h0
+        rw [this]
+        exact neg_mem hQ0J
+      have hGI : ∀ m, G.coeff m ∈ I := ihS G hG (Ideal.pow_right_mono hJI (d + 1) hGJ)
+      obtain ⟨H, hH, hHG⟩ := exists_isHomogeneous_eval_eq (a := a') hGJ
+      have hQ : ∀ t, (P.coeff 0 + C (a 0) * H).coeff t ∈ J := by
+        refine coeff_mem_of_eval_mem_pow_succ ha.1 (d + 1) (hQ0.add (hH.C_mul _)) ?_
+        have : eval a' (P.coeff 0 + C (a 0) * H) = 0 := by
+          rw [hev] at h0
+          simp only [map_add, map_mul, eval_C, hHG]
+          linear_combination h0
+        rw [this]
+        exact zero_mem _
+      have hQ0I (t : Fin n →₀ ℕ) : (P.coeff 0).coeff t ∈ I := by
+        have h1 := hJI (hQ t)
+        have h2 : a 0 * H.coeff t ∈ I := Ideal.mul_mem_right _ _ ha0I
+        rw [coeff_add, coeff_C_mul] at h1
+        simpa using I.sub_mem h1 h2
+      rw [← Finsupp.cons_tail m]
+      cases h : m 0 with
+      | zero => rw [← finSuccEquiv_coeff_coeff]; exact hQ0I _
+      | succ k => rw [← hcoeffG]; exact hGI _
+    -- quasi-regularity in all degrees
+    have hS : ∀ d, ∀ F : MvPolynomial (Fin (n + 1)) R, F.IsHomogeneous d →
+        eval a F ∈ I ^ (d + 1) → ∀ m, F.coeff m ∈ I := by
+      intro d
+      induction d with
+      | zero => exact fun F hF hev ↦ coeff_mem_of_eval_mem_pow_succ_of_eval_eq_zero hZ0 hF hev
+      | succ d ihS => exact fun F hF hev ↦
+          coeff_mem_of_eval_mem_pow_succ_of_eval_eq_zero (hZ d ihS) hF hev
+    exact hS d F hF hev m
+
+end QuasiRegular
+
 end MvPolynomial
