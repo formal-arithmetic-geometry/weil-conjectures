@@ -142,7 +142,7 @@ end GeometricPoint
 
 /-- The scalar tower `k₀ → k̄ → k̄((t))`, stated with the scalar actions coming from the algebra
 structures (the instance found by unification is slow to compare with them). -/
-instance LaurentSeries.isScalarTower_algebraicClosure :
+instance _root_.LaurentSeries.isScalarTower_algebraicClosure :
     @IsScalarTower k₀ (AlgebraicClosure k₀) (LaurentSeries (AlgebraicClosure k₀)) Algebra.toSMul
       Algebra.toSMul Algebra.toSMul :=
   .of_algebraMap_eq fun _ ↦ by
@@ -150,7 +150,7 @@ instance LaurentSeries.isScalarTower_algebraicClosure :
 
 /-- The scalar tower `k₀ → k̄ → k̄⟦t⟧`, stated with the scalar actions coming from the algebra
 structures. -/
-instance PowerSeries.isScalarTower_algebraicClosure :
+instance _root_.PowerSeries.isScalarTower_algebraicClosure :
     @IsScalarTower k₀ (AlgebraicClosure k₀) (PowerSeries (AlgebraicClosure k₀)) Algebra.toSMul
       Algebra.toSMul Algebra.toSMul :=
   .of_algebraMap_eq fun _ ↦ by simp [PowerSeries.algebraMap_apply]
