@@ -291,8 +291,8 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal {ϖ : Λ}
     (hϖ : ϖ ∈ nonZeroDivisors Λ) [IsAdicComplete (Ideal.span {ϖ}) Λ]
     {N N₁ : _root_.DerivedCategory
       (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hN : (_root_.DerivedCategory.smulInvertible (Spec (.of k)).smallEtaleTopology ϖ).rightOrthogonal
-      N)
+    (hN : (_root_.DerivedCategory.smulInvertible (Spec (.of k)).smallEtaleTopology
+      ϖ).rightOrthogonal N)
     {g : N ⟶ N₁} {h : N₁ ⟶ N⟦(1 : ℤ)⟧} (hT : Triangle.mk (ϖ • 𝟙 N) g h ∈ distTriang _)
     (hN₁ : ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj N₁).IsPerfect) :
     ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj N).IsPerfect := by
@@ -327,8 +327,8 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
     {a b : ℤ} (hKt : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
       ((reductionModIdeal Λ X I).obj K))
     (N : _root_.DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hN : (_root_.DerivedCategory.smulInvertible (Spec (.of k)).smallEtaleTopology ϖ).rightOrthogonal
-      N)
+    (hN : (_root_.DerivedCategory.smulInvertible (Spec (.of k)).smallEtaleTopology
+      ϖ).rightOrthogonal N)
     (φ : (R(aX)_![ModuleCat.{u + 1} Λ]).obj K ⟶ N)
     (hφ : ∀ (Y : _root_.DerivedCategory
         (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) (g : N ⟶ Y)
@@ -372,6 +372,7 @@ variable [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
   [HasCompactification aX]
 
+omit [IsDomain Λ] [IsPrincipalIdealRing Λ] [IsSepClosed k] in
 /-- For `I = 0`, the ring `Λ ≅ Λ/I` is finite of exponent invertible in `k`, so the integral
 stage is the finite stage. -/
 lemma finite_and_hasInvertibleExponent_of_eq_bot (h : I = ⊥) :

@@ -33,14 +33,35 @@ factors of the reduced pairing with the reductions of the two factors of `β_K`,
 `AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerStar` place every object of
 `β_K` at `Λ = 𝒪_E` in the adic category `D_comp(−, 𝒪_E)`.
 
+The two other nodes of the subsection are proved in their own files:
+`prop-pod-integral-degreewise-form` in
+`WeilConjectures.EtaleCohomology.PoincareDuality.IntegralDegreewise` (the universal coefficient
+sequences `AlgebraicGeometry.Etale.shortExact_compactlySupportedReductionSequence`,
+`AlgebraicGeometry.Etale.shortExact_cohomologyReductionSequence`,
+`AlgebraicGeometry.Etale.integralDegreewise_adjoint` and the degreewise duality
+`AlgebraicGeometry.Etale.integralDegreewiseDuality`), and
+`thm-pod-adic-reconstruction-and-scalar-extension` in
+`WeilConjectures.EtaleCohomology.PoincareDuality.AdicReconstruction` (the adjoint
+`AlgebraicGeometry.Etale.poincareAdjoint`, its reductions and
+`AlgebraicGeometry.Etale.adicReconstruction_scalarExtension`). The third node,
+`thm-pod-qbar-coefficient-pairing`, is treated separately.
+
 ## Not stated
 
-- *Change of coefficient ring.* The reduction `A_{E,n} → A_{E,m}` as a change of the ring of
-  coefficients, and the comparison of the pairing over `Λ/J` with the reduction of the pairing
-  over `Λ`, need a restriction-of-scalars functor between `D(X_ét, Λ)` and `D(X_ét, Λ/J)`,
-  which the repository does not have; `reductionModIdeal` stays inside `D(X_ét, Λ)`.
-- *The `E` and `ℚ̄_ℓ` stages.* `AlgebraicGeometry.DerivedCategoryDerivedCompleteRational`
-  carries no `Rf_!`, and the colimit over finite `E/ℚ_ℓ` does not exist in the repository.
+- *Change of coefficient ring.* The finite stage `A_{E,n}` is read inside `D(X_ét, Λ)` through
+  `reductionModIdeal`, and the `A_n`-dual of `RΓ_c(X, K_n)` as `RHom_Λ(RΓ_c(X, K), A_n)`. The
+  pairing built over the ring `A_{E,n}` itself, in `D(X_ét, A_{E,n})`, is not compared with the
+  reduction of the pairing over `Λ`: this needs the compatibility of `Rf_!`, `Rf_*`, the dual
+  and the tensor product with restriction of scalars `derivedRestrictScalars`, which the
+  repository does not have.
+- *Identification of the transported pairing.* Over `E` and over a finite extension `L ⊇ E`
+  the images of the `𝒪_E`-duality isomorphism are isomorphisms
+  (`AlgebraicGeometry.Etale.adicReconstruction_scalarExtension`); that they are the dualities
+  of the base-changed complexes needs the compatibility of the six operations with derived base
+  change, which the repository does not have. The transport of the degree-indexing maps, of
+  the relative form and of the Frobenius squares is not stated.
+- *The `ℚ̄_ℓ` stage.* The colimit over finite `E/ℚ_ℓ` is treated with
+  `thm-pod-qbar-coefficient-pairing`.
 - *The trace isomorphism and the Frobenius statements.* They are built from the pairing and
   the smooth trace, and transport with them; the Frobenius statements belong to
   `sk-thm-frobenius`.
