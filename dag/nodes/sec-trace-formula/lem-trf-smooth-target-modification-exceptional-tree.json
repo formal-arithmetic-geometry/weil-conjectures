@@ -26,9 +26,121 @@
   "def-weil-proper-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-valuation-modification-proper-completion] to $f$ and $x$. Its source-reducedness hypothesis follows directly from flatness: apply [lem-sc-flat-invertible-sections-torsion-free] on every affine open of $Z$ with the invertible module $\\mathcal O$. Multiplication by each nonzero element of $V$ is injective, so its coordinate ring injects into its generic localization; the generic fibre is smooth and hence reduced, so a nilpotent in the chart is zero. All geometric fibres of $Z/T$ are nodal by hypothesis, so the required neighbourhood is semistable. We obtain $R=V_{\\mathfrak p}$, $S=\\operatorname{Spec}R$, proper flat finitely presented integral curves $\\bar Z,\\bar W$ with geometrically reduced fibres, and a proper modification $\\bar f:\\bar Z\\to\\bar W$. The target is normal, their generic fibres are geometrically integral and identified, and the original map is unchanged over an open $U$ containing $x$. Over the given $\\Omega$, put $D=\\bar Z_\\Omega$, $C=\\bar W_\\Omega$ and let $y\\in C$ be the single induced point. It is smooth, the map is an isomorphism off $y$, and $(\\bar f_\\Omega^{-1}(y))_{\\mathrm{red}}$ is the original $B$, with an open ambient neighbourhood unchanged. This reduction asserts properness only for the auxiliary completions.",
+   "uses": [
+    "lem-trf-valuation-modification-proper-completion",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.2, local-to-proper reduction using Lemma 4.4.1; flatness check for reducedness expanded."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-proper-normal-geometric-connectedness] first to $\\bar f$. Its target $\\bar W$ is normal integral and its source is integral, with its generic point mapping to that of $\\bar W$. Its generic fibre over the function field of $\\bar W$ is a single point with that field, because $\\bar f$ is an isomorphism on dense opens. Thus its generic global functions are that field. The conclusion makes $\\bar f$ geometrically connected, so $B$ is connected and nonempty; reduction does not change its space. Apply the same node to $\\bar Z\\to S$. The localizations of a valuation ring are integrally closed: if $a\\notin R$ is integral over $R$, then $a^{-1}\\in R$, and its monic equation, multiplied by $a^{-(n-1)}$, expresses $a$ as an element of $R$, a contradiction. Thus $S$ is normal integral. The integral source dominates $S$, and its proper geometrically integral generic fibre has global functions $K$ by [lem-pc-h0-proper-variety](2). Consequently $D$ is connected. Its surjective image $C$ is connected as well.",
+   "uses": [
+    "lem-trf-proper-normal-geometric-connectedness",
+    "lem-pc-h0-proper-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0AY8, label lemma-geometrically-connected-fibres-towards-normal; Temkin Lemma 4.4.2, connectedness paragraph."
+   }
+  },
+  {
+   "text": "The curves $D,C$ and the geometric fibre of the original $Z/T$ are of finite type over $\\Omega$, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The reduced closed subset $B$ has dimension one by the hypothesis and the completion identification. It is a union of finitely many whole curve components together with possibly finitely many isolated points: a closed proper subset of an irreducible Noetherian curve has dimension zero. Points not on its one-dimensional components would be isolated connected components of $B$, which connectedness excludes. Thus $B$ is pure of dimension one. Near it the ambient curve is nodal. At a node its reduced subcurve consists of one branch (smooth) or both branches (nodal), as seen from $\\Omega[[u,v]]/(uv)$; elsewhere it is smooth. Therefore $B$ is nodal. Properness of $D$ follows from [lem-pc-proper-base-change], and its closed subcurve $B$ is proper by [lem-weil-pbc-proper-fp-permanence](a),(c). Let $B_1,\\ldots,B_v$ be its components, $e$ its internal nodes (including self-nodes), and $r$ its boundary points in $D$. These sets are finite. Since $C$ is a curve and $D\\setminus B\\cong C\\setminus\\{y\\}$, the complement is nonempty. Connectedness of $D$ therefore gives $r\\geq1$: if the two unions of components did not meet, they would partition $D$ into two nonempty closed and open subsets.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, boundary of a reduced subcurve; local nodal branch and connectedness arguments expanded."
+   }
+  },
+  {
+   "text": "For each of $p:\\bar Z\\to S$ and $q:\\bar W\\to S$, apply [lem-pc-rf-perfect-base-change] to its structure sheaf. It is of finite presentation as a module over itself and flat over $S$, and both structure morphisms are proper finitely presented. Thus $Rp_*\\mathcal O_{\\bar Z}$ and $Rq_*\\mathcal O_{\\bar W}$ are perfect and compute structure-sheaf cohomology after arbitrary base change. By [def-pc-perfect-complex], around the closed point of the local scheme $S$ each is represented by a bounded complex of finite projective $R$-modules; an open containing that closed point is all of $S$. By [lem-trf-projective-over-local-free] the terms are free, and finite generation makes their ranks finite. For any field over $S$, tensoring such a complex gives terms of those same ranks. The identities $\\dim H^i=\\dim P^i-\\operatorname{rank}d^i-\\operatorname{rank}d^{i-1}$ telescope, so the Euler characteristic of its cohomology is the alternating sum of the integer ranks of its terms, independently of the field. Hence $\\chi(D)=\\chi(\\bar Z_\\eta)$ and $\\chi(C)=\\chi(\\bar W_\\eta)$, even for the given algebraically closed residue-field extension $\\Omega$. Their identified generic fibres give $\\chi(D)=\\chi(C)$. This uses integer dimensions, with no reduction modulo the residue characteristic.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-perfect-complex",
+    "lem-trf-projective-over-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0B91 (lemma-flat-proper-perfect-direct-image-general), 08CM/08EB (perfect complexes), and 0B9T (lemma-chi-locally-constant-geometric); explicit finite-complex calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-contraction-euler-defect] to $D\\to C$, the smooth point $y$, and $B$. Properness, reducedness, the one-dimensional connected fibre, the isomorphism off it and the nodal neighbourhood have all been checked. Its normalizations $\\widetilde B_i$ are smooth proper connected curves; put $g_i=\\dim_\\Omega H^1(\\widetilde B_i,\\mathcal O)\\geq0$. The formula and Step 4 give $0=v-e-r-\\sum_i g_i$, or equivalently\n$$0=(r-1)+(e-v+1)+\\sum_i g_i.$$",
+   "uses": [
+    "lem-trf-nodal-contraction-euler-defect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, Lemma B.1 and Corollary B.2 numerical calculation, smooth-point case."
+   }
+  },
+  {
+   "text": "The dual multigraph of $B$ is connected, since a partition of its vertices without an edge across it would partition the connected curve $B$ into disjoint unions of components. Starting at one vertex, repeatedly adjoin an edge to a vertex not yet reached; connectedness supplies such an edge until all $v$ vertices are reached. The selected $v-1$ edges form a spanning tree, so $e-v+1\\geq0$. Step 3 gives $r-1\\geq0$, and all $g_i$ are nonnegative integers. The equality in Step 5 forces $r=1$, $e=v-1$, and every $g_i=0$. Every edge is therefore in that spanning tree. In particular there are no cycles, multiple-edge cycles, or self-loops.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, Corollary B.2; elementary finite connected multigraph and nonnegative-integer calculation."
+   }
+  },
+  {
+   "text": "By [lem-trf-genus-zero-smooth-proper-line], each $\\widetilde B_i$ is $\\mathbf P^1_\\Omega$. A self-node on $B_i$ would be a self-loop of the dual graph, which Step 6 excludes. Apply the branch statements of [lem-trf-nodal-normalization-adjunction] to $B_i$ in the ORIGINAL geometric fibre $Z_s$, which is nodal everywhere by hypothesis; the completion need be nodal only near $B$. This node says that the only singularities of the reduced component are self-nodes, and that its normalization is an isomorphism on its smooth locus. There are no self-nodes, so the normalization is an isomorphism everywhere, and $B_i\\cong\\mathbf P^1_\\Omega$.",
+   "uses": [
+    "lem-trf-genus-zero-smooth-proper-line",
+    "lem-trf-nodal-normalization-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6U, proposition-projective-line; nodal branch description as in Temkin Appendix B."
+   }
+  },
+  {
+   "text": "At a point of $B$, membership in the boundary is detected on the preserved open neighbourhood: at a node it means that one branch is a component of $B$ and the other is not; a smooth point of the ambient curve is not a boundary point. The identifications over $U$ identify these branches in $D$ with those in the original $Z_s$. Thus the original set $B\\cap\\overline{Z_s\\setminus B}$ has exactly $r=1$ point, in particular at most two. Together with Steps 2, 3, 6 and 7 this gives all the asserted nonemptiness, connectedness, nodality, finiteness, projective-line components and tree clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, definition of boundary; locality on the preserved open neighbourhood."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-proper-base-change",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-trf-genus-zero-smooth-proper-line",
+  "lem-trf-nodal-contraction-euler-defect",
+  "lem-trf-nodal-normalization-adjunction",
+  "lem-trf-projective-over-local-free",
+  "lem-trf-proper-normal-geometric-connectedness",
+  "lem-trf-valuation-modification-proper-completion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemma 4.4.2 and Appendix B, numerical route read in the author PDF online; archival copy WANTED. Euler constancy expanded using the existing proper-flat perfect base-change theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +176,38 @@
    "results": "[leanfinder] OK 8 hit(s).  Returned names: AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Projective.baseChange_nonsingular, AlgebraicGeometry.instIsPreimmersionFiberι, WeierstrassCurve.Projective.map_nonsingular, WeierstrassCurve.Projective.comp_equiv_comp, WeierstrassCurve.minimal. The returned fibre definitions, smooth base-change assertions and Weierstrass minimal-model results do not state this exceptional-fibre tree theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional fibres of semistable modifications over smooth points of relative curves are rational trees",
+   "results": "[leanfinder] OK 8 hit(s).  Returned names/files: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, WeierstrassCurve.IsGoodReduction, AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver, AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField. No hit proves all clauses of this relative exceptional-fibre theorem; the smoothness, fibre, normalization and elliptic-curve statements are different results.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semistable curve modification of a smooth curve has exceptional fibres which are trees of projective lines",
+   "results": "[leansearch] OK 8 hit(s).  Returned names/files: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, LibraryNote.Design_choices_about_smooth_algebraic_structures, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsEtale, WeierstrassCurve.IsGoodReduction, AlgebraicGeometry.FormallyUnramified.casesOn. No hit proves all clauses of this relative exceptional-fibre theorem; the smoothness, fibre, normalization and elliptic-curve statements are different results.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"GeometricallyConnected\"",
+   "results": "[loogle] OK 0 hit(s).  Returned names/files: . No hit proves all clauses of this relative exceptional-fibre theorem; the smoothness, fibre, normalization and elliptic-curve statements are different results.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*tree|rational.*tree|semistable.*modification",
+   "results": "[grep] OK 0 hit(s).  Returned names/files: . No hit proves all clauses of this relative exceptional-fibre theorem; the smoothness, fibre, normalization and elliptic-curve statements are different results.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-marking-semistable-separation",
@@ -104,5 +244,64 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-target-modification-exceptional-tree",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Split the Temkin local-completion/connectedness/Euler-defect proof; all numeric cancellations and the graph argument are explicit. Three statement-only auxiliary nodes; no Mathlib leaves. The smooth-point case gives one boundary point, so implies the stated bound of two. No stability, marking, global separatedness or global properness hypothesis was added.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: Temkin stable-modification input, specifically Lemma 4.3.2, p. 29, retaining semistability of the modified pair.; local geometric input to the repaired marking-globalization argument: the unmarked smooth-target exceptional-tree case of Temkin Lemma 4.4.2. Numerical proof of the unmarked smooth-target exceptional-fibre assertion, following Temkin Lemma 4.4.2.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "Its injectivity statement on sections of the structure line makes each affine coordinate ring inject into its generic localization, checking reducedness before applying completion."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Its proper geometrically integral global-functions clause verifies the generic-function hypothesis of Zariski connectedness; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "Generic coherent proper-flat base change computes the Euler characteristics of the auxiliary completions over the non-Noetherian valuation base; it is not an etale six-functor comparison."
+   },
+   {
+    "node": "def-pc-perfect-complex",
+    "why": "Defines the bounded finite-projective representatives used for the elementary integer Euler-characteristic computation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finiteness tool for the geometric fibre schemes over a field, used to justify their finite component decompositions."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme-morphism permanence for the proper auxiliary geometric fibres, not a replacement of a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic closed-immersion and proper-composition properties for the closed exceptional subcurve of the proper completion."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-implies-geometrically-reduced input for reducedness of the original flat source, required by proper completion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-rf-perfect-base-change",
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-ded579a00",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-ded579a00 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited interfaces. Temkin 4.4.1–4.4.2 and Appendix B, Stacks 0AY8/0B91, and edge-case calculations support all eight steps and three new nodes. No duplicate, circular split, dropped-route dependency, or target weakening found. Detailed checks and accepted tool_uses are in review.md."
  }
 }

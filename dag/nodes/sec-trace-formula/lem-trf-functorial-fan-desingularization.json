@@ -10,9 +10,81 @@
  "stmt_deps": [
   "def-trf-fine-fan-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix once and for all the normalized toric rule $\\mathcal F$ of [lem-trf-toric-normalized-desingularization] over $\\mathbf Q$. Its domain includes $\\mathbf Q[M]$ for every fine torsion-free monoscheme with finite affine cover, and all their finite disjoint unions [def-trf-monoscheme-toric-realization]. Thus the same algorithm, including the order of its ideal centers, is used for every object; no unrelated affine resolutions are chosen.",
+   "uses": [
+    "lem-trf-toric-normalized-desingularization",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.2.19, p.106, first sentence; normalized algorithm of 2.3.9--2.3.12, pp.93--94."
+   }
+  },
+  {
+   "text": "For such a monoscheme $M$, write $\\mathcal F(\\mathbf Q[M])=(X_i,J_i)_{0\\le i<n}$ with terminal $X_n$. Inductively construct $M_i$ with $X_i=\\mathbf Q[M_i]$, starting at $M_0=M$. The original torus acts at every stage and preserves $J_i$ by [lem-trf-toric-normalized-desingularization]. Under the inductive identification it is the torus of $M_i$. Part (i) of [lem-trf-toric-monoid-comparison] gives the unique coherent monoid ideal $I_i$ with $J_i=\\mathbf Q[I_i]$. It is nonempty on each component: a zero ideal would have the whole component as its zero scheme, contrary to nowhere density of the center. Put $M_{i+1}=\\operatorname{Bl}_{I_i}(M_i)^{\\rm sat}$. Part (ii) identifies its toric realization, equivariantly, with $X_{i+1}$, and ensures it remains fine, torsion free, with a finite affine cover. This proves the inductive claim for all $0\\le i\\le n$. Denote the resulting finite ordered tower by $\\mathcal T(M)$.",
+   "uses": [
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-toric-monoid-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.2.19, p.106: equivariant centers, monoidal ideal, and inductive descent using 3.2.15 and 3.2.18."
+   }
+  },
+  {
+   "text": "The terminal scheme $X_n$ is regular by [lem-trf-toric-normalized-desingularization]. The last clause of [lem-trf-toric-monoid-comparison](iii), applied to $X_n=\\mathbf Q[M_n]$, makes $M_n$ smooth. For a smooth monoscheme morphism $a:N\\to M$, part (iii) also makes $\\mathbf Q[a]$ smooth, so toric functoriality identifies $\\mathcal F(\\mathbf Q[N])$ with the contracted pullback of $\\mathcal F(\\mathbf Q[M])$. At the first stage, the pulled-back toric center is $\\mathbf Q[a^*I_0]$ by part (i); injectivity there identifies its monoid ideal with $a^*I_0$. Part (ii) then identifies the next stages. Repeating this argument recursively identifies every noncontracted center in its original order. A toric stage is contracted exactly when the corresponding monoid ideal is the whole sheaf, by part (i). Hence $\\mathcal T(N)=(a^*\\mathcal T(M))^c$.",
+   "uses": [
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-toric-monoid-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.2.19, p.106: terminal smoothness from 3.2.12(ii), and functoriality from 3.2.12(i) and unique descent."
+   }
+  },
+  {
+   "text": "The comparisons in the preceding step respect identities and composition. Indeed, both routes for a composite $N'\\xrightarrow{b}N\\xrightarrow{a}M$ yield the toric comparison for $\\mathbf Q[ab]$ by [lem-trf-toric-normalized-desingularization]. The ideal bijection in [lem-trf-toric-monoid-comparison](i) forces the same ordered monoid centers. The canonical chart identifications of part (ii), then force the same comparisons of towers. Deleting unit-ideal stages only records the remaining ordered subsequence, so iterated contraction agrees with contraction once. We have therefore constructed a smooth-functorial saturated desingularization rule on monoschemes, with its full composition compatibility.",
+   "uses": [
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-toric-monoid-comparison",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.21--3.1.23, pp.101--102; 3.2.19--3.2.20, p.106, naturality of the centerwise descent."
+   }
+  },
+  {
+   "text": "Apply the rule bijection of [lem-trf-sharpening-fan-bijection] to $\\mathcal T$. This gives a rule $\\mathcal R$ on every fine torsion-free fan with finite affine cover. Its affine-chart towers are the sharpenings of the constructed $\\mathcal T$ towers; the finite-disjoint-union synchronization in that node gives one finite global tower, including when the fan has no global monoscheme lift. Nonempty coherent centers, their order, and smoothness of the last fan are preserved. The same bijection gives $\\mathcal R(G)\\simeq(g^*\\mathcal R(F))^c$ for every smooth fan map $g$, with identity and composition compatibility. Finally open localizations, isomorphisms, and component inclusions in finite disjoint unions have stalk maps that are isomorphisms, hence are smooth with $r=0$ in [def-trf-fine-fan-blowup]. The asserted comparisons therefore apply to all of them. This proves every clause of the item.",
+   "uses": [
+    "lem-trf-sharpening-fan-bijection",
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.26--3.1.28, p.102; paragraph following Theorem 3.2.20 and Remark 3.2.21, p.106."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-toric-normalized-desingularization",
+  "def-trf-monoscheme-toric-realization",
+  "lem-trf-toric-monoid-comparison",
+  "lem-trf-sharpening-fan-bijection",
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 3.2.19, p.106, and Theorems 3.1.27 and 3.2.20, with the centerwise naturality and composition checks written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-monoidal-resolution-tower",
@@ -69,5 +141,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-functorial-fan-desingularization",
+  "worker": "stage1",
+  "summary": "Kept the statement and its full fine torsion-free generality. Constructed the monoscheme tower by induction from the toric resolution and ideal/blowup comparison, proved terminal smoothness and centerwise smooth functoriality, and transferred the rule to fans via sharpening. New nodes define monoscheme/toric terminology, give the characteristic-zero algorithm, isolate the toric comparison, and state the generic sharpening correspondence. All are statement-only/definition leaves with actual recorded Mathlib searches.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Realizes this historical auxiliary branch at ILO VIII 3.2.19 (inductive descent), 3.1.27 (fan sharpening/synchronization), 3.2.20--3.2.21 (functoriality). The present sk-i-curve-zero route itself is not altered."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N8-fb150d6e5",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-fb150d6e5 (reviewer sub-agent of L); spot-checked: Read the full item, four new nodes, cited DAG statements, unit route, report, and ILO VIII sources. The construction is mathematically supported by Theorems 2.3.10, 3.1.27, 3.2.20 and Lemmas 3.1.25, 3.2.12, 3.2.15, 3.2.17/Corollary 3.2.18. Repaired step 4 to remove the unsupported universal-property invocation; it now relies on the cited canonical chart identifications. Full review is in review.md; corrected item JSON is under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }

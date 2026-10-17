@@ -15,9 +15,140 @@
   "def-weil-abstract-derived-category",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S_Z=\\epsilon_Z^{-1}$ and $J_Z=\\epsilon_{Z,*}$. Since $J_Z$ changes no underlying presheaf, it is fully faithful, and $S_ZJ_ZG=G$ for every $\\tau$-sheaf $G$: sheafification fixes a sheaf by its universal property. If $H\\cong S_XH'$ with $H'\\in\\mathcal A'_X$, assumption (3) gives $J_XH\\cong H'\\in\\mathcal A'_X$. The functor $S_Z$ is exact: it is abelian sheafification restricted to $\\tau'$-sheaves; kernels of sheaves are sectionwise and colimits are sheafified presheaf colimits. Thus the exactness statement for presheaf sheafification gives exactness also on this restricted domain.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "section-compare, assertions (1)-(2); Tag 0EZA, preliminary identification of the coefficient class."
+   }
+  },
+  {
+   "text": "Apply localization of a site morphism to the identity functor from the coarse slice category over $Y$ to the fine slice category over $Y$, localized at the object $f:X\\to Y$. Its localized morphism is $\\epsilon_X$, and its two horizontal localization morphisms are $f_\\tau$ and $f_{\\tau'}$. The inverse-image composition isomorphism gives the square in the statement; taking right adjoints gives $f_{\\tau',*}J_X\\cong J_Yf_{\\tau,*}$. All inverse images on abelian sheaves are exact: they preserve finite limits as geometric inverse images and finite colimits as left adjoints. Hence each direct image preserves injectives. The categories have enough injectives, and the derived composition theorem gives the canonical isomorphism $Rf_{\\tau',*}RJ_X\\cong RJ_YRf_{\\tau,*}$. Here use constant integer ring sheaves, for which modules are exactly abelian sheaves with their unique integer action; restrict the composition theorem to bounded-below objects. Set $B^i=\\mathcal H^i(RJ_YRf_{\\tau,*}H)$. The morphism $a_H$ in the statement is obtained from the augmentation $J_XH\\to RJ_XH$ and this very composition isomorphism.",
+   "uses": [
+    "lem-weil-pbc-slice-site-localization",
+    "def-trf-geometric-morphism",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "section-compare-general, equation-commutative-epsilon; Tag 0EZA, first displayed derived identity; Tag 0D6E, lemma-derived-pushforward-composition."
+   }
+  },
+  {
+   "text": "For the pair $(J_X,f_{\\tau',*})$, the site specialization of the Grothendieck spectral sequence gives $T_2^{p,q}=R^pf_{\\tau',*}(R^qJ_XH)\\Rightarrow B^{p+q}$. The acyclicity condition holds because Step 2 shows that $J_X$ preserves injectives. By $(V_r)$, rows $1\\leq q\\leq r$ vanish. For total degree $i\\leq r$, only $(i,0)$ can remain. Its outgoing differentials have negative second index; an incoming differential on page $s\\geq2$ would start at $(i-s,s-1)$, which either has negative first index or has $1\\leq s-1\\leq r$ and is zero. Thus the abutment filtration has a single nonzero graded piece in degree $i$, and the bottom edge $R^if_{\\tau',*}J_XH\\to B^i$ is an isomorphism. This edge is $\\mathcal H^i(a_H)$: the bottom edge derives the augmentation $J_XH\\to RJ_XH$, followed by the canonical composition comparison, as in Step 2.",
+   "uses": [
+    "sk-thm-groth-ss",
+    "sk-def-groth-ss",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZA, passage from (V_n) to an isomorphism in degrees at most n, expressed using the Grothendieck bottom edge; Tag 0734, lemma-relative-Leray."
+   }
+  },
+  {
+   "text": "Put $G_q=R^qf_{\\tau,*}H$. The other composite $(f_{\\tau,*},J_Y)$ gives a first-quadrant spectral sequence $E_2^{p,q}=R^pJ_YG_q\\Rightarrow B^{p+q}$, with $d_s$ of bidegree $(s,1-s)$ and finite abutment filtrations. Its left edge is $e_q:B^q\\to J_YG_q$. Its acyclicity condition again follows from preservation of injectives in Step 2. In degree zero there are no entering or leaving differentials and the filtration has only $(0,0)$. Consequently $e_0$ is invertible. Composing with Step 3 proves the specified comparison $c_0:R^0f_{\\tau',*}J_XH\\to J_YG_0$ is invertible. If $r=0$, this already proves every claimed degree.",
+   "uses": [
+    "sk-thm-groth-ss",
+    "sk-def-groth-ss",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZA, second-page diagram and base case (C_0); Tag 0734, lemma-relative-Leray."
+   }
+  },
+  {
+   "text": "For $1\\leq m\\leq r$, suppose the specified comparisons $c_q$ have been proved invertible for $0\\leq q<m$. By Step 1 and assumption (4), $R^qf_{\\tau',*}J_XH$ belongs to $\\mathcal A'_Y$. Therefore $J_YG_q$ belongs to $\\mathcal A'_Y$ for $q<m$. The identity $S_YJ_YG_q=G_q$ then puts $G_q$ in $\\mathcal A_Y$. Apply $(V_r)$ to these particular sheaves: $E_2^{p,q}=R^pJ_YG_q=0$ whenever $1\\leq p\\leq r$ and $0\\leq q<m$. This uses only the already proved comparisons in strictly smaller degrees, so it sets up a genuine induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZA, calculation following (C_{m-1}); assumptions (3)-(4) in situation-compare."
+   }
+  },
+  {
+   "text": "On the total-degree-$m$ diagonal, every term except $(0,m)$ has $1\\leq p\\leq m\\leq r$ and $q<m$, so vanishes by Step 5. No differential enters $(0,m)$ in a first-quadrant sequence. A differential leaving it on page $2\\leq s\\leq m$ lands in $(s,m-s+1)$, also zero by Step 5. Pages $s>m+1$ have negative target second index. Only $d_{m+1}^{0,m}$ can remain, with target $E_{m+1}^{m+1,0}$, a subquotient of $R^{m+1}J_YG_0$. The filtration therefore identifies the left edge as a monomorphism $e_m:B^m\\hookrightarrow J_YG_m$ with image the kernel of this last differential. If $m<r$, then $R^{m+1}J_YG_0=0$ by Step 5 and $(V_r)$, so $e_m$ is an isomorphism. With Step 3 this proves $c_m$ and continues the induction up to $m=r-1$.",
+   "uses": [
+    "sk-def-groth-ss",
+    "def-sp-spectral-sequence",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZA, differential and filtration analysis for m<n, and the beginning of the final-degree analysis."
+   }
+  },
+  {
+   "text": "For the remaining case $m=r\\geq1$, the target of the possibly nonzero differential is exactly $R^{r+1}J_YG_0$. Indeed, before page $r+1$, outgoing differentials from $(r+1,0)$ have negative second index, while incoming ones have source $(r+1-s,s-1)$ with $1\\leq r+1-s\\leq r-1$ and $s-1<r$, so those sources vanish by Step 5. Thus $E_{r+1}^{r+1,0}=E_2^{r+1,0}$. Combining the kernel description in Step 6 with the isomorphism in Step 3 gives an exact sequence $0\\to A\\xrightarrow{c_r}J_YG_r\\to R^{r+1}J_YG_0$, where $A=R^rf_{\\tau',*}J_XH$. There is no assertion that the last differential vanishes before sheafification.",
+   "uses": [
+    "sk-def-groth-ss",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZA, final paragraph and its displayed exact sequence."
+   }
+  },
+  {
+   "text": "Choose an injective resolution $G_0\\to I^\\bullet$ on the fine slice site. Then $R^{r+1}J_YG_0=H^{r+1}(J_YI^\\bullet)$. Exactness of $S_Y$ and its compatibility with cohomology give $S_YR^{r+1}J_YG_0=H^{r+1}(S_YJ_YI^\\bullet)=H^{r+1}(I^\\bullet)=0$, since $r+1>0$. This is the source's sheafification-zero assertion, computed directly on the same injective resolution rather than quoting local vanishing as an extra lemma. Assumption (4) puts $A$ in $\\mathcal A'_Y$, so assumption (3) says that $A$ is already a fine sheaf. The middle term $J_YG_r$ also is a fine sheaf, by definition. Apply exact $S_Y$ to Step 7: it makes $S_Y(c_r)$ invertible. Sheafification fixes both its source and target and their morphism, so $c_r$ itself is invertible. This completes the induction.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZA, last paragraph; section-compare, explanation Ad (3), the same injective-complex calculation for the derived counit."
+   }
+  },
+  {
+   "text": "At every degree the map proved invertible was $c_i=e_i\\circ\\mathcal H^i(a_H)$. Step 3 proves the first factor from $a_H$ invertible, and Steps 4-8 prove the relative Leray edge $e_i$ invertible, for $0\\leq i\\leq r$. Thus the conclusion is about precisely the canonical maps prescribed in the statement. Under the derived adjunction $S_Y\\dashv RJ_Y$, the adjoint of $a_H$ is $b_H$; explicitly it is $S_YRf_{\\tau',*}J_XH\\xrightarrow{S_Ya_H}S_YRJ_YRf_{\\tau,*}H\\to Rf_{\\tau,*}H$ with the derived counit as last map. All comparisons used above are natural in the coefficient, being augmentations, composition comparisons and the two spectral-sequence edges.",
+   "uses": [
+    "lem-sp-grothendieck-edge-maps",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZA, canonical comparison throughout its proof; Tag 0EZE, displayed map a and its adjoint b in the truncation paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-slice-site-localization",
+  "def-trf-geometric-morphism",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "sk-thm-groth-ss",
+  "sk-def-groth-ss",
+  "lem-sp-grothendieck-edge-maps",
+  "def-sp-spectral-sequence",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EZA, lemma-V-implies-C-general; section-compare Ad (3) for the explicit sheafification-zero calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +184,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.le_finestTopology\", \"module\": \"Mathlib/CategoryTheory/Sites/Canonical\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (Ps : Set (CategoryTheory.Functor Cᵒᵖ (Type v)))\\n  (J : CategoryTheory.GrothendieckTopology C),\\n  (∀ P ∈ Ps, CategoryTheory.Presieve.IsSheaf J P) → J ≤ CategoryTheory.Sheaf.finestTopology Ps\", \"doc\": \"For any set of presheaves $\\\\mathcal{P}$ on a category $\\\\mathcal{C}$ and any Grothendieck topology $J$ on $\\\\mathcal{C}$, if every presheaf in $\\\\mathcal{P}$ is a sheaf with respect to $J$, then $J$ is l\"}\n  {\"name\": \"CategoryTheory.le_topology_of_closedSieves_isSheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/Closed\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J₁ J₂ : CategoryTheory.GrothendieckTopology C},\\n  CategoryTheory.Presieve.IsSheaf J₁ (CategoryTheory.Functor.closedSieves J₂) → J₁ ≤ J₂\", \"doc\": \"If the presheaf of closed sieves with respect to a Grothendieck topology $J_2$ satisfies the sheaf condition for another Grothendieck topology $J_1$, then $J_1$ is coarser than $J_2$ (i.e., $J_1 \\\\leq \"}\n  {\"name\": \"CategoryTheory.Presieve.isSheaf_of_le\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafOfTypes\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (P : CategoryTheory.Functor Cᵒᵖ (Type w))\\n  {J₁ J₂ : CategoryTheory.GrothendieckTopology C},\\n  J₁ ≤ J₂ → CategoryTheory.Presieve.IsSheaf J₂ P → CategoryTheory.Presieve.IsSheaf J₁ P\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with Grothendieck topologies $J_1$ and $J_2$, where $J_1 \\\\leq J_2$ in the canonical partial order of topologies. If a presheaf $P : \\\\mathcal{C}^{\\\\text{op}} \\\\to\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.PreservesSheafification.le\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {J : CategoryTheory.GrothendieckTopology C} {A : Type u_1}\\n  {B : Type u_2} {inst_1 : CategoryTheory.Category.{v_1, u_1} A} {inst_2 : CategoryTheory.Category.{v_2, u_2} B}\\n  {F : CategoryTheory.Functor A B} [self : J.PreservesSheafification F]\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{A}, \\\\mathcal{B}$ with a Grothendieck topology $J$ on $\\\\mathcal{C}$ and a functor $F : \\\\mathcal{A} \\\\to \\\\mathcal{B}$, if $F$ preserves sheafification with respect\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u₂} [inst : CategoryTheory.Category.{v, u₂} C] [inst_1 : CategoryTheory.EssentiallySmall.{v, v, u₂} C]\\n  (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v, u₁} A]\\n  [inst_3 : CategoryTheory.Abelian A] [CategoryTheory.IsGrothendieckAbelian.{v, \", \"doc\": \"Let $\\\\mathcal{C}$ be an essentially small category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a Grothendieck abelian category. If there exists a sheafification functor for pre\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.grothendieckTopology_monotone\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [inst : P.IsStableUnderBaseChange]\\n  [inst_1 : P.IsMultiplicative] {Q : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  [inst_2 : Q.IsMultiplicative] [inst_3 : Q.IsStableUnderBaseChange],\\n  P ≤ Q → AlgebraicGeometry.Scheme.\", \"doc\": \"Given two morphism properties $P$ and $Q$ on the category of schemes that are stable under base change and multiplicative, if $P$ is less than or equal to $Q$ (i.e., every morphism satisfying $P$ also\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.grothendieckTopology_le_grothendieckTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [inst : P.IsStableUnderBaseChange]\\n  [inst_1 : P.IsMultiplicative] {Q : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  [inst_2 : Q.IsMultiplicative] [inst_3 : Q.IsStableUnderBaseChange],\\n  P ≤ Q → AlgebraicGeometry.Scheme.\", \"doc\": \"Given two morphism properties $P$ and $Q$ on the category of schemes that are stable under base change and multiplicative, if $P$ is less than or equal to $Q$ (i.e., every morphism satisfying $P$ also\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits give underived pushforward composition/sheafification compatibility, topology monotonicity, or generic truncation. None states derived comparison through a vanishing range for these two topologies."
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|V_implies|compare.*cohomology",
+   "results": "[grep] OK 1 hit(s)\nMathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\nMathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:34: Eventually, we will be able to compare the ℓ-adic cohomology defined here with the classical",
+   "date": "2026-10-18",
+   "verdict": "no match: returned topology/sheafification infrastructure, generic localization comparisons, or a comment about ell-adic cohomology; none states the comparison in a finite vanishing range."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: returned topology/sheafification infrastructure, generic localization comparisons, or a comment about ell-adic cohomology; none states the comparison in a finite vanishing range."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparison of higher direct images between two Grothendieck topologies under truncated vanishing of the comparison functor",
+   "results": "[leansearch] OK 8 hit(s)\nCategoryTheory.Functor.inducedTopology_isCocontinuous\nCategoryTheory.Functor.inducedTopology.congr_simp\nCategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\nAlgebraicGeometry.Scheme.grothendieckTopology_le_grothendieckTopology\nAlgebraicGeometry.Scheme.smallGrothendieckTopologyOfLE_eq_toGrothendieck_smallPretopology\nCategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\nCategoryTheory.GrothendieckTopology.Subcanonical.le_canonical\nCategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+   "date": "2026-10-18",
+   "verdict": "no match: returned topology/sheafification infrastructure, generic localization comparisons, or a comment about ell-adic cohomology; none states the comparison in a finite vanishing range."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of higher direct images for a finer to coarser topology comparison implies comparison of higher direct images through the same finite degree",
+   "results": "[leanfinder] OK 8 hit(s)\nCategoryTheory.Presheaf.isLocallySurjective_of_le\nCategoryTheory.GrothendieckTopology.PreservesSheafification.le\nCategoryTheory.Presieve.isSheaf_of_le\nTopology.IsOpenEmbedding.compatiblePreserving\nCategoryTheory.coherentTopology.coverPreserving\nCategoryTheory.Functor.IsContinuous\nDerivedCategory.isLE_Q_obj_iff\nDerivedCategory.isZero_of_isLE",
+   "date": "2026-10-18",
+   "verdict": "no match: returned topology/sheafification infrastructure, generic localization comparisons, or a comment about ell-adic cohomology; none states the comparison in a finite vanishing range."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray spectral sequence comparison of higher direct images for nested topologies and sheafification killing the final transgression",
+   "results": "[leanfinder] OK 8 hit(s)\nCategoryTheory.GrothendieckTopology.PreservesSheafification.transport\nCategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\nCategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\nCategoryTheory.sheafComposeIso_hom_fac\nCategoryTheory.sheafComposeIso_hom_fac_assoc\nCategoryTheory.sheafComposeIso_inv_fac\nCategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\nCategoryTheory.sheafComposeIso_inv_fac_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: returned topology/sheafification infrastructure, generic localization comparisons, or a comment about ell-adic cohomology; none states the comparison in a finite vanishing range."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-comparison-induction-step",
@@ -84,5 +250,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-comparison-truncated-direct-images",
+  "worker": "stage1",
+  "summary": "Split the Stacks 0EZA proof into two canonical Leray comparisons, induction on degree, and the final sheafification argument. Reused all supporting DAG statements, created no new nodes, retained the statement and its canonical maps, and made explicit the only possible final transgression and why exact sheafification kills its target. The covering-refinement assumption of the surrounding Stacks situation is not needed for this lemma.",
+  "blueprint": "The topology-comparison branch serving lem-trf-local-term-locality through the existing ancestry: the truncated-direct-image comparison used in the truncation paragraph of Stacks 0EZE, proved by 0EZA. No unit step or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Generic exactness of abelian sheafification, used for the final transgression target."
+   },
+   {
+    "node": "lem-weil-pbc-slice-site-localization",
+    "why": "Generic localization of a continuous site morphism gives the square of slice topoi; the unit has no such site-localization statement."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic exact-adjoint injective preservation verifies the two Leray acyclicity hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Generic existence of injective resolutions on each small slice site."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic derived composition normalizes the comparison in the square; specialize coefficients to integers."
+   },
+   {
+    "node": "sk-thm-groth-ss",
+    "why": "Generic relative Leray spectral sequence applied to the two factorizations of the same composite."
+   },
+   {
+    "node": "lem-sp-grothendieck-edge-maps",
+    "why": "Generic bottom and left edge maps identify the actual canonical comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor cohomology compatibility computes the sheafification of a positive derived image."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-slice-site-localization",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "sk-thm-groth-ss",
+  "lem-sp-grothendieck-edge-maps",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q85-2389e8ed7",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-2389e8ed7 (reviewer sub-agent of L); spot-checked: Read the full item, all nine proof steps, cited DAG statements, unit/chapter route, Stacks sources, report, and delivery instructions. The canonical comparison, coefficient category, base-change square, spectral-sequence induction, endpoint transgression, edge cases, searches, and route restrictions check out. No new nodes or repairs are needed."
  }
 }

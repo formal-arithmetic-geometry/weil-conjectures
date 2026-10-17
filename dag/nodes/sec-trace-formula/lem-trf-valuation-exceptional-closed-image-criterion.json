@@ -24,9 +24,95 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The set $T$ is finite by the finite-chain hypothesis. Finite presentation of $Y\\to T$ implies finite type: on affine charts its algebra has finitely many generators, and the morphism is quasi-compact. By [lem-sfb-finite-type-composition-base-change](2), each fibre $Y_t$ is of finite type over $\\kappa(t)$. The spectrum of a field is Noetherian, since its only ideals are zero and the whole field. Hence [lem-weil-pbc-finite-type-over-noetherian] makes $Y_t$ Noetherian, and [lem-weil-pbc-noetherian-finitely-many-components] makes its component set finite. A scheme has at most one generic point for each irreducible closed subset (on any common affine neighbourhood equality of the closures gives equality of the corresponding prime ideals). Thus there are finitely many fibre-component generic points over the finite set $T$, and $B_f$, being a subset, is finite. This uses neither properness nor separatedness of $X\\to T$.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.2 finiteness, printed pp. 26--27; Stacks Tags 01T4, 01T6 and 0BA8"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-semistable-normal-target-factorization] to the given $f$. It supplies a normal multipointed $T$-curve $(N,D_N)$ with smooth generic curve and etale generic marking, and a semistable $\\eta$-modification $g:(Y,E)\\to(N,D_N)$ with $f=\\nu\\circ g$. Its component-contraction equivalence, on both ordinary and geometric fibres, shows that $f$ and $g$ have exactly the same exceptional components: the projective-line and special-point conditions use only the unchanged source $(Y,E)$. Thus if $f$ is not stable then $g$ is not stable. Keep $B_f$ and closedness relative to the original target $X$; no assertion that $X$ itself is normal is made.",
+   "uses": [
+    "lem-trf-semistable-normal-target-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.4, first sentence, printed p. 31: normalization reduction with marking and contraction compatibility made explicit."
+   }
+  },
+  {
+   "text": "Assume $f$ is not stable. By step 2, $g$ is not stable, so it has an exceptional component in a geometric fibre over some $s\\in T$. The finite-type fibre $Y_s$ has pure one-dimensional geometric fibres with only smooth points or ordinary nodes, by semistability. Hence [lem-trf-nodal-geometric-fibres-reduced] makes it geometrically reduced. Apply [lem-trf-sepclosed-valuation-geometric-components] to $Y_s$. It identifies that geometric component with $C_{\\overline{\\kappa(s)}}$ for a unique irreducible component $C\\subseteq Y_s$. Its image under $g_Y$ is a point, since the field-extension projection is surjective and its composite image is a point. The projective-line and geometric special-point conditions are unchanged. Thus $C$ is exceptional for $g$. Write $z$ for its generic point and $W=\\overline{\\{z\\}}\\subseteq Y$.",
+   "uses": [
+    "lem-trf-sepclosed-valuation-geometric-components",
+    "lem-trf-nodal-geometric-fibres-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.4, choice of an exceptional component, printed p. 31; geometric-component interpretation"
+   }
+  },
+  {
+   "text": "The image $I$ of $W\\to T$ is a nonempty subset of the finite chain $T$. Choose its most special point $t$. Every point of $W$ is a specialization of $z$, so $t$ is a specialization of $s$. The singleton $\\{t\\}$ is closed in $I$: in an affine spectrum closure means containment of prime ideals, and maximality within $I$ leaves no other specialization. Therefore $W_t$ is nonempty and closed in $W$, hence closed in $Y$. This does not assert that $t$ is the closed point of the whole valuation spectrum; $I$ can omit that point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.2 proof, choice of the closed point of the image of the component closure, printed p. 27"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-exceptional-component-specialization] to $g:(Y,E)\\to(N,D_N)$ and to $C,W,t$. Step 2 supplies normality of $N$, smooth generic curve, etale generic marking and the semistable modification; steps 3--4 give the exceptional $C$, the specialization $t$ and nonempty $W_t$. We obtain an exceptional component $C_t$ of $Y_t$ contained in $W_t$. By [def-weil-irreducible-components], $C_t$ is closed in $Y_t$, hence closed in $W_t$ and then in $Y$. The contraction equivalence of [lem-trf-semistable-normal-target-factorization] gives $f_Y(C_t)=\\{x\\}$; its projective-line and special-point conditions are the same for $f$ and $g$. By [def-weil-proper-morphism], the original proper $f_Y:Y\\to X$ is closed, so this singleton is closed in the entire $X$. The generic point $z_t$ of $C_t$ therefore belongs to $B_f$ and is exceptional for $f$.",
+   "uses": [
+    "lem-trf-exceptional-component-specialization",
+    "def-weil-irreducible-components",
+    "def-weil-proper-morphism",
+    "lem-trf-semistable-normal-target-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemmas 4.2.2 and 4.4.4, printed pp. 26--27 and 31--32, AFTER normalization; original proper map used for closedness in X."
+   }
+  },
+  {
+   "text": "The component correspondence of [lem-trf-sepclosed-valuation-geometric-components], applicable to each nodal fibre by [lem-trf-nodal-geometric-fibres-reduced] as in step 3, identifies the ordinary exceptional components in the statement with geometric exceptional components. If $f$ is stable, no geometric fibre has an exceptional component, so no element of $B_f$ is exceptional. Conversely, if no element of $B_f$ is exceptional but $f$ were not stable, step 5 would supply such an element, a contradiction. Combined with step 1 this proves finiteness, the equivalence, and its stated particular consequence.",
+   "uses": [
+    "lem-trf-sepclosed-valuation-geometric-components",
+    "lem-trf-nodal-geometric-fibres-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.4 conclusion, printed pp. 31--32"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-exceptional-component-specialization",
+  "lem-trf-nodal-geometric-fibres-reduced",
+  "lem-trf-semistable-normal-target-factorization",
+  "lem-trf-sepclosed-valuation-geometric-components",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemmas 4.2.2, 4.4.1(i), 4.4.4 and Remark 4.1 read in the primary PDF online. Normalization factorization and component compatibility are explicit cited input; the normal-target specialization argument is applied only to that factor. Local archival PDF WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +148,38 @@
    "results": "[leanfinder] OK 8 hit(s); top=[\"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"]; returned signatures do not state the claimed marked-curve criterion or contraction. General properness, generic-point, valuative-criterion and Weierstrass results do not specialize to it in one line.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semistable marked curve modification over a finite height valuation ring is stable exactly when no exceptional fibre component maps to a closed point of the entire target",
+   "results": "8 hits; top=['AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange', 'WeierstrassCurve.IsGoodReduction', 'WeierstrassCurve.IsMinimal', 'WeierstrassCurve.isGoodReduction_iff', 'WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction', 'WeierstrassCurve.exists_isMinimal', 'WeierstrassCurve.IsGoodReduction.goodReduction', 'WeierstrassCurve.minimal']; note=; digest=cb6bc7a6c33b57b8. No result gives a stability test for semistable multipointed modifications. Generic-point topology and elliptic good reduction do not specialize to the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many closed image fibre component generic points detect stability of a semistable marked curve modification",
+   "results": "8 hits; top=['genericPoints', 'genericPoints.ofComponent', 'genericPoints.component', 'IsGenericPoint', 'genericPoints.isGenericPoint', 'PrimeSpectrum.isClosed_range_of_stableUnderSpecialization', 'genericPoints.finite', 'genericPoints.isGenericPoint_ofComponent']; note=; digest=d5a11042c88c4528. No result gives a stability test for semistable multipointed modifications. Generic-point topology and elliptic good reduction do not specialize to the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exceptional\"",
+   "results": "2 hits; top=['LinearEquiv.IsExceptional', 'LinearEquiv.mem_transvections_pow_mul_dilatransvections_of_not_isExceptional']; note=; digest=0b3a01bf690eefcb. No result gives a stability test for semistable multipointed modifications. Generic-point topology and elliptic good reduction do not specialize to the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*component|stable.*modification|semistable",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. No result gives a stability test for semistable multipointed modifications. Generic-point topology and elliptic good reduction do not specialize to the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-semistable-stable-contraction",
@@ -93,5 +207,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-exceptional-closed-image-criterion",
+  "worker": "stage1",
+  "summary": "Repair of RETURN E1/E2, C1/D5 at cef9624b66: statement unchanged. Restored normality to the specialization input and inserted a separate finite-normal-target factorization input with unchanged source and ordinary/geometric component-contraction equivalence. Specialization is applied to the normal factor g, and closed image in the original X is proved with the original proper f. Retained geometric-component descent and finiteness proof; three smaller statement-only inputs, no stable-existence or contraction theorem.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification; specifically Proposition 4.4.6 and its successive exceptional blow-down construction, printed pp. 30--33.; substep: Lemma 4.4.4, printed pp. 31--32, with the identification and finiteness of Gamma_0 in Lemma 4.2.2, printed p. 26 Realizes the Lemma 4.4.4 detection step in the existing semistable-to-stable contraction branch, leaving that branch and the unit route unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q81-27478569f",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-27478569f (reviewer sub-agent of L); spot-checked: Read the item, all new nodes, cited statements, and Temkin’s normalization and specialization arguments. Repaired C1 by adding the missing nodal geometric-reducedness lemma from Stacks 0E37 and citing it in steps 3 and 6. Target statement unchanged. Corrected JSON files and full source checks are in fixes/ and review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

@@ -15,9 +15,143 @@
   "def-weil-abstract-derived-category",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $X$ and write $F=\\epsilon_X^{-1}$ and $G=\\epsilon_{X,*}$. Abelian sheaves on either small slice site form a Grothendieck abelian category: apply [lem-cbc-sieve-module-sheaves-grothendieck] with $\\Lambda=\\mathbf Z$, identifying an abelian group with its unique unital $\\mathbf Z$-module structure. The functor $F$ is exact by [lem-weil-pbc-sheafification-exact], and its termwise action commutes with cohomology by [lem-weil-pbc-exact-functor-complex-cohomology]. For $A'\\in\\mathcal A'_X$, assumption (3) says that $A'$ is already a $\\tau$-sheaf. Its sheafification unit $A'\\to GFA'$ is therefore an isomorphism: its inverse is the unique map extending the identity of $A'$, and uniqueness in [def-weil-pbc-sheafification] makes both composites identities. Also $FA'\\in\\mathcal A_X$ by definition.",
+   "uses": [
+    "lem-cbc-sieve-module-sheaves-grothendieck",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZB, the equality epsilon_* epsilon^{-1} H^q(L)=H^q(L); Tag 0EZ3, assumption (3)."
+   }
+  },
+  {
+   "text": "Use the canonical derived unit $u_M:M\\to RGF M$ for $F\\dashv RG$. This is the ringed-topos adjunction for $\\epsilon_X$ with constant integer coefficient sheaves; module inverse image is the exact abelian inverse image $F$. By [lem-weil-pbc-exact-functor-derived-functor], its derived inverse image is the termwise functor. The unit commutes with every integer shift by [lem-weil-pbc-derived-adjunction-shift]. The identity functor and $RGF$ are triangulated by [lem-sf-exact-functor-derived-triangulated] and [lem-weil-pbc-derived-direct-image-triangulated]. Thus [lem-weil-pbc-commshift-nattrans-triangle-morphism] makes the units into a morphism between each distinguished triangle and its $RGF$ image, including the connecting arrow. This records the particular canonical maps that the argument will compare.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZB, the canonical map L -> R epsilon_* epsilon^{-1} L; Tag 07A6 (lemma-adjoint), with constant Z coefficients."
+   }
+  },
+  {
+   "text": "For $A'\\in\\mathcal A'_X$ in degree zero, [lem-sp-derived-functor-single-identification] identifies $\\mathcal H^p(RGF(A'[0]))$ with $R^pG(FA')$ for $p\\geq0$. In degree zero the map of $u_{A'[0]}$ is the underived unit of Step 1: for an injective resolution $FA'\\to I$, its representative is $A'\\to GFA'\\to GI$, and $G$ preserves kernels as a right adjoint. Here $R^0G=G$ by [lem-sp-derived-well-defined]. For $1\\leq p\\leq r$ the target is zero by $(V_r)$; the source is zero as well. Both sides vanish in negative degrees by [lem-sp-shift-identification], part (3). Hence $u_{A'[0]}$ is an isomorphism on cohomology in every degree $\\leq r$. For $0\\leq q\\leq r$, shift compatibility from Step 2 and [lem-sp-shift-identification] give the same conclusion for $u_{A'[-q]}$: its degree-$i$ map is the degree-$(i-q)$ map before shifting, and $i-q\\leq r$ whenever $i\\leq r$.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification",
+    "lem-sp-derived-well-defined",
+    "lem-sp-shift-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZB, vanishing of R^p epsilon_* epsilon^{-1} H^q(L) for 0<p<=r; derived.tex Tags 015A and 05TH."
+   }
+  },
+  {
+   "text": "Put $K=\\tau_{\\leq r}L$ and let $c:K\\to L$ be the canonical inclusion. Then $K$ has cohomology only in $[0,r]$, with $\\mathcal H^q(K)=\\mathcal H^q(L)\\in\\mathcal A'_X$ there. The map $c$ is an isomorphism on cohomology through degree $r$ and is a monomorphism in degree $r+1$, since its source in that degree is zero. Exactness of $F$ gives the same assertions for $Fc:FK\\to FL$. Apply [lem-weil-pbc-derived-functor-truncation-iso], with $n=r$ and the global-sections functor on each slice site. Its Grothendieck hypotheses hold by Step 1. We obtain isomorphisms $H^r_{\\tau'}(X,K)\\to H^r_{\\tau'}(X,L)$ and $H^r_\\tau(X,FK)\\to H^r_\\tau(X,FL)$. It therefore suffices to prove the canonical comparison for $K$, and then use naturality with respect to $c$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-derived-functor-truncation-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZB, the omitted detail, first truncate at r; derived.tex Tag 05TC (lemma-negative-vanishing), part (2)."
+   }
+  },
+  {
+   "text": "Write $K_q=\\tau_{\\leq q}K$ for $-1\\leq q\\leq r$ and $B_q=\\mathcal H^q(K)[-q]$ for $0\\leq q\\leq r$. By [lem-weil-pbc-truncation-triangle] there are distinguished triangles $K_{q-1}\\to K_q\\to B_q\\to K_{q-1}[1]$. We prove by induction on $q$ that $\\mathcal H^i(u_{K_q})$ is an isomorphism for all $i\\leq r$. The base $K_{-1}=0$ holds because $K$ is connective and additive functors send zero to zero. Step 3 applies to every $B_q$. The units give morphisms of these triangles by Step 2; their long exact cohomology sequences are natural by [lem-sp-long-exact-of-triangle], with cohomology homological by [lem-sf-derived-homology-long-exact].",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sp-long-exact-of-triangle",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZB, “small detail omitted”, written with the finite truncation filtration underlying its spectral sequence; derived.tex Tag 08J5."
+   }
+  },
+  {
+   "text": "For the induction step, fix $0\\leq q\\leq r$ and $i\\leq r$ and compare the exact five-term segments\n$$\\mathcal H^{i-1}(B_q)\\to\\mathcal H^i(K_{q-1})\\to\\mathcal H^i(K_q)\\to\\mathcal H^i(B_q)\\to\\mathcal H^{i+1}(K_{q-1})$$\nand their $RGF$ counterparts. The first, second and fourth vertical maps are isomorphisms by Step 3 and the induction hypothesis. The fifth is an isomorphism if $i<r$. If $i=r$, it is still a monomorphism: $K_{q-1}$ has no cohomology in degree $r+1$ since $q-1\\leq r-1$, so its source is zero. The hypotheses of [lem-weil-pbc-five-lemma] therefore hold, giving the required middle isomorphism. This proves the induction. Since $K_r=K$, the actual unit $u_K$ induces isomorphisms in degrees $\\leq r$. Also $\\mathcal H^{r+1}(u_K)$ is a monomorphism because $\\mathcal H^{r+1}(K)=0$. This last observation is essential when applying derived sections.",
+   "uses": [
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZB, “small detail omitted”; homology.tex Tag 05QB (lemma-five-lemma), applied to the canonical unit on truncation triangles."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-functor-truncation-iso] once more, now to $u_K:K\\to RGF K$ and $v=\\Gamma(\\mathcal C_{\\tau'}/X,-)$, with $n=r$. The bounded-below hypothesis holds for $RGF K$ because it is a right derived functor on $D^+$; the Grothendieck hypotheses hold by Step 1, and Step 6 verifies both the isomorphism range and the degree-$(r+1)$ monomorphism. Consequently the specific map $H^r(R\\Gamma_{\\tau'}(u_K))$ is an isomorphism. This argument does not assume that an arbitrary morphism which is an isomorphism only through degree $r$ remains so after derived sections.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-truncation-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZB, passage from the derived unit to hypercohomology; derived.tex Tag 05TC, applied with the additional monomorphism checked in Step 6."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $\\epsilon_X$ followed by the structure morphism of the $\\tau'$ slice topos to the punctual topos, all with constant $\\mathbf Z$ coefficients. Ordinary sections satisfy $\\Gamma_{\\tau'}G=\\Gamma_\\tau$ because $G$ leaves underlying presheaves unchanged. The cited canonical composition isomorphism therefore identifies $R\\Gamma_{\\tau'}RGFK$ with $R\\Gamma_\\tau FK$, naturally in $K$. Composing this isomorphism with Step 7 gives\n$$H^r_{\\tau'}(X,K)\\xrightarrow{H^r(R\\Gamma_{\\tau'}u_K)}H^r(R\\Gamma_{\\tau'}RGFK)\\xrightarrow{\\sim}H^r_\\tau(X,FK).$$\nThis is precisely the comparison specified in the statement, since it is the derived adjunction unit followed by the canonical derived-sections/direct-image identification.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZB, first line, using Tag 0D6H (lemma-Leray-unbounded); composition Tag 0D6E."
+   }
+  },
+  {
+   "text": "The derived unit and the composition isomorphism in Step 8 are natural transformations. Applied to $c:K\\to L$, their naturality makes a commutative square with the comparison for $K$ above, the comparison for $L$ below, and the two vertical isomorphisms of Step 4. Hence the comparison for $L$ is an isomorphism. For any morphism $L\\to L'$ between complexes satisfying the hypotheses, the same naturality square proves naturality of the resulting isomorphism; no choices of resolutions or truncation isomorphisms alter the canonical map. This includes $r=0$, where $(V_0)$ is empty and the induction has only $q=0$. Assumptions (1), (2), (4) and weak Serre closure remain part of the comparison situation but are not needed beyond the supplied vanishing and assumption (3) for this lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZB, conclusion; naturality of the derived unit and of Tag 0D6E."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-sieve-module-sheaves-grothendieck",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-derived-well-defined",
+  "lem-sp-shift-identification",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sp-long-exact-of-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EZB, lemma-V-implies-cohomology-general; its omitted unit-map detail is expanded along the finite truncation filtration (Tag 08J5), and derived sections are applied after checking the necessary degree-(r+1) monomorphism (Tag 05TC)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +187,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.PreservesOneHypercovers\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        CategoryTheory.Functor C D →\\n          CategoryTheory.GrothendieckTopology C → CategoryTheory.GrothendieckTopology D → Prop\", \"doc\": \"A proposition stating that a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserves one-step hypercovers with respect to Grothendieck topologies $ J $ on $ \\\\mathcal{C} $ and $ K $ on $ \\\\mathcal{D} $. S\"}\n  {\"name\": \"CategoryTheory.Functor.isContinuous_of_preservesOneHypercovers\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D) (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckTopology D) [F.PreservesOneHypercovers J K] [J.IsGeneratedByOneHype\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserves one-step hypercovers with respect to Grothendieck topologies $ J $ on $ \\\\mathcal{C} $ and $ K $ on $ \\\\mathcal{D} $, and $ J $ is generated by\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {X : C} → J.OneHypercover X → CategoryTheory.Functor C D → CategoryTheory.GrothendieckTopology D →\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$ respectively, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $H$ of $X$, and a functor $F : \\\\mathcal{C} \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy.mem₁\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {J : CategoryTheory.GrothendieckTopology C} {X : C} {E : J.OneHypercover X} {F : CategoryTheory.Functor C D}\\n  {K : CategoryTheory.GrothendieckTopology D} [self : E.IsPreservedBy\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be categories equipped with Grothendieck topologies $J$ and $K$, respectively. Given a one-step hypercover $E$ of an object $X \\\\in \\\\mathcal{C}$, a functor $F : \\\\mat\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a generating family of one-step hypercovers in a site $(\\\\mathcal{C}, J)$, a contravariant functor $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$, and a covering sieve $S$ containing the zeroth sie\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over the diagram indexed by a covering sieve $S$ c\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over a diagram indexed by a covering sieve $S$ con\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.HOneHypercover\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → C → Type (max (max u v) (u_1 + 1))\", \"doc\": \"For a site $(\\\\mathcal{C}, J)$ with Grothendieck topology $J$ and an object $S \\\\in \\\\mathcal{C}$, this is the quotient category of one-step hypercovers of $S$ obtained by identifying homotopic morphisms\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits give generic t-structure bounds, underived sheafification units and continuity. They do not give the hypercohomology comparison under (V_r) for a weak Serre coefficient class."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing higher direct images through degree r gives canonical hypercohomology comparison for a connective sheaf complex with cohomology in a weak Serre subcategory",
+   "results": "{\"t\": \"2026-10-17T20:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing higher direct images through degree r gives canonical hypercohomology comparison for a connective sheaf complex with cohomology in a weak Serre subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.isLE_Q_obj_iff\"], \"digest\": \"8bd12a709ac268ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general bounds, underived sheafification, or normalization of derived functors; none states the topology comparison under (V_r)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlus\", \"unit\"",
+   "results": "{\"t\": \"2026-10-17T20:45:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctorPlus\\\", \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnith\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnit\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnithInt\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnitInt\", \"CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnit_app\"], \"digest\": \"ff22695de0d1c7ea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general bounds, underived sheafification, or normalization of derived functors; none states the topology comparison under (V_r)."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|derivedPlus.*unit|unit.*derivedPlus",
+   "results": "{\"t\": \"2026-10-17T20:45:44Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|derivedPlus.*unit|unit.*derivedPlus\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general bounds, underived sheafification, or normalization of derived functors; none states the topology comparison under (V_r)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparison of hypercohomology for two Grothendieck topologies when higher comparison pushforward vanishes in a finite range",
+   "results": "{\"t\": \"2026-10-17T20:45:56Z\", \"tool\": \"leansearch\", \"query\": \"Comparison of hypercohomology for two Grothendieck topologies when higher comparison pushforward vanishes in a finite range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.topology_eq_iff_same_sheaves\", \"CategoryTheory.Presieve.isSheaf_of_le\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous.congr_simp\", \"CategoryTheory.Functor.inducedTopology_isCocontinuous\", \"AlgebraicGeometry.Scheme.grothendieckTopology_monotone\", \"CategoryTheory.GrothendieckTopology.le_def\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"AlgebraicGeometry.Scheme.grothendieckTopology_le_grothendieckTopology\"], \"digest\": \"208d4f27adf28119\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general bounds, underived sheafification, or normalization of derived functors; none states the topology comparison under (V_r)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact left adjoint sheafification the derived adjunction unit is a cohomology isomorphism in low degrees under vanishing of derived pushforward on cohomology objects",
+   "results": "{\"t\": \"2026-10-17T20:45:59Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact left adjoint sheafification the derived adjunction unit is a cohomology isomorphism in low degrees under vanishing of derived pushforward on cohomology objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions_of_hasSheafCompose\", \"CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\"], \"digest\": \"b1062d65947d2dfe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general bounds, underived sheafification, or normalization of derived functors; none states the topology comparison under (V_r)."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPlus|rightDerivedFunctorPlusUnit|CommShift",
+   "results": "{\"t\": \"2026-10-17T20:46:10Z\", \"tool\": \"grep\", \"query\": \"derivedPlus|rightDerivedFunctorPlusUnit|CommShift\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\"], \"digest\": \"25af6db86a8a6b59\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general bounds, underived sheafification, or normalization of derived functors; none states the topology comparison under (V_r)."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-comparison-induction-step",
@@ -84,5 +260,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-comparison-truncated-cohomology",
+  "worker": "stage1",
+  "summary": "Nine-step proof of Tag 0EZB with no new nodes. Truncate before applying the derived unit, check its sheaf components using (V_r), and prove the unit comparison on the finite truncation filtration by the five lemma. Verify the extra monomorphism before deriving sections and retain the actual unit/Leray map and its naturality. Statement unchanged. Existing general-site and derived-category nodes supply every non-elementary tool.",
+  "blueprint": "Realizes the inherited topology-comparison branch of the specialization proof beneath lem-trf-local-term-locality, specifically the Tag 0EZB lift of the cone class used in the final paragraph of Tag 0EZE. The ancestor main-20261015 proof (1)--(2) uses the specialization route; no change to that route or to its unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identify exact abelian inverse image with the derived inverse image in the canonical ringed-topos adjunction. No node of the curve-local-term unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "The general ringed-topos unit commutes with integer shifts, including for the comparison of two topologies with constant integer coefficients. No node of the curve-local-term unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Apply the general right-derived triangulated-functor theorem to the comparison direct image. No node of the curve-local-term unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "why": "A shift-compatible unit gives a morphism on each truncation triangle, including its boundary arrow. No node of the curve-local-term unit states this general tool."
+   },
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "Identify the derived comparison direct image of a sheaf in degree zero with its ordinary higher direct images. No node of the curve-local-term unit states this general tool."
+   },
+   {
+    "node": "lem-sp-shift-identification",
+    "why": "Move the single-sheaf vanishing calculation to the cohomological degree q of a truncation layer. No node of the curve-local-term unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-truncation-iso",
+    "why": "Generic low-degree right-derived-functor criterion, with its additional monomorphism hypothesis verified before use for derived sections. No node of the curve-local-term unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "The canonical finite truncation layers realize the omitted unit comparison argument. No node of the curve-local-term unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical Leray identification for a small ringed topos and its morphism to the punctual topos, with integer coefficients. No node of the curve-local-term unit states this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-shift-identification",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q81-ad8386389",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-ad8386389 (reviewer sub-agent of L); spot-checked: Read the complete item, report, DAG instructions, Tag 0EZB source, all 19 cited node statements, and route materials. Verified all nine steps, hypotheses, truncation and top-degree monomorphism checks, five-lemma induction, canonical derived-unit/base-change map, coefficient category, edge cases, absence of duplicates/cycles, no long steps, and ordinary-derived route compliance. Wrote review.md; no new nodes or repairs."
  }
 }

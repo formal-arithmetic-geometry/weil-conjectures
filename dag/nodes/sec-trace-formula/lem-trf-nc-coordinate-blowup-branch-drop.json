@@ -14,11 +14,151 @@
   "def-nagata-global-blowup",
   "def-nagata-strict-transform",
   "def-weil-etale-morphism",
-  "def-nagata-effective-cartier-ideal"
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-blowup-chart-ring",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-trf-normal-crossings-divisor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=(t_1,\\ldots,t_m)$. By [prop-nagata-affine-blowup-chart-cover] and [def-nagata-blowup-chart-ring], the standard charts cover the blowup and have rings $C=A[I/t_i]=A[t_j/t_i:j\\ne i]\\subset A[1/t_i]$. Write $a=t_i$, $z_j=t_j/t_i$ for $j\\ne i$, and $P=\\prod_{j\\ne i}z_j$. The relations are $t_j=az_j$, and hence $f=\\prod_jt_j=a^mP$. By [lemma-nagata-chart-extended-ideal-principal], $IC=(a)$, so the complement of the center on this chart is $D(a)$. Each $C$ is finitely generated over the Noetherian ring $A$, and thus Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian].",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring",
+    "lemma-nagata-chart-extended-ideal-principal",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9, printed p. 121; chart computation underlying 4.1.8, printed p. 118"
+   }
+  },
+  {
+   "text": "Fix a prime $y\\subset C$, put $p=y\\cap A$, $R=A_p$ and $S=C_y$. Localizing the generators and their relations identifies $C\\otimes_A R$ with $R[IR/a]\\subset R[1/a]$, and $S$ with its localization at the prime induced by $y$: both maps send every ratio to $t_j/a$, and the inverse follows by inverting the elements of $A\\setminus p$. If $p\\not\\supset I$, choose $t_k\\notin p$. The equation $t_k=az_k$ (or $t_k=a$ for $k=i$) forces $a\\notin y$, and hence $a\\notin p$. Thus $R[IR/a]=R$ and $S=R$. Each nonunit $z_j$ is then a unit multiple of $t_j$, and the pointwise hypothesis gives its extension to a regular system of parameters; multiplying selected parameter generators by units preserves their generating ideal. This proves regularity and the parameter assertion away from the center.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9, printed p. 121; chart computation underlying 4.1.8, printed p. 118"
+   }
+  },
+  {
+   "text": "If $p\\supset I$, all $t_1,\\ldots,t_m$ belong to the maximal ideal of $R$ and are distinct members of a regular parameter system by hypothesis. Reorder and complete this list to $t_1,\\ldots,t_d$. Apply [lem-trf-permissible-coordinate-chart] over this regular local ring, with its $r=m$, $J=\\{1,\\ldots,m\\}$ and chart index $i$. It says that the chart $R[IR/a]$ is regular and that at every point its vanishing exceptional coordinate $a$ and vanishing ratio coordinates $z_j$ occur among a regular system of parameters. Step 2 identifies its chosen local ring with $S$, so $S$ is regular and those exact germs, rather than coordinates in a purportedly local global chart, have the required parameter property. In particular $a$ and all nonunit $z_j$ occupy distinct positions in such a system.",
+   "uses": [
+    "lem-trf-permissible-coordinate-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9, printed p. 121; chart computation underlying 4.1.8, printed p. 118"
+   }
+  },
+  {
+   "text": "By [def-nagata-strict-transform] the strict transform is the scheme-theoretic closure of the inverse image of $D_U$ away from the center. The preserved immersion is quasi-compact: on each of the finitely many standard affine charts its source is the affine scheme $\\operatorname{Spec}((C/(f))[1/a])$; it is quasi-separated since it is an immersion. The scheme-theoretic image description [def-nagata-scheme-theoretic-image] and its restriction to open charts [lemma-nagata-scheme-image-restrict-open] identify its chart ideal with $K=\\ker(C\\to(C/(f))[1/a])$. Explicitly $h\\in K$ iff $a^nh\\in(f)$ for some $n\\ge0$. At $y$ this becomes $KS=\\{h\\in S:\\exists n,\\ a^nh\\in fS\\}$: clearing the localization denominators shows that $a^n h/s\\in fS$ iff some $v\\notin y$ satisfies $va^nh\\in(f)$. Thus the closure is computed by saturation of $(f)$ by $a$, including all scheme structure.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "def-nagata-scheme-theoretic-image",
+    "lemma-nagata-scheme-image-restrict-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080D, definition-strict-transform; affine sections supported on the exceptional divisor; morphisms.tex Tag 01R8, lemma-quasi-compact-scheme-theoretic-image (1)-(3)"
+   }
+  },
+  {
+   "text": "We compute this saturation in $S$. Away from the center $a$ is a unit by Step 2, so $(f):a^\\infty=(P)$. Over the center, Step 3 and [lem-trf-regular-local-ufd-boundary-factorization] say that $S$ is a domain and that $a$ and the nonunit factors of $P$ are pairwise nonassociate prime elements. Nonassociation follows also from their distinct cotangent-basis positions. If $a^nh\\in(a^mP)$, each such prime factor of $P$ divides $h$, since it does not divide $a$; unique factorization therefore gives $P\\mid h$. Conversely $h=Pq$ satisfies $a^mh=fq$. Hence again $(f):a^\\infty=(P)$. All stalks of the closure ideal thus agree with those of $(P)$, so the chart strict transform is exactly $V(P)$. When $m=1$, $P=1$ and this closed subscheme is empty.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9, printed p. 121; chart computation underlying 4.1.8, printed p. 118"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 prove the pointwise coordinate condition for the $m-1$ functions $z_j$ on the regular Noetherian chart $\\operatorname{Spec}C$. In each local ring $P$ is a unit times the product of exactly the nonunit $z_j$. It is a nonzerodivisor, because that regular local ring is a domain by [lem-trf-regular-local-ufd-boundary-factorization]. A function whose multiplication is injective on all local rings has injective multiplication on the ring (a nonzero kernel element survives at some prime). Thus $V(P)$ is an effective Cartier divisor in the sense of [def-nagata-effective-cartier-ideal], and the equations give normal crossings by [def-trf-normal-crossings-divisor]. For $m\\ge2$, apply [lem-trf-nc-coordinate-max-stratum] with $s=m-1$ and functions $(z_j)_{j\\ne i}$: its geometric-branch conclusion is exactly $\\#\\{j\\ne i:z_j\\in y\\}\\le m-1$. For $m=1$ the empty divisor has zero branches. In particular an ordinary parameter hyperplane is not being assumed geometrically irreducible without the cited geometric-branch theorem.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "def-nagata-effective-cartier-ideal",
+    "def-trf-normal-crossings-divisor",
+    "lem-trf-nc-coordinate-max-stratum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9, printed p. 121; chart computation underlying 4.1.8, printed p. 118"
+   }
+  },
+  {
+   "text": "Let $v:W\\to U$ be etale. Its flatness is part of [def-weil-etale-morphism]. The comparison of [def-nagata-blowup-flat-base-change-map] is an isomorphism by [thm-nagata-blowup-flat-base-change]. On affine pieces $\\operatorname{Spec}B\\subset W$ it identifies the pullback of the $i$-chart with $\\operatorname{Spec}(C\\otimes_A B)$, and the named ratios with the pulled-back ratios. Here $B$ is flat over $A$ by [lem-weil-pbc-etale-algebra-flat]. Apply [lem-weil-pbc-flat-tensor-exact] to $0\\to K\\to C\\to(C/(f))[1/a]$: the kernel after tensoring with $B$ is the extended ideal $K(C\\otimes_A B)$. Localization and quotient commute with this tensor product by their defining universal properties. Thus the kernel is precisely the closure kernel for the base-changed product divisor, and Step 5 identifies it with the ideal generated by the pulled-back $P$. This proves the scheme-theoretic strict-transform formula after base change without a hypothesis about generic points.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up; Tag 080D, definition-strict-transform; algebra.tex Tag 00HD, lemma-flat"
+   }
+  },
+  {
+   "text": "The projection $W\\times_UU^+\\to U^+$ is etale by [lem-weil-pbc-etale-scheme-base-change]. On any affine subchart $\\operatorname{Spec}E\\to\\operatorname{Spec}C$ its ring map is etale and finitely presented by [lem-weil-pbc-etale-ring-map-iff-etale-affine]; $E$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. For a chosen prime $q\\subset E$ over $y$, [lem-weil-pbc-etale-prime-generates-maximal] says that the images of any parameter system of $C_y$ generate the maximal ideal of $E_q$, and [lem-sc-etale-local-dimension] says the two dimensions are equal. These images are consequently a regular system of parameters of $E_q$ by [def-weil-pbc-regular-system-of-parameters]. A local homomorphism preserves whether a germ is a unit, so the same subset of the $z_j$ vanishes, and the parameter assertion holds at each chosen point. The branch interpretation and its invariance are then exactly [lem-trf-nc-coordinate-max-stratum] for $m\\ge2$, with the already empty $m=1$ case handled by Step 5.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-sc-etale-local-dimension",
+    "def-weil-pbc-regular-system-of-parameters",
+    "lem-trf-nc-coordinate-max-stratum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP, lemma-dimension-etale-extension; algebra.tex Tag 00U4, lemma-etale-at-prime (1), and Tag 00KU, definition-regular-local"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-strict-transform",
+  "def-trf-normal-crossings-divisor",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-regular-scheme",
+  "lem-sc-etale-local-dimension",
+  "lem-trf-nc-coordinate-max-stratum",
+  "lem-trf-permissible-coordinate-chart",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lemma-nagata-scheme-image-restrict-open",
+  "prop-nagata-affine-blowup-chart-cover",
+  "thm-nagata-blowup-flat-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 4.1.8 and Lemma 4.2.9, printed pp. 118 and 121; expanded globalization, saturation and etale parameter arguments using the cited Stacks nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +215,45 @@
    "results": "{\"t\": \"2026-10-17T20:24:44Z\", \"tool\": \"leanfinder\", \"query\": \"On the blowup of a regular scheme along the intersection of coordinate divisors, in each affine chart the vanishing ratio coordinates are part of a regular system of parameters in the local ring at each point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"StandardEtalePair.hasMap_X\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\"], \"digest\": \"c245eb834662cd85\"}; Returned smooth and standard-etale charts, localization of regular sequences, normalization dominance, and meromorphic divisors. No returned type states a blowup strict-transform equation or the pointwise parameter assertion.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The strict transform of a product of coordinate parameters after blowing up their common zero locus has one fewer factor on each affine chart",
+   "results": "{\"t\": \"2026-10-17T20:43:25Z\", \"tool\": \"leanfinder\", \"query\": \"The strict transform of a product of coordinate parameters after blowing up their common zero locus has one fewer factor on each affine chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"MvPolynomial.pderiv_inr_universalFactorizationMap_X\"], \"digest\": \"d18c8bef36b5ecbe\"}; The returned Proj-cover and overlap declarations do not compute a strict transform or geometric branches.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|blowup|Rees",
+   "results": "{\"t\": \"2026-10-17T20:43:39Z\", \"tool\": \"grep\", \"query\": \"strictTransform|strict_transform|blowup|Rees\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"Mathlib/AlgebraicGeometry/Sites/Small.lean\"], \"digest\": \"39db5dab58644b66\"}; The 14 hits are incidental occurrences in words such as agrees and degrees; none defines blowups or strict transforms in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a coordinate blowup the strict transform of a normal crossings divisor is the product of the ratio coordinates and has at most one fewer branch",
+   "results": "{\"t\": \"2026-10-17T20:43:40Z\", \"tool\": \"leansearch\", \"query\": \"On a coordinate blowup the strict transform of a normal crossings divisor is the product of the ratio coordinates and has at most one fewer branch\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"MeromorphicOn.divisor_zpow\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"WeierstrassCurve.variableChange_Δ'\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"38aef6836cfcbe7f\"}; Returned normalization, formally unramified morphisms, properness base change and meromorphic divisors, none with the asserted blowup equation or parameter condition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-17T20:43:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No declarations returned for the blowup name.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular ring, blow up the ideal generated by coordinate parameters; on a standard affine chart the strict transform of their union is the vanishing of the product of all ratio variables",
+   "results": "{\"t\": \"2026-10-17T20:44:57Z\", \"tool\": \"leanfinder\", \"query\": \"In a regular ring, blow up the ideal generated by coordinate parameters; on a standard affine chart the strict transform of their union is the vanishing of the product of all ratio variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι\"], \"digest\": \"67f9a463dbfc7f62\"}; The returned Proj-cover and overlap declarations do not compute a strict transform or geometric branches.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nc-maximal-branch-blowup",
@@ -103,5 +278,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nc-coordinate-blowup-branch-drop",
+  "worker": "stage1",
+  "summary": "Reused the reviewed permissible-coordinate chart theorem and existing geometric branch-count theorem; supplied the affine-to-local argument, explicit scheme-theoretic saturation and flat-kernel base-change calculation. No new nodes or statement correction. All chart and base-change points are localized individually.",
+  "blueprint": "The inherited ancestor lem-trf-local-term-locality is reached through the nodal-pair strictification chain; this split realizes the ILO VIII 4.1.8 deepest-stratum branch decrease and 4.2.9 coordinate-chart calculation specified by blueprint.from.place. It does not replace a unit-level argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Equality of local dimensions under etale maps allows the same number of parameter generators after base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-local-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-fa3ecb93f",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-fa3ecb93f (reviewer sub-agent of L); spot-checked: Read the required project documents, item, unit/chapter route, all cited node statements, ILO VIII §§4.1.8 and 4.2.9, and cited Stacks locations. Verified all eight steps, hypotheses, saturation and flat étale base change, m=1/2/3 and empty-center cases, route/tool-use compliance, and absence of forbidden SGA or dropped machinery. No repair or node drop is needed."
  }
 }

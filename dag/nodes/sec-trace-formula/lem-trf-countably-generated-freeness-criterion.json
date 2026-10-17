@@ -10,9 +10,67 @@
  "stmt_deps": [
   "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a sequence of generators $x_1,x_2,\\ldots$ for $M$, repeating elements or inserting $0$ if the original generating subset is finite. The hypothesis that an at most countable subset generates $M$ gives such a sequence, and every element of $M$ is a finite linear combination of its terms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0591, lemma-freeness-criteria, proof: first sentence ('Let $x_1, x_2, \\ldots$ be a countable set of generators')"
+   }
+  },
+  {
+   "text": "Inductively suppose finite free direct summands $F_1,\\ldots,F_n$ have been chosen so that $S_n=F_1\\oplus\\cdots\\oplus F_n$ is a direct summand of $M$ containing $x_1,\\ldots,x_n$. Write $M=S_n\\oplus N$ and let $x\\in N$ be the $N$-component of $x_{n+1}$. The finite direct sum $S_n$ has a finite basis obtained by taking the union of finite bases of the $F_i$, so the assumed criterion applies to the decomposition $M=N\\oplus S_n$. It gives submodules $G,H\\subseteq N$ with $N=G\\oplus H$, $x\\in G$, and $G$ free.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0591, lemma-freeness-criteria, proof: inductive construction of $F_1, F_2, \\ldots$ and the paragraph beginning 'Namely, given $F_1, \\ldots, F_n$'"
+   }
+  },
+  {
+   "text": "Choose a basis of the free module $G$. The element $x$ has finite support in this basis; let $F_{n+1}$ be the span of the finitely many basis vectors in that support (and include any additional basis vectors if needed). The complementary basis vectors give $G=F_{n+1}\\oplus G'$, with $F_{n+1}$ finite free. Together with $N=G\\oplus H$ and $M=S_n\\oplus N$, this exhibits $F_{n+1}$ as a finite free direct summand of $M$ containing $x$, and it makes $S_{n+1}=S_n\\oplus F_{n+1}$ a direct summand containing $x_1,\\ldots,x_{n+1}$ because $x_{n+1}$ is the sum of its $S_n$-component and $x$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0591, lemma-freeness-criteria, proof: 'Of course we can replace $F_{n+1}$ by a finite free direct summand of $F_{n+1}$'"
+   }
+  },
+  {
+   "text": "The induction supplies $S_n=F_1\\oplus\\cdots\\oplus F_n$ for every $n$, and each generator $x_j$ lies in $S_j$. Hence every element of $M$, being a finite linear combination of the $x_j$, lies in some $S_n$. The direct-sum uniqueness at each finite stage implies that the sum $M=\\bigoplus_{i\\ge1}F_i$ is direct: a finite relation is contained in one $S_n$ and all its components vanish there.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0591, lemma-freeness-criteria, proof: conclusion of the inductive construction before 'Then $M = \\bigoplus_{i = 1}^{\\infty} F_i$ is free'"
+   }
+  },
+  {
+   "text": "For each $F_i$ choose its finite basis. The disjoint union of these bases is a basis of $\\bigoplus_{i\\ge1}F_i$: a vector has finite support in the outer direct sum and finite basis support in each of those finitely many coordinates, while uniqueness follows coordinatewise. Since this direct sum equals $M$, the module $M$ is free.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0591, lemma-freeness-criteria, proof: final sentence 'Then $M = \\bigoplus_{i = 1}^{\\infty} F_i$ is free'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0591, lemma-freeness-criteria"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-projective-over-local-free",
@@ -70,7 +128,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), 'Hence by Lemmas 05FQ and 05FT the map S^{⊕r}→N_p is R-universally injective' (Tag 05FQ). Within the proof of Tag 05FQ: the first sentence invokes Algebra, Theorem 0593 to make the projective source free. In the proof of Tag 0593, the invocation of Lemma 0591 (lemma-freeness-criteria) for a countably generated projective module.",
+   "place": "Proof (1)--(2), semistable-alteration input: the nested invocation of Algebra, Lemma 0591 (lemma-freeness-criteria) for a countably generated projective module; this node realizes the countable induction and direct-sum conclusion.",
    "via": [
     "lem-trf-projective-over-local-free",
     "lem-trf-local-universal-injective-residue",
@@ -89,5 +147,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-countably-generated-freeness-criterion",
+  "worker": "stage1",
+  "summary": "Checked the statement and the five-part inductive proof against Stacks Tag 0591. No Lean declaration or DAG/blueprint duplicate states this criterion, and Mathlib searches found only general basis results. The proof uses the existing free-module definition for finite bases and basis unions; all other steps are the explicit countable induction from the source, so no new nodes are needed.",
+  "blueprint": "Realizes the nested Tag 0591 invocation in the ancestor proof: enumerate generators, construct finite free summands in the complements, exhaust M by their direct sum, and conclude freeness from the union of finite bases."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q93-3bea4ddbe",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-3bea4ddbe (reviewer sub-agent of L); spot-checked: Read the complete delivery, stage instructions, unit route, ancestor and free-module dependency, and Stacks Tag 0591 at the cited source. The statement and all five proof steps are mathematically correct, cover finite/empty/zero cases, use only justified dependencies, and contain no hidden long lemma or duplicate node. Review written to review.md."
  }
 }

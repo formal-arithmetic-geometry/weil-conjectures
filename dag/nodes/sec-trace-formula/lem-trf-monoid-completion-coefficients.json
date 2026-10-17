@@ -12,9 +12,82 @@
   "def-weil-pbc-adically-complete-ring",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose nonzero generators g_1, ..., g_s of P (the list is empty when P={0}). Let alpha=min_i w(g_i)>0 when s>0. Every decomposition of p into q nonzero summands has q*alpha <= w(p), so the set of possible q is finite and nu(p) is attained. For each p choose a generator word; if nu(p)<n, a word of length <n can be chosen because its length is at most nu(p). There are only finitely many generator words of length <n, hence S_n={p:nu(p)<n} is finite. If u+v=p, concatenating decompositions gives nu(u)+nu(v)<=nu(p); the same weight bound shows that only finitely many u,v occur. Thus every convolution coefficient below is a finite sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; positive-weight finiteness is the agent-supplied coefficient refinement"
+   }
+  },
+  {
+   "text": "For a finite sum F=sum_p c_p z^p in A[P], one has F in b^n exactly when c_p belongs to m^{max(n-nu(p),0)} for every p. For the forward implication, expand a product of n generators of b: if k factors are nonzero monomials, its coefficient at p is in m^{n-k}, and k<=nu(p); sums preserve the asserted containment. Conversely, if nu(p)<n choose a decomposition of p of length nu(p) and write c_p as a finite sum of products of n-nu(p) elements of m, while if nu(p)>=n choose n nonzero summands in a decomposition of p. Each resulting term lies in b^n, and the support of F is finite, so summing over p proves the reverse implication. The case p=0 uses nu(0)=0 and gives c_0 in m^n.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; finite monomial filtration calculation"
+   }
+  },
+  {
+   "text": "Write B=lim_n A[P]/b^n. For x=(x_n)_n in B choose finite representatives F_n in A[P]. If m>=n, compatibility and the finite-level criterion give c_p(F_m)-c_p(F_n) in m^{max(n-nu(p),0)}. Therefore, for each p and k, the residue of c_p(F_n) modulo m^k is constant once n>=k+nu(p). Completeness and separatedness of A supply a unique a_p in A with these residues. This defines a coefficient map B to A^P. Conversely, for a family (a_p), the finite set S_n gives a compatible class in A[P]/b^n by summing the terms p in S_n with coefficients a_p modulo m^{n-nu(p)}; changing lifts changes no class by the finite-level criterion. These constructions are inverse because every coefficient is eventually visible modulo every power of m.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; inverse-limit coefficient construction"
+   }
+  },
+  {
+   "text": "Addition is coefficientwise. For multiplication, representatives multiply by the finite monoid-algebra convolution; for a fixed p only finitely many decompositions p=u+v occur by Step 1, and the stabilized coefficient is sum_{u+v=p} a_u b_v. This proves that the coefficient map is an A-algebra isomorphism onto A^P with convolution. A monomial az^p has the family with coefficient a at p and zero elsewhere, directly from its representatives.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; coefficientwise ring operations"
+   }
+  },
+  {
+   "text": "The projection pi_n is surjective because the transition maps A[P]/b^m \\to A[P]/b^n are surjective: lift a class at level n successively to a compatible inverse-limit sequence. Its kernel consists of families whose nth component is zero. By Step 3 and the finite-level criterion, this is exactly the coefficient condition a_p in m^{max(n-nu(p),0)}. Inclusion b^nB is immediate from the coefficient condition and convolution. For the reverse inclusion, apply the finite-pattern factorization lemma [lem-trf-finite-pattern-factorization] and spell out its finite partition as follows. Choose generators g_1,...,g_s of P and m_1,...,m_t of m. The set S={p:nu(p)<n} is finite by Step 1. For each p in S choose a nu(p)-term decomposition p=p_1+...+p_nu; expand a_p as a finite sum of products of n-nu(p) of the m_j. Each resulting a_p z^p is a product of n generators of b (the m_j constants and the z^{p_i}), so the whole S-part lies in b^nB. For p with nu(p)>=n, choose n nonzero summands and, in a generator word for each summand, choose one generator g_i; cancellativity in the embedding P subset G gives p=g_{i_1}+...+g_{i_n}+q with q in P. There are only finitely many tuples I=(i_1,...,i_n). Assign each such p to the first eligible tuple in a fixed order, and let c^I be the residual family with coefficient a_{g_{i_1}+...+g_{i_n}+q} on the assigned residual q and zero elsewhere. The high-nu part is the finite sum over I of z^{g_{i_1}}...z^{g_{i_n}}c^I, hence is in b^nB. Thus every family satisfying the coefficient condition lies in b^nB, so ker(pi_n)=b^nB.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-trf-finite-pattern-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG, lemma-hathat-finitely-generated, parts (1)--(2) and final paragraph; combined with the VI 1.6 finite monomial filtration"
+   }
+  },
+  {
+   "text": "For a fixed n, the coefficient condition in Step 5 forces a_p=0 modulo the displayed coefficient quotient whenever nu(p)>=n, and leaves the class of a_p in A/m^{n-nu(p)} when nu(p)<n. Since S_n is finite by Step 1, taking these coefficients gives an A-module isomorphism B/b^nB = direct sum_{nu(p)<n} A/m^{n-nu(p)}. The inverse sends a finite tuple to the corresponding finite family, so the isomorphism is explicit.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; finite-level coefficient decomposition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion",
+  "lem-trf-finite-pattern-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i)--(ii), printed p. 70; explicit positive-weight coefficient and finite-level filtration argument, with Stacks algebra.tex Tag 05GG for finite-generation completion bookkeeping"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-formal-monoid-ring-dimension",
@@ -65,7 +138,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical nearby-duality/alteration algebra under lem-trf-local-term-locality proof (1)--(2), through lem-trf-log-smooth-log-regular: ILO VI 1.6(i)--(ii) formal chart models; this input expands the formal-monoid dimension argument. Coefficient description and finite-level monomial filtration of the completed chart, independent of its dimension or domain properties.",
+   "place": "Historical nearby-duality/alteration algebra under lem-trf-local-term-locality proof (1)--(2), through lem-trf-log-smooth-log-regular: ILO VI 1.6(i)--(ii) formal chart models; coefficient description and finite-level monomial filtration of the completed chart.",
    "via": [
     "lem-trf-formal-monoid-ring-dimension",
     "lem-trf-log-smooth-log-regular",
@@ -79,5 +152,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-monoid-completion-coefficients",
+  "worker": "stage1",
+  "summary": "Audited the imported coefficient statement and found no finished Lean declaration or duplicate DAG node. Kept the statement unchanged. The split gives the positive-weight finiteness of nu and bounded decompositions, proves the finite-level coefficient criterion directly, constructs the inverse-limit coefficient-family isomorphism, checks convolution and monomials, proves surjectivity and the kernel formula (using finite generation of the maximal ideal and monoid), and derives the finite direct-sum quotient.",
+  "blueprint": "ILO VI 1.6(i)--(ii) formal chart model coefficient description and finite-level monomial filtration under the ancestor lem-trf-local-term-locality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-80bb69fe9",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-80bb69fe9 (reviewer sub-agent of L); spot-checked: Read the complete item, auxiliary node, cited statements, unit/chapter route, Illusie–Laszlo–Orgogozo VI §1.6, and Stacks Tag 05GG. Checked every proof step, hypotheses, non-elementary steps, completion/kernel argument, finite-pattern factorization, duplicates, route restrictions, and edge cases P={0}, P=N, n=1, and field coefficients. The auxiliary node is a genuine reusable lemma and not a restatement. No repairs are needed; review.md records the detailed checks."
  }
 }
