@@ -27,6 +27,7 @@ attribute [local irreducible] perfectHomComposition
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
 
+
 /-- The restricted maps form a square over the two nested open inclusions.
 Both maps agree after the open immersion of the larger target open.
 Source: Stacks Project, Tag 08DW.
@@ -63,5 +64,6 @@ Source: Stacks Project, Tags 08DW and 0D5S.
       (perfectOverlapNestedRestrictedMaps g iY iX hP hT).symm) ≪≫
     (perfectHomComposition (g.resLE W T hT) (Y.homOfLE (leOfHom iY))).symm ≪≫
     Functor.isoWhiskerRight (overlapOpenInclusionPullbackIso Y iY) _
+
 
 end AlgebraicGeometry
