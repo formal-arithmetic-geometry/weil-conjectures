@@ -15,9 +15,70 @@
   "def-weil-pbc-additive-functor",
   "lem-sfb-left-resolution-objectwise-cochain"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the objectwise resolution functor $R$ and its induced maps to form $B_K$ by applying the homological-complex map in the complex degree: its $(p,q)$-term is $R(K^p)^q$, and applying $\\iota$ termwise gives the mapped bicomplex. The two differentials are the complex differential of $K$ and the resolution differential, with the standard commuting-bicomplex signs.",
+   "uses": [
+    "lem-sfb-left-resolution-objectwise-cochain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "definition bicomplexFunctor, lines 48–51"
+   }
+  },
+  {
+   "text": "The objectwise resolution is strictly supported in cochain degrees $q\\le 0$, and the same is true after applying $\\iota$. Therefore $B_K^{p,q}$ and $(\\iota B_K)^{p,q}$ are zero whenever $q>0$, for every $p$.",
+   "uses": [
+    "lem-sfb-left-resolution-objectwise-cochain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "support instances for the cochain resolution and its mapped image, lines 52–64"
+   }
+  },
+  {
+   "text": "If $p>b$, then $K^p$ is a zero object, so $\\mathrm{id}_{K^p}=0_{K^p,K^p}$. By the recursion in [lem-sfb-left-resolution-objectwise-cochain], $R(X)^{-n}$ is, for $n\\ge0$, exactly the $n$-th term of the $\\mathbb N$-indexed chain complex $\\Lambda.\\mathrm{chainComplex}(X)$ (degree $0$: $F(X)$; degree $1$: $F(\\ker\\pi_X)$; degree $n+2$: $F(\\ker\\iota(d))$), $R(X)^q=0$ for $q>0$, and $R(f)$ has components $\\Lambda.\\mathrm{chainComplexMap}(f)$ in degrees $\\le0$. Functoriality of $R$ gives $R(\\mathrm{id}_{K^p})=\\mathrm{id}_{R(K^p)}$, and the zero-morphism equation [lem-sfb-left-resolution-chain-complex-map-zero] (using that $F$ preserves zero morphisms) gives $R(0)=0$ in every degree $\\le0$, while the degrees $q>0$ are zero objects anyway. Hence the identity of every term $R(K^p)^q$ is zero, so every term is a zero object of $C$. An additive functor sends zero objects to zero objects, so every $\\iota(R(K^p)^q)$ is zero as well. Hence both $B_K^{p,q}$ and $(\\iota B_K)^{p,q}$ are zero for every $p>b$ and every $q$.",
+   "uses": [
+    "lem-sfb-left-resolution-chain-complex-map-zero",
+    "lem-sfb-left-resolution-objectwise-cochain",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "support instances using K.IsStrictlyLE, lines 66–90"
+   }
+  },
+  {
+   "text": "Apply the bounded-support totalization statement [lem-sfb-left-resolution-additive-total-transport] to $B_K$ with $F=\\iota$ and $D=A$. Its hypotheses hold because $C$ has a zero object and finite coproducts, $A$ is preadditive as part of being abelian, and $\\iota$ is additive. The support established in the preceding two steps is exactly the condition that terms vanish for $p>b$ or $q>0$. The theorem therefore supplies the diagonal total complexes for both $B_K$ and its termwise image under $\\iota$, with shape $\\operatorname{up}(\\mathbb Z)$.",
+   "uses": [
+    "lem-sfb-left-resolution-additive-total-transport",
+    "def-sp-abelian",
+    "def-weil-preadditive-category",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "HasTotal instances, lines 92–108"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
+  "def-weil-preadditive-category",
+  "lem-sfb-left-resolution-additive-total-transport",
+  "lem-sfb-left-resolution-chain-complex-map-zero",
+  "lem-sfb-left-resolution-objectwise-cochain"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+  "place": "bicomplexFunctor support instances and HasTotal instances, lines 48–108"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +110,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-left-resolution-bounded-minus",
@@ -61,7 +122,7 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-derived-monoidal",
-   "place": "Parent proof sentence beginning ‘So the K-flat complexes form a left derivability structure...’; the parent does not spell out bounded-minus totalization, which this node makes concrete via CochainComplexMinus.lean.",
+   "place": "The bounded-minus resolution sentence in the parent proof, made concrete by CochainComplexMinus.lean lines 48–108: support instances for the resolution bicomplex and its image, followed by the HasTotal applications.",
    "via": [
     "lem-sfb-left-resolution-bounded-minus",
     "lem-sfb-functorial-bounded-above-class-resolution",
@@ -70,5 +131,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-left-resolution-bicomplex-total-exists",
+  "worker": "stage1",
+  "group": "N1",
+  "summary": "Read the source definition of bicomplexFunctor and all support and HasTotal instances. The split keeps the bicomplex construction as the first step, cites the existing objectwise cochain-resolution support for the resolution direction, isolates the zero-input argument through the Mathlib chainComplexMap_zero lemma for the upper bound in the first direction, and then applies the existing bounded-support additive total-transport statement. No duplicate project node was created; one exact Mathlib leaf was added for chainComplexMap_zero.",
+  "blueprint": "The four steps realize the parent blueprint proof sentence about bounded-minus resolution totalization: construction of the bicomplex, support in the resolution direction, propagation of the complex upper bound, and the two HasTotal applications.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-3eb4cbcb7",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-3eb4cbcb7 (reviewer sub-agent of L); spot-checked: I read the whole delivery against CochainComplexMinus.lean lines 32-108 in slopmaster2 and against Mathlib LeftResolution/Basic.lean lines 1-200, where chainComplexMap_zero is at lines 161-168. The item statement matches the source hypothesis by hypothesis and is unchanged. Step 1 (construction of the bicomplex) and step 2 (vanishing for q>0) are both backed by the objectwise-cochain node's statement, which gives the functor R and its support in degrees <=0. Step 3 (vanishing for p>b) follows the source: F preserves zero morphisms, so chainComplexMap_zero gives R(0)=0; K^p is zero, so id=0 on every term of R(K^p). Step 4 meets every hypothesis of additive-total-transport and gets the two totals for shape up(Z). Every cited statement is in unit sk-def-sfb-derived-tensor-hom, there is no cycle, no SGA, and no tool use is needed. Edge cases checked: K=0, K in a single degree, and Tot^n running over the finite range p in [n,b]. The new Mathlib leaf is an exact match, has no duplicate in the DAG, and is strictly smaller than the item. I repaired three small faults in fixes/: (1) step 3 now spells out that R(X)^{-n} is Mathlib's N-indexed chainComplex term and cites the additive-functor node for the zero objects under iota; (2) the new node's statement was not self-contained (B2) and now defines Lambda, chainComplex and chainComplexMap; (3) the new node's blueprint.from.via was wrong (B9) and is now [item, bounded-minus, functorial-bounded-above-class-resolution, kflat-derivability].; 2 file(s) fixed by the reviewer"
  }
 }
