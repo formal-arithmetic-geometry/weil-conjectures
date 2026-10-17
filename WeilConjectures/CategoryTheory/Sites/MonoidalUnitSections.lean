@@ -51,8 +51,8 @@ variable {R : Type*} [Ring R] {D : Type*} [Category* D] {K : D ⥤ ModuleCat.{w}
 
 /-- The images of the components of a colimit cocone of modules span the colimit. -/
 lemma iSup_range_ι_app_eq_top {c : Cocone K} (hc : IsColimit c) :
-    ⨆ d, LinearMap.range ((c.ι.app d).hom : K.obj d →ₗ[R] c.pt) = ⊤ := by
-  set N := ⨆ d, LinearMap.range ((c.ι.app d).hom : K.obj d →ₗ[R] c.pt)
+    ⨆ d, LinearMap.range (show K.obj d →ₗ[R] c.pt from (c.ι.app d).hom) = ⊤ := by
+  set N := ⨆ d, LinearMap.range (show K.obj d →ₗ[R] c.pt from (c.ι.app d).hom)
   have h : ModuleCat.ofHom N.mkQ = 0 := hc.hom_ext fun d ↦ by
     ext x
     simpa using Submodule.mem_iSup_of_mem d (LinearMap.mem_range_self _ x)
@@ -85,7 +85,7 @@ lemma exists_map_tensorObj_eq (hf : J.IsDisjointCover f) (F G : Sheaf J (ModuleC
   obtain ⟨a', ha'⟩ := hf.exists_map_eq F (Pi.single i a)
   obtain ⟨b', hb'⟩ := hf.exists_map_eq G (Pi.single i b)
   refine ⟨(a' ⊗ₜ b' : F.obj.obj (op W) ⊗[R] G.obj.obj (op W)), fun k ↦ ?_⟩
-  rw [Monoidal.tensorObj_map, ModuleCat.MonoidalCategory.tensorHom_tmul, ha', hb']
+  erw [Monoidal.tensorObj_map, ModuleCat.MonoidalCategory.tensorHom_tmul, ha', hb']
   by_cases hk : k = i
   · subst hk
     simp
@@ -104,7 +104,7 @@ lemma exists_map_sigma_eq (hf : J.IsDisjointCover f) {K : Type*}
     (fun i ↦ ⋃ k, Set.range ((Sigma.ι (fun k ↦ (X k).obj) k).app (op (Y i))))
     (fun i ↦ ?_) ?_ t
   · rw [Submodule.span_iUnion]
-    refine eq_top_iff.2 ((ModuleCat.iSup_range_ι_app_eq_top
+    refine _root_.eq_top_iff.2 ((ModuleCat.iSup_range_ι_app_eq_top
       (isColimitOfPreserves ((evaluation _ _).obj (op (Y i)))
         (colimit.isColimit (Discrete.functor fun k ↦ (X k).obj)))).symm.le.trans
       (iSup_le fun ⟨k⟩ ↦ le_iSup_of_le k ?_))
@@ -129,11 +129,17 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) {R : Type (m
 
 attribute [local instance] Sheaf.monoidalCategory
 
+/-- The canonical map from the constant presheaf `R`, the monoidal unit of presheaves, to the
+presheaf underlying the monoidal unit of sheaves. -/
+noncomputable def unitHom :
+    𝟙_ (Cᵒᵖ ⥤ ModuleCat.{max u v} R) ⟶ (𝟙_ (Sheaf J (ModuleCat.{max u v} R))).obj :=
+  (sheafificationAdjunction J _).homEquiv _ _
+    (Functor.OplaxMonoidal.η (presheafToSheaf J (ModuleCat.{max u v} R)))
+
 /-- The unit section of the monoidal unit of sheaves of modules over an object `W`: the image
 of `1 ∈ R` under the canonical map from the constant presheaf `R` to the unit. -/
 noncomputable def unitSection (W : C) : (𝟙_ (Sheaf J (ModuleCat.{max u v} R))).obj.obj (op W) :=
-  ((sheafificationAdjunction J _).homEquiv _ _
-    (Functor.OplaxMonoidal.η (presheafToSheaf J (ModuleCat.{max u v} R)))).app (op W) (1 : R)
+  (unitHom J).app (op W) (1 : R)
 
 /-- The canonical morphism from the objectwise tensor product of the presheaves underlying two
 sheaves of modules to the presheaf underlying their tensor product. -/
@@ -144,6 +150,64 @@ noncomputable def tensorObjComparison (F G : Sheaf J (ModuleCat.{max u v} R)) :
       ((sheafificationAdjunction J _).counit.app F ⊗ₘ (sheafificationAdjunction J _).counit.app G))
 
 variable {J}
+
+/-- The comparison `F(-) ⊗ G(-) ⟶ (F ⊗ G)(-)` is natural. -/
+@[reassoc]
+lemma tensorObjComparison_naturality {F F' G G' : Sheaf J (ModuleCat.{max u v} R)}
+    (f : F ⟶ F') (g : G ⟶ G') :
+    tensorObjComparison J F G ≫ (f ⊗ₘ g).hom =
+      (f.hom ⊗ₘ g.hom) ≫ tensorObjComparison J F' G' := by
+  have h (F G : Sheaf J (ModuleCat.{max u v} R)) :
+      ((sheafificationAdjunction J _).homEquiv _ _).symm (tensorObjComparison J F G) =
+        Functor.OplaxMonoidal.δ (presheafToSheaf J (ModuleCat.{max u v} R)) _ _ ≫
+          ((sheafificationAdjunction J _).counit.app F ⊗ₘ
+            (sheafificationAdjunction J _).counit.app G) :=
+    Equiv.symm_apply_apply _ _
+  have h₂ : ((sheafificationAdjunction J _).homEquiv _ _).symm
+      (tensorObjComparison J F G ≫ (f ⊗ₘ g).hom) =
+      ((sheafificationAdjunction J _).homEquiv _ _).symm (tensorObjComparison J F G) ≫
+        (f ⊗ₘ g) :=
+    Adjunction.homEquiv_naturality_right_symm _ _ _
+  have h₃ : ((sheafificationAdjunction J _).homEquiv _ _).symm
+      ((f.hom ⊗ₘ g.hom) ≫ tensorObjComparison J F' G') =
+      (presheafToSheaf J _).map (f.hom ⊗ₘ g.hom) ≫
+        ((sheafificationAdjunction J _).homEquiv _ _).symm (tensorObjComparison J F' G') :=
+    Adjunction.homEquiv_naturality_left_symm _ _ _
+  apply ((sheafificationAdjunction J _).homEquiv _ _).symm.injective
+  rw [h₂, h₃, h, h, Category.assoc, tensorHom_comp_tensorHom]
+  erw [← Functor.OplaxMonoidal.δ_natural_assoc]
+  rw [tensorHom_comp_tensorHom]
+  congr 2
+  · exact ((sheafificationAdjunction J _).counit.naturality f).symm
+  · exact ((sheafificationAdjunction J _).counit.naturality g).symm
+
+/-- The inverse of the left unitor of sheaves, on underlying presheaves. -/
+lemma leftUnitor_inv_hom (F : Sheaf J (ModuleCat.{max u v} R)) :
+    (λ_ F).inv.hom = (λ_ F.obj).inv ≫ unitHom J ▷ F.obj ≫ tensorObjComparison J (𝟙_ _) F := by
+  have hθ : ((sheafificationAdjunction J _).homEquiv _ _).symm (tensorObjComparison J (𝟙_ _) F) =
+      Functor.OplaxMonoidal.δ (presheafToSheaf J (ModuleCat.{max u v} R)) _ _ ≫
+        ((sheafificationAdjunction J _).counit.app (𝟙_ _) ⊗ₘ
+          (sheafificationAdjunction J _).counit.app F) :=
+    Equiv.symm_apply_apply _ _
+  have hu : (presheafToSheaf J _).map (unitHom J) ≫ (sheafificationAdjunction J _).counit.app _ =
+      Functor.OplaxMonoidal.η (presheafToSheaf J (ModuleCat.{max u v} R)) :=
+    (Adjunction.homEquiv_counit _ _ _ _).symm.trans (Equiv.symm_apply_apply _ _)
+  have h₁ : ((sheafificationAdjunction J _).homEquiv _ _).symm ((λ_ F).inv.hom) =
+      (sheafificationAdjunction J _).counit.app F ≫ (λ_ F).inv :=
+    (Adjunction.homEquiv_counit _ _ _ _).trans
+      ((sheafificationAdjunction J _).counit.naturality (λ_ F).inv)
+  have h₃ : ((sheafificationAdjunction J _).homEquiv _ _).symm
+      ((λ_ F.obj).inv ≫ unitHom J ▷ F.obj ≫ tensorObjComparison J (𝟙_ _) F) =
+      (presheafToSheaf J _).map ((λ_ F.obj).inv ≫ unitHom J ▷ F.obj) ≫
+        ((sheafificationAdjunction J _).homEquiv _ _).symm (tensorObjComparison J (𝟙_ _) F) := by
+    rw [← Adjunction.homEquiv_naturality_left_symm, Category.assoc]
+  apply ((sheafificationAdjunction J _).homEquiv _ _).symm.injective
+  rw [h₁, h₃, hθ, Functor.map_comp, Category.assoc]
+  erw [← Functor.OplaxMonoidal.δ_natural_left_assoc]
+  rw [tensorHom_def]
+  erw [← comp_whiskerRight_assoc]
+  rw [hu, ← Functor.OplaxMonoidal.left_unitality_assoc]
+  exact leftUnitor_inv_naturality ((sheafificationAdjunction J _).counit.app F)
 
 end Sheaf
 
