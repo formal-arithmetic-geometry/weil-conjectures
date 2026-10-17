@@ -16,9 +16,207 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The map $A\\to B$ is local because $\\mathfrak q\\cap A=\\mathfrak m$, and it reflects units. Products in a commutative ring are units exactly when both factors are units, so $G$ and $F$ are faces. The tensor relation $[h(r)]=\\alpha(r)$ gives $h^{-1}(F)=G$. Apply [lem-trf-fs-face-sharpening] separately to $(R,G)$ and $(Q,F)$: $R_G^\\times=G^{\\rm gp}$, $Q_F^\\times=F^{\\rm gp}$, and $S,T$ are sharp fs with finite free group completions. There is an induced map $S\\to T$, but its group completion need not be injective: for $R=\\mathbf N e_1+\\mathbf N e_2$, $Q=\\mathbf N e_1+\\mathbf N(e_2-e_1)$, $A=k[[x,y]]$, $\\alpha(e_1)=x$, $\\alpha(e_2)=y$, at $(x,u-1)$ in $A[u]/(xu-y)$ one has $G=0$, $F=\\mathbf N(e_2-e_1)$, and ranks $2$ and $1$. No equality of these face subgroups is used.",
+   "uses": [
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.1--3.1.5, printed pp. 98--99; explicit unit-face calculation and the returned blowup counterexample."
+   }
+  },
+  {
+   "text": "Define $\\chi=\\epsilon\\circ(h^{\\rm gp})^{-1}:Q^{\\rm gp}\\to A^\\times$. The $A$-algebra automorphism $\\Phi$ of $A[Q]$ with $\\Phi([q])=\\chi(q)[q]$ has inverse given by $\\chi^{-1}$. For $r\\in R$, $$\\Phi([h(r)]-\\alpha(r))=\\epsilon(r)([h(r)]-a(\\bar r)).$$ Thus it carries the original relation ideal onto the untwisted relation ideal and identifies the corresponding tensor rings, chosen local rings, completions and nonface monomial ideals. All monomials are rescaled by units. We henceforth use the untwisted chart, so $\\alpha(r)=a(\\bar r)$, in particular $\\alpha(g)=1$ for $g\\in G^{\\rm gp}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, printed p. 70, formal-model context; the character automorphism and its relation calculation are agent algebra."
+   }
+  },
+  {
+   "text": "Inverting the monomials in $F$ gives $C_F\\cong A\\otimes_{\\mathbf Z[R_G]}\\mathbf Z[Q_F]$. The inverse on a localized monomial is $b\\otimes[q+(-f)]\\mapsto b[q]/[f]$; the relations for $G$ are valid since its monomials are already units. Put $N=h(G^{\\rm gp})$ and $P=Q_F/N$, the quotient by this subgroup of units. Since the untwisted map sends every $g\\in G^{\\rm gp}$ to $1$, the tensor relations kill $[h(g)]-1$. The remaining relations are exactly those over $\\mathbf Z[S]$, giving $$C_F\\cong A\\otimes_{\\mathbf Z[S]}\\mathbf Z[P].$$ Both directions send $b\\otimes[q]$ to the class of $b\\otimes[q]$; changing $q$ by $h(g)$ gives the same tensor by balancing. This keeps the unit relations instead of dropping the whole group $F^{\\rm gp}$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.2, printed p. 98; explicit face localization and balanced tensor presentation."
+   }
+  },
+  {
+   "text": "Identify $M=Q^{\\rm gp}/N$ with $R^{\\rm gp}/G^{\\rm gp}=S^{\\rm gp}$ using $h^{\\rm gp}$. Let $K=F^{\\rm gp}/N\\subset M$. This is a subgroup of the finite free group $M$, hence is finite free by [lem-weil-subgroup-finite-free-abelian-group-free]. Moreover $P$ is the full inverse image of $T$ under $M\\to Q^{\\rm gp}/F^{\\rm gp}=T^{\\rm gp}$: representatives of a fixed $T$-class differ by a unit of $Q_F$. Choose lifts in $M$ of a basis of the free group $T^{\\rm gp}$, giving a section $\\sigma:T^{\\rm gp}\\to M$. Then $\\sigma(T)\\subset P$, and the inverse formulas $(k,v)\\mapsto k+\\sigma(v)$ and $p\\mapsto(p-\\sigma(\\bar p),\\bar p)$ identify $P=K\\oplus T$. Write the induced map $f:S\\to P$ as $f(s)=(\\delta(s),\\beta(s))$. It satisfies $\\beta(s)\\ne0$ for $s\\ne0$: a lift $r\\in R_G$ of such an $s$ has $a(s)=\\alpha(r)$ nonunit in $A$ and hence in $B$, so $h(r)\\notin F^{\\rm gp}=Q_F^\\times$.",
+   "uses": [
+    "lem-trf-fs-face-sharpening",
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.1--3.1.5, printed pp. 98--99; splitting the sharp quotient while retaining the residual unit group."
+   }
+  },
+  {
+   "text": "We first justify replacing the base $A$ by $\\widehat A$. Put $C'=\\widehat A\\otimes_{\\mathbf Z[S]}\\mathbf Z[P]$ and let $\\mathfrak q'$ be the prime corresponding to the chosen prime of $C_F$ under $C'/\\mathfrak mC'\\cong C_F/\\mathfrak m C_F$. Write $B'=C'_{\\mathfrak q'}$. Then $\\mathfrak m_BB'=\\mathfrak m_{B'}$, since the quotient is $\\kappa(\\mathfrak q)$. For every $j\\ge1$, [lem-weil-pbc-adic-completion-mod-power] identifies $\\widehat A/\\mathfrak m^j\\widehat A=A/\\mathfrak m^j$. Because $\\mathfrak m^jB\\subset\\mathfrak m_B^j$, balancing tensors yields $$B'/\\mathfrak m_{B'}^j\\cong B/\\mathfrak m_B^j.$$ Explicitly $\\hat a\\otimes b$ maps to $(a\\bmod\\mathfrak m^j)b$, where $a$ represents the $j$th coordinate of $\\hat a$; the inverse is induced by $B\\to B'$. Denominators outside the chosen prime stay invertible, and the composites fix all generators. These maps commute with reduction, so $\\widehat B=\\widehat {B'}$ compatibly with every chart monomial.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "05GG, lemma-hathat-finitely-generated (quotient by each ideal power); elementary balanced-tensor and local quotient calculation."
+   }
+  },
+  {
+   "text": "Let $L=k$ in case (a) and $L=V$ in case (b). Set $$R_0=L[S][t_1,\\ldots,t_n],\\quad I=(\\mathfrak m_L,[s]:s\\ne0,t_1,\\ldots,t_n),\\quad H_S=\\widehat{R_0}_I,\\quad U=L[P][t_1,\\ldots,t_n].$$ The ideal $I$ is finitely generated: use finite generators of $S$, the finitely many $t_i$ and, in the Cohen case, $p$. The hypothesis gives $\\widehat A=H_S$ in case (a), and $\\widehat A=H_S/(\\theta)$ in case (b). Here $U$ is an $R_0$-algebra via $[s]\\mapsto[f(s)]$, with the coefficient and $t$ variables fixed. Put $W=H_S\\otimes_{R_0}U$. Associating tensors identifies $W$ with $H_S\\otimes_{\\mathbf Z[S]}\\mathbf Z[P]$: $(x\\otimes l[p]t^e)\\mapsto xl t^e\\otimes[p]$, with inverse $x\\otimes[p]\\mapsto x\\otimes[p]$. Hence $B'$ is a localization of $W$ in case (a), and of $W/(\\theta)$ in case (b). Both $R_0,U$ are finite type over the Noetherian ring $L$, and $H_S$ is Noetherian by completion. Since $U$ is finite type over $R_0$, $W$ is finite type over $H_S$ and is Noetherian too.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; polynomial chart before completion and before imposing the mixed-characteristic relation."
+   }
+  },
+  {
+   "text": "Under $P=K\\oplus T$, put $E=L[K][t_1,\\ldots,t_n]$, so $U=E[T]$. In the residue field of the chosen point, all $[v]$, $v\\in T\\setminus\\{0\\}$, as well as $\\mathfrak m_L$ and the old $t_i$, vanish. The remaining units are the $K$-monomials. Let $\\mathfrak p\\subset E$ be the kernel of this residue map; it contains $(\\mathfrak m_L,t_1,\\ldots,t_n)$. The corresponding prime of $U$ is $$\\mathfrak r=\\mathfrak pU+([v]:v\\ne0),$$ because quotienting by the displayed monomial ideal gives $E$. The residue field of $U_{\\mathfrak r}$ is $\\operatorname{Frac}(E/\\mathfrak p)=\\kappa(\\mathfrak q)$: the localized tensor presentation in Step 3, reduced at its chosen point, leaves exactly this group-algebra stratum. Since $\\beta(s)\\ne0$ for $s\\ne0$, $IU\\subset\\mathfrak r$; and since $\\theta-p\\in([s]:s\\ne0,t)$, the chosen prime of $W$ also contains $\\theta$ in case (b).",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.1--3.1.5, printed pp. 98--99; direct computation of the stratum prime and residue field from the corrected tensor presentation."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak n$ be the prime of $W$ over $\\mathfrak r$ given by $W/IW\\cong U/IU$. This is the prime whose localization occurs in Step 6 (or the inverse image of that prime before quotienting by $\\theta$). Set $Z=U_{\\mathfrak r}$ and $W_*=W_{\\mathfrak n}$. The quotient $W_*/\\mathfrak m_ZW_*$ is $\\kappa(\\mathfrak r)$, so $\\mathfrak m_{W_*}=\\mathfrak m_ZW_*$. For each $j$, the isomorphism $H_S/I^jH_S=R_0/I^j$ from [lem-weil-pbc-adic-completion-mod-power], and $I^j Z\\subset\\mathfrak m_Z^j$, give $$W_*/\\mathfrak m_{W_*}^j\\cong Z/\\mathfrak m_Z^j.$$ The forward map replaces a formal coefficient by a polynomial representative modulo $I^j$ and multiplies it into the $U$ factor; the inverse comes from $U\\to W$. The replacement error is in $I^jZ$, the tensor relations are preserved, and both composites fix generators. They commute with all quotient transitions. Passing to limits gives $\\widehat {W_*}\\cong\\widehat Z$. This establishes the completion comparison before any relation is imposed.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "05GG, lemma-hathat-finitely-generated; finite-quotient comparison of a tensor extension of a completed coefficient ring."
+   }
+  },
+  {
+   "text": "Let $E_*=E_{\\mathfrak p}$ and $D=\\widehat {E_*}$. The coefficient ring $L$ is regular local by [lem-weil-pbc-power-series-field-cohen-regular-complete] with zero variables, and is regular as a ring by [lem-weil-pbc-regular-local-localization]. Choose a basis of $K$: $E$ is the Laurent polynomial ring $L[u_1^{\\pm1},\\ldots,u_d^{\\pm1},t_1,\\ldots,t_n]$. Thus $E_*$ is a prime localization of an ordinary polynomial ring over the regular ring $L$, and is regular local by [lem-trf-polynomial-ring-regular-base]. Its completion $D$ is regular local by [lem-weil-pbc-completion-regular-local], and is complete by [lem-weil-pbc-adic-completion-mod-ideal](1). The local-completion statement identifies its residue field with that of $E_*$, namely $\\kappa(\\mathfrak q)$ by Step 7. In particular $D\\ne0$. This $D$ is constructed from the polynomial coefficient lift; in case (b) it is constructed before imposing $\\theta$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "07NY, lemma-completion-regular; algebra.tex 05GG, lemma-hathat-finitely-generated, and 05GI, lemma-radical-completion, for completeness and residue fields. Polynomial regularity is the cited existing Mathlib statement."
+   }
+  },
+  {
+   "text": "Put $H=D[[T]]$, defined by completion of $D[T]$ at $(\\mathfrak m_D,[v]:v\\ne0)$. We compute $\\widehat Z=H$. First localize $E[T]$ by $E\\setminus\\mathfrak p$, giving $E_*[T]$, and set $\\mathfrak b=(\\mathfrak m_{E_*},[v]:v\\ne0)$. Every element inverted in the further localization at $\\mathfrak r$ has unit constant coefficient in $E_*$; modulo $\\mathfrak b^j$ its inverse is the finite geometric series in its nonconstant part, whose $j$th power is zero. Consequently $Z/\\mathfrak m_Z^j=E_*[T]/\\mathfrak b^j$. Next $E_*/\\mathfrak m_{E_*}^j=D/\\mathfrak m_D^j$ by [lem-weil-pbc-adic-completion-mod-power]. Since both combined ideals to the $j$th power contain these coefficient-ideal powers, the same coefficient isomorphism induces $$E_*[T]/\\mathfrak b^j\\cong D[T]/(\\mathfrak m_D,[v]:v\\ne0)^j.$$ Its inverse chooses coefficient lifts modulo $\\mathfrak m_{E_*}^j$ in each finite monomial sum; the error lies in $\\mathfrak b^j$. Products and transitions agree on coefficients and monomials. Taking inverse limits gives the claimed continuous coefficient-compatible isomorphism.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "05GG, lemma-hathat-finitely-generated, applied to E_*; direct finite geometric inversion and coefficient-quotient computation in the monoid polynomial ring."
+   }
+  },
+  {
+   "text": "Combining Steps 5, 8 and 10 gives $\\widehat B\\cong H$ in case (a). In case (b), $B'=W_* /(\\theta)$ and $W_*$ is Noetherian. Apply [lem-weil-pbc-local-completion-quotient] to this surjection: $$\\widehat B=\\widehat {B'}\\cong\\widehat {W_*}/(\\theta)\\cong H/(\\eta),$$ where $\\eta$ is the image of $\\theta\\in H_S\\to W_*\\to\\widehat {W_*}=H$. All maps are the coefficient-compatible maps of the finite quotients. In particular the image of a base chart monomial is $[f(s)]=[\\delta(s)][\\beta(s)]$, and the image of $[k+\\sigma(v)]$ is $[k][v]$. For a general formal base element its image is its full convergent expansion under this substitution, not its reduction to $D$. The substitution is continuous since $\\beta(s)\\ne0$ for $s\\ne0$, and all $t_i$ map to the maximal ideal of $D$. Thus the tensor relation $a(s)=[f(s)]$ is preserved, including $x=[1]$ in the identity chart $A=k[[x]]$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00MA, lemma-completion-tensor, completion of the Noetherian local quotient; the preceding finite-quotient maps specify the compatible formal substitution."
+   }
+  },
+  {
+   "text": "We verify the mixed-characteristic parameter condition without asserting $\\bar\\eta-p\\in\\mathfrak m_D^2$. Set $E'=E_* /(t_1,\\ldots,t_n)$; this is the localization of $V[K]$ at the prime induced by $\\mathfrak p$, and $E'/pE'$ is the corresponding localization of $k[K]$. Both are regular local by polynomial regularity over $V$ and $k$ (and the regular-local localization statement for the coefficient rings). Also $p\\ne0$ in $E'$: a Laurent polynomial over the domain $V$ is not annihilated by its nonzero scalar $p$, and localization cannot kill $p$. Apply [lem-weil-pbc-regular-local-quotient-kernel-parameters] to the nonzero ideal $pE'$ in the regular local ring $E'$ with regular quotient $E'/pE'$. It is generated by a nonempty subset of a regular parameter system. These $d$ parameter classes span a cotangent space of dimension $d$ by [lem-weil-pbc-regular-local-cotangent-dimension], hence form a basis. If $p$ lay in $\\mathfrak m_{E'}^2$, that entire nonzero parameter subset would have zero classes, a contradiction. Hence $p\\in\\mathfrak m_{E'}\\setminus\\mathfrak m_{E'}^2$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00NR, lemma-regular-quotient-regular (kernel generated by regular parameters); 00KU cotangent characterization of regular local rings. Applied only to the actual localized Laurent coefficient ring."
+   }
+  },
+  {
+   "text": "Let $L_T=([v]:v\\ne0)H$. The formal-monoid statement [lem-trf-formal-monoid-ring-dimension] applies to the nonzero complete regular $D$ and sharp fs $T$; it gives $H/L_T=D$. Reduce the substituted relation modulo $L_T$ and then modulo the old parameters $t_i$. Every nonzero $S$-monomial disappears because $\\beta(s)\\ne0$, so $\\theta-p\\in([s]:s\\ne0,t)$ gives $\\bar\\eta\\equiv p\\pmod{(t)D}$. The quotient-completion statement gives $D/(t)D\\cong\\widehat {E'}$. The square-quotient isomorphism of [lem-weil-pbc-adic-completion-mod-power] identifies the cotangent class of $p$ in $E'$ with that in $\\widehat {E'}$, which is nonzero by Step 12. Thus $\\bar\\eta$ cannot be in $\\mathfrak m_D^2$, since its image in $D/(t)D$ is $p$. It belongs to $\\mathfrak m_D$, as its residue is zero. This proves exactly $\\bar\\eta\\in\\mathfrak m_D\\setminus\\mathfrak m_D^2$, allowing linear $t$-terms such as $\\theta=p-t$.",
+   "uses": [
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(ii), printed p. 70, the stated congruence modulo both monomials and old parameters; Stacks 00MA and 05GG for the two quotient comparisons."
+   }
+  },
+  {
+   "text": "Under the isomorphism in Step 11, a $Q_F$-monomial with coordinates $(k,v)$ goes to the unit $[k]$ times $[v]$; the earlier character correction also multiplies it by a unit. For $q\\in Q$, $q\\notin F$ exactly when its $T$-class is nonzero, so the image of $J\\widehat B$ is contained in the indicated nonzero-$T$ monomial ideal. Conversely, for each $v\\ne0$ choose a representative $q-f\\in Q_F$, with $q\\in Q$, $f\\in F$. Necessarily $q\\notin F$, and its image is a unit times $[v]$ because the denominator $[f]$ and the $K$-factor are units. Hence every generator $[v]$ belongs to the image of $J\\widehat B$. This proves equality of the actual generated ideals in $H$ or $H/(\\eta)$; no assertion about factors or closures of arbitrary monomial ideals is needed. The maps are continuous with continuous inverse because their finite-quotient constructions preserve each maximal-ideal power. Cases $T=\\{0\\}$, $K=0$ and $n=0$ use the same formulas with empty monomial, unit or parameter lists.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and VIII 3.1.1--3.1.5, printed pp. 70 and 98--99; generator-by-generator ideal comparison after construction of the isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-subgroup-finite-free-abelian-group-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 (formal models) and VIII 3.1.1--3.1.5 (face localization) supply context; the corrected independent proof constructs the residual unit group, compares finite quotients twice, builds the pre-relation coefficient lift and checks the mixed-characteristic parameter after quotienting old parameters."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +255,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-smooth-log-regular",
@@ -82,5 +280,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-formal-monoid-extension-model",
+  "worker": "stage1",
+  "summary": "Full repair against maintainer review 2f4232130023. Retained the item statement, all hypotheses and existing search records. Removed the false face-subgroup/sharp-group identifications; kept K=F^gp/h(G^gp) via P=Q_F/h(G^gp)=K plus T. Explicitly compared completion after A to Ahat and completion after the polynomial source to its formal chart using quotient-by-power identities and balanced tensors. Constructed D from the localized polynomial Laurent coefficient ring before theta, computed the remaining monoid completion on every quotient, and used completion of a Noetherian quotient for eta. Proved the exact parameter condition by passing modulo t, with p nonzero in the cotangent space of the regular Laurent Cohen stratum; did not assert eta-bar=p modulo m_D^2. Replaced the invalid coefficient-to-D map by full formal substitution, and proved both ideal inclusions directly from unit-times-monomial generator images. No new nodes.",
+  "blueprint": "Historical lem-trf-local-term-locality proof (1)--(2) through the retained ancestry to lem-trf-log-smooth-log-regular: independent algebra input implementing ILO VI 1.6 formal models and VIII 3.1.1--3.1.5 face localization. Steps 1--4 give the corrected chart and unit factors; Steps 5--11 construct its completed presentation; Steps 12--14 check the parameter and ideal pair.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Steps 6, 9 and 12 use regularity/Noetherianity of the field or Cohen coefficient ring (zero variables). This is a generic commutative-algebra tool; no statement of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Steps 9 and 12 turn regular local coefficient rings into regular rings before applying polynomial regularity. This is a generic commutative-algebra tool; no statement of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Step 9 transfers regular-locality of the actual Laurent polynomial coefficient stratum to its completion D. This is a generic commutative-algebra tool; no statement of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Step 9 identifies the maximal ideal and residue field of D. This is a generic commutative-algebra tool; no statement of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Steps 11 and 13 commute completion with the theta quotient and with quotienting by the old t variables. This is a generic commutative-algebra tool; no statement of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "why": "Step 12 recognizes the nonzero principal ideal (p) as generated by parameters because its Laurent coefficient quotient is regular. This is a generic commutative-algebra tool; no statement of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-cotangent-dimension",
+    "why": "Step 12 detects that a member of the parameter system has nonzero cotangent class. This is a generic commutative-algebra tool; no statement of the current unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-cotangent-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-187dfd328",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-187dfd328 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all fourteen proof steps, cited dependency statements, unit/chapter route, ILO VI 1.6 and VIII 3.1.1–3.1.5 context, Stacks interfaces, edge cases, duplicate search, route-pivot exclusions, and prior repair points. The corrected character twist, face splitting, tensor/localization comparisons, completion constructions, mixed-characteristic parameter argument, and ideal comparison are valid. Review written to review.md; no fixes needed."
  }
 }

@@ -22,9 +22,94 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-module-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-power-series-domain], $k[[x,y]]$ is a domain. Thus $f\\ne0$ is a nonzerodivisor, and $f\\in(x,y)$ makes its quotient nonzero; $f$ is a regular sequence of length one by [def-weil-pbc-regular-sequence]. Apply [lem-trf-completed-conormal-determinant-comparison] with $d=1,n=2,c=1$: $k$ is perfect, $S$ has the required reduced lci pure-dimensional hypotheses, its maximal residue field is $k$, and $R=\\widehat A$ is reduced by the given formal presentation. We obtain the specified isomorphism $K_A\\otimes_A R\\cong\\lambda_f=(R\\bar f)^\\vee\\otimes_R\\bigwedge^2(R\\,\\mathrm dx\\oplus R\\,\\mathrm dy)$. Its normalization square applies to $R\\to L=k((t))$: the restriction to $A$ factors through the given smooth generic point of the normalization branch. It identifies the inverse formal determinant map with the given algebraic generic differential map. This is the required completion comparison; base change of $S$ is not being used.",
+   "uses": [
+    "lem-weil-pbc-power-series-domain",
+    "def-weil-pbc-regular-sequence",
+    "lem-trf-completed-conormal-determinant-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Auxiliary formal comparison for Tag 0E9Z; no source-completion assertion is taken from Tag 0E2Y."
+   }
+  },
+  {
+   "text": "Choose the generator $\\varepsilon=-\\bar f^\\vee\\otimes(\\mathrm dx\\wedge\\mathrm dy)$ of $\\lambda_f$. In $L$ put $a=f_x(x(t),y(t))$ and $b=f_y(x(t),y(t))$. The formal conormal differential sends $\\bar f$ to $a\\,\\mathrm dx+b\\,\\mathrm dy$. The normalized determinant map of [lem-trf-completed-conormal-determinant-comparison] sends $\\mathrm dx$ to $-b\\,\\bar f^\\vee\\otimes(\\mathrm dx\\wedge\\mathrm dy)=b\\varepsilon$, and $\\mathrm dy$ to $a\\,\\bar f^\\vee\\otimes(\\mathrm dx\\wedge\\mathrm dy)=-a\\varepsilon$. Consequently its inverse sends $\\varepsilon$ to $\\mathrm dx/b$ if $b\\ne0$, or to $-\\mathrm dy/a$ if $a\\ne0$. At least one is allowed by hypothesis. These inversions take place in $L$, so no partial derivative is required to be a unit in $k[[t]]$.",
+   "uses": [
+    "lem-trf-completed-conormal-determinant-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Determinant wedge formula preceding Tag 0E9Z, with the normalization supplied by the separately stated comparison."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-completed-jacobian-differentials] separately to $D$. The assumption that $D$ is the local ring of a smooth curve at a point with residue $k$ supplies a localization of an affine finite-type $k$-algebra at that maximal ideal. The coefficient section is the structural map from $k$, and the chosen presentation is $\\widehat D=k[[t]]$, with one variable and no equations. The lemma therefore identifies $\\Omega^1_{D/k}\\otimes_D k[[t]]$ with $k[[t]]\\,\\mathrm dt$, with the continuous extension of $d_D$ sending $t$ to $\\mathrm dt$. On polynomials it is termwise differentiation by the derivation rule. Continuity and polynomial truncations give $d_D^\\wedge(h(t))=h'(t)\\,\\mathrm dt$ for every power series. The quotient rule $d(a/b)=b^{-1}da-ab^{-2}db$ extends every derivation of $D$ uniquely to $F$ with values in an $F$-module; the universal property therefore gives $\\Omega^1_{D/k}\\otimes_D F=\\Omega^1_{F/k}$. Localizing the completed identification to $L$ now shows that the scalar extension of the rational-differential map $\\Omega^1_{F/k}\\to L\\,\\mathrm dt$ is an isomorphism; thus a nonzero rational differential stays nonzero.",
+   "uses": [
+    "lem-trf-completed-jacobian-differentials",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D, completed-Jacobian comparison applied with one variable and no equations to the smooth branch DVR."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-completed-jacobian-differentials] also to $A$ and its plane presentation. The completed algebraic differential cokernel has coordinate classes $\\widehat d_A(x),\\widehat d_A(y)$. The algebraic differential map for $A\\to D$ commutes with universal derivations by [def-weil-pbc-kahler-differentials]. After completing, the induced derivation on $R$ and the composite $R\\to\\widehat D\\xrightarrow{d_D^\\wedge}k[[t]]\\,\\mathrm dt$ agree on the dense subring $A$. Both are continuous into the separated module $k[[t]]\\,\\mathrm dt$, so they agree on $R$. Hence $\\mathrm dx\\mapsto x'(t)\\,\\mathrm dt$ and $\\mathrm dy\\mapsto y'(t)\\,\\mathrm dt$. By steps 1--2 the completed adjunction generator maps to $x'(t)\\,\\mathrm dt/b$, respectively $-y'(t)\\,\\mathrm dt/a$. Associativity of tensor extension [def-weil-module-base-change] identifies its $k[[t]]$-span with the image of $(K_A\\otimes_A D)\\otimes_D k[[t]]$. This generator is nonzero by step 3 and the generic isomorphism in step 1, so its span is a free rank-one lattice.",
+   "uses": [
+    "lem-trf-completed-jacobian-differentials",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Z residue calculation following the formal comparison, with explicit continuous pullback of the differential classes."
+   }
+  },
+  {
+   "text": "The relation $f_x\\,\\mathrm dx+f_y\\,\\mathrm dy=0$ in the completed differential cokernel of [lem-trf-completed-jacobian-differentials], mapped as in step 4, gives $a x'(t)+b y'(t)=0$. If $a,b$ are both nonzero, division by $ab$ gives $x'(t)/b=-y'(t)/a$. Thus the two displayed fractions agree.",
+   "uses": [
+    "lem-trf-completed-jacobian-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "The conormal relation in the determinant calculation of Tag 0E9Z."
+   }
+  },
+  {
+   "text": "For any other algebraic presentation or regular formal presentation of the same $R$, the comparison and generic-normalization identities of [lem-trf-completed-conormal-determinant-comparison] identify the resulting image with the same completed algebraic line inside rational differentials. Thus their lattices agree; we are using formal-presentation compatibility explicitly. For a change $t=t(s)$ of the complete branch parameter, [lem-trf-formal-jacobian-coordinate-chain-rule] in one variable gives the chain rule and the invertibility of $t'(s)$. Substitution sends $\\mathrm dt$ to $t'(s)\\,\\mathrm ds$ and the two residue expressions to the corresponding expressions in $s$. This is an invertible identification of the ambient regular differential modules and of the calculated lattices, proving the stated parameter independence.",
+   "uses": [
+    "lem-trf-completed-conormal-determinant-comparison",
+    "lem-trf-formal-jacobian-coordinate-chain-rule"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B coordinate changes, together with the formal determinant comparison and its generic normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-regular-sequence",
+  "lem-trf-completed-conormal-determinant-comparison",
+  "lem-trf-completed-jacobian-differentials",
+  "lem-trf-formal-jacobian-coordinate-chain-rule",
+  "lem-weil-pbc-power-series-domain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Z and preceding determinant formula, with the separately stated formal conormal comparison; curves.tex Tag 0C4B for coordinate changes. Formal completion and branch specialization are an agent-written synthesis, not verbatim assertions of 0E9Z."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,7 +162,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-normalization-adjunction",
@@ -105,5 +190,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-formal-plane-adjunction-lattice",
+  "worker": "stage1",
+  "summary": "Repaired the returned C4/E5 comparison gap by adding one statement-only theorem on completed algebraic and formal conormal complexes and their determinant lines, including the explicit generic-normalization square. The six item steps validate the regular formal presentation, compute its determinant generator with the common sign fixed, apply completed Jacobian differentials to D separately, prove pullback compatibility by continuity, and establish agreement and presentation/parameter independence. Statement and inherited metadata retained; no Lean work.",
+  "blueprint": "Retains the inherited auxiliary stable-modification/nodal-normalization ancestry and supplies its local adjunction calculation before f=uv; no change to the current contracting-correspondence unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-fcee84e86",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-fcee84e86 (reviewer sub-agent of L); spot-checked: Read the item, new comparison node, every cited statement, unit route, and cited Stacks sources. Verified all six proof steps, hypotheses, determinant signs, formal/base-change compatibility, edge cases, searches, duplicate checks, route constraints, and absence of forbidden SGA or dropped machinery. No repair needed; review written to review.md."
  }
 }
