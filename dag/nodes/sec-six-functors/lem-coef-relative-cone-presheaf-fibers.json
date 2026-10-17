@@ -12,9 +12,146 @@
   "def-coef-infinity-fibrations",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=\\mathcal P(E)$ and $B=\\mathcal P(A)$. The pushout defining $D$ gives an isomorphism of simplicial sets\n$$\\mathcal P(D)\\cong B\\times_{p^*,C,t}\\operatorname{Fun}(\\Delta^1,C),\\qquad t=\\operatorname{ev}_1.$$\nIndeed, an $n$-simplex on the left is a map $D^{\\mathrm{op}}\\times\\Delta^n\\to\\mathcal S$. It is exactly a pair of maps on $A^{\\mathrm{op}}\\times\\Delta^n$ and $(E\\times\\Delta^1)^{\\mathrm{op}}\\times\\Delta^n$ agreeing on $(E\\times\\{0\\})^{\\mathrm{op}}\\times\\Delta^n$. Reverse the cylinder interval and curry the second map: this is an arrow in $C$ whose target is $p^*$ of the first map. Its source is restriction to the original endpoint $1$. Operators are precomposition on $\\Delta^n$, so the same description holds for transformations and every higher simplex. This is just the internal-Hom definition in [def-cbc-enhanced-diagrams-cones] and the degreewise pushout universal property. In particular no claim that $D$ itself is a quasicategory is needed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Definition 9.1 and the pullback calculation in the proof of Lemma 9.4, after taking opposites"
+   }
+  },
+  {
+   "text": "The categories $B,C$ and $\\operatorname{Fun}(\\Delta^1,C)$ are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. By [lem-coef-infinity-yoneda-presheaf-limits], $C$ has pullbacks computed in spaces at each vertex of $E$. Apply [lem-coef-arrow-target-cartesian-pullbacks] to $C$. Under step 1, $j^*$ is the base change of $t$ along $p^*$. The inner-horn and Cartesian-edge horn lifting problems for this base change are the same problems for $t$ with the base simplex fixed by $p^*$, so the lifts remain in the pullback. Each required lift into a chosen target exists there. Thus [def-coef-infinity-fibrations] gives a Cartesian fibration $j^*$. The lift over $h:X'\\to X$ is the square obtained by pulling $\\Psi\\to p^*X$ back to $p^*X'$; its source presheaf is $\\Psi\\times_{p^*X}p^*X'$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-arrow-target-cartesian-pullbacks",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Remark 9.5, Cartesian part; pointwise existence of pullbacks in presheaves"
+   }
+  },
+  {
+   "text": "Taking the degreewise fiber of step 1 at $X$ gives the target-fixed arrow category $\\operatorname{Fun}(\\Delta^1,C)\\times_C\\{p^*X\\}$. Apply [lem-coef-infinity-slice-arrow-equivalence] to $C$ and its vertex $p^*X$: the join-defined coherent slice $C_{/p^*X}$ is equivalent to this arrow fiber over $C$. This identifies the first fiber with the asserted slice, not just with its objects or its core. The arrow is precisely $\\Psi\\to p^*X$ from step 1. The fixed-target evaluation is an isofibration by [lem-coef-infinity-isofibration-exponentiation], applied to $\\{1\\}\\subset\\Delta^1$ and $C\\to *$; the same holds for its base change $j^*$. The final step below verifies that these strict fibers present fibers with a specified equivalence to $X$.",
+   "uses": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Lemma 9.4 and Remark 9.5, identification of the fixed-target fiber"
+   }
+  },
+  {
+   "text": "Write $Y=E_X$ and $r:Y\\to E$. By [lem-coef-space-transport-classification], base change of $r_X$ classifies $F=p^*X$; it is small. Denote the contravariant simplicial model category on $\\mathrm{sSet}_{/E}$ by $M_E$, as in [lem-coef-simplicial-right-fibration-presentation]. Composition with $r$ identifies the underlying ordinary category $\\mathrm{sSet}_{/Y}$ with $(\\mathrm{sSet}_{/E})_{/r}$, by forgetting only a redundant composite. Compare the contravariant model $M_Y$ with the slice model $M_E/r$ of [lem-coef-model-over-structure]. Both have monomorphisms as cofibrations. A fibrant object of the second is $q:Z\\to Y$ which is an $M_E$-fibration. Its composite to $E$ is fibrant, and [lem-coef-contravariant-fibrations-between-right-fibrations] says exactly that $q$ is a right fibration. Conversely a right fibration $q$ has right-fibration composite $rq$ (compose horn lifts), so that same criterion makes it $M_E$-fibrant over $r$. These are precisely the fibrant objects of $M_Y$. Therefore [lem-coef-model-structure-determined-by-fibrant-objects] identifies the two model structures, including their weak equivalences, under this ordinary-category identification.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-model-over-structure",
+    "lem-coef-contravariant-fibrations-between-right-fibrations",
+    "lem-coef-model-structure-determined-by-fibrant-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proof of Proposition 9.7: comparison of the two model structures"
+   }
+  },
+  {
+   "text": "Let $\\mathcal R_E$ be the ordinary category of small right fibrations over $E$, with weak equivalences and fibrations inherited from $M_E$. It satisfies the all-fibrant Brown hypotheses: its terminal object is $1_E$, compositions and pullbacks of (trivial) fibrations are inherited from the model lifting classes, and factorization in $M_E$ of a map to a fibrant object has fibrant middle object. Thus [lem-coef-brown-slice-fraction-calculus] gives\n$$L(\\mathcal R_E(r))\\simeq(L\\mathcal R_E)_{/r},$$\nwhere $\\mathcal R_E(r)$ consists of fibrations to $r$. Step 4 identifies this category with small right fibrations over $Y$, including its weak equivalences. By [lem-coef-simplicial-model-nerve-localization], inclusion of the fibrant objects presents the model localization. Applied to the simplicial models of [lem-coef-simplicial-right-fibration-presentation], it identifies these localizations with the coherent nerves of the enriched right-fibration categories. The equivalence [lem-coef-space-transport-classification] identifies them with $\\mathcal P(Y)$ and $\\mathcal P(E)$, carrying $r$ to $F$. To transfer slices along this equivalence $G:L\\mathcal R_E\\to\\mathcal P(E)$, with its specified equivalence $G(r)\\simeq F$: by [lem-coef-infinity-slice-arrow-equivalence], applied in a containing universe, each join slice is equivalent over its category to the target-fixed arrow fiber $\\operatorname{Fun}(\\Delta^1,-)\\times_{\\operatorname{ev}_1}\\{-\\}$. Postcomposition with $G$, with a quasi-inverse and with the two coherent natural equivalences is a simplicial operation, so it gives an equivalence $\\operatorname{Fun}(\\Delta^1,L\\mathcal R_E)\\simeq\\operatorname{Fun}(\\Delta^1,\\mathcal P(E))$ commuting with $\\operatorname{ev}_1$ and $G$. Both maps $\\operatorname{ev}_1$ are isofibrations by [lem-coef-infinity-isofibration-exponentiation], hence Joyal fibrations by [lem-coef-joyal-quasicategory-characterizations]. In the fibrant objects of [lem-coef-joyal-model-structure], which satisfy the Brown hypotheses as in step 8, [lem-coef-brown-fibrant-localization-pullbacks] makes their strict fibers at $r$ and at $F$ infinity-categorical pullbacks. These are pullbacks of equivalent cospans, linked by $G(r)\\simeq F$, so the two slices are equivalent. We obtain\n$$\\mathcal P(Y)\\simeq\\mathcal P(E)_{/F}.$$\nIts forward functor sends $q:Z\\to Y$ to the composite $rq:Z\\to E$ with its arrow to $r$; the Brown comparison is induced by precisely this slice functor. Hence the equivalence retains the coherent triangle homotopies and all mapping spaces.",
+   "uses": [
+    "lem-coef-brown-slice-fraction-calculus",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-brown-fibrant-localization-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 9.7 and Corollary 9.8, with the existing Brown slice comparison supplying the coherent-slice step"
+   }
+  },
+  {
+   "text": "To compute the inverse in step 5, represent $\\Psi\\to F$ by a fibrant slice object $q:Z\\to Y$ in $M_E/r$. This is legitimate for every coherent slice object by step 5, not an assertion that an arbitrary map of right fibrations is already a right fibration. By step 4, $q$ is a right fibration. Classification [lem-coef-space-transport-classification] identifies $Z_e$ with $\\Psi(e)$, $Y_e$ with $X(p(e))$, and the map $Z_e\\to Y_e$ with the component of $\\Psi\\to F$. Pullback of $q$ to $Y_e$ is a right fibration over a Kan complex. By [lem-cbc-right-fibration-space-fiber] it is a Kan fibration, and its strict fiber at $y$ is naturally equivalent to its homotopy fiber. On the other hand, classification over $Y$ evaluates the presheaf represented by $q$ at $(e,y)$ as precisely this strict fiber. Thus\n$$\\widetilde\\Psi(e,y)\\simeq\\operatorname{fib}_{y}(\\Psi(e)\\to X(p(e))).$$\nThe cited natural fiber comparison applies to entire simplicial maps, so this computes the transformation and higher-simplex data as well as the values.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Explicit fiber calculation in the proof of Proposition 9.12"
+   }
+  },
+  {
+   "text": "Represent $h:X'\\to X$ by a map $Y_{X'}\\to Y_X$ over $A$, using the mapping-space comparison of [lem-coef-space-transport-classification], and let $g:Y'=E_{X'}\\to Y=E_X$ be its pullback. For $q:Z\\to Y$ as in step 6, restriction of its classified presheaf along $g$ is classified by $Z\\times_Y Y'\\to Y'$. Its composite to $E$ represents the pullback of $\\Psi\\to F$ along $F'=p^*X'\\to F$: indeed $q$ is a fibration between fibrant objects of $M_E$ by step 4, and [lem-coef-brown-fibrant-localization-pullbacks] sends its ordinary pullback square to a pullback square in $L\\mathcal R_E$. Classification identifies the latter with the desired presheaf pullback, computed pointwise by [lem-coef-infinity-yoneda-presheaf-limits]. This agrees with step 2. For a commuting square between two functors $p$, restriction along the two base maps takes the cylinder pair of step 1 to its restricted pair, and takes $Z\\to E\\times_A Y_X$ to the corresponding base change. The naturality under base change, composition and higher simplices in [lem-coef-space-transport-classification] makes these comparisons coherent. Pullback associativity identifies successive restrictions with restriction along a composite; the Brown pullback comparison is natural for maps of squares. These are functors and equivalences on whole categories, so they prove the stated naturality, rather than only a pointwise correspondence.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-brown-fibrant-localization-pullbacks",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Naturality clauses of Proposition 9.7, Corollary 9.8 and Proposition 9.6"
+   }
+  },
+  {
+   "text": "Finally verify the geometric meaning of the strict pullbacks. A right fibration $v:V\\to T$ of quasicategories is an isofibration: restrict it to the core $T^\\simeq$, which is Kan by [lem-cbc-enhanced-functor-cone-calculus]. The restriction is a right fibration over a Kan complex, hence a Kan fibration with Kan total space by [lem-cbc-right-fibration-space-fiber]. It lifts an equivalence of $T$ with any specified source; its lift is an equivalence because every edge of a Kan complex is an equivalence by [lem-coef-infinity-core-kan-fibration]. Inner horn lifts already come from $v$. By [lem-coef-joyal-quasicategory-characterizations] this is a Joyal fibration. The fibrant objects of the Joyal model structure [lem-coef-joyal-model-structure], with its fibrations and weak equivalences, satisfy the Brown hypotheses just verified for a model category in step 5. Apply [lem-coef-brown-fibrant-localization-pullbacks] in this category: pullbacks along these fibrations present infinity-categorical pullbacks. This applies to $E\\times_A Y_X$ and to pullbacks of the right-fibration models. It also applies to the fiber of $j^*$, since step 3 makes it an isofibration. Consequently the strict models used above represent the specified infinity-categorical fibers and pullbacks. The bases $A,E$, the right-fibration representatives and their contravariant-model factorizations stay in $\\mathcal U$. Presheaf categories, their Joyal-model comparisons, and categories of model objects are placed in containing universes.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-brown-fibrant-localization-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "GHN Proposition 9.6 and its proof: homotopy-invariant interpretation of the right-fibration pullbacks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-arrow-target-cartesian-pullbacks",
+  "lem-coef-brown-fibrant-localization-pullbacks",
+  "lem-coef-brown-slice-fraction-calculus",
+  "lem-coef-contravariant-fibrations-between-right-fibrations",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-model-over-structure",
+  "lem-coef-model-structure-determined-by-fibrant-objects",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "GHN Definition 9.1, Lemma 9.4, Remark 9.5, Proposition 9.7, Corollary 9.8 and Proposition 9.6; explicit values from Proposition 9.12. Sources read online; local archival copies WANTED. Expanded model and homotopy-fiber arguments."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +187,45 @@
    "results": "{\"t\": \"2026-10-17T04:10:36Z\", \"tool\": \"leanfinder\", \"query\": \"The slice of a space valued presheaf infinity category is equivalent to presheaves on the infinity category of elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.overEquivPresheafCostructuredArrow\", \"CategoryTheory.Grothendieck.grothendieckTypeToCat\", \"CategoryTheory.Presheaf.functorToRepresentables\", \"CategoryTheory.CostructuredArrow.toOverCompOverEquivPresheafCostructuredArrow\", \"CategoryTheory.CategoryOfElements.costructuredArrowYonedaEquivalence\", \"CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_obj\", \"CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst_eq\", \"CategoryTheory.OverPresheafAux.restrictedYoneda\"], \"digest\": \"c8ee11e829c87004\"}",
    "date": "2026-10-17",
    "verdict": "no match: The returned declarations concern ordinary CategoryTheory categories and Type-valued presheaves. Read Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean:613-615 (overEquivPresheafCostructuredArrow), FiberedCategory/Cartesian.lean:50-80 (IsCartesian, IsStronglyCartesian), Grothendieck.lean:73 and 605 (ordinary construction and functorFrom), and Limits/Types/Limits.lean:197 (limitEquivSections). None asserts the coherent quasicategory theorem; AlgebraicTopology/Quasicategory/Basic.lean:34-43 only defines Quasicategory. No one-line specialization gives the statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presheaves on a relative mapping cylinder of infinity categories have slice presheaf fibers and Cartesian transport by pullbacks",
+   "results": "{\"t\": \"2026-10-17T05:22:20Z\", \"tool\": \"leanfinder\", \"query\": \"Presheaves on a relative mapping cylinder of infinity categories have slice presheaf fibers and Cartesian transport by pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreOneHypercover.cylinder_p₂\", \"CategoryTheory.PreOneHypercover.cylinder_p₁\", \"CategoryTheory.PreOneHypercover.sieve₁'_cylinder\", \"CategoryTheory.PreOneHypercover.cylinder\", \"CategoryTheory.PreOneHypercover.cylinder_Y\", \"CategoryTheory.PreOneHypercover.sieve₀_cylinder\", \"CategoryTheory.GrothendieckTopology.OneHypercover.cylinder_toPreOneHypercover\", \"CategoryTheory.PreOneHypercover.cylinder_X\"], \"digest\": \"72551a75b549d9ff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: overEquivPresheafCostructuredArrow (Comma/Presheaf/Basic.lean:613-615) is the ordinary Type-valued theorem. The other hits are ordinary hypercovers, fibered categories, and the basic QCat definition; none supplies coherent space-valued presheaf slices or relative-cylinder transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Presheaf\", \"CostructuredArrow\"",
+   "results": "{\"t\": \"2026-10-17T05:22:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Presheaf\\\", \\\"CostructuredArrow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.overEquivPresheafCostructuredArrow\", \"CategoryTheory.OverPresheafAux.costructuredArrowPresheafToOver\", \"CategoryTheory.OverPresheafAux.OverArrows.costructuredArrowIso\", \"CategoryTheory.OverPresheafAux.costructuredArrowPresheafToOver_obj\", \"CategoryTheory.CostructuredArrow.toOverCompOverEquivPresheafCostructuredArrow\", \"CategoryTheory.OverPresheafAux.costructuredArrowPresheafToOver_map\", \"CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda\", \"CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_inverse_map_toOverCompYoneda\"], \"digest\": \"72eaa7372ce0f93f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: overEquivPresheafCostructuredArrow (Comma/Presheaf/Basic.lean:613-615) is the ordinary Type-valued theorem. The other hits are ordinary hypercovers, fibered categories, and the basic QCat definition; none supplies coherent space-valued presheaf slices or relative-cylinder transport."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeCone|relative_cone|presheaf.*slice|slice.*presheaf",
+   "results": "{\"t\": \"2026-10-17T05:22:18Z\", \"tool\": \"grep\", \"query\": \"relativeCone|relative_cone|presheaf.*slice|slice.*presheaf\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: overEquivPresheafCostructuredArrow (Comma/Presheaf/Basic.lean:613-615) is the ordinary Type-valued theorem. The other hits are ordinary hypercovers, fibered categories, and the basic QCat definition; none supplies coherent space-valued presheaf slices or relative-cylinder transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an infinity category E and a space valued presheaf X the slice presheaf category over X is equivalent to presheaves on the right fibration classified by X",
+   "results": "{\"t\": \"2026-10-17T05:22:19Z\", \"tool\": \"leansearch\", \"query\": \"For an infinity category E and a space valued presheaf X the slice presheaf category over X is equivalent to presheaves on the right fibration classified by X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.overEquivPresheafCostructuredArrow\", \"CategoryTheory.Sheaf.over\", \"CategoryTheory.Sieve.overEquiv\", \"TopCat.instCategoryPresheaf\", \"CategoryTheory.Presheaf.conesEquivSieveCompatibleFamily\", \"CategoryTheory.Over.iteratedSliceEquiv\", \"HomotopicalAlgebra.fibrations_over_def\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\"], \"digest\": \"e77105153e2ab3e1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: overEquivPresheafCostructuredArrow (Comma/Presheaf/Basic.lean:613-615) is the ordinary Type-valued theorem. The other hits are ordinary hypercovers, fibered categories, and the basic QCat definition; none supplies coherent space-valued presheaf slices or relative-cylinder transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of elements of a space valued functor on a quasicategory presents its slice presheaf infinity category",
+   "results": "{\"t\": \"2026-10-17T05:22:21Z\", \"tool\": \"leanfinder\", \"query\": \"The category of elements of a space valued functor on a quasicategory presents its slice presheaf infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.QCat\", \"TopCat.toSSet\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.QCat.bicategory\", \"SSet.sk\", \"CategoryTheory.nerveFunctor\", \"SSet.toTopSimplex\"], \"digest\": \"a53a4cdceb7f76ed\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: overEquivPresheafCostructuredArrow (Comma/Presheaf/Basic.lean:613-615) is the ordinary Type-valued theorem. The other hits are ordinary hypercovers, fibered categories, and the basic QCat definition; none supplies coherent space-valued presheaf slices or relative-cylinder transport."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ghn-ind-presheaf-cartesian-realization",
@@ -81,5 +253,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-cone-presheaf-fibers",
+  "worker": "stage1",
+  "summary": "Eight-step split following the GHN relative-cylinder and right-fibration-composition route. Added only the generic arrow-target pullback criterion and the contravariant-fibration criterion. Derived the slice equivalence using existing model-structure recognition, Brown slices and classification; computed its homotopy fibers and coherent contravariant transport. Statement unchanged. No Lean attachment or Mathlib leaf.",
+  "blueprint": "The inherited ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, presentable Cartesian-fibration infrastructure before the finite-coefficient adjunction, through lem-coef-ghn-ind-presheaf-cartesian-realization. Steps 1-3 realize GHN cylinder restriction; steps 4-6 its right-fibration slice identification; steps 7-8 naturality and homotopy-pullback interpretation. The current main-20261015 ancestor proof has replaced this historical paragraph by coefficient duality; this supporting item preserves its recorded ancestry and unit without editing maintainer metadata.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic quasicategory functor/core calculus or right-fibration Kan-fiber comparison, used to interpret the coherent slice and strict homotopy-fiber models; no coefficient-unit statement replaces this foundational tool."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory functor/core calculus or right-fibration Kan-fiber comparison, used to interpret the coherent slice and strict homotopy-fiber models; no coefficient-unit statement replaces this foundational tool."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic quasicategory functor/core calculus or right-fibration Kan-fiber comparison, used to interpret the coherent slice and strict homotopy-fiber models; no coefficient-unit statement replaces this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-space-fiber"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NP-6f9811e92",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-6f9811e92 (reviewer sub-agent of L); spot-checked: The mathematics is correct; one step needed a repair. Item statement: unchanged from base. Checked against GHN arXiv:1501.02161v3 Def 9.1 (B glued at E×{0}), Lemma 9.4(2) and Remark 9.5 after taking opposites (so j* is Cartesian, with fiber P(E)_{/p*X} and arrow Ψ→p*X), Prop 9.6, Prop 9.7, Cor 9.8 and the fiber chain in the proof of Prop 9.12. The statement correctly does not claim D is a quasicategory. Small cases checked: E empty, A=E=point, X initial, identity p and h. Steps 1-4 and 6-8 are correct. Step 1 is genuinely elementary: degreewise pushout and currying. Step 2 is the fixed-base horn argument. Step 4's fibrant-object comparison matches GHN's proof of 9.7. In step 8, right fibrations are isofibrations via the Kan core, then Brown on Joyal fibrant objects applies. New nodes: lem-coef-arrow-target-cartesian-pullbacks matches HTT Lemma 6.1.1.1 and lem-coef-contravariant-fibrations-between-right-fibrations matches HTT Cor 2.2.3.14 (both read in the HTT PDF, which states 2.2.3.14 for arbitrary S). Both are self-contained and statement-only, have five searches each, are generic tools rather than restated clauses of the item, and are not duplicates: I compared them with lem-coef-slice-cartesian-colimit-criterion, lem-coef-infinity-arrow-target-right-fibration, lem-coef-infinity-relative-slice-sections, lem-coef-contravariant-slice-model and lem-coef-simplicial-right-fibration-presentation. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-right-fibration-space-fiber, generic foundational tools already used this way in this unit. def-cbc-enhanced-diagrams-cones is a definition and needs no tool_use. FIX (C1/C2): step 5 moved the slice across the equivalence LR_E ≃ P(E) with an uncited 'apply a quasi-inverse' sentence. I replaced it with an explicit argument: the slice-arrow equivalence, Fun(Δ^1,-) applied to the equivalence, ev_1 as an isofibration and hence a Joyal fibration, then Brown pullbacks of equivalent cospans. The cited nodes were already in proof_deps. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-relative-cone-presheaf-fibers.json; no node is dropped.; 1 file(s) fixed by the reviewer"
  }
 }

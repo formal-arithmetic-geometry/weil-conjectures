@@ -10,11 +10,137 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-space-transport-classification"
+  "lem-coef-space-transport-classification",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cat-infinity-colimits-cartesian-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First normalize opposites of spaces using existing statements. Horn reversal takes Kan complexes to Kan complexes. The coherent opposite involution of $\\operatorname{Cat}_{\\infty,\\mathcal V}$ therefore restricts to a coherent equivalence $O:\\mathcal S_{\\mathcal V}\\to\\mathcal S_{\\mathcal V}$. Here spaces form the full subcategory on Kan complexes: the category mapping space is the core of $\\operatorname{Fun}(K,L)$, which for Kan $L$ is all of $\\operatorname{Fun}(K,L)$. Indeed transpose a horn into this functor set to $K\\times\\Lambda_i^n\\to L$; the pushout-product theorem for $\\varnothing\\to K$ and the horn inclusion gives the extension against $L\\to *$. Thus it is Kan and agrees with the stated space model. The involution supplies $O^2\\simeq1$. An equivalence preserves any existing colimit, since its inverse transports the mapping-space cocone criterion; hence $O$ preserves $\\mathcal V$-small colimits, which exist in spaces. Take the one-point category $*$. Evaluation identifies $\\mathcal P_{\\mathcal V}(*)$ with $\\mathcal S_{\\mathcal V}$, and Yoneda sends its unique vertex to the terminal point. Free cocompletion for $*$ says that colimit-preserving functors out of spaces are determined, including transformations and higher simplices, by that value. Both $O$ and the identity take the point to the point. Consequently they are coherently naturally equivalent: $\\eta:O\\simeq1$. Whiskering $\\eta$ with any space-valued diagram identifies its pointwise opposite with itself. This is an application of the cited universal property, not a claim of a degreewise identity $K^{\\mathrm{op}}=K$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cat-infinity-opposite-involution",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Agent expansion of the duality in Lemma 9.10(3)-(4); apply the existing presheaf universal property to the one-point category"
+   }
+  },
+  {
+   "text": "Put $D=\\operatorname{Fun}(A^{\\mathrm{op}},\\operatorname{Cat}_{\\infty,\\mathcal V})$. The right-fibration classifier supplies $X\\mapsto Y_X$ coherently, including maps over $A$. By the restriction lemma for straightening, $Y_X$ is a Cartesian fibration all of whose edges are Cartesian, maps of right fibrations preserve Cartesian edges, and under Cartesian straightening $Y_X$ is classified by $iX$, where $i:\\mathcal S_{\\mathcal U}\\to\\operatorname{Cat}_{\\infty,\\mathcal V}$, coherently in $X$. So the parameterized straightening comparison with source diagram $iX$ makes $F_G(X)=\\operatorname{Fun}^{\\mathrm{cart}}_A(Y_X,U_G)$ a contravariant coherent functor of $X$ and a covariant coherent functor of $G$. For the second construction, taking opposites sends a right fibration to a left fibration by reversing the horn indices. Since Cartesian straightening is $\\mathrm{op}$ composed with cocartesian straightening of the opposite fibration, and $\\mathrm{op}\\circ\\mathrm{op}\\simeq1$, the cocartesian class of $Y_X^{\\mathrm{op}}\\to A^{\\mathrm{op}}$ is $a\\mapsto X(a)^{\\mathrm{op}}$, that is $O\\circ X$ followed by $i$. The equivalence $\\eta$ of step 1, applied to the space-valued diagram $X$, identifies this class with $iX$. Thus the cocartesian version of the same comparison applies to $F'_G(X)=\\operatorname{Fun}^{\\mathrm{cocart}}_{A^{\\mathrm{op}}}(Y_X^{\\mathrm{op}},V_G)$ with source diagram $iX$, just as the Cartesian comparison does. This uses opposites of space fibers, without replacing the target $G$ by its opposite. Both values are $\\mathcal V$-small.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-parametric-straightening-mapping-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-fibration-straightening-space-restriction",
+    "lem-coef-cat-infinity-opposite-involution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Section 1.2 opposite convention; Lemma 9.10, the definitions of the two functors and the duality suppressed in its proof"
+   }
+  },
+  {
+   "text": "Let $C$ be any $\\mathcal V$-small quasicategory. The coherent mapping bifunctor gives $Q_C:A^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal V}$ with $Q_C(a)=\\operatorname{Map}_{\\operatorname{Cat}_{\\infty,\\mathcal V}}(C,G(a))=\\operatorname{Fun}(C,G(a))^{\\simeq}$. Let $jX$ denote the same presheaf in $\\mathcal P_{\\mathcal V}(A)$. For either $F=F_G$ or $F'_G$, parameterized straightening gives\n$$\\operatorname{Map}(C,F(X))\\simeq\\operatorname{Map}_{D}((\\Delta C)\\times iX,G)\\simeq\\operatorname{Map}_{\\mathcal P_{\\mathcal V}(A)}(jX,Q_C).\\tag{*}$$\nHere is the second comparison explicitly. Curry the component maps $C\\times X(a)\\to G(a)$ into $X(a)\\to\\operatorname{Fun}(C,G(a))$. Every edge in the space $X(a)$ is invertible (its two inverse triangles are supplied by the outer $2$-horn fillers), so its image is an equivalence; the same holds for every edge in a Kan parameter testing the mapping space. These maps therefore factor through the core, exactly $Q_C(a)$. Conversely, a map into that core followed by evaluation gives the component map $C\\times X(a)\\to G(a)$. Currying and evaluation are inverse, commute with restriction along every simplex of $A$, and with all Kan parameters. This proves (*) for whole mapping spaces, with its contravariance in $X$ and covariance in $G$.",
+   "uses": [
+    "lem-coef-parametric-straightening-mapping-spaces",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-space-transport-classification",
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Lemma 9.10 proof, first displayed calculation; the core factorization expands the space-valued Yoneda input"
+   }
+  },
+  {
+   "text": "At $X=y(a)$, change of universe identifies $jX$ with the $\\mathcal V$-space-valued representable at $a$, compatibly with the right-fibration classifier. Apply pointwise Yoneda to $Q_C$ in universe $\\mathcal V$; Yoneda evaluation, again in $\\mathcal V$ with the $\\mathcal V$-small $A$, assembles these equivalences into a natural equivalence on $A^{\\mathrm{op}}\\times\\mathcal P_{\\mathcal V}(A)$ with all higher homotopies. Formula (*) becomes $\\operatorname{Map}(C,F(y(a)))\\simeq Q_C(a)=\\operatorname{Map}(C,G(a))$, naturally in $C$ and $a$. Fully faithful Yoneda for $\\operatorname{Cat}_{\\infty,\\mathcal V}$ identifies these represented functors and hence supplies $F\\circ y^{\\mathrm{op}}\\simeq G$. Its naturality in $a$ includes every higher simplex. Both constructions restrict to the given $G$.",
+   "uses": [
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Lemma 9.10 proof of (1), its Yoneda step, and the identical covariant calculation for (3)"
+   }
+  },
+  {
+   "text": "Let $X_k\\to X$ be any $\\mathcal U$-small colimit cocone in $\\mathcal P_{\\mathcal U}(A)$. Colimits in this functor category are objectwise. Universe inclusion on spaces preserves the given $\\mathcal U$-small colimits, so $jX_k\\to jX$ is a colimit cocone in $\\mathcal P_{\\mathcal V}(A)$, again by the objectwise criterion. In particular this uses no colimit indexed by the whole large presheaf category. Since $A$ is $\\mathcal V$-small, $\\mathcal P_{\\mathcal V}(A)$ has $\\mathcal V$-small mapping spaces by free cocompletion, so the contravariant representable mapping-space criterion applies to it and gives\n$$\\operatorname{Map}(jX,Q_C)\\simeq\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}(jX_k,Q_C).$$\nAll test values $Q_C$ are allowed to be $\\mathcal V$-small, not necessarily $\\mathcal U$-small; applying the criterion in $\\mathcal V$ is why the preceding universe comparison was needed.",
+   "uses": [
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-presheaf-free-cocompletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Lemma 9.10 proof of (2): preservation of limits, with the pointwise universe comparison made explicit"
+   }
+  },
+  {
+   "text": "Via (*) the last equivalence is exactly the comparison $\\operatorname{Map}(C,F(X))\\to\\lim_{K^{\\mathrm{op}}}\\operatorname{Map}(C,F(X_k))$ of the induced cone, since (*) is natural under precomposition in $X$. The mapping-space cone criterion for $\\operatorname{Cat}_{\\infty,\\mathcal V}$ therefore shows that $F(X)\\to F(X_k)$ is limiting. The category admits these limits by the cited category calculus, and the criterion applies for every $C$ in it. This proves the required colimit-to-limit property for each of the two functors, including $K=\\varnothing$ (then $F(\\varnothing)$ is terminal).",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-cat-infinity-colimits-cartesian-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Lemma 9.10 proof of (2), testing the actual cone, and the dual proof of (4)"
+   }
+  },
+  {
+   "text": "Apply presheaf free cocompletion with small universe $\\mathcal U$ and target $\\operatorname{Cat}_{\\infty,\\mathcal V}^{\\mathrm{op}}$, formed in $\\mathcal W$. This target admits $\\mathcal U$-small colimits because $\\operatorname{Cat}_{\\infty,\\mathcal V}$ admits $\\mathcal V$-small limits. Taking opposites converts its colimit-preserving functors out of $\\mathcal P(A)$ into the required functors out of $\\mathcal P(A)^{\\mathrm{op}}$. Restriction to $y$ is an equivalence of the entire relevant functor categories. Steps 4 and 6 put both constructions in its fiber over $G$; each is consequently the unique extension up to coherent natural equivalence. The classifier and the mapping comparison in steps 2 and 3 use restriction of simplicial maps: a transformation $X'\\to X$ acts by precomposition with $Y_{X'}\\to Y_X$, and the cocartesian model by its opposite. Composition and the higher simplices are these same restrictions. Naturality in $G$ is postcomposition under its classified Cartesian or cocartesian map. Since the restriction equivalence is fully faithful on all transformation spaces, the identification of the two models with the extension retains these coherences. No resizing of $\\mathcal P(A)$ into $\\mathcal U$ occurs.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-parametric-straightening-mapping-spaces",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Lemma 9.10 (1)-(4), concluding uniqueness from the presheaf universal property, with all coherences retained"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-cat-infinity-opposite-involution",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-fibration-straightening-space-restriction",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-parametric-straightening-mapping-spaces",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-small-colimits-universe",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "Expansion of GHN Lemma 9.10 proof and Proposition 6.9; online sources are not archived in literature/. Uses the existing presheaf universal property, pointwise Yoneda and universe-change nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +176,38 @@
    "results": "{\"t\": \"2026-10-17T04:10:35Z\", \"tool\": \"leanfinder\", \"query\": \"For any functor H from opposite of a small infinity category A to Cat infinity its limit preserving extension to presheaves is Cartesian preserving maps from the right fibration of elements into unstraightening H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_homCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isStronglyCartesian_homCartesianLift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.Truncated.rightExtensionInclusion\"], \"digest\": \"ac542f7945863407\"}",
    "date": "2026-10-17",
    "verdict": "no match: The returned declarations concern ordinary CategoryTheory categories and Type-valued presheaves. Read Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean:613-615 (overEquivPresheafCostructuredArrow), FiberedCategory/Cartesian.lean:50-80 (IsCartesian, IsStronglyCartesian), Grothendieck.lean:73 and 605 (ordinary construction and functorFrom), and Limits/Types/Limits.lean:197 (limitEquivSections). None asserts the coherent quasicategory theorem; AlgebraicTopology/Quasicategory/Basic.lean:34-43 only defines Quasicategory. No one-line specialization gives the statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCartesian\", \"Presheaf\"",
+   "results": "{\"t\": \"2026-10-17T05:19:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCartesian\\\", \\\"Presheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:50-80, Fibered.lean:49-75, Functor/KanExtension/Basic.lean:45-60, and AlgebraicTopology/Quasicategory/Basic.lean:34-43. IsCartesian/IsFibered concern ordinary categories with unique Hom-set lifts; StrictSegal and hoFunctor product comparison concern strict nerves and ordinary homotopy categories. None supplies mapping spaces of the infinity category of Cartesian fibrations or the parametrized coherent functor comparison. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian edge preserving functors between unstraightenings are represented by mapping spaces from the pointwise product of infinity category valued diagrams",
+   "results": "{\"t\": \"2026-10-17T05:19:57Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian edge preserving functors between unstraightenings are represented by mapping spaces from the pointwise product of infinity category valued diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"bf40c6e74957377b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:50-80, Fibered.lean:49-75, Functor/KanExtension/Basic.lean:45-60, and AlgebraicTopology/Quasicategory/Basic.lean:34-43. IsCartesian/IsFibered concern ordinary categories with unique Hom-set lifts; StrictSegal and hoFunctor product comparison concern strict nerves and ordinary homotopy categories. None supplies mapping spaces of the infinity category of Cartesian fibrations or the parametrized coherent functor comparison. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cartesian functor infinity category from a right fibration computes the limit preserving extension from representable presheaves",
+   "results": "{\"t\": \"2026-10-17T05:19:57Z\", \"tool\": \"leansearch\", \"query\": \"The cartesian functor infinity category from a right fibration computes the limit preserving extension from representable presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\", \"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.pointwiseRightKanExtension\", \"CategoryTheory.lan_preservesFiniteLimits_of_flat\", \"CategoryTheory.Functor.representable_preservesLimitsOfShape\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.corepresentable_preservesLimit\"], \"digest\": \"4125c3191734c0ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:50-80, Fibered.lean:49-75, Functor/KanExtension/Basic.lean:45-60, and AlgebraicTopology/Quasicategory/Basic.lean:34-43. IsCartesian/IsFibered concern ordinary categories with unique Hom-set lifts; StrictSegal and hoFunctor product comparison concern strict nerves and ordinary homotopy categories. None supplies mapping spaces of the infinity category of Cartesian fibrations or the parametrized coherent functor comparison. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*section|section.*cartesian|presheaf.*extension",
+   "results": "{\"t\": \"2026-10-17T05:19:57Z\", \"tool\": \"grep\", \"query\": \"cartesian.*section|section.*cartesian|presheaf.*extension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\"], \"digest\": \"a54dfaf577cbc951\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:50-80, Fibered.lean:49-75, Functor/KanExtension/Basic.lean:45-60, and AlgebraicTopology/Quasicategory/Basic.lean:34-43. IsCartesian/IsFibered concern ordinary categories with unique Hom-set lifts; StrictSegal and hoFunctor product comparison concern strict nerves and ordinary homotopy categories. None supplies mapping spaces of the infinity category of Cartesian fibrations or the parametrized coherent functor comparison. Two semantic phrasings were tried."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ghn-ind-presheaf-cartesian-realization",
@@ -81,5 +235,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-maps-presheaf-extension",
+  "worker": "stage1",
+  "summary": "Kept the statement. Seven proof steps reduce the two constructions to parameterized straightening, explicit core factorization, Yoneda evaluation, a universe comparison, and free cocompletion. One new general mapping lemma. Space-opposite normalization is proved by free cocompletion of the point inside step 1, avoiding an elementary child node. No Mathlib match or project attachment found.",
+  "blueprint": "Proof paragraph 2, the presentable Cartesian-fibration construction before the finite-coefficient mapping-complex adjunction: GHN Proposition 9.12/9.16 and Corollary 9.17 identify the relative-cone presheaf subcategory with the Ind extension. Supporting GHN Lemma 9.10, parts (1)-(4), with size conventions enlarged for a small source and a larger Cat-infinity target; the same universal property uses only U-small limits. Seven steps expand GHN Lemma 9.10, with space inversion derived from existing free cocompletion and one general parameterized straightening input."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-385735206",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-385735206 (reviewer sub-agent of L); spot-checked: I read GHN arXiv:1501.02161v3 online: Lemma 9.10 (1)-(4) with the proof of (1)-(2), Prop 6.9 and its testing-object proof, and §1.2 notation. I also read every cited statement in full, the unit and the chapter. The item statement is true in its enlarged size form (A U-small, G valued in Cat_V; Cat_V^op has U-small colimits, so free cocompletion applies). I checked it on A empty or a point, X empty, a point, two points, BG, and G=[1] for variance. The new node lem-coef-parametric-straightening-mapping-spaces is true and statement-only. It is strictly smaller than the item, not a restatement, and has no duplicate in the DAG or blueprint. Three faults, all repaired. (1) C1/C4, step 2: the step used, uncited, that a right fibration classified by X under space-valued transport is classified by iX under Cartesian straightening, coherently, and the same for the opposite fibration. No node states this. I added the statement-only node lem-coef-fibration-straightening-space-restriction (Lurie HTT 2.4.2.4 and §§2.2.1, 3.2.1, WANTED; implicit in GHN §9), created.item set to the item, and rewrote step 2 to cite it and the op involution. (2) C4, step 4: naturality in a was claimed from lem-coef-infinity-pointwise-yoneda-evaluation, which is pointwise in a. It now cites lem-coef-infinity-yoneda-evaluation, which is natural on D^op×P(D). (3) Step 5: the representable criterion needs P_V(A) to have V-small mapping spaces. It now cites lem-coef-infinity-presheaf-free-cocompletion. Steps 1, 3, 6 and 7 were checked and accepted; in step 3, currying is a natural isomorphism of Kan mapping complexes. Same unit throughout, no tool_uses, no SGA, no cycle. The new node records Mathlib grep only; LeanSearch/LeanFinder could not be run here.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

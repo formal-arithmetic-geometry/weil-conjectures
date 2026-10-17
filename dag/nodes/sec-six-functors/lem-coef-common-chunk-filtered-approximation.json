@@ -11,9 +11,189 @@
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-simplicial-localization-comparison-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the following finite-limit-sketch presentation of $\\mathrm{sCat}$. Its sorts are the object set $O$ and, for every $n\\geq0$, the set $A_n=\\coprod_{x,y}C(x,y)_n$. The operations are source, target, faces, degeneracies, identities and composition on $A_n\\times_OA_n$, with the category and simplicial identities. Thus the limit and filtered-colimit clause of [lem-coef-finite-limit-model-presentability] applies: limits and filtered colimits are formed on these sets. In particular, after representing two objects at a common stage, the mapping simplicial set between them in a filtered colimit is the filtered colimit of the eventual mapping simplicial sets. This last assertion follows by imposing the two endpoint equalities in each degree; equality in a filtered colimit is witnessed at a later stage by [lem-weil-pbc-filtered-colimit-sets-elementwise].",
+   "uses": [
+    "lem-coef-finite-limit-model-presentability",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.2, simplicial categories; elementary finite-limit-sketch and filtered-set calculation underlying the use of A.2.8.2 in A.3.6.18"
+   }
+  },
+  {
+   "text": "Consequently filtered pointwise colimits preserve Dwyer--Kan equivalences. Indeed, for objects represented in the source at a common stage, Step 1 identifies the map on mapping sets with a filtered colimit of weak homotopy equivalences, so [lem-coef-filtered-colimit-weak-equivalences] applies. Every target object is represented at a stage, where essential surjectivity supplies a source object and an isomorphism in the category of path components; its image is still an isomorphism in the colimit. Local weak equivalence and essential surjectivity are exactly the definition in [lem-coef-simplicial-localization-comparison-calculus]. This argument also allows transition functors that identify objects; it does not assume inclusions.",
+   "uses": [
+    "lem-coef-filtered-colimit-weak-equivalences",
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.18 proof, filtered passage in Cat_S; elementary application of filtered invariance of simplicial-set weak equivalences"
+   }
+  },
+  {
+   "text": "Put $D=K_0^{\\mathrm{op}}$. Apply [lem-coef-scat-diagram-factorization-uniform-bound] and factor each terminal arrow $H\\to1$ as an injective trivial cofibration $H\\to R_DH$ followed by an injective fibration. Thus $R_D$ is a functorial injective fibrant replacement. The constant terminal functor preserves filtered colimits because the index is nonempty and connected, so the asserted preservation for the middle-object functor makes $R_D$ preserve $\\delta$-filtered colimits, with $\\delta$ in the input universe uniformly in larger universes. Choose an infinite regular $\\kappa\\geq\\delta$ with $|\\operatorname{Mor}D|<\\kappa$ using [lem-coef-small-family-regular-bound]. A $\\kappa$-filtered index is also $\\delta$-filtered. Both the bound and its preservation property depend only on $D$ and the fixed Kan-model/Bergner data, independently of $\\mathcal M$ and $(I_a)$.",
+   "uses": [
+    "lem-coef-scat-diagram-factorization-uniform-bound",
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.18 proof, first two cardinal-bound sentences; A.2.8.2 proof and A.1.2.5(2)"
+   }
+  },
+  {
+   "text": "For this $\\kappa$, strict $D$-limits in $\\mathrm{sCat}$ commute with pointwise $\\kappa$-filtered colimits. On each sort of Step 1 an element of the limit is a compatible tuple, one element for each object of $D$. Represent these fewer than $\\kappa$ elements at stages of the filtered diagram and choose a common receiving stage. For each arrow of $D$ the compatibility equality holds at a further stage by [lem-weil-pbc-filtered-colimit-sets-elementwise]; fewer than $\\kappa$ arrows allow a common stage where they all hold. This proves surjectivity of the comparison. For injectivity do the same with the fewer than $\\kappa$ coordinate equalities of two tuples. The resulting bijections commute with source, target and all operations, so are an isomorphism of simplicial categories by Step 1. For $D=\\varnothing$ the tuple is empty and both sides are terminal: filtered index categories are nonempty and connected.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.18 proof, fixed-shape filtered closure; elementary compatible-tuples calculation"
+   }
+  },
+  {
+   "text": "Let $Z_t\\to H_t$ be the compatible homotopy-limit cones in the statement. By [lem-coef-combinatorial-injective-diagram-model], their comparisons $c_t:Z_t\\to\\lim_D R_DH_t$ are Dwyer--Kan equivalences. They form a natural transformation because $R_D$ and its replacement map are functorial. Step 2 makes $\\operatorname{colim}_t c_t$ a Dwyer--Kan equivalence. Steps 3--4 identify its target by canonical isomorphisms\n$$\\operatorname{colim}_t\\lim_D R_DH_t\\cong\\lim_D\\operatorname{colim}_tR_DH_t\\cong\\lim_D R_D(\\operatorname{colim}_tH_t).$$\nCompatibility of $\\eta$ identifies the composite with the comparison of the colimit cone. The same injective-model criterion proves that cone homotopy limiting. This proves the entire fixed-shape clause, including the empty shape, with the uniform $\\kappa$ of Step 3.",
+   "uses": [
+    "lem-coef-combinatorial-injective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.18 proof, fixed-shape homotopy-limit closure via the injective model of A.2.8.2"
+   }
+  },
+  {
+   "text": "For the chunk construction adjoin the one-object unit simplicial category to $(I_a)$ and index it by $*$. For every resulting $I_a$, [lem-coef-simplicial-projective-model-calculus] gives the combinatorial simplicial model category $\\mathcal M^{I_a}$, with objectwise tensor, weak equivalences and fibrations. Choose its two enriched functorial factorizations by [lem-coef-enriched-functorial-factorizations]. The tensor hypothesis of that theorem holds: for any simplicial set $K$ and generating (trivial) cofibration $j$, $K\\otimes j$ is a (trivial) cofibration, since all simplicial sets are cofibrant and the simplicial model axiom applies to $\\varnothing\\to K$. Fix these choices once for the whole categories, so restricting them to closed full subcategories will preserve inclusions. Let $F_a$ denote the middle object of the trivial-cofibration/fibration factorization and $G_a$ that of the cofibration/trivial-fibration factorization.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-enriched-functorial-factorizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.4.15 proof, first paragraph and the two enriched factorization functors; A.1.2.6"
+   }
+  },
+  {
+   "text": "Choose an infinite regular $\\rho$ exceeding the cardinalities of the object sets of all the augmented $I_a$, by [lem-coef-small-family-regular-bound]. Given any small set $S$ of objects of $\\mathcal M$, use [lem-weil-pbc-transfinite-recursion] to define increasing sets $S_\\alpha$, $\\alpha<\\rho$: $S_0=S$, and at a nonzero limit take the union of earlier sets. At a successor retain $S_\\alpha$ and add (i) every value of $F_a(u)$, where $u:f\\to\\prod_{i=1}^n g_i$ is a finite fan of diagrams valued in $S_\\alpha$, and (ii) every value of $G_a(v)$, where $v:\\coprod_{i=1}^n g_i\\to f$ is a finite cofan of such diagrams. Include $n=0$ in both rules. Let $\\mathrm{cl}(S)$ be the full simplicial subcategory on $\\bigcup_{\\alpha<\\rho}S_\\alpha$. These are exactly the successor operations in the construction of HTT A.3.4.15, now with globally fixed choices.",
+   "uses": [
+    "lem-coef-small-family-regular-bound",
+    "lem-weil-pbc-transfinite-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.4.15 proof, transfinite construction (i)--(iii)(a)--(c), printed p.891"
+   }
+  },
+  {
+   "text": "Each $S_\\alpha$ is small: a diagram on a small $I_a$ valued in a small full enriched subcategory is specified by small sets of choices of objects and maps between small mapping simplicial sets. The finite families and their enriched natural transformations therefore form a small set, and the successor rule adds only a small family of objects. Small unions at limits and at $\\rho$ remain small. For a finite fan or cofan of diagrams valued in $\\mathrm{cl}(S)$, its constituent values form a set of cardinality less than $\\rho$. Regularity gives a single $\\alpha<\\rho$ containing all those values. Its chosen middle diagram has all values in $S_{\\alpha+1}$ by construction. Fullness retains all maps between retained objects; the factorization maps to the ambient finite product or from the ambient finite coproduct are the ambient maps required by the chunk definition, and all enriched naturality maps are retained. Thus $\\mathrm{cl}(S)^{I_a}$ is a chunk for every $a$. The added unit index gives the chunk condition on $\\mathrm{cl}(S)$ itself. Empty fans and cofans give both replacements without requiring terminal or initial objects themselves to lie in the subcategory.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.4.15 proof, verification of the transfinite construction; Definitions A.3.4.1 and A.3.4.9"
+   }
+  },
+  {
+   "text": "Let $P$ be the poset of all small full subcategories closed under the operations fixed in Step 6. It is a set in $\\mathcal U'$: its object sets belong to the power set of the $\\mathcal U'$-small object collection of $\\mathcal M$. It is nonempty since it contains $\\mathrm{cl}(\\varnothing)$. For any $\\mathcal U$-small subfamily of members of $P$, the union of their small object sets is small, and applying $\\mathrm{cl}$ gives an upper bound in $P$. Hence $P$ is $\\mu$-filtered for every prescribed infinite regular $\\mathcal U$-small $\\mu$, in particular for $\\kappa$. Every object $X$ belongs to $\\mathrm{cl}(\\{X\\})$, so its union is $\\mathcal M$. Step 8 proves that every member is a common $I_a$-chunk. This proves the filtered-family clause rather than passing it to a new existence lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.18 proof, use of A.3.4.15 to form a filtered union; explicit poset and upper bounds"
+   }
+  },
+  {
+   "text": "For each $a$ put $C_{\\lambda,a}=U_\\lambda^{I_a}\\cap(\\mathcal M^{I_a})^f$ and $C_a=(\\mathcal M^{I_a})^f$, with their actual enriched mapping sets. Every object of $C_a$ has a small set of values, so those values belong to a single member of $P$ by Step 9. Each $C_{\\lambda,a}$ is full in $C_a$, whence their enriched union is exactly $C_a$. Between objects present at a stage the full mapping simplicial set is already present, so the same holds for its weak-equivalence vertices: $W_a$ is the union of $W_{\\lambda,a}$. Objectwise fibrancy and weak equivalence are exactly the projective classes supplied by [lem-coef-simplicial-projective-model-calculus].",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.18 proof, passage from small common chunks to the full diagram categories"
+   }
+  },
+  {
+   "text": "To compute the enriched localization functorially, use its homotopy-pushout definition in [lem-coef-simplicial-localization-comparison-calculus]. For a pair $(C,W)$ write its span as $B\\leftarrow A\\to E$, where $B=C$, $A=\\coprod_W[1]$ and $E=\\coprod_W J$. Apply [lem-coef-scat-diagram-factorization-uniform-bound] with the terminal index category to choose ordinary functorial cofibration/trivial-fibration factorizations in $\\mathrm{sCat}$ whose middle-object functor preserves $\\epsilon$-filtered colimits for some regular $\\epsilon\\in\\mathcal U$, even in the enlarged ambient universe. First factor $\\varnothing\\to A$ to obtain $QA\\xrightarrow{\\sim}A$. Factor each composite $QA\\to B$ and $QA\\to E$ to obtain cofibrations $QA\\to QB,QE$ and trivial fibrations $QB\\to B$, $QE\\to E$. The resulting span $QB\\leftarrow QA\\to QE$ is Reedy cofibrant and is objectwise weakly equivalent to the original span by [lem-coef-reedy-model-structure].",
+   "uses": [
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-scat-diagram-factorization-uniform-bound",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.5.1 localization, interpreted as a derived pushout; A.1.2.5 and the direct Reedy model of A.2.9"
+   }
+  },
+  {
+   "text": "The pushout $L(C,W)=QB\\amalg_{QA}QE$ computes that homotopy pushout. Indeed the span category is direct Reedy, so its fibrations are objectwise; the constant diagram functor therefore preserves fibrations and trivial fibrations. Its left adjoint, pushout, is left Quillen, and its value on the Reedy cofibrant replacement of Step 11 is the derived pushout. This is the localization model we use for every pair, with all transition functors induced by the same construction. It avoids choosing unrelated representatives of homotopy pushouts.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.5.1; A.2.9, direct Reedy calculation of a derived pushout"
+   }
+  },
+  {
+   "text": "Choose a regular $\\mu\\geq\\kappa,\\epsilon$ in $\\mathcal U$ (and at least any prescribed regular lower bound), using [lem-coef-small-family-regular-bound]. Step 9 makes $P$ $\\mu$-filtered. Every operation forming the replacement span in Step 11 preserves these colimits: the middle-object functor does so, and the constant initial object does because the index is filtered. Also $W\\mapsto\\coprod_W[1]$ and $W\\mapsto\\coprod_WJ$ preserve colimits of sets, by the universal property of coproducts. Colimits commute with pushouts, since maps from either iterated colimit to a test object are exactly the same compatible cocones. With the union identities of Step 10 this gives a canonical isomorphism\n$$\\operatorname{colim}_\\lambda L(C_{\\lambda,a},W_{\\lambda,a})\\cong L(C_a,W_a).$$\nIn particular the displayed comparison of localizations in the statement is a Dwyer--Kan equivalence. A functorial weakly equivalent localization model gives the same conclusion, because Step 2 preserves its stagewise comparisons.",
+   "uses": [
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-scat-diagram-factorization-uniform-bound",
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.18 proof, filtered localization passage; A.1.2.5(2) and the localization span of A.3.5.1"
+   }
+  },
+  {
+   "text": "Finally let $v:I_a\\to I_b$ be any enriched restriction map. Precomposition sends a diagram valued in $U_\\lambda$ to one valued in the same $U_\\lambda$ and preserves objectwise fibrancy and weak equivalences. It therefore gives actual functors of the pairs $(C_{\\lambda,b},W_{\\lambda,b})\\to(C_{\\lambda,a},W_{\\lambda,a})$ and of the full pairs. Functoriality of Step 11 makes their localization squares commute, and the colimit comparison in Step 13 is induced by these commuting squares. This proves the asserted restriction naturality, even when restriction fails to preserve projective cofibrancy. The only bound used in Steps 3--5 is the uniform replacement bound for $D$ and the cardinality of its arrows, so it remains valid in larger universes. The family construction and the possible larger $\\mu$ impose no dependence on $\\mathcal M$ on that homotopy-limit bound. No passage to a coherent nerve has occurred.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-scat-diagram-factorization-uniform-bound",
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.18 proof, actual restrictions on fibrant diagrams and the universe-invariance sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-combinatorial-injective-diagram-model",
+  "lem-coef-enriched-functorial-factorizations",
+  "lem-coef-filtered-colimit-weak-equivalences",
+  "lem-coef-finite-limit-model-presentability",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-scat-diagram-factorization-uniform-bound",
+  "lem-coef-simplicial-localization-comparison-calculus",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-small-family-regular-bound",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-transfinite-recursion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, inherited derived-diagram infrastructure. Explicit synthesis of HTT A.3.4.15 and Corollary A.3.6.18, read online; HTT archival copy is WANTED. The one uniform-replacement subclaim is a separate statement-only node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,7 +253,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-projective-diagram-simplicial-descent",
@@ -104,5 +284,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-common-chunk-filtered-approximation",
+  "worker": "stage1",
+  "summary": "Repaired the interrupted draft after its required initial dry run failed on dependency cycles. Preserved the item statement and all inherited fields. Removed three uncommitted clause-restatement nodes, preserving them and the earlier proof/report/citations in previous-attempt/preserved-input.json. Fourteen explicit steps now construct common chunks, prove filtered localization comparison and prove fixed-shape homotopy-limit closure. Reuse the existing independent injective model, Reedy and filtered-colimit nodes. One new technical uniform injective factorization lemma isolates the actual bounded-generator obligation, refining the existing fixed-universe accessible small-object theorem. All proof dependencies are independent of this item and of the unmarked straightening theorem.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, its displayed derived coefficient-adjunction/inverse-limit computation, via the inherited projective-diagram foundation. Steps 6--10 realize HTT A.3.4.15 and the chunk-union sentence of A.3.6.18; Steps 1--5 realize its fixed-shape filtered homotopy-limit sentence; Steps 11--14 make localization passage and actual restriction naturality explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-ccb598aaa",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-ccb598aaa (reviewer sub-agent of L); spot-checked: I read the full item, all 14 steps, the new node and every cited node's statement. The source is HTT, read in a local PDF copy, at A.3.4.1, A.3.4.9, A.3.4.15 with its proof (pp. 890-891), A.3.6.18 with its proof (p. 905), A.2.8.2 with its proof (pp. 830-832) and A.2.8.3. The item statement is unchanged and matches HTT. The steps are correct. Steps 1-5: fixed-shape closure, using the sCat finite-limit sketch, filtered preservation of Dwyer--Kan equivalences, the replacement R_D=E^f(H->1), commutation of kappa-small limits with filtered colimits, and the injective-model criterion verbatim. Steps 6-10: the A.3.4.15 closure, where the tensor hypothesis follows from the SM7 Map-form applied to the cofibration from the empty set to K, and P is U'-small and mu-filtered. Steps 11-14: the localization is the pushout of a Reedy-cofibrant span (direct Reedy, so fibrations are objectwise); it commutes with mu-filtered colimits, and restriction is natural. I tested the empty K_0, the empty I_a, the unit index and the case cl(empty)=empty. There is no cycle: no dependency closure reaches the item, unmarked straightening or coherent-nerve comparison. The route stays in the same unit apart from three Mathlib leaves, so no tool_uses are needed. The new node lem-coef-scat-diagram-factorization-uniform-bound is self-contained, statement-only and true. For D={*} the small-object argument with countable generators commutes with universe inclusion; for general D the universe-invariant kappa is asserted in the proof of HTT A.3.6.18. It is not a clause restatement and has no duplicate. lem-coef-simplicial-small-chunks overlaps steps 6-8, but citing it would close a cycle through lem-coef-coherent-nerve-comparison, so not citing it is justified. Two form repairs on the new node are in fixes/: I added the missing lean_audit (state none, and no slopmaster2 declaration exists), and I replaced the boilerplate verdicts on the four 0-hit searches with 'no match: the search returned 0 hits'. The item itself is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

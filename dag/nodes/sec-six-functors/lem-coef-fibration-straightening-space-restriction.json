@@ -1,0 +1,68 @@
+{
+ "id": "lem-coef-fibration-straightening-space-restriction",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the presentable Cartesian-fibration construction before the finite-coefficient mapping-complex adjunction: GHN Proposition 9.12/9.16 and Corollary 9.17 identify the relative-cone presheaf subcategory with the Ind extension. Supporting GHN Lemma 9.10(2),(4): the right fibration of a presheaf X, viewed as a Cartesian fibration (and its opposite as a cocartesian one), is classified by X regarded as Cat-valued, the identification P(B) = RFib(B) inside Cart(B) used implicitly by GHN.",
+   "via": [
+    "lem-coef-cartesian-maps-presheaf-extension",
+    "lem-coef-ghn-ind-presheaf-cartesian-realization",
+    "lem-coef-ind-presheaf-fibration-accessibility",
+    "lem-coef-presentable-cartesian-fibration",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Straightening of left and right fibrations restricts space-valued transport",
+ "statement": "Use quasicategories, Kan complexes, coherent functors, functor simplicial sets, cores and equivalences of [def-cbc-enhanced-diagrams-cones], left, right, Cartesian and cocartesian fibrations of [def-coef-infinity-fibrations], space-valued transport of [lem-coef-space-transport-classification], cocartesian straightening of [lem-coef-cocartesian-straightening], the infinity category of small quasicategories of [lem-coef-cat-infinity-colimits-cartesian-closure] and the opposite involution of [lem-coef-cat-infinity-opposite-involution]. Fix universes $\\mathcal U\\in\\mathcal U'$ and let $B$ be a $\\mathcal U$-small quasicategory. Let $i:\\mathcal S_{\\mathcal U}\\to\\operatorname{Cat}_{\\infty,\\mathcal U}$ regard a $\\mathcal U$-small Kan complex as a quasicategory; for Kan complexes $K,L$ the simplicial set $\\operatorname{Fun}(K,L)$ is Kan and equal to its core, so $i$ is a coherent fully faithful functor. (1) Every left fibration $p:E\\to B$ is a cocartesian fibration, every edge of $E$ is $p$-cocartesian, and its fibers are Kan complexes. Hence every functor over $B$ between left fibrations preserves cocartesian edges, and the left fibrations with $\\mathcal U$-small total space span a full subcategory $\\operatorname{LFib}(B)\\subseteq\\operatorname{coCart}(B)$ whose mapping spaces are the Kan complexes $\\operatorname{Fun}_{/B}(E,E')$. (2) Write $T_B:\\operatorname{LFib}(B)\\simeq\\operatorname{Fun}(B,\\mathcal S_{\\mathcal U})$ for space-valued transport and $\\operatorname{St}_B$ for cocartesian straightening. There is a coherent natural equivalence $\\operatorname{St}_B|_{\\operatorname{LFib}(B)}\\simeq i\\circ T_B$ of functors $\\operatorname{LFib}(B)\\to\\operatorname{Fun}(B,\\operatorname{Cat}_{\\infty,\\mathcal U})$, whose component at $p$ evaluated at $b$ is equivalent to the identity of the fiber $E_b$. In particular a left fibration classified by $F:B\\to\\mathcal S_{\\mathcal U}$ under space-valued transport is classified by $i\\circ F$ as a cocartesian fibration. (3) Dually every right fibration $q:Y\\to B$ is a Cartesian fibration all of whose edges are $q$-Cartesian. Define the Cartesian straightening of a Cartesian fibration $E\\to B$ as $\\mathrm{op}\\circ\\operatorname{St}_{B^{\\mathrm{op}}}(E^{\\mathrm{op}}\\to B^{\\mathrm{op}}):B^{\\mathrm{op}}\\to\\operatorname{Cat}_{\\infty,\\mathcal U}$. Then a right fibration classified by $X:B^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal U}$ under the right-fibration form of space-valued transport is classified by $i\\circ X$ under Cartesian straightening, and the right fibrations form a full subcategory of the Cartesian fibrations on which this identification is a coherent natural equivalence. All these identifications are natural for maps of fibrations over $B$, including higher simplices, compatible with base change along maps $B'\\to B$, and unchanged on enlarging $\\mathcal U'$.",
+ "source": {
+  "document": "Lurie, Higher Topos Theory (2009), not archived in literature/ (WANTED); context https://arxiv.org/html/1501.02161v3",
+  "place": "HTT Proposition 2.4.2.4 (left fibrations are the cocartesian fibrations with Kan fibers, every edge cocartesian) and Sections 2.2.1 and 3.2.1 (straightening of a left fibration agrees with the marked straightening of E^sharp); used implicitly in GHN Section 9 (the identification P(B) = RFib(B) inside Cart(B) before Proposition 9.7 and in the proof of Lemma 9.10(2))."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-space-transport-classification",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-cat-infinity-opposite-involution"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'left fibration|right fibration|leftFibration|rightFibration|straighten' Mathlib/",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has no left/right fibrations of simplicial sets or straightening."
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlniE 'cocartesian|IsCartesian' Mathlib/ ; grep -rln KanComplex Mathlib/",
+   "results": "CategoryTheory/FiberedCategory/{Cartesian,Cocartesian,Fibered,HasFibers}.lean; Monoidal/OfHasFiniteProducts.lean; Distributive/Cartesian.lean; AlgebraicTopology/SimplicialSet/KanComplex.lean; SimplicialSet/AnodyneExtensions/PushoutProduct.lean; Quasicategory/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the fibered-category files concern ordinary categories with Hom-set lifts; KanComplex and Quasicategory only define horn filling. No infinity-categorical straightening. LeanSearch/LeanFinder were not available to the maintainer reader and were not run."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-maps-presheaf-extension",
+  "date": "2026-10-17",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
