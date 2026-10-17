@@ -32,9 +32,14 @@ stalks at points which are not `k₀`-rational:
   sheaf `B[1] = FT_{ψ⁻¹}(i_* i^* H)`, which is geometrically a sum of linear characters
   `ℒ_{ψ(a x)}` with `-a` the coordinate of a geometric point over `x`
   (`AlgebraicGeometry.WeilSheaf.exists_iso_carrier_lowerStar_tensorObj_fourierKernel_inv`);
+- the restriction of `N ⟶ B` to a dense open `U` stays nonzero: its image `I` vanishing on `U`
+  would have `FT_ψ(I) ≤ -1`, while `FT_ψ(B) ≥ 1` by Fourier inversion
+  (`AlgebraicGeometry.WeilSheaf.eq_zero_of_upperStar_map_eq_zero`);
 - on the geometric fibre `Ū` of a dense open on which `N` is lisse, `N` therefore has a nonzero
-  morphism to some `ℒ_{ψ(a x)}|_Ū` with `a` over `x`. These characters are irreducible and
-  pairwise distinct (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isEmpty_iso_linearCharacter`),
+  morphism to some `ℒ_{ψ(a x)}|_Ū` with `a` over `x`
+  (`AlgebraicGeometry.exists_isNegCoordOver_ne_zero_of_mem_support`). These characters are
+  irreducible and pairwise distinct
+  (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isEmpty_iso_linearCharacter`),
   so there are at most `rank N|_U` of them
   (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.le_finrank_of_ne_zero`).
 -/
