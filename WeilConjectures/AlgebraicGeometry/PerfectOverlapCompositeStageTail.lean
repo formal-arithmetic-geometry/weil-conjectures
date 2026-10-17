@@ -18,7 +18,7 @@ set_option synthInstance.maxSize 2048
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
-attribute [local irreducible] derivedPullback perfectHomComposition
+attribute [local irreducible] perfectHomComposition
 attribute [local instance] Functor.additive_of_preserves_binary_products
 attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
 variable [∀ Z : Scheme.{u},
