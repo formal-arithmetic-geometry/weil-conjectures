@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Retract
+public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
 
 /-!
 # Properties of the field coefficient stages
@@ -34,7 +36,11 @@ stages proved elsewhere in the blueprint:
   étale sheaves of modules over a discrete coefficient field `F`; the Tor amplitude statements
   are made there.
 * The lemmas `lem-weil-qbar-idempotent-complete` and `lem-weil-field-tor-amplitude` belong to
-  other parts of the blueprint and are only stated here.
+  other parts of the blueprint. In the Bhatt–Scholze model, idempotent completeness of
+  `Dᵇc(X, ℚ̄_ℓ)` needs no descent to finite stages: an idempotent of a bounded object of
+  `D(X_proét, ℚ̄_ℓ)` splits (`CategoryTheory.Triangulated.TStructure.isSplit_of_isGE_of_isLE`),
+  and `Dᵇc(X, ℚ̄_ℓ)` is stable under retracts, retracts of constructible sheaves being
+  constructible (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.of_retract`).
 -/
 
 @[expose] public section
@@ -121,6 +127,20 @@ section AlgebraicClosure
 
 variable (l : ℕ) [Fact l.Prime]
 
+/-- The common-stage category `Dᵇc(X, ℚ̄_ℓ)` is stable under retracts: the homology sheaves of a
+retract are retracts of constructible sheaves
+(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.of_retract`). -/
+instance ProEtale.DerivedCategory.isStableUnderRetracts_boundedConstructibleAdic
+    (X : Scheme.{u}) :
+    (ProEtale.DerivedCategory.boundedConstructibleAdic l X).IsStableUnderRetracts where
+  of_retract {M N} e := by
+    rintro ⟨hb, hc⟩
+    obtain ⟨a, b, hab⟩ := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded N).2 hb
+    exact ⟨(_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded M).1
+      ⟨a, b, (_root_.DerivedCategory.homologyConcentratedIn a b).prop_of_retract e hab⟩,
+      fun n ↦ (ProEtale.adicConstructibleSheaf l X).prop_of_retract
+        (e.map (_root_.DerivedCategory.homologyFunctor _ n)) (hc n)⟩
+
 /-- Blueprint `lem-weil-qbar-idempotent-complete`: Idempotent completeness of the common-stage
 category.
 
@@ -129,7 +149,16 @@ The common-stage category `Dᵇc(X, ℚ̄_ℓ)` (in its Bhatt–Scholze model
 theorem ProEtale.DerivedCategory.isIdempotentComplete_boundedConstructibleAdic
     (X : Scheme.{u}) :
     IsIdempotentComplete (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory :=
-  sorry
+  Idempotents.isIdempotentComplete_iff_isSplit.2 fun K p hp ↦ by
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := K.property.1
+  have : _root_.DerivedCategory.TStructure.t.IsLE K.obj (a + ((b - a).toNat : ℕ)) :=
+    _root_.DerivedCategory.TStructure.t.isLE_of_le K.obj b _ (by lia)
+  obtain ⟨Y, i, r, hir, hri⟩ := Triangulated.TStructure.isSplit_of_isGE_of_isLE
+    _root_.DerivedCategory.TStructure.t (b - a).toNat K.obj a p.hom
+    ((ObjectProperty.ι _).congr_map hp)
+  exact ⟨⟨Y, (ProEtale.DerivedCategory.boundedConstructibleAdic l X).prop_of_retract
+    ⟨i, r, hir⟩ K.property⟩, ObjectProperty.homMk i, ObjectProperty.homMk r,
+    by cat_disch, by cat_disch⟩
 
 /-- Blueprint `rem-ptr-weil-algebraically-closed-coefficients-3`: Pointer to the properties of
 the common-stage category.
