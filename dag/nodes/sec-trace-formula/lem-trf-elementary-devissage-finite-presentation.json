@@ -27,48 +27,98 @@
   "def-weil-pbc-module-finite-type-presentation",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "devissage|finite.presentation.*etale",
-   "results": "0 hits. In Mathlib/AlgebraicGeometry. The hits concern finite presentation of etale algebras, locality of ring maps, or finite algebras as modules; none gives the stated three-way devissage equivalences for module sheaves.",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "text": "Because $f$ is locally of finite presentation, the composition $Z'\\to S$ is locally of finite presentation: $i$ is of finite presentation and $X'\\to S$ is locally of finite presentation by composition. Likewise $Y'\\to S$ is locally of finite presentation because $h$ is smooth and $S'\\to S$ is etale. The finite morphism $\\pi$ is therefore locally of finite presentation by the finite-presentation permanence lemma, and the new node lem-trf-finite-morphism-finite-presentation makes $\\pi$ a morphism of finite presentation.",
+   "uses": [
+    "lem-trf-finite-morphism-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, first proof paragraph."
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "finite presentation near a point equivalent after etale pullback and finite pushforward",
-   "results": "Algebra.Etale.finitePresentation; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.LocallyOfFinitePresentation; RingHom.finitePresentation_isLocal; AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange; AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE; AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation. The hits concern finite presentation of etale algebras, locality of ring maps, or finite algebras as modules; none gives the stated three-way devissage equivalences for module sheaves.",
+   "text": "For the neighbourhood assertions, introduce (4): $g^*\\mathcal F$ is of finite presentation near $x'$. Pullback preserves finite presentation, so (1) implies (4). Conversely, $g$ is etale and hence open; for any neighbourhood $U'\\ni x'$ its image is an open neighbourhood of $x$, and $U'\\to g(U')$ is an etale covering. Faithfully flat descent of finite presentation then gives (4) implies (1).",
+   "uses": [
+    "lem-trf-etale-module-finite-presentation-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, neighbourhood proof, paragraph beginning “The etale morphism $g$ is open”."
+   }
+  },
+  {
+   "text": "The identity $i_*\\mathcal G\\cong g^*\\mathcal F$ identifies (4) with finite presentation of $i_*\\mathcal G$ near $x'$. Apply the finite-pushforward equivalence to the finite finitely presented closed immersion $i$ and its marked point to obtain (4) $\\Leftrightarrow$ (2). Apply the same equivalence to $\\pi$ (whose finite presentation was established in Step 1) and the singleton fibre $\\pi^{-1}(\\{y'\\})=\\{z'\\}$ to obtain (2) $\\Leftrightarrow$ (3).",
+   "uses": [
+    "lem-trf-finite-pushforward-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, paragraph beginning “Using Descent, Lemma 03C4”."
+   }
+  },
+  {
+   "text": "For stalks, the local ring map $\\mathcal O_{X,x}\\to\\mathcal O_{X',x'}$ is faithfully flat because $g$ is etale and the map is local. Faithfully flat module finite-presentation descent identifies finite presentation of $\\mathcal F_x$ with that of $(g^*\\mathcal F)_{x'}$. The closed immersion $i$ induces a surjective finite-presentation local ring map, and $\\pi$ induces a finite-presentation local ring map because it is finite, finitely presented, and has singleton fibre at $y'$. Applying the finite-extension module equivalence to these two local ring maps, and using $i_*\\mathcal G\\cong g^*\\mathcal F$, gives the equivalence of (a), (b), and (c).",
+   "uses": [
+    "lem-trf-finite-presentation-module-descent-flat-local",
+    "lem-trf-finite-extension-module-finite-presentation",
+    "lem-trf-finite-pushforward-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, stalkwise proof, paragraph beginning “To prove the equivalence of (a), (b), (c)”."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-module-finite-presentation-local",
+  "lem-trf-finite-extension-module-finite-presentation",
+  "lem-trf-finite-morphism-finite-presentation",
+  "lem-trf-finite-pushforward-module-finite-presentation",
+  "lem-trf-finite-presentation-module-descent-flat-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057T, complete proof of lemma-devissage-finite-presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation of modules under etale pullback finite pushforward and stalk localization",
+   "results": "Algebra.Etale.finitePresentation, RingHom.finitePresentation_isLocal, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.propertyIsLocal, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, Algebra.exists_etale_of_isEtaleAt",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Module.FinitePresentation, AlgebraicGeometry.Etale",
-   "results": "0 hits. The hits concern finite presentation of etale algebras, locality of ring maps, or finite algebras as modules; none gives the stated three-way devissage equivalences for module sheaves.",
+   "query": "Module.FinitePresentation",
+   "results": "Module.FinitePresentation, instFinitePresentation, instFiniteOfFinitePresentation, Module.FinitePresentation.of_subsingleton, instFinitePresentationForall, Module.finitePresentation_of_finite, Module.finitePresentation_iff_finite, Module.finitePresentation_of_projective",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "finite presentation descends through elementary etale devissage finite morphism singleton fibre",
-   "results": "Algebra.Etale.finitePresentation; StandardEtalePresentation; StandardEtalePresentation.toSubmersivePresentation; Algebra.Etale.exists_subalgebra_fg; Algebra.isOpen_etaleLocus; Algebra.exists_etale_of_isEtaleAt; StandardEtalePresentation.lift_bijective; StandardEtalePresentation.toPresentation. The hits concern finite presentation of etale algebras, locality of ring maps, or finite algebras as modules; none gives the stated three-way devissage equivalences for module sheaves.",
+   "tool": "grep",
+   "query": "finite.*presentation|FinitePresentation [RingTheory/Finiteness]",
+   "results": "Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "finite finitely presented ring extension transfer finite presentation module local singleton fibre",
-   "results": "RingHom.finitePresentation_isLocal; Algebra.FinitePresentation.of_span_eq_top_target_aux; Module.FinitePresentation.of_finite_of_finitePresentation; Algebra.FinitePresentation.of_isLocalizationAway; instFinitePresentationAway; Algebra.FinitePresentation.of_span_eq_top_target; Module.FinitePresentation.iff_finitePresentation_of_finite; Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway. The hits concern finite presentation of etale algebras, locality of ring maps, or finite algebras as modules; none gives the stated three-way devissage equivalences for module sheaves.",
+   "tool": "leansearch",
+   "query": "finite presentation of modules under etale pullback finite pushforward and stalk localization",
+   "results": "SheafOfModules.isFinitePresentation, Algebra.Etale.finitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.Presentation.IsFinite.mk, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-type-flat-etale-neighborhood",
@@ -88,5 +138,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-elementary-devissage-finite-presentation",
+  "worker": "stage1",
+  "summary": "Audited Tag 057T against the imported statement and split the proof into finite-presentation of the finite map, etale-local descent for module finite presentation, finite pushforward equivalence at a singleton fibre, faithfully flat stalk descent using the existing stronger DAG lemma, and finite-extension module comparison. No statement clause was weakened; all hypotheses for the etale maps, finite presentation, and singleton fibre are used explicitly.",
+  "blueprint": "The steps realize the supporting finite-presentation branch named in lem-trf-local-term-locality, via the imported elementary devissage data."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q105-991820080",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q105-991820080 (reviewer sub-agent of L); spot-checked: Tag 057T and all cited statements/sources were read and checked. The faithful-flat new node duplicates the existing stronger lem-trf-finite-presentation-module-descent-flat-local; the corrected item reuses that node and drops the duplicate. The finite-extension node also had misleading scheme-morphism citations on a ring-map statement; corrected JSON removes them. Fixes are under fixes/dag/nodes/sec-trace-formula/.; 2 file(s) fixed by the reviewer"
  }
 }

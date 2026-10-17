@@ -1,0 +1,83 @@
+{
+ "id": "lem-trf-rectangular-determinant-switch",
+ "kind": "statement",
+ "title": "Rectangular determinant switch identity",
+ "statement": "Let $R$ be a commutative ring and $m,n\\geq0$ integers. For matrices $A\\in\\operatorname{Mat}_{m\\times n}(R)$ and $B\\in\\operatorname{Mat}_{n\\times m}(R)$ [def-weil-matrix], one has\n$$\\det(I_m+AB)=\\det(I_n+BA).$$\nHere $I_t$ is the identity matrix of size $t$, matrix multiplication is $(AB)_{ij}=\\sum_k A_{ik}B_{kj}$, and the determinant of a $t\\times t$ matrix $X$ is $\\sum_{\\sigma\\in S_t}\\operatorname{sgn}(\\sigma)\\prod_{i=1}^tX_{i,\\sigma(i)}$, with determinant $1$ in size zero.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJF (lemma-det-switch), displayed rectangular-matrix identity in its proof."
+ },
+ "stmt_deps": [
+  "def-weil-matrix"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sylvester determinant identity det identity plus A times B equals det identity plus B times A for rectangular matrices over a commutative ring",
+   "results": "8 hits; top=['Matrix.det_one_add_mul_comm', 'Matrix.det_mul_add_one_comm', 'Matrix.det_one_sub_mul_comm', 'Matrix.det_add_mul', \"Matrix.det_comm'\", 'Matrix.det_one_add_replicateCol_mul_replicateRow', 'Matrix.det_mul_comm', 'Matrix.detp_mul']; note=; digest=cab10addae6224a3. Read Matrix.det_one_add_mul_comm, Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:401-406, under CommRing and arbitrary finite row/column index types, including empty types.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For rectangular matrices over a commutative ring det of I plus A B equals det of I plus B A",
+   "results": "8 hits; top=['Matrix.det_one_add_mul_comm', 'Matrix.det_mul_add_one_comm', 'Matrix.det_one_sub_mul_comm', 'Matrix.det', \"Matrix.det_comm'\", 'Matrix.det_add_replicateCol_mul_replicateRow', 'Matrix.trace_mul_comm', 'Matrix.det_comm']; note=; digest=a58d5be09cce0fc2. Read Matrix.det_one_add_mul_comm, Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:401-406, under CommRing and arbitrary finite row/column index types, including empty types.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, _ + _ * _",
+   "results": "12 hits; top=['Matrix.det_eq_of_forall_row_eq_smul_add_const', 'Matrix.det_eq_of_forall_row_eq_smul_add_const_aux', 'Matrix.det_eq_of_forall_row_eq_smul_add_pred_aux', 'Matrix.det_eq_of_forall_col_eq_smul_add_pred', 'Matrix.det_eq_of_forall_row_eq_smul_add_pred', 'Matrix.det_fin_three', 'Matrix.det_one_add_replicateCol_mul_replicateRow', 'Matrix.det_one_add_mul_comm']; note=; digest=2bbcf4ef577a6f95. Read Matrix.det_one_add_mul_comm, Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:401-406, under CommRing and arbitrary finite row/column index types, including empty types.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "det_one_add|det.*mul_comm|Sylvester",
+   "results": "25 hits; top=['Mathlib/LinearAlgebra/Matrix/Kronecker.lean', 'Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean', 'Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean', 'Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean', 'Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean', 'Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean', 'Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean', 'Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean']; note=; digest=46e1af39b1a3637f. Read Matrix.det_one_add_mul_comm, Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:401-406, under CommRing and arbitrary finite row/column index types, including empty types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.det_one_add_mul_comm",
+  "file": "Mathlib/LinearAlgebra/Matrix/SchurComplement.lean",
+  "how": "specializes in one line: take row and column types Fin m and Fin n; theorem at lines 401-406, under the CommRing and finite-index hypotheses at lines 44-46. Empty index types are allowed.",
+  "line": 401
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-surjective-two-term-determinant-calculus",
+  "date": "2026-10-18",
+  "group": "Q55"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Auxiliary module input: Rectangular determinant switch identity.",
+   "via": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

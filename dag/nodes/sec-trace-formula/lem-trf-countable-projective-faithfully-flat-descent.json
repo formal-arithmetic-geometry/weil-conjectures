@@ -12,9 +12,82 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $N=B\\otimes_A P$. Choose a generating family $(y_i)_{i\\in I}$ of $N$ with $I$ at most countable. By the finite pure-tensor presentation in [def-weil-pbc-module-tensor-product], write $y_i=\\sum_{j=1}^{n_i}b_{ij}\\otimes p_{ij}$. The pairs $(i,j)$ form an at most countable set (finite sets over a countable index set). Let $P_0\\subseteq P$ be the submodule spanned by the $p_{ij}$. The image of $B\\otimes_A P_0\\to N$ is a $B$-submodule: multiplying $b\\otimes p$ by $c$ gives $cb\\otimes p$ in the same image. This image contains every $y_i$, hence is $N$. Thus tensoring the complex $P_0\\to P\\to0$ with $B$ makes it exact at $N$. Faithful exactness in [def-weil-pbc-faithfully-flat-ring-map] makes the original complex exact at $P$, so $P_0=P$. This proves countable generation of $P$, including the empty generating-set case.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GVD, lemma-ffdescent-countable, full generator argument used in Tag 05A6"
+   }
+  },
+  {
+   "text": "Projectivity of $N$ implies flatness over $B$ by [lem-weil-pbc-projective-module-flat]. Apply [lem-weil-pbc-flatness-descends-faithfully-flat] with $R=A$, $R\\prime=B$, and $M=P$. Its scalar extension is exactly $N$ with the stipulated first-factor action, so $P$ is flat over $A$.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-flatness-descends-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A6 invoking Tag 03C4(3), lemma-descend-properties-modules; Tag 00HJ, lemma-flatness-descends; projective implies flat in theorem-projectivity-characterization"
+   }
+  },
+  {
+   "text": "We verify directly that the projective $B$-module $N$ is Mittag-Leffler. By [def-weil-pbc-projective-module], choose a free $F=\\bigoplus_{t\\in T}B$ and maps $i:N\\to F$, $s:F\\to N$ with $si=1$. For any $B$-module $Q$, the tensor universal property [def-weil-pbc-module-tensor-product] identifies $F\\otimes_B Q$ with finitely supported families in $Q$: $e_t\\otimes q$ is the family with $q$ at $t$ and zero elsewhere, with inverse $(q_t)\\mapsto\\sum_t e_t\\otimes q_t$. Consequently for any family $(Q_j)_j$ the map $\\theta_F$ of [def-trf-mittag-leffler-module] sends a finitely supported family of tuples $(q_{t,j})_j$ to its coordinate families $(q_{t,j})_t$. If its image is zero, every $q_{t,j}=0$, hence the original family is zero. Thus $\\theta_F$ is injective. If $x\\in N\\otimes_B\\prod_j Q_j$ has $\\theta_N(x)=0$, naturality on pure tensors gives $\\theta_F((i\\otimes1)x)=\\prod_j(i\\otimes1)(\\theta_N(x))=0$. Injectivity just proved gives $(i\\otimes1)x=0$, and applying $s\\otimes1$ gives $x=0$. Therefore $N$ is Mittag-Leffler.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-module-tensor-product",
+    "def-trf-mittag-leffler-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A6 via the forward implication of Tag 059Z, theorem-projectivity-characterization; free-coordinate and retract argument expanded using the tensor characterization 059M"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-mittag-leffler-faithfully-flat-descent] to the same faithfully flat homomorphism $A\\to B$ and the module $P$. Step 3 supplies precisely its Mittag-Leffler hypothesis on the $B$-module $B\\otimes_A P$. It follows that $P$ is Mittag-Leffler over $A$.",
+   "uses": [
+    "lem-trf-mittag-leffler-faithfully-flat-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A5, lemma-ffdescent-ML, as invoked in Tag 05A6"
+   }
+  },
+  {
+   "text": "Step 1 gives countable generation of $P$, Step 2 gives flatness, and Step 4 gives the Mittag-Leffler property. These are all the hypotheses of [lem-trf-countable-flat-mittag-leffler-projective] with $R=A$. Hence $P$ is projective over $A$. Together with Step 1 this proves both conclusions, without a finite-generation or finite-presentation assumption.",
+   "uses": [
+    "lem-trf-countable-flat-mittag-leffler-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A6, final invocation of the projectivity characterization; Tag 059X, lemma-countgen-projective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-flatness-descends-faithfully-flat",
+  "def-weil-pbc-projective-module",
+  "def-trf-mittag-leffler-module",
+  "lem-trf-mittag-leffler-faithfully-flat-descent",
+  "lem-trf-countable-flat-mittag-leffler-projective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05A6, lemma-ffdescent-countable-projectivity, expanding Tag 0GVD generator descent and the projective-implies-Mittag-Leffler coordinate argument in Tag 059Z; invoking 00HJ, 05A5 and 059X."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +123,45 @@
    "results": "{\"t\": \"2026-10-17T21:02:07Z\", \"tool\": \"leanfinder\", \"query\": \"Countably generated projectivity descends under faithfully flat extension without finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.projective_of_finitePresentation\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"Algebra.FormallyUnramified.projective_of_restrictScalars\", \"Module.FaithfullyFlat\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"Module.Flat.of_projective\"], \"digest\": \"8a2bbadc7157dc65\"}",
    "date": "2026-10-18",
    "verdict": "no match: The returned faithfully flat results descend flatness or reflect isomorphisms; Module.Flat.projective_of_finitePresentation requires finite presentation, not countable generation. The grep hits concern inverse systems, analytic Mittag-Leffler expansions, and projective families of measures, not Mittag-Leffler modules or Tag 05A6."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "faithfully flat descent of countably generated projective modules",
+   "results": "{\"t\": \"2026-10-17T21:18:10Z\", \"tool\": \"leanfinder\", \"query\": \"faithfully flat descent of countably generated projective modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.of_projective\", \"Module.FaithfullyFlat\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"Module.FaithfullyFlat.toFlat\", \"Module.FaithfullyFlat.instOfNontrivialOfFree\"], \"digest\": \"2f89fd989a38ab04\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned flatness descent, finite-presentation projectivity, faithfully-flat definitions and reflection of isomorphisms do not state countably generated projectivity descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Module.FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-17T21:18:10Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, Module.FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned flatness descent, finite-presentation projectivity, faithfully-flat definitions and reflection of isomorphisms do not state countably generated projectivity descent."
+  },
+  {
+   "tool": "grep",
+   "query": "countabl.*projective|projective.*countabl",
+   "results": "{\"t\": \"2026-10-17T21:18:10Z\", \"tool\": \"grep\", \"query\": \"countabl.*projective|projective.*countabl\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned flatness descent, finite-presentation projectivity, faithfully-flat definitions and reflection of isomorphisms do not state countably generated projectivity descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "faithfully flat descent countably generated projective module",
+   "results": "{\"t\": \"2026-10-17T21:18:11Z\", \"tool\": \"leansearch\", \"query\": \"faithfully flat descent countably generated projective module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.Flat.iff_flat_tensorProduct\", \"RingHom.FaithfullyFlat\", \"Module.FaithfullyFlat.iff_flat_and_rTensor_reflects_triviality\", \"Module.FaithfullyFlat\", \"Module.faithfullyFlat_iff\", \"Module.FaithfullyFlat.iff_flat_and_lTensor_faithful\"], \"digest\": \"7a120416ace9a2d8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned flatness descent, finite-presentation projectivity, faithfully-flat definitions and reflection of isomorphisms do not state countably generated projectivity descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "countable generation and projectivity are reflected by faithfully flat extension of scalars",
+   "results": "{\"t\": \"2026-10-17T21:23:19Z\", \"tool\": \"leanfinder\", \"query\": \"countable generation and projectivity are reflected by faithfully flat extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"Module.FaithfullyFlat\", \"RingHom.FaithfullyFlat\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_flat_tensorProduct\", \"RingHom.faithfullyFlat_algebraMap_iff\", \"Module.FaithfullyFlat.self\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\"], \"digest\": \"780128231c82582f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned flatness descent, finite-presentation projectivity, faithfully-flat definitions and reflection of isomorphisms do not state countably generated projectivity descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-projective-faithfully-flat-descent",
@@ -84,5 +192,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-countable-projective-faithfully-flat-descent",
+  "worker": "stage1",
+  "summary": "Kept the exact statement and existing metadata. Wrote countable-generation descent as an elementary generator/faithful-exactness argument, reused the existing projective-flat and flatness-descent Mathlib leaves, proved the tensor-to-products property of a projective module by coordinates and a retract, cited one new general Mittag-Leffler descent lemma (05A5), and applied the existing countable flat Mittag-Leffler projectivity criterion. No countable-generation clause is repackaged as a new node.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Within the final faithfully flat descent (Algebra Tag 05A9): lemma-ffdescent-countable-projectivity. Five steps expand the nested Stacks Tag 05A6 invocation without changing the surrounding normal-cone/flattening route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q74-3c7f06ce5",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-3c7f06ce5 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, unit/chapter route, blueprint, and Stacks Tags 05A5, 05A6, 0GVD, 059X, and 059Z. Verified all hypotheses, tensor actions, faithful-flat descent steps, projective-to-Mittag-Leffler coordinate argument, edge cases, searches, duplicate checks, and route constraints. Wrote review.md; no repairs or tool_uses required."
  }
 }

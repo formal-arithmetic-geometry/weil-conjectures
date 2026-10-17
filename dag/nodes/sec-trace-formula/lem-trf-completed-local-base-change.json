@@ -14,11 +14,86 @@
   "def-weil-finite-type-morphism",
   "def-weil-pbc-adic-completion",
   "def-pc-fibre-product",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine neighbourhoods S_0=Spec R of s and X_0=Spec C of x with C a finitely generated R-algebra. Writing p subset R and q subset C for the corresponding primes, the local rings are A=R_p and O_{X,x}=C_q. By the fibre-product point correspondence, points above (x,b) correspond to primes of kappa(q) tensor_{kappa(s)} kappa(b). The completion-local-ring statement identifies kappa(b) with kappa(s); hence this tensor product is kappa(q), a field, and there is exactly one point x_B above (x,b). The residue field of x_B is kappa(q).",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-finite-type-morphism",
+    "def-pc-fibre-product",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT point correspondence, together with Algebra Tag 00MA and the completion-local residue-field clause"
+   }
+  },
+  {
+   "text": "The completion A^ is Noetherian, local, and has maximal ideal m_A A^ with residue field kappa(s), by the completion Noetherianity and local-completion nodes. The canonical map A \\to A^ is flat by the Noetherian-completion-flat node. Base-changing the finite-type affine chart gives D=C tensor_R A^, and localizing at x_B gives D_Q; the induced map C_q \\to D_Q is the canonical local base-change map.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GI and 00MB, with the affine base-change construction in Tag 0GDX"
+   }
+  },
+  {
+   "text": "For every n>=1, the finite-type localization quotient lemma gives a canonical isomorphism C_q/(q C_q)^n \\to D_Q/(Q D_Q)^n, and these isomorphisms commute with the transition maps. Applying the compatible inverse-limit lemma to this system yields a canonical isomorphism lim_n C_q/(q C_q)^n \\to lim_n D_Q/(Q D_Q)^n. By the definition of adic completion, this is an isomorphism O^_{X,x} \\to O^_{X_B,x_B}.",
+   "uses": [
+    "lem-trf-finite-type-base-change-adic-quotients",
+    "lem-trf-adic-inverse-limit-iso",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA(3), finite-module completion and compatible inverse-limit construction"
+   }
+  },
+  {
+   "text": "The quotient comparison is induced at every level by the canonical local map C_q \\to D_Q, so its inverse-limit map is the canonical local base-change map. Naturality of localization and of the quotient projections makes it independent of the affine charts, and the isomorphism is an isomorphism of A^-algebras.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA(3), naturality of completion maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adic-completion",
+  "lem-trf-adic-inverse-limit-iso",
+  "lem-trf-finite-type-base-change-adic-quotients",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-noetherian-completion-flat",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MA(3), with the affine point correspondence of Tag 01JT; Tag 0GDX is used only as context because its hypothesis already assumes the completed-local map"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-completion-etale-approximation",
@@ -67,7 +142,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Tag 0GDX proof, first paragraph: identify the completed local ring after base change to Spec O_{S,s}^ with the original completed local ring at x.",
+   "place": "the completed-local identification needed in the first paragraph of the ancestor locality route",
    "via": [
     "lem-trf-relative-completion-etale-approximation",
     "lem-trf-nodal-family-etale-local-model",
@@ -82,5 +157,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-completed-local-base-change",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: Tag 0GDX was found to assume the completed-local map and therefore could not prove this item. I added two statement-only helper nodes, one for the finite-type localization quotient comparison and one for the compatible inverse-limit passage, and rewrote the item proof to cite them. The affine point argument now cites the existing fibre-product point and residue-field nodes; the completion properties cite the existing completion nodes.",
+  "blueprint": "Realizes the completed-local identification used in the ancestor lem-trf-local-term-locality route: affine point identification, finite-level quotient comparison, and the compatible inverse-limit passage.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-4069f0840",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-4069f0840 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all cited DAG statements, unit/blueprint route, and Stacks sources 01JT, 00MA, 05GI, 0GDX. The repaired split correctly isolates finite-level quotient comparison and inverse-limit passage; hypotheses, point uniqueness, canonical base-change map, edge cases, duplicate searches, and route restrictions check out. Tag 0GDX was verified to assume the completed-local isomorphism, and is used only as contextual source. Review written to review.md."
  }
 }
