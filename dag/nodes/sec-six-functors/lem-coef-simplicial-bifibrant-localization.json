@@ -238,5 +238,44 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-306abfe28 (reviewer sub-agent of L); spot-checked: I read all nine steps and the full statement of lem-coef-simplicial-bifibrant-localization. The delivery has no new nodes and leaves the statement unchanged. Cited nodes: lem-coef-simplicial-boundary-collapse-test is used only for the model-category definitions in its preamble (two-out-of-three, the two weak factorization systems, cofibrant and fibrant objects). def-coef-simplicial-tensor-cotensor is used for enriched composition and for the cotensor isomorphism, where (k,b) maps to eps(k)b. All cited nodes are in the unit sk-prop-sf-biduality-general, so the proof stays on route and there are no tool uses. Source: I read paragraph 2 of the main-20261015 prop-coef-integral-exceptional-adjoint.proof.md. It only motivates the result, so proof_origin=agent is correct. I checked every step. Step 1: composites of cofibrations and of fibrations; QX is called fibrant only when X is fibrant. Step 2: two-out-of-three is used in both directions. Step 3: composition is well defined on zigzag classes, with no Kan condition needed. Step 4: from the cotensor definition, an edge gives h with e_i h equal to the two endpoints, and the constant path c gives e_i c = 1. Then (ii) forces q(e0) = q(e1), so q(f) = q(g). Steps 5-7: F is well defined on the word quotient. I recomputed the naturality of alpha and beta from the replacement squares, and G(beta_X) = alpha_qX holds. Step 8: the full, faithful and essentially surjective calculations are correct. Step 9: saturation goes through F, (i) and Step 2, and the representation clause follows from fullness. Edge cases: the discrete enrichment with the trivial model structure is consistent, and empty mapping sets cause no problem. The hypotheses (i) and (ii) actually hold for simplicial model categories (the parent shows this in its step 14 via SM7). Duplicates: I checked lem-coef-chunk-bifibrant-localization, localization-homotopy-category, bifibrant-comparison-common-replacement, fibrant-subcategory-localization and model-localization-map-surjective. None states this result. lem-coef-model-localization-detects-weak-equivalences generalizes only the saturation clause of the pre-existing statement, which Step 9 proves directly. The recorded Mathlib searches (LeanSearch, Loogle, LeanFinder, grep) were run, and the Mathlib BifibrantObject results use right homotopy, so there is no match. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialBifibrantLocalization",
+  "declaration": "CategoryTheory.simplicial_bifibrant_localization",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialBifibrantLocalization.lean",
+  "statement": "theorem simplicial_bifibrant_localization {C : Type u} [Category.{v} C] [ModelCategory C] [SimplicialCategory C] [HasFunctorialFactorization (cofibrations C) (trivialFibrations C)] [HasFunctorialFactorization (trivialCofibrations C) (fibrations C)] (T : SimplicialTensorCotensor C) (Q R : C ⥤ C) (p : Q ⟶ 𝟭 C) (j : 𝟭 C ⟶ R) (hQ : ∀ X : C, IsCofibrant (Q.obj X)) (hp : ∀ X : C, trivialFibrations C (p.app X)) (hR : ∀ X : C, IsFibrant (R.obj X)) (hj : ∀ X : C, trivialCofibrations C (j.app X)) (hrecognition : ∀ (X Y : SimplicialBifibrantComponent C) (f : X.obj ⟶ Y.obj), WeakEquivalence f ↔ ∃ g : Y.obj ⟶ X.obj, simplicialPiZeroComp (SSet.π₀.mk ((SimplicialCategory.homEquiv' X.obj Y.obj) f)) (SSet.π₀.mk ((SimplicialCategory.homEquiv' Y.obj X.obj) g)) = SSet.π₀.mk ((SimplicialCategory.homEquiv' X.obj X.obj) (𝟙 X.obj)) ∧ simplicialPiZeroComp (SSet.π₀.mk ((SimplicialCategory.homEquiv' Y.obj X.obj) g)) (SSet.π₀.mk ((SimplicialCategory.homEquiv' X.obj Y.obj) f)) = SSet.π₀.mk ((SimplicialCategory.homEquiv' Y.obj Y.obj) (𝟙 Y.obj))) (hendpoints : ∀ (Y : C), IsFibrant Y → ∀ (i : Fin 2), trivialFibrations C (simplicialCotensorEndpoint T Y i)) : ∃ (G : SimplicialBifibrantComponent C ⥤ (weakEquivalences C).Localization) (F : (weakEquivalences C).Localization ⥤ SimplicialBifibrantComponent C), G.IsEquivalence ∧ (∀ (a : Arrow C), IsIso ((weakEquivalences C).Q.map a.hom) ↔ weakEquivalences C a.hom) ∧ (∀ (X Y : SimplicialBifibrantComponent C) (f : X.obj ⟶ Y.obj), ∃ (eX : G.obj X = (weakEquivalences C).Q.obj X.obj) (eY : G.obj Y = (weakEquivalences C).Q.obj Y.obj), eqToHom eX.symm ≫ G.map (SSet.π₀.mk ((SimplicialCategory.homEquiv' X.obj Y.obj) f)) ≫ eqToHom eY = (weakEquivalences C).Q.map f) ∧ (∀ (X : C), F.obj ((weakEquivalences C).Q.obj X) = simplicialReplacementObject Q R p j hQ hp hR hj X) ∧ (∀ (X Y : C) (f : X ⟶ Y), ∃ (eX : F.obj ((weakEquivalences C).Q.obj X) = simplicialReplacementObject Q R p j hQ hp hR hj X) (eY : F.obj ((weakEquivalences C).Q.obj Y) = simplicialReplacementObject Q R p j hQ hp hR hj Y), eqToHom eX.symm ≫ F.map ((weakEquivalences C).Q.map f) ≫ eqToHom eY = SSet.π₀.mk ((SimplicialCategory.homEquiv' ((Q ⋙ R).obj X) ((Q ⋙ R).obj Y)) ((Q ⋙ R).map f))) ∧ (∃ α : 𝟭 (weakEquivalences C).Localization ⟶ F ⋙ G, (∀ (X : C), ∃ e : (F ⋙ G).obj ((weakEquivalences C).Q.obj X) = (weakEquivalences C).Q.obj ((Q ⋙ R).obj X), (weakEquivalences C).Q.map (p.app X) ≫ α.app ((weakEquivalences C).Q.obj X) ≫ eqToHom e = (weakEquivalences C).Q.map (j.app (Q.obj X))) ∧ (∀ X, IsIso (α.app X))) ∧ (∀ (X Y : SimplicialBifibrantComponent C) (a : (weakEquivalences C).Q.obj X.obj ⟶ (weakEquivalences C).Q.obj Y.obj), ∃ f : X.obj ⟶ Y.obj, (weakEquivalences C).Q.map f = a)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SimplicialBifibrantComponent",
+   "CategoryTheory.SimplicialBifibrantComponent.obj",
+   "CategoryTheory.simplicialPiZeroComp_right_edge",
+   "CategoryTheory.simplicialPiZeroComp_left_edge",
+   "CategoryTheory.simplicialPiZeroComp_left_edge_lift",
+   "CategoryTheory.simplicialPiZeroComp",
+   "CategoryTheory.simplicialPiZeroComp_assoc",
+   "CategoryTheory.simplicialPiZeroComp_id_left",
+   "CategoryTheory.simplicialPiZeroComp_id_right",
+   "CategoryTheory.simplicialCotensorMap",
+   "CategoryTheory.simplicialCotensorZeroEval",
+   "CategoryTheory.simplicialCotensorEndpoint",
+   "CategoryTheory.simplicialReplacement_bifibrant",
+   "CategoryTheory.simplicialReplacementObject",
+   "CategoryTheory.simplicialPiZeroCategory",
+   "CategoryTheory.simplicialBifibrantComponentCategory",
+   "CategoryTheory.simplicial_bifibrant_localization"
+  ],
+  "note": "Reviewer mechanical repair: give the enriched component category a public type synonym and named global category instance; preserve the ordinary BifibrantObject full-subcategory instance. Add source/blueprint docstrings and register all helper declarations. Mathematical statement unchanged.",
+  "fixed_by": "NT-stage2-Codex-d5f4c6b62"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d5f4c6b62",
+  "group": "Q51",
+  "result": "fix",
+  "note": "Wrote review.md and complete fixes for the file-local category instance, helper citations and declaration records, and second-reading report. Checked all hypotheses, conclusions, dependencies, universes, edge cases, and verbatim signatures. Original and corrected modules compile cleanly through scompile.py. No branch or clone changes."
  }
 }
