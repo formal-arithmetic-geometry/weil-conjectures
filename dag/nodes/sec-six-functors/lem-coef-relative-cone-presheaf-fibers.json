@@ -286,10 +286,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-a9f36de4f",
-  "group": "Q09",
+  "reviewer": "NT-stage2-Codex-9dbe0b495",
+  "group": "NR",
   "result": "pass",
-  "note": "Re-delivery after the duplicate-name return of 630952046450. Compared with that snapshot, the only change is that the colliding helper relativeSliceArrow is deleted. Its five uses become Mathlib pullback.fst, which is exactly its body, since fixedTargetArrows is pullback ev1 (const x). The node diff only drops the declaration entry and adds a note sentence. Independent full check of the node's clauses against the Lean: pushout D via ι0 with j=inl and free end ι1≫inr; j* via MonoidalClosed.pre and cartesianFibration; representatives tied to the classifier; E_X as the actual pullback; the ∞-fiber via pullbackCoreComparison; the first equivalence fully determined by source_formula and cylinder_formula, with opIso reversing the interval (StdSimplex.lean:775) so the arrow runs Ψ→p*X; the second equivalence with the homotopy-fiber formula as a natural equivalence of whole functors; representative_arrows and transport (cartesian W intertwined with the pullback functor P, and P with restriction along the canonical E_X'→E_X); naturality for every square p'≫a=b≫p; models_are_homotopy_pullbacks. Edge cases checked: empty E or A, initial X, a point, identities, empty fibers. Node: only lean and stmt_deps differ from the side clone; the 3 added deps are landed and used. All 29 names checked against the live library, side clone, Mathlib and slopmaster2: no collision. No hollow def, one sorry with the 8-step docstring, 30 blueprint tags, no line over 100 columns, statement verbatim, both report sections real. nt_compile --json on the snapshot: rc 0, no errors or warnings (target 6.5 s). Remark R1, no change needed: fiber_values is existential, mirroring TransportClassificationClauses."
+  "note": "Recorded the independent review in review.md. Checked source, all statement dependencies, canonical comparisons, universes, edge cases, and verbatim signatures. All three immutable Lean modules compiled cleanly through scompile.py; no fixes required.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.RelativeConePresheafFibers",
@@ -328,9 +328,9 @@
   "file": "lean/Sheaf/CategoryTheory/RelativeConePresheafFibers.lean",
   "statement": "theorem relative_cone_presheaf_fibers : ∃ T : ∀ (A : SSet.{u + 1}) (left : Bool), TransportClassifier.{u, 0} A left, (∀ (A : SSet.{u + 1}) (left : Bool), TransportClassificationClauses (T A left)) ∧ (∀ left : Bool, Nonempty (CoherentTransportBaseChange T left)) ∧ TransportSmallRepresentatives T ∧ Nonempty (RelativeConePresheafFibers (fun A ↦ T (SSet.uliftFunctor.{u + 1}.obj A) false))",
   "branch": "newtargets-dag",
-  "by": "Q09",
+  "by": "NR",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Uses the published coherent space-valued presheaf and right-fibration interfaces. The first comparison is fixed on every cylinder simplex; the second has the full slice-valued fiber-functor formula. Pullback cones and cartesian lifts specify contravariant transport, and general commuting squares specify naturality in both base functors. Helpers belong to this construction; only the final theorem is postponed. The added landed dependency owns the canonical pullbackCoreComparison used to express infinity-categorical pullbacks. Second reading reuses the landed infinityCospan and explicitly supplies a representative map for every presheaf edge before applying transport. Cylinder endpoint inclusions use Mathlib SSet.ι₀ and SSet.ι₁; internal-hom vertices use the published CategoryTheory.vertexMap. Return repair removes the colliding relativeSliceArrow helper entirely and uses the existing Mathlib pullback.fst at every fixed-target-arrow inclusion."
+  "note": "Dependency module repair under brief-stage2 §1(B): the published module fails to compile at relativePresheaves because transportDiagrams is now noncomputable. Retains the exact published source, declarations, constructions and theorem statement, changing only relativePresheaves to noncomputable abbrev. Reuses the current server source via scompile.py --source; no mathematical interface or node statement changes."
  }
 }

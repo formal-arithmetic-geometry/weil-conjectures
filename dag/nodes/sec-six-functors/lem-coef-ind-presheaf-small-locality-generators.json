@@ -5,7 +5,21 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-small-inner-horn-completion"
+  "lem-coef-small-inner-horn-completion",
+  "lem-coef-relative-cone-presheaf-fibers",
+  "lem-coef-small-right-adjoint-diagram-compact-model",
+  "lem-coef-infinity-presheaf-ind-criterion",
+  "lem-coef-suspension-square-comparison",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-infinity-colimit-gluing",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-space-transport-classification",
+  "def-cbc-enhanced-cartesian-fibration",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-blunt-sharp-join-equivalence",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-limits-products-pullbacks",
+  "lem-coef-join-slice-cocone-comparison"
  ],
  "proof": [
   {
@@ -266,5 +280,50 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-7e82547fe (reviewer sub-agent of L); spot-checked: Read in full: the item; the parent lem-coef-ind-presheaf-fibration-accessibility; every cited node statement; GHN arXiv:1501.02161v3 Props 9.16 and 10.5 and Lemma 10.6 (online HTML; not in literature/, WANTED still outstanding). GHN Prop 10.5 tests cocartesian edges plus pushouts and κ-small coproducts in the fibres; Lemma 10.6 uses locality for colim(y∘p|K)→y(∞) on a small ∞-category. The item follows this route. Fault (E7/C4): the delivery changed the statement from the raw relative cone to D=R D_0 citing lem-coef-small-inner-horn-completion, but that node was missing from stmt_deps and proof_deps. Step 1 also claimed no completion was made, step 8 relied on 'D quasicategory by step 1' without support, and the report falsely says the statement is unchanged. The change itself is correct and is not a weakening: the raw D_0 is not a quasicategory in general (a'→p(e) followed by the cylinder edge is an unfillable inner horn when the edge does not lift to E), so Map_D and the locality lemma need the completion; P(RD_0)→P(D_0) is a trivial fibration by the completion lemma with S^op. Repaired in fixes/: added the completion lemma to stmt_deps and proof_deps and rewrote step 1 to cite it for D being a small quasicategory and the equivalence P(D)≃P(D_0), with (i) and (ii) read on φ|D_0 as in the GHN realization node; statement kept as delivered. No cycle (the lemma's closure excludes the item); same unit. Steps 2-8 checked: the slice-limit formula Z×_{lim ΔZ} lim Y including J=∅; the bounded products-pullbacks criterion with κ=λ including ℵ0 and the empty product; the prism square in step 4 giving X(b)×_{X(a)}Ψ(e); the fat-join cone with B^op=(K^op)^▷; the discrete, empty and span comparisons; the size count; the colimit-locality hypotheses. No new nodes, no duplicates. Accepted tool_use lem-cbc-enhanced-functor-cone-calculus. Maintainer note: parent step 6 uses S_0 in P of the raw cone and must pass through P(RD_0)≃P(D_0) (item step 1) when next touched.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9dbe0b495",
+  "group": "NR",
+  "result": "pass",
+  "note": "Recorded the independent review in review.md. Checked source, all statement dependencies, canonical comparisons, universes, edge cases, and verbatim signatures. All three immutable Lean modules compiled cleanly through scompile.py; no fixes required.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IndPresheafSmallLocalityGenerators",
+  "declaration": "SSet.Enhanced.ind_presheaf_small_locality_generators",
+  "declarations": [
+   "SSet.Enhanced.indLocalityCategory",
+   "SSet.Enhanced.indLocalityCylinder",
+   "SSet.Enhanced.indLocalityBase",
+   "SSet.Enhanced.indLocalitySections",
+   "SSet.Enhanced.indLocalitySectionInclusion",
+   "SSet.Enhanced.IndLocalityClassification",
+   "SSet.Enhanced.IndLocalityCocone",
+   "SSet.Enhanced.indLocalityConeMap",
+   "SSet.Enhanced.IndLocalityDoubleCone",
+   "SSet.Enhanced.IndLocalityFiberColimit",
+   "SSet.Enhanced.indLocalitySquare",
+   "SSet.Enhanced.IndLocalityCartesian",
+   "SSet.Enhanced.IndLocalityFiberwise",
+   "SSet.Enhanced.IndLocalityFiberShape",
+   "SSet.Enhanced.IsIndLocalityTest",
+   "SSet.Enhanced.indLocalityYonedaDiagram",
+   "SSet.Enhanced.IndLocalityMap",
+   "SSet.Enhanced.indLocalityComparisonSpace",
+   "SSet.Enhanced.indLocalityComparison",
+   "SSet.Enhanced.indLocalityPrecompositionSpan",
+   "SSet.Enhanced.indLocalityShortRestriction",
+   "SSet.Enhanced.indLocalityLongRestriction",
+   "SSet.Enhanced.IndLocalityIsLocal",
+   "SSet.Enhanced.ind_presheaf_small_locality_generators"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/IndPresheafSmallLocalityGenerators.lean",
+  "statement": "theorem ind_presheaf_small_locality_generators (A E : SSet.{u}) [Quasicategory A] [Quasicategory E] (κ : Cardinal.{u}) (hκ : κ.IsRegular) (F₀ : SSet.uliftFunctor.{u + 1}.obj A ⟶ compactRex κ) (p : E ⟶ A) (hp : cocartesianFibrationOver p) (hF₀ : IndLocalityClassification p F₀) : Quasicategory (indLocalityCategory p) ∧ (∀ (a : A _⦋0⦌) (K : SSet.{u}), IsKappaSmall κ K → ∀ q : rightJoinCone K ⟶ fiber p a, IndLocalityFiberColimit p a q → ∃ r : IndLocalityCocone (indLocalityCategory p), IndLocalityDoubleCone p a q r) ∧ (∀ e : E _⦋1⦌, IsCocartesianEdge p (SSet.yonedaEquiv.symm e) → Nonempty (SuspensionComparison.SquareCocone (indLocalitySquare p e))) ∧ ∃ (I : Type u) (r : I → IndLocalityCocone (indLocalityCategory p)) (s : ∀ i : I, IndLocalityMap (r i)), (∀ i : I, IsIndLocalityTest κ p (r i)) ∧ ∀ φ : infinityPresheaves (indLocalityCategory p) _⦋0⦌, (∀ i : I, IndLocalityIsLocal (s i) φ) ↔ IndLocalityCartesian p φ ∧ IndLocalityFiberwise κ p φ",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of a6aeac1ca027: the arbitrary comparison-edge field is removed. The comparison is represented by the inhabited contractible mapping space from the colimit cocone to the exact degreewise Yoneda image cocone. Its apex projection is constructed explicitly. Locality uses canonical pullback triangle spans and explicit short/long projection maps, with no existential restriction-map parameters, and tests every universal comparison representative. The completed-cylinder geometry, source statement and theorem signature are retained. No postponed construction or additional theorem is introduced."
  }
 }
