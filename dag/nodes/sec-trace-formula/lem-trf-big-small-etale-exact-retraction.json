@@ -14,9 +14,78 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-trf-geometric-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the compatible small presentations in the common larger universe [def-weil-size-convention]. Put $\\mathcal C=T_{\\mathrm{Et}}$, $\\mathcal D=B_T$, and $u:\\mathcal C\\hookrightarrow\\mathcal D$. Check each hypothesis of [lem-trf-bigger-site-retraction]. (a) If $\\{V_j\\to u(U)\\}$ is a big-site covering with $U\\to T$ etale, then each $V_j\\to U$ is etale, and etale composition [lem-weil-pbc-etale-composition-cancellation](2) makes $V_j\\to T$ etale. The same jointly surjective family is therefore a covering in $\\mathcal C$ and lifts the given cover, proving cocontinuity. (b) Every small covering is a big covering by the identical definition, and the fibre products along its members are the same scheme fibre products by [def-weil-pbc-etale-site]; thus $u$ is continuous in the sense of [def-weil-pbc-sites-and-cohomology](3). (c) Both sites have all $T$-morphisms between their objects, so $u$ is fully faithful. (d) Fibre products in $\\mathcal C$ are scheme fibre products by [def-weil-pbc-etale-site], hence are preserved by $u$. (e) $T/T$ is final on both sides: for every $V/T$ its unique map to $T/T$ is its structure morphism. The inclusion sends this object to itself.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-trf-bigger-site-retraction",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021F (lemma-put-in-T-etale) and 021G (lemma-at-the-bottom-etale); check Sites 00XU hypotheses (a)--(e)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-bigger-site-retraction] to $u$ with the hypotheses checked in step 1. It supplies the morphism of sites $\\pi_T=f$ and the geometric morphism $i_T=g:\\operatorname{Sh}(T_{\\mathrm{Et}})\\to\\operatorname{Sh}(B_T)$, with $\\pi_{T,*}=i_T^{-1}=R$ and $\\pi_T^{-1}=L$. In particular restriction on set sheaves is $(RG)(U/T)=G(U/T)$. The site-morphism conventions of [def-weil-pbc-sites-and-cohomology](3) give the same precomposition formula on abelian sheaves and on their morphisms. Thus the claimed direct-image formula holds.",
+   "uses": [
+    "lem-trf-bigger-site-retraction",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021G (lemma-at-the-bottom-etale), using Sites Tag 00XU (lemma-bigger-site)"
+   }
+  },
+  {
+   "text": "Prove exactness of this abelian restriction. The node [lem-trf-bigger-site-retraction] gives $R=i_T^{-1}\\dashv i_{T,*}$ on set sheaves; $R$ preserves finite products because it is the inverse image of a geometric morphism. Identify abelian sheaves with abelian group objects by [lem-weil-pbc-sheaf-algebraic-structures-objects], and lift this adjunction using [lem-weil-pbc-adjunction-lifts-group-ring-objects](1),(2). Its lifted left adjoint is exactly abelian restriction: applying $R$ to addition, zero and negation applies the same structure maps on every $U/T$. It therefore preserves cokernels by [lem-weil-pbc-left-adjoint-preserves-colimits], applied to the finite diagram defining a cokernel. Kernels of abelian sheaves are sectionwise by [lem-weil-pbc-sheafification-exact](1), so restriction preserves them as well: $(R\\ker(a))(U)=\\ker(a(U))=(\\ker(Ra))(U)$. Restriction is additive since addition of natural transformations is sectionwise. Hence it is an additive functor preserving kernels and cokernels, which is precisely exactness on these abelian categories.",
+   "uses": [
+    "lem-trf-bigger-site-retraction",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDI (lemma-cohomological-descent-etale): pi_* = i^{-1} is exact; Sites 00YV(2), 00XR and 00XU for the adjunction on abelian objects"
+   }
+  },
+  {
+   "text": "By [lem-trf-bigger-site-retraction], the canonical unit $\\eta_F:F\\to RLF$ is an isomorphism on set sheaves. This is a statement about the sheafified left adjoint $LF=(u_pF)^\\#$, not just about the presheaf $u_pF$: Sites 00XT includes the effect of sheafification using the cofinal coverings supplied by continuity and cocontinuity. Under $R=\\pi_{T,*}$ and $L=\\pi_T^{-1}$, this is the unit $F\\to\\pi_{T,*}\\pi_T^{-1}F$ of the stated adjunction. For abelian sheaves, [def-weil-pbc-sites-and-cohomology](3) states that the abelian unit is the unit on the underlying sheaves of sets. Thus its components are bijective group homomorphisms; their inverse functions are homomorphisms and are natural because the unit is natural. It follows that the abelian unit is an isomorphism as required.",
+   "uses": [
+    "lem-trf-bigger-site-retraction",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00XT (lemma-back-and-forth), 00XU (lemma-bigger-site), and 00YV(2) for abelian units"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-trf-bigger-site-retraction",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DDI (lemma-cohomological-descent-etale), via Topologies 021F/021G and Sites 00XU/00XT; abelian exactness from the two adjunctions and sectionwise kernels"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +117,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-etale-torsion-comparison",
@@ -73,5 +142,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-big-small-etale-exact-retraction",
+  "worker": "stage1",
+  "summary": "Repaired all three return faults: check the five bigger-site hypotheses, including cocontinuity, and apply a new general Sites 00XU theorem node, not a renamed etale clause. Restriction is the inverse image i_T^{-1}; its abelian adjunction preserves cokernels and sectionwise kernels give exactness. The canonical unit for the sheafified left adjoint is invertible by 00XT/00XU and its underlying-set comparison gives the abelian unit. No presheaf-only evaluation or restriction-of-sheafified-cokernel shortcut remains. The item statement is unchanged.",
+  "blueprint": "The proof realizes the parent blueprint sentence: \"Stacks 0DE5 uses the exact small/big etale retraction (0DDI)\" in the normal-cone specialization of lem-trf-local-term-locality, with the site bridge supplied by Sites 00XU and 00XT.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Etale composition ensures every covering of a small etale object has small etale domains; generic scheme tool, with no trace-formula replacement."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "why": "Identify abelian sheaves with abelian group objects in order to lift the cocontinuous-site adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "Lift the inverse/direct-image adjunction for i_T to abelian group objects so restriction is a left adjoint on abelian sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Apply preservation of cokernels to the lifted restriction left adjoint."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Use only the sectionwise-kernel clause to verify left exactness of restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-91c8bb1ac",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-91c8bb1ac (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no fixes; review.md has the details. Sources read in full: Stacks 0DDI (whose proof uses pi_* = i^{-1} exact and the identity composite), Topologies 021F and 021G, and Sites 00XR, 00XT and 00XU with their proofs; all tags were checked against tags/tags. The item statement is verbatim the live one and no metadata changed. New node lem-trf-bigger-site-retraction: its hypotheses (a)-(e) are those of 00XU, with u(e_C) iso to e_D, which is harmless. Its conclusions (f_* = g^{-1} = R, f^{-1} = (u_p)^#, the adjunctions L, R, g_*, the unit and counit isomorphisms of 00XT, f o g iso to the identity, f^{-1} fully faithful) say nothing beyond 00XR/00XT/00XU, so the node is true. It is statement-only and unsplit, with correct blueprint from/via and same_as []. It is the general site theorem, not a restatement of a clause of the item. It is not a duplicate: lem-weil-pbc-continuous-cocontinuous-topos-adjunction gives only the 00XR adjunction, with no full-faithfulness hypothesis and no unit or counit isomorphism. Mathlib has no match: CoverLifting and Pullback give no unit isomorphism without cover-density. Item step 1 checks 00XU (a)-(e) for T_Et inside (Sch/T)_Et as 021G does: etale composition gives cocontinuity, def-weil-pbc-etale-site gives fibre products, and full faithfulness and the final object T/T hold. Step 2 gives pi_* = restriction on abelian sheaves through def-weil-pbc-sites-and-cohomology(3). Step 3: R is a left adjoint that preserves finite products; lifting it to group objects (adjunction-lifts (1),(2)) gives cokernels, sectionwise kernels give kernels, so R is exact. Step 4 takes the set-level unit isomorphism from the new node and the abelian unit = underlying set unit from def(3). Edge cases checked: T empty, the zero sheaf, u = id, and a non-full u, where 00XT fails. Accepted tool uses: etale-composition-cancellation, sheaf-algebraic-structures-objects, adjunction-lifts-group-ring-objects, left-adjoint-preserves-colimits and sheafification-exact(1). No SGA source is used and no target is weakened."
  }
 }
