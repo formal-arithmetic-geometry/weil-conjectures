@@ -185,5 +185,23 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-ac6fdabcd (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery creates no new nodes. I read every cited node's statement, the parent's two citing steps, and the sources: Stacks curves.tex 0C56 (lemma-node-field-extension) with its proof, 0C4A (lemma-nodal), and Varieties 0C54 (lemma-base-change-complete-local-ring). The statement is unchanged and true. It takes Stacks 0C56 (1)=>(2) for algebraically closed k inside Omega, with the weaker hypothesis of a ring isomorphism instead of a k-algebra one. I tested it on the node, on (uv=0)xA^1 at a non-closed point, on the tacnode and on the empty scheme. Two proof faults, repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-node-algebraically-closed-extension.json. (1) E5/C2, Step 1: 'the isomorphism identifies residue fields, so kappa(x)=k, so x is closed' does not follow from a ring isomorphism, and Zariski's lemma was uncited. The repaired step shows kappa(x) is the residue field of the completion, hence abstractly isomorphic to k and so algebraically closed. Transcendence degree 0 follows from an Eisenstein argument with X^l - t_1. Then lem-kun-closed-point-field(a) gives a maximal ideal with kappa(x)=k; I declared it as a generic tool use. (2) E1/E5, Step 3: the ring isomorphism to k[[u,v]]/(uv) was used as if it were a k-algebra presentation. The repaired step takes any presentation from lem-trf-separable-closed-point-formal-presentation. It applies clause (c)=>(b) of lem-trf-formal-jacobian-quadratic-criterion (same unit, reviewed) to get a nondegenerate quadric q. Over algebraically closed k, q factors as l1*l2 with (alpha*delta - beta*gamma)^2 equal to the discriminant in every characteristic. A linear change of variables then gives a genuine presentation k[[u,v]]/(uv), and the base-change clause yields Omega[[u,v]]/(uv). proof_deps was updated; I checked that the change adds no cycle. I accept the tool uses lem-pc-proper-base-change (clause 2, smooth base change) and lem-kun-closed-point-field. No SGA is cited and I found no duplicate node.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b5e1a922d",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable module, all statement dependencies, source argument, edge cases, universes, exact signature, docstrings, and route-pivot exclusions. scompile.py reproduced a clean per-file compile with exit code 0. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NodeAlgebraicallyClosedExtension",
+  "declaration": "AlgebraicGeometry.node_algebraically_closed_extension",
+  "file": "lean/Sheaf/TraceFormula/NodeAlgebraicallyClosedExtension.lean",
+  "statement": "theorem node_algebraically_closed_extension (k : Type u) [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] (hC : ∀ x : C, (¬ ∃ U : C.Opens, x ∈ U ∧ Smooth (U.ι ≫ f)) → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω] : ∀ x : Limits.pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))), (¬ ∃ U : (Limits.pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).Opens, x ∈ U ∧ Smooth (U.ι ≫ Limits.pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))))) → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((Limits.pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).presheaf.stalk x)) ((Limits.pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1}))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

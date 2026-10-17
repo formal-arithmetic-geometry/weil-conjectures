@@ -259,5 +259,23 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-a360d4bec (reviewer sub-agent of L); spot-checked: I read the item and all eight cited statements in full and checked the sources: Stacks 00IA (algebra.tex:11750), 052K, 0ASH (more-algebra.tex:37334; only the finite-extension inequality), 0539 (more-algebra.tex:4925), 00HR (algebra.tex:9184), 01U5, 01I4 and 022B. The statement is unchanged and true. I tested height 0, K already separably closed, and nondiscrete rank 1, and confirmed that the domination clause is needed for faithful flatness. Step by step: step 1 gives the dominating extension and W∩K=V from the Nagata nodes; I accept both declared tool_uses, since these are Lean-closed generic tools that no node of sk-i-curve-zero supplies. Step 2 applies algebraic-height with E=K^s algebraic and A=W∩K=V; there is no cycle. Step 3 shows W is torsion-free inside the field K^s, so it is flat by the 0539 leaf. Step 4 gets faithful flatness and surjective Spec from flatness plus the local inclusion. Step 5 is the Spec-flatness equivalence. Step 6 used two facts with no cited node (C1): the open preimage is a fibre product (01JR) and the affine open U is Spec of a V-algebra (01I1). FIX: step 6 now cites the existing leaves lem-weil-pbc-open-preimage-fibre-product and lem-weil-pbc-morphism-into-affine-scheme, and proof_deps and the step source were updated to match. The delivery has no new nodes and so no duplicates or restated clauses, keeps the unit/chapter route unchanged, and uses no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e278184de",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, module, report, declarations, edge cases, route-pivot constraints, and scompile.py local/server compilation; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationSeparableClosureExtension",
+  "declaration": "AlgebraicGeometry.exists_valuation_separableClosure_extension",
+  "statement": "theorem exists_valuation_separableClosure_extension {K Ks : Type u} [Field K] [Field Ks] [Algebra K Ks] [IsSepClosure K Ks] (V : ValuationSubring K) (hfinite : Set.Finite (Set.univ : Set (PrimeSpectrum V))) (hchain : IsChain (· ≤ ·) (Set.univ : Set (PrimeSpectrum V))) : ∃ (W : ValuationSubring Ks) (f : V →+* W), (∀ x : V, ((f x : W) : Ks) = algebraMap K Ks (x : K)) ∧ (∀ x : K, ((algebraMap K Ks x : Ks) ∈ W ↔ x ∈ V)) ∧ IsFractionRing W Ks ∧ (IsLocalRing.maximalIdeal W).comap f = IsLocalRing.maximalIdeal V ∧ Set.Finite (Set.univ : Set (PrimeSpectrum W)) ∧ IsChain (· ≤ ·) (Set.univ : Set (PrimeSpectrum W)) ∧ Order.krullDim (PrimeSpectrum V) = Order.krullDim (PrimeSpectrum W) ∧ RingHom.FaithfullyFlat f ∧ Presieve.ofArrows (fun _ : PUnit => Scheme.Spec.obj (Opposite.op (CommRingCat.of W))) (fun _ : PUnit => Scheme.Spec.map (CommRingCat.ofHom f).op) ∈ Scheme.fpqcPrecoverage (Scheme.Spec.obj (Opposite.op (CommRingCat.of V)))",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/ValuationSeparableClosureExtension.lean"
  }
 }

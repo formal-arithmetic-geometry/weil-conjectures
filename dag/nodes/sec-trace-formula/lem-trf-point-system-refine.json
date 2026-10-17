@@ -146,11 +146,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-4daee0855",
-  "group": "N6",
-  "result": "fix",
-  "note": "Statement matches Stacks 00YO clause by clause (site precoverage with IsSiteForCoverings, directed preorder J as in Stacks 002V, V : Jᵒᵖ ⥤ C, sheaf on P.toGrothendieck, finite ofArrows cover, s≠s', f in the uliftYoneda colimit; ∃ I, U, e : J ↪o I, functor equality, distinct colimit.pre images, range of colimMap of uliftYoneda.map (wk k)). Edge cases (empty cover makes the hypotheses contradictory, singleton J, repeated arrows) are fine; proof is sorry only; docstrings and report sections present; no duplicate definition. Fault: silent universe restriction (J, I, K : Type u; sheaf Type (max u v); uliftYoneda.{u}) made the lemma unusable for its only citer exists_pointSystem_refinement_all (J : Type (max u v), sheaf Type (max u v w)). Fixed module generalises to J, I : Type w, K : Type r, sheaf Type (max w t), uliftYoneda.{w}; an application at the citer's universes compiles (nt_compile --json: delivered 4.5 s clean, fixed 3.5 s clean, check 5.1 s clean; the delivered universes give a Sheaf mismatch). Also fixed: statement_change.what and the report's Statement corrected section falsely described an unlanded S/H/post correction and a nonexistent statement_change.previous field; rewritten to describe the real change, citer kept holds:false with a precise note (citer needs PartialOrder and an explicit representative). merge_delivery.py dry run was blocked by the review hook, so fixes were not tool-checked. Fixes: lean/Sheaf/Paper/PointSystemRefine.lean, lem-trf-point-system-refine.statement-change.json, lem-trf-point-system-refine.report.md.",
-  "statement_corrected": true
+  "reviewer": "NT-stage2-Codex-9b4e1be42",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source, Lean signature, correction and sole citer. Universe and edge-case checks pass; scompile.py reproduced a clean compile. No blocking faults. Recorded review.md, including an empty-cover wording clarification."
  },
  "statement_change": {
   "date": "2026-10-18",
@@ -175,7 +174,7 @@
   "file": "lean/Sheaf/Paper/PointSystemRefine.lean",
   "statement": "theorem pointSystemRefine {C : Type u} [Category.{v} C] (P : Precoverage C) (hP : P.IsSiteForCoverings) {J : Type w} [Preorder J] [Nonempty J] [IsDirected J (· ≤ ·)] (V : Jᵒᵖ ⥤ C) (F : Sheaf P.toGrothendieck (Type (max w t))) {K : Type r} [Finite K] {W : C} (Wk : K → C) (wk : ∀ k, Wk k ⟶ W) (hcover : Presieve.ofArrows Wk wk ∈ P W) (s s' : colimit (V.rightOp ⋙ F.1)) (hs : s ≠ s') (f : colimit (V.rightOp ⋙ uliftYoneda.{w}.obj W)) : ∃ (I : Type w) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (U : Iᵒᵖ ⥤ C) (e : J ↪o I) (h : e.toOrderHom.toFunctor ⋙ U.rightOp = V.rightOp), (((eqToHom (congrArg (fun X : J ⥤ Cᵒᵖ => colimit (X ⋙ F.1)) h).symm) ≫ colimit.pre (U.rightOp ⋙ F.1) e.toOrderHom.toFunctor) s ≠ ((eqToHom (congrArg (fun X : J ⥤ Cᵒᵖ => colimit (X ⋙ F.1)) h).symm) ≫ colimit.pre (U.rightOp ⋙ F.1) e.toOrderHom.toFunctor) s') ∧ (∃ k : K, ∃ g : colimit (U.rightOp ⋙ uliftYoneda.{w}.obj (Wk k)), colimMap (U.rightOp.whiskerLeft (uliftYoneda.map (wk k))) g = ((eqToHom (congrArg (fun X : J ⥤ Cᵒᵖ => colimit (X ⋙ uliftYoneda.{w}.obj W)) h).symm) ≫ colimit.pre (U.rightOp ⋙ uliftYoneda.{w}.obj W) e.toOrderHom.toFunctor) f)",
   "branch": "newtargets-dag",
-  "by": "N6",
+  "by": "Q121",
   "date": "2026-10-18",
   "existing": false,
   "fixed_by": "NT-stage2-cc-4daee0855"

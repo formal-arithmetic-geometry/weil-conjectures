@@ -229,5 +229,23 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-522c83c6b (reviewer sub-agent of L); spot-checked: I read Stacks 0GTG (more-morphisms.tex 8832-8871), 0GTE (8566-8587) and 05F7 (8411-8432), the item, both new nodes in full, and every cited statement. The item statement equals the intermediate assertion of 0GTG and is not weakened; I tested Z->Z[x] and Z->F_p[x] with d=1. Steps 1-2 are correct: the 00P1 calculation at minimal primes, then 0GTE with B=J=S, then 02FZ with n=d-1>=0, then the trdeg tower. Step 4 is correct: on each irreducible open W_i it applies 05F7, or 054W closed avoidance when the generic fibre is empty. The new 0GTE and 05F7 nodes are true statements, strictly smaller than the item and not duplicates. I made three fixes (files under fixes/dag/nodes/sec-trace-formula). (1) Both new nodes had blueprint.from.via=[]; it is now the item followed by the item's via chain. (2) Step 5 bounded dim T_q by Step 4, which only bounds T_p for p in V. I added the elementary subspace inequality dim T_q <= dim T_p, needed for non-closed q, and cited the noetherian and finitely-many-minimal-primes leaves for prime avoidance. Step 3 now also gives the generization reason that generic points of generic fibres lie in U. (3) lem-sc-closed-irreducible-dimension-trdeg, a tool from unit sk-prop-sf-cbc, was used in Step 5 but not declared; I added it to split_report.tool_uses. I accept the tool uses of 00P1, 02FZ, 054W and that node.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-04a3c81f3",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Reviewed the immutable node, source citation, six dependencies, delivered Lean module, report sections, edge cases, route-pivot status, and exact per-file scompile evidence. Statement and declarations match; only permitted sorry remains."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GenericPrincipalCoordinateDimensionDrop",
+  "declaration": "AlgebraicGeometry.exists_principal_coordinate_dimension_drop",
+  "file": "lean/Sheaf/TraceFormula/GenericPrincipalCoordinateDimensionDrop.lean",
+  "statement": "theorem exists_principal_coordinate_dimension_drop {R S : Type u} [CommRing R] [CommRing S] [Algebra.FiniteType ℤ R] [Algebra.FiniteType ℤ S] (φ : R →+* S) (d : ℕ) (hd : 1 ≤ d) : letI : Algebra R S := φ.toAlgebra ∀ hdim : ∀ y : (Scheme.Spec.obj (Opposite.op (CommRingCat.of R))), topologicalKrullDim ((Scheme.Spec.map (Opposite.op (CommRingCat.ofHom φ))).fiber y) ≤ (d : WithBot ℕ∞), ∃ a : S, ∃ f : R, (∀ p : PrimeSpectrum R, p.asIdeal ∈ minimalPrimes R → f ∉ p.asIdeal) ∧ (∀ y : (Scheme.Spec.obj (Opposite.op (CommRingCat.of (Polynomial (Localization.Away f))))), topologicalKrullDim ((Scheme.Spec.map (Opposite.op (CommRingCat.ofHom (Polynomial.eval₂RingHom (IsLocalization.Away.map (Localization.Away f) (Localization.Away (φ f)) φ f) (algebraMap S (Localization.Away (φ f)) a))))).fiber y) ≤ ((d - 1 : ℕ) : WithBot ℕ∞))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
