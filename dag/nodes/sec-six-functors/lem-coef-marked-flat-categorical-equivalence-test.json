@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure",
-  "lem-coef-marked-point-cartesian-model"
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-infinity-isofibration-pullback-limit"
  ],
  "proof": [
   {
@@ -236,5 +238,28 @@
   "group": "Q157",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-35efb6aa3 (reviewer sub-agent of L); spot-checked: I read the delivery in full and wrote review.md; I made no changes. The statement is unchanged and true: absolute marked tests B^flat->E^natural and C^natural->E^natural, and the core test Fun(B,Q)^≃->Fun(A,Q)^≃ for categorical equivalence. Small cases agree on both sides: empty->empty, empty->nonempty fails at Q=empty, and Delta^1->Delta^0 is correctly separated. Step 1: the minimal product marking forces Map^flat(K^flat,Q^natural)=Fun(K,Q); the anodyne calculus says Map^sharp is its core, and the point model gives Map^sharp(C^natural,D^natural)=Fun(C,D)^≃. Step 2: the functor test (ii) supplies a quasi-inverse. I checked edge by edge that the unit and counit restrict to the cores, using the pointwise criterion of the cone calculus and the triangle calculus for diagonal edges; the simplicial-homotopy lemma then gives the weak equivalence. Steps 3-4: currying turns the test into postcomposition with p on Fun(K,D)^≃ and Fun(K,E)^≃, Kan cores turn component bijections into classes up to coherent natural equivalence, and K=E then K=D build s with ps≃1 and sp≃1 for the specified p, which is condition (ii). Steps 5-6 are elementary from the point-model definition. Step 7 bridges small C and larger universes through the point model's enlargement clause. A DFS over the dependencies (472 nodes) finds no cycle. An rg search of the DAG finds no duplicate; I read four candidates and none states this test. No new nodes and no SGA sources. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-homotopy-equivalence-weak, both generic simplicial facts used as black boxes. Minor and not a fault: the maintainer-owned source field still cites HTT 3.2.2.14, which is not needed; the report flags it and gives the corrected references in proof_origin and the step sources. HTT is not archived, a WANTED line is filed, and proof_origin is agent-written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d96392991",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Delivery is 3 files (report, node, module); node unchanged apart from lean and two added stmt_deps; lean.statement verbatim. Clause (i): flatMap b ≫ flatToMarked (natural E), E quasicategory only, weak ↔ the exact Joyal hoFunctor/MonoidalClosed.pre test from exists_joyal_model_structure. Clause (ii): naturalMap c between quasicategories; naturalMap is a real helper that transports IsEquivalenceEdge witnesses and degeneracies, no sorry, source/blueprint docstring, no duplicate found. Clause (iii): for arbitrary t and free v, Joyal test ↔ Enhanced.IsWeakHomotopyEquivalence of Enhanced.coreMap of the specified precomposition, for all Q : SSet.{max u v}. No stronger assumptions or universe restriction; empty cases agree. Added stmt_deps (marked-anodyne-lifting-calculus for flatToMarked, infinity-isofibration-pullback-limit for coreMap) are landed and acyclic. Docstrings carry HTT 3.1.3.1/3.1.3.2/3.1.3.3/3.1.3.5, the blueprint id and the 7 proof steps; only the theorem's sorry. nt_compile.py --json: rc 0, no errors or warnings (8.6 s). Second-reading section is the accepted 2026-10-17 standard note. Cosmetic: scrubbed HTT numbers in report.md; node source still cites the unneeded HTT 3.2.2.14."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedFlatCategoricalEquivalenceTest",
+  "declaration": "SSet.Marked.marked_flat_categorical_equivalence_test",
+  "declarations": [
+   "SSet.Marked.naturalMap",
+   "SSet.Marked.marked_flat_categorical_equivalence_test"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedFlatCategoricalEquivalenceTest.lean",
+  "statement": "theorem marked_flat_categorical_equivalence_test : (∀ {B E : SSet.{u}} [Quasicategory E] (b : B ⟶ E), weak (flatMap b ≫ flatToMarked (natural E)) ↔ ∀ (Q : SSet.{max u v}), Q.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map b)).app Q)).toFunctor).IsEquivalence) ∧ (∀ {C E : SSet.{u}} [Quasicategory C] [Quasicategory E] (c : C ⟶ E), weak (naturalMap c) ↔ ∀ (Q : SSet.{max u v}), Q.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map c)).app Q)).toFunctor).IsEquivalence) ∧ (∀ {A B : SSet.{u}} (t : A ⟶ B), (∀ (Q : SSet.{max u v}), Q.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map t)).app Q)).toFunctor).IsEquivalence) ↔ ∀ (Q : SSet.{max u v}), Q.Quasicategory → Enhanced.IsWeakHomotopyEquivalence (Enhanced.coreMap ((MonoidalClosed.pre (uliftFunctor.{v, u}.map t)).app Q)))",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the exact Joyal homotopy-category testing formula from the recorded Joyal model statement. naturalMap constructs the canonical natural-marking map on the given underlying simplicial map; all data are explicit. Added already-landed statement dependencies for flatToMarked and coreMap."
  }
 }
