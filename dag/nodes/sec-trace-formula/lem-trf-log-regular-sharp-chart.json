@@ -210,5 +210,23 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-06bdd5392 (reviewer sub-agent of L); spot-checked: I read all of the item and both new nodes, and checked them against ILO Exposé VI 1.6 (p.70), VI 3.7(a) (p.75) and VIII 3.1.1-3.1.5 (pp.98-99). Step 1: the fs chart Q, F = preimage of A^x is a face, M_x = Q_F (+)_{F^gp} A^x, so P = Q_F/F^gp; this matches the chart formula in def-trf-fs-log-blowup. Step 2: the face-sharpening lemma applies with these hypotheses. Step 3: the basis-lift section lands in Q_F because F^gp is the unit group of Q_F, and Q_F = P (+) F^gp. Step 4: the composite to the characteristic is the identity, so E = {0} and the stalk iso is exactly the spreading node's hypothesis. Step 5: spreading gives an affine W with germ h; etale implies lfp, then lft, then 01T6 (Mathlib leaf; tool_use accepted). I proved every clause of lem-trf-fs-face-sharpening by hand: Q_F finitely generated and saturated, units = F^gp, R sharp, fs and embedded, R^gp torsion-free hence free. Small cases N^r, Z/n and N+Z/n all behave correctly. lem-trf-fine-log-stalk-chart-spreading is the standard Kato/Ogus fine-chart spreading fact; it is true and strictly smaller than the item because the germ is given. Neither new node restates a clause of the item. No duplicate in the DAG or in blueprint main-20261015; no Mathlib match. Log regularity is unused but retained. No SGA. Three repairs, all in fixes: (1) define 'sharp' in face-sharpening; (2) define 'integral' in chart-spreading; (3) cite def-weil-pbc-geometric-stalks for 'pointed etale neighbourhood' in the item statement and add it to stmt_deps.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogRegularSharpChart",
+  "declaration": "AlgebraicGeometry.exists_sharp_chart_of_logRegular",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogRegularSharpChart.lean",
+  "statement": "theorem exists_sharp_chart_of_logRegular (X : FineSaturatedLogScheme.{u}) (_hX : X.IsLogRegular) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) : IsFineSaturatedMonoid (X.logStructure.characteristic t) ∧ (∀ p : X.logStructure.characteristic t, IsUnit p → p = 1) ∧ ∃ (W : X.scheme.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (β : X.logStructure.characteristic t →* X.logStructure.monoidSheaf.obj.obj (op W)), IsAffine W.left ∧ IsLocallyNoetherian W.left ∧ X.logStructure.IsChart W β ∧ ∀ p : X.logStructure.characteristic t, Associates.mk (X.logStructure.toEtalePrelogStructure.germ t W w (β p)) = p",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8e102ac0d",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Statement matches the node and source; dependencies and canonical definitions checked; edge cases, universes, docstrings, no hollow definitions, route-pivot constraints, and compile evidence reviewed."
  }
 }
