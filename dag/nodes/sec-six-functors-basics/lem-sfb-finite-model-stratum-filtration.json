@@ -38,16 +38,14 @@
    }
   },
   {
-   "text": "Refine this finite partition by the construction in Stacks Tag 09Y5. At each recursion, give the current closed remainder its reduced induced closed scheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme]; closed subspaces inherit the descending-chain condition, since their relatively closed subsets are closed in the original space. If this remainder is nonempty, work relative to it (denoting it temporarily by $X$) and choose a point of it and an irreducible component $Z$ containing that point using [lem-sc-irreducible-components-cover]. The Mathlib leaf [lem-sfb-noetherian-component-open] gives a nonempty open $O$ of $X$ contained in $Z$. Since the finite partition has $Z\\subseteq\\bigcup_a\\overline{X_a}$, irreducibility of $Z$ applied successively to this finite closed cover gives an $i$ with $Z\\subseteq\\overline{X_i}$. Because $O$ is open in $X$, contained in $Z$, and $Z\\subseteq\\overline{X_i}$, the set $O\\cap X_i$ is dense in $O$. Local closedness makes it open in $O$ (it is open in its closure). It is therefore a nonempty open $U$ of $X$ contained in $X_i$. Write\n$$X_i=U\\amalg X_i^1\\amalg X_i^2,\\qquad X_i^1=(X_i\\setminus U)\\cap\\overline U,\\quad X_i^2=(X_i\\setminus U)\\cap\\overline U^{c},$$\nand, for $i'\\ne i$, write $X_{i'}^1=X_{i'}\\cap\\overline U$ and $X_{i'}^2=X_{i'}\\cap\\overline U^{c}$. These pieces are locally closed, being intersections of locally closed subsets with open or closed subsets. Then $X\\setminus U$ is a finite partition by these pieces and $\\overline U\\setminus U$ is the union of the pieces with superscript $1$. Apply the same construction recursively to the strictly smaller closed remainder $X\\setminus U$. A strictly descending infinite sequence of closed remainders would contradict the assumed descending-chain condition, so the recursion terminates. The nonempty open $U\\subseteq Z$ is dense in the irreducible closed set $Z$, so $\\overline U=Z$. The inductive partition separates $\\overline U\\setminus U$ from its complement, hence $\\overline U$ is a union of the final strata. Each inductive stratum has closure in the closed set $X\\setminus U$, where its closure is already a union of inductive strata by induction. Thus all final stratum closures are unions of strata, which is exactly goodness; the empty space is handled by the empty partition.",
+   "text": "Apply [lem-sfb-noetherian-good-stratification-refinement] to the underlying topological space of $X$ and the finite locally closed partition chosen in step 1. Its descending-chain hypothesis is exactly the hypothesis on $X$. Obtain a finite good partition $|X|=\\coprod_bQ_b$ refining the original strata, with each stratum closure a union of members. For $X=\\varnothing$, take the empty partition. No scheme structure or sheaf assertion is taken from this topology lemma; reduced strata and local-model restrictions are constructed in steps 3 and 4.",
    "uses": [
-    "lem-sc-irreducible-components-cover",
-    "lem-sfb-noetherian-component-open",
-    "lem-weil-pbc-reduced-induced-closed-subscheme"
+    "lem-sfb-noetherian-good-stratification-refinement"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification), proof; component-open input is Tag 0052(3)"
+    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification, statement and proof; good stratification: definition-good-stratification"
    }
   },
   {
@@ -60,7 +58,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 09Y5 together with Definition 5.10.1 (good stratification); reduced structure from Schemes Tag 01J3"
+    "place": "Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification) together with Tag 09Y0 (definition-good-stratification) and the remark following it (the order and the closure formula); reduced structure from Schemes Tag 01J3"
    }
   },
   {
@@ -138,9 +136,8 @@
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "def-weil-quasi-separated-morphism",
   "det-pe-topos-functoriality-inverse-image",
-  "lem-sc-irreducible-components-cover",
   "lem-sfb-alpha-iso",
-  "lem-sfb-noetherian-component-open",
+  "lem-sfb-noetherian-good-stratification-refinement",
   "lem-sfb-noetherian-space-compact-subsets",
   "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
@@ -197,7 +194,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-constructible-internal-hom-continuity",
@@ -221,15 +218,34 @@
   "date": "2026-10-17",
   "item": "lem-sfb-finite-model-stratum-filtration",
   "worker": "stage1",
-  "summary": "Corrected the Noetherian-topology hypotheses, replaced the inapplicable scheme-level minimality citation with exact topological Mathlib leaves, repaired the Tag 09Y5 partition recursion, supplied the closed complement for localization, and fixed malformed LaTeX escapes. The arbitrary-condensed-coefficient comparison now cites lem-sfb-alpha-iso, and reduced-source factorization and module-category comparisons are explicit.",
-  "blueprint": "Finite sheaf dévissage needed before coefficient localization: the steps realize the parent proof invocation by refining constructible strata and extracting the open--closed filtration."
+  "summary": "Q40 repaired the dedicated long-step handoff by extracting the independent Noetherian good-refinement theorem of Stacks 09Y5 as one statement-only topology node. Step 2 now cites that theorem; the item statement and the remaining six proof steps are unchanged. Existing leaves and module comparison tools are reused. All citations were checked against their statements.",
+  "blueprint": "Parent lem-sfb-dc-hom-preserves proof, last sentence (inverting ell and descending to E): constructible-source finite sheaf devissage used by lem-sfb-constructible-internal-hom-continuity. Steps 1-4 provide the refined local models and steps 5-7 their canonical open-closed filtration.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic module open-closed exact sequence on a qcqs complementary pair; the assigned unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme factorization for a reduced source into an original stratum; no corresponding theorem is supplied by this unit."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic coefficient-cartesian identification for every condensed ring, needed to compare module restriction and inverse image without restricting coefficients."
+   }
+  ]
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NB-3ac9aa671",
-  "group": "NB",
+  "reviewer": "NT-cc-Q40-21d333717",
+  "group": "Q40",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-3ac9aa671 (reviewer sub-agent of L); spot-checked: Read the item, both new leaves, the statement of every cited node, the unit and the blueprint parent lem-sfb-dc-hom-preserves (main-20261015), and the citing step of lem-sfb-constructible-internal-hom-continuity. Sources read: Stacks Tag 09Y5 and its proof, the good-stratification definition, 0052(1)-(3), 04ZA and proetale 09AH, plus NoetherianSpace.lean lines 55-95 and 195-210. Steps 1-7 hold. Step 1: qcqs follows from the compactness of every subset. Step 2 follows 09Y5 faithfully: O∩X_i is open and dense in O, the piece decomposition is correct, the recursion stops by DCC, and goodness holds because every closure is a union of strata. Step 3: the order puts maximal strata first, so each prefix is open. Step 4 makes the reduced stratum factor through X_a via the reduced-source lemma (this avoids E3), and the matrix presentation pulls back by lem-sfb-alpha-iso. Steps 5-6: the localization sequence applies because v_k and a are quasi-compact. j_!⊣j^* holds because α is an iso, and the counit of the composite adjunction gives F_{k-1}⊆F_k with the stated quotient. Small cases tested: X=∅, Spec k[ε] (F≅t_*t^*F), a DVR with two strata, and Λ=0. Coefficients stay B_X-modules for any Λ, no SGA is cited, and the DAG has no cycle. Both new leaves are exact Mathlib matches, verified at lines 65 and 203. Neither restates part of the item, and neither duplicates an existing node. det-lem-coefficient-heart-filtration is a special case (only E or Q̄_ℓ) that existed before this delivery; noted for a later merge. Repaired in fixes/: (1) B9: both new nodes now have blueprint.from.via=[item, lem-sfb-constructible-internal-hom-continuity]; it was []. (2) B5: steps 5-7 and proof_origin wrongly placed Tags 03DI-03DJ in proetale.tex; they are in sites-modules.tex, now named with their labels. No mathematical text was changed. Accepted tool_uses: lem-weil-pbc-proetale-ringed-open-closed, lem-weil-pbc-reduced-source-factors-through-closed-subscheme and lem-sfb-alpha-iso, each a generic black box that no node on the unit's route gives.; 3 file(s) fixed by the reviewer"
- }
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-21d333717 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node, every cited statement, the unit and the main-20261015 ancestor lem-sfb-dc-hom-preserves. The delivery repairs the over-long old step 2 by moving it into a new topology-only node, lem-sfb-noetherian-good-stratification-refinement. That node is Stacks 09Y5 (topology.tex lemma-noetherian-partition-refined-by-stratification) with good stratification as defined in 09Y0, and it matches the source hypothesis by hypothesis. Its 'nonempty parts' requirement is harmless and is needed for the order used in step 3. I checked the 09Y5 proof. I tested the new node on the empty space, a point, the Sierpinski space with both possible partitions, a finite discrete space and a DVR spectrum, and it held in each case. The node is statement-only, its one definition citation is right, its blueprint from and via fields are correct, and same_as is []. It is not a duplicate: rg over all of dag/nodes found only det-lem-coefficient-heart-common-stratification (a scheme with E or Qbar coefficients and no goodness condition) and some unrelated refinement lemmas. It does not restate part of the item, since it gives no ordering, reduced strata, local models or sheaf subquotients. The item statement and steps 1 and 3-7 are unchanged, and I reread them. Step 1 gets qcqs from compactness of all subsets. Step 3's order is a partial order and its prefixes are open. Step 4 uses the reduced-source factorization and the alpha isomorphism, and the presentation pullback needs no flatness, so torsion local models are fine. Steps 5-6 meet the quasi-compact-open hypothesis of the open-closed sequence, and the counits agree by uniqueness of adjoints. proof_deps is exactly the union of the uses. No SGA source is cited, coefficients stay B_X-modules for any condensed ring, and no target is touched. I accept again the three earlier tool_uses: ringed open-closed, reduced-source factorization and alpha-iso. Fix (B5): step 3's source.place named 'Definition 5.10.1', a section number; it now names Tag 09Y0 (definition-good-stratification). The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-model-stratum-filtration.json. The leaf lem-sfb-noetherian-component-open is now uncited and is noted as the natural dependency for whoever splits the new node.; 1 file(s) fixed by the reviewer"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sfb-alpha-iso"
+ ]
 }
