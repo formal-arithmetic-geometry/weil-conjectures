@@ -16,9 +16,70 @@
   "def-pc-geometrically-irreducible",
   "def-pc-integral-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since C is of finite type over k, it has a finite cover by affine opens $\\operatorname{Spec}A_1,\\ldots,\\operatorname{Spec}A_m$ with each $A_i$ a finitely generated $k$-algebra. Each $\\operatorname{Spec}A_i$ is a Noetherian topological space by [lem-wf-affine-noetherian-components], so the finite union $|C|$ is Noetherian by [lem-kun-finite-union-noetherian]; passing to complements, ascending chains of open subsets of $|C|$ stabilize. Hence the connected component T of c (nonempty, as $c\\in T$) is open by [lem-sfb-noetherian-connected-components-open], and T is quasi-compact because every subset of a Noetherian space is [lem-sfb-noetherian-space-compact-subsets]. In particular T, with its open subscheme structure, is a quasi-compact open subscheme of the locally finite type k-scheme C, hence of finite type over k.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-kun-finite-union-noetherian",
+    "lem-sfb-noetherian-connected-components-open",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057K, lemma-local-local-structure-finite-type, proof, paragraph beginning 'Let $T$ be the connected component of $Y_s$ containing $y$': 'As $Y_s$ is Noetherian we see that $T$ is open.'"
+   }
+  },
+  {
+   "text": "The field k is algebraically closed in $\\kappa(c)\\cong k(u_1,\\ldots,u_r)$: let $\\alpha\\in k(u_1,\\ldots,u_r)$ be algebraic over k and nonzero, with minimal polynomial $x^n+c_{n-1}x^{n-1}+\\cdots+c_0$ over k, so $c_0\\neq0$. As $k[u_1,\\ldots,u_r]$ is a unique factorization domain, write $\\alpha=p/q$ with $p,q$ coprime polynomials. Multiplying the relation by $q^n$ gives $p^n+c_{n-1}p^{n-1}q+\\cdots+c_0q^n=0$, so $q\\mid p^n$ and $p\\mid c_0q^n$; coprimality makes $q$ a unit, and then $p$ divides the nonzero constant $c_0q^n$, so $p$ is a unit; thus $\\alpha\\in k$. (For r=0 there is nothing to prove.) Since T is connected and contains c, and $\\kappa(c)$ is the same computed in T or in C (T is open), the connected-point criterion [lem-trf-connected-point-geometrically-connected] applied to T and c gives that T is geometrically connected over k: $T_K$ is connected for every field extension $K/k$.",
+   "uses": [
+    "lem-trf-connected-point-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057K, lemma-local-local-structure-finite-type, proof, paragraph beginning 'Let $T$ be the connected component of $Y_s$ containing $y$': 'We also see that $T$ is geometrically connected over $\\kappa(s)$ by Varieties, Lemma 04KV'; the algebraic closedness of k in the purely transcendental $\\kappa(c)$ is written out here (the source leaves it implicit)."
+   }
+  },
+  {
+   "text": "The open subscheme T of the smooth k-scheme C is smooth over k: the inclusion is an open immersion and smoothness (locally of finite presentation and formally smooth) is checked on affine opens of the source, so it restricts to opens. Hence T is geometrically normal over k by [lem-trf-smooth-geometrically-normal]: for every field extension $K/k$ every local ring of $T_K$ is a normal domain.",
+   "uses": [
+    "lem-trf-smooth-geometrically-normal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057K, lemma-local-local-structure-finite-type, proof, paragraph beginning 'Let $T$ be the connected component of $Y_s$ containing $y$': 'Since $T$ is also smooth over $\\kappa(s)$ it is geometrically normal, see Varieties, Lemma 056T.'"
+   }
+  },
+  {
+   "text": "Let $K/k$ be a field extension. By step 1, T is covered by finitely many affine opens $\\operatorname{Spec}B_j$ with $B_j$ finitely generated over k, so $T_K$ is covered by the finitely many affine opens $\\operatorname{Spec}(B_j\\otimes_kK)$ with $B_j\\otimes_kK$ finitely generated over K, hence Noetherian rings [lem-wf-affine-noetherian-components]; so $T_K$ is a Noetherian scheme (locally Noetherian and quasi-compact). By step 3 every local ring of $T_K$ is a normal domain, so $T_K$ is normal, and by [rem-pc-regular-normal] (2) its irreducible components are pairwise disjoint open and closed subsets which are integral with their open subscheme structures. By step 2, $T_K$ is connected, in particular nonempty, so it has exactly one irreducible component, equal to $T_K$; hence $T_K$ is integral. As K was arbitrary, T is geometrically integral over k. Together with step 1, this proves the assertion.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057K, lemma-local-local-structure-finite-type, proof, paragraph beginning 'Let $T$ be the connected component of $Y_s$ containing $y$': 'We conclude that $T$ is geometrically irreducible over $\\kappa(s)$ (as a connected Noetherian normal scheme is irreducible, see Properties, Lemma 033M)'; applied to every $T_K$, with reducedness from normality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-affine-noetherian-components",
+  "lem-kun-finite-union-noetherian",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-trf-connected-point-geometrically-connected",
+  "lem-trf-smooth-geometrically-normal",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057K, lemma-local-local-structure-finite-type, proof, paragraph beginning 'Let $T$ be the connected component of $Y_s$ containing $y$', using Varieties Tags 04KV and 056T and Properties Tag 033M."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-finite-smooth-local-structure",
@@ -69,7 +130,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The affine elementary-etale finite-over-smooth ingredient (Stacks 057K--057L) of the 057S flatification route used for the horizontal curve reduction in the proof of lem-trf-local-term-locality; specifically: Geometrically integral component of a smooth fibre at a purely transcendental point.",
+   "place": "The affine elementary-etale finite-over-smooth ingredient (Stacks 057K--057L) of the 057S flatification route used for the horizontal curve reduction in the proof of lem-trf-local-term-locality: the connected component of a smooth finite-type scheme at a point with purely transcendental residue field is open, quasi-compact, and geometrically integral.",
    "via": [
     "lem-trf-etale-finite-smooth-local-structure",
     "lem-trf-elementary-module-devissage",
@@ -86,5 +147,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-component-pure-transcendental",
+  "worker": "stage1",
+  "summary": "Split the component argument of the proof of Stacks Tag 057K into four steps: Noetherianity of |C| gives openness and quasi-compactness of the connected component T (Tags 04ME/04MF via the closed lem-sfb-noetherian-connected-components-open); k is algebraically closed in the purely transcendental residue field and Tag 04KV gives geometric connectedness; Tag 056T gives geometric normality; Tag 033M applied to every T_K gives geometric integrality. No statement change. Maintainer-reader repair: step and proof_origin tags corrected from 052E to 057K, Noetherianity citations added, the algebraic-closedness argument written out.",
+  "blueprint": "Realizes the affine elementary-etale finite-over-smooth ingredient (Stacks 057K--057L) in the 057S flatification route of lem-trf-local-term-locality, specifically the smooth component at a purely transcendental point (057K proof, paragraph 'Let T be the connected component').",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "step 4 takes the Stacks 033M structure of a Noetherian normal scheme (clause 2) as a generic commutative-algebra tool; no node of sk-i-curve-zero states it."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "step 1 takes openness of connected components of a Noetherian space (Topology 04ME/04MF), a generic topology lemma closed in Lean; no node of sk-i-curve-zero states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-sfb-noetherian-connected-components-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-d0c4faa83",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-d0c4faa83 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the Stacks sources. The argument is in the proof of Tag 057K (more-morphisms.tex l.13481-13490, the paragraph 'Let T be the connected component'), using Varieties 04KV (l.1082), Varieties 056T (l.4617), the geometrically-normal definition (l.2105) and Properties 033M (l.960). The item statement matches the source exactly: open, quasi-compact, and geometrically integral, where reducedness comes from normality. Nothing is weakened. I tested it on A^1 at its generic point, on a disjoint union with a rational point, on r=0, on Spec C over R (shows the purely transcendental hypothesis is needed) and on the empty case. Both new nodes are true Stacks lemmas, given as statements only, not in Mathlib (checked Geometrically/*.lean) and not duplicates. lem-sbc-connected-rational-point-geometrically-connected is only the rational-point special case, and sbc-lem-smooth-geometrically-reduced only gives reduced fibres. Neither new node restates a clause of the item. Repairs, in fixes/: (1) B5: the step sources and proof_origin said Tag 052E, but the cited paragraph is in 057K; corrected. (2) B3: lem-trf-smooth-geometrically-normal cited def-pc-geometrically-irreducible for 'geometrically normal', which that node does not define; I wrote the Stacks definition into the statement (normal local rings of X_K for every K/k) and also made the 04KV node self-contained. (3) C1: steps 1 and 4 used Noetherianity of C and of T_K without a citation; I added the existing Mathlib leaves lem-wf-affine-noetherian-components, lem-kun-finite-union-noetherian and lem-sfb-noetherian-space-compact-subsets, and wrote out the UFD argument that k is algebraically closed in k(u_1..u_r). I accepted two tool uses and recorded them in split_report.tool_uses: rem-pc-regular-normal (2) for Tag 033M, and the Lean-closed lem-sfb-noetherian-connected-components-open. Not done: tools/check_dag.py was not run; a script check of ids and deps passed instead.; 3 file(s) fixed by the reviewer"
  }
 }
