@@ -13,9 +13,101 @@
   "def-weil-presheaf-modules-sheafification",
   "def-weil-pbc-ringed-topos-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category of elements has objects $(U,s)$ with $U$ an object of $\\mathcal C$ and $s\\in A(U)$, and arrows $(V,t)\\to(U,s)$ the arrows $v:V\\to U$ satisfying $A(v)(s)=t$. Since $\\mathcal C$ is small and every $A(U)$ is a set, the objects and arrows form sets. Declare a family covering exactly when its underlying family in $\\mathcal C$ covers. Identities and composition preserve the displayed equality, and the identity, transitivity, and pullback axioms for coverings are inherited from the site axioms in [def-weil-pbc-sites-and-cohomology]. Thus $\\mathcal C/A$ is a small site.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0791, lemma-localize-topos-site; site axioms from Tag 00VH"
+   }
+  },
+  {
+   "text": "For a sheaf $(F\\xrightarrow p A)$, define its fibre presheaf on the element site by $F_A(U,s)=\\{x\\in F(U)\\mid p_U(x)=s\\}$. Restriction is well-defined because naturality of $p$ gives $p_V(x|_v)=A(v)(p_U(x))=A(v)(s)=t$ for an arrow $(V,t)\\to(U,s)$, and the equalizer sheaf condition for $F$ restricts to the fibres, so $F_A$ is a sheaf. Conversely, for a sheaf $L$ on $\\mathcal C/A$, take the presheaf of pairs $(s,x)$ with $s\\in A(U)$ and $x\\in L(U,s)$ and sheafify it; projection to $A$ is induced by $(s,x)\\mapsto s$. On a covering, compatible pairs glue exactly when their first coordinates glue in $A$ and their second coordinates glue in the corresponding fibre, so the projection is a sheaf map. The map from $(F\\to A)$ to the reconstructed sheaf sends $x$ to $(p(x),x)$, while the map back evaluates a pair at its fibre; both are inverse after sheafification by the sheaf condition. These maps are natural, giving the required equivalence $\\operatorname{Sh}(\\mathcal C/A)\\simeq\\operatorname{Sh}(\\mathcal C)/A$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0791, lemma-localize-topos-site"
+   }
+  },
+  {
+   "text": "Let $p:\\mathcal C/A\\to\\mathcal C$, $(U,s)\\mapsto U$, be the projection. It is continuous: a covering of $\\mathcal C/A$ maps to a covering of $\\mathcal C$ by definition, and the fibre product $(U_i,s_i)\\times_{(U,s)}(V,t)$ is $(U_i\\times_UV,\\,t|_{U_i\\times_UV})$, so $p$ carries it to $U_i\\times_UV$. It is cocontinuous: a covering $\\{U_i\\to U\\}$ of $p(U,s)=U$ is the image of the covering $\\{(U_i,s|_{U_i})\\to(U,s)\\}$. By [lem-weil-pbc-continuous-cocontinuous-topos-adjunction], restriction $L\\mathcal G(U,s)=\\mathcal G(U)$ is the inverse image of a morphism of topoi $\\operatorname{Sh}(\\mathcal C/A)\\to\\operatorname{Sh}(\\mathcal C)$; under the fibre equivalence of the preceding step it is $\\mathcal G\\mapsto(\\mathcal G\\times A\\to A)$, since the fibre of $\\mathcal G\\times A\\to A$ over $s$ is $\\{(x,s)\\}\\cong\\mathcal G(U)$, and this is the localization morphism $j_A$. The product sheaf $R_A=R\\times A\\to A$ has fibre $R(U)$ at $(U,s)$, with the restrictions of $R$, so $R_A=j_A^{-1}R$; taking the structural ring map to be the identity gives a ringed-topos morphism [def-weil-pbc-ringed-topos-morphism]. Its module pullback $R_A\\otimes_{j_A^{-1}R}j_A^{-1}M$ of [lem-weil-pbc-ringed-topoi-module-adjunction] is $j_A^{-1}M$, as tensoring over a ring with the ring itself is the identity; so $(j_A^*M)(U,s)=M(U)$ with the $R(U)$-action of $M$, a module sheaf in the sense of [def-weil-sheaf-of-modules-category], and $j_A^*$ is left adjoint to the module pushforward of that lemma.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IE, lemma-localize-ringed-topos, clauses (1)-(2); continuity and cocontinuity of $j$ from sites.tex Tag 0791, lemma-localize-topos-site (verification omitted there, written here)"
+   }
+  },
+  {
+   "text": "For an $R_A$-module sheaf $L$ the presheaf $u_pL$ of [def-weil-pbc-sites-and-cohomology](3) for $u=p$ is, at $U$, the colimit of $L(V,t)$ over the opposite of the category $I_U$ of triples $(V,t,\\varphi:U\\to V)$, an arrow $(V,t,\\varphi)\\to(V',t',\\varphi')$ being an arrow $g:(V,t)\\to(V',t')$ of $\\mathcal C/A$ with $g\\varphi=\\varphi'$. The triples $(U,s,\\mathrm{id}_U)$, $s\\in A(U)$, form a discrete full subcategory $D_U$ (an arrow between two of them is $g$ with $g\\circ\\mathrm{id}=\\mathrm{id}$). Every object $(V,t,\\varphi)$ receives exactly one arrow from $D_U$, namely $\\varphi:(U,A(\\varphi)(t),\\mathrm{id}_U)\\to(V,t,\\varphi)$, since such an arrow $g$ must satisfy $g=\\varphi$ and then $s=A(\\varphi)(t)$. Hence $D_U^{op}$ is final in $I_U^{op}$ and the colimit is $\\bigoplus_{s\\in A(U)}L(U,s)$, an $R(U)$-module since each $L(U,s)$ is an $R_A(U,s)=R(U)$-module; restriction along $v:V\\to U$ sends the $s$-summand to the $A(v)(s)$-summand by $L$ of $v:(V,A(v)(s))\\to(U,s)$, which is $R$-semilinear. Sheafifying this presheaf of modules using [def-weil-presheaf-modules-sheafification] gives $j_{A!}L$. An $R$-linear map from it to an $R$-module sheaf $M$ is, by the sheafification universal property, an $R$-linear presheaf map from the direct sum, i.e. a family of $R(U)$-linear maps $L(U,s)\\to M(U)$ compatible with restrictions; this is exactly a morphism $L\\to j_A^*M$. Thus $j_{A!}\\dashv j_A^*$, naturally in $L$ and $M$, and $j_{A!}$ is additive.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IE and 03CY; direct-sum calculation from the $u_p$ colimit in Tag 0791"
+   }
+  },
+  {
+   "text": "Kernels of module sheaves are computed sectionwise [def-weil-sheaf-of-modules-category], and $(j_A^*M)(U,s)=M(U)$, so $j_A^*$ preserves kernels; it also preserves cokernels, being a left adjoint (preceding-but-one step, [lem-weil-pbc-ringed-topoi-module-adjunction]). Hence $j_A^*$ is exact. The functor $j_{A!}$ is a left adjoint (preceding step), so it preserves cokernels and is right exact; it remains to show that it preserves injections. Let $L_1\\to L_2$ be injective; since kernels are sectionwise, each $L_1(U,s)\\to L_2(U,s)$ is injective. Then the map of presheaves $\\bigoplus_{s\\in A(U)}L_1(U,s)\\to\\bigoplus_{s\\in A(U)}L_2(U,s)$ is injective on every $U$, because a direct sum of injective maps of abelian groups is injective. The module sheafification of a presheaf has as underlying abelian sheaf the abelian sheafification [def-weil-presheaf-modules-sheafification], and abelian sheafification preserves injections, being exact [lem-weil-pbc-sheafification-exact]; by [lem-weil-pbc-module-sheaves-colimits-forgetful](1) the forgetful functor to abelian sheaves is faithful and preserves kernels, so a map of module sheaves whose underlying abelian map is injective is injective. Hence $j_{A!}L_1\\to j_{A!}L_2$ is injective, and $j_{A!}$ is exact.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IE, clauses (2)-(4), and Tag 03DJ, lemma-extension-by-zero-exact (right exactness from the adjunction, injectivity from the sectionwise direct sum and exact sheafification)"
+   }
+  },
+  {
+   "text": "For a map of sheaves $B\\to A$, an object of the iterated element site $((\\mathcal C/A)/(B\\to A))$ is an object $(U,s)$ together with $b\\in B(U)$ mapping to $s$; sending it to $(U,b)$ gives a bijection on objects. An arrow over $(U,s)$ is an arrow $v:V\\to U$ carrying $b$ to the section at $V$, so under this bijection it is precisely an arrow of the element site $\\mathcal C/B$; the same observation identifies covering families. The restricted product ring $R\\times A$ pulls back to $R\\times B$, and the two restriction functors both evaluate a module at $(U,b)$ as $M(U)$. Therefore the localization over $B\\to A$ is identified with $\\operatorname{Sh}(\\mathcal C)/B$, the composite restriction is canonically $j_B^*$, and repeating the objectwise identification for $C\\to B\\to A$ gives compatibility with further maps.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J4, lemma-relocalize-ringed-topos"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0791, 04IE, 04J4 and 03DI/03DJ; element-site and module extension arguments written out"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,7 +153,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-presentation-transport",
@@ -73,7 +165,7 @@
  "blueprint": {
   "from": {
    "node": "prop-weil-pbc-scalar-extension",
-   "place": "Supporting presentation change for the ambient direct-image/completion comparison in the scalar-extension exchange clause: slicing at arbitrary sheaves, rather than only representable site objects.",
+   "place": "Supporting presentation change for the ambient direct-image/completion comparison in the scalar-extension exchange clause: slicing at arbitrary sheaves, rather than only representable site objects; the five proof steps realize the element-site, module extension, and relocalization parts.",
    "via": [
     "lem-weil-pbc-ringed-presentation-transport",
     "lem-weil-pbc-ringed-pushforward-completion"
@@ -81,5 +173,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "worker": "stage1",
+  "summary": "Repaired the returned relabelling split by deleting the three helper nodes that restated clauses of the item. The proof now carries the category-of-elements fibre equivalence, the explicit u_p colimit and direct-sum/sheafification adjunction, exactness via the existing sheafification and module-colimit statements, and the iterated element-site identification inline. The statement and hypotheses are unchanged.",
+  "blueprint": "Supporting presentation change for the ambient direct-image/completion comparison in prop-weil-pbc-scalar-extension: the arbitrary-sheaf slice clause, including the category-of-elements presentation, direct-sum extension by zero, exactness, and relocalization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NA-7a3797386",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-7a3797386 (reviewer sub-agent of L); spot-checked: I read the whole item, all six steps, every cited statement, and Stacks sites.tex 0791 and sites-modules.tex 04IE (1)-(4), 04J4 and 03DJ. The statement matches the sources and is not weakened. Step 1 (the element site) is correct. In step 2 (the fibre equivalence) the presheaf of pairs is already a sheaf, so the extra sheafification is harmless. Step 6 (relocalization) is correct: s is determined by b, the coverings agree and the ring maps are identities. The three clause-restating helper nodes are gone, so the D1 return is repaired. I fixed three faults in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-ringed-sheaf-slice-adjunction.json. F1 (step 4): the u_p comma category had its arrows reversed, and A(f)(t) with f:V->U and t in A(V) is ill-typed. It now uses the triples (V,t,phi:U->V); the discrete part {(U,s,id)} is final, which gives the direct sum over s in A(U). F2 (step 5, E3): exactness of j_{A!} applied a direct sum to a short exact sequence of sheaves as if it were exact on each section, which is false because sheaf epimorphisms are only locally surjective. It now uses the 03DJ argument: right exact as a left adjoint, plus injectivity from injective maps on sections, exact sheafification (lem-weil-pbc-sheafification-exact) and the faithful forgetful functor that preserves kernels (lem-weil-pbc-module-sheaves-colimits-forgetful). F3 (steps 3 and 5): j_A existing as a morphism of topoi and j_A^* preserving cokernels had no support, and the step treated a definition as if it supplied the morphism. The repair shows that p is continuous and cocontinuous and cites lem-weil-pbc-continuous-cocontinuous-topos-adjunction and lem-weil-pbc-ringed-topoi-module-adjunction (structure map id, R_A tensor over R_A of M is M). So j_A^* is a left adjoint, and it is exact because kernels are computed on sections. Both added nodes are reviewed and in unit sk-thm-properbasechange. A DFS found no cycle through the item or its citer lem-weil-pbc-ringed-presentation-transport. The module-colimits lemma is in sk-thm-reduction, which the unit cites, so it stays on the route and no tool_uses are needed. The duplicate search found only the representable-object versions, and the edge cases (A terminal, A initial, two sections, B=A) are consistent. Statement, stmt_deps, blueprint and searches are unchanged; no nodes added or dropped.; 1 file(s) fixed by the reviewer"
  }
 }

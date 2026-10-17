@@ -11,9 +11,134 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-slice-right-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The two displayed triangle equalities are equalities of edge classes in the homotopy categories of the quasicategorical hom-simplicial sets. By the edge homotopy quotient calculus, choose 2-simplex witnesses whose successive edges are L eta and epsilon L with long edge 1_L, and eta U and U epsilon with long edge 1_U. Strict simplicial composition in the simplicial category curries each such 2-simplex to a coherent triangle homotopy in the corresponding functor simplicial set: for every z, whiskering gives coherent functors L_z:C_z to D_z and U_z:D_z to C_z, transformations eta_z and epsilon_z, and homotopies epsilon_z L_z composed with L_z eta_z approximately 1 and U_z epsilon_z composed with eta_z U_z approximately 1. This construction uses the actual simplicial composition maps, so it retains all higher simplices and does not infer coherence from component classes alone.",
+   "uses": [
+    "lem-coef-edge-homotopy-quotient-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Observation 4.3.4 and Theorem 4.3.9, coherent triangle witnesses; here the witnesses are obtained directly by the homotopy-category edge quotient and strict simplicial whiskering."
+   }
+  },
+  {
+   "text": "The source projection q_a:(D_z)_{/a}\\to D_z is a right fibration by the slice theorem, hence has all inner-horn lifting properties. Pulling its lifting squares back along L_z shows that E\\prime_z\\to C_z is a right fibration. Since C_z is a quasicategory, the same fillers show that E\\prime_z is a quasicategory. This argument is degreewise and also covers an empty pullback. The vertex (Ua,epsilon_a) is present because q_a(epsilon_a)=LUa=L_z(Ua).",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/018F",
+    "place": "Right-slice construction and right-fibration projection (Kerodon 018F/01KX), specialized to K=Delta^0; the pullback horn argument is the degreewise base-change calculation."
+   }
+  },
+  {
+   "text": "Fix a vertex (b,alpha) of E\\prime_z and abbreviate P=Map_{C_z}(b,Ua), M=Map_{D_z}(L_z b,LUa), and S=Map_{(D_z)_{/a}}(alpha,epsilon_a). Because E\\prime_z is a degreewise pullback, an n-simplex of its right-pinched mapping space is exactly a pair of n-simplices in P and S with equal image in M; thus Map_{E\\prime_z}((b,alpha),(Ua,epsilon_a)) is the strict pullback P\\times_M S. The map S\\to M induced by q_a is a Kan fibration: q_a is an inner fibration by Step 2, so this is precisely the relative mapping-space assertion of the inner-mapping-fiber lemma. Therefore the strict pullback agrees, via the Kan pullback/path comparison, with the homotopy pullback P\\times^h_M S, retaining all higher path data. The mapping spaces P, M and S are Kan by the mapping-space clause of [lem-cbc-enhanced-functor-cone-calculus], taking the functor shape to be Delta^0.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-inner-mapping-fiber",
+    "lem-coef-kan-pullback-path-comparison",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 2.4.4.1 (relative right-pinched mapping-space Kan fibration), together with Kerodon 018F/01KX for the right-slice mapping spaces."
+   }
+  },
+  {
+   "text": "Put $T_a=\\operatorname{Fun}(\\Delta^1,D_z)\\times_{\\operatorname{ev}_1,D_z}\\{a\\}$, with source projection $t_a$. The slice-arrow comparison supplies a functor equivalence $\\delta_a:(D_z)_{/a}\\to T_a$ with $t_a\\delta_a=q_a$. Its degree-zero formula has $\\rho_0:\\Delta^0\\times\\Delta^1\\cong\\Delta^1$, so it sends the vertices $\\alpha$ and $\\epsilon_a$ to those very arrows in $T_a$. Write $R=\\operatorname{Map}_{T_a}(\\alpha,\\epsilon_a)$. The assertion that every functor equivalence induces equivalences on mapping spaces in [lem-cbc-enhanced-functor-cone-calculus] makes the actual induced map $j:S\\to R$ a weak homotopy equivalence of Kan complexes. Moreover $j$ is strictly over $M$: applying the right-pinched mapping construction to $t_a\\delta_a=q_a$ gives $t_{a,*}j=q_{a,*}$. This is the required comparison on mapping spaces, rather than an inference from the slice equivalence alone.",
+   "uses": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02VT",
+    "place": "Corollary 4.6.4.20 and Construction 4.6.4.15; mapping-space preservation is the cited enhanced-functor calculus statement."
+   }
+  },
+  {
+   "text": "Set $N=\\operatorname{Map}_{D_z}(L_zb,a)$. Apply [lem-coef-infinity-comma-mapping-pullback] with $\\mathcal C=\\mathcal D=D_z$, $F=\\mathrm{id}_{D_z}$, $\\mathcal B=\\Delta^0$, and $G(*)=a$. Its comma category is exactly $T_a$, and its two chosen objects are $(L_zb,*,\\alpha)$ and $(LUa,*,\\epsilon_a)$. It gives $R\\simeq M\\times^h_N\\operatorname{Map}_{\\Delta^0}(*,*)$, with the first projection the actual $t_{a,*}$. The right-hand mapping space has exactly one simplex in every degree, directly from its definition. The first map to $N$ is $u:h\\mapsto\\epsilon_a\\circ h$; the second is the vertex $1_a\\circ\\alpha$. These are canonical mapping-space compositions of [lem-coef-infinity-mapping-composition]. Its unit homotopy gives a specified path $1_a\\circ\\alpha\\simeq\\alpha$. Apply the homotopy-commuting pullback-invariance lemma with identity equivalences on $M$, $\\Delta^0$ and $N$, constant homotopy on $u$, and that unit homotopy on the other leg. Thus $R\\simeq H:=M\\times^h_N\\{\\alpha\\}$ over $M$; the comparison keeps the $M$ coordinate and concatenates the path with the unit homotopy. No equality of composition with a chosen strict representative is assumed.",
+   "uses": [
+    "lem-coef-infinity-comma-mapping-pullback",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Composition, unitality and pre/postcomposition in Subsection 4.6.8; the general comma formula and homotopy-commuting comparison are agent-formulated in the cited existing nodes."
+   }
+  },
+  {
+   "text": "Let $\\ell:P\\to M$ be the actual map on mapping spaces induced by $L_z$. Apply [lem-coef-kan-homotopy-pullback-invariance] first to the strictly commuting cospan comparison $(\\mathrm{id}_P,j,\\mathrm{id}_M)$. It gives $P\\times^h_M S\\simeq P\\times^h_M R$. Apply the same lemma to the equivalence $R\\simeq H$ of Step 5 over $M$, keeping $P$ and $M$ fixed. If this equivalence is represented by a zigzag, apply it to each leg; for an over-$M$ comparison specified up to homotopy use [lem-coef-kan-homotopy-commuting-pullback-invariance] with that specified homotopy. Thus Step 3 gives $\\operatorname{Map}_{E'_z}((b,\\alpha),(Ua,\\epsilon_a))\\simeq K:=P\\times^h_M H$. In the diagram with top row $K\\to H\\to\\{\\alpha\\}$ and bottom row $P\\xrightarrow{\\ell}M\\xrightarrow{u}N$, both adjacent squares are homotopy pullbacks by their path-space definitions. Apply [lem-coef-infinity-homotopy-pullback-pasting], including its specified-homotopy clause: the outer square is a homotopy pullback, with its path obtained by concatenating the two square paths. Consequently $K\\simeq P\\times^h_N\\{\\alpha\\}$, where the map from $P$ is exactly $f=u\\ell$, namely $h_0\\mapsto\\epsilon_a\\circ L_z(h_0)$. All inputs are Kan complexes and all replacements preserve the displayed projection or its specified homotopy.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "Proposition 3.4.1.11 (pasting), Proposition 3.4.0.9 (032B, invariance), and the cited specified-homotopy extension."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-adjunction-mapping-equivalence] to $F=L_z$, $G=U_z$, $x=b$, $d=a$, and the coherent unit, counit and triangle homotopies constructed in Step 1. It states that $N\\to P$, $v\\mapsto U_z(v)\\circ\\eta_b$, is an equivalence, with inverse homotopy class represented by $h_0\\mapsto\\epsilon_a\\circ L_z(h_0)$. With the canonical composition of [lem-coef-infinity-mapping-composition], this latter map is the map $f=u\\ell$ of Step 6, so $f:P\\to N$ is an equivalence of spaces. In particular the argument concerns all simplices of the mapping Kan complexes, rather than only the adjunction bijection on components.",
+   "uses": [
+    "lem-coef-infinity-adjunction-mapping-equivalence",
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02F1",
+    "place": "Proposition 6.2.1.17 and the dual counit formula of the cited adjunction-mapping-equivalence statement."
+   }
+  },
+  {
+   "text": "The vertex $\\alpha:L_zb\\to a$ is a vertex of the Kan complex $N$. By [lem-coef-space-contractible-fiber-equivalence], the homotopy fiber $P\\times^h_N\\{\\alpha\\}$ of the equivalence $f$ of Step 7 is contractible. Step 6 identifies this fiber up to weak homotopy equivalence with the right-pinched mapping space into $(Ua,\\epsilon_a)$ from $(b,\\alpha)$. Its map to a point therefore induces a bijection on components and isomorphisms on all based homotopy groups, since the same is true of the fiber and of each comparison equivalence. This is precisely contractibility as defined in [def-cbc-enhanced-diagrams-cones]. Since $(b,\\alpha)$ was arbitrary and $E'_z$ is a quasicategory by Step 2, this is the stated terminality of $(Ua,\\epsilon_a)$.",
+   "uses": [
+    "lem-coef-space-contractible-fiber-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0328",
+    "place": "Remark 3.4.0.6: every homotopy fiber of an equivalence of Kan complexes is contractible; terminality uses the stated mapping-space definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-edge-homotopy-quotient-calculus",
+  "lem-coef-infinity-adjunction-mapping-equivalence",
+  "lem-coef-infinity-comma-mapping-pullback",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-kan-homotopy-commuting-pullback-invariance",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-space-contractible-fiber-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived mapping-complex adjunction before the inverse limit; coherent unit/counit data and the Riehl--Verity slice argument are expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,7 +212,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-counit-cone-boundary-extension",
@@ -111,5 +236,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-homotopy-adjunction-coherent-witnesses",
+  "worker": "stage1",
+  "summary": "Repaired all three returned citation gaps without changing the statement or creating nodes. Retained Steps 1–3, added the existing equivalence-on-mapping-spaces theorem, derived the fixed-target mapping formula from the existing comma theorem with its unit homotopy, and cited strict and homotopy-commuting pullback invariance and pasting. The final contractibility assertion now applies the existing contractible-fiber theorem explicitly.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2: the derived mapping-complex adjunction and its compatible units/counits before the inverse limit. Steps 1–3 give coherent triangles and the right-slice mapping pullback; Steps 4–6 establish its fiber identification; Steps 7–8 give the adjunction equivalence and terminal counit.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Uses only the general assertions that quasicategory mapping spaces are Kan and that every functor equivalence induces equivalences on mapping spaces (Steps 3–4). These are model-independent tools; no theorem of this unit supplies the latter assertion, and no geometric or unit-level proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-ND-683be72d9",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-683be72d9 (reviewer sub-agent of L); spot-checked: I read all 8 steps in full, every cited node's statement, the parent lem-coef-counit-cone-boundary-extension, the unit sk-prop-sf-biduality-general and blueprint main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2. The delivery creates no new nodes and leaves the statement unchanged; it is not weakened and matches what the parent consumes. Riehl–Verity §4.3 exists only online, so I checked it from my own knowledge of the source, not a local copy; the item's hypotheses match that setting with no extra coherence assumption. Step checks: (1) I verified by hand that currying the edge-quotient 2-simplices through strict associativity gives L_z, U_z, η_z, ε_z and both triangle 2-simplices, exactly as the adjunction-mapping node needs. (2) The pulled-back right fibration plus inner-horn filling in C_z makes E'_z a quasicategory, and q_a(ε_a)=L_z(Ua). (3) Map_{E'} is strictly P×_M S; inner-mapping-fiber makes S→M a Kan fibration, and path-comparison gives the homotopy pullback. (4) The slice-arrow node's S_y is the right slice; δ_a is an equivalence over D_z; the cone calculus makes j:S→R an equivalence, and t_*j=q_* holds strictly. (5) The comma node with F=id, B=Δ^0, G=a gives T_a, base N, legs ε_a∘- and 1_a∘α, and the unit path; homotopy-commuting invariance then gives R≃H over M. (6) Strict and homotopy-commuting invariance apply; I checked the pasting orientation (A=K, C=H, D={α}, A'=P, C'=M, D'=N), which gives the fiber of f=uℓ. (7) The adjunction-mapping node with F=L_z, G=U_z, x=b, d=a has inverse class ε_a∘L_z(-)=f, so f is an equivalence. (8) The contractible-fiber node then gives contractibility, which is terminality by definition. Small cases: nerves of categories give the comma category and universal arrow; the identity adjunction gives id_a terminal in the slice; (b,α)=(Ua,ε_a) and empty C_z are fine. There is no cycle (transitive check), no missing ids, proof_deps equals the union of uses, and no SGA source. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus (generic clauses only: Kan mapping spaces, and equivalences induce mapping-space equivalences). All three points of the previous return are repaired. No changes."
  }
 }
