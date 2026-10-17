@@ -11,9 +11,173 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the interval diagrams of [def-coef-enriched-interval-strings] for $\\mathcal V=\\mathcal C$. The Segal-fibration lemma identifies the fiber over $(A_0,\\ldots,A_n)$ with the product of the coherent comma categories $(A_{i-1}\\otimes-\\downarrow A_i)$. In one factor put $H=[A_{i-1},A_i]$ and take its evaluation $A_{i-1}\\otimes H\\to A_i$. The mapping space from $(V,f)$ to this evaluation object is the homotopy fiber at $f$ of $\\operatorname{Map}(V,H)\\simeq\\operatorname{Map}(A_{i-1}\\otimes V,A_i)$, so it is contractible. Thus it is final in that factor. The product of these evaluations is final in the string fiber, since its incoming mapping spaces are the corresponding finite products of contractible spaces. Conversely any final string is equivalent to this one in its fiber. This uses closedness but no presentability.",
+   "uses": [
+    "def-coef-enriched-interval-strings",
+    "lem-coef-interval-string-segal-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Section 7.4, proof of Proposition 7.4.5; the one-edge comma calculation written out"
+   }
+  },
+  {
+   "text": "Let $T$ be the full simplicial subset of $\\mathrm{Str}_\\iota(\\mathcal C)$ on objects final in their fibers. For any string $z$ over $b$ and $t\\in T$ over $c$, the homotopy fiber of $\\operatorname{Map}(z,t)\\to\\operatorname{Map}(b,c)$ at an arrow $f:b\\to c$ is $\\operatorname{Map}_{(\\mathrm{Str}_\\iota)_c}(f_!z,t)$ by the cocartesian mapping-space criterion. It is contractible, since $t$ is final in that fiber. Hence $t$ is relative-final in the precise mapping-space sense of the boundary criterion. For a boundary over a simplex of $\\Delta_K^{\\mathrm{op}}$ with vertices in $T$, its last vertex is relative-final, so that criterion fills the boundary. The filler stays in $T$ because $T$ is full and all vertices were already prescribed. Dimension zero lifts by Step 1. Therefore $T\\to\\Delta_K^{\\mathrm{op}}$ is a trivial Kan fibration. Here $K=\\mathcal C^\\simeq$; the base is made in a universe where it is small.",
+   "uses": [
+    "lem-coef-interval-string-segal-fibration",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-relative-initial-boundary",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 7.4.5; dual of HTT Proposition 2.4.4.9(1), expanded through the relative boundary criterion"
+   }
+  },
+  {
+   "text": "Choose a section $s:\\Delta_K^{\\mathrm{op}}\\to T$ of the trivial fibration, using the section assertion for trivial Kan fibrations. An inert restriction projects the product of Step 1 onto its retained factors, so it carries a final string to a final string. Thus an arrow of $s$ over an inert restriction is a cocartesian lift followed by an equivalence in its fiber; by the interval comparison criterion it is $p$-cocartesian in $\\mathrm{Str}(\\mathcal C)$. Pull back $a:\\mathrm{Str}^+(\\mathcal C)\\to\\mathrm{Str}(\\mathcal C)$ along $s$ and choose a section of this trivial fibration as well. Composing the resulting lift with $e$ gives a functor $\\Delta_K^{\\mathrm{op}}\\to\\mathcal C^\\otimes$ preserving inert edges, by the extraction lemma. It is consequently a categorical algebra by definition. Pull back along $O\\to K$, $o\\mapsto A_o$, to obtain the required algebra on $O$. Constructing it first on $K$ makes all family restrictions and equivalences of families coherent by precomposition.",
+   "uses": [
+    "lem-coef-interval-string-segal-fibration",
+    "lem-coef-interval-string-inert-extraction",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Theorem 7.4.7 and Corollary 7.4.10; inert preservation and restriction to O"
+   }
+  },
+  {
+   "text": "The extraction description gives hom objects $H_{ij}=[A_i,A_j]$. An active collapse of a two-edge universal string transports its two actions to $A_0\\otimes H_{01}\\otimes H_{12}\\to A_1\\otimes H_{12}\\to A_2$. Its map to the final one-edge string is the transpose $H_{01}\\otimes H_{12}\\to H_{02}$. A repeated endpoint gives $\\mathbf1\\to H_{ii}$ transposing $1_{A_i}$. For any longer string, successive collapses evaluate the same interval diagram; a simplex of composable ordinal maps is sent to the corresponding simplex by the functor of Step 3. Its faces are the different parenthesized collapses and its degeneracies insert the identity actions. This explicitly supplies all associative and unital coherences, rather than inferring them from binary identities. The chronological order here is the convention of the algebroid definition; symmetry gives the reverse tensor order if desired.",
+   "uses": [
+    "lem-coef-interval-string-inert-extraction",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Remark 7.3.8, Lemma 7.3.17 and Theorem 7.4.7; action and coherence formulas"
+   }
+  },
+  {
+   "text": "Encode the symmetric monoidal structures over $S=N(\\mathsf{Fin}_*)$ using the symmetric Segal classification. Over $\\langle n\\rangle$, $L^\\otimes$ is $L^n$ and has right adjoint $R^n$, including $n=0$. Apply the relative-right-adjoint theorem to $L^\\otimes$ over $S$, obtaining a coherent $R^\\otimes$ with unit, counit and triangles over $S$. For an inert arrow $\\alpha$, each output block has exactly one input. The adjunction on the homotopy fiber over $\\alpha$ is therefore the product, over retained inputs, of the original adjunctions. An inert cocartesian edge has identity block maps; its image under $R^\\otimes$ has the same identity block maps on the retained $R$-objects, and is inert. Hence $R^\\otimes$ is lax symmetric monoidal. For an active operation its comparison $\\mu_n:\\bigotimes_i RB_i\\to R(\\bigotimes_iB_i)$ is the mate of $L(\\bigotimes_iRB_i)\\simeq\\bigotimes_iLRB_i\\xrightarrow{\\otimes\\epsilon_i}\\bigotimes_iB_i$. For $n=0$ use $L\\mathbf1\\simeq\\mathbf1$. The relative functor supplies substitution, permutation and unit simplices over $S$; its ordered restriction is precisely the formula of the monoidal-relative-adjoint lemma.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "lem-coef-monoidal-relative-adjoint-inert",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2011.08808",
+    "place": "Agent argument: relative adjoints over finite pointed sets; no presentability or colimit assumption"
+   }
+  },
+  {
+   "text": "Restrict $R^\\otimes$ to the ordered associative base and compose it with the algebra functor on $O$ of Step 3. Both functors preserve inert arrows; their composite does as well, so the algebroid definition applies directly. Its hom objects are $RH_{ij}$, its composition is $RH_{01}\\otimes RH_{12}\\xrightarrow{\\mu_2}R(H_{01}\\otimes H_{12})\\xrightarrow{R(c)}RH_{02}$, and its units are $\\mathbf1\\xrightarrow{\\mu_0}R\\mathbf1\\to RH_{ii}$. Every higher coherence is the image of a simplex of the original algebra under the actual functor $R^\\otimes$. Precomposition with a map of object spaces commutes with this composition of functors. This proves change of enriching base without the presentable change-of-enrichment theorem.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent proof by postcomposition of inert-preserving functors"
+   }
+  },
+  {
+   "text": "For every test object $Y\\in\\mathcal D$, calculate the following equivalences of full mapping spaces, naturally in $Y,X,B$:\n$$\\begin{aligned}\\operatorname{Map}_{\\mathcal D}(Y,R[LX,B]_{\\mathcal C})&\\simeq\\operatorname{Map}_{\\mathcal C}(LY,[LX,B]_{\\mathcal C})\\\\&\\simeq\\operatorname{Map}_{\\mathcal C}(LY\\otimes LX,B)\\\\&\\simeq\\operatorname{Map}_{\\mathcal C}(L(Y\\otimes X),B)\\\\&\\simeq\\operatorname{Map}_{\\mathcal D}(Y\\otimes X,RB)\\\\&\\simeq\\operatorname{Map}_{\\mathcal D}(Y,[X,RB]_{\\mathcal D}).\\end{aligned}$$\nThe middle equivalence uses strong monoidality of $L$; it is indispensable. Symmetry identifies the chosen left- or right-tensor conventions in the two closed adjunctions. Full faithfulness of infinity Yoneda represents this chain by $\\beta_{X,B}:R[LX,B]\\simeq[X,RB]$. Its naturality in $X,B$, including all simplices, follows by lifting the resulting presheaf-valued natural equivalence through fully faithful Yoneda. Enlarge universes first so the testing categories and these functor categories fit the Yoneda theorem.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-functor-equivalence-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent proof: five-adjunction test-object calculation and infinity Yoneda"
+   }
+  },
+  {
+   "text": "Put $H=[LX,B]_{\\mathcal C}$. Uncurrying $\\beta$ gives the map\n$$RH\\otimes X\\xrightarrow{1\\otimes\\eta_X}RH\\otimes RLX\\xrightarrow{\\mu_2}R(H\\otimes LX)\\xrightarrow{R(\\mathrm{ev})}RB.$$\nFor $u:Y\\to RH$, its composite with $u\\otimes1_X$ has adjoint $L(Y\\otimes X)\\simeq LY\\otimes LX\\xrightarrow{\\widetilde u\\otimes1}H\\otimes LX\\xrightarrow{\\mathrm{ev}}B$, where $\\widetilde u=\\epsilon_H L(u)$. Indeed the mate formula for $\\mu_2$, naturality of $\\epsilon$, and $\\epsilon_{LX}L\\eta_X\\simeq1_{LX}$ give exactly this expression. It is the chain of Step 7, so this is the evaluation comparison. Reversing the two closed adjunctions gives the currying comparison. The diagram-mapping-space clause of parametric universal arrows applies to each of the given adjunctions and identifies these calculations on every simplex of parameters, with restriction to its faces and degeneracies.",
+   "uses": [
+    "lem-coef-monoidal-relative-adjoint-inert",
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent proof: explicit mate of evaluation and diagramwise currying"
+   }
+  },
+  {
+   "text": "For composition in the source variable take parameters $U,V\\in\\mathcal D$, $a:U\\otimes X\\to X'$ and $b:LV\\otimes LX'\\to B$. Let $b^\\sharp:V\\otimes X'\\to RB$ be its mate. Under Step 7 the composite\n$$L(V\\otimes U\\otimes X)\\simeq LV\\otimes LU\\otimes LX\\xrightarrow{1\\otimes L(a)}LV\\otimes LX'\\xrightarrow{b}B$$\nhas mate $V\\otimes U\\otimes X\\xrightarrow{1\\otimes a}V\\otimes X'\\xrightarrow{b^\\sharp}RB$. This is naturality of the mapping-space adjunction, using the tensor comparison, and holds as an equality up to its specified coherent homotopy. Take the universal evaluations for $a$ and $b$. The first expression is the composition on the changed-base hom objects with the map $[X,X']_{\\mathcal D}\\to R[LX,LX']_{\\mathcal C}$ adjoint to $L(\\mathrm{ev})$; the second is internal-Hom precomposition in $\\mathcal D$. Thus $\\beta$ identifies these compositions. Iterating the displayed natural transformation along an interval string gives the same iterated evaluation on every face; the substitution simplices of $L^\\otimes,R^\\otimes$ and the diagramwise adjunction supply the higher comparisons. Taking $a$ to be an identity proves the unit case.",
+   "uses": [
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "lem-coef-monoidal-relative-adjoint-inert",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-interval-string-inert-extraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent proof: test-parameter calculation for composition, including n-ary substitutions"
+   }
+  },
+  {
+   "text": "For composition in the target variable put $E=R[B,B']_{\\mathcal C}$ and let $b:LV\\otimes LX\\to B$ have mate $b^\\sharp:V\\otimes X\\to RB$. The map\n$$L(E\\otimes V\\otimes X)\\simeq LE\\otimes LV\\otimes LX\\xrightarrow{\\epsilon_{[B,B']}\\otimes b}[B,B']\\otimes B\\xrightarrow{\\mathrm{ev}}B'$$\nhas mate $E\\otimes V\\otimes X\\xrightarrow{1\\otimes b^\\sharp}E\\otimes RB\\xrightarrow{\\mu_2}R([B,B']\\otimes B)\\xrightarrow{R(\\mathrm{ev})}RB'$. To check it, apply the inverse adjunction to the latter expression and use the mate formula for $\\mu_2$; naturality of the counit replaces $\\epsilon_B L(b^\\sharp)$ by $b$. This verifies the target-composition square for universal $b$, hence for $\\beta$. For several target hom objects, the same calculation uses $\\mu_n$ and the tensor of their counits; its substitution and unit simplices are those of Step 5. Together with Step 9 this gives the mixed composition coherences claimed, without identifying $RLX$ with $X$. Finally $[\\mathbf1,B]_{\\mathcal C}\\simeq B$ and $[\\mathbf1,RB]_{\\mathcal D}\\simeq RB$ by the unit tensor adjunctions, giving the stated unit specialization.",
+   "uses": [
+    "lem-coef-monoidal-relative-adjoint-inert",
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent proof: counit calculation for postcomposition and the tensor-unit specialization"
+   }
+  },
+  {
+   "text": "All interval diagrams, functor categories and adjunctions above are formed in a containing universe; increase it before using the core $K$ or Yoneda, rather than imposing smallness in the original universe on $\\mathcal C$ or $\\mathcal D$. Restriction along a small family $O\\to K$ then gives the specified object set. Changing the containing universe retains the diagrams and their universal mapping-space properties. If $O$ is empty the restriction is the empty algebra; if $O$ is a singleton it is the endomorphism algebra. For $L=\\mathrm{id}$ the five-equivalence chain reduces to the closed adjunction and its inverse, so $\\beta$ is the identity comparison. For $X=\\mathbf1$ it is the unit comparison just calculated. No step invokes completeness of a categorical algebra with discrete objects.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Universe convention and empty, singleton, identity-adjunction and unit checks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-complete-algebroid",
+  "def-coef-enriched-interval-strings",
+  "def-coef-monoidal-infinity-category",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-cocartesian-relative-right-adjoint",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-yoneda-functor-equivalence-lift",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-interval-string-inert-extraction",
+  "lem-coef-interval-string-segal-fibration",
+  "lem-coef-monoidal-relative-adjoint-inert",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-symmetric-monoidal-segal-classification",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "GH Sections 7.3--7.4, decomposed through interval strings; explicit relative-adjoint, Yoneda and evaluation-mate arguments. Online sources are not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,7 +216,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-simplicial-presentation",
@@ -75,5 +239,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-closed-self-enrichment-base-change",
+  "worker": "stage1",
+  "summary": "Repair all four return points. Replace the asserted self-enrichment coherence with three technical interval-string nodes and explicit final-fiber selection and inert extraction. Reuse the presentability-free relative-adjoint theorem, prove the mixed comparison on all test objects using strong monoidality and Yoneda, and calculate its evaluation and composition mates. Statement and imported metadata are unchanged; proof origin is agent.",
+  "blueprint": "Supporting foundation of prop-coef-integral-exceptional-adjoint paragraph 2: the generic self-enrichment, adjoint change of enriching base, and mixed tensor-Hom coherence used by lem-coef-enriched-simplicial-presentation before choosing models. The interval-string construction realizes that foundation without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Only its section of a trivial Kan fibration is used to choose coherent universal strings and their cocartesian extensions; this is a generic simplicial tool, and no node of this unit provides that section assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-a54d6f087",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-a54d6f087 (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes, every cited node, the unit record and the parent's uses, plus Gepner–Haugseng arXiv 1312.3178 §§7.1–7.4 (PDF fetched read-only). Item statement is unchanged against the side DAG; only the split fields changed. def-coef-enriched-interval-strings matches GH Def. 7.1.4/RM, 7.3.1–7.3.7, 7.3.9, 7.3.13–7.3.16 and 7.4.1: the Str^+ cocartesian condition equals GH's q-left-Kan condition, and the relative-nerve target of r was checked to be well defined. lem-coef-interval-string-segal-fibration matches Props. 7.3.10(i,iii,iv), 7.3.11, 7.3.12(iii) and Lemma 7.4.2; the comma-fiber identification was checked by hand at n=1 using Rem. 7.3.8 and the active map [1]->[2]. lem-coef-interval-string-inert-extraction matches Lemmas 7.3.15 and 7.3.17. No new node duplicates an existing one or restates the item; the existing enrichment-change nodes need presentability. Steps checked: 1 (final evaluation via closedness); 2 (dual of HTT 2.4.4.9 via the cocartesian mapping-space criterion and the relative-final boundary lemma; trivial Kan fibration including dimension 0); 3 (section, inert to cocartesian, algebroid definition on the left fibration Δ_K^op); 5 (relative right adjoint over Fin_*, no presentability); 7 (Yoneda chain using strong monoidality); 8 (mate recomputed exactly); 9–10 (binary and unit cases verified, higher arities sketched at the level of the item's own informal clause); 11 (empty and singleton O, L=id, X=1). Accepted tool_use: lem-weil-pbc-trivial-kan-homotopy-equivalence, section clause only. Remarks, no change: the symmetric-to-Δ^op restriction is implicit and elementary; the item's stmt_deps could cite the symmetric-monoidal classification node (this predates the delivery). No fixes, no drops."
  }
 }
