@@ -8,15 +8,14 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Basic
 
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import all Sheaf.AlgebraicGeometry.FormalSystemsPullback
+import all WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Mathlib.RingTheory.AdicCompletion.Algebra
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Algebraizing a formal pullback isomorphism with quotient compatibility
 
@@ -68,7 +67,83 @@ theorem formalComparison_algebraization_quotient_lift
         (Scheme.Modules.tensorPullback p).map (formalModuleQuotientπ J (n + 1) A₀.obj) ≫
           (Scheme.Modules.tensorPullback p).map (e.inv.app (op n)) ≫ β.hom.app (op n) =
         b.hom ≫ formalModuleQuotientπ (J.comap p) (n + 1) F.obj := by
-  sorry
+  classical
+  obtain ⟨E, _, _, _, _, _, ⟨c⟩⟩ := coherentFormalModules_affine A I J hJ
+  let N := E.functor.obj G
+  let M := (ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))).obj N.obj
+  let H := (tilde.functor (CommRingCat.of A)).obj M
+  have : Module.Finite A (AdicCompletion I A) :=
+    Module.Finite.equiv (AdicCompletion.ofLinearEquiv I A)
+  let : Module (AdicCompletion I A) M := N.obj.isModule
+  have : IsScalarTower A (AdicCompletion I A) M :=
+    IsScalarTower.of_algebraMap_smul (fun a x ↦
+      (ModuleCat.restrictScalars.smul_def (algebraMap A (AdicCompletion I A)) a x).symm)
+  have : Module.Finite (AdicCompletion I A) M := N.property
+  have : Module.Finite A M := Module.Finite.trans (AdicCompletion I A) M
+  have : Module.Finite A ((moduleSpecΓFunctor (R := CommRingCat.of A)).obj H) :=
+    Module.Finite.equiv (tilde.isoTop (R := CommRingCat.of A) M).toLinearEquiv
+  let : Module A Γ(H, ⊤) := inferInstanceAs
+    (Module A ((moduleSpecΓFunctor (R := CommRingCat.of A)).obj H))
+  let : Algebra A Γ(Spec (CommRingCat.of A), ⊤) :=
+    (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom.toAlgebra
+  have : IsScalarTower A Γ(Spec (CommRingCat.of A), ⊤) Γ(H, ⊤) :=
+    IsScalarTower.of_algebraMap_smul (fun a x ↦ (Scheme.Modules.smul_top_eq H a x).symm)
+  have : Module.Finite A Γ(H, ⊤) := inferInstanceAs
+    (Module.Finite A ((moduleSpecΓFunctor (R := CommRingCat.of A)).obj H))
+  have : Module.Finite Γ(Spec (CommRingCat.of A), ⊤) Γ(H, ⊤) :=
+    Module.Finite.of_restrictScalars_finite A _ _
+  have hq : H.IsQuasicoherent := by
+    exact (presentationTilde (R := CommRingCat.of A) M Set.univ
+      (by simp) _ (Submodule.span_eq _)).isQuasicoherent
+  have ht : H.IsFiniteType :=
+    ((Scheme.Modules.quasicoherent_finite_type_affine _).2 H hq).2.1
+      PUnit.{u + 1} (fun _ ↦ ⊤) (by simp) (fun _ ↦ isAffineOpen_top _)
+      (fun _ ↦ inferInstance) |>.1
+  let A₀ : CoherentModules (Spec (CommRingCat.of A)) :=
+    ⟨H, (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType _ _).mpr ⟨hq, ht⟩⟩
+  let e : G.obj ≅ formalCompletionSystem J A₀.obj :=
+    (ObjectProperty.ι (IsCoherentFormalModule J)).mapIso (E.unitIso.app G) ≪≫
+      c.app (E.functor.obj G)
+  let : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType p
+  let P : CoherentModules Z := ⟨(Scheme.Modules.tensorPullback p).obj A₀.obj,
+    coherent_pullback p A₀.obj A₀.property⟩
+  let q : formalCompletionSystem (J.comap p) P.obj ≅
+      formalCompletionSystem (J.comap p) F.obj :=
+    (completionPullbackIso p J).app A₀ ≪≫
+      Functor.isoWhiskerRight e.symm (Scheme.Modules.tensorPullback p) ≪≫ β
+  let C := completion Z (J.comap p)
+  have hbij (K L : CoherentModules Z) : Function.Bijective
+      (fun v : K ⟶ L ↦ C.map v) := by
+    subst J
+    exact formalCompletion_map_bijective_of_proper I p K L
+  let : C.Full := ⟨fun {K L} ↦ (hbij K L).2⟩
+  let : C.Faithful := ⟨fun {K L} ↦ (hbij K L).1⟩
+  let q' : C.obj P ≅ C.obj F :=
+    (ObjectProperty.fullyFaithfulι (IsCoherentFormalModule (J.comap p))).preimageIso q
+  let b' : P ≅ F := C.preimageIso q'
+  let b : (Scheme.Modules.tensorPullback p).obj A₀.obj ≅ F.obj :=
+    (ObjectProperty.ι (RingedSpace.IsCoherent Z.toRingedSpace)).mapIso b'
+  refine ⟨A₀, e, b, ?_⟩
+  intro n
+  have hb : formalCompletionMap (J.comap p) b.hom = q.hom := by
+    change (ObjectProperty.ι (IsCoherentFormalModule (J.comap p))).map
+      (C.map b'.hom) = q.hom
+    simp [b', q']
+  have hbn := congrArg (fun t ↦ t.app (op n)) hb
+  have hπ := powerQuotientIso_π p J A₀.obj hq (n + 1)
+  calc
+    _ = formalModuleQuotientπ (J.comap p) (n + 1) P.obj ≫ q.hom.app (op n) := by
+      dsimp only [q, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+        Functor.whiskerRight_app, Iso.symm_hom]
+      change _ = formalModuleQuotientπ (J.comap p) (n + 1)
+        ((Scheme.Modules.tensorPullback p).obj A₀.obj) ≫
+        (powerQuotientIso p J A₀.obj hq (n + 1)).hom ≫ _ ≫ _
+      simpa only [Category.assoc] using
+        congrArg (fun t ↦ t ≫ (Scheme.Modules.tensorPullback p).map
+          (e.inv.app (op n)) ≫ β.hom.app (op n)) hπ.symm
+    _ = b.hom ≫ formalModuleQuotientπ (J.comap p) (n + 1) F.obj := by
+      rw [← hbn]
+      exact cokernel.π_desc _ _ _
 
 end
 end AlgebraicGeometry
