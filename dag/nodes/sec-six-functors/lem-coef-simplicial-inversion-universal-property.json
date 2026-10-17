@@ -192,5 +192,33 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-d132e802d (reviewer sub-agent of L); spot-checked: I read the whole item and both new nodes, plus the statements of every node they cite (interval-lifting, interval-cell-stability, kan-quillen-right-proper, reedy-model-structure), the parent node, the nodes that use the item, the unit sk-prop-sf-biduality-general and the chapter. Item: statement unchanged. Checked on W empty, T empty, C=[1] with its arrow marked, and a discrete non-invertible target. Steps 2-6 are correct: the derived-pushout node states the pushout comparison, the pi_0/hsCat bijection and the coproduct-to-product comparison; the walking-groupoid node gives the compatible choices that make the restriction a trivial Kan fibration onto E_T; products of trivial fibrations lift coordinatewise; pulling back along a union of components gives injectivity; and pi_0 equivalences reflect isomorphisms, which gives the image. New nodes: derived-pushout-mapping is Hovey's framed left function complex plus standard homotopy-pushout and coproduct facts, all correct. Walking-groupoid-components is true: Fun(J,T) to Fun(Delta^1,T) is fully faithful onto the equivalences, so on cores it is an inclusion of components. Neither node reaches the item. The only near-duplicates (cosimplicial-frame-mapping, model-colimit-localization-comparison) do reach it, so citing them would make a cycle. Searches and blueprint fields are present; all citations stay in the unit; no tool_uses. Repair: old Step 1 said the interval nodes 'thus' give the model structure but omitted I-inj = W ∩ J-inj and I-cof ∩ W ⊆ J-cof (error D5/C2). I wrote the recognition argument out as two steps, the second citing kan-quillen boundary lifting, in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-inversion-universal-property.json; nothing else in the file changed. Sources: HTT A.3.5, Hovey 5.2/5.4 and Bergner are not archived and network access is blocked, so the cited pages were not opened. The WANTED lines and proof_origin=agent are correct; I checked the mathematics independently.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a29f8e04",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node, both stmt deps, module, report (Worker report + Second reading by NC present) and the reused declarations (Pair, PairHom, Marks, walkingArrow/Groupoid, LocalizationPresentation, IsBergnerHomotopyPushout, I/J/IntervalRepresentatives, DwyerKanEquivalence, IsPiZeroIso, BergnerModelData, Bergner localization). All clauses match: model structure (W=DK, Cof=I.rlp.llp with n=0 boundary, Fib=(J R).rlp, R-independent), derived pushout via resolved homotopy-pushout presentation, injective q*, exact image via an I-injective-source/DK-target representative test (every marked arrow lifts; pi0 iso up to nat iso), unique iso under C, unique induced maps for mark-preserving functors with identities/composition. No extra hypotheses; edge cases W empty, C/T empty, marked identities/endomorphisms covered. Six real Prop definitions, single sorry, docstrings with HTT A.3.5.1/A.3.5.2/A.3.5.5 and blueprint, 7 proof steps; node diff only the lean field, statement verbatim. nt_compile.py --json on side overlay: exit 0, no errors or warnings. Non-blocking: proof import into SimplicialLocalizationComparisonCalculus omitted per the section 3(7) cycle rule (stage 3 must move those definitions upstream); bergnerWeakEquivalences and dwyerKanEquivalences duplicate names predate this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialInversionUniversalProperty",
+  "declaration": "CategoryTheory.SimplicialInversion.simplicial_inversion_universal_property",
+  "declarations": [
+   "CategoryTheory.SimplicialInversion.RepresentativeInverts",
+   "CategoryTheory.SimplicialInversion.InvertsMarked",
+   "CategoryTheory.SimplicialInversion.MappingProperty",
+   "CategoryTheory.SimplicialInversion.Uniqueness",
+   "CategoryTheory.SimplicialInversion.InducedMaps",
+   "CategoryTheory.SimplicialInversion.CompositionCompatibility",
+   "CategoryTheory.SimplicialInversion.simplicial_inversion_universal_property"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialInversionUniversalProperty.lean",
+  "statement": "theorem simplicial_inversion_universal_property : ∃ B : BergnerModelData.{u}, B.model.categoryWithWeakEquivalences.weakEquivalences = SSet.Bergner.dwyerKanEquivalences ∧ B.model.categoryWithCofibrations.cofibrations = SSet.Bergner.I.rlp.llp ∧ (∀ R : SSet.Bergner.IntervalRepresentatives.{u}, B.model.categoryWithFibrations.fibrations = (SSet.Bergner.J R).rlp) ∧ (∀ P : Pair.{u}, ∃ (L : SCat.{u}) (q : P.category ⟶ L), Nonempty (LocalizationPresentation B P q)) ∧ (∀ (P : Pair.{u}) (L : SCat.{u}) (q : P.category ⟶ L), Nonempty (LocalizationPresentation B P q) → MappingProperty P (bergnerHomotopyFunctor.map q) ∧ Uniqueness P (bergnerHomotopyFunctor.map q)) ∧ InducedMaps.{u} ∧ CompositionCompatibility.{u}",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing marked pairs, resolved derived-pushout presentation and Bergner homotopy category; the downstream comparison theorem is not used. Inversion is tested on a three-arrow representative whose source map is I-injective, ensuring that every original marked vertex lifts. No arbitrary strict inverse choices, saturation hypothesis or local Kan assumption on C or T."
  }
 }
