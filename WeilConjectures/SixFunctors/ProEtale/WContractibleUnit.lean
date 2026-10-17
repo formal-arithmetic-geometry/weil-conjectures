@@ -349,6 +349,22 @@ theorem unitTensorFinite {R : CommRingCat.{u}} [IsWContractibleRing R] (e : Y �
     rw [ha' i k, Pi.single_eq_of_ne (Ne.symm hi), TensorProduct.zero_tmul, map_zero]
   · simp
 
+/-- On the pro-étale site of the spectrum of a w-contractible ring, a dualizable object of
+`D(Y_proét, Λ)` is isomorphic to a bounded complex of finite projective `Λ_Y`-modules, that is, of
+retracts of finite direct sums `Λ_Yʳ`. -/
+theorem exists_iso_Q_obj_of_isDualizable {R : CommRingCat.{u}} [IsWContractibleRing R]
+    (e : Y ≅ Spec R)
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hK : IsDualizable K) :
+    ∃ (P : CochainComplex (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ℤ) (a b : ℤ),
+      P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
+      (∀ n, ∃ r : ℕ, Nonempty (Retract (P.X n) (⨁ fun _ : Fin r ↦
+        𝟙_ (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))))) ∧
+      Nonempty (K ≅ DerivedCategory.Q.obj P) := by
+  have := projective_unit (Λ := Λ) e
+  exact DerivedCategory.exists_iso_Q_obj_of_isDualizable (unitFactorsThroughFiniteCoproducts e)
+    (unitTensorFinite e) hK
+
 end ProEtale
 
 end AlgebraicGeometry
