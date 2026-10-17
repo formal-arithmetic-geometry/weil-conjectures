@@ -235,5 +235,28 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-89ce24465 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps, both new nodes and every cited statement in full (mapping criterion, pinched rigidification, coherent nerve, equivalence detection, fibrations and enhanced-diagram definitions, Joyal model structure, enriched coend, projective calculus), plus the parent's use. Item statement unchanged; it matches the parent's application exactly. Step 2: cocartesianness carries over to E_123 over Delta^123; the bottom mapping spaces in that poset are contractible; precomposition by e is a strict module map because e is a vertex of C[E_12](u,u_2). Step 3: the square commutes by associativity, then co-Yoneda and two-out-of-three. Steps 4-5: R->P is M01 tensored with k, then a pushout along an equivalence. I re-derived the gluing formula P amalg^h_R D myself by gluing faces 012 and 123 along 12, then 023 along 02 union 23, and checked the other label pairs collapse the same way. Small cases: K=H gives a point (C[Lambda^3_2](0,3) is contractible); the M12-empty diagnostic gives S^0, so gluing alone does not imply the item. Steps 6-8 (fullness of T_J, labels of isomorphisms in [3], Dwyer-Kan detection) are correct. Both new nodes are statement-only, self-contained, true, strictly smaller and not clauses of the item. No duplicates in the DAG; nearest candidates checked: simplicial-derived-pushout-mapping, bead-normal-form, enriched-coend-homotopy-invariance, free-bar-cell-filtration, ordinary-two-sided-bar-comparison, the coherent/space Yoneda nodes, the dg bar nodes. No cycle (390-node closure); all proof tools in sk-prop-sf-biduality-general; no tool_uses needed or accepted. HA 3.1.2.4 is not in literature/: agent provenance and WANTED are stated honestly; no SGA. No target, coefficient category or base-change morphism touched. Not checked: searches.jsonl is absent from my snapshot, so the recorded searches were not compared with the log. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CocartesianThreeHornFaceConservation",
+  "declaration": "SSet.Enhanced.cocartesian_three_horn_face_conservation",
+  "declarations": [
+   "SSet.Enhanced.threeHornFaceInclusion",
+   "SSet.Enhanced.cocartesian_three_horn_face_conservation"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CocartesianThreeHornFaceConservation.lean",
+  "statement": "theorem cocartesian_three_horn_face_conservation (E : SSet.{u}) (r : E ⟶ (horn 3 2).toSSet) [InnerFibration r] (hlift : ∀ x : E _⦋0⦌, stdSimplex.obj₀Equiv ((r ≫ (horn 3 2).ι).app (op ⦋0⦌) x) = 1 → ∃ e : E _⦋1⦌, E.δ 1 e = x ∧ SSet.yonedaEquiv.symm e ≫ r ≫ (horn 3 2).ι = SSet.stdSimplex.map (SimplexCategory.mkOfSucc (n := 3) 1) ∧ IsCocartesianEdge r (SSet.yonedaEquiv.symm e)) (T : SSet.{u}) [Quasicategory T] (t : T ⟶ Δ[3]) (w : E ⟶ T) [Mono w] (hw : w ≫ t = r ≫ (horn 3 2).ι) (hequiv : ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map w)).app C)).toFunctor).IsEquivalence) (J : Finset (Fin 4)) (hJ : J.Nonempty) (hface : J ⊆ {0, 1, 2} ∨ J ⊆ {0, 2, 3} ∨ J ⊆ {1, 2, 3}) : ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (pullback.map r (threeHornFaceInclusion J hface) t (stdSimplex.face J).ι w (𝟙 _) (horn 3 2).ι hw.symm (by simp [threeHornFaceInclusion])))).app C)).toFunctor).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded arbitrary-base outer-horn cocartesian edge predicate. The helper is the canonical inclusion of an allowed face into the horn; the theorem uses the actual pullback.map from the pullback over the horn to the pullback over the simplex. No definition or statement dependency is replaced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcbb56b09",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Every clause matches the node. Inner fibration r over horn 3 2 with no quasicategory assumption; hlift = label-1 vertices have an edge with E.δ 1 e = x lying over mkOfSucc 1 (edge 1->2) and satisfying the recorded arbitrary-base IsCocartesianEdge; [Quasicategory T], t, [Mono w], hw = tw = ιr; hequiv and the conclusion use the recorded Joyal testing expression verbatim with max u v; J nonempty inside 012, 023 or 123; the conclusion is the actual pullback.map (w, id, horn ι), with argument order checked against Mathlib. The helper threeHornFaceInclusion is real data (homOfLE via face_le_horn for i=3,1,0). Proof is sorry only; docstrings carry source, blueprint tag and all 8 proof steps; proof-dep imports are non-public per brief-stage2 and the two unrecorded proof deps have no module. lean.statement matches the file verbatim; node unchanged except lean; lines <=100. Edge cases (empty fibers, singleton J, universes) are covered with no extra hypotheses. nt_compile.py --json against the side overlay: rc 0, 1.3 s, no errors or warnings. No findings, no fixes."
  }
 }
