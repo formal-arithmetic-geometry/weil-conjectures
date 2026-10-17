@@ -9,7 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
-import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedCoverSectionsComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedCoverSections
 import Mathlib.AlgebraicGeometry.QuasiAffine
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.MvPowerSeries.Equiv

@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoCore
-import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoTransfer
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimTwoTransfer
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits

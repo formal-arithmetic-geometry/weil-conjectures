@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
-import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapResidueQuotientSurjective
+import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingResidueQuotientSurjective
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits

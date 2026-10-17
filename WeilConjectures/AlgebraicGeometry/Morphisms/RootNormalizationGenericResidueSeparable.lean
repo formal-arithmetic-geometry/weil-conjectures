@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Localization.Ideal
 
 import Mathlib.FieldTheory.PurelyInseparable.Basic
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkResidueDegreeDvd
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericResidueDegreeDvd
 
 /-! # RootNormalizationGenericStalkResidueSeparable
 

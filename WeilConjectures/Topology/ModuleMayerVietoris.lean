@@ -9,8 +9,8 @@ module
 public import WeilConjectures.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Exact.Basic
 import WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryExact
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryNaturality
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjExactSquareBoundaryExact
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjExactSquareBoundaryNaturality
 import Mathlib.Topology.Sheaves.MayerVietoris
 
 /-! # Mayer--Vietoris for modules on a ringed space

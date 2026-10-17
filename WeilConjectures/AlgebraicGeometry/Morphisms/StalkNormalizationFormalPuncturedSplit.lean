@@ -19,7 +19,7 @@ public import WeilConjectures.RingTheory.Depth
 
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedRestriction
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedRestrict
 import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFormalZeroSliceSplit
 import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSplitAssembly
 import Mathlib.RingTheory.MvPowerSeries.Equiv

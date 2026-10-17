@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux
+import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationExtensionUniqueAux
 
 @[expose] public section
 universe u
