@@ -1,0 +1,74 @@
+{
+ "id": "lem-sp-finite-ring-compact-support-projection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-compatibilities",
+   "place": "Proof (3), tensor-map paragraph: 'its transpose is built from the projection formula and $\\varepsilon_A$' -- the inverse of the compact-support projection formula used in that transpose, for an arbitrary finite coefficient ring",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compact-support projection formula on pro-etale sites with arbitrary finite l-primary coefficients",
+ "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ and a prime $\\ell\\ne\\operatorname{char}(k)$ [def-weil-finite-field-fiber]. Let $R$ be a finite commutative ring with $\\ell^nR=0$ for some $n\\geq1$; no flatness over $\\mathbf Z/\\ell^n$ and no presentation of $R$ as a quotient of a discrete valuation ring is assumed. Let $X$, $\\bar X$ and $Y$ be separated finite-type $k$-schemes, let $j:X\\hookrightarrow\\bar X$ be an open immersion and $p:\\bar X\\to Y$ a proper $k$-morphism [def-weil-scheme-morphism-properties, def-weil-open-immersion, def-weil-proper-morphism], and put $f=p\\circ j$. Use the ordinary, uncompleted, unbounded derived categories $D(T_{\\mathrm{proét}},R)$ of module sheaves over the constant ring $R_T$ on the small pro-étale sites [def-weil-pbc-proetale-modules], their K-flat derived tensor product $\\otimes^{\\mathbf L}_R$ [def-weil-derived-tensor], the derived inverse and direct images with their adjunctions $Lu^*\\dashv Ru_*$ [def-weil-pbc-proetale-operations], and extension by zero $j_!$ [def-weil-extension-by-zero]; put $Rf_{!,R}=Rp_*j_!$.\n\nFor $M\\in D(X_{\\mathrm{proét}},R)$ and $K\\in D(Y_{\\mathrm{proét}},R)$ let $\\operatorname{PF}_{R;M,K}$ be the composite\n$$\nRf_{!,R}M\\otimes^{\\mathbf L}_RK=(Rp_*j_!M)\\otimes^{\\mathbf L}_RK\\xrightarrow{\\ \\pi_p\\ }Rp_*\\bigl(j_!M\\otimes^{\\mathbf L}_RLp^*K\\bigr)\\xrightarrow{\\ Rp_*(\\pi_j)\\ }Rp_*j_!\\bigl(M\\otimes^{\\mathbf L}_RLj^*Lp^*K\\bigr)\\cong Rf_{!,R}\\bigl(M\\otimes^{\\mathbf L}_RLf^*K\\bigr),\n$$\nwhere $\\pi_p$ is the proper projection map (the adjoint transpose under $Lp^*\\dashv Rp_*$ of the counit $Lp^*Rp_*j_!M\\to j_!M$ tensored with $1_{Lp^*K}$, after the pullback/tensor comparison $Lp^*(V\\otimes^{\\mathbf L}_RW)\\cong Lp^*V\\otimes^{\\mathbf L}_RLp^*W$), $\\pi_j:j_!M\\otimes^{\\mathbf L}_RN\\to j_!(M\\otimes^{\\mathbf L}_Rj^{-1}N)$ is the canonical extension-by-zero projection map with $N=Lp^*K$, and the last identification is the composition isomorphism $Lj^*Lp^*\\cong Lf^*$.\n\nIf $M$ and $K$ have intrinsically constructible cohomology sheaves [def-weil-proetale-constructible-sheaf] vanishing outside a finite range of degrees, then $\\operatorname{PF}_{R;M,K}$ is an isomorphism in $D(Y_{\\mathrm{proét}},R)$, natural in $M$ and $K$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Proof (3), tensor-map paragraph (projection formula in the transpose of the tensor map); proper case from Stacks Tag 0F0G (etale-cohomology.tex, lemma-projection-formula-proper-mod-n) transported along the finite-ring etale/pro-etale comparison",
+  "external": [
+   {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, label lemma-projection-formula-proper-mod-n"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlniE 'projection.?formula|projectionFormula' over /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "RingTheory/WittVector/Identities.lean (verschiebung_mul_frobenius, Witt-vector 'projection formula'); Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean (a comment only)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'proetale|ProEtale|proEtale' over the same Mathlib tree, then the declarations of the hits",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean (proetalePrecoverage, proetaleTopology, ProEt site), AlgebraicGeometry/Sites/ElladicCohomology.lean (ellAdicSheaf, EllAdicCohomology); no derived direct image, extension by zero or projection map",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer-reader",
+  "item": "det-sp-reduction-compatibilities",
+  "date": "2026-10-17",
+  "group": "Q68"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
