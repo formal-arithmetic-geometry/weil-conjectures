@@ -8,7 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 
 /-!
 # Constant coefficients on projective families of curves

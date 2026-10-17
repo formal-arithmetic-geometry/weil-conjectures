@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
 
 /-!
@@ -24,6 +25,41 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
+
+/-- The case `d = 0` of `AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`:
+an affine `K`-scheme of finite type and dimension zero is finite over `K`, so its torsion
+cohomological dimension is at most that of `K`
+(`AlgebraicGeometry.Scheme.HasTorsionCohomologicalDimensionLE.of_isFinite`). -/
+lemma hasTorsionCohomologicalDimensionLE_of_isAffine_of_topologicalKrullDim_le_zero {K : Type u}
+    [Field K] {c : ℕ} (hK : (Spec (.of K)).HasTorsionCohomologicalDimensionLE c)
+    {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [IsAffine X]
+    (hX : topologicalKrullDim X ≤ 0) :
+    X.HasTorsionCohomologicalDimensionLE c := by
+  have : QuasiCompact a := (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).2 inferInstance
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian a
+  have : IsLocallyArtinian X := .of_topologicalKrullDim_le_zero hX
+  have : LocallyQuasiFinite a := locallyQuasiFinite_iff_isDiscrete_preimage_singleton.2
+    fun _ ↦ IsDiscrete.univ.mono (Set.subset_univ _)
+  have : IsLocallyArtinian (Spec (.of K)) := isLocallyArtinianScheme_Spec.mpr inferInstance
+  have : IsFinite a := IsFinite.of_locallyQuasiFinite a
+  exact hK.of_isFinite a
+
+/-- The case `d = 1` of `AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`:
+over an algebraic closure `K̄` of `K`, `X_K̄` is an affine curve, so `cd_tor(X_K̄) ≤ 1`
+(`AlgebraicGeometry.IsCurve.hasTorsionCohomologicalDimensionLE`), and
+`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure` concludes. -/
+lemma hasTorsionCohomologicalDimensionLE_of_isAffine_of_topologicalKrullDim_le_one {K : Type u}
+    [Field K] {c : ℕ} (hK : (Spec (.of K)).HasTorsionCohomologicalDimensionLE c)
+    {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [IsAffine X]
+    (hX : topologicalKrullDim X ≤ 1) :
+    X.HasTorsionCohomologicalDimensionLE (1 + c) := by
+  have : QuasiCompact a := (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).2 inferInstance
+  let g := Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K)))
+  have : IsCurve (pullback.snd a g) :=
+    { krullDim_le_one := (topologicalKrullDim_pullback_le_of_field a g).trans hX }
+  rw [add_comm]
+  exact hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure (AlgebraicClosure K) a hK
+    ((IsCurve.hasTorsionCohomologicalDimensionLE (pullback.snd a g)).2 inferInstance)
 
 /-- Blueprint `thm-sc-affine-torsion-cd`: The affine torsion cohomological dimension bound.
 

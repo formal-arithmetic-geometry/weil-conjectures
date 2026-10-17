@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveLine.Reduction
 
 /-!
 # Constructibility of projective direct images
@@ -20,7 +22,9 @@ higher direct images preserve constructibility.
 
 - `AlgebraicGeometry.Etale.hasConstructibleDirectImages_projectiveLine`
   (`thm-fin-projective-line-constructible`): the projective line `ℙ¹_S ⟶ S`, by resolving a
-  constructible sheaf by finite pushforwards of constant sheaves and using the case of curves;
+  constructible sheaf by finite pushforwards of constant sheaves and using the case of curves
+  (the reduction is
+  `AlgebraicGeometry.Etale.hasConstructibleDirectImages_projectiveLine_of_constantSheaf`);
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_projectiveLine`
   (`lem-finrepair-projective-from-line`): from the projective line to all projective morphisms,
   through `(ℙ¹_S)ⁿ ⟶ ℙⁿ_S` (finite and surjective) and composition;
@@ -66,7 +70,9 @@ direct image `Rᵠπ_* F` along `π : ℙ¹_S ⟶ S` is constructible. -/
 theorem hasConstructibleDirectImages_projectiveLine [HasInvertibleExponent Λ (Spec (.of k))]
     {S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] :
     HasConstructibleDirectImages Λ (ProjectiveLine S ↘ S) :=
-  sorry
+  hasConstructibleDirectImages_projectiveLine_of_constantSheaf aS
+    fun _ aT _ _ _ _ f _ _ i _ hi hf M _ q ↦
+      isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf Λ aT f i hi hf M q
 
 /-- **`𝒞` for finite morphisms.** A finite morphism `f : X ⟶ S` with Noetherian target
 satisfies `𝒞(f)`: `f_*` is exact and preserves constructible sheaves. -/

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
-public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionDirectImage
 
 /-!
 # Torsion cohomological dimension and the ground field
@@ -28,6 +28,8 @@ finite type over a field `K` with `cd_tor(K) ≤ c` and
 universe u
 
 open CategoryTheory Limits
+
+open scoped AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Scheme
 
@@ -73,16 +75,37 @@ theorem torsionCohomologicalDimension_spec_of_isSepClosed (K : Type u) [Field K]
 
 Let `X` be a scheme of finite type over a field `K` (structure morphism `a`), and let `K̄` be an
 algebraic closure of `K`. If `cd_tor(K) ≤ c` and `cd_tor(X_K̄) ≤ e`, then `cd_tor(X) ≤ c + e`.
-The proof uses the Leray spectral sequence of `a`: the geometric stalk of `Rᵠa_* F` is
-`Hᵠ(X_{K^sep}, F)`, which agrees with `Hᵠ(X_K̄, F)` since `X_K̄ ⟶ X_{K^sep}` is a universal
-homeomorphism. -/
+The proof uses the Leray spectral sequence of `a`
+(`AlgebraicGeometry.Etale.subsingleton_H_of_rightDerived_lowerStar`), after reducing to sheaves
+killed by an integer. The higher direct images `Rᵠa_* F` vanish for `q > e`
+(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isAlgClosure`): their stalks are the
+colimits of those of the higher direct images from the `X_L`, `L` running over the finite
+subextensions of `K^sep/K`, into which they inject, and the higher direct image from
+`X_{K^sep}` vanishes since `cd_tor(X_{K^sep}) = cd_tor(X_K̄) ≤ e`, `X_K̄ ⟶ X_{K^sep}` being a
+universal homeomorphism. -/
 theorem hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure {K : Type u} [Field K]
     (L : Type u) [Field L] [Algebra K L] [IsAlgClosure K L] {X : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] {c e : ℕ}
     (hK : (Spec (.of K)).HasTorsionCohomologicalDimensionLE c)
     (hX : HasTorsionCohomologicalDimensionLE
       (pullback a (Spec.map (CommRingCat.ofHom (algebraMap K L)))) e) :
-    X.HasTorsionCohomologicalDimensionLE (c + e) :=
-  sorry
+    X.HasTorsionCohomologicalDimensionLE (c + e) := fun F hF q hq ↦ by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian a
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace a
+  have : IsNoetherian X := ⟨⟩
+  refine Etale.subsingleton_H_of_isTorsion hF q fun G N hN hG ↦ ?_
+  let Φ := sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})
+  let M := Φ.objPreimage G
+  let eM : Φ.obj M ≅ G := Φ.objObjPreimageIso G
+  have hM : (Φ.obj M).IsTorsion :=
+    Etale.isTorsion_of_iso eM.symm (isTorsion_of_nsmul_id_eq_zero hN hG)
+  refine Etale.subsingleton_H_of_rightDerived_lowerStar a G (c := c) (e := e)
+    (fun q' hq' ↦ ?_) (fun p q' hp ↦ hK _ (isTorsion_of_nsmul_id_eq_zero hN ?_) p hp) q hq
+  · refine IsZero.of_iso ?_ (((((a)_*[AddCommGrpCat.{u + 1}]).rightDerived q').mapIso eM).symm ≪≫
+      (Etale.forget₂HigherDirectImageIso a M q').symm)
+    exact Functor.map_isZero _
+      (Etale.isZero_higherDirectImage_of_isAlgClosure L a hX M hM q' hq')
+  · rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hG, Functor.map_zero]
 
 end AlgebraicGeometry.Scheme
