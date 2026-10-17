@@ -81,14 +81,11 @@
    }
   },
   {
-   "text": "Sheaf amplitude and finite truncation induction. The chosen compactification and the Noetherian hypotheses verified in Step 1 allow [lem-amb-etale-compact-comparisons] to identify $Rp_{\\mathrm{et},*}j_!^{\\mathrm{et}}$ with the compactification-independent étale $Rf_!$ on bounded-below inputs. For a constructible étale $A$-sheaf $F$, [sbc-thm-finiteness-finite-type] applies directly to $f$, and gives $R^qf_!F=0$ for $q>2e$. Negative cohomology vanishes as well: $j_!F$ is a sheaf in degree zero by exactness from Step 3; the category of étale $A$-module sheaves has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Choose an injective resolution in degrees $\\geq0$ using [lem-weil-pbc-left-exact-injective-resolution-degree-zero]. It is K-injective by [prop-weil-pbc-kinjective-resolutions-exist], hence computes $Rp_*$ by the K-injective construction in [def-kun-projection-formula-map]; its termwise direct image has no negative terms. The comparison and exact pullback in Step 2 give the interval $[0,2e]$ for $Rf_{!,n}$ on every intrinsic constructible pro-étale sheaf. The ambient functor preserves shifts and triangles by [lem-compact-support-direct-image-triangulated]. Apply the successive truncation triangles [lem-weil-pbc-truncation-triangle] of $K$. Start from $\\tau_{\\leq a-1}K\\cong0$. For $r=a$, the triangle identifies $\\tau_{\\leq a}K$ with $\\mathcal H^a(K)[-a]$, so its image has interval $[a,a+2e]$, including when $e=0$. For $a<r\\leq b$, the other quotient is $\\mathcal H^r(K)[-r]$, whose image has interval $[r,r+2e]$. If the previous truncation's image has interval $[a,r-1+2e]$, the long exact sequence [lem-sf-derived-homology-long-exact] shows that the new image vanishes outside $[a,r+2e]$: at each degree outside it, both adjacent images have zero cohomology. Induction to $r=b$ gives $[a,b+2e]$. Since $\\tau_{\\leq b}K\\cong K$, take $a'=a$, $b'=b+2e$. The actual fibres used in the vanishing theorem are those of $f$; the interval is independent of the compactification.",
+   "text": "Sheaf amplitude. The chosen compactification and the Noetherian hypotheses verified in Step 1 allow [lem-amb-etale-compact-comparisons] to identify $Rp_{\\mathrm{et},*}j_!^{\\mathrm{et}}$ with the compactification-independent étale $Rf_!$ on bounded-below inputs. For a constructible étale $A$-sheaf $F$, [sbc-thm-finiteness-finite-type] applies directly to $f$, and gives $R^qf_!F=0$ for $q>2e$. Negative cohomology vanishes as well: $j_!F$ is a sheaf in degree zero by exactness from Step 3; the category of étale $A$-module sheaves has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Choose an injective resolution in degrees $\\geq0$ using [lem-weil-pbc-left-exact-injective-resolution-degree-zero]. It is K-injective by [prop-weil-pbc-kinjective-resolutions-exist], hence computes $Rp_*$ by the K-injective construction in [def-kun-projection-formula-map]; its termwise direct image has no negative terms. The comparison and exact pullback in Step 2 give the interval $[0,2e]$ for $Rf_{!,n}$ on every intrinsic constructible pro-étale sheaf.",
    "uses": [
     "lem-amb-etale-compact-comparisons",
     "sbc-thm-finiteness-finite-type",
     "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-compact-support-direct-image-triangulated",
-    "lem-weil-pbc-truncation-triangle",
-    "lem-sf-derived-homology-long-exact",
     "lem-weil-pbc-module-sheaves-enough-injectives",
     "prop-weil-pbc-kinjective-resolutions-exist",
     "def-kun-projection-formula-map"
@@ -96,7 +93,19 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
-    "place": "Steps 3–4, replacing the invalid transfer of the fibre bound to an arbitrary compactification"
+    "place": "Steps 3–4, sheaf bound for f itself"
+   }
+  },
+  {
+   "text": "Pass from sheaves to bounded complexes using [lem-pur-bounded-heart-amplitude]. Take $T=Rf_{!,n}^c$, which is triangulated by [lem-compact-support-direct-image-triangulated], and let $\\mathcal S$ be the class of intrinsic constructible pro-etale $A$-sheaves, including zero and all its isomorphic copies. Step 4 gives the lemma's hypothesis with $c=0,d=2e$. Each $H^r(K)$ is in this class and vanishes outside $[a,b]$ by the input condition. Thus $Rf_{!,n}^cK$ has interval $[a,b+2e]$. Its bounded constructibility was proved in Step 3. Take $a'=a$, $b'=b+2e$; these depend only on $a,b,e$, and Step 1 identifies all compactification candidates on this input.",
+   "uses": [
+    "lem-pur-bounded-heart-amplitude",
+    "lem-compact-support-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+    "place": "Steps 3–4, finite cohomology induction now factored through a generic amplitude lemma"
    }
   },
   {
@@ -112,25 +121,47 @@
    }
   },
   {
-   "text": "Derived coefficient comparison on the étale candidate. Fix $B=A_{E,m}$ and first work with $G$ on the étale site. For this bounded-domain assertion assume $G_B=G\\otimes_A^LB$ is bounded constructible; Step 7 will deduce this hypothesis from the one on $K_m$. Use ordinary derived change of rings [lem-pur-derived-change-of-rings]. Its underlying $A$-complex is tensor with $B$: apply the natural sheaf identification [lem-pur-change-of-rings-tensor-comparison] to a K-flat resolution and use exact restriction of scalars. For $J=j_!^{\\mathrm{et}}G$, properness of $p$ and torsion of $A$ allow [lem-kun-0f0g] with coefficient complex $B_Y[0]$, without any perfectness assumption on $B$. Combining it with [lem-pur-etale-open-derived-tensor] gives\n$$\n (Rp_*j_!G)\\otimes_A^L B\\xrightarrow{\\sim}Rp_*j_!(G\\otimes_A^L B)\n$$\nafter forgetting to $A$-coefficients. Restriction of scalars leaves finite stalks and locally constant strata unchanged, so $\\operatorname{Res}G_B$ is also bounded constructible over $A$. By Step 3 the right side of the displayed isomorphism is bounded. Thus its left side, the underlying $A$-complex of $(Rp_{*,A}J)\\otimes_A^LB$, is bounded too. The latter is therefore bounded also as a $B$-complex, since forgetting its scalar action does not change cohomology. The comparison with the right side computed over $B$ is the canonical restriction/direct-image isomorphism [lem-sbc-canonical-restrict-scalars-functor-comparisons], applied to the bounded complex $j_!^BG_B$. For the open factor over $B$, choose a K-flat resolution $P\\to G$. The sheaf tensor identity and direct-sum total convention in [lem-pur-etale-open-derived-tensor] give $(j_!P)\\otimes_A C=j_!(P\\otimes_A j^{-1}C)$ on total complexes. If $C$ is acyclic, then $j^{-1}C$ is acyclic by the exact inverse image of [def-kun-projection-formula-map], the inner tensor is acyclic by K-flatness, and the right side is acyclic by Step 3. Thus $j_!P$ is K-flat. The degreewise identification $(j_!P)\\otimes_A B\\cong j_!^B(P\\otimes_A B)$ is $B$-linear: on every section its action is multiplication on the $B$ factor. It therefore computes an isomorphism $(j_!G)\\otimes_A^LB\\cong j_!^BG_B$ in $D(\\overline X_{\\mathrm{et}},B)$, whose underlying $A$-map is precisely the cited open tensor comparison. To specify the proper map over $B$, transpose the scalar extension of the $A$-coefficient proper counit: $p_B^{-1}((Rp_{*,A}J)\\otimes_A^LB)\\cong(p_A^{-1}Rp_{*,A}J)\\otimes_A^LB\\to J\\otimes_A^LB$, then compose with the open tensor comparison. The adjunction and counit-tensor description are exactly [def-kun-projection-formula-map]; the pullback/scalar identifications follow by applying [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the coefficient ring maps and the scheme pullback, using its K-flat resolutions with flat terms. To verify the underlying map, apply both the unit and counit identities of [lem-sbc-restrict-scalars-derived-adjunction-identities] to $p$ with $A\\to B$. They apply because the source just shown bounded and $j_!^BG_B$ are bounded below. The adjunct after restriction is consequently the $A$-adjunct $(\\varepsilon_{p,J}\\otimes1_B)$ after the pullback/tensor identification. This is precisely the adjunct defining $\\mathrm{PF}_p(J,B)$ in [def-kun-projection-formula-map]. Uniqueness under the adjunction identifies the restricted map with that projection morphism followed by the open tensor comparison. Restriction of scalars detects isomorphisms, because it leaves cohomology sheaves unchanged. Hence this is an isomorphism over $B$, not merely an arbitrary $A$-linear isomorphism.",
+   "text": "Coefficient reduction and the underlying A-linear comparison. Fix $B=A_{E,m}$ and an etale input $G$ from Step 2 whose actual reduction $G_B=G\\otimes_A^LB$ is bounded constructible; Step 10 will verify this from the hypothesis on $K_m$. Write $J=j_!^AG$. Derived scalar extension is [lem-pur-derived-change-of-rings]; its underlying $A$-complex is tensor with $B$, by [lem-pur-change-of-rings-tensor-comparison] applied to a K-flat resolution. Properness of $p$ and torsion of $A$ allow [lem-kun-0f0g], with coefficient complex $B_Y[0]$, without a finite-Tor assumption on $B$. Follow its projection isomorphism with [lem-pur-etale-open-derived-tensor] to obtain\n$$(Rp_{*,A}j_!^AG)\\otimes_A^LB\\cong Rp_{*,A}j_!^A(\\operatorname{Res}G_B)$$\nas $A$-complexes. Restriction of scalars leaves finite stalks and locally constant strata unchanged, so $\\operatorname{Res}G_B$ is bounded constructible over $A$. Step 3 makes the displayed right side bounded, hence the left side bounded. Forgetting scalar action leaves cohomology unchanged, so $L_B(Rp_{*,A}J)$ is bounded as a $B$-complex as well.",
    "uses": [
     "lem-pur-derived-change-of-rings",
     "lem-pur-change-of-rings-tensor-comparison",
     "lem-kun-0f0g",
-    "lem-pur-etale-open-derived-tensor",
-    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "def-kun-projection-formula-map",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sbc-restrict-scalars-derived-adjunction-identities"
+    "lem-pur-etale-open-derived-tensor"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F0G (etale-cohomology.tex, lemma-projection-formula-proper-mod-n), 0GL1 (sites-cohomology.tex, lemma-j-shriek-and-tensor), and 0GL6 (more-etale.tex, remark-Rf-lower-shriek-change-of-rings)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+    "place": "Step 5; Stacks Tags 0F0G, 0GL1 and 0GL6, first the A-linear projection isomorphism"
    }
   },
   {
-   "text": "Transport reduction and its bound to the pro-étale site, keeping the bounded domain explicit. Comparison pullback is exact and commutes with cohomology by [lem-sf-comparison-pullback-exact]. Its canonical derived tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], computed on K-flat resolutions and with $\\nu^{-1}B_X=B_X$, identifies $\\nu_X^*(G\\otimes_A^LB)$ with $K_m=K\\otimes_A^LB$ as $B$-complexes. If $K_m$ is bounded constructible, then so is $G\\otimes_A^LB$: the sheaf unit of [prop-weil-pbc-site-comparison-finite-level] reflects vanishing; full faithfulness of the same sheaf pullback, combined with clause (i) of [lem-sf-proetale-constructible-origin], reflects constructibility degree by degree. Explicitly, descend a constructible pullback to a constructible étale sheaf, then full faithfulness lifts the isomorphism back to the original cohomology sheaf. Thus both inputs to [lem-sf-class-compact-support-comparison] at $A$ and $B$ are bounded below. Apply its canonical comparisons, the tensor comparison on $Y$, and Step 6 to obtain the stated coefficient isomorphism in $D^b_c(Y,B)$. Its sources and targets are bounded constructible because the target is so by Step 3 at $B$, and it is an isomorphism. Under restriction of scalars the $B$-candidate is identified with the $A$-candidate by [lem-sf-compact-support-restriction-of-scalars]; this also specifies which coefficient functors are being compared. Applying Step 4 at $B$ to the interval $[c,d]$ of $K_m$ gives $[c,d+2e]$. The same calculation works for every $m$ and every compactification. It does not assert that $K_m$ has the original interval $[a,b]$, or is bounded for every $K$.",
+   "text": "The open comparison has its B-action. Choose a K-flat resolution $P\\to G$ as in [lem-pur-derived-change-of-rings]. For every acyclic $A$-complex $C$, the sheaf tensor identity of [lem-pur-etale-open-derived-tensor] identifies the total complex $(j_!P)\\otimes_A C$ with $j_!(P\\otimes_A j^{-1}C)$. Exactness of inverse image [def-kun-projection-formula-map] makes $j^{-1}C$ acyclic, so K-flatness of $P$ [def-pc-kflat-complex] and exactness of $j_!$ [lem-weil-pbc-extension-by-zero-exact] make this total complex acyclic. Thus $j_!P$ is K-flat. The degreewise identity $(j_!P)\\otimes_A B\\cong j_!^B(P\\otimes_A B)$ is B-linear, with B acting on the same tensor factor on both sides. It computes the natural B-linear isomorphism $L_BJ\\cong j_!^BG_B$; after forgetting B it is the open tensor comparison used in Step 7.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-etale-open-derived-tensor",
+    "def-kun-projection-formula-map",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+    "place": "Step 5; Stacks 0GL1 and 0E8I, explicit K-flat test and degreewise B-action"
+   }
+  },
+  {
+   "text": "Identify the proper coefficient morphism, rather than selecting an A-linear isomorphism. Apply [lem-pur-etale-scalar-mate-projection] to $p$ and $J=j_!^AG$. Here $J$ is bounded by Step 3, its B-reduction is bounded by Step 8 and boundedness of $G_B$, and $L_B(Rp_{*,A}J)$ is bounded by Step 7. The lemma gives the canonical B-linear counit-transpose map to $Rp_{*,B}L_BJ$ and identifies its restriction with the projection-formula map of Step 7, under the canonical restriction/direct-image comparison. Compose with the B-linear open isomorphism of Step 8. The restricted composite is precisely the isomorphism displayed in Step 7. Restriction detects isomorphisms because its cohomology is the same underlying sheaf of abelian groups; a map is a quasi-isomorphism for one scalar action exactly when it is for the other. Hence this specified B-linear coefficient comparison is an isomorphism.",
+   "uses": [
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+    "place": "Step 5; Stacks 0GL6, the canonical proper scalar mate identified with the projection map"
+   }
+  },
+  {
+   "text": "Transport reduction and its bound to the pro-étale site, keeping the bounded domain explicit. Comparison pullback is exact and commutes with cohomology by [lem-sf-comparison-pullback-exact]. Its canonical derived tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], computed on K-flat resolutions and with $\\nu^{-1}B_X=B_X$, identifies $\\nu_X^*(G\\otimes_A^LB)$ with $K_m=K\\otimes_A^LB$ as $B$-complexes. If $K_m$ is bounded constructible, then so is $G\\otimes_A^LB$: the sheaf unit of [prop-weil-pbc-site-comparison-finite-level] reflects vanishing; full faithfulness of the same sheaf pullback, combined with clause (i) of [lem-sf-proetale-constructible-origin], reflects constructibility degree by degree. Explicitly, descend a constructible pullback to a constructible étale sheaf, then full faithfulness lifts the isomorphism back to the original cohomology sheaf. Thus both inputs to [lem-sf-class-compact-support-comparison] at $A$ and $B$ are bounded below. Apply its canonical comparisons, the tensor comparison on $Y$, and Steps 7–9 to obtain the stated coefficient isomorphism in $D^b_c(Y,B)$. Its sources and targets are bounded constructible because the target is so by Step 3 at $B$, and it is an isomorphism. Under restriction of scalars the $B$-candidate is identified with the $A$-candidate by [lem-sf-compact-support-restriction-of-scalars]; this also specifies which coefficient functors are being compared. Applying Step 5 at $B$ to the interval $[c,d]$ of $K_m$ gives $[c,d+2e]$. The same calculation works for every $m$ and every compactification. It does not assert that $K_m$ has the original interval $[a,b]$, or is bounded for every $K$.",
    "uses": [
     "lem-sf-comparison-pullback-exact",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
@@ -165,19 +196,18 @@
   "lem-amb-etale-compact-comparisons",
   "sbc-thm-finiteness-finite-type",
   "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-compact-support-direct-image-triangulated",
-  "lem-weil-pbc-truncation-triangle",
-  "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-module-sheaves-enough-injectives",
   "prop-weil-pbc-kinjective-resolutions-exist",
   "def-kun-projection-formula-map",
+  "lem-pur-bounded-heart-amplitude",
+  "lem-compact-support-direct-image-triangulated",
   "lem-pur-derived-change-of-rings",
   "lem-pur-change-of-rings-tensor-comparison",
   "lem-kun-0f0g",
   "lem-pur-etale-open-derived-tensor",
-  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-pc-kflat-complex",
+  "lem-pur-etale-scalar-mate-projection",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sbc-restrict-scalars-derived-adjunction-identities",
   "lem-sf-compact-support-restriction-of-scalars"
  ],
  "proof_origin": {
@@ -241,10 +271,45 @@
    "results": "{\"t\": \"2026-10-16T17:19:03Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct image with proper support preserves constructible torsion module complexes and cohomological bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.map_isStrictlySupported\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.IsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.IsLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isLE_Q_obj_iff\"], \"digest\": \"bc28acf2eabb1aa7\"}",
    "date": "2026-10-16",
    "verdict": "no match: general cohomological support and localization statements, no proper-support constructible module sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ss]hriek|[Ss]hriek.*constructible",
+   "results": "{\"t\": \"2026-10-17T07:04:49Z\", \"tool\": \"grep\", \"query\": \"constructible.*[Ss]hriek|[Ss]hriek.*constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give general support, exact-functor, scalar-restriction or adjunction notions, not this derived comparison/interval statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactSupport\"",
+   "results": "{\"t\": \"2026-10-17T07:04:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"compactSupport\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HasCompactSupport\", \"HasCompactSupport.addSubmonoid\", \"HasCompactSupport.of_compactSpace\", \"HasCompactSupport.isCompact\", \"HasCompactSupport.zero\", \"hasCompactSupport_def\", \"HasCompactSupport.isCompact_range\", \"HasCompactSupport.is_zero_at_infty\"], \"digest\": \"ccb24dc80fe276dc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give general support, exact-functor, scalar-restriction or adjunction notions, not this derived comparison/interval statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support direct image preserves bounded constructible finite torsion complexes and commutes with derived quotient coefficient reduction when the reduced input is bounded",
+   "results": "{\"t\": \"2026-10-17T07:05:00Z\", \"tool\": \"leanfinder\", \"query\": \"Compact support direct image preserves bounded constructible finite torsion complexes and commutes with derived quotient coefficient reduction when the reduced input is bounded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"HomologicalComplex.map_isStrictlySupported\", \"DerivedCategory.isGE_Q_obj_iff\", \"HomologicalComplex.isSupported_iff\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"HomologicalComplex.isSupported_iff_of_quasiIso\", \"HomologicalComplex.instIsSupportedOfIsStrictlySupported\", \"HomologicalComplex.IsSupported\"], \"digest\": \"83dc44f792e7b8d1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give general support, exact-functor, scalar-restriction or adjunction notions, not this derived comparison/interval statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite torsion compact support direct image preserves bounded constructible complexes and commutes with bounded derived reduction",
+   "results": "{\"t\": \"2026-10-17T07:05:26Z\", \"tool\": \"leansearch\", \"query\": \"Finite torsion compact support direct image preserves bounded constructible complexes and commutes with bounded derived reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.comp_isClosedEmbedding\", \"HasCompactSupport.comp_homeomorph\", \"DerivedCategory.TStructure.t\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"DerivedCategory.isGE_Q_obj_iff\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"HomologicalComplex.map_isStrictlySupported\", \"SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf\"], \"digest\": \"8ae4bbccbcb34abb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give general support, exact-functor, scalar-restriction or adjunction notions, not this derived comparison/interval statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type scheme morphism the compactly supported derived direct image has cohomological amplitude zero through twice the fibre dimension on constructible torsion sheaves",
+   "results": "{\"t\": \"2026-10-17T07:05:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a separated finite type scheme morphism the compactly supported derived direct image has cohomological amplitude zero through twice the fibre dimension on constructible torsion sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"DerivedCategory.isGE_Q_obj_iff\"], \"digest\": \"ebcbc6a4008e2467\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give general support, exact-functor, scalar-restriction or adjunction notions, not this derived comparison/interval statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -343,8 +408,8 @@
   "date": "2026-10-17",
   "item": "prop-finite-compact-support-constructibility",
   "worker": "stage1",
-  "summary": "Reworked the earlier attempt: connected intrinsic constructibility with etale origin, used theorem statements for exactness/triangulation, removed the unjustified dimension bound for the proper factor, supplied explicit truncation induction, and proved derived coefficient compatibility using proper projection plus open tensor. Corrected the ill-typed unconditional bounded-reduction wording, with an explicit Z/ell^2 counterexample in report.md; no hypothesis was added to constructibility or the amplitude theorem. No new nodes. Second reading adds finite-type/Noetherian checks, the chosen-candidate comparison for the amplitude theorem, the zero-dimensional truncation base case, and the coefficient unit/counit compatibility.",
-  "blueprint": "Realizes current main-20261015 proof Steps 1–5: compactification candidate, site transport, proper-factor bounded constructibility, the direct f-fibre amplitude estimate, exactness and derived coefficient reduction. Repairs the invalid boundary-dimension inference and the bounded-reduction typing.",
+  "summary": "Q58 repairs the explicit 2026-10-17 re-split instruction: extracts the general finite cohomology devissage and the normalized scalar-mate/projection identification into two strictly smaller statement-only nodes; separates the A-linear isomorphism, the elementary K-flat open calculation and the B-linear conclusion. All ten steps are shorter than 2000 characters. The statement, existing Lean record and other route steps are retained; internal references are renumbered.",
+  "blueprint": "Current main-20261015 Steps 1–5 retained. New bounded-heart-amplitude carries the finite truncation argument in Steps 3–4; new etale-scalar-mate-projection makes precise the coefficient compatibility of Step 5, without assuming finite Tor amplitude or asserting the item as a leaf.",
   "tool_uses": [
    {
     "node": "prop-compactification-coherence-detailed",
@@ -379,14 +444,6 @@
     "why": "Ambient triangulation is the exactness input for finite truncation induction and for restriction of the functor."
    },
    {
-    "node": "lem-weil-pbc-truncation-triangle",
-    "why": "Successive truncation triangles make the passage from sheaf bounds to complex bounds explicit."
-   },
-   {
-    "node": "lem-sf-derived-homology-long-exact",
-    "why": "The long exact sequence carries the vanishing bounds through that finite induction."
-   },
-   {
     "node": "lem-pur-derived-change-of-rings",
     "why": "Defines actual ordinary derived coefficient extension on the finite coefficient categories."
    },
@@ -401,10 +458,6 @@
    {
     "node": "lem-pur-etale-open-derived-tensor",
     "why": "General open tensor comparison supplies the open-factor coefficient comparison."
-   },
-   {
-    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "why": "Identifies derived direct image of a B-complex with its A-coefficient restriction on the bounded-below domain."
    },
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
@@ -425,10 +478,6 @@
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
     "why": "Generic finiteness tool checking Noetherian hypotheses for the chosen compactification comparison."
-   },
-   {
-    "node": "lem-sbc-restrict-scalars-derived-adjunction-identities",
-    "why": "Generic coefficient adjunction tool identifying the restricted B-linear map with the proper projection formula map, including unit and counit compatibility."
    }
   ]
  },
@@ -456,12 +505,12 @@
   "lem-sbc-restrict-scalars-derived-adjunction-identities"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q63-616476ca7",
-  "group": "Q63",
+  "reviewer": "NT-cc-Q58-d0e3d52ef",
+  "group": "Q58",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-616476ca7 (reviewer sub-agent of L); spot-checked: I read in full the item, all 7 steps and the statements of all 32 proof dependencies and 10 statement dependencies; there are no new nodes. Sources checked at the place: Stacks 0GL0 (more-etale theorem-constructible-shriek), 095U (etale-cohomology lemma-cohomological-dimension-proper), 0GL6 (more-etale remark-Rf-lower-shriek-change-of-rings), 0F0G (lemma-projection-formula-proper-mod-n), 09AK/09AL (proetale lemma-compare-constructible{,-derived}). Two statement corrections, both justified. (1) Unconditional coefficient reduction is ill-typed on D^b_c without finite Tor amplitude: for A=Z/l^2, B=F_l, K=F_l[0], Tor_i(B,B)=B for all i. The corrected clause asserts the isomorphism when K_m is in D^b_c, with amplitude [c,d+2e], and no citer uses more: lem-weil-structure-direct-images-constructible, prop-trf-compact-support-perfectness, thm-cbc-finite-extension, prop-cohomological-finiteness and lem-pod-compact-support-finite-coefficient-comparison need only constructibility and boundedness. (2) Refinement comparisons are identities only for identity refinements, as prop-compactification-coherence-detailed states. The blueprint's Step 3 inference, which gives the proper factor the fibre bound e (refuted by pt into pt ⊔ P^2), is avoided: the amplitude comes from sbc-thm-finiteness-finite-type for f itself, through lem-amb-etale-compact-comparisons. The truncation induction gives [a,b+2e], including the base case and e=0. Hypotheses checked: l^s annihilates A, X̄ is of finite type and Noetherian, G is bounded below for lem-sf-class-compact-support-comparison, 0F0G needs only proper and torsion, the D+ unit/counit identities, and reflection of constructibility for G_B through clause (i) plus full faithfulness. The global-datum parameter p≠l in lem-sf-proetale-constructible-origin is immaterial by 09AK. No SGA. No cycle (DFS). proof_deps equals the union of uses. I accept the 21 declared tool_uses: generic site-comparison, exactness, truncation, K-injective, projection-formula and change-of-rings black boxes that carry out the blueprint's Steps 1-5. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-d0e3d52ef (reviewer sub-agent of L); spot-checked: I read the item, all ten steps and both new nodes in full, together with the statements of all 31 proof dependencies, blueprint main-20261015 Steps 1-5, and Stacks 0GL0, 0GL6, 0G2A(3), 0F0G (proper + torsion only, unbounded), 095U and 08J5 at their labels. No SGA source is used. lem-pur-bounded-heart-amplitude is true by finite induction over the 08J5 triangles; I checked a=b, c=d, K=0 and S={0}. It is no duplicate: lem-sfb-left-complete-heart-upper-bound needs exact products and left completeness and gives only an upper bound. lem-pur-etale-scalar-mate-projection is true by the unit identity of lem-sbc-restrict-scalars-derived-adjunction-identities, naturality of V and U L = -(x)B. Its three D+ hypotheses are exactly where the cited D+ comparisons are used. It asserts no invertibility, so it does not restate an item clause, and no existing node states it. Step checks: the amplitude bound comes from sbc-thm-finiteness-finite-type for f itself, not for p (the blueprint's Step 3 error, refuted by pt into pt+P^2, is avoided). The lower bound comes from a degree>=0 injective resolution, which is K-injective. Step 5 gives [a,b+2e], independent of the compactification. Step 7 uses 0F0G with B_Y[0] and no finite-Tor hypothesis. The Step 8 K-flat calculation really is elementary. Steps 9-10 check every D+ hypothesis and reflect constructibility of G_B through clause (i) plus full faithfulness, without circularity. Mechanical checks: proof_deps equals the union of uses, all ids exist and are unmerged, no cycle, every step is under 2000 characters, and the statement and Lean record are unchanged. I accept the 16 declared tool_uses. Remarks: the item's inherited tool_uses field still lists four nodes the new proof no longer uses; it is maintainer-owned and should be recomputed at the merge. The DAG leaves 'canonical coefficient comparison' undefined; Steps 9-10 specify it as the p-counit transpose plus the open isomorphism. The stage-2 Lean map is the L-Res transpose, so the agreement of the two forms is a formal identity for the stage-2/3 owner. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",

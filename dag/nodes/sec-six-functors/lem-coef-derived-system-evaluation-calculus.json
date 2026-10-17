@@ -237,16 +237,46 @@
    }
   },
   {
-   "text": "Write $R=\\mathcal R_W$ and $L=\\mathcal L_W$ in this step only. All constructions above are derived functors or the internal-Hom bifunctor on one small ringed site. For ambient $a:P'\\to P$ and system $v:N\\to N'$, the naturality equation for the map of step 13 is $b_{P',N'}\\,R H_A(a,Lv)=H_B(Ra,v)\\,b_{P,N}$. Uncurrying both sides gives evaluation with the first input precomposed by $Ra$, followed respectively by $e_{N'}RLv$ and $v e_N$; these agree by counit naturality. Applying the reduction/limit adjunction, then the natural comparison of step 12, proves naturality of $\\delta$ and $\\gamma$ for input derived morphisms.\n\nFor composition with tensor parameters, take $S,T,P\\in D(A)$, a map $f:T\\otimes_A^LP\\to LN$, and a system map $g:RS\\otimes_B^LN\\to N'$. Its first transpose is $f^\\sharp=e_N Rf:RT\\otimes_B^LRP\\to N$. Define $\\lambda_{S,N}:S\\otimes_A^LLN\\to L(RS\\otimes_B^LN)$ to be adjoint to $1_{RS}\\otimes e_N$, using the monoidal comparison. The adjunct of $Lg\\,\\lambda_{S,N}(1_S\\otimes f)$ is $g(1_{RS}\\otimes e_N)(1_{RS}\\otimes Rf)=g(1_{RS}\\otimes f^\\sharp)$, by the inverse Hom-bijection formulas of step 4. To obtain the mapping-object composition square, take $T=H_A(P,LN)$ with $f$ its evaluation, put $K=H_B(N,N')$, and take $S=LK$ and $g=\\mathrm{ev}_{N,N'}(e_K\\otimes1_N)$. The right-hand formula is then the composition of the system evaluations, with the counit on its mapping-object parameter. The left-hand formula is the corresponding evaluation on $LN$, followed by $Lg\\,\\lambda_{LK,N}$. This specifies the composition action on both sides of the enriched comparison. Applying derived global sections and the natural total-limit comparison gives its mapping-complex version. Inserting an identity gives the unit equation. Explicitly $(u_P)^\\sharp=e_{RP}Ru_P=1_{RP}$ and the adjunct of $e_N$ is $Le_N u_{LN}=1_{LN}$, so the same equations include both triangle identities and compatibility with the specified unit and counit. Currying and uncurrying are inverse by step 6; hence these evaluation equations also give compatibility with transposition.\n\nAll equations are in the derived tensor-Hom adjunctions themselves. On Hom-complex representatives, [def-pur-hom-complex] gives the differential, and composition of homogeneous $f,g$ satisfies $d(fg)=d(f)g+(-1)^{|f|}f\\,d(g)$ by expanding $d(f)=df-(-1)^{|f|}fd$. Thus composition and evaluation are chain maps for the total tensor differential fixed in the statement, and shifting gives the usual Hom/tensor signs. Together with step 5 this proves the remaining coherence and isomorphism-detection clauses, without asserting reconstruction or invertibility of the unit or arbitrary-input $\\beta$.",
+   "text": "Apply [lem-coef-closed-adjunction-naturality] with $\\mathcal C=D(A)$, $\\mathcal D=D(\\mathscr S_W)$, $F=\\mathcal R_W$ and $G=\\mathcal L_W$. Its hypotheses hold: the tensor bifunctors are the derived tensors $\\otimes_A^L$ and $\\otimes_B^L$; steps 2-4 give the adjunction with the normalized Hom bijection; step 5 gives the natural isomorphism $\\mu$, the inverse of the tensor-pullback comparison; step 6 gives $H_A$, $H_B$ with tensor-Hom bijections natural in all three variables. No associativity or unit coherence of $\\mu$ is needed. Its $b$ and $\\delta$ are exactly those defined in step 13. Hence, for $a:P'\\to P$ and $v:N\\to N'$, $b_{P',N'}\\mathcal R_WH_A(a,\\mathcal L_Wv)=H_B(\\mathcal R_Wa,v)b_{P,N}$ and $\\delta_{P',N'}H_A(a,\\mathcal L_Wv)=\\mathcal L_WH_B(\\mathcal R_Wa,v)\\delta_{P,N}$. Apply derived global sections and the natural total-direct-image comparison of step 12: this proves naturality of the specified $\\gamma$ for derived input morphisms, including the actual projections already checked in step 14.",
    "uses": [
-    "def-pur-hom-complex",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "lem-coef-closed-adjunction-naturality"
    ],
    "elementary": false,
    "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general); agent-formulated closed monoidal consequence, preserving the original step-15 route."
+   }
+  },
+  {
+   "text": "Write $R=\\mathcal R_W$, $L=\\mathcal L_W$. Apply [lem-coef-monoidal-adjunction-parameter-composition] to the adjunction of steps 2-4 and the natural tensor-comparison isomorphism $\\mu$ of step 5 (only its naturality and invertibility are used). Put $K=H_B(N,N')$, $T=H_A(P,LN)$, $S=LK$, $f=\\mathrm{ev}_{P,LN}$ and $g=\\mathrm{ev}_{N,N'}(e_K\\otimes1_N)$. Step 13 defines $b_{P,N}$ as the transpose of $f^\\sharp=e_N Rf$, with the tensor comparison understood. The cited equation identifies the adjunct of $Lg\\,\\lambda_{LK,N}(1_{LK}\\otimes f)$ with $g(1_{RLK}\\otimes f^\\sharp)$. The latter is successive system evaluation, with the counit on its mapping-object parameter; the former is the corresponding evaluation after passing to $L$. These are precisely the two composition actions on the mapping objects in step 13. Taking their closed transposes and then derived global sections, with step 12's natural limit comparison, gives the mapping-complex composition compatibility. No invertibility of the projection map $\\lambda$ is needed.",
+   "uses": [
+    "lem-coef-monoidal-adjunction-parameter-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general); agent-formulated closed monoidal consequence, preserving the original step-15 route."
+   }
+  },
+  {
+   "text": "The remaining unit/counit equations use the inverse adjunction bijections already established in step 4: $(u_P)^\\sharp=e_{RP}Ru_P=1_{RP}$, and the adjunct of $e_N$ is $Le_Nu_{LN}=1_{LN}$. Inserting these identities into the composition equation of step 16 gives its identity specializations. The closed transposition maps of step 6 are inverse bijections, so taking their inverse recovers the same evaluation equations. This verifies compatibility with unit, counit and transposition as actual system maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general); agent-formulated closed monoidal consequence, preserving the original step-15 route."
+   }
+  },
+  {
+   "text": "For completeness the signs require only the definitions [def-pur-hom-complex, def-pc-tensor-complex-sheaves]. For homogeneous $f:L\\to M$ of degree $r$ and $g:K\\to L$ of degree $s$,\n$$d(f)g+(-1)^rf\\,d(g)=(d_Mf-(-1)^rf d_L)g+(-1)^rf(d_Lg-(-1)^sgd_K)=d_Mfg-(-1)^{r+s}fgd_K=d(fg).$$\nLikewise $d_M(f(x))=d(f)(x)+(-1)^rf(d_Lx)$, the total-tensor chain identity for evaluation. These local formulas commute with restriction and hence hold for sheaf maps and their total tensor summands. Thus the evaluation and composition representatives used above are chain maps with the stated signs. Together with step 5 and the preceding steps, this completes all clauses without claiming reconstruction or invertibility of the unit or arbitrary-input $\\beta$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent coherence check using evaluation, the adjunction identities and the Hom-complex differential; Tags 08J9 and 0A98"
+    "place": "Tags 0A8X (section-hom-complexes), 0A91 (lemma-composition): explicit elementary differential calculation."
    }
   }
  ],
@@ -276,7 +306,10 @@
   "lem-pur-left-derived-from-kflat-class",
   "def-coef-normalized-dvr-tower",
   "lem-galois-yoneda-hom-bijection",
-  "lem-weil-tower-evaluation-kinjective"
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-coef-closed-adjunction-naturality",
+  "lem-coef-monoidal-adjunction-parameter-composition",
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
@@ -440,7 +473,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-coef-integral-exceptional-adjoint",
   "by": "worker",
@@ -449,11 +482,11 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-coef-derived-system-evaluation-calculus",
   "worker": "stage1",
-  "summary": "Retained the statement and proved it on the explicit small ringed sequence site. Derived reduction/limit adjunction comes from general ringed-topos pullback, direct-image composition and normalized adjunction maps. The fiberwise Hom assertion is proved using derived induction from one level and its finite-prefix projection formula, both calculated inside the item. Constructed beta and gamma by tensor-Hom transposition as actual system maps and checked total-limit projections, units/counits and composition. No new nodes: previously drafted clause-only helpers were removed.",
-  "blueprint": "Parent prop-coef-integral-exceptional-adjoint, proof paragraph 1 reconstruction unit and proof paragraph 2 first/last mapping-complex comparisons. Steps 1-5 supply the derived reduction/total-limit unit, counit and projections; steps 6-11 construct coherent evaluation and beta; steps 12-15 supply the enriched mapping-complex gamma and its actual projections.",
+  "summary": "Retained the statement and proved it on the explicit small ringed sequence site. Derived reduction/limit adjunction comes from general ringed-topos pullback, direct-image composition and normalized adjunction maps. The fiberwise Hom assertion is proved using derived induction from one level and its finite-prefix projection formula, both calculated inside the item. Constructed beta and gamma by tensor-Hom transposition as actual system maps and checked total-limit projections, units/counits and composition. No new nodes: previously drafted clause-only helpers were removed. Dedicated Q105 repair of the 2026-10-17 return: preserve statement, Lean record and proof steps 1-14 verbatim; extract the two non-elementary categorical arguments of former step 15 as general statement-only nodes, cite them in short steps 15-16, and write the unit and differential identities as elementary steps 17-18. All proof steps are now below 2000 characters.",
+  "blueprint": "Parent prop-coef-integral-exceptional-adjoint, proof paragraph 1 reconstruction unit and proof paragraph 2 first/last mapping-complex comparisons. Steps 1-5 supply the derived reduction/total-limit unit, counit and projections; steps 6-11 construct coherent evaluation and beta; steps 12-15 supply the enriched mapping-complex gamma and its actual projections. Steps 15-18 replace only the former final coherence step, along the same parent proof paragraph 2.",
   "tool_uses": [
    {
     "node": "prop-pur-kinjective-resolutions-exist",
@@ -565,12 +598,12 @@
   "lem-weil-tower-evaluation-kinjective"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NQ-72a8615e0",
-  "group": "NQ",
+  "reviewer": "NT-cc-Q105-4c8ee7a26",
+  "group": "Q105",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-72a8615e0 (reviewer sub-agent of L); spot-checked: Read the complete item, all cited node statements, sources, report, and unit/chapter route. Verified all 15 steps, finite-prefix adjunction, coherent Hom construction, gamma projections, edge cases, and exact master target morphisms/coefficient categories. No gaps, duplicates, missing dependencies, or cycles found. Accepted all 21 declared tool uses. Detailed checks are in review.md; no fixes required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-4c8ee7a26 (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics, both new nodes, every cited statement, Stacks 0FND (derived.tex:9517) and the main-20261015 proof of prop-coef-integral-exceptional-adjoint (paragraph 2). Steps 1-14 match their cited statements; this delivery did not change them, and the 21 declared tool uses are generic infrastructure, which I accept. I checked both new lemmas by hand. lem-coef-closed-adjunction-naturality holds: uncurrying both sides gives v e_N F(ev) mu (1 tensor Fa), and the delta equation follows from naturality of the unit. lem-coef-monoidal-adjunction-parameter-composition holds: naturality of mu cancels the tensorators and leaves g(1 tensor f#). I tested both with identity functors and unit parameters. Neither is a duplicate; I read the closest candidates in full (lem-pod-closed-uncurry-laws, lem-sfb-adjunction-oplax-mate, lem-coef-cartesian-section-adjoint-mates, def-coef-ringed-tensor-hom-model). Neither restates a clause of the item. Steps 15-16 apply them correctly, and I verified the signs in steps 17-18. Repairs (E1): both new nodes required monoidal categories and a strong monoidal F with pentagon and unit coherence, but the cited nodes give only the derived tensor bifunctors and a natural isomorphism mu (lem-weil-pbc-ringed-topoi-derived-tensor-pullback). Neither proof uses coherence, so I restated both nodes for categories with tensor bifunctors and a natural isomorphism mu; this is a strict generalization, and stmt_deps are now def-nagata-category and lem-weil-pbc-adjunction-of-natural-bijection. In node 1 I replaced 'evaluation natural also in X', which is ill-typed, with a tensor-Hom bijection natural in T, X and Y, and ev defined as its inverse at the identity. In the item, steps 15-16 now say which steps supply each hypothesis; steps 1-14, the statement and the Lean record are unchanged. I also added the missing lean_audit field to both new nodes. Corrected files are in fixes/dag/nodes/sec-six-functors/ and the checks are in review.md.; 3 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

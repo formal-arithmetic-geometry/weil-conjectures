@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-etale-open-cover-shriek-ses",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Since the finite ring $\\Lambda=P_n$ is annihilated by an integer, $F_{\\Et}$ is a torsion abelian sheaf, so the classical input of the source note (Th. 1.1 of SGA 4 1/2 and [Tag 095U](https://stacks.math.columbia.edu/tag/095U)) applies to $f_{\\Et}$: the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$.; classical constructibility input expanded using proof of 0GL0, first paragraph: induction principle and relative Mayer Vietoris reduce to affine X; relative Mayer Vietoris (Tag 0GKN) through its cited Tag 0GKK: the open-cover short exact sequence of extensions by zero",
+   "via": [
+    "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open-cover short exact sequence of etale extensions by zero",
+ "statement": "Let $\\Lambda$ be a commutative ring and $X$ a scheme [def-pc-scheme] with small etale site $X_{\\Et}$ [def-weil-pbc-etale-site]. Let $U,V\\subseteq X$ be open subschemes with $X=U\\cup V$, put $W=U\\cap V$, and for $T=U,V,W$ let $k_T:T\\hookrightarrow X$ be the inclusion, an open immersion [def-weil-open-immersion]. For a sheaf $F$ of $\\Lambda$-modules on $X_{\\Et}$ in the sense of [def-weil-pbc-extension-by-zero] write $F|_T$ for its restriction, the sheaf of $\\Lambda$-modules $(E\\to T)\\mapsto F(E\\to T\\xrightarrow{k_T}X)$ on $T_{\\Et}$ (the inverse image $k_T^{-1}F$ [def-weil-pbc-inverse-image], up to the canonical identification for an open immersion), and $k_{T!}$ for extension by zero [def-weil-pbc-extension-by-zero]. For $T=U,V$ let $\\iota_T:k_{W!}(F|_W)\\to k_{T!}(F|_T)$ be the morphism induced, by the universal property of sheafification [def-weil-pbc-sheafification], by the presheaf map that is the identity of $F(E)$ on every etale $E\\to X$ factoring through $W$ (such an $E$ factors through $T$) and zero on the others, and let $\\varepsilon_T:k_{T!}(F|_T)\\to F$ be the morphism induced in the same way by the identity of $F(E)$ on every etale $E\\to X$ factoring through $T$ (the counit of extension by zero). Then the sequence of sheaves of $\\Lambda$-modules\n$$0\\to k_{W!}(F|_W)\\xrightarrow{(\\iota_U,-\\iota_V)}k_{U!}(F|_U)\\oplus k_{V!}(F|_V)\\xrightarrow{\\varepsilon_U+\\varepsilon_V}F\\to0$$\nis exact, and its maps are natural in $F$.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, proof: the short exact sequence 'can be seen by looking at stalks'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-open-immersion",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendByZero|ExtendByZero|lowerShriek in /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/LinearAlgebra/Pi.lean (Function.ExtendByZero.linearMap, functions on index sets), LinearAlgebra/InvariantBasisNumber.lean, LinearAlgebra/Dimension/StrongRankCondition.lean, Algebra/Group/Pi/Lemmas.lean; no extension by zero of sheaves",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris (file names) in the same Mathlib tree",
+   "results": "Mathlib/Topology/Sheaves/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean (GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, lines 231-266: Z[X1] -> Z[X2] (+) Z[X3] -> Z[X4] short exact for free abelian sheaves), Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean (long exact cohomology sequence); read: only the case F = Z of free abelian sheaves, the passage to an arbitrary module sheaf F (j_!(F|_U) as Z[U] tensor F) is itself a theorem",
+   "date": "2026-10-17",
+   "verdict": "no match (candidate: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:265, case F = Z only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
+  "date": "2026-10-17",
+  "group": "NJ"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

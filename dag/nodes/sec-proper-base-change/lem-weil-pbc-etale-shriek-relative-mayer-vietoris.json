@@ -43,19 +43,15 @@
    }
   },
   {
-   "text": "Use [lem-weil-pbc-etale-constant-ring-module-equivalence] to identify sheaves valued in $\\Lambda$-modules, used in the extension-by-zero definition, with sheaves of modules over the constant ring sheaf $\\Lambda_X$, used in [def-weil-pbc-derived-categories]. This equivalence keeps the underlying abelian presheaves and their maps unchanged and is exact. Restriction and the sheafification defining extension by zero agree under it: restrict the scalar action to constant sections, or extend it uniquely along the constant-ring sheafification map. Thus the following maps and exact sequences are in the coefficient category of the statement. For a sheaf $F$ of $\\Lambda$-modules on $X_{\\Et}$, form $A(F)=k_{W!}(F|_W)$ and $B(F)=k_{U!}(F|_U)\\oplus k_{V!}(F|_V)$. For $T=U,V$, on any etale object $E\\to W$ the extension-by-zero presheaf for $k_T$ has value $F(E)$, since $E\\to X$ factors through $T$. Its sheafification restricted to $W$ is therefore $F|_W$: covers of an object over $W$ remain over $W$, and $F|_W$ is already a sheaf. Thus $k_W^{-1}k_{T!}(F|_T)=F|_W$. Under [lem-weil-pbc-extension-by-zero-adjunction], the identity of $F|_W$ now defines $A(F)\\to k_{T!}(F|_T)$. Take the negative of this map for $T=V$; define $B(F)\\to F$ by the two counits. Their composite is zero, since the two composites $A(F)\\to F$ both correspond to $\\mathrm{id}_{F|_W}$. The stalk formula [lem-weil-pbc-extension-by-zero-stalks], including its explicit map on germs, and the explicit counits in the adjunction identify the stalk sequence at a point in $W$ with $0\\to M\\xrightarrow{(1,-1)}M\\oplus M\\xrightarrow{(1,1)}M\\to0$, where $M=F_{\\bar x}$. At a point of $U\\setminus V$ or $V\\setminus U$ it is $0\\to0\\to M\\xrightarrow{1}M\\to0$. These exhaust the points since $U\\cup V=X$. All three sequences are exact. To justify detection, forget scalars using [lem-weil-pbc-module-sheaves-colimits-forgetful]; exact stalks [prop-weil-pbc-geometric-stalks-exact] make the kernel, middle homology and cokernel have zero stalks. Apply [lemma-weil-pbc-geometric-stalk-conservative] to each of their maps to zero. Faithfulness of forgetting scalars implies that a module with zero underlying sheaf is zero. Thus $0\\to A(F)\\to B(F)\\to F\\to0$ is short exact in module sheaves.",
+   "text": "Use [lem-weil-pbc-etale-constant-ring-module-equivalence] to identify sheaves valued in $\\Lambda$-modules, used in the extension-by-zero definition, with sheaves of modules over the constant ring sheaf $\\Lambda_X$, used in [def-weil-pbc-derived-categories]. This equivalence keeps the underlying abelian presheaves and their maps unchanged and is exact. Restriction and the sheafification defining extension by zero agree under it: restrict the scalar action to constant sections, or extend it uniquely along the constant-ring sheafification map. Thus the following maps and exact sequences are in the coefficient category of the statement. For a sheaf $F$ of $\\Lambda$-modules on $X_{\\Et}$ put $A(F)=k_{W!}(F|_W)$ and $B(F)=k_{U!}(F|_U)\\oplus k_{V!}(F|_V)$. By [lem-weil-pbc-etale-open-cover-shriek-ses], applied to the open cover $X=U\\cup V$, the maps $(\\iota_U,-\\iota_V):A(F)\\to B(F)$ and $\\varepsilon_U+\\varepsilon_V:B(F)\\to F$ (the nested-open maps and the counits of extension by zero) give a short exact sequence $0\\to A(F)\\to B(F)\\to F\\to0$ of module sheaves, natural in $F$.",
    "uses": [
     "lem-weil-pbc-etale-constant-ring-module-equivalence",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-stalks",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-weil-pbc-etale-open-cover-shriek-ses"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, stalk calculation in its proof"
+    "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, short exact sequence in its proof"
    }
   },
   {
@@ -110,11 +106,7 @@
   "def-weil-open-immersion",
   "def-weil-pbc-scheme-conventions",
   "lem-weil-pbc-etale-constant-ring-module-equivalence",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-etale-open-cover-shriek-ses",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-module-sheaves-grothendieck-abelian",
@@ -318,7 +310,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-compactification-constructibility",
   "by": "worker",
@@ -330,13 +322,9 @@
   "date": "2026-10-14",
   "item": "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
   "worker": "stage1",
-  "summary": "Expanded the source Mayer Vietoris argument using signed stalk maps, a degreewise short exact sequence, triangulated compact-support pushforward, and the existing qcqs composition theorem. No new nodes or altered statements. Coefficients remain finite-ring modules on small etale sites. Maintainer repair: explicitly cite the existing constant-ring module equivalence at the coefficient-category handoff before the stalk sequence; the statement is unchanged.",
+  "summary": "Expanded the source Mayer Vietoris argument using signed stalk maps, a degreewise short exact sequence, triangulated compact-support pushforward, and the existing qcqs composition theorem. No new nodes or altered statements. Coefficients remain finite-ring modules on small etale sites. Maintainer repair: explicitly cite the existing constant-ring module equivalence at the coefficient-category handoff before the stalk sequence; the statement is unchanged. Maintainer reader repair (2026-10-17): the stalkwise proof of the open-cover short exact sequence, which the source's proof of 0GKN takes from the separate Lemma 0GKK, is now the statement-only node lem-weil-pbc-etale-open-cover-shriek-ses cited by step 2.",
   "blueprint": "Nearest ancestor thm-weil-pbc-direct-image-finiteness-proper, classical constructibility input, expanded by the first paragraph of Tag 0GL0: relative Mayer Vietoris reduction to affine source. Steps 1-3 realize the open-cover triangle and steps 4-5 its relative compact-support version.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves used in the explicit stalk/derived-category construction of the relative Mayer Vietoris triangle; it supplies infrastructure, not a replacement for the unit route."
-   },
    {
     "node": "prop-weil-pbc-inverse-image-modules-exact",
     "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used in the explicit stalk/derived-category construction of the relative Mayer Vietoris triangle; it supplies infrastructure, not a replacement for the unit route."
@@ -358,12 +346,12 @@
   "lem-weil-pbc-module-direct-image-left-exact"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NP-acb876de5",
-  "group": "NP",
+  "reviewer": "NT-cc-NJ-77e8bc9f5",
+  "group": "NJ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-acb876de5 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. All five steps and edge cases check out against Stacks 0GKK, 0GKN, and 0F7J. Added the existing constant-ring module equivalence citation to make the coefficient-category identification explicit; statement unchanged. Corrected JSON and detailed review.md written. No new nodes or target-category comparisons assumed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-77e8bc9f5 (reviewer sub-agent of L); spot-checked: I read the item, the statement of every cited node and the sources: Stacks 0GKN (more-etale.tex l.3645-3667), 0GKK (l.2403-2425) and 0F7J (located at l.3159, statement taken via the composition node). The statement is the finite-ring D^+ specialization of 0GKN. The coefficient hand-off to Mod(Lambda_T) is explicit, and no target is involved. Steps 1 and 3-5 are correct; I checked the qcqs and finite-type permanence, the K-injective version of Rp_* agreeing on D^+, and the triangle-isomorphism formulas. I tested the edge cases V empty, U=V=X, Lambda=0 and X empty. The long-step check failed on step 2 (2249 characters): it inlined the stalkwise proof of the open-cover short exact sequence, which the source's proof of 0GKN takes from the separate Lemma 0GKK (D3). No on-route node states it: the ringed-space nodes lem-sc-derived-open-mayer-vietoris-ses and lem-sc-open-cover-mate-module-short-exact are Zariski only, and lem-sp-ringed-topos-binary-descent(2) is in sec-smooth-purity, which this chapter does not use. FIX: I added the statement-only unsplit node lem-weil-pbc-etale-open-cover-shriek-ses (source 0GKK, natural in F, created.item set to this item, blueprint.from/via filled, same_as=[]). Its Mathlib search is two greps; the only candidate, MayerVietorisSquare.shortComplex_shortExact, covers F=Z only. LeanSearch and Loogle were not available to me, so they still need to be run. Step 2 is now the coefficient hand-off plus a citation of the new node (1083 characters). proof_deps is recomputed, and the uncited lem-weil-pbc-module-sheaves-colimits-forgetful is dropped from tool_uses. I accepted the three remaining tool uses; they are already on the unit route. The report lists a citations.json that is not in the branch (harmless).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean_audit": {
   "master": {

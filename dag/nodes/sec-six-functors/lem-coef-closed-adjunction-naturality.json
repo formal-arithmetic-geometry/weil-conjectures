@@ -1,0 +1,174 @@
+{
+ "id": "lem-coef-closed-adjunction-naturality",
+ "kind": "statement",
+ "title": "Naturality of the evaluation-defined closed adjunction comparison",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories [def-nagata-category], each equipped with a tensor bifunctor $\\otimes$ (it assigns an object $X\\otimes Y$ to each pair of objects and a morphism $f\\otimes g$ to each pair of morphisms, preserving identities and componentwise composition); no associator, unitor, symmetry or coherence condition is assumed. In each of them let $H(X,Y)$ be a bifunctor, contravariant in $X$ and covariant in $Y$, with bijections $\\Theta_{T,X,Y}:\\operatorname{Hom}(T\\otimes X,Y)\\xrightarrow{\\sim}\\operatorname{Hom}(T,H(X,Y))$ natural in all three variables: $\\Theta(g\\circ k\\circ(t\\otimes a))=H(a,g)\\circ\\Theta(k)\\circ t$ for $k:T\\otimes X\\to Y$, $t:T'\\to T$, $a:X'\\to X$ and $g:Y\\to Y'$. Write $\\mathrm{ev}_{X,Y}=\\Theta^{-1}(1_{H(X,Y)}):H(X,Y)\\otimes X\\to Y$ for evaluation; call $\\Theta(k)$ the tensor-Hom transpose of $k$. Let $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$ be functors, let $\\mu_{X,Y}:FX\\otimes FY\\xrightarrow{\\sim}F(X\\otimes Y)$ be isomorphisms natural in $X,Y$, that is $F(f\\otimes g)\\circ\\mu_{X,Y}=\\mu_{X',Y'}\\circ(Ff\\otimes Fg)$, and let $F\\dashv G$ be an adjunction with unit $u$ and counit $e$ and the natural Hom-bijection convention of [lem-weil-pbc-adjunction-of-natural-bijection]. For $P\\in\\mathcal C$ and $N\\in\\mathcal D$, define $b_{P,N}:F H_{\\mathcal C}(P,GN)\\to H_{\\mathcal D}(FP,N)$ to be the tensor-Hom transpose of\\n$$F H_{\\mathcal C}(P,GN)\\otimes FP\\xrightarrow{\\mu}F(H_{\\mathcal C}(P,GN)\\otimes P)\\xrightarrow{F(\\mathrm{ev})}FGN\\xrightarrow{e_N}N.$$\\nPut $\\delta_{P,N}=G(b_{P,N})\\circ u_{H_{\\mathcal C}(P,GN)}$. For every $a:P'\\to P$ in $\\mathcal C$ and $v:N\\to N'$ in $\\mathcal D$, these specified maps satisfy\\n$$b_{P',N'}\\circ F H_{\\mathcal C}(a,Gv)=H_{\\mathcal D}(Fa,v)\\circ b_{P,N},$$\\n$$\\delta_{P',N'}\\circ H_{\\mathcal C}(a,Gv)=G H_{\\mathcal D}(Fa,v)\\circ\\delta_{P,N}.$$\\nThus $b$ and its adjoint $\\delta$ are natural in both variables for these evaluation-defined choices; no invertibility assertion is part of this statement. In particular the statement applies when $\\mathcal C,\\mathcal D$ are monoidal and $(F,\\mu)$ is strong monoidal, but only the tensor bifunctors and the naturality of $\\mu$ enter.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), naturality and canonical adjunction formulas; the closed monoidal consequence stated here is agent-formulated, not the literal statement of that tag."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In closed monoidal categories a strong monoidal left adjoint induces a natural isomorphism from internal Hom into the right adjoint to the right adjoint of internal Hom",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.adj",
+     "CategoryTheory.exp.adjunction",
+     "CategoryTheory.Closed.adj",
+     "CategoryTheory.ihom.adjunction",
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂",
+     "CategoryTheory.Functor.monoidalClosed_closed_adj",
+     "CategoryTheory.FunctorToTypes.adj"
+    ],
+    "digest": "d191df4eca3c0eb4"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary adjunction naturality and evaluation lemmas are ingredients, not the two-variable naturality of the specified composite tensor-Hom/strong-monoidal/counit comparison; expComparison requires Cartesian monoidal categories, which module tensor categories are not."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*adjunction|adjunction.*closed|internalHom.*adjunction|adjunction.*internalHom",
+   "results": {
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean",
+     "Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean",
+     "Mathlib/CategoryTheory/Adjunction/Parametrized.lean",
+     "Mathlib/CategoryTheory/Adjunction/Parametrized.lean",
+     "Mathlib/CategoryTheory/Monoidal/Arrow.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Types.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Types.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Transport.lean"
+    ],
+    "digest": "74d66392dd63f21e"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary adjunction naturality and evaluation lemmas are ingredients, not the two-variable naturality of the specified composite tensor-Hom/strong-monoidal/counit comparison; expComparison requires Cartesian monoidal categories, which module tensor categories are not."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal left adjoint between closed monoidal categories has a natural enriched adjunction internal Hom comparison compatible with counit",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.closedCounit",
+     "CategoryTheory.ihom.adjunction",
+     "CategoryTheory.exp.adjunction",
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂",
+     "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+     "CategoryTheory.MonoidalClosedFunctor.comparison_iso",
+     "CategoryTheory.Closed.adj",
+     "CategoryTheory.ihom.ihom_adjunction_unit"
+    ],
+    "digest": "4099ae31968bcfdc"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary adjunction naturality and evaluation lemmas are ingredients, not the two-variable naturality of the specified composite tensor-Hom/strong-monoidal/counit comparison; expComparison requires Cartesian monoidal categories, which module tensor categories are not."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\", \"naturality\"",
+   "results": {
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.homEquiv_naturality_left",
+     "CategoryTheory.Adjunction.homEquiv_naturality_right",
+     "CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left",
+     "CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right",
+     "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+     "CategoryTheory.Adjunction.homEquiv_naturality_right_symm",
+     "CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left_symm",
+     "CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right_symm"
+    ],
+    "digest": "c7270464f2da8891"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary adjunction naturality and evaluation lemmas are ingredients, not the two-variable naturality of the specified composite tensor-Hom/strong-monoidal/counit comparison; expComparison requires Cartesian monoidal categories, which module tensor categories are not."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality in both variables of the closed internal Hom comparison defined by transposing strong monoidal pullback of evaluation followed by an adjunction counit",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ihom.ev_naturality_assoc",
+     "CategoryTheory.ihom.coev_naturality",
+     "CategoryTheory.ihom.coev_naturality_assoc",
+     "CategoryTheory.ihom.ev_naturality",
+     "CategoryTheory.expComparison_ev",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm",
+     "CategoryTheory.coev_expComparison",
+     "CategoryTheory.expComparison"
+    ],
+    "digest": "139e1c5af68c8ca9"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary adjunction naturality and evaluation lemmas are ingredients, not the two-variable naturality of the specified composite tensor-Hom/strong-monoidal/counit comparison; expComparison requires Cartesian monoidal categories, which module tensor categories are not."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right projection map of a monoidal adjunction transports parameterized composition: the adjunct of G g composed with projection and one tensor f equals g composed with one tensor the adjunct of f",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.rightAdjointMate_comp",
+     "CategoryTheory.tensorRightAdjunction",
+     "CategoryTheory.rightAdjointMate_comp_evaluation",
+     "CategoryTheory.rightAdjointMate_comp_evaluation_assoc",
+     "CategoryTheory.comp_rightAdjointMate",
+     "CategoryTheory.coevaluation_comp_rightAdjointMate",
+     "CategoryTheory.coevaluation_comp_rightAdjointMate_assoc",
+     "CategoryTheory.tensorLeftAdjunction"
+    ],
+    "digest": "7d4cd5284961f10a"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary adjunction naturality and evaluation lemmas are ingredients, not the two-variable naturality of the specified composite tensor-Hom/strong-monoidal/counit comparison; expComparison requires Cartesian monoidal categories, which module tensor categories are not."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-derived-system-evaluation-calculus",
+  "date": "2026-10-17",
+  "group": "Q105"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, first/last mapping-complex comparisons and specified adjunction maps: naturality argument formerly inline in step 15 of lem-coef-derived-system-evaluation-calculus.",
+   "via": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

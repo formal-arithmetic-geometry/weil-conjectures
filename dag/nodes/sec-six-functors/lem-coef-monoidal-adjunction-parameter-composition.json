@@ -1,0 +1,165 @@
+{
+ "id": "lem-coef-monoidal-adjunction-parameter-composition",
+ "kind": "statement",
+ "title": "Tensor-parameter composition under an adjunction with a tensor comparison",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories [def-nagata-category], each equipped with a tensor bifunctor $\\otimes$ (it assigns an object $X\\otimes Y$ to each pair of objects and a morphism $f\\otimes g$ to each pair of morphisms, preserving identities and componentwise composition); no associator, unitor, symmetry or coherence condition is assumed. Let $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$ be functors, and let $\\mu_{X,Y}:FX\\otimes FY\\xrightarrow{\\sim}F(X\\otimes Y)$ be isomorphisms natural in $X,Y$, that is $F(f\\otimes g)\\circ\\mu_{X,Y}=\\mu_{X',Y'}\\circ(Ff\\otimes Fg)$. Let $F\\dashv G$ have natural Hom bijections $\\Phi_{X,Y}:\\operatorname{Hom}_{\\mathcal C}(X,GY)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal D}(FX,Y)$, unit $u$ and counit $e$, normalized by $\\Phi(h)=e_Y\\circ F(h)$ [lem-weil-pbc-adjunction-of-natural-bijection]. For $S\\in\\mathcal C$ and $N\\in\\mathcal D$, define\\n$$\\lambda_{S,N}:S\\otimes GN\\longrightarrow G(FS\\otimes N)$$\\nto be the unique map whose $\\Phi$-image is $(1_{FS}\\otimes e_N)\\circ\\mu_{S,GN}^{-1}$. For objects $S,T,P\\in\\mathcal C$, $N,N'\\in\\mathcal D$ and maps $f:T\\otimes P\\to GN$, $g:FS\\otimes N\\to N'$, set\\n$$f^\\sharp=e_N\\circ F(f)\\circ\\mu_{T,P}:FT\\otimes FP\\to N.$$\\nThen\\n$$\\Phi_{S\\otimes(T\\otimes P),N'}\\bigl(G(g)\\circ\\lambda_{S,N}\\circ(1_S\\otimes f)\\bigr)\\circ\\mu_{S,T\\otimes P}\\circ(1_{FS}\\otimes\\mu_{T,P})=g\\circ(1_{FS}\\otimes f^\\sharp).$$\\nBoth sides have source $FS\\otimes(FT\\otimes FP)$ and target $N'$. This is transport of tensor-parameter composition through the specified adjunction; it requires neither invertibility of $\\lambda$, nor closedness or dualizability of the objects, nor any associativity or unit coherence. In particular it applies to a strong monoidal $F$ between monoidal categories.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), naturality and canonical adjunction formulas; the closed monoidal consequence stated here is agent-formulated, not the literal statement of that tag."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a strong monoidal functor F left adjoint to G, the mate of S tensor G N to G(F S tensor N) composes tensor parameterized maps compatibly with the counit",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor",
+     "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+     "CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ",
+     "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+     "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+     "CategoryTheory.Adjunction.ε_comp_map_ε_assoc",
+     "CategoryTheory.Adjunction.ε_comp_map_ε",
+     "CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ"
+    ],
+    "digest": "e264eed7fdd55136"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected monoidal counit tensor identities, linear tensor compositions and rigid dual mates; none is the displayed parameterized composition formula with lambda defined as its specified mate, and rigidity/Cartesian hypotheses do not hold here."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Ff]ormula|[Ff]ormula.*projection|rightProjection",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected monoidal counit tensor identities, linear tensor compositions and rigid dual mates; none is the displayed parameterized composition formula with lambda defined as its specified mate, and rigidity/Cartesian hypotheses do not hold here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor parameterized adjunction mate of composition using the projection map S tensor G N to G(F S tensor N)",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.map_comp_lTensor",
+     "LinearMap.map_comp_rTensor",
+     "LinearMap.lTensor_comp_map",
+     "LinearMap.map_rTensor",
+     "CategoryTheory.FunctorToTypes.adj",
+     "LinearMap.map_lTensor",
+     "TensorProduct.adjoint_map",
+     "LinearMap.lTensor_comp"
+    ],
+    "digest": "4ba043e0d03e8b08"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected monoidal counit tensor identities, linear tensor compositions and rigid dual mates; none is the displayed parameterized composition formula with lambda defined as its specified mate, and rigidity/Cartesian hypotheses do not hold here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalCategory\", \"homEquiv\"",
+   "results": {
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.CartesianMonoidalCategory.homEquivToProd",
+     "CategoryTheory.CartesianMonoidalCategory.homEquivToProd_apply",
+     "CategoryTheory.CartesianMonoidalCategory.homEquivToProd_symm_apply",
+     "CategoryTheory.FreeMonoidalCategory.HomEquiv",
+     "CategoryTheory.FreeMonoidalCategory.HomEquiv.refl",
+     "CategoryTheory.FreeMonoidalCategory.HomEquiv.comp_id",
+     "CategoryTheory.FreeMonoidalCategory.HomEquiv.id_comp",
+     "CategoryTheory.FreeMonoidalCategory.HomEquiv.l_inv_hom"
+    ],
+    "digest": "fefc2df7466b898f"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected monoidal counit tensor identities, linear tensor compositions and rigid dual mates; none is the displayed parameterized composition formula with lambda defined as its specified mate, and rigidity/Cartesian hypotheses do not hold here."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|counit_naturality",
+   "results": {
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean"
+    ],
+    "digest": "6339f68b0f4c6940"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected monoidal counit tensor identities, linear tensor compositions and rigid dual mates; none is the displayed parameterized composition formula with lambda defined as its specified mate, and rigidity/Cartesian hypotheses do not hold here."
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*comp|comp.*HomComplex",
+   "results": {
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+     "Mathlib/Algebra/Homology/Factorizations/CM5b.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean"
+    ],
+    "digest": "f79f169ad4c64a8c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: inspected monoidal counit tensor identities, linear tensor compositions and rigid dual mates; none is the displayed parameterized composition formula with lambda defined as its specified mate, and rigidity/Cartesian hypotheses do not hold here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-derived-system-evaluation-calculus",
+  "date": "2026-10-17",
+  "group": "Q105"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite units/counits and compatibility of the mapping-complex comparisons: tensor-parameter composition argument formerly inline in step 15 of lem-coef-derived-system-evaluation-calculus.",
+   "via": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
