@@ -189,7 +189,7 @@ theorem GaloisCover.strict_hensel_root_tame_normalization
   have : IsLocallyNoetherian N := hN
   let a := p ≫ V.ι
   have hn : IsFinite a.fromNormalization :=
-    W.strict_hensel_root_normalization_finite i G R φ f hG hf β hβ barY b hb
+    W.strict_hensel_root_normalization_finite i G R φ f hf barY b hb
       hgu hN hp.1 hp.2
   obtain ⟨O, hO, heO⟩ :=
     W.strict_hensel_root_normalization_generic_etale i G R φ f hG hf β hβ barY b hb

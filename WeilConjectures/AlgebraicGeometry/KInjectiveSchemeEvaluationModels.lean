@@ -120,15 +120,15 @@ theorem exists_kInjective_scheme_evaluation_models (Y : Scheme.{u})
     (hhom : ∀ (M M' : CochainComplex
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (t : M ⟶ M'),
       QuasiIso t → QuasiIso (((homComplexFunctor (R := Y.sheaf)).obj (op P)).map t))
-    (hdual : (homComplex (R := Y.sheaf) P
+    (hdual : (homComplex.{u, u, u, u} (R := Y.sheaf) P
       ((HomologicalComplex.single _ (.up ℤ) 0).obj
         (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))).IsKFlatTensor)
     (eK : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj F ≅ N)
     (f : pullbackTensorTotal Y F
-        (homComplex (R := Y.sheaf) P
+        (homComplex.{u, u, u, u} (R := Y.sheaf) P
           ((HomologicalComplex.single _ (.up ℤ) 0).obj
             (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) ⟶
-      homComplex (R := Y.sheaf) P F)
+      homComplex.{u, u, u, u} (R := Y.sheaf) P F)
     (hf : IsSchemeOrdinaryEvaluation Y P F f) [F.IsKInjective] :
     let H := derivedInternalHom (Opens.grothendieckTopology Y.toRingedSpace) Y.sheaf
     let D := H.obj (op K, 𝟙_ (schemeDerivedCategory Y))
@@ -137,10 +137,10 @@ theorem exists_kInjective_scheme_evaluation_models (Y : Scheme.{u})
         ((schemeDerivedTensorHomEquiv Y) D K
           (𝟙_ (schemeDerivedCategory Y)) (𝟙 D)) ≫ (ρ_ N).hom)
     ∃ a : N ⊗ D ≅ DerivedCategory.Q.obj (pullbackTensorTotal Y F
-          (homComplex (R := Y.sheaf) P
+          (homComplex.{u, u, u, u} (R := Y.sheaf) P
             ((HomologicalComplex.single _ (.up ℤ) 0).obj
               (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))))),
-      ∃ b : H.obj (op K, N) ≅ DerivedCategory.Q.obj (homComplex (R := Y.sheaf) P F),
+      ∃ b : H.obj (op K, N) ≅ DerivedCategory.Q.obj (homComplex.{u, u, u, u} (R := Y.sheaf) P F),
         g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f := by
   classical
   let H : (schemeDerivedCategory Y)ᵒᵖ × schemeDerivedCategory Y ⥤
@@ -148,9 +148,9 @@ theorem exists_kInjective_scheme_evaluation_models (Y : Scheme.{u})
     derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf
   let O := (HomologicalComplex.single _ (.up ℤ) 0).obj
     (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-  let V := homComplex (R := Y.sheaf) P O
+  let V := homComplex.{u, u, u, u} (R := Y.sheaf) P O
   let D := H.obj (op K, 𝟙_ (schemeDerivedCategory Y))
-  let c : DerivedCategory.Q.obj (homComplex (R := Y.sheaf) P F) ⟶
+  let c : DerivedCategory.Q.obj (homComplex.{u, u, u, u} (R := Y.sheaf) P F) ⟶
       H.obj (op K, N) := schemeOrdinaryHomComparison Y P F ≫ H.map (eK.inv.op, eN.hom)
   let t : DerivedCategory.Q.obj V ⟶ D := schemeOrdinaryHomComparison Y P O ≫
     H.map (eK.inv.op, ((DerivedCategory.quotientCompQhIso _).app O).inv)
