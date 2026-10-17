@@ -99,3 +99,30 @@ theorem IsDiscreteValuationRing.exists_dvd_algebraMap {R₀ A₁ : Type*} [CommR
   refine ⟨m, ?_, by rw [map_pow]; exact pow_ne_zero m hr₀⟩
   rw [map_pow]
   exact (Units.mul_left_dvd.2 dvd_rfl).trans (pow_dvd_pow_of_dvd hdvd m)
+
+/-- **Invariants and flat base change**, relative version. If the common fixed points of a finite
+family `σ` of `S`-algebra endomorphisms of `L` are the image of an `S`-algebra map `f : C → L`,
+then for a flat `S`-algebra `T` the common fixed points of the `𝟙 ⊗ σᵢ` on `T ⊗[S] L` are the
+image of `𝟙 ⊗ f`. -/
+theorem AlgHom.mem_range_map_of_forall_baseChange_eq {S L T C ι : Type*} [CommRing S]
+    [CommRing L] [Algebra S L] [CommRing T] [Algebra S T] [CommRing C] [Algebra S C]
+    [Module.Flat S T] [_root_.Finite ι] (f : C →ₐ[S] L)
+    (σ : ι → L →ₐ[S] L) (hfix : ∀ x, (∀ i, σ i x = x) → x ∈ Set.range f)
+    (y : T ⊗[S] L) (hy : ∀ i, Algebra.TensorProduct.map (AlgHom.id T T) (σ i) y = y) :
+    y ∈ Set.range (Algebra.TensorProduct.map (AlgHom.id T T) f) := by
+  let z := (AlgHom.tensorFixedPointsEquiv T σ).symm ⟨y, AlgHom.mem_fixedPoints.2 hy⟩
+  have hz : (AlgHom.tensorFixedPointsEquiv T σ z : T ⊗[S] L) = y := by simp [z]
+  have key (w : T ⊗[S] AlgHom.fixedPoints σ) :
+      (AlgHom.tensorFixedPointsEquiv T σ w : T ⊗[S] L) ∈
+        Set.range (Algebra.TensorProduct.map (AlgHom.id T T) f) := by
+    induction w with
+    | zero => exact ⟨0, by simp⟩
+    | add w₁ w₂ h₁ h₂ =>
+      obtain ⟨a, ha⟩ := h₁
+      obtain ⟨b, hb⟩ := h₂
+      exact ⟨a + b, by rw [map_add, ha, hb, map_add, Subalgebra.coe_add]⟩
+    | tmul t a =>
+      obtain ⟨c, hc⟩ := hfix a (AlgHom.mem_fixedPoints.1 a.2)
+      exact ⟨t ⊗ₜ c, by rw [AlgHom.coe_tensorFixedPointsEquiv_tmul, ← hc]; rfl⟩
+  rw [← hz]
+  exact key z
