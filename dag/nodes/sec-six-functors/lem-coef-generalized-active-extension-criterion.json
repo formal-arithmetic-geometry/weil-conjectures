@@ -292,5 +292,51 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-902939579 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps and all 13 cited statements plus both stmt_deps in full. Checked against Gepner–Haugseng arXiv:1312.3178v4 Appendix A: I downloaded the PDF to /tmp and read A.2.1–A.2.10, A.3.1–A.3.4 and A.4.1–A.4.5. The hypotheses match Cor. A.4.5: inert-preserving, Kan zero-fibers, equivalence over [0], and K_b equal to GH's A x_B (B_act)/b. The colimit hypothesis is two-sided, which contains GH's one-sided A.2.7 tests; it is stronger, not weaker, and imports no presentability. Step checks: Step 1 is transport into Fun(K_b,V) with the unit at arity 0. Step 2 turns contextual cocones into colimits preserved by L⊗–⊗R, via the transport fiber formula and the dual cone criterion. Step 3 checks the stationary-inert squares and incidence limits in all four source/target cases (the backward case is empty). Step 4 uses active-incidence (i) and concatenation (GH A.2.3/A.2.4). Step 5 uses the filling existence clause (A.3.4(i)) and the collage comparison (Remark A.4.2). Step 6 uses the right-pinched boundary with m=n+1>0 and the trivial-fibration criterion (A.3.4(ii), A.4.3). Step 7 uses the comma formula with θ=id. Step 8 uses the dual parametric universal arrows. Small cases tested: u=id, the free associative algebra ⊔A^{⊗n}, empty K_b, arity 0. Graph traversal from all 13 cited nodes (565 reachable nodes) finds no path back to the item, so the old presentability cycle is gone. No new nodes. The parents active-colimit-extension-criterion and generalized-operadic-monadicity specialize the item; no duplicate. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, a generic cone criterion with 188 accepted uses in this unit. No SGA used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GeneralizedActiveExtensionCriterion",
+  "declaration": "SSet.Enhanced.GeneralizedActiveExtension.generalized_active_extension_criterion",
+  "declarations": [
+   "SSet.Enhanced.GeneralizedActiveExtension.IsActiveBase",
+   "SSet.Enhanced.GeneralizedActiveExtension.IsActiveEdge",
+   "SSet.Enhanced.GeneralizedActiveExtension.activeEdges",
+   "SSet.Enhanced.GeneralizedActiveExtension.activeSlice",
+   "SSet.Enhanced.GeneralizedActiveExtension.activeSliceSource",
+   "SSet.Enhanced.GeneralizedActiveExtension.activeIndex",
+   "SSet.Enhanced.GeneralizedActiveExtension.zeroFiberMap",
+   "SSet.Enhanced.GeneralizedActiveExtension.IsInertPreserving",
+   "SSet.Enhanced.GeneralizedActiveExtension.activeIndexArrow",
+   "SSet.Enhanced.GeneralizedActiveExtension.activeIndexSource",
+   "SSet.Enhanced.GeneralizedActiveExtension.exchange",
+   "SSet.Enhanced.GeneralizedActiveExtension.IsActiveTensorDiagram",
+   "SSet.Enhanced.GeneralizedActiveExtension.IsContextualColimit",
+   "SSet.Enhanced.GeneralizedActiveExtension.HasContextualColimit",
+   "SSet.Enhanced.GeneralizedActiveExtension.operationIndex",
+   "SSet.Enhanced.GeneralizedActiveExtension.operationSource",
+   "SSet.Enhanced.GeneralizedActiveExtension.operationArrow",
+   "SSet.Enhanced.GeneralizedActiveExtension.familyValue",
+   "SSet.Enhanced.GeneralizedActiveExtension.familyOperation",
+   "SSet.Enhanced.GeneralizedActiveExtension.familyUnit",
+   "SSet.Enhanced.GeneralizedActiveExtension.unitFamily",
+   "SSet.Enhanced.GeneralizedActiveExtension.parameterInclusion",
+   "SSet.Enhanced.GeneralizedActiveExtension.IsColimitFamily",
+   "SSet.Enhanced.GeneralizedActiveExtension.HasCoherentColorFormula",
+   "SSet.Enhanced.GeneralizedActiveExtension.CoherentLeftAdjoint"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GeneralizedActiveExtensionCriterion.lean",
+  "statement": "theorem generalized_active_extension_criterion {A B E : SSet.{max (v + 1) w}} [Quasicategory E] (hsmallA : Presentability.IsSmall.{v} A) (hsmallB : Presentability.IsSmall.{v} B) (pA : A ⟶ monoidalSimplexBase.{max (v + 1) w}) (hA : InertOperad.IsGeneralizedOperad pA) (hA0 : KanComplex (fiber pA (monoidalBaseVertex 0))) (pB : B ⟶ monoidalSimplexBase.{max (v + 1) w}) (hB : InertOperad.IsGeneralizedOperad pB) (hB0 : KanComplex (fiber pB (monoidalBaseVertex 0))) (q : E ⟶ monoidalSimplexBase.{max (v + 1) w}) (hq : IsMonoidalInfinityCategory q) (u : A ⟶ B) (hu : IsInertPreserving (pA := pA) (pB := pB) u) (hzero : IsFunctorEquivalence (zeroFiberMap (pA := pA) (pB := pB) u hu.1)) (hcolim : ∀ (X : (InertOperad.algebras pA q) _⦋0⦌) (b : (monoidalUnderlying pB) _⦋0⦌), ∃ (D : activeIndex pB u b ⟶ monoidalUnderlying q) (transport : activeIndex pB u b ⟶ (ihom Δ[1]).obj E), IsActiveTensorDiagram pB q u X b D transport ∧ HasContextualColimit q D) : CoherentLeftAdjoint pA pB q u",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "§1(B) dependency repair for H13 of returned 0b692fb9bf45: no published recorded module is available (scompile.py --source reports unavailable); the retained module had arbitrary diagrams and unrelated restriction/equivalences. This module specifies the input diagram by coherent cocartesian transport, contextual preservation of the actual mapped cocone, restriction as literal precomposition, the parametric universal-arrow unit, and a coherent family of color colimit cocones whose triangles identify the same unit and actual extended operations, including identities and substitution. The full repaired interface from the retained NK packet was reread and included here; its conditional theorem retains small operads and arbitrary ambient coefficients."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c23a4b504",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Item: every hypothesis matches the node with nothing stronger: small operads, Kan zero fibers (part of Nonsymmetric.IsGeneralizedOperad), inert-preserving u, zero-fiber equivalence, presentably monoidal V. activeIndex is the slice over b (commaSubcomplex orientation checked) and arrows between its objects are automatically active. The cocone is tied to the actual eta and F's action via the Gamma/T triangles, with apex F(b). The tensor-context colimit condition is equivalent to the node's operadic condition under presentability (GH A.2.10, node steps 1-2). UniversalArrowAt unfolds to restriction followed by composition with eta as an equivalence Map(F,B)~Map(X,u*B); naturality is the version over every parameter K; restriction compatibility is implied by the landed parametric_universal_arrows. Dependency: lem-coef-generalized-active-extension-criterion had no lean record; the delivery changes only its lean field and the module matches its node (no presentability assumed, restriction is precomposition, left adjoint with unit and colour colimit formula). Item stmt_deps gain it and the landed parametric-universal-arrows; stage2_delivery accepts this; no path back to the item (952 and 632 nodes reachable). No hollow definitions; one sorry per module; docstrings carry source, blueprint tag and the node's proof steps; statements verbatim. Both files compile cleanly as siblings via nt_compile.py --json (6.9 s each, rc 0). Cosmetic only: NK author header, universe u shares its name with the map u, pre-existing Nonsymmetric/InertOperad duplication."
  }
 }

@@ -13,7 +13,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-monoidal-infinity-category",
   "def-coef-infinity-fibrations",
-  "def-coef-infinity-relative-cone"
+  "def-coef-infinity-relative-cone",
+  "def-coef-operadic-typec-incidence-data"
  ],
  "proof": [
   {
@@ -259,5 +260,27 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-14b06a805 (reviewer sub-agent of L); spot-checked: Read all eight steps, every cited dependency statement, unit/chapter route, and relevant Gepner–Haugseng, HTT, HA and Kerodon sources. Exact-boundary cone extension is justified; checked r=0–3, hypotheses, duplicates and acyclicity. No DAG repairs or additional tool_uses needed. Report-only endpoint-map wording noted in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicTypeCIncidenceCone",
+  "declaration": "SSet.Enhanced.operadic_typec_incidence_cone",
+  "declarations": [
+   "SSet.Enhanced.operadic_typec_incidence_cone"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicTypeCIncidenceCone.lean",
+  "statement": "theorem operadic_typec_incidence_cone {E : SSet.{u}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{u}) (hp : IsMonoidalInfinityCategory p) (r : ℕ) (d : TypeCIncidenceData r) (f : CategoryTheory.nerve d.I ⟶ E) (hf : f ≫ p = d.b) : ∃ barf : leftJoinCone (CategoryTheory.nerve d.I) ⟶ E, leftJoinConeInclusion (CategoryTheory.nerve d.I) ≫ barf = f ∧ barf ≫ p = d.barB ∧ IsRelativeLimitDiagram p barf ∧ (∀ x : (CategoryTheory.nerve d.I) _⦋0⦌, IsCocartesianEdge p (typeCIncidenceConeEdge x ≫ barf)) ∧ (r = 0 → ∃ x : (CategoryTheory.nerve d.I) _⦋0⦌, orderedJoinInl (Δ[0] : SSet.{u}) (CategoryTheory.nerve d.I) ≫ barf = SSet.yonedaEquiv.symm (f.app _ x) ∧ typeCIncidenceConeEdge x ≫ barf = SSet.yonedaEquiv.symm (E.map (SimplexCategory.σ 0).op (f.app _ x)))",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-1bc1c598d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bc1c598d",
+  "group": "Q88",
+  "result": "fix",
+  "note": "Statement matches node clause by clause (canonical Incidence r: exactly e_j, v_i, endpoint arrows; b forced to incidenceProjection; barB apex/boundary/legs strict and unique; exact boundary and base equalities; IsRelativeLimitDiagram; cocartesian apex legs; explicit r=0 apex f(v0)/identity-leg clause; no colimit hypothesis; Quasicategory instance required by IsMonoidalInfinityCategory). New def node fields OK, not hollow, reuses Nonsymmetric.Incidence (H4). Fixes: H8 docstrings added to typeCIncidenceConeEdge and TypeCIncidenceData.I; H9/rule 7 removed unused public import InertRelativeTupleCone and added plain imports of the 5 proof-dependency modules. Signatures unchanged. nt_compile --json clean for delivered and fixed files (rc 0). Advisory: TypeCIncidenceData imports OperadicAlgebraPresentability, whose node depends on this item through its proof chain; no cycle now, but stage 3 should move Incidence to a lower module."
  }
 }

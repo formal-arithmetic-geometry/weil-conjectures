@@ -9,7 +9,10 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-space-transport-classification"
+  "lem-coef-space-transport-classification",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-relative-hom-evaluation"
  ],
  "proof": [
   {
@@ -245,5 +248,48 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-9fbf53d12 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the new node lem-coef-infinity-relative-hom-evaluation and every cited statement in full: def-cbc-enhanced-diagrams-cones, cone-calculus, pinch-comparison, space-transport-classification, hom-bifunctor-functoriality, mapping-composition. Also read the unit record and both versions of the ancestor prop-coef-integral-exceptional-adjoint. Kerodon is not archived, so I checked it online: 05R5 is Subsection 7.4.2 (Def 7.4.2.2, Warning 7.4.2.3, Prop 7.4.2.6, Cor 7.4.2.17) and 01L5 is Prop 4.6.5.10 (pinch inclusions are homotopy equivalences); both match the delivery. Step 2's currying is checked degreewise and is correct. Step 3 uses the stated ρ_n formula of the pinch node. Step 4 uses the transport node's pullback clause, the constant functor ↔ J×*→J, and the Fun_{/A} mapping formula, on an arbitrary base. In Step 5 the lemma's hypothesis holds: ev(j, Δ_J y) = y on all of J×E. Φ(k,h) = h(k(z),z,s) is well defined, and its adjoint is c∘j_D. Step 6: pullback and pinch naturality commute strictly. Step 7: I computed ε∘Δ_J(Δ_J)_* through Φ as id_J×j_E, the constant identity family, so the composite is H_E(x,λ), acting by λ_j∘− on all simplices. Step 8: the fibres U_E(x,p(j)) are essentially small, there is a small representative, and the edge cases (J empty, J a point, an empty fibre) are fine. The new node is statement-only and self-contained, with notions from its stmt_deps, six logged searches, and correct from/via/same_as. Small cases (K=Δ⁰ gives single-functor Hom functoriality; K=∅; a K-family of arrows from e; nerves) are consistent. It is a genuine generalization, strictly smaller than the item, with no equivalence assertion, and not a D1 restatement. I compared it against coherent-end-twisted-arrow-formula, dinatural-section-evaluation, spatial-mapping-interchange, parametric-discrete-yoneda, parameterized-evaluation-naturality, cone-straightening and pointwise-cocartesian-transport: no duplicate. There is no cycle. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (from unit sk-prop-sf-cbc, which the unit does not cite; it is a generic simplicial tool). The universe descent in Step 5, from W back to S_U through the universe-independent Fun_{/J} formula, is accepted. FIX: split_report.blueprint wrongly said the main-20261015 ancestor has no proof paragraph. sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md carries the same proof, so the sentence is corrected in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-constant-source-section-comparison.json. Nothing else is changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantSourceSectionComparison",
+  "declaration": "SSet.Enhanced.constant_source_section_comparison",
+  "declarations": [
+   "SSet.Enhanced.constantSourceBase",
+   "SSet.Enhanced.constantSourceTotal",
+   "SSet.Enhanced.constantSourceProjection",
+   "SSet.Enhanced.constantSourceSections",
+   "SSet.Enhanced.constantSourceSectionArrows",
+   "SSet.Enhanced.constantSourceVertex",
+   "SSet.Enhanced.constantSourceMaps",
+   "SSet.Enhanced.constantSourceHomDiagram",
+   "SSet.Enhanced.constantSourceHomRow",
+   "SSet.Enhanced.constantSourceSpaceMaps",
+   "SSet.Enhanced.ConstantSourceEquivalence",
+   "SSet.Enhanced.constantSourceLeftFunctor",
+   "SSet.Enhanced.constantSourceRightFunctor",
+   "SSet.Enhanced.constantSourcePrism",
+   "SSet.Enhanced.ConstantSourceComparison",
+   "SSet.Enhanced.ConstantSourceComparison.coherentMap",
+   "SSet.Enhanced.constantSourceParameterRestriction",
+   "SSet.Enhanced.ConstantSourceRestriction",
+   "SSet.Enhanced.constantSourceHomAt",
+   "SSet.Enhanced.ConstantSourcePointInsertion",
+   "SSet.Enhanced.ConstantSourceConeFormula",
+   "SSet.Enhanced.constant_source_section_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConstantSourceSectionComparison.lean",
+  "statement": "theorem constant_source_section_comparison (E : SSet.{max (u + 1) v}) [Quasicategory E] (_hE : TransportLocallySmall.{u, v} E) : ∃ hS : Quasicategory transportSpaces.{u, v}, ∃ T : ∀ (A : SSet.{max (u + 1) v}) (left : Bool), TransportClassifier.{u, v} A left, (∀ (A : SSet.{max (u + 1) v}) (left : Bool), TransportClassificationClauses (T A left)) ∧ ∃ H : HomTransport E T, ∃ star : transportSpaces.{u, v} _⦋0⦌, smallSpaceValue star.down = (Δ[0] : SSet.{u}) ∧ ∃ P : ConstantSourcePointInsertion H star, ∃ C : ∀ J : SSet.{u}, ConstantSourceComparison J E T H star, (∀ (I J : SSet.{u}) (v : I ⟶ J), Nonempty (ConstantSourceRestriction v (C J) (C I))) ∧ (∀ J : SSet.{u}, ConstantSourceConeFormula hS P (C J))",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The literal arrow pullback and degreewise section complex, prism-normalized first equivalence, full parameter naturality and coherent restriction squares, normalized constant-point insertion, whole-space cone formula, and independent small/ambient universes. Auxiliary structures describe this node's comparisons; the only postponed theorem is the item itself. The added statement dependency lem-coef-infinity-relative-hom-evaluation supplies the relative transport interface used in proof steps 5 and 7; the canonical prism and composition interfaces also occur in the statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e60c98a95",
+  "group": "Q95",
+  "result": "fix",
+  "note": "Read the item node, all 5 statement dependencies and their Lean, both delivered modules and the report. The Lean matches the node clause by clause: literal A and Gamma, Kan complexes, homotopy equivalences, prism-fixed first comparison, one coherent equivalence over E^op x Fun(J,E), restriction squares, whole-space cone formula with normalized point insertion, U-small model, empty cases admitted. No stronger hypotheses or universe restriction. The dependency module for lem-coef-infinity-relative-hom-evaluation is stated in the same delivery under the 2026-10-16 rule, matches its node and replaces the returned bare Prop fields. Added stmt_deps are landed nodes whose declarations the statement uses. No hollow definitions; docstrings present; only the two theorems are sorry; statements verbatim. nt_compile --json on both files: clean twice. Fix: the report wrongly claimed a scoped Spaces.kanEnrichment attribute; fixes/lem-coef-infinity-constant-source-section-comparison.report.md corrects that one sentence. No Lean or node change."
  }
 }

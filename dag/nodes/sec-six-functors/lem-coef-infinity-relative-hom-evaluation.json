@@ -224,5 +224,41 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-8cdff6788 (reviewer sub-agent of L); spot-checked: Read the full packet, item, unit route, ancestor blueprint proof, cited node statements, and Kerodon sources 05R5, 01L5, 03MR, 046J, and 03PD. Verified all seven proof steps, hypotheses, universe/coefficient conventions, pullback and pinch formulas, variance squares, edge cases, Mathlib searches, duplicate checks, and acyclicity. Wrote review.md; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeHomEvaluation",
+  "declaration": "SSet.Enhanced.relative_hom_evaluation",
+  "declarations": [
+   "SSet.Enhanced.relativeHomFamilyAt",
+   "SSet.Enhanced.relativeHomEvaluationTotal",
+   "SSet.Enhanced.relativeHomEvaluationProjection",
+   "SSet.Enhanced.relativeHomLiftFamily",
+   "SSet.Enhanced.relativeHomParameters",
+   "SSet.Enhanced.relativeHomSource",
+   "SSet.Enhanced.relativeHomTarget",
+   "SSet.Enhanced.relativeHomTransformation",
+   "SSet.Enhanced.relativeHomComponent",
+   "SSet.Enhanced.RelativeHomSquare",
+   "SSet.Enhanced.relativeHomFibrations",
+   "SSet.Enhanced.RelativeHomEvaluationData",
+   "SSet.Enhanced.RelativeHomPullback",
+   "SSet.Enhanced.relativeHomEnlarge",
+   "SSet.Enhanced.relative_hom_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeHomEvaluation.lean",
+  "statement": "theorem relative_hom_evaluation {B C E : SSet.{w}} [Quasicategory B] [Quasicategory C] [Quasicategory E] (i : B ⟶ C) (t : B ⟶ E) : ∃ (Tr : ∀ (A : SSet.{w + 1}) (left : Bool), TransportClassifier.{w, w + 1} A left) (HC : HomTransport (SSet.uliftFunctor.{w + 1}.obj C) Tr) (HE : HomTransport (SSet.uliftFunctor.{w + 1}.obj E) Tr), (∀ (A : SSet.{w + 1}) (left : Bool), TransportClassificationClauses (Tr A left)) ∧ ∃ D : ∀ (K : SSet.{w}) (T : K ⊗ C ⟶ E) (hrestr : (𝟙 K ⊗ₘ i) ≫ T = snd K B ≫ t), RelativeHomEvaluationData i t T hrestr Tr HC HE, ∀ (K K' : SSet.{w}) (T : K ⊗ C ⟶ E) (hrestr : (𝟙 K ⊗ₘ i) ≫ T = snd K B ≫ t) (r : K' ⟶ K), ∃ hrestr' : (𝟙 K' ⊗ₘ i) ≫ ((r ⊗ₘ 𝟙 C) ≫ T) = snd K' B ≫ t, Nonempty (RelativeHomPullback (D K T hrestr) r hrestr' (D K' ((r ⊗ₘ 𝟙 C) ≫ T) hrestr'))",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B), repair of returned head 20e8843180a7: its six bare Prop fields did not assert any formula or coherence. This module retains the exact dependency statement and supplies the all-simplex Phi formula, actual coherent Hom transformation with fixed endpoints, canonical enriched-nerve map of arrow fibrations, a transport comparison square through coherent equivalences, arbitrary-parameter naturality squares, and parameter pullback squares. All helper notions use the recorded transport and pinch declarations; no epsilon or section equivalence is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e60c98a95",
+  "group": "Q95",
+  "result": "fix",
+  "note": "Read the item node, all 5 statement dependencies and their Lean, both delivered modules and the report. The Lean matches the node clause by clause: literal A and Gamma, Kan complexes, homotopy equivalences, prism-fixed first comparison, one coherent equivalence over E^op x Fun(J,E), restriction squares, whole-space cone formula with normalized point insertion, U-small model, empty cases admitted. No stronger hypotheses or universe restriction. The dependency module for lem-coef-infinity-relative-hom-evaluation is stated in the same delivery under the 2026-10-16 rule, matches its node and replaces the returned bare Prop fields. Added stmt_deps are landed nodes whose declarations the statement uses. No hollow definitions; docstrings present; only the two theorems are sorry; statements verbatim. nt_compile --json on both files: clean twice. Fix: the report wrongly claimed a scoped Spaces.kanEnrichment attribute; fixes/lem-coef-infinity-constant-source-section-comparison.report.md corrects that one sentence. No Lean or node change."
  }
 }

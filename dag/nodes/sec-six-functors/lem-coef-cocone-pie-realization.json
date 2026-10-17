@@ -141,5 +141,30 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-10547f83b (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged from the side-DAG base (diffed); the delivery only adds the proof, proof_deps, proof_origin, status and split_report. It cites two definitions, both read: def-coef-inserter and def-weil-pbc-category-colimit, whose cocone condition is iota_j D(a)=iota_i. I also read the parent lem-coef-accessible-completeness-characterization (its step 6 is the only user of the item), clause (3) of lem-coef-accessible-pie-closure (the equifier is the full subcategory where alpha_X=beta_X, matching the item), the blueprint proof file prop-coef-integral-exceptional-adjoint.proof.md, and the unit sk-prop-sf-biduality-general. Checks: the inserter direction u_j:D(j)->X and the morphism rule h u_j=v_j follow from G(f)u=vF(f) with F(f)=id. alpha_a=u_{cod a}D(a) and beta_a=u_{dom a} have the right types and are natural, since H(h)=id and h u_j=v_j. The equifier condition is exactly the cocone condition, and fullness gives the cocone morphisms. Small cases tested: empty J (both sides are A), a single identity arrow (vacuous condition, the coslice D(*)/A) and a parallel pair (coforks). All four steps are correct; step 4 is genuinely elementary; proof_deps equals the union of uses. No new nodes. The equifier and cocone/inserter greps over dag/nodes found no duplicate. Only definitions are cited, so there is no route problem and no tool_uses. The item is pure category theory with no base-change morphism or coefficient category, no SGA source, and no target weakened. One minor provenance point, accepted: the step source places name the parent's agent-written proof rather than text in the cited blueprint file, which is consistent with proof_origin.by=agent and the blueprint.from.via chain. Mathlib searches: LeanSearch is correctly recorded as unavailable (rate limit); LeanFinder, Loogle and grep are recorded with their results. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoconePieRealization",
+  "declaration": "CategoryTheory.Limits.CoconePIE.cocone_pie_realization",
+  "declarations": [
+   "CategoryTheory.Limits.CoconePIE.constantFamily",
+   "CategoryTheory.Limits.CoconePIE.diagonal",
+   "CategoryTheory.Limits.CoconePIE.arrowSources",
+   "CategoryTheory.Limits.CoconePIE.arrowVertices",
+   "CategoryTheory.Limits.CoconePIE.coconeToInserter"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoconePieRealization.lean",
+  "statement": "theorem cocone_pie_realization (D : J ⥤ A) : ∃ α β : arrowSources D ⟶ arrowVertices D, (∀ (X : Inserter (constantFamily D) (diagonal J A)) (a : Arrow J), α.app X a = D.map a.hom ≫ X.hom a.right ∧ β.app X a = X.hom a.left) ∧ ∃ e : (ObjectProperty.FullSubcategory (fun X : Inserter (constantFamily D) (diagonal J A) ↦ α.app X = β.app X)) ≌ Cocone D, e.inverse ⋙ ObjectProperty.ι (fun X : Inserter (constantFamily D) (diagonal J A) ↦ α.app X = β.app X) = coconeToInserter D",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4bc969fe4",
+  "group": "NC",
+  "result": "pass",
+  "note": "Each node clause matches the Lean (U-small Homs/J, Pi products over Ob J and Arrow J, constantFamily/diagonal via Functor.pi', the recorded Inserter with u_j : D j ⟶ X, arrowSources/arrowVertices, alpha = D.map a.hom ≫ u a.right, beta = u a.left, full subcategory where alpha.app X = beta.app X). The equivalence with Cocone D is fixed to the canonical comparison by e.inverse ⋙ ι = coconeToInserter D. No extra hypotheses; universes u and w independent. A full sorry-free proof in /tmp compiles, so the statement is true and not vacuous. Only the lean key differs from the side node; lean.statement is verbatim in the file; all 6 declarations exist with source and blueprint docstrings; the theorem docstring has the 4 proof steps; definitions have real data; the only sorry is the theorem's proof; no duplicate declaration found. Edge cases checked: empty J, one-object J, parallel pair, empty A. nt_compile.py --json: Inserter.lean and CoconePieRealization.lean compile with no errors and no messages. Report has both sections. No findings."
  }
 }

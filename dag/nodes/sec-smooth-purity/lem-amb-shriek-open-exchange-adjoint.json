@@ -147,5 +147,29 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-21e21c9f3 (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Checked Stacks 0F7B–0F7L and 03S3/03S6/0F70. Removed the unnecessary SGA-based normalization citation and expanded the specified mate calculation to C·adj(κ)=1. Hypotheses and conclusion remain unchanged. Corrected JSON and review.md written; route and cycle checks passed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint",
+  "declaration": "AlgebraicGeometry.Etale.openExchange_adjunct",
+  "declarations": [
+   "AlgebraicGeometry.Etale.openExchangeIso",
+   "AlgebraicGeometry.Etale.canonicalCompactSupportExchange",
+   "AlgebraicGeometry.Etale.openExchange_adjunct"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleShriekOpenExchangeAdjoint.lean",
+  "statement": "theorem openExchange_adjunct (A : Type (u + 1)) [CommRing A] [Finite A] {X U S : Scheme.{u}} {f : X ⟶ S} (u : U ⟶ S) [IsOpenImmersion u] [IsNoetherian X] [IsNoetherian U] [IsNoetherian S] [IsNoetherian (pullback f u)] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] (F : DerivedCategoryModule A X) : ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) u).homEquiv ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) (pullback.snd f u)).obj ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f u)).mapDerivedCategory.obj F)) ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj F) ((openExchangeIso A u).inv.app ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f u)).mapDerivedCategory.obj F) ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (pullback.fst f u)).counit.app F)) = (canonicalCompactSupportExchange A u).inv.app F) ∧ ((openExchangeIso A u).inv.app ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f u)).mapDerivedCategory.obj F) ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (pullback.fst f u)).counit.app F)) = (openImmersionLowerShriek (ModuleCat.{u + 1} A) u).mapDerivedCategory.map ((canonicalCompactSupportExchange A u).inv.app F) ≫ (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) u).counit.app ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj F)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-8d64e30b2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d64e30b2",
+  "group": "NR",
+  "result": "fix",
+  "note": "Statement correct clause by clause against the node and Stacks 0F7J/0F7L: hypotheses (finite ring, all schemes Noetherian, f separated/finite type/compactifiable, u open immersion), v/f_U/pullback.condition, delta = alpha_{u,f_U}^-1 o alpha_{f,v} normalized via (w,id), C = recorded unboundedEtaleCompactSupportBaseChange, kappa, both conjuncts in node order, F unbounded; directions match Stacks; open-immersion derived adjunction is the correct Du_! adjunction. Edge cases, universes, verbatim statement field, report sections and maintainer gates pass; only sorry is the theorem's, and canonicalCompactSupportExchange's IsIso comes from a named upstream theorem. Fixes: (H4) removed openCompactSupportIso, a pure alias of upstream rightDerivedLowerShriekIsoOfIsOpenImmersion, now used directly; redundant letI dropped. (H8) theorem docstring now carries node proof steps 1-3 in full. fixes/EtaleShriekOpenExchangeAdjoint.lean (statement unchanged) and fixes/lem-amb-shriek-open-exchange-adjoint.report.md (appended fix note). nt_compile: delivered and fixed files rc 0 with no messages; probe confirmed signature and instance synthesis."
  }
 }

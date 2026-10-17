@@ -214,5 +214,39 @@
   "group": "Q146",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-aed012aa3 (reviewer sub-agent of L); spot-checked: I read the item, its nine steps, the six cited nodes (all in the item's own unit sk-prop-sf-biduality-general, so no tool_uses) and Gepner–Haugseng arXiv:1312.3178v4 §4.2, which I fetched to /tmp. Def. 4.2.4 states O_C((x_0,y_1),…;(y_0,x_n)) = ∏C(y_i,x_i), which matches the item exactly. Def. 4.2.6 / Rem. 4.2.5 say to invert the first factor and insert identities, with strict involutive inverses in a simplicial groupoid; the item's endpoint types (u_{i-1}^{-1}, identities, u_i) and the nullary block u_i u_{i-1}^{-1} are the only well-typed completion. The D(G) convention agrees with the proof of GH Thm 4.2.7. I recomputed the multicategory axioms (Step 2), simpliciality (Step 4), composition with telescoping collapsed runs and the cases a=b and ℓ=0 (Steps 5–6), and the inert precomposition isomorphisms (Step 8). For Step 9, the base mapping sets are discrete and β↦φβ is injective, so the homotopy pullback is the coproduct of the fibres over φβ and the criterion applies. Every inert edge is covered because N_hc D(G) is a left fibration. I checked the empty G, one-object S_3, two isomorphic objects, and the cases m=0, n=0 and ℓ=0. The rg duplicate search found no node stating O_G or Φ_G and no cycle. Fix: in Step 8 the internal conjugation was written u_i^{-1} a_i u_i with the index inside the block; it is corrected to the global index u_{c+i}^{-1} a_i u_{c+i}, and the inverses likewise. The corrected item is in fixes/dag/nodes/sec-six-functors/. No new nodes and no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadGroupoidOperatorMap",
+  "declaration": "CategoryTheory.OperadGroupoidOperatorMap.operad_groupoid_operator_map",
+  "declarations": [
+   "CategoryTheory.OperadGroupoidOperatorMap.gapSource",
+   "CategoryTheory.OperadGroupoidOperatorMap.gapTarget",
+   "CategoryTheory.OperadGroupoidOperatorMap.Factors",
+   "CategoryTheory.OperadGroupoidOperatorMap.Arrow",
+   "CategoryTheory.OperadGroupoidOperatorMap.word",
+   "CategoryTheory.OperadGroupoidOperatorMap.contractStep",
+   "CategoryTheory.OperadGroupoidOperatorMap.Contracts",
+   "CategoryTheory.OperadGroupoidOperatorMap.pairs",
+   "CategoryTheory.OperadGroupoidOperatorMap.PairModel",
+   "CategoryTheory.OperadGroupoidOperatorMap.coloredPairs",
+   "CategoryTheory.OperadGroupoidOperatorMap.nullary",
+   "CategoryTheory.OperadGroupoidOperatorMap.FunctorModel",
+   "CategoryTheory.OperadGroupoidOperatorMap.operad_groupoid_operator_map"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadGroupoidOperatorMap.lean",
+  "statement": "theorem operad_groupoid_operator_map (N : CoherentNerveComparisonStatement.{u}) (O : CategoryTheory.SimplicialOperatorNerve.Statement N) (G : SimplicialGroupoid.{u}) (hG : G.IsFibrant) : ∃ P : PairModel G, Nonempty (FunctorModel O G P)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Pair-color operation spaces are specified by natural degreewise product equivalences. Expanded-word contraction fixes all substitution maps, including nullary substitution; no object is chosen from a postponed existence proof. The enriched functor is normalized on all mapping simplices, and its coherent nerve is over the simplex base and preserves inert edges. N and O are the normalized comparison and operator/string presentations supplied by existing dependency existence theorems."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0878a9b21",
+  "group": "NW",
+  "result": "pass",
+  "note": "Node changed only by its lean record; lean.statement verbatim. Clause check against the node and GH Defs 4.2.4/4.2.6, Rem 4.2.5: gap endpoints give exactly prod G(y_i,x_i), including n=0; substitution by word expansion plus Contracts (reflexive transitive closure) is uniquely determined, including nullary inner and outer cases; unit factors are identities; Data plus IsLocallyKan. Phi_G is an SCat morphism; objects go to adjacent pairs; g.1=f.1; positive block inv(u_{i-1}), identities, u_i; zero block nullary = u_i u_{i-1}^{-1}; m=0 is the empty tuple; inert clause uses IsLaxMonoidalInfinityFunctor from the dependency. N/O presentation parameters follow the established pattern and do not strengthen the claim. Edge cases covered. No hollow defs, only the theorem is sorry, docstrings/source/blueprint and nine proof steps present, no line >100, autoImplicit off. nt_compile --json of the snapshot file: rc=0, no warnings. The Second reading section is the 2026-10-17 placeholder, accepted under that policy. No findings."
  }
 }

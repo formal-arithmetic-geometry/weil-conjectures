@@ -201,5 +201,23 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-9343e592a (reviewer sub-agent of L); spot-checked: Read the item in full, all 8 cited node statements, the citer lem-kun-0f1j (statement and all 4 steps), the unit record, the master and main-20261015 blueprint texts (statement and proof identical in both), and Stacks 0F1M (sites-cohomology l.12472) and 0F1J (etale-cohomology proof l.20736-20756). The imported statement is false; I checked the counterexample myself: over Z/4, Z/2 derived-tensor Z/2 has H^{-k}=Z/2 for every k>=0. The blueprint proof also grades Tor_p in degree +p instead of -p (E7). The report names the change under its own source-error heading. The corrected hypothesis (A has tor amplitude in [a,inf)) is what 0F1J provides for its tail E''=sigma_{>=N+1}E. That tail is K-flat (kernel of a termwise-split map onto a bounded flat complex), supported in degrees >=N+1, and stable under pullback by 0F1M. The new hypothesis implies the old one on A by testing with Lambda_T. The item is not a target and not its unit's statement. Steps: (1) lem-kun-0f1m gives a K-flat complex of flat modules with P^p=0 for p<a, on the same unit, with no cycle. (2) The quotient onto the canonical truncation tau_{>=b} is a quasi-isomorphism; I re-checked the kernel/cokernel calculation. (3) The derived tensor definition allows the identity K-flat model for the first factor. (4) In the total tensor complex every summand in degree <a+b is zero, so no spectral sequence is needed. All three elementary markings are justified, and proof_deps equals the union of uses. There are no new nodes. The duplicate search found only lem-kun-integral-derived-tensor-bounded-torsion (Z coefficients, bound r<a+b-1), which is a different statement. The coefficient category is ordinary Lambda_T-module sheaves on the small etale site, matching the citer. No SGA source, no tool_uses, no fixes. The maintainer should record the statement correction in HUMAN.md and the ledger. The future split of lem-kun-0f1j must justify the tor-amplitude hypothesis for p^{-1}E''."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KunnethDerivedTensorTEst",
+  "declaration": "AlgebraicGeometry.Etale.derivedTensor_isZero_homology_of_torAmplitudeGE",
+  "file": "lean/Sheaf/Paper/KunnethDerivedTensorTEst.lean",
+  "statement": "theorem derivedTensor_isZero_homology_of_torAmplitudeGE (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) (A B : DerivedCategoryModule Λ T) (a b : ℤ) (hA : DerivedCategory.hasTorAmplitudeGE Λ T a A) (hB : ∀ (j : ℤ), j < b → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) j).obj B)) (i : ℤ) (hi : i < a + b) : IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i).obj (((derivedTensor (ModuleCat.{u + 1} Λ) T).obj A).obj B))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5252374e",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Lean theorem derivedTensor_isZero_homology_of_torAmplitudeGE matches the corrected node clause by clause: hA = the recorded hasTorAmplitudeGE (every sheaf M in degree 0, every i<a, A as left factor), hB = vanishing of all homology of B below b, conclusion for every i<a+b with the recorded derivedTensor in the same factor order. Λ : Type (u+1) is the project-wide encoding of DerivedCategoryModule and of the dependency predicates, not a new restriction. No extra instances or finiteness assumptions; autoImplicit false and all universes bound. lean.statement appears verbatim in the file; apart from the lean field the node is identical to the side clone. No duplicate: isGE_tensor_of_torAmplitudeIn needs a finite interval [a,b]. No definitions introduced; docstrings carry the source place, the blueprint tag and the four proof steps (0F1M, 0118, 06YU, 012Z); proof is exactly sorry; single import of the recorded tor-amplitude module; small étale site, no pro-étale substitute; report has both Worker report and Second reading by Q115. nt_compile.py --json on the snapshot file: rc=0, no errors (8.9 s); a deliberately broken copy gave rc=1 with an error, so the tool reports errors. No findings."
  }
 }

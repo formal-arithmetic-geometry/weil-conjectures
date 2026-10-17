@@ -19,7 +19,10 @@
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring",
   "def-kun-derived-tensor",
-  "def-weil-pbc-etale-constructible-sheaf"
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-finite-reduction-constructibility",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
  ],
  "proof": [
   {
@@ -387,5 +390,49 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-7ad23acfa (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 10 steps, the statements of all 31 cited nodes, parent steps 0-4, the blueprint compatibilities proof (1)-(3), unit sk-thm-purity-transport, and Stacks 0GL6, 0F7L and 0E48 (07A4, 07A7, 0E46 and 0GL1 resolve to the labels the steps name). The statement only gains inline definitions of bounded constructible and finite Tor amplitude, plus two notion deps; nothing is weakened. The coefficient category is ordinary-etale D(T_et,A) throughout, and beta is the counit transpose through compact-support base change from prop-asd-smooth-base-change. I redid every transpose by hand: the step 5 cocycle (naturality of b^{BC} along c^{AB}, then the assumed b cocycle), step 7 (step 6's projection identity at M=omega) and step 10 (step 9 at M=G_AK, inverted); the inverse directions are right and c is never assumed invertible. Hypotheses check out: qcqs and Noetherian Lambda for det-pe-finite-tor-comparison-noetherian; N=ell^r for thm-asd-smooth-tensor; a qcqs surjective finite affine cover for constructibility descent; any commutative ringed square for the exchange-tensor coherence lemma; X' Noetherian after base change. The flat-model shift [a-2d,b-2d] is correct. Edge cases tried: r=m, d=0, empty X, K=0, g=id, and the non-flat map Z/ell^2 -> Z/ell. No cycle, proof_deps equals the union of uses, no SGA source, no new nodes. The pro-etale nodes det-sp-reduction-compatibilities and lem-pur-finite-coefficient-adjoint-comparisons are a different setting, not duplicates. I accept all 19 tool_uses as generic ambient tools. One minor remark, not a fault: step 3 cites the sheaf-of-sets constructible pullback node, as other accepted DAG splits do. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalCoefficientComparison",
+  "declaration": "AlgebraicGeometry.Etale.exceptional_coefficient_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.openIso",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.compactSupportMap",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.comparisonInverse",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.mateMap",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.ordinaryIsLeftAdjoint",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.ordinaryOplax",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.TensorNormalizationAux",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.TensorNormalization",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso_existsUnique",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.siteTensorIso_existsUnique",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.UnitNormalizationAux",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.UnitNormalization",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.unitIso_existsUnique",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.unitIso",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.compactSupportMap_isIso",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.quotientAssociator",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.CompactSupportCocycle",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorDomainMap",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.TensorCompatibility",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.BaseChangeCompatibility",
+   "AlgebraicGeometry.Etale.exceptional_coefficient_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalCoefficientComparison.lean",
+  "statement": "theorem exceptional_coefficient_comparison (l r m d : ℕ) [Fact l.Prime] (hmr : m ≤ r) (hm : 1 ≤ m) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] [SmoothOfRelativeDimension d f] (hInvertible : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (hb : ExceptionalCoefficients.CompactSupportCocycle l f) : (∀ (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y), DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K → DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) X ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K)) ∧ (∀ (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y), DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K → IsIso (ExceptionalCoefficients.compactSupportMap (FiniteReduction.quotient l hmr) (HasCompactification.compactification f) ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K)) ∧ (rightDerivedLowerShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f).map (ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hmr) f K) ≫ (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f).counit.app ((scalarExtension (FiniteReduction.quotient l hmr) Y).obj K) = ExceptionalCoefficients.comparisonInverse (FiniteReduction.quotient l hmr) (HasCompactification.compactification f) ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K) ≫ (scalarExtension (FiniteReduction.quotient l hmr) Y).map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).counit.app K)) ∧ (∀ (K K' : DerivedCategoryModule (FiniteReduction.Coeff l r) Y), DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K → DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K' → ∀ h : K ⟶ K', (scalarExtension (FiniteReduction.quotient l hmr) X).map ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).map h) ≫ ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hmr) f K' = ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hmr) f K ≫ (rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f).map ((scalarExtension (FiniteReduction.quotient l hmr) Y).map h)) ∧ (∀ (n : ℕ) (hnm : n ≤ m) (_hn : 1 ≤ n) (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y), DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K → (scalarExtension (FiniteReduction.quotient l hnm) X).map (ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hmr) f K) ≫ ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hnm) f ((scalarExtension (FiniteReduction.quotient l hmr) Y).obj K) ≫ (rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l n)) f).map ((ExceptionalCoefficients.quotientAssociator Y l hmr hnm).hom.app K) = (ExceptionalCoefficients.quotientAssociator X l hmr hnm).hom.app ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K) ≫ ExceptionalCoefficients.mateMap (FiniteReduction.quotient l (hnm.trans hmr)) f K) ∧ (∀ (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y), DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K → ExceptionalCoefficients.TensorCompatibility (FiniteReduction.quotient l hmr) f K) ∧ (∀ (Y' : Scheme.{u}) [IsNoetherian Y'] (g : Y' ⟶ Y) (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y), DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K → ExceptionalCoefficients.BaseChangeCompatibility (FiniteReduction.quotient l hmr) f g K)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Returned head 9e310850b83b repaired: uses the published scalar functors, actual proper/open counit comparisons, and canonical representative-normalized tensor/unit identifications. The conclusion includes exceptional-domain preservation, the counit equation, naturality, the third quotient index and both associators, smooth tensor compatibility and the Cartesian base-change square. Owning-node helpers specify the canonical identifications already required by this statement; no arbitrary functor, map or isomorphism datum is assumed. Reviewer fix (H4): the module's own scalar/pullback comparison (pullbackMap, pullbackMap_isIso, pullbackIso) and proper coefficient map (properMap) were second definitions of the recorded AlgebraicGeometry.Etale.scalarPullbackIso and AlgebraicGeometry.Etale.scalarMate of lem-pur-etale-scalar-mate-projection (Sheaf.Paper.PurEtaleScalarMateProjection, landed before this delivery; same categories, the K-flat-normalized canonical tensor/pullback identification and exactly the transpose of the scalar-extended proper counit). They are removed; compactSupportMap uses scalarMate at the open extension, and tensorDomainMap and BaseChangeCompatibility use scalarPullbackIso.inv. The main statement is unchanged.",
+  "fixed_by": "NT-stage2-cc-c1df27a3b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1df27a3b",
+  "group": "Q71",
+  "result": "fix",
+  "note": "Read node, 10 proof steps, source compatibilities.proof.md (2)-(3), module, report, prior return review, and dependency declarations. All hypotheses (prime l, 1<=m<=r, IsNoetherian X/Y, smooth of rel. dim d, separated, finite type, HasCompactification, l invertible on Y, cocycle hb with both associators) and all six conclusions (domain preservation, IsIso b at G_A K plus counit equation defining c, naturality, three-level quotient cocycle, tensor compatibility via recorded smoothTensorDualityMap, Cartesian base change via recorded smoothExceptionalBaseChangeMap) match the node. Statement field verbatim; no hollow def; all theorems sorry; docstrings complete; ordinary-etale; added stmt_deps are landed and acyclic. Zero fallback of comparisonInverse is never used where the theorem asserts something. H4 fixed: pullbackMap/pullbackMap_isIso/pullbackIso/properMap duplicated the recorded scalarPullbackIso/scalarMate (lem-pur-etale-scalar-mate-projection, landed 22:35, before delivery 23:23); removed and replaced (compactSupportMap uses scalarMate; tensorDomainMap/BaseChangeCompatibility use scalarPullbackIso.inv); main statement unchanged. nt_compile: delivered 37.3 s clean; fixed module 37.4 s clean (PurEtaleScalarMateProjection timed out once at load ~208, then 52.3 s OK); HEq probe timed out, argued by definition. Fixes: module, lean-record.json (22 declarations, note), report with Maintainer review fix section."
  }
 }

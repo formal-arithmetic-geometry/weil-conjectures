@@ -229,5 +229,33 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-94523e2bd (reviewer sub-agent of L); spot-checked: Read the item and new lemma in full; checked all eight proof steps, cited statements, Varshavsky §§5.1.4–5.1.5, Stacks 05TP/05TY/070I/070J, and Mathlib sources. Signs, hypotheses, symbol lifting, route, duplicate searches, dependency cycles, and small cases pass. No repairs or tool-use exceptions needed. Full findings written to review.md."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredHomComplexInvariance",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredHomComplexInvariance.lean",
+  "declaration": "CategoryTheory.filtered_hom_complex_invariance",
+  "statement": "theorem filtered_hom_complex_invariance {C : Type u} [Category.{v} C] [Abelian C] (P P' I J : FilteredObject (CochainComplex C ℤ)) (hP : P.filtration.IsFinite ∧ ∃ a b : ℤ, (∀ n : ℤ, n < a → IsZero (P.obj.X n)) ∧ (∀ n : ℤ, b < n → IsZero (P.obj.X n))) (hP' : P'.filtration.IsFinite ∧ ∃ a b : ℤ, (∀ n : ℤ, n < a → IsZero (P'.obj.X n)) ∧ (∀ n : ℤ, b < n → IsZero (P'.obj.X n))) (hI : I.filtration.IsFinite ∧ ∃ a : ℤ, ∀ n : ℤ, n < a → IsZero (I.obj.X n)) (hJ : J.filtration.IsFinite ∧ ∃ a : ℤ, ∀ n : ℤ, n < a → IsZero (J.obj.X n)) : ∃ FPI : DecreasingFiltration (HomComplex P.obj I.obj), ∃ FP'I : DecreasingFiltration (HomComplex P'.obj I.obj), ∃ FPIJ : DecreasingFiltration (HomComplex P.obj J.obj), IsShiftFilteredHomFiltration P I FPI ∧ IsShiftFilteredHomFiltration P' I FP'I ∧ IsShiftFilteredHomFiltration P J FPIJ ∧ (FPI.IsFinite ∧ FP'I.IsFinite ∧ FPIJ.IsFinite) ∧ (∃ a : ℤ, ∀ n : ℤ, n < a → IsZero ((HomComplex P.obj I.obj).X n)) ∧ (∃ a : ℤ, ∀ n : ℤ, n < a → IsZero ((HomComplex P'.obj I.obj).X n)) ∧ (∃ a : ℤ, ∀ n : ℤ, n < a → IsZero ((HomComplex P.obj J.obj).X n)) ∧ (∀ (s : P' ⟶ P), ∃ φ : (FilteredObject.mk (HomComplex P.obj I.obj) FPI) ⟶ (FilteredObject.mk (HomComplex P'.obj I.obj) FP'I), IsPrecompositionMap s φ) ∧ (∀ (u : I ⟶ J), ∃ φ : (FilteredObject.mk (HomComplex P.obj I.obj) FPI) ⟶ (FilteredObject.mk (HomComplex P.obj J.obj) FPIJ), IsPostcompositionMap u φ) ∧ (∀ (s t : P' ⟶ P), FilteredHomotopy s t → ∃ φ ψ : (FilteredObject.mk (HomComplex P.obj I.obj) FPI) ⟶ (FilteredObject.mk (HomComplex P'.obj I.obj) FP'I), IsPrecompositionMap s φ ∧ IsPrecompositionMap t ψ ∧ FilteredHomotopy φ ψ) ∧ (∀ (u v : I ⟶ J), FilteredHomotopy u v → ∃ φ ψ : (FilteredObject.mk (HomComplex P.obj I.obj) FPI) ⟶ (FilteredObject.mk (HomComplex P.obj J.obj) FPIJ), IsPostcompositionMap u φ ∧ IsPostcompositionMap v ψ ∧ FilteredHomotopy φ ψ) ∧ (∀ (s : P' ⟶ P), IsFilteredHomotopyEquivalenceMap s → ∃ φ : (FilteredObject.mk (HomComplex P.obj I.obj) FPI) ⟶ (FilteredObject.mk (HomComplex P'.obj I.obj) FP'I), IsPrecompositionMap s φ ∧ IsFilteredHomotopyEquivalenceMap φ) ∧ (∀ (u : I ⟶ J), IsFilteredHomotopyEquivalenceMap u → ∃ φ : (FilteredObject.mk (HomComplex P.obj I.obj) FPI) ⟶ (FilteredObject.mk (HomComplex P.obj J.obj) FPIJ), IsPostcompositionMap u φ ∧ IsFilteredHomotopyEquivalenceMap φ) ∧ ((∀ a n : ℤ, Injective ((I.filtration.gradedPiece a).X n)) → ∀ (s : P' ⟶ P), (∀ a : ℤ, QuasiIso (FilteredObject.gradedMapSteps s a)) → ∃ φ : (FilteredObject.mk (HomComplex P.obj I.obj) FPI) ⟶ (FilteredObject.mk (HomComplex P'.obj I.obj) FP'I), IsPrecompositionMap s φ ∧ ∀ a : ℤ, QuasiIso (FilteredObject.gradedMapSteps φ a))",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-17",
+  "declarations": [
+   "CategoryTheory.filtered_hom_complex_invariance",
+   "CategoryTheory.FilteredHomotopy",
+   "CategoryTheory.ShiftFilteredHomCondition",
+   "CategoryTheory.IsShiftFilteredHomFiltration",
+   "CategoryTheory.IsPrecompositionMap",
+   "CategoryTheory.IsPostcompositionMap",
+   "CategoryTheory.IsFilteredHomotopyEquivalenceMap"
+  ],
+  "fixed_by": "NT-stage2-cc-f0d28b9d2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0d28b9d2",
+  "group": "Q118",
+  "result": "fix",
+  "note": "Hypotheses and every conclusion clause read against node lem-trf-filtered-hom-complex-invariance and its dependencies (Abelian, DecreasingFiltration/FilteredObject/IsFinite/gradedPiece, FilteredComplexSubquotients, Injective, gradedMapSteps, Mathlib HomComplex with the delta sign checked). H3 fixed: hIinj (graded pieces of I injective) was a global hypothesis, restricting the filtration, map, homotopy and homotopy-equivalence clauses that the node states without it; it now guards only the graded quasi-isomorphism clause. H8 fixed: source and blueprint docstrings added to IsPrecompositionMap, IsPostcompositionMap and IsFilteredHomotopyEquivalenceMap. lean.declarations now lists all 7 declarations and lean.statement is verbatim. Identity, composition and commutation follow from the explicit component formulas, so they were accepted without separate clauses. No duplicate notion, no hollow definitions, no extra instances. nt_compile on both the delivered and the fixed file: no errors. fixes/ holds the complete module, the lean-record.json and the report.md."
  }
 }

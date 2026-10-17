@@ -163,5 +163,34 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-2eeb35ed4 (reviewer sub-agent of L); spot-checked: Corrected Step 1’s reversed universal-property application, added existing path/pinch citations and explicit coherence details, and declared the accepted cone-calculus tool use. Statement unchanged; empty-boundary checks passed. Full review and corrected DAG JSON saved.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SymmetricRelativeProductComparison",
+  "declaration": "SSet.Enhanced.symmetric_relative_product_comparison",
+  "declarations": [
+   "SSet.Enhanced.relativeIdentityPoint",
+   "SSet.Enhanced.relativeLimitRestriction",
+   "SSet.Enhanced.relativeLimitPostcomposition",
+   "SSet.Enhanced.relativeLimitComparisonMap",
+   "SSet.Enhanced.relativeIdentityPointBetween",
+   "SSet.Enhanced.IsRelativeIdentityComparisonPoint",
+   "SSet.Enhanced.symmetric_relative_product_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SymmetricRelativeProductComparison.lean",
+  "statement": "theorem symmetric_relative_product_comparison {K D B : SSet.{u}} [Quasicategory D] [Quasicategory B] (q : D ⟶ B) [InnerFibration q] (lam mu : leftJoinCone K ⟶ D) (hl : IsRelativeLimitDiagram q lam) (hm : IsRelativeLimitDiagram q mu) (hboundary : leftJoinConeInclusion K ≫ lam = leftJoinConeInclusion K ≫ mu) (hbase : lam ≫ q = mu ≫ q) : ∃ w : mappingSpaceMap (relativeLimitRestriction (K := K) (C := D)) (diagramVertex lam) (diagramVertex mu) ≫ mappingSpaceMap (relativeLimitPostcomposition q K) (diagramVertex (leftJoinConeInclusion K ≫ lam)) (diagramVertex (leftJoinConeInclusion K ≫ mu)) = mappingSpaceMap (relativeLimitPostcomposition q (leftJoinCone K)) (diagramVertex lam) (diagramVertex mu) ≫ mappingSpaceMap (relativeLimitRestriction (K := K) (C := B)) (diagramVertex (lam ≫ q)) (diagramVertex (mu ≫ q)), ∀ b, IsRelativeIdentityComparisonPoint q lam mu hboundary hbase b → IsContractible (homotopyFiber (relativeLimitComparisonMap q lam mu w) b) ∧ ∀ z : (homotopyFiber (relativeLimitComparisonMap q lam mu w) b) _⦋0⦌, IsEquivalenceEdge D ((evaluation (leftJoinCone K) D ((orderedJoinInl Δ[0] K).app _ (stdSimplex.obj₀Equiv.symm 0))).app (op ⦋1⦌) z.1.1.1)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations give the canonical identity point, restriction and postcomposition maps, the explicit path-pullback comparison, and the identity-pair predicate. The theorem assumes the node's inner fibration q (Mathlib SSet.InnerFibration, re-exported by the def-coef-infinity-fibrations module) and states the contractible homotopy fibre over the identity pair for any two relative limit cones with equal boundary and base, together with equivalence of every comparison on the cone vertex (evaluation at the Delta[0] vertex of the left join). All helper data are real constructions; only the theorem proof is postponed. Reviewer fix: added the dropped inner-fibration hypothesis and restated the last clause at the cone vertex.",
+  "fixed_by": "NT-stage2-cc-a5a69bbec"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5a69bbec",
+  "group": "Q24",
+  "result": "fix",
+  "note": "Read node, 3 stmt deps (RelativeInfinityCone, EnhancedDiagramsCones, SourceAttachmentGluing, InfinityFibrations records), module, report (Worker report + Second reading by Q24 present). Square = IsRelativeLimitDiagram q mu at t=lam, comparison = homotopyPullbackComparison; helpers real (σ0 identity, pre, ihom.map), only theorem sorry; single universe u; K unrestricted covers empty boundary/relative product. H3 fixes: (1) node's 'q inner fibration' was dropped -> added [InnerFibration q] with import of def-coef-infinity-fibrations' recorded module InfinityFibrationsOverSimplicialBases; (2) 'equivalence on cone vertices' was stated as equivalence in Fun(K◁,D) (stronger) -> now IsEquivalenceEdge D of evaluation at the cone vertex (orderedJoinInl Δ[0] K, vertex 0). Docstring now carries the node's 3 proof steps. Observation: identity-pair predicate leaves path coordinate free (true, mild generalization), accepted. nt_compile: delivered file exit 0 (14.8 s), fixed file exit 0 (8.3 s), broken copy exit 1 confirms error reporting. fixes/: SymmetricRelativeProductComparison.lean, <item>.lean-record.json (note), <item>.report.md."
  }
 }

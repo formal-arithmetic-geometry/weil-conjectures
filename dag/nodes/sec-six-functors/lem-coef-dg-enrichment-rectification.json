@@ -23,7 +23,8 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-dg-derived-enrichment"
  ],
  "proof": [
   {
@@ -209,5 +210,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgEnrichmentRectification",
+  "declaration": "SSet.Enhanced.Algebroid.DGRectification.dg_enrichment_rectification",
+  "file": "lean/Sheaf/CategoryTheory/DgEnrichmentRectification.lean",
+  "statement": "theorem dg_enrichment_rectification {E : SSet.{u + 2}} (p : E ⟶ monoidalSimplexBase.{u + 2}) (unit : UnitSection p) (D : IntegralDerivedCoefficients.{u} p) : ∃ R : Enrichment unit D, IsLocalization quasiEquivalences R.comparison ∧ Nonempty (UnderlyingComparison R)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a8497ac51",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read the item, the new node def-coef-dg-derived-enrichment, both modules, the report and every used declaration (CompleteAlgebroid, IntegralDerivedCoefficients, Dg.Cat/IsH0Iso, UnderlyingModel/underlyingCoefficientArrow, FiniteReedy IsLocalization/Composes, IsEquivalenceEdge), and Haugseng Thm 5.8, Def 5.6 and Ex 5.11 online. All clauses match: quasiEquivalences is DK-equivalence with closed H^0-invertible arrows; the enhanced D(Z) datum and completeCategory at object universe u; full coherent IsLocalization of one functor from the nerve of DGCat; natural Hom comparison against actual chain maps (hom_formula's hypothesis is always provable, so not vacuous); closed-arrow, H^0 and essential-surjectivity normalization through the same Hom edge. Edge cases (empty, zero, non-flat/unbounded, arbitrary object maps, universes) are fine. No hollow definitions; one theorem sorry; docstrings include all six proof steps. The item node differs from the base only in lean plus the new stmt_dep; the new node's fields follow the rules; statements are verbatim. nt_compile --json on both files exits 0 with no errors or warnings. Minor, non-blocking: dgNerveMap duplicates integralDerivedNerveMap; proof-only import of EnrichedCompletionLocalization; second reading done by the same worker, disclosed."
  }
 }

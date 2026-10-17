@@ -2,7 +2,7 @@
  "id": "lem-coef-quasicategory-full-subcategory-core-equivalence",
  "kind": "statement",
  "title": "Restriction to replete full quasicategories and comparison on cores",
- "statement": "Use quasicategories, coherent functor equivalences, coherent natural equivalences, full subcategories, cores and weak homotopy equivalences as in [def-cbc-enhanced-diagrams-cones]. Work in a universe containing all the displayed simplicial sets. Let $P:C\\to D$ be a coherent functor equivalence of small quasicategories, and let $V\\subseteq D_0$ be invariant under equivalence edges: if $d\\in V$ and $d\\simeq d'$ in $D$, then $d'\\in V$. Put $U=\\{c\\in C_0:P(c)\\in V\\}$. Write $C_U,D_V$ for the full simplicial subsets on those vertices. They are quasicategories, and $P$ restricts to a coherent functor equivalence $C_U\\to D_V$. A chosen coherent quasi-inverse of $P$ restricts to a quasi-inverse of this map; the chosen units and counits restrict as well. The induced map of cores $C_U^\\simeq\\to D_V^\\simeq$ is a weak homotopy equivalence. More generally every coherent functor equivalence $F:E\\to E'$ between small quasicategories induces a weak homotopy equivalence $E^\\simeq\\to(E')^\\simeq$: the quasi-inverse restricts to cores and the coherent inverse equivalences give simplicial homotopies on the cores. Empty full subcategories are allowed.",
+ "statement": "Use quasicategories, coherent functor equivalences, coherent natural equivalences, full subcategories, cores and weak homotopy equivalences as in [def-cbc-enhanced-diagrams-cones]. Work in a universe containing all the displayed simplicial sets. Let $P:C\\to D$ be a coherent functor equivalence of small quasicategories, equipped with a chosen coherent quasi-inverse $Q:D\\to C$ and coherent unit and counit data, and let $V\\subseteq D_0$ be invariant under equivalence edges: if $d\\in V$ and $d\\simeq d'$ in $D$, then $d'\\in V$. Put $U=\\{c\\in C_0:P(c)\\in V\\}$. Write $C_U,D_V$ for the full simplicial subsets on those vertices. They are quasicategories, and $P$ restricts to a coherent functor equivalence $C_U\\to D_V$. A chosen coherent quasi-inverse of $P$ restricts to a quasi-inverse of this map; the chosen units and counits restrict as well. The induced map of cores $C_U^\\simeq\\to D_V^\\simeq$ is a weak homotopy equivalence. More generally every coherent functor equivalence $F:E\\to E'$ between small quasicategories induces a weak homotopy equivalence $E^\\simeq\\to(E')^\\simeq$: the quasi-inverse restricts to cores and the coherent inverse equivalences give simplicial homotopies on the cores. Empty full subcategories are allowed.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "HTT Proposition 3.2.2.14, the full-subcategory mapping test; general restriction and core argument extracted from the returned Step 26. No Stacks tag states this simplicial result; HTT is requested in report.md."
@@ -243,5 +243,58 @@
   "group": "Q158",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-319b6bb77 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, every cited statement, the unit and the citers. Shape: one commit; the item's statement, stmt_deps, source, blueprint and unit are identical to the base and live copies; proof_deps equals the union of the step uses; the dependency closure has no cycle; there are no new nodes. HTT and Kerodon are not in literature/, so the proof is correctly marked by=agent with the documents WANTED; it is not a target node, so no base-change morphism or coefficient category is involved. Steps 1-4 are definition chases and I checked each. S1: an inner horn with n>=2 contains every vertex, and inverse witnesses use only the two endpoints. S2: the inverse component d->PQ(d) of the counit plus repleteness gives Q(V)⊆U. S3: the restricted unit and counit, their inverses and the inverse triangles all have vertices in U or V. S5: I checked the product 2-simplex (s_1 a,(0,0,1)) with vertices (x,0),(y,0),(y,1); it uses only the iff clause and the edge-representation clause of the triangle-calculus statement, and the degenerate long side gives both inverse witnesses. S6: lem-cbc-simplicial-homotopy-equivalence-weak matches exactly (either orientation, no Kan or nonemptiness assumption). Small cases tested: V empty, V all of D_0, point to the two-object contractible groupoid, and a non-replete V where the conclusion fails, so the hypothesis is needed. No duplicate in the DAG (lem-cbc-enhanced-functor-cone-calculus and lem-coef-infinity-full-essential-image are different statements); the three citers use the statement as written. Accepted tool_use: lem-cbc-simplicial-homotopy-equivalence-weak (sk-prop-sf-cbc), a generic simplicial-homotopy-to-weak-equivalence fact; the unit only has the topological version. Minor: the report mentions citations.json, which is not in the commit; this is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.QuasicategoryFullSubcategoryCoreEquivalence",
+  "declaration": "SSet.Enhanced.quasicategory_full_subcategory_core_equivalence",
+  "declarations": [
+   "SSet.Enhanced.NaturalEquivalenceRestricts",
+   "SSet.Enhanced.functor_equivalence_core_weak",
+   "SSet.Enhanced.quasicategory_full_subcategory_core_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/QuasicategoryFullSubcategoryCoreEquivalence.lean",
+  "statement": "theorem quasicategory_full_subcategory_core_equivalence {C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (P : C ⟶ D) (Q : D ⟶ C) (η ηinv : ((ihom C).obj C) _⦋1⦌) (ηt ηs : ((ihom C).obj C) _⦋2⦌) (ε εinv : ((ihom D).obj D) _⦋1⦌) (εt εs : ((ihom D).obj D) _⦋2⦌) (hη : ((ihom C).obj C).δ 1 η = diagramVertex (P ≫ Q) ∧ ((ihom C).obj C).δ 0 η = diagramVertex (𝟙 C) ∧ ((ihom C).obj C).δ 2 ηt = η ∧ ((ihom C).obj C).δ 0 ηt = ηinv ∧ ((ihom C).obj C).δ 1 ηt = ((ihom C).obj C).σ 0 (((ihom C).obj C).δ 1 η) ∧ ((ihom C).obj C).δ 2 ηs = ηinv ∧ ((ihom C).obj C).δ 0 ηs = η ∧ ((ihom C).obj C).δ 1 ηs = ((ihom C).obj C).σ 0 (((ihom C).obj C).δ 0 η)) (hε : ((ihom D).obj D).δ 1 ε = diagramVertex (Q ≫ P) ∧ ((ihom D).obj D).δ 0 ε = diagramVertex (𝟙 D) ∧ ((ihom D).obj D).δ 2 εt = ε ∧ ((ihom D).obj D).δ 0 εt = εinv ∧ ((ihom D).obj D).δ 1 εt = ((ihom D).obj D).σ 0 (((ihom D).obj D).δ 1 ε) ∧ ((ihom D).obj D).δ 2 εs = εinv ∧ ((ihom D).obj D).δ 0 εs = ε ∧ ((ihom D).obj D).δ 1 εs = ((ihom D).obj D).σ 0 (((ihom D).obj D).δ 0 ε)) (V : D _⦋0⦌ → Prop) (hV : ∀ (e : D _⦋1⦌), V (D.δ 1 e) → IsEquivalenceEdge D e → V (D.δ 0 e)) : Quasicategory (fullSubcomplex C (fun c ↦ V (P.app _ c))).toSSet ∧ Quasicategory (fullSubcomplex D V).toSSet ∧ ∃ (p : (fullSubcomplex C (fun c ↦ V (P.app _ c))).toSSet ⟶ (fullSubcomplex D V).toSSet) (q : (fullSubcomplex D V).toSSet ⟶ (fullSubcomplex C (fun c ↦ V (P.app _ c))).toSSet), p ≫ (fullSubcomplex D V).ι = (fullSubcomplex C (fun c ↦ V (P.app _ c))).ι ≫ P ∧ q ≫ (fullSubcomplex C (fun c ↦ V (P.app _ c))).ι = (fullSubcomplex D V).ι ≫ Q ∧ AreNaturallyEquivalent (p ≫ q) (𝟙 _) ∧ AreNaturallyEquivalent (q ≫ p) (𝟙 _) ∧ IsFunctorEquivalence p ∧ NaturalEquivalenceRestricts (fullSubcomplex C (fun c ↦ V (P.app _ c))).ι (p ≫ q) (𝟙 _) η ηinv ηt ηs ∧ NaturalEquivalenceRestricts (fullSubcomplex D V).ι (q ≫ p) (𝟙 _) ε εinv εt εs ∧ ∃ r : (core (fullSubcomplex C (fun c ↦ V (P.app _ c))).toSSet).toSSet ⟶ (core (fullSubcomplex D V).toSSet).toSSet, r ≫ (core (fullSubcomplex D V).toSSet).ι = (core (fullSubcomplex C (fun c ↦ V (P.app _ c))).toSSet).ι ≫ p ∧ IsWeakHomotopyEquivalence r",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The chosen quasi-inverse Q, the chosen unit and counit edges, their chosen inverse edges and inverse triangles are explicit arguments of the main theorem with their boundary equations (reviewer fix: the delivered head only asserted that some unrelated witnesses restrict). NaturalEquivalenceRestricts states that exactly these chosen witnesses restrict. The general core theorem identifies the actual restrictions of the quasi-inverse and the coherent cylinders. Returned source-provenance correction and all three citers audited in statement_change; the mathematical statement is unchanged.",
+  "fixed_by": "NT-stage2-cc-293abb569"
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "Q14 stage 2",
+  "old_statement": "Use quasicategories, coherent functor equivalences, coherent natural equivalences, full subcategories, cores and weak homotopy equivalences as in [def-cbc-enhanced-diagrams-cones]. Work in a universe containing all the displayed simplicial sets. Let $P:C\\to D$ be a coherent functor equivalence of small quasicategories, and let $V\\subseteq D_0$ be invariant under equivalence edges: if $d\\in V$ and $d\\simeq d'$ in $D$, then $d'\\in V$. Put $U=\\{c\\in C_0:P(c)\\in V\\}$. Write $C_U,D_V$ for the full simplicial subsets on those vertices. They are quasicategories, and $P$ restricts to a coherent functor equivalence $C_U\\to D_V$. A chosen coherent quasi-inverse of $P$ restricts to a quasi-inverse of this map; the chosen units and counits restrict as well. The induced map of cores $C_U^\\simeq\\to D_V^\\simeq$ is a weak homotopy equivalence. More generally every coherent functor equivalence $F:E\\to E'$ between small quasicategories induces a weak homotopy equivalence $E^\\simeq\\to(E')^\\simeq$: the quasi-inverse restricts to cores and the coherent inverse equivalences give simplicial homotopies on the cores. Empty full subcategories are allowed.",
+  "what": "The original prose left the chosen quasi-inverse and its coherent unit/counit witnesses implicit, although the Lean statement takes Q, hη and hε as explicit data. The corrected statement makes that supplied data explicit without changing the mathematical assertion. The source record is also corrected: HTT §1.2.11 and Proposition 1.2.5.3 with the following paragraph give the full-subcategory and core foundations; Proposition 3.2.2.14 is only an application to marked mapping simplices, not the generic lemma. The three citers use the same assertion and remain valid.",
+  "source": {
+   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+   "place": "HTT §1.2.11, printed p.44 (PDF p.62), full subcategories spanned by a vertex set; Proposition 1.2.5.3 and the paragraph following its proof, printed pp.35–36 (PDF pp.53–54), core construction and invariance under categorical equivalence. The chosen inverse/unit/counit restrictions and core cylinders are the explicit agent-written argument of this node. Proposition 3.2.2.14, printed p.187 (PDF p.205), is an application to marked mapping simplices, not the statement of this generic lemma."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-cartesian-cone-fiber-comparison",
+    "holds": true,
+    "note": "Step 26 verifies repleteness and inverse-image membership for relative marked mapping objects and uses the unchanged restricted core weak equivalence."
+   },
+   {
+    "id": "lem-coef-cartesian-mapping-simplex-presentation",
+    "holds": true,
+    "note": "Step 11 checks the base and marking predicates and applies the unchanged replete full-subcategory/core conclusion to the precomposition equivalence."
+   },
+   {
+    "id": "lem-coef-pattern-section-core-identification",
+    "holds": true,
+    "note": "Step 6 uses the unchanged general core-invariance clause after obtaining an equivalence of strict section quasicategories; no repleteness of strict sections is required."
+   }
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-293abb569",
+  "group": "Q14",
+  "result": "fix",
+  "note": "Read check-brief2, packet, snapshot node/module/report, dependency declarations in EnhancedDiagramsCones (IsEquivalenceEdge, fullSubcomplex, core, diagramVertex, AreNaturallyEquivalent, IsFunctorEquivalence, IsWeakHomotopyEquivalence) and the three citer steps. Node diff vs base: only statement, lean, statement_change; old_statement verbatim; citer audit correct. All clauses match except H3: the delivered main theorem took hη/hε as Props and concluded ∃ unit/counit witnesses (not tied to the supplied data) that restrict, which is weaker than the node's 'the chosen units and counits restrict'. FIX: the main theorem now takes the chosen η ηinv ηt ηs / ε εinv εt εs with their 8 boundary equations as hypotheses and concludes NaturalEquivalenceRestricts for exactly these; true by node steps 2-3; citers use only the core clauses. General theorem functor_equivalence_core_weak is correct (ι₀ = vertex 0 = δ1 η). No hollow defs, sorry only, docstrings with source and blueprint, no extra hypotheses or universe restriction, edge cases V=∅ / V=D₀ / empty inputs covered. nt_compile --json: delivered 11.3 s clean, fixed 3.1 s clean, broken control reports an error. Note for maintainer: top-level source still says HTT 3.2.2.14 (the delivery tool keeps it); the corrected place is in statement_change.source and can be copied by hand at landing. fixes/: complete module, lean-record.json (note), report.md.",
+  "statement_corrected": true
  }
 }

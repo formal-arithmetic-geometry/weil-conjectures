@@ -12,7 +12,9 @@
   "def-coef-infinity-category-of-spaces",
   "def-coef-presentable-infinity-category",
   "def-coef-infinity-fibrations",
-  "lem-coef-space-valued-straightening"
+  "lem-coef-space-valued-straightening",
+  "lem-coef-suspension-square-comparison",
+  "lem-coef-infinity-cocone-restriction-initial"
  ],
  "proof": [
   {
@@ -291,5 +293,42 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-c6a67d218 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the statement of every cited node in full. HTT is not in literature/ (WANTED is kept), so I checked the mathematics directly against HTT 6.1.1.1, 2.4.2.5/2.4.1.5, 3.3.3.3 and 6.1.3.4-6.1.3.5. The item statement is unchanged. All seven steps are correct. Step 1: ev_1 is a Cartesian fibration whose Cartesian edges are the pullback squares (arrow mapping-space formula plus the dual cocartesian criterion), and the restriction to S is a right fibration (for n>=2 a right horn contains every vertex; for Lambda^1_1 pullback stability and repleteness give the new vertex). Step 2: cone-mono-right-anodyne with A empty gives exactly the apex inclusion, and exponentiation gives contractible apex-pullback lifts, so the introductory clauses are now proved, not assumed. Steps 3-6: the section criterion; B->A_K fully faithful (dual join-cone formula plus the colimit criterion) and essentially surjective (presentability); universality gives A_{K>} inside B; A_{K>} is replete inside B, so (a)<=>(b). Step 7 (K empty): both (a) and (b) reduce to 1_L in S, using strict initiality. New nodes: lem-coef-cartesian-core-right-fibration (true; tested on B=pt, p=id and ordinary fibrations; no duplicate) and lem-coef-right-fibration-cone-section-criterion (true; tested on K empty and K=pt; strictly more general than lem-coef-right-fibration-section-limit, which needs K to be a quasicategory). Neither restates an item clause. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, used as a generic cone/functor calculus black box, as in 168 nodes of this unit. One fix: the item's source.place still claimed a nonexistent 'sandbox HTT-second-reader.pdf'; replaced with the online-PDF/WANTED wording in fixes/dag/nodes/sec-six-functors/lem-coef-slice-cartesian-colimit-criterion.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SliceCartesianColimitCriterion",
+  "declaration": "SSet.Enhanced.slice_cartesian_colimit_criterion",
+  "file": "lean/Sheaf/CategoryTheory/SliceCartesianColimitCriterion.lean",
+  "statement": "theorem slice_cartesian_colimit_criterion {C : SSet.{u + 1}} [SSet.Quasicategory C] (hpresentable : SSet.Presentability.IsPresentable.{u, u} C) (hfinite : SuspensionComparison.HasFiniteLimits C) (D : SliceCartesianCriterionData C) (huniversal : HasDescentUniversalColimits.{u, u + 1} C) (st : SpaceStraightening.Straightening.{u + 1}) {K : SSet.{u + 1}} (hsmall : Presentability.IsSmall.{u} K) (q : rightJoinCone K ⟶ C) (hq : IsDescentColimitCocone q) : IsSliceClassifierLimit st hfinite D q ↔ (∀ (p : rightJoinCone K ⟶ C) (α : rightJoinCone K ⟶ (ihom Δ[1]).obj C), α ≫ evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm (1 : Fin 2)) = q ∧ α ≫ evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm (0 : Fin 2)) = p → IsDescentColimitCocone p → CriterionCartesianOnBase D α → IsDescentCartesianTransformation α ∧ CriterionApexInClass D α)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.ArrowReplete",
+   "SSet.Enhanced.ArrowPullbackStable",
+   "SSet.Enhanced.restrictedArrowSubcomplex",
+   "SSet.Enhanced.restrictedArrow",
+   "SSet.Enhanced.restrictedArrowTarget",
+   "SSet.Enhanced.SliceCartesianCriterionData",
+   "SSet.Enhanced.restrictedArrowTarget_fibrations",
+   "SSet.Enhanced.sliceObjectsInClass",
+   "SSet.Enhanced.restrictedArrowTarget_fiber_core",
+   "SSet.Enhanced.sliceOppositeFibration",
+   "SSet.Enhanced.sliceClassifier",
+   "SSet.Enhanced.sliceClassifierBase",
+   "SSet.Enhanced.IsSliceClassifierLimit",
+   "SSet.Enhanced.CriterionCartesianOnBase",
+   "SSet.Enhanced.CriterionApexInClass",
+   "SSet.Enhanced.slice_cartesian_colimit_criterion"
+  ],
+  "note": "Repair of immutable head f7a99fc42aaf: O^(S) has S-vertices and pullback-square edges. Its right-fibration condition is a theorem, not a hypothesis. Condition (a) is the actual IsLimiting assertion in the coherent nerve of Kan complexes for the opposite-left-fibration classifier obtained from the recorded global space-valued straightening interface. The cone apex and every cylinder simplex are fixed by q and the reversed right-join prism. Smallness of K is explicit. All definitions have real data; the three postponed theorems correspond to the introductory fibration assertion, its slice-core fiber identification, and the criterion in this node. Universality is an explicit hypothesis of the criterion, and is not used as a hypothesis of the introductory fibration results."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a5a77dee",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_deps declarations (EnhancedDiagramsCones comma/coneCategory/IsLimiting, SpaceValuedStraightening Straightening/LeftFibrations, SpaceTransportClassification TransportFibration/transportFibrationValue, IsPresentable/IsSmall, HasFiniteLimits, rightJoinPrismSimplex, reused descent predicates), the 359-line module and report. Clause check: O^(S) = subcomplex of Fun(Δ1,C) with S-vertices and pullback-square edges; pullback stability oriented δ0→δ1 correctly; slice over x (outgoing=true); right fibration and fiber core are postponed theorems, not hypotheses; (a) pins the fibration vertex by transportFibrationValue and the cone by apex plus the reversed prism (rev convention verified), IsLimiting in Spaces.{u+1}; (b) has both endpoint equations, p colimiting, Cartesian with S on base, Cartesian with S at the apex on the cone. Edge cases K=∅ and S=∅ consistent; one universe, nothing unbound. lean.statement verbatim; 16 declarations, all with source/blueprint docstrings; sorry only in 3 theorem bodies; added stmt_deps are landed nodes. nt_compile clean (4.3/7.0 s, no warnings). Non-blocking notes: cone-pullback intro clause not a separate theorem (derivable); stage-3 import-cycle risk with CartesianColimitDescentCriterion; st universally quantified (acceptable); pre-existing source.place 'sandbox HTT-second-reader.pdf' wording; second reading is a self-check."
  }
 }

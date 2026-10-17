@@ -31,7 +31,9 @@
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability",
   "def-coef-monoidal-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-generalized-active-extension-criterion",
+  "lem-coef-parametric-universal-arrows"
  ],
  "proof": [
   {
@@ -275,5 +277,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicFreeCoconeCharacterization",
+  "declaration": "SSet.Enhanced.GeneralizedActiveExtension.operadic_free_cocone_characterization",
+  "declarations": [
+   "SSet.Enhanced.GeneralizedActiveExtension.operadicUnitFamily",
+   "SSet.Enhanced.GeneralizedActiveExtension.HasOperadicFreeCocone",
+   "SSet.Enhanced.GeneralizedActiveExtension.HasOperadicMappingEquivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicFreeCoconeCharacterization.lean",
+  "statement": "theorem operadic_free_cocone_characterization {A B E : SSet.{max (u + 1) v}} [Quasicategory E] (hsmallA : Presentability.IsSmall.{u} A) (hsmallB : Presentability.IsSmall.{u} B) (pA : A ⟶ monoidalSimplexBase.{max (u + 1) v}) (hA : Nonsymmetric.IsGeneralizedOperad pA) (pB : B ⟶ monoidalSimplexBase.{max (u + 1) v}) (hB : Nonsymmetric.IsGeneralizedOperad pB) (q : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hq : Algebroid.IsPresentablyMonoidal.{u, v} q) (u : A ⟶ B) (hu : IsLaxMonoidalInfinityFunctor pA pB u) (hzero : IsFunctorEquivalence (GeneralizedActiveExtension.zeroFiberMap (pA := pA) (pB := pB) u hu.1)) (X : (Nonsymmetric.algebras pA q) _⦋0⦌) : (∃ F : (Nonsymmetric.algebras pB q) _⦋0⦌, ∃ η : mappingSpace (Nonsymmetric.algebras pA q) X ((Nonsymmetric.restriction q u hu).app _ F) _⦋0⦌, HasOperadicFreeCocone pA pB q u hu X F η ∧ HasOperadicMappingEquivalence pA pB q u hu X F η) ∧ (∀ (F : (Nonsymmetric.algebras pB q) _⦋0⦌) (η : mappingSpace (Nonsymmetric.algebras pA q) X ((Nonsymmetric.restriction q u hu).app _ F) _⦋0⦌), HasOperadicFreeCocone pA pB q u hu X F η → HasOperadicMappingEquivalence pA pB q u hu X F η)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 0b692fb9bf45 (H3/H5/H13): the canonical active diagram is specified by coherent cocartesian transport of X; the apex is F(d); the same cocone factors the unit/action composite on the whole active index. Contexts use the actual mapped cocone. The universal comparison is the existing fixed-leg composition span for the given η, on every simplicial parameter, with restriction compatibility. Small operads and an independent ambient universe are explicit. No mathematical statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c23a4b504",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Item: every hypothesis matches the node with nothing stronger: small operads, Kan zero fibers (part of Nonsymmetric.IsGeneralizedOperad), inert-preserving u, zero-fiber equivalence, presentably monoidal V. activeIndex is the slice over b (commaSubcomplex orientation checked) and arrows between its objects are automatically active. The cocone is tied to the actual eta and F's action via the Gamma/T triangles, with apex F(b). The tensor-context colimit condition is equivalent to the node's operadic condition under presentability (GH A.2.10, node steps 1-2). UniversalArrowAt unfolds to restriction followed by composition with eta as an equivalence Map(F,B)~Map(X,u*B); naturality is the version over every parameter K; restriction compatibility is implied by the landed parametric_universal_arrows. Dependency: lem-coef-generalized-active-extension-criterion had no lean record; the delivery changes only its lean field and the module matches its node (no presentability assumed, restriction is precomposition, left adjoint with unit and colour colimit formula). Item stmt_deps gain it and the landed parametric-universal-arrows; stage2_delivery accepts this; no path back to the item (952 and 632 nodes reachable). No hollow definitions; one sorry per module; docstrings carry source, blueprint tag and the node's proof steps; statements verbatim. Both files compile cleanly as siblings via nt_compile.py --json (6.9 s each, rc 0). Cosmetic only: NK author header, universe u shares its name with the map u, pre-existing Nonsymmetric/InertOperad duplication."
  }
 }

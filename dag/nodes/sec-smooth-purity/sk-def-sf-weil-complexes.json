@@ -64,5 +64,46 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictWeilDualTate",
+  "declaration": "AlgebraicGeometry.Etale.WeilComplex.contragredientDatum",
+  "declarations": [
+   "AlgebraicGeometry.Etale.WeilComplex",
+   "AlgebraicGeometry.Etale.WeilComplex.Hom",
+   "AlgebraicGeometry.Etale.WeilComplex.forget",
+   "AlgebraicGeometry.Etale.WeilComplex.map_hom_eq_zero_of_iso_unit_geometricFiber",
+   "AlgebraicGeometry.Etale.strictWeilHomComparison",
+   "AlgebraicGeometry.Etale.strictWeilHomComparison_isIso",
+   "AlgebraicGeometry.Etale.strictWeilHomIso",
+   "AlgebraicGeometry.Etale.strictWeilContragredientMap",
+   "AlgebraicGeometry.Etale.strictWeilContragredientMap_isIso",
+   "AlgebraicGeometry.Etale.strictWeilContragredientIso",
+   "AlgebraicGeometry.Etale.WeilComplex.contragredientDatum",
+   "AlgebraicGeometry.Etale.strictWeilTateIso",
+   "AlgebraicGeometry.Etale.WeilComplex.tateLine",
+   "AlgebraicGeometry.Etale.strictWeilTateIso_zero",
+   "AlgebraicGeometry.Etale.strictWeilTwistedContragredientIso",
+   "AlgebraicGeometry.Etale.strictWeilTwistedContragredientMap",
+   "AlgebraicGeometry.Etale.strictWeilTateScalar",
+   "AlgebraicGeometry.Etale.strictWeilTateCyclotomicScalar",
+   "AlgebraicGeometry.Etale.strictWeilTateCyclotomicScalar_normalization",
+   "AlgebraicGeometry.Etale.strictWeilTateIso_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/StrictWeilDualTate.lean",
+  "statement": "def WeilComplex.contragredientDatum (K : WeilComplex (ModuleCat.{u + 1} Λ) g) : (L((g.hom)^*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) T).obj (op ((DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) T).obj K.obj))) ≅ (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) T).obj (op ((DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) T).obj K.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned bd14e5ad453c: imports and reuses the existing strict-pair category; adds the canonical internal-Hom pullback comparison, typed contragredient and twisted-dual composites, canonical Tate pairs, zero-twist identification, and geometric cyclotomic scalar normalization. The scalar normalization after Z_l coefficient realization is not restricted to finite rings. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-201d7b970",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Clause by clause, the Lean matches the node (statement verbatim) and its main-20261015 source section, complement included. It reuses the upstream WeilComplex, Hom, category instance, forget and the Hom-vanishing lemma unchanged. The dual-datum first arrow is built from the actual pullback and evaluation maps (homEquiv transpose), with a named IsIso theorem that is true for an automorphism and adds no perfectness. Second arrow: the unit iso. Third arrow: RHom.map of phi.inv.op, contravariance correct. The twisted-dual datum is tensorWeilDatum. Tate datum: the upstream pullback iso; tau_0 = phi_Lambda is derivable from the twist axioms. Sign checked: geometric Frobenius gives q^-r, matching strictWeilTateScalar. The cyclotomic scalar theorem is true. Finite Lambda in the operator theorem comes from upstream IsNormalized. Universes are the upstream convention. No empty definitions; every theorem is sorry with source and proof docstring; blueprint docstrings on all 16 declarations. stage2_delivery check_lean_text, check_record and check_report: no failures. Empty stmt_deps is consistent. nt_compile --json: clean, no errors or warnings. Landing preflight not run (review service blocks git); the landing tool runs it."
  }
 }

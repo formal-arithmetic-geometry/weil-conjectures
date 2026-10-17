@@ -346,5 +346,42 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q99-f39768fa1 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited statements/sources; all ten steps check out, including canonical resolution comparisons and coefficient categories. Corrected two record faults: the 03CO/03DB source description and a failed Loogle query mislabeled as no match. Whole corrected JSON is under fixes/dag/nodes; detailed checks are in review.md. No mathematical statement changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismReductionTower",
+  "declaration": "WeilConjectures.isomorphismReductionTower",
+  "declarations": [
+   "WeilConjectures.isoReductionAbSheafify",
+   "WeilConjectures.isoReductionAbBijective",
+   "WeilConjectures.isoReductionSiteSmall",
+   "WeilConjectures.isoReductionCompletedMap_existsUnique",
+   "WeilConjectures.isoReductionCompletedMap",
+   "WeilConjectures.isoReductionIntegralInverse",
+   "WeilConjectures.isoReductionFiniteInverse",
+   "WeilConjectures.isoReductionFiniteLimits",
+   "WeilConjectures.isoReductionFiniteColimits",
+   "WeilConjectures.isoReductionIntegralComplex",
+   "WeilConjectures.isoReductionFiniteComplex",
+   "WeilConjectures.IsoReductionFlatComplex",
+   "WeilConjectures.isoReductionFiniteDerived",
+   "WeilConjectures.isoReductionImageComparison",
+   "WeilConjectures.isoReductionMapQuasiIso",
+   "WeilConjectures.isomorphismReductionTower"
+  ],
+  "file": "lean/Sheaf/Paper/IsomorphismReductionTower.lean",
+  "statement": "theorem isomorphismReductionTower [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] : ∃ β : ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ), IsoReductionFlatComplex l E Y P → ∀ n : ℕ, (isoReductionFiniteComplex l E g n).obj (unrestrictedTowerFiniteComplex l E Y n P) ≅ unrestrictedTowerFiniteComplex l E X n ((isoReductionIntegralComplex l E g).obj P), (∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ) (hP : IsoReductionFlatComplex l E Y P) (n : ℕ) (i : ℤ) (U : X.ProEt) (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj (op ((proEtaleIsoPostcompose g).obj U))) (x : (P.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))), (((β P hP n).hom.f i).val.app (op U)) (unrestrictedTowerTensorSection l E Y n (P.X i) (op ((proEtaleIsoPostcompose g).obj U)) a x) = unrestrictedTowerTensorSection l E X n (((isoReductionIntegralComplex l E g).obj P).X i) (op U) ((isoSectionwiseConstantMap g (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app (op U) a) x) ∧ (∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ) (hP : IsoReductionFlatComplex l E Y P) (n : ℕ) (i : ℤ) (U : X.ProEt) (x : (P.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))), (((β P hP n).hom.f i).val.app (op U)) (((unrestrictedTowerUnit l E Y P n).f i).val.app (op ((proEtaleIsoPostcompose g).obj U)) x) = (((unrestrictedTowerUnit l E X ((isoReductionIntegralComplex l E g).obj P) n).f i).val.app (op U)) x) ∧ (∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ) (hP : IsoReductionFlatComplex l E Y P) (n : ℕ) (i : ℤ) (U : X.ProEt) (z : ((unrestrictedTowerFiniteComplex l E Y (n + 1) P).X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))), (((β P hP n).hom.f i).val.app (op U)) (((unrestrictedTowerTransition l E Y P n).f i).val.app (op ((proEtaleIsoPostcompose g).obj U)) z) = (((unrestrictedTowerTransition l E X ((isoReductionIntegralComplex l E g).obj P) n).f i).val.app (op U)) ((((β P hP (n + 1)).hom.f i).val.app (op U)) z)) ∧ (∀ (P P' : CochainComplex (scalarReductionSource l E Y) ℤ) (hP : IsoReductionFlatComplex l E Y P) (hP' : IsoReductionFlatComplex l E Y P') (a : P ⟶ P') (n : ℕ), (isoReductionFiniteComplex l E g n).map (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).map a) ≫ (β P' hP' n).hom = (β P hP n).hom ≫ ((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).map ((isoReductionIntegralComplex l E g).map a)) ∧ (∀ (P P' K : CochainComplex (scalarReductionSource l E Y) ℤ) (hP : IsoReductionFlatComplex l E Y P) (hP' : IsoReductionFlatComplex l E Y P') (q : P ⟶ K) (q' : P' ⟶ K) (hq : QuasiIso q) (hq' : QuasiIso q') (hFP : CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E X) ((isoReductionIntegralComplex l E g).obj P)) (hFP' : CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E X) ((isoReductionIntegralComplex l E g).obj P')) (n : ℕ), (isoReductionImageComparison l E g n q q' ⟨hq, hP.1⟩ ⟨hq', hP'.1⟩).hom ≫ DerivedCategory.Q.map (β P' hP' n).hom = DerivedCategory.Q.map (β P hP n).hom ≫ (unrestrictedTowerFiniteComparison l E X n ((isoReductionIntegralComplex l E g).map q) ((isoReductionIntegralComplex l E g).map q') ⟨isoReductionMapQuasiIso l E g q hq, hFP⟩ ⟨isoReductionMapQuasiIso l E g q' hq', hFP'⟩).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-94c5afc59"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94c5afc59",
+  "group": "Q63",
+  "result": "fix",
+  "note": "All item clauses match the node: completed-coefficient iso characterized by its projections, beta with its pure-tensor formula, quotient and transition identities, chain-map naturality, canonical resolution-comparison compatibility in D(X,A_n). Universes independent, no stronger assumptions, statements verbatim, docstrings and proof steps present, sorry only, no hollow definitions. The two section 1(B) dependency repairs (no FiniteFieldDatum) are justified and match their nodes. Fixes: (1) H4: unrestrictedTowerTransition now reuses the published unrestrictedIntegralTransition (NI) instead of a second choice; the existence-uniqueness theorem now covers the unit only; the unused transition condition is removed; all recorded signatures unchanged. (2) Added the missing proof-dependency imports LeftDerivedFromResolvingClass and RingedSiteModules to the item module. nt_compile of the three files: delivered and fixed both rc=0, no errors or warnings."
  }
 }

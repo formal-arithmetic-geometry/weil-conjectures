@@ -230,5 +230,33 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-f602c1f4c (reviewer sub-agent of L); spot-checked: Read the item, every proof step, all cited node statements, unit/chapter route, Kerodon 003N and 02KF source locations, blueprint route, and Mathlib search records. The explicit degreewise opposite construction is correct, endpoint and apex behavior match the pullback definitions, mapping-space reversal gives initial/terminal duality, and empty and small test cases pass. No new nodes or duplicate claims were introduced; the sole off-unit calculus tool is explicitly justified. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedCoconeOppositeLimit",
+  "declaration": "SSet.Enhanced.fixed_cocone_opposite_limit",
+  "declarations": [
+   "SSet.Enhanced.fixedCoconeOppositeVertex",
+   "SSet.Enhanced.FixedCoconeOppositeApexFormula",
+   "SSet.Enhanced.FixedCoconeOppositeUniversal",
+   "SSet.Enhanced.FixedCoconeOppositeMappingSpaces",
+   "SSet.Enhanced.FixedCoconeOppositeSimplexFormula",
+   "SSet.Enhanced.fixed_cocone_opposite_limit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FixedCoconeOppositeLimit.lean",
+  "statement": "theorem fixed_cocone_opposite_limit (K E : SSet.{u}) [Quasicategory E] (F : K ⟶ E) : Quasicategory (SSet.opFunctor.obj E) ∧ ∃ e : (coconeCategory F).op ≅ coneCategory (SSet.opFunctor.map F), FixedCoconeOppositeApexFormula e ∧ FixedCoconeOppositeSimplexFormula e ∧ FixedCoconeOppositeUniversal e ∧ FixedCoconeOppositeMappingSpaces e",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations retain the degreewise interval/parameter reversal, constant-diagram apex equation, mapping-space weak equivalence and contractibility, and initial/terminal duality; the theorem proof is postponed.",
+  "fixed_by": "NT-stage2-cc-dadd9e147"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dadd9e147",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Read node, 3 stmt deps + Lean (EnhancedDiagramsCones, RelativeConeEquivalence, OppositeJoinFunctor, EnhancedFunctorConeCalculus), Mathlib Op/opIso, Kerodon 003N/02KF. Simplex formula correctly pins Phi (h^o = h^op(id x rho x rho), endpoints exchanged), universal clause and hypotheses OK, K=empty covered, single-universe convention matches coneCategory, no hollow defs, only theorem sorry, statement verbatim. Findings fixed in fixes/FixedCoconeOppositeLimit.lean: (1) H3 the mapping-space clause was a bare exists-eta weak equivalence from Map(c,d).op unrelated to e; now states IsIso (mappingSpaceMap e.hom ...) (the induced, natural map) plus a weak equivalence Map_{C_F}(c,d) -> Map_L(d^o,c^o) and the contractibility iff; (2) calculusApex, from a node not in stmt_deps, inlined as the comma pullback first projection (same map). Delivered and fixed files compile clean with nt_compile.py (2.8 s / 24.3 s); signature and declarations unchanged."
  }
 }

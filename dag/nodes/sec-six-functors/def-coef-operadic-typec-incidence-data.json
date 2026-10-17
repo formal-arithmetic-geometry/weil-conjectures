@@ -1,0 +1,112 @@
+{
+ "id": "def-coef-operadic-typec-incidence-data",
+ "kind": "definition",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "title": "Finite type-(c) incidence indexing data",
+ "status": "split",
+ "statement": "For $r\\geq0$, use the canonical finite incidence category $I_r:=\\operatorname{AsSmall}(\\operatorname{Incidence}(r))$ of inert maps from $[r]$ to $[1]$ and $[0]$, with exactly the edge and vertex objects and commuting incidence arrows of Definition 3.1.13. Package a boundary map $b_r:N(I_r)\\to N(\\Delta^{\\mathrm{op}})$ together with a proof that $b_r$ is the canonical incidence projection, and package an apex extension $\\bar b_r:\\Delta^0\\star N(I_r)\\to N(\\Delta^{\\mathrm{op}})$ with apex $[r]$, boundary $b_r$, and each mixed leg equal to the prescribed inert base edge, using [def-cbc-enhanced-diagrams-cones], [def-coef-monoidal-infinity-category], and [def-coef-infinity-relative-cone].",
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category",
+  "def-coef-infinity-relative-cone"
+ ],
+ "source": {
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Definition 3.1.13 and Appendix A.3.1"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite category with edge and vertex incidence objects",
+   "results": "No exact declaration; service returned no usable match.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite category with edge and vertex incidence objects",
+   "results": "Only generic finite-category constructors.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "incidence.*category|type.?c.*incidence",
+   "sub": "Mathlib, WeilConjectures, lean/Sheaf",
+   "results": "No matching declaration in Mathlib, source WeilConjectures, or lean/Sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-operadic-typec-incidence-cone",
+  "date": "2026-10-17",
+  "group": "Q88"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, prescribed type-(c) incidence cone",
+   "via": [
+    "lem-coef-operadic-typec-incidence-cone",
+    "lem-coef-operadic-correspondence-kan-filling",
+    "lem-coef-operadic-free-cocone-characterization",
+    "lem-coef-free-operadic-active-slice-formula",
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-fixed-object-enriched-rectification",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TypeCIncidenceData",
+  "declaration": "SSet.Enhanced.TypeCIncidenceData",
+  "file": "lean/Sheaf/CategoryTheory/TypeCIncidenceData.lean",
+  "statement": "structure TypeCIncidenceData (r : ℕ) : Type (u + 1)",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.TypeCIncidenceIndex",
+   "SSet.Enhanced.typeCIncidenceConeEdge",
+   "SSet.Enhanced.TypeCIncidenceData"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bc1c598d",
+  "group": "Q88",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bc1c598d",
+  "group": "Q88",
+  "result": "fix",
+  "note": "Statement matches node clause by clause (canonical Incidence r: exactly e_j, v_i, endpoint arrows; b forced to incidenceProjection; barB apex/boundary/legs strict and unique; exact boundary and base equalities; IsRelativeLimitDiagram; cocartesian apex legs; explicit r=0 apex f(v0)/identity-leg clause; no colimit hypothesis; Quasicategory instance required by IsMonoidalInfinityCategory). New def node fields OK, not hollow, reuses Nonsymmetric.Incidence (H4). Fixes: H8 docstrings added to typeCIncidenceConeEdge and TypeCIncidenceData.I; H9/rule 7 removed unused public import InertRelativeTupleCone and added plain imports of the 5 proof-dependency modules. Signatures unchanged. nt_compile --json clean for delivered and fixed files (rc 0). Advisory: TypeCIncidenceData imports OperadicAlgebraPresentability, whose node depends on this item through its proof chain; no cycle now, but stage 3 should move Incidence to a lower module."
+ }
+}

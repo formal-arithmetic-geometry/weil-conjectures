@@ -260,10 +260,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-fc840a5be",
-  "group": "NJ",
+  "reviewer": "NT-stage2-cc-92f0ca9ee",
+  "group": "Q12",
   "result": "pass",
-  "note": "Read the node, all 6 stmt_dep records and their Lean, the module, the report and the commit diff (only the lean record, module and report are added; the node statement is unchanged). Every clause matches: inline stalk normality; the recorded affine-open IsRegularRing regularity; AlgebraicGeometry.IsNoetherian for Noetherian; Fin n opens whose range is irreducibleComponents, closed, pairwise disjoint, covering, each IsIntegral and normal as toScheme, with IsColimit of the cofan of inclusions; (3) has Nonempty + PreconnectedSpace giving IrreducibleSpace. No extra assumptions. Empty scheme ok with n=0; no universe restriction. Neither Mathlib nor the project has this combined statement; IsNormalScheme includes IsIntegral so it is unsuitable; upstream Regular.lean lemmas are only partial. No definitions, proof is sorry, axioms are standard plus sorryAx; docstrings carry the source, the blueprint tag and 7 steps; lean.statement matches the file verbatim. nt_compile --json is clean (exit 0, 5-9 s); a probe showed diagnostics are reported. The Second reading section is the standard post-2026-10-17 direct-delivery note. Non-blocking: the report's upstream search summary is incomplete."
+  "note": "Duplicate re-delivery of rem-pc-regular-normal, already landed by NJ (8c2c8f51dc); Q12's commit only changes lean.by NJ->Q12, adds one module-docstring sentence and its report; the signature is byte-identical to main. Independently re-checked every clause against the node and Stacks 0569/033M (properties.tex l.1184, l.960): inline stalk normality (IsNormalScheme includes IsIntegral, so it is a different notion); recorded affine-open IsRegularRing regularity; IsNoetherian = locally Noetherian + CompactSpace; Fin n opens with range = irreducibleComponents, closed, pairwise disjoint, covering, each IsIntegral and normal as toScheme, IsColimit of the cofan of the open inclusions; (3) Nonempty + PreconnectedSpace => IrreducibleSpace. No stronger assumptions; empty scheme gives n=0; only universe u. No definitions, proof sorry, axioms standard + sorryAx, docstrings carry source, blueprint tag and 7 steps, lean.statement matches the file verbatim. nt_compile --json on the snapshot file at its library path: clean (20.5 s / 3.7 s), and an error probe confirms diagnostics are reported. Non-blocking: the duplicate landing re-attributes lean.by to Q12 (the merge tool requires by == group) while the file header still says NJ; IsNormalScheme could have phrased the component clause equivalently."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.RegularNormalDecomposition",
@@ -271,7 +271,7 @@
   "file": "lean/Sheaf/AlgebraicGeometry/RegularNormalDecomposition.lean",
   "statement": "theorem regular_normal_and_normal_decomposition (X : Scheme.{u}) : ((∀ x : X, ∃ U : X.affineOpens, x ∈ (U : X.Opens) ∧ IsRegularRing Γ(X, U)) → ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) ∧ (IsNoetherian X → (∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) → ∃ (n : ℕ) (U : Fin n → X.Opens), Set.range (fun i : Fin n ↦ (U i : Set X)) = irreducibleComponents X ∧ (∀ i : Fin n, IsClosed (U i : Set X)) ∧ (∀ i j : Fin n, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ i : Fin n, U i) = ⊤ ∧ (∀ i : Fin n, IsIntegral (U i).toScheme ∧ ∀ x : (U i).toScheme, IsDomain ((U i).toScheme.presheaf.stalk x) ∧ IsIntegrallyClosed ((U i).toScheme.presheaf.stalk x)) ∧ Nonempty (IsColimit (Cofan.mk X (fun i : Fin n ↦ (U i).ι)))) ∧ ((∀ x : X, ∃ U : X.affineOpens, x ∈ (U : X.Opens) ∧ IsRegularRing Γ(X, U)) → IsNoetherian X → Nonempty X → PreconnectedSpace X → IrreducibleSpace X)",
   "branch": "newtargets-dag",
-  "by": "NJ",
+  "by": "Q12",
   "date": "2026-10-17",
   "existing": false
  }

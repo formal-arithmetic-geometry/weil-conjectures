@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-space-transport-classification",
-  "lem-coef-infinity-yoneda-presheaf-limits"
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-space-point-cocone-criterion"
  ],
  "proof": [
   {
@@ -230,5 +232,53 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-c0c7eaad4 (reviewer sub-agent of L); spot-checked: I read the item and its 5 steps in full, the full statements of all 8 cited nodes (plus the proofs of the section-comparison and hom-bifunctor nodes, and def-coef-infinity-category-of-spaces), and the only citer (lem-coef-generalized-operad-pattern-fibered, steps 3-4). The delivery has no new nodes and is not a target. Gepner-Haugseng 1312.3178 and Kerodon 05QM are not in literature/, so I could not check the cited source places; they stay WANTED and the proof is agent-written. One fault, repaired (C4/E5): the statement takes the Hom diagram from lem-coef-infinity-hom-bifunctor-functoriality, built by rigidification, while step 1's section comparison gives the transport/straightening bifunctor of lem-coef-space-transport-classification. Steps 1 and 4 treated these two models as the same, including their T-functoriality, but no DAG node identifies them; that would need a Yoneda-type comparison. Fix, a named statement correction that weakens nothing: the statement and stmt_deps now use the transport H_E (the model of the sibling section comparison and of the representable criterion the citer combines with the item), and the postcomposition map is named as tau_T, induced by (k,h)->(k,Th) on the pulled-back arrow fibrations. Step 1 is re-cited, and old step 4 is rewritten as steps 4 (a commutes with T, from the transport mapping formula plus composition, and pinch naturality) and 5 (c commutes with T and v, from the cone criterion with testing object L). Other checks: in step 2 the cone criterion with x=* in S_U and the point-cocone specialization with K=Delta^0 hold literally, since Fun(Delta^0,S_U)=S_U and L is a U-small Kan complex. Size hypotheses hold (E U-small). Edge cases hold: empty K gives a point and the terminal limit, Delta^0 and Delta^1, empty Hom values, empty E. The dependency closure (625 nodes) has no cycle. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (cone mapping-space criterion, already a recorded tool of sibling nodes). No duplicates, no SGA. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-constant-diagram-mapping-limit.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantDiagramMappingLimit",
+  "declaration": "SSet.Enhanced.ConstantMappingLimit.constant_diagram_mapping_limit",
+  "declarations": [
+   "SSet.Enhanced.ConstantMappingLimit.spacePresentation_eq",
+   "SSet.Enhanced.ConstantMappingLimit.lowerSpaces",
+   "SSet.Enhanced.ConstantMappingLimit.row",
+   "SSet.Enhanced.ConstantMappingLimit.diagram",
+   "SSet.Enhanced.ConstantMappingLimit.families",
+   "SSet.Enhanced.ConstantMappingLimit.IsIdentityPoint",
+   "SSet.Enhanced.ConstantMappingLimit.evaluationTriangles",
+   "SSet.Enhanced.ConstantMappingLimit.limitTriangles",
+   "SSet.Enhanced.ConstantMappingLimit.PointFamilyFormula",
+   "SSet.Enhanced.ConstantMappingLimit.evaluationSource",
+   "SSet.Enhanced.ConstantMappingLimit.ComparisonSquare",
+   "SSet.Enhanced.ConstantMappingLimit.pulledArrows",
+   "SSet.Enhanced.ConstantMappingLimit.fibrationEdgeMap",
+   "SSet.Enhanced.ConstantMappingLimit.TransportMapCompatibility",
+   "SSet.Enhanced.ConstantMappingLimit.transformationArrow",
+   "SSet.Enhanced.ConstantMappingLimit.familyAction",
+   "SSet.Enhanced.ConstantMappingLimit.InducedLimitArrow",
+   "SSet.Enhanced.ConstantMappingLimit.limitSource",
+   "SSet.Enhanced.ConstantMappingLimit.limitAction",
+   "SSet.Enhanced.ConstantMappingLimit.LimitCompatibility",
+   "SSet.Enhanced.ConstantMappingLimit.PostcompositionCompatibility",
+   "SSet.Enhanced.ConstantMappingLimit.RestrictedFamilyMap",
+   "SSet.Enhanced.ConstantMappingLimit.RestrictedLimitSquare",
+   "SSet.Enhanced.ConstantMappingLimit.RestrictionEvaluationCompatibility",
+   "SSet.Enhanced.ConstantMappingLimit.RestrictionLimitCompatibility",
+   "SSet.Enhanced.ConstantMappingLimit.RestrictionCompatibility",
+   "SSet.Enhanced.ConstantMappingLimit.constant_diagram_mapping_limit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConstantDiagramMappingLimit.lean",
+  "statement": "theorem constant_diagram_mapping_limit (E : SSet.{u}) [Quasicategory E] (H : YonedaLimits.HomPresentation.{u, 0} (pointCoconeIndex E)) (z : E _⦋0⦌) : ∃ e : ((ihom Δ[1]).obj CategoryTheory.Spaces.infinityCategory.{u}) _⦋0⦌, IsIdentityPoint H z e ∧ PostcompositionCompatibility E H z e ∧ RestrictionCompatibility E H z e ∧ ∀ (K : SSet.{u}) [Quasicategory K] (F : K ⟶ E), (∃ t : (coneCategory (diagram F H z)) _⦋0⦌, IsLimiting (diagram F H z) t) ∧ IsWeakHomotopyEquivalence (universalCompositionSource ((ihom (pointCoconeIndex K)).map (row H z)) false (diagramVertex (SSet.uliftFunctor.{u + 1, u}.map F)) ((constantDiagrams (pointCoconeIndex K) (pointCoconeIndex E)).app _ (ULift.up z)) (((ihom Δ[1]).map (constantDiagrams (pointCoconeIndex K) _)).app _ e)) ∧ (∃ a : (evaluationTriangles F H z e).toSSet ⟶ families F H z, a ≫ arrowMappingSpaceInclusion _ _ _ = (evaluationTriangles F H z e).ι ≫ snd _ _ ≫ (MonoidalClosed.pre (stdSimplex.δ 1)).app _ ∧ IsWeakHomotopyEquivalence a) ∧ ∀ (t : (coneCategory (diagram F H z)) _⦋0⦌), IsLimiting (diagram F H z) t → IsWeakHomotopyEquivalence (universalCompositionSource (constantDiagrams (pointCoconeIndex K) CategoryTheory.Spaces.infinityCategory.{u}) true (pointCoconeVertex pointCoconePoint) t.1.1 t.1.2) ∧ (∃ c : (limitTriangles F H z t).toSSet ⟶ families F H z, c ≫ arrowMappingSpaceInclusion _ _ _ = (limitTriangles F H z t).ι ≫ snd _ _ ≫ (MonoidalClosed.pre (stdSimplex.δ 1)).app _ ∧ IsWeakHomotopyEquivalence c) ∧ ∃ (Y : CategoryTheory.Spaces.Kan.{u}) (b : pointCoconeIndex Y.obj ⟶ arrowMappingSpace CategoryTheory.Spaces.infinityCategory (pointCoconeVertex pointCoconePoint) t.1.1), PointFamilyFormula Y t.1.1 b ∧ IsWeakHomotopyEquivalence b",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of return at 9aeb91b00266: the main theorem explicitly asserts RestrictionCompatibility for every K′ → K. The same canonical whole-family restriction occurs in both the evaluation square and induced-limit square; the latter uses the apex arrow characterized by the complete restricted-cone square, and its point-mapping action is normalized by triangle restriction. Existing postcomposition clauses are retained. The InfinityYonedaPresheafLimits dependency import closure is repaired under §1(B), without changing its declarations or mathematical statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1d1be62a",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery after RETURN at 9aeb91b00266 (H3, restriction naturality): RestrictionCompatibility is now an explicit conjunct. RestrictedFamilyMap fixes r to precomposition by ulift v; the same r is used in the evaluation square and in the induced-limit square (RestrictedLimitSquare, orientation checked: λ'∘Δl ≃ λ|K'); nothing is required to be an equivalence. Every node clause was checked against the Lean: universes (no restriction; HomPresentation.{u,0} is the natural instance); H_E from the transport HomTransport via transportHomRow plus lowerSpaces; Map(Δz,F) as the arrow model with right_pinch_comparison; the evaluation formula pinned by IsIdentityPoint, triangle faces and long-leg mono equations; the limit side holds for every limiting cone; PointFamilyFormula; the postcomposition clause with τ_T tied to h↦Th on the pulled-back source-fixed arrow fibrations; empty K; no limits in E. z/F naturality is covered by the fixed formula plus the restriction clause (F along α via K×Δ1). Records: the declarations list equals the file, the statement is verbatim, stmt_deps gain only landed nodes (allowed), the other dependency nodes are byte-identical. Gates: no hollow definitions, only two sorry proofs, docstrings with source and blueprint. nt_compile: the item and the dependency module are clean together, and the item is clean against the published Yoneda module. The §1(B) Yoneda import swap (CompleteAlgebroid→EnhancedCartesianFibration) is no longer needed (upstream 93990d0775) but harmless: all 17 direct importers and every module losing CompleteAlgebroid from its closure compile clean. Cosmetic: a redaction artifact in report.md."
  }
 }

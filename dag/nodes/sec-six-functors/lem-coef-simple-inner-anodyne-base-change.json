@@ -26,7 +26,8 @@
   "place": "Definition 6.7 and Proposition 6.9 (which invokes Chu–Haugseng, Enriched infinity-operads, Lemma 2.7.14 (arXiv:1707.08049; Haugseng bibliography [1])); read online. No Stacks tag covers labelled infinity-categorical inner-anodyne maps."
  },
  "stmt_deps": [
-  "def-coef-segal-presheaf-localization"
+  "def-coef-segal-presheaf-localization",
+  "def-coef-simple-presheaf-inner-anodyne"
  ],
  "proof": [
   {
@@ -326,5 +327,26 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-f1d002126 (reviewer sub-agent of L); spot-checked: I read the item and all six cited statements in full and wrote review.md; I wrote no fixes. The item's statement, stmt_deps, blueprint, unit and created fields are identical to the side base copy; only the proof, proof_deps, proof_origin, split_report, status and added searches changed. Sources read: Haugseng arXiv:2311.13362v1 Defs 6.1, 6.2 and 6.7 and Prop 6.9 (online), and Chu–Haugseng arXiv:1707.08049 pp.26-29, Def 2.7.1, Prop 2.7.8(i)-(iii), Cor 2.7.9, Def 2.7.11, Notation 2.7.13 and Lemma 2.7.14 (PDF via pdftotext in /tmp). The statement matches the sources: generators for a>=2 and 0<b<a, the three closure operations, simplicity requiring the adjoint projection to be an equivalence, and the same base-change direction. The item uses only the generic P(C_otimes) of def-coef-segal-presheaf-localization, so there is no target coefficient category or scheme base-change morphism to compare. Step checks: step 1 shows slice colimits are underlying colimits, p* is evaluation at p(c), applies universal-colimits over L(pc) along X(c), then pointwise-equivalences on the nerve of C_otimes^op. Step 2 uses the Yoneda chain to get p_!y(e)=Delta^r; the projection is a monotone map alpha, simplicity forces alpha=id, so the map is the structural unit over Delta^a, and the projection clause is genuinely used (counterexample at a=1 without it). Step 3 is pasting of homotopy pullbacks, objectwise, which I accept as elementary. Steps 4-6 prove pushout, transfinite and retract closure of the class W that tests every map to L, matching CH 2.7.8; then minimality, and t=id_L gives the claim. Edge cases tested: a=0,1,2, empty L, identity u, terminal C, and X=Delta^n(c). Cited nodes are all in unit sk-prop-sf-biduality-general and none is merged; proof_deps equals the union of the step uses; a traversal of 440 dependencies found no cycle; the parent lem-coef-labelled-spine-prism-horn-calculus applies the item correctly. There are no new nodes. rg over dag/nodes and blueprint_refs search found no duplicate, so same_as [] is right. There are no tool_uses and no SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimpleInnerAnodyneBaseChange",
+  "declaration": "SSet.Enhanced.SimplePresheaf.simple_inner_anodyne_base_change",
+  "declarations": [
+   "SSet.Enhanced.SimplePresheaf.simple_inner_anodyne_base_change"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimpleInnerAnodyneBaseChange.lean",
+  "statement": "theorem simple_inner_anodyne_base_change {St : CocartesianStraightening.Statement.{u}} (A : SegalPresheaf.CartesianPresentation St) (H : YonedaLimits.HomPresentation.{u, v} A.ambientTotal) (D : ProjectionExtension.{u, v} A.ambientProjection) (L : transportDiagrams.{u, v} monoidalSimplexBase.op false _⦋0⦌) (f : transportDiagrams.{u, v} A.ambientTotal false _⦋1⦌) (hf : IsSimple H D L f) (k : transportDiagrams.{u, v} monoidalSimplexBase.op false _⦋1⦌) (hk : (transportDiagrams.{u, v} monoidalSimplexBase.op false).δ 0 k = L) (hu : IsOrdinaryInnerAnodyne.{u, v} k) (s : spaceSquare ⟶ transportDiagrams.{u, v} A.ambientTotal false) (hs : IsPullbackOf f ((SegalPresheaf.restriction A.ambientProjection).app _ k) s) : IsLabelledInnerAnodyne H D (topEdge s)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfa39cf3a",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Read the item, both statement dependencies, the new definition node, both modules and the exact side declarations (SpaceBaseChange square edges, EnhancedStrongSaturation pushout/retract/row helpers, CoherentAdjunction counit, representedSimplex, FiniteReedy colimit edges). Every clause matches: the conclusion is topEdge = projection X x_{p*L} p*K -> X; simplicity tests all n>=0 and every pullback square, with representable apex and invertible adjunct of the projection X_sigma -> p*Delta^n; generators are labels in the fibre over [n] with the structural map normalised by its invertible adjunct; weak saturation has correct pushout/retract/transfinite closures with continuity at limit stages and no two-out-of-three. Edge cases and universes are correct. Item statement unchanged (only stmt_deps and lean changed); both lean.statement fields match verbatim; imports match the dependency modules; no hollow definitions; only the theorem proof is sorry; docstrings carry source, blueprint and the six proof steps. nt_compile --json of both files in dependency order: exit 0, no diagnostics (9.2 s, 8.5 s). Duplicate search found no matching notion. Observations only: EnhancedStrongSaturation helpers are imported without that node in stmt_deps (justified, no Lean cycle); the future discrete-inner-cell-transfer statement should reuse discreteObject and IsOrdinaryInnerAnodyne."
  }
 }

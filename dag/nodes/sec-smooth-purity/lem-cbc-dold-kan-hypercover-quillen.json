@@ -28,7 +28,11 @@
   "def-weil-abstract-derived-category",
   "lem-cbc-dg-presheaf-model-localizations",
   "lem-coef-simplicial-presheaf-localization-comparison",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-derived-hypersheaf-presentation",
+  "def-cbc-bounded-representable-hypercover",
+  "def-cbc-local-simplicial-presheaf-maps",
+  "lem-cbc-dold-kan-homology"
  ],
  "proof": [
   {
@@ -226,5 +230,38 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-0a7eb353f (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes and the statement of every cited node in full, and checked the steps against Choudhury–Gallauer arXiv:1511.02828, which is not archived in literature/. I fetched the PDF from arXiv and read it with pdftotext. Places checked: Fact 3.14 and sequence (1), p.11; the transferred simplicial-module model and Prop 3.15, pp.11-12; Lemma 5.12, p.20; the interval paragraph of Lemma 5.13, pp.20-21. Steps 1-7 are correct. (1) The adjunction factors through tau<=0 and goes through Dold–Kan plus the free/forget adjunction, objectwise and natural. (2) pi_0=H^0 and pi_m=H^{-m}, with translation compatible on the slice. (3) The new set-sheafification leaf plus slice sheafification give every sheaf-of-pi test. (4) Positive normalized degree of R(f) is f^{-m}, so R(f) is a fibration with no degree-0 surjectivity needed; Ken Brown gives that NLambda preserves weak equivalences. (5) NLambda(h_T)=L_T[0]; B and W_obj lie in W_B, and two-out-of-three on the Q-square gives NLambdaQ(s) in W_B. (6) The hypotheses of the Bousfield descent lemma hold exactly; L_S exists by the steps of the comparison node. (7) I recomputed the interval: ker d1=<e-s0v0>, d0 gives v1-v0, and for n>=2, ker d_n=<e_{n-1}-v0> while d_{n-1} of it is e_{n-2}-v0, nonzero, so N_n=0. New nodes: the simplicial-module model is a true, standard result and strictly smaller than the item. Both leaves are confirmed at the Mathlib lines HomotopyEquivalence.lean:79-87, AlternatingFaceMapComplex.lean:300-301, MooreComplex.lean:64-90 and PreservesSheafification.lean:233-242,305-314. rg found no duplicates; the pc/weil-pbc set-sheafification nodes cover other sites or other value categories. No cycle, no SGA source. I accept the 3 declared lem-coef tool_uses as generic model-category tools. FIX: the item's source.place still said Prop 3.15 is on p.10, although the report says it was corrected; the printed page is 12. The corrected whole item file is at fixes/dag/nodes/sec-smooth-purity/lem-cbc-dold-kan-hypercover-quillen.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DoldKanHypercoverQuillen",
+  "declaration": "CategoryTheory.DoldKanHypercover.doldKanHypercoverQuillen",
+  "declarations": [
+   "CategoryTheory.DoldKanHypercover.freeNormalization",
+   "CategoryTheory.DoldKanHypercover.realization",
+   "CategoryTheory.DoldKanHypercover.simplicialAugmentation",
+   "CategoryTheory.DoldKanHypercover.shiftedAugmentations",
+   "CategoryTheory.DoldKanHypercover.freeRepresentable",
+   "CategoryTheory.DoldKanHypercover.intervalInclusion",
+   "CategoryTheory.DoldKanHypercover.boundaryInclusion",
+   "CategoryTheory.DoldKanHypercover.endpoint",
+   "CategoryTheory.DoldKanHypercover.IntervalComparison",
+   "CategoryTheory.DoldKanHypercover.HomotopyComparison",
+   "CategoryTheory.DoldKanHypercover.Statement",
+   "CategoryTheory.DoldKanHypercover.doldKanHypercoverQuillen"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DoldKanHypercoverQuillen.lean",
+  "statement": "theorem doldKanHypercoverQuillen (C : Type u) [SmallCategory C] (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] [HasWeakSheafify J (ModuleCat.{u} Λ)] : Nonempty (Statement C J Λ)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical free normalization and objectwise smart-truncation realization, projective and localized Quillen assertions for arbitrary small hypercover families, all homotopy-sheaf tests and the interval arrow with both endpoints. Reuses the already landed hypercover, augmentation, Dold–Kan and local simplicial presheaf definitions; the four added statement dependencies record those interfaces explicitly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f86e04e8b",
+  "group": "NA",
+  "result": "pass",
+  "note": "Delivery f86e04e8 changes only report, item node (lean + stmt_deps) and DoldKanHypercoverQuillen.lean. All node clauses rendered: canonical NΛ (Mathlib normalizedMooreComplex, ker d1..dn, d0, cochain -n) and R (truncLE' with cycles in degree 0, objectwise Dold-Kan), adjunction, projective and H/B-localized DgLeftQuillen over DgProjectiveModelData/DgBousfieldModelData at all shifts e_U[k] and the comparison node's localEquivalences convention (no density or cofibrancy), Kan/π0/πm+1/translation comparisons natural in all maps, cohomology-sheaf equivalence ⇒ IsLocalWeakEquivalence, interval as mapping-cone inr of (-id,id) with arrow iso and both endpoint equations. The 4 added stmt_deps had lean records at base; no cycle. lean.statement verbatim; 12 declarations present; docstrings with source and blueprint; only sorry is the theorem. Clean compile via nt_compile.py (12-16 s, no warnings); probes printed every dependency definition and axioms. Notes: HasWeakSheafify is a Prop binder supplied by the dg-presheaf dependency; sorryAx in HomotopyComparison comes from landed DoldKanHomology.vertexPoint_natural; the second reading section is a same-worker pass."
  }
 }

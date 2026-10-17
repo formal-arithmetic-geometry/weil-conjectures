@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "lem-coef-sorted-simplicial-algebra-model",
-  "lem-coef-simplicial-interval-lifting"
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-fixed-object-free-arrow-adjunction"
  ],
  "proof": [
   {
@@ -173,5 +174,45 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-cbcd80b5c (reviewer sub-agent of L); spot-checked: I read the item in full: 4 steps, no new nodes, no tool_uses. Source check: Bergner AGT 6 (2006), arXiv:math/0508152, read from the arXiv PDF (it is not in literature/). Intro p.1926 says product-preserving T_OCat→SSets functors are simplicial categories on O. Def 3.1 is on p.1932, Example 3.5 on p.1937 (T_OCat is the opposite of the free categories on finite graphs with vertex set O, (O×O)-sorted, loops give free monoids) and Def 3.6 on p.1938. The item's ordered-list T_O is equivalent to Bergner's theory and satisfies the definition in lem-coef-sorted-simplicial-algebra-model. The statement is true: T_O(α,-) represents the free category P_α, and Cat_O is finitary monadic over O×O-graphs, so taking models degreewise gives sCat_O. Step checks: coproduct by concatenation and P_∅ initial are correct. The composition map ((x,y),(y,z))→((x,z)) comes from generator↦e2∘e1, and the unit from loop↦id. Word substitution gives functoriality. Natural transformations correspond to simplicial functors fixing O. Edge cases: O empty (T_O terminal, sCat_∅ trivial) and loops x=y are both covered. No cycle; both cited nodes are in the unit; the only citer, cone-equivalence-saturation Step 5, uses exactly this statement. Duplicate search (rg sorted/Lawvere/product-preserving, blueprint_refs) found nothing: the sorted-model, fixed-object-free-calculus and diagonal-nerve nodes are distinct. No SGA cited. Minor points, no fix needed: Step 1 cites interval-lifting without needing it, and Step 3's 'inverse on objects' means up to the canonical product isomorphism. The WANTED archival copy of Bergner is still valid."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ConeSortedTheoryIdentification",
+  "declaration": "AlgebraicTopology.FixedObjectTheory.cone_sorted_theory_identification",
+  "declarations": [
+   "AlgebraicTopology.FixedObjectTheory.Graph",
+   "AlgebraicTopology.FixedObjectTheory.graphQuiver",
+   "AlgebraicTopology.FixedObjectTheory.FreeCategory",
+   "AlgebraicTopology.FixedObjectTheory.generator",
+   "AlgebraicTopology.FixedObjectTheory.Lists",
+   "AlgebraicTopology.FixedObjectTheory.listsCategory",
+   "AlgebraicTopology.FixedObjectTheory.Theory",
+   "AlgebraicTopology.FixedObjectTheory.substitute",
+   "AlgebraicTopology.FixedObjectTheory.relabel",
+   "AlgebraicTopology.FixedObjectTheory.sort",
+   "AlgebraicTopology.FixedObjectTheory.projection",
+   "AlgebraicTopology.FixedObjectTheory.listFan",
+   "AlgebraicTopology.FixedObjectTheory.includeLeft",
+   "AlgebraicTopology.FixedObjectTheory.includeRight",
+   "AlgebraicTopology.FixedObjectTheory.concatFan",
+   "AlgebraicTopology.FixedObjectTheory.sortedTheory",
+   "AlgebraicTopology.FixedObjectTheory.unitOperation",
+   "AlgebraicTopology.FixedObjectTheory.compOperation",
+   "AlgebraicTopology.FixedObjectTheory.cone_sorted_theory_identification"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ConeSortedTheoryIdentification.lean",
+  "statement": "theorem cone_sorted_theory_identification (O : Type u) : (∀ α β : Lists O, Nonempty (IsLimit (concatFan α β))) ∧ (∀ α : Lists O, Nonempty (IsLimit (listFan α))) ∧ ∃ (p : HasFiniteProducts (Theory O)) (g : ∀ X : Theory O, ∃ (n : ℕ) (f : Fin n → O × O), Nonempty (X ≅ ∏ᶜ fun i : Fin n => sort (f i))), ∃ E : StrictSimplicialAlgebra (sortedTheory p g) ≌ SSet.Bergner.Fixed O, ∃ e : ∀ x y : O, evaluation (T := sortedTheory p g) (x, y) ≅ E.functor ⋙ SSet.Bergner.mappingSetEvaluation x y, (∀ (A : StrictSimplicialAlgebra (sortedTheory p g)) (x : O) (n : SimplexCategoryᵒᵖ) (t : (A.1.obj (op [])).obj n), ((e x x).hom.app A).app n ((A.1.map (unitOperation x)).app n t) = ((E.functor.obj A).id x).app n PUnit.unit) ∧ (∀ (A : StrictSimplicialAlgebra (sortedTheory p g)) (x y z : O) (n : SimplexCategoryᵒᵖ) (t : (A.1.obj (op [(x, y), (y, z)])).obj n), ((e x z).hom.app A).app n ((A.1.map (compOperation x y z)).app n t) = ((E.functor.obj A).comp x y z).app n (((e x y).hom.app A).app n ((A.1.map (projection [(x, y), (y, z)] 0)).app n t), ((e y z).hom.app A).app n ((A.1.map (projection [(x, y), (y, z)] 1)).app n t)))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The finite-list free categories, fixed-object functors, opposite theory, canonical product cones and ordinary unit/composition substitutions have real data. The theorem supplies finite-product/generation evidence and an equivalence with natural evaluation isomorphisms that identify unit and composition operations in every simplicial degree. Uses the landed mappingSetEvaluation rather than duplicating it; its owning node is added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d86cf0cc0",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Clause-by-clause match of node and Lean: the free categories are Paths on labelled-position quivers; morphisms are functors fixing O literally; Theory = opposite category; IsLimit for concatFan and listFan (the empty list gives a terminal object, the correct direction); sortedTheory has the literal carrier and sorts; E is an equivalence with SSet.Bergner.Fixed O; e is a natural iso with mappingSetEvaluation; the unit and composition clauses are correct, with the composition order checked by a probe. Edge cases (empty O, x=y, repeated entries, empty list) are covered. Everything is in the single universe u, with no extra hypotheses. No hollow definitions: the only sorry is on the theorem, and docstrings carry the source place and blueprint tag. No duplicate found in Mathlib or Sheaf. The lean.statement matches the file verbatim; the only node changes are lean and an acyclic stmt_dep on the free-arrow-adjunction node that owns mappingSetEvaluation. nt_compile clean in 12.3 s with no warnings; the probe compiled. The second-reading section is the accepted 2026-10-17 'worker delivers directly' note."
  }
 }
