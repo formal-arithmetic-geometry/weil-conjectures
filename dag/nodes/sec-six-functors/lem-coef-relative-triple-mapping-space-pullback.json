@@ -8,7 +8,8 @@
   "place": "Agent auxiliary mapping-pullback lemma for the coherent-comma expansion of the proof of Proposition 3.1.3.2, printed p. 348; it is not a separately numbered assertion of HA. Definitions are those of def-cbc-enhanced-diagrams-cones. Online 2017 edition read; archive WANTED. No Stacks tag states this quasicategorical assertion."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-relative-symmetric-operadic-algebras"
  ],
  "proof": [
   {
@@ -228,5 +229,32 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-fb17819e1 (reviewer sub-agent of L); spot-checked: Reviewed item, cited nodes, unit/chapter route, local Scholze notes, Kerodon 01F3/01KX, and HA Proposition 3.1.3.2 at printed p. 348. The four-step strict pullback proof is mathematically correct, hypotheses and endpoint naturality check, edge cases pass, no duplicate or new-node faults exist, searches are recorded, and no SGA or forbidden tooling was used. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-495c7e75d",
+  "group": "Q25",
+  "result": "pass",
+  "note": "All clauses and dependencies matched; no hollow definitions or unintended assumptions; scompile.py passed sandbox and library compilation."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeTripleMappingSpacePullback",
+  "declaration": "SSet.Enhanced.relative_triple_mapping_space_pullback",
+  "declarations": [
+   "SSet.Enhanced.relativeTripleArrowProjection",
+   "SSet.Enhanced.relativeTripleMappingEndpoints",
+   "SSet.Enhanced.relativeTripleMappingBase",
+   "SSet.Enhanced.IsRelativeTripleMappingIso",
+   "SSet.Enhanced.relativeTripleMappingCoordinates",
+   "SSet.Enhanced.relative_triple_mapping_space_pullback"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeTripleMappingSpacePullback.lean",
+  "statement": "theorem relative_triple_mapping_space_pullback {A B : SSet.{u}} [Quasicategory A] [Quasicategory B] (R : B ⟶ A) : Quasicategory (operadicTriples R) ∧ ∀ H K : (operadicTriples R) _⦋0⦌, ∃ e : mappingSpace (operadicTriples R) H K ≅ pullback (relativeTripleMappingEndpoints R H K) (relativeTripleMappingBase R H K), IsRelativeTripleMappingIso R H K e ∧ ∀ {A₁ B₁ : SSet.{u}} [Quasicategory A₁] [Quasicategory B₁] (R₁ : B₁ ⟶ A₁) (f : A ⟶ A₁) (g : B ⟶ B₁), R ≫ f = g ≫ R₁ → ∀ (H₁ K₁ : (operadicTriples R₁) _⦋0⦌) (e₁ : mappingSpace (operadicTriples R₁) H₁ K₁ ≅ pullback (relativeTripleMappingEndpoints R₁ H₁ K₁) (relativeTripleMappingBase R₁ H₁ K₁)), IsRelativeTripleMappingIso R₁ H₁ K₁ e₁ → ∀ (n : SimplexCategoryᵒᵖ) (s : (mappingSpace (operadicTriples R) H K).obj n) (t : (mappingSpace (operadicTriples R₁) H₁ K₁).obj n), t.1.1.1 = g.app _ s.1.1.1 → t.1.1.2 = ((ihom Δ[1]).map f).app _ s.1.1.2 → relativeTripleMappingCoordinates R₁ H₁ K₁ e₁ n t = (((ihom Δ[1]).map f).app _ (relativeTripleMappingCoordinates R H K e n s).1, (f.app _ (relativeTripleMappingCoordinates R H K e n s).2.1, g.app _ (relativeTripleMappingCoordinates R H K e n s).2.2))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed general operadicTriples construction. Its landed owning definition node is added to stmt_deps. Endpoint transport uses only the defining equations of the two triples; the comparison is normalized on both pullback projections. Naturality is stated on every pair of related mapping simplices, for every commuting pair of simplicial functors and every normalized target comparison."
  }
 }
