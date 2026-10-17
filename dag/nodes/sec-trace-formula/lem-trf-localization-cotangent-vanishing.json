@@ -11,9 +11,77 @@
   "lem-trf-cotangent-resolution-coherence",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=S^{-1}R$. For every $R$-module $M$, the maps $B\\otimes_R M\\to S^{-1}M$, $(r/s)\\otimes m\\mapsto rm/s$, and $m/s\\mapsto(1/s)\\otimes m$ are inverse: tensor balancing proves the first composite is the identity, and the fraction equality in [lem-weil-pbc-localization-module-exact] proves well-definedness of the second. Indeed, $u(s\\prime m-sm\\prime)=0$ implies equality after multiplying the proposed images by the invertible element $uss\\prime$. In particular, $S^{-1}B\\cong B$ by $b/s\\mapsto(s/1)^{-1}b$, with inverse $b\\mapsto b/1$. These formulas need only that images of elements of $S$ are units; they also hold when $0\\in S$, in which case $B=0$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QZ, localization case: the elementary fraction identifications needed before applying bottom localization."
+   }
+  },
+  {
+   "text": "Choose the standard augmented polynomial resolution $P_\\bullet\\to B$ over $R$ supplied by [lem-trf-cotangent-resolution-coherence]. Set $Q_n=P_n\\otimes_R B=S^{-1}P_n$, with augmentation $p\\otimes b\\mapsto\\epsilon(p)b$. If $P_n=R[E_n]$, coefficientwise localization identifies $Q_n$ with $B[E_n]$: a polynomial has finitely many coefficients, so one common denominator gives the inverse to this identification. The augmentation is surjective since $1\\otimes b\\mapsto b$. The augmented alternating-face complex $s(P_\\bullet)\\to B[0]$ is exact in its augmented form. Applying [lem-weil-pbc-localization-module-exact] to its exact pairs in every degree preserves that exactness; Step 1 identifies the localized complex with $s(Q_\\bullet)\\to B[0]$, including the augmentation. Thus $Q_\\bullet\\to B$ is a polynomial resolution of $B$ over $B$ in precisely the sense of the comparison theorem. No finite number of variables or denominators is needed.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QI (remark-resolution), 08QP (lemma-flat-base-change), proof; exact localization is Algebra, Tag 00CS."
+   }
+  },
+  {
+   "text": "For each $n$, the universal derivation of [def-weil-pbc-kahler-differentials] gives mutually inverse $B$-linear maps $\\Omega^1_{P_n/R}\\otimes_{P_n}B\\rightleftarrows\\Omega^1_{Q_n/B}\\otimes_{Q_n}B$. The forward map sends $\\mathrm dp\\otimes c$ to $\\mathrm d(p\\otimes1)\\otimes c$. For its inverse, the rule $p\\otimes b\\mapsto\\mathrm dp\\otimes b$ is a $B$-derivation into the left module, where $Q_n$ acts via $p\\otimes b\\mapsto\\epsilon(p)b$: it is balanced over $R$, kills $1\\otimes b$, and satisfies Leibniz. It therefore induces the inverse, sending $\\mathrm d(p\\otimes b)\\otimes c$ to $\\mathrm dp\\otimes bc$. The composites fix $\\mathrm dp\\otimes c$ and $\\mathrm d(p\\otimes b)\\otimes c$, respectively, since $\\mathrm d(p\\otimes b)=b\\,\\mathrm d(p\\otimes1)$ for differentials over $B$. For each face or degeneracy $f:P_n\\to P_m$, both routes send $\\mathrm dp\\otimes c$ to $\\mathrm d(f(p)\\otimes1)\\otimes c$. Hence these maps commute with the alternating differentials and give an isomorphism of the two differential complexes.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QZ (lemma-localize-at-bottom), displayed differential base-change identification, written out by the universal property."
+   }
+  },
+  {
+   "text": "Compute $L_{B/B}$ using the constant augmented simplicial $B$-algebra $B\\to B$. Each term is polynomial over $B$ on the empty set and surjects onto $B$. Its alternating-face differential from simplicial degree $n>0$ is the identity for even $n$ and zero for odd $n$, so the augmentation induces $H^0=B$ and all other cohomology groups vanish. It is a polynomial resolution as defined in [lem-trf-cotangent-resolution-coherence]. Every $B$-derivation from $B$ is zero, since it kills every element of the base. The universal property [def-weil-pbc-kahler-differentials] therefore identifies $\\Omega^1_{B/B}$ with the zero module. The differential complex of this constant resolution is termwise zero, and the comparison theorem gives $L_{B/B}\\simeq0$.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QH (lemma-cotangent-complex-polynomial-algebra), empty-variable case, and 08QI (remark-resolution)."
+   }
+  },
+  {
+   "text": "The left differential complex in Step 3 represents $L_{B/R}$ by its standard construction. By Step 2 and the resolution-comparison isomorphism of [lem-trf-cotangent-resolution-coherence], the right differential complex represents $L_{B/B}$. The chain isomorphism of Step 3 and Step 4 yield $L_{B/R}\\simeq L_{B/B}\\simeq0$. In the derived category of [def-weil-abstract-derived-category], cohomology of an object represented by a complex is its kernel modulo image. The displayed isomorphism therefore gives $H^i(L_{B/R})=0$ for every integer $i$. Conversely, a complex with all cohomology zero has a quasi-isomorphism to the zero complex, which becomes invertible in that localization. This also proves the stated equivalence of the two formulations.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QZ and 08R0 (lemma-derived-diagonal), specialized to localization, proving Tag 08R2 (lemma-when-zero), case (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-exact",
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QZ and 08R0, proving 08R2(3), implemented directly with the polynomial-resolution computations of 08QI and 08QP and exact module localization (Algebra 00CS)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +117,45 @@
    "results": "8 hits; top=['RingHom.FormallyEtale', 'Algebra.FormallyEtale', 'Algebra.formallySmooth_iff', 'Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing', 'Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange', 'Algebra.FormallySmooth.kerCotangentToTensor_injective_iff', 'Algebra.FormallySmooth.iff_subsingleton_and_projective', 'Algebra.FormallySmooth.iff_split_injection']; note=; digest=ad3135d6ded00f77. The hits concern H1Cotangent, a presentation differential, or formal etaleness. None asserts vanishing of all degrees of the standard simplicial cotangent complex. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and Mathlib/RingTheory/Etale/Kaehler.lean:279-284.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|H1Cotangent [sub=RingTheory/Etale]",
+   "results": "{\"t\": \"2026-10-17T22:19:38Z\", \"tool\": \"grep\", \"query\": \"cotangent|H1Cotangent\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Descent.lean\", \"Mathlib/RingTheory/Etale/Descent.lean\", \"Mathlib/RingTheory/Etale/Descent.lean\"], \"digest\": \"ca4b59c71eb023c3\"}; Read the returned types and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and RingTheory/Etale/Kaehler.lean:279-284. These concern the presentation differential, H1Cotangent, formal etaleness or generic acyclicity, not all cohomological degrees of the standard simplicial cotangent complex.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cotangent complex L of ring localization is acyclic in every degree",
+   "results": "{\"t\": \"2026-10-17T22:19:38Z\", \"tool\": \"leansearch\", \"query\": \"cotangent complex L of ring localization is acyclic in every degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Acyclic\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"ModuleCat.localizedModule_functor_map_exact\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv.congr_simp\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"Algebra.Generators.map_comp_cotangentCompAwaySec\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\"], \"digest\": \"5aa7676d4a18fa40\"}; Read the returned types and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and RingTheory/Etale/Kaehler.lean:279-284. These concern the presentation differential, H1Cotangent, formal etaleness or generic acyclicity, not all cohomological degrees of the standard simplicial cotangent complex.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"H1Cotangent\", \"IsLocalization\"",
+   "results": "{\"t\": \"2026-10-17T22:19:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"H1Cotangent\\\", \\\"IsLocalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.tensorH1CotangentOfIsLocalization\", \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\"], \"digest\": \"68dca145b878c7df\"}; Read the returned types and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and RingTheory/Etale/Kaehler.lean:279-284. These concern the presentation differential, H1Cotangent, formal etaleness or generic acyclicity, not all cohomological degrees of the standard simplicial cotangent complex.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "full cotangent complex of a localization of a commutative ring vanishes",
+   "results": "{\"t\": \"2026-10-17T22:19:40Z\", \"tool\": \"leanfinder\", \"query\": \"full cotangent complex of a localization of a commutative ring vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFreeCotangentToExtensionUnitLocalizationAway\", \"Algebra.Generators.cMulXSubOneCotangent\", \"Algebra.H1Cotangent.isLocalizedModule\", \"Algebra.FormallyEtale.of_isLocalization\", \"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr\"], \"digest\": \"f1db00cd7b96b5aa\"}; Read the returned types and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and RingTheory/Etale/Kaehler.lean:279-284. These concern the presentation differential, H1Cotangent, formal etaleness or generic acyclicity, not all cohomological degrees of the standard simplicial cotangent complex.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Andre Quillen homology is zero for a flat epimorphism of rings",
+   "results": "{\"t\": \"2026-10-17T22:19:57Z\", \"tool\": \"leanfinder\", \"query\": \"Andre Quillen homology is zero for a flat epimorphism of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyEtale\", \"Algebra.FormallyEtale\", \"Algebra.formallySmooth_iff\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"Algebra.FormallySmooth.iff_split_injection\"], \"digest\": \"ad3135d6ded00f77\"}; Read the returned types and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65 and RingTheory/Etale/Kaehler.lean:279-284. These concern the presentation differential, H1Cotangent, formal etaleness or generic acyclicity, not all cohomological degrees of the standard simplicial cotangent complex.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-affine-cotangent-comparison",
@@ -82,5 +185,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-localization-cotangent-vanishing",
+  "worker": "stage1",
+  "summary": "Preserved the full statement including arbitrary multiplicative subsets and the zero-ring case. Expanded bottom localization through a localized standard polynomial resolution, explicit inverse maps on differential complexes, and the constant resolution for the identity ring map. Reused existing resolution coherence, exact module localization, differentials and derived-category nodes; created no nodes. Read all cited statements and the Stacks proofs and recorded fresh whole-item Mathlib searches.",
+  "blueprint": "Preserves the historical ancestry through lem-trf-affine-cotangent-comparison, whose ring-localization input this item supplies. Realizes the supporting ring/sheaf input in blueprint.from.place under lem-trf-local-term-locality, Proof (1)--(2); this is not the unit key node, and the unit and chapter records are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-2cd2b750a",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-2cd2b750a (reviewer sub-agent of L); spot-checked: Read the item, report, unit/chapter route, all four cited nodes, and Stacks Tags 08QI, 08QH, 08QZ, 08QP, 08R0, and 08R2(3). Verified all five proof steps, coefficient category, base-change maps, arbitrary multiplicative sets, zero-ring and other edge cases, duplicate/cycle risks, route-pivot compliance, and Mathlib searches. Wrote review.md; no repairs or accepted tool uses."
  }
 }
