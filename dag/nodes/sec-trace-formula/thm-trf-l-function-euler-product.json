@@ -34,18 +34,39 @@
    }
   },
   {
-   "text": "Work over $E$, using the operators and normalized stalk transports explicitly supplied by [prop-trf-rational-frobenius-integral-model]. Write $g=g_\\gamma$, $B_m=g_{\\gamma,c}^{m,*}$ and $\\varphi=\\varphi_E$. The definition of the iterates as a product of $m$ pullbacks of $\\varphi$ gives $\\varphi^{[m+n]}=\\varphi^{[m]}\\circ Lg^{m*}\\varphi^{[n]}$ by splitting that product after its first $m$ factors. Naturality and composition of the supplied integral base-change identifications remain equalities after [prop-weil-pbc-rational-transport]. Thus, with the object subscripts understood, $B_1R\\Gamma_c(\\varphi^{[m]})=R\\Gamma_c(Lg^*\\varphi^{[m]})B_1$ and $B_1B_m=B_{m+1}$, whence\n$$F_{c,K_E}^1F_{c,K_E}^{\\,m}=R\\Gamma_c(\\varphi\\circ Lg^*\\varphi^{[m]})B_{m+1}=F_{c,K_E}^{\\,m+1}.$$\nThe base case is $m=1$, so $F_{c,K_E}^{\\,m}=(F_{c,K_E}^1)^m$ for all $m\\ge1$.\nFor the local calculation use only the geometric orbit assertion (1) of [lem-trf-local-frobenius-conjugacy], which does not involve coefficients. Above a closed point $x$ of degree $e$, label the geometric lifts $z_i=g^iz_0$, with indices modulo $e$. Put $V_i=K_{E,z_i}$. Via the canonical pullback-stalk identifications and normalized fixed-point identifications of [prop-trf-rational-frobenius-integral-model], the stalk of $\\varphi$ is an isomorphism $A_i:V_{i+1}\\to V_i$. The identifications are natural and compatible with composition, so the stalk of $\\varphi^{[m]}$ with its fixed-point transport, for $m=er$, is the product $A_iA_{i+1}\\cdots A_{i+m-1}=C_i^r$, where $C_i=A_i\\cdots A_{i+e-1}$. If $T_i=A_0\\cdots A_{i-1}:V_i\\to V_0$, with $T_0=1$, then the two products $C_0T_i$ and $T_iC_i$ consist of the identical ordered list of $e+i$ factors. Hence $C_i=T_i^{-1}C_0T_i$ and $F_{z_i,m}=T_i^{-1}C_0^rT_i$. This proves both lift independence of the conjugacy class of $F_x=C_0$ and the power formula over $E$, without applying a finite-coefficient lemma to $E$. The scalar-extension statement of [thm-trf-grothendieck-lefschetz-qbar] proves the corresponding assertions over $\\overline{\\mathbf Q}_\\ell$. Finally [thm-trf-trace-formula-e] and that scalar extension give bounded finite-dimensional compact cohomology and stalk cohomology. Thus each inverse local determinant lies in $1+T^{e_x}\\Lambda[[T]]$, and the global determinant product is finite.",
+   "text": "Apply [lem-trf-rational-global-frobenius-powers] to the chosen $E$-representative and its finite-level lattice. It identifies the specified operators with $F_{c,K_E}^{\\,m}=(F_{c,K_E}^{\\,1})^m$. The scalar-extension assertion of [thm-trf-grothendieck-lefschetz-qbar] gives the same identity over $\\Qlb$.",
    "uses": [
-    "prop-trf-rational-frobenius-integral-model",
-    "prop-weil-pbc-rational-transport",
-    "lem-trf-local-frobenius-conjugacy",
-    "thm-trf-grothendieck-lefschetz-qbar",
-    "thm-trf-trace-formula-e"
+    "lem-trf-rational-global-frobenius-powers",
+    "thm-trf-grothendieck-lefschetz-qbar"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1: powers and finiteness"
+    "place": "Step 1, Global powers"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-rational-local-frobenius-powers] to the invertible rational Weil map. For a degree-$e_x$ closed point it identifies every normalized lift operator $F_{y,m}$, for $e_x\\mid m$, with $F_x^{m/e_x}$ up to conjugacy of stalk complexes. In particular $F_x$ is well defined up to conjugacy. Extending the displayed intertwining equality by the scalar extension of [thm-trf-grothendieck-lefschetz-qbar] proves the same statements over $\\Qlb$.",
+   "uses": [
+    "lem-trf-rational-local-frobenius-powers",
+    "thm-trf-grothendieck-lefschetz-qbar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers"
+   }
+  },
+  {
+   "text": "Finally [thm-trf-trace-formula-e] and [thm-trf-grothendieck-lefschetz-qbar] give bounded finite-dimensional compact cohomology and stalk cohomology. Thus each inverse local determinant lies in $1+T^{e_x}\\Lambda[[T]]$, while the global determinant product is finite.",
+   "uses": [
+    "thm-trf-trace-formula-e",
+    "thm-trf-grothendieck-lefschetz-qbar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1: powers and finiteness, Finiteness"
    }
   },
   {
@@ -61,7 +82,7 @@
    }
   },
   {
-   "text": "Fix $m\\ge1$. By the orbit assertion (1) of [lem-trf-local-frobenius-conjugacy], a closed point $x$ has rational lifts in $X_0(\\mathbf F_{q^m})$ exactly when $e_x\\mid m$, with $e_x$ lifts in that case: on its cyclic orbit of length $e_x$, $g^m$ fixes every point precisely when $e_x\\mid m$. The calculation in Step 2 of this split gives $F_{y,m}$ conjugate to $F_x^{m/e_x}$ on each lift. Conjugacy induces conjugacy on every cohomology space, hence equality of their ordinary traces (also [prop-trf-trace-formal-laws], clauses (1) and (4)). Therefore [thm-trf-trace-formula-e], or [thm-trf-grothendieck-lefschetz-qbar], gives\n$$\\sum_i(-1)^i\\operatorname{Tr}(F^m\\mid H_c^i(X,K))=\\sum_{e_x\\mid m}e_x\\,t_x(m/e_x),\\qquad t_x(r)=\\sum_j(-1)^j\\operatorname{Tr}(F_x^r\\mid H^j(K_{\\bar x})).$$",
+   "text": "Fix $m\\ge1$. By the orbit assertion (1) of [lem-trf-local-frobenius-conjugacy], a closed point $x$ has rational lifts in $X_0(\\mathbf F_{q^m})$ exactly when $e_x\\mid m$, with $e_x$ lifts in that case: on its cyclic orbit of length $e_x$, $g^m$ fixes every point precisely when $e_x\\mid m$. The calculation in Step 3 of this split gives $F_{y,m}$ conjugate to $F_x^{m/e_x}$ on each lift. Conjugacy induces conjugacy on every cohomology space, hence equality of their ordinary traces (also [prop-trf-trace-formal-laws], clauses (1) and (4)). Therefore [thm-trf-trace-formula-e], or [thm-trf-grothendieck-lefschetz-qbar], gives\n$$\\sum_i(-1)^i\\operatorname{Tr}(F^m\\mid H_c^i(X,K))=\\sum_{e_x\\mid m}e_x\\,t_x(m/e_x),\\qquad t_x(r)=\\sum_j(-1)^j\\operatorname{Tr}(F_x^r\\mid H^j(K_{\\bar x})).$$",
    "uses": [
     "lem-trf-local-frobenius-conjugacy",
     "prop-trf-trace-formal-laws",
@@ -75,7 +96,7 @@
    }
   },
   {
-   "text": "Multiply the trace identity of Step 4 by $T^m/m$ and sum over $m\\ge1$. Reindexing $m=e_xr$ gives\n$$\\sum_{m\\ge1}\\sum_i(-1)^i\\operatorname{Tr}(F^m\\mid H_c^i(X,K))T^m/m=\\sum_x\\sum_{r\\ge1}t_x(r)T^{e_xr}/r,$$\nsince $e_x/m=1/r$. Step 3 makes this reindexing finite in every coefficient. Apply the formal exponential to both sides. The finite alternating determinant identity established in Step 1 identifies the left-hand side after exponentiating with the finite alternating cohomological determinant product. On the right, [lem-weil-power-series-exp-hom] and the coefficient formula of [def-weil-power-series-exponential] (Step 1) allow exponentiation through the locally finite sum; the determinant identity with $T^{e_x}$ in place of $T$ identifies the $x$-factor with $\\det(1-T^{e_x}F_x\\mid K_{\\bar x})^{-1}$. This proves clause (2) directly, without requiring an uncited logarithm theorem.",
+   "text": "Multiply the trace identity of Step 6 by $T^m/m$ and sum over $m\\ge1$. Reindexing $m=e_xr$ gives\n$$\\sum_{m\\ge1}\\sum_i(-1)^i\\operatorname{Tr}(F^m\\mid H_c^i(X,K))T^m/m=\\sum_x\\sum_{r\\ge1}t_x(r)T^{e_xr}/r,$$\nsince $e_x/m=1/r$. Step 5 makes this reindexing finite in every coefficient. Apply the formal exponential to both sides. The finite alternating determinant identity established in Step 1 identifies the left-hand side after exponentiating with the finite alternating cohomological determinant product. On the right, [lem-weil-power-series-exp-hom] and the coefficient formula of [def-weil-power-series-exponential] (Step 1) allow exponentiation through the locally finite sum; the determinant identity with $T^{e_x}$ in place of $T$ identifies the $x$-factor with $\\det(1-T^{e_x}F_x\\mid K_{\\bar x})^{-1}$. This proves clause (2) directly, without requiring an uncited logarithm theorem.",
    "uses": [
     "lem-weil-power-series-exp-hom",
     "def-weil-power-series-exponential"
@@ -87,31 +108,57 @@
    }
   },
   {
-   "text": "Assume $\\dim X_0\\le1$ and $K$ is a sheaf in degree zero. First work over $E$. Choose an integral representative $K_{\\mathcal O}$ using [thm-trf-trace-formula-e]. The equivalence and closure clauses of [lem-weil-pbc-integral-stratified-perfect-characterization] apply: $X$ is noetherian, finite dimensional, and $\\ell$ is invertible. They give bounded integral cohomology sheaves with finite stratified finitely presented module models, and closure under standard truncations. The integral t-structure is [prop-weil-pbc-integral-tstructure]; the rational truncations are [prop-constructible-truncations]. Localization is t-exact because it sends integral nonpositive and nonnegative objects into the corresponding classes defined in [def-weil-constructible-standard-tstructure], and sends their truncation triangles to truncation triangles. Hence $\\mathcal H^j(K_{\\mathcal O})$ rationalizes to zero for $j\\ne0$. By the raw Hom-localization definition [def-weil-pbc-rational-category], its identity is killed by a power of $\\varpi$. A bounded complex whose cohomology objects are killed by powers of $\\varpi$ is itself killed by a power: in a triangle, if powers $\\varpi^a,\\varpi^b$ kill the two outer objects, exactness of Hom factors $\\varpi^a$ on the middle object through the other outer object, so $\\varpi^{a+b}$ kills it; induct on truncation triangles. Thus the two truncation cones outside degree zero vanish in the rational category.\nLet $C=\\mathcal H^0(K_{\\mathcal O})$, and let $D=C[\\varpi^\\infty]$. Its finitely presented local models on a finite stratification have bounded torsion exponent; taking a finite refinement on the quasi-compact strata gives a single exponent for $D$. On these models $M=C/D$ is finitely generated and torsion-free, hence finite free over the DVR by [lem-sc-dvr-fg-torsionfree-free]. The characterization theorem therefore puts $D$ and $M$ in the integral category. Since $D$ is killed by a power, $K\\cong M[1/\\varpi]$. The reductions $M_n=M\\otimes^L A_n=M/\\varpi^nM$ are constructible sheaves, flat over $A_n$ on every stratum, hence of Tor amplitude $[0,0]$, and tensor associativity gives $M_{n+1}\\otimes^L_{A_{n+1}}A_n\\cong M_n$. No Weil structure on $M$ is asserted or required.\nBy clauses (1),(2) of [prop-trf-adic-coefficient-morphism-systems], $P=R\\Gamma_c(X,M)$ has a bounded finite-free $\\mathcal O_E$ model with $P\\otimes^LA_1\\cong R\\Gamma_c(X,M_1)$. By [def-weil-integral-rational-qbar-compact-support], $H_c^i(X,K)=H^i(P)\\otimes E$. Choose a compactification of $X_0/k_0$ by [thm-nagata-compactification], replace its ambient scheme by the scheme-theoretic closure of $X_0$, and base change to $k$. The resulting $j:X\\hookrightarrow\\bar X$ is a compactification with $\\dim\\bar X\\le1$: both dense-open invariance and field-extension invariance are [lem-kun-dimension-extension]. By [sk-thm-pe-constructible-comparison], the constructible finite-coefficient sheaf $M_1$ has an explicit etale-origin representative. Apply [lem-trf-compactification-cohomology] to identify $R\\Gamma_c(X,M_1)$ with $R\\Gamma(\\bar X,j_!M_1)$. The sheaf $j_!M_1$ is constructible (use the strata for $M_1$ and the complementary stratum with value zero), so [sk-thm-pe-constructible-comparison] and [sk-prop-sf-comparison] identify its cohomology with etale cohomology of a torsion sheaf. The field $k$ has torsion cohomological dimension zero by [lem-sf-separably-closed-torsion-cd]; [thm-sc-finite-type-torsion-cd] then makes this cohomology vanish for $i>2$, and a sheaf has no negative cohomology. Finally, the short exact sequence of complexes $0\\to P\\xrightarrow{\\varpi}P\\to P/\\varpi\\to0$ gives an injection $H^i(P)/\\varpi H^i(P)\\hookrightarrow H^i(P/\\varpi)$. For $i\\notin\\{0,1,2\\}$ its target is zero. The finitely generated module $H^i(P)$ is therefore zero by [lem-weil-pbc-nakayama-jacobson], applied to the maximal ideal $(\\varpi)$ of $\\mathcal O_E$. In particular $H_c^i(X,K)=0$ in those degrees. For $\\overline{\\mathbf Q}_\\ell$, [prop-constructible-truncations] commutes with common-stage scalar extension, and faithfulness of extension of fields makes the representing $E$-object a sheaf; the cohomology scalar extension in [thm-trf-grothendieck-lefschetz-qbar] gives the same vanishing. Substituting the three surviving degrees in clause (2) gives the displayed fraction, proving clause (3).",
+   "text": "Assume $\\dim X_0\\le1$ and $K$ is a sheaf in degree zero. If $\\Lambda=E$ put $L=E$ and $K_L=K_E$. If $\\Lambda=\\Qlb$ with representative $(E,K_E)$, clause (3) of [def-weil-constructible-standard-tstructure] makes $K$ isomorphic in the common-stage category to some $(L_1,N_1)$ with $N_1\\in D^{\\le0}_c$ and some $(L_2,N_2)$ with $N_2\\in D^{\\ge0}_c$; choose a finite $L\\supseteq E,L_1,L_2$ over which both isomorphisms are represented. The truncations of [prop-constructible-truncations] commute with finite scalar extension, so $K_L=K_E\\otimes_EL$ is a sheaf in degree zero in $D^b_c(X,L)$. Apply [lem-trf-curve-integral-lattice] over $L$ to $K_L$ with the lattice $K_L$ itself and $\\alpha=\\mathrm{id}$; it needs no finite-level hypothesis, so nothing has to be transferred from the given lattice of $K_E$ to the larger field. From now on write $E,\\mathcal O_E,\\varpi,A_n$ for $L,\\mathcal O_L,\\varpi_L,\\mathcal O_L/\\varpi_L^n$. The lemma supplies the torsion-free sheaf $M$, its normalized reductions $M_n$ with explicit etale-origin witnesses, and a bounded finite-free model $P=R\\Gamma_c(X,M)$ with $P\\otimes^LA_1\\simeq R\\Gamma_c(X,M_1)$ and $H_c^i(X,K_L)\\simeq H^i(P)\\otimes E$.",
    "uses": [
-    "thm-trf-trace-formula-e",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "prop-weil-pbc-integral-tstructure",
-    "prop-constructible-truncations",
     "def-weil-constructible-standard-tstructure",
-    "def-weil-pbc-rational-category",
-    "prop-trf-adic-coefficient-morphism-systems",
-    "def-weil-integral-rational-qbar-compact-support",
-    "thm-nagata-compactification",
-    "lem-kun-dimension-extension",
-    "sk-thm-pe-constructible-comparison",
-    "lem-trf-compactification-cohomology",
-    "sk-prop-sf-comparison",
-    "thm-sc-finite-type-torsion-cd",
-    "lem-sf-separably-closed-torsion-cd",
-    "thm-trf-grothendieck-lefschetz-qbar",
-    "lem-sc-dvr-fg-torsionfree-free",
-    "lem-weil-pbc-nakayama-jacobson"
+    "prop-constructible-truncations",
+    "lem-trf-curve-integral-lattice"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 5: curves"
+    "place": "Step 5, curves: lattice, reduction tower and finite-free realization"
+   }
+  },
+  {
+   "text": "Choose a compactification of $X_0/k_0$ by [thm-nagata-compactification], replace the ambient scheme by the scheme-theoretic closure of $X_0$, and base change to $k$. This gives $j:X\\hookrightarrow\\bar X$ with $\\bar X$ proper of finite type over $k$. [lem-kun-dimension-extension] gives $\\dim\\bar X\\le1$: first use equality of dimensions for the dense open $X_0$, then invariance under the field extension $k/k_0$.",
+   "uses": [
+    "thm-nagata-compactification",
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 5, curves: Nagata compactification and the dimension bound"
+   }
+  },
+  {
+   "text": "The lattice lemma gives an explicit etale-origin witness for $M_1$, so [lem-trf-compactification-cohomology] identifies $P\\otimes^LA_1\\simeq R\\Gamma(\\bar X,j_!M_1)$. The sheaf $j_!M_1$ is constructible: use the strata of $M_1$ and the complementary closed stratum with value zero. By [sk-thm-pe-constructible-comparison] it comes from a constructible etale $A_1$-sheaf; $A_1$ is a discrete finite field, hence noetherian. [sk-prop-sf-comparison] identifies its pro-etale and etale cohomology. Since $k$ is separably closed, [lem-sf-separably-closed-torsion-cd] gives $c=0$, and [thm-sc-finite-type-torsion-cd] on the finite-type $k$-scheme $\\bar X$ gives the bound $2\\dim\\bar X+c\\le2$. Thus $H^i(P/\\varpi P)=0$ for $i>2$; it also vanishes for $i<0$, because $j_!M_1$ is a sheaf in degree zero. Derived reduction is the termwise quotient here because $P$ is finite free.",
+   "uses": [
+    "lem-trf-curve-integral-lattice",
+    "lem-trf-compactification-cohomology",
+    "sk-thm-pe-constructible-comparison",
+    "sk-prop-sf-comparison",
+    "lem-sf-separably-closed-torsion-cd",
+    "thm-sc-finite-type-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 5, curves: finite-coefficient comparison and torsion-cohomological-dimension bound"
+   }
+  },
+  {
+   "text": "The short exact sequence of complexes $0\\to P\\xrightarrow{\\varpi}P\\to P/\\varpi P\\to0$ gives an injection $H^i(P)/\\varpi H^i(P)\\hookrightarrow H^i(P/\\varpi P)$. For $i\\notin\\{0,1,2\\}$ the target vanishes by Step 10. The module $H^i(P)$ is finitely generated over the noetherian DVR $\\mathcal O_L$, so [lem-weil-pbc-nakayama-jacobson] applied to its maximal ideal $(\\varpi_L)$ gives $H^i(P)=0$. Step 8 then gives $H_c^i(X,K_L)=0$ for these $i$; for $\\Lambda=E$ this is the vanishing in clause (3). For $\\Lambda=\\Qlb$, [lem-weil-compact-support-finite-field-independence], applied to $a_X:X\\to\\operatorname{Spec}k$ and the representing isomorphisms $(E,K_E)\\cong K\\cong(L,K_L)$, identifies $R\\Gamma_c(X,K_E)\\otimes_E\\Qlb$ with $R\\Gamma_c(X,K_L)\\otimes_L\\Qlb$; cohomology commutes with these field extensions, so $H_c^i(X,K)=0$ for $i\\notin\\{0,1,2\\}$, where $H_c^i(X,K)$ and $F$ are as in [thm-trf-grothendieck-lefschetz-qbar]. Keeping degrees $0,1,2$ in clause (2) gives the displayed fraction, proving clause (3).",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson",
+    "lem-weil-compact-support-finite-field-independence",
+    "thm-trf-grothendieck-lefschetz-qbar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 5, curves: universal coefficient injection and Nakayama"
    }
   },
   {
@@ -125,33 +172,29 @@
   }
  ],
  "proof_deps": [
-  "def-weil-constructible-standard-tstructure",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-pbc-rational-category",
-  "def-weil-power-series-exponential",
-  "lem-kun-dimension-extension",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "lem-sf-separably-closed-torsion-cd",
-  "lem-trf-compactification-cohomology",
-  "lem-trf-local-frobenius-conjugacy",
   "lem-weil-exp-trace-determinant",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-nakayama-jacobson",
-  "lem-weil-power-series-exp-hom",
   "lem-zl-euler-product-identity",
-  "prop-constructible-truncations",
-  "prop-trf-adic-coefficient-morphism-systems",
-  "prop-trf-rational-frobenius-integral-model",
-  "prop-trf-trace-formal-laws",
-  "prop-weil-pbc-integral-tstructure",
-  "prop-weil-pbc-rational-transport",
-  "sk-prop-sf-comparison",
-  "sk-thm-pe-constructible-comparison",
-  "thm-nagata-compactification",
-  "thm-sc-finite-type-torsion-cd",
-  "thm-trf-frobenius-fixed-points",
+  "lem-weil-power-series-exp-hom",
+  "def-weil-power-series-exponential",
+  "lem-trf-rational-global-frobenius-powers",
   "thm-trf-grothendieck-lefschetz-qbar",
-  "thm-trf-trace-formula-e"
+  "lem-trf-rational-local-frobenius-powers",
+  "thm-trf-trace-formula-e",
+  "thm-trf-frobenius-fixed-points",
+  "lem-trf-local-frobenius-conjugacy",
+  "prop-trf-trace-formal-laws",
+  "def-weil-constructible-standard-tstructure",
+  "prop-constructible-truncations",
+  "lem-trf-curve-integral-lattice",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-extension",
+  "lem-trf-compactification-cohomology",
+  "sk-thm-pe-constructible-comparison",
+  "sk-prop-sf-comparison",
+  "lem-sf-separably-closed-torsion-cd",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-compact-support-finite-field-independence"
  ],
  "proof_origin": {
   "by": "document",
@@ -259,7 +302,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -307,7 +350,7 @@
   "date": "2026-10-17",
   "item": "thm-trf-l-function-euler-product",
   "worker": "stage1",
-  "summary": "Second reading repaired the rational-stage power and conjugacy argument by explicit composition and cyclic products; supplied integral t-structure, stratified-model, dimension and etale-comparison citations for the curve clause; used the exponential homomorphism with coefficientwise limits to prove the determinant identity. No new nodes; statement unchanged. Off-unit generic tools are explained in the report for maintainer review.",
+  "summary": "Repair of returned long Steps 2 and 6. The rational global power/coherence argument, rational local cyclic-transport argument, and torsion-free sheaf lattice/realization are extracted as three unsplit statement nodes. Short compactification, comparison/cd and Nakayama steps retain the curve route. Other steps retained with adjusted cross-references; statement and Lean record unchanged.",
   "blueprint": "Steps 0–6 realize the identically named blueprint proof: determinant-trace identity; powers and finiteness; local finiteness; grouping by closed points; logarithmic/exponential identity; curve range; coefficientwise embedding.",
   "tool_uses": [
    {
@@ -317,14 +360,6 @@
    {
     "node": "lem-weil-power-series-exp-hom",
     "why": "Generic formal exponential homomorphism used in blueprint Steps 0 and 4; the infinite-sum extension is proved coefficientwise in this split."
-   },
-   {
-    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "why": "Integral local-model and truncation properties needed to justify the sheaf lattice constructed in blueprint Step 5; no statement within the unit supplies them."
-   },
-   {
-    "node": "prop-weil-pbc-integral-tstructure",
-    "why": "Integral t-structure needed for the cohomology lattice construction in blueprint Step 5, not a replacement trace-formula route."
    },
    {
     "node": "prop-constructible-truncations",
@@ -352,9 +387,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q69-5870d7a62",
-  "group": "Q69",
+  "reviewer": "NT-cc-NL-3c019f806",
+  "group": "NL",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-5870d7a62 (reviewer sub-agent of L); spot-checked: Read the full delivery: item, all 7 steps, every cited statement, and the blueprint main-20261015 statement and proof (Steps 0-6). The master and main statement bodies are identical, and the node statement matches them exactly, so nothing is weakened. Small cases checked: Spec F_q with a scalar Weil map; Spec F_{q^2}, where the degree-2 point gives 1-T^2 and F swaps the two summands; A^1, where H^2_c=E(-1) and L=1/(1-qT); the empty scheme. Step 0: clauses (1),(2) of prop-trace-determinant hold over any characteristic-zero field, the sign of Delta matches, and the substitution T->T^e and the coefficientwise infinite sum follow from def-weil-power-series-exponential. Step 1: recomputed the global composition F^1F^m=F^{m+1} through the rational transport. Recomputed the cyclic products: C_0T_i=T_iC_i=A_0...A_{i+e-1}, so C_i=T_i^{-1}C_0T_i, with T_i invertible because phi_E is an isomorphism. Only the geometric clause (1) of the conjugacy lemma is used. Steps 2-4: X_0(F_{q^r}) is finite by thm-trf-frobenius-fixed-points; the grouping by closed points and the trace invariance under conjugacy follow from trace formal laws (1),(4); the reindexing m=e_x r is finite in each coefficient. Step 5 (curves): checked t-exactness of localization through the standard pair; the raw Hom localization; the torsion bound of the local models; M_n flat; adic-systems clauses (1),(2) need no Weil structure; the closure of the Nagata compactification has dim<=1 by lem-kun-dimension-extension; the etale-origin witness, the compactification comparison and cd<=2d+c<=2; H^i(P)/varpi injects into H^i(P/varpi), then Nakayama. In the Q-bar-ell case E may need to be enlarged first; this is harmless because only a lattice is needed. Step 6 is elementary. The DAG is acyclic, proof_deps equals the union of the uses lists, and there are no new nodes or duplicates. Repair: sk-thm-pe-constructible-comparison is cited in Step 6 but lies off the sk-thm-trace-transport route and was not declared; the report wrongly calls it on-route. I added it to split_report.tool_uses in fixes/dag/nodes/sec-trace-formula/thm-trf-l-function-euler-product.json, with no other change. Accepted tool_uses: prop-trace-determinant, lem-weil-power-series-exp-hom, lem-weil-pbc-integral-stratified-perfect-characterization, prop-weil-pbc-integral-tstructure, prop-constructible-truncations, lem-kun-dimension-extension, sk-thm-pe-constructible-comparison. Minor, not repaired: the report says the statement source was updated to main-20261015, but source.document still points to master; since the two statements are identical this is harmless.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-3c019f806 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 12 steps, the 3 new nodes, the statement of every cited node, blueprint main-20261015 thm-trf-l-function-euler-product (statement and proof Steps 0-6; the statement is identical to master and to the node, not weakened), the unit sk-thm-trace-transport and the chapter. No SGA source is used. Coefficient categories are the rationalized E-stage and common-stage Q̄ℓ categories, with base-change transports rationalized via prop-weil-pbc-rational-transport. Steps 1-7, 9, 10 and 12 check out: exp/det signs; X_0(F_{q^m}) is finite by the finite coproduct in thm-trf-frobenius-fixed-points; only the geometric clause (1) of the conjugacy lemma is used; reindexing m=e_x r is finite in each coefficient; Nagata closure and dimension invariance hold; the étale-origin witness gives compactification, then étale comparison, then cd ≤ 2d+0 ≤ 2. New nodes: the global powers node (B_{m+1}=B_{1,G^m}∘B_m in the orientation of def-trf-frobenius-operators; diag(1,ℓ) and φ=0 tested), the local powers node (cyclic transports with the source reparametrization; e=1, e=2 and noncommuting A_0,A_1 tested) and the lattice node (M=H^0/torsion; torsion lattices tested). All three are true, statement-only, not duplicates (lem-trf-global-frobenius-iterate-formula, lem-trf-compact-frobenius-transport-composition, lem-trf-local-frobenius-conjugacy, lem-trf-frobenius-degree-formula, lem-trf-lattice-reduction-tower-normalized, lem-weil-pbc-lisse-e-constructible-integral-lattice compared) and not restated clauses of the item. Two repairable faults, both in the Q̄ℓ case of clause (3), repaired in fixes/. (1) E1: Step 8 must enlarge E to L, since the Q̄ℓ heart is defined at a larger stage (def-weil-constructible-standard-tstructure (3)). It then applied lem-trf-curve-integral-lattice, which required a lattice with the finite-level hypotheses, and those hold only over O_E with no cited transfer to O_L. The lattice lemma never uses those hypotheses or the Weil structure: witnesses come from constructibility, and perfectness from prop-trf-adic-coefficient-morphism-systems (1),(2). The repair removes both hypotheses from the new node, which makes it stronger and still true, and rewrites Step 8 to apply the lemma to K_L with lattice K_L. (2) C1/C4: Step 11 moved the vanishing from K_L back to the given representative using thm-trf-grothendieck-lefschetz-qbar, which does not state stage independence of RΓ_c. The repair cites the on-route reviewed lem-weil-compact-support-finite-field-independence (no cycle). proof_deps is updated. Accepted tool_uses: lem-weil-exp-trace-determinant, lem-weil-power-series-exp-hom, prop-constructible-truncations, lem-kun-dimension-extension, sk-thm-pe-constructible-comparison.; 2 file(s) fixed by the reviewer"
  }
 }
