@@ -14,9 +14,95 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $b=0$, the given prime $\\mathfrak q'$ makes $A'_{\\mathfrak q'}$ a nonzero local ring, so the empty sequence is regular by the definition in the statement. Hence assume $b>0$. Put $J=(f_1,\\ldots,f_b)$. Apply [lem-pur-regular-sequence-graded-polynomial] to the given regular sequence in $A$. It gives the canonical isomorphism $(A/J)[T_1,\\ldots,T_b]\\simeq\\operatorname{gr}_J(A)$, sending $T_j$ to the degree-one class of $f_j$. This is exactly the quasi-regular hypothesis of the algebraic base-change input.",
+   "uses": [
+    "lem-pur-regular-sequence-graded-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular, part (1)."
+   }
+  },
+  {
+   "text": "Fix the prime $\\mathfrak q'\\subset A'$ in the statement. Let $\\mathfrak q\\subset A$ be its inverse image and $\\mathfrak p\\subset R$ its inverse image in $R$. Thus $J\\subset\\mathfrak q$ and $\\mathfrak q\\cap R=\\mathfrak p$. Put $k=\\kappa(\\mathfrak p)$ and $F=A\\otimes_R k$. The fraction description of the fibre in the statement identifies $F$ with $(R\\setminus\\mathfrak p)^{-1}(A/\\mathfrak pA)$. Accordingly $\\mathfrak q$ induces a prime $P$ in $F$, containing the images $\\bar f_j$ of all $f_j$. Apply [lem-pur-quasi-regular-flat-quotient-base-change] to $R\\to k$: the required quotient flatness is the hypothesis that $A/J$ is flat over $R$. We obtain the canonical polynomial associated-graded isomorphism for $(\\bar f_1,\\ldots,\\bar f_b)$ in $F$. A finite presentation of $A$ over $R$ gives a presentation of $F$ by the same generators and reduced relations over $k$; hence $F$ is finitely generated over the field $k$. By [lem-wf-affine-noetherian-components], $F$ is Noetherian. Only this fibre, not $R$ or $A$, has been asserted Noetherian.",
+   "uses": [
+    "lem-pur-quasi-regular-flat-quotient-base-change",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063U, lemma-relative-regular-immersion-flat-in-neighbourhood, first proof paragraph; more-algebra.tex Tag 0CEP(1)."
+   }
+  },
+  {
+   "text": "Let $L=F_P$. It is a nonzero local Noetherian ring: for any ideal of $F_P$, generators of its contracted ideal in $F$ generate it after localization. The polynomial associated-graded isomorphism of step 2 localizes to the corresponding isomorphism for $L$ and $(\\bar f_j/1)$. In detail, [lem-weil-pbc-localization-module-exact] identifies $S^{-1}(I^n/I^{n+1})$ with $(S^{-1}I)^n/(S^{-1}I)^{n+1}$ for $I=(\\bar f_1,\\ldots,\\bar f_b)$ and $S=F\\setminus P$; powers identify by multiplying fractions. The polynomial side localizes coefficientwise, and the map still sends $T_j$ to $[\\bar f_j/1]_1$. All $\\bar f_j/1$ lie in the maximal ideal $PL$. Therefore [lem-pur-quasi-regular-noetherian-local] says they form a regular sequence in $L$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-pur-quasi-regular-noetherian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063U proof: algebra.tex Tag 061S, lemma-quasi-regular-regular, on the Noetherian local fibre."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-regular-sequence-principal-neighbourhood] to the Noetherian ring $F$, its prime $P$, and the sequence $(\\bar f_j)$. It gives $\\gamma\\notin P$ such that the whole sequence is regular in $F[1/\\gamma]$. Write $\\gamma=(a\\bmod\\mathfrak pA)/r$ with $a\\in A$ and $r\\in R\\setminus\\mathfrak p$; then $a\\notin\\mathfrak q$ and $F[1/\\gamma]=F[1/\\bar a]$. Start with $D=A[1/a]$. This is finitely presented over $R$: to a finite presentation for $A$ adjoin one generator $u$ and relation $au-1$. It is flat over $R$: for every injection $N_1\\to N_2$ of $R$-modules, flatness of $A$ first makes $N_1\\otimes_RA\\to N_2\\otimes_RA$ injective, and exact localization [lem-weil-pbc-localization-module-exact] preserves that injection. The identifications $(N_i\\otimes_RA)[1/a]\\simeq N_i\\otimes_RD$ send $(n\\otimes x)/a^t$ to $n\\otimes(x/a^t)$. Thus the fibre $D\\otimes_Rk=F[1/\\bar a]$ carries the regular sequence of the specified images of $f_j$.",
+   "uses": [
+    "lem-exc-regular-sequence-principal-neighbourhood",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063U proof, shrinking on the fibre by algebra.tex Tag 061L, lemma-regular-sequence-in-neighbourhood; explicit lift of the shrinking to A."
+   }
+  },
+  {
+   "text": "We now induct on $e=0,\\ldots,b$, shrinking the ambient principal neighbourhood of $\\mathfrak q$ each time. The inductive claim is: there is $h\\notin\\mathfrak q$ and $D=A[1/h]$ such that, with $D_i=D/(f_1,\\ldots,f_i)$, every $D_i$ for $0\\le i\\le e$ is flat and finitely presented over $R$, multiplication by $f_i$ on $D_{i-1}$ is injective for $1\\le i\\le e$, and on the fibre $D\\otimes_Rk$ all successive multiplication maps of $(\\bar f_1,\\ldots,\\bar f_b)$ are injective. Step 4 gives the base case $e=0$. For the induction step apply [lem-pc-algebra-fibre-cartier-local] with base $R$, ambient algebra $D_e$, field $K=k$, principal ideal $(f_{e+1})$, and the prime $\\mathfrak q_e$ induced by $\\mathfrak q$. This prime exists because all $f_j\\in\\mathfrak q$, and its contraction is $\\mathfrak p=\\ker(R\\to k)$. The fibre identifies with $(D\\otimes_Rk)/(\\bar f_1,\\ldots,\\bar f_e)$: the map sends $(d\\bmod(f_1,\\ldots,f_e))\\otimes t$ to the class of $d\\otimes t$, with inverse on pure tensors given by the same formula. In this fibre $\\bar f_{e+1}$ is a nonzerodivisor by the inductive claim. At every fibre prime one can therefore take $g_P=1$ in the cited criterion, so its all-primes hypothesis is satisfied, not just a hypothesis at the chosen point. The criterion gives $g\\notin\\mathfrak q_e$ such that $(f_{e+1})$ in $(D_e)[1/g]$ is generated by a nonzerodivisor $v$ and its quotient is flat over $R$. The specified $f_{e+1}$ itself is a nonzerodivisor: writing $v=t f_{e+1}$, the equation $f_{e+1}x=0$ implies $vx=0$, hence $x=0$. Lift $g$ to $\\tilde g\\in D$ outside the prime induced by $\\mathfrak q$, and replace $D$ by $D[1/\\tilde g]$. Writing $\\tilde g=c/h^n$ makes this $A[1/(hc)]$, with $hc\\notin\\mathfrak q$. Earlier multiplication injections and all fibre multiplication injections survive by [lem-weil-pbc-localization-module-exact]. Earlier flat quotients remain flat by the injection-and-localization argument of step 4. Every prefix quotient remains finitely presented: append its finitely many equations to the finite presentation and append a generator and relation for each new inverse. The criterion supplies the new flat quotient $D_{e+1}$, completing the induction. Thus at $e=b$ the original equations on some $A[1/h]$, $h\\notin\\mathfrak q$, have all prefix quotients flat over $R$.",
+   "uses": [
+    "lem-pc-algebra-fibre-cartier-local",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063U proof, repeated fibre-Cartier criterion Tag 062Y; algebraic form of that criterion in the cited existing node."
+   }
+  },
+  {
+   "text": "For the final $D$ of step 5, each sequence of $R$-modules $0\\to D_{i-1}\\xrightarrow{\\ f_i\\ }D_{i-1}\\to D_i\\to0$ is exact and its last term is flat over $R$. Apply [lem-weil-pbc-flat-quotient-tensor-injective] with $N=R'$ to every one of them. The cited lemma first gives injection on $R'\\otimes_RD_{i-1}$. The $R$-linear flip $r'\\otimes d\\mapsto d\\otimes r'$, with inverse $d\\otimes r'\\mapsto r'\\otimes d$, follows directly from the tensor universal property and carries $r'\\otimes f_i d$ to $f_i d\\otimes r'=(f_i\\otimes1)(d\\otimes r')$. Thus multiplication by $f_i\\otimes1$ on $D_{i-1}\\otimes_RR'$ is injective for every $i$. The usual tensor-quotient identification is explicit: $(d\\bmod(f_1,\\ldots,f_{i-1}))\\otimes r'$ maps to $[d\\otimes r']$, and the inverse sends $[d\\otimes r']$ back to this tensor. Hence the images of the $f_j$ are weakly regular on $D\\otimes_RR'$. Tensoring the principal localization gives $D\\otimes_RR'=A'[1/h']$, $h'=h\\otimes1$, via $(a/h^n)\\otimes r'\\mapsto(a\\otimes r')/(h')^n$ and its inverse. Since $h\\notin\\mathfrak q$, we have $h'\\notin\\mathfrak q'$. Apply [lem-weil-pbc-weakly-regular-sequence-localization-prime] to $A'[1/h']$, its prime induced by $\\mathfrak q'$, and this weakly regular sequence. All its terms lie in that prime. The resulting local ring is canonically $A'_{\\mathfrak q'}$, by sending fractions to the same fractions (the extra element $h'$ is already invertible there). We obtain the required regular sequence of the specified $f'_j/1$, including the nonzero final quotient, which has residue field $\\kappa(\\mathfrak q')$. This proves the arbitrary-base-change conclusion without assuming $R'$ flat over $R$.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063U proof, stability of the relative sequence under arbitrary base change; Tag 0FUD, remark-relative-regular-immersion-elements, specified equations and final localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-pur-quasi-regular-flat-quotient-base-change",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pur-quasi-regular-noetherian-local",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-pc-algebra-fibre-cartier-local",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 063U, lemma-relative-regular-immersion-flat-in-neighbourhood, proof, and Tag 0FUD, remark-relative-regular-immersion-elements; inputs more-algebra.tex Tag 0CEP(1) and algebra.tex Tag 061S."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,7 +127,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-smooth-pair-local-coordinates",
@@ -60,5 +146,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-relative-regular-equations-base-change",
+  "worker": "stage1",
+  "summary": "Repair of D1/D2: withdrew the child that restated the entire local-regularity conclusion. Wrote the 063U proof in six steps: regular gives quasi-regular, flat-quotient quasi-regular base change to the Noetherian fibre, local regularity, fibre shrinking, explicit prefix induction via the existing algebraic fibre-Cartier criterion, and tensor preservation of each injection followed by prime localization. Two smaller statement-only algebra inputs, 0CEP(1) and 061S, replace the former whole-theorem child. Statement and maintainer metadata preserved.",
+  "blueprint": "Provides regular equations for the local frame in the first sentence of lem-pur-divisor-class, via the smooth-pair local coordinates prerequisite; follows the 0FUD/063U algebraic route. Current main-20261015 files the same ancestor proof under sk-prop-an; existing unit binding is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-regular-sequence-principal-neighbourhood",
+    "why": "Generic spreading of a specified sequence from a Noetherian local ring to a principal neighbourhood, applied only on the fibre; no purity-unit node supplies this 061L algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-regular-sequence-principal-neighbourhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-048dfa6a7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-048dfa6a7 (reviewer sub-agent of L); spot-checked: I read all the mathematics in full and made no repairs; the full review is in review.md. Item statement: identical to the base and to the read-only copies in both projects. It agrees with Stacks 0FUD/063U (divisors.tex). The restriction to primes q' that contain the f'_j is needed: without it, k[t] with f=t and q'=(t-1) is a counterexample. The report records this as a source error. Steps: step 1 uses 00LN(1) (regular implies quasi-regular). Step 2 applies the new 0CEP(1) node to R→κ(p), which needs only flatness of A/J; the fibre is finite type over a field, hence Noetherian. Step 3 localizes the associated-graded isomorphism exactly and applies the new 061S node in the Noetherian local fibre. Step 4 applies the 061L node, with γ=ā/r so a∉q, then checks finite presentation and flatness of A[1/a]. Step 5 checks every hypothesis of the 062Y fibre-Cartier leaf, which is the Lean declaration Fiber.lean:981 (read): flat and finitely presented D_e, a field with kernel p, a principal ideal, and g_P=1 at all fibre primes. It also checks v=t·f_{e+1}, so f_{e+1} is a nonzerodivisor, and that each new denominator c/h^n gives a principal open not containing q. Step 6 uses 00HL with N=R' and no flatness of R', then the weakly-regular localization at q' with h'∉q'. Long step 5 (2303 characters): it is the single 063U induction, now with its invariant, base case and inductive step stated. Its only non-elementary input is the cited 062Y leaf, and the rest is short checks. Splitting it would put the whole item into a child, the D1/D2 fault this repair removed, so it may stay. New nodes: 0CEP(1) and 061S (with M=A) match their Stacks sources hypothesis by hypothesis. Both are statement-only and meet B1–B7. Small cases agree: b=0, a unit generator, Z[x]/(2x) with f=x (hypothesis fails), and k[x,y]/(xy) localized with f=x (hypothesis fails, and x is a zerodivisor). Both are strictly smaller than the item. An rg search for 0CEP, 061S, quasi-regular, 063U and 062Y found no duplicates. Mathlib RegularSequence.lean:21 lists quasi-regular sequences as TODO. Route: lem-pur-regular-sequence-graded-polynomial is in unit sk-def-purity-conv, which this item's unit cites. The declared tool use lem-exc-regular-sequence-principal-neighbourhood is in fact in the item's own unit, so the declaration is redundant; accepting it is harmless. No SGA source, no cycle, and proof_deps equals the union of the steps' uses."
  }
 }
