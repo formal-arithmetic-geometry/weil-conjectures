@@ -108,7 +108,7 @@ lemma of_iso {F G : ℕ ⥤ C} (e : F ≅ G) {c : Cocone F} (hc : IsHomotopyColi
   · simp only [Triangle.mk_mor₁, Iso.refl_hom, Category.comp_id, Category.id_comp, ht]
     rfl
   · refine Cofan.IsColimit.hom_ext hP' _ _ fun n ↦ ?_
-    simp only [Triangle.mk_obj₂, Triangle.mk_obj₃, Triangle.mk_mor₂, Iso.refl_hom,
+    simp only [Triangle.mk_mor₂, Iso.refl_hom,
       Category.id_comp, Iso.symm_hom, Cofan.IsColimit.fac_assoc]
     simp only [P', cofan_mk_inj, Category.assoc, Cofan.IsColimit.fac]
     rw [← cancel_mono eι.hom]

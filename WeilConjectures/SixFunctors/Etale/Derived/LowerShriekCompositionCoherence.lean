@@ -52,6 +52,27 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
+section General
+
+variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- The projection map of `Rf_!` is compatible with the associativity of the derived tensor
+product, for a general coefficient category: this is
+`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc` for the chosen
+compactification. -/
+theorem projectionMapAssociativity_general {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] : ProjectionMapAssociativity A f :=
+  ⟨projectionMapOfCompactification_assoc A (HasCompactification.compactification f)⟩
+
+end General
+
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
 The projection map `PF : Rf_!M ⊗ᴸ N ⟶ Rf_!(M ⊗ᴸ Lf^*N)` is compatible with the associativity of
@@ -60,10 +81,10 @@ the derived tensor product: the two maps
 to `N ⊗ᴸ N'` followed by the tensor comparison `Lf^*(N ⊗ᴸ N') ≅ Lf^*N ⊗ᴸ Lf^*N'`, agree. This is
 the identification of "the two tensor reassociations" in the blueprint proof of the coherence of
 the projection formula. -/
+omit [Finite Λ] in
 theorem projectionMapAssociativity {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     ProjectionMapAssociativity (ModuleCat.{u + 1} Λ) f :=
-  ⟨projectionMapOfCompactification_assoc (ModuleCat.{u + 1} Λ)
-    (HasCompactification.compactification f)⟩
+  projectionMapAssociativity_general f
 
 /-- Blueprints `sk-thm-sf-comp-composition`, `sk-prop-sf-pf-coherence` and `sk-thm-sf-package`
 (clause (2)): the composition law for `Rf_!` and its coherence with the projection formula and

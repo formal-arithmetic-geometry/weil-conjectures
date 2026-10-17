@@ -18,6 +18,7 @@ public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyConstantPullback
 
 /-!
 
@@ -211,18 +212,114 @@ lemma profiniteToProEt_obj_left (S : Profinite.{u}) :
     (profiniteToProEt.obj S).left = Spec (.of (LocallyConstant S ℤ)) :=
   rfl
 
-/-- The functor `S ↦ Spec LC(S, ℤ)` preserves finite limits. See the module docstring. -/
+/-- `S ↦ Spec LC(S, ℤ)` sends fibre products of profinite sets to fibre products of schemes:
+`LC(-, ℤ)` sends them to tensor products (`Profinite.isPushout_locallyConstant`). -/
+lemma isPullback_profiniteToScheme_map {X Y Z : Profinite.{u}} (f : X ⟶ Z) (g : Y ⟶ Z) :
+    IsPullback (profiniteToScheme.map (CompHausLike.pullback.fst f g))
+      (profiniteToScheme.map (CompHausLike.pullback.snd f g)) (profiniteToScheme.map f)
+      (profiniteToScheme.map g) :=
+  (Profinite.isPushout_locallyConstant f g).op.flip.map Scheme.Spec
+
+instance preservesLimit_cospan_profiniteToScheme {X Y Z : Profinite.{u}} (f : X ⟶ Z)
+    (g : Y ⟶ Z) : PreservesLimit (cospan f g) profiniteToScheme :=
+  preservesLimit_of_preserves_limit_cone (CompHausLike.pullback.isLimit f g)
+    ((isLimitMapConePullbackConeEquiv _ _).symm (isPullback_profiniteToScheme_map f g).isLimit)
+
+/-- `S ↦ Spec LC(S, ℤ)` is the composite of `profiniteToProEt` with the forgetful functor to
+schemes. -/
+noncomputable def profiniteToSchemeIsoProfiniteToProEtCompForget :
+    profiniteToScheme.{u} ≅ profiniteToProEt ⋙ ProEt.forget specZ ⋙ Over.forget specZ :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by
+    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+    rfl)
+
+instance preservesLimit_cospan_profiniteToProEt {X Y Z : Profinite.{u}} (f : X ⟶ Z)
+    (g : Y ⟶ Z) : PreservesLimit (cospan f g) profiniteToProEt :=
+  have : PreservesLimit (cospan f g)
+      (profiniteToProEt ⋙ ProEt.forget specZ ⋙ Over.forget specZ) :=
+    preservesLimit_of_natIso _ profiniteToSchemeIsoProfiniteToProEtCompForget
+  preservesLimit_of_reflects_of_preserves _ (ProEt.forget specZ ⋙ Over.forget specZ)
+
+instance preservesLimitsOfShape_walkingCospan_profiniteToProEt :
+    PreservesLimitsOfShape WalkingCospan profiniteToProEt.{u} where
+  preservesLimit {K} := preservesLimit_of_iso_diagram _ (diagramIsoCospan K).symm
+
+/-- The ring of locally constant functions on a point is `ℤ`. -/
+noncomputable def locallyConstantPUnitRingEquiv :
+    LocallyConstant (Profinite.of PUnit.{u + 1}) ℤ ≃+* ULift.{u} ℤ where
+  toFun f := ⟨f PUnit.unit⟩
+  invFun n := LocallyConstant.const _ n.down
+  left_inv f := by
+    ext ⟨⟩
+    rfl
+  right_inv _ := rfl
+  map_mul' _ _ := rfl
+  map_add' _ _ := rfl
+
+/-- The point is sent to a terminal object of the pro-étale site of `Spec ℤ`. -/
+def isTerminalProfiniteToProEtObjPUnit :
+    IsTerminal (profiniteToProEt.{u}.obj (Profinite.of PUnit.{u + 1})) := by
+  let e := (locallyConstantPUnitRingEquiv.{u}).toCommRingCatIso
+  have hS : IsTerminal (profiniteToScheme.obj (Profinite.of PUnit.{u + 1})) :=
+    specULiftZIsTerminal.ofIso (Scheme.Spec.mapIso e.op)
+  have : IsIso (toSpecZ (profiniteToScheme.obj (Profinite.of PUnit.{u + 1}))) :=
+    ⟨⟨hS.from _, hS.hom_ext _ _, specULiftZIsTerminal.hom_ext _ _⟩⟩
+  have hO : IsTerminal (Over.mk (toSpecZ (profiniteToScheme.obj (Profinite.of PUnit.{u + 1})))) :=
+    (Over.mkIdTerminal (X := specZ.{u})).ofIso
+      (Over.isoMk (asIso (toSpecZ (profiniteToScheme.obj (Profinite.of PUnit.{u + 1})))).symm
+        (by simp))
+  exact IsTerminal.isTerminalOfObj (ProEt.forget specZ) _ hO
+
+instance preservesLimit_empty_profiniteToProEt :
+    PreservesLimit (Functor.empty.{0} Profinite.{u}) profiniteToProEt.{u} :=
+  preservesLimit_of_preserves_limit_cone Profinite.isTerminalPUnit
+    ((isLimitMapConeEmptyConeEquiv _ _).symm isTerminalProfiniteToProEtObjPUnit)
+
+instance preservesLimitsOfShape_pempty_profiniteToProEt :
+    PreservesLimitsOfShape (Discrete PEmpty) profiniteToProEt.{u} :=
+  preservesLimitsOfShape_pempty_of_preservesTerminal _
+
+/-- The functor `S ↦ Spec LC(S, ℤ)` preserves finite limits: it preserves the terminal object
+and fibre products. -/
 instance preservesFiniteLimits_profiniteToProEt : PreservesFiniteLimits profiniteToProEt.{u} :=
-  sorry
+  preservesFiniteLimits_of_preservesTerminal_and_pullbacks _
 
 instance : RepresentablyFlat profiniteToProEt.{u} :=
   flat_of_preservesFiniteLimits _
 
 /-- The functor `S ↦ Spec LC(S, ℤ)` sends finite jointly surjective families to pro-étale
-coverings. See the module docstring. -/
+coverings: on underlying spaces `Spec LC(S, ℤ) = S × Spec ℤ`, so joint surjectivity is
+preserved, the morphisms are weakly étale, and a finite family of affine schemes over an affine
+scheme is quasi-compact. -/
 lemma coverPreserving_profiniteToProEt :
-    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt :=
-  sorry
+    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt where
+  cover_preserve {U S} hS := by
+    obtain ⟨α, _, Y, π, hπ, hSπ⟩ :=
+      (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily S).1 hS
+    have hsurj := ((Profinite.effectiveEpiFamily_tfae Y π).out 0 2).1 hπ
+    let 𝒰 : (profiniteToScheme.obj U).Cover (Scheme.precoverage @WeaklyEtale) :=
+      Scheme.Cover.mkOfCovers α (fun a ↦ profiniteToScheme.obj (Y a))
+        (fun a ↦ profiniteToScheme.map (π a))
+        (fun x ↦ by
+          obtain ⟨⟨t, p⟩, rfl⟩ :=
+            (LocallyConstant.homeomorphPrimeSpectrum (T := U) (R := ℤ)).surjective x
+          obtain ⟨a, y, rfl⟩ := hsurj t
+          refine ⟨a, LocallyConstant.homeomorphPrimeSpectrum (y, p), ?_⟩
+          rw [LocallyConstant.homeomorphPrimeSpectrum_apply,
+            LocallyConstant.homeomorphPrimeSpectrum_apply]
+          ext φ
+          exact Iff.rfl)
+        (fun a ↦ (inferInstance : WeaklyEtale (profiniteToProEt.map (π a)).left))
+    have hmem : Presieve.ofArrows (fun a ↦ profiniteToProEt.obj (Y a))
+        (fun a ↦ profiniteToProEt.map (π a)) ∈ ProEt.precoverage specZ (profiniteToProEt.obj U) := by
+      rw [ProEt.precoverage, Precoverage.mem_comap_iff, Presieve.map_ofArrows]
+      exact ⟨Scheme.presieve₀_mem_qcPrecoverage_iff.2 (QuasiCompactCover.of_finite (𝒰 := 𝒰)),
+        𝒰.mem₀⟩
+    refine (ProEt.topology specZ).superset_covering ?_
+      (Precoverage.generate_mem_toGrothendieck hmem)
+    rw [Sieve.generate_le_iff]
+    rintro _ _ ⟨a⟩
+    exact Sieve.image_mem_functorPushforward _ _ (hSπ a)
 
 instance isContinuous_profiniteToProEt :
     profiniteToProEt.IsContinuous (coherentTopology Profinite.{u}) (ProEt.topology specZ) :=

@@ -119,7 +119,89 @@ theorem nonempty_iso_derivedHom_rightDerivedUpperShriek_verdierDual
       ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).mapIso β ≪≫ e.symm) ≪≫
     (MonoidalClosed.ihomTensorObjIso _ _ _).symm⟩
 
+/-- Blueprint `sk-rem-sf-kv-formal` (also `rem-sf-kv-formal`): What is formal and what is not.
+
+For `X`, `Y` separated of finite type over an algebraically closed field `k` and a finite
+coefficient ring `Λ` whose exponent is invertible in `k`, the Künneth–Verdier isomorphism
+`M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)` holds for all `M ∈ Dctf(X, Λ)` and `N ∈ Dctf(Y, Λ)` if and
+only if Verdier duality commutes with the external product,
+`𝔻_{X×Y}(M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N`, for all of them. Both directions are formal: biduality, the
+preservation of `Dctf` by `𝔻_X`, and
+`AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedUpperShriek_verdierDual`, which
+rewrites `RHom(p_Y^* N, Rp_X^! M)` as `𝔻_{X×Y}(𝔻_X M ⊠ N)`. The non-formal content is the
+statement itself; at `M = Λ_X`, `N = Λ_Y` it reads `ω_{X×Y} ≅ ω_X ⊠ ω_Y`. -/
+theorem kunnethVerdier_iff_verdierDual_externalProduct :
+    (∀ {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+        {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+        constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M →
+        constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N →
+        Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M
+            ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N)) ≅
+          (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
+              (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
+            ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M))) ↔
+      ∀ {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+        {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+        constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M →
+        constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N →
+        Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a)).obj
+            (op (externalProduct (ModuleCat.{u + 1} Λ) a b M N)) ≅
+          externalProduct (ModuleCat.{u + 1} Λ) a b
+            ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M))
+            ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N))) := by
+  -- `M ≅ 𝔻𝔻M` transported into the first factor of the external product
+  have hext (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
+      (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+      Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M N ≅
+        externalProduct (ModuleCat.{u + 1} Λ) a b ((verdierDual (ModuleCat.{u + 1} Λ) a).obj
+          (op ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M)))) N) := by
+    obtain ⟨β⟩ := nonempty_iso_verdierDual_verdierDual Λ a hM
+    exact ⟨((derivedTensor _ _).mapIso
+      ((L((pullback.fst a b)^*[ModuleCat.{u + 1} Λ])).mapIso β)).app _⟩
+  constructor
+  · intro hκ M N hM hN
+    have hDM := constructibleFiniteTor_verdierDual Λ a hM
+    obtain ⟨κ⟩ := hκ hDM hN
+    obtain ⟨φ⟩ := nonempty_iso_derivedHom_rightDerivedUpperShriek_verdierDual Λ a b hDM N
+    obtain ⟨β⟩ := hext M hM N
+    exact ⟨(verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a)).mapIso β.symm.op ≪≫
+      φ.symm ≪≫ κ.symm⟩
+  · intro hδ M N hM hN
+    have hDM := constructibleFiniteTor_verdierDual Λ a hM
+    obtain ⟨δ⟩ := hδ hDM hN
+    obtain ⟨φ⟩ := nonempty_iso_derivedHom_rightDerivedUpperShriek_verdierDual Λ a b hM N
+    obtain ⟨β⟩ := hext M hM ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N))
+    exact ⟨β ≪≫ δ.symm ≪≫ φ.symm⟩
+
 end AlgClosed
+
+/-- Blueprint `sk-rem-sf-kv-formal`: the formal case of duality of external products.
+
+If the dualizing complexes satisfy `ω_{X×Y} ≅ ω_X ⊠ ω_Y` (the constant-coefficient exceptional
+Künneth isomorphism), then for **dualizable** `M` and `N` (for instance perfect complexes on
+smooth `X`, `Y`) Verdier duality commutes with the external product,
+`𝔻_{X×Y}(M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N`: internal homs out of dualizable objects commute with the
+external product (`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_derivedHom_of_isDualizable`).
+As the blueprint stresses, this perfect case is the base of the induction, not a substitute
+for it. -/
+theorem nonempty_iso_verdierDual_externalProduct_of_isDualizable {S X Y : Scheme.{u}}
+    (a : X ⟶ S) (b : Y ⟶ S) [HasCompactification a] [HasCompactification b]
+    [HasCompactification (pullback.fst a b ≫ a)]
+    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hM : IsDualizable M) (hN : IsDualizable N)
+    (hω : Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a) ≅
+      externalProduct (ModuleCat.{u + 1} Λ) a b (dualizingComplex _ a) (dualizingComplex _ b))) :
+    Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a)).obj
+        (op (externalProduct (ModuleCat.{u + 1} Λ) a b M N)) ≅
+      externalProduct (ModuleCat.{u + 1} Λ) a b
+        ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M))
+        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N))) := by
+  obtain ⟨ω⟩ := hω
+  obtain ⟨e⟩ := nonempty_iso_externalProduct_derivedHom_of_isDualizable (ModuleCat.{u + 1} Λ) a b
+    (N₁ := dualizingComplex _ a) (N₂ := dualizingComplex _ b) hM hN
+  exact ⟨((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso ω ≪≫ e.symm⟩
 
 end Etale
 

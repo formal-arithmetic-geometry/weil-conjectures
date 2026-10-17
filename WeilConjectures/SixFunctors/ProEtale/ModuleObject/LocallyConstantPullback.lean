@@ -86,16 +86,16 @@ lemma sum_const_mul_fiberCharFn [CompactSpace T] (c : LocallyConstant T V) (F : 
   simp only [sum_apply, coe_mul, Pi.mul_apply, coe_const, Function.const_apply,
     fiberCharFn_apply, mul_ite, mul_one, mul_zero, map_apply]
   rw [Finset.sum_ite_eq, if_pos (c.range_finite.mem_toFinset.2 (Set.mem_range_self t))]
+  rfl
 
 /-- On a compact space, the characteristic functions of the fibres of a locally constant
 function sum to `1`. -/
 lemma sum_fiberCharFn [CompactSpace T] (c : LocallyConstant T V) :
     ∑ v ∈ c.range_finite.toFinset, fiberCharFn R c v = 1 := by
-  have := sum_const_mul_fiberCharFn (R := R) c (fun _ ↦ 1)
-  simp only [const_one, one_mul] at this
-  rw [this]
-  ext
-  rfl
+  classical
+  ext t
+  simp only [sum_apply, fiberCharFn_apply, coe_one, Pi.one_apply]
+  rw [Finset.sum_ite_eq, if_pos (c.range_finite.mem_toFinset.2 (Set.mem_range_self t))]
 
 /-- A locally constant function which is equal to `r` on the fibre of `c` over `v` is `r` times
 the characteristic function of that fibre, after multiplying with it. -/
@@ -155,11 +155,9 @@ theorem mem_closure_comap_mul_comap [CompactSpace P] [CompactSpace X] [T2Space X
   let cX : LocallyConstant X (F → Fin 2) := unflip fun q : F ↦ ofIsClopen (hU q)
   let cY : LocallyConstant Y (F → Fin 2) := unflip fun q : F ↦ ofIsClopen (hV q)
   have hcX (x : X) (q : F) : cX x q = 0 ↔ x ∈ U q := by
-    change ofIsClopen (hU q) x = 0 ↔ _
-    rw [← Set.mem_preimage, ofIsClopen_fiber_zero]
+    exact Set.ext_iff.1 (ofIsClopen_fiber_zero (hU q)) x
   have hcY (y : Y) (q : F) : cY y q = 0 ↔ y ∈ V q := by
-    change ofIsClopen (hV q) y = 0 ↔ _
-    rw [← Set.mem_preimage, ofIsClopen_fiber_zero]
+    exact Set.ext_iff.1 (ofIsClopen_fiber_zero (hV q)) y
   -- on the trace on `P` of a cell `cY⁻¹ β × cX⁻¹ α`, the function `h` is constant
   have hconst (q q₀ : P) (hX : cX (fst q) = cX (fst q₀)) (hY : cY (snd q) = cY (snd q₀)) :
       h q = h q₀ := by
@@ -183,7 +181,9 @@ theorem mem_closure_comap_mul_comap [CompactSpace P] [CompactSpace X] [T2Space X
     calc h = (∑ β ∈ cY.range_finite.toFinset, (fiberCharFn R cY β).comap snd) *
           (∑ α ∈ cX.range_finite.toFinset, (fiberCharFn R cX α).comap fst) * h := by
           rw [h1X, h1Y, one_mul, one_mul]
-      _ = _ := by simp only [Finset.sum_mul, Finset.mul_sum]
+      _ = _ := by
+        simp only [Finset.sum_mul, Finset.mul_sum]
+        exact Finset.sum_comm
   rw [hsum]
   refine AddSubmonoid.sum_mem _ fun β _ ↦ AddSubmonoid.sum_mem _ fun α _ ↦ ?_
   by_cases hb : ∃ q₀, cY (snd q₀) = β ∧ cX (fst q₀) = α
@@ -248,7 +248,7 @@ theorem sum_tmul_eq_zero [CompactSpace X] [CompactSpace Y] [CompactSpace Z] [T2S
     rw [Algebra.TensorProduct.tmul_mul_tmul,
       fiberCharFn_mul_eq cY β p.1.1 (β p) (fun t ht ↦ by rw [← ht]; rfl),
       fiberCharFn_mul_eq cX α p.1.2 (α p) (fun t ht ↦ by rw [← ht]; rfl),
-      ← hsmulX, ← hsmulY, smul_tmul', tmul_smul, smul_smul, mul_comm]
+      ← hsmulX, ← hsmulY, ← smul_tmul', tmul_smul, smul_smul]
   have hz1 : z = ∑ β ∈ cY.range_finite.toFinset, ∑ α ∈ cX.range_finite.toFinset,
       (fiberCharFn R cY β ⊗ₜ[LocallyConstant Z R] fiberCharFn R cX α) * z := by
     conv_lhs => rw [← one_mul z, h1]
@@ -265,7 +265,7 @@ theorem sum_tmul_eq_zero [CompactSpace X] [CompactSpace Y] [CompactSpace Z] [T2S
         Pi.zero_apply] at this
       rw [← hx, ← hy]
       exact this
-    rw [h0, const_zero, zero_smul]
+    rw [h0, show const Z (0 : R) = 0 from rfl, zero_smul]
   · push_neg at hm
     obtain ⟨W, hW, hKW, hWK⟩ := exists_clopen_of_closed_subset_open
       ((cX.isLocallyConstant.isClopen_fiber α).isClosed.isCompact.image f.continuous).isClosed
@@ -332,8 +332,8 @@ theorem isPushout_locallyConstant {X Y Z : Profinite.{u}} (f : X ⟶ Z) (g : Y �
     IsScalarTower.of_algebraMap_eq fun a ↦ by
       ext q
       exact congrArg a q.2
-  refine (CommRingCat.isPushout_iff_isPushout (R := LocallyConstant Z ℤ)
-    (R' := LocallyConstant X ℤ) (S := LocallyConstant Y ℤ) (S' := LocallyConstant P ℤ)).2 ?_
+  refine IsPushout.flip ((CommRingCat.isPushout_iff_isPushout (R := LocallyConstant Z ℤ)
+    (R' := LocallyConstant Y ℤ) (S := LocallyConstant X ℤ) (S' := LocallyConstant P ℤ)).2 ?_)
   rw [Algebra.isPushout_iff]
   let Φ : LocallyConstant Y ℤ ⊗[LocallyConstant Z ℤ] LocallyConstant X ℤ →ₐ[LocallyConstant Y ℤ]
       LocallyConstant P ℤ :=

@@ -260,7 +260,9 @@ noncomputable def mapModCoreMonoidal : (F.mapMod R).CoreMonoidal where
     simp only [Category.assoc]
     rw [Mod.tensorObjπ_whiskerRight_assoc, Mod.tensorObjπ_associator_hom_assoc,
       Mod.tensorObjπ_whiskerLeft_assoc]
-    dsimp only [mapMod_obj_X, mapMod_map_hom]
+    have hα : ((F.mapMod R).map (α_ M N P).hom).hom = F.map (α_ M N P).hom.hom := rfl
+    rw [hα]
+    dsimp only [mapMod_obj_X]
     rw [← comp_whiskerRight_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc,
       tensorπ_mapModTensorIso_hom_hom, tensorπ_mapModTensorIso_hom_hom,
       tensorπ_mapModTensorIso_hom_hom_assoc, tensorπ_mapModTensorIso_hom_hom]
