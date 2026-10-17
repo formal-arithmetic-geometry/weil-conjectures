@@ -89,5 +89,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicAlgebraColimitChange",
+  "declaration": "SSet.Enhanced.Nonsymmetric.operadic_algebra_colimit_change",
+  "file": "lean/Sheaf/CategoryTheory/OperadicAlgebraColimitChange.lean",
+  "statement": "theorem operadic_algebra_colimit_change {M E D : SSet.{max (u + 1) v}} [Quasicategory E] [Quasicategory D] (q : M ⟶ monoidalSimplexBase.{max (u + 1) v}) (hMsmall : SSet.Presentability.IsSmall.{u, max (u + 1) v} M) (hM : IsGeneralizedOperad q) (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (r : D ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : IsMonoidalInfinityCategory p) (hr : IsMonoidalInfinityCategory r) (hVcolim : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (monoidalUnderlying p)) (hWcolim : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (monoidalUnderlying r)) (hVtensor : ∀ (tensor : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying p)) ⟶ monoidalUnderlying p), IsMonoidalTensorOperation p 2 tensor → ∀ (x : (monoidalUnderlying p) _⦋0⦌) (i : Fin 2), SSet.Presentability.PreservesColimitsIn (Algebroid.tensorWith tensor x i) (fun I _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} I)) (hWtensor : ∀ (tensor : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying r)) ⟶ monoidalUnderlying r), IsMonoidalTensorOperation r 2 tensor → ∀ (x : (monoidalUnderlying r) _⦋0⦌) (i : Fin 2), SSet.Presentability.PreservesColimitsIn (Algebroid.tensorWith tensor x i) (fun I _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} I)) (F : E ⟶ D) (hF : IsStrongMonoidalInfinityFunctor p r F) (hFcolim : SSet.Presentability.PreservesColimitsIn (Algebroid.underlyingChange F hF) (fun I _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} I)) : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (algebras q p) ∧ SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (algebras q r) ∧ ∃ H : algebras q p ⟶ algebras q r, (∀ (n : SimplexCategoryᵒᵖ) (A : (algebras q p) _⦋n.unop.len⦌), (H.app _ A).val.val = A.val.val.comp (Functor.HomObj.ofNatTrans F)) ∧ SSet.Presentability.PreservesColimitsIn H (fun I _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} I)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-15e015cc3",
+  "group": "NV",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, report sections, and per-file compilation all verified."
  }
 }
