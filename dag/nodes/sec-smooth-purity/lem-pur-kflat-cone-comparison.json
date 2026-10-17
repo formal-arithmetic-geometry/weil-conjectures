@@ -13,9 +13,98 @@
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-site-derived-tensor-descent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The two composites around the displayed square agree by bifunctoriality: both are q tensor epsilon. The target is (L tensor M)[0] since only degree zero survives. For later use, the Koszul symmetry on homogeneous local tensors is x tensor y ↦ (-1)^{ij} y tensor x for degrees i,j. With the total differential in the cited definition, both d followed by symmetry and symmetry followed by d have coefficients (-1)^{ij+j} on y tensor dx and (-1)^{ij} on dy tensor x. Thus this is a chain map; its square is the identity and its formula commutes with degree-preserving maps. These local balanced formulas induce the claimed natural symmetry of the sheaf total tensors.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM (lemma-derived-tor-exact), total tensor; the explicit symmetry calculation uses its signed total differential"
+   }
+  },
+  {
+   "text": "The cones of epsilon and q are acyclic by the cone criterion. The defining K-flat condition applied to the acyclic complex Cone(epsilon) and K-flat factor P makes Tot(Cone(epsilon) tensor P) acyclic. Applied to Cone(q) and K-flat factor C it makes Tot(Cone(q) tensor C) acyclic. In both applications the K-flat factor is on the right, exactly as required by the definition.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN (definition-K-flat) and 06YP (lemma-K-flat-quasi-isomorphism), cone argument"
+   }
+  },
+  {
+   "text": "The natural tensor-cone comparison identifies Tot(P tensor Cone(epsilon)) with Cone(1 tensor epsilon), compatibly with the cone inclusion. Applying the Koszul sign symmetry gives the stated identification with Cone(epsilon) tensor P. The same comparison applied after symmetry identifies Cone(q tensor 1) with Cone(q) tensor C. Transporting the acyclicity from step 2 across these isomorphisms and applying the cone criterion proves that the top and left arrows are quasi-isomorphisms.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM (lemma-derived-tor-exact) and the cone comparison used in Tag 06YP; signed chain isomorphism stated by lem-pc-tensor-mapping-cone-iso"
+   }
+  },
+  {
+   "text": "The augmentation square is natural in P, C, q, and epsilon: a morphism of augmented resolutions commutes with each tensor factor, with q and epsilon, and hence with the four square maps. The cone comparisons are natural because the tensor-cone isomorphism and the Koszul symmetry are natural chain isomorphisms.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM, naturality of the tensor construction and cone maps"
+   }
+  },
+  {
+   "text": "Write a,b,c,d for the top, left, right and bottom arrows. By the K-flat and flat-term hypotheses, P,C lie in the resolving class of the derived-tensor descent statement. It identifies Q(Tot(P tensor C)) with Q(P) tensor_R^L Q(C); applying the isomorphisms Q(q),Q(epsilon) identifies this object with L tensor_R^L M. The canonical derived-to-ordinary comparison is represented on these resolutions by their tensor augmentation Q(q tensor epsilon) to (L tensor M)[0]. Since q tensor epsilon = c a, and Q(a) is invertible by step 3, we may identify the derived tensor instead with Q(P tensor M[0]) using Q(a). In this model the comparison is Q(q tensor epsilon) Q(a)^{-1} = Q(c), exactly the right arrow. Naturality follows from the representative identifications in the descent statement and the augmentation square of step 4; no flatness of L or M is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU and 06YM, derived tensor computed by K-flat representatives"
+   }
+  },
+  {
+   "text": "Suppose the bottom arrow d is a quasi-isomorphism. For every degree n the commuting square gives H^n(c) H^n(a) = H^n(d) H^n(b). The three maps H^n(a), H^n(b), H^n(d) are invertible, by step 3 and the extra hypothesis. Hence H^n(c) = H^n(d) H^n(b) H^n(a)^{-1} is invertible. By the definition of quasi-isomorphism c is a quasi-isomorphism, so its image under the derived-category localization is invertible. Step 5 identifies that image with the canonical comparison in the stated model.",
+   "uses": [
+    "def-pc-quasi-iso-modules",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 05RU (definition-derived-category), localization at quasi-isomorphisms; elementary cohomology calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YT, 06YU and 07A3; two-resolution augmentation square and cone comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -65,10 +154,38 @@
    "results": "{\"t\": \"2026-10-17T08:39:55Z\", \"tool\": \"grep\", \"query\": \"mappingCone.*[Tt]ensor|[Tt]ensor.*mappingCone|[Kk][Ff]lat\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic quotient tensors, derived Tor or limit.post cover individual ingredients; none states the full ringed-site resolution/augmentation or scalar-and-tensor tower comparison in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two bounded above termwise flat K-flat resolutions q P to L and epsilon C to M on a ringed site, tensoring gives a commuting augmentation square whose top and left maps are quasi-isomorphisms, cones identify by Koszul signs, and a quasi-isomorphic bottom map implies the derived-to-ordinary tensor comparison is an isomorphism",
+   "results": "{\"t\": \"2026-10-17T10:49:08Z\", \"tool\": \"leanfinder\", \"query\": \"For two bounded above termwise flat K-flat resolutions q P to L and epsilon C to M on a ringed site, tensoring gives a commuting augmentation square whose top and left maps are quasi-isomorphisms, cones identify by Koszul signs, and a quasi-isomorphic bottom map implies the derived-to-ordinary tensor comparison is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"Module.Flat.rTensor_shortComplex_exact\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_map\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.lTensor_shortComplex_exact\", \"CategoryTheory.Tor_map\"], \"digest\": \"a91252b59701b117\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the logged hits concern Tor, flat-module exactness, or individual cone APIs; none states the augmented-resolution square with all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, QuasiIso, KFlat, tensor",
+   "results": "{\"t\": \"2026-10-17T10:49:09Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.mappingCone, QuasiIso, KFlat, tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'KFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable for this query: loogle: unknown identifier 'KFlat'"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*tensor|tensor.*mappingCone|KFlat.*QuasiIso",
+   "results": "{\"t\": \"2026-10-17T10:49:09Z\", \"tool\": \"grep\", \"query\": \"mappingCone.*tensor|tensor.*mappingCone|KFlat.*QuasiIso\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the logged hits concern Tor, flat-module exactness, or individual cone APIs; none states the augmented-resolution square with all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "two K-flat resolutions tensor augmentation square derived tensor ordinary comparison",
+   "results": "{\"t\": \"2026-10-17T10:49:10Z\", \"tool\": \"leansearch\", \"query\": \"two K-flat resolutions tensor augmentation square derived tensor ordinary comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.iff_rTensor_exact\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_preserves_injective_linearMapₛ\"], \"digest\": \"e86fa507f84a8a9d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the logged hits concern Tor, flat-module exactness, or individual cone APIs; none states the augmented-resolution square with all its clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-kummer-level",
@@ -84,10 +201,44 @@
  "blueprint": {
   "from": {
    "node": "lem-pur-finite-kummer-level",
-   "place": "The last sentence, compatibility with the derived tensor product; the two-resolution augmentation square and its signed cone identifications in returned proof step 6.",
+   "place": "The compatibility sentence in the ancestor proof: the derived tensor comparison is independent of the chosen K-flat resolutions; expanded as the two-resolution augmentation square, cone identifications, and naturality.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-kflat-cone-comparison",
+  "worker": "stage1",
+  "summary": "Audited the imported two-resolution comparison statement and split its proof into the commuting square, K-flat cone acyclicity, natural tensor-cone identifications, naturality, derived-model identification, and the two-out-of-three conclusion. No new node was needed because the DAG already contains the cone criterion, tensor-cone comparison, and K-flat derived-tensor descent statements.",
+  "blueprint": "Realizes the ancestor blueprint proof clause asserting compatibility of the finite-level derived tensor comparison with K-flat replacements; the square and cone details make that clause explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "The proof uses its general cone criterion to turn each resolution quasi-isomorphism into an acyclic cone and back."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "The proof uses its natural chain isomorphism identifying a tensor of a mapping cone with the mapping cone of the tensor map."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "The proof uses its representative-level identification of total tensor with the derived tensor bifunctor and its naturality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NG-81e86ae2d",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-81e86ae2d (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, the parent lem-pur-finite-kummer-level (its steps 7–8 use only 'bottom arrow quasi-iso implies comparison iso'), its blueprint proof in main-20261015, and the statement of every cited node. The cone convention [[d_L,f],[0,-d_K]] matches def-weil-abstract-derived-category. K-flatness has the K-flat factor on the right, and the tensor-cone node has the fixed complex A on the left. I checked Stacks sites-cohomology 06YM/06YN/06YP/06YS/06YT/06YU/07A3 against the tags file and the .tex (06YP's proof is the acyclic-cone route; 06YT is the commuting-square argument). I re-derived the step-1 Koszul sign: both composites give (-1)^{ij+j} y⊗dx and (-1)^{ij} dy⊗x. I also re-derived the step-3 tensor-cone isomorphism a⊗(y,x)↦(a⊗y,(-1)^p a⊗x) as a chain map. For the left arrow, steps 2–3 put C on the left of the cone lemma and then apply symmetry, which is valid. In step 5, P and C are exactly the descent node's class (K-flat with flat terms, small site), and Q(q⊗ε)=Q(c)Q(a) with Q(a) invertible. Step 6's cohomology argument is correct and cites only definitions. Small cases checked: zero modules, an identity resolution of a flat L, and the parent's [R→R] case. Nothing is weakened; 'bounded above' is unused but harmless. No new nodes. I found no duplicate among the existing *kflat* nodes: the closest are for a one-point site, for schemes or rings, or are acyclic-factor statements. Accepted tool_uses: lem-pc-tensor-mapping-cone-iso and lem-weil-pbc-site-derived-tensor-descent, which are generic and off the unit's route; lem-pur-quasi-iso-cone-acyclic is on the route via sk-def-sf-operations, so its declaration is redundant. No SGA. No fixes."
  }
 }
