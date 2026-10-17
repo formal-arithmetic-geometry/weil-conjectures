@@ -294,6 +294,35 @@ theorem constructibleFiniteTor_stability_reductionModIdeal {X Y : Scheme.{u}}
     fun K hK ↦ nonempty_iso_reductionModIdeal_verdierDual Λ J aX hK,
     fun L hL ↦ nonempty_iso_reductionModIdeal_rightDerivedUpperShriek Λ J aX aY f hf hL⟩
 
+/-- Blueprint `lem-coef-finite-exceptional`: Finite exceptional adjoints and coefficient change.
+
+For a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes, `k` algebraically closed, and
+`L ∈ Dctf(Y, Λ)` at a finite stage `Λ`:
+
+1. `Rf^! L ≅ 𝔻_X Lf^* 𝔻_Y L`, the case of clause (v) of `thm-sf-ctf-stability`
+   (`nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`);
+2. for a quotient `B = Λ ⧸ J`, `(Rf^! L) ⊗ᴸ B ≅ Rf_B^!(L ⊗ᴸ B)`, read after restriction of scalars
+   to `Λ` as `(Rf^! L)_B ≅ Rf^!(L_B)`
+   (`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedUpperShriek`).
+
+The cocycle condition of the comparisons and their compatibility with units and counits are not
+recorded. -/
+theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
+    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] [HasCompactification aY]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hL : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅
+      (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+        (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
+          ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L))))) ∧
+    Nonempty ((reductionModIdeal Λ X J).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj L) ≅
+      (R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ Y J).obj L)) :=
+  ⟨nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar Λ aX aY f hf hL,
+    nonempty_iso_reductionModIdeal_rightDerivedUpperShriek Λ J aX aY f hf hL⟩
+
 end Etale
 
 end AlgebraicGeometry

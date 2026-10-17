@@ -177,13 +177,13 @@ theorem exists_distTriang_derivedLowerShriek_openClosed (j : U ⟶ X) [IsOpenImm
       Nonempty (T.obj₂ ≅ (derivedLowerShriek k₀ l f).obj K) ∧
       Nonempty (T.obj₃ ≅ (derivedLowerShriek k₀ l (i ≫ f)).obj ((upperStar i).obj K)) := by
   have hX : f ≫ Y ↘ Spec (CommRingCat.of k₀) = X ↘ Spec (CommRingCat.of k₀) :=
-    Scheme.Hom.comp_over f _
-  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := hX ▸ inferInstance
-  have : QuasiCompact (X ↘ Spec (CommRingCat.of k₀)) := hX ▸ inferInstance
-  have : QuasiSeparated (X ↘ Spec (CommRingCat.of k₀)) := hX ▸ inferInstance
-  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := exists_distTriang_openClosed j i hij K
-  obtain ⟨cj⟩ := nonempty_derivedLowerShriek_comp_iso (l := l) j f
-  obtain ⟨ci⟩ := nonempty_derivedLowerShriek_comp_iso (l := l) i f
+    comp_over f _
+  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by rw [← hX]; infer_instance
+  have : QuasiCompact (X ↘ Spec (CommRingCat.of k₀)) := by rw [← hX]; infer_instance
+  have : QuasiSeparated (X ↘ Spec (CommRingCat.of k₀)) := by rw [← hX]; infer_instance
+  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := exists_distTriang_openClosed (k₀ := k₀) j i hij K
+  obtain ⟨cj⟩ := nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) j f
+  obtain ⟨ci⟩ := nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) i f
   let F := derivedLowerShriek k₀ l f
   exact ⟨F.mapTriangle.obj T, F.map_distinguished _ hT, ⟨F.mapIso e₁ ≪≫ (cj.app _).symm⟩,
     ⟨F.mapIso e₂⟩, ⟨F.mapIso (e₃ ≪≫ (derivedLowerShriekObjIsoDerivedLowerStar i _).symm) ≪≫

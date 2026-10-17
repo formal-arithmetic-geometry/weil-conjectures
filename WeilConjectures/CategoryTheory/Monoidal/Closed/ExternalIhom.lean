@@ -98,8 +98,9 @@ variable {C D₁ D₂ : Type*} [Category* C] [Category* D₁] [Category* D₂] [
   [F₂.LaxMonoidal]
 
 omit [SymmetricCategory C] in
-/-- Precomposition with an isomorphism is an isomorphism. -/
-lemma isIso_pre_app {A B : C} (f : B ⟶ A) [IsIso f] (Z : C) : IsIso ((pre f).app Z) :=
+/-- Precomposition with an isomorphism is an isomorphism. (A copy of
+`CategoryTheory.MonoidalClosed.isIso_pre_app` in `DoubleDual.lean`, which is not imported.) -/
+private lemma isIso_pre_app {A B : C} (f : B ⟶ A) [IsIso f] (Z : C) : IsIso ((pre f).app Z) :=
   ⟨(pre (inv f)).app Z, by rw [← NatTrans.comp_app, ← pre_map, IsIso.inv_hom_id, pre_id]; rfl,
     by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id]; rfl⟩
 
@@ -312,6 +313,7 @@ theorem isIso_projectionIhomMap (X Y : C) : IsIso (adj.projectionIhomMap π X Y)
       ← cancel_epi (π T X), IsIso.hom_inv_id_assoc, ← reassoc_of% (hπ t X),
       IsIso.hom_inv_id_assoc, ← comp_whiskerRight_assoc,
       BraidedCategory.braiding_naturality_left_assoc, ← uncurry_eq, homEquiv_counit]
+    rfl
   rw [he]
   exact e.bijective
 
@@ -561,7 +563,7 @@ theorem isIso_map_externalIhomMap_iff
       Category.assoc, hmain, Category.assoc, Category.assoc, Category.assoc, IsIso.inv_hom_id,
       Category.comp_id, BraidedCategory.braiding_naturality_assoc, SymmetricCategory.symmetry_assoc,
       whisker_exchange_assoc, ← tensorHom_def_assoc]
-  have : IsIso ((pre c).app (F₁'.obj (R₁.obj L₁) ⊗ F₂'.obj L₂)) := MonoidalClosed.isIso_pre_app _ _
+  have : IsIso ((pre c).app (F₁'.obj (R₁.obj L₁) ⊗ F₂'.obj L₂)) := isIso_pre_app _ _
   rw [h, isIso_comp_left_iff, isIso_comp_right_iff]
 
 end Step

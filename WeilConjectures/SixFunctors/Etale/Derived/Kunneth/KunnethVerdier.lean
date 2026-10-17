@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DualReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHomMap
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
 public import WeilConjectures.SixFunctors.Etale.Derived.PointDualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
@@ -34,8 +34,8 @@ reads `M ⊠ ω_Y ≅ Rp_X^! M`.
 - `AlgebraicGeometry.Etale.verdierDualEvaluation_eq_homEquiv_symm_id`
   (`def-trf-dualizing-complex`): the evaluation `M ⊗ᴸ 𝔻_X M ⟶ ω_X` is the transpose of the
   identity.
-- `AlgebraicGeometry.Etale.isIso_externalHomMap`, `AlgebraicGeometry.Etale.nonempty_iso_externalHom`
-  (`prop-trf-external-hom`): `β`.
+- `AlgebraicGeometry.Etale.nonempty_iso_externalHom` (`prop-trf-external-hom`): `β` as an
+  isomorphism, from `AlgebraicGeometry.Etale.isIso_externalHomMap`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_pullbackFst`: `α` for
   `𝟙_X × a_Y`, `Rp_X^! M ≅ M ⊠ ω_Y`.
 - `AlgebraicGeometry.Etale.nonempty_iso_kunnethVerdier` (`thm-trf-kunneth-verdier`): `κ`.
@@ -105,28 +105,6 @@ noncomputable def externalProductUnitLeftIso {B X Y : Scheme.{u}} (f : X ⟶ B) 
     derivedTensorLeftUnitor _ _ _
 
 variable {k : Type u} [Field k]
-
-/-- Blueprint `prop-trf-external-hom`: External Hom; the `β` map.
-
-Over a field `k`, for a finite coefficient ring `Λ` of invertible exponent, separated
-finite-type `k`-schemes `Z₁`, `Z₂` and `Eᵢ, Nᵢ ∈ Dctf(Zᵢ, Λ)`, the external Hom map of
-`def-sf-kv-maps` (iii) (`AlgebraicGeometry.Etale.externalHomMap`)
-
-`β : RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ⟶ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`
-
-is an isomorphism. -/
-theorem isIso_externalHomMap [HasInvertibleExponent Λ (Spec (.of k))] {Z₁ Z₂ : Scheme.{u}}
-    (c₁ : Z₁ ⟶ Spec (.of k)) (c₂ : Z₂ ⟶ Spec (.of k))
-    [IsSeparated c₁] [LocallyOfFiniteType c₁] [QuasiCompact c₁]
-    [IsSeparated c₂] [LocallyOfFiniteType c₂] [QuasiCompact c₂]
-    {E₁ N₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {E₂ N₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hE₁ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₁ E₁)
-    (hE₂ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₂ E₂)
-    (hN₁ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₁ N₁)
-    (hN₂ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₂ N₂) :
-    IsIso (externalHomMap (ModuleCat.{u + 1} Λ) c₁ c₂ E₁ N₁ E₂ N₂) :=
-  sorry
 
 /-- Blueprint `prop-trf-external-hom`: External Hom; the `β` map, as an isomorphism
 `RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ≅ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`

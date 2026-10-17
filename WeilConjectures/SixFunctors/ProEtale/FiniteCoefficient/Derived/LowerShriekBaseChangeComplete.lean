@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Complete pro-étale compact-support base change
@@ -105,11 +106,15 @@ noncomputable def reductionModIdeal (J : Ideal Λ) : 𝐃(X, Λ) ⥤ 𝐃(X, Λ)
 
 /-- The reduction `K ↦ K ⊗ᴸ (Λ/J)_X` commutes with shifts. -/
 noncomputable instance (J : Ideal Λ) : (reductionModIdeal Λ X J).CommShift ℤ :=
-  inferInstanceAs (((derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj _).CommShift ℤ)
+  inferInstanceAs (((curriedTensor
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))).flip.obj
+      _).CommShift ℤ)
 
 /-- The reduction `K ↦ K ⊗ᴸ (Λ/J)_X` is triangulated. -/
 instance (J : Ideal Λ) : (reductionModIdeal Λ X J).IsTriangulated :=
-  inferInstanceAs (((derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj _).IsTriangulated)
+  inferInstanceAs (((curriedTensor
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))).flip.obj
+      _).IsTriangulated)
 
 variable {Λ X}
 
@@ -121,7 +126,7 @@ map is the multiplication by `ϖ`. -/
 theorem isIso_smul_id_of_isZero_reductionModIdeal {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (K : 𝐃(X, Λ)) (hK : IsZero ((reductionModIdeal Λ X (Ideal.span {ϖ})).obj K)) :
     IsIso (ϖ • 𝟙 K) := by
-  let F := (derivedTensor (ModuleCat.{u + 1} Λ) X).obj K
+  let F := (curriedTensor 𝐃(X, Λ)).obj K
   let T := _root_.DerivedCategory.quotPowTriangle (Scheme.ProEt.topology X) hϖ rfl 1
   have hT : F.mapTriangle.obj T ∈ distTriang _ :=
     F.map_distinguished _

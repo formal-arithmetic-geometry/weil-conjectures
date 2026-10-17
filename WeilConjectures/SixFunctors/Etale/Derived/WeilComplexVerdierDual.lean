@@ -130,7 +130,8 @@ lemma verdierDual_obj_obj (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
 datum `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback` of `φ`. -/
 lemma verdierDual_frobenius_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (verdierDual g aX sq K).frobenius.hom.hom =
-      verdierDualWeilDatumOfIsPullback sq ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) := by
+      verdierDualWeilDatumOfIsPullback sq
+        ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) := by
   rw [verdierDual, internalHom_obj_obj_frobenius, internalHomFrobenius_hom_hom,
     verdierDualWeilDatumOfIsPullback, verdierDualWeilDatum, MonoidalClosed.dualWeilDatum_eq]
   erw [Category.assoc, ← NatTrans.naturality]

@@ -309,7 +309,7 @@ invertible on `k`, and a separated finite-type morphism `f : X ⟶ Y` of separat
   complement gives a distinguished triangle (clause (3),
   `AlgebraicGeometry.Etale.exists_distTriang_rightDerivedLowerShriek_openClosed`);
 * on `Dctf(Y, Λ)` the exceptional inverse image is `Rf^! = 𝔻_X Lf^* 𝔻_Y` (clause (7),
-  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual`).
+  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`).
 
 The integral reduction compatibilities of clause (2) are
 `AlgebraicGeometry.Etale.functorPackage_integral`. Clause (1) (finite coefficient-field extension
@@ -335,8 +335,10 @@ theorem functorPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
           (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
             ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L))))) :=
   ⟨sixOperationsPackage Λ k f aY,
-    fun j _ _ i _ hij _ _ _ _ K ↦ exists_distTriang_rightDerivedLowerShriek_openClosed Λ j i hij f K,
-    fun _ hL ↦ nonempty_iso_rightDerivedUpperShriek_verdierDual Λ (f ≫ aY) aY f rfl hL⟩
+    fun j _ _ i _ hij _ _ _ _ K ↦
+      exists_distTriang_rightDerivedLowerShriek_openClosed Λ j i hij f K,
+    fun _ hL ↦
+      nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar Λ (f ≫ aY) aY f rfl hL⟩
 
 end Etale
 
