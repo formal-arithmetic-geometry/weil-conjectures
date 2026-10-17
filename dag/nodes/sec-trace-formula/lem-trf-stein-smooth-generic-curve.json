@@ -20,9 +20,118 @@
   "def-weil-pbc-separable-field-extension",
   "def-sc-generic-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the relative spectrum S_0 = Spec_S(f_* O_C). Since f is proper over the Noetherian base and O_C is coherent, [lem-pc-coherent-hi] makes f_*O_C coherent (hence quasi-coherent), so the relative-spectrum construction applies. On an affine open V = Spec(A) of S, the restriction C_V -> V is proper and the relative-spectrum construction identifies S_0 x_S V with Spec Gamma(C_V,O_C). The canonical morphisms give C -> S_0 -> S and their composite is f. This is exactly the Stein factorization construction, with the affine descriptions and restriction compatibility supplied by the relative-spectrum node.",
+   "uses": [
+    "def-weil-pbc-stein-factorization",
+    "lem-pc-coherent-hi",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX, §1.3, printed p. 132, Stein-factorization paragraph; Stacks 03GX and 01SA"
+   }
+  },
+  {
+   "text": "Fix an affine V = Spec(A) in S. Properness of C_V -> V and coherence of O_{C_V} give that Gamma(C_V,O_{C_V}) is a finite A-module by [lem-pc-coherent-hi]. Hence S_0 -> S is finite, since finiteness is affine-local on the target (by the relative-spectrum description of Step 1, q^{-1}(V) = Spec Gamma(C_V,O_C)). The same affine rings are domains: C_V is nonempty because f is dominant, and C is integral, so restriction of a section of O_C over the nonempty open C_V to the function field of C is injective. Integrality of S_0 and dominance of q are proved in Step 3. Since S is excellent and Noetherian, each finite (hence finite type) coordinate algebra Gamma(C_V,O_C) is excellent by [lem-exc-finite-type-localization-excellent], and S_0, being finite, hence of finite type, over the Noetherian S, is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Finally [lem-trf-finite-projective-bundle] makes the finite map q projective in the required projective-bundle convention.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-finite-projective-bundle",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX, §1.3, printed p. 132, finiteness and excellence of the Stein base; Stacks 03H0, 02O5 and 07QU"
+   }
+  },
+  {
+   "text": "On each affine V = Spec(A), apply the affine Stein-factorization theorem to C_V -> V. It says that the first map C_V -> Spec Gamma(C_V,O_C) is proper and that each of its fibres is geometrically connected, in particular nonempty. Since g^{-1}(q^{-1}V) = C_V and the restriction of g over q^{-1}V is this map, the fibre of g over a point of q^{-1}V is the fibre of C_V -> Spec Gamma(C_V,O_C), and properness is local on the target; so g:C -> S_0 is proper with geometrically connected fibres. Integrality of S_0: every fibre of g is nonempty, so g is surjective and S_0 = g(C) is irreducible as the continuous image of the irreducible C. S_0 is nonempty, and it is reduced because it is covered by the opens q^{-1}V = Spec Gamma(C_V,O_C) whose rings are domains by Step 2. Hence S_0 is nonempty, reduced and irreducible, i.e. integral by the equivalent characterization in [def-pc-integral-scheme]. Dominance of q: f = q o g is dominant, so the image of q contains the dense set f(C).",
+   "uses": [
+    "lem-weil-pbc-stein-factorization-affine",
+    "def-weil-proper-morphism",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX, §1.3, printed p. 132, Stein-factorization paragraph; Stacks 03H2 (1), (3)"
+   }
+  },
+  {
+   "text": "Let K = kappa(eta). The generic fibre C_eta is the base change of the proper morphism f, hence proper; it is integral because affine charts of the dominant morphism from the integral C are obtained by localizing domains, and it is a smooth curve by hypothesis. Therefore [lem-pc-h0-proper-variety] says that L := H^0(C_eta,O_{C_eta}) is a finite field extension of K. Smoothness gives geometric reducedness by [sbc-lem-smooth-geometrically-reduced], so [lem-pc-proper-geometrically-reduced-global-sections-separable] makes L/K separable. The relative-spectrum restriction and [lem-sc-fraction-field-sections-base-change] identify the generic relative-spectrum algebra with Gamma(C_eta,O_C_eta)=L; since S_0 is integral and finite dominant over S, its generic point eta_0 has residue field L. Thus kappa(eta_0)=L and the displayed finite separable extension is the claimed one.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-h0-proper-variety",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-pc-proper-geometrically-reduced-global-sections-separable",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-sc-fraction-field-sections-base-change",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX, §1.3, printed p. 132, identification of the Stein generic field; Stacks 0BUG and 0FD1"
+   }
+  },
+  {
+   "text": "The Stein fibre is C_{eta_0}=C\\times_{S_0}Spec(L). It is canonically isomorphic to C_eta: indeed S_0\\times_S Spec(K) is Spec(L) (Step 4), with Spec(L) -> S_0 the inclusion of the generic point eta_0, and associativity of fibre products identifies C\\times_{S_0}(S_0\\times_S Spec(K)) with C\\times_S Spec(K). Under this identification the L-structure of C_eta is the canonical map C_eta -> Spec Gamma(C_eta,O_{C_eta}) = Spec(L). This is not the generally larger scheme C_eta\\times_{Spec(K)}Spec(L). C_{eta_0} -> Spec(L) is proper, being the base change of the proper g ([lem-pc-proper-base-change](1)); so it is separated and of finite type. To prove smoothness over Spec(L), let W=C_eta\\times_{Spec(K)}Spec(L). The extension L/K is finite and separable (Step 4); for an algebraic extension the empty set is a transcendence basis, so separability in the sense of [def-weil-pbc-separable-field-extension] means L/K is separable algebraic, and [lem-weil-pbc-finite-separable-extension-etale] makes Spec(L) -> Spec(K) etale. The projection W -> C_eta is its base change, hence etale by [lem-weil-pbc-etale-scheme-base-change]. It is separated: over an affine open Spec(R) of C_eta it is Spec(R\\otimes_K L) -> Spec(R), a morphism of affine schemes, whose diagonal is the closed immersion given by the surjective multiplication map, and separatedness is local on the target. The graph of the structure map C_eta -> Spec(L) is a section of W -> C_eta, so [lem-weil-pbc-etale-section-clopen-immersion] makes it an isomorphism of C_eta onto a clopen subscheme of W; composed with the second projection W -> Spec(L) this section is the structure map C_eta -> Spec(L). By [lem-pc-proper-base-change](2), W -> Spec(L) is smooth (base change of the smooth C_eta -> Spec(K)), and its restriction to the open subscheme C_eta is smooth, smoothness being local on the source. The affine Stein theorem [lem-weil-pbc-stein-factorization-affine](iii) gives geometric connectedness of this fibre over L. After any field extension Omega/L, the base change C_{eta_0,Omega} is smooth over Omega by [lem-pc-proper-base-change](2), of finite type over the field Omega hence locally Noetherian, and its local rings are local rings of smooth Omega-algebras on affine opens, hence regular by [lem-weil-pbc-smooth-over-field-regular-local]; it is nonempty and connected by geometric connectedness. Applying [lem-sc-regular-connected-integral] to this nonempty connected regular scheme shows it is integral, so C_{eta_0} is geometrically integral over L. Finally C_{eta_0} is isomorphic as a scheme to C_eta, which has dimension one by hypothesis, so C_{eta_0} has dimension one [def-kun-topological-krull-dimension]; hence it is a smooth geometrically integral curve of dimension one over L.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-sc-regular-connected-integral",
+    "def-weil-pbc-separable-field-extension",
+    "def-pc-geometrically-irreducible",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX, §1.3, printed p. 132, smooth geometrically integral generic fibre; Stacks 056T and 033N"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-stein-factorization",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-pc-coherent-hi",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-proper-base-change",
+  "lem-pc-proper-geometrically-reduced-global-sections-separable",
+  "lem-sc-fraction-field-sections-base-change",
+  "lem-sc-regular-connected-integral",
+  "lem-trf-finite-projective-bundle",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-stein-factorization-affine",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IX, §1.3, printed p. 132, Stein-factorization paragraph, with Stacks 03H0, 0BUG, 0FD1, 07QU"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +163,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-dejong-relative-marked-semistable",
@@ -78,5 +187,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-stein-smooth-generic-curve",
+  "worker": "stage1",
+  "summary": "Split the finite Stein-base lemma into five source-driven steps. The relative spectrum and affine Stein theorem provide the factorization, finiteness, properness and geometrically connected fibres; coherent cohomology makes the affine Stein algebras finite, and the new statement-only child lem-trf-finite-projective-bundle supplies the required projective-bundle projectivity of a finite morphism. The generic fibre is handled by proper smooth base change, finite global sections, and separability of global sections of a proper geometrically reduced scheme; smooth geometrically connected field fibres are shown geometrically integral using regularity and connectedness. No statement change was made.",
+  "blueprint": "Realizes the Stein-factorization paragraph of the ancestor lem-trf-local-term-locality used in the alteration branch.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Coherent proper pushforward finiteness is a generic cohomology input not supplied by the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-stein-factorization-affine",
+    "why": "Affine Stein properness and geometric connectedness are the generic factorization input used locally on the base."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Finite global sections of a proper integral curve over a field is a generic proper-curve input."
+   },
+   {
+    "node": "lem-pc-proper-geometrically-reduced-global-sections-separable",
+    "why": "Separability of the generic Stein field is a generic field/cohomology input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Regularity of smooth field fibres is a generic local-algebra input."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Connected regular fibres becoming integral is a generic scheme-theoretic input."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Excellence of finite algebras over an excellent ring (Stacks 07QU) is a generic commutative-algebra input; the trace-formula unit has no node for it."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Stability of properness and smoothness under base change is a generic morphism input not supplied by the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-fraction-field-sections-base-change",
+    "why": "Flat base change of global sections to the fraction field identifies the generic Stein algebra; generic cohomology input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Relative spectrum of a quasi-coherent algebra and its affine-local description; generic scheme construction."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Smooth fibres are geometrically reduced; generic input for separability of the Stein field."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-proper-geometrically-reduced-global-sections-separable",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-regular-connected-integral",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-pc-proper-base-change",
+  "lem-sc-fraction-field-sections-base-change",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-fead5b0d4",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-fead5b0d4 (reviewer sub-agent of L); spot-checked: I read the whole delivery against its sources. The item agrees with ILO Exposé IX §1.3 p.132 (Stein-factorization paragraph) and Stacks 07QU/0BUG/03H2. The new node lem-trf-finite-projective-bundle is exactly Stacks 0B3I (morphisms-lemma-finite-projective, line 11237) read with 01W8(1), and is true over any base. It is not a duplicate: I grepped dag/nodes for 0B3I and 'finite morphism is projective' and compared it with the neighbouring projective nodes. It is statement-only and has four recorded searches. I corrected three faults in fixes/dag/nodes/sec-trace-formula/lem-trf-stein-smooth-generic-curve.json. (1) E1/E5, step 2: S_0 was called integral only because the rings over the opens q^{-1}V are domains, which does not show it is irreducible. Step 3 now proves it: g is surjective because the Stein fibres are nonempty, so S_0=g(C) is irreducible; S_0 is reduced because it is covered by spectra of domains; and dominance of q follows from f=q∘g. (2) C1, step 5: étale base change was used without a node. The step now cites the Mathlib leaf lem-weil-pbc-etale-scheme-base-change (02GO), writes out the elementary separatedness argument, and the separable to separable-algebraic passage. (3) C4, step 5: lem-pc-dim-base-change was cited for C_{η_0}, which is not a field base change of C_η. Dimension one now comes from the isomorphism C_{η_0}≅C_η. The statement is unchanged and no node is dropped. I accept 11 tool uses: the 6 the worker declared plus lem-exc-finite-type-localization-excellent, lem-pc-proper-base-change, lem-sc-fraction-field-sections-base-change, lem-weil-pbc-affine-morphism-relative-spec and sbc-lem-smooth-geometrically-reduced. I checked the edge cases P^1_{O_L}/Z and an inseparable L/K in characteristic p. No SGA source is used. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
