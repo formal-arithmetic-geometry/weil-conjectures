@@ -16,6 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SingleReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
@@ -381,8 +382,8 @@ Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. F
 Spec K <-b- S' <--g-- T
 ```
 
-with both squares cartesian and `g` quasi-compact and quasi-separated, the base change map
-(`AlgebraicGeometry.Etale.tensorBaseChangeMap`)
+with both squares cartesian, `X` of finite type over `K` and `g` quasi-compact and quasi-separated,
+the base change map (`AlgebraicGeometry.Etale.tensorBaseChangeMap`)
 
 `Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)`
 
@@ -390,7 +391,7 @@ is an isomorphism for every bounded below `E ∈ D(X_ét, Λ)` of Tor amplitude 
 bounded below `F ∈ D(T_ét, Λ)`. -/
 theorem isIso_tensorBaseChangeMap_of_isGE [Finite Λ] {K : Type u} [Field K]
     [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
-    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K))
+    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact g]
     [QuasiSeparated g] (_sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -403,7 +404,8 @@ theorem isIso_tensorBaseChangeMap_of_isGE [Finite Λ] {K : Type u} [Field K]
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
       ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
   isIso_tensorBaseChangeMap_of_isGE_of_single Λ a b p f' h e g _sq₁ sq₂ E F m n _hE _hEt _hF
-    (fun _ _ _ ↦ sorry)
+    (fun 𝓔 h𝓔 𝓕 ↦
+      isIso_tensorBaseChangeMap_singleFunctor_of_flat Λ a b p f' h e g _sq₁ sq₂ 𝓔 h𝓔 𝓕)
 
 /-- A derived pushforward of finite cohomological dimension along a quasi-compact
 quasi-separated morphism commutes with countable direct sums
@@ -425,7 +427,7 @@ reduction of `F` to strictly bounded complexes, which are bounded below, and an 
 blueprint `lem-kun-0f1j` (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE`). -/
 lemma isIso_tensorBaseChangeMap_Q_obj_of_flat [Finite Λ] {K : Type u} [Field K]
     [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
-    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K))
+    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact g]
     [QuasiSeparated g] [QuasiCompact h] [QuasiSeparated h]
     (hg : HasFiniteCohomologicalDimensionMorphism Λ g)
