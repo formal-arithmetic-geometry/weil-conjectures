@@ -112,6 +112,56 @@ lemma upperStar_unit_str (P : ProEtaleWeilSheaf k₀ l Y) (e : 𝟙_ _ ⟶ P.car
       ε (φ̄)^*[W] ≫ (φ̄)^*[W].map e :=
   (unit_str_iff _ _).2 (upperStar_unit_frobeniusStr φ P e ((unit_str_iff P e).1 he))
 
+/-- The isomorphism `φ^* ℚ̄_ℓ ≅ ℚ̄_ℓ` is compatible with the Weil structures. -/
+lemma adicUpperStarUnitIso_str :
+    (WeilSheaf.frobeniusPullback k₀ l X).map (adicUpperStarUnitIso l φ̄).hom ≫
+        (ProEtaleWeilSheaf.adicConstant k₀ l X).str.hom =
+      ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj (ProEtaleWeilSheaf.adicConstant k₀ l Y)).str.hom ≫
+        (adicUpperStarUnitIso l φ̄).hom := by
+  set u := adicUpperStarUnitIso l φ̄
+  set K := (adicLowerStarUnitIso l (σX).symm).symm ≪≫
+    (WeilSheaf.frobeniusPullback k₀ l X).mapIso u.symm
+  rw [← cancel_epi K.hom]
+  apply Mod.regular_hom_ext
+  have hL : K.hom ≫ (WeilSheaf.frobeniusPullback k₀ l X).map u.hom ≫
+      (ProEtaleWeilSheaf.adicConstant k₀ l X).str.hom = 𝟙 _ := by
+    simp only [K, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc,
+      ← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp]
+    exact (adicLowerStarUnitIso l (σX).symm).inv_hom_id
+  rw [hL, Mod.id_hom']
+  erw [Category.comp_id]
+  set e := (σX).symm
+  have : IsMonHom (adicConstantSheafLowerStarIso l e).inv :=
+    inferInstanceAs (IsMonHom (adicConstantSheafToLowerStar l e.hom))
+  have h1 : (η : 𝟙_ _ ⟶ adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
+      (adicConstantSheafLowerStarIso l e).inv = ε ((σX).inv)_*[W] ≫ ((σX).inv)_*[W].map η :=
+    IsMonHom.one_hom _
+  have : IsMonHom (adicUpperStarRingIso (l := l) φ̄) :=
+    inferInstanceAs (IsMonHom (inv (((ProEtale.upperStarLowerStarAdjunction W φ̄).homEquiv _ _).symm
+      (adicConstantSheafToLowerStar l φ̄))))
+  have h2 : (η : 𝟙_ _ ⟶ adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
+      adicUpperStarRingIso (l := l) φ̄ = ε (φ̄)^*[W] ≫ (φ̄)^*[W].map η :=
+    IsMonHom.one_hom _
+  have h3 := upperStar_unit_str φ (ProEtaleWeilSheaf.adicConstant k₀ l Y)
+    (η : 𝟙_ _ ⟶ adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (adicConstant_one_str (S := Y))
+  have h4 : (ε (φ̄)^*[W] ≫ (φ̄)^*[W].map
+      (η : 𝟙_ _ ⟶ adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ≫
+      u.hom.hom =
+        (η : 𝟙_ _ ⟶ adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) := by
+    rw [← h2, Category.assoc]
+    simp only [u, adicUpperStarUnitIso, Mod.regularIsoOfIsIso_hom_hom]
+    erw [IsIso.inv_hom_id]
+    exact Category.comp_id _
+  simp only [K, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Mod.comp_hom', Category.assoc]
+  erw [adicLowerStar_map_hom]
+  erw [reassoc_of% h1]
+  rw [← Functor.map_comp_assoc]
+  simp only [u, adicUpperStarUnitIso, Mod.regularIsoOfIsIso_inv_hom]
+  erw [h2]
+  rw [reassoc_of% h3]
+  exact h4.symm
+
 end ProEtaleWeilSheaf
 
 end AlgebraicGeometry
