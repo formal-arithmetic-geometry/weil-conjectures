@@ -3,53 +3,226 @@
  "blueprint": {
   "is": "lem-wf-open-curve-residue-sequence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-level residue sequences on an open curve",
- "statement": "Let $C_0/\\mathbf F_q$ be a smooth projective geometrically connected\ncurve, let $D_0\\subset C_0$ be a finite reduced closed subscheme, and put\n$U_0=C_0-D_0$. After base change to\n$\\overline{\\mathbf F}_q$, write $j:U\\hookrightarrow C$ and\n$i:D\\hookrightarrow C$. Put $A_n=\\mathbf Z/\\ell^n\\mathbf Z$, with\n$\\ell\\ne\\operatorname{char}\\mathbf F_q$. For every $n\\geq1$, there is\na Frobenius-equivariant exact sequence\n\n$$\n0\\longrightarrow H^1(C,A_n)\\xrightarrow{j^*}H^1(U,A_n)\n\\xrightarrow{\\operatorname{res}_n}H^0(D,A_n(-1))\n\\longrightarrow H^2(C,A_n).\n\\tag{5.1}\n$$\n\nThe sequences and their transition maps in $n$ are compatible. There\nis $m\\geq1$ such that, for $Q=q^m$, $\\Phi_Q$ fixes every geometric\npoint of $D$; on the inverse-limit boundary module\n\n$$\n\\varprojlim_n H^0(D,A_n(-1))\n$$\n\nit acts as multiplication by $Q$, and this module has no\n$\\Phi_Q$-fixed element. Frobenius and twists are those of\n[def-tw-frobenius-action], [def-coefficient-twists-detailed].",
+ "statement": "Let $C_0/\\mathbf F_q$ be a smooth projective geometrically connected\ncurve, let $D_0\\subset C_0$ be a finite reduced closed subscheme, and put\n$U_0=C_0-D_0$. After base change to\n$\\overline{\\mathbf F}_q$, write $j:U\\hookrightarrow C$ and\n$i:D\\hookrightarrow C$. Put $A_n=\\mathbf Z/\\ell^n\\mathbf Z$, with $\\ell$ prime and\n$\\ell\\ne\\operatorname{char}\\mathbf F_q$. For every $n\\geq1$, there is\na Frobenius-equivariant exact sequence\n\n$$\n0\\longrightarrow H^1(C,A_n)\\xrightarrow{j^*}H^1(U,A_n)\n\\xrightarrow{\\operatorname{res}_n}H^0(D,A_n(-1))\n\\longrightarrow H^2(C,A_n).\n\\tag{5.1}\n$$\n\nThe sequences and their transition maps in $n$ are compatible. There\nis $m\\geq1$ such that, for $Q=q^m$, $\\Phi_Q$ fixes every geometric\npoint of $D$; on the inverse-limit boundary module\n\n$$\n\\varprojlim_n H^0(D,A_n(-1))\n$$\n\nit acts as multiplication by $Q$, and this module has no nonzero\n$\\Phi_Q$-fixed element. Here the finite-field datum is [def-weil-finite-field-fiber], a smooth projective curve means [def-pc-smooth-projective-curve], and geometric connectedness means that its base change to the algebraic closure is connected. Finite morphisms and reduced schemes have the meanings of [def-weil-finite-integral-morphism] and [def-pc-reduced-scheme]. The displayed groups are ordinary etale cohomology [def-weil-pbc-etale-cohomology], equivalently the cohomology of their finite constant-coefficient pullbacks to the small pro-etale site by [sk-prop-sf-comparison]. Twists are [def-coefficient-twists-detailed], with canonical Weil structures [def-weil-frobenius-coefficient-twists]. Frobenius is the geometric Galois automorphism of [def-weil-frobenius-detailed]; its operator on finite-coefficient cohomology is $H^r(R\\Gamma(\\theta)\\circ\\tau)$, with $\\tau$ the finite-coefficient transport of [def-weil-frobenius-cohomology-transport]. The inverse limit means compatible tuples under coefficient reduction, with Frobenius acting coordinatewise.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.md",
   "place": "node lem-wf-open-curve-residue-sequence, order 2624"
  },
  "stmt_deps": [
-  "def-tw-frobenius-action",
-  "def-coefficient-twists-detailed"
+  "def-weil-finite-field-fiber",
+  "def-pc-smooth-projective-curve",
+  "def-weil-finite-integral-morphism",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-etale-cohomology",
+  "sk-prop-sf-comparison",
+  "def-coefficient-twists-detailed",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-frobenius-detailed",
+  "def-weil-frobenius-cohomology-transport"
  ],
  "proof": [
   {
-   "text": "The geometric boundary $D$ is a finite disjoint union of closed points of\nthe smooth curve $C$. Each point is an effective Cartier divisor by\n[lem-sc-point-cartier]; hence $i$ is a regular closed immersion of\npure codimension one. For every $n$, purity in\n[thm-pur-regular-immersion-purity] gives\n\n$$\nRi^!A_{n,C}\\xrightarrow{\\sim}A_{n,D}(-1)[-2].\n\\tag{5.2}\n$$\n\nThe finite-reduction compatibility in\n[prop-pur-regular-immersion-purity-compatibilities] makes (5.2)\ncompatible with $n$. Apply the support-localization triangle\n[lem-pur-support-localization-triangle] at level $n$:\n\n$$\nR\\Gamma(D,Ri^!A_{n,C})\\longrightarrow R\\Gamma(C,A_n)\n\\longrightarrow R\\Gamma(U,A_n)\\xrightarrow{+1}.\n\\tag{5.3}\n$$\n\nThe shift in (5.2) gives $H_D^1(C,A_n)=0$ and\n$H_D^2(C,A_n)=H^0(D,A_n(-1))$. The degree-one part of the long exact\nsequence of (5.3) is (5.1). Naturality of purity and localization gives\nFrobenius equivariance and compatibility under reduction.",
+   "text": "The boundary is a finite disjoint union of geometric points. Indeed [lem-weil-pbc-finite-morphism-permanence] makes $D\\to\\operatorname{Spec}k$ finite and $D$ affine. The finite field $k_0$ is perfect: its injective map $a\\mapsto a^p$ is surjective on the finite set $k_0$. Thus [lem-kun-geometric-reduced-perfect] makes $D$ reduced. Finiteness makes $D$ proper over $k$ by [lem-weil-pbc-finite-proper]. Apply [lem-weil-pbc-proper-reduced-algclosed-global-sections-product] to $D$: for a finite set $I$, $\\Gamma(D,\\mathcal O_D)\\cong\\prod_{x\\in I}k$. Since $D$ is affine, [lem-weil-pbc-spec-finite-product-fields] identifies $D$ with $\\coprod_{x\\in I}\\operatorname{Spec}k$. Its local rings are fields, hence regular of dimension zero (their maximal ideals are zero). The empty boundary corresponds to $I=\\varnothing$.",
    "uses": [
-    "lem-sc-point-cartier",
-    "thm-pur-regular-immersion-purity",
-    "prop-pur-regular-immersion-purity-compatibilities",
-    "lem-pur-support-localization-triangle"
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-kun-geometric-reduced-perfect",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "lem-weil-pbc-spec-finite-product-fields"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.proof.md",
+    "place": "First paragraph, first sentence: the geometric boundary is a finite disjoint union of closed points"
+   }
   },
   {
-   "text": "Frobenius permutes the finite set $D(\\overline{\\mathbf F}_q)$. Choose\n$m$ divisible by all cycle lengths. Then $\\Phi_Q=\\Phi_q^m$ fixes every\npoint. By the normalization in\n[def-weil-frobenius-coefficient-twists], it acts on\n$A_n(-1)$ by $Q\\bmod\\ell^n$. Hence it acts on the inverse limit as\nthe scalar $Q$ on the finite free $\\mathbf Z_\\ell$-module\n$\\mathbf Z_\\ell(-1)^{D(\\overline{\\mathbf F}_q)}$. Since $Q-1\\ne0$ and\nthis module is torsion-free, its fixed element is zero.",
+   "text": "The geometric curve $C$ is smooth of relative dimension one by [lem-sc-curve-base-change-relative-dimension-one], and is connected by geometric connectedness of $C_0$. By [lem-sc-smooth-connected-curve-local-rings] it is Noetherian, and its local rings at the points of $D$ are discrete valuation rings of dimension one. At any such point $x$, removing the other finitely many closed points identifies $D$ locally with the reduced point $x$. Its ideal is generated by one non-zero-divisor by [lem-sc-point-cartier]. Together with $\\dim\\mathcal O_{C,x}=1$ and $\\dim\\mathcal O_{D,x}=0$, this verifies exactly the regular-sequence and pure-codimension-one conditions of [def-pur-regular-immersion]. With $E=\\mathbf Q_\\ell$, $\\varpi_E=\\ell$ and $\\Lambda=A_n$, [thm-pur-regular-immersion-purity] therefore gives the canonical isomorphism\n$$P_n:Ri^!A_{n,C}\\xrightarrow{\\sim}A_{n,D}(-1)[-2].$$\nThe ambient field $k$ is algebraically closed, hence perfect, and $\\ell$ is invertible on both schemes. For empty $D$ the assertion is the unique isomorphism between zero objects. By [prop-pur-regular-immersion-purity-compatibilities] these isomorphisms respect finite reduction and etale base change.",
    "uses": [
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-point-cartier",
+    "def-pur-regular-immersion",
+    "thm-pur-regular-immersion-purity",
+    "prop-pur-regular-immersion-purity-compatibilities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.proof.md",
+    "place": "First paragraph, Cartier argument, (5.2), and finite-reduction sentence"
+   }
+  },
+  {
+   "text": "Identify the exceptional functor in purity with the closed-support functor, keeping the counit. Write $H=A_{n,C_{\\mathrm{et}}}$, $S=\\nu^*$, $U=R\\nu_*$ and $I_{\\mathrm{et}}=Ri^!_{\\mathrm{et}}$. The finite transported exceptional functor is $J=S_D I_{\\mathrm{et}}U_C$ by [lem-coef-site-closed-counit-transport]. For this bounded degree-zero etale $H$, that node gives $\\alpha_H:S_DI_{\\mathrm{et}}H\\xrightarrow{\\sim}JS_CH$, with its displayed counit equation. The canonical isomorphism $\\beta_H:S_DI_{\\mathrm{et}}H\\xrightarrow{\\sim}I_{\\mathrm{pro}}S_CH$ and its counit equation are [lem-weil-finite-duality-closed-comparison]. Hence $\\beta_H\\alpha_H^{-1}:JS_CH\\xrightarrow{\\sim}I_{\\mathrm{pro}}S_CH$ respects the supported counit. By [lem-exc-proetale-closed-support], $I_{\\mathrm{pro}}$ is the derived supported-kernel functor. We may therefore use the isomorphism $P_n$ of step 2 for this functor; this comparison concerns the bounded etale-origin constant object, and asserts no ambient exceptional adjunction for general morphisms.",
+   "uses": [
+    "lem-coef-site-closed-counit-transport",
+    "lem-weil-finite-duality-closed-comparison",
+    "lem-exc-proetale-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.proof.md",
+    "place": "First paragraph, the identification of the purity and support functors implicit between (5.2) and (5.3)"
+   }
+  },
+  {
+   "text": "The open complement $j$ is quasi-compact, since $C$ is Noetherian. The right adjoint $i^!$ of the exact functor $i_*$ in [lem-pur-support-localization-triangle] sends injectives to injectives: for injective $J$, $\\operatorname{Hom}(-,i^!J)=\\operatorname{Hom}(i_*(-),J)$ is exact. On a bounded-below injective resolution $A_{n,C}\\to J^\\bullet$, [def-pur-flasque-support] identifies $i_*i^!J^\\bullet$ with the supported kernel sheaf. Taking sections therefore gives\n$$\\Gamma_D(C,J^\\bullet)=\\Gamma(D,i^!J^\\bullet).$$\nBy the definition [def-pur-support-cohomology], these same complexes compute $R\\Gamma_D(C,A_n)$ and $R\\Gamma(D,Ri^!A_n)$. Substituting $P_n$ from step 2 yields\n$$H_D^r(C,A_n)\\cong H^{r-2}(D,A_n(-1)).$$\nIn particular $H_D^1(C,A_n)=0$ and $H_D^2(C,A_n)\\cong H^0(D,A_n(-1))$: a sheaf in degree zero has zero negative cohomology, since its bounded-below injective resolution may start in degree zero.",
+   "uses": [
+    "lem-pur-support-localization-triangle",
+    "def-pur-flasque-support",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.proof.md",
+    "place": "First paragraph, (5.3) and the two supported-cohomology identifications"
+   }
+  },
+  {
+   "text": "Apply [thm-pur-with-support-exactness] to the torsion coefficient sheaf $A_n$ and the pair $(C,D)$, on the pro-etale site. The segment in degrees one and two, using step 4, is\n$$0\\longrightarrow H^1(C,A_n)\\xrightarrow{j^*}H^1(U,A_n)\\longrightarrow H_D^2(C,A_n)\\longrightarrow H^2(C,A_n).$$\nDefine $\\operatorname{res}_n$ as the connecting map followed by the identification $H_D^2(C,A_n)\\cong H^0(D,A_n(-1))$ of step 4. This is the asserted exact sequence. The groups for $C,U,D$ agree with etale cohomology by [sk-prop-sf-comparison], applied to the degree-zero discrete coefficient sheaves. No exactness of an inverse-limit functor is used.",
+   "uses": [
+    "thm-pur-with-support-exactness",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.proof.md",
+    "place": "First paragraph, degree-one part of (5.3) is (5.1)"
+   }
+  },
+  {
+   "text": "Both compatibilities concern the very maps just constructed. The automorphisms $g_C,g_D,g_U$ of [def-weil-frobenius-detailed] preserve the pair and commute with its inclusions. They are isomorphisms, hence etale. Functoriality in the pair and in the torsion sheaf in [thm-pur-with-support-exactness] makes the supported connecting map commute with these transports. Etale base-change compatibility in [prop-pur-regular-immersion-purity-compatibilities] makes $P_n$ commute with them as well. Thus their composite $\\operatorname{res}_n$ commutes with the finite-coefficient Frobenius operators $H^r(R\\Gamma(\\theta)\\circ\\tau)$ of [def-weil-frobenius-cohomology-transport], with the canonical twist structure [def-weil-frobenius-coefficient-twists]. For $A_{n+1}\\to A_n$, apply the same functoriality in the torsion sheaf, together with the finite-reduction clause of the purity compatibility node: it gives the commuting square between the two connecting maps followed by $P_{n+1},P_n$. The other arrows are restrictions or supported counits and are functorial too. This gives a morphism of the displayed sequences at each reduction; iterating gives every transition. Here coefficient maps are maps of torsion sheaves after forgetting scalars; no flatness of $A_n$ over $A_{n+1}$ is asserted.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "thm-pur-with-support-exactness",
+    "prop-pur-regular-immersion-purity-compatibilities",
+    "def-weil-frobenius-cohomology-transport",
     "def-weil-frobenius-coefficient-twists"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.proof.md",
+    "place": "First paragraph, last sentence: Frobenius equivariance and compatibility under reduction"
+   }
+  },
+  {
+   "text": "The automorphism $g_D$ permutes the finite set $I$ of points. If $I$ is nonempty choose $m\\geq1$ divisible by all its cycle lengths; for $I=\\varnothing$ take $m=1$. Then $g_D^m=\\Phi_Q$, $Q=q^m$, preserves each component. Its restriction to the component $\\operatorname{Spec}k$ lies over $\\operatorname{Spec}(\\gamma^m)$, so it is this semilinear automorphism, even though it fixes the underlying point. By [lem-weil-pbc-finite-geometric-point-coproduct-cohomology] and [sk-prop-sf-comparison],\n$$H^0(D,A_n(-1))\\cong\\prod_{x\\in I}H^0(\\operatorname{Spec}k,A_n(-1)).$$\nApply [lem-pur-twist-frobenius-scalar] with twist $-1$ and iterate its operator $m$ times: on each preserved component $\\Phi_Q$ acts as $q^m=Q\\pmod{\\ell^n}$. Thus it acts as $Q$ on the entire product. The reduction identifications of that lemma give, from any generator $e$ of the free rank-one module $H^0(\\operatorname{Spec}k,\\mathbf Z_\\ell(-1))$, compatible generators $e_n$. Hence these boundary groups and reduction maps identify with $A_n^I$ and coordinatewise reduction. On compatible tuples $\\Phi_Q$ is consequently multiplication by $Q$.",
+   "uses": [
+    "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+    "sk-prop-sf-comparison",
+    "lem-pur-twist-frobenius-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.proof.md",
+    "place": "Second paragraph, permutation of the points and scalar action on the boundary"
+   }
+  },
+  {
+   "text": "Let $r=(r_n)$ be a $\\Phi_Q$-fixed compatible boundary tuple. Then $(Q-1)r_n=0$ for every $n$. Write the positive integer $Q-1=\\ell^a u$ with $a\\geq0$ and $u$ prime to $\\ell$; this is possible since $Q=q^m>1$. Fix $n\\geq1$ and a coordinate $x\\in I$. In the compatible bases of step 7, write $r_{n+a,x}=c e_{n+a}$ for $c\\in\\mathbf Z/\\ell^{n+a}$. The equation $\\ell^a u c=0$ says that an integer lift of $c$ is divisible by $\\ell^n$, because $u$ is prime to $\\ell$. Its reduction to $A_n$ is zero. Compatibility therefore gives $r_{n,x}=0$. This holds for every $x$ and $n$, so $r=0$. For empty $I$ the same conclusion holds for the unique empty tuple. This proves the no-nonzero-fixed-element assertion, including the case $\\ell\\mid Q-1$ where the individual finite levels can have nonzero fixed elements.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.proof.md",
+    "place": "Second paragraph, last sentence: the inverse-limit fixed element is zero"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-sc-smooth-connected-curve-local-rings",
   "lem-sc-point-cartier",
+  "def-pur-regular-immersion",
   "thm-pur-regular-immersion-purity",
   "prop-pur-regular-immersion-purity-compatibilities",
+  "lem-coef-site-closed-counit-transport",
+  "lem-weil-finite-duality-closed-comparison",
+  "lem-exc-proetale-closed-support",
   "lem-pur-support-localization-triangle",
-  "def-weil-frobenius-coefficient-twists"
+  "def-pur-flasque-support",
+  "def-pur-support-cohomology",
+  "thm-pur-with-support-exactness",
+  "sk-prop-sf-comparison",
+  "def-weil-frobenius-detailed",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-coefficient-twists",
+  "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+  "lem-pur-twist-frobenius-scalar"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-open-curve-residue-sequence.proof.md",
+  "place": "Both proof paragraphs, expanded with existing general tools and an explicit modular-divisibility argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariant residue exact sequence in finite coefficient etale cohomology of a smooth open curve and its boundary",
+   "results": "Algebra.Generators.H1Cotangent.exact_map_δ'; Algebra.H1Cotangent.exact_map_δ; Algebra.Generators.H1Cotangent.exact_map_δ; Algebra.Generators.H1Cotangent.exact_δ_map; Algebra.H1Cotangent.exact_δ_mapBaseChange; Algebra.Extension.exact_cotangentComplex_toKaehler; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-17",
+   "verdict": "no match: no etale supported residue sequence; hits, if any, are general algebra or category-theory ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "Etale, ShortComplex.Exact",
+   "results": "No hits (loogle: unknown identifier 'Etale')",
+   "date": "2026-10-17",
+   "verdict": "no match: unsuccessful query, unknown identifier; not absence evidence"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*[Ss]equence|[Ee]tale.*[Cc]ohomology|[Ff]robenius.*[Tt]wist",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no etale supported residue sequence; hits, if any, are general algebra or category-theory ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology localization residue exact sequence smooth curve Tate twist Frobenius",
+   "results": "Algebra.Etale.of_isLocalizationAway; Algebra.exists_etale_of_isEtaleAt; RingHom.Etale.ofLocalizationSpanTarget; Algebra.Etale.of_isLocalization_Away; Algebra.FormallyEtale.of_isLocalization; Algebra.FormallyEtale.localization_map; AlgHom.IsArithFrobAt.localize; Algebra.FormallyEtale.localization_base",
+   "date": "2026-10-17",
+   "verdict": "no match: no etale supported residue sequence; hits, if any, are general algebra or category-theory ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated, CategoryTheory.Functor.IsHomological",
+   "results": "No hits (loogle: unknown identifier 'CategoryTheory.Triangulated')",
+   "date": "2026-10-17",
+   "verdict": "no match: unsuccessful query, unknown identifier; not absence evidence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization distinguished triangle for cohomology with supports of a closed immersion and complementary open immersion",
+   "results": "DerivedCategory.mem_distTriang_iff; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.TStructure.t; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.triangleOfSESIso; CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; DerivedCategory.triangleOfSESδ",
+   "date": "2026-10-17",
+   "verdict": "no match: no etale supported residue sequence; hits, if any, are general algebra or category-theory ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "localizationTriangle|localization_triangle|cohomologyWithSupport|cohomology_with_support|TateTwist",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no etale supported residue sequence; hits, if any, are general algebra or category-theory ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, ZMod",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no etale supported residue sequence; hits, if any, are general algebra or category-theory ingredients"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -77,5 +250,99 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-open-curve-residue-sequence",
+  "worker": "stage1",
+  "summary": "Expanded the finite-level purity/localization proof and both naturality arguments; reused existing finite-boundary and twist-scalar tools, with no new nodes. Corrected the literal no-fixed-element assertion to no nonzero fixed element, made primality explicit, and supplied finite-coefficient Frobenius and topology definitions. Checked Lean tags: only torsor consequences are present, with the local monodromy theorem sorried.",
+  "blueprint": "Steps 1–2 realize the geometric-boundary argument and (5.2); step 3 makes the exceptional-functor comparison explicit; steps 4–6 realize (5.3), (5.1), and both compatibilities; steps 7–8 realize the entire second paragraph. The unit open-curve step is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "lem-sc-curve-base-change-relative-dimension-one",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "thm-pur-regular-immersion-purity",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "prop-pur-regular-immersion-purity-compatibilities",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "lem-pur-support-localization-triangle",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "thm-pur-with-support-exactness",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "lem-pur-twist-frobenius-scalar",
+    "why": "Generic tool for the finite-boundary, purity, supported localization, topology comparison, or scalar-twist calculation explicitly used in the proof; no node of the rank-one unit states this general fact. The open-curve residue route is unchanged."
+   },
+   {
+    "node": "lem-coef-site-closed-counit-transport",
+    "why": "Counit-normalized comparison between the transported constructible exceptional functor of purity and the ambient closed supported-kernel functor. The rank-one unit has no such coefficient-model comparison; this generic tool justifies applying localization to the purity object."
+   },
+   {
+    "node": "lem-weil-finite-duality-closed-comparison",
+    "why": "Counit-normalized comparison between the transported constructible exceptional functor of purity and the ambient closed supported-kernel functor. The rank-one unit has no such coefficient-model comparison; this generic tool justifies applying localization to the purity object."
+   },
+   {
+    "node": "lem-exc-proetale-closed-support",
+    "why": "Counit-normalized comparison between the transported constructible exceptional functor of purity and the ambient closed supported-kernel functor. The rank-one unit has no such coefficient-model comparison; this generic tool justifies applying localization to the purity object."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-geometric-reduced-perfect",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "thm-pur-regular-immersion-purity",
+  "prop-pur-regular-immersion-purity-compatibilities",
+  "lem-pur-support-localization-triangle",
+  "thm-pur-with-support-exactness",
+  "sk-prop-sf-comparison",
+  "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+  "lem-pur-twist-frobenius-scalar",
+  "lem-coef-site-closed-counit-transport",
+  "lem-weil-finite-duality-closed-comparison",
+  "lem-exc-proetale-closed-support"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-669f2f92f",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-669f2f92f (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, current and master sources, every cited node statement, and cited Stacks locations. All eight steps are mathematically supported with hypotheses checked; Frobenius transport, finite coefficient category, purity/support comparison, transition maps, and inverse-limit scalar argument are correct. The report records the necessary correction of the source's false literal claim to “no nonzero fixed element.” Review written to review.md."
+ }
 }

@@ -12,48 +12,160 @@
   "def-weil-abstract-derived-category",
   "def-sc-module-total-hom-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because every projective module is flat (lem-weil-pbc-projective-module-flat), the bounded-above complex P is K-flat by the bounded-above flat-complex theorem (lem-pc-module-bounded-flat-kflat). This uses only the stated upper bound on P; N is arbitrary.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K, more-algebra-lemma-derived-tor-quasi-isomorphism; algebra projective-flat lemma"
+   }
+  },
+  {
+   "text": "For every integer n, the cohomology of the product-total Hom complex in degree n is the group of homotopy classes of maps P to N[n]: apply the Hom-complex quotient statement (lem-sc-module-hom-complex-quotient) to the shifted target N[n]. Since P is bounded above and termwise projective, the canonical map from homotopy-category maps out of P to derived-category maps is bijective (lem-pc-ring-derived-map-representative). The defining derived Hom identity in Tag 0A5W identifies these groups with H^n(RHom_R(QP,QN)); therefore the cohomology maps induced by the canonical comparison Q(D) to RHom are isomorphisms in every degree, so that comparison is an isomorphism. The construction uses only the localization Q and is natural under precomposition in P and postcomposition in N.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sc-module-total-hom-complex",
+    "lem-sc-module-hom-complex-quotient",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A8H, 0A5W and 0A66; equation cohomology-hom-complex and Lemma RHom-out-of-projective"
+   }
+  },
+  {
+   "text": "The K-flat tensor-model theorem (lem-pc-source-kflat-module-tensor-model), applied to the K-flat complex P and the arbitrary complex D, gives a canonical isomorphism Q(Tot(P tensor_R D)) ≅ QP tensor_R^L QD. Thus the ordinary direct-sum total tensor in the statement represents the derived tensor, with its differential d(x tensor f)=d_Px tensor f+(-1)^p x tensor d_Df.",
+   "uses": [
+    "lem-pc-source-kflat-module-tensor-model",
+    "def-pc-module-kflat-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06YH, derived tensor computed on a K-flat first complex"
+   }
+  },
+  {
+   "text": "The chain-level tensor-Hom transpose from Tags 0A5Y and 0GWQ sends a homogeneous tensor x tensor f with x in degree p and f in degree q to (-1)^(pq) f(x). Substituting the Hom differential d_D(f)=d_N f-(-1)^q f d_P and the tensor differential shows that the two sides have matching d_N(f(x)) and f(d_P x) terms with the displayed Koszul signs; hence this is a chain map. Under the comparison of the preceding two steps it is the counit of the derived tensor–RHom adjunction, because the chain map is the ordinary evaluation corresponding to the identity under the Hom–tensor bijection. The calculation is independent of finite generation and of bounds on N.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A5Y (lemma-compose), 0GWQ (remark-internal-hom), 0FNG (sign rules), and 0A66"
+   }
+  },
+  {
+   "text": "All comparison maps used above are induced by precomposition, postcomposition, tensoring and the same signed evaluation formula. These operations commute with maps of complexes, so the comparison Q(D) to RHom is contravariantly natural in P and covariantly natural in N, and the represented counit is natural in both variables. The zero complex, a shifted rank-one free module, and an unbounded N give the stated formulas directly; no finite-generation hypothesis enters any step.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A5W, 0A5Y and 0FNG; functoriality and sign rules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-sc-module-hom-complex-quotient",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A66, 0A5W, 0A5Y, 0GWQ and 0FNG"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For a bounded above projective module complex P and arbitrary N, ordinary Hom(P,N) computes RHom and its signed chain evaluation represents the derived tensor Hom counit",
-   "results": "{\"t\": \"2026-10-17T12:51:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a bounded above projective module complex P and arbitrary N, ordinary Hom(P,N) computes RHom and its signed chain evaluation represents the derived tensor Hom counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.isoExt\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"Rep.standardComplex.x_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"Rep.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.π'\", \"Rep.standardResolution.extIso\"], \"digest\": \"75a3d49e9baa1d20\"}",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "K-projective bounded above complex computes internal derived Hom with the localized tensor Hom adjunction",
-   "results": "{\"t\": \"2026-10-17T12:51:35Z\", \"tool\": \"leanfinder\", \"query\": \"K-projective bounded above complex computes internal derived Hom with the localized tensor Hom adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\"], \"digest\": \"7b3741998ae22ff3\"}",
+   "query": "A bounded above projective module complex computes internal derived Hom naturally and the tensor Hom counit is signed chain evaluation",
+   "results": "Top hits were CategoryTheory.ProjectiveResolution.isoExt, Rep.standardComplex.x_projective, and Tor/projective lemmas; none states the full module-complex result.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "CochainComplex.IsKProjective",
-   "results": "{\"t\": \"2026-10-17T12:49:07Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKProjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_shift_iff\"], \"digest\": \"293fc534e5acfbd4\"}",
+   "results": "CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, and related K-projective declarations.",
+   "date": "2026-10-17",
+   "verdict": "general K-projective infrastructure only; no full result"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|tensorHomAdjunction|RHom (Mathlib/Algebra/Homology)",
+   "results": "Hits in BifunctorHomotopy, BifunctorFlip, BifunctorShift and HomologicalComplex.Monoidal; no derived module Hom/evaluation theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "RHom computed by bounded above projective complex ordinary Hom and evaluation counit compatibility",
-   "results": "{\"t\": \"2026-10-17T12:51:25Z\", \"tool\": \"leansearch\", \"query\": \"RHom computed by bounded above projective complex ordinary Hom and evaluation counit compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'\", \"CategoryTheory.ProjectiveResolution.Hom.mk.injEq\", \"HomologicalComplex.unopCounitIso\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f\", \"HomologicalComplex.opEquivalence_counitIso\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'_assoc\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso_inv_app_f\"], \"digest\": \"48a1f672fc1d8793\"}",
+   "query": "derived internal Hom of projective cochain complexes and the evaluation counit",
+   "results": "Hits include CategoryTheory.ihom.ev and generic evaluation morphisms; no module-complex theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K projective bounded above complexes ordinary Hom computes derived Hom compatibly with tensor evaluation",
+   "results": "Hits include ProjectiveResolution and CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective; no exact statement.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "internalHom|tensorHomAdjunction|ihom",
-   "results": "{\"t\": \"2026-10-17T12:49:07Z\", \"tool\": \"grep\", \"query\": \"internalHom|tensorHomAdjunction|ihom\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "Qh_map_bijective|isKProjective_of_projective (Mathlib/Algebra/Homology)",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:113 and DerivedCategory/KProjective.lean:43 provide K-projective and localized Hom bijections.",
+   "date": "2026-10-17",
+   "verdict": "generalization: K-projective map bijections, not the full evaluation model"
+  },
+  {
+   "tool": "grep",
+   "query": "Hom.*quasi.*iso|quasi.*iso.*Hom (Mathlib/Algebra/Homology)",
+   "results": "General QuasiIso declarations and K-projective/K-injective files; no exact ordinary Hom-to-RHom comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom complex of a bounded above projective complex computes derived Hom",
+   "results": "CochainComplex.HomComplex and generic ProjectiveResolution declarations; no exact theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective.Qh_map_bijective",
+   "results": "Exact generic declaration CochainComplex.IsKProjective.Qh_map_bijective.",
+   "date": "2026-10-17",
+   "verdict": "generalization: localized Hom bijection for K-projectives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a bounded above projective cochain complex sends quasi-isomorphisms to quasi-isomorphisms",
+   "results": "Hits include cm5b quasi-isomorphisms, K-projective isomorphism invariance, and DerivedCategory.isIso_Q_map_iff_quasiIso; no exact theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pod-cohomology-of-dual-over-field",
@@ -70,5 +182,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-projective-hom-evaluation-model",
+  "worker": "stage1",
+  "summary": "Split the projective Hom/evaluation model into K-flatness, derived Hom comparison via Hom-complex cohomology and K-projective localization, K-flat tensor representation, the signed chain evaluation/counit calculation, and naturality. No new nodes were needed: all non-elementary inputs are existing DAG statements. The statement and all hypotheses, including arbitrary unbounded N and no finite-generation assumption, were retained.",
+  "blueprint": "Realizes the parent proof's Step 3 (ordinary Hom model and evaluation) and Step 4 (naturality and perfect pairing input) in lem-pod-cohomology-of-dual-over-field; the source route is Tags 0A66, 0A5W, 0A5Y, 0GWQ and 0FNG.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-module-flat",
+    "why": "Generic algebraic fact that projective modules are flat, used to enter the bounded-above K-flat theorem."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic K-flatness theorem for bounded-above flat module complexes; the Poincare-duality unit does not restate it."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic derived tensor computation on a K-flat first factor, needed to identify the ordinary total tensor representative."
+   },
+   {
+    "node": "lem-pc-ring-derived-map-representative",
+    "why": "Generic derived-category localization result identifying maps out of bounded-above projectives; no node in the Poincare unit replaces it."
+   },
+   {
+    "node": "lem-sc-module-hom-complex-quotient",
+    "why": "Generic Hom-complex cohomology identification with homotopy maps, used to compare all degrees."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-ring-derived-map-representative",
+  "lem-sc-module-hom-complex-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q104-b09bd85ef",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q104-b09bd85ef (reviewer sub-agent of L); spot-checked: Step 4 contains the ill-typed term `f(d_N x)`; x lies in P while d_N acts on N. Corrected DAG JSON is at fixes/dag/nodes/sec-poincare-duality/lem-pod-projective-hom-evaluation-model.json, replacing it with the valid d_N(f(x)) and f(d_P x) terms. Full audit is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

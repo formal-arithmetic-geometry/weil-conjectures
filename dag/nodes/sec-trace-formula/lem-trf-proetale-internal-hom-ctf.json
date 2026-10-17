@@ -16,9 +16,78 @@
   "def-weil-finite-tor-amplitude",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ for site comparison. Since $\\ell\\ne p$, its image in $k$ is a unit, whose image in every structure ring of $T$ remains a unit; hence $\\ell$ is invertible on $T$. By [lem-sf-proetale-constructible-origin](ii), choose $K',L'\\in D^b_c(T_{\\mathrm{et}},A)$ and isomorphisms $\\nu_T^*K'\\cong K$, $\\nu_T^*L'\\cong L$. Choose Tor intervals $[a,b]$ and $[c,d]$ for $K,L$. Clause (ii) of [lem-sf-comparison-tor-amplitude] applied separately to these two isomorphisms gives the same intervals for $K',L'$ on the etale site. Its hypotheses hold: both representatives are bounded, hence bounded below, and the pro-etale objects are bounded constructible of the stipulated Tor amplitudes. Thus $K',L'\\in D^b_{ctf}(T_{\\mathrm{et}},A)$; no site-perfectness is assumed.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/lem-sf-proetale-constructible-origin.md",
+    "place": "Clause (ii), together with lem-sf-comparison-tor-amplitude(ii) in sk-cor-pe-finite-tor-comparison; etale-origin and Tor-reflection reduction"
+   }
+  },
+  {
+   "text": "Let $a_T:T\\to\\operatorname{Spec}k$ be the finite-type structure morphism. The spectrum of the field $k$ has one point, so every open cover has a member covering that point and is reduced to a finite cover. Apply [lem-fin-finite-type-fibre-dimension-bound] to $a_T$ with this quasi-compact target, obtaining $m\\in\\mathbf Z_{\\geq0}$ bounding all fibre dimensions. The unique fibre is $T\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k\\cong T$: projection has inverse $(\\operatorname{id}_T,a_T)$. Consequently $\\dim T\\leq m$. Empty $T$ is allowed by the cited statement; one may enlarge its bound to zero if needed.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0A3V, label lemma-morphism-finite-type-bounded-dimension, applied to the structure morphism"
+   }
+  },
+  {
+   "text": "Apply [thm-sf-hom-ctf] to $X=T$, $K=K'$ and $M=L'$ on the etale site. Its finite-field datum and coefficient ring are exactly the fixed $k$ and $A_{E,n}$. The scheme is finite type, the dimension bound is step 2, and step 1 gives bounded constructibility and the two Tor intervals. Its general clause, which has no separatedness or site-perfectness hypothesis, gives\n$$\nH'=R\\mathcal Hom_A(K',L')\\in D^b_{ctf}(T_{\\mathrm{et}},A)\n$$\nwith Tor amplitude in $I=[c-b-2m,d-a+2m]$. We use this general clause, rather than the sharper clause for a site-perfect first variable.",
+   "uses": [
+    "thm-sf-hom-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-sf-hom-ctf.md",
+    "place": "General assertion and dimension-dependent interval; no use of the site-perfect sharper assertion"
+   }
+  },
+  {
+   "text": "Apply [thm-sf-hom-comparison-constructible] with first argument $K'$ and second argument $L'$. Both lie on the etale site; its first argument is finite-Tor constructible by step 1 and its second is bounded constructible. No separatedness assumption occurs in its statement. It gives the canonical isomorphism\n$$\n\\nu_T^*H'\\xrightarrow{\\sim}R\\mathcal Hom_A(\\nu_T^*K',\\nu_T^*L').\n$$\nDerived internal Hom is a functor contravariant in the first argument and covariant in the second [def-pur-derived-internal-hom]. Applying it to the two chosen isomorphisms from step 1 and their inverses identifies the right side with $R\\mathcal Hom_A(K,L)$. Thus the target is isomorphic to $\\nu_T^*H'$. This compares the ambient derived sheaf Hom objects and assumes no stalk formula for internal Hom.",
+   "uses": [
+    "thm-sf-hom-comparison-constructible",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-sf-hom-comparison-constructible.md",
+    "place": "Displayed internal-Hom comparison; transport through input isomorphisms by the derived-Hom bifunctor"
+   }
+  },
+  {
+   "text": "Apply clause (i) of [lem-sf-comparison-tor-amplitude] to $H'$ and $I$. Its input is bounded constructible on the etale site and has that Tor interval by step 3; invertibility of $\\ell$ was checked in step 1. It follows that $\\nu_T^*H'$ is bounded constructible on the pro-etale site and has Tor amplitude in $I$. Step 4 supplies an isomorphism from this object to $R\\mathcal Hom_A(K,L)$. Its cohomology maps identify all cohomology sheaves, preserving their finite bounds and constructibility. For every degree-zero pro-etale module sheaf $F$, tensoring this isomorphism with $F$ gives an isomorphism of the derived tensor products, whose cohomology consequently has the same vanishing outside $I$. This proves $R\\mathcal Hom_A(K,L)\\in D^b_{ctf}(T,A)$.",
+   "uses": [
+    "lem-sf-comparison-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-comparison-tor-amplitude.md",
+    "place": "Clause (i), followed by invariance of cohomology and Tor-amplitude bounds under the specified isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "thm-sf-hom-ctf",
+  "thm-sf-hom-comparison-constructible",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-sf-hom-ctf.md",
+  "place": "General etale preservation assertion, transferred through constructible origin, Tor-amplitude comparison and thm-sf-hom-comparison-constructible; realizes the parent trace-exchange Hom-domain check"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,10 +137,31 @@
    "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, LightCondensed.free_internallyProjective_iff_tensor_condition, Algebra.FormallyEtale.instForallOfFinite, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition'",
    "date": "2026-10-17",
    "verdict": "no match: scheme-morphism closure, underived condensed internal Hom, abstract homology preservation, and constructible subsets of spectra do not assert finite-Tor constructible pro-etale derived Hom preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of bounded constructible complexes of finite Tor amplitude on a finite type scheme over an algebraically closed finite field is bounded constructible of finite Tor amplitude on the proetale site",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedLightCondMod, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived sheaf Hom, light condensed closed structures or derived-category cohomological bounds, not finite-Tor constructible pro-etale derived Hom preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor|torAmplitude.*[Hh]om|[Hh]om.*torAmplitude",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived sheaf Hom, light condensed closed structures or derived-category cohomological bounds, not finite-Tor constructible pro-etale derived Hom preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of constructible sheaves with finite Tor dimension on the etale and proetale sites remains bounded constructible of finite Tor dimension",
+   "results": "8 hits: CategoryTheory.sheafHom, CategoryTheory.Sheaf.Hom, SheafOfModules.Hom, SheafOfModules.Hom.mk, CategoryTheory.Sheaf.Hom.mk, CategoryTheory.sheafHom'Iso, CategoryTheory.Pseudofunctor.sheafHom, SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived sheaf Hom, light condensed closed structures or derived-category cohomological bounds, not finite-Tor constructible pro-etale derived Hom preservation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-exceptional-internal-hom-exchange",
@@ -88,5 +178,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-proetale-internal-hom-ctf",
+  "worker": "stage1",
+  "summary": "Audited the inherited statement and split its pro-etale preservation argument into five steps: descend both inputs to the etale site, obtain a finite dimension bound, apply the general etale finite-Tor internal-Hom theorem, compare internal Homs across sites, and transfer the resulting constructibility and Tor amplitude back to the pro-etale site. No new nodes were needed; all non-elementary facts are existing DAG statements.",
+  "blueprint": "Realizes the extracted domain-preservation argument in the parent lem-trf-exceptional-internal-hom-exchange split: the etale-origin/Tor-amplitude reduction, application of the general etale Hom theorem, and pro-etale comparison/transfer.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Provides the finite nonnegative dimension bound needed to instantiate the etale Hom theorem for an arbitrary finite-type, possibly non-separated T."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies etale representatives for arbitrary bounded constructible pro-etale inputs in this auxiliary domain argument."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Transfers finite Tor amplitude from pro-etale inputs to etale representatives and back to the output."
+   },
+   {
+    "node": "thm-sf-hom-ctf",
+    "why": "The general bounded constructible finite-Tor internal-Hom preservation theorem is proved on the etale site and is not a trace-class-unit lemma."
+   },
+   {
+    "node": "thm-sf-hom-comparison-constructible",
+    "why": "Identifies etale derived internal Hom with the pro-etale internal Hom after comparison pullback."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "thm-sf-hom-ctf",
+  "thm-sf-hom-comparison-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q72-c5ca0acee",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-c5ca0acee (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source passages; verified all five steps, coefficient categories, canonical Hom comparison, non-separated and empty cases, route/tool uses, duplicates and absence of dependency cycles. No repairs needed. Detailed checks written to review.md."
  }
 }

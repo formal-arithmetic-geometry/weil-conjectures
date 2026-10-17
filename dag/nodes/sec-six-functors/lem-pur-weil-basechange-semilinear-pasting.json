@@ -14,9 +14,162 @@
   "def-exchange-projection",
   "def-weil-pbc-cartesian-square"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-frobenius-square-cartesian] to each of $f_0,f'_0,u_0,v_0$. Thus the four Frobenius maps are scheme isomorphisms, $fg_X=g_Yf$, $f'g_{X'}=g_{Y'}f'$, $ug_{X'}=g_Xu$ and $vg_{Y'}=g_Yv$, and the Frobenius squares are Cartesian. All squares below are squares of underlying schemes. In particular use $S=Y$ for the square of $f$ and $g_Y$, giving its source copy of $Y$ the structure map $g_Y$; similarly use $S=Y'$ for $f'$. This satisfies the relative typing in [def-exchange-projection] without asking that $g_T$ be a $k$-map. The pullback compositors of [lem-weil-pbc-proetale-derived-pullback-composition] identify $Q_YG_Y$ with $G_{Y'}Q_Y$ and $Q_XG_X$ with $G_{X'}Q_X$ through these equalities of underlying maps.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "def-exchange-projection",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Base-change constituent: form the mixed geometric/Frobenius cube with the correct semilinear maps."
+   }
+  },
+  {
+   "text": "Fix a compactification $c=(j,p)$ used to represent $F_f$. For a base map $a:Y_1\\to Y$, write $c_a=(j_a,p_a)$ for its pullback, and $\\bar a:\\overline X_a\\to\\overline X$, $a_X:X_a\\to X$ for the projections. These are compactifications by [pur713-def-base-changed-compactification]. The opens are quasi-compact by [lemma-nagata-open-immersion-qc-over-separated-target], applied to $f=pj$ and its base changes. For $b:Y_2\\to Y_1$, identify $(c_a)_b$ with $c_{ab}$ by the unique fibre-product isomorphism preserving all projections [def-pc-fibre-product]. In the two applications $(a,b)=(g_Y,v)$ and $(v,g_{Y'})$, the final compactification spaces are identified through $g_Yv=vg_{Y'}$: a point of either iterated fibre product is the same compatible pair in $\\overline X\\times_Y Y'$. The inverse maps preserve both projections, so their composites are identities by uniqueness. The same check on the open pieces uses $g_Xu=ug_{X'}$. No lift of Frobenius to the originally chosen $\\overline X$ is required.",
+   "uses": [
+    "pur713-def-base-changed-compactification",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Base-change constituent: choose the four pullback compactifications, not an equivariant compactification."
+   }
+  },
+  {
+   "text": "At finite coefficients write $P=Rp_*$, $P_a=Rp_{a,*}$ and $A_a=La^*$. Write $E_a:A_aP\\to P_aA_{\\bar a}$ for the proper-square unit--square--counit mate of [def-exchange-projection]. Its horizontal pasting law is\n$$E_{ab}=(E_b A_{\\bar a})\\circ(A_bE_a),$$\nwith the canonical pullback compositors inserted. Indeed take mates of the two pullback-square isomorphisms using clause (1) of [lem-weil-pbc-mate-pasting]. Their pasted square is the outer one: all pullback comparisons are induced by the projection-preserving fibre-product identifications, and two threefold identifications agree since each preserves every projection. For modules this equality respects the scalar action and for constant coefficients the inverse images are exact, so the same equality holds on complexes and on their derived localizations, as in [def-weil-pbc-proetale-operations]. Exactly this argument holds in the derived strict-tower categories: [def-cbc-strict-constant-tower-operations] supplies the termwise adjunctions and defines the pullback/direct-image compositors by the same normalized conjugation. Thus this is an equality of tower transformations before evaluation, with no faithfulness assumption on evaluation.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-proetale-operations",
+    "def-cbc-strict-constant-tower-operations",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change) and 0E47 (remark-compose-base-change-horizontal); omitted verification supplied by the cited mate-pasting theorem."
+   }
+  },
+  {
+   "text": "Let $J=j_!$ and let $\\beta_a:A_{\\bar a}J\\to J_aA_{a_X}$ be the canonical open comparison. Use [lem-cbc-strict-tower-proper-open-calculus], which states naturality and the successive-base-change identity\n$$\\beta_{ab}=(\\beta_b A_{a_X})\\circ(A_{\\bar b}\\beta_a)$$\nin the derived strict-tower category, with pullback compositors. Its finite evaluation is precisely [lem-cbc-proetale-extension-zero-base-change]. In particular this identity also holds for the finite constant-coefficient functors, by applying the tower identity to the constant tower of a complex and evaluating: open extension and inverse image are termwise, so each factor evaluates to the specified finite factor. This is an application of a functor to an already proved equality, not an inference of equality from all evaluations.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE (definition-extension-zero); the cited strict-tower calculus supplies successive-base-change coherence on arbitrary underlying scheme maps."
+   }
+  },
+  {
+   "text": "Expand the chosen compact-support transformation as $H_a=(P_a\\beta_a)\\circ(E_aJ)$, exactly [def-exchange-projection]. For consecutive base maps the composite $(H_bA_{a_X})\\circ(A_bH_a)$ has four factors, in order from the source:\n$$A_bE_aJ,\\quad A_bP_a\\beta_a,\\quad E_bJ_aA_{a_X},\\quad P_{ab}\\beta_bA_{a_X}.$$\nNaturality of $E_b$ for the arrow $\\beta_a$ replaces the middle pair by $E_bA_{\\bar a}J$ followed by $P_{ab}A_{\\bar b}\\beta_a$. The first pair is now $E_{ab}J$ by Step 3, and the last pair is $P_{ab}\\beta_{ab}$ by Step 4. Hence\n$$H_{ab}=(H_bA_{a_X})\\circ(A_bH_a).$$\nThis is substitution of the two previously established equations and naturality; it works both at finite coefficients and for the actual strict-tower functors $P,J,A$. All source and target compactifications are the iterated pullbacks of Step 2.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal), combined with the open-extension composition from Step 4; explicit four-factor calculation."
+   }
+  },
+  {
+   "text": "At finite coefficients remove the temporary compactification choices using [lem-cbc-complete-proetale-refinement-exchange-coherence]. For a refinement its equation is $C'_u e_2=e_1G_aC_u$ for every scheme base map $a$, and its common-refinement comparisons $I_{12}$ satisfy the cocycle and intertwine the $e_i$. Apply this on constant towers with $B=A_{E,n}$ and evaluate. By [lem-weil-tower-evaluation-kinjective], an evaluated K-injective tower resolution is K-injective. Thus evaluating derived termwise direct image computes the ordinary derived direct image. Its comparison is the adjunction mate specified in [def-cbc-strict-constant-tower-operations], so evaluation carries the proper factors to the specified finite mates. This gives the finite comparison equation. The scalar-etale-origin hypothesis holds here because the domain of [fix-lem-exchanges] supplies the finite etale-origin witnesses. In the composite of two exchanges, replace an intermediate compactification by $I$ and the next exchange by the corresponding conjugate; the adjoining $I^{-1}I$ cancels. The initial and final comparisons are the same by the cocycle. Thus the formula of Step 5 holds for the specified compactification-independent finite maps. Apply it first to $(g_Y,v)$, then to $(v,g_{Y'})$. Their outer maps agree by Step 1 and their outer compactifications by Step 2. The two resulting composites are respectively $B_{G_XM}\\circ Q_Y(e_{f,M})$ and $e_{f',Q_XM}\\circ G_{Y'}(B_M)$, with exactly the pullback identifications in the statement. This proves the required finite identity.",
+   "uses": [
+    "lem-cbc-complete-proetale-refinement-exchange-coherence",
+    "fix-lem-exchanges",
+    "lem-weil-tower-evaluation-kinjective",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change), refinement-square case; apply the cited strict-tower theorem then evaluate at finite coefficients."
+   }
+  },
+  {
+   "text": "For integral coefficients perform Steps 2--5 on the strict reduction diagram of $M$, with constant coefficient ring $B=\\mathcal O_E$, rather than on isolated reductions. [lem-weil-pbc-strict-tower-exchange-mate-normalization] identifies the specified proper strict factor of [def-cbc-completed-exchange-map] with $E_a^{\\mathcal T}$ under its fixed corner comparisons: its equality is $d\\operatorname{Res}(v'_\\bullet)=E_a^{\\mathcal T}b$. Use [lem-cbc-strict-tower-proper-open-calculus] for the open factors. The normalization in [fix-lem-exchanges] reconstructs the integral open factors from these strict extension-by-zero diagrams. Consequently the calculation of Step 5 is the calculation for the specified strict compact-support factors themselves, conjugated by those corner comparisons. A tensor comparison used in these corners is canonical on the diagram site: iterating pullback and reduction in either order sends a local elementary tensor $x\\otimes r\\otimes s$ to the pullback of $x$ tensored with $rs$; quotient transitions replace $r,s$ by their images. Thus the comparisons for the two paths agree as strict diagrams, not merely at the derived evaluations. Insert the strict refinement comparisons of [lem-cbc-complete-proetale-refinement-exchange-coherence]; its same equation $C'_u e_2=e_1G_aC_u$ and cocycle cancel the intermediate comparisons as in Step 6. This proves the asserted mixed equation in the derived strict-tower category before $R\\lim$. Its finite-origin hypotheses are exactly the compatible finite witnesses required by the integral domain specified in [fix-lem-exchanges].",
+   "uses": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "def-cbc-completed-exchange-map",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "fix-lem-exchanges",
+    "lem-cbc-complete-proetale-refinement-exchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Base-change constituent at integral coefficients: normalized strict reduction diagrams, with equality before derived inverse limit."
+   }
+  },
+  {
+   "text": "Step 7 is an equality in constant $\\mathcal O_E$-coefficient strict-tower coordinates, via the specified $b,d$ comparisons. First take its derived inverse limit in those coordinates. By [lem-weil-pbc-constant-completion-equivalence], restriction of scalars along $\\underline{\\mathcal O_E}\\to\\widehat{\\mathcal O}_{E,T}$ identifies the derived limits of the strict reduction towers and their completion units. Consequently this is the restriction of the equality sought for the completed maps: [def-cbc-completed-exchange-map] fixes the proper strict lift and source/target comparisons, [lem-cbc-completed-extension-zero-comparison] identifies the open map with the limit of the finite open maps, and [prop-weil-pbc-direct-image-limits] supplies the natural proper direct-image/limit comparison. In the two composites each intervening comparison cancels with its inverse. Their restricted limits therefore are precisely the restrictions of $B_{G_XM}\\circ Q_Y(e_{f,M})$ and $e_{f',Q_XM}\\circ G_{Y'}(B_M)$, with the displayed pullback identifications. Both endpoints are derived complete on the supplied integral domain. The equivalence on complete objects in [lem-weil-pbc-constant-completion-equivalence] is fully faithful, so equality of these restricted maps implies equality of the completed maps. This uses full faithfulness only on complete objects after taking the limit, not on arbitrary derived towers or finite evaluations. The completed limit is the functor of [prop-weil-pbc-rlim-functoriality]; the opens are quasi-compact by Step 2 and the reductions have the supplied witnesses. Applying the same restriction/limit comparison to the strict refinement equations proves compactification independence.",
+   "uses": [
+    "prop-weil-pbc-rlim-functoriality",
+    "def-cbc-completed-exchange-map",
+    "lem-cbc-completed-extension-zero-comparison",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Base-change constituent at integral coefficients: apply derived inverse limit only after the strict-tower equality."
+   }
+  },
+  {
+   "text": "At $E$ coefficients use raw scalar localization of the integral equation, on the lattice presentations of the statement. By [lem-pur-semilinear-scalar-localization], extensions preserve natural transformations, composition and whiskering and hence this equation. Here the geometry is semilinear over $k$, but the coefficient homomorphism is the identity of $\\mathcal O_E$; no $k$-linearity of a scheme map enters the localization. [thm-cbc-finite-extension] identifies the specified rational compact-support exchange as the extension of the completed integral one, including independence of the lattice. For $\\overline{\\mathbf Q}_\\ell$ represent the object, the finite list of functors and comparisons, and both composites over a common finite field stage. [prop-weil-pbc-descent-functors] states that compatible natural transformations and their equations descend, and [thm-cbc-qbar] identifies this descended exchange with the specified common-stage map. Thus the equality and the refinement identities descend. All scalar comparisons are those of the supplied domains in [def-exchange-projection]; in particular this argument never reduces a rational complex to a finite coefficient ring. We have proved every coefficient-stage identity with its specified maps and compactification comparisons.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "thm-cbc-finite-extension",
+    "prop-weil-pbc-descent-functors",
+    "thm-cbc-qbar",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Base-change constituent at field coefficients: scalar localization and common-stage passage of the established equation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-completed-exchange-map",
+  "def-cbc-strict-constant-tower-operations",
+  "def-exchange-projection",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-operations",
+  "fix-lem-exchanges",
+  "lem-cbc-complete-proetale-refinement-exchange-coherence",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "lem-weil-tower-evaluation-kinjective",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-rlim-functoriality",
+  "pur713-def-base-changed-compactification",
+  "thm-cbc-finite-extension",
+  "thm-cbc-qbar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Constituent-compatibility assembly paragraph; explicit mixed-pasting calculation using Stacks Tags 07A7, 0E47, 0F7F and 09AE, with the existing strict-tower normalization nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +205,45 @@
    "results": "SpecialLinearGroup.baseChange_apply_coe; IsBaseChange.comp; IsBaseChange.tensorEquiv; LinearEquiv.baseChange_trans; IsBaseChange.of_comp; IsBaseChange.basis.congr_simp; IsBaseChange.ofEquiv; LinearMap.baseChange_comp",
    "date": "2026-10-17",
    "verdict": "no match: returned declarations do not identify these pro-etale Tate/compactification/strict-tower transformations; generic mate laws are only constituent facts, already represented in the DAG"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_hcomp|semilinear.*baseChange",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits give generic mate or module base-change facts, not the mixed compact-support/semilinear identity at the specified strict-tower and coefficient stages; generic mate laws are already cited as lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of compact support base change and geometric Frobenius semilinear exchange before derived inverse limit",
+   "results": "IsBaseChange.basis_repr_comp; LinearMap.liftBaseChange_comp; RingHom.map_frobeniusEquiv_symm; IsBaseChange.comp_iff; IsBaseChange.endHom_comp; IsBaseChange.linearMapRight; IsBaseChange.finsuppPow; LinearEquiv.baseChange_trans",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits give generic mate or module base-change facts, not the mixed compact-support/semilinear identity at the specified strict-tower and coefficient stages; generic mate laws are already cited as lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits give generic mate or module base-change facts, not the mixed compact-support/semilinear identity at the specified strict-tower and coefficient stages; generic mate laws are already cited as lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate horizontal pasting for a proper direct image followed by open extension by zero, including strict inverse systems",
+   "results": "TopCat.Sheaf.pullbackPushforwardAdjunction; CompHausLike.LocallyConstant.adjunction_left_triangle; SheafOfModules.pushforwardPushforwardAdj; CompHausLike.LocallyConstant.adjunction; CategoryTheory.sheafComposeNatTrans_fac; TopCat.Presheaf.pushforwardPullbackAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits give generic mate or module base-change facts, not the mixed compact-support/semilinear identity at the specified strict-tower and coefficient stages; generic mate laws are already cited as lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived base change commutes with geometric Galois Frobenius semilinear isomorphism exchange in a Cartesian cube",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits give generic mate or module base-change facts, not the mixed compact-support/semilinear identity at the specified strict-tower and coefficient stages; generic mate laws are already cited as lem-weil-pbc-mate-pasting"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-pur-weil-equivariance-compatibilities",
@@ -72,5 +260,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-weil-basechange-semilinear-pasting",
+  "worker": "stage1",
+  "summary": "Expanded the mixed geometric/Frobenius base-change cube into proper adjunction mates and open comparisons. Proved horizontal compactification-relative pasting by a four-factor calculation, cancelled refinement comparisons, established equality on actual strict reduction diagrams before Rlim, and transported to field coefficients. Statement and existing metadata retained; no new nodes. Maintainer review: made the constant-to-completed coefficient passage at derived limit explicit using lem-weil-pbc-constant-completion-equivalence and full faithfulness on complete objects.",
+  "blueprint": "prop-pur-weil-equivariance-compatibilities.proof.md, constituent assembly and base-change compatibility (the parent split calls this the mixed-pasting argument of old Step 6).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-9a0db0908",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-9a0db0908 (reviewer sub-agent of L); spot-checked: Read all nine steps, cited statements and source passages. Repaired Step 8’s constant-to-completed coefficient passage using the existing completion-equivalence lemma. Statement unchanged; no new nodes or off-route tools. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
  }
 }

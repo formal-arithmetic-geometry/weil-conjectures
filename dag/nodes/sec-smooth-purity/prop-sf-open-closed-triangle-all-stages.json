@@ -193,19 +193,65 @@
    }
   },
   {
-   "text": "Finally let $g_X,g_U,g_Z$ be the geometric Frobenius automorphisms of [def-weil-frobenius-detailed]. They commute with $i,j$ because these are defined over $k_0$. They are generally semilinear, so we do not apply a theorem restricted to squares of $k$-morphisms. Instead, use the actual site construction [def-weil-proetale-inverse-image]: base change along $g_T$ and $g_T^{-1}$ are inverse equivalences of the pro-etale sites, and the equivalences preserve covering families. The coefficient identifications of [lem-weil-pbc-profinite-coefficient-inverse-image] respect their composites and finite projections. Thus their module pullbacks are inverse exact equivalences; they preserve the partitions defining constructibility and the Roos triangles defining completeness, and induce the Frobenius pullbacks on all four coefficient categories. Put $F_T=g_T^*$. Composition of the base-change functors gives $b:F_Uj^*\\cong j^*F_X$ and $d:F_Zi^*\\cong i^*F_X$. Define $c:F_Xi_*\\cong i_*F_Z$ as the right-adjoint mate of $d^{-1}:i^*F_X\\cong F_Zi^*$, and define $a:F_Xj_!\\cong j_!F_U$ as the inverse of the left-adjoint conjugate $j_!F_U\\to F_Xj_!$ of $b$. These are isomorphisms because the vertical functors are equivalences: for the right-adjoint mate use [lem-weil-mate-iso-along-equivalences], and for the left-adjoint mate apply the same assertion to the opposite adjunctions. The mate construction and its pasting/identity equations [lem-weil-pbc-mate-pasting] give, componentwise,\n$$F_X\\varepsilon_K=\\varepsilon_{F_XK}\\circ j_!(b_K)\\circ a_{j^*K},\\qquad i_*(d_K)\\circ c_{i^*K}\\circ F_X\\eta_K=\\eta_{F_XK}.$$\nThese equations are also obtained by expanding the unit--square--counit definition of a mate and canceling its triangular identities. All these constructions can first be made on module sheaves, then on complexes, then on the completed and rational/common-stage models of steps 3--7 and 10--11; no $k$-linearity of $g_T$ is required. If $\\theta:F_XK\\xrightarrow{\\sim}K$ is the Weil structure [def-weil-weil-sheaf-complex], give the outer terms the structures\n$$\\theta_A=j_!j^*(\\theta)\\circ j_!(b_K)\\circ a_{j^*K},\\qquad \\theta_C=i_*i^*(\\theta)\\circ i_*(d_K)\\circ c_{i^*K}.$$\nThe two displayed mate equations and naturality of unit and counit give $\\varepsilon_K\\theta_A=\\theta F_X\\varepsilon_K$ and $\\eta_K\\theta=\\theta_CF_X\\eta_K$. The exact functor $F_X$ transports the distinguished triangle to one with these same first two arrows under $\\theta_A,\\theta,\\theta_C$. Uniqueness from step 9 forces the third square: $\\delta_K\\theta_C=\\theta_A[1]F_X(\\delta_K)$, with the canonical shift comparison. This proves Weil equivariance of all three arrows in the category of pairs, without asserting a triangulated structure on that category.",
+   "text": "Finally let $g_X,g_U,g_Z$ be the geometric Frobenius automorphisms of [def-weil-frobenius-detailed]. Because $i,j$ and the schemes are defined over $k_0$, these automorphisms commute with the immersions. They may be semilinear over $k$, so we use [def-weil-proetale-inverse-image] directly: pullback along each $g_T$ and $g_T^{-1}$ gives inverse equivalences of pro-etale sites preserving covering families. The coefficient identifications of [lem-weil-pbc-profinite-coefficient-inverse-image] respect composites and finite projections. Hence the induced module pullbacks are inverse exact equivalences; they preserve finite constructibility partitions and the Roos triangles for completeness, and therefore induce the Frobenius pullbacks $F_T=g_T^*$ on all four coefficient categories.",
    "uses": [
     "def-weil-frobenius-detailed",
     "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-mate-iso-along-equivalences",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-weil-sheaf-complex"
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-    "place": "Weil structures: semilinear site equivalences, explicit mate equations, and uniqueness of the third arrow."
+    "place": "Weil structures: semilinear site equivalences and coefficient compatibility."
+   }
+  },
+  {
+   "text": "Composition of these base-change functors gives $b:F_Uj^*\\cong j^*F_X$ and $d:F_Zi^*\\cong i^*F_X$. Define $c:F_Xi_*\\cong i_*F_Z$ as the right-adjoint mate of $d^{-1}:i^*F_X\\cong F_Zi^*$, and define $a:F_Xj_!\\cong j_!F_U$ as the inverse of the left-adjoint conjugate $j_!F_U\\to F_Xj_!$ of $b$. The vertical functors are equivalences, so [lem-weil-mate-iso-along-equivalences] makes the right-adjoint mate an isomorphism; applying the same result to opposite adjunctions makes the left-adjoint conjugate an isomorphism. These constructions are made first on module sheaves and then termwise on complexes and through the completed, rational and common-stage models of steps 3--7 and 10--11; no $k$-linearity of $g_T$ is used.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-mate-iso-along-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Weil structures: construction and invertibility of the Frobenius mate comparisons."
+   }
+  },
+  {
+   "text": "The mate formulas are compatible with the units and counits. The unit and counit identities in [lem-pur-mate-unit-compatibility] and [lem-amb-mate-unit-counit], together with the pasting and identity laws of [lem-weil-pbc-mate-pasting], give componentwise\n$$F_X\\varepsilon_K=\\varepsilon_{F_XK}\\circ j_!(b_K)\\circ a_{j^*K},\\qquad i_*(d_K)\\circ c_{i^*K}\\circ F_X\\eta_K=\\eta_{F_XK}.$$\nThus these are the actual mate equations, rather than an appeal to a $k$-linear exchange theorem.",
+   "uses": [
+    "lem-pur-mate-unit-compatibility",
+    "lem-amb-mate-unit-counit",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Weil structures: explicit mate equations for the open counit and closed unit."
+   }
+  },
+  {
+   "text": "If $\\theta:F_XK\\xrightarrow{\\sim}K$ is the Weil structure of [def-weil-weil-sheaf-complex], define structures on the outer terms by\n$$\\theta_A=j_!j^*(\\theta)\\circ j_!(b_K)\\circ a_{j^*K},\\qquad \\theta_C=i_*i^*(\\theta)\\circ i_*(d_K)\\circ c_{i^*K}.$$\nThe two mate equations of step 14 and naturality of the unit and counit give $\\varepsilon_K\\theta_A=\\theta F_X\\varepsilon_K$ and $\\eta_K\\theta=\\theta_CF_X\\eta_K$. Since $F_X$ is an exact equivalence, it transports the distinguished triangle to a distinguished triangle with these same first two arrows under $\\theta_A,\\theta,\\theta_C$, using the stagewise triangulation supplied by [thm-weil-pbc-verdier-axioms].",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "thm-weil-pbc-verdier-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Weil structures: induced Weil structures on the outer terms and transport of the triangle."
+   }
+  },
+  {
+   "text": "Apply the uniqueness argument of step 9 to the original triangle and the transported triangle: the first two squares already commute, and the factorization through the connecting morphism is killed by the cross-object Hom vanishing. Equivalently, the uniqueness calculation using [def-weil-triangulated-category] and [lem-weil-pbc-hom-out-of-triangle-exact] forces the third square\n$$\\delta_K\\theta_C=\\theta_A[1]F_X(\\delta_K),$$\nwith the canonical shift comparison. Therefore all three arrows are Weil-equivariant in the category of pairs; no triangulated structure on that category is asserted.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Weil structures: uniqueness of the connecting arrow and equivariance of the third map."
    }
   }
  ],
@@ -251,6 +297,8 @@
   "thm-weil-pbc-verdier-axioms",
   "def-weil-frobenius-detailed",
   "lem-weil-mate-iso-along-equivalences",
+  "lem-pur-mate-unit-compatibility",
+  "lem-amb-mate-unit-counit",
   "lem-weil-pbc-mate-pasting",
   "def-weil-weil-sheaf-complex"
  ],
@@ -318,7 +366,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -392,11 +440,11 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "prop-sf-open-closed-triangle-all-stages",
   "worker": "stage1",
-  "summary": "Kept the statement and all coefficient stages. Replaced unstated support and normalization inferences by existing ringed localization, product, tensor, and derived-adjunction statements. Wrote the K-flat and product arguments inside the proof; corrected uniqueness and treated semilinear Frobenius without applying a k-morphism exchange theorem outside its domain. No new nodes. The second audit explicitly verifies finite dimension for scalar extension using the existing finite-type dimension theorem. Independent second reading spells out finite type of U and Z, the closed tower comparison, the integral complex sequence, and the orientations of the Frobenius mates.",
-  "blueprint": "Realizes the unit sheaf-sequence-to-triangle argument and all five paragraphs of the item: finite stage (1-2), integral (3-8), uniqueness (9), rational (10), common-stage (11), Weil structures (12). The appended F1 implementation is not a proof of the full statement and is not used.",
+  "summary": "Repaired the returned Frobenius step by splitting its semilinear site-equivalence, mate-comparison, explicit unit/counit, outer Weil-structure, and uniqueness arguments into five cited steps. Reused the existing Mathlib leaves lem-pur-mate-unit-compatibility and lem-amb-mate-unit-counit for the two mate identities, so no duplicate node was created; all other steps and the statement remain unchanged. Each replacement is below the 2000-character review threshold.",
+  "blueprint": "Realizes the unit sheaf-sequence-to-triangle argument and all five paragraphs of the item: finite stage (1-2), integral (3-8), uniqueness (9), rational (10), common-stage (11), and the repaired five-part Weil-structure paragraph (12-16).",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -538,11 +586,11 @@
   "lem-kun-dimension-finite-type"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NS-e820cce7a",
-  "group": "NS",
+  "reviewer": "NT-Codex-Q09-f0c4bea74",
+  "group": "Q09",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-e820cce7a (reviewer sub-agent of L); spot-checked: Read the required instructions, master item/unit, all twelve proof steps, all 43 cited DAG statements, cited Stacks sources (09AH, 09BP, 0152), and the finite étale Lean declaration. Verified hypotheses, coefficient/base-change identifications, completion and reduction arguments, Hom vanishing, uniqueness/naturality, scalar descent, semilinear Frobenius mates, route, searches, duplicates, and edge cases. No new nodes or repairs are needed. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-f0c4bea74 (reviewer sub-agent of L); spot-checked: Read all 16 steps, 46 cited statements, source locations, and unit/chapter routes. Verified coefficient stages, semilinear Frobenius mates, equivariance, uniqueness, and edge cases. Corrected step 13’s five missing \\cong escapes and malformed \\to escape. Whole corrected JSON is under fixes/dag/nodes/sec-smooth-purity/; detailed checks and accepted tool uses are in review.md. No new nodes or statement changes.; 1 file(s) fixed by the reviewer"
  }
 }

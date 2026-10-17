@@ -13,9 +13,91 @@
   "def-trf-cohomological-comparison",
   "lem-trf-proper-direct-image-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use $T=Y_1\\times_kY_2$, $U=X_1\\times_kY_2$, $V=Y_1\\times_kX_2$, $u=p_1\\times1$, $v=1\\times p_2$, and $W=U\\times_TV=X_1\\times_kX_2$. Write $a_1:U\\to X_1$, $a_2:V\\to X_2$, $j_1:W\\to U$, $j_2:W\\to V$ for the projections, so $p=uj_1=vj_2$ and $r_i=a_ij_i$. Put $K_1=La_1^*M_1$, $K_2=La_2^*M_2$. The maps $u,v$ are proper by [lem-weil-pbc-proper-base-change], being base changes of $p_i$. The base $T$ is separated finite type and the $K_i$ are finite-Tor constructible, as required in the construction of [def-sf-kv-maps](i). Let $e_1:Ls_1^*Rp_{1*}M_1\\to Ru_*K_1$ and $e_2:Ls_2^*Rp_{2*}M_2\\to Rv_*K_2$ be exchange for the Cartesian squares $(a_1,u,p_1,s_1)$ and $(a_2,v,p_2,s_2)$. With the proper compactifications $j=1$, [def-exchange-projection] defines these as the compact-support exchanges as well. In the notation of [thm-sf-kunneth-relative], let $\\kappa=\\kappa_{u,v}$. Then the definition gives exactly\n$$\\mathrm{Ku}_!^{-1}=\\kappa^{-1}\\circ(e_1\\otimes_A^Le_2).$$\nAll the maps in this construction are isomorphisms, with $!$ identified with $*$ as in [prop-functor-package](3).",
+   "uses": [
+    "def-sf-kv-maps",
+    "thm-sf-kunneth-relative",
+    "lem-weil-pbc-proper-base-change",
+    "def-exchange-projection",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Evaluation (1), paragraph beginning “Indeed”: inverse product characterized by the tensor of ordinary pullback counits"
+   }
+  },
+  {
+   "text": "Put $H_i=Ls_i^*Rp_{i*}M_i$, $Q_i=Lr_i^*M_i$, and $F_i=Lr_i^*\\varepsilon_{p_i,M_i}:Lp^*H_i\\to Q_i$, inserting the canonical pullback composition and monoidal identifications of [lem-pur-derived-pullback-tensor-iso]. The ordinary exchange $\\alpha_i:H_i\\to Rp_*Q_i$ of the commutative square $p_ir_i=s_ip$ means the mate of $F_i$ under [fix-prop-adjunctions](1): explicitly\n$$\\alpha_i=Rp_*(F_i)\\circ\\eta_{p,H_i},\\qquad \\varepsilon_{p,Q_i}\\circ Lp^*\\alpha_i=F_i.$$\nThe second equality is naturality of $\\varepsilon_p$ followed by $\\varepsilon_p Lp^*\\circ Lp^*\\eta_p=1$. These squares need not be Cartesian; only the two squares defining $e_i$ in Step 1 are being used as Cartesian exchange squares. By the defining transpose of $t_p$ and tensor functoriality,\n$$\\varepsilon_{p,Q_1\\otimes Q_2}\\circ Lp^*\\bigl(t_p(\\alpha_1\\otimes\\alpha_2)\\bigr)\n=(\\varepsilon_{p,Q_1}\\circ Lp^*\\alpha_1)\\otimes(\\varepsilon_{p,Q_2}\\circ Lp^*\\alpha_2)=F_1\\otimes F_2.$$\nThus this is the ordinary transpose of the map $\\Pi^p$ in the statement.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(b), formula (0.1); ordinary adjunction calculation for commutative product squares"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-relative-kunneth-counit] to the proper maps $u,v$ and the objects $K_1,K_2$ of Step 1. Its equality is\n$$\\varepsilon_p\\circ Lp^*\\kappa^{-1}=Lj_1^*\\varepsilon_{u,K_1}\\otimes Lj_2^*\\varepsilon_{v,K_2}.$$\nBy [def-exchange-projection], the transposes of $e_1,e_2$ give\n$$\\varepsilon_{u,K_1}\\circ Lu^*e_1=La_1^*\\varepsilon_{p_1,M_1},\\qquad\n\\varepsilon_{v,K_2}\\circ Lv^*e_2=La_2^*\\varepsilon_{p_2,M_2}.$$\nPrecompose the first displayed equality with $Lp^*(e_1\\otimes e_2)$ and use $p=uj_1=vj_2$. Its right side becomes\n$Lj_1^*(\\varepsilon_u\\circ Lu^*e_1)\\otimes Lj_2^*(\\varepsilon_v\\circ Lv^*e_2)=F_1\\otimes F_2$.\nThis calculates the transpose of $\\mathrm{Ku}_!^{-1}$ itself, using exactly the Cartesian exchanges in its definition. The pullback and tensor identifications are those of [lem-pur-derived-pullback-tensor-iso].",
+   "uses": [
+    "lem-trf-relative-kunneth-counit",
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Evaluation (1), paragraph beginning “Indeed”: inverse product characterized by the tensor of ordinary pullback counits"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 give equal transposes for $\\Pi^p$ and $\\mathrm{Ku}_!^{-1}$ with the same source $H_1\\otimes H_2$ and target $Rp_*(Q_1\\otimes Q_2)$. The adjunction bijection of [fix-prop-adjunctions](1) therefore makes these maps equal. The latter is an isomorphism by [def-sf-kv-maps](i), proving the canonical-map assertion and invertibility.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "def-sf-kv-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Evaluation (1), paragraph beginning “Indeed”: inverse product characterized by the tensor of ordinary pullback counits"
+   }
+  },
+  {
+   "text": "For a proper pushforward diagram of [def-trf-coefficient-pushforward], [lem-trf-proper-direct-image-comparison] specifies $f_X=Rp_{X*}$, $f_{X\\times X}=R(p_X\\times p_X)_*$ and the usual lax tensor map, together with the ordinary mates for all the commutative fixed-diagram squares; no Cartesian hypothesis on these squares is imposed. Distinguish the product projections $\\operatorname{pr}_i$ from the two proper maps $p_i$ used earlier. The formula in [def-trf-cohomological-comparison] is\n$$\\Pi_{M,N}=t_{X\\times X}\\circ(\\alpha_{\\operatorname{pr}_1}\\otimes\\alpha_{\\operatorname{pr}_2}).$$\nHere $\\alpha_{\\operatorname{pr}_i}$ is the mate of $L\\operatorname{pr}_i^*\\varepsilon_{p_X}$. Taking $p_1=p_2=p_X$ in Step 2 gives these very mates and this very lax tensor map. Hence the prescribed $\\Pi$ is exactly $\\Pi^p$, without changing any map or coefficient domain.",
+   "uses": [
+    "lem-trf-proper-direct-image-comparison",
+    "def-trf-cohomological-comparison",
+    "def-trf-coefficient-pushforward"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a), p. 27; Notation 4.2.3(ii), p. 32"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-kv-maps",
+  "thm-sf-kunneth-relative",
+  "lem-weil-pbc-proper-base-change",
+  "def-exchange-projection",
+  "prop-functor-package",
+  "fix-prop-adjunctions",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-trf-relative-kunneth-counit",
+  "lem-trf-proper-direct-image-comparison",
+  "def-trf-cohomological-comparison",
+  "def-trf-coefficient-pushforward"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+  "place": "Evaluation (1), paragraph beginning “Indeed”: inverse product characterized by the tensor of ordinary pullback counits; expanded using the existing relative-counit lemma and ordinary adjunctions. Varshavsky §§0.3(b), 4.1.4(a), 4.2.3(ii) prescribe the tensor and comparison maps, not this Kunneth identification."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +136,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-specialization",
@@ -66,12 +148,46 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof paragraphs (1),(2), normal-cone specialization; returned trace-specialization Step 1: identify the proper factor product map with inverse Kunneth",
+   "place": "Proof (1) and (2) of lem-trf-local-term-locality: specialization and proper-pushforward compatibility in the normal-cone reduction, via lem-trf-trace-specialization. The product-map normalization used by that comparison is expanded in lem-trf-trace-map-exchange, Evaluation (1), paragraph beginning “Indeed”, in main-20261015.",
    "via": [
     "lem-trf-trace-specialization"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-proper-comparison-product",
+  "worker": "stage1",
+  "summary": "Expanded the product normalization using the existing relative-counit lemma. Distinguished Cartesian base-change squares from the generally non-Cartesian product projection squares, wrote both ordinary transpose calculations, and matched the proper-comparison Pi. Corrected source provenance. No new nodes or changed mathematical hypotheses.",
+  "blueprint": "Proof (1) and (2) of lem-trf-local-term-locality: specialization and proper-pushforward compatibility in the normal-cone reduction, via lem-trf-trace-specialization. The product-map normalization used by that comparison is expanded in lem-trf-trace-map-exchange, Evaluation (1), paragraph beginning “Indeed”, in main-20261015.",
+  "tool_uses": [
+   {
+    "node": "def-sf-kv-maps",
+    "why": "The item takes the canonical construction of Ku_! and its product exchange maps from the six-functor product-map definition; the trace unit has no replacement for this generic product construction."
+   },
+   {
+    "node": "thm-sf-kunneth-relative",
+    "why": "The item uses the relative compact-support Kunneth isomorphism underlying the external product; this is a generic six-functor theorem outside the trace-locality route."
+   },
+   {
+    "node": "lem-trf-relative-kunneth-counit",
+    "why": "The item uses its counit characterization of the specified inverse relative product; no node in the curve-zero unit supplies this mate calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sf-kv-maps",
+  "thm-sf-kunneth-relative",
+  "lem-trf-relative-kunneth-counit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-0219b688f",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-0219b688f (reviewer sub-agent of L); spot-checked: Read the item, every cited statement, sources, and unit/chapter routes in full. Repaired the canonical-map calculation to distinguish non-Cartesian projection mates from Cartesian exchanges, and corrected source/blueprint provenance. Statement unchanged; small cases checked; no new nodes. Full review in review.md; corrected JSON under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }

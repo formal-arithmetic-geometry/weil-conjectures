@@ -15,9 +15,89 @@
   "def-sp-filtered-complex-subquotients",
   "lem-trf-filtered-derived-hom-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose bounded filtered representatives P and Q in the common finite filtration interval. Resolve the filtered complex L^FQ in the bounded-below filtered category by a filtered quasi-isomorphism L^FQ -> J with J termwise filtered injective, using the filtered-injective model. Thus every graded complex gr^p J is a bounded-below complex of injectives and represents L(gr^p Q).",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, filtered-injective resolution model"
+   }
+  },
+  {
+   "text": "The right adjoint R sends injectives of B to injectives of A. Indeed, for a monomorphism M -> N and a map M -> RJ, transpose the latter by L adjunction to a map LM -> J. Exactness of L makes LM -> LN a monomorphism, so injectivity of J extends the transposed map to LN -> J; transposing back gives the required extension N -> RJ. The same argument applies degreewise to the graded terms.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, adjunction calculation for injective resolutions"
+   }
+  },
+  {
+   "text": "Write i:L^FQ -> J for the resolution from Step 1 and eta for the ordinary adjunction unit. Give RJ the termwise filtration F^p(RJ)=R(F^pJ), included in RJ by R of the inclusion. These are subobjects: if R(m)u=R(m)v for a monomorphism m, adjunction transposes this to m times the transposes of u and v being equal, so u=v. Naturality of eta and the filteredness of i show that alpha=R(i) eta_Q:Q -> RJ preserves filtration. For each term of J, [lem-trf-injective-graded-filtration-splits] splits every sequence 0 -> F^{p+1}J -> F^pJ -> gr^p J -> 0. Applying additive R preserves these split sequences, so the canonical quotient comparison gr^p(RJ) -> R(gr^p J) is an isomorphism, natural for filtered maps and hence compatible with the differentials. By Step 2 its terms are injective. Under this comparison gr^p(alpha) is R(gr^p i) eta_{gr^p Q}, the chain representative of the derived unit at gr^p Q, since exactness of L identifies gr^p(L^FQ) with L(gr^p Q) and gr^p J is a bounded-below injective representative of that object. The assumed invertibility of the derived unit therefore makes every gr^p(alpha) a quasi-isomorphism. Thus alpha is a filtered quasi-isomorphism to the bounded-below termwise filtered-injective complex RJ. Additivity gives R(0)=0, so its filtration stays in the same finite interval.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "lem-trf-injective-graded-filtration-splits",
+    "def-weil-abstract-derived-category",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, derived-unit argument on associated graded resolutions"
+   }
+  },
+  {
+   "text": "For bounded P, form the shift-filtered Hom complexes C_A(P,RJ) and C_B(L^FP,J) of [lem-trf-filtered-hom-complex-invariance]. Their degree-n terms are finite sums of termwise Hom groups and their differentials are d f - (-1)^n f d. If epsilon is the ordinary counit, the termwise adjunction sends f:P^i -> RJ^j to epsilon_{J^j} L(f):LP^i -> J^j. Additivity and naturality in both arguments make these bijections commute with the Hom differentials. They preserve the shift filtration in both directions. Indeed the restriction of f to F^aP factors through R(F^{a+r}J) if and only if its adjoint, restricted to L(F^aP), factors through F^{a+r}J, by the adjunction bijection for F^aP and F^{a+r}J and its naturality with respect to both inclusions. Exactness of L identifies L(F^aP) with F^a(LP). Consequently we have an isomorphism of uniformly finite filtered complexes. It is natural for filtered chain maps of P and J; naturality in the localized Q follows in Step 5.",
+   "uses": [
+    "lem-trf-filtered-hom-complex-invariance",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, explicit filtered Hom-complex construction"
+   }
+  },
+  {
+   "text": "Compute RHom^F_A(P,Q) using alpha:Q -> RJ from Step 3 and RHom^F_B(L^FP,L^FQ) using i:L^FQ -> J from Step 1. The chain isomorphism of Step 4 defines c_{P,Q}. The filtered-injective localization model identifies any two such target representatives by filtered homotopy equivalences, and [lem-trf-filtered-hom-complex-invariance] sends these to filtered homotopy equivalences of Hom complexes; the same lemma inverts filtered quasi-isomorphisms between bounded sources. Together with the bifunctor and model identifications of [lem-trf-filtered-derived-hom-calculus], the natural chain adjunction therefore descends to the asserted canonical natural isomorphism. Forgetting the filtration gives precisely ordinary derived adjunction using the derived-unit representative alpha. Taking the canonical associated-graded Hom maps gives the sum, over q-p=r, of the ordinary adjunction comparisons, because gr^q(RJ)=R(gr^q J) is the canonical quotient comparison of Step 3 and the adjunction respects the inclusion and quotient maps. The graded formula of the calculus identifies their targets with the stated ordinary derived Hom objects.\nFor the map on filtered morphisms, represent a morphism by a filtered chain map f:P -> RJ. Its adjoint is epsilon_J L(f):L^FP -> J. Naturality of epsilon and the adjunction triangle identity give epsilon_J L(alpha)=epsilon_J L(R(i)) L(eta_Q)=i epsilon_{LQ} L(eta_Q)=i. Thus, in the filtered localization, epsilon_J L(f)=i (L(alpha))^{-1} L(f), which represents exactly L^F(alpha^{-1} f). This checks the claimed morphism map, rather than just its invertibility. Finally the chain isomorphism respects F^0 and F^1, and its induced squares with F^0C -> C and F^0C -> F^0C/F^1C commute. Applying H^0 and the calculus's identifications proves the forgetful and graded-projection compatibilities.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus",
+    "lem-trf-filtered-localization-injective-model",
+    "lem-trf-filtered-hom-complex-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, naturality, graded comparison and H^0 projection clauses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-trf-filtered-derived-hom-calculus",
+  "lem-trf-filtered-hom-complex-invariance",
+  "lem-trf-filtered-localization-injective-model",
+  "lem-trf-injective-graded-filtration-splits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1.1–5.1.5, with the explicit filtered Hom-complex and adjunction calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,7 +150,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-operations-hom",
@@ -89,5 +169,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-global-hom-exact-adjunction",
+  "worker": "stage1",
+  "summary": "Split the generic exact-adjunction filtered global Hom comparison into the filtered-injective resolution, injective preservation, derived-unit, explicit Hom-complex, and descent/projection arguments. No new nodes were needed: the filtered localization model, filtered Hom-complex invariance, and filtered RHom calculus already state the required interfaces. The statement and hypotheses are unchanged.",
+  "blueprint": "Realizes the filtered bifunctor/naturality paragraph extracted from step 12 of lem-trf-filtered-operations-hom: steps 1–3 construct the right-adjoint filtered-injective resolution, step 4 gives the termwise adjunction on filtered Hom complexes, and step 5 descends it and checks underlying, graded, forgetful, and projection compatibilities.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-filtered-derived-hom-calculus",
+    "why": "Its filtered RHom, graded direct-sum, and H^0 morphism interfaces are the generic calculus used by this exact-adjunction comparison."
+   },
+   {
+    "node": "lem-trf-filtered-hom-complex-invariance",
+    "why": "Its explicit shift-filtered Hom complex and localization invariance are needed to descend the termwise adjunction; no node in this additivity unit supplies that generic model."
+   },
+   {
+    "node": "lem-trf-filtered-localization-injective-model",
+    "why": "Its same-interval filtered-injective resolutions and Hom computation provide the generic localization model in steps 1, 3 and 5; they do not replace the filtered trace-additivity route."
+   },
+   {
+    "node": "lem-trf-injective-graded-filtration-splits",
+    "why": "Its finite split flag permits additive R to preserve the filtration quotients of the injective target in step 3, without assuming that R is exact; this is a generic abelian-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-filtered-derived-hom-calculus",
+  "lem-trf-filtered-hom-complex-invariance",
+  "lem-trf-filtered-localization-injective-model",
+  "lem-trf-injective-graded-filtration-splits"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q69-458c580fd",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q69-458c580fd (reviewer sub-agent of L); spot-checked: Read the item, report, all cited statements, unit/chapter route, Varshavsky §§5.1.1–5.1.5, and relevant Stacks passages. Mathematics checks out. Added two missing tool declarations and explicit filtered-unit/counit calculations. Statement unchanged; no new nodes or cycles. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
  }
 }

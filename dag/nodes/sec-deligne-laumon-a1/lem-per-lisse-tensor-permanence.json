@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-per-lisse-tensor-permanence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Permanence under a lisse tensor",
@@ -14,31 +14,170 @@
  },
  "stmt_deps": [
   "def-per-perverse-subcategories",
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-scheme-conventions"
+  "def-per-support-condition",
+  "def-weil-pbc-qbar-category",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pure-dimension"
  ],
  "proof": [
   {
-   "text": "For the $\\le$-direction: the cohomology sheaves of\n$K\\otimes^L\\mathcal L$ have support contained in the support of the\ncorresponding sheaves of $K$ (the tensor with the lisse sheaf is\nexact, and the module over each point is the tensor with the free\n$\\mathcal L_{\\bar x}$, of the same support), so the support\ninequalities of [def-per-support-condition] for $K$ imply the\nones for $K\\otimes^L\\mathcal L$. For the $\\ge$-direction: by\n[lem-per-dual-lisse-tensor],\n$D_X(K\\otimes^L\\mathcal L)\\cong D_XK\\otimes^L\\mathcal L^\\vee$, and\napplying the $\\le$-direction to the lisse sheaf\n$\\mathcal L^\\vee$ gives\n$\\operatorname{SuppCon}(D_X(K\\otimes^L\\mathcal L))$ from\n$\\operatorname{SuppCon}(D_XK)$, which is\n$\\mathrm{CosuppCon}(K\\otimes^L\\mathcal L)$ from\n$\\mathrm{CosuppCon}(K)$ by [def-per-support-condition].",
+   "text": "Use the adic $\\overline{\\mathbf Q}_\\ell$ category specified in [def-per-support-condition], with lisse sheaves in [def-pod-lisse-l-adic-sheaves]. Apply [lem-per-adic-lisse-cohomology-calculus] to $K$ and $\\mathcal L$. It gives $K\\otimes^L\\mathcal L\\in D^b_c$ and, for every integer $a$ and geometric point $\\bar x$, the isomorphism\n$$\\mathcal H^a(K\\otimes^L\\mathcal L)_{\\bar x}\\cong\\mathcal H^a(K)_{\\bar x}\\otimes_{\\overline{\\mathbf Q}_\\ell}\\mathcal L_{\\bar x}.$$\nThe scheme hypotheses (noetherian, finite-dimensional, with $\\ell$ invertible) are part of the domain of [def-weil-pbc-qbar-category] already required to interpret $K$. In particular, this application uses the lemma for the completed/rational/common-stage coefficients, not a comparison with discrete etale $\\overline{\\mathbf Q}_\\ell$-modules.",
    "uses": [
+    "lem-per-adic-lisse-cohomology-calculus",
     "def-per-support-condition",
+    "def-pod-lisse-l-adic-sheaves",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-lisse-tensor-permanence.proof.md",
+    "place": "First sentence: the exact lisse tensor and the geometric-point computation."
+   }
+  },
+  {
+   "text": "Suppose $K\\in{}^pD^{\\le0}(X)$. By [def-per-perverse-subcategories] and [def-per-support-condition], $\\dim\\operatorname{Supp}\\mathcal H^{-i}(K)\\le i$ for every integer $i$. If $\\mathcal H^{-i}(K)_{\\bar x}=0$, Step 1 gives $\\mathcal H^{-i}(K\\otimes^L\\mathcal L)_{\\bar x}=0$, since $0\\otimes V=0$. Thus\n$$\\operatorname{Supp}\\mathcal H^{-i}(K\\otimes^L\\mathcal L)\\subseteq\\operatorname{Supp}\\mathcal H^{-i}(K).$$\nThis also holds if support is defined as the closure of the nonzero-fibre locus, by taking closures of the inclusion. Every chain of irreducible closed subsets in the smaller closed support is a chain in the larger one, so its dimension is at most that of the larger support; empty support has dimension $-\\infty$. The required inequality is therefore inherited for every $i$, proving $K\\otimes^L\\mathcal L\\in{}^pD^{\\le0}(X)$. Only containment is used: for rank zero the left-hand support is empty.",
+   "uses": [
+    "def-per-perverse-subcategories",
+    "def-per-support-condition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-lisse-tensor-permanence.proof.md",
+    "place": "First sentence: pass from the cohomology calculation to every support inequality."
+   }
+  },
+  {
+   "text": "Now suppose $K\\in{}^pD^{\\ge0}(X)$. By [def-per-perverse-subcategories] and [def-per-support-condition], $\\operatorname{SuppCon}(D_XK)$ holds. The dual statement in [lem-per-adic-lisse-cohomology-calculus] gives a lisse finite-rank $\\mathcal L^\\vee$ in degree zero. The isomorphism of [lem-per-dual-lisse-tensor] applies because $X$ is smooth of pure dimension $d$, $K$ is bounded constructible and $\\mathcal L$ is lisse finite rank; it identifies\n$$D_X(K\\otimes^L\\mathcal L)\\cong D_XK\\otimes^L\\mathcal L^\\vee.$$\nApply Steps 1 and 2 to $D_XK$ and $\\mathcal L^\\vee$ in the same bounded constructible Verdier-dual setting of [def-per-support-condition]. They give $\\operatorname{SuppCon}(D_XK\\otimes^L\\mathcal L^\\vee)$. Isomorphic complexes have isomorphic cohomology and the same supports, so the displayed isomorphism gives $\\operatorname{SuppCon}(D_X(K\\otimes^L\\mathcal L))$. By the two definitions this is precisely $K\\otimes^L\\mathcal L\\in{}^pD^{\\ge0}(X)$.",
+   "uses": [
+    "def-per-perverse-subcategories",
+    "def-per-support-condition",
+    "lem-per-adic-lisse-cohomology-calculus",
     "lem-per-dual-lisse-tensor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-lisse-tensor-permanence.proof.md",
+    "place": "Second sentence: Verdier duality and the already proved support argument for the lisse dual."
+   }
+  },
+  {
+   "text": "Let $n\\in\\mathbf Z$. By [def-per-perverse-subcategories], $K\\in{}^pD^{\\le n}$ (respectively ${}^pD^{\\ge n}$) exactly when $K[n]\\in{}^pD^{\\le0}$ (respectively ${}^pD^{\\ge0}$). The derived tensor construction of [def-weil-derived-pullback-tensor-hom] gives\n$$(K[n])\\otimes^L\\mathcal L\\cong(K\\otimes^L\\mathcal L)[n].$$\nIndeed, on K-flat cochain representatives the degree-$a$ summands on either side are $K^{p+n}\\otimes L^q$ with $p+q=a$. Both differentials are $(-1)^n d_K\\otimes1+(-1)^p1\\otimes d_L$, so the identity on these summands is a chain isomorphism. The same comparison holds after the completed integral construction, scalar localization and passage to a common finite field, which define these operations. Apply Step 2 or Step 3 to $K[n]$ and transport through this isomorphism. The two shifted assertions follow for every $n$.",
+   "uses": [
+    "def-per-perverse-subcategories",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-lisse-tensor-permanence.proof.md",
+    "place": "Statement, last sentence: the analogous assertions for all shifted subcategories."
+   }
   }
  ],
  "proof_deps": [
+  "lem-per-adic-lisse-cohomology-calculus",
   "def-per-support-condition",
-  "lem-per-dual-lisse-tensor"
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-pbc-qbar-category",
+  "def-per-perverse-subcategories",
+  "lem-per-dual-lisse-tensor",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-lisse-tensor-permanence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-lisse-tensor-permanence.proof.md",
+  "place": "Whole proof, expanded with an explicit adic coefficient-calculus obligation and shift calculation."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsLisse|Perverse|adic.*tensor|tensor.*adic",
+   "results": "7 hits; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean",
+   "date": "2026-10-17",
+   "verdict": "No match: adic completion of algebraic modules and a functor-category tensor result, not lisse adic sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of the derived tensor product with a lisse l-adic sheaf of finite rank",
+   "results": "8 hits; CategoryTheory.Sheaf.tensorProd_isSheaf, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, Derivation.tensorProductTo_tmul, DerivedCategory.instLinear, DerivedCategory.instPreadditive, KaehlerDifferential.derivationTensorProduct_algebraMap, DerivedCategory.instAdditiveHomotopyCategoryIntUpQh",
+   "date": "2026-10-17",
+   "verdict": "No match: Sheaf.tensorProd_isSheaf is cartesian tensor (read CartesianMonoidal.lean lines 25-43); AdicCompletion results concern ordinary modules, not this adic category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, tensor",
+   "results": "0 hits; . loogle: unknown identifier 'tensor'",
+   "date": "2026-10-17",
+   "verdict": "No match: Loogle reports unknown identifier tensor; the corrected Sheaf and mapHomologicalComplex searches are recorded below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a bounded constructible adic derived complex with a finite rank lisse l-adic sheaf commutes with cohomology sheaves",
+   "results": "8 hits; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-17",
+   "verdict": "No match: light condensed monoidal structures and internal projectivity criteria do not give the adic cohomology and fibre comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientDual|IsDualizable|LocallyConstant",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "No match in Mathlib/CategoryTheory; no adic lisse coefficient-dual theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived internal Hom of a lisse finite rank l-adic sheaf into the coefficient sheaf is its lisse linear dual in degree zero",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.linearEquiv₀, LinearEquiv.dualMap_symm, LightCondensed.ihomPoints, FDRep.dualTensorIsoLinHom, LinearEquiv.dualMap_refl, LinearMap.dualMap_eq_lcomp, dualTensorHomEquiv, FGModuleCat.FGModuleCatDual_coe",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary linear duals, FDRep dualTensorIsoLinHom and LightCondensed.ihomPoints concern other categories; no adic lisse comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf",
+   "results": "12 hits; CategoryTheory.Sheaf, CategoryTheory.Sheaf.terminal, CategoryTheory.sheafOver, CategoryTheory.Sheaf.isTerminalTerminal, CategoryTheory.sheafToPresheaf, CategoryTheory.fullyFaithfulSheafToPresheaf, CategoryTheory.instInhabitedSheafBotGrothendieckTopologyType, CategoryTheory.sheafSections",
+   "date": "2026-10-17",
+   "verdict": "No match: sheaf definitions and elementary universal properties, not the adic coefficient calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free sheaf of finite rank has locally free derived coefficient dual in degree zero over adic l-adic coefficients",
+   "results": "8 hits; LightCondensed.free, Condensed.free, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, LocallyConstant.freeOfProfinite, Algebra.instFreeCotangentToExtensionUnitLocalizationAway, SheafOfModules.freeFunctor, Module.FinitePresentation.exists_free_localizedModule_powers",
+   "date": "2026-10-17",
+   "verdict": "No match: free condensed-module functors and free sheaf presentations do not identify adic coefficient duals or cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorIso|mapHomologicalComplex.*homology|tensor.*homology|homology.*tensor",
+   "results": "18 hits; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole node: ShortComplex.homologyFunctorIso (read lines 773-783) assumes a functor preserving homology; it does not provide the coefficient realization or fibre comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact tensor functor with a flat locally free sheaf commutes with homology of complexes",
+   "results": "8 hits; Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.lTensor_exact, CategoryTheory.Functor.preservesHomology_of_map_exact, Module.Flat.rTensor_exact, CategoryTheory.Functor.preservesHomologyOfExact, CategoryTheory.Functor.PreservesHomology, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole node: Module.Flat tensor exactness and Functor.preservesHomologyOfExact supply general ingredients, but not the adic/common-stage realization, lisse dual and fibre comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "12 hits; CategoryTheory.Functor.mapHomologicalComplex, CategoryTheory.Functor.mapHomologicalComplex_reflects_iso, CategoryTheory.instPreservesZeroMorphismsHomologicalComplexMapHomologicalComplex, CategoryTheory.Functor.mapHomologicalComplex_obj_X, CategoryTheory.instFaithfulHomologicalComplexMapHomologicalComplex, CategoryTheory.Functor.mapHomologicalComplexIdIso, CategoryTheory.instAdditiveHomologicalComplexMapHomologicalComplex, CategoryTheory.instFullHomologicalComplexMapHomologicalComplexOfFaithful",
+   "date": "2026-10-17",
+   "verdict": "No match: termwise prolongation, not identification of adic lisse tensor with an exact functor or of adic duals."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perverse support and cosupport conditions are preserved by tensor product with a lisse sheaf of finite rank",
+   "results": "8 hits; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.free_internallyProjective_iff_tensor_condition, CategoryTheory.Sheaf.tensorProd_isSheaf, LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: light condensed monoidal instances, internally projective criteria and cartesian sheaf tensor, not perverse classes."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -130,5 +269,20 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-per-lisse-tensor-permanence",
+  "worker": "stage1",
+  "summary": "Retained the statement; expanded the support, Verdier-dual and integer-shift arguments. Isolated the adic cohomology/fibre and lisse-dual calculation in one statement-only node, rather than applying a discrete-coefficient theorem. Replaced the source proof's unnecessary support equality by containment, including rank zero.",
+  "blueprint": "Steps 1-2 realize the first sentence (exact lisse tensor, geometric fibres and support inequalities); Step 3 realizes the second sentence (Verdier duality and the lisse dual); Step 4 realizes the statement's final shifted-subcategory clause. The Fourier-exactness unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-327d9031a",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-327d9031a (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, cited statements, current/master blueprint proofs, Bhatt–Scholze pp. 58–62, and all coefficient definitions. Steps 1–4 are correct: adic tensor/cohomology fibres, support containment including rank zero, Verdier-dual lower bound, and signed shifts. Small cases and edge cases pass; no duplicate, cycle, route violation, SGA citation, or accepted tool_use. The new coefficient lemma is appropriately statement-only and unsplit. Review written to review.md. The report mentions citation/search sidecars absent from the packet, recorded as a delivery discrepancy only."
  }
 }

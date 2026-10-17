@@ -15,9 +15,72 @@
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
   "def-weil-pbc-ringed-site-section-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an object $U$ of $\\mathcal C$ and a section $f\\in\\mathcal I(U)$. Restriction of internal Hom to the slice identifies $H(K,N)|_U$ with $R\\mathcal Hom_{\\mathcal O_U}(K|_U,N|_U)$, using the localized ringed site and the exact slice restriction.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB, lemma-restriction-RHom-to-U; Tag 03DH, section-localize"
+   }
+  },
+  {
+   "text": "The tensor--internal-Hom adjunction on the slice gives a canonical isomorphism\n$$R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],R\\mathcal Hom_{\\mathcal O_U}(K|_U,N|_U))\\cong R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f]\\otimes^L_{\\mathcal O_U}K|_U,N|_U).$$\nThis is the currying identity for derived internal Hom, with the localization supplied by the section-localization definition.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-pbc-ringed-site-section-localization",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, lemma-internal-hom; algebraization.tex Tag 0996"
+   }
+  },
+  {
+   "text": "Put $S=\\mathcal O_U[1/f]$. Derived extension of scalars along $\\mathcal O_U\\to S$ gives $K|_U\\otimes^L_{\\mathcal O_U}S\\in D(S)$ by [lem-pur-derived-change-of-rings]. Its underlying $\\mathcal O_U$-object identifies with $S\\otimes^L_{\\mathcal O_U}K|_U$: on a K-flat representative $P$ the tensor interchange is $p\\otimes s\\mapsto s\\otimes p$, with no sign since $S$ is in degree zero. Since $N$ is locally derived $\\mathcal I$-complete, its localization Hom vanishes: $R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],N|_U)=0$. Apply [lem-sf-ringed-localization-rhom-orthogonality] on the slice to conclude\n$$R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f]\\otimes^L_{\\mathcal O_U}K|_U,N|_U)=0.$$",
+   "uses": [
+    "def-weil-pbc-locally-derived-ringed-ideal-complete",
+    "lem-sf-ringed-localization-rhom-orthogonality",
+    "def-weil-pbc-ringed-site-section-localization",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099A, lemma-derived-complete-internal-hom, proof; Tag 0997, lemma-hom-from-Af; sites-cohomology.tex Tag 06YY, lemma-derived-base-change (identity underlying topos, coefficient map O_U to S)"
+   }
+  },
+  {
+   "text": "Combining the slice restriction from Step 1, the currying isomorphism of Step 2, and the vanishing of Step 3 gives $R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],H(K,N)|_U)=0$. Since this holds for every $U$ and every $f\\in\\mathcal I(U)$, the defining criterion says that $H(K,N)$ is locally derived $\\mathcal I$-complete.",
+   "uses": [
+    "def-weil-pbc-locally-derived-ringed-ideal-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099A, lemma-derived-complete-internal-hom; Definition 0999"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-ringed-site-section-localization",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-ringed-localization-rhom-orthogonality",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099A, lemma-derived-complete-internal-hom; proof via Tags 0996 and 0997 and the tensor--internal-Hom adjunction."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-rational-thick-evaluation",
@@ -75,5 +138,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-ringed-rhom-derived-complete",
+  "worker": "stage1",
+  "summary": "Read the Stacks Tag 099A proof and checked that the imported statement is the unrestricted ringed-site local-completeness assertion. The split uses slice restriction and the derived tensor--internal-Hom adjunction, then the Tag 0996/0997 localization orthogonality calculation supplied as a strict auxiliary node. No hypotheses on boundedness, finite generation, finite-type ideals, or flatness were added.",
+  "blueprint": "Realizes the parent proof's clause that the target of the evaluation map is complete when extending through derived completion, using the rational-thick evaluation route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "The item uses its generic ringed-site slice restriction and tensor--internal-Hom adjunction; the dualizable-biduality unit has no replacement for this ambient calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N9-39adfe6d5",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-39adfe6d5 (reviewer sub-agent of L); spot-checked: Read the mathematics in full against Stacks 0996, 0997, 0999, 099A, 08J9 and 08JB. Repaired the localized-tensor coefficient citation, restriction-of-scalars dependency, and auxiliary audit metadata. Statements remain unchanged. Corrected files and concrete checks are recorded in fixes/ and review.md; dependency closure is acyclic. Accepted the declared internal-Hom calculus tool use.; 2 file(s) fixed by the reviewer"
  }
 }

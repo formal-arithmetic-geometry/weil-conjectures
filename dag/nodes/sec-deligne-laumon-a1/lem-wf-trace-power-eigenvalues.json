@@ -1,0 +1,127 @@
+{
+ "id": "lem-wf-trace-power-eigenvalues",
+ "kind": "statement",
+ "title": "Trace of powers as the eigenvalue power sum",
+ "statement": "Let $K$ be an algebraically closed field, $V$ a finite-dimensional $K$-vector space, $r=\\dim_KV$, and $A:V\\to V$ a $K$-linear endomorphism. Use the characteristic polynomial $\\chi_A(T)=\\det(T-A\\mid V)$ of [def-weil-characteristic-polynomial] and the ordinary linear trace of [def-weil-endomorphism-trace]. The multiset of roots of $\\chi_A$ has cardinality $r$. If these roots, with algebraic multiplicity, are enumerated as $\\alpha_1,\\ldots,\\alpha_r$, then for every integer $n\\ge0$,\n$$\\operatorname{Tr}(A^n\\mid V)=\\sum_{j=1}^r\\alpha_j^n.$$\nNo semisimplicity assumption on $A$ is made; for $r=0$ the sum is empty.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
+  "place": "Proof, opening trace estimate; exact project declarations LinearMap.card_roots_charpoly and LinearMap.trace_pow_eq_sum_pow_roots_charpoly in WeilConjectures/Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean:68-69 and :84-122 (locations read in the available source checkout)"
+ },
+ "stmt_deps": [
+  "def-weil-characteristic-polynomial",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "trace_eq_sum.*(roots|eigen)|trace_pow.*eq|sum.*roots.*trace",
+   "results": "Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean; Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the n=1 trace-root formula and finite-characteristic special cases, not the all-n power-sum identity; the exact identity exists in the project extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace of a linear operator is the sum of the roots of its characteristic polynomial over an algebraically closed field",
+   "results": "Matrix.trace_eq_sum_roots_charpoly; Matrix.trace_eq_sum_roots_charpoly_of_splits; trace_eq_sum_roots; IntermediateField.AdjoinSimple.trace_gen_eq_sum_roots; LinearMap.IsSymmetric.trace_eq_sum_eigenvalues; Matrix.coeff_charpolyRev_eq_neg_trace; Matrix.trace_eq_neg_charpoly_coeff; Matrix.trace_eq_neg_charpoly_nextCoeff",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the n=1 trace-root formula and finite-characteristic special cases, not the all-n power-sum identity; the exact identity exists in the project extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace, Polynomial.roots",
+   "results": "Module.End.trace_eq_sum_roots_charpoly_of_splits",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the n=1 trace-root formula and finite-characteristic special cases, not the all-n power-sum identity; the exact identity exists in the project extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace of an endomorphism of a finite dimensional vector space over an algebraically closed field is the sum of its eigenvalues with multiplicity",
+   "results": "Matrix.trace_eq_sum_roots_charpoly; Matrix.trace_eq_sum_roots_charpoly_of_splits; LinearMap.trace_one; LinearMap.trace_id; Algebra.trace_algebraMap_of_basis; LinearMap.trace; LinearMap.IsSymmetric.trace_eq_sum_eigenvalues; Algebra.trace_eq_matrix_trace",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the n=1 trace-root formula and finite-characteristic special cases, not the all-n power-sum identity; the exact identity exists in the project extension"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_pow|trace.*pow.*sum|sum.*pow.*trace|eigenvalues.*pow",
+   "results": "Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the n=1 trace-root formula and finite-characteristic special cases, not the all-n power-sum identity; the exact identity exists in the project extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"pow\"",
+   "results": "PowerBasis.trace_gen_eq_nextCoeff_minpoly; PowerBasis.trace_gen_eq_sum_roots; Module.Basis.traceDual_powerBasis_eq; Algebra.traceForm_toMatrix_powerBasis; FiniteField.algebraMap_trace_eq_sum_pow; FiniteField.trace_pow_card; ZMod.trace_pow_card; LucasLehmer.X.ω_pow_trace",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the n=1 trace-root formula and finite-characteristic special cases, not the all-n power-sum identity; the exact identity exists in the project extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace of the nth power of a matrix equals the sum of nth powers of its eigenvalues with algebraic multiplicity",
+   "results": "FiniteField.trace_pow_card; ZMod.trace_pow_card; Matrix.trace_eq_sum_roots_charpoly; Matrix.traceLinearMap_apply; Matrix.trace_eq_neg_charpoly_coeff; Matrix.trace_eq_sum_roots_charpoly_of_splits; Matrix.trace_eq_neg_charpoly_nextCoeff; Matrix.isNilpotent_trace_of_isNilpotent",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the n=1 trace-root formula and finite-characteristic special cases, not the all-n power-sum identity; the exact identity exists in the project extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any endomorphism f of a finite dimensional vector space over an algebraically closed field the trace of f power m is the sum of the mth powers of characteristic polynomial roots",
+   "results": "Matrix.trace_eq_sum_roots_charpoly; Module.End.HasEigenvalue.pow; trace_eq_sum_roots; Matrix.trace_eq_sum_roots_charpoly_of_splits; Module.End.HasEigenvector.pow_apply; Module.End.hasEigenvalue_iff_isRoot_charpoly; LinearMap.IsSymmetric.trace_eq_sum_eigenvalues; LinearMap.charpoly",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the n=1 trace-root formula and finite-characteristic special cases, not the all-n power-sum identity; the exact identity exists in the project extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-l2-upper",
+  "date": "2026-10-17",
+  "group": "NR"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-l2-upper",
+   "place": "Proof, opening sentence and first inequality: express the trace of a local Frobenius power as the power sum of its eigenvalues",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "LinearMap.card_roots_charpoly",
+     "module": "WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs",
+     "lines": [
+      68,
+      69
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "LinearMap.trace_pow_eq_sum_pow_roots_charpoly",
+     "module": "WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs",
+     "lines": [
+      84,
+      122
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
+}

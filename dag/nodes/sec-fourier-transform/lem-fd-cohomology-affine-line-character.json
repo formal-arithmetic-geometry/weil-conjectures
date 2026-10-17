@@ -3,44 +3,147 @@
  "blueprint": {
   "is": "lem-fd-cohomology-affine-line-character",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology of an affine line with an exponential sheaf",
- "statement": "Let $k$ be finite or algebraically closed, let $a\\in k$, and let $\\psi_a(x)=\\psi(ax)$. Over $\\mathbf A^1_k$,\n\n$$\nH^q(\\mathbf A^1_{\\bar k},\\mathcal L_{\\psi_a})=\\begin{cases}\\overline{\\mathbf Q}_\\ell,&q=0,\\ a=0,\\\\0,&\\text{otherwise.}\\end{cases}\n$$",
+ "statement": "Fix distinct primes $p,\\ell$ and a nontrivial additive character $\\Psi:(\\mathbf F_p,+)\\to\\overline{\\mathbf Q}_\\ell^\\times$. Let $k$ be a finite or algebraically closed field of characteristic $p$, let $a\\in k$, put $K=\\bar k$, and let $i\\geq0$. Use the adic coefficient category [def-weil-pbc-qbar-category]; $H^i$ means the $i$-th cohomology of its ordinary derived global-section complex. On $\\mathbf A^1_k$, let $\\mathcal L_{\\psi_a}=\\mathcal L_{\\Psi,ax}$ be the pullback of the prime-field Artin–Schreier sheaf of [sk-def-as], applied with the finite field $\\mathbf F_p$ and coefficient ring $\\overline{\\mathbf Q}_\\ell$. Thus it is the $\\Psi$-isotypic summand of the covering $T^p-T=ax$. For finite $k$, the notation is $\\psi_a(x)=\\psi(ax)$ with $\\psi=\\Psi\\circ\\operatorname{Tr}_{k/\\mathbf F_p}$; over algebraically closed $k$ the notation denotes this same prime-field sheaf construction, not a field trace from $k$ to $\\mathbf F_p$. Then\n$$\nH^i(\\mathbf A^1_K,\\mathcal L_{\\psi_a})\\cong\n\\begin{cases}\\overline{\\mathbf Q}_\\ell,&i=0,\\ a=0,\\\\0,&\\text{otherwise.}\\end{cases}\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.md",
   "place": "node lem-fd-cohomology-affine-line-character, order 2686"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-as",
+  "def-weil-pbc-qbar-category"
+ ],
  "proof": [
   {
-   "text": "The covering $\\pi:\\mathbf A^1_y\\to\\mathbf A^1_x$, $x=y^p-y$, of [lem-fd-as-cover-affine-line] is finite, so by [lem-fd-finite-pushforward-cohomology] and the isotypic decomposition of [lem-fd-as-characters],\n\n$$\n\\bigoplus_{\\chi\\in\\widehat{\\mathbf F}_p}H^q(\\mathbf A^1_x,\\mathcal L_\\chi)\\cong H^q(\\mathbf A^1_x,\\pi_*\\overline{\\mathbf Q}_\\ell)\\cong H^q(\\mathbf A^1_y,\\overline{\\mathbf Q}_\\ell),\n$$\n\nwhich is $\\overline{\\mathbf Q}_\\ell$ in degree $0$ and $0$ above by [lem-fd-affine-line-constant-cohomology]. The $\\mathbf F_p$-action of [lem-fd-as-cover-affine-line], $y\\mapsto y+a$, acts trivially on $H^0(\\mathbf A^1_y,\\overline{\\mathbf Q}_\\ell)$ (the automorphism pulls back the constant sheaf to itself), so in degree $0$ only the component $\\chi=0$ survives, and the component $\\chi=0$ is the constant sheaf (the deck-invariant subsheaf of $\\pi_*\\overline{\\mathbf Q}_\\ell$). Here $\\mathcal L_{\\psi_a}=\\mathcal L_{\\psi(ax)}=\\mathcal L_{\\psi,ax}$. For $a\\neq0$ the automorphism $m_a:x\\mapsto ax$ of the line satisfies $m_a^*\\mathcal L_{\\psi,x}=\\mathcal L_{\\psi,ax}$ (the Artin–Schreier covering of $ax$ is the pullback of that of $x$), so $H^q(\\mathbf A^1,\\mathcal L_{\\psi_a})\\cong H^q(\\mathbf A^1,\\mathcal L_{\\psi,x})$; and $\\mathcal L_{\\psi,x}$ is the component $\\mathcal L_\\chi$ with $\\chi=\\Psi\\neq0$ of the decomposition above for $f=x$ ([lem-fd-as-characters], [lem-fd-as-lisse]), so all its cohomology vanishes. For $a=0$, $\\mathcal L_{\\psi,0}$ is the constant sheaf (the covering is the trivial torsor) and [lem-fd-affine-line-constant-cohomology] gives $\\overline{\\mathbf Q}_\\ell$ in degree $0$ and $0$ above.",
+   "text": "Work over $K=\\bar k$. By [lem-fd-as-cover-affine-line], the cover for the coordinate $x$ is $\\pi:\\mathbf A^1_{K,y}\\to\\mathbf A^1_{K,x}$, $x=y^p-y$, with translations $\\sigma_b(y)=y+b$ for $b\\in\\mathbf F_p$; its finite etale torsor property is [lem-fd-as-cover]. Apply [lem-fd-as-characters] to obtain $\\pi_*\\overline{\\mathbf Q}_\\ell=\\bigoplus_\\chi\\mathcal L_\\chi$. With the prime-field definition [sk-def-as], $\\mathcal L_{\\Psi,x}$ is precisely the summand on which $\\sigma_b$ acts by $\\Psi(b)$. All these objects descend to a finite extension $E/\\mathbf Q_\\ell$ containing the $p$-th roots of unity: the defining coefficients $p^{-1}\\Psi(-b)$ lie in $\\mathcal O_E$, since $p\\ne\\ell$. Hence the constant lattice and its character projectors give compatible finite free lisse coefficient systems. The finite-etale exchange of [lem-fd-finite-etale-adic-cohomology], applied to the prime-field cover and its pullback to $K$, identifies the pulled-back character summand in [sk-def-as] with this isotypic summand. All schemes in this square are noetherian of finite dimension, and $\\ell$ is invertible on them.",
    "uses": [
     "lem-fd-as-cover-affine-line",
-    "lem-fd-finite-pushforward-cohomology",
+    "lem-fd-as-cover",
     "lem-fd-as-characters",
-    "lem-fd-affine-line-constant-cohomology",
-    "lem-fd-as-lisse"
+    "sk-def-as",
+    "lem-fd-finite-etale-adic-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.proof.md",
+    "place": "Proof, Artin–Schreier cover and its cohomology"
+   }
+  },
+  {
+   "text": "Apply [lem-fd-finite-etale-adic-cohomology] with $Y=\\mathbf A^1_{K,y}$, $X=\\mathbf A^1_{K,x}$ and the constant coefficient system. It gives $H^i(X,\\pi_*\\overline{\\mathbf Q}_\\ell)\\cong H^i(Y,\\overline{\\mathbf Q}_\\ell)$ and identifies the action of every deck translation on both sides. The hypotheses hold: both lines are noetherian and finite-dimensional, $\\ell$ is invertible on them, and Step 1 supplies the finite etale map and coefficient system. This comparison uses adic coefficients throughout; the torsion-only statement lem-fd-finite-pushforward-cohomology is not applied directly to rational coefficients.",
+   "uses": [
+    "lem-fd-finite-etale-adic-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.proof.md",
+    "place": "Proof, Artin–Schreier cover and its cohomology"
+   }
+  },
+  {
+   "text": "Finite direct-sum inclusions $j_\\chi$ and projections $r_\\chi$ satisfy $r_\\chi j_{\\chi'}=\\delta_{\\chi\\chi'}$ and $\\sum_\\chi j_\\chi r_\\chi=1$. Applying the additive cohomology functor preserves these identities, so Step 1 and Step 2 give $\\bigoplus_\\chi H^i(X,\\mathcal L_\\chi)\\cong H^i(Y,\\overline{\\mathbf Q}_\\ell)$. By [lem-fd-affine-line-constant-cohomology] the right side is zero for $i>0$. Each summand is then zero, because its identity factors through that zero group.",
+   "uses": [
+    "lem-fd-affine-line-constant-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.proof.md",
+    "place": "Proof, Artin–Schreier cover and its cohomology"
+   }
+  },
+  {
+   "text": "In degree zero, [lem-fd-affine-line-constant-cohomology] makes $H^0(Y,\\overline{\\mathbf Q}_\\ell)$ one-dimensional. The constant global section $1$ is nonzero (its value at $y=0$ is $1$), so it spans this group: every global section is a constant $c$. Pullback of a constant section $c$ by $y\\mapsto y+b$ is again $c$, so all translations act as the identity. On the image of $H^0(X,\\mathcal L_\\Psi)$, however, Step 1 makes $\\sigma_b$ multiplication by $\\Psi(b)$. Choose $b$ with $\\Psi(b)\\ne1$. Every vector $v$ in this image satisfies $(\\Psi(b)-1)v=0$, and this nonzero scalar is invertible in $\\overline{\\mathbf Q}_\\ell$, hence $v=0$. The inclusion is split by $H^0(r_\\Psi)$, so $H^0(X,\\mathcal L_{\\Psi,x})=0$. Together with Step 3 this gives vanishing for the nontrivial coordinate sheaf in every degree.",
+   "uses": [
+    "lem-fd-affine-line-constant-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.proof.md",
+    "place": "Proof, Artin–Schreier cover and its cohomology"
+   }
+  },
+  {
+   "text": "If $a\\ne0$, the maps $m_a(x)=ax$ and $m_{a^{-1}}(x)=a^{-1}x$ are inverse scheme automorphisms of $\\mathbf A^1_K$. By the pullback definition [sk-def-as], $\\mathcal L_{\\Psi,ax}=m_a^*\\mathcal L_{\\Psi,x}$. More explicitly, substituting $x\\mapsto ax$ in $K[x,T]/(T^p-T-x)$ gives $K[x,T]/(T^p-T-ax)$ and leaves every translation $T\\mapsto T+b$ unchanged, hence leaves the character projector unchanged. An isomorphism identifies the small sites by $U\\mapsto U\\times_{m_a}\\mathbf A^1_K$ with inverse given by $m_{a^{-1}}$, preserving coverings and the terminal object. It therefore relabels the sheaf categories, their resolutions and global-section complexes; the same relabeling applies to coefficient towers and their rationalizations. Thus $H^i(\\mathbf A^1_K,m_a^*F)\\cong H^i(\\mathbf A^1_K,F)$. Take $F=\\mathcal L_{\\Psi,x}$ and apply Steps 3–4.",
+   "uses": [
+    "sk-def-as",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.proof.md",
+    "place": "Proof, Artin–Schreier cover and its cohomology"
+   }
+  },
+  {
+   "text": "If $a=0$, the cover $T^p-T=0$ splits as $\\coprod_{b\\in\\mathbf F_p}\\mathbf A^1_K$, since $T^p-T=\\prod_b(T-b)$ and distinct roots differ by a unit. Its pushforward consists of functions on $\\mathbf F_p$ with values in the constant coefficient sheaf. The functions satisfying $v(b+c)=\\Psi(c)v(b)$ are exactly $v(b)=\\Psi(b)v(0)$; evaluation at zero identifies this summand with the constant rank-one sheaf. The finite-etale exchange [lem-fd-finite-etale-adic-cohomology] identifies the zero pullback in [sk-def-as] with the character summand of this split cover. By the isotypic definition this is $\\mathcal L_{\\Psi,0}$. Now [lem-fd-affine-line-constant-cohomology] gives $\\overline{\\mathbf Q}_\\ell$ in degree zero and zero above. Along with Step 5 this is the asserted formula.",
+   "uses": [
+    "sk-def-as",
+    "lem-fd-affine-line-constant-cohomology",
+    "lem-fd-finite-etale-adic-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.proof.md",
+    "place": "Proof, Artin–Schreier cover and its cohomology"
+   }
   }
  ],
  "proof_deps": [
-  "lem-fd-as-cover-affine-line",
-  "lem-fd-finite-pushforward-cohomology",
-  "lem-fd-as-characters",
   "lem-fd-affine-line-constant-cohomology",
-  "lem-fd-as-lisse"
+  "lem-fd-as-characters",
+  "lem-fd-as-cover",
+  "lem-fd-as-cover-affine-line",
+  "lem-fd-finite-etale-adic-cohomology",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "sk-def-as"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.proof.md",
+  "place": "Entire proof, coefficient-domain repair and expanded zero/scaling cases"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "artinSchreier.*[Cc]ohomology|cohomology.*artinSchreier|Artin.Schreier",
+   "results": "Hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this etale/adic cohomological assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a nontrivial exponential local system on the affine line is zero",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, cohomology",
+   "results": "Hits: none. loogle: unknown identifier 'cohomology'",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this etale/adic cohomological assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of the affine line with a nontrivial Artin Schreier character sheaf vanishes",
+   "results": "Hits: groupCohomology.Hilbert90.aux_ne_zero, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.SubmersivePresentation.subsingleton_h1Cotangent, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallySmooth.subsingleton_h1Cotangent, groupCohomology.H1ofAutOnUnitsUnique, Algebra.formallyEtale_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this etale/adic cohomological assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All cohomology groups of a nontrivial rank one Artin Schreier local system on affine one space over an algebraically closed field are zero",
+   "results": "Hits: groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, isZero_groupCohomology_succ_of_subsingleton, Rep.FiniteCyclicGroup.groupCohomologyIso₀, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.SubmersivePresentation.subsingleton_h1Cotangent, groupCohomology.H1IsoOfIsTrivial, Algebra.IsStandardSmooth.subsingleton_h1Cotangent",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this etale/adic cohomological assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -103,5 +206,29 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fd-cohomology-affine-line-character",
+  "worker": "stage1",
+  "summary": "Made the standing characteristic and nontrivial-character conventions explicit; split the cover, adic Leray comparison, positive-degree summand argument, degree-zero eigenvector argument, scaling and zero cases. Added one statement-only finite-etale adic comparison node instead of applying a torsion result to rational coefficients. Current Lean proves only a finite-domain variant through sorry lemmas, and its audit is stale.",
+  "blueprint": "Current blueprint proof first formula is Steps 1–3; trivial deck action and nontrivial isotypic vanishing are Step 4; the scaling sentence is Step 5; the final trivial-torsor case is Step 6. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic exact equivalence of small pro-etale sites for a scheme isomorphism supplies the coefficient-compatible relabelling and derived global-section invariance used in the scaling step; the Fourier unit has no more specific automorphism-cohomology node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q59-650a30817",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-650a30817 (reviewer sub-agent of L); spot-checked: The mathematics and hypotheses check out, including finite/adically compatible coefficients and Stacks Tags 03QP/0959. Step 5 incorrectly marked scheme-isomorphism invariance of derived adic global sections elementary and lacked a citation. Corrected DAG JSON records the existing site-isomorphism lemma as a generic tool, updates proof dependencies, and marks only the finite-direct-sum step elementary. Repair: fixes/dag/nodes/sec-fourier-transform/lem-fd-cohomology-affine-line-character.json.; 1 file(s) fixed by the reviewer"
  }
 }

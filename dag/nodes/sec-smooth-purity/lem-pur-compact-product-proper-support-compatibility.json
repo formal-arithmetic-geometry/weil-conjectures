@@ -21,9 +21,80 @@
   "def-pur-supported-cup",
   "lem-pur-supported-cup-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [prop-compactification-refinement] to the separated finite-type maps $X\\to\\operatorname{Spec}k$ and $Y\\to\\operatorname{Spec}k$ to choose proper compactifications $j_X:X\\hookrightarrow\\overline X$ and $j_Y:Y\\hookrightarrow\\overline Y$ over $k$. Apply [lem-pur-ordinary-kunneth-finite-ring] to the extension-by-zero complexes $j_{X,!}K$ and $j_{Y,!}L$ on the proper compactifications. Its canonical exterior-product isomorphism identifies the tensor of their derived global sections with the derived sections of the tensor on $\\overline X\\times_k\\overline Y$. The compatibility $(j_X\\times_kj_Y)_!(K\\boxtimes_A^L L)\\simeq j_{X,!}K\\boxtimes_A^Lj_{Y,!}L$ follows from the defining zero-extension presheaves after sheafification: on geometric stalks both sides are the derived tensor of the two factor stalks, hence are zero off $X\\times_kY$ and agree with $K\\boxtimes_A^LL$ on that open; K-flat resolutions and exactness of extension by zero make this a derived isomorphism. The definition of the ordinary etale compact-support functor [def-amb-etale-compact-support] then identifies the source and target with $R\\Gamma_c(X,K)\\otimes_A^LR\\Gamma_c(Y,L)$ and $R\\Gamma_c(X\\times_kY,K\\boxtimes_A^LL)$, respectively. This is precisely $\\kappa_c$, and naturality follows from naturality of the Kunneth arrow and compactification comparisons.",
+   "uses": [
+    "lem-pur-ordinary-kunneth-finite-ring",
+    "def-amb-etale-compact-support",
+    "def-weil-pbc-extension-by-zero",
+    "prop-compactification-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 1: compact-support Kunneth"
+   }
+  },
+  {
+   "text": "Put $M=R\\Gamma_Z(X,K)$ and $N=R\\Gamma_W(Y,L)$. Because $Z$ and $W$ are proper over $k$, the composites $Z\\to X\\hookrightarrow\\overline X$ and $W\\to Y\\hookrightarrow\\overline Y$ are proper immersions (closed immersion followed by open immersion is an immersion, and the source is proper over $k$); a proper immersion is a closed immersion. The product support is likewise proper and closed. For the closed-support adjunctions $C_i\\dashv R\\Gamma_Z$ and $C_j\\dashv R\\Gamma_W$, the maps $u_Z$ and $u_W$ are the units to the compactly supported direct images followed by the counits $C_i(M)\\to K$ and $C_j(N)\\to L$. The explicit construction of the supported exterior product [def-pur-supported-exterior-product] says that $\\kappa^{Z,W}$ is the adjoint of $C_{Z\\times W}(M\\otimes_A^LN)\\to p_X^*C_i(M)\\otimes_A^Lp_Y^*C_j(N)\\to K\\boxtimes_A^LL$. After identifying $R\\Gamma_c(X,C_i(M))$ and $R\\Gamma_c(Y,C_j(N))$ with $R\\Gamma(Z,\\underline M_Z)$ and $R\\Gamma(W,\\underline N_W)$, the two composites in the displayed equation are adjoints of this same morphism, by functoriality of tensor products and of the three counits. Hence $u_{Z\\times W}\\circ\\kappa^{Z,W}=\\kappa_c\\circ(u_Z\\otimes_A^Lu_W)$ in $D(A)$. Taking cohomology gives the stated description of $u_Z$ on a supported morphism.",
+   "uses": [
+    "def-pur-supported-exterior-product",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 1: product of localized classes and compatibility with proper support"
+   }
+  },
+  {
+   "text": "Let $j:X\\hookrightarrow\\overline X$ be any open compactification and let $j_{\\mathrm{ext}}K$ be a bounded-below extension with $j^*j_{\\mathrm{ext}}K\\cong K$. Excision for sections with support is the standard cone calculation: the support complex is the cone of restriction to the open complement, equivalently the cone description of [lem-amb-closed-support-hom], and restriction along the open neighbourhood $X$ of $Z$ identifies the two cones. Thus $R\\Gamma_Z(\\overline X,j_{\\mathrm{ext}}K)\\cong R\\Gamma_Z(X,K)$. Since $Z$ is closed in $\\overline X$, the extension-by-zero map $j_!K\\to j_{\\mathrm{ext}}K$ induces the second arrow $R\\Gamma_c(X,K)\\to R\\Gamma(\\overline X,j_{\\mathrm{ext}}K)$. Under the excision identification, the composite from $R\\Gamma_Z(X,K)$ through $u_Z$ and this arrow is exactly the map obtained by forgetting support, so it is the claimed inverse followed by forgetting support. All identifications are natural in the extension and in $K$.",
+   "uses": [
+    "lem-amb-closed-support-hom",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 1: compatibility with forgetting support in the compactification"
+   }
+  },
+  {
+   "text": "For $K=A(r)_X$ and $L=A(s)_Y$, the twist multiplication from [def-coefficient-twists-detailed] identifies $K\\boxtimes_A^LL$ with $A(r+s)_{X\\times_kY}$. Represent $\\alpha$ and $\\beta$ by the supported morphisms used in [def-pur-supported-exterior-product]. The definition of the supported cup product [def-pur-supported-cup] is the same adjoint composite as the definition of $\\kappa^{Z,W}$, followed by the shift comparison and this twist multiplication; therefore $\\kappa^{Z,W}(\\alpha\\otimes\\beta)$ is $\\operatorname{pr}_X^*\\alpha\\cup\\operatorname{pr}_Y^*\\beta$. The pullback and cup compatibilities, including the even-degree sign, are exactly [lem-pur-supported-cup-functoriality]. For pro-etale realizations, [lem-pur-support-site-comparison] gives the equality of the supported exterior-product maps under the canonical tensor comparison, while [lem-sf-class-compact-support-comparison] gives the corresponding comparison for compact-support direct images. Combining these natural comparison squares proves the final agreement clause for all stated witnesses and supports.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-pur-supported-exterior-product",
+    "def-pur-supported-cup",
+    "lem-pur-supported-cup-functoriality",
+    "lem-pur-support-site-comparison",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 1: product of localized Kummer classes and etale-to-pro-etale comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-coefficient-twists-detailed",
+  "def-pur-supported-cup",
+  "def-pur-supported-exterior-product",
+  "def-weil-pbc-extension-by-zero",
+  "lem-amb-closed-support-hom",
+  "lem-pur-ordinary-kunneth-finite-ring",
+  "lem-pur-support-site-comparison",
+  "lem-pur-supported-cup-functoriality",
+  "lem-sf-class-compact-support-comparison",
+  "prop-compactification-refinement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+  "place": "Step 1, expanded with the finite-ring ordinary Kunneth refinement, proper-support adjunction, excision, and site comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-projective-bundle-formula",
@@ -79,5 +150,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-compact-product-proper-support-compatibility",
+  "worker": "stage1",
+  "summary": "Audited the imported compact-support/support-compatibility statement against the current project definitions and the main-20261015 projective-bundle proof. No new DAG nodes were needed: finite-ring compact Kunneth is supplied by lem-pur-ordinary-kunneth-finite-ring, the supported map is the explicit adjoint in def-pur-supported-exterior-product, and cup and etale/pro-etale comparison are supplied by existing comparison nodes. Wrote four complete proof steps covering compactification Kunneth, proper-support units and their tensor compatibility, excision in a compactification, and twist/cup/site comparison.",
+  "blueprint": "Realizes Step 1 of thm-pur-projective-bundle-formula.proof.md: compact-support Kunneth, product of supported classes, compatibility with proper support, and compatibility with forgetting support; the final step expands the finite-ring and etale-to-pro-etale refinements named by the item.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ordinary-kunneth-finite-ring",
+    "why": "The unit route needs the finite coefficient-ring refinement of compact Kunneth; the sk-prop-an unit has no independent Kunneth theorem."
+   },
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "The excision step uses the generic cone description of derived sections with support, which is a foundational support tool outside sk-prop-an."
+   },
+   {
+    "node": "lem-pur-support-site-comparison",
+    "why": "The final witness-independent etale-to-pro-etale equality uses the canonical support comparison, which is supplied by the comparison unit rather than sk-prop-an."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "The final compact-support comparison uses the etale/pro-etale compact-support comparison theorem from the compact-support existence unit."
+   },
+   {
+    "node": "lem-pur-supported-cup-functoriality",
+    "why": "The final cup-product pullback and sign laws are generic support-operation tools supplied by the Kummer unit."
+   },
+   {
+    "node": "prop-compactification-refinement",
+    "why": "Existence of proper compactifications for separated finite-type schemes over k is supplied by the Nagata compactification chapter, outside sk-prop-an."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ordinary-kunneth-finite-ring",
+  "lem-amb-closed-support-hom",
+  "lem-pur-support-site-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "lem-pur-supported-cup-functoriality",
+  "prop-compactification-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-f100e7c76",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-f100e7c76 (reviewer sub-agent of L); spot-checked: Statement and route are mathematically sound, with no new nodes or target weakening. Repaired compactification existence, proper-immersion-to-closed-support reasoning, and derived extension-by-zero tensor compatibility in fixes/dag/nodes/sec-smooth-purity/lem-pur-compact-product-proper-support-compatibility.json; full review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

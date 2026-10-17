@@ -1,0 +1,78 @@
+{
+ "id": "lem-trf-point-reduction-unit-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "proof clause (4): the canonical completed stalk reduction, before composition with u; normalization of point sections against the reduction units",
+   "via": [
+    "lem-trf-completed-stalk-frobenius-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Point coefficient-reduction comparisons are normalized by scalar-extension units",
+ "statement": "Fix primes $p\\ne\\ell$, an integer $d\\ge1$, $k=\\overline{\\mathbf F}_{p^d}$ and $s=\\operatorname{Spec}k$ with its small pro-etale site [def-weil-pbc-proetale-site]. Fix a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $V=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=V/(\\varpi^n)$ [def-weil-l-adic-coefficient-extension]. Use the module derived categories [def-weil-abstract-derived-category], exact point sections $\\Gamma=\\Gamma(s,-)$ [lem-weil-point-proetale-sections-exact], and the completed sheaf $\\widehat V_s=\\lim_n(A_n)_s$ [def-weil-completed-integral-coefficients]. Consider either of the following coefficient maps and inputs:\n(1) $R=V$, $B=\\widehat V_s$, $T=A_n$, $B'=(A_n)_s$, and $N\\in D^b_c(s,V)$ [def-weil-derived-complete-integral-detailed];\n(2) $R=A_b$, $B=(A_b)_s$, $T=A_a$, $B'=(A_a)_s$, $b\\ge a\\ge1$, and $N\\in D(s_{\\mathrm{proet}},A_b)$ bounded above.\nAll coefficient maps are the specified quotient projections, and $\\Gamma(s,B)=R$, $\\Gamma(s,B')=T$ use constant values. Let $N_T=N\\otimes_B^L B'$ [lem-pur-derived-change-of-rings], and write $\\eta_N:N\\to\\operatorname{Res}_{B\\to B'}N_T$ and $\\eta_{\\Gamma N}:\\Gamma N\\to\\operatorname{Res}_{R\\to T}(\\Gamma N\\otimes_R^L T)$ for the scalar-extension units [lem-pur-sheaf-ring-derived-coefficient-adjunction]. The natural isomorphisms of [lem-pod-point-sections-derived-reduction] in (1) and [lem-trf-point-sections-finite-reduction] in (2) admit specified canonical choices $\\chi_N:\\Gamma N\\otimes_R^L T\\xrightarrow{\\sim}\\Gamma N_T$ characterized by\n$$\\operatorname{Res}_{R\\to T}(\\chi_N)\\circ\\eta_{\\Gamma N}=\\Gamma(\\eta_N).$$\nHere exact sections identify $\\Gamma\\operatorname{Res}_{B\\to B'}N_T$ with $\\operatorname{Res}_{R\\to T}\\Gamma N_T$. Thus the comparisons are the scalar-extension adjuncts of sections of the actual sheaf reduction units, not arbitrary natural isomorphisms between the same functors.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, label lemma-adjoint, with derived.tex Tags 0FND and 09T5 for derived adjunction normalization; additional agent-formulated normalization of the point comparison. Integral quotient construction: sites-modules.tex Tags 093M (lemma-completion-flat), 093J (lemma-constant-exact). Blueprint use: main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md, clause (4)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-abstract-derived-category",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-trf-point-sections-finite-reduction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections and extension of coefficient scalars preserve the normalized tensor restriction adjunction transpose",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendRestrictScalarsAdj.homEquiv. Read the module scalar adjunction formulas and ordinary sheaf pullback adjunction: these do not state the derived pro-etale point reduction unit comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "5 hits: SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. Read the module scalar adjunction formulas and ordinary sheaf pullback adjunction: these do not state the derived pro-etale point reduction unit comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(tensor|adjunction)|tensor.*(sections|adjunction)",
+   "results": "0 hits: . Read the module scalar adjunction formulas and ordinary sheaf pullback adjunction: these do not state the derived pro-etale point reduction unit comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer-reader",
+  "item": "lem-trf-completed-stalk-frobenius-reduction",
+  "date": "2026-10-17",
+  "group": "Q25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil"
+}

@@ -18,9 +18,124 @@
   "def-trf-frobenius-operators",
   "prop-trf-scheme-galois-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O_E$, $h=\\Phi^m$, $g=g_\\gamma^m$, and $Y=\\bar y:s\\to X$. For an integral object $M$ write $M_n=M\\otimes_R^LA_n$ and $S(M)=\\Gamma(s,LY^*M)$, using [def-weil-finite-coefficient-point]. By [lem-pur-integral-operations-preserve-constructible], $LY^*M$ is integral constructible and its canonical reduction is $LY_n^*M_n$. Compose this reduction map with the natural isomorphism of [lem-pod-point-sections-derived-reduction] at $N=LY^*M$ to obtain\n$$\\alpha_{M,n}:S(M)\\otimes_R^LA_n\\xrightarrow{\\sim}\\Gamma(s,LY_n^*M_n).$$\nThese are precisely the two canonical comparisons specified in the item. They are natural in integral morphisms $M\\to M'$. The same construction applies to $Lh^*K$ and $Lg^*K$, which are integral constructible by the pullback-preservation assertion. All schemes in these applications have $\\ell$ invertible, since they have characteristic $p\\ne\\ell$.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pod-point-sections-derived-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(4)*: reduction of the completed stalk and of its normalized transport, before composing with a coefficient morphism"
+   }
+  },
+  {
+   "text": "Put $P_n=S_n(K_n)$ and $Q_n=S_n(Lg_n^*K_n)$. Their quotient comparisons $\\sigma_P:r_{b,a}P_b\\simeq P_a$ and $\\sigma_Q:r_{b,a}Q_b\\simeq Q_a$, where $r_{b,a}=-\\otimes_{A_b}^LA_a$, come from the quotient tower [def-weil-pbc-adic-coefficient-datum], monoidality [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and finite point sections [lem-trf-point-sections-finite-reduction]. The point complexes are bounded: finite pullback is exact by [def-weil-derived-pullback-tensor-hom]. Thus the last theorem applies, including its three-index cocycle, without assuming $A_a$ flat over $A_b$. Write $I_n=\\iota_{K_n}$ and $B_n=S_n(\\kappa^{(m)}_{K_n})$, so $\\tau_n=B_nI_n$ by [def-trf-frobenius-operators]. Apply [lem-trf-fixed-stalk-identification-reduction] with $N=b,j=a,h=\\Phi^m,K=K_b,t=s$. Its hypotheses hold: $h$ is a $k$-endomorphism, $hY=Y$ is assumed, and $K_b$ is finite-Tor constructible. It gives $\\sigma_Hr_{b,a}(I_b)=I_a\\sigma_P$, where $H_n=S_n(Lh_n^*K_n)$. The square of [lem-trf-frobenius-coefficient-reduction-coherence], after point pullback and natural finite point sections, gives $\\sigma_Qr_{b,a}(B_b)=B_a\\sigma_H$. Therefore\n$$\\sigma_Qr_{b,a}(\\tau_b)=\\tau_a\\sigma_P.$$\nThis proves compatibility of the specified finite transports, not merely existence of unrelated maps with the same source and target.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-trf-point-sections-finite-reduction",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-trf-frobenius-operators",
+    "lem-trf-fixed-stalk-identification-reduction",
+    "lem-trf-frobenius-coefficient-reduction-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(4)*: reduction of the completed stalk and of its normalized transport, before composing with a coefficient morphism"
+   }
+  },
+  {
+   "text": "The completed pullback formula of [def-weil-derived-pullback-tensor-hom] gives $LY^*K$ as the specified functorial derived limit of $(LY_n^*K_n)_n$. For the target, apply [lem-pod-integral-pullback-composition] to $Y:s\\to X$ followed by $g:X\\to X$. It identifies $LY^*Lg^*K$ with the completed pullback along $gY$, with reductions exactly $LY_n^*Lg_n^*K_n$. Thus its defining limit has these finite terms and the same quotient transitions. Point sections carry both sheaf limits to module limits. To check this on the actual model, [lem-pur-integral-operations-well-defined] supplies the functorial shifted cone of $1-t$ on products, and [lem-weil-point-proetale-sections-exact] says termwise sections preserve quasi-isomorphisms. Products of module sheaves are evaluated componentwise; finite direct sums and differentials are likewise evaluated componentwise. Consequently sections carry $(x_n)\\mapsto(x_n-t_nx_{n+1})$ and its shifted cone to precisely the same formula on section complexes, including the projections. Hence\n$$S(K)\\simeq R\\!\\varprojlim P_n,\\qquad S(Lg^*K)\\simeq R\\!\\varprojlim Q_n.$$\nWrite their actual projections as $p_n,q_n$. Under these identifications the integral transport in the item is its stipulated derived-limit realization of $(\\tau_n)$, so $q_n\\tau_{y,m}=\\tau_np_n$. No construction of a lift from an arbitrary family of maps in a triangulated category is required.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pod-integral-pullback-composition",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(4)*: reduction of the completed stalk and of its normalized transport, before composing with a coefficient morphism"
+   }
+  },
+  {
+   "text": "We identify the adjoints of these projections with the canonical comparisons of step 1. On $s$, the pulled-back quotient towers are normalized: apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the quotient normalizations of [def-weil-pbc-adic-coefficient-datum]. Their coherent counits are isomorphisms by [lem-coef-normalized-dvr-effectivity]. The adjunction and projection normalization of [lem-coef-derived-system-evaluation-calculus] say that the counit at level $n$ is the scalar-extension adjoint of the actual limit projection. Thus these are the canonical pullback-reduction maps of [lem-pur-integral-operations-preserve-constructible], rather than arbitrary isomorphisms between the same objects. Use the normalized comparison $\\chi_N$ of [lem-trf-point-reduction-unit-normalization]. It satisfies $\\operatorname{Res}(\\chi_N)\\eta_{\\Gamma N}=\\Gamma(\\eta_N)$. If $e:N\\otimes_B^L B_n\\to N_n$ is adjoint to $c$, then $\\operatorname{Res}(e)\\eta_N=c$. Applying sections and substituting gives $\\operatorname{Res}(\\Gamma(e)\\chi_N)\\eta_{\\Gamma N}=\\Gamma(c)$. The adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction] therefore identifies $\\Gamma(e)\\chi_N$ with the adjunct of $\\Gamma(c)$, for every derived morphism $c$. Therefore $\\alpha_{K,n}$ is adjoint to $p_n$, and\n$$\\beta_n:=S_n(\\rho_{g,K,n})\\circ\\alpha_{Lg^*K,n}$$\nis adjoint to $q_n$. The comparison for the target is the one of step 3 because the integral composition theorem there identifies its reductions with finite pullback composition.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pod-point-sections-derived-reduction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-point-reduction-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(4)*: reduction of the completed stalk and of its normalized transport, before composing with a coefficient morphism"
+   }
+  },
+  {
+   "text": "Apply the natural adjunction bijection of [lem-pur-sheaf-ring-derived-coefficient-adjunction] on the one-object site, for $R\\to A_n$, to the equality $q_n\\tau_{y,m}=\\tau_np_n$ of step 3. The adjoint of its left side is $\\beta_n\\circ(\\tau_{y,m}\\otimes_R^LA_n)$, by naturality in the source. The adjoint of its right side is $\\tau_n\\circ\\alpha_{K,n}$, by naturality in the target. Equality of the adjoints is exactly\n$$\\beta_n\\circ(\\tau_{y,m}\\otimes_R^LA_n)=\\tau_{y,m,n}\\circ\\alpha_{K,n}.$$\nStep 4 identified both comparisons with those in the statement, including reduction of $Lg^*K$ on the target. This proves the asserted reduction square for every $n\\ge1$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(4)*: reduction of the completed stalk and of its normalized transport, before composing with a coefficient morphism"
+   }
+  },
+  {
+   "text": "For successive quotients $R\\to A_b\\to A_a$, use [lem-sfb-successive-derived-quotient-normalization]. Its associativity identifies two successive scalar extensions with the direct one and identifies their composite unit with the direct unit. The adjunction in [lem-pur-sheaf-ring-derived-coefficient-adjunction] then identifies both $\\sigma_P(\\alpha_{K,b}\\otimes_{A_b}^LA_a)$ and $\\alpha_{K,a}$ with the same projection $p_a$: the composite of $p_b$ and the transition to level $a$ is $p_a$. Here the finite sections comparison is the one of [lem-trf-point-sections-finite-reduction], natural and compatible with successive reductions; its unit normalization is supplied by [lem-trf-point-reduction-unit-normalization], so the adjunction calculation of step 4 applies also to the finite comparison. The identical argument gives $\\sigma_Q(\\beta_b\\otimes_{A_b}^LA_a)=\\beta_a$. Together with step 2 these identities prove compatibility with all transitions, including equal indices. For an integral morphism $f:K\\to K'$, the quotient tower is functorial by [def-weil-pbc-adic-coefficient-datum]; the natural $\\kappa^{(m)}$ of [prop-trf-scheme-galois-comparison] and natural pullback composition of [lem-pod-integral-pullback-composition] give the natural finite transport squares. The specified functorial limit realizes these squares, and the canonical counits and point-sections comparisons are natural. Thus $S(Lg^*f)\\tau_{y,m,K}=\\tau_{y,m,K'}S(f)$, and every reduction square above commutes with $f$.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-point-sections-finite-reduction",
+    "def-weil-pbc-adic-coefficient-datum",
+    "prop-trf-scheme-galois-comparison",
+    "lem-pod-integral-pullback-composition",
+    "lem-trf-point-reduction-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(4)*: reduction of the completed stalk and of its normalized transport, before composing with a coefficient morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-frobenius-operators",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-trf-fixed-stalk-identification-reduction",
+  "lem-trf-frobenius-coefficient-reduction-coherence",
+  "lem-trf-point-reduction-unit-normalization",
+  "lem-trf-point-sections-finite-reduction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-point-proetale-sections-exact",
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Clause (4), expanded using clause (2), finite fixed-stalk reduction, canonical normalized-system counits, and the tensor/restriction adjunction at the actual limit projections."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +178,45 @@
    "results": "8 hits; recorded top names: TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackIso, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.germ_stalkPullbackInv, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app.  None states the completed pro-etale stalk transport reduction theorem. Returned stalk maps are for Zariski structure sheaves or topological presheaves; sheaf module pullback composition does not identify the specified normalized Frobenius transport or its completed reductions.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*reduc|reduc.*stalk|frobenius.*stalk",
+   "results": "15 hits; top: Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/FunctionField.lean. Read results: these concern ordinary sheaf pullback composition, scheme structure-sheaf stalks, perfection or Witt-vector Frobenius, not derived-complete pro-etale stalk transport reduction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete stalk transport reduces to the finite coefficient Frobenius comparison",
+   "results": "8 hits; top: Perfection.coeff_frobenius, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, AlgebraicGeometry.Scheme.Hom.stalkMap, TopCat.Presheaf.stalkPushforward, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso. Read results: these concern ordinary sheaf pullback composition, scheme structure-sheaf stalks, perfection or Witt-vector Frobenius, not derived-complete pro-etale stalk transport reduction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits; top: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. Read results: these concern ordinary sheaf pullback composition, scheme structure-sheaf stalks, perfection or Witt-vector Frobenius, not derived-complete pro-etale stalk transport reduction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed geometric stalk Frobenius transport commutes with derived reduction modulo powers of a uniformizer",
+   "results": "8 hits; top: PreTilt.untilt_iterate_frobeniusEquiv_symm_pow, WittVector.StandardOneDimIsocrystal.frobenius_apply, AlgHom.IsArithFrobAt.localize, AlgHom.IsArithFrobAt.isArithFrobAt_localize, WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.FractionRing.frobeniusRingHom, AlgHom.IsArithFrobAt.localize_algebraMap, WittVector.instIsocrystalStandardOneDimIsocrystal. Read results: these concern ordinary sheaf pullback composition, scheme structure-sheaf stalks, perfection or Witt-vector Frobenius, not derived-complete pro-etale stalk transport reduction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic sheaf pullback and geometric point sections commute with inverse limits and derived coefficient change",
+   "results": "8 hits; top: AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.pullbackSpecIso_hom_base. Read results: these concern ordinary sheaf pullback composition, scheme structure-sheaf stalks, perfection or Witt-vector Frobenius, not derived-complete pro-etale stalk transport reduction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-rational-frobenius-integral-model",
@@ -83,5 +233,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-completed-stalk-frobenius-reduction",
+  "worker": "stage1",
+  "summary": "Expanded completed stalk transport into six steps. Reused existing finite Frobenius/fixed-stalk coherence, integral composition, canonical normalized-system counits and point-sections reduction. Identified canonical stalk reductions as adjoints of the actual limit projections, then proved the transport square by adjunction. Checked quotient and morphism coherence. No statement change and no new nodes. Maintainer repair: steps 4 and 6 now cite a statement-only point-reduction unit-normalization lemma; the transpose calculation is written using units, rather than pure tensors of an unspecified derived representative.",
+  "blueprint": "prop-trf-rational-frobenius-integral-model.proof.md clause (4), its completed-stalk reduction sentence before composition with u; clause (2) supplies the kappa compatibility. No part of the global-operator or rational-scaling clauses is substituted.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-pod-point-sections-derived-reduction",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-trf-fixed-stalk-identification-reduction",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-trf-point-sections-finite-reduction",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   },
+   {
+    "node": "prop-trf-scheme-galois-comparison",
+    "why": "Generic coefficient, point-sections or pullback-composition tool, used with its stated domain to check canonical reduction of the fixed-point transport. The sk-d-weil unit supplies no replacement for this tool and its Frobenius/stalk route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-trf-fixed-stalk-identification-reduction",
+  "lem-trf-point-sections-finite-reduction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-point-proetale-sections-exact",
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-5aa934fbc",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-5aa934fbc (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired C3/C4: steps 4 and 6 required point-reduction unit normalization absent from the cited statements. Added one searched, statement-only lemma and corrected item JSON under fixes/. Statement unchanged; step checks, edge cases, source locations and accepted tool uses are documented in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

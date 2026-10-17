@@ -1,0 +1,94 @@
+{
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "kind": "statement",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "MvPolynomial.funext_set",
+  "file": "Mathlib/Algebra/MvPolynomial/Funext.lean",
+  "how": "specializes in one line: contrapose funext_set (lines 57–72), with p=H, q=0 and each coordinate set k\\{0}, infinite since k is infinite. It gives an evaluation of H nonzero with every coordinate nonzero; m>=1 makes that vector nonzero. This is stronger than the stated homogeneous case; no homogeneity hypothesis is needed."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-constant-family-defect-finite-projection",
+  "date": "2026-10-17",
+  "group": "Q33"
+ },
+ "id": "lem-trf-infinite-field-top-form-direction",
+ "title": "A nonzero homogeneous form over an infinite field has a nonvanishing direction",
+ "statement": "Let $k$ be an infinite field [def-weil-field], let $m\\ge 1$, and let $H$ be a nonzero homogeneous polynomial in $k[x_1,\\ldots,x_m]$ [def-weil-pbc-mv-polynomial-ring]. There exists a nonzero vector $v\\in k^m$ with $H(v)\\ne0$ (equivalently, the one-dimensional subspace $kv$ is not contained in the zero locus of $H$).",
+ "source": {
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§3.2.4, the Noether-normalization direction choice (expanded elementary polynomial argument)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an infinite field and a nonzero homogeneous polynomial, there is a vector where the polynomial is nonzero.",
+   "results": "MvPolynomial.combinatorial_nullstellensatz_exists_eval_nonzero; Polynomial.exists_eval_ne_zero_of_natDegree_lt_card; Polynomial.zero_of_eval_zero; none states the unrestricted multivariate infinite-field specialization in this form.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.eval_nonzero, Polynomial.eval₂_ne_zero",
+   "results": "No hits; service reported unknown identifier MvPolynomial.eval_nonzero.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eval.*nonzero|infinite.*field.*polynomial [Mathlib/Algebra/MvPolynomial]",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero polynomial over an infinite field does not vanish at every point.",
+   "results": "Polynomial.zero_of_eval_zero; Polynomial.exists_eval_ne_zero_of_natDegree_lt_card; MvPolynomial.funext. These require a univariate polynomial or give equality from all evaluations, and do not state the homogeneous multivariate lemma directly.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero multivariate polynomial over an infinite field has a nonvanishing evaluation.",
+   "results": "MvPolynomial.combinatorial_nullstellensatz_exists_eval_nonzero; Polynomial.zero_of_eval_zero; MvPolynomial.funext; no exact unrestricted statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eval₂Hom.*eq_zero|eval.*eq_zero [Mathlib/Algebra/MvPolynomial]",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Read MvPolynomial.funext_set and funext in Mathlib/Algebra/MvPolynomial/Funext.lean, lines 29–90",
+   "results": "funext_set (57–72) holds over a commutative integral domain on any box of infinite subsets. Contraposition with H and 0 on (k\\{0})^m gives the stated nonzero vector. funext is at lines 83–86.",
+   "date": "2026-10-17",
+   "verdict": "match: one-line specialization of MvPolynomial.funext_set"
+  }
+ ],
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof paragraph (1): choose a direction on which the top homogeneous part of a nonzero equation does not vanish.",
+   "via": [
+    "lem-trf-constant-family-defect-finite-projection",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

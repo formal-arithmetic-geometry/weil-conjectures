@@ -1,119 +1,260 @@
 {
-  "id": "lem-wf-l2-upper",
-  "blueprint": {
-    "is": "lem-wf-l2-upper",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The $L^2$-weight is at most the weight",
-  "statement": "Let $\\mathcal F$ be a lisse Weil sheaf of rank $r$ on the affine\ncurve $X_0$, punctually $\\iota$-mixed of weights at most $w$.\nThen\n\n$$\n\\|\\mathcal F\\|\\le w.\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
-    "place": "node lem-wf-l2-upper, order 2760"
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "At $y\\in X_0(k_m)$ the eigenvalues of the Frobenius $F_y^{(m)}$\nare the $m/d(y)$-th powers of the local eigenvalues at the closed\npoint below, hence have modulus at most $q^{mw/2}$ by the punctual\nbounds of [def-weil-punctual-weights]; therefore\n\n$$\n\\|f_{\\mathcal F}\\|_m^2\\le r^2\\cdot\\#X_0(k_m)\\cdot q^{mw}\n\\le C\\,q^{m(w+1)}\n$$\n\nfor a constant $C$ (the point-count bound of the affine curve,\n[lem-wf-point-count-linear-growth] of the basic-weight chapter). The\n$\\limsup$ in [def-wf-l2-norm] is therefore $0$ for\n$\\beta>w$, hence $\\|\\mathcal F\\|\\le w$.",
-      "uses": [
-        "def-weil-punctual-weights",
-        "lem-wf-point-count-linear-growth",
-        "def-wf-l2-norm"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-wf-l2-upper",
+ "blueprint": {
+  "is": "lem-wf-l2-upper",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The $L^2$-weight is at most the weight",
+ "statement": "Fix $k_0=\\mathbf F_q$, its algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}k_0$, the coefficient field $\\Qlb=\\overline{\\mathbf Q}_\\ell$, and $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$ as in [def-weil-punctual-weights]. Let $X_0$ be a smooth geometrically connected affine curve over $k_0$ (with the curve conventions of [sk-d-real-setup]). Let $\\mathcal F$ be a lisse Weil $\\Qlb$-sheaf of rank $r$ on $X_0$ as in [sk-d-real-weil], punctually $\\iota$-mixed of weights at most $w\\in\\mathbf R$ in the sense of [def-weil-punctual-weights]. Then the $L^2$-weight parameter of [def-wf-l2-norm] satisfies\n$$\\|\\mathcal F\\|\\le w.$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
+  "place": "node lem-wf-l2-upper, order 2760"
+ },
+ "stmt_deps": [
+  "def-weil-punctual-weights",
+  "sk-d-real-setup",
+  "sk-d-real-weil",
+  "def-wf-l2-norm"
+ ],
+ "proof": [
+  {
+   "text": "Fix a closed point $x$ of degree $e\\ge1$ and put $q_x=q^e$. Take the finite mixed filtration $0=\\mathcal F_0\\subset\\cdots\\subset\\mathcal F_s=\\mathcal F$ with pure quotients of weights $w_i\\le w$, supplied by [def-weil-punctual-weights]. By [lem-wf-rational-stalk-exact], its stalk at $\\bar x$ is a filtration by Frobenius-stable subspaces, whose successive quotients are the stalks of those sheaf quotients. At each stage [lem-a1-spectrum-exact-sequence] says that the eigenvalue multiset is the union of the preceding subspace's and quotient's spectra. Starting with the zero subspace and repeating this for $i=1,\\ldots,s$ shows that every eigenvalue $\\alpha$ of $F_x$ occurs in a pure quotient. Thus $|\\iota\\alpha|=q_x^{w_i/2}\\le q_x^{w/2}=q^{ew/2}$. Here $q_x>1$ and $w_i\\le w$ give the inequality, without requiring $w\\ge0$. The zero sheaf has empty eigenvalue multiset, so the assertion also covers $r=0$.",
+   "uses": [
     "def-weil-punctual-weights",
+    "lem-wf-rational-stalk-exact",
+    "lem-a1-spectrum-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
+    "place": "Proof, opening sentence: justify the punctual upper eigenvalue bound for a mixed filtration"
+   }
+  },
+  {
+   "text": "Fix $m\\ge1$ and $y\\in X_0(\\mathbf F_{q^m})$, lying over a closed point $x$ of degree $e$. The residue-field embedding $\\kappa(x)\\hookrightarrow\\mathbf F_{q^m}$ makes $e\\mid m$ by the tower law, so $h=m/e\\ge1$. Choose the finite coefficient field $E$ and lisse $E$-model supplied by [sk-d-real-weil], with its Weil pair interpreted in [def-weil-weil-sheaf-complex], the same raw rationalized coefficient category as the local-power lemma. After enlarging $E$, [p-real-integral], applied with $U_0=C_0=X_0$, realizes a geometric lattice as a lisse $\\mathcal O_E$-sheaf on $X$. Its reductions are finite locally constant free $\\mathcal O_E/\\varpi^n$-modules in degree zero. Hence they are bounded constructible with Tor amplitude zero. Its rationalization is the chosen lisse $E$-model, so it supplies the integral representative required by [lem-trf-rational-local-frobenius-powers]; only the underlying lattice is used, and the Weil map need only be invertible after rationalization. That lemma gives $F_y^{(m)}=T^{-1}F_x^hT$ on the stalk, for an $E$-linear isomorphism $T$. Extending scalars to $\\Qlb$ preserves this equality, by applying the same scalar extension to both sides. Consequently the trace at $y$ is $\\operatorname{Tr}(F_x^h)$: in matrices, $\\operatorname{Tr}(T^{-1}BT)=\\operatorname{Tr}(BTT^{-1})=\\operatorname{Tr}(B)$, since $\\sum_{ij}a_{ij}b_{ji}=\\sum_{ji}b_{ji}a_{ij}$.",
+   "uses": [
+    "sk-d-real-weil",
+    "def-weil-weil-sheaf-complex",
+    "p-real-integral",
+    "lem-trf-rational-local-frobenius-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
+    "place": "Proof, opening sentence: rational-point Frobenius is the appropriate power of closed-point Frobenius"
+   }
+  },
+  {
+   "text": "Enumerate the roots of the characteristic polynomial of $F_x$ as $\\alpha_1,\\ldots,\\alpha_r$, with algebraic multiplicities. By [lem-wf-trace-power-eigenvalues] and the preceding two steps, the realized trace at $y$ is $\\sum_{j=1}^r(\\iota\\alpha_j)^h$. The triangle inequality and multiplicativity of absolute value give\n$$|\\iota\\operatorname{Tr}(F_y^{(m)})|\\le\\sum_{j=1}^r|\\iota\\alpha_j|^h\\le r\\,(q^{ew/2})^h=rq^{mw/2}.$$\nSquaring gives $|\\iota\\operatorname{Tr}(F_y^{(m)})|^2\\le r^2q^{mw}$. This also gives zero when $r=0$, and does not assume that Frobenius is semisimple.",
+   "uses": [
+    "lem-wf-trace-power-eigenvalues"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
+    "place": "Proof, first inequality: bound each squared trace by the rank squared times the punctual bound"
+   }
+  },
+  {
+   "text": "By [lem-wf-point-count-linear-growth], choose $d\\ge1$, independent of $m$, such that $\\#X_0(\\mathbf F_{q^m})\\le dq^m$ for every $m\\ge1$; its hypotheses hold because $X_0$ is a smooth affine curve of finite type. The energy $S_m=\\|f_{\\mathcal F}\\|_m^2$ in [def-wf-l2-norm] is a finite sum of the squared traces just bounded. Summing gives\n$$0\\le S_m\\le r^2\\#X_0(\\mathbf F_{q^m})q^{mw}\\le dr^2q^{m(w+1)}.$$\nSet $C=dr^2\\ge0$. Empty rational-point sets contribute the empty sum $0$; the same $C$ works for all $m$.",
+   "uses": [
     "lem-wf-point-count-linear-growth",
     "def-wf-l2-norm"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
-    "place": "## Proof"
+    "place": "Proof, second inequality: sum over rational points and use the uniform point-count bound"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2760,
-  "blueprint_uses": [
-    "def-weil-punctual-weights",
-    "def-wf-l2-norm",
-    "lem-wf-point-count-linear-growth"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
-        "AlgebraicGeometry.WeilSheaf.l2Weight_le_of_hasWeightsAtMost"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            476,
-            488
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.l2Weight_le_of_hasWeightsAtMost",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            490,
-            502
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.l2Weight_le_of_hasWeightsAtMost"
-      ],
-      "open": []
-    }
+  {
+   "text": "Let $\\beta>w$ and set $b=q^{w-\\beta}$. Positive real powers [def-weil-real-power] give $0<b<1$ since $q>1$ and $w-\\beta<0$. Dividing the preceding bound by the positive denominator gives, for every $m\\ge1$,\n$$0\\le\\frac{S_m}{q^{m(\\beta+1)}}\\le Cq^{m(w-\\beta)}=Cb^m.$$",
+   "uses": [
+    "def-weil-real-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
+    "place": "Proof, last sentence: rewrite the normalized energy bound as geometric decay"
+   }
   },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-l-dl-a1-energy",
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-    "declaration": "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
-    "branch": "slopmaster2",
-    "line": 478,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
-      "AlgebraicGeometry.WeilSheaf.l2Weight_le_of_hasWeightsAtMost"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "Apply [lem-wf-geometric-decay] to $b$ from step 5. For $C>0$ and any $\\varepsilon>0$, eventually $b^m<\\varepsilon/C$, whence $0\\le S_m/q^{m(\\beta+1)}<\\varepsilon$. If $C=0$, all these ratios vanish for $m\\ge1$. Thus the ratios tend to zero. In particular, their $\\limsup$ is zero: every positive $\\varepsilon$ eventually bounds the whole tail, while zero bounds every term below. The same argument computes the extended-nonnegative-real $\\limsup$ used by the Lean definition; finite initial indices do not affect it.",
+   "uses": [
+    "lem-wf-geometric-decay"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
+    "place": "Proof, last sentence: the limsup vanishes for every beta strictly greater than w"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X_0$ be a smooth geometrically connected affine curve over\n$k_0=\\mathbf F_q$, and let $\\mathcal F$ be a lisse Weil sheaf of rank $r$\non $X_0$, punctually $\\iota$-mixed of weights at most $w$.\nThen\n\n$$\n\\|\\mathcal F\\|\\le w.\n$$",
-    "proof": [
-      {
-        "text": "At $y\\in X_0(k_m)$ the eigenvalues of the Frobenius $F_y^{(m)}$\nare the $m/d(y)$-th powers of the local eigenvalues at the closed\npoint below, hence have modulus at most $q^{mw/2}$ by the punctual\nbounds of [def-weil-punctual-weights]; therefore\n\n$$\n\\|f_{\\mathcal F}\\|_m^2\\le r^2\\cdot\\#X_0(k_m)\\cdot q^{mw}\n\\le C\\,q^{m(w+1)}\n$$\n\nfor a constant $C$ (the point-count bound of the affine curve,\n[lem-wf-point-count-linear-growth] of the basic-weight chapter). The\n$\\limsup$ in [def-wf-l2-norm] is therefore $0$ for\n$\\beta>w$, hence $\\|\\mathcal F\\|\\le w$.",
-        "uses": [
-          "def-weil-punctual-weights",
-          "lem-wf-point-count-linear-growth",
-          "def-wf-l2-norm"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Let $A=\\{\\beta\\in\\mathbf R:\\limsup_m S_m/q^{m(\\beta+1)}>0\\}$, the set defining $\\|\\mathcal F\\|$ in [def-wf-l2-norm]. Step 6 excludes every $\\beta>w$ from $A$, so $w$ is an upper bound of $A$. Its supremum in the extended real numbers is therefore at most $w$. If $A$ is empty this is the stipulated value $-\\infty\\le w$, covering in particular the zero sheaf.",
+   "uses": [
+    "def-wf-l2-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
+    "place": "Proof, final conclusion: take the supremum of the positive-limsup exponents"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-punctual-weights",
+  "lem-wf-rational-stalk-exact",
+  "lem-a1-spectrum-exact-sequence",
+  "sk-d-real-weil",
+  "def-weil-weil-sheaf-complex",
+  "p-real-integral",
+  "lem-trf-rational-local-frobenius-powers",
+  "lem-wf-trace-power-eigenvalues",
+  "lem-wf-point-count-linear-growth",
+  "def-wf-l2-norm",
+  "def-weil-real-power",
+  "lem-wf-geometric-decay"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.md",
+  "place": "Proof, expanded with explicit stalk exactness, Frobenius power comparison, trace power sums and geometric decay"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|traceEnergy|l2Weight",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil sheaf trace-energy growth theorem in Mathlib; generic exponential-growth and modular-form estimates do not supply the punctual trace bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a lisse Weil sheaf mixed of weights at most w the normalized squared traces have growth exponent at most w",
+   "results": "Function.hasTemperateGrowth_norm_sq; ModularFormClass.qExpansion_isBigO; ExpGrowth.expGrowthInf_le_expGrowthSup; ModularFormClass.exists_bound; qExpansion_coeff_isBigO_of_norm_isBigO; CuspFormClass.qExpansion_isBigO; Function.HasTemperateGrowth; LinearGrowth.linearGrowthSup",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil sheaf trace-energy growth theorem in Mathlib; generic exponential-growth and modular-form estimates do not supply the punctual trace bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil sheaf trace-energy growth theorem in Mathlib; generic exponential-growth and modular-form estimates do not supply the punctual trace bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The L2 growth weight of a lisse Weil sheaf on a smooth affine curve is at most its punctual mixed weight bound",
+   "results": "BoundingSieve.weights; BoundingSieve.weights_nonneg; Mathlib.Meta.Positivity.evalBoundingSieveWeights; LieModule.eventually_genWeightSpace_smul_add_eq_bot; ChevalleyThm.MvPolynomialC.numBound_mono; ChevalleyThm.MvPolynomialC.degBound_le_degBound; NumberField.hermiteTheorem.boundOfDiscBdd; Polynomial.card_mahlerMeasure_le_prod",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil sheaf trace-energy growth theorem in Mathlib; generic exponential-growth and modular-form estimates do not supply the punctual trace bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2760,
+ "blueprint_uses": [
+  "def-weil-punctual-weights",
+  "def-wf-l2-norm",
+  "lem-wf-point-count-linear-growth"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
+    "AlgebraicGeometry.WeilSheaf.l2Weight_le_of_hasWeightsAtMost"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      476,
+      488
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.l2Weight_le_of_hasWeightsAtMost",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      490,
+      502
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.l2Weight_le_of_hasWeightsAtMost"
+   ],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
+  "branch": "slopmaster2",
+  "line": 478,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
+   "AlgebraicGeometry.WeilSheaf.l2Weight_le_of_hasWeightsAtMost"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X_0$ be a smooth geometrically connected affine curve over\n$k_0=\\mathbf F_q$, and let $\\mathcal F$ be a lisse Weil sheaf of rank $r$\non $X_0$, punctually $\\iota$-mixed of weights at most $w$.\nThen\n\n$$\n\\|\\mathcal F\\|\\le w.\n$$",
+  "proof": [
+   {
+    "text": "At $y\\in X_0(k_m)$ the eigenvalues of the Frobenius $F_y^{(m)}$\nare the $m/d(y)$-th powers of the local eigenvalues at the closed\npoint below, hence have modulus at most $q^{mw/2}$ by the punctual\nbounds of [def-weil-punctual-weights]; therefore\n\n$$\n\\|f_{\\mathcal F}\\|_m^2\\le r^2\\cdot\\#X_0(k_m)\\cdot q^{mw}\n\\le C\\,q^{m(w+1)}\n$$\n\nfor a constant $C$ (the point-count bound of the affine curve,\n[lem-wf-point-count-linear-growth] of the basic-weight chapter). The\n$\\limsup$ in [def-wf-l2-norm] is therefore $0$ for\n$\\beta>w$, hence $\\|\\mathcal F\\|\\le w$.",
+    "uses": [
+     "def-weil-punctual-weights",
+     "lem-wf-point-count-linear-growth",
+     "def-wf-l2-norm"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-l2-upper",
+  "worker": "stage1",
+  "summary": "Followed the current blueprint_update statement, adding its explicit smooth geometrically connected affine-curve hypotheses and naming statement notions. Expanded the imported one-paragraph proof into seven steps, exposing exact Frobenius fibres, mixed-filtration spectra, rational local powers, trace power sums, point counting, geometric decay and the supremum argument. Three new statement nodes, one Mathlib leaf; the trace-power node has exact proved project attachment candidates. No Lean written or compiled.",
+  "blueprint": "Steps 1-3 realize the opening sentence and pointwise squared-trace estimate; step 4 realizes the two displayed energy inequalities; steps 5-7 realize the last limsup sentence and final inequality. The smooth/connected hypotheses follow main-20261015 and blueprint_update. This is a subsidiary node, not the key statement of sk-l-dl-a1-energy, so unit realized fields are untouched.",
+  "tool_uses": [
+   {
+    "node": "p-real-integral",
+    "why": "The geometric lattice is used solely to meet the integral-model input of the rational local Frobenius comparison; it does not replace the energy unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "p-real-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-c958ac1b0",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-c958ac1b0 (reviewer sub-agent of L); spot-checked: Read all seven steps, three new nodes, cited statements and sources. Corrected coefficient-category citations, attached proved trace-power declarations with accurate locations, and completed new-node records. Verified edge cases, duplicates and route; accepted p-real-integral tool use. No target weakened. Review and four corrected JSON files written.; 4 file(s) fixed by the reviewer"
+ }
 }

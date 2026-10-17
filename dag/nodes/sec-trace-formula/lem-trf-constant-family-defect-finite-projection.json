@@ -2,11 +2,67 @@
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Y=\\operatorname{Spec}(k[x_1,\\ldots,x_m]/I)$ after choosing affine coordinates. Since $Y$ is a proper closed subscheme of $\\mathbf A^m_k$, its defining ideal $I$ is nonzero; choose $0\\ne f\\in I$ and let $f_d$ be its highest-degree homogeneous part. Then $f_d$ is a nonzero homogeneous polynomial. If $d=0$, then $f$ is a nonzero scalar, so $I=(1)$ and $Y$ is empty; in that case any line gives the conclusion.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§3.2.4, beginning of the finite-projection argument"
+   }
+  },
+  {
+   "text": "In the remaining case $d>0$, apply [lem-trf-infinite-field-top-form-direction] to $f_d$ and choose a nonzero $v\\in k^m$ with $a:=f_d(v)\\ne0$. Put $l=kv$ and choose a linear complement $W$ of $l$. In the coordinates $(t,w)\\mapsto tv+w$, the coefficient of $t^d$ in $f(tv+w)$ is $a$, independent of $w$: only degree-$d$ monomials contribute to it. Multiplying this equation by the scalar $a^{-1}$ gives an element $F=t^d+\\sum_{j<d}a_j(w)t^j$ of the transformed ideal of $Y$. No extraction of a $d$-th root or rescaling of $t$ is needed.",
+   "uses": [
+    "lem-trf-infinite-field-top-form-direction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§3.2.4, the line chosen by Noether normalization"
+   }
+  },
+  {
+   "text": "Write $R=k[W]\\simeq k[x_2,\\ldots,x_m]$ and $B=R[t]/I$ in these coordinates. Since $F\\in I$ is monic of degree $d$, polynomial division by $F$ shows that $1,t,\\ldots,t^{d-1}$ generate $B$ as an $R$-module. Thus $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ is finite by [def-weil-finite-integral-morphism].",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§3.2.4, p. 24: finite linear projection (explicit monic-equation calculation)"
+   }
+  },
+  {
+   "text": "Use homogeneous coordinates $[T:S]$ with $t=T/S$ on the affine chart $S\\ne0$ of [def-sc-p1-standard]. The closed subscheme $V(T^d+\\sum_{j<d}a_j(w)T^jS^{d-j})$ of $\\mathbf P^1_k\\times W$ contains $Y$, so it contains its scheme-theoretic closure. On $S=0$, its equation is $T^d=0$, which has empty zero scheme there because $T$ is invertible on that section. Thus the closure misses infinity scheme-theoretically. Finally $v\\ne0$ makes $l$ one-dimensional, $W\\simeq k^m/l$, and the projection to $W$ is precisely the quotient projection of the statement.",
+   "uses": [
+    "def-sc-p1-standard"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§3.2.4, p. 24: projective compactification and finite closed support (explicit homogenization calculation)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-sc-p1-standard",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-infinite-field-top-form-direction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§3.2.4"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-specialization-zero-section",
@@ -115,5 +171,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-constant-family-defect-finite-projection",
+  "worker": "stage1",
+  "summary": "Choose a nonzero equation and a nonvanishing top-form direction using the Mathlib leaf. Multiply the equation by its inverse leading coefficient; polynomial division explicitly proves finiteness, and homogenization explicitly proves that the scheme-theoretic closure misses infinity. The monic-coordinate auxiliary node is unnecessary and is dropped.",
+  "blueprint": "Realizes the finite linear projection and projective support reduction in the proof paragraph (1) of lem-trf-local-term-locality via lem-trf-specialization-zero-section.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q33-9acc56137",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-9acc56137 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited sources. Corrected scalar normalization, recognized the direction lemma as a Mathlib funext_set specialization, and expanded the monic criterion into explicit finiteness and homogenization steps. Statement unchanged; corrected dependency closure is acyclic. Details in review.md; corrected JSON files under fixes/.; 2 file(s) fixed by the reviewer"
  }
 }

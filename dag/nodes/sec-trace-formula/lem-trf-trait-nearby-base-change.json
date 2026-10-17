@@ -12,9 +12,135 @@
   "def-trf-oriented-nearby-cycles",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The ring $R$ is a principal ideal domain, hence Noetherian by the PID lemma. Thus $B=\\operatorname{Spec}R$ is locally Noetherian by its one-chart definition and quasi-compact by the affine-scheme lemma; it is integral since $R$ is a domain. Finite type over a Noetherian scheme makes $T$ Noetherian, and the locally-Noetherian quasi-separatedness lemma makes $T$ quasi-separated. In particular $T$ is qcqs. These deductions require neither separatedness nor flatness of $f$. The coefficient ring is Noetherian because it is finite.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Section 4.5, Example 4.26(2) and Theorem 4.27(1), printed p. 37 (PDF page 37); read online from the author PDF, local PDF WANTED."
+   }
+  },
+  {
+   "text": "First take a constructible sheaf $F$ of $\\Lambda$-modules on $T_{\\mathrm{Et}}$, regarded as a complex in degree zero. Apply the modification theorem to $(B,f,F[0],\\Lambda,m)$: step 1 supplies its integral Noetherian base, and $F[0]$ is bounded with constructible cohomology. It produces $r:B_1\\to B$, proper and an isomorphism over a dense open $U\\subset B$, with $(f_1,r_T^*F)$ $\\Psi$-good. This is the general-base existence theorem, rather than a trait base-change theorem assumed for $F$.",
+   "uses": [
+    "lem-trf-orgogozo-good-modification",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Section 4.5, Example 4.26(2) and Theorem 4.27(1), printed p. 37 (PDF page 37); read online from the author PDF, local PDF WANTED."
+   }
+  },
+  {
+   "text": "The generic point $\\eta=\\operatorname{Spec}\\operatorname{Frac}(R)$ belongs to the dense open $U$. Its inverse image under the isomorphism over $U$ gives a $B$-map $\\eta\\to B_1$. The local PID $R$ is a valuation ring: for nonzero $a,b$, write $(a,b)=(d)$, $a=du$, $b=dv$; then $(u,v)=R$, so one of $u,v$ is a unit in the local ring, and either $a/b$ or $b/a$ belongs to $R$. The proper valuative existence criterion extends $\\eta\\to B_1$ across $B=\\operatorname{Spec}R$ to a $B$-map $s:B\\to B_1$. Being a $B$-map says exactly $rs=1_B$. Thus the modification has a section; no completeness, henselianity or excellence of $R$ was used.",
+   "uses": [
+    "lemma-nagata-proper-valuative-criterion-existence-api"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Section 4.5, Example 4.26(2) and Theorem 4.27(1), printed p. 37 (PDF page 37); read online from the author PDF, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Write $\\beta_a$ for the ordinary comparison for base change $a$. For successive base changes $a:S_0\\to S_1$ and $b:S_2\\to S_0$, the definition by the pulled-back counit gives $\\beta_{ab}=\\beta_b\\circ v_b^*\\beta_a$, under the canonical pullback identifications: transposing the right hand side gives the counit for $a$ followed by that for $b$, and the middle adjunction unit and counit cancel. Consequently goodness is preserved by base change: if the pair over $S_1$ is good, both $\\beta_a$ and $\\beta_{ab}$ are isomorphisms for every $b$, so $\\beta_b$ is an isomorphism. Apply this to the good pair of step 2 and $a=s$. Since $rs=1_B$, its pullback along $s$ is $(f,F)$ with the specified ordinary comparison. Hence every constructible $F$ on $T$ is good.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Section 4.5, Example 4.26(2) and Theorem 4.27(1), printed p. 37 (PDF page 37); read online from the author PDF, local PDF WANTED."
+   }
+  },
+  {
+   "text": "For a filtered diagram $(F_i)$ of module sheaves, each functor $R^q\\Psi_f$ preserves its colimit. Indeed pull back the natural comparison $\\operatorname{colim}_i R^q\\Psi_fF_i\\to R^q\\Psi_f(\\operatorname{colim}_iF_i)$ by each strict-local section $\\sigma_x$. These inverse images are exact, preserve colimits as left adjoints, and are jointly conservative. The strict-local description identifies this comparison with $\\operatorname{colim}_i R^q a_*(F_i|_{T_{(x)}})\\to R^q a_*((\\operatorname{colim}_iF_i)|_{T_{(x)}})$, for $a:T_{(x)}\\to B_{(f(x))}$. Both strict localizations are affine; the morphism-between-affines lemma and affine permanence make $a$ qcqs. Higher direct-image continuity gives precisely the required isomorphism. The same argument applies to $f':T\\times_BB'\\to B'$ for arbitrary $B'\\to B$: it remains locally finite type, and its strict-local schemes remain affine, even when $B'$ is not Noetherian. The torsion condition required by the strict-local description follows from $m\\Lambda=0$. All restrictions and inverse images preserve the sheaf colimits by their module adjunctions.",
+   "uses": [
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sbc-higher-direct-image-large-filtered-colimit",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Section 4.5, Example 4.26(2) and Theorem 4.27(1), printed p. 37 (PDF page 37); read online from the author PDF, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Now let $F$ be any module sheaf on $T$. Since $T$ is qcqs and $\\Lambda$ finite, constructible approximation writes $F=\\operatorname{colim}_iF_i$ for a small filtered diagram of constructible module sheaves. Fix any $g:B'\\to B$. Exact inverse image and step 5 identify $H^q(\\beta_{g,F})$ with the colimit of the isomorphisms $H^q(\\beta_{g,F_i})$ of step 4, for every $q$: on the source use $v^*R^q\\Psi_f$, and on the target use $R^q\\Psi_{f'}h^*$. Naturality of the counit defining $\\beta$ identifies the map between these two colimits with the one induced by the $\\beta_{g,F_i}$. Thus $H^q(\\beta_{g,F})$ is invertible for every $q$, which is exactly invertibility in the derived category. This proves goodness for all sheaves without imposing constructibility on $F$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Section 4.5, Example 4.26(2) and Theorem 4.27(1), printed p. 37 (PDF page 37); read online from the author PDF, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Finally choose $a\\leq b$ with $H^q(L)=0$ outside $[a,b]$, and fix $g:B'\\to B$. The right derived direct images $R\\Psi_f,R\\Psi_{f'}$ are triangulated, and the exact inverse images are triangulated termwise. The comparison commutes with shifts: use the shifted K-injective resolution $I[1]$ for $K[1]$; its defining adjunct is the shift of the adjunct for $K$, since inverse images, the counit and pullback identifications commute termwise with shifts. Naturality and the shift-compatible-transformation lemma therefore give a morphism of image triangles. Apply both sides to the truncation triangles $\\tau_{\\leq q-1}L\\to\\tau_{\\leq q}L\\to H^q(L)[-q]\\to(\\tau_{\\leq q-1}L)[1]$. Step 6 gives the comparison isomorphism on $H^q(L)[-q]$. Starting from $\\tau_{\\leq a-1}L=0$, induction for $q=a,\\ldots,b$ gives it on $\\tau_{\\leq q}L$: in the morphism of long exact cohomology sequences, the four adjacent maps are isomorphisms, so the middle map is an isomorphism by the elementary five-lemma argument. As $\\tau_{\\leq b}L\\simeq L$, this proves the displayed comparison for $L$ and every $g$, hence precisely $(f,L)$ is $\\Psi$-good.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-truncation-triangle",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Section 4.5, Example 4.26(2) and Theorem 4.27(1), printed p. 37 (PDF page 37); read online from the author PDF, local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sbc-higher-direct-image-large-filtered-colimit",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-trf-orgogozo-good-modification",
+  "lem-trf-oriented-nearby-strict-local-description",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+  "place": "Section 4.5, Example 4.26(2) and Theorem 4.27(1), printed p. 37 (PDF page 37); read online from the author PDF, local PDF WANTED. The source was read online, but its PDF is absent locally; expanded the constructible reduction using existing DAG tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +190,45 @@
    "results": "8 hits: StandardEtalePair.instFormallyEtaleRing, Algebra.exists_etale_of_isEtaleAt, Algebra.etaleLocus_eq_compl_support, StandardEtalePair.instEtaleRing, Algebra.IsEtaleAt, Algebra.instEtaleOfIsStandardEtale, Algebra.IsEtaleAt.comp, Algebra.mem_etaleLocus_iff. Signatures independently inspected in the current second reading.",
    "date": "2026-10-17",
    "verdict": "no match: ordinary etale schemes, scheme tensor pushouts and restriction/skyscraper counits do not state oriented nearby cycles or any of these comparison theorems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nearby cycles of bounded torsion etale complexes over a discrete valuation ring commute with arbitrary base change",
+   "results": "8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.IsEtaleAt.comp, Algebra.Etale.comp, Algebra.FormallyEtale.comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; returned signatures read in this session; digest 927b60ef071468af",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary etale stability, homological cycles, normed-ring units and scheme pullback adjunctions do not state oriented nearby-cycle goodness or its modification theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "nearby.?cycle|vanishing.?topos|Psi.?good",
+   "results": "0 hits: none; returned signatures read in this session; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary etale stability, homological cycles, normed-ring units and scheme pullback adjunctions do not state oriented nearby-cycle goodness or its modification theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale nearby cycles over a trait commute with arbitrary morphisms of base schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.IsOver, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange; returned signatures read in this session; digest 067e395b0619fbe3",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary etale stability, homological cycles, normed-ring units and scheme pullback adjunctions do not state oriented nearby-cycle goodness or its modification theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearby\", \"baseChange\"",
+   "results": "0 hits: none; returned signatures read in this session; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary etale stability, homological cycles, normed-ring units and scheme pullback adjunctions do not state oriented nearby-cycle goodness or its modification theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every bounded torsion etale complex is good for the vanishing topos when its base is the spectrum of a valuation ring",
+   "results": "8 hits: StandardEtalePair.instFormallyEtaleRing, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.exists_etale_of_isEtaleAt, Algebra.etaleLocus, Algebra.Etale.formallyEtale, StandardEtalePair.instEtaleRing, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.IsEtaleAt; returned signatures read in this session; digest 6a00af4f27b1c46b",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary etale stability, homological cycles, normed-ring units and scheme pullback adjunctions do not state oriented nearby-cycle goodness or its modification theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-specialization-external-product",
@@ -87,5 +248,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-trait-nearby-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement and canonical comparison unchanged. Expanded Lu--Zheng Example 4.26(2): Orgogozo modification for constructible sheaves, a valuative section, explicit stability under base change, strict-local filtered continuity, constructible approximation, and finite Postnikov induction. Created one statement-only general modification theorem; all other non-elementary inputs reuse existing nodes. No attachment or Mathlib match.",
+  "blueprint": "Realizes the trait Psi-goodness input to the normal-cone external-product argument for lem-trf-local-term-locality clauses (1) and (2), through lem-trf-trace-specialization and lem-trf-specialization-external-product; no change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic The unbounded right derived functor is triangulated input to the indicated reduction step; the trace-formula unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-large-filtered-colimit",
+    "why": "Generic Higher direct images preserve coefficient-size filtered colimits input to the indicated reduction step; the trace-formula unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "why": "Generic A sheaf of $\\Lambda$-modules on a qcqs scheme is a filtered colimit of constructible ones input to the indicated reduction step; the trace-formula unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi input to the indicated reduction step; the trace-formula unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished input to the indicated reduction step; the trace-formula unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lemma-nagata-proper-valuative-criterion-existence-api",
+    "why": "Generic Existence part of the proper valuative criterion input to the indicated reduction step; the trace-formula unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic exact-functor cohomology or shift-compatible natural-transformation tool; ensures the cohomology and Postnikov argument uses its actual stated interfaces."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "why": "Generic exact-functor cohomology or shift-compatible natural-transformation tool; ensures the cohomology and Postnikov argument uses its actual stated interfaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sbc-higher-direct-image-large-filtered-colimit",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q48-ee28266a2",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-ee28266a2 (reviewer sub-agent of L); spot-checked: Full review recorded in review.md. Checked all seven steps, the new modification theorem against Lu–Zheng 4.26(2)/4.27(1), every cited statement, coefficient and comparison conventions, route, duplicates, cycles, and edge cases. Accepted all eight generic tool uses. No repairs needed."
  }
 }

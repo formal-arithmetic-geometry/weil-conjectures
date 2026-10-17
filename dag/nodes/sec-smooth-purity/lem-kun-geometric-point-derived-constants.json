@@ -14,9 +14,110 @@
   "def-weil-abstract-derived-category",
   "def-kun-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-exc-abelian-sheaves-gmodules] with $K=K^{\\rm sep}=\\Omega$ and with the identity geometric point. Since $\\Omega$ is algebraically closed, it is its own separable closure, and every $\\Omega$-automorphism of it is the identity. A discrete module for this trivial Galois group is just an abelian group: its action is forced by $1m=m$, every stabilizer is the whole group, and every additive map is equivariant. The cited equivalence is therefore the actual geometric-stalk functor $S:\\operatorname{Ab}(s_{\\mathrm{Et}})\\to\\operatorname{Ab}$, not merely an unspecified equivalent functor.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point, specialized to an algebraically closed base field"
+   }
+  },
+  {
+   "text": "For $N\\in\\operatorname{Ab}$ let $\\eta_N:N\\to SC_sN$ be the constant-germ map. By [lem-weil-pbc-constant-sheaf-geometric-stalk] it is invertible; it is natural because a map of constant sheaves carries the germ of $n$ to the germ of its image. Full faithfulness of $S$ gives a unique $\\epsilon_G:C_sSG\\to G$ with $S\\epsilon_G=\\eta_{SG}^{-1}$. These maps are natural and invertible. Naturality of $\\eta$ applied to $\\eta_N$ gives $SC_s(\\eta_N)=\\eta_{SC_sN}$, so $\\epsilon_{C_sN}\\circ C_s\\eta_N=1$ after applying the faithful $S$; the other triangle identity is $S\\epsilon_G\\circ\\eta_{SG}=1$. Thus these are the specified unit and counit of $C_s\\dashv S$. Both functors are additive by the additive germ and constant-sheaf constructions. An additive equivalence and its inverse are exact: transporting the universal properties of a kernel and a cokernel along their Hom bijections gives a kernel and a cokernel of the transported map.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point; constant-germ normalization from Tag 03PT (2), lemma-stalk-exact, and Tag 040R, definition-stalk, with Tag 03PQ, lemma-cofinal-etale"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exact-functor-complex-cohomology], applying $S$ or $C_s$ termwise commutes naturally with every $H^r$. Hence it preserves quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property] (1) to obtain the functors on the unbounded derived categories [def-weil-pbc-derived-categories], and (2) to descend $\\eta$ and $\\epsilon$. Their inverse and triangle equations remain equations by (3), so the descended functors are quasi-inverse with exactly the stated unit and counit. The same cohomology comparison shows that $H^r=0$ for all $r<a$ is preserved, for every integer $a$, without requiring a bounded representative.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; derived-category localization as in Tag 05RU"
+   }
+  },
+  {
+   "text": "Here are the underived tensor comparisons. For abelian groups $M,N$, constant sections define $c_{M,N}:C_sM\\otimes C_sN\\to C_s(M\\otimes N)$ by $\\underline m\\otimes\\underline n\\mapsto\\underline{m\\otimes n}$. Conversely the bilinear assignment $(m,n)\\mapsto\\underline m\\otimes\\underline n$ defines the inverse from $C_s(M\\otimes N)$. Indeed sections of constants are locally constant values [def-kun-constant-sheaf], and the sheaf tensor is the sheafification of the sectionwise tensor [def-pur-sheaf-tensor-product]; the two composites are the identity on local pure tensors, which generate locally. The unit is $C_s\\mathbf Z=\\mathbf Z_s$. Associativity and unit diagrams agree on pure tensors, and symmetry interchanges $m,n$, so these maps make $C_s$ symmetric monoidal.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, sheafification of the sectionwise tensor product"
+   }
+  },
+  {
+   "text": "For arbitrary sheaves $G,H$, use $\\epsilon_G,\\epsilon_H$ of Step 2 to reduce them to constants. The comparison $SG\\otimes SH\\to S(G\\otimes H)$ sends two represented germs to the germ of their local tensor. On constants Step 4 and $\\eta$ identify it with $m\\otimes n\\mapsto m\\otimes n$, so it is invertible; write its inverse in the direction used in the statement. Naturality reduces its associativity, symmetry and unit identities to the pure-tensor identities of Step 4. The unit equation for $\\eta$ is the germ of $1$; its tensor equation sends $m\\otimes n$ on either side to the germ of $\\underline m\\otimes\\underline n$. Thus $\\eta$ is monoidal. The equation $S\\epsilon_G=\\eta_{SG}^{-1}$ and faithfulness of $S$ then give the tensor and unit equations for $\\epsilon$. This proves monoidality of the specified counit, not just existence of some monoidal inverse.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; germ normalization of the point equivalence in Tag 04JQ"
+   }
+  },
+  {
+   "text": "The comparisons extend to total tensor complexes. Both equivalences preserve arbitrary coproducts: transporting the universal bijection $\\operatorname{Hom}(\\bigoplus_iA_i,B)=\\prod_i\\operatorname{Hom}(A_i,B)$ through their Hom bijections proves the coproduct universal property. Thus they commute with the direct sums in every tensor degree, and their additivity preserves the differential $d\\otimes1+(-1)^p1\\otimes d$ in [def-kun-derived-tensor]. They also preserve K-flat complexes. For either functor $F$ with inverse $G$, if $P$ is K-flat and $A$ is acyclic in the target, $GA$ is acyclic by Step 3 and $FP\\otimes A\\cong F(P\\otimes GA)$ is acyclic. This is precisely K-flatness of $FP$. This argument uses arbitrary acyclic complexes and therefore covers unbounded inputs.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, lemma-check-K-flat-stalks, with the direct K-flatness argument simplified by the exact quasi-inverse"
+   }
+  },
+  {
+   "text": "Choose a K-flat resolution $P\\to K$ using [lem-pc-kflat-resolution] on the constant-integer ringed site (and on the one-point ringed site for ordinary groups). By Step 6, $SP\\to SK$ and $C_sP\\to C_sK$ are K-flat resolutions in the respective target categories. Consequently the total-tensor comparisons of Steps 4–6 compute the canonical derived comparisons of [def-kun-derived-tensor], for arbitrary complexes $K,L$. They are natural under resolution maps and inverted quasi-isomorphisms: both orders are induced by the same tensor maps on K-flat representatives. The localization property [lem-weil-pbc-localization-universal-property] (2)–(3), applied in each variable, descends their associativity, unit, symmetry (with the same $(-1)^{pq}$ on homogeneous tensors), and the monoidal equations for $\\eta,\\epsilon$. On constant sections the formula remains $m\\otimes n\\mapsto m\\otimes n$. This proves all the asserted normalized symmetric monoidal derived equivalence claims.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 0DEN, lemma-check-K-flat-stalks; normalized derived comparisons in Tag 0F0F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "def-kun-constant-sheaf",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-pbc-derived-categories",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-geometric-stalks",
+  "def-kun-derived-tensor",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ gives the abelian stalk equivalence; Tags 03EK, 010N, 05RU, 06YS give the constructions used to supply the derived and monoidal details implicit in Tag 0F0F."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +167,52 @@
    "results": "7 hits; Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean. No match: hits concern smooth-manifold stalks, condensed locally constant modules, the affine Zariski site, Kaehler differentials, or the definition of an etale point; none identifies the small etale derived category at the point with D(Z) with the normalized tensor equivalence. Searched Mathlib/AlgebraicGeometry/Sites.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Ee]quivalence|[Ee]quivalence.*constantSheaf|stalk.*[Ee]quivalence",
+   "results": "{\"t\": \"2026-10-17T14:20:19Z\", \"tool\": \"grep\", \"query\": \"constantSheaf.*[Ee]quivalence|[Ee]quivalence.*constantSheaf|stalk.*[Ee]quivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern constant-sheaf definitions/criteria, sheaf equivalences induced by site equivalences, condensed modules, Zariski stalks, or lifting etale points; none states this normalized unbounded derived equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalk and constant sheaves on an algebraically closed field are inverse tensor equivalences on unbounded derived categories",
+   "results": "{\"t\": \"2026-10-17T14:20:20Z\", \"tool\": \"leansearch\", \"query\": \"Geometric stalk and constant sheaves on an algebraically closed field are inverse tensor equivalences on unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.stalkClosedPointIso_inv\", \"CategoryTheory.constantSheaf\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CategoryTheory.Sheaf.isConstant_of_iso\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"ModuleCat.Tilde.stalkIso\", \"CategoryTheory.Sheaf.isConstant_congr\", \"stalkSkyscraperSheafAdjunction\"], \"digest\": \"45f8660eab8dcd2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern constant-sheaf definitions/criteria, sheaf equivalences induced by site equivalences, condensed modules, Zariski stalks, or lifting etale points; none states this normalized unbounded derived equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"IsEquivalence\"",
+   "results": "{\"t\": \"2026-10-17T14:20:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"constantSheaf\\\", \\\"IsEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern constant-sheaf definitions/criteria, sheaf equivalences induced by site equivalences, condensed modules, Zariski stalks, or lifting etale points; none states this normalized unbounded derived equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact symmetric monoidal equivalence between the derived category of abelian sheaves on the small etale site of an algebraically closed field and derived abelian groups via the constant sheaf functor and geometric stalk",
+   "results": "{\"t\": \"2026-10-17T14:20:21Z\", \"tool\": \"leanfinder\", \"query\": \"Exact symmetric monoidal equivalence between the derived category of abelian sheaves on the small etale site of an algebraically closed field and derived abelian groups via the constant sheaf functor and geometric stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CategoryTheory.Equivalence.sheafCongr\", \"CategoryTheory.Equivalence.transportIsoSheafToPresheaf\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod.LocallyConstant.functorIsoDiscrete\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso\"], \"digest\": \"b7592271a7d6f600\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern constant-sheaf definitions/criteria, sheaf equivalences induced by site equivalences, condensed modules, Zariski stalks, or lifting etale points; none states this normalized unbounded derived equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separably closed field every complex of abelian etale sheaves is canonically a constant complex, via an exact stalk and constant sheaf tensor equivalence",
+   "results": "{\"t\": \"2026-10-17T14:20:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a separably closed field every complex of abelian etale sheaves is canonically a constant complex, via an exact stalk and constant sheaf tensor equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isSeparable_aux\", \"CategoryTheory.Sheaf.isConstant_iff_of_equivalence\", \"Algebra.FormallyEtale.of_isSeparable\", \"CategoryTheory.Sheaf.isConstant_of_forget\", \"CategoryTheory.Sheaf.isConstant_iff_forget\", \"CategoryTheory.instIsConstantObjSheafSheafCompose\", \"CategoryTheory.Sheaf.IsConstant\", \"CategoryTheory.Sheaf.isConstant_of_iso\"], \"digest\": \"b804906c832d0d9f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern constant-sheaf definitions/criteria, sheaf equivalences induced by site equivalences, condensed modules, Zariski stalks, or lifting etale points; none states this normalized unbounded derived equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgClosed|IsSepClosed",
+   "results": "{\"t\": \"2026-10-17T14:20:39Z\", \"tool\": \"grep\", \"query\": \"IsAlgClosed|IsSepClosed\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\"], \"digest\": \"258cca6894e3fc91\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern constant-sheaf definitions/criteria, sheaf equivalences induced by site equivalences, condensed modules, Zariski stalks, or lifting etale points; none states this normalized unbounded derived equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-0f0f",
@@ -86,5 +229,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-geometric-point-derived-constants",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing 04JQ abelian stalk equivalence and constant-germ theorem, then supplied the normalized counit, exact derived localization, local tensor formulas, and the unbounded K-flat argument in seven steps. No new nodes or Mathlib leaves. The tensor and unit equations of both the unit and counit are proved explicitly.",
+  "blueprint": "Realizes the constant-germ, derived localization and normalized tensor comparison used in the retained Step 4 of lem-kun-0f0f. This supplies the geometric-point reduction implicit in Stacks 0F0F; the parent has already documented the error in the blueprint free-global-sheaf proof. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "The general field-stalk equivalence, specialized to the trivial absolute Galois group, supplies the abelian equivalence; the Kunneth unit has no competing proof of this foundational fact."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General unbounded K-flat resolution existence on a ringed site is the tensor-construction input already named by def-kun-derived-tensor; it does not replace a Kunneth step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q81-7ca3e14f1",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-7ca3e14f1 (reviewer sub-agent of L); spot-checked: Read the item, all cited DAG statements, unit/chapter route, Stacks Tags 04JQ, 03PT, 040R, 03PQ, 010N, 04VG/04VK, 05RU, 03EK, 06YS, 0DEN, and parent Tag 0F0F projection formula. The algebraically closed specialization gives trivial Galois action; unit/counit normalization, exact unbounded localization, tensor coherence, K-flat preservation, and derived comparison are correctly justified. Coefficients are genuinely Z and the parent base-change morphism and hypotheses are unchanged. Edge cases including zero, Z, Z/2 Tor, and unbounded complexes check out. No duplicate or circular node, no SGA citation, and both declared tool uses are accepted. Full review written to review.md."
  }
 }
