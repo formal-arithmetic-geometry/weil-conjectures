@@ -90,7 +90,7 @@ lemma descApp_pathU {Δ : SimplexCategory} (f : Δ ⟶ ⦋N⦌) (hf : ¬ Epi f) 
   simp only [BoundaryCone.descApp_ofSimplex, BoundaryCone.descApp_postcomp] at this
   exact this.symm
 
-variable (u) in
+variable (a b u) in
 /-- The interior `N`-simplices of the prism, with the two ends given by `u`. -/
 noncomputable def tau' (τ : Fin (N + 2) → (T ⟶ V _⦋N⦌)) (s : Fin (N + 2)) : T ⟶ V _⦋N⦌ :=
   if s = 0 then u ≫ b.app _ else if s = Fin.last (N + 1) then u ≫ a.app _ else τ s
@@ -100,7 +100,7 @@ variable {τ : Fin (N + 2) → (T ⟶ V _⦋N⦌)}
 
 include hu hτ in
 lemma tau'_map (s : Fin (N + 2)) {Δ : SimplexCategory} (μ : Δ ⟶ ⦋N⦌) (hμ : ¬ Epi μ) :
-    tau' u τ s ≫ V.map μ.op = bval p μ hμ (μ ≫ sw s) := by
+    tau' a b u τ s ≫ V.map μ.op = bval p μ hμ (μ ≫ sw s) := by
   obtain ⟨m, rfl⟩ : ∃ m, Δ = ⦋m⦌ := ⟨Δ.len, rfl⟩
   unfold tau'
   split_ifs with h₀ h₁
@@ -121,10 +121,10 @@ variable (p u τ) in
 the other ones. -/
 noncomputable def hval (f : ⦋N⦌ ⟶ ⦋N⦌) (g : ⦋N⦌ ⟶ ⦋1⦌) : T ⟶ V _⦋N⦌ := by
   classical
-  exact if hf : Epi f then tau' u τ (switch g) else bval p f hf g
+  exact if hf : Epi f then tau' a b u τ (switch g) else bval p f hf g
 
-lemma hval_id (g : ⦋N⦌ ⟶ ⦋1⦌) : hval p u τ (𝟙 _) g = tau' u τ (switch g) := by
-  rw [hval, dif_pos inferInstance]
+lemma hval_id (g : ⦋N⦌ ⟶ ⦋1⦌) : hval p u τ (𝟙 _) g = tau' a b u τ (switch g) := by
+  rw [hval, dif_pos (inferInstance : Epi (𝟙 ⦋N⦌))]
 
 include hu hτ in
 lemma hval_map (f : ⦋N⦌ ⟶ ⦋N⦌) (g : ⦋N⦌ ⟶ ⦋1⦌) {Δ : SimplexCategory} (μ : Δ ⟶ ⦋N⦌)
@@ -166,7 +166,7 @@ theorem exists_ofSimplex_eq_precomp {T' : C} (t : T' ⟶ T)
     ∃ z : T' ⟶ (pathSpace a b) _⦋N⦌, BoundaryCone.ofSimplex z = p.precomp t := by
   have hface : ∀ k J, h k ≫ V.δ J = t ≫ hFaces p u τ k J := fun k J ↦ by
     have := congrArg (fun c ↦ BoundaryCone.π c ⦋N⦌ (by simp) (δ J)) (hh k)
-    simpa [prismCone] using this
+    simpa [prismCone, SimplicialObject.δ] using this
   have hmap : ∀ (k : Fin (N + 1)) {Δ : SimplexCategory} (φ : Δ ⟶ ⦋N + 1⦌)
       (hφ : ¬ Epi (φ ≫ σ k)), h k ≫ V.map φ.op = t ≫ bval p (φ ≫ σ k) hφ (φ ≫ side k) := by
     intro k Δ φ hφ
@@ -178,7 +178,7 @@ theorem exists_ofSimplex_eq_precomp {T' : C} (t : T' ⟶ T)
     rw [op_comp, V.map_comp, ← Category.assoc]
     erw [hface k J]
     rw [Category.assoc, hFaces, hval_map hu hτ _ _ φ' (by simpa using hφ)]
-    exact bval_congr _ _ _ (by simp) (by simp)
+    exact congrArg (t ≫ ·) (bval_congr p _ _ (Category.assoc _ _ _).symm (Category.assoc _ _ _).symm)
   have hpath : V.IsPathFamily h := fun j ↦ by
     have e₁ : δ j.succ.castSucc ≫ σ j.succ = 𝟙 _ := SimplexCategory.δ_comp_σ_self
     have e₂ : δ j.succ.castSucc ≫ σ j.castSucc = 𝟙 _ := by
@@ -212,8 +212,8 @@ theorem exists_ofSimplex_eq_precomp {T' : C} (t : T' ⟶ T)
     simp only [BoundaryCone.ofSimplex_π, BoundaryCone.postcomp_π, pathProj_app] at this
     rw [Category.assoc, Category.assoc]
     erw [pathMapObj_pathU, pathLift_pathU_assoc]
-    rw [Category.assoc, this]
-    rfl
+    rw [Category.assoc]
+    exact congrArg (t ≫ ·) this
   · rw [Category.assoc, Category.assoc, pathSpace_map_pathH, pathLift_pathH_assoc,
       hmap _ _ (by rw [prism_comp_σ]; exact not_epi_comp_of_not_epi _ _ hi),
       ← pathValue_σ_side, ← bval_eq_pathValue p (by omega) (δ i) (σ l)
