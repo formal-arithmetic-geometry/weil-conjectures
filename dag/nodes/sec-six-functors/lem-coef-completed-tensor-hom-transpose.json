@@ -13,48 +13,115 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-rationalization-karoubi"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On the ringed pro-etale site with coefficient sheaf $\\widehat R_X$, put $H=R\\mathcal Hom_{\\widehat R_X}$. The global-sections identification $H^0(R\\Gamma(X_{\\mathrm{proet}},R\\mathcal Hom(A,B)))\\cong\\operatorname{Hom}(A,B)$ and the natural currying isomorphism $H(L,H(P,Q))\\cong H(L\\otimes^L P,Q)$ give a natural chain $\\operatorname{Hom}(L,H(P,Q))\\cong\\operatorname{Hom}(L\\otimes^L P,Q)$. The canonical signed symmetry of the derived tensor changes the target to $\\operatorname{Hom}(P\\otimes^L L,Q)$. By the closed tensor-Hom model, the resulting bijection is the transpose of the evaluation counit, hence sends $\\varphi$ to $e_{P,Q}\\circ(1_P\\otimes^L\\varphi)$.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JA and 08J9; internal-Hom currying and global derived Hom"
+   }
+  },
+  {
+   "text": "Put $\\mathcal O=\\widehat R_X$ and $B_n=(R/\\varpi^n)_X$. Choose flat-term K-flat representatives $A\\to P$ and $B\\to L$ as in [def-pur-integral-derived-operations]. The actual tensor identifications\n$$ (A\\otimes_{\\mathcal O}B)\\otimes_{\\mathcal O}B_n\n \\cong (A\\otimes_{\\mathcal O}B_n)\\otimes_{B_n}(B\\otimes_{\\mathcal O}B_n) $$\ncommute with the quotient transitions: both send $(a\\otimes b)\\otimes\\bar r$ to $(a\\otimes\\bar r)\\otimes(b\\otimes1)$ and apply the same quotient to $\\bar r$. The canonical K-flat total-tensor model in [def-coef-ringed-tensor-hom-model] therefore identifies the completed tensor construction with $\\widehat T=R\\lim_n\\operatorname{Res}_n(T\\otimes^L_{\\mathcal O}B_n)$, for $T=P\\otimes^L_{\\mathcal O}L$, respecting its unit $\\eta_T:T\\to\\widehat T$. The constant/completed-coefficient comparison identifies this quotient-tower completion, with its unit, with Koszul completion. The coefficient ring is the Noetherian DVR $R$ and the ideal is the principal ideal $(\\varpi)$, so this comparison applies. The reflector then gives a natural bijection $\\eta_T^*:\\operatorname{Hom}(\\widehat T,Q)\\to\\operatorname{Hom}(T,Q)$. The definition of derived completeness puts $Q$ isomorphically in this completion subcategory, so the reflector applies; no choice of a lift in an abstract Roos triangle is used to define $\\eta_T$. Compose the bijection of Step 1 with $(\\eta_T^*)^{-1}$. For $H=H(P,Q)$, completed evaluation is the unique extension of ambient evaluation along $\\eta_{P\\otimes^L H}$; the coefficient-system evaluation calculus preserves that evaluation comparison. Naturality of the completion unit gives\n$$ (1_P\\widehat\\otimes\\varphi)\\eta_T=\\eta_{P\\otimes^L H}(1_P\\otimes\\varphi). $$\nThus $e_{P,Q}(1_P\\widehat\\otimes\\varphi)$ restricts along $\\eta_T$ to the ambient transpose of $\\varphi$. Uniqueness in the reflector bijection proves that the resulting map is exactly the displayed completed evaluation transpose.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-weil-derived-complete",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), following 099L; with algebraization.tex Tags 099B and 0A0E, and Bhatt-Scholze p. 22, Definition 3.4.10 and Lemma 3.4.11."
+   }
+  },
+  {
+   "text": "The ambient currying and its global-sections identification are natural in the three inputs, as are the completion unit and the evaluation comparisons cited in Steps 1--2. Uniqueness of extension through that unit transports these naturality equations to completed tensors. All these maps are $R$-linear. To check the symmetry convention, use the fixed K-flat tensor and Hom representative models. If $p$ has degree $a$ and $l$ degree $b$, the degree-zero map $\\varphi$ sends $l$ to a Hom element of degree $b$. Currying on $L\\otimes P$ sends $l\\otimes p$ to $\\varphi(l)(p)$. Precomposition with the signed symmetry on $P\\otimes L$ sends $p\\otimes l$ to $(-1)^{ab}\\varphi(l)(p)$. This is also evaluation on $P\\otimes H(P,Q)$: it is ordinary evaluation on $H(P,Q)\\otimes P$ preceded by its signed symmetry. Both transposition constructions therefore have the identical sign. The calculation respects quotient maps and localization of the representative complexes; uniqueness through completion proves the same equality for the completed tensors.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-integral-derived-operations",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), together with the K-flat total tensor and the representative evaluation normalization in def-coef-ringed-tensor-hom-model; completion uniqueness is algebraization.tex Tag 099B."
+   }
+  },
+  {
+   "text": "In the raw rationalization, the objects are unchanged and each Hom group is $\\operatorname{Hom}_{D^b_c(X,R)}(-,-)\\otimes_R E$. The integral tensor and internal-Hom maps, including evaluation, extend $E$-linearly by the rational operation definitions. Tensoring the integral natural $R$-linear bijection with the field $E$ therefore gives an $E$-linear bijection on the full rationalized Hom groups, for arbitrary rational morphisms; the naturality and signed-symmetry equations persist after scalar extension.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "Displayed Hom scalar-localization formula; rational operation formulas are the statement of def-weil-derived-pullback-tensor-hom. This step is scalar extension of the integral bijection, not a further completion theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-fix-operation-reduction",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "p. 22, Definition 3.4.10 and Lemma 3.4.11; expanded using Stacks 08J9, 08JA, 099B, 0A0E and 099M, then raw scalar localization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "tensor-Hom transpose bijection for completed derived tensor and derived-complete target",
-   "results": "AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "query": "completed tensor Hom transpose bijection derived-complete constructible",
+   "results": "homTensorHomEquiv, homTensorHomEquiv_apply, lTensorHomEquivHomLTensor, rTensorHomEquivHomRTensor, rTensorHomEquivHomRTensor_apply, lTensorHomEquivHomLTensor_apply, AdicCompletion.tensor_map_id_left_eq_map, homTensorHomEquiv_toLinearMap",
    "date": "2026-10-17",
-   "verdict": "no match: these declarations do not state the constructible completed-coefficient assertion"
+   "verdict": "no match: generic Mathlib declarations do not state the completed constructible coefficient assertion"
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
-   "results": "CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Equivalence.transportSheafificationAdjunction, CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalClosed, tensorHomEquiv",
+   "results": "loogle: unknown identifier 'tensorHomEquiv'",
    "date": "2026-10-17",
-   "verdict": "no match: these declarations do not state the constructible completed-coefficient assertion"
+   "verdict": "no match: generic Mathlib declarations do not state the completed constructible coefficient assertion"
   },
   {
    "tool": "grep",
-   "query": "tensor.*Hom|exchange.*isomorphism",
-   "results": "Mathlib/CategoryTheory/MarkovCategory/Positive.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Dialectica/Monoidal.lean, Mathlib/CategoryTheory/Dialectica/Monoidal.lean; searched Mathlib/CategoryTheory",
+   "query": "tensor.*Hom|completed.*tensor|internal.*Hom",
+   "results": "none",
    "date": "2026-10-17",
-   "verdict": "no match: these declarations do not state the constructible completed-coefficient assertion"
+   "verdict": "no match: generic Mathlib declarations do not state the completed constructible coefficient assertion"
   },
   {
    "tool": "leansearch",
-   "query": "tensor-Hom transpose bijection for completed derived tensor and derived-complete target",
-   "results": "dualTensorHomEquivOfBasis, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, lTensorHomEquivHomLTensor, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, Module.Dual.transpose, ModuleCat.monoidalClosedHomEquiv, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, CategoryTheory.tensorRightHomEquiv_tensor",
+   "query": "completed derived tensor internal Hom adjunction for derived-complete constructible coefficient sheaves",
+   "results": "CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.ihom.adjunction, CategoryTheory.exp.adjunction, CategoryTheory.Types.tensorProductAdjunction, CategoryTheory.Closed.adj, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.Adjunction.derived, CategoryTheory.ihom.coev",
    "date": "2026-10-17",
-   "verdict": "no match: these declarations do not state the constructible completed-coefficient assertion"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived complete sheaves of modules completed tensor internal Hom adjunction rational localization",
-   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.ihomPoints, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
-   "date": "2026-10-17",
-   "verdict": "no match: these declarations do not state the constructible completed-coefficient assertion"
+   "verdict": "no match: generic Mathlib declarations do not state the completed constructible coefficient assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "cor-coef-verdier-weil-equivariance",
@@ -71,5 +138,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-completed-tensor-hom-transpose",
+  "worker": "stage1",
+  "summary": "Audited the imported tensor-Hom statement against the ringed-site, completed-integral and raw-rational operation definitions. No new dependency node was needed: the ambient currying and global-Hom identifications, completion reflector, coefficient-system evaluation comparison, and rational localization are existing nodes. The proof has four steps: ambient transpose, completed integral completion, naturality and signed symmetry, and rationalization.",
+  "blueprint": "Realizes evaluation and transposition in the current cor-coef-verdier-weil-equivariance proof, using the ambient adjunction appearing in fix-lem-tensor-adjunction. The completion argument is Bhatt-Scholze Lemma 3.4.11 / Stacks 099B and 099M; no completion-reflector paragraph exists in the cited master tensor-adjunction file.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q82-ba79f7a32",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-ba79f7a32 (reviewer sub-agent of L); spot-checked: Read the item, dependency statements, route, and cited sources in full. Corrected inaccurate source locations and made completion/evaluation and signed-symmetry calculations explicit. Statement unchanged; no new nodes. Bhatt–Scholze Lemma 3.4.11 and Stacks adjunction/completion passages support the proof. Small cases and immediate dependency checks pass; review.md records the inherited global-DAG limitation.; 1 file(s) fixed by the reviewer"
  }
 }

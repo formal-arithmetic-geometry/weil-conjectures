@@ -17,9 +17,70 @@
   "def-weil-finite-tor-amplitude",
   "def-weil-scheme-morphism-properties"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of the exceptional transpose, the map $P:L\\to\\omega_f$ is characterized by the counit equation\n$$\\varepsilon_{f,A_S}\\circ Rf_!(P)=t,$$\nwith the coefficient-unit identifications understood. This is the only property of $P$ used below.",
+   "uses": [
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-exceptional-inverse-image.md",
+    "place": "Displayed exceptional Hom bijection and the following paragraph on bounded-below etale-origin inputs; elementary counit equation"
+   }
+  },
+  {
+   "text": "Put $X_K=Lf^*K\\otimes\\omega_f$ and $u=1\\otimes P$. Define $e_K:Rf_!X_K\to K$ by\n$$e_K=\\lambda_K\\circ(1_K\\otimes\\varepsilon_{f,A_S})\\circ\\Pi_{\\omega_f,K},$$\nwhere $\\lambda_K:K\\otimes A_S\\xrightarrow{\\sim}K$ is the unit constraint. The two symmetries are already included in $\\Pi$; no additional symmetry precedes it. By the definition of $\\theta_{f,K}$, $\\varepsilon_{f,K}\\circ Rf_!(\\theta_{f,K})=e_K$. Therefore functoriality gives\n$$\\varepsilon_{f,K}\\circ Rf_!(\\theta_{f,K}\\circ u)=e_K\\circ Rf_!(u).$$\nThis is the inverse exceptional transpose of the composite in the assertion.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "def-weil-exceptional-inverse-image",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-co-smoothness.md",
+    "place": "Condition 2: canonical map is the mate of the projection formula with the adjunction counit; explicit counit calculation written here"
+   }
+  },
+  {
+   "text": "The projection transformation is natural in its first coefficient, so invertibility of the two displayed projection maps gives naturality of their inverses. Therefore, after the canonical associators and symmetries,\n$$\\Pi_{\\omega_f,K}\\circ Rf_!(1\\otimes P)=(1_K\\otimes Rf_!P)\\circ\\Pi_{L,K}.$$\nSubstituting this into the preceding transpose and using the counit equation from Step 1 yields\n$$e_K\\circ Rf_!(1\\otimes P)=(1_K\\otimes\\varepsilon_{f,A_S})\\circ(1_K\\otimes Rf_!P)\\circ\\Pi_{L,K}=(1_K\\otimes t)\\circ\\Pi_{L,K}.$$\nThe last equality is functoriality of derived tensor and the tensor-unit constraint.",
+   "uses": [
+    "def-exchange-projection",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-exchanges/def-exchange-projection.md",
+    "place": "Final projection-transformation paragraphs: definition and naturality in both coefficients; invert the naturality square on the assumed isomorphism domain"
+   }
+  },
+  {
+   "text": "Both maps in the claimed equality have now been shown to have the same exceptional adjunction transpose, namely $(1_K\\otimes t)\\circ\\Pi_{L,K}$. The exceptional Hom bijection is injective, so the maps themselves are equal. Naturality in $K$ follows because every map used above—$\\Pi$, tensor symmetry, the counit, and the adjunction bijection—is natural in $K$ on the stated domain.",
+   "uses": [
+    "def-exchange-projection",
+    "def-pur-co-smoothness",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-exceptional-inverse-image.md",
+    "place": "Natural exceptional Hom bijection; injectivity and naturality, applied to the composites calculated above"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-co-smoothness.md",
+  "place": "Condition 2, expanded using naturality of the projection transformation of sk-def-sf-exchanges/def-exchange-projection.md and the exceptional Hom bijection; the old claimed Expanded Step 5 is not present in the cited blueprint proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-projection-purity-agreement",
@@ -75,5 +136,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-tensor-trace-transpose",
+  "worker": "stage1",
+  "summary": "Split the extracted tensor-trace mate identity into four explicit adjunction calculations. No new node was needed: the transpose equation for P, the definition of theta, naturality of the counit-defined projection map and tensor functoriality are all supplied by existing DAG definitions. The projection hypotheses are used exactly to pass from naturality of projection maps to naturality of their inverses. Maintainer review: corrected the duplicate symmetry in Step 2, wrote its counit computation explicitly, replaced literal backslash-n text with newlines, supplied Step 4 naturality citations, and replaced nonexistent proof-source locations by the actual defining passages. The statement is unchanged.",
+  "blueprint": "Serves the existing parent DAG proof, Step 8 (passage from the unit trace orientation to arbitrary K), in the unit model-agreement route. The literature proof of lem-pur-projection-purity-agreement, main-20261015 lines 5-26, gives the model comparison but has no Expanded Step 5; this auxiliary mate calculation is agent-written from the cited definitions."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q13-6d4629f5c",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-6d4629f5c (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Corrected Step 2’s duplicate tensor symmetry, replaced nonexistent proof-source locations, and added Step 4 naturality citations. Statement unchanged; edge cases, coefficient domains, route, duplicate candidates, and dependency cycles checked. Whole corrected JSON and review.md written under the review directory.; 1 file(s) fixed by the reviewer"
  }
 }

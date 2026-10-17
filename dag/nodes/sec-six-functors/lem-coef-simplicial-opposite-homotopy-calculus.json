@@ -2,7 +2,7 @@
  "id": "lem-coef-simplicial-opposite-homotopy-calculus",
  "kind": "statement",
  "title": "Simplicial reversal preserves Joyal homotopy data and horn-lifting classes",
- "statement": "Use small simplicial sets, horns, quasicategories and internal functor simplicial sets of [def-cbc-enhanced-diagrams-cones], categorical equivalences and Joyal fibrations of [lem-coef-joyal-model-structure], and Kan fibrations of [lem-coef-kan-quillen-right-proper]. For a monotone map $\\alpha:[m]\\to[n]$ put $\\alpha^\\vee(i)=n-\\alpha(m-i)$. Define $K^{\\mathrm{op}}_n=K_n$ with operator $K^{\\mathrm{op}}(\\alpha)=K(\\alpha^\\vee)$, and $f^{\\mathrm{op}}$ with the same degreewise components as $f$. This is a covariant involution. Opposite preserves and reflects Kan complexes, Kan fibrations, quasicategories and inner fibrations, and interchanges horn $i$ with horn $n-i$ under the standard simplex-reversal identification. For arbitrary small simplicial sets $A,C$ there is a natural simplicial isomorphism\n$$\\operatorname{Fun}(A^{\\mathrm{op}},C^{\\mathrm{op}})\\cong\\operatorname{Fun}(A,C)^{\\mathrm{op}},$$\ncompatible with composition and with $h(K^{\\mathrm{op}})\\cong(hK)^{\\mathrm{op}}$, where $h$ is the vertex-edge category in [lem-coef-joyal-model-structure]. Opposite preserves and reflects categorical equivalences and Joyal fibrations, including maps whose domain or codomain is not a quasicategory. It preserves degreewise pullbacks and takes fibrant cospans with Joyal fibration legs to cospans of the same kind.",
+ "statement": "Use small simplicial sets, horns, quasicategories and internal functor simplicial sets of [def-cbc-enhanced-diagrams-cones], categorical equivalences and Joyal fibrations of [lem-coef-joyal-model-structure], Kan fibrations of [lem-coef-kan-quillen-right-proper], and inner fibrations of [def-coef-infinity-fibrations]. For a monotone map $\\alpha:[m]\\to[n]$ put $\\alpha^\\vee(i)=n-\\alpha(m-i)$. Define $K^{\\mathrm{op}}_n=K_n$ with operator $K^{\\mathrm{op}}(\\alpha)=K(\\alpha^\\vee)$, and $f^{\\mathrm{op}}$ with the same degreewise components as $f$. This is a covariant involution. Opposite preserves and reflects Kan complexes, Kan fibrations, quasicategories and inner fibrations, and interchanges horn $i$ with horn $n-i$ under the standard simplex-reversal identification. For arbitrary small simplicial sets $A,C$ there is a natural simplicial isomorphism\n$$\\operatorname{Fun}(A^{\\mathrm{op}},C^{\\mathrm{op}})\\cong\\operatorname{Fun}(A,C)^{\\mathrm{op}},$$\ncompatible with composition and with $h(K^{\\mathrm{op}})\\cong(hK)^{\\mathrm{op}}$, where $h$ is the vertex-edge category in [lem-coef-joyal-model-structure]. Opposite preserves and reflects categorical equivalences and Joyal fibrations, including maps whose domain or codomain is not a quasicategory. It preserves degreewise pullbacks and takes fibrant cospans with Joyal fibration legs to cospans of the same kind.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "HTT Section 1.2.1, opposite simplicial sets; explicit realization reflection and categorical-equivalence test expansion used in former Step 14. No Stacks tag states this result; source unavailable in literature/."
@@ -10,11 +10,111 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure",
+  "lem-coef-kan-quillen-right-proper",
+  "def-coef-infinity-fibrations"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\rho_n(i)=n-i$ and $\\alpha^\\vee=\\rho_n\\alpha\\rho_m$. Reversing both orders gives a monotone map, and direct substitution gives $(\\beta\\alpha)^\\vee=\\beta^\\vee\\alpha^\\vee$, $(1)^\\vee=1$, and $(\\alpha^\\vee)^\\vee=\\alpha$. Hence the displayed formula defines a covariant involution on simplicial sets and maps. The map $r_n:\\Delta^n\\to(\\Delta^n)^{\\mathrm{op}}$ sending a simplex $\\gamma:[k]\\to[n]$ to $\\rho_n\\gamma\\rho_k$ is simplicial by the same composition identity and is its own inverse. A simplex misses vertex $j$ exactly when its reversed simplex misses vertex $n-j$. Membership in $\\Lambda_i^n$ means missing some $j\\ne i$, which becomes missing some $n-j\\ne n-i$; therefore $r_n$ restricts to $\\Lambda_i^n\\cong(\\Lambda_{n-i}^n)^{\\mathrm{op}}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Section 1.2.1, printed p. 26 (PDF p. 44), opposite and horn reversal; explicit ordinal calculation from the simplicial definitions."
+   }
+  },
+  {
+   "text": "The existing subdivision zigzag gives a natural involutive comparison $T\\leftarrow\\operatorname{Sd}T\\to\\operatorname{Sd}(T^{\\mathrm{op}})\\to T^{\\mathrm{op}}$ by weak homotopy equivalences, and states that opposite preserves and reflects weak homotopy equivalences and preserves Kan complexes. Since opposite is involutive, preservation of Kan complexes is also reflection. For a map $p:E\\to B$, a lifting square for a horn against $p^{\\mathrm{op}}$ becomes, by $r_n$, a lifting square for the reversed horn against $p$; applying the inverse reversal to a filler gives the converse. Thus Kan fibrations are preserved and reflected as well.",
+   "uses": [
+    "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Example 2.0.0.1, printed p. 53, for Kan horn lifting; the subdivision zigzag and weak-equivalence assertions are the statement of lem-coef-infinity-opposite-subdivision-kan-zigzag, whose external last-vertex input is Kerodon 00YZ."
+   }
+  },
+  {
+   "text": "The same horn bijection proves the inner-fibration assertion: an inner-horn lifting problem for $p^{\\mathrm{op}}$ at index $i$ is exactly the problem for $p$ at index $n-i$, and the two reversal maps are inverse. Taking $p:E\\to\\Delta^0$ gives the quasicategory assertion; equivalently, opposites of quasicategories are quasicategories as recorded in the relative-cone equivalence node. No fibrancy assumption on $E$ or $B$ is used, so the statement applies to arbitrary inner fibrations.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Section 1.2.1, printed p. 26, and Definition 2.0.0.3, printed p. 53; direct reversed-horn lifting calculation."
+   }
+  },
+  {
+   "text": "For arbitrary small simplicial sets $A,C$, define $R_n$ from degree $n$ of $\\operatorname{Fun}(A,C)^{\\mathrm{op}}$ to degree $n$ of $\\operatorname{Fun}(A^{\\mathrm{op}},C^{\\mathrm{op}})$ by $R_n(h)=h^{\\mathrm{op}}\\circ(\\mathrm{id}_{A^{\\mathrm{op}}}\\times r_n)$, using the degreewise equality $(A\\times\\Delta^n)^{\\mathrm{op}}=A^{\\mathrm{op}}\\times(\\Delta^n)^{\\mathrm{op}}$. For $\\alpha:[m]\\to[n]$, the identity $r_n\\Delta(\\alpha)=(\\Delta(\\alpha^\\vee))^{\\mathrm{op}}r_m$ from Step 1 gives $R_m(h\\circ(\\mathrm{id}_A\\times\\Delta(\\alpha^\\vee)))=R_n(h)\\circ(\\mathrm{id}_{A^{\\mathrm{op}}}\\times\\Delta(\\alpha))$. Thus $R$ is simplicial. Applying reversal twice gives its inverse. This proves the displayed isomorphism for all $A,C$ without a fibrancy assumption. It agrees with the cited cocone-opposite-join-functor isomorphism when $C$ is a quasicategory (the hypothesis of that node). Naturality follows by pre- and postcomposition. For $h:A\\times\\Delta^n\\to B$ and $g:B\\times\\Delta^n\\to C$, the parametrized composite is $(a,t)\\mapsto g(h(a,t),t)$; reversal applies the same $r_n$ to both occurrences of $t$, so $R$ preserves this composition and identities.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cocone-opposite-join-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Section 1.2.1 for reversal; internal-functor definition in Scholze, Six-Functor Formalisms, Lecture II, Definition 2.2 and basic fact (1), printed p. 14. The all-simplicial-set isomorphism and composition check are the explicit agent calculation here; the cited cocone node states its quasicategorical case."
+   }
+  },
+  {
+   "text": "For every simplicial set $K$, the presentation of $hK$ in the Joyal-model node gives a natural isomorphism $h(K^{\\mathrm{op}})\\cong(hK)^{\\mathrm{op}}$: keep vertices and regard each edge as its reversed arrow, and send a composable edge word to the word in reverse order. Degenerate edges remain identities. In dimension two, $d_j^{\\mathrm{op}}=d_{2-j}$, so the relation $d_1\\sigma=d_0\\sigma\\circ d_2\\sigma$ becomes exactly its opposite relation. Reversing twice is the identity, proving the isomorphism with no fibrancy assumption. Apply this to $K=\\operatorname{Fun}(A,C)$ and combine with Step 4. For $u:A\\to B$ and any quasicategory $D$, naturality identifies restriction $h\\operatorname{Fun}(B^{\\mathrm{op}},D)\\to h\\operatorname{Fun}(A^{\\mathrm{op}},D)$ with the opposite of restriction $h\\operatorname{Fun}(B,D^{\\mathrm{op}})\\to h\\operatorname{Fun}(A,D^{\\mathrm{op}})$. Step 3 says $D^{\\mathrm{op}}$ is again a quasicategory; the involution permutes all such test targets. An ordinary functor is an equivalence if and only if its opposite is (reverse a quasi-inverse and its unit and counit). The categorical-equivalence test in the Joyal-model node therefore holds for $u^{\\mathrm{op}}$ exactly when it holds for $u$, for arbitrary $A,B$.",
+   "uses": [
+    "lem-coef-infinity-cocone-opposite-join-functor",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Section 1.2.3, printed p. 29, generators and relations for hS; Proposition 2.2.5.8 and its preceding test, printed pp. 94-95. The reversal of words and test-target substitution are the explicit agent calculation here."
+   }
+  },
+  {
+   "text": "A Joyal fibration is characterized by the right lifting property against all cofibrations that are categorical equivalences, while cofibrations are degreewise injections. Opposite is an involutive degreewise identity on simplices, so it preserves and reflects injections. By Step 5 it also preserves and reflects the class of categorical-equivalence cofibrations. Applying opposite to a commutative lifting square and then applying it back to a diagonal filler gives a bijection between the lifting problems for $p$ and for $p^{\\mathrm{op}}$. Consequently Joyal fibrations are preserved and reflected, including when neither endpoint is fibrant.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Theorem 2.2.5.1, printed p. 89, with Proposition 2.2.5.8, printed pp. 94-95, and the model-category lifting axiom as stated in lem-coef-joyal-model-structure; involutive transport of lifting squares."
+   }
+  },
+  {
+   "text": "Degreewise limits, in particular pullbacks, are computed by the same sets and componentwise maps, so applying the involution commutes with pullbacks. If a cospan has quasicategorical (Joyal-fibrant) vertices and Joyal-fibration legs, Step 3 keeps every vertex quasicategorical and Step 6 keeps each leg a Joyal fibration after reversal. Thus the opposite cospan is fibrant with Joyal-fibration legs; applying opposite again proves reflection. This establishes the final pullback and fibrant-cospan clause.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Theorem 2.4.6.1, printed p. 136, for Joyal fibrancy; degreewise pullback convention of def-cbc-enhanced-diagrams-cones and Steps 3 and 6; explicit agent limit calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocone-opposite-join-functor",
+  "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-joyal-model-structure",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting agent proof below paragraph 2 of prop-coef-integral-exceptional-adjoint (finite coefficient mapping-complex adjunction); ordinal, exponential, word-reversal and lifting-square calculations, with the precise external definitions and model tests listed per step. The blueprint paragraph motivates this foundation but does not state a simplicial reversal theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +150,31 @@
    "results": "{\"t\": \"2026-10-17T08:35:00Z\", \"tool\": \"grep\", \"query\": \"opFunctorCompOpFunctorIso|topological realization|opEquivalence\", \"sub\": \"AlgebraicTopology/SimplicialSet/Op.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"25\", \"26\", \"81\", \"88\", \"91\"], \"digest\": \"600960fb352ec998\"}",
    "date": "2026-10-17",
    "verdict": "no match: SSet.opEquivalence and opFunctor give strict reversal only. Read Mathlib/AlgebraicTopology/SimplicialSet/Op.lean:20-26 and 39-93: realization homeomorphism and horns are TODOs. No hit gives the realization or Joyal invariance clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial order reversing opposite preserves Kan complexes quasicategories inner fibrations and Joyal fibrations",
+   "results": "SSet.instQuasicategoryOfKanComplex; SSet.op; SSet.opFunctor; SSet.modelCategoryQuillen.instCategoryWithFibrations; SSet.opEquivalence; SSet.modelCategoryQuillen.fibrations_eq; CategoryTheory.Nerve.quasicategory; SSet.Quasicategory (Mathlib/AlgebraicTopology/...)",
+   "date": "2026-10-17",
+   "verdict": "no match: only strict SSet.op/opEquivalence and primitive Kan/Joyal declarations; no theorem for the full reversal invariance."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.opEquivalence, SSet.Quasicategory, SSet.InnerFibration",
+   "results": "none (0 hits)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "opEquivalence|opFunctor|Quasicategory|InnerFibration [AlgebraicTopology/SimplicialSet]",
+   "results": "Mathlib/AlgebraicTopology/SimplicialSet/Op.lean:42,44-45; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean:119; Mathlib/AlgebraicTopology/Quasicategory/Basic.lean references; inner-fibration declarations in Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean:43",
+   "date": "2026-10-17",
+   "verdict": "no match: strict opposite and primitive horn infrastructure only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-relative-cartesian-model",
@@ -80,5 +201,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-opposite-homotopy-calculus",
+  "worker": "stage1",
+  "summary": "Split the opposite simplicial-set calculus into seven proof steps. Reused the existing subdivision/Kan comparison, relative-cone opposite horn result, internal-functor reversal, and Joyal model-structure characterization; the remaining horn, hom-category, lifting, and pullback arguments are written explicitly. No new nodes were needed and no duplicate or cycle was introduced. Maintainer correction: supply the explicit exponential comparison without a quasicategory hypothesis, cite the Kan and inner horn-lifting definitions, spell out reversal on hK and restriction tests, and give precise proof-source locations. No mathematical hypothesis or conclusion changed.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: supporting simplicial enhancement of the derived coefficient adjunction, opposite horn and mapping-space comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-f89e4ea60",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-f89e4ea60 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited statements; checked HTT §§1.2.1–1.2.3, Joyal model/test results, Scholze and Kerodon sources. Corrected Step 4’s arbitrary-target citation mismatch with an explicit construction, added horn-lifting definition citations, and clarified hK reversal/source locations. Finite reversal and horn checks passed; no cycles, duplicate nodes, target weakening or tool_uses. Whole corrected JSON and review.md supplied.; 1 file(s) fixed by the reviewer"
  }
 }

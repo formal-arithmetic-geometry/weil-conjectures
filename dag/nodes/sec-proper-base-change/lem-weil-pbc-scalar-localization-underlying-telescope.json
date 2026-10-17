@@ -17,9 +17,135 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\lambda_n:R\\to R_t$ for $r\\mapsto r/t^n$. First these maps exhibit the underlying $R$-module $R_t$ as the colimit of $R\\xrightarrow{t}R\\xrightarrow{t}\\cdots$. Here is the universal-property check, including possible $t$-torsion. On an object $V$, put $B=R(V)$ and let $t_V$ be the image of $t$. Given $B$-linear maps $a_n:B\\to N$ with $a_{n+1}(t_Vr)=a_n(r)$, define $a(r/t_V^n)=a_n(r)$. If $r/t_V^n=r'/t_V^m$, the fraction relation gives $k\\ge0$ with $t_V^k(t_V^m r-t_V^n r')=0$. At stage $n+m+k$ the two representatives therefore agree, and compatibility of the $a_n$ gives equal images. Addition and $B$-linearity follow by passing to a common stage; uniqueness follows since every fraction has this form. These formulas commute with restrictions. Thus the presheaf $V\\mapsto R(V)[1/t_V]$ has the presheaf colimit property. A compatible family from the sheaves $R$ to any $R$-module sheaf factors uniquely through that presheaf and then through its module sheafification by the stated sheafification adjunction. Its sheafification is precisely $R_t$ by the definition in the statement. The legs satisfy $\\lambda_{n+1}t=\\lambda_n$ and $\\lambda_n=t^{-n}\\lambda_0$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-ringed-section-localization",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM (section-localization), fraction equivalence preceding Tag 07JZ; sites-modules.tex Tag 03CY (lemma-sheafification-presheaf-modules)"
+   }
+  },
+  {
+   "text": "For any $R$-module sheaf $M$ and any $R$-module sheaf $N$, tensor symmetry and the tensor--Hom adjunction give\n$$\\operatorname{Hom}_R(R_t\\otimes_R M,N)\\cong\\operatorname{Hom}_R(R_t,\\mathcal Hom_R(M,N))\\cong\\{(a_n:R\\to\\mathcal Hom_R(M,N))_n\\mid a_{n+1}t=a_n\\}\\cong\\{(b_n:M\\to N)_n\\mid b_{n+1}t=b_n\\}.$$\nThe middle bijection is step 1, and the last is the same adjunction and $R\\otimes_R M\\cong M$. This is exactly the colimit universal property, so $U_0(R_t\\otimes_R M)$ is the colimit of $M\\xrightarrow{t}M\\xrightarrow{t}\\cdots$, where $U_0$ denotes restriction on module sheaves. The $n$th leg $j_{n,M}$ is $\\lambda_n\\otimes1_M$, hence locally sends $m$ to $t^{-n}\\otimes m$. This also specifies the map on sections supplied by the tensor sheafification. In the tensor order $M\\otimes_R R_t$ used for the unit in the question, it is $m\\mapsto m\\otimes t^{-n}$.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO (lemma-internal-hom-adjoint-tensor), Tag 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "The exactness needed for the functors in the question is available on this arbitrary small ringed site. By the ringed-site Grothendieck theorem, filtered colimits of $R$-module sheaves exist and are exact. Apply this to the diagram over the small filtered category $\\mathbf N$ consisting of the scalar sequences of a short exact sequence $0\\to M'\\to M\\to M''\\to0$; each row is the given exact sequence. Step 2 identifies its colimit sequence with the restriction of its scalar-extension sequence. Exactness of module sheaves is detected on underlying abelian sheaves: the forgetful functors are faithful and exact and preserve kernels and cokernels. Indeed the homology of a three-term sequence is preserved, and a module sheaf whose underlying abelian sheaf is zero is zero. Since restriction of scalars changes no underlying abelian sheaf, it is exact and reflects exactness. Consequently extension of scalars is exact as well. Both functors therefore carry quasi-isomorphisms to quasi-isomorphisms, and their derived functors are computed termwise, with their termwise shift identifications, by the exact-functor factorization theorem.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits); derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Choose a representative cochain complex $C$ and an isomorphism $QC\\cong L$. Put $B^\\bullet=\\varinjlim_n(C\\xrightarrow{t}C\\xrightarrow{t}\\cdots)$, taken degreewise in $R$-module sheaves, and $E(C)=R_t\\otimes_R C$ termwise. Step 2 gives, in each degree, a unique colimit isomorphism $\\beta_C:B^\\bullet\\xrightarrow{\\sim}U_0E(C)$ sending the stage-$n$ map $c_n:C\\to B$ to $j_{n,C}$. It is a chain map: $d(t^{-n}\\otimes x)=t^{-n}\\otimes dx$, so the two composites with the differential agree on every colimit leg; uniqueness in the colimit universal property gives equality. The inverse commutes with differentials by multiplying this equality by the degreewise inverses. By step 3, $Q(U_0E(C))$ represents $UFL$. Thus $Q\\beta_C$ identifies the termwise scalar-sequence colimit with $UFL$. No strictly bounded representative, no injectivity of $t$, and no sectionwise computation of a sheaf colimit is assumed.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-derived-category); Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Apply the sequential-complex homotopy-colimit theorem to $E_n^\\bullet=C$ with every transition multiplication by $t$. Its site-module hypotheses hold for the given small site and sheaf of commutative rings, and its index is the small sequence $\\mathbf N$. Put $A_C=\\bigoplus_n C$ termwise and $u\\iota_n=\\iota_n-\\iota_{n+1}t$. The theorem gives a quasi-isomorphism $p:\\operatorname{Cone}(u)\\to B$ equal on the unshifted summand to the colimit map $q:A_C\\to B$, and it asserts that $QA_C$ with its actual coprojections is the coproduct of the $QC$ in $D(R)$. Transport its distinguished cone triangle along $Qp$ and then along $Q\\beta_C$. The result is a distinguished triangle\n$$\\bigoplus_nL\\xrightarrow{1-s}\\bigoplus_nL\\xrightarrow{(Qj_{n,C})_n}UFL\\longrightarrow(\\bigoplus_nL)[1].$$\nThe equality of the second arrow with the displayed family follows from $p$ restricted to the unshifted summand being $q$ and $\\beta_Cc_n=j_{n,C}$. Hence this is the claimed triangle with its specified maps, not merely an identification of its third object.",
+   "uses": [
+    "lem-kun-complex-colimit-hocolim",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0949 (lemma-colim-hocolim), using Tag 093W (lemma-compute-colimit) and Tag 0A5L (lemma-direct-sums)"
+   }
+  },
+  {
+   "text": "The termwise unit is $j_{0,C}:x\\mapsto1\\otimes x$ (equivalently $x\\otimes1$ after tensor symmetry). Multiplication by $t$ on $E(C)$ is inverted by multiplication by $t^{-1}$, since $t$ is a unit in the localized sheaf of rings. Thus in each degree $j_{n,C}=t^{-n}j_{0,C}$, and after localization $Qj_{n,C}=U(t^{-n})\\eta_L$. This proves the required formula for every leg, including $n=0$. In particular $U(t^{-(n+1)})\\eta_L\\,t=U(t^{-n})\\eta_L$, the actual cocone relation used in the second arrow of the triangle.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-ringed-section-localization",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product); algebra.tex Tag 00CM (section-localization)"
+   }
+  },
+  {
+   "text": "For the separately chosen telescope triangle in the question, use the canonical coproduct identifications to identify its first two vertices and first arrow with those of step 5. Axiom TR3 completes the identity maps of these vertices to a map of distinguished triangles, whose third component is $\\gamma:H_t(L)\\to UFL$. Since its first two components are isomorphisms, the triangle-isomorphism lemma makes $\\gamma$ an isomorphism. The second square says $\\gamma$ composed with the telescope's second arrow is the map of step 5. Precomposing with the $n$th coprojection gives exactly $U(t^{-n})\\eta_L$. Only existence of this comparison is asserted; no uniqueness or functorial choice of cones is needed.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145 (definition-triangulated-category), TR3; Tag 014A (lemma-third-isomorphism-triangle)"
+   }
+  },
+  {
+   "text": "Finally the specified legs themselves are natural and shift compatible. For a chain map $h:C\\to C'$, $(1\\otimes h)j_{n,C}=j_{n,C'}h$ because both maps send $x$ to $t^{-n}\\otimes h(x)$. The exact termwise functors of step 3 invert quasi-isomorphisms. The fully faithful precomposition property of localization therefore descends these natural transformations to $D(R)$; explicitly the same equation holds for $Qh$ and, by multiplying with inverses, for inverses of quasi-isomorphisms, hence for all localized morphisms. For $k\\in\\mathbf Z$, under the termwise shift identifications, $(j_{n,C[k]})^r=(j_{n,C})^{r+k}$. Both shifted differentials are multiplied by $(-1)^k$, so this equality commutes with the differentials without an extra sign on a leg. The shift compatibility in exact-functor factorization and faithfulness of precomposition with $Q$ descend it to $j_{n,L[k]}=j_{n,L}[k]$ under $UF(L[k])\\cong UF(L)[k]$. This concerns the legs in the statement and does not assert naturality of arbitrary chosen cone comparisons.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-derived-category); Tag 015F (lemma-right-derived-exact-functor); categories.tex Tags 04VG/04VK (localization)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-category-colimit",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-kun-complex-colimit-hocolim",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0949 (lemma-colim-hocolim) and Tags 093W, 0A5L; scalar colimit expanded from algebra.tex Tag 00CM and sites-modules.tex Tags 03CY, 03EO; comparison of cones: Tag 014A"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +174,59 @@
    "results": "0 hits in the requested Mathlib directory.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on a ringed site, derived extension of scalars by inverting an element is the homotopy colimit of repeated multiplication by that element",
+   "results": "8 hits: SheafOfModules.mapFree, SheafOfModules.Presentation.map, SheafOfModules.Presentation.isColimit, Ext, localCohomology.diagram, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, localCohomology.ofDiagram, DerivedCategory.instLinearHomotopyCategoryIntUpQh",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state scalar localization as a derived telescope"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|hocolim|homotopyColimit",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state scalar localization as a derived telescope"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar localization of a sheaf complex as the mapping telescope of multiplication by an element",
+   "results": "8 hits: ModuleCat.Tilde.sections_smul_localizations_def, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, PresheafOfModules.Sheafify.map_smul, LocalizedModule.smul_def, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.Sheafify.SMulCandidate.mk', PresheafOfModules.Sheafify.SMulCandidate.ctorIdx",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state scalar localization as a derived telescope"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"telescope\"",
+   "results": "12 hits: Lean.Parser.Sym.Simp.arrowTelescope, Lean.Parser.Sym.Simp.telescope, Lean.Meta.mapForallTelescope, Lean.Meta.mapForallTelescope', Lean.Meta.forallMetaTelescope, Lean.Meta.forallMetaBoundedTelescope, Lean.Meta.lambdaMetaTelescope, Lean.Meta.forallMetaTelescopeReducing",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state scalar localization as a derived telescope"
+  },
+  {
+   "tool": "grep",
+   "query": "localization|colimit|mappingCone",
+   "results": "25 hits: Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state scalar localization as a derived telescope"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"localization\"",
+   "results": "6 hits: DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.Plus.instIsLocalizationPlusQhQuasiIso, DerivedCategory.Plus.instIsLocalizationPlusQQuasiIso, DerivedCategory.Plus.instIsLocalizationPlusQhTrWSubcategoryAcyclic",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state scalar localization as a derived telescope"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cone of identity minus shift on a countable direct sum of copies of a complex is the complex obtained by tensoring with the ring localized away from one element",
+   "results": "8 hits: HomotopyCategory.spectralObjectMappingCone_ω₁, HomologicalComplex.instHasTensorXTensorUnit, HomologicalComplex.ιTensorObj, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, HomologicalComplex.rightUnitor'_inv, HomologicalComplex.rightUnitor",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state scalar localization as a derived telescope"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-scalar-localization-derived-hom",
@@ -72,5 +247,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-scalar-localization-underlying-telescope",
+  "worker": "stage1",
+  "summary": "Expanded the scalar-localization telescope using fraction relations, module sheafification and tensor--Hom adjunction, then applied the existing sequential-complex homotopy-colimit theorem; checked exact scalar functors, all legs, arbitrary cone comparison, naturality and shifts. No new nodes or statement changes.",
+  "blueprint": "Realizes the integral-lattice/rationalization ingredient underlying thm-weil-pbc-finite-extension: the underlying scalar extension is the telescope of repeated multiplication by the denominator. The current main-20261015 proof rationalizes an integral isomorphism; this child supplies the generic telescope model used by scalar-localization-derived-hom and does not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor--Hom adjunction on any ringed site gives preservation of this scalar colimit by tensoring; no proper-base-change unit statement supplies this categorical tool."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic exact filtered colimits for module sheaves on an arbitrary small ringed site establish exact scalar extension; the unit has no such arbitrary-ringed-site theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Faithful exact forgetful functors for arbitrary module sheaves detect exactness under restriction of scalars; this is a general coefficient-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor factorization supplies the termwise derived functors and their coherent shift comparisons."
+   },
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "Generic sequential-complex telescope theorem on ringed sites, including actual derived coproducts and the canonical cone projection; it does not use any Kunneth conclusion and the proper-base-change unit has no equivalent general theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-kun-complex-colimit-hocolim"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-36e8a9857",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-36e8a9857 (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, item, cited DAG statements, unit route, current blueprint proof, and cited Stacks locations. Verified all eight proof steps, hypotheses, base-change/coefficient context, telescope legs, naturality, shifts, edge cases (t=0, nilpotent, unit, zero divisor), duplicate search, and route-lock compliance. No new nodes or repairs required; review.md records the checks."
  }
 }

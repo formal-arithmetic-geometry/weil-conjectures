@@ -11,41 +11,101 @@
   "def-weil-pbc-simplicial-set",
   "def-coef-coherent-monad-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\alpha<\\lambda$ and form the object $P_\\alpha$ by the displayed pushout: in simplicial degree $k$ it is the quotient of $(X_\\alpha)_k\\amalg\\coprod_{\\sigma\\in R_\\alpha}(M_k\\times(\\Delta^{n_\\sigma})_k)$ which identifies $(m,\\tau)$ whenever $\\tau$ factors through a proper face of $[n_\\sigma]$, with that element identified with $m\\cdot\\tau^*\\sigma$ in $(X_\\alpha)_k$. The relation is preserved by every simplicial operator and by the $M$-action, because the boundary inclusions and the maps induced by the faces of $\\sigma$ are simplicial and equivariant. Thus $P_\\alpha$ is a left simplicial $M$-module and the bottom map induces an equivariant simplicial map $\\phi_\\alpha:P_\\alpha\\to X_{\\alpha+1}$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-coef-coherent-monad-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proposition 5.3.3, construction of the relative cell pushout"
+   }
+  },
+  {
+   "text": "The map $\\phi_\\alpha$ is surjective in degree $k$. An element of $(X_\\alpha)_k$ is already represented by the old summand. For an element outside $(X_\\alpha)_k$, the assumed bijection supplies a unique $\\sigma\\in R_\\alpha$, $m\\in M_k$, and a surjection $\\theta:[k]\\to[n_\\sigma]$ with the element equal to $m\\cdot\\theta^*\\sigma$; it is represented by $(m,\\theta)$ in the cell summand. If a cell simplex is indexed by a non-surjective $\\tau:[k]\\to[n_\\sigma]$, its image lies in a proper face of $\\sigma$, hence in $X_\\alpha$ by the hypothesis on proper faces, and therefore is represented by the old summand.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Lemma 6.1.8 skeletal cell argument and Proposition 5.3.3"
+   }
+  },
+  {
+   "text": "The map $\\phi_\\alpha$ is injective in degree $k$. A representative from the old summand cannot have the same image as a representative $(m,\\theta)$ with $\\theta$ surjective, since the former lies in $X_\\alpha$ and the latter lies outside it. Two surjective representatives have equal images only when their triples $(\\sigma,m,\\theta)$ agree, by the assumed degreewise bijection. Every non-surjective representative is identified in the quotient with its image in the old summand; if two such representatives have the same image, they become equal through that common old element. Hence the quotient has exactly one representative for every element of $(X_{\\alpha+1})_k$, and $\\phi_\\alpha$ is bijective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proposition 5.3.3, uniqueness of cell representatives"
+   }
+  },
+  {
+   "text": "The preceding degreewise bijection is compatible with all simplicial operators and with the $M$-action by construction, so $\\phi_\\alpha$ is an isomorphism of left simplicial $M$-modules. Equivalently, the square in the statement is a pushout: for any left simplicial $M$-module $Y$, a map from $P_\\alpha$ to $Y$ is exactly a map $X_\\alpha\\to Y$ together with equivariant maps from each $M\\times\\Delta^{n_\\sigma}$ to $Y$ whose restrictions to $M\\times\\partial\\Delta^{n_\\sigma}$ agree with the prescribed face maps. This is the universal property of the displayed pushout, checked degreewise on the quotient.",
+   "uses": [
+    "def-coef-coherent-monad-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proposition 5.3.3, relative projective cells"
+   }
+  },
+  {
+   "text": "At every successor ordinal the inclusion $X_\\alpha\\to X_{\\alpha+1}$ is therefore a pushout of a coproduct of free-module maps $M\\times\\partial\\Delta^{n_\\sigma}\\to M\\times\\Delta^{n_\\sigma}$. At a limit ordinal the given equality $X_\\beta=\\bigcup_{\\alpha<\\beta}X_\\alpha$ is precisely continuity of the composite. Consequently $A=X_0\\to X=X_\\lambda$ is a transfinite composite, continuous at limits, of such pushouts; the indexing sets are small sets in the ambient universe, so this is a small relative projective cell complex. When $A=\\varnothing$, the same construction is the stated cellular weight for the one-object simplicial category with endomorphism monoid $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Corollary 6.2.3 and Observation 6.2.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-coef-coherent-monad-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Proposition 5.3.3 and Lemma 6.1.8; source read online, archival copy WANTED"
+ },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "A simplicial monoid action with free simplex orbits and boundaries in earlier stages yields a relative projective cell complex",
-   "results": "HomotopicalAlgebra.RelativeCellComplex; HomotopicalAlgebra.RelativeCellComplex.Cells; HomotopicalAlgebra.RelativeCellComplex.mk; CategoryTheory.SmallObject.relativeCellComplexιObj; HomotopicalAlgebra.RelativeCellComplex.Cells.mk; FreeSimplexQuiver; FreeSimplexQuiver.Hom.rec; SSet.modelCategoryQuillen.I_le_monomorphisms",
+   "tool": "grep",
+   "query": "RelativeCellComplex|free.*module|simplicial.*cell",
+   "results": "0 hits in Mathlib/AlgebraicTopology; no free-module orbit criterion.",
    "date": "2026-10-17",
-   "verdict": "no match: generic relative-cell structures, no free-module orbit criterion"
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A degreewise bijective free orbit decomposition of new simplices with proper faces in the old simplicial submodule yields a pushout of free simplicial module boundary inclusions",
+   "results": "SSet.modelCategoryQuillen.I; SSet.horn₂₀.isPushout; SSet.Subcomplex.BicartSq.isPushout; SSet.horn₂₁.isPushout; SSet.horn₂₂.isPushout; SSet.modelCategoryQuillen.boundary_ι_mem_I; SimplexCategoryGenRel.exists_P_σ_P_δ_factorization; SimplexCategoryGenRel.instHasFactorizationP_σP_δ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic simplicial-set boundary and factorization results, no module-orbit criterion"
   },
   {
    "tool": "loogle",
-   "query": "RelativeCellComplex, SmallObject, SimplicialObject",
-   "results": "none; unknown identifier RelativeCellComplex",
+   "query": "RelativeCellComplex, CategoryTheory.SmallObject, SimplicialObject",
+   "results": "none; Loogle rejected unknown identifier RelativeCellComplex",
    "date": "2026-10-17",
-   "verdict": "unavailable: Loogle rejected the pattern"
+   "verdict": "unavailable"
   },
   {
    "tool": "leanfinder",
-   "query": "Free simplicial monoid module orbit filtration by boundary simplex cells",
-   "results": "SimplicialObject.Splitting.summand; AlgebraicTopology.DoldKan.Γ₀.Obj.summand; SimplexCategoryGenRel.toSimplexCategory; SSet.skeletonOfMono_succ; SSet.stdSimplex.face; SSet.skeleton",
+   "query": "free simplicial module orbit decomposition by degeneracies gives pushout of boundary simplex cells",
+   "results": "SSet.horn₂₁.isPushout; AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂; AlgebraicTopology.DoldKan.Γ₀.Obj.summand; AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀; SSet.horn.multicoequalizerDiagram; AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand; AlgebraicTopology.DoldKan.Γ₀.Obj.map; AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'",
    "date": "2026-10-17",
    "verdict": "no match: skeletal primitives only"
-  },
-  {
-   "tool": "grep",
-   "query": "RelativeCellComplex|boundary.*simplex|free.*action",
-   "results": "Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean; Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean; Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct.lean",
-   "date": "2026-10-17",
-   "verdict": "no match: no module-cell orbit lemma"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-walking-module-weight-cells",
@@ -68,5 +128,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-free-module-orbit-cell-filtration",
+  "worker": "stage1",
+  "summary": "Added a direct degreewise proof of the free-orbit pushout criterion. The quotient pushout is analyzed in each simplicial degree; non-surjective operators land in old faces, while the assumed orbit bijection gives unique representatives for new simplices. Equivariance, the pushout universal property, and transfinite continuity then give the relative projective cell complex and the empty-base cellular-weight clause. No new nodes were necessary.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived mapping-complex adjunction: the free-orbit skeletal filtration and its relative projective cell presentation.",
+  "tool_uses": [],
+  "group": "NK"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-696ce682f",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-696ce682f (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. The delivered node metadata contradicts the worker report: created.item/group remain lem-coef-walking-module-weight-cells/N4, and split_report omits group NK. Corrected whole DAG JSON written under fixes/dag/nodes/sec-six-functors; review.md records all step, source, route, and edge-case checks.; 1 file(s) fixed by the reviewer"
  }
 }
