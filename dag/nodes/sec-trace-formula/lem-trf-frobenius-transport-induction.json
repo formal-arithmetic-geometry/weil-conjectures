@@ -154,5 +154,30 @@
   "group": "Q78",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-db2685153 (reviewer sub-agent of L); spot-checked: I read the item in full, along with its parent lem-trf-frobenius-operator-compact-description (all 5 steps), def-nagata-category (Mathlib leaf CategoryTheory.Category), the sk-d-weil unit (no steps) and the main-20261015 parent statement and proof. The statement is byte-identical to the base node; the delivery changes only status, proof, proof_deps, proof_origin, the searches and split_report. It adds no new nodes and declares no tool uses. The types are consistent: T(d_r):TP_rM->T^{r+1}M and d_{r+1}^{-1}:T^{r+1}M->P_{r+1}M, so the coherence equals b_r; S_r and tau_r both map H(M)->H(P_rM). I checked small cases: r=1; r=2, where b_1=d_2^{-1} because d_1=id; the identity-functor case, where both sides are eta^r; one-object (monoid) categories, where the factor order is right; and the empty category. Step 3 checked: H(d_r)S_r=E_r, naturality of eta at u=d_{r,M} gives eta_{T^rM}H(d_r)=H(Td_r)eta_{P_rM}, then coherence, the induction hypothesis and the recurrence. The parent's step 3 supplies every hypothesis (C=D^b_c, H=RGamma_c, P_1=T, d_1=id, eta=tau_c natural). The nearest existing node, lem-trf-global-frobenius-iterate-formula (powers of a G-algebra operator), is a different statement, not a duplicate. The item is not a restated parent clause: it is the induction the parent applies. There is no route issue, no SGA, no target or coefficient category involved, and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NaturalTransportInduction",
+  "declaration": "CategoryTheory.NaturalTransport.compared_eq",
+  "declarations": [
+   "CategoryTheory.NaturalTransport.power",
+   "CategoryTheory.NaturalTransport.repeated",
+   "CategoryTheory.NaturalTransport.compared",
+   "CategoryTheory.NaturalTransport.compared_eq"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NaturalTransportInduction.lean",
+  "statement": "theorem compared_eq {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] (H : C ⥤ D) (T : C ⥤ C) (P : ℕ → C ⥤ C) (hP : P 0 = T) (d : ∀ n : ℕ, P n ≅ power T (n + 1)) (b : ∀ n : ℕ, P n ⋙ T ≅ P (n + 1)) (hd : d 0 = eqToIso hP) (hdb : ∀ n : ℕ, (Functor.whiskerRight (d n).hom T) ≫ (d (n + 1)).inv = (b n).hom) (η : H ⟶ T ⋙ H) (τ : ∀ (n : ℕ) (M : C), H.obj M ⟶ H.obj ((P n).obj M)) (hτ₀ : ∀ M : C, τ 0 M = η.app M ≫ H.map (eqToHom (congrArg (fun F : C ⥤ C ↦ F.obj M) hP.symm))) (hτ : ∀ (n : ℕ) (M : C), τ (n + 1) M = τ n M ≫ η.app ((P n).obj M) ≫ H.map ((b n).hom.app M)) : ∀ (n : ℕ) (M : C), compared H T P d η n M = τ n M",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The family index n represents the positive source index r=n+1. The helpers implement exactly the powers and displayed composites introduced by this node. hP and hd express P_1=T and d_1=id_T; hτ₀ uses only the corresponding equality transport of its codomain."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46c6a3cf3",
+  "group": "Q20",
+  "result": "pass",
+  "note": "The head changes only 3 files: the module, the node's lean field and the report. Every clause matches the node: P n = P_{n+1}, hP for P_1=T, hd for d_1=id via eqToIso, hdb is whiskerRight(d n).hom T ≫ (d(n+1)).inv = (b n).hom, η : H ⟶ T ⋙ H, τ has no naturality, hτ is in the source's order, and the conclusion quantifies over every n and M. Four independent universes; lean.statement verbatim. The helpers power, repeated and compared are real recursive data with source and blueprint docstrings; the theorem is sorry. Edge cases r=1, r=2, T=identity and empty C checked. No duplicate in Mathlib or lean/Sheaf. lcompile.py compiles the module cleanly (exit 0, 6.2 s); nt_compile.py timed out on an unrelated KFlat.lean override. A /tmp-only proof compiles without sorry, so the statement is true as typed. The Second reading section uses the standard direct-delivery sentence. No findings."
  }
 }

@@ -277,5 +277,28 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-e87565605 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 7 steps and the statement of every cited node, plus the sources Stacks 0GKX (the second boundary Z', 'Again Z' -> V is quasi-finite') and 0GK7 clauses (4)(b) and (5)-(8). The item's hypotheses match how the parent lem-weil-pbc-etale-constant-shriek-rel-dim-1 uses it in its step 4. The statement is true and not weakened. Edge cases checked: empty I, B or T_i; O_i=C_i; 0-dimensional fibres; P^1 minus points; and dropping fibrewise nonemptiness, which makes the statement fail. There are no new nodes and no duplicate of the item in the DAG. The route check passes, and I accept the three declared generic tool uses. No target node, base-change morphism or coefficient category is involved. One fault (C4/E1), now fixed: step 4 got regularity of the fibre over an arbitrary residue field kappa(s) from lem-sc-smooth-regular, whose 'smooth curve' comes from def-sc-curves and needs an algebraically closed field. I replaced it with the same-unit node lem-weil-pbc-geometric-regularity-smooth-field-criterion (any field, locally of finite type, reviewed), applied with L=kappa(s), in the step text, uses and proof_deps. The replacement does not create a cycle. Every other step was checked against the cited statements: step 2's finite-coproduct properness is a genuinely elementary few-line check; step 3 gives finite presentation including quasi-separatedness; step 5's Kolmogorov, dimension at most 1, Noetherian argument and step 6's set-level fibre decomposition are sound. Fix file: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-good-curves-boundary-quasifinite.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GoodCurvesBoundaryQuasiFinite",
+  "declaration": "AlgebraicGeometry.good_curves_boundary_quasiFinite",
+  "declarations": [
+   "AlgebraicGeometry.goodCurvesBoundaryMap",
+   "AlgebraicGeometry.good_curves_boundary_quasiFinite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GoodCurvesBoundaryQuasiFinite.lean",
+  "statement": "theorem good_curves_boundary_quasiFinite {I : Type u} [Finite I] (B : Scheme.{u}) [IsLocallyNoetherian B] [CompactSpace B] (T C O : I → Scheme.{u}) (t : ∀ i, T i ⟶ B) (b : ∀ i, C i ⟶ T i) (u : ∀ i, O i ⟶ C i) [∀ i, IsFinite (t i)] [∀ i, Etale (t i)] [∀ i, Smooth (b i)] [∀ i, IsProper (b i)] [∀ i, IsOpenImmersion (u i)] (hC : ∀ (i : I) (s : T i), Nonempty ((b i).fiber s) ∧ GeometricallyConnected ((b i).fiberToSpecResidueField s) ∧ topologicalKrullDim ((b i).fiber s) ≤ 1) (hO : ∀ (i : I) (s : T i), Nonempty ((u i ≫ b i).fiber s)) : IsSeparated (goodCurvesBoundaryMap B T C O t b u) ∧ Scheme.Hom.IsQuasiFinite (goodCurvesBoundaryMap B T C O t b u) ∧ LocallyOfFinitePresentation (goodCurvesBoundaryMap B T C O t b u) ∧ QuasiCompact (goodCurvesBoundaryMap B T C O t b u) ∧ QuasiSeparated (goodCurvesBoundaryMap B T C O t b u)",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "goodCurvesBoundaryMap is the canonical composite of the reduced closed-complement inclusion with the coproduct structure map, constructed from vanishingIdeal and Sigma.desc. No new notion or dependency repair is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f24b2a18",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Every clause matches the node through the recorded dependency declarations: Noetherian base as IsLocallyNoetherian + CompactSpace; finite étale as IsFinite + Etale; Smooth and IsProper for b_i; fibre conditions via Scheme.Hom.fiber, GeometricallyConnected over the residue field and topologicalKrullDim ≤ 1; hO is the fibre of O_i → T_i; the open is the supremum of the images of u_i in the coproduct; Z is the recorded vanishing-ideal reduced subscheme; the conclusion is IsSeparated, the project's Scheme.Hom.IsQuasiFinite and the Stacks 01TP finite-presentation triple. I in the scheme universe is harmless because I is finite. The helper goodCurvesBoundaryMap is the canonical map, not hollow. Node diff against the live DAG: only the lean record is added, and lean.statement appears verbatim in the file. Docstrings carry the source place, blueprint tag and 7-step plan; the proof is only sorry; no pro-étale content; the report has both sections. Edge cases (empty I, B or T_i; O_i = C_i; 0-dimensional fibres) are covered. nt_compile --json compiled with rc 0 and no errors or warnings in 12.7 s and 24.8 s; a probe confirmed the types, coercions and axioms. No findings."
  }
 }

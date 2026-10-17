@@ -15,7 +15,8 @@
   "def-pur-localized-ringed-site",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories",
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-ringed-derived-restriction"
  ],
  "proof": [
   {
@@ -257,5 +258,49 @@
   "group": "Q143",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-0c0f078d4 (reviewer sub-agent of L); spot-checked: Read the item's six steps in full, the statements of all 15 cited nodes, the parent det-sf-comparison-affine-continuity (its Step 5 is the only citer), unit sk-prop-sf-comparison (uses []), Stacks 03F3 and its proof in sites-cohomology.tex, and Mathlib RightDerivedFunctorPlus.lean:36-55 and DerivabilityStructureInjectives.lean:376. Statement unchanged and no new nodes. Step 1: def-pur-localized-ringed-site gives sectionwise restriction and relocalization; lem-pe-constant-left-module-inverse-image covers noncommutative Λ and gives exactness. Step 2 follows Stacks' own proof of 03F3(1): the extension-by-zero adjunction (zero-map hypothesis checked) plus right-adjoint-preserves-injectives in the right orientation. Step 3: enough injectives from the Grothendieck-abelian node on small slices; the right-derived-plus-injective hypotheses (abelian categories, enough injectives, additive evaluation through Λ→Λ_{C/W}(id_W)) hold; α_W = RE_W(S_W e)∘η is an isomorphism. Step 4: ρ_a comes from one application of the leaf's universal property (the transformation is natural on K^+, and t_a = r_a on S_W L), so marking it elementary is fair. Step 5: I recomputed the square ρ_aα_W = α_{W'}Q(r_a) and the naturality in (L,e); both are correct. Step 6: strict I^op diagram with one lower bound, and injective acyclicity via clause (2) without assuming that forgetting scalars preserves injectives. Edge cases: identity and terminal W, composable arrows, L=0, empty I, a lower bound N≠0, the zero ring, M_2(k). Coefficients are left modules over the constant ring sheaf, as in the parent; no SGA. Accepted tool_uses: lem-pur-kinjective-restrict-localized-adjunction (generic extension by zero) and lem-weil-pbc-ring-sheaves-grothendieck (generic, Lean-closed in slopmaster2). Checked the DAG nodes citing 03F3: none duplicates the item. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InjectiveComplexSliceSectionModel",
+  "declaration": "CategoryTheory.injectiveComplexSliceSectionModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveComplexSliceSectionModel.lean",
+  "statement": "theorem injectiveComplexSliceSectionModel [∀ W : C, HasWeakSheafify (J.over W) RingCat.{u}] (L : CochainComplex.Plus (constantModuleSheaves J Λ)) (hInjective : ∀ n : ℤ, Injective (L.obj.X n)) (K : DerivedCategory.Plus (constantModuleSheaves J Λ)) (e : DerivedCategory.Plus.Q.obj L ≅ K) : (∀ W : C, ∃ c : (((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)).over W) ≅ (constantSheaf (J.over W) RingCat.{u}).obj (RingCat.of Λ), Functor.whiskerLeft (Over.forget W).op (constantCoefficientMap J Λ) ≫ c.hom.hom = constantCoefficientMap (J.over W) Λ) ∧ (∀ W : C, PreservesFiniteLimits (SheafOfModules.overFunctor.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)) W) ∧ PreservesFiniteColimits (SheafOfModules.overFunctor.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)) W) ∧ ∀ M : constantModuleSheaves J Λ, Injective M → Injective (M.over W)) ∧ ∃ beta : ∀ W : C, constantModuleDerivedSections J Λ (op W) ≅ constantModuleSliceRestriction J Λ W ⋙ constantModuleSliceDerivedSections J Λ W, (∀ (W : C) (M : CochainComplex.Plus (constantModuleSheaves J Λ)), (constantModuleEvaluation J Λ (op W)).rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient _).obj M) ≫ (beta W).hom.app (DerivedCategory.Plus.Q.obj M) = (constantModuleSliceEvaluation J Λ W).rightDerivedFunctorPlusUnit.app (((SheafOfModules.overFunctor _ W).mapHomotopyCategoryPlus).obj ((HomotopyCategory.Plus.quotient _).obj M)) ≫ (constantModuleSliceDerivedSections J Λ W).map ((SheafOfModules.overFunctor _ W).mapDerivedCategoryPlusFactorsh.inv.app ((HomotopyCategory.Plus.quotient _).obj M))) ∧ (∀ W : C, IsIso (constantModuleSectionComparison J Λ L K e (op W) ≫ (beta W).hom.app K)) ∧ (∀ {W' W : C} (a : W' ⟶ W), (constantModuleSectionComparison J Λ L K e (op W) ≫ (beta W).hom.app K) ≫ ((beta W).inv.app K ≫ (constantModuleDerivedRestriction J Λ a.op).app K ≫ (beta W').hom.app K) = DerivedCategory.Plus.Q.map (ObjectProperty.homMk (((constantModuleRestriction J Λ a.op).mapHomologicalComplex (.up ℤ)).app L.obj)) ≫ (constantModuleSectionComparison J Λ L K e (op W') ≫ (beta W').hom.app K)) ∧ (∀ (L' : CochainComplex.Plus (constantModuleSheaves J Λ)) (K' : DerivedCategory.Plus (constantModuleSheaves J Λ)) (e' : DerivedCategory.Plus.Q.obj L' ≅ K') (f : L ⟶ L') (k : K ⟶ K'), DerivedCategory.Plus.Q.map f ≫ e'.hom = e.hom ≫ k → ∀ W : C, (constantModuleSectionComparison J Λ L K e (op W) ≫ (beta W).hom.app K) ≫ (constantModuleSliceRestriction J Λ W ⋙ constantModuleSliceDerivedSections J Λ W).map k = DerivedCategory.Plus.Q.map ((constantModuleEvaluation J Λ (op W)).mapCochainComplexPlus.map f) ≫ (constantModuleSectionComparison J Λ L' K' e' (op W) ≫ (beta W).hom.app K')) ∧ (∀ (I : Type i) [SmallCategory I] (D : I ⥤ C), ∃ N : ℤ, ∀ (j : Iᵒᵖ) (n : ℤ), n < N → IsZero (((D.op ⋙ constantModuleSectionDiagram J Λ L.obj).obj j).X n)) ∧ (∀ (M : constantModuleSheaves J Λ), Injective M → ∀ (W : C) (n : ℤ), 0 < n → IsZero ((DerivedCategory.Plus.homologyFunctor (ModuleCat.{u} Λ) n).obj ((constantModuleSliceDerivedSections J Λ W).obj ((constantModuleSliceRestriction J Λ W).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj M)))))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.coefficientSectionPresheaf",
+   "CategoryTheory.coefficientSectionPresheaf_additive",
+   "CategoryTheory.coefficientSectionEvaluation",
+   "CategoryTheory.coefficientSectionEvaluation_additive",
+   "CategoryTheory.constantCoefficientMap",
+   "CategoryTheory.constantModuleSheaves",
+   "CategoryTheory.constantModuleEvaluation",
+   "CategoryTheory.constantModuleEvaluation_additive",
+   "CategoryTheory.constantModuleRestriction",
+   "CategoryTheory.moduleSheavesEnoughInjectives",
+   "CategoryTheory.constantModuleSectionDiagram",
+   "CategoryTheory.constantModuleDerivedSections",
+   "CategoryTheory.constantModuleDerivedRestriction",
+   "CategoryTheory.constantModuleSectionComparison",
+   "CategoryTheory.sliceRestrictionAdditive",
+   "CategoryTheory.sliceRestrictionFiniteLimits",
+   "CategoryTheory.sliceRestrictionFiniteColimits",
+   "CategoryTheory.constantModuleSliceRestriction",
+   "CategoryTheory.constantModuleSliceEvaluation",
+   "CategoryTheory.constantModuleSliceEvaluation_additive",
+   "CategoryTheory.sliceModuleEnoughInjectives",
+   "CategoryTheory.constantModuleSliceDerivedSections",
+   "CategoryTheory.injectiveComplexSliceSectionModel"
+  ],
+  "note": "Repaired the retained packet: removed all bare Prop placeholders and arbitrary section objects. Canonical scalar restriction, literal evaluation complexes and derived restrictions are real constructions. The theorem states normalized slice identification, comparison invertibility, restriction square, naturality, common lower bound and injective acyclicity. Technical sheafification and localization instances encode the chosen small-site and derived-category constructions; no mathematical hypotheses are added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-946da1c58",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Clause-by-clause check of the node, all 9 stmt_deps and Stacks 03F3 against CategoryTheory.injectiveComplexSliceSectionModel. It covers the small site, unital noncommutative Λ, constant ring sheaf, left-module sheaves, slice J.over W, and the canonical normalized identification of the restricted constant ring sheaf. Also exactness and injective preservation, the unit-normalized beta giving α_W with IsIso, the restriction square (ρ_a by rightDerivedNatTrans transported along beta, equal to relocalization pullback by uniqueness), naturality in (L,K,e,f,k), the strict D.op diagram with a common lower bound for any I : Type i, and positive-degree vanishing for restricted injectives. Only lean and stmt_deps changed in the node; the added dep is a landed node and is used (allowed by brief-stage2). lean.statement matches the file verbatim. No hollow definitions, a single sorry, docstrings with source and blueprint, lines of at most 100 characters. The extra instances are construction-only. No duplicate notion found (siteModuleDerivedSections is an abelian-group, commutative-ring, unbounded helper). Edge cases: empty C or I, L=0, any lower bound, identity arrows, zero ring, noncommutative Λ. nt_compile --json on the local side overlay compiled clean in 31.3 s with no errors or warnings, after a first attempt hit the 60 s limit at machine load average ~243 on 80 cores. No findings."
  }
 }

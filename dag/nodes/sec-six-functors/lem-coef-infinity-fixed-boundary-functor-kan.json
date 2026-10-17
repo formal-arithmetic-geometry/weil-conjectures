@@ -228,5 +228,23 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-25e0d93f1 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement matches Kerodon 01P1 (Prop. 4.6.1.11), which is not archived locally; the report has WANTED lines for it and the proof is marked agent-written. The statement is unchanged and not weakened. I tested B=A, B=Δ^1 with A=∂Δ^1 and X=N(C) (empty Hom included), and A=∅ with B=Δ^0, which shows the all-vertices hypothesis is needed. Step 1: the transposition formulas are mutually inverse, and gluing agrees on A×Λ. Step 2: for n=1 the degenerate edge fills. Step 3 uses the Mathlib leaf SSet.innerFibration_pullbackObjObjπ, which I read at Inner/PushoutProduct.lean:70-90. With p:X→Δ^0 the corner is restriction, and the lift over the constant simplex at f stays in the strict fiber. Step 4 uses lem-cbc-invertible-prism-extension (01DP). All vertices lie in A, so each vertex edge is s_0 f(b), an equivalence, and the extension restricts to f∘pr on A×Δ^n. Step 5: I checked that the reversal α^rev is functorial and involutive, that (Λ^n_n)^op ≅ Λ^n_0, that X^op is a quasicategory, and that degenerate edges are preserved. Step 6 covers every case and handles the empty fiber vacuously. There is no cycle: the dependency closures of the definition, corner and prism (3, 4 and 10 nodes) do not contain the item, and the item avoids the parent's isofibration theorem. A DAG search with rg found no duplicate. There are no new nodes and no SGA source, and this is not a target node. I accept the tool_use of lem-cbc-invertible-prism-extension, a generic simplicial lemma from sk-prop-sf-cbc. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedBoundaryFunctorKan",
+  "declaration": "SSet.Enhanced.fixedBoundaryFunctor_kanComplex",
+  "file": "lean/Sheaf/CategoryTheory/FixedBoundaryFunctorKan.lean",
+  "statement": "theorem fixedBoundaryFunctor_kanComplex (B X : SSet.{u}) [Quasicategory X] (A : B.Subcomplex) (hA : ∀ b : B _⦋0⦌, b ∈ A.obj (op ⦋0⦌)) (f : A.toSSet ⟶ X) : KanComplex (pullback ((MonoidalClosed.pre A.ι).app X) (SSet.const (X := Δ[0]) (diagramVertex f)))",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb0d2ee4a",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Checked every clause of SSet.Enhanced.fixedBoundaryFunctor_kanComplex against the node and Kerodon 01P1 (Prop. 4.6.1.11). B and X are in one explicit universe u; X is a Quasicategory; A is a B.Subcomplex; hA requires only degree-0 vertex membership; f : A.toSSet ⟶ X is arbitrary. The fibre is the strict SSet pullback of (MonoidalClosed.pre A.ι).app X along SSet.const (X := Δ[0]) (diagramVertex f), with pre in the correct direction and const giving all degeneracies. The conclusion KanComplex covers all horns of positive dimension, outer ones included, with no nonemptiness or extension assumed. Edge cases checked: B empty, A=B, Δ[1] with its boundary (fibre may be empty), and A empty with B=Δ[0] (shows hA is needed). lean.statement is verbatim; the node differs from the clone only by the added lean field. Docstrings carry 01P1, the blueprint id and the six proof steps; the proof is exactly sorry; there are no definitions; public and private imports match the dependency records; the report has a real Worker report and a Second reading by Q82. nt_compile.py --json: the first two runs hit the 60 s per-file limit on transitive side imports at load average about 270; the third compiled the whole chain cleanly (FixedBoundaryFunctorKan 9.0 s), with no errors or warnings. No findings."
  }
 }

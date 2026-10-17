@@ -202,5 +202,23 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-3a0fc001e (reviewer sub-agent of L); spot-checked: I read the full item, all 8 steps, the only cited node (def-weil-pbc-simplicial-set, a Mathlib-leaf definition of Delta), parent step 5 and the Cut definition in lem-coef-cartesian-associative-segal-comparison. The item's c_alpha formula (j->i iff a(i-1)<j<=a(i), fibres ordered by input index) and its Ass^tensor composition agree with that node and with HA Construction 4.1.2.9. HA is not archived; the report lists it as WANTED and proof_origin.by is agent. Step checks: step 1 gives disjoint, increasing intervals, including m=0 and n=0. Step 2 is the telescoping union (a(b(j-1)),a(b(j))] in lexicographic order, with the composition direction correct. Steps 3-5 build the record, induct for L_j with a=a_1...a_q, and identify splitting with ordered grafting while discarded branches stay in the full record. Steps 6-8 cover weakly increasing theta (repeated stages give identity corollas), outer faces taken on the full record (wires discarded only at level q survive), commutation by associativity, and rigidity. All steps are rightly elementary; proof_deps equals the union of uses. An exhaustive Python check found no counterexample: 73,085 ordered compositions (ordinals up to 4) and 537,099 chain-tree leaf sets (length 3, ordinals up to 3, including constant maps, empty fibres and repeated stages) all matched. There are no new nodes. An rg search for Cut/forest/associative operad found no duplicate, and the parent is strictly larger (target-category coherence), so this is not D1. Grep, LeanFinder, LeanSearch and Loogle searches are recorded with no match. There is no SGA, no off-route citation and no tool_uses. Minor, unchanged: the item has no lean_audit key, and the imported statement's phrase 'every intersection' is loose wording but not false. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CutChainForestCompatibility",
+  "declaration": "CategoryTheory.CutChainForest.cutChain_forest_compatibility",
+  "file": "lean/Sheaf/CategoryTheory/CutChainForestCompatibility.lean",
+  "statement": "theorem cutChain_forest_compatibility {q : ℕ} (σ : Chain q) : Compatible σ",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9699222c8",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and HA 4.1.2.9: cutLayer is the source fibre formula with zero-based labels; ordered_composition has the right direction; external_interval is L_j with the composite opposite map; splitting_grafting and ordered_leaf_concatenation hold at every stage; restricted_record is restriction on the full record for any weakly increasing theta; repeated_stage_identity and successive_restrictions are present; the theorem is stated for every chain. No extra hypotheses or universe parameters; edge cases q=0, zero ordinals, empty fibres, constant maps and repeated stages are covered. A Python model of the exact Lean definitions confirmed every Compatible field on 5,498 chains (q<=3, widths<=2, theta/eta up to length 2) and composition for all ordinals up to 3. nt_compile overlay: clean, 18.4 s (one earlier attempt timed out on unrelated KFlat.lean under heavy load); lcompile: exit 0, 8.0 s. Docstrings name source place and blueprint; nothing hollow; only sorry; lean.statement verbatim; node differs from the clone only by the lean field; no duplicate in side, slopmaster2 or Mathlib. Minor, non-blocking: restriction_grafting adds nothing beyond splitting_grafting plus restricted_record; discarded helpers unused in Compatible; report text has 'the project server' in place of the HA section numbers."
  }
 }
