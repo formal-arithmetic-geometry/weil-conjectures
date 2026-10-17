@@ -15,9 +15,184 @@
   "def-pd-descent-datum",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the property $\\mathcal P(f)$ that $f$ is quasi-affine in the stated sense. It is invariant under isomorphism directly from the definition, and is stable under arbitrary base change by [lem-trf-quasi-affine-base-change]. This verifies condition (1) of the reduction lemma used in the last step.",
+   "uses": [
+    "def-nagata-quasi-affine-morphism",
+    "lem-trf-quasi-affine-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, first paragraph of proof; Tag 02W3, condition (1)"
+   }
+  },
+  {
+   "text": "For a finite family $f_i:Y_i\\to T_i$ with $\\mathcal P$, let $T=\\coprod_iT_i$. The component images are clopen by [lem-weil-pbc-scheme-coproduct-family]. If $H\\subset T$ is affine open, $H_i=H\\cap T_i$ is clopen in the affine scheme $H$, hence equals a principal open $D(e_i)$ by [lem-weil-pbc-spec-clopen-idempotent], and is affine by [lem-weil-pbc-principal-localization-open-immersion]. Thus $f_i^{-1}(H_i)$ is a quasi-compact open in some affine scheme $Z_i$, by quasi-affineness. Their finite disjoint union is a quasi-compact open in the affine scheme $\\coprod_i Z_i$ by [lem-weil-pbc-affine-morphism-permanence](4); it is precisely the inverse image of $H$. For no components the source and target are empty, and the same assertion holds with $\\operatorname{Spec}(0)$. This proves condition (2) of the reduction lemma.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-nagata-quasi-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, condition (2), verified for quasi-affine morphisms; Tag 0247, first paragraph"
+   }
+  },
+  {
+   "text": "We prove condition (3) for an arbitrary flat surjective morphism $p:A=\\operatorname{Spec}S\\to B=\\operatorname{Spec}R$ and the given quasi-affine $V\\to A$. Affine schemes are qcqs by [lem-weil-pbc-affine-scheme-qcqs], so $p$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1). This singleton is an fpqc covering: for every affine open $H\\subset B$, its inverse image is quasi-compact, so finitely many affine opens of it cover it, and their images cover $H$ by surjectivity, as required by [def-weil-pbc-fpqc-covering]. Since $A$ itself is affine, $V$ is a quasi-affine scheme. Put $C=\\Gamma(V,\\mathcal O_V)$ and $W=\\operatorname{Spec}C$. By [lem-trf-quasi-affine-canonical-affine-embedding], $V$ is qcqs and $j:V\\to W$ is an open immersion. The ring map $S\\to C$ defines $W\\to A$, and $j$ is over $A$ because both composites $V\\to A$ correspond to that same ring map by [lem-weil-pbc-morphism-into-affine-scheme]. The morphism $W\\to A$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine].",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-fpqc-covering",
+    "def-nagata-quasi-affine-morphism",
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, affine reduction and construction of W; properties.tex Tag 01P9 identifies this W over the affine A"
+   }
+  },
+  {
+   "text": "Write $A_2=A\\times_B A$, with projections $p_i$, and $V_i=V\\times_{A,p_i}A_2$, $W_i=W\\times_{A,p_i}A_2$, for $i=0,1$. These projections are flat by [lem-weil-pbc-flat-morphism-base-change], and $A_2$ is affine by [lem-weil-pbc-fibre-product-affine-spectra]. Apply [lem-weil-pbc-flat-base-change-global-sections-qcqs] with $X=V$, $S=A$, $S\\prime=A_2$: its qcqs hypothesis is Step 3. If $S_2=\\Gamma(A_2,\\mathcal O)$, it gives isomorphisms $C\\otimes_{S,p_i^\\sharp}S_2\\simeq\\Gamma(V_i,\\mathcal O)$ with formula $c\\otimes t\\mapsto c|_{V_i}\\,t|_{V_i}$. The affine fibre-product formula therefore identifies $W_i$ canonically with $\\operatorname{Spec}\\Gamma(V_i,\\mathcal O)$. Under this identification the base change $j_i:V_i\\to W_i$ is the canonical map: both maps to the affine $W_i$ send $c\\otimes t$ to $c|_{V_i}\\,t|_{V_i}$, so equality follows from [lem-weil-pbc-morphism-into-affine-scheme].",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, flat-base-change display and construction of the algebra isomorphism"
+   }
+  },
+  {
+   "text": "The datum $\\phi:V_0\\simeq V_1$ over $A_2$ induces an $S_2$-algebra isomorphism $\\phi^\\sharp:\\Gamma(V_1,\\mathcal O)\\simeq\\Gamma(V_0,\\mathcal O)$. Apply the contravariant affine-spectrum functor [def-weil-affine-spectrum] and conjugate by Step 4 to obtain $\\psi:W_0\\simeq W_1$ over $A_2$. It extends $\\phi$: $\\psi j_0=j_1\\phi$, since these maps into the affine $W_1$ induce the same ring map $\\phi^\\sharp$ on global sections, by [lem-weil-pbc-morphism-into-affine-scheme].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, the isomorphism of algebras induces a datum on W and V to W is a morphism of data"
+   }
+  },
+  {
+   "text": "Check the cocycle on $A_3=A\\times_B A\\times_B A$. The maps $A_3\\to A_2$ and $A_3\\to A$ are flat by successive applications of [lem-weil-pbc-flat-morphism-base-change] (each forgets one or two factors of the flat map $p$), and their sources are affine by [lem-weil-pbc-fibre-product-affine-spectra]. The pullbacks of $V$ are qcqs by [lem-weil-pbc-qcqs-morphism-permanence], applied over the affine qcqs schemes using Step 3. Thus [lem-weil-pbc-flat-base-change-global-sections-qcqs] applies both from $A$ and from $A_2$. Its identifications commute with the ring maps induced by $\\phi$: on each tensor generator $a\\otimes t$ both orders send it to the pullback of $\\phi^\\sharp(a)$ times the pulled-back scalar $t$. The successive-base-change identifications also agree, since both send $(c\\otimes s)\\otimes t$ to the product of the three pulled-back sections. Consequently the pullback of $\\psi$ along each $A_3\\to A_2$ is the affine spectrum of the ring map induced by that pullback of $\\phi$. Contravariant functoriality [def-weil-affine-spectrum] and the cocycle $\\phi_{02}=\\phi_{12}\\phi_{01}$ give $\\psi_{02}=\\psi_{12}\\psi_{01}$. Hence $(W,\\psi)$ is a descent datum and $j$ is a morphism of descent data [def-pd-descent-datum].",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "def-weil-affine-spectrum",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, sentence asserting the induced algebra cocycle; tensor formula writes out its naturality"
+   }
+  },
+  {
+   "text": "Apply [lem-galois-fpqc-affine-descent-effective] to the affine morphism $W\\to A$ and datum $\\psi$, using the fpqc singleton checked in Step 3. Obtain $W\\simeq W\\prime\\times_B A$ compatibly with descent data, for a scheme $W\\prime\\to B$. Let $q:W\\to W\\prime$ be the projection. It is flat and surjective by [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-surjective-base-change]; it is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](3), since $p$ is quasi-compact. No affineness assertion about $W\\prime$ is needed.",
+   "uses": [
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, apply lemma-affine and identify W with the base change of U-prime"
+   }
+  },
+  {
+   "text": "Let $O=j(V)\\subset W$. Under the identification $W=W\\prime\\times_B A$, the two maps $r_0,r_1:W\\times_{W\\prime}W\\to W$ correspond to the two pullbacks over $A_2$, with their identification given by $\\psi$; this is the compatibility in Step 7 and the universal property [def-pc-fibre-product]. Since $\\psi j_0=j_1\\phi$ and $\\phi$ is an isomorphism, $r_0^{-1}O=r_1^{-1}O$. Here the images of $j_i$ are the inverse images of $O$: pullbacks of open immersions are open immersions by [lem-weil-pbc-open-immersion-base-change], and the universal property identifies them with the inverse-image open subschemes [def-weil-open-immersion].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, stability of the open V under the canonical descent datum"
+   }
+  },
+  {
+   "text": "The equality in Step 8 implies that $O$ is a union of fibres of $q$. Indeed, if $q(x)=q(y)=z$, the spectrum of $\\kappa(x)\\otimes_{\\kappa(z)}\\kappa(y)$ is nonempty: it is the base change of the surjection $\\operatorname{Spec}\\kappa(x)\\to\\operatorname{Spec}\\kappa(z)$ to the one-point scheme $\\operatorname{Spec}\\kappa(y)$, so [lem-weil-pbc-surjective-base-change] and [lem-weil-pbc-fibre-product-affine-spectra] apply. By [lem-weil-pbc-fibre-product-points] a point of this spectrum gives $t\\in W\\times_{W\\prime}W$ with $r_0(t)=x,r_1(t)=y$. Step 8 then gives $x\\in O\\iff y\\in O$. Set $U=q(O)\\subset W\\prime$; hence $q^{-1}U=O$. Since $q$ is flat, quasi-compact and surjective (Step 7), [lem-weil-pbc-flat-qc-surjective-quotient-map] shows that $U$ is open.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-flat-qc-surjective-quotient-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, invariant open is the inverse image of a subset U, and the fpqc projection is a quotient map"
+   }
+  },
+  {
+   "text": "Give $U$ its open-subscheme structure in $W\\prime$ and its composite map to $B$. Its base change to $A$ is the open subscheme $q^{-1}U=O$ of $W$, by [lem-weil-pbc-open-immersion-base-change] and the fibre-product universal property. The open immersion $j$ identifies $V$ with this open subscheme by [def-weil-open-immersion], giving $U\\times_B A\\simeq V$. On $A_2$ its canonical descent identification is the restriction of $\\psi$, which by Step 5 is precisely $\\phi$. Thus the isomorphism induces the specified datum [def-pd-descent-datum]. This proves condition (3). Finally apply [lem-galois-fpqc-descending-types-morphisms], with conditions (1), (2), (3) supplied by Steps 1, 2, 3–10. Its conclusion gives $V_0\\to B$ and the required compatible isomorphism for the original, arbitrary singleton fpqc cover. None of the steps assumed local finite presentation.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "def-pd-descent-datum",
+    "lem-galois-fpqc-descending-types-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, final identification of V with X times U; Tag 02W3 completes the affine reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-quasi-affine-morphism",
+  "lem-trf-quasi-affine-base-change",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "def-pd-descent-datum",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-surjective-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-flat-qc-surjective-quotient-map",
+  "lem-galois-fpqc-descending-types-morphisms"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0247, lemma-quasi-affine, entire proof, using Tag 02W3 for the reduction. Over the affine base its relative spectrum and sheaf flat-base-change argument are written with ordinary spectra and flat base change of global sections; the tensor formula explicitly verifies the cocycle."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +231,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-separated-lqf-fppf-effective-descent",
@@ -68,7 +243,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Geometric quotient-presentation support in lem-trf-local-term-locality, via Tag 0265 and Tag 02W8: Tag 0247, lemma-quasi-affine, one-member fpqc covering specialization; used in Tag 02W8 for each saturated quasi-compact open.",
+   "place": "Geometric quotient-presentation support in lem-trf-local-term-locality, through Tag 0265 and Tag 02W8: its quasi-affine effective-descent ingredient is Tag 0247; the proof descends the canonical affine envelope and its invariant open subset.",
    "via": [
     "lem-trf-separated-lqf-fppf-effective-descent",
     "lem-trf-etale-affine-quotient-representable",
@@ -87,5 +262,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-quasi-affine-fpqc-effective-descent",
+  "worker": "stage1",
+  "summary": "Statement retained. Ten steps prove Tag 0247: base-change and finite-coproduct verifications, canonical affine envelope, flat-base-change comparison on double and triple overlaps, affine effectivity, and descent of the invariant open through an fpqc quotient map. Two new nodes: base-change stability (unsplit), canonical affine embedding (Mathlib leaf). Existing affine effectivity and affine-reduction nodes are reused; no new node restates an affine case of the item.",
+  "blueprint": "Realizes the quasi-affine-descent ingredient of the geometric quotient-presentation route beneath lem-trf-local-term-locality, via the recorded ancestry: Stacks 0247 used by 02W8. The canonical-affine-envelope and invariant-open steps carry the actual argument.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Generic effective descent for affine morphisms used exactly as in Stacks 0247; this unit does not replace this general descent tool."
+   },
+   {
+    "node": "lem-galois-fpqc-descending-types-morphisms",
+    "why": "Generic fpqc affine reduction used exactly as in Stacks 0247; this unit does not replace this general descent tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-galois-fpqc-descending-types-morphisms"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q110-95ed42ee3",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-95ed42ee3 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass for all 10 steps and both new nodes. Fixed the item’s copied created metadata (Q52 / lem-trf-separated-lqf-fppf-effective-descent) in fixes/dag/nodes/sec-trace-formula/lem-trf-quasi-affine-fpqc-effective-descent.json; no proof or statement changes.; 1 file(s) fixed by the reviewer"
  }
 }

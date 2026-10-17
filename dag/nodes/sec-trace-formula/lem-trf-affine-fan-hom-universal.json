@@ -10,9 +10,99 @@
  "stmt_deps": [
   "def-trf-fine-fan-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\varphi:P\\to\\Gamma(T,\\mathcal A)$. For every open $V\\subset T$, $\\mathcal A(V)$ is sharp: an invertible section has invertible, hence zero, germs at every point, so it is zero by sheaf separation. In any commutative monoid a sum is invertible exactly when each summand is invertible (an inverse to $b+c$ gives inverses to $b$ and $c$). Consequently $\\mathfrak m_x=\\{p\\in P:\\varphi(p)_x\\ne0\\}$ is a prime ideal: it excludes $0$, is stable under addition by $P$, and its complement is closed under addition. Define $h(x)=\\mathfrak m_x$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8, proof of (i), p.99: construction of the prime ideal from the stalk homomorphism; sharp case (ii)."
+   }
+  },
+  {
+   "text": "One has $h^{-1}D(a)=\\{x:\\varphi(a)_x=0\\}=:V_a$. Equality of a germ to zero means equality to zero on some neighborhood, so $V_a$ is open and $\\varphi(a)|_{V_a}=0$ by separation. Since the $D(a)$ form a basis, $h$ is continuous. On $V_a$ define $P_a\\to\\mathcal A(V_a)$ by $p-na\\mapsto\\varphi(p)|_{V_a}$. If $p-na=p'-n'a$, integrality gives $p+n'a=p'+na$ in $P$, and applying $\\varphi$ gives equal images. Thus this formula is well defined and additive; it is the unique extension killing the invertible element $a$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8, p.99: continuity and extension to localizations, expanding the straightforward verification."
+   }
+  },
+  {
+   "text": "The homomorphism in Step 2 kills $P_a^\\times$, since its target is sharp by Step 1. Hence it factors through $P_a/P_a^\\times=\\overline{\\mathcal M}_P(D(a))$ by [lem-trf-affine-fan-localization-sections]. These maps commute on $D(a)\\cap D(b)=D(a+b)$: both send the class of each $p\\in P$ to $\\varphi(p)$ and all localized denominators to zero. For an inclusion $D(b)\\subseteq D(a)$, use $D(a+b)=D(b)$ in this intersection calculation; the localization descriptions identify the restriction maps, so it proves restriction compatibility as well. For any open $U$ and a section on $U$, restrict to the basic opens contained in $U$, apply these maps, and glue on their inverse images in $T$. Agreement on intersections and uniqueness of sheaf gluing give a restriction-compatible sheaf map over $h$, equivalently the inverse-image sheaf map in the statement; this is the direct-section description of morphisms in [def-trf-fine-fan-blowup].",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-fan-localization-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8, p.99: sheaf-map construction; VIII 3.1.3 and Remark 3.1.4(iii), pp.98--99, for the sharp affine sections."
+   }
+  },
+  {
+   "text": "At $x\\in T$, put $F_x=P\\setminus\\mathfrak m_x$. By [lem-trf-affine-fan-localization-sections] the source stalk is $(P-F_x)/(P-F_x)^\\times$. The constructed map sends $\\operatorname{cl}(p-f)$ to $\\varphi(p)_x$, since $f\\in F_x$ has zero image. This image is zero exactly when $p\\in F_x$. In that case $p-f$ is a unit and its class is zero. Conversely a unit has zero image in the sharp target. Hence the stalk map has inverse image of the units equal to the units, so it is local. This proves the construction gives a morphism $(T,\\mathcal A)\\to S(P)$.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-fan-localization-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8, proof of (i)--(ii), p.99: local stalk factorization and descent to sharpening."
+   }
+  },
+  {
+   "text": "For any morphism $g:(T,\\mathcal A)\\to S(P)$, compose the canonical map $P\\to\\Gamma(S(P),\\overline{\\mathcal M}_P)$ with pullback of sections to obtain $\\Phi(g):P\\to\\Gamma(T,\\mathcal A)$. For $x\\in T$, locality and sharpness say $\\Phi(g)(p)_x=0$ if and only if the canonical germ of $p$ at $g(x)$ is zero. By [lem-trf-affine-fan-localization-sections] this holds exactly when $p\\notin g(x)$. Thus the point map reconstructed from $\\Phi(g)$ is exactly $g$.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-fan-localization-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8(ii), statement and uniqueness of the construction, p.99."
+   }
+  },
+  {
+   "text": "The sheaf map is also determined by these pulled-back canonical sections. On $D(a)$ every section has the form $\\operatorname{cl}(p-na)$ by [lem-trf-affine-fan-localization-sections], and $\\operatorname{cl}(p-na)=\\operatorname{cl}(p)$ because $a$ is a unit in $P_a$ and therefore zero after sharpening. Its pullback must be $\\Phi(g)(p)|_{g^{-1}D(a)}$. These maps determine the maps on arbitrary opens by the sheaf gluing used in Step 3. Consequently reconstructing from $\\Phi(g)$ gives exactly $g$, including its sheaf map. Conversely, for the morphism constructed from $\\varphi$, Step 2 with $a=0$ gives the pullback $p\\mapsto\\varphi(p)$ on the whole space. The two constructions are mutual inverses.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-fan-localization-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8(ii), p.99: bijectivity, with the uniqueness checks expanded on the basic opens."
+   }
+  },
+  {
+   "text": "If $k:(T',\\mathcal A')\\to(T,\\mathcal A)$ is a morphism, pullback of canonical sections gives $\\Phi(g\\circ k)=\\Gamma(k)\\circ\\Phi(g)$, by composition of the sheaf maps. For a homomorphism $u:P\\to Q$ of fine sharp monoids, the inverse construction applied to $P\\xrightarrow{u}Q=\\Gamma(S(Q),\\overline{\\mathcal M}_Q)$ defines $S(u):S(Q)\\to S(P)$; here the equality follows by [lem-trf-affine-fan-localization-sections] with $a=0$ and sharpness of $Q$. Pullback sends the canonical section $p$ to $u(p)$, so $\\Phi(S(u)\\circ g)=\\Phi(g)\\circ u$. The same calculation for identities and composites, followed by uniqueness in Step 6, proves functoriality of $S$. These two formulas prove naturality in both variables.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-fan-localization-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8, p.99: global-sections correspondence; naturality follows from the explicit construction and composition of pullbacks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-fan-localization-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(ii), proof (using (i)), printed p.99; straightforward sheaf and inverse checks expanded."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +138,52 @@
    "results": "{\"t\": \"2026-10-17T20:39:34Z\", \"tool\": \"leanfinder\", \"query\": \"The global sections functor is right adjoint to the affine monoidal spectrum construction on sharp locally monoidal spaces.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply\"], \"digest\": \"67a8e636b1c189eb\"} Read all returned signatures. Scheme/locally-ringed-space Gamma-Spec adjunctions have commutative rings and ordinary prime spectra, not sharp commutative monoids and monoidal spaces; manifold chart congruence results have different objects. The grep hits in ring localization, projective spectra, Dedekind factorization and the module structure sheaf concern rings, not monoid spectra. No logarithmic/fan assertion or one-line specialization is supplied.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal property of the spectrum of a fine sharp commutative monoid in sharp monoidal spaces",
+   "results": "{\"t\": \"2026-10-17T21:41:33Z\", \"tool\": \"leanfinder\", \"query\": \"universal property of the spectrum of a fine sharp commutative monoid in sharp monoidal spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec.full\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"AlgebraicGeometry.Spec.toSheafedSpace_obj\", \"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"AlgebraicGeometry.Spec.toTop\", \"AlgebraicGeometry.AffineScheme.Spec\", \"AlgebraicGeometry.Scheme.Spec_obj\"], \"digest\": \"a9b96362b5797e96\"} Returned signatures are for CommRing spectra and locally ringed spaces, not spectra or sharpened structure sheaves of commutative monoids; no exact or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalSpace, MonoidHom, Spec",
+   "results": "{\"t\": \"2026-10-17T21:41:34Z\", \"tool\": \"loogle\", \"query\": \"MonoidalSpace, MonoidHom, Spec\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MonoidalSpace'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No matching declaration returned.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalSpace|MonoidSpectrum|Spec\\(P\\)|sharp.*monoid",
+   "results": "{\"t\": \"2026-10-17T21:41:34Z\", \"tool\": \"grep\", \"query\": \"MonoidalSpace|MonoidSpectrum|Spec\\\\(P\\\\)|sharp.*monoid\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No matching declaration returned.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a sharp sheaf of commutative monoids to the affine monoid spectrum Spec P is equivalent to a monoid homomorphism P to global sections",
+   "results": "{\"t\": \"2026-10-17T21:41:35Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from a sharp sheaf of commutative monoids to the affine monoid spectrum Spec P is equivalent to a monoid homomorphism P to global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"AlgebraicGeometry.toSpecΓ\", \"AlgebraicGeometry.Spec.full\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"AlgebraicGeometry.Spec.preimage\", \"AlgebraicGeometry.StructureSheaf.toStalk\", \"AlgebraicGeometry.ΓSpec.toSpecΓ_unop\"], \"digest\": \"7b59110f59dcba56\"} Returned signatures are for CommRing spectra and locally ringed spaces, not spectra or sharpened structure sheaves of commutative monoids; no exact or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections adjunction for sharp monoidal spaces and affine monoid spectra",
+   "results": "{\"t\": \"2026-10-17T21:41:37Z\", \"tool\": \"leanfinder\", \"query\": \"global sections adjunction for sharp monoidal spaces and affine monoid spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app\", \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_unit\", \"AlgebraicGeometry.ΓSpec_adjunction_homEquiv_eq\"], \"digest\": \"62c67f901eda8bfe\"} Returned signatures are for CommRing spectra and locally ringed spaces, not spectra or sharpened structure sheaves of commutative monoids; no exact or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ΓSpec.adjunction",
+   "results": "{\"t\": \"2026-10-17T21:41:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.ΓSpec.adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply\", \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_symm_apply\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app\", \"AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv\"], \"digest\": \"e2989e5de6503569\"} Returned signatures are for CommRing spectra and locally ringed spaces, not spectra or sharpened structure sheaves of commutative monoids; no exact or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-strict-fan-chart-local-comparison",
@@ -77,5 +209,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-affine-fan-hom-universal",
+  "worker": "stage1",
+  "summary": "Constructed the inverse explicitly by the prime ideal of elements with nonzero germ, localization on basic opens, quotient by units and sheaf gluing. Checked locality, both inverse identities, and naturality on canonical sections. Added one statement-only supporting lemma for sharp sections and stalks of monoid spectra (ILO VIII 3.1.3--3.1.4), not an extra universal-property clause. Statement and historical blueprint ancestry unchanged.",
+  "blueprint": "Retains the historical ancestry through the local comparison of strict fan charts, using ILO VIII 3.1.8(ii) invoked in the point-local comparison paragraph of VIII 3.3.15. The seven proof steps supply that affine-target universal property; they do not replace a current unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-6774ab44a",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-6774ab44a (reviewer sub-agent of L); spot-checked: Read both nodes fully against ILO VIII 3.1.1–3.1.8 and 3.3.15; verified all seven steps, hypotheses, localization formulas, edge cases, duplicate candidates and route restrictions. No repairs or accepted tool_uses. Detailed checks written to review.md."
  }
 }
