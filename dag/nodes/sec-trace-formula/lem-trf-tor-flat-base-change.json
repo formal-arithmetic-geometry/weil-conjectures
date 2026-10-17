@@ -208,5 +208,31 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-e3dabe9f1 (reviewer sub-agent of L); spot-checked: I read all five steps against the cited statements and Stacks 00M8 (label lemma-flat-base-change-tor, line 18735), 00LY, 00HD, 00HB, 010N and 065P. 00M8 changes the base ring, while this item fixes R and changes only the coefficient A->B; proof_origin correctly records the proof as an agent adaptation. The statement is true and needs no flatness of A or B over R. Small cases agree: Z/2 with Z->Q; Z/4->Z/4[x], where both sides are (Z/2)[x]; and n=0. Step 1 gets a free resolution by applying the free-resolution lemma to 0->M->M->0->0, which is valid. Step 2 (the termwise isomorphism (P(x)A)(x)_A B = P(x)B) is elementary, with R- and A-balancing checked. Step 3 combines the Mathlib leaves on flat tensor exactness and clause (c) of the exact-functor homology lemma; that clause gives the cycle-induced comparison [z](x)b -> [z(x)b] with no boundedness assumption. Step 4 identifies the composite with the B-linear extension of Tor(M,g), so the stated map is the isomorphism. Step 5 proves T=0 from the faithful-flatness definition applied to 0->T->0. There are no new nodes. No existing node duplicates the item: the closest candidates (tor-one-surjective-flat-middle, flat-scalar-extension-tor-comparison, tor-localization-on-spec) differ. Every cited node is a definition, a Mathlib leaf or a Lean-closed node, so there is no route departure and no tool_uses. Changes: none. Note for the maintainer: the maintainer-owned source.place still says the 00M8 proof 'applies verbatim' and would read better as 'adapted'."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a140aa699",
+  "group": "Q16",
+  "result": "fix",
+  "note": "Reviewed immutable delivery and sources; reproduced compilation. Fixed H4/H9 duplicate coefficient construction and declaration name by reusing the existing TorCoefficientModule interface. Complete replacement module, Lean record, and report are in fixes/; final compile passed. Findings recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TorFlatBaseChange",
+  "file": "lean/Sheaf/RingTheory/TorFlatBaseChange.lean",
+  "declaration": "ModuleCat.tor_flat_base_change",
+  "statement": "theorem tor_flat_base_change {R A B M : Type u} [CommRing R] [CommRing A] [CommRing B] [AddCommGroup M] [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B] [Module R M] (hf : Module.Flat A B) (n : ℕ) : Function.Bijective (torFlatBaseChangeMap (R := R) (A := A) (B := B) (M := M) n) ∧ (Module.FaithfullyFlat A B → IsZero (torCoefficientModule R A (ModuleCat.of R M) B n) → IsZero (torCoefficientModule R A (ModuleCat.of R M) A n))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "ModuleCat.torFlatBaseChange_scalarTower",
+   "ModuleCat.torCoefficientBaseChange",
+   "ModuleCat.torFlatBaseChangeMap",
+   "ModuleCat.tor_flat_base_change"
+  ],
+  "note": "Maintainer repair H4/H9: reuse the landed coefficient action and coefficient-linear map from def-trf-tor-coefficient-module, Sheaf.RingTheory.TorCoefficientModule. Removed duplicate ModuleCat.torCoefficientLinearMap and the private coefficient-module construction. Only the compatibility of the existing A and B actions and the canonical tensor extensions are local helpers. The natural statement and its statement dependencies are unchanged.",
+  "fixed_by": "NT-stage2-Codex-a140aa699"
  }
 }

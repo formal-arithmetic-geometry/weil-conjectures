@@ -139,28 +139,23 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes",
-  "declaration": "AlgebraicGeometry.Etale.DerivedCategory.isBoundedConstructible",
-  "declarations": [
-   "AlgebraicGeometry.Etale.DerivedCategory.isBoundedConstructible",
-   "AlgebraicGeometry.Etale.BoundedConstructibleDerivedCategory"
-  ],
-  "statement": "def DerivedCategory.isBoundedConstructible (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (T : Scheme.{u}) : ObjectProperty (DerivedCategoryModule Λ T)",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
+  "module": "Sheaf.TraceFormula.BoundedConstructibleTransport",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.IsBoundedConstructible",
+  "statement": "def IsBoundedConstructible (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (K : EtaleDerived X Λ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Fixed by R-dcc1226 (delivered existing: true at the source's Etale.DerivedCategory.boundedConstructible, H4): the source predicate is stated with the source's Scheme.IsConstructibleSheaf (finitely generated geometric stalks), a second constructibility notion beside the recorded dependency Scheme.IsConstructibleEtaleModuleSheaf of def-weil-pbc-etale-constructible-sheaf (finite constant module values; agreement is a separate lemma). New: on D(T_et,Λ) = Etale.DerivedCategoryModule Λ T, Λ : Type (u+1) finite commutative, every H^i(K) (DerivedCategory.homologyFunctor) satisfies IsConstructibleEtaleModuleSheaf and there are a ≤ b with H^i(K) = 0 for i ∉ [a,b]; D^b_c is its FullSubcategory.",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/BoundedConstructibleComplexes.lean",
-  "fixed_by": "R-dcc1226",
-  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes retired, the source module WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes declares the same names"
+  "file": "lean/Sheaf/TraceFormula/BoundedConstructibleTransport.lean",
+  "note": "The recorded small-etale declaration cannot be applied to `EtaleDerived`, whose modules use the transported `etaleDatum`; this module states the same bounded-constructible notion with the canonical `orgogozoModuleSections` transport.",
+  "fixed_by": "NT-stage2-Codex-e59e1279d"
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "R-dcc1226",
-  "group": "H1",
+  "reviewer": "NT-stage2-Codex-e59e1279d",
+  "group": "Q73",
   "result": "fix",
-  "note": "Λ finite comm ring Type(u+1) + T scheme; D(T_et,Λ)=DerivedCategoryModule; every H^i via homologyFunctor IsConstructibleEtaleModuleSheaf (recorded dep, not source IsConstructibleSheaf); ∃ a ≤ b, H^i=0 off [a,b]; FullSubcategory"
+  "note": "Review and complete fixes written. Reuse the landed canonical constructibility transport with --revert-nodes def-trf-oriented-constructible-sheaf; restore proof documentation and imports. The theorem signature is unchanged. All delivered and fixed files compile cleanly through scompile.py.; reverted the delivery's change of existing node(s) def-trf-oriented-constructible-sheaf (--revert-nodes; kept as on newtargets-dag)"
  }
 }

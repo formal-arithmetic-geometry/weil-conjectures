@@ -521,5 +521,24 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-2f46f549b (reviewer sub-agent of L); spot-checked: I read all 19 steps of the item, all six new statement-only nodes and the statement of every cited node; I made no changes. No step invokes the theorem itself, and every recursive call lowers a parameter of the induction (base dimension, truncation degree r, fibre bound d): 7 calls Q at r-1, 8 and 10 call positive hypercover levels at r-i, 9 calls closed images at a smaller base dimension, 12 calls the shorter tower at d-1, and Step 5 (finite type) is used only after all d. Step-by-step checks: Step 4 makes the pair good first, then descends through the alteration refinement and constructibility descent. Step 9's lifting and finite descent are used for goodness only, with closed-base extension for the object identity. Step 14 meets the truncation-iso hypotheses (iso in degrees <= r, injective in degree r+1). In Step 15 pi=hi is finite, and finite detection holds because the unit is a stalkwise split injection. Step 18 uses full goodness for an arbitrary base morphism. The six new nodes (subquotients, proper image, source localization, smooth pullback, hypercover spectral sequence, closed-base extension) were tested on small cases (empty source, identity, open immersion, constant hypercover, closed base F=S or empty, plus a stalk check of the closed-base identity). They are smaller than the item, carry their hypotheses, and do not duplicate the existing nodes (smooth/proper-source-exchange, proper-hyperdescent, nearby-closed-image, constructible-coherent, slice-localization). There is no cycle, proof_deps equals the union of the uses, the blueprint from/via fields are correct, there is no SGA citation, and the item statement is unchanged. I accept the 14 declared generic tool_uses. Limitation: the Orgogozo and Lu-Zheng PDFs are not in literature/ and the network is blocked here, so I could not check their cited pages. I checked the oriented-product and Psi definitions against ILO Expose XI sections 1-4 and the finite-constant reduction against ILO Expose XIII 2.1. The worker's WANTED lines stand."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e59e1279d",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Review and complete fixes written. Reuse the landed canonical constructibility transport with --revert-nodes def-trf-oriented-constructible-sheaf; restore proof documentation and imports. The theorem signature is unchanged. All delivered and fixed files compile cleanly through scompile.py.; reverted the delivery's change of existing node(s) def-trf-oriented-constructible-sheaf (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.PsiProperSurjectiveConstructibility",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.exists_proper_surjective_constructible",
+  "statement": "theorem exists_proper_surjective_constructible {X S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (m : ℕ) (hm : 1 ≤ m) (hΛ : (m : Λ) = 0) (hmS : IsUnit (m : Γ(S, ⊤))) (K : EtaleDerived X Λ) (hK : IsBoundedConstructible X Λ K) (q : ℤ) (hq : 0 ≤ q) : ∃ (T : Scheme.{u}) (p : T ⟶ S), IsProper p ∧ Surjective p ∧ IsConstructibleVanishing (pullback.snd f p) Λ ((DerivedCategory.homologyFunctor ((vanishingDatum (pullback.snd f p)).modules (Coeff Λ)) q).obj ((nearbyCycles (pullback.snd f p) Λ).obj (((etaleModules (pullback.fst f p)).pull (Coeff Λ)).obj K)))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/PsiProperSurjectiveConstructibility.lean",
+  "fixed_by": "NT-stage2-Codex-e59e1279d"
  }
 }
