@@ -12,6 +12,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 import WeilConjectures.WeilSheaf.CohomologyProEtale
 import WeilConjectures.WeilSheaf.LowerShriek
 import WeilConjectures.WeilSheaf.CohomologyNonneg
+import WeilConjectures.AlgebraicGeometry.DenseCompactification
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Compactly supported cohomology of the constant Weil sheaf
@@ -99,6 +101,47 @@ theorem nonempty_lowerStarCohomologyIso (G : ProEtaleWeilSheaf k₀ l Y) (r : �
     Functor.rightDerivedObjIsoOfIso (ProEtale.globalSectionsLowerStarIso _ φ') r _⟩
 
 end ProEtaleWeilSheaf
+
+section Dimension
+
+open Order Topology TopologicalSpace
+
+/-- In a noetherian quasi-sober `T₀` space, the complement of a dense open subset `U` has
+strictly smaller dimension: every point `x ∉ U` is a proper specialization of the generic point
+of an irreducible component, which lies in `U`. -/
+theorem topologicalKrullDim_compl_add_one_le_of_dense {X : Type*} [TopologicalSpace X]
+    [NoetherianSpace X] [QuasiSober X] [T0Space X] {U : Set X} (hU : IsOpen U)
+    (hd : Dense U) : topologicalKrullDim (Uᶜ : Set X) + 1 ≤ topologicalKrullDim X := by
+  have : QuasiSober (Uᶜ : Set X) := hU.isClosed_compl.isClosedEmbedding_subtypeVal.quasiSober
+  letI oC := specializationOrder (Uᶜ : Set X)
+  rcases isEmpty_or_nonempty (Uᶜ : Set X) with hE | hE
+  · rw [topologicalKrullDim_eq_krullDim_specializationOrder (X := (Uᶜ : Set X)),
+      krullDim_eq_bot]
+    simp
+  have : Nonempty X := ⟨hE.some.1⟩
+  rw [topologicalKrullDim_eq_krullDim_specializationOrder (X := (Uᶜ : Set X)),
+    krullDim_eq_iSup_height_of_nonempty, ← WithBot.coe_one, ← WithBot.coe_add, ENat.iSup_add]
+  let oX := specializationOrder X
+  rw [topologicalKrullDim_eq_krullDim_specializationOrder (X := X),
+    @krullDim_eq_iSup_height_of_nonempty X oX.toPreorder _]
+  have hmono : @StrictMono (Uᶜ : Set X) X oC.toPreorder oX.toPreorder Subtype.val := by
+    intro a b hab
+    have hle : b ⤳ a := hab.le
+    refine @lt_of_le_of_ne X oX _ _ ?_ fun h ↦ (@ne_of_lt _ oC.toPreorder _ _ hab) (Subtype.ext h)
+    exact (IsInducing.subtypeVal.specializes_iff (x := b) (y := a)).2 hle
+  refine WithBot.coe_le_coe.2 (iSup_le fun a ↦ ?_)
+  obtain ⟨η, -, hη, hηa⟩ := isClosed_univ.exists_maximal_specializes (Set.mem_univ a.1)
+  have hηU : η ∈ U :=
+    mem_of_dense_of_forall_specializes_eq hU hd fun y hy ↦ hη y trivial hy
+  have hlt : @LT.lt X oX.toLT a.1 η :=
+    @lt_of_le_of_ne X oX _ _ hηa fun h ↦ a.2 (by rw [h]; exact hηU)
+  calc @height _ oC.toPreorder a + 1 ≤ @height X oX.toPreorder a.1 + 1 := by
+        gcongr
+        exact @height_le_height_apply_of_strictMono _ X oC.toPreorder oX.toPreorder _ hmono a
+    _ ≤ @height X oX.toPreorder η := @height_add_one_le X oX.toPreorder _ _ hlt
+    _ ≤ ⨆ x, @height X oX.toPreorder x := le_iSup (fun x : X ↦ @height X oX.toPreorder x) η
+
+end Dimension
 
 namespace WeilSheaf
 
