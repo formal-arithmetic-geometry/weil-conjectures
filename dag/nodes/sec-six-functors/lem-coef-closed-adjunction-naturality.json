@@ -11,9 +11,74 @@
   "def-nagata-category",
   "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For either category, naturality of $\\Theta$ in $T$, applied to $\\mathrm{ev}_{X,Y}$ and $t=z:T\\to H(X,Y)$, gives $\\Theta(\\mathrm{ev}_{X,Y}\\circ(z\\otimes1_X))=z$, since $\\Theta(\\mathrm{ev}_{X,Y})=1$. Thus $\\Theta^{-1}(z)=\\mathrm{ev}_{X,Y}\\circ(z\\otimes1_X)$. In particular equality of maps into $H(X,Y)$ can be checked after this uncurrying. This uses only the assumed bijectivity and naturality, and the identity laws of [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction maps and formulas immediately following the definition. Agent-written tensor-Hom consequence using the natural bijections explicitly assumed in the statement."
+   }
+  },
+  {
+   "text": "For $a:X\\prime\\to X$ and $g:Y\\to Y\\prime$, apply $\\Theta_{H(X,Y),X\\prime,Y\\prime}$ to the two maps $\\mathrm{ev}_{X\\prime,Y\\prime}\\circ(H(a,g)\\otimes1_{X\\prime})$ and $g\\circ\\mathrm{ev}_{X,Y}\\circ(1_{H(X,Y)}\\otimes a)$. The first has transpose $H(a,g)$ by step 1; the second has transpose $H(a,g)\\circ1\\circ1=H(a,g)$ by the assumed three-variable naturality. Injectivity proves the evaluation identity between these two maps. All objects and arrows here are in the single category being considered; no symmetry or reassociation of tensor factors is used. The simplifications are the identity laws of [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction maps and formulas immediately following the definition. Agent-written tensor-Hom consequence using the natural bijections explicitly assumed in the statement."
+   }
+  },
+  {
+   "text": "Put $A=H_{\\mathcal C}(P,GN)$, $A\\prime=H_{\\mathcal C}(P\\prime,GN\\prime)$ and $h=H_{\\mathcal C}(a,Gv):A\\to A\\prime$. Let $k_{P,N}=e_N\\circ F(\\mathrm{ev}_{P,GN})\\circ\\mu_{A,P}$, so that $b_{P,N}=\\Theta_{\\mathcal D}(k_{P,N})$. Naturality of $\\mu$ at $(h,1_{P\\prime})$, step 2 in $\\mathcal C$, and then naturality of the counit give, in order,\n$$\\begin{aligned}k_{P\\prime,N\\prime}\\circ(Fh\\otimes1_{FP\\prime})&=e_{N\\prime}\\circ F\\bigl(\\mathrm{ev}_{P\\prime,GN\\prime}\\circ(h\\otimes1_{P\\prime})\\bigr)\\circ\\mu_{A,P\\prime}\\\\&=e_{N\\prime}\\circ FGv\\circ F(\\mathrm{ev}_{P,GN})\\circ F(1_A\\otimes a)\\circ\\mu_{A,P\\prime}\\\\&=v\\circ e_N\\circ F(\\mathrm{ev}_{P,GN})\\circ\\mu_{A,P}\\circ(1_{FA}\\otimes Fa)\\\\&=v\\circ k_{P,N}\\circ(1_{FA}\\otimes Fa).\\end{aligned}$$\nThe third equality also uses naturality of $\\mu$ at $(1_A,a)$. The counit equation $e_{N\\prime}\\circ FGv=v\\circ e_N$ is supplied by [lem-weil-pbc-adjunction-of-natural-bijection]; associativity is [def-nagata-category]. Both sides have source $FA\\otimes FP\\prime$ and target $N\\prime$.",
+   "uses": [
+    "def-nagata-category",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction maps and formulas immediately following the definition. Agent-written tensor-Hom consequence using the natural bijections explicitly assumed in the statement."
+   }
+  },
+  {
+   "text": "Apply the assumed bijection $\\Theta^{\\mathcal D}_{FA,FP\\prime,N\\prime}$ to step 3. Naturality in the first variable $T$ gives transpose $b_{P\\prime,N\\prime}\\circ Fh$ on the left. Naturality in $X$ and $Y$ gives transpose $H_{\\mathcal D}(Fa,v)\\circ b_{P,N}$ on the right. This is exactly the asserted equation for $b$. These are direct substitutions into the stated naturality formula; identity compositions are simplified using [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction maps and formulas immediately following the definition. Agent-written tensor-Hom consequence using the natural bijections explicitly assumed in the statement."
+   }
+  },
+  {
+   "text": "Write $q=H_{\\mathcal D}(Fa,v)$ and use the defining formula for $\\delta$. Naturality of the unit from [lem-weil-pbc-adjunction-of-natural-bijection], evaluated at $h:A\\to A\\prime$, says $u_{A\\prime}\\circ h=GFh\\circ u_A$. Therefore, by step 4 and functoriality of $G$,\n$$\\delta_{P\\prime,N\\prime}\\circ h=Gb_{P\\prime,N\\prime}\\circ GFh\\circ u_A=G(b_{P\\prime,N\\prime}\\circ Fh)\\circ u_A=G(q\\circ b_{P,N})\\circ u_A=Gq\\circ\\delta_{P,N}.$$\nAssociativity is [def-nagata-category]. The adjunction formula $\\Psi(b)=Gb\\circ u$ in the cited statement also confirms that this specified $\\delta$ is the adjoint of $b$. This proves both naturality clauses for arbitrary $a,v$; no comparison map or counit was inverted.",
+   "uses": [
+    "def-nagata-category",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction maps and formulas immediately following the definition. Agent-written tensor-Hom consequence using the natural bijections explicitly assumed in the statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0037 (definition-adjoint), adjunction maps and formulas immediately following the definition. Agent-written tensor-Hom consequence using the natural bijections explicitly assumed in the statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -140,10 +205,147 @@
    },
    "date": "2026-10-17",
    "verdict": "no match: inspected ordinary adjunction naturality and evaluation lemmas are ingredients, not the two-variable naturality of the specified composite tensor-Hom/strong-monoidal/counit comparison; expComparison requires Cartesian monoidal categories, which module tensor categories are not."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality in two variables of internal Hom comparison defined by transposing tensor comparison followed by evaluation and adjunction counit",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm",
+     "CategoryTheory.ihom.coev_naturality_assoc",
+     "CategoryTheory.ihom.ev_naturality_assoc",
+     "CategoryTheory.ihom.coev_naturality",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_three",
+     "CategoryTheory.expComparison_ev",
+     "CategoryTheory.ihom.ev_naturality",
+     "CategoryTheory.coev_expComparison"
+    ],
+    "digest": "ae64ab94bf0f1f30",
+    "sub": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: evaluation/adjunction ingredients or Cartesian monoidal special cases, not this bifunctor-only comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|ev_naturality|counit_naturality",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": "Mathlib/CategoryTheory"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for this exact query and subdirectory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two, CategoryTheory.ihom.ev_naturality, CategoryTheory.coev_expComparison",
+   "results": {
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: loogle: unknown identifier 'CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of an evaluation-defined internal Hom comparison under a monoidal functor with adjoint",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ihom.ev_naturality_assoc",
+     "CategoryTheory.ihom.ev_naturality",
+     "CategoryTheory.FunctorToTypes.functorHomEquiv_apply_app",
+     "CategoryTheory.ihom.coev_naturality_assoc",
+     "CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_naturality_app",
+     "CategoryTheory.expComparison_ev",
+     "CategoryTheory.MonoidalClosed.internalHom",
+     "CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatTrans"
+    ],
+    "digest": "269a8128b0464894",
+    "sub": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: evaluation/adjunction ingredients or Cartesian monoidal special cases, not this bifunctor-only comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality in two variables of evaluation-defined closed adjunction comparison via tensor-Hom transpose and adjunction counit",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.coev_expComparison",
+     "CategoryTheory.expComparison_ev",
+     "CategoryTheory.ihom.coev_naturality",
+     "CategoryTheory.ihom.ev_naturality_assoc",
+     "CategoryTheory.ihom.coev_naturality_assoc",
+     "CategoryTheory.ihom.ev_naturality",
+     "CategoryTheory.expComparison",
+     "CategoryTheory.MonoidalClosed.coev_app_comp_pre_app"
+    ],
+    "digest": "b26519c8da81f23e",
+    "sub": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: evaluation/adjunction ingredients or Cartesian monoidal special cases, not this bifunctor-only comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "ev_naturality|counit_naturality",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": "Mathlib/CategoryTheory/Monoidal/Closed"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for this exact query and subdirectory"
+  },
+  {
+   "tool": "grep",
+   "query": "ev_naturality",
+   "results": {
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean"
+    ],
+    "digest": "31b1d568b8d7a06e",
+    "sub": "CategoryTheory/Monoidal/Closed"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: evaluation/adjunction ingredients or Cartesian monoidal special cases, not this bifunctor-only comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom.ev_naturality",
+   "results": {
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.ihom.ev_naturality"
+    ],
+    "digest": "50ae0cf74a0c1a9c",
+    "sub": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: evaluation/adjunction ingredients or Cartesian monoidal special cases, not this bifunctor-only comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-derived-system-evaluation-calculus",
@@ -170,5 +372,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-closed-adjunction-naturality",
+  "worker": "stage1",
+  "summary": "Q132 proves the specified comparisons natural by deriving the evaluation identity from the assumed natural tensor-Hom bijections, commuting the uncurried square by tensorator/counit naturality, then applying the bijection and unit naturality. No new nodes or extra monoidal coherence hypotheses. Source attribution corrected from derived Tag 0FND to adjunction Tag 0037; statement unchanged.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2: naturality of the first and last mapping-complex comparisons and their specified adjunction maps, as isolated in step 15 of lem-coef-derived-system-evaluation-calculus.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-38af3d7f0",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-38af3d7f0 (reviewer sub-agent of L); spot-checked: I read the whole item and checked every step myself; all are correct. The delivery has no new nodes. The statement is unchanged and not weakened, and parent step 15 of lem-coef-derived-system-evaluation-calculus applies it word for word. Step 1: Theta(ev∘(z⊗1)) = z, using H(1,1) = 1. Step 2: the evaluation identity, from injectivity of Theta, where both transposes equal H(a,g). Step 3: I checked μ-naturality at (h,1) and at (1,a) and counit naturality (from the statement of lem-weil-pbc-adjunction-of-natural-bijection); sources and targets match (FA⊗FP' to N'). Step 4: applying Theta_D gives b'∘Fh = H_D(Fa,v)∘b. Step 5: unit naturality and functoriality of G give the equation for δ. No step uses associativity, symmetry or invertibility. Small cases I tested: identity adjunction on Set, the terminal category, empty objects, and a tensor with no coherence. Both cited nodes are Mathlib leaves, so no tool_uses are needed. Step sources and proof_origin cite Stacks Tag 0037, which I read at categories.tex:3344-3384, and it gives the unit/counit conventions used. The Mathlib searches cover all three kinds, and ihom.ev_naturality and expComparison are not one-line specializations. The sibling node lem-coef-monoidal-adjunction-parameter-composition and lem-pod-closed-uncurry-laws are different results, and an rg over dag/nodes found no duplicate. Maintainer note, not a delivery fault: the top-level source field still names derived.tex Tag 0FND. That field belongs to the maintainer, so the worker could not change it; I suggest setting it to categories.tex Tag 0037 (definition-adjoint). No fixes were written."
  }
 }
