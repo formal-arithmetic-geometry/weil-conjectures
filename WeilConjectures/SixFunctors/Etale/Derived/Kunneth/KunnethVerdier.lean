@@ -31,9 +31,8 @@ reads `M ⊠ ω_Y ≅ Rp_X^! M`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.verdierDualEvaluation_eq_homEquiv_symm_id`
-  (`def-trf-dualizing-complex`): the evaluation `M ⊗ᴸ 𝔻_X M ⟶ ω_X` is the transpose of the
-  identity.
+- `AlgebraicGeometry.Etale.verdierDual_obj`, `AlgebraicGeometry.Etale.dualizingComplex_eq`
+  (`def-trf-dualizing-complex`): `𝔻_X = RHom(-, ω_X)` and `ω_X = Ra^! Λ_S`.
 - `AlgebraicGeometry.Etale.nonempty_iso_externalHom` (`prop-trf-external-hom`): `β` as an
   isomorphism, from `AlgebraicGeometry.Etale.isIso_externalHomMap`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_pullbackFst`: `α` for
@@ -76,18 +75,23 @@ theorem constructibleFiniteTor_unit (X : Scheme.{u}) :
 /-- Blueprint `def-trf-dualizing-complex`: Dualizing complex and Verdier dual.
 
 For `a : X ⟶ S`, the dualizing complex is `ω_X = Ra^! Λ_S`
-(`AlgebraicGeometry.Etale.dualizingComplex`), the Verdier dual is `𝔻_X = RHom(-, ω_X)`
-(`AlgebraicGeometry.Etale.verdierDual`), and the evaluation `ev_M : M ⊗ᴸ 𝔻_X M ⟶ ω_X`
-(`AlgebraicGeometry.Etale.verdierDualEvaluation`) is the transpose of the identity of `𝔻_X M`
-under the tensor–internal-Hom adjunction `Hom(M ⊗ᴸ 𝔻_X M, ω_X) ≅ Hom(𝔻_X M, RHom(M, ω_X))`.
+(`AlgebraicGeometry.Etale.dualizingComplex`, see
+`AlgebraicGeometry.Etale.dualizingComplex_eq`), the Verdier dual is `𝔻_X = RHom(-, ω_X)`
+(`AlgebraicGeometry.Etale.verdierDual`), and the evaluation `ev_M : M ⊗ᴸ 𝔻_X M ⟶ ω_X` is the
+counit of the tensor–internal-Hom adjunction (`AlgebraicGeometry.Etale.verdierDualEvaluation`).
 (The blueprint writes the two factors in the other order, `𝔻_X M ⊗ᴸ M`; the internal Hom of the
 library is right adjoint to tensoring on the left.) -/
-theorem verdierDualEvaluation_eq_homEquiv_symm_id {X S : Scheme.{u}} (a : X ⟶ S)
-    [HasCompactification a]
+theorem verdierDual_obj {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    verdierDualEvaluation _ a M =
-      ((ihom.adjunction M).homEquiv _ _).symm (𝟙 ((verdierDual _ a).obj (op M))) :=
-  (MonoidalClosed.uncurry_id_eq_ev _ _).symm
+    (verdierDual _ a).obj (op M) =
+      (RHom(X)[ModuleCat.{u + 1} Λ].obj (op M)).obj (dualizingComplex _ a) :=
+  rfl
+
+/-- Blueprint `def-trf-dualizing-complex`: the dualizing complex of `a : X ⟶ S` is
+`ω_X = Ra^! Λ_S`. -/
+theorem dualizingComplex_eq {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] :
+    dualizingComplex (ModuleCat.{u + 1} Λ) a = (R(a)^![ModuleCat.{u + 1} Λ]).obj (𝟙_ _) :=
+  rfl
 
 /-- The internal hom out of the unit is the identity, `RHom(Λ_X, -) ≅ 𝟭`: both are right
 adjoint to `Λ_X ⊗ᴸ - ≅ 𝟭`. -/
