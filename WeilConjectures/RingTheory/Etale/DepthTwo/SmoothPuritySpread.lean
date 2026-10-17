@@ -104,6 +104,58 @@ lemma exists_forall_exists_not_mem (good : B → Prop) (P : Ideal B) [P.IsPrime]
     · have hps : p ∈ s := Finset.mem_filter.2 ⟨(Set.Finite.mem_toFinset _).2 hp, hpP⟩
       exact hQh ((Ideal.IsPrime.prod_mem_iff).2 ⟨p, hps, hpQ (hf p hps).1⟩)
 
+/-- **A domain neighbourhood.** If `B` is a reduced Noetherian ring and `B_P` is a domain, then
+there is `h₁ ∉ P` such that `B_{g h₁}` is a domain for every `g ∉ P`: `h₁` lies in the minimal
+primes of `B` not contained in `P`, and `B_{g h₁}` embeds into `B_P`. -/
+lemma exists_isDomain_away [IsReduced B] (P : Ideal B) [P.IsPrime]
+    [IsDomain (Localization.AtPrime P)] :
+    ∃ h₁ ∉ P, ∀ g ∉ P, IsDomain (Localization.Away (g * h₁)) := by
+  classical
+  let p₀ := RingHom.ker (algebraMap B (Localization.AtPrime P))
+  have hp₀ : p₀.IsPrime := RingHom.ker_isPrime _
+  have hker (y : B) (hy : y ∈ p₀) : ∃ s ∉ P, s * y = 0 := by
+    obtain ⟨⟨s, hs⟩, hsy⟩ := (IsLocalization.map_eq_zero_iff P.primeCompl _ y).1 hy
+    exact ⟨s, hs, hsy⟩
+  have hmin (p : Ideal B) (hp : p ∈ minimalPrimes B) (hpP : p ≤ P) : p₀ ≤ p := by
+    intro y hy
+    obtain ⟨s, hs, hsy⟩ := hker y hy
+    exact (hp.1.1.mem_or_mem (hsy ▸ p.zero_mem)).resolve_left fun h ↦ hs (hpP h)
+  have hfin := minimalPrimes.finite_of_isNoetherianRing B
+  let s := hfin.toFinset.filter fun p ↦ ¬ p ≤ P
+  have hs (p : Ideal B) (hp : p ∈ s) : ∃ x ∈ p, x ∉ P := Set.not_subset.1 (Finset.mem_filter.1 hp).2
+  choose! f hf using hs
+  refine ⟨∏ p ∈ s, f p, ?_, fun g hg ↦ ?_⟩
+  · rw [Ideal.IsPrime.prod_mem_iff]
+    rintro ⟨p, hp, hfp⟩
+    exact (hf p hp).2 hfp
+  set x := g * ∏ p ∈ s, f p
+  have hxP : x ∉ P := by
+    refine fun h ↦ (Ideal.IsPrime.mem_or_mem inferInstance h).elim hg fun h' ↦ ?_
+    obtain ⟨p, hp, hfp⟩ := Ideal.IsPrime.prod_mem_iff.1 h'
+    exact (hf p hp).2 hfp
+  -- `x y = 0` for `y ∈ p₀`
+  have hxy (y : B) (hy : y ∈ p₀) : x * y = 0 := by
+    have hmem : x * y ∈ sInf (minimalPrimes B) := by
+      refine Submodule.mem_sInf.2 fun p hp ↦ ?_
+      by_cases hpP : p ≤ P
+      · exact Ideal.mul_mem_left _ _ (hmin p hp hpP hy)
+      · have hps : p ∈ s := Finset.mem_filter.2 ⟨(Set.Finite.mem_toFinset _).2 hp, hpP⟩
+        have := hp.1.1
+        refine Ideal.mul_mem_right _ _ (Ideal.mul_mem_left _ _ ?_)
+        exact Ideal.IsPrime.prod_mem_iff.2 ⟨p, hps, (hf p hps).1⟩
+    rw [minimalPrimes, Ideal.sInf_minimalPrimes] at hmem
+    obtain ⟨n, hn⟩ := hmem
+    exact IsReduced.eq_zero _ ⟨n, (Submodule.mem_bot _).1 hn⟩
+  let φ : Localization.Away x →+* Localization.AtPrime P :=
+    IsLocalization.Away.lift x (IsLocalization.map_units _ (⟨x, hxP⟩ : P.primeCompl))
+  have hφ : Function.Injective φ := (injective_iff_map_eq_zero φ).2 fun z hz ↦ by
+    obtain ⟨⟨y, t⟩, rfl⟩ := IsLocalization.mk'_surjective (Submonoid.powers x) z
+    have h1 : φ (algebraMap B _ y) = 0 := by
+      rw [← IsLocalization.mk'_spec (Localization.Away x) y t, map_mul, hz, zero_mul]
+    rw [IsLocalization.Away.lift_eq] at h1
+    exact (IsLocalization.mk'_eq_zero_iff _ _).2 ⟨⟨x, 1, pow_one x⟩, hxy y h1⟩
+  exact hφ.isDomain φ
+
 end Locus
 
 end RingTheory.DepthTwo
