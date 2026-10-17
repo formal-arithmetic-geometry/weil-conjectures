@@ -1,6 +1,6 @@
 # Work queue
 
-33 items; claim with `tools/claim.py next <group> [--stage N]`.
+32 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (33)
+## Stage 3: modules to prove (32)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -33,7 +33,6 @@
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObject` | 13 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredComplexDecalageComparison` | 13 | 1 | proof |
-| `Sheaf.CategoryTheory.SpectralObjectPageTwoMapExistence` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueScalarCounitModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitModel` | 13 | 1 | proof |
