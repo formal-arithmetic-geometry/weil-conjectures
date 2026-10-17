@@ -208,5 +208,28 @@
   "group": "Q106",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q106-5bc628a03 (reviewer sub-agent of L); spot-checked: Read the complete item, new node, cited statements and source passages. All nine steps, evaluation normalizations, naturalities and the exact Mathlib leaf check out; no duplicate or circular split found. Small-case checks and route scope are documented in review.md. No repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d1829684e",
+  "group": "NF",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, report sections, and compile reproducibility all checked; no substantive or mechanical issues found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InvertibleFactorHomCancellation",
+  "declaration": "CategoryTheory.MonoidalClosed.invertibleFactorHomCancellation",
+  "declarations": [
+   "CategoryTheory.MonoidalClosed.ihomTensorBoth",
+   "CategoryTheory.MonoidalClosed.invertibleFactorHomCancellation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InvertibleFactorHomCancellation.lean",
+  "statement": "theorem invertibleFactorHomCancellation (J I : C) (a : J ⊗ I ≅ 𝟙_ C) (b : I ⊗ J ≅ 𝟙_ C) : ∃ (t : ∀ X Y : C, (ihom X).obj Y ⊗ J ≅ (ihom X).obj (Y ⊗ J)) (s : ∀ X Y : C, (ihom X).obj Y ≅ (ihom (X ⊗ J)).obj (Y ⊗ J)), (∀ X Y : C, (t X Y).hom = ihomTensorToIhom X Y J ∧ (s X Y).hom = ihomTensorBoth X Y J) ∧ (∀ X Y : C, (t X Y).hom ▷ X ≫ (β_ ((ihom X).obj (Y ⊗ J)) X).hom ≫ (ihom.ev X).app (Y ⊗ J) = (α_ ((ihom X).obj Y) J X).hom ≫ (ihom X).obj Y ◁ (β_ J X).hom ≫ (α_ ((ihom X).obj Y) X J).inv ≫ ((β_ ((ihom X).obj Y) X).hom ≫ (ihom.ev X).app Y) ▷ J ∧ (s X Y).hom ▷ (X ⊗ J) ≫ (β_ ((ihom (X ⊗ J)).obj (Y ⊗ J)) (X ⊗ J)).hom ≫ (ihom.ev (X ⊗ J)).app (Y ⊗ J) = (α_ ((ihom X).obj Y) X J).inv ≫ ((β_ ((ihom X).obj Y) X).hom ≫ (ihom.ev X).app Y) ▷ J ∧ (t X Y).inv ▷ X ≫ (α_ ((ihom X).obj Y) J X).hom ≫ (ihom X).obj Y ◁ (β_ J X).hom ≫ (α_ ((ihom X).obj Y) X J).inv ≫ ((β_ ((ihom X).obj Y) X).hom ≫ (ihom.ev X).app Y) ▷ J = (β_ ((ihom X).obj (Y ⊗ J)) X).hom ≫ (ihom.ev X).app (Y ⊗ J) ∧ (s X Y).inv ▷ (X ⊗ J) ≫ (α_ ((ihom X).obj Y) X J).inv ≫ ((β_ ((ihom X).obj Y) X).hom ≫ (ihom.ev X).app Y) ▷ J = (β_ ((ihom (X ⊗ J)).obj (Y ⊗ J)) (X ⊗ J)).hom ≫ (ihom.ev (X ⊗ J)).app (Y ⊗ J)) ∧ (∀ (X X' Y Y' : C) (f : X' ⟶ X) (g : Y ⟶ Y'), ((pre f).app Y ≫ (ihom X').map g) ▷ J ≫ (t X' Y').hom = (t X Y).hom ≫ (pre f).app (Y ⊗ J) ≫ (ihom X').map (g ▷ J) ∧ ((pre f).app Y ≫ (ihom X').map g) ≫ (s X' Y').hom = (s X Y).hom ≫ (pre (f ▷ J)).app (Y ⊗ J) ≫ (ihom (X' ⊗ J)).map (g ▷ J) ∧ ((pre f).app (Y ⊗ J) ≫ (ihom X').map (g ▷ J)) ≫ (t X' Y').inv = (t X Y).inv ≫ ((pre f).app Y ≫ (ihom X').map g) ▷ J ∧ ((pre (f ▷ J)).app (Y ⊗ J) ≫ (ihom (X' ⊗ J)).map (g ▷ J)) ≫ (s X' Y').inv = (s X Y).inv ≫ (pre f).app Y ≫ (ihom X').map g) ∧ (∀ (X Y J' : C) (z : J ≅ J'), (ihom X).obj Y ◁ z.hom ≫ ihomTensorToIhom X Y J' = (t X Y).hom ≫ (ihom X).map (Y ◁ z.hom) ∧ ihomTensorBoth X Y J' = (s X Y).hom ≫ (pre (X ◁ z.inv)).app (Y ⊗ J) ≫ (ihom (X ⊗ J')).map (Y ◁ z.hom))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the upstream ihomTensorToIhom for t. The helper ihomTensorBoth is the explicit evaluation transpose s. The theorem supplies families of isomorphisms with these hom maps, the two right-evaluation equations and their inverse forms, naturality in X and Y, and compatibility with factor isomorphisms. Right evaluation is the existing Mathlib evaluation precomposed with the symmetry."
  }
 }

@@ -12,7 +12,9 @@
   "def-coef-infinity-category-of-spaces",
   "lem-coef-pinched-rigidification-resolution",
   "lem-cbc-realization-singular-unit-weak",
-  "lem-coef-infinity-mapping-composition"
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-rigidification-postcomposition-comparison",
+  "lem-coef-kan-realization-serre"
  ],
  "proof": [
   {
@@ -223,5 +225,29 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-0ae47f53b (reviewer sub-agent of L); spot-checked: Read the mathematics in full and wrote review.md. All four steps establish the specified beta compatibility; HTT and Kerodon source checks, degenerate/empty/non-Kan cases, and dependency-cycle checks pass. No new nodes or repairs. Accept lem-cbc-realization-singular-unit-weak as a generic tool use. Target coefficient categories and base-change morphisms remain unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RigidificationComponentPostcomposition",
+  "declaration": "SSet.Enhanced.rigidification_component_postcomposition",
+  "declarations": [
+   "SSet.Enhanced.rigidificationComponentComparison",
+   "SSet.Enhanced.corepresentedPostcomposition",
+   "SSet.Enhanced.rigidification_component_postcomposition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RigidificationComponentPostcomposition.lean",
+  "statement": "theorem rigidification_component_postcomposition (C : SSet.{u}) [Quasicategory C] (x : C _⦋0⦌) : (∀ (y z : C _⦋0⦌) (g : (mappingSpace C y z) _⦋0⦌) (a : ZerothHomotopy (SSet.toTop.obj (mappingSpace C x y))), rigidificationComponentComparison C x z (componentsMap (SSet.toTop.map (Pinched.mappingPostcomposition C x y z g)).hom a) = componentsMap (SSet.toTop.map (corepresentedPostcomposition C x y z g)).hom (rigidificationComponentComparison C x y a)) ∧ (∀ (y z : C _⦋0⦌) (s : C _⦋2⦌) (f : (mappingSpace C x y) _⦋0⦌) (g : (mappingSpace C y z) _⦋0⦌) (w : (mappingSpace C x z) _⦋0⦌), C.δ 2 s = f.1 → C.δ 0 s = g.1 → C.δ 1 s = w.1 → rigidificationComponentComparison C x z (Quotient.mk _ (SSet.realizationVertex w)) = componentsMap (SSet.toTop.map (corepresentedPostcomposition C x y z g)).hom (rigidificationComponentComparison C x y (Quotient.mk _ (SSet.realizationVertex f))))",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The comparison is an explicit composite of three Equiv.ofBijective constructions on realization path components, using the existing normalized pinched projection, comparison and characteristic-map unit. The actual corepresented edge action restricts the existing corepresentedMap to the existing subset-poset edge generator. Two already-landed statement dependencies are added solely to reuse mappingEdgeVertex, mappingPostcomposition and realizationVertex; their node records are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f8b0c83cc",
+  "group": "Q76",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, and verbatim Lean signature pass; snapshot module compiles cleanly. Wrote review.md and a complete replacement report under fixes/ to replace the H11 second-reading placeholder and repair corrupted source citations. No Lean or node changes needed."
  }
 }
