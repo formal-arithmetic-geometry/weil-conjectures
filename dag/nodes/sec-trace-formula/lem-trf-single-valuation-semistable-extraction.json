@@ -24,9 +24,124 @@
   "def-weil-proper-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $x$ be the specified centre, $s$ its image on $T$, and $R=V_s$. Then $O\\cap K=R$: elements of $V\\setminus s$ are units in $O$, giving $R\\subseteq O\\cap K$; if $c\\in K\\setminus R$, the valuation property gives $c^{-1}\\in\\mathfrak m_R\\subseteq\\mathfrak m_O$, so $c$ cannot belong to $O$. Work in a neighbourhood of $x$ over the open $\\operatorname{Spec}R$ supplied by [lem-trf-elementary-semistable-chart-globalization]. Its statement permits this localization and the required smooth or nodal etale chart. All global modifications below are supplied by that lemma over the original $T$; no separatedness assumption is introduced. Normality of $C$ follows from [lem-trf-strict-semistable-model-normal]. Taking the empty marking, [lem-trf-valuation-horizontal-curve-models] gives finitely many irreducible components of $C$. Throughout, a proper generic-fibre-isomorphism between flat $T$-curves is an $\\eta$-modification: $\\eta$ is open because the primes of $V$ form a finite chain (invert a nonzero element of its least nonzero prime, unless $V=K$); the generic fibre is schematically dense since a flat affine $V$-algebra injects into its localization over $K$. Thus both models have the entire generic fibre as a schematically dense isomorphism open.",
+   "uses": [
+    "lem-trf-elementary-semistable-chart-globalization",
+    "lem-trf-strict-semistable-model-normal",
+    "lem-trf-valuation-horizontal-curve-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, p. 28, localization beneath the centre and local-to-global reductions"
+   }
+  },
+  {
+   "text": "In a nodal chart write $uv=c\\ne0$; in a smooth chart write the coordinate as $t$. On the component containing the valuation, the generic point maps to the generic point of the chart: apply [lem-sc-flat-going-down] on affine charts to the minimal prime of the component. Its contraction must be minimal, because a smaller target prime would lift to a smaller source prime. The model chart is integral, so this contraction is zero. The residue-field statement [lem-weil-pbc-etale-algebra-residue-field-separable], applied at that generic prime, makes the component field $L$ finite separable over $K(u)$ (nodal case) or $K(t)$ (smooth case). In particular $L/K$ is finitely generated of transcendence degree one. If $F$ denotes that rational subfield and $O_F=O\\cap F$, then $\\kappa(O)/\\kappa(O_F)$ is algebraic: for a unit $z\\in O$, take its polynomial relation over $F$, divide all coefficients by one of least valuation, and reduce. All coefficients now belong to $O_F$, at least one is a unit, and reduction gives a nonzero polynomial vanishing on $\\bar z$. Thus the residual transcendence degree of $O_F/R$ is also one. This argument applies separately each time a new smooth chart is chosen.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, p. 28, restriction to the rational model; algebraicity of the residue extension written out"
+   }
+  },
+  {
+   "text": "If $x$ is not smooth, choose the nodal chart of Step 1. Apply [lem-trf-residual-curve-value-group] to $L/K$ and $O$: its two transcendence-degree hypotheses are the assumption and Step 2. Obtain $0\\ne\\pi\\in\\mathfrak m_R$ with $u/\\pi\\in O^\\times$. Since $v\\in O$, $c/\\pi=(u/\\pi)v\\in O\\cap K=R$. Use the nodal operation of [lem-trf-elementary-semistable-chart-globalization], obtaining a global strictly semistable proper generic-fibre-isomorphism $C_1\\to C$. Its local model is the blowup of $(u,\\pi)$. The chart where $\\pi$ generates has ring $R[v,w]/(vw-c/\\pi)$ with $u=\\pi w$; the chart where $u$ generates has ring $R[u,z]/(uz-\\pi)$ with $v=(c/\\pi)z$. The inverse substitutions prove these identities inside $K(u)$, with $w=u/\\pi$ and $z=\\pi/u$, using [def-nagata-blowup-chart-ring].",
+   "uses": [
+    "lem-trf-residual-curve-value-group",
+    "lem-trf-elementary-semistable-chart-globalization",
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, p. 28, first-stage choice of pi and the two blowup charts"
+   }
+  },
+  {
+   "text": "In Step 3 the specified map $\\operatorname{Spec}O\\to C$ factors through the chosen open neighbourhood because every point of $\\operatorname{Spec}O$ generalizes its closed point. It lifts in the $\\pi$-chart by sending $w$ to $u/\\pi$. This element is a unit, so the lifted centre belongs to the open with ring $R[w,w^{-1}]$, where $v=(c/\\pi)w^{-1}$. By [lem-weil-pbc-etale-base-change-finite-limits](1), its pullback has an etale morphism to this open. It therefore has an etale affine-line coordinate $w$, by [lem-weil-pbc-etale-composition-cancellation], since $\\mathbf G_m\\hookrightarrow\\mathbf A^1$ is an open immersion. Normality of $C$ and [lem-trf-finite-fibre-valuation-domination] show that the lifted centre is either already a fibre generic point, in which case stop, or a closed point of $C_1$. If $x$ was smooth from the start, put $C_1=C$ instead. In the remaining case we therefore have a closed centre with an etale affine-line chart on a strictly semistable model, with the same valued field and residual transcendence degree. The source $C_1$ is normal and reduced by [lem-trf-strict-semistable-model-normal], since it is strictly semistable with the same smooth generic fibre; this checks the reduced-source hypothesis of the lifting lemma.",
+   "uses": [
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-trf-strict-semistable-model-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, p. 28, first-stage smooth unit locus; Lemma 4.2.2 for closed-or-generic lifted centres"
+   }
+  },
+  {
+   "text": "Choose a smooth chart $U\\to\\operatorname{Spec}R_1[t]$ at the remaining centre $x_1$, where $R_1=V_{s_1}=O\\cap K$ as in Step 1. This is allowed by [lem-trf-elementary-semistable-chart-globalization]. The image of $x_1$ is closed: its residue field embeds in $\\kappa(x_1)$ and this last field is algebraic over $\\kappa(R_1)$, by [lem-weil-pbc-zariski-lemma], since an affine neighbourhood of $x_1$ in its field fibre has finite-type coordinate ring and $x_1$ is maximal; equivalently the chart image is a closed point of the affine-line fibre. Step 2 shows that $O_t=O\\cap K(t)$ has residual transcendence degree one. Apply [lem-trf-rational-valuation-linear-residue] to get $a\\in R_1$, $0\\ne\\pi\\in\\mathfrak m_{R_1}$, and $w=(t-a)/\\pi\\in O_t^\\times$ with transcendental residue. The contraction of $\\mathfrak m_O$ to $R_1[t]$ is then $(\\mathfrak m_{R_1},t-\\bar a)$: $t-a=\\pi w$ vanishes in the residue, while constants have kernel $\\mathfrak m_{R_1}$. Thus the smooth chart operation's pointed hypothesis holds.",
+   "uses": [
+    "lem-trf-elementary-semistable-chart-globalization",
+    "lem-trf-rational-valuation-linear-residue",
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, pp. 28--29, second-stage linear normalized coordinate and closed-centre check"
+   }
+  },
+  {
+   "text": "Apply operation (ii) of [lem-trf-elementary-semistable-chart-globalization] to $(t-a,\\pi)$, producing $C_2\\to C_1$. The two model blowup charts are $R_1[w]$, with $t=a+\\pi w$, and $R_1[q,z]/(qz-\\pi)$, with $q=t-a$ and $z=\\pi/(t-a)$, by [def-nagata-blowup-chart-ring]. The first is smooth and the second is the displayed strictly semistable model. The map from $O$ lifts in the first chart. On its $s_1$-fibre the prime of the centre in $\\kappa(R_1)[w]$ is zero, because $\\bar w$ is transcendental. Therefore the model centre is the generic point of that affine-line fibre. In the pullback the chart map stays etale after restriction to the $s_1$-fibre and localization at the generic point, by [lem-weil-pbc-etale-base-change-finite-limits](1). Any prime strictly below the centre prime would still contract to zero, hence would give a strictly smaller prime after localization to $\\kappa(R_1)(w)$. But [lem-weil-pbc-etale-algebra-over-field-product] makes that localized etale algebra a finite product of fields, whose primes are all minimal. This is impossible. Thus the centre is a generic point of a component of the $T$-fibre of $C_2$.",
+   "uses": [
+    "lem-trf-elementary-semistable-chart-globalization",
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, p. 29, second-stage blowup charts and generic centre"
+   }
+  },
+  {
+   "text": "The resulting global source is strictly semistable by the chart-globalization lemma at each operation. Every operation is proper and is an isomorphism on the entire generic fibre. Properness of their composite follows from [lem-weil-pbc-proper-fp-permanence](a). The generic fibre is open in each model: since the primes of $V$ form a finite chain, a nonzero element in the least nonzero prime cuts out the open $\\{\\eta\\}$ (and if $V=K$, the whole base is $\\eta$). It is schematically dense in every flat model: on an affine chart, flatness over the domain $V$ makes localization at $V\\setminus\\{0\\}$ injective. Consequently the proper generic-fibre-isomorphisms used above and their composite are modifications in the stated schematically dense sense. Their lifts of the specified valuation map are unique by separatedness of a proper morphism, also supplied by [lem-trf-finite-fibre-valuation-domination]. Take the composite as $b$, stopping after the first operation if its centre was already generic. It has the claimed generic centre and all the required properties. All sources used in the lifting criterion are reduced by [lem-trf-strict-semistable-model-normal].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-elementary-semistable-chart-globalization",
+    "lem-trf-strict-semistable-model-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, pp. 28--29, conclusion of the two stages; generic-fibre density and modification convention written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-chart-ring",
+  "def-weil-etale-morphism",
+  "lem-sc-flat-going-down",
+  "lem-trf-elementary-semistable-chart-globalization",
+  "lem-trf-finite-fibre-valuation-domination",
+  "lem-trf-rational-valuation-linear-residue",
+  "lem-trf-residual-curve-value-group",
+  "lem-trf-strict-semistable-model-normal",
+  "lem-trf-valuation-horizontal-curve-models",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 4.3.1, pp. 28--29, read online; local archival copy WANTED. Explicit chart and restriction arguments supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,7 +180,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-strict-semistable-cofinality",
@@ -93,5 +208,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-single-valuation-semistable-extraction",
+  "worker": "stage1",
+  "summary": "Expanded both valuation-extraction stages with explicit blowup charts, algebraic residue-field restriction, closed-or-generic case distinction and generic-fibre density. Three statement-only supporting nodes isolate value-group equality, the normalized linear residue coordinate, and the chart-globalization input without a separatedness assumption. The statement is unchanged.",
+  "blueprint": "Historical lem-trf-local-term-locality proof (1)--(2), semistable-modification input in the nearby-cycle branch: Temkin Proposition 4.3.1 single-valuation two-stage construction.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Generic flat ring-map tool to identify the image of a component generic point in an etale rational chart; no replacement of a unit route. The curve-valuation unit has no corresponding general algebra/geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "Generic etale residue-field tool to compare component function fields with the rational model. The curve-valuation unit has no corresponding general algebra/geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic permanence of etale charts under restriction and composition. The curve-valuation unit has no corresponding general algebra/geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic base-change stability of etale morphisms, used for chart pullbacks and fibres. The curve-valuation unit has no corresponding general algebra/geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Generic finite-type field algebra tool to verify the closed-point hypothesis in a smooth chart. The curve-valuation unit has no corresponding general algebra/geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic etale algebra over a field classification, used only to detect a minimal prime over the rational model generic point. The curve-valuation unit has no corresponding general algebra/geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic composition of proper maps, used to assemble the two local operations. The curve-valuation unit has no corresponding general algebra/geometry tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-f2601a331",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-f2601a331 (reviewer sub-agent of L); spot-checked: Read in full: the item, its three new statement-only nodes, the statement of every cited node and the parent's use of the item. The Temkin source (Prop. 4.3.1) is not in the literature tree and network access is blocked, so it was not opened here; the delivery marks it WANTED with agent origin, as do 50 existing nodes. Every claim was checked mathematically instead. (1) residual-curve-value-group is true: Abhyankar makes Gamma_L/Gamma_K torsion; Gamma_K is divisible for separably closed K (Kummer for n prime to p, Artin-Schreier for p); torsion over a divisible subgroup of a torsion-free group is trivial. When the valuation is trivial on K, O=L. (2) rational-valuation-linear-residue is true: minimal-pair/Gauss form, density of K=K^sep in Kbar, delta in Gamma_K. The integral clause holds because kappa(R) is algebraically closed and w(t-a0)>0 forces a in R and pi in m_R. (3) elementary-semistable-chart-globalization: the preamble facts hold (V_s open; c nonzero via openness of etale maps and the smooth generic fibre). The chart rings and flat base change of blowups were checked. In the separated case, gluing follows from unique specializations. In the non-separated case it is true but substantive: a rank-2 doubled example needs an extra blowup at a second specialization x', which the statement allows since it fixes X' only over W. Future splitters must not route through cofinality or its ancestors, or a cycle results. Item steps 1-7 were each verified: O cap K=V_s; going-down plus the etale residue field give L finite separable over K(u) or K(t); the residue-algebraicity normalization; the value lemma gives pi with u/pi a unit and c/pi in R; both chart rings by substitution; the lifted centre lies in D(w), giving an etale A1 chart; Zariski shows the image is (m_R1, t-a); a transcendental residue gives a generic model centre, and the etale fibre is a product of fields, so the centre is generic; composition, eta openness and schematic density hold. No duplicates (rg for Abhyankar/value group/residual transcendence and the trf valuation nodes). Acyclic; proof_deps equal the step uses; blueprint from/via correct; no SGA. The 7 tool_uses are generic Mathlib leaves and are accepted. No fixes."
  }
 }
