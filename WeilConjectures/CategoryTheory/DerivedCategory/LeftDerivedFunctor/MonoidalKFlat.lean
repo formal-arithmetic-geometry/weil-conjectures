@@ -131,12 +131,19 @@ instance isLeftDerivedFunctor₂_derivedTensorLeftDerivedOfKFlat :
   refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat
     (HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatInterKFlatMap) _ (fun X₁ X₂ ↦ ?_)
-  have := isIso_μNatTrans_Qh_app_app_of_kFlat
-    ((F.mapHomotopyCategory _).obj X₁.obj) _ X₂.property.2
-  have h₁ := F.isIso_leftDerivedFunctorCounit_app_of_kFlat' X₁.obj X₁.property
-  have h₂ := F.isIso_leftDerivedFunctorCounit_app_of_kFlat' X₂.obj X₂.property.1
+  have h₁ : IsIso (F.leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quasiIso C (.up ℤ)).localizerMorphismKFlat.functor.obj X₁)) :=
+    F.isIso_leftDerivedFunctorCounit_app_of_kFlat' _ X₁.property
+  have h₂ : IsIso (F.leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatInterKFlatMap).functor.obj X₂)) :=
+    F.isIso_leftDerivedFunctorCounit_app_of_kFlat' _ X₂.property.1
+  have h₃ : IsIso (((LaxMonoidal.μNatTrans Qh).app ((F.mapHomotopyCategory (.up ℤ)).obj
+      ((HomotopyCategory.quasiIso C (.up ℤ)).localizerMorphismKFlat.functor.obj X₁))).app
+      ((F.mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatInterKFlatMap).functor.obj X₂))) :=
+    isIso_μNatTrans_Qh_app_app_of_kFlat _ _ X₂.property.2
   simp only [derivedTensorLeftDerivedCounitOfKFlat, NatTrans.comp_app]
-  dsimp at this h₁ h₂ ⊢
+  dsimp
   infer_instance
 
 /-- `(K, M) ↦ LF(K ⊗ᴸ M)` is the total left derived functor of `(A, B) ↦ F(A ⊗ B)`. It is
