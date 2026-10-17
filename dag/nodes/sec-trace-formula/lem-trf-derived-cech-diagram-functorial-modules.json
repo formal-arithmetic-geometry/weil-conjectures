@@ -19,9 +19,104 @@
   "prop-weil-pbc-kinjective-resolutions-exist",
   "lem-kun-rgamma-unbounded-well-defined"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each of the two small étale sites, the category of constant-Λ module sheaves is Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. Thus it has functorial injective embeddings by [lem-weil-pbc-grothendieck-functorial-injective-embedding]. Apply [lem-weil-pbc-functorial-bounded-injective-resolution] simultaneously to the augmented cosimplicial complexes A_• and B_• and to every coface, codegeneracy, and augmentation map. Naturality of the resolution transformation gives augmented cosimplicial complexes I(A_•) and I'(B_•), with termwise injectives and the same lower bound a; [prop-weil-pbc-kinjective-resolutions-exist] makes their bounded-below injective columns K-injective.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "prop-weil-pbc-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141, lemma-functorial-injective-resolutions; functoriality over diagrams"
+   }
+  },
+  {
+   "text": "Exactness of h^{-1} on Λ-module sheaves is [prop-weil-pbc-inverse-image-modules-exact], so applying h^{-1} termwise preserves the complexes, their augmentations, all cosimplicial identities, and the vanishing in degrees below a; being exact, h^{-1} commutes with cohomology of complexes, so h^{-1}η_{A_q}:h^{-1}A_q→h^{-1}I(A_q) is a quasi-isomorphism for every q≥−1. Applying the functorial resolution I' of [lem-weil-pbc-functorial-bounded-injective-resolution] gives the chain map I'(h^{-1}η_{A_q}):I'(h^{-1}A_q)→I'(h^{-1}I(A_q)), natural in q. By naturality of η', I'(h^{-1}η_{A_q})∘η'_{h^{-1}A_q}=η'_{h^{-1}I(A_q)}∘h^{-1}η_{A_q}. In this square the two vertical sides η' and the top side h^{-1}η are quasi-isomorphisms, hence so is I'(h^{-1}η_{A_q}) by two-out-of-three, including the augmentation column q=−1. Both I'(h^{-1}A_q) and I'(h^{-1}I(A_q)) are bounded-below complexes of injectives, hence K-injective [prop-weil-pbc-kinjective-resolutions-exist]; with the augmentations η'_{h^{-1}A_q} and η'_{h^{-1}I(A_q)}∘h^{-1}η_{A_q} they are two K-injective resolutions of h^{-1}A_q, and the square says that I'(h^{-1}η_{A_q}) is a comparison between them over h^{-1}A_q. By [lem-kun-rgamma-unbounded-well-defined], taking sections over Y' gives an isomorphism in D(Λ); thus each column of v=ΓI'(h^{-1}η_{A_•}) is a quasi-isomorphism of complexes of Λ-modules.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-kun-rgamma-unbounded-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC, exactness of inverse image on module sheaves; combined with derived.tex Tag 0141 naturality"
+   }
+  },
+  {
+   "text": "For a Λ-module sheaf F on Y, the restriction map on sections Γ(Y,F)→Γ(Y',h^{-1}F) is the component at the final object Y of the unit F→h_*h^{-1}F of the adjunction h^{-1}⊣h_* of [prop-weil-pbc-inverse-image-modules-exact] (3), using (h_*G)(Y)=G(Y'×_YY)=G(Y') from the formula for h_* there; it is Λ-linear and natural in F. Applied termwise to F=I(A_q)^j it gives, for every q≥−1, a chain map Γ(Y,I(A_q))→Γ(Y',h^{-1}I(A_q)) natural in every coface, codegeneracy and augmentation. Composing with Γ(Y',η'_{h^{-1}I(A_q)}) gives u; since η' is natural, u is a morphism of augmented cosimplicial complexes of Λ-modules.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-sheaf-of-modules-category",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141, functoriality of the resolution maps; module-sheaf section restriction"
+   }
+  },
+  {
+   "text": "The given diagram morphism b:h^{-1}A_•→B_• is a morphism of augmented cosimplicial complexes. Functoriality of I' sends it to I'(b):I'(h^{-1}A_•)→I'(B_•), and taking sections gives w. Consequently w commutes with every coface, codegeneracy, and augmentation. The same observation applied to η' shows that all three displayed arrows are actual maps of augmented diagrams, rather than independently chosen derived morphisms.",
+   "uses": [
+    "lem-weil-pbc-functorial-bounded-injective-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141, functoriality on morphisms of complexes and diagrams"
+   }
+  },
+  {
+   "text": "The resolution functor preserves the lower bound by [lem-weil-pbc-functorial-bounded-injective-resolution], while exact h^{-1} preserves zero terms below a. Hence every column in u, v, and w, including the augmentation column, is internally concentrated in degrees at least a. The alternating coface maps and the chain maps above therefore form a double-complex zigzag with total differential δ+(-1)^q d; commutation with the cofaces gives genuine maps of augmented total complexes.",
+   "uses": [
+    "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141, bounded-below functorial resolutions; alternating-complex construction"
+   }
+  },
+  {
+   "text": "Here res_h:RΓ(Y,K)→RΓ(Y',h^{-1}K) is the restriction map induced by the inverse-image/direct-image unit of [prop-weil-pbc-inverse-image-modules-exact]: for a K-injective resolution K→I on Y and a K-injective resolution h^{-1}I→J on Y' (h^{-1}K→h^{-1}I→J is a K-injective resolution of h^{-1}K since h^{-1} is exact), it is the composite Γ(Y,I)→Γ(Y,h_*h^{-1}I)=Γ(Y',h^{-1}I)→Γ(Y',J) of the unit and the resolution map; by [lem-kun-rgamma-unbounded-well-defined] this is independent of the resolutions in D(Λ). By Step 1, η_{A_q}:A_q→I(A_q) is a K-injective resolution [prop-weil-pbc-kinjective-resolutions-exist], so Γ(Y,I(A_q)) represents RΓ(Y,A_q) [def-kun-rgamma-unbounded]; η'_{h^{-1}I(A_q)} is a K-injective resolution of h^{-1}I(A_q), so by Step 3 the column u_q is exactly the composite defining res_h with I=I(A_q), J=I'(h^{-1}I(A_q)), its target representing RΓ(Y',h^{-1}A_q) through the resolution η'_{h^{-1}I(A_q)}∘h^{-1}η_{A_q}. Step 2 identifies, through v_q, this target with the representative Γ(Y',I'(h^{-1}A_q)) coming from η'_{h^{-1}A_q}, by the canonical isomorphism of [lem-kun-rgamma-unbounded-well-defined]; hence v_q^{-1}u_q represents res_h. Finally I'(b_q) is a chain map between the K-injective resolutions η'_{h^{-1}A_q} and η'_{B_q} lying over b_q (naturality of η'), so w_q=ΓI'(b_q) represents RΓ(b_q), the action of RΓ on morphisms computed by lifts to K-injective resolutions, unique up to homotopy [prop-weil-pbc-kinjective-resolutions-exist]. Thus w_qv_q^{-1}u_q represents RΓ(Y,A_q)→RΓ(Y',h^{-1}A_q)→RΓ(Y',B_q) for every q≥−1, with one common choice of resolutions and all cosimplicial compatibilities retained.",
+   "uses": [
+    "def-kun-rgamma-unbounded",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-kun-rgamma-unbounded-well-defined",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141, derived functors computed by functorial injective resolutions; definition of RΓ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-rgamma-unbounded",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-kun-rgamma-unbounded-well-defined",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0141, lemma-functorial-injective-resolutions and remark-match; diagramwise application to the unit of exact module inverse image"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,7 +179,7 @@
  "mathlib_match": null,
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-base-cech-hypercohomology",
@@ -106,5 +201,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-derived-cech-diagram-functorial-modules",
+  "worker": "stage1",
+  "summary": "Audited the imported compatible-roof statement against the module-sheaf and derived-category nodes. No new nodes were needed: Grothendieck module categories, functorial injective embeddings and bounded-below functorial resolutions supply the common diagram resolutions; exact inverse image gives the middle quasi-isomorphism; naturality gives actual maps of all augmented cosimplicial structure; the K-injective RΓ definition identifies the resulting roof columnwise and hence on the alternating total double complexes.",
+  "blueprint": "Realizes the finite-surjective Čech descent input in the ancestor lem-trf-local-term-locality: the naturality of the resolved Čech diagram under arbitrary base change, using the common functorial injective resolution and its columnwise derived roof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-fdd258e0c",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-fdd258e0c (reviewer sub-agent of L); spot-checked: Read the item, the 10 cited nodes' statements, Stacks derived.tex Tag 0141 (lemma-functorial-injective-resolutions l.7623, remark-match l.7691; the bound is preserved via J(0)=0 and I^{p,q}=0 for p<B) and sites-modules.tex Tag 04JC (l.5540), plus the parent's Steps 6–7 and its sibling, which defines res as the map induced by the unit. The statement is true and the coefficient category is Mod(T_Et,Λ) throughout, matching the parent. No base-change invertibility is asserted. Tested h=id (v^{-1}u=id by naturality of η'), A=0, negative a and the augmentation column q=-1. There are no new nodes and no duplicates: rg finds only single-object abelian-sheaf pullback nodes and spectral-sequence nodes. I fixed three gaps in the proof text only; statement, stmt_deps and proof_deps are unchanged. (1) Step 2 (E5): it never said why h^{-1}η is a quasi-isomorphism and proved the claim only for the sheaf map, while the statement's v is the map on sections. Added exactness, two-out-of-three, K-injectivity, and lem-kun-rgamma-unbounded-well-defined for the sections, extending the step's uses. (2) Step 3: the 'restriction on sections' is now spelled out as the unit F→h_*h^{-1}F at Y, with (h_*G)(Y)=G(Y'). (3) Step 6 (E5): it asserted that u is the derived restriction without justification. It now gives res_h's unit recipe, shows u_q is that composite, v_q is the canonical comparison, and w_q=RΓ(b_q). Remark (B2): the statement does not define res_h; I left it unchanged because it is split-owned, and the meaning is now fixed in Step 6. review_split.py on the snapshot: PASS. Accepted tool_uses, the same as the parent's: lem-weil-pbc-module-sheaves-grothendieck-abelian, lem-weil-pbc-grothendieck-functorial-injective-embedding, lem-weil-pbc-functorial-bounded-injective-resolution, prop-weil-pbc-inverse-image-modules-exact, prop-weil-pbc-kinjective-resolutions-exist, lem-kun-rgamma-unbounded-well-defined.; 1 file(s) fixed by the reviewer"
  }
 }
