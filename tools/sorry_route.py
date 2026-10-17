@@ -12,16 +12,24 @@ The scratch file is a plain Lean file, not a `module`: a `module` file sees neit
 non-exposed bodies of what it imports, so the walk found nothing and printed nothing (sorry-route.json was empty from
 2026-10-16 to 2026-10-17 and the batch tags fell back to the import closure). A plain file imports the full .olean.
 
+Assumed results (the human, 2026-10-17): the Lean declarations a batch assumes (coord/assumed.tsv, tools/assumed.py; batch 5
+assumes Poincare duality and the Lefschetz trace formula) are axioms of that batch's walk: not descended into, and their
+`sorry`s are not its work. The exclusion is per batch: batch 4 proves Poincare duality, so its route keeps them.
+
 Output: {"t", "ok", "failed": [target modules whose walk failed], "route": {module: [declarations]} (union over the open
-batches), "batches": {batchN: {module: [declarations]}}, "targets": {target module: {module: [declarations]}}}.
+batches), "batches": {batchN: {module: [declarations]}}, "targets": {target module: {module: [declarations]}} (walks without assumptions), "assumed": {batchN: [declarations]}}.
 `ok` is false when any target module failed: consumers must not read a partial route as complete (tools/tag_batches.py
 then keeps the import closure for that batch and says so). Exit 1 when a walk failed.
-Usage: tools/sorry_route.py [N ...]      (default: every open batch; the file always describes the batches it lists)"""
-import json, os, pathlib, re, subprocess, sys, time
+Usage: tools/sorry_route.py [N ...]      (default: every open batch; the file always describes the batches it lists)
+       tools/sorry_route.py --check N [MODULE ...]   print batch N's route (its target modules, or the MODULEs given) with
+                                                     its assumptions, without writing local/sorry-route.json"""
+import hashlib, json, os, pathlib, re, subprocess, sys, time
 R = pathlib.Path(__file__).resolve().parent.parent
 SB = R / "lean" / ".sandbox" / "_sheaf"; SB.mkdir(parents=True, exist_ok=True)
 LIB = (R / "tools" / "sorry_route.lean").read_text()
 body = LIB[LIB.index("open Lean Meta"):]
+sys.path.insert(0, str(R / "tools"))
+import assumed  # noqa: E402
 
 
 def open_batches():
@@ -54,9 +62,13 @@ def declaring(mod, depth=0):
     return out or [mod]
 
 
-def walk(mod):
-    """{module: set(declarations)} of the sorried project declarations the declarations of `mod` use; None on failure."""
-    f = SB / f"SorryRoute_{mod.replace('.', '_')}.lean"
+def walk(mod, stops=()):
+    """{module: set(declarations)} of the sorried project declarations the declarations of `mod` use, not entering the
+    declarations `stops` (a batch's assumptions); None on failure."""
+    stops = sorted(stops)
+    tag = ("_A" + hashlib.sha1("\n".join(stops).encode()).hexdigest()[:8]) if stops else ""
+    f = SB / f"SorryRoute_{mod.replace('.', '_')}{tag}.lean"
+    stoplist = "[" + ", ".join(json.dumps(x) for x in stops) + "].map String.toName"
     mods = declaring(mod)
     names = ", ".join(f"`{m}" for m in mods)
     f.write_text(f"import Lean\nimport {mod}\n{body}\n#eval show MetaM Unit from do\n"
@@ -66,7 +78,7 @@ def walk(mod):
                  f"  let decls := env.constants.map₁.toList.filterMap fun (n, _) =>\n"
                  f"    if (env.getModuleIdxFor? n).any mis.contains && !n.isInternalDetail then some n else none\n"
                  f"  IO.println s!\"TARGETDECLS {{decls.length}}\"\n"
-                 f"  for (d, m) in (← sorryRoute decls) do IO.println s!\"ROUTE {{m}} {{d}}\"\n")
+                 f"  for (d, m) in (← sorryRoute decls ({stoplist})) do IO.println s!\"ROUTE {{m}} {{d}}\"\n")
     env = dict(os.environ, SHEAF_FILE_TIMEOUT="900")
     r = subprocess.run(["tools/lean_file.sh", str(f.relative_to(R))], cwd=R, env=env, capture_output=True, text=True,
                        timeout=1200)
@@ -107,22 +119,48 @@ def changed_since(t, modules):
     return out
 
 
+def check(n, mods):
+    """--check: batch n's route with its assumptions, printed; nothing written"""
+    stops = assumed.decls_for(n)
+    print(f"batch{n}: {len(stops)} assumed declarations (coord/assumed.tsv)")
+    rc = 0
+    for mod in mods or targets(n):
+        w = walk(mod, stops)
+        if w is None:
+            rc = 1; continue
+        print(f"{mod}: {sum(len(v) for v in w.values())} sorried declarations in {len(w)} modules")
+        for m, ds in sorted(w.items()):
+            for d in sorted(ds):
+                print(f"  {m}\t{d}")
+    return rc
+
+
 def main():
+    if sys.argv[1:2] == ["--check"]:
+        return check(int(sys.argv[2]), sys.argv[3:])
     ns = [int(a) for a in sys.argv[1:]] or open_batches()
     route, batches, tgt, failed = {}, {}, {}, []
+    walks = {}   # (module, assumptions) -> walk; tgt keeps the walks without assumptions
+    assumed_by = {}
     for n in ns:
         b = batches.setdefault(f"batch{n}", {})
+        stops = frozenset(assumed.decls_for(n))
+        if stops:
+            assumed_by[f"batch{n}"] = sorted(stops)
         for mod in targets(n):
-            if mod not in tgt:
-                w = walk(mod)
+            if (mod, stops) not in walks:
+                w = walk(mod, stops)
                 if w is None:
                     failed.append(mod); continue
-                tgt[mod] = w
-            for m, ds in tgt[mod].items():
+                walks[(mod, stops)] = w
+                if not stops:
+                    tgt[mod] = w
+            for m, ds in walks[(mod, stops)].items():
                 b.setdefault(m, set()).update(ds); route.setdefault(m, set()).update(ds)
     srt = lambda d: {m: sorted(v) for m, v in sorted(d.items())}  # noqa: E731
     out = {"t": time.time(), "ok": not failed, "failed": failed, "route": srt(route),
-           "batches": {k: srt(v) for k, v in batches.items()}, "targets": {k: srt(v) for k, v in tgt.items()}}
+           "batches": {k: srt(v) for k, v in batches.items()}, "targets": {k: srt(v) for k, v in tgt.items()},
+           "assumed": assumed_by}
     (R / "local").mkdir(exist_ok=True)
     tmp = R / "local" / ".sorry-route.json"; tmp.write_text(json.dumps(out, indent=1)); tmp.replace(R / "local" / "sorry-route.json")
     for k, v in out["batches"].items():

@@ -39,7 +39,7 @@ project's layout, as `tools/README.md` says. `SHEAF_DAG` in coord/sheaf.env name
 not `dag/nodes`.
 """
 from __future__ import annotations
-import collections, json, pathlib, sys
+import collections, json, pathlib, re, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402
@@ -109,7 +109,39 @@ def audit_state(d) -> str:
 
 def finished(d) -> bool:
     """Stage 1 is finished with the node: its Lean on the done branch is closed (SETUP.md). Nothing below it is an item."""
+    if assumed_done(d):   # the human, 2026-10-17: a node its batches assume (coord/assumed.tsv)
+        return True
     return audit_state(d) in DONE_STATES
+
+
+# the human, 2026-10-17 (batch 5 ASSUMES the Lefschetz trace formula and Poincare duality; their Lean keeps its `sorry`):
+# the nodes listed in coord/assumed.tsv (tools/assumed.py) are finished for the batches that assume them. Such a node is
+# finished when every target that reaches it belongs to a batch assuming it (coord/batchN-targets.txt; a target in no
+# batch file assumes nothing). Finished, it is never a stage-1 or stage-2 item, counts as stated (nothing waits for it),
+# and its stmt_deps are not reached through it.
+_ASSUMED: dict = {}
+
+
+def target_batches() -> dict[str, str]:
+    out = {}
+    for p in sorted((li.ROOT / "coord").glob("batch*-targets.txt")):
+        m = re.fullmatch(r"batch(\d+)-targets\.txt", p.name)
+        if not m:
+            continue
+        for x in p.read_text().splitlines():
+            if x.strip() and not x.lstrip().startswith("#"):
+                out.setdefault(x.split()[0], f"batch{m.group(1)}")
+    return out
+
+
+def assumed_done(d) -> bool:
+    if "done" not in _ASSUMED:
+        import assumed
+        if assumed.nodes():
+            g = Dag.__new__(Dag); g._graph(load()); g._set_assumed()
+        else:
+            _ASSUMED["done"] = set()
+    return str(field(d, "id")) in _ASSUMED["done"]
 
 
 def is_def(d) -> bool:
@@ -157,19 +189,50 @@ def deps_of(d, which: str) -> list[str]:
 
 class Dag:
     def __init__(self, nodes: dict[str, dict]):
+        self._graph(nodes)
+        self._set_assumed()
+        self.dist = self.distances(cut=False)    # every node a target reaches: the DAG check and stages 2 and 3
+        self.dist1 = self.distances(cut=True)    # reached without passing through a finished node: stage 1
+        self.height = {}   # fewest dependency steps down to a Mathlib leaf
+
+    def _set_assumed(self):
+        """self.assumed: the nodes of coord/assumed.tsv that are finished here (every target reaching them is of a batch
+        that assumes them); also the module-wide set read by finished()."""
+        import assumed
+        recs = {i: bs for i, bs in assumed.nodes().items() if i in self.live}
+        done = set()
+        if recs:
+            tb, tset = target_batches(), set(self.targets)
+            rev = collections.defaultdict(set)
+            for j, d in self.live.items():
+                for c in deps_of(d, "all"):
+                    rev[self.resolve(c)].add(j)
+            for i, bs in recs.items():
+                seen, st = {i}, [i]
+                while st:
+                    for q in rev.get(st.pop(), ()):
+                        if q not in seen:
+                            seen.add(q); st.append(q)
+                if all(tb.get(t) in bs for t in seen & tset):
+                    done.add(i)
+        _ASSUMED["done"] = self.assumed = done
+
+    def batch_reach(self, batch, roots) -> dict[str, int]:
+        """what the targets `roots` of `batch` reach, not entering the nodes that batch assumes (coord/assumed.tsv)"""
+        import assumed
+        return self.distances_from(roots, stop=assumed.nodes_for(batch))
+
+    def _graph(self, nodes: dict[str, dict]):
         self.n = nodes
         self.merged = {i: str(field(d, "merged")) for i, d in nodes.items()
                        if field(d, "merged") or str(field(d, "status") or "").lower() == "merged"}
         self.live = {i: d for i, d in nodes.items() if i not in self.merged}
         self.targets = [i for i, d in self.live.items() if field(d, "target") or str(field(d, "kind") or "").lower() == "target"]
-        self.dist = self.distances(cut=False)    # every node a target reaches: the DAG check and stages 2 and 3
-        self.dist1 = self.distances(cut=True)    # reached without passing through a finished node: stage 1
-        self.height = {}   # fewest dependency steps down to a Mathlib leaf
 
     def distances(self, cut: bool) -> dict[str, int]:
         return self.distances_from(self.targets, cut)
 
-    def distances_from(self, roots, cut: bool = False) -> dict[str, int]:
+    def distances_from(self, roots, cut: bool = False, stop=()) -> dict[str, int]:
         dist = {}
         dq = collections.deque((t, 0) for t in roots)
         while dq:
@@ -177,6 +240,8 @@ class Dag:
             if i in dist:
                 continue
             dist[i] = k
+            if i in stop:
+                continue
             if cut and finished(self.live[i]):
                 continue
             for c in deps_of(self.live[i], "all"):
@@ -211,7 +276,7 @@ class Dag:
 
     def stated(self, i: str) -> bool:
         d = self.live.get(i)
-        return d is None or is_leaf(d) or has_decl(d)   # a dependency on a missing node is reported by the DAG check, not here
+        return d is None or is_leaf(d) or has_decl(d) or i in self.assumed   # an assumed node is stated (2026-10-17); a dependency on a missing node is reported by the DAG check, not here
 
     def stage1(self) -> list[tuple[int, str]]:
         """nearest to a target first; since 2026-10-09 (SETUP.md) ordered first by the unit route: the rank of the node's unit in
@@ -241,7 +306,7 @@ class Dag:
     def needs_statement(self, i: str) -> bool:
         """A stage-2 node that still needs a statement: reached from a target, not a Mathlib leaf, no Lean declaration."""
         d = self.live.get(i)
-        return d is not None and i in self.dist and not is_leaf(d) and not has_decl(d)
+        return d is not None and i in self.dist and not is_leaf(d) and not has_decl(d) and i not in self.assumed
 
     def blockers(self, items) -> dict[str, int]:
         """item -> how many stage-2 nodes still needing a statement cannot be stated before it: every node whose stmt_deps
@@ -268,7 +333,7 @@ class Dag:
         why = collections.Counter(); items = []; tsc = self.target_statement_closure()
         early = li.config().get("SHEAF_EARLY_REVIEW", "") not in ("", "0", "no")
         for i, d in self.live.items():
-            if i not in self.dist or is_leaf(d) or has_decl(d):
+            if i not in self.dist or is_leaf(d) or has_decl(d) or i in self.assumed:   # assumed: never an item (2026-10-17)
                 continue
             if not unfolded(d):
                 why["waits for stage 1"] += 1; continue

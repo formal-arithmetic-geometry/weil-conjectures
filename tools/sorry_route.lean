@@ -2,18 +2,20 @@
 The sorry route of target declarations (launcher, 2026-10-16): the modules of the project declarations whose own term
 contains `sorry` and that the targets' proofs actually use (transitively, through types and values). Stage 3 is
 top-down: only these modules are work; a sorry in a module the targets import but do not use is not a task.
+`stops` (the human, 2026-10-17: the declarations the batch assumes, coord/assumed.tsv) are axioms: the walk
+neither enters nor reports them.
 Run: SORRY_ROUTE_TARGETS="A.b C.d" SORRY_ROUTE_OUT=out.txt  with this file's imports replaced by the targets' modules
 (tools/sorry_route.py writes and compiles it per target module through tools/lean_file.sh).
 -/
 import Lean
 open Lean Meta
 
-def sorryRoute (targets : List Name) : MetaM (Array (Name × Name)) := do
+def sorryRoute (targets : List Name) (stops : List Name := []) : MetaM (Array (Name × Name)) := do
   let env ← getEnv
   let mods := env.header.moduleNames
   let modOf (n : Name) : Option Name := do
     let i ← env.getModuleIdxFor? n; mods[i.toNat]?
-  let mut seen : NameSet := {}
+  let mut seen : NameSet := stops.foldl (fun s n => s.insert n) {}
   let mut stack := targets.toArray
   let mut out : Array (Name × Name) := #[]
   while h : stack.size > 0 do
