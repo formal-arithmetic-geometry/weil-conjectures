@@ -14,9 +14,8 @@ public import WeilConjectures.RingTheory.Etale.TraitSection
 
 In the situation of the spreading theorem (blueprint `sbc-thm-spreading-finite-etale-galois`)
 over a Noetherian base, let `s ∈ S` be a point of codimension one, so that `𝒪_{S,s}` is a
-discrete valuation ring. If the normalization `N ⟶ C` of `C` in the Galois cover is étale over
-the generic point, it is étale over `σ(s)`
-(`AlgebraicGeometry.Scheme.SpreadingDatum.etaleOverSection_of_coheight_eq_one`, tame
+discrete valuation ring. The normalization `N ⟶ C` of `C` in the Galois cover is étale over
+`σ(s)` (`AlgebraicGeometry.Scheme.SpreadingDatum.etaleOverSection_of_coheight_eq_one`, tame
 ramification and Abhyankar's lemma) and then over all of `C_s`
 (`AlgebraicGeometry.Scheme.SpreadingDatum.etaleOver_of_coheight_eq_one`, purity). This is the
 first paragraph of the proof of [Stacks 0EYJ].
@@ -58,7 +57,7 @@ The commutative algebra is `Algebra.exists_etale_integralClosure_of_height_eq_on
 `AlgebraicGeometry.Scheme.GaloisCover.mem_range_app_of_forall_smul_eq`,
 `AlgebraicGeometry.Scheme.GaloisCover.rankAtStalk_app_eq`). -/
 theorem etaleOverSection_of_coheight_eq_one [IsNoetherian D.S] (s : D.S)
-    (hs : Order.coheight s = 1) (hη : D.EtaleOver (genericPoint D.S)) :
+    (hs : Order.coheight s = 1) :
     D.EtaleOverSection s := by
   obtain ⟨W, hW, U, hU, hUW, hsW, hWU⟩ := D.exists_affineOpens_section s
   have : Nonempty W := ⟨⟨s, hsW⟩⟩

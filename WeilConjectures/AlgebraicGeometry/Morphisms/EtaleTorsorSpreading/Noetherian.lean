@@ -46,7 +46,7 @@ theorem etaleOver_of_forall_specializes [IsNoetherian D.S] (s : D.S)
   have h0 := coheight_ne_zero_of_ne_genericPoint s hη
   by_cases h1 : Order.coheight s = 1
   · exact D.etaleOver_of_coheight_eq_one s h1 hgen
-      (D.etaleOverSection_of_coheight_eq_one s h1 hgen)
+      (D.etaleOverSection_of_coheight_eq_one s h1)
   · have h2 : 2 ≤ Order.coheight s := by
       induction h : Order.coheight s using ENat.recTopCoe with
       | top => simp

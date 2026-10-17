@@ -142,7 +142,8 @@ theorem Algebra.TraitSection.mem_range_of_forall_smul_eq {B B₁ Bk L : Type*} [
         exact (IsScalarTower.algebraMap_smul (A := Bk) b (g • x))⟩
       letI := rightTensorAction (B := B) (B₁ := B₁) (L := L) G
       ∀ g : G, g • y = y) :
-    y ∈ Set.range (Algebra.TensorProduct.map (AlgHom.id B₁ B₁) (IsScalarTower.toAlgHom B Bk L)) := by
+    y ∈ Set.range
+      (Algebra.TensorProduct.map (AlgHom.id B₁ B₁) (IsScalarTower.toAlgHom B Bk L)) := by
   have : SMulCommClass G B L := ⟨fun g b x ↦ by
     rw [IsScalarTower.algebraMap_smul (A := Bk) b x |>.symm, smul_comm g]
     exact (IsScalarTower.algebraMap_smul (A := Bk) b (g • x))⟩
