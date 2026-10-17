@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
@@ -5,6 +10,35 @@ public import Mathlib.CategoryTheory.Monoidal.Subcategory
 public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
+
+/-!
+# The Galois correspondence for finite local systems is a tensor equivalence
+
+Let `Y` be a scheme, `s` a geometric point, `Λ` a finite ring and `G` a group acting naturally on
+the geometric fibres of finite étale `Y`-schemes (for instance `π₁(Y, s)`). The geometric stalk
+`AlgebraicGeometry.Scheme.galoisRepFunctor` sends a finite locally constant sheaf of
+`Λ`-modules `F` to its stalk `F_s` with the action of `G` through the finite étale cover
+representing `F`. We show it is compatible with tensor products and units:
+
+- the stalk of a tensor product of sheaves of `Λ`-modules is the tensor product of the stalks,
+  `(F₁ ⊗ F₂)_s ≅ F₁_s ⊗ F₂_s`, naturally, sending the germ of `σ ⊗ τ` to `σ_s ⊗ τ_s`
+  (`AlgebraicGeometry.Scheme.sheafFiberTensorIso'`), and the stalk of `Λ_Y` is `Λ`
+  (`AlgebraicGeometry.Scheme.sheafFiberUnitIso'`);
+- these identifications are `G`-equivariant: `g (x ⊗ y) = g x ⊗ g y` and `G` acts trivially on
+  the stalk of `Λ_Y` (`AlgebraicGeometry.Scheme.galoisRepFunctorTensorNatIso`,
+  `AlgebraicGeometry.Scheme.galoisRepFunctorUnitIso`).
+
+The Galois action is only natural for morphisms of the underlying sheaves of *sets*, which is
+how the equivariance is proved: the pairing `(σ, τ) ↦ σ ⊗ τ` is a morphism
+`F₁ ⊞ F₂ ⟶ F₁ ⊗ F₂` of finite locally constant sheaves of sets
+(`AlgebraicGeometry.Scheme.tensorPairing`), and a constant section of `Λ_Y` is a morphism from
+the terminal sheaf of sets (`AlgebraicGeometry.Scheme.unitSection`).
+
+## Main results
+
+- `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor`: the Galois
+  correspondence (`sk-i-real-galois`) as a tensor equivalence.
+-/
 
 @[expose] public noncomputable section
 
@@ -447,5 +481,81 @@ lemma Scheme.galoisRepFunctorUnitIso_hom_hom_apply
   rfl
 
 end Unit
+
+
+/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems, with its
+tensor structure.
+
+Let `Y` be a connected scheme, `s` a geometric point, `Λ` a finite ring and `G = π₁(Y, s)` a
+fundamental group of the fibre functor at `s`. The geometric stalk at `s` is an equivalence `e`
+between finite locally constant sheaves of `Λ`-modules on `Y_ét` and finite continuous
+representations of `G` such that
+* the underlying `Λ`-module of `e F` is the stalk `F_s` (the isomorphism `η`);
+* `e` is compatible with tensor products: there is an isomorphism of bifunctors
+  `τ : e (F₁ ⊗ F₂) ≅ e F₁ ⊗ e F₂`, natural in `F₁` and `F₂`, whose underlying linear map is, via
+  `η`, the identification `(F₁ ⊗ F₂)_s ≅ F₁_s ⊗ F₂_s` of
+  `AlgebraicGeometry.Scheme.sheafFiberTensorIso'`;
+* `e` sends the constant sheaf `Λ_Y` to the trivial representation `Λ`.
+Exactness is `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`. -/
+theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor_of_isFundamentalGroup
+    (Y : Scheme.{u}) [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s : Spec (.of Ω) ⟶ Y) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (G : ProfiniteGrp.{u})
+    [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
+    [PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber s) G] :
+    ∃ (e : ObjectProperty.FullSubcategory
+            (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦
+              Scheme.IsFiniteLocallyConstantSheaf F) ≌
+          ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)))
+      (η : e.functor ⋙ ObjectProperty.ι _ ⋙ forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
+        ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber)
+      (τ : MonoidalCategory.tensor _ ⋙ e.functor ⋙ ObjectProperty.ι _ ≅
+        (e.functor ⋙ ObjectProperty.ι _).prod (e.functor ⋙ ObjectProperty.ι _) ⋙
+          MonoidalCategory.tensor (Rep.{u + 1} Λ G)),
+      (∀ F₁ F₂, (forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ)).map (τ.hom.app (F₁, F₂)) =
+        η.hom.app (F₁ ⊗ F₂) ≫ (Scheme.sheafFiberTensorIso' s F₁.obj F₂.obj).hom ≫
+          (η.inv.app F₁ ⊗ₘ η.inv.app F₂)) ∧
+      Nonempty ((e.functor ⋙ ObjectProperty.ι _).obj (𝟙_ _) ≅ 𝟙_ (Rep.{u + 1} Λ G)) := by
+  refine ⟨(Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).asEquivalence,
+    Scheme.galoisRepFunctorCompForget₂Iso s G, Scheme.galoisRepFunctorTensorNatIso s G,
+    fun F₁ F₂ ↦ ?_, ⟨Scheme.galoisRepFunctorUnitIso s G⟩⟩
+  have h₁ : (Scheme.galoisRepFunctorCompForget₂Iso s G).inv.app F₁ = 𝟙 _ := rfl
+  have h₂ : (Scheme.galoisRepFunctorCompForget₂Iso s G).inv.app F₂ = 𝟙 _ := rfl
+  have h₃ : (Scheme.galoisRepFunctorCompForget₂Iso s G).hom.app (F₁ ⊗ F₂) = 𝟙 _ := rfl
+  rw [h₁, h₂, h₃]
+  erw [MonoidalCategory.id_tensorHom_id]
+  ext w
+  rfl
+
+/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems, as an exact
+*tensor* equivalence.
+
+For a connected scheme `Y`, a geometric point `s` and a finite ring `Λ`, there is a profinite
+group `G` (the étale fundamental group `π₁(Y, s)`) and an equivalence `e` between finite locally
+constant sheaves of `Λ`-modules on `Y_ét` and finite continuous representations of `G`, such that
+the underlying `Λ`-module of `e F` is the stalk `F_s` (via `η`), `e` is compatible with tensor
+products through an isomorphism of bifunctors `τ` lifting
+`(F₁ ⊗ F₂)_s ≅ F₁_s ⊗ F₂_s` (`AlgebraicGeometry.Scheme.sheafFiberTensorIso'`), and `e` sends
+`Λ_Y` to the trivial representation. See the `_of_isFundamentalGroup` version for the statement
+with `G` named; exactness is
+`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`. -/
+theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor (Y : Scheme.{u})
+    [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+    ∃ (G : ProfiniteGrp.{u})
+      (e : ObjectProperty.FullSubcategory
+            (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦
+              Scheme.IsFiniteLocallyConstantSheaf F) ≌
+          ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)))
+      (η : e.functor ⋙ ObjectProperty.ι _ ⋙ forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
+        ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber)
+      (τ : MonoidalCategory.tensor _ ⋙ e.functor ⋙ ObjectProperty.ι _ ≅
+        (e.functor ⋙ ObjectProperty.ι _).prod (e.functor ⋙ ObjectProperty.ι _) ⋙
+          MonoidalCategory.tensor (Rep.{u + 1} Λ G)),
+      (∀ F₁ F₂, (forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ)).map (τ.hom.app (F₁, F₂)) =
+        η.hom.app (F₁ ⊗ F₂) ≫ (Scheme.sheafFiberTensorIso' s F₁.obj F₂.obj).hom ≫
+          (η.inv.app F₁ ⊗ₘ η.inv.app F₂)) ∧
+      Nonempty ((e.functor ⋙ ObjectProperty.ι _).obj (𝟙_ _) ≅ 𝟙_ (Rep.{u + 1} Λ G)) := by
+  obtain ⟨G, _, _⟩ := Scheme.FiniteEtale.exists_isFundamentalGroup s
+  exact ⟨G, exists_equivalence_isFiniteLocallyConstantSheaf_tensor_of_isFundamentalGroup Y s Λ G⟩
 
 end AlgebraicGeometry

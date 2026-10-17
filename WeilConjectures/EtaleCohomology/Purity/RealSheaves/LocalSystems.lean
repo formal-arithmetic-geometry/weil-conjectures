@@ -56,8 +56,13 @@ following.
   The target category is the full subcategory of `Rep Λ G` cut out by
   `Rep.IsFiniteContinuous`. Compatibility with the geometric stalk is the requested clause; it
   is an isomorphism of underlying `Λ`-modules only, not tied to the action of `G` on geometric
-  fibres. Exactness and the tensor structure are automatic for an equivalence of abelian
-  categories and are not restated. The compatibility with base change along a map `Λ → Λ'` of
+  fibres. Exactness is `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`
+  (in `WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsExact`). Compatibility
+  with `⊗_Λ` is *not* a formal consequence of the equivalence (an equivalence of abelian
+  categories need not be monoidal); it is proved in
+  `WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsTensor`, see
+  `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor`. The
+  compatibility with base change along a map `Λ → Λ'` of
   finite rings is not restated either; with `G` fixed as in the `_of_isFundamentalGroup`
   version it could now be written down, but it is not part of the statement here.
 
@@ -1243,6 +1248,44 @@ end EssSurj
 
 end EssSurjAux
 
+section GaloisRepEquivalence
+
+variable {Y : Scheme.{u}} [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+  (s : Spec (.of Ω) ⟶ Y) {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (G : ProfiniteGrp.{u})
+  [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
+  [PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber s) G]
+
+/-- The geometric stalk at `s` with its action of the fundamental group `G`, as a functor from
+finite locally constant sheaves of `Λ`-modules to finite continuous representations of `G`
+(`AlgebraicGeometry.Scheme.galoisRepFunctor`, corestricted). -/
+noncomputable def Scheme.galoisRepFunctorFiniteContinuous :
+    ObjectProperty.FullSubcategory
+        (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦
+          Scheme.IsFiniteLocallyConstantSheaf F) ⥤
+      ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)) :=
+  ObjectProperty.lift (Rep.IsFiniteContinuous (Λ := Λ) (G := G))
+    (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ))
+    (fun F ↦ Scheme.galoisRepFunctor_obj_isFiniteContinuous s G F)
+
+/-- `AlgebraicGeometry.Scheme.galoisRepFunctorFiniteContinuous` is an equivalence: it is fully
+faithful, and every finite continuous representation is the stalk of a finite locally constant
+sheaf (`AlgebraicGeometry.Scheme.exists_galoisRepFunctor_obj_iso`). -/
+instance : (Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).IsEquivalence := by
+  let Φ := Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)
+  let Φ' := Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G
+  have hΦ' : Φ'.FullyFaithful :=
+    (Functor.FullyFaithful.ofFullyFaithful Φ).ofCompFaithful (G := ObjectProperty.ι _)
+  have : Φ'.Full := hΦ'.full
+  have : Φ'.Faithful := hΦ'.faithful
+  -- essential surjectivity: a finite continuous `Λ[G]`-module is the stalk of a finite locally
+  -- constant sheaf of `Λ`-modules
+  have : Φ'.EssSurj := ⟨fun M ↦ by
+    obtain ⟨F, hF, ⟨i⟩⟩ := Scheme.exists_galoisRepFunctor_obj_iso s G M.obj M.property
+    exact ⟨⟨F, hF⟩, ⟨(ObjectProperty.fullyFaithfulι _).preimageIso i⟩⟩⟩
+  exact { }
+
+end GaloisRepEquivalence
+
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems. Also
 blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
 
@@ -1270,20 +1313,8 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalG
       Nonempty (e.functor ⋙ ObjectProperty.ι _ ⋙
           forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
         ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber) := by
-  let Φ := Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)
-  let Φ' := ObjectProperty.lift (Rep.IsFiniteContinuous (Λ := Λ) (G := G)) Φ
-    (fun F ↦ Scheme.galoisRepFunctor_obj_isFiniteContinuous s G F)
-  have hΦ' : Φ'.FullyFaithful :=
-    (Functor.FullyFaithful.ofFullyFaithful Φ).ofCompFaithful (G := ObjectProperty.ι _)
-  have : Φ'.Full := hΦ'.full
-  have : Φ'.Faithful := hΦ'.faithful
-  -- essential surjectivity: a finite continuous `Λ[G]`-module is the stalk of a finite locally
-  -- constant sheaf of `Λ`-modules
-  have : Φ'.EssSurj := ⟨fun M ↦ by
-    obtain ⟨F, hF, ⟨i⟩⟩ := Scheme.exists_galoisRepFunctor_obj_iso s G M.obj M.property
-    exact ⟨⟨F, hF⟩, ⟨(ObjectProperty.fullyFaithfulι _).preimageIso i⟩⟩⟩
-  have : Φ'.IsEquivalence := { }
-  exact ⟨Φ'.asEquivalence, ⟨Scheme.galoisRepFunctorCompForget₂Iso s G⟩⟩
+  exact ⟨(Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).asEquivalence,
+    ⟨Scheme.galoisRepFunctorCompForget₂Iso s G⟩⟩
 
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
 
@@ -1304,8 +1335,12 @@ continuous `G`-action, compatible with the geometric stalk at `s`: the triangle
 
 commutes up to isomorphism.
 
-Exactness and compatibility with `⊗_Λ` are automatic consequences of the equivalence being
-an equivalence of abelian (monoidal) categories; the compatibility with base change along a
+Exactness is `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`.
+Compatibility with `⊗_Λ` is not automatic for an equivalence of abelian categories; it is
+`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor`, which
+strengthens this statement by a natural isomorphism `(F ⊗ F')_s ≅ F_s ⊗ F'_s` of
+representations and the identification of the stalk of `Λ_Y` with the trivial representation.
+The compatibility with base change along a
 map `Λ → Λ'` of finite rings is not restated here, see the module implementation notes and
 `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`
 for the version with `π₁(Y, s)` named. -/

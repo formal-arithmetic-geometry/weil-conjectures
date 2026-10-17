@@ -2715,6 +2715,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseRepAbelian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalPolynomial
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsExact
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsTensor
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.MiddleExtension
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
