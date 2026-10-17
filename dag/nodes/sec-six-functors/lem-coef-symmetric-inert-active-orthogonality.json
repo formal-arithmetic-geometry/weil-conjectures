@@ -12,9 +12,101 @@
   "def-coef-infinity-fibrations",
   "lem-coef-symmetric-operadic-fibration-recognition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=N(\\mathsf{Fin}_*)$ and write $H(S,T)=\\operatorname{Hom}_{\\mathsf{Fin}_*}(S,T)$, regarded as a discrete space. From the nerve and right-pinched mapping-space definitions in [def-cbc-enhanced-diagrams-cones], $\\operatorname{Map}_B(S,T)=H(S,T)$: a simplex has all its initial arrows equal to identities, so every remaining arrow is the same pointed map. Also $B$ is a quasicategory, since an inner horn in an ordinary nerve extends by composition of its string of arrows. By [lem-coef-symmetric-operadic-fibration-recognition], $p$ is an inner fibration with cocartesian lifts of inert maps. Hence $P$ is a quasicategory: extend the image of an inner horn in $B$, then lift that extension using [def-coef-infinity-fibrations]. This checks the hypotheses of the cocartesian mapping-space criterion used below.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-symmetric-operadic-fibration-recognition",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10 and Definition 2.1.2.3; explicit nerve and inner-horn checks"
+   }
+  },
+  {
+   "text": "For $b:x\\to y$, let $\\alpha=p(b):\\langle m\\rangle\\to\\langle n\\rangle$. Set $S=\\{t\\in\\{1,\\ldots,m\\}:\\alpha(t)\\ne *\\}$, choose a bijection $e:\\{1,\\ldots,k\\}\\to S$ with $k=|S|$, and define $r:\\langle m\\rangle\\to\\langle k\\rangle$ by $r(e(j))=j$ and $r(t)=*$ off $S$. Define $s:\\langle k\\rangle\\to\\langle n\\rangle$ by $s(j)=\\alpha(e(j))$ for $j\\ne *$. Then $r$ is inert, $s$ is active, and $sr=\\alpha$. This is a direct check of the inert condition in [lem-coef-symmetric-operadic-fibration-recognition] and the active condition $s^{-1}(*)=\\{*\\}$; it also applies when $S$ is empty.",
+   "uses": [
+    "lem-coef-symmetric-operadic-fibration-recognition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.2.2; explicit factorization by the non-discarded inputs"
+   }
+  },
+  {
+   "text": "Choose a $p$-cocartesian lift $i:x\\to z$ of $r$ using [lem-coef-symmetric-operadic-fibration-recognition]. Apply the outer-horn condition of [def-coef-infinity-fibrations] in dimension two: the horn $\\Lambda^2_0$ has edge $01=i$ and edge $02=b$, and its prescribed base $2$-simplex has edges $r,s,\\alpha$. Its filler supplies an edge $a:z\\to y$ over $s$ and a $2$-simplex with boundary $i,a,b$. Thus $i$ is inert, $a$ is active, and this is a coherent factorization of the given edge, rather than only an equality of homotopy classes.",
+   "uses": [
+    "lem-coef-symmetric-operadic-fibration-recognition",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.1.2.5, proof (3), specialized to the factorization of Remark 2.1.2.2; dimension-two cocartesian lifting"
+   }
+  },
+  {
+   "text": "We next check orthogonality in the base explicitly. Let $r:X\\to Y$ be inert, $s:U\\to V$ active, and let $f:X\\to U$, $g:Y\\to V$ satisfy $sf=gr$. For $t\\in r^{-1}(*)$, this equality gives $s(f(t))=*$, hence $f(t)=*$ by activity. For each $j\\in Y\\setminus\\{*\\}$ let $t_j$ be its unique preimage under $r$, and set $d(j)=f(t_j)$ and $d(*)=*$. Then $dr=f$ (including on discarded elements) and $sd=g$ (evaluate at each $t_j$ and at $*$). These formulas force every value of $d$, so the filler is unique. Consequently the square with rows $H(Y,U)\\to H(X,U)$ and $H(Y,V)\\to H(X,V)$, with vertical maps given by postcomposition with $s$, is a pullback of discrete spaces, and hence a homotopy pullback. The construction does not require $Y$ or $U$ to have a non-basepoint.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.2.2 and Proposition 2.1.2.5, proof (2); direct pointed-set filler calculation"
+   }
+  },
+  {
+   "text": "Fix the inert $i:x\\to y$ and active $a:u\\to v$ of the statement. Write $X=p(x)$, $Y=p(y)$, $U=p(u)$, $V=p(v)$, and $M(t,w)=\\operatorname{Map}_P(t,w)$. Consider the three-row diagram\n$$\\begin{array}{ccc}M(y,u)&\\longrightarrow&M(x,u)\\\\ \\downarrow&&\\downarrow\\\\ H(Y,U)&\\longrightarrow&H(X,U)\\\\ \\downarrow&&\\downarrow\\\\ H(Y,V)&\\longrightarrow&H(X,V).\\end{array}$$\nThe first square is a homotopy pullback by [lem-coef-infinity-cocartesian-mapping-criterion] for the $p$-cocartesian edge $i$ with test vertex $u$; the second is a homotopy pullback by step 4 with $r=p(i)$ and $s=p(a)$. Pasting by [lem-coef-infinity-homotopy-pullback-pasting] shows that the outer rectangle is a homotopy pullback. Now compare with the three-row diagram whose rows are $M(y,u)\\to M(x,u)$, $M(y,v)\\to M(x,v)$ and $H(Y,V)\\to H(X,V)$. Its lower square is a homotopy pullback by the same cocartesian criterion with test vertex $v$. Its outer rectangle is the one just proved to be a homotopy pullback, so cancellation in the pasting lemma makes its upper square a homotopy pullback. Here the vertical mapping-space maps are postcomposition with $a$, and the horizontal ones are precomposition with $i$. The commutation homotopies and their images under $p$ are the composition homotopies supplied by [lem-coef-infinity-mapping-composition]; the outer homotopy is their concatenation, as required by the pasting statement. Pasting is applied to the transposed diagrams, merely interchanging the two coordinates in the path-space definition of a homotopy pullback. Therefore the resulting comparison is exactly\n$$M(y,u)\\longrightarrow M(x,u)\\times^h_{M(x,v)}M(y,v),$$\nwith the specified square homotopy retained.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.1.2.5, proof (2); mapping-space proof of the lift from base orthogonality, expanded using the existing cocartesian criterion and homotopy-pullback pasting"
+   }
+  },
+  {
+   "text": "Let $T=M(x,u)\\times^h_{M(x,v)}M(y,v)$ and let $c:M(y,u)\\to T$ be the comparison of step 5. A specified coherent square is a point $(f,g,h)$ of $T$. In the homotopy-fiber convention of [def-cbc-enhanced-diagrams-cones], its space of diagonal fillers is $\\operatorname{hofib}_{(f,g,h)}(c)$: a point specifies a diagonal and a path from its induced square to $(f,g,h)$, so it contains both triangle homotopies and their compatibility with $h$, together with all higher simplices. Since $c$ is an equivalence, apply [lem-coef-spaces-homotopy-fiber-detection] with $X=M(y,u)$, $Y=S=T$, $r=u=c$, $q=v=\\mathrm{id}_T$ and the identity commutation homotopy. It identifies each homotopy fiber of $c$ with that of $\\mathrm{id}_T$. The latter is contractible: its path-space model consists of paths ending at the specified point, and the simplicial map $\\Delta^1\\times\\Delta^1\\to\\Delta^1$ induced by $\\max:[1]\\times[1]\\to[1]$ contracts it: send a path $\\gamma$ at parameter $s$ to the path $t\\mapsto\\gamma(\\max(t,s))$. At $s=0$ this is $\\gamma$, at $s=1$ it is constant at the specified endpoint, and the endpoint remains fixed throughout. This proves the asserted contractibility while retaining the square's specified homotopy. If $T$ is empty there are no squares to check.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.1.2.5, proof (2); homotopy-fiber interpretation of the space of compatible fillers"
+   }
+  },
+  {
+   "text": "All constructions include arity zero. If $\\alpha$ discards every input then $k=0$ in step 2, the lift in step 3 is an inert edge to the zero fiber, and the following map $\\langle0\\rangle\\to\\langle n\\rangle$ is active. If $n=0$, then $S$ is empty and the active factor is the identity of $\\langle0\\rangle$. In step 4, when $Y=\\langle0\\rangle$, activity forces $f$ to be the constant pointed map and the unique $d$ has source $\\langle0\\rangle$. When $U=\\langle0\\rangle$, both $f$ and $d$ are uniquely determined and the commutative-square condition forces $g$ to be constant since $r$ is surjective. Steps 5 and 6 impose no nonemptiness on mapping spaces. Thus neither the factorization nor orthogonality excluded any nullary case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 2.1.1.10 and 2.1.2.3 and Proposition 2.1.2.4; explicit zero-arity verification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-symmetric-operadic-fibration-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Remark 2.1.2.2, Definition 2.1.2.3, Proposition 2.1.2.4 and Proposition 2.1.2.5, proof (2)-(3), printed pp. 178-179. Read online; WANTED archived source. The general transport argument is expanded directly using existing mapping-space and pasting nodes, with explicit pointed-set calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +142,38 @@
    "results": "{\"t\": \"2026-10-17T01:49:27Z\", \"tool\": \"grep\", \"query\": \"inert.*active|active.*inert|Operadic|Preoperad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\"], \"digest\": \"a19c790c0324b782\"}",
    "date": "2026-10-17",
    "verdict": "no match: the semantic and Loogle hits are ordinary-category weak factorization systems or simplex epi-mono factorizations, not orthogonality of inert and active edges of a quasicategorical operad; the grep hits are unrelated linter variables."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an infinity operad every morphism factors as inert then active and the space of fillers between inert and active arrows is contractible",
+   "results": "{\"t\": \"2026-10-17T02:41:08Z\", \"tool\": \"leansearch\", \"query\": \"In an infinity operad every morphism factors as inert then active and the space of fillers between inert and active arrows is contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.cm5b\", \"HomotopicalAlgebra.ModelCategory.cm5a\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"HomotopicalAlgebra.CofibrantBrownFactorization\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"CategoryTheory.MorphismProperty.MapFactorizationData\", \"SSet.Quasicategory\"], \"digest\": \"bd14899a3af36a60\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected semantic hits. Quasicategory.hornFilling is only the inner-horn condition (Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-53); ordinary MapFactorizationData (Mathlib/CategoryTheory/MorphismProperty/Factorization.lean:43-58) and model-category factorizations do not state symmetric infinity-operadic orthogonality or its mapping-space pullback. Loogle found no Operad declaration; grep found only unrelated linter variables."
+  },
+  {
+   "tool": "grep",
+   "query": "inert.*active|active.*inert|cocartesian.*orthogon|orthogon.*cocartesian",
+   "results": "{\"t\": \"2026-10-17T02:41:08Z\", \"tool\": \"grep\", \"query\": \"inert.*active|active.*inert|cocartesian.*orthogon|orthogon.*cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\"], \"digest\": \"a19c790c0324b782\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected semantic hits. Quasicategory.hornFilling is only the inner-horn condition (Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-53); ordinary MapFactorizationData (Mathlib/CategoryTheory/MorphismProperty/Factorization.lean:43-58) and model-category factorizations do not state symmetric infinity-operadic orthogonality or its mapping-space pullback. Loogle found no Operad declaration; grep found only unrelated linter variables."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\"",
+   "results": "{\"t\": \"2026-10-17T02:41:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected semantic hits. Quasicategory.hornFilling is only the inner-horn condition (Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-53); ordinary MapFactorizationData (Mathlib/CategoryTheory/MorphismProperty/Factorization.lean:43-58) and model-category factorizations do not state symmetric infinity-operadic orthogonality or its mapping-space pullback. Loogle found no Operad declaration; grep found only unrelated linter variables."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocartesian inert edge is left orthogonal to an edge over an active map in a symmetric infinity operad, with homotopy pullback mapping spaces",
+   "results": "{\"t\": \"2026-10-17T02:41:09Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian inert edge is left orthogonal to an edge over an active map in a symmetric infinity operad, with homotopy pullback mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.horn₂₁.sq\", \"SSet.horn₂₀.sq\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\"], \"digest\": \"2392472211949594\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected semantic hits. Quasicategory.hornFilling is only the inner-horn condition (Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-53); ordinary MapFactorizationData (Mathlib/CategoryTheory/MorphismProperty/Factorization.lean:43-58) and model-category factorizations do not state symmetric infinity-operadic orthogonality or its mapping-space pullback. Loogle found no Operad declaration; grep found only unrelated linter variables."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-approximation-marked-equivalence",
@@ -80,5 +200,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-inert-active-orthogonality",
+  "worker": "stage1",
+  "summary": "Preserved the statement and ancestry. Gave explicit finite-pointed-set factorization and unique fillers; lifted the factorization by the defining cocartesian outer horn, and proved the full mapping-space comparison by two applications of existing homotopy-pullback pasting. Explained its contractible homotopy fibers and every zero-arity case. No new nodes or Mathlib leaves. Initial absence of the item resolved when the shared snapshot refreshed.",
+  "blueprint": "Supports the inherited exact place in prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction and finite-level mapping comparison), through the operadic approximation/monadic-bar ancestry recorded in blueprint.from: steps 1-3 construct the inert-active factorization, steps 4-6 prove orthogonality including coherent fillers, and step 7 checks arity zero. This is a supporting combinatorial input, not a replacement of the coefficient route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-4386549e9",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-4386549e9 (reviewer sub-agent of L); spot-checked: I read all seven steps in full, along with the statements of the seven cited nodes and HA §2.1.2 (Def 2.1.2.1/2.1.2.3, Rem 2.1.2.2, Prop 2.1.2.4, and Prop 2.1.2.5 with proof (1)-(3), pp. 178-179) from the fetched PDF. The statement is HA 2.1.2.4 without the retract-closure clause, so it is true and not stronger than the source. Step 1: P is a quasicategory because B is one and p is an inner fibration, and the right-pinched Map in N(Fin_*) is discrete. Steps 2-3: the base inert/active factorization, then a Λ^2_0 cocartesian filler for n=2; this is HA 2.1.2.5(3). Step 4: base orthogonality in Fin_*, using activity, surjectivity of inert maps and uniqueness, with the ⟨0⟩ cases rechecked. Step 5: the cocartesian mapping criterion with test vertices u and v, plus pasting and cancellation. Both outer rectangles agree because their bottom row is discrete, and transposition is harmless because the cited homotopy-pullback notion fixes no orientation; this is HA 2.1.2.5(2). Step 6: fiber detection with q=v=id_T, and the path fibre of id_T is contracted by max. Step 7: arity zero. The cited nodes say what each step uses. proof_deps equals the union of uses, and there is no cycle (456 nodes traversed). All statement citations are in unit sk-prop-sf-biduality-general, so no tool_uses are needed, and no SGA source is used. The delivery creates no new nodes and I made no fixes. For the maintainer, not a fault of this delivery: the existing unsplit node lem-coef-operadic-inert-active-factorization (NU, 2026-10-17) overlaps this item and should be merged or made to cite it."
  }
 }
