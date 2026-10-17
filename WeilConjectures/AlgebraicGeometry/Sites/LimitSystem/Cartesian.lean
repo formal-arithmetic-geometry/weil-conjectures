@@ -135,7 +135,8 @@ theorem cohomologyMap_isColimit_of_isLimit' {S : Scheme.{u}}
     let m' : (Φ.obj a).unop ⟶ i := m.unop
     let e := upperStarComp AddCommGrpCat.{u + 1} (D.map m').left (D.obj i).hom (v a)
       (Over.w (D.map m')).symm
-    let ya : Sheaf.H (Sys.F a) q := Sheaf.H.map (e.inv.app F) q (cohomologyMap (D.map m').left _ q y)
+    let ya : Sheaf.H (Sys.F a) q :=
+      Sheaf.H.map (e.inv.app F) q (cohomologyMap (D.map m').left _ q y)
     have h₁ : cohomologyMap (cE.π.app (op a)) _ q (cohomologyMap (D.map m').left _ q y) = 0 :=
       cohomologyMap_comp_eq_zero_of_eq_zero _ _ _
         (congrArg CommaMorphism.left (c.w m')) _ _ _ hy

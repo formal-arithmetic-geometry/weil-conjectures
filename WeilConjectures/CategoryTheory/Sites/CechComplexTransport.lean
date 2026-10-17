@@ -91,7 +91,8 @@ noncomputable def cechComplexIsoOfPreservesFiniteProducts :
     (cechCosimplicialObjectIsoOfPreservesFiniteProducts G U₀ U e P P' β)
 
 include G e β in
-/-- Exactness of Čech complexes transfers along `CategoryTheory.Presheaf.cechComplexIsoOfPreservesFiniteProducts`. -/
+/-- Exactness of Čech complexes transfers along
+`CategoryTheory.Presheaf.cechComplexIsoOfPreservesFiniteProducts`. -/
 lemma exactAt_cechComplex_of_preservesFiniteProducts (q : ℕ)
     (h : ((cechComplex U₀).obj P).ExactAt q) : ((cechComplex U).obj P').ExactAt q :=
   h.of_iso (cechComplexIsoOfPreservesFiniteProducts G U₀ U e P P' β)

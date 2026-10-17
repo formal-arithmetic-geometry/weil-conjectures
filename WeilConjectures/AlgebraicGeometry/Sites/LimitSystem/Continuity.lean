@@ -204,7 +204,8 @@ omit [Preorder I] in
 /-- Restrictions of a section over a terminal object along two composites agree. -/
 lemma presheaf_map_map_of_isTerminal {C : Type*} [Category C] (P : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1})
     {X Y₁ Y₂ Z : C} (hZ : IsTerminal Z) (a₁ : Y₁ ⟶ Z) (b₁ : X ⟶ Y₁) (a₂ : Y₂ ⟶ Z)
-    (b₂ : X ⟶ Y₂) (w : P.obj (op Z)) : P.map b₁.op (P.map a₁.op w) = P.map b₂.op (P.map a₂.op w) := by
+    (b₂ : X ⟶ Y₂) (w : P.obj (op Z)) :
+    P.map b₁.op (P.map a₁.op w) = P.map b₂.op (P.map a₂.op w) := by
   rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← P.map_comp, ← P.map_comp,
     ← op_comp, ← op_comp, hZ.hom_ext (b₁ ≫ a₁) (b₂ ≫ a₂)]
 

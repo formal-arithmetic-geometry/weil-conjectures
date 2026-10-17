@@ -30,6 +30,7 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 lemma _root_.CategoryTheory.GrothendieckTopology.iInf_mem_of_finite {C : Type*} [Category* C]
     (J : GrothendieckTopology C) {T : C} {ι : Type*} [Finite ι] (s : ι → Sieve T)
     (h : ∀ i, s i ∈ J T) : ⨅ i, s i ∈ J T := by
+  classical
   have := Fintype.ofFinite ι
   rw [← Finset.inf_univ_eq_iInf]
   induction (Finset.univ : Finset ι) using Finset.induction_on with
@@ -47,15 +48,19 @@ def _root_.CategoryTheory.Limits.isColimitCofanSigma {C : Type*} [Category* C] {
     (fun t ↦ Cofan.IsColimit.desc hc fun i ↦ Cofan.IsColimit.desc (hN i) fun j ↦ t.inj ⟨i, j⟩)
     (fun t a ↦ by
       obtain ⟨i, j⟩ := a
-      simp only [cofan_mk_inj, Category.assoc]
-      rw [Cofan.IsColimit.fac hc (fun i ↦ _) i]
-      exact Cofan.IsColimit.fac (hN i) (fun j ↦ t.inj ⟨i, j⟩) j)
+      have e := Cofan.IsColimit.fac hc
+        (fun i ↦ Cofan.IsColimit.desc (hN i) fun j ↦ t.inj ⟨i, j⟩) i
+      have e' := Cofan.IsColimit.fac (hN i) (fun j ↦ t.inj ⟨i, j⟩) j
+      simp only [cofan_mk_inj] at e e' ⊢
+      rw [Category.assoc, e, e'])
     (fun t m hm ↦ by
       refine Cofan.IsColimit.hom_ext hc _ _ fun i ↦ ?_
       refine Cofan.IsColimit.hom_ext (hN i) _ _ fun j ↦ ?_
-      simp only [cofan_mk_inj] at hm ⊢
-      rw [← Category.assoc, hm ⟨i, j⟩, Cofan.IsColimit.fac hc (fun i ↦ _) i]
-      exact (Cofan.IsColimit.fac (hN i) (fun j ↦ t.inj ⟨i, j⟩) j).symm)
+      have e := Cofan.IsColimit.fac hc
+        (fun i ↦ Cofan.IsColimit.desc (hN i) fun j ↦ t.inj ⟨i, j⟩) i
+      have e' := Cofan.IsColimit.fac (hN i) (fun j ↦ t.inj ⟨i, j⟩) j
+      simp only [cofan_mk_inj] at hm e e' ⊢
+      rw [← Category.assoc, hm ⟨i, j⟩, e, e'])
 
 variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
 
@@ -115,8 +120,34 @@ theorem exists_refinement_solving_local_requirements
                 U.simplicial.obj (op (SimplexCategory.mk m.val))) h.symm)) := by
   classical
   let S : ∀ m : ℕ, Sieve (U.simplicial _⦋m⦌) := fun m ↦
-    ⨅ x : Σ j : Fin k, (⦋(degree x.1).val⦌ ⟶ ⦋m⦌), (R x.1).pullback (U.simplicial.map x.2.op)
-  sorry
+    ⨅ x : Σ j : Fin k, (⦋(degree j).val⦌ ⟶ ⦋m⦌), (R x.1).pullback (U.simplicial.map x.2.op)
+  have hS : ∀ m, S m ∈ X.smallEtaleTopology (U.simplicial _⦋m⦌) := fun m ↦
+    X.smallEtaleTopology.iInf_mem_of_finite _ fun x ↦
+      X.smallEtaleTopology.pullback_stable _ (hR x.1)
+  obtain ⟨V, ℓ, hV⟩ := FiniteSplitHypercoverEngine.exists_hypercover
+    U.toSplitEtaleHypercover.hasLocalLifts S hS
+  choose kk P ιP hP hgood using hV
+  refine ⟨V, ℓ, fun n ↦ ?_⟩
+  let I := Σ A : SimplicialObject.Splitting.IndexSet (op ⦋n.val⦌), Fin (kk A.1.unop.len)
+  let e := (Fintype.equivFin I).symm
+  have hcol : IsColimit (Cofan.mk (V.simplicial.obj (op ⦋n.val⦌))
+      fun a : I ↦ ιP _ a.2 ≫ (V.splitting.cofan (op ⦋n.val⦌)).inj a.1) :=
+    isColimitCofanSigma (fun a : I ↦ ιP _ a.2) (fun A ↦ (hP _).some) _
+      (V.splitting.isColimit (op ⦋n.val⦌))
+  refine ⟨Fintype.card I, fun i ↦ P _ (e i).2,
+    fun i ↦ ιP _ (e i).2 ≫ (V.splitting.cofan (op ⦋n.val⦌)).inj (e i).1,
+    ⟨Cofan.isColimitEquivOfEquiv e _ hcol⟩, fun j h i ↦ ?_⟩
+  subst h
+  simp only [eqToHom_refl, Category.comp_id]
+  obtain ⟨A, i'⟩ := e i
+  rw [SimplicialObject.Splitting.cofan_inj_eq]
+  dsimp only
+  rw [Category.assoc, Category.assoc, ℓ.naturality, ← Category.assoc, ← Category.assoc]
+  have hmem := hgood _ i'
+  have hle : S A.1.unop.len ≤ (R j).pullback (U.simplicial.map A.e.op) :=
+    iInf_le (fun x : Σ j : Fin k, (⦋(degree j).val⦌ ⟶ ⦋A.1.unop.len⦌) ↦
+      (R x.1).pullback (U.simplicial.map x.2.op)) ⟨j, A.e⟩
+  exact hle _ (by simpa [Category.assoc] using hmem)
 
 /-- Blueprint `lem-weil-pbc-hypercover-refinement`: a semi-representable hypercover is refined,
 through any finite degree, by a finite split étale hypercover. -/
