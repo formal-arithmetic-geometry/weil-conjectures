@@ -370,8 +370,7 @@ noncomputable def Scheme.isLimitConeSpecOfMonotone (Z : Scheme.{u}) [IsAffine Z]
   refine (isLimitOfPreserves Scheme.Spec
     (Subalgebra.isColimitCoconeOfMonotone F hcov).op).ofIsoLimit (Cone.ext Z.isoSpec.symm ?_)
   intro i
-  rw [Iso.symm_hom, Scheme.coneSpecOfMonotone_π_app, Scheme.isoSpec_inv_toSpecΓ_assoc]
-  rfl
+  exact (Z.isoSpec_inv_toSpecΓ_assoc (Spec.map (CommRingCat.ofHom (F i.unop).val.toRingHom))).symm
 
 /-- The general form of blueprint `lem-kun-0f1i-normal`, for given `K`-algebra structures on
 `Γ(S')` and `Γ(T)` compatible with `s` and `t`; see
@@ -414,7 +413,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : T
     rw [← Spec.map_comp, ← Spec.map_comp]
     congr 2
     ext x
-    simp [hφ]
+    exact (hφ _).symm
   have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (w.app i) :=
     HasRingHomProperty.Spec_iff.2
       (RingHom.finiteType_algebraMap.2 (Subalgebra.finiteType_pairLeft i.unop))
