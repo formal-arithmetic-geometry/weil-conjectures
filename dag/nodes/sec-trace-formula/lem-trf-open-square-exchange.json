@@ -1,345 +1,432 @@
 {
-  "id": "lem-trf-open-square-exchange",
-  "blueprint": {
-    "is": "lem-trf-open-square-exchange",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Open-square exchange from restriction of direct image",
-  "statement": "Use the finite coefficient ring\n$A=A_{E,n}$. Let\n\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\n{\\scriptstyle j'}\\downarrow&&\\downarrow{\\scriptstyle j}\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\n\nbe a Cartesian square with $j,j'$\nopen immersions.\nOn the small pro-etale sites,\nthe extension-by-zero functors\nand derived pullbacks\nadmit a canonical natural isomorphism\n\n$$\nb_g:Lg^*j_!\\xrightarrow{\\sim}j'_!Lg_U^*.\n$$\n\nIts restriction to $U'$ is the identity, after the pullback\nidentifications. These isomorphisms respect identity squares and\npasting of Cartesian squares.\n(Source for the etale version:\n[Stacks, Tag 03S6](https://stacks.math.columbia.edu/tag/03S6),\nLemma 59.70.5, the underived statement $j'_!f'^{-1}=f^{-1}j_!$ on\nsheaves; the derived form and the compatibilities are proved below.)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
-    "place": "node lem-trf-open-square-exchange, order 2367",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03S6"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-scheme-morphism-properties",
-    "def-pc-fibre-product",
-    "def-weil-pbc-proetale-site",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-extension-by-zero",
-    "def-weil-pbc-proetale-operations"
-  ],
-  "proof": [
-    {
-      "text": "Work first with sheaves of modules over the constant finite commutative ring $A$. Write $g^*$ for the underived module pullback. The coefficient identification and exactness in [prop-weil-pbc-proetale-constant-exact] identify this with inverse image, with its transported $A$-action. By [lem-weil-proetale-weakly-etale-localization], the sites of $U$ and $U'$ are the localizations at those opens and $j^*,j'^*$ are restriction, with the restricted constant coefficient rings. For $Q$ on $Y'$ and $V\\to U$ in $U_{\\mathrm{proet}}$, the direct-image formula in [def-weil-pbc-proetale-operations] gives\n$$\n(j^*g_*Q)(V)=Q(Y'\\times_Y V),\\qquad\n(g_{U*}j'^*Q)(V)=Q(U'\\times_U V\\longrightarrow Y').\n$$\nThe Cartesian hypothesis identifies the two objects over $Y'$. Pullback along this identification gives a natural isomorphism $\\delta_g:j^*g_*\\xrightarrow{\\sim}g_{U*}j'^*$. For a morphism $V_1\\to V_2$ the two restriction maps are induced by the same morphism of fibre products, so this is a sheaf map, not just an objectwise bijection. It is $A$-linear: by the definition of the coefficient structure map in [def-weil-proetale-inverse-image], both structure maps send each constant $a\\in A$ to the same constant section, and maps from the constant sheaf are determined by these sections. This is the section calculation behind Stacks Tag 04J0 and the adjunction proof of Tag 03S6, now on the pro-etale sites.",
-      "uses": [
-        "prop-weil-pbc-proetale-constant-exact",
-        "lem-weil-proetale-weakly-etale-localization",
-        "def-weil-pbc-proetale-operations",
-        "def-weil-proetale-inverse-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
-        "place": "Proof, first two paragraphs: direct-image restriction; agent adaptation of Stacks 04J0 (lemma-localize-morphism-ringed-sites) and 03S6 (lemma-shriek-base-change)"
-      }
-    },
-    {
-      "text": "Use the module adjunction $g^*\\dashv g_*$ of [def-weil-pbc-proetale-operations] and the extension-by-zero adjunction [lem-weil-extension-by-zero-adjunction]. The composite-adjunction formula [def-weil-pbc-composite-adjunction] gives\n$$\n L_1=g^*j_!\\dashv R_1=j^*g_*,\\qquad\n L_2=j'_!g_U^*\\dashv R_2=g_{U*}j'^*.\n$$\nApply [lem-weil-pbc-conjugate-iso-unit-equation] with its right-adjoint isomorphism $\\delta_g^{-1}:R_2\\to R_1$. It gives a canonical natural isomorphism $b_g^0:L_1\\to L_2$, uniquely characterized by the composite units $\\eta_1,\\eta_2$ through\n$$\nR_1(b_g^0(F))\\eta_{1,F}=\\delta_{g,L_2F}^{-1}\\eta_{2,F}.\n$$\nMore explicitly, precomposition with $b_g^0(F)$ is the inverse of the natural Hom bijection\n$$\n\\operatorname{Hom}(g^*j_!F,Q)\n\\cong\\operatorname{Hom}(F,j^*g_*Q)\n\\xrightarrow{\\delta_g}\\operatorname{Hom}(F,g_{U*}j'^*Q)\n\\cong\\operatorname{Hom}(j'_!g_U^*F,Q).\n$$\nThus both the direction and the adjunction data of the comparison are fixed.",
-      "uses": [
-        "def-weil-pbc-proetale-operations",
-        "lem-weil-extension-by-zero-adjunction",
-        "def-weil-pbc-composite-adjunction",
-        "lem-weil-pbc-conjugate-iso-unit-equation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
-        "place": "Proof, third paragraph: taking left adjoints; Stacks 03S6 adjunction argument, before derivation"
-      }
-    },
-    {
-      "text": "The open adjunction units $F\\to j^*j_!F$ and $N\\to j'^*j'_!N$ are isomorphisms by [lem-exc-proetale-open-unit]. There are also canonical identifications $j^*j_*M=M$ and $j'^*j'_*N=N$: evaluating at $V\\to U$ or $V'\\to U'$ reduces them to $U\\times_Y V=V$ and $U'\\times_{Y'}V'=V'$. The direct-image formula [def-weil-pbc-proetale-operations] identifies $g_*j'_*=j_*g_{U*}$, since both evaluate $N$ on $U'\\times_Y W$ for $W\\to Y$. Taking left adjoints with [lem-weil-pbc-conjugate-iso-unit-equation] and the composite adjunction [def-weil-pbc-composite-adjunction] fixes the usual pullback identification $j'^*g^*\\cong g_U^*j^*$.\nTo check the restriction of $b_g^0(F)$, put $Q=j'_*N$ in the Hom bijection of Step 2 and apply $j'^*\\dashv j'_*$ on both ends. After the displayed identifications and the open units, both ends are $\\operatorname{Hom}(g_U^*F,N)$. The middle identification is\n$$\nj^*g_*j'_*N=j^*j_*g_{U*}N=g_{U*}N,\n$$\nand $\\delta_g$ here is the identity on $N(U'\\times_U V)$. The Hom bijection is therefore the identity, using the same $g_U$-adjunction on both sides. By the uniqueness assertion of [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection], the restricted map is the identity of $g_U^*F$.",
-      "uses": [
-        "lem-exc-proetale-open-unit",
-        "def-weil-pbc-proetale-operations",
-        "def-weil-pbc-composite-adjunction",
-        "lem-weil-pbc-conjugate-iso-unit-equation",
-        "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
-        "place": "Proof, third paragraph: normalization on U′; explicit Hom calculation replacing the assertion about the mate"
-      }
-    },
-    {
-      "text": "For a second base change $h:Y''\\to Y'$ let $U''=Y''\\times_{Y'}U'$ and $h_U:U''\\to U'$. Direct-image composition and its inverse-image comparison are fixed by the section formulas and [lem-weil-pbc-conjugate-iso-unit-equation], with the composite units of [def-weil-pbc-composite-adjunction]. Under those identifications the section calculation of Step 1 gives\n$$\n\\delta_{g h}=(g_{U*}\\delta_h)\\circ(\\delta_g h_*):\nj^*g_*h_*\\longrightarrow g_{U*}h_{U*}j''^*.\n$$\nIndeed both arrows evaluate a section on the unique identification of $Y''\\times_Y V$ with $U''\\times_U V$. Expand the Hom bijection of Step 2 for these two squares: its middle arrows are precisely $\\delta_g h_*$ followed by $g_{U*}\\delta_h$; the adjacent adjunction bijections combine to the composite adjunction. Consequently it is the Hom bijection for the outer square. Precomposition with the two resulting left maps is the same, so uniqueness in [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] gives\n$$\nb_{g h}^0(F)=b_h^0(g_U^*F)\\circ h^*b_g^0(F).\n$$\nFor $g=\\mathrm{id}$, the section comparison and the Hom bijection are identities after the identity-adjunction identifications, so $b_{\\mathrm{id}}^0=\\mathrm{id}$ by the same uniqueness. These calculations use the direct-image formula of [def-weil-pbc-proetale-operations].",
-      "uses": [
-        "def-weil-pbc-proetale-operations",
-        "def-weil-pbc-composite-adjunction",
-        "lem-weil-pbc-conjugate-iso-unit-equation",
-        "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
-        "place": "Proof, final paragraph: identity and horizontal pasting; expanded section and Hom-bijection calculation"
-      }
-    },
-    {
-      "text": "Vertical pasting is checked as well. Let $i:V\\hookrightarrow U$ be another open immersion, set $V'=Y'\\times_Y V$, and write $i':V'\\hookrightarrow U'$ and $g_V:V'\\to V$. The direct-image section formulas [def-weil-pbc-proetale-operations] and restriction to localizations [lem-weil-proetale-weakly-etale-localization] give\n$$\n\\delta_g^{j i}=(\\delta_{g_U}^{i}\\,j'^*)\\circ(i^*\\delta_g^j):\ni^*j^*g_*\\longrightarrow g_{V*}i'^*j'^*.\n$$\nEvery component evaluates $Q$ on the same object $Y'\\times_Y T$ for $T\\to V$. Define $(j i)_!\\cong j_!i_!$ and $(j'i')_!\\cong j'_!i'_!$ using the composite adjunction [def-weil-pbc-composite-adjunction], the open adjunction [lem-weil-extension-by-zero-adjunction], and [lem-weil-pbc-conjugate-iso-unit-equation]. For $Q$ on $Y'$, the outer Hom bijection has the explicit middle part\n$$\n\\operatorname{Hom}(F,i^*j^*g_*Q)\n\\xrightarrow{i^*\\delta_g^j}\n\\operatorname{Hom}(F,i^*g_{U*}j'^*Q)\n\\xrightarrow{\\delta_{g_U}^{i}j'^*}\n\\operatorname{Hom}(F,g_{V*}i'^*j'^*Q).\n$$\nThe first endpoint is obtained from $\\operatorname{Hom}(g^*j_!i_!F,Q)$ by the $g,j,i$ adjunctions, in that order; the last endpoint goes to $\\operatorname{Hom}(j'_!i'_!g_V^*F,Q)$ by their primed adjunctions in reverse order. To compute the inverse of precomposition with the composite of $b_g^{0,j}(i_!F)$ followed by $j'_!b_{g_U}^{0,i}(F)$, use the Step 2 characterization for each factor: the $j'_!\\dashv j'^*$ Hom bijection between the factors is followed by its inverse and cancels, leaving exactly the two displayed middle arrows. Their composite is $\\delta_g^{j i}$ by the section calculation above, so the pasted and outer Hom bijections agree. Uniqueness in [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] gives, with these composition identifications,\n$$\nb_g^{0,j i}(F)=j'_!b_{g_U}^{0,i}(F)\\circ b_g^{0,j}(i_!F).\n$$\nTogether with Step 4 this proves the pasting assertions on sheaves. No conservativity claim about ordinary geometric stalks has been used. If the open arrows themselves are identities, then $\\delta_g$ and the middle restriction adjunctions are identities; the Hom bijection is the $g$-adjunction followed by its inverse. Thus $b_g^{0,\\mathrm{id}}=\\mathrm{id}_{g^*}$, again by the same uniqueness. This also checks the vertical identity-square normalization.",
-      "uses": [
-        "def-weil-pbc-proetale-operations",
-        "lem-weil-proetale-weakly-etale-localization",
-        "def-weil-pbc-composite-adjunction",
-        "lem-weil-extension-by-zero-adjunction",
-        "lem-weil-pbc-conjugate-iso-unit-equation",
-        "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
-        "place": "Proof, final paragraph: vertical pasting, with both open-extension composition comparisons specified"
-      }
-    },
-    {
-      "text": "By [lem-weil-extension-by-zero-exact], $j_!$ and $j'_!$ are exact on pro-etale $A$-module sheaves. The four pullbacks are exact by [prop-weil-pbc-proetale-constant-exact]. Apply these functors termwise to an arbitrary, possibly unbounded cochain complex $K$ on $U$. Naturality of $b_g^0$ with respect to each differential gives a chain isomorphism with components $b_g^0(K^r)$; the inverse is termwise $(b_g^0(K^r))^{-1}$. The exact-functor factorization theorem [lem-weil-pbc-exact-functor-derived-factorization] shows that all these termwise functors preserve quasi-isomorphisms and induce the corresponding functors on the unbounded derived categories. By [def-weil-pbc-proetale-operations], the induced pullback is $Lg^*$ (respectively $Lg_U^*$); the induced extension functors are denoted $j_!,j'_!$ since they are exact. The natural-transformation clause of [lem-weil-pbc-localization-universal-property] therefore descends the chain isomorphism to\n$$\nb_g:Lg^*j_!\\xrightarrow{\\sim}j'_!Lg_U^*.\n$$\nThe normalization and identity and pasting equations of Steps 3--5 hold in every degree. The same localization theorem respects composition and detects equality of natural transformations after precomposition with the localization functor. It consequently gives all those equations on the derived categories. This proves every clause without a boundedness, constructibility, or stalk-detection hypothesis.",
-      "uses": [
-        "lem-weil-extension-by-zero-exact",
-        "prop-weil-pbc-proetale-constant-exact",
-        "lem-weil-pbc-exact-functor-derived-factorization",
-        "def-weil-pbc-proetale-operations",
-        "lem-weil-pbc-localization-universal-property"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
-        "place": "Proof, third paragraph and last two sentences: derive the exact sheaf comparison and all its equations termwise"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-trf-open-square-exchange",
+ "blueprint": {
+  "is": "lem-trf-open-square-exchange",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open-square exchange from restriction of direct image",
+ "statement": "Use the finite coefficient ring\n$A=A_{E,n}$. Let\n\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\n{\\scriptstyle j'}\\downarrow&&\\downarrow{\\scriptstyle j}\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\n\nbe a Cartesian square with $j,j'$\nopen immersions.\nOn the small pro-etale sites,\nthe extension-by-zero functors\nand derived pullbacks\nadmit a canonical natural isomorphism\n\n$$\nb_g:Lg^*j_!\\xrightarrow{\\sim}j'_!Lg_U^*.\n$$\n\nIts restriction to $U'$ is the identity, after the pullback\nidentifications. These isomorphisms respect identity squares and\npasting of Cartesian squares.\n(Source for the etale version:\n[Stacks, Tag 03S6](https://stacks.math.columbia.edu/tag/03S6),\nLemma 59.70.5, the underived statement $j'_!f'^{-1}=f^{-1}j_!$ on\nsheaves; the derived form and the compatibilities are proved below.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+  "place": "node lem-trf-open-square-exchange, order 2367",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03S6"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-scheme-morphism-properties",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Work first with sheaves of modules over the constant finite commutative ring $A$. Write $g^*$ for the underived module pullback. The coefficient identification and exactness in [prop-weil-pbc-proetale-constant-exact] identify this with inverse image, with its transported $A$-action. By [lem-weil-proetale-weakly-etale-localization], the sites of $U$ and $U'$ are the localizations at those opens and $j^*,j'^*$ are restriction, with the restricted constant coefficient rings. For $Q$ on $Y'$ and $V\\to U$ in $U_{\\mathrm{proet}}$, the direct-image formula in [def-weil-pbc-proetale-operations] gives\n$$\n(j^*g_*Q)(V)=Q(Y'\\times_Y V),\\qquad\n(g_{U*}j'^*Q)(V)=Q(U'\\times_U V\\longrightarrow Y').\n$$\nThe Cartesian hypothesis identifies the two objects over $Y'$. Pullback along this identification gives a natural isomorphism $\\delta_g:j^*g_*\\xrightarrow{\\sim}g_{U*}j'^*$. For a morphism $V_1\\to V_2$ the two restriction maps are induced by the same morphism of fibre products, so this is a sheaf map, not just an objectwise bijection. It is $A$-linear: by the definition of the coefficient structure map in [def-weil-proetale-inverse-image], both structure maps send each constant $a\\in A$ to the same constant section, and maps from the constant sheaf are determined by these sections. This is the section calculation behind Stacks Tag 04J0 and the adjunction proof of Tag 03S6, now on the pro-etale sites.",
+   "uses": [
     "prop-weil-pbc-proetale-constant-exact",
     "lem-weil-proetale-weakly-etale-localization",
     "def-weil-pbc-proetale-operations",
-    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+    "place": "Proof, first two paragraphs: direct-image restriction; agent adaptation of Stacks 04J0 (lemma-localize-morphism-ringed-sites) and 03S6 (lemma-shriek-base-change)"
+   }
+  },
+  {
+   "text": "Use the module adjunction $g^*\\dashv g_*$ of [def-weil-pbc-proetale-operations] and the extension-by-zero adjunction [lem-weil-extension-by-zero-adjunction]. The composite-adjunction formula [def-weil-pbc-composite-adjunction] gives\n$$\n L_1=g^*j_!\\dashv R_1=j^*g_*,\\qquad\n L_2=j'_!g_U^*\\dashv R_2=g_{U*}j'^*.\n$$\nApply [lem-weil-pbc-conjugate-iso-unit-equation] with its right-adjoint isomorphism $\\delta_g^{-1}:R_2\\to R_1$. It gives a canonical natural isomorphism $b_g^0:L_1\\to L_2$, uniquely characterized by the composite units $\\eta_1,\\eta_2$ through\n$$\nR_1(b_g^0(F))\\eta_{1,F}=\\delta_{g,L_2F}^{-1}\\eta_{2,F}.\n$$\nMore explicitly, precomposition with $b_g^0(F)$ is the inverse of the natural Hom bijection\n$$\n\\operatorname{Hom}(g^*j_!F,Q)\n\\cong\\operatorname{Hom}(F,j^*g_*Q)\n\\xrightarrow{\\delta_g}\\operatorname{Hom}(F,g_{U*}j'^*Q)\n\\cong\\operatorname{Hom}(j'_!g_U^*F,Q).\n$$\nThus both the direction and the adjunction data of the comparison are fixed.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
     "lem-weil-extension-by-zero-adjunction",
     "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+    "place": "Proof, third paragraph: taking left adjoints; Stacks 03S6 adjunction argument, before derivation"
+   }
+  },
+  {
+   "text": "The open adjunction units $F\\to j^*j_!F$ and $N\\to j'^*j'_!N$ are isomorphisms by [lem-exc-proetale-open-unit]. There are also canonical identifications $j^*j_*M=M$ and $j'^*j'_*N=N$: evaluating at $V\\to U$ or $V'\\to U'$ reduces them to $U\\times_Y V=V$ and $U'\\times_{Y'}V'=V'$. The direct-image formula [def-weil-pbc-proetale-operations] identifies $g_*j'_*=j_*g_{U*}$, since both evaluate $N$ on $U'\\times_Y W$ for $W\\to Y$. Taking left adjoints with [lem-weil-pbc-conjugate-iso-unit-equation] and the composite adjunction [def-weil-pbc-composite-adjunction] fixes the usual pullback identification $j'^*g^*\\cong g_U^*j^*$.\nTo check the restriction of $b_g^0(F)$, put $Q=j'_*N$ in the Hom bijection of Step 2 and apply $j'^*\\dashv j'_*$ on both ends. After the displayed identifications and the open units, both ends are $\\operatorname{Hom}(g_U^*F,N)$. The middle identification is\n$$\nj^*g_*j'_*N=j^*j_*g_{U*}N=g_{U*}N,\n$$\nand $\\delta_g$ here is the identity on $N(U'\\times_U V)$. The Hom bijection is therefore the identity, using the same $g_U$-adjunction on both sides. By the uniqueness assertion of [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection], the restricted map is the identity of $g_U^*F$.",
+   "uses": [
+    "lem-exc-proetale-open-unit",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-exc-proetale-open-unit",
-    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
-    "lem-weil-extension-by-zero-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Agent adaptation of Stacks Tag 03S6, Lemma 59.70.5 (etale-cohomology.tex, lemma-shriek-base-change), and Tag 04J0 (sites-modules.tex, lemma-localize-morphism-ringed-sites): pro-etale direct-image restriction and adjunction, explicit normalization/pasting, then exact termwise derivation"
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+    "place": "Proof, third paragraph: normalization on U′; explicit Hom calculation replacing the assertion about the mate"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "For a cartesian square of schemes with vertical open immersions, inverse image commutes with extension by zero on pro etale sheaves with finite constant coefficients, compatibly with composition",
-      "results": "8 hit(s): AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.Scheme.Hom.app_invApp', AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply, AlgebraicGeometry.Scheme.Hom.app_appIso_inv, AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE",
-      "date": "2026-10-16",
-      "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf, \"extension\"",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
-    },
-    {
-      "tool": "grep",
-      "query": "proetale|pro.etale|extensionByZero|extension_by_zero",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
-    },
-    {
-      "tool": "leansearch",
-      "query": "inverse image commutes with extension by zero for an open immersion of sites",
-      "results": "service unavailable: Internal Server Error; 0 hits",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "In a morphism of topoi the inverse image of extension by zero along an open subtopos is extension by zero of the restricted inverse image",
-      "results": "8 hit(s): TopCat.Sheaf.extend_hom_app, TopCat.Presheaf.pullbackObjObjOfImageOpen, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply",
-      "date": "2026-10-16",
-      "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.leftAdjointUniq",
-      "results": "12 hit(s): CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
-      "date": "2026-10-16",
-      "verdict": "no match for the item; generic uniqueness of adjoints only, already represented by lem-weil-pbc-conjugate-iso-unit-equation"
-    },
-    {
-      "tool": "grep",
-      "query": "lowerShriek|LowerShriek|extension.*zero|baseChange",
-      "results": "25 hit(s): Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
-    },
-    {
-      "tool": "grep",
-      "query": "leftAdjointUniq|sheafPushforwardContinuousComp|sheafPullback.*[Cc]omp",
-      "results": "25 hit(s): Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
-      "date": "2026-10-16",
-      "verdict": "no match for the item; generic adjoint uniqueness and direct-image composition, or Zariski sheaf restriction only"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Beck Chevalley isomorphism for extension by zero and pullback along an open immersion of topoi",
-      "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, TopCat.Presheaf.pullbackObjObjOfImageOpen, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app', AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp",
-      "date": "2026-10-16",
-      "verdict": "no match for the item; generic adjoint uniqueness and direct-image composition, or Zariski sheaf restriction only"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2367,
-  "blueprint_uses": [
-    "def-trf-coefficient-conventions",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-extension-by-zero",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "uses_not_cited": [
-    "def-trf-coefficient-conventions",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "For a second base change $h:Y''\\to Y'$ let $U''=Y''\\times_{Y'}U'$ and $h_U:U''\\to U'$. Direct-image composition and its inverse-image comparison are fixed by the section formulas and [lem-weil-pbc-conjugate-iso-unit-equation], with the composite units of [def-weil-pbc-composite-adjunction]. Under those identifications the section calculation of Step 1 gives\n$$\n\\delta_{g h}=(g_{U*}\\delta_h)\\circ(\\delta_g h_*):\nj^*g_*h_*\\longrightarrow g_{U*}h_{U*}j''^*.\n$$\nIndeed both arrows evaluate a section on the unique identification of $Y''\\times_Y V$ with $U''\\times_U V$. Expand the Hom bijection of Step 2 for these two squares: its middle arrows are precisely $\\delta_g h_*$ followed by $g_{U*}\\delta_h$; the adjacent adjunction bijections combine to the composite adjunction. Consequently it is the Hom bijection for the outer square. Precomposition with the two resulting left maps is the same, so uniqueness in [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] gives\n$$\nb_{g h}^0(F)=b_h^0(g_U^*F)\\circ h^*b_g^0(F).\n$$\nFor $g=\\mathrm{id}$, the section comparison and the Hom bijection are identities after the identity-adjunction identifications, so $b_{\\mathrm{id}}^0=\\mathrm{id}$ by the same uniqueness. These calculations use the direct-image formula of [def-weil-pbc-proetale-operations].",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+    "place": "Proof, final paragraph: identity and horizontal pasting; expanded section and Hom-bijection calculation"
+   }
   },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-d-weil-push",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-trf-open-square-exchange",
-    "worker": "stage1",
-    "summary": "Statement kept. Replaced the imported unreferenced K-injective argument with the adjunction proof on pro-etale constant-module sheaves followed by exact termwise derivation. Reused existing localization, extension-by-zero adjunction/exactness, open-unit, conjugate-isomorphism, co-Yoneda, exact-functor and localization nodes. Wrote out normalization and both directions of pasting. No new nodes; Mathlib searches did not give the geometric comparison.",
-    "blueprint": "Steps 1--2 realize the first two imported paragraphs and the taking-left-adjoints sentence of paragraph 3. Step 3 expands its normalization assertion; Steps 4--5 expand identity and pasted-square assertions, including vertical pasting. Step 6 supplies the derived assertion via exact functors rather than K-injectives. The sk-d-weil-push unit has no proof steps; the open-square tool serves its compactified !-base-change comparison without changing the unit statement or route.",
-    "tool_uses": [
-      {
-        "node": "prop-weil-pbc-proetale-constant-exact",
-        "why": "Exact module inverse image for the finite constant ring; used to derive the comparison termwise, not any proper base-change assertion. No node of sk-d-weil-push states this input."
-      },
-      {
-        "node": "lem-weil-proetale-weakly-etale-localization",
-        "why": "Generic identification of the open pro-etale site with the localized site; supplies sectionwise restriction. No node of sk-d-weil-push states this input."
-      },
-      {
-        "node": "lem-weil-extension-by-zero-adjunction",
-        "why": "Generic open-extension sheaf adjunction needed to form the two composite left adjoints. No node of sk-d-weil-push states this input."
-      },
-      {
-        "node": "lem-exc-proetale-open-unit",
-        "why": "Generic open-extension unit isomorphism needed only for normalization on the open. No node of sk-d-weil-push states this input."
-      },
-      {
-        "node": "lem-weil-extension-by-zero-exact",
-        "why": "Generic exactness of open extension, needed to pass the constructed sheaf isomorphism to arbitrary complexes. No node of sk-d-weil-push states this input."
-      }
-    ]
-  },
-  "tool_uses": [
-    "prop-weil-pbc-proetale-constant-exact",
+  {
+   "text": "For vertical pasting let $i:V\\hookrightarrow U$ be an open immersion, $V'=Y'\\times_YV$, $i':V'\\hookrightarrow U'$, and $g_V:V'\\to V$. For $T\\to V$, both composites of restrictions and direct images evaluate a sheaf $Q$ on $Y'\\times_YT$, by [def-weil-pbc-proetale-operations] and [lem-weil-proetale-weakly-etale-localization]. All reassociations preserve the projections, so are the same by the fibre-product universal property [def-pc-fibre-product]. Thus the section comparisons of Step 1 satisfy\n$$\n\\delta_g^{ji}=(\\delta_{g_U}^{i}j'^*)\\circ(i^*\\delta_g^j):i^*j^*g_*\\longrightarrow g_{V*}i'^*j'^*.\n$$\nThis is an equality of module sheaf maps: the restrictions and constant-coefficient actions are precisely those already checked in Step 1.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
     "lem-weil-proetale-weakly-etale-localization",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+    "place": "Proof, final paragraph: vertical pasting of the section comparisons"
+   }
+  },
+  {
+   "text": "The open adjunctions [lem-weil-extension-by-zero-adjunction] and [def-weil-pbc-composite-adjunction] give $j_!i_!\\dashv i^*j^*$ and $j'_!i'_!\\dashv i'^*j'^*$. Localization [lem-weil-proetale-weakly-etale-localization] identifies the right adjoints with $(ji)^*$ and $(j'i')^*$. Define the composition isomorphisms $(ji)_!\\cong j_!i_!$ and $(j'i')_!\\cong j'_!i'_!$ by [lem-weil-pbc-conjugate-iso-unit-equation], using the identity on these right adjoints. These are the unique isomorphisms preserving the composite units. Hence, under them, the outer square's comparison is computed with those composite adjunctions, with no extra choice of a composition comparison.",
+   "uses": [
     "lem-weil-extension-by-zero-adjunction",
-    "lem-exc-proetale-open-unit",
-    "lem-weil-extension-by-zero-exact"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q38-b26a39ada",
-    "group": "Q38",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-b26a39ada (reviewer sub-agent of L); spot-checked: Read the full mathematics against the master blueprint and Stacks 03S6/04J0. Verified mate direction, normalization, both pasting laws, unbounded derivation, hypotheses, edge cases, duplicates, and acyclicity. No new nodes or repairs. Target coefficient categories remain distinct. Detailed checks and the disclosed read-only git-command violation are recorded in review.md."
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+    "place": "Proof, final paragraph: specify the open-extension composition comparisons by adjunction uniqueness"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-f689b9209",
-    "group": "NJ",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, coherence, universes, edge cases, docstrings, and report sections. Both modules compiled through scompile.py with exit 0 and no diagnostics. No fixes required."
+  {
+   "text": "Write $c(-)$ for conjugation of transformations between left adjoints [def-weil-pbc-adjunction-conjugate]. The Hom characterization in Step 2 says $c(b_g^{0,j})=(\\delta_g^j)^{-1}$ and $c(b_{g_U}^{0,i})=(\\delta_{g_U}^i)^{-1}$. Clause 2 of [lem-weil-pbc-mate-pasting], with an identity square for the extra adjunction $i_!\\dashv i^*$ or $j'_!\\dashv j'^*$, gives respectively\n$$\nc(b_g^{0,j}i_!)=i^*(\\delta_g^j)^{-1},\\qquad\nc(j'_!b_{g_U}^{0,i})=(\\delta_{g_U}^i)^{-1}j'^*.\n$$\nHere the other adjunctions are the $g^*\\dashv g_*$ and $g_U^*\\dashv g_{U*}$ adjunctions of Step 2 and their $g_V$ analogue; all composites are those of Step 6. Conjugation reverses composition by [def-weil-pbc-adjunction-conjugate]. Therefore for $B=(j'_!b_{g_U}^{0,i})\\circ(b_g^{0,j}i_!)$,\n$$\nc(B)=\\bigl(i^*(\\delta_g^j)^{-1}\\bigr)\\circ\\bigl((\\delta_{g_U}^i)^{-1}j'^*\\bigr)=(\\delta_g^{ji})^{-1}=c(b_g^{0,ji}),\n$$\nwhere the middle equality is Step 5 inverted. Bijectivity of conjugation gives\n$$\nb_g^{0,ji}(F)=j'_!b_{g_U}^{0,i}(F)\\circ b_g^{0,j}(i_!F).\n$$\nThe identifications in Step 6 preserve units, so clause 3 of [lem-weil-pbc-mate-pasting] permits exactly those changes of adjunctions. This proves vertical pasting using the cited mate calculus.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+    "place": "Proof, final paragraph: vertical pasting by the generic composite-adjunction mate law (Mathlib mateEquiv_hcomp)"
+   }
   },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenSquareExchange",
-    "declaration": "AlgebraicGeometry.Scheme.proEtale_openSquareExchange",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.sfIntrinsicOpenAdjunction",
-      "AlgebraicGeometry.Scheme.sfIntrinsicOpenComp",
-      "AlgebraicGeometry.Scheme.sfIntrinsicOpenId",
-      "AlgebraicGeometry.Scheme.sfIntrinsicSquarePullback",
-      "AlgebraicGeometry.Scheme.sfIntrinsicOpenMate",
-      "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpen",
-      "AlgebraicGeometry.Scheme.sfIntrinsicDeriveMap",
-      "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenMate",
-      "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenUnit",
-      "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullbackComp",
-      "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenComp",
-      "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullbackId",
-      "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenId",
-      "AlgebraicGeometry.Scheme.sfIntrinsicDerivedSquarePullback",
-      "AlgebraicGeometry.Scheme.SfOpenSquareExchangeData",
-      "AlgebraicGeometry.Scheme.proEtale_openSquareExchange"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenSquareExchange.lean",
-    "statement": "theorem proEtale_openSquareExchange (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) : Nonempty (@SfOpenSquareExchangeData (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn))",
-    "branch": "newtargets-dag",
-    "by": "NJ",
-    "date": "2026-10-16",
-    "existing": false
+  {
+   "text": "If the open arrows are identities, the section comparison $\\delta_g$ is the identity after restriction identifications. The middle restriction adjunctions in Step 2 are identity adjunctions [def-weil-pbc-composite-adjunction]; its Hom bijection is the $g$-adjunction followed by its inverse. Equivalently, the conjugate comparison is the identity, whose inverse conjugate is the identity by [def-weil-pbc-adjunction-conjugate]. Thus $b_g^{0,\\mathrm{id}}=\\mathrm{id}_{g^*}$. Together with Step 4 this checks both identity-square normalizations.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+    "place": "Proof, final paragraph: the identity-open-arrow normalization"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Use the finite coefficient ring\n$A=A_{E,n}$. Let\n\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\n{\\scriptstyle j'}\\downarrow&&\\downarrow{\\scriptstyle j}\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\n\nbe a Cartesian square with $j,j'$\nopen immersions.\nOn the small pro-etale sites,\nthe extension-by-zero functors\nand derived pullbacks\nadmit a canonical natural isomorphism\n\n$$\nb_g:Lg^*j_!\\xrightarrow{\\sim}j'_!Lg_U^*.\n$$\n\nIts restriction to $U'$ is the identity, after the pullback\nidentifications. These isomorphisms respect identity squares and\npasting of Cartesian squares.",
-    "proof": [
-      {
-        "text": "Restriction along an open immersion is localization of the site:\nan object $V\\to U$ is also an object over $Y$.\nFor a sheaf $Q$ on $Y'$, the direct-image formula gives\n\n$$\n(j^*g_*Q)(V)=Q(V\\times_Y Y')\n=(g_{U*}j'^*Q)(V).\n$$",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "The equality respects restrictions and coverings on the site of\n[def-weil-pbc-proetale-site]. Thus $j^*g_*=g_{U*}j'^*$,\nwith all comparison maps specified on sections.",
-        "uses": [
-          "def-weil-pbc-proetale-site"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The exact functor $j'^*$ preserves injectives and K-injectives:\nits left adjoint $j'_!$ is exact by\n[def-weil-extension-by-zero]. For K-injectives this follows\ndirectly by applying the adjunction to Hom complexes against an\nacyclic complex. Thus a K-injective resolution of $Q$ computes\nboth sides of\n\n$$\nj^*Rg_*Q\\simeq Rg_{U*}j'^*Q,\n$$\n\nusing [def-weil-derived-direct-image]. Taking left adjoints,\nwith the exact inverse-image pullbacks of\n[def-weil-derived-pullback-tensor-hom], gives\n$Lg^*j_!\\simeq j'_!Lg_U^*$. This defines $b_g$.\nOn $U'$ the section equality is the identity, so its mate has the\nstated normalization. The section equalities for two pasted squares\ncompose to the equality for the outer square. The uniqueness of\nleft adjoints with their adjunction data proves the pasting and\nidentity assertions. This proof uses no claim that ordinary\ngeometric stalks detect arbitrary pro-etale sheaves.",
-        "uses": [
-          "def-weil-extension-by-zero",
-          "def-weil-derived-direct-image",
-          "def-weil-derived-pullback-tensor-hom"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "By [lem-weil-extension-by-zero-exact], $j_!$ and $j'_!$ are exact on pro-etale $A$-module sheaves. The four pullbacks are exact by [prop-weil-pbc-proetale-constant-exact]. Apply these functors termwise to an arbitrary, possibly unbounded cochain complex $K$ on $U$. Naturality of $b_g^0$ with respect to each differential gives a chain isomorphism with components $b_g^0(K^r)$; the inverse is termwise $(b_g^0(K^r))^{-1}$. The exact-functor factorization theorem [lem-weil-pbc-exact-functor-derived-factorization] shows that all these termwise functors preserve quasi-isomorphisms and induce the corresponding functors on the unbounded derived categories. By [def-weil-pbc-proetale-operations], the induced pullback is $Lg^*$ (respectively $Lg_U^*$); the induced extension functors are denoted $j_!,j'_!$ since they are exact. The natural-transformation clause of [lem-weil-pbc-localization-universal-property] therefore descends the chain isomorphism to\n$$\nb_g:Lg^*j_!\\xrightarrow{\\sim}j'_!Lg_U^*.\n$$\nThe normalization and identity and pasting equations of Steps 3--8 hold in every degree. The same localization theorem respects composition and detects equality of natural transformations after precomposition with the localization functor. It consequently gives all those equations on the derived categories. This proves every clause without a boundedness, constructibility, or stalk-detection hypothesis.",
+   "uses": [
+    "lem-weil-extension-by-zero-exact",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.md",
+    "place": "Proof, third paragraph and last two sentences: derive the exact sheaf comparison and all its equations termwise"
+   }
   }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-exc-proetale-open-unit",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "def-pc-fibre-product",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Agent adaptation of Stacks Tag 03S6, Lemma 59.70.5 (etale-cohomology.tex, lemma-shriek-base-change), and Tag 04J0 (sites-modules.tex, lemma-localize-morphism-ringed-sites): pro-etale direct-image restriction and adjunction, explicit normalization/pasting, then exact termwise derivation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of schemes with vertical open immersions, inverse image commutes with extension by zero on pro etale sheaves with finite constant coefficients, compatibly with composition",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.Scheme.Hom.app_invApp', AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply, AlgebraicGeometry.Scheme.Hom.app_appIso_inv, AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"extension\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|extensionByZero|extension_by_zero",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image commutes with extension by zero for an open immersion of sites",
+   "results": "service unavailable: Internal Server Error; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a morphism of topoi the inverse image of extension by zero along an open subtopos is extension by zero of the restricted inverse image",
+   "results": "8 hit(s): TopCat.Sheaf.extend_hom_app, TopCat.Presheaf.pullbackObjObjOfImageOpen, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hit(s): CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic uniqueness of adjoints only, already represented by lem-weil-pbc-conjugate-iso-unit-equation"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|LowerShriek|extension.*zero|baseChange",
+   "results": "25 hit(s): Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state pro-etale extension-by-zero exchange and its normalization/coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|sheafPushforwardContinuousComp|sheafPullback.*[Cc]omp",
+   "results": "25 hit(s): Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic adjoint uniqueness and direct-image composition, or Zariski sheaf restriction only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley isomorphism for extension by zero and pullback along an open immersion of topoi",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, TopCat.Presheaf.pullbackObjObjOfImageOpen, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app', AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic adjoint uniqueness and direct-image composition, or Zariski sheaf restriction only"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|conjugateEquiv_whiskerLeft|conjugateEquiv_whiskerRight|conjugateEquiv_comp",
+   "results": "19 hits; Mathlib/CategoryTheory/Adjunction/Mates.lean:209 mateEquiv_hcomp, :350 conjugateEquiv_comp; also bicategorical and composition-isomorphism uses.",
+   "date": "2026-10-17",
+   "verdict": "match for existing categorical input; not the full geometric item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_whiskerLeft",
+   "results": "1 hit: CategoryTheory.conjugateEquiv_whiskerLeft, Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-17",
+   "verdict": "generic categorical input only; existing mate-pasting node already covers the needed specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking mates under composite adjunctions commutes with horizontal pasting of natural transformations between functors",
+   "results": "8 hits including CategoryTheory.mateEquiv_vcomp, mateEquiv_hcomp, conjugateEquiv_mateEquiv_vcomp and mateEquiv_conjugateEquiv_vcomp (Mathlib/CategoryTheory/Adjunction/Mates.lean).",
+   "date": "2026-10-17",
+   "verdict": "match for the hidden categorical input, already the existing Mathlib leaf lem-weil-pbc-mate-pasting; not a match for the whole geometric item"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|extensionByZero|extension_by_zero",
+   "results": "10 hits in Mathlib/AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean; read Proetale.lean:43-80 (precoverage and topology).",
+   "date": "2026-10-17",
+   "verdict": "no match: site definitions and coefficient constructions, no extension exchange theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"extension\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image commutes with extension by zero along an open immersion of pro etale sites",
+   "results": "8 hits including AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp, invApp_app, and related Scheme/PresheafedSpace open-immersion section identities.",
+   "date": "2026-10-17",
+   "verdict": "no match: section identities for ringed spaces rather than this theorem on pro-etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of schemes with open vertical maps, derived inverse image commutes with extension by zero on pro etale finite constant module sheaves and the isomorphism is normalized on the open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Hom.map_appLE', AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE.",
+   "date": "2026-10-17",
+   "verdict": "no match: these are scheme or Zariski module restriction formulas, not normalized pro-etale extension exchange"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2367,
+ "blueprint_uses": [
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-trf-coefficient-conventions",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil-push",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-open-square-exchange",
+  "worker": "stage1",
+  "summary": "Repaired the dedicated Q60 handoff without changing the statement or Lean record. Retained the existing route and Steps 1--4 and the termwise derivation. Replaced the former 2278-character vertical-pasting step by a section calculation, the canonical open-composition identifications, an explicit application of the existing Mathlib mate-pasting law and conjugate-composition law, and a separate identity-open check. No new nodes: the hidden categorical input already exists as lem-weil-pbc-mate-pasting, with conjugation in def-weil-pbc-adjunction-conjugate. All nine steps are shorter than 2000 characters.",
+  "blueprint": "The current main-20261015 blueprint_update uses restriction of direct image then taking left adjoints. Steps 1--2 implement that route; Step 3 proves normalization and Step 4 horizontal pasting. Steps 5--8 repair the returned vertical-pasting argument by explicitly citing the existing generic mate-pasting Mathlib leaf and conjugation law. Step 9 retains exact termwise derivation of the same sheaf comparison and its equations. The unit sk-d-weil-push has no numbered proof steps; this is its open-square tool, not its key definition.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exact module inverse image for the finite constant ring; used to derive the comparison termwise, not any proper base-change assertion. No node of sk-d-weil-push states this input."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the open pro-etale site with the localized site; supplies sectionwise restriction. No node of sk-d-weil-push states this input."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "Generic open-extension sheaf adjunction needed to form the two composite left adjoints. No node of sk-d-weil-push states this input."
+   },
+   {
+    "node": "lem-exc-proetale-open-unit",
+    "why": "Generic open-extension unit isomorphism needed only for normalization on the open. No node of sk-d-weil-push states this input."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Generic exactness of open extension, needed to pass the constructed sheaf isomorphism to arbitrary complexes. No node of sk-d-weil-push states this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-exc-proetale-open-unit",
+  "lem-weil-extension-by-zero-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-0bacb92a4",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-0bacb92a4 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and all nine steps. It is a proof repair with no new nodes, and the statement, source, Lean record and tool_uses are unchanged. The statement matches the master blueprint verbatim (main-20261015 has the same text minus the Stacks parenthesis), and the route is the blueprint's: restrict the direct image, then take left adjoints. I read Stacks 03S6 (etale-cohomology.tex 11492-11514, lemma-shriek-base-change) and 04J0 (sites-modules.tex 2368-2411); Steps 1-2 adapt exactly that argument to the pro-etale sites with finite constant A. I checked the direction of b_g against lem-weil-pbc-conjugate-iso-unit-equation: its input is delta_g^{-1}, so b_g runs Lg^*j_! -> j'_!Lg_U^* as stated. The new Steps 5-8 replace the returned vertical-pasting step. Step 5 is the fibre-product section identity delta^{ji}=(delta^i j'^*)(i^* delta^j), checked on T->V; it is genuinely elementary. Step 6 builds the unit-preserving composites (ji)_! = j_!i_!. In Step 7 I re-derived both whiskering formulas from clause 2 of lem-weil-pbc-mate-pasting: alpha=id with beta=b^j gives i^*(delta^j)^{-1}, and beta=id with alpha=b^i gives (delta^i)^{-1}j'^*. Conjugation reverses composition, so c(B) is the inverse of delta^{ji}; bijectivity of conjugation then gives b^{ji}=j'_!b^i o b^j i_!, and its domain and codomain match. Step 8 covers the identity open. I read Mathlib Mates.lean (mateEquiv_hcomp at line 209, conjugateEquiv_comp at 350). The newly cited nodes are Mathlib leaves, proof_deps equals the union of the steps' uses, every step is under 2000 characters, there is no cycle among the 336 dependencies, no SGA source is cited, and nothing that adds boundedness, an etale/pro-etale identification or stalk detection is used. The existing pro-etale extension-zero base-change nodes lack the normalization and pasting clauses, so none duplicates the item. I made no fixes and accept the existing tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f689b9209",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, coherence, universes, edge cases, docstrings, and report sections. Both modules compiled through scompile.py with exit 0 and no diagnostics. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenSquareExchange",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_openSquareExchange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfIntrinsicOpenAdjunction",
+   "AlgebraicGeometry.Scheme.sfIntrinsicOpenComp",
+   "AlgebraicGeometry.Scheme.sfIntrinsicOpenId",
+   "AlgebraicGeometry.Scheme.sfIntrinsicSquarePullback",
+   "AlgebraicGeometry.Scheme.sfIntrinsicOpenMate",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpen",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDeriveMap",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenMate",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenUnit",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullbackComp",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenComp",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullbackId",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenId",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedSquarePullback",
+   "AlgebraicGeometry.Scheme.SfOpenSquareExchangeData",
+   "AlgebraicGeometry.Scheme.proEtale_openSquareExchange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenSquareExchange.lean",
+  "statement": "theorem proEtale_openSquareExchange (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) : Nonempty (@SfOpenSquareExchangeData (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Use the finite coefficient ring\n$A=A_{E,n}$. Let\n\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\n{\\scriptstyle j'}\\downarrow&&\\downarrow{\\scriptstyle j}\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\n\nbe a Cartesian square with $j,j'$\nopen immersions.\nOn the small pro-etale sites,\nthe extension-by-zero functors\nand derived pullbacks\nadmit a canonical natural isomorphism\n\n$$\nb_g:Lg^*j_!\\xrightarrow{\\sim}j'_!Lg_U^*.\n$$\n\nIts restriction to $U'$ is the identity, after the pullback\nidentifications. These isomorphisms respect identity squares and\npasting of Cartesian squares.",
+  "proof": [
+   {
+    "text": "Restriction along an open immersion is localization of the site:\nan object $V\\to U$ is also an object over $Y$.\nFor a sheaf $Q$ on $Y'$, the direct-image formula gives\n\n$$\n(j^*g_*Q)(V)=Q(V\\times_Y Y')\n=(g_{U*}j'^*Q)(V).\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The equality respects restrictions and coverings on the site of\n[def-weil-pbc-proetale-site]. Thus $j^*g_*=g_{U*}j'^*$,\nwith all comparison maps specified on sections.",
+    "uses": [
+     "def-weil-pbc-proetale-site"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The exact functor $j'^*$ preserves injectives and K-injectives:\nits left adjoint $j'_!$ is exact by\n[def-weil-extension-by-zero]. For K-injectives this follows\ndirectly by applying the adjunction to Hom complexes against an\nacyclic complex. Thus a K-injective resolution of $Q$ computes\nboth sides of\n\n$$\nj^*Rg_*Q\\simeq Rg_{U*}j'^*Q,\n$$\n\nusing [def-weil-derived-direct-image]. Taking left adjoints,\nwith the exact inverse-image pullbacks of\n[def-weil-derived-pullback-tensor-hom], gives\n$Lg^*j_!\\simeq j'_!Lg_U^*$. This defines $b_g$.\nOn $U'$ the section equality is the identity, so its mate has the\nstated normalization. The section equalities for two pasted squares\ncompose to the equality for the outer square. The uniqueness of\nleft adjoints with their adjunction data proves the pasting and\nidentity assertions. This proof uses no claim that ordinary\ngeometric stalks detect arbitrary pro-etale sheaves.",
+    "uses": [
+     "def-weil-extension-by-zero",
+     "def-weil-derived-direct-image",
+     "def-weil-derived-pullback-tensor-hom"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

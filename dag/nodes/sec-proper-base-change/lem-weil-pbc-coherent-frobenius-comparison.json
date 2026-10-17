@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "Properness gives separatedness and finite type. The finite-type definition supplies a finite affine open cover $\\mathcal U$ of $X$ over $\\operatorname{Spec}k$. Repeated application of the separated-affine-intersection lemma makes every positive-length tuple intersection affine, including repetitions. The inverse images of the opens cover $X_K$, and inverse image commutes with intersections. Apply the affine-triple tensor base-change theorem with $S=\\operatorname{Spec}k$, $X_0=Y_0=X$, $f_0=\\mathrm{id}_X$, $W_0=S$, $U_0=V_0=U_J=\\operatorname{Spec}A_J$, $B=C=A_J$, $\\phi=\\mathrm{id}_{A_J}$, and $T=\\operatorname{Spec}K$: it identifies $j^{-1}U_J$ with $\\operatorname{Spec}(K\\otimes_k A_J)$, hence makes every target tuple affine. The structure sheaf is locally the module associated to the section ring itself, so it is quasi-coherent. Affine module vanishing applies on both schemes. For each affine intersection $U_J$, restriction of an ambient module injective resolution to $U_J$ is an injective resolution, by the module open-restriction lemma. Thus ambient derived evaluation at $U_J$ equals module cohomology of the scheme $U_J$. Apply the module/abelian comparison on that scheme. By the Zariski open-restriction lemma, restriction of an ambient abelian injective resolution is also an injective resolution, with exactly the same section complex at $U_J$. Consequently the resulting abelian vanishing on the scheme $U_J$ is precisely ambient abelian object-cohomology vanishing; apply the etale object-vanishing theorem with the unit quasi-coherent module to obtain etale vanishing. Thus the acyclic-edge hypotheses of Step 2 hold for all three cohomology theories on both schemes.",
+   "text": "Work in a common universe in which the chosen small sites and finite covers are small. Properness of $X_K$ follows by proper base change. Properness gives separatedness and finite type. The finite-type definition supplies a finite affine open cover $\\mathcal U$ of $X$ over $\\operatorname{Spec}k$. Repeated application of the separated-affine-intersection lemma makes every positive-length tuple intersection affine, including repetitions. The inverse images of the opens cover $X_K$, and inverse image commutes with intersections. Apply the affine-triple tensor base-change theorem with $S=\\operatorname{Spec}k$, $X_0=Y_0=X$, $f_0=\\mathrm{id}_X$, $W_0=S$, $U_0=V_0=U_J=\\operatorname{Spec}A_J$, $B=C=A_J$, $\\phi=\\mathrm{id}_{A_J}$, and $T=\\operatorname{Spec}K$: it identifies $j^{-1}U_J$ with $\\operatorname{Spec}(K\\otimes_k A_J)$, hence makes every target tuple affine. The structure sheaf is locally the module associated to the section ring itself, so it is quasi-coherent. Affine module vanishing applies on both schemes. For each affine intersection $U_J$, restriction of an ambient module injective resolution to $U_J$ is an injective resolution, by the module open-restriction lemma. Thus ambient derived evaluation at $U_J$ equals module cohomology of the scheme $U_J$. Apply the module/abelian comparison on that scheme. By the Zariski open-restriction lemma, restriction of an ambient abelian injective resolution is also an injective resolution, with exactly the same section complex at $U_J$. Consequently the resulting abelian vanishing on the scheme $U_J$ is precisely ambient abelian object-cohomology vanishing; apply the etale object-vanishing theorem with the unit quasi-coherent module to obtain etale vanishing. Thus the acyclic-edge hypotheses of Step 2 hold for all three cohomology theories on both schemes.",
    "uses": [
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
@@ -46,7 +46,8 @@
     "pqf-def-coherent",
     "lem-weil-pbc-affine-triple-tensor-base-change",
     "lem-weil-pbc-module-open-restriction-injectives",
-    "lem-weil-pbc-zariski-open-restriction-injectives"
+    "lem-weil-pbc-zariski-open-restriction-injectives",
+    "lem-weil-pbc-proper-base-change"
    ],
    "elementary": false,
    "source": {
@@ -55,14 +56,20 @@
    }
   },
   {
-   "text": "Use the common section complex $C^r=\\prod_J\\mathcal O_X(U_J)$ with alternating restriction differential, and denote its canonical edges by $e_{et},e_{ab},e_{mod}$. The Zariski-to-etale inclusion is continuous, preserves the final object and tuple fibre products, and defines the change-of-site morphism by the cited inclusion theorem. For the associated unit module its restriction has exactly the Zariski sections and restrictions, by the definition of the associated etale sheaf: for $v:V\\to X$, its unit pullback $v^*\\mathcal O_X=\\mathcal O_V\\otimes_{v^{-1}\\mathcal O_X}v^{-1}\\mathcal O_X$ identifies with $\\mathcal O_V$ via $r\\otimes s\\mapsto r\\,v^\\sharp(s)$, with inverse $r\\mapsto r\\otimes1$. Apply the general change-of-site edge square with identity coefficient map on these sections, and then its module-forgetting square. This gives $H^q(\\epsilon)e_{ab}=e_{et}$ and $\\iota e_{mod}=e_{ab}$, where $\\iota$ is the canonical module-to-abelian identification. Consequently the canonical composite $H^q(\\epsilon)\\iota$ sends $e_{mod}[z]$ to $e_{et}[z]$, and its inverse sends $e_{et}[z]$ to $e_{mod}[z]$. This is $c_X^q$ by the specified etale-to-Zariski characterization in the statement; we do not infer canonicity from the existence-only statement of the quasi-coherent comparison theorem. All edges are isomorphisms by Step 1 and the acyclic-edge lemma. Apply these same two squares on $X_K$ with its base-changed cover to obtain $c_{X_K}^q e_{et,K}=e_{mod,K}$.",
+   "text": "Use the common section complex $C^r=\\prod_J\\mathcal O_X(U_J)$ with alternating restriction differential, and denote its canonical edges by $e_{et},e_{ab},e_{mod}$. The Zariski-to-etale inclusion is continuous, preserves the final object and tuple fibre products, and defines the change-of-site morphism $\\epsilon$ by the cited inclusion theorem. Let $\\mathcal F$ be any quasi-coherent $\\mathcal O_X$-module. For an open $v:V\\to X$, $v^{-1}\\mathcal O_X=\\mathcal O_V$ and $v^{-1}\\mathcal F=\\mathcal F|_V$, so $v^*\\mathcal F=\\mathcal O_V\\otimes_{\\mathcal O_V}\\mathcal F|_V\\cong\\mathcal F|_V$ via $r\\otimes s\\mapsto rs$, inverse $s\\mapsto1\\otimes s$; thus $h_{\\mathcal F}:\\mathcal F_{ab}\\to\\epsilon_*\\mathcal F_{et}$, $s\\mapsto1\\otimes s$, is bijective on all opens. Let $h_{\\mathcal F,H}$ be its canonical cohomology map, i.e. pullback along $\\epsilon$ followed by the adjoint $\\epsilon^{-1}\\mathcal F_{ab}\\to\\mathcal F_{et}$. These maps form the canonical family of the comparison definition. Pullback along $\\epsilon$ is a morphism of $\\delta$-functors equal to the unit in degree $0$ by the site-pullback theorem; $\\epsilon^{-1}$ is exact; for a short exact sequence $S$ of quasi-coherent modules with exact etale sequence $S_{et}$ (as the definition requires), the adjoint maps form a morphism of short exact sequences $\\epsilon^{-1}S_{ab}\\to S_{et}$, so by clause (2) of a $\\delta$-functor for etale cohomology (horseshoe theorem) the composite commutes with connecting maps; naturality in $\\mathcal F$ holds likewise, and degree $0$ is the tensor-pullback unit. Step 1 used only quasi-coherence, so its vanishing holds for $\\mathcal F$; the change-of-site edge square gives $h_{\\mathcal F,H}e_{ab}=e_{et}H^q(h_C)$ with $h_C$ bijective and both edges isomorphisms, so each $h_{\\mathcal F,H}$ is bijective. By uniqueness in the definition, the comparison is $h_{\\mathcal F,H}$; for $\\mathcal F=\\mathcal O_X$ write $H^q(\\epsilon)e_{ab}=e_{et}$. Let $\\iota$ be the fixed module/abelian comparison. Choose a module injective resolution $I$ of $\\mathcal O_X$, an abelian injective resolution $J$ and $\\varphi:I_{ab}\\to J$ over the identity; by resolution normalization $\\iota=H^q(\\Gamma\\varphi)$ on these presentations. Restriction and augmentation are natural, so $\\alpha_J\\Gamma(\\varphi)=\\mathrm{Tot}(\\varphi)\\alpha_I$ and $\\mathrm{Tot}(\\varphi)\\beta_I=\\beta_J$, hence $\\iota e_{mod}=H^q(\\alpha_J)^{-1}H^q(\\beta_J)=e_{ab}$ (edges are resolution-independent by the acyclic-edge lemma). Thus $c_X^q=(H^q(\\epsilon)\\iota)^{-1}$ sends $e_{et}[z]$ to $e_{mod}[z]$, and all edges are isomorphisms. The same argument on the proper scheme $X_K$ with its base-changed cover gives $c_{X_K}^qe_{et,K}=e_{mod,K}$.",
    "uses": [
     "lem-weil-pbc-acyclic-cech-edge-compatibility",
     "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
     "def-sc-etale-qcoherent-module",
-    "lem-sc-module-abelian-zariski-cohomology",
     "def-weil-pbc-site-cech-complex",
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "new-module-cohomology-ext-resolution-normalization",
+    "def-pbc-canonical-coherent-etale-comparison",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "def-weil-pbc-delta-functor",
+    "pqf-def-coherent"
    ],
    "elementary": false,
    "source": {
@@ -84,7 +91,7 @@
    }
   },
   {
-   "text": "The etale base-change functor $W\\mapsto W\\times_X X_K$ preserves final objects and fibre products by the finite-limit theorem, and carries covers to covers by the continuity theorem. The algebraic-structures theorem supplies the set-theoretic inverse image, its finite-limit preservation and its adjunction to direct image. A left adjoint preserves colimits, so this defines a morphism of sites; the same theorem identifies its abelian inverse image and unit with the specified ones. On each tuple, the adjoint of $u$ is the structural ring map $j_J^\\#: \\mathcal O_X(U_J)\\to\\mathcal O_{X_K}(j^{-1}U_J)$. The general change-of-site edge square therefore computes precisely the unit-and-coefficient pullback of the cohomology-pullback definition: $P_j^q(e_{et}[z])=e_{et,K}[(j_J^\\#z_J)_J]$. This uses the adjoint additive coefficient map, without identifying $j^{-1}G_X$ with $G_{X_K}$.",
+   "text": "The etale base-change functor $W\\mapsto W\\times_X X_K$ preserves final objects and fibre products by the finite-limit theorem, and carries covers to covers by the continuity theorem. The algebraic-structures theorem supplies the set-theoretic inverse image, its finite-limit preservation and its adjunction to direct image. Together the adjunction and finite-limit preservation give the morphism of sites; the same theorem identifies its abelian inverse image and unit with the specified ones. On each tuple, the adjoint of $u$ is the structural ring map $j_J^\\#: \\mathcal O_X(U_J)\\to\\mathcal O_{X_K}(j^{-1}U_J)$. The general change-of-site edge square therefore computes precisely the unit-and-coefficient pullback of the cohomology-pullback definition: $P_j^q(e_{et}[z])=e_{et,K}[(j_J^\\#z_J)_J]$. This uses the adjoint additive coefficient map, without identifying $j^{-1}G_X$ with $G_{X_K}$.",
    "uses": [
     "lem-weil-pbc-acyclic-cech-edge-compatibility",
     "def-weil-pbc-cohomology-pullback",
@@ -101,26 +108,52 @@
    }
   },
   {
-   "text": "A field extension is flat: choose a $k$-basis of $K$, so tensoring with $K$ is a direct sum of copies of the identity on vector spaces and is exact. On Zariski sites the inverse-image-of-opens functor takes $U_J$ to $j^{-1}U_J$, preserving the final object, coverings and intersections. Apply the general change-of-site edge square to the underlying abelian structural map $\\mathcal O_X\\to j_*\\mathcal O_{X_K}$, and use the module-forgetting square on each scheme. It gives $j_{coh}^q(e_{mod}[z])=e_{mod,K}[(j_J^\\#z_J)_J]$ for the canonical additive coherent pullback. To identify the Ext presentation used by the flat-comparison definition with these derived module groups, use the explicitly constructed moduleCohomologyExtResolutionEquiv, not an unspecified natural equivalence. Its coefficient naturality and its direct-image edge formula identify the map for the structural module morphism $\\varphi:\\mathcal O_X\\to j_*\\mathcal O_{X_K}$: first apply $H^q(\\varphi)$ on $X$, then the identity-coefficient direct-image edge. In the Ext presentation this is exactly inverse image with the constant-integer-sheaf comparison followed by the coefficient map, as specified in the flat-comparison definition. The definition of module cohomology fmap uses the same resolution diagram for that composite; the canonical module/abelian identification is obtained by forgetting this resolution and comparing its acyclic section complex. Thus the additive map $j_{coh}^q$ above is the map extended by the specific flat comparison, so $b_q(v\\otimes a)=a\\,j_{coh}^q(v)$ (its tensor order is exchanged from $K\\otimes_k E_X^q$). Apply module-edge naturality on $X_K$ to multiplication by $a\\in K$, which is $\\mathcal O_{X_K}$-linear. Thus $e_{mod,K}$ is $K$-linear, hence $b_q(e_{mod}[z]\\otimes a)=e_{mod,K}[(a\\,j_J^\\#z_J)_J]$. The specific flat separated-cohomology theorem supplies invertibility of this very map: $X$ is compact (quasi-compact) by finite type, its structure morphism is separated, and the unit module is quasi-coherent. Taking $a=1$, Step 4 and the two canonical edge identities in Step 2 give $c_{X_K}^q(P_j^q(x))=b_q(c_X^q(x)\\otimes1)$ for every $x$.",
+   "text": "On the Zariski sites, inverse image of opens sends $U_J$ to $j^{-1}U_J$ and preserves the final object, covers and intersections. Apply the ringed-site Cech refinement square with $M=\\mathcal O_X$, $N=\\mathcal O_{X_K}$, structural ring map $\\rho=\\varphi:\\mathcal O_X\\to j_*\\mathcal O_{X_K}$, the two covers from Step 1, identity index map, and identity maps from each target open to the inverse image of its source open. Both module categories have enough injectives by the scheme-modules theorem. Its cochain formula is exactly $z\\mapsto(j_J^\\#z_J)_J$, and its definition of $h_H$ is exactly the resolution definition of module cohomology fmap. Hence for this specified module h-map $j_{mod}^q$ we have $j_{mod}^q(e_{mod}[z])=e_{mod,K}[(j_J^\\#z_J)_J]$. This invokes the module refinement theorem directly; an identification of module and abelian pullback maps is not being assumed.",
    "uses": [
-    "lem-weil-pbc-acyclic-cech-edge-compatibility",
-    "def-pc-flat-cohomology-comparison",
-    "lem-pc-flat-cohomology-separated",
+    "lem-weil-pbc-ringed-site-cech-refinement-square",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "def-weil-pbc-module-cohomology-fmap",
     "def-sc-zariski-site",
-    "lem-sc-cech-comparison-map-naturality",
-    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FD, label lemma-functoriality-cech; Tag 01FB, label remark-explain-arrow; sites-cohomology.tex Tag 03FD, label lemma-cohomology-modules-abelian-agree"
+   }
+  },
+  {
+   "text": "Write $E$ for the fixed module-derived-to-Ext comparison of the resolution-naturality lemma. By the coefficient-factor theorem, $j_{mod}^q=\\mathrm{edge}_{j,\\mathcal O_{X_K}}\\circ H^q(\\varphi)$. Coefficient naturality of $E$ moves $H^q(\\varphi)$ across $E_X$; the resolution-edge theorem moves the subsequent edge across $E_X,E_{X_K}$ and identifies it with exact abelian inverse image, the constant-integer-sheaf comparison, and the identity coefficient map. The coefficient-transport theorem then says that the composite for $\\varphi$ is the Ext h-map with its actual coefficient map. The structural $\\varphi$ is the tensor-pullback unit followed by the canonical identification $j^*\\mathcal O_X\\cong\\mathcal O_{X_K}$, whose section formula is $r\\otimes s\\mapsto rj^\\#(s)$ with inverse $r\\mapsto r\\otimes1$. Therefore, by the flat-comparison definition, this very Ext h-map is the additive map whose $K$-linear extension is $b_q$. Resolution normalization says that these are the same fixed comparisons used in Step 2. Consequently, in the module presentation, $b_q(v\\otimes a)=a\\,j_{mod}^q(v)$, with tensor factors commuted from $K\\otimes_kE_X^q$.",
+   "uses": [
     "new-module-cohomology-ext-resolution-naturality",
     "new-module-cohomology-ext-resolution-edge",
-    "def-weil-pbc-module-cohomology-fmap"
+    "new-module-cohomology-ext-resolution-normalization",
+    "new-module-cohomology-coefficient-factor",
+    "new-module-cohomology-coefficient-transport",
+    "def-pc-flat-cohomology-comparison",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FD, label lemma-functoriality-cech; Tag 01FB, label remark-explain-arrow; sites-cohomology.tex Tag 03FD, label lemma-cohomology-modules-abelian-agree"
+   }
+  },
+  {
+   "text": "A field extension $K/k$ is flat: a $k$-basis of $K$ identifies tensoring with $K$ with a direct sum of identity functors on vector spaces, which preserves exact sequences. The separated flat-cohomology theorem applies to $X$: its structure map is separated and its underlying space is quasi-compact by properness and finite type, and its unit module is quasi-coherent by Step 1. It makes the specific linear extension in Step 6 invertible. Apply module Cech-edge naturality on $X_K$ to multiplication by $a\\in K$, an $\\mathcal O_{X_K}$-linear coefficient map. Its action on sections and cohomology is scalar multiplication, so $e_{mod,K}$ is $K$-linear. Steps 5 and 6 yield $b_q(e_{mod}[z]\\otimes a)=e_{mod,K}[(a\\,j_J^\\#z_J)_J]$. In particular, if $x=e_{et}[z]$, Step 4 and the two comparison identities of Step 2 give $c_{X_K}^q(P_j^q(x))=e_{mod,K}[(j_J^\\#z_J)_J]=b_q(c_X^q(x)\\otimes1)$. Every $x$ has such a cycle representative by Step 2.",
+   "uses": [
+    "lem-pc-flat-cohomology-separated",
+    "def-pc-flat-cohomology-comparison",
+    "lem-sc-cech-comparison-map-naturality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 02KH, label lemma-flat-base-change-cohomology, separated affine-cover proof Canonical resolution/Ext identification: sites-cohomology.tex Tag 03FD, label lemma-cohomology-modules-abelian-agree; cohomology.tex Tag 01FB, label remark-explain-arrow, and Tags 01F9/01FA, equations equation-functorial-derived and equation-functorial."
+    "place": "Tag 02KH, label lemma-flat-base-change-cohomology, separated finite-affine-cover proof; cohomology.tex Tag 01EQ, label lemma-cech-cohomology"
    }
   },
   {
-   "text": "For every tuple $J$, the ring-map property and commutativity give $(j_J^\\#(z_J)a)^p=j_J^\\#(z_J^p)a^p$. Therefore, if $v=e_{mod}[z]$, Step 3 on $X_K$ and Step 5 imply $F_{X_K}^q(b_q(v\\otimes a))=e_{mod,K}[(j_J^\\#(z_J^p)a^p)_J]=b_q(F_X^q(v)\\otimes a^p)$. Every cohomology class has a Cech cycle representative by Step 1, so the identity holds for every $v$ and $a$. The tensor relation is respected: replacing $(\\lambda v)\\otimes a$ by $v\\otimes\\lambda a$ gives $F_X(v)\\otimes\\lambda^pa^p$ on both sides. Thus the formula does not require $k$ or $K$ to be perfect.",
+   "text": "For every tuple $J$, the ring-map property and commutativity give $(j_J^\\#(z_J)a)^p=j_J^\\#(z_J^p)a^p$. Therefore, if $v=e_{mod}[z]$, Step 3 on $X_K$ and Step 7 imply $F_{X_K}^q(b_q(v\\otimes a))=e_{mod,K}[(j_J^\\#(z_J^p)a^p)_J]=b_q(F_X^q(v)\\otimes a^p)$. Every cohomology class has a Cech cycle representative by Step 2, so the identity holds for every $v$ and $a$. The tensor relation is respected: replacing $(\\lambda v)\\otimes a$ by $v\\otimes\\lambda a$ gives $F_X(v)\\otimes\\lambda^pa^p$ on both sides. Thus the formula does not require $k$ or $K$ to be perfect.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -130,6 +163,7 @@
   }
  ],
  "proof_deps": [
+  "def-pbc-canonical-coherent-etale-comparison",
   "def-pc-base-change",
   "def-pc-flat-cohomology-comparison",
   "def-pc-module-pullback",
@@ -137,6 +171,7 @@
   "def-sc-zariski-site",
   "def-weil-finite-type-morphism",
   "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-delta-functor",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-module-cohomology-fmap",
   "def-weil-pbc-site-cech-complex",
@@ -151,12 +186,21 @@
   "lem-weil-pbc-etale-base-change-continuous",
   "lem-weil-pbc-etale-base-change-finite-limits",
   "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-horseshoe-delta-functor",
   "lem-weil-pbc-module-open-restriction-injectives",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-ringed-site-cech-refinement-square",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
   "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-site-pullback-abelian-exact",
   "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
   "lem-weil-pbc-zariski-open-restriction-injectives",
+  "new-module-cohomology-coefficient-factor",
+  "new-module-cohomology-coefficient-transport",
   "new-module-cohomology-ext-resolution-edge",
   "new-module-cohomology-ext-resolution-naturality",
+  "new-module-cohomology-ext-resolution-normalization",
   "pqf-def-coherent",
   "pqf-lem-affine-vanishing"
  ],
@@ -263,10 +307,45 @@
    "results": "AlgebraicGeometry.IsEtale.of_comp; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.comp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.IsEtaleAt.comp; KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.Etale.comp",
    "date": "2026-10-14",
    "verdict": "no match: cotangent cohomology, etale morphism properties and tensor modules do not state this canonical Frobenius-compatible sheaf cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*cohomology|cohomology.*Frobenius|coherent_frobenius",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Structure sheaf etale cohomology equals coherent cohomology naturally under Frobenius and flat scalar extension",
+   "results": "CategoryTheory.Sheaf.H; Algebra.FormallyUnramified.flat_of_restrictScalars; AlgebraicGeometry.Spec.structureSheaf; CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj; comonadicExtendScalars; RingHom.Etale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, frobenius",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical etale to Zariski structure sheaf cohomology comparison commutes with Frobenius and field extension",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.Etale.comp; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.etaleLocus_eq_compl_support; Algebra.Etale.formallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.IsEtaleAt.comp; Algebra.FormallyEtale.localization_map",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cocycles compute coherent cohomology and the additive p power map is semilinear and compatible with extension of scalars",
+   "results": "ContinuousCohomology.homogeneousCochains; groupCohomology.iCocycles; groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply; CategoryTheory.PresheafOfGroups.OneCohomologyRelation; groupCohomology.cocyclesIso₀_hom_comp_f_apply; groupCohomology.cocyclesIso₀_hom_comp_f; groupCohomology.coe_mapCocycles₁; groupCohomology.isoCocycles₁_hom_comp_i_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lemma-weil-pbc-smooth-curve-artin-schreier",
   "by": "worker",
@@ -275,19 +354,41 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-coherent-frobenius-comparison",
   "worker": "stage1",
-  "summary": "Explicit common Cech representatives prove Frobenius semilinearity and compatibility. General acyclic edges handle additive maps, site change and forgetting scalars. The specified flat comparison is computed from its definition, not an existential Leray square.",
-  "blueprint": "Realizes the final paragraph of lemma-weil-pbc-smooth-curve-artin-schreier: coherent base change identifies E tensor k′ and carries Frobenius to Frobenius, with canonical additive pullback tracked."
+  "summary": "Audited the inherited common-Cech proof and all cited statements. Replaced the long inline module/abelian pullback identification by the existing ringed-site refinement square, coefficient factorization and fixed resolution comparison theorems; added proper base-change and resolution normalization citations. No statement change or new node. Repeated item Mathlib searches by two semantic phrasings, Loogle and source grep without a match.",
+  "blueprint": "Realizes the final paragraph of the current blueprint lemma-weil-pbc-smooth-curve-artin-schreier: coherent base change identifies E tensor k′ and carries Frobenius to Frobenius. Steps 1–3 give the canonical additive comparison and semilinearity, Steps 4–7 identify the specified field-extension map, and Step 8 proves the Frobenius formula on cycles.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-cohomology-separated",
+    "why": "Generic separated flat coherent base-change theorem, used for invertibility of the explicitly specified linear extension."
+   },
+   {
+    "node": "lem-sc-cech-comparison-map-naturality",
+    "why": "Generic module coefficient naturality, used on multiplication maps to prove scalar linearity of the Cech edges."
+   },
+   {
+    "node": "lem-sc-etale-tensor-positive-object-cohomology",
+    "why": "Generic affine-object vanishing for the associated quasi-coherent etale sheaf, supplying the edge acyclicity hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Generic cohomological tool for the canonical comparisons; the curve unit has no substitute for this general construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-cech-refinement-square",
+    "why": "Generic cohomological tool for the canonical comparisons; the curve unit has no substitute for this general construction."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NS-5342450e0",
-  "group": "NS",
+  "reviewer": "NT-cc-Q27-ef53a2766",
+  "group": "Q27",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-5342450e0 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, sources, and route in full. Added missing open/object-cohomology citations in Step 1 and canonical Ext/derived-map citations in Step 5; clarified zero-ring wording in Step 3. Sources 03F3, 03FD, 01FB, 03AX/03F7, and 02KH support the corrected argument. Statements unchanged; edge cases checked; no missing dependencies or cycles. Details in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-ef53a2766 (reviewer sub-agent of L); spot-checked: Read the whole item: all 8 steps, the statement of every one of the 36 proof_deps and 14 stmt_deps, and the Lean of def-pbc-canonical-coherent-etale-comparison. Its uniqueness is among normalized families of equivalences over all quasi-coherent modules. Sources checked: Stacks 0A3P proof (03P2 and 02KH used for this compatibility) and the final paragraph of the current blueprint lemma-weil-pbc-smooth-curve-artin-schreier (the from.place is correct). The statement is unchanged and there are no new nodes. Step checks: Step 1 hypotheses hold (finite affine cover, separated affine intersections, triple-tensor instantiation with f_0=id and T=Spec K, affine vanishing in the module, abelian and etale theories, properness of X_K). Steps 3-8 are correct: additive edge naturality for Frobenius, p=2 and the zero ring checked, the base-change site morphism, the refinement square matching the module fmap recipe, the coefficient factor/transport/Ext-edge chain identifying b_q, flatness and separated flat base change, and the semilinear cycle calculation. Repaired fault (E5): Step 2 asserted that the Cech-computed map is c_X^q but never showed the change-of-site maps form the definition's unique normalized family. It also equated the delta-universal module/abelian identification with the fixed resolution comparison without argument. The fix rewrites Step 2 using in-unit nodes: lem-weil-pbc-site-cohomology-pullback (delta-morphism, unit in degree 0), lem-weil-pbc-site-pullback-abelian-exact, and lem-weil-pbc-horseshoe-delta-functor with def-weil-pbc-delta-functor (connecting maps along the morphism of short exact sequences). Bijectivity for every quasi-coherent F follows from Step 1 and the edge square, then the definition's uniqueness applies. A resolution map I_ab->J with resolution normalization gives iota e_mod = e_ab. proof_deps recomputed; no cycle; all additions in unit sk-thm-p1. Accepted tool_uses: lem-pc-flat-cohomology-separated, lem-sc-cech-comparison-map-naturality, lem-sc-etale-tensor-positive-object-cohomology, lem-weil-pbc-etale-base-change-continuous, lem-weil-pbc-ringed-site-cech-refinement-square (the only off-route one). No SGA cited. Process note: the side ledger retired the Q27 claim 32 s before this commit; the merge tool should check mergeability.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
@@ -322,5 +423,12 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Canonical comparisons are defined in the companion definition node. Coefficient maps and the flat base-change equivalence are specified by their defining sectionwise and pure-tensor equations. Tensor order K tensor E is the canonical commuted presentation of E tensor K."
- }
+ },
+ "tool_uses": [
+  "lem-pc-flat-cohomology-separated",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-sc-etale-tensor-positive-object-cohomology",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-ringed-site-cech-refinement-square"
+ ]
 }

@@ -10,9 +10,148 @@
  "stmt_deps": [
   "lem-coef-simplicial-inversion-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E=E(p)$ and $W=W(p)$. The composition in the statement is associative because $p_{bc}p_{ab}=p_{ac}$ strictly and every transition preserves composition; the fiber identity vertices are units. The grade $d(a,x)=a$ has $E(u,v)=\\varnothing$ unless $d(u)\\leq d(v)$. Use the fixed $[1]\\to K\\to\\mathbb J$ and strict localization $\\Gamma$ of the arrow-attachment node. Its comparison identifies $\\Gamma(E,W)$ with $L_WE$ under $E$, including the maps induced by functors sending $W$ to identities. For each $a$ let $E_a=E_{\\leq a}$ and $W_a$ be the labels in $W$ with both endpoints in $E_a$. Inclusions define the strict diagram $\\chi(a)=\\Gamma(E_a,W_a)$ and its strict cocone $\\ell_a:\\chi(a)\\to\\Gamma(E,W)$.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.3.5.11, Remark A.3.5.8 and Notation A.3.5.1; choice of the strict localization model is supplied by the cited node."
+   }
+  },
+  {
+   "text": "Define $r_a:E_a\\to p(a)$ by $r_a(b,x)=p_{ba}x$. On a mapping simplex $u\\in p(c)(p_{bc}x,y)$, for $b\\leq c\\leq a$, set $r_a(u)=p_{ca}(u)$. Its source is $p_{ca}p_{bc}x=p_{ba}x$, so it is a simplicial functor and sends every label of $W_a$ to an identity. Let $C_a$ be the full subcategory on $b<a$, and put $f_a=r_a|_{C_a}$. The remaining objects of $E_a$ form precisely $p(a)$. Mapping sets inside either part are unchanged, the mapping set from $(b,x)$ with $b<a$ to $(a,y)$ is $p(a)(p_{ba}x,y)$, and every mapping set in the reverse direction is empty. These identifications respect composition by the displayed formula for $r_a$. Thus $E_a$ is exactly the categorical mapping cylinder $M_{f_a}$ and $r_a$ is its canonical retraction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.3.5.11 and the identification used in Lemma A.3.5.12 with Lemma A.3.5.6; all mapping sets and compositions are computed here."
+   }
+  },
+  {
+   "text": "For each $(b,x)$ with $b<a$, the required cross arrow $(b,x)\\to(a,p_{ba}x)$ lies in $W_a$, and $r_a$ sends every label of $W_a$, including transitions between lower fibers, to an identity. The mapping-cylinder node therefore says that the specified extension $\\rho_a:\\chi(a)\\to p(a)$ is a Dwyer--Kan equivalence. For $a\\leq a'$, the equations $p_{aa'}r_a=r_{a'}|_{E_a}$ hold on objects and every mapping simplex, since $p_{aa'}p_{ca}=p_{ca'}$. Both extensions collapse each attached $K$ through its specified map to $\\mathbb J$ and then to the common object. They therefore agree on those copies too. Consequently $\\rho:\\chi\\to p$ is a strict objectwise weak equivalence of diagrams.",
+   "uses": [
+    "lem-coef-enriched-mapping-cylinder-localization",
+    "lem-coef-simplicial-arrow-attachment-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.12 and the natural transformation of diagrams at the end of Definition A.3.5.11."
+   }
+  },
+  {
+   "text": "Apply the filtered-resolution node to $E$ with its grade $d$. Obtain $f:E'\\to E$ bijective on objects, locally a trivial Kan fibration, with $D'(a)=E'_{\\leq a}$ projectively cofibrant as an $A$-diagram. Identify its object set with that of $E$. For each labelled $w\\in W$ choose a vertex lift $w'$ between the corresponding objects: trivial Kan fibrations lift $\\partial\\Delta^0\\to\\Delta^0$ by the Kan-model node. Keep the original label set $W$ for these chosen arrows. If the target of $w$ has grade $b$, then its source has grade at most $b$, and $w'$ lies in $E'_{\\leq a}$ precisely for $b\\leq a$. Put $\\chi'(a)=\\Gamma(E'_{\\leq a},W_a)$ using these lifts. Each restriction of $f$ is a Dwyer--Kan equivalence, so arrow-attachment invariance gives an objectwise weak equivalence $\\chi'\\to\\chi$.",
+   "uses": [
+    "lem-coef-poset-filtered-cofibrant-resolution",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-arrow-attachment-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.9 and the first sentence of the proof of Proposition A.3.5.10, with the explicit vertex-lifting argument."
+   }
+  },
+  {
+   "text": "The diagram $\\chi'$ is projectively cofibrant, as can be checked directly by lifting. For a diagram $X\\to Y$ which is objectwise a trivial fibration and a map $\\chi'\\to Y$, first lift its restriction $D'\\to Y$ to $X$, using projective cofibrancy of $D'$. For a label $w$ whose target has grade $b$, its attaching $[1]$ and its copy of $K$ first occur at $b$ and occur at every $a\\geq b$. At $b$ the chosen lift on $D'(b)$ and the given map $K\\to Y(b)$ form a lifting square for the cofibration $i:[1]\\to K$ against $X(b)\\to Y(b)$. Choose a lift $K\\to X(b)$ and propagate it to every $X(a)$ for $a\\geq b$. Diagram functoriality makes these propagated maps compatible. Do this independently for every label. The pushout universal property now gives compatible maps $\\chi'(a)\\to X(a)$ lifting the given diagram map. This is the left lifting property defining projective cofibrancy; no objectwise-cofibrancy-to-projective-cofibrancy implication is used.",
+   "uses": [
+    "lem-coef-poset-filtered-cofibrant-resolution",
+    "lem-coef-simplicial-arrow-attachment-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Expanded projective-cofibrancy assertion in the proof of Proposition A.3.5.10; explicit principal-upper-set attachment lifting."
+   }
+  },
+  {
+   "text": "There are canonical ordinary colimit identifications $\\operatorname{colim}_a E'_{\\leq a}=E'$ and $\\operatorname{colim}_a\\chi'(a)=\\Gamma(E',W)$. Indeed compatible enriched functors from the initial segments glue uniquely: an object of grade $b$ occurs already at $b$, each mapping simplex from grade $b$ to grade $c$ occurs at $c$, and every composable string occurs at the grade of its last target. Thus all identities and composition equations are checked in one initial segment. For the second identification, use the pushout description: for a label with target grade $b$, a compatible family of maps on its copies of $K$ is exactly one map on the copy at $b$, because the indexing upper set has initial element $b$. Hence compatible functors $\\chi'(a)\\to T$ are exactly a functor $E'\\to T$ and one map $K\\to T$ per label, agreeing on $[1]$. This is precisely the defining pushout property of $\\Gamma(E',W)$. The same argument without primes identifies $\\operatorname{colim}\\chi=\\Gamma(E,W)$ and identifies its colimit cocone with $\\ell$.",
+   "uses": [
+    "lem-coef-poset-filtered-cofibrant-resolution",
+    "lem-coef-simplicial-arrow-attachment-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.5.8 and the colimit identifications in the proof of Proposition A.3.5.10; universal-property verification written out."
+   }
+  },
+  {
+   "text": "The map $\\operatorname{colim}\\chi'\\to\\operatorname{colim}\\chi$ is, under Step 6, exactly $\\Gamma(E',W)\\to\\Gamma(E,W)$ induced by $f$. It is a Dwyer--Kan equivalence by arrow-attachment invariance. The adjunction $\\operatorname{colim}_A\\dashv\\operatorname{const}_A$ is Quillen for the assumed projective model structure: its right adjoint preserves fibrations and trivial fibrations since these are objectwise. Apply the derived-functor assertion of the Quillen node. Steps 4--5 give a projectively cofibrant diagram weakly equivalent to $\\chi$, so its colimit computes $\\mathbf L\\operatorname{colim}(\\chi)$. The preceding weak equivalence therefore says that the comparison induced by the actual cocone $\\ell$ is an isomorphism\n$$\\kappa:\\operatorname{hocolim}_A\\chi\\xrightarrow{\\ \\sim\\ }\\Gamma(E,W)\\quad\\text{in }h\\mathrm{sCat}.$$\nThe map $\\chi'\\to\\chi$ need not be a trivial fibration; a weak equivalence with cofibrant source suffices for computing the derived functor.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization",
+    "lem-coef-quillen-derived-counit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.3.5.10, expanded using its stated cofibrant resolution and localization invariance; ordinary Quillen derived-colimit comparison."
+   }
+  },
+  {
+   "text": "Since $\\rho:\\chi\\to p$ is an objectwise weak equivalence in the projective model structure, it is an isomorphism in that model homotopy category. The derived functor $\\mathbf L\\operatorname{colim}_A$ of the Quillen node sends it to an isomorphism $v:\\operatorname{hocolim}_A\\chi\\to\\operatorname{hocolim}_A p$. Define the desired comparison by $\\theta=v\\kappa^{-1}$, after identifying $\\Gamma(E,W)$ with $L_WE$ by the arrow-attachment node. This proves the displayed isomorphism. It is defined using $\\rho$ and the actual cocone $\\ell$, rather than by assigning the same isomorphism class to two objects.",
+   "uses": [
+    "lem-coef-quillen-derived-counit-criterion",
+    "lem-coef-simplicial-arrow-attachment-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.13, obtained from Lemma A.3.5.12 and Proposition A.3.5.10; maps of the cocones retained."
+   }
+  },
+  {
+   "text": "Let $c_a:p(a)\\to T$ be a strict cocone. Define $G:E\\to T$ by $G(a,x)=c_a(x)$ and, for $u\\in p(b)(p_{ab}x,y)$, by $G(u)=c_b(u)$, with source $c_b p_{ab}x=c_a x$. Strict cocone compatibility and the composition formula for $E$ make this an enriched functor, and $G$ sends every label of $W$ to an identity. Let $\\bar G:\\Gamma(E,W)\\to T$ be its specified identity-collapse extension. On $E_a$ one has $G|_{E_a}=c_a r_a$, and on each attached $K$ both extensions use the same identity collapse. Thus there is an equality of strict cocones $\\bar G\\ell_a=c_a\\rho_a$. Applying the derived colimit functor and its natural comparison to ordinary cocone maps gives\n$$\\bar G\\kappa=(\\operatorname{hocolim}_A p\\longrightarrow T)\\,v.$$\nHere the right comparison is computed by $Qp\\to p\\xrightarrow{c}\\operatorname{const}T$ followed by ordinary colimit. Composing with $\\kappa^{-1}$ proves $\\bar G=(\\operatorname{hocolim}_A p\\to T)\\theta$, exactly the requested agreement of maps.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization",
+    "lem-coef-quillen-derived-counit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Identity-collapse extensions in Notation A.3.5.1, the maps in Definition A.3.5.11, and the actual colimit comparison in Proposition A.3.5.10; cocone equality checked explicitly."
+   }
+  },
+  {
+   "text": "For a strict transformation $\\eta:p\\to\\widetilde p$, the induced enriched functor sends $(a,x)$ to $(a,\\eta_a x)$ and a mapping simplex $u$ over $a\\leq b$ to $\\eta_b(u)$. Strict naturality gives $\\eta_b p_{ab}=\\widetilde p_{ab}\\eta_a$, so it preserves the labels, initial segments, and the retractions $r_a$. Functoriality of $\\Gamma$ and of the identity-collapse extensions therefore makes the maps $\\rho$ and cocones $\\ell$ natural. The derived functor and its comparison are natural, and inverses of natural isomorphisms are natural, so $\\theta=v\\kappa^{-1}$ commutes with transformations of diagrams. The equality in Step 9 then also commutes with maps of strict cocones, including a change of target $T$. Choices in the auxiliary resolution of Step 4 do not enter this definition of $\\theta$.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization",
+    "lem-coef-quillen-derived-counit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Functorial maps in Definition A.3.5.11 and the comparison in Lemma A.3.5.13; naturality verified from the explicit maps."
+   }
+  },
+  {
+   "text": "If $A=\\varnothing$, then $E$ and $W$ are empty and the ordinary pushout $\\Gamma(E,W)$ is the empty simplicial category. The empty diagram is already projectively cofibrant, and its colimit is the same initial simplicial category. There is exactly one strict cocone to any $T$ and exactly one functor from that initial object to $T$. Thus both the isomorphism and all compatibility claims hold in this case. The arguments above impose no nonemptiness conditions on individual fibers either.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Empty-index case of Notation A.3.5.1, Remark A.3.5.8 and Lemma A.3.5.13, checked directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-mapping-cylinder-localization",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-poset-filtered-cofibrant-resolution",
+  "lem-coef-quillen-derived-counit-criterion",
+  "lem-coef-simplicial-arrow-attachment-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded argument following Notation A.3.5.1, Lemmas A.3.5.6, A.3.5.9, A.3.5.12--13 and Proposition A.3.5.10, read online. Archival copy WANTED. Projective lifting, colimit gluing, cocone equality and naturality are written out by N6."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -34,10 +173,45 @@
    "results": "0 hits; ; names/files: ; digest 4f53cda18c2baa0c",
    "date": "2026-10-17",
    "verdict": "no match: inspected the returned signatures/source; ordinary Grothendieck constructions, ordinary colimits, and model homotopy classes do not state the simplicial-category localization formula or the framed derived diagram adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?colimit|Grothendieck|Dwyer.Kan",
+   "results": "[grep] OK 0 hit(s); returned names/files: ; digest 4f53cda18c2baa0c; Mathlib subdirectory: AlgebraicTopology",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures/source; conical enriched limits, ordinary Grothendieck categories, and simplicial nerves do not state the Dwyer--Kan localization/homotopy-colimit comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial category Grothendieck construction localization homotopy colimit",
+   "results": "[leansearch] OK 8 hit(s); returned names/files: CategoryTheory.SimplicialCategory, CategoryTheory.Pseudofunctor.Grothendieck.base, SimplexCategory.toCat, CategoryTheory.SimplicialObject.instSimplicialCategory, CategoryTheory.Pseudofunctor.CoGrothendieck.base, CategoryTheory.SimplicialObject.instSimplicialCategorySSet, CategoryTheory.Pseudofunctor.CoGrothendieck, CategoryTheory.SimplicialNerve; digest 72034f7a43813d89",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures/source; conical enriched limits, ordinary Grothendieck categories, and simplicial nerves do not state the Dwyer--Kan localization/homotopy-colimit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Grothendieck, CategoryTheory.Localization",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Localization'; returned names/files: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures/source; conical enriched limits, ordinary Grothendieck categories, and simplicial nerves do not state the Dwyer--Kan localization/homotopy-colimit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization of the enriched Grothendieck construction of a poset diagram of simplicial categories computes its homotopy colimit",
+   "results": "[leanfinder] OK 8 hit(s); returned names/files: CategoryTheory.SimplicialThickening.functor, SSet.QCat.catEnrichedOrdinaryCategory, CategoryTheory.SimplicialThickening.instSimplicialCategory, CategoryTheory.SimplicialNerve, instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex, CategoryTheory.SimplicialThickening.functor_comp, CategoryTheory.SimplicialObject.instHasColimitsOfShape, CategoryTheory.SimplicialObject.instEnrichedCategorySSet; digest a6d1896e75967ec0",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures/source; conical enriched limits, ordinary Grothendieck categories, and simplicial nerves do not state the Dwyer--Kan localization/homotopy-colimit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A poset indexed diagram of enriched categories has derived colimit given by inverting its transport morphisms in the total category",
+   "results": "[leanfinder] OK 8 hit(s); returned names/files: CategoryTheory.Enriched.HasConicalProduct, CategoryTheory.Enriched.HasConicalLimit, CategoryTheory.Enriched.FunctorCategory.diagram, CategoryTheory.Enriched.FunctorCategory.HasFunctorEnrichedHom, CategoryTheory.Enriched.FunctorCategory.HasEnrichedHom, CategoryTheory.Enriched.HasConicalTerminal, CategoryTheory.Enriched.FunctorCategory.enrichedOrdinaryCategory, CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom; digest cb0d61db72064050",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures/source; conical enriched limits, ordinary Grothendieck categories, and simplicial nerves do not state the Dwyer--Kan localization/homotopy-colimit comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dk-weak-exponential-limit-criterion",
@@ -69,5 +243,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-grothendieck-hocolimit",
+  "worker": "stage1",
+  "summary": "Statement preserved. Expanded the HTT proof into a strict localization diagram, an explicit mapping-cylinder identification of each initial segment, a filtered cofibrant resolution and projective lifting argument, an ordinary-colimit calculation, derived comparison, and exact cocone compatibility. Three genuine supporting statements remain unsplit; no Mathlib leaves or Lean attachments. No SGA source used.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, second paragraph and displayed derived coefficient-adjunction/inverse-limit computation: retains the inherited simplicial diagram foundation below the weak-exponential limit criterion. HTT A.3.5.12--13 supplies this supporting hocolimit mechanism; no unit/chapter route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-cf2017a33",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-cf2017a33 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and every cited statement (simplicial-inversion-universal-property, kan-quillen-right-proper, quillen-derived-counit-criterion, plus the reedy and interval-lifting conventions). I checked them against HTT §A.3.5 (Notation A.3.5.1 through Lemma A.3.5.13, printed pp.891-896), read verbatim from a local copy. The item's statement is unchanged and matches Definition A.3.5.11 and Lemma A.3.5.13. Step 2: E_{<=a} is exactly the mapping cylinder M_{f_a}; I recomputed its mapping sets and composition. Step 3: the cylinder node's (i) and (ii) hold for r_a and W_a, and naturality holds on the attached K copies. Step 4: vertex lifts come from the n=0 boundary-lifting clause, and invariance uses the same label set. Step 5: the projective lifting is a correct free cell attachment at each label's target grade. Step 6: the colimit gluing needs no filteredness. Step 7: colim -| const is Quillen; LL can be computed from any weak equivalence with cofibrant source, and the node's equivalence clause is not used. Step 9: the strict cocone equality Gbar.l = c.rho holds, giving the comparison for any T. Steps 10-11 (naturality, empty A) are correct. The new nodes are HTT A.3.5.1-2 (strict interval-attachment model; true by left properness), A.3.5.9 (filtered cofibrant resolution, all three clauses) and A.3.5.6 (mapping-cylinder localization, (i) and (ii) exact). I tested them on small cases: identity labels, V empty, C=D=*, a free monoid with D=*, A empty. They are statement-only and self-contained, and created/blueprint/same_as are correct. A grep of the whole DAG and the blueprint found no duplicates, and none restates a clause of the item. Everything cited is in the same unit, the graph is acyclic, no tool_uses are needed, and no SGA is cited. HTT stays WANTED, as for the accepted inversion node. Remark: the future split of the attachment node needs left properness of sCat, and lem-coef-scat-bergner-left-proper-pushouts currently reaches this item, so that split needs a proof independent of the coherent nerve (HTT A.3.2.4). No changes."
  }
 }

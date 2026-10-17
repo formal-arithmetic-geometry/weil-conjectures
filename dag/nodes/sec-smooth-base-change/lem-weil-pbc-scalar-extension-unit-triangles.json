@@ -1,0 +1,88 @@
+{
+ "id": "lem-weil-pbc-scalar-extension-unit-triangles",
+ "kind": "statement",
+ "title": "Scalar-extension maps form morphisms of distinguished triangles",
+ "statement": "Let $\\mathcal C$ be a site small relative to the universe of its module sheaves [def-weil-pbc-sites-and-cohomology], and let $\\varphi:R\\to S$ be a morphism of sheaves of commutative rings on $\\mathcal C$. Write $D(R)$ and $D(S)$ for the unbounded derived categories [def-weil-abstract-derived-category] of their abelian categories of module sheaves [def-weil-sheaf-of-modules-category], and $Q_R,Q_S$ for localization from homotopy categories. Let $F=-\\otimes_R^LS:D(R)\\to D(S)$ be the exact derived scalar-extension functor computed by K-flat resolutions [lem-pur-derived-change-of-rings, def-pc-kflat-complex, lem-pc-kflat-resolution]. Let $U:D(S)\\to D(R)$ be termwise restriction of scalars along $\\varphi$ [def-pc-sheaf-restrict-scalars]; use its exact derived functor, computed termwise, with the unchanged underlying abelian sheaves [lem-sf-exact-functor-derived-triangulated]. Give these functors their canonical shift structures from the complexes, using $(P[1])^i=P^{i+1}$ and $d_{P[1]}=-d_P$ [def-weil-triangulated-category].\n\nThere is a canonical natural transformation $\\eta:\\mathrm{id}_{D(R)}\\to UF$ with the following characterization. For every complex $C$ and every K-flat resolution $p:P\\to C$, under the canonical identification $F(Q_RC)\\cong Q_S(P\\otimes_R S)$, its component is represented by the roof\n$$Q_RC\\xleftarrow{\\ Q_Rp\\ }Q_RP\\xrightarrow{\\ Q_R i_P\\ }UQ_S(P\\otimes_R S),\\qquad i_P(x)=x\\otimes1.$$\nThis characterization is independent of the resolution. If $\\chi_X:UF(X[1])\\xrightarrow{\\sim}(UF X)[1]$ is the composite canonical shift comparison, then\n$$\\chi_X\\circ\\eta_{X[1]}=\\eta_X[1]$$\nfor every $X\\in D(R)$. For every distinguished triangle $\\Delta=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$, the three components $(\\eta_X,\\eta_Y,\\eta_Z)$ give a morphism of distinguished triangles $\\Delta\\to UF(\\Delta)$, with connecting square\n$$\\chi_X\\circ UF(w)\\circ\\eta_Z=\\eta_X[1]\\circ w.$$\nNo flatness of $S$ over $R$, boundedness, constructibility, or existence of points of the site is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY (lemma-derived-base-change), construction of the exact K-flat derived pullback for the identity topos and R -> S; agent refinement identifying the coefficient-reduction transformation and its shift/connecting-map compatibility. The tag does not state this transformation assertion verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-triangulated-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*[Uu]nit|[Uu]nit.*[Cc]omm[Ss]hift|[Cc]omm[Ss]hift.*[Uu]nit",
+   "results": "25 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: underived scalar maps, abstract derived adjunctions or abstract shift compatibility; none supplies the canonical K-flat scalar-extension transformation with its triangle compatibility on arbitrary ringed sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of derived extension and restriction of scalars for sheaves of modules defines a morphism of distinguished triangles",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, SheafOfModules.unitToPushforwardObjUnit, PresheafOfModules.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.unit_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+   "date": "2026-10-17",
+   "verdict": "no match: underived scalar maps, abstract derived adjunctions or abstract shift compatibility; none supplies the canonical K-flat scalar-extension transformation with its triangle compatibility on arbitrary ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.CommShift",
+   "results": "12 hits: CategoryTheory.Adjunction.CommShift, CategoryTheory.Adjunction.leftAdjointCommShift, CategoryTheory.Adjunction.rightAdjointCommShift, CategoryTheory.Adjunction.commShift_of_leftAdjoint, CategoryTheory.Adjunction.commShift_of_rightAdjoint, CategoryTheory.Adjunction.LeftAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.LeftAdjointCommShift.iso",
+   "date": "2026-10-17",
+   "verdict": "no match: underived scalar maps, abstract derived adjunctions or abstract shift compatibility; none supplies the canonical K-flat scalar-extension transformation with its triangle compatibility on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a homomorphism of sheaves of rings, the natural unit from a derived module to restriction of its derived extension of scalars commutes with shifts and gives a morphism of distinguished triangles",
+   "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: underived scalar maps, abstract derived adjunctions or abstract shift compatibility; none supplies the canonical K-flat scalar-extension transformation with its triangle compatibility on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|extendRestrictScalarsAdj|restrictScalars",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: underived scalar maps, abstract derived adjunctions or abstract shift compatibility; none supplies the canonical K-flat scalar-extension transformation with its triangle compatibility on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived change of coefficient map X to X tensor derived S on a ringed site is independent of the K-flat resolution and is a natural transformation of triangulated functors",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor_map, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.Derivation.d_map, PresheafOfModules.DifferentialsConstruction.derivation', CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-17",
+   "verdict": "no match: underived scalar maps, abstract derived adjunctions or abstract shift compatibility; none supplies the canonical K-flat scalar-extension transformation with its triangle compatibility on arbitrary ringed sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-levelwise-truncations",
+  "date": "2026-10-17",
+  "group": "Q10"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-pbc-levelwise-truncations",
+   "place": "Current blueprint proof Step 1, tensoring the truncation triangle, and Step 3, compatibility with normalization maps by canonicality: the scalar-extension maps comparing the original and reduced triangles.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -16,29 +16,64 @@
   "def-weil-pbc-derived-categories",
   "def-asd-compactifiable",
   "def-amb-etale-compact-support",
-  "def-weil-pbc-proper-open-comparison",
-  "lem-weil-pbc-etale-shriek-compactification-independence"
+  "def-weil-pbc-proper-open-comparison"
  ],
  "proof": [
   {
-   "text": "The stipulated finite affine cover witnesses local Noetherianity by [pqf-def-locnoeth]. Each affine is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so their finite union is quasi-compact (restrict an open cover to each affine and join the finite subcovers). By [lem-weil-pbc-locally-noetherian-quasi-separated], every original scheme is quasi-separated. For a compactification $X\\hookrightarrow\\overline X\\to Y$, the proper map to the locally Noetherian base is finite type, hence its ambient scheme is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. It is in particular locally Noetherian, hence quasi-separated by the preceding lemma. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] now makes the open immersion quasi-compact since its source X is quasi-compact. We can therefore apply the qcqs compactification results. For the finite-ring bounded-below candidates, [lem-weil-pbc-proper-open-comparison-iso] and [lem-weil-pbc-proper-open-comparison-composition] make the specified alpha maps [def-weil-pbc-proper-open-comparison] invertible and compatible with identity and composition. For a refinement $u:e\\to c$, let $A_u:F_c\\to F_e$ be the result of applying the ambient proper pushforward to alpha and the canonical direct-image composition identification, where $F_c=Rf_!^c$. Using [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the unit and associativity calculation on bounded-below injective representatives in step 3, $A_{ut}=A_tA_u$ and $A_{\\operatorname{id}}=\\operatorname{id}$. By [prop-nagata-compactification-category], the category is nonempty and cofiltered, including equalization of parallel refinements without a density assumption. For $u:e\\to c$ and $v:e\\to d$, set $C_{c,d}=A_v^{-1}A_u$. Given a second span through $e'$, take a common refinement $z$ of $e,e'$ and then equalize the resulting parallel arrows to $c$ and to $d$ successively. On this final refinement both pairs of composites are equal. The composition formula cancels its invertible comparison factors, so the two expressions for $C_{c,d}$ agree. For three objects take one common refinement; then $C_{d,b}C_{c,d}=(A_w^{-1}A_v)(A_v^{-1}A_u)=A_w^{-1}A_u=C_{c,b}$, and $C_{c,c}=\\operatorname{id}$. This proves the specified alpha comparisons give exactly the canonical identification and cocycle claimed in the first clause, on the same domain as [lem-weil-pbc-etale-shriek-compactification-independence].",
+   "text": "The stipulated finite affine cover witnesses local Noetherianity by [pqf-def-locnoeth]. Each affine is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so their finite union is quasi-compact (restrict an open cover to each affine and join the finite subcovers). By [lem-weil-pbc-locally-noetherian-quasi-separated], every original scheme is quasi-separated. For a compactification $X\\hookrightarrow\\overline X\\to Y$, the proper map is finite type by [def-weil-proper-morphism] and its base is Noetherian, hence its ambient scheme is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. It is in particular locally Noetherian, hence quasi-separated by the preceding lemma. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] now makes the open immersion quasi-compact since its source X is quasi-compact. We can therefore apply the qcqs compactification results.",
    "uses": [
     "pqf-def-locnoeth",
     "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-etale-shriek-compactification-independence",
-    "def-weil-pbc-proper-open-comparison",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, lemma-shriek-well-defined, qcqs hypotheses"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the small etale topoi with the constant ring $\\Lambda$, in a universe in which these sites are small. Its normalization gives the canonical composition maps. On $D^+$ these maps and their coherences can be evaluated on a bounded-below injective complex $I$: such representatives exist by [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative]. By [lem-weil-pbc-direct-image-preserves-injectives], $p_*I$ is again termwise injective and bounded below, hence K-injective by the latter representative lemma. Choose its resolution to be the identity in the normalization of the ringed-topos comparison. The comparison is then the underived identification $q_*p_*I=(qp)_*I$. For three maps both parenthesizations, evaluated at an etale test object, are induced by the unique fibre-product isomorphism preserving every projection [def-pc-fibre-product]; identity maps give the identity identification. These maps are $\\Lambda$-linear by the module formula of [def-weil-pbc-direct-image]. Naturality of the normalized comparison therefore gives the unit and associativity equalities on $D^+$. The same representative calculation shows that derived direct image preserves a lower bound.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "def-pc-fibre-product",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; bounded-below injective normalization"
+   }
+  },
+  {
+   "text": "For the finite-ring bounded-below candidates, [lem-weil-pbc-proper-open-comparison-iso] and [lem-weil-pbc-proper-open-comparison-composition] make the specified alpha maps [def-weil-pbc-proper-open-comparison] invertible and compatible with identity and composition. For a refinement $u:e\\to c$, let $A_u:F_c\\to F_e$ be the result of applying the ambient proper pushforward to alpha and the canonical direct-image composition identification, where $F_c=Rf_!^c$. Using [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the unit and associativity calculation on bounded-below injective representatives in step 2, $A_{ut}=A_tA_u$ and $A_{\\operatorname{id}}=\\operatorname{id}$.",
+   "uses": [
     "lem-weil-pbc-proper-open-comparison-iso",
     "lem-weil-pbc-proper-open-comparison-composition",
-    "prop-nagata-compactification-category",
+    "def-weil-pbc-proper-open-comparison",
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7I, lemma-shriek-well-defined; blueprint first paragraph"
+    "place": "Tag 0F7I, lemma-shriek-well-defined, refinement comparison"
+   }
+  },
+  {
+   "text": "By [prop-nagata-compactification-category], the category is nonempty and cofiltered, including equalization of parallel refinements without a density assumption. For $u:e\\to c$ and $v:e\\to d$, set $C_{c,d}=A_v^{-1}A_u$. Given a second span through $e'$, take a common refinement $z$ of $e,e'$ and then equalize the resulting parallel arrows to $c$ and to $d$ successively. On this final refinement both pairs of composites are equal. The composition formula cancels its invertible comparison factors, so the two expressions for $C_{c,d}$ agree. For three objects take one common refinement; then $C_{d,b}C_{c,d}=(A_w^{-1}A_v)(A_v^{-1}A_u)=A_w^{-1}A_u=C_{c,b}$, and $C_{c,c}=\\operatorname{id}$. This proves that the specified alpha comparisons give exactly the canonical identification and cocycle claimed in the first clause, on $D^+(X_{\\mathrm{et}},\\Lambda)$.",
+   "uses": [
+    "prop-nagata-compactification-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, lemma-shriek-well-defined, cofiltered descent"
    }
   },
   {
@@ -50,86 +85,101 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, first paragraph"
+    "place": "Tag 0F7J, lemma-shriek-composition, compatible model"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-etale-open-proper-interchange] to the Cartesian square $pb=vp_Y$ and to $c_!K$. This gives $v_!Rp_{Y*}c_!K\\cong Rp_*b_!c_!K$. The input remains in D+ by exact degreewise extension by zero [lem-weil-pbc-extension-by-zero-exact]. By [lem-cbc-extension-zero-composition], the degreewise coherent isomorphism $b_!c_!\\cong a_!$ descends to complexes and localization: its inverse and its identities remain inverse and identities after applying the localization functor. Applying $Rq_*$ and the comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] yields the explicit chain\n$$Rg_!^dRf_!^{(c,p_Y)}=Rq_*v_!Rp_{Y*}c_!\\xrightarrow{Rq_*\\gamma}Rq_*Rp_*b_!c_!\\cong R(qp)_*a_!=R(gf)_!^{(a,qp)}.$$\nApply the ringed-topos statement to the small etale topoi with constant coefficient ring $\\Lambda$, in a universe in which these sites are small. Its canonical comparison restricts to D+ and is coherent there as follows. Enough injectives [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative] give a bounded-below injective representative I. Direct image preserves injective terms [lem-weil-pbc-direct-image-preserves-injectives] and zero terms, so p_*I is bounded-below K-injective. In the normalization of the ringed-topos theorem choose the resolution p_*I to be the identity: the composition comparison is then the underived identification q_*p_*I=(qp)_*I. For three maps both parenthesizations are the same underived identification on I: at an etale test object both iterated fibre products are identified with the single fibre product by the unique map preserving every projection [def-pc-fibre-product]. Identity maps give identity identifications. All are linear for the same constant ring by [def-weil-pbc-direct-image]. Naturality and the fact that every D+ object has such a representative prove the unit and associativity laws on D+. The computation of [def-weil-pbc-direct-image] also shows the lower bound is preserved. Finally conjugate this chain by the step-1 comparisons to any prescribed candidates for $f,g,gf$.",
+   "text": "Apply the canonical map $\\gamma$ of [lem-cbc-proper-open-interchange-coherence] to the Cartesian square $pb=vp_Y$ (vertical maps $p_Y,p$ proper, horizontal maps $b,v$ open immersions) and to $c_!K$. It is a natural isomorphism $v_!Rp_{Y*}c_!K\\cong Rp_*b_!c_!K$, and it is the same specified map whose pasting identities are used in steps 7-10. The input remains in D+ by exact degreewise extension by zero [lem-weil-pbc-extension-by-zero-exact]. By [lem-cbc-extension-zero-composition], the degreewise coherent isomorphism $b_!c_!\\cong a_!$ descends to complexes and localization: its inverse and its identities remain inverse and identities after applying the localization functor. Applying $Rq_*$ and the comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] yields the explicit chain\n$$Rg_!^dRf_!^{(c,p_Y)}=Rq_*v_!Rp_{Y*}c_!\\xrightarrow{Rq_*\\gamma}Rq_*Rp_*b_!c_!\\cong R(qp)_*a_!=R(gf)_!^{(a,qp)}.$$\nThe exact extension by zero preserves a lower bound termwise, and step 2 checks the same for proper derived direct image, so this is an isomorphism of functors on $D^+$. Conjugate it by the step-4 comparisons to any prescribed candidates for $f,g,gf$.",
    "uses": [
-    "lem-weil-pbc-etale-open-proper-interchange",
+    "lem-cbc-proper-open-interchange-coherence",
     "lem-weil-pbc-extension-by-zero-exact",
     "lem-cbc-extension-zero-composition",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-etale-shriek-compactification-independence",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-direct-image-preserves-injectives",
-    "def-pc-fibre-product",
-    "def-weil-pbc-direct-image"
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B, 0F7J, four-line calculation"
+    "place": "Tag 0F7J, lemma-shriek-composition, composition chain"
    }
   },
   {
-   "text": "For each auxiliary triangle take the supplied compactification of $gf$ to be $(a_i,q_ip_i)$; the last clause of [lem-cbc-compactifiable-compatible-tower] gives a tower dominating both, so it suffices to compare a triangle indexed 1 refining a triangle indexed 2. Write $h:\\overline X_1\\to\\overline X_2$, $k:\\overline Y_1\\to\\overline Y_2$, $h':V_1\\to V_2$, and $q_1=q_2k$. Set $P_i=Rp_{i*}$, $L_i=Rp_{Yi*}$, $H=Rh_*$, $H'=Rh'_*$, $M=Rk_*$, $J_i=c_{i!}$, $B_i=b_{i!}$ and $I_i=v_{i!}$. Step 3 identifies $P_2H=MP_1$ and $L_2H'=L_1$. The squares A (top $X\\hookrightarrow V_1$, bottom $X\\hookrightarrow V_2$, vertical $\\operatorname{id}_X,h'$), D (top $Y\\hookrightarrow\\overline Y_1$, bottom $Y\\hookrightarrow\\overline Y_2$, vertical $\\operatorname{id}_Y,k$), and E (top $X\\hookrightarrow\\overline X_1$, bottom $X\\hookrightarrow\\overline X_2$, vertical $\\operatorname{id}_X,h$) yield $\\gamma_A:J_2\\to H'J_1$, $\\gamma_D:I_2\\to MI_1$ and $\\gamma_E:B_2J_2\\to HB_1J_1$. By the normalization in [lem-cbc-proper-open-interchange-coherence], these are precisely the alpha comparisons of [def-weil-pbc-proper-open-comparison]. The Cartesian model squares B and C for indices 2 and 1 yield $\\gamma_B:I_2L_2\\to P_2B_2$ and $\\gamma_C:I_1L_1\\to P_1B_1$. The square F with top $V_1\\hookrightarrow\\overline X_1$, bottom $V_2\\hookrightarrow\\overline X_2$, vertical $h',h$ yields $\\gamma_F:B_2H'\\to HB_1$. Horizontal and vertical pasting [lem-cbc-proper-open-interchange-coherence] give\n$$\\gamma_E=(\\gamma_FJ_1)\\circ(B_2\\gamma_A),\\qquad (M\\gamma_C)\\circ(\\gamma_DL_1)=(P_2\\gamma_F)\\circ(\\gamma_BH').$$\nNaturality of $\\gamma_B$ at $\\gamma_{A,K}:J_2K\\to H'J_1K$ gives\n$$(P_2B_2\\gamma_A)\\circ(\\gamma_BJ_2)=(\\gamma_BH'J_1)\\circ(I_2L_2\\gamma_A).$$\nSubstitution gives the fully whiskered equality\n$$(P_2\\gamma_E)\\circ(\\gamma_BJ_2)=(M\\gamma_CJ_1)\\circ(\\gamma_DL_1J_1)\\circ(I_2L_2\\gamma_A).$$\nApply $Rq_{2*}$. The pushforward identifications and their coherence from step 3 and the open-extension identifications [lem-cbc-extension-zero-composition] identify this equality with the commuting square between the two model composition maps and the three refinement comparisons. Choice-independent cocycles [lem-weil-pbc-etale-shriek-compactification-independence] then cancel the comparisons through the dominating triangle and prove independence of all auxiliary choices.",
+   "text": "For each auxiliary triangle take the supplied compactification of $gf$ to be $(a_i,q_ip_i)$; the last clause of [lem-cbc-compactifiable-compatible-tower] gives a tower dominating both, so it suffices to compare a triangle indexed 1 refining a triangle indexed 2. Write $h:\\overline X_1\\to\\overline X_2$, $k:\\overline Y_1\\to\\overline Y_2$, $h':V_1\\to V_2$, and $q_1=q_2k$. Set $P_i=Rp_{i*}$, $L_i=Rp_{Yi*}$, $H=Rh_*$, $H'=Rh'_*$, $M=Rk_*$, $J_i=c_{i!}$, $B_i=b_{i!}$ and $I_i=v_{i!}$. Use the open-extension identifications of step 6 [lem-cbc-extension-zero-composition]. Step 2 identifies $P_2H=MP_1$ and $L_2H'=L_1$. The squares A (top $X\\hookrightarrow V_1$, bottom $X\\hookrightarrow V_2$, vertical $\\operatorname{id}_X,h'$), D (top $Y\\hookrightarrow\\overline Y_1$, bottom $Y\\hookrightarrow\\overline Y_2$, vertical $\\operatorname{id}_Y,k$), and E (top $X\\hookrightarrow\\overline X_1$, bottom $X\\hookrightarrow\\overline X_2$, vertical $\\operatorname{id}_X,h$) yield $\\gamma_A:J_2\\to H'J_1$, $\\gamma_D:I_2\\to MI_1$ and $\\gamma_E:B_2J_2\\to HB_1J_1$. By the normalization in [lem-cbc-proper-open-interchange-coherence], these are precisely the alpha comparisons of [def-weil-pbc-proper-open-comparison]. The Cartesian model squares B and C for indices 2 and 1 yield $\\gamma_B:I_2L_2\\to P_2B_2$ and $\\gamma_C:I_1L_1\\to P_1B_1$. The square F with top $V_1\\hookrightarrow\\overline X_1$, bottom $V_2\\hookrightarrow\\overline X_2$, vertical $h',h$ yields $\\gamma_F:B_2H'\\to HB_1$.",
    "uses": [
     "lem-cbc-compactifiable-compatible-tower",
     "lem-cbc-proper-open-interchange-coherence",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-cbc-extension-zero-composition",
     "def-weil-pbc-proper-open-comparison",
-    "lem-weil-pbc-etale-shriek-compactification-independence"
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-extension-zero-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, second paragraph and five squares A--F; Tags 0F7C, 0F7D"
+    "place": "Tag 0F7J, lemma-shriek-composition, five squares and auxiliary square F"
    }
   },
   {
-   "text": "For $X\\xrightarrow{f}Y\\xrightarrow{g}S\\xrightarrow{h}T$, choose successive compactifications $S\\xhookrightarrow{w}\\overline S\\xrightarrow{r}T$, $Y\\xhookrightarrow{v}\\overline Y\\xrightarrow{q}\\overline S$ of $wg$, and $X\\xhookrightarrow{a}\\overline X\\xrightarrow{p}\\overline Y$ of $vf$, by [lem-weil-pbc-compatible-compactification-triangle]. The ambient schemes are Noetherian and qcqs by the step-1 calculation applied to each proper map. Put $W=\\overline Y\\times_{\\overline S}S$, $V=\\overline X\\times_{\\overline Y}W$, and $U=\\overline X\\times_{\\overline Y}Y$ [def-pc-fibre-product]. Denote the open inclusions by $d:Y\\hookrightarrow W$, $i:W\\hookrightarrow\\overline Y$, $c:U\\hookrightarrow V$, $b:V\\hookrightarrow\\overline X$, and $j:X\\hookrightarrow U$, with $id=v$ and $bcj=a$; write the proper projections as $q_S:W\\to S$, $p_W:V\\to W$ and $p_Y:U\\to Y$. These are successive restrictions in the cited compatible-triangle construction. The adjacent Cartesian squares are A (top $U\\xrightarrow{c}V$, bottom $Y\\xrightarrow{d}W$, vertical $p_Y,p_W$), B (top $V\\xrightarrow{b}\\overline X$, bottom $W\\xrightarrow{i}\\overline Y$, vertical $p_W,p$), and C (top $W\\xrightarrow{i}\\overline Y$, bottom $S\\xrightarrow{w}\\overline S$, vertical $q_S,q$). Their maps are\n$$\\gamma_A:d_!Rp_{Y*}\\to Rp_{W*}c_!,\\quad \\gamma_B:i_!Rp_{W*}\\to Rp_*b_!,\\quad \\gamma_C:w_!Rq_{S*}\\to Rq_*i_!.$$\nStep 4 permits both parenthesizations to be computed on these models. Starting from $Rr_*w_!Rq_{S*}d_!Rp_{Y*}j_!$, one route uses A then the vertically pasted rectangle B+C; the other uses C then the horizontally pasted rectangle A+B. The pasting formulas [lem-cbc-proper-open-interchange-coherence] are\n$$\\gamma_{A+B}=(\\gamma_Bc_!)\\circ(i_!\\gamma_A),\\qquad \\gamma_{B+C}=(Rq_*\\gamma_B)\\circ(\\gamma_CRp_{W*}).$$\nThe middle transformations commute by the explicit naturality identity\n$$(\\gamma_CRp_{W*}c_!)\\circ(w_!Rq_{S*}\\gamma_A)=(Rq_*i_!\\gamma_A)\\circ(\\gamma_Cd_!Rp_{Y*}),$$\nchecked at each object by naturality of $\\gamma_C$ at $\\gamma_{A,K}$. Whisker by $Rr_*$ and $j_!$ and compose with $Rq_*\\gamma_Bc_!$. Both routes are now the same map to $Rr_*Rq_*Rp_*b_!c_!j_!$. The associative direct-image identifications from step 3 and the coherent open-extension composition [lem-cbc-extension-zero-composition] identify this target with $R(rqp)_*a_!$. Finally the choice-independent cocycles [lem-weil-pbc-etale-shriek-compactification-independence] conjugate this equality to the original candidates, proving associativity.",
+   "text": "Horizontal and vertical pasting [lem-cbc-proper-open-interchange-coherence] give\n$$\\gamma_E=(\\gamma_FJ_1)\\circ(B_2\\gamma_A),\\qquad (M\\gamma_C)\\circ(\\gamma_DL_1)=(P_2\\gamma_F)\\circ(\\gamma_BH').$$\nNaturality of $\\gamma_B$ at $\\gamma_{A,K}:J_2K\\to H'J_1K$ gives\n$$(P_2B_2\\gamma_A)\\circ(\\gamma_BJ_2)=(\\gamma_BH'J_1)\\circ(I_2L_2\\gamma_A).$$\nSubstitution gives the fully whiskered equality\n$$(P_2\\gamma_E)\\circ(\\gamma_BJ_2)=(M\\gamma_CJ_1)\\circ(\\gamma_DL_1J_1)\\circ(I_2L_2\\gamma_A).$$\nApply $Rq_{2*}$. The pushforward identifications and their coherence from step 2 and the open-extension identifications [lem-cbc-extension-zero-composition] identify this equality with the commuting square between the two model composition maps and the three refinement comparisons. The step-4 comparisons $C$ and their cocycle identities then cancel the comparisons through the dominating triangle and prove independence of all auxiliary choices.",
    "uses": [
-    "lem-weil-pbc-compatible-compactification-triangle",
     "lem-cbc-proper-open-interchange-coherence",
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-cbc-extension-zero-composition",
-    "lem-weil-pbc-etale-shriek-compactification-independence",
-    "def-pc-fibre-product"
+    "lem-cbc-extension-zero-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7K, lemma-pseudo-functor, complete diagram and proof"
+    "place": "Tags 0F7C, 0F7D, 0F7J: vertical and horizontal pasting, naturality calculation"
+   }
+  },
+  {
+   "text": "For $X\\xrightarrow{f}Y\\xrightarrow{g}S\\xrightarrow{h}T$, choose successive compactifications $S\\xhookrightarrow{w}\\overline S\\xrightarrow{r}T$, $Y\\xhookrightarrow{v}\\overline Y\\xrightarrow{q}\\overline S$ of $wg$, and $X\\xhookrightarrow{a}\\overline X\\xrightarrow{p}\\overline Y$ of $vf$, by [lem-weil-pbc-compatible-compactification-triangle]. The ambient schemes are Noetherian and qcqs by the step-1 calculation applied to each proper map. Put $W=\\overline Y\\times_{\\overline S}S$, $V=\\overline X\\times_{\\overline Y}W$, and $U=\\overline X\\times_{\\overline Y}Y$ [def-pc-fibre-product]. Denote the open inclusions by $d:Y\\hookrightarrow W$, $i:W\\hookrightarrow\\overline Y$, $c:U\\hookrightarrow V$, $b:V\\hookrightarrow\\overline X$, and $j:X\\hookrightarrow U$, with $id=v$ and $bcj=a$; write the proper projections as $q_S:W\\to S$, $p_W:V\\to W$ and $p_Y:U\\to Y$. These are successive restrictions in the cited compatible-triangle construction. The adjacent Cartesian squares are A (top $U\\xrightarrow{c}V$, bottom $Y\\xrightarrow{d}W$, vertical $p_Y,p_W$), B (top $V\\xrightarrow{b}\\overline X$, bottom $W\\xrightarrow{i}\\overline Y$, vertical $p_W,p$), and C (top $W\\xrightarrow{i}\\overline Y$, bottom $S\\xrightarrow{w}\\overline S$, vertical $q_S,q$). Applying [lem-cbc-proper-open-interchange-coherence], their maps are\n$$\\gamma_A:d_!Rp_{Y*}\\to Rp_{W*}c_!,\\quad \\gamma_B:i_!Rp_{W*}\\to Rp_*b_!,\\quad \\gamma_C:w_!Rq_{S*}\\to Rq_*i_!.$$\n",
+   "uses": [
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "def-pc-fibre-product",
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7K, lemma-pseudo-functor, simultaneous geometric model"
+   }
+  },
+  {
+   "text": "Step 8 permits both parenthesizations to be computed on these models. Starting from $Rr_*w_!Rq_{S*}d_!Rp_{Y*}j_!$, one route uses A then the vertically pasted rectangle B+C; the other uses C then the horizontally pasted rectangle A+B. The pasting formulas [lem-cbc-proper-open-interchange-coherence] are\n$$\\gamma_{A+B}=(\\gamma_Bc_!)\\circ(i_!\\gamma_A),\\qquad \\gamma_{B+C}=(Rq_*\\gamma_B)\\circ(\\gamma_CRp_{W*}).$$\nThe middle transformations commute by the explicit naturality identity\n$$(\\gamma_CRp_{W*}c_!)\\circ(w_!Rq_{S*}\\gamma_A)=(Rq_*i_!\\gamma_A)\\circ(\\gamma_Cd_!Rp_{Y*}),$$\nchecked at each object by naturality of $\\gamma_C$ at $\\gamma_{A,K}$. Whisker by $Rr_*$ and $j_!$ and compose with $Rq_*\\gamma_Bc_!$. Both routes are now the same map to $Rr_*Rq_*Rp_*b_!c_!j_!$. The associative direct-image identifications from step 2 and the coherent open-extension composition [lem-cbc-extension-zero-composition] identify this target with $R(rqp)_*a_!$. Finally the step-4 comparisons $C$ and their cocycle identities conjugate this equality to the original candidates, proving associativity.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C, 0F7D, 0F7K: two pasting formulas and naturality"
    }
   }
  ],
  "proof_deps": [
   "pqf-def-locnoeth",
   "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-weil-proper-morphism",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-etale-shriek-compactification-independence",
-  "def-weil-pbc-proper-open-comparison",
-  "lem-weil-pbc-proper-open-comparison-iso",
-  "lem-weil-pbc-proper-open-comparison-composition",
-  "prop-nagata-compactification-category",
-  "lem-weil-pbc-compatible-compactification-triangle",
-  "def-amb-etale-compact-support",
-  "lem-weil-pbc-etale-open-proper-interchange",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-cbc-extension-zero-composition",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-direct-image-preserves-injectives",
   "def-pc-fibre-product",
   "def-weil-pbc-direct-image",
-  "lem-cbc-compactifiable-compatible-tower",
-  "lem-cbc-proper-open-interchange-coherence"
+  "lem-weil-pbc-proper-open-comparison-iso",
+  "lem-weil-pbc-proper-open-comparison-composition",
+  "def-weil-pbc-proper-open-comparison",
+  "prop-nagata-compactification-category",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "def-amb-etale-compact-support",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-compactifiable-compatible-tower"
  ],
  "proof_origin": {
   "by": "document",
@@ -171,10 +221,52 @@
    "results": "Hits: AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux_assoc, AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t', AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf_app_comp, AlgebraicGeometry.IsOpenImmersion.comp_lift_assoc, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; read printed signatures; none states this etale compactification fact.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|lowerShriek",
+   "results": "Hits: Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/OnePoint/Sphere.lean, Mathlib/Topology/Compactification/OnePoint/Sphere.lean; the printed types are topological compactifications, underived sheaf pushforwards, or scheme etale composition, not derived compact-support comparison/coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition and coherent compactification independence of etale derived direct image with proper support",
+   "results": "Hits: HasCompactSupport.comp_isClosedEmbedding, HasCompactMulSupport.comp_isClosedEmbedding, Algebra.Etale.comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, CompactlySupportedContinuousMap.coe_comp_to_continuous_fun, RingHom.Etale.stableUnderComposition, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsProper.comp_iff; the printed types are topological compactifications, underived sheaf pushforwards, or scheme etale composition, not derived compact-support comparison/coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerShriek\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale direct image with compact support is independent of compactification and its composition isomorphisms are associative",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; the printed types are topological compactifications, underived sheaf pushforwards, or scheme etale composition, not derived compact-support comparison/coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactification|proper.*support",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules the compactly supported pushforward defined by extension by zero followed by proper derived pushforward has canonical comparison isomorphisms for different compactifications",
+   "results": "Hits: SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardCongr_inv_app_val_app, SheafOfModules.pushforwardCongr_hom_app_val_app, SheafOfModules.pushforwardNatIso_inv; the printed types are topological compactifications, underived sheaf pushforwards, or scheme etale composition, not derived compact-support comparison/coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -208,19 +300,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-amb-etale-compact-comparisons",
   "worker": "stage1",
-  "summary": "Retained the finite-ring bounded-below correction and repaired the proof with explicit alpha comparison equalization, whiskered five-square choice-independence and three-square associativity calculations. Reused the existing compatible-tower and proper/open interchange coherence nodes; removed both duplicate new nodes in the second reading.",
-  "blueprint": "First paragraph: refinement invertibility/coherence and canonical identification (step 1). Second paragraph: compatible geometric construction (step 2), displayed interchange and composition chain (step 3), omitted choice-independence diagram (step 4), associativity (step 5).",
+  "summary": "Revalidated and retained the earlier finite-ring D+ proof against the current blueprint and Stacks 0F7I/0F7J/0F7K. Reorganized its five long paragraphs into ten explicit steps; separated the normalized derived-direct-image calculation from the refinement and model composition arguments. Added the definition of proper for the finite-type hypothesis check, and retained the fully whiskered naturality and pasting identities. No new nodes or statement changes.",
+  "blueprint": "Current main-20261015 sec-six-functors-basics/sk-prop-sf-cbc proof: first paragraph realized by steps 1-4 (qcqs, normalized compositors, alpha and cofiltered descent); second paragraph by steps 5-8 (compatible model, explicit chain, five-square independence) and 9-10 (three-square associativity). Historical chapter/unit bindings are retained.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
     "why": "Generic A locally Noetherian scheme is quasi-separated (Stacks 01OY) statement supplies exactly the indicated step ingredient; the CBC unit has no replacement and its finite-ring route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-etale-shriek-compactification-independence",
-    "why": "Generic Compactification independence on the qcqs etale site statement supplies exactly the indicated step ingredient; the CBC unit has no replacement and its finite-ring route is unchanged."
    },
    {
     "node": "lem-weil-pbc-proper-open-comparison-iso",
@@ -233,10 +321,6 @@
    {
     "node": "lem-weil-pbc-compatible-compactification-triangle",
     "why": "Generic Compatible geometric compactifications of a composable pair statement supplies exactly the indicated step ingredient; the CBC unit has no replacement and its finite-ring route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-etale-open-proper-interchange",
-    "why": "Generic Open extension by zero and proper derived pushforward interchange statement supplies exactly the indicated step ingredient; the CBC unit has no replacement and its finite-ring route is unchanged."
    },
    {
     "node": "lem-weil-pbc-extension-by-zero-exact",
@@ -309,12 +393,12 @@
   "prop-nagata-compactification-category"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NI-69b70753a",
-  "group": "NI",
+  "reviewer": "NT-cc-Q49-12e1cf9c1",
+  "group": "Q49",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-69b70753a (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, blueprint route, Stacks 0F7B–D/I–K, and exact master target sources. Repaired one C1 omission: step 1 now cites derived-pushforward composition and step 3’s coherence calculation. No new nodes remain. Five-step mathematics passes for finite-ring D+ coefficients. review.md records source checks, edge cases, accepted tool uses, and inherited unbounded-caller and graph gaps; no target was weakened.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-12e1cf9c1 (reviewer sub-agent of L); spot-checked: I read the item, all ten steps and the statements of all 24 cited nodes. I checked them against the main-20261015 and 20261017 blueprints, the master blueprint, and Stacks more-etale 0F7B (l.2460), 0F7I (l.3081), 0F7J (l.3159, squares A–F) and 0F7K (l.3374). The statement is unchanged and not weakened: finite commutative Λ, ordinary étale Λ-module sheaves, D^+, with the specified α comparisons. There are no new nodes. Steps 1–10 check out. Step 1: Noetherian gives qcqs, the ambient scheme is Noetherian by 01T6, and j is quasi-compact. Step 2: on D^+ the normalized κ, taken with the identity resolution of p_*I, is the underived identification, so unit and associativity follow. Steps 3–4: A_{ut}=A_tA_u, and the Nagata common-refinement and equalizer arguments give independence and the cocycle. Steps 7–8: I recomputed all five-square pastings and the naturality substitution. Steps 9–10: A is Cartesian because U=V×_W Y, and the two routes are equal by naturality of γ_C. Two C3/C4 citation faults were repaired in fixes/dag/nodes/sec-smooth-purity/lem-amb-etale-compact-comparisons.json. (1) Step 6 built the composition map from lem-weil-pbc-etale-open-proper-interchange, whose statement gives an unnormalized isomorphism; only its proof identifies it with the γ whose pasting identities steps 7–10 prove. Step 6 now uses γ of lem-cbc-proper-open-interchange-coherence directly, as Stacks 0F7J uses the 0F7B map. (2) Steps 8 and 10, and the domain remark in step 4, cited lem-weil-pbc-etale-shriek-compactification-independence for cocycles. That node does not say its isomorphisms are the α-built comparisons, so these places now cite the step-4 comparisons C, which step 4 proves. proof_deps is now the exact union of the steps' uses, and both nodes are removed from split_report.tool_uses; the maintainer-owned top-level tool_uses still lists them and may be pruned. The corrected graph has no cycle. The remaining tool uses are generic lemmas whose stated hypotheses I checked. No SGA source is used, and there were no Lean, build or git operations.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons",

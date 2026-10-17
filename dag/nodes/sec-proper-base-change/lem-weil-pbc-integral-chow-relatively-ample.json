@@ -107,13 +107,29 @@
    }
   },
   {
-   "text": "Use [lem-weil-pbc-projective-space-standard-charts] with the finite nonempty coordinate set $\\{0,\\ldots,N\\}$. Its clauses (a),(b) provide the covering by the pulled-back opens $D_+(T_i)$ and free generators $T_i$ of the pullback of the Proj twist from $\\mathbf P^N_{\\mathbf Z}$, with $T_i=(T_i/T_j)T_j$ on overlaps. Over $\\operatorname{Spec}k$, clause (c) identifies these charts with $\\operatorname{Spec}k[T_l/T_i:l\\ne i]$. On their overlaps, sending the generator $e_i^{(1)}$ in [def-pc-projective-space-twist] to $T_i$ respects exactly the relation $e_i^{(1)}=(T_i/T_j)e_j^{(1)}$; the resulting local isomorphisms therefore glue. This identifies the line bundle used in the statement with the pullback of the Proj twist from $\\mathbf P^N_{\\mathbf Z}$. For $r:\\mathbf P^N_X\\to\\mathbf P^N_k$ the second projection, the projections $\\rho_X:\\mathbf P^N_X\\to\\mathbf P^N_{\\mathbf Z}$ and $\\rho_k:\\mathbf P^N_k\\to\\mathbf P^N_{\\mathbf Z}$ satisfy $\\rho_k\\circ r=\\rho_X$, by the fibre-product universal property. Thus pullback composition [def-pc-module-pullback] gives $r^*\\mathcal O_{\\mathbf P^N_k}(1)\\cong\\rho_X^*\\mathcal O_{\\mathbf P^N_{\\mathbf Z}}(1)=\\mathcal O_{\\mathbf P^N_X}(1)$ and, since $r\\circ a=j$, $\\mathcal L\\cong a^*\\mathcal O_{\\mathbf P^N_X}(1)$. The chart generators also prove invertibility. For every affine open $W=\\operatorname{Spec}A\\subset X$, the base change $a_W:\\pi^{-1}(W)\\to\\mathbf P^N_A$ of the closed immersion $a$ is a closed immersion by [lem-weil-pbc-proper-fp-permanence] (b). Its composite with the structural projection is the restriction of $\\pi$. The same equality of projections to $\\mathbf P^N_{\\mathbf Z}$ and pullback composition identify $a_W^*\\mathcal O_{\\mathbf P^N_A}(1)$ with $\\mathcal L|_{\\pi^{-1}(W)}$, using exactly the definition of the twist in [lem-weil-pbc-projective-ample-invertible]. That theorem now proves this restriction invertible and ample. Since $W$ is arbitrary this is the required relative ampleness. For the empty affine open the inverse image is empty, quasi-compactness holds, and the affine nonvanishing-cover condition is vacuous.",
+   "text": "Use [lem-weil-pbc-projective-space-standard-charts] with $S=\\operatorname{Spec}k$ and the finite nonempty coordinate set $\\{0,\\ldots,N\\}$ ($N+1\\ge1$, so $N=0$ is allowed). Clauses (a),(b) give the cover of $\\mathbf P^N_k$ by the opens $D_+(T_i)_k$ and the free generators $T_i$ of $\\rho_k^*\\mathcal O(1)$ over them with $T_j=u_{j/i}T_i$, where $\\mathcal O(1)$ is the glued twist of $\\mathbf P^N_{\\mathbf Z}$ and $\\rho_k:\\mathbf P^N_k\\to\\mathbf P^N_{\\mathbf Z}$ the projection; clause (c) identifies $D_+(T_i)_k$ with $\\operatorname{Spec}k[T_l/T_i:l\\ne i]$. Sending the basis $e_i^{(1)}$ of [def-pc-projective-space-twist] (with $A=k$) to $T_i$ respects exactly the transition rule $e_i^{(1)}=(T_i/T_j)e_j^{(1)}$, so these chart isomorphisms glue: the twist $\\mathcal O_{\\mathbf P^N_k}(1)$ of the statement is $\\rho_k^*\\mathcal O(1)$. By [lem-weil-pbc-projective-space-twist-glued-identification] there is an isomorphism $\\theta:\\mathcal O(1)\\to\\widetilde{S(1)}$ onto the Proj twisting sheaf [def-weil-pbc-proj-twisting-sheaf] of $\\mathbf P^N_{\\mathbf Z}$, the twist used in [lem-weil-pbc-projective-ample-invertible], with $\\theta(T^{\\mathrm{gl}}_l)=T_l$. Let $r:\\mathbf P^N_X\\to\\mathbf P^N_k$ be the second projection and $\\rho_X:\\mathbf P^N_X\\to\\mathbf P^N_{\\mathbf Z}$; the fibre-product universal property gives $\\rho_k\\circ r=\\rho_X$, and $r\\circ a=j$ for the closed immersion $a$ of step 5. Pullback composition [def-pc-module-pullback] and $\\theta$ give $\\mathcal L=j^*\\rho_k^*\\mathcal O(1)\\cong a^*r^*\\rho_k^*\\widetilde{S(1)}\\cong a^*\\rho_X^*\\widetilde{S(1)}$. Clause (b) with $g=j$ shows that $j^*T_i$ freely generates $\\mathcal L$ over $j^{-1}(D_+(T_i)_k)$, and these opens cover $Y$ by (a); so $\\mathcal L$ is invertible.",
    "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
     "def-pc-projective-space-twist",
-    "def-pc-module-pullback",
+    "lem-weil-pbc-projective-space-twist-glued-identification",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, Chow paragraph: '$\\mathcal L=i^*\\mathcal O_{\\mathbf P^n_k}(1)\\cong(i')^*\\mathcal O_{\\mathbf P^n_X}(1)$'"
+   }
+  },
+  {
+   "text": "Let $W\\subseteq X$ be an affine open, $W\\cong\\operatorname{Spec}A$, and $P_W=q^{-1}(W)$, the open subscheme $W\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^N_{\\mathbf Z}=\\mathbf P^N_A$ of $\\mathbf P^N_X$ [def-nagata-projective-space-base-change], with projections $q_A:P_W\\to W$ and $\\rho_A=\\rho_X|_{P_W}$. Since $q\\circ a=\\pi$, $a^{-1}(P_W)=\\pi^{-1}(W)$, and $a_W:\\pi^{-1}(W)\\to P_W$ is the base change of the closed immersion $a$ along the open immersion $P_W\\to\\mathbf P^N_X$, hence a closed immersion by [lem-weil-pbc-proper-fp-permanence] (b), with $q_A\\circ a_W=\\pi|_{\\pi^{-1}(W)}$. Apply [lem-weil-pbc-projective-ample-invertible] to $A$, $n=N$, $f=\\pi|_{\\pi^{-1}(W)}$ and $i=a_W$: the module $a_W^*\\rho_A^*\\widetilde{S(1)}$ is invertible and ample on $\\pi^{-1}(W)$. For the inclusion $\\iota_W:\\pi^{-1}(W)\\to Y$, $a\\circ\\iota_W$ is $a_W$ followed by the inclusion of $P_W$, along which $\\rho_X$ restricts to $\\rho_A$; pullback composition [def-pc-module-pullback] and step 6 give $\\mathcal L|_{\\pi^{-1}(W)}=\\iota_W^*\\mathcal L\\cong a_W^*\\rho_A^*\\widetilde{S(1)}$. By [lem-sc-ample-iso] the restriction $\\mathcal L|_{\\pi^{-1}(W)}$ is ample [def-weil-pbc-ample-invertible-module]. For $W=\\emptyset$ the inverse image is empty, which is quasi-compact, and the pointwise condition is vacuous. Since $W$ is arbitrary, $\\mathcal L$ is $\\pi$-relatively ample.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
     "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-projective-ample-invertible",
-    "lem-weil-pbc-projective-space-standard-charts"
+    "def-pc-module-pullback",
+    "lem-sc-ample-iso",
+    "def-weil-pbc-ample-invertible-module"
    ],
    "elementary": false,
    "source": {
@@ -129,14 +145,18 @@
   "def-pc-module-pullback",
   "def-pc-projective-space-twist",
   "def-weil-finite-type-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-proj-twisting-sheaf",
   "def-weil-proper-morphism",
   "lem-chow-tuple-immersion",
+  "lem-sc-ample-iso",
   "lem-sc-integral-scheme-stalks-in-function-field",
   "lem-weil-pbc-chow-noetherian",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-projective-ample-invertible",
   "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-projective-space-twist-glued-identification",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-proper-immersion-closed",
   "lem-weil-pbc-proper-over-separated",
@@ -189,7 +209,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-top-coherent-cohomology-finite",
   "by": "worker",
@@ -211,11 +231,11 @@
  },
  "merged_into": null,
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-integral-chow-relatively-ample",
   "worker": "stage1",
-  "summary": "Reused the general Chow lemma; took the schematic closure of an affine dense integral open to secure integrality, and used the proper graph immersion into projective space over X to prove ampleness on every affine inverse image. No properness of X or new nodes.",
-  "blueprint": "Realizes the Chow modification and twisting input to Tag 0A3M in the finite-dimensionality input beneath lemma-weil-pbc-smooth-curve-artin-schreier; retains the unit curve-calculation route.",
+  "summary": "Audited the existing six-step Chow modification proof. It obtains an integral scheme by taking the scheme-theoretic closure of an affine dense open, then uses the proper graph immersion into projective space over X and standard Proj charts to establish the pulled-back twist and relative ampleness; all cited facts are existing DAG nodes and no new node is needed.",
+  "blueprint": "Realizes the Chow modification and relative-twisting input to the Artin–Schreier finite-dimensionality route beneath lemma-weil-pbc-smooth-curve-artin-schreier, following the ancestor blueprint place recorded above.",
   "tool_uses": [
    {
     "node": "lem-chow-tuple-immersion",
@@ -236,6 +256,10 @@
    {
     "node": "lem-weil-pbc-projective-space-standard-charts",
     "why": "Generic chart and twist interface: clauses (a),(b),(c) identify the glued twist over k with the pullback of the Proj twist over Z. The curve-calculation unit has no chart theorem; this does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-twist-glued-identification",
+    "why": "Generic comparison of the glued twist of P^N_Z with the Proj twisting sheaf S(1)~, used exactly as stated in step 6 to match the twist of the statement with the twist of lem-weil-pbc-projective-ample-invertible; the curve-calculation unit has no such comparison and this does not replace its route."
    }
   ]
  },
@@ -244,15 +268,16 @@
   "lemma-nagata-projective-space-base-change-proper",
   "lemma-nagata-scheme-image-ideal-qc",
   "lemma-nagata-scheme-image-restrict-open",
-  "lem-weil-pbc-projective-space-standard-charts"
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-projective-space-twist-glued-identification"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NY-3e713d9a7",
-  "group": "NY",
+  "reviewer": "NT-cc-Q28-5719574d0",
+  "group": "Q28",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-3e713d9a7 (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements and sources, route, duplicate candidates, and edge cases. Repaired C1 in step 6 by citing the existing projective-space chart theorem and explicitly identifying the glued twist with the Proj pullback. Statement unchanged; nonproper X remains covered. Corrected JSON and review.md written. Dependency checks found no cycles, missing references, or merged citations.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-5719574d0 (reviewer sub-agent of L); spot-checked: I read the item, its six steps, every cited statement, the unit sk-thm-p1, the chapter, and the Stacks sources: Coherent 0200 and 0201 (1)-(3), Étale cohomology 0A3M (Chow paragraph), Morphisms 02NR and Properties 01PU. The statement matches the sources with no properness of X over k and nothing weakened; I tested X = Spec k (N = 0) and W empty. There is no duplicate: lem-pc-chow-relative-ample(-twist) assumes Z proper over S, which does not hold here. Steps 1-5 are correct: Chow lemma; scheme-theoretic closure of an affine dense V, where restricting to V gives the image of id_V = V; reducedness through the integral stalks, including the case B∩V empty; surjective because the image is closed and contains a dense open; graph immersion that is proper over the separated projection and hence a closed immersion. The delivery itself only marked the unchanged split as split, but it deleted split_report.tool_uses (five declarations); I restored them. Faults (C1/C4) in step 6, the step flagged at 2097 characters: it moves from the glued twist (def-pc-projective-space-twist, which standard-charts uses) to the S(1)~ twist of lem-weil-pbc-projective-ample-invertible without citing an identification. That identification exists as lem-weil-pbc-projective-space-twist-glued-identification. The step also moves ampleness across an isomorphism without citing lem-sc-ample-iso. Step 6 hid an inline comparison followed by a separate argument, so I split it: new step 6 (1732 characters) identifies L with a^*rho_X^*S(1)~ and proves invertibility; new step 7 (1360 characters) does the affine base change a_W, applies the ampleness lemma, and transports ampleness through lem-sc-ample-iso. I updated proof_deps, checked there is no cycle, and added the glued-identification node as a tool use. The corrected JSON is in fixes/dag/nodes/sec-proper-base-change/. No nodes are added or dropped.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-15",

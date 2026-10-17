@@ -12,9 +12,124 @@
   "def-coef-infinity-fibrations",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a face $J$ of $H$, every inner-horn lifting problem in $E_J$ lies over a simplex of $\\Delta^J$; the horn filler in $E$ supplied by $r$ remains over that simplex. Thus $E_J$ is a quasicategory. The inverse image $T_J$ is the full simplicial subset of $T$ on vertices labelled by $J$: a simplex of $\\Delta^3$ is determined by its ordered vertices. An inner filler in $T$ with those vertices therefore lies in $T_J$, so $T_J$ is also a quasicategory. The same vertex argument shows that, whenever $J\\subseteq F\\subseteq H$, $E_J$ is full in $E_F$. In particular right mapping spaces between vertices in $E_J$ are unchanged in $E_F$; those between vertices in $T_J$ are unchanged in $T$. This follows directly from the pinched mapping-simplex definition, whose vertices are its two endpoints. Set $A_i=\\mathfrak C[E_i]$ and $M_{ij}(u,v)=\\mathfrak C[E_{ij}](u,v)$, with their composition actions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent mapping-space repair of the face comparison motivating HA Lemma 3.1.2.4, pp.330-332; not the printed K2 argument."
+   }
+  },
+  {
+   "text": "Fix $u\\in E_1$ and choose an $r$-cocartesian edge $e:u\\to u_2$ over $1\\to2$. It remains cocartesian for $E_{123}\\to\\Delta^{123}$: every relevant outer-horn lifting problem there is one for $r$, and its filler stays over the given simplex of $123$. This map is an inner fibration between quasicategories by Step 1. Apply [lem-coef-infinity-cocartesian-mapping-criterion]. For $v\\in E_2$ and $z\\in E_3$, the two bottom mapping spaces in its square are points. Hence precomposition gives equivalences $\\operatorname{Map}_{E_2}(u_2,v)\\simeq\\operatorname{Map}_{E_{12}}(u,v)$ and $\\operatorname{Map}_{E_{23}}(u_2,z)\\simeq\\operatorname{Map}_{E_{13}}(u,z)$. Step 1 justifies replacing the ambient face $123$ by these smaller faces. The natural mapping comparisons of [lem-coef-pinched-rigidification-resolution] and [lem-coef-coherent-nerve-comparison], including compatibility with composition, give objectwise weak equivalences of the enriched modules $A_2(u_2,-)\\xrightarrow{e^*}M_{12}(u,-)$ and of spaces $M_{23}(u_2,z)\\xrightarrow{e^*}M_{13}(u,z)$. No edge of $T$ is asserted cocartesian.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent mapping-space repair of the face comparison motivating HA Lemma 3.1.2.4, pp.330-332; not the printed K2 argument."
+   }
+  },
+  {
+   "text": "Consider the derived composition augmentation in face $123$,\n$$k_{u,z}:M_{12}(u,-)\\otimes_{A_2}^{\\mathbb L}M_{23}(-,z)\\longrightarrow M_{13}(u,z).$$\nThe target is identified with the triangle-face mapping module through the natural full-face weak equivalence of [lem-coef-pinched-rigidification-resolution]; the augmentation is a map of derived modules, with no strict retraction asserted. By [lem-coef-derived-space-module-coyoneda], replacing its first module using Step 2 is an equivalence, and the action augmentation $A_2(u_2,-)\\otimes_{A_2}^{\\mathbb L}M_{23}(-,z)\\to M_{23}(u_2,z)$ is an equivalence. The square with this augmentation on top, $k_{u,z}$ on the bottom, and precomposition by $e$ on both vertical sides commutes: both composites compose the same string $u\\xrightarrow e u_2\\to v\\to z$, using the specified enriched composition and bar augmentation. The right side is an equivalence by Step 2. Two-out-of-three gives that $k_{u,z}$ is an equivalence for every $u,z$. The maps $k_{u,z}$ themselves form the enriched composition pairing and hence are natural in $u,z$. The chosen lifts were used only to test them objectwise; no functorial choice of lifts is needed.",
+   "uses": [
+    "lem-coef-derived-space-module-coyoneda",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent mapping-space repair of the face comparison motivating HA Lemma 3.1.2.4, pp.330-332; not the printed K2 argument."
+   }
+  },
+  {
+   "text": "For $x\\in E_0$, $z\\in E_3$, use the spaces $P,R,D$ of [lem-coef-directed-three-face-mapping-pushout] with $K=E$. Its hypotheses hold by Step 1. Its map $R(x,z)\\to P(x,z)$ is the derived tensor of $M_{01}(x,-)$ with the composition pairing $k_{-,z}$ of Step 3. Fubini and invariance in [lem-coef-derived-space-module-coyoneda] therefore make $R(x,z)\\to P(x,z)$ an equivalence. The other map $R\\to D$ is completely specified: first compose $M_{01}\\otimes_{A_1}^{\\mathbb L}M_{12}\\to M_{02}$ in face $012$, then compose $M_{02}\\otimes_{A_2}^{\\mathbb L}M_{23}\\to M_{03}$ in face $023$. This is exactly the gluing span, not an assumption that a triangle with vertices $013$ was already in $E$.",
+   "uses": [
+    "lem-coef-directed-three-face-mapping-pushout",
+    "lem-coef-derived-space-module-coyoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent mapping-space repair of the face comparison motivating HA Lemma 3.1.2.4, pp.330-332; not the printed K2 argument."
+   }
+  },
+  {
+   "text": "The gluing formula now reads $\\mathfrak C[E](x,z)\\simeq P(x,z)\\amalg^h_{R(x,z)}D(x,z)$ with $R\\to P$ an equivalence. Thus $D(x,z)\\to\\mathfrak C[E](x,z)$ is a weak equivalence: mapping this pushout to any space $V$ gives $\\operatorname{Map}(P,V)\\times^h_{\\operatorname{Map}(R,V)}\\operatorname{Map}(D,V)\\simeq\\operatorname{Map}(D,V)$. The identification of the map from $D$ with the actual inclusion is part of [lem-coef-directed-three-face-mapping-pushout]. The same node gives the inclusion comparisons for every pair $i\\leq j$ other than $(0,3)$. Consequently, for every allowed face $J$ and vertices $a,b$ of $E_J$, the actual map $\\mathfrak C[E_J](a,b)\\to\\mathfrak C[E](a,b)$ is a weak equivalence. For $(0,3)$ this uses the face $03$ calculation and the full-face mapping comparison of Step 1, via the natural pinched comparisons. For $i>j$ both mapping sets are empty, since their maps to $\\mathfrak C[\\Delta^3]$ would otherwise give a backward arrow. These cases exhaust the labels.",
+   "uses": [
+    "lem-coef-directed-three-face-mapping-pushout",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent mapping-space repair of the face comparison motivating HA Lemma 3.1.2.4, pp.330-332; not the printed K2 argument."
+   }
+  },
+  {
+   "text": "By [lem-coef-rigidification-equivalence-detection], $\\mathfrak C[w]:\\mathfrak C[E]\\to\\mathfrak C[T]$ is a Dwyer--Kan equivalence. In particular it is a weak equivalence on each mapping simplicial set and essentially surjective on component categories. For vertices $a,b$ of $E_J$, Step 5 makes the composite $\\mathfrak C[E_J](a,b)\\to\\mathfrak C[T](wa,wb)$ a weak equivalence. The map $\\mathfrak C[T_J](wa,wb)\\to\\mathfrak C[T](wa,wb)$ is also a weak equivalence: right mapping spaces are identical by Step 1, and the two natural weak equivalences in [lem-coef-pinched-rigidification-resolution] identify their $Q$-realizations with the displayed rigidified mapping sets. The commuting square for the actual inclusions and $w_J$, followed by two-out-of-three, proves that $\\mathfrak C[w_J]$ is a weak equivalence on all mapping sets.",
+   "uses": [
+    "lem-coef-rigidification-equivalence-detection",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent mapping-space repair of the face comparison motivating HA Lemma 3.1.2.4, pp.330-332; not the printed K2 argument."
+   }
+  },
+  {
+   "text": "Let $y$ be a vertex of $T_J$ with label $j$. Essential surjectivity of $\\mathfrak C[w]$ on component categories supplies a vertex $x$ of $E$ and an isomorphism from $wx$ to $y$ in $\\pi_0\\mathfrak C[T]$. The functor $\\pi_0\\mathfrak C[T]\\to\\pi_0\\mathfrak C[\\Delta^3]=[3]$ sends this to an isomorphism in the ordered category $[3]$, so $x$ has label $j$ and belongs to $E_J$. By Step 6's full mapping comparison for $T_J\\subseteq T$, both the isomorphism and its inverse lift to $\\pi_0\\mathfrak C[T_J]$. Their inverse equations hold there by injectivity on the same endomorphism sets. Hence $y$ is isomorphic to $w_Jx$ in $\\pi_0\\mathfrak C[T_J]$. This also covers a singleton $J$; if $E_J$ is empty the argument forces $T_J$ empty. Thus $\\mathfrak C[w_J]$ is essentially surjective.",
+   "uses": [
+    "lem-coef-rigidification-equivalence-detection",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent mapping-space repair of the face comparison motivating HA Lemma 3.1.2.4, pp.330-332; not the printed K2 argument."
+   }
+  },
+  {
+   "text": "The Dwyer--Kan criterion consists of weak equivalences on all mapping sets and essential surjectivity on the component category. Steps 6 and 7 give exactly these two properties for $\\mathfrak C[w_J]$. Apply [lem-coef-rigidification-equivalence-detection] to $w_J:E_J\\to T_J$ to conclude that it is a categorical equivalence. Every nonempty $J$ in the item is a face of $H$, so this proves all requested comparisons.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-rigidification-equivalence-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent mapping-space repair of the face comparison motivating HA Lemma 3.1.2.4, pp.330-332; not the printed K2 argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-derived-space-module-coyoneda",
+  "lem-coef-directed-three-face-mapping-pushout",
+  "lem-coef-rigidification-equivalence-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+  "place": "Mapping-bimodule proof of the three-horn face comparison motivating Lemma 3.1.2.4, pp.330-332; gluing and derived co-Yoneda isolated as smaller supporting nodes, not claimed to be its printed proof. Online context read; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,7 +189,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-single-horn-relative-completion",
@@ -105,5 +220,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-three-horn-face-conservation",
+  "worker": "stage1",
+  "summary": "Repaired returned D2/D1 and B9. Removed the rejected arbitrary-dimensional generalization from the delivery, retaining its historical files outside dag/. Wrote the eight-step three-horn mapping-space argument: face quasicategories, restricted cocartesian mapping criterion, co-Yoneda contraction, directed gluing, local mapping equivalences, and essential surjectivity on each face. Two genuinely smaller statement-only nodes record the gluing formula without cocartesian hypotheses and the derived module calculus; both have actual logged searches and full blueprint ancestry including single-horn-relative-completion. Item statement and authoritative metadata unchanged.",
+  "blueprint": "Historical enrichment/operadic-extension branch of prop-coef-integral-exceptional-adjoint, paragraph 2, coherent middle adjunction. The inherited descendants invoke HA 3.1.2.4; this split repairs its required face-localization comparison through faces 123, 012, 023. It makes no change to the ancestor route, unit binding or target statements."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-89ce24465",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-89ce24465 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps, both new nodes and every cited statement in full (mapping criterion, pinched rigidification, coherent nerve, equivalence detection, fibrations and enhanced-diagram definitions, Joyal model structure, enriched coend, projective calculus), plus the parent's use. Item statement unchanged; it matches the parent's application exactly. Step 2: cocartesianness carries over to E_123 over Delta^123; the bottom mapping spaces in that poset are contractible; precomposition by e is a strict module map because e is a vertex of C[E_12](u,u_2). Step 3: the square commutes by associativity, then co-Yoneda and two-out-of-three. Steps 4-5: R->P is M01 tensored with k, then a pushout along an equivalence. I re-derived the gluing formula P amalg^h_R D myself by gluing faces 012 and 123 along 12, then 023 along 02 union 23, and checked the other label pairs collapse the same way. Small cases: K=H gives a point (C[Lambda^3_2](0,3) is contractible); the M12-empty diagnostic gives S^0, so gluing alone does not imply the item. Steps 6-8 (fullness of T_J, labels of isomorphisms in [3], Dwyer-Kan detection) are correct. Both new nodes are statement-only, self-contained, true, strictly smaller and not clauses of the item. No duplicates in the DAG; nearest candidates checked: simplicial-derived-pushout-mapping, bead-normal-form, enriched-coend-homotopy-invariance, free-bar-cell-filtration, ordinary-two-sided-bar-comparison, the coherent/space Yoneda nodes, the dg bar nodes. No cycle (390-node closure); all proof tools in sk-prop-sf-biduality-general; no tool_uses needed or accepted. HA 3.1.2.4 is not in literature/: agent provenance and WANTED are stated honestly; no SGA. No target, coefficient category or base-change morphism touched. Not checked: searches.jsonl is absent from my snapshot, so the recorded searches were not compared with the log. No fixes."
  }
 }

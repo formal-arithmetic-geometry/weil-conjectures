@@ -26,26 +26,46 @@
  ],
  "proof": [
   {
-   "text": "Write h for the inverse of g. The diagonal of g is an isomorphism with inverse pr_1: g pr_1=g pr_2 implies pr_1=pr_2 after composing with h, so (pr_1,pr_2)=Delta_g pr_1. The same holds for h. An isomorphism and its diagonal induce isomorphisms on local rings, whose tensor functors identify with the identity under those ring isomorphisms: for a local-ring isomorphism alpha:R→S the maps N tensor_R S→N and N→N tensor_R S send x tensor s to alpha^{-1}(s)x and x to x tensor 1, respectively. They are inverse by the tensor relations and natural in N, hence preserve injections. The flat-module criterion [def-weil-pbc-flat-ring-map] and stalkwise definition [def-weil-flat-morphism] show that the isomorphisms are flat. Thus g and its inverse h are weakly etale [def-weil-weakly-etale-morphism]. By weakly etale composition, postcomposition defines functors Phi_g and Phi_h; their composites are identities on objects and arrows, up to the chosen small-skeleton identifications. The underlying morphisms in a covering family do not change, so the fpqc and weakly etale covering conditions are unchanged. Write U_Y=(U,g u). In the comma category I_U of [def-weil-proetale-inverse-image], take D_U=(U_Y,theta_U), where theta_U=(u,id_U):U→X×_Y U_Y. For any (V,phi), the map a=pr_2 phi:U_Y→V is the unique arrow D_U→(V,phi): indeed u_g(a) theta_U=phi by the two fibre-product projections, and that equation forces a=pr_2 phi. Therefore D_U is initial in I_U and terminal in I_U^op. Explicitly the colimit is F(U_Y): its cocone from F(V) is restriction along a, its inverse is the coprojection indexed by D_U, and the cocone equations and the unique arrows from D_U show both composites are identities. For b:U'→U, the formula a=pr_2 phi gives restriction along b_Y:U'_Y→U_Y; for a sheaf morphism it gives its component at U_Y. Hence the identification is natural in U and F. The presheaf U↦F(U_Y) is already a sheaf: a covering and its overlap objects become exactly the corresponding covering and overlaps over Y, so its matching-family equalizer is the sheaf equalizer for F. Its sheafification is itself by [def-weil-pbc-sheafification], proving the section formula.",
+   "text": "Write $h$ for the inverse scheme isomorphism. By [lem-weil-iso-weakly-etale], both $g$ and $h$ are weakly etale. Weakly etale composition makes $\\Phi_g(U,u)=(U,gu)$ and $\\Phi_h(V,v)=(V,hv)$ functors on the recorded small sites. The equations $hg=1_X$ and $gh=1_Y$ identify their composites with the identity on objects and arrows, with the canonical representative isomorphisms if small skeletons are used. A covering is specified by its underlying scheme arrows and their fpqc covering condition, which postcomposition does not change. Thus both functors preserve and reflect coverings.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-proetale-inverse-image",
+    "lem-weil-iso-weakly-etale",
     "lem-weil-pbc-weakly-etale-composition-base-change",
-    "def-weil-flat-morphism",
-    "def-weil-weakly-etale-morphism",
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-flat-ring-map"
+    "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5, proetale-section-morphism; Sites Tag 00VC, sites-section-functoriality-PSh, equation sites-equation-colim-category (053L), and Lemma 00WX, sites-lemma-adjoint-sheaves; More on Morphisms Tags 094P, 094T and 094U; Algebra Tag 00HB, algebra-definition-flat"
+    "place": "Tag 09A5, proetale-section-morphism; More on Morphisms Tags 094P and 094T"
    }
   },
   {
-   "text": "Define T(F)(U)=F(U_Y) and S(G)(V)=G(V_X), where V_X=(V,h v) and h is the inverse scheme isomorphism. Step 1 shows these are sheaves and g^{-1}≅T. For each U and V, (U_Y)_X=U and (V_X)_Y=V; the identities on their sections are natural unit and counit isomorphisms ST≅id and TS≅id (with the canonical representative isomorphisms on small skeletons). Moreover X×_Y V≅V_X over X, with forward map pr_2 and inverse (h v,id_V); restriction along this isomorphism identifies the recorded g_*G(V)=G(X×_Y V) with S(G)(V), naturally in V and G. The adjunction in [def-weil-proetale-inverse-image], equivalently [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] for sets and abelian groups, is thus the adjunction of these mutually inverse functors. For abelian-group sheaves, T and S take addition, zero and negation at U or V to the very same operations at U_Y or V_X. For ring sheaves they also take multiplication and unit to those operations there. The section isomorphism from the comma colimit respects each operation, by its construction from restriction homomorphisms; hence these identifications are with the abelian and ring inverse images defined in the cited definition, and the unit and counit are homomorphisms. This establishes the equivalences for sets, abelian groups and rings. Apply [lem-galois-equivalence-preserves-limits] to obtain preservation of all existing small limits and colimits. In the abelian-group category, kernels and cokernels are the corresponding finite limits and colimits, so the additive equivalence is exact; for sets and rings the equivalence preserves finite limits and finite colimits as well.",
+   "text": "Fix $(U,u)$ and write $U_Y=(U,gu)$. In the indexing category $\\mathcal I_U$ of [def-weil-proetale-inverse-image], the object $D_U=(U_Y,\\theta_U)$ with $\\theta_U=(u,1_U):U\\to X\\times_YU_Y$ is initial. Indeed the unique arrow $D_U\\to(V,\\phi)$ is $a=\\operatorname{pr}_2\\phi:U_Y\\to V$: the equation $u_g(a)\\theta_U=\\phi$ follows from the two fibre-product projections, and that equation forces $a=\\operatorname{pr}_2\\phi$. Consequently $D_U$ is terminal in $\\mathcal I_U^{op}$. The colimit cocone with vertex $\\mathcal F(U_Y)$ has maps restriction along these $a$. Its inverse is the colimit coprojection at $D_U$; the cocone equations make both composites identities. For $b:U^\\prime\\to U$, the same formula gives restriction along $b_Y$; for a sheaf morphism it gives its component at $U_Y$. This proves naturality in both variables, including for abelian groups and rings because all maps used are their restriction homomorphisms. This is the elementary terminal-object colimit argument (Mathlib also states it as colimitOfDiagramTerminal).",
    "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VC, sites-section-functoriality-PSh, equation 053L; Tag 00VE, sites-lemma-adjoints-u"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-equivalence-is-morphism-of-sites] to the equivalence in Step 1. Its full-faithfulness, quasi-inverse and covering-iff hypotheses were verified there; the sites are small in the universe fixed by [def-weil-pbc-proetale-site]. Hence $T\\mathcal F(U)=\\mathcal F(U_Y)$ and $S\\mathcal G(V)=\\mathcal G(V_X)$ are inverse equivalences on set and abelian sheaves, where $V_X=(V,hv)$. For ring sheaves, the same functors use the operations already present at $U_Y$ or $V_X$; the unit and counit identities respect every operation. Thus they also give inverse equivalences on ring sheaves. Step 2 identifies the inverse-image presheaf with $T\\mathcal F$, already a sheaf, so its sheafification is itself by its universal property. This proves the section formula for the specified $g^{-1}$, rather than merely constructing an abstract equivalence.",
+   "uses": [
+    "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WW, 00WX and 03A0; explicit specialization to the covering-compatible equivalence"
+   }
+  },
+  {
+   "text": "The isomorphism $X\\times_YV\\cong V_X$ over $X$ has forward map $\\operatorname{pr}_2$ and inverse $(hv,1_V)$. Restriction along it identifies the specified $g_*\\mathcal G(V)=\\mathcal G(X\\times_YV)$ with $S\\mathcal G(V)$, naturally in $V,\\mathcal G$. Combined with $g^{-1}\\cong T$ from Step 3, this proves the asserted quasi-inverse is $g_*$. The equivalences preserve every existing small limit and colimit by [lem-galois-equivalence-preserves-limits]. On abelian sheaves they are additive (addition of maps is unchanged sectionwise); kernels and cokernels are the finite limit and colimit constructions, so the equivalence is exact.",
+   "uses": [
     "def-weil-proetale-inverse-image",
     "lem-galois-equivalence-preserves-limits"
    ],
@@ -56,35 +76,60 @@
    }
   },
   {
-   "text": "Let P_Y and P_X be the constant ring presheaves with value A, and let T,S denote the inverse transports of Step 2, also on presheaves. Then T(P_Y)=P_X. The sheaf T(A_Y), with its map P_X→T(A_Y), is a sheafification of P_X: a presheaf map P_X→H to an X-sheaf corresponds by S to P_Y→S(H), extends uniquely to A_Y→S(H) by [def-weil-pbc-sheafification], and applying T gives its unique extension T(A_Y)→H. Thus uniqueness of sheafification gives an isomorphism beta_A:T(A_Y)→A_X taking the image of every constant a to the image of the same a. This proves isomorphy without assuming that all sections of a constant sheaf are constant. Under Step 1 the candidate beta_A∘(g^{-1}A_Y≅T(A_Y)) has adjoint A_Y→g_*A_X sending each a∈P_Y(V) to its constant section over X×_Y V: the adjunction unit is the comma-colimit coprojection at (V,id), and the colimit identification is restriction along pr_2:(X×_Y V)_Y→V. Uniqueness of the extension from P_Y says this adjoint is exactly rho^g_A in [def-weil-proetale-inverse-image]. Consequently the candidate is c^g_A, hence c^g_A is an isomorphism. For a ring homomorphism phi:A→B, identify the source of both proposed composites with T(A_Y), itself the sheafification of P_X. On the constant generator a, both composites give the constant section phi(a); uniqueness of extension from P_X makes the two sheaf maps equal. This is the required naturality equation.",
+   "text": "Let $P_Y,P_X$ be the constant ring presheaves with value $A$. To apply [lem-pc-dense-subsite-sheafification-compatibility] to $\\Phi_g$, note that it is fully faithful, every target object is isomorphic to one in its image and hence covered by one, and its topology is induced because it preserves and reflects coverings. Restriction is the ring-sheaf equivalence of Step 3, and ring sheafification exists as in [def-weil-pbc-sheafification]. Since $T(P_Y)=P_X$, the compatibility theorem identifies $T(A_Y)$ with $A_X$. Choose the unique isomorphism $\\beta_A:T(A_Y)\\to A_X$ whose composite with $P_X\\to T(A_Y)$ is the constant-presheaf sheafification unit; uniqueness of sheafification gives this normalization. In particular it sends the image of each constant $a$ to the image of the same $a$.",
    "uses": [
+    "lem-pc-dense-subsite-sheafification-compatibility",
     "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification",
-    "def-weil-proetale-inverse-image"
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J, sites-example-constant-sheaf; Proposition 00WH, sites-proposition-sheafification-adjoint; Lemma 00VE, sites-lemma-adjoints-u, and Lemma 00WX, sites-lemma-adjoint-sheaves; Pro-etale Tag 09A5, proetale-section-morphism"
+    "place": "Tags 00WH and 0H7J; compatibility is the cited Mathlib leaf at DenseSubsite/Basic.lean:805"
    }
   },
   {
-   "text": "Use beta_A:T(A_Y)≅A_X from Step 3. For an A_Y-module sheaf F, define the action on T(F)(U)=F(U_Y) by b⋅x=beta_{A,U}^{-1}(b)x for b∈A_X(U). The identities (b+b')x=bx+b'x, b(x+x')=bx+bx', (bb')x=b(b'x) and 1x=x follow from the A_Y(U_Y)-module identities and the fact that beta_A is a ring homomorphism. Restrictions are semilinear because beta_A commutes with restrictions; a transported module morphism is linear by the same formula. This is the transported inverse image of [def-weil-proetale-inverse-image] after its scalar extension: at U the defining tensor presheaf maps to T(F)(U) by x⊗b↦beta_{A,U}^{-1}(b)x, with inverse x↦x⊗1; the tensor relations make these inverse and compatible with restrictions. By [def-pur-sheaf-tensor-product] and sheafification's universal property this identifies the tensor-defined module pullback with T(F). On an A_X-module sheaf G, define S(G)(V)=G(V_X) with the A_Y(V)-action obtained by applying S to beta_A:A_Y≅S(A_X). The isomorphism X×_Y V≅V_X of Step 2 identifies this action with the action through rho^g_{A,V} defining the actual module direct image: both ring maps agree on constant sections, hence agree by sheafification uniqueness as maps A_Y→g_*A_X. The underlying identities ST(F)≅F and TS(G)≅G respect actions, since their scalar maps are beta_A and its inverse. They therefore give inverse module equivalences with the specified g_*. These functors preserve addition on morphisms, and [lem-galois-equivalence-preserves-limits] gives all limits and colimits, in particular kernels and cokernels in the abelian categories of [def-weil-sheaf-of-modules-category]; hence the module inverse image is exact.",
+   "text": "Under Step 2, the candidate $\\beta_A\\circ(g^{-1}A_Y\\cong T(A_Y))$ has adjoint $A_Y\\to g_*A_X$ which sends every constant $a$ over $V$ to its constant section over $X\\times_YV$. Indeed the adjunction unit, the composite of the $u_p\\dashv u^p$ and sheafification adjunctions in [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction], is the coprojection indexed by $(V,1)$ followed by the sheafification unit, and Step 2 sends it to restriction along $\\operatorname{pr}_2:(X\\times_YV)_Y\\to V$. By sheafification uniqueness this adjoint equals the map $\\rho^g_A$ defining $c^g_A$ in [def-weil-proetale-inverse-image]. Therefore $c^g_A$ is the displayed isomorphism. If $\\varphi:A\\to B$, the two composites $\\varphi_Xc^g_A$ and $c^g_Bg^{-1}(\\varphi_Y)$, viewed on $T(A_Y)$, both send each constant $a$ to the constant $\\varphi(a)$. The sheafification universal property makes them equal. This proves exactly the prescribed naturality equation.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE, 00WX, 00WH and 0H7J; the constant-section normalization is checked explicitly"
+   }
+  },
+  {
+   "text": "For an $A_Y$-module sheaf $\\mathcal F$, sectionwise precomposition $T$ gives a $T(A_Y)$-module sheaf: the action and every module identity at $U$ are those at $U_Y$, and restrictions are the original semilinear maps. Apply [lem-weil-sheaf-scalar-extension-ring-iso] with $R=T(A_Y)$, $S=A_X$, $c=\\beta_A$ and $M=T\\mathcal F$. Its normalized tensor isomorphism identifies the actual scalar-extended module pullback of [def-weil-proetale-inverse-image] with $T\\mathcal F$ carrying action $b\\cdot x=\\beta_{A,U}^{-1}(b)x$. Thus the tensor comparison previously proved inline is now the statement of a cited general lemma.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product",
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ and 03EK; general ring-isomorphism tensor comparison specialized to beta_A"
+   }
+  },
+  {
+   "text": "For an $A_X$-module sheaf $\\mathcal G$, give $S\\mathcal G$ its $A_Y$-action through $S(\\beta_A):A_Y\\cong S(A_X)$ and $ST\\cong1$. Step 4 identifies $S\\mathcal G$ with $g_*\\mathcal G$. The scalar map under this identification equals $\\rho^g_A$: both sheaf ring maps $A_Y\\to g_*A_X$ agree on the constant presheaf by Step 6, so agree by sheafification uniqueness. Thus this is the actual module direct image. The sectionwise unit and counit $ST\\cong1$ and $TS\\cong1$ are linear: their scalar identifications are $\\beta_A$ and its inverse, whose composites are identities. Hence these are quasi-inverse module functors. They preserve addition on morphisms; by [lem-galois-equivalence-preserves-limits] they preserve limits and colimits. The recorded module category is abelian, so preservation of kernels and cokernels proves exactness.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
     "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category",
     "lem-galois-equivalence-preserves-limits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CT and 03CW, sites-modules-definition-presheaf-modules and sites-modules-definition-sheaf-modules; Tags 03D1 and 03D2, sites-modules-lemma-pushforward-module and sites-modules-lemma-pullback-module; Tag 03DA, sites-modules-lemma-abelian; tensor product definition [def-pur-sheaf-tensor-product]; Tag 03EK, sites-modules-section-tensor-product"
+    "place": "Tags 03D1, 03D2 and 03DA; Categories Tag 0038"
    }
   },
   {
-   "text": "Apply preservation of limits from Steps 2 and 4 to the inverse-system diagram (F_n) in the sheaf category. For modules, abelian groups and rings, [def-pur-sheaf-inverse-limit] supplies the sectionwise compatible-family limit and its coordinate projections. For sets the same compatible-family presheaf is a sheaf: glue a matching family coordinate by coordinate using each F_n; the transition equations hold for the glued sections because they hold after restriction to the covering and F_n is separated. A cone maps uniquely to this sheaf by the tuple of its coordinate maps, so it is the limit also in sets. The image of the original limit cone is a limit cone by [lem-galois-equivalence-preserves-limits]. Its comparison with the chosen limit of (g^{-1}F_n)_n is therefore invertible: the two maps furnished by the limit universal properties have identity composites since their composites with every projection are identities. By construction its composites with the projections are the inverse images of the original coordinate projections. Thus it is exactly the canonical comparison map specified in the statement.",
+   "text": "Apply limit preservation to the tower $(\\mathcal F_n)$. For modules, abelian groups and rings, [def-pur-sheaf-inverse-limit] supplies its limit and coordinate projections. For sets the compatible-tuple presheaf is a sheaf: glue coordinatewise using the sheaf axioms of $\\mathcal F_n$; transition equations hold because they hold locally and $\\mathcal F_n$ is separated. The tuple of any cone maps is its unique map to this sheaf, proving its limit property. In each case [lem-galois-equivalence-preserves-limits] makes the image of the original limit cone a limit cone. The comparison with the chosen target limit has inverse given by the opposite universal property; the composites are identities because they agree with identities after every projection. Its projection composites are $g^{-1}$ of the original projections, so it is exactly the canonical map in the statement.",
    "uses": [
     "def-pur-sheaf-inverse-limit",
     "lem-galois-equivalence-preserves-limits"
@@ -92,24 +137,24 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DB and 03CO, sites-modules-lemma-limits-colimits and sites-modules-lemma-limits-colimits-abelian-sheaves; Categories Tag 0038, categories-lemma-adjoint-exact; the set-valued compatible-family argument is written explicitly in this step"
+    "place": "Tags 03DB and 03CO; Categories Tag 0038; coordinatewise set-sheaf gluing written explicitly"
    }
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-inverse-limit",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-flat-morphism",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-sheafification",
   "def-weil-proetale-inverse-image",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-weakly-etale-morphism",
   "lem-galois-equivalence-preserves-limits",
+  "lem-pc-dense-subsite-sheafification-compatibility",
+  "lem-weil-iso-weakly-etale",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-weakly-etale-composition-base-change"
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-sheaf-scalar-extension-ring-iso"
  ],
  "proof_origin": {
   "by": "agent",
@@ -196,7 +241,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -250,19 +295,27 @@
   "note": "Read node, 19 stmt deps, sources (Stacks 03D6, 08TC; BS 6.5), both snapshot modules, report (real Worker report + Second reading by Q111). Finite c_A from section-normalized ∃!; completed c is limit.lift of g⁻¹(π_m)≫c_{A_m}; module action via inv c; exact mapDerivedCategory on unbounded D. Finite κ: x↦x⊗1 via adjunction unit + comma arrow, fixed on all sections; intrinsic variant to finiteDerivedPullback inherits that decl's Type t restriction. Integral κ: recorded tower/transitions/Roos, θ_m = (1⊗x) then finite unit, mappingCocone.lift with zero homotopy, roof [θ̃]∘[g⁻¹q]⁻¹ moved into integralDerivedPullback via the good-representative comparison. §1(B) dependency repair of lem-weil-proetale-isomorphism-inverse-image justified (proEtaleSheafInverseImage needs Category.{u+1} D); only lean changed, old module re-exported; site/coefficient universes stay independent. No hollow defs, only sorry proofs, no Classical/axiom/Nonempty; docstrings carry source and blueprint tags; lean.statement verbatim for both records; all declarations present; no statement_change. nt_compile.py on both files: exit 0, no errors or warnings (2.9 s, 9.5 s)."
  },
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-weil-proetale-isomorphism-inverse-image",
   "worker": "stage1",
-  "summary": "Completed existing five-step split, with an explicit inverse to the diagonal, comma-colimit section formula, specified direct-image quasi-inverse, normalized constant-ring comparison and module scalar-extension isomorphism. Added the set-valued tower-limit construction and both inverses of its canonical comparison. Sources provide the general constructions; their isomorphism specialization is marked agent-written. No new nodes; no statement changes.",
-  "blueprint": "Serves the coefficient-object paragraph of def-weil-ordinary-compact-cohomology in main-20261015, which equips E and Qlb coefficients with their canonical Weil structure. Via def-weil-constant-weil-structure, clauses 1 and 2, Steps 1-4 construct the finite-level ring comparisons and their naturality, and Step 5 justifies the completed integral comparison. The Stacks constructions are specialized to an isomorphism, with the specialization argument written here.",
-  "tool_uses": []
+  "summary": "Re-split the returned long proof using a Mathlib leaf for scheme-isomorphism weak etaleness, the existing site-equivalence and dense-subsite sheafification nodes, and a new general normalized change-of-ring-sheaf tensor lemma. Retained the comma-colimit route, explicit canonical maps and module equivalences. The comma universal-object and terminal-colimit verifications remain short elementary arguments. Statement, statement dependencies and complete Lean record preserved. All nine steps are below 2000 characters.",
+  "blueprint": "Serves the coefficient-object paragraph of def-weil-ordinary-compact-cohomology in main-20261015, which equips E and Qlb coefficients with their canonical Weil structure, via def-weil-constant-weil-structure, clauses 1 and 2. Steps 1-4 give the site equivalence, the section formula for g^{-1} and the quasi-inverse g_* (with exactness and limit/colimit preservation); Steps 5-6 the finite-level constant-ring comparison c^g_A and its naturality in the ring; Steps 7-8 the module equivalence; Step 9 the inverse-limit compatibility used for the completed integral coefficients. The Stacks constructions are specialized to an isomorphism, with the specialization argument written here.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "why": "Generic covering-compatible site equivalence gives the sheaf property and equivalence used in the unchanged comma-colimit route; no node of this unit states this abstract tool."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NW-8d9311d02",
-  "group": "NW",
+  "reviewer": "NT-cc-Q52-ad281e41f",
+  "group": "Q52",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-8d9311d02 (reviewer sub-agent of L); spot-checked: Read the complete item, report, DAG guidance, errors A–F, unit/chapter route, all cited DAG statements, and cited Stacks sources. Verified all five proof steps, hypotheses, comma-category orientation, base-change morphism, coefficient/module categories, canonical constant-ring and inverse-limit comparisons, edge cases, and Mathlib searches. No new nodes or repairs are needed. Review written to review.md."
- }
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ad281e41f (reviewer sub-agent of L); spot-checked: Read the whole item (9 steps), both new nodes, every cited statement, the unit sk-def-sf-admissible (no steps, uses []) and the repair note (re-split, statement kept). Compared with the live copy: statement, stmt_deps and lean are byte-identical. Sources checked: Stacks proetale 09A5 (base change V↦X×_Y V, the same morphism as def-weil-proetale-inverse-image) and sites-modules 03CZ (change of rings defined by sheafifying the sectionwise tensor product). Mathlib checked: WeaklyEtale.lean:44 and :58, Etale.lean:78, OpenImmersion.lean:481. Step 2 orientation re-derived: D_U=((U,gu),(u,1)) is initial in I_U, the unique arrow is a=pr_2φ, and u_g(a)(u,1)=φ. Step 4: pr_2:X×_Y V→(V,hv) is an X-iso with inverse (hv,1). Step 5: every hypothesis of the dense-subsite leaf holds for Φ_g. Step 6: the adjoint equals ρ on constants, so c^g_A is invertible. Steps 7–9 are correct. lem-weil-iso-weakly-etale is a valid Mathlib leaf (IsIso→IsOpenImmersion→Etale→WeaklyEtale) and not a duplicate (det-pe-morphisms-etale-comparison only gives étale⇒weakly étale). lem-weil-sheaf-scalar-extension-ring-iso is true: m⊗s↦c^{-1}(s)m on presheaves with inverse m↦m⊗1, then extended through sheafification. I tested it with c=id, a conjugation automorphism and M=0. It is strictly smaller than the item and not a duplicate of the étale-only lem-weil-pbc-etale-module-ring-iso-tensor or of lem-pur-change-of-rings-tensor-comparison. Accepted tool_use: lem-weil-pbc-site-equivalence-is-morphism-of-sites; every other off-unit statement is a Mathlib leaf. No SGA source is cited and no target is weakened. Fixes in the item: (1) step 6 now cites the Mathlib leaf lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction for the explicit adjunction unit (coprojection at (V,1) then sheafification), and proof_deps is updated; (2) the stale split_report.blueprint, which spoke of a 'Step 5 completed integral comparison', is rewritten to map the nine steps.; 1 file(s) fixed by the reviewer"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
+ ]
 }
