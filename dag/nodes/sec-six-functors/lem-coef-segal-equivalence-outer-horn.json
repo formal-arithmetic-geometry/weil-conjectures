@@ -34,9 +34,111 @@
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-reedy-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the mapping-space facts needed throughout. Restriction along every inclusion $A\\subseteq B$ of the finite discrete simplicial spaces below is a Kan fibration by [lem-coef-segal-cartesian-exponent], and each unrestricted mapping space is Kan (apply the same result to $\\varnothing\\subseteq B$). By [lem-coef-segal-homotopy-category-components], invertibility is constant on components of $V_1$. Each $T_V(B)$ is therefore a union of components of $\\operatorname{Map}(B,V)$: along a path every edge evaluation stays in its component. Such a union is Kan, and restriction between these unions is still a Kan fibration, because every horn has a vertex and a filler lies in the component of that vertex. Whenever $T_V(B)$ is the inverse image of $T_V(A)$, the restricted map is exactly a pullback. The Segal restriction to the consecutive-edge spine is a trivial Kan fibration: it is a Kan fibration by restriction and a weak equivalence by the Segal hypothesis, hence trivial in [lem-coef-kan-quillen-right-proper]. This remains true after fixing all vertices or selecting invertible components, when the selected source is the full inverse image. All edges of a simplex are composites in $hV$ of its consecutive edges, by restricting to its triangles; thus selecting all invertible edges is equivalent to selecting its consecutive edges.",
+   "uses": [
+    "lem-coef-segal-cartesian-exponent",
+    "lem-coef-segal-homotopy-category-components",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 2.5,4.1,5.3-5.8 and 11.7; explicit component and horn-lifting argument"
+   }
+  },
+  {
+   "text": "Prove the base case $k=2$. The horn $H(2)$ is the union of edges $01$ and $02$, glued at vertex $0$, so its all-equivalence mapping space has, over vertices $(x,y,z)$, the fiber $M(x,y)_{\\mathrm{eq}}\\times M(x,z)_{\\mathrm{eq}}$. The corresponding fiber for $F(2)$ is the subspace $Z$ of $M(x,y,z)$ with all three edges invertible. Project both spaces to $M(x,y)_{\\mathrm{eq}}$ by the edge $01$. These projections are Kan fibrations by step 1 and the product projection; the induced fiber map at an invertible $f:x\\to y$ is $d_1:Z_f\\to M(x,z)_{\\mathrm{eq}}$. The map $d_0:Z_f\\to M(y,z)_{\\mathrm{eq}}$ is a trivial Kan fibration, being the pullback of the degree-two Segal restriction to the spine. Here the missing edge $02$ is invertible exactly when $12$ is invertible, since $[02]=[12][f]$. By [lem-coef-segal-composition-equivalences], $d_1$ on this fiber is homotopic to $f^*d_0$, and $f^*$ is a weak equivalence preserving and reflecting invertible components. Its restriction to these unions is a weak equivalence: its bijection on components restricts to the invertible ones, and its based homotopy-group isomorphisms do not change when the other components are removed. The homotopy restricted to $Z_f$ lands in $M(x,z)_{\\mathrm{eq}}$: for every source vertex its path begins at the invertible edge $d_1$, and each image simplex lies in that same selected union of components. Realize this restricted homotopy using [lem-coef-simplicial-realization-cylinder]; [lem-coef-homotopy-groups-basepoint-change] says that continuously homotopic realizations have the same weak-equivalence property. Hence $d_1$ is a weak equivalence. Apply [lem-coef-kan-fibration-arbitrary-base-fibers] first over $M(x,y)_{\\mathrm{eq}}$, and then over $V_0^3$. The latter projections are Kan fibrations by restriction to the vertices. This proves $T_V(F(2))\\to T_V(H(2))$ is a weak equivalence. The same reasoning includes empty fibers and an empty $V$.",
+   "uses": [
+    "lem-coef-segal-composition-equivalences",
+    "lem-coef-kan-fibration-arbitrary-base-fibers",
+    "lem-coef-segal-cartesian-exponent",
+    "lem-coef-segal-homotopy-category-components",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-groups-basepoint-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 11.2-11.6; expanded proof of the degree-two case of Lemma 11.10"
+   }
+  },
+  {
+   "text": "For the induction, fix $k\\geq3$ and assume restriction $\\rho_{k-1}:T_V(F(k-1))\\to T_V(H(k-1))$ is a weak equivalence. It is also a Kan fibration by step 1, hence a trivial Kan fibration by [lem-coef-kan-quillen-right-proper]. Define $C(k)\\subseteq F(k)$ to consist of simplices whose vertex image does not contain the entire subset $\\{2,\\ldots,k\\}$. Then $H(k)=C(k)\\cup d^1F(k-1)$ and $C(k)\\cap d^1F(k-1)=d^1H(k-1)$: the first union adds the subsets missing $1$, and within that face the forbidden subset is precisely its face opposite $0$. These equalities hold for every monotone map, so they are equalities of simplicial subobjects. Mapping out gives a strict pullback square, also after imposing the all-edge condition, since the edges of a union are the union of the edges. Thus $a:T_V(H(k))\\to T_V(C(k))$ is the pullback of $\\rho_{k-1}$ along restriction to $d^1H(k-1)$. It is a trivial Kan fibration: any boundary lifting problem projects to one for $\\rho_{k-1}$, and the lifted simplex pairs with the prescribed simplex on $C(k)$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 11.7, equality (11.9) and Lemma 11.10; degreewise verification of the gluing"
+   }
+  },
+  {
+   "text": "Put $A(k)=d^0H(k-1)\\cup F(\\{0,1\\})\\subseteq C(k)$, where the copy $d^0H(k-1)$ has vertices $1,\\ldots,k$. Cover $C(k)$ by the full faces $F(S_J)$, where $S_J=\\{0,1\\}\\cup J$ and $J$ ranges over all proper subsets of $\\{2,\\ldots,k\\}$, including $J=\\varnothing$. Every simplex of $C(k)$ belongs to one of these faces, by taking $J$ to be its image intersected with $\\{2,\\ldots,k\\}$. The family is finite and closed under intersections, since $S_J\\cap S_L=S_{J\\cap L}$. On each face the intersection with $A(k)$ is exactly $F(\\{0,1\\})\\cup F(\\{1\\}\\cup J)$. These two subfaces are consecutive intervals for the induced order on $S_J$ and together contain its entire spine; for $J=\\varnothing$ the intersection is the whole edge. The hypotheses of [lem-coef-segal-finite-cover-descent] hold. Consequently $b:\\operatorname{Map}(C(k),V)\\to\\operatorname{Map}(A(k),V)$ is a trivial Kan fibration.",
+   "uses": [
+    "lem-coef-segal-finite-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 11.11, proof; explicit finite face family and each interval-cover intersection"
+   }
+  },
+  {
+   "text": "The inverse image of $T_V(A(k))$ under $b$ is exactly $T_V(C(k))$. Indeed on every $F(S_J)$ all consecutive edges lie in $A(k)$, so invertibility on $A(k)$ makes each of its other edges invertible by the triangle composition relation in $hV$. Every edge of $C(k)$ lies in such a face. The converse follows by restriction. This checks the equality on vertices; it holds on every inner simplex because these spaces are unions of components. It follows that the restricted $b:T_V(C(k))\\to T_V(A(k))$ is a pullback of the trivial fibration from step 4, and is itself trivial by the boundary-lifting argument of step 3.",
+   "uses": [
+    "lem-coef-segal-homotopy-category-components",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 11.11 and the all-equivalence restriction in the last sentence of the proof of Lemma 11.10"
+   }
+  },
+  {
+   "text": "Let $B(k)=d^0F(k-1)\\cup F(\\{0,1\\})$. Restriction $u:T_V(F(k))\\to T_V(B(k))$ is a weak equivalence. To see this using exactly the Segal hypotheses, restrict both spaces further to the full consecutive spine $G(k)$. The restriction from $F(k)$ is the degree-$k$ Segal trivial fibration from step 1. The restriction from $B(k)$ is the pullback, after adjoining edge $01$ at vertex $1$, of the degree-$(k-1)$ Segal trivial fibration on $d^0F(k-1)$. The all-edge condition is exactly the inverse image of the all-invertible spine condition, since long edges in that face are composites. Both maps to $T_V(G(k))$ are therefore weak equivalences; two-out-of-three in [lem-coef-kan-quillen-right-proper] proves the claim for $u$. Also $T_V(B(k))\\to T_V(A(k))$ is a pullback of $\\rho_{k-1}$, after adjoining the same edge $01$ at vertex $1$, because $d^0H(k-1)$ and $d^0F(k-1)$ both meet this edge in that vertex. Thus this second restriction is trivial. The composite $s:T_V(F(k))\\to T_V(A(k))$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-segal-cartesian-exponent",
+    "lem-coef-segal-homotopy-category-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Proof of Lemma 11.10, last displayed comparison; written with the copy d^0H(k-1) used in the proof of Lemma 11.11"
+   }
+  },
+  {
+   "text": "Let $r:T_V(F(k))\\to T_V(H(k))$ be the desired restriction. Precomposition identities give $s=b\\,a\\,r$, with $a,b$ from steps 3 and 5. Those two maps and $s$ are weak equivalences. Two-out-of-three in [lem-coef-kan-quillen-right-proper] gives that $r$ is a weak equivalence. Step 2 supplies the base $k=2$, and steps 3-7 give the induction for each $k\\geq3$, proving the statement for every $k\\geq2$. No completeness of $V$ was used.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 11.10, induction conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-segal-cartesian-exponent",
+  "lem-coef-segal-homotopy-category-components",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-segal-composition-equivalences",
+  "lem-coef-kan-fibration-arbitrary-base-fibers",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-homotopy-groups-basepoint-change",
+  "lem-coef-segal-finite-cover-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 mapping-space foundation, inherited Rezk chain. Agent-written detailed induction follows online Rezk Lemma 11.10, using Sections 11.2-11.6 and the face-cover construction of Lemma 11.11; online source requested in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +160,66 @@
    "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"line\": \"130\", \"text\": \"  SSet.Truncated.IsStrictSegal.hom_ext (fun f ↦ by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"line\": \"50\", \"text\": \"section liftOfStrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"line\": \"51\", \"text\": \"/-! The goal of this section is to define `SSet.Truncated.liftOfStrictSegal`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"line\": \"53\", \"text\": \"from the data of maps on `0`- and `1`-simplices when `Y` is strict Segal.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"line\": \"63\", \"text\": \"  (hY : Y.StrictSegal)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"line\": \"65\", \"text\": \"namespace liftOfStrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"16\", \"text\": \"In this file, we prove that if `X` is `StrictSegal` then `X` is 2-coskeletal,\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"20\", \"text\": \"extension. In fact, we show that when `X` is `StrictSegal` then\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"52\", \"text\": \"namespace StrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"53\", \"text\": \"variable {X : SSet.{u}} (sx : StrictSegal X)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"line\": \"12\", \"text\": \"# Strict Segal simplicial sets\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"line\": \"14\", \"text\": \"A simplicial set `X` satisfies the `StrictSegal` condition if for all `n`, the map\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"line\": \"18\", \"text\": \"Examples of `StrictSegal` simplicial sets are given by nerves of categories.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"line\": \"20\", \"text\": \"TODO: Show that these are the only examples: that a `StrictSegal` simplicial set is isomorphic to\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"line\": \"23\", \"text\": \"`StrictSegal` simplicial sets have an important property of being 2-coskeletal which is proven\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: the results concern strict Segal simplicial sets, quasicategory existence of inner-horn fillers, horn inclusions, or generic fibrant-object weak equivalences; none asserts a weak equivalence of strict mapping spaces of a Reedy fibrant simplicial space on equivalence-edge components. Read StrictSegal.lean:42-57 and Quasicategory/StrictSegal.lean:34-35; these concern a single simplicial set, not a simplicial space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Reedy fibrant Segal space has contractible fillers for outer horns whose edges are invertible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Type u\", \"doc\": \"A type family over simplicial sets, where each instance represents a strict Segal space structure on a given simplicial set. A strict Segal space is a simplicial set equipped with additional structure\"}\n  {\"name\": \"SSet.Truncated.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} → SSet.Truncated (n + 1) → Prop\", \"doc\": \"An $(n+1)$-truncated simplicial set satisfies the strict Segal condition, which imposes constraints on its simplicial structure to ensure compatibility with categorical composition laws at all levels \"}\n  {\"name\": \"SSet.StrictSegalCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → ℕ → Type u\", \"doc\": \"A type family parameterized by a simplicial set $X$ and a natural number $n$, representing the strict Segal condition at level $n$ for $X$. For each $n$, $\\\\text{StrictSegalCore}(X, n)$ encodes the req\"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.IsStrictSegal\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the strict Segal condition.\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.Truncated.StrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} → SSet.Truncated (n + 1) → Type u\", \"doc\": \"For each natural number $ n $ and each $ (n+1) $-truncated simplicial set $ X $, this defines the type of strict Segal conditions that $ X $ must satisfy.\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {n : ℕ} {X : SSet.Truncated (n + 1)} (sx : X.StrictSegal), X.IsStrictSegal\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal structure, then $X$ satisfies the strict Segal condition.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the Segal hits concern a single strict Segal simplicial set with a bijective spine map, not a Reedy fibrant simplicial space with weakly equivalent spine mapping spaces. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-57,275-325 and Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:34-35. Ordinary category equivalences and structured-arrow precomposition do not give weak equivalences of these Kan mapping complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\", \"horn\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the Segal hits concern a single strict Segal simplicial set with a bijective spine map, not a Reedy fibrant simplicial space with weakly equivalent spine mapping spaces. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-57,275-325 and Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:34-35. Ordinary category equivalences and structured-arrow precomposition do not give weak equivalences of these Kan mapping complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "SegalSpace|Rezk|hoequiv|outer.?horn",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the Segal hits concern a single strict Segal simplicial set with a bijective spine map, not a Reedy fibrant simplicial space with weakly equivalent spine mapping spaces. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-57,275-325 and Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:34-35. Ordinary category equivalences and structured-arrow precomposition do not give weak equivalences of these Kan mapping complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a Segal space to a zeroth horn is a weak equivalence on invertible edges",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.horn.edge\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Horn\", \"type\": \"(n : ℕ) (i a b : Fin (n + 1)) (hab : a ≤ b) (H : #{ i, a, b } ≤ n) : (Λ[n, i] : SSet.{u}) _⦋1⦌\", \"doc\": \"For natural numbers $n$, $i$, and elements $a, b \\\\in [n+1]$ with $a \\\\leq b$, if the set $\\\\{i, a, b\\\\}$ has cardinality at most $n$, then the edge from $a$ to $b$ in the standard $n$-simplex is containe\"}\n  {\"name\": \"SSet.StrictSegalCore.injective\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"∀ {X : SSet} {n : ℕ} (self : X.StrictSegalCore n) {x y : X.obj (Opposite.op (SimplexCategory.mk (n + 1)))},\\n  X.map (SimplexCategory.mkOfSucc 0).op x = X.map (SimplexCategory.mkOfSucc 0).op y →\\n    CategoryTheory.SimplicialObject.δ X 0 x = CategoryTheory.SimplicialObject.δ X 0 y → x = y\", \"doc\": \"In a simplicial set satisfying the strict Segal condition at level $n$, if two elements agree under the 0th face map and the degeneracy map inserting at position 0, then they are equal.\"}\n  {\"name\": \"SSet.Edge.edge\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CompStruct\", \"type\": \"(e : Edge x₀ x₁) : X _⦋1⦌\", \"doc\": \"For an edge $ e $ between 0-simplices $ x_0 $ and $ x_1 $ in a simplicial set $ X $, this maps $ e $ to the corresponding 1-simplex in $ X $, obtained by restricting to the 2-truncated simplicial set \"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \"(X : SSet.{u}) [IsStrictSegal X] : Quasicategory X\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"SSet.Truncated.liftOfStrictSegal.spineEquiv_f₂_arrow_zero\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \"(x : X _⦋2⦌₂) : ((hY.spineEquiv 2) (f₂ f₀ f₁ hδ₁ hδ₀ hY x)).arrow 0 = f₁ (X.map (δ₂ 2).op x)\", \"doc\": \"For any 2-simplex $x$ in the $(n+1)$-truncated simplicial set $X$, the zeroth component of the path obtained by applying the inverse spine-path equivalence to $f_2(x)$ equals the image of $x$ under th\"}\n  {\"name\": \"SSet.Edge\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CompStruct\", \"type\": \"{X : SSet} → X.obj (Opposite.op (SimplexCategory.mk 0)) → X.obj (Opposite.op (SimplexCategory.mk 0)) → Type u\", \"doc\": \"For a simplicial set $ X $, this defines the type of edges (1-simplices) between two 0-simplices $ x_0 $ and $ x_1 $, computed by restricting to the 2-truncated simplicial set obtained by discarding s\"}\n  {\"name\": \"SSet.horn₂₁.ι₀₁\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HornColimits\", \"type\": \": Δ[1] ⟶ Λ[2, 1]\", \"doc\": \"A morphism from the standard 1-simplex $\\\\Delta[1]$ to the 2-dimensional horn $\\\\Lambda[2, 1]$ missing the 1st face, constructed via the Yoneda equivalence by lifting the 0th face map $\\\\delta^0$ to ensu\"}\n  {\"name\": \"SSet.Truncated.liftOfStrictSegal_app_0\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": (liftOfStrictSegal f₀ f₁ hδ₁ hδ₀ H hσ hY).app (op ⦋0⦌₂) = f₀\", \"doc\": \"The component of the natural transformation liftOfStrictSegal at the 0-simplex (corresponding to the object [0] in the truncated simplex category $\\\\Delta_{\\\\leq 2}^\\\\text{op}$) is equal to the map $f_0$\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the Segal hits concern a single strict Segal simplicial set with a bijective spine map, not a Reedy fibrant simplicial space with weakly equivalent spine mapping spaces. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-57,275-325 and Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:34-35. Ordinary category equivalences and structured-arrow precomposition do not give weak equivalences of these Kan mapping complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "weak equivalence of mapping spaces from Segal space simplex F(k) to outer horn H(k) on equivalence edge components",
+   "results": "Verbatim msearch.py log record: {\"t\": \"2026-10-16T22:54:10Z\", \"tool\": \"leanfinder\", \"query\": \"weak equivalence of mapping spaces from Segal space simplex F(k) to outer horn H(k) on equivalence edge components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.liftOfStrictSegal.f₂\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.Truncated.liftOfStrictSegal.spineEquiv_f₂_arrow_one\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.IsStrictSegal\", \"SSet.Truncated.liftOfStrictSegal.spineEquiv_f₂_arrow_zero\", \"SSet.StrictSegal\", \"SSet.Truncated.liftOfStrictSegal_app_1\"], \"digest\": \"a9bffdfd9e28fce3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: supplementary source/name audit, not a statement of the Segal-space theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Segal, weak equivalence, horn",
+   "results": "Verbatim msearch.py log record: {\"t\": \"2026-10-16T22:54:10Z\", \"tool\": \"loogle\", \"query\": \"Segal, weak equivalence, horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Segal'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query rejected by Loogle (unknown identifier); subsequent quoted-name patterns were run. This is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal|H\\(k\\)|outer horn|hoequiv",
+   "results": "Verbatim msearch.py log record: {\"t\": \"2026-10-16T22:54:10Z\", \"tool\": \"grep\", \"query\": \"Segal|H\\\\(k\\\\)|outer horn|hoequiv\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "not evidentiary: incorrect subdirectory supplied in this exploratory call; substantive greps were rerun with AlgebraicTopology."
+  },
+  {
+   "tool": "grep",
+   "query": "preEquivalence|instIsEquivalenceObjWhiskeringLeft",
+   "results": "Verbatim msearch.py log record: {\"t\": \"2026-10-16T23:03:02Z\", \"tool\": \"grep\", \"query\": \"preEquivalence|instIsEquivalenceObjWhiskeringLeft\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Grothendieck.lean\", \"Mathlib/CategoryTheory/Grothendieck.lean\", \"Mathlib/CategoryTheory/Grothendieck.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\"], \"digest\": \"eb607ffcbcb07e4a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: supplementary source/name audit, not a statement of the Segal-space theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-equivalence-classifier",
@@ -69,5 +227,21 @@
   "group": "NI"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-equivalence-outer-horn",
+  "worker": "stage1",
+  "summary": "Kept the statement and proved Rezk Lemma 11.10 by degree-two mapping-fiber calculation and an explicit outer-horn induction. Created only general Segal composition and finite interval-cover descent statements; reused existing fibration, component and fiberwise-equivalence infrastructure. All new Mathlib queries were run with msearch.py. The proof consistently uses d^0H(k-1) in the auxiliary C(k) comparison, as Rezk Lemma 11.11 proof does; the d^1 in its displayed comparison is reported as a source error. No Lean attachment, compiler, or library write.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: inherited mapping-space foundation via the cosimplicial-frame/cofibrant-inversion and diagonal/coherent-nerve chain, specifically the equivalence-classifier support in Rezk Sections 11.2-11.11. This is additional infrastructure, not a literal coefficient-adjunction claim.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-bc36bb0ea",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-bc36bb0ea (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. I checked them against Rezk §10 (cover, Lemma 10.1) and §11.2-11.11 (11.3, 11.5, 11.6, (11.9), 11.10, 11.11), using the cached text of the online PDF the nodes name. The item statement is unchanged and matches Lemma 11.10 with §11.7: H(k), the hoequiv subspaces, Reedy-fibrant Segal, no completeness, k>=2. Steps 1-7 verified. Step 1: restriction fibrations come from the last clause of the cartesian-exponent node, and T is a union of components. Step 2: the base case uses d0 as a pulled-back Segal trivial fibration, d1 ~ f^*d0 from the composition node, and the arbitrary-base fiber criterion twice; this is Rezk 11.6 made explicit. Step 3: I checked the (11.9) decomposition and C cap d^1F = d^1H by hand; a is the pullback of rho_{k-1}. Step 4: the faces S_J={0,1}+J, J a proper subset of {2..k}, are intersection-closed, and A cap F(S_J) = F{0,1} + F({1}+J) is an interval cover. Step 5: the inverse-image argument holds. Step 6: B(k) gluing at vertex 1 and the Segal 2-of-3. Step 7: s=bar. The report's source-error note (d^1 vs d^0 in 11.10/11.11) is correct, and the fork example is valid. New node lem-coef-segal-composition-equivalences is true (Rezk 11.2-11.5 in section form) and does not duplicate the homotopy-category-components node (pi_0 only). New node lem-coef-segal-finite-cover-descent is true: Reedy-fibrant finite poset limits with objectwise Segal-cover equivalences. It is not Lemma 10.3, the spine-interval-test node or the localization nodes, and its consecutive-edge condition repairs Rezk's cover definition. Neither node restates a clause of the item. No cycle: the 183-node closure does not reach the item. All citations are in the unit, so tool_uses is empty and none was accepted. No SGA source. No fixes."
+ }
 }

@@ -1,0 +1,124 @@
+{
+ "id": "lem-coef-fibrant-subcategory-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: coherent homotopy-colimit foundation used by small-diagram rectification. Technical input: Finite direct diagrams in a Brown localization. Subargument: Brown Reedy replacements for finite inverse diagrams. General input for the coherent-localization clause: inclusion of fibrant objects in a category with weak equivalences and fibrations.",
+   "via": [
+    "lem-coef-brown-reedy-fibrant-replacement",
+    "lem-coef-brown-finite-direct-rectification",
+    "lem-coef-cocomplete-cofibration-localization",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Including fibrant objects preserves coherent localization",
+ "statement": "Use ordinary nerves, quasicategories, equivalences and entire coherent functor categories of [def-cbc-enhanced-diagrams-cones], in a universe containing all the categories below. Let $\\mathcal A$ be an ordinary category with terminal object $1$, and let $W,P$ be classes of arrows containing all isomorphisms and closed under composition. Suppose $W$ has two-out-of-three. Call $a$ fibrant when $a\\to1$ belongs to $P$, and let $\\mathcal A_f$ be the full subcategory of fibrant objects. Assume that for every $p:x\\to y$ in $P$ with $x,y$ fibrant, and every $v:y'\\to y$ with $y'$ fibrant, the pullback $x'=y'\\times_yx$ exists, is fibrant, and $x'\\to y'$ belongs to $P$; if $p\\in W$, also $x'\\to y'\\in W$. Assume further that every $f:a\\to b$ with fibrant codomain has a factorization $a\\xrightarrow{w}a'\\xrightarrow{p}b$ with $w\\in W$, $p\\in P$, and $a'$ fibrant. No functoriality of these factorizations is assumed, and arbitrary objects of $\\mathcal A$ need not be fibrant.\n\nBoth ordinary nerves have coherent localizations at their specified weak equivalences, and the inclusion induces an equivalence\n$$L(\\mathcal A_f,W|_{\\mathcal A_f})\\xrightarrow{\\ \\sim\\ }L(\\mathcal A,W).$$\nHere a coherent localization $q:N\\mathcal B\\to L(\\mathcal B,V)$ means that, for every quasicategory $\\mathcal E$, restriction along $q$ identifies $\\operatorname{Fun}(L(\\mathcal B,V),\\mathcal E)$ with the full subcategory of $\\operatorname{Fun}(N\\mathcal B,\\mathcal E)$ on functors inverting $V$, retaining every coherent transformation and higher simplex.",
+ "source": {
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Definition 7.4.6, Definition 7.4.12(i)-(ii), Theorem 7.5.18 (first assertion), applied to an ordinary nerve; existence is Definition 7.1.2 and Proposition 7.1.3. Read online 2026-10-17, printed pp. 360-361, 365-366 and 380; localization definition and existence on pp. 323-324. No Stacks tag states this coherent-localization theorem. WANTED: an archived copy in literature/."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FibrantObject|fibrant.*localization|fibration.*categor",
+   "results": "{\"t\": \"2026-10-16T23:03:19Z\", \"tool\": \"grep\", \"query\": \"FibrantObject|fibrant.*localization|fibration.*categor\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"f7b35823c4ddc49e\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories.",
+   "sub": "AlgebraicTopology/ModelCategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinity localization of a category with weak equivalences and fibrations is unchanged by restriction to fibrant objects",
+   "results": "{\"t\": \"2026-10-16T23:03:19Z\", \"tool\": \"leansearch\", \"query\": \"The infinity localization of a category with weak equivalences and fibrations is unchanged by restriction to fibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.bifibrantObjects_le_fibrantObject\", \"HomotopicalAlgebra.FibrantObject.mk\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjBifibrantObjects\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"CategoryTheory.MorphismProperty.Localization'\"], \"digest\": \"34d5aa95ed27948e\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\"",
+   "results": "{\"t\": \"2026-10-16T23:03:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubmonoid.IsLocalizationMap\", \"Submonoid.IsLocalizationMap\", \"AddSubmonoid.isLocalizationMap_top_nat_int\", \"AddSubmonoid.isLocalizationMap_id\", \"Submonoid.isLocalizationMap_id\", \"AddSubmonoid.isLocalizationMap_nat_int\", \"AddSubmonoid.LocalizationMap.isLocalizationMap\", \"Submonoid.LocalizationMap.isLocalizationMap\"], \"digest\": \"7f6d5b897ab742a2\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a category with weak equivalences and fibrations, inclusion of the full subcategory of fibrant objects induces an equivalence of infinity categorical localizations without functorial factorization",
+   "results": "{\"t\": \"2026-10-16T23:03:21Z\", \"tool\": \"leanfinder\", \"query\": \"In a category with weak equivalences and fibrations, inclusion of the full subcategory of fibrant objects induces an equivalence of infinity categorical localizations without functorial factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.ι\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.BifibrantObject.ι\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"456c369e62d80d00\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonfunctorial right deformation to fibrant objects preserves homotopy coherent localization of a weak fibration category",
+   "results": "{\"t\": \"2026-10-16T23:03:21Z\", \"tool\": \"leanfinder\", \"query\": \"A nonfunctorial right deformation to fibrant objects preserves homotopy coherent localization of a weak fibration category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"055fd44a5b304911\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.FibrantObject.ι",
+   "results": "{\"t\": \"2026-10-16T23:06:01Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.FibrantObject.ι\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.ι\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.FibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.FibrantObject.HoCat.toHoCatCompToLocalizationIso\", \"HomotopicalAlgebra.FibrantObject.HoCat.ιCompResolutionNatTrans\", \"HomotopicalAlgebra.FibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\"], \"digest\": \"c75fd50f9383cded\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedEquivalence|IsLocalization",
+   "results": "{\"t\": \"2026-10-16T23:06:01Z\", \"tool\": \"grep\", \"query\": \"IsLocalizedEquivalence|IsLocalization\", \"sub\": \"AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"120\", \"121\", \"125\", \"126\", \"127\"], \"digest\": \"c3fdda7164dcd4ba\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories.",
+   "sub": "AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of fibrant objects is a localized equivalence for a derivability structure",
+   "results": "{\"t\": \"2026-10-16T23:24:09Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of fibrant objects is a localized equivalence for a derivability structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"474f52dbf4ec71e6\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Independent second reader read Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean:12-24,166-169 and DerivabilityStructure/Basic.lean:15-22,72-80: these concern ordinary categorical localization, not coherent localizations. FibrantObjectHomotopy.lean:34,120-127 additionally assumes ModelCategory. None states the Brown fibrant-subcategory theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRightDerivabilityStructure|IsLocalizedEquivalence",
+   "results": "{\"t\": \"2026-10-16T23:25:10Z\", \"tool\": \"grep\", \"query\": \"IsRightDerivabilityStructure|IsLocalizedEquivalence\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/Quotient.lean\", \"Mathlib/CategoryTheory/Localization/Quotient.lean\", \"Mathlib/CategoryTheory/Localization/Quotient.lean\"], \"digest\": \"26599424576a0a5e\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Independent second reader read Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean:12-24,166-169 and DerivabilityStructure/Basic.lean:15-22,72-80: these concern ordinary categorical localization, not coherent localizations. FibrantObjectHomotopy.lean:34,120-127 additionally assumes ModelCategory. None states the Brown fibrant-subcategory theorem.",
+   "sub": "CategoryTheory/Localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivabilityStructure\"",
+   "results": "{\"t\": \"2026-10-16T23:25:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightDerivabilityStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.instIsRightDerivabilityStructureIdOfContainsIdentities\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.hasRightResolutions\", \"CategoryTheory.LocalizerMorphism.instIsLeftDerivabilityStructureOppositeOpOpOfIsRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.instIsRightDerivabilityStructureOppositeOpOpOfIsLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_iff_op\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_iff\"], \"digest\": \"1734be54f62e0b98\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Independent second reader read Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean:12-24,166-169 and DerivabilityStructure/Basic.lean:15-22,72-80: these concern ordinary categorical localization, not coherent localizations. FibrantObjectHomotopy.lean:34,120-127 additionally assumes ModelCategory. None states the Brown fibrant-subcategory theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-brown-reedy-fibrant-replacement",
+  "date": "2026-10-17",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

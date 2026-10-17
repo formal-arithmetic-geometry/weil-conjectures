@@ -32,9 +32,162 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=F\\cap W$. Both $F$ and $T$ contain isomorphisms and are closed under composition and pullback. Binary products exist because $A\\times B$ is the pullback of $A\\to1$ along $B\\to1$. For $P=F$ or $P=T$, the product of two $P$-maps factors as the pullback of the first map followed by the pullback of the second; hence finite products of $P$-maps lie in $P$. The empty product is $1$, and its comparison map is $1_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "7.4.6 and proof of Proposition 7.4.8; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "Give $k/K$ and $B_k$ the degree of the codomain. At an object $\\alpha:k\\to j$, its category of nonidentity outgoing arrows is isomorphic to $B_j$: the object attached to $\\beta:j\\to l$ is the triangle $\\alpha\\to\\beta\\alpha$, and a morphism is the same subsequent arrow out of $l$. Strict decrease ensures $\\beta\\alpha\\ne1_k$. Thus the matching object and relative matching map of a restricted diagram at $\\alpha$ are precisely those at $j$. For a full target-closed subcategory the outgoing categories are unchanged. These identifications prove the restriction assertions directly, for fibrant diagrams and for maps with relative matching maps in either $F$ or $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "7.4.7; ordinary coslice description; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "We establish the finite-limit calculation by induction on the largest degree $d$ of an index category; the empty shape has limit $1$. For a nonempty shape let $S$ be the objects of degree $d$ and $J=K\\setminus S$. There are no nonidentity arrows into $S$, and none between its members. Each $B_s$, $s\\in S$, has all degrees less than $d$ and is finite, even when several distinct arrows have the same codomain. Restriction in Step 2 therefore permits induction on $J$ and every $B_s$. The constant terminal diagram is Reedy fibrant since every one of its matching limits is $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "7.4.7 and Proposition 7.4.8; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "For a Reedy fibrant $X$, write $A_X=\\lim_JX$, $C_X=\\prod_{s\\in S}M_sX$ and $D_X=\\prod_{s\\in S}X_s$. The map $D_X\\to C_X$ belongs to $F$ by Step 1. Consequently $L_X=A_X\\times_{C_X}D_X$ exists. For each test object $a$, a map $a\\to L_X$ is a cone on $X|_J$ together with maps $a\\to X_s$ whose composites along every arrow $s\\to j$ equal that cone. These are exactly the cones on $X$, with uniqueness in both directions. This proves $L_X=\\lim_KX$, completes the existence induction, and shows that $L_X\\to A_X$ lies in $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.8; pullback (7.4.4.1); ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "For $P=F$ or $T$, prove simultaneously by the same degree induction that $\\lim u$ lies in $P$ whenever every relative matching map $\\rho_k(u)$ lies in $P$ and both diagrams are Reedy fibrant for $F$. By induction $A_X\\to A_Y$ lies in $P$. Set $H=L_Y\\times_{A_Y}A_X$, so $H\\to L_Y$ lies in $P$. Put $Q_s=M_sX\\times_{M_sY}Y_s$. The cone maps give $H\\to\\prod_sQ_s$. A map into $H\\times_{\\prod_sQ_s}\\prod_sX_s$ is exactly a cone on $X$, hence this object is $L_X$. Thus $L_X\\to H$ is a pullback of $\\prod_s\\rho_s(u)$ and lies in $P$. Its composite with $H\\to L_Y$ is $\\lim u\\in P$. All pullbacks here exist along the indicated $P\\subseteq F$ maps. For the empty shape the map is $1_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.9; pullback (7.4.9.4); ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "Apply Step 5 with $P=F$ to the restriction of a Reedy fibration $u$ to $k/K$; Step 2 gives its relative matching conditions. The identity of $k$ is initial in $k/K$, so a cone is uniquely its component at that identity, and its limit is $X_k$ (respectively $Y_k$). Therefore $u_k\\in F$. If all relative matching maps of $u$ lie in $T$, the same argument with $P=T$ shows every $u_k\\in T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.10, first paragraph; Proposition 7.4.18, first implication; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "Conversely let $u$ be a Reedy fibration which is componentwise in $W$. Induct on the degree. On $B_k$ all codomain degrees are smaller, so induction makes each relative matching map trivial. Step 5 with $P=T$ gives $M_ku\\in T$. Hence $Q_k=M_kX\\times_{M_kY}Y_k\\to Y_k$ is in $T$. Since its composite with $\\rho_k(u)$ is $u_k\\in W$, two-out-of-three makes $\\rho_k(u)\\in W$, and it is already in $F$. For an object with empty boundary, $M_ku=1_1$; this starts the induction. Together with Step 6 this proves the claimed characterization of trivial Reedy fibrations. Step 5 with $P=T$ now proves the assertion about their limits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.18; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "For composable Reedy fibrations $X\\xrightarrow{u}Y\\xrightarrow{v}Z$, factor the relative matching map of $vu$ as\n$$X_k\\xrightarrow{\\rho_k(u)}M_kX\\times_{M_kY}Y_k\\longrightarrow M_kX\\times_{M_kZ}Z_k.$$\nThe second map is the pullback of $\\rho_k(v):Y_k\\to M_kY\\times_{M_kZ}Z_k$ along the map induced by $M_ku$. Thus it lies in $F$, as does the composite. Identities have identity relative matching maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.10, composition square; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "Let $p:X\\to Y$ be a Reedy fibration and $Z\\to Y$ a map with $X,Y,Z$ Reedy fibrant. Step 6 gives $p_k\\in F$, so $V_k=X_k\\times_{Y_k}Z_k$ exists; the pullback universal properties give its strict diagram operators and the objectwise pullback diagram $V$. Step 5 applied on $B_k$ gives $M_kp\\in F$. Thus $M_kX\\times_{M_kY}M_kZ$ exists. A cone into $V|_{B_k}$ is exactly a compatible pair of cones into $X|_{B_k}$ and $Z|_{B_k}$, so this pullback is $M_kV$. This establishes the matching limits without assuming in advance that $V$ is Reedy fibrant.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.10, pullback construction; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "Using the matching identification of Step 9, the relative matching map of $V\\to Z$ is the base change of $\\rho_k(p)$: both its domain and the corresponding pullback domain are $X_k\\times_{Y_k}Z_k$. It belongs to $F$. The projection $M_kV\\times_{M_kZ}Z_k\\to M_kV$ is a base change of $Z_k\\to M_kZ\\in F$. Their composite proves $V$ Reedy fibrant. If $p$ is also componentwise in $W$, Step 7 makes $\\rho_k(p)\\in T$; its base changes lie in $T$, and Step 6 makes $V\\to Z$ componentwise trivial. Hence objectwise pullback preserves both Reedy fibrations and trivial Reedy fibrations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.10 and Proposition 7.4.18; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "The constant diagram at $1$ is terminal among strict diagrams and belongs to $R_K$ by Step 3; its restriction to $R_K$ is therefore terminal. The relative matching maps of $X\\to\\operatorname{const}1$ are exactly $X_k\\to M_kX$, so all objects of $R_K$ are fibrant. Componentwise $W$ contains isomorphisms, is closed under composition and satisfies two-out-of-three because these assertions can each be checked at every $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.4.20, terminal object and weak-equivalence axioms; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "For any strict $X$ and Reedy fibrant $Y$, factor a given $f:X\\to Y$ recursively in increasing degree. Suppose $X|_J\\xrightarrow{w'}H'\\xrightarrow{p'}Y|_J$ has already been constructed on all lower degrees, with $H'$ Reedy fibrant, $w'$ componentwise in $W$ and $p'$ a Reedy fibration. Every arrow out of a codomain in $B_k$ still has lower degree; Step 2 makes the pullback of $H'$ along $B_k\\to J$ Reedy fibrant, and Step 4 gives its limit $M_kH'$. Form\n$$Q_k=M_kH'\\times_{M_kY}Y_k.$$\nThis exists since $Y_k\\to M_kY\\in F$. The maps $X_k\\to X_j\\to H'_j$ form a cone and, together with $f_k$, give $X_k\\to Q_k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.19, inductive factorization; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "Factor $X_k\\to Q_k$ by the given Brown axiom as $X_k\\xrightarrow{w_k}H_k\\xrightarrow{r_k}Q_k$, with $w_k\\in W$ and $r_k\\in F$. Define every outgoing operator $H_k\\to H_j$ by the projection $Q_k\\to M_kH'$ and its cone at the arrow $k\\to j$. The cone identities give preservation of each composite $k\\to j\\to l$, including parallel arrows. Define $p_k$ by the projection to $Y_k$; the defining square for $Q_k$ gives its naturality, and the factorization equation gives naturality of $w_k$. The map $H_k\\to M_kH'$ is a composite of $r_k$ and a base change of $Y_k\\to M_kY$, hence in $F$; the relative matching map of $p$ is $r_k$. Distinct objects of the same degree have no arrows between them, so all such extensions can be made independently. Starting with the empty restriction and iterating finitely constructs the stated factorization $f=pw$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.19; strict version of the extension construction 7.4.11; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "For $X,Y\\in R_K$ the factorization of Steps 12-13 stays in $R_K$. Steps 8, 10 and 11 and this factorization verify every all-fibrant Brown hypothesis for $R_K$. Taking $Y=\\operatorname{const}1$ in that construction for an arbitrary strict $X$ gives $X\\to H\\in R_K$ componentwise in $W$. This proves the replacement assertion using only the choices in the original factorization axiom, with no assertion of functorial choices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.4.20; Proposition 7.4.19 with terminal target; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "To justify the coherent-localization assertion, put $\\mathcal A=\\operatorname{Fun}(K,\\mathcal C)$. Let $P$ consist of all isomorphisms of arbitrary diagrams together with Reedy fibrations between members of $R_K$, and use $W_K$ as weak equivalences. A diagram isomorphism $a:X\\to X'$ induces isomorphisms $M_ka:M_kX\\to M_kX'$ by the cone universal property, and the matching map of $X'$ is $(M_ka)(X_k\\to M_kX)a_k^{-1}$. Thus Reedy fibrancy is invariant under diagram isomorphisms. Precomposing or postcomposing a Reedy fibration by a diagram isomorphism conjugates its relative matching maps by isomorphisms of the domains and pullback targets; these maps remain in $F$. Together with Step 8 and composition of isomorphisms, this proves $P$ closed under composition. The $P$-fibrant objects are precisely $R_K$, by Step 11. Steps 9-10 verify the pullback and trivial-pullback assumptions between these fibrant objects. Crucially Steps 12-13 factor every map from an arbitrary strict diagram to a fibrant target through a fibrant object; merely replacing objects would not verify this assumption. Apply [lem-coef-fibrant-subcategory-localization] with these verified data. Its entire-coherent-functor-category conclusion gives the required equivalence induced by inclusion, rather than only an equivalence of ordinary homotopy categories.",
+   "uses": [
+    "lem-coef-fibrant-subcategory-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Definition 7.4.12 and Theorem 7.5.18; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  },
+  {
+   "text": "If $K$ is empty, there is exactly one diagram and one natural transformation, so $R_K=\\operatorname{Fun}(K,\\mathcal C)$ is terminal. Its limit is $1$, both arrow classes contain its unique identity, and all matching conditions are vacuous. The inclusion is the identity. Thus the constructions and conclusions include the empty case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Empty-shape base case of 7.4.8-7.4.20; ordinary categorical argument written explicitly by ND, 2026-10-17."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-fibrant-subcategory-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2: coherent diagram and derived inverse-limit foundation; explicit ordinary Brown Reedy induction, compared with Cisinski 7.4.7-7.4.20 and 7.5.18 read online; archive unavailable."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +239,46 @@
    "date": "2026-10-16",
    "verdict": "No match. Independent second reading: ModelCategory/FibrantObjectHomotopy.lean:34-155 assumes a model category and constructs an ordinary quotient; CategoryTheory/Localization/LocalizerMorphism.lean:12-24,161-167 is ordinary localization. Neither states the coherent Brown/Reedy or slice equivalence. AlgebraicTopology/Reedy/Basic.lean:22-25 leaves diagram model structures as TODO.",
    "sub": "AlgebraicTopology/ModelCategory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite inverse diagrams in a Brown category admit Reedy fibrant replacement and inclusion of Reedy fibrant diagrams induces an equivalence of infinity localizations",
+   "results": "{\"t\": \"2026-10-16T22:59:15Z\", \"tool\": \"leanfinder\", \"query\": \"Finite inverse diagrams in a Brown category admit Reedy fibrant replacement and inclusion of Reedy fibrant diagrams induces an equivalence of infinity localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"cf25fe5256772c0b\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|fibrant.*replacement",
+   "results": "{\"t\": \"2026-10-16T23:03:19Z\", \"tool\": \"grep\", \"query\": \"Reedy|fibrant.*replacement\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories.",
+   "sub": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Brown category Reedy fibrant inverse diagrams and infinity localization",
+   "results": "{\"t\": \"2026-10-16T23:03:20Z\", \"tool\": \"leansearch\", \"query\": \"Brown category Reedy fibrant inverse diagrams and infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantBrownFactorization\", \"HomotopicalAlgebra.FibrantBrownFactorization.i_r\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk.injEq\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk.inj\", \"HomotopicalAlgebra.bifibrantObjects_le_fibrantObject\", \"HomotopicalAlgebra.CofibrantBrownFactorization\", \"HomotopicalAlgebra.FibrantBrownFactorization.recOn\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"06f2e371f65f3d58\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reedy\"",
+   "results": "{\"t\": \"2026-10-16T23:03:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Reedy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Language.instToSnapshotTreeDynamicSnapshot\", \"Lean.Core.CoreM.parIterGreedy\", \"Lean.Core.CoreM.parIterGreedyWithCancel\", \"Lean.Meta.MetaM.parIterGreedy\", \"Lean.Meta.MetaM.parIterGreedyWithCancel\", \"Lean.Elab.Term.TermElabM.parIterGreedy\", \"Lean.Elab.Tactic.TacticM.parIterGreedy\", \"Lean.Elab.Term.TermElabM.parIterGreedyWithCancel\"], \"digest\": \"7b07fbcaebad8dcc\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse diagrams have matching object fibrations and weak equivalence replacements without any cofibrations",
+   "results": "{\"t\": \"2026-10-16T23:03:22Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse diagrams have matching object fibrations and weak equivalence replacements without any cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instIsVeryGoodSymmOfRespectsIsoFibrations\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.PathObject.instIsGoodSymmOfRespectsIsoFibrations\", \"HomotopicalAlgebra.CategoryWithFibrations\", \"HomotopicalAlgebra.CategoryWithCofibrations\", \"HomotopicalAlgebra.BifibrantObject\", \"HomotopicalAlgebra.PathObject.symm\", \"HomotopicalAlgebra.ModelCategory.mk'\"], \"digest\": \"e7d8d9a204b12e5d\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-155,250-328: the inclusion-localization instances assume ModelCategory and assert ordinary categorical localization. Reedy/Basic.lean:14-25,38-48 defines only the index-category ReedyStructure and leaves diagram model structures as TODO. Neither supplies a Brown category theorem about entire coherent functor categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-finite-direct-rectification",
@@ -97,5 +286,21 @@
   "group": "Q50"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-brown-reedy-fibrant-replacement",
+  "worker": "stage1",
+  "summary": "Proved the ordinary Brown Reedy construction and all finite-limit, relative-matching and restriction claims by explicit finite induction. Isolated only the general fibrant-subcategory coherent-localization theorem as one statement-only node, after DAG, blueprint, project Lean and logged Mathlib searches. Kept the item statement and maintainer metadata unchanged; checked empty, discrete, arrow, parallel-arrow and diamond shapes. No model structure, retract closure or functorial factorization is introduced. Independent second reading made the boundary restriction and isomorphism invariance explicit and corrected the new dependency source pagination.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, paragraph 2 displayed derived coefficient adjunction and inverse-limit calculation, through the existing Brown finite-direct-rectification ancestry: supplies its Reedy replacement subargument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-ND-354aadbcc",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-354aadbcc (reviewer sub-agent of L); spot-checked: I read all 16 steps of the item and the new node lem-coef-fibrant-subcategory-localization in full. Source: Cisinski CatLR.pdf, fetched read-only and run through pdftotext in /tmp because it is not in literature/ (the WANTED line stands). Checked: Def 7.1.2 and Prop 7.1.3 (pp. 323-324), Def 7.4.6 (pp. 360-361), 7.4.7, Def 7.4.12(i)-(ii) (pp. 365-366), 7.4.17, Props 7.4.18-7.4.19, Thm 7.4.20, Thm 7.5.18 (p. 380). Hypotheses of the new node, for an ordinary nerve, are exactly 7.4.6 + 7.4.12(i)-(ii) (isomorphisms in place of identities, harmless) and its conclusion is the first assertion of 7.5.18 with existence from 7.1.3; it is not weakened and contains no Reedy content, so it does not restate a clause of the item. Tested on small cases: all objects fibrant; only 1 fibrant, where L(A,W)=|NA| is contractible because A has a terminal object. Item, step by step: products as two base changes (1); outgoing category at a:k->j is B_j and target-closed restriction keeps it (2); induction on maximal degree with S having no incoming arrows and J target-closed (3); lim_K X = lim_J X x_{prod M_s} prod X_s with the cone bijection checked (4); H and Q_s pullbacks give lim u in P for P=F and P=T (5); 1_k initial in k/K gives u_k in F or T (6); trivial relative matching maps by 2-of-3 on X_k->Q_k->Y_k (7); composition pullback identity (8); objectwise pullback with M_kV = M_kX x_{M_kY} M_kZ, existence before use (9-10); terminal object and W_K axioms (11); nonfunctorial degreewise factorization from an arbitrary source, matching 7.4.19 (12-13); replacement (14); every hypothesis of the new node verified for P = isomorphisms + Reedy fibrations, so the P-fibrant objects are exactly R_K (15); empty case (16). Every statement clause is covered and the statement is unchanged. Elementary steps cite nothing beyond the item's hypotheses and write the arguments out. Searched the DAG for duplicates (brown-fibrant-localization-pullbacks, finite-reedy-localization, model-weak-equivalence-nerve, simplicial-model-nerve-localization, dk/cosimplicial/combinatorial nodes): none states 7.5.18 in this generality. Node form, blueprint from/via/same_as and Mathlib searches (4 kinds; FibrantObject instances need ModelCategory) are correct. The new node lacks lean_audit, consistent with other coef nodes, not treated as a fault. Route: same unit, empty tool_uses, no tool uses accepted, no SGA. Minor: item source.place calls 7.4.7 and 7.4.17 'Definitions' though they are numbered paragraphs; left as is. No fixes written."
+ }
 }
