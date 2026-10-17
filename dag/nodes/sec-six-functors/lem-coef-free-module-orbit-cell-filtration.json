@@ -1,0 +1,72 @@
+{
+ "id": "lem-coef-free-module-orbit-cell-filtration",
+ "kind": "statement",
+ "title": "Free-orbit criterion for simplicial module cell filtrations",
+ "statement": "Use simplicial sets, simplicial subsets, faces and degenerate simplices from [def-weil-pbc-simplicial-set] and the simplicial monoid/action conventions of [def-coef-coherent-monad-modules]. Let $M$ be a simplicial monoid, $X$ a left simplicial $M$-module, and $A$ an $M$-submodule of $X$. For a simplicial set $K$, the free module $M\\times K$ has $M$ acting on the first factor. Suppose given an ordinal $\\lambda$ and $M$-submodules $X_\\alpha\\subseteq X$, $\\alpha\\leq\\lambda$, increasing in $\\alpha$, with $X_0=A$, $X_\\lambda=X$, and $X_\\beta=\\bigcup_{\\alpha<\\beta}X_\\alpha$ for every limit $\\beta\\leq\\lambda$. For every $\\alpha<\\lambda$ suppose given a set $R_\\alpha$ of simplices $\\sigma\\in (X_{\\alpha+1})_{n_\\sigma}$ such that every proper face of every $\\sigma\\in R_\\alpha$ lies in $X_\\alpha$, and such that for every $k\\geq0$ the map\n$$\\coprod_{\\sigma\\in R_\\alpha}\\{(m,\\theta): m\\in M_k,\\ \\theta:[k]\\to[n_\\sigma]\\ \\text{surjective}\\}\\longrightarrow (X_{\\alpha+1})_k\\setminus(X_\\alpha)_k,\\qquad (m,\\theta)\\mapsto m\\cdot(\\theta^*\\sigma),$$\nis well defined (each $m\\cdot\\theta^*\\sigma$ lies outside $X_\\alpha$) and bijective. Then each square with top $\\coprod_{\\sigma\\in R_\\alpha}M\\times\\partial\\Delta^{n_\\sigma}\\to X_\\alpha$ (induced by the faces of the $\\sigma$) and bottom $\\coprod_{\\sigma\\in R_\\alpha}M\\times\\Delta^{n_\\sigma}\\to X_{\\alpha+1}$, $(m,\\tau)\\mapsto m\\cdot\\tau^*\\sigma$, is a pushout of left simplicial $M$-modules. Hence $A\\to X$ is a small relative projective cell complex in left simplicial $M$-modules: a transfinite composite, continuous at limit ordinals, of pushouts of coproducts of free-module maps $M\\times\\partial\\Delta^n\\to M\\times\\Delta^n$, $n\\geq0$. If $A$ is empty, $X$ is a cellular weight for the one-object simplicial category with endomorphism monoid $M$, meaning that $\\varnothing\\to X$ is such a cell complex.",
+ "source": {
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Proposition 5.3.3 (relative projective cells), together with the skeletal cell argument used in Lemma 6.1.8. Read online; archive WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-coef-coherent-monad-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A simplicial monoid action with free simplex orbits and boundaries in earlier stages yields a relative projective cell complex",
+   "results": "HomotopicalAlgebra.RelativeCellComplex; HomotopicalAlgebra.RelativeCellComplex.Cells; HomotopicalAlgebra.RelativeCellComplex.mk; CategoryTheory.SmallObject.relativeCellComplexιObj; HomotopicalAlgebra.RelativeCellComplex.Cells.mk; FreeSimplexQuiver; FreeSimplexQuiver.Hom.rec; SSet.modelCategoryQuillen.I_le_monomorphisms",
+   "date": "2026-10-17",
+   "verdict": "no match: generic relative-cell structures, no free-module orbit criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "RelativeCellComplex, SmallObject, SimplicialObject",
+   "results": "none; unknown identifier RelativeCellComplex",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected the pattern"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free simplicial monoid module orbit filtration by boundary simplex cells",
+   "results": "SimplicialObject.Splitting.summand; AlgebraicTopology.DoldKan.Γ₀.Obj.summand; SimplexCategoryGenRel.toSimplexCategory; SSet.skeletonOfMono_succ; SSet.stdSimplex.face; SSet.skeleton",
+   "date": "2026-10-17",
+   "verdict": "no match: skeletal primitives only"
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeCellComplex|boundary.*simplex|free.*action",
+   "results": "Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean; Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean; Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no module-cell orbit lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-walking-module-weight-cells",
+  "date": "2026-10-17",
+  "group": "N4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle derived mapping-complex adjunction: the cellular weight argument reduces to a free-orbit skeletal filtration and its relative version.",
+   "via": [
+    "lem-coef-walking-module-weight-cells",
+    "lem-coef-linear-monad-tensor-enrichment",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
