@@ -16,7 +16,8 @@
   "lem-cbc-proetale-extension-zero",
   "lem-cbc-proetale-extension-zero-base-change",
   "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-site-morphism-composition"
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
  ],
  "proof": [
   {
@@ -193,5 +194,66 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-fe9d5b3b0 (reviewer sub-agent of L); spot-checked: Read the item in full, all 9 cited statements, the full proofs of lem-cbc-proetale-extension-zero-base-change and lem-cbc-proetale-extension-zero, the parent lem-cbc-completed-extension-zero-comparison (its step 8 applies the item to P_b->P_a; steps 9 and 11 rely on the inverse-mate normalization), the main-20261015 blueprint statement and proof, Stacks 03DI (sites-modules.tex l.2058), and the unit and chapter records. The statement is true and keeps the parent's coefficient category (constant finite commutative rings, small pro-etale sites). beta runs g^{-1}j_! -> j'_!g_U^{-1} as in the base-change node, and the stated inverse mate is the correct one. No qc or constructibility hypothesis is needed. Small cases checked: a=id, zero ring, U empty, U=X, g=id, one-level tower, Z/l^n quotient towers. Not a duplicate: the base-change node has one ring; the underived-compatibility node gives the same mate normalization but on the etale site; strict-tower-proper-open-calculus has one fixed ring B; and no clause of the parent is restated. Faults, both E5: step 3 transported beta summand by summand and invoked an unnamed uniqueness, and step 4 asserted the mate computation without doing it. The fix rewrites steps 1-4 only. Step 1 adds h_* and the units and counits of h^* -| h_*. Step 2 shows the units and adjuncts are ring-independent, citing the 03DI construction. Step 3 now uses the Beck-Chevalley characterization: beta is the unique map with adjunct t^{-1}eta_2, where t_{M,V}=M(a_V) and Res_a fixes t and the units. Step 4 computes the j'_!-adjunct of beta^{-1} as sigma o g_U^{-1}u_F, with sigma the mate of t, and identifies sigma with the composition comparison via clause (3) of lem-weil-pbc-site-morphism-composition. I read the statement's 'canonical map' as the standard Beck-Chevalley exchange constructed in step 6 of the base-change node. The statement, stmt_deps and proof_deps union are unchanged, every step is under 2000 characters, and there is no cycle. Both declared tool_uses are accepted (prop-weil-pbc-proetale-constant-exact, lem-weil-pbc-site-morphism-composition). No SGA, no new nodes, nothing dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.exchange_restrictScalars",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.coefficientMap",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ringCoefficients",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ringCoefficientMap",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.res",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.coefficientSquare",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.pullRes",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.pushRes",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.openResMap",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.openResMap_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.openRes",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.beta",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.sourceRes",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.targetRes",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.resC",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.betaC",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.sourceResC",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.targetResC",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.exchange_restrictScalars",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.open_unit_counit",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.pull_unit_counit",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.inverse_unit_transpose",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.exchange_transition",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.resId_existsUnique",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.resId",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ambientRes_existsUnique",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ambientRes",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.coefficientMap_comp",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.resComp",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.scalar_identity",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.scalar_composition",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.pull_identity",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.pull_composition",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.forgetModules",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.resForget",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.sourceStep",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.targetStep",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.exchange_strict_towers",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ambientSourceStep",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ambientTargetStep",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.exchange_ambient_towers"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteOpenExchangeScalars.lean",
+  "statement": "theorem exchange_restrictScalars [Finite B] [Finite C] (a : B →+* C) {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g) (hsq : IsPullback gU j' j g) (F : CochainComplex (Modules C U) ℤ) : (sourceResC a j g).hom.app F ≫ (resC a X').map ((betaC C gU j' j g h hsq).hom.app F) = (betaC B gU j' j g h hsq).hom.app ((resC a U).obj F) ≫ (targetResC a gU j').hom.app F",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Clause-complete statement bundle: the primary complex-level scalar-exchange equality, open and pullback unit/counit compatibility, the recorded inverse-unit transpose, identity/composite coefficient coherence, arbitrary semilinear chain transitions, and actual isomorphisms of strict abelian and ambient-ring-sheaf towers. Uses the recorded normalized finite base-change dependency in constant-ring module coordinates; no legacy base-change import or new inverse-image/extension notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-52c64e368",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical constructions, universes, edge cases, docstrings, report sections, and strict tower clauses checked; per-file scompile.py compilation passed."
  }
 }
