@@ -134,7 +134,7 @@ theorem affine_koszul_section_roof
     intro x
     obtain ⟨V, hx, K, hK, ⟨eK⟩⟩ := hP n x
     exact ⟨V, hx, K, hK,
-      ⟨(SheafOfModules.overFunctor (moduleRings X.toRingedSpace) V).mapDerivedCategory.mapIso
+      ⟨(SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) V).mapDerivedCategory.mapIso
         c ≪≫ eK⟩⟩
   let j : R.obj (P n) ≅ R.obj (DerivedCategory.Q.obj T) :=
     ⟨R.map (a n), v n, hav n, hva n⟩

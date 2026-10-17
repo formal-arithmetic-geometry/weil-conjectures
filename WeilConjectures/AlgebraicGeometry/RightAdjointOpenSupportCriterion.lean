@@ -143,13 +143,13 @@ theorem rightAdjoint_open_support_criterion
     (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)
     (adj : (schemeDerivedQCohProperty Y).lift
       ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hpush ⊣ a)
-    (adjOpen : (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+    (adjOpen : (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
       (moduleRings Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
@@ -159,12 +159,12 @@ theorem rightAdjoint_open_support_criterion
     (hopen : ∀ K : schemeDerivedQCohCategory Y,
       schemeDerivedQCohProperty Y
         ((schemeDerivedDirectImage V.ι).obj ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
-          (SheafOfModules.overFunctor (moduleRings Y.toRingedSpace) V ⋙
+          (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
@@ -172,12 +172,12 @@ theorem rightAdjoint_open_support_criterion
         (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj))) :
     ((∀ K : schemeDerivedQCohCategory Y,
       (∃ n : ℤ, K.obj.IsGE n) → IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
-        (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U ⋙
+        (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -187,13 +187,13 @@ theorem rightAdjoint_open_support_criterion
             (a.map (ObjectProperty.homMk
               (X := K)
               (Y := ⟨(schemeDerivedDirectImage V.ι).obj
-                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
                   (moduleRings Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
@@ -202,38 +202,38 @@ theorem rightAdjoint_open_support_criterion
               (adjOpen.unit.app K.obj)))))) ↔
       (∀ Q : schemeDerivedQCohCategory Y,
       (∃ n : ℤ, Q.obj.IsGE n) →
-      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
         (moduleRings Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj Q.obj) →
-      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
         (moduleRings X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U))) inferInstance inferInstance).obj (a.obj Q).obj))) ∧
     ((∀ K : schemeDerivedQCohCategory Y,
-      IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+      IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
         (moduleRings X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -243,13 +243,13 @@ theorem rightAdjoint_open_support_criterion
             (a.map (ObjectProperty.homMk
               (X := K)
               (Y := ⟨(schemeDerivedDirectImage V.ι).obj
-                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
                   (moduleRings Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
@@ -257,25 +257,25 @@ theorem rightAdjoint_open_support_criterion
         (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj), hopen K⟩)
               (adjOpen.unit.app K.obj)))))) ↔
       (∀ Q : schemeDerivedQCohCategory Y,
-      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
         (moduleRings Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj Q.obj) →
-      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
         (moduleRings X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -284,12 +284,12 @@ theorem rightAdjoint_open_support_criterion
     ((∀ I : Type u, PreservesColimitsOfShape (Discrete I) a) →
       ((∀ K : schemeDerivedQCohCategory Y,
       (∃ n : ℤ, K.obj.IsGE n) → IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
-        (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U ⋙
+        (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -299,13 +299,13 @@ theorem rightAdjoint_open_support_criterion
             (a.map (ObjectProperty.homMk
               (X := K)
               (Y := ⟨(schemeDerivedDirectImage V.ι).obj
-                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
                   (moduleRings Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
@@ -313,13 +313,13 @@ theorem rightAdjoint_open_support_criterion
         (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj), hopen K⟩)
               (adjOpen.unit.app K.obj)))))) ↔
         (∀ K : schemeDerivedQCohCategory Y,
-      IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+      IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
         (moduleRings X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -329,13 +329,13 @@ theorem rightAdjoint_open_support_criterion
             (a.map (ObjectProperty.homMk
               (X := K)
               (Y := ⟨(schemeDerivedDirectImage V.ι).obj
-                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor
+                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
                   (moduleRings Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor (moduleRings
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
       Y.toRingedSpace) V ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))

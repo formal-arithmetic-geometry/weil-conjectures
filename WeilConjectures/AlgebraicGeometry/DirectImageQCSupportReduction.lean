@@ -102,7 +102,7 @@ theorem directImage_qc_support_reduction
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U)).Additive),
       ∃ adj :
-        (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U ⋙
+        (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
@@ -121,13 +121,13 @@ theorem directImage_qc_support_reduction
                   K)) ∧
         IsIso ((schemeDerivedDirectImage f).map (adj.unit.app E) ≫
           c.hom.app
-            ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U ⋙
+            ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
               Equivalence.functor
                 (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
                 (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
                 (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj E)) ∧
         Nonempty ((schemeDerivedDirectImage (U.ι ≫ f)).obj
-            ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U ⋙
+            ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
               Equivalence.functor
                 (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
                 (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
