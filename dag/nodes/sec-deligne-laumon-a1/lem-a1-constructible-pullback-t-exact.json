@@ -525,5 +525,48 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-2b31d712f (reviewer sub-agent of L); spot-checked: Read in full: the item, all 38 cited node statements, unit sk-thm-dl-a1-upper, ancestor lem-a1-finite-map-purity (main-20261015) and the parent step that uses the item. Sources checked: BS Prop 6.6.11, Def 6.8.10, Prop 6.8.11(3), Prop 6.8.14(2), Rem 6.8.15 and Stacks 099N(5). The statement is correct and unchanged; I tested a torsion R/pi heart object, W empty, non-surjective h, a twisted geometric point (Steps 1-9 never use k-linearity of h), and j of both signs. Fixed three faults. (1) C4/E6: Steps 2 and 7 applied lemmas about the strict-tower completed pullback of def-weil-pbc-completed-pullback (lem-sf-immersion-completed-pullback-comparison, lem-cbc-completed-pullback-triangles) to the item's def-pur integral pullback. def-pur says that agreement is a separate comparison, and no node states it. Added the statement-only unsplit node lem-a1-integral-pullback-completed-comparison (Stacks 099N(5); natural, O_E-linear, compatible with reductions and shifts), cited in Steps 2 and 7. (2) C1: Step 2's claim that inverse image along a site object is restriction now cites lem-sfb-proetale-object-inverse-image-restriction(3). (3) C1: Step 5's exactness of the constant-sheaf functor now cites lem-weil-pbc-constant-module-section-properties(1). Two tool_uses entries added; proof_deps recomputed; no cycle. Only a Mathlib grep is recorded for the new node because LeanSearch and Loogle were not available here; the next worker must complete the three-kind search. Batch-5 check: lem-pod-integral-pullback-composition is generic pullback-composition infrastructure, given by neither assumption and not a step of either proof; accepted. lem-pod-texact-truncation-comparison is an abstract t-structure lemma; accepted. The closure of lem-weil-pbc-integral-stratified-perfect-characterization reaches only the general definition def-pod-ring-scalar-extension; accepted. None of the added citations reaches sec-trace-formula or sec-poincare-duality. I accept the item's 30 declared tool uses plus the two I added. Not a target node, so no master base-change check applies.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructiblePullbackTExact",
+  "declaration": "WeilConjectures.constructible_pullback_t_exact",
+  "declarations": [
+   "WeilConjectures.ConstructiblePullbackComparison",
+   "WeilConjectures.ConstructiblePullbackScalarSquare",
+   "WeilConjectures.constructiblePullbackResidueUnits",
+   "WeilConjectures.ConstructibleRationalPullbackComparison",
+   "WeilConjectures.ConstructibleCommonStagePullbackComparison",
+   "WeilConjectures.constructible_pullback_t_exact",
+   "WeilConjectures.ConstructiblePullbackScalarCompatibility",
+   "WeilConjectures.constructible_pullback_scalar_compatibility",
+   "WeilConjectures.constructiblePointRationalRealization",
+   "WeilConjectures.constructiblePointCommonStageRealization",
+   "WeilConjectures.ConstructiblePointRationalComparison",
+   "WeilConjectures.ConstructiblePointCommonStageComparison",
+   "WeilConjectures.constructible_pullback_point_fibre",
+   "WeilConjectures.ConstructibleRationalPointData",
+   "WeilConjectures.ConstructibleCommonStagePointData",
+   "WeilConjectures.ConstructibleFieldScalarData",
+   "WeilConjectures.constructiblePointFiniteScalarBeta",
+   "WeilConjectures.constructiblePointCoefficientMap",
+   "WeilConjectures.constructiblePointCommonStageObjectIso",
+   "WeilConjectures.constructiblePointCommonStageScalarComponent",
+   "WeilConjectures.ConstructiblePointScalarCompatibility",
+   "WeilConjectures.constructible_point_scalar_compatibility"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructiblePullbackTExact.lean",
+  "statement": "theorem constructible_pullback_t_exact (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (E : AlgebraicallyClosedCoefficients.Index l Ω) {W X : Scheme.{u}} [W.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (W ↘ Spec (.of D.k))] [QuasiCompact (W ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] (h : W ⟶ X) : Nonempty (ConstructibleRationalPullbackComparison D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) h) ∧ Nonempty (ConstructibleCommonStagePullbackComparison D l hl Ω h)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All clauses are stated in the four theorems constructible_pullback_t_exact, constructible_pullback_scalar_compatibility, constructible_pullback_point_fibre and constructible_point_scalar_compatibility. Owning comparison packages expose the exact heart restriction, canonical truncation equations, induced cohomology formulas, and normalized finite/common-stage scalar squares. Uses the intrinsic sf categories and the recorded point fibre; no mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e1cc72f51",
+  "group": "NL",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source, Lean module, report, route-pivot constraints, edge cases, and compiler evidence. scompile.py passed sandbox and library compilation with no errors or warnings; no substantive findings."
  }
 }

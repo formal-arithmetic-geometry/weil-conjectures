@@ -21,7 +21,11 @@
   "lem-amb-etale-compact-comparisons",
   "thm-sf-comp-composition",
   "def-cbc-compact-support-square",
-  "def-cbc-exchange-map"
+  "def-cbc-exchange-map",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-pur-co-smooth-exchange-transport",
+  "lem-sf-class-compact-support-comparison",
+  "lem-weil-pbc-comparison-pullback"
  ],
  "proof": [
   {
@@ -385,5 +389,42 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-365179848 (reviewer sub-agent of L); spot-checked: Reviewed item, all ten proof steps, cited DAG statements, unit/chapter route, Stacks sources, blueprint, coefficient categories, edge cases, dependencies, and duplicates. No mathematical or structural faults found; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportSiteCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.compactSupportSiteCoherence",
+  "statement": "theorem compactSupportSiteCoherence (P : WeilConjectures.PurityFiniteSetting.{u}) : (∀ {X Y : Over (Spec (.of P.field.k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (c : Compactification f.left) (L : DerivedCategory.Plus (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))), IsIso ((compactSupportSiteComparisonPlus P.Coefficient c).hom.app L)) ∧ (∀ {X X' Y Y' : Over (Spec (.of P.field.k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] {f : X ⟶ Y} {f' : X' ⟶ Y'} {u' : X' ⟶ X} {v : Y' ⟶ Y} [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] [IsOpenImmersion v.left] (sq : IsPullback u'.left f'.left f.left v.left) (c : Compactification f.left) (L : DerivedCategory.Plus (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))), IsIso ((Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap P.Coefficient sq c).app L) ∧ IsIso ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} P.Coefficient) sq c).app ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X.left).mapDerivedCategory.obj L.obj))) ∧ (∀ {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T} (D : CompactSupportSiteDiagram P b₀ b₁), (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategory.map (DerivedCategory.Plus.ι.map D.etaleMap) ≫ b₁.comparison.hom = b₀.comparison.hom ≫ D.proEtaleMap) ∧ (∀ {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T} (D E : CompactSupportSiteDiagram P b₀ b₁), D.etaleMap = E.etaleMap → D.proEtaleMap = E.proEtaleMap)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/CompactSupportSiteCoherence.lean",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.compactSupportCoherenceCoefficientFinite",
+   "AlgebraicGeometry.ProEtale.coherenceEtaleCompositor",
+   "AlgebraicGeometry.ProEtale.coherenceCompactificationChange",
+   "AlgebraicGeometry.ProEtale.coherenceProEtaleCompositor",
+   "AlgebraicGeometry.ProEtale.coherenceCompositionSource",
+   "AlgebraicGeometry.ProEtale.CompactSupportSiteBoundary",
+   "AlgebraicGeometry.ProEtale.coherenceCompactificationBoundary",
+   "AlgebraicGeometry.ProEtale.coherenceCompositionBoundary",
+   "AlgebraicGeometry.ProEtale.coherenceRestrictionSource",
+   "AlgebraicGeometry.ProEtale.coherenceRestrictionTarget",
+   "AlgebraicGeometry.ProEtale.coherencePushBoundary",
+   "AlgebraicGeometry.ProEtale.coherencePullBoundary",
+   "AlgebraicGeometry.ProEtale.CompactSupportSiteDiagram",
+   "AlgebraicGeometry.ProEtale.CompactSupportSiteDiagram.etaleMap",
+   "AlgebraicGeometry.ProEtale.CompactSupportSiteDiagram.proEtaleMap",
+   "AlgebraicGeometry.ProEtale.compactSupportSiteCoherence"
+  ],
+  "note": "Repair of immutable head 2e698672a5d8: use the recorded actual properTransportRefinement, originComposition and compactification-relative pro-etale exchange. State all three equations, both exchange invertibilities, and the generated identity/whiskering/pasting calculus. The original tautological refinement conjugate and unused imports are removed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-997606dd8",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all 18 dependencies, sources, canonical maps, universes, edge cases, docstrings, route-pivot requirements, and verbatim signature. The sole delivered module compiled cleanly through scompile.py. No landing corrections required; branch unchanged."
  }
 }

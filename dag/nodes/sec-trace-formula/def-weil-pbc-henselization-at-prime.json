@@ -1,0 +1,101 @@
+{
+ "id": "def-weil-pbc-henselization-at-prime",
+ "title": "Henselization of a localization at a prime",
+ "kind": "definition",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring and $\\mathfrak p\\subset A$ a prime ideal. A commutative ring $H$ with an $A_{\\mathfrak p}$-algebra structure and a henselian-local-ring structure is a *henselization of $A_{\\mathfrak p}$* if the structural map $A_{\\mathfrak p}\\to H$ is local and, for every henselian local ring $T$ and every local map $g:A_{\\mathfrak p}\\to T$, there is a unique local map $h:H\\to T$ with $h\\circ(A_{\\mathfrak p}\\to H)=g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GN and 04GQ, henselization universal property for a local ring."
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal property henselization local ring",
+   "results": "LeanSearch found only HenselianLocalRing and related TFAE; no universal henselization predicate.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing IsLocalHom RingHom",
+   "results": "No declaration combining a henselian local ring with the universal local-map property.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn IsHenselizationAtPrime /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-newtargets-shared/lean/Sheaf",
+   "results": "0 hits before this delivery.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ind-etale-local-henselian-integral",
+  "date": "2026-10-17",
+  "group": "Q132"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The henselization used in the local henselian ind-etale reduction.",
+   "via": [
+    "lem-trf-ind-etale-local-henselian-integral",
+    "lem-trf-artin-henselian-tensor-residue-dichotomy",
+    "lem-trf-artin-tensor-etale-acyclic",
+    "lem-trf-projective-strict-local-intersection-acyclic",
+    "lem-trf-gabber-nearby-cycle-dimension-bound",
+    "lem-trf-gabber-strict-local-torsion-bound",
+    "lem-trf-finite-type-torsion-universal-star",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselizationAtPrime",
+  "declaration": "Algebra.IsHenselizationAtPrime",
+  "file": "lean/Sheaf/RingTheory/HenselizationAtPrime.lean",
+  "statement": "def IsHenselizationAtPrime (A : Type u) [CommRing A] (p : Ideal A) (H : Type u) [p.IsPrime] [CommRing H] [Algebra (Localization.AtPrime p) H] [HenselianLocalRing H] : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fd0e274d6",
+  "group": "Q132",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fd0e274d6",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Statement, dependencies, helper definition, docstrings, edge cases, report sections, and exact declarations checked; both delivered files compile cleanly via scompile.py."
+ }
+}

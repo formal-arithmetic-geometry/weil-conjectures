@@ -9,7 +9,8 @@
  "stmt_deps": [
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-ind-etale-algebra"
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-henselization-at-prime"
  ],
  "kind": "statement",
  "proof": [
@@ -222,5 +223,23 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-28cf732ad (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, plus the statement of every cited node. I checked the Stacks places (algebra.tex 04GJ lemma-mop-up l.42418, 00U5 l.39456, 00U2, 00GK, 00PL, 00D6, 04GN l.42971 and 04GQ l.43125) and Hübner–Schmidt p.13 from the public PDF. That paper is not under literature/ and is WANTED in the report. Its sentence reads: 'If A→B is ind-étale with B local, henselian, then B is an integral A^h_p-algebra for some prime ideal p ⊂ A.' The item states exactly this, with p = f^{-1}(m_D) and the canonical local map made explicit. It uses ordinary henselization, defined inline by the initial local-map property, which agrees with 04GN/04GQ. Nothing is weakened and no hypothesis is added. Steps: (1) local A_p→D, then the universal property gives h; (2) a representative d = u_i(e) from the elementwise filtered-colimit node; (3) étale base change to H⊗_A E_i, then 00U5 gives finite type and quasi-finite; (4) 04GJ decomposition over the henselian H; (5) the local ring D selects one coordinate idempotent; (6) the B factor is excluded because Spec(B⊗k) = D(e_B) is clopen in the fibre, so quasi-finiteness at Q gives quasi-finiteness at q, against step 4; (7) a finite factor is integral (00GK), and the monic equation is pushed through v. All hypotheses hold where they are used. Small cases tested: fields, Z_(p)^h, Z_(p)^sh, Q over Z. There are no new nodes. The grep found no duplicate, and the parent and lem-trf-artin-join-theorem-6-3 use the conclusion in exactly this form. I accept both declared tool_uses (00U5 and 04GJ ring-theory nodes) as generic black boxes. No SGA source is used. This is not a target node, so no base-change or coefficient comparison applies. No fixes were made. review.md written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.IndEtaleLocalHenselianIntegral",
+  "declaration": "RingHom.indEtale_local_henselian_integral",
+  "file": "lean/Sheaf/TraceFormula/IndEtaleLocalHenselianIntegral.lean",
+  "statement": "theorem indEtale_local_henselian_integral (A D : Type u) [CommRing A] [CommRing D] (f : A →+* D) [HenselianLocalRing D] (hind : f.IndEtale) (p : Ideal A) (hp : p = Ideal.comap f (IsLocalRing.maximalIdeal D)) [p.IsPrime] (H : Type u) [CommRing H] [Algebra (Localization.AtPrime p) H] [HenselianLocalRing H] (hH : Algebra.IsHenselizationAtPrime A p H) : ∃! h : H →+* D, IsLocalHom h ∧ h.comp ((algebraMap (Localization.AtPrime p) H).comp (algebraMap A (Localization.AtPrime p))) = f ∧ RingHom.IsIntegral h",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fd0e274d6",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Statement, dependencies, helper definition, docstrings, edge cases, report sections, and exact declarations checked; both delivered files compile cleanly via scompile.py."
  }
 }
