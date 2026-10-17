@@ -26,9 +26,94 @@
   "lem-coef-enhanced-localization-universal",
   "lem-coef-dg-model-mapping-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the right Quillen properties directly. A lifting square from a map $i$ of $\\mathcal A$ to $Rp$, for a map $p$ of $\\mathcal B$, corresponds under the underlying adjunction to a lifting square from $Li$ to $p$; the same adjunction identifies its fillers. If $p$ is a fibration, every trivial cofibration $i$ has $Li$ a trivial cofibration, so the square has a filler. The weak factorization system $(C\\cap W,F)$ makes $Rp$ a fibration. If $p$ is a trivial fibration, use all cofibrations $i$ and $(C,F\\cap W)$ instead to show that $Rp$ is a trivial fibration. Also $L0_{\\mathcal A}$ is initial, since maps from it to any $Y$ correspond to the unique map $0_{\\mathcal A}\\to RY$; dually $R*_{\\mathcal B}$ is terminal. Preservation of cofibrations by $L$, applied to initial maps, and preservation of fibrations by $R$, applied to terminal maps, therefore give $L(\\mathcal A_c)\\subseteq\\mathcal B_c$ and $R(\\mathcal B_f)\\subseteq\\mathcal A_f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, middle derived mapping-complex comparison; agent-supplied foundation: adjoint lifting squares and preservation of the required objects"
+   }
+  },
+  {
+   "text": "Let $u:X\\to X'$ be a weak equivalence between cofibrant objects of $\\mathcal A$. Apply [lem-coef-brown-split-factorizations] to obtain $u=pi$, with $p:Z\\to X'$ a trivial fibration, $i:X\\to Z$ a cofibration, and a cofibration $s:X'\\to Z$ satisfying $ps=1$. Two-out-of-three, applied to $pi=u$ and $ps=1$, makes $i$ and $s$ weak equivalences. Hence $Li$ and $Ls$ are trivial cofibrations, in particular weak equivalences. Since $(Lp)(Ls)=1$, two-out-of-three makes $Lp$ a weak equivalence as well, and then $Lu=(Lp)(Li)$ is one. Thus the enriched restriction $L_c:\\mathcal A_c\\to\\mathcal B_c$ preserves the inherited weak equivalences.",
+   "uses": [
+    "lem-coef-brown-split-factorizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, middle derived mapping-complex comparison; agent-supplied foundation: Brown argument on the cofibrant domain"
+   }
+  },
+  {
+   "text": "Let $v:Y\\to Y'$ be a weak equivalence between fibrant objects of $\\mathcal B$. The dual assertion of [lem-coef-brown-split-factorizations] gives $v=pi$, where $i:Y\\to Z$ is a trivial cofibration, $p:Z\\to Y'$ is a fibration, and a fibration $r:Z\\to Y$ satisfies $ri=1$. Two-out-of-three makes $p$ and $r$ trivial fibrations. Step 1 makes $Rp$ and $Rr$ weak equivalences. From $(Rr)(Ri)=1$ it follows that $Ri$ is a weak equivalence, and hence $Rv=(Rp)(Ri)$ is one. Thus the enriched restriction $R_f:\\mathcal B_f\\to\\mathcal A_f$ preserves the inherited weak equivalences.",
+   "uses": [
+    "lem-coef-brown-split-factorizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, middle derived mapping-complex comparison; agent-supplied foundation: Brown argument on the fibrant domain"
+   }
+  },
+  {
+   "text": "Write $q_{\\mathcal A},q_{\\mathcal B}$ for the enriched localization functors. By [lem-coef-enhanced-localization-universal], Steps 2 and 3 induce enriched functors $\\overline L:\\mathcal A_c[W^{-1}]\\to\\mathcal B_c[W^{-1}]$ and $\\overline R:\\mathcal B_f[W^{-1}]\\to\\mathcal A_f[W^{-1}]$. Apply [lem-coef-dg-model-mapping-comparison] in both model categories: the localized inclusions $j_{\\mathcal A,c},j_{\\mathcal A,f},j_{\\mathcal B,c},j_{\\mathcal B,f}$ are equivalences. Consequently the composites\n$$\\mathbb L L=j_{\\mathcal B,c}\\,\\overline L\\,j_{\\mathcal A,c}^{-1},\\qquad \\mathbb R R=j_{\\mathcal A,f}\\,\\overline R\\,j_{\\mathcal B,f}^{-1}$$\nare the desired enhanced functors. The localization universal property supplies their specified comparisons with $q_{\\mathcal B}L$ on $\\mathcal A_c$ and $q_{\\mathcal A}R$ on $\\mathcal B_f$. All hypotheses of the mapping-comparison node are precisely the completeness, presentability, two lifting systems and enriched model axiom assumed here.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-model-mapping-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, middle derived mapping-complex comparison; agent-supplied foundation: construct the functors by localization and inclusion equivalences"
+   }
+  },
+  {
+   "text": "For $X\\in\\mathcal A_c$ and $Y\\in\\mathcal B_f$, Step 1 makes $LX$ cofibrant and $RY$ fibrant. The mixed-domain mapping comparison of [lem-coef-dg-model-mapping-comparison] therefore identifies the two restricted derived mapping bifunctors with $H_{\\mathcal B}(LX,Y)$ and $H_{\\mathcal A}(X,RY)$, respectively, interpreted in $\\mathbf D(\\mathbf Z)$. These identifications are enriched and natural as bifunctors, rather than just identifications of individual Hom sets. The assumed enriched adjunction gives an isomorphism between these complexes, natural and compatible with the enriched actions. Each bifunctor carries a weak equivalence in either variable to a quasi-isomorphism: use Steps 2 and 3 for $L$ and $R$, and the mixed-domain weak-equivalence invariance in the cited comparison node for the Hom complexes. Thus the given adjunction is an equivalence between two relative enriched bifunctors on $\\mathcal A_c^{\\mathrm{op}}\\times\\mathcal B_f$.",
+   "uses": [
+    "lem-coef-dg-model-mapping-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, middle derived mapping-complex comparison; agent-supplied foundation: identify the restricted comparison and verify its relative hypotheses"
+   }
+  },
+  {
+   "text": "Apply the multivariable assertion of [lem-coef-enhanced-localization-universal] to the bifunctors and their transformation in Step 5. It applies to the opposite in the first variable. Restriction along the two localization maps is an equivalence of enhanced functor categories, fully faithful on transformations and every higher homotopy; it therefore extends the specified adjunction isomorphism. Next invert the localized inclusion equivalences from Step 4, using the same universal property's assertion about such inverses. The result is the displayed equivalence of derived mapping objects on $\\mathcal A[W^{-1}]^{\\mathrm{op}}\\times\\mathcal B[W^{-1}]$. Its components are equivalences by the cited pointwise criterion. Its specified restriction is exactly Step 5's original enriched adjunction under the mapping comparisons, since the extension was taken over that transformation, including its restriction. Full faithfulness supplies naturality and all coherences, and the contractible extension-space assertion supplies uniqueness with the specified restriction. No replacement functor was chosen; stability was not used.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, middle derived mapping-complex comparison; agent-supplied foundation: descend the specified comparison, its coherences, and its uniqueness"
+   }
+  },
+  {
+   "text": "Finally, include any given finite list of relative enriched parameter categories as additional variables throughout Steps 4-6. By hypothesis the restricted functors and adjunction transformations are enriched in these variables and preserve their specified weak equivalences separately. They therefore satisfy exactly the additional-variable hypotheses of [lem-coef-enhanced-localization-universal]. Its multivariable restriction equivalence, compatible with substitution, composition, and coherent diagrams, extends this entire specified diagram at once. This gives the claimed parameter naturality, including its higher coherences; the fiber over the specified restricted diagram is again contractible by that node. Applying this to the empty list recovers Step 6, so no additional condition on parameters or their model structures has entered the argument.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, middle derived mapping-complex comparison; agent-supplied foundation: retain finite enriched parameter naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-enhanced-localization-universal",
+  "lem-coef-dg-model-mapping-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, middle derived mapping-complex comparison; explicit enriched Quillen descent argument from the three cited existing foundation nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +156,52 @@
    "results": "{\"t\": \"2026-10-17T08:36:07Z\", \"tool\": \"grep\", \"query\": \"def derived|def derived.|theorem derived\", \"sub\": \"CategoryTheory/Functor/Derived/Adjunction.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"52\", \"96\", \"118\", \"144\"], \"digest\": \"4d15bc14e28d96e5\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected CategoryTheory.Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-150, which is an ordinary-category adjunction, not an equivalence of chain-valued mapping objects or coherent parameter families. The Loogle hit CofibrantObject.HoCat.adj is an ordinary homotopy-category adjunction. No enriched Quillen-descent theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]nriched.*[Aa]djunction|[Dd]erived.*[Aa]djunction",
+   "results": "{\"t\": \"2026-10-17T11:18:44Z\", \"tool\": \"grep\", \"query\": \"[Ee]nriched.*[Aa]djunction|[Dd]erived.*[Aa]djunction\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-150 and CofibrantObject.HoCat.adj in Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:440ff. These assert ordinary adjunctions; neither asserts a chain-enriched mapping-object equivalence, its coherent descent, or relative parameter naturality. The second semantic query returned ordinary homotopy-class and localization results, which do not assert enriched descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-17T11:18:45Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.adj\"], \"digest\": \"bf5dc6a0324bc9e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-150 and CofibrantObject.HoCat.adj in Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:440ff. These assert ordinary adjunctions; neither asserts a chain-enriched mapping-object equivalence, its coherent descent, or relative parameter naturality. The second semantic query returned ordinary homotopy-class and localization results, which do not assert enriched descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The enriched Hom adjunction of a dg Quillen pair descends to the chain enriched localization",
+   "results": "{\"t\": \"2026-10-17T11:18:45Z\", \"tool\": \"leansearch\", \"query\": \"The enriched Hom adjunction of a dg Quillen pair descends to the chain enriched localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.localization\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.Localization.η\"], \"digest\": \"fe175f79edd4c62e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-150 and CofibrantObject.HoCat.adj in Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:440ff. These assert ordinary adjunctions; neither asserts a chain-enriched mapping-object equivalence, its coherent descent, or relative parameter naturality. The second semantic query returned ordinary homotopy-class and localization results, which do not assert enriched descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded Quillen adjunction induces a coherent natural equivalence of derived mapping complexes without a stability assumption",
+   "results": "{\"t\": \"2026-10-17T11:18:55Z\", \"tool\": \"leanfinder\", \"query\": \"A differential graded Quillen adjunction induces a coherent natural equivalence of derived mapping complexes without a stability assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\"], \"digest\": \"b540e59a3bef0462\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-150 and CofibrantObject.HoCat.adj in Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:440ff. These assert ordinary adjunctions; neither asserts a chain-enriched mapping-object equivalence, its coherent descent, or relative parameter naturality. The second semantic query returned ordinary homotopy-class and localization results, which do not assert enriched descent."
+  },
+  {
+   "tool": "grep",
+   "query": "def derived|def derived.|theorem derived",
+   "results": "{\"t\": \"2026-10-17T11:19:14Z\", \"tool\": \"grep\", \"query\": \"def derived|def derived.|theorem derived\", \"sub\": \"CategoryTheory/Functor/Derived/Adjunction.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"52\", \"96\", \"118\", \"144\"], \"digest\": \"4d15bc14e28d96e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-150 and CofibrantObject.HoCat.adj in Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:440ff. These assert ordinary adjunctions; neither asserts a chain-enriched mapping-object equivalence, its coherent descent, or relative parameter naturality. The second semantic query returned ordinary homotopy-class and localization results, which do not assert enriched descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For cofibrant X and fibrant Y the chain complex Hom(L X,Y) equals Hom(X,R Y) and computes the enhanced derived adjunction",
+   "results": "{\"t\": \"2026-10-17T11:19:17Z\", \"tool\": \"leanfinder\", \"query\": \"For cofibrant X and fibrant Y the chain complex Hom(L X,Y) equals Hom(X,R Y) and computes the enhanced derived adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\"], \"digest\": \"0ad3595a88aa7b00\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-150 and CofibrantObject.HoCat.adj in Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:440ff. These assert ordinary adjunctions; neither asserts a chain-enriched mapping-object equivalence, its coherent descent, or relative parameter naturality. The second semantic query returned ordinary homotopy-class and localization results, which do not assert enriched descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-model-homotopy-colimits",
@@ -94,5 +221,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-quillen-enriched-adjunction-descent",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied seven proof steps: adjoint lifting, the two Brown calculations, localized derived functors, mixed mapping complexes, coherent descent with specified restriction, and finite parameter naturality. Reused the existing Brown Mathlib leaf and both existing enriched foundation nodes; created no nodes. Rechecked the Mathlib candidates and found only ordinary derived adjunctions.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md, the middle mapping-complex equivalence before the inverse limit. This is an agent-formulated dg-model foundation of that comparison, not a theorem explicitly stated by the blueprint.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-461bbb234",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-461bbb234 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps in full, and the full statements of its four cited nodes: lem-coef-brown-split-factorizations, lem-coef-enhanced-localization-universal, lem-coef-dg-model-mapping-comparison and def-weil-abstract-derived-category. The statement is true: an enriched dg Quillen adjunction induces an equivalence of derived mapping objects on the enriched localizations, with no stability assumption. I tested it on the identity adjunction, the zero adjunction, an empty parameter list, and cofibrant X with fibrant Y, where it reduces to the strict isomorphism H(LX,Y)=H(X,RY). Step 1 is correctly marked elementary: lifting squares transfer across the adjunction, so R preserves fibrations and trivial fibrations, and L keeps objects cofibrant while R keeps them fibrant. Steps 2 and 3 use the two halves of the Brown factorization with the right variance (s a cofibration with ps=1; r a fibration with ri=1). I checked these against Mathlib BrownLemma.lean lines 45-55, 83-88, 95-103 and 130-135. Two-out-of-three is applied correctly, and L and R are never applied to weak equivalences outside their safe domains. Steps 4 to 7 use only clauses written in the statements of the localization node and the mapping-comparison node, not their proofs, and the comparison node's hypotheses are word for word the item's. Possible duplicates found by searching the whole DAG for 'Quillen': lem-coef-dg-derived-quillen-calculus assumes stable models, so it does not cover this item; quillen-derived-counit-criterion, enriched-right-quillen-equivalence and localized-bifunctor-partial-derived-adjoints state different results. The item is strictly smaller than its parent lem-coef-dg-model-homotopy-colimits, which uses it only in its step 7. A script over the snapshot DAG found no dependency cycle. All cited nodes are in the unit or are Mathlib leaves, no SGA source is used, and tool_uses is empty, so there was none to accept. The blueprint place cited (prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2, middle isomorphism) exists. The Mathlib searches cover LeanSearch, LeanFinder, Loogle and grep. The base-change morphism and coefficient-category checks do not apply because this is not a target node. No fixes were made."
  }
 }

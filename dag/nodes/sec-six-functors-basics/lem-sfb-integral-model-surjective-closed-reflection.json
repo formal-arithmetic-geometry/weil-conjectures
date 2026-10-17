@@ -18,9 +18,75 @@
   "sk-def-sfb-module-pushforward-pullback",
   "sk-def-sfb-constructible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a scheme T and an A-module P write C_T(P)=B_T\\otimes_{A_T}P_T, where A_T and P_T are constant sheaves, unlike the pulled-back condensed ring B_T. For any morphism f:S\\to T, [def-weil-proetale-inverse-image] supplies the covering-preserving finite-limit-preserving base-change functor. Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor]: its abelian inverse image L preserves colimits and the tensor unit and is strong monoidal. In particular L sends constant abelian sheaves to the same constant abelian sheaves: present an abelian group by sums of copies of Z and take its cokernel; L preserves that presentation. Apply L to the coequalizer defining relative tensor in [sk-def-sfb-change-of-scalars](2). Strong monoidality and colimit preservation identify the result with LB_T\\otimes_{A_S}P_S, with the same scalar action. The coefficient isomorphism LB_T\\simeq B_S of [sk-prop-sfb-cartesian-coefficients](1) and the module-pullback definition in [sk-def-sfb-module-pushforward-pullback] therefore give f^*C_T(P)\\simeq C_S(P). This computation does not require P to be flat or free.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "sk-def-sfb-change-of-scalars",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
+    "place": "Extension, clause (2), coequalizer; cartesian-coefficients clause (1) and the module-pullback definition"
+   }
+  },
+  {
+   "text": "Assume (a), and pull its covering back to Z. By [def-weil-proetale-inverse-image] this gives a pro-etale covering W_\\alpha=U_\\alpha\\times_X Z\\to Z. The composition isomorphisms in [sk-def-sfb-module-pushforward-pullback] identify (i^*F)|_{W_\\alpha} with the pullback of F|_{U_\\alpha} along W_\\alpha\\to U_\\alpha. Applying Step 1 to the given local isomorphism yields (i^*F)|_{W_\\alpha}\\simeq C_{W_\\alpha}(M_\\alpha). Each scalar module is the original finitely generated M_\\alpha, proving (b).",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, functoriality: base change of the given pro-etale cover"
+   }
+  },
+  {
+   "text": "Assume (b), with its covering C={V_\\beta\\to Z}. Apply [new-lem-weil-pbc-proetale-surjective-closed-cover-refinement] to i and C. It gives a pro-etale covering {b_\\gamma:T_\\gamma\\to X}, and for every \\gamma an index \\beta, a scheme W_\\gamma, and maps q:W_\\gamma\\to T_\\gamma, p:W_\\gamma\\to Z, r:W_\\gamma\\to V_\\beta such that the square with b_\\gamma and i is cartesian and (V_\\beta\\to Z)\\circ r=p. These are precisely the witnesses in the cited statement. By [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism], base change of i along b_\\gamma is a surjective closed immersion, so q has both hypotheses required for the module-equivalence theorem in the next step. This uses the existing global cover-refinement statement, with no assumption that X is affine.",
+   "uses": [
+    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BK and 09AB: global cover refinement and the cartesian closed fibre"
+   }
+  },
+  {
+   "text": "Fix \\gamma and the index \\beta from Step 3. Pull the isomorphism (i^*F)|_{V_\\beta}\\simeq C_{V_\\beta}(N_\\beta) back along r. By the composition isomorphisms of [sk-def-sfb-module-pushforward-pullback] and the two equations in Step 3, its left side is q^*(F|_{T_\\gamma}); by Step 1 its right side is C_{W_\\gamma}(N_\\beta)\\simeq q^*C_{T_\\gamma}(N_\\beta). Apply [new-lem-weil-pbc-condensed-surjective-closed-equivalence] with the commutative condensed ring associated to the valuation-topological A and the surjective closed immersion q. It states that this very module pullback q^* is an equivalence; its coefficient convention agrees by [sk-prop-sfb-cartesian-coefficients](1). Fullness lifts the isomorphism and its inverse to maps between F|_{T_\\gamma} and C_{T_\\gamma}(N_\\beta). Faithfulness makes their two composites identities, since their pullbacks are identities. Thus F|_{T_\\gamma}\\simeq C_{T_\\gamma}(N_\\beta). The family {T_\\gamma\\to X} covers, and all N_\\beta remain finitely generated over A, proving (a). No gluing of these different local isomorphisms is needed.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AB applied to pulled-back condensed module coefficients; descent of each local isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "sk-def-sfb-change-of-scalars",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BK (lemma-closed-immersion-affines) and 09AB (lemma-thickening), through the existing global cover-refinement and condensed-module equivalence nodes; explicit scalar-model comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,10 +150,73 @@
    "results": "81; 94; 126",
    "date": "2026-10-17",
    "verdict": "no match: no reflection of finite scalar-matrix models over completed integral coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjective closed immersion reflects finite constant local models for integral pro-etale module sheaves",
+   "results": "{\"t\": \"2026-10-17T10:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"surjective closed immersion reflects finite constant local models for integral pro-etale module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Hom.app_surjective\"], \"digest\": \"512217c829e25239\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant-sheaf, closed-immersion or site facts do not state reflection of the specified integral scalar models; inspected ConstantSheaf.lean:165 and ClosedImmersion.lean:416"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant, ModuleCat, Sheaf",
+   "results": "{\"t\": \"2026-10-17T10:14:43Z\", \"tool\": \"loogle\", \"query\": \"IsLocallyConstant, ModuleCat, Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Sheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: loogle: unknown identifier 'Sheaf'"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.*closed|locally.*constant|finite.*constant",
+   "results": "{\"t\": \"2026-10-17T10:14:43Z\", \"tool\": \"grep\", \"query\": \"surjective.*closed|locally.*constant|finite.*constant\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: earlier invocation supplied a redundant Mathlib prefix, so this zero-hit record is not evidence of absence; corrected source-root searches below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent and reflection of finite constant integral module sheaves across a surjective closed immersion of schemes on the pro-etale site",
+   "results": "{\"t\": \"2026-10-17T10:14:43Z\", \"tool\": \"leansearch\", \"query\": \"Descent and reflection of finite constant integral module sheaves across a surjective closed immersion of schemes on the pro-etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.IsConstant.recOn\", \"CategoryTheory.Sheaf.IsConstant.casesOn\", \"CategoryTheory.Sheaf.IsConstant.rec\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"CategoryTheory.Sheaf.isConstant_iff_of_equivalence\", \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"digest\": \"6664ca7f40bf7a53\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant-sheaf, closed-immersion or site facts do not state reflection of the specified integral scalar models; inspected ConstantSheaf.lean:165 and ClosedImmersion.lean:416"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pro-etale topoi and finitely generated scalar local models are invariant under a surjective nilpotent closed thickening",
+   "results": "{\"t\": \"2026-10-17T10:14:46Z\", \"tool\": \"leanfinder\", \"query\": \"pro-etale topoi and finitely generated scalar local models are invariant under a surjective nilpotent closed thickening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"30ee6d2babf7e140\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant-sheaf, closed-immersion or site facts do not state reflection of the specified integral scalar models; inspected ConstantSheaf.lean:165 and ClosedImmersion.lean:416"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsConstant",
+   "results": "{\"t\": \"2026-10-17T10:14:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.IsConstant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.IsConstant\", \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"CategoryTheory.Sheaf.IsConstant.mk\", \"CategoryTheory.Sheaf.isConstant_congr\", \"CategoryTheory.Sheaf.isConstant_of_iso\", \"CategoryTheory.instIsConstantObjSheafSheafCompose\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\"], \"digest\": \"7ebed27f6562063e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant-sheaf, closed-immersion or site facts do not state reflection of the specified integral scalar models; inspected ConstantSheaf.lean:165 and ClosedImmersion.lean:416"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstant|locally.?constant|pro.?etale",
+   "results": "{\"t\": \"2026-10-17T10:14:47Z\", \"tool\": \"grep\", \"query\": \"IsConstant|locally.?constant|pro.?etale\", \"sub\": \"Mathlib/AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: earlier invocation supplied a redundant Mathlib prefix, so this zero-hit record is not evidence of absence; corrected source-root searches below"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.*closed|locally.*constant|finite.*constant",
+   "results": "{\"t\": \"2026-10-17T10:34:34Z\", \"tool\": \"grep\", \"query\": \"surjective.*closed|locally.*constant|finite.*constant\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant-sheaf, closed-immersion or site facts do not state reflection of the specified integral scalar models; inspected ConstantSheaf.lean:165 and ClosedImmersion.lean:416"
+  },
+  {
+   "tool": "grep",
+   "query": "isConstant_iff_of_equivalence|class IsConstant|proetale.*thicken|surjective.*closed",
+   "results": "{\"t\": \"2026-10-17T10:34:34Z\", \"tool\": \"grep\", \"query\": \"isConstant_iff_of_equivalence|class IsConstant|proetale.*thicken|surjective.*closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/ExtremallyDisconnected.lean\", \"Mathlib/Topology/ExtremallyDisconnected.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"Mathlib/Topology/Maps/Basic.lean\", \"Mathlib/Geometry/Manifold/IsManifold/InteriorBoundary.lean\"], \"digest\": \"1238e331ad38ad71\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant-sheaf, closed-immersion or site facts do not state reflection of the specified integral scalar models; inspected ConstantSheaf.lean:165 and ClosedImmersion.lean:416"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-int-ext-formula",
@@ -104,5 +233,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-integral-model-surjective-closed-reflection",
+  "worker": "stage1",
+  "summary": "Proved both implications using pullback of scalar-model tensor coequalizers, base change of covers, the existing global closed-cover refinement, and the existing condensed-module pullback equivalence. Repaired the interrupted affine/global cover-lifting gap and made the fully faithful descent of each isomorphism explicit. No new nodes; statement and source unchanged.",
+  "blueprint": "Realizes det-lem-int-ext-formula proof (1), the sentence asserting that the restriction to each refined stratum has the stated finite integral local form and the descent from the fibre-product comparison across a surjective closed immersion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic inverse-image monoidality and colimit preservation compute pullback of the scalar tensor coequalizer; the unit has no separate site-tensor theorem."
+   },
+   {
+    "node": "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "why": "Generic global Tag 09BK cover lifting supplies the precise cartesian refinements of a pro-etale covering of Z; no such node occurs in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "Generic geometric base-change stability supplies surjectivity and closedness of the lifted closed fibre, without a nilpotence bound."
+   },
+   {
+    "node": "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+    "why": "Generic equivalence for arbitrary condensed ring modules descends the specified scalar-model isomorphisms; it does not assert the local-model property being proved."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Untwisted coefficient identification ensures pullback uses the same valuation-topological integral ring, on arbitrary schemes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-454e4b7c8",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-454e4b7c8 (reviewer sub-agent of L); spot-checked: I read in full the item, the four proof steps, every cited statement, the parent det-lem-int-ext-formula steps 3-5 and the unit sk-lem-int-ext. Stacks proetale.tex 09BK (line 4801) and 09AB (line 4963) are checked. I also read the Lean source of condensedSurjectiveClosedPullback_isEquivalence. Its functor is extendScalars(condensedPullbackHom) after mapMod(upperStar Ab), which is exactly the module pullback of sk-def-sfb-module-pushforward-pullback, so the coefficient category matches. The statement is true and unchanged: an arbitrary surjective closed immersion, no Noetherian or nilpotence-bound hypothesis, and torsion modules allowed. The parent uses only (b)=>(a), which this item supplies. Step 1 uses colimit preservation, strong monoidality and the coequalizer of sk-def-sfb-change-of-scalars(2), so pullback preserves the constant models. Compatibility of alpha_f with the constant-section maps is implicit but routine. Step 2 base-changes the covering and uses the composition isomorphisms. Step 3 uses exactly the IsPullback witnesses of the cover-refinement node; the base change q is a surjective closed immersion, as the equivalence node requires. Step 4 lifts the isomorphism and its inverse by fullness and gets the identities by faithfulness; no gluing is needed. I tested i=id, X empty, Spec k -> Spec k[e]/e^2, and P = 0, O_E, O_E/varpi, O_E/varpi^2. There are no cycles and no SGA. I accept the five declared tool_uses: left-exact inverse-image tensor, cover refinement, universal homeomorphism, condensed equivalence and cartesian coefficients. No new nodes. The closest existing node, lem-sfb-surjective-closed-module-invariance, is for a finite ring with constant sheaves, so it is not a duplicate; the lfp-reflection nodes use sheaf-valued matrices. The Mathlib searches cover all three kinds. No changes."
  }
 }

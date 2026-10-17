@@ -1,0 +1,75 @@
+{
+ "kind": "statement",
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-simplicial-bar-projective-resolution",
+  "date": "2026-10-17",
+  "group": "NG"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-coef-simplicial-bar-latching-decomposition",
+ "title": "Nondegenerate-chain decomposition of the bar latching object",
+ "statement": "Let $I$ be a small category, let $\\mathcal M$ be a category with all small coproducts, and let $V:I\\to\\mathcal M$ be a functor. Use the simplex category $\\Delta$ of [def-weil-pbc-simplicial-set]. For $n\\geq0$ and $j\\in I$, put\n$$S_nV(j)=\\coprod_{i_0\\to\\cdots\\to i_n\\to j}V(i_0).$$\nFor an order-preserving surjection $\\theta:[n]\\twoheadrightarrow[a]$, the map $S_aV(j)\\to S_nV(j)$ repeats the vertices according to $\\theta$, inserts identity internal arrows, retains the final arrow to $j$, and acts identically on each $V(i_0)$-label. Let $D_n$ have objects the proper surjections $\\theta:[n]\\twoheadrightarrow[a]$, $a<n$. A morphism $\\theta\\to\\theta'$ is a surjection $\\rho:[a']\\twoheadrightarrow[a]$ satisfying $\\theta=\\rho\\theta'$. Give it the diagram $\\theta\\mapsto S_aV(j)$, with arrow map given by insertion according to $\\rho$. Its canonical cocone to $S_nV(j)$ is the degree-$n$ simplicial latching cocone.\nThis diagram has a colimit $L_nS(j)$ [def-weil-pbc-category-colimit]. The canonical map to $S_nV(j)$ identifies, up to canonical isomorphism, with the coproduct injection\n$$\\coprod_{i_0\\to\\cdots\\to i_n\\to j\\,;\\,\\exists k<n:\\,(i_k\\to i_{k+1})=1}V(i_0)\\ \\longrightarrow\\ \\coprod_{i_0\\to\\cdots\\to i_n\\to j}V(i_0).$$\nIn particular there is a canonical decomposition\n$$S_nV(j)\\cong L_nS(j)\\amalg N_nV(j),\\qquad N_nV(j)=\\coprod_{i_0\\to\\cdots\\to i_n\\to j\\,;\\,\\forall k<n:\\,(i_k\\to i_{k+1})\\ne1}V(i_0).$$\nOnly the $n$ internal arrows are tested; the final arrow $i_n\\to j$ may be an identity. These identifications commute with postcomposition in $j$ and natural transformations of $V$. For $n=0$, $D_n$ is empty and $L_0S(j)$ is initial. No model structure, cofibrancy, images, or monomorphism assumption on coproduct injections is required.",
+ "source": {
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Section 3.4 and Definition 13.8 (latching colimits), Remark 4.4 (identity-chain summands), Remark 9.12 (forward-chain convention), and Section 19.1; printed pp.10, 17, 38, 57, 90. General coproduct-valued formulation supplied by the agent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The latching object of the forward-chain simplicial bar diagram is the coproduct of degenerate chains and nondegenerate chains are its complementary summands",
+   "results": "{\"t\": \"2026-10-17T09:18:07Z\", \"tool\": \"leanfinder\", \"query\": \"The latching object of the forward-chain simplicial bar diagram is the coproduct of degenerate chains and nondegenerate chains are its complementary summands\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"SimplicialObject.Splitting.summand\", \"AlgebraicTopology.DoldKan.Γ₀.splitting\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.obj\"], \"digest\": \"9080e8dfee77d6f8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, especially Splitting and its cofan, and the Dold-Kan candidates. These assume a splitting or concern additive chain complexes; they do not construct the latching colimit of this arbitrary coproduct-valued forward-chain bar."
+  },
+  {
+   "tool": "grep",
+   "query": "latching.*nondegenerate|nondegenerate.*latching",
+   "results": "{\"t\": \"2026-10-17T09:18:46Z\", \"tool\": \"grep\", \"query\": \"latching.*nondegenerate|nondegenerate.*latching\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, especially Splitting and its cofan, and the Dold-Kan candidates. These assume a splitting or concern additive chain complexes; they do not construct the latching colimit of this arbitrary coproduct-valued forward-chain bar."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject.Splitting\"",
+   "results": "{\"t\": \"2026-10-17T09:20:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject.Splitting\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Splitting.IndexSet\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.id\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.EqId\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.instFintype\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.instInhabited\", \"CategoryTheory.SimplicialObject.Splitting\", \"CategoryTheory.SimplicialObject.Splitting.summand\", \"CategoryTheory.SimplicialObject.Splitting.N\"], \"digest\": \"611011639f9a6857\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, especially Splitting and its cofan, and the Dold-Kan candidates. These assume a splitting or concern additive chain complexes; they do not construct the latching colimit of this arbitrary coproduct-valued forward-chain bar."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The latching map of a split simplicial object freely indexed by category chains is the inclusion of its degenerate-chain coproduct",
+   "results": "{\"t\": \"2026-10-17T09:20:27Z\", \"tool\": \"leanfinder\", \"query\": \"The latching map of a split simplicial object freely indexed by category chains is the inclusion of its degenerate-chain coproduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.ι\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'\", \"SimplicialObject.Splitting.πSummand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"SimplicialObject.Splitting.φ\", \"SimplicialObject.Splitting.cofan_inj_eq\"], \"digest\": \"d68e17a9fef54014\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, especially Splitting and its cofan, and the Dold-Kan candidates. These assume a splitting or concern additive chain complexes; they do not construct the latching colimit of this arbitrary coproduct-valued forward-chain bar."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nondegenerate chain decomposition of the simplicial bar construction",
+   "results": "{\"t\": \"2026-10-17T09:20:48Z\", \"tool\": \"leansearch\", \"query\": \"Nondegenerate chain decomposition of the simplicial bar construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.nondegComplex\", \"SimplicialObject.Split.nondegComplexFunctor\", \"SimplicialObject.Split.nondegComplexFunctor_obj\", \"SSet.nonDegenerate\", \"SSet.N\", \"SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁\", \"SSet.N.recOn\", \"SSet.mem_degenerate_iff_notMem_nonDegenerate\"], \"digest\": \"51117a73384d052c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, especially Splitting and its cofan, and the Dold-Kan candidates. These assume a splitting or concern additive chain complexes; they do not construct the latching colimit of this arbitrary coproduct-valued forward-chain bar."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph beginning For K, middle finite-level derived mapping-complex adjunction: nondegenerate-chain/latching calculation for the simplicial bar.",
+   "via": [
+    "lem-coef-simplicial-bar-projective-resolution"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

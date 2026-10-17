@@ -131,19 +131,48 @@
    }
   },
   {
-   "text": "The lifts in steps 7 and 8 are cartesian; here is the unique-factorization calculation omitted as a simple calculation in the source. For a lift $e:(j_s,w_s,\\sigma_s)\\to(j_n,w_n,\\sigma_n)$ above $b:w_s\\to w_n$, and a competitor $d:(j_r,w_r,\\sigma_r)\\to(j_n,w_n,\\sigma_n)$ above $d_B$ together with $h_B:w_r\\to w_s$ satisfying $bh_B=d_B$, put $h=\\sigma_s^{-1}h_B\\sigma_r$ and $d_0=\\sigma_n^{-1}d_B\\sigma_r=H(d)$. The equation $b\\sigma_s=\\sigma_nH(e)$ gives $H(e)h=d_0$. It therefore suffices to prove unique factorization for the underlying canonical arrow $e:([s],\\epsilon)\\to([n],\\epsilon)$ with opposite operator $\\alpha:[n]\\to[s]$, $\\alpha(0)=0$; in the top case also $\\alpha(n)=s$. In the Cut case suppress $\\epsilon$. Let an arbitrary competing arrow $d:([r],\\eta)\\to([n],\\epsilon)$ have opposite operator $\\delta:[n]\\to[r]$, and let $h:H([r],\\eta)\\to H([s],\\epsilon)$ be a base arrow with $H(e)h=H(d)$. In the prism necessarily $\\eta\\leq\\epsilon$; when $\\epsilon=0$ both are zero. For each algebra output $1\\leq j\\leq s$ write $C_j$ for the ordered fibre of $h$ at $j$. Equality of the composite as an ordered-fibre map says that concatenating the $C_j$ for $\\alpha(i-1)<j\\leq\\alpha(i)$ gives precisely the increasing interval $(\\delta(i-1),\\delta(i)]$. Define\n$$\\lambda(0)=\\delta(0),\\qquad \\lambda(j)=\\delta(0)+\\sum_{l=1}^j|C_l|\\quad(1\\leq j\\leq s).$$\nIn the top case every $j$ occurs in one of these lists, so each $C_j$ is the increasing interval $(\\lambda(j-1),\\lambda(j)]$, and $\\lambda(s)=\\delta(n)\\leq r$. The discarded inputs are exactly those at or below $\\delta(0)$ or above $\\delta(n)$, since the active $H(e)$ discards none; for a cross arrow this includes the module input. In the bottom case concatenate also the fibre $C_{s+1}$ at the module output. The equality at that output says that $C_{\\alpha(n)+1},\\ldots,C_s,C_{s+1}$ concatenate to $(\\delta(n),r+1]$ in increasing order, ending in the unique module input. It follows that the algebra $C_j$ again have the displayed interval form, and $C_{s+1}=(\\lambda(s),r+1]$, so $\\lambda(s)\\leq r$; the only discarded inputs are those at or below $\\delta(0)$. In either case $\\lambda$ is a monotone map $[s]\\to[r]$, the fibre description proves $H(\\lambda^{\\mathrm{op}},\\eta\\to\\epsilon)=h$, and counting the concatenations gives $\\lambda(\\alpha(i))=\\delta(i)$ for all $i$. Thus $\\lambda^{\\mathrm{op}}$ is the desired factor $v$, with $ev=d$. Uniqueness follows because $\\lambda(0)=\\delta(0)$ is forced by $\\alpha(0)=0$ and $\\lambda(j)-\\lambda(j-1)=|C_j|$ is forced for every $j$. This also handles $s=0$, where the single value is forced even though the pointed map can forget that value. The pair $(v,h_B)$ is an arrow of $J^H$, because $h_B\\sigma_r=\\sigma_sH(v)$ is exactly $H(v)=h$. Its composite with $e$ has underlying arrow $ev=d$ and base arrow $bh_B=d_B$, so equals the original competitor. Every other factor must have these same underlying and base arrows; hence uniqueness holds for all labels. Step 2, namely the dual application of [lem-coef-infinity-cocartesian-mapping-criterion], makes these lifts $N(Q)$-cartesian.",
+   "text": "For the lifts of steps 7 and 8, normalize an arbitrary factorization problem by its labels. Write $e:(j_s,w_s,\\sigma_s)\\to(j_n,w_n,\\sigma_n)$ over $b$, and $d:(j_r,w_r,\\sigma_r)\\to(j_n,w_n,\\sigma_n)$ over $d_B$, with $bh_B=d_B$. Put $h=\\sigma_s^{-1}h_B\\sigma_r$. Cancelling $\\sigma_n$ in $b\\sigma_s=\\sigma_nH(e)$ gives $H(e)h=H(d)$. Thus a factor in $J$ with $ev=d$ and $H(v)=h$ gives the factor $(v,h_B)$ in $J^H$, since its defining equation is $h_B\\sigma_r=\\sigma_sH(v)$. This correspondence is bijective, because the base arrow is prescribed. The canonical opposite operator $\\alpha:[n]\\to[s]$ of $e$ satisfies $\\alpha(0)=0$, and in the top or Cut case also $\\alpha(n)=s$, by steps 7 and 8.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra (2017), Proposition 4.1.2.11, final cartesian-lift calculation; Remark 4.2.2.8, left-module analogue. Agent expansion of the ordered-fibre calculation; no Stacks tag covers this operator-combinatorial assertion. WANTED archive in literature/."
+   }
+  },
+  {
+   "text": "For a canonical competitor with opposite operator $\\delta:[n]\\to[r]$, write $\\eta$ and $\\epsilon$ for its source and target prism levels. The existence of the competitor forces $\\eta\\leq\\epsilon$; if $\\epsilon=0$ both are zero. In the notation of [lem-coef-lm-algebra-fibre-reconstruction] and [lem-coef-lm-module-fibre-reconstruction], the canonical $H(e)$ is $T_\\alpha$ for a top or Cut target and $B_\\alpha$ for a bottom target. The competitor is respectively $D^\\eta_\\delta$ (with $\\eta=1$ for Cut) or $B_\\delta$. Apply the algebra reconstruction lemma in the first case and the module reconstruction lemma in the second to the normalized equation of step 9. Their endpoint hypotheses are exactly those just checked. They give a monotone $\\lambda:[s]\\to[r]$ with $H(\\lambda^{\\mathrm{op}},\\eta\\to\\epsilon)=h$ and $\\lambda\\alpha=\\delta$. Hence $v=(\\lambda^{\\mathrm{op}},\\eta\\to\\epsilon)$, suppressing levels for Cut, is a factor with $ev=d$ and $H(v)=h$.",
    "uses": [
-    "def-coef-left-module-operadic-encoding",
+    "lem-coef-lm-algebra-fibre-reconstruction",
+    "lem-coef-lm-module-fibre-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra (2017), Proposition 4.1.2.11, final cartesian-lift calculation; Remark 4.2.2.8, left-module analogue. Agent expansion of the ordered-fibre calculation; no Stacks tag covers this operator-combinatorial assertion. WANTED archive in literature/."
+   }
+  },
+  {
+   "text": "This canonical factor is unique. Any other factor has a monotone operator $\\mu:[s]\\to[r]$ with $\\mu\\alpha=\\delta$. Since $\\alpha(0)=0$, its initial value is forced: $\\mu(0)=\\delta(0)$. Equality $H(v)=h$ forces $\\mu(j)-\\mu(j-1)=|C_j|$ for each algebra-output fibre $C_j$. Summing gives $\\mu(j)=\\delta(0)+\\sum_{l=1}^j|C_l|=\\lambda(j)$ for every $j$. This also handles $s=0$: the initial value alone is forced although the pointed map forgets it. There is at most one level arrow $\\eta\\to\\epsilon$, so the arrow $v$ is unique. The bijection in step 9 then proves uniqueness for every labelled factorization problem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra (2017), Proposition 4.1.2.11, final cartesian-lift calculation; Remark 4.2.2.8, left-module analogue. Agent expansion of the ordered-fibre calculation; no Stacks tag covers this operator-combinatorial assertion. WANTED archive in literature/."
+   }
+  },
+  {
+   "text": "We have proved that for every competitor and prescribed compatible base arrow there is a unique factor through each lift of steps 7 and 8. Apply the ordinary-nerve cartesian criterion established in step 2, the dual of [lem-coef-infinity-cocartesian-mapping-criterion], to $Q:J^H\\to P$. Consequently these lifts are $N(Q)$-cartesian. This checks all competitors, including cross arrows into a top target and module-only bottom words.",
+   "uses": [
     "lem-coef-infinity-cocartesian-mapping-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
-    "place": "Proposition 4.1.2.11, final simple-calculation sentence, and Remark 4.2.2.8; full factorization calculation for top, bottom and cross competitors."
+    "place": "Higher Algebra (2017), Proposition 4.1.2.11, final cartesian-lift calculation; Remark 4.2.2.8, left-module analogue. Agent expansion of the ordered-fibre calculation; no Stacks tag covers this operator-combinatorial assertion. WANTED archive in literature/."
    }
   },
   {
-   "text": "The categorical-fibration replacement in step 3 has the inert colour projections of step 6 and the active cartesian lifts of steps 7–9. These are exactly conditions (i) and (ii) in the approximation definition of [lem-coef-operadic-approximation-restriction]. Thus $N(Q)$ is an approximation and its factorization with the categorical equivalence $N(J)\\to N(J^H)$ proves that both original functors are approximations. Step 5 proves their colour-fibre equivalences, and step 4 proves every marking and cross-edge factorization claimed. Everything was computed in the ordinary operator categories and their nerves, so no assumption about a target fibration, section, module or algebra was used.",
+   "text": "The categorical-fibration replacement in step 3 has the inert colour projections of step 6 and the active cartesian lifts of steps 7–12. These are exactly conditions (i) and (ii) in the approximation definition of [lem-coef-operadic-approximation-restriction]. Thus $N(Q)$ is an approximation and its factorization with the categorical equivalence $N(J)\\to N(J^H)$ proves that both original functors are approximations. Step 5 proves their colour-fibre equivalences, and step 4 proves every marking and cross-edge factorization claimed. Everything was computed in the ordinary operator categories and their nerves, so no assumption about a target fibration, section, module or algebra was used.",
    "uses": [
     "lem-coef-operadic-approximation-restriction"
    ],
@@ -159,7 +188,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-cocartesian-mapping-criterion",
   "def-coef-infinity-fibrations",
-  "lem-coef-operadic-approximation-restriction"
+  "lem-coef-operadic-approximation-restriction",
+  "lem-coef-lm-algebra-fibre-reconstruction",
+  "lem-coef-lm-module-fibre-reconstruction"
  ],
  "proof_origin": {
   "by": "agent",
@@ -281,7 +312,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-module-section-model",
@@ -294,16 +325,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-lm-prism-approximation",
   "worker": "stage1",
-  "summary": "Kept the statement. Verified the explicit operators against HA, constructed the isomorphism-labelled categorical-fibration replacement, wrote the local projection and active prefix-sum lifting arguments, and proved cartesianness by unique factorization using the existing mapping-space criterion. No new nodes or Mathlib leaves. Checked nullary operators, empty active fibres, module-only objects, discarded cross-module inputs and colour fibres.",
+  "summary": "Repair of the human return: retained statement and Lean record; replaced former 3096-character step 9 by four short steps. Two statement-only nodes isolate algebra-target (including cross) and module-target interval-fibre reconstruction; label normalization, uniqueness by initial value and fibre lengths, and application of the existing mapping-space criterion complete the argument. All other steps and the unit route are retained.",
   "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, middle finite-coefficient mapping-complex comparison before R lim: operadic foundation of coherent-module simplicial sections through the existing monadic-bar ancestry. This item realizes the explicit Cut/prism approximation and inert marking step; it does not replace the unit route."
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q116-5cacd07bb",
-  "group": "Q116",
+  "reviewer": "NT-cc-Q23-dce00a8c5",
+  "group": "Q23",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-5cacd07bb (reviewer sub-agent of L); spot-checked: I read the item and all ten steps in full, together with the full statements of the five cited nodes and the parent's steps 1, 4, 5 and 6. Higher Algebra is not in literature/, so it is correctly marked WANTED with proof_origin agent; I checked the mathematics against the definitions in the DAG. The LCut and Cut blocks match inverse images of initial segments. The module input is always last, and θ is inert and natural. Colour fibres: Cut has only {[1]} and the prism has the discrete pair ([1],1), ([0],0); the cross candidate discards its module input. Markings: interval inclusion, plus α(m)=n on the bottom; the factorization is vertical-first. Step 2: ordinary nerves are inner fibrations with discrete right-pinched mapping spaces, and the cartesian case follows from the opposite category. Step 3: J→J^H is an equivalence and (1,t) lifts every isomorphism. Step 4: singleton fibres give the p-cocartesian factor and the colours match. Step 6: I recomputed every Hom set over ρ_i, including relabelling by σ^{-1}(i). Steps 7–9: the prefix-sum lifts are correct, including n=0, s=0 and empty fibres; uniqueness uses λ(0)=δ(0), and cross competitors are covered. Step 10 is exactly clauses (i) and (ii) of the approximation definition. My own brute-force check found exactly one factor in all 5600 cartesian cases (n≤3, every competitor and base map) and matched the marking predicate on every edge. The delivery has one commit, no new nodes and no cycle. proof_deps equals the union of the steps' uses. All cited statement nodes are in the same unit, and the only off-unit node is a definition, so no tool_uses are needed. The delivery's HA Remark 4.2.2.26 source-error example (α=(0,1) gives a module fibre {2,3}) is correct and does not affect the item. No changes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-dce00a8c5 (reviewer sub-agent of L); spot-checked: I read the item, its 13 steps (8 kept unchanged, old step 9 rewritten as steps 9-13) and both new statement-only nodes in full, plus the statements of every cited node. These are def-coef-left-module-operadic-encoding (ordered fibres, module input last, substitution), lem-coef-operadic-approximation-restriction (clauses i/ii and the equivalence replacement), lem-coef-infinity-cocartesian-mapping-criterion, def-coef-infinity-fibrations (horn conventions) and def-coef-lm-pointed-projection. All cited statements are in the unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no SGA. Higher Algebra is not in literature/, so I checked the math against the DAG definitions; WANTED and proof_origin=agent are correctly set. Step 9: I recomputed the label cancellation H(e)h = sigma_n^-1 d_B sigma_r = H(d) and the bijection of factorization problems. Step 10: H(e) is T_alpha for top/Cut and B_alpha for bottom; competitors are T_delta, the cross arrow K_delta = Cut(delta)theta_r, or B_delta. Levels satisfy eta<=epsilon, the lemma hypotheses alpha(0)=0 (plus alpha(n)=s for algebra) hold, and e∘v = (lambda∘alpha)^op = d. Step 11: uniqueness comes from mu(0)=delta(0) and the fibre lengths. Steps 12-13 apply the dual criterion of step 2 and approximation clauses (i)/(ii). Algebra node: concatenation over outputs gives C_1..C_s = (delta(0),delta(n)] only because alpha(n)=s. That gives lambda∘alpha=delta, the discards (<=delta(0), >delta(n), module input) and h=D_lambda. Module node: concatenation gives C_1..C_{s+1} = (delta(0),r+1], and the last fibre contains the module input r+1, so lambda(s)<=r and h=B_lambda; no alpha(n)=s is needed or assumed. I enumerated every LM arrow for r<=3, s<=2, n<=2 and both eta: 460 algebra and 500 module cases satisfy all conclusions. Edge cases checked: n=0, s=0, constant delta, empty fibres and module-only sources. The nodes have no proofs (B1), are self-contained TeX with valid stmt_dep, carry LeanFinder/LeanSearch/Loogle/grep searches and correct blueprint from/via (ancestor prop-coef-integral-exceptional-adjoint). proof_deps equals the union of uses, and all steps are <=1929 characters. An rg over dag/nodes for ordered fibre/Cut/4.1.2.11/4.2.2.8/prefix sums found no duplicate (block-projection-coherence, cut-chain-forest, module-operad-encoding, lm-zero and pointed-projection all differ). The new nodes are not restated clauses of the item and create no cycle. The item statement and Lean record are unchanged; this is not a target node. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

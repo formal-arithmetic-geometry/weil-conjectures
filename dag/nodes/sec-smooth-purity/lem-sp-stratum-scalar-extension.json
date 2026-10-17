@@ -18,9 +18,101 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=i^{-1}$ on sheaves of sets. The construction in [def-weil-proetale-inverse-image] gives a geometric morphism on the chosen small pro-etale sites: base change sends the final object $T\\to T$ to $S\\to S$, preserves finite limits, and direct image is precomposition. For the finite commutative ring $A$, [prop-weil-pbc-proetale-constant-ring-map] says that the particular structure map $c_A:L A_T\\to A_S$, adjoint to the map sending constant scalars to themselves, is invertible. Thus the module pullback $i^*F=LF\\otimes_{LA_T}A_S$ is canonically $LF$ with its action transported through $c_A$: the map on local tensors is $x\\otimes a\\mapsto c_A^{-1}(a)x$, with inverse $x\\mapsto x\\otimes1$. By [prop-weil-pbc-proetale-constant-exact] this module functor is exact. The same coefficient comparison applies to $B$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YV (proposition-functoriality-algebraic-structures-topoi) and 0H7J (example-constant-sheaf); specialized coefficient comparisons supplied by the cited nodes"
+   }
+  },
+  {
+   "text": "Write $\\Delta_T E,\\Delta_S E$ for constant sheaves of sets. For a set $E$ and a sheaf of sets $F$ on $S$, the inverse-image adjunction from [def-weil-proetale-inverse-image] and the constant-sheaf adjunction [lem-weil-pbc-constant-sheaf-maps-global-sections] give, naturally in both variables,\n$$\\operatorname{Hom}(L\\Delta_T E,F)=\\operatorname{Hom}(\\Delta_T E,i_*F)=\\operatorname{Hom}_{\\mathrm{Sets}}(E,(i_*F)(T))=\\operatorname{Hom}_{\\mathrm{Sets}}(E,F(S))=\\operatorname{Hom}(\\Delta_S E,F).$$\nThe middle equality uses $(i_*F)(T)=F(S)$, since base change preserves the final object. Hence $L\\Delta_T$ and $\\Delta_S$ are left adjoints to the same global-sections functor. The unit-compatible uniqueness statement [lem-weil-pbc-conjugate-iso-unit-equation] gives a natural isomorphism $\\gamma_E:L\\Delta_T E\\xrightarrow{\\sim}\\Delta_S E$. Its adjoint sends the constant section $e$ to the constant section $e$: this is precisely the equality of units in that statement. This construction works for every set $E$, including singleton and product sets.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J (example-constant-sheaf), with categories.tex Tag 0B65 (lemma-transformation-between-functors-and-adjoints): composite adjunction and its unit-compatible uniqueness"
+   }
+  },
+  {
+   "text": "Apply step 2 to the underlying sets of $A$ and $M$. By [lem-weil-pbc-sheafification-sets-exact], the constant-sheaf functor preserves finite products: the product of two constant presheaves is the constant presheaf of the product, and sheafification preserves that product. The functor $L$ also preserves finite products by [def-weil-proetale-inverse-image]. Naturality of $\\gamma$ at the two projections therefore identifies $\\gamma_{E\\times E'}$ with $\\gamma_E\\times\\gamma_{E'}$ under these product comparisons. Apply naturality at $+:M\\times M\\to M$, $-:M\\to M$, $0:\\{*\\}\\to M$, and the action $A\\times M\\to M$. It gives respectively the addition, negation, zero and action squares; for example $\\gamma_M L(\\mu_M)=\\mu_{M,S}(\\gamma_A\\times\\gamma_M)$ under the product identification. The module operations are the sheafified constant operations of [def-weil-proetale-locally-constant-sheaf], and the pulled-back operations are exactly those prescribed in [def-weil-proetale-inverse-image]. Both $\\gamma_A$ and $c_A$ have adjunct sending each constant $a$ to itself, so the adjunction makes them equal. Step 1 now gives the required $A_S$-linear isomorphism $i^*\\underline M_T\\simeq\\underline M_S$. Naturality holds for every $A$-linear map $M\\to M'$ by the same naturality square; in particular this applies to $M=B$ as an $A$-module. No local freeness of $M$ was used.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ (lemma-sheafification-exact) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi); naturality at the displayed module operations"
+   }
+  },
+  {
+   "text": "Regard $i$ as a morphism of ringed topoi with rings $A_T,A_S$ and structure map $c_A$ from step 1. In each degree $n$, apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to the two $A_T$-module sheaves $P^n$ and $B_T$. Using $i^*B_T\\simeq B_S$ from step 3 gives\n$$i^*(P^n\\otimes_{A_T}B_T)\\xrightarrow{\\sim}i^*P^n\\otimes_{A_S}B_S.$$\nThe comparison is $B_S$-linear: on the right $B_S$ acts on its second factor, and naturality of the cited tensor comparison in that factor intertwines multiplication by each constant $b\\in B$ with multiplication by the same $b$ after step 3. These constants locally generate $B_S$ as a sheaf, so the action square holds for all local scalar sections. Naturality in $P^n$ applied to $d^n:P^n\\to P^{n+1}$ makes these maps commute with the differentials. They thus give the asserted natural termwise tensor isomorphism of complexes, and naturality for any cochain map follows degree by degree. This tensor comparison itself does not require $B_T$ to be flat over $A_T$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), applied degreewise; naturality for multiplication on the constant B factor"
+   }
+  },
+  {
+   "text": "The same ringed-topos morphism has the module pullback of [def-weil-proetale-inverse-image]. The complex $P$ is K-flat and each $P^n$ is flat by hypothesis. Apply [lem-weil-pbc-ringed-topos-kflat-pullback] with $\\mathcal C=T_{\\mathrm{proet}}$, $\\mathcal C'=S_{\\mathrm{proet}}$, $\\mathcal O=A_T$, $\\mathcal O'=A_S$, and $c=c_A$. Its conclusion is exactly that the termwise pullback $i^*P$ is K-flat over $A_S$ and has flat terms. Both the K-flat and flat-term hypotheses are retained; this application does not rely on enough points or on a stalk criterion for the pro-etale topos.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat), with both its K-flatness and flat-term hypotheses"
+   }
+  },
+  {
+   "text": "By step 1 the additive coefficient pullback $i^*$ is exact. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to this functor between the abelian module categories and to the given complex $K$. It yields natural $A_S$-linear isomorphisms $H^q(i^*K)\\simeq i^*H^q(K)$ for every integer $q$, induced by preservation of cycles and boundaries. With the cohomology-sheaf convention [def-weil-derived-cohomology-sheaves], these are precisely the isomorphisms $\\mathcal H^q(i^*K)\\simeq i^*\\mathcal H^q(K)$ in the statement. In particular they hold when the cohomology sheaves restrict to finite locally constant modules on $S$; that restriction hypothesis imposes no additional requirement on this exact-functor calculation.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), applied in each degree, with cohomology sheaves computed in the abelian category of modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "place": "Expansion of paragraph (2), following Stacks Tags 0H7J, 00WJ, 00YV, 03EL, 0G7E, 010N and the existing DAG interfaces; the constant-set adjunction and operation squares are written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +141,45 @@
    "results": "8 hits; recorded top: CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.constantSheaf; CategoryTheory.Sheaf.isConstant_congr; CategoryTheory.Sheaf.mem_essImage_of_isConstant; CategoryTheory.Sheaf.IsConstant.rec; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.IsConstant.mem_essImage",
    "date": "2026-10-17",
    "verdict": "no match: no theorem for the stated ringed pro-etale module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*sheaf|pullback.*tensor",
+   "results": "2 hits; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: these generic pullback, constant-sheaf or algebra declarations do not state the full pro-etale module, K-flat, tensor and cohomology comparison; the generic constant-sheaf adjunction is used through its existing DAG node."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits; SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso",
+   "date": "2026-10-17",
+   "verdict": "no match: these generic pullback, constant-sheaf or algebra declarations do not state the full pro-etale module, K-flat, tensor and cohomology comparison; the generic constant-sheaf adjunction is used through its existing DAG node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of constant module sheaves on pro-etale sites preserves K-flat complexes and commutes with scalar extension and cohomology",
+   "results": "8 hits; CategoryTheory.compatiblePreservingOfFlat, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: these generic pullback, constant-sheaf or algebra declarations do not state the full pro-etale module, K-flat, tensor and cohomology comparison; the generic constant-sheaf adjunction is used through its existing DAG node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of a constant sheaf of modules is the constant sheaf of the same module",
+   "results": "8 hits; CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.constantSheaf, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.rec, CategoryTheory.Sheaf.IsConstant.recOn",
+   "date": "2026-10-17",
+   "verdict": "no match: these generic pullback, constant-sheaf or algebra declarations do not state the full pro-etale module, K-flat, tensor and cohomology comparison; the generic constant-sheaf adjunction is used through its existing DAG node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left exact inverse image functor sends constant sheaves to constant sheaves and commutes with tensor products of modules",
+   "results": "8 hits; CompHausLike.LocallyConstantModule.functor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.instIsConstantObjSheafSheafCompose, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+   "date": "2026-10-17",
+   "verdict": "no match: these generic pullback, constant-sheaf or algebra declarations do not state the full pro-etale module, K-flat, tensor and cohomology comparison; the generic constant-sheaf adjunction is used through its existing DAG node."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-scalar-extension-functor",
@@ -69,5 +196,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-stratum-scalar-extension",
+  "worker": "stage1",
+  "summary": "Six-step proof using only existing DAG nodes: canonical coefficient comparison and exactness; constant-set adjunction; explicit module-operation squares; degreewise tensor comparison; ringed-topos K-flat pullback with flat terms; exact-functor cohomology. Statement unchanged; no new nodes. Searches found no project declaration giving all clauses and no Mathlib match for the whole item.",
+  "blueprint": "det-sp-scalar-extension-functor, proof paragraph (2): justify restriction of constant modules and scalar extension to the refined stratum, and the K-flat/cohomology comparisons that its termwise construction needs.",
+  "tool_uses": [
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "The specified pro-etale ringed-topos inverse image and its actual coefficient structure map fix the functor used throughout; the scalar-extension unit does not reconstruct site inverse image."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Use invertibility of the particular finite-constant ring comparison, preserving constant scalars; no coefficient-comparison theorem is stated in this unit."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Use exactness for finite commutative constant coefficients on pro-etale sites, without changing coefficient categories."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "why": "Use the set-valued constant-sheaf/global-sections adjunction to prove the constant-object comparison rather than postulate it."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness of left adjoints supplies the natural constant-set comparison with its prescribed unit."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Finite-product preservation gives the explicit addition/action comparison squares for constant sheaves."
+   },
+   {
+    "node": "def-weil-proetale-locally-constant-sheaf",
+    "why": "Defines the precise constant module sheaf and its scalar action, needed to identify the object in the statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic ringed-topos tensor pullback specializes degreewise and proves the scalar-extension comparison without a flatness assumption on B."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ringed-topos theorem applies to the K-flat complex with flat terms exactly as hypothesized, avoiding a topological-space or enough-points substitution."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic abelian-category theorem identifies cohomology of termwise exact pullback with pullback of cohomology."
+   },
+   {
+    "node": "def-weil-derived-cohomology-sheaves",
+    "why": "Fixes the cohomology-sheaf interpretation of the final clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-33fa09041",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-33fa09041 (reviewer sub-agent of L); spot-checked: Read the full item and the statement of every cited node, the unit sk-def-sp-scalar-extension, blueprint main-20261015 sk-def-sp-scalar-extension-functor.proof.md paragraph (2), and the parent det-sp-scalar-extension-functor step that cites the item. The delivery creates no new nodes, leaves the statement unchanged and cites no SGA. A walk of the dependencies finds no cycle, and every cited id exists. Step 1: the base-change morphism and structure map c_A are the ones in def-weil-proetale-inverse-image. prop-weil-pbc-proetale-constant-ring-map states that c_A is invertible and equal to the def's map, including when the scheme is empty. Its coefficient sheaf Lambda_Proet is identified with the constant sheaf A_T through that prop's map, which preserves constants, so the exactness from prop-weil-pbc-proetale-constant-exact carries over; coefficients are not silently changed. Step 2: the Hom chain through the constant-sheaf/global-sections adjunction (needs a final object, which exists even for an empty scheme) and the conjugate-adjoint uniqueness lemma is correct. Step 3 is genuinely elementary: naturality at the module operations, finite-product preservation, and gamma_A = c_A because both have the same adjunct. Step 4 uses Stacks 03EL (sites-modules.tex line 3649) degreewise; B_S-linearity is checked on locally constant sections, and no flatness of A->B is used. Step 5 uses Stacks 0G7E (sites-cohomology.tex line 3508), which needs both K-flatness and flat terms, exactly as the item assumes. Step 6 uses Stacks 010N with the exact functor from step 1; the finite-local-constancy hypothesis goes unused, so the item is not weakened. Edge cases checked: empty S or T, M=0, A=B, B=0, the non-flat map Z/4->Z/2, and unbounded P. Duplicate candidate: lem-sfb-geometric-inverse-image-constant-module (unsplit, another unit) states the general constant-module clause. The item proves that clause directly, so this is a note, not a fault. Accepted tool_uses: prop-weil-pbc-proetale-constant-ring-map, prop-weil-pbc-proetale-constant-exact, lem-weil-pbc-ringed-topoi-module-pullback-tensor and lem-weil-pbc-ringed-topos-kflat-pullback, used as generic infrastructure that the unit does not provide. No fixes."
  }
 }

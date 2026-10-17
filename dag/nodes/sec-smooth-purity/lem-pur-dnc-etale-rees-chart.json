@@ -13,9 +13,88 @@
   "def-sbc-affine-space",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=A[t,u_1,\\ldots,u_d]$. Evaluation $t\\mapsto t$, $u_i\\mapsto x_i/t$ gives a map $\\phi:P\\to C[t,t^{-1}]$. Its image is $E$: the image contains the stated generators of $E$, because $x_i=t(x_i/t)$, and conversely all images lie in $E$. For injectivity write a polynomial as a finite sum $\\sum_{a,\\beta}c_{a,\\beta}t^a u^\\beta$, where $a\\geq0$, $\\beta\\in\\mathbb N^d$ and $|\\beta|=\\sum_i\\beta_i$. Its image is $\\sum_{a,\\beta}c_{a,\\beta}x^\\beta t^{a-|\\beta|}$. The exponent pairs $(\\beta,a-|\\beta|)$ are distinct for distinct $(a,\\beta)$; uniqueness of the coefficients of polynomial/Laurent monomials over $A$ therefore implies that the kernel is zero. Thus $\\phi:P\\xrightarrow{\\sim}E$ is an $A[t]$-algebra isomorphism, with the $C$-algebra structure on $P$ given by $x_i\\mapsto tu_i$. This uses no domain or reducedness assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/_section.md",
+    "place": "Clause (2), coordinates $u_i=x_i/t$; explicit monomial calculation"
+   }
+  },
+  {
+   "text": "By hypothesis the morphism $\\operatorname{Spec}R\\to\\operatorname{Spec}C$ is étale. It is flat by [def-weil-etale-morphism], so [lem-weil-pbc-flat-ring-map-iff-flat-affine] implies that $C\\to R$ is a flat ring map. Equivalently $R$ is a flat $C$-module [def-weil-pbc-flat-ring-map]. The inclusion $j:E\\hookrightarrow C[t,t^{-1}]$ is injective as a map of $C$-modules. Apply the left-tensor exactness clause of [lem-weil-pbc-flat-tensor-exact] to $0\\to E\\xrightarrow{j}C[t,t^{-1}]\\to C[t,t^{-1}]/E$. It follows that $1\\otimes j:R\\otimes_C E\\to R\\otimes_C C[t,t^{-1}]$ is injective. The quotient here is a module quotient; $E$ need not be an ideal.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HB (definition-flat), 00HD (lemma-flat); affine translation is Morphisms Tag 01U5 (lemma-flat-characterize)"
+   }
+  },
+  {
+   "text": "The tensor algebra universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives the ring map $\\alpha:R\\otimes_C C[t,t^{-1}]\\to R[t,t^{-1}]$, $r\\otimes\\sum_n c_nt^n\\mapsto\\sum_n r\\bar c_nt^n$. Its inverse is $\\sum_n r_nt^n\\mapsto\\sum_n r_n\\otimes t^n$. This is additive and multiplicative by the coefficient formula for Laurent multiplication; balancing over $C$ gives $r\\bar c\\otimes t^n=r\\otimes ct^n$, so the composites are identities on Laurent monomials and pure tensors, hence on all finite sums. Thus $\\alpha$ is an isomorphism. The composite $\\alpha(1\\otimes j)$ has image exactly $D$: every pure tensor maps to a product of an element of $R$ and an expression in $C$, $t$, and $x_i/t$, hence lands in $D$; conversely it contains $R$, $t$, and each $\\bar x_i/t$. For $f\\in I$ write $f=\\sum_i r_i\\bar x_i$; then $f/t=\\sum_i r_i(\\bar x_i/t)$ is in the image. These elements generate $D$ by its definition. Step 2 gives injectivity of the composite, proving that its corestriction is precisely the canonical isomorphism $R\\otimes_C E\\xrightarrow{\\sim}D$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/_section.md",
+    "place": "Clause (2), the explicit flat tensor identification of the deformation chart; tensor universal property as in Stacks Tag 01I4 (lemma-fibre-product-affine-schemes)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fibre-product-affine-spectra] with base ring $C$ and its two algebras $R$ and $E$. Together with Step 3 this identifies $\\operatorname{Spec}D$ with $\\operatorname{Spec}R\\times_{\\operatorname{Spec}C}\\operatorname{Spec}E$, with the map to $\\operatorname{Spec}E$ induced by $e\\mapsto1\\otimes e$. Thus [lem-weil-pbc-etale-scheme-base-change] applies to the assumed étale map $\\operatorname{Spec}R\\to\\operatorname{Spec}C$ and the arbitrary map $\\operatorname{Spec}E\\to\\operatorname{Spec}C$, giving an étale projection. Under the isomorphism $P\\cong E$ of Step 1 its ring map is $P\\to D$, $t\\mapsto t$, $u_i\\mapsto\\bar x_i/t$. By the contravariant functoriality in [def-weil-affine-spectrum], this is exactly the induced morphism $\\operatorname{Spec}D\\to\\operatorname{Spec}A[t,u_1,\\ldots,u_d]$ in the statement.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines); étale stability is Morphisms Tag 02GO (lemma-base-change-etale)"
+   }
+  },
+  {
+   "text": "By the affine description of [def-sbc-affine-space], the projection $p:\\operatorname{Spec}P\\to\\operatorname{Spec}A[t]$ is the affine $d$-space projection over $\\operatorname{Spec}A[t]$. Therefore [sbc-lem-affine-space-smooth] says that $p$ is smooth of relative dimension $d$. The map $a:\\operatorname{Spec}D\\to\\operatorname{Spec}P$ of Step 4 is étale in the sense of [def-weil-etale-morphism]; by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] it is smooth of relative dimension $0$ in the sense of [def-sbc-smooth-morphisms]. Apply clause (2) of [lem-sbc-smooth-relative-dimension-permanence] with this $a$, $m=0$, and $f=p$, $n=d$. The composite $p\\circ a$ is smooth of relative dimension $0+d=d$, as required. No nonemptiness or surjectivity of $a$ is required.",
+   "uses": [
+    "def-sbc-affine-space",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VA (lemma-composition-smooth), 02NL (lemma-composition-relative-dimension-d); affine space is standard smooth by Algebra Tags 00T6 (definition-standard-smooth), 00T7 (lemma-standard-smooth)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-affine-spectrum",
+  "def-sbc-affine-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/_section.md",
+  "place": "Clause (2): expand the coordinate substitution and flat tensor calculation, then apply affine tensor fibre products, étale base change, and smooth relative-dimension composition."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +123,52 @@
    "results": "Algebra.Smooth.baseChange; Algebra.Etale.baseChange; Algebra.IsStandardSmoothOfRelativeDimension.baseChange; RingHom.Smooth.isStableUnderBaseChange; these are general base-change facts and do not state the Rees-chart identification.",
    "date": "2026-10-17",
    "verdict": "generalization: only generic étale/smooth base-change declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale algebra R over A[x_1,...,x_d], the extended Rees algebra R[t,x_1/t,...,x_d/t] is the tensor product of R with A[t,u_1,...,u_d] under x_i = t u_i",
+   "results": "8 hits; Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.baseChange, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.FormallyEtale.instTensorProduct, StandardEtalePair.instAlgebraRing, StandardEtalePresentation, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Presentation.tensorModelOfHasCoeffsInv",
+   "date": "2026-10-17",
+   "verdict": "no match for the full extended-Rees chart statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Algebra.TensorProduct",
+   "results": "0 hits; ; loogle: unknown identifier 'Algebra.TensorProduct'",
+   "date": "2026-10-17",
+   "verdict": "no match (query diagnostic: loogle: unknown identifier 'Algebra.TensorProduct')"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedRees|extended_rees|deformationToNormalCone|reesAlgebra|ReesAlgebra",
+   "results": "10 hits; Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the full extended-Rees chart statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change identifies extended Rees algebras and the deformation chart of an etale polynomial algebra is smooth of relative dimension d",
+   "results": "8 hits; Module.Flat.isBaseChange, Algebra.Extension.baseChange, Algebra.Smooth.baseChange, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Flat.isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match for the full extended-Rees chart statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale",
+   "results": "12 hits; Algebra.Etale.inst, Algebra.Etale, Algebra.Etale.formallyEtale, Algebra.Etale.instSmooth, Algebra.Etale.instUnramified, Algebra.Etale.finitePresentation, Algebra.Etale.of_isLocalizationAway, Algebra.Etale.iff_formallyUnramified_and_smooth",
+   "date": "2026-10-17",
+   "verdict": "no match for the full extended-Rees chart statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat ring homomorphism C to R and an ideal J, flat tensor product preserves the inclusion C[t,J/t] into Laurent polynomials and identifies its base change with R[t,JR/t]",
+   "results": "8 hits; Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Generators.baseChange, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, polyEquivTensor_apply, Algebra.Presentation.tensorModelOfHasCoeffsInv, PolynomialLaw.exists_lift",
+   "date": "2026-10-17",
+   "verdict": "no match for the full extended-Rees chart statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pur-dnc-section-family",
@@ -64,5 +185,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-dnc-etale-rees-chart",
+  "worker": "stage1",
+  "summary": "Expanded the étale deformation-chart calculation into five steps: monomial polynomial identification, flat tensor injection, explicit ambient Laurent tensor isomorphism and image calculation, étale affine base change, and smooth relative-dimension composition. The statement is unchanged. Reused existing general tools; no new nodes. Retained inherited searches and added actual NL searches.",
+  "blueprint": "Realizes the local coordinate algebra calculation in Step 5 of def-pur-dnc-section-family (its original blueprint ancestry records Step 4), and clause (2), coordinates u_i=x_i/t, of sk-lem-geometry. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smoothness and relative dimension of the affine-space projection; the purity-conventions unit has no such theorem."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic composition of an étale morphism of relative dimension zero with a smooth morphism of relative dimension d; does not replace the deformation calculation."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic comparison: an étale morphism (lfp, flat, unramified) is smooth of relative dimension zero in the sense of def-sbc-smooth-morphisms, needed to feed Step 4's étale map into the relative-dimension composition; the purity-conventions unit has no such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-68bb62e06",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-68bb62e06 (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps and all 12 cited statements in full: the parent def-pur-dnc-section-family Step 5, unit sk-def-purity-conv, and blueprint main-20261015 sk-lem-geometry clause (2). Stacks tags 00HB/00HD/01U5/01I4/01JQ/02GO/01VA/02NL/00T6/00T7 were checked at their labels. The statement is true. I tested d=0 (it reduces to R[t]=R⊗_A A[t]), A=0 or R=0 (vacuous), nonreduced A, and d=1 with R=C (D=A[t,u]). Step 1: the monomial injectivity (a,β)↦(β,a−|β|) holds, and the image equals E. Step 2: the flat-tensor injection is correctly sourced through etale→flat→ring flat→left-exactness. Step 3: the Laurent tensor isomorphism holds, and the image is exactly D since f/t=Σr_i x_i/t. Step 4: the affine fibre product and étale base change give the stated map. No new nodes. rg for Rees/I/t charts across the DAG found no duplicate; lemma-nagata-flat-pullback-rees and lem-pur-dnc-affine-blowup-complement are different statements. One C4 fault, fixed: Step 5 took 'étale ⇒ smooth of relative dimension 0' from the permanence lemma. There 'étale' is the def-sbc-smooth-morphisms notion, but Step 4 yields étale in the def-weil-etale-morphism sense (lfp+flat+unramified). The existing reviewed node lem-weil-pbc-etale-smooth-zero-dimensional-fibres is now cited in Step 5, added to proof_deps and declared in split_report.tool_uses. I accept the tool uses sbc-lem-affine-space-smooth, lem-sbc-smooth-relative-dimension-permanence and lem-weil-pbc-etale-smooth-zero-dimensional-fibres as generic black boxes. Remark for the maintainer: the unit binding is sk-def-purity-conv, though the content realizes sk-lem-geometry (2); this is maintainer-owned and left unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,102 @@
   "def-weil-completed-integral-coefficients",
   "def-weil-rationalization-karoubi"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_E$, $\\pi=\\varpi_E$, $r=\\pi^N$, and $\\mathcal A=\\operatorname{Sh}(X_{\\mathrm{proet}},\\widehat{\\mathcal O}_{E,X})$. By the completed-coefficient definition, $\\mathcal A$ is the abelian category of modules over the completed sheaf, and $C$ belongs to its derived category through the full inclusion defining $D^b_c(X,A)$. The constant compatible sections of $A/\\pi^n$ define $A\\to\\widehat{\\mathcal O}_{E,X}$, so $a\\in A$ acts on a module sheaf morphism sectionwise by $(af)(s)=a f(s)$. Module linearity gives $(ag)f=a(gf)=g(af)$, making $\\mathcal A$ $A$-linear. Apply the linear-abelian-derived-category lemma: $D(\\mathcal A)$ and its shifts are $A$-linear, and localization from complexes is $A$-linear. Thus the scalar action used below is the termwise scalar action on any representative complex, and it commutes with every derived morphism.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-linear-abelian-derived-category",
+    "def-weil-linear-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category), with the scalar-linear localization theorem cited as lem-weil-linear-abelian-derived-category; module scalar calculation written here"
+   }
+  },
+  {
+   "text": "Choose a complex representing $C$ and put $K_q=\\tau_{\\leq q}C$ in the ambient $D(\\mathcal A)$ for $u-1\\leq q\\leq v$. The truncation-cohomology lemma says that $H^i(K_q)=H^i(C)$ for $i\\leq q$ and is zero for $i>q$. Consequently all cohomology of $K_{u-1}$ vanishes: for $i\\leq u-1$ use the assumed lower bound, and for $i>u-1$ use the truncation calculation. The map from its representing complex to the zero complex is therefore a quasi-isomorphism, so $K_{u-1}\\simeq0$ by the definition of the derived category. Likewise the inclusion $K_v\\to C$ is a quasi-isomorphism: it is an isomorphism on cohomology in degrees $i\\leq v$, and both cohomologies vanish for $i>v$. Hence $K_v\\simeq C$. All these truncations are taken in $D(\\mathcal A)$; no closure assertion for the integral constructible subcategory is needed.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (section-truncations), canonical truncation cohomology; derived.tex Tag 05RU, inversion of quasi-isomorphisms"
+   }
+  },
+  {
+   "text": "For each $u\\leq q\\leq v$, the successive-truncation-triangle lemma gives a distinguished triangle $K_{q-1}\\xrightarrow{i_q}K_q\\xrightarrow{j_q}S_q\\to K_{q-1}[1]$, where $S_q=H^q(C)[-q]$ is represented by the complex with $H^q(C)$ as its only nonzero term, in degree $q$. The assumption $rH^q(C)=0$ says that $r\\operatorname{id}$ on that complex is the zero cochain map. By the scalar linearity of localization established in step 1, $r\\operatorname{id}_{S_q}=0$ in $D(\\mathcal A)$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-linear-abelian-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), successive-truncation triangle with a single cohomology object"
+   }
+  },
+  {
+   "text": "Induct on the integer $q$ from $u-1$ to $v$, with claim $r^{q-u+1}\\operatorname{id}_{K_q}=0$. The base exponent is zero and $K_{u-1}\\simeq0$ by step 2, so its identity is zero. For the successor $q\\geq u$, put $s=r^{q-u}$; the induction hypothesis is $s\\operatorname{id}_{K_{q-1}}=0$. Bilinearity gives $(s\\operatorname{id}_{K_q})\\circ i_q=i_q\\circ(s\\operatorname{id}_{K_{q-1}})=0$. Apply clause (i) of Hom-out-of-triangle exactness to the triangle in step 3, with $W=K_q$ and $a=s\\operatorname{id}_{K_q}$. It supplies $h:S_q\\to K_q$ with $s\\operatorname{id}_{K_q}=h\\circ j_q$. Multiply by $r$ and use bilinearity and step 3: $r^{q-u+1}\\operatorname{id}_{K_q}=r(h\\circ j_q)=h\\circ(r\\operatorname{id}_{S_q})\\circ j_q=0$. This proves the successor and the induction.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-weil-linear-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149 (lemma-representable-homological), contravariant Hom exactness; the scalar factorization and finite induction are written here"
+   }
+  },
+  {
+   "text": "At $q=v$, step 4 gives $r^{v-u+1}\\operatorname{id}_{K_v}=0$. If $e:K_v\\xrightarrow{\\sim}C$ is the isomorphism of step 2, bilinearity gives $r^{v-u+1}\\operatorname{id}_C=e\\circ(r^{v-u+1}\\operatorname{id}_{K_v})\\circ e^{-1}=0$. Multiplying by $r$ yields $r^{v-u+2}\\operatorname{id}_C=0$, which is exactly $\\pi^{N(v-u+2)}\\operatorname{id}_C=0$. Both exponents are nonnegative since $u\\leq v$ and $N\\geq0$. The full inclusion defining $D^b_c(X,A)$ identifies its endomorphisms of $C$ with the ambient ones, and by the integral-linearity lemma the $\\mathcal O_E$-module structure of $D^b_c(X,A)$ is the restriction of the ambient one through the same constant-section map $\\mathcal O_E\\to\\Gamma(X_{\\mathrm{proet}},\\widehat{\\mathcal O}_{E,X})$ used in step 1, so this is also zero in its integral Hom $\\mathcal O_E$-module.",
+   "uses": [
+    "def-weil-linear-category",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, derived category; elementary scalar calculation and the full-subcategory definition cited here"
+   }
+  },
+  {
+   "text": "Let $m=N(v-u+2)$. By the rationalization definition, whose $\\mathcal O_E$-linear structure on $D^b_c(X,A)$ is that of the integral-linearity lemma (step 5), the identity of the rational image of $C$ is $\\operatorname{id}_C\\otimes1$ in $\\operatorname{End}_{D^b_c(X,A)}(C)\\otimes_AE$. The scalar-localization formula and the tensor balancing relation give $\\operatorname{id}_C\\otimes1=(\\pi^m\\operatorname{id}_C)\\otimes\\pi^{-m}=0$, using step 5; for $m=0$ the same equality uses $\\pi^0=1$. An object with zero identity is a zero object: every map out of it is $f\\circ\\operatorname{id}=0$, and every map into it is $\\operatorname{id}\\circ g=0$. Its rational image is therefore isomorphic to zero, as asserted.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "Definition of rationalization on Hom modules; the tensor balancing equality and zero-identity argument are written here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-linear-abelian-derived-category",
+  "def-weil-linear-category",
+  "lem-weil-pbc-truncation-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-integral-constructible-linear",
+  "def-weil-rationalization-karoubi",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Agent-written finite truncation induction, using Tags 08J5 (remark-truncation-distinguished-triangle), 0149 (lemma-representable-homological), 05RU (definition-unbounded-derived-category), and homology.tex Tag 0118 (section-truncations); rationalization as in the cited blueprint definition."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +144,54 @@
    "results": "AdicCompletion.val_zero_apply; IsAdicComplete.bot; AdicCompletion.val_zero; HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization; Submodule.localized'_bot; CochainComplex.augmentTruncate_inv_f_zero; DerivedCategory.instHasZeroObject; PowerSeries.IsWeierstrassDivisorAt.mod_zero",
    "date": "2026-10-17",
    "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilat|nilpoten|torsion",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in the specified Mathlib directory",
+   "directory": "Mathlib/Algebra/Homology/DerivedCategory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂",
+   "results": "CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations give support bounds, fraction representatives, or Hom exactness, not scalar nilpotence on a bounded object and its rational vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex whose cohomology is annihilated by a fixed scalar is killed by a power of the scalar in the derived category",
+   "results": "DerivedCategory.right_fac_of_isStrictlyLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; ModuleCat.smulShortComplex; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; HomologicalComplexUpToQuasiIso.Q; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; CochainComplex.HomComplex.δ_units_smul",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations give support bounds, fraction representatives, or Hom exactness, not scalar nilpotence on a bounded object and its rational vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a bounded derived category a scalar annihilating every cohomology object has a power annihilating the identity morphism",
+   "results": "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; DerivedCategory.instIsLEObjSingleFunctor; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isZero_of_isLE; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; DerivedCategory.isZero_of_isGE",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations give support bounds, fraction representatives, or Hom exactness, not scalar nilpotence on a bounded object and its rational vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpoten|annihilat|ghost",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in the specified Mathlib directory",
+   "directory": "Mathlib/CategoryTheory/Triangulated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism of a bounded derived object which induces zero on all homology objects is nilpotent",
+   "results": "DerivedCategory.isLE_iff; DerivedCategory.isZero_of_isLE; DerivedCategory.isZero_of_isGE; DerivedCategory.isGE_iff; HomotopyCategory.subcategoryAcyclic; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; DerivedCategory.instHasZeroObject",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations give support bounds, fraction representatives, or Hom exactness, not scalar nilpotence on a bounded object and its rational vanishing"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +217,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-rational-bounded-cone-torsion",
+  "worker": "stage1",
+  "summary": "Kept the statement and coefficient category unchanged. Wrote the finite successive-truncation induction explicitly, proving the stronger exponent N(v-u+1) before multiplying once more. Reused the existing general truncation triangle, truncation cohomology, Hom exactness, and scalar-linearity nodes; no new nodes. Truncations remain in the ambient completed-module derived category. Wrote the tensor-balancing argument for rational vanishing and checked N=0, u=v, zero complexes, and negative degree intervals.",
+  "blueprint": "Serves the rational supplement to prop-sf-dualizable-hom identified by blueprint.from.place: bounded-complex passage, specifically cohomological power torsion to annihilation of the identity. It expands that created-node subargument only; it does not replace the unit finite-projective tensor-Hom route. The published main-20261015 detailed proof contains the bounded-complex tensor-Hom calculation but not this extracted scalar-torsion induction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic successive-truncation distinguished triangle in the derived category of any abelian category, used as a homological-algebra tool for completed module sheaves; the unit supplies no such general triangle statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-8b842d62a",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-8b842d62a (reviewer sub-agent of L); spot-checked: I read the item, the parent step 13, the unit and blueprint main-20261015, Stacks 08J5 and 0149, and every cited statement in full. The statement is true and unchanged; its coefficient category is the completed pro-etale O_E-sheaf category with the full subcategory D^b_c. I tested N=0, u=v, C=0 and shifted intervals, and an l^2 extension example shows the factor (v-u+1) is genuinely needed. The induction in steps 2-4 is correct: K_{u-1} is acyclic, K_v->C is a quasi-isomorphism, the triangle is the generic successive truncation, r id_{S_q}=0 comes through the linear Q, and clause (i) of Hom-exactness is applied in the right direction. Step 6's tensor balancing and zero-object argument are correct. There are no new nodes and no duplicates (rg for power-torsion/identity wording; the nearest hit, lem-sf-rational-local-global-power-torsion, is the converse). I accept the tool use lem-weil-pbc-truncation-triangle: a generic abelian-category triangle (Stacks 08J5) that no node of the unit or of sk-def-sf-operations supplies. One repair: steps 5 and 6 now also cite lem-weil-integral-constructible-linear (in sk-def-sf-operations, so on route; no cycle). Without it, the O_E-module structure on End_{D^b_c}(C) that the rationalization uses was not tied to the action shown to vanish. The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

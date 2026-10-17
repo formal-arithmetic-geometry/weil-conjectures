@@ -12,9 +12,102 @@
   "lem-coef-pinched-rigidification-resolution",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Distinguish the vertices $a,b$ of $J^n$ from their prescribed images $x,y$ in $A$. The pushout defining $J^n$ identifies maps $J^n\\to P$ with maps $\\Delta^{n+1}\\to P$ constant at $x$ on the entire initial face and with last vertex $y$: this is exactly its universal property, degree by degree. Apply the natural adjunction $\\mathfrak C\\dashv N_{\\mathrm{hc}}$ to obtain a bijection with enriched functors $G:\\mathfrak C[J^n]\\to A$ satisfying $G(a)=x,G(b)=y$. Vertex restrictions correspond under this bijection because the coherent realization of a vertex has one object and only its identity. Restricting $G$ to $(a,b)$ defines $\\Phi_n(z):Q^n\\to T$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 1.1.5.1, 1.1.5.5; Example 2.2.2.5; proof preceding Proposition 2.2.2.13, printed p.78."
+   }
+  },
+  {
+   "text": "Let $r_n:\\Delta^{n+1}\\to J^n$ be the quotient. For $0\\leq i\\leq n$ put $H_i=\\mathfrak C[\\Delta^{n+1}](i,n+1)$ and let $q_i:H_i\\to Q^n$ be the mapping map of $\\mathfrak C[r_n]$. This functor sends every mapping simplex between initial vertices to the identity of $a$: its restriction factors through $\\mathfrak C[\\Delta^0]$. Consequently for $i\\leq j\\leq n$, union composition satisfies $q_i(U\\cup V)=q_j(V)$ on $\\mathfrak C[\\Delta^{n+1}](i,j)\\times H_j$. Given $t:Q^n\\to T$, define an enriched functor $F_t:\\mathfrak C[\\Delta^{n+1}]\\to A$ by sending all initial vertices to $x$, the last to $y$, all initial mapping sets constantly to $1_x$, the last endomorphism to $1_y$, and $H_i$ by $tq_i$. Empty reverse mapping sets have their unique maps. Its composition laws are precisely the displayed union identity and the unit laws of $A$; its identity laws are the same unit laws. Thus $F_t$ is an enriched functor whose initial restriction is the constant functor at $x$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 1.1.5.1 (union composition), Example 2.2.2.5, and proof of Proposition 2.2.2.13; explicit construction of the inverse."
+   }
+  },
+  {
+   "text": "The maps $q_i$ jointly cover $Q^n=\\mathfrak C[J^n](a,b)$ in every simplicial degree. Let $D\\subseteq\\mathfrak C[J^n]$ be the simplicial subcategory with objects $a,b$, only identities as endomorphisms, empty mapping set from $b$ to $a$, and $D(a,b)=\\bigcup_iq_i(H_i)$, a simplicial subset because each $q_i$ is simplicial. Its only composites are unit composites, so it is closed under composition. By step 2, $\\mathfrak C[r_n]$ sends initial mapping sets to $1_a$, the last endomorphism to $1_b$ and $H_i$ into $q_i(H_i)$, so $\\mathfrak C[r_n]=\\iota E$ with $\\iota:D\\to\\mathfrak C[J^n]$ the inclusion and $E:\\mathfrak C[\\Delta^{n+1}]\\to D$ constant at $1_a$ on the initial face. The coherent-nerve transpose of $E$ restricts on $\\Delta^n$ to the transpose of a functor factoring through $\\mathfrak C[\\Delta^0]$, i.e. the degenerate simplex at $a$; by the pushout defining $J^n$ it descends along $r_n$ to $w:J^n\\to N_{\\mathrm{hc}}D$. Let $W:\\mathfrak C[J^n]\\to D$ be its adjoint; naturality of the adjunction gives $W\\mathfrak C[r_n]=E$, hence $\\iota W\\mathfrak C[r_n]=\\mathfrak C[r_n]$. The simplices $J^n\\to N_{\\mathrm{hc}}\\mathfrak C[J^n]$ adjoint to $\\iota W$ and to the identity therefore agree after precomposition with the degreewise surjection $r_n$, so they are equal and $\\iota W$ is the identity functor. Hence $\\iota$ is surjective on the mapping set $(a,b)$: every simplex of $Q^n$ is $q_i$ of a simplex of $H_i$ for some $i$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof preceding Proposition 2.2.2.13, printed p.78 (\"this is simply the data of a map of simplicial sets Q^n -> Map_C(x,y)\"): generation of C[J^n](x,y) by the images of the coherent-simplex mapping sets, written out via the adjunction and the pushout J^n."
+   }
+  },
+  {
+   "text": "Transpose $F_t$ under the coherent-nerve adjunction. Its initial restriction is constant, so the resulting simplex descends uniquely along $r_n$ to $z_t:J^n\\to P$ with the specified vertices. Let $G_t$ be its adjoint. Naturality of adjunction gives $G_t\\mathfrak C[r_n]=F_t$, hence $(G_t)_{a,b}q_i=tq_i$ for every $i$. The degreewise covering in step 3 implies $(G_t)_{a,b}=t$, so $\\Phi_n(z_t)=t$. Conversely, if $t=G_{a,b}$ for the adjoint of $z$, the restriction $G\\mathfrak C[r_n]$ agrees with $F_t$ on every object and mapping set: the initial ones are identities, the final endomorphism is the identity, and on $H_i$ it is $tq_i$. Their adjoint simplices agree, and uniqueness in the pushout gives $z_t=z$. Thus these formulas are inverse bijections. At $n=0$ they send an edge exactly to its vertex in $T$, since $J^0=\\Delta^1$ and $Q^0=\\Delta^0$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Example 2.2.2.5 and proof of Proposition 2.2.2.13, printed p.78; both inverse identities expanded."
+   }
+  },
+  {
+   "text": "For any monotone $\\alpha:[m]\\to[n]$, extend it by $\\bar\\alpha(m+1)=n+1$. This preserves the initial faces and last vertices and gives $j_\\alpha:J^m\\to J^n$. By the definitions its realized $(a,b)$ mapping map is $Q(\\alpha):Q^m\\to Q^n$. If $G$ is adjoint to $z$, the functor adjoint to $zj_\\alpha$ is $G\\mathfrak C[j_\\alpha]$. Restricting to $(a,b)$ therefore gives the equality $\\Phi_m(zj_\\alpha)=\\Phi_n(z)\\,Q(\\alpha)$, exactly the simplicial operator in $\\operatorname{Sing}_QT$. This holds for all monotone maps, including noninjective ones. Hence the bijections assemble into a simplicial map; their inverses commute with operators by applying this equality and bijectivity in each degree. They form the asserted simplicial isomorphism.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.13, naturality with respect to [n]; direct-image cosimplicial operators in Section 2.2.2, printed pp.76,78."
+   }
+  },
+  {
+   "text": "For a simplicial functor $u:A\\to A'$, the simplex $N_{\\mathrm{hc}}(u)z$ is adjoint to $uG$. Taking its $(a,b)$ mapping map yields $\\Phi_{A',u(x),u(y),n}(N_{\\mathrm{hc}}(u)z)=u_{x,y}\\Phi_{A,x,y,n}(z)$. Postcomposition on the right is precisely $\\operatorname{Sing}_Q(u_{x,y})$. This proves naturality in $A$ and in the displayed pair of objects, including functors that identify objects. All the constructions above use identities and composition, so they also apply when $x=y$; no condition on the mapping simplicial sets was used.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.13: natural isomorphism, and its adjunction proof; target-functor naturality written explicitly."
+   }
+  },
+  {
+   "text": "If $A$ is locally Kan, the cited coherent-nerve theorem gives that $P=N_{\\mathrm{hc}}A$ is a quasicategory. The definition of its right-pinched mapping space in the enhanced-diagram definition is exactly the formula for $M_A(x,y)$, including the entire constant initial face and the extension of operators by the last vertex. Thus $M_A(x,y)$ is that mapping space. This last interpretation is the only use of local Kan; the isomorphism already proved holds for arbitrary small simplicial $A$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.1.5.10 for the quasicategory assertion; Proposition 2.2.2.13 for the mapping identification; project right-pinched convention in def-cbc-enhanced-diagrams-cones."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-pinched-rigidification-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-explicit expansion of the proof preceding HTT Proposition 2.2.2.13, printed p.78; HTT is readable online but is not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +143,59 @@
    "results": "Hits: CategoryTheory.SimplicialCategory.homEquiv', SSet.yonedaEquiv, SSet.unitHomEquiv, CategoryTheory.SimplicialObject.instEnrichedCategorySSet, SSet.stdSimplex.faceRepresentableBy, SSet.ι₀, SSet.stdSimplex.objEquiv, SSet.stdSimplex.faceSingletonIso. Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-38,193-210 read; the coherent nerve is defined but the pinched mapping identification and prism comparison are absent. Ordinary nerve, enriched Hom and Yoneda results do not state this lemma.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural simplicial isomorphism identifies right pinched mapping simplices in the coherent nerve of a simplicial category with the Q singular complex of its enriched hom simplicial set",
+   "results": "{\"t\": \"2026-10-17T08:36:41Z\", \"tool\": \"leanfinder\", \"query\": \"A natural simplicial isomorphism identifies right pinched mapping simplices in the coherent nerve of a simplicial category with the Q singular complex of its enriched hom simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.isoNerve_hom_app_apply\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.stdSimplex.isoNerve\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"SSet.stdSimplex.isoNerve_inv_app_apply\", \"SSet.OneTruncation₂.ofNerve₂.natIso\"], \"digest\": \"020e69aff41f0c97\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve definition, ordinary nerve adjunction, enriched hom vertices and functor extensionality do not state the pinched mapping isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coherent nerve adjunction identifies maps from a pinched simplex with maps from its rigidified mapping simplicial set",
+   "results": "{\"t\": \"2026-10-17T08:36:41Z\", \"tool\": \"leansearch\", \"query\": \"The coherent nerve adjunction identifies maps from a pinched simplex with maps from its rigidified mapping simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.nerve₂Adj\", \"sSetTopAdj\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"23fe3286e284f1d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve definition, ordinary nerve adjunction, enriched hom vertices and functor extensionality do not state the pinched mapping isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialCategory.homEquiv, CategoryTheory.SimplicialNerve, SSet.yonedaEquiv",
+   "results": "{\"t\": \"2026-10-17T08:36:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialCategory.homEquiv, CategoryTheory.SimplicialNerve, SSet.yonedaEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.SimplicialCategory.homEquiv'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid name in combined pattern; no absence conclusion drawn"
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|homEquiv|pinched",
+   "results": "{\"t\": \"2026-10-17T08:36:42Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|homEquiv|pinched\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\"], \"digest\": \"d4618ef8f7b067ca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve definition, ordinary nerve adjunction, enriched hom vertices and functor extensionality do not state the pinched mapping isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched functors from a two object simplicial category with only one nonidentity hom simplicial set are determined by a simplicial map into the hom of the target category",
+   "results": "{\"t\": \"2026-10-17T08:38:22Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched functors from a two object simplicial category with only one nonidentity hom simplicial set are determined by a simplicial map into the hom of the target category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.CatEnrichedOrdinary.Hom.ext_iff\", \"CategoryTheory.CatEnrichedOrdinary.Hom.ext\", \"CategoryTheory.CatEnrichedOrdinary.Hom.mk'.inj\", \"CategoryTheory.EnrichedFunctor.ext\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.EnrichedFunctor.hom_ext\"], \"digest\": \"e8fcfb1faa2584fb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve definition, ordinary nerve adjunction, enriched hom vertices and functor extensionality do not state the pinched mapping isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve",
+   "results": "{\"t\": \"2026-10-17T08:39:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialNerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve definition, ordinary nerve adjunction, enriched hom vertices and functor extensionality do not state the pinched mapping isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "pinched|Sing_Q|rightMapping|homEquiv",
+   "results": "{\"t\": \"2026-10-17T08:39:24Z\", \"tool\": \"grep\", \"query\": \"pinched|Sing_Q|rightMapping|homEquiv\", \"sub\": \"AlgebraicTopology/SimplicialCategory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject.lean\", \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\"], \"digest\": \"f86d8bfc79ebb026\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve definition, ordinary nerve adjunction, enriched hom vertices and functor extensionality do not state the pinched mapping isomorphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-diagonal-coherent-nerve-comparison",
@@ -80,5 +222,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coherent-nerve-pinched-adjunction",
+  "worker": "stage1",
+  "summary": "Expanded the coherent-nerve adjunction into seven explicit steps. Constructed the inverse on coherent-simplex mapping sets, proved its uniqueness by joint surjectivity of the coherent-simplex mapping maps onto Q, checked both inverse identities and all simplicial and enriched-functor naturality equations, and isolated local Kan to the final terminology clause. Statement unchanged; no new nodes. Located the exact source as HTT Proposition 2.2.2.13. Maintainer review: step 3 rewritten to prove joint surjectivity of the q_i from the adjunction and the pushout J^n alone, since the cube lemma's statement does not identify its quotient map with the q_i; lem-coef-pinched-cube-latching no longer cited.",
+  "blueprint": "Realizes the mapping-space foundation of prop-coef-integral-exceptional-adjoint proof paragraph 2, through lem-coef-diagonal-coherent-nerve-comparison old step 3: identification of the coherent-nerve right-pinched mapping simplicial set with Sing_Q of the enriched mapping set."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-d16114053",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-d16114053 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the 4 cited node statements, including the proof of lem-coef-pinched-cube-latching to separate what it states from what it proves. HTT is not archived. I read the Harvard PDF at printed pp.75-78: Prop. 2.2.2.13 states Hom^R_{N(C)}(X,Y) ≅ Sing_Q Map_C(X,Y) for an arbitrary simplicial C. The item matches it exactly, with no Kan hypothesis, and its M_A matches the right-pinched definition in def-cbc-enhanced-diagrams-cones. The statement is not weakened. Steps 1, 2 and 4-7 are correct. I checked every composition case for F_t, the descent of the transpose, the converse via the surjectivity of r_n, Q(α)=𝔆[j_α]_{a,b}, and naturality in A, including the cases x=y and object-identifying functors. Small cases checked: n=0, n=1 (Q^1=Δ^1), empty A(x,y), non-Kan A(x,y). One fault, C3: step 3 got joint surjectivity of the q_i from the cube lemma's 'canonical quotient', but only that lemma's proof identifies the quotient map with q_i. I rewrote step 3 to prove the covering from the adjunction and the pushout J^n alone, by factoring 𝔆[r_n] through the subcategory D generated by the images of the q_i and showing ι∘W=id. I removed lem-coef-pinched-cube-latching from uses and proof_deps and adjusted proof_origin.place and the summary. There are no new nodes and no duplicates (DAG-wide search for Sing together with coherent nerve). The route stays within sk-prop-sf-biduality-general apart from one definition from another unit. No tool_uses, no SGA. WANTED: an HTT archive.; 1 file(s) fixed by the reviewer"
  }
 }

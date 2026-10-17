@@ -131,10 +131,33 @@
    }
   },
   {
-   "text": "Use [lem-weil-pbc-transfinite-recursion] first for the natural-number construction in step 8 and then for the well-order $\\{\\alpha:\\alpha\\leq\\theta\\}$ in step 9. Here is a total deterministic rule to which its statement applies. Fix once and for all a filler for every inner-horn map into $\\mathcal C$, using the quasicategory condition of [def-cbc-enhanced-diagrams-cones] and classical choice. Let $X=\\coprod_{n\\geq0}N(A)_n$ and $Y=\\coprod_{n\\geq0}\\mathcal C_n$, tagging each simplex with its degree, and take the value set to be $\\mathcal V=\\mathcal P(X\\times Y)$. Every degreewise map on a simplicial subset of $N(A)$ has its graph in this set. Call an earlier family admissible if each value is the graph of a degree-preserving simplicial map on its prescribed domain, each restricts to the prescribed initial map, and the maps agree by restriction whenever their domains are nested. On inadmissible inputs let the rule return $\\varnothing\\in\\mathcal V$. On admissible inputs in the natural-number recursion, return $g_1$ at the first stage and use the fixed fillers and the degreewise gluing of step 8 thereafter. Induction on the rank shows that each actual value is a simplicial map on $H_r$ extending the preceding values: this holds for $g_1$, and steps 6-8 prove it at each successor. Its union is therefore the deterministic one-vertex extension of step 8. For the outer recursion return $h$ at $\\alpha=0$, apply that one-vertex extension to $g_\\beta$ at $\\alpha=\\beta+1$, and use the union of earlier maps at nonzero limits. Transfinite induction verifies admissibility of the actual values: the base has domain $K_B=U$; a successor has domain $K_{S_{\\beta+1}}$ and fixes $g_\\beta$ by step 8, hence fixes every earlier map; at a limit the domain is exactly $K_{S_\\alpha}$ by the finite-support calculation of step 9, and the union is simplicial and fixes every earlier value. Thus every application of the recursion rule returns the asserted map. In particular $g_\\theta$ has domain $K_{A_0}=N(A)$ and restricts exactly to $g_0=h$. Set $\\bar h=g_\\theta$. Only inner-horn fillers in $\\mathcal C$ were required, so no filteredness or colimit-existence hypothesis on $\\mathcal C$ was used.",
+   "text": "For the natural-number iteration in step 8, let $F_r$ be the set of simplicial maps $H_r\\to\\mathcal C$, $r\\geq1$, and use restriction as $\\rho_{sr}$ for $r\\leq s$. Identity and composition of restrictions hold on each simplex. Steps 6-8 prove that every $F_r$-element lifts to $F_{r+1}$. Apply [lem-coef-well-ordered-inverse-system-section] to this inverse system, with prescribed bottom element $g_1$. The index set $\\{1,2,\\ldots\\}$ has no nonzero limit elements, so its limit-family condition is vacuous. The conclusion supplies compatible maps $g_r:H_r\\to\\mathcal C$ through that specified $g_1$.",
    "uses": [
-    "def-cbc-enhanced-diagrams-cones",
-    "lem-weil-pbc-transfinite-recursion"
+    "lem-coef-well-ordered-inverse-system-section",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "For $x\\in(K_{S\\cup\\{a\\}})_n$, define $g_n(x)=(g_r)_n(x)$ at any stage containing $x$. Such a stage exists by the exhaustive pairing in steps 3-8. For two stages, the larger one restricts to the smaller, so the value is independent of the stage. Each simplicial operator preserves every $H_r$, hence commutes with this map by the equation for $g_r$. This gives a simplicial extension $K_{S\\cup\\{a\\}}\\to\\mathcal C$ fixing $g_1$, for every $S,a$ of step 3.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "For the outer iteration put $F_\\alpha=\\operatorname{Hom}_{\\mathrm{sSet}}(K_{S_\\alpha},\\mathcal C)$ on the small ordinal interval $0\\leq\\alpha\\leq\\theta$, with restriction maps. Step 11 proves surjectivity at each successor. At a nonzero limit $\\lambda$, step 9 identifies $K_{S_\\lambda}$ with the union of earlier domains; for a compatible family define its extension simplex by simplex by its value at any earlier stage containing that simplex. Compatibility makes it independent of the stage, and every simplicial operator stays in that stage, so it is simplicial and restricts to every given map. Thus the limit-family hypothesis holds. Apply [lem-coef-well-ordered-inverse-system-section] through $h\\in F_0$ to obtain compatible $g_\\alpha\\in F_\\alpha$ with $g_0=h$. Since $S_\\theta=A_0$, set $\\bar h=g_\\theta:N(A)\\to\\mathcal C$. Compatibility says exactly $\\bar h|_U=h$. All successor fillers came from the quasicategory condition; no colimit or filteredness assumption on $\\mathcal C$ was used.",
+   "uses": [
+    "lem-coef-well-ordered-inverse-system-section",
+    "def-cbc-enhanced-diagrams-cones"
    ],
    "elementary": false,
    "source": {
@@ -145,7 +168,7 @@
  ],
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-weil-pbc-transfinite-recursion",
+  "lem-coef-well-ordered-inverse-system-section",
   "lem-weil-pbc-well-ordering-theorem"
  ],
  "proof_origin": {
@@ -282,7 +305,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cofinal-common-image",
@@ -307,16 +330,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-linear-cofinal-cone-extension",
   "worker": "stage1",
-  "summary": "Kept the statement, proved the strict extension directly by inserting one chosen cofinal vertex in each missing cone chain, checked the exact horn intersections and disjoint new cells, then constructed the extension along a small well-order of the missing vertices. Only the existing horn/nerve definition and Mathlib transfinite-recursion leaf are used. No new nodes. Checked empty and maximal cofinal subsets and arbitrary insertion positions; recorded fresh logged Mathlib searches. Independent second reading made the total recursion rule and its graph value set precise, including the admissibility conditions and base/successor/limit verification; added independent logged searches. The auxiliary well-order now cites the existing Mathlib well-ordering leaf rather than being left as an uncited classical theorem.",
+  "summary": "Repair of the 2026-10-17 long-step return: kept the statement, Lean record, source route and steps 1-9 unchanged. Replaced step 10 by short applications of the generic Mathlib well-ordered-inverse-system section theorem to the natural-number horn filtration and the ordinal vertex filtration, separated by explicit elementary degreewise gluing. The one new node is a Mathlib leaf, supported by logged searches and the exact ofExists and surjective declarations read in WellOrderInductionData.lean. The leaf cites the existing well-ordering node for its order terminology. Verified successor and limit hypotheses, empty cases, verbatim citation quotes and absence of non-elementary steps longer than 2000 characters.",
   "blueprint": "Realizes the linear-order cone extension used in lem-coef-infinity-cofinal-common-image (HTT Lemma 5.4.6.3), inherited through the accessible-infinity-pullback branch of prop-coef-integral-exceptional-adjoint proof paragraph 2. This is a foundational auxiliary in the recorded via chain, not a literal assertion of that blueprint paragraph."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q11-551a6c1a2",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q102-fa088f2ee",
+  "group": "Q102",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-551a6c1a2 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item, all ten steps, the full statements of the three cited nodes (def-cbc-enhanced-diagrams-cones, and the Mathlib leaves lem-weil-pbc-transfinite-recursion and lem-weil-pbc-well-ordering-theorem) and the parent lem-coef-infinity-cofinal-common-image, which uses the item. The statement is true and not weakened: U is included in N(A) by a monomorphism that is a Joyal equivalence (HTT 5.4.6.2), so a strict extension to any quasicategory exists. The delivery proves this directly by inner-horn filling; HTT is not archived, the delivery records it as WANTED and marks the proof agent-written. Step checks: (3) a not in B makes a<b strict, and inserting b pairs the missing chains with no overlaps and no gaps. (4) b sits at an interior index; deleting a or infinity gives an old simplex, and deleting any other vertex gives an earlier pair. (5)-(7) the induction is set up explicitly, the inverse image is exactly the horn including degenerate simplices, and pieces of the same rank meet only inside H_r. (8) the cited quasicategory clause gives the fillers. (9)-(10) the well-order and transfinite recursion fit the statements of the two Mathlib leaves, limit stages work by finite support, and the result restricts exactly to h. Edge cases checked: A0=B=empty, A0=B, and an empty target. Small cases checked by hand: {a<b} with B={b}, and {a1<a2<b} with a non-monotone insertion order (inner horns 2-horn index 1 and 3-horn index 2). The parent's two uses (B containing the maximum, and the even ordinals below a limit) satisfy the hypotheses. No new nodes. An rg search of dag/nodes found no duplicate. blueprint.from and its via list are consistent. No cycle, no SGA source, no tool_uses needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-fa088f2ee (reviewer sub-agent of L); spot-checked: I read the item's 12 steps, the new leaf, the two cited statements (def-cbc-enhanced-diagrams-cones and the well-ordering leaf), the parent's use of the item, the unit record, and the Mathlib file WellOrderInductionData.lean. In that file, the structure is at line 46, ofExists at 68 (its inputs: surjectivity at each successor and lifting of compatible families at each IsSuccLimit), sectionsMk at 271, sectionsMk_val_op_bot at 275 and surjective at 280. A nonempty well-order supplies the SuccOrder instance through SuccOrder.ofLinearWellFoundedLT (Order/SuccPred/Basic.lean:116). The new leaf lem-coef-well-ordered-inverse-system-section is an exact one-line specialization. It is true, and its limit hypothesis is genuinely needed: F_n = N_{>=n} with F_omega empty has surjective successor maps but no section. It is not a duplicate of transfinite-recursion, transfinite-left-lifting, the Mittag-Leffler tower node, galois-inverse-limit-surjective or the ring-tower recursion. It does not restate a clause of the item. I verified steps 1-9 again: the strict inequality a<b, the exhaustive pairing, b at an inner position 0<k<r+1, the face cases, the inverse image being exactly the horn, the pushout gluing and the finite-support limits. Step 10 applies the leaf to the restrictions H_r over N>=1, with successor surjectivity from step 8 for arbitrary maps, no limit elements, and bottom value g_1. Step 11 is elementary degreewise gluing. Step 12 applies the leaf on [0,theta], with successor surjectivity from step 11, the limit lifting given by the displayed union, bottom value h, and endpoint N(A). Small cases I checked: the spine of {a<b} with B={b} gives an inner-horn fill; A_0=B; A_0 empty. HTT 5.4.6.2 is not archived and is recorded as WANTED; the proof is self-contained and agent-written. Not a target node, so the base-change check does not apply. No SGA, no tool_uses, no route departure. Cosmetic only: the new node's blueprint key order. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",

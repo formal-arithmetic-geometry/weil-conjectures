@@ -9,11 +9,102 @@
  },
  "stmt_deps": [
   "lem-coef-reedy-model-structure",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use functional composition. For $\\alpha:[k]\\to[m]$ and $\\beta:[l]\\to[n]$, the operator on $D$ sends $h:S^m\\to B_n$ to $B(\\beta)hS(\\alpha)$; use the same formula for $E,D'$, with $TS,B'$ and $S',B'$ respectively. Identity and composition laws follow from those of the diagrams, and the two directions commute by associativity. Naturality of $b$ gives\n$$B'(\\beta)b_nT(h)T(S(\\alpha))=b_lT(B(\\beta)hS(\\alpha)).$$\nNaturality of $a$ gives\n$$B'(\\beta)h'a^mT(S(\\alpha))=B'(\\beta)h'S'(\\alpha)a^k.$$\nThus the two stated formulas commute with every pair of simplicial operators, so define the span $D\\to E\\leftarrow D'$ of bisimplicial sets. Restricting both indices along the diagonal gives the stated span of simplicial sets.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.7, bisimplicial Hom construction; the two naturality calculations are expanded here."
+   }
+  },
+  {
+   "text": "Fix $m$ and put $X=TS^m$, $X'=S'^m$ and $f=a^m:X\\to X'$. Both objects are cofibrant by hypothesis. Apply [lem-coef-brown-split-factorizations] to choose $X\\xrightarrow{u}V\\xrightarrow{p}X'$ and $s:X'\\to V$, with $u,s$ cofibrations, $p$ a trivial fibration, $pu=f$ and $ps=1_{X'}$. Since $p,f$ and $1_{X'}$ are weak equivalences, two-out-of-three makes $u,s$ weak equivalences, hence trivial cofibrations. Write $J(A)_n=\\operatorname{Hom}_{\\mathcal N}(A,B'_n)$, with operators given by postcomposition with the operators of $B'$. Precomposition defines $J(v):J(C)\\to J(A)$ for $v:A\\to C$, and gives $J(wv)=J(v)J(w)$ and $J(1)=1$.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 1.1.12, explicit split factorization used in the Proposition 5.4.7 comparison."
+   }
+  },
+  {
+   "text": "For either $v=u$ or $v=s$ from step 2, write $v:A\\to C$. Consider a boundary lifting problem against $J(v):J(C)\\to J(A)$ in dimension $n\\geq0$. Its simplex on the lower side is a map $x:A\\to B'_n$. Its upper boundary is a family $y_\\theta:C\\to B'_k$ for all proper injective $\\theta:[k]\\hookrightarrow[n]$, compatible with further face restrictions. These describe every boundary simplex: any nonsurjective order map into $[n]$ factors uniquely as a surjection onto its image followed by its proper injective image inclusion; the corresponding value is the degeneracy of $y_\\theta$. The boundary relations are precisely the cone relations for $M_nB'$ in [lem-coef-reedy-model-structure], so the family gives $y:C\\to M_nB'$. Commutativity of the original lifting problem says $q_nx=yv$, where $q_n:B'_n\\to M_nB'$ is the matching map. Reedy fibrancy of $B'$ makes $q_n$ a fibration. Since $v$ is a trivial cofibration, the model-category lifting axiom supplies $z:C\\to B'_n$ with $zv=x$ and $q_nz=y$. Its restrictions give a filler of the original boundary. For $n=0$ the boundary is empty and $M_0B'$ is terminal, so the same argument applies. Thus $J(u),J(s)$ have the right lifting property against every boundary and are trivial Kan fibrations by [lem-coef-kan-quillen-right-proper].",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.1, dual boundary/matching calculation, and Corollary 5.4.4(2); here only trivial-cofibration lifting is needed."
+   }
+  },
+  {
+   "text": "Step 3 makes $J(u),J(s)$ weak homotopy equivalences. The equation $ps=1_{X'}$ gives $J(s)J(p)=1_{J(X')}$. Two-out-of-three in the simplicial-set model structure of [lem-coef-kan-quillen-right-proper] therefore makes $J(p)$ a weak homotopy equivalence. From $f=pu$ obtain $J(f)=J(u)J(p)$, also a weak homotopy equivalence. For this fixed $m$, $J(f)$ is exactly $D'_{m,\\bullet}\\to E_{m,\\bullet}$. This proves the required weak equivalence for every row. The Brown choices need not be natural in $m$: the map of bisimplicial sets was already defined independently in step 1.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 1.1.12, two-out-of-three argument; Proposition 5.4.7, row comparison."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-bisimplicial-diagonal-equivalence] to the actual bisimplicial map $D'\\to E$ of step 1. Its hypothesis for every fixed first index is exactly step 4. It follows that $\\operatorname{diag}D'\\to\\operatorname{diag}E$ is a weak homotopy equivalence. No cofibrancy of $S$ or Reedy cofibrancy of $TS,S'$ is used beyond the expressly assumed cofibrancy of the components of $a$ in step 2; neither a Quillen property of $T$ nor a weak-equivalence condition on $b$ is required.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 5.3.1, diagonal weak-equivalence argument used in Proposition 5.4.7."
+   }
+  },
+  {
+   "text": "The three vertical maps have degree-$m$ formulas\n$$h\\longmapsto i_mh,\\qquad k\\longmapsto i'_mk,\\qquad h'\\longmapsto i'_mh',$$\nfrom $H(S,Y)$, $H(TS,Z)$, $H(S',Z)$ respectively to $\\operatorname{diag}D$, $\\operatorname{diag}E$, $\\operatorname{diag}D'$. For example, for $\\alpha:[k]\\to[m]$, the first composite with its diagonal operator is $B(\\alpha)i_mhS(\\alpha)=i_khS(\\alpha)$ by naturality of $i$; the other two calculations use naturality of $i'$. Thus these formulas define simplicial maps. The horizontal maps $h\\mapsto rT(h)$ and $h'\\mapsto h'a^m$ are simplicial by functoriality of $T$ and naturality of $a$, using the same computation as in step 1.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.7, maps from the constant-target mapping complexes; coaugmentation naturality written explicitly."
+   }
+  },
+  {
+   "text": "Check both squares on a degree-$m$ element. For $h:S^m\\to Y$, the path via $D$ has value\n$$b_mT(i_mh)=b_mT(i_m)T(h)=i'_mrT(h),$$\nusing exactly the assumed equation $bT(i)=i'\\operatorname{const}(r)$. This is the path via $H(TS,Z)$. For $h':S'^m\\to Z$, the path via $D'$ has value\n$$(i'_mh')a^m=i'_m(h'a^m),$$\nwhich is the path via $H(TS,Z)$. Equality in every degree gives equality of the simplicial maps of step 6, hence the two commuting squares with the span. These are strictly commuting squares; the statement asserts no weak equivalence for their vertical arrows under its present hypotheses.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.7 pattern; compatibility with the supplied coaugmentations is the displayed composition calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Boundary/matching lifting and the explicit Brown split-factorization proof of the comparison pattern in Hovey Proposition 5.4.7; Hovey Lemma 1.1.12 and Proposition 5.4.1 read online. Hovey is not held locally in literature/; see report WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +147,52 @@
    "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
    "date": "2026-10-17",
    "verdict": "no match: ordinary cosimplicial-object definitions, model-category axioms and natural transformations into the ordinary homotopy category do not supply this double-resolution or hammock comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weak equivalence between cofibrant objects induces a weak homotopy equivalence on Hom into a Reedy fibrant simplicial resolution",
+   "results": "{\"t\": \"2026-10-17T11:19:09Z\", \"tool\": \"leanfinder\", \"query\": \"A weak equivalence between cofibrant objects induces a weak homotopy equivalence on Hom into a Reedy fibrant simplicial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.weakEquivalence_resolutionMap_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel\"], \"digest\": \"3ccf311ea3333b5a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Hits concern homotopy classes, ordinary chain complexes, or Reedy indexing categories; none states this Hom span and diagonal comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps of bisimplicial Hom sets induced by natural transformations of resolutions give a span and a weak equivalence on diagonals",
+   "results": "{\"t\": \"2026-10-17T11:20:28Z\", \"tool\": \"leansearch\", \"query\": \"Maps of bisimplicial Hom sets induced by natural transformations of resolutions give a span and a weak equivalence on diagonals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.AlternatingFaceMapComplex.map\", \"CategoryTheory.NatTrans.mapHomologicalComplex\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory\", \"CategoryTheory.NatTrans.mapHomotopyCategory\", \"CategoryTheory.ShortComplex.homologyMap_mapNatTrans\", \"HomologicalComplex.mapBifunctorMap\", \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\"], \"digest\": \"1d1aa56eb0391587\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Hits concern homotopy classes, ordinary chain complexes, or Reedy indexing categories; none states this Hom span and diagonal comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory, HomotopicalAlgebra.CofibrantBrownFactorization",
+   "results": "{\"t\": \"2026-10-17T11:20:33Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory, HomotopicalAlgebra.CofibrantBrownFactorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantBrownFactorization\", \"HomotopicalAlgebra.CofibrantBrownFactorization.toMapFactorizationData\", \"HomotopicalAlgebra.CofibrantBrownFactorization.s\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instNonemptyOfIsCofibrant\", \"HomotopicalAlgebra.CofibrantBrownFactorization.cofibration_s\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceICofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CofibrantBrownFactorization.s_p\"], \"digest\": \"3cda6945a94186e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Brown factorization is an existing cited Mathlib leaf, not a theorem about bisimplicial Hom spans."
+  },
+  {
+   "tool": "grep",
+   "query": "bisimplicial|cosimplicial.*fram|Reedy.*fibrant|simplicial.*resolution [AlgebraicTopology]",
+   "results": "{\"t\": \"2026-10-17T11:20:38Z\", \"tool\": \"grep\", \"query\": \"bisimplicial|cosimplicial.*fram|Reedy.*fibrant|simplicial.*resolution\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Hits concern homotopy classes, ordinary chain complexes, or Reedy indexing categories; none states this Hom span and diagonal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|cosimplicialFrame|simplicialFrame|bisimplicial",
+   "results": "{\"t\": \"2026-10-17T11:22:11Z\", \"tool\": \"grep\", \"query\": \"Reedy|cosimplicialFrame|simplicialFrame|bisimplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\"], \"digest\": \"02acb1d747fdfb16\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Hits concern homotopy classes, ordinary chain complexes, or Reedy indexing categories; none states this Hom span and diagonal comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition with a weak equivalence of cofibrant objects gives a weak equivalence of simplicial mapping sets into a Reedy fibrant diagram; use Brown factorization and boundary matching lifts",
+   "results": "{\"t\": \"2026-10-17T11:22:16Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition with a weak equivalence of cofibrant objects gives a weak equivalence of simplicial mapping sets into a Reedy fibrant diagram; use Brown factorization and boundary matching lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsStableUnderPrecompHomRel\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"cb814b04d24d8755\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Hits concern homotopy classes, ordinary chain complexes, or Reedy indexing categories; none states this Hom span and diagonal comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cosimplicial-frame-mapping",
@@ -83,5 +216,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-frame-bisimplicial-span",
+  "worker": "stage1",
+  "summary": "Preserved the entire statement. Constructed both bisimplicial maps, used the existing Brown split-factorization leaf and the explicit Reedy matching lift against boundaries to prove rowwise weak equivalence, then applied the existing diagonal theorem. Wrote both coaugmentation squares on elements. No new nodes, no Lean or builds. All component and boundary hypotheses, including dimension zero, checked.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction in the R Hom / R lim calculation), through the inherited via chain. The current main-20261015 ancestor has retained the adjunction statement but no proof paragraph; the historical master paragraph and the parent lem-coef-cosimplicial-frame-mapping step 15 identify the auxiliary task. Steps 1 and 6-7 realize its span/naturality clauses, steps 2-5 its weak-equivalence clause. No change of chapter, unit or route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-4404c492d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-4404c492d (reviewer sub-agent of L); spot-checked: I read the item in full: its unchanged statement and all 7 steps. I also read the statement of every cited node (reedy-model-structure, kan-quillen-right-proper, def-weil-pbc-simplicial-set, bisimplicial-diagonal-equivalence and brown-split-factorizations, which is the Mathlib leaf in BrownLemma.lean) and steps 6 and 15 of the parent. Step 1: both naturality equations check, b_l T(B(beta)) = B'(beta) b_n and a^m T S(alpha) = S'(alpha) a^k. Step 2: the Brown leaf needs both ends cofibrant, which TS^m and S'^m are by hypothesis, and two-out-of-three makes u and s trivial cofibrations. Step 3: in Delta^op, J^- is the opposite of the proper injections, so the boundary data is a map C -> M_nB'. Reedy fibrancy makes q_n a fibration, and lifting against the trivial cofibration v gives the filler. The n=0 case holds. The boundary criterion of the Kan node then gives trivial fibrations. Step 4: the contravariant two-out-of-three through J(s)J(p)=1 and J(f)=J(u)J(p) is correct, and J(f) is exactly row m of D' -> E. Step 5: this is the rowwise hypothesis of the diagonal node, in the correct direction. Steps 6-7: the strict squares follow from the m-component of bT(i)=i'const(r) and from associativity. The homotopically-constant hypothesis is kept although unused; that is not a weakening. The chain of dependencies is acyclic. All statement citations are in the same unit and no SGA is cited. No node in the DAG duplicates the item: the zigzag-nerve node states a different result, and cbc-right-resolution-mapping-criterion is off-unit and depends on the parent, so citing it would make a cycle. No new nodes, no fixes, no tool_uses. Hovey is not in literature/, so proof_origin is correctly marked agent and the report files a WANTED line."
  }
 }

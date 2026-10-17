@@ -31,17 +31,27 @@
  ],
  "proof": [
   {
-   "text": "We first justify choosing sharp-join representatives with both prescribed end cocones fixed. The right-cone version of [lem-coef-infinity-join-cone-calculus], obtained by the opposite operation of [lem-coef-infinity-relative-cone-equivalence](4), compares maps on $K\\star\\Delta^0$ with coherent cocones, and is an equivalence after fixing the boundary diagram and, if desired, its vertex. Thus a cocone supplied by filteredness or cofinality may be replaced by a sharp-join representative with the same diagram and vertex. The resulting equivalence of cocones maps under any functor to an equivalence, and may be composed with the morphism supplied by cofinality. It therefore suffices at a successor stage to connect two specified sharp cocones by a fat coherent morphism.\n\nSuch a morphism is a map on $K\\diamond\\Delta^1$: its cylinder description is the square of coherent transformations, constant on $K$ at the source of the cone direction and constant in $K$ at the target. Put $V=(K\\star\\{0\\})\\cup_K(K\\star\\{1\\})$ and $W=(K\\diamond\\{0\\})\\cup_K(K\\diamond\\{1\\})$. By [lem-coef-infinity-blunt-sharp-join-equivalence], restriction along the comparison gives an equivalence $\\operatorname{Fun}(K\\star\\Delta^1,\\mathcal Y)\\to\\operatorname{Fun}(K\\diamond\\Delta^1,\\mathcal Y)$. The comparison on boundary diagrams $\\operatorname{Fun}(V,\\mathcal Y)\\to\\operatorname{Fun}(W,\\mathcal Y)$ is also an equivalence: apply the product and joint-boundary base-change clauses of the right-cone comparison to two cones whose $K$ diagrams agree. Both comparisons commute with restriction. Choose a sharp total diagram whose fat image is equivalent to the given fat morphism. Restrict this equivalence to $W$. A quasi-inverse of the boundary comparison gives an equivalence from the sharp boundary of this total diagram to the pair of prescribed sharp end cocones on $V$. Restriction from $K\\star\\Delta^1$ to $V$ is an isofibration by [lem-coef-infinity-parameter-cone-extension]; lift that boundary equivalence to replace the total diagram by one restricting exactly to the prescribed pair. This constructs a map on $K\\star\\Delta^1$ retaining both end cones, including all their simplices. We need only its existence, not equality with the initially chosen fat morphism. In particular, in step 4 both the old $K\\cup\\{\\beta\\}$ diagram and the new image source cone are retained exactly.",
+   "text": "For a small diagram $a:K\\to\\mathcal E$, use the sharp join slice $J_a$ and coherent cocone category $P_a$ of [lem-coef-join-slice-cocone-comparison]. Its comparison $c:J_a\\to P_a$ is an equivalence over $\\mathcal E$, and an equivalence on each strict apex fiber. Given a coherent cocone with apex $T$, essential surjectivity in that fiber supplies a sharp cocone $A:K\\star\\Delta^0\\to\\mathcal E$ with exactly boundary $a$ and apex $T$, and an equivalence from $c(A)$ to the given cocone within that fiber. Thus we can sharpen the cocones supplied by filteredness and cofinality while retaining their diagrams and vertices. A functor carries the inverse edges and their triangle witnesses to inverse edges and triangle witnesses, so carries this equivalence to an equivalence of image cocones.",
    "uses": [
-    "lem-coef-infinity-join-cone-calculus",
-    "lem-coef-infinity-relative-cone-equivalence",
-    "lem-coef-infinity-parameter-cone-extension",
-    "lem-coef-infinity-blunt-sharp-join-equivalence"
+    "lem-coef-join-slice-cocone-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Agent expansion of the coherent cocone conventions in Lemma 5.4.6.3; join/cocone comparison, Section 4.2.1."
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent application of the existing join-slice/cocone comparison, HTT Proposition 4.2.1.5 and Corollary 4.2.1.7, to the fixed-end coherence in Lemma 5.4.6.3; archive WANTED."
+   }
+  },
+  {
+   "text": "Fix two sharp cocones $A,B$ on the same diagram $a:K\\to\\mathcal E$, and suppose there is a coherent cocone morphism $c(A)\\to c(B)$. The equivalence $c:J_a\\to P_a$ of [lem-coef-join-slice-cocone-comparison] induces an equivalence $\\operatorname{Map}_{J_a}(A,B)\\to\\operatorname{Map}_{P_a}(c(A),c(B))$ by [lem-cbc-enhanced-functor-cone-calculus]. The target has a vertex, so surjectivity on components makes the source nonempty. A vertex of this right-pinched mapping space is an edge $A\\to B$; by the stated definition of $J_a$, it is a map $K\\star\\Delta^1\\to\\mathcal E$ whose two end cones are exactly $A,B$. After step 1, compose the cocone morphism supplied by cofinality with the chosen cocone equivalences and their inverses, using inner-horn composition. The resulting sharp morphism therefore retains both prescribed end cones, including every simplex. No equality with the original coherent morphism is needed.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent application of the existing join-slice/cocone comparison, HTT Proposition 4.2.1.5 and Corollary 4.2.1.7, to the fixed-end coherence in Lemma 5.4.6.3; archive WANTED."
    }
   },
   {
@@ -56,7 +66,7 @@
    }
   },
   {
-   "text": "We construct compatible diagrams $q:N(E)\\to\\mathcal X$, $s:N(O)\\to\\mathcal Z$, and $Q:N(\\kappa)\\to\\mathcal Y$, with restrictions $Q|_{N(E)}=fq$ and $Q|_{N(O)}=gs$ holding exactly as simplicial maps, using the fixed-boundary representatives of step 1. For stage $0$, choose $x_0\\in\\mathcal X$ by filteredness for the empty shape and set $Q(0)=f(x_0)$. Stage $1$ is handled separately. Choose $z_0\\in\\mathcal Z$. Filteredness of $\\mathcal Y$ gives a vertex $y$ and arrows $f(x_0)\\to y$ and $g(z_0)\\to y$, by applying the cocone definition to two discrete vertices. Apply $\\kappa$-cofinality of $g$ to the one-point diagram $z_0$ and its cocone $g(z_0)\\to y$. This supplies $z_0\\to z_1$ and a morphism of cocones with vertex arrow $y\\to g(z_1)$. Composing with $f(x_0)\\to y$ gives the diagram $Q$ on $\\{0<1\\}$, and set $s(1)=z_1$. The coherent composition is an inner-horn filler. In particular we have not treated the empty preceding odd part as weakly contractible.",
+   "text": "We construct compatible diagrams $q:N(E)\\to\\mathcal X$, $s:N(O)\\to\\mathcal Z$, and $Q:N(\\kappa)\\to\\mathcal Y$, with restrictions $Q|_{N(E)}=fq$ and $Q|_{N(O)}=gs$ holding exactly as simplicial maps, using the fixed-boundary representatives of steps 1–2. For stage $0$, choose $x_0\\in\\mathcal X$ by filteredness for the empty shape and set $Q(0)=f(x_0)$. Stage $1$ is handled separately. Choose $z_0\\in\\mathcal Z$. Filteredness of $\\mathcal Y$ gives a vertex $y$ and arrows $f(x_0)\\to y$ and $g(z_0)\\to y$, by applying the cocone definition to two discrete vertices. Apply $\\kappa$-cofinality of $g$ to the one-point diagram $z_0$ and its cocone $g(z_0)\\to y$. This supplies $z_0\\to z_1$ and a morphism of cocones with vertex arrow $y\\to g(z_1)$. Composing with $f(x_0)\\to y$ gives the diagram $Q$ on $\\{0<1\\}$, and set $s(1)=z_1$. The coherent composition is an inner-horn filler. In particular we have not treated the empty preceding odd part as weakly contractible.",
    "uses": [
     "def-coef-presentable-infinity-category",
     "def-cbc-enhanced-diagrams-cones"
@@ -68,7 +78,7 @@
    }
   },
   {
-   "text": "For a successor stage $\\alpha=\\beta+1\\geq2$, let $T$ be $E\\cap\\alpha$ if $\\alpha$ is even, and $O\\cap\\alpha$ if $\\alpha$ is odd; let $v$ denote the existing diagram into $\\mathcal X$ or $\\mathcal Z$ respectively, and $F$ the corresponding functor $f$ or $g$. The set $T$ is nonempty (it contains $0$ in the even case and $1$ in the odd case), and its nerve is weakly contractible: the arrows from its least element to every vertex define a natural transformation from the constant functor to its identity, contracting the nerve. Its nerve is $\\kappa$-small by step 2. The restriction of $Q$ to $T\\cup\\{\\beta\\}$ gives a cocone on $Fv$ with vertex $Q(\\beta)$. Apply $\\kappa$-cofinality of $F$ to $v$ and this cocone. We obtain a cocone on $v$ with new vertex $v_\\alpha$ and a morphism from the displayed target cocone to its image. By step 1 the latter is a diagram on the ordered set $T\\cup\\{\\beta,\\alpha\\}$. It agrees with $Q$ on $T\\cup\\{\\beta\\}$ and with the image of the new source cone on $T\\cup\\{\\alpha\\}$. Put $B=T\\cup\\{\\beta\\}\\subseteq\\alpha$. This $B$ is cofinal since it contains the greatest element $\\beta$ of $\\alpha$. Apply [lem-coef-infinity-linear-cofinal-cone-extension] to $A_0=\\alpha$ with new vertex $\\alpha$: the old $Q$ on $N(\\alpha)$ and the just constructed cone on $N(B)$ extend to $N(\\alpha+1)$. This extends the matching source diagram and all of $Q$, retaining every earlier simplex.",
+   "text": "For a successor stage $\\alpha=\\beta+1\\geq2$, let $T$ be $E\\cap\\alpha$ if $\\alpha$ is even, and $O\\cap\\alpha$ if $\\alpha$ is odd; let $v$ denote the existing diagram into $\\mathcal X$ or $\\mathcal Z$ respectively, and $F$ the corresponding functor $f$ or $g$. The set $T$ is nonempty (it contains $0$ in the even case and $1$ in the odd case), and its nerve is weakly contractible: the arrows from its least element to every vertex define a natural transformation from the constant functor to its identity, contracting the nerve. Its nerve is $\\kappa$-small by step 3. The restriction of $Q$ to $T\\cup\\{\\beta\\}$ gives a cocone on $Fv$ with vertex $Q(\\beta)$. Apply $\\kappa$-cofinality of $F$ to $v$ and this cocone. We obtain a cocone on $v$ with new vertex $v_\\alpha$ and a morphism from the displayed target cocone to its image. By step 2 the latter is a diagram on the ordered set $T\\cup\\{\\beta,\\alpha\\}$. It agrees with $Q$ on $T\\cup\\{\\beta\\}$ and with the image of the new source cone on $T\\cup\\{\\alpha\\}$. Put $B=T\\cup\\{\\beta\\}\\subseteq\\alpha$. This $B$ is cofinal since it contains the greatest element $\\beta$ of $\\alpha$. Apply [lem-coef-infinity-linear-cofinal-cone-extension] to $A_0=\\alpha$ with new vertex $\\alpha$: the old $Q$ on $N(\\alpha)$ and the just constructed cone on $N(B)$ extend to $N(\\alpha+1)$. This extends the matching source diagram and all of $Q$, retaining every earlier simplex.",
    "uses": [
     "lem-coef-infinity-linear-cofinal-cone-extension"
    ],
@@ -91,7 +101,7 @@
    }
   },
   {
-   "text": "Perform the preceding recursion for all $\\alpha<\\kappa$. At a limit stage, the already defined portion is the union of its earlier portions, and at each successor the extension fixes that union. These unions define simplicial maps, because every simplex of an ordinal nerve uses finitely many vertices and is therefore contained in a bounded earlier portion; faces and degeneracies are inherited from the same portions. The source diagrams have the same compatibility. We obtain the three diagrams $q,s,Q$ of step 3 on their full nerves, without choosing any additional coherence at the end.",
+   "text": "Perform the preceding recursion for all $\\alpha<\\kappa$. At a limit stage, the already defined portion is the union of its earlier portions, and at each successor the extension fixes that union. These unions define simplicial maps, because every simplex of an ordinal nerve uses finitely many vertices and is therefore contained in a bounded earlier portion; faces and degeneracies are inherited from the same portions. The source diagrams have the same compatibility. We obtain the three diagrams $q,s,Q$ of step 4 on their full nerves, without choosing any additional coherence at the end.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -100,7 +110,7 @@
    }
   },
   {
-   "text": "Choose colimiting cocones on $q,s,Q$ with vertices $x,z,y$, respectively. These exist by the hypotheses because all three shapes are $\\tau$-small and $\\kappa$-filtered, as checked in step 2. Preservation makes the image cocones with vertices $f(x)$ and $g(z)$ colimiting for the two restrictions of $Q$. For the inclusion $N(E)\\to N(\\kappa)$ and any $\\gamma<\\kappa$, the comma quasicategory of [lem-coef-infinity-cofinal-comma-criterion] is the nerve of the tail $\\{e\\in E:\\gamma\\leq e\\}$. Indeed its objects are exactly pairs $(e,\\gamma\\leq e)$ and its arrows are the order comparisons; there are no nonidentity equivalences in these posets to add identifications in the homotopy pullback. The tail is nonempty by unboundedness of $E$ and has a least element. The arrows from that element to every other element give a natural transformation from the constant functor to the identity and hence a contraction of its nerve. For $N(O)\\to N(\\kappa)$ the comma has objects $(o,\\gamma\\leq o)$ and order arrows, so it is the nerve of $\\{o\\in O:\\gamma\\leq o\\}$. Unboundedness of $O$ makes this tail nonempty; its least element gives the constant-to-identity contraction. Thus the cited criterion applies to each inclusion and says that the cocone on $Q$ with vertex $y$, restricted to each parity, is colimiting. The indexing nerves are small by step 2; no ambient cocompleteness is needed.",
+   "text": "Choose colimiting cocones on $q,s,Q$ with vertices $x,z,y$, respectively. These exist by the hypotheses because all three shapes are $\\tau$-small and $\\kappa$-filtered, as checked in step 3. Preservation makes the image cocones with vertices $f(x)$ and $g(z)$ colimiting for the two restrictions of $Q$. For the inclusion $N(E)\\to N(\\kappa)$ and any $\\gamma<\\kappa$, the comma quasicategory of [lem-coef-infinity-cofinal-comma-criterion] is the nerve of the tail $\\{e\\in E:\\gamma\\leq e\\}$. Indeed its objects are exactly pairs $(e,\\gamma\\leq e)$ and its arrows are the order comparisons; there are no nonidentity equivalences in these posets to add identifications in the homotopy pullback. The tail is nonempty by unboundedness of $E$ and has a least element. The arrows from that element to every other element give a natural transformation from the constant functor to the identity and hence a contraction of its nerve. For $N(O)\\to N(\\kappa)$ the comma has objects $(o,\\gamma\\leq o)$ and order arrows, so it is the nerve of $\\{o\\in O:\\gamma\\leq o\\}$. Unboundedness of $O$ makes this tail nonempty; its least element gives the constant-to-identity contraction. Thus the cited criterion applies to each inclusion and says that the cocone on $Q$ with vertex $y$, restricted to each parity, is colimiting. The indexing nerves are small by step 3; no ambient cocompleteness is needed.",
    "uses": [
     "def-coef-presentable-infinity-category",
     "lem-coef-infinity-cofinal-comma-criterion"
@@ -127,12 +137,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category",
   "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-coef-infinity-blunt-sharp-join-equivalence",
   "lem-coef-infinity-cofinal-comma-criterion",
-  "lem-coef-infinity-join-cone-calculus",
   "lem-coef-infinity-linear-cofinal-cone-extension",
-  "lem-coef-infinity-parameter-cone-extension",
-  "lem-coef-infinity-relative-cone-equivalence"
+  "lem-coef-join-slice-cocone-comparison"
  ],
  "mathlib_searches": [
   {
@@ -211,10 +218,38 @@
    "results": "{\"t\": \"2026-10-16T21:40:40Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial map to an inner Kan simplicial set extends a cone from an unbounded suborder to the full ordinal nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.SimplicialThickening.functor_map\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.mk\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion_left\"], \"digest\": \"827b190c7e3fbcb2\"}",
    "date": "2026-10-17",
    "verdict": "No match: inspected hits concern nerves, their degeneracies, strict Segal or coskeletal simplicial objects, and individual inner-horn fillers. None states extension from the specified union to a linear-order cone in an arbitrary quasicategory; the resolving Loogle extension query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|filtered|common.image",
+   "results": "{\"t\": \"2026-10-17T07:51:59Z\", \"tool\": \"grep\", \"query\": \"cofinal|filtered|common.image\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Preserved search from the interrupted Q89 run. The hits concern ordinary categories and transfinite compositions, or basic quasicategory horn fillers, not the stated strong-cofinal common-image theorem. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103; no coherent cocone or strong-cofinality result is present. The grep was restricted to AlgebraicTopology/Quasicategory and returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alternating transfinite chains of two cofinal functors in infinity categories yield equivalent image objects",
+   "results": "{\"t\": \"2026-10-17T07:51:59Z\", \"tool\": \"leansearch\", \"query\": \"Alternating transfinite chains of two cofinal functors in infinity categories yield equivalent image objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TransfiniteCompositionOfShape.mk.inj\", \"CategoryTheory.TransfiniteCompositionOfShape.ofOrderIso_F\", \"CategoryTheory.TransfiniteCompositionOfShape.map\", \"CategoryTheory.SmallObject.SuccStruct.iterationFunctor.congr_simp\", \"CategoryTheory.TransfiniteCompositionOfShape.ici_isColimit\", \"ChainComplex.alternatingConst\", \"ChainComplex.alternatingConst_obj\", \"AlgebraicTopology.alternatingCofaceMapComplex\"], \"digest\": \"74a14a12654c0204\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Preserved search from the interrupted Q89 run. The hits concern ordinary categories and transfinite compositions, or basic quasicategory horn fillers, not the stated strong-cofinal common-image theorem. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103; no coherent cocone or strong-cofinality result is present. The grep was restricted to AlgebraicTopology/Quasicategory and returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, \"cofinal\"",
+   "results": "{\"t\": \"2026-10-17T07:51:59Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, \\\"cofinal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Preserved search from the interrupted Q89 run. The hits concern ordinary categories and transfinite compositions, or basic quasicategory horn fillers, not the stated strong-cofinal common-image theorem. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103; no coherent cocone or strong-cofinality result is present. The grep was restricted to AlgebraicTopology/Quasicategory and returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two kappa cofinal quasicategory functors preserving cardinal filtered colimits have a common object in their essential images",
+   "results": "{\"t\": \"2026-10-17T07:52:09Z\", \"tool\": \"leanfinder\", \"query\": \"Two kappa cofinal quasicategory functors preserving cardinal filtered colimits have a common object in their essential images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.aux\", \"CategoryTheory.isCardinalFiltered_iff_aux₂\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.final_functor\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.IsCardinalFiltered.max\"], \"digest\": \"7ccbceb7225c7bcc\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Preserved search from the interrupted Q89 run. The hits concern ordinary categories and transfinite compositions, or basic quasicategory horn fillers, not the stated strong-cofinal common-image theorem. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103; no coherent cocone or strong-cofinality result is present. The grep was restricted to AlgebraicTopology/Quasicategory and returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-filtered-cofinal-pullback",
@@ -232,12 +267,12 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-cofinal-common-image",
   "worker": "stage1",
-  "summary": "Unchanged statement checked against HTT 5.4.6.3. Gave the alternating ordinal-chain proof, including separate initialization at the first odd stage, fixed-boundary coherence, all cardinality bounds and colimit comparisons. Created one generic linear-order cone-extension node (HTT 5.4.6.2); reused the existing join/cocone, opposite, restriction-isofibration and comma-criterion nodes. No Lean attachment or Mathlib match. Second reading made the two-end strictification argument explicit, expanded both final parity arguments, and removed the worker-written tool-use authorization.",
+  "summary": "Q89 repair of the returned 2369-character step 1: replaced it by two short applications of the existing, reviewed lem-coef-join-slice-cocone-comparison, whose fixed-apex equivalence supplies sharp cocone representatives and whose functor equivalence, together with the existing mapping-space calculus, supplies an edge between the two exactly prescribed sharp cocones. No duplicate lemma was created. Kept all seven other proof steps, changing only their internal step numbers. The alternating transfinite-chain route, statement, statement dependencies, Lean record and reviewed_lean record are unchanged. Rechecked every cited statement, the initial odd stage, all cardinal bounds and the exact-boundary successor/limit extensions. No new nodes, Mathlib leaves or Lean work.",
   "blueprint": "Realizes the accessible-infinity-pullback descendant of proof paragraph 2 of prop-coef-integral-exceptional-adjoint (derived coefficient adjunction); in the immediate parent it supplies the common-image argument used in the three applications in lem-coef-infinity-filtered-cofinal-pullback. No chapter or unit route is changed.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Step 8 takes only its generic clause that the full subcategory of initial objects of a quasicategory is a contractible Kan complex (uniqueness of colimiting cocones up to equivalence); unit sk-prop-sf-biduality-general has no node stating this, and the same node is already an accepted generic tool of this unit's coherent-cone nodes."
+    "why": "Steps 2 and 9 use only its generic mapping-space equivalence and initial-object uniqueness clauses. The fixed-apex join-slice comparison belongs to this unit; this previously accepted generic tool supplies its mapping-space calculus, and no node of the unit replaces those general clauses."
    }
   ]
  },
@@ -245,12 +280,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q02-34b2fc44d",
-  "group": "Q02",
+  "reviewer": "NT-cc-Q89-1a3068153",
+  "group": "Q89",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-34b2fc44d (reviewer sub-agent of L); spot-checked: Read in full: contract docs, delivery-errors A-H, the packet and report, the item, the new node, the statements of all 8 cited nodes, the parent's three uses of the item, and the unit and chapter records. HTT is not archived (WANTED), so HTT 5.4.6.2/5.4.6.3 were checked from knowledge. Statement: matches HTT 5.4.6.3 hypothesis by hypothesis and is unchanged. Base-change and coefficient checks do not apply (abstract quasicategory lemma). Steps: (1) the fat-to-sharp fixed-end replacement is valid: right cones by opposites (relative-cone-equivalence (4)); the boundary comparison is the base change of the product comparison along E x E x Fun(K,E) (join-cone calculus); blunt-sharp equivalence; isofibration lift (parameter-cone-extension). (2) E/O are unbounded, κ-filtered and τ-small; κ=ω checked. (3) Stage 1 uses g's κ-cofinality on a one-point test shape and an inner-horn composite. (4) At a successor stage β is not in T and is the maximum of B=T∪{β}, so the new node applies. (5) At a limit stage E∩α is cofinal; filteredness gives a cocone, not a colimit. (6) Union by finite vertex support. (7) For poset nerves the comma categories are the parity tails (nonempty, least element), so the comma criterion's given-cocone iff applies. (8) Initial objects form a contractible Kan complex. New node lem-coef-infinity-linear-cofinal-cone-extension: true (HTT 5.4.6.2; also derivable from DAG facts, since filtered linear tails are contractible and the comma criterion plus the isofibration lift give it). Tested on the empty case, the Λ^2_1 horn, the spine case, ω with the evens, and a counterexample without cofinality. Not a restated clause, not a duplicate (checked against cofinal-kappa-poset, directed-cone-cover, cofinal-coslice-calculus, compact-relative-cocone-factorization, the comma criterion and the join nodes). Form B1-B9 is correct and the dependency closure has no cycle. Fixes to the item: step 3 'in the coherent sense' changed to strict equality; step 5 now explicitly sharpens the filteredness cocone via step 1; split_report.tool_uses restored for lem-cbc-enhanced-functor-cone-calculus (step 8 initial-object uniqueness; generic, already an accepted tool in this unit), which I accept.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-1a3068153 (reviewer sub-agent of L); spot-checked: I read all 9 steps and the full statements of all 6 cited nodes. The repaired steps 1-2 hold. Step 1: the fixed-apex fiber equivalence of lem-coef-join-slice-cocone-comparison gives a sharp cocone with the same boundary and apex, equivalent to the given one; postcomposition commutes strictly with the comparison. Step 2: the comparison is a functor equivalence, so by lem-cbc-enhanced-functor-cone-calculus it gives an equivalence of Kan mapping spaces, and a nonempty target forces a nonempty source. A vertex of the right-pinched mapping space is an edge of J_a, which by definition is a map L*Delta^1 -> E with both end cones exactly prescribed. Steps 3-9: parities checked at successor stages (beta is not in T and is the maximum of B), the linear-extension application checked with A0=alpha and B=T+{beta} or E-intersect-alpha, stage 1 uses a one-point test shape and never the empty one, poset commas are strict tails with a least element so the comma criterion applies, and colimiting cocones are unique because initial objects form a contractible Kan complex. Edge cases tested: kappa=omega, empty L, one-point K, empty Y. Shape and route: one commit with the item and report, no new nodes, proof_deps equals the union of uses, no cycle (the 641-node closure excludes the item), no SGA. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus. HTT is not archived (WANTED); I checked HTT 5.4.6.3 from memory, and the statement is unchanged and not weakened. Minor remark, not changed: the statement defines 'weakly cofinal' between filtered quasicategories but applies it to cocone categories. No fixes were made."
  },
  "lean_audit": {
   "master": {

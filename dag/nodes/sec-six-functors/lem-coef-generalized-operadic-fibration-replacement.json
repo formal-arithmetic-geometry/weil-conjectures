@@ -12,9 +12,115 @@
   "def-coef-infinity-fibrations",
   "lem-coef-operadic-algebra-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=N(\\Delta^{\\mathrm{op}})$, mark its inert edges $I$, and let $P=\\mathfrak P_{\\mathrm{gen}}=(B,I,\\{d_n\\})$ be the incidence pattern of [lem-coef-generalized-operad-pattern-fibered]: the cone $d_n$ has apex $[n]$ over the finite category $D_n$ of inert maps $[n]\\to[0],[1]$, and all its edges are inert. By that lemma a marked object over $(B,I)$ is $P$-fibered in the sense of [def-coef-categorical-pattern-fibrancy] exactly when it is a generalized operad in the convention of [lem-coef-marked-operadic-model-structures] (which imposes no Kan zero fiber) marked by precisely its inert cocartesian edges. $M$ and $O$, in the convention of [lem-coef-operadic-algebra-presentability], satisfy these conditions: inert cocartesian lifts are its condition (i); its category $I_n$ has the same objects and arrows as $D_n$, so its incidence mapping axiom (iii) is literally the mapping comparison over $D_n$; and $D_n$ is the chain of $n$ edge objects each mapping to its two endpoint vertex objects, so a cone to the fiber diagram consists of the $n$ edge coordinates with their successive endpoint identifications and the limit over $D_n$ is the iterated fiber product of its Segal axiom (ii). For $n=0$ both comparisons are the identity of the zero fiber. The extra Kan zero-fiber condition is not used here. Hence $M$ and $O$, with their inert cocartesian edges marked, are $P$-fibered, and $f$, which lies over $B$ and preserves inert edges, is a morphism of $\\mathsf M_P$. Every equivalence of $B$ is an identity, since the only order isomorphisms of finite ordinals are identities, and identities are degenerate, hence in $I$: the pattern marking contains every base equivalence.",
+   "uses": [
+    "lem-coef-generalized-operad-pattern-fibered",
+    "lem-coef-marked-operadic-model-structures",
+    "lem-coef-operadic-algebra-presentability",
+    "def-coef-categorical-pattern-fibrancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Example 3.2.4(3), Theorem 3.2.5, Definition 3.2.9 and Remark 3.2.12 (generalized operads as fibrant objects of the categorical-pattern model, its monomorphism cofibrations and marked enrichment); argument agent-written."
+   }
+  },
+  {
+   "text": "Give $\\mathsf M_P$ the model structure of [lem-coef-categorical-pattern-model-calculus]: cofibrations are the monomorphisms and fibrant objects are exactly the $P$-fibered objects. It is a model category in the sense of [lem-coef-model-infinity-derived-adjunction], so its trivial-cofibration/fibration factorization applied to $f$ gives $M\\xrightarrow{e}M'\\xrightarrow{g}O$ in $\\mathsf M_P$ with the strict equality $ge=f$. Morphisms of $\\mathsf M_P$ are simplicial maps over $B$ preserving markings, so the equality is degreewise. Since fibrations are a right lifting class, their composites are fibrations (solve the two lifting squares successively). Compose $g$ with the fibration $O\\to\\bar B$, which exists since $O$ is $P$-fibered by Step 1, to conclude that $M'$ is fibrant, i.e. $P$-fibered. By [lem-coef-generalized-operad-pattern-fibered], $M'$ is a generalized operad marked by exactly its inert cocartesian edges, with its Segal and incidence axioms. Objects of $\\mathsf M_P$ are $\\mathcal U$-small by [def-coef-categorical-pattern-fibrancy], so $M'$ is $\\mathcal U$-small; the factorization does not enlarge the universe.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-generalized-operad-pattern-fibered",
+    "def-coef-categorical-pattern-fibrancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Example 3.2.4(3), Theorem 3.2.5, Definition 3.2.9 and Remark 3.2.12 (generalized operads as fibrant objects of the categorical-pattern model, its monomorphism cofibrations and marked enrichment); argument agent-written."
+   }
+  },
+  {
+   "text": "Obtain an actual marked quasi-inverse over $B$ without using an uncited homotopy-category criterion. Let $P_0$ be $P$-fibered, so $r_0:P_0\\to\\bar B$ is a fibration of $\\mathsf M_P$. Apply the marked enriched model axiom of [lem-coef-categorical-pattern-model-calculus] to the cofibration $e$ and $r_0$: since $\\mathcal H_B(A,\\bar B)$ is the terminal marked simplicial set (there is exactly one map over $B$ into $\\bar B$ in each degree, and it preserves markings), the induced map is restriction $\\mathcal H_B(M',P_0)\\to\\mathcal H_B(M,P_0)$, a trivial fibration in $\\mathsf K$ because $e$ is a trivial cofibration. With $P_0=M$, lift the identity vertex against $\\varnothing\\hookrightarrow(\\Delta^0)^\\sharp$. This gives a marked $r:M'\\to M$ over $B$ with $re=\\mathrm{id}_M$ exactly. With $P_0=M'$, the vertices $er$ and $\\mathrm{id}_{M'}$ have the same restriction $e$. Lift the constant marked edge at $e$ with these endpoints against $(\\partial\\Delta^1)^\\sharp\\hookrightarrow(\\Delta^1)^\\sharp$. Both test inclusions are monomorphisms, hence cofibrations of $\\mathsf K$ by [lem-coef-marked-point-cartesian-model], and trivial fibrations lift them by its model axioms. The lift is a marked edge $H:er\\to\\mathrm{id}_{M'}$. These enriched Homs are fibrant in $\\mathsf K$: apply the same axiom to the cofibration $\\varnothing\\hookrightarrow M'$, whose target Hom $\\mathcal H_B(\\varnothing,P_0)$ is terminal. By [lem-coef-marked-point-cartesian-model] a fibrant object is some $C^\\natural$, so its underlying simplicial set is a quasicategory whose marked edges are exactly its equivalences. Thus $H$ has coherent inverse triangles in $\\mathcal H_B(M',M')$. By [lem-coef-categorical-pattern-model-calculus] the $n$-simplices of $\\mathcal H_B(M',M')$ are maps $M'\\times(\\Delta^n)^\\flat\\to M'$ over $B$ preserving markings, i.e. families over $B$ whose vertex functors preserve inert edges. So $r$ is an inert-preserving simplicial quasi-inverse over $B$, and $\\mathrm{id}=re$ and $H$ are coherent inverse natural equivalences over $B$, as required for $e$.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Example 3.2.4(3), Theorem 3.2.5, Definition 3.2.9 and Remark 3.2.12 (generalized operads as fibrant objects of the categorical-pattern model, its monomorphism cofibrations and marked enrichment); argument agent-written."
+   }
+  },
+  {
+   "text": "For later lifting, every equivalence edge $u$ of $O$ is inert. Its base image is an identity of $B$. In the mapping-square criterion of [lem-coef-infinity-cocartesian-mapping-criterion] for $O\\to B$, precomposition by $u$ and by its base image are homotopy equivalences: compose with the inverse edges and use the associative and unit homotopies of [lem-coef-infinity-mapping-composition]. A commuting square whose two horizontal maps are homotopy equivalences is a homotopy pullback: the path-space fiber product of its other corners projects equivalently onto the upper-right corner because the bottom horizontal map has contractible fibers, and the comparison composes with this projection to the upper horizontal equivalence. Equivalently replace both rows by identities using their explicit inverse homotopies. The criterion therefore makes $u$ cocartesian over the identity, hence inert. We will also use the converse: a cocartesian edge over an equivalence has all its precomposition maps equivalences by this same homotopy-pullback square. Such an edge $a:x\\to y$ is invertible: surjectivity on $\\pi_0\\operatorname{Map}(y,x)\\to\\pi_0\\operatorname{Map}(x,x)$ gives $v$ with $va=1_x$, and injectivity on $\\pi_0\\operatorname{Map}(y,y)\\to\\pi_0\\operatorname{Map}(x,y)$ gives $av=1_y$. The edge/triangle characterization in the composition statement makes $a$ an equivalence edge.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Examples 3.2.4(3), Theorem 3.2.5, Definition 3.2.9 and Remark 3.2.12; Definition A.6.1 supplies the representative convention, not a replacement theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-pattern-induced-fibration-test] with the pattern $P$ of Step 1, $Y=O$ and the model fibration $g$ of Step 2. Step 1 checked that $O$ is $P$-fibered and the base marking contains all equivalences. The theorem says $g$ is fibered for the induced pattern on $O$. By conditions (i) and (ii) of [def-coef-categorical-pattern-fibrancy], $g$ is an inner fibration and every inert marked edge in $O$ has a $g$-cocartesian lift with specified source and exact base image. Given an equivalence $u:g(m')\\to o$, Step 4 says that $u$ is such a marked edge. Obtain its lift with source $m'$. By the converse calculation of Step 4, now for the inner fibration $g$ and its cocartesian lift over the equivalence $u$, that lift is an equivalence. Thus $g$ is a categorical fibration in exactly the specified-source, exact-image sense of the item.",
+   "uses": [
+    "lem-coef-pattern-induced-fibration-test",
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Examples 3.2.4(3), Theorem 3.2.5, Definition 3.2.9 and Remark 3.2.12; Definition A.6.1 supplies the representative convention, not a replacement theorem."
+   }
+  },
+  {
+   "text": "Let $B=N(\\Delta^{\\mathrm{op}})$. Let $M$ and $O$ be the $\\mathcal U$-small generalized nonsymmetric infinity operads over $B$ in the statement, with Kan zero fibers $M_{[0]}$ and $O_{[0]}$, and let $f:M\\to O$ be the inert-preserving map over $B$. Let $M'$, $e:M\\to M'$, $g:M'\\to O$ be the factorization from Step 2, and let $r:M'\\to M$ and $H:er\\Rightarrow\\mathrm{id}_{M'}$ be the strict over-$B$ inverse and marked inverse natural equivalence from Step 3, so $re=\\mathrm{id}_M$. Restrict $r,e,H$ and their inverse simplices to the strict zero fibers over $[0]$; they remain over the identity base diagram. Thus $r_0e_0=1$ and $H_0:e_0r_0\\simeq1_{M'_0}$. Both zero fibers are quasicategories by the inner-fibration condition on $M\\to B$ and $M'\\to B$. For an edge $a:x\\to y$ of $M'_0$, $r_0(a)$ is an equivalence since $M_0$ is Kan; this is the Kan assertion of [lem-coef-infinity-core-kan-fibration]. So is $e_0r_0(a)$, because simplicial maps preserve inverse triangles. The two triangles of the square $H_0$ on $a$ give, in the homotopy category, $[a]=[H_{0,y}][e_0r_0(a)][H_{0,x}]^{-1}$. Hence $[a]$ is invertible. By [lem-coef-infinity-mapping-composition] the edge $a$ itself is an equivalence. Consequently every simplex of $M'_0$ belongs to its core. That core is Kan by [lem-coef-infinity-core-kan-fibration]: apply its theorem to $M'_0\\to\\Delta^0$, an isofibration since inner horns fill and the only base equivalence lifts to the identity. Thus $M'_0$ equals a Kan simplicial subset and is Kan. This proof also applies to the empty zero fiber.",
+   "uses": [
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Examples 3.2.4(3), Theorem 3.2.5, Definition 3.2.9 and Remark 3.2.12; Definition A.6.1 supplies the representative convention, not a replacement theorem."
+   }
+  },
+  {
+   "text": "The output of Step 2 has the strict equality $ge=f$ in the original universe and the Segal and incidence axioms. The maps $e,g$ preserve inert edges because they are morphisms of $\\mathsf M_P$ and, by [lem-coef-generalized-operad-pattern-fibered], their source and target markings are exactly the inert markings. Step 3 gives the specified inert-preserving over-base quasi-inverse for $e$; Step 5 gives the categorical-fibration condition for $g$; Step 6 supplies the additional Kan zero fiber. These are every clause of the statement. Neither the ordinary-target condition nor any approximation or contractibility hypothesis entered the construction.",
+   "uses": [
+    "lem-coef-generalized-operad-pattern-fibered"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Examples 3.2.4(3), Theorem 3.2.5, Definition 3.2.9 and Remark 3.2.12; Definition A.6.1 supplies the representative convention, not a replacement theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-categorical-pattern-fibrancy",
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-generalized-operad-pattern-fibered",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-marked-operadic-model-structures",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-pattern-induced-fibration-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Examples 3.2.4(3), Theorem 3.2.5, Definition 3.2.9 and Remark 3.2.12; Definition A.6.1 supplies the representative convention, not a replacement theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -81,7 +187,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-active-lift-criterion",
@@ -93,7 +199,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, the finite coefficient mapping-complex adjunction before derived inverse limit, realized through lem-coef-many-object-operad-accessibility and its corrected active-operation localization criterion; Erratum Proposition E.0.2 (the corrected active-slice criterion, not the uncorrected Corollary A.6.9); Definition A.6.1, equivalence--categorical-fibration representative; Joyal factorization and transfer of generalized-operad axioms (HTT Theorem 2.2.5.1 and Proposition 2.4.4.3)",
+   "place": "Historical master proof, paragraph 2: the derived mapping-complex adjunction before R lim, specifically the operadic foundation reached through lem-coef-operadic-active-lift-criterion; in main-20261015 the same paragraph is in the adjacent prop-coef-integral-exceptional-adjoint.proof.md sidecar. This supplies indirect ancestry, not an explicit operadic-model sentence.",
    "via": [
     "lem-coef-operadic-active-lift-criterion",
     "lem-coef-operadic-localization-operation-criterion",
@@ -108,5 +214,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-generalized-operadic-fibration-replacement",
+  "worker": "stage1",
+  "summary": "Resumed the prior sandbox after its required first dry run found stale citation quotes. Removed the unsubmitted relative-factorization prerequisite: the model axioms already supply factorization. Replaced its unsupported recognition and homotopy assertions with existing pattern-induced fibration recognition and an explicit enriched-Hom lifting construction of the marked inverse. Separately proved the Kan zero fiber using the relative inverse, without confusing the general marked-model convention with the stronger convention of the item. Statement unchanged; no new nodes; earlier proof, report, citations and proposed node retained in retained-proof.json, search log unchanged. Maintainer-reader fix (2026-10-17): Steps 1-3 now form the factorization and inverse in the categorical-pattern model M_P of lem-coef-categorical-pattern-model-calculus, using the new statement-only node lem-coef-generalized-operad-pattern-fibered (Gepner-Haugseng Example 3.2.4(3)); the earlier text identified the model of lem-coef-marked-operadic-model-structures with M_P, which that node's statement does not say.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, master proof paragraph 2 (mapping-complex adjunction before derived inverse limit), through the recorded operadic prerequisite chain. Steps 1-2 construct the model factorization, step 3 its relative inverse, steps 4-5 categorical-fibration lifting, step 6 the extra Kan convention, step 7 collects the conclusion. The main-20261015 ancestor has a separate .proof.md sidecar with the same mapping-complex paragraph; the .md file holds only the statement. Neither proof text explicitly mentions operadic model structures, so the inherited ancestry is retained as an indirect foundational dependency.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-756fe4b86",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-756fe4b86 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the statements of all 12 cited nodes (plus the proof of lem-coef-marked-operadic-model-structures), the citer active-lift-criterion, and Gepner–Haugseng arXiv:1312.3178 online (Ex. 3.2.4(3), Thm 3.2.5, Def 3.2.9, Rem 3.2.12, Def 2.4.1). One C3/C4 fault: Steps 1-3 treated the generalized model structure of lem-coef-marked-operadic-model-structures as the categorical-pattern model M_P. Only that node's proof builds it that way; its statement does not say so. Step 5's pattern-induced-fibration-test needs g to be a fibration in M_P, which the steps never showed. Repair in the fixes directory: (1) new unsplit statement-only node lem-coef-generalized-operad-pattern-fibered (source GH Example 3.2.4(3)): over (N(Delta^op), inert), the fibered objects of the incidence pattern (D_n cones) are exactly the generalized operads (no Kan condition) with inert cocartesian marking. I tested it for n=0,1,2 and for empty X. A DAG and blueprint search found no existing node stating it. Only an rg search of Mathlib is recorded: the network is blocked here, so LeanSearch, Loogle and LeanFinder were not run and should be added at merge. (2) Steps 1, 2, 3 and 7 now factor f and lift the enriched Homs in M_P, using the axioms of lem-coef-categorical-pattern-model-calculus (target Hom H_B(-,B-bar) is terminal) and the new node; proof_deps recomputed. Statement, stmt_deps and blueprint fields are unchanged. All other steps checked as written: equivalence edges are inert and cocartesian over identities; cocartesian edges over equivalences are equivalences; the inverse r with re=id exactly and the marked homotopy H come from lifting in fibrant marked Homs; the Kan zero fiber follows by conjugating with H_0 and applying the core-Kan theorem to M'_0 -> Delta^0. Edge cases (empty, terminal, non-ordinary O) are fine. No tool uses, no SGA, no cycle.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

@@ -24,9 +24,103 @@
   "prop-functor-package",
   "lem-pur-derived-pullback-tensor-iso"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All the following calculations are at the fixed finite coefficient ring $A$, and $u^*,u_*,\\otimes$ abbreviate $Lu^*,Ru_*,\\otimes_A^L$. The maps $p,q$ are base changes of the proper maps $g,f$, and $t=gq$ is proper, by [lem-weil-pbc-proper-fp-permanence](a),(b) (Stacks Tags 01W3, 01W4). Thus [prop-functor-package](3) supplies the proper identifications for $f,g,p,q,t$. By [thm-sf-ctf-stability](i)--(iv), all the pullbacks, tensors and direct images used below remain in $D^b_{ctf}$. In particular put $F=f_*M$, $G=g_*N$, $H=p^*M$, and $Z=H\\otimes q^*N$. By [cor-cbc-proper-coincidence], the compact-support exchange $b:g^*F\\to q_*H$ is the ordinary exchange. By [fix-prop-projection-formula], the compact-support projection maps for $q,g$ identify with the direct-image projection maps $\\pi_q,\\pi_g$ defined in [def-exchange-projection]. These are identifications of the specified transformations, not choices of new isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "prop-functor-package",
+    "thm-sf-ctf-stability",
+    "cor-cbc-proper-coincidence",
+    "fix-prop-projection-formula",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Evaluation (1), paragraph beginning Indeed Ku_!: expand the relative product and its ordinary adjoint"
+   }
+  },
+  {
+   "text": "Use throughout the natural monoidal and pullback-composition comparisons of [lem-pur-derived-pullback-tensor-iso] and the adjunction-compatible composition convention of [fix-prop-adjunctions](3). Let $c:g_*q_*\\xrightarrow{\\sim}t_*$ be this direct-image comparison, read through the specified proper identifications. Write $\\sigma$ for signed tensor symmetry and set\n$$a=g_*(\\sigma_{N,g^*F})\\circ\\pi_{g;N,F}\\circ\\sigma_{F,G}:F\\otimes G\\longrightarrow g_*(g^*F\\otimes N),$$\n$$d=\\pi_{q;H,N}\\circ(b\\otimes1_N):g^*F\\otimes N\\longrightarrow q_*Z.$$\nReverse the defining composite in [thm-sf-kunneth-relative]: the final symmetry becomes $\\sigma_{F,G}$, inverse projection for $g$ becomes $\\pi_g$, inverse exchange becomes $b$, and inverse projection for $q$ becomes $\\pi_q$. Naturality of tensor symmetry rewrites the intermediate $N\\otimes q_*H$ as $q_*H\\otimes N$. Consequently the specified inverse is exactly\n$$\\Pi_{f,g}=c_Z\\circ g_*d\\circ a.$$\nThis simply reverses the named arrows of the defining Künneth composite; compatibility with the proper identifications is part of the cited relative theorem.",
+   "uses": [
+    "thm-sf-kunneth-relative",
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Evaluation (1), paragraph beginning Indeed Ku_!: expand the relative product and its ordinary adjoint"
+   }
+  },
+  {
+   "text": "For the two projection maps just used, [def-exchange-projection] defines $\\pi_{u;V,W}=u_*a_{u,V,W}\\circ\\eta_u$, where, after the monoidal comparison, $a_{u,V,W}=\\varepsilon_{u,V}\\otimes1_{u^*W}$. Hence naturality of the counit and the triangle identity in [fix-prop-adjunctions](1) give directly\n$$\\varepsilon_{u,V\\otimes u^*W}\\circ u^*\\pi_{u;V,W}\n=a_{u,V,W}\\circ\\varepsilon_{u,u^*(u_*V\\otimes W)}\\circ u^*\\eta_{u,u_*V\\otimes W}\n=a_{u,V,W}.$$\nUse this formula only with $(u,V,W)=(g,N,F)$ and $(q,H,N)$. Each is an evaluation of the definition, followed by one triangle cancellation; no projection theorem beyond the identifications in Step 1 is being inferred.",
+   "uses": [
+    "def-exchange-projection",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Evaluation (1), paragraph beginning Indeed Ku_!: expand the relative product and its ordinary adjoint"
+   }
+  },
+  {
+   "text": "Apply Step 3 at $(g,N,F)$. Naturality of $\\varepsilon_g$ moves the postcomposition $g_*\\sigma$ in $a$ outside the transpose. Compatibility of the pullback tensor comparison with signed symmetry [lem-pur-derived-pullback-tensor-iso] then gives\n$$\\varepsilon_{g,g^*F\\otimes N}\\circ g^*a\n=\\sigma_{N,g^*F}\\circ(\\varepsilon_{g,N}\\otimes1_{g^*F})\\circ\\sigma_{g^*F,g^*G}\n=1_{g^*F}\\otimes\\varepsilon_{g,N}.$$\nThe last equality is naturality of symmetry followed by $\\sigma\\circ\\sigma=1$. Thus the two swaps introduce no residual sign. For the arrow $d$ of Step 2, counit naturality now reads\n$$\\varepsilon_{g,q_*Z}\\circ g^*(g_*d\\circ a)=d\\circ(1_{g^*F}\\otimes\\varepsilon_{g,N}).$$",
+   "uses": [
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Evaluation (1), paragraph beginning Indeed Ku_!: expand the relative product and its ordinary adjoint"
+   }
+  },
+  {
+   "text": "The composite-counit formula of [fix-prop-adjunctions](3), under $t^*=q^*g^*$ and $c$, is\n$$\\varepsilon_{t,Z}\\circ t^*c_Z=\\varepsilon_{q,Z}\\circ q^*\\varepsilon_{g,q_*Z}.$$\nSubstitute Step 2 and then Step 4. Functoriality gives the transpose of the specified inverse as\n$$\\varepsilon_{t,Z}\\circ t^*\\Pi_{f,g}\n=\\varepsilon_{q,Z}\\circ q^*d\\circ q^*(1_{g^*F}\\otimes\\varepsilon_{g,N}).$$\nApply Step 3 at $(q,H,N)$ and substitute the definition of $d$:\n$$\\varepsilon_{q,Z}\\circ q^*d\n=(\\varepsilon_{q,H}\\otimes1_{q^*N})\\circ(q^*b\\otimes1_{q^*N})\n=(\\varepsilon_{q,H}\\circ q^*b)\\otimes1_{q^*N}.$$\nAll displayed tensor identifications and their naturality use [lem-pur-derived-pullback-tensor-iso].",
+   "uses": [
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Evaluation (1), paragraph beginning Indeed Ku_!: expand the relative product and its ordinary adjoint"
+   }
+  },
+  {
+   "text": "The exchange $b:g^*f_*M\\to q_*p^*M$ is the mate of the pullback square, so [def-exchange-projection] (equivalently [fix-prop-adjunctions](4)) states its transpose exactly:\n$$\\varepsilon_{q,H}\\circ q^*b=p^*\\varepsilon_{f,M}$$\nafter $q^*g^*\\cong p^*f^*$. Substitute this in Step 5. Naturality of the monoidal comparison [lem-pur-derived-pullback-tensor-iso] identifies $q^*(1\\otimes\\varepsilon_{g,N})$ with $1\\otimes q^*\\varepsilon_{g,N}$; the tensor interchange law gives\n$$\\varepsilon_{t,Z}\\circ t^*\\Pi_{f,g}\n=(p^*\\varepsilon_{f,M}\\otimes1)\\circ(1\\otimes q^*\\varepsilon_{g,N})\n=p^*\\varepsilon_{f,M}\\otimes q^*\\varepsilon_{g,N}.$$\nThis has source $p^*f^*f_*M\\otimes q^*g^*g_*N$ and target $Z$, exactly the source and target in the statement after its specified comparisons. It proves the asserted equality for $\\kappa_{f,g}^{-1}$ itself, because Step 2 identified that particular map before taking its transpose.",
+   "uses": [
+    "def-exchange-projection",
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Evaluation (1), paragraph beginning Indeed Ku_!: expand the relative product and its ordinary adjoint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-cbc-proper-coincidence",
+  "def-exchange-projection",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-proper-fp-permanence",
+  "prop-functor-package",
+  "thm-sf-ctf-stability",
+  "thm-sf-kunneth-relative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+  "place": "Evaluation (1), paragraph beginning Indeed Ku_!: expand the relative product and its ordinary adjoint",
+  "note": "Explicit counit calculation expanding the blueprint argument; geometric inputs are cited as existing DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +156,45 @@
    "results": "{\"t\": \"2026-10-17T08:10:12Z\", \"tool\": \"leanfinder\", \"query\": \"The projection formula and proper base change composite defining a relative tensor product comparison has transpose tensor of counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosedFunctor.comparison_iso\", \"CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso\", \"CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso\", \"CategoryTheory.coev_expComparison\", \"CategoryTheory.frobeniusMorphism\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"CategoryTheory.expComparison\", \"CategoryTheory.ExponentiableMorphism.coev_ev\"], \"digest\": \"dbbb150abe331e26\"}; Read the returned signatures: generic adjunction, monoidal-adjunction structure, underived scheme modules, or Cartesian closed comparison; none identifies the specified relative Künneth composite. Grep has no Kunneth hits.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-17T09:19:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\"], \"digest\": \"ec73ed347580c9e9\"}; Read returned signatures: adjunction/composition or induced lax-monoidal structure, not the specified relative geometric Künneth composite. The second phrasing likewise supplies generic mate formulas only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The proper relative Kunneth product map is the adjoint transpose of the tensor of the two pullback direct image counits",
+   "results": "{\"t\": \"2026-10-17T09:19:52Z\", \"tool\": \"leansearch\", \"query\": \"The proper relative Kunneth product map is the adjoint transpose of the tensor of the two pullback direct image counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.adjoint_map\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app\", \"CategoryTheory.MorphismProperty.Over.mapPullbackAdj_counit_app\", \"CategoryTheory.ExponentiableMorphism.ev\", \"Coalgebra.TensorProduct.map\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"CategoryTheory.ExponentiableMorphism.coev\"], \"digest\": \"97ebf7a231ad502b\"}; Read returned signatures: adjunction/composition or induced lax-monoidal structure, not the specified relative geometric Künneth composite. The second phrasing likewise supplies generic mate formulas only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper maps to a common base, the inverse relative Kunneth comparison obtained from two projection formulas and base change is adjoint to the tensor of counits",
+   "results": "{\"t\": \"2026-10-17T09:19:55Z\", \"tool\": \"leanfinder\", \"query\": \"For proper maps to a common base, the inverse relative Kunneth comparison obtained from two projection formulas and base change is adjoint to the tensor of counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"LightCondensed.ihomPoints_symm_comp\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.ExponentiableMorphism.coev_ev\"], \"digest\": \"48f1becf23011ab0\"}; Read returned signatures: adjunction/composition or induced lax-monoidal structure, not the specified relative geometric Künneth composite. The second phrasing likewise supplies generic mate formulas only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]unneth|[Kk]ünneth|relative.*counit",
+   "results": "{\"t\": \"2026-10-17T09:19:57Z\", \"tool\": \"grep\", \"query\": \"[Kk]unneth|[Kk]ünneth|relative.*counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: adjunction/composition or induced lax-monoidal structure, not the specified relative geometric Künneth composite. The second phrasing likewise supplies generic mate formulas only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor product comparison constructed by a projection morphism and a Beck Chevalley base change mate transposes to the tensor product of adjunction counits",
+   "results": "{\"t\": \"2026-10-17T09:21:37Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor product comparison constructed by a projection morphism and a Beck Chevalley base change mate transposes to the tensor product of adjunction counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.frobeniusMorphism\", \"CategoryTheory.frobeniusMorphism_mate\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\", \"CategoryTheory.tensorLeftAdjunction\", \"CategoryTheory.tensorRightAdjunction\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc\"], \"digest\": \"5ecf725fa62f4a91\"}; Read returned signatures: adjunction/composition or induced lax-monoidal structure, not the specified relative geometric Künneth composite. The second phrasing likewise supplies generic mate formulas only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-map-exchange",
@@ -81,5 +210,54 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-relative-kunneth-counit",
+  "worker": "stage1",
+  "summary": "Expanded the inverse relative Künneth composite into its two counit-defined projection maps, ordinary proper exchange and direct-image compositor, then computed its composite-adjunction transpose explicitly. Reused existing geometry, domain preservation and normalization nodes; no new nodes and no statement change.",
+  "blueprint": "Realizes the paragraph beginning Indeed Ku_! in Evaluation (1) of lem-trf-trace-map-exchange.proof.md: supplies the tensor-of-counits characterization used before diagonal pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Proper base change and composition ensure q,p,t are proper; this is a generic geometric permanence tool, not a replacement of the trace-formula route."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Finite-stage pullback, tensor and direct-image preservation type every intermediate object; this is a generic operation-domain tool."
+   },
+   {
+    "node": "cor-cbc-proper-coincidence",
+    "why": "Identifies the compact-support exchange with the ordinary counit mate for proper f, fixing the exact map used by the relative product."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Its proper compatibility identifies the two compact-support projection maps with their counit-defined ordinary versions."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Supplies ordinary triangle identities, the composite ordinary counit and the exchange transpose; these are generic adjunction tools."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Provides natural pullback tensor comparisons compatible with signed symmetry and composition, required to type the counit calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "thm-sf-ctf-stability",
+  "cor-cbc-proper-coincidence",
+  "fix-prop-projection-formula",
+  "fix-prop-adjunctions",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-9f82bb2f4",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-9f82bb2f4 (reviewer sub-agent of L); spot-checked: I read the item, the source paragraph (main-20261015 lem-trf-trace-map-exchange.proof.md, Evaluation (1), 'Indeed Ku_!') and every cited statement, including the blueprint_updates. The statement is true: the inverse proper relative Kunneth map is adjoint to the tensor of the counits. It is unweakened and is exactly what step 3 of the parent node uses. I tested it on a point, f=id, and an empty or zero input. Step 1: p, q and t are proper by 01W4 and 01W3 (lem-weil-pbc-proper-fp-permanence (a),(b)); every object stays in D^b_ctf by ctf-stability (i)-(iv); and cor-cbc-proper-coincidence plus fix-prop-projection-formula identify Ex_! and PF with the ordinary exchange and projection maps. Step 2: reversing the composite of thm-sf-kunneth-relative gives Pi=c∘g_*d∘a; I checked the source and target of every arrow. Step 3: counit naturality and the triangle identity give ε∘u^*π=a. Step 4: the two signed symmetries cancel by naturality and σσ=1. Step 5: the composite counit of fix-prop-adjunctions (3) is at the right objects. Step 6: the transpose of Ex_* is p^*ε_f∘θ (def-exchange-projection, fix-prop-adjunctions (4)). The elementary flags are justified, and proof_deps equals the union of the uses lists. All cited units lie in sk-p-proper's transitive route, so the declared tool_uses are harmless and accepted. There are no new nodes, no duplicate (checked the coherence, exceptional-product and kunneth-agrees nodes) and no cycle. No SGA is cited and no fixes were made. I ran one read-only git log by mistake; it wrote nothing."
  }
 }

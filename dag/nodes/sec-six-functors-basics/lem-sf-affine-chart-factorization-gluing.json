@@ -2,7 +2,7 @@
  "id": "lem-sf-affine-chart-factorization-gluing",
  "kind": "statement",
  "title": "Finite affine chart factorization and interval gluing",
- "statement": "Let $k$ be a field and $f:X\\to Y$ a separated finite-type morphism between separated finite-type $k$-schemes. There are finite affine open covers $(V_i)$ of $Y$ and $(U_{ij})_j$ of each $f^{-1}(V_i)$ such that the restricted morphism $U_{ij}\\to V_i$ factors as a closed immersion $U_{ij}\\hookrightarrow\\mathbf A^{m_{ij}}_{V_i}$ followed by the smooth [def-sbc-smooth-morphisms] separated affine-space projection [def-sbc-affine-space] of relative dimension $m_{ij}\\ge0$. All schemes in these factorizations are separated and of finite type over $k$. Let $A$ be a finite commutative ring and $K\\in D(X_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories]. Suppose each $K|_{U_{ij}}$ has constructible cohomology [def-weil-pbc-etale-constructible-sheaf] in an interval $[r_{ij},s_{ij}]$ and Tor amplitude $[a_{ij},b_{ij}]$ [def-kun-tor-amplitude]. Then $K$ is bounded constructible, with cohomological interval $[\\min r_{ij},\\max s_{ij}]$ and Tor amplitude $[\\min a_{ij},\\max b_{ij}]$ if $X$ is nonempty. If $X$ is empty, $K=0$ and every interval is valid.",
+ "statement": "Let $k$ be a field and $f:X\\to Y$ a separated finite-type morphism between separated finite-type $k$-schemes. There are finite affine open covers $(V_i)$ of $Y$ and $(U_{ij})_j$ of each $f^{-1}(V_i)$ such that the restricted morphism $U_{ij}\\to V_i$ factors as a closed immersion $U_{ij}\\hookrightarrow\\mathbf A^{m_{ij}}_{V_i}$ followed by the smooth [def-sbc-smooth-morphisms] separated affine-space projection [def-sbc-affine-space] of relative dimension $m_{ij}\\ge0$. All schemes in these factorizations are separated and of finite type over $k$. Let $A$ be a finite commutative ring and $K\\in D(X_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories]. Suppose each restriction $K|_{U_{ij}}$ (termwise inverse image along the open immersion [def-weil-pbc-inverse-image]) has constructible cohomology [def-weil-pbc-etale-constructible-sheaf] in an interval $[r_{ij},s_{ij}]$ and Tor amplitude $[a_{ij},b_{ij}]$ [def-kun-tor-amplitude]. Then $K$ is bounded constructible [def-weil-pbc-constructible-complexes], with cohomological interval $[\\min r_{ij},\\max s_{ij}]$ and Tor amplitude $[\\min a_{ij},\\max b_{ij}]$ if $X$ is nonempty. If $X$ is empty, $K=0$ and every interval is valid.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
   "place": "Step 7, affine chart factorization and finite-cover gluing of constructibility and Tor intervals."
@@ -15,11 +15,144 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-etale-constructible-sheaf",
   "def-kun-tor-amplitude",
-  "def-sbc-smooth-morphisms"
+  "def-sbc-smooth-morphisms",
+  "def-weil-open-immersion",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-constructible-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the finite-type definition to the structure map $Y\\to\\operatorname{Spec}k$. Since the base is affine, choose finitely many affine opens $V_i=\\operatorname{Spec}R_i$ covering $Y$, with each $R_i$ finitely generated over $k$. Apply the same definition to $f$ over each $V_i$: choose finitely many affine opens $U_{ij}=\\operatorname{Spec}B_{ij}$ covering $f^{-1}(V_i)$ with $B_{ij}$ finitely generated over $R_i$. The combined family is finite and covers $X$. No claim that $f^{-1}(V_i)$ itself is affine is needed.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T1 (definition-finite-type); finite affine presentation in Tag 01T2 (lemma-locally-finite-type-characterize)."
+   }
+  },
+  {
+   "text": "For each pair $(i,j)$ choose finitely many $R_i$-algebra generators $b_1,\\ldots,b_m$ of $B_{ij}$. By the finite-type algebra definition, evaluation $q:R_i[t_1,\\ldots,t_m]\\twoheadrightarrow B_{ij}$, $t_h\\mapsto b_h$, is surjective. Thus $B_{ij}=R_i[t_1,\\ldots,t_m]/\\ker(q)$, and the affine quotient characterization of closed immersions makes $\\operatorname{Spec}(q)$ a closed immersion $U_{ij}\\hookrightarrow\\mathbf A^m_{V_i}$. Its composite with the projection corresponds to the composite $R_i\\hookrightarrow R_i[t_1,\\ldots,t_m]\\xrightarrow{q}B_{ij}$, the original structural ring map. Hence this is the required factorization, with $m=m_{ij}\\geq0$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-closed-immersion",
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T0 (section-finite-type), opening paragraph; Tag 01QO (lemma-closed-immersion), affine quotient criterion. Affine space over Spec R is Spec R[t_1,...,t_m] as in def-sbc-affine-space."
+   }
+  },
+  {
+   "text": "The projection $\\mathbf A^{m_{ij}}_{V_i}\\to V_i$ is smooth of relative dimension $m_{ij}$ by [sbc-lem-affine-space-smooth]. The source is affine, so this projection is separated by [lem-weil-pbc-affine-source-morphism-separated]. The same node applied to the structural maps to $\\operatorname{Spec}k$ shows that $V_i$, $U_{ij}$ and $\\mathbf A^{m_{ij}}_{V_i}$ are separated over $k$. They are of finite type over $k$: if $r_1,\\ldots,r_e$ generate $R_i$ over $k$, then their images together with $b_1,\\ldots,b_m$ generate $B_{ij}$ over $k$; and $r_1,\\ldots,r_e,t_1,\\ldots,t_m$ generate $R_i[t_1,\\ldots,t_m]$. The finite-type algebra and affine finite-type definitions give the asserted finite-type structural morphisms. This also covers $m=0$.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Smoothness: Tags 00T7 (algebra-lemma-standard-smooth), 02H6 (more-morphisms-lemma-smooth-formally-smooth), 02G1 (lemma-smooth-omega-finite-locally-free); separatedness: Schemes Tag 01KN (lemma-affine-separated) and 01KV (lemma-compose-after-separated); finite type: Tag 01T2 (lemma-locally-finite-type-characterize)."
+   }
+  },
+  {
+   "text": "For the remainder write $W_\\alpha=U_{ij}$ and let $j_\\alpha:W_\\alpha\\hookrightarrow X$ be the inclusions. The scheme $X$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine], applied to its separated finite-type structural morphism to $\\operatorname{Spec}k$. Each $W_\\alpha$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. These are precisely the scheme hypotheses needed below for constructibility locality.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K4 (lemma-quasi-compact-affine), 01KN (lemma-affine-separated), and 01KU (lemma-separated-permanence), as assembled by the two cited nodes."
+   }
+  },
+  {
+   "text": "Open immersions are etale by [lem-weil-pbc-etale-composition-cancellation](1). The inverse-image/restriction comparison [lem-weil-pbc-etale-inverse-image-restriction] therefore applies to $j_\\alpha$. Its termwise action on $A$-module complexes is exact by [prop-weil-pbc-inverse-image-modules-exact], so preservation of kernels, images and quotients gives $\\mathcal H^t(K)|_{W_\\alpha}\\cong\\mathcal H^t(K|_{W_\\alpha})$. We also record explicitly the zero test used below: if an etale module sheaf $F$ restricts to zero on every $W_\\alpha$, then for every etale $T\\to X$ the family $T\\times_XW_\\alpha\\to T$ covers in the small etale site. Every section of $F(T)$ restricts to zero on this cover; the uniqueness part of the sheaf axiom gives $F(T)=0$, and hence $F=0$. This argument works for the empty cover when $X$ is empty.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact); exactness gives cohomology compatibility by its kernel/image definition. Etale restriction comparison and the separatedness axiom for sheaves on etale coverings are used as stated in the cited nodes."
+   }
+  },
+  {
+   "text": "Assume $X\\ne\\varnothing$. The finite chart index set is nonempty because its opens cover $X$. Put $r=\\min_\\alpha r_\\alpha$ and $s=\\max_\\alpha s_\\alpha$. If $t\\notin[r,s]$, then $t\\notin[r_\\alpha,s_\\alpha]$ for every $\\alpha$, so step 5 shows $\\mathcal H^t(K)=0$. For any $t$, the same step identifies each restriction of $\\mathcal H^t(K)$ with a constructible sheaf (including the zero sheaf). Apply [lem-weil-pbc-constructible-qcqs-affine-local] first to each affine $W_\\alpha$: its (3) implies (1). Apply it next to the qcqs scheme $X$: the chart restrictions satisfy (1), so (2) implies (3), giving constructibility of $\\mathcal H^t(K)$ on $X$. The cohomology vanishing just proved means that $K$ is bounded, by the definition of the bounded derived category. This proves bounded constructibility [def-weil-pbc-constructible-complexes] with the stated cohomological interval.",
+   "uses": [
+    "lem-weil-pbc-constructible-qcqs-affine-local",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E (lemma-constructible-quasi-compact-quasi-separated) and Tag 095F (lemma-constructible-local), with elementary finite-interval comparison."
+   }
+  },
+  {
+   "text": "Still assuming $X\\ne\\varnothing$, put $a=\\min_\\alpha a_\\alpha$ and $b=\\max_\\alpha b_\\alpha$. Let $M$ be any degree-zero etale sheaf of $A$-modules on $X$. Exactness of inverse image makes $j_\\alpha^{-1}M$ degree zero, and [lem-kun-inverse-image-monoidal] gives\n$$j_\\alpha^{-1}(K\\otimes_A^{\\mathbf L}M)\\cong (K|_{W_\\alpha})\\otimes_A^{\\mathbf L}(M|_{W_\\alpha}).$$\nFor $t\\notin[a,b]$ one has $t\\notin[a_\\alpha,b_\\alpha]$ for every chart. Its assumed Tor bound therefore makes the $t$-th cohomology of the right side zero. By the cohomology comparison and sheaf zero test of step 5, $\\mathcal H^t(K\\otimes_A^{\\mathbf L}M)=0$ on $X$. Since $M$ was arbitrary, this is exactly Tor amplitude $[a,b]$ in [def-kun-tor-amplitude]. No replacement of arbitrary module sheaves by constant test modules, and no boundedness assumption on a flat resolution, is used.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-kun-inverse-image-monoidal",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); compare Tag 0DJJ (lemma-tor-amplitude-stalk), whose proof uses the same cohomology-zero test. Tor amplitude is the quantification in def-kun-tor-amplitude."
+   }
+  },
+  {
+   "text": "If $X=\\varnothing$, every object of its small etale site is empty. The empty family covers each such object, so the sheaf axiom forces every module sheaf to be zero. Every representing complex of $K$ is thus zero, giving $K\\cong0$ in the derived category. Its cohomology and the cohomology of its derived tensor with every degree-zero module sheaf vanish in every degree. The empty stratification gives constructibility. Thus every cohomological and Tor interval is valid; no minimum or maximum of an empty family is formed. Empty charts over a nonempty $X$ are also harmless, since their local vanishing assumptions are vacuous and the displayed minima/maxima still bound all nonempty charts.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "The sheaf axiom for the empty covering; Tag 03RW (definition-constructible), empty partition; derived-category and Tor-amplitude definitions as cited."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-closed-immersion",
+  "def-sbc-affine-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-constructible-complexes",
+  "lem-kun-inverse-image-monoidal",
+  "def-kun-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Opening and final paragraphs (unit steps 1 and 4); detailed affine quotient and sheaf-locality arguments supplied using the cited Stacks results."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +181,38 @@
    "results": "AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.IsFinite.instOfIsClosedImmersion; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.isClosedImmersion_iff_isAffineHom; AlgebraicGeometry.LocallyOfFiniteType.mk; AlgebraicGeometry.IsAffineHom.mk; AlgebraicGeometry.IsFinite.toIsAffineHom; AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset",
    "date": "2026-10-17",
    "verdict": "no match: returned declarations do not state the node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite affine chart closed immersion affine space and local gluing bounded constructible complexes Tor amplitude",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι; AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE; AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Proj.affineOpenCover; AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned hits; none states the affine-chart plus etale constructibility and Tor-interval gluing assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_.*immersion_affineSpace|constructibleTorAmplitudeIn.*[Ll]ocal|torAmplitude.*[Ll]ocal",
+   "results": "",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned hits; none states the affine-chart plus etale constructibility and Tor-interval gluing assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite affine open cover gluing constructible cohomology finite Tor amplitude complexes",
+   "results": "AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.Scheme.AffineOpenCover.openCover; AlgebraicGeometry.Scheme.affineBasisCover; AlgebraicGeometry.Scheme.AffineOpenCover; AlgebraicGeometry.Scheme.AffineCover.mk; AlgebraicGeometry.Scheme.isAffine_affineOpenCover; AlgebraicGeometry.Scheme.openCover_affineOpenCover; AlgebraicGeometry.Scheme.OpenCover.affineRefinement",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned hits; none states the affine-chart plus etale constructibility and Tor-interval gluing assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible complexes of etale sheaves finite Tor dimension can be checked on a finite Zariski open cover",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.smallEtalePretopology; SheafOfModules.isFinitePresentation; AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover; SheafOfModules.IsFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned hits; none states the affine-chart plus etale constructibility and Tor-interval gluing assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-prop-sf-rf-shriek-preservation",
@@ -63,10 +224,44 @@
  "blueprint": {
   "from": {
    "node": "sk-prop-sf-rf-shriek-preservation",
-   "place": "Step 7, affine chart factorization and finite-cover gluing of constructibility and Tor intervals.",
+   "place": "Proof, first paragraph ('Locally on $X$ and $Y$, $f$ is a closed immersion followed by the projection from an affine space, so we treat these two cases and then glue') and final paragraph ('after restricting to affine opens in $X$ and $Y$, a finite-type morphism factors as a closed immersion into an affine space over $Y$ followed by its projection ... A finite affine cover of the quasi-compact scheme $X$ gives one cohomological interval and one Tor interval valid everywhere'); used in step 7 of the DAG split of that node.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-affine-chart-factorization-gluing",
+  "worker": "stage1",
+  "summary": "Constructed finite affine charts directly from finite type, wrote the polynomial quotient factorization and the finite generation calculation over k, then glued constructibility, cohomological bounds and Tor bounds with explicit exact restriction, tensor comparison and sheaf zero tests. Retained the statement; no new nodes were necessary. Kept etale coefficients throughout and handled empty X and empty charts separately.",
+  "blueprint": "Realizes the opening affine closed-immersion/smooth-projection reduction and final finite-affine-cover interval gluing in sk-prop-sf-rf-shriek-preservation (unit steps 1 and 4, parent split step 7).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic etale inverse-image/restriction comparison needed for the explicit sheaf zero test; this unit has no such comparison statement."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-qcqs-affine-local",
+    "why": "Generic locality of the finite-stratification constructibility predicate on qcqs schemes; no node of this unit states that topological gluing tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic fact that open immersions are etale, needed to apply the etale restriction comparison; it does not replace any step of the exceptional-adjoint route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-5e635517d",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-5e635517d (reviewer sub-agent of L); spot-checked: I read the whole delivery and every source it needs: the item (statement and all 8 steps), the unit and the current main-20261015 blueprint proof (all four paragraphs), all 11 steps of the parent sk-prop-sf-rf-shriek-preservation, the full statement of every cited node, and Stacks 095E/095F, 07A4, 01T2, 01QO, 04JC and 02GP. The delivery has 0 new nodes. Coefficients: the parent's step 7 uses the item on the ordinary small étale site with finite constant coefficients, and its step 8 transports the result to pro-étale, so D(X_et,A) is the right category. Statement: it is the unit's steps 1 and 4 (affine closed immersion plus affine-space projection, then finite-cover interval gluing). It is not a restated clause of the parent, nothing is weakened, and arbitrary finite A generalizes the parent's ℓ-primary A. Small cases I tested: f = id with m = 0, A^1 over k, X empty, empty charts, all local intervals empty (then K = 0), and A = 0. Steps: (1) finite affine charts come from the finite-cover form of def-weil-finite-type-morphism. (2) The polynomial quotient is a closed immersion by the 01QO form of def-weil-closed-immersion, and A^m over Spec R is Spec R[x] by def-sbc-affine-space. (3) The projection is smooth of relative dimension m (sbc-lem-affine-space-smooth); maps from affine sources are separated; the finite generating sets over k are written out correctly. (4) X is qcqs (lem-weil-pbc-qcqs-over-affine) and each affine chart is qcqs. (5) Open immersions are étale, inverse image is sectionwise restriction, and exact module inverse image makes cohomology commute with restriction; the étale-cover zero test is correct, including the empty cover. (6) 095E/095F locality: (3)⇒(1) on each chart, then (2)⇒(3) on X; the inequalities run the right way. (7) 07A4, applied with L = M[0], keeps the quantifier over all module sheaves. (8) Empty X gives K = 0. Route: all cited statements are on the transitive route or are Mathlib/Lean-closed tools (sbc-lem-affine-space-smooth and lem-kun-inverse-image-monoidal are closed). No SGA is used. I accept the declared tool_uses: lem-weil-pbc-etale-inverse-image-restriction, lem-weil-pbc-constructible-qcqs-affine-local and lem-weil-pbc-etale-composition-cancellation. Duplicate candidates are all different: det-thm-restriction-local (pro-étale f^! locality), def-pur-affine-chart-cover (chart data only), lem-sf-finite-cover-ctf-locality (pro-étale), lem-weil-pbc-tor-amplitude-principal-cover-glue (ring modules). Fixes (2): B3 — cited def-weil-pbc-constructible-complexes for 'bounded constructible' in the statement and step 6, and def-weil-pbc-inverse-image for the restriction K|_U; both added to stmt_deps/proof_deps with no cycle. B9 — blueprint.from.place (and source.place) now quote the blueprint proof's first and final paragraphs instead of the parent's 'Step 7', which the report claimed was already done. The mathematics is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,111 @@
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A(I)$ for the complex with differential $d_A^n=A(d_I^n)$, and similarly for $B$. Additivity gives $A(0)=B(0)=0$ on morphisms, so these differentials square to zero. Naturality gives $d_B^nr_{I^n}=r_{I^{n+1}}d_A^n$. Thus $D^{n+1}D^n(a,b)=(0,r d_Aa-d_Br a+d_B^2b)=(0,0)$, proving that $F(I)$ is a complex. For a chain map $f:I\\to J$, the two composites $D_JF(f)$ and $F(f)D_I$ are $(A(f)d_Aa,r_JA(f)a-B(f)d_Bb)$ and $(A(f)d_Aa,B(f)r_Ia-B(f)d_Bb)$; they agree by naturality of $r$. Identities and composition follow on each coordinate, and $F(f+g)=F(f)+F(g)$ by additivity of $A$ and $B$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (definition-cone), 014F (lemma-functorial-cone); explicit agent-written signed two-term calculation extending these formulas."
+   }
+  },
+  {
+   "text": "Let $f-g=d_JH+Hd_I$ and set $h^n(a,b)=(A(H^n)a,-B(H^{n-1})b)$. The first coordinate of $D_Jh+hD_I$ is $(d_AA(H)+A(H)d_A)a=A(f-g)a$. Its second coordinate is $[r_JA(H)-B(H)r_I]a+[d_BB(H)+B(H)d_B]b=B(f-g)b$. The bracket involving $r$ vanishes by naturality for $H^n:I^n\\to J^{n-1}$. Hence $h$ is the asserted homotopy. Sending a homotopy class $[f]$ to $[F(f)]$ is therefore well-defined; the identity, composition and addition identities just proved descend to give the additive functor on $K(\\mathcal A)$.",
+   "uses": [
+    "lem-trf-additive-homotopy-category-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (definition-cone), 014F (lemma-functorial-cone); explicit agent-written signed two-term calculation extending these formulas."
+   }
+  },
+  {
+   "text": "The differentials on $F(I[1])$ and $F(I)[1]$, on their common underlying groups, are respectively $(a,b)\\mapsto(-d_Aa,r a+d_Bb)$ and $(a,b)\\mapsto(-d_Aa,-r a+d_Bb)$. Applying $s_I(a,b)=(a,-b)$ before or after the differential gives $(-d_Aa,-r a-d_Bb)$. Thus $s_I$ is a chain map, inverse to the same coordinate sign map. It is natural since every $F(f)$ is diagonal in the two coordinates. The naturality identities persist on homotopy classes.",
+   "uses": [
+    "lem-trf-additive-homotopy-category-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (definition-cone), 014F (lemma-functorial-cone); explicit agent-written signed two-term calculation extending these formulas."
+   }
+  },
+  {
+   "text": "Use the canonical decompositions $A(U\\oplus V)\\cong A(U)\\oplus A(V)$ and similarly for $B$. Explicitly the maps induced by the two projections and the two inclusions are inverse: applying $A$ to $p_i i_j=\\delta_{ij}$ and $i_1p_1+i_2p_2=1$ proves both inverse identities, and the same holds for $B$. Naturality of $r$ for the inclusions and projections identifies $r_{U\\oplus V}$ with the diagonal matrix $(r_U,r_V)$. Therefore, in the stated source order, the differential of $F(\\operatorname{Cone}(f))$ is\n$$ (x,y,z,w)\\longmapsto(d_{AJ}x+A(f)y,-d_{AI}y,r_Jx-d_{BJ}z-B(f)w,r_Iy+d_{BI}w). $$\nAll indices are forced by the source order: $x\\in A(J^n)$, $y\\in A(I^{n+1})$, $z\\in B(J^{n-1})$, $w\\in B(I^n)$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (definition-cone), 014F (lemma-functorial-cone); explicit agent-written signed two-term calculation extending these formulas."
+   }
+  },
+  {
+   "text": "In target order $(u,v,t,q)\\in A(J^n)\\oplus B(J^{n-1})\\oplus A(I^{n+1})\\oplus B(I^n)$, the cone differential is\n$$d(u,v,t,q)=(d_{AJ}u+A(f)t,r_Ju-d_{BJ}v+B(f)q,-d_{AI}t,-r_It+d_{BI}q).$$\nSubstitution of $\\Phi_f(x,y,z,w)=(x,z,y,-w)$ gives\n$$(d\\Phi_f)(x,y,z,w)=(d_{AJ}x+A(f)y,r_Jx-d_{BJ}z-B(f)w,-d_{AI}y,-r_Iy-d_{BI}w).$$\nApplying $\\Phi_f$ in degree $n+1$ to the four coordinates of the preceding step gives exactly this tuple. Thus $\\Phi_f$ is a chain map, with inverse $(u,v,t,q)\\mapsto(u,t,v,-q)$, proving the asserted chain isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (definition-cone), 014F (lemma-functorial-cone); explicit agent-written signed two-term calculation extending these formulas."
+   }
+  },
+  {
+   "text": "For a strictly commuting square $v f=f^{\\prime}u$ with $u:I\\to I^{\\prime}$, $v:J\\to J^{\\prime}$, the induced source cone map after applying $F$ sends $(x,y,z,w)$ to $(A(v)x,A(u)y,B(v)z,B(u)w)$. Either order of composing it with $\\Phi$ gives $(A(v)x,B(v)z,A(u)y,-B(u)w)$. This proves naturality of the cone isomorphism in chain-map squares. The inclusion $F(J)\\to F(\\operatorname{Cone}(f))$ sends $(x,z)$ to $(x,0,z,0)$, and $\\Phi$ sends this to $(x,z,0,0)$, the target cone inclusion. Finally $F(-p)(x,y,z,w)=(-y,-w)$, so $s_IF(-p)(x,y,z,w)=(-y,w)=(-p)\\Phi_f(x,y,z,w)$. This proves the boundary identity, including its sign.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (definition-cone), 014F (lemma-functorial-cone); explicit agent-written signed two-term calculation extending these formulas."
+   }
+  },
+  {
+   "text": "Apply the triangulation statement to $\\mathcal A$ and to $\\mathrm{Ab}$: both have a zero object and binary biproducts, and are preadditive. Every distinguished triangle in their homotopy categories is isomorphic to a cone triangle ending in $-p$. Steps 3, 5 and 6 give an isomorphism from the image under $F$ of each cone triangle, with last arrow composed with $s_I$, to the cone triangle of $F(f)$: on the first two vertices it is the identity, and on the third it is $\\Phi_f$. A functor sends isomorphisms and commuting diagrams to isomorphisms and commuting diagrams; hence the image of any distinguished triangle is isomorphic to this distinguished cone triangle. Together with additivity and the natural shift comparison, this is precisely the definition of an exact functor.",
+   "uses": [
+    "lem-trf-additive-homotopy-category-triangulated",
+    "def-sp-abelian",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014S (proposition-homotopy-category-triangulated), and the explicit cone and boundary identities proved above."
+   }
+  },
+  {
+   "text": "If $I^n=0$ for $n<N$, then $A(I^n)$ and $B(I^{n-1})$ vanish for $n<N$: an additive functor sends the zero object to zero since its identity is the image of the zero morphism and hence is zero. Thus $F(I)^n=0$ for $n<N$. The chain-map and homotopy formulas are the same on these complexes, so the functor restricts to $K^+(\\mathcal A)\\to K^+(\\mathrm{Ab})$. Shifts preserve bounded-below complexes, and if $I$ and $J$ vanish below $N_I$ and $N_J$, their cone vanishes below $\\min(N_J,N_I-1)$. The preceding cone-triangle comparison therefore also holds within bounded-below complexes.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (definition-cone), 014F (lemma-functorial-cone); explicit agent-written signed two-term calculation extending these formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-trf-additive-homotopy-category-triangulated",
+  "def-sp-abelian",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit signed two-term totalization argument, using cone conventions from Tags 014E/014F and the triangulation from Tag 014S; not a verbatim Stacks theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +166,45 @@
    "results": "Hits read: HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, DerivedCategory.HomologySequence.exact₁, CategoryTheory.Functor.homologySequence_exact₁, CategoryTheory.Functor.homologySequence_exact₂, DerivedCategory.HomologySequence.exact₃, DerivedCategory.HomologySequence.exact₂, CochainComplex.mappingCone.quasiIso_descShortComplex, CategoryTheory.Functor.homologySequence_exact₃. ",
    "date": "2026-10-17",
    "verdict": "no match: additive-functor cone comparison and mapping cocones exist, but no hit states exactness of the signed two-term totalization or its double-cone/shift comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*(Functor|functor)|total.*IsTriangulated|map.*mappingCone",
+   "results": "Hits read: Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern individual additive functors on complexes, ordinary mapping cones or cocones, and the general homotopy-category triangulation; none supplies the signed fibre functor or its cone-interchange formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation of additive functors gives a triangulated mapping fibre functor on homotopy categories",
+   "results": "Hits read: CategoryTheory.NatTrans.mapHomotopyCategory, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory, CategoryTheory.NatTrans.mapHomotopyCategory_app, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory, CategoryTheory.NatTrans.mapHomotopyCategory_comp, CategoryTheory.Functor.IsTriangulated, CategoryTheory.NatTrans.leftDerived. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern individual additive functors on complexes, ordinary mapping cones or cocones, and the general homotopy-category triangulation; none supplies the signed fibre functor or its cone-interchange formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\"",
+   "results": "Hits read: CochainComplex.mappingCocone.inl, CochainComplex.mappingCocone.inr, CochainComplex.mappingCocone.snd, CochainComplex.mappingCocone, CochainComplex.mappingCocone.triangle, CochainComplex.mappingCocone.triangle_obj₂, CochainComplex.mappingCocone.triangle_obj₃, CochainComplex.mappingCocone.descCochain. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern individual additive functors on complexes, ordinary mapping cones or cocones, and the general homotopy-category triangulation; none supplies the signed fibre functor or its cone-interchange formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed two term totalization of a natural transformation between additive functors preserves homotopies shifts and mapping cone triangles",
+   "results": "Hits read: CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.rotateHomotopyEquiv_comm₃, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.trianglehMapOfHomotopy, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.mapHomologicalComplexIso. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern individual additive functors on complexes, ordinary mapping cones or cocones, and the general homotopy-category triangulation; none supplies the signed fibre functor or its cone-interchange formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping fibre of a morphism of dg functors is an exact functor on the homotopy category, with the cone interchange sign",
+   "results": "Hits read: HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.map_distinguished_exact, DerivedCategory.Qh, HomotopyCategory.instIsTriangulatedIntUp, CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Abelian.Ext.mapExactFunctor. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern individual additive functors on complexes, ordinary mapping cones or cocones, and the general homotopy-category triangulation; none supplies the signed fibre functor or its cone-interchange formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-amb-relative-torsor-cohomology",
@@ -86,5 +223,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-amb-signed-fibre-triangulated",
+  "worker": "stage1",
+  "summary": "Proved the signed fibre formulas in eight steps, including the homotopy, shift, double-cone differential, naturality and boundary signs. Reused the existing Mathlib triangulation leaf instead of creating any new node. No statement correction and no Lean work. All new proof steps are shorter than 2000 characters.",
+  "blueprint": "The ancestor lem-amb-cartier-kummer-map proof says \"One may compute the cone on an injective resolution\" and \"All the cone maps and Kummer boundaries commute with pullback\". Steps 1-3 construct the functorial signed fibre on the homotopy category; steps 4-7 justify cone triangles and connecting-map signs used by step 10 of lem-amb-relative-torsor-cohomology; step 8 checks bounded-below applicability."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-16ca64109",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-16ca64109 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 8 steps, the cited statements of def-sp-abelian, def-weil-abstract-derived-category, def-weil-triangulated-category and the Mathlib leaf lem-trf-additive-homotopy-category-triangulated, the Stacks sources 014E (derived.tex l.2471), 014F (l.2501) and 014S (l.3320, whose triangulation proof uses the cone triangle with last map -p), the ancestor blueprint proof lem-amb-cartier-kummer-map (lines 24-25 and 45, which match from.place), and the citer lem-amb-relative-torsor-cohomology steps 10 and 12. I recomputed every sign: D^2=0 by naturality of r applied to d; the homotopy (A(H),-B(H)) works because its r-terms cancel by naturality applied to H^n; the shift comparison s=(a,-b) intertwines (-d_A, r+d_B) with (-d_A, -r+d_B); I recomputed both differentials, of F(Cone f) and of Cone(F f), in four coordinates, and dPhi = PhiD; Phi carries the inclusion to the inclusion; s F(-p) = -p Phi = (-y,w). Step 7 uses only the leaf's statement; naturality of s for the third square comes from step 3, which it cites. Small cases tested: A=0, B=0, r=0, f=0, f=id, A=B with r=id (contractible, as exactness predicts), zero complexes, and lower bound min(N_J,N_I-1). The hypotheses (abelian category, arbitrary additive functors A and B, arbitrary natural r, statement on K not D) are sufficient. There are no new nodes. The rg duplicate search over dag/nodes found no node stating this fibre functor or its cone comparison, and Mathlib's mappingCocone and mapHomotopyCategory do not state it either. The item does not restate a clause of its parent. The only off-route citation is a Mathlib leaf, so no tool_uses are needed. No SGA source is used. It is not a target node, so there is no base-change morphism or coefficient category to compare. No fixes were written."
  }
 }

@@ -13,9 +13,85 @@
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-simplicial-bifibrant-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Factor $P\\to *$ as a trivial cofibration $i:P\\to A$ followed by a fibration $A\\to *$, and factor $0\\to Y$ as a cofibration $0\\to B$ followed by a trivial fibration $p:B\\to Y$. These factorizations exist by the two weak factorization systems in [lem-coef-simplicial-boundary-collapse-test]. The objects $A$ and $B$ are bifibrant: $A$ is fibrant by construction and $B$ is cofibrant by construction; $0\\to A$ is the composite of the cofibrations $0\\to P$ and $i$, and $B\\to *$ is the composite of the fibrations $p$ and $Y\\to *$. For completeness, closure of either lifting class under twofold composition needs only two fillers: for a composite of left-class maps, fill against the first map using the prescribed map out of the second object's target, then fill against the second; the dual two-fillers argument proves closure of the right class. Thus the indicated composites belong to the required classes. No properness hypothesis is used.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Extracted mapping-localization prerequisite, replacement construction; expansion of original projective-model proof Step 15, first paragraph"
+   }
+  },
+  {
+   "text": "For any objects $U,V$, the simplicial sets $\\operatorname{Map}(U,*)$ and $\\operatorname{Map}(0,V)$ are terminal. Indeed, by the representing isomorphisms of [def-coef-simplicial-tensor-cotensor], their $n$-simplices identify respectively with $\\operatorname{Hom}(\\Delta^n\\otimes U,*)$ and $\\operatorname{Hom}(0,V^{\\Delta^n})$, each a singleton by the ordinary terminal and initial universal properties. The simplicial operators between singleton sets are unique. Consequently the corner maps in the assumed simplicial model axiom for $(i,B\\to *)$ and $(0\\to P,p)$ identify respectively with\n$$i^*:\\operatorname{Map}(A,B)\\longrightarrow\\operatorname{Map}(P,B),\\qquad p_*:\\operatorname{Map}(P,B)\\longrightarrow\\operatorname{Map}(P,Y).$$",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Extracted mapping-localization prerequisite, identification of the two corner-map targets with mapping sets"
+   }
+  },
+  {
+   "text": "Both maps displayed in step 2 are trivial Kan fibrations. For the first, $i$ is a trivial cofibration and $B\\to *$ is a fibration; for the second, $0\\to P$ is a cofibration and $p$ is a trivial fibration. These are precisely the hypotheses of the assumed simplicial model axiom. A trivial Kan fibration is in particular a weak homotopy equivalence. By the definition of weak homotopy equivalence in [lem-coef-kan-quillen-right-proper], its realization induces a bijection on path components. Applying this twice gives the bijection\n$$r=\\pi_0(p_*)\\,\\pi_0(i^*):\\pi_0\\operatorname{Map}(A,B)\\xrightarrow{\\sim}\\pi_0\\operatorname{Map}(P,Y),\\qquad [h]\\longmapsto[p\\circ h\\circ i].$$\nThe formula follows from the definition of precomposition and postcomposition in the enrichment.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Extracted mapping-localization prerequisite, the two trivial mapping fibrations and their component bijections"
+   }
+  },
+  {
+   "text": "Use the assumed ordinary bifibrant-localization conclusion of [lem-coef-simplicial-bifibrant-localization]. Its equivalence $H\\to\\mathcal L$ sends the vertex class of an actual arrow $h:A\\to B$ to $q(h)$. Since $A,B$ are bifibrant, its map on these Hom sets is the bijection\n$$b:\\pi_0\\operatorname{Map}(A,B)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal L}(qA,qB),\\qquad[h]\\longmapsto q(h).$$\nHere the Hom-set inverse is supplied by a quasi-inverse of the equivalence and its comparison isomorphisms. The finite-string localization $q:\\mathcal M\\to\\mathcal L$ inverts $i,p$, since they are weak equivalences. Hence\n$$c:\\operatorname{Hom}_{\\mathcal L}(qA,qB)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal L}(qP,qY),\\qquad u\\longmapsto q(p)\\circ u\\circ q(i)$$\nhas inverse $v\\mapsto q(p)^{-1}\\circ v\\circ q(i)^{-1}$. We obtain a well-defined bijection $\\theta=c\\circ b\\circ r^{-1}$ from $\\pi_0\\operatorname{Map}(P,Y)$ to the desired localized Hom set. It remains to identify it on every vertex, rather than merely exhibit an abstract bijection.",
+   "uses": [
+    "lem-coef-simplicial-bifibrant-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Extracted mapping-localization prerequisite, bifibrant comparison and transport along the two inverted replacements"
+   }
+  },
+  {
+   "text": "Let $f:P\\to Y$ be any vertex. Lift $f$ through the trivial fibration $p$ using the cofibration $0\\to P$: the square with top $0\\to B$ and bottom $f$ gives $g:P\\to B$ with $pg=f$. Extend $g$ across the trivial cofibration $i$ using the fibration $B\\to *$: the square with top $g$ and bottom the unique $A\\to *$ gives $h:A\\to B$ with $hi=g$. Both fillers are exactly the lifting properties in [lem-coef-simplicial-boundary-collapse-test]. Therefore $phi=f$ as actual arrows, not merely up to homotopy. Step 3 gives $r([h])=[f]$, so step 4 yields\n$$\\theta([f])=c(b([h]))=q(p)\\circ q(h)\\circ q(i)=q(phi)=q(f).$$\nThus sending vertices to their actual localized arrows is constant on each component, and its induced map is the bijection $\\theta$. This computation also makes the bijection independent of every replacement and filler choice. In particular there is no prior assumption that $q$ identifies simplicial paths between non-bifibrant objects.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Extracted mapping-localization prerequisite, verification that the comparison is induced by the actual localization functor"
+   }
+  },
+  {
+   "text": "For an actual arrow $a:P'\\to P$ between cofibrant objects and an actual arrow $d:Y\\to Y'$ between fibrant objects, enriched precomposition and postcomposition induce the map $[f]\\mapsto[dfa]$ on components. The enrichment and its identification of underlying arrows with vertices are part of [def-coef-simplicial-tensor-cotensor]. Every component contains a vertex, so the identity\n$$\\theta_{P',Y'}([dfa])=q(dfa)=q(d)\\circ\\theta_{P,Y}([f])\\circ q(a)$$\nproves the asserted naturality for all such actual arrows, with no weak-equivalence restriction on $a,d$. For composable vertices $f:P\\to Y$ and $g:Y\\to Z$, whenever $P,Y$ are cofibrant and $Y,Z$ are fibrant so the three bijections apply, enriched composition on components is $([g],[f])\\mapsto[gf]$. Hence $\\theta_{P,Z}([gf])=q(gf)=\\theta_{Y,Z}([g])\\circ\\theta_{P,Y}([f])$. The identity vertex goes to the identity under $q$ as well. This proves all composition and identity assertions.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Extracted mapping-localization prerequisite, naturality in actual arrows and compatibility with enriched composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-boundary-collapse-test",
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-bifibrant-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction; explicit ordinary comparison argument realizing the extracted first paragraph of original projective-model Step 15"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +120,52 @@
    "results": "{\"t\": \"2026-10-17T08:20:40Z\", \"tool\": \"leansearch\", \"query\": \"Connected components of enriched mapping spaces calculate morphisms from cofibrant to fibrant objects in the model homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.mk\", \"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\"], \"digest\": \"03d4b8fe484a6639\"}",
    "date": "2026-10-17",
    "verdict": "no match: FundamentalLemma gives the bijection for model left/right homotopy classes, not pi_0 of the specified simplicial mapping set. Comparing these notions is a genuine missing lemma. Read FundamentalLemma.lean:34-118 and BifibrantObjectHomotopy.lean:148-159."
+  },
+  {
+   "tool": "grep",
+   "query": "pi0|π₀|SimplicialCategory|Simplicial.*[Hh]omotopy",
+   "results": "{\"t\": \"2026-10-17T10:03:56Z\", \"tool\": \"grep\", \"query\": \"pi0|π₀|SimplicialCategory|Simplicial.*[Hh]omotopy\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"c24545ea72fe9325\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern ordinary left/right model homotopy classes and BifibrantObject, rather than components of the specified simplicial enrichment. Read Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean:34-118 and BifibrantObjectHomotopy.lean:148-159; converting the quotient notions is not a one-line specialization. The grep results do not supply that conversion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected components of simplicial mapping spaces from cofibrant to fibrant objects give morphisms in the homotopy category",
+   "results": "{\"t\": \"2026-10-17T10:04:01Z\", \"tool\": \"leansearch\", \"query\": \"Connected components of simplicial mapping spaces from cofibrant to fibrant objects give morphisms in the homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"SSet.Truncated.mapHomotopyCategory_obj\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\", \"AlgebraicTopology.DoldKan.MorphComponents\"], \"digest\": \"16e137186f392b90\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern ordinary left/right model homotopy classes and BifibrantObject, rather than components of the specified simplicial enrichment. Read Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean:34-118 and BifibrantObjectHomotopy.lean:148-159; converting the quotient notions is not a one-line specialization. The grep results do not supply that conversion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-17T10:04:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialCategory\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern ordinary left/right model homotopy classes and BifibrantObject, rather than components of the specified simplicial enrichment. Read Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean:34-118 and BifibrantObjectHomotopy.lean:148-159; converting the quotient notions is not a one-line specialization. The grep results do not supply that conversion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a simplicial model category connected components of the enriched mapping simplicial set from a cofibrant object to a fibrant object are the morphisms in the ordinary localization at weak equivalences",
+   "results": "{\"t\": \"2026-10-17T10:04:02Z\", \"tool\": \"leanfinder\", \"query\": \"In a simplicial model category connected components of the enriched mapping simplicial set from a cofibrant object to a fibrant object are the morphisms in the ordinary localization at weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\"], \"digest\": \"659430a53672e836\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern ordinary left/right model homotopy classes and BifibrantObject, rather than components of the specified simplicial enrichment. Read Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean:34-118 and BifibrantObjectHomotopy.lean:148-159; converting the quotient notions is not a one-line specialization. The grep results do not supply that conversion."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyClassToHom|leftHomotopyClassEquiv|homMk_surjective|homMk.*[Bb]ijective|homRel",
+   "results": "{\"t\": \"2026-10-17T10:04:47Z\", \"tool\": \"grep\", \"query\": \"homotopyClassToHom|leftHomotopyClassEquiv|homMk_surjective|homMk.*[Bb]ijective|homRel\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\"], \"digest\": \"abb6c9c2c835a97e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern ordinary left/right model homotopy classes and BifibrantObject, rather than components of the specified simplicial enrichment. Read Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean:34-118 and BifibrantObjectHomotopy.lean:148-159; converting the quotient notions is not a one-line specialization. The grep results do not supply that conversion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched hom space pi zero equals localized Hom for cofibrant source fibrant target in a model category via trivial mapping fibrations",
+   "results": "{\"t\": \"2026-10-17T10:04:53Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched hom space pi zero equals localized Hom for cofibrant source fibrant target in a model category via trivial mapping fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"HomotopicalAlgebra.BifibrantObject.homMk\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.BifibrantObject.homMk_surjective\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\"], \"digest\": \"9c70695f088dc779\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern ordinary left/right model homotopy classes and BifibrantObject, rather than components of the specified simplicial enrichment. Read Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean:34-118 and BifibrantObjectHomotopy.lean:148-159; converting the quotient notions is not a one-line specialization. The grep results do not supply that conversion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-projective-model-calculus",
@@ -74,5 +192,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-mapping-localization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved the cofibrant-source/fibrant-target comparison by two replacements, the simplicial corner-map axiom, the existing bifibrant-localization conclusion and explicit model lifting squares. Identified the resulting bijection on every actual vertex before deducing naturality and composition. No new nodes, no Mathlib leaves and no off-unit proof tools.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, coherent derived coefficient adjunction before its displayed derived inverse-limit computation; the original projective-model proof Step 15 first paragraph is realized by steps 1-5, and its natural mapping-component comparison by step 6. The full existing from/via ancestry is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-d3d96dc30",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-d3d96dc30 (reviewer sub-agent of L); spot-checked: I read the whole item, the four cited statements (boundary-collapse-test, tensor-cotensor def, kan-quillen-right-proper, bifibrant-localization), blueprint main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 2, and Step 15 of the parent, which uses the item as stated. Compared with the live side copy, the statement, stmt_deps, blueprint and unit are unchanged; only proof, proof_deps, proof_origin, status and split_report changed, and 6 searches were appended after the 4 earlier records, which are kept unchanged. Step checks: (1) i: P->A is a trivial cofibration and p: B->Y a trivial fibration; A and B are bifibrant by closure under composition. (2) Map(U,*) and Map(0,V) are terminal by the representing isomorphisms plus Yoneda, so the two corner maps are i^* and p_*. (3) Both are trivial Kan fibrations by the simplicial model axiom, so they give pi_0 bijections, with r[h]=[phi]. (4) b[h]=q(h) comes from the assumed equivalence H->L, and conjugation by q(i) and q(p) is a bijection. (5) Two explicit lifts give phi=f strictly, so theta[f]=q(f) and the map is independent of choices with no circularity. (6) Naturality for arrows between cofibrant sources and fibrant targets, and composition through a bifibrant middle object, follow from q's functor laws. Edge cases checked: an empty Hom(P,Y), already-bifibrant P and Y, and an initial object that differs from the terminal one. No properness or other hidden hypotheses are used. All citations are in unit sk-prop-sf-biduality-general, so there are no tool_uses. Mathlib's FundamentalLemma only covers model left/right homotopy classes, so the no-leaf verdict is right. There are no new nodes, no duplicate found by rg over the DAG, no cycle and no SGA citation. No fixes were made."
  }
 }

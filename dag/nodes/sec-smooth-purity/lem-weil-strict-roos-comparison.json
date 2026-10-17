@@ -15,9 +15,121 @@
   "def-pur-kinjective-complex",
   "prop-pur-kinjective-resolutions-exist"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the signed model $\\mathsf C(X)^r=P_X^{r-1}\\oplus P_X^r$, $D(y,x)=(-dy-(1-s_X)x,dx)$, where $P_X=\\prod_nX_n$. For a strict tower chain map $f:X\\to Y$, put $F=\\prod_nf_n$. The tower equations give $F(1-s_X)=(1-s_Y)F$ by each product projection. Hence $\\mathsf C(f)(y,x)=(Fy,Fx)$ is a chain map, preserving identities and composition. If $h$ is a chain homotopy $f-g=dh+hd$ in the tower category, its termwise product $H$ commutes with shifts of the tower transitions. The map $(y,x)\\mapsto(-Hy,Hx)$ of degree $-1$ satisfies $D\\widetilde H+\\widetilde HD=\\mathsf C(f)-\\mathsf C(g)$: its off-diagonal terms are $-(1-s_Y)H+H(1-s_X)=0$. Thus the construction also preserves chain homotopies. This uses only the complex, shift and homotopy conventions of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; agent-written strict-cone naturality refinement"
+   }
+  },
+  {
+   "text": "A quasi-isomorphism $f$ of tower complexes is levelwise a quasi-isomorphism, since the evaluations are exact [lem-weil-tower-category-levelwise-abelian]. Exactness of countable products and [lem-sp-exact-functor-preserves-homology](a)-(c) identify kernels, images and their quotients in the product complex, giving $H^r(P_X)=\\prod_nH^r(X_n)$ naturally. Thus $F=\\prod_nf_n$ is a quasi-isomorphism. The strictly commuting square for $1-s$ in step 1 induces a morphism of the shifted cone triangles of [def-weil-abstract-derived-category], with $F$ on both product terms and $\\mathsf C(f)$ on the remaining term. The two-product-term isomorphisms imply that $\\mathsf C(f)$ is invertible in $D(\\mathcal A)$ by [lem-sf-triangle-morphism-iso]. Therefore $X\\mapsto Q\\mathsf C(X)$ inverts quasi-isomorphisms and factors through the localization $D(\\operatorname{Tow}(\\mathcal A))$ of [def-weil-abstract-derived-category], with the stated action on strict maps.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-abstract-derived-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, lemma-products, proof; Tag 05RU, definition-derived-category; strict shifted-cone application"
+   }
+  },
+  {
+   "text": "For resolution existence, form the site with objects $(U,n)$, $n\\geq1$, arrows $(U,n)\\to(V,m)$ equal to arrows $U\\to V$ when $n\\leq m$, and coverings at a fixed index inherited from $\\mathcal C$. Put $R^{\\mathrm{tow}}(U,n)=R(U)$. Its sheaf condition is exactly the sheaf condition at each index; restrictions along $(U,n)\\to(U,n+1)$ are the tower transitions. Thus its module sheaves, including their morphisms, are exactly $\\operatorname{Tow}(\\mathcal A)$. The site is small in the same universe because a set times $\\mathbf N$ is a set, and its ring sheaf is commutative. Apply [prop-pur-kinjective-resolutions-exist] to this site to choose a functorial quasi-isomorphism $q_X:X\\to I_X$ with $I_X$ K-injective and injective in each degree. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], $L_X=\\lim I_X$ computes the specified total derived inverse limit, and on strict maps it is computed by $\\lim I(f)$. No boundedness of $X$ is needed.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, tower-site construction; Tag 0941, lemma-derived-limit-is-ok, K-injective computation; injectives.tex Tag 079P, theorem-K-injective-embedding-grothendieck"
+   }
+  },
+  {
+   "text": "For an injective tower object $J$, let $T_n(M)$ equal $M$ through index $n$, with identity transitions, and zero above $n$. A tower map $T_n(M)\\to J$ is determined by its component $M\\to J_n$. The inclusion $T_n(M)\\hookrightarrow T_{n+1}(M)$ is monic by [lem-weil-tower-category-levelwise-abelian]. With $M=J_n$, extend the map corresponding to $\\mathrm{id}_{J_n}$ across this inclusion by injectivity [def-sp-injective-resolutions]. Its component at $n+1$ is a section $\\sigma_n$ of $J_{n+1}\\to J_n$. Apply this separately to each injective tower $I^r$. In degree $r$, the recursion $y_1=0$, $y_{n+1}=\\sigma_n(y_n-x_n)$ defines, coordinate by coordinate using finite sums, a morphism $x\\mapsto y$ on $P_I^r=\\prod_n I_n^r$ with $(1-s_I)y=x$. Thus $u=1-s_I$ is degreewise split epic and its kernel is the compatible-family complex $L=\\lim_n I_n$. The sections need not commute with the differential; only the degreewise epimorphism assertion is used.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, injective-tower transition and short exact sequence paragraphs; explicit extension argument for modules"
+   }
+  },
+  {
+   "text": "For the degreewise epimorphism $u=1-s_I:P_I\\to P_I$ of step 4, the compatible-family inclusion $\\eta:L\\to\\mathsf C(I)$ is $z\\mapsto(0,z)$. Its quotient complex is identified degreewise with $E^r=P_I^{r-1}\\oplus P_I^r$ by $[(y,x)]\\mapsto(y,ux)$, since $\\ker u=L$ and $u$ is epic. As $u$ commutes with differentials, $D_E(y,z)=(-dy-z,dz)$. The degree $-1$ map $h(y,z)=(0,-y)$ satisfies $D_Eh+hD_E=1$: the two summands are $(y,-dy)$ and $(0,dy+z)$. Hence $E$ is contractible and zero in the derived category [def-weil-abstract-derived-category]. Apply [lem-weil-pbc-complex-ses-triangle] to $0\\to L\\xrightarrow{\\eta}\\mathsf C(I)\\to E\\to0$. The maps $(1,Q\\eta,0)$ from the distinguished identity triangle $QL\\xrightarrow{1}QL\\to0\\to QL[1]$ to this triangle commute in all three squares; the last two have zero source or target. By [lem-sf-triangle-morphism-iso], $Q\\eta$ is invertible. Put $\\rho_X=(Q\\eta)^{-1}Q\\mathsf C(q_X)$, using step 3 to identify $QL$ with $R\\lim X$. The equalities $p_{I,n}\\eta=\\mathrm{pr}_n$ and $p_{I,n}\\mathsf C(q_X)=q_{X,n}p_{X,n}$ give $e_n\\rho_X=p_{X,n}$, where $e_n=(Qq_{X,n})^{-1}Q\\mathrm{pr}_n$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, short exact sequence; derived.tex Tag 0152, lemma-derived-canonical-delta-functor; explicit quotient contraction"
+   }
+  },
+  {
+   "text": "For a strict chain map $f:X\\to Y$, functoriality of the chosen resolution gives $I(f)q_X=q_Yf$. The map on inverse limits is the restriction of $\\prod_nI(f)_n$ to compatible families. Consequently the identity $\\mathsf C(I(f))\\eta_X=\\eta_Y\\lim I(f)$ holds as chain maps, since both send $z$ to $(0,(I(f)_nz_n)_n)$. Combining it with $\\mathsf C(I(f))\\mathsf C(q_X)=\\mathsf C(q_Y)\\mathsf C(f)$ and cancelling the invertible $\\eta$ gives $(R\\lim f)\\rho_X=\\rho_Y\\mathsf C(f)$. Here [lem-weil-pbc-ringed-strict-tower-homotopy-limit] identifies the limit map with the actual derived functor map. By the localization description in [def-weil-abstract-derived-category], derived morphisms are generated by chain maps and formal inverses of quasi-isomorphisms. The equation for a quasi-isomorphism implies the equation for its inverse by cancellation, and equations compose. Thus $\\rho$ is natural on the whole derived category.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; agent-written strict-cone naturality refinement"
+   }
+  },
+  {
+   "text": "Let $q:X\\to I$ and $q':X\\to J$ be any two K-injective tower resolutions with injective terms. The bijection of [lem-weil-pbc-kinjective-hom-derived], applied in the abelian tower category, gives a chain map $a:I\\to J$ with $aq$ homotopic to $q'$, uniquely up to homotopy. Its derived class is $Q(q')Q(q)^{-1}$, so it is a quasi-isomorphism and the same lemma makes it a homotopy equivalence. Applying termwise limit to its inverse and homotopies gives the canonical identification of the limit models from [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The coordinate identity $\\mathsf C(a)\\eta_I=\\eta_J\\lim a$ and Step 1's homotopy preservation imply, after localization and cancellation, $Q(\\lim a)Q(\\eta_I)^{-1}Q\\mathsf C(q)=Q(\\eta_J)^{-1}Q\\mathsf C(q')$. Step 5 proves both $\\eta_I$ and $\\eta_J$ are quasi-isomorphisms by the quotient contraction, so this is the canonical resolution-independent comparison and normalization formula.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I K-injective comparison; Tag 0941 resolution computation; explicit strict-cone coordinate calculation"
+   }
+  },
+  {
+   "text": "For the strict augmentation $\\gamma_n:P\\to X_n$, compatibility says $(1-s_X)\\gamma=0$ for $\\gamma=(\\gamma_n)_n:P\\to P_X$. Thus $b:P\\to\\mathsf C(X)$, $b(p)=(0,\\gamma(p))$ in the signed coordinate order of step 1, is a chain map. The family $q_n\\gamma_n$ is still strictly compatible, hence determines the chain map $\\lambda:P\\to\\lim I_n$. Directly on the two coordinates, $\\mathsf C(q)b=\\eta_I\\lambda$. It follows that $\\rho_XQ(b)=Q(\\lambda)$ in the derived-limit model $Q\\lim I_n$. The latter is the canonical derived map induced by the strict augmentation: take its compatible maps into the chosen tower resolution and apply the ordinary limit universal property, as in the resolution computation of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. This also fixes its zero shifted-product component. For another resolution the $a$ of step 7 satisfies $aq\\gamma\\sim q'\\gamma$; their compatible homotopies restrict to inverse limits. Thus the same canonical comparison identifies both $Q\\lambda$, proving independence of this assertion as well.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; agent-written strict-cone naturality refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-tower-category-levelwise-abelian",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok; derived.tex Tag 0152 short-exact-sequence triangles; explicit strict-map, homotopy, quotient contraction and augmentation refinement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +165,45 @@
    "results": "8 hits; CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv; CochainComplex.mappingCone.mapHomologicalComplexXIso_eq; CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom; HomologicalComplex.homotopyCofiber.XIsoBiprod; HomologicalComplex.homotopyCofiber.XIso; HomologicalComplex.coneOfHasLimitEval_pt_d; CochainComplex.mappingCone.mapHomologicalComplexXIso'; CochainComplex.mappingCone.mapHomologicalComplexXIso",
    "date": "2026-10-17",
    "verdict": "no match for the complete statement; only generic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The shifted mapping cone of one minus shift computes the total derived inverse limit of strict inverse sequences in a category with exact products naturally and respects augmentation maps",
+   "results": "8 hits; CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, HomologicalComplex.coneOfHasLimitEval_pt_d, CochainComplex.mappingCone.shiftIso, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, HomotopyCategory.spectralObjectMappingCone_ω₁, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.map_δ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full strict-tower derived-cone comparison, naturality and augmentation normalization; generic cone, exact-functor and ordinary inverse-limit ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|homotopyLimit|derivedLimit",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full strict-tower derived-cone comparison, naturality and augmentation normalization; generic cone, exact-functor and ordinary inverse-limit ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, CategoryTheory.Limits.HasLimit",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full strict-tower derived-cone comparison, naturality and augmentation normalization; generic cone, exact-functor and ordinary inverse-limit ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived inverse limit of towers is the mapping fiber of one minus shift on products when products are exact",
+   "results": "8 hits; CategoryTheory.Functor.rightDerived, InverseSystem.invLimEquiv, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id, TensorProduct.directLimitRight_symm_of_tmul, InverseSystem.piEquivLim, InverseSystem.invLimEquiv_apply_coe, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv, CategoryTheory.Functor.rightDerivedZeroIsoSelf",
+   "date": "2026-10-17",
+   "verdict": "no match for the full strict-tower derived-cone comparison, naturality and augmentation normalization; generic cone, exact-functor and ordinary inverse-limit ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural functor from derived category of inverse sequences to a derived category defined by a product mapping cone with compatible maps from a constant sequence",
+   "results": "8 hits; DerivedCategory.singleFunctors, DerivedCategory.singleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, HomotopyCategory.spectralObjectMappingCone_ω₁, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.Q, CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-17",
+   "verdict": "no match for the full strict-tower derived-cone comparison, naturality and augmentation normalization; generic cone, exact-functor and ordinary inverse-limit ingredients only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-derived-direct-image-composition",
@@ -73,5 +220,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-strict-roos-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and wrote eight proof steps: strict cone maps and homotopies, quasi-isomorphism descent, tower-site resolutions, the elementary injective-tower splitting calculation, a quotient contraction proving the normalized comparison, derived naturality, canonical resolution independence, and the strict-augmentation equation. Reused existing generic tools; no new nodes.",
+  "blueprint": "Realizes the integral-stage paragraph of lem-weil-derived-direct-image-composition: identifying the strict total derived limit with the functorial product cone, preserving the canonical completion augmentation. Historical master ancestry is retained; the main-20261015 counterpart is in sec-proper-base-change/sk-lem-pbc-composition-cancellation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic total right derived inverse limit on a small ringed tower site, including its K-injective computation and maps; the ambient six-operations unit does not replace this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-ec51be2ac",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-ec51be2ac (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, every cited statement, and Stacks 0940 and 0941 with its proof. Only proof, proof_deps, proof_origin, status, split_report and mathlib_searches changed; statement, stmt_deps, blueprint, unit and chapter are byte-identical to the live side DAG. There are no new nodes, no dependency path back to the item, and proof_deps equals the union of the steps' uses. Step 1: the shifted-cone sign (-dy-(1-s)x, dx) matches def-weil-abstract-derived-category; I verified the homotopy (-Hy,Hx) directly. Step 2: exact products and lem-sp-exact-functor-preserves-homology make the product of a quasi-isomorphism a quasi-isomorphism; the rotated cone triangles and two-out-of-three then let C descend to the derived category. Step 3: the tower site is exactly Stacks 0940, so prop-pur-kinjective-resolutions-exist applies, and the R lim lemma gives termwise limits. Step 4: injectivity gives the section of J_{n+1}->J_n via T_n(M) into T_{n+1}(M), and the recursion satisfies (1-s)y=x. Step 5: I checked the quotient E and its contraction (D_E h+hD_E=1), the triangle morphism (1,Q eta,0), and the projection compatibility. Steps 6-8: I checked naturality, independence of the resolution (lem-weil-pbc-kinjective-hom-derived, aq homotopic to q'), and the augmentation identity C(q)b=eta lambda, which agrees with the constant-tower route. Edge cases checked: zero tower, identity transitions, zero transitions, a single level. I accept the tool use of lem-weil-pbc-ringed-strict-tower-homotopy-limit, the R lim the item itself compares against. No SGA is used. I found no duplicate that could be cited without a cycle. No fixes."
  }
 }

@@ -18,9 +18,82 @@
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-pur-rhom-global-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an $R$-linear isomorphism $S\\cong R^{\\oplus d}$ and write $e_j:R\\to S$ for its basis inclusions. Let $U$ denote restriction of scalars [def-pc-sheaf-restrict-scalars]. For every $X\\in D(R)$ there is a natural isomorphism $a_X:X^{\\oplus d}\\xrightarrow{\\sim}UTX$, with components $b_j^X=1_X\\otimes e_j$. Indeed, choose a K-flat resolution $F\\to X$ [lem-pc-kflat-resolution] and compute $TX$ by $F\\otimes_R S$ [lem-pur-derived-change-of-rings]. The tensor definition [def-pur-sheaf-tensor-product] gives the degreewise mutually inverse maps $F^{\\oplus d}\\to U(F\\otimes_R S)$, $(x_j)\\mapsto\\sum_j x_j\\otimes e_j$, and $x\\otimes\\sum_j r_je_j\\mapsto(r_jx)_j$; they commute with differentials. Finite sums of the resolution remain quasi-isomorphisms, since kernels and images of a finite block-diagonal differential are the corresponding finite sums. Thus these maps give $a_X$ after localization. This also proves naturality in $X$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, label lemma-internal-hom, and Tag 08JA, label lemma-section-RHom-over-U; agent finite-free specialization using the adjunction counit and finite biproducts."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dc-hom-scalar-adjunction] with $K=P$ and $N=TQ$. It gives an isomorphism $\\beta:UH_S(TP,TQ)\\xrightarrow{\\sim}H_R(P,UTQ)$. Its normalization says explicitly that the transpose of $\\beta$ is restricted $S$-linear evaluation after inserting the scalar-extension unit $\\eta_P:P\\to UTP$. The same node states that $U$ reflects isomorphisms. All its hypotheses hold: the site is small and $P,Q$ are arbitrary objects of the ordinary unbounded module-sheaf derived categories. No condensed-coefficient or constructibility hypothesis is used.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, label lemma-internal-hom, and Tag 08JA, label lemma-section-RHom-over-U; agent finite-free specialization using the adjunction counit and finite biproducts."
+   }
+  },
+  {
+   "text": "Put $H=H_R(P,Q)$. The tensor-Hom adjunction supplied by [lem-weil-pbc-ringed-internal-hom-exact-restriction] and [lem-pur-rhom-global-sections] gives $\\operatorname{Hom}(Z,H_R(P,Q^{\\oplus d}))\\cong\\operatorname{Hom}(P\\otimes_R^{\\mathbf L}Z,Q^{\\oplus d})\\cong\\prod_j\\operatorname{Hom}(P\\otimes_R^{\\mathbf L}Z,Q)\\cong\\operatorname{Hom}(Z,H^{\\oplus d})$ for every $Z$. The maps are the finite product projections; their inverse assembles the components by the finite biproduct universal property. Hence $H_R(P,Q^{\\oplus d})\\cong H^{\\oplus d}$, with components $H_R(P,\\operatorname{pr}_i)$. Composing with $H_R(P,a_Q^{-1})$ gives an isomorphism $\\gamma:H_R(P,UTQ)\\to H^{\\oplus d}$. This is the elementary proof that this particular right adjoint preserves finite products, with finite products equal to finite sums.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, label lemma-internal-hom, and Tag 08JA, label lemma-section-RHom-over-U; agent finite-free specialization using the adjunction counit and finite biproducts."
+   }
+  },
+  {
+   "text": "Let $c=c_{P,Q}$ be exactly the evaluation transpose in the statement. Compute $\\beta\\,U(c)\\,b_j^H:H\\to H_R(P,UTQ)$ by transposing. By the evaluation normalization of [lem-sfb-dc-hom-scalar-adjunction], its transpose is $P\\otimes_R^{\\mathbf L}H\\xrightarrow{\\operatorname{ev}_{P,Q}}Q\\xrightarrow{b_j^Q}UTQ$: inserting $\\eta_P$ inserts the scalar $1_S$, and the defining extended pairing multiplies it by $e_j$, giving $1_Se_j=e_j$. This calculation may be made on the K-flat tensor representatives defining the pairing; it uses only the bilinear tensor relations, so is an equality of the specified morphisms after localization. By uniqueness of transposes, $\\beta\\,U(c)\\,b_j^H=H_R(P,b_j^Q)$. Therefore the $(i,j)$ matrix entry of $\\gamma\\,\\beta\\,U(c)\\,a_H$ is $H_R(P,\\operatorname{pr}_i a_Q^{-1}b_j^Q)=\\delta_{ij}1_H$. Maps between finite biproducts are determined by these entries, so this composite is the identity of $H^{\\oplus d}$.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, label lemma-internal-hom, and Tag 08JA, label lemma-section-RHom-over-U; agent finite-free specialization using the adjunction counit and finite biproducts."
+   }
+  },
+  {
+   "text": "The three maps $a_H$, $\\beta$ and $\\gamma$ are isomorphisms, so the identity just computed implies that $U(c)$ is an isomorphism. Conservativity in [lem-sfb-dc-hom-scalar-adjunction] implies that $c$ is an isomorphism in $D(S)$. If $d=0$, the same argument takes place between zero biproducts and their unique map is their identity; no positive-rank hypothesis was used. Evaluation and the adjunctions are natural in both arguments, so taking transposes makes $c$ contravariantly natural in $P$ and covariantly natural in $Q$. The original pairing and its unique transpose mention no chosen basis; the basis was used only to test invertibility. This proves the required basis independence and all the asserted clauses for unbounded $P,Q$.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, label lemma-internal-hom, and Tag 08JA, label lemma-section-RHom-over-U; agent finite-free specialization using the adjunction counit and finite biproducts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-rhom-global-sections",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J9, label lemma-internal-hom, and Tag 08JA, label lemma-section-RHom-over-U; agent finite-free specialization using the adjunction counit and finite biproducts."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -94,10 +167,92 @@
    },
    "date": "2026-10-17",
    "verdict": "no match: the hits concern underived module contraction or closed structures, not arbitrary derived module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of sheaves commutes with scalar extension along a finite free algebra for unbounded complexes",
+   "results": {
+    "top": [
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "SheafOfModules.freeHomEquiv_symm_comp",
+     "SheafOfModules.freeHomEquiv_comp_apply",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihom_map_val_app",
+     "instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite"
+    ],
+    "note": "",
+    "n_hits": 8
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/scalar adjunctions, underived sheaf internal Homs, and finite distributors do not state the unbounded derived ring-sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\", \"extendScalars\"",
+   "results": {
+    "top": [],
+    "note": "",
+    "n_hits": 0
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/scalar adjunctions, underived sheaf internal Homs, and finite distributors do not state the unbounded derived ring-sheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(derivedHom|internalHom|rhom).*(baseChange|finiteFree)|finiteFree.*(derivedHom|internalHom|rhom)",
+   "results": {
+    "top": [],
+    "note": "",
+    "n_hits": 0
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/scalar adjunctions, underived sheaf internal Homs, and finite distributors do not state the unbounded derived ring-sheaf comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite free ring sheaf algebra derived scalar extension commutes with internal Hom without boundedness",
+   "results": {
+    "top": [
+     "AlgHom.extendScalars",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+     "ModuleCat.CoextendScalars.obj'",
+     "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+     "AlgHom.restrictScalars"
+    ],
+    "note": "",
+    "n_hits": 8
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/scalar adjunctions, underived sheaf internal Homs, and finite distributors do not state the unbounded derived ring-sheaf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an additive closed monoidal category tensoring with a finite sum of units commutes with internal Hom in the second variable",
+   "results": {
+    "top": [
+     "CategoryTheory.rightDistributor",
+     "CategoryTheory.sum_tensor",
+     "CategoryTheory.tensor_sum",
+     "CategoryTheory.leftDistributor",
+     "CategoryTheory.MonoidalPreadditive.add_tensor",
+     "CategoryTheory.rightDistributor_hom",
+     "CategoryTheory.leftDistributor_hom",
+     "CategoryTheory.MonoidalPreadditive.tensor_add"
+    ],
+    "note": "",
+    "n_hits": 8
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/scalar adjunctions, underived sheaf internal Homs, and finite distributors do not state the unbounded derived ring-sheaf comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-tensor-hom",
@@ -114,5 +269,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-ringed-finite-free-hom-base-change",
+  "worker": "stage1",
+  "summary": "Prove the finite-free comparison by restriction of scalars, the existing normalized scalar-Hom adjunction, and explicit finite-biproduct coordinates. Check the evaluation-defined comparison rather than an arbitrary isomorphism. No new nodes and no statement change.",
+  "blueprint": "Realizes lem-sf-tensor-hom scalar-extension compatibility: the auxiliary finite-free comparison isolated in its coefficient-compatibility step.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "General unbounded ring-sheaf scalar-Hom adjunction and conservativity; no node in this unit supplies this ambient comparison."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat representatives for the explicit finite-free tensor calculation."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Sectionwise bilinear tensor and scalar-extension construction."
+   },
+   {
+    "node": "def-pc-sheaf-restrict-scalars",
+    "why": "Termwise coefficient forgetting, needed to identify the underlying derived objects."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat computation of the ambient derived scalar-extension functor."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Derived tensor-Hom adjunction, used only to compute finite products."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Converts the internal tensor-Hom identity to Hom-set adjunctions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-pc-kflat-resolution",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-db2b5c011",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-db2b5c011 (reviewer sub-agent of L); spot-checked: Read in full: the item, all cited node statements, unit sk-thm-sf-tensor-hom, the parent lem-sf-tensor-hom step 8 (which uses the item), the main-20261015 blueprint lem-sf-tensor-hom (the 'compatible with scalar extension' clause), and Stacks sites-cohomology.tex 08JA lemma-section-RHom-over-U and 08J9 lemma-internal-hom (lines 8874-8930). Compared with the base copy, the statement, stmt_deps, source and blueprint fields are unchanged; only the proof, status, split_report and appended searches are new. There are no new nodes. The statement is true because S finite free over R is perfect and flat. Tested d=0, d=1, R=k with S=k[eps], and the unbounded case P = direct sum of k[n] (finite free tensor commutes with products). Step 1: the presheaf tensor with R^d is already a sheaf, the explicit inverse maps commute with d, and lem-pur-derived-change-of-rings gives the K-flat computation. Step 2: the hypotheses of lem-sfb-dc-hom-scalar-adjunction hold (small site, commutative rings, no flatness or boundedness needed); it supplies the normalized iso and conservativity of U, and it does not reach the item, so there is no cycle. Step 3: Yoneda with the Hom-adjunction from the internal-Hom node plus rhom-global-sections gives the finite product. Step 4: I re-derived the transpose. It is b_j^{P tensor H}, checkable on K-flat representatives, then by naturality of b_j it becomes b_j^Q composed with ev; the matrix entries are delta_ij. This is the specified evaluation morphism, not just some isomorphism. Step 5: conservativity, the d=0 case and basis independence are correct. Duplicate candidates checked and rejected: lem-pur-integral-operations-scalar-extension (narrower, completed integral bounded), lem-sf-hom-comparison-finite-free (a different functor), lem-pur-ringed-site-finite-free-dual-pullback, lem-sf-hom-finite-projective, lem-pod-finite-projective-tensor-hom. No SGA. All seven declared tool_uses accepted as generic black-box ringed-site tools. Mathlib searches cover all three kinds (one leansearch recorded honestly as unavailable). No fixes."
  }
 }

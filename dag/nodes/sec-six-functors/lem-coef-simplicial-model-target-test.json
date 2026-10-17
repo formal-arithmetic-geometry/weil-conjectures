@@ -11,9 +11,118 @@
   "lem-coef-simplicial-inversion-universal-property",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The forward implication is formal: if $v$ is inverse to $u$, precomposition by $v$ is inverse to precomposition by $u$ for every target. For the converse choose cofibrant-fibrant representatives $X_0,Y_0$ of $X,Y$ in the Bergner model supplied by [lem-coef-simplicial-inversion-universal-property]. By [lem-coef-model-localization-homotopy-classes], the given morphism has an actual representative $u_0:X_0\\to Y_0$. Conjugating by the replacement isomorphisms preserves the test bijections and essential surjectivity. We henceforth write $X,Y,u$ for these representatives. Their mapping sets are Kan: the fibration to the terminal simplicial category has local Kan fibrations by [lem-coef-simplicial-interval-lifting]. Only replacements, not additional hypotheses on the original categories, have been made.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-model-localization-homotopy-classes",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of paragraph 2 foundational target reduction; HTT A.3.4.6, initial fibrant replacement, and A.3.5.14, target test"
+   }
+  },
+  {
+   "text": "For each $T=X,Y$ form $\\mathcal P_T=\\mathsf{sSet}^{T^{\\mathrm{op}}}$ using enriched functors. The Kan-model simplicial-set category is combinatorial and simplicial by [lem-coef-simplicial-presheaf-projective-model]; hence [lem-coef-simplicial-projective-model-calculus] applies to the small simplicial category $T^{\\mathrm{op}}$ and supplies its combinatorial simplicial projective structure. Let $h_t=T(-,t)$. It is cofibrant: it is the free diagram at $t$ on $\\Delta^0$, and the free/evaluation adjunction lifts its initial map against every objectwise trivial fibration, since $\\varnothing\\to\\Delta^0$ is a cofibration. It is fibrant because $T(z,t)$ is Kan for every $z$. For cofibrant $P$ and fibrant $Q$, the simplicial model axiom in the calculus node, applied to $\\varnothing\\to P$ and $Q\\to *$, makes $\\operatorname{Map}(P,Q)\\to *$ a Kan fibration; thus $\\mathcal P_T^{cf}$ has Kan mapping sets and is Bergner fibrant by Step 1's criterion. The model target $\\mathcal P_T$ is permitted by the universe convention. This invokes the enriched diagram theorem, not the ordinary-index presheaf clause.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of paragraph 2 supporting target reduction; HTT A.3.4.6 proof, projective enriched presheaves"
+   }
+  },
+  {
+   "text": "The Yoneda functor $j_T:T\\to\\mathcal P_T^{cf}$ is strictly fully faithful on mapping simplicial sets. Here is the calculation, including simplicial parameters. A natural map $\\alpha:h_t\\times\\Delta^n\\to F$ is sent to the simplex $\\alpha_t(1_t,-):\\Delta^n\\to F(t)$. Conversely, $p:\\Delta^n\\to F(t)$ gives $(a,s)\\mapsto F(a)(p(s))$ at $z$, for $a\\in T(z,t)$. Associativity gives enriched naturality, the identity gives evaluation of this inverse equal to $p$, and naturality at $a$ gives the other inverse equation. Both formulas commute with maps $\\Delta^m\\to\\Delta^n$, so they identify the mapping simplicial set with $F(t)$. Taking $F=h_{t'}$ gives $\\operatorname{Map}(h_t,h_{t'})\\cong T(t,t')$; composition and identities agree by associativity and the unit of $T$. The mapping-set and free-diagram descriptions used here are precisely those of [lem-coef-simplicial-projective-model-calculus].",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent explicit enriched Yoneda computation beneath paragraph 2; HTT A.3.4.6 proof, Yoneda embedding"
+   }
+  },
+  {
+   "text": "Record the needed full-subcategory observation directly in the Bergner model, to avoid the cyclic dependency of the existing general essential-image lemma. Let $S$ be fibrant and $E\\subseteq S$ its full subcategory on a collection of objects closed under isomorphism in $\\pi_0S$. Then $E$ is fibrant, and $k:E\\to S$ is a Bergner fibration: local maps are identities of Kan sets; an invertible vertex out of $e\\in E$ has target in $E$ by repleteness, and that same vertex is a lift. The fibration characterization is the $J$-injective criterion of [lem-coef-simplicial-interval-lifting] for the model in [lem-coef-simplicial-inversion-universal-property]. A class $a:Z\\to S$ with essential image in $E$ lifts to $E$ in $h\\mathrm{sCat}$: represent it by $QZ\\to S$ using [lem-coef-model-localization-homotopy-classes]. Its values belong to $E$, since its induced component functor has that essential image. Fullness gives a strict corestriction, with exactly the same maps on mapping sets. This proves the required existence without a coherent-nerve comparison.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-model-localization-homotopy-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent direct Bergner full-subcategory calculation beneath paragraph 2; HTT A.3.4.11(2), replete-full-subcategory special case"
+   }
+  },
+  {
+   "text": "For the same inclusion $k:E\\to S$, postcomposition is injective on $\\operatorname{Hom}_{h\\mathrm{sCat}}(Z,E)$. Replace $Z$ by a cofibrant $QZ$ and represent two classes by $f,g:QZ\\to E$. If $kf=kg$ in the homotopy category, [lem-coef-model-localization-homotopy-classes] gives a cylinder $QZ\\amalg QZ\\xrightarrow{(e_0,e_1)}J\\xrightarrow{c}QZ$ with $c$ weak, $ce_i=1$, and $H:J\\to S$ with endpoints $kf,kg$. Here $\\pi_0c$ is an equivalence because Bergner weak equivalences are DK equivalences. Every object $z$ of $J$ is therefore isomorphic in $\\pi_0J$ to $e_0(cz)$: their images under $\\pi_0c$ agree and full faithfulness lifts the identity and its inverse. Applying $\\pi_0H$ shows $H(z)$ is isomorphic to $f(cz)$, which belongs to $E$. Repleteness forces all values of $H$ into $E$, so fullness corestricts $H$ and supplies the same cylinder homotopy between $f,g$. The reverse implication of the cited node gives $f=g$ in $h\\mathrm{sCat}$.",
+   "uses": [
+    "lem-coef-model-localization-homotopy-classes",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent cylinder proof beneath paragraph 2; HTT A.3.4.11(1), replete-full-subcategory special case"
+   }
+  },
+  {
+   "text": "Let $E_T\\subseteq\\mathcal P_T^{cf}$ be the full subcategory on all objects isomorphic in $\\pi_0\\mathcal P_T^{cf}$ to some $h_t$. It is replete, since composites of isomorphisms are isomorphisms. The functor $j_T$ factors as $T\\xrightarrow{e_T}E_T\\xrightarrow{k_T}\\mathcal P_T^{cf}$. Step 3 makes every mapping map of $e_T$ an isomorphism; its component functor is fully faithful and essentially surjective by definition of $E_T$. Thus $e_T$ is a DK equivalence, hence invertible in the localization [lem-coef-simplicial-inversion-universal-property]. Steps 4-5 imply that $(j_T)_*$ is injective on maps out of any small $Z$, and that a class $a:Z\\to\\mathcal P_T^{cf}$ factors through $j_T$ exactly when its component functor has essential image among the representables. Indeed first factor through $k_T$ and then compose with $e_T^{-1}$; injectivity follows by cancelling $k_T$ and $e_T$. All categories fit in the enlarged universe allowed in the statement.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent assembly of Yoneda and the replete-full-subcategory test; HTT A.3.4.6 and A.3.4.11"
+   }
+  },
+  {
+   "text": "Apply surjectivity of the assumed test for $\\mathcal A=\\mathcal P_X$ to $[j_X]$. Obtain $F:Y\\to\\mathcal P_X^{cf}$ in $h\\mathrm{sCat}$ with $Fu=j_X$. For any object $y$ of $Y$, essential surjectivity of $\\pi_0u$ gives $x$ and an isomorphism $ux\\cong y$. Applying $\\pi_0F$ and then the natural isomorphism induced by $Fu=j_X$ gives $F(y)\\cong j_X(x)$. The interpretation of homotopy classes on $\\pi_0$, including independence and natural isomorphism, is supplied by [lem-coef-simplicial-derived-pushout-mapping]. Concretely, since $X,Y$ are cofibrant and $\\mathcal P_X^{cf}$ is fibrant, [lem-coef-model-localization-homotopy-classes] represents $F$ and $u$ by actual simplicial functors $F_0,u_0$; then $F_0u_0$ is an actual representative of $Fu=j_X$, its component functor is strictly $\\pi_0F_0\\circ\\pi_0u_0$, and it is naturally isomorphic to $\\pi_0j_X$ because the induced functor depends only on the homotopy class. Step 6 now gives $v:Y\\to X$ with $j_Xv=F$. Consequently $j_Xvu=Fu=j_X$, and Step 6 injectivity with source $X$ implies $vu=1_X$. This is the only use of essential surjectivity; there is no assumption that $u$ is injective on objects.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-model-localization-homotopy-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent explicit left-inverse construction for paragraph 2 target reduction; HTT A.3.5.14 initial reduction via A.3.4.6 and A.3.4.11"
+   }
+  },
+  {
+   "text": "Apply injectivity of the assumed test for $\\mathcal A=\\mathcal P_Y$ to the two maps $j_Yuv,j_Y:Y\\to\\mathcal P_Y^{cf}$. Their restrictions along $u$ agree, because $j_Yuvu=j_Yu$ by $vu=1_X$. Thus $j_Yuv=j_Y$. Step 6 injectivity, now for $j_Y$ with source $Y$, gives $uv=1_Y$. Therefore $u$ is invertible. For the final assertion, an actual simplicial functor whose class is such an isomorphism is a weak equivalence by [lem-coef-model-localization-detects-weak-equivalences], applied to the Bergner model of [lem-coef-simplicial-inversion-universal-property]. Its weak equivalences are exactly DK equivalences. This applies before or after the allowed endpoint replacements, and supplies the asserted conclusion without endpoint cofibrancy or fibrancy assumptions.",
+   "uses": [
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent explicit right-inverse and saturation arguments; HTT A.3.5.14 target reduction, model-category saturation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-model-localization-homotopy-classes",
+  "lem-coef-simplicial-derived-pushout-mapping",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-inversion-universal-property",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 enriched derived coefficient-adjunction foundations; explicit projective-presheaf Yoneda calculation and replete-full-subcategory cylinder proof following the target reduction in HTT A.3.5.14. HTT A.3.4.6 and A.3.4.11 were read online but are not archived; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +168,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-inversion-product-parameter",
@@ -91,5 +200,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-model-target-test",
+  "worker": "stage1",
+  "summary": "Eight steps prove the model-target test using enriched presheaves, an explicit simplicial Yoneda calculation, and a direct replete-full-subcategory cylinder argument. Constructed both inverse equations. Reused existing model and saturation nodes, avoiding the cyclic general essential-image and coherent-nerve nodes. No new nodes, no Lean attachment, no change to statement. On continuation, explicitly verified that the cofibrant-fibrant test subcategories have Kan mapping sets by the stated simplicial model axiom.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: derived coefficient adjunction and inverse-limit comparison. This supplies the model-target reduction beneath the inversion/product parameter comparison in its existing ancestry. Unit and chapter route unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-9a474c9c4",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-9a474c9c4 (reviewer sub-agent of L); spot-checked: I read all eight steps in full, together with the statement of each of the 7 cited nodes. All 7 are in the item's own unit sk-prop-sf-biduality-general and none is merged, so no tool_uses are needed. The statement is unchanged and there are no new nodes. A DFS over the item's 251 transitive dependencies does not reach the item, so there is no cycle. I confirmed that lem-coef-simplicial-fully-faithful-homotopy-image transitively reaches the item, so citing it would create a cycle; the worker was right to re-prove that special case inline in Steps 4-5. I grepped the chapter for duplicates and found none. Step checks: Step 1 uses the Bergner replacements and actual representatives (A cofibrant, B fibrant), and fibrant means J-inj to the terminal category, which gives Kan mapping sets. Step 2: h_t is the free diagram T^op(t,-)⊗Δ0; it is cofibrant because the free functor is left adjoint to evaluation and projective trivial fibrations are objectwise, and SM7 applied to ∅→P and Q→* gives Kan mapping sets. Step 3 is the enriched Yoneda calculation, read degreewise. Step 4: a full replete subcategory is fibrant and its inclusion is J-inj. Step 5: a cylinder's values stay in E because π0c is an equivalence. Step 6: e_T is a DK equivalence. Steps 7-8 give vu=1 and then uv=1, and detects-weak-equivalences gives the final DK claim. Edge cases checked: empty X, and essential surjectivity used only in Step 7. Fault fixed (C3): Step 7 applies π0F to objects and composes induced functors. That needs actual representatives of F and u from lem-coef-model-localization-homotopy-classes (X,Y cofibrant, P_X^cf fibrant), not only the class-invariance in the derived-pushout node. I added that sentence and citation to Step 7; proof_deps is unchanged. HTT A.3.4.6/A.3.5.14 is not archived (WANTED), and the proof stays marked agent-written.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,112 @@
+{
+ "id": "lem-coef-reduced-word-prepend-action",
+ "kind": "statement",
+ "title": "Prepending a tagged arrow acts on reduced categorical words",
+ "statement": "Let $O$ be a small set and $A,B$ small categories [def-nagata-category] with object set $O$. A tagged arrow is an arrow in either $A$ or $B$, with its factor recorded. For $x,z\\in O$, let $R(x,z)$ be the set of finite composable lists from $x$ to $z$ of tagged nonidentity arrows whose consecutive tags differ; the empty list $\\varepsilon_x$ belongs to $R(x,x)$. For a tagged arrow $f:x\\to y$ in factor $t\\in\\{A,B\\}$, including an identity arrow, and $w\\in R(y,z)$, define $P_f(w)$ by the following rules. If $f=\\mathrm{id}_x$, put $P_f(w)=w$. Otherwise, if $w$ is empty or its first tag differs from $t$, prepend $f$ to $w$. Otherwise write $w=g\\,w'$ with $g:y\\to u$ in factor $t$, form $c=g\\circ f$ in that factor, and put $P_f(w)=w'$ if $c=\\mathrm{id}_x$ and $P_f(w)=c\\,w'$ otherwise. Identity cases identify the equal endpoint objects. These rules define a map $P_f:R(y,z)\\to R(x,z)$ for every $z\\in O$. For every tagged identity and every pair $f:x\\to y$, $g:y\\to u$ in the same factor, they satisfy\n$$P_{\\mathrm{id}_x}(w)=w,\\qquad P_f(P_g(w))=P_{g\\circ f}(w)\\quad(w\\in R(u,z)).$$\nNo freeness hypothesis and no restriction on invertible arrows or on composites equal to identities is imposed.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Dwyer--Kan, Calculating simplicial localizations, proof of Proposition 3.2, printed p.21, unique alternating factorization; agent expansion of the prepend-action law from the returned normal-form proof, step 2. No Stacks tag states this typed categorical action law."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "prepend|alternating|reduced.*word|normal.*form",
+   "results": "{\"t\": \"2026-10-17T08:29:25Z\", \"tool\": \"grep\", \"query\": \"prepend|alternating|reduced.*word|normal.*form\", \"sub\": \"CategoryTheory/Category\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no such categorical reduced-word operation in CategoryTheory/Category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prepending an arrow to a reduced alternating path in a free product of categories defines an action of each factor category",
+   "results": "{\"t\": \"2026-10-17T08:29:26Z\", \"tool\": \"leansearch\", \"query\": \"Prepending an arrow to a reduced alternating path in a free product of categories defines an action of each factor category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Monoid.CoprodI.Word.instMulAction\", \"CategoryTheory.ComposableArrows.precomp\", \"Monoid.CoprodI.Word.summandAction\", \"CategoryTheory.MonoidalCategory.MonoidalLeftActionStruct.actionHom\", \"CategoryTheory.Cat.freeMap_map\", \"CategoryTheory.ComposableArrows.whiskerLeft\", \"CategoryTheory.FreeBicategory.inclusionPathAux\", \"CategoryTheory.composePath\"], \"digest\": \"7f5b54ab8894bbc1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the closest hit Monoid.CoprodI.Word.summandAction (GroupTheory/CoprodI.lean:476-483) only treats one-object factors. ComposableArrows.precomp merely adds an arrow; it does not reduce alternating words or prove the action law."
+  },
+  {
+   "tool": "loogle",
+   "query": "Monoid.CoprodI, \"mul\"",
+   "results": "{\"t\": \"2026-10-17T08:29:26Z\", \"tool\": \"loogle\", \"query\": \"Monoid.CoprodI, \\\"mul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Monoid.CoprodI.Word.instMulAction\", \"Monoid.CoprodI.Word.prod_smul\", \"Monoid.CoprodI.Word.smul_induction\", \"Monoid.CoprodI.Word.rcons_eq_smul\", \"Monoid.CoprodI.Word.cons_eq_smul\", \"Monoid.CoprodI.NeWord.mulHead_prod\", \"Monoid.CoprodI.Word.smul_eq_of_smul\", \"Monoid.CoprodI.Word.mem_smul_iff_of_ne\"], \"digest\": \"20051d90a525c875\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/GroupTheory/CoprodI.lean:88-110,338-341,426-430,476-499. Word.summandAction is the analogous result for a family of monoids, whose multiplication is total. The present statement concerns arrows with varying source and target and a partial composition law. Constructing a monoid encoding and proving that its reduction restricts to typed paths is not a one-line specialization. The PushoutI.lean:440 summand action is likewise for groups, with a prescribed amalgamated subgroup, not categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two categories on the same object set, the operation of prepending and reducing a tagged arrow on alternating reduced words respects composition within each factor",
+   "results": "{\"t\": \"2026-10-17T08:29:28Z\", \"tool\": \"leanfinder\", \"query\": \"For two categories on the same object set, the operation of prepending and reducing a tagged arrow on alternating reduced words respects composition within each factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeGroup.Red.Step.append_left\", \"FreeGroup.Red.trans\", \"FreeGroup.Red.cons_cons\", \"FreeGroup.Red.Step.diamond_aux\", \"FreeGroup.Red.Step.append_right\", \"FreeGroup.reduce_cons_reduce\", \"FreeGroup.Red.Step.not_rev\", \"FreeGroup.Red.append_append\"], \"digest\": \"61ae6efee362e69a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: FreeGroup.Red.Step and FreeGroup.reduce_cons_reduce concern words in free group generators and their inverses. Read GroupTheory/FreeGroup/Reduce.lean:132-142,256-262; that cancellation relation is different from same-factor categorical composition."
+  },
+  {
+   "tool": "grep",
+   "query": "summandAction|mul_smul|equivPair_smul_same",
+   "results": "{\"t\": \"2026-10-17T08:30:54Z\", \"tool\": \"grep\", \"query\": \"summandAction|mul_smul|equivPair_smul_same\", \"sub\": \"GroupTheory/CoprodI.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"476\", \"481\", \"496\", \"590\", \"603\"], \"digest\": \"ec2dd9512267440a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/GroupTheory/CoprodI.lean:88-110,338-341,426-430,476-499. Word.summandAction is the analogous result for a family of monoids, whose multiplication is total. The present statement concerns arrows with varying source and target and a partial composition law. Constructing a monoid encoding and proving that its reduction restricts to typed paths is not a one-line specialization. The PushoutI.lean:440 summand action is likewise for groups, with a prescribed amalgamated subgroup, not categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "Monoid.CoprodI.Word.summandAction",
+   "results": "{\"t\": \"2026-10-17T08:30:55Z\", \"tool\": \"loogle\", \"query\": \"Monoid.CoprodI.Word.summandAction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Monoid.CoprodI.Word.summandAction\", \"Monoid.CoprodI.Word.smul_eq_of_smul\", \"Monoid.CoprodI.Word.smul_def\"], \"digest\": \"c8474746b78a7170\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/GroupTheory/CoprodI.lean:88-110,338-341,426-430,476-499. Word.summandAction is the analogous result for a family of monoids, whose multiplication is total. The present statement concerns arrows with varying source and target and a partial composition law. Constructing a monoid encoding and proving that its reduction restricts to typed paths is not a one-line specialization. The PushoutI.lean:440 summand action is likewise for groups, with a prescribed amalgamated subgroup, not categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associative action of each factor category on the reduced alternating paths with fixed terminal object by reduced left concatenation",
+   "results": "{\"t\": \"2026-10-17T08:30:55Z\", \"tool\": \"leansearch\", \"query\": \"Associative action of each factor category on the reduced alternating paths with fixed terminal object by reduced left concatenation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.MonoidalLeftAction.comp_actionHomLeft_assoc\", \"CategoryTheory.MonoidalCategory.MonoidalLeftActionStruct.actionHom\", \"CategoryTheory.MonoidalCategory.MonoidalLeftActionStruct.actionHomRight\", \"CategoryTheory.MonoidalCategory.MonoidalLeftActionStruct.actionObj\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.actionHomLeft_action_assoc\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.actionHom_comp_assoc\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.actionHomRight_comp_assoc\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.tensor_actionHomRight_assoc\"], \"digest\": \"1bd087a54a92284d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are MonoidalLeftActionStruct.actionHom and its functoriality consequences in CategoryTheory/Monoidal/Action/Basic.lean; these assume an action and do not construct the reduced-word action or verify its law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category acts on reduced alternating composable paths by multiplication of the first arrow; the head multiplication operation satisfies the unit and associativity laws even with inverse arrows",
+   "results": "{\"t\": \"2026-10-17T08:31:03Z\", \"tool\": \"leanfinder\", \"query\": \"A category acts on reduced alternating composable paths by multiplication of the first arrow; the head multiplication operation satisfies the unit and associativity laws even with inverse arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.pathComposition\", \"CategoryTheory.Paths\", \"CategoryTheory.composePath\", \"CategoryTheory.Paths.categoryPaths\", \"CategoryTheory.pathComposition_map\", \"CategoryTheory.pathsHomRel\", \"CategoryTheory.pathComposition_obj\", \"CategoryTheory.SimplicialThickening.instCategoryPath\"], \"digest\": \"f67ae4ed2637068f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/PathCategory/Basic.lean:45-135. Paths and pathComposition concern unreduced paths in a single category; neither removes identities and same-factor composites in a two-tag alternating word."
+  },
+  {
+   "tool": "grep",
+   "query": "instance summandAction|theorem equivPair_smul_same",
+   "results": "{\"t\": \"2026-10-17T08:31:06Z\", \"tool\": \"grep\", \"query\": \"instance summandAction|theorem equivPair_smul_same\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/PushoutI.lean\", \"Mathlib/GroupTheory/CoprodI.lean\", \"Mathlib/GroupTheory/CoprodI.lean\"], \"digest\": \"3ca7ac723409a3d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/GroupTheory/CoprodI.lean:88-110,338-341,426-430,476-499. Word.summandAction is the analogous result for a family of monoids, whose multiplication is total. The present statement concerns arrows with varying source and target and a partial composition law. Constructing a monoid encoding and proving that its reduction restricts to typed paths is not a one-line specialization. The PushoutI.lean:440 summand action is likewise for groups, with a prescribed amalgamated subgroup, not categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-free-factor-category-normal-form",
+  "date": "2026-10-17",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, second paragraph and displayed derived Hom inverse-limit calculation, through its finite-adjunction-diagram and mapping-space foundation; DK Comparison Lemma 2.3, Section 5.8(i), uses Proposition 3.2, whose proof on printed p.21 invokes unique alternating factorization. Extracted argument: the reduced-word prepend action and its factor-composition law in the returned normal-form proof, step 2.",
+   "via": [
+    "lem-coef-free-factor-category-normal-form",
+    "lem-coef-free-factor-hammock-pushout",
+    "lem-coef-free-factor-hammock-comparison",
+    "lem-coef-dk-cofibrant-localization-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

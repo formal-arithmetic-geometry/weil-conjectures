@@ -10,9 +10,74 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the transformation from internal evaluation in [def-cbc-enhanced-diagrams-cones]. The composite $X\\times D\\times\\Delta^1\\to Y\\times D\\to\\mathcal E$ is simplicial, since $H$, product permutations and evaluation are simplicial. To see the evaluation explicitly, its value in degree $n$ on $(x,f,u)$ is $f_n(H_n(x,u),\\mathrm{id}_{[n]})$, where $f:Y\\times\\Delta^n\\to\\mathcal E$ represents the $n$-simplex of $D$. The defining internal-Hom formula curries this composite to $\\Phi_H:D\\times\\Delta^1\\to T$ and then to an edge $\\alpha$ of $\\operatorname{Fun}(D,T)$. Indeed, for any parameter simplicial set $P$, a map $X\\times P\\to\\mathcal E$ assigns to each simplex $p:\\Delta^n\\to P$ its restriction $X\\times\\Delta^n\\to\\mathcal E$, compatibly with all operators, giving precisely a map $P\\to\\operatorname{Fun}(X,\\mathcal E)$. Restricting $\\Phi_H$ to $u=0,1$ replaces $H$ by $a,b$, respectively, and yields precomposition with $a,b$ on every simplex of $D$. Thus $\\alpha:a^*\\to b^*$ has exactly the required endpoints.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, applied first to shape X and target E, then to shape Fun(Y,E) and target Fun(X,E); explicit evaluation and degeneracy argument by N1."
+   }
+  },
+  {
+   "text": "Choose a common containing universe in which $X,Y,\\mathcal E,D,T$ are small. Apply [lem-cbc-internal-hom-quasicategory] with $(A,X)=(Y,\\mathcal E)$ and $(X,\\mathcal E)$ to obtain that $D$ and $T$ are quasicategories. Apply it again with $(A,X)=(D,T)$ to obtain that $\\operatorname{Fun}(D,T)$ is a quasicategory. The closure statement allows any small simplicial set as its first argument, so neither $X$ nor $Y$ needs inner horn fillers. Passing to the larger universe supplies the same smallness hypothesis for $D$.",
+   "uses": [
+    "lem-cbc-internal-hom-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, applied first to shape X and target E, then to shape Fun(Y,E) and target Fun(X,E); explicit evaluation and degeneracy argument by N1."
+   }
+  },
+  {
+   "text": "Fix a vertex $f:Y\\to\\mathcal E$ of $D$. Evaluating $\\alpha$ at this vertex gives the edge $\\alpha_f$ of $T$ represented by $X\\times\\Delta^1\\xrightarrow{H}Y\\xrightarrow{f}\\mathcal E$. At a vertex $x$ of $X$ its component is $f\\circ H|_{\\{x\\}\\times\\Delta^1}$. By hypothesis $H|_{\\{x\\}\\times\\Delta^1}=s_0(a(x))$, and simpliciality of $f$ gives the component $s_0(f(a(x)))$. This degenerate edge is an equivalence by the definition in [def-cbc-enhanced-diagrams-cones]: take that same degenerate edge as inverse, and the constant $2$-simplex at $f(a(x))$ as both inverse triangles. In particular $a(x)=b(x)$, as required for these endpoints; no equality of the full diagrams $a$ and $b$ is asserted.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, applied first to shape X and target E, then to shape Fun(Y,E) and target Fun(X,E); explicit evaluation and degeneracy argument by N1."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-pointwise-equivalences] with shape $K=X$, target $\\mathcal C=\\mathcal E$, diagrams $F=f\\circ a$, $G=f\\circ b$ and edge $\\tau=\\alpha_f$. Step 3 verifies its component hypothesis at every vertex of $X$. Its conclusion is that $\\alpha_f$ is an equivalence edge of $T$. This proves the conclusion for every vertex $f$ of $D$, with no choice of inverses varying with $f$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, applied first to shape X and target E, then to shape Fun(Y,E) and target Fun(X,E); explicit evaluation and degeneracy argument by N1."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-pointwise-equivalences] a second time, with shape $K=D$, target $\\mathcal C=T$, diagrams $F=a^*$, $G=b^*$ and edge $\\tau=\\alpha$. The target is a quasicategory by step 2, the shape is small in the chosen common universe, and step 4 proves the component hypothesis for every vertex of $D$. Hence $\\alpha$ is an equivalence edge in $\\operatorname{Fun}(D,T)$. By [def-cbc-enhanced-diagrams-cones] this means that the specified map $\\Phi_H$ is a coherent natural equivalence $a^*\\simeq b^*$. Both applications allow empty shapes: if $X$ is empty the first vertex condition is vacuous, and if $D$ is empty the second is vacuous. No nonemptiness of $Y$ is used.",
+   "uses": [
+    "lem-coef-infinity-pointwise-equivalences",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, applied first to shape X and target E, then to shape Fun(Y,E) and target Fun(X,E); explicit evaluation and degeneracy argument by N1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-coef-infinity-pointwise-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01DK",
+  "place": "Explicit two-stage specialization of Theorem 4.4.4.4 with evaluation and degenerate inverse triangles; online source checked 2026-10-17; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +127,45 @@
    "results": "{\"t\": \"2026-10-17T08:26:29Z\", \"tool\": \"grep\", \"query\": \"precomp|[Hh]omotopy|[Ee]quivalence\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"cc4725d38ce1ea3f\"}",
    "date": "2026-10-17",
    "verdict": "no match: the displayed hits concern model-category homotopies or the strict homotopy bicategory, not coherent equivalence of precomposition transformations. Read Quasicategory/StrictBicategory.lean:14-70, including its future-work note about identifying 2-morphisms with interval homotopies."
+  },
+  {
+   "tool": "grep",
+   "query": "precomp|[Hh]omotopy|[Ee]quivalence",
+   "results": "{\"t\": \"2026-10-17T09:25:31Z\", \"tool\": \"grep\", \"query\": \"precomp|[Hh]omotopy|[Ee]quivalence\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"cc4725d38ce1ea3f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictBicategory.lean:14-32 and TwoTruncated.lean:12-21; strict bicategory homotopy classes and 2-truncated homotopy relations do not state coherent precomposition equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial homotopy fixing vertices induces a natural equivalence between restriction functors on functor infinity categories",
+   "results": "{\"t\": \"2026-10-17T09:25:32Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial homotopy fixing vertices induces a natural equivalence between restriction functors on functor infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\", \"SSet.Truncated.HomotopyCategory.functor_ext\", \"SSet.Truncated.HomotopyCategory.mkNatIso\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.Truncated.HomotopyCategory.mkNatIso.congr_simp\", \"ComplexShape.Embedding.restrictionFunctor\", \"SimplexCategory.homEquivFunctor\"], \"digest\": \"806347f7428f0ae6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned homotopy-category functors, ordinary natural isomorphisms and 2-truncated homotopy relations or primitive horn fillers. Read SimplicialSet/HomotopyCat.lean:385-444 and Quasicategory/StrictBicategory.lean:14-32; these do not give the required equivalence edge of an iterated internal Hom. Two semantic phrasings checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"homotopy\"",
+   "results": "{\"t\": \"2026-10-17T09:25:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: quoted-name query returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vertexwise constant simplicial homotopy induces an equivalence between precomposition functors on quasicategory internal homs",
+   "results": "{\"t\": \"2026-10-17T09:25:42Z\", \"tool\": \"leanfinder\", \"query\": \"A vertexwise constant simplicial homotopy induces an equivalence between precomposition functors on quasicategory internal homs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor.unitHomEquiv\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk\", \"SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_map_homMk\"], \"digest\": \"2016dbe76c765896\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned homotopy-category functors, ordinary natural isomorphisms and 2-truncated homotopy relations or primitive horn fillers. Read SimplicialSet/HomotopyCat.lean:385-444 and Quasicategory/StrictBicategory.lean:14-32; these do not give the required equivalence edge of an iterated internal Hom. Two semantic phrasings checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An edge of the internal functor quasicategory is invertible if every vertex component is invertible",
+   "results": "{\"t\": \"2026-10-17T09:25:43Z\", \"tool\": \"leanfinder\", \"query\": \"An edge of the internal functor quasicategory is invertible if every vertex component is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.instSetoidEdge\", \"SSet.Truncated.HomotopicL\", \"SSet.OneTruncation₂.reflQuiver_Hom\", \"SSet.Truncated.HomotopicR\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.quasicategory_of_filler\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Quasicategory.hornFilling\"], \"digest\": \"743901c9eb6888aa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned homotopy-category functors, ordinary natural isomorphisms and 2-truncated homotopy relations or primitive horn fillers. Read SimplicialSet/HomotopyCat.lean:385-444 and Quasicategory/StrictBicategory.lean:14-32; these do not give the required equivalence edge of an iterated internal Hom. Two semantic phrasings checked."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-blunt-join-comparison",
@@ -92,5 +192,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-homotopy-precomp-equivalence",
+  "worker": "stage1",
+  "summary": "Preserved the statement and historical ancestry. Constructed the specified transformation on all simplices and identified both endpoints. Reused internal-Hom quasicategory closure and the existing arbitrary-shape pointwise equivalence criterion twice; degenerate components and their inverse triangles are written out. Checked common universes and empty shapes. No new nodes.",
+  "blueprint": "Supplies the vertex-fixed homotopy/precomposition argument in step 4 of lem-coef-infinity-blunt-join-comparison, a supporting coherent-diagram foundation beneath the historical prop-coef-integral-exceptional-adjoint paragraph beginning For K in D^b_c(X,R). That integral adjunction paragraph is retained as historical ancestry, not claimed to contain this simplicial lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-d12e6457e",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-d12e6457e (reviewer sub-agent of L); spot-checked: I read the whole item, all three cited statements, the citer lem-coef-infinity-blunt-join-comparison (all 10 steps), the unit record, Mathlib PushoutProduct.lean:153-154 and Scholze Lecture II basic facts (1)-(7) on pp.14-15. The statement is true and is exactly what the parent's step 4 uses (X=Y=P(Δ^n), a=1, b=s_n c_n). Step 1: the evaluation and currying formulas are correct, and both endpoints are precomposition with a and b on every simplex, not only on vertices. Step 2: the Mathlib leaf (universe-polymorphic) makes D, T and Fun(D,T) quasicategories. The common containing universe is stated in the item and matches the parent. Step 3: the component of α_f at x is s0 f(a(x)), which is an equivalence with itself as inverse and the constant 2-simplex as both witnesses. Steps 4-5: lem-coef-infinity-pointwise-equivalences (Kerodon 01DK) is applied with K=X, C=E and then K=D, C=T. Its hypotheses hold, it allows any small shape, and coherence comes from its statement. Small cases checked: X, Y or E empty; X=Δ^0; and the non-degenerate counterexample E=N([1]), which shows the degeneracy hypothesis is needed. There are no new nodes. The duplicate scan of all statements combining a Δ^1-homotopy, precomposition and Fun found nothing that states the item. The dependency closure (14 nodes) does not contain the item, so there is no cycle. The route stays in its own unit plus a Mathlib leaf and a definition, so no tool_uses are needed. No SGA source is used, no target is touched and no fixes were made."
  }
 }

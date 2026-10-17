@@ -13,9 +13,140 @@
   "lem-coef-infinity-slice-right-fibration",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=N(A)^{\\mathrm{op}}\\times B$ and write $q:R\\to D$. The slice theorem makes $C_{/c}\\to C$ a right fibration. Its pullback $q$ is a right fibration: a lifting square for $q$ is a square for that slice map together with its already specified map into $D$, and a filler there gives the required pair in the pullback. Products of quasicategories are quasicategories, since inner horns fill coordinatewise. Thus $D$ and $R$ are quasicategories. The composite $p$ is inner: given an inner horn over a simplex of $N(A)^{\\mathrm{op}}$, first fill its $B$-coordinate in $B$, then lift the resulting simplex of $D$ through $q$. These are direct applications of the lifting definitions.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent argument from right-fibration horns and represented universal arrows; compare §§3.4, 4.2, 6.1 and formula (6.7.1.3), printed pp.315–316. No Stacks tag treats this quasicategorical assertion."
+   }
+  },
+  {
+   "text": "For an edge $v^{\\mathrm{op}}:b\\to a$ and an object $r$ over $(a,y)$, the dimension-one right-horn lifting property of $q$ supplies an edge $e:r'\\to r$ over $(v^{\\mathrm{op}},1_y)$. It is $p$-cartesian. Indeed, in any lifting problem for $\\Lambda_n^n\\subset\\Delta^n$, $n\\geq2$, with last edge $e$, the $B$-coordinate of that last edge is the degenerate identity of $y$. The equivalence outer-horn lemma fills this horn in $B$. Pair the filler with the prescribed base simplex to obtain a simplex of $D$, and use the right-horn lifting property of $q$ to fill in $R$. This is exactly the horn definition of a $p$-cartesian edge. Every required target has such a lift, so $p$ is a cartesian fibration. In particular these lifts have underlying $B$-map exactly $1_y$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent argument from right-fibration horns and represented universal arrows; compare §§3.4, 4.2, 6.1 and formula (6.7.1.3), printed pp.315–316. No Stacks tag treats this quasicategorical assertion."
+   }
+  },
+  {
+   "text": "Fix $a$, set $T=Q(a,-)$, $t=F(a)$, and denote the given natural equivalence by $\\tau_x:\\operatorname{Map}_C(Tx,c)\\simeq\\operatorname{Map}_B(x,t)$. Apply pointwise Yoneda to its inverse, viewed as a transformation $\\operatorname{Map}_B(-,t)\\to\\operatorname{Map}_C(T(-),c)$, in a universe containing $B,C$. It is coherently homotopic to $\\beta\\mapsto\\epsilon\\,T(\\beta)$, where $\\epsilon:Tt\\to c$ corresponds to $1_t$. Consequently this latter map is an equivalence for every $x$. These are universal arrows, not a choice from an undetermined existence assertion. The parametrized universal-arrow theorem applied to $T$ and the full subcategory of $C$ on $c$ supplies, for every simplicial set $K$ and diagram $X:K\\to B$, the equivalence\n$$\\operatorname{Map}_{\\operatorname{Fun}(K,B)}(X,\\Delta_Kt)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,C)}(TX,\\Delta_Kc),$$\ninduced by $\\beta\\mapsto\\epsilon\\,T\\beta$. Here the image of the constant diagram under the partial right adjoint is identified with the constant diagram at its representing object. The theorem includes the coherent choices of this identification, evaluation and restriction in $K$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent argument from right-fibration horns and represented universal arrows; compare §§3.4, 4.2, 6.1 and formula (6.7.1.3), printed pp.315–316. No Stacks tag treats this quasicategorical assertion."
+   }
+  },
+  {
+   "text": "Use arrow slices to implement transposition. Let $S=\\operatorname{Fun}(\\Delta^1,B)\\times_{B,\\operatorname{ev}_1}\\{t\\}$ and $H=B\\times_{T,C,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,C)\\times_{C,\\operatorname{ev}_1}\\{c\\}$. The slice/arrow comparison and its pullback identify $S$ with $B_{/t}$ and $H$ with $R_a$ over $B$. The pullback assertion applies because both source projections being compared are right fibrations, hence isofibrations: lift the inverse of a base equivalence with specified target, and fill the two inverse-triangle horns to obtain its inverse lift and the two witnesses. The equivalence-edge outer-horn lemma supplies those witnesses. Thus the isofibration base-change theorem applies to the slice/arrow comparison along $T$, without any fibration assumption on $T$.\n\nApplying $T$ to an arrow $\\beta:x\\to t$ and composing with $\\epsilon$ gives a functor $J:S\\to H$ over $B$. Composition is taken coherently using the composition-spine theorem, which includes identities, associativity, and their higher homotopies. Hence $J(\\beta)=(x,\\epsilon T\\beta)$ on objects and it keeps every underlying source map in $B$.",
+   "uses": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-isofibration-base-change",
+    "lem-cbc-equivalence-outer-horn-filling",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent argument from right-fibration horns and represented universal arrows; compare §§3.4, 4.2, 6.1 and formula (6.7.1.3), printed pp.315–316. No Stacks tag treats this quasicategorical assertion."
+   }
+  },
+  {
+   "text": "Here is the mapping-space check of $J$. For $\\beta:x\\to t$ and $\\gamma:y\\to t$, maps in $S$ are $h:x\\to y$ together with a path $\\gamma h\\simeq\\beta$. Maps in $H$ between their images are $h:x\\to y$ together with a path $\\epsilon T\\gamma\\,T h\\simeq\\epsilon T\\beta$. These are homotopy fibers, including the higher simplices. To obtain these formulas, use the cone mapping-space formula for a point-shaped diagram with target $t$ or $c$ and the slice/arrow comparison. Pulling the second formula along $T$ replaces the free source-map space by $\\operatorname{Map}_B(x,y)$: mapping simplicial sets preserve degreewise pullbacks, and the inner-mapping-fibration theorem plus the Kan pullback/path comparison identifies this strict pullback with its homotopy pullback. The universal-arrow equivalence of step 3 carries the first pair of composites to the second pair, so homotopy-pullback invariance proves that $J$ is fully faithful. Every $(x,\\alpha)$ in $H$ has a $\\beta$ and a path $\\epsilon T\\beta\\simeq\\alpha$, because the equivalence of step 3 is surjective on components. This path is an equivalence over $1_x$ in the Kan fiber of $H\\to B$. Thus $J$ is essentially surjective, and the full-essential-image theorem makes it an equivalence.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-inner-mapping-fiber",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent argument from right-fibration horns and represented universal arrows; compare §§3.4, 4.2, 6.1 and formula (6.7.1.3), printed pp.315–316. No Stacks tag treats this quasicategorical assertion."
+   }
+  },
+  {
+   "text": "The inverse is the required coherent transpose over $B$, not just an equivalence after forgetting source objects. For a fixed diagram $X:K\\to B$, objects above $X$ in the diagram categories of $S$ and $H$ are respectively transformations $X\\to\\Delta_Kt$ and $TX\\to\\Delta_Kc$. The entire spaces of such transformations are the two sides of step 3; the arrow/right-pinched comparison identifies the concrete models. The inverse sends $\\alpha$ to its transpose and keeps $X$ fixed. Naturality in $X$, including its coherent transformations, gives the triangles; restriction along $K'\\to K$ gives their faces and degeneracies. The unit and counit homotopies of this equivalence of spaces give the inverse-composite homotopies with these same fixed source diagrams. This constructs the inverse over $B$ with all simplicial parameters, by the explicit diagram formula of the parametrized universal-arrow theorem. In particular the induced equivalence $E_a:R_a\\simeq B_{/F(a)}$ sends $\\alpha:Q(a,x)\\to c$ to $\\tau_{a,x}(\\alpha)$.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-slice-arrow-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent argument from right-fibration horns and represented universal arrows; compare §§3.4, 4.2, 6.1 and formula (6.7.1.3), printed pp.315–316. No Stacks tag treats this quasicategorical assertion."
+   }
+  },
+  {
+   "text": "Compute transport on the lift in step 2. Write its target as $(a,y,\\alpha)$ and its source as $(b,y,\\alpha')$. The right-fibration transport calculation for the concrete slice pullback says\n$$\\alpha'\\simeq\\alpha\\,Q(v^{\\mathrm{op}},1_y).$$\nThe given coherent naturality of $\\tau$ in $a$ says exactly\n$$\\tau_{b,y}(\\alpha\\,Q(v^{\\mathrm{op}},1_y))\\simeq F(v)\\,\\tau_{a,y}(\\alpha).$$\nThus $E_b$ takes the source to $y\\xrightarrow{\\beta}F(a)\\xrightarrow{F(v)}F(b)$, where $\\beta=\\tau_{a,y}(\\alpha)$. Naturality in $y$ gives the same identity on slice triangles and higher simplices. Hence cartesian transport from the fiber at $a$ to that at $b$ is postcomposition by $F(v)$, with the asserted direction, and the chosen lift has underlying identity. For composable $v:a\\to b$, $w:b\\to d$, the composition simplex of $F$ identifies $F(w)F(v)\\beta$ with $F(wv)\\beta$; the higher simplices of the assumed natural equivalence give the higher compatibilities. This proves the identification as a coherent functor, rather than just on objects.",
+   "uses": [
+    "lem-coef-right-fibration-section-limit",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent argument from right-fibration horns and represented universal arrows; compare §§3.4, 4.2, 6.1 and formula (6.7.1.3), printed pp.315–316. No Stacks tag treats this quasicategorical assertion."
+   }
+  },
+  {
+   "text": "All preceding formulas may be restricted along an arbitrary parameter map $K'\\to K$. The universal-arrow diagram equivalence commutes with this restriction, and the concrete slice transport comparison is natural under restriction of the base. The two sides of the transport identity in step 7 are the restrictions of the same given naturality homotopy of $\\tau$; its higher homotopies restrict too. Therefore the fiber equivalences and transport identifications retain arbitrary coherent simplicial parameters and commute with their restriction. Enlarge the working universe to contain $A,B,C$, their mapping spaces and the chosen parameters before applying the cited results. This uses no local-smallness hypothesis in the original universe of $A$. Only right/inner horn fillers and universal-arrow mapping equivalences were used; no colimit in $B$ or $C$ was invoked.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-right-fibration-section-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent argument from right-fibration horns and represented universal arrows; compare §§3.4, 4.2, 6.1 and formula (6.7.1.3), printed pp.315–316. No Stacks tag treats this quasicategorical assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-infinity-isofibration-base-change",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-right-fibration-section-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, coherent coefficient adjunction/inverse-limit calculation; independent represented-family slice argument, compared with online Cisinski (6.7.1.3)."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -65,10 +196,59 @@
    "results": "{\"t\": \"2026-10-17T07:58:41Z\", \"tool\": \"grep\", \"query\": \"relative.?slice|cartesianFibration|CartesianFibration|parametric.*adjoint\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match. Returned HasFibers, IsPreFibered, IsFibered and Over.postAdjunctionRight are ordinary category statements, not cartesian fibrations of quasicategories or equivalences of coherent relative slices. Read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:49-80 and Comma/Over/Basic.lean; the two grep scopes CategoryTheory and AlgebraicTopology returned no relevant declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?slice|cartesianFibration|CartesianFibration|parametric.*adjoint",
+   "results": "{\"t\": \"2026-10-17T09:13:28Z\", \"tool\": \"grep\", \"query\": \"relative.?slice|cartesianFibration|CartesianFibration|parametric.*adjoint\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: only ordinary category Over/IsFibered facts or no hits; these do not describe coherent quasicategory slices and cartesian horns. Read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:49–80 and CategoryTheory/Comma/Over/Basic.lean:492–508."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasicategory slice of a parametrized represented presheaf is a Cartesian fibration",
+   "results": "{\"t\": \"2026-10-17T09:13:28Z\", \"tool\": \"leansearch\", \"query\": \"A quasicategory slice of a parametrized represented presheaf is a Cartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"CategoryTheory.Functor.IsFibered\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsFibered.recOn\", \"CategoryTheory.Functor.IsFibered.mk\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\"], \"digest\": \"a0563fe5d245a634\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: only ordinary category Over/IsFibered facts or no hits; these do not describe coherent quasicategory slices and cartesian horns. Read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:49–80 and CategoryTheory/Comma/Over/Basic.lean:492–508."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CartesianFibration\"",
+   "results": "{\"t\": \"2026-10-17T09:13:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"CartesianFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: only ordinary category Over/IsFibered facts or no hits; these do not describe coherent quasicategory slices and cartesian horns. Read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:49–80 and CategoryTheory/Comma/Over/Basic.lean:492–508."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A represented coherent family of mapping spaces gives a cartesian relative slice with fibres equivalent to over categories",
+   "results": "{\"t\": \"2026-10-17T09:13:31Z\", \"tool\": \"leanfinder\", \"query\": \"A represented coherent family of mapping spaces gives a cartesian relative slice with fibres equivalent to over categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.sections\", \"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.toOver\", \"CategoryTheory.Over.cartesianMonoidalCategory\", \"CategoryTheory.instIsContinuousOverLeftDiscretePUnitIteratedSliceBackwardOver\", \"CategoryTheory.ExponentiableMorphism.instChosenPullbacksAlongHomDiscretePUnitMk\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryOver\", \"CategoryTheory.Over\"], \"digest\": \"27db9580c8822672\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: only ordinary category Over/IsFibered facts or no hits; these do not describe coherent quasicategory slices and cartesian horns. Read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:49–80 and CategoryTheory/Comma/Over/Basic.lean:492–508."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adjunction between infinity categories the comma category over an object is equivalent over the source to the slice over its representing object",
+   "results": "{\"t\": \"2026-10-17T09:13:55Z\", \"tool\": \"leanfinder\", \"query\": \"For an adjunction between infinity categories the comma category over an object is equivalent over the source to the slice over its representing object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.postEquiv\", \"CategoryTheory.Over.postAdjunctionRight_unit_app\", \"CategoryTheory.Over.postAdjunctionRight\", \"CategoryTheory.CostructuredArrow.ofCommaFstEquivalence\", \"CategoryTheory.Over.postAdjunctionRight_counit_app\", \"CategoryTheory.CostructuredArrow.isEquivalence_toOver\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\"], \"digest\": \"4d10d9d35c300a20\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: only ordinary category Over/IsFibered facts or no hits; these do not describe coherent quasicategory slices and cartesian horns. Read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:49–80 and CategoryTheory/Comma/Over/Basic.lean:492–508."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"slice\", \"adjunction\"",
+   "results": "{\"t\": \"2026-10-17T09:21:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"slice\\\", \\\"adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: only ordinary category Over/IsFibered facts or no hits; these do not describe coherent quasicategory slices and cartesian horns. Read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:49–80 and CategoryTheory/Comma/Over/Basic.lean:492–508."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?slice|cartesianFibration|CartesianFibration|parametric.*adjoint",
+   "results": "{\"t\": \"2026-10-17T09:21:53Z\", \"tool\": \"grep\", \"query\": \"relative.?slice|cartesianFibration|CartesianFibration|parametric.*adjoint\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: only ordinary category Over/IsFibered facts or no hits; these do not describe coherent quasicategory slices and cartesian horns. Read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:49–80 and CategoryTheory/Comma/Over/Basic.lean:492–508."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-diagram-coyoneda",
@@ -97,5 +277,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-represented-family-slice-fibration",
+  "worker": "stage1",
+  "summary": "Proved cartesianness directly by right-horn lifting and equivalence outer-horn filling. Used existing pointwise Yoneda and parametrized universal arrows to transpose concrete slices over B, then computed contravariant transport by naturality. No new nodes and no Mathlib leaves; statement and all hypotheses retained, and no straightening/classification dependency used.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: the represented-family relative slice needed for the coherent free-diagram adjunction in lem-coef-coherent-diagram-coyoneda step 3.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic quasicategory horn, coherent-composition or cone/mapping-space tool; it supplies foundational calculus and does not replace a coefficient/unit-route step."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory horn, coherent-composition or cone/mapping-space tool; it supplies foundational calculus and does not replace a coefficient/unit-route step."
+   },
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic quasicategory horn, coherent-composition or cone/mapping-space tool; it supplies foundational calculus and does not replace a coefficient/unit-route step."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic quasicategory horn, coherent-composition or cone/mapping-space tool; it supplies foundational calculus and does not replace a coefficient/unit-route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-74e84e265",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-74e84e265 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps, the statements of all 18 proof_deps, plus lem-coef-infinity-isofibration-exponentiation, def-coef-infinity-category-of-spaces, the parent lem-coef-coherent-diagram-coyoneda (only its step 3 uses the item), the unit and chapter records, and the ancestor prop-coef-integral-exceptional-adjoint paragraph 2 (same text in master and main-20261015). Shape: one commit with two files, no new nodes, statement kept as imported, proof_deps equal to the union of the step uses, all cited ids exist and none is merged. A traversal from the item reaches 402 nodes with no cycle back to the item or its parent. Variance of Map_C(Q(a,x),c) and Map_B(x,F(a)) checked. Edge cases checked: A empty, terminal, [1] and discrete, v=id, n=2 horn. Step 2's p-cartesian argument is exact: the outer horn is filled in B by lem-cbc-equivalence-outer-horn-filling on the degenerate 1_y edge, then lifted by q's right-horn property. Step 3: pointwise Yoneda applied to the inverse of tau gives the universal arrow eps, and lem-coef-parametric-universal-arrows (with no closure assumption on D_0) gives the coherent diagram equivalences. Step 4: the base-change hypotheses are met because right fibrations are isofibrations (shown by right-horn lifts; the step attributes this to the outer-horn lemma, a minor misattribution). Step 5: the strict pullback of mapping spaces is a homotopy pullback via the Kan mapping fibration; the needed strict commutation of composites is a routine detail. Step 7: transport is the slice-pullback clause of lem-coef-right-fibration-section-limit plus naturality of tau, in the right direction; the functor level is written as a sketch but is complete. Duplicate search: closest node is lem-coef-infinity-relative-slice-sections, which is a different statement (cocartesian over K, assumes local smallness, no represented family). Tool uses accepted: lem-cbc-enhanced-functor-cone-calculus, lem-cbc-equivalence-outer-horn-filling, lem-cbc-simplicial-composition-spine, as generic calculus matching unit precedent. The fourth entry, def-cbc-enhanced-diagrams-cones, is a definition and needs no declaration. Source: proof is agent-written, CatLR is WANTED, no SGA cited. No fixes made."
  }
 }

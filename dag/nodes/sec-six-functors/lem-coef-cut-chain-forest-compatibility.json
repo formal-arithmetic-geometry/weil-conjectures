@@ -10,9 +10,104 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix alpha and its opposite monotone map a. The half-open intervals (a(i-1),a(i)] are pairwise disjoint and occur in increasing order; every j in {1,...,n} lies in at most one of them, and all remaining j go to the basepoint. Therefore the displayed rule defines an ordered pointed map c_alpha, with the induced order on each non-basepoint fibre. The case n=0 or m=0 is included because the relevant intervals are empty. This only unfolds the simplex-category and simplicial-operator definitions.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9, ordered Cut formula; finite-ordinal verification written here."
+   }
+  },
+  {
+   "text": "For alpha:[n]->[m] and beta:[m]->[ell] in Delta^op, let a:[m]->[n] and b:[ell]->[m] be opposites. The fibre of c_beta over j is the consecutive block b(j-1)+1,...,b(j). Substituting c_alpha into that ordered block replaces each i by the increasing block a(i-1)+1,...,a(i), and concatenates these blocks in increasing i. The result is exactly the interval (a(b(j-1)),a(b(j))], which is the fibre of c_{beta alpha} because (a o b)(j)=a(b(j)). Inputs outside the selected blocks are discarded in both descriptions. Thus c_{beta alpha} is the ordered operadic composite, including empty blocks.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9, Cut composition; explicit interval calculation."
+   }
+  },
+  {
+   "text": "For a chain, attach at level k one vertex for each output i and attach each input slot to the unique matching wire at level k-1; a slot absent from every fibre is recorded as a discarded wire. Every vertex has exactly one outgoing wire, while every non-discarded incoming slot has exactly one parent. Induction on the number of levels therefore gives a finite leveled forest record, with nullary vertices retained because a zero-length fibre still supplies its corolla. Pruning to the ancestors of one final output is well-defined, and for q=0 it leaves the selected initial wire.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9, leveled forest interpretation; finite-record construction written here."
+   }
+  },
+  {
+   "text": "Induct on q to compute the external wires of the tree feeding final output j. For q=0 the tree is the single wire j and the interval is {j}. For q>0, the last vertex receives the consecutive intermediate outputs b(j-1)+1,...,b(j), where b=a_q. By the induction hypothesis, the r-th of these outputs has external interval (a_1...a_{q-1}(r-1),a_1...a_{q-1}(r)]. These intervals are consecutive and their ordered union is (a_1...a_q(j-1),a_1...a_q(j)], exactly L_j. If the interval is empty, the vertex and its nullary descendants remain in the pruned tree even though no external wire is present.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9, external-input interval; induction on chain length."
+   }
+  },
+  {
+   "text": "Split the chain after level r. The earlier record supplies one rooted tree for each intermediate output, and the later record supplies the vertices whose input slots are those outputs. Replacing each such slot by its earlier tree is precisely grafting in increasing slot order. The same interval-union calculation as in the preceding step shows that the resulting external list is the concatenation of the earlier lists in that order. If a later vertex sends an intermediate output to the basepoint, its entire earlier component has no path to the chosen final output and is omitted from the pruned tree, while it remains in the full record.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9, ordered grafting and discarded branches."
+   }
+  },
+  {
+   "text": "Let theta:[p]->[q] be weakly increasing. Replace each consecutive retained pair theta(s)<=theta(s+1) by the composite of all intervening c-maps. By Step 2 this composite has exactly the ordered fibres obtained by substituting all intervening layers. A corolla whose output is not used by any retained successor is marked discarded; this is exactly the full-record restriction before pruning. If theta(s)=theta(s+1), the composite is an identity map and contributes singleton identity corollas. Hence the restricted forest is canonically the stated operation on the full record, with the same wire labels and nullary vertices.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9, restriction to subchains and repeated stages."
+   }
+  },
+  {
+   "text": "The preceding construction makes each inner face a substitution of adjacent layers, each outer face a deletion of an endpoint layer followed by pruning, and each degeneracy an inserted identity layer. Applying two restrictions in either order keeps the same retained endpoints and composes the same monotone maps; associativity of ordinary function composition and the interval calculation in Step 2 give the same ordered fibres. Since grafting is itself the same ordered substitution, restriction commutes with splitting and grafting. This also explains why an outer face must be taken on the full record: a branch discarded only at the removed endpoint may feed a surviving output after that endpoint is deleted.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9, simplicial faces, degeneracies and grafting compatibility."
+   }
+  },
+  {
+   "text": "All constructions are finite and order-preserving, so the canonical identifications are unique: a forest is determined by its vertices, ordered input slots, wire labels and parent incidences, and each of these is preserved by the interval substitutions. Empty output ordinals give no final vertices, empty input fibres give nullary vertices, and repeated stages give identities; the same arguments apply without selecting an element from an empty set. Thus every intersection of face, degeneracy and grafting operations agrees, proving the asserted compatibility for finite ordered forests alone, with no target-category coherence being asserted.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9 and boundary-case audit of the finite-forest construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Construction 4.1.2.9 and Definition 4.1.1.3/Remark 4.1.1.4; explicit finite-ordinal forest verification written here because HA is not archived in literature."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,7 +160,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-monoidal-block-projection-coherence",
@@ -92,5 +187,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cut-chain-forest-compatibility",
+  "worker": "stage1",
+  "summary": "Preserved the imported finite ordered Cut-chain forest statement and supplied an eight-step agent-written proof. The steps verify interval fibres, composition, the full forest record, external-wire intervals, ordered grafting, arbitrary subchain restrictions, simplicial and grafting compatibilities, and all empty/repeated-stage boundary cases. No new nodes are needed: every step is a finite calculation from the simplicial-set definition and the displayed constructions. Existing Mathlib searches were rerun for this item and found only generic simplex identities, not the stated forest theorem.",
+  "blueprint": "Realizes the retained-output-forest, ordered external interval, grafting, endpoint restriction, face/degeneracy and further substitution sentences in the ancestor proof paragraph of prop-coef-integral-exceptional-adjoint, via the parent block-projection lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-3a0fc001e",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-3a0fc001e (reviewer sub-agent of L); spot-checked: I read the full item, all 8 steps, the only cited node (def-weil-pbc-simplicial-set, a Mathlib-leaf definition of Delta), parent step 5 and the Cut definition in lem-coef-cartesian-associative-segal-comparison. The item's c_alpha formula (j->i iff a(i-1)<j<=a(i), fibres ordered by input index) and its Ass^tensor composition agree with that node and with HA Construction 4.1.2.9. HA is not archived; the report lists it as WANTED and proof_origin.by is agent. Step checks: step 1 gives disjoint, increasing intervals, including m=0 and n=0. Step 2 is the telescoping union (a(b(j-1)),a(b(j))] in lexicographic order, with the composition direction correct. Steps 3-5 build the record, induct for L_j with a=a_1...a_q, and identify splitting with ordered grafting while discarded branches stay in the full record. Steps 6-8 cover weakly increasing theta (repeated stages give identity corollas), outer faces taken on the full record (wires discarded only at level q survive), commutation by associativity, and rigidity. All steps are rightly elementary; proof_deps equals the union of uses. An exhaustive Python check found no counterexample: 73,085 ordered compositions (ordinals up to 4) and 537,099 chain-tree leaf sets (length 3, ordinals up to 3, including constant maps, empty fibres and repeated stages) all matched. There are no new nodes. An rg search for Cut/forest/associative operad found no duplicate, and the parent is strictly larger (target-category coherence), so this is not D1. Grep, LeanFinder, LeanSearch and Loogle searches are recorded with no match. There is no SGA, no off-route citation and no tool_uses. Minor, unchanged: the item has no lean_audit key, and the imported statement's phrase 'every intersection' is loose wording but not false. No fixes."
  }
 }

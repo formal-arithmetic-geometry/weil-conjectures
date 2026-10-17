@@ -46,8 +46,9 @@
    }
   },
   {
-   "text": "Put $F_i(A)(j)=\\coprod_{I(i,j)}A$. A natural map $F_i(A)\\to Z$ is uniquely determined by the map $A\\to Z(i)$ on $1_i$, because its component on $u:i\\to j$ must be $Z(u)$ after that map. Thus $S_nV=\\coprod_{i_0\\to\\cdots\\to i_n}F_{i_n}(V(i_0))$. Call such a chain nondegenerate when none of its $n$ internal arrows is an identity; no condition is imposed on the separate arrow $i_n\\to j$. Removing identity arrows has a unique result, and the positions removed specify a unique surjection $[n]\\twoheadrightarrow[r]$. Consequently the simplicial latching object $L_nS$ is the coproduct of precisely the degenerate summands: all multiple degeneracy presentations of one summand are identified by their common presentation with all identities removed. At each $j$, $L_nS(j)\\to S_nV(j)$ is therefore inclusion of a subcoproduct with cofibrant complementary summands. It is a cofibration: a lifting problem against a trivial fibration extends over each complementary $V(i_0)$ by its cofibrancy. By the cited Reedy criterion $S_\\bullet V(j)$ is Reedy cofibrant. These statements include $n=0$, when the latching object is initial.",
+   "text": "Put $F_i(A)(j)=\\coprod_{I(i,j)}A$. A natural map $F_i(A)\\to Z$ is uniquely determined by the map $A\\to Z(i)$ on $1_i$, because its component on $u:i\\to j$ must be $Z(u)$ after that map. Thus $S_nV=\\coprod_{i_0\\to\\cdots\\to i_n}F_{i_n}(V(i_0))$. Apply [lem-coef-simplicial-bar-latching-decomposition]: its latching category is exactly the Reedy latching category in degree $n$, and it identifies $L_nS(j)\\to S_nV(j)$ with the coproduct injection of the degenerate-chain summands. The complementary summands are the cofibrant objects $V(i_0)$. This injection is a cofibration: a lifting problem against a trivial fibration extends over each complementary $V(i_0)$ by its cofibrancy. By [lem-coef-reedy-model-structure], $S_\\bullet V(j)$ is Reedy cofibrant. This includes $n=0$, when the latching object is initial.",
    "uses": [
+    "lem-coef-simplicial-bar-latching-decomposition",
     "lem-coef-reedy-model-structure"
    ],
    "elementary": false,
@@ -57,11 +58,36 @@
    }
   },
   {
-   "text": "Let $Q^{(n)}$ be the coend coequalizer restricted to objects $[p]$ with $0\\leq p\\leq n$ and simplex operators between these objects, taken objectwise as an $I$-diagram; set $Q^{(-1)}$ to be the initial diagram. The inclusions of these truncated indexing categories give the skeletal filtration. The coend relations and the unique identity-removal factorization in Step 2 show that $Q^{(n-1)}\\to Q^{(n)}$ is the pushout of the coproduct, over nondegenerate chains $i_0\\to\\cdots\\to i_n$, of\n$$F_{i_n}(V(i_0)\\otimes\\partial\\Delta^n)\\longrightarrow F_{i_n}(V(i_0)\\otimes\\Delta^n).$$\nThe boundary is attached by the $n+1$ faces. Their overlaps agree by the simplicial identities of Step 1; degenerate chains already factor through earlier stages, so add no cells. To verify this pushout without a skeletal-filtration theorem, a map from the proposed stage to a diagram $T$ is exactly a map from the previous stage together with one map $F_{i_n}(V(i_0)\\otimes\\Delta^n)\\to T$ for each nondegenerate chain, agreeing on its boundary with the prescribed face maps. A degenerate chain contributes no free choice: its map is forced by its unique shorter chain and the associated surjection of simplices. The simplicial identities give agreement on boundary overlaps and between different strings of elementary degeneracies. Conversely these agreements impose all the coend relations, since every monotone operator factors as a surjection followed by an injection, and each factor is a composite of elementary degeneracies or faces. This proves the pushout universal property in both directions and gives the coend itself as $\\operatorname{colim}_{n\\geq0}Q^{(n)}$. Tensoring by a fixed simplicial set preserves the coproducts used here: the tensor-cotensor adjunction identifies maps out of such a tensor with maps out of the original coproduct into the corresponding cotensor, hence with families of maps from its summands. To prove each attaching map is a projective cofibration, let $E\\to B$ be any projective trivial fibration, hence objectwise a trivial fibration by [lem-coef-model-colimit-localization-comparison]. By the explicit free-diagram adjunction of Step 2 a cell lifting problem is a lifting problem for $V(i_0)\\otimes\\partial\\Delta^n\\to V(i_0)\\otimes\\Delta^n$ against $E(i_n)\\to B(i_n)$. The same tensor-cotensor adjunction gives $0\\otimes K=0$ for every simplicial set $K$, hence $\\underline{\\operatorname{Map}}(0,Z)$ is the terminal simplicial set. Thus the corner map of the simplicial mapping axiom applied to $0\\to V(i_0)$ is exactly the map below. The axiom gives a trivial Kan fibration $\\underline{\\operatorname{Map}}(V(i_0),E(i_n))\\to\\underline{\\operatorname{Map}}(V(i_0),B(i_n))$. By the boundary-lifting characterization in [lem-coef-kan-quillen-right-proper] this lifts against $\\partial\\Delta^n\\to\\Delta^n$, including $n=0$. Tensor adjunction gives the required cell lift. Choose these lifts at each stage and take their compatible colimit; this proves $0\\to QV$ lifts against every projective trivial fibration, hence is a projective cofibration. No hypothesis on the arrows of $V$ is used.",
+   "text": "For a fixed simplicial set $K$, the tensor/cotensor isomorphisms of [def-coef-simplicial-tensor-cotensor], on vertices, give natural bijections $\\operatorname{Hom}(A\\otimes K,B)\\cong\\operatorname{Hom}(A,B^K)$. Thus $-\\otimes K$ is left adjoint to $(-)^K$. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to discrete small diagrams, including the empty diagram. It gives the canonical isomorphism $\\coprod_\\lambda(A_\\lambda\\otimes K)\\xrightarrow{\\sim}(\\coprod_\\lambda A_\\lambda)\\otimes K$, induced by the tensored injections, and $0\\otimes K\\cong0$. These isomorphisms commute with maps in $K$ and in the family because both composites agree on every coproduct injection.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact (1), applied to the ordinary tensor-cotensor adjunction (Dugger Section 19.1, printed p.90)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-tensor-coend-skeletal-pushouts] objectwise to $S_\\bullet V(j)$. All its maps are natural in $j$, so its universal pushout squares assemble to a pushout of $I$-diagrams. Write $Q^{(n)}=R_n(S_\\bullet V)$ and $Q^{(-1)}=0$. By [lem-coef-simplicial-bar-latching-decomposition], write $S_nV=D_n\\amalg N_n$, with $D_n=L_nS$. Using Step 3, the theorem's left edge is the coproduct of the identity on $D_n\\otimes\\Delta^n$ and $N_n\\otimes\\partial\\Delta^n\\to N_n\\otimes\\Delta^n$. The identity summand contributes no new attachment: specifying a map from its pushout is exactly specifying a map from the previous stage and from $N_n\\otimes\\Delta^n$ agreeing on $N_n\\otimes\\partial\\Delta^n$. Finally Step 2 and Step 3 identify $N_n\\otimes K$ with $\\coprod_{i_0\\to\\cdots\\to i_n\\ \\mathrm{nondegenerate}}F_{i_n}(V(i_0)\\otimes K)$. Thus $Q^{(n-1)}\\to Q^{(n)}$ is the pushout of the coproduct of these free cells with $K=\\partial\\Delta^n\\to\\Delta^n$. The attaching maps are the face maps specified by the cited theorem. That theorem also gives $\\operatorname{colim}_nQ^{(n)}\\cong QV$, naturally as $I$-diagrams, including $n=0$.",
+   "uses": [
+    "lem-coef-tensor-coend-skeletal-pushouts",
+    "lem-coef-simplicial-bar-latching-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Proposition 9.11, Remark 9.12 and Section 19.1, printed pp.37-38 and 90."
+   }
+  },
+  {
+   "text": "Fix a projective trivial fibration $E\\to B$. By [lem-coef-model-colimit-localization-comparison] its components are trivial fibrations. The free-diagram adjunction in [lem-coef-simplicial-projective-model-calculus] turns a lifting problem for a cell of Step 4 into one for $A\\otimes\\partial\\Delta^n\\to A\\otimes\\Delta^n$ against $E(i_n)\\to B(i_n)$, where $A=V(i_0)$. The tensor-cotensor adjunction gives $0\\otimes K=0$ for every $K$, so $\\underline{\\operatorname{Map}}(0,Z)$ is terminal: its $r$-simplices are maps $0\\otimes\\Delta^r\\to Z$. Since $0\\to A$ is a cofibration, SM7 in [lem-coef-simplicial-model-nerve-localization] gives a trivial Kan fibration $\\underline{\\operatorname{Map}}(A,E(i_n))\\to\\underline{\\operatorname{Map}}(A,B(i_n))$. By [lem-coef-kan-quillen-right-proper] it lifts against $\\partial\\Delta^n\\to\\Delta^n$, also for $n=0$. Tensor adjunction gives the cell lift. For a square from $0\\to QV$ to $E\\to B$, start with the unique lift from $Q^{(-1)}=0$. Given a lift on $Q^{(n-1)}$, restrict the square to each attaching cell, choose its lift as above, and glue by the pushout in Step 4 to obtain a lift on $Q^{(n)}$ extending the old one. Their compatible colimit is a lift on $QV$. Thus $0\\to QV$ has the left lifting property against every projective trivial fibration and is a projective cofibration. Only cofibrancy of the values, not of the arrows of $V$, was used.",
    "uses": [
     "lem-coef-model-colimit-localization-comparison",
     "lem-coef-simplicial-model-nerve-localization",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-projective-model-calculus"
    ],
    "elementary": false,
    "source": {
@@ -90,7 +116,7 @@
    }
   },
   {
-   "text": "A natural transformation $V\\to W$ acts on every chain summand by $V(i_0)\\to W(i_0)$. Its naturality square for the first arrow verifies compatibility with $d_0$; all other operators merely change the indexing chain. Hence it induces the maps of coends and augmentations, and the formula in Step 5 makes the colimit isomorphism natural. If $I$ is empty, its diagram category is the terminal category, so its unique diagram is cofibrant and its augmentation is an objectwise weak equivalence vacuously. There are no chains, so all displayed coproducts and the coend $R_I(V)$ are initial; this is the colimit of the empty diagram. This proves every clause also in the empty case.",
+   "text": "A natural transformation $V\\to W$ acts on every chain summand by $V(i_0)\\to W(i_0)$. Its naturality square for the first arrow verifies compatibility with $d_0$; all other operators merely change the indexing chain. Hence it induces the maps of coends and augmentations, and the formula in Step 7 makes the colimit isomorphism natural. If $I$ is empty, its diagram category is the terminal category, so its unique diagram is cofibrant and its augmentation is an objectwise weak equivalence vacuously. There are no chains, so all displayed coproducts and the coend $R_I(V)$ are initial; this is the colimit of the empty diagram. This proves every clause also in the empty case.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -100,12 +126,17 @@
   }
  ],
  "proof_deps": [
+  "def-coef-simplicial-tensor-cotensor",
   "def-weil-pbc-simplicial-set",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-model-colimit-localization-comparison",
   "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-bar-latching-decomposition",
   "lem-coef-simplicial-model-nerve-localization",
-  "lem-coef-simplicial-realization-extra-degeneracy"
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-simplicial-realization-extra-degeneracy",
+  "lem-coef-tensor-coend-skeletal-pushouts",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "proof_origin": {
   "by": "agent",
@@ -175,10 +206,66 @@
    "results": "{\"t\": \"2026-10-17T00:33:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Cofibrant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: abstract model-category replacements in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:127-158 do not identify the explicit bar coend. Abelian-category and representation-theoretic projective resolutions are different objects. The searched bar/Reedy realization patterns have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The explicit simplicial bar construction gives a projectively cofibrant replacement of an objectwise cofibrant diagram in a simplicial model category",
+   "results": "{\"t\": \"2026-10-17T07:54:26Z\", \"tool\": \"leanfinder\", \"query\": \"The explicit simplicial bar construction gives a projectively cofibrant replacement of an objectwise cofibrant diagram in a simplicial model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"AlgebraicTopology.DoldKan.N₁_obj_p\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\"], \"digest\": \"a6c83fd31b31a2bb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:129-158; these are unspecified cofibrant replacements; Rep.barResolution and projectiveResolutions concern abelian chain resolutions, not this explicit simplicial-model bar theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.?replacement|Bousfield.?Kan|barResolution|simplicialBar",
+   "results": "{\"t\": \"2026-10-17T07:54:41Z\", \"tool\": \"grep\", \"query\": \"simplicial.?replacement|Bousfield.?Kan|barResolution|simplicialBar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"ffc54578fd0f7359\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/RepresentationTheory/Homological/Resolution.lean:418-434; Rep.barResolution is a chain complex resolving the trivial group representation, not the simplicial-model diagram theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Bousfield Kan bar resolution of a cofibrant valued functor is projectively cofibrant with objectwise weak equivalence augmentation",
+   "results": "{\"t\": \"2026-10-17T07:54:42Z\", \"tool\": \"leansearch\", \"query\": \"The Bousfield Kan bar resolution of a cofibrant valued functor is projectively cofibrant with objectwise weak equivalence augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences\", \"Rep.barResolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"CategoryTheory.projectiveResolutions\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\"], \"digest\": \"9a599e4852fe7692\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:129-158; these are unspecified cofibrant replacements; Rep.barResolution and projectiveResolutions concern abelian chain resolutions, not this explicit simplicial-model bar theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Cofibrant\"",
+   "results": "{\"t\": \"2026-10-17T07:54:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Cofibrant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: successful Loogle query returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The explicit simplicial bar construction gives a projectively cofibrant replacement of an objectwise cofibrant diagram in a simplicial model category",
+   "results": "{\"t\": \"2026-10-17T07:54:26Z\", \"tool\": \"leanfinder\", \"query\": \"The explicit simplicial bar construction gives a projectively cofibrant replacement of an objectwise cofibrant diagram in a simplicial model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"AlgebraicTopology.DoldKan.N₁_obj_p\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\"], \"digest\": \"a6c83fd31b31a2bb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:129-158; these are unspecified cofibrant replacements; Rep.barResolution and projectiveResolutions concern abelian chain resolutions, not this explicit simplicial-model bar theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.?replacement|Bousfield.?Kan|barResolution|simplicialBar",
+   "results": "{\"t\": \"2026-10-17T07:54:41Z\", \"tool\": \"grep\", \"query\": \"simplicial.?replacement|Bousfield.?Kan|barResolution|simplicialBar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"ffc54578fd0f7359\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/RepresentationTheory/Homological/Resolution.lean:418-434; Rep.barResolution is a chain complex resolving the trivial group representation, not the simplicial-model diagram theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Bousfield Kan bar resolution of a cofibrant valued functor is projectively cofibrant with objectwise weak equivalence augmentation",
+   "results": "{\"t\": \"2026-10-17T07:54:42Z\", \"tool\": \"leansearch\", \"query\": \"The Bousfield Kan bar resolution of a cofibrant valued functor is projectively cofibrant with objectwise weak equivalence augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences\", \"Rep.barResolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"CategoryTheory.projectiveResolutions\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\"], \"digest\": \"9a599e4852fe7692\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:129-158; these are unspecified cofibrant replacements; Rep.barResolution and projectiveResolutions concern abelian chain resolutions, not this explicit simplicial-model bar theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Cofibrant\"",
+   "results": "{\"t\": \"2026-10-17T07:54:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Cofibrant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: successful Loogle query returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presheaf-simplex-hocolim-resolution",
@@ -203,17 +290,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-simplicial-bar-projective-resolution",
   "worker": "stage1",
-  "summary": "Preserved the imported statement and provenance. Expanded the nondegenerate-chain latching and skeletal cell computations, proved projective cofibrancy by direct mapping-space boundary lifting, used one generic terminal-extra-degeneracy realization theorem, and gave the universal-property colimit calculation, cocone compatibility, functoriality and empty case. Removed the previous attempt's unnecessarily broad coherent-diagram dependency and repaired self-ancestry metadata. Second reading made the auxiliary coend definition self-contained and made the truncated skeletal stages, attaching-map terminology and initial-object mapping-space reduction explicit.",
-  "blueprint": "The inherited ancestor prop-coef-integral-exceptional-adjoint, proof paragraph beginning For K, middle finite-level derived mapping-complex adjunction: model-category foundation of its representable-simplex presentation. The six steps realize the explicit cofibrant bar replacement and its augmentation, colimit and cocone compatibility.",
+  "summary": "NG repairs the returned 3108-character step without changing the statement, statement dependencies or Lean record. The bar latching identification is now one precise statement-only node. Tensor preservation uses the existing Mathlib leaf for left adjoints preserving colimits; the filtration uses the existing general tensor-coend skeletal-pushout node. Short steps give only the adjunction specialization, coproduct reindexing and identity-summand cancellation. The original lifting, extra-degeneracy, colimit and functoriality route is retained; all non-elementary steps are under 2000 characters.",
+  "blueprint": "The inherited ancestor prop-coef-integral-exceptional-adjoint, proof paragraph beginning For K, middle finite-level derived mapping-complex adjunction: model-category foundation of its representable-simplex presentation. The eight steps realize the explicit cofibrant bar replacement and its augmentation, colimit and cocone compatibility.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q109-0322bf813",
-  "group": "Q109",
+  "reviewer": "NT-cc-NG-ee0e1d8b0",
+  "group": "NG",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-0322bf813 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the one new node, every cited statement (def-weil-pbc-simplicial-set, lem-coef-simplicial-model-nerve-localization, lem-coef-model-colimit-localization-comparison, lem-coef-reedy-model-structure, lem-coef-kan-quillen-right-proper), the citer lem-coef-presheaf-simplex-hocolim-resolution step 2, the unit record and the main-20261015 ancestor proof paragraph 'For K'. I could not open Dugger: it is not in literature/ and this machine blocks network access. The item records it as WANTED and marks the proof agent-written, so I checked all the mathematics independently. Item: unchanged and correct. QV(j) is the Bousfield-Kan realization over I/j, with the value at i_0 and the operators satisfying the simplicial identities. Step 2: the latching object is the subcoproduct of chains with an internal identity (Eilenberg-Zilber for nerves, with the terminal arrow kept), a summand inclusion with cofibrant complement is a cofibration, so the simplicial object is Reedy cofibrant by the cited criterion. Step 3: the skeletal pushout along F_{i_n}(V(i_0) tensor boundary inclusions) is the correct reduction of the Reedy cell attachment. The lift uses objectwise trivial fibrations, SM7 on 0->V(i_0) and the boundary-lifting criterion; the cited statements give exactly these. Step 4: I checked each terminal-contraction identity on chains myself, including d_{n+1}t_n=1, d_0t_0=t_{-1}eps, the i=n face merge and the degeneracies. Steps 5-6: the colimit formula via terminal-arrow identification, cocone compatibility, naturality and the empty case are all correct and elementary. New node lem-coef-simplicial-realization-extra-degeneracy is true: the extra degeneracy gives a simplicial homotopy equivalence |X|->Y, and both objects are cofibrant (|X| by Reedy cofibrancy, Y as a retract of X_0), so the map is a weak equivalence. Constant X=cY gives |cY|=Y. The node is statement-only, self-contained and searched by all three kinds, strictly smaller than the item and not a duplicate: rg over all dag/nodes, plus reading the extra-degeneracy-contraction, infinity-split-augmentation-colimit, BK comparison, bisimplicial diagonal, projective-model-calculus, boundary-collapse-test and related candidates. All cited statements are in the unit, so there are no tool_uses; no SGA is cited. No fixes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-ee0e1d8b0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-simplicial-bar-latching-decomposition and the statement of every cited node in full. I fetched Dugger's online primer into /tmp: §3.4 (printed p.10) gives the latching object and Reedy cofibrancy, Remark 4.4 (p.17) says the latching object of the simplicial replacement is the summand of chains containing identities, Prop 9.11/Remark 9.12 (pp.37-38) and §19.1 match the citations. Blueprint ancestor paragraph 'For K' (main-20261015 prop-coef-integral-exceptional-adjoint.proof.md line 20) exists. The new node is true. Degeneracies fix i_0 and act on labels by the identity, so the colimit is a coproduct over pi_0 of the category of elements. By Eilenberg-Zilber that is the set of degenerate simplices of N(I/j), which are exactly the chains with an identity internal arrow; the final arrow is not tested. Tested on n=0, the terminal category in degrees 1 and 2, an inverse pair, a non-identity endomorphism and empty I. The node is not a duplicate of free-bar-cell-filtration (sSet-valued only), tensor-coend-skeletal-pushouts (takes the latching object as input) or reedy-model-structure (definition only). It does not restate an item clause, and B1-B9 are satisfied. Steps: 2 matches the new node's category with the Reedy latching category of Delta^op, and the injection has a cofibrant complement, so it is a cofibration. 3 gives the tensor adjunction on vertices plus the Mathlib left-adjoint leaf. 4 uses the skeletal pushouts objectwise, assembled because pushouts in M^I are objectwise, and cancels the identity summand. 5 uses objectwise trivial fibrations, Map(0,Z) terminal, SM7, Kan-Quillen boundary lifting including n=0, and an omega-induction. 6: I rechecked every extra-degeneracy identity on chains, and Reedy cofibrancy comes from step 2. 7 and 8 are elementary cocone and naturality arguments, including empty I. proof_deps equals the union of step uses, there is no cycle, all route nodes are in the item's unit or are Mathlib/definition nodes, so no tool_uses are needed. Statement unchanged, no fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.SimplicialBarProjectiveResolution",

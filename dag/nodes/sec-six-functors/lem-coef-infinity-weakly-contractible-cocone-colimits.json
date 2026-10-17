@@ -2,7 +2,7 @@
  "id": "lem-coef-infinity-weakly-contractible-cocone-colimits",
  "kind": "statement",
  "title": "Weakly contractible colimits of fixed-boundary coherent cocones",
- "statement": "Use the universes and smallness of [def-coef-presentable-infinity-category] and coherent functor categories, cocones, colimits, cores and homotopy fibers of [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal C$ be a quasicategory, $K$ a small simplicial set, and $p:K\\to\\mathcal C$ a coherent diagram. Let $I$ be a small weakly contractible quasicategory, meaning that $I\\to\\Delta^0$ is a weak homotopy equivalence. Assume $\\mathcal C$ admits colimits of all $I$-diagrams. Put $Q=\\mathcal C_{p/}$ and let $U:Q\\to\\mathcal C$ be the apex projection. Then $Q$ admits colimits of all $I$-diagrams. For every $F:I\\to Q$ and coherent cocone $t$ on $F$, $t$ is colimiting if and only if $U(t)$ is colimiting. The functor induced by $U$ from the space of colimiting cocones on $F$ to the space of colimiting cocones on $UF$ has contractible homotopy fiber over every colimiting cocone on $UF$; thus every specified colimiting apex cocone lifts up to a contractible space of choices, including the equivalence identifying its apex cocone with the specified one. Each space of colimiting cocones is the core of the full subcategory of colimiting objects in the relevant coherent cocone category. No compactness, accessibility or cardinal bound on $I$ or $K$ beyond smallness is assumed, and $K=\\varnothing$ is allowed.",
+ "statement": "Use the universes and smallness of [def-coef-presentable-infinity-category] and coherent functor categories, cocones, colimits, cores and homotopy fibers of [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal C$ be a quasicategory, $K$ a small simplicial set, and $p:K\\to\\mathcal C$ a coherent diagram. Let $I$ be a small weakly contractible quasicategory, meaning that $I\\to\\Delta^0$ is a weak homotopy equivalence. Assume $\\mathcal C$ admits colimits of all $I$-diagrams. Put $Q=\\mathcal C_{p/}$, the coherent cocone category $\\{p\\}\\times_{\\operatorname{Fun}(K,\\mathcal C),\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,\\operatorname{Fun}(K,\\mathcal C))\\times_{\\operatorname{ev}_1,\\operatorname{Fun}(K,\\mathcal C)}\\mathcal C$ of [def-cbc-enhanced-diagrams-cones], whose objects are cocones $(c,\\beta:p\\to\\Delta_Kc)$ with all higher compatibility simplices, and let $U:Q\\to\\mathcal C$ be the apex projection. Then $Q$ admits colimits of all $I$-diagrams. For every $F:I\\to Q$ and coherent cocone $t$ on $F$, $t$ is colimiting if and only if $U(t)$ is colimiting. The functor induced by $U$ from the space of colimiting cocones on $F$ to the space of colimiting cocones on $UF$ has contractible homotopy fiber over every colimiting cocone on $UF$; thus every specified colimiting apex cocone lifts up to a contractible space of choices, including the equivalence identifying its apex cocone with the specified one. Each space of colimiting cocones is the core of the full subcategory of colimiting objects in the relevant coherent cocone category. No compactness, accessibility or cardinal bound on $I$ or $K$ beyond smallness is assumed, and $K=\\varnothing$ is allowed.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "HTT Lemma 5.4.5.14, printed p.442; the pointwise/isofibration pullback argument of Lemma 5.4.5.13, pp.441-442, and pointwise colimits (Corollary 5.1.2.3). Agent-formulated extension from filtered to weakly contractible indexing quasicategories, including creation, detection and contractible lift spaces. Extracted from returned step 2. No Stacks tag states this coherent infinity-category result; HTT is not archived in literature/."
@@ -11,9 +11,100 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $M=\\operatorname{Fun}(K,\\mathcal C)$, $H=\\operatorname{Fun}(I,\\mathcal C)$, $Y=UF$, and $p_I:K\\to H$, $k\\mapsto\\Delta_Ip(k)$. The cone-calculus node makes $M,H,Q$ quasicategories. In degree $n$, an element of $\\operatorname{Fun}(I,Q)$ consists of an apex map $I\\times\\Delta^n\\to\\mathcal C$ and a map $K\\times I\\times\\Delta^n\\times\\Delta^1\\to\\mathcal C$ whose source is $p$ and whose target is that apex map. Reordering factors identifies this, with every simplex operator, with the coherent cocone category on $p_I$ in $H$. In particular $F$ is the transformation $\\alpha:p_I\\to\\Delta_KY$, equivalently $\\alpha:\\Delta_Ip\\to\\Delta_KY$ in $\\operatorname{Fun}(I,M)$. Applying groupoid localization to the weak homotopy equivalence $I\\to\\Delta^0$ gives a functor equivalence $M\\to\\operatorname{Fun}_{\\mathrm{eq}}(I,M)$. That subcategory is full, so the actual constant-transformation map\n$$c_{a,b}:\\operatorname{Map}_M(a,b)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(I,M)}(\\Delta_Ia,\\Delta_Ib)$$\nis an equivalence for all $a,b\\in M$. This uses weak contractibility, not filteredness or any colimit of the $K$-diagram.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent fixed-boundary expansion of Lemmas 5.4.5.13-14; groupoid-localization input as stated by the cited node."
+   }
+  },
+  {
+   "text": "Choose a colimiting apex cocone $\\lambda:Y\\to\\Delta_Ix$, which exists by the hypothesis on $\\mathcal C$. Compose $\\alpha$ with $\\Delta_K\\lambda$ in $\\operatorname{Fun}(I,M)$, retaining the composition homotopies. The equivalence $c_{p,\\Delta_Kx}$ of step 1 gives a transformation $\\beta:p\\to\\Delta_Kx$ and a path from $(\\Delta_K\\lambda)\\alpha$ to $\\Delta_I\\beta$ (a path in the opposite direction is inverted in the Kan mapping space). Put $q=(x,\\beta)\\in Q$. Apply the dual cone mapping-space formula in $H$ to its $K$-diagram $p_I$, using the degreewise identification of step 1. It identifies\n$$\\operatorname{Map}_{\\operatorname{Fun}(I,Q)}(F,\\Delta_Iq)\\simeq\\operatorname{hofib}_{\\Delta_I\\beta}\\bigl(\\operatorname{Map}_{H}(Y,\\Delta_Ix)\\xrightarrow{v\\mapsto(\\Delta_Kv)\\alpha}\\operatorname{Map}_{\\operatorname{Fun}(I,M)}(\\Delta_Ip,\\Delta_I\\Delta_Kx)\\bigr).$$\nThe pair consisting of $\\lambda$ and the chosen path is a point of this fiber, hence gives a coherent cocone $t_0$ on $F$ with apex $q$. Its image is equivalent to $\\lambda$ as an apex cocone: the equivalence on the displayed mapping spaces retains the projection to $\\operatorname{Map}_H(Y,\\Delta_Ix)$, up to its natural homotopy. Thus the path of legs, with identity on $x$, gives the identification of cocones. We require a lift with this identification, not a strict equality of chosen simplicial representatives.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-groupoid-localization",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent existence argument using the coherent comma fiber formula (compare Lemma 5.5.5.12) and the weakly contractible constant-diagram map."
+   }
+  },
+  {
+   "text": "Let $t:F\\to\\Delta_Iq$ be any cocone whose apex cocone $\\lambda=U(t):Y\\to\\Delta_Ix$ is colimiting, writing $q=(x,\\beta)$. Fix a target $z=(y,\\gamma:p\\to\\Delta_Ky)$ in $Q$. Set\n$$A=\\operatorname{Map}_{\\mathcal C}(x,y),\\quad B=\\operatorname{Map}_M(p,\\Delta_Ky),\\quad A'=\\operatorname{Map}_H(Y,\\Delta_Iy),\\quad B'=\\operatorname{Map}_{\\operatorname{Fun}(I,M)}(\\Delta_Ip,\\Delta_I\\Delta_Ky).$$\nThe dual cone formula in $\\mathcal C$ and, using step 1, in $H$ gives\n$$\\operatorname{Map}_Q(q,z)\\simeq\\operatorname{hofib}_{\\gamma}(A\\xrightarrow{u\\mapsto\\Delta_K(u)\\beta}B),$$\n$$\\operatorname{Map}_{\\operatorname{Fun}(I,Q)}(F,\\Delta_Iz)\\simeq\\operatorname{hofib}_{\\Delta_I\\gamma}(A'\\xrightarrow{v\\mapsto(\\Delta_Kv)\\alpha}B').$$\nThe map $a:A\\to A'$, $u\\mapsto(\\Delta_Iu)\\lambda$, is an equivalence by the colimit criterion for $\\lambda$. The map $c:B\\to B'$ is the equivalence from step 1. The compatibility homotopy of $t$ identifies $c(\\Delta_K(u)\\beta)$ with $(\\Delta_Ka(u))\\alpha$, coherently in $u$. The two points are $\\gamma$ and $c(\\gamma)$, so this is a homotopy-commuting comparison of the displayed pointed maps, not just an identification of their abstract fiber types.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-groupoid-localization",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent mapping-space calculation: dual coherent cone formula and its colimit criterion, compare Lemma 5.5.5.12."
+   }
+  },
+  {
+   "text": "Apply homotopy-pullback invariance to the comparison of step 3, with the point map $*\\to B$ at $\\gamma$ as the second leg. For completeness the specified homotopy can be handled without assuming a strictly commuting square: if $r:A\\to B$, $r':A'\\to B'$ are the two rows, use the path replacement $E_{r'}=A'\\times_{B',\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B')$. The homotopy gives a map $\\widetilde a:A\\to E_{r'}$ over $c\\circ r:A\\to B'$; it sends $u$ to $(a(u),\\theta_u)$, with $\\theta_u:r'a(u)\\to cr(u)$. Projection $E_{r'}\\to A'$ has the constant-path inclusion as inverse up to equivalence by the path-replacement node, so $\\widetilde a$ is an equivalence since $a$ is. Now the spans $(A\\xrightarrow r B\\leftarrow *)$ and $(E_{r'}\\to B'\\leftarrow *)$ compare strictly by $\\widetilde a,c,\\mathrm{id}_*$. The invariance node applies. The constant-path inclusion likewise compares the latter span with $(A'\\xrightarrow{r'} B'\\leftarrow *)$. Thus the induced map between the two fibers is an equivalence. Its path formula sends $(u,h:r(u)\\to\\gamma)$ to $(a(u),\\theta_u\\cdot c(h))$. This is composition with $t$, by the compatibility homotopy and coherent composition used in step 3. The cone criterion in $Q$ therefore proves $t$ colimiting. Applying this to $t_0$ proves existence for every $F$ and hence all $I$-colimits in $Q$.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-space-path-fibration-replacement",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent explicit strictification of the mapping-fiber comparison; Kerodon 032B and the path-space replacement. The only universal property used is the coherent cone criterion."
+   }
+  },
+  {
+   "text": "Conversely suppose $t$ is colimiting on $F$. It and the cocone $t_0$ of step 2 are initial objects of the coherent cocone quasicategory on $F$, since step 4 proved $t_0$ colimiting. The cone-calculus node says that the full subcategory of initial objects is a contractible Kan complex. Thus $t$ and $t_0$ are equivalent as cocones, with their legs. Applying $U$ gives an equivalence of apex cocones. The apex cocone of $t_0$ is colimiting, and so is that of $t$: in the cone mapping-space criterion the two comparison maps differ by composition with this equivalence, whose inverse and triangle homotopies give inverse homotopies on the testing mapping spaces. Together with step 4 this proves the asserted if-and-only-if for every cocone.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent reflection argument from uniqueness of initial objects and the coherent cone criterion."
+   }
+  },
+  {
+   "text": "Let $L_Q(F)$ and $L_{\\mathcal C}(Y)$ be the spaces of colimiting cocones, namely the cores of the full subcategories of initial objects in their coherent cocone categories. Both are nonempty by the hypothesis and step 4. The cone-calculus node makes both contractible Kan complexes. Step 5 ensures that $U$ restricts to a map $f:L_Q(F)\\to L_{\\mathcal C}(Y)$. This map is a weak homotopy equivalence: both source and target have one component and trivial based homotopy groups, so the induced maps on those invariants are isomorphisms. Apply the contractible-fiber criterion in a containing universe in which these Kan complexes are small. For every specified colimiting apex cocone $c$, $\\operatorname{hofib}_c(f)$ is contractible. By the definition of homotopy fiber its points are precisely a colimiting lifted cocone together with an equivalence of its image cocone to $c$, with every higher compatibility. This proves the specified lift-space clause. When $K=\\varnothing$, $M$ is terminal and $Q=\\mathcal C$, so the argument specializes to the identity. The indexing $I$ is nonempty because it is weakly contractible; no empty-$I$ assertion or extra colimit, accessibility or cardinal hypothesis was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-contractible-fiber-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent deduction from contractibility of initial-object spaces and Kerodon Remark 3.4.0.6 (0328)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-space-contractible-fiber-equivalence",
+  "lem-coef-space-path-fibration-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Agent-written foundation for proof paragraph 2, via compact cocones. Online checked against HTT Lemmas 5.4.5.13-14 and 5.5.5.12 and Kerodon 01PF, 032B, 0328; HTT not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +143,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-compact-cocones",
@@ -79,5 +170,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-weakly-contractible-cocone-colimits",
+  "worker": "stage1",
+  "summary": "Replaced the interrupted draft by a six-step fixed-boundary mapping-fiber proof using only existing DAG nodes. Groupoid localization gives full faithfulness of constant I-diagrams; degreewise interchange identifies Fun(I,Q) with the cocone category for k mapping to the constant I-diagram at p(k). The two explicit fiber formulas prove creation; initial-object uniqueness proves reflection; contractibility of both colimiting-cocone spaces and the homotopy-fiber criterion give all specified lift spaces. No new node or Mathlib leaf is needed. The statement is unchanged.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, via lem-coef-accessible-compact-cocones: the fixed-boundary cocone foundation extracted from its returned step 2. Steps 1-4 supply weakly contractible creation, step 5 detection, and step 6 the contractible space of lifts.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Definitions of coherent functor categories, fixed-boundary cocones and homotopy fibers; generic foundation not supplied by this unit."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Mapping-space fibers, colimit criterion, and contractibility of initial-object subcategories; generic coherent category calculus."
+   },
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Full faithfulness of constant I-diagrams for weakly contractible I, applied to Fun(K,C); generic localization tool."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Composition with its coherence and inverse homotopies in the functor and cocone quasicategories; generic coherence tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-7e5850607",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-7e5850607 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statement of every cited node: def-cbc-enhanced-diagrams-cones, def-coef-presentable-infinity-category, the cone-calculus, groupoid-localization, composition-spine, pullback-invariance, path-replacement and contractible-fiber nodes. I also read the citer lem-coef-accessible-compact-cocones and the ancestor in the blueprint (master and main-20261015). HTT and Kerodon are not in literature/, so the source is honestly agent-formulated with WANTED recorded; the HTT page numbers could not be checked. The statement is true: the slice projection creates weakly contractible colimits. I tested it on K empty (Q=C), I=Delta^0 (conservativity), the span I (coslice pushouts), and the discrete-pair counterexample, which shows weak contractibility is essential. Step 1: Fun(I,-) preserves the defining pullback, so Fun(I,Q) is strictly the cocone category of p_I. Groupoid localization with Delta^0 Kan plus fullness gives the equivalence c_{a,b}. Steps 2-3: the dual cone formulas match cone-calculus. I checked the square (Delta_K a(u))alpha ~ c(Delta_K(u)beta) via the strict interchange Delta_I Delta_K = Delta_K Delta_I and the path in t. Step 4: the strict square through E_{r'} is valid, and pullback invariance is applied twice. Identifying the fiber map with composition with t rests on naturality in cone-calculus; I accept this. Step 5: initial objects form a contractible Kan complex, so t ~ t0. Step 6: a map between contractible cores has contractible fibers. The four cbc nodes of sk-prop-sf-cbc are generic quasicategory tools, already reviewed and split; I accept these tool_uses. There are no new nodes. No duplicate: cofinal-coslice-calculus covers only kappa-filtered colimits, and coslice-colimit-formula covers one object under all colimits. Fixes (2): (1) B2: the statement now names Q=C_{p/} explicitly as the def-cbc cocone category with objects (c, beta: p -> Delta_K c), matching the citer's definition; this clarifies and does not change content. (2) Step 2: the path now runs from (Delta_K lambda)alpha to Delta_I beta, matching the def-cbc homotopy-fiber convention. No other changes.; 1 file(s) fixed by the reviewer"
  }
 }
