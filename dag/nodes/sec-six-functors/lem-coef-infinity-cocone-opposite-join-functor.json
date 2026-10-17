@@ -246,5 +246,31 @@
   "group": "Q73",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q73-ab4381a5f (reviewer sub-agent of L); spot-checked: Read the complete item, all seven steps, cited DAG statements, unit route, Kerodon 003N/016K source places, and delivery materials. Checked hypotheses, operator identities, join reversal, internal-functor isomorphism, restriction/evaluation naturality, cylinder/fat-cone factorization, empty and pure-block cases, duplicate candidates, and all recorded searches. No mathematical or route defect found; review.md written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8a19b46c6",
+  "group": "NS",
+  "result": "fix",
+  "note": "Added required source/blueprint docstrings to all helpers and expanded the theorem docstring to cover all seven proof steps; replacement compiles cleanly."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCoconeOppositeJoinFunctor",
+  "declaration": "SSet.Enhanced.opposite_join_functor",
+  "declarations": [
+   "SSet.Enhanced.IsRightJoinCylinderFormula",
+   "SSet.Enhanced.IsJoinOppositeFamily",
+   "SSet.Enhanced.IsInternalOppositeFormula",
+   "SSet.Enhanced.IsInternalOppositeNaturality",
+   "SSet.Enhanced.opposite_join_functor"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCoconeOppositeJoinFunctor.lean",
+  "statement": "theorem opposite_join_functor (K S E : SSet.{u}) [Quasicategory E] : ∃ e : ∀ K : SSet.{u}, (rightJoinCone K).op ≅ leftJoinCone K.op, IsJoinOppositeFamily e ∧ ∃ f : ∀ S E : SSet.{u}, ((ihom S).obj E).op ≅ (ihom S.op).obj E.op, IsInternalOppositeFormula f ∧ IsInternalOppositeNaturality f ∧ ∃ u : ∀ K : SSet.{u}, K ⊗ Δ[1] ⟶ rightJoinCone K, (∀ K : SSet.{u}, IsRightJoinCylinderFormula K (u K)) ∧ ∀ K : SSet.{u}, ∃ t : fatLeftJoinCone K.op ⟶ leftJoinCone K.op, pushout.inl (stdSimplex.isTerminalObj₀.from K.op) (coneCylinderEnd K.op 0) ≫ t = orderedJoinInl Δ[0] K.op ∧ pushout.inr (stdSimplex.isTerminalObj₀.from K.op) (coneCylinderEnd K.op 0) ≫ t = ((𝟙 K.op) ⊗ₘ (stdSimplex.opIso ⦋1⦌).inv) ≫ (Functor.Monoidal.μIso SSet.opFunctor K Δ[1]).hom ≫ SSet.opFunctor.map (u K) ≫ (e K).hom",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper predicates prescribe the canonical ordered-block, parameter-reversal, naturality, and fat-cone factorization clauses; the theorem proof is postponed."
  }
 }
