@@ -4,9 +4,123 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
   "place": "Trace-transport setup specialized to the constant coefficient object; hidden construction in the rationality proof's Step 4"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B_n=(A_n)_Y$ and $K_n=B_n[0]$. Apply [lem-weil-constant-coefficient-objects-constructible](1) with $E=\\mathbf Q_\\ell$ (choose an algebraic closure containing this field): $K_n$ is bounded constructible. The coefficient unit is K-flat directly from [def-pc-kflat-complex]: for any complex $C$, multiplication $C\\otimes_{B_n}B_n\\to C$ has inverse $x\\mapsto x\\otimes1$, commutes with differentials, and preserves acyclicity. These mutually inverse maps are defined on the presheaf tensors and hence on the sheaf tensor of [def-pur-sheaf-tensor-product]. In particular, for a module sheaf $M[0]$, $K_n\\otimes^L_{B_n}M=M[0]$, so its cohomology is zero outside degree zero. This is Tor amplitude $[0,0]$ in [def-weil-finite-tor-amplitude], and therefore $K_n\\in D^b_{ctf}(Y,A_n)$, with one bound independent of $n$.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, unit multiplication; sites-cohomology.tex Tag 06YN, definition-K-flat. The finite-constructibility input is Bhatt–Scholze §6.8, as stated in the cited coefficient-object node."
+   }
+  },
+  {
+   "text": "Let $q_{n,m}:B_n\\to B_m$ be coefficient reduction, $n\\geq m\\geq1$, and take $t_{n,m}=q_{n,m}$ in degree zero, with the target read by restriction of scalars. These maps have $t_{n,n}=1$ and $t_{n,j}=t_{m,j}t_{n,m}$ because quotient homomorphisms do. By [lem-pur-derived-change-of-rings](2), the K-flat unit of Step 1 itself computes $K_n\\otimes^L_{B_n}B_m$. Its adjoint normalization map in [def-trf-adic-system] is\n$$\\nu_{n,m}:B_n\\otimes_{B_n}B_m\\longrightarrow B_m,\\qquad a\\otimes b\\longmapsto q_{n,m}(a)b.$$\nThe inverse is $b\\mapsto1\\otimes b$: balancing gives $a\\otimes b=1\\otimes q_{n,m}(a)b$. Thus this is the canonical isomorphism induced by the chosen transition, not merely an abstract identification of the two objects. For $n\\geq m\\geq j$, both normalization composites send $(a\\otimes b)\\otimes c$ to $q_{n,j}(a)q_{m,j}(b)c$, proving the required coherence. No flatness of $A_m$ over $A_n$ is asserted or used.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-trf-adic-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and 06YY (lemma-derived-base-change); unit change-of-rings and its adjoint are written out."
+   }
+  },
+  {
+   "text": "Write $g=g_Y$. At finite level let $d_{g,n}:Lg^*B_n\\xrightarrow{\\sim}B_n$ be the canonical coefficient-unit identification. By [lem-weil-isomorphism-derived-pullback] it is $c_n\\circ\\lambda_{B_n}$, with $c_n$ exactly the constant-section structure map in [def-weil-constant-weil-structure](1). Clause (3) of [lem-weil-proetale-isomorphism-inverse-image] gives\n$$q_{n,m}c_n=c_m g^{-1}(q_{n,m}).$$\n(The clause applies to every coefficient homomorphism, not just adjacent levels.) The comparisons $\\lambda$ are natural, so this is also the derived transition square for $d_{g,n}$. By [lem-weil-proetale-constant-sheaf-stalk], the canonical identification of a constant stalk with $A_n$ sends $a$ to the germ of the constant section $a$. The defining adjunct for $c_n$ preserves that section. Hence $d_{g,n}$ sends $a$ to $a$ between the source and target constant stalks. This compares stalks at the appropriate pulled-back points; it does not assert that $g$ fixes the geometric point. Together with Step 2 this gives the geometric Weil maps of a normalized system.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-constant-weil-structure",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-proetale-constant-sheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph: canonical constant Weil structure, explicitly constructed in def-weil-constant-weil-structure clauses (1)–(3); stalk and coefficient naturality supplied by the cited nodes."
+   }
+  },
+  {
+   "text": "Let $\\Phi$ be the model Frobenius. By [prop-trf-frobenius-factorization] and [def-trf-scheme-frobenius], if $H=F_Y^a$ is absolute $q$-power Frobenius, then $\\Phi=g\\circ H$: the arithmetic Galois map in the factorization is inverse to $g$. Put $P=LH^*$. The canonical comparison of [prop-trf-scheme-galois-comparison], compatible with this factorization, is\n$$L\\Phi^*\\xrightarrow{c}P Lg^*\\xrightarrow{\\tau_{Lg^*(-)}}Lg^*.$$\nHere $\\tau:P\\to\\mathrm{id}$ is precisely the trivialization specified by [lem-pur-frobenius-trivialization-pullback] with exponent $a$. That statement describes it as the adjoint of restriction along the relative-Frobenius isomorphisms of site objects. Restriction along each such isomorphism takes the constant section $b$ to $b$, so its inverse and its adjoint also preserve $b$. Thus at the coefficient unit $\\tau$ is the canonical constant-section identification. The constant-ring composition equation of [lem-pur-proetale-constant-ring-composition] now gives\n$$d_{g,n}\\circ\\kappa_{B_n}=d_{H,n}\\circ P(d_{g,n})\\circ c_{B_n}=d_{\\Phi,n}.$$\nIn the first equality use naturality of $\\tau$ at $d_{g,n}$ and its just-computed unit value. The derived maps here are the ordinary constant-coefficient maps in degree zero: [prop-weil-pbc-proetale-constant-exact] identifies module pullback with exact inverse image for every scheme map. All hypotheses hold: $Y$ is in characteristic $p$, $a\\geq1$, and $A_n$ is finite and killed by $\\ell^n$ prime to $p$.",
+   "uses": [
+    "prop-trf-frobenius-factorization",
+    "def-trf-scheme-frobenius",
+    "prop-trf-scheme-galois-comparison",
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-pur-proetale-constant-ring-composition",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale, with the relative-Frobenius trivialization stated in lem-pur-frobenius-trivialization-pullback; canonical comparison of main-20261015 prop-trf-scheme-galois-comparison."
+   }
+  },
+  {
+   "text": "Take the model Weil map to be $d_{\\Phi,n}$. It is an isomorphism by [prop-weil-pbc-proetale-constant-ring-map], and Step 4 identifies it with $d_{g,n}\\kappa_{B_n}$. Thus it is the canonical model map, with the same underlying $K_n$, in [sk-d-weil]. Its transition square commutes: on a constant local coefficient $a\\in A_n$ both $q_{n,m}d_{\\Phi,n}$ and $d_{\\Phi,m}L\\Phi^*(q_{n,m})$ send its pulled-back germ to $q_{n,m}(a)$. Constant sections locally generate the constant sheaves, so equality there proves equality of the sheaf maps; [prop-weil-pbc-proetale-constant-exact] computes these derived pullbacks termwise. The same calculation shows that its map on constant stalks is $a\\mapsto a$, using the identifications of [lem-weil-proetale-constant-sheaf-stalk]. For the derived normalizations of Step 2, either path around the Frobenius square sends a local tensor $a\\otimes b$ to $q_{n,m}(a)b$. Hence the model and geometric maps both commute with the canonical reductions as well as with the transitions. This proves every finite-level Weil-compatibility requirement of [def-trf-adic-system].",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "sk-d-weil",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-trf-adic-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism, constant-section maps; the transition and normalization equalities are the explicit coefficient calculations in this step."
+   }
+  },
+  {
+   "text": "Put $R=\\widehat{\\mathbf Z}_{\\ell,Y}=\\varprojlim_nB_n$. By [lem-weil-constant-coefficient-objects-constructible](2), $R[0]$ is derived complete and its canonical reductions are $B_n[0]$. In the reduction-tower construction [def-weil-integral-reduction-tower] one may take the K-flat unit complex $P=R[0]$ itself: multiplication identifies $R\\otimes_RB_n$ with $B_n$, takes $x\\mapsto x\\otimes1$ to the limit projection $\\pi_n$, and takes $1\\otimes q_{n+1,n}$ to coefficient reduction. Thus this reduction tower is exactly the tower of Step 2, including all transition maps. Derived completeness in [def-weil-derived-complete] says that $R[0]$ is an integral realization of this tower in the Roos-triangle sense required by [def-trf-adic-system]. The integral canonical map of [def-weil-constant-weil-structure](2)–(3) has components $c_n g^{-1}(\\pi_n)$; by [lem-weil-isomorphism-derived-pullback-reduction-tower], its canonical quotient and transition identifications are precisely those of Step 3. Hence it is the integral lift of that compatible geometric datum. Finally [def-weil-constant-weil-structure](4) defines $E_Y$ and its canonical Weil map as the rationalizations of this $R[0]$ and its map. The constructed integral model therefore rationalizes to the prescribed constant $E$-Weil sheaf. This rationalizes the completed integral realization, not an individual torsion ring $A_n$.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-integral-reduction-tower",
+    "def-weil-derived-complete",
+    "def-trf-adic-system",
+    "def-weil-constant-weil-structure",
+    "lem-weil-isomorphism-derived-pullback-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2 (completed coefficient ring and completeness), Definition 6.8.1 and Lemma 6.8.2(1)–(2), pp. 24, 58–59; explicit unit reduction-tower calculation and the cited pullback/reduction interface."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-derived-change-of-rings",
+  "def-trf-adic-system",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-constant-weil-structure",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "prop-trf-frobenius-factorization",
+  "def-trf-scheme-frobenius",
+  "prop-trf-scheme-galois-comparison",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-pur-proetale-constant-ring-composition",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "sk-d-weil",
+  "def-weil-integral-reduction-tower",
+  "def-weil-derived-complete",
+  "lem-weil-isomorphism-derived-pullback-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+  "place": "Constant coefficient datum required by sk-thm-trace-transport; constructed from the existing coefficient-unit, constant-pullback and absolute-Frobenius interfaces, with the tensor and coefficient calculations written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +184,45 @@
    "results": "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, localCohomology, CondensedMod.ofSheafProfinite, BDeRhamPlus, LightCondMod.ofSheafLightProfinite, CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functor",
    "date": "2026-10-17",
    "verdict": "no match: generic constant sheaves, coefficient maps, condensed modules or classical analytic L-functions do not state this scheme/Weil assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant adic coefficient unit is a normalized tower of finite constant sheaves with coefficient reduction and canonical Frobenius fixing constant sections",
+   "results": "BDeRham; BDeRhamPlus; AdicCompletion.instOne; PreTilt; AdicCompletion.val_one; AdicCompletion.one_apply; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; instCommRingBDeRhamPlus",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic constant sheaves, adic completion or Witt-vector isocrystals, not this compatible pro-etale Weil datum"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|constant.*Frobenius|normalized.*tower",
+   "results": "Mathlib/FieldTheory/NormalizedTrace.lean; Mathlib/FieldTheory/NormalizedTrace.lean; Mathlib/FieldTheory/NormalizedTrace.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic constant sheaves, adic completion or Witt-vector isocrystals, not this compatible pro-etale Weil datum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The constant l adic sheaf is the compatible normalized system of constant sheaves modulo powers of l with canonical Frobenius structure",
+   "results": "CategoryTheory.constantSheaf; CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.constantSheafΓAdj; LightCondensed.discrete; CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.IsConstant.casesOn; CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic constant sheaves, adic completion or Witt-vector isocrystals, not this compatible pro-etale Weil datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant rank one sheaf over a finite field admits the integral lattice given by the coefficient rings modulo l power and Frobenius acts as identity",
+   "results": "WittVector.StandardOneDimIsocrystal; WittVector.isocrystal_classification; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.instModuleFractionRingStandardOneDimIsocrystal; WittVector.instAddCommGroupStandardOneDimIsocrystal; WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.Isocrystal; IsArithFrobAt.arithFrobAt",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic constant sheaves, adic completion or Witt-vector isocrystals, not this compatible pro-etale Weil datum"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, CategoryTheory.Functor",
+   "results": "CategoryTheory.constantSheaf; CategoryTheory.Sheaf.mem_essImage_of_isConstant; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.constantSheafAdj; CategoryTheory.constantCommuteCompose; CategoryTheory.equivCommuteConstant",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic constant sheaves, adic completion or Witt-vector isocrystals, not this compatible pro-etale Weil datum"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-rationality",
@@ -102,5 +251,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-constant-weil-datum",
+  "worker": "stage1",
+  "summary": "Constructed the constant coefficient unit tower directly, checked K-flatness and the canonical adjoint normalization maps by multiplication, computed both Frobenius maps on constant germs and their comparison through absolute Frobenius, and identified the integral realization and its rationalized canonical Weil structure. Statement unchanged; no new nodes. Every non-elementary input is an existing cited statement.",
+  "blueprint": "Realizes the constant-coefficient datum implicit in sk-thm-rationality proof first sentence (trace-to-determinant application), in the repaired compact-support route of its current split. Finite levels and transitions are steps 1–2, the compatible Weil maps and their scheme/Galois identification are steps 3–5, and the integral/rational stage is step 6. The item is not the key statement of its unit; its realized record is left untouched.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Supplies finite constructibility and the completed coefficient unit with its canonical reductions; this is a coefficient foundation, not a rationality argument."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes finite scalar reduction on the K-flat unit; the rationality unit has no derived change-of-rings theorem."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Identifies geometric pullback of the coefficient unit with ordinary inverse image, for the canonical constant Weil map."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Supplies exact inverse image and naturality of coefficient identifications along the geometric automorphism."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Identifies constant germs canonically with their coefficient module; no rationality-unit statement supplies this site foundation."
+   },
+   {
+    "node": "prop-trf-frobenius-factorization",
+    "why": "Supplies the scheme/Galois/absolute Frobenius factorization used to identify the two constant Weil maps."
+   },
+   {
+    "node": "prop-trf-scheme-galois-comparison",
+    "why": "Supplies the canonical finite-coefficient scheme/Galois comparison; no trace identity is used."
+   },
+   {
+    "node": "lem-pur-frobenius-trivialization-pullback",
+    "why": "Specifies the relative-Frobenius construction of the absolute-Frobenius trivialization so its value on constants can be computed."
+   },
+   {
+    "node": "lem-pur-proetale-constant-ring-composition",
+    "why": "Supplies composition coherence of the canonical constant-ring maps, needed to identify d_g composed with kappa with d_Phi."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Computes derived finite-constant-coefficient pullback by exact inverse image for the possibly noninvertible model Frobenius."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Supplies the canonical invertible pullback map on a finite constant ring for arbitrary scheme maps."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-reduction-tower",
+    "why": "Supplies canonical quotient and transition compatibility for geometric pullback of the integral unit, linking the tower with the specified rational constant Weil structure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "prop-trf-frobenius-factorization",
+  "prop-trf-scheme-galois-comparison",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-pur-proetale-constant-ring-composition",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-isomorphism-derived-pullback-reduction-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q68-37ca17b12",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-37ca17b12 (reviewer sub-agent of L); spot-checked: Reviewed item, all six proof steps, 24 cited nodes, literature locations, unit/chapter route, edge cases, route lock, and batch-5 assumptions. No mathematical, citation, duplication, cycle, or hidden-long-step fault found. Wrote review.md."
  }
 }

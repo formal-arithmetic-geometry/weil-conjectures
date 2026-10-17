@@ -58,7 +58,7 @@
   {
    "tool": "grep",
    "query": "tensor|quotient",
-   "results": "Returned 25 hits; top results read: Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/OfQuotient.lean, Mathlib/CategoryTheory/Localization/OfQuotient.lean, Mathlib/CategoryTheory/Localization/OfQuotient.lean",
+   "results": "Returned 25 hits; top results read: Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Quotient.lean, Mathlib/CategoryTheory/Localization/Quotient.lean, Mathlib/CategoryTheory/Localization/Quotient.lean",
    "date": "2026-10-17",
    "verdict": "no match: general categorical localization construction, not exact-sections principal-quotient coherence",
    "sub": "CategoryTheory/Localization"
@@ -66,11 +66,93 @@
  ],
  "chapter": "sec-poincare-duality",
  "unit": "sk-thm-sf-compatibility",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Exactness of $\\Gamma$ on abelian sheaves applies to the underlying abelian sheaves of module kernels, images and cokernels. Thus $H^j(\\Gamma K)=\\Gamma(H^jK)$, naturally in every complex $K$: write cohomology as the cokernel of the map from boundaries into cycles and use preservation of kernels and cokernels. Consequently sections carry quasi-isomorphisms to quasi-isomorphisms. Restriction of the scalar action changes none of these abelian groups. The localization definition therefore gives the functors $G,G'$ in the statement, with their action on a chain map given by termwise sections.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-derived-category; elementary kernel/cokernel calculation using the assumed exactness of sections."
+   }
+  },
+  {
+   "text": "For a flat-term model $P$, tensor the assumed short exact coefficient sequence with $P^j$; this stays exact by the definition of flatness. The identification $P^j\\otimes_{\\mathcal O}\\mathcal O'=P^j/tP^j$ is given locally by $x\\otimes\\bar b\\mapsto bx\\bmod tP^j$, with inverse $\\bar x\\mapsto x\\otimes1$. A different lift of $\\bar b$ changes the product by a multiple of $t$, and the inverse kills $tx$ because $tx\\otimes1=x\\otimes t=0$. These balanced maps commute with restrictions and descend to sheafifications. Exact sections now give $\\theta_P:C/tC\\cong\\Gamma(P/tP)$, sending the class of a global section $x$ to its quotient section. This is $A$-linear and commutes with differentials. For $h:P\\to P'$, put $u=\\Gamma(h)$ and denote quotient maps by bars. Both $\\Gamma(\\bar h)\\theta_P(\\bar x)$ and $\\theta_{P'}\\bar u(\\bar x)$ are the quotient section of $h(x)$. Since every class has such a representative, $\\Gamma(\\bar h)\\theta_P=\\theta_{P'}\\bar u$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER, definition-flat (3); elementary quotient tensor maps and exactness of the sections functor assumed in the statement."
+   }
+  },
+  {
+   "text": "Specialize the mixed-tensor left-derived functor and its natural counit to $R\\to A$ and $N=A[0]$. Identify it with $L=-\\otimes_R^{\\mathbf L}A$ through its specified derived-functor identification. The ordinary tensor identification $C\\otimes_R A\\cong C/tC$ sends $x\\otimes\\bar a$ to $ax\\bmod tC$, with inverse $\\bar x\\mapsto x\\otimes1$; the same balancing calculation as in step 2 proves well-definedness. For any chain map $u:C\\to C'$, these formulas commute with $u$. Naturality of the counit therefore gives, in $D(A)$,\n$$Q_A(\\bar u)\\circ c_C=c_{C'}\\circ L(Q_Ru).$$\nThis assertion applies to arbitrary $C$; it does not require $\\Gamma(P)$ to be K-flat.",
+   "uses": [
+    "lem-pc-mixed-tensor-pointwise-left-derived",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, lemma-derived-base-change and its preceding construction; the natural counit supplied by lem-pc-mixed-tensor-pointwise-left-derived."
+   }
+  },
+  {
+   "text": "Write $e_P:T(Q_{\\mathcal O}P)\\xrightarrow{\\sim}Q_{\\mathcal O'}(P/tP)$ for the canonical K-flat computation of derived change of rings. These are the model identifications stipulated in the statement. Since $T$ is the left derived functor of ordinary change of rings, $e_P$ is its counit at a K-flat complex; in particular its naturality says\n$$e_{P'}\\circ T(Q_{\\mathcal O}h)=Q_{\\mathcal O'}(\\bar h)\\circ e_P.$$\nUnder $G'(e_P)$, the displayed $\\alpha_P$ is $Q_A(\\theta_P)c_C$. Apply $G'$ to this naturality equation and substitute step 2 and then step 3:\n$$Q_A(\\Gamma(\\bar h))Q_A(\\theta_P)c_C\n=Q_A(\\theta_{P'})Q_A(\\bar u)c_C\n=Q_A(\\theta_{P'})c_{C'}L(Q_Ru).$$\nBy step 1, $L(Q_Ru)=LG(h)$. Conjugating by $G'(e_P),G'(e_{P'})$ gives $G'T(h)\\alpha_P=\\alpha_{P'}LG(h)$, the first assertion, for every chain map $h$ between flat-term K-flat complexes.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change: left-derived change of rings computed on K-flat flat-term models, with its natural model identifications."
+   }
+  },
+  {
+   "text": "For the supplied resolutions $p:P\\to M$ and $p':P'\\to M$, take the finite category with three objects $0,1,2$ and only nonidentity arrows $0\\to2$, $1\\to2$. Its diagram of complexes is $P\\xrightarrow p M\\xleftarrow{p'}P'$. Apply the strict diagram replacement theorem on the given small ringed site. It supplies flat-term K-flat complexes $S_0,S_1,S_2$, arrows $a:S_0\\to S_2$, $b:S_1\\to S_2$, and quasi-isomorphisms $r:S_0\\to P$, $r':S_1\\to P'$, $q:S_2\\to M$, satisfying the actual chain equalities\n$$qa=pr,\\qquad qb=p'r'.$$\nOn every cohomology object, $H^j(q)H^j(a)=H^j(p)H^j(r)$; all three maps other than $H^j(a)$ are invertible, so $H^j(a)=H^j(q)^{-1}H^j(p)H^j(r)$ is invertible. Likewise $b$ is a quasi-isomorphism. All five sources $S_0,S_1,S_2,P,P'$ satisfy the model hypotheses of step 4.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 077J, lemma-resolution-by-direct-sums-extensions-by-zero, and Tag 06YS, lemma-K-flat-resolution; strict finite-diagram version supplied by lem-weil-pbc-diagram-kflat-replacements."
+   }
+  },
+  {
+   "text": "For clarity set $F=LG$, $H=G'T$, and $\\beta(p)=H(p)\\alpha_PF(p)^{-1}$. Step 1 and the localization definition make $F$ and $H$ functors on $D(\\mathcal O)$; therefore they carry each quasi-isomorphism of step 5 to an isomorphism. Apply step 4 to $r$ and to $a$:\n$$\\begin{aligned}\n\\beta(p)&=H(pr)\\alpha_{S_0}F(pr)^{-1}\\\\\n&=H(qa)\\alpha_{S_0}F(qa)^{-1}\\\\\n&=H(q)\\alpha_{S_2}F(q)^{-1}=\\beta(q).\n\\end{aligned}$$\nIndeed the first equality inserts $H(r)\\alpha_{S_0}=\\alpha_PF(r)$ and cancels $F(r)$; the third inserts $H(a)\\alpha_{S_0}=\\alpha_{S_2}F(a)$ and cancels $F(a)$. The same two cancellations with $r',b$ give $\\beta(p')=\\beta(q)$. Thus $\\beta(p)=\\beta(p')$. Every operation took place in $D(A)$ after the natural model identifications of step 4, so this is precisely the specified resolution independence. No inverse of an $\\alpha$ was taken.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Elementary composition and cancellation in the localized categories, using steps 1, 4 and 5; this completes the agent extraction of the coherence argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-mixed-tensor-pointwise-left-derived",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-diagram-kflat-replacements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent extraction of the exact-sections quotient coherence: natural derived counits (06YY and more-algebra 06Y6) and the existing strict finite-cospan K-flat replacement theorem."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pod-point-sections-derived-reduction",
@@ -87,5 +169,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-derived-reduction-sheaf-resolution-independence",
+  "worker": "stage1",
+  "summary": "Prove quotient comparison naturality from its explicit section formula and the universal mixed-tensor counit. Compute sheaf derived extension by its natural K-flat counit. Replace the entire finite cospan of two supplied resolutions by one strict K-flat diagram and write out the two cancellation identities proving independence. No new nodes; no statement changes; no claim of invertibility of the comparisons.",
+  "blueprint": "Serves Steps 2 and 4 of prop-cohomological-finiteness (integral-to-finite point comparison), specifically the sheaf cospan coherence referred to in step 8 of lem-pod-point-sections-derived-reduction. The current six-functor compatibility unit clause (7) retains coefficient coherence; no route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-mixed-tensor-pointwise-left-derived",
+    "why": "Step 3 takes the natural counit for ordinary-module derived tensor, with arbitrary section complex; this generic homological-algebra tool is not a six-functor compatibility assertion."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Step 3 identifies the mixed-tensor derived functor at A[0] with the L specified in the statement; ordinary-module coefficient extension is a generic tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Step 4 uses same-site derived change of rings and its canonical K-flat computations; it supplies the generic model interface underlying coefficient coherence."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Step 5 uses its strict small-diagram replacement clause for the finite cospan of resolutions. The coefficient-coherence unit does not construct resolutions of diagram complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-mixed-tensor-pointwise-left-derived",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-diagram-kflat-replacements"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-14f0a475b",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-14f0a475b (reviewer sub-agent of L); spot-checked: Read the complete item, report, DAG route, cited node statements, and Stacks sources. All six steps are mathematically coherent with correct hypotheses, coefficient categories, quotient map, naturality, strict cospan comparison, and resolution independence. Edge cases and duplicate candidates were checked; no new nodes or repairs are needed."
  }
 }

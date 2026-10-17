@@ -15,9 +15,108 @@
   "lem-coef-coherent-weight-limit-recognition",
   "lem-coef-infinity-join-cone-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set up the actual evaluation. By [lem-coef-simplicial-right-fibration-presentation], $T$ is left Quillen and every slice object is cofibrant. Thus $W=T(1_K)$ is projectively cofibrant. Since $F$ is objectwise Kan, the simplicial model axiom applied to $\\varnothing\\to W$ and $F\\to *$ makes $L=\\underline{\\operatorname{Nat}}(W,F)$ Kan. Hence $L$ is an object of $\\mathbf{Kan}_{\\mathcal V}$, not merely a simplicial set of vertices. Define $m_F$ by transposing $F$ along $\\mathfrak C[K^{\\mathrm{op}}]\\cong\\mathfrak C[K]^{\\mathrm{op}}$ into $\\mathcal S_{\\mathcal V}$ as in [def-coef-infinity-category-of-spaces]. Define $e_k:W(k)\\times L\\to F(k)$ by $e_k(w,\\ell)=\\ell_k(w)$ in every simplicial degree. Enriched naturality says, for $a\\in\\mathfrak C[K](k,l)$,\n$$e_k(w\\circ a,\\ell)=F(a)e_l(w,\\ell).$$\nTogether with identities and associativity, this is precisely the enriched functor on the reversed ordered cone, with new first object $L$, used to define the weighted join cone in [lem-coef-coherent-weight-limit-recognition]. No limit-recognition conclusion is used here.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-coherent-weight-limit-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 2.2.1 and 2.2.3 (projective presentation); weighted evaluation is defined directly; agent-written unit/evaluation calculation, not a verbatim theorem of HTT. No Stacks tag states this comparison."
+   }
+  },
+  {
+   "text": "Compute the unit on each simplex using the ordinary adjunction of [lem-coef-cone-presheaf-adjunction]. For $\\sigma:\\Delta^r\\to K$, let $i_\\sigma=T(\\sigma):T_\\sigma\\to T(1_K)=W$. Under the adjunction, the unit $u:K\\to U_KW$ corresponds to $1_W$. Restricting its adjoint family to $\\sigma$ therefore gives $1_Wi_\\sigma=i_\\sigma$. This proves that $u(\\sigma)$ is the actual natural map $i_\\sigma$, with no fibrant replacement of $W$. In the pushout defining $T_\\sigma$, the functor inducing $i_\\sigma$ is $\\mathfrak C[\\sigma\\star1]$ on the cone and the identity on $\\mathfrak C[K]$. The common face agrees, so the functor exists by the pushout property. It fixes the cone vertex and sends a subset-labelled cone arrow to its image in the same ordered cone, by [lem-coef-pinched-cube-latching]. Consequently both direct cone arrows and their entire factorization simplices have the claimed images.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.1, cone pushout and ordinary adjunction; agent-written unit/evaluation calculation, not a verbatim theorem of HTT. No Stacks tag states this comparison."
+   }
+  },
+  {
+   "text": "Keep track of the enrichment, rather than treating $T\\dashv U_K$ as a simplicial adjunction. Let $\\pi_r:Q^r\\to\\Delta^r$ be the maximum-subset map of [lem-coef-pinched-cube-latching]. Collapsing the whole base of the cone of $\\sigma$ to one object induces a map $\\rho_{\\sigma,k}:T_\\sigma(k)\\to Q^r$, natural in $k$; the defining pushout maps to $\\mathfrak C[J^r]$ because the initial $\\Delta^r$ has become constant. The canonical enrichment of $U_K$ specified in [lem-coef-unstraightening-homotopy-descent] is induced by these maps $Q^r\\to\\Delta^r$. Thus for $\\ell:W\\times\\Delta^n\\to F$, the map $c_F(\\ell):K\\times\\Delta^n\\to U_KF$ takes an $r$-simplex $(\\sigma,\\theta)$, where $\\theta:\\Delta^r\\to\\Delta^n$, to the natural map with components\n$$t\\longmapsto\\ell_k\\bigl(i_{\\sigma,k}(t),\\theta\\pi_r\\rho_{\\sigma,k}(t)\\bigr).$$\nIndeed the first coordinate is the unit family of Step 2, while the second is exactly the parameter map used by the specified enrichment before applying $U_K(\\ell)$. Only the enrichment clause of the cited descent node is used; its Dwyer--Kan assertion for bifibrant diagrams is not applied to $W$. This is the precise simplexwise interpretation of the parameterized map $T_\\sigma\\times\\Delta^n\\to W\\times\\Delta^n\\to F$ in the statement.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-unstraightening-homotopy-descent",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, maximum-subset map and the parameter map in unstraightening; agent-written unit/evaluation calculation, not a verbatim theorem of HTT. No Stacks tag states this comparison."
+   }
+  },
+  {
+   "text": "Check all operators explicitly. For $\\alpha:[s]\\to[r]$, the induced $T_\\alpha:T_{\\sigma\\alpha}\\to T_\\sigma$ satisfies\n$$i_\\sigma T_\\alpha=i_{\\sigma\\alpha},\\qquad\n\\rho_\\sigma T_\\alpha=Q(\\alpha)\\rho_{\\sigma\\alpha},\\qquad\n\\pi_r Q(\\alpha)=\\Delta(\\alpha)\\pi_s.$$\nThe first two identities are the two composites of the same maps on the defining pushout; the last is $\\max\\alpha(I)=\\alpha(\\max I)$, also for noninjective $\\alpha$. Substituting them into Step 3 gives exactly its formula for $(\\sigma\\alpha,\\theta\\alpha)$. A parameter operator $\\beta:[m]\\to[n]$ replaces $\\ell$ by $\\ell(1\\times\\beta)$, so both sides replace $\\theta$ by $\\beta\\theta$. For an enriched natural map $b:F\\to G$, both sides postcompose the displayed value with $b_k$. These equalities prove faces, degeneracies and naturality in $F$ for every degree, rather than just on the vertices of $L$. They also show directly that the formula defines the simplicial map $c_F$.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-cone-presheaf-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 2.2.1-2.2.2, functoriality of cone pushouts and maximum-subset maps; agent-written unit/evaluation calculation, not a verbatim theorem of HTT. No Stacks tag states this comparison."
+   }
+  },
+  {
+   "text": "Compare vertex evaluation with the specified fibre comparison. Over a vertex $k$, the unit $u(k)$ is the natural map from the representable $T_k$ to $W$ determined by the direct arrow $e_k^0:k\\to z$ (Step 2). The parameter construction in Step 3 on the constant base simplex is the canonical map $j_{F(k)}:F(k)\\to(U_KF)_k$ induced by $Q^r\\to\\Delta^r$. Therefore the entire vertex evaluation map $L\\to(U_KF)_k$ of $c_F$ is\n$$j_{F(k)}\\circ\\bigl(\\ell\\longmapsto\\ell_k(e_k^0)\\bigr).$$\nThe fibre comparison is a weak equivalence by [lem-coef-simplicial-right-fibration-presentation]. Thus evaluation is $e_k$ on the direct cone edge under that comparison; an inverse to $j_{F(k)}$ is neither asserted to be a strict simplicial inverse nor used to define $c_F$. For $K=\\Delta^0$, this specializes to $W=\\Delta^0$, $L=F(k)$ and $c_F=j_{F(k)}$, which also checks the direction of the comparison.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, Remark 2.2.2.11 and the maximum-subset fibre comparison; agent-written unit/evaluation calculation, not a verbatim theorem of HTT. No Stacks tag states this comparison."
+   }
+  },
+  {
+   "text": "Compare the coherences on a base simplex, not only its vertex values. In $\\mathfrak C[\\Delta^r\\star\\Delta^0](i,z)$ a simplex is a chain $I_0\\subseteq\\cdots\\subseteq I_d$ of subsets containing $i,z$. Its image in $W(\\sigma(i))$ under Step 2 is that same chain mapped by $\\sigma\\star1$. A face deletes an $I_j$, a degeneracy repeats it, and composing a base arrow with a cone arrow takes union of their subsets, by [lem-coef-pinched-cube-latching]. Applying $e_{\\sigma(i)}$ to these images gives the weighted cone's homotopies. By the displayed enriched naturality equation in Step 1, union with a base arrow gives exactly the $F$-action on the value at its other endpoint. Step 3 applies $\\ell$ to exactly these same images, with the same parameter coordinate. Thus the direct value, each homotopy and every iterated union-composition coherence agree. For general $K$, this calculation descends through the simplex-colimit relations defining $\\mathfrak C[K]$: Step 4 proves compatibility for every simplex map, so two representatives related by those relations have the same image. No claim that direct edges alone determine a coherent cone is needed.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.1 and ordered-subset rigidification: direct calculation on every chain; agent-written unit/evaluation calculation, not a verbatim theorem of HTT. No Stacks tag states this comparison."
+   }
+  },
+  {
+   "text": "Use [lem-coef-unstraightening-simplex-transport] with this objectwise Kan $F$. Its simplex formula identifies the vertex restrictions, subset-generator homotopies and union-composition coherences of $T_\\sigma\\to F$ with the actual fibre-transport functor $m_F$, naturally in all extra simplicial parameters. Applying that assertion to the family in Step 3 reads precisely the data computed in Steps 5-6 as the section-evaluation cone precomposed with $c_F$. The same data, read as the enriched functor on the collage with vertex $L$, are the weighted join cone of Step 1. Hence the identification is of the full coherent cones over $m_F$ with the same apex; it is not inferred from equality of the vertex maps. Finally use the fixed-boundary, fixed-vertex comparison of [lem-coef-infinity-join-cone-calculus] to express this join-cone identification in the coherent-transformation convention. That comparison preserves the apex and boundary diagram. Step 4 and the additional-parameter clause of the transport node show that the resulting cone identification commutes with every base and parameter operator and with every enriched natural transformation of $F$.",
+   "uses": [
+    "lem-coef-unstraightening-simplex-transport",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 2.2.1-2.2.3, simplex transport; the full cone comparison is the agent-written calculation above; agent-written unit/evaluation calculation, not a verbatim theorem of HTT. No Stacks tag states this comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-right-fibration-presentation",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-coherent-weight-limit-recognition",
+  "lem-coef-cone-presheaf-adjunction",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-unstraightening-homotopy-descent",
+  "lem-coef-unstraightening-simplex-transport",
+  "lem-coef-infinity-join-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Auxiliary unit/generator calculation for the displayed inverse-limit mapping argument, extracted in lem-coef-right-fibration-section-limit Step 11; HTT Sections 2.2.1-2.2.3 supply the constructions, not this assertion verbatim."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +152,59 @@
    "results": "8 hits; recorded top names: CategoryTheory.Adjunction.unit, CategoryTheory.evaluationAdjunctionRight_unit_app, CategoryTheory.Adjunction.functorialityUnit'_app_hom, CategoryTheory.Adjunction.functorialityUnit', CategoryTheory.Over.toOverSectionsAdj_unit_app, CategoryTheory.evaluationAdjunctionLeft_unit_app_app, CategoryTheory.Limits.isLimitConeOfAdj_lift, CategoryTheory.Limits.isLimitConeOfAdj",
    "date": "2026-10-17",
    "verdict": "no match: ordinary enriched functor categories, model-category interfaces or ordinary Kan extension results; none states the specified quasicategory/coherent-nerve comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "unstraighten|coherent.*cone|weighted.*eval",
+   "results": "{\"t\": \"2026-10-17T15:01:02Z\", \"tool\": \"grep\", \"query\": \"unstraighten|coherent.*cone|weighted.*eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\"], \"digest\": \"a8f8d60c3d6563ad\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary functor-category ends or unrelated cone formulas; read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:330-390, which has no unstraightening or coherent cone unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Enriched.FunctorCategory",
+   "results": "{\"t\": \"2026-10-17T15:01:03Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.unit, CategoryTheory.Enriched.FunctorCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Enriched.FunctorCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reported an unknown namespace identifier; corrected with the subsequent coneFunctorEnrichedHom query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cone adjunction unit identifies section evaluation of unstraightening with enriched weighted evaluation including simplicial parameters",
+   "results": "{\"t\": \"2026-10-17T15:01:05Z\", \"tool\": \"leanfinder\", \"query\": \"The cone adjunction unit identifies section evaluation of unstraightening with enriched weighted evaluation including simplicial parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_π_app\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_pt\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom\", \"CategoryTheory.Adjunction.functorialityUnit'\", \"CategoryTheory.Adjunction.conesIsoComponentHom\", \"CategoryTheory.Adjunction.conesIsoComponentInv\", \"SSet.hoFunctor.unitHomEquiv_eq\", \"CategoryTheory.Adjunction.functorialityUnit'_app_hom\"], \"digest\": \"92bc2a8f6a731d70\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary functor-category ends or unrelated cone formulas; read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:330-390, which has no unstraightening or coherent cone unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of straightening and unstraightening preserves the homotopy coherent cone evaluation with every higher simplex",
+   "results": "{\"t\": \"2026-10-17T15:01:28Z\", \"tool\": \"leansearch\", \"query\": \"The unit of straightening and unstraightening preserves the homotopy coherent cone evaluation with every higher simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation\", \"CategoryTheory.Limits.coneOfConeUncurry_pt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"HomologicalComplex.isLimitOfEval\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom_homOfCocone\", \"CategoryTheory.WithInitial.coconeEquiv_counitIso_hom_app_hom\"], \"digest\": \"2d3453b051e1a280\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary functor-category ends or unrelated cone formulas; read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:330-390, which has no unstraightening or coherent cone unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coneFunctorEnrichedHom\"",
+   "results": "{\"t\": \"2026-10-17T15:01:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"coneFunctorEnrichedHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_pt\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.lift\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_π_app\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.fac\"], \"digest\": \"c17c891fc32b1b29\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary functor-category ends or unrelated cone formulas; read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:330-390, which has no unstraightening or coherent cone unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched natural transformations from the coherent cone weight give sections by the adjunction unit and preserve evaluation",
+   "results": "{\"t\": \"2026-10-17T15:01:29Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched natural transformations from the coherent cone weight give sections by the adjunction unit and preserve evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_pt\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_π_app\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.lift\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.fac\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHomπ\"], \"digest\": \"0e4f1ae444a1b61a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary functor-category ends or unrelated cone formulas; read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:330-390, which has no unstraightening or coherent cone unit."
+  },
+  {
+   "tool": "grep",
+   "query": "coneFunctorEnrichedHom|isLimitConeFunctorEnrichedHom",
+   "results": "{\"t\": \"2026-10-17T15:03:06Z\", \"tool\": \"grep\", \"query\": \"coneFunctorEnrichedHom|isLimitConeFunctorEnrichedHom\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\"], \"digest\": \"d2158d97fb5f6ebf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary functor-category ends or unrelated cone formulas; read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:330-390, which has no unstraightening or coherent cone unit."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-right-fibration-section-limit",
@@ -86,5 +234,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cone-unit-weighted-evaluation",
+  "worker": "stage1",
+  "summary": "Expanded the ordinary unit into its simplex family, retained the canonical Q-to-simplex parameter map in the simplicial enrichment, and compared every subset-chain coherence. Reused the existing transport lemma for its full parameter-compatible fibre comparison. No statement change, new nodes, Lean work or compilation.",
+  "blueprint": "Ancestor proof paragraph 2, displayed inverse-limit mapping-space calculation: the auxiliary section-evaluation/weighted-cone identification extracted from lem-coef-right-fibration-section-limit Step 11. All seven steps retain this route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q67-0f63bee80",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-0f63bee80 (reviewer sub-agent of L); spot-checked: Mathematics and route check pass. The node metadata incorrectly lists created.item=lem-coef-right-fibration-section-limit and group=Q117; corrected JSON is in fixes/dag/nodes/sec-six-functors/lem-coef-cone-unit-weighted-evaluation.json with only those fields changed to the Q67 item and group.; 1 file(s) fixed by the reviewer"
  }
 }

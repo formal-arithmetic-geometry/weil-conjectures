@@ -1,11 +1,124 @@
 {
  "id": "lem-geo-cartier-exponent-independence",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first verify the unit for the quotient identification, rather than infer it from naturality alone. Put $Z=\\mathbf Z_{\\mathcal C}$ and $L_q=-\\otimes_Z^{\\mathbf L}R_q$. For $q=m,n$, take a flat-term K-flat resolution $P\\to F[0]$ using [lem-pc-kflat-resolution]. Locally on the site, $0\\to Z\\xrightarrow{q}Z\\to R_q\\to0$ is the usual exact integer sequence. Flatness of each $P^j$ [def-pc-flat-sheaf-modules] gives a degreewise short exact sequence $0\\to P\\xrightarrow{q}P\\to P\\otimes_ZR_q\\to0$, since locally tensoring with $R_q$ is quotienting by $q$. Its triangle [lem-weil-pbc-complex-ses-triangle] and cohomology sequence [lem-sf-derived-homology-long-exact] give\n$$F\\xrightarrow{q}F\\xrightarrow{H^0(j)}H^0(P\\otimes_ZR_q)\\longrightarrow H^1(P)=0.$$\nThe K-flat computation [lem-pur-derived-change-of-rings] and normalized unit formula [lem-pur-sheaf-ring-derived-coefficient-adjunction] identify $j:P\\to P\\otimes_ZR_q$, $x\\mapsto x\\otimes1$, with the unit. Therefore the cokernel identification $H^0(L_qF)=F/qF$ sends that unit to the quotient $\\pi_q$. This is precisely the quotient identification used in the statement: it is the single-cohomology identification induced by this cokernel, and equality of the resulting maps $F[0]\\to(F/qF)[0]$ follows from [lem-weil-pbc-derived-single-fully-faithful].",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 07A6 (lemma-adjoint); derived.tex Tag 0152 (lemma-derived-canonical-delta-functor). Agent three-arrow cohomology calculation of the quotient unit."
+   }
+  },
+  {
+   "text": "Write $Z=\\mathbf Z_{\\mathcal C}$, $L_q=-\\otimes_Z^{\\mathbf L}R_q$ and $E=-\\otimes_{R_m}^{\\mathbf L}R_n$. Denote their units by $\\eta^q$ and $\\epsilon$. For $K=F,B_0$ write $\\alpha_{q,K}:L_qK\\xrightarrow{\\sim}T_{q,K}$ for the identifications of [lem-sfb-divisible-extension-derived-reduction], where $T_{q,F}=\\bar F_q[0]$ and $T_{q,B_0}=H_q[1]$. To apply that lemma, use the split extension $0\\to B_0\\to B_0\\oplus F\\to F\\to0$; its extra extension hypothesis is thereby satisfied. By Step 1, $(\\operatorname{Res}\\alpha_{q,F})\\eta^q_F$ is $\\pi_q:F\\to F/qF$; the stated torsion normalization gives $(\\operatorname{Res}\\alpha_{q,B_0})\\eta^q_{B_0}=\\kappa_q$. Set $c_K=\\alpha_{n,K}\\,a_K\\,E(\\alpha_{m,K}^{-1}):E(T_{m,K})\\to T_{n,K}$. By the composite-unit identity of [lem-sfb-successive-derived-quotient-normalization] and naturality of the units of [lem-pur-sheaf-ring-derived-coefficient-adjunction],\n$$(\\operatorname{Res}c_K)(\\operatorname{Res}\\epsilon_{T_{m,K}})(\\operatorname{Res}\\alpha_{m,K})\\eta^m_K=(\\operatorname{Res}\\alpha_{n,K})\\eta^n_K.$$\nAll terms in this equality are restricted to $D(Z)$; before that restriction, $c_K$ is a morphism in $D(R_n)$ and $\\epsilon$ is a morphism in $D(R_m)$.",
+   "uses": [
+    "lem-sfb-divisible-extension-derived-reduction",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D and 07A6, applied to Z → R_m → R_n; normalized one-exponent identifications from the cited existing node. Agent notation and composite-unit calculation."
+   }
+  },
+  {
+   "text": "The one-term complexes $\\bar F_m[0]$ and $H_m[0]$ are bounded above with flat terms by hypothesis, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]. The K-flat computation of [lem-pur-derived-change-of-rings] therefore identifies $E(\\bar F_m[0])$ with $(\\bar F_m\\otimes_{R_m}R_n)[0]$, and $E(H_m[1])$ with $(H_m\\otimes_{R_m}R_n)[1]$. The unit and transpose formulas of [lem-pur-sheaf-ring-derived-coefficient-adjunction] apply to these actual flat-term complexes: the unit is $x\\mapsto x\\otimes1$, and the transpose of a map $g$ is $x\\otimes b\\mapsto b\\,g(x)$. These formulas also hold after shifting: termwise scalar extension commutes with shift, and both shifted differentials have the same minus sign.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat (the cited node has a stale source tag 06YS); Tag 06YY, lemma-derived-base-change; Tag 07A6, lemma-adjoint with the cited normalized formulas."
+   }
+  },
+  {
+   "text": "Let $\\rho:\\bar F_m\\to\\bar F_n$ send $f\\bmod mF$ to $f\\bmod nF$. It is defined since $mF\\subset nF$, and $\\rho\\pi_m=\\pi_n$. Put $v_F=(\\operatorname{Res}_{m,n}c_F)\\epsilon_{\\bar F_m}$ in $D(R_m)$. Step 2 says that the maps $v_F\\alpha_{m,F}$ and $\\rho\\alpha_{m,F}$ from $L_mF$ to $\\operatorname{Res}_{m,n}\\bar F_n$ have the same adjunct $\\pi_n$ in $D(Z)$. The first adjunction ($Z\\to R_m$) of [lem-pur-sheaf-ring-derived-coefficient-adjunction] is a bijection on these Hom sets, so $v_F\\alpha_{m,F}=\\rho\\alpha_{m,F}$, hence $v_F=\\rho$ since $\\alpha_{m,F}$ is invertible. The second adjunction ($R_m\\to R_n$), computed as in Step 3, now gives\n$$c_F(\\bar f\\otimes\\bar b)=b f\\bmod nF.$$\nThus this is the map induced by $a_F$, rather than merely an abstract isomorphism of its source and target.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; agent application of the two normalized adjunction bijections and composite-unit equality of Step 2."
+   }
+  },
+  {
+   "text": "Put $d=m/n$ and define $\\beta:H_m\\to H_n$ by $\\beta(h)=dh$. This is well defined because $n d h=m h=0$, and is $R_m$-linear after restriction of $H_n$. Consider the two short exact sequences $S_q:0\\to H_q\\to B_0\\xrightarrow{q}B_0\\to0$. The triple $(\\beta,d\\operatorname{id}_{B_0},\\operatorname{id}_{B_0})$ is a morphism $S_m\\to S_n$: the inclusion square says $d h=\\beta(h)$ and the multiplication square says $n d=m$. The naturality clause of [lem-weil-pbc-complex-ses-triangle], applied to these sequences in degree zero, gives the precise boundary equation\n$$\\beta[1]\\,\\kappa_m=\\kappa_n$$\nin $D(Z)$. Both boundaries are the canonical short-exact-sequence boundaries used in the normalization in the item, so the same cone convention is used on both rows.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, naturality for the displayed morphism of short exact sequences. Agent explicit comparison of the two moduli."
+   }
+  },
+  {
+   "text": "Put $v_B=(\\operatorname{Res}_{m,n}c_{B_0})\\epsilon_{H_m[1]}:H_m[1]\\to\\operatorname{Res}_{m,n}H_n[1]$ in $D(R_m)$. By Step 2, the adjunct of $v_B\\alpha_{m,B_0}$ under $L_m\\dashv\\operatorname{Res}$ is $\\kappa_n$. By Step 5, the adjunct of $\\beta[1]\\alpha_{m,B_0}$ is also $\\beta[1]\\kappa_m=\\kappa_n$. The first adjunction bijection of [lem-pur-sheaf-ring-derived-coefficient-adjunction] gives $v_B\\alpha_{m,B_0}=\\beta[1]\\alpha_{m,B_0}$, and invertibility of $\\alpha_{m,B_0}$ gives $v_B=\\beta[1]$. We have cancelled an isomorphism after using an adjunction bijection, not cancelled $\\kappa_m$. Transposing under the second adjunction and using Step 3 shows that $c_{B_0}$ is the shift of\n$$H_m\\otimes_{R_m}R_n\\longrightarrow H_n,\\qquad h\\otimes\\bar b\\longmapsto b d h.$$\nThis identifies the actual transitivity comparison and its sign. The map on $h\\otimes1$ is $dh$, or $h^{m/n}$ in multiplicative notation.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; agent two-adjunction proof using the boundary equation of Step 5, not a claim about a two-term resolution over R_m."
+   }
+  },
+  {
+   "text": "For any $R_m$-module sheaf $M$, the maps $M\\otimes_{R_m}R_n\\to M/nM$, $x\\otimes\\bar b\\mapsto bx\\bmod nM$, and $M/nM\\to M\\otimes_{R_m}R_n$, $x\\bmod nM\\mapsto x\\otimes1$, are inverse: balancing gives $nx\\otimes1=x\\otimes\\bar n=0$, and $(bx)\\otimes1=x\\otimes\\bar b$. Scalars of $R_n$ lift locally to integers, so these formulas define morphisms on the presheaf tensor and descend through the sheafification of [def-pur-sheaf-tensor-product]. Quotients here are sheaf cokernels, so representatives and lifts are local. With $M=F/mF$, its quotient by $nM$ is $F/nF$ because $mF\\subset nF$. This proves directly that the formula in Step 4 is an isomorphism, with inverse $f\\bmod nF\\mapsto(f\\bmod mF)\\otimes1$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; elementary local balanced-tensor calculation and sheafification."
+   }
+  },
+  {
+   "text": "The map $\\beta$ of Step 5 is locally surjective: for $t\\in H_n$, surjectivity of $m:B_0\\to B_0$ gives locally $z$ with $mz=t$; then $h=nz$ satisfies $dh=t$ and $mh=n t=0$. Its kernel is exactly $nH_m$: one inclusion follows from $d(ny)=my=0$ for $y\\in H_m$; conversely if $h\\in H_m$ and $dh=0$, surjectivity of $n$ gives locally $y$ with $ny=h$, and $my=dh=0$, so $y\\in H_m$. Therefore $H_m/nH_m\\xrightarrow{\\beta}H_n$ is an isomorphism of sheaves. Step 7 identifies its source with $H_m\\otimes_{R_m}R_n$, so this is precisely the map in Step 6. This argument uses no points of the site and no global surjectivity on sections. When $m=n$ it is the identity; when $n=1$ both quotients and both target sheaves vanish. The same formulas cover zero sheaves.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Elementary local lifting and kernel calculation for the explicitly given epimorphisms n and m; no derived tensor over Z is used here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-divisible-extension-derived-reduction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent consequence of Tag 0D6D (lemma-derived-pullback-composition), Tag 07A6 (lemma-adjoint), and derived.tex Tag 0152 (lemma-derived-canonical-delta-functor). These supply the general tools, not a verbatim exponent-independence theorem. This auxiliary calculation supplies the coefficient-compatibility check added in parent DAG node sk-lem-geo-cartier proof step 5, extending the single-exponent construction in blueprint unit proof paragraph 4."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-geo-cartier",
@@ -80,15 +193,92 @@
    "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Differentials/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; directory Algebra/Category/ModuleCat",
    "date": "2026-10-17",
    "verdict": "no match: hits do not state this comparison for derived categories of sheaf modules; ordinary-module or underived sheaf results require further arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived coefficient comparison modulo m and n with n dividing m on a small site",
+   "results": "PreTilt.pow_dvd_untiltAux_sub_untiltAux; PowerSeries.IsWeierstrassDivisorAt.divCoeff; modularCyclotomicCharacter.pow_dvd_aux_pow_sub_aux_pow; PadicInt.toZModPow_ofIntSeq_of_pow_dvd_sub; other PreTilt hits; no sheaf-derived comparison",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct ZMod quotient derived",
+   "results": "0 hits; application type mismatch for ZMod",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "two.term|ZMod|quotient.*tensor",
+   "results": "0 hits in Algebra/Category/ModuleCat (the directory argument in searches.jsonl).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor reduction modulo n after modulo m n divides m",
+   "results": "TensorProduct.tensorQuotientEquiv_apply_mk_tmul; TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk; Int.ModEq.of_dvd; TensorProduct.tensorQuotientEquiv; TensorProduct.quotientTensorQuotientEquiv; Nat.ModEq.of_dvd; no derived sheaf result",
+   "date": "2026-10-17",
+   "verdict": "generalization: ordinary tensor quotient equivalences only; no sheaf-derived result"
   }
  ],
  "blueprint": {
   "from": {
    "node": "sk-lem-geo-cartier",
-   "place": "proof paragraph 4, reduction of the extension boundary modulo ell^r and subsequent coefficient extension; makes precise comparison with another killing exponent used by the existing item statement and proof step 5",
+   "place": "Auxiliary comparison for parent DAG node sk-lem-geo-cartier proof step 5: compare the modulus n with a larger killing modulus m in its coefficient-compatibility check. Blueprint unit proof paragraph 4 constructs the class for one exponent and then extends coefficients; it does not itself state exponent independence.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-geo-cartier-exponent-independence",
+  "worker": "stage1",
+  "summary": "Repair E7, E5/D3 and C3/C4: identify the source as an agent homological consequence rather than a blueprint exponent theorem; replace the invalid Z-versus-R_m tensor identification by the explicit SES boundary square and two adjunction bijections; prove the ordinary quotient and torsion isomorphisms locally. Statement and all hypotheses unchanged. Fold the former elementary two-term child into the argument and deliver no new nodes. Restore current-base created metadata.",
+  "blueprint": "Auxiliary comparison for parent DAG node sk-lem-geo-cartier proof step 5: compare the modulus n with a larger killing modulus m in its coefficient-compatibility check. Blueprint unit proof paragraph 4 constructs the class for one exponent and then extends coefficients; it does not itself state exponent independence.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Step 2 uses its explicit composite-unit identity for generic scalar extension. It supplies machinery for coefficient compatibility, not a replacement of the Cartier construction."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Steps 1–6 use the two derived extension/restriction adjunction bijections and their unit/transpose formulas; the Cartier unit does not prove this machinery."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Step 3 applies the arbitrary-site K-flat criterion to the given flat sheaves in one degree; the scheme-only Kunneth version would not cover this site."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Step 3 computes scalar extension on the explicitly K-flat one-term complexes; generic derived-category machinery, not an alternative Cartier route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 1 uses a generic flat-term K-flat input resolution to verify the quotient-unit normalization, without taking an unasserted claim from a dependency proof."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Step 1 takes the three displayed cohomology arrows of a derived SES triangle; this is a generic cohomological tool, not a different route for constructing the Cartier class."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q57-4a37a1ddc",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-4a37a1ddc (reviewer sub-agent of L); spot-checked: Read the complete mathematics, all 15 cited statements, relevant local sources, and Cartier route. The eight-step proof is sound; small cases and dependency checks pass. Corrected three stale step references in the full JSON under fixes/. No statements, hypotheses, dependencies, or targets changed. Detailed checks and accepted tool uses are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

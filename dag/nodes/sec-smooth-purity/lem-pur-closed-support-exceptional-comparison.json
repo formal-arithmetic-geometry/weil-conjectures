@@ -24,9 +24,74 @@
   "lem-pur-support-localization-triangle",
   "thm-sf-ambient-adjoint-class"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the closed–open pair $(i,j)$, the cited support-localization result gives the right adjunction $i_*\\dashv Ri^!_0$ on bounded-below derived categories and its canonical counit. Thus, for every bounded-below etale-origin $T$, its adjunction bijection is the stated natural map $a_T:\\operatorname{Hom}(T,B_0)\\xrightarrow{\\sim}\\operatorname{Hom}(i_*T,K)$, and the support counit is $\\epsilon_0=a_{B_0}(1_{B_0})$. The quasi-compactness hypothesis needed there is exactly the hypothesis on $j$ in the item.",
+   "uses": [
+    "lem-pur-support-localization-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-localization-triangle.md",
+    "place": "Proof, second paragraph: the supported-kernel adjunction and its derived bounded-below form"
+   }
+  },
+  {
+   "text": "Use $c=(\\mathrm{id}_Z,i)$. By [lem-weil-pbc-closed-immersion-proper], $i$ is proper, hence separated and finite type, so this is a compactification in [def-weil-compactifications-refinements]. By [lem-kun-dimension-finite-type], choose an integer $d\\geq0$ bounding $\\dim Z$ (also for empty $Z$); this meets the dimension hypothesis of [thm-sf-ambient-adjoint-class]. By [def-compact-support-direct-image-detailed], $P_c=Ri_*\\mathrm{id}_!$. Extension by zero along the identity is the identity, and $i_*$ is exact by [lem-pur-support-localization-triangle], so $P_c=i_*$ as the termwise induced derived functor. Clause (2) of [thm-sf-ambient-adjoint-class], with its source object $T$ bounded below of etale origin and its target object $K\\in D^+(X_{\\mathrm{proet}},A)$, supplies a natural bijection $\\operatorname{Hom}(i_*T,K)\\cong\\operatorname{Hom}(T,\\nu_Z^*i_c^\\times R\\nu_{X,*}K)$. Its inverse is exactly $e_T$. The same clause gives bounded-below typing for $B$; the statement places both representing objects in the etale-origin subcategory, allowing $\\epsilon=e_B(1_B)$.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-compactifications-refinements",
+    "lem-kun-dimension-finite-type",
+    "def-compact-support-direct-image-detailed",
+    "lem-pur-support-localization-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Proof, first paragraph: the bounded-below etale-origin Hom bijection for the compactification adjoint"
+   }
+  },
+  {
+   "text": "Restrict to the full subcategory of bounded-below etale-origin objects of $D(Z_{\\mathrm{proet}},A)$ and the contravariant Hom functor $T\\mapsto\\operatorname{Hom}(i_*T,K)$. Steps 1 and 2 give two natural representations of this functor by $B_0$ and $B$. Apply [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] to the opposite of this full subcategory and the natural bijections $e_T^{-1}a_T$. Equivalently, Yoneda (Categories, Tag 001P) gives the unique morphism $\\phi_K:B_0\\to B$ satisfying $e_T(\\phi_K\\circ f)=a_T(f)$ for every $T$ and $f:T\\to B_0$. Applying the same argument to the inverse natural transformation gives $\\psi:B\\to B_0$; naturality at $T=B_0$ and $T=B$ shows $\\psi\\circ\\phi_K=1_{B_0}$ and $\\phi_K\\circ\\psi=1_B$, so $\\phi_K$ is an isomorphism. This uses the explicitly assumed etale-origin hypotheses on both representing objects.",
+   "uses": [
+    "lem-pur-support-localization-triangle",
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P, lemma-yoneda; uniqueness of a morphism representing a natural Hom transformation"
+   }
+  },
+  {
+   "text": "Evaluate the defining relation at $T=B_0$ and $f=1_{B_0}$. By Step 1 its right-hand side is $a_{B_0}(1_{B_0})=\\epsilon_0$. Naturality of the relative-adjunction bijection in Step 2 identifies the left-hand side with $e_{B_0}(\\phi_K)=e_B(1_B)\\circ i_*\\phi_K=\\epsilon\\circ i_*\\phi_K$. Hence $\\epsilon\\circ i_*\\phi_K=\\epsilon_0$, as required.",
+   "uses": [
+    "lem-pur-support-localization-triangle",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Proof, first paragraph: naturality of the relative adjunction and its counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-support-localization-triangle",
+  "thm-sf-ambient-adjoint-class",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-compactifications-refinements",
+  "lem-kun-dimension-finite-type",
+  "def-compact-support-direct-image-detailed",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+  "place": "Agent-written comparison of the two cited adjunctions, following the agent-written blueprint and Stacks Tag 001P; no independent human-authored source for this complete comparison is claimed."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -72,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-gysin-structure",
@@ -84,10 +149,34 @@
  "blueprint": {
   "from": {
    "node": "lem-pur-gysin-structure",
-   "place": "First paragraph: the first localization term is described as built from def-weil-exceptional-inverse-image; the comparison between the independently defined support value and the transported exceptional value in returned proof step 7.",
+   "place": "First paragraph: after the support value is computed, compare the independently defined support value with the transported exceptional value using the two Hom adjunctions.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-closed-support-exceptional-comparison",
+  "worker": "stage1",
+  "summary": "Audited the imported comparison obligation against the closed-support localization and relative exceptional-adjoint statements. The four steps identify the support Hom bijection, specialize the relative exceptional adjunction to the identity compactification of the closed immersion, apply Yoneda to the two natural representations on the bounded-below etale-origin class, and derive the counit equation. No new DAG nodes were needed; the item’s bounded-below etale-origin assumptions are used exactly where representability and inverse construction require them.",
+  "blueprint": "Realizes the first paragraph of lem-pur-gysin-structure.proof.md: after the support value is computed, compare it with the transported exceptional value using the support adjunction, thm-sf-ambient-adjoint-class, Stacks Tag 001P, and the closed-immersion exactness input Tag 09BM.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "The comparison step needs the relative bounded-below etale-origin exceptional adjunction for the compactification c=(id_Z,i), which is supplied by the six-functors existence unit and has no replacement in sk-prop-a1-kummer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-400c90718",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-400c90718 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited source passages in full. Repaired specialization citations and dimension-bound check, added the existing co-Yoneda citation, and corrected agent-written proof provenance. Statement unchanged; no new nodes or cycles. Detailed checks are in review.md; corrected JSON is under fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
  }
 }
