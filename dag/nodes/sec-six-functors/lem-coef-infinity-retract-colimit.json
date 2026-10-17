@@ -8,7 +8,8 @@
   "place": "HTT Corollary 4.4.5.7 (a weak retraction extends coherently), Proposition 4.4.5.12, Corollaries 4.4.5.14–4.4.5.16 and Remark 4.4.5.18, printed pp. 305–308. A retraction is a colimit of a countable walking-idempotent diagram; full embeddings preserving those colimits preserve its splitting. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces"
  ],
  "proof": [
   {
@@ -263,5 +264,24 @@
   "group": "Q117",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-c76ce857b (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus the full statements of every cited node: def-cbc-enhanced-diagrams-cones, lem-coef-infinity-full-essential-image, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-mapping-composition and lem-cbc-simplicial-homotopy-equivalence-weak. The item statement is unchanged and true, and it fits parent lem-coef-compact-model-pr-duality step 6: λ is uncountable, so every countable simplicial set is λ-small. Step 1 is elementary: Idem has exactly one nondegenerate simplex per degree, because e∘e=e never produces an identity. Step 2 substitutes u=i(c), v=x with the correct variance into both new nodes. Step 3 restricts and includes the coherent equivalence and its 2-simplex witnesses, using the full-subcategory clause of the definition node; it relies on the lemma's statement, not its proof. Step 4 applies the two item hypotheses. Step 5 uses the dual mapping-space criterion, associativity and units, and simplicial homotopy inverses being weak equivalences. Step 6 uses that the initial objects form a contractible Kan complex, then projects to the apex. proof_deps equals the union of uses, and the elementary flags are correct. lem-coef-weak-retraction-coherent-extension: R is a category (r e=r, e s=s), and Ret is the image of the 2-simplex with long edge r s=1_Y, which I checked is Δ²/Δ^{0,2}. The statement is HTT Cor. 4.4.5.7 via the inner-anodyne Prop. 4.4.5.6. lem-coef-strong-retraction-idem-colimit: the transformation with component r is natural since 1_Y∘r=r∘e, and its nerve gives an edge ending exactly at Δ_I F(Y). Ordinary test: q with q e=q factors uniquely as (q s) r. The ∞-version is HTT's result that every Idem+-diagram is a colimit diagram, since the slice over Y is Idem. Neither node is elementary; both are statement-only, self-contained and singly escaped, carry logged searches and correct blueprint from/via fields, and are strictly smaller than the item. Searching the DAG for idempotent/retract/Idem/HTT 4.4.5 found no duplicate, and I see no cycle. I accept both tool_uses (cone calculus and simplicial-homotopy-weak from sk-prop-sf-cbc): they are generic black boxes that replace no unit step. No target, coefficient category or base-change morphism is touched, and no SGA source is used. No fixes. Limitation: HTT is not archived and network access is blocked for reviewers, so the exact HTT label of the Idem+-colimit proposition (cited as 4.4.5.12) was not checked against the page; its mathematics was verified independently."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityRetractColimit",
+  "declaration": "SSet.Enhanced.fullyFaithful_countableColimits_retract_closed",
+  "file": "lean/Sheaf/CategoryTheory/InfinityRetractColimit.lean",
+  "statement": "theorem fullyFaithful_countableColimits_retract_closed {C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (i : C ⟶ D) (hfullyFaithful : IsFullyFaithful i) (hcolimits : ∀ (K : SSet.{u}), Countable (Σ n : ℕ, K.nonDegenerate n) → ∀ (F : K ⟶ C), ∃ t : (coconeCategory F) _⦋0⦌, IsColimiting F t) (hpreserves : ∀ (K : SSet.{u}), Countable (Σ n : ℕ, K.nonDegenerate n) → ∀ (F : K ⟶ C) (t : (coconeCategory F) _⦋0⦌), IsColimiting F t → IsColimiting (F ≫ i) (CategoryTheory.Spaces.mappedCocone i F t)) (c : C _⦋0⦌) (x : D _⦋0⦌) (hretract : ∃ t : D _⦋2⦌, D.δ 1 t = D.σ 0 x ∧ D.δ 1 (D.δ 2 t) = x ∧ D.δ 0 (D.δ 2 t) = i.app _ c) : ∃ (c' : C _⦋0⦌) (e : D _⦋1⦌), D.δ 1 e = i.app _ c' ∧ D.δ 0 e = x ∧ IsEquivalenceEdge D e",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded enhanced quasicategory notions and the existing canonical Spaces.mappedCocone from def-coef-infinity-category-of-spaces. Second reading added that landed helper owner to stmt_deps, imported all four currently stated proof dependencies, and expanded the docstring to all six DAG proof steps. The mathematical statement and Lean signature are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e905fc07f",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Every clause of the Lean statement matches node lem-coef-infinity-retract-colimit: quasicategories in one universe u; IsFullyFaithful via mapping-space weak equivalences; countability as Countable (Σ n, K.nonDegenerate n), empty shape included; colimit existence and preservation through the existing Spaces.mappedCocone; the retract as a 2-simplex with long edge σ0 x, arrows a: x→i(c), b: i(c)→x; conclusion an IsEquivalenceEdge from i(c') to x. No extra hypotheses, no smaller-universe restriction, one sorry theorem, no definitions, source and blueprint docstrings present, lean.statement byte-identical to the file. The node changes only lean and adds the landed owner def-coef-infinity-category-of-spaces to stmt_deps (allowed, no cycle). Report has the Worker report and Second reading by Q05 sections. nt_compile.py --json on the local side overlay: exit 0, no errors or warnings printed. Only remark: some HTT numbers in the report text are replaced by 'the project server'; the Lean docstrings are correct."
  }
 }

@@ -266,5 +266,23 @@
   "group": "Q119",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-20114f472 (reviewer sub-agent of L); spot-checked: The proof is correct and I read every step against the full statements of all 10 cited nodes and the parent citer, lem-coef-left-fibration-right-anodyne-base-change. Checks: Step 4 gives rho(a)=rho(hg)=(bg,af), and the n=1 boundary lift yields H with H_0=a, H_1=hg, qH=bg.pr and H(f x 1)=af.pr. Step 5 uses Lambda^1_1={1}; the pushout-product lemma applies with i={1}->Delta^1 and k=g, and the coordinate swap is conjugation by isomorphisms. The glued map gives c=H~_0 with cg=a and qc=b. The Step 2 retract equations pd=1 and dv=j hold. No cycle: the dependency closure has 17 nodes and contains neither the item nor its parent. All uses are in the unit sk-prop-sf-biduality-general; no tool_use is needed. Small cases agree with the statement: identities, empty sets, {1}->Delta^1 versus {0}->Delta^1 (the latter is itself a right fibration with no section), and {2} in Lambda^2_2 in Delta^2. Limitation: I could not open Cisinski Cor. 4.1.10 because network access is blocked here. The statement is the standard cancellation for final monomorphisms, and the delivered proof needs no source. Long-step check: Step 2 (2242 chars) hides a standalone standard lemma. With Step 1 it proves that right anodyne maps are exactly the maps with the left lifting property against right fibrations. Inline it checks the small-object hypotheses (degreewise cocompleteness, finite presentability of horns, coproducts as cell maps) and the retract argument. Mathlib states the all-horn and inner-horn analogues as separate lemmas (AnodyneExtensions/Basic.lean:111-114, Inner/Basic.lean:89-93). Searches with rg over dag/nodes and blueprint_refs found no existing node for it. FIX: added the statement-only unsplit node lem-coef-right-anodyne-lifting-characterization (created.item = this item; blueprint.from = prop-coef-integral-exceptional-adjoint; same_as = []). Its Mathlib searches are only the two greps actually run; its source place is HTT 2.0.0.3/A.1.2 or Cisinski 4.1, and must be confirmed online. In the item, old Steps 1-2 are replaced by Step 1 citing the new node, old Steps 3-6 are renumbered 2-5, and proof_deps is recomputed. The statement is unchanged.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightAnodyneMonoCancellation",
+  "declaration": "SSet.rightAnodyneExtensions_mono_cancellation",
+  "file": "lean/Sheaf/CategoryTheory/RightAnodyneMonoCancellation.lean",
+  "statement": "theorem rightAnodyneExtensions_mono_cancellation {A B C : SSet.{u}} (f : A ⟶ B) (g : B ⟶ C) (hf : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (f.app n)) (hg : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (g.app n)) (hfRight : rightAnodyneExtensions f) : rightAnodyneExtensions g ↔ rightAnodyneExtensions (f ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcdc277c4",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clauses match the node: universe u, SSet A B C, f g with degreewise injectivity (incl. degree 0), hfRight using the recorded SSet.rightAnodyneExtensions (positive-index horns, saturated), conclusion rightAnodyneExtensions g ↔ rightAnodyneExtensions (f ≫ g), no Kan/quasicategory hypotheses. Edge cases (empty sets, identities, ∅→B, Λ[1,1]={1}) checked; docstring proof sound. No definitions, sorry only, source and blueprint docstrings present, lean.statement verbatim, only the lean field changed, report has both sections, no duplicate found. nt_compile --json on the snapshot file: rc 0, no errors or warnings, 1.7 s. No fixes."
  }
 }
