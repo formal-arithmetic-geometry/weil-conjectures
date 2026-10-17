@@ -177,5 +177,23 @@
   "group": "Q50",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-4990b9abb (reviewer sub-agent of L); spot-checked: Read the item, the new node, the parent lem-trf-formal-jacobian-quadratic-criterion with its reviewed tool_uses, unit sk-i-curve-zero, and the statements of every cited node. Read the source Stacks curves.tex Tag 0C49 (lemma-nodal-algebraic, proof of (2)=>(3), the correction mod m^4 and the completeness passage). The item statement is unchanged and not weakened; the polar determinant 4ac-b^2 handles characteristic 2. Tested by hand: uv+u^3 in char 2 (y->v+u^2, alpha: v->v-u^2), u^2-v^2+v^3 in char 0 (E3=v^4/4), and u^2+v^2 in char 2 (excluded, discriminant 0). Steps 1-2 are correct and elementary. Step 3 is correct but left a gap, fixed under E5: it now states the exact identity Q(x+A,y+B)=Q+L1A+L2B+Q(A,B) and the congruences L_i(x_r,y_r)A_r(x_r,y_r) = L_iA_r mod p^(r+2). C5/duplicate: the new node lem-trf-binary-morse-tangent-substitution is true but is the case n=2 of the existing lem-weil-pbc-power-series-full-coordinates-field plus elementary remarks. The parent already cites that node as an accepted tool in the same unit, so I dropped the new node. Steps 4-5 now build beta from cohen-regular-complete (1),(4), Nakayama, def-regular-system-of-parameters and full-coordinates-field. They also prove continuity via beta(p^N)=p^N and the tangency of alpha=beta^{-1}. I accept the two generic sec-proper-base-change tool_uses (full-coordinates-field, cohen-regular-complete); both were already accepted for the parent. No SGA. proof_deps is the union of the uses. The corrected item is in fixes/dag/nodes/sec-trace-formula/lem-trf-formal-binary-morse.json, and rg shows no other citer of the dropped node.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b57dc8ca",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, dep def-weil-pbc-multivariate-power-series (Mathlib MvPowerSeries leaf), Stacks curves.tex 0C49 proof (2)=>(3), module, report and commit (3 files). MvPowerSeries.formal_binary_morse matches the node clause by clause: arbitrary Field F in universe u with no char restriction; S=MvPowerSeries (Fin 2) F; p=span of X; hfp f∈p^2; hquad f-Q∈p^3 (equivalent to Q being the degree-2 part); hdisc b^2-4ac≠0; conclusion ∃ α : S ≃ₐ[F] S continuous for p.adicTopology on both sides, α(X i)-X i ∈ p^2, α f = Q. Edge cases: f=Q, char 2 uv+u^3, u^2+v^2 and Q=0 excluded. lean.statement verbatim in the file; docstrings carry the source place, blueprint tag and the 5-step proof; no definitions; sorry only; proof-only imports are private; no duplicate in Mathlib or the project. nt_compile.py: clean in 1.7 s; a control run confirmed diagnostics are reported and the #check signature is correct. Minor: the second reading is the author's own but clause-by-clause."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FormalBinaryMorse",
+  "declaration": "MvPowerSeries.formal_binary_morse",
+  "file": "lean/Sheaf/TraceFormula/FormalBinaryMorse.lean",
+  "statement": "theorem formal_binary_morse (F : Type u) [Field F] (f : MvPowerSeries (Fin 2) F) (a b c : F) (hfp : f ∈ (Ideal.span (Set.range (MvPowerSeries.X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ 2) (hquad : f - (MvPowerSeries.C a * (MvPowerSeries.X 0) ^ 2 + MvPowerSeries.C b * (MvPowerSeries.X 0) * MvPowerSeries.X 1 + MvPowerSeries.C c * (MvPowerSeries.X 1) ^ 2) ∈ (Ideal.span (Set.range (MvPowerSeries.X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ 3) (hdisc : b ^ 2 - 4 * a * c ≠ 0) : ∃ α : MvPowerSeries (Fin 2) F ≃ₐ[F] MvPowerSeries (Fin 2) F, @Continuous _ _ (Ideal.span (Set.range (MvPowerSeries.X : Fin 2 → MvPowerSeries (Fin 2) F))).adicTopology (Ideal.span (Set.range (MvPowerSeries.X : Fin 2 → MvPowerSeries (Fin 2) F))).adicTopology α ∧ α (MvPowerSeries.X 0) - MvPowerSeries.X 0 ∈ (Ideal.span (Set.range (MvPowerSeries.X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ 2 ∧ α (MvPowerSeries.X 1) - MvPowerSeries.X 1 ∈ (Ideal.span (Set.range (MvPowerSeries.X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ 2 ∧ α f = MvPowerSeries.C a * (MvPowerSeries.X 0) ^ 2 + MvPowerSeries.C b * (MvPowerSeries.X 0) * MvPowerSeries.X 1 + MvPowerSeries.C c * (MvPowerSeries.X 1) ^ 2",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
