@@ -443,5 +443,33 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-c4f4b46b1 (reviewer sub-agent of L); spot-checked: I read all 18 steps by hand and they are correct. The statement is the standard relative skeletal filtration of a J-weighted Reedy coend: ⊙_J is cocontinuous in each variable, and the attaching maps are λ_nf □_J δ_ni, with Δ latching over injections and Δ^op latching over surjections, matching lem-coef-reedy-model-structure. Checks done: the substitution α=δθ in Step 6 covers every simplex relation, including nonidentity endomorphisms of [n]; the overlap tests in Steps 10–13 (V*H uses θδ in degrees below n; F*N, F*H, V*N) and the extension criterion in Step 14 match Step 5 exactly; Step 16 forces the map from D to be the corner map; the n=0 case, the J=∅ case, i=id (every transition an isomorphism) and A=K=0 (the absolute filtration) all hold. The parent lem-coef-projective-frame-weighted-coend uses the item in Step 3 exactly as stated. Duplicate search: tensor-coend-skeletal-pushouts, truncated-coend-skeleton-image, simplicial-latching-degenerate-subset, reedy-realization-prism, enriched-coend, pinched-cube-latching, bar-latching-decomposition and the Reedy comparison nodes; none is a duplicate or a one-line generalization. Mathlib has no latching (Reedy/Basic.lean lines 22–24 is a TODO), so 'no match' stands. There are no new nodes, no tool_uses, no SGA, and no target, base-change morphism or coefficient category is involved. Hirschhorn is not in literature/, the report lists it as WANTED, and proof_origin is agent, which is correct. For the maintainer (source is a maintainer field, so not repairable through fixes): source.place still falsely says the scan is retained in the sandbox, although the report claims that sentence was removed; please drop it. The unused word 'boundaries' in the statement is cosmetic. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4e010ec4",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Checked each clause against the node: X⊙_J S is Mathlib coend of sigmaConst copowers; E(A,K) is the outer simplex coend with K flipped; λ_n f and δ_n i are the recorded Reedy.relativeLatching with monomorphisms Δ (proper injections) and monomorphisms Δᵒᵖ (proper surjections, presheaf colimit); □_J and the corner use Mathlib leibnizPushout in the displayed summand order. Filtration is a functor Input ⥤ ℕ ⥤ C with a natural stage-0 iso to the corner domain, a natural colimit cocone to E(B,L) composing to the corner map, and IsPushout of cell x n at every n (n=0 included; J=∅ allowed). Only hypotheses are SmallCategory J, Category C, HasColimitsOfSize.{max w t} C; no limits, model structure, mono or universe equality. No hollow definitions, only sorry is the main theorem, source/blueprint docstrings present, 18-step proof docstring, lean.statement verbatim, only the lean field changed, no duplicate. nt_compile.py compiled the module cleanly with no messages. Non-blocking: second-reading section is the standard stub; maintainer-owned source.place still falsely says a scan is retained; unused 'boundaries' wording in the node statement."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.WeightedCoendSkeletalFiltration",
+  "file": "lean/Sheaf/CategoryTheory/WeightedCoendSkeletalFiltration.lean",
+  "declaration": "CategoryTheory.WeightedCoendSkeletal.weighted_coend_skeletal_filtration",
+  "declarations": [
+   "CategoryTheory.WeightedCoendSkeletal.coendPairing",
+   "CategoryTheory.WeightedCoendSkeletal.weightedCoend",
+   "CategoryTheory.WeightedCoendSkeletal.realization",
+   "CategoryTheory.WeightedCoendSkeletal.Input",
+   "CategoryTheory.WeightedCoendSkeletal.corner",
+   "CategoryTheory.WeightedCoendSkeletal.cell",
+   "CategoryTheory.WeightedCoendSkeletal.weighted_coend_skeletal_filtration"
+  ],
+  "statement": "theorem weighted_coend_skeletal_filtration : ∃ (F : Input.{w, t, u, v} (J := J) (C := C) ⥤ ℕ ⥤ C) (z : F ⋙ (evaluation ℕ C).obj 0 ≅ corner (J := J) (C := C) ⋙ Arrow.leftFunc) (c : F ⟶ (corner (J := J) (C := C) ⋙ Arrow.rightFunc) ⋙ Functor.const ℕ), (∀ x : Input.{w, t, u, v} (J := J) (C := C), (c.app x).app 0 = z.hom.app x ≫ (corner.obj x).hom) ∧ (∀ x : Input.{w, t, u, v} (J := J) (C := C), Nonempty (IsColimit (Cocone.mk _ (c.app x)))) ∧ (∀ (x : Input.{w, t, u, v} (J := J) (C := C)) (n : ℕ), ∃ (a : (cell x n).left ⟶ (F.obj x).obj n) (b : (cell x n).right ⟶ (F.obj x).obj (n + 1)), IsPushout a (cell x n).hom ((F.obj x).map (homOfLE (Nat.le_succ n))) b)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Concrete ordinary coends of Mathlib copowers, with the canonical Leibniz corner and recorded Reedy relative latching arrows. The filtration is natural in both arrows as one functor on their arrow categories; stage 0 is the corner domain and transition n attaches simplex degree n. All definition data are real constructions; only the filtration theorem is sorry."
  }
 }

@@ -238,5 +238,27 @@
   "group": "Q124",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-d18ed1c18 (reviewer sub-agent of L); spot-checked: I read all of the item and checked all 7 steps against what the cited nodes state: def-cbc-enhanced-diagrams-cones, def-weil-pbc-simplicial-set, def-weil-pbc-category-colimit, lem-weil-pbc-left-adjoint-preserves-colimits (Stacks 0038), lem-weil-pbc-presheaf-colimits-sectionwise and lem-coef-kspace-exponential-law. I also read the parent lem-coef-realization-finite-limits; its step 7 is the only use of this item. Hovey is not in the local literature, so I could not open the cited places (Lemma 3.1.3 and the proof of Lemma 3.1.8); I checked that mathematics myself, and the node is correctly marked proof_origin.by=agent. The statement is unchanged and not weakened. Edge cases hold: X empty, X=Delta^0, degenerate simplices, Simp(X) small, and constant-empty R (binary product only, no claim about the terminal object). Steps 1-3: Yoneda evaluation, a direct proof that the simplex cocone is a colimit, and degreewise product-colimit commutation in sets; all correct. Steps 5-7: naturality of the comparison, then the two cocone-inverse arguments; I checked the equations and they are correct. The one fault was in step 4: it reads the exponential law as an adjunction inside K, but the cited exponential-law node never says that kC(Y,Z) is a k-space (k(kT)=kT). I wrote that two-line argument into step 4, and also that k(C x Y) is the product in K; no other field changed. The whole corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-simplex-colimit-product.json. The delivery has no new nodes and no duplicates (rg over the DAG for simplex-category, colimit-of-representables and realization-product nodes found only different or stronger statements). The route is fine: the only cited statements are Mathlib leaves and one node of the same unit, so no tool_uses were needed or accepted. No SGA is used, and there is no base-change morphism or coefficient category to check (not a target node).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cc36064e",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: tautologicalCocone' colimit; tensorLeft/tensorRight PreservesColimit of the simplex diagram; [PreservesColimits.{u} R]; the simplex-pair premise fixes the canonical comparison function; the exponential-law premise is verbatim CompactlyGenerated.exists_compactTestCurry; the conclusion gives canonical homeomorphisms natural in both variables. Same CompactlyGenerated.{u,u} and single universe as the dependency and the citer realization_finite_limits; no extra assumptions. Helper kProductComparisonFunction is the real pair of projections, not hollow. Edge cases (empty, m=n=0, degenerate simplices, empty-valued R, non-Hausdorff) covered. No duplicate declaration; Mathlib isColimitTautologicalCocone' is only a partial match. Docstrings carry the source and all 7 steps; only the lean field changed; lean.statement is verbatim in the file. The Second reading section records no worker reading, the same line as 98 landed reports, so not a fault. nt_compile.py: SimplexColimitProduct.lean 4.5 s, rc=0, no messages, reproduced on a second run."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplexColimitProduct",
+  "declaration": "SSet.simplex_colimit_product_comparison",
+  "declarations": [
+   "SSet.kProductComparisonFunction",
+   "SSet.simplex_colimit_product_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplexColimitProduct.lean",
+  "statement": "theorem simplex_colimit_product_comparison : (∀ X : SSet.{u}, Nonempty (IsColimit (Presheaf.tautologicalCocone'.{u} X))) ∧ (∀ (B X : SSet.{u}), PreservesColimit (CostructuredArrow.proj uliftYoneda X ⋙ uliftYoneda) (tensorLeft B) ∧ PreservesColimit (CostructuredArrow.proj uliftYoneda X ⋙ uliftYoneda) (tensorRight B)) ∧ ∀ (R : SSet.{u} ⥤ CompactlyGenerated.{u, u}) [PreservesColimits.{u} R], (∀ (m n : ℕ), ∃ e : R.obj ((stdSimplex.obj ⦋m⦌) ⊗ (stdSimplex.obj ⦋n⦌)) ≃ₜ TopCat.kification (TopCat.of (R.obj (stdSimplex.obj ⦋m⦌) × R.obj (stdSimplex.obj ⦋n⦌))), ∀ p, e p = kProductComparisonFunction R (stdSimplex.obj ⦋m⦌) (stdSimplex.obj ⦋n⦌) p) → (∃ E : ∀ (C Y Z : CompactlyGenerated.{u, u}), C(TopCat.kification (TopCat.of (C × Y)), Z) ≃ C(C, TopCat.kification (TopCat.compactTestMapSpace Y.toTop Z.toTop)), (∀ (C Y Z : CompactlyGenerated.{u, u}) (h : C(TopCat.kification (TopCat.of (C × Y)), Z)) (x : C) (y : Y), (E C Y Z h x).val y = h (x, y)) ∧ (∀ (C Y Z C' Y' Z' : CompactlyGenerated.{u, u}) (a : C(C', C)) (b : C(Y', Y)) (c : C(Z, Z')) (h : C(TopCat.kification (TopCat.of (C × Y)), Z)), ∃ h' : C(TopCat.kification (TopCat.of (C' × Y')), Z'), (∀ p : C' × Y', h' p = c (h (a p.1, b p.2))) ∧ ∀ (x : C') (y : Y'), (E C' Y' Z' h' x).val y = c ((E C Y Z h (a x)).val (b y)))) → ∃ e : ∀ (X Y : SSet.{u}), R.obj (X ⊗ Y) ≃ₜ TopCat.kification (TopCat.of (R.obj X × R.obj Y)), (∀ (X Y : SSet.{u}) (p : R.obj (X ⊗ Y)), e X Y p = kProductComparisonFunction R X Y p) ∧ (∀ (X Y X' Y' : SSet.{u}) (a : X ⟶ X') (b : Y ⟶ Y') (p : R.obj (X ⊗ Y)), e X' Y' (R.map (a ⊗ₘ b) p) = (R.map a (e X Y p).1, R.map b (e X Y p).2))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

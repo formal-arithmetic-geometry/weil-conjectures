@@ -88,11 +88,17 @@
   }
  ],
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale",
+  "declaration": "AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale",
   "declarations": [
    "AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 13:01 UTC for group Q143, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: gives the section existence and composition-equals-identity clause."
+  "statement": "theorem exists_comp_eq_id_of_weaklyEtale {K : Type u} [Field K] [IsAlgClosed K] {V : Scheme.{u}}\n    (f : V ⟶ Spec (.of K)) [WeaklyEtale f] (v : V) :\n    ∃ σ : Spec (.of K) ⟶ V, σ ≫ f = 𝟙 _",
+  "branch": "slopmaster2",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing upstream theorem, read in both the source checkout and the current scompile --source output. Its point argument (v : V) supplies precisely the nonemptiness hypothesis, and its conclusion is existence of a section with sigma followed by f equal to the identity. No affine, quasi-compact, finite-type, or etale hypothesis is imposed. Completes the existing attachment with a full stage-2 record; no duplicate module."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -112,5 +118,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0ee237b5",
+  "group": "NO",
+  "result": "pass",
+  "note": "Existing upstream theorem AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale (WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale:81-100, identical in slopmaster2 and side clone, real proof via nonempty_algHom_of_isAlgClosed) matches the node clause by clause: IsAlgClosed field K, arbitrary Scheme V, f to Spec K with Mathlib WeaklyEtale (the def-weil-weakly-etale-morphism mathlib_match), nonemptiness as point argument v, conclusion exists sigma with sigma ≫ f = id. The shared universe u is forced by Scheme Hom. lean.statement verbatim. Node diff vs side and newtargets: only lean changed. Source Tag 0F6C proetale.tex:3608-3622 confirmed. nt_compile --json probe: clean, 5.5 s, axioms [propext, Classical.choice, Quot.sound]. Report has Worker report and Second reading by NO sections. No new module, no hollow def, no duplicate. Only cosmetic finding: line ranges 81-100 vs 77-100."
  }
 }
