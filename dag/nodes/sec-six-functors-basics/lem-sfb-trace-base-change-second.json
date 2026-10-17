@@ -21,9 +21,99 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the ambient unbounded categories, and restrict at the end to the given full localizing subcategories. These are derived categories of sheaves over the commutative ring sheaves $R_Z$: [sk-def-sfb-module-derived-pushpull] defines precisely the total module-derived functors, and [sk-prop-sfb-cartesian-coefficients] identifies module inverse image with exact inverse image. Thus the ringed-topos formulas apply to these actual functors, without replacing condensed coefficients by constant discrete coefficients or towers. The canonical pullback comparisons are symmetric monoidal and compatible with composition by [lem-sfb-ringed-derived-monoidal-comparisons]. In particular $p_1^*f^*K=p_2^*f^*K$ and $p_1^*T_X=p_2^*T_X$ use the comparisons for $fp_1=fp_2$. In the rest of the proof put $r=p_2$, $R=Rr_*$, $a=f^*K$, $T=T_X$, $U=r^*a$, $V=r^*T=T_W$, and $S=RV$. Tensor associators and unitors are understood. The assumed preservation of $\\mathcal L$ and invertibility of the displayed maps justify all subsequent inverses.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); blueprint (1), canonical comparisons for the second triangle"
+   }
+  },
+  {
+   "text": "The symmetry $\\sigma_{V,V}$ is the identity. Indeed [sk-def-sp-tate-twist] states that $R_W(1)$ is pro-etale locally free of rank one. It is flat: on a trivializing cover tensoring is the identity, and exactness of a sequence of sheaves is checked locally. The complex with this sheaf in degree $-2$ and zero elsewhere is therefore K-flat by [lem-weil-pbc-independent-bounded-flat-kflat]. It represents $V=R_W(1)[2]$: the one-term complex $R_Y(1)[2]$ is K-flat by the same argument, so its derived pullbacks along $f$ and then $r=p_2$ are computed by module pullback of this complex [sk-def-sfb-module-derived-pushpull], and module pullback of the twist is the twist by [sk-prop-sfb-cartesian-coefficients](1). By the representative formula in [lem-sf-ringed-derived-closed-symmetric-monoidal], its tensor symmetry is the ordinary flip multiplied by $(-1)^{(-2)(-2)}=1$. On a trivializing cover, for a generator $z$ and local scalars $b,c$, the flip sends $bz\\otimes cz$ to $cz\\otimes bz=bc(z\\otimes z)=bz\\otimes cz$. Thus it is the identity as a morphism of sheaves, hence as a chain map before localization, and consequently in the derived category. This does not test equality of arbitrary derived maps by restriction to a cover. Since the symmetry is natural, the same holds for $\\sigma$ of any two objects identified with $V$ by the canonical comparisons.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; signed tensor comparison of Tag 07A4; blueprint (1), the two (1)[2] factors in the second triangle"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the square with $(f',g,g')=(p_2,f,p_1)$, taking its objects $(E,Q)=(T_X,K)$. Its exchange is exactly $b_2$, since both are the mate of the same pullback-composition comparison [def-weil-pbc-adjunction-mate]. Its projection is initially written with the pushed-forward factor on the left. Conjugating source and target by tensor symmetry gives the left-factor convention of this item: their adjoint transposes are both $1\\otimes c_h$ after the canonical pullback tensor comparison. Thus, with $b=b_2$, the cited square says\n$$b_{GK}\\circ f^*(\\pi_{f,K,T})=\\pi_{r,a,V}\\circ(1_a\\otimes b_T).$$\nHere $p_1^*(f^*K\\otimes T)=U\\otimes V$. Set $\\lambda=\\pi_{r,a,V}:a\\otimes S\\to R(U\\otimes V)$. The equation shows that $\\lambda$ is an isomorphism, since $b_{GK}$, $b_T$ and $\\pi_{f,K,T}$ are assumed isomorphisms. Inverting and multiplying the resulting equality gives\n$$f^*(\\pi_{f,K,T}^{-1})\\circ b_{GK}^{-1}=(1_a\\otimes b_T^{-1})\\circ\\lambda^{-1}.$$\nThis is an equality of the canonical maps, rather than a choice of projection-formula isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "def-weil-pbc-adjunction-mate",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram, with Tags 07A7 (remark-base-change) and 0B56 (equation-projection-formula-map)"
+   }
+  },
+  {
+   "text": "Let $H=R(U\\otimes V\\otimes V)$ and let\n$$q:R(U\\otimes V)\\otimes T\\longrightarrow H$$\nbe the right-factor projection map, namely the symmetry version of $\\pi_{r,T,U\\otimes V}$. By definition of $B$ we have $B_{GK}=(b_{GK}^{-1}\\otimes1_T)q^{-1}$. Expanding $G(e_K)$, using the symmetric monoidal naturality of $f^*$ [lem-sfb-ringed-derived-monoidal-comparisons], and inserting step 3 gives\n$$G(e_K)B_{GK}=(1_a\\otimes(f^*t\\circ b_T^{-1})\\otimes1_T)(\\lambda^{-1}\\otimes1_T)q^{-1}.$$\nThe assumed trace equation $t_2b_T=f^*t$ gives $f^*t\\circ b_T^{-1}=t_2$. Consequently, for $D=(\\lambda^{-1}\\otimes1_T)q^{-1}:H\\to a\\otimes S\\otimes T$,\n$$G(e_K)B_{GK}=(1_a\\otimes t_2\\otimes1_T)D.$$\nOnly the equation for $t_2$ is needed; the unused equation for $t_1$ imposes no additional inference.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+    "place": "(1), second triangle: expand the counit and move the trace through base change"
+   }
+  },
+  {
+   "text": "Put $\\psi=\\pi_{r,a\\otimes T,V}:(a\\otimes T)\\otimes S\\to H$. The tensor-action identity of [lem-sfb-ringed-projection-tensor-composition], applied with the two base factors $a,T$ and fibre factor $V$, gives, in the left/right conventions of steps 3 and 4,\n$$q(\\lambda\\otimes1_T)=R(1_U\\otimes\\sigma_{V,V})\\,\\psi(1_a\\otimes\\sigma_{S,T}).$$\nThis is the cited identity $\\pi_{r,E,Q\\otimes T}=\\pi_{r,E\\otimes r^*Q,T}(\\pi_{r,E,Q}\\otimes1_T)$ with $(E,Q)=(V,a)$, followed by the tensor symmetries: the successive projections put the two fibre copies in the order $U,V_{\\mathrm{old}},V_{\\mathrm{new}}$, whereas the combined projection puts them in the order $U,V_{\\mathrm{new}},V_{\\mathrm{old}}$. The displayed $R(1_U\\otimes\\sigma_{V,V})$ is precisely this final transposition. Compatibility of the pullback comparisons with the symmetries is part of [lem-sfb-ringed-derived-monoidal-comparisons]. By step 2 the transposition is the identity, so inversion and cancellation give\n$$\\psi^{-1}=(1_a\\otimes\\sigma_{S,T})(\\lambda^{-1}\\otimes1_T)q^{-1}=(1_a\\otimes\\sigma_{S,T})D.$$\nNo new projection formula is asserted here: this is a two-factor substitution in the cited tensor-action law.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map: tensor-action coherence of the projection mate; blueprint (1), exchange of the two Tate factors"
+   }
+  },
+  {
+   "text": "Naturality of tensor symmetry for the morphism $t_2:S\\to R_X$ gives\n$$(1_T\\otimes t_2)\\sigma_{S,T}=\\sigma_{R_X,T}(t_2\\otimes1_T)=t_2\\otimes1_T,$$\nwhere unitors identify the last targets; this is naturality of the symmetry in [lem-sf-ringed-derived-closed-symmetric-monoidal]. Hence steps 4 and 5 yield\n$$G(e_K)B_{GK}=(1_a\\otimes t_2\\otimes1_T)D=(1_{a\\otimes T}\\otimes t_2)\\psi^{-1}.$$\nSince $a\\otimes T=GK$ and $\\psi=\\pi_{p_2,GK,T_W}$, this is the claimed equality, with source $H=Rp_{2*}(p_1^*GK\\otimes T_W)$ and target $GK$. The equality $p_1^*GK=p_2^*GK$ uses exactly the canonical comparisons fixed in step 1. The ambient identity restricts to $\\mathcal L$ because all its objects and maps lie there by the stated assumptions.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+    "place": "(1), second triangle: identify the remaining map with identity tensored with the base-changed trace"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "sk-def-sp-tate-twist",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sfb-ringed-projection-tensor-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "(1), second triangle, expanding the canonical projection/base-change and even-Tate-factor calculation; Stacks Tags 0E48, 0B56, 07A4, 06YQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +150,53 @@
    "results": "8 hits; LinearMap.trace_baseChange, IsBaseChange.comp_iff, Algebra.intTrace_eq_trace, AlgebraicGeometry.IsProper.isStableUnderBaseChange, IsBaseChange.directSumPow, Algebra.algebraMap_intTrace, SheafOfModules.sheafificationCompPullback, Algebra.intTrace.congr_simp",
    "date": "2026-10-17",
    "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(baseChange|mate)|trace.*baseChange",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula base change compatibility with trace on a shifted rank one sheaf",
+   "results": "8 hits: LinearMap.trace_baseChange, IsBaseChange.rank_eq, InnerProductSpace.trace_rankOne, IsBaseChange.transvection, Module.rankAtStalk_baseChange, LinearMap.transvection.baseChange, LinearEquiv.transvection.baseChange, map_equiv_traceDual",
+   "date": "2026-10-18",
+   "verdict": "no match: algebraic traces of finite free modules and base-changed transvections do not state this derived sheaf projection/trace identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"mate\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change and the derived projection formula commute with a trace on an even shifted Tate line, giving the second triangle rearrangement",
+   "results": "8 hits: CategoryTheory.Functor.comp_homologySequenceδ_assoc, CategoryTheory.Functor.homologySequenceδ_comp, CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Functor.homologySequence_comp, CategoryTheory.Functor.homologySequenceδ_comp_assoc, CategoryTheory.Functor.homologySequence_comp_assoc, DerivedCategory.triangleOfSESδ, CategoryTheory.Functor.homologySequenceδ_naturality",
+   "date": "2026-10-18",
+   "verdict": "no match: homology-sequence and triangle connecting-map identities do not give this tensor/base-change equality"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|rightAdjointProjectionMap|projectionMap",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical monoidal adjunction projection map commutes with a Beck Chevalley mate and a linear functional on a tensor invertible object",
+   "results": "8 hits: CategoryTheory.leftAdjointMate_comp_evaluation_assoc, CategoryTheory.coevaluation_comp_rightAdjointMate_assoc, CategoryTheory.coevaluation_comp_leftAdjointMate_assoc, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftAdjunction, CategoryTheory.leftAdjointMate_comp_evaluation, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv",
+   "date": "2026-10-18",
+   "verdict": "no match: rigid-category tensor-Hom adjunctions and evaluation mate identities do not state compatibility of a square of derived pushpull adjunctions with projection and trace"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-thm-int-restriction-line",
@@ -80,5 +213,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-trace-base-change-second",
+  "worker": "stage1",
+  "summary": "Expanded the second-triangle trace rearrangement using existing general ringed-topos projection/base-change coherence and tensor-action laws. Checked the identity self-symmetry of the even shifted rank-one Tate line on explicit K-flat representatives. Kept the statement and coefficient category unchanged; no new nodes are needed.",
+  "blueprint": "det-thm-int-restriction-line, proof (1): second triangle, as elaborated by det-prop-p1-adjunction-rational-triangle, Second identity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic equality of canonical projection and exchange maps for arbitrary ringed topoi; used on the integral module-object square, without changing the projective-line triangle route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic signed symmetry and its naturality for unbounded derived categories of module sheaves, used only for the Tate interchange and the final tensor-functional calculation."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic K-flatness criterion on arbitrary small ringed sites, used only for the explicit one-term Tate complex; this unit does not supply a separate K-flatness theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-ffe68d44a",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-ffe68d44a (reviewer sub-agent of L); spot-checked: The mathematics is correct; I read the item, every cited statement and the sources in full. The statement and stmt_deps are unchanged from the base, and there are no new nodes. The base-change map b_2 is the Stacks 07A7 map for the 0E48 square with (f',g,g')=(p_2,f,p_1); this matches the item's definition-of-mate and the orientation in step 3. The coefficients stay in the ordinary D(Mod over the pulled-back condensed O_E sheaf) restricted to Loc(D^b_c), with no rationalisation or tower. I re-derived step 3: the 0E48 coherence converted to the item's left-factor convention, with V=p_1^*T_X matching the domain of t_2 and b_{2,T_X}; lambda is invertible from that equation. I re-derived step 5's permutations from the first identity of lem-sfb-ringed-projection-tensor-composition: the sources agree by symmetric monoidal coherence and the targets differ exactly by R(1⊗sigma_{V,V}). I checked step 2: R_W(1) is locally free of rank one, its one-term complex is K-flat by 06YQ, and the symmetry sign is (-1)^4=1, so sigma_{V,V}=1. An odd shift would give a sign, so the even shift is essential. Steps 4 and 6 are elementary. Edge cases checked: K=0, f=id, ell=2. Both route nodes belong to sk-prop-p1-adjunction-rational, which the unit cites. I accept the three declared tool uses (exchange-tensor coherence 0E48, signed derived symmetric monoidal structure, bounded-flat K-flat 06YQ) as generic black boxes. No duplicate found by rg: the sibling lem-sfb-trace-base-change-first is a different rearrangement. Fixes in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-trace-base-change-second.json: (B4) all six proof texts had lost their TeX backslashes (otimes, circ, pi, lambda, sigma, psi, mathcal; \\to had become a TAB, \\rm a newline, \\, a comma), and I restored them verbatim; (C1, minor) step 2 used the identification V ≅ R_W(1)[2] without a citation, so I added a sentence citing sk-def-sfb-module-derived-pushpull and sk-prop-sfb-cartesian-coefficients(1), which were already in proof_deps, plus a note on naturality of sigma. Only proof[*].text and proof[1].uses changed.; 1 file(s) fixed by the reviewer"
  }
 }

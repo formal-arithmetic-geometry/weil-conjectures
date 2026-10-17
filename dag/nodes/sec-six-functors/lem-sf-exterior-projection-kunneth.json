@@ -12,9 +12,167 @@
   "def-exchange-projection",
   "sk-def-sf-kv-maps"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with the actual finite coefficients \\(A=A_{E,n}\\) and operations of [sk-def-sf-operations]. Put \\(F_i=Rf_{i!}M_i\\), \\(H=F_1\\boxtimes F_2\\), and \\(D=C_1\\boxtimes C_2\\). Pullback, tensor and compact support preserve the finite-Tor constructible domains by [thm-sf-ctf-stability](i),(ii),(iv), including extension by zero for open immersions. All these objects are of bounded etale origin by [lem-sf-proetale-constructible-origin](ii). Thus the witnessed compactification comparisons used below apply. We always use the monoidal pullback comparisons of [lem-pur-derived-pullback-tensor-iso], including their signed symmetry and composition coherence, and the projection maps of [def-exchange-projection]. These give the stated \\(\\delta\\) and \\(\\xi\\) with exactly the displayed sources and targets.",
+   "uses": [
+    "sk-def-sf-operations",
+    "thm-sf-ctf-stability",
+    "lem-sf-proetale-constructible-origin",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  },
+  {
+   "text": "First suppose \\(f_i\\) proper. Write \\(s_i:Y_1\\times Y_2\\to Y_i\\), \\(h_1=f_1\\times1\\), \\(h_2=1\\times f_2\\), and \\(r_i:\\operatorname{dom}(h_i)\\to X_i\\). Set \\(Q_i=Lr_i^*M_i\\). The base-change isomorphisms built into [sk-def-sf-kv-maps](i) are\n\\[b_i:Ls_i^*F_i\\longrightarrow Rh_{i*}Q_i.\\]\nThey are the proper exchanges of [def-exchange-projection]. Let \\(\\lambda_h\\) be the forward relative composite displayed in [lem-sf-proper-product-counit-transpose], for \\((h_1,h_2;Q_1,Q_2)\\). Reversing the arrows in the definition of [sk-thm-sf-kunneth-relative] gives, with the canonical product pullback identifications,\n\\[L_M:=K_M^{-1}=\\lambda_h\\circ(b_1\\otimes b_2):H\\longrightarrow Rf_*M.\\]\nIn particular \\(K_M^{-1}\\) is not identified with \\(\\lambda_h\\) before these exchanges are inserted. Define \\(L_C=K_C^{-1}\\) by exactly the same formula with \\(M_i\\) replaced by \\(C_i\\).",
+   "uses": [
+    "sk-def-sf-kv-maps",
+    "sk-thm-sf-kunneth-relative",
+    "def-exchange-projection",
+    "lem-sf-proper-product-counit-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  },
+  {
+   "text": "For each \\(i\\), the exchange mate formula in [def-exchange-projection] gives\n\\[\\varepsilon_{h_i,Q_i}\\circ Lh_i^*b_i\n =Lr_i^*\\varepsilon_{f_i,M_i}\\circ\\theta_i,\\]\nwhere \\(\\theta_i:Lh_i^*Ls_i^*\\cong Lr_i^*Lf_i^*\\). Apply the second transpose formula of [lem-sf-proper-product-counit-transpose] to \\(\\lambda_h\\), then precompose with \\(Lf^*(b_1\\otimes b_2)\\). The two factors in its transpose are precisely the two left sides of this equation, pulled back from \\(\\operatorname{dom}(h_i)\\) to \\(X_1\\times X_2\\). Substitution yields\n\\[\\varepsilon_{f,M}\\circ Lf^*L_M=c_M,\n\\qquad c_M:=\\varepsilon_{f_1,M_1}\\boxtimes\\varepsilon_{f_2,M_2}:Lf^*H\\to M.\\]\nHere \\(\\boxtimes\\) on maps includes the canonical pullback and tensor comparisons. Since \\(L_MK_M=1\\), this also proves the previously missing identity\n\\[\\varepsilon_{f,M}=c_M\\circ Lf^*K_M.\\]\nReplacing \\(M_i\\) by \\(C_i\\) gives \\(\\varepsilon_{f,D}\\circ Lf^*L_C=c_C\\). The ordinary adjunction and its composite normalization are [fix-prop-adjunctions](1),(3); no exceptional counit is involved.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-sf-proper-product-counit-transpose",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  },
+  {
+   "text": "Put \\(P_i=\\operatorname{PF}_{f_i,M_i,B_i}\\). For proper maps use the trivial compactification \\((\\mathrm{id},f_i)\\): its open projection isomorphism \\(\\gamma\\) is the identity by [lem-sf-open-tensor-normalization] with \\(j=\\mathrm{id}\\), so \\(P_i=\\pi_{f_i;M_i,B_i}\\), and likewise for \\(f\\). Compare the two maps to the SAME object \\(Rf_*D\\):\n\\[u=Rf_*(\\delta)\\operatorname{PF}_{f,M,B},\\qquad\nv=L_C(P_1\\boxtimes P_2)\\xi(K_M\\otimes1).\\]\nTheir ordinary transposes have domain \\(Lf^*(Rf_*M\\otimes B)\\). By [def-exchange-projection] the transpose of \\(u\\) is \\(\\delta(\\varepsilon_{f,M}\\otimes1)\\mu_f\\). By step 3 the transpose of \\(v\\) is \\(c_C Lf^*((P_1\\boxtimes P_2)\\xi(K_M\\otimes1))\\). For each factor the counit projection definition says\n\\[\\varepsilon_{f_i,C_i}Lf_i^*P_i\n =(\\varepsilon_{f_i,M_i}\\otimes1)\\mu_{f_i}.\\]\nThis is also the FIRST formula of [lem-sf-proper-product-counit-transpose] with its \\(f=f_i\\), \\(g=\\mathrm{id}_{Y_i}\\), \\(K=M_i\\), \\(L=B_i\\), hence \\(q=f_i\\) and the exchange is identity. Consequently both transposes are the following typed composite:\n\\[Lf^*(Rf_*M\\otimes B)\\xrightarrow{Lf^*(K_M\\otimes1)}Lf^*(H\\otimes B)\n \\cong (Lf_1^*F_1\\otimes Lf_1^*B_1)\\boxtimes(Lf_2^*F_2\\otimes Lf_2^*B_2)\n \\xrightarrow{(\\varepsilon_{f_1,M_1}\\otimes1)\\boxtimes(\\varepsilon_{f_2,M_2}\\otimes1)}D.\\]\nThe middle comparison is the signed one: its equality in the two expansions follows from the symmetry and composition clauses of [lem-pur-derived-pullback-tensor-iso]. Injectivity of the ordinary Hom bijection [fix-prop-adjunctions](1) gives \\(u=v\\); composing with \\(K_C\\) proves the proper case.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-sf-proper-product-counit-transpose",
+    "lem-pur-derived-pullback-tensor-iso",
+    "fix-prop-adjunctions",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  },
+  {
+   "text": "For the general case choose \\(f_i=a_i j_i\\), with \\(j_i:X_i\\hookrightarrow\\bar X_i\\) open and \\(a_i\\) proper. Such compactifications exist by [thm-nagata-compactification]: the targets are quasi-compact and quasi-separated since they are separated and finite type over a field. Use \\(f=aj\\), \\(a=a_1\\times a_2\\), \\(j=j_1\\times j_2\\). Put\n\\[N_i=j_{i!}M_i,\\quad A_i=La_i^*B_i,\\quad V_i=N_i\\otimes A_i,\\quad T_i=j_{i!}C_i,\\quad N=N_1\\boxtimes N_2,\\quad T=T_1\\boxtimes T_2.\\]\nWrite \\(\\gamma_i:V_i\\to T_i\\) and \\(\\gamma_j:j_!M\\otimes La^*B\\to j_!(M\\otimes Lf^*B)\\) for the open projection isomorphisms of [def-exchange-projection]. Let\n\\[e_M:N\\to j_!M,\\quad e_C:T\\to j_!D\\]\nbe the normalized comparisons of [lem-sf-open-external-tensor-normalization], and let \\(\\bar\\delta:N\\otimes La^*B\\to V_1\\boxtimes V_2\\) be signed interchange. The domain assertions of step 1 apply also on the compactifications (which are separated finite type) and to all these objects.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-exchange-projection",
+    "lem-sf-open-external-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  },
+  {
+   "text": "The required open coefficient square, on \\(j_!M\\otimes La^*B\\), is\n\\[e_C^{-1}\\,j_!(\\delta)\\,\\gamma_j\n =(\\gamma_1\\boxtimes\\gamma_2)\\,\\bar\\delta\\,(e_M^{-1}\\otimes1).\\tag{O}\\]\nHere is its proof, rather than an appeal to base-change pasting. Precompose both sides with \\(\\gamma_j^{-1}\\); they are now maps FROM \\(j_!(M\\otimes Lf^*B)\\). Under the open adjunction it suffices to compare their restrictions, since the unit \\(1\\to j^*j_!\\) is an isomorphism [lem-sf-open-tensor-normalization]. The restrictions of \\(e_M,e_C\\) are identities by [lem-sf-open-external-tensor-normalization], and those of every \\(\\gamma\\) are identities by [lem-sf-open-tensor-normalization]. Finally \\(j^*\\bar\\delta=\\delta\\) by monoidal pullback composition [lem-pur-derived-pullback-tensor-iso]. Thus both restricted maps are exactly \\(\\delta\\), proving (O). This is a direct open-adjunction calculation; no displayed hypothesis of lem-sf-pf-compactification-pasting is used as a theorem.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-open-external-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  },
+  {
+   "text": "Write \\(K^a_N,K^a_T\\) for the exterior Kunneth maps of \\((a_1,a_2)\\). Under \\(Rf_{i!}=Ra_{i*}j_{i!}\\), the product compactification identity gives\n\\[K_M=K^a_N\\,Ra_*(e_M^{-1}),\\qquad K_C=K^a_T\\,Ra_*(e_C^{-1}).\\tag{K}\\]\nTo specify the exchanges in this application, apply [lem-sf-product-compactification-identity] to \\(h_i\\) of step 2, compactified by \\(\\bar h_1=a_1\\times1\\), \\(\\bar h_2=1\\times a_2\\) and their opens \\(v_i\\). Open base change identifies \\(v_{i!}Lr_i^*M_i\\) with \\(L\\bar r_i^*j_{i!}M_i\\). In the notation \\(b_i\\) of step 2, [def-exchange-projection]'s compactification formula is explicitly\n\\[b_i^f=R\\bar h_{i*}(\\beta_i)\\,b_i^a,\\quad\n\\beta_i:L\\bar r_i^*j_{i!}M_i\\to v_{i!}Lr_i^*M_i.\\]\nNaturality of the relative forward composite in its two inputs [sk-thm-sf-kunneth-relative] moves these \\(\\beta_i\\) through \\(\\lambda_{\\bar h_1,\\bar h_2}\\). The product compactification identity then reads\n\\[K_M^{-1}=Ra_*(e_M)(K^a_N)^{-1}.\\]\nIndeed put \\(e'=e_{v_1,v_2}\\circ(\\beta_1\\boxtimes\\beta_2)\\), its source identified with that of \\(e_M\\) by pullback composition. Each \\(\\beta_i\\) restricts to the identity on the open [lem-sf-open-tensor-normalization], and \\(e_{v_1,v_2}\\), \\(e_M\\) restrict to the identity [lem-sf-open-external-tensor-normalization]. So \\(e'e_M^{-1}\\) is an endomorphism of \\(j_!M\\) restricting to the identity; full faithfulness of \\(j_!\\) [lem-sf-open-tensor-normalization] gives \\(e'=e_M\\). Inverting gives (K); replacing \\(M_i\\) by \\(C_i\\) gives the second formula. This uses the exact relative definition of [sk-def-sf-kv-maps](i), including its two exchanges.",
+   "uses": [
+    "lem-sf-product-compactification-identity",
+    "def-exchange-projection",
+    "sk-thm-sf-kunneth-relative",
+    "lem-sf-open-external-tensor-normalization",
+    "sk-def-sf-kv-maps",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  },
+  {
+   "text": "Let \\(\\Gamma=\\gamma_1\\boxtimes\\gamma_2\\), \\(P_a=\\operatorname{PF}_{a,N,B}\\), and \\(P_{a_i}=\\operatorname{PF}_{a_i,N_i,B_i}\\). The proper case already proved, applied to \\((a_i,N_i,B_i)\\), says\n\\[K^a_{V_1,V_2}\\,Ra_*(\\bar\\delta)P_a\n =(P_{a_1}\\boxtimes P_{a_2})\\xi(K^a_N\\otimes1).\\]\nNaturality in the two coefficient complexes in [sk-thm-sf-kunneth-relative], with [sk-def-sf-kv-maps](i), gives\n\\[K^a_T Ra_*(\\Gamma)\n =(Ra_{1*}\\gamma_1\\boxtimes Ra_{2*}\\gamma_2)K^a_{V_1,V_2}.\\]\nMultiply the first equality by the displayed coefficient maps and use the defining formula \\(\\operatorname{PF}_{f_i}=Ra_{i*}(\\gamma_i)P_{a_i}\\) from [def-exchange-projection]. This yields the explicit equality\n\\[K^a_T Ra_*(\\Gamma\\bar\\delta)P_a\n =(\\operatorname{PF}_{f_1}\\boxtimes\\operatorname{PF}_{f_2})\\xi(K^a_N\\otimes1).\\tag{P}\\]\nEvery projection map here has second variable \\(B_i\\), or \\(B=B_1\\boxtimes B_2\\); no base-change projection square is substituted for this naturality square.",
+   "uses": [
+    "sk-thm-sf-kunneth-relative",
+    "sk-def-sf-kv-maps",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  },
+  {
+   "text": "Set \\(q=Ra_*(e_M^{-1}):Rf_!M\\to Ra_*N\\), and let \\(P'_a=\\pi_{a;j_!M,B}\\). Ordinary projection naturality [def-exchange-projection] says\n\\[Ra_*(e_M^{-1}\\otimes1)P'_a=P_a(q\\otimes1).\\]\nNow compute the left-hand side of the asserted equality using (K), the compactification formula for \\(\\operatorname{PF}_f\\), (O), this naturality, and (P), in that order:\n\\[\\begin{aligned}\nK_C Rf_!(\\delta)\\operatorname{PF}_f\n &=K^a_T Ra_*(e_C^{-1}j_!(\\delta)\\gamma_j)P'_a\\\\\n &=K^a_T Ra_*(\\Gamma\\bar\\delta)Ra_*(e_M^{-1}\\otimes1)P'_a\\\\\n &=K^a_T Ra_*(\\Gamma\\bar\\delta)P_a(q\\otimes1)\\\\\n &=(\\operatorname{PF}_{f_1}\\boxtimes\\operatorname{PF}_{f_2})\\xi(K^a_N\\otimes1)(q\\otimes1)\\\\\n &=(\\operatorname{PF}_{f_1}\\boxtimes\\operatorname{PF}_{f_2})\\xi(K_M\\otimes1).\n\\end{aligned}\\]\nAll five lines start at \\(Rf_!M\\otimes B\\) and end at \\(Rf_{1!}C_1\\boxtimes Rf_{2!}C_2\\). This is the required equality at the product compactification.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  },
+  {
+   "text": "Finally, [lem-fix-projection-compactification-comparison] identifies the chosen-compactification projection maps with the specified ones on the bounded etale-origin domain checked in step 1: its equation is \\(\\rho(C)\\operatorname{PF}^{c}=\\operatorname{PF}^{c'}(\\rho(M)\\otimes1)\\). The exchanges \\(b_i\\) of step 2, hence their compactification formula in step 7, are independent of the compactification and commute with refinement comparisons [fix-lem-exchanges](4). The product identity used in (K) is compatible with the same refinement comparisons [lem-sf-product-compactification-identity]; hence the calculation holds for the specified \\(K_M,K_C\\), not just for one presentation. The coefficient naturality used in step 8 is expressly part of [sk-thm-sf-kunneth-relative]. This proves the stated formula with its original \\(\\delta,\\xi\\) and coefficients, without any exceptional inverse image or external internal-Hom map.",
+   "uses": [
+    "lem-fix-projection-compactification-comparison",
+    "lem-sf-product-compactification-identity",
+    "sk-thm-sf-kunneth-relative",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "The map beta, final paragraph: projection compatibility before the two evaluation maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "fix-lem-exchanges",
+  "fix-prop-adjunctions",
+  "lem-fix-projection-compactification-comparison",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-open-external-tensor-normalization",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-product-compactification-identity",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-proper-product-counit-transpose",
+  "sk-def-sf-kv-maps",
+  "sk-def-sf-operations",
+  "sk-thm-sf-kunneth-relative",
+  "thm-nagata-compactification",
+  "thm-sf-ctf-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+  "place": "The map beta, last paragraph: details of ordinary counits, open restriction and the product compactification calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +211,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-kv-beta-kunneth-evaluation",
@@ -65,12 +223,36 @@
  "blueprint": {
   "from": {
    "node": "sk-thm-sf-kunneth-verdier",
-   "place": "The beta proof, last sentence: both paths become the tensor product of the two evaluation maps after the projection formula; compatibility of Ku_! with projection in the external coefficient.",
+   "place": "Beta, last sentence: both paths become the tensor product of the two evaluation maps after the projection formula; compatibility of Ku_! with projection in the external coefficient.",
    "via": [
     "lem-sf-kv-beta-kunneth-evaluation"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sf-exterior-projection-kunneth",
+  "worker": "stage1",
+  "summary": "Repairs both returned compatibility gaps without changing the statement. Inserts the two base-change exchanges in the proper inverse Kunneth map and derives their counit-mate identities, then compares correctly typed ordinary transposes, with the first proper transpose formula explicitly specialized to g=id. Proves the open external/projection coefficient square directly by open adjunction and identity restrictions, and replaces the unsupported pasting invocation and conjugation claim by displayed naturality equations and a five-line composite calculation. Adds the relative Kunneth coefficient-naturality citation and checks bounded etale-origin and finite-Tor domains. No new nodes: the open square is an elementary restriction calculation from existing normalization statements.",
+  "blueprint": "Realizes the beta proof final sentence: after projection formula, both paths are the tensor product of the two evaluation maps, using compatibility of Ku_! with projection in the external coefficient.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open-adjunction normalization: the open unit is invertible and the specified open projection restricts to identity. Step 6 uses this to prove the coefficient square by adjunction; it does not replace a unit proof step. The unit has the external comparison normalization but no node supplying this ordinary open-unit/gamma normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-9ff34cf8d",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-9ff34cf8d (reviewer sub-agent of L); spot-checked: FIX. The mathematics is correct; three small faults are repaired in fixes/dag/nodes/sec-six-functors/lem-sf-exterior-projection-kunneth.json. The statement is unchanged, there are no new nodes and nothing is dropped. Source: main-20261015 sk-thm-sf-kunneth-verdier.proof.md, the map beta, lines 190-217. Its last sentence ('both paths become the tensor product of the two evaluation maps after the projection formula') needs exactly this compatibility of Ku_! with PF, and parent lem-sf-kv-beta-kunneth-evaluation step 7 uses it in exactly this form at A_{E,n}. Checks made: (1) lambda of lem-sf-proper-product-counit-transpose is the arrow-reversed kappa^rel. (2) The base-change exchanges b_i are correctly inserted into Ku_!. (3) The exchange-mate formula of def-exchange-projection gives epsilon_f = c_M Lf^*K_M. (4) The proper-case comparison by transposes is right. (5) Square (O) follows by open adjunction from the identity restrictions. (6) The (K), (P) and five-line computation are typed and correct line by line. Small cases tested: f_i=id, M_i=0, Y_i=Spec k, B_i=A. Checked against lem-sf-kunneth-coherence, prop-sf-pf-coherence, lem-sf-exterior-shriek-projection-compatibility, lem-sf-exceptional-product-direct-image-compatibility and lem-kun-proj-formula-natural: none duplicates the item. No SGA is cited. Fixes: (a) Step 4: PF for proper f via the trivial compactification needs gamma_id = id; now cites lem-sf-open-tensor-normalization with j=id. (b) Step 7 (E5, C4): it only asserted that e_{v1,v2} composed with (beta_1 boxtimes beta_2) equals e_M. Now proved: both maps restrict to the identity (lem-sf-open-tensor-normalization, lem-sf-open-external-tensor-normalization), and full faithfulness of j_! gives equality. (c) Step 10 (C4): choice independence also needs Ex_! to be independent of the compactification, which def-exchange-projection's current statement leaves to a separate theorem. Now cites fix-lem-exchanges(4), which is on the route via sk-prop-sf-cbc. proof_deps is updated. Accepted tool_use: lem-sf-open-tensor-normalization, a generic open-immersion unit, full-faithfulness and restriction normalization that no unit on the route supplies. Applying the six-functor-datum lemmas to the concrete operations follows the existing convention of the unit (lem-sf-kunneth-coherence).; 1 file(s) fixed by the reviewer"
  }
 }

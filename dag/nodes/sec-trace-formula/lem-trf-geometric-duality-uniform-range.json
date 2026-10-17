@@ -15,9 +15,319 @@
   "def-weil-pbc-henselian-terminology",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the ordinary etale derived categories. A separated finite-type scheme over any field is Noetherian and its structure map admits a Nagata compactification. The ambient exceptional-adjoint theorem therefore supplies $a_Z^\\times$ with no constructible or finite-Tor restriction. Define $\\omega_Z=a_Z^\\times A$ and $D_ZM=R\\mathcal Hom_A(M,\\omega_Z)$. This is the etale reading of the formulas in the statement. We do not apply a theorem restricted to the fixed algebraic closure of a finite field.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "thm-amb-etale-exceptional-adjoint",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "Suppose $\\dim Z\\leq d$. For an affine etale finite-type neighbourhood $u:U\\to Z$, etale local dimension gives $\\dim U\\leq d$. Such $u$ is separated (both schemes are separated over the field) and $a_U$ is compactifiable. Ambient etale adjoint locality gives $u^*\\omega_Z=a_U^\\times A$. Thus\n$$\\operatorname{Hom}(A_U,u^*\\omega_Z[q])=\\operatorname{Hom}(Ra_{U!}A_U,A[q]).$$\nCompact-support amplitude puts $Ra_{U!}A_U$ in $D^{[0,2d]}$. On the separably closed point, every affine etale object is a finite disjoint union of the point by the split-etale-algebra statement. The sheaf axiom therefore identifies its module sheaves with ordinary modules (values on those unions are finite products). The coefficient ring $A$ is self-injective, so the right side vanishes for $q<-2d$: coefficient Hom reverses degrees and has no higher Ext. These Hom groups compute the degree-$q$ cohomology of sections of a K-injective representative restricted to $U$. Their presheaf sheafifies to $\\mathcal H^q(\\omega_Z)$: kernels of a complex of sheaves are computed sectionwise and its cokernels are sheafified sectionwise cokernels. Hence $\\omega_Z\\in D^{\\geq-2d}$. This proves the quantitative bound over the actual separably closed field, uniformly in $n$.",
+   "uses": [
+    "lem-sc-etale-local-dimension",
+    "lem-amb-etale-adjoint-locality",
+    "lem-dg-compact-support-amplitude",
+    "lem-weil-coefficient-frobenius",
+    "lem-pur-rhom-into-kinjective-local",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-kun-dimension-extension",
+    "det-pe-condensed-point-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "The finite-coefficient adjoint comparison is stated over an arbitrary positive-characteristic field. Apply it to $a_Z$ and the constant free rank-one object $A$ on the point, which is bounded constructible with Tor amplitude $[0,0]$. It states that $\\nu_Z^*a_Z^\\times R\\nu_{s,*}A$ is bounded constructible of finite Tor amplitude. Site comparison identifies $R\\nu_{s,*}A$ with the ordinary constant $A$. By the preceding lower bound $\\omega_Z$ is in $D^+$, so the site-comparison unit applies. The finite-ring constructible-origin theorem then implies that $\\omega_Z$ itself is bounded constructible. Only the coefficient object at the point has been assumed finite-Tor here, not the argument $M$ of $D_Z$.",
+   "uses": [
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "Let $M\\in D^{\\leq b}(Z,A)$ and put $c=-2d$. For every etale object $U$, restriction is exact, so $M|_U\\in D^{\\leq b}$ and $\\omega_Z|_U\\in D^{\\geq c}$. If $t<c-b$, standard t-structure orthogonality gives $\\operatorname{Hom}(M|_U,\\omega_Z|_U[t])=0$, since $c-t>b$. The local K-injective Hom computation identifies this with the degree-$t$ cohomology of the presheaf Hom complex on $U$. Sheafifying, as in Step 2, gives $\\mathcal H^t(D_ZM)=0$. Consequently\n$$D_Z(D^{\\leq b})\\subseteq D^{\\geq-2d-b}.$$\nThis argument applies on the whole unbounded derived category, in particular to $D^-_c$, without a finite-Tor or constructibility assumption on $M$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-t-structure",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-into-kinjective-local",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "First prove constructible preservation for residue-field coefficients $k_E=A_{E,1}$. The preceding step makes the ordinary etale dual of a bounded $M$ bounded below. Pull $M$ and $\\omega_Z$ to the pro-etale site. The finite-field internal-Hom finiteness theorem applies over any field, hence its Hom is bounded constructible and has a bounded constructible etale origin $Q$. Identify $Q$ with the ordinary etale Hom as follows. For every bounded-below etale test complex $C$, site comparison, monoidality, and tensor--Hom adjunction identify\n$$\\operatorname{Hom}(C,Q)=\\operatorname{Hom}(\\nu^*C,R\\mathcal Hom(\\nu^*M,\\nu^*\\omega_Z))=\\operatorname{Hom}(C\\otimes^L M,\\omega_Z).$$\nAll full-faithfulness uses are in $D^+$: over the field $k_E$, tensor with bounded $M$ preserves bounded-below objects. Yoneda on $D^+$ identifies $Q$ with $D_ZM$. This proves bounded constructibility for $n=1$ without identifying the ground field with the fixed finite-field closure.",
+   "uses": [
+    "lem-sfb-finite-field-internal-hom-finiteness",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "For the fixed $A=A_{E,n}$, a constructible sheaf $M$ has the finite filtration $M\\supseteq\\varpi M\\supseteq\\cdots\\supseteq\\varpi^nM=0$. Its subquotients $M_j=\\varpi^jM/\\varpi^{j+1}M$ are constructible sheaves of $k_E$-modules, by constructible Serre closure; no flatness is asserted. The coefficient-dual restriction lemma identifies $D_{Z,A}(\\operatorname{Res}M_j)$ with $\\operatorname{Res}D_{Z,k_E}M_j$, bounded constructible by the preceding step; restriction of coefficients retains the finite locally constant stratification. Starting at $\\varpi^nM=0$, apply the contravariant exact Hom functor to each short exact filtration triangle. Its cohomology long exact sequence and Serre closure prove bounded constructibility for $D_{Z,A}M$ by descending finite induction on $j$. Finally build any bounded constructible complex from its finitely many cohomology sheaves by the truncation triangles and apply the same argument. This proves the whole constructibility clause for all $n$; the bound $c_d=-2d$ was proved independently in Step 4.",
+   "uses": [
+    "lem-trf-frobenius-coefficient-dual-restriction",
+    "thm-constructible-serre",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "Put $r=\\dim X_{\\bar\\eta}$ when the generic fibre is nonempty. The map $\\bar j$ is affine, hence qcqs: it is the generic open immersion followed by an algebraic field extension. For every geometric point $x$ of $X_0$, the strict-local stalk formula and exactness of $i^*$ give\n$$(R^q\\Psi M)_x=H^q(X_{(x)}\\times_B\\bar\\eta,M)=\\varinjlim_U H^q(U_{\\bar\\eta},M|_{U_{\\bar\\eta}}).$$\nHere $U$ ranges over a small cofinal system of affine pointed etale neighbourhoods of $x$ with affine transitions; continuity applies with base $X_{\\bar\\eta}$ and the sheaf $M$ in degree zero. Each $U_{\\bar\\eta}$ is finite type over the separably closed generic field and has dimension at most $r$, by etale local dimension. The relative torsion dimension bound gives vanishing for $q>2r$ for every module sheaf $M$, without constructibility. The module/abelian comparison permits this computation after forgetting the coefficient action. Conservativity of stalks gives $R^q\\Psi M=0$ for $q>2r$.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-derived-etale-cohomology-limit",
+    "lem-sc-etale-local-dimension",
+    "lem-kun-relative-torsion-direct-image-dimension-bound",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "The finite bound just proved is on all sheaves. It gives $\\Psi(D^{\\leq b})\\subseteq D^{\\leq b+2r}$ even for unbounded inputs, as follows. Write $T=i^*\\bar j_*$ and $N=2r$. Its total derived functor is $i^*R\\bar j_*$, since $i^*$ is exact. For $K\\in D^{\\leq b}$ choose a K-injective representative $I$ with injective terms. Above degree $b$ it is exact. The sequences $0\\to Z^tI\\to I^t\\to Z^{t+1}I\\to0$ for $t\\geq b$ give $R^qT(Z^{b+N}I)=R^{q+N}T(Z^bI)=0$ for $q>0$. Thus the good truncation $\\tau^{\\leq b+N}I$, still representing $K$, has $T$-acyclic terms. The finite-cd acyclic-complex theorem computes $RTK$ by applying $T$ to this truncation, which is zero above $b+N$. On a bounded-below input the injective resolution starts at its lower bound, giving $\\Psi(D^{\\geq a})\\subseteq D^{\\geq a}$. No infinite truncation induction or convergence assertion is needed.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-kun-finite-cd-acyclic-complex",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "For nearby-cycle constructibility it suffices to treat a constructible sheaf on the geometric generic fibre. One may use a separable closure $K^s$ of $K=\\operatorname{Frac}B$. If an algebraic closure $\\bar K$ was chosen, its extension over $K^s$ is purely inseparable, and the projection $X_{\\bar K}\\to X_{K^s}$ is a universal homeomorphism by the inseparable-closure invariance statement (applied to the $K^s$-scheme $X_{K^s}$); topological invariance identifies the etale module categories and direct images. It preserves constructibility: carry a finite locally closed stratification through the universal homeomorphism, use reduced structures on the strata, and descend their finite locally constant restrictions through the etale-site equivalence. Let $M$ now be on $X_{K^s}$. The finite separable subextensions $L/K$ form a small directed system, with affine transition maps and limit $X_{K^s}$ (on affines tensoring commutes with the union of the fields). Constructible-module limit descent supplies a finite separable $L/K$ and a constructible $M'$ on $X_L$ pulling back to $M$.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "det-curve-invariance-inseparable-closure",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "For $v:X_L\\to X_K$, finite separability makes $v$ finite etale. It is finitely presented since $X_K$ is Noetherian. The finite pushforward theorem gives the constructible sheaf $H=v_*M'$ and $Rv_*M'=H$. Over $K^s$, proper base change identifies $H|_{X_{K^s}}$ with the pushforward along $w:X_L\\times_KK^s\\to X_{K^s}$ of the pullback of $M'$. The chosen embedding $L\\subset K^s$ supplies a section of $w$; a section of a separated etale map is open and closed. The section component and its complement split this pushforward as a product, whose first factor is $M$. Restriction to that factor and extension by zero give $M\\xrightarrow{u}H|_{X_{K^s}}\\xrightarrow{v_0}M$ with $v_0u=1$. This splitting does not divide by $[L:K]$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-finite-fp-locnoeth",
+    "lem-kun-095r",
+    "lem-weil-pbc-finite-proper",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "Apply sheaf nearby-cycle finiteness to $H$ on the arithmetic generic fibre. Its trait is the actual strictly henselian DVR $B$, its residue field is separably closed, $X$ is separated finite type, and the finite coefficient exponent is invertible; no model trait $k[t]_{(t)}$ is substituted. Each $R^q\\Psi(H|_{X_{K^s}})$ is constructible. Apply the additive functor $R^q\\Psi$ to the splitting in Step 10. Its first factor is the kernel of $1-R^q\\Psi(u v_0)$ and is constructible by Serre closure. Thus every $R^q\\Psi M$ is constructible, and Step 7 supplies the uniform vanishing above $2r$. A finite induction through truncation triangles proves bounded constructibility for every bounded constructible input.",
+   "uses": [
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "thm-constructible-serre",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://afst.centre-mersenne.org/item/10.5802/afst.1667.pdf",
+    "place": "Illusie, Grothendieck and vanishing cycles (2021), §§1.1--1.2, printed pp. 85--86, formula (1.2) and final constructibility paragraph; geometric-sheaf extension by the explicit splitting in Steps 9--10."
+   }
+  },
+  {
+   "text": "Let $W$ be the scheme-theoretic closure of $X_\\eta$ in $X$. On an affine chart with ring $C$ its ring is $C/\\ker(C\\to C[1/t])$, where $t$ is a uniformizer of the DVR of $B$. Multiplication by $t$ is injective on this quotient: if $tc$ is killed by a power of $t$, then so is $c$. Every nonzero base element is a unit times a power of $t$, so this quotient is torsion free over the DVR. The PID torsion-free flatness theorem makes $W\\to B$ flat. The closure is closed in the Noetherian $X$, hence finite type. Apply the flat-family generic-dimension node with base the integral trait $B$ to obtain $\\dim W_0\\leq\\dim W_\\eta=r$. Equality of generic and geometric generic dimensions follows from field-extension dimension invariance. This is the dimension argument that excludes arbitrarily large vertical components.",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-trf-flat-family-generic-dimension-bound",
+    "lem-kun-dimension-extension",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "Let $h:W\\hookrightarrow X$ and $h_0:W_0\\hookrightarrow X_0$. The generic base change $h_{\\bar\\eta}$ is an isomorphism. Direct-image composition gives $R\\bar j_{X*}L=Rh_*R\\bar j_{W*}L$. Proper base change for $h$ along $X_0\\to X$, valid on unbounded torsion-module complexes, now identifies\n$$R\\Psi_X L\\simeq Rh_{0*}R\\Psi_W L.$$\nThe open--closed recollement statement includes exactness of closed pushforward on etale module sheaves, so $Rh_{0*}=h_{0*}$ preserves each cohomological bound. This proves the support comparison for all the inputs under consideration.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-cbc-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "On the special fibre, the closed ambient adjunction gives $Rh_{0*}\\dashv Rh_0^!$. Compact-support composition identifies $Ra_{X_0!}Rh_{0*}$ with $Ra_{W_0!}$, since the closed immersion is proper. The composition-of-right-adjoints lemma gives $Rh_0^!\\omega_{X_0}=\\omega_{W_0}$. Apply the ambient immersion-Hom identity to $s=h_0$ and second argument $\\omega_{X_0}$; it is valid without boundedness or finite Tor hypotheses. It yields\n$$D_{X_0}(h_{0*}M)\\simeq h_{0*}D_{W_0}M.$$\nAll structural maps here are over the algebraically closed residue field.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-cat-right-adjoint-composition",
+    "lem-weil-stratum-ambient-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "For $L\\in D_c^{\\leq0}(X_{\\bar\\eta},A)$, Step 4 gives $D_{X_{\\bar\\eta}}L\\in D^{\\geq-2r}$, and the lower exactness bound of Step 8 gives $F_XL\\in D^{\\geq-2r}$. Also Step 8 gives $R\\Psi_WL\\in D^{\\leq2r}$; apply Step 4 on $W_0$, whose dimension is at most $r$ by Step 12, to get $D_{W_0}R\\Psi_WL\\in D^{\\geq-4r}$. Steps 13--14 give $G_XL\\in D^{\\geq-4r}$. Thus $b_r=-4r$ works for both functors. Exactly the same calculation works on $D^-_c$, since Steps 4, 8, 13 and 14 were established on the required unbounded derived categories. If $X_{\\bar\\eta}$ is empty, its input category is zero and both functors vanish. If $\\dim X\\leq d$, then $r\\leq d$, so $b_d=-4d$ works as well. Repeating the argument over any finite extension of the trait uses the same $r$, by field-extension dimension invariance. No bound on vertical components enters.",
+   "uses": [
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  },
+  {
+   "text": "Finally $q^*$ is exact for constant coefficients and preserves constructibility; field extension preserves $\\dim Z$. Hence $q^*D_Z$ carries $D_c^{\\leq0}$ into $D^{\\geq-2d}$ by Step 4 over $F$, and $D_{Z_K}q^*$ does so by Step 4 over the actual separably closed $K$. The calculation applies to $D^-_c$ as well. Derived internal Hom is exact contravariantly, derived direct image is triangulated, and the exact inverse images induce exact derived functors. Their composites are therefore exact on the derived models in the statement.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-constructible-pullback",
+    "lem-kun-dimension-extension",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Agent repair of Remark 3.3 / Theorem 5.1 range argument; local PDF WANTED. Sources for the individual tools are recorded on their nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-t-structure",
+  "det-curve-invariance-inseparable-closure",
+  "det-pe-condensed-point-basis",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cat-right-adjoint-composition",
+  "lem-cbc-open-closed-recollement",
+  "lem-dg-compact-support-amplitude",
+  "lem-exc-closed-ambient",
+  "lem-kun-095r",
+  "lem-kun-dimension-extension",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-kun-relative-torsion-direct-image-dimension-bound",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-rhom-into-kinjective-local",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sc-etale-local-dimension",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-derived-ses-triangle",
+  "lem-sfb-finite-field-internal-hom-finiteness",
+  "lem-trf-flat-family-generic-dimension-bound",
+  "lem-trf-frobenius-coefficient-dual-restriction",
+  "lem-trf-nearby-cycle-sheaf-finiteness",
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-stratum-ambient-hom",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "pqf-lem-finite-fp-locnoeth",
+  "prop-constructible-pullback",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-constructible-serre",
+  "thm-nagata-compactification",
+  "thm-weil-pbc-site-comparison",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+  "place": "Explicit repair of the geometric range argument; original Lu--Zheng PDF WANTED. Tools read from the DAG, Stacks 0H3X, Bhatt--Scholze 6.7.13, and Illusie (2021) §§1.1--1.2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +366,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-cycle-verdier-duality",
@@ -77,5 +387,189 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometric-duality-uniform-range",
+  "worker": "stage1",
+  "summary": "Replaced the returned clause restatements by explicit arguments: omega has lower bound -2d by compact-support adjunction, Hom has lower bound -2d-b on all D<=b, residue-coefficient filtration proves constructibility, strict-local stalks give nearby cd 2r, and horizontal-closure support plus dim W_0<=r gives the common bound -4r directly on D^-_c. Dropped all six rejected unlanded nodes; added only residue-coefficient dual restriction and the independent flat-family fibre-dimension lemma.",
+  "blueprint": "Proof (1)--(2), specialization to the normal cone: the nearby-cycle duality input used in Varshavsky §4.1.4(b), axiom (V); Remark 3.3 and proof of Theorem 5.1, uniform lower cohomological bounds and the induction on n, pp. 24,42. Local PDF WANTED.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic tool in Step(s) 2: Etale localization of the ambient adjoint. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic tool in Step(s) 14: Unbounded ordinary etale compact-support comparisons. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic tool in Step(s) 13: Open-closed recollement. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-dg-compact-support-amplitude",
+    "why": "Generic tool in Step(s) 2: The compact-support bound uses the original fibres. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic tool in Step(s) 14: Closed-immersion right adjoint before restriction. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-kun-095r",
+    "why": "Generic tool in Step(s) 10: Pushforward of constructible sheaves along finite morphisms. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Generic tool in Step(s) 2, 12, 15, 16: Dimension after extension and restriction. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-kun-finite-cd-acyclic-complex",
+    "why": "Generic tool in Step(s) 8: Finite cohomological dimension permits unbounded acyclic-complex computation. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic tool in Step(s) 10, 13: Unbounded proper base change over a torsion coefficient ring. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-kun-relative-torsion-direct-image-dimension-bound",
+    "why": "Generic tool in Step(s) 7: Relative torsion-module direct-image bound over a separably closed field. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pur-finite-coefficient-adjoint-comparisons",
+    "why": "Generic tool in Step(s) 3: Finite-coefficient exceptional adjunction and coefficient mates over an arbitrary field. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic tool in Step(s) 5: Global sections of the derived internal Hom. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pur-rhom-into-kinjective-local",
+    "why": "Generic tool in Step(s) 2, 4: Hom into a K-injective complex computes localized derived morphisms. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic tool in Step(s) 8: Bounded-below complexes admit bounded-below K-injective resolutions. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic tool in Step(s) 2, 7: Étale localizations preserve dimension. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sfb-finite-field-internal-hom-finiteness",
+    "why": "Generic tool in Step(s) 5: Finite-field internal Hom finiteness over an arbitrary ground field. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-coefficient-frobenius",
+    "why": "Generic tool in Step(s) 2: Coefficient biduality at finite and integral stages. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-limit-descent",
+    "why": "Generic tool in Step(s) 9: A constructible sheaf of $\\Lambda$-modules on a limit of qcqs schemes descends to some stage (Stacks 09YU (3), essential surjectivity). The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-etale-cohomology-limit",
+    "why": "Generic tool in Step(s) 7: Derived etale cohomology over an inverse limit. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic tool in Step(s) 10: Inverse image along an etale morphism is restriction. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic tool in Step(s) 3, 5: Constructible derived comparison for arbitrary finite rings. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic tool in Step(s) 7: Canonical derived direct image comparison for forgotten module coefficients. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic tool in Step(s) 4, 5, 6, 16: Derived internal Hom calculus on small ringed sites. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic tool in Step(s) 13: Canonical composition comparison for unbounded ringed-topos direct images. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic tool in Step(s) 5: Derived tensor comparison for arbitrary ringed topoi. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-stratum-ambient-hom",
+    "why": "Generic tool in Step(s) 14: Internal Hom from extension along a stratum. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "pqf-lem-finite-fp-locnoeth",
+    "why": "Generic tool in Step(s) 10: Finite over a locally Noetherian base is finitely presented. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic tool in Step(s) 7: Strict-henselization stalk formula. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic tool in Step(s) 1, 14: The ordinary ambient exceptional adjoint. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic tool in Step(s) 3, 5: Bounded-below site comparison. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic tool in Step(s) 9: Universal-homeomorphism invariance. The trace unit uses geometric-fibre duality as an input and has no replacement for this general tool."
+   },
+   {
+    "node": "det-pe-condensed-point-basis",
+    "why": "Step 2 uses only clause 1: finite-presentation etale algebras over a separably closed field split into copies of the field. This identifies etale modules on the point with modules, so the coefficient Frobenius calculation applies. The trace unit has no replacement for this general fact."
+   },
+   {
+    "node": "det-curve-invariance-inseparable-closure",
+    "why": "Generic tool in Step 9: the projection from the base change to an algebraic closure of a separably closed field is a universal homeomorphism; no node of the trace unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-open-closed-recollement",
+  "lem-dg-compact-support-amplitude",
+  "lem-exc-closed-ambient",
+  "lem-kun-095r",
+  "lem-kun-dimension-extension",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-kun-relative-torsion-direct-image-dimension-bound",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-rhom-into-kinjective-local",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sc-etale-local-dimension",
+  "lem-sfb-finite-field-internal-hom-finiteness",
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-stratum-ambient-hom",
+  "pqf-lem-finite-fp-locnoeth",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-weil-pbc-site-comparison",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "det-pe-condensed-point-basis",
+  "det-curve-invariance-inseparable-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-41c2b5d2a",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-41c2b5d2a (reviewer sub-agent of L); spot-checked: I read the whole item, all 16 steps, both new nodes, all 62 cited statements, unit sk-i-curve-zero and Stacks 0H3X (more-morphisms.tex l.5256). The item statement is unchanged and not weakened. Every step checks out. The bound omega_Z>=-2d comes from adjoint locality, compact-support amplitude [0,2d] and self-injectivity of A. That gives D_Z(D^{<=b})>=-2d-b on the unbounded category. Constructibility of omega comes from lem-pur G_A(A), the finite-ring etale origin and D^+ full faithfulness. The k_E case is Bhatt-Scholze finiteness plus a Yoneda argument entirely in D^+. The case of general n uses the uniformizer filtration and the new coinduction lemma. Nearby-cycle cohomological dimension 2r comes from the strict-local stalk limit and the relative torsion dimension bound. The unbounded upper bound follows from a T-acyclic good truncation. Constructibility goes through a finite separable descent and a direct-summand argument. For G_X: the horizontal closure W is flat, so dim W_0<=r, and the support and closed-pushforward identities give the common bound -4r. Both new nodes are true and are not duplicates or restated clauses. The flat-family node is Stacks 0H3X with F=O_Y. I proved the coinduction lemma myself: Res commutes with Ra_!, right adjoints compose, and Hom_A(k_E,A)=ann(varpi)=k_E. There is no cycle and no SGA citation, and proof_deps equals the union of the uses. I accept the 32 declared generic tool uses. One fix (C1): Step 9 used that X_{Kbar}->X_{K^s} is a universal homeomorphism without citing any statement. It now cites det-curve-invariance-inseparable-closure; proof_deps and tool_uses are updated in fixes/dag/nodes/sec-trace-formula/lem-trf-geometric-duality-uniform-range.json. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
