@@ -14,9 +14,71 @@
   "lem-coef-pinched-cube-latching",
   "lem-coef-infinity-pinch-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix n and a: Δ^n→T. The coherent nerve identifies a simplex with an enriched functor from the subset-poset realization. For a chain in [1]×[n], use the displayed object assignments and maximum formula. Its indexing set is nonempty because it contains the initial endpoint i. Inclusion of subsets increases the maximum. Check composition at an intermediate index k: if its ε-coordinate is 0, the second subset contains k, and every zero-coordinate entry in the first subset has b-coordinate at most b_k, so adjoining the first subset leaves the maximum of the second unchanged. If its ε-coordinate is 1, the second subset adds no zero-coordinate entries, so the maximum of the first is unchanged. These are exactly composition with an identity in A. For pairs with equal ε all maps are identities, including i=j. A monotone operator on the chain acts by direct image of subsets and preserves this maximum; repeated vertices cause no change. Thus these enriched functors give compatible coherent simplices, constant on both end faces, and define the prism f(a).",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cahierstgdc.com/wp-content/uploads/2025/10/CTGDC_LXVI-4.pdf",
+    "place": "Remark 2.5, printed p.34: coherent-simplex description and naturality"
+   }
+  },
+  {
+   "text": "For a monotone α:[m]→[n], the direct-image description of Q and its maximum map gives q^n Q(α)=α q^m, since max α(I)=α(max I) for every nonempty I. Thus τ_n(a)=a q^n defines a simplicial map T→Sing_Q T. Set z=Φ^{-1}(τ_n(a)). The pinched-adjunction statement says precisely that z is a map J^n→P whose enriched adjoint has the specified object images x,y and mapping map a q^n:Q^n→A(x,y). On Δ^{n+1}, this simplex is constant on the entire initial face. At this point z is a pinched simplex, before applying the right-pinch map.",
+   "uses": [
+    "lem-coef-coherent-nerve-pinched-adjunction",
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cahierstgdc.com/wp-content/uploads/2025/10/CTGDC_LXVI-4.pdf",
+    "place": "Proposition 3.2, printed pp.35-36, together with the maximum-map calculation of HTT §2.2.2, printed p.76"
+   }
+  },
+  {
+   "text": "The stated definition of j precomposes z with h:Δ^1×Δ^n→Δ^{n+1}, where h(0,b)=b and h(1,b)=n+1. Fix a chain and a subset S between a 0-endpoint i and a 1-endpoint j. Direct image under h sends S to I(S)∪{n+1}, where I(S)={b_k:k∈S, ε_k=0} is nonempty. Its mapping element in Q^n is represented by I(S) in the canonical subset quotient. Explicitly, if the initial endpoint b_i is not 0, prepend the edge from 0 to b_i; the initial face is collapsed, so this edge maps to the identity, and subset composition changes the representative to {0}∪I(S) without changing its image. The cubical quotient identifies these representatives on the subcube with coordinate b_i equal to 1. The maximum map therefore sends this class to max I(S). This calculation applies to every inclusion chain of subsets, hence to every simplex of each mapping nerve. Applying the mapping map a q^n gives exactly the nerve of S↦max I(S), followed by a. Pairs with equal ε lie in an end face and give identities. Consequently j(z) has precisely the coherent-simplex data of f(a).",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-coherent-nerve-pinched-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10 and Construction 4.6.5.7, right-pinch map; explicit subset evaluation is the agent refinement"
+   }
+  },
+  {
+   "text": "For a simplex operator α:[m]→[n], the maximum formula commutes with α by max α(I)=α(max I), so f(a) restricts to f(aα). For a simplicial functor F:A→A', postcomposing a with F on mapping sets commutes with this formula and carries each identity to the corresponding identity. The naturality of Φ and j gives the same compatibilities on j Φ^{-1}τ. The equality proved for every n and a therefore is an equality of simplicial maps f=j Φ^{-1}τ, natural in A and the displayed endpoints.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-coherent-nerve-pinched-adjunction",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cahierstgdc.com/wp-content/uploads/2025/10/CTGDC_LXVI-4.pdf",
+    "place": "Proposition 3.2 naturality clause, pp.35-36; agent-written pointwise conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-coherent-nerve-pinched-adjunction",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-pinched-rigidification-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cahierstgdc.com/wp-content/uploads/2025/10/CTGDC_LXVI-4.pdf",
+  "place": "Expanded pointwise proof from Remark 2.5 and Proposition 3.2, with the maximum-coordinate computation from HTT §2.2.2 and right-pinch definition from Kerodon 01L5."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +114,52 @@
    "results": "Hits: SSet.stdSimplex.isoNerve_hom_app_apply, CategoryTheory.nerve.right_edge, SSet.horn.spineId_map_hornInclusion, SSet.prodStdSimplex.isoNerve, CategoryTheory.nerve.mk₁_homEquiv_apply, CategoryTheory.Nerve.strictSegal, CategoryTheory.SimplicialNerve, CategoryTheory.nerve.homEquiv. Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-38,193-210 read; the coherent nerve is defined but the pinched mapping identification and prism comparison are absent. Ordinary nerve, enriched Hom and Yoneda results do not state this lemma.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent nerve prism on an enriched Hom simplex equals right pinch composed with the maximum map from the pinched simplex resolution",
+   "results": "Hits: SSet.prodStdSimplex.isoNerve, SSet.PtSimplex.MulStruct.map, CategoryTheory.SimplicialNerve, CategoryTheory.Nerve.strictSegal, SSet.ι₀, SSet.ι₁, CategoryTheory.nerve, SSet.ι₀_snd_assoc. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean; none states the pinched prism identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent nerve prism defined by maximum coordinates equals the right pinch map composed with the pinched simplex maximum map",
+   "results": "service unavailable: rate limit exceeded (HTTP 429)",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve, SSet.prodStdSimplex, max",
+   "results": "0 hits; loogle reports unknown identifier SSet.prodStdSimplex.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent|pinch|maximum|SimplicialNerve",
+   "results": "Hits in Mathlib/AlgebraicTopology/SimplicialNerve.lean lines 14, 24, 28-29, 50; coherent nerve is defined, but no maximum-coordinate or right-pinch identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialNerve nerve right_edge homEquiv",
+   "results": "0 hits; unknown identifier SimplicialNerve.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "max.*subset|subset.*max|right_edge|homEquiv",
+   "results": "Hits concern generic homEquiv and nerve declarations in ModelCategory, Quasicategory, SimplicialCategory, CechNerve, and SimplicialNerve.lean:130; none states this pinched identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-diagonal-coherent-nerve-comparison",
@@ -82,5 +186,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coherent-prism-pinch-identity",
+  "worker": "stage1",
+  "summary": "Expanded the prism identity into four steps: construct the compatible enriched coherent simplices; identify τ and its inverse pinched adjunction; compute the direct image of each mapping subset under right pinch in the canonical cube quotient, including the initial-source identity; assemble equality and naturality. Preserved the statement and all recorded searches, corrected non-verbatim citation excerpts, and distinguished the pinched simplex from its right-pinch prism. No new nodes are needed.",
+  "blueprint": "The four steps realize the final prism-comparison sentence of prop-coef-integral-exceptional-adjoint: coherent-nerve mapping data, the pinched adjunction, the maximum map q^n, and the right-pinch comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-188ab9a0c",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-188ab9a0c (reviewer sub-agent of L); spot-checked: The mathematics is correct. I read the item, all four steps and the five same-unit dependencies in full. The statement and stmt_deps match the live node exactly. Step 1: composition holds at an intermediate k in both cases (ε_k=0 and ε_k=1), and operator compatibility holds because max α(I)=α(max I). Step 2: τ is simplicial, and Φ⁻¹ is described exactly as the pinched-adjunction node states. Step 3: h(S)=I(S)∪{n+1}; prepending the collapsed edge gives {0}∪I, which the cube-latching subcube relation identifies with I (both contain b_i=min I and agree above it), and max is preserved. This matches HTT §2.2.2, printed pp.76-77 (K[n] collapse, Remark 2.2.2.6, π given by the largest element, Prop 2.2.2.13). Step 4 is acceptable as elementary. I hand-checked n=0, n=1 (both triangles, Q^1≅Δ^1) and x=y. There is no cycle, no off-unit dependency, no tool_uses, no new nodes and no duplicate; lem-coef-point-family-q-counit-identification uses the same α and β but does not state this identity. Arakawa and Kerodon are online only and unverified locally (WANTED); the proof is marked by agent. Repairs in fixes/dag/nodes/sec-six-functors/lem-coef-coherent-prism-pinch-identity.json: (B9) blueprint.from.via began with lem-coef-coherent-nerve-comparison instead of the creator lem-coef-diagonal-coherent-nerve-comparison, so I restored the live from (via and the place, which was not unspecified); and the delivery dropped the live node's five recorded Mathlib searches although the report says they were preserved, so all 11 are now kept.; 1 file(s) fixed by the reviewer"
  }
 }

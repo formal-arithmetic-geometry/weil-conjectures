@@ -129,23 +129,80 @@
    }
   },
   {
-   "text": "Retain the construction for the arbitrary $q$ and $L/E$. The finite $A$-algebra $R$ is of finite type: its finite module generators also generate it as an algebra. Since $A$ is J-2, [def-exc-excellent-ring] makes $\\operatorname{Reg}(R)$ open. It contains the zero prime, because $R_{(0)}=L_0$ is a regular field by [lem-weil-pbc-field-regular-ring]. By [lem-weil-pbc-spec-localization-away-basic-open], choose $0\\ne a\\in R$ with $D_R(a)\\subseteq\\operatorname{Reg}(R)$. For a prime $P$ of $R_a$ with contraction $p$, the mutually inverse maps $r/s\\mapsto(r/1)/(s/1)$ and $(r/a^n)/(s/a^m)\\mapsto ra^m/(sa^n)$ identify $(R_a)_P$ with $R_p$; their denominators are invertible since $a\\notin p$ and $s\\notin p$. Thus $R_a$ is regular. Its Noetherianity and that of $C_a$ follow from [lem-weil-pbc-localization-noetherian]. The map $R_a\\to C_a$ is the base change of $R\\to C$, hence weakly etale by step 2, flat by its definition, and has regular fibres by step 2. Apply [lem-weil-pbc-regular-map-ascent] to get that $C_a$ is regular. Under the product decomposition in step 7, write $C_a\\cong D_a\\times H$. For a prime $\\mathfrak t$ of $D_a$, the corresponding prime of $C_a$ is $\\mathfrak t\\times H$. The idempotent $(1,0)$ is outside this prime and becomes $1$ in its localization, while $(0,1)$ becomes $0$. Projection therefore identifies $(C_a)_{\\mathfrak t\\times H}$ with $(D_a)_{\\mathfrak t}$; its inverse sends $d/s$ to $(d,0)/(s,0)$, whose denominator is outside $\\mathfrak t\\times H$. Thus every prime local ring of $D_a$ is regular. Its Noetherianity follows from that of $C_a$, since it is a cyclic quotient algebra, by [lem-weil-pbc-finite-algebra-noetherian]. The image of $a$ in $D\\subset L$ is nonzero. For each prime $\\mathfrak d$ of $D$ avoiding $a$, the fraction maps $d/s\\mapsto(d/1)/(s/1)$ and $(d/a^n)/(s/a^m)\\mapsto da^m/(sa^n)$ identify $D_{\\mathfrak d}$ with $(D_a)_{\\mathfrak dD_a}$. Consequently $D_D(a)$ is a nonempty open subset of $\\operatorname{Spec}D$ consisting of regular local rings; it contains $(0)$.",
+   "text": "Retain the construction for the arbitrary $q$ and $L/E$. The finite $A$-algebra $R$ is of finite type: its finite module generators also generate it as an algebra. Since $A$ is J-2, [def-exc-excellent-ring] makes $\\operatorname{Reg}(R)$ open. It contains the zero prime because $R_{(0)}=L_0$ is a regular field by [lem-weil-pbc-field-regular-ring]. By [lem-weil-pbc-spec-localization-away-basic-open], choose $0\\ne a\\in R$ with $D_R(a)\\subseteq\\operatorname{Reg}(R)$.",
    "uses": [
     "def-exc-excellent-ring",
     "lem-weil-pbc-field-regular-ring",
-    "lem-weil-pbc-spec-localization-away-basic-open",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-regular-map-ascent",
-    "lem-weil-pbc-finite-algebra-noetherian"
+    "lem-weil-pbc-spec-localization-away-basic-open"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07P7 (definition-J); algebra.tex Tags 00E0 (lemma-Zariski-topology), 00E4 (lemma-standard-open), 00FN (lemma-Noetherian-permanence), 031E (lemma-flat-over-regular-with-regular-fibre); component localizations are computed by idempotents"
+    "place": "Tag 07P7 (definition-J); algebra.tex Tags 00E0 (lemma-Zariski-topology), 00E4 (lemma-standard-open)"
    }
   },
   {
-   "text": "In particular, for every prime $q\\subset B$ and every finite purely inseparable extension $L/\\kappa(q)$, steps 3–7 and 9 produce the $B$-subalgebra $D\\subset L$, finite as a $B$-module, with fraction field exactly $L$ and a nonempty open subset of its spectrum consisting of regular local rings. (The construction works for all finite extensions, so it applies to these.) These are exactly the hypotheses, with $R=B$, of [lem-exc-j2-residue-field-criterion]. Since $B$ is Noetherian by assumption, that lemma proves that $B$ is J-2. Combining with step 8 gives both requested clauses. If $B$ is the zero ring there are no primes; the Japanese conditions and the criterion are vacuous, and every unital $B$-algebra is zero, so the same conclusion holds.",
+   "text": "For any prime $P$ of $R_a$, apply part (2) of [lem-weil-pbc-localization-prime-residue-field-iso] with $A=R$, $W=\\{1,a,a^2,\\ldots\\}$ and $A\\prime=R_a$. It identifies $(R_a)_P$ with $R_p$, where $p$ is the contracted prime. The image of $a$ is a unit, so $a\\notin p$ and $R_p$ is regular local by step 9. The ring $R_a$ is Noetherian by [lem-weil-pbc-localization-noetherian]; hence $R_a$ is regular by [def-weil-regular-scheme].",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization), 00C9 (item-localization-localization), 00FN (lemma-Noetherian-permanence)"
+   }
+  },
+  {
+   "text": "The ring $C_a$ is Noetherian by [lem-weil-pbc-localization-noetherian]. The map $R_a\\to C_a=R_a\\otimes_R C$ is weakly etale by step 2, flat by [def-weil-pbc-ind-etale-algebra], and has regular fibres by step 2. The base $R_a$ is regular by step 10. All hypotheses of [lem-weil-pbc-regular-map-ascent] therefore hold, so $C_a$ is regular.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-regular-map-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031E (lemma-flat-over-regular-with-regular-fibre)"
+   }
+  },
+  {
+   "text": "Write $C\\cong D\\times H_0$ using step 7 and let the image of $a$ be $(a_D,a_H)$. Localizing this product gives $C_a\\cong D_{a_D}\\times (H_0)_{a_H}$: the map sends $(d,h)/a^n$ to $(d/a_D^n,h/a_H^n)$; the inverse sends $(d/a_D^n,h/a_H^m)$ to $(d a_D^m,h a_H^n)/a^{n+m}$. These fraction formulas respect the localization equivalence relation and are inverse by multiplication of denominators. Put $H=(H_0)_{a_H}$ and write $D_a=D_{a_D}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary fraction calculation for localization of the finite product from step 7"
+   }
+  },
+  {
+   "text": "For a prime $\\mathfrak t$ of $D_a$, apply [lem-weil-pbc-product-prime-localization] to the two factors in step 12, selecting $D_a$. It identifies $(D_a)_{\\mathfrak t}$ with $(C_a)_{\\mathfrak t\\times H}$, which is regular local since $C_a$ is regular. Also $D_a$ is a cyclic quotient algebra of the Noetherian ring $C_a$, so [lem-weil-pbc-finite-algebra-noetherian] makes it Noetherian. By [def-weil-regular-scheme], $D_a$ is regular.",
+   "uses": [
+    "lem-weil-pbc-product-prime-localization",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CYA (lemma-finite-product-normal, local-ring calculation); Tag 00FN (lemma-Noetherian-permanence)"
+   }
+  },
+  {
+   "text": "The image of $a$ in $D\\subset L$ is nonzero. For a prime $\\mathfrak d$ of $D$ avoiding $a$, part (1) of [lem-weil-pbc-localization-prime-residue-field-iso] gives the prime $\\mathfrak dD_a$ with contraction $\\mathfrak d$; part (2) identifies $D_{\\mathfrak d}$ with $(D_a)_{\\mathfrak dD_a}$. The latter is regular local by step 13. By [lem-weil-pbc-spec-localization-away-basic-open], $D_D(a)$ is open; it contains $(0)$ and all its local rings are regular local. This supplies the required nonempty regular open in $\\operatorname{Spec}D$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization), 00C9 (item-localization-localization), 00E4 (lemma-standard-open)"
+   }
+  },
+  {
+   "text": "In particular, for every prime $q\\subset B$ and every finite purely inseparable extension $L/\\kappa(q)$, steps 3–7 and 9–14 produce the $B$-subalgebra $D\\subset L$, finite as a $B$-module, with fraction field exactly $L$ and a nonempty open subset of its spectrum consisting of regular local rings. (The construction works for all finite extensions, so it applies to these.) These are exactly the hypotheses, with $R=B$, of [lem-exc-j2-residue-field-criterion]. Since $B$ is Noetherian by assumption, that lemma proves that $B$ is J-2. Combining with step 8 gives both requested clauses. If $B$ is the zero ring there are no primes; the Japanese conditions and the criterion are vacuous, and every unital $B$-algebra is zero, so the same conclusion holds.",
    "uses": [
     "lem-exc-j2-residue-field-criterion"
    ],
@@ -177,7 +234,10 @@
   "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
   "def-exc-excellent-ring",
   "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "def-weil-regular-scheme",
   "lem-weil-pbc-regular-map-ascent",
+  "lem-weil-pbc-product-prime-localization",
   "lem-exc-j2-residue-field-criterion"
  ],
  "proof_origin": {
@@ -307,7 +367,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-weakly-etale-excellent",
   "by": "worker",
@@ -316,75 +376,79 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-exc-weakly-etale-nagata-j2",
   "worker": "stage1",
-  "summary": "Kept the statement exactly. Ten proof steps use existing field-fibre, normality, finite-normalization, product-decomposition and J-2 criterion nodes. Constructed finite normal models for every finite residue-field extension and exhibited their regular principal opens; no clause is moved to a new node. No new nodes or Mathlib leaves.",
+  "summary": "Repair of the returned long step 9: kept the statement, Lean record, route, and other steps. Replaced step 9 by six short steps citing the existing localization-prime comparison and Mathlib product-prime localization leaf for its hidden local-ring identifications; only the explicit product-fraction regrouping is elementary. No new nodes or Mathlib leaves.",
   "blueprint": "The second-paragraph permanence sentence of thm-exc-curve-open-dimension-general, through lem-exc-field-algebra-strict-henselization-excellent and lem-exc-weakly-etale-excellent. This item implements Greco 5.3(ii) below that sentence; the generic algebra proof is below the unit route and changes no chapter or unit step.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-weak-etale-field",
-    "why": "Generic algebra tool in steps 1. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 1. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-finite-algebra-is-integral",
-    "why": "Generic algebra tool in steps 1, 8. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 1, 8. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-minimal-prime-reduced-localization-field",
-    "why": "Generic algebra tool in steps 1. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 1. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-field-regular-ring",
-    "why": "Generic algebra tool in steps 1, 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 1, 9. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-weakly-etale-composition-base-change",
-    "why": "Generic algebra tool in steps 2. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 2. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-affine-chart-base-change-iso",
-    "why": "Generic algebra tool in steps 2. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 2. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-finite-algebra-noetherian",
-    "why": "Generic algebra tool in steps 2, 4, 5, 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 2, 4, 5, 13. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-localization-noetherian",
-    "why": "Generic algebra tool in steps 2, 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 2, 10, 11. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
-    "why": "Generic algebra tool in steps 4. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 4. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-localization-normal-domain",
-    "why": "Generic algebra tool in steps 4. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 4. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
-    "why": "Generic algebra tool in steps 5. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 5. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "why": "Generic algebra tool in steps 7. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 7. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-prime-localizations-jointly-injective",
-    "why": "Generic algebra tool in steps 7. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 7. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
-    "why": "Generic algebra tool in steps 7. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 7. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-spec-localization-away-basic-open",
-    "why": "Generic algebra tool in steps 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 9, 14. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
    },
    {
     "node": "lem-weil-pbc-regular-map-ascent",
-    "why": "Generic algebra tool in steps 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+    "why": "Generic algebra tool in steps 11. Its statement supplies precisely the algebra fact used there; this fact is not supplied by the affine-line/Kummer unit and does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic localization tool in steps 10 and 14. Part (1) gives the prime correspondence and part (2) the local-ring comparison for arbitrary localizations. The Kummer unit has no such general algebra lemma."
    }
   ]
  },
@@ -404,15 +468,16 @@
   "lem-weil-pbc-prime-localizations-jointly-injective",
   "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
   "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-regular-map-ascent"
+  "lem-weil-pbc-regular-map-ascent",
+  "lem-weil-pbc-localization-prime-residue-field-iso"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q02-9e67375e9",
-  "group": "Q02",
+  "reviewer": "NT-cc-Q105-309d135d4",
+  "group": "Q105",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-9e67375e9 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and unit/chapter route. All ten steps pass: finite normal models have the exact fraction fields and nonempty regular opens required by Stacks 07PC. Greco 5.3(ii) and Remark 5.2 match all hypotheses. No new nodes, circular dependencies, restated splits, or repairs. Accepted all 16 declared generic tool uses; concrete checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-309d135d4 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 15 steps, the statements of all 25 cited nodes, the unit sk-prop-a1-kummer and the parent lem-exc-weakly-etale-excellent (its step 4 uses exactly this statement), plus the local Stacks texts 07PC (lemma-J-2), 092Q and lemma-spec-product. The statement (Greco 5.3(ii) with AF = weakly étale) is unchanged and not weakened. The return point is repaired: the old long step 9 is now steps 9–14. Step 9 uses J-2 of A for the finite A-algebra R and picks a regular D(a) containing (0). Step 10 shows R_a regular via localization-prime-residue-field-iso (2), which fits because its statement allows any localization. Step 11 meets all four hypotheses of regular-map-ascent for R_a→C_a. Step 12 is the product-localization fraction calculation; I checked the inverse formula. Step 13 uses the Mathlib leaf product-prime-localization, and D_a is Noetherian as a quotient of C_a. Step 14 uses parts (1)/(2) to get regular local rings of D on D(a), and a≠0 because R embeds in the domain D. Step 15 meets exactly the hypotheses of the 07PC (4)⇒(1) criterion. Steps 1–8 are rechecked and correct: field fibres, the finite subfield L0, the finite normal R via N-2, C normal via 0C22, minimality of Q, the product decomposition giving D with Frac L, and Nagata. Edge cases checked: B=0, infinite separable E/k, non-faithful localizations, products of fields, L=E, empty second factor. No cycle in a 619-node walk, no new nodes, no SGA. I accept the newly declared tool use lem-weil-pbc-localization-prime-residue-field-iso. Remarks with no change made: steps 1–8 repeat the proof of the existing same-unit node lem-exc-nagata-weakly-etale-ascent (Nagata half only), which is not a fault because the construction is needed for J-2; and source.url still ends 'rings1.pdf', not the corrected 'rings-1.pdf' named in the report."
  },
  "reviewed_lean": {
   "date": "2026-10-16",

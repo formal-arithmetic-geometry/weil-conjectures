@@ -11,9 +11,144 @@
   "lem-coef-sorted-simplicial-algebra-model",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the composition-and-unit theory, the free algebra $F_{xy}(K)$ on a simplicial set $K$ in sort $(x,y)$ is the degreewise path category on edges $K$ from $x$ to $y$: a functor out amounts exactly to a simplicial map $K\\to C(x,y)$. Colimits of simplicial categories on $O$ are degreewise ordinary categorical colimits, since their universal properties assemble the simplicial operators uniquely. In degree $q$, the simplices of $\\Delta^m$ outside $\\partial\\Delta^m$ are precisely the surjections $[q]\\twoheadrightarrow[m]$. A boundary-cell pushout therefore freely adjoins one graph edge for every such surjection, tagged by the cell, with the specified endpoints. All other simplices are assigned to old arrows by the attaching map. The categorical presentation has only the old relations, so adds no relation involving a new edge. Coproducts tag the edges by their cells; at a limit stage every arrow is a finite word from preceding stages. Consequently every relative boundary-cell map $A\\to A'$ has, in each degree, $A'_q=A_q*P(R_q)$, with $P(R_q)$ the free path category on its newly adjoined graph. Starting from the identity-only category $I_O$, the result is free in each degree. This is the direct cell calculation for the generators supplied by [lem-coef-sorted-simplicial-algebra-model]; it includes $x=y$ and the zero-dimensional boundary.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Definitions 7.4–7.5 and Proposition 7.6, pp.277–278: boundary-cell presentation of free maps, expanded using the sorted-model generators."
+   }
+  },
+  {
+   "text": "Apply the boundary small-object factorization of [lem-coef-sorted-simplicial-algebra-model] first to $I_O\\to V$, obtaining $I_O\\to V'\\xrightarrow{p_V}V$, and then to $V'\\xrightarrow{vp_V}B$, obtaining a relative cell map $j:V'\\to B'$ followed by $p_B:B'\\to B$. Both $p_V,p_B$ are mappingwise trivial fibrations, and $p_Bj=vp_V$. Cofibrancy of $V$ gives a section $s_V:V\\to V'$ of $p_V$. Lift the cofibration $v$ against $p_B$ with top map $js_V$ and bottom map $1_B$. This produces $s_B:B\\to B'$ with $s_Bv=js_V$ and $p_Bs_B=1_B$. Thus the pair $v:V\\to B$ is an arrow-category retract of $j:V'\\to B'$. By Step 1 there are degreewise graphs $S_q\\subseteq Q_q$ on $O$ with $V'_q=P(S_q)$ and $B'_q=P(Q_q)$, and $j_q$ the inclusion of the path categories. The graph $Q_q$ is the disjoint union of the graph of $V'_q$ and the new tagged edges. We do not require faces to preserve these graphs.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 7.6 and proof of Proposition 10.2, pp.278,281: simultaneous free-pair retract via two trivial-fibration lifts."
+   }
+  },
+  {
+   "text": "Fix for now a graph $Q$ on $O$ and a subgraph $S$ with the same vertices. Put $P=P(Q)$ and $L=P\\amalg_{P(S)}G(P(S))$. The arrows of $L$ have the following presentation: composable words in positive edges of $Q$ and negative edges $e^{-1}$ only for $e\\in S$, modulo deletion or insertion of adjacent pairs $ee^{-1}$ and $e^{-1}e$. To check this presentation against the pushout, a functor from the presented category into any category on $O$ specifies arbitrary images of the positive $Q$-edges and inverse images for exactly the $S$-edges. This is exactly a functor out of $P$ together with a functor out of $G(P(S))$ agreeing on $P(S)$. Both presentations therefore satisfy the same universal property, identifying the canonical $u:P\\to L$ with the positive-word inclusion. No edge outside $S$ is inverted by this presentation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 3.1–3.3, pp.271–272: relative signed-word presentation, specializing the free-factor case of Proposition 3.7."
+   }
+  },
+  {
+   "text": "Every arrow in this presentation has a unique reduced word. Scan from left to right, storing a reduced stack; cancel the top letter if it is inverse to the next letter, and append otherwise. The stack output represents the input word, because the scan deletes only adjacent inverse pairs. For either sign of an $S$-edge $e$, appending $e$ and then its opposite restores any reduced stack: if the first append cancels, reducedness prevents the second from cancelling again; otherwise the second cancels the first. Hence inserting or deleting an inverse pair anywhere in a word leaves the final output unchanged, including after processing its suffix. All presentation relations preserve the output, and a reduced word is its own output. This proves existence and uniqueness, with no cancellation allowed for a positive edge outside $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 3.2, pp.271–272: reduced-word presentation, with the elementary stack verification written out."
+   }
+  },
+  {
+   "text": "For each $b\\in O$, the comma category $E_b=(b\\downarrow u)$ has objects reduced allowed words $w:b\\to x$ and morphisms $w\\to w'$ positive $Q$-paths $a:x\\to x'$ with $w'=\\operatorname{red}(wa)$. Let $T_b$ have these objects as vertices and one directed edge $w\\to\\operatorname{red}(we)$ for each positive $Q$-edge $e$ out of the endpoint of $w$. A positive path determines a unique lifted path in $T_b$ by successively appending its letters; a lifted path records its positive word. These assignments are inverse on every morphism, preserve concatenation and identities, and give $E_b=P(T_b)$. The sets are small because all words are finite words in small sets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7, p.272: explicit comma-category expansion of the free case, agent argument."
+   }
+  },
+  {
+   "text": "The underlying undirected graph of $T_b$ is a tree rooted at the empty word. Each edge changes reduced-word length by one. A nonempty word has exactly one edge to a shorter word, obtained by deleting its final letter: for a positive last letter this edge enters the word from its prefix, while for a negative last letter (necessarily from $S$) it leaves the word for its prefix. All such prefixes are allowed words. This also proves uniqueness of the underlying edge; the edge is determined by the last signed letter, so parallel edges of $Q$ do not become parallel edges here. There are no loops. A simple cycle would have a maximum-length vertex with two distinct edges to shorter neighbors, which is impossible. Successive deletion joins every vertex to the root. Thus the tree assertion holds with arbitrary loops and parallel edges in $Q$, and with $S$ empty or all of $Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7, p.272: elementary rooted-tree calculation for the comma category, agent argument."
+   }
+  },
+  {
+   "text": "For a nonempty finite connected subtree $H\\subseteq T_b$ containing the root, prove $N(P(H))\\to *$ a weak equivalence by induction on its number of vertices. A singleton has path category and nerve equal to a point. Otherwise choose a nonroot leaf $z$ with neighbor $t$, and set $H'=H\\setminus\\{z\\}$. The inclusion $J:P(H')\\to P(H)$ has retraction $R$ sending $z$ to $t$, the incident edge to $1_t$, and fixing everything else. A graph map into a category extends uniquely to its path category, so $RJ=1$. If the edge points $z\\to t$, its component at $z$ and identity components elsewhere define $1\\Rightarrow JR$; if it points $t\\to z$, they define $JR\\Rightarrow1$. Naturality holds because a directed path meeting a leaf can only start or end there, and $R$ erases just that incident edge. The natural-transformation homotopy assertion of [lem-coef-nerve-natural-homotopy-equivalence] makes $NJ$ and $NR$ homotopy inverses. Composition of weak equivalences [lem-coef-kan-quillen-right-proper] and the induction hypothesis prove the assertion for $H$.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7, p.272: finite-tree contraction supplied explicitly using natural-transformation homotopies."
+   }
+  },
+  {
+   "text": "The poset $\\mathcal H_b$ of finite connected subtrees of $T_b$ containing its root is small, nonempty, and directed: it contains the singleton root and the union of finitely many such subtrees is another. Every simplex of $N(P(T_b))$ is a finite string of finite edge paths. Adjoining the paths from its vertices to the root puts it in some $H\\in\\mathcal H_b$. Equality of paths is literal word equality, so inclusions identify no distinct simplices. This gives a degreewise equality $\\operatorname{colim}_{H\\in\\mathcal H_b}N(P(H))=NE_b$, compatible with all nerve operators. The maps to the constant point diagram form a natural transformation and are weak equivalences by Step 7. Apply the filtered-colimit clause of [lem-coef-sset-gluing-filtered-equivalences]; its index hypotheses have just been verified. The colimit of the constant point is a point because the poset is nonempty and directed. Therefore $NE_b\\to *$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7, p.272: passage from finite comma subtrees to the full comma category, agent argument."
+   }
+  },
+  {
+   "text": "For $u:P(Q)\\to P(Q)\\amalg_{P(S)}G(P(S))$, Steps 5–8 prove weak contractibility of $N(b\\downarrow u)$ for every target object $b$. The left-aspherical nerve implication of [lem-coef-grothendieck-aspherical-base-change] applies to this functor of small categories and proves that the actual canonical nerve map $Nu$ is a weak homotopy equivalence. The implication only requires these comma nerves, not invertibility of the positive edges outside $S$. If $O$ is empty, both nerves are empty and the nerve map is already the identity. No connectedness is used: each tree is rooted at its own chosen target object.",
+   "uses": [
+    "lem-coef-grothendieck-aspherical-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7, p.272: asphericity proof for a free category with a chosen free subgraph; this is the ordinary input to 10.2."
+   }
+  },
+  {
+   "text": "Apply Step 9 to $(Q_q,S_q)$ from Step 2 for every $q$. The pushout defining $B'[V'^{-1}]$ is degreewise: a simplicial functor out is exactly a compatible family of degreewise functors, so the ordinary degreewise pushouts have its universal property. Thus each map of ordinary nerves $B(B')_{\\bullet,q}\\to B(B'[V'^{-1}])_{\\bullet,q}$ is a weak homotopy equivalence. These maps form a morphism of bisimplicial sets, since the localization unit is natural for every functor of pairs, regardless of whether that functor preserves chosen free generators. Apply the exchanged-direction assertion of [lem-coef-bisimplicial-diagonal-equivalence]. Its diagonal is exactly $NB'\\to N(B'[V'^{-1}])$, with the $p=0$ and empty-product conventions of the statement. This canonical map is consequently a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 1.4(vi)–(vii) and proof of Proposition 10.2, pp.269,281: the diagonal argument."
+   }
+  },
+  {
+   "text": "A map of pairs $(V\\to B)\\to(W\\to C)$ induces $B\\amalg_VG(V)\\to C\\amalg_WG(W)$: use the functor on $B$, and the functor on completions, which sends formal inverses to the inverses of their images. Agreement on $V$ is the pair square. Uniqueness in the completion and pushout properties makes these assignments preserve identities and composition, and makes $B\\to B[V^{-1}]$ natural in the pair. Apply this to the section and retraction of pairs in Step 2. Since their composite is the identity pair, the induced localization maps also compose to the identity. Applying the diagonal nerve to the naturality squares exhibits $NB\\to N(B[V^{-1}])$ as an arrow-category retract of the weak equivalence in Step 10.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 10.1 and proof of Proposition 10.2, p.281: functoriality of partial inversion and retraction."
+   }
+  },
+  {
+   "text": "Weak equivalences of simplicial sets are retract-closed by the model structure in [lem-coef-kan-quillen-right-proper]. Concretely, if $f:A\\to B$ is a retract of $g:X\\to Y$, write $i_A,i_B$ and $r_A,r_B$ for the inclusions and retractions. On path components, and on each based homotopy group with the corresponding included basepoint, an inverse to $f_*$ is $r_{A*}g_*^{-1}i_{B*}$. The two commuting squares and $r_*i_*=1$ make both composites identities. Realization respects these equations. Apply this to Step 11 to obtain the required weak homotopy equivalence. The empty object set gives the identity of the empty nerve; isolated vertices give singleton comma trees, while missing mapping sets are allowed throughout.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 10.2, p.281: conclusion by retract closure, including the empty case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-grothendieck-aspherical-base-change",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-sorted-simplicial-algebra-model",
+  "lem-coef-sset-gluing-filtered-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Proposition 10.2, using its 7.6 / 3.7 / diagonal route, expanded by a direct partial-signed-word comma-tree argument because the existing free-calculus and ordinary gluing nodes have dependency paths back to this item; source read online, archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +198,66 @@
    "results": "{\"t\": \"2026-10-17T06:55:41Z\", \"tool\": \"grep\", \"query\": \"simplicial.*(groupoid|localization)|cofibrant.*nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary nerve adjunctions and abstract localization of model categories do not assert diagonal-nerve invariance of degreewise partial inversion of simplicial categories; the corrected Loogle identifier also returns no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*(localiz|groupoid)|localiz.*nerve|nerve.*localiz",
+   "results": "{\"t\": \"2026-10-17T08:04:36Z\", \"tool\": \"grep\", \"query\": \"free.*(localiz|groupoid)|localiz.*nerve|nerve.*localiz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\"], \"digest\": \"dcb3ec9b646b49be\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained hits concern ordinary nerve/homotopy-category adjunctions, abstract cofibrant-object localization, or free groupoid constructions; none states partial-inversion invariance of the diagonal classifying nerve. Read Nerve.lean:35–75, NerveAdjunction.lean:393–418, FreeGroupoid.lean:45–65, and CofibrantObjectHomotopy.lean:55–98."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverting a free factor of an ordinary category preserves the weak homotopy type of its classifying nerve",
+   "results": "{\"t\": \"2026-10-17T08:04:36Z\", \"tool\": \"leansearch\", \"query\": \"Inverting a free factor of an ordinary category preserves the weak homotopy type of its classifying nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.FunctorsInverting\", \"HomotopicalAlgebra.instWeakEquivalenceOppositeOp\", \"CategoryTheory.FreeMonoidalCategory.inverseAux\", \"CategoryTheory.FreeGroupoid\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesOpposite\", \"CategoryTheory.FreeGroupoid.liftNatIso\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\"], \"digest\": \"de88c99c268bccf9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained hits concern ordinary nerve/homotopy-category adjunctions, abstract cofibrant-object localization, or free groupoid constructions; none states partial-inversion invariance of the diagonal classifying nerve. Read Nerve.lean:35–75, NerveAdjunction.lean:393–418, FreeGroupoid.lean:45–65, and CofibrantObjectHomotopy.lean:55–98."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLocalization, CategoryTheory.nerve",
+   "results": "{\"t\": \"2026-10-17T08:04:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLocalization, CategoryTheory.nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained hits concern ordinary nerve/homotopy-category adjunctions, abstract cofibrant-object localization, or free groupoid constructions; none states partial-inversion invariance of the diagonal classifying nerve. Read Nerve.lean:35–75, NerveAdjunction.lean:393–418, FreeGroupoid.lean:45–65, and CofibrantObjectHomotopy.lean:55–98."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of a free product of categories D and W is weakly homotopy equivalent to the nerve obtained by inverting every arrow of the free category W",
+   "results": "{\"t\": \"2026-10-17T08:04:47Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of a free product of categories D and W is weakly homotopy equivalent to the nerve obtained by inverting every arrow of the free category W\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"SSet.OneTruncation₂.ofNerve₂\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"4f421e201ed03511\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained hits concern ordinary nerve/homotopy-category adjunctions, abstract cofibrant-object localization, or free groupoid constructions; none states partial-inversion invariance of the diagonal classifying nerve. Read Nerve.lean:35–75, NerveAdjunction.lean:393–418, FreeGroupoid.lean:45–65, and CofibrantObjectHomotopy.lean:55–98."
+  },
+  {
+   "tool": "grep",
+   "query": "free.factor|partial.inversion|localiz.*nerve|nerve.*localiz",
+   "results": "{\"t\": \"2026-10-17T08:05:06Z\", \"tool\": \"grep\", \"query\": \"free.factor|partial.inversion|localiz.*nerve|nerve.*localiz\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained hits concern ordinary nerve/homotopy-category adjunctions, abstract cofibrant-object localization, or free groupoid constructions; none states partial-inversion invariance of the diagonal classifying nerve. Read Nerve.lean:35–75, NerveAdjunction.lean:393–418, FreeGroupoid.lean:45–65, and CofibrantObjectHomotopy.lean:55–98."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degreewise partial inversion in a cofibrant simplicial category induces a weak homotopy equivalence on the diagonal nerve",
+   "results": "{\"t\": \"2026-10-17T08:05:06Z\", \"tool\": \"leansearch\", \"query\": \"Degreewise partial inversion in a cofibrant simplicial category induces a weak homotopy equivalence on the diagonal nerve\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dwyer Kan Proposition 3.7: partial groupoid completion of a free factor W in a free product D star W induces a weak homotopy equivalence on ordinary nerves",
+   "results": "{\"t\": \"2026-10-17T08:05:19Z\", \"tool\": \"leanfinder\", \"query\": \"Dwyer Kan Proposition 3.7: partial groupoid completion of a free factor W in a free product D star W induces a weak homotopy equivalence on ordinary nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\"], \"digest\": \"aa4306ef4963e6cf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained hits concern ordinary nerve/homotopy-category adjunctions, abstract cofibrant-object localization, or free groupoid constructions; none states partial-inversion invariance of the diagonal classifying nerve. Read Nerve.lean:35–75, NerveAdjunction.lean:393–418, FreeGroupoid.lean:45–65, and CofibrantObjectHomotopy.lean:55–98."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a cofibrant pair of simplicial categories preserves the weak homotopy type of its diagonal classifying nerve",
+   "results": "{\"t\": \"2026-10-17T08:05:20Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing a cofibrant pair of simplicial categories preserves the weak homotopy type of its diagonal classifying nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"bb86522cf40b4849\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained hits concern ordinary nerve/homotopy-category adjunctions, abstract cofibrant-object localization, or free groupoid constructions; none states partial-inversion invariance of the diagonal classifying nerve. Read Nerve.lean:35–75, NerveAdjunction.lean:393–418, FreeGroupoid.lean:45–65, and CofibrantObjectHomotopy.lean:55–98."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-invertible-arrow-pushout",
@@ -100,5 +291,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cofibrant-localization-diagonal-nerve",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Dwyer–Kan Proposition 10.2 into a simultaneous free-pair retract, the partial signed-word comma-tree calculation, finite-tree contraction and directed union, Quillen A, diagonal invariance, and functorial retract closure. Avoided cyclic uses of the existing fixed-object free calculus and ordinary gluing/completion nodes without creating duplicates. Reused retained genuine Mathlib searches; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the coherent adjunction-calculation foundation in prop-coef-integral-exceptional-adjoint proof paragraph 2 through the recorded simplicial-inversion ancestry. Supplies precisely the diagonal-nerve preservation input required by lem-coef-simplicial-invertible-arrow-pushout; no unit/chapter route change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-f74264e43",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-f74264e43 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 12 steps, the full statements of the six cited nodes, the one citer, and Dwyer–Kan (the Rochester scan of Simplicial localizations of categories, not in literature/): printed p.281 (10.1, 10.2, 10.4) as a page image, and 1.4(v)-(vii), 3.1-3.8 and 7.4-7.6 from a text extraction of the same scan. The statement matches 10.2 exactly: V and B cofibrant and v a cofibration, B[V^{-1}] the pushout with degreewise groupoid completion, NB the diagonal of the degreewise nerves. It drops no hypothesis and is not weakened. The invertibility condition belongs only to 10.4, as the item says. No target node is involved, so no base-change or coefficient check applies; no SGA is used. Checked every step. Step 1: F(Delta^m)_q = F(dDelta^m)_q * P(surjections), and colimits are degreewise. Step 2: both lifts commute (p_B j s_V = v), giving a retract of pairs. Steps 3-4: the word presentation and the stack proof of unique reduced words. Step 5: the comma category is the free category on the element graph. Step 6: T_b is a tree because each nonempty word has exactly one edge to a shorter word; tested loops, parallel edges, S empty and S=Q. Step 7: leaf retraction with a natural transformation that need not be invertible. Step 8: the filtered-colimit clause's hypotheses hold. Step 9: Quillen A for (b|u), which matches the cited node. Step 10: the exchanged-direction diagonal clause. Steps 11-12: functoriality and retract closure. All six cited nodes are split, reviewed and in the item's unit, so no tool_uses are needed. Their dependency closures avoid the item. Confirmed that citing free-category-groupoid-nerve, free-product-nerve-gluing or fixed-object-simplicial-free-calculus would create a cycle. No new nodes. No existing node duplicates the partial-inversion result; completion-nerve is the special case V=B. No fixes."
  }
 }

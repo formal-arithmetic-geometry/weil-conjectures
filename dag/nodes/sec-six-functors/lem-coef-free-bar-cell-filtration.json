@@ -25,14 +25,48 @@
    }
   },
   {
-   "text": "For fixed $d,r$, apply the cited unique nondegenerate decomposition to the outer simplicial set $k\\mapsto P_k(d)_r$. An outer simplex is degenerate exactly when one of the arrows among $c_0\\to\\cdots\\to c_k$ is an identity: degeneracies insert such arrows, and deleting them gives the converse. This criterion does not concern the last arrow $c_k\\to d$ or degeneracy of the inner value. Define $Q_kZ$ as the image of coend summands of outer degree at most $k$. To check the attaching square in inner degree $r$, a representative of the proposed degree-$k$ cell is $(x,\\alpha)$ with $x$ an outer-nondegenerate $k$-simplex in $P_k(d)_r$ and $\\alpha:[r]\\to[k]$. If $\\alpha$ is not surjective, factor it through its proper image $[t]\\hookrightarrow[k]$ with $t<k$. The coend relation identifies it with the corresponding proper face in $Q_{k-1}Z$. This is exactly the boundary attaching map; its compatibility on intersections is the simplex identity already checked. If $\\alpha$ is surjective, its image is the outer degeneracy $P(\\alpha)x$. Unique nondegenerate decomposition says that two such pairs have the same image only when both $x$ and $\\alpha$ agree, and none has image in $Q_{k-1}Z$. Conversely, every simplex in $Q_kZ$ has a nondegenerate ancestor of dimension at most $k$: factor the map in any coend representative through its image and then remove degeneracies. Thus the pushout has precisely the old simplices plus these distinct new interior simplices. This proves its bijection with $Q_kZ$ degreewise. The attaching maps and this bijection commute with inner operators and postcomposition in $d$, even when an inner operator makes an inner value degenerate, since it leaves the outer string unchanged. Grouping $x$ by its nonidentity string and final arrow gives exactly the displayed coproduct of $F_{c_k}(Z(c_0)\\times\\partial\\Delta^k)\\to F_{c_k}(Z(c_0)\\times\\Delta^k)$. For $k=0$ the boundary is empty. Finally every coend representative has finite outer degree, so these inclusions have colimit $QZ$.",
+   "text": "Define $N_k(d)\\subseteq P_k(d)$ as the union of the summands indexed by strings whose internal arrows $c_0\\to\\cdots\\to c_k$ are all nonidentity, with any terminal arrow to $d$, and $D_k(d)$ as the complementary union. Inner operators, postcomposition in $d$ and maps of $Z$ do not change the internal string, so both are sub-$C$-diagrams. Fix $d$ and an inner degree $r$ and let $T=P_\\bullet(d)_r$, an outer simplicial set [def-weil-pbc-simplicial-set]. An outer $k$-simplex is degenerate exactly when it lies in $D_k(d)_r$: the image of $s_i$ has $c_i\\to c_{i+1}$ an identity; conversely, if $c_i\\to c_{i+1}$ is $1$ with $0\\leq i<k$, then $d_{i+1}$ composes it with the next arrow (the terminal arrow if $i+1=k$) leaving the value unchanged, and $s_i$ reinserts it, so $x=s_id_{i+1}x$. Colimits of $C$-diagrams of simplicial sets [def-weil-pbc-category-colimit] are formed objectwise and degreewise in sets, so $(L_kP)(d)_r=L_kT$ for the proper-surjection latching colimit, with the same structure maps. By [lem-coef-simplicial-latching-degenerate-subset], $\\lambda_k:L_kT\\to T_k$ is injective with image the degenerate subset $D_k(d)_r$, naturally in $T$. Inner operators, postcomposition in $d$ and maps of $Z$ are maps of these outer simplicial sets, so this naturality shows that $\\lambda_k:L_kP\\to P_k$ is an isomorphism of $C$-diagrams of simplicial sets onto $D_k$. Hence $P_k\\cong L_kP\\amalg N_k$ compatibly with $\\lambda_k$, naturally in $Z$, with no condition on the terminal arrow or the inner simplex. For $k=0$ there are no internal arrows and $L_0P=D_0=\\varnothing$.",
    "uses": [
-    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-simplicial-latching-degenerate-subset"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 017R, lemma-splitting-simplicial-sets. Agent degreewise pushout argument for the explicit free bar, consistent with Rezk §6 equation (6.2), printed p.11."
+    "place": "Tag 017R (lemma-splitting-simplicial-sets) for nondegenerate splitting; proper-surjection latching colimit from lem-coef-simplicial-latching-degenerate-subset. Agent identification of the degenerate outer simplices of the given free bar."
+   }
+  },
+  {
+   "text": "Let $R_k(P)$ be the truncated coend with outer indices at most $k$, and set $R_{-1}(P)=\\varnothing$. For fixed $d,r$, apply [lem-coef-truncated-coend-skeleton-image] to the outer simplicial set $S_n=P_n(d)_r$. Its map sends $[x,\\alpha]$ to $P(\\alpha)x$ and is injective with image the outer simplices generated in dimensions at most $k$. By the coend/diagonal formula of step 1 this is precisely the specified image $Q_kZ(d)_r$. Naturality of this comparison in $S$ makes it commute with inner operators, postcomposition in $d$, and maps of $Z$. Hence $R_k(P)\\cong Q_kZ$ with their specified maps into $QZ$.",
+   "uses": [
+    "lem-coef-truncated-coend-skeleton-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R (lemma-splitting-simplicial-sets), applied via the two explicit comparison nodes; skeletal coend pushout from lem-coef-tensor-coend-skeletal-pushouts. Agent specialization to the given free bar."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-tensor-coend-skeletal-pushouts] to the outer simplicial object $P$ in the category of $C$-diagrams of simplicial sets, using its objectwise Cartesian tensor and small colimits; this is the projective simplicial presheaf category of [lem-coef-simplicial-presheaf-projective-model] with $D=C^{\\mathrm{op}}$. The cited theorem gives the latching/boundary pushout for $R_{k-1}(P)\\to R_k(P)$, with the prescribed face maps, and colimit $QZ$. Use the preceding comparison to identify these stages with $Q_{k-1}Z$ and $Q_kZ$. All required index categories are small; no cofibrancy hypothesis is used for this pushout.",
+   "uses": [
+    "lem-coef-tensor-coend-skeletal-pushouts",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R (lemma-splitting-simplicial-sets), applied via the two explicit comparison nodes; skeletal coend pushout from lem-coef-tensor-coend-skeletal-pushouts. Agent specialization to the given free bar."
+   }
+  },
+  {
+   "text": "Substitute $P_k=L_kP\\amalg N_k$ into that square. Products distribute over these disjoint unions degreewise, so its attaching object is $(L_kP\\times\\Delta^k)\\amalg(N_k\\times\\partial\\Delta^k)$ and its disk object is $(L_kP\\times\\Delta^k)\\amalg(N_k\\times\\Delta^k)$. In the pushout universal property the identical $L_kP\\times\\Delta^k$ summand cancels: a map on the disk object is already fixed there by the old-stage map. Thus the same square attaches $N_k\\times\\partial\\Delta^k\\to N_k\\times\\Delta^k$. Since $N_k=\\coprod_{c_0\\to\\cdots\\to c_k\\text{ nonidentity}}F_{c_k}Z(c_0)$, distributing again gives exactly the displayed free cells. Their boundary maps are the faces specified by the preceding theorem. At $k=0$, the latching object and boundary are empty. The cited colimit and stage comparisons give the required filtration with colimit $QZ$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R (lemma-splitting-simplicial-sets), applied via the two explicit comparison nodes; skeletal coend pushout from lem-coef-tensor-coend-skeletal-pushouts. Agent specialization to the given free bar."
    }
   },
   {
@@ -69,7 +103,11 @@
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-simplicial-presheaf-projective-model",
-  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-simplicial-latching-degenerate-subset",
+  "lem-coef-truncated-coend-skeleton-image",
+  "lem-coef-tensor-coend-skeletal-pushouts",
   "lem-coef-kan-quillen-right-proper"
  ],
  "proof_origin": {
@@ -129,7 +167,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-geometric-descent",
@@ -159,16 +197,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-free-bar-cell-filtration",
   "worker": "stage1",
-  "summary": "Second-read five-step split with no new nodes: explicit simplex-operator/coend formulas, degreewise skeletal pushout via unique nondegenerate decomposition, coefficient-weighted projective cofibrancy proved by free/evaluation lifting, and all terminal extra-degeneracy identities. Statement unchanged. Rezk §7 supplies the displayed construction, §6 (6.2) the general skeletal context, and HTT A.3.3.5 the free-diagram cofibration principle; the detailed argument is agent-written. No Lean declaration attaches.",
+  "summary": "Q13 repair of the human-returned long step 2. Kept the statement, Lean record, route and all four other proof steps verbatim. Factored the truncated-coend image identification into one smaller statement-only node, obtained the bar latching/splitting comparison from the existing lem-coef-simplicial-latching-degenerate-subset with the identity-arrow degeneracy criterion written out (maintainer review dropped the proposed near-duplicate bar-latching node), and cited the existing general tensor-coend skeletal pushout theorem. The remaining cancellation and regrouping are explicit elementary universal-property steps. All non-elementary steps are shorter than 2000 characters.",
   "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: independent explicit free-bar replacement, its free-cell filtration, and terminal extra-degeneracy contraction data."
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q37-ec15c9bbd",
-  "group": "Q37",
+  "reviewer": "NT-cc-Q13-e99982191",
+  "group": "Q13",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-ec15c9bbd (reviewer sub-agent of L); spot-checked: PASS, no fixes written. Read the full item (5 steps, no new nodes), the cited statements (def-cbc-enhanced-diagrams-cones; lem-coef-simplicial-presheaf-projective-model plus its model-category conventions from lem-coef-simplicial-boundary-collapse-test, where each WFS class is exactly the maps lifting against the other; lem-coef-kan-quillen-right-proper; the Eilenberg–Zilber Mathlib leaf), the parent lem-coef-space-geometric-descent step 6, and paragraph 2 of the ancestor prop-coef-integral-exceptional-adjoint. Statement checked by hand: (1) F_cK=Hom(c,-)xK equals h_c in U(C^op), so the variance is right. (2) The coend is the diagonal. (3) Outer-nondegenerate strings (no identity among c_0..c_k; the last arrow c_k->d is absorbed into F_{c_k}) form an inner-closed splitting, so the skeletal pushouts along F_{c_k}(Z(c_0)x boundary of Delta^k) are correct. (4) Every terminal extra-degeneracy identity holds: d_{k+1}h_k=1, d_0h_0=h_{-1}e, d_i h_k=h_{k-1}d_i for i<=k, s_i h_k=h_{k+1}s_i, e h_{-1}=1. Small cases tested: C=[1] with Z=* gives QZ(1)=Delta^1 and QZ(0)=*; discrete C; endomorphisms and isomorphisms; empty C or Z; k=0. Step 3 is correct: monomorphisms are Kan cofibrations, Yoneda moves the lifting problem to component c, and projective cofibrations are exactly the maps lifting against objectwise trivial fibrations. The long step 2 (2017 characters) is one degreewise Eilenberg–Zilber count of the new simplices, with its only non-elementary input cited; rg found no general skeletal/bisimplicial node in the DAG, so it may stay. Duplicate candidates read and ruled out: presheaf-simplex-hocolim-resolution, ordinary-two-sided-bar-comparison, reedy-realization-homotopy-invariance, cone-boundary-projective-cells, fixed-object-simplicial-free-calculus, associative-algebra-diagram-cell-filtration, combinatorial-cofibrant-density, extra-degeneracy-contraction. Route is in-unit or uses a Mathlib leaf or a definition; no tool_uses needed; no cycle; no SGA. Rezk and HTT are not archived, so the proof is correctly marked agent-written and the report lists them as WANTED. Not a target node, so the base-change and coefficient-category check does not apply."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-e99982191 (reviewer sub-agent of L); spot-checked: I read the item in full (statement and all 8 steps), both new nodes, the statement of every cited node, all 14 proof steps of tensor-coend-skeletal-pushouts (to check its R_n, L_n and B_n conventions), and Stacks Tag 017R (simplicial.tex l.1796-1815). I searched the DAG for duplicates of both new nodes. Rezk §7 and HTT A.3.3.5 are not archived; they back steps 1, 6 and 7, which are unchanged, and I re-checked those steps by hand. Steps 1 and 3-8 are correct. Step 3: colimits are degreewise, so R_k(P)(d)_r is the degree-r part of R_k(S) for S_n=P_n(d)_r, which is the item's Q_kZ. Step 4: the hypotheses of the cited skeletal-pushout node are met objectwise. Step 5: pushing out along id plus the boundary inclusion cancels the latching summand. Step 6: monomorphisms are Kan cofibrations and Yoneda moves the lifting problem to component c. Step 7: all extra-degeneracy identities hold. New node lem-coef-truncated-coend-skeleton-image is true: a normal form [nondegenerate y, surjection] gives injectivity by 017R uniqueness, and the image is the subcomplex generated in dimension at most k. I tested k=0, the empty set, Delta^n and Delta^1/boundary. It has no duplicate, is smaller than the item, and is statement-only with correct sources and recorded searches. I kept it. New node lem-coef-bar-outer-nondegenerate is true but is a near-duplicate (C1/C5). It is the existing same-unit lem-coef-simplicial-latching-degenerate-subset (latching colimit maps injectively onto the degenerate simplices, naturally in T) applied to T=P_.(d)_r, plus a few-line check that an outer simplex is degenerate exactly when some internal arrow is an identity (x=s_i d_{i+1} x). Its extra Eilenberg-Zilber clause is not used by the item. I dropped it and rewrote step 2 (1581 characters) to cite the existing node and def-weil-pbc-category-colimit, with the criterion and the k=0 case written out. proof_deps was updated to the union of step uses and the split summary was adjusted. The statement, stmt_deps, lean record and other steps are unchanged. There is no cycle, all cited statements are in-unit so no tool_uses are needed, and no SGA is cited. This is not a target node, so the base-change and coefficient-category check does not apply.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.FreeBarCellFiltration",
