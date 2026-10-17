@@ -14,6 +14,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
 
 /-!
 
@@ -103,6 +105,10 @@ extension `E` of `ℚ_ℓ` and `ℚ̲̄_ℓ` (Deligne's finiteness theorems, Bha
 
 @[expose] public section
 
+-- Keep elaboration from expanding the K-injective construction of internal Hom.
+attribute [local irreducible] DerivedCategory.monoidalClosed
+  CategoryTheory.Mod.monoidalClosed AlgebraicGeometry.ProEtale.upperStarFromPoint
+
 universe u
 
 open scoped CategoryTheory.Obj
@@ -134,14 +140,20 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+set_option linter.unusedSectionVars false in
 /-- The derived pullback `Lf^*` on module objects over `Λ` preserves bounded constructible
 complexes. -/
 lemma boundedConstructible_leftDerivedUpperStar_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
       (condensedRingObj Λ Y.left)))
     (hK : boundedConstructible (condensedRingObj Λ Y.left) K) :
-    boundedConstructible (condensedRingObj Λ X.left) ((L((f.left)^*⟦Λ⟧)).obj K) :=
-  sorry
+    boundedConstructible (condensedRingObj Λ X.left) ((L((f.left)^*⟦Λ⟧)).obj K) := by
+  let e := (leftDerivedUpperStarIsoMapDerivedCategory Λ f.left).app K
+  refine ⟨(DerivedCategory.TStructure.t.bounded).prop_of_iso e.symm
+    ((f.left)^*⟦Λ⟧.bounded_mapDerivedCategory_obj hK.1), fun n ↦ ?_⟩
+  exact constructible_of_iso ((DerivedCategory.homologyFunctor _ n).mapIso e.symm)
+    (constructible_of_iso (((f.left)^*⟦Λ⟧.mapDerivedCategoryHomologyFunctorIso n).app K)
+      (isConstructibleModuleObject_upperStar Λ f.left _ (hK.2 n)))
 
 /-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes: the
 restriction of `L((f)^*⟦Λ⟧)`. -/
@@ -172,6 +184,11 @@ noncomputable def boundedConstructibleUpperStarComp {Z : Over (Spec (.of k))}
       Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility Λ ℓ f).symm ≪≫
       (Functor.associator _ _ _).symm)
 
+/- STATEMENT-DISPUTED: arbitrary condensed coefficients include the constant discrete F_p
+in characteristic p. For A¹ over an algebraically closed field of characteristic p,
+Artin–Schreier gives H¹(A¹, F_p) = k[t] / (F - 1)k[t], which is infinite-dimensional.
+Thus this nonproper pushforward is not constructible. The assumptions on ℓ do not constrain
+Λ. A coefficient hypothesis is needed; the signature and original hole are retained. -/
 /-- The derived pushforward `Rf_*` on module objects over `Λ` preserves bounded constructible
 complexes. -/
 lemma boundedConstructible_rightDerivedLowerStar_obj
@@ -240,14 +257,19 @@ variable {U X : Over (Spec (.of k))}
   [QuasiCompact X.hom] [IsSeparated X.hom]
   (j : U ⟶ X) [IsOpenImmersion j.left]
 
+set_option linter.unusedSectionVars false in
 /-- The extension by zero `j_!` along an open immersion, applied levelwise to complexes of
 module objects over `Λ`, preserves bounded constructible complexes. -/
 lemma boundedConstructible_openImmersionLowerShriek_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U.left) Ab.{u + 1})
       (condensedRingObj Λ U.left)))
     (hK : boundedConstructible (condensedRingObj Λ U.left) K) :
-    boundedConstructible (condensedRingObj Λ X.left) ((D((j.left)_!open⟦Λ⟧)).obj K) :=
-  sorry
+    boundedConstructible (condensedRingObj Λ X.left) ((D((j.left)_!open⟦Λ⟧)).obj K) := by
+  let : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  refine ⟨((j.left)_!open⟦Λ⟧).bounded_mapDerivedCategory_obj hK.1, fun n ↦ ?_⟩
+  exact constructible_of_iso
+    ((((j.left)_!open⟦Λ⟧).mapDerivedCategoryHomologyFunctorIso n).app K)
+    (isConstructibleModuleObject_openImmersionLowerShriek Λ j.left _ (hK.2 n))
 
 /-- The extension by zero `j_! : Dᵇc(U)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` along an open immersion on bounded
 constructible complexes: the restriction of the levelwise functor `D((j)_!open⟦Λ⟧)`. -/
@@ -384,6 +406,14 @@ section TensorHom
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
+/- STATEMENT-DISPUTED: for constant discrete Λ = Z/4 on a geometric point of characteristic
+3, Ext^i_(Z/4)(Z/2, Z/2) = Z/2 for all i ≥ 0, so the derived internal Hom of these two
+finitely presented degree-zero modules is unbounded. The signature and original hole
+are retained. -/
+/- STATEMENT-DISPUTED: for constant discrete Λ = Z/4 on a geometric point of characteristic
+3, the constant module Z/2 is finitely presented, but Tor_i^(Z/4)(Z/2, Z/2) = Z/2 for all
+i ≥ 0. Its derived self-tensor is unbounded. No coefficient regularity or finite Tor
+dimension is assumed. The signature and original hole are retained. -/
 /-- The bounded constructible complexes of module objects over `Λ` form a monoidal
 subcategory of `D(Mod_{Λ_X})` for the derived tensor product: they contain the unit `Λ_X`
 and are stable under `- ⊗ᴸ -`. -/
