@@ -148,7 +148,7 @@ theorem isPerfect_rightDerivedGlobalSections [QuasiCompact aX]
   have : IsNoetherianRing Λ := inferInstance
   have hK' : DerivedCategory.boundedConstructibleFiniteTor Λ c.Z
       ((R((c.i)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-    ⟨boundedConstructible_rightDerivedLowerStar _ aX c.g c.i c.comm.symm N hN hNY hbc,
+    ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX c.g c.i c.comm.symm hbc,
       a, b + 2 * (d : ℤ),
       torAmplitudeIn_rightDerivedLowerStar _ aX c.g c.i c.comm.symm d hd a b N hN hNY hbc hta⟩
   exact (isPerfect_compactlySupportedGlobalSections Λ c.g _ hK').of_iso
@@ -266,8 +266,11 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
       rw [Nat.cast_pow]; exact hmY.pow _
     have hN := nsmul_id_reductionModIdeal (J := I ^ (n + 1)) (N := m ^ (n + 1))
       (by rw [Nat.cast_pow]; exact Ideal.pow_mem_pow hmI _) K
+    have : Finite (Λ ⧸ I ^ (n + 1)) := Ideal.finite_quotient_pow (IsNoetherian.noetherian I) _
     exact ⟨(DerivedCategory.boundedConstructible _ _).prop_of_iso (e.app K).symm
-        (boundedConstructible_rightDerivedLowerStar _ aX c.g c.i c.comm.symm _ hN hNY hbc),
+        (boundedConstructible_rightDerivedLowerStar Λ (I ^ (n + 1)) aX c.g c.i c.comm.symm _
+          (by rw [Nat.cast_pow]; exact Ideal.pow_mem_pow hmI _) hNY
+          (fun r hr ↦ smul_id_reductionModIdeal hr K) hbc),
       (DerivedCategory.torAmplitudeIn _ _ _ _).prop_of_iso (e.app K).symm
         (torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing _ aX c.g c.i c.comm.symm d hd a b
           _ hN hNY hbc hta)⟩

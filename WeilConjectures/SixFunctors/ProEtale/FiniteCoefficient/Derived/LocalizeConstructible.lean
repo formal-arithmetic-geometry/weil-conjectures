@@ -114,7 +114,7 @@ theorem boundedConstructible_rightDerivedFunctor_lowerStar_of_isOpenImmersion
     (hG : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) U G) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
       (R((j)_*[ModuleCat.{u + 1} Λ]).obj G) :=
-  boundedConstructible_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) N hN (nsmul_id_eq_zero N hΛ)
+  boundedConstructible_rightDerivedLowerStar Λ N hN (nsmul_id_eq_zero N hΛ)
     s j hG
 
 omit [QuasiCompact j] in
@@ -125,7 +125,7 @@ theorem boundedConstructible_rightDerivedFunctor_lowerStar_of_isClosedImmersion
     (hM : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z M) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
       (R((i)_*[ModuleCat.{u + 1} Λ]).obj M) :=
-  boundedConstructible_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) N hN (nsmul_id_eq_zero N hΛ)
+  boundedConstructible_rightDerivedLowerStar Λ N hN (nsmul_id_eq_zero N hΛ)
     s i hM
 
 omit hN hΛ s [Finite Λ] in

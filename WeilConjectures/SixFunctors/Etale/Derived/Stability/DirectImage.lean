@@ -9,6 +9,7 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 
@@ -67,26 +68,37 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-! #### Direct image -/
 
+omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
 
-Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, and let `K` be a bounded constructible
-complex on `X_ét` killed by an integer `N` invertible on `Y`. Then `Rf_* K` is bounded
-constructible on `Y_ét`. The coefficients are noetherian: subobjects of finitely generated
-objects of `A` are finitely generated (`CategoryTheory.ConcreteCategory.FinitelyGeneratedOfMono`,
-which holds for `ModuleCat Λ` with `Λ` noetherian).
+Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, let `Λ` be a noetherian ring and `J` an
+ideal of `Λ` with `Λ ⧸ J` finite, and let `K` be a bounded constructible complex of étale sheaves
+of `Λ`-modules on `X` killed by `J`, where `J` contains an integer `N` invertible on `Y`. Then
+`Rf_* K` is bounded constructible on `Y_ét`. For a finite `Λ` one may take `J = 0`; the case of an
+infinite `Λ` is used at the integral stage `Λ = 𝒪_E`, for the reductions modulo `Iⁿ⁺¹`. This is
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero`.
 
 Each hypothesis is needed. Without torsion the statement fails, `H³(ℙ¹, ℤ)` containing
-`ℚ_ℓ/ℤ_ℓ`; without the noetherian hypothesis it fails for a rank-one local system on `𝔾_m` with
-stalk `𝔽_ℓ[x, y₁, y₂, …]/(xˡ, x yᵢ)` and monodromy `1 + x`, whose `H⁰` is the non-finitely
-generated annihilator of `x`; and for `N = p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite
-(Artin–Schreier). -/
-theorem boundedConstructible_rightDerivedLowerStar [ConcreteCategory.FinitelyGeneratedOfMono A]
-    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
-    [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (N : ℕ) [NeZero N]
-    (hN : N • 𝟙 K = 0) (hNY : IsUnit (N : Γ(Y, ⊤))) (hbc : boundedConstructible A X K) :
-    boundedConstructible A Y ((R((f)_*[A])).obj K) :=
-  sorry
+`ℚ_ℓ/ℤ_ℓ`; and for `N = p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite (Artin–Schreier). -/
+theorem boundedConstructible_rightDerivedLowerStar [IsNoetherianRing Λ] (J : Ideal Λ)
+    [Finite (Λ ⧸ J)] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (N : ℕ)
+    [NeZero N] (hNJ : (N : Λ) ∈ J) (hNY : IsUnit (N : Γ(Y, ⊤))) (hJ : ∀ r ∈ J, r • 𝟙 K = 0)
+    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have : QuasiCompact f := by
+    subst hf
+    have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+    have : IsNoetherian Y := {}
+    exact QuasiCompact.of_comp f aY
+  have : HasInvertibleExponent (Λ ⧸ J) X :=
+    ⟨N, Nat.pos_of_ne_zero (NeZero.ne N), by
+      rw [← map_natCast (Ideal.Quotient.mk J), Ideal.Quotient.eq_zero_iff_mem]
+      exact hNJ, by simpa using hNY.map f.appTop.hom⟩
+  exact boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero J f aX aY hf hbc hJ
 
 /-- Blueprint `sk-thm-sf-direct-image-tor-amplitude`: Direct image with finite Tor amplitude.
 

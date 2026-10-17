@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
+public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
 public import WeilConjectures.WeilSheaf.TateTwist
 
@@ -51,7 +52,14 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse {X Y : Scheme.{u
 Let `i : Z ⟶ X` be a closed immersion of `k₀`-schemes of finite type and `j : U ⟶ X` the
 complementary open immersion. There is a natural transformation `K ⟶ Ri_* i^* K` (the closed
 unit) which is an isomorphism at every `K` with `j^* K = 0`: in the recollement triangle
-`j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶`, the first term vanishes. -/
+`j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶`, the first term vanishes.
+
+The closed unit is the unit of `i^* ⊣ Ri_*`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction`); it is invertible at
+`K` with `j^* K = 0` by
+`DerivedCategory.isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero`, using that
+`i_*` is exact, `j^* i_* = 0` and that `i^*`, `j^*` jointly detect zero objects. The open
+immersion `j` is quasi-compact since `X` is Noetherian. -/
 theorem WeilComplex.exists_isIso_app_of_isZero_upperStar {X Z U : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
     [U.Over (Spec (CommRingCat.of k₀))] (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i]
@@ -61,8 +69,30 @@ theorem WeilComplex.exists_isIso_app_of_isZero_upperStar {X Z U : Scheme.{u}}
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] :
     ∃ η : 𝟭 (WeilComplex k₀ l X) ⟶
         WeilComplex.upperStar i ⋙ WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) i,
-      ∀ K : WeilComplex k₀ l X, IsZero ((WeilComplex.upperStar j).obj K) → IsIso (η.app K) :=
-  sorry
+      ∀ K : WeilComplex k₀ l X, IsZero ((WeilComplex.upperStar j).obj K) → IsIso (η.app K) := by
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
+  have hij' : IsCompl (Set.range i.base) (Set.range j.base) := by
+    have h : Set.range j.base = (Set.range i.base)ᶜ := hij
+    rw [h]
+    exact isCompl_compl
+  let adj := ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l i
+  refine ⟨{ app K := ObjectProperty.homMk (adj.unit.app K.obj)
+            naturality _ _ f := ObjectProperty.hom_ext _ (adj.unit.naturality f.hom) },
+    fun K hK ↦ ?_⟩
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isCompl (k₀ := k₀) (l := l)
+    i j hij'
+  have hiso : IsIso (adj.unit.app K.obj) :=
+    DerivedCategory.isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero
+      (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l i)
+      (ProEtaleWeilSheaf.isZero_upperStar_obj_lowerStar_obj i j hij')
+      (ProEtaleWeilSheaf.isZero_of_isZero_upperStar_of_isCompl i j hij')
+      ((ObjectProperty.ι _).map_isZero hK)
+  have : IsIso ((ObjectProperty.ι (WeilComplex.objectProperty k₀ l X)).map
+      (ObjectProperty.homMk (adj.unit.app K.obj) :
+        (show WeilComplex k₀ l X from K) ⟶ (WeilComplex.derivedLowerStar i).obj
+          ((WeilComplex.upperStar i).obj K))) := hiso
+  exact isIso_of_fully_faithful (ObjectProperty.ι _) _
 
 /-- Blueprint `thm-pur-rank-one-thom` (and its vector-bundle form `thm-pur-vector-bundle-thom`),
 combined with the projection formula of `prop-weil-operations` for the constant sheaf: for the

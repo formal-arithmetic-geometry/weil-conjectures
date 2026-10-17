@@ -225,9 +225,14 @@ section Torsion
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- **The comparison `α_u` is an isomorphism** for torsion coefficients: this is
-`isIso_derivedPlus_unit_app_openImmersionLowerShriek`, which rests on proper base change for
-`u = r.hom`. (blueprint: `sk-prop-sf-comp-coherence`) -/
+/-- Blueprint `lem-weil-pbc-proper-open-comparison-iso`: proper pushforward of extension by zero.
+
+**The comparison `α_u : j_{d!} K ⟶ Ru_* j_{c!} K` is an isomorphism** for torsion coefficients:
+this is `isIso_derivedPlus_unit_app_openImmersionLowerShriek`, which rests on proper base change
+for `u = r.hom` and checks the claim on the open `X` and on its closed complement, as in the
+blueprint. Here the square of `u` over `X` is cartesian, i.e. `u⁻¹(X) = X`; for an arbitrary
+refinement the comparison is `refinementOpenImmersionLowerShriekIso`, an isomorphism built from
+this one through a dense refinement. (blueprint: `sk-prop-sf-comp-coherence`) -/
 instance isIso_refinementOpenImmersionLowerShriekComparison
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
     IsIso (refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ) r hcart) := by
@@ -484,6 +489,32 @@ theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_comp
         rightDerivedLowerShriekOfCompactificationPlusRefinementIso Λ r := by
   simp only [rightDerivedLowerShriekOfCompactificationPlusRefinementIso_eq,
     ← Iso.trans_symm, rightDerivedLowerShriekOfCompactificationPlusIso_trans]
+
+/-- Blueprint `det-sf-comp-coherence-cocycle`: independence of the compactification and the
+cocycle condition.
+
+For compactifications `c`, `d` of a quasi-compact `f`, the isomorphism
+`φ_{d,c} = rightDerivedLowerShriekOfCompactificationPlusIso Λ c d : Rf_!(c) ≅ Rf_!(d)` is
+obtained from the refinement comparisons `ρ` through *any* common refinement `e` whose
+refinement maps have cartesian squares over `X` (e.g. any dense common refinement):
+`φ_{d,c} = ρ_s⁻¹ ∘ ρ_r`; moreover `φ_{c,c} = id` and `φ_{c₃,c₂} ∘ φ_{c₂,c₁} = φ_{c₃,c₁}`.
+The blueprint works with `Loc(Dctf)` on the pro-étale site; the repository's setting for this
+subsection is the bounded below derived category of étale sheaves with finite coefficients. -/
+theorem rightDerivedLowerShriekOfCompactificationPlusIso_coherence :
+    (∀ {c d e : Compactification f} (r : e.Refinement c) (s : e.Refinement d)
+        (hr : IsPullback e.i (𝟙 X) r.hom c.i) (hs : IsPullback e.i (𝟙 X) s.hom d.i),
+        rightDerivedLowerShriekOfCompactificationPlusIso Λ c d =
+          asIso (rightDerivedLowerShriekOfCompactificationPlusComparison _ r hr) ≪≫
+            (asIso (rightDerivedLowerShriekOfCompactificationPlusComparison _ s hs)).symm) ∧
+      (∀ c : Compactification f,
+        rightDerivedLowerShriekOfCompactificationPlusIso Λ c c = Iso.refl _) ∧
+      ∀ c₁ c₂ c₃ : Compactification f,
+        rightDerivedLowerShriekOfCompactificationPlusIso Λ c₁ c₂ ≪≫
+            rightDerivedLowerShriekOfCompactificationPlusIso Λ c₂ c₃ =
+          rightDerivedLowerShriekOfCompactificationPlusIso Λ c₁ c₃ :=
+  ⟨fun r s hr hs ↦ rightDerivedLowerShriekOfCompactificationPlusIso_eq Λ r s hr hs,
+    rightDerivedLowerShriekOfCompactificationPlusIso_refl Λ,
+    rightDerivedLowerShriekOfCompactificationPlusIso_trans Λ⟩
 
 end Independence
 
@@ -804,6 +835,62 @@ theorem homEquiv_refinementOpenImmersionLowerShriekIso_hom_app (u : c.Refinement
         _ _ ((refinementOpenImmersionLowerShriekIso Λ u).hom.app K) =
       (refinementOpenImmersionLowerShriekRestrictionIso Λ u).inv.app K := by
   simp [refinementOpenImmersionLowerShriekRestrictionIso, Adjunction.homEquiv_unit]
+
+/-- Blueprint `det-sf-comp-coherence-refinement`: the refinement map.
+
+Let `r : c.Refinement d` and `s : d.Refinement e` be refinements of compactifications of a
+quasi-compact `f` whose squares over `X` are cartesian (`u⁻¹(X) = X`, automatic for dense
+compactifications), and let `e_r = α_r : j_{d!} ⟶ Ru_* j_{c!}`
+(`refinementOpenImmersionLowerShriekComparison`). Then:
+
+1. `e_r` is the unique map whose adjoint under `D⁺(d.i)_! ⊣ D⁺(d.i)^*` is the inverse of the
+  identification `θ_r : (d.i)^* Ru_* (c.i)_! K ≅ K`, i.e. whose restriction to `X` is the
+  identity;
+2. `e_r` is an isomorphism (for finite coefficients, by proper base change);
+3. `e_{id} = id` (modulo `R(𝟙)_* ≅ 𝟭`) and `e_{r.comp s} = R(s)_*(e_r) ∘ e_s` (modulo
+  `R(r ≫ s)_* ≅ R(s)_* R(r)_*`).
+
+The blueprint works with `Loc(Dctf)` on the pro-étale site; the repository's setting for this
+subsection is the bounded below derived category of étale sheaves with finite coefficients, on
+which `e_r` is an isomorphism on all objects. -/
+theorem refinementOpenImmersionLowerShriekComparison_coherence {c d e : Compactification f}
+    (r : c.Refinement d) (s : d.Refinement e) (hr : IsPullback c.i (𝟙 X) r.hom d.i)
+    (hs : IsPullback d.i (𝟙 X) s.hom e.i) :
+    (∀ φ : D+((d.i)_!open[ModuleCat.{u + 1} Λ]) ⟶
+        D+((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙
+          (r.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus,
+      φ = refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ) r hr ↔
+        ∀ K, (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+            (ModuleCat.{u + 1} Λ) d.i).homEquiv _ _ (φ.app K) =
+          (refinementOpenImmersionLowerShriekRestrictionIso Λ r).inv.app K) ∧
+      IsIso (refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ) r hr) ∧
+      (∀ hid : IsPullback c.i (𝟙 X) (Compactification.Refinement.id c).hom c.i,
+        refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ)
+          (Compactification.Refinement.id c) hid =
+          Functor.whiskerLeft D+((c.i)_!open[ModuleCat.{u + 1} Λ])
+            (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) c.Z).inv) ∧
+      refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ) (r.comp s)
+          (Compactification.Refinement.isPullback_comp r s hr hs) =
+        refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ) s hs ≫
+          Functor.whiskerRight
+            (refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ) r hr)
+            (s.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ≫
+          Functor.whiskerLeft D+((c.i)_!open[ModuleCat.{u + 1} Λ])
+            (Functor.rightDerivedFunctorPlusCompIso' (r.hom)_*[ModuleCat.{u + 1} Λ]
+              (s.hom)_*[ModuleCat.{u + 1} Λ]
+              (Etale.lowerStarComp (ModuleCat.{u + 1} Λ) r.hom s.hom ((r.comp s).hom)
+                rfl)).hom := by
+  refine ⟨fun φ ↦ ⟨?_, fun h ↦ ?_⟩, inferInstance,
+    fun hid ↦ refinementOpenImmersionLowerShriekComparison_id _ hid,
+    refinementOpenImmersionLowerShriekComparison_comp _ r s hr hs⟩
+  · rintro rfl K
+    rw [← refinementOpenImmersionLowerShriekIso_hom_of_isPullback Λ r hr]
+    exact homEquiv_refinementOpenImmersionLowerShriekIso_hom_app Λ r K
+  · ext K : 2
+    apply ((derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+      (ModuleCat.{u + 1} Λ) d.i).homEquiv _ _).injective
+    rw [h K, ← refinementOpenImmersionLowerShriekIso_hom_of_isPullback Λ r hr]
+    exact (homEquiv_refinementOpenImmersionLowerShriekIso_hom_app Λ r K).symm
 
 end ArbitraryRefinements
 
