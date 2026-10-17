@@ -95,9 +95,9 @@ theorem exists_etale_isLocalizationAway_of_isIntegralClosure :
     refine subset_trans ?_ hfU
     rw [← hg, PrimeSpectrum.basicOpen_mul]
     exact inf_le_right
-  have : FormallyEtale R S' := .of_equiv ((IsLocalization.algEquiv
-    (Submonoid.powers (algebraMap R S π)) (Localization.Away (algebraMap R S π)) S').restrictScalars
-      R)
+  have : FormallyEtale R S' := .of_equiv <| AlgEquiv.restrictScalars R <|
+    IsLocalization.algEquiv (Submonoid.powers (algebraMap R S π))
+      (Localization.Away (algebraMap R S π)) S'
   have : IsLocalization (algebraMapSubmonoid S (Submonoid.powers π)) S' := by
     rw [algebraMapSubmonoid_powers]
     infer_instance
