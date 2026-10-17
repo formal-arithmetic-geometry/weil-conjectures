@@ -194,5 +194,29 @@
   "group": "Q141",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-15b1fabe3 (reviewer sub-agent of L); spot-checked: I read in full the item lem-cbc-constant-ring-module-sheaves (statement unchanged, six steps, no new nodes) and every cited statement: lem-cbc-sieve-module-sheafification (a Mathlib leaf in the same unit sk-prop-sf-cbc), def-weil-pbc-sheafification, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category and def-weil-size-convention. Sources checked: Stacks sites-modules.tex:810-849 (Tag 03CY, proof omitted, so proof_origin=agent is correct). Behind the sibling leaf I read Mathlib ModuleCat/Presheaf/Sheafification.lean:33-36 (arbitrary GrothendieckTopology, no fibre products), :54, :72, :125 (adjunction), :145-149 (unit is toSheafify), :161 (counit iso), :168/171 (full and faithful), and Sites/Sheafification.lean:151. Step checks: (1) the fixed-module sheaf condition holds exactly when the underlying abelian presheaf is a sheaf; correct and elementary. (2) For a sheaf N, the sibling's adjunction and unit clauses plus the sheafification universal property give c with c∘η=1, and uniqueness gives η∘c=1. (3) The transported action s⋆n=c(s·ηn) is written out; ι(a)⋆n=an because η is Λ^pre-linear. (4) and (5) Fullness of i lifts identity maps, giving the unique action, and lifts any Λ-linear f, giving Λ̲-linearity. (6) The two composites are the identity, and both functors are additive. Edge cases checked: the zero ring, the empty site and empty covering sieves. Duplicate check: new-constant-ring-module-sheaf-equivalence and lem-weil-pbc-sheaves-killed-by-n-zmod-modules are étale ZMod special cases. The sibling has the essential-image and unique-action clauses, but not the strict equivalence on the same sheaves and maps that the steps derive. The split does not merely relabel. No route departure, no tool_uses, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantRingModuleSheaves",
+  "declaration": "CategoryTheory.constant_ring_module_sheaves",
+  "declarations": [
+   "CategoryTheory.constantRingModuleRestrictionPresheaf",
+   "CategoryTheory.constantRingModuleRestriction",
+   "CategoryTheory.IsConstantRingModuleActionExtension",
+   "CategoryTheory.constant_ring_module_sheaves"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConstantRingModuleSheaves.lean",
+  "statement": "theorem constant_ring_module_sheaves : (∃ e : ringedSiteModules.{max u v} ((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)) ≌ Sheaf J (ModuleCat.{max u v} Λ), e.functor = constantRingModuleRestriction J Λ ∧ e.functor.Additive ∧ e.inverse.Additive ∧ e.inverse ⋙ SheafOfModules.toSheaf _ = sheafCompose J (forget₂ (ModuleCat.{max u v} Λ) AddCommGrpCat.{max u v})) ∧ (∀ N : Sheaf J (ModuleCat.{max u v} Λ), ∃! m : ∀ X : Cᵒᵖ, Module (((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)).obj.obj X) (N.obj.obj X), IsConstantRingModuleActionExtension J Λ N m) ∧ (∀ (N M : Sheaf J (ModuleCat.{max u v} Λ)) (f : N ⟶ M) (m : ∀ X : Cᵒᵖ, Module (((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)).obj.obj X) (N.obj.obj X)) (n : ∀ X : Cᵒᵖ, Module (((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)).obj.obj X) (M.obj.obj X)), IsConstantRingModuleActionExtension J Λ N m → IsConstantRingModuleActionExtension J Λ M n → ∀ (X : Cᵒᵖ) (s : ((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)).obj.obj X) (x : N.obj.obj X), f.hom.app X (@SMul.smul _ _ (m X).toSMul s x) = @SMul.smul _ _ (n X).toSMul s (f.hom.app X x))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-785bbd663",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps, Stacks 03CY (sites-modules.tex:814-849, proof omitted, agent origin correct), module, report. All clauses match: the equivalence is canonical restriction along toSheafify (constantRingModuleRestriction is real data), both functors additive, the inverse keeps underlying abelian sheaves/maps (functor equality is achievable), exists-unique extended Module structure on the same carriers with semilinearity and iota-extension, and every linear f is linear for the extended actions; no extra hypotheses. Universe Λ : Type (max u v) is Mathlib's sheafification bound and covers the size convention (u=v); site universes stay independent. Edge cases (empty site, zero ring, empty sieves) are fine. No duplicate in Mathlib or the project (the near matches are ZMod/étale/pro-étale/different notions). Gates: no hollow defs, sorry only, docstrings with source/blueprint and the 6 proof steps, proof import non-public, ring/LeftExact imports needed together (HasWeakSheafify), lines <=96, node differs only in lean, statement verbatim, report sections present. nt_compile.py clean (2.5 s); axioms only sorryAx plus the standard ones."
  }
 }
