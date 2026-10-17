@@ -15,9 +15,91 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-proetale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $j<t$, the quotient definition gives a short exact sequence of $B$-modules $0\\to V_{j+1}\\to V_j\\to W_j\\to0$. Its constant presheaf sequence is exact at every object. Apply [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] with the constant coefficient ring $B$: sheafification is exact and yields $0\\to(V_{j+1})_Y\\to(V_j)_Y\\to(W_j)_Y\\to0$. These are the constant sheaves of [def-weil-pbc-constant-sheaf], with their induced $B_Y$-actions. Restrict those actions through $\\rho$ as in [def-pc-sheaf-restrict-scalars]. This remains exact as a sequence of $\\mathcal R$-modules: restriction changes neither the underlying additive sheaves nor the maps, and kernels and sheafified cokernels carry the restricted action by their usual formulas in [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "def-weil-pbc-constant-sheaf",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI, lemma-sheafification-exact, specialized to the constant ring presheaf B; compare Tag 093J, lemma-constant-exact"
+   }
+  },
+  {
+   "text": "Apply the assumed exact functor $P^q\\otimes_{\\mathcal R}-$ to the sequence in step 1 for each $q\\in\\mathbf Z$. This is precisely the flatness hypothesis, rather than an assertion of flatness for any coefficient quotient [def-pc-flat-sheaf-modules]. The resulting maps are $1\\otimes\\iota_j$ and $1\\otimes\\pi_j$. They commute with $d_P^q\\otimes1$, since both composites act on local pure tensors as $p\\otimes v\\mapsto d_P^q(p)\\otimes\\iota_j(v)$ or $d_P^q(p)\\otimes\\pi_j(v)$, respectively, and extend through sheafification [def-pur-sheaf-tensor-product]. The $B_Y$-action is $b(p\\otimes v)=p\\otimes bv$; commutativity of $B_Y$ and the scalar map $\\rho$ make this well-defined, and all maps are $B_Y$-linear. Exactness is still exactness in $B_Y$-modules: the additive kernels and sheafified cokernels are those of the same maps, with the induced $B_Y$-action [def-weil-sheaf-of-modules-category]. Thus $0\\to C_{V_{j+1}}\\to C_{V_j}\\to C_{W_j}\\to0$ is degreewise short exact in the abelian category $\\mathcal A=\\operatorname{Mod}(B_Y)$ on the given small site.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, section-tensor-product; application of the exact tensor functors explicitly assumed in the statement"
+   }
+  },
+  {
+   "text": "Prove the assertion for all $V_j$ by descending induction on $j$, starting at $j=t$. Since $V_t=0$, the complex $C_{V_t}$ is zero: each presheaf tensor $P^q\\otimes_{\\mathcal R}0$ is zero, and its sheafification is zero [def-pur-sheaf-tensor-product]. Its cohomology is zero in every degree. The zero sheaf is constructible in [def-weil-proetale-constructible-sheaf]: the single stratum $Y$ has the constant zero module as local model, with finite zero stalks (also when $Y$ is empty). This proves the base case, including $t=0$. For the induction step fix $j<t$ and assume the whole assertion for $V_{j+1}$. The layer $C_{W_j}$ has constructible cohomology and support in $[r,s]$ by the original hypothesis.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B5, lemma-constructible-serre; agent-written descending filtration induction, zero base case"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-homology-long-exact] in $\\mathcal A$ to the degreewise short exact sequence of step 2. For every integer $n$ the segment $H^n(C_{V_{j+1}})\\to H^n(C_{V_j})\\to H^n(C_{W_j})$ is exact. If $n<r$ or $n>s$, both outside objects are zero by the induction hypothesis and the layer hypothesis. Hence the middle object is zero: its identity factors through its image from the zero left object, since its map to the zero right object has full kernel. This proves the same interval $[r,s]$ for $C_{V_j}$, without shifting either endpoint.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117, lemma-long-exact-sequence-cochain, exactness at the middle cohomology object"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-complex-ses-triangle], the sequence in step 2 gives a distinguished triangle $Q(C_{V_{j+1}})\\to Q(C_{V_j})\\to Q(C_{W_j})\\to Q(C_{V_{j+1}})[1]$ in $D(\\mathcal A)$. Their cohomology sheaves in the sense of [def-weil-derived-cohomology-sheaves] are those of the representing complexes, since $H^n\\circ Q\\cong H^n$ [def-weil-abstract-derived-category]. Both outside vertices have constructible cohomology and only finitely many nonzero cohomology sheaves, since their common interval $[r,s]$ is finite. Apply the middle-vertex closure assertion of [lem-weil-proetale-dbc-triangulated] with $\\Lambda=B$ and this very scheme $Y$. It gives constructible cohomology for $C_{V_j}$. This theorem uses exactly the global finite-stratification constructibility in the item and allows every scheme and every finite commutative ring; no Noetherian hypothesis on $Y$ is added. Together with step 4 this completes the induction step. Descending induction gives every $0\\le j\\le t$, and $V_0=V$ gives the final assertion. The induction never enlarges $[r,s]$, so the bounds are independent of $t$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-proetale-dbc-triangulated",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived, triangulated constructible-cohomology subcategory from Tag 09B5; short-exact triangle from derived.tex Tag 0152"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Finite-filtration devissage using Tags 09B5 and 09AL, exact constant sheafification and the cohomology sequence; the filtration argument is written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +135,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.shortExact_of_degreewise_shortExact\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexAbelian\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {c : ComplexShape ι} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Abelian C] (S : CategoryTheory.ShortComplex (HomologicalComplex C c)),\\n  (∀ (i : ι), (S.map (HomologicalComplex.eval C c i)).ShortExact) → S.ShortExact\", \"doc\": \"If for every index $i$, the evaluation of the short complex $S$ at $i$ is a short exact sequence, then $S$ itself is a short exact sequence in the category of homological complexes.\"}\n  {\"name\": \"HomologicalComplex.shortExact_iff_degreewise_shortExact\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexAbelian\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {c : ComplexShape ι} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Abelian C] (S : CategoryTheory.ShortComplex (HomologicalComplex C c)),\\n  S.ShortExact ↔ ∀ (i : ι), (S.map (HomologicalComplex.eval C c i)).ShortExact\", \"doc\": \"A short complex $ S $ in an abelian category is exact if and only if for every index $ i $, the sequence obtained by evaluating $ S $ at degree $ i $ is exact. This equivalence establishes that global\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.covariantSequence_exact\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] (X : C) {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact) (n₀ n₁ : ℕ)\\n  (h : n₀ + 1 = n₁), (CategoryTheory.Abelian.Ext.covariantSequence X hS n₀ n₁ h).Exact\", \"doc\": \"The covariant long exact sequence in Ext groups, constructed from postcompositions with extension classes and zero morphisms in the derived category of an abelian category, satisfies the exactness con\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.contravariantSequence_exact\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact) (Y : C) (n₀ n₁ : ℕ)\\n  (h : 1 + n₀ = n₁), (CategoryTheory.Abelian.Ext.contravariantSequence hS Y n₀ n₁ h).Exact\", \"doc\": \"Given a short exact sequence in an abelian category, the contravariant sequence of additive homomorphisms between Ext groups constructed via precomposition with the sequence's differential maps forms \"}\n  {\"name\": \"HomologicalComplex.exact_of_degreewise_exact\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexAbelian\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {c : ComplexShape ι} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Abelian C] (S : CategoryTheory.ShortComplex (HomologicalComplex C c)),\\n  (∀ (i : ι), (S.map (HomologicalComplex.eval C c i)).Exact) → S.Exact\", \"doc\": \"If a short complex $ S $ in an abelian category has the property that its evaluation at every index $ i $ is an exact sequence, then $ S $ itself is an exact complex. In other words, if for all $ i $,\"}\n  {\"name\": \"CochainComplex.exactAt_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n i : ℤ),\\n  autoParam (n < i) CochainComplex.exactAt_of_isLE._auto_1 → ∀ [K.IsLE n], HomologicalComplex.ExactAt K i\", \"doc\": \"For a cochain complex $ K $ in a category with zero morphisms indexed by integers, if $ K $ is supported under the embedding from natural numbers to integers at position $ n $ (via $ n \\\\mapsto p - n $\"}",
    "date": "2026-10-17",
    "verdict": "no match: flat ordinary modules, module filtrations and short exact complexes do not state this filtered coefficient-sheaf constructibility theorem with a common cohomological interval"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite filtration of coefficient modules preserves constructible cohomology and the same vanishing interval after tensoring a termwise flat sheaf complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  ∃ L',\\n    ∃ (_ : L'.IsStrictlyGE n),\\n      ∃ i p,\\n        ∃ (_ : Ca\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"CochainComplex.cm5b.instIsStrictlyGEI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ) [K.IsStrictlyGE n],\\n  (CochainComplex.cm5b.I K).IsStrictlyGE n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$ with enough injectives, this constructs a cochain complex $I K$ where each object $X^n$ is the injective replacement of $K.X^n$ from the original complex $K$, and \"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results supply ordinary-module flatness or generic cohomology exactness, not the coefficient-sheaf filtration theorem with constructibility and unchanged common interval; the generic exactness results are reused through existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology_exact\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.homology_exact₁\", \"module\": \"Mathlib.Algebra.Homology.HomologySequence\", \"type\": \" {C : Type u_1} {ι : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {c : ComplexShape ι} {S : CategoryTheory.ShortComplex (HomologicalComplex C c)} (hS : S.ShortExact) (i j : ι) (hij : c.Rel i j) : { X₁ := S.X₃.homology i, X₂ := S.X₁.homology j, X₃ := S.X₂.homology j, f \", \"doc\": \"Exactness of `S.X₃.homology i ⟶ S.X₁.homology j ⟶ S.X₂.homology j`.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.homology_exact₃\", \"module\": \"Mathlib.Algebra.Homology.HomologySequence\", \"type\": \" {C : Type u_1} {ι : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {c : ComplexShape ι} {S : CategoryTheory.ShortComplex (HomologicalComplex C c)} (hS : S.ShortExact) (i j : ι) (hij : c.Rel i j) : { X₁ := S.X₂.homology i, X₂ := S.X₃.homology i, X₃ := S.X₁.homology j, f \", \"doc\": \"Exactness of `S.X₂.homology i ⟶ S.X₃.homology i ⟶ S.X₁.homology j`.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.homology_exact₂\", \"module\": \"Mathlib.Algebra.Homology.HomologySequence\", \"type\": \" {C : Type u_1} {ι : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {c : ComplexShape ι} {S : CategoryTheory.ShortComplex (HomologicalComplex C c)} (hS : S.ShortExact) (i : ι) : { X₁ := S.X₁.homology i, X₂ := S.X₂.homology i, X₃ := S.X₃.homology i, f := HomologicalComple\", \"doc\": \"Exactness of `S.X₁.homology i ⟶ S.X₂.homology i ⟶ S.X₃.homology i`.\"}\n  {\"name\": \"SSetPair.homology_exact₃\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Homology.Relative\", \"type\": \" {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Limits.HasCoproducts A] [CategoryTheory.Abelian A] (P : SSetPair) (R : A) (n m : ℕ) (h : m + 1 = n := by lia) : { X₁ := P.right.homology R n, X₂ := P.homology R n, X₃ := P.left.homology R m, f := P.homologyπ R n, g := P.homologyδ\", \"doc\": \"Given `P : SSetPair` corresponding to a monomorphism `i : Y ⟶ X`,\\nthe sequence `Hₘ₊₁(X) ⟶ Hₘ₊₁(X;Y) ⟶ Hₘ(Y)` is exact.\"}\n  {\"name\": \"SSetPair.homology_exact₁\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Homology.Relative\", \"type\": \" {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Limits.HasCoproducts A] [CategoryTheory.Abelian A] (P : SSetPair) (R : A) (n m : ℕ) (h : m + 1 = n := by lia) : { X₁ := P.homology R n, X₂ := P.left.homology R m, X₃ := ((CategoryTheory.Functor.id SSet).obj P.right).homology R m,\", \"doc\": \"Given `P : SSetPair` corresponding to a monomorphism `i : Y ⟶ X`,\\nthe sequence `Hₘ₊₁(X;Y) ⟶ Hₘ(Y) ⟶ Hₘ(X)` is exact.\"}\n  {\"name\": \"SSetPair.homology_exact₂\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Homology.Relative\", \"type\": \" {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Limits.HasCoproducts A] [CategoryTheory.Abelian A] (P : SSetPair) (R : A) (n : ℕ) : { X₁ := ((CategoryTheory.Functor.id SSet).obj P.left).homology R n, X₂ := ((CategoryTheory.Functor.id SSet).obj P.right).homology R n, X₃ := P.ho\", \"doc\": \"Given `P : SSetPair` corresponding to a monomorphism `i : Y ⟶ X`,\\nthe sequence `Hₙ(Y) ⟶ Hₙ(X) ⟶ Hₙ(X;Y)` is exact.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results supply ordinary-module flatness or generic cohomology exactness, not the coefficient-sheaf filtration theorem with constructibility and unchanged common interval; the generic exactness results are reused through existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]iltrat.*[Tt]ensor|[Tt]ensor.*[Ff]iltrat|[Cc]onstructible.*[Ee]xtension",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: results supply ordinary-module flatness or generic cohomology exactness, not the coefficient-sheaf filtration theorem with constructibility and unchanged common interval; the generic exactness results are reused through existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a complex tensored with a finite filtered module has the same interval bounds as its successive layers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ContinuousCohomology.MultiInd.complex\", \"module\": \"Mathlib.Algebra.Category.ContinuousCohomology.Basic\", \"type\": \": CochainComplex (Action (TopModuleCat R) G ⥤ Action (TopModuleCat R) G) ℕ\", \"doc\": \"A cochain complex in the category of $G$-actions on topological $R$-modules, constructed using the family of functors $\\\\text{functor}_{R,G}$ and differentials $d_n$, where consecutive differentials sa\"}\n  {\"name\": \"CochainComplex.isZero_of_isGE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n i : ℤ),\\n  autoParam (i < n) CochainComplex.isZero_of_isGE._auto_1 →\\n    ∀ [K.IsGE n] [inst_3 : HomologicalComplex.HasHomology K i],\\n      CategoryTheory.Li\", \"doc\": \"For a cochain complex $ K $ bounded below at an integer $ n $, the homology at every index $ i < n $ is zero. Specifically, if $ K $ satisfies the boundedness condition $ \\\\text{IsGE}(n) $, then for al\"}\n  {\"name\": \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"module\": \"Mathlib.Algebra.Homology.GrothendieckAbelian\", \"type\": \"[HasFilteredColimitsOfSize.{w, w'} C] : HasFilteredColimitsOfSize.{w, w'} (HomologicalComplex C c)\", \"doc\": \"If a category $ \\\\mathcal{C} $ has filtered colimits of size $ \\\\kappa $, then the category of homological complexes over $ \\\\mathcal{C} $ with shape $ c $ also has filtered colimits of size $ \\\\kappa $.\"}\n  {\"name\": \"CochainComplex.isStrictlyLE_of_le\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(p q : ℤ) (hpq : p ≤ q) [K.IsStrictlyLE p] : K.IsStrictlyLE q\", \"doc\": \"If a cochain complex $ K $ is strictly supported by the embedding $ \\\\text{embeddingUpIntLE}(p) $ and $ p \\\\leq q $, then $ K $ is also strictly supported by $ \\\\text{embeddingUpIntLE}(q) $. This means t\"}\n  {\"name\": \"CochainComplex.isStrictlyGE_of_ge\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(p q : ℤ) (hpq : p ≤ q) [K.IsStrictlyGE q] : K.IsStrictlyGE p\", \"doc\": \"For integers $p$ and $q$ with $p \\\\leq q$, if a cochain complex $K$ is strictly supported in degrees $\\\\geq q$, then it is also strictly supported in degrees $\\\\geq p$.\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology\", \"type\": \": Type v\", \"doc\": \"The cohomology class in degree $ n $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ is defined as the quotient of the cocycle subgroup $ \\\\text{Cocycle}(K, L, n) $ by the coboundary subgroup $ \\\\text{\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CochainComplex.instIsStrictlyGEObjHomologicalComplexIntUpSingle\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(A : C) (n : ℤ) : IsStrictlyGE ((single C (ComplexShape.up ℤ) n).obj A) n\", \"doc\": \"For any object $A$ in a category $C$ and integer $n$, the cochain complex constructed by placing $A$ at degree $n$ and zero objects elsewhere (with all differentials zero) is strictly supported in deg\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results supply ordinary-module flatness or generic cohomology exactness, not the coefficient-sheaf filtration theorem with constructibility and unchanged common interval; the generic exactness results are reused through existing DAG Mathlib leaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-integral-scalar-extension-constructible",
@@ -75,5 +185,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-filtered-coefficient-tensor-bounds",
+  "worker": "stage1",
+  "summary": "Proved the finite coefficient-filtration devissage by descending induction. Exact constant sheafification and the explicitly assumed termwise exact tensor functors give degreewise short exact B_Y-complexes; the cohomology exact sequence preserves the exact common interval, and the existing pro-etale constructible derived-subcategory theorem preserves constructibility. Reused all needed nodes, with no new nodes and no statement changes.",
+  "blueprint": "Realizes the last paragraph of def-weil-rationalization-karoubi, integral scalar extension levelwise modulo the two uniformizers, through the finite coefficient-module filtration used in step 5 of lem-weil-integral-scalar-extension-constructible. The present proof supplies its layer-by-layer devissage without any finite-Tor or coefficient-flatness assumption.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-cec85ef5b",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-cec85ef5b (reviewer sub-agent of L); spot-checked: The delivery is correct, with one citation repair. I read the item in full and compared it with the base copy in the side project: statement, stmt_deps and blueprint.from are unchanged, so no target or statement was weakened. I read every cited statement, the parent lem-weil-integral-scalar-extension-constructible (its step 5 applies the item with exactly the item's hypotheses), unit sk-def-sf-operations, the last paragraph of blueprint main-20261015 def-weil-rationalization-karoubi, and Stacks proetale.tex 09B5 (l.5343) and 09AL (l.5357). The coefficient category is Mod(B_Y) on the small pro-etale site throughout, which matches def-weil-proetale-constructible-sheaf and lem-weil-proetale-dbc-triangulated (same unit; Lambda finite commutative, Y arbitrary). Step checks: step 1 uses exact sheafification of constant presheaves and restriction of scalars along rho; step 2 uses the item's own termwise-flatness hypothesis, which is the definition in def-pc-flat-sheaf-modules, and B_Y-linearity on pure tensors; step 3 is a well-posed descending induction whose base is the zero sheaf, constructible with the single stratum Y, which is constructible because Y and the empty set are retrocompact; step 4 uses the same-degree exact segment from the homology leaf; step 5 uses the triangle leaf and the middle-vertex closure clause. Small cases tested: V=0, t=0, zero layers, r=s, Y empty, P unbounded, B=0, and a sanity case with Z/4 coefficients. No new nodes; checked duplicate candidates (lem-sf-complete-residue-cohomology-bounds, lem-fin-constructible-devissage, lem-sfb-finite-model-stratum-filtration, lem-sf-proetale-residue-tor-test, lem-sfb-adic-constructible-finite-reductions) and none duplicates or generalizes the item. No cycle, no SGA citations, no tool_uses needed. FIX (C1): step 5 identified the derived cohomology sheaves of Q(C) with H^n(C) without a citation. I added that sentence citing def-weil-derived-cohomology-sheaves and the clause H^n∘Q≅H^n of def-weil-abstract-derived-category, and added both to the step's uses and to proof_deps. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-sf-filtered-coefficient-tensor-bounds.json and the full review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

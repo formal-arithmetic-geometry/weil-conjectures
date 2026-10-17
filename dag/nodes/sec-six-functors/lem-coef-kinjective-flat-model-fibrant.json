@@ -28,27 +28,136 @@
   "def-pc-acyclic-complex-modules",
   "lem-coef-sheaf-flat-model"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Set $\\mathcal A=\\operatorname{Mod}(R)$ and $C=\\operatorname{coker}(i)$. The cokernel is computed degreewise: give $C^r=\\operatorname{coker}(i^r)$ the differential induced by $d_B^r$; the identity $d_C^{r+1}d_C^r=0$ follows after precomposition with the epimorphism $B^r\\to C^r$, and the degreewise cokernel universal property is also the cokernel universal property for chain maps. Thus $0\\to A\\xrightarrow{i}B\\to C\\to0$ is degreewise short exact. By [lem-weil-pbc-complex-ses-homology-long-exact], for each $r$ the segment $H^{r-1}(C)\\to H^r(A)\\xrightarrow{H^r(i)}H^r(B)\\to H^r(C)$ is exact. The outer terms vanish by the assumed acyclicity of $C$, so $H^r(i)$ is an isomorphism for every $r$; hence $i$ is a quasi-isomorphism [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-cochain-complex-modules",
+    "def-pc-acyclic-complex-modules",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0114 (lemma-cat-cochain-abelian), 0115 (definition-quasi-isomorphism-cochain), 0117 (lemma-long-exact-sequence-cochain)."
+   }
+  },
+  {
+   "text": "Let $Q:K(\\mathcal A)\\to D(\\mathcal A)$ be the localization. By [lem-weil-pbc-kinjective-hom-derived], $Q$ is bijective on morphisms from either $A$ or $B$ into the K-injective target $I$; its stated null-homotopy definition of K-injectivity is exactly [def-pur-kinjective-complex]. Since $Q(i)$ is invertible, choose a homotopy class $[g_0]:B\\to I$ mapping to $Q(f)Q(i)^{-1}$. Then $Q([g_0][i])=Q(f)$, and injectivity of $Q$ on maps from $A$ into $I$ gives $[g_0i]=[f]$. Choose a chain-map representative $g_0$ and a homotopy $h$ from $g_0i$ to $f$. By the homotopy formula of [def-pur-kinjective-complex], its components $h^r:A^r\\to I^{r-1}$ satisfy\n$$g_0^r i^r-f^r=d_I^{r-1}h^r+h^{r+1}d_A^r.$$",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), (1) implies (3), and (2); Tag 070H (definition-K-injective)."
+   }
+  },
+  {
+   "text": "For every $r\\in\\mathbf Z$, the morphism $i^r:A^r\\hookrightarrow B^r$ is monic and $I^{r-1}$ is injective. By the defining extension property in [def-sp-injective-resolutions], extend $h^r$ to $H^r:B^r\\to I^{r-1}$ with $H^ri^r=h^r$. Choose these extensions for all degrees. Define\n$$t^r=d_I^{r-1}H^r+H^{r+1}d_B^r:B^r\\longrightarrow I^r.$$\nThere is no compatibility requirement on the choices $H^r$.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Proof of Tag 079L (lemma-characterize-K-injective): termwise injectivity permits lifting graded maps; the displayed extension is the definition of an injective object."
+   }
+  },
+  {
+   "text": "The equations $d_I^rd_I^{r-1}=0$ and $d_B^{r+1}d_B^r=0$ give\n$$d_I^rt^r=d_I^rH^{r+1}d_B^r=t^{r+1}d_B^r.$$\nThus $t$ is a chain map [def-pc-cochain-complex-modules]. Moreover, because $i$ is a chain map,\n$$t^ri^r=d_I^{r-1}h^r+H^{r+1}i^{r+1}d_A^r=d_I^{r-1}h^r+h^{r+1}d_A^r=g_0^ri^r-f^r.$$\nConsequently $g=g_0-t$ is a chain map $B\\to I$ and $gi=f$ degreewise. This proves the extension assertion.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070H (definition-K-injective), with the cochain homotopy formula in literature/stacks-project/homology.tex; explicit correction of the representative of Tag 070I."
+   }
+  },
+  {
+   "text": "Let $j:U\\to V$ be a trivial cofibration of [lem-coef-sheaf-flat-model]. Its stated cofibration and weak-equivalence classes make $j$ termwise monic and a quasi-isomorphism. Put $D=\\operatorname{coker}(j)$. Applying [lem-weil-pbc-complex-ses-homology-long-exact] to $0\\to U\\to V\\to D\\to0$ gives\n$$H^r(U)\\xrightarrow{\\sim}H^r(V)\\longrightarrow H^r(D)\\longrightarrow H^{r+1}(U)\\xrightarrow{\\sim}H^{r+1}(V).$$\nExactness forces $H^r(D)=0$ for every $r$. The extension assertion just proved therefore extends every map $U\\to I$ to $V\\to I$. Every square with left arrow $j$ and right arrow $I\\to0$ has this form, since the maps to zero are unique. Hence $I\\to0$ has the right lifting property against all trivial cofibrations, which is fibrancy by the stated model-structure lifting axioms.",
+   "uses": [
+    "lem-coef-sheaf-flat-model",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117 (lemma-long-exact-sequence-cochain); the flat-model trivial-cofibration classes are the explicit statement of lem-coef-sheaf-flat-model, used conditionally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-kinjective-complex",
+  "def-sp-injective-resolutions",
+  "lem-coef-sheaf-flat-model"
+ ],
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "rg -n 'IsKInjective|isFibrant|Lifting.hasLift|eq_δ_of_cocycle' over Mathlib/Algebra/Homology (/home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib)",
-   "results": "Mathlib/Algebra/Homology/ModelCategory/Lifting.lean:144 CochainComplex.Lifting.hasLift (a square with degreewise lifts lifts when the obstruction cocycle Q->K of degree 1 is a coboundary); Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:171 CochainComplex.IsKInjective.eq_δ_of_cocycle (a cocycle from an acyclic complex into a K-injective complex is a coboundary); Mathlib/Algebra/Homology/ModelCategory/Injective.lean:77 isFibrant_iff and private lemma lifting, for the Quillen model on bounded-below complexes only",
+   "query": "IsKInjective|isFibrant_iff|eq_δ_of_cocycle|lemma hasLift",
+   "results": "Search output/log: 25 hits; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
    "date": "2026-10-17",
-   "verdict": "candidate, not a leaf: the extension clause is Lifting.hasLift (with Y=0, K=I) plus IsKInjective.eq_δ_of_cocycle plus degreewise injectivity, a combination of three declarations rather than one statement; no Mathlib flat model structure exists for the fibrancy clause"
+   "verdict": "candidate, not a leaf: Lifting.hasLift and IsKInjective.eq_δ_of_cocycle are separate ingredients; isFibrant_iff and private lifting apply to bounded-below injective-model complexes only"
   },
   {
    "tool": "leansearch",
-   "query": "K-injective complex with injective terms extends maps along monomorphisms with acyclic cokernel",
-   "results": "not run: the review service blocks network access for reviewers",
+   "query": "A K-injective complex with injective terms is fibrant for a model structure with monomorphic trivial cofibrations",
+   "results": "Search output/log: 8 hits; CochainComplex.isKInjective_of_injective_aux, CochainComplex.isKInjective_of_injective, CochainComplex.IsKInjective, CategoryTheory.InjectiveResolution.self, HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations, CochainComplex.IsKInjective.mk, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.IsKInjective.rightOrthogonal",
    "date": "2026-10-17",
-   "verdict": "unavailable"
+   "verdict": "no match: search hits do not state strict extension for arbitrary unbounded K-injective complexes with injective terms, or flat-model fibrancy"
   },
   {
    "tool": "loogle",
    "query": "CochainComplex.IsKInjective, HasLiftingProperty",
-   "results": "not run: the review service blocks network access for reviewers",
+   "results": "Search output/log: 0 hits; . loogle: unknown identifier 'HasLiftingProperty'",
+   "date": "2026-10-17",
+   "verdict": "no match: search hits do not state strict extension for arbitrary unbounded K-injective complexes with injective terms, or flat-model fibrancy"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-injective cochain complex whose terms are injective has the right lifting property against degreewise monomorphisms with acyclic cokernel",
+   "results": "Search output/log: 8 hits; CochainComplex.isKInjective_of_injective, CochainComplex.IsKInjective, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.IsKInjective.rightOrthogonal, CochainComplex.cm5b.instMonoIntI",
+   "date": "2026-10-17",
+   "verdict": "no match: search hits do not state strict extension for arbitrary unbounded K-injective complexes with injective terms, or flat-model fibrancy"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a monomorphic quasi-isomorphism of unbounded complexes every map into a termwise injective K-injective complex extends to a chain map",
+   "results": "Search output/log: 8 hits; CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b, CochainComplex.cm5b.instMonoIntI, CochainComplex.cm5b.instMonoFIntI, CochainComplex.isKInjective_of_injective, CochainComplex.IsKInjective, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective",
+   "date": "2026-10-17",
+   "verdict": "no match: search hits do not state strict extension for arbitrary unbounded K-injective complexes with injective terms, or flat-model fibrancy"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "Search output/log: 12 hits; CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyEquiv.isKInjective, CochainComplex.isKInjective_of_iso, CochainComplex.isKInjective_iff_of_iso, CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: search hits do not state strict extension for arbitrary unbounded K-injective complexes with injective terms, or flat-model fibrancy"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_δ_of_cocycle|lemma hasLift|private lemma lifting|isFibrant_iff",
+   "results": "Search output/log: 12 hits; Mathlib/Algebra/Homology/ModelCategory/Injective.lean, Mathlib/Algebra/Homology/ModelCategory/Injective.lean, Mathlib/Algebra/Homology/ModelCategory/Injective.lean, Mathlib/Algebra/Homology/ModelCategory/Injective.lean, Mathlib/Algebra/Homology/ModelCategory/Injective.lean, Mathlib/Algebra/Homology/ModelCategory/Lifting.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+   "date": "2026-10-17",
+   "verdict": "candidate, not a leaf: Lifting.hasLift and IsKInjective.eq_δ_of_cocycle are separate ingredients; isFibrant_iff and private lifting apply to bounded-below injective-model complexes only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every chain map extends strictly from a subcomplex with acyclic quotient into a K injective complex with injective objects in every degree",
+   "results": "Search output/log: 0 hits; . service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
    "date": "2026-10-17",
    "verdict": "unavailable"
   }
@@ -64,7 +173,7 @@
   ]
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-semilinear-derived-sections",
   "by": "reviewer",
@@ -84,5 +193,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070I (lemma-K-injective), using (1) implies (3) to lift a homotopy class; strictification by the displayed degreewise injectivity calculation. The final model assertion uses the existing flat-model node."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kinjective-flat-model-fibrant",
+  "worker": "stage1",
+  "summary": "Kept the statement and all hypotheses. Proved that i is a quasi-isomorphism using the existing long exact sequence leaf, lifted f in the homotopy category using the existing K-injective Hom localization leaf, then extended the homotopy degreewise by injectivity and subtracted its boundary to obtain gi=f strictly. Applied this to trivial flat-model cofibrations after checking acyclicity of their cokernels by the long exact sequence. No new nodes; replaced inherited unrun search placeholders with actual logged searches.",
+  "blueprint": "Realizes the foundational K-injective/flat-model comparison required for the derived coefficient adjunction in proof paragraph 2 of prop-coef-integral-exceptional-adjoint (master blueprint); the main-20261015 version retains the adjunction statement but omits that proof. The unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-41347610f",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-41347610f (reviewer sub-agent of L); spot-checked: I read the whole delivery and found nothing to fix; no files changed and fixes/ is empty. It is one commit containing the item and its report; it adds no new nodes and changes no unit. proof_deps equals the union of the step uses. Sources checked in the Stacks project: 070I (derived.tex:9632, lemma-K-injective, (1)⇒(3)), 070H, 079L (injectives.tex:1633, used only as motivation; it is a K-injectivity criterion, not this conclusion) and 0117. Step 1: the cokernel is computed degreewise and is degreewise short exact because each i^r is monic; the long exact sequence leaf with acyclic C makes H^r(i) an isomorphism, which is a quasi-isomorphism as def-weil-abstract-derived-category defines it. Step 2: lem-weil-pbc-kinjective-hom-derived uses the same null-homotopy K-injectivity as def-pur-kinjective-complex; Q(i) is invertible, so surjectivity gives [g0] and injectivity gives [g0 i]=[f]; the homotopy sign g0 i - f = dh + hd matches the definition. Step 3: the first clause of def-sp-injective-resolutions extends h^r along the monic i^r, choosing independently in each degree; this is elementary. Step 4: I checked by hand that d t = d H d = t d and t i = g0 i - f, so g = g0 - t is a chain map with g i = f. Step 5: by lem-coef-sheaf-flat-model a trivial cofibration is a termwise monic quasi-isomorphism, the long exact sequence forces its cokernel to be acyclic, and since (trivial cofibration, fibration) is a stated weak factorization system, the right lifting property for I→0 is fibrancy. Both hypotheses are needed: (N'→N')⊇(M'→M') shows the conclusion forces injective terms, and the inclusion of the Z/4 complex with differential 2 into its cone shows K-injectivity is needed. Small cases A=0, i an isomorphism and I=0 are consistent, and no boundedness is assumed. Route: the two off-unit citations are both Mathlib leaves, the flat-model node is in the same unit, there is no SGA, and no tool_uses are needed. A search for fibrant / termwise-injective / lifting nodes found no duplicate, and no new node restates a clause of its parent. This is not a target node, so the base-change morphism check does not apply; the coefficient category Mod(R) on a small site matches the flat-model node. The citing steps 8 and 9 of lem-coef-semilinear-derived-sections use exactly this fibrancy statement."
  }
 }
