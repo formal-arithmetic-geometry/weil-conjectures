@@ -12,9 +12,85 @@
   "def-coef-infinity-category-of-spaces",
   "lem-coef-complete-segal-quasicategory-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-strict-bimodule-rectification] to $H$; it uses the Bergner model structure and coherent-nerve comparison of [lem-coef-coherent-nerve-comparison] and the space and universe conventions of [def-cbc-enhanced-diagrams-cones] and [def-coef-infinity-category-of-spaces]. It supplies Bergner cofibrant, locally Kan simplicial categories $A,B$ with equivalences $N_{\\mathrm{hc}}A\\simeq C$, $N_{\\mathrm{hc}}B\\simeq D$, a strict simplicial functor $M:A^{\\mathrm{op}}\\times B\\to\\mathsf{sSet}$ with $\\mathcal U$-small Kan values, an equivalence of its coherent nerve with the transported $H$, and strict commuting $A$- and $B$-actions corresponding to the two actions of $H$. The equivalence preserves the identity and composition simplices and is natural in $H$, endpoint functors, and small parameters, so no one-variable presheaf rectification or strict equality of a Segal-space composite is being assumed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-strict-bimodule-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1 and §2.2.5, with Appendix A.3.3; strict two-variable consequence stated in lem-coef-strict-bimodule-rectification"
+   }
+  },
+  {
+   "text": "On the disjoint object set $\\operatorname{Ob}(A)\\amalg\\operatorname{Ob}(B)$, form the strict simplicial category $\\mathcal K$ with diagonal enriched categories $A$ and $B$, reverse mapping simplicial sets $\\mathcal K(b,a)=\\varnothing$, and mixed mapping simplicial sets $\\mathcal K(a,b)=M(a,b)$. The identity vertices are those of $A$ and $B$. For $a\\in A$, $b\\in B$, composition $\\mathcal K(b,b')\\times\\mathcal K(a,b)\\to\\mathcal K(a,b')$ is the covariant $B$-action of $M$ and $\\mathcal K(a,b)\\times\\mathcal K(a',a)\\to\\mathcal K(a',b)$ is its contravariant $A$-action; a composite with two endpoint arrows uses the two commuting actions, and the associativity and unit equations for composable triples (any triple through a reverse hom is vacuous) are exactly the enriched-functor equations for $M$. Thus $\\mathcal K$ is a well-defined directed strict collage, and its mixed mapping simplicial sets are Kan.",
+   "uses": [
+    "lem-coef-strict-bimodule-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.3.1, Definition 2.3.1.3 and Remark 2.3.1.4; the strict enriched construction is written out here"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-triangular-cofibrant-resolution] to $\\mathcal K$ with $U=\\operatorname{Ob}A$, $V=\\operatorname{Ob}B$ and the endpoint identity resolutions $A\\to A$, $B\\to B$, which are local trivial fibrations fixing objects with Bergner cofibrant sources (Step 1). It gives a Bergner-cofibrant strict triangular collage $\\widetilde{\\mathcal K}$ with the same two endpoint blocks, empty reverse mapping sets, projectively cofibrant mixed bimodule $N$, and a local trivial fibration $\\widetilde{\\mathcal K}\\to\\mathcal K$ that is the identity on objects and endpoint blocks. Since $\\mathcal K(a,b)=M(a,b)$ is Kan and $N(a,b)\\to M(a,b)$ is a trivial Kan fibration, each $N(a,b)$ is Kan and $N(a,b)\\to M(a,b)$ is a weak equivalence. The endpoint models are locally Kan, the mixed $N(a,b)$ are Kan and the reverse sets are empty, so $\\widetilde{\\mathcal K}$ is locally Kan. The construction is functorial for maps of the endpoint models and of the bimodule.",
+   "uses": [
+    "lem-coef-triangular-cofibrant-resolution",
+    "lem-coef-strict-bimodule-rectification",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.3, Proposition A.3.3.2 and Remark A.3.3.5, specialized to the two endpoint blocks"
+   }
+  },
+  {
+   "text": "The coherent nerve $\\operatorname{Coll}(H)=N_{\\mathrm{hc}}\\widetilde{\\mathcal K}$ is a small infinity-category by [lem-coef-coherent-nerve-comparison]. The simplicial functor $\\widetilde{\\mathcal K}\\to[1]$ sending $A$ to $0$ and $B$ to $1$ is defined because reverse mapping sets are empty; its coherent nerve is the projection $\\operatorname{Coll}(H)\\to\\Delta^1$, the coherent nerve of the discrete category $[1]$ being its ordinary nerve. The fiber over $0$ (resp. $1$) consists of the simplices whose vertices lie in $A$ (resp. $B$), i.e. $N_{\\mathrm{hc}}A$ (resp. $N_{\\mathrm{hc}}B$) since these are full subcategories, and hence identifies with $C$ (resp. $D$) through the chosen equivalences. The mapping-space comparison in [lem-coef-coherent-nerve-comparison], which preserves enriched composition with its coherent homotopies, together with $N(a,b)\\simeq M(a,b)\\simeq H(a,b)$, gives the mixed mapping-space equivalence compatibly with the two actions, while the reverse mapping space is $\\widetilde{\\mathcal K}(b,a)=\\varnothing$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-strict-bimodule-rectification",
+    "lem-coef-triangular-cofibrant-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.5 and Proposition 1.1.5.10; coherent-nerve mapping-space comparison"
+   }
+  },
+  {
+   "text": "An $n$-simplex of $N_{\\mathrm{hc}}\\widetilde{\\mathcal K}$ is an enriched functor $\\mathfrak C[\\Delta^n]\\to\\widetilde{\\mathcal K}$. Because $\\widetilde{\\mathcal K}$ has no $B$-to-$A$ mapping simplices, its object labels are nondecreasing and a mixed simplex has exactly one change from $A$ to $B$; its crossing edge is a vertex of $N(a,b)$, all other edges are endpoint arrows, and the higher subset-poset simplices spanning the change land in the mixed sets $N(-,-)$. Enriched composition gives the cross-change faces and endpoint composition gives the remaining faces; degeneracies insert endpoint identities. The coherent nerve therefore has exactly the asserted one-crossing string presentation and all its higher action compatibilities. Applying the natural equivalence $R:\\mathrm{Cat}_\\infty\\simeq\\mathrm{CSS}_\\infty$ of [lem-coef-complete-segal-quasicategory-comparison] supplies the complete Segal-space presentation, its mapping fibers being the mapping spaces of Step 4, and preserves equivalences and naturality in $H$, endpoint functors, and small parameters.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-complete-segal-quasicategory-comparison",
+    "lem-coef-triangular-cofibrant-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.3.1, Definition 2.3.1.3 and Remark 2.3.1.4; complete-Segal comparison of §2.2.5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-complete-segal-quasicategory-comparison",
+  "lem-coef-strict-bimodule-rectification",
+  "lem-coef-triangular-cofibrant-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 2.3.1, Definition 2.3.1.3 and Remark 2.3.1.4; explicit complete-Segal string refinement. Archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -81,7 +157,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-flexible-weight-enriched-lift",
@@ -104,5 +180,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-space-bimodule-collage",
+  "worker": "stage1",
+  "summary": "Repaired the proof along the strict simplicial-category route. A new statement-only node supplies the missing two-variable strict Kan-valued bimodule rectification. The proof now forms a strict directed collage, applies the existing triangular cofibrant-resolution lemma, takes its coherent nerve, and then invokes the complete Segal-space comparison. The malformed arrows, backslashes, and TeX delimiters were rewritten as valid JSON text.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: strictify the coherent coefficient bimodule, form the directed triangular collage, and compare its coherent nerve with the coefficient infinity-category.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-e92589f5c",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e92589f5c (reviewer sub-agent of L); spot-checked: I read all of it: the contract, the report, the item, the new node, every cited node's full statement, the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint. The item's statement is identical to the base and is not weakened. All cited proof nodes are in the same unit, so there is no route departure and no tool_uses entry. There is no cycle and no SGA source. HTT places checked: 2.3.1.3/2.3.1.4, 1.1.5.10, 2.2.5.1, 2.2.5.6, 4.2.4.4 and A.3.3. Step checks: step 2's associativity on a mixed triple is exactly the condition that the two actions of M commute, and triples through a reverse hom are vacuous because those homs are empty. Step 3 meets the hypotheses of the triangular lemma (identity resolutions are local trivial fibrations; reverse homs are empty), and N(a,b)->M(a,b) is a trivial Kan fibration onto a Kan complex, so N(a,b) is Kan and the resolved collage is locally Kan. Step 4 uses the locally Kan mapping-space clause, and the endpoint fibers are the full subcategories. Step 5's one-crossing description plus the comparison R is sound. The new node lem-coef-strict-bimodule-rectification is true: take Bergner fibrant-cofibrant replacements, use the product rigidification of lem-coef-joyal-homotopy-exponentials, then enriched-diagram rectification into Kan sSet. It is smaller than the item and duplicates neither the one-variable rectification nor the triangular lemma. Edge cases (empty C or D, empty H, a point) hold. Three fixes under fixes/: (1) item stmt_deps restored to the base list; the new node stays a proof dependency only. (2) In the item's steps the strict collage and its resolution were named D and C, clashing with the statement's C and D; renamed to \\mathcal K and \\widetilde{\\mathcal K}, added $ delimiters, and spelled out a few one-line checks. (3) In the new node: wrong HTT URL corrected and the places 2.2.5.6 and 4.2.4.4 added; statement TeX delimited; made explicit that M's values are U-small and that N_hc M is a functor into S_U.; 2 file(s) fixed by the reviewer"
  }
 }
