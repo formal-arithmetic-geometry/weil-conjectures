@@ -137,9 +137,11 @@ theorem strictPerfectClosedPushforward_stalkResolution
       ∀ j : ℕ, n < j → IsZero (P.complex.X j) := by
   obtain ⟨L, hbound, hproj, ⟨eL⟩, hhomology⟩ :=
     strictPerfectClosedPushforward_stalkModel i x U hx K hK e
-  obtain ⟨Q, a, hbelow, hQproj, hpositive, hQhomology⟩ :=
+  obtain ⟨Q, a, hbelow, hQproj, hpositive, ι, hι⟩ :=
     L.boundedProjective_nonpositiveModel hbound hproj
       (fun j hj ↦ hhomology j (by omega))
+  have hQhomology (j : ℤ) : Nonempty (Q.homology j ≅ L.homology j) :=
+    ⟨asIso (HomologicalComplex.homologyMap ι j)⟩
   obtain ⟨eQ⟩ := hQhomology 0
   apply nonpositiveProjective_resolution Q _ a hbelow hQproj hpositive
     (fun j hj ↦ ?_) (eQ ≪≫ eL)
