@@ -169,5 +169,23 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-b1b5932f0 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full; its statement is unchanged and true, and it serves the parent's use. Statement tests: theta=0, one cell, theta=omega with a simplex first appearing at a finite stage, and empty X_0 all hold. The extension hypothesis applies only to maps extending f_0, and that is exactly what the parent (lem-coef-infinity-directed-union-local-colimits, step 6) supplies through its steps 4 and 5. Steps 1-3 and 5 are genuinely elementary. Step 1: F_alpha is the set of extensions of f_0 to X_alpha, with restriction maps, and F_0={f_0}. Step 2: the pushout universal property, using the inclusion leg X_alpha into X_{alpha+1}, gives successor surjectivity. Step 3: the degreewise union at a nonzero limit is well defined by compatibility and commutes with the simplicial operators because each X_alpha is a simplicial subset. Step 4: the cited Mathlib leaf lem-coef-well-ordered-inverse-system-section matches. I read Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean, lines 40-82 (ofExists: surjectivity at not-IsMax successors, lifting at IsSuccLimit, which excludes bottom) and lines 265-282 (sectionsMk and surjective, which need OrderBot and WellFoundedLT). With J=[0,theta], steps 2 and 3 are exactly its hypotheses. proof_deps equals the union of uses, and there is no cycle. There are no new nodes. An rg search over dag/nodes for transfinite/limit-ordinal together with extend/pushout found no duplicate. A general LLP-under-transfinite-composition result does not specialize in one line, because the hypothesis is restricted to extensions of f_0. The route stays inside unit sk-prop-sf-biduality-general: the only proof dependency is a Mathlib leaf, no tool_uses are needed, and no SGA is cited. The blueprint from/place/via, same_as=[] and split_report.blueprint are present. This is not a target, so the base-change and coefficient checks do not apply. Source: HTT Prop. 4.2.3.4 is not in literature/, so I could not read the cited page. The node is correctly marked proof_origin agent with a WANTED entry, and I verified the argument on its own. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TransfiniteSimplicialExtension",
+  "declaration": "SSet.Enhanced.exists_transfinite_extension",
+  "file": "lean/Sheaf/CategoryTheory/TransfiniteSimplicialExtension.lean",
+  "statement": "theorem exists_transfinite_extension {θ : Ordinal.{u}} {X : Ordinal.{u} → SSet.{v}} {E : SSet.{v}} (inc : ∀ {α β : Ordinal.{u}}, α ≤ β → (X α ⟶ X β)) (inc_id : ∀ (α : Ordinal.{u}), inc (le_refl α) = 𝟙 (X α)) (inc_comp : ∀ {α β γ : Ordinal.{u}} (hαβ : α ≤ β) (hβγ : β ≤ γ), inc (hαβ.trans hβγ) = inc hαβ ≫ inc hβγ) (inc_injective : ∀ {α β : Ordinal.{u}} (hαβ : α ≤ β) (n : ℕ), Function.Injective ((inc hαβ).app (op (SimplexCategory.mk n)))) (limit_union : ∀ {β : Ordinal.{u}} (hβ : β ≤ θ), Order.IsSuccLimit β → ∀ (n : ℕ) (x : (X β).obj (op (SimplexCategory.mk n))), ∃ (α : Ordinal.{u}) (hα : α < β) (y : (X α).obj (op (SimplexCategory.mk n))), ((inc (le_of_lt hα)).app (op (SimplexCategory.mk n))) y = x) (A B : ∀ α : Ordinal.{u}, SSet.{v}) (a : ∀ α : Ordinal.{u}, (A α ⟶ X α)) (cell : ∀ α : Ordinal.{u}, (A α ⟶ B α)) (inr : ∀ α : Ordinal.{u}, (B α ⟶ X (Order.succ α))) (cell_injective : ∀ (α : Ordinal.{u}) (n : ℕ), Function.Injective ((cell α).app (op (SimplexCategory.mk n)))) (pushout : ∀ {α : Ordinal.{u}} (hα : α < θ), CategoryTheory.IsPushout (a α) (cell α) (inc (Order.le_succ α)) (inr α)) (f₀ : (X 0 ⟶ E)) (extend : ∀ {α : Ordinal.{u}} (hα : α < θ) (g : (X α ⟶ E)), inc (bot_le) ≫ g = f₀ → ∃ h : (B α ⟶ E), cell α ≫ h = a α ≫ g) : ∃ (f : ∀ α : Ordinal.{u}, α ≤ θ → (X α ⟶ E)), f 0 bot_le = f₀ ∧ ∀ (α β : Ordinal.{u}) (hαβ : α ≤ β) (hβ : β ≤ θ), inc hαβ ≫ f β hβ = f α (hαβ.trans hβ)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c1163026d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, report sections, and universes checked; scompile.py passed for sandbox and library files; no defects found."
  }
 }

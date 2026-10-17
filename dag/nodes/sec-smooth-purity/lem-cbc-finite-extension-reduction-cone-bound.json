@@ -191,5 +191,23 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-88289c981 (reviewer sub-agent of L); spot-checked: Read in full: the item, its parent thm-cbc-finite-extension (statement and 9 steps), unit sk-prop-sf-cbc, the master and main-20261015 blueprint text, and every cited statement. No new nodes; statement unchanged. The statement is true and sharp. M=(A/I)_T[0] gives H^{-1} and H^0 and so needs [a-1,b]. M=A_T, M=0 and a=b also fit. The cone of ϖ^n on R[0] is [R→R] in degrees -1,0. It stays in D(Mod(A_T)) with the completed A_T of def-weil-pbc-adic-coefficient-datum, whose hypotheses hold for O_E (Noetherian, finite and perfect quotients, torsion A/I). It is not identified with constant coefficients, and it matches the reduction interval that the parent passes to prop-weil-pbc-preservation-constructible. Step 1: Stacks 093J lemma-constant-exact (sites-modules.tex l.8198) and 093M lemma-completion-flat (l.8261), with flatness of A_T over Ā so derived and underived tensors agree. Step 2: K-flatness with a signed swap, the cone criterion and the tensor-cone iso show P⊗F→P⊗S is a quasi-isomorphism, and change of rings (2) plus the datum identify it with M_n and Res_n M_n. Step 3: the tensor-cone iso gives P⊗F≅C(ϖ^n id_P), so the triangle is distinguished by the concrete cone triangles of def-weil-abstract-derived-category; naturality goes through K-flat roofs and change of rings (1),(2). Step 4: Stacks 05RS long exact sequence (derived.tex l.3618) gives vanishing for q<a-1 and q>b. Tags 093J/093M/05RS/05RU/06YN/06YU match tags/tags. No cycle, proof_deps equals the union of uses, all ids exist. Duplicate search found only lem-pur-constant-two-term-resolution (constant Z_ℓ coefficients) and ring-level DVR amplitude nodes, none a duplicate. Accepted all five declared tool_uses (constant-module-section-properties, completed-constant-sheaf-reduction, derived-change-of-rings, quasi-iso-cone-acyclic, tensor-mapping-cone-iso), all generic black boxes. No SGA used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteExtensionReductionConeBound",
+  "declaration": "AlgebraicGeometry.Scheme.finiteExtensionReductionConeBound",
+  "file": "lean/Sheaf/Paper/FiniteExtensionReductionConeBound.lean",
+  "statement": "theorem finiteExtensionReductionConeBound (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) (M : PbcCompletedDerived T (pbcPadicCoefficientDatum l E)) (a b : ℤ) (hab : a ≤ b) (hM : ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (pbcModules T (pbcAdicCompletion T (pbcPadicCoefficientDatum l E))) q).obj M)) : ∀ n : ℕ, 1 ≤ n → ∃ (β : 𝟭 (PbcCompletedDerived T (pbcPadicCoefficientDatum l E)) ⟶ (pbcCompletedReduction T (pbcPadicCoefficientDatum l E) (n - 1) ⋙ pbcDerivedRestrict (pbcAdicProjection T (pbcPadicCoefficientDatum l E) (n - 1)))) (γ : (pbcCompletedReduction T (pbcPadicCoefficientDatum l E) (n - 1) ⋙ pbcDerivedRestrict (pbcAdicProjection T (pbcPadicCoefficientDatum l E) (n - 1))) ⟶ 𝟭 (PbcCompletedDerived T (pbcPadicCoefficientDatum l E)) ⋙ shiftFunctor (PbcCompletedDerived T (pbcPadicCoefficientDatum l E)) (1 : ℤ)), (∀ N : PbcCompletedDerived T (pbcPadicCoefficientDatum l E), Triangle.mk ((Padic.coefficientExtensionUniformizer l E) ^ n • 𝟙 N) (β.app N) (γ.app N) ∈ distTriang (PbcCompletedDerived T (pbcPadicCoefficientDatum l E))) ∧ (∀ q : ℤ, q < a - 1 ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (pbcModules T (pbcAdicCompletion T (pbcPadicCoefficientDatum l E))) q).obj ((pbcCompletedReduction T (pbcPadicCoefficientDatum l E) (n - 1) ⋙ pbcDerivedRestrict (pbcAdicProjection T (pbcPadicCoefficientDatum l E) (n - 1))).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9f72b52d1",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Statement, dependencies, universes, edge cases, docstrings, source citations, and canonical completed-coefficient interfaces verified; per-file scompile passed."
  }
 }

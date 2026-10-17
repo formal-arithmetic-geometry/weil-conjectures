@@ -227,5 +227,24 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-ded3cc886 (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged, 8 steps, no new nodes. I checked all three cited statements: def-weil-pbc-simplicial-set, the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition (Degenerate.lean, lines 114/217/225/233 confirmed) and def-weil-pbc-category-colimit. I read Stacks simplicial.tex lemma-splitting-simplicial-sets (017R) with its proof and categories.tex definition-colimit (002F), and both tags match the tags file. D_n has the standard Reedy latching orientation, and the cocone equation S(theta')S(rho)=S(theta) holds. Step 5's overlap argument is correct for chains that are already degenerate: the normal form of T(theta)y is T(rho theta)z, and rho is an arrow tau->theta. Uniqueness is tested on coproduct injections and never assumes they are monic. I tested n=0, I=* with n=2, the case of one arrow a->b, and mutually inverse arrows; all agree with the formulas. Off-unit citations are only definitions and a Mathlib leaf, so no tool_uses are needed. lem-coef-simplicial-latching-degenerate-subset is only the set-valued special case, so the item is not a duplicate. No cycle, no SGA citation, TeX and proof_deps are correct, and the blueprint fields are present. The parent's steps 2 and 4 use exactly what the item states. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialBarLatchingDecomposition",
+  "declaration": "CategoryTheory.simplicialBarLatchingDecomposition",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialBarLatchingDecomposition.lean",
+  "statement": "theorem simplicialBarLatchingDecomposition {M : Type u} [Category.{v, u} M] [HasCoproducts M] {I : Type v} [SmallCategory I] : Nonempty (CategoryTheory.SimplicialBarLatchingClaim (M := M) (I := I))",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-0df19ecc7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0df19ecc7",
+  "group": "Q55",
+  "result": "fix",
+  "note": "Found H3 mismatch: latching compat/desc/uniq quantified arbitrary simplex morphisms instead of the node’s required surjective rho. Added complete replacement under fixes/lean/Sheaf/CategoryTheory/SimplicialBarLatchingDecomposition.lean; scompile.py passes cleanly."
  }
 }
