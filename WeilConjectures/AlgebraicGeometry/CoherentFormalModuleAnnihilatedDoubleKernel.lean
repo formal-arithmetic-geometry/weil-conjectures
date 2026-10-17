@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 import WeilConjectures.AlgebraicGeometry.IdealPowerProductZeroAffineCover
-import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelComponentAffineAnnihilation
+import WeilConjectures.AlgebraicGeometry.CoherentFormalKernelComponentAffineAnnihilation
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
