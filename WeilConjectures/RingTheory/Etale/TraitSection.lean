@@ -83,7 +83,7 @@ theorem etale_localization_integralClosure_of_height_eq_one (ε : B →ₐ[R₀]
   have hnA : IsUnit (Nat.card G : A) := by simpa using hG.map (algebraMap R₀ A)
   obtain ⟨A₁, _, _, _, _, hEt, hloc, hff, ζ, hζ⟩ :=
     IsDiscreteValuationRing.exists_etale_isPrimitiveRoot hnA
-  letI : Algebra R₀ A₁ := ((algebraMap A A₁).comp (algebraMap R₀ A)).toAlgebra
+  let : Algebra R₀ A₁ := ((algebraMap A A₁).comp (algebraMap R₀ A)).toAlgebra
   have : IsScalarTower R₀ A A₁ := .of_algebraMap_eq' rfl
   have : Module.Flat R₀ A := IsLocalization.flat A q.primeCompl
   have : Module.Flat R₀ A₁ := Module.Flat.trans R₀ A A₁
@@ -94,7 +94,7 @@ theorem etale_localization_integralClosure_of_height_eq_one (ε : B →ₐ[R₀]
   have hq₁ : (maximalIdeal A₁).comap (algebraMap R₀ A₁) = q := by
     have hmax : (maximalIdeal A₁).comap (algebraMap A A₁) = maximalIdeal A := by
       ext x
-      simp [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff, isUnit_map_iff]
+      simp [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff]
     rw [IsScalarTower.algebraMap_eq R₀ A A₁, ← Ideal.comap_comap, hmax]
     exact Localization.AtPrime.under_maximalIdeal
   exact etale_localization_integralClosure_of_baseChange (Bk := Bk) ε q hq0 G hfix hrank hG φ hφ

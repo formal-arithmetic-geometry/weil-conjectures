@@ -47,8 +47,9 @@ variable {R₀ B Bk L : Type u} [CommRing R₀] [IsDomain R₀] [IsIntegrallyClo
   [CommRing L] [Algebra Bk L] [Algebra B L] [IsScalarTower B Bk L]
   [Module.Finite Bk L] [Algebra.Etale Bk L]
 
-attribute [local instance] Algebra.TensorProduct.rightAlgebra in
 set_option maxHeartbeats 3200000 in
+-- The base-changed algebras `B₁`, `Bk₁` and `L₁` make instance synthesis slow.
+attribute [local instance] Algebra.TensorProduct.rightAlgebra in
 include Bk in
 /-- **Reduction of the trait case to a base containing the roots of unity.** See the module
 docstring. -/
@@ -98,14 +99,14 @@ theorem etale_localization_integralClosure_of_baseChange (ε : B →ₐ[R₀] R�
   let L₁ := B₁ ⊗[B] L
   let ι : Bk₁ →ₐ[B₁] L₁ := Algebra.TensorProduct.map (AlgHom.id B₁ B₁)
     (IsScalarTower.toAlgHom B Bk L)
-  letI : Algebra Bk₁ L₁ := ι.toRingHom.toAlgebra
+  let : Algebra Bk₁ L₁ := ι.toRingHom.toAlgebra
   have : IsScalarTower B₁ Bk₁ L₁ := .of_algebraMap_eq fun x ↦ (ι.commutes x).symm
   have : Module.Finite Bk₁ L₁ := sorry
   have : Algebra.Etale Bk₁ L₁ := sorry
   have : SMulCommClass G B L := ⟨fun g b x ↦ by
     rw [IsScalarTower.algebraMap_smul (A := Bk) b x |>.symm, smul_comm g]
     exact (IsScalarTower.algebraMap_smul (A := Bk) b (g • x))⟩
-  letI := Algebra.TraitSection.rightTensorAction (B := B) (B₁ := B₁) (L := L) G
+  let := Algebra.TraitSection.rightTensorAction (B := B) (B₁ := B₁) (L := L) G
   have hfixι (g : G) (k : Bk₁) : g • algebraMap Bk₁ L₁ k = algebraMap Bk₁ L₁ k := by
     induction k using TensorProduct.induction_on with
     | zero => rw [map_zero, smul_zero]
@@ -133,7 +134,7 @@ theorem etale_localization_integralClosure_of_baseChange (ε : B →ₐ[R₀] R�
     rw [IsScalarTower.algebraMap_eq R₀ A₁ K₁]
     exact (IsFractionRing.injective A₁ K₁).comp hinj
   let ιK : K →+* K₁ := IsFractionRing.lift hinjK
-  letI : Algebra B K₁ := ((algebraMap R₀ K₁).comp ε.toRingHom).toAlgebra
+  let : Algebra B K₁ := ((algebraMap R₀ K₁).comp ε.toRingHom).toAlgebra
   let f₁ : B₁ →ₐ[B] K₁ :=
     { (algebraMap A₁ K₁).comp ε₁.toRingHom with
       commutes' := fun b ↦ by
