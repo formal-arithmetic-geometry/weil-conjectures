@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-constituent-nonexceptional-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constituent-nonexceptional versus Fourier-nonexceptional",
@@ -18,34 +18,46 @@
  ],
  "proof": [
   {
-   "text": "First translate [def-fd-nonexceptional] into a condition on $U$.\nOver $k$, the middle extension of [def-wf-middle-extension]\nsatisfies $j^*j_*\\mathcal M=\\mathcal M$. Conversely, if $\\mathcal L$ is a\nlisse sheaf on $\\mathbf A^1_k$ (a constant sheaf, or some\n$\\mathcal L_{\\psi(ax)}$), then $j_*(\\mathcal L|_U)=\\mathcal L$, because\nthe stalks of the ordinary direct image at the missing points are the\ninertia invariants, and inertia acts trivially on a sheaf that is lisse\nthere. Geometrically, a constant Weil twist of\n[def-wf-constant-weil-twist] becomes the constant sheaf. Hence\n$j_*\\mathcal M$ is Fourier-exceptional exactly when\n$\\mathcal M_{\\bar k}$ is a constant sheaf or is isomorphic to\n$\\mathcal L_{\\psi(ax)}|_U$ for some $a$.",
+   "text": "Put $U=U_0\\otimes_{k_0}k$. Use the explicit condition on $U$ in the statement of [def-fd-nonexceptional]: $j_*\\mathcal M$ is Fourier-nonexceptional if and only if $\\mathcal M|_U$ is not geometrically constant and there is no $a\\in k$ for which $\\mathcal M|_U$ is geometrically irreducible and has $\\mathcal L_{\\psi(ax)}|_U$ as a geometric constituent. Thus its negation is precisely the disjunction of these two exceptional alternatives. This uses the stated geometric-sheaf condition, with ordinary middle extension and the same lisse adic coefficients as in that definition.",
+   "uses": [
+    "def-fd-nonexceptional"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-middle/lem-a1-constituent-nonexceptional-comparison.md",
+    "place": "Proof, first paragraph (translation of Fourier-nonexceptionality to U)"
+   }
+  },
+  {
+   "text": "Assume constituent-nonexceptionality and suppose that $j_*\\mathcal M$ is Fourier-exceptional. If $\\mathcal M|_U$ is geometrically constant, [rem-dl-a1-conventions] says it is a finite direct sum $\\overline{\\mathbf Q}_\\ell^{\\oplus r}$. Here $U$ is connected and nonempty (it is a dense open of $\\mathbf A^1_k$), and $r>0$ since $\\mathcal M$ is nonzero. The flag by the first $i$ summands, $0\\leq i\\leq r$, has trivial rank-one successive quotients, so the trivial rank-one sheaf is a Jordan–Hölder constituent. By [def-a1-constituent-nonexceptional] this is $\\mathcal L_{\\psi(0\\cdot x)}|_U$, which is excluded. In the other exceptional alternative of Step 1, the Artin–Schreier constituent is already explicitly present, again contradicting [def-a1-constituent-nonexceptional]. Both alternatives are impossible, proving the first implication.",
    "uses": [
     "def-fd-nonexceptional",
-    "def-wf-middle-extension",
-    "def-wf-constant-weil-twist"
+    "def-a1-constituent-nonexceptional",
+    "rem-dl-a1-conventions"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-middle/lem-a1-constituent-nonexceptional-comparison.md",
+    "place": "Proof, paragraph (1)"
+   }
   },
   {
-   "text": "(1) Suppose $j_*\\mathcal M$ is Fourier-exceptional. If\n$\\mathcal M_{\\bar k}$ is constant, it is nonzero, and every geometric\nirreducible constituent is the trivial rank-one sheaf\n$\\mathcal L_{\\psi(0\\cdot x)}|_U$. If\n$\\mathcal M_{\\bar k}\\cong\\mathcal L_{\\psi(ax)}|_U$, this rank-one sheaf\nis its only geometric constituent. In both cases $\\mathcal M$ is not\nconstituent-nonexceptional.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(2) If the geometric fundamental representation $V$ is irreducible,\nthen $V$ is the only geometric irreducible constituent. If it is\nisomorphic to $\\mathcal L_{\\psi(ax)}|_U$, then\n$\\mathcal M_{\\bar k}\\cong\\mathcal L_{\\psi(ax)}|_U$. For $a=0$ this sheaf\nis constant, and for $a\\ne0$ it is an Artin–Schreier restriction. In\neither case $j_*\\mathcal M$ is Fourier-exceptional by the translation\nabove.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Without geometric irreducibility, the converse of (1) is not asserted.\nFourier-nonexceptionality looks at the whole geometric sheaf, while\nconstituent-nonexceptionality looks at each geometric constituent.",
-   "uses": [],
-   "elementary": null
+   "text": "Assume now that the geometric fundamental representation of $\\mathcal M$ is irreducible and that $j_*\\mathcal M$ is Fourier-nonexceptional. If constituent-nonexceptionality failed, [def-a1-constituent-nonexceptional] would give some $a\\in k$ with $\\mathcal L_{\\psi(ax)}|_U$ as a geometric constituent. Together with the assumed geometric irreducibility this is exactly the second exceptional alternative excluded by [def-fd-nonexceptional], a contradiction. In the blueprint’s equivalent isomorphism formulation, an irreducible representation has itself as its sole Jordan–Hölder constituent. This proves the converse under the additional hypothesis, and Step 2 gives the equivalence.",
+   "uses": [
+    "def-a1-constituent-nonexceptional",
+    "def-fd-nonexceptional"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-middle/lem-a1-constituent-nonexceptional-comparison.md",
+    "place": "Proof, paragraph (2)"
+   }
   }
  ],
  "proof_deps": [
   "def-fd-nonexceptional",
-  "def-wf-middle-extension",
-  "def-wf-constant-weil-twist"
+  "def-a1-constituent-nonexceptional",
+  "rem-dl-a1-conventions"
  ],
  "proof_origin": {
   "by": "agent",
@@ -54,7 +66,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -142,5 +154,21 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-constituent-nonexceptional-comparison",
+  "worker": "stage1",
+  "summary": "Maintainer-reader repair: use the explicit geometric-open condition already in the cited Fourier-nonexceptionality definition, rather than applying a finite-field recovery lemma over k. Inline the elementary constant-sheaf constituent flag from the conventions and constituent definition, dropping the unneeded new node. Both implications and the geometric-irreducibility hypothesis are unchanged.",
+  "blueprint": "The three proof steps realize the blueprint's translation paragraph, paragraph (1) contrapositive, and paragraph (2) geometrically irreducible converse.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q100-46884dacb",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q100-46884dacb (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited sources. Preserved the statement; repaired Step 1 using the existing geometric-open definition and inlined the elementary constant-sheaf constituent argument. Corrected JSON and detailed checks are in fixes/ and review.md. No accepted tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }

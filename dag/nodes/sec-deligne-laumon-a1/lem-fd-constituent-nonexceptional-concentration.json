@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fd-constituent-nonexceptional-concentration",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Concentration of the zero-extension transform for a constituent-nonexceptional input",
@@ -16,68 +16,205 @@
   "def-a1-constituent-nonexceptional",
   "def-wf-constant-weil-twist",
   "def-fd-transform",
-  "lem-fd-realified-kernel-real"
+  "lem-fd-realified-kernel-real",
+  "rem-dl-a1-conventions",
+  "def-weil-ordinary-compact-cohomology"
  ],
  "proof": [
   {
-   "text": "(1) Fix $a\\in k$ and put\n$\\mathcal F_a:=\\mathcal M\\otimes\\mathcal L_{\\psi(ax)}|_U$, a lisse sheaf\non the smooth geometrically connected affine curve\n$U=U_0\\otimes_{k_0}k$; it is defined, with its Weil structure, over the\nfinite extension $k_0(a)$ of $k_0$, and we apply the following curve\nresults over that finite field. By [lem-zl-affine-curve-range] only\n$q\\in\\{0,1,2\\}$ can contribute. By [lem-a1-affine-hc0],\n$H^0_c(U,\\mathcal F_a)=0$. By [lem-a1-affine-hc2],\n\n$$\nH^2_c(U,\\mathcal F_a)\\simeq\n\\bigl(V\\otimes L_a\\bigr)_{\\pi_1(U)}(-1),\n\\qquad V=\\mathcal M_{\\bar\\eta},\\quad\nL_a=\\bigl(\\mathcal L_{\\psi(ax)}\\bigr)_{\\bar\\eta},\n$$\n\nthe coinvariants for the geometric monodromy of\n[def-wf-fundamental-representation]. Suppose these coinvariants are\nnonzero. Then there is a nonzero $\\pi_1(U)$-equivariant linear map\n$V\\otimes L_a\\to\\Qlb$ to the trivial module. Tensoring with the\nrank-one module $L_a^{-1}$, which is the generic fibre of\n$\\mathcal L_{\\psi(-ax)}$ by\n$(\\mathcal L_{\\psi,f})^{-1}\\cong\\mathcal L_{\\psi,-f}$ of\n[lem-fd-as-characters], gives a nonzero equivariant map\n$V\\to L_a^{-1}$. Its target is one-dimensional, so the map is\nsurjective, and refining $0\\subset\\ker\\subset V$ to a composition\nseries shows that $\\mathcal L_{\\psi(-ax)}|_U$ is a geometric irreducible\nconstituent of $\\mathcal M$. This is excluded by\n[def-a1-constituent-nonexceptional] (with $-a\\in k$; the case $a=0$ is\nthe trivial constituent). Hence $H^2_c(U,\\mathcal F_a)=0$, and only\n$q=1$ survives.",
+   "text": "Fix $a\\in k$ and put $\\mathcal F_a=\\mathcal M\\otimes\\mathcal L_{\\psi(ax)}|_U$. Since $k=\\overline{k_0}$, $a$ lies in a finite extension $k_1/k_0$. The linear Artin–Schreier sheaf and the base change of $\\mathcal M$ give a lisse Weil sheaf $\\mathcal F_a$ over $U_0\\times_{k_0}k_1$. The Artin–Schreier factor is lisse of rank one by [lem-fd-as-characters], and the tensor equivalence of [cor-galois-lisse-representations] identifies its generic fibre with $V\\otimes L_a$, where $V=\\mathcal M_{\\bar\\eta}$ and $L_a=(\\mathcal L_{\\psi(ax)})_{\\bar\\eta}$. A dense open of the affine line is a nonempty smooth geometrically connected affine curve; these properties persist over $k_1$, and its geometric fibre is still $U$. Thus [lem-zl-affine-curve-range] gives vanishing outside $0,1,2$, and [lem-a1-affine-hc0] gives vanishing in degree zero. These results are applied with finite base field $k_1$, not with $a$ assumed to lie in $k_0$.",
    "uses": [
-    "lem-zl-affine-curve-range",
-    "lem-a1-affine-hc0",
-    "lem-a1-affine-hc2",
-    "def-wf-fundamental-representation",
     "lem-fd-as-characters",
+    "cor-galois-lisse-representations",
+    "lem-zl-affine-curve-range",
+    "lem-a1-affine-hc0"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+    "place": "Proof (1), first paragraph: finite-field descent, cohomological range, and degree zero"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-affine-hc2] to the same curve over $k_1$. It identifies $H_c^2(U,\\mathcal F_a)$ with $(V\\otimes L_a)_{\\pi_1(U)}(-1)$. Here the subscript is geometric coinvariants, not Weil-group coinvariants. It remains to show that this vector-space quotient is zero.",
+   "uses": [
+    "lem-a1-affine-hc2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+    "place": "Proof (1), displayed top-cohomology isomorphism"
+   }
+  },
+  {
+   "text": "If these coinvariants were nonzero, choose a nonzero linear functional on their finite-dimensional quotient; its composite with the quotient is an equivariant nonzero map $V\\otimes L_a\\to\\Qlb$ with trivial target action. Tensoring with $L_a^{-1}$ yields a nonzero map $V\\to L_a^{-1}$, necessarily onto its one-dimensional target. By [lem-fd-as-characters], $L_a^{-1}$ corresponds to $\\mathcal L_{\\psi(-ax)}|_U$. A composition series of the kernel, followed by this simple quotient, is a composition series of $V$; such a kernel series is obtained by successively choosing invariant subspaces of smallest positive dimension and passing to the smaller-dimensional quotient. Hence this rank-one sheaf is a geometric constituent, by the exact lisse-representation equivalence. This contradicts [def-a1-constituent-nonexceptional], with parameter $-a$ (including $a=0$). Therefore degree two vanishes, and step 1 proves clause (1).",
+   "uses": [
+    "lem-fd-as-characters",
+    "cor-galois-lisse-representations",
     "def-a1-constituent-nonexceptional"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+    "place": "Proof (1), coinvariants contradiction"
+   }
   },
   {
-   "text": "(2) The dual of an irreducible representation of the Weil group of\n$U_0$ is irreducible, and twisting by the character through which the\nconstant twist $\\mathcal B_b$ acts preserves irreducibility; so\n$\\mathcal M^\\dagger$ is a nonzero irreducible lisse Weil sheaf. After\ngeometric base change $\\mathcal B_b$ becomes trivial, so the geometric\nfundamental representation of $\\mathcal M^\\dagger$ is the\n$\\pi_1(U)$-module $V^\\vee$. If\n$0=V_0\\subset V_1\\subset\\cdots\\subset V_n=V$ is a composition series,\nthe annihilators\n$V_{n-i}^\\perp\\subset V^\\vee$ form a composition series of $V^\\vee$\nwith graded pieces $(V_{n-i+1}/V_{n-i})^\\vee$; so the geometric\nirreducible constituents of $\\mathcal M^\\dagger$ are the duals of those\nof $\\mathcal M$. If one of them were\n$\\mathcal L_{\\psi(ax)}|_U$, its dual\n$\\mathcal L_{\\psi(-ax)}|_U$ ([lem-fd-as-characters]) would be a\ngeometric constituent of $\\mathcal M$, which is excluded. So\n$\\mathcal M^\\dagger$ is constituent-nonexceptional.",
+   "text": "The dual action is $(g\\lambda)(v)=\\lambda(g^{-1}v)$, as in [def-real-weil-representation-operations]. The dual of a finite-dimensional continuous representation is continuous, since inversion and matrix transpose are continuous. The exact tensor equivalence for lisse sheaves identifies its dual with the lisse linear dual: the invariant evaluation pairing $V^\\vee\\otimes V\\to\\Qlb$ and the dual-basis coevaluation satisfy the two duality identities, which the equivalence preserves. The Frobenius operator acts by inverse transpose, giving the dual Weil datum. If $W\\subset V^\\vee$ is a Weil-invariant subspace, its annihilator $W^\\perp\\subset V$ is invariant. Weil irreducibility of $V$, in [rem-dl-a1-conventions], gives $W^\\perp=0$ or $V$; the dimension formula $\\dim W+\\dim W^\\perp=\\dim V$ then gives $W=V^\\vee$ or $0$. Finally, [def-wf-constant-weil-twist] multiplies every Weil operator by the nonzero scalar $b^{\\deg(g)}$, leaving invariant subspaces unchanged. Thus $\\mathcal M^\\dagger$ is lisse, nonzero and Weil-irreducible for every $b\\ne0$.",
    "uses": [
+    "def-real-weil-representation-operations",
+    "cor-galois-lisse-representations",
+    "rem-dl-a1-conventions",
+    "prop-wf-weil-sheaf-representation-equivalence",
+    "def-wf-constant-weil-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+    "place": "Proof (2), duality and irreducibility"
+   }
+  },
+  {
+   "text": "On the geometric group the twist $\\mathcal B_b$ is trivial, so $\\mathcal M^\\dagger$ has representation $V^\\vee$. Choose a geometric composition series $0=V_0\\subset\\cdots\\subset V_n=V$ by the dimension argument of step 3. Its annihilators give a series $0=V_n^\\perp\\subset\\cdots\\subset V_0^\\perp=V^\\vee$. Restriction of functionals gives the equivariant identification $V_{i-1}^\\perp/V_i^\\perp\\simeq(V_i/V_{i-1})^\\vee$: its kernel is $V_i^\\perp$ and it is onto by extending a basis. Each quotient is simple by the annihilator argument of step 4, which applies to any group. Therefore the geometric simple factors of the dual are the duals of the original factors. If one were $\\mathcal L_{\\psi(ax)}|_U$, dualizing it would make $\\mathcal L_{\\psi(-ax)}|_U$ a factor of $\\mathcal M$, using [lem-fd-as-characters]. This is excluded by [def-a1-constituent-nonexceptional]. This proves clause (2) without assuming geometric irreducibility or semisimplicity.",
+   "uses": [
+    "def-wf-constant-weil-twist",
+    "def-a1-constituent-nonexceptional",
     "lem-fd-as-characters"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+    "place": "Proof (2), annihilator filtration and the excluded constituents"
+   }
   },
   {
-   "text": "(3) Let $\\bar\\xi$ be a geometric point of the dual line, i.e.\n$\\xi\\in k$. The stalk formula [lem-fd-stalk-formula] (with $r=1$)\ngives\n\n$$\n\\bigl(\\operatorname{FT}_\\psi(j_!\\mathcal M)\\bigr)_{\\bar\\xi}\n\\cong H^*_c\\bigl(\\mathbf A^1_k,\\,j_!\\mathcal M\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr)[1]\n=H^*_c\\bigl(U,\\,\\mathcal M\\otimes\\mathcal L_{\\psi(\\xi x)}|_U\\bigr)[1],\n$$\n\nthe tensor product with the lisse rank-one kernel being exact and the\ncompact-support cohomology of an extension by zero being that of the\nopen curve. By (1) with $a=\\xi$ this is concentrated in degree\n$1-1=0$. The same formula for the character $\\psi^{-1}$, whose\nArtin–Schreier sheaf is\n$\\mathcal L_{\\psi^{-1}(\\xi x)}=\\mathcal L_{\\psi(-\\xi x)}$ by\n[lem-fd-as-characters], together with (1) applied to\n$\\mathcal M^\\dagger$ (legitimate by (2)) with $a=-\\xi$, shows that\n$\\operatorname{FT}_{\\psi^{-1}}(j_!\\mathcal M^\\dagger)$ is concentrated\nin degree $0$. Since this holds at every geometric point, both\ntransforms are sheaves.",
+   "text": "For a closed geometric point $\\xi\\in\\mathbf A^1(k)$, [lem-fd-stalk-formula] with $r=1$ gives the stalk of $\\operatorname{FT}_\\psi(j_!\\mathcal M)$ as $R\\Gamma_c(\\mathbf A^1_k,j_!\\mathcal M\\otimes^L\\mathcal L_{\\psi(\\xi x)})[1]$. Apply the all-coefficient-stage compact-support projection formula [fix-prop-projection-formula] with $f=j$, $K=\\mathcal M$ and $L=\\mathcal L_{\\psi(\\xi x)}$. The latter is a lisse line, so its local rank-one free integral models have Tor amplitude $[0,0]$; the finite-Tor hypothesis is satisfied. Since $Rj_!$ restricts to exact $j_!$ on sheaves by [lem-zl-immersion-weil-local-behavior], this identifies the integrand with $j_!(\\mathcal M\\otimes\\mathcal L_{\\psi(\\xi x)}|_U)$. Compact-support composition in [prop-functor-package], for $U\\xrightarrow{j}\\mathbf A^1_k\\to\\operatorname{Spec}k$, then identifies its cohomology with $R\\Gamma_c(U,\\mathcal F_\\xi)[1]$. Clause (1) shows concentration in degree zero: $H^i(C[1])=H^{i+1}(C)$.",
    "uses": [
+    "lem-zl-immersion-weil-local-behavior",
     "lem-fd-stalk-formula",
-    "lem-fd-as-characters"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Now let $\\mathcal M$ be pure of weight $w$ and let $\\mathcal K$ be the\nrealified kernel of [lem-fd-realified-kernel-real], the direct sum of\n$p_1^*(j_!\\mathcal M)\\otimes^L\\mathcal K_\\psi$ and\n$p_1^*(j_!\\mathcal M^\\dagger)\\otimes^L\\mathcal K_{\\psi^{-1}}$ with the\nkernels of [def-fd-kernel]. By [def-fd-transform] the direct images\nunder $p_{2,!}$ of the two summands are\n$\\operatorname{FT}_\\psi(j_!\\mathcal M)[-1]$ and\n$\\operatorname{FT}_{\\psi^{-1}}(j_!\\mathcal M^\\dagger)[-1]$, which by\nwhat was just shown are concentrated in degree $1$. The\ncompact-support direct image is an exact triangulated functor by\n[prop-functor-package], hence additive, so\n$R^\\nu p_{2,!}\\mathcal K=0$ for $\\nu\\neq1$ and\n\n$$\nR^1p_{2,!}\\mathcal K\\cong\\operatorname{FT}_\\psi(j_!\\mathcal M)\\oplus\n\\operatorname{FT}_{\\psi^{-1}}(j_!\\mathcal M^\\dagger),\n$$\n\nexhibiting $\\operatorname{FT}_\\psi(j_!\\mathcal M)$ as a direct summand.",
-   "uses": [
-    "lem-fd-realified-kernel-real",
-    "def-fd-kernel",
-    "def-fd-transform",
+    "fix-prop-projection-formula",
     "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+    "place": "Proof (3), closed-point stalk formula and extension by zero"
+   }
+  },
+  {
+   "text": "By clause (2), the same calculation applies to $\\mathcal M^\\dagger$. The character identity $\\mathcal L_{\\psi^{-1},f}\\simeq\\mathcal L_{\\psi,-f}$ in [lem-fd-as-characters] replaces $\\xi$ by $-\\xi$, so every closed geometric stalk of $\\operatorname{FT}_{\\psi^{-1}}(j_!\\mathcal M^\\dagger)$ is also concentrated in degree zero. Both transforms belong to the bounded constructible category: the projection is separated of finite type, their inputs are zero extensions of lisse sheaves tensored with lisse lines, and the constructible preservation statements of [thm-sf-ctf-stability], including passage to $\\Qlb$, apply. Their ordinary cohomology sheaves are constructible by [lem-a1-qbar-open-closed-cohomology]. For each such point choose a finite field $k_1$ containing its coordinate. The corresponding $k_1$-rational closed immersion into the dual line has t-exact pullback by [lem-zl-immersion-weil-local-behavior]; its base change to $k$ is the required derived fibre. Its point-fibre functor is exact by [lem-dl-a1-constructible-fibres-exact]. Thus the fibre of each cohomology sheaf in degree $i\\ne0$ is zero at every $k$-point. Joint conservativity in that same node, for $Y_0=\\mathbf A^1_{k_0}$, makes each such sheaf zero. Both transforms are therefore sheaves. This uses closed-point fibres on constructible objects; it does not identify generic geometric points with elements of $k$.",
+   "uses": [
+    "lem-fd-as-characters",
+    "thm-sf-ctf-stability",
+    "lem-a1-qbar-open-closed-cohomology",
+    "lem-zl-immersion-weil-local-behavior",
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+    "place": "Proof (3), inverse character and detection from closed geometric fibres"
+   }
+  },
+  {
+   "text": "Now suppose $\\mathcal M$ is punctually pure of weight $w$ and $\\iota(b)=q^w$. In the statement of [lem-fd-realified-kernel-real], the realified kernel is explicitly the direct sum $\\mathcal K=I_\\psi\\oplus I_{\\psi^{-1}}$, where $I_\\psi=p_1^*(j_!\\mathcal M)\\otimes^L\\mathcal K_\\psi$ and $I_{\\psi^{-1}}=p_1^*(j_!\\mathcal M^\\dagger)\\otimes^L\\mathcal K_{\\psi^{-1}}$. Its final generality clause allows every pure lisse $\\mathcal M$; no extra unramifiedness or geometric irreducibility is used. By [def-fd-transform] with rank one, $Rp_{2,!}I_\\psi=\\operatorname{FT}_\\psi(j_!\\mathcal M)[-1]$ and $Rp_{2,!}I_{\\psi^{-1}}=\\operatorname{FT}_{\\psi^{-1}}(j_!\\mathcal M^\\dagger)[-1]$. Each is concentrated in degree one by step 7.",
+   "uses": [
+    "lem-fd-realified-kernel-real",
+    "def-fd-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+    "place": "Proof (3), realified kernel and transform normalization"
+   }
+  },
+  {
+   "text": "The functor $Rp_{2,!}$ preserves finite biproducts. Indeed at finite coefficients this follows from its triangulatedness in [lem-compact-support-direct-image-triangulated]. The formula defining the higher-coefficient operation in [def-weil-integral-rational-qbar-compact-support] preserves this property: derived reduction and rational scalar extension preserve finite direct sums, and the derived inverse limit preserves finite products, which in these additive categories are finite direct sums. At a common finite coefficient field this gives the same property for $\\Qlb$. Consequently $Rp_{2,!}\\mathcal K$ is the direct sum of the two degree-one complexes of step 8. Taking cohomology yields $R^\\nu p_{2,!}\\mathcal K=0$ for $\\nu\\ne1$ and\n$$R^1p_{2,!}\\mathcal K\\simeq\\operatorname{FT}_\\psi(j_!\\mathcal M)\\oplus\\operatorname{FT}_{\\psi^{-1}}(j_!\\mathcal M^\\dagger).$$\nThe inclusion and projection of the first summand have composite the identity, proving the claimed direct-summand assertion.",
+   "uses": [
+    "lem-compact-support-direct-image-triangulated",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+    "place": "Proof (3), final paragraph: biproducts, shifts, and the explicit summand"
+   }
   }
  ],
  "proof_deps": [
+  "lem-fd-as-characters",
+  "cor-galois-lisse-representations",
   "lem-zl-affine-curve-range",
   "lem-a1-affine-hc0",
   "lem-a1-affine-hc2",
-  "def-wf-fundamental-representation",
-  "lem-fd-as-characters",
   "def-a1-constituent-nonexceptional",
+  "def-real-weil-representation-operations",
+  "rem-dl-a1-conventions",
+  "prop-wf-weil-sheaf-representation-equivalence",
+  "def-wf-constant-weil-twist",
+  "lem-zl-immersion-weil-local-behavior",
   "lem-fd-stalk-formula",
+  "fix-prop-projection-formula",
+  "prop-functor-package",
+  "thm-sf-ctf-stability",
+  "lem-a1-qbar-open-closed-cohomology",
+  "lem-dl-a1-constructible-fibres-exact",
   "lem-fd-realified-kernel-real",
-  "def-fd-kernel",
   "def-fd-transform",
-  "prop-functor-package"
+  "lem-compact-support-direct-image-triangulated",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-constituent-nonexceptional-concentration.proof.md",
+  "place": "Proof (1)–(3), with the closed-point and functoriality justifications expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ArtinSchreier|FourierDeligne|compactSupport.*cohom",
+   "results": "No source hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform concentration of lisse sheaf without additive character constituents",
+   "results": "Returned analytic Fourier definitions and the Riemann–Lebesgue lemma; none concerns etale Fourier–Deligne transforms.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, \"dual\"",
+   "results": "Returned Representation.dual (Basic), Representation.Equiv.dualTensorHom (Intertwining) and FDRep.dualTensorIsoLinHom (FDRep), plus character-dual formulas. These provide representation operations, not the sheaf cohomological concentration statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a lisse sheaf on an affine smooth curve with no Artin Schreier constituents all additive twists have compactly supported cohomology only in degree one and Fourier transform in degree zero",
+   "results": "Returned Hilbert 90, abstract sheaf cohomology, affine inverse-limit section lemmas and cyclic group cohomology; none states the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ArtinSchreier\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible lisse Weil sheaf with no rank one additive character in its geometric composition factors has zero compact support cohomology in degrees zero and two",
+   "results": "Returned singular homology, trivial/cyclic group cohomology, vanishing of sections on basic opens and locally constant condensed modules; none states the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_remark"
@@ -192,5 +329,94 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-p-dl-a1-some-weight"
+ "unit": "sk-p-dl-a1-some-weight",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-constituent-nonexceptional-concentration",
+  "worker": "stage1",
+  "summary": "NY checked both blueprint snapshots and project source; retained the statement, expanded the coinvariant and annihilator arguments, justified finite-field descent and compact-support projection/composition, used existing constructible k-point fibre conservativity instead of treating all geometric points as k-points, and replaced the obsolete functor-package exactness citation by finite-level triangulatedness and the higher-coefficient defining formula. No new nodes were necessary.",
+  "blueprint": "Proof (1): steps 1–3; proof (2): steps 4–5; proof (3) first paragraph: steps 6–7; proof (3) final paragraph: steps 8–9. These realize the concentration input to the paired complex in the unit proof, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-fd-as-characters",
+    "why": "Artin–Schreier character and inverse-character formulas identify the excluded rank-one representations. No node in this unit states this general tool."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "The exact tensor equivalence translates the explicitly written finite-dimensional arguments into lisse-sheaf statements. No node in this unit states this general tool."
+   },
+   {
+    "node": "lem-zl-affine-curve-range",
+    "why": "The general curve cohomological interval is a tool for clause (1). No node in this unit states this general tool."
+   },
+   {
+    "node": "lem-a1-affine-hc0",
+    "why": "Degree-zero vanishing on an affine curve is a tool for clause (1). No node in this unit states this general tool."
+   },
+   {
+    "node": "lem-a1-affine-hc2",
+    "why": "Top cohomology as geometric coinvariants is the endpoint tool needed for clause (1). No node in this unit states this general tool."
+   },
+   {
+    "node": "prop-wf-weil-sheaf-representation-equivalence",
+    "why": "The exact Weil-representation equivalence identifies subobjects for the dual irreducibility argument. No node in this unit states this general tool."
+   },
+   {
+    "node": "lem-zl-immersion-weil-local-behavior",
+    "why": "T-exact open extension and closed-point pullback give the precise standard-cohomology comparisons used in the stalk argument. No node in this unit states this general tool."
+   },
+   {
+    "node": "lem-fd-stalk-formula",
+    "why": "The unit Fourier route requires this fibre computation for the concentration input. No node in this unit states this general tool."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "The all-coefficient projection formula moves the lisse line through the open compact-support image. No node in this unit states this general tool."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Only compact-support composition is used, to identify compact cohomology of extension by zero. No node in this unit states this general tool."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Preservation of bounded constructibility at the rational/common stages supplies the domain for fibre detection. No node in this unit states this general tool."
+   },
+   {
+    "node": "lem-a1-qbar-open-closed-cohomology",
+    "why": "Standard constructible cohomology on a curve is needed to apply fibre conservativity to cohomology sheaves. No node in this unit states this general tool."
+   },
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Constructible coefficient fibres at k-points detect zero; this repairs the generic-point omission without changing the Fourier route. No node in this unit states this general tool."
+   },
+   {
+    "node": "lem-compact-support-direct-image-triangulated",
+    "why": "Finite-level triangulatedness supplies additivity before passing coefficients. No node in this unit states this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fd-as-characters",
+  "cor-galois-lisse-representations",
+  "lem-zl-affine-curve-range",
+  "lem-a1-affine-hc0",
+  "lem-a1-affine-hc2",
+  "prop-wf-weil-sheaf-representation-equivalence",
+  "lem-zl-immersion-weil-local-behavior",
+  "lem-fd-stalk-formula",
+  "fix-prop-projection-formula",
+  "prop-functor-package",
+  "thm-sf-ctf-stability",
+  "lem-a1-qbar-open-closed-cohomology",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-compact-support-direct-image-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-1a8b7ec6d",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-1a8b7ec6d (reviewer sub-agent of L); spot-checked: Reviewed the full item, nine proof steps, unit/chapter route, all cited node statements and source locations, coefficient/base-change details, edge cases, Mathlib searches, duplicate/cycle risks, route locks, and reported repairs. No remaining mathematical or DAG faults; review written to review.md."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-a1-curve-perverse-simples",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Simple perverse sheaves on a smooth curve",
@@ -24,44 +24,246 @@
  ],
  "proof": [
   {
-   "text": "We use the parts (1)–(5) of [thm-a1-curve-perverse-heart] freely.\n\"Punctual\" and \"no punctual subsheaf\" are meant as there. We also use [lem-wf-dense-open-pi1-surjective] (SGA 1, Exposé V,\nProposition 8.2): for a dense open $k:U'\\hookrightarrow U$ of a smooth\ncurve, the maps of fundamental groups and of Weil groups are surjective,\nand consequently, for a lisse sheaf $\\mathcal N$ on $U$, the unit\n$\\mathcal N\\to k_*k^*\\mathcal N$ is an isomorphism (part (3)) and, if\n$\\mathcal N$ is irreducible, so is $k^*\\mathcal N$ (part (4)).",
+   "text": "Use exactly the perfect-field, smooth separated finite-type pure-dimension-one curve and rational coefficient conventions of [thm-a1-curve-perverse-heart]. Work first in its geometric category; the Weil interpretation is justified in Step 4. All sheaves below are in the standard constructible heart. By [sk-lem-coefficient-heart], a constructible sheaf is lisse on a dense open; finitely many such opens have a common dense intersection. A dense open of our curve contains every component generic point, so its closed complement has dimension at most zero and is a finite set of closed points by [lem-sc-dim0-finite]. Thus a sheaf vanishing on that open is punctual. We use exact restrictions, the ordinary adjunction $j^*\\dashv j_*$, and the exact fully faithful closed direct image from [lem-a1-qbar-open-closed-cohomology]. In particular these operations remain in the same rational coefficient category; no comparison with discrete coefficient sheaves is being assumed.",
    "uses": [
     "thm-a1-curve-perverse-heart",
-    "lem-wf-dense-open-pi1-surjective"
+    "sk-lem-coefficient-heart",
+    "lem-sc-dim0-finite",
+    "lem-a1-qbar-open-closed-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Opening conventions; common lisse opens used in the middle-extension and classification paragraphs"
+   }
   },
   {
-   "text": "*Punctual objects are simple.* Let $E$ be irreducible, so $E\\neq0$, and\nlet $0\\to Q\\to i_{x*}E\\to R\\to0$ be exact in $\\mathrm{Perv}(C)$. Part (5)\ngives $\\mathcal H^{-1}Q=0$ and an exact sequence\n$0\\to\\mathcal H^{-1}R\\to\\mathcal H^0Q\\to i_{x*}E\\to\\mathcal H^0R\\to0$.\nHere $\\mathcal H^{-1}R$ is a subsheaf of the punctual sheaf\n$\\mathcal H^0Q$, so it is punctual, and by (3) it is zero. So\n$\\mathcal H^0Q$ is a subsheaf of $i_{x*}E$. Subsheaves of $i_{x*}E$\ncorrespond to submodules of $E$, since $i_{x*}$ is exact and fully\nfaithful with inverse $i_x^*$ on sheaves supported at $x$. Hence either\n$\\mathcal H^0Q=0$, and then $Q=0$, or $\\mathcal H^0Q=i_{x*}E$, and then\n$R=0$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Middle extensions are simple.* Let $P=(j_*\\mathcal N)[1]$ with\n$\\mathcal N$ nonzero and irreducible, so $P\\neq0$, and let\n$0\\to Q\\to P\\to R\\to0$ be exact in $\\mathrm{Perv}(C)$. Part (5) gives\n$\\mathcal H^0R=0$ and an exact sequence\n$$\n0\\to\\mathcal H^{-1}Q\\to j_*\\mathcal N\\to\\mathcal H^{-1}R\\to\n\\mathcal H^0Q\\to0 .\n$$\nChoose a dense open $k:U'\\hookrightarrow U$ on which $\\mathcal H^{-1}Q$\nand $\\mathcal H^{-1}R$ are lisse and the punctual sheaf $\\mathcal H^0Q$\nvanishes, and write $j'=j\\circ k$. On $U'$ we get an exact sequence of\nlisse sheaves $0\\to\\mathcal H^{-1}Q|_{U'}\\to\\mathcal N|_{U'}\\to\n\\mathcal H^{-1}R|_{U'}\\to0$. Since $\\mathcal N|_{U'}$ is irreducible,\nthere are two cases.\n\n(a) Suppose $\\mathcal H^{-1}Q|_{U'}=0$. Then $\\mathcal H^{-1}Q$ is a\npunctual subsheaf of $j_*\\mathcal N$, so it is zero by (3) and (4), and\n$\\mathcal N|_{U'}\\cong\\mathcal H^{-1}R|_{U'}$. Put\n$\\mathcal H:=\\mathcal H^{-1}R$. By (3) it has no punctual subsheaf, so\nthe unit $\\mathcal H\\to j'_*j'^*\\mathcal H$ is injective, because its\nkernel is punctual. The composite\n$$\nj_*\\mathcal N\\to\\mathcal H\\to j'_*j'^*\\mathcal H\n\\cong j'_*(\\mathcal N|_{U'})=j_*k_*k^*\\mathcal N\n$$\nis $j_*$ of the unit $\\mathcal N\\to k_*k^*\\mathcal N$, which is an\nisomorphism. Hence the injective second map is also surjective, and so\n$j_*\\mathcal N\\to\\mathcal H$ is an isomorphism. Its cokernel\n$\\mathcal H^0Q$ therefore vanishes, and $Q=0$. This is the step that\nexcludes a punctual subobject of the middle extension.\n\n(b) Suppose $\\mathcal H^{-1}Q|_{U'}=\\mathcal N|_{U'}$. Then\n$\\mathcal H^{-1}R$ vanishes on $U'$, so it is punctual, hence zero by\n(3). Then $R=0$, and $Q\\to P$ is an isomorphism.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Every simple object is of one of the two kinds.* Let $P$ be simple. The\nexact sequence $0\\to(\\mathcal H^{-1}P)[1]\\to P\\to(\\mathcal H^0P)[0]\\to0$\nof (5) forces either $\\mathcal H^{-1}P=0$ or $\\mathcal H^0P=0$.\n\nIf $\\mathcal H^{-1}P=0$, then $P=\\mathcal G[0]$ with $\\mathcal G$\npunctual, supported on a finite set of closed points, so\n$\\mathcal G\\cong\\bigoplus_xi_{x*}\\mathcal G_x$. Every subsheaf\n$\\mathcal G'\\subset\\mathcal G$ gives a short exact sequence\n$0\\to\\mathcal G'[0]\\to\\mathcal G[0]\\to(\\mathcal G/\\mathcal G')[0]\\to0$ in\nthe heart. This holds because the three terms are punctual, hence in the\nheart by (3), and they form a distinguished triangle, so part (4)\nof [lem-weil-heart-short-exact-triangles] applies. By simplicity\n$\\mathcal G$ has no subsheaves other than $0$ and $\\mathcal G$. So\n$\\mathcal G=i_{x*}E$ for a single closed point $x$ and an irreducible $E$.\n\nIf $\\mathcal H^0P=0$, then $P=\\mathcal F[1]$ with $\\mathcal F\\neq0$\nhaving no punctual subsheaf. Choose a dense open $j:U\\hookrightarrow C$\non which $\\mathcal F$ is lisse, and put $\\mathcal N:=j^*\\mathcal F$. The\nunit $\\mathcal F\\to j_*\\mathcal N$ is injective, because its kernel is\npunctual. In particular $\\mathcal N\\neq0$. Let $\\mathcal Q$ be its\ncokernel. It vanishes on $U$, so it is punctual. The sheaf sequence\n$0\\to\\mathcal F\\to j_*\\mathcal N\\to\\mathcal Q\\to0$ gives a distinguished\ntriangle $\\mathcal Q[0]\\to\\mathcal F[1]\\to(j_*\\mathcal N)[1]\\to$ whose\nthree terms lie in the heart by (3) and (4). So it is a short exact\nsequence in $\\mathrm{Perv}(C)$ by part (4) of\n[lem-weil-heart-short-exact-triangles]. Its quotient $(j_*\\mathcal N)[1]$ is\nnonzero, so simplicity forces $\\mathcal Q=0$, and hence\n$P\\cong(j_*\\mathcal N)[1]$.\n\nIt remains to show that $\\mathcal N$ is irreducible. Let\n$0\\neq\\mathcal N'\\subsetneq\\mathcal N$ be a lisse subsheaf, and let\n$\\mathcal C$ be the cokernel of $j_*\\mathcal N'\\to j_*\\mathcal N$. Let\n$\\mathcal C'' := \\mathcal C/\\mathcal C_{\\mathrm p}$ be its quotient by\nits largest punctual subsheaf, and let\n$\\mathcal F':=\\ker(j_*\\mathcal N\\to\\mathcal C'')$. The sequence\n$0\\to\\mathcal F'\\to j_*\\mathcal N\\to\\mathcal C''\\to0$ has no punctual\nsubsheaf in any of its terms: $\\mathcal F'$ is a subsheaf of\n$j_*\\mathcal N$, and $\\mathcal C''$ has none by construction. So, as\nabove, it gives a short exact sequence\n$0\\to\\mathcal F'[1]\\to P\\to\\mathcal C''[1]\\to0$ in $\\mathrm{Perv}(C)$.\nOn $U$ the sheaf $\\mathcal C|_U=\\mathcal N/\\mathcal N'$ is lisse, so\n$\\mathcal C_{\\mathrm p}|_U=0$ and $\\mathcal F'|_U=\\mathcal N'$. Both\n$\\mathcal F'$ and $\\mathcal C''$ are therefore nonzero, and this\ncontradicts the simplicity of $P$. Hence $\\mathcal N$ is irreducible, and\n$P$ is a middle extension of the second kind.",
+   "text": "Here is the precise dense-restriction input used below. Smooth curves are normal by [lem-sc-smooth-normal]. On each connected component of a lisse open $V$, [lem-wf-dense-open-pi1-surjective](1) makes $\\pi_1(V')\\to\\pi_1(V)$ surjective for a dense open $V'$. Under the exact fibre equivalence [cor-galois-lisse-representations](2), the two actions consequently have exactly the same invariant subspaces and intertwining linear maps: invariance or commutation for the image is invariance or commutation for the whole group. Thus restriction is fully faithful and gives a bijection on lisse subobjects. The same conclusion holds on a finite disjoint union by applying it on each component. For Weil sheaves, use [def-weil-weil-sheaf-complex]: a subobject on the geometric open extends component by component; its Frobenius isomorphism extends uniquely by full faithfulness, as does its inverse, and the inclusion is equivariant because this can be tested on the dense open. Therefore restriction also gives a bijection on Weil lisse subobjects. In particular it preserves and reflects irreducibility. The ordinary unit $M\\to v_*v^*M$ for lisse $M$ is an isomorphism componentwise by [lem-wf-dense-open-pi1-surjective](3), and its naturality makes it a Weil isomorphism when applicable.",
    "uses": [
+    "lem-sc-smooth-normal",
+    "lem-wf-dense-open-pi1-surjective",
+    "cor-galois-lisse-representations",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Opening paragraph: dense-open monodromy and the lisse unit; stated componentwise to avoid a geometric-connectedness assumption"
+   }
+  },
+  {
+   "text": "Two elementary consequences of [thm-a1-curve-perverse-heart](3),(4) and [lem-a1-qbar-open-closed-cohomology] will be used repeatedly. If $M$ is lisse and $j$ is a dense open immersion, $(j_*M)[1]$ belongs to the heart, so $j_*M$ has no nonzero punctual subsheaf. Taking $j$ to be the identity gives the same assertion for $M$. If a constructible sheaf $F$ has no punctual subsheaf and $v$ is a dense open on which $F$ is lisse, exactness of $v^*$ and $v^*v_*\\cong\\mathrm{id}$ show that the kernel of $F\\to v_*v^*F$ is supported on the finite complement. Hence that kernel is zero, and this unit is monic. A subsheaf of a sheaf with no punctual subsheaf again has none, since a punctual subobject would compose to one of the original sheaf.",
+   "uses": [
+    "thm-a1-curve-perverse-heart",
+    "lem-a1-qbar-open-closed-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Middle-extension paragraph (a), and the unit in the classification paragraph"
+   }
+  },
+  {
+   "text": "For the Weil case, all these constructions are on the geometric fiber with Frobenius pairs as in [def-weil-weil-sheaf-complex]. Pullback by Frobenius preserves the ordinary and perverse classes described in [thm-a1-curve-perverse-heart]; it is an exact autoequivalence of each geometric heart. The kernel of an equivariant morphism has a unique induced Frobenius isomorphism, because applying that autoequivalence to its kernel diagram gives another kernel diagram. The same argument applies to cokernels. Therefore a sequence of equivariant maps in either heart is exact if and only if its underlying sequence is exact. In particular, below we apply [lem-weil-heart-short-exact-triangles] only in the geometric derived category. When the resulting first two maps are equivariant, the last map inherits its equivariance from the cokernel universal property, so the short exact sequence is also one of Weil perverse pairs. This does not put a triangulated structure on the fixed-pair category. Common lisse opens may be chosen over $k_0$: the maximal lisse locus is Frobenius-stable, and its finite complement descends; finite intersections and removing punctual supports preserve this property.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "thm-a1-curve-perverse-heart",
     "lem-weil-heart-short-exact-triangles"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "All Weil versions of the source proof: exact sequences are interpreted in the fixed-pair heart"
+   }
+  },
+  {
+   "text": "Let $E$ be irreducible on a closed point $x$, and let $0\\to Q\\to i_{x*}E\\to R\\to0$ be exact in the perverse heart. By [thm-a1-curve-perverse-heart](5), $\\mathcal H^{-1}Q=0$ and\n$$0\\to\\mathcal H^{-1}R\\to\\mathcal H^0Q\\to i_{x*}E\\to\\mathcal H^0R\\to0.$$\nThe first sheaf is a punctual subsheaf of the punctual $\\mathcal H^0Q$, and has no punctual subsheaf by part (3), so it is zero. Thus $\\mathcal H^0Q$ is a subsheaf of $i_{x*}E$. Apply [lem-a1-qbar-open-closed-cohomology] to the complement of $x$: exact $i_x^*$ and fully faithful $i_{x*}$ identify sheaves supported at $x$ with sheaves on $x$ and identify their subobjects. Irreducibility of $E$ forces $\\mathcal H^0Q=0$ or $i_{x*}E$. The displayed sequence and the two-degree heart description then give $Q=0$ or $R=0$, respectively. The object $i_{x*}E$ is nonzero since $i_x^*i_{x*}E=E\\ne0$, so it is simple. In the Weil case the supported equivalence retains Frobenius and hence gives sub-Weil-modules of $E$.",
+   "uses": [
+    "thm-a1-curve-perverse-heart",
+    "lem-a1-qbar-open-closed-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Punctual objects are simple"
+   }
+  },
+  {
+   "text": "Let $P=(j_*\\mathcal N)[1]$ for nonzero irreducible lisse $\\mathcal N$, and let $0\\to Q\\to P\\to R\\to0$ be exact in the heart. Parts (3)--(5) of [thm-a1-curve-perverse-heart] give $\\mathcal H^0R=0$ and\n$$0\\to A\\to j_*\\mathcal N\\xrightarrow{f}B\\to T_0\\to0,$$\nwhere $A=\\mathcal H^{-1}Q$, $B=\\mathcal H^{-1}R$ have no punctual subsheaf and $T_0=\\mathcal H^0Q$ is punctual. Choose $k:U'\\hookrightarrow U$ making $A,B$ lisse and $T_0$ zero, using [sk-lem-coefficient-heart], and put $j'=jk$. Exact restriction from [lem-a1-qbar-open-closed-cohomology] gives\n$$0\\to A|_{U'}\\to\\mathcal N|_{U'}\\to B|_{U'}\\to0.$$\nBy Step 2, $\\mathcal N|_{U'}$ is irreducible (also in the Weil lisse category). Its lisse subobject $A|_{U'}$ is therefore zero or the whole sheaf.",
+   "uses": [
+    "thm-a1-curve-perverse-heart",
+    "sk-lem-coefficient-heart",
+    "lem-a1-qbar-open-closed-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Middle extensions are simple: six-term sequence and restriction to a common dense open"
+   }
+  },
+  {
+   "text": "Suppose $A|_{U'}=0$ in Step 6. Then $A$ is punctual and hence zero. The restriction of $f$ is an isomorphism $\\mathcal N|_{U'}\\cong B|_{U'}$. By Step 3, the unit $u:B\\to j'_*j'^*B$ is monic. Naturality of the ordinary adjunction of [lem-a1-qbar-open-closed-cohomology] identifies $uf$, through that restricted isomorphism, with the unit\n$$j_*\\mathcal N\\longrightarrow j'_*k^*\\mathcal N=j_*k_*k^*\\mathcal N.$$\nThe equality of direct images follows directly from their section formula; this unit is $j_*$ of the lisse unit in Step 2, hence is an isomorphism. Thus $u$ is both monic and split epic: a right inverse is $f(uf)^{-1}$. Consequently $u$ and $f$ are isomorphisms, $T_0=0$, and $Q=0$ by [thm-a1-curve-perverse-heart](3). This proves the boundary-subobject exclusion without citing the proof of another node.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology",
+    "thm-a1-curve-perverse-heart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Middle-extension paragraph (a): the composite of units and the vanishing of Q"
+   }
+  },
+  {
+   "text": "Suppose instead that $A|_{U'}=\\mathcal N|_{U'}$. Then $B|_{U'}=0$, so $B$ is punctual. By [thm-a1-curve-perverse-heart](3) it has no punctual subsheaf, hence $B=0$. Together with $\\mathcal H^0R=0$ this gives $R=0$. These two cases exhaust the subobjects of $P$. Since $j^*j_*\\mathcal N=\\mathcal N\\ne0$, $P\\ne0$, and $P$ is simple.",
+   "uses": [
+    "thm-a1-curve-perverse-heart",
+    "lem-a1-qbar-open-closed-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Middle-extension paragraph (b), completing simplicity of middle extensions"
+   }
+  },
+  {
+   "text": "Now let $P$ be any simple object of the heart. Part (5) of [thm-a1-curve-perverse-heart] gives\n$$0\\to(\\mathcal H^{-1}P)[1]\\to P\\to(\\mathcal H^0P)[0]\\to0.$$\nIts two outer terms cannot both be nonzero. Thus either $P=\\mathcal G[0]$ for a nonzero punctual sheaf $\\mathcal G$, or $P=\\mathcal F[1]$ for a nonzero sheaf $\\mathcal F$ with no punctual subsheaf. These are precisely the two cases allowed by part (3).",
+   "uses": [
+    "thm-a1-curve-perverse-heart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Every simple object is of one of the two kinds: canonical short exact sequence"
+   }
+  },
+  {
+   "text": "In the punctual case, let $Z$ be the finite reduced closed support. By [lem-a1-qbar-open-closed-cohomology], $\\mathcal G=i_*i^*\\mathcal G$. As $Z=\\coprod_{x\\in Z}x$, a sheaf on $Z$ is a tuple of sheaves on its components: sections over an object over $Z$ are the product of the sections over its disjoint component pieces, by the sheaf gluing axiom. A finite product is also a direct sum here. Hence $\\mathcal G=\\bigoplus_{x\\in Z}i_{x*}E_x$. Every subsheaf $\\mathcal G'$ and the quotient $\\mathcal G/\\mathcal G'$ are punctual. Their ordinary short exact sequence gives a distinguished triangle by [lem-weil-heart-short-exact-triangles](4) for the standard heart, and all three terms belong to the perverse heart by [thm-a1-curve-perverse-heart](3),(4). The same triangle is therefore short exact in the perverse heart by the cited clause (4). Simplicity forces exactly one nonzero summand, and forces its $E_x$ to have no proper nonzero subsheaf. Thus $P=i_{x*}E_x$ with $E_x$ irreducible. For Weil pairs take $Z_0$ as the finite reduced support over $k_0$ and decompose by its closed points, keeping each Frobenius orbit together. The same argument uses Step 4 and gives an irreducible Weil module on that closed point.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology",
+    "lem-weil-heart-short-exact-triangles",
+    "thm-a1-curve-perverse-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Classification: the punctual case and the finite supported decomposition"
+   }
+  },
+  {
+   "text": "In the other case, choose a dense lisse open $j:U\\hookrightarrow C$ for $\\mathcal F$ by [sk-lem-coefficient-heart], and put $\\mathcal N=j^*\\mathcal F$. The unit $\\mathcal F\\to j_*\\mathcal N$ is monic by Step 3 and has punctual cokernel $B_0$, by exact restriction in [lem-a1-qbar-open-closed-cohomology]. In particular $\\mathcal N\\ne0$. The resulting ordinary short exact sequence gives, by [lem-weil-heart-short-exact-triangles](4) and rotation, the geometric triangle\n$$B_0[0]\\to\\mathcal F[1]\\to(j_*\\mathcal N)[1]\\to B_0[1].$$\nAll three terms are perverse by [thm-a1-curve-perverse-heart](3),(4), so clause (4) of the same heart-triangle lemma makes the first three terms short exact in the perverse heart. In the Weil case its last two maps are equivariant ordinary unit maps shifted by one; the first term, as their kernel, inherits the given Weil structure on $B_0$ by naturality of standard cohomology, or equivalently by the kernel universal property of Step 4. The quotient $(j_*\\mathcal N)[1]$ is nonzero. Simplicity forces $B_0=0$, and $P=(j_*\\mathcal N)[1]$.",
+   "uses": [
+    "sk-lem-coefficient-heart",
+    "lem-a1-qbar-open-closed-cohomology",
+    "lem-weil-heart-short-exact-triangles",
+    "thm-a1-curve-perverse-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Classification: the sheaf unit and its punctual cokernel"
+   }
+  },
+  {
+   "text": "It remains to prove that $\\mathcal N$ in Step 11 is irreducible. Suppose $0\\ne\\mathcal N'\\subsetneq\\mathcal N$ is a lisse subobject, equivariant in the Weil case. By [cor-galois-lisse-representations](2), lisse sheaves form an exact abelian category on each connected component, so $L=\\mathcal N/\\mathcal N'$ is lisse and nonzero. The same is true for the equivariant quotient by Step 4. Ordinary $j_*$ is a right adjoint by [lem-a1-qbar-open-closed-cohomology], so it preserves this monomorphism. Let $B$ be the constructible cokernel of $j_*\\mathcal N'\\to j_*\\mathcal N$. Exact restriction gives $B|_U=L$. Choose a dense $v:V\\hookrightarrow C$, with $V\\subseteq U$, on which $B$ is lisse, using [sk-lem-coefficient-heart].",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-a1-qbar-open-closed-cohomology",
+    "sk-lem-coefficient-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Classification: a putative lisse subobject and the ordinary cokernel"
+   }
+  },
+  {
+   "text": "Define $B''=\\operatorname{im}(B\\to v_*v^*B)$ and $F'=\\ker(j_*\\mathcal N\\to B'')$. These are constructible by the abelian closure and constructibility in [sk-lem-coefficient-heart, lem-a1-qbar-open-closed-cohomology]. The composite onto $B''$ is epic, giving\n$$0\\to F'\\to j_*\\mathcal N\\to B''\\to0.$$\nThe target $v_*v^*B$ has no punctual subsheaf by Step 3, so neither does $B''$. Nor does $F'$, since it is a subsheaf of $j_*\\mathcal N$. On $V$, $B''|_V=B|_V=L|_V$ and $F'|_V=\\mathcal N'|_V$. Both are nonzero: a nonzero lisse sheaf has positive rank on at least one component, and a dense open meets that component. Thus $F'$ and $B''$ are both nonzero. This is the source's saturation construction written directly as the image of a unit, so no assertion about an uncited largest punctual subsheaf is needed. All the maps are natural and hence equivariant when the input is Weil.",
+   "uses": [
+    "sk-lem-coefficient-heart",
+    "lem-a1-qbar-open-closed-cohomology",
+    "thm-a1-curve-perverse-heart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Classification: saturation; replacing the unnamed maximal-punctual-subsheaf assertion by an explicit kernel and image"
+   }
+  },
+  {
+   "text": "By [lem-weil-heart-short-exact-triangles](4) in the standard geometric heart, the exact sheaf sequence of Step 13 gives a distinguished triangle after shifting by one. All three shifted sheaves are perverse by [thm-a1-curve-perverse-heart](3), because they have no punctual subsheaf. Apply clause (4) of the heart-triangle lemma to the perverse t-structure: this gives\n$$0\\to F'[1]\\to(j_*\\mathcal N)[1]\\to B''[1]\\to0$$\nin the perverse heart. In the Weil case the first two maps are already equivariant and Step 4 gives the same exact sequence of pairs. Its two outer objects are nonzero by Step 13, contradicting simplicity of $P$. Thus $\\mathcal N$ is irreducible. Steps 5--8 prove that both listed kinds are simple; Steps 9--14 prove that every simple belongs to the list.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "thm-a1-curve-perverse-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+    "place": "Classification: the saturated subobject contradiction and conclusion"
+   }
   }
  ],
  "proof_deps": [
   "thm-a1-curve-perverse-heart",
+  "sk-lem-coefficient-heart",
+  "lem-sc-dim0-finite",
+  "lem-a1-qbar-open-closed-cohomology",
+  "lem-sc-smooth-normal",
   "lem-wf-dense-open-pi1-surjective",
+  "cor-galois-lisse-representations",
+  "def-weil-weil-sheaf-complex",
   "lem-weil-heart-short-exact-triangles"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/prop-a1-curve-perverse-simples.proof.md",
+  "place": "Entire proof; expanded common-stage sheaf operations, dense restriction, Weil exactness, and saturation. BBD 1.3.6 and 4.3.1--4.3.4 were read as supporting literature, without replacing the unit route."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perverse|middleExtension",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification of simple objects of the perverse heart on a smooth curve",
+   "results": "CategoryTheory.Simple; CategoryTheory.indecomposable_of_simple; CategoryTheory.simple_of_cosimple; CategoryTheory.Simple.mk; CategoryTheory.isIso_of_hom_simple; simple_of_isSimpleModule; CategoryTheory.Simple.not_isZero; CategoryTheory.simple_iff_subobject_isSimpleOrder",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Simple, CategoryTheory.Triangulated.TStructure",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple perverse sheaves on a smooth curve are skyscraper sheaves or middle extensions of irreducible lisse sheaves",
+   "results": "skyscraperSheaf; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instIsLEObjSingleFunctor; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.finrank_hom_simple_simple_eq_zero_iff; CategoryTheory.finrank_hom_simple_simple_eq_zero_of_not_iso; LightCondensed.IsDiscrete",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perverse|intermediate.extension",
+   "results": "Mathlib/FieldTheory/FinTrdeg.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Irreducible local systems on a curve give simple intermediate extensions in its perverse t-structure",
+   "results": "simple_of_finrank_eq_one; Representation.IsIrreducible.toIsSimpleOrder; CategoryTheory.indecomposable_of_simple; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; FDRep.simple_iff_end_is_rank_one; CategoryTheory.finrank_hom_simple_simple_eq_one_iff; Representation.is_simple_module_iff_irreducible_ofModule; FDRep.finrank_hom_simple_simple",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -154,5 +356,54 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "prop-a1-curve-perverse-simples",
+  "worker": "stage1",
+  "summary": "Retained the statement and all coefficient/curve hypotheses. Expanded the imported proof into fourteen steps with per-step citations, checked generic monodromy on disconnected curves and on Weil pairs, supplied exact supported-sheaf equivalences, and replaced the unnamed largest punctual subsheaf by the image of an ordinary unit. No new nodes: the remaining calculations are elementary consequences of existing statements. The affine-line Lean classification contains sorry and is narrower than the general curve statement.",
+  "blueprint": "Steps 1--4 make the opening conventions and tools explicit; Step 5 realizes punctual simplicity; Steps 6--8 realize both cases of middle-extension simplicity; Steps 9--11 realize the two cohomological cases; Steps 12--14 realize the saturated-subobject argument. This realizes the classification below the unit’s curve-heart construction; the Fourier step of the unit is unchanged.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-coefficient-heart",
+    "why": "Only the generic constructible-stratification and abelian-closure statements are used to choose lisse opens and form sheaf kernels and cokernels; these are not classification results."
+   },
+   {
+    "node": "lem-sc-dim0-finite",
+    "why": "Finiteness of a zero-dimensional closed boundary is a generic finite-type scheme fact, not a replacement of the perverse route."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Normality of a smooth curve checks the hypothesis of the dense-open monodromy tool."
+   },
+   {
+    "node": "lem-wf-dense-open-pi1-surjective",
+    "why": "Dense-open monodromy surjectivity and the ordinary lisse unit are generic tools needed by the source proof, already named in the blueprint."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "The exact fibre equivalence turns surjectivity into equality of invariant subspaces and supplies exact lisse quotients; this is the general lisse foundation, not the classification."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Only the standard/perverse heart short-exact triangle equivalence is used; the simple-object argument remains written in this item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-coefficient-heart",
+  "lem-sc-dim0-finite",
+  "lem-sc-smooth-normal",
+  "lem-wf-dense-open-pi1-surjective",
+  "cor-galois-lisse-representations",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-0f1eac3ae",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-0f1eac3ae (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all 14 proof steps, cited node statements, unit/chapter route, blueprint sources, BBD, and Bhatt–Scholze sources. Hypotheses, coefficient category, adjunction/base-change maps, Weil fixed-pair handling, edge cases, duplicates, route/tool uses, and long-step rule all check. No new nodes or repairs are needed; review.md records the detailed checks."
  }
 }

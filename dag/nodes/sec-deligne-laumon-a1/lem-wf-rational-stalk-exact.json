@@ -12,9 +12,76 @@
   "def-weil-weil-sheaf-complex",
   "def-weil-local-frobenius-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $s=\\operatorname{Spec}k$, and let $0\\to\\mathcal F\\xrightarrow{i}\\mathcal G\\xrightarrow{j}\\mathcal H\\to0$ be the given short exact sequence. Apply [lem-dl-a1-constructible-fibres-exact] at $\\bar x:s\\to Y$: its statement uses exactly the heart [def-weil-constructible-heart] in the question, computes fibres by derived pullback and the point-fibre functor, and explicitly includes constructible Weil sheaves after forgetting their structure. Its hypotheses hold because $Y_0$ is separated of finite type over $k_0$ and $\\ell\\ne p$. It gives a short exact sequence $0\\to\\mathcal F_{\\bar x}\\xrightarrow{i_{\\bar x}}\\mathcal G_{\\bar x}\\xrightarrow{j_{\\bar x}}\\mathcal H_{\\bar x}\\to0$ of finite-dimensional $\\Qlb$-vector spaces. These are the rational coefficient fibres specified in the question; no assertion about arbitrary pro-etale sheaf stalks is being used.",
+   "uses": [
+    "lem-dl-a1-constructible-fibres-exact",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, Lemma 6.8.7, Proposition 6.8.14 and Remark 6.8.15; specialized using the existing constructible coefficient-fibre lemma"
+   }
+  },
+  {
+   "text": "Let $u:(K,\\theta_K)\\to(L,\\theta_L)$ be either Weil morphism. All its data, the inverse Weil maps and their equations are represented over a common finite coefficient field $E$, after enlarging it: there are finitely many arrows and equations, and equality in [def-weil-algebraically-closed-coefficients] means equality after further finite extension. Work at this rationalized $E$-stage first. Put $T=Lg_Y^*$ and $e=[\\kappa(x):k_0]\\ge1$. By [def-weil-weil-sheaf-complex], $u\\theta_K=\\theta_LT(u)$. Use the iterates of [def-weil-local-frobenius-trace]. Induction gives $u\\theta_K^{[n]}=\\theta_L^{[n]}T^n(u)$: the base $n=1$ is the morphism equation, and the step is\n$$u\\theta_K^{[n+1]}=u\\theta_K^{[n]}T^n(\\theta_K)=\\theta_L^{[n]}T^n(u\\theta_K)=\\theta_L^{[n]}T^n(\\theta_L)T^{n+1}(u)=\\theta_L^{[n+1]}T^{n+1}(u).$$\nIn particular this holds for $n=e$, using the specified pullback-composition comparisons.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "def-weil-local-frobenius-trace",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds argument; expansion of the local Frobenius definition and the equation for a Weil morphism"
+   }
+  },
+  {
+   "text": "At the $E$-stage put $P=\\operatorname{Fib}_sL\\bar x^*$. For each $K$, let $J_K:P(K)\\to P(T^eK)$ be the iterated point transport followed by the return comparison of [def-weil-local-frobenius-trace]. Thus $F_{x,K}=P(\\theta_K^{[e]})J_K$. Point transport is natural by [lem-weil-frobenius-point-transport-natural] (2), and pullback composition is natural by [lem-pod-integral-pullback-composition], then scalar localization. Composing their squares gives $P(T^eu)J_K=J_LP(u)$. The return is $g_Y^e\\bar x=\\bar xg_s^e$, not literal fixation of $\\bar x$. Consequently\n$$P(u)F_{x,K}=P(u\\theta_K^{[e]})J_K=P(\\theta_L^{[e]})P(T^eu)J_K=P(\\theta_L^{[e]})J_LP(u)=F_{x,L}P(u).$$\nThis is an identity of the rational point-complex morphisms over $E$.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds argument; naturality calculation for the normalized local operator, using the existing point-transport and pullback-composition interfaces"
+   }
+  },
+  {
+   "text": "To pass this identity to $\\Qlb$, use the specified comparison families of [lem-trf-integral-pullback-comparison-realization]. Its composition/scalar equation, including equality of scheme maps and arbitrary finite iterations, supplies coefficient compatibility of the return comparison and of $\\theta^{[e]}$. The coefficient equation of [lem-trf-local-frobenius-transport-normalization] applies to $m=e$ and the $\\mathbf F_{q^e}$-point induced by $\\kappa(x)\\hookrightarrow k$. Its map $t_{x,e,K}$ is exactly $J_K$, with those comparison families. For $E\\subset M$, write $b_K:P_EK\\otimes_EM\\xrightarrow{\\sim}P_M(K\\otimes_EM)$ for its point comparison and $d_K:(T_E^eK)\\otimes_EM\\xrightarrow{\\sim}T_M^e(K\\otimes_EM)$. That lemma gives\n$$P_M(d_K)b_{T_E^eK}(J_K\\otimes_EM)=J_{K\\otimes_EM}b_K.$$\nThe composition/scalar equation and naturality of $b$ applied to $\\theta^{[e]}$ therefore give\n$$b_K(F_{x,K}\\otimes_EM)=F_{x,K\\otimes_EM}b_K.$$\nThus the local operators and Step 3's intertwining equation define the same maps after every further common extension, with the identity and tower identifications of these lemmas. This defines the stagewise $\\Qlb$ interpretation of the $E$-coefficient local operator in [def-weil-local-frobenius-trace], rather than treating that definition as already asserting coefficient compatibility. By [def-weil-algebraically-closed-coefficients] the equation holds in the common-stage category. Taking $H^0$ gives commutation for the two fibre maps of Step 1.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence about transport of Frobenius; expanded using the existing strict-system comparison and local-transport coefficient equations, not the trace theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-dl-a1-constructible-fibres-exact",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-pod-integral-pullback-composition",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-local-frobenius-transport-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+  "place": "Opening punctual-bounds argument, expanded through the existing exact coefficient-fibre and normalized local-operator interfaces; coefficient exactness follows Bhatt-Scholze section 6.8"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +117,45 @@
    "results": "CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; LightCondensed.instIsGrothendieckAbelianLightCondMod; AlgebraicGeometry.Scheme.Modules.instAbelian; instAbelianCondensedMod; instAbelianLightCondMod; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CompHausLike.LocallyConstantModule.functor; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
    "date": "2026-10-17",
    "verdict": "no match: ordinary site/topological stalks and exact functors do not identify the rational constructible heart or its normalized Weil operators"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(Exact|exact)|[eE]xact.*stalk|WeilSheaf|localFrobenius",
+   "results": "25 hits: Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean; Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean; Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean; Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean; Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/Stalk.lean; Mathlib/AlgebraicGeometry/Stalk.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary stalks, Galois fibre functors, module completions or Witt-vector Frobenius do not state exact rational constructible Weil fibres with their normalized local operators"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre functor on constructible ell adic Weil sheaves is exact and commutes with Frobenius",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor; CategoryTheory.PreGaloisCategory.FiberFunctor.instFaithfulFintypeCat; CategoryTheory.exactFunctor; CategoryTheory.PreGaloisCategory.FiberFunctor.mk; CategoryTheory.leftExactFunctor; CategoryTheory.PreGaloisCategory.FiberFunctor; CategoryTheory.PreGaloisCategory.GaloisCategory.getFiberFunctor; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary stalks, Galois fibre functors, module completions or Witt-vector Frobenius do not state exact rational constructible Weil fibres with their normalized local operators"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkFunctor\"",
+   "results": "12 hits: TopCat.Presheaf.stalkFunctor; TopCat.Presheaf.stalkFunctor_obj; TopCat.Presheaf.stalkFunctor_preserves_mono; TopCat.Presheaf.stalkSpecializes_stalkFunctor_map; TopCat.Presheaf.stalkSpecializes_stalkFunctor_map_assoc; TopCat.Presheaf.stalkFunctor_map_germ; TopCat.Presheaf.stalkFunctor_map_germ_assoc; TopCat.Presheaf.stalkSpecializes_stalkFunctor_map_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary stalks, Galois fibre functors, module completions or Witt-vector Frobenius do not state exact rational constructible Weil fibres with their normalized local operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of geometric coefficient fibres of rational constructible adic Weil sheaves and equivariance for local Frobenius",
+   "results": "8 hits: BDeRham; BDeRhamPlus; Profinite.NobelingProof.succ_exact; AdicCompletion.map_exact; WittVector.exists_frobenius_solution_fractionRing_aux; WittVector.instModuleFractionRingStandardOneDimIsocrystal; WittVector.Isocrystal.toModule; WittVector.StandardOneDimIsocrystal",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary stalks, Galois fibre functors, module completions or Witt-vector Frobenius do not state exact rational constructible Weil fibres with their normalized local operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between sheaves equipped with Frobenius isomorphisms induces an intertwining linear map on geometric stalks and an exact sequence of fibres",
+   "results": "8 hits: ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc; ModuleCat.Tilde.res_apply; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; ModuleCat.Tilde.stalkIso_hom; ModuleCat.Tilde.toOpen_res; ModuleCat.Tilde.stalkToFiberLinearMap_toStalk; ModuleCat.Tilde.stalkToFiberLinearMap",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary stalks, Galois fibre functors, module completions or Witt-vector Frobenius do not state exact rational constructible Weil fibres with their normalized local operators"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-l2-upper",
@@ -79,5 +181,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-rational-stalk-exact",
+  "worker": "stage1",
+  "summary": "Kept the statement and its coefficient category unchanged. Reused the stronger existing constructible-fibre exactness lemma, avoiding a duplicate. Proved equivariance by induction on the Weil iterate and an explicit naturality calculation for the normalized local operator, retaining Spec(k) reparametrization. No new nodes or Mathlib leaves. Searched the project Lean source by tag and stalk/exactness concepts without finding a full attachment. Maintainer-reader repair: explicitly descended the Weil morphism calculation from a common rational coefficient stage and cited the existing strict-system composition/scalar and point-return coefficient comparisons; the local-operator definition itself is only at E coefficients.",
+  "blueprint": "Realizes the exact Frobenius-stable stalk filtration implicit in the opening punctual-bounds sentence of lem-wf-l2-upper.proof.md in main-20261015; no change to the weight-detection unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Generic exactness of rational constructible coefficient fibres, including the Weil forgetful case; the energy unit contains no replacement for this coefficient-category tool."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Generic naturality of point transport at the exact rational/common-stage coefficients used to define local Frobenius; needed to compose the commuting squares."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Generic natural pullback-composition comparison underlying the normalized local operator, localized stagewise; it is not a replacement for a weight argument."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Only the completed-pullback composition/scalar equation and its finite-iteration coherence; this is coefficient calculus outside the trace-formula and Poincare-duality assumptions."
+   },
+   {
+    "node": "lem-trf-local-frobenius-transport-normalization",
+    "why": "Only the scalar-extension equation for the point-transport/return map t; it is a local coefficient-comparison tool, not a use of the trace formula or its proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-pod-integral-pullback-composition",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-local-frobenius-transport-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q10-6ab32a075",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q10-6ab32a075 (reviewer sub-agent of L); spot-checked: Read the full delivery and cited mathematics. Repaired Step 3’s unsupported passage to common coefficient stages using existing pullback/scalar and local-transport comparison lemmas. Statement unchanged; no new nodes. Corrected JSON and detailed source, hypothesis, edge-case, route, and dependency checks are recorded under fixes/ and review.md.; 1 file(s) fixed by the reviewer"
  }
 }

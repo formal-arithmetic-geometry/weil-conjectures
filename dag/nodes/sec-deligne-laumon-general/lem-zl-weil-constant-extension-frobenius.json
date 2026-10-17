@@ -9,55 +9,144 @@
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
   "def-weil-weil-sheaf-complex",
   "def-pod-lisse-l-adic-sheaves",
   "def-weil-ordinary-compact-cohomology",
   "def-weil-local-frobenius-trace",
   "def-weil-punctual-weights",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-algebraically-closed-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $g=g_X$ and let $g_e$ be the geometric Frobenius of $X_{0,e}\\times_{k_e}k$. Under the canonical associativity identification of the two base changes, the affine formula for geometric Frobenius gives $g_e=g^e$. The pullback of a lisse sheaf along this identification is lisse. Starting with $\\theta:Lg^*M\\xrightarrow{\\sim}M$, define\n$$\n\\theta^{[e]}=\\theta\\circ Lg^*\\theta\\circ\\cdots\\circ L(g^{e-1})^*\\theta.\n$$\nThe iterated-Weil cocycle identity identifies the same composite for every decomposition of $e$, so $(M,\\theta^{[e]})$ is a Weil sheaf over $k_e$; when $e=1$ this is the original sheaf. This construction is made at a finite coefficient stage and then transported to $\\overline{\\mathbf Q}_\\ell$ by the common-stage convention, so no semisimplicity or connectedness is used.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-frobenius-detailed",
+    "def-weil-weil-sheaf-complex",
+    "def-pod-lisse-l-adic-sheaves",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-trf-iterated-weil-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph: local stalk Frobenius is a residue-degree power and the cohomology operator over the constant extension is F^e; made precise using the iterated Weil structure"
+   }
+  },
+  {
+   "text": "Let $C=R\\Gamma_c(X,-)$ and let $t$ be the compact-support transport along $g$ from the definition of geometric Frobenius on cohomology. The transport is natural in the coefficient complex, and the transport along $g^e$ is the successive composite $t^{[e]}=t_{Lg^{e-1*}M}\\circ\\cdots\\circ t_M$; this is the composition law for the specified Frobenius transports, first at finite coefficient level and then after passage to the common $\\overline{\\mathbf Q}_\\ell$ stage. Applying the categorical transport-power identity to the morphism $\\theta:Lg^*M\\to M$ gives\n$$\n(C(\\theta)\\circ t_M)^e=C(\\theta^{[e]})\\circ t^{[e]}.\n$$\nBy the definition of the global geometric-Frobenius operator, the left side is $F_q^e$, while the right side is the operator $F_{q^e}$ for $(M,\\theta^{[e]})$. Taking degree-$r$ cohomology proves the asserted identity on $H_c^r$.",
+   "uses": [
+    "def-weil-global-geometric-frobenius",
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-trf-global-frobenius-iterate-formula",
+    "lem-trf-compact-frobenius-transport-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph: local stalk Frobenius is a residue-degree power and the cohomology operator over the constant extension is F^e; made precise using the iterated Weil structure"
+   }
+  },
+  {
+   "text": "Let $z$ lie over the closed point $x$, and put $d=[\\kappa(z):\\kappa(x)]$. Finite-field Galois theory identifies the residue extension with the degree-$d$ Frobenius orbit. In the stalk definition of local geometric Frobenius, one circuit at $x$ is the composite of the pullback/reparametrization transport with $\\theta$; traversing the orbit $d$ times at $z$ inserts successively $\\theta,Lg^*\\theta,\\ldots,L(g^{d-1})^*\\theta$. The cocycle identity from Step 1 therefore identifies this return operator with $F_x^d$. Changing the chosen embeddings of either residue field only changes the displayed operator by conjugation, by the local-Frobenius conjugacy lemma. The same argument is valid at every finite coefficient stage and hence after scalar extension to $\\overline{\\mathbf Q}_\\ell$.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-sfb-finite-field-galois-frobenius",
+    "def-weil-local-frobenius-trace",
+    "lem-weil-local-frobenius-conjugacy-class",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-trf-iterated-weil-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph: local stalk Frobenius is a residue-degree power and the cohomology operator over the constant extension is F^e; made precise using the iterated Weil structure"
+   }
+  },
+  {
+   "text": "Assume that $\\mathcal F$ is punctually $\\iota$-pure of weight $w$. If $\\alpha$ is an eigenvalue of $F_x$, the definition of purity gives $|\\iota(\\alpha)|=q_x^{w/2}$, where $q_x=|\\kappa(x)|$. Step 3 says that the corresponding eigenvalues over $z$ are $\\alpha^d$ (with multiplicities and conjugacy unchanged), while $q_z=|\\kappa(z)|=q_x^d$. Hence\n$$\n|\\iota(\\alpha^d)|=|\\iota(\\alpha)|^d=q_x^{dw/2}=q_z^{w/2},\n$$\nwhich is precisely punctual purity of $\\mathcal F^{(e)}$ relative to $k_e$. If a stalk is zero there are no eigenvalues, so the assertion is vacuous.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph: local stalk Frobenius is a residue-degree power and the cohomology operator over the constant extension is F^e; made precise using the iterated Weil structure"
+   }
+  },
+  {
+   "text": "All constructions are functorial in the underlying sheaf and use only the finite-field base-change identifications, so they do not require geometric connectedness, a choice of components, or semisimplicity. The cases $e=1$, the zero sheaf, and empty cohomology reduce to the defining identities and are covered.",
+   "uses": [
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph: local stalk Frobenius is a residue-degree power and the cohomology operator over the constant extension is F^e; made precise using the iterated Weil structure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-local-frobenius-trace",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex",
+  "lem-kun-closed-point-field",
+  "lem-sfb-finite-field-galois-frobenius",
+  "lem-trf-compact-frobenius-transport-composition",
+  "lem-trf-global-frobenius-iterate-formula",
+  "lem-trf-iterated-weil-cocycle",
+  "lem-weil-local-frobenius-conjugacy-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+  "place": "Expanded from the second paragraph of the cited blueprint proof; the finite-field and transport calculations are written out here."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "WeilSheaf|frobenius.*cohomology|cohomology.*frobenius",
-   "results": "No hits",
+   "tool": "leanfinder",
+   "query": "finite constant field extension iterated Weil sheaf compactly supported cohomology Frobenius power local Frobenius residue degree",
+   "results": "arithFrobAt; IsArithFrobAt.arithFrobAt; FiniteField.orderOf_frobeniusAlgHom; WittVector.StandardOneDimIsocrystal; FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate; FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic; FiniteField.bijective_frobeniusAlgHom_pow; FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"WeilSheaf\"",
-   "results": "No hits",
+   "query": "WeilSheaf, Frobenius, compact support cohomology, geometric Frobenius",
+   "results": "0 hits; unknown identifier 'WeilSheaf'",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "iterated Weil|Frobenius.*power|residue.*degree (subdirectory WeilConjectures)",
+   "results": "0 hits",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Under finite extension of the finite base field the Frobenius of a lisse Weil sheaf on compactly supported cohomology is raised to the extension degree",
-   "results": "FiniteField.Extension.frob_apply; FiniteField.Extension.frob; FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate; FiniteField.coe_frobeniusAlgEquivOfAlgebraic; LinearMap.frobenius; FiniteField.frobeniusAlgEquivOfAlgebraic_apply; FiniteField.minpoly_frobeniusAlgHom; WittVector.StandardOneDimIsocrystal.frobenius_apply",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Restrict a Weil sheaf from Fq to Fq power e by iterating its Weil structure; global compact cohomology Frobenius is F power e and local Frobenius is powered by residue degree",
-   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.Isocrystal.frobenius; WittVector.Isocrystal.frob; WittVector.StandardOneDimIsocrystal; WittVector.Isocrystal; WittVector.IsocrystalHom.frob_equivariant; WittVector.instModuleFractionRingStandardOneDimIsocrystal",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Compactly supported cohomology Frobenius under extension of constants and geometric Frobenius powers on the stalks of a lisse Weil sheaf",
-   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.IsocrystalEquiv.frob_equivariant; WittVector.IsocrystalHom.frob_equivariant; WittVector.Isocrystal.frobenius; WittVector.Isocrystal.frob; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.instModuleFractionRingStandardOneDimIsocrystal; WittVector.Isocrystal.toModule",
+   "query": "finite constant extension of a lisse Weil sheaf iterates Weil structure and raises Frobenius on compact cohomology",
+   "results": "FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate; LinearMap.iterateFrobenius; FiniteField.Extension.frob; coe_iterateFrobenius; LinearMap.frobenius; WittVector.StandardOneDimIsocrystal.frobenius_apply; coe_iterateFrobeniusEquiv; FiniteField.Extension.frob_apply",
    "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-affine-curve-hc2-purity",
@@ -74,5 +163,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-weil-constant-extension-frobenius",
+  "worker": "stage1",
+  "summary": "Kept the imported statement unchanged and split its construction, compact-support Frobenius comparison, local residue-degree computation, and purity calculation into five explicit steps. No new node was created: each auxiliary fact is supplied by an existing definition or lemma, and the common-stage convention handles Qbar coefficients. The proof checks e=1, zero stalks/cohomology, and does not assume connectedness or semisimplicity.",
+  "blueprint": "Realizes the second paragraph of lem-zl-affine-curve-hc2-purity.proof.md: the iterated Weil structure gives the constant-extension sheaf, its compact-support Frobenius is F^e, local Frobenius is raised to the residue degree, and purity is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q72-9082cdc3a",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-9082cdc3a (reviewer sub-agent of L); spot-checked: Added missing citation to def-weil-frobenius-detailed in Step 1, stmt_deps, and proof_deps; corrected DAG is under fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-weil-constant-extension-frobenius.json. Full review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

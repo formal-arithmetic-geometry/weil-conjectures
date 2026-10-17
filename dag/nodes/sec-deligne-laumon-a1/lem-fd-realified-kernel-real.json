@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fd-realified-kernel-real",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The realified kernel is $\\iota$-real",
@@ -18,56 +18,142 @@
   "def-fd-transform",
   "def-wf-iota-real",
   "def-fd-nonexceptional",
-  "def-weil-pbc-constructible-complexes",
   "def-weil-punctual-weights",
   "def-wf-constant-weil-twist",
-  "def-wf-middle-extension"
+  "def-wf-middle-extension",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-derived-pullback-tensor-hom",
+  "rem-dl-a1-conventions"
  ],
  "proof": [
   {
-   "text": "Only the punctual purity of $\\mathcal M$ is used below, which gives the\nmore general form of the statement.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Step 1 (the two summands are mutual conjugates). By\n[lem-wf-pure-realizable] the local factor of\n$\\mathcal M^\\dagger=\\mathcal M^\\vee\\otimes\\mathcal B_b$ at a closed point\n$x$ of $U_0$ of degree $m$ has eigenvalues\n$\\iota(b^m\\alpha^{-1})=q^{mw}\\iota(\\alpha)^{-1}=\\overline{\\iota(\\alpha)}$,\nwhere $\\alpha$ runs through the eigenvalues of $F_x$ on\n$\\mathcal M_{\\bar x}$: the eigenvalues of the twisted dual are exactly\nthe $\\iota$-conjugates of those of $\\mathcal M$, at every closed point.\nThe same computation applies to the extension by zero, since the stalk of\n$j_!\\mathcal M$ at a closed point of $\\mathbf A^1_{k_0}$ is either the\nstalk of $\\mathcal M$ (over $U_0$) or zero. For the kernel factors, the\nArtin–Schreier sheaf $\\mathcal K_\\psi$ of [def-fd-kernel] is lisse\nof rank one ([lem-fd-as-lisse]) and punctually $\\iota$-pure of\nweight $0$ ([lem-fd-as-purity]), so its unique local eigenvalue\n$\\lambda$ at a closed point of the square satisfies\n$|\\iota(\\lambda)|=1$ and therefore\n$\\overline{\\iota(\\lambda)}=|\\iota(\\lambda)|^2\\iota(\\lambda)^{-1} =\\iota(\\lambda)^{-1}$; by\n$(\\mathcal L_{\\psi,f})^{-1}\\cong\\mathcal L_{\\psi,-f}\\cong\\mathcal L_{\\psi^{-1},f}$ of\n[lem-fd-as-characters] the sheaf $\\mathcal K_{\\psi^{-1}}$ is the\ninverse of $\\mathcal K_\\psi$ [prop-kernel-lisse], so its local eigenvalue at the same point\nis $\\lambda^{-1}$.",
+   "text": "Work with an arbitrary lisse $\\mathcal M$ punctually pure of weight $w$; the more restrictive first assertion will follow. Since $q^w>0$, $b=\\iota^{-1}(q^w)$ is nonzero. At a closed point $x\\in U_0$ of degree $m$, let $A$ be Frobenius on $\\mathcal M_{\\bar x}$. By [lem-tw-dual-stalk-frobenius], the dual stalk operator is $(A^{-1})^*$. By the tensor and point-transport compatibility of [lem-tw-lisse-rational-realization] and the character $g\\mapsto b^{\\deg(g)}$ of [def-wf-constant-weil-twist], Frobenius on $\\mathcal M^\\dagger$ has matrix $b^m(A^{-1})^{\\mathsf t}$. Its eigenvalues, with multiplicities, are $b^m/\\alpha$ for the eigenvalues $\\alpha$ of $A$: indeed transpose preserves determinant and $\\det(tI-A^{-1})=\\det(A)^{-1}\\det(tA-I)$. Purity [def-weil-punctual-weights] gives $|\\iota(\\alpha)|^2=q^{mw}$. Thus\n$$\\iota(b^m/\\alpha)=q^{mw}/\\iota(\\alpha)=\\overline{\\iota(\\alpha)}.$$\nThe dual and tensor constructions here are lisse, and this computation uses no semisimplicity.",
    "uses": [
-    "lem-wf-pure-realizable",
-    "def-fd-kernel",
-    "lem-fd-as-lisse",
-    "lem-fd-as-purity",
-    "lem-fd-as-characters",
-    "prop-kernel-lisse"
+    "lem-tw-dual-stalk-frobenius",
+    "lem-tw-lisse-rational-realization",
+    "def-wf-constant-weil-twist",
+    "def-weil-punctual-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 1, twisted-dual eigenvalue calculation"
+   }
   },
   {
-   "text": "Step 2 (the realified kernel is real). Let $z$ be a closed point of the\nFourier square with first coordinate $x=p_1(z)$. If $x\\in S_0$ then both\nsummands of $\\mathcal K$ have zero stalk at $z$, because $j_!\\mathcal M$\nand $j_!(\\mathcal M^\\dagger)$ are extensions by zero from $U_0$; the\nlocal factor of $\\mathcal K$ at $z$ is then $1$, which is real. If\n$x\\in U_0$, let $e$ be the degree of $\\kappa(z)$ over $\\kappa(x)$ and let\n$E$ be the multiset of eigenvalues of $F_x$ on $\\mathcal M_{\\bar x}$.\nThe local eigenvalues of the first summand at $z$ are\n$\\{\\alpha^e\\lambda:\\alpha\\in E\\}$ — pullback along $p_1$ raises the local\nFrobenius to the $e$-th power, which is the degree formula for the local\nFrobenius [lem-trf-frobenius-degree-formula] relating the local\noperator at a point to a power of the operator below it, and\n$\\mathcal K_\\psi$ is of rank one with\neigenvalue $\\lambda$ — and those of the second are\n$\\{\\overline{\\iota(\\alpha)}^e\\lambda^{-1}:\\alpha\\in E\\}$ by Step 1.\nSince conjugation of the complex numbers commutes with the $e$-th power,\n\n$$\n\\overline{\\iota(\\alpha^e\\lambda)}\n=\\overline{\\iota(\\alpha)}^e\\,\\overline{\\iota(\\lambda)}\n=\\overline{\\iota(\\alpha)}^e\\lambda^{-1},\n$$\n\nthe conjugation map carries the eigenvalue multiset of the first summand\nbijectively onto that of the second, and the total multiset of\n$\\mathcal K$ at $z$ is conjugation-stable. Hence $\\mathcal K$ is\n$\\iota$-real in the sense of [def-wf-iota-real], which is the\nassertion of the lemma.",
+   "text": "Write $W_0=\\mathbf A^1_{k_0}\\times\\mathbf A^1_{k_0}$ and denote the evaluation function by $h(x,\\xi)=x\\xi$, to distinguish it from the scalar $b$. By [def-fd-kernel], $\\mathcal K_\\psi=h^*\\mathcal L_\\psi$. The sheaf $\\mathcal L_\\psi$ on the line is pure of weight zero by [lem-fd-as-purity] with $a=1$. For a closed $z\\in W_0$, put $t=h(z)$ and $r=[\\kappa(z):\\kappa(t)]$. By [lem-fd-weil-pullback-local-frobenius], the eigenvalue $\\lambda$ of the kernel at $z$ is the $r$-th power of the eigenvalue at $t$, so $|\\iota(\\lambda)|=1$. The rank-one assertion and inverse identity $\\mathcal K_{\\psi^{-1}}\\cong\\mathcal K_\\psi^{-1}$ are exactly [prop-kernel-lisse]. In the lisse realization of [lem-tw-lisse-rational-realization], the tensor isomorphism $\\mathcal K_\\psi\\otimes\\mathcal K_{\\psi^{-1}}\\cong1$ intertwines Frobenius, so the eigenvalue of the inverse kernel is $\\lambda^{-1}$. Put $L=\\iota(\\lambda)$; then $\\overline L=L^{-1}$.",
    "uses": [
-    "lem-trf-frobenius-degree-formula",
+    "def-fd-kernel",
+    "lem-fd-as-purity",
+    "lem-fd-weil-pullback-local-frobenius",
+    "prop-kernel-lisse",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 1, the kernel eigenvalues are inverse complex conjugates"
+   }
+  },
+  {
+   "text": "Fix a closed $z\\in W_0$. Apply [lem-fd-weil-pullback-local-frobenius] to $p_1:W_0\\to\\mathbf A^1_{k_0}$ and put $x=p_1(z)$, $e=[\\kappa(z):\\kappa(x)]$. Both zero extensions are constructible Weil sheaves by [lem-zl-immersion-weil-local-behavior](2); their stalks at $x$ are zero outside $U_0$, and on $U_0$ identify with the original stalks, compatibly with Frobenius. The pullback lemma applies to these sheaves even at the boundary. Tensoring with either lisse rank-one kernel is locally tensoring with the coefficient unit, so the displayed derived integrands are constructible sheaves in degree zero. At field coefficients $D^b_{ctf}=D^b_c$ by [def-weil-finite-tor-amplitude], so all these constructible inputs are in the domain of the point tensor comparison. For the geometric point $i_z:s=\\operatorname{Spec}k\\to W$ and either pulled-back zero extension $G$ and kernel $H$, first apply [lem-pur-derived-pullback-tensor-iso] to obtain $Li_z^*(G\\otimes^L H)\\cong Li_z^*G\\otimes^L Li_z^*H$ in $D^b_c(s,\\Qlb)$. Then [lem-sf-point-fibre-derived-tensor] identifies $\\operatorname{Fib}_s$ of this tensor with $\\operatorname{Fib}_s(Li_z^*G)\\otimes^L_{\\Qlb}\\operatorname{Fib}_s(Li_z^*H)$. Thus if $x\\notin U_0$ both fibres are $0\\otimes^L\\Qlb=0$ and the local factor of $\\mathcal K$ is $1$. This includes all missing points, regardless of inertia of $\\mathcal M$.",
+   "uses": [
+    "lem-fd-weil-pullback-local-frobenius",
+    "lem-zl-immersion-weil-local-behavior",
+    "lem-sf-point-fibre-derived-tensor",
+    "def-weil-finite-tor-amplitude",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Steps 1–2, extension by zero and the boundary case"
+   }
+  },
+  {
+   "text": "Now suppose $x\\in U_0$. Let $E_x$ be the eigenvalue multiset on $\\mathcal M_{\\bar x}$ and put $a_\\alpha=\\iota(\\alpha)$. By the pullback comparison [lem-fd-weil-pullback-local-frobenius] and the zero-extension identification from Step 3, the two pulled-back stalks have eigenvalues $\\alpha^e$ and $(b^m/\\alpha)^e$, respectively. Their complex images are $a_\\alpha^e$ and $\\overline{a_\\alpha}^{\\,e}$ by Step 1. On the open $p_1^{-1}(U_0)$ both factors are lisse. The tensor-and-fibre compatibility of [lem-tw-lisse-rational-realization] identifies their tensor Frobenius with tensor of the stalk operators. A rank-one factor with eigenvalue $\\lambda$ scales the first operator by $\\lambda$; the inverse kernel scales the second by $\\lambda^{-1}$. Consequently the two complex eigenvalue multisets of the summands are\n$$\\{a_\\alpha^eL:\\alpha\\in E_x\\},\\qquad\\{\\overline{a_\\alpha}^{\\,e}L^{-1}:\\alpha\\in E_x\\}.$$\nAll powers and products preserve algebraic multiplicities, including when distinct eigenvalues acquire the same power.",
+   "uses": [
+    "lem-fd-weil-pullback-local-frobenius",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, the two multisets on the Fourier square"
+   }
+  },
+  {
+   "text": "For each occurrence of $\\alpha\\in E_x$, Step 2 gives\n$$\\overline{a_\\alpha^eL}=\\overline{a_\\alpha}^{\\,e}L^{-1}.$$\nThus conjugation exchanges the two multisets from Step 4. More explicitly, if $P(T)=\\prod_{\\alpha\\in E_x}(1-a_\\alpha^eLT)$, the local factor of the direct sum is $P(T)\\overline{P(T)}$, where conjugation acts on coefficients; conjugating this product leaves it unchanged. Every coefficient is therefore real. At the boundary the factor is $1$ by Step 3. The local-factor definition [def-wf-iota-real] now says that $\\mathcal K$ is $\\iota$-real. Empty spectra give $P=1$; no assumption of distinct eigenvalues is used. The proof used only lissity and punctual purity of $\\mathcal M$, proving both assertions.",
+   "uses": [
     "def-wf-iota-real"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, conjugation-stability and reality"
+   }
   }
  ],
  "proof_deps": [
-  "lem-wf-pure-realizable",
+  "lem-tw-dual-stalk-frobenius",
+  "lem-tw-lisse-rational-realization",
+  "def-wf-constant-weil-twist",
+  "def-weil-punctual-weights",
   "def-fd-kernel",
-  "lem-fd-as-lisse",
   "lem-fd-as-purity",
-  "lem-fd-as-characters",
+  "lem-fd-weil-pullback-local-frobenius",
   "prop-kernel-lisse",
-  "lem-trf-frobenius-degree-formula",
+  "lem-zl-immersion-weil-local-behavior",
+  "lem-sf-point-fibre-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-derived-pullback-tensor-iso",
   "def-wf-iota-real"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+  "place": "Steps 1–2, with coefficient-correct local comparison and explicit boundary and characteristic-factor calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A punctually pure lisse Weil sheaf paired with its weight twisted dual and opposite Artin Schreier Fourier kernels is real under complex conjugation",
+   "results": "NumberField.ComplexEmbedding.isConj_ne_one_iff; WittVector.isocrystal_classification; NumberField.InfinitePlace.isReal_smul_iff; NumberField.ComplexEmbedding.IsConj.isReal_comp; NumberField.ComplexEmbedding.isConj_one_iff; FDRep.simple_iff_char_is_norm_one; CompHausLike.LocallyConstantModule.functor; NumberField.ComplexEmbedding.IsReal.isConjGal_one",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the Qbar_l Weil-sheaf assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "none",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the Qbar_l Weil-sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "realified|WeilSheaf|Artin.Schreier.*pure",
+   "results": "none",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the Qbar_l Weil-sheaf assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of a pure Weil sheaf tensor an additive character and its conjugate dual tensor the inverse character has real local Frobenius polynomials",
+   "results": "AddChar.inv_apply_eq_conj; AddChar.directSum_apply; AddChar.directSum; gaussSum; MulChar.IsQuadratic.gaussSum_frob; gaussSum_frob; DirectSum; AddChar.directSum_injective",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the Qbar_l Weil-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf and its conjugate have a direct sum with real characteristic polynomial at every closed point",
+   "results": "LinearEquiv.charpoly_conj; BoundedContinuousFunction.separatesPoints_charPoly; FDRep.simple_iff_char_is_norm_one; LieAlgebra.engel_isBot_of_isMin.lieCharpoly_map_eval; BoundedContinuousFunction.char_mem_charPoly; FDRep.char_conj; LieModule.isRegular_iff_coeff_polyCharpoly_rank_ne_zero; FDRep.char_orthonormal",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the Qbar_l Weil-sheaf assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -166,5 +252,49 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-p-dl-a1-some-weight"
+ "unit": "sk-p-dl-a1-some-weight",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-realified-kernel-real",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint and actual source checkout, replaced overstrong uses of realizability and finite-coefficient trace statements by precise dual/realization/open-immersion nodes and one new rational pullback comparison; wrote multiplicity-preserving conjugacy and boundary calculations, without changing the item statement.",
+  "blueprint": "Steps 1–2 of the node proof; realizes the zero-extension conjugacy portion of the unit’s single proof paragraph. No Fourier pushforward or reality of j_*M is substituted.",
+  "tool_uses": [
+   {
+    "node": "lem-tw-dual-stalk-frobenius",
+    "why": "The contragredient local operator is a generic coefficient-compatible duality fact, not the unit’s Fourier or purity conclusion."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Identifies lisse common-stage tensor products and point transports with finite locally free module operations; the unit contains no such realization theorem."
+   },
+   {
+    "node": "lem-zl-immersion-weil-local-behavior",
+    "why": "Its clause (2) supplies the common-stage Qbar_l extension-by-zero stalks with Weil compatibility, including the boundary; it is a generic immersion tool."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "The point-fibre tensor comparison is a generic all-coefficient tool used to evaluate the integrand at boundary points."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "The generic common-stage tensor comparison for geometric-point pullback is needed before the coefficient-point fibre tensor comparison in Step 3; the unit has no such coefficient-operation theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-tw-dual-stalk-frobenius",
+  "lem-tw-lisse-rational-realization",
+  "lem-zl-immersion-weil-local-behavior",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N3-40bb1f97a",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-40bb1f97a (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, sources, and route in full. Added the missing common-stage tensor–pullback comparison citation in Step 3 and completed empty audit metadata. Statements unchanged; residue-degree powers, boundary stalks, multiplicities, duplicates, and batch-5 restrictions checked. Review and corrected JSON files written under the review directory.; 2 file(s) fixed by the reviewer"
+ }
 }

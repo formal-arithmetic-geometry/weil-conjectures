@@ -20,9 +20,221 @@
   "def-weil-finite-coefficient-point",
   "def-weil-frobenius-point-transport"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A field is noetherian (its only ideals are $0$ and the unit ideal). Apply [pqf-lem-locnoeth-lft] to the structure map of $X$ and use its quasi-compactness, part of finite type, to see that $X$ is noetherian. By [lem-kun-dimension-finite-type] it has finite Krull dimension. Its underlying noetherian space has every open quasi-compact, so $X$ is qcqs even without separatedness. The same statements apply to $X'$ and to quasi-compact etale charts of either. The coefficient identifications of [lem-weil-pbc-continuous-coefficients-immersion-restriction] identify $\\widehat R_X$ with the continuous integral coefficient sheaf and $E_X$ with its sheaf localization. Thus the lattice and continuity results cited below concern exactly these rings.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.6.10(1), Lemma 6.8.2; Stacks Tag 01T6, morphisms-lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Put $B=\\widehat R_X$, $t=\\varpi$ and $F(K)=B[1/t]\\otimes_B^LK$. Localization is exact: sectionwise localization is flat by [lem-weil-pbc-localization-flat] and preserves kernels, while module sheafification is exact by [lem-weil-pbc-ringed-site-module-sheafification-exact]; hence localization of an exact sheaf sequence is exact after sheafification. It follows that $H^i(FK)=H^i(K)[1/t]$. For integral constructible $K$, [lem-weil-pbc-integral-constructible-bounded-below-compactness] supplies bounded-below coproduct continuity of global derived Hom. Taking $H^0$ gives the Hom continuity hypothesis of [lem-weil-pbc-scalar-localization-derived-hom] (cohomology of a direct sum of module complexes is the direct sum of cohomology, since cycles and boundaries have finite support). Apply that lemma to bounded integral constructible $K,L$. It gives\n$$\\operatorname{Hom}(K,L)\\otimes_RE\\cong\\operatorname{Hom}_{D(E_X)}(FK,FL),\\quad u\\otimes a\\mapsto aF(u).$$\nThe same lemma gives identity and composition compatibility. By [def-weil-rationalization-karoubi] these are precisely the Hom groups of the raw rationalization, so $F$ descends to a fully faithful functor with exactly the prescribed arrow formula.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "lem-weil-pbc-scalar-localization-derived-hom",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness"
+   }
+  },
+  {
+   "text": "Restriction to a site slice commutes with sheaf tensor by [lem-sfb-localized-site-tensor-restriction], and with the strict derived limit by [lem-sp-slice-restriction-strict-derived-limit]. Thus it also commutes with the coefficient localization and the completed coefficient constructions used here. The sheaf-site interpretation of a weakly etale chart is [lem-weil-proetale-weakly-etale-localization]. On an object of the lisse source, restrict its given local isomorphism with a finite sum of the coefficient unit and apply $F$. By [lem-weil-constant-coefficient-objects-constructible] the unit is represented by $B[0]$, whose image is $E_X[0]$. Consequently $FK$ is locally finite free in degree zero. This also identifies the lisse heart with a full subcategory of ordinary sheaves: morphisms between complexes concentrated in degree zero in a derived category are their sheaf morphisms. The standard heart is [def-weil-constructible-heart], with the cohomological standard classes of [def-weil-constructible-standard-tstructure]; exact localization carries both classes into their ordinary cohomological counterparts.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-sp-slice-restriction-strict-derived-limit",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-constructible-heart",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.3 and 6.8.8; restriction of the localization realization"
+   }
+  },
+  {
+   "text": "Conversely let $L\\in\\operatorname{Loc}(X,E_X)$. By [lem-weil-pbc-lisse-e-constructible-integral-lattice] there is a constructible integral sheaf $N$ with $N[1/t]\\cong L$. By [lem-weil-pbc-integral-stratified-perfect-characterization], $N[0]$ is an integral constructible derived-complete object, so its rationalization is in the standard heart. To verify that this object is lisse, use [lem-weil-pbc-lisse-lattice-etale-local] and refine its etale cover by quasi-compact charts $Y_i$. It gives integral finite locally free $M_i$ with $M_i[1/t]\\cong L|_{Y_i}$. The same stratified-perfect characterization puts $M_i[0]$ in the integral constructible category. Step 2 on the noetherian finite-dimensional $Y_i$ lifts the specified isomorphism $N[1/t]|_{Y_i}\\cong M_i[1/t]$ and its inverse uniquely to the rationalized category. The lifts are inverse because their composites realize to identities and realization is faithful. Each $M_i$ is pro-etale locally a finite free coefficient module, hence these local lifts give the required local isomorphisms for the rationalization of $N$. Together with Step 3 and Step 2 this proves the equivalence and its exact Hom normalization; it never asserts that $L$ has a globally lisse integral lattice.",
+   "uses": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13 and Proposition 6.8.4(6); essential image in Proposition 6.8.14(2)"
+   }
+  },
+  {
+   "text": "For integral representatives $M,N$, the specified map $\\chi_{M,N}$ of [lem-fix-constructible-tensor-completion] identifies the ordinary ambient derived tensor with the completed tensor used by [def-weil-derived-pullback-tensor-hom]. Apply scalar localization and the ordinary ringed-topos monoidal comparison of [lem-sfb-ringed-derived-monoidal-comparisons] to obtain\n$$F(M\\widehat\\otimes_R^LN)\\cong FM\\otimes_{E_X}^LFN.$$\nFor lisse inputs the right side is ordinary sheaf tensor in degree zero: on a basis chart, tensoring with a finite free module is a finite direct sum of the identity functor, hence exact. Exactness and vanishing of the higher tensor cohomology are local statements about sheaves, so this calculation suffices. The map sends $e_i\\otimes e_j$ to the corresponding pure tensor. The unit comparison is multiplication $E_X\\otimes_BE_X\\to E_X$, with $1\\otimes1\\mapsto1$.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15, tensor; ordinary/completed tensor comparison"
+   }
+  },
+  {
+   "text": "For an arbitrary scheme map $f:X'\\to X$, apply [lem-tw-ordinary-completed-integral-pullback] to identify completed integral pullback with $P_fK=B_{X'}\\otimes^L_{f^{-1}B_X}f^{-1}K$. The two paths of ordinary derived scalar extension around the ring square $f^{-1}B_X\\to B_{X'}$, $f^{-1}E_X\\to E_{X'}$ are canonically the same, by the composition and monoidal comparisons of [lem-sfb-ringed-derived-monoidal-comparisons]. Consequently\n$$F_{X'}(Lf_E^*K)\\cong E_{X'}\\otimes^L_{f^{-1}E_X}f^{-1}(F_XK).$$\nFor lisse $K$, $f^{-1}(F_XK)$ is locally finite free over $f^{-1}E_X$, so the displayed tensor is ordinary and in degree zero. On pulled-back bases the comparison is $1\\otimes e_i\\mapsto e_i$. Both the new integral comparison and ordinary ringed-topos composition apply to all scheme maps, so no $k$-linearity or separatedness hypothesis has entered.",
+   "uses": [
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15, explicit ringed pullback formula"
+   }
+  },
+  {
+   "text": "For $E\\subset L$ finite, [lem-weil-finite-free-completed-scalar-comparison] identifies the integral transition functor with ordinary derived change of completed coefficient rings via its specified quotient-cone map $\\chi_{L/E,K}$. Localizing this isomorphism gives the ordinary extension of continuous field coefficients on realized objects, with $e_i\\otimes b\\mapsto b e_i$. The comparison is natural on integral arrows; the formula in Step 2 extends it to all rationalized arrows. The scalar-operation comparisons of [lem-pur-integral-operations-scalar-extension] therefore identify the field extensions of the tensor and pullback comparisons of Steps 5 and 6 with the same comparisons over $L$.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; finite coefficient extension"
+   }
+  },
+  {
+   "text": "Check that these are the specified coherent comparisons. The completed tensor associators, unitors and symmetry are the limits of the finite total-complex maps by [lem-pur-completed-operation-tower-substitution]. The normalized integral pullback composition and its scalar compatibility are those realized from simultaneous quotient diagrams in [lem-trf-integral-pullback-comparison-realization]. The maps $\\chi$ in Steps 5 and 7 and $\\eta$ in Step 6 use those same quotient maps, with zero shifted-product component. Thus they intertwine these finite diagrams before realization. On the ordinary side [lem-sfb-ringed-derived-monoidal-comparisons] supplies the corresponding monoidal and composition laws. Alternatively, after realizing lisse inputs every resulting diagram is checked on a common local basis: associativity sends $(e_i\\otimes e_j)\\otimes e_k$ to $e_i\\otimes(e_j\\otimes e_k)$, symmetry interchanges the two basis vectors, units multiply by $1$, and successive pullbacks send a basis vector to the same basis vector. The scalar maps send it to $e_i\\otimes b$, with successive scalars multiplied. Both paths therefore agree on generators, then on all sections by linearity and the sheaf axiom. All objects here are in degree zero, so the symmetry sign is $+1$. This proves the requested naturality, identity, composition and coherence assertions.",
+   "uses": [
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; quotient-diagram normalization and pure-tensor verification"
+   }
+  },
+  {
+   "text": "Put $s=\\operatorname{Spec}k$. By [lem-weil-point-proetale-sections-exact], sections of any coefficient module sheaf on $s$ are exact. The continuous-coefficient identification of Step 1 gives $B_s(s)=R$ and $E_s(s)=E$, because a continuous function on the one-point space $|s|$ is its value. For any integral constructible $C$ at $s$, the canonical sections-localization map\n$$\\Gamma(s,C)\\otimes_RE\\longrightarrow\\Gamma(s,FC)$$\nis an isomorphism: apply Step 2's Hom-localization result with $K=B_s$ and $L=C[q]$ for every $q$. The unit $B_s$ is constructible by [lem-weil-constant-coefficient-objects-constructible], and $\\operatorname{Hom}(B_s,C[q])=H^q\\Gamma(s,C)$ by exact sections and evaluation at $1$. These Hom identifications are exactly the cohomology maps of the displayed canonical map; [lem-weil-pbc-unbounded-derived-iso-cohomology] proves invertibility. Combining it with Step 6 for $x:s\\to X$ identifies the rational point fibre defined in [def-weil-finite-coefficient-point] with sections of the ordinary pullback. All maps used are natural in $C$ and $K$.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-weil-pbc-scalar-localization-derived-hom",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), on a geometric point"
+   }
+  },
+  {
+   "text": "For lisse point objects the fibre in Step 9 is a finite-dimensional vector space: [lem-weil-point-fibre-equivalence] places it in $D^b_{\\mathrm{fd}}(E)$, and exact localization and sections put its cohomology in degree zero. Choose a finite basis of this space. Full faithfulness of the point fibre functor in [lem-weil-point-fibre-equivalence] lifts its basis isomorphism to an isomorphism of the point object with a finite sum of units. Hence the sections-tensor comparison and the fibre-tensor comparison are the same map: on these finite sums both send $e_i\\otimes e_j$ to $e_i\\otimes e_j$, and send the unit $1$ to $1$. Naturality removes the choice of basis. This verifies tensor and unit compatibility of Step 9, including rank zero.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3 and Remark 6.8.15; finite free point calculation"
+   }
+  },
+  {
+   "text": "Let $h:s\\to s$ be a scheme automorphism. By [lem-weil-proetale-isomorphism-inverse-image], $h^{-1}$ is an exact equivalence commuting with coefficient limits and colimits, with structure map induced by the finite coefficient maps. Use the restriction-and-coprojection construction of [def-weil-frobenius-point-transport] with $h$ in place of $g_s$. Its integral comparison $\\kappa$ is the quotient-cone map of [def-weil-inverse-image-pullback-comparison]. Under the normalized $\\eta_h$ of Step 6 it becomes the ordinary module unit $z\\mapsto1\\otimes z$: both maps into every quotient are the reduction followed by that unit, and both have zero shifted-product component. Under Step 9, a localized section $z/t^n$ is consequently sent to\n$$t^{-n}\\bigl(1\\otimes\\operatorname{ins}(\\operatorname{res}_h z)\\bigr).$$\nRestriction and the inverse-image colimit coprojection commute with multiplying by $t$ and with the coefficient maps. This is exactly restriction, then coprojection, then the ordinary module unit applied to the localized section. Thus the point-transport maps themselves agree under realization, rather than only being conjugate by an arbitrary fibre isomorphism. The calculation is natural in sheaf maps and coefficient extensions.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-frobenius-point-transport",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-tw-ordinary-completed-integral-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; explicit point-transport normalization of the item"
+   }
+  },
+  {
+   "text": "The equality for iterates follows by induction: for zero iterations both sides are identities; if the identification intertwines the first $r$ transport factors, compose that equation with the one-factor equation of Step 11 applied to the $r$-fold pulled-back object. Step 8's pullback composition law identifies the resulting source and target. Every tensor and scalar compatibility persists under this composition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Point-transport normalization; induction on the number of factors"
+   }
+  },
+  {
+   "text": "Finally use [def-weil-algebraically-closed-coefficients]. An object, a morphism, or a finite diagram in the common-stage category is represented over a finite field after taking a compositum. Apply Steps 2-12 there and then extend scalars to $\\Qlb$ where the fibre definition requires it. Step 7 and Step 8 identify the results after any further finite extension. Equal representatives therefore yield equal maps, and inverse maps remain inverse at larger stages. This gives the stated common-stage lisse assertions and all tensor, pullback, fibre and point-transport compatibilities for $\\Sh_c(X,\\Qlb)$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1); common finite coefficient stage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-point-transport",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-rationalization-karoubi",
+  "lem-fix-constructible-tensor-completion",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sp-slice-restriction-strict-derived-limit",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "lem-weil-pbc-lisse-lattice-etale-local",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-scalar-localization-derived-hom",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-proetale-weakly-etale-localization",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2) restricted to lisse hearts, with explicit comparisons from Remark 6.8.15; the normalization and coherence arguments are supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +270,45 @@
    "results": "8 hits: LightCondMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, LightCondMod.LocallyConstant.functor, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.functorIsoDiscrete. Read Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85 and Algebra/Category/ModuleCat/Sheaf/Free.lean:35-75: coefficient sheaves, cohomology and free modules only; the condensed hits concern discrete/light condensed modules. None identifies a rationalized constructible heart with continuous lisse sheaves or its pullback and fibre comparisons.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The raw rationalization of derived complete constructible integral l-adic sheaves realizes fully faithfully as continuous field coefficient sheaves, with lisse heart finite locally free",
+   "results": "8 hits: lightProfiniteToLightCondSetFullyFaithful, CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, LightCondSet.LocallyConstant.functorFullyFaithful, LightCondSet.fullyFaithfulSequentialToLightCondSet, CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet.  Read the returned signatures and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85, Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and Condensed/Discrete/Module.lean:122-152. These provide continuous coefficient abelian sheaves, ordinary underived pullback or discrete condensed embeddings, not the constructible derived-completion comparison or rational lisse realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id.  Read the returned signatures and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85, Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and Condensed/Discrete/Module.lean:122-152. These provide continuous coefficient abelian sheaves, ordinary underived pullback or discrete condensed embeddings, not the constructible derived-completion comparison or rational lisse realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|rationalization|adic.*complete|complete.*pullback",
+   "results": "25 hits: Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/Data/Rel/Separated.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/Analysis/Complex/PhragmenLindelof.lean, Mathlib/RingTheory/Teichmuller.lean, Mathlib/RingTheory/Teichmuller.lean.  Read the returned signatures and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85, Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and Condensed/Discrete/Module.lean:122-152. These provide continuous coefficient abelian sheaves, ordinary underived pullback or discrete condensed embeddings, not the constructible derived-completion comparison or rational lisse realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|rationalization|ellAdicSheaf",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean.  Read the returned signatures and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85, Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and Condensed/Discrete/Module.lean:122-152. These provide continuous coefficient abelian sheaves, ordinary underived pullback or discrete condensed embeddings, not the constructible derived-completion comparison or rational lisse realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationalizing constructible complete l-adic complexes gives the derived category of continuous l-adic constructible sheaves",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory, HasDerivedCategory, DerivedCategory.instCategory, HomologicalComplexUpToQuasiIso, HomologicalComplexUpToQuasiIso.Q, HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso, DerivedCategory.Q.  Read the returned signatures and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:45-85, Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and Condensed/Discrete/Module.lean:122-152. These provide continuous coefficient abelian sheaves, ordinary underived pullback or discrete condensed embeddings, not the constructible derived-completion comparison or rational lisse realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-tw-dual-stalk-frobenius",
@@ -80,5 +327,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-tw-lisse-rational-realization",
+  "worker": "stage1",
+  "summary": "Preserved the full statement, including nonseparated schemes, arbitrary scheme maps and point-transport normalization. Reused existing Hom-continuity, scalar-localization, constructible-lattice, tensor-completion and normalized quotient-system results. Added only the integral ordinary/completed pullback comparison, without a field-linearity restriction. Wrote the lisse essential-image argument using etale-local integral lattices, and explicit pure-tensor, section-localization and transport calculations.",
+  "blueprint": "Ancestor lem-tw-dual-negation, proof first sentence (dual stalk as dual representation): supplies the continuous coefficient model and its exact tensor/pullback/point identifications used by lem-tw-dual-stalk-frobenius.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-sp-slice-restriction-strict-derived-limit",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-lisse-lattice-etale-local",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-localization-derived-hom",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic coefficient, ringed-site, geometric finiteness or point-fibre tool used with its stated hypotheses; this linear-algebra unit has no such infrastructure theorem and its dual-stalk route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-constructible-tensor-completion",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sp-slice-restriction-strict-derived-limit",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "lem-weil-pbc-lisse-lattice-etale-local",
+  "lem-weil-pbc-scalar-localization-derived-hom",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q60-ce235861d",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-ce235861d (reviewer sub-agent of L); spot-checked: Read the item, new integral pullback node, all cited statements, current blueprint route, Bhatt–Scholze sources, Stacks Tag 01T6, and recorded Mathlib searches. Verified all 13 proof steps, hypotheses, coefficient/base-change normalizations, edge cases, route constraints, duplicate checks, and no SGA or batch-5 violations. Wrote review.md; no repairs needed."
  }
 }

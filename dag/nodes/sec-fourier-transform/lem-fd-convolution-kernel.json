@@ -3,60 +3,153 @@
  "blueprint": {
   "is": "lem-fd-convolution-kernel",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The convolution of the Fourier kernels is the delta kernel",
- "statement": "Let $S=\\Spec k$ and $V=\\mathbf A^r_k$. Then\n\n$$\n\\mathcal K_{\\psi^{-1}}\\ast\\mathcal K_\\psi\\cong\n\\Delta_*\\overline{\\mathbf Q}_\\ell(-r)[-2r],\n\\qquad\n\\mathcal K_\\psi\\ast\\mathcal K_\\psi\\cong\n(\\operatorname{id}\\times\\iota')_*\\Delta_*\\overline{\\mathbf Q}_\\ell(-r)[-2r],\n$$\n\nwhere $\\Delta:V\\to V\\times_SV$ is the diagonal and $\\iota'$ is the inverse\nof the addition.",
+ "statement": "Fix distinct primes $p,\\ell$, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$ and $k=\\overline{k_0}$, in the Fourier conventions [def-fourier-set]. Fix a nontrivial character $\\Psi:(\\mathbf F_p,+)\\to\\overline{\\mathbf Q}_\\ell^\\times$ and write $\\psi=\\Psi\\circ\\operatorname{Tr}_{k_0/\\mathbf F_p}$. Over $k$ the notation $\\mathcal L_{\\psi,f}$ means the geometric pullback of the prime-field Artin–Schreier sheaf attached to $\\Psi$ and $f$ [def-fd-artin-schreier-sheaf], not a trace from $k$ to $\\mathbf F_p$. Work in $D^b_c(-,\\overline{\\mathbf Q}_\\ell)$ with the adic common-stage coefficients of [def-weil-algebraically-closed-coefficients]. Let $S=\\operatorname{Spec}k$, $r\\geq0$, $V=\\mathbf A^r_k$ and $V^\\vee$ its dual. Use the Fourier kernels [def-fd-kernel] of the evaluation pairings on $V\\times V^\\vee$ and $V^\\vee\\times V$, and the unshifted convolution $\\ast$ of [lem-fd-kernel-composition]. Then\n$$\n\\mathcal K_{\\psi^{-1}}\\ast\\mathcal K_\\psi\\cong\\Delta_*\\overline{\\mathbf Q}_\\ell(-r)[-2r],\\qquad\n\\mathcal K_\\psi\\ast\\mathcal K_\\psi\\cong(\\operatorname{id}_V\\times\\iota')_*\\Delta_*\\overline{\\mathbf Q}_\\ell(-r)[-2r],\n$$\nwhere $\\Delta:V\\to V\\times_kV$ sends $x$ to $(x,x)$, $\\iota':V\\to V$ sends $y$ to $-y$, and the twists are [def-coefficient-twists-detailed]. All sheaves and maps are the geometric pullbacks from their indicated finite-field models.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.md",
   "place": "node lem-fd-convolution-kernel, order 2714"
  },
  "stmt_deps": [
-  "def-wf-tate-twist"
+  "def-fourier-set",
+  "def-fd-artin-schreier-sheaf",
+  "def-weil-algebraically-closed-coefficients",
+  "def-fd-kernel",
+  "lem-fd-kernel-composition",
+  "def-coefficient-twists-detailed"
  ],
  "proof": [
   {
-   "text": "Let $(\\bar x,\\bar y)$ be a geometric point of $V\\times_SV$. By the same\nstalk computation as in [lem-fd-stalk-formula] – the fibre of $r_{13}$\nover $(\\bar x,\\bar y)$ is $\\mathbf A^r_{\\bar k}$, and the kernel restricts\nto the product of the two values of $\\psi$ – the stalk of\n$\\mathcal K_{\\psi^{-1}}\\ast\\mathcal K_\\psi$ at $(\\bar x,\\bar y)$ is the\ncompactly supported cohomology\n\n$$\nH^*_c\\bigl(\\mathbf A^r_{\\bar k},\\,\n\\mathcal L_{\\psi(\\langle\\xi,x\\rangle)}\\otimes^L\n\\mathcal L_{\\psi^{-1}(\\langle\\xi,y\\rangle)}\\bigr)\n=H^*_c\\bigl(\\mathbf A^r_{\\bar k},\\,\n\\mathcal L_{\\psi(\\langle\\xi,x-y\\rangle)}\\bigr),\n$$\n\nthe identification being the multiplicativity and the inverse formula of\n[prop-kernel-lisse], [lem-fd-as-lisse]. If $x\\neq y$ the linear form\n$\\xi\\mapsto\\langle\\xi,x-y\\rangle$ is nonzero: choose linear coordinates on\n$\\mathbf A^r_{\\bar k}$ whose first coordinate is $t=\\langle\\xi,c\\rangle$\nwith $c=x-y$, so that $\\mathbf A^r_{\\bar k}=\\mathbf A^1_t\\times\\mathbf A^{r-1}$\nand the sheaf is $\\mathrm{pr}^*\\mathcal L_{\\psi(t)}$ for the projection\n$\\mathrm{pr}:\\mathbf A^r\\to\\mathbf A^1_t$, a trivial vector bundle of rank\n$r-1$. The vector-bundle Thom isomorphism [thm-pur-vector-bundle-thom] (in\nthe $\\overline{\\mathbf Q}_\\ell$ transport of [def-pur-conventions]) gives\n$R\\mathrm{pr}_!\\overline{\\mathbf Q}_\\ell\\cong\n\\overline{\\mathbf Q}_\\ell(-(r-1))[-2(r-1)]$, so the projection formula\n[fix-prop-projection-formula] gives\n\n$$\nR\\Gamma_c\\bigl(\\mathbf A^r_{\\bar k},\\mathrm{pr}^*\\mathcal L_{\\psi(t)}\\bigr)\n\\cong R\\Gamma_c\\bigl(\\mathbf A^1_{\\bar k},\n\\mathcal L_{\\psi(t)}\\otimes R\\mathrm{pr}_!\\overline{\\mathbf Q}_\\ell\\bigr)\n\\cong R\\Gamma_c\\bigl(\\mathbf A^1_{\\bar k},\\mathcal L_{\\psi(t)}\\bigr)\n(-(r-1))[-2(r-1)].\n$$",
+   "text": "Put $B=V\\times_kV$, $T=V\\times_kV^\\vee\\times_kV$ and $P=r_{13}:T\\to B$. Define $C_-$ and $C_+$ to be the two convolutions in the statement. The convolution formula of [lem-fd-kernel-composition] and the pullback description of [def-fd-kernel] give their integrands as the tensor products of the two evaluation sheaves. By the multiplicativity and inverse identities of [lem-fd-as-lisse], these are respectively $\\mathcal L_{\\psi,\\langle\\xi,x-y\\rangle}$ and $\\mathcal L_{\\psi,\\langle\\xi,x+y\\rangle}$. Thus, putting $c_-=x-y$, $c_+=x+y$ and $F_\\pm=\\mathcal L_{\\psi,\\langle\\xi,c_\\pm\\rangle}$, one has $C_\\pm=RP_!F_\\pm$. These are bounded constructible complexes by the stability clause (8) of [sk-thm-sf-package]: the evaluation sheaves are rank-one lisse and have finite Tor amplitude by [prop-kernel-lisse]. All projections are separated finite type between separated finite-type $k$-schemes. The calculation below is the unit's fibre calculation carried out over relative coordinate charts; in particular it does not assume that arbitrary geometric points have residue field $k$.",
    "uses": [
-    "lem-fd-stalk-formula",
-    "prop-kernel-lisse",
+    "lem-fd-kernel-composition",
+    "def-fd-kernel",
     "lem-fd-as-lisse",
-    "thm-pur-vector-bundle-thom",
-    "def-pur-conventions",
-    "fix-prop-projection-formula"
+    "sk-thm-sf-package",
+    "prop-kernel-lisse"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "first paragraph: identify the two kernel factors and their tensor product"
+   }
   },
   {
-   "text": "The last complex vanishes by the degreewise Poincare duality of\n[thm-pod-degreewise-perfectness-over-a-field] for the smooth, separated (not\nproper) curve $\\mathbf A^1$ at the field stage $\\overline{\\mathbf Q}_\\ell$,\napplied to the lisse rank-one, hence perfect\n([def-pod-perfect-complex-on-x]), sheaf $\\mathcal L_{\\psi(t)}$: it gives\n$H^i_c(\\mathbf A^1,\\mathcal L_{\\psi(t)})^\\vee\\cong\nH^{2-i}(\\mathbf A^1,\\mathcal L_{\\psi(t)}^\\vee(1))$, and the coefficient dual\n$\\mathcal L_{\\psi(t)}^\\vee=\\mathcal L_{\\psi(-t)}$ ([lem-fd-as-lisse]) is the\nexponential sheaf of a nonzero linear function, whose ordinary cohomology\nvanishes by [lem-fd-cohomology-affine-line-character]. If $x=y$ the\nintegrand is the constant sheaf, and\n$R\\Gamma_c(\\mathbf A^r_{\\bar k},\\overline{\\mathbf Q}_\\ell)\n=\\overline{\\mathbf Q}_\\ell(-r)[-2r]$, Frobenius-compatibly, by the same Thom\nisomorphism [thm-pur-vector-bundle-thom] for the trivial rank-$r$ bundle over\nthe point. The stalk\ncomputation therefore identifies the convolution with the constant sheaf with\ntwist $(-r)$ and shift $[-2r]$ extended by zero along the diagonal, which\nis the first displayed isomorphism; the support is closed because the diagonal\nis a closed immersion. The same-character computation replaces $x-y$ by\n$x+y$, so the vanishing locus is the anti-diagonal $\\{x+y=0\\}$, the image\nof the diagonal under $\\operatorname{id}\\times\\iota'$, which gives the\nsecond isomorphism.",
+   "text": "To relate this family calculation to the unit's Fourier stalk formula, fix $y\\in V(k)$ and put $K_{-,y}(\\xi)=\\mathcal L_{\\psi^{-1},\\langle\\xi,y\\rangle}$, $K_{+,y}(\\xi)=\\mathcal L_{\\psi,\\langle\\xi,y\\rangle}$ on $V^\\vee$. These are rank-one lisse bounded constructible objects. Apply [thm-cbc-qbar] to $P$ along the slice $s_y:V\\to B$, $x\\mapsto(x,y)$. Under the symmetry $V\\times V^\\vee\\cong V^\\vee\\times V$, [def-fd-transform] gives $s_y^*C_\\pm\\cong\\operatorname{FT}_\\psi(K_{\\pm,y})[-r]$, the transform now having input $V^\\vee$ and output its bidual $V$. The shift $[r]$ in that definition is cancelled explicitly. Apply [lem-fd-stalk-formula] to these actual transform objects: for $\\bar x:\\operatorname{Spec}\\Omega\\to V$ the result is $R\\Gamma_c(\\mathbf A^r_\\Omega,\\mathcal L_{\\psi,\\langle\\xi,x-y\\rangle})$ for $C_-$ and the same with $x+y$ for $C_+$. The linear-function sheaf identities are those of Step 1. We will prove the vanishing and the constant closed restriction relatively, rather than glue these pointwise identifications; this also handles pairs whose second coordinate is not k-rational.",
    "uses": [
-    "thm-pod-degreewise-perfectness-over-a-field",
-    "def-pod-perfect-complex-on-x",
-    "lem-fd-as-lisse",
-    "lem-fd-cohomology-affine-line-character",
-    "thm-pur-vector-bundle-thom"
+    "thm-cbc-qbar",
+    "def-fd-transform",
+    "lem-fd-stalk-formula"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "first paragraph: the same stalk computation as the Fourier stalk formula, applied to actual fixed-y transform objects"
+   }
+  },
+  {
+   "text": "Let $L=\\mathcal L_{\\psi,t}$ on $\\mathbf A^1_k$. By [lem-fd-as-lisse] it is lisse of rank one with coefficient dual $L^\\vee=\\mathcal L_{\\psi,-t}$. It is site-perfect: on the finite etale Artin–Schreier trivializing cover it is a free rank-one coefficient module in degree zero, exactly [def-pod-perfect-complex-on-x]. The curve $\\mathbf A^1_{k_0}$ is smooth, separated, geometrically connected of dimension one and descends to the finite field; properness is not required in [thm-pod-degreewise-perfectness-over-a-field]. Apply that theorem at $\\overline{\\mathbf Q}_\\ell$ to obtain $H_c^i(\\mathbf A^1_k,L)^\\vee\\cong H^{2-i}(\\mathbf A^1_k,\\mathcal L_{\\psi,-t}(1))$. The right side vanishes by [lem-fd-cohomology-affine-line-character] with nonzero scalar $-1$; tensoring with the one-dimensional constant twist on the algebraically closed point preserves zero. Negative ordinary degrees also vanish for a sheaf in degree zero. The compact cohomology groups are finite-dimensional by the duality theorem, so a zero dual forces each of them to vanish. Consequently $R\\Gamma_c(\\mathbf A^1_k,L)=0$.",
+   "uses": [
+    "lem-fd-as-lisse",
+    "def-pod-perfect-complex-on-x",
+    "thm-pod-degreewise-perfectness-over-a-field",
+    "lem-fd-cohomology-affine-line-character"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "second paragraph: deduce compact-support vanishing from ordinary cohomology and degreewise duality"
+   }
+  },
+  {
+   "text": "For either sign let $Z_\\pm\\subset B$ be the closed subscheme defined by the $r$ equations $c_{\\pm,j}=0$, and put $U_\\pm=B\\setminus Z_\\pm$. If $r>0$, the $r$ principal opens $U_{\\pm,i}=D(c_{\\pm,i})$ cover $U_\\pm$. On $U_{\\pm,i}$ set $t=\\sum_j c_{\\pm,j}\\xi_j$ and $u_j=\\xi_j$ for $j\\ne i$. The inverse change of coordinates is $\\xi_i=c_{\\pm,i}^{-1}(t-\\sum_{j\\ne i}c_{\\pm,j}u_j)$, $\\xi_j=u_j$ for $j\\ne i$. Both maps are regular on this principal open, and substituting gives the identity in either direction. This identifies $T|_{U_{\\pm,i}}$ with $\\mathbf A^1_{U_{\\pm,i}}\\times\\mathbf A^{r-1}$ and $F_\\pm$ with the pullback of $\\mathcal L_{\\psi,t}$ along the first projection, by [def-fd-kernel]'s pullback rule. When $r=0$, $Z_\\pm=B$ and $U_\\pm$ is empty; no rank $-1$ is used.",
+   "uses": [
+    "def-fd-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "first paragraph: choose a coordinate given by the nonzero linear form; relative chart version with explicit inverse"
+   }
+  },
+  {
+   "text": "Fix one chart $W=U_{\\pm,i}$ and write $\\rho:\\mathbf A^r_W\\to\\mathbf A^1_W$, $a:\\mathbf A^1_W\\to W$ and $b:W\\to\\operatorname{Spec}k$. Compact-support base change [thm-cbc-qbar] identifies $C_\\pm|_W$ with $R(a\\rho)_!\\rho^*L_W$, where $L_W$ is the pullback of $L$ from $\\mathbf A^1_k$. The composition law of [sk-thm-sf-package](4) and the projection formula [fix-prop-projection-formula] give $R(a\\rho)_!\\rho^*L_W\\cong Ra_!(L_W\\otimes R\\rho_!\\overline{\\mathbf Q}_\\ell)$. Here $\\rho$ is a trivial bundle of rank $r-1$; [lem-fd-affine-space-thom-coefficient-transport] identifies its compact-support constant image with $\\overline{\\mathbf Q}_\\ell(-(r-1))[-2(r-1)]$. Applying the projection formula to the twist pulled back from $W$ then gives $C_\\pm|_W\\cong(Ra_!L_W)(-(r-1))[-2(r-1)]$. In the cartesian square obtained from $\\mathbf A^1_k\\to\\operatorname{Spec}k$ by $b$, [thm-cbc-qbar] identifies $Ra_!L_W$ with $b^*R\\Gamma_c(\\mathbf A^1_k,L)$, which is zero by Step 3. All schemes in these squares are noetherian, finite-dimensional and have $\\ell$ invertible; every compact-support map is separated finite type. The rank-one sheaf and the twists are in the finite-Tor domains of the projection formula.",
+   "uses": [
+    "thm-cbc-qbar",
+    "sk-thm-sf-package",
+    "fix-prop-projection-formula",
+    "lem-fd-affine-space-thom-coefficient-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "first paragraph: projection formula and the transported Thom computation off the vanishing locus"
+   }
+  },
+  {
+   "text": "The chartwise zero objects imply $C_\\pm|_{U_\\pm}=0$ in the adic common-stage category, as follows. By [def-weil-algebraically-closed-coefficients], the object and the finitely many identities expressing that its restrictions are zero are represented after one common finite coefficient extension $E$. Choose an integral representative $M\\in D^b_c(U_\\pm,\\mathcal O_E)$. Its restriction to each chart is zero after inverting $\\varpi_E$. Apply [lem-sf-rational-local-global-power-torsion] to this finite open cover: one power $\\varpi_E^N$ kills every cohomology sheaf of $M$. Choose a bounded cohomological interval $[u,v]$ for $M$ and apply [lem-sf-rational-bounded-cone-torsion]. It gives $\\varpi_E^{N(v-u+2)}\\operatorname{id}_M=0$, hence $M_E=0$ and therefore $C_\\pm|_{U_\\pm}=0$. For empty $U_\\pm$ the same lemmas allow the empty covering, or the assertion follows directly from the zero sheaf category on the empty scheme.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-sf-rational-local-global-power-torsion",
+    "lem-sf-rational-bounded-cone-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "second paragraph, support claim: passage from relative chart vanishing to vanishing on the entire open complement"
+   }
+  },
+  {
+   "text": "Let $i_\\pm:Z_\\pm\\hookrightarrow B$. The base-changed map $P_Z:T\\times_BZ_\\pm\\to Z_\\pm$ is the trivial rank-$r$ bundle with coordinates $\\xi$. On $Z_-$ one has $y=x$, so the original two evaluation factors are tensor inverses; on $Z_+$ one has $y=-x$, so the same is true of the two same-character factors. The inverse identity of [lem-fd-as-lisse] gives in both cases the unit sheaf on the whole $T\\times_BZ_\\pm$, not just a unit at its individual points. Applying [thm-cbc-qbar] along $i_\\pm$, followed by [lem-fd-affine-space-thom-coefficient-transport] with $Y=Z_\\pm$ and $m=r$, gives $i_\\pm^*C_\\pm\\cong RP_{Z!}\\overline{\\mathbf Q}_\\ell\\cong\\overline{\\mathbf Q}_{\\ell,Z_\\pm}(-r)[-2r]$. This is a relative identification of complexes on $Z_\\pm$. The bases are isomorphic to $V$, so they meet all finite-type and separatedness hypotheses; rank zero is the identity normalization of the transported Thom statement.",
+   "uses": [
+    "lem-fd-as-lisse",
+    "thm-cbc-qbar",
+    "lem-fd-affine-space-thom-coefficient-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "second paragraph: the integrand is constant on the vanishing locus, and the same Thom isomorphism identifies its relative direct image"
+   }
+  },
+  {
+   "text": "Apply [prop-sf-open-closed-triangle-all-stages] at $\\overline{\\mathbf Q}_\\ell$ to $C_\\pm$ and the closed-open pair $(i_\\pm,j_\\pm)$. Its triangle is $j_{\\pm!}j_\\pm^*C_\\pm\\to C_\\pm\\to i_{\\pm*}i_\\pm^*C_\\pm\\to$. Step 6 makes the first term zero, so the specified middle unit map is an isomorphism. Step 7 therefore gives $C_\\pm\\cong i_{\\pm*}\\overline{\\mathbf Q}_{\\ell,Z_\\pm}(-r)[-2r]$. Explicitly $Z_-\\cong V$ via $x\\mapsto(x,x)$ and $Z_+\\cong V$ via $x\\mapsto(x,-x)$; the inverse is the first projection, and the equations $x-y=0$ and $x+y=0$ verify these scheme isomorphisms. Hence $i_-=\\Delta$ and $i_+=(\\operatorname{id}\\times\\iota')\\Delta$. The direct-image composition law for these proper maps, equivalently compact-support composition and proper coincidence in [sk-thm-sf-package](4), yields exactly the two displayed identities. In characteristic two $Z_+=Z_-$, as it should; when $r=0$ both identities reduce to the unit on a point.",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
+    "sk-thm-sf-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "second paragraph: replace the unsupported stalkwise identification by the actual open-closed unit isomorphism; diagonal and anti-diagonal conclusions"
+   }
   }
  ],
  "proof_deps": [
-  "lem-fd-stalk-formula",
-  "prop-kernel-lisse",
+  "lem-fd-kernel-composition",
+  "def-fd-kernel",
   "lem-fd-as-lisse",
-  "thm-pur-vector-bundle-thom",
-  "def-pur-conventions",
-  "fix-prop-projection-formula",
-  "thm-pod-degreewise-perfectness-over-a-field",
+  "sk-thm-sf-package",
+  "prop-kernel-lisse",
+  "thm-cbc-qbar",
+  "def-fd-transform",
+  "lem-fd-stalk-formula",
   "def-pod-perfect-complex-on-x",
+  "thm-pod-degreewise-perfectness-over-a-field",
   "lem-fd-cohomology-affine-line-character",
-  "lem-fd-as-cover-affine-line",
-  "lem-fd-kernel-composition"
+  "fix-prop-projection-formula",
+  "lem-fd-affine-space-thom-coefficient-transport",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-sf-rational-local-global-power-torsion",
+  "lem-sf-rational-bounded-cone-torsion",
+  "prop-sf-open-closed-triangle-all-stages"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+  "place": "Entire proof, completed by relative charts, coefficient transport, restriction to the closed support and open-closed localization; the unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -64,10 +157,45 @@
    "query": "AlgebraicGeometry.Etale.fourierKernelConvolutionIso",
    "results": [],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "fourier.*kernel|kernel.*convolution|artin.?schreier",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: only classical Fourier sums or analytic convolution; no constructible sheaf kernel statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Convolution of Fourier Deligne kernels is the delta sheaf on the diagonal of affine space",
+   "results": "Hits read: Real.fourier_mul_convolution_eq, Real.fourier_smul_convolution_eq, SchwartzMap.fourier_convolution_apply, SchwartzMap.fourier_convolution, SchwartzMap.convolution, MeasureTheory.Measure.dirac_conv_dirac, MeasureTheory.Measure.dirac_conv, MeasureTheory.term_∗_",
+   "date": "2026-10-18",
+   "verdict": "no match: only classical Fourier sums or analytic convolution; no constructible sheaf kernel statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\", \"convolution\"",
+   "results": "Hits read: Real.fourier_smul_convolution_eq, Real.fourier_mul_convolution_eq, Real.fourier_bilin_convolution_eq, Real.fourier_bilin_convolution_eq_integral, SchwartzMap.fourier_convolution_apply, SchwartzMap.fourier_convolution",
+   "date": "2026-10-18",
+   "verdict": "no match: only classical Fourier sums or analytic convolution; no constructible sheaf kernel statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The convolution of the Artin Schreier Fourier Deligne kernels for a nontrivial additive character on affine space is the diagonal delta sheaf with Tate twist and shift",
+   "results": "Hits read: AddChar.sum_mulShift, jacobiSum, jacobiSum_one_nontrivial, jacobiSum_mul_nontrivial, gaussSum, jacobiSum_nontrivial_inv, gaussSum_mulShift, gaussSum_mul",
+   "date": "2026-10-18",
+   "verdict": "no match: only classical Fourier sums or analytic convolution; no constructible sheaf kernel statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In etale cohomology integration of a nontrivial additive character sheaf over affine space vanishes off the zero linear form, giving Fourier inversion",
+   "results": "Hits read: AddChar.wInner_cWeight_eq_boole, AddChar.wInner_cWeight_eq_zero_iff_ne, DirichletCharacter.fourierTransform_eq_gaussSum_mulShift, AddChar.sum_mulShift, AddChar.wInner_cWeight_eq_one_iff_eq, DirichletCharacter.IsPrimitive.fourierTransform_eq_inv_mul_gaussSum, BoundedContinuousFunction.charAlgHom_apply, AddChar.sum_apply_ne_zero_iff_eq_zero",
+   "date": "2026-10-18",
+   "verdict": "no match: only classical Fourier sums or analytic convolution; no constructible sheaf kernel statement"
   }
  ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -117,5 +245,54 @@
   }
  },
  "chapter": "sec-fourier-transform",
- "unit": "sk-prop-convolution-kernel"
+ "unit": "sk-prop-convolution-kernel",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-convolution-kernel",
+  "worker": "stage1",
+  "summary": "Made the finite-field and nontrivial prime-field character hypotheses explicit, retained both convolution identities, and replaced the stalkwise gluing gap by a fixed-input Fourier slices, a relative chart computation, a relative closed-support computation, and the localization unit. Isolated the missing adic affine-space Thom coefficient transport as one unsplit helper; reused existing base-change, projection, Poincare and rational locality tools.",
+  "blueprint": "Realizes the only unit proof step: Steps 1-2 identify the integrands and actual Fourier-transform slices and apply its prescribed stalk formula, Steps 4-5 carry the relative linear-form/Thom calculation, Step 3 its duality vanishing, Step 6 the support deduction, Step 7 the diagonal computation, Step 8 both identities. Relative charts and localization complete rather than replace the unit stalk calculation.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-sf-package",
+    "why": "Only generic stability, composition and proper coincidence, clauses (8) and (4), for the prescribed convolution calculation; not Fourier inversion."
+   },
+   {
+    "node": "thm-cbc-qbar",
+    "why": "Generic compact-support base change at the actual adic coefficient stage, required for the unit fibre calculation and its restriction to the diagonal."
+   },
+   {
+    "node": "prop-sf-open-closed-triangle-all-stages",
+    "why": "Generic localization triangle turns off-support vanishing and an actual closed restriction into the required object isomorphism."
+   },
+   {
+    "node": "lem-sf-rational-local-global-power-torsion",
+    "why": "Generic finite-cover coefficient-locality tool; avoids assuming geometric stalks detect arbitrary pro-etale objects."
+   },
+   {
+    "node": "lem-sf-rational-bounded-cone-torsion",
+    "why": "Generic bounded derived-category tool upgrading power-torsion cohomology to rational zero."
+   },
+   {
+    "node": "lem-fd-kernel-composition",
+    "why": "Only its explicit unshifted convolution formula names the kernel object being calculated; the composition/inversion conclusion is not used as a black box."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-sf-package",
+  "thm-cbc-qbar",
+  "prop-sf-open-closed-triangle-all-stages",
+  "lem-sf-rational-local-global-power-torsion",
+  "lem-sf-rational-bounded-cone-torsion",
+  "lem-fd-kernel-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-6b60affde",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-6b60affde (reviewer sub-agent of L); spot-checked: Read the item, new helper, unit/chapter route, cited statements, and cited source locations in full. Verified hypotheses, coefficient category, base-change morphism, relative chart/open-closed proof, edge cases, duplicate searches, and all eight proof steps. The nontrivial-character correction is necessary and justified by the trivial-character counterexample; no remaining mathematical or DAG faults found. Review written to review.md."
+ }
 }

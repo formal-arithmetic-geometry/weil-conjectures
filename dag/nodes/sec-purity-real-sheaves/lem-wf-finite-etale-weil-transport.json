@@ -16,9 +16,146 @@
   "def-wf-weil-group",
   "def-weil-frobenius-detailed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\phi=\\Phi_U$ and write $\\bar u:\\operatorname{Spec}\\Omega\\to U$, with scalar embedding $\\iota:k\\hookrightarrow\\Omega$. By [def-weil-frobenius-detailed], $\\phi$ is an automorphism. For every integer $r$, the projection to $P$ identifies $(\\phi^{-r})^*P$ with $T_rP$: its inverse sends $z$ to $(z,\\phi^r p(z))$. These two maps are inverse by the fibre-product universal property [def-pc-fibre-product] and commute with every cover morphism. Pullback gives a finite-etale cover by [def-weil-pbc-finite-etale-category], so $T_r$ is a well-defined functor, with inverse $T_{-r}$.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "def-pc-fibre-product",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BN5 (lemma-functoriality-galois), 0BND (theorem-fundamental-group), 0BTV (lemma-limit), 0BTX (lemma-ses-field); explicit agent-written finite-stage argument for the penultimate paragraph of lem-wf-finite-constant-h1-pi1.proof.md in main-20261015."
+   }
+  },
+  {
+   "text": "Let $u_0$ be the composite of $\\bar u$ with $U\\to U_0$, put $F_0=F_{u_0}$ and $A=\\operatorname{Aut}(F_0)$. The canonical map $i:\\Pi\\to A$ and the natural fibre identifications for base change are [lem-galois-pi1-functoriality]. The identification of $\\Pi$ with the geometric subgroup of $W\\subseteq A$, including its normality, is [lem-wf-weil-group-exact-sequence]. We use $i$ for this inclusion throughout. The degree convention [def-wf-weil-group] says that an element of degree $d$ acts on the fibre of the constant cover $U_0\\times_{k_0}\\operatorname{Spec}E$, for every finite subextension $E\\subseteq k$, by $\\iota\\sigma\\mapsto\\iota\\gamma^d\\sigma$ on $k_0$-embeddings $E\\hookrightarrow k$. This is simply the restriction of its image $\\gamma^d\\in\\operatorname{Gal}(k/k_0)$, with the geometric convention of [def-weil-frobenius-detailed].",
+   "uses": [
+    "lem-galois-pi1-functoriality",
+    "lem-wf-weil-group-exact-sequence",
+    "def-wf-weil-group",
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BN5 (lemma-functoriality-galois), 0BND (theorem-fundamental-group), 0BTV (lemma-limit), 0BTX (lemma-ses-field); explicit agent-written finite-stage argument for the penultimate paragraph of lem-wf-finite-constant-h1-pi1.proof.md in main-20261015."
+   }
+  },
+  {
+   "text": "Every finite subextension $E/k_0$ of $k$ is a finite field, hence separable and normal by [lem-sfb-finite-field-galois-frobenius]. Since every element of the algebraic closure lies in a finite subextension, $k/k_0$ is separable algebraic. Apply [lem-wf-finite-etale-field-limit-descent](1) to $U_0$ and $k/k_0$: choose a finite $E$ and $P_E\\to U_E=U_0\\times_{k_0}E$ with $P\\cong P_E\\times_E k$. Regard $Q=P_E$ as a cover of $U_0$. The map $\\operatorname{Spec}E\\to\\operatorname{Spec}k_0$ is finite by finite-dimensionality and etale by [lem-sc-finite-etale-algebra-criterion]. Its base change $U_E\\to U_0$ is finite etale by [def-weil-pbc-finite-etale-category]. Thus $Q\\to U_0$ is finite by [lem-trf-finite-radicial-basechange] and etale by [lem-weil-pbc-etale-composition-cancellation]. This puts $Q$ in the domain of $F_0$, without assuming that $P$ has a group action.",
+   "uses": [
+    "lem-sfb-finite-field-galois-frobenius",
+    "lem-wf-finite-etale-field-limit-descent",
+    "lem-sc-finite-etale-algebra-criterion",
+    "def-weil-pbc-finite-etale-category",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BN5 (lemma-functoriality-galois), 0BND (theorem-fundamental-group), 0BTV (lemma-limit), 0BTX (lemma-ses-field); explicit agent-written finite-stage argument for the penultimate paragraph of lem-wf-finite-constant-h1-pi1.proof.md in main-20261015."
+   }
+  },
+  {
+   "text": "For $r\\in\\mathbf Z$, let $S_r(Q)\\subseteq F_0(Q)$ consist of those points whose restriction to $E$ is $\\iota\\gamma^{-r}|_E$. Projection $P=P_E\\times_E k\\to P_E=Q$ gives a bijection $j_r:F(T_rP)\\to S_r(Q)$. Indeed a point $x$ of $T_rP$ satisfies $p x=\\phi^{-r}\\bar u$, so its scalar map on $k$ is $\\iota\\gamma^{-r}$. Conversely, a point $y$ of $Q$ with the indicated restriction on $E$, together with the scalar map $\\iota\\gamma^{-r}:k\\to\\Omega$, gives a unique point of $P_E\\times_E k$ by [def-pc-fibre-product]; its projections to $U_0$ and $\\operatorname{Spec}k$ are those of $\\phi^{-r}\\bar u$, so it belongs to $F(T_rP)$. The two constructions are inverse. The isomorphism chosen in step 3 is inserted in these formulas when $P$ is not literally this fibre product.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BN5 (lemma-functoriality-galois), 0BND (theorem-fundamental-group), 0BTV (lemma-limit), 0BTX (lemma-ses-field); explicit agent-written finite-stage argument for the penultimate paragraph of lem-wf-finite-constant-h1-pi1.proof.md in main-20261015."
+   }
+  },
+  {
+   "text": "Use the arithmetic cover morphism $Q\\to U_0\\times_{k_0}\\operatorname{Spec}E$ induced by its $U_0$- and $E$-maps. Naturality of $s\\in\\operatorname{Aut}(F_0)$ [def-galois-fibre-functor] and its degree-$n$ action on the latter cover [def-wf-weil-group] show that $s$ carries $S_n(Q)$ bijectively to $S_0(Q)$: on restrictions to $E$ the formula is $\\iota\\gamma^{-n}\\mapsto\\iota\\gamma^n\\gamma^{-n}=\\iota$. The inverse is the action of $s^{-1}$. Define\n$$\\tau_{s,P}=j_0^{-1}\\circ s_Q\\circ j_n.$$\nIts inverse is $j_n^{-1}\\circ(s^{-1})_Q\\circ j_0$, so it is a finite-set bijection.",
+   "uses": [
+    "def-galois-fibre-functor",
+    "def-wf-weil-group",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BN5 (lemma-functoriality-galois), 0BND (theorem-fundamental-group), 0BTV (lemma-limit), 0BTX (lemma-ses-field); explicit agent-written finite-stage argument for the penultimate paragraph of lem-wf-finite-constant-h1-pi1.proof.md in main-20261015."
+   }
+  },
+  {
+   "text": "The bijection is independent of the finite-stage model. For a refinement $E\\subseteq E'$, the projection $P_E\\times_E E'\\to P_E$ is a morphism of arithmetic covers. On fibres it commutes with $j_r$ for every $r$, because both composites are the same projection of the point of $P$; the scalar restrictions are $\\iota\\gamma^{-r}|_{E'}$ and $\\iota\\gamma^{-r}|_E$. It also commutes with $s$, since $s$ is a natural automorphism [def-galois-fibre-functor]. Hence both definitions of $\\tau_{s,P}$ have the same image under the injective map $j_0$ for the smaller model, and agree. For two arbitrary models, take a common finite overfield, descend the comparison isomorphism and its inverse using [lem-wf-finite-etale-field-limit-descent](2), and enlarge once more so that both inverse identities hold by (3). The preceding projection calculation and naturality of $s$ with respect to this descended isomorphism identify the two answers.",
+   "uses": [
+    "lem-wf-finite-etale-field-limit-descent",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BN5 (lemma-functoriality-galois), 0BND (theorem-fundamental-group), 0BTV (lemma-limit), 0BTX (lemma-ses-field); explicit agent-written finite-stage argument for the penultimate paragraph of lem-wf-finite-constant-h1-pi1.proof.md in main-20261015."
+   }
+  },
+  {
+   "text": "Let $f:P\\to P'$ be any morphism in $\\mathrm{F\\acute Et}(U)$. Choose models at a common finite stage and descend $f$ by [lem-wf-finite-etale-field-limit-descent](2). The resulting $f_E:P_E\\to P'_E$ is a morphism of arithmetic covers. Write $b=F_0(f_E)$. Projection of points gives $j'_r F(T_rf)=b j_r$ for $r=0,n$; naturality of $s$ gives $b s_Q=s_{Q'}b$ [def-galois-fibre-functor]. Consequently\n$$j'_0 F(f)\\tau_{s,P}=b s_Qj_n=s_{Q'}b j_n=j'_0\\tau_{s,P'}F(T_nf).$$\nCancel the injection $j'_0$. Model independence from step 6 makes this equality valid for the chosen bijections on all objects simultaneously. Thus $\\tau_s:F\\circ T_n\\cong F$ is natural for every morphism, with no isomorphism assumption on $f$.",
+   "uses": [
+    "lem-wf-finite-etale-field-limit-descent",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BN5 (lemma-functoriality-galois), 0BND (theorem-fundamental-group), 0BTV (lemma-limit), 0BTX (lemma-ses-field); explicit agent-written finite-stage argument for the penultimate paragraph of lem-wf-finite-constant-h1-pi1.proof.md in main-20261015."
+   }
+  },
+  {
+   "text": "For each $r$, the pair of maps $P\\to Q$ and $\\phi^r p:P\\to U$ gives a $U$-morphism $v_r:T_rP\\to Q\\times_{U_0}U$ by [def-pc-fibre-product], since $\\phi$ lies over $U_0$. Under the natural fibre identification $F(Q\\times_{U_0}U)\\cong F_0(Q)$ of [lem-galois-pi1-functoriality], $F(v_r)$ is exactly $j_r$. Naturality of $g\\in\\operatorname{Aut}(F)$ [def-galois-fibre-functor] and that fibre identification give\n$$j_r(gx)=i(g)j_r(x).$$\nNormality and the identification of the geometric subgroup in [lem-wf-weil-group-exact-sequence] give $s i(g)s^{-1}=i(sgs^{-1})$. Therefore\n$$j_0\\tau_{s,P}(gx)=s i(g)j_n(x)=i(sgs^{-1})s j_n(x)=j_0((sgs^{-1})\\tau_{s,P}(x)).$$\nCancel $j_0$ to obtain precisely the first required formula.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-galois-pi1-functoriality",
+    "def-galois-fibre-functor",
+    "lem-wf-weil-group-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BN5 (lemma-functoriality-galois), 0BND (theorem-fundamental-group), 0BTV (lemma-limit), 0BTX (lemma-ses-field); explicit agent-written finite-stage argument for the penultimate paragraph of lem-wf-finite-constant-h1-pi1.proof.md in main-20261015."
+   }
+  },
+  {
+   "text": "Apply the established construction to $s^{-1}$, whose degree is $-n$ by [def-wf-weil-group]. Step 1 with $r=-n$ gives the natural comparison $(\\phi^n)^*P\\cong T_{-n}P$, explicitly the projection to $P$ with inverse $z\\mapsto(z,\\phi^{-n}p(z))$. Set $\\lambda_{s,P}$ equal to its fibre map followed by $\\tau_{s^{-1},P}$. Every natural map of covers induces a map commuting with $g\\in\\Pi$ by [def-galois-fibre-functor], so step 8 for $s^{-1}$ gives\n$$\\lambda_{s,P}(gx)=(s^{-1}gs)\\lambda_{s,P}(x).$$\nThe same construction with $s^{-1}$ recovers the covariant formulation from the pullback formulation. This proves the stated equivalence and all naturality assertions.",
+   "uses": [
+    "def-wf-weil-group",
+    "def-pc-fibre-product",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BN5 (lemma-functoriality-galois), 0BND (theorem-fundamental-group), 0BTV (lemma-limit), 0BTX (lemma-ses-field); explicit agent-written finite-stage argument for the penultimate paragraph of lem-wf-finite-constant-h1-pi1.proof.md in main-20261015."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-fibre-functor",
+  "def-pc-fibre-product",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-finite-etale-category",
+  "def-wf-weil-group",
+  "lem-galois-pi1-functoriality",
+  "lem-sc-finite-etale-algebra-criterion",
+  "lem-sfb-finite-field-galois-frobenius",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-wf-finite-etale-field-limit-descent",
+  "lem-wf-weil-group-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Finite-stage construction from Tags 0BTV and 0BTX, with the natural fibre actions of 0BND and 0BN5; expands the penultimate paragraph of the current blueprint proof of lem-wf-finite-constant-h1-pi1."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +191,38 @@
    "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois, CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.autMulFiber. The Galois-category hits concern abstract automorphisms and actions, and the grep hits concern ring conjugacy, etale base change or order-theoretic Galois connections; none identifies scheme Galois transport with an arithmetic lift.",
    "date": "2026-10-17",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(Weil|Galois|Etale).*(transport|conjug)|fundamentalGroupMap",
+   "results": "4 hits: Mathlib/Analysis/Normed/Field/Dense.lean, Mathlib/Analysis/Normed/Field/Krasner.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean. No match: the abstract Galois-category action lemmas and topological monodromy do not identify a prescribed arithmetic Weil lift with transport of scheme covers. The Frobenius-at-a-prime hits concern invariant rings and residue fields.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil lift action on finite etale geometric fibres and conjugation of the geometric fundamental group",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.autMulFiber, IsCoveringMap.monodromy, CategoryTheory.PreGaloisCategory.instMulActionAutCarrierVFintypeCatFunctorObjActionFunctorToAction, CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected, ConjAct.instGroup, CategoryTheory.PreGaloisCategory.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.exists_lift_of_mono. No match: the abstract Galois-category action lemmas and topological monodromy do not identify a prescribed arithmetic Weil lift with transport of scheme covers. The Frobenius-at-a-prime hits concern invariant rings and residue fields.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Galois\", \"conjug\"",
+   "results": "0 hits: . No match: the abstract Galois-category action lemmas and topological monodromy do not identify a prescribed arithmetic Weil lift with transport of scheme covers. The Frobenius-at-a-prime hits concern invariant rings and residue fields.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Weil group lift of geometric Frobenius induces a natural transport on finite etale cover fibres intertwining geometric monodromy with conjugation",
+   "results": "8 hits: arithFrobAt, isConj_arithFrobAt, IsArithFrobAt.exists_primesOver_isConj, IsArithFrobAt.exists_of_isInvariant, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber. No match: the abstract Galois-category action lemmas and topological monodromy do not identify a prescribed arithmetic Weil lift with transport of scheme covers. The Frobenius-at-a-prime hits concern invariant rings and residue fields.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-finite-constant-h1-pi1",
@@ -83,5 +248,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-finite-etale-weil-transport",
+  "worker": "stage1",
+  "summary": "Constructs transport using arithmetic actions on finite-stage models of covers. The labelled-subset formula j_0^{-1} s j_n fixes the Frobenius sign, descent of morphisms proves all-morphism naturality and model independence, and an explicit U-morphism into the base-changed arithmetic cover proves equivariance. Adds one independently useful statement-only finite-cover descent lemma, not a torsor or cohomology reformulation. Statement unchanged.",
+  "blueprint": "lem-wf-finite-constant-h1-pi1.proof.md (main-20261015), penultimate paragraph beginning \"For completeness, consider the descent transport associated with s\": steps 1–4 set up finite cover transport, steps 5–7 construct its natural fibre bijection, step 8 proves the conjugation calculation, and step 9 obtains the pullback action g -> s^{-1}gs."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-7270e5bd0",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-7270e5bd0 (reviewer sub-agent of L); spot-checked: Read the item and sole new node in full. Stacks 0BN5, 0BND, 0BTV and 0BTX support the construction and descent hypotheses. Verified Frobenius signs, model independence, all-morphism naturality, conjugation, edge cases, duplicates and batch-5 restrictions. No long steps or repairs required. Detailed checks are in review.md."
  }
 }
