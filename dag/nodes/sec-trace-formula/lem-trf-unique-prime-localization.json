@@ -13,9 +13,75 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the finite-module hypothesis, the ring map $\\varphi:A\\to B$ is integral (every element of $B$ satisfies a monic polynomial over $A$). If $\\mathfrak q'\\subset B$ lies over a prime $\\mathfrak p'\\subseteq\\mathfrak p$, going-up produces a prime $\\mathfrak q''\\supseteq\\mathfrak q'$ lying over $\\mathfrak p$; the assumed uniqueness of the prime over $\\mathfrak p$ gives $\\mathfrak q''=\\mathfrak q$. Hence every prime of $B$ whose contraction is contained in $\\mathfrak p$ is contained in $\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "pqf-lem-going-up"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EA (lemma-unique-prime-over-localize-below), finite-map specialization of going-up case (1)+(2)(a)."
+   }
+  },
+  {
+   "text": "Let $\\lambda:B\\to S^{-1}B$ be the localization map at the image of $S=A\\setminus\\mathfrak p$, and let $\\mathfrak q_S=\\mathfrak q(S^{-1}B)$. The arbitrary-localization prime correspondence identifies the primes of $S^{-1}B$ with primes $\\mathfrak q'\\subset B$ disjoint from $\\varphi(S)$; their contractions $\\varphi^{-1}(\\mathfrak q')$ are contained in $\\mathfrak p$, so Step 1 gives $\\mathfrak q'\\subseteq\\mathfrak q$ and therefore every prime of $S^{-1}B$ is contained in $\\mathfrak q_S$. If an element outside $\\mathfrak q_S$ were not a unit, its principal ideal would lie in a maximal (hence prime) ideal, contradicting this containment. Thus every element outside $\\mathfrak q_S$ is already invertible in $S^{-1}B$, so $(S^{-1}B)_{\\mathfrak q_S}=S^{-1}B$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EA (lemma-unique-prime-over-localize-below), final paragraph, with the maximal-ideal argument expanded."
+   }
+  },
+  {
+   "text": "Apply the localization-at-a-prime clause of the arbitrary-localization node to $\\lambda$ and $\\mathfrak q_S$. It gives an isomorphism $B_{\\mathfrak q}\\xrightarrow{\\sim}(S^{-1}B)_{\\mathfrak q_S}$ sending $b/t$ to $\\lambda(b)/\\lambda(t)$. Using Step 2 to identify the target with $S^{-1}B$, its inverse is the canonical $B$-algebra map $S^{-1}B\\to B_{\\mathfrak q}$, $b/s\\mapsto b/\\varphi(s)$, and is therefore an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EA (lemma-unique-prime-over-localize-below), conclusion via the canonical localization maps."
+   }
+  },
+  {
+   "text": "Restrict $M$ along $\\varphi$ to an $A$-module. Apply localization commuting with tensor over the base with both rings equal to $A$, its module $A$, multiplicative subset $S$, and other module $M$. Using the elementary tensor unit $A\\otimes_A M\\cong M$ and tensor symmetry, this gives $M\\otimes_AA_{\\mathfrak p}\\cong S^{-1}M$, with map $m\\otimes(a/s)\\mapsto\\varphi(a)m/s$ (the unit map is $a\\otimes m\\mapsto\\varphi(a)m$, inverse $m\\mapsto1\\otimes m$). Next, in the $S^{-1}B$-module $S^{-1}M$, every $b\\notin\\mathfrak q$ acts invertibly by Step 3. Define $M_{\\mathfrak q}\\to S^{-1}M$ by $m/b\\mapsto (b/1)^{-1}(m/1)$. If $m/b=m^{\\prime}/b^{\\prime}$, some $t\\notin\\mathfrak q$ kills $b^{\\prime}m-bm^{\\prime}$, so the invertibility of $t,b,b^{\\prime}$ proves equality of the images. This is inverse to $S^{-1}M\\to M_{\\mathfrak q}$, $m/s\\mapsto m/\\varphi(s)$, by the same fraction relations. Thus the required module isomorphism follows.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization), followed by the elementary change of denominators from Tag 00EA."
+   }
+  },
+  {
+   "text": "Composing the two displayed maps sends $m\\otimes(a/s)$ to $\\varphi(a)m/\\varphi(s)$, exactly the map in the statement. Both maps respect the $A_{\\mathfrak p}$-action, and the fraction formulas commute with every $B$-linear map $M\\to M'$, proving $A_{\\mathfrak p}$-linearity and naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization), displayed fraction formula and its compatibility with module maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "pqf-lem-going-up",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00EA, using Tag 00DK for the module tensor consequence and the localization prime correspondence in the cited general localization lemma.",
+  "by": "document"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -137,10 +203,246 @@
    },
    "date": "2026-10-17",
    "verdict": "no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite ring map with unique prime over a base prime localization at the two primes are equal and module tensor localization",
+   "results": {
+    "t": "2026-10-17T22:21:06Z",
+    "tool": "leanfinder",
+    "query": "finite ring map with unique prime over a base prime localization at the two primes are equal and module tensor localization",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsDedekindDomain.primesOverEquivPrimesOver",
+     "instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl",
+     "IsLocalization.AtPrime.liesOver_map_of_liesOver",
+     "Algebra.QuasiFiniteAt.baseChange",
+     "instIsLocalHomAtPrimeRingHomAlgebraMap",
+     "IsLocalization.liesOver_of_isPrime_of_disjoint",
+     "TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway",
+     "Localization.AtPrime.instAlgebraOfLiesOver"
+    ],
+    "digest": "d4baa1903c0d6647"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.moduleTensorEquiv, Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime",
+   "results": {
+    "t": "2026-10-17T22:21:07Z",
+    "tool": "loogle",
+    "query": "IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.moduleTensorEquiv, Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_ideal_over_prime_of_isIntegral_of_isPrime|tensorProduct_isLocalizedModule|moduleTensorEquiv",
+   "results": {
+    "t": "2026-10-17T22:21:07Z",
+    "tool": "grep",
+    "query": "exists_ideal_over_prime_of_isIntegral_of_isPrime|tensorProduct_isLocalizedModule|moduleTensorEquiv",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Ideal/GoingUp.lean",
+     "Mathlib/RingTheory/Ideal/GoingUp.lean",
+     "Mathlib/RingTheory/Ideal/GoingUp.lean",
+     "Mathlib/RingTheory/Ideal/HasGoingUp.lean",
+     "Mathlib/RingTheory/Ideal/HasGoingUp.lean"
+    ],
+    "digest": "785d0a5b6d086529"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite algebra with one prime over p, localization away from p equals localization at q and every module tensor with A_p equals localization at q",
+   "results": {
+    "t": "2026-10-17T22:21:08Z",
+    "tool": "leansearch",
+    "query": "For a finite algebra with one prime over p, localization away from p equals localization at q and every module tensor with A_p equals localization at q",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocalization.tensorProduct_isLocalizedModule",
+     "AlgebraicGeometry.StructureSheaf.Localizations",
+     "ModuleCat.Tilde.Localizations",
+     "LocalizedModule.AtPrime",
+     "PrimeSpectrum.isLocalization_away_iff_atPrime_of_basicOpen_eq_singleton",
+     "IsLocalizedModule.AtPrime",
+     "Localization.AtPrime.congr_simp",
+     "IsLocalization.isLocalization_atPrime_localization_atPrime"
+    ],
+    "digest": "1e47a37ceba2b7e8"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary multiplicative subset S, S inverse tensor over A with an A module is the localized module",
+   "results": {
+    "t": "2026-10-17T22:21:11Z",
+    "tool": "leanfinder",
+    "query": "For an arbitrary multiplicative subset S, S inverse tensor over A with an A module is the localized module",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocalization.tensorProduct_isLocalizedModule",
+     "IsLocalizedModule.rTensor",
+     "IsLocalization.moduleLid",
+     "IsLocalization.moduleTensorEquiv",
+     "IsLocalizedModule.map_lTensor",
+     "IsLocalization.instIsLocalizedModuleTensorProductMap",
+     "IsLocalization.tensorRight",
+     "IsLocalization.tensor"
+    ],
+    "digest": "b5b1a63cbc460624"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.isBaseChange",
+   "results": {
+    "t": "2026-10-17T22:21:12Z",
+    "tool": "loogle",
+    "query": "IsLocalizedModule.isBaseChange",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "IsLocalizedModule.isBaseChange"
+    ],
+    "digest": "0dd9e7d117c2ccff"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule.isBaseChange|IsLocalization.tensorProduct_isLocalizedModule",
+   "results": {
+    "t": "2026-10-17T22:21:12Z",
+    "tool": "grep",
+    "query": "IsLocalizedModule.isBaseChange|IsLocalization.tensorProduct_isLocalizedModule",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/PicardGroup.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean"
+    ],
+    "digest": "83500522d73d7e32"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "module localization at an arbitrary multiplicative subset is tensor product with the localized ring",
+   "results": {
+    "t": "2026-10-17T22:21:23Z",
+    "tool": "leansearch",
+    "query": "module localization at an arbitrary multiplicative subset is tensor product with the localized ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocalization.tensorProduct_isLocalizedModule",
+     "IsLocalization.moduleLid",
+     "localizedModuleIsLocalizedModule",
+     "LocalizedModule.Away",
+     "IsLocalization.tensorProduct_tensorProduct",
+     "isLocalizedModule_iff_isBaseChange",
+     "IsLocalizedModule.mk",
+     "IsLocalization.mk'_tmul"
+    ],
+    "digest": "fa68199ebbe9d857"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.tensorProduct_isLocalizedModule",
+   "results": {
+    "t": "2026-10-17T22:21:23Z",
+    "tool": "loogle",
+    "query": "IsLocalization.tensorProduct_isLocalizedModule",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "IsLocalization.tensorProduct_isLocalizedModule"
+    ],
+    "digest": "eb62773ea8840ec7"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct_isLocalizedModule|IsLocalizedModule.isBaseChange",
+   "results": {
+    "t": "2026-10-17T22:21:23Z",
+    "tool": "grep",
+    "query": "tensorProduct_isLocalizedModule|IsLocalizedModule.isBaseChange",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/PicardGroup.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean"
+    ],
+    "digest": "0f5a8b848afecd40"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match for the full finite-algebra unique-prime ring and module statement; the module-localization hits are used through an existing DAG node"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-singleton-fibre-localization",
@@ -162,5 +464,50 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-unique-prime-localization",
+  "worker": "Q79",
+  "summary": "Split the finite-algebra unique-prime localization statement into the integral/going-up argument, arbitrary-localization prime comparison, and module tensor localization consequence. All inputs already exist in the DAG; no new node is needed.",
+  "blueprint": "The item realizes the affine algebra input at the unique point of the finite fibre in the Tag 057U branch of the current blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "The existing Mathlib leaf supplies finite module implies integral."
+   },
+   {
+    "node": "pqf-lem-going-up",
+    "why": "The existing Mathlib leaf supplies going-up for integral maps."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Its arbitrary-localization prime correspondence and localization-at-the-contracted-prime clause are the generic ring input used in Tag 00EA."
+   },
+   {
+    "node": "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "why": "Its maximal-ideal existence clause justifies that an element outside every prime is a unit."
+   },
+   {
+    "node": "lem-weil-pbc-localization-tensor-over-base",
+    "why": "Specialize its arbitrary-localization tensor formula to the regular module A and the module M; tensor unit and symmetry give scalar localization."
+   }
+  ],
+  "statement_change": "None; the imported statement and all hypotheses were retained verbatim."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "pqf-lem-going-up",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q79-afde2b7b3",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q79-afde2b7b3 (reviewer sub-agent of L); spot-checked: Read the item, packet, stage guidance, unit route, Tag 00EA and 00DK sources, and every cited node statement. The five proof steps correctly establish integrality/going-up, localized prime containment, the canonical ring isomorphism, the module tensor isomorphism, and linear naturality. Hypotheses and edge cases were checked; no duplicates, route-pivot violations, long hidden arguments, SGA citations, or repairs found. Review written to review.md."
  }
 }

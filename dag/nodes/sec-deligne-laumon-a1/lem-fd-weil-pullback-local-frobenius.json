@@ -10,11 +10,125 @@
  "stmt_deps": [
   "def-weil-weil-sheaf-complex",
   "def-weil-derived-pullback-tensor-hom",
-  "def-weil-local-frobenius-trace"
+  "def-weil-local-frobenius-trace",
+  "def-weil-constructible-heart"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-a1-constructible-pullback-t-exact] with $h=f$ and $\\Lambda=\\Qlb$. Its categories, standard heart and derived pullback are precisely those in the item, so $Lf^*\\mathcal F$ lies in the constructible heart. The same statement applies at every finite coefficient-field stage and to geometric-point pullbacks. The canonical comparison $\\beta_1:Lg_X^*Lf^*\\xrightarrow{\\sim}Lf^*Lg_Y^*$ comes from $fg_X=g_Yf$ and the composition isomorphisms of [lem-trf-integral-pullback-comparison-realization], rationalized and used stagewise as in [def-weil-derived-pullback-tensor-hom]. Thus the induced Weil structure is $\\theta_X=Lf^*(\\theta_Y)\\beta_1$; it is an isomorphism, so this heart object is a Weil sheaf.",
+   "uses": [
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: rational pullback and the residue-degree Frobenius formula"
+   }
+  },
+  {
+   "text": "Let $z$ be closed and put $x=f_0(z)$. By [lem-kun-closed-point-field](a), $\\kappa(z)$ is finite over $k_0$. The scheme morphism gives a $k_0$-embedding $\\kappa(x)\\hookrightarrow\\kappa(z)$, so $\\kappa(x)$ is also finite over $k_0$. The converse in that same criterion makes $x$ closed. Set $d=[\\kappa(x):k_0]\\geq1$ and $e=[\\kappa(z):\\kappa(x)]\\geq1$. A basis in each field extension gives $[\\kappa(z):k_0]=de$, and counting coordinate tuples in a basis gives $q_z=q^{de}=(q^d)^e=q_x^e$.",
+   "uses": [
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: rational pullback and the residue-degree Frobenius formula"
+   }
+  },
+  {
+   "text": "Work over one finite coefficient field $E$ defining $M=\\operatorname{For}\\mathcal F$, its Weil isomorphism $\\theta$ and its inverse. Such a stage exists: represent these finitely many arrows in the Hom colimits of [def-weil-algebraically-closed-coefficients], then enlarge until both inverse equations hold. Choose compatible points $\\bar z:s\\to X$ and $\\bar x=f\\bar z:s\\to Y$. Write $J_z=\\operatorname{Fib}_sL\\bar z^*$ and $J_x=\\operatorname{Fib}_sL\\bar x^*$. The inverse of the composition isomorphism $L(f\\bar z)^*\\xrightarrow{\\sim}L\\bar z^*Lf^*$, followed by $\\operatorname{Fib}_s$, is a natural isomorphism $c_M:J_zLf^*M\\xrightarrow{\\sim}J_xM$. Use the canonical families of [lem-trf-integral-pullback-comparison-realization]: they are defined for all derived-complete constructible objects without a finite Tor-amplitude condition, give composition isomorphisms after rationalization, and commute with scalar comparisons. Applying also [lem-weil-point-sections-scalar-extension] shows that $c_M$ commutes with finite coefficient extension, including its identity and tower identifications. Thus $c_M$ defines a natural $\\Qlb$-linear comparison on the common-stage category. Its degree-zero map is the desired stalk isomorphism.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: rational pullback and the residue-degree Frobenius formula"
+   }
+  },
+  {
+   "text": "Here is the Frobenius compatibility of this comparison at stage $E$. Put $G_Y=Lg_Y^*$ and $G_X=Lg_X^*$. For $n$ divisible by $de$, both points return: $g_X^n\\bar z=\\bar z g_s^n$ and $g_Y^n\\bar x=\\bar x g_s^n$. Let $t^X_{n,N}:J_zN\\to J_zG_X^nN$ and $t^Y_{n,M}:J_xM\\to J_xG_Y^nM$ be the point transports of [lem-trf-local-frobenius-transport-normalization]. Let $\\beta_n:G_X^nLf^*\\to Lf^*G_Y^n$ be the comparison from $fg_X^n=g_Y^nf$. Naturality of the iterated point transport applied to $L\\bar z^*Lf^*M\\cong L\\bar x^*M$, followed by the associative composition identifications, gives\n$$c_{G_Y^nM}\\,J_z(\\beta_n)\\,t^X_{n,Lf^*M}=t^Y_{n,M}\\,c_M.$$\nThe naturality used here is [lem-weil-frobenius-point-transport-natural](2), iterated $n$ times; the two rebracketings agree by [lem-trf-integral-pullback-comparison-realization]. This constructs the equation in the rational category itself, rather than importing a finite-ring stalk equation.",
+   "uses": [
+    "lem-trf-local-frobenius-transport-normalization",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: rational pullback and the residue-degree Frobenius formula"
+   }
+  },
+  {
+   "text": "The induced iterated Weil structure is $\\theta_X^{[n]}=Lf^*(\\theta_Y^{[n]})\\beta_n$: induct on $n$, substituting $\\theta_X=Lf^*(\\theta_Y)\\beta_1$ and using naturality and associativity of the composition comparisons in [lem-trf-integral-pullback-comparison-realization]. For $n=de$, the preceding equation and naturality of $c$ for $\\theta_Y^{[n]}$ therefore give\n$$\\begin{aligned}\nc_MJ_z(\\theta_X^{[n]})t^X_{n,Lf^*M}\n&=J_x(\\theta_Y^{[n]})c_{G_Y^nM}J_z(\\beta_n)t^X_{n,Lf^*M}\\\\\n&=J_x(\\theta_Y^{[n]})t^Y_{n,M}c_M.\n\\end{aligned}$$\nBy [def-weil-local-frobenius-trace], the left operator is $c_MF_z$ and the right one is the $q^{de}$-return operator at $x$, followed by $c_M$.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: rational pullback and the residue-degree Frobenius formula"
+   }
+  },
+  {
+   "text": "To identify that return operator, keep the point $\\bar x$ fixed and put $J=J_x$, $G=G_Y$, $A=\\theta_Y^{[d]}:G^dM\\to M$, and $t_{rd,N}=t^Y_{rd,N}$. Splitting the defining list of $(r+1)d$ point transports after the first $rd$ entries gives\n$$t_{(r+1)d,N}=t_{d,G^{rd}N}\\,t_{rd,N}.$$\nThis equality uses the same return $g_Y^d\\bar x=\\bar xg_s^d$ and associative comparisons of [lem-trf-integral-pullback-comparison-realization]. Naturality of the $d$-fold transport [lem-weil-frobenius-point-transport-natural] gives $JG^d(\\theta^{[rd]})t_{d,G^{rd}M}=t_{d,M}J(\\theta^{[rd]})$. Since the definition of iterated Weil structure gives $\\theta^{[(r+1)d]}=A\\,G^d(\\theta^{[rd]})$, we obtain\n$$J(\\theta^{[(r+1)d]})t_{(r+1)d,M}=(J(A)t_{d,M})(J(\\theta^{[rd]})t_{rd,M}).$$\nStarting with $r=1$, induction shows that the $ed$-return operator is $(J(A)t_{d,M})^e=F_x^e$, with exactly the geometric-Frobenius convention of [def-weil-local-frobenius-trace].",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: rational pullback and the residue-degree Frobenius formula"
+   }
+  },
+  {
+   "text": "The equality just proved is compatible with change of the finite field $E$. Indeed the scalar/composition equation of [lem-trf-integral-pullback-comparison-realization] identifies the two scalar extensions of $c$ and $\\beta_n$; the explicit scalar equation in [lem-trf-local-frobenius-transport-normalization] identifies those of $t_{n,M}$; and naturality identifies those of $\\theta^{[n]}$. Consequently extension to any common larger field sends every factor in the displayed equations to its corresponding factor. With [lem-weil-point-sections-scalar-extension] these give the same $\\Qlb$-linear equation on the common-stage fibres, independently of representatives:\n$$c_{f,z}F_{z,f^*\\mathcal F}=F_{x,\\mathcal F}^{e}c_{f,z}.$$\nTaking degree-zero cohomology is legitimate by the point-fibre clause of [lem-a1-constructible-pullback-t-exact].",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-a1-constructible-pullback-t-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: rational pullback and the residue-degree Frobenius formula"
+   }
+  },
+  {
+   "text": "The two endomorphisms are conjugate after replacing $F_x$ by $F_x^e$. Over the algebraically closed coefficient field choose an upper triangular matrix for $F_x$. Its diagonal lists its eigenvalues with algebraic multiplicity; the diagonal of its $e$-th power lists their $e$-th powers, with repetitions retained even when distinct eigenvalues acquire the same power. Conjugation preserves the characteristic polynomial, proving the asserted multiset formula. The empty diagonal covers the zero sheaf.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2: rational pullback and the residue-degree Frobenius formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-local-frobenius-trace",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-kun-closed-point-field",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-local-frobenius-transport-normalization",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+  "place": "Step 2, expanded using rational composition and point-transport interfaces; compare Deligne Weil II (1.1.7)-(1.1.10), pp. 150-151"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +164,24 @@
    "results": "AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint; isConj_arithFrobAt; AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor; arithFrobAt; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; IsArithFrobAt.arithFrobAt; AlgebraicGeometry.Scheme.Pullback.ofPointTensor",
    "date": "2026-10-18",
    "verdict": "no match: the hits do not state the Qbar_l Weil-sheaf assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism over a finite field pulls back constructible Qbar ell Weil sheaves and the stalk Frobenius is conjugate to a power at the image point",
+   "results": "TopCat.Presheaf.stalkPullbackHom; FiniteField.Extension.frob; AlgebraicGeometry.Scheme.Hom.fiber; AlgebraicGeometry.Scheme.Hom.stalkMap; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; FiniteField.frobeniusAlgHom_apply; CategoryTheory.GrothendieckTopology.overMapPullback; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state rational/common-stage Weil-sheaf pullback and local Frobenius functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent pullback of constructible rational Weil sheaves identifies stalks and local geometric Frobenius with the residue degree power",
+   "results": "AlgebraicGeometry.Scheme.Pullback.ofPointTensor; AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint; AlgebraicGeometry.Scheme.residue_residueFieldMap; AlgebraicGeometry.Scheme.residue_residueFieldCongr; AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc; AlgebraicGeometry.Scheme.residue_residueFieldMap_assoc; AlgebraicGeometry.Scheme.evaluation_naturality_apply; AlgebraicGeometry.LocallyRingedSpace.residue_comp_residueFieldMap_eq_stalkMap_comp_residue",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state rational/common-stage Weil-sheaf pullback and local Frobenius functoriality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-realified-kernel-real",
@@ -65,7 +193,7 @@
  "blueprint": {
   "from": {
    "node": "lem-fd-realified-kernel-real",
-   "place": "Proof Step 2: pullback along p_1 raises the local Frobenius to the residue-field degree power; also Step 1, pullback of the Artin–Schreier sheaf along the pairing.",
+   "place": "Proof Step 2: pullback along p_1 raises local Frobenius to the residue-field degree power; the same comparison for an arbitrary morphism gives the rational input.",
    "via": []
   },
   "same_as": [],
@@ -79,5 +207,54 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-weil-pullback-local-frobenius",
+  "worker": "stage1",
+  "summary": "Repair of C3/C4/E6: cite rational pullback t-exactness, construct the stalk comparison from coherent rationalized composition, and derive the Frobenius functoriality and power recurrence explicitly. Scalar-extension and common-stage compatibility are cited at each relevant map; no finite-ring assertion is applied directly to rational coefficients. No new nodes.",
+  "blueprint": "Realizes Step 2 of lem-fd-realified-kernel-real, the rational morphism-functorial justification of the eigenvalues alpha^e. No change to the Fourier or purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-constructible-pullback-t-exact",
+    "why": "Generic rational/common-stage pullback t-exactness and degree-zero point fibres; a coefficient-category tool, not a replacement of the Fourier argument."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic finite-type closed-point residue-field criterion, needed to determine the positive degree of the point extension."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Generic coherent rationalized composition and scalar-extension comparisons, needed to construct the rational stalk isomorphism and its compatibility with the Frobenius square."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Point-fibre scalar extension with identity and tower compatibility, needed to pass the rational comparison to the common-stage fibres."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality of point transport at integral, rational and common-stage coefficients; needed to prove, rather than assume, the Frobenius intertwining."
+   },
+   {
+    "node": "lem-trf-local-frobenius-transport-normalization",
+    "why": "Normalized rational local point transports and their scalar-extension equation with no finite Tor hypothesis; used as a coefficient tool for the local Frobenius operators."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-kun-closed-point-field",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-trf-local-frobenius-transport-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q98-d93b87b11",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q98-d93b87b11 (reviewer sub-agent of L); spot-checked: Read the required guidance, packet, report, item, unit, chapter, blueprint source, Deligne source, and every cited node. Verified all eight proof steps, coefficient-category coherence, residue-degree Frobenius calculation, edge cases, route-pivot and SGA restrictions, and absence of duplicate/new nodes. Independent review written to review.md."
  }
 }
