@@ -5,6 +5,7 @@ Usage:
   tools/claim.py next <group> [--count N] [--stage S]   claim up to N items from the head of coord/queue.tsv, of stage S only
                                                if given; prints one item per line (a module, or a DAG node in stages 1 and 2)
   tools/claim.py take <group> <module>         claim a given module (also before changing someone else's statement)
+  tools/claim.py take-many <g1> <m1> <g2> <m2> ...   take for many pairs; one line per pair: OK|NO, group, item[, reason]
   tools/claim.py renew <group> <module>        keep a claim alive during long work
   tools/claim.py done <group> <module> <note>  delivered; if the module still has `sorry`, it goes back to the queue
   tools/claim.py release <group> <module> <reason>   give the item back, stuck or abandoned
@@ -165,6 +166,43 @@ def take(who, m, quiet=False) -> bool:
         r = read(m) or {}
         print(f"taken by {r.get('who', '?')} since {r.get('since', '?')}")
     return False
+
+
+
+def take_many(pairs):
+    """`take` for many (group, item) pairs in one call (launcher, 2026-10-17: the dispatcher claimed one item per ssh
+    call, about 12 starts a minute). Prints one line per pair, `OK<TAB>group<TAB>item` or `NO<TAB>group<TAB>item<TAB>reason`,
+    and returns. The repair handoffs written meanwhile are committed afterwards in one bookkeeping commit by a detached
+    child, so a busy coord/.merge.lock no longer delays the answer."""
+    import contextlib, io
+    deferred, msgs = [], []
+    real = globals().get("commit_bookkeeping")
+    if real is not None:
+        globals()["commit_bookkeeping"] = lambda paths, msg: (deferred.extend(paths), msgs.append(msg))
+    try:
+        for who, m in pairs:
+            buf = io.StringIO()
+            try:
+                with contextlib.redirect_stdout(buf):
+                    ok = take(who, m)
+            except Exception as e:   # one bad pair never costs the others their answer
+                ok = False; buf.write(f"error: {e!r}")
+            reason = " ".join(buf.getvalue().split())
+            print(f"OK\t{who}\t{m}" if ok else f"NO\t{who}\t{m}\t{reason[:300]}")
+    finally:
+        if real is not None:
+            globals()["commit_bookkeeping"] = real
+    sys.stdout.flush()
+    if real is not None and deferred:
+        if os.fork() == 0:
+            try:
+                os.setsid()
+                fd = os.open(os.devnull, os.O_RDWR)
+                for k in (0, 1, 2): os.dup2(fd, k)
+                real(list(dict.fromkeys(deferred)), "repair handoffs (take-many): " + "; ".join(x.split(": ", 1)[-1] for x in msgs)[:400])
+            finally:
+                os._exit(0)
+    return 0
 
 
 def queue_stage(m: str):
@@ -352,6 +390,9 @@ def main() -> int:
                 got += 1
         if got == 0:
             print("nothing to claim" if n > 0 else f"{who} already holds {LIMIT} claims")
+    elif cmd == "take-many":
+        rest = a[1:]
+        return take_many(list(zip(rest[0::2], rest[1::2])))
     elif cmd == "take":
         return 0 if take(a[1], a[2]) else 1
     elif cmd == "renew":
