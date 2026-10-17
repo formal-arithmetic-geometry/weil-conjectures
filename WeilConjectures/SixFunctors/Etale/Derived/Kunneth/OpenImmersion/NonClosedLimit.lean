@@ -359,7 +359,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
     · rw [Category.assoc, Category.assoc, heD₁ k]
       simp [cT, cY]
     · rw [Category.assoc, Category.assoc, heD₂ k]
-      simp [cT, cY, cX, pD, hD]
+      simp only [cT, cY, cX, pD, hD, constPullbackCone_π_app_snd,
+        constPullbackCone_π_app_snd_assoc, sq.w_assoc]
   · exact (constPullbackCone_π_app_snd U₀.ι (pD ≫ w') cX (e ≫ uU) h hwX hYpb.w k).symm
   · have : LocallyOfFiniteType (qD'.app k) :=
       inferInstanceAs (LocallyOfFiniteType (qD.app k.left))

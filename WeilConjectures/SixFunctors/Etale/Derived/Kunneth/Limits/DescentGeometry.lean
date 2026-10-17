@@ -132,7 +132,7 @@ lemma exists_etale_hom_descent_of_isLimit [∀ i, CompactSpace (D.obj i)] {Ω : 
     H'.isoPullback.inv ≫ W'.ι, by simp, ?_, ?_, ?_, ?_⟩
   · rw [Category.assoc]
     erw [pullback.lift_fst]
-    rw [reassoc_of% hL, reassoc_of% hw'ι]
+    rw [hL, reassoc_of% hw'ι]
   · rw [Category.assoc, H'.isoPullback_inv_snd]
   · have e : pullback.lift (w' ≫ L) x hv' = w' ≫ H'.isoPullback.hom := by
       apply pullback.hom_ext

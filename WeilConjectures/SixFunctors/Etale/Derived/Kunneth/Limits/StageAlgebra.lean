@@ -79,6 +79,109 @@ lemma transition_apply_inv (q : ℤ) (x : B)
   rw [transition_apply_comp Λ q x K φ ψ _ h, transition_id]
   rfl
 
+section MapW
+
+variable {W' : Scheme.{u}} (v : W' ⟶ W)
+
+/-- Change of the scheme of coefficients: the stage `(T, S, g, π, w ≫ v)`. -/
+abbrev mapW (α : LimitStage B W') : LimitStage B W := ⟨α.T, α.S, α.g, α.π, α.w ≫ v⟩
+
+/-- Change of the scheme of coefficients for morphisms of stages. -/
+abbrev Hom.mapW {α β : LimitStage B W'} (φ : Hom α β) : Hom (α.mapW v) (β.mapW v) :=
+  ⟨φ.t, φ.s, φ.wg, φ.wπ, by rw [← Category.assoc, φ.ww]⟩
+
+/-- `π^* Rg_* (w ≫ v)^* K ≅ π^* Rg_* w^* (v^* K)`. -/
+noncomputable def mapWIso (α : LimitStage B W')
+    (K : DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (functor Λ (α.mapW v)).obj K ≅ (functor Λ α).obj (D+((v)^*[ModuleCat.{u + 1} Λ]).obj K) :=
+  D+((α.π)^*[ModuleCat.{u + 1} Λ]).mapIso (R+((α.g)_*[ModuleCat.{u + 1} Λ]).mapIso
+    ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.w v (α.w ≫ v) rfl).app K))
+
+lemma transition_mapW {α β : LimitStage B W'} (φ : Hom α β)
+    (K : DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (transition Λ (φ.mapW v)).app K ≫ (mapWIso Λ v α K).hom =
+      (mapWIso Λ v β K).hom ≫ (transition Λ φ).app (D+((v)^*[ModuleCat.{u + 1} Λ]).obj K) := by
+  have hA := NatTrans.congr_app (Etale.upperStarCompDerivedPlus_assoc (ModuleCat.{u + 1} Λ)
+    φ.t β.w v α.w (β.w ≫ v) (α.w ≫ v) φ.ww.symm rfl rfl) K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at hA
+  have h3 : (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t (β.w ≫ v) (α.w ≫ v)
+        (φ.mapW v).ww.symm).inv.app K ≫
+      (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.w v (α.w ≫ v) rfl).hom.app K =
+      D+((φ.t)^*[ModuleCat.{u + 1} Λ]).map
+          ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) β.w v (β.w ≫ v) rfl).hom.app K) ≫
+        (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv.app
+          (D+((v)^*[ModuleCat.{u + 1} Λ]).obj K) := by
+    rw [← cancel_epi ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t (β.w ≫ v) (α.w ≫ v)
+      (φ.mapW v).ww.symm).hom.app K), Iso.hom_inv_id_app_assoc, reassoc_of% hA,
+      Iso.hom_inv_id_app, Category.comp_id]
+  have n1 := (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom.naturality
+    (R+((β.g)_*[ModuleCat.{u + 1} Λ]).map
+      ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) β.w v (β.w ≫ v) rfl).hom.app K))
+  have n2 := congrArg D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
+    ((Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩).naturality
+      ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) β.w v (β.w ≫ v) rfl).hom.app K))
+  have n3 := congrArg (fun x ↦ D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
+    (R+((α.g)_*[ModuleCat.{u + 1} Λ]).map x)) h3
+  simp only [Functor.comp_map, Functor.map_comp] at n1 n2 n3
+  simp only [transition_app, mapWIso, Functor.mapIso_hom, Iso.app_hom, Functor.map_comp,
+    Category.assoc]
+  rw [reassoc_of% n1, reassoc_of% n2, n3]
+
+end MapW
+
 end LimitStage
+
+namespace LimitStageSystem
+
+variable {B W : Scheme.{u}} {I : Type u} [Category.{u} I]
+
+variable {Λ}
+
+/-- Being a stalkwise colimit only depends on the complex up to isomorphism. -/
+lemma isStalkColimit_of_iso (𝒮 : LimitStageSystem B W I)
+    {K K' : DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (e : K ≅ K')
+    {q : ℤ} (h : 𝒮.IsStalkColimit Λ K' q) : 𝒮.IsStalkColimit Λ K q := fun x ↦
+  ModuleCat.IsElementwiseColimit.of_iso
+    (fun i ↦ (stalkHomology Λ q x).mapIso ((LimitStage.functor Λ (𝒮.obj i)).mapIso e))
+    ((stalkHomology Λ q x).mapIso ((LimitStage.functor Λ 𝒮.pt).mapIso e))
+    (fun i ↦ by
+      simp only [Functor.mapIso_hom, ← Functor.map_comp]
+      rw [(LimitStage.transition Λ (𝒮.π i)).naturality])
+    (fun f ↦ by
+      simp only [Functor.mapIso_hom, ← Functor.map_comp]
+      rw [(LimitStage.transition Λ (𝒮.map f)).naturality])
+    (h x)
+
+variable {W' : Scheme.{u}} (v : W' ⟶ W)
+
+/-- Change of the scheme of coefficients of a system of stages along `v : W' ⟶ W`. -/
+@[simps]
+def mapW (𝒮 : LimitStageSystem B W' I) : LimitStageSystem B W I where
+  obj i := (𝒮.obj i).mapW v
+  map f := (𝒮.map f).mapW v
+  map_id i := LimitStage.Hom.ext (by rw [𝒮.map_id]) (by rw [𝒮.map_id])
+  map_comp f g := LimitStage.Hom.ext (by rw [𝒮.map_comp]) (by rw [𝒮.map_comp])
+  pt := 𝒮.pt.mapW v
+  π i := (𝒮.π i).mapW v
+  w f := LimitStage.Hom.ext (by rw [← 𝒮.w f]) (by rw [← 𝒮.w f])
+
+/-- A system is a stalkwise colimit at `K` after change of coefficients along `v` as soon as it
+is one at `v^* K` before. -/
+lemma isStalkColimit_mapW (𝒮 : LimitStageSystem B W' I)
+    {K : DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))} {q : ℤ}
+    (h : 𝒮.IsStalkColimit Λ (D+((v)^*[ModuleCat.{u + 1} Λ]).obj K) q) :
+    (𝒮.mapW v).IsStalkColimit Λ K q := fun x ↦
+  ModuleCat.IsElementwiseColimit.of_iso
+    (fun i ↦ (stalkHomology Λ q x).mapIso (LimitStage.mapWIso Λ v (𝒮.obj i) K))
+    ((stalkHomology Λ q x).mapIso (LimitStage.mapWIso Λ v 𝒮.pt K))
+    (fun i ↦ by
+      simp only [Functor.mapIso_hom, ← Functor.map_comp, mapW_obj, mapW_pt, mapW_π]
+      rw [LimitStage.transition_mapW])
+    (fun f ↦ by
+      simp only [Functor.mapIso_hom, ← Functor.map_comp, mapW_obj, mapW_map]
+      rw [LimitStage.transition_mapW])
+    (h x)
+
+end LimitStageSystem
 
 end AlgebraicGeometry.Etale

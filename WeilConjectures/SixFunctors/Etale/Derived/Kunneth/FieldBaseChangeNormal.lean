@@ -328,12 +328,12 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
         (Scheme.ΓSpecIso (.of K)).inv ≫ s.appTop := rfl
     rw [this, Spec.map_comp, ← Scheme.toSpecΓ_naturality_assoc, toSpecΓ_SpecMap_ΓSpecIso_inv,
       Category.comp_id]
-  have hs (i) : cS.π.app i ≫ w.app i = s := by
+  have hs (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : cS.π.app i ≫ w.app i = s := by
     rw [← hsK]
     dsimp [cS, w]
     rw [Category.assoc, ← Spec.map_comp]
     rfl
-  have ht (i) : t ≫ cS.π.app i = cT.π.app i ≫ g.app i := by
+  have ht (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : t ≫ cS.π.app i = cT.π.app i ≫ g.app i := by
     dsimp [cS, cT, g]
     rw [Scheme.toSpecΓ_naturality_assoc, Category.assoc, ← Spec.map_comp, ← Spec.map_comp]
     rfl
@@ -343,9 +343,12 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
     (Subalgebra.fg_iff_finiteType _).1 ⟨r i ∪ (l i).image φ, by simp [FC]⟩
   have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (w.app i) :=
     HasRingHomProperty.Spec_iff.2 (RingHom.finiteType_algebraMap.2 (hfinB i.unop))
-  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : QuasiCompact (w.app i) := inferInstanceAs (QuasiCompact (Spec.map _))
-  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : IsSeparated (g.app i) := inferInstanceAs (IsSeparated (Spec.map _))
-  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : QuasiCompact (g.app i) := inferInstanceAs (QuasiCompact (Spec.map _))
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : QuasiCompact (w.app i) :=
+    inferInstanceAs (QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap K (FB i.unop)))))
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : IsSeparated (g.app i) :=
+    inferInstanceAs (IsSeparated (Spec.map (ψ.app i.unop)))
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : QuasiCompact (g.app i) :=
+    inferInstanceAs (QuasiCompact (Spec.map (ψ.app i.unop)))
   have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (g.app i) :=
     HasRingHomProperty.Spec_iff.2 (RingHom.FiniteType.of_comp_finiteType
       (f := algebraMap K (FB i.unop)) (RingHom.finiteType_algebraMap.2 (hfinC i.unop)))

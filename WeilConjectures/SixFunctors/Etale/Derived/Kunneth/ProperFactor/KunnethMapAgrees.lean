@@ -164,16 +164,15 @@ lemma tensorBaseChangeMap_eq_projectionMap (q : W ⟶ X) (r : W ⟶ Y) (aX : X �
     map_rightDerivedLowerStarProjectionMap_comp_counit'_assoc,
     leftDerivedUpperStar_map_braiding_hom_comp_tensorComparison_assoc,
     leftDerivedUpperStarTensorComparison_naturality_right_assoc]
-  done
   congr 1
   simp only [derivedTensor, curriedTensor_map_app, curriedTensor_obj_map]
-  rw [← BraidedCategory.braiding_naturality_right_assoc, Iso.hom_inv_id, Category.comp_id,
-    ← MonoidalCategory.whiskerLeft_comp, derivedUpperStar_map_derivedBaseChangeMap_app_counit,
-    derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
-    leftDerivedUpperStarComp_inv_app_comp_hom_app_congr_assoc A q aX r aY (r ≫ aY) (q ≫ aX)]
-  · rfl
-  · rfl
-  · exact w.symm
+  rw [← BraidedCategory.braiding_naturality_right_assoc, Iso.hom_inv_id, Category.comp_id]
+  simp only [← MonoidalCategory.whiskerLeft_comp]
+  congr 1
+  rw [derivedUpperStar_map_derivedBaseChangeMap_app_counit, derivedSquareUpperStarIso,
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+    ← leftDerivedUpperStarComp_inv_app_comp_hom_app_congr_assoc A q aX r aY (q ≫ aX) (r ≫ aY)
+      rfl w w.symm rfl]
 
 /-- Blueprint `lem-kun-kunneth-map-agrees`: the Künneth map is the composite of the canonical
 maps.

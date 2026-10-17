@@ -87,10 +87,10 @@ lemma SpecPointedEtaleNeighborhood.exists_range_subset (N₁ N₂ : SpecPointedE
   exact ⟨N₃, (h N₁).trans ((range_colimit_ι_subset (IsCofiltered.minToLeft _ _)).trans hN₃),
     (h N₂).trans ((range_colimit_ι_subset (IsCofiltered.minToRight _ _)).trans hN₃)⟩
 
+omit [IsSepClosed Ω] in
 /-- If the geometric point `s` of a scheme `S` locally of finite type over a field `K` lies over
 a non-closed point, then some pointed étale neighbourhood `Spec R` of `s` has a function `c ∈ R`
 whose value at `s` is transcendental over `K`. -/
-omit [IsSepClosed Ω] in
 lemma exists_transcendental_pt {K : Type u} [Field K] (aS : S ⟶ Spec (.of K))
     [LocallyOfFiniteType aS] (hs : ¬ IsClosed {s (IsLocalRing.closedPoint Ω)}) :
     letI : Algebra K Ω := (Spec.preimage (s ≫ aS)).hom.toAlgebra
