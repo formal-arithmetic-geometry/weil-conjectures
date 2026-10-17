@@ -251,5 +251,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoreKanFibration",
+  "declaration": "SSet.Enhanced.core_kan_fibration",
+  "declarations": [
+   "SSet.Enhanced.coreMap_is_kan_fibration",
+   "SSet.Enhanced.core_eq_top_of_kanComplex",
+   "SSet.Enhanced.core_kan_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoreKanFibration.lean",
+  "statement": "theorem core_kan_fibration : (∀ {C D : SSet.{u}} (p : C ⟶ D) (hp : IsIsofibration p), modelCategoryQuillen.J.rlp (coreMap p)) ∧ (∀ {K : SSet.{u}} [KanComplex K], core K = ⊤)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair: SSet.Enhanced.coreMap is reused from Sheaf.CategoryTheory.IsofibrationPullbackLimit, which already declares the canonical restriction for every simplicial map. This module states only the two source conclusions and does not redeclare coreMap or a redundant range helper."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e7b07870",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Checked every clause against the node and Kerodon 01EZ/019D: IsIsofibration is the node's source-prescribed definition (quasicategories, inner fibration, equivalence-edge lifting with strict image); coreMap is the existing canonical restriction (Subcomplex.lift); J.rlp is exactly the horns with n>=1, 0<=i<=n; core K = ⊤ is equivalent to every edge being an equivalence and K^≃=K. One free universe u, no extra hypotheses, empty/Δ⁰/identity cases allowed. No new definitions, the earlier duplicate coreMap is removed, all three proofs are sorry-only, docstrings give source and blueprint, lines are at most 84 characters, the three proof-dependency modules are imported plainly, only the lean field changed, lean.statement matches the file, and the report has both sections. Per-file nt_compile.py --json was clean (rc=0, no messages; an injected error was caught). Observation, not a fault: the module imports the modules of two citers that list it in proof_deps, so they cannot import it in stage 3; add_proof_imports.py documents this case."
  }
 }

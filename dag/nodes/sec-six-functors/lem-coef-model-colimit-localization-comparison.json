@@ -26,7 +26,8 @@
   "place": "Section 2.3, projective diagram model structures and Example 2.3.21; Section 7.9, Theorem 7.9.8 and Remark 7.9.10, with the dual colimit statements. No Stacks tag states this coherent-localization comparison."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -255,5 +256,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModelColimitLocalizationComparison",
+  "declaration": "HomotopicalAlgebra.modelColimitLocalizationComparison",
+  "file": "lean/Sheaf/CategoryTheory/ModelColimitLocalizationComparison.lean",
+  "statement": "theorem modelColimitLocalizationComparison {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] (hM : CombinatorialModelCategory.{u, v, w} M) : ∃ (C : SSet.{max u v t}) (q : FiniteReedy.largeNerve.{u, v, max u v t} M ⟶ C), FiniteReedy.IsLocalization.{u, v, max u v t} (weakEquivalences M) q ∧ (∀ (I : Type v) [SmallCategory I], ∃ S : ModelCategory (I ⥤ M), S.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences M).functorCategory I ∧ S.categoryWithFibrations.fibrations = (fibrations M).functorCategory I) ∧ (∀ (I : Type v) [SmallCategory I] (S : ModelCategory (I ⥤ M)) (D Q : I ⥤ M) (a : Q ⟶ D) (c : Cocone Q), S.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences M).functorCategory I → S.categoryWithFibrations.fibrations = (fibrations M).functorCategory I → S.categoryWithCofibrations.cofibrations (initial.to Q) → (∀ i : I, (weakEquivalences M) (a.app i)) → IsColimit c → ∃ e : ((ihom (FiniteReedy.largeNerve.{v, v, max u v t} I)).obj C) _⦋1⦌, FiniteReedy.IsColimitEdge (FiniteReedy.diagram.{u, v, v, v, max u v t} q D) (FiniteReedy.object.{u, v, max u v t} q c.pt) e ∧ FiniteReedy.Composes (FiniteReedy.transformation.{u, v, v, v, max u v t} q a) e (FiniteReedy.transformation.{u, v, v, v, max u v t} q c.ι)) ∧ (∀ (A B X : M) (i : A ⟶ B) (j : A ⟶ X) (s : Cocone (span i j)), (∃ Q : WalkingSpan ⥤ M, ∃ a : Q ⟶ span i j, ∃ S : ModelCategory (WalkingSpan ⥤ M), S.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences M).functorCategory WalkingSpan ∧ S.categoryWithFibrations.fibrations = (fibrations M).functorCategory WalkingSpan ∧ S.categoryWithCofibrations.cofibrations (initial.to Q) ∧ (∀ k : WalkingSpan, (weakEquivalences M) (a.app k)) ∧ ∃ c : Cocone Q, Nonempty (IsColimit c) ∧ ∃ m : c.pt ⟶ s.pt, (weakEquivalences M) m ∧ (∀ k : WalkingSpan, c.ι.app k ≫ m = a.app k ≫ s.ι.app k)) → FiniteReedy.IsColimitEdge (FiniteReedy.diagram.{u, v, 0, 0, max u v t} q (span i j)) (FiniteReedy.object.{u, v, max u v t} q s.pt) (FiniteReedy.transformation.{u, v, 0, 0, max u v t} q s.ι))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "HomotopicalAlgebra.CombinatorialModelCategory",
+   "HomotopicalAlgebra.modelColimitLocalizationComparison"
+  ],
+  "fixed_by": "NT-stage2-cc-886e009c4"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-886e009c4",
+  "group": "Q47",
+  "result": "fix",
+  "note": "The Lean statement matches the node clause by clause: the CombinatorialModelCategory hypothesis structure is real (llp(rlp) generators, functorial factorizations); there exists a universal FiniteReedy.IsLocalization q, the same q in every clause; for every small I there is a projective model structure with only weak equivalences and fibrations objectwise; for a cofibrant replacement that is only an objectwise weak equivalence, the colimit cocone becomes IsColimitEdge plus a Composes triangle (orientation checked, satisfiable); homotopy pushouts become pushouts. No extra assumptions; universes u, v, w, t are independent; edge cases (empty I, a point, discrete I, BG, spans) are covered. lean.statement matches the file verbatim. stmt_deps are [def-cbc-enhanced-diagrams-cones, def-coef-coherent-localization-interface] as the b75460cc5539 return required, and the cycle is removed. Pilot gates pass: one sorry, source and blueprint docstrings with nine proof steps, no hollow definition, no pro-etale content. nt_compile of the snapshot: exit 0, clean. F1 (fixed): the module of proof dependency lem-coef-system-localization-universal (Sheaf.CategoryTheory.SystemLocalizationUniversal, now landed) was not imported. fixes/ModelColimitLocalizationComparison.lean adds only that non-public import and compiles clean (exit 0). Observation: diagram, transformation and IsColimitEdge are recorded under the finite-Reedy node; this is the pattern the return prescribed and landed nodes use, so no change is needed."
  }
 }

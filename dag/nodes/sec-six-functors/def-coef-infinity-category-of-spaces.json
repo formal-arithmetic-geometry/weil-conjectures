@@ -232,5 +232,49 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCategoryOfSpaces",
+  "declaration": "CategoryTheory.Spaces.infinityCategory",
+  "declarations": [
+   "CategoryTheory.Spaces.Kan",
+   "CategoryTheory.Spaces.kanEnrichment",
+   "CategoryTheory.Spaces.infinityCategory",
+   "CategoryTheory.Spaces.infinityCategory_quasicategory",
+   "CategoryTheory.Spaces.singularRealization",
+   "CategoryTheory.Spaces.singular_kan",
+   "CategoryTheory.Spaces.singularRealization_preserves_finite_products",
+   "CategoryTheory.Spaces.singularRealizationMonoidal",
+   "CategoryTheory.Spaces.topEnrichment",
+   "CategoryTheory.Spaces.topUnit_laws",
+   "CategoryTheory.Spaces.topUnit",
+   "CategoryTheory.Spaces.corepresentedValue",
+   "CategoryTheory.Spaces.corepresentedMap",
+   "CategoryTheory.Spaces.corepresented_laws",
+   "CategoryTheory.Spaces.enrichedCorepresented",
+   "CategoryTheory.Spaces.corepresentedSimplex",
+   "CategoryTheory.Spaces.corepresentedSimplex_naturality",
+   "CategoryTheory.Spaces.corepresented",
+   "CategoryTheory.Spaces.imageCocone",
+   "CategoryTheory.Spaces.mappedCoconeData",
+   "CategoryTheory.Spaces.mappedCoconeData_mem",
+   "CategoryTheory.Spaces.mappedCocone",
+   "CategoryTheory.Spaces.PreservesColimit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCategoryOfSpaces.lean",
+  "statement": "def infinityCategory : SSet.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The coherent nerve of small Kan complexes and the explicit coherent corepresented functor, with image-cocone and colimit-preservation interfaces. Reuses the published subset-poset left-Kan-extension rigidification primitives in Sheaf.CategoryTheory.PinchedRigidificationResolution; no mapping-space comparison theorem or arbitrary chosen equivalence is used. Named postponed proofs establish the well-definedness and Kan/product clauses already stated by this definition node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1fe13b6c8",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Read the full node, the 4 stmt deps, the side modules CoherentNerveInfrastructure, PinchedRigidificationResolution (rigidification/coherentSimplexInclusion/vertex), EnhancedDiagramsCones (commaSubcomplex/coconeCategory/IsColimiting), RealizationFiniteLimits, Mathlib SimplicialNerve and the full-subcategory enrichment, and the citer def-coef-presentable-infinity-category. Every clause matches: Kan_W is the internal-Hom enrichment of the full subcategory of KanComplex; S_W = SimplicialNerve Kan.{u} : SSet.{u+1}; Sing|.| uses the canonical ofChosenFiniteProducts tensor (inverse of the projection comparison); A^top is built by TransportEnrichment; topUnit is the sSetTopAdj unit; H_c is the curried (id⊗η)≫eComp_top; h_c is the LKE unit, then rigidification.map, then H_c, simplex by simplex, through ulift; PreservesColimit is IsColimiting of the mapped enhanced cocone. All 7 sorry'd theorems are true (topUnit/corepresented laws, mappedCoconeData_mem via commutation of (ihom I).map with diagramVertex/constantDiagrams, product preservation via realization_finite_limits). No extra hypotheses or universe equalities; edge cases (empty Kan complex, empty C, arrow, degeneracies, empty diagrams) are covered. No duplicate in Mathlib or side. lean.statement is verbatim and the node is unchanged apart from lean. nt_compile on the snapshot: 1.6 s, exit 0, no errors or warnings. Minor notes: the quasicategory theorem is implicit in the node and its proof sketch is loose; source.place §2.2.1 should be §1.1.5 (maintainer-owned); garbled HTT numbers in the report text."
  }
 }
