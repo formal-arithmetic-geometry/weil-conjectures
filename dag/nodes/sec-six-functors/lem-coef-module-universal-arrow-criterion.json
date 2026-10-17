@@ -24,7 +24,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-monoidal-infinity-category"
+  "def-coef-monoidal-infinity-category",
+  "def-coef-left-module-operadic-encoding"
  ],
  "proof": [
   {
@@ -219,5 +220,40 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-6baba24d4 (reviewer sub-agent of L); spot-checked: Read in full against HA (2017 PDF, read from a local copy): Def 4.2.1.1, Notation 4.2.1.6, 4.2.1.7/13/19, Cor 4.2.3.2, Def 4.2.4.1, Prop 4.2.4.2 with its proof, Cor 4.2.4.6, Def 3.1.1.2, Rem 3.1.1.4, Lemma 3.1.1.14, Def 3.1.3.1 and Prop 3.1.3.2. The item statement is unchanged and matches 4.2.4.1+4.2.4.6. Step 2's terminal objects agree with HA's proof: id_a, and β:(a,m)->m, with LM_0 factorizations, including r=0 (nullary unit). Step 3: the edge over β is the cocartesian transport followed by e=b_L(B⊗λ), and e is cocartesian because it is a fibre equivalence over an identity edge. Step 4 is HA 3.1.3.2 with the terminal-slice reduction. Step 5 takes the fibre over id_B, which gives Cor 4.2.4.6. All cited nodes are in unit sk-prop-sf-biduality-general, so there are no tool uses. The dependencies are acyclic and no SGA source is used. The generic terminal-active lemma is true (cofinal terminal object, Lemma 3.1.1.14, Prop 3.1.3.2). It is not a duplicate of lem-coef-operadic-free-cocone-criterion, which is nonsymmetric with a single V. The LM_0 repair (fibre over each m-output is a singleton) is correct, and HA's printed α^{-1}(S∪{*}) display is indeed ill-typed. One fault, B3/C5: lem-coef-module-operad-encoding defined LM^⊗, the coherent tensoring as a cocartesian LM-fibration, module sections and LMod_B a second time, although def-coef-left-module-operadic-encoding already defines them. That definition is on the base and in the same unit, and the report's duplicate list misses it. Fixed: the node now cites that definition in stmt_deps and in its statement, keeps the same mathematics, and all its other fields are identical. Item and generic lemma accepted as delivered. Remark for the maintainer: the item's imported informal 'coherent left action' (and its sibling's) could later cite the same definition.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1535f060d",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Read the node, all 3 statement dependencies (LeftModuleOperadicEncoding lines 45-330, EnhancedDiagramsCones comma/IsInitial/mappingSpace), the commit diff and the module. Hypothesis IsLMFreeComparison: LM_0 section A with algebra part strictly B, cylinder H (id_B, lambda), triangle with delta2 = H(a,m) and delta0 = L(beta) over (id, beta), long edge cocartesian; this holds iff b_L(B x lambda) is an equivalence (HA Def 4.2.4.1), and the witnesses exist, so it is not stronger. lmZeroGenerators matches HA's LM_0 (excludes beta, keeps factorizations including r=0, closed under composition). X in E is forced over m and End(m)={id}, so the mapping spaces are those of M. Conclusion: IsInitial in comma(outgoing=false: X -> UL) over arbitrary K is the precomposition equivalence for all N, natural in families; no existence, colimit or presentability. Edge cases empty K, empty M, unit algebra, arity 0 and universes are fine. No duplicate helpers in the newtargets lean, side clone or slopmaster2; the landed Q16 encoding is reused. lean.statement verbatim; 14 declarations present; node statement unchanged; only sorry is the main theorem; docstrings present; report has Worker report and Second reading by Q112. nt_compile.py --json on the snapshot file: exit 0, no diagnostics. Cosmetic only: the report's HA numbers are garbled to 'the project server'."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleUniversalArrowCriterion",
+  "declaration": "SSet.Enhanced.module_universal_arrow_criterion",
+  "declarations": [
+   "SSet.Enhanced.lmDiagramMap",
+   "SSet.Enhanced.lmEndpoint",
+   "SSet.Enhanced.lmFreeModuleDiagram",
+   "SSet.Enhanced.lmZeroGenerators",
+   "SSet.Enhanced.LMZeroOperators",
+   "SSet.Enhanced.lmZeroBase",
+   "SSet.Enhanced.lmZeroInclusion",
+   "SSet.Enhanced.lmAlgebraToZero",
+   "SSet.Enhanced.lmAlgebraZeroInclusion",
+   "SSet.Enhanced.lmZeroVertex",
+   "SSet.Enhanced.lmBinaryTuple",
+   "SSet.Enhanced.lmBinaryAction",
+   "SSet.Enhanced.IsLMFreeComparison",
+   "SSet.Enhanced.module_universal_arrow_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ModuleUniversalArrowCriterion.lean",
+  "statement": "theorem module_universal_arrow_criterion {E V M : SSet.{u}} [Quasicategory E] [Quasicategory V] [Quasicategory M] (p : E ⟶ lmBase) (q : V ⟶ monoidalSimplexBase) (hp : CoherentLeftTensoring (M := M) p q) (B : (lmAlgebras p) _⦋0⦌) (K : SSet.{u}) (X : K ⟶ E) (t : (comma ((ihom K).obj (LMModuleFiber p B)) ((ihom K).obj E) ((ihom K).map (lmUnderlyingObject p B)) (diagramVertex X) false) _⦋0⦌) (h : ∀ k : K _⦋0⦌, IsLMFreeComparison p B ((lmDiagramMap t.1.1).app _ k) (lmDiagramMap t.1.2 ≫ evaluation K E k)) : IsInitial (comma ((ihom K).obj (LMModuleFiber p B)) ((ihom K).obj E) ((ihom K).map (lmUnderlyingObject p B)) (diagramVertex X) false) t",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the current landed CoherentLeftTensoring, lmAlgebras, LMModuleFiber and lmUnderlyingObject directly. The LM_0 helpers and specified binary-action free comparison belong only to this criterion module; no dependency module or binding is replaced. Initiality in the coherent comma expresses the precomposition equivalence in all coherent parameter families."
  }
 }
