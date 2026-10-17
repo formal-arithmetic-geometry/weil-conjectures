@@ -15,9 +15,138 @@
   "def-weil-open-immersion",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work at the fixed finite ring $A$. Every bounded constructible pro-etale input has an etale-origin witness by [lem-sf-proetale-constructible-origin](ii), and the operations below preserve the bounded-below etale-origin class. Thus the compactification-independent composition isomorphisms of [thm-sf-comp-composition], and the normalization statement [lem-trf-compact-composition-proper-square-normalization], apply to every object occurring below. All arguments stay on these bounded-below domains; the bounded constructible finite-Tor conditions are imposed only where the statement imposes them. No etale/pro-etale transport of units or mates is used: every identity below is stated and used for the pro-etale operations.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "thm-sf-comp-composition",
+    "lem-trf-compact-composition-proper-square-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, final paragraph; domains of the composition law"
+   }
+  },
+  {
+   "text": "For $h:W\\to X$ write $J_h=Rh_!$, $P=Lt^*$, $R=Rt_*$, $Q=Lt_W^*$ and $S=Rt_{W*}$. Proper coincidence and compact-support composition [prop-functor-package](3), [thm-sf-comp-composition] give the canonical comparison\n$$\\chi_h:J_hS\\xrightarrow{\\sim}R J_h$$\nby $Rh_!Rt_{W!}\\simeq R(ht_W)_!=R(th)_!\\simeq Rt_!Rh_!$, with $Rt_{W!}=Rt_{W*}$ and $Rt_!=Rt_*$ the proper-coincidence comparisons of the compactifications $(\\mathrm{id},t_W)$, $(\\mathrm{id},t)$. This is the map $\\chi$ of [lem-trf-compact-composition-proper-square-normalization] for the square $ht_W=th$ (with $h'=h$, $W'=W$, $X'=X$). For $h=i$, clause (1) of that lemma says that, with $Ri_!=Ri_*$, $\\chi_i$ is the ordinary direct-image composition comparison $Ri_*Rt_{Z*}\\simeq R(it_Z)_*=R(ti)_*\\simeq Rt_*Ri_*$ in the normalization of [fix-prop-adjunctions](3). For $h=j$ the open square is Cartesian, and clause (2) says that $\\chi_j$ is the adjunct under $j_!\\dashv j^*$ of $\\lambda^{-1}$, where $\\lambda:j^*Rt_*j_!\\to Rt_{U*}j^*j_!\\simeq Rt_{U*}$ is the open exchange followed by the inverse open unit. No inverse to a closed-square base-change map is used.",
+   "uses": [
+    "prop-functor-package",
+    "thm-sf-comp-composition",
+    "lem-trf-compact-composition-proper-square-normalization",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition) and 0F7B (lemma-shriek-proper-and-open), as stated in lem-trf-compact-composition-proper-square-normalization"
+   }
+  },
+  {
+   "text": "For the open piece put $J=j_!$, $K=j^*$, with open unit $u:\\mathrm{id}\\xrightarrow{\\sim}KJ$ and counit $e:JK\\to\\mathrm{id}$ [prop-weil-open-closed-recollement-adjunctions]; $J$ is fully faithful, so a map $JM\\to N$ is determined by its transpose $M\\to KN$. Let $c:KP\\xrightarrow{\\sim}QK$ be the pullback comparison for $tj=jt_U$ [fix-prop-adjunctions](3), and let $\\mathrm{Ex}:KR\\to SK$ be the mate of $c^{-1}:QK\\to KP$ under $P\\dashv R$, $Q\\dashv S$ [def-weil-pbc-adjunction-mate]; thus $\\lambda=S(u^{-1})\\circ\\mathrm{Ex}_J$. The open exchange $b:PJ\\xrightarrow{\\sim}JQ$ of [lem-trf-open-square-exchange] restricts on $U$ to the identity after these identifications: $K(b_N)=u_{QN}\\circ Q(u_N^{-1})\\circ c_{JN}$. Hence $K(b^{-1}_N)\\circ u_{QN}=c^{-1}_{JN}\\circ Q(u_N)$. By [lem-pur-mate-unit-compatibility], the transformation $JQ\\to PJ$ whose mate under $J\\dashv K$, $J\\dashv K$ is $c^{-1}$ has the same transposes; so $b^{-1}$ is that inverse mate. Apply [lem-trf-iterated-square-mates] twice. (a) To $J\\dashv K$, $J\\dashv K$ (horizontal), $Q\\dashv S$, $P\\dashv R$ (vertical) and $\\alpha=b^{-1}:JQ\\to PJ$: the iterated mate $\\mathrm{Ex}$ is the conjugate of $b^{-1}$ for $PJ\\dashv KR$, $JQ\\dashv SK$. (b) To $Q\\dashv S$, $P\\dashv R$ (horizontal), $J\\dashv K$, $J\\dashv K$ (vertical) and $\\alpha=b$: if $\\beta_b:JS\\to RJ$ is the mate of $b$ under $Q\\dashv S$, $P\\dashv R$, then the mate of $\\beta_b$ under $J\\dashv K$ is the conjugate of $b$. Conjugation reverses composition and preserves identities [def-weil-pbc-adjunction-conjugate], so this conjugate is $\\mathrm{Ex}^{-1}$ (in particular $\\mathrm{Ex}$ is invertible). By [lem-pur-mate-unit-compatibility] for this $J$-mate, the transpose of $\\beta_b$ is $K(\\beta_{b,N})\\circ u_{SN}=\\mathrm{Ex}^{-1}_{JN}\\circ S(u_N)=\\lambda^{-1}_N$. By Step 2 the transpose of $\\chi_j$ is also $\\lambda^{-1}$, so $\\chi_j=\\beta_b$:\n$$\\chi_{j,N}=R(J\\varepsilon_{Q,N})\\circ R(b_{SN})\\circ\\eta_{P,JSN},$$\nwith $\\varepsilon_Q:QS\\to\\mathrm{id}$. This identifies the specified map, not an arbitrary isomorphism $JS\\simeq RJ$.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions",
+    "fix-prop-adjunctions",
+    "def-weil-pbc-adjunction-mate",
+    "lem-trf-open-square-exchange",
+    "lem-pur-mate-unit-compatibility",
+    "lem-trf-iterated-square-mates",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-trf-compact-composition-proper-square-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, final paragraph; explicit adjunction-mate calculation below"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-mate-unit-compatibility] to this mate pair, with $L_1=Q$, $R_1=S$, $L_2=P$, $R_2=R$, and both vertical functors equal to $J$. It gives\n$$\\chi_{j,QN}\\circ J(\\eta_{Q,N})=R(b_N)\\circ\\eta_{P,JN}.$$\nThus the unit on the open localization piece, followed by its open exchange, is the unit on $U$, followed by the canonical proper/open composition comparison. This is a direct specialization of the cited unit equation.",
+   "uses": [
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, final paragraph; explicit adjunction-mate calculation below"
+   }
+  },
+  {
+   "text": "For the closed piece put $I=Ri_*$, $K=Li^*$, with unit $u:\\mathrm{id}\\to IK$ and counit $v:KI\\to\\mathrm{id}$ [prop-weil-open-closed-recollement-adjunctions]. Let $a:KP\\xrightarrow{\\sim}QK$ be the pullback comparison for $ti=it_Z$. By the definition of a square mate [def-weil-pbc-adjunction-mate],\n$$b_{t,i,N}=I(Qv_N)\\circ I(a_{IN})\\circ u_{PIN}.$$\nLet $d:RI\\xrightarrow{\\sim}IS$ be ordinary direct-image composition; thus $d=\\chi_i^{-1}$. The composite-unit formula [fix-prop-adjunctions](3), or equivalently [def-weil-pbc-composite-adjunction] and the unit normalization [lem-trf-adjoint-mate](2), gives, for every $M$,\n$$IS(a_M)\\circ d_{KPM}\\circ R(u_{PM})\\circ\\eta_{P,M}=I(\\eta_{Q,KM})\\circ u_M.$$\nBoth sides are the unit of the adjunction for $it_Z=ti$, written using $KP$ and $QK$. This uses commutativity only. In particular the closed square is not asserted to be Cartesian.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions",
+    "def-weil-pbc-adjunction-mate",
+    "fix-prop-adjunctions",
+    "def-weil-pbc-composite-adjunction",
+    "lem-trf-adjoint-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, final paragraph; explicit adjunction-mate calculation below"
+   }
+  },
+  {
+   "text": "Substitute $M=IN$ in the last equation and postcompose with $IS(Qv_N)$. Naturality of $d$ and the formula for $b_{t,i,N}$ turn the left side into $d_{QN}\\circ R(b_{t,i,N})\\circ\\eta_{P,IN}$. Naturality of $\\eta_Q$ turns the right side into\n$$I(\\eta_{Q,N})\\circ I(v_N)\\circ u_{IN}=I(\\eta_{Q,N}),$$\nthe last equality being the triangle identity for $K\\dashv I$. Cancel $d_{QN}=\\chi_{i,QN}^{-1}$ to obtain\n$$R(b_{t,i,N})\\circ\\eta_{P,IN}=\\chi_{i,QN}\\circ I(\\eta_{Q,N}).$$\nNo stalk argument, nilpotent invariance, or invertibility of $b_{t,i}$ enters this calculation.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, final paragraph; explicit adjunction-mate calculation below"
+   }
+  },
+  {
+   "text": "For either $h$, Steps 4 and 6 give $R(b_{t,h,N})\\eta_{t,J_hN}=\\chi_{h,QN}J_h(\\eta_{t_W,N})$. Apply $H_X$ and insert the proper-composition maps $c_{r,M}:H_V(Rr_*M)\\xrightarrow{\\sim}H_V(M)$ used to define $\\beta_r$. By naturality,\n$$H_X(b)\\,\\beta_{t,J_hN}=c_{t,J_hQN}\\,H_X(Rb\\,\\eta_{t,J_hN}).$$\nAssociativity of compact-support composition [thm-sf-comp-composition], with proper coincidence as in [prop-functor-package](3), says\n$$\\lambda_{h,QN}\\,c_{t,J_hQN}\\,H_X(\\chi_{h,QN})=c_{t_W,QN}\\,\\lambda_{h,SQN}.$$\nIndeed both sides compose the three direct-image factors for $a_Xht_W=a_Xth=a_Wt_W=a_W$, using the definition of $\\chi_h$ in Step 2. Finally naturality of $\\lambda_h$ at $\\eta_{t_W,N}$ gives\n$$\\lambda_{h,QN}H_X(b)\\beta_{t,J_hN}=c_{t_W,QN}H_W(\\eta_{t_W,N})\\lambda_{h,N}=\\beta_{t_W,N}\\lambda_{h,N},$$\nwhich is the asserted equation.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "prop-functor-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, final paragraph; explicit adjunction-mate calculation below"
+   }
+  },
+  {
+   "text": "Repeat the argument in the bounded-below filtered derived categories with finite filtrations. [lem-trf-filtered-derived-operation-lifts] supplies the adjunctions with their units and counits, the square mates, the open comparison, the proper comparisons and the compact-support composition/refinement comparisons, and says that lifting respects composition and whiskering. The equalities of Steps 2–3 are equalities of ordinary transformations built from these units, counits, square mates and comparisons; since the lifts respect composition and whiskering, they hold for the lifts, and the iterated-mate identity [lem-trf-iterated-square-mates] holds for the lifted adjunctions as well. The unit equation of Step 4 and the composite-unit/triangle calculation of Steps 5–6 are identities in any category with these adjunctions, so they hold before applying either the forgetful or graded functors. The naturality and associativity calculation of Step 7 therefore gives the required equality of filtered morphisms. Forgetting or taking a graded piece recovers the unfiltered equation by the stated comparison maps. This does not infer equality of filtered morphisms from equality of their underlying or graded maps. The required bounds and operation domains are precisely those imposed on the underlying and graded inputs in the statement.",
+   "uses": [
+    "lem-trf-filtered-derived-operation-lifts",
+    "lem-trf-iterated-square-mates",
+    "lem-pur-mate-unit-compatibility",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, final paragraph; explicit adjunction-mate calculation below"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "fix-prop-adjunctions",
+  "lem-pur-mate-unit-compatibility",
+  "lem-sf-proetale-constructible-origin",
+  "lem-trf-adjoint-mate",
+  "lem-trf-compact-composition-proper-square-normalization",
+  "lem-trf-filtered-derived-operation-lifts",
+  "lem-trf-iterated-square-mates",
+  "lem-trf-open-square-exchange",
+  "prop-functor-package",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+  "place": "Step 6, final paragraph; explicit adjunction-mate calculation below"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +196,31 @@
    "results": "4 hits: Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
    "date": "2026-10-17",
    "verdict": "no match: candidates do not state the canonical pro-etale derived comparison and all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction unit for a proper map commutes with compactly supported derived direct image composition for invariant open and closed subschemes",
+   "results": "{\"t\": \"2026-10-17T10:14:46Z\", \"tool\": \"leansearch\", \"query\": \"Adjunction unit for a proper map commutes with compactly supported derived direct image composition for invariant open and closed subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"CategoryTheory.Adjunction.comp_unit_app\", \"IsOpenMap.adjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_naturality_assoc\", \"SheafOfModules.pushforwardPushforwardAdj\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ\"], \"digest\": \"3854b606dfc680fc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern generic adjunctions or unrelated sheaf/topological functors, not this geometric compact-support identity and its filtered lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper endomorphism adjunction unit on compact support cohomology is compatible with extension by zero and closed direct image",
+   "results": "{\"t\": \"2026-10-17T10:14:51Z\", \"tool\": \"leanfinder\", \"query\": \"Proper endomorphism adjunction unit on compact support cohomology is compatible with extension by zero and closed direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.adjunction_unit\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"CompHausLike.LocallyConstant.adjunction_counit\", \"CompHausLike.LocallyConstant.adjunction\", \"CondensedSet.topCatAdjunctionUnit_val_app_apply\", \"CondensedSet.topCatAdjunctionUnit\", \"CondensedSet.topCatAdjunctionUnit_val_app\", \"LightCondSet.topCatAdjunctionUnit_val_app_apply\"], \"digest\": \"269627da40ae7bc2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern generic adjunctions or unrelated sheaf/topological functors, not this geometric compact-support identity and its filtered lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functors shriek composition intertwines the adjunction unit on invariant open and closed localization pieces of a proper self map",
+   "results": "{\"t\": \"2026-10-17T10:15:25Z\", \"tool\": \"leanfinder\", \"query\": \"Derived functors shriek composition intertwines the adjunction unit on invariant open and closed localization pieces of a proper self map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.sheafComposeNatTrans_fac\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"CategoryTheory.sheafComposeNatIso\", \"CategoryTheory.sheafComposeNatTrans\"], \"digest\": \"a6414c56b2fe13dc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern generic adjunctions or unrelated sheaf/topological functors, not this geometric compact-support identity and its filtered lift"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-trace-additivity-open-closed",
@@ -87,5 +237,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-proper-unit-localization-composition",
+  "worker": "stage1",
+  "summary": "Expanded the composite-unit and mate-pasting argument into separate open and non-Cartesian closed calculations, identified their proper-support composition comparisons, and repeated the identities in filtered derived categories. Added one generic iterated-mates Mathlib leaf; retained the statement unchanged. Verified all cited statements and the etale-origin domains. Maintainer reader (2026-10-17): added the statement-only lemma lem-trf-compact-composition-proper-square-normalization for the normalization of the compact-support composition comparison along the open and closed squares, which Step 2 had taken from the construction (proof) of thm-sf-comp-composition and Stacks 0F7J; Steps 1-3 now work directly with pro-etale operations, and Step 3 spells out the two applications of the iterated-mate identity and the inverse-mate direction of b.",
+  "blueprint": "Realizes Step 6, final paragraph, of prop-trf-trace-additivity-open-closed: identifying the unit-induced maps on the open and closed compact localization pieces with those on U and Z.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Generic Adjunctions of the datum used for the adjunction/comparison or domain calculation indicated in the proof; the global-additivity unit has no replacement statement for this operation-level tool."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin used for the adjunction/comparison or domain calculation indicated in the proof; the global-additivity unit has no replacement statement for this operation-level tool."
+   },
+   {
+    "node": "lem-trf-adjoint-mate",
+    "why": "Generic Mates along an isomorphism of left adjoints used for the adjunction/comparison or domain calculation indicated in the proof; the global-additivity unit has no replacement statement for this operation-level tool."
+   },
+   {
+    "node": "lem-trf-open-square-exchange",
+    "why": "Generic Open-square exchange from restriction of direct image used for the adjunction/comparison or domain calculation indicated in the proof; the global-additivity unit has no replacement statement for this operation-level tool."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Generic Coefficient and functor package on the proved domains used for the adjunction/comparison or domain calculation indicated in the proof; the global-additivity unit has no replacement statement for this operation-level tool."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Generic Adjunctions of the open-closed recollement used for the adjunction/comparison or domain calculation indicated in the proof; the global-additivity unit has no replacement statement for this operation-level tool."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic The composition law for $Rf_!$ used for the adjunction/comparison or domain calculation indicated in the proof; the global-additivity unit has no replacement statement for this operation-level tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-adjunctions",
+  "lem-sf-proetale-constructible-origin",
+  "lem-trf-adjoint-mate",
+  "lem-trf-open-square-exchange",
+  "prop-functor-package",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-sf-comp-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-a5279ab9b",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-a5279ab9b (reviewer sub-agent of L); spot-checked: Item statement unchanged; the mathematics is correct. Checked against the blueprint main-20261015 prop-trf-trace-additivity-open-closed proof (Step 6, final paragraph; the closed square stays non-Cartesian), Stacks more-etale 0F7J/0F7B, and Mathlib Mates.lean 84-100, 275-281, 438-467. New leaf lem-trf-iterated-square-mates: accepted. Its directions match iterated_mateEquiv_conjugateEquiv exactly (TwoSquare F1 L1 L2 F2 = L2F1->F2L1, then F1R1->R2F2, then R1U2->U1R2, conjugate for F2L1 -| R1U2 and L2F1 -| U1R2). A DAG search for iterated_mateEquiv and for mate/conjugate nodes (def-sfb-conjugate-pull-iso, lem-weil-pbc-mate-pasting, lem-sf-mate) found no duplicate. Step 4's substitution into unit_mateEquiv, Step 6's cancellation (naturality of d and eta_Q, then the triangle identity Iv.uI=id) and Step 7's chase (naturality of c_t, associativity of thm-sf-comp-composition, naturality of lambda_h) were all recomputed and are correct. Edge cases checked: t=id, U or Z empty, Z=X, and a Frobenius on A^1 with V(x^p) as non-Cartesian closed square. Faults repaired: (1) C3/E5: Step 2 identified chi_j with the proper/open interchange Gamma_Q, and chi_i with direct-image composition, from the construction in the proof of thm-sf-comp-composition and Stacks 0F7J. No cited statement fixes that normalization (prop-functor-package(3) only says Rf_! ~ Rf_*), and Step 1's etale-to-pro-etale transport of units and mates was unproved. Fix: added the statement-only lemma lem-trf-compact-composition-proper-square-normalization (unsplit, Q74, same unit, from Step 6 final paragraph). For a commutative square h't_W=th with proper t, t_W it says: (1) for proper h, h' the explicit chi is ordinary direct-image composition in the fix-prop-adjunctions(3) normalization; (2) for open h, h' with a Cartesian square, chi = counit composed with h'_!(lambda^{-1}). I verified both clauses on the compactification construction. Steps 1-2 now cite this lemma and work pro-etale throughout. (2) Step 3 called b the J-|K mate of the pullback comparison, but that mate is b^{-1}, and it compressed two uses of the iterated-mate identity. Step 3 now shows b^{-1} is the inverse mate via unit compatibility, applies the leaf twice (Ex=conj(b^{-1}); the J-mate of beta_b is conj(b)=Ex^{-1}), and compares transposes with lambda^{-1}. Step 8 was reworded so the lifted identities follow from lifts respecting composition and whiskering. Removed the now unused lem-amb-unbounded-proper-open-interchange, lem-sf-class-compact-support-comparison, lem-cbc-proetale-extension-zero-comparison, lem-weil-pbc-comparison-pullback and lem-weil-pbc-comparison-direct-image-canonical-mate from uses and tool_uses. Accepted tool_uses: fix-prop-adjunctions, lem-sf-proetale-constructible-origin, lem-trf-adjoint-mate, lem-trf-open-square-exchange, prop-functor-package, prop-weil-open-closed-recollement-adjunctions, thm-sf-comp-composition. The new lemma's Mathlib record has two greps that were actually run; LeanSearch/Loogle were not available on this machine and are recorded as unavailable.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

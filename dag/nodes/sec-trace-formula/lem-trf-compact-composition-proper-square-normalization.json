@@ -1,0 +1,71 @@
+{
+ "id": "lem-trf-compact-composition-proper-square-normalization",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-trace-additivity-open-closed",
+   "place": "Step 6, final paragraph: 'identifies $\\Phi^\\sharp$ on $R\\Gamma_c(X,h_!-)\\cong R\\Gamma_c(W,-)$, followed by $b$ or $e$, with $(\\Phi_W^m)^\\sharp$ on $W$, compatibly with the composition law': the normalization of the composition comparison $Rh_!R\\Phi_{W*}\\simeq R\\Phi_*Rh_!$ on the open and closed pieces.",
+   "via": [
+    "lem-trf-proper-unit-localization-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Compact-support composition along a proper square: closed and open normalizations",
+ "statement": "Use the finite coefficient ring $A=A_{E,n}$ and separated finite-type $k$-schemes of [def-trf-coefficient-conventions], with the ordinary pro-etale operations $Lu^*\\dashv Ru_*$ of [def-weil-pbc-proetale-operations], extension by zero $j_!\\dashv j^*$ along open immersions [def-weil-extension-by-zero, prop-weil-open-closed-recollement-adjunctions], and the compactification-independent compact-support functors $Rf_!$ of [def-compact-support-direct-image-detailed] with their composition isomorphisms $\\alpha_{g,f}:Rg_!Rf_!\\xrightarrow{\\sim}R(gf)_!$ of [thm-sf-comp-composition], all on bounded-below complexes with an etale-origin witness [def-sf-etale-origin-subcategory]. For a proper [def-weil-proper-morphism] $r$ let $\\pi_r:Rr_!\\xrightarrow{\\sim}Rr_*$ be the proper-coincidence comparison specified by the compactification $(\\mathrm{id},r)$; for an open immersion [def-weil-open-immersion] $j$ identify $Rj_!=j_!$ by the compactification $(j,\\mathrm{id})$. Consider a commutative square of separated finite-type $k$-schemes\n$$\\begin{array}{ccc} W&\\xrightarrow{t_W}&W'\\\\ h\\downarrow&&\\downarrow h'\\\\ X&\\xrightarrow{t}&X'\\end{array},\\qquad h't_W=th,$$\nwith $t,t_W$ proper, and define\n$$\\chi:Rh'_!Rt_{W*}\\xrightarrow{\\pi_{t_W}^{-1}}Rh'_!Rt_{W!}\\xrightarrow{\\alpha_{h',t_W}}R(h't_W)_!=R(th)_!\\xrightarrow{\\alpha_{t,h}^{-1}}Rt_!Rh_!\\xrightarrow{\\pi_t}Rt_*Rh_!.$$\n1. If $h,h'$ are proper, then, after identifying $Rh_!=Rh_*$ and $Rh'_!=Rh'_*$ by $\\pi_h,\\pi_{h'}$, $\\chi$ is the composite $Rh'_*Rt_{W*}\\simeq R(h't_W)_*=R(th)_*\\simeq Rt_*Rh_*$ of the ordinary derived direct-image composition comparisons, in the adjunction-compatible normalization of [fix-prop-adjunctions](3).\n2. If $h,h'$ are open immersions and the square is Cartesian [def-weil-pbc-cartesian-square], let $\\mathrm{Ex}:h'^*Rt_*\\to Rt_{W*}h^*$ be the square mate [def-weil-pbc-adjunction-mate], under $Lt^*\\dashv Rt_*$ and $Lt_W^*\\dashv Rt_{W*}$, of the inverse of the pullback comparison $h^*Lt^*\\simeq Lt_W^*h'^*$ for $th=h't_W$, and put $\\lambda=Rt_{W*}(u^{-1})\\circ\\mathrm{Ex}_{h_!}:h'^*Rt_*h_!\\to Rt_{W*}h^*h_!\\to Rt_{W*}$, with $u:\\mathrm{id}\\xrightarrow{\\sim}h^*h_!$ the open unit. Then $\\lambda$ is an isomorphism and $\\chi$ is the adjunct of $\\lambda^{-1}$ under $h'_!\\dashv h'^*$: $\\chi=\\varepsilon_{h',Rt_*h_!}\\circ h'_!(\\lambda^{-1})$, with $\\varepsilon_{h'}$ the counit.\n\nBoth are equalities of the specified natural transformations, not mere existence of isomorphisms with the same source and target.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), its proof: the composition isomorphism interchanges an open extension by zero and a proper direct image by the map of Tag 0F7B (lemma-shriek-proper-and-open); identity opens give the direct-image composition. Pro-etale form as in the construction of thm-sf-comp-composition (its proof steps 3, 5, 6) and the open-adjunction normalization of lem-amb-unbounded-proper-open-interchange."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "def-compact-support-direct-image-detailed",
+  "thm-sf-comp-composition",
+  "def-sf-etale-origin-subcategory",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "fix-prop-adjunctions",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -li 'compact support|lowerShriek|shriek' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has no compact-support direct image of etale/pro-etale sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'Etale.*Sheaf|etaleSite|EtaleSite' Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean (site definitions only)",
+   "date": "2026-10-17",
+   "verdict": "no match: no derived direct images or extension by zero on etale sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "not run: the maintainer reader has no LeanSearch/Loogle access on this machine",
+   "results": "unavailable",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proper-unit-localization-composition",
+  "date": "2026-10-17",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity"
+}
