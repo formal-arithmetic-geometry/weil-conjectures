@@ -11,7 +11,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-mapping-composition",
   "lem-coef-coherent-nerve-comparison",
-  "lem-coef-joyal-model-structure"
+  "lem-coef-joyal-model-structure",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-infinity-hom-bifunctor-functoriality"
  ],
  "proof": [
   {
@@ -230,5 +232,35 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-dd5ca391e (reviewer sub-agent of L); spot-checked: I read the whole item and the full statements of all 7 cited nodes; there are no new nodes. All cited statements are in the item's own unit sk-prop-sf-biduality-general, except def-cbc, which is a definition. No cycle: a walk over 442 dependency nodes did not reach the item again. proof_deps equals the union of the step uses. No SGA is cited. The item is not a target node. Step 1: S is Joyal-cofibrant because the map from the empty set is a monomorphism. RD is Bergner-fibrant because it is locally Kan, and the identity lifts the only isomorphism of the terminal category. r is a Dwyer-Kan equivalence that fixes objects. The Quillen-equivalence criterion then makes a a categorical equivalence, and equivalence detection makes C[a] Dwyer-Kan. Step 2: Map^R in the resolution node is exactly the right-pinched space. Naturality of theta gives theta_W|f|_Q = C[a]_xy theta_S, naturality of p gives the second square, and two-out-of-three finishes. Step 3: a(h) corresponds to r([h]) by the coherent-nerve vertex clause. Hom naturality at the edge (1_w,h) and the coherent nerve's preservation of composition give t(h∘-) = (k∘-)t in the homotopy category of spaces. Step 4: the strict square r_wz([h]∘-) = (k∘-)r_wy with two-out-of-three; no Kan hypothesis on D is used. Step 5: the degree-zero clause (Q^0 = Δ^0) identifies the hom-set bijection with h ↦ [h]. Since π0r is faithful, F preserves composition. The equivalence-edge claim follows from the invertibility clause of the mapping-composition node. HTT is not archived locally (the report lists it as WANTED), so proof_origin=agent is correct. Small cases checked: the empty set, Δ^0, Δ^1, identity edges and discrete S. Duplicate candidates read and ruled out: component-postcomposition, coherent-nerve-pinched-adjunction, mapping-simplex-final-edge and diagonal-coherent-nerve-comparison. No fixes, no tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b60be89ac",
+  "group": "Q74",
+  "result": "fix",
+  "note": "Read node, report, module and all dependency declarations (CoherentNerveComparison, CoherentNerveInfrastructure, PinchedRigidificationResolution, EnhancedDiagramsCones, InfinityHomBifunctorFunctoriality, JoyalModelStructure). Every clause is rendered faithfully: canonical simplex-normalized adjunction on Pinched.rigidification, a categorical equivalence via the Joyal test, mapping-space weak equivalences, b = N.mapping_space_comparison after vertex transport, t = b^{-1}a_* with the postcomposition square at r([h]) (composition orders checked), raw [h]∘- weak, object bijection plus pi0 hom equivalences with edge/identity/composition formulas, equivalence-edge lifting; no local Kan hypothesis on D; universes u,v free. Gates OK; stmt_deps additions are landed nodes (brief §5 l.140); statement verbatim. Delivered file compiles clean (nt_compile rc=0). H4: helper realizationWeakEquivalences duplicates SSet.KanQuillen.weakEquivalenceStructure; fixes/ gives the complete module (helper removed, public import of KanQuillenRightProper, localization at the existing class; compiles clean), the lean-record (declarations, statement, note) and the updated report."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RigidificationPostcompositionComparison",
+  "declaration": "SSet.Pinched.rigidification_postcomposition_comparison",
+  "declarations": [
+   "SSet.Pinched.edgeFunctor",
+   "SSet.Pinched.edgeFunctor_endpoints",
+   "SSet.Pinched.edgeVertex",
+   "SSet.Pinched.mappingEdgeVertex",
+   "SSet.Pinched.enrichedPostcomposition",
+   "SSet.Pinched.mappingPostcomposition",
+   "SSet.Pinched.replacementAdjoint",
+   "SSet.Pinched.rigidification_postcomposition_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RigidificationPostcompositionComparison.lean",
+  "statement": "theorem rigidification_postcomposition_comparison (N : CoherentNerveComparisonStatement.{u}) : ∃ adj : rigidification.{u} ⊣ nerveFunctor, (∀ (S : SSet.{u}) (A : SCat.{u}) (f : rigidification.obj S ⟶ A) (n : SimplexCategory) (s : S.obj (op n)), ((adj.homEquiv S A) f).app (op n) s = (coherentSimplexInclusion.app n ≫ rigidification.map (yonedaEquiv.symm s) ≫ f)) ∧ ∀ (S : SSet.{u}) [Quasicategory S] (R : LocallyKanReplacement.{u}), Function.Bijective (vertex S) ∧ (∀ Z : SSet.{max u v}, Z.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (replacementAdjoint adj R S))).app Z)).toFunctor).IsEquivalence) ∧ Quasicategory (nerveFunctor.obj (R.R.obj (rigidification.obj S))) ∧ (∀ x y : S _⦋0⦌, Enhanced.IsWeakHomotopyEquivalence (Enhanced.mappingSpaceMap (replacementAdjoint adj R S) x y)) ∧ (∀ x : S _⦋0⦌, (replacementAdjoint adj R S).app _ x = N.vertex (R.R.obj (rigidification.obj S)) ((R.unit.app (rigidification.obj S)).obj (vertex S x))) ∧ (∃ b : ∀ x y : S _⦋0⦌, hom (R.R.obj (rigidification.obj S)) ((R.unit.app (rigidification.obj S)).obj (vertex S x)) ((R.unit.app (rigidification.obj S)).obj (vertex S y)) ⟶ Enhanced.mappingSpace (nerveFunctor.obj (R.R.obj (rigidification.obj S))) ((replacementAdjoint adj R S).app _ x) ((replacementAdjoint adj R S).app _ y), (∀ x y : S _⦋0⦌, HEq (b x y) (N.mapping_space_comparison.comparison (R.R.obj (rigidification.obj S)) ((R.unit.app (rigidification.obj S)).obj (vertex S x)) ((R.unit.app (rigidification.obj S)).obj (vertex S y)))) ∧ (∀ x y : S _⦋0⦌, Enhanced.IsWeakHomotopyEquivalence (b x y)) ∧ ∃ t : ∀ x y : S _⦋0⦌, KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.obj (Enhanced.mappingSpace S x y) ⟶ KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.obj (hom (R.R.obj (rigidification.obj S)) ((R.unit.app (rigidification.obj S)).obj (vertex S x)) ((R.unit.app (rigidification.obj S)).obj (vertex S y))), (∀ x y : S _⦋0⦌, IsIso (t x y)) ∧ (∀ x y : S _⦋0⦌, t x y ≫ KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (b x y) = KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (Enhanced.mappingSpaceMap (replacementAdjoint adj R S) x y)) ∧ (∀ (w y z : S _⦋0⦌) (h : (Enhanced.mappingSpace S y z) _⦋0⦌), KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (mappingPostcomposition S w y z h) ≫ t w z = t w y ≫ KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (enrichedPostcomposition (R.R.obj (rigidification.obj S)) ((R.unit.app (rigidification.obj S)).obj (vertex S w)) ((R.unit.app (rigidification.obj S)).obj (vertex S y)) ((R.unit.app (rigidification.obj S)).obj (vertex S z)) (((R.unit.app (rigidification.obj S)).map _ _).app _ (mappingEdgeVertex S y z h))))) ∧ (∀ (w y z : S _⦋0⦌) (h : (Enhanced.mappingSpace S y z) _⦋0⦌), Enhanced.IsWeakHomotopyEquivalence (mappingPostcomposition S w y z h) → Enhanced.IsWeakHomotopyEquivalence (enrichedPostcomposition (rigidification.obj S) (vertex S w) (vertex S y) (vertex S z) (mappingEdgeVertex S y z h))) ∧ (∃ F : ∀ x y : S _⦋0⦌, π₀ (Enhanced.mappingSpace S x y) ≃ π₀ (hom (rigidification.obj S) (vertex S x) (vertex S y)), (∀ (x y : S _⦋0⦌) (h : (Enhanced.mappingSpace S x y) _⦋0⦌), F x y (π₀.mk h) = π₀.mk (mappingEdgeVertex S x y h)) ∧ (∀ (x : S _⦋0⦌) (i : (Enhanced.mappingSpace S x x) _⦋0⦌), i.val = S.σ 0 x → F x x (π₀.mk i) = π₀.mk ((eId SSet (vertex S x)).app _ PUnit.unit)) ∧ (∀ (x y z : S _⦋0⦌) (f : (Enhanced.mappingSpace S x y) _⦋0⦌) (g : (Enhanced.mappingSpace S y z) _⦋0⦌), F x z (π₀.mk ((Enhanced.canonicalHomComposition S x y z).app _ (g, f))) = π₀.mk ((eComp SSet (vertex S x) (vertex S y) (vertex S z)).app _ (mappingEdgeVertex S x y f, mappingEdgeVertex S y z g)))) ∧ (∀ (x y : S _⦋0⦌) (k : (hom (rigidification.obj S) (vertex S x) (vertex S y)) _⦋0⦌), CategoryTheory.IsPiZeroIso ((SimplicialCategory.homEquiv' (C := underlying (rigidification.obj S)) (vertex S x) (vertex S y)).symm k) → ∃ h : (Enhanced.mappingSpace S x y) _⦋0⦌, Enhanced.IsEquivalenceEdge S h.val ∧ π₀.mk (mappingEdgeVertex S x y h) = π₀.mk k)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing Pinched.rigidification simplex-colimit construction. The adjunction is existential with its complete simplex-summand formula, which uniquely characterizes its maps. Edge vertices are real coherent-simplex generators with named endpoint obligations. Postcomposition is a helper construction for this item; the homotopy category of spaces is the localization of all simplicial sets at the existing SSet.KanQuillen.weakEquivalenceStructure (maintainer review FIX: replaces a duplicate local MorphismProperty wrapper of Enhanced.IsWeakHomotopyEquivalence). The component isomorphism is stated as hom-set equivalences with object bijectivity, edge normalization and identity/composition formulas. Two already-landed proof prerequisites are made explicit statement dependencies; no statement correction or dependency replacement.",
+  "fixed_by": "NT-stage2-cc-b60be89ac"
  }
 }
