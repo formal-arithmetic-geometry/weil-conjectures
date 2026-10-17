@@ -187,5 +187,23 @@
   "group": "Q100",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-ab9fcff4f (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and every cited statement in full, together with Stacks 09BI (l.13850), 03Q1 (1),(3), 04JN, 03PT (2), derived 015F (3),(4) and sites-modules 03D8. The item's statement, which predates this delivery, is true for arbitrary f, any commutative A and unbounded complexes. Edge cases checked: U empty (vacuous), A=0, E=0, f=id. Step 1: point-pullback-stalk clauses 1 and 2 at U and X, inverse-image-modules (1)-(3) and module-linear composition c_{f,ubar} give an exact, A-linear T_ubar∘f^{-1} ≅ (-)_xbar. Step 2: the exact-functor factorization leaf (mapDerivedCategoryFactors) plus routine localization descent gives T_ubar,D f^{-1}_D ≅ T_xbar,D; the step's '=' with K_xbar is meant up to the canonical iso, which is harmless. Step 3: the constant-stalk iso, with the scalar and differential equations written out, gives a chain iso. Step 4 is elementary composition. Every cited unit (sk-thm-properbasechange, sk-def-exchange, sk-thm-p1, sk-def-pbc) is in the transitive uses of sk-prop-sf-biduality-general, so the 3 declared tool_uses are accepted as generic tools. There are no new nodes. I found no duplicate in the DAG: finite-ring-derived-local-constancy, kun-stalks-of-cohomology and local-derived-stalk-transport all state different results. No cycle, no SGA source, no fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-65f38b336",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement, dependencies, source, universes, edge cases, docstrings, report sections, and exact Lean declaration checked; scompile.py local overlay and server confirmation passed."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleStratifiedStalkIdentification",
+  "declaration": "AlgebraicGeometry.Etale.derivedGeometricStalkIso",
+  "file": "lean/Sheaf/SixFunctors/EtaleStratifiedStalkIdentification.lean",
+  "statement": "theorem derivedGeometricStalkIso (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (E : CochainComplex (ModuleCat.{u + 1} A) ℤ) (α : Nonempty (((Etale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory).obj K ≅ _root_.DerivedCategory.Q.obj (((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex (ComplexShape.up ℤ)).obj E))) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (ubar : Spec (.of Ω) ⟶ U) : Nonempty ((geometricStalk A (ubar ≫ f)).obj K ≅ _root_.DerivedCategory.Q.obj E)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

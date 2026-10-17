@@ -274,5 +274,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-63a22540d",
+  "group": "Q92",
+  "result": "fix",
+  "note": "Mathematical statement accepted; immutable and fixed modules compile cleanly through scompile.py. Complete fixes replace the placeholder second reading, add the module declaration inventory, and correct empty-category wording. Findings and checks are recorded in review.md; signatures, definitions, snapshot, and branch head remain unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialBousfieldModelStructure",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialBousfieldModelStructure.lean",
+  "declaration": "CategoryTheory.simplicial_bousfield_model_structure",
+  "declarations": [
+   "CategoryTheory.tLocalObject",
+   "CategoryTheory.tEquivalence",
+   "CategoryTheory.tEquivalences",
+   "CategoryTheory.simplicial_bousfield_model_structure"
+  ],
+  "statement": "theorem simplicial_bousfield_model_structure {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [SimplicialCategory M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] (T : MorphismProperty M) [MorphismProperty.IsSmall.{v} T] (hT : ∀ {A B : M} (t : A ⟶ B), T t → Cofibration t ∧ IsCofibrant A ∧ IsCofibrant B) (D : SimplicialTensorCotensor M) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 M) (hM : CombinatorialModelCategory.{u, v, w} M) (hleft : ∀ {A B C : M} (f : A ⟶ B) (i : A ⟶ C), WeakEquivalence f → Cofibration i → WeakEquivalence (pushout.inr f i)) : ∃ m : ModelCategory M, @CombinatorialModelCategory.{u, v, w} M _ m ∧ @SimplicialModelLocalization.SatisfiesSM7 M _ m inferInstance ∧ (∀ {A B C : M} (f : A ⟶ B) (i : A ⟶ C), @WeakEquivalence M _ A B f m.categoryWithWeakEquivalences → @Cofibration M _ A C i m.categoryWithCofibrations → @WeakEquivalence M _ _ _ (pushout.inr f i) m.categoryWithWeakEquivalences) ∧ m.categoryWithCofibrations.cofibrations = cofibrations M ∧ m.categoryWithWeakEquivalences.weakEquivalences = tEquivalences T ∧ (∀ Z : M, @Fibration M _ Z _ (terminal.from Z) m.categoryWithFibrations ↔ IsFibrant Z ∧ tLocalObject T Z) ∧ (∃ (_h₁ : @MorphismProperty.HasFunctorialFactorization M _ m.categoryWithCofibrations.cofibrations (@trivialFibrations M _ m.categoryWithFibrations m.categoryWithWeakEquivalences)), ∃ (_h₂ : @MorphismProperty.HasFunctorialFactorization M _ (@trivialCofibrations M _ m.categoryWithCofibrations m.categoryWithWeakEquivalences) m.categoryWithFibrations.fibrations), True) ∧ (∀ {A B : M} (f : A ⟶ B), Cofibration f → @Cofibration M _ A B f m.categoryWithCofibrations) ∧ (∀ {A B : M} (f : A ⟶ B), trivialCofibrations M f → (@trivialCofibrations M _ m.categoryWithCofibrations m.categoryWithWeakEquivalences) f)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper predicates tLocalObject, tEquivalence, and tEquivalences are real definitions in the owning module. tEquivalence quantifies over all cofibrant replacement squares and fibrant local targets, which is the replacement-independent rendering of Map^h. The theorem supplies the localized ModelCategory, combinatorial and SM7 structures, left properness, exact cofibrations and T-equivalences, fibrant-object characterization, functorial factorizations, and explicit identity left-Quillen preservation clauses.",
+  "fixed_by": "NT-stage2-Codex-63a22540d"
  }
 }
