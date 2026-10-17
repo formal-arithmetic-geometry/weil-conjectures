@@ -232,5 +232,28 @@
   "group": "Q160",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-1ad38cafb (reviewer sub-agent of L); spot-checked: I read all of the mathematics; no changes and no drops. The item statement is unchanged and true; it holds for any finite n, so 1<=n<=4 only narrows it. Step 1: lem-sfb-product-localization is exact Mathlib IsLocalization.pi (Pi.lean:31-35: Finite J, ContainsIdentities, IsLocalization). Its hypotheses hold for A_i and for the P_i, because inverse images of W_i contain identities and the product of inverse images is the inverse image of the product. Step 2: the triple category is the finite product of the coordinate triple categories, since all defining equations are coordinatewise, and the finite zigzag argument is correct. Step 3: (X,id,b) is terminal; L(a)c=b is the triple's own equation, and id_X lies in W_i. Step 4: factoring one coordinate at a time stays inside the product of the P_i, which gives Derives. The unary node's hypotheses are met. Steps 5-6: the typing tau∘eps: LF∘L=>G is correct, and identity, composition and isomorphism follow from uniqueness. Step 7: essential surjectivity plus resolutions give an isomorphism (L_iP_i)_i -> y, and naturality with cancellation finishes. The unary node matches slopmaster2 FromJoel Derives.lean:54-58 (hasLeftDerivedFunctor) and :107-109 (isLeftDerivedFunctor_iff_isIso), which have no extra hypotheses; the sorry map gives s=false, ts=false for both. I tested it on the identity inclusion and on the two-object case {0->1} with W = all arrows and P={0}. Neither new node duplicates an existing one: I compared them with lem-pur-left-derived-from-kflat-class, def-sfb-left-derived-functor, lem-sc-nattrans-from-resolving-class, lem-sfb-kflat-derivability, lem-coef-dg-product-localization and lem-coef-brown-localization-products. Neither restates a clause of the parent. The blueprint fields are correct, nothing is cited from SGA, and this is not a target node, so no base-change morphism or coefficient category is involved. No tool_uses are needed: the only node from another unit is a Mathlib leaf."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d83bed9d0",
+  "group": "Q146",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, verbatim statement, and per-file compilation pass. Wrote review.md and a complete replacement report in fixes/lem-sfb-multivariable-derived-calculus.report.md, repairing H11 by replacing the author self-check with an independent second reading. No Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MultivariableDerivedCalculus",
+  "declaration": "CategoryTheory.multivariableDerivedCalculus",
+  "declarations": [
+   "CategoryTheory.multivariableDerivedCalculus",
+   "CategoryTheory.multivariableDerivedComparisons"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MultivariableDerivedCalculus.lean",
+  "statement": "theorem multivariableDerivedCalculus (hn : 1 ≤ n ∧ n ≤ 4) (hP : ∀ i, (LocalizerMorphism.ofEq (F := I i) (W₂ := W i) rfl).IsLeftDerivabilityStructure) (F : (∀ i, A i) ⥤ H) (hF : ∀ (i : Fin n) (p q : ∀ j, P j) (f : (fun j ↦ (I j).obj (p j)) ⟶ (fun j ↦ (I j).obj (q j))) (h : ∀ j, j ≠ i → p j = q j), (∀ (j : Fin n) (hj : j ≠ i), f j = eqToHom (congrArg (fun x ↦ (I j).obj x) (h j hj))) → W i (f i) → IsIso (F.map f)) : (Functor.pi L).IsLocalization (MorphismProperty.pi W) ∧ (LocalizerMorphism.ofEq (F := Functor.pi I) (W₂ := MorphismProperty.pi W) rfl).IsLeftDerivabilityStructure ∧ (∀ i, (LocalizerMorphism.id (W i)).IsLeftDerivabilityStructure) ∧ (∃ (LF : (∀ i, D i) ⥤ H) (ε : Functor.pi L ⋙ LF ⟶ F), (∀ V : (∀ i, D i) ⥤ H, Function.Bijective (fun γ : V ⟶ LF ↦ whiskerLeft (Functor.pi L) γ ≫ ε)) ∧ (∀ p : ∀ i, P i, IsIso (ε.app (fun i ↦ (I i).obj (p i))))) ∧ (∀ (T : (∀ i, D i) ⥤ H) (η : Functor.pi L ⋙ T ⟶ F), (∀ V : (∀ i, D i) ⥤ H, Function.Bijective (fun γ : V ⟶ T ↦ whiskerLeft (Functor.pi L) γ ≫ η)) ↔ ∀ p : ∀ i, P i, IsIso (η.app (fun i ↦ (I i).obj (p i)))) ∧ (∀ (V V' : (∀ i, D i) ⥤ H) (γ δ : V ⟶ V'), (∀ p : ∀ i, P i, γ.app (fun i ↦ (L i).obj ((I i).obj (p i))) = δ.app (fun i ↦ (L i).obj ((I i).obj (p i)))) → γ = δ)",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The two declarations together render every clause: product derivability, universal bijection and resolving-object criterion; canonical comparison maps with uniqueness, identity/composition, isomorphism preservation, and counit cancellation. Fully faithful inclusions represent the full subcategories."
  }
 }
