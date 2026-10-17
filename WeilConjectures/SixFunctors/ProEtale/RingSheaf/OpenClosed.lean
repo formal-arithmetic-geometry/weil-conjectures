@@ -34,6 +34,8 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 
+open scoped CategoryTheory.Obj
+
 namespace CategoryTheory.Mod
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [Preadditive C] [MonoidalPreadditive C]
@@ -58,19 +60,22 @@ variable {R : Type (u + 1)} [CommRing R] {Y Z U X : Scheme.{u}}
 
 instance preservesFiniteColimits_upperStar (g : Y ⟶ X) :
     PreservesFiniteColimits (upperStar B g) :=
-  (upperStarLowerStarAdjunction B g).leftAdjoint_preservesColimits.preservesFiniteColimits
+  have := (upperStarLowerStarAdjunction B g).isLeftAdjoint
+  inferInstance
 
 instance preservesFiniteLimits_lowerStar (g : Y ⟶ X) :
     PreservesFiniteLimits (lowerStar B g) :=
-  (upperStarLowerStarAdjunction B g).rightAdjoint_preservesLimits.preservesFiniteLimits
+  have := (upperStarLowerStarAdjunction B g).isRightAdjoint
+  inferInstance
 
 variable (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
   (hij : IsCompl (Set.range i.base) (Set.range j.base))
 
 instance preservesFiniteColimits_openImmersionLowerShriek :
     PreservesFiniteColimits (openImmersionLowerShriek B i j hij) :=
-  (openImmersionLowerShriekUpperStarAdjunction B i j hij
-    ).leftAdjoint_preservesColimits.preservesFiniteColimits
+  have := (openImmersionLowerShriekUpperStarAdjunction B i j hij
+    ).isLeftAdjoint
+  inferInstance
 
 /-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (1): the extension by zero on
 module sheaves is left exact, since it is so on underlying sheaves. -/
@@ -80,6 +85,7 @@ instance preservesFiniteLimits_openImmersionLowerShriek :
     inferInstanceAs (PreservesFiniteLimits (Mod.forget _ ⋙ (j)_!open[ModuleCat.{u + 1} R]))
   exact preservesFiniteLimits_of_reflects_of_preserves _ (Mod.forget B)
 
+include j hij in
 /-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (2), and blueprint
 `lem-exc-proetale-closed-exact` for module sheaves: the pushforward `i_*` along a closed
 immersion with quasi-compact open complement is exact on module sheaves. -/
@@ -133,6 +139,8 @@ noncomputable def fullyFaithfulOpenImmersionLowerShriek :
     (openImmersionLowerShriek B i j hij).FullyFaithful :=
   (openImmersionLowerShriekUpperStarAdjunction B i j hij).fullyFaithfulLOfIsIsoUnit
 
+omit [IsClosedImmersion i] [QuasiCompact j] in
+include hij in
 /-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (2): `j^* i_* = 0` on module
 sheaves. -/
 lemma isZero_upperStar_obj_lowerStar_obj
@@ -166,10 +174,10 @@ noncomputable def openClosedShortComplexMapForgetIso
   ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _)
     (by
       simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
-      exact openImmersionLowerShriekUpperStarAdjunction_counit_app_hom B i j hij M)
+      exact (openImmersionLowerShriekUpperStarAdjunction_counit_app_hom B i j hij M).symm)
     (by
       simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
-      exact upperStarLowerStarAdjunction_unit_app_hom B i M)
+      exact (upperStarLowerStarAdjunction_unit_app_hom B i M).symm)
 
 /-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (3), and the exact sequence of
 blueprint `sk-prop-sf-open-closed-triangle`: let `i : Z ⟶ X` be a closed immersion with

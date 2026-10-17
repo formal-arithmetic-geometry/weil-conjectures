@@ -30,6 +30,8 @@ universe u
 
 open CategoryTheory Limits
 
+open scoped CategoryTheory.Obj
+
 namespace AlgebraicGeometry.ProEtale.RingSheaf
 
 open Scheme
@@ -39,6 +41,7 @@ variable {R : Type (u + 1)} [CommRing R] {Z U X : Scheme.{u}} [CompactSpace X]
   (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
   (hij : IsCompl (Set.range i.base) (Set.range j.base))
 
+include j hij in
 /-- Blueprint `sk-prop-sf-open-closed-triangle` (and `det-sf-open-closed-pullback-limits`) for
 module sheaves over a sheaf of rings `B`: the pullback `i^*` along a closed immersion with
 quasi-compact open complement, on a qcqs scheme, preserves all small limits. -/

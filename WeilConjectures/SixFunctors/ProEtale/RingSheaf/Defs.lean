@@ -38,6 +38,8 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 
+open scoped CategoryTheory.Obj
+
 namespace AlgebraicGeometry.ProEtale.RingSheaf
 
 open Scheme
@@ -81,13 +83,15 @@ noncomputable def upperStarLowerStarAdjunction : upperStar B g ⊣ lowerStar B g
   (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g).mapModAdjunction B
 
 @[simp]
-lemma upperStarLowerStarAdjunction_unit_app_hom (M : Mod (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) B) :
+lemma upperStarLowerStarAdjunction_unit_app_hom
+    (M : Mod (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) B) :
     ((RingSheaf.upperStarLowerStarAdjunction B g).unit.app M).hom =
       (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g).unit.app M.X :=
   Adjunction.mapModAdjunction_unit_app_hom _ _ M
 
 @[simp]
-lemma upperStarLowerStarAdjunction_counit_app_hom (N : Mod (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))
+lemma upperStarLowerStarAdjunction_counit_app_hom
+    (N : Mod (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))
       ((g)^*[ModuleCat.{u + 1} R].obj B)) :
     ((RingSheaf.upperStarLowerStarAdjunction B g).counit.app N).hom =
       (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g).counit.app N.X :=
@@ -99,6 +103,8 @@ section OpenImmersion
 
 variable (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
   (hij : IsCompl (Set.range i.base) (Set.range j.base))
+
+include i hij
 
 /-- Blueprint `sk-prop-sf-open-closed-triangle`, `det-sf-open-closed-sequence-ring-sheaf`: the
 extension by zero `j_!` from `j^* B`-module sheaves on `U_proét` to `B`-module sheaves on
@@ -135,7 +141,8 @@ lemma openImmersionLowerShriekUpperStarAdjunction_unit_app_hom
   Adjunction.mapModLeftAdjunction_unit_app_hom _ N
 
 @[simp]
-lemma openImmersionLowerShriekUpperStarAdjunction_counit_app_hom (M : Mod (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) B) :
+lemma openImmersionLowerShriekUpperStarAdjunction_counit_app_hom
+    (M : Mod (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) B) :
     ((RingSheaf.openImmersionLowerShriekUpperStarAdjunction B i j hij).counit.app M).hom =
       (ProEtale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} R) j).counit.app
         M.X :=
