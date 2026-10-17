@@ -4303,6 +4303,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedFinite
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZeroLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGerm
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
