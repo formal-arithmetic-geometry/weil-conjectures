@@ -202,5 +202,32 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-ec05f9291 (reviewer sub-agent of L); spot-checked: Read the item in full: statement, six steps, sources and searches. Also read the full statement of its only cited node, def-cbc-enhanced-diagrams-cones (inverse edges with 2-simplex witnesses, nerve simplices as functors [n]->B, Fun(K,C)_n=Hom(K x Delta^n,C), functor equivalence), and the citer lem-coef-monoidal-yoneda-embedding (steps 8 and 10 apply the item with B=Delta^op and fixed a:K->Delta^op, matching X_a and Y_a). Step 1: evaluating at a vertex and applying p shows the projected unit/counit components and their inverses are mutually inverse arrows of B, hence identities because B is gaunt. Step 2: edges of Y x Delta^1 are horizontal, vertical or diagonal; the two triangles of e x Delta^1 give pG(e) = q(e), and since a map into a nerve is determined by vertices and spine edges, q beta = q pr_Y and pG = q. Step 3: the same gives p alpha = p pr_X, using pGF = qF = p. Step 4: every edge of T x Delta^2 under an inverse-triangle witness is constant, a vertical identity, or lies in a face transformation already shown constant (a degenerate face s0(GF) projects to p pr), so the inverse data also lie over the base. Steps 5-6: X_a is closed under simplicial operators; F_a and G_a land correctly because qF = p and pG = q; the induced transformations (u,t) -> alpha(u, t pr) and the witnesses lie over a and commute with faces, so they give equivalence edges, with X_a and Y_a being quasicategories as assumed. Small cases checked: empty, terminal and discrete B; B = [1]; the monoid (N,+), which is gaunt but not thin and is why edges and not only vertices are compared; BC_2 with a central unit shows gauntness is necessary; empty K. No new nodes. rg over dag/nodes found no duplicate (operadic-collage-relative-overbase-equivalence and the cartesian-fibration nodes are different statements). Mathlib searches are recorded with all three kinds (LeanFinder, Loogle, grep, LeanSearch). HTT is cited by URL for terminology only; the proof is marked agent-written and WANTED is reported. No SGA source and no route issue, since only a definition is cited; not a target node, so there is no base-change or coefficient-category check. No changes, no tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1be1293a3",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Checked every clause of the node against SSet.Enhanced.equivalence_over_gaunt_nerve: hB is exact gauntness without thinness; hF : F ≫ q = p; α and β are on F≫G and G≫F, with SpecifiedNaturalEquivalence holding exactly the IsEquivalenceEdge/AreNaturallyEquivalent witnesses; ∃ hG : G ≫ p = q; IsOver covers the edge, inverse and both triangles projecting to σ0/σ0σ0 of diagramVertex; the relative objects are the pullback of const(diagramVertex a) with (ihom K).map p/q; the Quasicategory premises are scoped inside ∀ K a; IsInduced forces step 6's formula; IsFunctorEquivalence is used verbatim. Universes max u v are forced by nerve B. Edge cases checked: empty B, empty K, (ℕ,+), BC₂. Only the lean field differs from the side clone; lean.statement is verbatim; docstrings carry source, blueprint and the six steps; the only proof is sorry; no line over 100 chars; no duplicate. nt_compile --json is clean (rc 0, no warnings, 3.0 s). The Second reading section is the accepted 2026-10-17 direct-delivery placeholder. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EquivalenceOverGauntNerve",
+  "declaration": "SSet.Enhanced.equivalence_over_gaunt_nerve",
+  "declarations": [
+   "SSet.Enhanced.SpecifiedNaturalEquivalence",
+   "SSet.Enhanced.SpecifiedNaturalEquivalence.IsOver",
+   "SSet.Enhanced.gauntRelativePostcomposition",
+   "SSet.Enhanced.IsInducedPostcompositionSimplex",
+   "SSet.Enhanced.SpecifiedNaturalEquivalence.IsInduced",
+   "SSet.Enhanced.equivalence_over_gaunt_nerve"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EquivalenceOverGauntNerve.lean",
+  "statement": "theorem equivalence_over_gaunt_nerve (B : Type u) [Category.{v} B] (hB : ∀ (x y : B) (i : x ≅ y), ∃ h : x = y, i.hom = eqToHom h) {X Y : SSet.{max u v}} [Quasicategory X] [Quasicategory Y] (p : X ⟶ nerve B) (q : Y ⟶ nerve B) (F : X ⟶ Y) (G : Y ⟶ X) (hF : F ≫ q = p) (α : SpecifiedNaturalEquivalence (F ≫ G) (𝟙 X)) (β : SpecifiedNaturalEquivalence (G ≫ F) (𝟙 Y)) : ∃ hG : G ≫ p = q, α.IsOver p p ∧ β.IsOver q q ∧ ∀ (K : SSet.{max u v}) (a : K ⟶ nerve B), Quasicategory (pullback (SSet.const (X := Δ[0]) (diagramVertex a)) ((ihom K).map p)) → Quasicategory (pullback (SSet.const (X := Δ[0]) (diagramVertex a)) ((ihom K).map q)) → ∃ (αa : SpecifiedNaturalEquivalence (gauntRelativePostcomposition p q F hF a ≫ gauntRelativePostcomposition q p G hG a) (𝟙 _)) (βa : SpecifiedNaturalEquivalence (gauntRelativePostcomposition q p G hG a ≫ gauntRelativePostcomposition p q F hF a) (𝟙 _)), α.IsInduced αa (pullback.snd _ _) ∧ β.IsInduced βa (pullback.snd _ _) ∧ IsFunctorEquivalence (gauntRelativePostcomposition p q F hF a)",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Retains the supplied inverse, both natural-equivalence edges, their inverse edges and all inverse triangles. Relative postcomposition is the canonical Mathlib pullback.map; IsInduced specifies the evaluation of each original witness on every simplex. Auxiliary records merely expose witnesses of the recorded dependency predicates."
  }
 }

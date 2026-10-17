@@ -218,5 +218,31 @@
   "group": "Q138",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-d89a9939d (reviewer sub-agent of L); spot-checked: PASS with no fixes, no new nodes and nothing dropped. I read the item, all 4 steps and every cited statement: lem-weil-strict-roos-comparison, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-weil-tower-category-levelwise-abelian, lem-weil-pbc-small-module-diagrams-grothendieck, lem-pur-kinjective-degreewise-existence, lem-weil-pbc-kinjective-hom-derived, and the defs. Statement: the sign convention (-dy-(1-s)x, dx) matches the cone/shift convention of def-weil-abstract-derived-category, and eta(z)=(0,z) is a chain map because lim = ker(1-s). The exact-countable-products hypothesis is genuinely needed (it is used for C(u)). Step 1 uses the functor clause of the existing comparison: a quasi-isomorphism u gives C(u) invertible in D, hence a quasi-isomorphism. It is also direct from Stacks 07KC. Step 2: Tow(A) is Grothendieck, so there is an injective-term K-injective replacement v:I->J; v is a homotopy equivalence by the K-injective Hom lemma, and the existing normalization makes eta_J a quasi-isomorphism. Step 3: lim preserves homotopies, the square C(v)eta_I = eta_J L(v) holds on coordinates, and 2-of-3 gives eta_I a quasi-isomorphism for an arbitrary K-injective I. This is the real content beyond the existing node. Step 4: L_I = R lim (ringed-tower node, consistent with Stacks 0941). From a_n^I eta_I = p_n and a_n^I C(u) = u_n a_n^X we get e_n theta = a_n^X. Small cases tested: zero transitions (1-s = id, R lim = 0), the constant identity tower (Roos complex = M), and u = id. Duplicate search: lem-weil-strict-roos-comparison is the nearest node, but it normalizes only injective-term resolutions; the item pre-existed (created by Q98) and its split cites that node rather than restating it. Route: unit sk-def-sf-operations cites no units. I accept the 4 declared tool_uses: two generic proper-base-change-unit lemmas and two Mathlib leaves. Not a target node, and no SGA is cited. Stacks tags 07KC, 08TC, 0940, 0941, 079P and 070I were checked against tags/tags and the .tex files. The blueprint place (last paragraph of def-weil-rationalization-karoubi, main-20261015) is correct."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d41d99c0",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion clause against the node and its 5 statement dependencies. Exact countable products are HasExactLimitsOfShape (Discrete ℕ). Towers use the recorded ℕᵒᵖ encoding with n ↔ n+1. Resolution is QuasiIso u plus IsKInjective I, with no injective-term assumption. Roos(X) = mappingCone(1−s)⟦-1⟧; Mathlib cone and shift signs plus the braiding give (−dy−(1−s)x, dx), and a rfl probe confirms strictRoosEndomorphism = 𝟙 − towerProductShift. ρ, η and a_n are uniquely fixed by coordinate equations for all p:ℤ. QuasiIso ρ and QuasiIso η are both asserted. θ.hom = Qρ ≫ (Qη)⁻¹, υ.hom = Q(u_n), and e_n θ = Q(a_n) holds for every n. L_I = limit I.asFunctor represents R lim per the recorded dependency. Universes uC, vC and max uC vC r stay independent, matching ringedStrictTowerHomotopyLimitOfUniverses. Node differs from the repository only in lean, and lean.statement appears verbatim in the file. Helpers carry real data and source/blueprint docstrings; the proof plan is present; only sorry (#print axioms). Report has Worker report and Second reading by Q05. nt_compile.py: rc 0, 2.5 s, clean; a probe shows the tool surfaces diagnostics. No duplicate recorded notion: integralOperationsRoos is an item-local helper in a pro-étale paper module, noted for later consolidation only."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StrictRoosDerivedLimitComparison",
+  "declaration": "CategoryTheory.strictRoosDerivedLimitComparison",
+  "declarations": [
+   "CategoryTheory.strictRoosProduct",
+   "CategoryTheory.strictRoosEndomorphism",
+   "CategoryTheory.strictRoosComplex",
+   "CategoryTheory.strictRoosCoordinates",
+   "CategoryTheory.strictRoosProductMap",
+   "CategoryTheory.strictRoosDerivedLimitComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/StrictRoosDerivedLimitComparison.lean",
+  "statement": "theorem strictRoosDerivedLimitComparison {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max uC vC r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}] (R : Sheaf J RingCat.{max uC vC r}) (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) [HasDerivedCategory.{w} (ringedSiteModules.{max uC vC r} R)] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} R)] (X I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (u : X ⟶ I) [QuasiIso u] [I.IsKInjective] : ∃ (ρ : strictRoosComplex X ⟶ strictRoosComplex I) (η : limit I.asFunctor ⟶ strictRoosComplex I) (a : ∀ n : ℕ, strictRoosComplex X ⟶ X.asFunctor.obj (op n)), (∀ p : ℤ, ρ.f (p + 1) ≫ (strictRoosCoordinates I p).hom = (strictRoosCoordinates X p).hom ≫ biprod.map ((strictRoosProductMap u).f p) ((strictRoosProductMap u).f (p + 1))) ∧ (∀ p : ℤ, η.f (p + 1) ≫ (strictRoosCoordinates I p).hom = biprod.lift 0 ((Pi.lift (fun n : ℕ ↦ limit.π I.asFunctor (op n))).f (p + 1))) ∧ (∀ (n : ℕ) (p : ℤ), (a n).f (p + 1) = (strictRoosCoordinates X p).hom ≫ biprod.snd ≫ (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f (p + 1)) ∧ QuasiIso ρ ∧ QuasiIso η ∧ ∃ (ε : DerivedCategory.Q.{w}.obj (limit I.asFunctor) ≅ DerivedCategory.Q.{w}.obj (strictRoosComplex I)) (θ : DerivedCategory.Q.{w}.obj (strictRoosComplex X) ≅ DerivedCategory.Q.{w}.obj (limit I.asFunctor)), ε.hom = DerivedCategory.Q.{w}.map η ∧ θ.hom = DerivedCategory.Q.{w}.map ρ ≫ ε.inv ∧ ∀ n : ℕ, ∃ υ : DerivedCategory.Q.{w}.obj (X.asFunctor.obj (op n)) ≅ DerivedCategory.Q.{w}.obj (I.asFunctor.obj (op n)), υ.hom = DerivedCategory.Q.{w}.map ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map u).app (op n)) ∧ θ.hom ≫ DerivedCategory.Q.{w}.map (limit.π I.asFunctor (op n)) ≫ υ.inv = DerivedCategory.Q.{w}.map (a n)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

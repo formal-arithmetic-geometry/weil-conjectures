@@ -195,5 +195,27 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-4db4b3af0 (reviewer sub-agent of L); spot-checked: I read the item, all 13 cited node statements, the parent's use of the item, and Stacks schemes.tex l.3545 (Tag 0HA1, lemma-local-ring-fibre) and algebra.tex l.3520 (Tag 0H9M, remark-local-ring-fibre); the tag-to-label mapping checks out. The statement matches the first isomorphism of 0HA1, made precise as the projection stalk map with its surjectivity, kernel and class formula. Nothing is added or dropped. Small cases all check: g=id; Spec Z[x] over Spec Z at (p,x) gives F_p[x]_(x), not the residue field; the generic point with m_t=0; and a nonreduced base k[eps]. Step 1: U is chosen inside g^{-1}(V), so preimages of affines are never assumed affine. Step 2: the hypotheses of open-fibre-product hold, the affine fibre-product and residue-field-identification nodes give exactly what is used, and the point y' comes from the homeomorphism clause of def-pc-scheme-fibre. Step 3: the germ formula, the localization clause and locality give the stalk map b/s -> j(b)/j(s) and both prime contractions, so the step is elementary. Step 4: natural-iso (split, reviewed 2026-10-10) has no extra hypotheses, its theta is the map computed in step 3, and its dependencies are pure algebra, so there is no cycle. Step 5: both containments for m_t O_{Y,y} = pB_q are written out. There are no new nodes. No duplicate exists at scheme level in the DAG, and Mathlib's Fiber.lean has no stalk computation. I accept the tool_use of lem-weil-pbc-fibre-ring-local-ring-natural-iso (unit sk-thm-p1): it is the generic 0H9M algebra that 0HA1 itself reduces to. No SGA is cited and no target is touched. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b37757a85",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Matched every clause of the node (Stacks 0HA1, first isomorphism) to the Lean: Scheme.{u} morphism g, point y, stalks, maximalIdeal, g.stalkMap, Mathlib g.fiber/fiberι, y' = g.asFiber y (the unique point, through fiberHomeo); p# = fiberStalkMap, a real composite of the canonical stalkCongr along fiberι_asFiber with fiberι.stalkMap, axioms standard; conclusion: surjective, ker = (maximalIdeal).map stalkMap, and ∃ e : quotient ≃+* fibre stalk with e[z] = p#(z). No extra hypotheses or universe restriction. Edge cases: empty Y, g = id, Z[x]/Z, generic point, nonreduced base. Only the theorem proof is sorry; its docstring has the five steps; source and blueprint docstrings present. Node changed only in lean, and lean.statement is verbatim in the file. No duplicate in Mathlib or the side/live trees. Report has Worker report and Second reading sections. nt_compile.py --json: compiles with no errors (2.3 s); #check/#print axioms confirm it. Minor: the module-stalk public import is unused but harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreStalkQuotient",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.fiberStalkMap_surjective_ker_quotientEquiv",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.fiberStalkMap",
+   "AlgebraicGeometry.Scheme.Hom.fiberStalkMap_surjective_ker_quotientEquiv"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreStalkQuotient.lean",
+  "statement": "theorem fiberStalkMap_surjective_ker_quotientEquiv {Y T : Scheme.{u}} (g : Y ⟶ T) (y : Y) : Function.Surjective (g.fiberStalkMap y).hom ∧ RingHom.ker (g.fiberStalkMap y).hom = (IsLocalRing.maximalIdeal (T.presheaf.stalk (g y))).map (g.stalkMap y).hom ∧ ∃ e : (Y.presheaf.stalk y ⧸ (IsLocalRing.maximalIdeal (T.presheaf.stalk (g y))).map (g.stalkMap y).hom) ≃+* (g.fiber (g y)).presheaf.stalk (g.asFiber y), ∀ z : Y.presheaf.stalk y, e (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (T.presheaf.stalk (g y))).map (g.stalkMap y).hom) z) = (g.fiberStalkMap y).hom z",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

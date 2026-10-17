@@ -9,7 +9,9 @@
  },
  "stmt_deps": [
   "def-sp-abelian",
-  "def-weil-pbc-exact-sequence"
+  "def-weil-pbc-exact-sequence",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-coef-yoneda-zero-splice"
  ],
  "proof": [
   {
@@ -214,5 +216,24 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-3c3a089f8 (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, statement unchanged. All four cited nodes are Mathlib leaves (def-sp-abelian, def-weil-pbc-exact-sequence, lem-weil-pbc-abelian-exact-iff-epi-kernel-lift, lem-sp-abelian-refinements), and each step uses exactly the clause it cites. Step 1: d:E_1→L is epic by the kernel-lift criterion, the prefix is exact because ℓ is monic, and K→P→F is short exact. Step 2: Q=ker((d,-a)), with j=(b,0) since db=0; the n=2 and n>2 cases are both handled. Step 3: s is epic by refinements (a) applied twice (Stacks 05PK(1)). Step 4: exactness at Q by (b) plus the jointly monic projections. Step 5: for n=2, j is monic; for n>2, ker j=ker b. Step 6: the splice is exact at Q (i is monic) and at P (the lift is s, which is epic). Step 7: all squares commute, including p·is=ℓas=ℓdr. Source checks: Stacks derived.tex:8775 Tag 06XT (common middle row; one morphism gives it with the identity), homology.tex Tags 010I, 05PJ, 05PK (line 919) and 08N5 (line 935), with labels confirmed in tags/tags. Small cases tested: n=2, p=1, F=0 (including p=0) and T=0 all check out. A duplicate search of dag/nodes found no duplicate (yoneda-zero-splice, sc-p1-pullback-extension-class and pbc-pushout-ses are different statements). The parent's step 8 use matches the hypotheses. Mathlib searches cover three kinds, with LeanSearch honestly recorded as unavailable. No SGA is used. No fixes; no tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0c14a95f",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read node, report, module, and the reused YonedaExtension/Equivalent (YonedaDerivedExtComparison) and RightSplice (YonedaZeroSplice) declarations. Clause-by-clause match: indices E0=obj'(n+2), E1=obj'(n+1); only Epi (p≫e) assumed; d and a fixed by kernel equations; B is the exact prefix identified by t with last arrow d; ShortExact kernel tail; H with b (leftMap 1, rightMap a, earlier components iso, IsPullback in correct orientation) forces incoming arrow (old,0); RightSplice gives joining arrow and final p≫e; φ is the projection, p, and identifications, fixing T and F, with G.Equivalent E. Edge cases n=0, degree 3, p=1, F=0/p=0, T=0 ok; universes u,v independent. Node statement verbatim unchanged; lean.statement verbatim in file; added stmt_deps landed and acyclic; citer step 8 fits. Own duplicate searches empty. No defs, sorry only, docstrings with source/blueprint/7-step plan. nt_compile.py rc=0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.YonedaPullbackSplice",
+  "declaration": "CategoryTheory.YonedaExtension.pullback_splice_equivalent",
+  "file": "lean/Sheaf/CategoryTheory/YonedaPullbackSplice.lean",
+  "statement": "theorem pullback_splice_equivalent {A : Type u} [Category.{v} A] [Abelian A] {T F : A} (n : ℕ) (E : YonedaExtension A T F (n + 2)) (e : E.sequence.obj' (n + 2) ⟶ F) (he : E.sequence.map' (n + 2) (n + 3) ≫ E.rightIso.hom = e) (P : A) (p : P ⟶ E.sequence.obj' (n + 2)) [Epi (p ≫ e)] : ∃ (d : E.sequence.obj' (n + 1) ⟶ kernel e) (a : kernel (p ≫ e) ⟶ kernel e) (B : YonedaExtension A T (kernel e) (n + 1)) (t : B.sequence.δlast ≅ E.sequence.δlast.δlast) (H : YonedaExtension A T (kernel (p ≫ e)) (n + 1)) (b : H.sequence ⟶ B.sequence) (G : YonedaExtension A T F (n + 2)) (s : RightSplice (ShortComplex.mk (kernel.ι (p ≫ e)) (p ≫ e) (kernel.condition (p ≫ e))) H G) (φ : G.sequence ⟶ E.sequence), d ≫ kernel.ι e = E.sequence.map' (n + 1) (n + 2) ∧ a ≫ kernel.ι e = kernel.ι (p ≫ e) ≫ p ∧ t.hom.app 0 ≫ E.leftIso.hom = B.leftIso.hom ∧ B.sequence.map' (n + 1) (n + 2) ≫ B.rightIso.hom = t.hom.app (Fin.last (n + 1)) ≫ d ∧ (ShortComplex.mk (kernel.ι (p ≫ e)) (p ≫ e) (kernel.condition (p ≫ e))).ShortExact ∧ H.leftMap B b = 𝟙 T ∧ H.rightMap B b = a ∧ (∀ k : Fin (n + 3), k.val < n + 1 → IsIso (b.app k)) ∧ IsPullback (b.app ⟨n + 1, by omega⟩) (H.sequence.map' (n + 1) (n + 2) ≫ H.rightIso.hom) (B.sequence.map' (n + 1) (n + 2) ≫ B.rightIso.hom) a ∧ (∀ k : Fin (n + 2), s.prefixIso.hom.app k ≫ φ.app k.castSucc.castSucc = b.app k.castSucc ≫ t.hom.app k) ∧ s.lastIso.hom ≫ ComposableArrows.app' φ (n + 2) = p ∧ G.leftMap E φ = 𝟙 T ∧ G.rightMap E φ = 𝟙 F ∧ G.Equivalent E",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed YonedaExtension, Equivalent, and RightSplice interfaces. The two owning nodes are added to stmt_deps. The exact prefix, its kernel-induced pullback, and the exact splice are specified up to endpoint-preserving identifications, with the comparison components constrained explicitly. The named arrow e is identified with the final sequence arrow by he; only p ≫ e is required epic."
  }
 }

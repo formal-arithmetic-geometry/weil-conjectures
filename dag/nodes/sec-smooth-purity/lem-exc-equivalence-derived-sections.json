@@ -236,5 +236,28 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-a8e7d40c9 (reviewer sub-agent of L); spot-checked: I read the item, the parent thm-exc-curve-open-dimension-general (steps 7-8, which use only the degree-q agreement), unit sk-prop-a1-kummer and all cited nodes, which are Mathlib leaves. I also read Stacks derived.tex 015M (l.7293), 013P (l.6386) and 05TD (l.5565). The statement is true and not weakened. Edge cases checked: E=id with α=id gives the identity, a nontrivial α is kept in degree 0, D=0 is trivial, and an injective X gives zero for q>0. There are no new nodes. My DAG search found no duplicate: the site-equivalence node and the iso-pullback nodes are different statements. Step 1 is the successive-cokernel construction and is correct. Step 2 uses equivalence-injective-resolutions (3), whose hypotheses hold. Step 3 makes a_I a chain isomorphism by naturality of α. Step 4 uses map-via-lift for S and T; T is fine because B has enough injectives. I checked the cancellation algebra in steps 5-6; they use lift-exists, E(u) and the two map formulas in the right direction. Fault in step 7 (C4): lem-sp-derived-well-defined gives only an unspecified natural iso R^0v≅v, not one induced by v(s). The degree-zero clause depends on that identification. Fix in fixes/dag/nodes/sec-smooth-purity/lem-exc-equivalence-derived-sections.json: step 7 now cites lem-weil-pbc-left-exact-injective-resolution-degree-zero (2), a Mathlib leaf, for σ_I: v(X)≅ker v(d^0) induced by v(s). It defines θ = i_I^{-1}σ_I and shows θ is independent of I and natural, using lift-exists and map-via-lift. Naturality of α at s then gives c^0θ^S = θ^Tα. The step is marked non-elementary and proof_deps is updated. All other fields are unchanged. No tool_uses are needed and no SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d89775868",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Clause-by-clause check of exists_equivalence_derivedSections against the node and Stacks 015M (derived.tex l.7292): abelian C,B,D; EnoughInjectives on C,B only; E additive IsEquivalence; S,T Additive+PreservesFiniteLimits; alpha : S ≅ E ⋙ T in the right direction; ∃ family of nat isos for all q:ℕ; resolution formula over every InjectiveResolution I using the literal termwise image; degree-zero equality via Mathlib rightDerivedZeroIsoSelf (induced by F(ι.f 0), RightDerived.lean:263) equals α. Six independent universes, no extra hypotheses. Helper InjectiveResolution.equivalenceImage has real data and is the injective counterpart of Mathlib Functor.mapProjectiveResolution; no Mathlib or side duplicate (SiteLerayDegenerate.mapResolution is private and needs different hypotheses). Node differs from main only in lean; lean.statement verbatim in file; docstrings carry source and blueprint tags and the 7 proof steps; only sorry. nt_compile.py (side overlay): 1.5 s, exit 0, no errors or warnings. Process notes only: the second reading was by the same worker (disclosed); the worker ran read-only git commands (disclosed, nothing changed)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EquivalenceDerivedSections",
+  "declaration": "CategoryTheory.exists_equivalence_derivedSections",
+  "declarations": [
+   "CategoryTheory.InjectiveResolution.equivalenceImage",
+   "CategoryTheory.exists_equivalence_derivedSections"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EquivalenceDerivedSections.lean",
+  "statement": "theorem exists_equivalence_derivedSections {C : Type u₁} {B : Type u₂} {D : Type u₃} [Category.{v₁} C] [Category.{v₂} B] [Category.{v₃} D] [Abelian C] [Abelian B] [Abelian D] [EnoughInjectives C] [EnoughInjectives B] (E : C ⥤ B) [E.Additive] [E.IsEquivalence] (S : C ⥤ D) (T : B ⥤ D) [S.Additive] [T.Additive] [PreservesFiniteLimits S] [PreservesFiniteLimits T] (α : S ≅ E ⋙ T) : ∃ c : ∀ q : ℕ, S.rightDerived q ≅ E ⋙ T.rightDerived q, (∀ (q : ℕ) (X : C) (I : InjectiveResolution X), (c q).hom.app X ≫ ((I.equivalenceImage E).isoRightDerivedObj T q).hom = (I.isoRightDerivedObj S q).hom ≫ HomologicalComplex.homologyMap ((NatTrans.mapHomologicalComplex α.hom (ComplexShape.up ℕ)).app I.cocomplex) q) ∧ (c 0).hom ≫ Functor.whiskerLeft E T.rightDerivedZeroIsoSelf.hom = S.rightDerivedZeroIsoSelf.hom ≫ α.hom",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The real-data helper equivalenceImage transports the specified injective resolution termwise. The theorem includes the arbitrary-resolution formula and degree-zero normalization; no definition, statement or dependency correction is required."
  }
 }

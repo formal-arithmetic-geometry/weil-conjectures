@@ -188,5 +188,27 @@
   "group": "Q147",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-bc34c04e8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the contract, the packet, the report, the item in full, def-weil-pbc-simplicial-set (it defines [r]), the parent lem-cbc-initial-prism-horn-filtration (its step 4 is the only user and takes exactly the two completions with indices p and p-1), unit sk-prop-sf-cbc and ancestor thm-cbc-finite-level-proetale. Kerodon 01DN has no local copy and stays WANTED; proof_origin=agent is correct. The statement is true. I checked it by hand and with my own enumeration of all 110 admissible chains for m<=3, 1<=n<=3, covering m=0, n=1, p=0 and p=m. Steps 1, 3 and 4 are correct and elementary: incomparability of (b,0) with (p,1) for b>p, and of (b,1) with (b+1,0) for b<p-1. No new nodes. rg over the DAG and the main-20261015 blueprint for 01DN, nonfree, vertical pair, strict chain and one-vertex found no duplicate, and the node is not a restated clause of its parent. Not a target, no SGA, no tool_uses. FIX, in fixes/dag/nodes/sec-smooth-purity/lem-cbc-nonfree-chain-completions.json: (1) step 2's justification was a non sequitur (coordinate coverage does not force the inserted vertex into the pair), so I rewrote it to argue from the definition of free and the absence of a pair in tau; (2) step 5 said surjectivity 'remains', which glosses p=0 where level 0 is gained from the pair, so I added that, plus adjacency and uniqueness of the pair and the position count; (3) blueprint.from.place named a 'final missing-face paragraph' of thm-cbc-finite-level-proetale that does not exist, so I rewrote it in the form of the parent's place. Statement and dependencies are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e06b3d65",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Matched every node clause to SSet.nonfreeChain_completions: m>=0 and n>=1; strict chain as Pairwise(<=,<=,!=); hfst; hsnd for 1..n; hnopair; first level-1 vertex via k, hfirst and hbefore; prefix as k=p plus the mapped take; free as IsFreePrismChain, a real Prop; one-vertex insertion as insertIdx with i<=length and x not in tau; RHS insertIdx p (p,0) or b+1=p with insertIdx p (b,1); pair positions p,p+1 and p-1,p with uniqueness. Nothing weaker or stronger, no universes or unbound variables. Edge cases m=0, n=1, p=0, p=m and empty tau checked. My own enumeration of the literal Lean semantics over m<=3, 1<=n<=3 (110 chains) passes every clause. Statement field verbatim in the file; stmt_dep def-weil-pbc-simplicial-set correct; sorry only; source and blueprint docstrings present; no duplicate found. nt_compile.py --json on the snapshot module: exit 0, no messages. The Second reading section is the 2026-10-17 direct-delivery placeholder, accepted. Cosmetic only: worker report says 'Lemma the project server'."
+ },
+ "lean": {
+  "module": "Sheaf.Combinatorics.NonfreeChainCompletions",
+  "declaration": "SSet.nonfreeChain_completions",
+  "declarations": [
+   "SSet.IsFreePrismChain",
+   "SSet.nonfreeChain_completions"
+  ],
+  "file": "lean/Sheaf/Combinatorics/NonfreeChainCompletions.lean",
+  "statement": "theorem nonfreeChain_completions (m n : ℕ) (hn : 1 ≤ n) (τ : List (Fin (m + 1) × Fin (n + 1))) (hchain : τ.Pairwise (fun x y ↦ x.1 ≤ y.1 ∧ x.2 ≤ y.2 ∧ x ≠ y)) (hfst : ∀ a : Fin (m + 1), ∃ x ∈ τ, x.1 = a) (hsnd : ∀ c : Fin (n + 1), 1 ≤ c.val → ∃ x ∈ τ, x.2 = c) (hnopair : ∀ b : Fin (m + 1), ¬ ((b, 0) ∈ τ ∧ (b, 1) ∈ τ)) (p : Fin (m + 1)) (k : ℕ) (hfirst : τ[k]? = some (p, 1)) (hbefore : ∀ j < k, ∀ x, τ[j]? = some x → x.2.val ≠ 1) : k = p.val ∧ (τ.take (k + 1)).map (fun x ↦ (x.1.val, x.2.val)) = (List.range p.val).map (fun a ↦ (a, 0)) ++ [(p.val, 1)] ∧ (∀ σ : List (Fin (m + 1) × Fin (n + 1)), (IsFreePrismChain σ ∧ ∃ (i : ℕ) (x : Fin (m + 1) × Fin (n + 1)), i ≤ τ.length ∧ x ∉ τ ∧ σ = τ.insertIdx i x) ↔ σ = τ.insertIdx p.val (p, 0) ∨ ∃ b : Fin (m + 1), b.val + 1 = p.val ∧ σ = τ.insertIdx p.val (b, 1)) ∧ (τ.insertIdx p.val (p, 0))[p.val]? = some (p, 0) ∧ (τ.insertIdx p.val (p, 0))[p.val + 1]? = some (p, 1) ∧ (∀ b : Fin (m + 1), ((b, 0) ∈ τ.insertIdx p.val (p, 0) ∧ (b, 1) ∈ τ.insertIdx p.val (p, 0)) ↔ b = p) ∧ (∀ b : Fin (m + 1), b.val + 1 = p.val → (τ.insertIdx p.val (b, 1))[b.val]? = some (b, 0) ∧ (τ.insertIdx p.val (b, 1))[p.val]? = some (b, 1) ∧ ∀ a : Fin (m + 1), ((a, 0) ∈ τ.insertIdx p.val (b, 1) ∧ (a, 1) ∈ τ.insertIdx p.val (b, 1)) ↔ a = b)",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

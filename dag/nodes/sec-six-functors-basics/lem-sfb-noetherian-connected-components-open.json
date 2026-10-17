@@ -134,12 +134,18 @@
   "is": null
  },
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.Mathlib.Topology.NoetherianSpace",
+  "declaration": "TopologicalSpace.NoetherianSpace.finite_connectedComponents",
   "declarations": [
    "TopologicalSpace.NoetherianSpace.finite_connectedComponents",
    "TopologicalSpace.NoetherianSpace.isOpen_connectedComponent"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 10:14 UTC for group Q75, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: Assuming only a topology and ACC on opens, the first gives finiteness of the maximal nonempt"
+  "statement": "instance finite_connectedComponents : Finite (ConnectedComponents α)",
+  "branch": "slopmaster2",
+  "by": "Q149",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The two existing declarations together state both clauses exactly. Their shared context is {α : Type*} [TopologicalSpace α] [NoetherianSpace α], with no nonemptiness or separation assumption. NoetherianSpace is ACC on opens. The primary instance gives Finite (ConnectedComponents α); theorem isOpen_connectedComponent (x : α) : IsOpen (connectedComponent x) gives openness. Mathlib connected components are maximal nonempty connected subsets; ConnectedComponents.isEmpty_iff_isEmpty includes the empty-space clause. Both upstream proofs are complete; this delivery writes no new Lean module."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -169,5 +175,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-372fcafda",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Existing record: finite_connectedComponents + isOpen_connectedComponent (WeilConjectures/Mathlib/Topology/NoetherianSpace.lean:50-62, sorry-free, axioms propext/choice/Quot.sound) state the node exactly: arbitrary-universe space, NoetherianSpace = WellFoundedGT (Opens α) = ACC on opens, no extra assumptions; Finite (ConnectedComponents α); IsOpen (connectedComponent x); empty case by ConnectedComponents.isEmpty_iff_isEmpty. Only the lean field changed; record complete, statement verbatim, branch slopmaster2 matches convention. Source 0052/04MF/04ME checked. Probe compiled with nt_compile.py --json. Report has Worker report and the standard Second reading section. No findings."
  }
 }

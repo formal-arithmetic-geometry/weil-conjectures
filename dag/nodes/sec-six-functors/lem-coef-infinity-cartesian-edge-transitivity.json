@@ -198,5 +198,23 @@
   "group": "Q149",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-b80f04379 (reviewer sub-agent of L); spot-checked: I read the whole item, all five steps and the statement of every cited node: def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, pinch-comparison, hom-bifunctor-functoriality, cartesian-mapping-criterion (including all ten of its proof steps) and homotopy-pullback-pasting. I also read the parent's step that uses the item and the unit record sk-prop-sf-biduality-general. Source: I read Kerodon 01TU (Cor. 5.1.2.6) online. Its assertion (1) is the cartesian version for inner fibrations of simplicial sets, so the item is that assertion restricted to quasicategories, with every hypothesis the same. Its proof (bottom square by 5.1.2.1, pasting by 3.4.1.11, then vary the test object) is what steps 3-5 follow. Small cases I tested: nerves of ordinary categories (where it is the classical strongly-cartesian cancellation), B a point (equivalences), and a=id or b=id (both trivially true). Empty mapping spaces are allowed by every cited node. Step 1 (a composite of inner fibrations is inner) really is elementary. The hom-bifunctor hypotheses hold because def-weil-size-convention gives universes U∈V. Step 3 needs only the forward direction of the criterion at the vertex a(z). Step 4's transposed use of pasting is fine, because the DAG defines a homotopy pullback square without fixing an orientation. One coherence point I checked and accept: the criterion's proof models the postcomposition square by a strict slice roof, while the item uses the Hom-bifunctor naturality squares. Both are the canonical postcomposition square and the item treats them the same way in steps 3 and 5, so this does not use a proof in place of a statement. Delivery-errors A-F: the delivery has one commit and creates no new nodes. I found no duplicate in the DAG (the closest, lem-coef-infinity-cocartesian-composition-initiality, is a different statement), and the item is not a clause of its parent. There is no cycle, every cited statement is in the item's own unit, no tool_uses are needed, and no SGA source is used. Kerodon/HTT are online only, so proof_origin agent with WANTED archives is right. I wrote no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-643d4d3ea",
+  "group": "NR",
+  "result": "pass",
+  "note": "Lean statement isCartesianEdge_iff_comp_of_isCartesianEdge matches the node and Kerodon 01TU Cor. 5.1.2.6(1) restricted to quasicategories, clause by clause: one universe u, three Quasicategory instances, two InnerFibration instances, edge h : Δ[1] ⟶ A, hypothesis IsCartesianEdge b (h ≫ a), conclusion IsCartesianEdge a h ↔ IsCartesianEdge (a ≫ b) h with the correct orientation. Read the recorded IsCartesianEdge (final horn Λ^n_n, edge {n-1,n}, no instance arguments, so no hidden assumption on the composite). No stronger hypotheses; edge cases (empty A, a or b identity, B a point) are consistent. The delivery adds one module, the node's lean record (verbatim match to the file) and the report with Worker report and Second reading sections. No definitions, theorem is by sorry, docstrings carry source place, blueprint tag and five proof steps. The proof dependency cartesian-mapping-criterion has no lean record, so it cannot be imported and is not needed for the statement. No duplicate in side lean/Sheaf or Mathlib. nt_compile.py --json compiled the module cleanly (1.8 s, exit code 0). No fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianEdgeTransitivity",
+  "declaration": "SSet.Enhanced.isCartesianEdge_iff_comp_of_isCartesianEdge",
+  "file": "lean/Sheaf/CategoryTheory/CartesianEdgeTransitivity.lean",
+  "statement": "theorem isCartesianEdge_iff_comp_of_isCartesianEdge {A D B : SSet.{u}} [Quasicategory A] [Quasicategory D] [Quasicategory B] (a : A ⟶ D) (b : D ⟶ B) [InnerFibration a] [InnerFibration b] (h : Δ[1] ⟶ A) (hh : IsCartesianEdge b (h ≫ a)) : IsCartesianEdge a h ↔ IsCartesianEdge (a ≫ b) h",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

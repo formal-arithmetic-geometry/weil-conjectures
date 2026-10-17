@@ -236,5 +236,35 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-2d53e5656 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the full review is in review.md; no fixes needed. The delivery is one commit with the item and its report and no new nodes. The statement, stmt_deps and blueprint ancestry are unchanged and no SGA source is cited. The statement is well-typed and true: c_a = eta_I^{-1} RF(Q a) : RF(Q N) -> Q(FI). By naturality of eta at g, c_b RF(h) c_a^{-1} = eta_J^{-1} RF(Q b h (Q a)^{-1}) eta_I = eta_J^{-1} RF(Qg) eta_I = Q(Fg). The transitions T = c_{a'} c_a^{-1} are the case h = 1. The cocycle identity and the intertwining square follow by cancellation, and both sides of the square equal c_{b'} RF(h) c_a^{-1}. Steps 1-7 each use exactly what the cited node statements give: F_K, invertibility of eta on K-injectives and the unit naturality from def-sfb-right-derived-functor; Q inverting quasi-isomorphisms from def-weil-abstract-derived-category; the unbounded Hom bijection from lem-weil-pbc-kinjective-hom-derived (Mathlib Qh_map_bijective) for existence and uniqueness. Only step 1 is marked elementary, which is right. Nothing uses boundedness, exactness of F or preservation of quasi-isomorphisms. I tested zero complexes, F = 0, F = id, a = identity on a K-injective N, coinciding resolutions, and a non-monic resolution of an acyclic N into 0. I checked the Stacks sources in derived.tex: 070I lemma-K-injective (l.9632), 070Y lemma-K-injective-defined (l.9747), 070K (l.9767) and 014X (l.3431), against tags/tags; the 014Z->014X correction is right. Duplicate search with rg over the DAG found nothing that duplicates or generalizes the item; I read lem-weil-pbc-kinjective-total-derived, lem-sp-kinjective-computes (bounded below, objects only), def-sfb-right-derived-functor and both citers. Both citers use only clauses the item states. The route stays in sk-def-sf-operations, since the cited nodes are only definitions and a Mathlib leaf. I accept the declared tool_use of lem-weil-pbc-kinjective-hom-derived."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e864b909",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean, nothing weaker or stronger: the unique homotopy-class lift and c_b RF(h) c_a^-1 = Q(Fg); identity and composition; transitions as isomorphisms equal to Q(Fk) with inverse and cocycle laws; the change-of-resolution square for every h. c_a is def-sfb's recorded comparison ObjIso, not an arbitrary map. The four helper definitions are real canonical composites. F only additive, resolutions only quasi-isomorphisms (no mono), no universe forced equal. Node differs from the side clone only in lean; lean.statement matches the file signature verbatim; declarations list matches; docstrings carry source, blueprint tag and proof steps; all proofs are sorry. A scratch file in /tmp proved the laws, the square and all four functoriality parts, confirming composition directions; the unique-lift parts follow from Mathlib Qh_map_bijective. Checked Stacks 014X/070I/070Y in derived.tex and tags. nt_compile.py on the local side overlay: rc=0, 2.3 s, no messages, reproduced twice (warn.sorry=false in the live lakefile). Report has a real Worker report and Second reading by Q147. No fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KInjectiveDerivedMapComputation",
+  "declaration": "CategoryTheory.Functor.kInjectiveDerivedMapComputation",
+  "declarations": [
+   "CategoryTheory.Functor.kInjectiveResolutionHomTarget",
+   "CategoryTheory.Functor.kInjectiveHomotopyImage",
+   "CategoryTheory.Functor.kInjectiveDerivedResolutionMap",
+   "CategoryTheory.Functor.kInjectiveDerivedResolutionTransition",
+   "CategoryTheory.Functor.kInjectiveDerivedMapComputation",
+   "CategoryTheory.Functor.kInjectiveDerivedMapComputation_functorial",
+   "CategoryTheory.Functor.kInjectiveDerivedResolutionTransition_computation",
+   "CategoryTheory.Functor.kInjectiveDerivedResolutionTransition_laws",
+   "CategoryTheory.Functor.kInjectiveDerivedResolutionTransition_naturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KInjectiveDerivedMapComputation.lean",
+  "statement": "theorem kInjectiveDerivedMapComputation {N N' I J : CochainComplex C ℤ} [I.IsKInjective] [J.IsKInjective] (a : N ⟶ I) (b : N' ⟶ J) [QuasiIso a] [QuasiIso b] (h : DerivedCategory.Q.obj N ⟶ DerivedCategory.Q.obj N') : (∃! g : (HomotopyCategory.quotient C (.up ℤ)).obj I ⟶ (HomotopyCategory.quotient C (.up ℤ)).obj J, DerivedCategory.Qh.map g = kInjectiveResolutionHomTarget a b h) ∧ (∀ g : (HomotopyCategory.quotient C (.up ℤ)).obj I ⟶ (HomotopyCategory.quotient C (.up ℤ)).obj J, DerivedCategory.Qh.map g = kInjectiveResolutionHomTarget a b h → F.kInjectiveDerivedResolutionMap enough a b h = F.kInjectiveHomotopyImage g)",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The declarations together state all clauses: unique homotopy-class lift and derived-map computation; identity and composition; transition computation, inverse and cocycle; change-of-resolution square. Four real-data helpers express the canonical transported target, degreewise image, conjugated derived map and transition isomorphism; the comparison c_a is reused from def-sfb-right-derived-functor."
  }
 }

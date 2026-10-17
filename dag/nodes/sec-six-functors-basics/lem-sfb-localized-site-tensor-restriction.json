@@ -167,5 +167,23 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-828f0a00f (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 4 steps, every cited statement, Stacks 03EL (sites-modules l.3649) and the localization section and definition (l.1992/2019; j_U^♯ is the identity and O_U(V/U)=O(V), so the coefficient ring O_U is O|_U itself and is not changed), Mathlib CoverLifting.lean:382-411, and blueprint main-20261015 limits.proof.md 'Tensoring with L'. The statement is the 03EL special case with no added or dropped hypotheses and the pure-tensor normalization in the correct direction. Small cases hold: one-object trivial site, open site of a space (01CD), zero ring, F=0, non-flat Z/2, empty covering sieves. Step 1 (presheaf identification P|_U=Q) is elementary from the definitions. Step 2 applies lem-cbc-sieve-slice-sheafification only with abelian values, its hypotheses hold, and module sheafification is abelian sheafification by def-weil-presheaf-modules-sheafification. Step 3: I checked by hand that the action transported along c extends the action on Q, so the uniqueness clause makes c O_U-linear. Step 4: the normalization and naturality follow from the unit equation and naturality of c. All dependencies are definitions or Mathlib leaves, so the route is respected and no tool_uses are needed; no SGA, no cycle. No new nodes. Duplicate check: lem-pc-open-localized-tensor-natural (topological spaces only), lem-weil-pbc-module-restriction-tensor-comparison (scheme open immersions only), lem-pur-isomorphism-inverse-image-tensor-hom (scheme isomorphisms only) and lem-weil-pbc-ringed-topoi-module-pullback-tensor (not a one-line specialization, and it lacks the normalization) are not duplicates. Blueprint search finds none, so same_as=[] and from.node is correct. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc9abe278",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Read node, 3 stmt deps (SheafOfModules.over/J.over/A.over; ringedSiteModules; siteSheafTensorRight/SecondMap/Tmul in side SiteTensorFunctoriality+TensorProductOfUniverses), Stacks 03EL l.3649 and 03DH l.2019. Lean matches clause by clause: arbitrary site, comm ring sheaf, iso (F⊗G)|_U ≅ F|_U⊗G|_U in the correct direction, joint naturality in f,g, unit-on-C to unit-on-C/U pure-tensor formula for every V→U; no finiteness/flatness. Extra instances are the sheafification instances required by the tensor dependency on J and J.over U; with a small site and equal universes all six are found automatically. Universes uC vC r m are independent and bound. Only lean field changed; statement verbatim; no defs, sorry only, docstrings carry source+blueprint+4 proof steps; no duplicate found. nt_compile reproduces a clean compile (2.5 s). The Second-reading section is the 2026-10-17 direct-delivery placeholder, which is current procedure (28 landed reports carry it)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction",
+  "declaration": "SheafOfModules.exists_localizedSiteTensorRestriction",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/LocalizedSiteTensorRestriction.lean",
+  "statement": "theorem exists_localizedSiteTensorRestriction {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasWeakSheafify J AddCommGrpCat.{m}] (A : Sheaf J CommRingCat.{r}) (U : C) [(J.over U).HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{m}] [HasWeakSheafify (J.over U) AddCommGrpCat.{m}] : ∃ e : ∀ F G : ringedSiteModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A), ((siteSheafTensorRight G).obj F).over U ≅ (siteSheafTensorRight (A := A.over U) (G.over U)).obj (F.over U), (∀ (F F' G G' : ringedSiteModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) (f : F ⟶ F') (g : G ⟶ G'), (((siteSheafTensorRight G).map f ≫ siteSheafTensorSecondMap F' g).over U) ≫ (e F' G').hom = (e F G).hom ≫ (siteSheafTensorRight (A := A.over U) (G.over U)).map (f.over U) ≫ siteSheafTensorSecondMap (A := A.over U) (F'.over U) (g.over U)) ∧ (∀ (F G : ringedSiteModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) (V : Over U) (x : F.val.obj (op V.left)) (y : G.val.obj (op V.left)), ((e F G).hom.val.app (op V)) (siteSheafTensorTmul F G (op V.left) x y) = siteSheafTensorTmul (A := A.over U) (F.over U) (G.over U) (op V) x y)",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
