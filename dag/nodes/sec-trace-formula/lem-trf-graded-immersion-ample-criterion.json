@@ -20,9 +20,82 @@
   "def-weil-closed-immersion",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an affine open $V\\subseteq S$, put $T=h^{-1}(V)$, and write $A=\\mathcal A(V)$ and $P=\\operatorname{Proj}(A)$. The affine restriction of the relative Proj and of the canonical map in [lem-trf-space-line-module-proj-map] identifies $r_{L,\\psi}|_T$ with the ordinary canonical morphism $r:T\\to P$ attached to the graded ring map $A\\to\\Gamma_*(T,L|_T)$ induced by $\\psi$. Because $U(\\psi)=Z$, the positive-degree images generate $L|_T$ at every point, so the nonvanishing opens of positive-degree homogeneous sections cover $T$.",
+   "uses": [
+    "lem-trf-space-line-module-proj-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, proof of (6) implies (1), affine reduction; Constructions Tag 01O9, affine restriction and canonical map."
+   }
+  },
+  {
+   "text": "The morphism $r:T\\to P$ is an immersion and $T$ is quasi-compact, since $h$ is quasi-compact and $V$ is affine. By [lemma-nagata-immersion-shrink-to-closed-exists] there is a quasi-compact open $Y\\subseteq P$ containing $r(T)$ such that the induced morphism $i:T\\to Y$ is a closed immersion; with $u:Y\\to P$ the open inclusion, $r=u\\circ i$.",
+   "uses": [
+    "lemma-nagata-immersion-shrink-to-closed-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, proof of (6) implies (1), paragraph asserting that quasi-compact X is a closed subscheme of a quasi-compact open Y in Proj(A)."
+   }
+  },
+  {
+   "text": "By [lem-trf-proj-qc-open-twist-ample], there is an integer $e\\geq1$ for which $\\mathcal O_Y(e)$ is invertible and ample. Restricting this ample module along the closed immersion $i$ and using [lem-trf-ample-restrict-closed-immersion] shows that $i^*\\mathcal O_Y(e)$ is ample on $T$. Via $u^*\\mathcal O_P(e)=\\mathcal O_Y(e)$, this is ampleness of $r^*\\mathcal O_P(e)$.",
+   "uses": [
+    "lem-trf-proj-qc-open-twist-ample",
+    "lem-trf-ample-restrict-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, proof of (6) implies (1), using Properties Tags 01PU and 01Q2."
+   }
+  },
+  {
+   "text": "The ring map and canonical morphism from Step 1 satisfy the hypotheses of [lem-trf-proj-canonical-map-twist-comparison] ($T$ is quasi-compact and the nonvanishing opens of positive-degree homogeneous elements cover $T$), so for some $d\\geq1$ there is an isomorphism $r^*\\mathcal O_P(dk)\\simeq L|_T^{\\otimes dk}$ for every $k\\geq1$. Take $k=e$. With $e$ as in Step 3, [lem-trf-proj-qc-open-twist-ample] (with $k=d$) says that the multiplication map $\\mathcal O_Y(e)^{\\otimes d}\\to\\mathcal O_Y(ed)$ is an isomorphism on $Y$; this identification is only asserted on the quasi-compact open $Y$, not on all of $P$ (for $A=k[x,y]$ with $\\deg x=1$, $\\deg y=2$, the map $\\mathcal O_P(1)^{\\otimes2}\\to\\mathcal O_P(2)$ is not surjective at the point of $D_+(y)$ where $x^2/y=0$). Since $r=u\\circ i$ and pullback commutes with tensor products [def-pur-sheaf-tensor-product], $r^*\\mathcal O_P(ed)=i^*\\mathcal O_Y(ed)\\simeq(i^*\\mathcal O_Y(e))^{\\otimes d}$. This is ample by Step 3 and [lem-sc-ample-positive-tensor-power]. Hence $L|_T^{\\otimes ed}\\simeq r^*\\mathcal O_P(ed)$ is ample.",
+   "uses": [
+    "lem-trf-proj-canonical-map-twist-comparison",
+    "lem-trf-proj-qc-open-twist-ample",
+    "lem-sc-ample-positive-tensor-power",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, proof of (6) implies (1), paragraphs on the pullback of O(d) and ampleness of a quasi-compact open of Proj."
+   }
+  },
+  {
+   "text": "Since $ed>0$, every affine nonvanishing section cover for the positive tensor power $L|_T^{\\otimes ed}$ is also a cover by sections of positive tensor powers of $L|_T$ (with the same nonvanishing loci). Thus $L|_T$ is ample directly from [def-weil-pbc-ample-invertible-module]. As this holds for the inverse image of every affine open $V\\subseteq S$, the asserted relative ampleness follows from the quasi-compactness of $h$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, conclusion of (6) implies (1), together with Definition 01PS of ample and Definition 01VH of relatively ample."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-positive-tensor-power",
+  "lem-trf-ample-restrict-closed-immersion",
+  "lem-trf-proj-canonical-map-twist-comparison",
+  "lem-trf-proj-qc-open-twist-ample",
+  "lem-trf-space-line-module-proj-map",
+  "lemma-nagata-immersion-shrink-to-closed-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ, implication (6) implies (1), with Constructions Tag 01O9 and Properties Tags 01PU, 01Q2, 01PT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +131,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": Proj 𝒜 ⟶ Spec (.of <| 𝒜 0)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": Spec (.of <| Away 𝒜 f) ⟶ Proj 𝒜\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (basicOpenIsoSpec 𝒜 f f_deg hm).inv ≫ (Proj.basicOpen 𝒜 f).ι = awayι 𝒜 f f_deg hm\", \"doc\": \"The composition of the inverse of the isomorphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})$ with the inc\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι_toSpecZero\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": awayι 𝒜 f f_deg hm ≫ toSpecZero 𝒜 = Spec.map (CommRingCat.ofHom (fromZeroRingHom 𝒜 _))\", \"doc\": \"The composition of the inclusion morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)}) \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ with the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{\"}\n  {\"name\": \"AlgebraicGeometry.Proj.stalkIso'_symm_mk\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"(x) (f) :\\n  (Proj.stalkIso' 𝒜 x).symm (.mk f) =\\n    (Proj.structureSheaf 𝒜).presheaf.germ _ x (mem_basicOpen_den _ x f) (sectionInBasicOpen _ x f)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a point $x$ in its projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$, the inverse of the stalk-localization isomorphism $\\\\mathcal{O}_{\\\\text{Proj}(\\\\mathcal{A})}|_x \\\\con\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \"(f) : CommRingCat.of (A⁰_ f) ⟶ LocallyRingedSpace.Γ.obj (op <| Proj| pbo f)\", \"doc\": \"A morphism in the category of commutative rings that maps the localization of a graded ring $ A $ at the submonoid generated by powers of a homogeneous element $ f $ to the global sections of the stru\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \":\\n  CommRingCat.ofHom (awayMap 𝒜 g_deg hx) ≫ awayToSection 𝒜 x =\\n    awayToSection 𝒜 f ≫ (Proj 𝒜).presheaf.map (homOfLE (basicOpen_mono _ _ _ ⟨_, hx⟩)).op\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f,g$ where $f$ divides $g$, the composition of the ring homomorphism $\\\\mathcal{A}_{(g)} \\\\to \\\\mathcal{A}_{(f)}$ (induced by localization) follo\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \"{f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) (x : Spec.T (A⁰_ f)) : toSpec 𝒜 f (FromSpec.toFun f_deg hm x) = x\", \"doc\": \"For a homogeneous element $ f $ of positive degree in a graded ring $ \\\\mathcal{A} $, the composition of the continuous map from the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ to the prim\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact scheme morphism to relative Proj whose everywhere-defined canonical map is an immersion implies the line bundle is ample",
+   "results": "Proj and quasi-compactness declarations only; no relative ampleness theorem",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAmple, IsImmersion, Proj",
+   "results": "0 hits; loogle reports unknown identifier IsAmple",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*Proj|Proj.*ample in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "graded algebra map to tensor powers invertible sheaf immersion Proj implies ample",
+   "results": "Proj chart and pullback declarations only; no ampleness theorem",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-ample-very-ample",
@@ -89,5 +190,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-graded-immersion-ample-criterion",
+  "worker": "stage1",
+  "summary": "Split the Stacks 01VJ implication (6) implies (1) after affine localization on the base. Step 2 cites the existing Lean-closed node lemma-nagata-immersion-shrink-to-closed-exists to factor the quasi-compact immersion through a quasi-compact open and a closed immersion. The split adds the general closed-subscheme restriction of ampleness (Stacks 01PU). The proof then uses the existing quasi-compact-open Proj twist ampleness and canonical-map twist comparison, followed by the direct positive-power-to-original argument. No statement change was made; the wording remains the source's quasi-compact hypothesis.",
+  "blueprint": "Realizes the arbitrary graded-algebra immersion criterion used by the relative-ample/very-ample route: affine reduction, quasi-compact immersion into a Proj open, restriction of a positive twist, and comparison with tensor powers of L.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-line-module-proj-map",
+    "why": "Generic construction of the canonical graded-algebra map to relative Proj, including its affine restriction, used as a black box in 01VJ (6) implies (1); no Frobenius local-term argument is invoked."
+   },
+   {
+    "node": "lem-trf-proj-qc-open-twist-ample",
+    "why": "Generic absolute Proj theorem (Stacks 01Q2) giving an ample positive twist on a quasi-compact open; it is used with its stated hypotheses in the source argument."
+   },
+   {
+    "node": "lem-trf-proj-canonical-map-twist-comparison",
+    "why": "Generic canonical-map pullback comparison (Stacks 01NK), used with its stated hypotheses to compare a positive Proj twist with a tensor power of the given line module."
+   },
+   {
+    "node": "lem-sc-ample-positive-tensor-power",
+    "why": "Generic absolute ampleness theorem (Stacks 01PT) for a positive tensor power of an ample invertible module; it is used as a black box with no curve-cohomology argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-line-module-proj-map",
+  "lem-trf-proj-qc-open-twist-ample",
+  "lem-trf-proj-canonical-map-twist-comparison",
+  "lem-sc-ample-positive-tensor-power"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-4491472ee",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-4491472ee (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, the unit record, the statements of all cited nodes, and Stacks 01VJ (statement and whole proof, especially '(6) implies (1)') and Properties 01PU. The statement matches 01VJ (6)⇒(1) hypothesis by hypothesis. Its conclusion is relative ampleness over every affine open (01VH), not weakened, with no degree-one or A_0 condition. The proof steps follow the source. Fixes: (1) Dropped the new node lem-trf-qc-immersion-proj-open-factor as a duplicate (C5). It is the special case Y=Proj(A) of the existing node lemma-nagata-immersion-shrink-to-closed-exists, which is Lean-closed (AlgebraicGeometry.Scheme.Hom.exists_isCompact_isClosedImmersion, sorry-free). Step 2 now cites that node, and every citation of the dropped node is removed (stmt_deps, step 2 uses, proof_deps, unit realized.steps[1]). (2) Rewrote Step 4. It asserted O_P(e)^{⊗d}≅O_P(ed) on all of P, which is false for non-degree-one A: for A=k[x,y] with deg y=2, the map O(1)^{⊗2}→O(2) fails to be surjective on D_+(y) where x²/y=0. The step now uses the identification on Y given by lem-trf-proj-qc-open-twist-ample (added to its uses): r^*O_P(ed)=i^*O_Y(ed)≅(i^*O_Y(e))^{⊗d}, which is ample. (3) Corrected the blueprint.from.place of lem-trf-ample-restrict-closed-immersion, which had been copied from the factorization node. (4) Removed the two proof-only nodes from the item's stmt_deps. lem-trf-ample-restrict-closed-immersion is kept: it is exactly 01PU, true, self-contained, and not a duplicate (only special cases exist in the DAG, and the blueprint has no node for it). Accepted the four declared tool_uses as generic black-box uses. No SGA, no cycles, not a target node. The unit record's step texts 2 and 4 still show the old wording; the maintainer should re-sync them. I counted three substantive repairable faults plus a dependency-list nit, so FIX rather than RETURN.; 3 file(s) fixed by the reviewer"
  }
 }
