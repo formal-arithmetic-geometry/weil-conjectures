@@ -99,7 +99,8 @@ of `R(𝟙 X)_* ≅ 𝟭` (`boundedConstructibleLowerStarId`), the exchange isom
 composition isomorphism `boundedConstructibleLowerStarComp`. For compactifications `c` and `c₁`
 of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and `p₁ = c₁.overG`, it is an
 isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
-noncomputable def boundedConstructibleLowerShriekRefinementIso [IsFinitenessCoefficient ℓ Λ] (sq : IsPullback (𝟙 X) i i₁ h)
+noncomputable def boundedConstructibleLowerShriekRefinementIso
+    [IsFinitenessCoefficient ℓ Λ] (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
     [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq)] :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙ boundedConstructibleLowerStar Λ ℓ p₁ ≅
