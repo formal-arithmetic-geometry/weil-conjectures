@@ -110,7 +110,8 @@ C-extension with identity tensor t. Tensorator naturality and whisker exchange
 prove its naturality in the input complex. Take homology and compose with the
 previous comparison. Extend the ordinary model isomorphism to C; associativity
 and the component equation give the displayed equality. No flatness of C, no
-invertibility of t and no K-flatness of N is used. Zero rings, zero complexes and unbounded complexes
+invertibility of t and no K-flatness of N is used. Zero rings, zero complexes and
+unbounded complexes
 are covered by the same maps and tensor generator equations.
 (blueprint: lem-pc-kflat-localized-tensor-comparison-natural). -/
 theorem exists_kFlatLocalizedTensorComparison_natural

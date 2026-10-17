@@ -67,7 +67,6 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 Source: Stacks Project, Tag 0DJA(1), retract part.
 (blueprint: lem-pc-localized-tensor-comparison-closure-retracts-core) -/
 theorem localizedTensorComparisonProperty_retract_core
-    (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)
     {X Y : DerivedCategory (ModuleCat.{u} A)} (hXY : Retract X Y)
@@ -87,7 +86,7 @@ theorem localizedTensorComparisonProperty_retract_core
   obtain ⟨eUX⟩ := hUX
   obtain ⟨V, ⟨eVY⟩, hV⟩ := exists_kFlat_representative Y
   obtain ⟨mV⟩ := nonempty_baseDerivedTensorCohomologyModel R A B (V ⊗ Q) C
-  obtain ⟨H, hH⟩ := exists_localizedTensorComparison_derived_arrow R A B C Q N t hC hQ i
+  obtain ⟨H, hH⟩ := exists_localizedTensorComparison_derived_arrow R A B C Q N t hQ i
   obtain ⟨eU⟩ := hH U hU mU
   obtain ⟨eV⟩ := hH V hV mV
   have hr : Retract (DerivedCategory.Q.obj U) (DerivedCategory.Q.obj V) :=
