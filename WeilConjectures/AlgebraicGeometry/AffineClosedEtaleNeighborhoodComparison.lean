@@ -113,10 +113,11 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
             (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) ∘
           ⇑(Sheaf.H.map ef.inv q) := by
       funext x
-      simp only [Function.comp_apply]
-      erw [← cohomologyMap_map k q ef.hom (Sheaf.H.map ef.inv q x), ← Sheaf.H.map_comp_apply,
-        ef.inv_hom_id]
-      simp
+      have hx : Sheaf.H.map ef.hom q (Sheaf.H.map ef.inv q x) = x := by
+        rw [← Sheaf.H.map_comp_apply, ef.inv_hom_id, Sheaf.H.map_id_apply]
+      calc cohomologyMap k tG q x
+          = cohomologyMap k tG q (Sheaf.H.map ef.hom q (Sheaf.H.map ef.inv q x)) := by rw [hx]
+        _ = _ := cohomologyMap_map k q ef.hom (Sheaf.H.map ef.inv q x)
     rw [heq]
     exact (hiso (((k)^*[AddCommGrpCat.{u + 1}]).mapIso ef)).comp (hgab.comp (hiso ef.symm))
   have hkk : Function.Bijective (cohomologyMap kk tG q) := by
@@ -128,7 +129,7 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
       simp only [Function.comp_apply]
       rw [(cohomologyPullbackFunctorial e.hom k tG q).2.1 x, ← Sheaf.H.map_comp_apply,
         Iso.hom_inv_id_app]
-      simp only [Sheaf.H.map_id, AddMonoidHom.id_apply]
+      rw [Sheaf.H.map_id_apply]
       rfl
     rw [heq]
     exact (hiso ((upperStarComp AddCommGrpCat.{u + 1} e.hom k).app tG).symm).comp
