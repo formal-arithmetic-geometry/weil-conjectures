@@ -29,7 +29,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-cbc-enhanced-cartesian-fibration"
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-cat-infinity-colimits-cartesian-closure"
  ],
  "proof": [
   {
@@ -203,5 +204,34 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-ba136e256 (reviewer sub-agent of L); spot-checked: I read the item, its eight steps and the full statement of every cited node: def-cbc-enhanced-diagrams-cones, def-cbc-enhanced-cartesian-fibration, lem-coef-marked-point-cartesian-model, lem-coef-realization-finite-limits and lem-coef-simplicial-model-nerve-localization. I also read the unit sk-prop-sf-biduality-general, the chapter, and the only citer, lem-coef-ind-right-adjoint-coherent step 1. The delivery has no new nodes; the false helper, which had the wrong variance (Fun(C,D) where Fun(C,D)^op is needed), was correctly dropped. Checks by step: (1) I recomputed (beta alpha)^vee = beta^vee alpha^vee, (alpha^vee)^vee = alpha, and products. (2) theta_n is simplicial and carries the horn Lambda_{n-i} into (Lambda_i)^op; reversal swaps the inverse witnesses. (3) I verified theta_n alpha = (alpha^vee)^op theta_m on simplices, which gives Map^sharp(X,Y)^op = Map^sharp(OX,OY), natural in X. (4) Reflecting barycentric coordinates satisfies |alpha^vee|(rev t) = rev(|alpha| t), so it respects the realization quotient; the weak-equivalence test transfers through C^op, which is a small quasicategory by step 2. (5) I matched every hypothesis of the nerve-localization node against the marked-point model: all objects are cofibrant, the fibrants are the C^natural, and the cores give Cat_infty. So q is a localization with the universal property for every target. (6)-(8) The descent, the lift of op^2 = id, and the universe compatibility via the strict identity i q_U = q_V N(incl) are correct. The values C^op and u^op hold through the specified comparison eta, which is how the citer uses them. Small cases checked: empty set, Delta^0, Delta^1, no inner horns in dimension 1, degenerate edges, the fork poset. proof_deps equals the union of the step uses. All dependencies are in the item's own unit or are definitions, so no tool_uses are needed. No cycle. Duplicate search by rg over dag/nodes and blueprint main-20261015 found none. No SGA source is cited. The item is not a target, so the base-change check does not apply. HTT is WANTED and proof_origin is agent. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cff43530",
+  "group": "Q40",
+  "result": "fix",
+  "note": "H3 repairs, theorem signature unchanged: (1) the node's arrow clause 'value on u is u^op' was missing; added IsCatInfinityOpposite.arrow as HEq of catInfinityArrow (op e) with opFunctor.map (catInfinityArrow e). (2) The clause 'component at C equivalent to the identity of (C^op)^op = C' was missing; added a named equivalence edge from op≫op to 𝟙 with, for every C, a 2-simplex whose faces are the evaluated component and two degenerate edges at C. (3) The enlargement statement was vacuous (op = opSmall = 𝟙 satisfied it); it now requires IsCatInfinityOpposite for the max u v op plus an involutive self-equivalence opSmall on catInfinitySmallObjects. New declarations catInfinityThickEdge, catInfinityArrow (a real edge projection with the same body as transportCatEdgeMap), IsCatInfinityOpposite; docstring gives all 8 proof steps; lean-record declarations/note and report updated. Truth checked against the node proof (rectification along sk0/sk1, step 7, full small subcomplex). Other checks: no hollow defs, only sorry, docstrings, no extra assumptions or universe restrictions, added stmt_dep on the colimits lemma is acyclic. nt_compile: delivered and fixed modules both rc 0 clean; planted-error control rc 1."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CatInfinityOppositeInvolution",
+  "declaration": "SSet.Enhanced.catInfinity_opposite_involution",
+  "declarations": [
+   "SSet.Enhanced.catInfinityObject",
+   "SSet.Enhanced.catInfinityThickEdge",
+   "SSet.Enhanced.catInfinityArrow",
+   "SSet.Enhanced.IsCatInfinityOpposite",
+   "SSet.Enhanced.CatInfinityOppositeStatement",
+   "SSet.Enhanced.CatInfinityOppositeEnlargementStatement",
+   "SSet.Enhanced.catInfinity_opposite_involution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CatInfinityOppositeInvolution.lean",
+  "statement": "theorem catInfinity_opposite_involution : CatInfinityOppositeStatement.{u} ∧ CatInfinityOppositeStatement.{max u v} ∧ CatInfinityOppositeEnlargementStatement.{u, v}",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The fixed-universe proposition records strict reversal, quasicategory and product preservation, and a coherent CatInfinity map satisfying IsCatInfinityOpposite: object values C^op, arrow values u^op (HEq of the edge functors catInfinityArrow), a coherent double-opposite equivalence whose component at each C is homotopic to the identity edge, and IsFunctorEquivalence. The enlargement proposition requires the same clauses of the larger-universe op and its restriction along the canonical full subcomplex catInfinitySmallObjects of small objects. Maintainer second reading (FIX): the delivered version omitted the arrow and component clauses, and its enlargement clause had no object clause, so the identity map satisfied it. catInfinityObject/catInfinityArrow are local projections of the coherent-nerve vertex/edge (same bodies as compactCatValue/transportCatEdgeMap of lemma modules, not imported to avoid lemma-module dependencies). The false unopposed mapping-space helper from the earlier review is not reintroduced.",
+  "fixed_by": "NT-stage2-cc-6cff43530"
  }
 }
