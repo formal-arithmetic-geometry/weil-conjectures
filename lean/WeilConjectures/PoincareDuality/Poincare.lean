@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.SmoothPurity.Defs
-import Sheaf.PoincareDuality.ConstructibleShiftSingle
-import Sheaf.PoincareDuality.TateTwistLocalLine
 
 /-!
 
@@ -56,12 +54,6 @@ objects of `Over (Spec (.of k))` and `p` a morphism of `Over (Spec (.of k))`.
 
 @[expose] public section
 
--- Avoid unfolding the K-injective internal-Hom and coefficient pullback constructions.
-attribute [local irreducible] DerivedCategory.monoidalClosed
-  CategoryTheory.Mod.monoidalClosed AlgebraicGeometry.ProEtale.upperStarFromPoint
-
-attribute [local instance 2000] CategoryTheory.ObjectProperty.fullMonoidalSubcategory
-
 universe u
 
 open CategoryTheory MonoidalCategory MonoidalClosed
@@ -82,18 +74,6 @@ variable {X S : Over (Spec (.of k))}
 
 /-! ### Smooth purity on bounded constructible complexes -/
 
-private theorem boundedConstructible_zeroTateTwistDerived (X : Scheme.{u}) (n : ℤ) :
-    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)
-      ((shiftFunctor _ n).obj (tateTwistDerived X ℓ 0)) := by
-  exact boundedConstructible_shift_single _ _ (zeroTwist_constructible X ℓ) n
-
-/- STATEMENT-DISPUTED: this signature drops the blueprint assumption that ℓ is invertible
-on X. The reviewed node nt-target-poincare-tate-bc records the counterexample
-X = Spec(F̄_ℓ[⊕ᵢ ℚ_ℓ/ℤ_ℓ]) with infinitely many summands: its compatible roots give an
-infinite-rank Tate module, hence a nonconstructible first twist. The section variables
-involving k do not occur in this lemma's type and impose no condition on X.
-The ell-invertible corrected statement is the current DAG statement. No proof of the
-unrestricted statement follows from that route. -/
 /-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]` is bounded constructible. -/
 lemma boundedConstructible_tateTwistDerived (X : Scheme.{u}) (d n : ℤ) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)
@@ -153,37 +133,14 @@ omit [SmoothOfRelativeDimension d p.left] in
 followed by the trace. -/
 theorem uncurry_poincareMap :
     uncurry (poincareMap ℓ p d) = cupProduct ℓ p d ≫ trace ℓ p d :=
-  Verdier.uncurry_poincareMap
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ p)
-    (boundedConstructibleExceptionalProjection _ ℓ p)
-    (boundedConstructibleSmoothPurityIso ℓ p d)
-
-universe v₁ v₂ u₁ u₂
-
-private theorem poincareMap_isIso_of_exchange
-    {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [MonoidalClosed C]
-    {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] [MonoidalClosed D]
-    {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
-    {P : C ⥤ D} {S : D ⥤ C} (adj' : P ⊣ S)
-    (pf : curriedTensorInsertFunctor₁ P ⟶
-      curriedTensorPost P ⋙ (Functor.whiskeringLeft D C D).obj F)
-    {T : C} (pur : S.obj (𝟙_ D) ≅ T)
-    (h : IsIso (Verdier.exchange adj adj' pf (𝟙_ C) (𝟙_ D))) :
-    IsIso (Verdier.poincareMap adj adj' pf pur) := by
-  have := h
-  unfold Verdier.poincareMap
-  infer_instance
+  Verdier.uncurry_poincareMap _ _ _ _
 
 omit [SmoothOfRelativeDimension d p.left] in
 /-- **Poincaré duality**: the Poincaré duality morphism
 `PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)` is an isomorphism, by Verdier duality. -/
 theorem isIso_poincareMap : IsIso (poincareMap ℓ p d) := by
-  exact poincareMap_isIso_of_exchange
-    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ p)
-    (boundedConstructibleExceptionalProjection _ ℓ p)
-    (boundedConstructibleSmoothPurityIso ℓ p d)
-    (isIso_verdierExchange ℓ p (𝟙_ _) (𝟙_ _))
+  have := isIso_verdierExchange ℓ p (𝟙_ _) (𝟙_ _)
+  unfold poincareMap Verdier.poincareMap
+  exact inferInstanceAs (IsIso (_ ≫ verdierExchange ℓ p (𝟙_ _) (𝟙_ _)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
