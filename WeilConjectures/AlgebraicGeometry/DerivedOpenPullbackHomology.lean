@@ -53,7 +53,7 @@ theorem nonempty_homology_derivedOpenPullback_iso_restrict
     (E : schemeDerivedCategory T) (n : ℤ) :
     Nonempty ((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) n).obj
-        ((derivedPullback W.ι).obj E) ≅
+        ((AlgebraicGeometry.derivedPullback W.ι).obj E) ≅
       (restrictFunctor W.ι).obj ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E)) := by
   classical
@@ -75,11 +75,12 @@ theorem nonempty_homology_derivedOpenPullback_iso_restrict
   obtain ⟨P, s, hP, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution (R := T.sheaf) G
   have : QuasiIso s := hs
   have : IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P)) := hK P hP
-  let e : (derivedPullback W.ι).obj E ≅
+  let e : (AlgebraicGeometry.derivedPullback W.ι).obj E ≅
       DerivedCategory.Q.obj ((tensorPullback W.ι).mapHomologicalComplex (.up ℤ) |>.obj P) :=
-    (derivedPullback W.ι).mapIso (DerivedCategory.Q.objObjPreimageIso E).symm ≪≫
-      ((derivedPullback W.ι).mapIso (asIso (DerivedCategory.Q.map s))).symm ≪≫
-      (derivedPullback W.ι).mapIso ((DerivedCategory.quotientCompQhIso A).app P).symm ≪≫
+    (AlgebraicGeometry.derivedPullback W.ι).mapIso (DerivedCategory.Q.objObjPreimageIso E).symm ≪≫
+      ((AlgebraicGeometry.derivedPullback W.ι).mapIso (asIso (DerivedCategory.Q.map s))).symm ≪≫
+      (AlgebraicGeometry.derivedPullback W.ι).mapIso
+        ((DerivedCategory.quotientCompQhIso A).app P).symm ≪≫
       asIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P)) ≪≫
       DerivedCategory.Qh.mapIso ((tensorPullback W.ι).mapHomotopyCategoryFactors
         (.up ℤ) |>.app P) ≪≫
