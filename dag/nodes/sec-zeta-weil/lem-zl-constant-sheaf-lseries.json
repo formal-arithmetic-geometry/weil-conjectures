@@ -1,0 +1,100 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+  "place": "Trace-transport setup specialized to the constant coefficient object; hidden construction in the rationality proof's Step 4"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant Weil sheaf compatible finite coefficient tower identity Frobenius",
+   "results": "WittVector.*Isocrystal declarations; none states the Weil-sheaf tower",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilSheaf, ConstantSheaf, Frobenius, PowerSeries",
+   "results": "0 hits; unknown identifier WeilSheaf",
+   "date": "2026-10-17",
+   "verdict": "invalid query: WeilSheaf is unknown; corrected by the successful later Loogle search"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*Weil|Frobenius.*stalk|L.series.*zeta [Mathlib]",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match; the literal [Mathlib] suffix overrestricts this query, so use the corrected later grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constant Weil sheaf has a compatible integral coefficient tower with identity Frobenius and its L-series equals the zeta series",
+   "results": "LSeries and CategoryTheory.Sheaf constant-sheaf declarations; no Weil-sheaf tower",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*Weil|Frobenius.*stalk|L.series.*zeta",
+   "results": "Mathlib/NumberTheory/LSeries/Nonvanishing.lean, Mathlib/NumberTheory/LSeries/Dirichlet.lean, Mathlib/NumberTheory/LSeries/Dirichlet.lean, Mathlib/NumberTheory/LSeries/Dirichlet.lean, Mathlib/NumberTheory/LSeries/Dirichlet.lean, Mathlib/NumberTheory/LSeries/Dirichlet.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant sheaves, coefficient maps, condensed modules or classical analytic L-functions do not state this scheme/Weil assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, Polynomial, \"map\"",
+   "results": "Polynomial.polynomial_map_coe, PowerSeries.algebraMap_apply', PowerSeries.trunc_map, Polynomial.algebraMap_hahnSeries_apply, Polynomial.IsDistinguishedAt.coe_natDegree_eq_order_map, Polynomial.IsDistinguishedAt.map_ne_zero_of_eq_mul, Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map, PowerSeries.IsWeierstrassFactorization.natDegree_eq_toNat_order_map",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant sheaves, coefficient maps, condensed modules or classical analytic L-functions do not state this scheme/Weil assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, CategoryTheory.Functor",
+   "results": "CategoryTheory.constantSheaf, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.constantSheafAdj, CategoryTheory.constantCommuteCompose, CategoryTheory.equivCommuteConstant",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant sheaves, coefficient maps, condensed modules or classical analytic L-functions do not state this scheme/Weil assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Euler product L function of the rank one constant etale sheaf over a finite field has local factors one minus T to the closed point degree and equals the Hasse Weil zeta formal power series",
+   "results": "ZMod.LFunction, NumberField.dedekindZeta, DirichletCharacter.LFunctionTrivChar, DirichletCharacter.LFunctionTrivChar₁, ZMod.LFunction_modOne_eq, ArithmeticFunction.LSeries_zeta_eulerProduct_exp_log, DirichletCharacter.LFunctionTrivChar_eq_mul_riemannZeta, DirichletCharacter.LSeries_eulerProduct_tprod",
+   "date": "2026-10-17",
+   "verdict": "no match: generic constant sheaves, coefficient maps, condensed modules or classical analytic L-functions do not state this scheme/Weil assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-rationality",
+  "date": "2026-10-17",
+  "group": "Q124"
+ },
+ "id": "lem-zl-constant-sheaf-lseries",
+ "title": "Constant sheaf local factors and zeta L-series",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$ and $E=\\Q_\\ell$ [def-weil-l-adic-numbers]. Let $Y_0$ be a separated finite-type $k_0$-scheme [def-weil-scheme-morphism-properties] with $Y=Y_0\\times_{k_0}k$, equipped with the normalized compatible constant datum of [lem-zl-constant-weil-datum]. For every closed point $y$ of $Y_0$, of degree $d_y=[\\kappa(y):k_0]$, the one-circuit local Frobenius on the constant stalk $E$ in degree zero is the identity in both of its forms: the operator $F_y$ of [def-weil-local-frobenius-trace] for the canonical Weil structure $(E_Y,\\theta_E)$, and the rationalization to $E$ of the compatible finite-level stalk operators $F_{x,d_y}$ of [def-trf-frobenius-operators] for the levels $((A_n)_Y,\\varphi_n)$ of that datum, where $x\\in Y_0(\\mathbf F_{q^{d_y}})$ is a point with image $y$ (given by a $k_0$-embedding $\\kappa(y)\\hookrightarrow\\mathbf F_{q^{d_y}}$); each finite-level operator $F_{x,d_y}$ is the identity of the stalk $A_n$. Hence, for either operator, the local determinant factor is $\\det(1-T^{d_y}F_y\\mid E)=1-T^{d_y}$. The Euler product defining the constant sheaf's $L$-series, namely $\\prod_y\\det(1-T^{d_y}F_y\\mid E)^{-1}$, is coefficientwise locally finite and equals the coefficientwise image of $Z(Y_0,T)$ [sk-def-zeta] under $\\iota:\\Q\\hookrightarrow E$ [def-weil-coefficientwise-ring-hom-map].",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-scheme-morphism-properties",
+  "lem-zl-constant-weil-datum",
+  "def-weil-local-frobenius-trace",
+  "def-trf-frobenius-operators",
+  "sk-def-zeta",
+  "def-weil-coefficientwise-ring-hom-map"
+ ],
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-rationality",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-rationality",
+   "place": "proof, first sentence: '[sk-thm-tracetodeterminant] factors $Z$ as a finite product of the rational functions $P_{i,\\ell}^{\\pm1}$ over $\\Ql$, so $Z\\in\\Ql(T)$' (repaired in the item as the compact-support Euler-product route over an affine partition): the local factors $1-T^{\\deg(y)}$ of the constant sheaf and the identification of its $L$-series with $Z(Y_0,T)$",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

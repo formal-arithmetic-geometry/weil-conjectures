@@ -66,14 +66,12 @@
    }
   },
   {
-   "text": "Choose a prime $\\ell\\neq p$ (take $2$ if $p\\neq2$, otherwise $3$) and put $E=\\mathbf Q_\\ell$. For $Y_j=Y_{0,j}\\times_{\\mathbf F_q}\\overline{\\mathbf F}_q$, take the constant $E$-Weil sheaf with the canonical structure [def-weil-constant-weil-structure]. Its integral model is the constant $\\mathbf Z_\\ell$ coefficient object; at every finite level Frobenius fixes each constant section, and these maps commute with reduction. Explicitly, the level-$n$ object is the rank-one free $A_n=\\mathbf Z_\\ell/\\ell^n$ coefficient module in degree zero. Its derived reduction to $A_m$ for $m\\leq n$ is $A_n\\otimes^{\\mathrm L}_{A_n}A_m=A_m$ in degree zero, and the identity Frobenius reduces to the identity. Thus these levels form the compatible normalized Weil datum required by [sk-thm-trace-transport]. No comparison between different Frobenius types is needed here. The pullback of a constant sheaf along any morphism is canonically the constant sheaf, so the canonical isomorphism serves as the finite-level Weil map. This holds for the model Frobenius $\\Phi_1$ of [sk-d-weil] and for the semilinear geometric Frobenius $g_Y$ of [def-weil-constant-weil-structure] clause 1 alike. In both cases the induced stalk endomorphism at a fixed geometric point is the identity of $A_{E,n}$. The $E$-stage of this tower is the rationalization of $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$, which is $E_Y$ by clauses 2 and 4 of [def-weil-constant-weil-structure]. The same object, in the coefficient category $D^b_{c,\\mathrm W}(Y,E)$ used by [def-weil-constant-weil-structure], is the one to which [prop-cohomological-finiteness] is applied below. That category is also the formalism of the current blueprint's realization of [sk-thm-trace-transport] (thm-trf-trace-formula-e, thm-trf-l-function-euler-product, with $Lg_\\gamma^*$). Only finite-dimensionality and boundedness are taken from [prop-cohomological-finiteness], not its Frobenius action. Every local Frobenius acts as the identity on its one-dimensional stalk. Hence its local determinant is $1-T^{\\deg(y)}$. By [prop-euler-product], its $L$-series is precisely the coefficientwise image of $Z(Y_{0,j},T)$ in $E[[T]]$; the locally finite products commute with the coefficient map since any fixed coefficient uses only finitely many factors. Clause (b) of [sk-thm-trace-transport] gives\n$$\\iota Z(Y_{0,j},T)=\\prod_i\\det(1-TF\\mid H_c^i(Y_j,E))^{(-1)^{i+1}}.$$\nHere $\\iota:\\mathbf Q\\hookrightarrow E$ and its coefficientwise extension are as in [def-weil-coefficientwise-ring-hom-map]. The cohomology is finite-dimensional and zero outside a finite interval by [prop-cohomological-finiteness], applied to the separated finite-type scheme $Y_{0,j}$ and its constant $E$-Weil sheaf. Thus put $A_{j,\\ell}=\\prod_{i\\text{ odd}}\\det(1-TF\\mid H_c^i)$ and $B_{j,\\ell}=\\prod_{i\\text{ even}}\\det(1-TF\\mid H_c^i)$ in $E[T]$. Their constant terms are $1$, since evaluating each determinant at $T=0$ gives the determinant of the identity. The displayed identity says $B_{j,\\ell}\\,\\iota Z(Y_{0,j},T)=A_{j,\\ell}$. No identification of compact with ordinary cohomology is used.",
+   "text": "Choose a prime $\\ell\\ne p$ (take $2$ if $p\\ne2$, otherwise $3$), set $E=\\Q_\\ell$, and for each affine stratum put $Y_j=Y_{0,j}\\times_{\\Fq}\\overline{\\F}_q$. The constant sheaf has the compatible normalized integral Weil datum of [lem-zl-constant-weil-datum], with the canonical structure of [def-weil-constant-weil-structure]; its rationalized stage is $E_{Y_j}$, and its finite-level model map is the geometric map composed with the canonical scheme/Galois comparison. This supplies exactly the input required by [sk-thm-trace-transport].",
    "uses": [
+    "lem-zl-constant-weil-datum",
     "def-weil-constant-weil-structure",
-    "sk-thm-trace-transport",
-    "prop-euler-product",
-    "def-weil-coefficientwise-ring-hom-map",
-    "prop-cohomological-finiteness",
-    "sk-d-weil"
+    "sk-d-weil",
+    "sk-thm-trace-transport"
    ],
    "elementary": false,
    "source": {
@@ -82,7 +80,34 @@
    }
   },
   {
-   "text": "Set $A_\\ell=\\prod_jA_{j,\\ell}$ and $B_\\ell=\\prod_jB_{j,\\ell}$ in $E[T]$. Multiply the finitely many identities from Step 4 and use the product identity of Step 2. The coefficientwise map is a ring homomorphism by [def-weil-coefficientwise-ring-hom-map], so $B_\\ell\\,\\iota Z(X_0,T)=A_\\ell$ and $B_\\ell(0)=\\prod_j1=1$. Empty products equal $1$. Thus the image of $Z(X_0,T)$ has a normalized rational presentation over $E$.",
+   "text": "By [lem-zl-constant-sheaf-lseries], every local Frobenius factor for this datum is $1-T^{\\deg(y)}$, and the locally finite product defining its $L$-series is the coefficientwise image $\\iota Z(Y_{0,j},T)$; [prop-euler-product] supplies the closed-point product, while [def-weil-coefficientwise-ring-hom-map] justifies the coefficient map. The lemma covers both forms of the one-circuit local Frobenius, in particular the finite-level stalk operators of the datum that define the $L$-series in clause (b) of [sk-thm-trace-transport]; so the product in Step 6 is this one.",
+   "uses": [
+    "lem-zl-constant-sheaf-lseries",
+    "prop-euler-product",
+    "def-weil-coefficientwise-ring-hom-map",
+    "sk-thm-trace-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+    "place": "Clause (b), specialized to the constant E-Weil sheaf; its proof Step 5 supplies the finite compact-cohomology product"
+   }
+  },
+  {
+   "text": "Clause (b) of [sk-thm-trace-transport] therefore gives $\\iota Z(Y_{0,j},T)=\\prod_i\\det(1-TF\\mid H_c^i(Y_j,E))^{(-1)^{i+1}}$. By [prop-cohomological-finiteness], applied to the separated finite-type stratum and its constant $E$-Weil sheaf, these cohomology groups are finite-dimensional and vanish outside a finite interval. Define $A_{j,\\ell}$ as the product of the odd-degree determinants and $B_{j,\\ell}$ as the product of the even-degree determinants. Each determinant has constant term $1$, hence $A_{j,\\ell},B_{j,\\ell}\\in E[T]$ have constant term $1$ and satisfy $B_{j,\\ell}\\,\\iota Z(Y_{0,j},T)=A_{j,\\ell}$. No compact-to-ordinary cohomology identification is used.",
+   "uses": [
+    "sk-thm-trace-transport",
+    "prop-cohomological-finiteness",
+    "def-weil-coefficientwise-ring-hom-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+    "place": "Clause (b), specialized to the constant E-Weil sheaf; its proof Step 5 supplies the finite compact-cohomology product"
+   }
+  },
+  {
+   "text": "Set $A_\\ell=\\prod_jA_{j,\\ell}$ and $B_\\ell=\\prod_jB_{j,\\ell}$ in $E[T]$. Multiply the finitely many identities from Step 6 and use the product identity of Step 2. The coefficientwise map is a ring homomorphism by [def-weil-coefficientwise-ring-hom-map], so $B_\\ell\\,\\iota Z(X_0,T)=A_\\ell$ and $B_\\ell(0)=\\prod_j1=1$. Empty products equal $1$. Thus the image of $Z(X_0,T)$ has a normalized rational presentation over $E$.",
    "uses": [
     "def-weil-coefficientwise-ring-hom-map"
    ],
@@ -93,7 +118,7 @@
    }
   },
   {
-   "text": "By [prop-weil-rationality-criterion], the presentation in Step 5 implies finite Hankel rank over $E$: there is an integer $r\\geq0$ bounding the ranks of all finite square submatrices of $(\\iota(z_{a+b}))_{a,b\\geq0}$. This is exactly the finite-submatrix meaning of Hankel rank in [def-weil-hankel-matrix]. Since $E=\\mathbf Q_\\ell$ has characteristic zero by [lem-weil-integers-injective-char-zero], $\\mathbf Q\\hookrightarrow E$ is a field extension. For every finite square submatrix $M=(z_{a+b})$ with entries in $\\mathbf Q$ (indeed in $\\mathbf Z$ by Step 3), [lem-weil-matrix-rank-field-extension] gives $\\operatorname{rank}_{\\mathbf Q}M=\\operatorname{rank}_{E}\\iota(M)\\leq r$. Therefore the Hankel rank of the original rational-coefficient series is finite as well. This compares each finite matrix; it does not assert a base-change theorem for an infinite product of vector spaces.",
+   "text": "By [prop-weil-rationality-criterion], the presentation in Step 7 implies finite Hankel rank over $E$: there is an integer $r\\geq0$ bounding the ranks of all finite square submatrices of $(\\iota(z_{a+b}))_{a,b\\geq0}$. This is exactly the finite-submatrix meaning of Hankel rank in [def-weil-hankel-matrix]. Since $E=\\mathbf Q_\\ell$ has characteristic zero by [lem-weil-integers-injective-char-zero], $\\mathbf Q\\hookrightarrow E$ is a field extension. For every finite square submatrix $M=(z_{a+b})$ with entries in $\\mathbf Q$ (indeed in $\\mathbf Z$ by Step 3), [lem-weil-matrix-rank-field-extension] gives $\\operatorname{rank}_{\\mathbf Q}M=\\operatorname{rank}_{E}\\iota(M)\\leq r$. Therefore the Hankel rank of the original rational-coefficient series is finite as well. This compares each finite matrix; it does not assert a base-change theorem for an infinite product of vector spaces.",
    "uses": [
     "prop-weil-rationality-criterion",
     "def-weil-hankel-matrix",
@@ -107,7 +132,7 @@
    }
   },
   {
-   "text": "Apply [prop-weil-rationality-criterion] once more, now over $\\mathbf Q$, to the finite Hankel rank from Step 6. There are $a,b\\in\\mathbf Q[T]$ with $b(0)=1$ and $bZ(X_0,T)=a$ in $\\mathbf Q[[T]]$. In particular $Z(X_0,T)\\in\\mathbf Q(T)$.",
+   "text": "Apply [prop-weil-rationality-criterion] once more, now over $\\mathbf Q$, to the finite Hankel rank from Step 8. There are $a,b\\in\\mathbf Q[T]$ with $b(0)=1$ and $bZ(X_0,T)=a$ in $\\mathbf Q[[T]]$. In particular $Z(X_0,T)\\in\\mathbf Q(T)$.",
    "uses": [
     "prop-weil-rationality-criterion"
    ],
@@ -118,7 +143,7 @@
    }
   },
   {
-   "text": "Step 3 gives $Z(X_0,T)\\in1+T\\mathbf Z[[T]]$ and Step 7 gives rationality over $\\mathbf Q$. Apply [prop-weil-integral-rational-series], the integral Fatou theorem, to this series. It produces $A,B\\in\\mathbf Z[T]$ with $A(0)=B(0)=1$ and $BZ=A$; the theorem even supplies coprimality and uniqueness, which are not required here. Apply the coefficientwise inclusions [def-weil-coefficientwise-ring-hom-map] and the polynomial inclusion [def-weil-polynomial-as-power-series] to read that identity in $\\mathbf Q[[T]]$. This proves the requested integral presentation and the final membership $Z\\in\\mathbf Q(T)\\cap(1+T\\mathbf Z[[T]])$. Merely clearing the denominators of the rational polynomials in Step 7 would not justify $B(0)=1$; the Fatou input supplies precisely this missing normalization.",
+   "text": "Step 3 gives $Z(X_0,T)\\in1+T\\mathbf Z[[T]]$ and Step 9 gives rationality over $\\mathbf Q$. Apply [prop-weil-integral-rational-series], the integral Fatou theorem, to this series. It produces $A,B\\in\\mathbf Z[T]$ with $A(0)=B(0)=1$ and $BZ=A$; the theorem even supplies coprimality and uniqueness, which are not required here. Apply the coefficientwise inclusions [def-weil-coefficientwise-ring-hom-map] and the polynomial inclusion [def-weil-polynomial-as-power-series] to read that identity in $\\mathbf Q[[T]]$. This proves the requested integral presentation and the final membership $Z\\in\\mathbf Q(T)\\cap(1+T\\mathbf Z[[T]])$. Merely clearing the denominators of the rational polynomials in Step 9 would not justify $B(0)=1$; the Fatou input supplies precisely this missing normalization.",
    "uses": [
     "prop-weil-integral-rational-series",
     "def-weil-coefficientwise-ring-hom-map",
@@ -144,11 +169,13 @@
   "lem-weil-power-series-exp-hom",
   "prop-euler-product",
   "def-weil-point-counts-zeta",
+  "lem-zl-constant-weil-datum",
   "def-weil-constant-weil-structure",
+  "sk-d-weil",
   "sk-thm-trace-transport",
+  "lem-zl-constant-sheaf-lseries",
   "def-weil-coefficientwise-ring-hom-map",
   "prop-cohomological-finiteness",
-  "sk-d-weil",
   "prop-weil-rationality-criterion",
   "def-weil-hankel-matrix",
   "lem-weil-integers-injective-char-zero",
@@ -227,7 +254,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -264,8 +291,8 @@
   "date": "2026-10-17",
   "item": "sk-thm-rationality",
   "worker": "stage1",
-  "summary": "Kept the current main-20261015 finite-type statement unchanged. Replaced the inapplicable smooth-proper trace identity by the existing compact-support Euler-product formula on the existing finite affine partition, wrote the point-count/product and finite-matrix descent arguments, and supplied the omitted integral Fatou step. Reused existing nodes throughout; no new nodes.",
-  "blueprint": "Steps 1–5 repair and realize the original first sentence (rational product over Q_l); Steps 6–7 realize the Hankel finite-rank descent and prime-field criterion; Step 3 realizes Euler integrality; Step 8 supplies the normalization demanded by the current main statement but missing from the imported proof. The old unit record still states only the smooth-proper special case; this unchanged stronger theorem realizes that special case and its one proof paragraph.",
+  "summary": "Repaired the prior split by replacing the 3112-character constant-sheaf trace step with three steps and two explicit unsplit lemmas: construction of the compatible constant Weil datum and identification of its local factors/L-series. The statement and route remain unchanged; all other steps are retained.",
+  "blueprint": "Steps 1–7 realize and repair the blueprint first sentence (rational product over Q_l), exposing its constant-datum and local-factor inputs in Steps 4–5; Steps 8–9 realize finite Hankel-rank descent and the rationality criterion over Q; Step 3 gives Euler integrality and Step 10 supplies integral Fatou normalization. The current statement and prior route are unchanged.",
   "tool_uses": [
    {
     "node": "lem-zl-affine-partition",
@@ -292,12 +319,12 @@
   "lem-weil-matrix-rank-field-extension"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q33-075fddae2",
-  "group": "Q33",
+  "reviewer": "NT-cc-Q124-5700bff63",
+  "group": "Q124",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-075fddae2 (reviewer sub-agent of L); spot-checked: Read the item, the unit, the report and every cited node statement. The item statement matches main-20261015 sk-thm-rationality word for word (finite type; integral A,B with B(0)=1), with no weakening. The route departure is an established scope error: sk-thm-tracetodeterminant needs smooth, proper and connected, which fails for A^1 and the doubled-origin line. The repair uses sk-thm-trace-transport (b), which is on the unit's route, applied to each separated affine stratum from lem-zl-affine-partition. Step 1: the 01T6/01T5/01T3/01T2/01KN leaves were checked against Stacks tags. Steps 6-7 follow Milne Lemma 27.9 and Cor. 27.8 (pp. 156-157). Step 8 applies the Fatou node correctly. No new nodes and no cycle. Repaired 2 faults and added 1 clarification. (C4/E6) Step 3 identified the Z of prop-euler-product (def-weil-point-counts-zeta) with the sk-def-zeta series without saying so; added the identification (same subfield F_{q^n}, finite sets, same degree) and the citations, matching the Q20 fix on sk-thm-weil1. (C8) lem-weil-matrix-rank-field-extension (unit sk-thm-weil1, split, not closed) was an undeclared off-route tool; added it to split_report.tool_uses. Clarification, Step 4: made the Weil datum explicit. The canonical constant-sheaf pullback serves for both the sk-d-weil model Frobenius and g_Y. The E-stage object is E_Y by clauses 2 and 4 of def-weil-constant-weil-structure. This is the D^b_{c,W}(Y,E) formalism of the blueprint's own thm-trf-trace-formula-e and thm-trf-l-function-euler-product. Only finite-dimensionality is taken from prop-cohomological-finiteness. Admissibility is a theorem by def-trf-admissibility. Also cites sk-d-weil. Edge cases checked: the empty scheme, Spec F_q, A^1, the doubled-origin line and a nilpotent thickening.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-5700bff63 (reviewer sub-agent of L); spot-checked: Read the item sk-thm-rationality (all 10 steps), both new nodes, the unit, the chapter, the main-20261015 blueprint statement and proof, sk-thm-trace-transport clause (b) and the blueprint's thm-trf-l-function-euler-product, Milne LEC 27.9 and 27.11 (pp. 156-158), and the statement of every cited node. The item statement is verbatim the blueprint's and is not weakened. The scope repair already confirmed by Q33 still holds: affine partition, then compact-support clause (b) on each separated affine stratum, then Hankel descent and Fatou normalization. Steps 1-10 check out: hypotheses hold, the empty case and Spec F_q work, proof_deps equals the union of uses, the longest step is 1434 characters, no SGA. New nodes: lem-zl-constant-weil-datum is a normalized constant A_n tower carrying both model and geometric Weil maps related by kappa, with E-stage E_Y; lem-zl-constant-sheaf-lseries gives identity local Frobenius, factors 1-T^{d_y} and L-series equal to iota Z. Both are true (tested on the empty scheme, Spec F_q, Spec F_{q^2} and A^1), strictly smaller than the item, not duplicates (rg found cor-trf-constant-stalk-trace, cor-trf-point-counting and the stage-independence and constructibility lemmas, none stating these), and searched with all three kinds. Repaired 2 faults. (C4/E6) Clause (b) of sk-thm-trace-transport forms L(X_0,K,T) with the operator F_{x,m} of def-trf-frobenius-operators (model fixed point plus kappa), but the new lemma computed only F_y of def-weil-local-frobenius-trace. The lemma now states the identity for both forms (finite-level F_{x,d_y} identity on A_n, rationalized), adds def-trf-frobenius-operators to its stmt_deps, and the item's Step 5 says so and cites sk-thm-trace-transport. (B9) The blueprint.from.place of both new nodes named the DAG step and now quotes the blueprint proof's first sentence. Fixed files: fixes/dag/nodes/sec-zeta-weil/{lem-zl-constant-sheaf-lseries,lem-zl-constant-weil-datum,sk-thm-rationality}.json. The existing tool_uses (lem-zl-affine-partition, sk-thm-trace-transport, prop-cohomological-finiteness, lem-weil-matrix-rank-field-extension) are accepted; the new steps add no off-route use.; 3 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
