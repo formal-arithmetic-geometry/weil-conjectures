@@ -11,9 +11,72 @@
   "def-weil-pbc-smooth-ring-map",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\pi:A\\to A/I$ for the quotient map and set $B=A\\otimes_RS$, with structure map $a\\mapsto a\\otimes1$. By clause (1) of [lem-weil-pbc-smooth-ring-map-base-change-composition], $B$ is a smooth $A$-algebra. The tensor-product universal property defines an $A$-algebra map $\\sigma:B\\to A/I$ by $\\sigma(a\\otimes s)=\\pi(a)\\tau(s)$: the formula is additive in each variable, $R$-balanced because $\\tau$ is an $R$-algebra map, multiplicative on pure tensors, and sends $1\\otimes1$ to $1$. In particular $\\sigma(1\\otimes s)=\\tau(s)$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H74, lemma-lift-smooth-henselian, first sentence of proof; Algebra Tag 00T4, lemma-base-change-smooth"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] to $A\\to B$: the smooth ring map obtained in Step 1 makes $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ smooth in the morphism sense required by the next lifting theorem.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H74, application of Tag 07M7; affine smoothness comparison in Morphisms Tag 01V6 and More on Morphisms Tag 02H6"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-section-etale-lift] with its base ring $A$, ideal $J=I$, algebra $B$ and map $\\sigma$. It gives an étale map $f:A\\to A\\prime$, an isomorphism $\\alpha:A/I\\xrightarrow{\\sim}A\\prime/IA\\prime$ induced by $f$, and an $A$-algebra map $j:B\\to A\\prime$ with $qj=\\alpha\\sigma$, where $q:A\\prime\\to A\\prime/IA\\prime$ is the quotient map. All hypotheses are supplied by Step 2 and the construction of $\\sigma$.",
+   "uses": [
+    "lem-weil-pbc-smooth-section-etale-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H74, second sentence of proof; Tag 07M7, lemma-lift-section-smooth-morphism"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselization-stage-map] with its rings $(B,C,A)$ equal to $(A,A\\prime,A)$, its ideals $(J,I)$ both equal to $I$, and $\\varphi=\\mathrm{id}_A$. The map $f$ is étale and its quotient map is the isomorphism $\\alpha$ of Step 3; $I$ maps into itself and the target pair $(A,I)$ is henselian by hypothesis. Thus there is a ring map $r:A\\prime\\to A$ with $rf=\\mathrm{id}_A$. This is an $A$-algebra map. All rings may be regarded in one common universe when applying that statement.",
+   "uses": [
+    "lem-weil-pbc-henselization-stage-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H74, henselian retraction sentence using Tag 09XI, lemma-characterize-henselian-pair; Tag 0A02, lemma-henselization, final paragraph (single-stage section)"
+   }
+  },
+  {
+   "text": "Since $r(f(i)x)=ir(x)\\in I$ for $i\\in I$ and $x\\in A\\prime$, the map $r$ induces $\\bar r:A\\prime/IA\\prime\\to A/I$. The equality $rf=\\mathrm{id}_A$ gives $\\bar r\\alpha=\\mathrm{id}_{A/I}$, hence $\\bar r=\\alpha^{-1}$. Define $\\widetilde\\tau(s)=r(j(1\\otimes s))$. The map $s\\mapsto1\\otimes s$ is an $R$-algebra map and $j,r$ are $A$-algebra maps, so this is an $R$-algebra map. Finally, for every $s\\in S$, $\\pi(\\widetilde\\tau(s))=\\bar r(qj(1\\otimes s))=\\bar r\\alpha(\\sigma(1\\otimes s))=\\tau(s)$. This is the required lift.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H74, last sentence of proof; quotient compatibility written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-section-etale-lift",
+  "lem-weil-pbc-henselization-stage-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H74, lemma-lift-smooth-henselian, proof; Tag 0A02 final paragraph for the existing single-stage retraction formulation of 09XI"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +112,45 @@
    "results": "5 hits; returned names/files: Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean; note: none; digest 3bea47525c378981. Searched Mathlib/RingTheory/Smooth. Read the returned signatures. Formal smoothness lifts through nilpotent ideals or into an adic completion, not through an arbitrary henselian pair.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]ensel.*[Ss]mooth|[Ss]mooth.*[Hh]ensel",
+   "results": "{\"t\": \"2026-10-17T21:46:48Z\", \"tool\": \"grep\", \"query\": \"[Hh]ensel.*[Ss]mooth|[Ss]mooth.*[Hh]ensel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the returned signatures and Mathlib/RingTheory/Smooth/Basic.lean:126-128 and Smooth/AdicCompletion.lean:94-96. The lifting candidates assume a nilpotent ideal or adic completeness; neither covers an arbitrary henselian pair.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth R algebra S and a henselian pair A I every R algebra map S to A modulo I lifts to A",
+   "results": "{\"t\": \"2026-10-17T21:46:49Z\", \"tool\": \"leansearch\", \"query\": \"For a smooth R algebra S and a henselian pair A I every R algebra map S to A modulo I lifts to A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.of_comp_surjective\", \"Algebra.FormallySmooth.mk_lift\"], \"digest\": \"3c31db92c4d503dc\"}. Read the returned signatures and Mathlib/RingTheory/Smooth/Basic.lean:126-128 and Smooth/AdicCompletion.lean:94-96. The lifting candidates assume a nilpotent ideal or adic completeness; neither covers an arbitrary henselian pair.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Algebra.Smooth",
+   "results": "{\"t\": \"2026-10-17T21:46:49Z\", \"tool\": \"loogle\", \"query\": \"HenselianRing, Algebra.Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the returned signatures and Mathlib/RingTheory/Smooth/Basic.lean:126-128 and Smooth/AdicCompletion.lean:94-96. The lifting candidates assume a nilpotent ideal or adic completeness; neither covers an arbitrary henselian pair.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth algebra maps to a quotient by a henselian ideal lift to the original ring",
+   "results": "{\"t\": \"2026-10-17T21:46:51Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth algebra maps to a quotient by a henselian ideal lift to the original ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.mk_lift\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.comp_lift\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.Smooth.formallySmooth\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\"], \"digest\": \"be4c389fcdc32999\"}. Read the returned signatures and Mathlib/RingTheory/Smooth/Basic.lean:126-128 and Smooth/AdicCompletion.lean:94-96. The lifting candidates assume a nilpotent ideal or adic completeness; neither covers an arbitrary henselian pair.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine scheme over a henselian pair has a section lifting a section over the closed subscheme",
+   "results": "{\"t\": \"2026-10-17T21:46:52Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine scheme over a henselian pair has a section lifting a section over the closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.Smooth.formallySmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"8ac40255c43f04dd\"}. Read the returned signatures and Mathlib/RingTheory/Smooth/Basic.lean:126-128 and Smooth/AdicCompletion.lean:94-96. The lifting candidates assume a nilpotent ideal or adic completeness; neither covers an arbitrary henselian pair.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-nodal-polar-section",
@@ -82,5 +180,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-henselian-smooth-algebra-lifting",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0H74 using four existing input statements: smooth base change, affine smoothness comparison, smooth-section lifting after an etale extension, and the single-stage henselian retraction. Wrote the tensor map and quotient compatibility explicitly, retaining the full arbitrary-henselian-pair statement. No new nodes, no attachments, no statement correction. Repeated all four authorized Mathlib search modes and a second semantic phrasing; the candidates require nilpotence or completeness.",
+  "blueprint": "Realizes the recorded horizontal-point substep in the semistable-alteration branch of lem-trf-local-term-locality (1)--(2), through lem-trf-valuation-nodal-polar-section: lifting a point in a smooth affine neighbourhood over the henselian valuation base. This is a generic commutative-algebra input and leaves the contracting-correspondence and normal-cone unit route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Converts smoothness of the tensor-product algebra into the smooth affine morphism hypothesis of the existing 07M7 input; the trace-formula unit supplies no such comparison."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-section-etale-lift",
+    "why": "Supplies the etale neighbourhood lifting a section modulo I as in 0H74; this generic algebra input is not a replacement for any trace-formula unit step."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-stage-map",
+    "why": "Supplies an A-algebra retraction of the etale neighbourhood trivial modulo I, with identity base map; the trace-formula unit supplies no henselian-pair retraction lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-section-etale-lift",
+  "lem-weil-pbc-henselization-stage-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q33-4232d969e",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-4232d969e (reviewer sub-agent of L); spot-checked: Reviewed the item, full unit route, all cited node statements, Stacks Tags 0H74/07M7/09XI/0A02, edge cases, Mathlib searches, duplicates, and route constraints. The five proof steps correctly establish the specified quotient-compatible lift with all hypotheses preserved; no hidden long lemma, circularity, SGA citation, route-pivot machinery, or repair is needed. Wrote review.md."
  }
 }

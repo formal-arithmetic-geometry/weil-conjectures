@@ -13,9 +13,204 @@
   "def-weil-pbc-henselization-at-prime",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Inside $L$ put $B=\\operatorname{icl}_P(L)$ and $S_i=\\operatorname{icl}_{H_i}(L)$, the integral closures of [def-weil-pbc-integral-closure]. Each $S_i$ is a nonzero domain as a subring of $L$, so its only idempotents are $0,1$: $e(e-1)=0$ forces one factor to vanish. It is integral over $H_i$ by construction. Apply [lem-trf-integral-component-henselian-permanence] to obtain that $S_i$ is henselian local and $H_i\\to S_i$ is local.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-trf-integral-component-henselian-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Construction of the individual normalizations; more-algebra.tex Tag 092X (lemma-integral-over-henselian), domain case of the cited permanence statement."
+   }
+  },
+  {
+   "text": "Every $s\\in S_i$ satisfies a monic equation over $H_i\\subseteq J$, hence over $J$. Since $s\\in L=\\operatorname{Frac}(J)$, normality of $J$ in [def-weil-pbc-normal-ring] gives $S_i\\subseteq J$. Every monic equation over $P$ is also one over $H_i$, so $B\\subseteq S_i$. Define the prime $\\mathfrak r_i=B\\cap\\mathfrak m_{S_i}$; then $\\mathfrak r_i\\cap P=\\mathfrak q_i$, because $P_{\\mathfrak q_i}\\to H_i\\to S_i$ is local.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent monic-equation and prime-contraction calculation; henselization locality is the stated universal-property convention, Tag 04GQ."
+   }
+  },
+  {
+   "text": "The ring $B$ is a normal domain with fraction field $L$. Indeed $L/K$ is algebraic, since $L\\subseteq K^{\\mathrm{sep}}$. For $x\\in L$, take $x^n+\\sum_{j<n}c_jx^j=0$ over $K$ and a common nonzero denominator $d\\in P$ for its coefficients. Then $dx$ satisfies $T^n+\\sum_{j<n}d^{n-j}c_jT^j=0$ over $P$, so $dx\\in B$ and $x=(dx)/d$. Thus $\\operatorname{Frac}(B)=L$. If $x\\in L$ is integral over $B$, let $C=\\operatorname{icl}_B(L)$. By [def-weil-pbc-integral-closure], both $P\\to B$ and $B\\to C$ are integral. [lem-weil-pbc-integral-transitive] makes $x\\in C$ integral over $P$, hence $x\\in B$. The criterion in [def-weil-pbc-normal-ring] proves normality.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-transitive",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent denominator calculation and Tag 00GN (lemma-integral-transitive); analogous denominator calculation in Tag 00GY (lemma-localize-normal-domain)."
+   }
+  },
+  {
+   "text": "Fix $i$. By [lem-trf-henselization-prime-ind-etale] and [def-weil-pbc-ind-etale-algebra], write $H_i$ as a filtered colimit of etale $P$-algebras $E_\\alpha$. Every $h\\in H_i$ is the image of some $e\\in E_\\alpha$, by [lem-weil-pbc-filtered-colimit-algebras-elementwise]. Put $\\mathfrak t_\\alpha=(E_\\alpha\\to S_i)^{-1}(\\mathfrak m_{S_i})$. The map $P\\to E_\\alpha$ is finite type and quasi-finite at this prime by [lem-weil-pbc-etale-ring-map-quasi-finite]. Let $C_\\alpha$ be the integral closure of $P$ in $E_\\alpha$. Apply [lem-weil-pbc-integral-closure-zariski-main-away] to get $g\\in C_\\alpha\\setminus\\mathfrak t_\\alpha$ with $(C_\\alpha)_g\\xrightarrow{\\sim}(E_\\alpha)_g$. This applies to $E_\\alpha$ itself; no assertion that its image in $L$ is etale is used.",
+   "uses": [
+    "lem-trf-henselization-prime-ind-etale",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "lem-weil-pbc-integral-closure-zariski-main-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GN/04GV (lemma-henselization / lemma-henselization-different), 00U5 (lemma-etale-quasi-finite), and 00Q9 (theorem-main-theorem), applied at the contracted prime of an actual etale stage."
+   }
+  },
+  {
+   "text": "The isomorphism in Step 4 writes $e/1=c/g^n$ for some $c\\in C_\\alpha$ and $n\\geq0$. Map this equality into $L$ through $E_\\alpha\\to H_i\\subseteq S_i$: the image $\\bar g$ is outside $\\mathfrak m_{S_i}$, hence nonzero. The elements $\\bar c,\\bar g$ satisfy the images of their monic equations over $P$, so belong to $B$ by [def-weil-pbc-integral-closure]; moreover $\\bar g\\notin\\mathfrak r_i$. Thus $h=\\bar c/\\bar g^n\\in B_{\\mathfrak r_i}$. This proves $H_i\\subseteq B_{\\mathfrak r_i}$. Conversely $B\\subseteq S_i$ and every element of $B\\setminus\\mathfrak r_i$ is a unit of $S_i$, giving $B_{\\mathfrak r_i}\\subseteq S_i$ as subrings of $L$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent evaluation of the fractions supplied by Tag 00Q9; denominators are outside the specified branch prime, so the localization map into S_i exists."
+   }
+  },
+  {
+   "text": "By Step 3 and [lem-weil-pbc-localization-normal-domain], $B_{\\mathfrak r_i}$ is a normal domain with fraction field $L$. Every $s\\in S_i$ lies in $L$ and satisfies a monic equation over $H_i\\subseteq B_{\\mathfrak r_i}$. The normal-domain criterion [def-weil-pbc-normal-ring] therefore gives $s\\in B_{\\mathfrak r_i}$. Together with Step 5 this proves the actual equality $S_i=B_{\\mathfrak r_i}$ inside $L$, for both indices.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GY (lemma-localize-normal-domain), followed by the defining monic-root criterion. This derives the branch comparison instead of citing the withdrawn branch auxiliary."
+   }
+  },
+  {
+   "text": "The primes $\\mathfrak r_1,\\mathfrak r_2$ are incomparable. If $\\mathfrak r_1\\subseteq\\mathfrak r_2$, taking complements and fractions gives $B_{\\mathfrak r_2}\\subseteq B_{\\mathfrak r_1}$, hence $S_2\\subseteq S_1$. Then $S_1$ contains both $H_1,H_2$, hence their generated ring $J$. Step 2 gives $S_1\\subseteq J$, so $S_1=J$. But $H_1\\to S_1$ is local by Step 1, contrary to the given nonlocal map $H_1\\to J$. Interchanging the indices excludes $\\mathfrak r_2\\subseteq\\mathfrak r_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent comparison of the two explicitly identified localizations; this uses their own maximal ideals, not the contraction of m_J."
+   }
+  },
+  {
+   "text": "Choose $a\\in\\mathfrak r_1\\setminus\\mathfrak r_2$ and $b\\in\\mathfrak r_2\\setminus\\mathfrak r_1$. Put $K_0=K(a,b)\\subseteq L$. Each generator is separable algebraic over $K$ since it lies in $K^{\\mathrm{sep}}$. If their equation degrees are $d,e$, then the powers $a^u b^v$ with $u<d,v<e$ span $K[a,b]$. This is a finite-dimensional domain over $K$; multiplication by a nonzero element is injective, hence surjective, so it is a field. Consequently $K[a,b]=K_0$ is finite separable over $K$. Put $P_0=B\\cap K_0$ and $\\mathfrak q_{0,i}=\\mathfrak r_i\\cap P_0$. These primes contract to $\\mathfrak q_i$ by Step 2. Both $a,b$ lie in $P_0$ and witness the two failures of inclusion between the $\\mathfrak q_{0,i}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent finite-witness construction inside L; separability is inherited from the given separable closure and finiteness is proved by the explicit span."
+   }
+  },
+  {
+   "text": "The ring $P_0=B\\cap K_0$ is exactly the integral closure of $P$ in $K_0$ by [def-weil-pbc-integral-closure]. Repeat the denominator calculation of Step 3 for $x\\in K_0$: a monic relation over $K$ and a common nonzero denominator $d\\in P$ give a monic relation for $dx$, so $dx\\in P_0$ and $x=(dx)/d$. Thus $\\operatorname{Frac}(P_0)=K_0$. Let $C_0=\\operatorname{icl}_{P_0}(K_0)$. Both $P\\to P_0$ and $P_0\\to C_0$ are integral, so [lem-weil-pbc-integral-transitive] makes every $x\\in C_0$ integral over $P$, whence $x\\in P_0$. Therefore $P_0$ is normal by [def-weil-pbc-normal-ring]. No claim that $P_0$ is a finite $P$-module is needed.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-transitive",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent denominator calculation; Tag 00GN (lemma-integral-transitive). This uses algebraicity of K_0/K, not finiteness of a normalization module."
+   }
+  },
+  {
+   "text": "Put $R_i=(P_0)_{\\mathfrak q_{0,i}}$. It is a normal local domain with fraction field $K_0$ by [lem-weil-pbc-localization-normal-domain]. The inclusion $P_0\\subseteq S_i$ extends to an injective local map $R_i\\to S_i$: a denominator outside $\\mathfrak q_{0,i}=P_0\\cap\\mathfrak m_{S_i}$ becomes a unit, and the inverse image of $\\mathfrak m_{S_i}$ consists exactly of fractions with numerator in $\\mathfrak q_{0,i}$. Let $H_{0,i}=R_i^h$. The universal property [def-weil-pbc-henselization-at-prime], with henselian local target $S_i$, supplies a unique local map $\\phi_i:H_{0,i}\\to S_i$ extending this inclusion. Injectivity of $\\phi_i$ will be proved below.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GY and the henselization universal property Tag 04GQ; locality is into S_i and is not asserted for S_i -> J."
+   }
+  },
+  {
+   "text": "Fix $i$ and abbreviate $R=R_i$, $H=H_{0,i}$. Since $R$ is local, $R_{\\mathfrak m_R}=R$ (all denominators are units); uniqueness in [def-weil-pbc-henselization-at-prime] identifies $H$ with its henselization at $\\mathfrak m_R$. Thus [lem-trf-henselization-prime-ind-etale] and [def-weil-pbc-ind-etale-algebra] give a filtered etale presentation $H=\\varinjlim E_\\alpha$ over $R$. Every prime localization of the normal domain $R$ is normal by [lem-weil-pbc-localization-normal-domain]. Hence $R$ is a normal ring, and [lem-weil-pbc-etale-colimit-normal-local-domain] applies: $H$ is a normal domain and $R\\to H$ is injective.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "lem-trf-henselization-prime-ind-etale",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "More on Algebra Tag 06DI (lemma-henselization-normal), in its already existing etale-colimit formulation; Algebra Tags 04GN and 00GY check its hypotheses."
+   }
+  },
+  {
+   "text": "Let $F=\\operatorname{Frac}(R)=K_0$ and $G=\\operatorname{Frac}(H)$, with $F\\subseteq G$ by Step 11. For $x\\in H$, [lem-weil-pbc-filtered-colimit-algebras-elementwise] chooses $e\\in E_\\alpha$ mapping to $x$. By [lem-weil-pbc-etale-ring-base-change], $F\\otimes_R E_\\alpha$ is etale over $F$, so [lem-weil-pbc-etale-algebra-over-field-product] expresses it as a finite product of finite separable field extensions $F_j/F$. The map $F\\otimes_R E_\\alpha\\to G$, $c\\otimes e\\mapsto c\\bar e$, is unital, so this product is nonzero. In each $F_j$ the coordinate of $1\\otimes e$ satisfies a nonzero monic polynomial $p_j(T)\\in F[T]$. Their product is nonzero and annihilates every coordinate, and therefore its image $x$ in $G$. This proves that every $x\\in H$ is algebraic over $F$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U2 (lemma-etale), base change, and 00U3 (lemma-etale-over-field), finite product of finite separable extensions; the annihilating polynomial is constructed coordinate by coordinate."
+   }
+  },
+  {
+   "text": "If $0\\ne x\\in H$ and $\\phi_i(x)=0$, choose the nonzero polynomial $p\\in F[T]$ from Step 12 with $p(x)=0$ in $G$. Write $p=T^m q$ with $q(0)\\ne0$. Since $G$ is a field and $x\\ne0$, $q(x)=0$. Multiply $q$ by a common nonzero coefficient denominator $d\\in R$, obtaining $\\sum_{j=0}^n r_jx^j=0$ in $H$ with $r_0=dq(0)\\ne0$. This equality holds in $H$ because $H\\hookrightarrow G$. Applying $\\phi_i$ makes all positive-degree terms zero and gives $r_0=0$ in $S_i$, contradicting the injectivity of $R\\to S_i$ from Step 10. Thus $\\ker\\phi_i=0$. We have proved an embedding $H_{0,i}\\hookrightarrow S_i\\subseteq J$ for each index.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent explicit kernel calculation from the algebraicity proved in Step 12; this proves injectivity rather than attributing it to Tag 06DI."
+   }
+  },
+  {
+   "text": "The maps $P_{\\mathfrak q_i}\\to R_i\\to H_{0,i}$ are local because $\\mathfrak q_{0,i}\\cap P=\\mathfrak q_i$. By [def-weil-pbc-henselization-at-prime] there is a unique local map $u_i:H_i\\to H_{0,i}$ extending $P_{\\mathfrak q_i}\\to R_i$. Both $\\phi_i u_i$ and the original $H_i\\to S_i$ are local maps extending the same $P_{\\mathfrak q_i}\\to S_i$, so the same universal property gives $\\phi_i u_i=(H_i\\to S_i)$. This proves compatibility with the prescribed embeddings in $K^{\\mathrm{sep}}$. The right-hand side is injective, so $u_i$ is injective as well. Uniqueness is applied only with target $S_i$, where locality was established.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GQ (definition-henselization), applied twice with local maps into the specified henselian targets."
+   }
+  },
+  {
+   "text": "Let $J_0\\subseteq K^{\\mathrm{sep}}$ be generated by the two images of $H_{0,i}$. Step 13 gives $J_0\\subseteq J$. Step 14 says that these images contain the two given $H_i$, so they contain the ring $J$ generated by them. Hence $J_0=J$. Together with Steps 8--9 and the compatible embeddings from Steps 13--14, this is every clause of the unchanged statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent two-containment argument for generated subrings; neither enlarged henselization is presumed to map locally into J."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "lem-trf-integral-component-henselian-permanence",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-henselization-at-prime",
+  "lem-weil-pbc-integral-transitive",
+  "lem-trf-henselization-prime-ind-etale",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-integral-closure-zariski-main-away",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit application of Zariski Main to etale stages of the two henselizations, followed by normality and a generic polynomial kernel calculation. All non-elementary inputs are existing cited nodes; the internal refinement is not stated in Huebner--Schmidt Theorem 6.3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +249,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-artin-join-theorem-6-3",
@@ -81,5 +276,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nonlocal-join-internal-normalization",
+  "worker": "stage1",
+  "summary": "Repair of E1/E3 and D1: retain the item statement verbatim; withdraw both Artin-clause drafts and both later branch/lift auxiliaries. Derive the branch comparison directly from existing henselization, etale quasi-finiteness and Zariski Main nodes. Prove injectivity by normality, the existing etale-over-field decomposition and an explicit nonzero-constant-term polynomial calculation. The finite witnesses lie in Frac(J), the embeddings land in the individual normalizations inside J, and exact generation follows by two containments. Fifteen steps, no new nodes.",
+  "blueprint": "Auxiliary internal-center comparison along the Artin join reduction of lem-trf-local-term-locality; nearest blueprint ancestor and original via chain retained.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-integral-closure",
+    "why": "Definition of the actual normalization subrings; generic algebra tool."
+   },
+   {
+    "node": "def-weil-pbc-normal-ring",
+    "why": "Monic-root criterion in the specified fraction fields; generic algebra definition."
+   },
+   {
+    "node": "lem-weil-pbc-integral-transitive",
+    "why": "Normality of the integral closures via transitivity; generic algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Normality and fraction fields of prime localizations; generic algebra tool."
+   },
+   {
+    "node": "def-weil-pbc-ind-etale-algebra",
+    "why": "Filtered etale presentations supplied by the same-unit henselization theorem."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "why": "Represent one henselization element at an etale stage; no unit-specific substitute."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "Finite type and quasi-finiteness at the stage prime for Zariski Main."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-zariski-main-away",
+    "why": "Zariski Main supplies integral numerators and a denominator outside the stage prime."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Normality and injectivity into the local etale colimit; no use of an injectivity claim for a map out of it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "Etaleness of a stage after passage to the fraction field."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Finite field-product description at the generic point, used to construct an annihilating polynomial."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-integral-closure-zariski-main-away",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-50fa28635",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-50fa28635 (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements, unit/chapter route, delivery errors A–F, report, and cited Stacks/Hübner–Schmidt sources. The 15-step proof is mathematically coherent: normalization branches, Zariski Main localization, incomparability, finite internal field selection, normality, henselization embeddings, injectivity, compatibility, and exact generation are all checked. No new nodes, duplicates, circularity, route-pivot machinery, SGA 4 citations, or long hidden lemmas were found. Detailed review written to review.md."
  }
 }

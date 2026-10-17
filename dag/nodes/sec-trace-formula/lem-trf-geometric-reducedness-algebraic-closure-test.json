@@ -15,9 +15,67 @@
   "def-pc-base-change",
   "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $X$ is geometrically reduced over $k$, then the defining all-field-extension condition applies to the particular extension $\\bar k/k$. Therefore the base change $X_{\\bar k}$ is reduced. This implication is valid for the empty scheme as well, since reducedness and the universal condition are both vacuous on an empty open cover.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 035X, implication (1) to (2), with $L=\\bar k$"
+   }
+  },
+  {
+   "text": "Assume that $X_{\\bar k}$ is reduced. Let $\\mathcal U=X.affineCover$ be the canonical affine open cover. Base change of each affine open along $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$ is an open subscheme of $X_{\\bar k}$, and these opens cover it. By [lem-trf-reduced-scheme-open-cover], every such base-changed affine open is reduced. If $U=\\operatorname{Spec}A$ is one chart, [lem-weil-pbc-fibre-product-affine-spectra] identifies its base change with $\\operatorname{Spec}(A\\otimes_k\\bar k)$; [lem-weil-pbc-affine-scheme-reduced-iff] therefore says that $A\\otimes_k\\bar k$ is a reduced ring.",
+   "uses": [
+    "lem-trf-reduced-scheme-open-cover",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 035X, implication (6) to (7), and Schemes Tags 01I4, 01JQ, 01J2"
+   }
+  },
+  {
+   "text": "For each chart ring $A$, [lem-trf-reducedness-tensor-chosen-algebraic-closure] transports reducedness from $A\\otimes_k\\bar k$ to $A\\otimes_k\\operatorname{AlgebraicClosure}(k)$. The Mathlib leaf [lem-trf-affine-geometric-reducedness-criterion] then gives that $A$ is geometrically reduced over $k$, i.e. $A\\otimes_kL$ is reduced for every field extension $L/k$.",
+   "uses": [
+    "lem-trf-reducedness-tensor-chosen-algebraic-closure",
+    "lem-trf-affine-geometric-reducedness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 035X, equivalence of affine condition (7) with all-field-extension condition (2), with Mathlib criterion"
+   }
+  },
+  {
+   "text": "Fix any field extension $L/k$. The base changes of the affine cover $\\mathcal U$ form an open cover of $X_L$. For a chart $U=\\operatorname{Spec}A$, Step 3 gives that $A\\otimes_kL$ is reduced; [lem-weil-pbc-fibre-product-affine-spectra] identifies the corresponding chart of $X_L$ with $\\operatorname{Spec}(A\\otimes_kL)$, and [lem-weil-pbc-affine-scheme-reduced-iff] makes that chart reduced. Applying [lem-trf-reduced-scheme-open-cover] to the cover yields that $X_L$ is reduced. Since $L/k$ was arbitrary, $X$ is geometrically reduced. The empty scheme is covered by the empty family, so this argument includes it.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-trf-reduced-scheme-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 035X, implication (7) to (1), via affine base changes and gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-geometric-reducedness-criterion",
+  "lem-trf-reduced-scheme-open-cover",
+  "lem-trf-reducedness-tensor-chosen-algebraic-closure",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 035X, equivalence (2) and (6), with affine condition (7); scheme gluing via Tags 01I4, 01JQ and Mathlib"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,7 +121,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometric-reduced-fibre-locus-constructible",
@@ -75,7 +133,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The good geometric-fibre locus in the finite-stage noetherian reduction: compare reducedness after the chosen algebraic closure with the all-field-extension notion used in Tag 0579 and the affine fibre-locus theorem.",
+   "place": "The affine geometric-fibre comparison: reducedness after the chosen algebraic closure is equivalent to the all-field-extension geometric-reducedness condition.",
    "via": [
     "lem-trf-geometric-reduced-fibre-locus-constructible",
     "lem-trf-geometrically-reduced-fibres-limit-descent",
@@ -94,5 +152,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Stacks Tag 035X and retained its arbitrary-field, arbitrary-scheme and empty-scheme hypotheses. Split the proof through the canonical affine open cover: base-change charts are spectra of tensor products, reducedness is local on the cover, and the affine all-field-extension criterion is Mathlib’s Algebra.isGeometricallyReduced_iff after transporting between the chosen and canonical algebraic closures. No Lean declaration in the project states the item exactly.",
+  "blueprint": "Realizes the affine geometric-fibre comparison described in the ancestor blueprint route for the trace-formula fibre-locus argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q20-ad6cc2b1b",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-ad6cc2b1b (reviewer sub-agent of L); spot-checked: Reviewed the item, all three new nodes, cited statements, Stacks Tags 035X/020I/09GV, Mathlib matches, unit/chapter route, hypotheses, edge cases, duplicates, and route constraints. Wrote review.md; no repairs or tool uses accepted."
  }
 }
