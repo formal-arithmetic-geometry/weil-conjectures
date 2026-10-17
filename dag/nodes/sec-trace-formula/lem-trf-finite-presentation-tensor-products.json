@@ -11,9 +11,63 @@
   "def-sc-finitely-presented-module",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-sc-finitely-presented-module], choose finite natural numbers m,n and an exact sequence of R-modules R^m \\xrightarrow{d} R^n \\xrightarrow{\\pi} P \\to 0. The same fixed presentation will be used for every family (Q_\\alpha)_{\\alpha\\in A}; the cases m=0, n=0 and A=\\varnothing are allowed by the definition.",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059K, proposition-fp-tensor, proof (1) implies (2), first sentence choosing R^m → R^n → M."
+   }
+  },
+  {
+   "text": "Tensor the chosen presentation with the product module Q=\\prod_{\\alpha\\in A}Q_\\alpha and, separately, with each Q_\\alpha. By [lem-weil-pbc-tensor-right-exact], both resulting rows are right exact. For a finite free module R^r, the canonical map R^r\\otimes_R Q\\to\\prod_\\alpha(R^r\\otimes_RQ_\\alpha) is an isomorphism: using the standard basis, both sides identify with Q^r and the map is componentwise the identity. Under these identifications the two rows form a commutative diagram, because the tensor-induced map is determined on pure tensors by [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059K, proposition-fp-tensor, proof (1) implies (2), displayed tensor diagram and the assertion that the first two vertical maps are isomorphisms."
+   }
+  },
+  {
+   "text": "The bottom comparison map is surjective. Indeed, given a family in \\prod_\\alpha(P\\otimes_RQ_\\alpha), lift it along the bottom surjection from \\prod_\\alpha(R^n\\otimes_RQ_\\alpha), use the finite-free isomorphism of Step 2 to lift that element to R^n\\otimes_RQ, and map it along the top row to P\\otimes_RQ. Commutativity sends the resulting element to the original family.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059K, proposition-fp-tensor, proof (1) implies (2), diagram chase proving surjectivity."
+   }
+  },
+  {
+   "text": "The bottom comparison map is injective. Let x\\in P\\otimes_RQ map to zero. Lift x to b\\in R^n\\otimes_RQ by top-row surjectivity. Its image b\\prime in \\prod_\\alpha(R^n\\otimes_RQ_\\alpha) maps to zero in the bottom-right product, so bottom-row exactness gives a\\prime in \\prod_\\alpha(R^m\\otimes_RQ_\\alpha) mapping to b\\prime. The finite-free isomorphism in Step 2 lifts a\\prime to a\\in R^m\\otimes_RQ. Since the left and middle vertical maps are isomorphisms, the image of a in R^n\\otimes_RQ equals b; hence x=0. Therefore the comparison is bijective.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059K, proposition-fp-tensor, proof (1) implies (2), diagram chase proving injectivity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059K, proposition-fp-tensor, implication (1) implies (2)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +113,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-mittag-leffler-hom-systems",
@@ -92,5 +146,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-presentation-tensor-products",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 059K and checked the exact finite-presentation-to-tensor/product argument. The item is proved in four steps: choose a finite presentation, tensor it to two right-exact rows and identify finite-free comparison maps explicitly, then chase the diagram for surjectivity and injectivity. Reused the existing finite-presentation definition, tensor-product definition and Mathlib-backed tensor right-exactness leaf; no new nodes or attachments.",
+  "blueprint": "Realizes the inherited ancestor route to Tag 059K in the proof of lem-trf-mittag-leffler-hom-systems: the item supplies the bottom tensor-to-product isomorphism for a finitely presented source."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-b3bfec287",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-b3bfec287 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, Stacks 059K/0518/00CX/00DF, and unit/chapter route. Verified all four steps, finite-free comparisons, coordinatewise exactness, nonflat and empty/zero cases, duplicate candidates, and acyclic dependencies. No long steps, prohibited machinery, or repairs. Detailed checks are in review.md."
  }
 }

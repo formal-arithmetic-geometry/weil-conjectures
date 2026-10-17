@@ -15,9 +15,81 @@
   "lem-trf-lci-pointwise-criterion",
   "def-weil-pbc-relative-global-complete-intersection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By finite presentation at x choose affine neighbourhoods U_0=Spec(A) of x and V_0 of s with f(U_0) contained in V_0 and A finitely presented over O_S(V_0). The restricted morphism f_0:U_0 -> S is locally of finite presentation: for every point y of U_0 the very same affine pair U_0,V_0 witnesses finite presentation at y in the cited definition. Choose an affine neighbourhood U=Spec(B) of x inside the open U_0 intersect f^{-1}(V), using the affine-open basis. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to f_0, the affine open U of U_0, and the prescribed affine open V=Spec(R) of S. It gives that R -> B is finitely presented. Thus x belongs to U and f(U) is contained in V, without asserting that an open principal in V is principal in V_0.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition Tag 01TP (definition-finite-presentation) and Lemma Tag 01TQ (lemma-locally-finite-presentation-characterize), (1) => (2); affine neighbourhood chosen using Schemes Tag 01IT."
+   }
+  },
+  {
+   "text": "Let q be the prime of B corresponding to x and p=q∩R, corresponding to s. The local rings of the affine opens identify R_p with O_{S,s} and B_q with O_{X,x}; restricting a morphism to affine open neighbourhoods does not change these stalks. Hence the local map R_p -> B_q is flat by the assumed flatness at x.",
+   "uses": [
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UE, condition (3), and Definition Tag 01U3 (flatness at a point), with the standard affine stalk identifications."
+   }
+  },
+  {
+   "text": "Put F=B tensor_R kappa(p), a finite type kappa(p)-algebra since B is finitely presented over R. The affine fibre-product calculation identifies Spec(F) with the open of X_s induced by U. Its prime Q corresponding to x is the kernel of F -> kappa(q), and F_Q is canonically O_{X_s,x}. Consequently F_Q is a complete-intersection local ring over kappa(p) by hypothesis. Apply [lem-trf-ci-local-ring-principal-neighbourhood] to k=kappa(p), F, and Q. It gives h outside Q such that F_h is a global complete intersection over kappa(p). This is a criterion at the single prime Q; no assertion about other local rings of F is needed.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-trf-ci-local-ring-principal-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SG (lemma-lci-at-prime), (1) => (3); affine fibre identification as in Morphisms Tag 01UE and lemma-syntomic-flat-fibres."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection] to the ring map R -> B, the prime q, and g=1. Its finite-presentation hypothesis is Step 1, its flat local-ring hypothesis is Step 2, and its fibre hypothesis is Step 3. We obtain an element g not in q, integers n,c, polynomials h_1,...,h_c in R[t_1,...,t_n], a relative global complete-intersection quotient T=R[t_1,...,t_n]/(h_1,...,h_c), and an R-algebra isomorphism B_g ≅ T. Since g is not in q, U\\cap D(g)=Spec(B_g) is an affine neighbourhood of x, maps into V, and has the asserted presentation.",
+   "uses": [
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SY, implication (3) to (2), applied to the affine coordinate map R -> B; the scheme-theoretic formulation is Morphisms Tag 01UE."
+   }
+  },
+  {
+   "text": "For every prime of R whose fibre of T is nonzero, the definition of a relative global complete intersection gives Krull dimension n-c. This is exactly the final “in particular” clause.",
+   "uses": [
+    "def-weil-pbc-relative-global-complete-intersection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition Tag 00SP (relative global complete intersection), fibre-dimension clause."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "lem-trf-ci-local-ring-principal-neighbourhood",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01UE, implication (3) => (2), with the affine refinement from Tag 01TQ, fibre-prime criterion Algebra Tag 00SG, and algebraic local model Algebra Tag 00SY."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,7 +128,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-syntomic-locus-base-change",
@@ -68,8 +140,9 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical stability-locus input to the specialization/alteration branch below lem-trf-local-term-locality (1)--(2), through lem-trf-stable-modification-stability-locus and its constructibility lemma: source-local nodal openness in Temkin Lemma 5.1(i)--(ii), expanded by Stacks 0DSC. Expanded in the fibrewise local-complete-intersection locus input (Stacks 02V3).",
+   "place": "The fibrewise local-complete-intersection input used in the syntomic/local-model branch: Stacks Morphisms Tag 01UE, implication (3) => (2), using Algebra Tag 00SY to pass from a flat local finite-presentation algebra with a complete-intersection fibre neighbourhood to a principal affine relative global-complete-intersection presentation.",
    "via": [
+    "lem-trf-syntomic-pointwise-local-model",
     "lem-trf-syntomic-locus-base-change",
     "lem-trf-nodal-open-locus",
     "lem-trf-stable-modification-constructibility",
@@ -78,5 +151,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-syntomic-pointwise-local-model",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reviewer corrected the affine refinement by applying the existing 01TQ affine-open finite-presentation lemma to the locally finitely presented restriction on the original chart. Replaced the all-points 01UG citation at a single fibre prime by a statement-only node for 00SG (1) => (3). Steps 2, 4 and 5 are retained. No use of the principal-localization lemma is now needed.",
+  "blueprint": "Realizes the fibrewise local-complete-intersection input in the syntomic/local-model branch below lem-trf-local-term-locality, specifically Stacks Morphisms Tag 01UE (3) => (2) and its Algebra Tag 00SY reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic affine-open criterion for locally finitely presented morphisms (01TQ), used only to refine the chart inside the prescribed V; it does not replace a local-term or trace comparison."
+   },
+   {
+    "node": "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "why": "Generic commutative-algebra local model (00SY), applied to R -> B with its three hypotheses checked; it supplies algebraic equations and does not replace the contracting-correspondence theorem of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q77-ae59f0575",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-ae59f0575 (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Corrected affine refinement using existing Stacks 01TQ node; replaced the invalid all-points criterion application with a searched, statement-only lemma for 00SG. Verified 01UE and 00SY hypotheses, edge cases, route and dependencies. Statement unchanged. Corrected JSON files and concrete checks are in fixes/ and review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
