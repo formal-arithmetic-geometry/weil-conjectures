@@ -11,9 +11,61 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-marked-point-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $a_0=g(0)$ and $y_1=e(1)$. The function $m:\\{0,1\\}\\times\\{0,1\\}\\to\\{0,1\\}$, $m(r,t)=\\min(r,t)$, is order preserving. In degree $n$, it sends a pair of monotone maps $r,t:[n]\\to[1]$ to the monotone map $i\\mapsto\\min(r(i),t(i))$; this commutes with precomposition by every simplicial operator. It therefore defines $m:\\Delta^1\\times\\Delta^1\\to\\Delta^1$. Define the underlying simplicial map $H(r,t)=\\mu(g(m(r,t)),e(t))$. Its restrictions at $r=0$ and $r=1$ are respectively $a_0^*e$ and $g^*e$. Thus $H$ is an explicit simplicial homotopy comparing the vertex action with the edge action; no fillers in $A,U$ or $V$ are used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(4), printed p.176, final paragraph; explicit minimum homotopy and one of its triangular restrictions."
+   }
+  },
+  {
+   "text": "On the side $t=1$ of this homotopy, $H(r,1)=\\mu(g(r),\\operatorname{const}_{y_1}(r))$. The edge $g$ is marked in $A^\\sharp$ and the constant edge at $y_1$ is degenerate, hence marked in $Y$. The coordinatewise product marking makes their pair marked in $A^\\sharp\\times Y$. Since $\\mu$ is a marked map, its image $v=\\mu\\circ(g,\\operatorname{const}_{y_1})$ belongs to $E_X$. The hypothesis on $h$ therefore makes $h(v)$ an equivalence in $Z$. This marking argument uses no marking of $e$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(4), printed p.176, final paragraph; explicit minimum homotopy and one of its triangular restrictions."
+   }
+  },
+  {
+   "text": "The two monotone maps $\\alpha,\\beta:[2]\\to[1]$ given by $\\alpha=(0,0,1)$ and $\\beta=(0,1,1)$ give a simplicial map $j=(\\alpha,\\beta):\\Delta^2\\to\\Delta^1\\times\\Delta^1$. On its image, $m(\\alpha,\\beta)=\\alpha$. The three edges $01,12,02$ of $Hj$ are consequently $a_0^*e$, $v$, and $g^*e$, respectively. Apply $h$ to this actual $2$-simplex. By [lem-coef-infinity-mapping-composition], its edges give the relation $[h(v)]\\,[h(a_0^*e)]=[h(g^*e)]$ in the ordinary category $hZ$, and an edge of $Z$ is an equivalence precisely when its component class is invertible. By step 2 the class $[h(v)]$ has an inverse. If $[h(a_0^*e)]$ is invertible, the displayed composite is invertible, with inverse $[h(a_0^*e)]^{-1}[h(v)]^{-1}$. Conversely, if $[h(g^*e)]$ is invertible, then $[h(a_0^*e)]=[h(v)]^{-1}[h(g^*e)]$ is invertible. This proves the claimed if and only if.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Remarks 4.6.8.10 and 4.6.8.14; apply the existing mapping-composition statement to the explicit triangular restriction of the HTT interval homotopy."
+   }
+  },
+  {
+   "text": "If $h(a^*e)$ is an equivalence for every vertex $a$ of $A$, apply this assumption to the initial vertex $a=g(0)$ of any edge $g$ and use step 3. This gives $h(g^*e)$ an equivalence for every edge $g$. If $A$ has no vertices, it has no edges, so both universal assertions are vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(4), printed p.176, final paragraph; explicit minimum homotopy and one of its triangular restrictions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 3.2.1.11(4), printed p.176, final paragraph; explicit minimum homotopy and one of its triangular restrictions. HTT is read online but not archived; the formula and cancellation are written explicitly by Q143."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +101,45 @@
    "results": "{\"t\": \"2026-10-17T09:31:30Z\", \"tool\": \"grep\", \"query\": \"marked.{0,30}action|action.{0,30}marked|equivalence.{0,30}square|square.{0,30}equivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: TwoTruncated.lean:261-276 identifies homotopic edges and compositions in the homotopy category; HomotopyCat.lean:496 is functoriality of edge classes. None states the comparison for a marked parameter action, including its marked side edges and arbitrary parameter simplicial set. HornColimits.lean:33-101 is about subcomplex pushouts, not this homotopy. Loogle and the marked-action grep found no match. Read all these candidate source statements."
+  },
+  {
+   "tool": "grep",
+   "query": "marked.{0,30}action|action.{0,30}marked|MarkedSSet",
+   "results": "{\"t\": \"2026-10-17T11:27:40Z\", \"tool\": \"grep\", \"query\": \"marked.{0,30}action|action.{0,30}marked|MarkedSSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/NonUnitalHom.lean\", \"Mathlib/Computability/TuringMachine/StackTuringMachine.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\"], \"digest\": \"bf2946b506674316\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; unmarked edge maps, strict Segal edge formulas, truncated homotopy relations, horn fillers, and product face formulas do not state this marked-action comparison. Grep hits are unrelated comments about simp and Turing machines. No one-line specialization covers the arbitrary marked action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a triangle in a quasicategory has an invertible second edge, its first edge is an equivalence if and only if its long edge is an equivalence",
+   "results": "{\"t\": \"2026-10-17T11:27:40Z\", \"tool\": \"leansearch\", \"query\": \"If a triangle in a quasicategory has an invertible second edge, its first edge is an equivalence if and only if its long edge is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.HomotopicR.symm\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicL.symm\", \"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.HomotopicL.trans\", \"SSet.Truncated.HomotopicR.trans\"], \"digest\": \"83623f47b66a6075\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; unmarked edge maps, strict Segal edge formulas, truncated homotopy relations, horn fillers, and product face formulas do not state this marked-action comparison. Grep hits are unrelated comments about simp and Turing machines. No one-line specialization covers the arbitrary marked action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Marked\"",
+   "results": "{\"t\": \"2026-10-17T11:27:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Marked\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; unmarked edge maps, strict Segal edge formulas, truncated homotopy relations, horn fillers, and product face formulas do not state this marked-action comparison. Grep hits are unrelated comments about simp and Turing machines. No one-line specialization covers the arbitrary marked action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A marked simplicial map from A sharp times Y to X carries diagonal parameter actions on an edge to equivalences exactly when its initial vertex action is an equivalence",
+   "results": "{\"t\": \"2026-10-17T11:27:41Z\", \"tool\": \"leanfinder\", \"query\": \"A marked simplicial map from A sharp times Y to X carries diagonal parameter actions on an edge to equivalences exactly when its initial vertex action is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.liftOfStrictSegal.spineEquiv_f₂_arrow_one\", \"SSet.Truncated.liftOfStrictSegal.spineEquiv_f₂_arrow_zero\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SSet.Edge.map_id\", \"SSet.StrictSegal.spineToSimplex_edge\", \"SSet.Truncated.StrictSegal.spineToSimplex_edge\", \"SSet.Edge.map_edge\", \"SSet.Edge.ext_iff\"], \"digest\": \"f7a80f16cba3f08d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; unmarked edge maps, strict Segal edge formulas, truncated homotopy relations, horn fillers, and product face formulas do not state this marked-action comparison. Grep hits are unrelated comments about simp and Turing machines. No one-line specialization covers the arbitrary marked action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial square in a quasicategory with invertible vertical edges has an invertible diagonal if and only if its bottom horizontal edge is invertible",
+   "results": "{\"t\": \"2026-10-17T11:32:14Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial square in a quasicategory with invertible vertical edges has an invertible diagonal if and only if its bottom horizontal edge is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.Quasicategory₂.fill31\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Truncated.Quasicategory₂.fill32\", \"SSet.horn₂₂.sq\", \"SSet.horn₂₀.sq\", \"SSet.horn₂₁.sq\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\"], \"digest\": \"8f9c140eb3173478\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; unmarked edge maps, strict Segal edge formulas, truncated homotopy relations, horn fillers, and product face formulas do not state this marked-action comparison. Grep hits are unrelated comments about simp and Turing machines. No one-line specialization covers the arbitrary marked action."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-generator-calculations",
@@ -80,5 +167,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-action-edge-comparison",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Expanded the HTT endpoint homotopy using the degreewise minimum map, checked the marked endpoint edge, and used the existing mapping-composition theorem for the explicit triangle and invertibility criterion. Read cited statements, searched project Lean, DAG, blueprint and Mathlib, and tested degenerate and empty cases.",
+  "blueprint": "Realizes the marked-edge action comparison in the final paragraph of HTT Proposition 3.2.1.11(4), used by proof step 8 of lem-coef-marked-cone-generator-calculations below paragraph 2 of prop-coef-integral-exceptional-adjoint."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-2bdf2ad6a",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-2bdf2ad6a (reviewer sub-agent of L); spot-checked: I read the item, the full statements of the three cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-marked-point-cartesian-model, lem-coef-infinity-mapping-composition) and how the parent lem-coef-marked-cone-generator-calculations uses the item in step 11. The statement is unchanged and true. I tested it on a nerve example (A=Δ^1, X=Δ^1×Δ^1, Z=N(J×[1])), a degenerate g, a degenerate e and empty A or U. Step 1: H=μ∘(g∘min, e∘pr2) is simplicial, with endpoints a_0^*e at r=0 and g^*e at r=1. Step 2 uses only the marking clauses of the marked-model statement (degenerate edges are marked, products are marked coordinatewise, A^♯), so v=μ(g,const_{y1}) is in E_X. Step 3: with j=((0,0,1),(0,1,1)), the edges 01, 12 and 02 are a_0^*e, v and g^*e. I checked these. The triangle relation [v][u]=[w] and the invertible-class criterion both appear verbatim in the statement of the mapping-composition node, which is in the same unit, so no tool use is needed. The cancellation in hZ is correct in both directions. Step 4 is elementary. proof_deps equals the union of uses. The delivery has no new nodes. A search of the DAG for duplicates found none (the nearest is the edge-triangle-presentation node, which is a different statement). The four kinds of Mathlib search are recorded. HTT 3.2.1.11 is not archived, so I could not read it at the cited place. The proof is marked agent-written and self-contained, and I verified it line by line. This is not a target node, so the base-change check does not apply. No SGA source is used. No fixes."
  }
 }
