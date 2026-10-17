@@ -19,9 +19,101 @@
   "def-weil-proper-morphism",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The retagging changes only the two structural maps to \\operatorname{Spec}k; it leaves the underlying schemes, the underlying morphism f, and every fibre product of these schemes unchanged. In particular the relative diagonal X\\to X\\times_Y X is the same closed immersion on both sides. Its regular-immersion description and normal bundle are therefore the same relative tangent bundle by [lem-pur-diagonal-regular-immersion]. The deformation-to-the-normal-cone construction is also literally the same Rees algebra: [def-pur-dnc-section-family] defines it from the ideal of the section and the underlying fibre product, and [lem-pur-dnc-section-geometry] identifies its two fibres, coordinates, punctured trivialization, and base-change maps. The identity on the underlying schemes consequently identifies the diagonal section invariant and the normal-bundle section invariant, including all pullback maps used in the deformation.",
+   "uses": [
+    "lem-pur-diagonal-regular-immersion",
+    "def-pur-dnc-section-family",
+    "lem-pur-dnc-section-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1, semilinear base-change application; auxiliary diagonal and deformation comparison"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 work at the finite level $R=\\mathbf Z/\\ell^m$ with $m\\geq1$, i.e. $E=\\mathbf Q_\\ell$, the coefficient stage at which [det-sp-orientation-charts] and [det-sp-orientation-vector-bundle] are stated; Step 4 passes to an arbitrary $A_{E,n}$. At this level the diagonal orientation is, on each etale coordinate chart, the composite of the normalized diagonal-to-normal-bundle comparison and vector-bundle purity, as specified by [det-sp-orientation-charts]. The deformation comparison is characterized uniquely by being the identity on the standard coordinate pair, and is compatible with etale localization and base change by [thm-pur-dnc-invariance]; the coefficient-transport statement [lem-pur-dnc-coefficient-transport] gives the same normalization for the finite coefficient $R$ and records compatibility with the Tate-line comparison. On the normal bundle, [cor-pur-vector-bundle-purity] gives the canonical integration-normalized map, and [det-sp-orientation-vector-bundle] identifies it with the diagonal orientation. By Step 1 the diagonal, its conormal/normal bundle, the DNC family, and the standard coordinate charts are identical after retagging. The identity of coefficient sheaves on the identified small sites also fixes the normalized Tate line and its transition maps. Thus the two finite orientation composites agree on every identified coordinate chart.",
+   "uses": [
+    "thm-pur-dnc-invariance",
+    "lem-pur-dnc-coefficient-transport",
+    "cor-pur-vector-bundle-purity",
+    "det-sp-orientation-vector-bundle",
+    "det-sp-orientation-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1, normalized diagonal/deformation orientation; agent formulation of the missing retagging input"
+   }
+  },
+  {
+   "text": "Smoothness supplies an etale coordinate cover by [sbc-thm-etale-local-normal-form]. On every chart $U\\to\\mathbf A^d_Y$, [det-sp-orientation-charts] says that the restriction of the diagonal orientation is the affine-space orientation. Step 1 identifies the chart, its coordinate adjunction, and its integration map after retagging, so the two restrictions agree by Step 2. To compare these as derived morphisms, compose the difference $(\\Pi_{f^{\\langle\\sigma\\rangle}}-\\Pi_f)$ on the right with $\\Pi_f^{-1}$, the inverse of the isomorphism supplied by [thm-pur-diagonal-dualizing-object], and remove the common shift $[2d]$; the result is an endomorphism of the degree-zero coefficient sheaf $R_X(d)$. The degree-zero full-faithfulness statement [lem-weil-pbc-derived-single-fully-faithful] identifies such derived morphisms with ordinary sheaf maps. These local sheaf maps agree on overlaps, and the sheaf Hom gluing statement [lem-pur-sheaf-hom-cover-gluing] gives a unique global equality. This proves $\\Pi_{f^{\\langle\\sigma\\rangle}}=\\Pi_f$ in the finite derived category with coefficients $R=\\mathbf Z/\\ell^m$, for every $m\\geq1$, with the displayed orientation direction (the inverse of the dualizing-object map) preserved.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "det-sp-orientation-charts",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "thm-pur-diagonal-dualizing-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1, equality of the normalized finite orientations after identifying the underlying sites"
+   }
+  },
+  {
+   "text": "Now let $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ be arbitrary. Since $\\ell\\in\\varpi_E\\mathcal O_E$, one has $\\ell^nA=0$, so $A$ is a finite commutative ring receiving the unital map from $R=\\mathbf Z/\\ell^n$. By [det-sp-finite-general-ring](2), the orientation obtained by running the diagonal and deformation construction directly with $A$-coefficients, which is $\\Pi_f$ at $A$ by [thm-pur-diagonal-dualizing-object] and [def-pur-smooth-purity-map], equals the composite of [det-sp-finite-general-ring](1): $c_{R,A}(R_Y)^{-1}:\\omega_{f,A}\\xrightarrow{\\sim}(\\omega_{f,R})_A$ followed by the scalar extension $(\\Pi_{f,R})_A$ of the $R$-orientation. The same holds for $f^{\\langle\\sigma\\rangle}$. Scalar extension $(-)_A=-\\otimes^L_{R}A$ is formed on the same underlying small sites with the same constant sheaves, so Step 3 at $m=n$ gives $(\\Pi_{f^{\\langle\\sigma\\rangle},R})_A=(\\Pi_{f,R})_A$. The comparison $c_{R,A}(R_Y)$ is, by [det-sp-reduction-exceptional], the unique morphism $c$ with $\\varepsilon_A(A_Y)\\circ Rf_{!,A}(c)=(\\varepsilon_R(R_Y))_A\\circ b(\\omega_{f,R})^{-1}$. The identifications of the statement preserve the counits $\\varepsilon_R,\\varepsilon_A$ (they are the counit-preserving adjunction isomorphisms), and $b$ is built from the coefficient exchanges for $Rp_*$ and $j_!$ of the same underlying compactification $f=pj$, so it is the same map. The defining equation of $c$ is therefore the same for $f$ and $f^{\\langle\\sigma\\rangle}$, and uniqueness gives $c^{\\langle\\sigma\\rangle}_{R,A}=c_{R,A}$. Composing, $\\Pi_{f^{\\langle\\sigma\\rangle}}=\\Pi_f$ at every finite stage $A_{E,n}$.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "det-sp-reduction-exceptional",
+    "thm-pur-diagonal-dualizing-object",
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1: semilinear base-change application; agent completion, passage from $\\mathbf Z/\\ell^n$ to $A_{E,n}$"
+   }
+  },
+  {
+   "text": "For the coefficient tower, [det-sp-tower-gamma](1) states that its orientation is the compatible family whose level $n$ is the finite diagonal orientation with coefficients $\\mathcal O_E/\\ell^n$. If $\\ell=u\\varpi_E^e$ in $\\mathcal O_E$, then $(\\ell^n)=(\\varpi_E^{en})$, so each tower level is $A_{E,en}$ and Step 4 applies at index $en$. Each level of the retagged and original tower orientations therefore agrees under the identity of the corresponding finite sites and coefficient sheaves. A tower morphism is, by [sk-def-sp-coefficient-towers], a family of level maps commuting with every quotient transition, and identities and composition are componentwise. Hence the equal level maps form the same tower morphism and retain all quotient-coefficient transition maps. Therefore $a_{f^{\\langle\\sigma\\rangle},\\bullet}=a_{f,\\bullet}$ in $D(\\operatorname{Tow}(X,\\mathcal O_E))$.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1, tower orientation; levelwise retagging comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-pur-vector-bundle-purity",
+  "def-pur-dnc-section-family",
+  "def-pur-smooth-purity-map",
+  "det-sp-finite-general-ring",
+  "det-sp-orientation-charts",
+  "det-sp-orientation-vector-bundle",
+  "det-sp-reduction-exceptional",
+  "det-sp-tower-gamma",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-dnc-coefficient-transport",
+  "lem-pur-dnc-section-geometry",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "sbc-thm-etale-local-normal-form",
+  "sk-def-sp-coefficient-towers",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1: semilinear base-change application; explicit missing auxiliary input, completed by the diagonal/DNC/tower argument"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -95,7 +187,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-weil-equivariance-of-purity-and-trace",
@@ -112,5 +204,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-orientation-ground-field-retagging",
+  "worker": "stage1",
+  "summary": "Completed the missing ground-field-retagging lemma. The proof keeps the underlying diagonal, normal bundle and DNC unchanged, compares the normalized finite orientation through the unique DNC and vector-bundle normalizations and local coordinate charts, glues the local equalities, and then proves tower equality componentwise at every finite level. Maintainer review: Steps 2-3 restricted to Z/l^m (the coefficient stage of det-sp-orientation-charts and det-sp-orientation-vector-bundle); new Step 4 passes to every A_{E,n} via det-sp-finite-general-ring and det-sp-reduction-exceptional; tool uses corrected.",
+  "blueprint": "Realizes Step 1 of thm-pur-weil-equivariance-of-purity-and-trace: the semilinear retagging auxiliary input needed before applying the k-linear purity base-change factors.",
+  "tool_uses": [
+   {
+    "node": "det-sp-orientation-charts",
+    "why": "Smooth-purity orientation unit (sk-prop-sp-orientation) supplies the chart restriction of the diagonal orientation used to compare the two orientations locally; no node of the six-functor package states it."
+   },
+   {
+    "node": "det-sp-orientation-vector-bundle",
+    "why": "Same unit supplies equality of the diagonal and integration-normalized vector-bundle orientations on the normal bundle."
+   },
+   {
+    "node": "det-sp-reduction-exceptional",
+    "why": "Coefficient-reduction unit (sk-lem-sp-reduction) supplies the counit characterization of c_{R,A} used to pass from Z/l^n to A_{E,n}."
+   },
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "Integral-adjunction unit supplies the levelwise tower orientation; the six-functor package has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-orientation-charts",
+  "det-sp-orientation-vector-bundle",
+  "det-sp-reduction-exceptional",
+  "det-sp-tower-gamma"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-7ac414cc1",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-7ac414cc1 (reviewer sub-agent of L); spot-checked: I read the whole item. I checked it against Step 1 of the main-20261015 proof thm-pur-weil-equivariance-of-purity-and-trace.proof.md: the blueprint applies a k-linear base-change result to the semilinear square of def-pur-scheme-geometric-frobenius, and the item supplies the missing retagging input. The statement is true and not weakened. Sites, coefficient sheaves, Tate lines, the diagonal, the normal bundle, the deformation to the normal cone (DNC), the compactification and integration all depend only on the underlying morphism. The orientation direction and the coefficient category (D^b_ctf over A_{E,n}; D(Tow(X,O_E))) match def-pur-smooth-purity-map, thm-pur-diagonal-dualizing-object and det-sp-tower-gamma(1). Edge cases checked: sigma=id, d=0, f=id, empty X, n=1, ramified E. No new nodes, no duplicate (det-sp-purity-bc-factors, prop-pur-smooth-purity-naturality-cover and lem-pur-finite-smooth-adjunction-general-base are distinct), no SGA, no cycle. Fault E1 (fixed): Steps 2-3 applied det-sp-orientation-charts and det-sp-orientation-vector-bundle, which are stated only for E=Q_l and Lambda=Z/l^n, to an arbitrary A_{E,n}. Steps 2-3 now work at R=Z/l^m. A new Step 4 passes to A_{E,n} using l^n A=0, det-sp-finite-general-ring(1)-(2) (the direct diagonal/DNC orientation at A equals (Pi_R)_A after c_{R,A}^{-1}) and the counit characterization of c_{R,A} in det-sp-reduction-exceptional. The statement's identifications preserve that characterization because they preserve counits and use the same compactification. The tower step (now Step 5) uses level O_E/l^n = A_{E,en}. Fault C8 (fixed): det-sp-orientation-charts is off-route (unit sk-prop-sp-orientation) but was not declared. split_report.tool_uses now lists det-sp-orientation-charts, det-sp-orientation-vector-bundle, det-sp-reduction-exceptional and det-sp-tower-gamma, and drops three on-route entries. proof_deps now equals the union of the step uses. The corrected item is fixes/dag/nodes/sec-six-functors/lem-pur-orientation-ground-field-retagging.json; the step-by-step checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
