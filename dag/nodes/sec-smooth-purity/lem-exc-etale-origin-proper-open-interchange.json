@@ -318,5 +318,34 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-f0ccf581c (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 9 steps, the deps and the declared tool_uses. I also read every cited statement, the parent prop-exc-base-change-proper (its Step 8 is the only place that cites the item), unit sk-prop-sf-existence, the current blueprint proof (4 steps, so proof_origin.by=agent is correct), and Stacks 0F7B (more-etale.tex l.2460) and 099R (proetale.tex l.3738). No SGA is cited. The five-arrow composite is well-typed arrow by arrow, and its hypotheses hold: p and r are qcqs, M0 and k_!^e M0 are bounded below, all four corners are Noetherian as lem-amb-unbounded-proper-open-interchange requires, and the transport lemma needs only f and f' qcqs. The coefficients are the ordinary constant-A modules throughout. The base-change map is normalized against the pro-etale lambda of lem-exc-proetale-derived-open-restriction, the same normalization the parent and the finite-CD node use. I redid the Step 7 mate calculation independently. Using the e_i/e_k unit normalizations, naturality of a_i, the Gamma^e normalization, the transport identity T∘A(E)=Ex^R∘S and naturality of b_r and Ex^R, the transpose equals (Ex^R)^{-1}∘Rr_*(eta^d)=lambda^{-1}; the identification of rho with Ex^R is adequately argued. Witness independence uses full faithfulness of nu^* on D^+. Edge cases checked: W=T, W empty and p=id all give the identity or zero. No duplicate: lem-exc-proetale-finite-cd-proper-open-interchange needs an all-sheaf cohomological-dimension bound, and lem-trf-proper-open-site-transport is for finite maps only. lem-sp-proper-open-coefficient-mate (unsplit) has an overlapping site-transport clause; its future splitter can cite this item. Fixes, to the statement and stmt_deps only: (1) added the missing citation [def-weil-extension-by-zero] for the pro-etale i_!,k_!; (2) the source of i^*C_M is i^*i_!Rr_*M, not Rr_*M, so I added a clause identifying it with Rr_*M through the invertible open unit [lem-exc-proetale-open-unit]. This changes no content and keeps the parent's quotation valid. All 10 declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleOriginProperOpenInterchange",
+  "declaration": "AlgebraicGeometry.Scheme.etaleOriginProperOpenInterchange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleOriginOpenComparison",
+   "AlgebraicGeometry.Scheme.etaleOriginOpenCoordinates",
+   "AlgebraicGeometry.Scheme.etaleOriginOpenExtensionComparison",
+   "AlgebraicGeometry.Scheme.etaleOriginOpenDirectImageComparison",
+   "AlgebraicGeometry.Scheme.etaleOriginOpenEtaleInterchange",
+   "AlgebraicGeometry.Scheme.etaleOriginProperOpenIso",
+   "AlgebraicGeometry.Scheme.witnessedEtaleOriginProperOpenIso",
+   "AlgebraicGeometry.Scheme.etaleOriginOpenLambda",
+   "AlgebraicGeometry.Scheme.etaleOriginProperOpenInterchange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOriginProperOpenInterchange.lean",
+  "statement": "theorem etaleOriginProperOpenInterchange (A : Type u) [CommRing A] [Finite A] {V T W : Scheme.{u}} (p : V ⟶ T) (i : W ⟶ T) [IsProper p] [IsOpenImmersion i] [IsNoetherian V] [IsNoetherian T] [IsNoetherian W] [IsNoetherian (pullback p i)] : (∀ K, IsIso (etaleOriginProperOpenIso A p i K).hom) ∧ ∀ (M : proEtaleDerivedCategory (pullback p i) A) (K : DerivedCategory.Plus (Sheaf (pullback p i).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (alpha : (etaleOriginOpenComparison A (pullback p i)).obj K.obj ≅ M), IsIso (witnessedEtaleOriginProperOpenIso A p i K alpha).hom ∧ (∀ (L : DerivedCategory.Plus (Sheaf (pullback p i).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (beta : (etaleOriginOpenComparison A (pullback p i)).obj L.obj ≅ M), (witnessedEtaleOriginProperOpenIso A p i K alpha).hom = (witnessedEtaleOriginProperOpenIso A p i L beta).hom) ∧ (∀ (N : proEtaleDerivedCategory (pullback p i) A) (L : DerivedCategory.Plus (Sheaf (pullback p i).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (beta : (etaleOriginOpenComparison A (pullback p i)).obj L.obj ≅ N) (f : M ⟶ N), (sfIntrinsicDerivedOpen A i).map ((proEtaleConstantDerivedDirectImage (pullback.snd p i) A).map f) ≫ (witnessedEtaleOriginProperOpenIso A p i L beta).hom = (witnessedEtaleOriginProperOpenIso A p i K alpha).hom ≫ (proEtaleConstantDerivedDirectImage p A).map ((sfIntrinsicDerivedOpen A (pullback.fst p i)).map f)) ∧ ((exceptionalOpenAdjunction i A).unit.app ((proEtaleConstantDerivedDirectImage (pullback.snd p i) A).obj M) ≫ (sfIntrinsicDerivedPullback A i).map (witnessedEtaleOriginProperOpenIso A p i K alpha).hom ≫ (etaleOriginOpenLambda A p i).hom.app M = 𝟙 _) ∧ ((witnessedEtaleOriginProperOpenIso A p i K alpha).hom = (sfIntrinsicDerivedOpen A i).map ((proEtaleOpenRestrictionLambdaInverse p i A).app M) ≫ (exceptionalOpenAdjunction i A).counit.app ((proEtaleConstantDerivedDirectImage p A).obj ((sfIntrinsicDerivedOpen A (pullback.fst p i)).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-912dfa689",
+  "group": "Q113",
+  "result": "pass",
+  "note": "No substantive or mechanical findings; scompile reproduced cleanly in sandbox and library modes."
  }
 }

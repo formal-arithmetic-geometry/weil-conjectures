@@ -314,5 +314,30 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-b74644881 (reviewer sub-agent of L); spot-checked: The statement and mathematics pass all source and edge-case checks. Repair the omitted dependencies in Steps 3–5 and mark Step 3 non-elementary; corrected JSON is under fixes/dag/nodes/sec-six-functors-basics/lem-sfb-etale-derived-tensor-stalk.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleDerivedTensorStalk",
+  "declaration": "AlgebraicGeometry.Etale.exists_derivedTensor_stalk_iso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleSheafFiber_additive",
+   "AlgebraicGeometry.Etale.moduleSheaf_hasSmallColimits",
+   "AlgebraicGeometry.Etale.moduleSheaf_hasCountableCoproducts",
+   "AlgebraicGeometry.Etale.exists_derivedTensor_stalk_iso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDerivedTensorStalk.lean",
+  "statement": "theorem exists_derivedTensor_stalk_iso (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) : ∃ e : ∀ K L : DerivedCategoryModule A T, (pointSmallEtale t).sheafFiber.mapDerivedCategory.obj (((derivedTensor (ModuleCat.{u + 1} A) T).obj K).obj L) ≅ (pointSmallEtale t).sheafFiber.mapDerivedCategory.obj K ⊗ (pointSmallEtale t).sheafFiber.mapDerivedCategory.obj L, (∀ (K K' L L' : DerivedCategoryModule A T) (f : K ⟶ K') (g : L ⟶ L'), (pointSmallEtale t).sheafFiber.mapDerivedCategory.map (((derivedTensor (ModuleCat.{u + 1} A) T).map f).app L ≫ ((derivedTensor (ModuleCat.{u + 1} A) T).obj K').map g) ≫ (e K' L').hom = (e K L).hom ≫ ((pointSmallEtale t).sheafFiber.mapDerivedCategory.map f ⊗ₘ (pointSmallEtale t).sheafFiber.mapDerivedCategory.map g)) ∧ ∀ P Q : HomotopyCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ), (e (_root_.DerivedCategory.Qh.obj P) (_root_.DerivedCategory.Qh.obj Q)).hom ≫ ((pointSmallEtale t).sheafFiber.mapDerivedCategoryFactorsh.hom.app P ⊗ₘ (pointSmallEtale t).sheafFiber.mapDerivedCategoryFactorsh.hom.app Q) ≫ Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh (C := ModuleCat.{u + 1} A)) (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A) |>.mapHomotopyCategory (ComplexShape.up ℤ)).obj P) (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A) |>.mapHomotopyCategory (ComplexShape.up ℤ)).obj Q) = (pointSmallEtale t).sheafFiber.mapDerivedCategory.map (Functor.LaxMonoidal.μ (_root_.DerivedCategory.Qh (C := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) P Q) ≫ (pointSmallEtale t).sheafFiber.mapDerivedCategoryFactorsh.hom.app (P ⊗ Q) ≫ (_root_.DerivedCategory.Qh (C := ModuleCat.{u + 1} A)).map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) ((pointSmallEtale t).sheafFiber)).app P).app Q)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-bd9667b1f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bd9667b1f",
+  "group": "Q98",
+  "result": "fix",
+  "note": "Mathematics and dependencies match; fixed forbidden let-bound statement syntax and missing launcher Review heading."
  }
 }

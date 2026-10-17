@@ -901,5 +901,46 @@
   "group": "Q100",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q100-f6067f320 (reviewer sub-agent of L); spot-checked: Read the target, all three new nodes, cited statements, exact master/current blueprint sources, Stacks tags 09AA/09AH/09BM/09BN, and the full unit route. Verified all 20 proof steps, canonical reduction/base-change morphisms, coefficient categories, Tor bounds, Weil equivariance, duplicates, cycles, hypotheses, and edge cases. Review written to review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfLocalizationAllStages",
+  "declaration": "WeilConjectures.sfLocalizationAllStages",
+  "declarations": [
+   "WeilConjectures.SfSupportedLocalization",
+   "WeilConjectures.SfSupportedLocalizationTor",
+   "WeilConjectures.SfLocalizationFiniteCategory",
+   "WeilConjectures.SfFiniteLocalization",
+   "WeilConjectures.sfLocalizationResidueMap",
+   "WeilConjectures.sfLocalizationPrimeInvertible",
+   "WeilConjectures.SfLocalizationIntegralInterval",
+   "WeilConjectures.sfLocalizationConstructibleReduction",
+   "WeilConjectures.SfIntegralLocalization",
+   "WeilConjectures.sfLocalizationExceptionalTerm",
+   "WeilConjectures.sfLocalizationExceptionalComparison",
+   "WeilConjectures.sfLocalizationExceptionalTransition",
+   "WeilConjectures.sfLocalizationExceptionalLimit",
+   "WeilConjectures.SfRationalLocalization",
+   "WeilConjectures.SfLocalizationStageComparison",
+   "WeilConjectures.SfAlgebraicallyClosedLocalization",
+   "WeilConjectures.sfLocalizationAllStages",
+   "WeilConjectures.SfWeilLocalization",
+   "WeilConjectures.sfLocalizationFiberMap",
+   "WeilConjectures.sfLocalizationAllStages_weil"
+  ],
+  "file": "lean/Sheaf/Paper/SfLocalizationAllStages.lean",
+  "statement": "theorem sfLocalizationAllStages (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : k)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X : Scheme.{u}) (t : X ⟶ Spec (.of k)) [IsSeparated t] [LocallyOfFiniteType t] [QuasiCompact t] {Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hij : Set.range j = (Set.range i)ᶜ) : (∀ n : ℕ, Nonempty (SfFiniteLocalization l E n k i j)) ∧ Nonempty (SfIntegralLocalization l E k hl t i j) ∧ Nonempty (SfRationalLocalization l E k hl t i j) ∧ Nonempty (SfAlgebraicallyClosedLocalization l Ω k hl t i j)",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All four coefficient stages and the separate actual-pair Weil clause. Owning-node helper records package the asserted adjunctions, canonical operation comparisons, natural supported boundary and Tor bounds. sfLocalizationExceptionalLimit states the integral Rlim formula with its reduction projections. No functor is assumed as an extra hypothesis or chosen from bare nonemptiness."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b8aa7ebdf",
+  "group": "Q64",
+  "result": "fix",
+  "note": "Lean and statement audit passed; supplied complete replacement report with substantive ## Second reading by Q64 section."
  }
 }
