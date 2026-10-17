@@ -231,20 +231,32 @@
  "lean": {
   "module": "Sheaf.CategoryTheory.SimplicialBarLatchingDecomposition",
   "declaration": "CategoryTheory.simplicialBarLatchingDecomposition",
+  "declarations": [
+   "CategoryTheory.simplicialBarStage",
+   "CategoryTheory.simplicialBarNondegenerateAt",
+   "CategoryTheory.simplicialBarNondegenerateStage",
+   "CategoryTheory.simplicialBarDegenerateStage",
+   "CategoryTheory.simplicialBarProperSurjections",
+   "CategoryTheory.simplicialBarLatchingIndex",
+   "CategoryTheory.simplicialBarLatchingDegrees",
+   "CategoryTheory.simplicialBarCanonicalLatchingCocone",
+   "CategoryTheory.SimplicialBarSummand",
+   "CategoryTheory.SimplicialBarLatchingClaim"
+  ],
   "file": "lean/Sheaf/CategoryTheory/SimplicialBarLatchingDecomposition.lean",
-  "statement": "theorem simplicialBarLatchingDecomposition {M : Type u} [Category.{v, u} M] [HasCoproducts M] {I : Type v} [SmallCategory I] : Nonempty (CategoryTheory.SimplicialBarLatchingClaim (M := M) (I := I))",
+  "statement": "theorem simplicialBarLatchingDecomposition {M : Type u} [Category.{v} M] [HasCoproducts.{w} M] {I : Type w} [SmallCategory I] : Nonempty (SimplicialBarLatchingClaim (M := M) (I := I))",
   "branch": "newtargets-dag",
-  "by": "Q55",
+  "by": "NI",
   "date": "2026-10-17",
   "existing": false,
-  "fixed_by": "NT-stage2-Codex-0df19ecc7"
+  "note": "Repairs the previously landed interface without changing the mathematical statement: independent diagram-size universe, actual Mathlib Cocone/IsColimit on the proper-surjection category, canonical injection equations for both summands, explicit naturality in the endpoint and coefficient diagram, and degree-zero initiality. All helpers belong to the bar construction introduced by this node."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-0df19ecc7",
-  "group": "Q55",
-  "result": "fix",
-  "note": "Found H3 mismatch: latching compat/desc/uniq quantified arbitrary simplex morphisms instead of the node’s required surjective rho. Added complete replacement under fixes/lean/Sheaf/CategoryTheory/SimplicialBarLatchingDecomposition.lean; scompile.py passes cleanly."
+  "reviewer": "NT-stage2-Codex-861d7f2bc",
+  "group": "NI",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source/docstrings, declarations, edge cases, and report; scompile.py and deliver2.py --no-push both passed. Review written to review.md."
  }
 }

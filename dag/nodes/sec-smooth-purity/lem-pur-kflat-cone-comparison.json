@@ -240,5 +240,40 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-81e86ae2d (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, the parent lem-pur-finite-kummer-level (its steps 7–8 use only 'bottom arrow quasi-iso implies comparison iso'), its blueprint proof in main-20261015, and the statement of every cited node. The cone convention [[d_L,f],[0,-d_K]] matches def-weil-abstract-derived-category. K-flatness has the K-flat factor on the right, and the tensor-cone node has the fixed complex A on the left. I checked Stacks sites-cohomology 06YM/06YN/06YP/06YS/06YT/06YU/07A3 against the tags file and the .tex (06YP's proof is the acyclic-cone route; 06YT is the commuting-square argument). I re-derived the step-1 Koszul sign: both composites give (-1)^{ij+j} y⊗dx and (-1)^{ij} dy⊗x. I also re-derived the step-3 tensor-cone isomorphism a⊗(y,x)↦(a⊗y,(-1)^p a⊗x) as a chain map. For the left arrow, steps 2–3 put C on the left of the cone lemma and then apply symmetry, which is valid. In step 5, P and C are exactly the descent node's class (K-flat with flat terms, small site), and Q(q⊗ε)=Q(c)Q(a) with Q(a) invertible. Step 6's cohomology argument is correct and cites only definitions. Small cases checked: zero modules, an identity resolution of a flat L, and the parent's [R→R] case. Nothing is weakened; 'bounded above' is unused but harmless. No new nodes. I found no duplicate among the existing *kflat* nodes: the closest are for a one-point site, for schemes or rings, or are acyclic-factor statements. Accepted tool_uses: lem-pc-tensor-mapping-cone-iso and lem-weil-pbc-site-derived-tensor-descent, which are generic and off the unit's route; lem-pur-quasi-iso-cone-acyclic is on the route via sk-def-sf-operations, so its declaration is redundant. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KFlatConeComparison",
+  "declaration": "SheafOfModules.KFlatConeComparison.augmentation_square",
+  "declarations": [
+   "SheafOfModules.KFlatConeComparison.Modules",
+   "SheafOfModules.KFlatConeComparison.single",
+   "SheafOfModules.KFlatConeComparison.tensor",
+   "SheafOfModules.KFlatConeComparison.total",
+   "SheafOfModules.KFlatConeComparison.resolving",
+   "SheafOfModules.KFlatConeComparison.Pair",
+   "SheafOfModules.KFlatConeComparison.Hom",
+   "SheafOfModules.KFlatConeComparison.ordinaryIso",
+   "SheafOfModules.KFlatConeComparison.swap",
+   "SheafOfModules.KFlatConeComparison.coneMap",
+   "SheafOfModules.KFlatConeComparison.localizationPair",
+   "SheafOfModules.KFlatConeComparison.resolvedTensor",
+   "SheafOfModules.KFlatConeComparison.resolvedPair",
+   "SheafOfModules.KFlatConeComparison.comparison",
+   "SheafOfModules.KFlatConeComparison.augmentation_square"
+  ],
+  "file": "lean/Sheaf/Paper/KFlatConeComparison.lean",
+  "statement": "theorem augmentation_square (T : DerivedCategory (Modules R) × DerivedCategory (Modules R) ⥤ DerivedCategory (Modules R)) (ρ : resolvedTensor R ≅ localizationPair R ⋙ T) : ∃ (topCone : ∀ r : Pair R, CochainComplex.mappingCone ((total R).map (𝟙 r.P ×ₘ r.ε)) ≅ (total R).obj (CochainComplex.mappingCone r.ε, r.P)) (leftCone : ∀ r : Pair R, CochainComplex.mappingCone ((total R).map (r.q ×ₘ 𝟙 r.K)) ≅ (total R).obj (CochainComplex.mappingCone r.q, r.K)) (e : ∀ r : Pair R, DerivedCategory.Q.obj ((total R).obj (r.P, (single R).obj r.M)) ≅ T.obj (DerivedCategory.Q.obj ((single R).obj r.L), DerivedCategory.Q.obj ((single R).obj r.M))), ∀ r : Pair R, (total R).map (r.q ×ₘ 𝟙 r.K) ≫ (total R).map (𝟙 _ ×ₘ r.ε) = (total R).map (𝟙 r.P ×ₘ r.ε) ≫ (total R).map (r.q ×ₘ 𝟙 _) ∧ QuasiIso ((total R).map (𝟙 r.P ×ₘ r.ε)) ∧ QuasiIso ((total R).map (r.q ×ₘ 𝟙 r.K)) ∧ CochainComplex.mappingCone.inr ((total R).map (𝟙 r.P ×ₘ r.ε)) ≫ (topCone r).hom = (total R).map (𝟙 r.P ×ₘ CochainComplex.mappingCone.inr r.ε) ≫ (swap R r.P (CochainComplex.mappingCone r.ε)).hom ∧ CochainComplex.mappingCone.inr ((total R).map (r.q ×ₘ 𝟙 r.K)) ≫ (leftCone r).hom = (total R).map (CochainComplex.mappingCone.inr r.q ×ₘ 𝟙 r.K) ∧ DerivedCategory.Q.map ((total R).map (𝟙 r.P ×ₘ r.ε)) ≫ (e r).hom = ρ.hom.app (resolvedPair R r) ≫ T.map (DerivedCategory.Q.map r.q ×ₘ DerivedCategory.Q.map r.ε) ∧ (e r).hom ≫ comparison R T ρ r = DerivedCategory.Q.map ((total R).map (r.q ×ₘ 𝟙 _)) ≫ DerivedCategory.Q.map (ordinaryIso R r.L r.M).hom ∧ (QuasiIso ((total R).map (𝟙 ((single R).obj r.L) ×ₘ r.ε)) → IsIso (comparison R T ρ r)) ∧ ∀ (s : Pair R) (f : Hom r s), (∃ (ht : (total R).map (f.p ×ₘ 𝟙 r.K) ≫ (total R).map (𝟙 s.P ×ₘ f.k) ≫ (total R).map (𝟙 s.P ×ₘ s.ε) = (total R).map (𝟙 r.P ×ₘ r.ε) ≫ (total R).map (f.p ×ₘ (single R).map f.m)) (hl : (total R).map (f.p ×ₘ f.k) ≫ (total R).map (s.q ×ₘ 𝟙 s.K) = (total R).map (r.q ×ₘ 𝟙 r.K) ≫ (total R).map ((single R).map f.l ×ₘ f.k)), coneMap R ((total R).map (f.p ×ₘ 𝟙 r.K) ≫ (total R).map (𝟙 s.P ×ₘ f.k)) ((total R).map (f.p ×ₘ (single R).map f.m)) ht ≫ (topCone s).hom = (topCone r).hom ≫ (total R).map (coneMap R f.k ((single R).map f.m) f.ε_comm ×ₘ f.p) ∧ coneMap R ((total R).map (f.p ×ₘ f.k)) ((total R).map ((single R).map f.l ×ₘ f.k)) hl ≫ (leftCone s).hom = (leftCone r).hom ≫ (total R).map (coneMap R f.p ((single R).map f.l) f.q_comm ×ₘ f.k)) ∧ DerivedCategory.Q.map ((total R).map (f.p ×ₘ (single R).map f.m)) ≫ (e s).hom = (e r).hom ≫ T.map (DerivedCategory.Q.map ((single R).map f.l) ×ₘ DerivedCategory.Q.map ((single R).map f.m)) ∧ T.map (DerivedCategory.Q.map ((single R).map f.l) ×ₘ DerivedCategory.Q.map ((single R).map f.m)) ≫ comparison R T ρ s = comparison R T ρ r ≫ DerivedCategory.Q.map ((single R).map (((tensor R).map f.l).app r.M ≫ ((tensor R).obj s.L).map f.m))",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-caded7c4e",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source alignment, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. scompile.py reproduced clean sandbox and library compiles. No findings; branch unchanged."
  }
 }

@@ -207,5 +207,32 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-d3d96dc30 (reviewer sub-agent of L); spot-checked: I read the whole item, the four cited statements (boundary-collapse-test, tensor-cotensor def, kan-quillen-right-proper, bifibrant-localization), blueprint main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 2, and Step 15 of the parent, which uses the item as stated. Compared with the live side copy, the statement, stmt_deps, blueprint and unit are unchanged; only proof, proof_deps, proof_origin, status and split_report changed, and 6 searches were appended after the 4 earlier records, which are kept unchanged. Step checks: (1) i: P->A is a trivial cofibration and p: B->Y a trivial fibration; A and B are bifibrant by closure under composition. (2) Map(U,*) and Map(0,V) are terminal by the representing isomorphisms plus Yoneda, so the two corner maps are i^* and p_*. (3) Both are trivial Kan fibrations by the simplicial model axiom, so they give pi_0 bijections, with r[h]=[phi]. (4) b[h]=q(h) comes from the assumed equivalence H->L, and conjugation by q(i) and q(p) is a bijection. (5) Two explicit lifts give phi=f strictly, so theta[f]=q(f) and the map is independent of choices with no circularity. (6) Naturality for arrows between cofibrant sources and fibrant targets, and composition through a bifibrant middle object, follow from q's functor laws. Edge cases checked: an empty Hom(P,Y), already-bifibrant P and Y, and an initial object that differs from the terminal one. No properness or other hidden hypotheses are used. All citations are in unit sk-prop-sf-biduality-general, so there are no tool_uses. Mathlib's FundamentalLemma only covers model left/right homotopy classes, so the no-leaf verdict is right. There are no new nodes, no duplicate found by rg over the DAG, no cycle and no SGA citation. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialMappingLocalization",
+  "declaration": "CategoryTheory.simplicial_mapping_localization",
+  "declarations": [
+   "CategoryTheory.simplicialCornerMap",
+   "CategoryTheory.SimplicialModelCategoryData",
+   "CategoryTheory.SimplicialBifibrantLocalizationData",
+   "CategoryTheory.SimplicialMappingLocalization",
+   "CategoryTheory.simplicial_mapping_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialMappingLocalization.lean",
+  "statement": "theorem simplicial_mapping_localization {M : Type u} [Category.{v} M] [ModelCategory M] [SimplicialCategory M] [HasLimits M] [HasColimits M] [HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] (S : SimplicialModelCategoryData M) (L : SimplicialBifibrantLocalizationData M) : Nonempty (SimplicialMappingLocalization M)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Maintainer mechanical repair: restore complete/cocomplete and functorial-factorization conventions, reuse the landed canonical corner map and SM7 predicate, and supply the six-step proof docstring. No mathematical statement change.",
+  "fixed_by": "NT-stage2-Codex-ea5a8795b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ea5a8795b",
+  "group": "NH",
+  "result": "fix",
+  "note": "Wrote review.md and three complete replacements in fixes/. Restored omitted model-category conventions, reused existing corner-map/SM7 definitions, removed the local proof, and completed proof and review documentation. Original and corrected modules compile cleanly through scompile.py. Mathematical statement unchanged; no branch or clone modifications."
  }
 }
