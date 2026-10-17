@@ -22,7 +22,8 @@ evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X`, which is a counit for every `K`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairingOfTrace`.
+- `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairingOfTrace`: the pairing of a trace
+  which is a counit is perfect.
 -/
 
 @[expose] public section
@@ -84,10 +85,14 @@ theorem bijective_derivedTensor_map_comp_counit_comp_coefficientEvaluation (K : 
   rw [e]
   exact (Equiv.bijective _).comp (Equiv.bijective _)
 
-omit [HasSmallSiteSheafify A] in
-/-- **The pairing of a trace which is a counit is perfect** (form with the trace read on
-`Ra_!(Λ_X[n])`). -/
-theorem isPerfectPairing_poincarePairingOfTrace_aux (K : 𝐃(X, A)) (n : ℤ)
+set_option maxRecDepth 4000 in
+omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
+/-- **The pairing of a trace which is a counit is perfect.** Let `t : Ra_!(Λ_X[n]) ⟶ Λ_Y` be
+such that every morphism `Ra_!(U[n]) ⟶ Λ_Y` is `Ra_!(z[n]) ≫ t` for a unique `z : U ⟶ Λ_X`, and
+let `K` satisfy the projection formula against every object. Then the pairing
+`Ra_! K ⊗ᴸ (Ra_* K^∨)[n] ⟶ Λ_Y` of the trace `(Ra_! Λ_X)[n] ≅ Ra_!(Λ_X[n]) ⟶ Λ_Y`
+(`AlgebraicGeometry.Etale.poincarePairingOfTrace`) is perfect. -/
+theorem isPerfectPairing_poincarePairingOfTrace (K : 𝐃(X, A)) (n : ℤ)
     (t : (R(a)_![A]).obj ((𝟙_ _)⟦n⟧) ⟶ 𝟙_ _)
     (ht : ∀ U : 𝐃(X, A), Function.Bijective (fun z : U ⟶ 𝟙_ _ ↦ (R(a)_![A]).map (z⟦n⟧') ≫ t))
     (hPF : ∀ N, HasProjectionFormula A a K N) :
