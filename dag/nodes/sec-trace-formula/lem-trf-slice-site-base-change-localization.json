@@ -171,5 +171,23 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q88-b6cf1c667 (reviewer sub-agent of L); spot-checked: Corrected step 1’s fibre-product comparison and made the slice site’s finite-limit and adjoint checks explicit. Stacks Tags 03CE/09W9 support the unchanged statement. No new nodes or major gaps. Wrote review.md and the corrected whole JSON under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a1cfee297",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Statement, dependencies, source clauses, universes, edge cases, docstrings, route-pivot compliance, and direct-image variance checked; no substantive faults found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.SliceSiteBaseChangeLocalization",
+  "declaration": "CategoryTheory.sliceSiteBaseChangeLocalization",
+  "file": "lean/Sheaf/CategoryTheory/Sites/SliceSiteBaseChangeLocalization.lean",
+  "statement": "theorem sliceSiteBaseChangeLocalization {C : Type u} [Category.{v} C] [HasPullbacks C] (K : Precoverage C) (hK : K.IsSiteForCoverings) {V W : C} (f : V ⟶ W) : (∀ (T : Over W) (R : Presieve T), Presieve.overEquiv T R ∈ K T.left → Presieve.overEquiv ((Over.pullback f).obj T) (R.map (Over.pullback f)) ∈ K ((Over.pullback f).obj T).left) ∧ (∀ (T S A : Over W) (R : Presieve T), Presieve.overEquiv T R ∈ K T.left → ∀ (a : S ⟶ T) (b : A ⟶ T), R a → PreservesLimit (cospan a b) (Over.pullback f)) ∧ (Over.pullback f).IsContinuous (K.toGrothendieck.over W) (K.toGrothendieck.over V) ∧ ∃ g : GeometricMorphism (Sheaf (K.toGrothendieck.over V) (Type (max u v w))) (Sheaf (K.toGrothendieck.over W) (Type (max u v w))), g.inverse = K.toGrothendieck.overMapPullback (Type (max u v w)) f ∧ g.direct = (Over.map f).sheafPushforwardCocontinuous (Type (max u v w)) (K.toGrothendieck.over V) (K.toGrothendieck.over W) ∧ Nonempty ((Over.pullback f).sheafPullback (Type (max u v w)) (K.toGrothendieck.over W) (K.toGrothendieck.over V) ≅ g.inverse) ∧ PreservesFiniteLimits ((Over.pullback f).sheafPullback (Type (max u v w)) (K.toGrothendieck.over W) (K.toGrothendieck.over V)) ∧ PreservesFiniteColimits ((Over.pullback f).sheafPullback (Type (max u v w)) (K.toGrothendieck.over W) (K.toGrothendieck.over V)) ∧ Nonempty (g.direct ⋙ sheafToPresheaf (K.toGrothendieck.over W) (Type (max u v w)) ≅ sheafToPresheaf (K.toGrothendieck.over V) (Type (max u v w)) ⋙ (Functor.whiskeringLeft (Over W)ᵒᵖ (Over V)ᵒᵖ (Type (max u v w))).obj (Over.pullback f).op)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

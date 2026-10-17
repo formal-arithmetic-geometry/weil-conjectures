@@ -238,5 +238,23 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-5247a090d (reviewer sub-agent of L); spot-checked: Reviewed item and all seven steps against Stacks Tags 018I/018J, cited definitions, unit/chapter route, blueprint ancestry, searches, and edge cases. The tuple construction, 1-coskeletal Hom bijection, canonical isomorphism, and augmentation clause are correct; no hidden lemma, duplicate node, route violation, or repair is needed. Wrote review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b6041b9da",
+  "group": "NO",
+  "result": "pass",
+  "note": "All clauses match Stacks 018I/018J and the node; dependencies and Mathlib declarations verified; isolated scompile passed with only intentional sorry."
+ },
+ "lean": {
+  "module": "Sheaf.Targets.CechNerveOneCoskeletal",
+  "declaration": "CategoryTheory.cechNerve_one_coskeletal",
+  "statement": "theorem cechNerve_one_coskeletal {C : Type u} [Category.{v, u} C] (F G : Cᵒᵖ ⥤ Type u) (f : F ⟶ G) : let P := Cᵒᵖ ⥤ Type u let E := (Arrow.mk f).cechNerve IsIso ((SimplicialObject.coskAdj (C := P) 1).unit.app E) ∧ ∀ (T : SimplicialObject P), Function.Bijective (fun h : T ⟶ E => (SimplicialObject.truncation 1).map h) ∧ Nonempty ((T ⟶ E) ≃ {g : T.obj (Opposite.op ⦋0⦌) ⟶ F // T.map (SimplexCategory.δ 0).op ≫ g ≫ f = T.map (SimplexCategory.δ 1).op ≫ g ≫ f}) ∧ ∀ (a : T ⟶ (SimplicialObject.const P).obj G) (g : T.obj (Opposite.op ⦋0⦌) ⟶ F), g ≫ f = a.app (Opposite.op ⦋0⦌) → ∃ H : T ⟶ E, (H.app (Opposite.op ⦋0⦌) ≫ Limits.WidePullback.π (fun _ : Fin 1 => f) 0 = g ∧ H ≫ (Arrow.mk f).augmentedCechNerve.hom = a ∧ ∀ (q : ℕ) (i : Fin (q + 1)), H.app (Opposite.op ⦋q⦌) ≫ Limits.WidePullback.π (fun _ : Fin (q + 1) => f) i = T.map (SimplexCategory.const ⦋0⦌ ⦋q⦌ i).op ≫ g) ∧ ∀ H' : T ⟶ E, (H'.app (Opposite.op ⦋0⦌) ≫ Limits.WidePullback.π (fun _ : Fin 1 => f) 0 = g ∧ H' ≫ (Arrow.mk f).augmentedCechNerve.hom = a) → H' = H",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/Targets/CechNerveOneCoskeletal.lean"
  }
 }

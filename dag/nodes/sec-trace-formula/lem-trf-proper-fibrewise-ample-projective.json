@@ -16,7 +16,8 @@
   "def-weil-geometric-fibre",
   "def-weil-pbc-ample-invertible-module",
   "def-weil-pbc-noetherian-ring",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "lem-pur-projective-bundle-tautological-geometry"
  ],
  "proof": [
   {
@@ -238,5 +239,28 @@
   "group": "Q85",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-47567836e (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements, and source passages. Repaired ampleness locality and coherence citations, clarified the canonical evaluation immersion, and completed new-node metadata. Stacks 0B5Y/0AYZ, 0D2S, 01VU/01VR, 02O5, and 01OD support the mathematics. review.md and five corrected JSON files are written; no statements weakened or nodes dropped.; 5 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-999e19d1a",
+  "group": "N6",
+  "result": "pass",
+  "note": "Checked immutable files, all statement dependencies, source passages, exact declarations, hypotheses, conclusions, universes, edge cases, report sections and route-pivot exclusions. Signature matches verbatim. scompile.py reproduced clean per-file compilation; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFibrewiseAmpleProjective",
+  "declaration": "AlgebraicGeometry.proper_fibrewise_ample_projective",
+  "declarations": [
+   "AlgebraicGeometry.normalizedFibreComponentDegree",
+   "AlgebraicGeometry.proper_fibrewise_ample_projective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFibrewiseAmpleProjective.lean",
+  "statement": "theorem proper_fibrewise_ample_projective {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : Y ⟶ X) [IsProper f] (L : Y.Modules) [L.IsInvertible] (hdim : ∀ (K : Type u) [Field K] [IsAlgClosed K] (x : Spec (.of K) ⟶ X), topologicalKrullDim ↥(pullback f x) ≤ 1) (hdegree : ∀ (K : Type u) [Field K] [IsAlgClosed K] (x : Spec (.of K) ⟶ X) (Z : Scheme.{u}) [IsIntegral Z] (i : Z ⟶ pullback f x), IsClosedImmersion i → Set.range i ∈ irreducibleComponents ↥(pullback f x) → topologicalKrullDim Z = 1 → 0 < normalizedFibreComponentDegree f L K x i) : (∀ U : X.Opens, IsAffineOpen U → Scheme.Modules.IsAmple (f ⁻¹ᵁ U).toScheme ((Scheme.Modules.pullback (f ⁻¹ᵁ U).ι).obj L)) ∧ (∃ n : ℕ, 0 < n ∧ ∃ (E : X.Modules) (hE : E.IsQuasicoherent), E.IsFiniteType ∧ ∃ i : Y ⟶ (@SymmetricAlgebraSheaf.gradedAlgebraData X E hE).relProj, IsClosedImmersion i ∧ i ≫ (@SymmetricAlgebraSheaf.gradedAlgebraData X E hE).relProjHom = f ∧ ∃ O1 : (@SymmetricAlgebraSheaf.gradedAlgebraData X E hE).relProj.Modules, Nonempty (TautologicalTwistData X (@SymmetricAlgebraSheaf.gradedAlgebraData X E hE) O1) ∧ Nonempty ((Scheme.Modules.pullback i).obj O1 ≅ L.tensorPow n)) ∧ IsProjectiveBundle f",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 991455d07825: that packet had no Lean declaration. This module states every hypothesis and conclusion. Integral closed immersions with component image encode the reduced components, whose actual normalizations compute the recorded degree. The existing TautologicalTwistData specifies O(1) by normalized compatible affine Proj charts; its landed owning node is added to stmt_deps. No local-freeness hypothesis on E is imposed."
  }
 }
