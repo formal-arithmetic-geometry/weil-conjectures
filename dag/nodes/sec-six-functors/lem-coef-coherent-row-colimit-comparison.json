@@ -10,9 +10,76 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal D=\\operatorname{Fun}(J,\\mathcal E)$ and $T=\\Delta_J:\\mathcal E\\to\\mathcal D$. The functor-category clause of [lem-cbc-enhanced-functor-cone-calculus] makes $\\mathcal D$ a quasicategory. Its dual cocone criterion, applied to the hypothesized $\\eta_A$, says that for every $A\\in\\mathcal D$ and $x\\in\\mathcal E$ the map\n$$\\operatorname{Map}_{\\mathcal E}(L(A),x)\\longrightarrow\\operatorname{Map}_{\\mathcal D}(A,T(x)),\\qquad f\\longmapsto T(f)\\circ\\eta_A,$$\nis an equivalence. Thus the given coherent pair $(L,\\eta)$ is universal-arrow data for the dual assertion of [lem-coef-parametric-universal-arrows], with full subcategory $\\mathcal D_0=\\mathcal D$. Enlarge the containing universe once so these functor categories and their diagram categories fit; $I,J$ remain small. No new colimit existence assumption is used.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Universal cocone criterion; verification of the dual universal-arrow hypothesis."
+   }
+  },
+  {
+   "text": "The dual coherent-diagram clause of [lem-coef-parametric-universal-arrows] therefore gives, for the given $R$ and $U$, the equivalence\n$$\\Phi:\\operatorname{Map}_{\\operatorname{Fun}(I,\\mathcal E)}(LR,U)\\xrightarrow{\\sim}\\operatorname{Map}_{\\operatorname{Fun}(I,\\mathcal D)}(R,TU),\\qquad a\\longmapsto (Ta)\\circ(\\eta R).$$\nHere the formula applies to the specified pair $(L,\\eta)$, not merely to some new choice: the cited theorem's space of universal-arrow choices, including the functor and its universal transformation, is contractible. If its existence assertion first supplies $(L_0,\\eta_0)$, connect that pair to $(L,\\eta)$ in that space. The connection includes a coherent equivalence $e:L\\simeq L_0$ and the compatibility $\\eta_0\\simeq(Te)\\eta$. Precomposition with $eR$ identifies the two source mapping spaces, with inverse given by its coherent inverse; the compatibility identifies the two displayed composition maps. The formula for $(L_0,\\eta_0)$ consequently implies the formula above. The cited evaluation compatibility makes evaluation of $\\Phi$ at $i$ precisely $f\\mapsto T(f)\\eta_{R(i)}$.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Dual coherent-diagram mapping-space formula, including independence from universal-arrow choices."
+   }
+  },
+  {
+   "text": "Both sides of $\\Phi$ are Kan complexes by [lem-cbc-enhanced-functor-cone-calculus]. Form its homotopy fiber $P_\\alpha$ over the specified point $\\alpha$. In the mapping-path model of [lem-cbc-kan-fibration-fiber-criterion], a point of $P_\\alpha$ is exactly a transformation $a:LR\\to U$ and a path from $\\Phi(a)$ to $\\alpha$ in the entire target mapping space. Higher simplices retain both data and their compatibilities. Since $\\Phi$ is an equivalence, that criterion makes $P_\\alpha$ contractible. In particular it is nonempty: a weak equivalence to a point induces a bijection on components, whereas the empty space has no component. Choose one point for existence; the argument below applies to every point of this fiber. Reversing its Kan path gives the compatibility homotopy in either orientation.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Contractibility of the homotopy fiber of the full transformation-space equivalence."
+   }
+  },
+  {
+   "text": "Fix any $(a,h)\\in P_\\alpha$ and vertex $i\\in I$. Write $A=R(i)$, $l=L(A)$, $u=U(i)$ and $a_i:l\\to u$. Evaluation of $h$ gives $T(a_i)\\eta_A\\simeq\\alpha_i$. By the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], applied now to the hypothesized colimiting $\\alpha_i$ and test object $l$, there is $b_i:u\\to l$ with $T(b_i)\\alpha_i\\simeq\\eta_A$. Composition gives\n$$T(b_i a_i)\\eta_A\\simeq\\eta_A,\\qquad T(a_i b_i)\\alpha_i\\simeq\\alpha_i.$$\nApply the same criterion to $\\eta_A$ with test object $l$, and to $\\alpha_i$ with test object $u$. Each composition map is an equivalence of Kan mapping spaces, hence injective on components. The two displayed homotopies therefore imply $b_i a_i\\simeq\\mathrm{id}_l$ and $a_i b_i\\simeq\\mathrm{id}_u$. These are inverse-triangle witnesses, so $a_i$ is an equivalence. This is only a vertexwise argument; no coherent choice of the $b_i$ is required or asserted.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Comparison between the two initial cocones in each row; explicit two-sided inverse calculation."
+   }
+  },
+  {
+   "text": "Every vertex component of $a$ is an equivalence by step 4. Apply [lem-coef-infinity-pointwise-equivalences] with shape $I$ and target $\\mathcal E$ to conclude that $a:LR\\to U$ is a coherent equivalence. This applies to every point of $P_\\alpha$. Consequently requiring the comparison to be an equivalence removes no points or higher compatibility data from that fiber: the space of pairs asserted in the item is $P_\\alpha$, already proved contractible in step 3. All tests used only the supplied $J$-colimits; the arguments impose no condition of siftedness or weak contractibility on either shape.",
+   "uses": [
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Pointwise detection of coherent equivalences; completion of the full comparison-space assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-parametric-universal-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent proof of coherent row-colimit comparison, supporting the successive-colimit argument of HTT 5.5.2.3 and 5.5.8.6; derived from the cited universal-arrow and cocone-calculus statements. HTT access failed in this worker session; archival source WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,10 +136,73 @@
    "results": "{\"t\": \"2026-10-17T08:25:45Z\", \"tool\": \"grep\", \"query\": \"isPointwiseLeftKanExtensionEquivOfGuitartExact|IsColimit.ofCoconeEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/WithTerminal/Cone.lean\", \"Mathlib/CategoryTheory/Limits/MonoCoprod.lean\", \"Mathlib/CategoryTheory/GuitartExact/KanExtension.lean\", \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean\"], \"digest\": \"72f470f06f98934f\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned IsColimit, colimCoyoneda and pointwise Kan-extension declarations concern ordinary categories and set-valued Hom, not coherent quasicategorical transformations and equivalences of full mapping spaces. Read HasLimits.lean:961-975, IsLimit.lean:274-281 and GuitartExact/KanExtension.lean:109-116."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent family of colimiting cocones in a quasicategory induces a coherent equivalence between any chosen colimit functor and the cocone apices",
+   "results": "{\"t\": \"2026-10-17T08:46:57Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent family of colimiting cocones in a quasicategory induces a coherent equivalence between any chosen colimit functor and the cocone apices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_apply_desc\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"CategoryTheory.Limits.isColimitMapCoconeCofanMkEquiv\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_symm_apply_desc\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence_hom\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.of_equiv\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence_inv\"], \"digest\": \"b4008a0be2a5b401\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned colimit and cocone comparison declarations concern ordinary categories and Hom sets, not quasicategories or full coherent mapping spaces. Read Mathlib/CategoryTheory/Limits/IsLimit.lean:274-281 and HasLimits.lean:961-975."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.Functor.LeftExtension",
+   "results": "{\"t\": \"2026-10-17T08:46:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsColimit, CategoryTheory.Functor.LeftExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned colimit and cocone comparison declarations concern ordinary categories and Hom sets, not quasicategories or full coherent mapping spaces. Read Mathlib/CategoryTheory/Limits/IsLimit.lean:274-281 and HasLimits.lean:961-975."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitIsoColimitCocone|IsColimit.ofCoconeEquiv|Quasicategory",
+   "results": "{\"t\": \"2026-10-17T08:46:58Z\", \"tool\": \"grep\", \"query\": \"colimitIsoColimitCocone|IsColimit.ofCoconeEquiv|Quasicategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/WithTerminal/Cone.lean\", \"Mathlib/CategoryTheory/Limits/MonoCoprod.lean\", \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Basic.lean\"], \"digest\": \"e9af624c09f5f776\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned colimit and cocone comparison declarations concern ordinary categories and Hom sets, not quasicategories or full coherent mapping spaces. Read Mathlib/CategoryTheory/Limits/IsLimit.lean:274-281 and HasLimits.lean:961-975."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an infinity category a coherent family of colimiting cocones is uniquely and coherently equivalent to a chosen colimit functor",
+   "results": "{\"t\": \"2026-10-17T08:46:58Z\", \"tool\": \"leansearch\", \"query\": \"In an infinity category a coherent family of colimiting cocones is uniquely and coherently equivalent to a chosen colimit functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitCocone.mk.inj\", \"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"CategoryTheory.Limits.colimit\", \"CategoryTheory.Limits.IsColimit.ofExistsUnique\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"CategoryTheory.Limits.IsColimit.uniqueUpToIso\", \"CategoryTheory.Limits.Cofork.IsColimit.ofExistsUnique\", \"CategoryTheory.Limits.Types.TypeMax.colimitCoconeIsColimit\"], \"digest\": \"58931f66bc091e88\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned colimit and cocone comparison declarations concern ordinary categories and Hom sets, not quasicategories or full coherent mapping spaces. Read Mathlib/CategoryTheory/Limits/IsLimit.lean:274-281 and HasLimits.lean:961-975."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between coherent diagram colimits are determined by their composite with the universal cocone via an equivalence of mapping spaces",
+   "results": "{\"t\": \"2026-10-17T08:52:48Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations between coherent diagram colimits are determined by their composite with the universal cocone via an equivalence of mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimit_obj_ext\", \"CategoryTheory.Limits.IsColimit.homEquiv\", \"CategoryTheory.Limits.colimit_obj_ext_iff\", \"CategoryTheory.Limits.IsColimit.homIso'\", \"CategoryTheory.Limits.IsColimit.homEquiv_apply\", \"CategoryTheory.Limits.IsColimit.homIso\", \"CategoryTheory.Limits.IsColimit.ι_app_homEquiv_symm_assoc\", \"CategoryTheory.Limits.Cowedge.IsColimit.hom_ext\"], \"digest\": \"b52e6cde0e459e3f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned colimit and cocone comparison declarations concern ordinary categories and Hom sets, not quasicategories or full coherent mapping spaces. Read Mathlib/CategoryTheory/Limits/IsLimit.lean:274-281 and HasLimits.lean:961-975."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent family of colimiting cocones in a quasicategory induces an equivalence from a chosen row colimit functor to the cocone apices",
+   "results": "{\"t\": \"2026-10-17T08:59:04Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent family of colimiting cocones in a quasicategory induces an equivalence from a chosen row colimit functor to the cocone apices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_apply_desc\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_symm_apply_desc\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence_hom\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.of_equiv\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence_inv\", \"CategoryTheory.Limits.Types.isColimit_iff_coconeTypesIsColimit\"], \"digest\": \"cff1974fd891992b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned colimit and cocone comparison declarations concern ordinary categories and Hom sets, not quasicategories or full coherent mapping spaces. Read Mathlib/CategoryTheory/Limits/IsLimit.lean:274-281 and HasLimits.lean:961-975."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit",
+   "results": "{\"t\": \"2026-10-17T08:59:05Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit\", \"CategoryTheory.Limits.IsColimit.subsingleton\", \"CategoryTheory.Limits.IsColimit.ofCorepresentableBy\", \"CategoryTheory.Limits.IsColimit.corepresentableBy\", \"CategoryTheory.Limits.IsColimit.desc\", \"CategoryTheory.Limits.IsColimit.ofIsoColimit\", \"CategoryTheory.Limits.IsColimit.uniqueUpToIso\", \"CategoryTheory.Limits.IsColimit.equivIsoColimit\"], \"digest\": \"82f92c0a7088bd0a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned colimit and cocone comparison declarations concern ordinary categories and Hom sets, not quasicategories or full coherent mapping spaces. Read Mathlib/CategoryTheory/Limits/IsLimit.lean:274-281 and HasLimits.lean:961-975."
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit.ofCoconeEquiv|colimCoyoneda|Quasicategory",
+   "results": "{\"t\": \"2026-10-17T08:59:05Z\", \"tool\": \"grep\", \"query\": \"IsColimit.ofCoconeEquiv|colimCoyoneda|Quasicategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean\", \"Mathlib/CategoryTheory/WithTerminal/Cone.lean\", \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"Mathlib/CategoryTheory/Limits/MonoCoprod.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean\"], \"digest\": \"15563b117964ac93\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned colimit and cocone comparison declarations concern ordinary categories and Hom sets, not quasicategories or full coherent mapping spaces. Read Mathlib/CategoryTheory/Limits/IsLimit.lean:274-281 and HasLimits.lean:961-975."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent family of colimiting cocones varies functorially and is contractibly equivalent to a chosen colimit functor",
+   "results": "{\"t\": \"2026-10-17T08:59:06Z\", \"tool\": \"leansearch\", \"query\": \"A coherent family of colimiting cocones varies functorially and is contractibly equivalent to a chosen colimit functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colim\", \"CategoryTheory.Limits.Multicofork.isColimitMapEquiv\", \"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"CategoryTheory.Limits.isColimitMapCoconeCofanMkEquiv\", \"CategoryTheory.Limits.getColimitCocone\", \"CategoryTheory.Limits.Types.TypeMax.colimitCoconeIsColimit\", \"CategoryTheory.Limits.colimit.cocone\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\"], \"digest\": \"391b918918bb8250\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned colimit and cocone comparison declarations concern ordinary categories and Hom sets, not quasicategories or full coherent mapping spaces. Read Mathlib/CategoryTheory/Limits/IsLimit.lean:274-281 and HasLimits.lean:961-975."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-sifted-colimit-calculus",
@@ -99,5 +229,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coherent-row-colimit-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five proof steps derive the specified coherent comparison via the dual parametric universal-arrow mapping-space formula, identify its entire compatibility space with a contractible homotopy fiber, and prove every component invertible using both row cocone universal properties. No new nodes or Mathlib leaves; all citations read and quoted; no Lean writing or compilation.",
+  "blueprint": "Retains the inherited paragraph-2 ancestry to prop-coef-integral-exceptional-adjoint (main-20261015), finite-level mapping-complex adjunction before R lim, through the successive-colimit argument of lem-coef-infinity-sifted-colimit-calculus. Supplies its extracted coherent row comparison without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory closure, Kan mapping-space and colimiting-cocone universal-property calculus; no coefficient-unit node supplies these cone criteria."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic Kan-space criterion that an equivalence has contractible homotopy fibers, applied to the coherent transformation-space comparison; no unit theorem replaces this space-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-3071dd42c",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-3071dd42c (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and the full statements of all 5 cited nodes: def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-cbc-kan-fibration-fiber-criterion, lem-coef-infinity-pointwise-equivalences and lem-coef-parametric-universal-arrows. I also read the unit sk-prop-sf-biduality-general, paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint, and step 3 of the only citer, lem-coef-infinity-sifted-colimit-calculus. Step 1: the dual cocone criterion makes (L,eta) universal-arrow data with D_0=Fun(J,E). Step 2: the dual parametric formula with K=I gives Phi. It transfers to the specified (L,eta) through the contractible choice space, using an equivalence e and two-out-of-three; I checked the directions. Step 3: the fiber criterion makes the homotopy fiber over alpha contractible, and it is nonempty because contractible means a bijection on components. Step 4: a two-sided inverse at each vertex, from surjectivity and then injectivity on pi_0 of both cocone criteria. Step 5: the in-unit pointwise criterion makes every point an equivalence, so the space of pairs is the whole fiber. Small cases tested and true: I=J=point, J empty (initial objects), I empty, J two points (coproducts, no siftedness), nerves of ordinary categories. No new nodes. proof_deps equals the union of the uses. No cycle (370 nodes reached, the item not among them). No duplicate in the DAG: the pointwise-Kan-extension, cocone-colimit and parametric-universal-arrow nodes differ. No SGA cited. HTT is not held locally; it is recorded as WANTED and proof_origin is agent. Not a target node, so the base-change and coefficient checks do not apply. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-fibration-fiber-criterion, both generic off-unit tools used as black boxes. Mathlib searches are genuine: one loogle parse error is recorded as an invalid query, and the rest are no-matches because Mathlib has only 1-categorical analogues. No changes."
  }
 }

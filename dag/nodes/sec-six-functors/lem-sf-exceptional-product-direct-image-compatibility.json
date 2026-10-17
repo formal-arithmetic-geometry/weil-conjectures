@@ -15,9 +15,123 @@
   "def-weil-pbc-adjunction-conjugate",
   "lem-trf-ordinary-kunneth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the adjunctions and their specified units and counits from [def-trf-admissibility]. Write $e_u:Lu^*Ru_*\\to1$ for an ordinary counit and $\\varepsilon_u:Ru_!u^!\\to1$ for an exceptional counit. Abbreviate $P=f_1^!Rg_*M$, $Q=f_2^!L$, $K=P\\boxtimes Q$, and $N=M\\boxtimes L$. All these objects and the functors occurring in the statement are on the specified finite-Tor constructible domains: these are the restrictions stipulated in [def-trf-admissibility] and [def-sf-kv-maps]. Suppress $L$ on pullbacks and retain $R$ on direct images. Let $E_1:g^*Rf_{1!}\\xrightarrow{\\sim}Rf'_{1!}g'^*$ and $E:G^*Rf_!\\xrightarrow{\\sim}RF_!G'^*$ be the specified compact-support exchanges. The inverses of their conjugates are exactly the two maps $D$ in the question, by [def-weil-pbc-adjunction-conjugate]. No inverse of a general square mate is being asserted. The base-changed morphisms are separated finite type by [lem-pod-separated-finite-type-base-change]. For the witnessed domain of [fix-lem-exchanges] used below, choose étale-origin presentations of the bounded constructible objects by [lem-sf-proetale-constructible-origin](ii). It applies at exactly this finite coefficient ring; no comparison of different coefficient categories is implicit.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-sf-kv-maps",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sf-proetale-constructible-origin",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+    "place": "paragraphs 5–6: the specified dual exchanges and adjunctions"
+   }
+  },
+  {
+   "text": "Put $k_f=\\mathrm{Ku}_{!,f_1,f_2}$ and $k_F=\\mathrm{Ku}_{!,f'_1,f_2}$ as constructed in [def-sf-kv-maps](i). Their base-change identity at $(P,Q)$ is\n$$k_F\\circ E_K=(E_{1,P}\\boxtimes1)\\circ G^*(k_f).\\tag{1}$$\nBoth sides start at $G^*Rf_!K$ and end at $Rf'_{1!}g'^*P\\boxtimes Rf_{2!}Q$. Here and below pullback–tensor and pullback-composition identifications are the specified ones of [lem-pur-derived-pullback-tensor-iso]. To obtain (1), use the construction of $k_f$ over $T=Y_1\\times Y_2$ in [def-sf-kv-maps](i): its relative product is for $X_1\\times Y_2\\to T$ and $Y_1\\times X_2\\to T$. Base-change this diagram by $G:Z\\times Y_2\\to T$. Clause (iii) of [lem-sf-kunneth-coherence] identifies the pulled-back relative product with the relative product of these base changes. Its two remaining projection exchanges are the pulled-back projection exchanges in the definition of $k_f$. Pasting them with the first-factor square gives $E_1$, while the second factor is unchanged; the equality of these pasted exchanges is clause (2) of [fix-lem-exchanges]. This gives precisely (1), with no exceptional product comparison used.",
+   "uses": [
+    "def-sf-kv-maps",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-sf-kunneth-coherence",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+    "place": "paragraphs 5–6: the compact-support base-change square underlying the mate check"
+   }
+  },
+  {
+   "text": "We need the ordinary comparisons with their counit normalization. For a morphism $u:V\\to W$, put $H=u\\times\\operatorname{id}_S$ and denote its identity-factor comparison by $c_u:Ru_*B\\boxtimes C\\to RH_*(B\\boxtimes C)$. Then\n$$e_H\\circ H^*c_u=e_u\\boxtimes1.\\tag{2}$$\nThe right side has source $u^*Ru_*B\\boxtimes C$. Indeed the canonical comparison is projection base change $a^*Ru_*B\\to RH_*b^*B$, tensored with the auxiliary pullback of $C$, followed by the ordinary projection map for $H$. In [def-exchange-projection] the first arrow is the mate of $b^*e_u$ and the second is the mate of the ordinary counit tensored with $1$. Applying the adjunct–counit identity [lem-weil-pbc-adjunct-counit-identity] to these two formulas and naturality of the counit cancels the intervening unit: the result is $b^*e_u\\otimes1$, which is (2). Monoidality of pullback is [lem-pur-derived-pullback-tensor-iso]. Apply this calculation to $u=g,g'$. These are exactly the canonical comparisons specified by [lem-trf-ordinary-kunneth], whose hypotheses hold for the finite coefficient ring and the separated finite-type schemes here. The calculation does not replace $Rj_*$ by $j_!$ when $u$ is open.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-trf-ordinary-kunneth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+    "place": "paragraphs 5–6: ordinary identity-factor comparisons; Stacks 07A7 and 0B56 counit formulas"
+   }
+  },
+  {
+   "text": "Set\n$$\\theta=e_{g'}\\circ g'^*(D_{f_1,g,M}):g'^*P\\longrightarrow f_1'^!M,$$\nand\n$$t=e_g\\circ g^*\\varepsilon_{f_1,Rg_*M}\\circ E_{1,P}^{-1}:Rf'_{1!}g'^*P\\longrightarrow M.$$\nThese are exceptional adjoints:\n$$\\varepsilon_{f'_1,M}\\circ Rf'_{1!}(\\theta)=t.\\tag{3}$$\nHere is the direction check. The definition of the conjugate in [def-weil-pbc-adjunction-conjugate] identifies the Hom map induced by $D_{f_1,g}$ with\n$$\\operatorname{Hom}(P,f_1^!Rg_*M)\\cong\\operatorname{Hom}(g^*Rf_{1!}P,M)\\longrightarrow\\operatorname{Hom}(Rf'_{1!}g'^*P,M),$$\nwhere the last map is precomposition by $E_{1,P}^{-1}$. The identity of $P$ becomes first $\\varepsilon_{f_1,Rg_*M}$, then $e_g\\circ g^*\\varepsilon_{f_1,Rg_*M}$, and then $t$. On the other hand transposing $D_{f_1,g}$ first through $g'^*\\dashv Rg'_*$ gives $\\theta$. The pasted-adjunction rule [lem-weil-pbc-mate-pasting](2) says that this iterated transpose is the same composite Hom map. The adjunct–counit identity [lem-weil-pbc-adjunct-counit-identity] therefore gives (3).",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-trf-admissibility",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+    "place": "paragraphs 5–6: inverse conjugate exchange evaluated at the identity"
+   }
+  },
+  {
+   "text": "Compare the two proposed maps with the same bijection\n$$\\Psi:\\operatorname{Hom}(K,RG'_*F^!N)\\xrightarrow{\\sim}\\operatorname{Hom}(RF_!G'^*K,N),$$\n$$\\Psi(v)=\\varepsilon_{F,N}\\circ RF_!(e_{G'}\\circ G'^*v).$$\nThe pasted-adjunction and change-of-adjunction formulas of [lem-weil-pbc-mate-pasting](2),(3), applied to the conjugate of $E$, give\n$$\\Psi(D_{f,G}\\circ f^!c_g\\circ\\alpha_f)\n=e_G\\circ G^*c_g\\circ G^*(\\varepsilon_f\\circ Rf_!\\alpha_f)\\circ E_K^{-1}.$$\nThis is also obtained by the Hom calculation of Step 4, with $P$ replaced by $K$ and the identity replaced by $f^!c_g\\circ\\alpha_f$; naturality of the Hom bijections gives the displayed formula. By the definition of $\\alpha_f$ in [def-sf-kv-maps](ii), its middle counit composite is $(\\varepsilon_{f_1}\\boxtimes\\varepsilon_{f_2})\\circ k_f$. Substitute (2), then (1), and finally the definition of $t$. The result is\n$$\\Psi(\\tau\\circ\\alpha_f)=(t\\boxtimes\\varepsilon_{f_2,L})\\circ k_F.\\tag{4}$$\nThe source of $k_F$ in this formula is $RF_!(g'^*P\\boxtimes Q)=RF_!G'^*K$.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-sf-kv-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+    "place": "paragraphs 5–6: explicit composite transpose of the upper path"
+   }
+  },
+  {
+   "text": "For the other path, use the naturality of $e_{G'}$ and (2) for $g'$ to transpose its ordinary direct-image comparison. Its $G'^*\\dashv RG'_*$ transpose is\n$$\\alpha_{f'_1,f_2}(M,L)\\circ(\\theta\\boxtimes1_Q).$$\nTransposing once more under $RF_!\\dashv F^!$, the definition [def-sf-kv-maps](ii) of this $\\alpha$ gives\n$$(\\varepsilon_{f'_1,M}\\boxtimes\\varepsilon_{f_2,L})\\circ k_F\\circ RF_!(\\theta\\boxtimes1).$$\nNaturality of $k_F$ moves $\\theta$ across $k_F$, so this equals\n$$\\bigl((\\varepsilon_{f'_1,M}\\circ Rf'_{1!}\\theta)\\boxtimes\\varepsilon_{f_2,L}\\bigr)\\circ k_F\n=(t\\boxtimes\\varepsilon_{f_2,L})\\circ k_F$$\nby (3). This is exactly $\\Psi(RG'_*(\\alpha_{f'_1,f_2})\\circ\\sigma)$, and is the same arrow as (4).",
+   "uses": [
+    "def-sf-kv-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+    "place": "paragraphs 5–6: explicit composite transpose of the lower path"
+   }
+  },
+  {
+   "text": "Injectivity of the adjunction bijection $\\Psi$ proves the required equality. All constructions and bijections used above are natural in $M,L$, so the equality is natural. For the second-variable assertion interchange the two pairs $(X_i,Y_i,f_i)$. The signed tensor symmetry identifies the two external products by [lem-pur-derived-pullback-tensor-iso]. Clause (i) of [lem-sf-kunneth-coherence], applied to the relative product in the construction [def-sf-kv-maps](i), identifies the swapped compact-support Künneth map with the original one through those symmetries. Taking its exceptional transpose, with the counits interchanged, identifies the swapped $\\alpha$ with the conjugate of the original $\\alpha$ by these same symmetries. For the ordinary comparison the identical assertion follows directly by swapping the counit and identity in (2). Thus the proved first-variable equality for the relabelled diagram is the asserted second-variable equality, with exactly the signed symmetries specified in the question.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-sf-kv-maps",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-sf-kunneth-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+    "place": "paragraph 5, likewise in the second variable; paragraph 6, open direct images"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissibility",
+  "def-sf-kv-maps",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sf-proetale-constructible-origin",
+  "fix-lem-exchanges",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-kunneth-coherence",
+  "def-exchange-projection",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-trf-ordinary-kunneth",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+  "place": "paragraphs 5–6; explicit counit calculation filling the omitted mate-calculus check, using Stacks 0037, 0038, 07A4, 07A7, 0B56 and the existing compact-support coherence statements"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +174,52 @@
    "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean; 25 hits",
    "date": "2026-10-17",
    "verdict": "no match: abstract mates and triangle axioms do not assert this geometric equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of exceptional Kunneth comparison with direct image under base change and adjunction mates",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.mateEquiv, CategoryTheory.expComparison_ev, CategoryTheory.TwoSquare.lanBaseChange; 8 hits; details in searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract counit and mate identities do not state the geometric compatibility; their existing DAG nodes are used instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional external tensor product comparison commutes with ordinary direct image and the conjugate of compact support base change",
+   "results": "LightCondensed.ihomPoints_symm_comp, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, instMonoidalClosedCondensedSet, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition; 8 hits; details in searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract counit and mate identities do not state the geometric compatibility; their existing DAG nodes are used instead"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"counit\"",
+   "results": "CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm; 2 hits; details in searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract counit and mate identities do not state the geometric compatibility; their existing DAG nodes are used instead"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*[Kk]unneth|[Kk]unneth.*exceptional|upperShriek",
+   "results": "; 0 hits; details in searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract counit and mate identities do not state the geometric compatibility; their existing DAG nodes are used instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under Beck Chevalley exchange the tensor product of right adjoint counits is compatible with the right mate of a monoidal left adjoint product comparison",
+   "results": "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.frobeniusMorphism, CategoryTheory.frobeniusMorphism_mate; 8 hits; details in searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract counit and mate identities do not state the geometric compatibility; their existing DAG nodes are used instead"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|map_μ_comp_counit_app_tensor|conjugateEquiv_mateEquiv_vcomp",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean; 13 hits; details in searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract counit and mate identities do not state the geometric compatibility; their existing DAG nodes are used instead"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-exceptional-kunneth",
@@ -80,5 +236,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-exceptional-product-direct-image-compatibility",
+  "worker": "stage1",
+  "summary": "Expanded the omitted compatibility check into a common composite-adjunction transpose. Both sides become (t external-product epsilon_f2) after compact-support Kunneth and its base-change compatibility; checked inverse-conjugate direction and the ordinary direct-image counit normalization for open as well as closed immersions. Reused all requisite nodes; no new nodes.",
+  "blueprint": "prop-trf-exceptional-kunneth, paragraphs 5–6: closed-pushforward compatibility and the identical open-direct-image compatibility; retained Step 10, including the second-variable signed symmetry.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-kunneth-coherence",
+    "why": "Uses only relative-product base-change and symmetry as generic canonical-map coherence for the product construction in def-sf-kv-maps; it does not replace the exceptional-product proof."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Uses only identity and pasting of compact-support exchanges to identify the exchanges occurring in that construction; no node of this unit states those generic pasting laws."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Uses only natural monoidal pullback and its signed symmetry and composition comparisons on finite-coefficient derived categories."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic permanence of separated finite-type morphisms under the base changes in the two squares."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies the finite-coefficient etale-origin presentations required by the witnessed pro-etale domain of exchange pasting; it is not an exceptional-product theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-kunneth-coherence",
+  "fix-lem-exchanges",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-28bfc9fc7",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-28bfc9fc7 (reviewer sub-agent of L); spot-checked: Read the whole item, all 7 steps, the statement of every cited node (including the blueprint_updates of def-trf-admissibility and def-sf-kv-maps) and the source prop-trf-exceptional-kunneth.proof.md, paragraphs 'Closed pushforward' and 'Open localization' (main-20261015, identical in main-20261017). There are no new nodes. The statement is exactly the source's 'mate-calculus check', written as an equality of specified arrows, at A_{E,n} on D^b_ctf, using the adjunctions of def-trf-admissibility and the Ku_!/alpha of def-sf-kv-maps; nothing is weakened. Base-change morphism: def-trf-admissibility's exchange is the conjugate of Ex_! with type Rg'_*f'^! -> f^!Rg_*. D is its inverse, the same as beta_square of thm-sf-dual-base-change, so its Hom map is precomposition by Ex_!^{-1} (def-weil-pbc-adjunction-conjugate). I recomputed every equation: (1) by lem-sf-kunneth-coherence(iii) and fix-lem-exchanges(2); (2) from the two transposes in def-exchange-projection, which agrees with the definition of the comparison in the proof of lem-trf-ordinary-kunneth; (3), the direction check through the composite-adjunction counit; (4) and step 6 by naturality and the definition of alpha; all are correct. Tested cases: g=id, empty Z, M=0 or L=0, f_i=id, and open g with Rg_* (never g_!). No cycle, all 14 dependencies exist and none is merged, no duplicate (checked thm-sf-dual-base-change, lem-sf-supported-external-triangle-comparison, lem-trf-cohomological-exchange-calculus, lem-sf-kunneth-coherence). All cited units lie on the route of sk-thm-sf-kunneth-verdier. The five declared tool_uses (lem-sf-kunneth-coherence, fix-lem-exchanges, lem-pur-derived-pullback-tensor-iso, lem-pod-separated-finite-type-base-change, lem-sf-proetale-constructible-origin) are accepted as narrow generic uses. No SGA. No changes."
  }
 }

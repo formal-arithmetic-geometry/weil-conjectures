@@ -15,9 +15,91 @@
   "def-weil-derived-cohomology-sheaves",
   "def-kun-truncations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose complexes representing $K,L$. Put $A=\\tau_{\\leq a-1}K$, $B=\\tau_{\\leq c-1}L$, $K^+=\\tau_{\\geq a}K$, and $L^+=\\tau_{\\geq c}L$. By the explicit good-truncation cohomology in [def-kun-truncations], $A$ has zero cohomology above $a-1$, $B$ above $c-1$, and $K^+$ above $b_K$. The latter assertion includes $a>b_K$, when $K^+$ is acyclic. The same definition shows that $K^+$ has cohomology only in $[a,b_K]$ and $L^+$ only in $[c,b_L]$. If a lower endpoint exceeds its upper endpoint, all cohomology vanishes. These constructions and their canonical maps are interpreted in the localization [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (section-truncations), canonical cochain truncations and their cohomology"
+   }
+  },
+  {
+   "text": "Use good upper truncation [def-kun-truncations] to represent $A,L,K^+,B$ by complexes with terms zero above $a-1,b_L,b_K,c-1$, respectively. Indeed the upper-truncation inclusion retains all possibly nonzero cohomology and is a quasi-isomorphism, hence invertible in the localization [def-weil-abstract-derived-category]. Apply [lem-pc-kflat-bounded-flat-replacement] to each of these four complexes, preserving its indicated upper term bound. Write the resulting flat complexes as $P_A,P_L,P_+,P_B$. They are K-flat by [lem-pc-bounded-above-flat-kflat-site]. By [lem-weil-pbc-site-derived-tensor-descent], the complexes $\\operatorname{Tot}(P_A\\otimes_RP_L)$ and $\\operatorname{Tot}(P_+\\otimes_RP_B)$ represent $A\\otimes_R^{\\mathbf L}L$ and $K^+\\otimes_R^{\\mathbf L}B$, respectively. This construction uses only a small ringed site, without points or finiteness conditions.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 077J (lemma-resolution-by-direct-sums-extensions-by-zero), 06YS (lemma-K-flat-resolution), 06YQ (lemma-bounded-flat-K-flat), and 06YU (definition-derived-tor); bounded-above replacements as in the cited replacement node"
+   }
+  },
+  {
+   "text": "The degree $n$ term of the first total tensor is $\\bigoplus_{p+q=n}P_A^p\\otimes_RP_L^q$ by [def-pc-tensor-complex-sheaves]. A nonzero summand requires $p\\leq a-1$ and $q\\leq b_L$, so the entire term is zero for $n>a-1+b_L$. Since $a\\leq i-b_L$, this implies vanishing in every degree $n\\geq i$, and in particular in degrees $i$ and $i+1$. For the second total tensor, a nonzero summand requires $p\\leq b_K$ and $q\\leq c-1$, so its term is zero for $n>b_K+c-1$. The inequality $c\\leq i-b_K$ again makes all terms in degrees $n\\geq i$ zero. Consequently $H^i$ and $H^{i+1}$ of both $A\\otimes_R^{\\mathbf L}L$ and $K^+\\otimes_R^{\\mathbf L}B$ vanish: cohomology in a degree with zero term is zero, by the kernel/image formula of [def-weil-derived-cohomology-sheaves]. No flatness of good lower truncations is claimed.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), with the total-complex formula of homology.tex Tag 012Z (definition-associated-simple-complex)"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-derived-truncation-triangle] to $K$ with $b=a$ to obtain $A\\to K\\to K^+\\to A[1]$, with the canonical map $K\\to K^+$. Derived tensor is exact in each variable by [lem-weil-pbc-ringed-projection-mate-exact], applied to the identity morphism of the ringed topos of $(\\mathcal C,R)$; only its sentence asserting separate exactness is used. Tensor this triangle with $L$. The long exact sequence of [lem-sf-derived-homology-long-exact] contains\n$$0=H^i(A\\otimes_R^{\\mathbf L}L)\\longrightarrow H^i(K\\otimes_R^{\\mathbf L}L)\\longrightarrow H^i(K^+\\otimes_R^{\\mathbf L}L)\\longrightarrow H^{i+1}(A\\otimes_R^{\\mathbf L}L)=0.$$\nThe zero terms were proved in Step 3. Exactness makes the middle arrow both monic and epic, hence an isomorphism in the abelian category of module sheaves. The arrow is induced by the canonical truncation map, since it is the second arrow of the tensored triangle.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), Tags 05RS (lemma-cohomology-homological) and 0147 (definition-homological); tensor exactness is sites-cohomology.tex Tag 06YU"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-derived-truncation-triangle] to $L$ with $b=c$, obtaining $B\\to L\\to L^+\\to B[1]$. Tensor on the left with $K^+$, using separate exactness from [lem-weil-pbc-ringed-projection-mate-exact] for the same identity ringed-topos morphism. The long exact sequence [lem-sf-derived-homology-long-exact] now gives\n$$0=H^i(K^+\\otimes_R^{\\mathbf L}B)\\longrightarrow H^i(K^+\\otimes_R^{\\mathbf L}L)\\longrightarrow H^i(K^+\\otimes_R^{\\mathbf L}L^+)\\longrightarrow H^{i+1}(K^+\\otimes_R^{\\mathbf L}B)=0,$$\nagain by Step 3, so its middle arrow is an isomorphism. Compose it with the isomorphism of Step 4. Bifunctoriality in [lem-weil-pbc-site-derived-tensor-descent] identifies the composite with $H^i$ of the tensor of the two canonical truncation maps: applying the first map and then the second equals their bifunctor image. This is the asserted canonical isomorphism; the window assertions were proved in Step 1.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), Tags 05RS and 0147; sites-cohomology.tex Tag 06YU (definition-derived-tor) and Tag 094H (lemma-locally-constant-tensor-product), corrected finite-window argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094H (lemma-locally-constant-tensor-product), first truncation reduction, with the already-corrected cutoffs; explicit degree calculation using Tags 06YQ, 06YU, 077J and derived.tex Tags 08J5, 05RS."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +142,73 @@
    "results": "HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; CochainComplex.ConnectData.homologyIsoPos; DerivedCategory.isZero_of_isGE; DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt; DerivedCategory.isGE_iff",
    "date": "2026-10-17",
    "verdict": "no match: the hits give individual good truncations, homology bounds, or total-tensor infrastructure, not a fixed-degree derived tensor comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor fixed cohomology degree unchanged after lower good truncations for bounded above factors",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; CochainComplex.truncLE; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected truncation and cohomological-support hits do not compare the derived tensor of two arbitrary ring-sheaf complexes with both good lower truncations"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.truncGE, tensor, homology",
+   "results": "loogle: unknown identifier 'DerivedCategory.truncGE'",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected truncation and cohomological-support hits do not compare the derived tensor of two arbitrary ring-sheaf complexes with both good lower truncations"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*tensor|tensor.*trunc",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected truncation and cohomological-support hits do not compare the derived tensor of two arbitrary ring-sheaf complexes with both good lower truncations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor of two bounded above complexes has cohomology vanishing above sum of upper bounds",
+   "results": "DerivedCategory.isZero_of_isLE; DerivedCategory.isZero_of_isGE; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; CochainComplex.isZero_of_isGE; CochainComplex.isZero_of_isLE; CochainComplex.exactAt_of_isGE; CochainComplex.isLE_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected truncation and cohomological-support hits do not compare the derived tensor of two arbitrary ring-sheaf complexes with both good lower truncations"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedAbove.*tensor|tensor.*boundedAbove|homology.*tensor",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected truncation and cohomological-support hits do not compare the derived tensor of two arbitrary ring-sheaf complexes with both good lower truncations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For bounded above complexes the canonical maps to good lower truncations induce an isomorphism on a fixed cohomology degree of derived tensor",
+   "results": "CochainComplex.isIso_ιTruncLE_iff; HomologicalComplex.instIsIsoπTruncGEOfIsStrictlySupported; CochainComplex.isIso_πTruncGE_iff; CochainComplex.quasiIso_truncGEMap_iff; CochainComplex.ιTruncLE; HomologicalComplex.truncGE'Map; CochainComplex.πTruncGE; HomologicalComplex.ιTruncLE",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected truncation and cohomological-support hits do not compare the derived tensor of two arbitrary ring-sheaf complexes with both good lower truncations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncGE, CochainComplex.truncLE",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected truncation and cohomological-support hits do not compare the derived tensor of two arbitrary ring-sheaf complexes with both good lower truncations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For complexes with cohomology bounded above, derived tensor cohomology in degree i is unchanged by quotienting each factor by a sufficiently low canonical truncation",
+   "results": "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; CochainComplex.ConnectData.homologyIsoPos; DerivedCategory.isZero_of_isGE; DerivedCategory.isZero_of_isLE; DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected truncation and cohomological-support hits do not compare the derived tensor of two arbitrary ring-sheaf complexes with both good lower truncations"
+  },
+  {
+   "tool": "grep",
+   "query": "isLE_Q_obj_iff|isGE_Q_obj_iff|instQuasiIsoIntιTruncLEOfIsLE|quasiIso_truncGEMap_iff",
+   "results": "Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean; Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected truncation and cohomological-support hits do not compare the derived tensor of two arbitrary ring-sheaf complexes with both good lower truncations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-locally-constant-tensor",
@@ -84,5 +229,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-derived-tensor-truncation-window",
+  "worker": "stage1",
+  "summary": "Five-step proof with no new nodes: use bounded-above flat replacements for the two discarded-tail tensors, calculate their zero terms explicitly, then apply the two truncation triangles and their long exact sequences. Preserves the already-corrected statement and all imported metadata. Checks include arbitrary shifts, endpoint equality, empty windows, and sites without points.",
+  "blueprint": "Makes precise the finite lisse cohomology reduction beneath amplification proof (c), as specified in blueprint.from.place. Follows Tag 094H finite-window reduction with upper-bound-dependent cutoffs, respecting main-20261015 proof (c): finite local constancy, not freeness.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "Generic ringed-site bounded-above flat replacement preserving its chosen upper bound; the proper-base-change unit has no replacement theorem with this bound."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site K-flatness of bounded-above flat complexes, needed for the total tensors computing the two discarded tails; not supplied by a same-unit statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-248a179da",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-248a179da (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full, together with the statement of every cited node; there are no new nodes and no files were changed. Source: Stacks 094H (sites-cohomology.tex 14356-14376). Its uniform cutoff tau_{>=i-1} is false: on the one-point site over a field k, K=k[2], L=k[-2], i=0 gives H^0 of the tensor equal to k, but tau_{>=-1}K=0. The item's corrected cutoffs a<=i-b_L and c<=i-b_K are correct and not weakened, and the only citer (lem-weil-pbc-locally-constant-tensor) uses exactly these. Step 1: the good-truncation windows follow from def-kun-truncations. Step 2: lem-pc-kflat-bounded-flat-replacement keeps the term bound N, lem-pc-bounded-above-flat-kflat-site gives K-flatness, and the descent node gives the Tot model; the hypotheses (same small site, same commutative R) hold. Step 3: the degree count is correct; the Tot terms vanish for n>a-1+b_L and for n>b_K+c-1, both at most i-1, so H^i and H^{i+1} of both tails are zero. Steps 4-5: the truncation triangle (Mathlib leaf, matches derived.tex 08J5), the 'exact in each variable' sentence of lem-weil-pbc-ringed-projection-mate-exact (its proof uses the descent node, so it is the same bifunctor) and the long exact sequence leaf give two isomorphisms, and bifunctoriality makes their composite H^i(q_K tensor q_L). proof_deps equals the union of uses, and the graph stays acyclic (the item is not in the 484-node dependency closure of its citations). Route: the descent and mate-exact nodes are in the same unit and both lem-sf nodes are Mathlib leaves. The two declared tool uses (lem-pc-kflat-bounded-flat-replacement, lem-pc-bounded-above-flat-kflat-site) are accepted as generic black boxes. Duplicate search: lem-kun-derived-tensor-t-est, lem-kun-integral-derived-tensor-bounded-torsion, lem-weil-pbc-ringed-tensor-cohomological-bounds, prop-weil-pbc-levelwise-truncations and lem-sf-tensor-ctf do not state this result. Small cases checked: the shifted counterexample, endpoint equality, empty windows, acyclic factors, and Z/2 tensor Z/2 over Z. No SGA source is cited. The missing lean_audit field on the item predates this delivery and was not touched."
  }
 }

@@ -12,9 +12,70 @@
   "def-coef-infinity-relative-cone",
   "def-coef-infinity-relative-join"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an $n$-simplex of $Z^{\\triangleright}\\times X$, write the cone factor $u\\in(Z\\star\\Delta^0)_n$ in its join block form of [def-coef-infinity-relative-cone] as $(\\delta,z)$, where $\\delta:[n]\\to[1]$ is monotone, $z$ is the simplex of $Z$ on the initial block $I=\\delta^{-1}(0)$ (and $I$ may be empty), and write $\\sigma\\in X_n$ for the second factor. Define $\\epsilon=\\delta$ and a simplex of $K\\star X$ with initial block $I$ labelled by $j(z,\\sigma|_I)$ and final block labelled by $\\sigma|_{\\delta^{-1}(1)}$; when a block is empty use the formal degree $-1$ element. The compatibility equation for the relative join holds because $a j(z,\\sigma|_I)=\\sigma|_I$ and the second factor maps by $1_X$. The resulting pair $(w,(\\epsilon,\\sigma))$ is therefore an $n$-simplex of $T=K\\star_X X$. As $\\delta$, restrictions of $z$, and restrictions of $\\sigma$ all commute with a simplicial operator, these assignments define a simplicial map $P:Z^{\\triangleright}\\times X\\to T$, and its structure map is the projection to $\\sigma$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 5.4.4.2, second specialization on printed p. 433; explicit degreewise simplicial construction"
+   }
+  },
+  {
+   "text": "For an $n$-simplex $(u,t)$ of $Z^{\\triangleright}\\times\\Delta^1$, use the same block form $(\\delta,z)$ for $u$, with $I=\\delta^{-1}(0)$, and put $\\epsilon=\\delta\\wedge t$, the pointwise minimum of the two monotone maps to $[1]$. Its zero block is $E_0=I\\cup I'$, where the tail $I'=\\delta^{-1}(1)\\cap t^{-1}(0)$ follows $I$. If $I'\\neq\\varnothing$, monotonicity of $t$ forces $t=0$ on all of $E_0$; then label the $K$-factor of $E_0$ by the degenerate simplex $k(p)$ of dimension $|E_0|-1$ (this includes $I=\\varnothing$ and $Z=\\varnothing$). If $I'=\\varnothing$, then $E_0=I$ and label it by $kc(z,t|_I)$, the formal degree $-1$ element when $I=\\varnothing$. The two rules agree when both apply ($I'=\\varnothing$, $t|_I=0$), since $c(z,0)=p$ by the quotient relation. On the one block $\\epsilon^{-1}(1)$ label the $X$-factor by the constant simplex at $x$. Since $ak$ is constant at $x$, $(a\\star1_X)$ of this join simplex equals $\\rho_X(\\epsilon,x_n)$, so $(w,(\\epsilon,x_n))$ is an $n$-simplex of $T$. For monotone $\\alpha:[m]\\to[n]$, $(\\delta\\wedge t)\\alpha=\\delta\\alpha\\wedge t\\alpha$, the blocks pull back to $\\alpha^{-1}(I)$ and $\\alpha^{-1}(I')$, the condition $t=0$ on $E_0$ is preserved, $\\alpha^*k(p)$ is degenerate at $k(p)$ and $\\alpha^*kc(z,t|_I)=kc(\\alpha^*z,t\\alpha|)$; when a tail first appears after restriction the agreement of the two rules applies. Hence these assignments commute with the operators of [def-coef-infinity-relative-join] and define $J:Z^{\\triangleright}\\times\\Delta^1\\to T$ with $\\pi J$ the constant vertex $x$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 5.4.4.2, second specialization on printed p. 433; explicit degreewise simplicial construction"
+   }
+  },
+  {
+   "text": "If $t=0$, then $\\epsilon=0$ and every $Z$ value is sent through $c(-,0)=p$, so the whole simplex is the pure $K$-simplex $i_Kk(p)$; hence $J|_{Z^{\\triangleright}\\times\\{0\\}}=i_Kk(p)$. If $t=1$, then $\\epsilon=\\delta$, there is no tail, the $Z$ block is labelled $kc_1(z)=j(z,x|_I)$ by the gluing of $K$, and the final block is sent to the constant $x$, which is exactly the formula for $P(-,x)$; hence $J|_{Z^{\\triangleright}\\times\\{1\\}}=P|_{Z^{\\triangleright}\\times\\{x\\}}$. On the pure $Z$ subobject one has $\\delta=0$, so the formula is the pure $K$-simplex $i_Kkc$, giving $J|_{Z\\times\\Delta^1}=i_Kkc$. For the pure apex of $Z^{\\triangleright}$, $\\delta=1$: the formula has the $k(p)$ endpoint at $t=0$ and the $x$ endpoint at $t=1$, with the relative-join degeneracies, so it is the required edge from $k(p)$ to $x$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 5.4.4.2, second specialization on printed p. 433; explicit degreewise simplicial construction"
+   }
+  },
+  {
+   "text": "When $Z=\\varnothing$, the initial blocks are always empty, $C_Z=K=\\Delta^0$ and $a$ is the constant map at $x$. The preceding formulas reduce to $P=i_X$ and to the relative-join edge from the unique $K$ vertex to $x$, so all four restrictions and the apex assertion remain valid. Thus the maps exist for arbitrary $Z$ and $X$ with no quasicategory, fibration, filteredness, or colimit assumptions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 5.4.4.2, second specialization on printed p. 433; explicit degreewise simplicial construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "def-coef-infinity-relative-join"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Lemma 5.4.4.2, second specialization on printed p. 433; explicit degreewise construction expanded from the simplicial block formula"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +128,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-cocartesian-section-cofinality",
@@ -95,5 +156,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-join-fixed-source-prism",
+  "worker": "stage1",
+  "summary": "Split the fixed-source relative-join prism by four explicit degreewise steps. The first defines P from the cone block parameter and the map j; the second defines J using the pointwise minimum of the cone and interval parameters, the cylinder quotient c and the constant X-label x; the third verifies all exact restrictions and the apex edge; the fourth checks Z empty. No new nodes were needed because every argument is a direct two- or three-line calculation from the existing degreewise simplicial, join and relative-join definitions. No Mathlib match or Lean attachment exists.",
+  "blueprint": "The item is a repair extraction from prop-coef-integral-exceptional-adjoint, whose proof route reaches the fixed-source construction through the finite pushout and relative-join infrastructure. The four steps realize the exact second specialization of HTT Lemma 5.4.4.2 on printed p. 433: blockwise P, blockwise J, boundary/operator verification, and the empty-source case."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-7d3debe41",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-7d3debe41 (reviewer sub-agent of L); spot-checked: Read the item, its four steps, the three cited definitions in full, and step 8 of lem-coef-filtered-cocartesian-section-cofinality, which cites the item. The construction is correct and each step is elementary. Step 1 defines P with epsilon = delta and labels j(z, sigma|_I) and sigma|_{I^c}; it restricts to i_K j and i_X. Step 2 defines J with epsilon = delta wedge t, using that a k is constant at x. Step 3 checks the four exact restrictions and the apex edge. Step 4 covers Z empty, where C_Z = K = Z^triangleright = Delta^0. I tested Z = Delta^0 with X = Delta^0 or Delta^1, plus Z empty. I made three fixes in fixes/dag/nodes/sec-six-functors/lem-coef-relative-join-fixed-source-prism.json. (1) C3/B3: the steps use the join block form of Z^triangleright and K star X, which is defined in def-coef-infinity-relative-cone, but did not cite it; I added it to the uses of steps 1-4 and to proof_deps. (2) E5: as written, step 2 gave the empty label when I is empty, which is wrong when I is empty and the tail is nonempty (the apex at t = 0, or Z empty). That zero block must carry the degenerate k(p). The step also never stated that a nonempty tail forces t = 0 on I, and it asserted rather than checked that the construction respects the simplicial operators. I rewrote step 2 as an explicit two-case rule; the two cases agree because c(z,0) = p, and the operator check is now written out. (3) Step 3 now states the gluing identity k c_1(z) = j(z,x). The statement is unchanged, there are no new nodes, and there are no tool_uses. No duplicate found: an rg over dag/nodes for 'fixed-source', the C_Z pushout and Z^triangleright x Delta^1 finds only the item and its citer, and lem-coef-relative-join-prism-comparison, lem-coef-cocartesian-relative-cylinder-extension and lem-coef-infinity-fiber-cocone-simplex-extension state different things. The source, HTT Lemma 5.4.4.2 p. 433, is not archived, so I could not read the printed page; the proof uses only the cited definitions. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }

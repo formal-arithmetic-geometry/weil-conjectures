@@ -42,13 +42,10 @@
    }
   },
   {
-   "text": "Both functors preserve small colimits. For $T_C$ this follows from the cone-straightening adjunction and from opposite being an equivalence of categories; for $L_C$ it follows degreewise since the pairs with a fixed simplex are indexed by arrows out of its last vertex, and the same description carries the generated markings through colimits. Both also preserve monomorphisms as objectwise cofibrations. On the cone side use its left-Quillen property, the relative monomorphism cofibrations, and preservation of cofibrations by evaluation. On the slice side the map on pairs is injective. We need the stronger projective cofibrancy assertion for $L_C$: for a simplex $x:\\Delta^n\\to X$ over $N(C)$ the map $L_C((\\partial\\Delta^n)^\\flat)\\to L_C((\\Delta^n)^\\flat)$ is the pushout of the free-diagram map $C(p(x_n),-)\\times(\\partial\\Delta^n)^\\flat\\to C(p(x_n),-)\\times(\\Delta^n)^\\flat$. Indeed the new nondegenerate simplices are exactly $(x,g)$; all proper faces are already in the source, and the final face attaches using $g\\circ p(x_{n-1}\\to x_n)$. For a marking cell the analogous free diagram is at $p(x_1)$ and uses $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$. Free diagrams are left adjoint to evaluation, which preserves trivial fibrations by the objectwise projective definition, so these free maps are projective cofibrations. Apply the boundary-cell presentation and then adjoin marked edges to obtain this assertion for every monomorphism. In particular all $L_C(X)$ are projectively cofibrant. All $T_C(X)$ are projectively cofibrant by the cone left-Quillen assertion and relative cofibrancy. Opposite preserves the absolute marked weak equivalences and cofibrations: the test quasicategories are permuted by $Q\\mapsto Q^{\\mathrm{op}}$, their equivalence markings are carried to equivalence markings, and monomorphisms are unchanged. More explicitly, the sharp mapping tests are opposite simplicial sets, whose realizations are homeomorphic by reversal of barycentric coordinates. The pointwise opposite also preserves projective cofibrations: it permutes the objectwise trivial fibrations and carries each of their lifting squares to its opposite square.",
+   "text": "Opposite is an equivalence of the category of marked simplicial sets and preserves its absolute weak equivalences: there is an identity $\\operatorname{Map}^{\\sharp}(A^{\\mathrm{op}},K^\\natural)=\\operatorname{Map}^{\\sharp}(A,(K^{\\mathrm{op}})^\\natural)^{\\mathrm{op}}$, obtained by reversing both factors in the defining product. Reversal of barycentric coordinates identifies the realizations of a simplicial set and its opposite. Since $K\\mapsto K^{\\mathrm{op}}$ permutes test quasicategories, the weak-equivalence tests are unchanged. Monomorphisms are unchanged too, so the lifting characterization of fibrations shows that opposite preserves trivial fibrations. Applied valuewise it permutes objectwise trivial fibrations; reversing a lifting square then proves preservation of projective cofibrations.",
    "uses": [
-    "lem-coef-marked-cone-straightening-quillen",
     "lem-coef-marked-point-cartesian-model",
-    "lem-coef-marked-relative-cartesian-model",
-    "lem-coef-simplicial-projective-model-calculus",
-    "lem-coef-infinity-monomorphism-boundary-cells"
+    "lem-coef-simplicial-projective-model-calculus"
    ],
    "elementary": false,
    "source": {
@@ -57,9 +54,63 @@
    }
   },
   {
-   "text": "Check change of category explicitly, before using it in the equivalence proof. The cone substitution isomorphism gives $u_!T_C(X)\\cong T_D(N(u)_!X)$, also after taking opposites since opposite commutes with colimits. For the slice side compute the left Kan extension by its coend: a degree-$r$ representative at $d$ is $(h:u(c)\\to d,x,g:p(x_r)\\to c)$, modulo $(h\\circ u(k),x,g)\\sim(h,x,k\\circ g)$. The map to $L_D(N(u)_!X)(d)$ is $(h,x,g)\\mapsto(x,h\\circ u(g))$. Its inverse sends $(x,l)$ to the class with $c=p(x_r)$, $g=1$, $h=l$. The displayed relation proves both inverse identities, including the last-face operator; markings depend only on the $X$-edge. The maximum-of-subsets formula in step 2 changes only its arrow label under these isomorphisms, so $u_!a_{C,X}=a_{D,N(u)_!X}$. Iterating this formula composes the labels $h\\circ u(g)$ associatively, and cone substitution has the same identity/composite coherence. This proves all the asserted base naturality without a fibrancy assumption. For $C=*$ the maximum-of-subsets formula is the point cone augmentation on $X^{\\mathrm{op}}$, followed by opposite; this is precisely the stipulated point comparison, with its normalization identified by the point-cone generator calculation. The cone-straightening node only asserts some natural weak equivalence $T\\to\\mathrm{id}$, so we check that a natural transformation $T\\to\\mathrm{id}$ is unique; then the stipulated comparison and the maximum map coincide. In the cone pushout for $(\\Delta^n)^\\flat$ over the point, composition with $\\mathfrak C[\\Delta^n](a,b)$, which is collapsed to the identity, identifies $K\\cup I$ with $I$ for $K\\ni a,b$ and $I\\ni b,*$. Hence every vertex $J$ of $Q^n$ equals the vertex $\\{\\max(J\\setminus\\{*\\}),*\\}$, and the vertices of $Q^n$ are $0,\\ldots,n$. Vertex $b$ is the image of the unique vertex of $Q^0=\\Delta^0$ under $b:[0]\\to[n]$, so naturality in $[n]$ forces any natural map $Q^n\\to\\Delta^n$ to send $b$ to $b$. A map into the nerve $\\Delta^n$ of a poset is determined by its values on vertices. Since $T(X)=\\int^{[n]}X_n\\times Q^n$ is covered by the images of the $Q^n$, the transformation is unique on underlying simplicial sets, and a map of marked simplicial sets is determined by its underlying map.",
+   "text": "Both functors preserve small colimits. For $T_C$ use the cone-straightening adjunction and the opposite equivalence of step 3. For $L_C$ compute colimits degreewise: the fiber of pairs over a simplex is its set of outgoing arrow labels, and markings in a colimit are precisely those generated by the images of marked edges. They also send monomorphisms to objectwise cofibrations. For $L_C$ the map on pairs is injective. For $T_C$ use the cone left-Quillen property, relative monomorphism cofibrations, evaluation preserving projective cofibrations, and step 3.",
    "uses": [
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.4; Proposition 3.2.1.7; Lemma 3.2.5.15; explicit free boundary and marking attachments."
+   }
+  },
+  {
+   "text": "The free boundary and marking-cell lemma gives projective cofibrancy of every $L_C(X)$ by its stated monomorphism clause applied to $\\varnothing\\to X$. Every $T_C(X)$ is projectively cofibrant because all relative marked objects are cofibrant, cone straightening is left Quillen, and valuewise opposite preserves projective cofibrations by step 3.",
+   "uses": [
+    "lem-cbc-relative-nerve-projective-cofibrancy",
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.4; Proposition 3.2.1.7; Lemma 3.2.5.15; explicit free boundary and marking attachments."
+   }
+  },
+  {
+   "text": "For $u:C\\to D$, cone substitution and the opposite equivalence give $u_!T_C(X)\\cong T_D(N(u)_!X)$. For the slice side, a degree-$r$ representative of its left Kan colimit at $d$ is $(h:u(c)\\to d,x,g:p(x_r)\\to c)$, with relation $(h\\circ u(k),x,g)\\sim(h,x,k\\circ g)$. This quotient computes the left Kan extension: a map out is exactly a family of maps $L_C(X)(c)\\to G(u(c))$ compatible with the $C$-action, by composing with $G(h)$. Send a representative to $(x,h\\circ u(g))$; its inverse takes $(x,l)$ to $c=p(x_r),g=1,h=l$. The relation with $k=g$ proves the inverse identities. The last-face label on both sides is $h\\circ u(g)\\circ u(p(x_{r-1}\\to x_r))$; all other faces and degeneracies restrict $x$, and actions postcompose $h$. Markings depend only on the $X$-edge, so this is an isomorphism of marked diagrams. All indexing sets and comma categories are small.",
+   "uses": [
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-unmarked-relative-nerve-cone-comparison",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remarks 3.2.5.8, 3.2.5.10(1)-(2), 3.2.5.14 and 3.2.5.16; point normalization in Section 3.2.1."
+   }
+  },
+  {
+   "text": "The underlying comparison in step 2 is the normalized unmarked comparison: on $[n]$, reversing the order changes the displayed maximum-of-subsets rule to its minimum-of-subsets rule, and the same cone quotient relations are imposed. The cited unmarked statement gives its compatibility with base change, identities and composites. Step 6 lifts the underlying Kan identifications to marked identifications. Since marked maps are determined by their underlying maps, this proves $u_!a_{C,X}=a_{D,N(u)_!X}$ with the same coherence. Equivalently the representative formula changes only the arrow label by $g\\mapsto h\\circ u(g)$, and iterated substitution is associative.",
+   "uses": [
+    "lem-coef-unmarked-relative-nerve-cone-comparison",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remarks 3.2.5.8, 3.2.5.10(1)-(2), 3.2.5.14 and 3.2.5.16; point normalization in Section 3.2.1."
+   }
+  },
+  {
+   "text": "Over the terminal category the underlying cone-straightening functor is the coend $T^0(X)=\\int^{[n]}X_n\\times Q^n$ of the generator-calculation node. The uniqueness lemma identifies the restriction to all minimally marked simplices of any natural point comparison $T^0\\to\\mathrm{id}$ with the maximum augmentation. The coend coprojections therefore identify it on every minimally marked object; naturality for $X^\\flat\\to X$, whose underlying map is the identity, identifies it for arbitrary markings as well. A marked map is determined by its underlying map. Applying the two opposite operations and their canonical double-opposite identification gives exactly the stipulated comparison for $T_*$.",
+   "uses": [
+    "lem-cbc-pinched-cube-augmentation-uniqueness",
     "lem-coef-marked-cone-generator-calculations",
+    "lem-coef-marked-point-cartesian-model",
     "lem-coef-marked-cone-straightening-quillen"
    ],
    "elementary": false,
@@ -69,7 +120,7 @@
    }
   },
   {
-   "text": "Call $X\\to N(C)$ good when every $a_{C,X}(c)$ is a weak equivalence in the absolute marked model. The empty object is good. The class is closed under small coproducts and under a pushout of good objects when one leg is a monomorphism: apply both colimit-preserving functors and evaluate at $c$, use step 3 to obtain cofibration legs, and use the coproduct and span comparison clauses for cofibrant objects. It is also closed under small continuous transfinite unions by the transfinite comparison clause. Every object in the absolute marked model is cofibrant, so the comparison lemmas' cofibrancy hypotheses hold at each stage. This uses only coproducts, cofibration pushouts and continuous ordinal colimits, never an arbitrary colimit of weak equivalences.",
+   "text": "Call $X\\to N(C)$ good when every $a_{C,X}(c)$ is a weak equivalence in the absolute marked model. The empty object is good. The class is closed under small coproducts and under a pushout of good objects when one leg is a monomorphism: apply both colimit-preserving functors and evaluate at $c$, use step 4 to obtain cofibration legs, and use the coproduct and span comparison clauses for cofibrant objects. It is also closed under small continuous transfinite unions by the transfinite comparison clause. Every object in the absolute marked model is cofibrant, so the comparison lemmas' cofibrancy hypotheses hold at each stage. This uses only coproducts, cofibration pushouts and continuous ordinal colimits, never an arbitrary colimit of weak equivalences.",
    "uses": [
     "lem-coef-model-cofibrant-colimit-comparison",
     "lem-coef-marked-point-cartesian-model"
@@ -110,7 +161,7 @@
    }
   },
   {
-   "text": "Let $Z=\\operatorname{Sp}[n]\\subseteq\\Delta^n$. First work over $N([n])=\\Delta^n$ with its identity base map. The slice formula gives $L_{[n]}((\\Delta^n)^\\flat)(i)=(\\Delta^i)^\\flat$ and $L_{[n]}(Z^\\flat)(i)=\\operatorname{Sp}[i]^\\flat$: a simplex labelled by an arrow from its last vertex to $i$ is exactly a simplex supported on $0,\\ldots,i$. Thus $L_{[n]}(Z^\\flat)\\to L_{[n]}((\\Delta^n)^\\flat)$ is an objectwise weak equivalence by step 7 (and the identity for $i=0,1$). Both diagrams are projectively cofibrant by step 3. For an arbitrary simplex $\\sigma:[n]\\to C$, restriction $\\sigma^*$ preserves projective fibrations and trivial fibrations since these are objectwise; its left adjoint $\\sigma_!$ is therefore left Quillen by the lifting adjunction. The model-category preservation theorem then says it preserves weak equivalences between projectively cofibrant objects. Step 4 identifies its image with $L_C(Z^\\flat)\\to L_C((\\Delta^n)^\\flat)$ for the given base map. No assertion that an arbitrary left Kan extension preserves every objectwise equivalence is used.",
+   "text": "Let $Z=\\operatorname{Sp}[n]\\subseteq\\Delta^n$. First work over $N([n])=\\Delta^n$ with its identity base map. The slice formula gives $L_{[n]}((\\Delta^n)^\\flat)(i)=(\\Delta^i)^\\flat$ and $L_{[n]}(Z^\\flat)(i)=\\operatorname{Sp}[i]^\\flat$: a simplex labelled by an arrow from its last vertex to $i$ is exactly a simplex supported on $0,\\ldots,i$. Thus $L_{[n]}(Z^\\flat)\\to L_{[n]}((\\Delta^n)^\\flat)$ is an objectwise weak equivalence by step 11 (and the identity for $i=0,1$). Both diagrams are projectively cofibrant by step 5. For an arbitrary simplex $\\sigma:[n]\\to C$, restriction $\\sigma^*$ preserves projective fibrations and trivial fibrations since these are objectwise; its left adjoint $\\sigma_!$ is therefore left Quillen by the lifting adjunction. The model-category preservation theorem then says it preserves weak equivalences between projectively cofibrant objects. Step 6 identifies its image with $L_C(Z^\\flat)\\to L_C((\\Delta^n)^\\flat)$ for the given base map. No assertion that an arbitrary left Kan extension preserves every objectwise equivalence is used.",
    "uses": [
     "lem-coef-simplicial-projective-model-calculus",
     "lem-coef-model-infinity-derived-adjunction"
@@ -122,7 +173,7 @@
    }
   },
   {
-   "text": "Every minimally marked simplex over $N(C)$ is now good. Its spine is an iterated pushout of its consecutive edges along vertices; steps 5 and 6 show that this spine is good. The naturality square for the spine inclusion has top horizontal map $T_C(Z^\\flat)(c)\\to T_C((\\Delta^n)^\\flat)(c)$ a weak equivalence by step 7, bottom horizontal map the $L_C$ inclusion a weak equivalence by step 8, and left vertical map a weak equivalence by goodness of the spine. Two-out-of-three makes the right vertical map a weak equivalence. This proves the assertion for all $n$, with the already computed cases $n=0,1$ as bases.",
+   "text": "Every minimally marked simplex over $N(C)$ is now good. Its spine is an iterated pushout of its consecutive edges along vertices; steps 9 and 10 show that this spine is good. The naturality square for the spine inclusion has top horizontal map $T_C(Z^\\flat)(c)\\to T_C((\\Delta^n)^\\flat)(c)$ a weak equivalence by step 11, bottom horizontal map the $L_C$ inclusion a weak equivalence by step 12, and left vertical map a weak equivalence by goodness of the spine. Two-out-of-three makes the right vertical map a weak equivalence. This proves the assertion for all $n$, with the already computed cases $n=0,1$ as bases.",
    "uses": [
     "lem-coef-marked-point-cartesian-model"
    ],
@@ -133,7 +184,7 @@
    }
   },
   {
-   "text": "Finally construct $X^\\flat$ by its skeletal filtration. At stage $n$ adjoin the coproduct of its nondegenerate $n$-simplices along their boundaries. For $n=0$ these boundaries are empty; for $n>0$ each boundary is built from simplices of smaller dimension, hence is good by induction using the already established coproduct and pushout closures. All attaching simplices are good by step 9. Step 5 proves goodness at each skeletal stage and at the continuous union, so $X^\\flat$ is good. Well-order the set of nondegenerate marked edges of $X$ and then adjoin each marking by the pushout of $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$ along that edge, always retaining the given map to $N(C)$. These are monomorphisms, their two test objects are good by step 6, and at limit stages take the continuous union. Step 5 proves that the resulting marked object $X$ is good. Degenerate edges were already marked, so this construction produces exactly $X$, including empty objects, constant base maps and arbitrary infinite markings. Combined with steps 2 and 4, this proves every clause of the statement.",
+   "text": "Finally construct $X^\\flat$ by its skeletal filtration. At stage $n$ adjoin the coproduct of its nondegenerate $n$-simplices along their boundaries. For $n=0$ these boundaries are empty; for $n>0$ each boundary is built from simplices of smaller dimension, hence is good by induction using the already established coproduct and pushout closures. All attaching simplices are good by step 13. Step 9 proves goodness at each skeletal stage and at the continuous union, so $X^\\flat$ is good. Well-order the set of nondegenerate marked edges of $X$ and then adjoin each marking by the pushout of $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$ along that edge, always retaining the given map to $N(C)$. These are monomorphisms, their two test objects are good by step 10, and at limit stages take the continuous union. Step 9 proves that the resulting marked object $X$ is good. Degenerate edges were already marked, so this construction produces exactly $X$, including empty objects, constant base maps and arbitrary infinite markings. Combined with steps 2, 7 and 8, this proves every clause of the statement.",
    "uses": [
     "lem-coef-infinity-monomorphism-boundary-cells",
     "lem-coef-model-cofibrant-colimit-comparison",
@@ -147,6 +198,8 @@
   }
  ],
  "proof_deps": [
+  "lem-cbc-pinched-cube-augmentation-uniqueness",
+  "lem-cbc-relative-nerve-projective-cofibrancy",
   "lem-cbc-spine-inner-anodyne",
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-infinity-monomorphism-boundary-cells",
@@ -159,7 +212,8 @@
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-relative-marked-anodyne-calculus",
   "lem-coef-simplicial-projective-model-calculus",
-  "lem-coef-small-object-cell-factorization"
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-unmarked-relative-nerve-cone-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -393,7 +447,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-marked-relative-nerve-quillen",
@@ -411,7 +465,9 @@
     "lem-cbc-strict-presentation-transport-representation",
     "lem-cbc-cocartesian-sections-limit",
     "lem-cbc-grothendieck-presheaf-coherent-straightening",
-    "lem-cbc-grothendieck-hypersheaf-sections"
+    "lem-cbc-grothendieck-hypersheaf-sections",
+    "lem-cbc-zariski-enhanced-derived-descent",
+    "lem-cbc-etale-local-compact-support-extension"
    ]
   },
   "same_as": [],
@@ -421,8 +477,8 @@
   "date": "2026-10-17",
   "item": "lem-cbc-relative-nerve-cone-left-comparison",
   "worker": "stage1",
-  "summary": "Repaired the retained attempt without changing the item statement. Replaced the unproved point-cone cell presentation by a direct coherent-subset construction, then proved goodness by the HTT spine argument, projectively cofibrant Kan extension, skeletons and marking cells. Removed the uncommitted cell helper; zero new nodes. Preserved inherited sources, metadata and all recorded searches.",
-  "blueprint": "Preserves the ancestry to thm-cbc-finite-level-proetale, opening compactification paragraph, through the marked-relative-nerve comparison used in the coherent-presheaf/strict-presentation foundations. The actual technical route is HTT Lemma 3.2.5.17(2), proof (A)-(G); no compact-support unit step is replaced.",
+  "summary": "Repaired the two long inherited steps by extracting the marked slice free-cell/projective-cofibrancy lemma and the pinched-cube augmentation uniqueness lemma. Retained the explicit coend inverse and used existing cone-substitution and unmarked-comparison nodes for base-change compatibility. Corrected all renumbered step references. The statement and Lean metadata are unchanged.",
+  "blueprint": "The fourteen steps preserve the inherited route: cone comparison construction; opposite, colimit and cofibrancy calculus; explicit left-Kan calculation and normalization; good-object gluing, spine reduction and cellular induction. The two new lemmas isolate the nontrivial subarguments of the inherited steps 3 and 4; both trace through this item to thm-cbc-finite-level-proetale.",
   "tool_uses": [
    {
     "node": "lem-coef-coherent-nerve-comparison",
@@ -471,6 +527,10 @@
    {
     "node": "lem-coef-small-object-cell-factorization",
     "why": "Converts the inner-spine lifting property to a retract of horn cells, with finite horn-domain smallness checked."
+   },
+   {
+    "node": "lem-coef-unmarked-relative-nerve-cone-comparison",
+    "why": "Steps 6 and 7 take its specified normalized unmarked comparison and its compatibility with left Kan extension along u, identities and composites; no node of sk-prop-sf-cbc states the unmarked relative-nerve cone comparison."
    }
   ]
  },
@@ -486,15 +546,16 @@
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-relative-marked-anodyne-calculus",
   "lem-coef-simplicial-projective-model-calculus",
-  "lem-coef-small-object-cell-factorization"
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-unmarked-relative-nerve-cone-comparison"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NN-6c45820e8",
-  "group": "NN",
+  "reviewer": "NT-cc-Q12-74c8558f7",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-6c45820e8 (reviewer sub-agent of L); spot-checked: I read the item, its ten steps and the full statements of all 13 cited nodes. I also read the one citer, lem-cbc-marked-relative-nerve-quillen; its steps use exactly the item's clauses. Mechanical checks: no cycle, proof_deps equals the union of uses, no merged or missing ids, zero new nodes. A search of dag/nodes found no duplicate. The other relative-nerve and straightening nodes state different results. The generator-calculation node's L_u is the coherent-index cone construction, not the slice pullback. I accept the 12 declared tool_uses from sk-prop-sf-biduality-general: all are generic model-category or marked-simplicial tools, and no compact-support unit step is replaced. HTT is not archived locally, which the node correctly records as an agent-written proof with a WANTED entry. Checks: step 2's max-of-subsets map lands in L_C(X)(p(y_a)) with label p(y_{m_0})->p(y_a), agrees with the last-face rule, is compatible with union composition, and sends marked cone edges to marked edges. Step 3's free cell at p(x_n) has the correct last-face label, and the marking cell sits at p(x_1). The opposite argument uses Map^sharp(X^op,K^nat)=Map^sharp(X,(K^op)^nat)^op. The step 4 coend uses that L_C(X)_r is free, and the cone side uses N(u^op) substitution with counit naturality. I recomputed step 6 from the pushout C^op ⊔_{C[Δ^1]} C[Δ^2], with edges (x_0,g_1f)->(x_1,g_1). Step 7's small-object argument with finite horns is correct. Step 8 has L_[n](Sp[n])(i)=Sp[i], with σ_! applied only between cofibrant objects. Steps 5, 9 and 10 use colimit-comparison clauses (a)-(c) with their hypotheses met, including loop edges and the empty input. Repair: the cone node only asserts some natural T->id, while the item stipulates that a_* is that map. I appended to step 4 a proof that a natural T->id is unique. In Q^n every vertex J equals {max J,*}, naturality from Q^0 fixes the vertices, maps into a nerve are determined by vertices, and T(X) is the coend of the Q^n. Only this step's text changed, in fixes/dag/nodes/sec-smooth-purity/lem-cbc-relative-nerve-cone-left-comparison.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-74c8558f7 (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps, both new nodes and the full statements of all 16 cited nodes (HTT is not archived locally; the agent-origin proof and its WANTED line are recorded correctly). The mathematics is correct. Step 2: I recomputed the max-of-subsets map in X^op order, including the label p(y_{m0}->y_a), union composition and markings. Step 6: both composites of the explicit left-Kan inverse check out. Step 8: the uniqueness node pins the cone-straightening point map, which the cone node only gives as existence. Step 9: the hypotheses of colimit-comparison clauses (a), (b) and (c) hold. Step 11: a map has the right lifting property against flat inner horns exactly when its underlying map is an inner fibration, so the spine is a retract of horn cells and hence marked anodyne. Step 12: Ken Brown is applied only between cofibrant objects. New node projective-cofibrancy is true: the complement of L(boundary) in L(simplex) is exactly the pairs with x(r)=n, and the marking square is a pushout; checked n=0 and n=1. New node pinched-cube uniqueness is true: every vertex I is identified with {max I}, naturality from [0] fixes the vertices, and maps into a nerve are determined by their vertices. Neither new node duplicates an existing node (checked against cone-boundary-projective-cells, marked-cone-generator-calculations, cartesian-cone-fiber-comparison and point-family-q-counit-identification). Repairs: (1) stale step numbers: step 12 said 'Step 4', now 'Step 6'; step 14 said 'Step 5' twice, now 'Step 9'. (2) lem-coef-unmarked-relative-nerve-cone-comparison (another unit) is used in steps 6 and 7 but was undeclared; added to split_report.tool_uses and accepted, together with the 12 declared generic tool uses. (3) blueprint.from.via was truncated on both new nodes and on the item; completed from the created.item chain up to thm-cbc-finite-level-proetale. No statement changed and no node dropped.; 3 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

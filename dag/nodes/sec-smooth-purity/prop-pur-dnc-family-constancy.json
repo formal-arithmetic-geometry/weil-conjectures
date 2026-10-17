@@ -124,37 +124,52 @@
    }
   },
   {
-   "text": "**Arbitrary-base rigidity claim.** For every scheme $S$, put $X=\\mathbf A^1_S$, let $p:X\\to S$ be the projection, and let $e:S\\to X$ be the unit section. If $M$ is a finite locally constant pro-etale $\\Lambda$-module sheaf on $S$, then every endomorphism $h:p^*M\\to p^*M$ with $e^*h=\\operatorname{id}_M$ is the identity. No separatedness, finite-type, quasi-compactness, or flatness hypothesis on $S$ is part of this claim. By [lem-sf-proetale-locally-constant-origin](b), $M\\simeq\\nu_S^*G$ for a finite locally constant etale module sheaf $G$. Step 7, applied to $p$, gives $p^*M\\simeq\\nu_X^*p_{\\mathrm{et}}^*G$. The full faithfulness of [thm-weil-pbc-site-comparison] on bounded-below derived categories, together with [lem-weil-pbc-derived-single-fully-faithful] for degree-zero objects, identifies endomorphisms of $p^*M$ with endomorphisms of $p_{\\mathrm{et}}^*G$, and identifies their restrictions along $e$.\n\nPut $H=\\mathcal Hom_{\\Lambda_S}(G,G)$ using [def-pur-sheaf-hom]. There is a canonical isomorphism $p^{-1}H\\simeq\\mathcal Hom(p_{\\mathrm{et}}^*G,p_{\\mathrm{et}}^*G)$: on an etale cover trivializing $G$ with finite module value $N$, both sheaves are the constant sheaf with value $\\operatorname{End}_\\Lambda(N)$, and the canonical map sends an endomorphism to its pullback. For a finite constant module $N$, choose a finite presentation $\\Lambda^r\\to\\Lambda^s\\to N\\to0$; this exists because a finite generating set for $N$ has a kernel contained in the finite set $\\Lambda^s$, hence finitely generated. The sheaf of maps $N\\to N$ is the kernel of the corresponding map $\\underline N^s\\to\\underline N^r$; inverse image preserves this finite limit and constant modules. Naturality in the presentation and the trivialization globalizes the comparison. The base changes of the etale trivializing cover cover $X$ by [lem-weil-pbc-etale-covering-base-change].\n\nThus $h$ corresponds to a section $z\\in\\Gamma(X,p^{-1}H)$. The geometric fibres of $p$ are $\\operatorname{Spec}(\\Omega[t])$ by [def-sbc-affine-space], and are connected because $\\Omega[t]$ is a domain and its zero prime is dense. Apply [lem-weil-pbc-etale-connected-fibres-section-compatible] to $z$: it gives $p_1^*z=p_2^*z$ on $X\\times_S X$, with no finiteness assumptions. Pull back along $r=(\\operatorname{id}_X,e\\circ p):X\\to X\\times_S X$. Since $p_1r=\\operatorname{id}_X$ and $p_2r=e\\circ p$, the unit-compatible comparisons [lem-weil-pbc-sets-etale-inverse-image-composition-units] give $z=p^*e^*z$, hence $h=p^*e^*h$. Under the hypothesis $e^*h=\\operatorname{id}_M$, this says $h=\\operatorname{id}_{p^*M}$. This is the rigidity principle used below.",
+   "text": "The arbitrary-base rigidity needed below is [lem-pur-a1-pullback-endomorphism-rigidity]: for every scheme $S$ and every finite locally constant pro-etale $\\Lambda$-module sheaf $M$, an endomorphism of $p^*M$ on $\\mathbf A^1_S$ which is the identity at $t=1$ is the identity. Here $\\Lambda=A_{E,n}$ is finite, so this applies to our coefficient ring. This generic sheaf statement has no finite-type restriction on $S$; it will be applied to $S=B'$ in Step 11.",
    "uses": [
-    "lem-sf-proetale-locally-constant-origin",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "def-pur-sheaf-hom",
-    "lem-weil-pbc-etale-covering-base-change",
-    "def-sbc-affine-space",
-    "lem-weil-pbc-etale-connected-fibres-section-compatible",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0A3H, lemma-sections-upstairs, final connected-fibre Cech-compatibility argument; applied to the internal Hom and pulled back along (id,e p). Finite etale origin: proetale.tex Tag 099Y, lemma-compare-locally-constant."
-   }
-  },
-  {
-   "text": "Let $b:B'\\to B$ be an arbitrary base change and let $b_1:\\mathbf A^1_{B'}\\to\\mathbf A^1_B$ be its affine-line base change. The canonical comparisons of [lem-pur-dnc-section-geometry](5) identify the primed family, section invariant and punctured comparison with the pullbacks of $F,C(g,s),\\kappa^\\circ$; clause (1), together with the composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition], identifies its fibre comparison with $b^*\\theta$. Therefore $b_1^*\\kappa:F'\\xrightarrow{\\sim}a'{}^*C(g',s')$ is a normalized comparison and extends the primed punctured comparison. By exact termwise inverse image [def-weil-derived-pullback-tensor-hom], Step 3 pulls back to $F'\\simeq b_1^*M_F[2d]$ and $C(g',s')\\simeq b^*M_1[2d]$. These sheaves are finite locally constant: by [lem-sf-proetale-locally-constant-origin] choose etale finite local models, pull their trivializing covers back using [lem-weil-pbc-etale-covering-base-change], and use Step 7 to compare the two sites. A constant finite module stays the same constant module under inverse image, since inverse image preserves the final object and coproducts. In particular $M'=b^*M_1$ is finite lisse.\n\nFor any other normalized comparison $\\eta$, the automorphism $h=\\eta\\circ(b_1^*\\kappa)^{-1}$ of $a'{}^*C(g',s')$ becomes, after cancelling the common shift by [lem-weil-pbc-derived-single-fully-faithful], an automorphism of $a'{}^*M'$ whose restriction along the unit section is the identity. Apply the **arbitrary-base rigidity claim of Step 8** with $S=B'$ and $M=M'$; its hypotheses hold for this arbitrary scheme $B'$, and it gives $h=\\operatorname{id}$. Hence $\\eta=b_1^*\\kappa$. No use of [lem-pur-lisse-uniqueness] is made over $B'$; that finite-type lemma occurs only in Step 5 over the separated finite-type coordinate bases $B_i$. For two successive base changes the comparison and the iterated pullback have the same normalization, so the same arbitrary-base rigidity claim identifies them; identity base change is immediate. Etale localization is a special case. This proves clause (4).",
-   "uses": [
-    "lem-pur-dnc-section-geometry",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-sf-proetale-locally-constant-origin",
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-derived-single-fully-faithful"
+    "lem-pur-a1-pullback-endomorphism-rigidity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
-    "place": "Final assertion: arbitrary base change and etale localization, expanded by pullback and the generic connected-fibre sheaf calculation in Steps 7-8"
+    "place": "Final base-change assertion: arbitrary-base endomorphism rigidity, extracted from former Step 8"
+   }
+  },
+  {
+   "text": "Let $b:B'\\to B$ be arbitrary and let $b_1:\\mathbf A^1_{B'}\\to\\mathbf A^1_B$ be its affine-line base change. By [lem-pur-dnc-section-geometry](5), the primed family and punctured comparison are the pullbacks of $F$ and $\\kappa^\\circ$. The fibre formula in part (1), together with [lem-weil-pbc-proetale-derived-pullback-composition], identifies the primed section invariant with $C'=b^*C(g,s)$ and its fibre comparison with $\\theta'=b^*\\theta$. Hence $\\kappa'=b_1^*\\kappa:F'\\xrightarrow{\\sim}a'{}^*C'$ is normalized by $\\theta'$ and extends the primed punctured comparison. Exact termwise inverse image [def-weil-derived-pullback-tensor-hom] pulls the Step 3 presentations back to $F'\\simeq b_1^*M_F[2d]$ and $C'\\simeq b^*M_1[2d]$. These are ambient derived inverse images when $B'$ is not finite type; no exceptional adjoint on a new constructible category is being assumed.",
+   "uses": [
+    "lem-pur-dnc-section-geometry",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Final base-change assertion: pulled-back family, fibre and normalized map"
+   }
+  },
+  {
+   "text": "Put $M'=b^*M_1$. By [lem-sf-proetale-locally-constant-origin](b), choose a finite locally constant etale module sheaf $G$ on $B$ with $M_1\\simeq\\nu_B^*G$. Apply [lem-weil-pbc-pullback-finite-locally-constant] with $T=Y=B$, $f=\\operatorname{id}_B$, and $g=b$ to its underlying abelian sheaf. It says that $b_{\\mathrm{et}}^*G$ is finite locally constant on $B'$. Its module structure is carried by inverse image, so it is a finite locally constant etale $\\Lambda$-module sheaf. By Step 7, $M'\\simeq\\nu_{B'}^*b_{\\mathrm{et}}^*G$; part (a) of [lem-sf-proetale-locally-constant-origin] now gives finite local constancy of $M'$ on the pro-etale site of $B'$. All three cited assertions apply to arbitrary schemes. This replaces the inline cover-and-finiteness argument of the former Step 9 by the existing pullback and comparison lemmas.",
+   "uses": [
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-weil-pbc-pullback-finite-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Final base-change assertion: finite lisse pullback, using existing lemmas"
+   }
+  },
+  {
+   "text": "For another normalized comparison $\\eta:F'\\xrightarrow{\\sim}a'{}^*C'$, set $h=\\eta\\circ(\\kappa')^{-1}$. Step 9 identifies its target with $a'{}^*M'[2d]$; cancel the shift and use [lem-weil-pbc-derived-single-fully-faithful] to regard $h$ as an automorphism of the ordinary sheaf $a'{}^*M'$. Normalization says $i_1'{}^*h=\\operatorname{id}_{M'}$. Step 10 verifies finite local constancy of $M'$, so [lem-pur-a1-pullback-endomorphism-rigidity] with $S=B'$, $p=a'$, $e=i'_1$ gives $h=\\operatorname{id}$. Thus $\\eta=\\kappa'$. For successive base changes, the composite pullback comparison of [lem-weil-pbc-proetale-derived-pullback-composition] identifies the iterated pullback and the direct pullback as normalized comparisons; the same uniqueness makes them equal. Identity base change is the identity comparison. Etale localization is a special case. This proves clause (4), using no finite-type lisse-rigidity assertion over $B'$.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-a1-pullback-endomorphism-rigidity",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Final base-change assertion: uniqueness and compatibility for towers"
    }
   }
  ],
@@ -182,11 +197,9 @@
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-pbc-inverse-image",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-pur-a1-pullback-endomorphism-rigidity",
   "lem-sf-proetale-locally-constant-origin",
-  "thm-weil-pbc-site-comparison",
-  "def-pur-sheaf-hom",
-  "def-sbc-affine-space",
-  "lem-weil-pbc-etale-connected-fibres-section-compatible"
+  "lem-weil-pbc-pullback-finite-locally-constant"
  ],
  "proof_origin": {
   "by": "agent",
@@ -245,7 +258,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -419,8 +432,8 @@
   "date": "2026-10-17",
   "item": "prop-pur-dnc-family-constancy",
   "worker": "stage1",
-  "summary": "Rechecked the current main-20261015 blueprint and all cited statements, retaining the finite-coefficient coordinate/concentration/normalization/gluing proof. Corrected the old arbitrary-base-change step, which applied finite-type lisse rigidity beyond its hypotheses, by an explicit etale/pro-etale adjunction comparison and the existing generic connected-geometric-fibre section compatibility. No statement change, no new nodes, no new Mathlib leaves, no Lean work. All searches were run through msearch.py and every proof citation has a verbatim statement quote. Independent second reading clarified the adjunction-unit/coherence calculation and finite-presentation argument, and corrected prime notation; no mathematical statement or dependency changed. Fresh second reading on 2026-10-17 explicitly checked cohomological smoothness of both original projections before the open-neighborhood composition comparison, and enlarged the vector-bundle quotation to include the base-change clause actually used. Returned-landing repair: revalidated the current def-pur-dnc-section-family statement and all 42 proof quotations against the current read-only DAG, restricted its quotation to the family-object formula actually used, and clarified in Step 1 that concentration and rank one are consequences proved below. Retained the nine-step reviewed mathematical repair and all dependency edges; the delivery tool rebases onto its freshly fetched current origin.",
-  "blueprint": "Steps 1-3 realize item proof Step 1 and unit Step 1; Steps 2 and 4 realize item Step 2; Step 5 checks agreement with the punctured comparison (unit Step 2); Step 6 realizes item Step 3 and unit Step 3 gluing. Steps 7-9 prove the final arbitrary-base-change assertion using generic sheaf tools; restriction at zero remains the separate key node thm-pur-dnc-invariance.",
+  "summary": "Rechecked the current main-20261015 blueprint and all cited statements, retaining the finite-coefficient coordinate/concentration/normalization/gluing proof. Corrected the old arbitrary-base-change step, which applied finite-type lisse rigidity beyond its hypotheses, by an explicit etale/pro-etale adjunction comparison and the existing generic connected-geometric-fibre section compatibility. No statement change, no new nodes, no new Mathlib leaves, no Lean work. All searches were run through msearch.py and every proof citation has a verbatim statement quote. Independent second reading clarified the adjunction-unit/coherence calculation and finite-presentation argument, and corrected prime notation; no mathematical statement or dependency changed. Fresh second reading on 2026-10-17 explicitly checked cohomological smoothness of both original projections before the open-neighborhood composition comparison, and enlarged the vector-bundle quotation to include the base-change clause actually used. Returned-landing repair: revalidated the current def-pur-dnc-section-family statement and all 42 proof quotations against the current read-only DAG, restricted its quotation to the family-object formula actually used, and clarified in Step 1 that concentration and rank one are consequences proved below. Retained the nine-step reviewed mathematical repair and all dependency edges; the delivery tool rebases onto its freshly fetched current origin. Q115 repair of the human return: kept the statement, Lean record and Steps 1-7 unchanged; extracted former Step 8 into the statement-only generic arbitrary-base affine-line endomorphism rigidity node, and replaced former Step 9 by short base-change, finite-lisse-pullback and uniqueness steps, citing the existing etale pullback and etale-origin statements. One new node, no Mathlib leaves.",
+  "blueprint": "Steps 1-3 realize item proof Step 1 and unit Step 1; Steps 2 and 4 realize item Step 2; Step 5 checks agreement with the punctured comparison (unit Step 2); Step 6 realizes item Step 3 and unit Step 3 gluing. Steps 7-9 prove the final arbitrary-base-change assertion using generic sheaf tools; restriction at zero remains the separate key node thm-pur-dnc-invariance. Q115: Steps 8-11 refine only the final base-change assertion; the generic rigidity node carries the old Step 8, and Step 10 uses existing pullback lemmas for the hidden argument of old Step 9.",
   "tool_uses": [
    {
     "node": "lem-pur-twist-sheaf-locally-free",
@@ -439,12 +452,8 @@
     "why": "Finite etale origin permits a generic sheaf uniqueness calculation after an unrestricted base change; the coordinate and gluing route is unchanged."
    },
    {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Full faithfulness transports the arbitrary-base endomorphism calculation from etale to pro-etale sheaves."
-   },
-   {
-    "node": "lem-weil-pbc-etale-connected-fibres-section-compatible",
-    "why": "The generic connected-fibre Cech equality replaces the invalid application of finite-type lisse rigidity over an unrestricted base; sk-thm-dnc has no arbitrary-base rigidity statement."
+    "node": "lem-weil-pbc-pullback-finite-locally-constant",
+    "why": "Preservation of finite local constancy under an arbitrary etale-site inverse image; applied to an etale-origin presentation, with scalar actions transported by inverse image. It is a generic sheaf tool for the final base-change clause."
    }
   ]
  },
@@ -454,15 +463,16 @@
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
   "lem-sf-proetale-locally-constant-origin",
   "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-etale-connected-fibres-section-compatible"
+  "lem-weil-pbc-etale-connected-fibres-section-compatible",
+  "lem-weil-pbc-pullback-finite-locally-constant"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q29-62b8b7fee",
-  "group": "Q29",
+  "reviewer": "NT-cc-Q115-fb5a01f48",
+  "group": "Q115",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-62b8b7fee (reviewer sub-agent of L); spot-checked: PASS: I read all nine steps, all 38 cited statements (10 statement deps, 28 proof deps), the main-20261015 statement and proof, unit sk-thm-dnc, and Stacks 0A3H (lemma-sections-upstairs, whose proof checks agreement fibre by fibre without flatness) and 099Y. Statement: the four clauses match the current blueprint and the hypotheses of def-pur-section-invariant exactly; arbitrary B'->B is kept, with b_1^*F and b^*C as the objects when B' is not of finite type; the coefficients are the finite pro-étale D^b_ctf(-,A_{E,n}) throughout. Steps 1-6: étale coordinates (geometry (2)); étale locality and composition give omega_{pe}=Le^*omega_p after checking co-smoothness of the projection with clauses (1)-(3); vector-bundle purity gives the local models; concentration in degree -2d over the separated finite-type T=A^1_B and B; the normalization h_i calculation is correct; every hypothesis of prop-pur-a1-invariance holds. Steps 7-9: the étale/pro-étale adjunction comparison is formal; the rigidity claim holds for every scheme S (connected fibres Spec Omega[t], pullback along (id,e p)); tested on S=Spec k with M=Lambda and on disconnected and non-reduced bases; lisse uniqueness is never used over a non-finite-type B', so the earlier E1 error is repaired. I accept the six declared off-unit tool uses (twist line, pullback composition, étale composition units, locally-constant origin, site comparison, connected-fibre compatibility). No new nodes; proof_deps equals the union of the step uses; no dependency cycle. Non-blocking remark: Step 5 only asserts that kappa° restricted to t=1 equals theta; it is used only for 'kappa extends kappa°', not for clauses (1)-(4). Some deep ancestors are missing ids (e.g. def-weil-pbc-etale-morphism, '0'); these are older DAG faults, not this delivery's. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-fb5a01f48 (reviewer sub-agent of L); spot-checked: I read the item in full: an unchanged statement and Lean record, and 11 steps, of which Steps 8-11 are new or rewritten. I also read the new unsplit node lem-pur-a1-pullback-endomorphism-rigidity, the statements of all 38 cited nodes, the main-20261015 item proof, unit sk-thm-dnc, Stacks etale-cohomology.tex lemma-sections-upstairs (0A3H, lines 5029-5070) and proetale.tex lemma-compare-locally-constant (099Y). Steps 1-7 still check: the coordinates and the co-smoothness verification; vector-bundle local models; concentration in degree -2d over separated finite-type T; the normalization calculation i_1^*kappa_i=theta_i; lisse uniqueness used only over the finite-type B_i; prop-pur-a1-invariance with all its hypotheses met; and the formal etale/pro-etale adjunction comparison. Step 9 gets C'=b^*C, theta'=b^*theta and a normalized kappa'=b_1^*kappa from geometry (1) and (5) and the composition comparison, with ambient pullbacks when B' is not of finite type. Step 10 is correct: origin (b) gives M_1=nu^*G; pullback-finite-locally-constant with f=id, g=b applies because it uses the same set-level notion from def-weil-pbc-etale-sheaves; then Step 7 and origin (a) show M' is lisse on any B'. Step 11 removes the shift by degree-zero full faithfulness and applies the new lemma to get eta=kappa', which also gives towers; this matches the unit's own base-change sentence. The new node is true: End(p^*M)=Gamma(A^1_S, p^{-1}End M), and the 0A3H fibrewise argument needs only connected geometric fibres Spec Omega[t]. I tested it on the empty base, Spec k with M=Lambda, M=0, disconnected and non-reduced bases, and non-trivial monodromy. It is strictly smaller than the item, with no DNC or derived content. It duplicates nothing in the DAG: lem-pur-lisse-uniqueness is finite-type only, and the 0A3H-family nodes concern etale sheaves of sets. Its form is fine (B1-B9). proof_deps equals the union of the step uses. The five declared tool uses are accepted (twist line, pullback composition, etale composition units, locally-constant origin, pullback finite locally constant). The node's existing tool_uses still lists two entries the proof no longer cites (thm-weil-pbc-site-comparison and lem-weil-pbc-etale-connected-fibres-section-compatible); the merge should set the field from the five accepted ones. No SGA source is used and no target is weakened. I made no fixes."
  },
  "lean": {
   "module": "WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation",
