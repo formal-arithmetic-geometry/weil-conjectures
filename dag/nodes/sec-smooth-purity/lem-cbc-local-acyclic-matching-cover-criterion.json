@@ -14,9 +14,116 @@
   "def-cbc-generalized-cover",
   "def-cbc-local-simplicial-presheaf-maps"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A section of $\\widetilde M_nF\\times_{\\widetilde M_nG}G_n$ at $V$ is a boundary square $(a,b)$, with $a:\\partial\\Delta^n\\to F(V)$, $b:\\Delta^n\\to G(V)$ and $f_Va=b|_{\\partial\\Delta^n}$. Explicitly, an $n$-simplex $z$ of $Z$ corresponds to the map sending $\\alpha:[q]\\to[n]$ to $Z(\\alpha)(z)$; evaluation at the identity is inverse. The matching map therefore sends $z$ to $(z|_{\\partial\\Delta^n},f_Vz)$. By [def-cbc-generalized-cover], the hypothesis supplies a covering sieve on which every such square has strict fillers. We may work with these objectwise squares: a map $h_V\\times K\\to F$ is determined by $a:K\\to F(V)$, and its value on $(u:W\\to V,k)$ is $F(u)(a(k))$. For $n=0$, the boundary is empty, so the same hypothesis is exactly local surjectivity on vertices.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-cbc-generalized-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Section 3, definition of generalized cover and equation (3.4), printed pp. 7-8; simplex evaluation written out."
+   }
+  },
+  {
+   "text": "Fix a finite inclusion $A\\subseteq B$ and a square $a:A\\to F(V)$, $b:B\\to G(V)$ over $f$. By [lem-coef-infinity-monomorphism-boundary-cells], this inclusion is a composite of finitely many single boundary attachments: only finitely many nondegenerate simplices of $B$ lie outside $A$, and the coproduct of cells in each dimension can be attached one cell at a time. Write the resulting filtration as $A=B_0\\subseteq\\cdots\\subseteq B_N=B$. Let $R_j$ be the sieve of arrows $u:W\\to V$ where the restricted square has a filler on $B_j$. It is a sieve since fillers restrict further, and $R_0$ is maximal. If $R_j$ covers, choose a partial filler for each $u$ in $R_j$. The next cell gives one boundary square over $W$, so Step 1 gives a covering sieve $T_u$ on $W$ where this partial filler extends to $B_{j+1}$; the boundary agreement glues the cell to the partial filler by the pushout property. Thus $T_u\\subseteq u^*R_{j+1}$. Covering sieves are upward closed: if $T\\subseteq T'$ and $T$ covers, the pullback of $T'$ along any arrow of $T$ is maximal, so transitivity makes $T'$ cover. Hence $u^*R_{j+1}$ covers for every $u$ in $R_j$, and transitivity makes $R_{j+1}$ cover. Finite induction gives $R_N$ covering. This proves local strict lifting against every finite simplicial inclusion, including an empty domain; no agreement of fillers for different arrows is needed.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "def-cbc-generalized-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Proposition 7.2, first implication, and the finite boundary-cell argument of Corollary 6.14, printed pp. 14-15; explicit induction with covering sieves."
+   }
+  },
+  {
+   "text": "For each $n\\ge1$ and $0\\le i\\le n$, the horn inclusion $\\Lambda_i^n\\subseteq\\Delta^n$ is an inclusion of finite simplicial sets: the nondegenerate simplices of $\\Delta^n$ are its strictly increasing vertex strings, of which there are finitely many, and the horn is a union of faces. Step 2 therefore gives local strict fillers for every horn square. This is precisely the local Kan fibration condition of [def-cbc-local-simplicial-presheaf-maps], also when $n=1$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-cbc-local-simplicial-presheaf-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Proposition 7.2, first paragraph of proof, printed p. 15."
+   }
+  },
+  {
+   "text": "Every component of $G(V)$ has a vertex representative $y$. The degree-zero instance of Step 1 locally lifts $y$, proving local surjectivity of $\\pi_0F\\to\\pi_0G$. For local injectivity, let vertices $x_0,x_1$ of $F(V)$ have the same component after applying $f$. By the definition of components, a finite zigzag of edges in $G(V)$ joins $f(x_0)$ to $f(x_1)$. Glue the corresponding copies of $\\Delta^1$ end to end, allowing either orientation, to form a finite simplicial interval $I$ with distinct abstract endpoints $v_0,v_1$. There is a map $I\\to G(V)$ realizing that zigzag. The map $\\{v_0,v_1\\}\\to F(V)$ given by $x_0,x_1$ forms a square for Step 2. Its local fillers are zigzags in $F$ joining the restricted vertices, so their components become equal locally. A zero-length zigzag is already equality of the image vertices and may be represented by one degenerate edge, so this case is included.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-cbc-local-simplicial-presheaf-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Theorem 6.15(a), first implication, printed p. 14, degree-zero local bijectivity; strict lifting specializes its homotopy-lifting argument."
+   }
+  },
+  {
+   "text": "Fix $V$, $x\\in F(V)_0$ and $m\\ge1$. On any object $u:W\\to V$ of the slice, put $x_W=F(u)x$. By [def-cbc-local-simplicial-presheaf-maps], every class of $\\pi_m(G(W),f(x_W))$ is represented by a map $b:\\Delta^m\\to G(W)$ constant with value $f(x_W)$ on $\\partial\\Delta^m$. Prescribe the constant map $x_W$ on that boundary and apply Step 1. Each local strict lift is a pointed representative in $F$, whose image is exactly $b$ on restriction. Thus the homotopy-group presheaf map on $\\mathcal C/V$ is locally surjective. The covering sieve on $W$ is a covering sieve in this slice at $u$, by the definition of the induced topology.",
+   "uses": [
+    "def-cbc-local-simplicial-presheaf-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Theorem 6.15(a), first implication and its sphere test, printed p. 14; Definition 6.6 and Proposition 6.9 for slice basepoints."
+   }
+  },
+  {
+   "text": "For injectivity, take pointed representatives $a_0,a_1:\\Delta^m\\to F(W)$ whose image classes are equal. Equality in the quotient of [def-cbc-local-simplicial-presheaf-maps] means a finite zigzag of relative cylinder homotopies in $G(W)$ from $f(a_0)$ to $f(a_1)$. Form $L$ by gluing one copy of $\\Delta^m\\times\\Delta^1$ for each homotopy along the adjacent full endpoint copies of $\\Delta^m$, in the direction specified by that zigzag. Let $A\\subseteq L$ be the union of the first and last endpoint copies and all copies of $\\partial\\Delta^m\\times\\Delta^1$. The homotopies glue to $h:L\\to G(W)$. Define $a:A\\to F(W)$ to be $a_0,a_1$ on the outer endpoints and the constant $x_W$ on every boundary prism. These prescriptions agree on intersections because both representatives and every homotopy have constant boundary. Thus $f_Wa=h|_A$. The products are finite by [lem-cbc-finite-simplicial-product]. Their finite glued union $L$ is finite: each nondegenerate image simplex comes from a nondegenerate simplex in some prism, since degeneracies remain degenerate under every simplicial map. Its subcomplex $A$ is finite too. A degenerate simplex $z$ in $L$ can be written $z=s_i y$ (factor its noninjective simplex operator through an elementary surjection). Then $y=d_i z$ lies in $A$ whenever $z$ does, since $A$ is closed under faces. Thus a nondegenerate simplex of $A$ remains nondegenerate in $L$. For a zero-length zigzag use a single constant cylinder; the image endpoint maps then coincide. We have constructed a finite inclusion $A\\subseteq L$ with a strict square over $f$.",
+   "uses": [
+    "def-cbc-local-simplicial-presheaf-maps",
+    "def-weil-pbc-simplicial-set",
+    "lem-cbc-finite-simplicial-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Theorem 6.15(a), first implication and its relative homotopy test, printed p. 14; Section 2, definition of pointed homotopy classes, printed p. 3. Explicit finite zigzag version avoids needing transitivity of single homotopies."
+   }
+  },
+  {
+   "text": "Apply Step 2 to the finite square constructed in Step 6. On every arrow of a covering sieve of $W$, a filler $L\\to F$ restricts to the prescribed outer representatives and the constant basepoint on all boundary prisms. Its restrictions to the individual prisms are relative cylinder homotopies, in the specified orientations, joining those representatives by a finite zigzag in $F$. Their pointed classes are therefore equal by the quotient relation of [def-cbc-local-simplicial-presheaf-maps]. This proves local injectivity at every object of $\\mathcal C/V$. All basepoints are restrictions of $x$, and naturality gives $f(x_W)=f(x)|_W$, so no basepoint-change isomorphism is being assumed.",
+   "uses": [
+    "def-cbc-local-simplicial-presheaf-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Theorem 6.15(a), first implication, homotopy-group injectivity test, printed p. 14; finite zigzag lifted strictly."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-set-presheaf-sheafification-local-bijection] on $\\mathcal C$ to the component map, using the two local conditions proved in Step 4. It yields an isomorphism on the associated component sheaves. For every $V$, $x\\in F(V)_0$ and $m\\ge1$, the slice $\\mathcal C/V$ is a small category, and its induced topology (a sieve on $u:W\\to V$ covers when the sieve of underlying arrows covers $W$) satisfies the maximality, pullback and transitivity axioms because those of $J$ do. The pointed homotopy-class map $\\pi_m(F|_{\\mathcal C/V},x)\\to\\pi_m(G|_{\\mathcal C/V},f(x))$, $u\\mapsto(\\pi_m(F(W),x_W)\\to\\pi_m(G(W),f(x_W)))$ with restriction by postcomposition as in [def-cbc-local-simplicial-presheaf-maps], is a map of set-valued presheaves on $\\mathcal C/V$. Steps 5 and 7, applied at every object $u$ of $\\mathcal C/V$, give exactly its local surjectivity and local injectivity for this induced topology. So [lem-cbc-set-presheaf-sheafification-local-bijection], applied on the site $\\mathcal C/V$, makes its associated-sheaf map an isomorphism. Thus $f$ is a local weak equivalence in the sense of the statement. Together with Step 3 this proves both conclusions. The assumed objectwise Kan hypotheses give the specified pointed homotopy-class sets their usual homotopy-group meaning. No objectwise fibration hypothesis on $f$ or enough-points hypothesis on the site has been used.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-cbc-local-simplicial-presheaf-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Lemma 6.8 and Proposition 6.9, printed p. 12, and Theorem 6.15(a), first implication, printed p. 14; DHI Proposition 3.2 and equation (3.4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-generalized-cover",
+  "def-cbc-local-simplicial-presheaf-maps",
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-finite-simplicial-product",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-coef-infinity-monomorphism-boundary-cells"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0205025",
+  "place": "Objectwise Kan specialization of Proposition 7.2, first implication, with direct homotopy-group tests from Theorem 6.15(a), first implication, and Lemma 6.8. Read online 2026-10-17, printed pp. 3, 12-15; archival copies of DI and DHI are WANTED. Boundary-cell, finite-product and sheafification inputs are existing DAG Mathlib leaves."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +180,59 @@
    "results": "{\"t\": \"2026-10-17T05:25:12Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial presheaf morphism with the local right lifting property for every boundary inclusion is a weak equivalence on sheafified homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\"], \"digest\": \"2195607b960330bb\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned general model-category homotopy results, not local lifting for simplicial presheaves on a site."
+  },
+  {
+   "tool": "grep",
+   "query": "local.*(acyclic|fibration)|relative.*matching",
+   "results": "{\"t\": \"2026-10-17T05:42:04Z\", \"tool\": \"grep\", \"query\": \"local.*(acyclic|fibration)|relative.*matching\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Linear.lean\"], \"digest\": \"b54387b7464be0ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern set-valued presheaf local bijections, one-step hypercovers, ordinary simplicial-set fibrations, or acyclic-complex localizations; none states this relative matching criterion for simplicial presheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.modelCategoryQuillen.fibration_iff",
+   "results": "{\"t\": \"2026-10-17T05:42:04Z\", \"tool\": \"loogle\", \"query\": \"SSet.modelCategoryQuillen.fibration_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"9bffff155604528f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern set-valued presheaf local bijections, one-step hypercovers, ordinary simplicial-set fibrations, or acyclic-complex localizations; none states this relative matching criterion for simplicial presheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Boundary lifting after covering sieves implies local weak equivalence of Kan simplicial presheaves",
+   "results": "{\"t\": \"2026-10-17T05:42:04Z\", \"tool\": \"leansearch\", \"query\": \"Boundary lifting after covering sieves implies local weak equivalence of Kan simplicial presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.cover_lift\", \"TopCat.Presheaf.IsLocallySurjective\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift.congr_simp\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"TopCat.Presheaf.isLimitOpensLeEquivGenerate₂\", \"CategoryTheory.Presheaf.imageSieve_mem\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"CategoryTheory.Presheaf.IsLocallyInjective\"], \"digest\": \"77475232f42e8eb7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern set-valued presheaf local bijections, one-step hypercovers, ordinary simplicial-set fibrations, or acyclic-complex localizations; none states this relative matching criterion for simplicial presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of objectwise Kan simplicial presheaves with local lifts against all simplex boundaries induces isomorphisms on homotopy sheaves",
+   "results": "{\"t\": \"2026-10-17T05:42:05Z\", \"tool\": \"leanfinder\", \"query\": \"A map of objectwise Kan simplicial presheaves with local lifts against all simplex boundaries induces isomorphisms on homotopy sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.W_iff\", \"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms\", \"CategoryTheory.Sheaf.isLocallyBijective_iff_isIso\", \"CategoryTheory.Sheaf.isLocallyInjective_of_iso\", \"CategoryTheory.GrothendieckTopology.OneHypercover.exists_nonempty_homotopy\", \"CategoryTheory.Presheaf.instIsLocallyInjectiveOfIsIsoFunctorOpposite\", \"CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso\"], \"digest\": \"20d8b9eed4f3af4a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern set-valued presheaf local bijections, one-step hypercovers, ordinary simplicial-set fibrations, or acyclic-complex localizations; none states this relative matching criterion for simplicial presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally surjective relative matching morphisms of a map of simplicial presheaves imply it is a local acyclic fibration",
+   "results": "{\"t\": \"2026-10-17T05:42:37Z\", \"tool\": \"leanfinder\", \"query\": \"Locally surjective relative matching morphisms of a map of simplicial presheaves imply it is a local acyclic fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLocallySurjective_iff_of_fac\", \"CategoryTheory.Presheaf.isLocallySurjective_of_isLocallySurjective\", \"CategoryTheory.Presheaf.isLocallySurjective_of_isLocallySurjective_of_isLocallyInjective\", \"CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff\", \"CategoryTheory.Presheaf.isLocallySurjective_of_whisker\", \"CategoryTheory.Presheaf.isLocallySurjective_of_isLocallySurjective_fac\", \"CategoryTheory.GrothendieckTopology.W.isLocallySurjective\", \"CategoryTheory.Presheaf.isLocallySurjective_of_le\"], \"digest\": \"f57d0583f2cd13a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern set-valued presheaf local bijections, one-step hypercovers, ordinary simplicial-set fibrations, or acyclic-complex localizations; none states this relative matching criterion for simplicial presheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallySurjective|Local.*Fibration|homotopy.*sheaf",
+   "results": "{\"t\": \"2026-10-17T05:54:51Z\", \"tool\": \"grep\", \"query\": \"IsLocallySurjective|Local.*Fibration|homotopy.*sheaf\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\"], \"digest\": \"4d99917c07a03769\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are the existing set-valued sheafification criterion, not simplicial homotopy sheaves; AlgebraicTopology grep gives only a Brown reference title."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Grothendieck site a morphism of simplicial presheaves locally lifting every finite simplicial monomorphism induces isomorphisms of associated homotopy sheaves",
+   "results": "{\"t\": \"2026-10-17T05:54:53Z\", \"tool\": \"leanfinder\", \"query\": \"For a Grothendieck site a morphism of simplicial presheaves locally lifting every finite simplicial monomorphism induces isomorphisms of associated homotopy sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk'\", \"CategoryTheory.GrothendieckTopology.W_iff\", \"CategoryTheory.GrothendieckTopology.W_of_isLocallyBijective\", \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.iff\", \"CategoryTheory.Sheaf.isLocallyBijective_iff_isIso\", \"CategoryTheory.GrothendieckTopology.W.isLocallyInjective\", \"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms\"], \"digest\": \"762c6cd8e897a31f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are the existing set-valued sheafification criterion, not simplicial homotopy sheaves; AlgebraicTopology grep gives only a Brown reference title."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-hypercover-cotensor-local-acyclic-fibration",
@@ -102,5 +258,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-local-acyclic-matching-cover-criterion",
+  "worker": "NY",
+  "summary": "Statement unchanged. Replaced the empty proof with eight steps: matching squares, finite boundary-cell induction with covering-sieve transitivity, horn lifting, component local bijectivity, and pointed homotopy-class local bijectivity followed by sheafification. Reuses existing DAG inputs; no new nodes or definition copies. Explicit finite zigzags avoid assuming a single homotopy or enough points.",
+  "blueprint": "Realizes the supporting converse of DHI Proposition 3.2/(3.4) in the descendant hypercover cotensor argument below the opening compactification step of thm-cbc-finite-level-proetale, whose affine-local descent repair invokes hypercover relative lifting. Ancestry and via list retained; no unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NY-b642b37b3",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-b642b37b3 (reviewer sub-agent of L); spot-checked: FIX: the item lem-cbc-local-acyclic-matching-cover-criterion is the objectwise-Kan converse of DHI Prop. 3.2 / (3.4). Read the item, all eight steps and the full statements of its six proof dependencies and five statement dependencies. The statement is true and unchanged. Its hypotheses are no stronger than DHI's, which does not even need objectwise Kan values. In degree 0 the hypothesis is local surjectivity of F_0 to G_0. DHI and DI are not in literature/; they are listed as WANTED and proof_origin is agent, which is correct. Step 1: the matching-map lifting sieve is exactly the sieve of strict boundary fillers. Step 2: the finite cell filtration comes from the leaf lem-coef-infinity-monomorphism-boundary-cells (SSet.relativeCellComplexOfMono). The induction R_j with T_u contained in u^*R_{j+1}, then transitivity, is correct, including empty domains and empty covering sieves. Steps 3-5: horns, pi_0 via a finite interval with its actual edge orientations, and pi_m surjectivity via boundary-constant representatives on every object of the slice; all correct. Steps 6-7: the finite prism complex L and its subcomplex A agree on overlaps, finiteness follows from lem-cbc-finite-simplicial-product plus the s_i/d_i argument, and the restricted fillers give based zigzags; correct. Repair (one fault): Step 8 relied on an 'equivalently' claim stated inside the definition node def-cbc-local-simplicial-presheaf-maps. It now applies the already-cited lem-cbc-set-presheaf-sheafification-local-bijection directly on each slice C/V with its induced topology. Only the Step 8 text changed; uses and proof_deps are the same. Route: all proof dependencies are definitions of the unit sk-prop-sf-cbc or Mathlib leaves, so no tool_uses are needed. There are no new nodes, no duplicates (the converse, homotopy-lifting and cotensor nodes were checked) and no cycle; the cotensor node depends on this item and is not cited by it. Edge cases tested: A=B, A empty, n=0, n=1, m=1, zero-length zigzags, empty covering sieves, trivial topology.; 1 file(s) fixed by the reviewer"
  }
 }
