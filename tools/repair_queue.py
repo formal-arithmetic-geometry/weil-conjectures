@@ -121,7 +121,8 @@ def reconcile():
         records = [ld.DONE / (j['repair_landing']+'.json')] if j.get('repair_landing') else []
         for p in records:
             r = read(p)
-            if r.get('group') == j['group'] and r.get('item') == j['item'] and r.get('result') == 'verified':
+            # a batch landing records group L and no item (2026-10-17: 17 landed repairs stayed `delivered` for days)
+            if (r.get('group'), r.get('item')) in ((j['group'], j['item']), ('L', None)) and r.get('result') == 'verified':
                 j.update(state='repaired', verified=time.time()); write(JOBS/(j['id']+'.json'),j); break
 
 # ---------------------------------------------------------------- hand-off to the stage-3 queue (2026-10-17)
@@ -165,6 +166,16 @@ def open_jobs():
 def handoff(only=None, dry_run=False, log=print):
     """Hand every open job (or those with ids in `only`) to the stage-3 queue. Returns [(id, item, verdict)]."""
     todo = [j for j in open_jobs() if only is None or j['id'] in only]
+    # `delivered` jobs that can no longer land: no claim of the XR group, no branch, and no landing (or a reverted one)
+    def _dead(j):
+        if j.get('state') != 'delivered' or read(claim_path(j['item'])).get('who') == j['group']: return False
+        if j.get('repair_landing'):
+            import landing as ld
+            res = read(ld.DONE / (j['repair_landing'] + '.json')).get('result')
+            if res is None or res == 'verified': return False   # building, or reconcile() closes it
+        return subprocess.run(['git', 'rev-parse', '--verify', '-q', f"refs/heads/deliver/{j['group']}/{j['item']}"],
+                              cwd=ROOT, capture_output=True).returncode != 0
+    todo += [j for j in jobs() if (only is None or j['id'] in only) and _dead(j)]
     # closed jobs whose XR claim survived (the 2026-10-17 race fixed in result(): six items stayed blocked for days)
     stale = [j for j in jobs() if j.get('state') in ('released', 'released_to_queue', 'dropped', 'superseded', 'repaired')
              and (only is None or j['id'] in only) and read(claim_path(j['item'])).get('who') == j['group']]
@@ -173,6 +184,9 @@ def handoff(only=None, dry_run=False, log=print):
     spec = importlib.util.spec_from_file_location('sheaf_work_queue', ROOT / 'tools' / 'queue.py')
     qm = importlib.util.module_from_spec(spec); spec.loader.exec_module(qm)
     _, dist = qm.analyse()
+    import sorry_route
+    route = sorry_route.load()
+    _on_route = lambda m: route is None or m in route['route']
     rp = ROOT / 'coord' / 'repairs.txt'
     out, paths, released = [], [], []
     with mergelock.merge_lock():
@@ -186,6 +200,10 @@ def handoff(only=None, dry_run=False, log=print):
             elif item not in dist: verdict = 'dropped: no target imports the module (outside the targets\' import closure)'
             elif li.sorry_count(f.read_text(errors='ignore')) == 0 and item not in listed:
                 verdict = 'dropped: the module has no sorry on the main branch any more (proved since)'
+            elif j.get('state') == 'delivered' and holder:
+                verdict = f'dropped: its delivered repair never landed; the item is now held by {holder}'
+            elif j.get('state') == 'delivered' and not _on_route(item):
+                verdict = 'dropped: its delivered repair never landed; no target uses the module\'s sorries (off the sorry route)'
             else: verdict = 'released_to_queue'
             out.append((j['id'], item, verdict + ('' if holder in (None, j['group']) else f'; item held by {holder}')))
             if dry_run: continue
