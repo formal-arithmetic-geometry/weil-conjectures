@@ -12,62 +12,105 @@
   "def-coef-infinity-relative-cone",
   "lem-coef-decomposition-local-colimit-cocones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unpack the ordered-block definition of $K_F$. A simplex of a join is uniquely a lower monotone map followed by an upper nerve chain, and the compatibility equations for the lifts are preserved by precomposition, restriction to faces, and repetition. Therefore the displayed formula for $c_\\sigma$ is simplicial; on the pure factors it is respectively $\\sigma$ and the forgetful map to $N(I)$. Every image simplex has lower block a face or degeneracy of $\\sigma$, hence belongs to $L'_F$ by the definition of the generated subset. The same check covers $m=0$ and empty upper or lower blocks.",
+   "uses": [
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT Notation 4.2.3.1, Remark 4.2.3.2 and the definition of the characteristic map in the proof of Proposition 4.2.3.8, printed pp. 248-252."
+   }
+  },
+  {
+   "text": "Use the unique nondegenerate decomposition of each simplex of the simplicial set $K_F$. A simplex outside $L_F$ has a unique nondegenerate root whose lower block is outside $L$; after adjoining $\\sigma$, the new roots are exactly those whose lower block is $\\sigma$. Writing a root and all of its degeneracies in join coordinates gives a surjective monotone map $\\alpha:[r]\\twoheadrightarrow[m]$ and a chain of lift objects $(a_0,w_0)\\to\\cdots\\to(a_s,w_s)$ in $I_\\sigma$. Conversely these data determine the corresponding simplex of $K_F$. The nerve coordinates are therefore precisely the $B=N(I_\\sigma)$ factor of $\\Delta^m\\star B$. If $\\sigma$ is degenerate, the same decomposition shows that a new simplex with a degenerate first lift $w_0$ already has a lower nondegenerate root in a proper face of $\\sigma$; exactly these coordinates form the subnerve $B_0=N(D_\\sigma)$ and are old.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT Notation 4.2.3.7 and the first paragraph of the proof of Proposition 4.2.3.8, printed pp. 251-252; the unique-degeneracy bookkeeping is the Eilenberg-Zilber decomposition."
+   }
+  },
+  {
+   "text": "Assume $\\sigma$ is nondegenerate. By hypothesis every proper face of $\\sigma$ lies in $L$, so a join simplex belongs to the old subset precisely when its lower monotone map is nonsurjective (a boundary simplex) or its upper block is pure. The preceding classification identifies all remaining simplices bijectively with the simplices of $\\Delta^m\\star B$ not in $\\partial\\Delta^m\\star B$, and identifies their common old faces with $\\partial\\Delta^m\\star B$. Thus the canonical map from the pushout of $\\partial\\Delta^m\\star B\\hookrightarrow\\Delta^m\\star B$ along $c_\\sigma$ to $L'_F$ is degreewise bijective and commutes with all operators, hence is an isomorphism. This proves the stated pushout and also shows that no injectivity of any $\\pi_a$ is used.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT proof of Proposition 4.2.3.8, nondegenerate simplex attachment square, printed p. 252."
+   }
+  },
+  {
+   "text": "Assume $\\sigma$ is degenerate. The classification in Step 2 says that the old part of the join consists of the entire boundary join together with all join simplices whose lift chain lies in $B_0$; their intersection is $\\partial\\Delta^m\\star B_0$. The pure lower factor is old as well, since the nondegenerate root of the degenerate simplex $\\sigma$ has smaller dimension and is a proper face in $L$. Consequently the canonical map from\n   $P_\\sigma=(\\partial\\Delta^m\\star B)\\amalg_{\\partial\\Delta^m\\star B_0}(\\Delta^m\\star B_0)$ into $L_F$ is well-defined, and the remaining simplices of $\\Delta^m\\star B$ map bijectively to $L'_F\\setminus L_F$. Degreewise the resulting pushout map is therefore bijective; compatibility with operators follows from the block formula, proving the degenerate pushout square. This also covers $D_\\sigma=\\varnothing$, because $\\Delta^m\\star\\varnothing$ still contains the pure lower factor.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT proof of Proposition 4.2.3.8, degenerate simplex attachment square, printed pp. 251-252."
+   }
+  },
+  {
+   "text": "The boundary convention is the stated one: a simplex of $\\Delta^m$ is in $\\partial\\Delta^m$ exactly when its monotone map has nonsurjective image, so $\\partial\\Delta^0=\\varnothing$. The preceding degreewise identifications are natural in faces and degeneracies and hence establish both squares as pushouts in simplicial sets, including all empty-factor cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT Notation 4.2.3.7 and Proposition 4.2.3.8, printed pp. 251-252."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-decomposition-local-colimit-cocones",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "HTT Notation 4.2.3.1, Remark 4.2.3.2, Notation 4.2.3.7 and proof of Proposition 4.2.3.8, printed pp. 248-252; degreewise pushout verification expanded here."
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "simplicial decomposition simplex attachment pushout join nerve lift category degenerate lifts",
+   "results": "CategoryTheory.Nerve.strictSegal, CategoryTheory.Nerve.isStrictSegal, CategoryTheory.Nerve.quasicategory, CategoryTheory.nerve, SSet.stdSimplex.isoNerve; none states the attachment pushout.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Subcomplex.BicartSq.isPushout, SSet.unique_nonDegenerate_simplex",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "decomposition|unique_nonDegenerate|join.*nerve|pushout AlgebraicTopology/SimplicialSet",
+   "results": "Hits in HomotopyCat.lean, Monomorphisms.lean, NerveAdjunction.lean, SubcomplexColimits.lean, Splitting.lean and related files; none states this decomposition attachment.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
    "tool": "leansearch",
-   "query": "The decomposition simplicial set over a diagram is built by attaching joins with nerves of categories of lifts of each simplex",
-   "results": "{\"t\": \"2026-10-17T08:37:45Z\", \"tool\": \"leansearch\", \"query\": \"The decomposition simplicial set over a diagram is built by attaching joins with nerves of categories of lifts of each simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"SSet.stdSimplex.isoNerve\", \"SSet.instInhabited\", \"CategoryTheory.decomposedEquiv\", \"SSet.hasColimits\", \"SSet.skeleton_succ\", \"SSet.stdSimplex\", \"sSetTopAdj\"], \"digest\": \"a7d7370446e6afdd\"}",
+   "query": "A simplicial set decomposition formed from simplex lift nerves is obtained by pushout attachment along the boundary join, with degenerate lifts retained in the old part",
+   "results": "SSet.degenerate_zero, SSet.degenerate, SSet.N, SSet.σ_mem_degenerate, SSet.Subcomplex.mem_degenerate_iff, SSet.nonDegenerate, SSet.N.toS; none states the attachment theorem.",
    "date": "2026-10-17",
-   "verdict": "no match: read returned signatures and SubcomplexColimits.lean:82-99, Skeleton.lean:1-110 and HomotopyCat.lean:1-60. BicartSq.isPushout concerns four embedded subcomplexes and presupposes their intersection/union calculation; the characteristic map here can identify old simplices. Ordinary boundary-cell presentations do not give these lift-category joins or the degenerate-lift domain. Neither is a one-line specialization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Attaching a base simplex in a decomposition simplicial set is a pushout of its boundary joined with the nerve of its lift category, removing degenerate lifts",
-   "results": "{\"t\": \"2026-10-17T08:37:56Z\", \"tool\": \"leanfinder\", \"query\": \"Attaching a base simplex in a decomposition simplicial set is a pushout of its boundary joined with the nerve of its lift category, removing degenerate lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₂.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn.isColimit\", \"CategoryTheory.Arrow.cechConerve_obj\"], \"digest\": \"eee8ef21e1394ebd\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read returned signatures and SubcomplexColimits.lean:82-99, Skeleton.lean:1-110 and HomotopyCat.lean:1-60. BicartSq.isPushout concerns four embedded subcomplexes and presupposes their intersection/union calculation; the characteristic map here can identify old simplices. Ordinary boundary-cell presentations do not give these lift-category joins or the degenerate-lift domain. Neither is a one-line specialization."
-  },
-  {
-   "tool": "loogle",
-   "query": "SSet, CategoryTheory.Limits.IsPushout",
-   "results": "{\"t\": \"2026-10-17T08:37:45Z\", \"tool\": \"loogle\", \"query\": \"SSet, CategoryTheory.Limits.IsPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.IsPushout'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "unavailable: loogle: unknown identifier 'CategoryTheory.Limits.IsPushout'"
-  },
-  {
-   "tool": "loogle",
-   "query": "SSet, CategoryTheory.IsPushout",
-   "results": "{\"t\": \"2026-10-17T08:39:19Z\", \"tool\": \"loogle\", \"query\": \"SSet, CategoryTheory.IsPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.relativeCellComplexOfMono.isPushout\", \"SSet.Subcomplex.unionProd.isPushout\", \"SSet.Subcomplex.Pairing.RankFunction.isPushout\"], \"digest\": \"470e730ab9d1076e\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read returned signatures and SubcomplexColimits.lean:82-99, Skeleton.lean:1-110 and HomotopyCat.lean:1-60. BicartSq.isPushout concerns four embedded subcomplexes and presupposes their intersection/union calculation; the characteristic map here can identify old simplices. Ordinary boundary-cell presentations do not give these lift-category joins or the degenerate-lift domain. Neither is a one-line specialization."
-  },
-  {
-   "tool": "grep",
-   "query": "decomposition|simplexLift|liftCategory|join.*nerve",
-   "results": "{\"t\": \"2026-10-17T08:37:44Z\", \"tool\": \"grep\", \"query\": \"decomposition|simplexLift|liftCategory|join.*nerve\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\"], \"digest\": \"95bd0a07e3ae7eab\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read returned signatures and SubcomplexColimits.lean:82-99, Skeleton.lean:1-110 and HomotopyCat.lean:1-60. BicartSq.isPushout concerns four embedded subcomplexes and presupposes their intersection/union calculation; the characteristic map here can identify old simplices. Ordinary boundary-cell presentations do not give these lift-category joins or the degenerate-lift domain. Neither is a one-line specialization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The decomposition simplicial set of a diagram over K is filtered by base simplices; adjoining a simplex is a pushout of joins with its category of lifts",
-   "results": "{\"t\": \"2026-10-17T08:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"The decomposition simplicial set of a diagram over K is filtered by base simplices; adjoining a simplex is a pushout of joins with its category of lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.hasColimits\", \"SSet.horn.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"CategoryTheory.Arrow.cechConerve_obj\"], \"digest\": \"c4056c7e4a43f93f\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read returned signatures and SubcomplexColimits.lean:82-99, Skeleton.lean:1-110 and HomotopyCat.lean:1-60. BicartSq.isPushout concerns four embedded subcomplexes and presupposes their intersection/union calculation; the characteristic map here can identify old simplices. Ordinary boundary-cell presentations do not give these lift-category joins or the degenerate-lift domain. Neither is a one-line specialization."
-  },
-  {
-   "tool": "grep",
-   "query": "localColimitDecomposition|simplexLift|decompositionNerve|join.*nerve|nerve.*join",
-   "results": "{\"t\": \"2026-10-17T08:06:49Z\", \"tool\": \"grep\", \"query\": \"localColimitDecomposition|simplexLift|decompositionNerve|join.*nerve|nerve.*join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"8bca5da51ffcbb25\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read returned signatures and SubcomplexColimits.lean:82-99, Skeleton.lean:1-110 and HomotopyCat.lean:1-60. BicartSq.isPushout concerns four embedded subcomplexes and presupposes their intersection/union calculation; the characteristic map here can identify old simplices. Ordinary boundary-cell presentations do not give these lift-category joins or the degenerate-lift domain. Neither is a one-line specialization."
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-decomposition-simplex-lift-right-anodyne",
@@ -100,5 +143,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-decomposition-simplex-attachment",
+  "worker": "stage1",
+  "summary": "Split the HTT simplex-attachment statement by an explicit degreewise classification of new simplices in the decomposition simplicial set. The nondegenerate case is the boundary join pushout; in the degenerate case the old degenerate-lift subjoin is retained, giving the stated P_sigma pushout. No new child node was needed because the only imported non-elementary combinatorial input is the existing Mathlib unique nondegenerate decomposition leaf.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint auxiliary proof input: the two attaching pushout squares in HTT Proposition 4.2.3.8, printed p. 252, with Notations 4.2.3.1 and 4.2.3.7."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q26-34dc5a813",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-34dc5a813 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Both pushouts agree with HTT 4.2.3.8, printed p. 252; checked unique-degeneracy input, noninjective maps, degenerate lifts, and empty-factor cases. No new nodes, duplicates, cycles, long steps over 2000 characters, or forbidden batch-5 dependencies. No fixes needed."
  }
 }

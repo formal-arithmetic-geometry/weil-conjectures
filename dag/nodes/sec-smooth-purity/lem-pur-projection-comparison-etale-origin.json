@@ -29,9 +29,122 @@
   "lem-pur-etale-open-derived-tensor",
   "lem-cbc-proetale-extension-zero-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Z=\\overline X$, $p=p_f$, $R_e=Rp_{\\mathrm{et},*}$ and $R_p=Rp_{\\mathrm{proet},*}$. The ring $A$ is finite and commutative by [def-weil-l-adic-coefficient-extension], and $p$ is qcqs by [pqf-lem-proper-basic]. Fix a lower bound $r$ for $M$ and a Tor interval $[a,b]$ for $H$. By [lem-kun-0f1m], $H$ has a K-flat flat-term model supported in degrees $\\geq a$, whose pullbacks along $p$ and $f$ remain K-flat with flat terms and the same termwise lower bound. Testing those models against degree-zero sheaves shows that $p^*H$ and $f^*H$ have lower Tor bound $a$. Exactness [lem-weil-pbc-extension-by-zero-exact] makes $E=j_!^eM$ bounded below by $r$. Apply [lem-kun-derived-tensor-t-est] to obtain lower bound $a+r$ for $Q=E\\otimes_A^Lp^*H$ and $D=M\\otimes_A^Lf^*H$. Thus $E,Q,j_!^eD$ are bounded below. These are exactly the inputs for the direct-image comparisons used below. No finite Tor condition on $M$ is needed.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "pqf-lem-proper-basic",
+    "lem-kun-0f1m",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-kun-derived-tensor-t-est"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0F1M, lemma-bounded-below-tor-amplitude; morphisms.tex Tag 01W1, definition-proper; bounded-below typing for the Tag 0E48 square"
+   }
+  },
+  {
+   "text": "Use the tensor comparisons of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the pullback comparison of [lem-weil-pbc-comparison-pullback]. They identify $V_Zp_e^*H$ with $p_p^*V_YH$ and $V_Xf_e^*H$ with $f_p^*V_YH$. Their compatibility with tensor and with $j^*p^*=f^*$ can be checked on the flat-term K-flat models provided by the tensor lemma: both composites take a pulled-back pure tensor $x\\otimes y$ to the same $x\\otimes y$. In bidegree $(i,q)$ both use differential $dx\\otimes y+(-1)^ix\\otimes dy$. Hence the chain maps, and therefore their images in the derived categories, agree. We suppress these specified identifications in the next three steps. The direction $t_{B,H}$ of the question is the inverse of this lemma's pullback/tensor map.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, flat-term K-flat construction; proetale.tex comparison morphism square"
+   }
+  },
+  {
+   "text": "For a bounded-below etale complex $N$ on $Z$, write $b_N:V_YR_eN\\xrightarrow{\\sim}R_pV_ZN$ for [lem-weil-pbc-comparison-direct-image-canonical-mate]. Its normalization is\n$$\\varepsilon^p_{V_ZN}\\circ p_p^*(b_N)\\circ a_{R_eN}=V_Z(\\varepsilon^e_N),$$\nwhere $a:V_Zp_e^*\\cong p_p^*V_Y$ is the specified pullback comparison. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the commutative square with vertical maps $p_e,p_p$ and horizontal maps $\\nu_Z,\\nu_Y$, with input $E=j_!^eM$ and tensor factor $H$. Its exchange is precisely $b$: both are the mate of $a^{-1}$ with the normalization just displayed. Its projection maps are the counit-defined ones of [def-kun-projection-formula-map, def-exchange-projection]. This gives, under Step 2's tensor identifications,\n$$b_Q\\circ V_Y(\\pi^e_{E,H})=\\pi^p_{V_ZE,V_YH}\\circ(b_E\\otimes1).$$\nThe coherence lemma permits any commutative ringed-topos square; it does not require the site-comparison square to be Cartesian. Both components of $b$ are invertible by Step 1 and the canonical-mate lemma.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "def-kun-projection-formula-map",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram, specialized to the etale/pro-etale comparison square; equation-projection-formula-map"
+   }
+  },
+  {
+   "text": "Let $e_B:V_Zj_!^eB\\cong j_!^pV_XB$ be [lem-cbc-proetale-extension-zero-comparison], applied degreewise. The two extensions are exact [lem-weil-pbc-extension-by-zero-exact, lem-weil-extension-by-zero-exact], so this natural chain isomorphism preserves quasi-isomorphisms and descends to the derived categories. Write $\\gamma_e:Q\\cong j_!^eD$ for [lem-pur-etale-open-derived-tensor], and $\\gamma_p$ for the canonical pro-etale open tensor map. Then\n$$e_D\\circ V_Z(\\gamma_e)=\\gamma_p\\circ(e_M\\otimes1).$$\nHere is the check of the named maps. The source is an object extended by zero, using $V_Z(\\gamma_e)$ and $e_D$. By [lem-sf-open-tensor-normalization], pro-etale extension by zero is fully faithful on derived categories, so equality of these maps is detected by restriction to $X$. The comparison $e$ is the adjoint open comparison: under the open units its restriction is the identity. The restricted $\\gamma_p$ is the identity by the same normalization lemma. The restricted $\\gamma_e$ is also the identity: its defining sheaf tensor identity sends $x\\otimes y$ to $x\\otimes y$, and the same holds in each summand of the K-flat total tensor used to define its derived map. Thus both restrictions are the same tensor/pullback identification of Step 2. Full faithfulness proves the displayed square. This uses arbitrary $M$, without a local-freeness hypothesis.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison (the adjoint comparison); sites-cohomology.tex Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "The fixed-compactification comparison in [lem-pur-compact-support-site-coherence] is\n$$B_B=R_p(e_B)\\circ b_{j_!^eB}:V_YF_fB\\xrightarrow{\\sim}P_fV_XB.$$\nIt uses exactly the counit-mate proper comparison and the adjoint open comparison fixed above, so its inverse is $C_B$ of [lem-sf-class-compact-support-comparison] with identity etale-origin witness. This identifies the specified comparison, rather than choosing an arbitrary isomorphism with its endpoints. By [def-exchange-projection] and the definition of the etale projection map in the statement,\n$$\\operatorname{PF}^e=R_e(\\gamma_e)\\pi^e,\\qquad\\operatorname{PF}^p=R_p(\\gamma_p)\\pi^p.$$\nFor $B=M,D$ the comparisons are defined and invertible by Step 1. None of this uses compactification independence or an exceptional adjunction.",
+   "uses": [
+    "lem-pur-compact-support-site-coherence",
+    "lem-sf-class-compact-support-comparison",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph, “Because the map is obtained by transposing”: fixed-compactification normalization of the comparison used for the projection map"
+   }
+  },
+  {
+   "text": "Paste Steps 3 and 4. Keeping $t=t_{F_fM,H}$ explicit, naturality of $b$ at $\\gamma_e:Q\\to j_!^eD$ gives\n$$\\begin{aligned}\n B_DV_Y(\\operatorname{PF}^e)\n &=R_p(e_DV_Z\\gamma_e)\\,b_Q\\,V_Y\\pi^e\\\\\n &=R_p\\bigl(\\gamma_p(e_M\\otimes1)\\bigr)\\,\\pi^p_{V_ZE,V_YH}\\,(b_E\\otimes1)\\,t^{-1}\\\\\n &=\\operatorname{PF}^p_{V_XM,V_YH}\\,(B_M\\otimes1)\\,t^{-1}.\n\\end{aligned}$$\nThe first line is naturality of the specified direct-image mate [lem-weil-pbc-comparison-direct-image-canonical-mate]. The second uses the two proved squares. The third is naturality of the pro-etale counit-defined projection map in its first argument, followed by the compactification formula [def-exchange-projection]. It moves $R_p(e_M)$ into the first projection input; its composite with $b_E$ is exactly $B_M$. All three lines have source $V_Y(F_fM\\otimes_A^LH)$ and target $P_fV_XD$. Thus this is an equality of the actual derived morphisms.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph, “Because the map is obtained by transposing”: pasting the proper and open projection squares at the chosen compactification"
+   }
+  },
+  {
+   "text": "Precompose Step 6 by $t\\circ(C_M\\otimes1)$ and postcompose by $C_D=B_D^{-1}$. Since $(B_M\\otimes1)(C_M\\otimes1)=1$ and $t^{-1}t=1$, the result is precisely\n$$C_D\\circ\\operatorname{PF}^p_{V_XM,V_YH}=V_Y(\\operatorname{PF}^e_{M,H})\\circ t_{F_fM,H}\\circ(C_M\\otimes1).$$\nThe target identification is Step 2's tensor comparison followed by the pullback comparison, as required. Naturality in $M,H$ follows by composing the natural transformations in Steps 2–6 and their natural inverses. For $M=0$, $H=0$ or $X=\\emptyset$ these equations reduce to the unique maps between zero objects. For $j=\\mathrm{id}$ the open square disappears; for $p=\\mathrm{id}$ the proper square disappears. These checks require neither smoothness nor an exceptional-pullback formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph, “Because the map is obtained by transposing”: inverse-comparison form and naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "pqf-lem-proper-basic",
+  "lem-kun-0f1m",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-kun-derived-tensor-t-est",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "def-kun-projection-formula-map",
+  "def-exchange-projection",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-extension-by-zero-exact",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-compact-support-site-coherence",
+  "lem-sf-class-compact-support-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+  "place": "First paragraph, sentence beginning “Because the map is obtained by transposing”; expanded using Stacks 0E48, 09AF, 0GL1 and the fixed proper/open comparison nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +180,45 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux_assoc, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.IsLocallyDirected.glueDataι_naturality, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq",
    "date": "2026-10-17",
    "verdict": "no match: results concern Lean structure projections, condensed adjunctions, scheme open-immersion identities or algebraic etaleness; none states equality of the compact-support projection maps under site comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comparison|comparison.*projection|pro[Ee]tale.*tensor|[Ee]tale.*projection",
+   "results": "0 hits: ; returned types read.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal adjunction structures, exponentiable morphism counits, product comparison projections, algebraic etale topology or condensed modules do not state this derived compact-support site comparison equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical compactly supported projection map commutes with etale proetale site comparison",
+   "results": "8 hits: CategoryTheory.Limits.piComparison_comp_π, CategoryTheory.Limits.piComparison_comp_π_assoc, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, DiscreteQuotient.ofLE_comp_proj, LightProfinite.proj_comp_transitionMapLE', AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtalePretopology, LightProfinite.proj_comp_transitionMapLE; returned types read.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal adjunction structures, exponentiable morphism counits, product comparison projections, algebraic etale topology or condensed modules do not state this derived compact-support site comparison equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; returned types read.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal adjunction structures, exponentiable morphism counits, product comparison projections, algebraic etale topology or condensed modules do not state this derived compact-support site comparison equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale to proetale comparison intertwines compact support projection formula morphisms for constant finite coefficients",
+   "results": "8 hits: Condensed.profiniteSolidCounit, Condensed.isColimitLocallyConstantPresheaf_desc_apply, LightProfinite.proj_comp_transitionMap, LightProfinite.lightToProfinite_map_proj_eq, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, LightProfinite.proj_comp_transitionMapLE, LightCondensed.ihomPoints_symm_comp; returned types read.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal adjunction structures, exponentiable morphism counits, product comparison projections, algebraic etale topology or condensed modules do not state this derived compact-support site comparison equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A base change mate between derived direct images commutes with the counit-defined tensor projection morphism",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit; returned types read.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal adjunction structures, exponentiable morphism counits, product comparison projections, algebraic etale topology or condensed modules do not state this derived compact-support site comparison equality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-cohomological-smoothness",
@@ -87,5 +235,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-projection-comparison-etale-origin",
+  "worker": "stage1",
+  "summary": "Seven-step split with no new nodes. Checks bounded-below comparison domains using the Tor hypothesis on H alone, applies ringed-topos projection/exchange coherence to the proper part, verifies the open tensor square by restriction and full faithfulness, and pastes/cancels the specified comparisons. The statement and all statement dependencies are retained. No absolute separatedness assumption is added.",
+  "blueprint": "Realizes the main-20261015 first paragraph, sentence “Because the map is obtained by transposing the projection formula and counit on both sites”, namely the projection-map comparison extracted by thm-pur-cohomological-smoothness Step 5. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Properness gives qcqs for the proper compactification factor; this is a generic geometric hypothesis check."
+   },
+   {
+    "node": "lem-kun-0f1m",
+    "why": "Generic lower Tor-bound K-flat model and pullback stability ensure the bounded-below comparison domains."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic exactness of ordinary etale extension gives the bounded-below inputs and degreewise comparison."
+   },
+   {
+    "node": "lem-kun-derived-tensor-t-est",
+    "why": "Generic lower Tor tensor estimate ensures both tensor inputs are in D+ without requiring Tor amplitude of M."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-topos tensor comparison fixes the tensor identifications on both sites."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic site pullback comparison fixes the comparison square and target identification."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic qcqs comparison supplies the specified counit mate, its naturality and invertibility."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic ringed-topos projection/exchange square supplies proper projection coherence for site comparison; the cohomological-smoothness unit has no replacement."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic canonical open site comparison supplies the open factor."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Generic pro-etale extension exactness permits the degreewise comparison on complexes."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic ordinary etale tensor identity fixes the open projection and its restriction."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open-adjunction full faithfulness and normalization detect the open square after restriction; no smoothness is used."
+   },
+   {
+    "node": "lem-pur-compact-support-site-coherence",
+    "why": "Only its explicit formula for the canonical chosen-compactification site comparison is used; no composition or restriction result replaces a unit step."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic bounded-below compact-support site comparison is the specified C from the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-proper-basic",
+  "lem-kun-0f1m",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-kun-derived-tensor-t-est",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-extension-by-zero-exact",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-compact-support-site-coherence",
+  "lem-sf-class-compact-support-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q92-cc5a4eb9a",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-cc5a4eb9a (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements and source passages. All seven steps correctly compare the specified proper/open projection maps; Tor bounds, mate directions and coefficient categories check out. No new nodes, cycles, forbidden trace/duality uses or long non-elementary steps. Accepted all fourteen declared tool uses. Detailed checks recorded in review.md; no fixes needed."
  }
 }

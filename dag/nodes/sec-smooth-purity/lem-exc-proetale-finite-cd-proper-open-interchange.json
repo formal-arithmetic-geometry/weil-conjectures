@@ -24,9 +24,101 @@
   "lem-exc-proetale-derived-open-restriction",
   "prop-exc-open-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the small skeleton and coefficient universe specified for each small pro-etale site. By [prop-pur-kinjective-resolutions-exist], its category of constant-$A$ module sheaves is Grothendieck abelian and admits functorial K-injective replacements with injective terms. Represent $M$ by such a complex $J$. Exactness of $k_!$ in [lem-weil-extension-by-zero-exact] makes $k_!J$ represent $k_!M$; choose a replacement $a:k_!J\\to I$ with $I$ K-injective and degreewise injective. The operations of [def-weil-pbc-proetale-operations] compute $Rr_*M$ by $r_*J$ and $Rp_*k_!M$ by $p_*I$. Exactness of $i_!$ computes $i_!Rr_*M$ by $i_!r_*J$. Thus these are representatives in exactly the ordinary, uncompleted unbounded categories of the statement.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-extension-by-zero-exact",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K (lemma-enough-K-injectives-implies); ringed-site application: sites-cohomology.tex, Section 07A5; injectives.tex, Theorem 079P"
+   }
+  },
+  {
+   "text": "For each $s\\in\\mathbf Z$, $J^s$ is an injective module sheaf on $U$. The Cartesian square, properness of $p$, finite constant coefficient ring, and the all-sheaf bound $d$ satisfy precisely the hypotheses of [lem-exc-proetale-cartesian-open-injective-acyclic]. It gives $R^qp_*(k_!J^s)=0$ for every $q>0$. Each $I^s$ is also $p_*$-acyclic by [lem-weil-pbc-derived-functor-injective-vanishing], since it is injective. These are termwise acyclicity statements, not a claim that $k_!$ preserves injectives. Neither argument requires a lower bound on $s$ or quasi-compactness of the open.",
+   "uses": [
+    "lem-exc-proetale-cartesian-open-injective-acyclic",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Retained repaired proof Step 3: injective-acyclicity input; etale analogue only, more-etale.tex Tag 0F7B (lemma-shriek-proper-and-open), case (b)"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-finite-cd-acyclic-complex] to $F=p_*$ between the module-sheaf categories. The source is Grothendieck by [prop-pur-kinjective-resolutions-exist]; the target is abelian, and $p_*$ is additive and left exact by its sectionwise definition in [def-weil-pbc-proetale-operations] (kernels are computed sectionwise). Its finite-CD hypothesis is exactly the assumed vanishing for every module sheaf on $V$; in Tag 07K7 take $n=d+1$. Step 2 makes both $k_!J$ and $I$ eligible for that lemma. Its natural comparison gives\n$$\\alpha_I\\circ Q(p_*a)=Rp_*(Qa)\\circ\\alpha_{k_!J}.$$\nBoth $\\alpha$ components are isomorphisms and $Qa$ is an isomorphism, so $Q(p_*a)$ is an isomorphism. Apply the specified natural sheaf isomorphism [lem-exc-proetale-proper-open-sheaf-comparison] degreewise to get a chain isomorphism $\\gamma_J:i_!r_*J\\to p_*k_!J$. Its composite with $p_*a$ therefore defines the required isomorphism $\\Gamma_M$.",
+   "uses": [
+    "lem-kun-finite-cd-acyclic-complex",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-proetale-operations",
+    "lem-exc-proetale-proper-open-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7 (lemma-unbounded-right-derived), (1)-(2) and naturality of the derived comparison"
+   }
+  },
+  {
+   "text": "Here is the choice and morphism check for that composite. A morphism $M\\to M'$ is represented by a chain map $h:J\\to J'$ unique up to homotopy, by [lem-weil-pbc-kinjective-hom-derived]. Write $a':k_!J'\\to I'$ for the second replacement. Since $I'$ is K-injective and $Qa$ is invertible, the same Hom bijection produces $b:I\\to I'$ with $ba$ homotopic to $a'k_!h$, uniquely up to homotopy. Applying additive $p_*$ preserves that homotopy. Naturality of $\\gamma$ in [lem-exc-proetale-proper-open-sheaf-comparison] then gives\n$$Q(p_*b)\\circ\\Gamma_M=\\Gamma_{M'}\\circ Q(i_!r_*h).$$\nThese outer maps compute the derived images by [def-weil-pbc-proetale-operations]; hence this is naturality in $M$. Changing $h$, $b$, or $a$ changes no map in the localization. For different representatives or replacements, perform the same construction over $1_M$; the Hom bijection gives the canonical comparison isomorphisms and the same equation identifies the two displayed composites. Thus the resulting map is independent of every choice.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-exc-proetale-proper-open-sheaf-comparison",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), (2)-(3); Tag 070K (lemma-enough-K-injectives-implies)"
+   }
+  },
+  {
+   "text": "Compute its restriction using [lem-exc-proetale-derived-open-restriction]. This node supplies the normalization $i^*p_*I=r_*k^*I$ on [def-pur-kinjective-complex], asserts that $k^*I$ is K-injective, and identifies $k^*k_!J$ with $J$ by the open unit [lem-exc-proetale-open-unit]. Exact $k^*$ turns $a$ into a quasi-isomorphism; write $c:J\\to k^*I$ for $k^*a$ composed with that unit. Thus $r_*c$ is the comparison between the two K-injective computations of $Rr_*M$. The sheaf normalization of [lem-exc-proetale-proper-open-sheaf-comparison] says that $i^*\\gamma_J$ is the identity after these open-unit and restriction identifications. Consequently $i^*\\Gamma_M$ is represented by $r_*c:r_*J\\to r_*k^*I$. By the specified normalization of the derived restriction node, $\\lambda_M$ is represented by the inverse of this comparison. Therefore\n$$\\lambda_M\\circ i^*\\Gamma_M=1_{Rr_*M}.$$\nThis checks the specified morphism itself, rather than just comparing the two objects.",
+   "uses": [
+    "lem-exc-proetale-derived-open-restriction",
+    "lem-exc-proetale-proper-open-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives); Tag 070I (lemma-K-injective); termwise open restriction as specified in the cited nodes"
+   }
+  },
+  {
+   "text": "Let $X=Rr_*M$ and $Y=Rp_*k_!M$. Under the derived adjunction $i_!\\dashv i^*$ of [prop-exc-open-adjoint], a map $t:i_!X\\to Y$ corresponds to $i^*t\\circ\\eta_X:X\\to i^*Y$. The open-unit identification in [lem-exc-proetale-derived-open-restriction] (using [lem-exc-proetale-open-unit]) identifies $\\eta_X$ with the identity; thus Step 5 says that the adjunct of $\\Gamma_M$ is $\\lambda_M^{-1}$. The inverse adjunction formula sends $s:X\\to i^*Y$ to $\\varepsilon_Y\\circ i_!s$. It gives exactly\n$$\\Gamma_M=\\varepsilon_i\\circ i_!(\\lambda_M^{-1}).$$\nAll hypotheses used were the stated all-sheaf finite-CD bound and proper/open Cartesian geometry. No truncation, completion, constructibility, etale-origin condition, or quasi-compactness of $i$ has entered.",
+   "uses": [
+    "prop-exc-open-adjoint",
+    "lem-exc-proetale-derived-open-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Retained repaired proof Step 3: open-adjunction normalization of the finite-CD proper/open comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-extension-by-zero-exact",
+  "def-weil-pbc-proetale-operations",
+  "lem-exc-proetale-cartesian-open-injective-acyclic",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-exc-proetale-proper-open-sheaf-comparison",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-exc-proetale-derived-open-restriction",
+  "prop-exc-open-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 07K7 (lemma-unbounded-right-derived), (1)-(2), applied to the existing pro-etale injective-acyclicity and sheaf-comparison nodes; Tags 070I and 08BJ for resolution comparison and open restriction. This is an agent adaptation, not a claim that the etale Tag 0F7B proves a pro-etale theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +154,52 @@
    "results": "{\"t\": \"2026-10-17T09:00:38Z\", \"tool\": \"grep\", \"query\": \"KInjective|rightDerived|cohomological dimension\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"e3cdfb8dcbda05ee\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected results concern structure-sheaf modules, generic derived functors or abstract mates; they do not state this fixed-coefficient small-site comparison or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open|open.*proper|extensionByZero|lowerShriek",
+   "results": "{\"t\": \"2026-10-17T13:14:34Z\", \"tool\": \"grep\", \"query\": \"proper.*open|open.*proper|extensionByZero|lowerShriek\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\"], \"digest\": \"3adc2845611956ca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; generic Kan-extension/derived-functor, condensed-module, bounded-support, or scheme-morphism results do not state the specified ordinary pro-etale derived proper/open comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derive the proper open support comparison on unbounded complexes using finite cohomological dimension and acyclicity of extension by zero of injectives",
+   "results": "{\"t\": \"2026-10-17T13:14:34Z\", \"tool\": \"leansearch\", \"query\": \"Derive the proper open support comparison on unbounded complexes using finite cohomological dimension and acyclicity of extension by zero of injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isStrictlyLE_iff\", \"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\", \"CochainComplex.isStrictlyGE_iff\", \"CochainComplex.isStrictlyGE_of_ge\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"HomologicalComplex.acyclic_truncLE_iff_isSupportedOutside\", \"CochainComplex.isZero_of_isStrictlyGE\", \"CochainComplex.isStrictlyGE_of_iso\"], \"digest\": \"95142a0a66edda4e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; generic Kan-extension/derived-functor, condensed-module, bounded-support, or scheme-morphism results do not state the specified ordinary pro-etale derived proper/open comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-17T13:14:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc\", \"CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.Derives.isIso_of_isRightDerivedFunctor\", \"CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso\", \"CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_iff_isIso\", \"CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\"], \"digest\": \"f21cd4d9722879b0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; generic Kan-extension/derived-functor, condensed-module, bounded-support, or scheme-morphism results do not state the specified ordinary pro-etale derived proper/open comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite cohomological dimension proper direct image on proetale module sheaves commutes with extension by zero on unbounded derived categories",
+   "results": "{\"t\": \"2026-10-17T13:14:36Z\", \"tool\": \"leanfinder\", \"query\": \"For finite cohomological dimension proper direct image on proetale module sheaves commutes with extension by zero on unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"localCohomology.diagram\", \"Condensed.profiniteSolidification\", \"Condensed.profiniteSolidCounit\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\"], \"digest\": \"c8ac948a7de47430\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; generic Kan-extension/derived-functor, condensed-module, bounded-support, or scheme-morphism results do not state the specified ordinary pro-etale derived proper/open comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|cohomological.?[dD]imension|finite.?[cC]ohomological",
+   "results": "{\"t\": \"2026-10-17T13:14:52Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|lowerShriek|cohomological.?[dD]imension|finite.?[cC]ohomological\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; generic Kan-extension/derived-functor, condensed-module, bounded-support, or scheme-morphism results do not state the specified ordinary pro-etale derived proper/open comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension by zero commutes with right derived proper pushforward, with inverse open restriction as its adjunction transpose",
+   "results": "{\"t\": \"2026-10-17T13:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"An exact extension by zero commutes with right derived proper pushforward, with inverse open restriction as its adjunction transpose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"digest\": \"50cdca870d9dd4a8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; generic Kan-extension/derived-functor, condensed-module, bounded-support, or scheme-morphism results do not state the specified ordinary pro-etale derived proper/open comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-exc-base-change-proper",
@@ -82,5 +216,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-proetale-finite-cd-proper-open-interchange",
+  "worker": "stage1",
+  "summary": "Statement preserved. Six steps derive the specified termwise sheaf comparison using the existing arbitrary-open Cartesian injective-acyclicity node and generic finite-CD acyclic-complex theorem, then check resolution independence, naturality, restriction normalization and its open-adjunction transpose. No new nodes or Mathlib leaves.",
+  "blueprint": "prop-exc-base-change-proper, retained repaired proof Step 3: construct the all-unbounded finite-CD proper/open map and normalize its open transpose. The current main-20261015 proof Step 3 cites ambient dual base change rather than proving this extracted obligation.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-finite-cd-acyclic-complex",
+    "why": "Generic unbounded finite-CD acyclic-complex computation; it converts the existing same-unit injective-acyclicity input into the derived comparison and does not replace the unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Grothendieck module-sheaf and degreewise injective K-injective replacement theorem needed to form the displayed representatives."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Hom bijection for a K-injective target makes the resolution comparison and its homotopies canonical."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Exact open extension descends to the ordinary derived categories and makes k_!J represent k_!M; this is generic localization infrastructure."
+   },
+   {
+    "node": "prop-exc-open-adjoint",
+    "why": "The general derived open adjunction supplies the Hom bijection and counit formula for the required normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-finite-cd-acyclic-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-extension-by-zero-exact",
+  "prop-exc-open-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-0776fc3bd",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-0776fc3bd (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, source passages, and unit/chapter route. All six steps establish the specified map and normalization in ordinary unbounded constant-ring pro-etale modules. No new nodes, duplicate split, oversized steps, prohibited SGA route, or forbidden batch-5 proof dependencies. Accepted all five declared tool uses. Detailed checks and inherited snapshot issues are recorded in review.md; no fixes needed."
  }
 }

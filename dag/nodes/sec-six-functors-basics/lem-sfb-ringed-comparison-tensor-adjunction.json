@@ -17,9 +17,64 @@
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-adjunction-conjugate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $h_i=g_i\\circ f_i$, $Q_i=Lh_i^*$ and $S_i=Rh_{i*}$. Apply [lem-sfb-ringed-derived-monoidal-comparisons] to each composable pair $(f_i,g_i)$ and to the specified ring-compatible 2-isomorphism between $h_1$ and $h_2$. This gives the canonical comparisons $a_i:Q_i\\xrightarrow{\\sim}P_i$, $\\kappa_i:S_i\\xrightarrow{\\sim}V_i$, and the induced comparisons $s:Q_2\\xrightarrow{\\sim}Q_1$, $r:S_1\\xrightarrow{\\sim}S_2$. They have exactly the K-flat pullback and normalized direct-image meanings used in the statement. Unwinding the two paths therefore gives $\\theta=a_1\\circ s\\circ a_2^{-1}$ and $c=\\kappa_2\\circ r\\circ\\kappa_1^{-1}$. Write $T_{i,K,H}:Q_i(K\\otimes^LH)\\to Q_iK\\otimes^LQ_iH$ for the tensor comparison for $h_i$. The lemma applies to arbitrary structural ring maps and unbounded complexes; no exactness of the module pullbacks is needed.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); apply the existing general coherence lemma to the two paths and the specified 2-isomorphism"
+   }
+  },
+  {
+   "text": "The monoidality assertions of [lem-sfb-ringed-derived-monoidal-comparisons] say\n$$d_i\\circ a_{i,K\\otimes^LH}=(a_{i,K}\\otimes^La_{i,H})\\circ T_i,\\qquad T_1\\circ s_{K\\otimes^LH}=(s_K\\otimes^Ls_H)\\circ T_2.$$\nSuppressing the displayed $K,H$ subscripts on $d_i,T_i$, substitute these equalities into the expression for $\\theta$ from step 1:\n$$\\begin{aligned}\nd_1\\circ\\theta_{K\\otimes^LH}\n&=(a_{1,K}\\otimes^La_{1,H})\\circ T_1\\circ s_{K\\otimes^LH}\\circ a_{2,K\\otimes^LH}^{-1}\\\\\n&=((a_{1,K}\\circ s_K)\\otimes^L(a_{1,H}\\circ s_H))\\circ T_2\\circ a_{2,K\\otimes^LH}^{-1}\\\\\n&=((a_{1,K}\\circ s_K)\\otimes^L(a_{1,H}\\circ s_H))\\circ(a_{2,K}^{-1}\\otimes^La_{2,H}^{-1})\\circ d_2\\\\\n&=(\\theta_K\\otimes^L\\theta_H)\\circ d_2.\n\\end{aligned}$$\nThe third line follows by composing the first displayed equality for $i=2$ with the inverses of $a_2$ and $a_{2,K}\\otimes^La_{2,H}$. All other rearrangements are associativity and bifunctoriality of tensor. This proves the tensor identity with the given $d_i$.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); elementary substitution of the existing monoidal comparison identities"
+   }
+  },
+  {
+   "text": "The adjunction compatibility in [lem-sfb-ringed-derived-monoidal-comparisons] is for the canonical adjunction $Q_i\\dashv S_i$ and the composite adjunction $P_i\\dashv V_i$ of the statement. With the conjugation convention of [def-weil-pbc-adjunction-conjugate], its composition assertion gives $a_i^c=\\kappa_i^{-1}:V_i\\to S_i$. Its 2-isomorphism assertion gives $s^c=r:S_1\\to S_2$. Conjugation reverses composition and takes inverses to inverses, by [def-weil-pbc-adjunction-conjugate]. Thus\n$$\\theta^c=(a_2^{-1})^c\\circ s^c\\circ a_1^c=\\kappa_2\\circ r\\circ\\kappa_1^{-1}=c.$$\nThe inverse on $\\kappa_1$ and absence of an inverse on $\\kappa_2$ follow from their actual types, so this identifies the specified direct-image comparison, including its normalization.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint); adjunction normalization supplied by the existing general coherence lemma and contravariant composition of conjugates"
+   }
+  },
+  {
+   "text": "Finally [def-weil-pbc-adjunction-conjugate] identifies conjugation with the mate for identity intervening functors, and [def-weil-pbc-adjunction-mate] characterizes that mate by its transpose. Apply this to $\\theta:P_2\\to P_1$ and the composite adjunctions. The transpose of $c_Z=(\\theta^c)_Z$ under $P_2\\dashv V_2$ is, by that characterization, $e_{1,Z}\\circ\\theta_{V_1Z}$. By the definition of the adjunction transpose of a map $V_1Z\\to V_2Z$, it is also $e_{2,Z}\\circ P_2(c_Z)$. Equating the two descriptions yields\n$$e_{2,Z}\\circ P_2(c_Z)=e_{1,Z}\\circ\\theta_{V_1Z}:P_2V_1Z\\longrightarrow Z,$$\nas required.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 07A7 (remark-base-change), transpose-of-counit convention; the displayed identity is the defining transpose characterization of the mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D, 07A4, 07A6, 0D6E; formal two-path deduction from the existing general coherence statement lem-sfb-ringed-derived-monoidal-comparisons and the mate definitions; not a claim that Stacks prints these equations verbatim"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -131,8 +186,8 @@
      "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean",
      "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
      "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
-     "Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean",
-     "Mathlib/CategoryTheory/Monoidal/Limits/Shapes/Pullback.lean"
+     "Mathlib/CategoryTheory/Monoidal/Limits/Shapes/Pullback.lean",
+     "Mathlib/CategoryTheory/Monoidal/Limits/HasLimits.lean"
     ],
     "note": ""
    },
@@ -141,7 +196,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-kunneth-factorizations",
@@ -160,5 +215,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-ringed-comparison-tensor-adjunction",
+  "worker": "stage1",
+  "summary": "Four-step formal two-path deduction from the existing general ringed-topos monoidal and adjunction coherence lemma. Expanded the tensor equation and reversed conjugate-composition order explicitly; extracted the counit equation using the mate transpose definition. No statement change, no new nodes, no attachment, and no compiler use. Rechecked the existing Mathlib search queries with the required logged command.",
+  "blueprint": "det-prop-p1-adjunction-rational-triangle, First identity: canonical direct-image identifications Rq_*Rp_{2*}=R(qp_2)_*=R(qp_1)_*=Rq_*Rp_{1*}, used together with the tensor and adjunction normalizations when expanding projection and exchange maps. This item provides their two-path compatibility, not either triangle identity itself.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q62-67a82e8e6",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-67a82e8e6 (reviewer sub-agent of L); spot-checked: Read all required instructions, DAG records, item, cited nodes, unit/chapter route, Stacks Tags 0D6D, 07A4, 07A6, 0D6E and Remark 07A7. Verified typing, hypotheses, monoidal substitution, conjugate direction, mate counit formula, nonflat and zero cases, route compliance, searches, and absence of long hidden lemmas. No new nodes or repairs are needed; review.md records the checks."
  }
 }

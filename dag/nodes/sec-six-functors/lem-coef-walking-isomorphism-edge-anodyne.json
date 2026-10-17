@@ -10,9 +10,41 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the alternating-word filtration in [lem-coef-walking-isomorphism-alternating-horn-filtration]. Given a lifting square with the edge $i$ on the left and a map $p:E\\to B$ having the right lifting property against every horn, lift first over the forward edge $J_1=i(\\Delta^1)$. At each stage $n\\geq2$, the new simplex is attached along $\\Lambda^n_0\\hookrightarrow\\Delta^n$, so the already constructed map on $J_{n-1}$ and the prescribed map to $B$ form a horn lifting square for $p$; choose its filler and glue it by the pushout property. The choices are compatible because each filler extends the preceding stage. Taking the degreewise union over $n$ gives a simplicial map $J\\to E$ extending the original map on $\\Delta^1$ and making the square commute. This is exactly the required diagonal filler.",
+   "uses": [
+    "lem-coef-walking-isomorphism-alternating-horn-filtration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UG",
+    "place": "Subsection 3.1.2, Definition 3.1.2.1 and Remark 3.1.2.6; horn-by-horn lifting along the explicit alternating filtration."
+   }
+  },
+  {
+   "text": "The filtration node identifies $J$ with the ordinary nerve of the two-object groupoid and identifies $J_1$ with the nerve of the functor $[1]\\to\\mathcal J$ carrying its nonidentity arrow to $0\\to1$, so the map used in Step 1 is the stated $i$. In each degree $J$ has finitely many simplices, and the filtration and compatible union are countable constructions in the common input universe. If $E$ is empty there is no map $\\Delta^1\\to E$ furnishing a lifting square; if $B$ is empty there is no map $J\\to B$. Those cases are therefore vacuous. Step 1 constructs a diagonal for every square against every map $p$ satisfying the all-horn lifting hypothesis explicitly stated in the item. This is exactly its asserted Kan-anodyne lifting property.",
+   "uses": [
+    "lem-coef-walking-isomorphism-alternating-horn-filtration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UG",
+    "place": "Subsection 3.1.2, opening paragraph and Remark 3.1.2.7 for the all-horn lifting terminology; endpoint, universe and empty-input checks are agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-walking-isomorphism-alternating-horn-filtration",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00UG",
+  "place": "Subsection 3.1.2, Definition 3.1.2.1 and Remark 3.1.2.6; explicit alternating-word horn filtration and its lifting argument, written out here because no archival source states this special edge."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,7 +107,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-fiber-path-reversal",
@@ -87,8 +119,9 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient adjunction and inverse-limit calculation: coherent diagram rectification foundation, via the finite-colimit approximation lemma; Cisinski Lemma 7.6.7, proof, forming the limit and the coherent triangle from the approximation. Supporting the path-orientation comparison used by the finite-core fiber contraction: extending a path to the walking isomorphism.",
+   "place": "Proof paragraph 2, derived coefficient adjunction and inverse-limit calculation: supporting the path-orientation comparison used by the finite-core fiber contraction, by extending a path to the walking isomorphism via an alternating-simplex horn filtration.",
    "via": [
+    "lem-coef-walking-isomorphism-edge-anodyne",
     "lem-coef-kan-fiber-path-reversal",
     "lem-coef-finite-core-fiber-contraction",
     "lem-coef-finite-colimit-approximation",
@@ -117,5 +150,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-walking-isomorphism-edge-anodyne",
+  "worker": "stage1",
+  "summary": "Audited the imported statement and preserved its exact groupoid, forward-edge, all-horn lifting, and universe clauses. Added one strictly smaller statement-only node recording the alternating-word horn filtration of the walking-isomorphism nerve. The item proof applies the given horn lifts stage by stage and takes the compatible degreewise union; it does not cite proof text from another node. No Lean declaration attaches to this item.",
+  "blueprint": "Realizes the walking-isomorphism extension used in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, specifically the path-orientation comparison supporting finite-core fiber contraction, through the alternating-simplex horn filtration.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q56-d852bdb8c",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-d852bdb8c (reviewer sub-agent of L); spot-checked: Read both nodes and cited mathematics in full. Filtration and lifting argument verified, including 19,377 finite combinatorial checks. Corrected Step 2’s mistaken Kan-fibration definition attribution; statements unchanged. No duplicates, cycles, long-step violations, or forbidden batch-5 dependencies found. Wrote review.md and corrected item JSON under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

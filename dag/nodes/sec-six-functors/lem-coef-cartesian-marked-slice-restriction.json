@@ -13,9 +13,67 @@
   "lem-coef-marked-anodyne-lifting-calculus",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix n≥0 and a boundary lifting square for the displayed restriction map. By the definitions of the ordered join slices and of degreewise pullback, its data are exactly a simplicial map h from J_n=((∂Δ[n]⋆V)∪_{∂Δ[n]⋆U}(Δ[n]⋆U)) to E, a map β:Δ[n]⋆V→B, and the equality ph=β|_{J_n}; h restricts to q on the V-part of ∂Δ[n]⋆V and β restricts to pq on V. An extension σ:Δ[n]⋆V→E with σ|_{Δ[n]⋆U} equal to the prescribed E-slice simplex and pσ=β is precisely a diagonal for this square. The formula also covers n=0 because ∂Δ[0] is empty.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.11, reduction of the boundary lifting problem to the ordered-join pushout"
+   }
+  },
+  {
+   "text": "Check the four generator families in [lem-coef-marked-anodyne-lifting-calculus] directly. For U=Λ_i^k and V=Δ^k, concatenate the n+1 initial vertices with the k+1 final vertices to identify Δ[n]⋆Δ[k] with Δ[n+k+1]. Under this identification J_n is Λ_{n+1+i}^{n+k+1}: its first summand contains precisely the faces omitting an initial vertex, and its second contains the faces omitting a final vertex other than n+1+i. This also proves the equality on all simplices, since membership in each of these simplicial subsets is determined by the image of its vertex map. For family (i), 0<i<k, hence 0<n+1+i<n+k+1, and the inner-fibration property of p gives the filler. For family (ii), i=k and k≥1, so this is the final horn of dimension n+k+1≥2. Its final edge lies in the prescribed V-part and is q applied to the marked final edge of Δ[k]; the defining p-Cartesian horn condition therefore gives the filler. This includes k=1, even though that edge is absent from the original horn U. Families (iii) and (iv) are identities on underlying simplicial sets. For either, J_n→Δ[n]⋆V is consequently an isomorphism, so h itself gives the required underlying simplicial filler; there is no marking to extend in E. These computations use the ordered join, not the Cartesian-product pushout product.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.1.1, families (1)-(4), and Proposition 3.1.1.11, printed p.151 (PDF page 169): explicit ordered-join horn calculation, with the Cartesian outer-horn condition of def-coef-infinity-fibrations."
+   }
+  },
+  {
+   "text": "The preceding cell argument is stable under the closure operations defining marked-anodyne maps. A pushout stage is solved by composing the already constructed diagonal with the pushout universal property; at a transfinite stage, the compatible diagonals on earlier stages assemble because simplicial sets and their marked-edge subsets are degreewise colimits; and a retract stage is solved by inserting the retract and projection maps. Therefore every map J_n→E over β extends to Δ[n]⋆V→E, with the extension agreeing on Δ[n]⋆U and projecting exactly to β. This proves the required boundary lifting for every n≥1 and the vertex-surjectivity case n=0.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.11, closure of the marked-anodyne cell argument"
+   }
+  },
+  {
+   "text": "By the definition of trivial Kan fibration, surjectivity on 0-simplices together with the boundary fillers for every n≥1 is exactly the assertion that E_{/q}→E_{/q_0}×_{B_{/pq_0}}B_{/pq} is a trivial Kan fibration. Since every diagonal was constructed over the prescribed β and relative to the prescribed Δ[n]⋆U-map, the restriction and base-projection equalities are strict, giving the stated exact agreement and the dimension-zero lifting assertion.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.11, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-marked-anodyne-lifting-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit ordered-join generator and weak-saturation argument checked against HTT Definition 3.1.1.1 and Proposition 3.1.1.11, with the Cartesian horn convention of def-coef-infinity-fibrations. Source read online; archival copy WANTED, as recorded in the delivery report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +144,38 @@
    "results": "{\"t\": \"2026-10-17T11:25:48Z\", \"tool\": \"leanfinder\", \"query\": \"The relative overcategory restriction for an inner fibration has boundary lifting whenever the indexing inclusion is marked anodyne and the marked diagram edges are Cartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"HomotopicalAlgebra.fibrations_over_def\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverFibrations\"], \"digest\": \"50606f828c8e18d5\"}",
    "date": "2026-10-17",
    "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked-anodyne inclusion with Cartesian marked diagram induces trivial Kan fibration on relative ordered join slices",
+   "results": "SSet.modelCategoryQuillen.J; SSet.modelCategoryQuillen.I; SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; SSet.modelCategoryQuillen.horn_ι_mem_J; SSet.modelCategoryQuillen.instCategoryWithFibrations; SSet.modelCategoryQuillen.fibrations_eq; SSet.modelCategoryQuillen.boundary_ι_mem_I; SSet.modelCategoryQuillen.instCategoryWithCofibrations; none states the marked Cartesian join-slice theorem",
+   "date": "2026-10-17",
+   "verdict": "No match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"Cartesian\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "No match"
+  },
+  {
+   "tool": "grep",
+   "query": "marked.*anodyne|cartesian.*edge|join.*slice [Mathlib/AlgebraicTopology]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "No match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ordered join slice restriction is a trivial Kan fibration for marked-anodyne maps carrying marked edges to Cartesian edges",
+   "results": "HomotopicalAlgebra.mem_trivialFibrations_iff; SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; HomotopicalAlgebra.trivialFibrations_sub_fibrations; SSet.modelCategoryQuillen.instCategoryWithFibrations; HomotopicalAlgebra.trivialFibrations; HomotopicalAlgebra.trivialFibrations_over_eq; HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations; HomotopicalAlgebra.instFibrationPTrivialCofibrationsFibrations; none states the marked Cartesian join-slice theorem",
+   "date": "2026-10-17",
+   "verdict": "No match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-comma-normalization",
@@ -101,7 +187,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: coherent finite mapping-complex adjunction in the derived inverse limit; the endpoint-normalization subargument of the twisted comma resolution, specifically extension of its universal join cone across Cartesian edges.",
+   "place": "Technical marked-anodyne slice-extension input for the finite-coefficient mapping-complex argument in paragraph 2: restriction of ordered join slices across Cartesian-marked anodyne inclusions.",
    "via": [
     "lem-coef-cartesian-comma-normalization",
     "lem-coef-cartesian-terminal-twisted-resolution",
@@ -120,5 +206,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-marked-slice-restriction",
+  "worker": "stage1",
+  "summary": "The unchanged relative ordered-join slice statement is proved by translating boundary lifting into J_n, computing J_n explicitly as a single shifted horn for generator families (i) and (ii), observing that families (iii) and (iv) are underlying identities, extending the lifting property under pushouts, transfinite compositions and retracts, and applying the explicit trivial-Kan definition including n=0. No Cartesian-product-to-join comparison is used, and no new nodes are needed.",
+  "blueprint": "Realizes the technical marked-anodyne ordered-join slice-extension input used in the finite-coefficient mapping-complex argument (paragraph 2) of prop-coef-integral-exceptional-adjoint."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-46c7cb56f",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-46c7cb56f (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired Step 2’s unsupported Cartesian-product-to-join claim using explicit shifted-horn identities and marking-only identity cases; corrected proof-origin metadata. Statements and dependencies unchanged. Small-case checks and acyclicity passed. Full findings are in review.md; corrected JSON is under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

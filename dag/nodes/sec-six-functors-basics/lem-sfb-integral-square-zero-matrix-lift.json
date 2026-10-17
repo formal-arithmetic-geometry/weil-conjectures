@@ -6,11 +6,57 @@
  "stmt_deps": [
   "def-weil-matrix"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use matrices as finite families of entries, as in [def-weil-matrix], with $(UV)_{ij}=\\sum_{k=1}^r U_{ik}V_{kj}$ and identity entries $\\delta_{ij}$. Let $q:R\\to R/I$ send an element to its additive coset. Every coset has a representative, so choose representatives for the finitely many entries of $\\overline B^{-1}$ to obtain $C$; when $r=0$ there are no choices. For the rest of the proof let $C$ be any such lift. The quotient operations are $q(x+y)=q(x)+q(y)$ and $q(xy)=q(x)q(y)$. Applying these entrywise to the finite product sums gives $\\overline{BC}=\\overline B\\,\\overline C=1$ and $\\overline{CB}=\\overline C\\,\\overline B=1$. Thus $N_{ij}=(BC-1)_{ij}$ and $P_{ij}=(CB-1)_{ij}$ have zero coset, which means precisely that they belong to $I$.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), p.59, proof (1) left to the reader; explicit elementary square-zero matrix calculation supplied here"
+   }
+  },
+  {
+   "text": "Every summand $N_{ik}N_{kj}$ and $P_{ik}P_{kj}$ is zero by the hypothesis on pairs of elements of $I$. Hence, entrywise, $(N^2)_{ij}=\\sum_{k=1}^r N_{ik}N_{kj}=0$ and $(P^2)_{ij}=\\sum_{k=1}^r P_{ik}P_{kj}=0$, so $N^2=P^2=0$. The matrix identities used below are the ring identities: distributivity follows by distributing each finite sum, and associativity follows from $\\sum_{k,l}(U_{ik}V_{kl})W_{lj}=\\sum_{k,l}U_{ik}(V_{kl}W_{lj})$ and reordering finite sums in the additive abelian group of $R$. Identity multiplication follows by summing $\\delta_{ij}$. None of these calculations changes the order of scalar factors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), p.59, proof (1) left to the reader; explicit elementary square-zero matrix calculation supplied here"
+   }
+  },
+  {
+   "text": "Since $BC=1+N$, associativity and distributivity give $$B\\bigl(C(1-N)\\bigr)=(BC)(1-N)=(1+N)(1-N)=1-N+N-N^2=1.$$ Similarly, $CB=1+P$ gives $$\\bigl((1-P)C\\bigr)B=(1-P)(CB)=(1-P)(1+P)=1+P-P-P^2=1.$$ Thus the proposed matrices are respectively a right and a left inverse of $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), p.59, proof (1) left to the reader; explicit elementary square-zero matrix calculation supplied here"
+   }
+  },
+  {
+   "text": "Their equality follows by expanding the correction terms, without any commutativity assumption: $$C(1-N)=C-C(BC-1)=C-(CBC-C),$$ $$ (1-P)C=C-(CB-1)C=C-(CBC-C).$$ Their common value therefore satisfies both inverse identities from step 3 and is a two-sided inverse of $B$. For $r=0$, matrices have no entries, the unique matrix is both $0$ and $1$, and all the entrywise equalities and displayed identities remain valid.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), p.59, proof (1) left to the reader; explicit elementary square-zero matrix calculation supplied here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1), p.59, proof (1) left to the reader; explicit elementary square-zero matrix calculation supplied here",
+  "note": "The source explicitly omits the proof of (1); this is the elementary algebra calculation needed in the parent reduction-equivalence proof, not a quotation of an unavailable source."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-integral-lisse-reduction-equivalence",
@@ -93,12 +139,61 @@
    "results": "8 hits: Matrix.right_inv_eq_left_inv, Matrix.inv_eq_right_inv, Matrix.invertibleOfRightInverse, Matrix.inv_eq_left_inv, TrivSqZeroExt.instInv, TrivSqZeroExt.mul_inv_rev, TrivSqZeroExt.isUnit_inv_iff, Matrix.invertibleOfLeftInverse",
    "date": "2026-10-17",
    "verdict": "no match: IsNilpotent.isUnit_quotient_mk_iff (RingTheory/Ideal/Quotient/Nilpotent.lean:53) is for elements of a commutative ring; matrix rings need not commute. TrivSqZeroExt results require a split extension, while a square-zero quotient need not split (e.g. Z/4 to Z/2). Neither states the explicit inverse identities here."
+  },
+  {
+   "tool": "grep",
+   "query": "right_inv_eq_left_inv|isUnit_quotient_mk_iff|isUnit.*[Ss]q|mul_self.*zero",
+   "results": "25 hits: Mathlib/NumberTheory/Dioph.lean, Mathlib/NumberTheory/Bertrand.lean, Mathlib/NumberTheory/LegendreSymbol/QuadraticChar/Basic.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Order.lean, Mathlib/NumberTheory/Zsqrtd/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: quotient-unit lifting requires CommRing; trivial square-zero extension lemmas require a split extension; matrix inverse uniqueness presupposes the inverse identities. None states the full arbitrary-ring quotient result with the three explicit formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For matrices B C with (BC-1) squared and (CB-1) squared zero, C(1-(BC-1)) equals (1-(CB-1))C and is a two sided inverse of B",
+   "results": "8 hits: Matrix.right_inv_eq_left_inv, Matrix.inv_eq_right_inv, Matrix.invertibleOfLeftInverse, Matrix.mul_invOf_eq_iff_eq_mul_right, Matrix.invertibleOfRightInverse, Matrix.mul_left_eq_iff_eq_invOf_mul, Matrix.instInvOneClass, Matrix.inv_mul_cancel_left_of_invertible",
+   "date": "2026-10-17",
+   "verdict": "no match: quotient-unit lifting requires CommRing; trivial square-zero extension lemmas require a split extension; matrix inverse uniqueness presupposes the inverse identities. None states the full arbitrary-ring quotient result with the three explicit formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an arbitrary noncommutative unital ring with square zero two sided ideal, a matrix invertible modulo the ideal has inverse C times (1 minus (BC minus 1))",
+   "results": "8 hits: Matrix.invertibleAddMulMul, Matrix.dualNumberEquiv_symm_apply, TrivSqZeroExt.mul_inv_cancel, TrivSqZeroExt.invertibleEquivInvertibleFst_symm_apply_invOf, Matrix.add_mul_mul_mul_invOf_eq_one, Matrix.add_mul_mul_invOf_mul_eq_one, Matrix.add_mul_mul_mul_invOf_eq_one', Matrix.add_mul_mul_invOf_mul_eq_one'",
+   "date": "2026-10-17",
+   "verdict": "no match: quotient-unit lifting requires CommRing; trivial square-zero extension lemmas require a split extension; matrix inverse uniqueness presupposes the inverse identities. None states the full arbitrary-ring quotient result with the three explicit formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "right_inv_eq_left_inv|nilpotent|square.zero",
+   "results": "8 hits in Mathlib/LinearAlgebra/Matrix: Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean, Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: quotient-unit lifting requires CommRing; trivial square-zero extension lemmas require a split extension; matrix inverse uniqueness presupposes the inverse identities. None states the full arbitrary-ring quotient result with the three explicit formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "isUnit_quotient_mk_iff|isUnit_one_add|isUnit_one_sub|sq.*zero",
+   "results": "3 hits in Mathlib/RingTheory/Ideal: Mathlib/RingTheory/Ideal/Quotient/Nilpotent.lean, Mathlib/RingTheory/Ideal/Quotient/Nilpotent.lean, Mathlib/RingTheory/Ideal/Quotient/Nilpotent.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: quotient-unit lifting requires CommRing; trivial square-zero extension lemmas require a split extension; matrix inverse uniqueness presupposes the inverse identities. None states the full arbitrary-ring quotient result with the three explicit formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse modulo a square zero ideal lifts by the finite geometric series correction in any ring, with explicit left and right inverse formulas",
+   "results": "8 hits: TrivSqZeroExt.inv_mul_cancel, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, TrivSqZeroExt.mul_inv_cancel, TrivSqZeroExt.invertibleEquivInvertibleFst_symm_apply_invOf, derivationToSquareZeroEquivLift_symm_apply_apply_coe, factorPowSucc.isUnit_of_isUnit_image, HenselianRing, PreTilt.exists_smodEq_untiltAux",
+   "date": "2026-10-17",
+   "verdict": "no match: quotient-unit lifting requires CommRing; trivial square-zero extension lemmas require a split extension; matrix inverse uniqueness presupposes the inverse identities. None states the full arbitrary-ring quotient result with the three explicit formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "def invertibleEquivInvertibleFst|invertibleEquivInvertibleFst_symm_apply_invOf|theorem inv_mul_cancel|theorem mul_inv_cancel",
+   "results": "0 hits in Mathlib/Algebra/TrivSqZeroExt.lean: ",
+   "date": "2026-10-17",
+   "verdict": "no match: quotient-unit lifting requires CommRing; trivial square-zero extension lemmas require a split extension; matrix inverse uniqueness presupposes the inverse identities. None states the full arbitrary-ring quotient result with the three explicit formulas."
   }
  ],
  "blueprint": {
   "from": {
    "node": "det-lem-coefficient-heart-closure",
-   "place": "Ancestor proof paragraph (2), the identification with Bhatt-Scholze lisse coefficients and the integral-monodromy comparison, via Proposition 6.8.4(1): omitted square-zero matrix calculation",
+   "place": "det-lem-coefficient-heart-closure clause (2), the integral-monodromy comparison used to prove closure of lisse kernels and cokernels; via lem-sfb-integral-lisse-reduction-equivalence step 6, square-zero matrix correction in the proof omitted in Bhatt-Scholze Proposition 6.8.4(1)",
    "via": [
     "lem-sfb-integral-lisse-reduction-equivalence",
     "lem-sfb-etale-local-monodromy-realization"
@@ -115,5 +210,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-integral-square-zero-matrix-lift",
+  "worker": "stage1",
+  "summary": "Preserved the full noncommutative statement and all three explicit inverse identities. Wrote the coset-representative lift, entrywise square-zero calculation, right and left inverse calculations, and equality of the corrections. All steps are elementary and no new nodes are needed. Searched project Lean, DAG, blueprint and Mathlib; no exact attachment or whole-statement Mathlib leaf was found.",
+  "blueprint": "Supports det-lem-coefficient-heart-closure clause (2), the Bhatt-Scholze integral-monodromy comparison, through lem-sfb-etale-local-monodromy-realization and lem-sfb-integral-lisse-reduction-equivalence. More precisely it realizes the square-zero matrix correction in step 6 of the latter, supplying details omitted in Bhatt-Scholze Proposition 6.8.4(1)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-6c0324a11",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-6c0324a11 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited matrix definition, Bhatt–Scholze Proposition 6.8.4(1), and unit/chapter route. All four elementary steps correctly prove the noncommutative inverse formulas; exhaustive small-ring checks passed. No duplicates, hidden lemmas, forbidden dependencies, or repairs found. Full findings written to review.md."
  }
 }
