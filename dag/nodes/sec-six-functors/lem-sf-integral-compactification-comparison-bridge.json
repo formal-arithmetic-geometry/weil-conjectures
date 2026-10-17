@@ -23,9 +23,141 @@
   "fix-lem-exchanges",
   "lem-cbc-strict-tower-proper-open-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U_T$ for termwise restriction of a semilinear system to a constant $R$-module tower. Use the canonical identifications $U\\mathcal R=\\mathcal R^{\\mathcal T}H$ and $H\\mathcal L=\\mathcal L^{\\mathcal T}U$; restriction carries the actual quotient completion unit $u$ to $\\eta$. For each proper or open letter use the canonical operation identification and the equality $U(r_A)=q_A$ of the single-generator comparison. All suppressed identifications below are these natural identifications. This fixes the coordinate change on derived strict towers, including morphisms; it does not require scalar restriction to be faithful.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sf-constant-semilinear-generator-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; agent argument with the specified generator comparison and quotient-unit normalization."
+   }
+  },
+  {
+   "text": "For a basic proper or open letter $A$ put $N_A=A\\mathcal RM$. The generator transpose identity and the reduction/limit triangle identity give\n$$\\mathcal L(r_A)u_{A_{\\rm int}M}\n=\\mathcal L(e_{N_A})\\mathcal L\\mathcal R(d_A^{-1})u_{A_{\\rm int}M}\n=\\mathcal L(e_{N_A})u_{\\mathcal LN_A}d_A^{-1}=d_A^{-1}.$$\nFor a proper $p$, denote the canonical direct-image/limit comparison by $b_{p,N}:Rp_*\\mathcal LN\\to\\mathcal LS_pN$. Its normalization gives $d_{p,M}^{-1}=b_{p,\\mathcal RM}Rp_*(u_M)$. Indeed both are the specified direct-image/limit comparison applied after the input completion unit. This also follows in constant coordinates from the one-letter formula $a_p=\\mathcal L^{\\mathcal T}(q_p)\\eta$ and its asserted agreement with the canonical direct-image/limit comparison.",
+   "uses": [
+    "lem-sf-generator-reduction-coherence",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-sf-cbc-compact-support-composition-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, for the strict total-limit model; formal unit naturality and right triangle identity."
+   }
+  },
+  {
+   "text": "Fix one of $c_v=(j,p)$, put $N_j=J_j\\mathcal RM$, and let $D=j_!M$. The specified open comparison is $d_j:\\mathcal LN_j\\to D$. The canonical identification of $Rp_*D$ with the defining compact-support tower identifies $d_{v,M}^{-1}$ with $b_{p,N_j}Rp_*(d_j^{-1})$. This is precisely the direct-image/limit comparison followed by the prescribed open comparison, as required in the statement; no expression-realization $c_V$ is chosen. Put $r_v=(S_pr_j)r_{p,D}$. Naturality of $b_p$ and the preceding step yield\n$$\\mathcal L(r_v)u_{Rp_*D}=\\mathcal LS_p(r_j)b_{p,\\mathcal RD}Rp_*(u_D)\n=b_{p,N_j}Rp_*(\\mathcal L(r_j)u_D)\n=b_{p,N_j}Rp_*(d_j^{-1})=d_{v,M}^{-1}.$$\nThe adjunction bijection $\\operatorname{Hom}(\\mathcal R F_vM,B_v\\mathcal RM)\\cong\\operatorname{Hom}(F_vM,\\mathcal LB_v\\mathcal RM)$ sends $r$ to $\\mathcal L(r)u$. Its inverse therefore gives\n$$r_{v,M}=e_{B_v\\mathcal RM}\\circ\\mathcal R(d_{v,M}^{-1}).$$",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent calculation on the specified strict quotient towers; Tag 0941, lemma-derived-limit-is-ok, and the fixed open reduction comparison."
+   }
+  },
+  {
+   "text": "Apply $U$ to the definition $r_v=(S_pr_j)r_{p,D}$. The single-generator equalities of Step 1 and the recursive word normalization give\n$$U(r_v)=(\\widetilde S_p q_j)q_{p,J_j^cHM}=q_{W_v,HM}.$$\nHere $HD=J_j^cHM$ is the fixed completed-open identification. This is equality in the derived strict-tower category: both sides are the composite of the same two one-letter maps. The two-letter calculation in Step 3 shows why the resulting $r_v$ uses the direct $d_v$ in the question, rather than an unspecified expression realization.",
+   "uses": [
+    "lem-sf-constant-semilinear-generator-comparison",
+    "lem-sf-cbc-compact-support-composition-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent substitution in the recursive word normalization; Tag 0E48, remark-compatible-with-diagram, underlies the generator comparison."
+   }
+  },
+  {
+   "text": "For each $v$ and allowed input $M$, use Step 4, preservation of the completion unit, and the defining formula for $a$ to obtain\n$$a_{v,M}=\\mathcal L^{\\mathcal T}(U r_{v,M})H(u_{F_vM})\n=H\\bigl(\\mathcal L(r_{v,M})u_{F_vM}\\bigr)=H(d_{v,M}^{-1}).$$\nEquivalently, substituting Step 3 gives the explicit cancellation\n$$\\mathcal L(e_{B_v\\mathcal RM})\\mathcal L\\mathcal R(d_{v,M}^{-1})u_{F_vM}\n=\\mathcal L(e_{B_v\\mathcal RM})u_{\\mathcal LB_v\\mathcal RM}d_{v,M}^{-1}=d_{v,M}^{-1}.$$\nThus the single-word comparisons match the required direct identifications as maps before finite evaluation.",
+   "uses": [
+    "lem-sf-cbc-compact-support-composition-limit",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Formal unit naturality and right triangle identity on the strict total-limit model of Tag 0941."
+   }
+  },
+  {
+   "text": "For the concatenated word $W_gW_f$, use the recursive $q$ formula followed by Step 5 at the input $F_fK$:\n$$a_{g,f,K}=\\mathcal L^{\\mathcal T}(\\widetilde W_gq_{W_f,HK})a_{g,F_fK}\n=H\\bigl(\\mathcal L_Z(B_gr_{f,K})d_{g,F_fK}^{-1}\\bigr).$$\nInsert the actual transpose from Step 3:\n$$a_{g,f,K}=H\\bigl(\\mathcal L_Z(B_g(e_{B_f\\mathcal R_XK}))\\,\n\\mathcal L_ZB_g\\mathcal R_Y(d_{f,K}^{-1})\\,d_{g,F_fK}^{-1}\\bigr).$$\nAll these expressions are defined: the hypotheses supply the normalized systems, etale-origin witnesses and common finite amplitude bounds for $K$, $F_fK$ and the intermediate proper/open operations. Only functoriality distributes $B_g$ and $\\mathcal L_Z$ over the two factors.",
+   "uses": [
+    "lem-sf-cbc-compact-support-composition-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent substitution in the recursive word comparison; no exchange-pasting assertion or finite-evaluation criterion is used."
+   }
+  },
+  {
+   "text": "The semilinear system realization identifies the restriction of $\\Gamma_Q$ with the normalized strict constant-tower $\\gamma_Q$. Both $\\beta$ and $\\beta^{\\mathcal T}$ are assembled from this map and the canonical direct-image and open compositors. The one-letter scalar comparisons preserve the adjunction units and counits. Since the compositors are adjunction conjugates, mate pasting identifies their scalar-restriction comparisons with the canonical constant-tower compositors. Consequently\n$$U(\\beta_{\\mathcal R_XK})=\\beta^{\\mathcal T}_{\\mathcal R_X^{\\mathcal T}HK},\\qquad\nH\\mathcal L_Z(\\beta_{\\mathcal R_XK})=\\mathcal L_Z^{\\mathcal T}(\\beta^{\\mathcal T}).$$\nThis uses the stated comparison of actual strict-system transformations, rather than comparison of their evaluations. The supplied compatible compactification tower gives exactly the same intermediate proper/open square on both sides.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-constant-semilinear-generator-comparison",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0F7B/0F7C/0F7D, more-etale.tex, proper/open composition; their specified semilinear/constant-tower normalization is supplied by the cited statements."
+   }
+  },
+  {
+   "text": "Substitute Steps 5--7 into the stipulated defining equation\n$$H(\\alpha^{\\mathrm{cbc}}_{g,f,K})=a_{h,K}^{-1}\\mathcal L^{\\mathcal T}(\\beta^{\\mathcal T})a_{g,f,K}.$$\nIt becomes the image under $H$ of\n$$d_{h,K}\\mathcal L_Z(\\beta_{\\mathcal R_XK})\\mathcal L_Z(B_g(e_{B_f\\mathcal R_XK}))\\mathcal L_ZB_g\\mathcal R_Y(d_{f,K}^{-1})d_{g,F_fK}^{-1}.$$\nThe source and target are derived-complete integral objects, where $H$ is an equivalence and hence faithful. Equality of these two images therefore gives the asserted equality of integral morphisms. Naturality follows because each factor used above is a natural transformation, so the calculation applies to every morphism between the allowed inputs.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent substitution and faithfulness of the complete-category equivalence; the displayed formula for alpha is part of the item data."
+   }
+  },
+  {
+   "text": "For an identity compactification $B_{\\mathrm{id}}=1$ and $d_{\\mathrm{id},M}=1$, Step 3 reads $r_{\\mathrm{id},M}=e_{\\mathcal RM}$. Since $u_M$ is invertible, the left triangle gives $e_{\\mathcal RM}=\\mathcal R(u_M^{-1})$; thus the empty constant word, transported from $M$ to $F_{\\mathrm{id}}M=\\mathcal L\\mathcal RM$ by $u_M^{-1}$, has exactly this comparison. Step 5 then reads $a_{\\mathrm{id},M}=1$, since $\\mathcal L(e_{\\mathcal RM})u_{\\mathcal L\\mathcal RM}=1$. Inserting an identity therefore requires no extra unitor or arbitrary automorphism. For an empty open, extension by zero is the zero functor: the input from the empty site and all its proper/open images are zero, so both sides are the unique map between zero objects. These checks also cover a zero input.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-cbc-compact-support-composition-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Formal identity and zero-object cases, with the actual reduction/limit triangle identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sf-constant-semilinear-generator-comparison",
+  "lem-sf-generator-reduction-coherence",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-sf-cbc-compact-support-composition-limit",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Step 5; explicit normalization bridge is agent-written, using the strict-generator comparison and a reduction/total-limit adjunction calculation, not a theorem stated in the blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -82,10 +214,45 @@
    "results": "0 hits; successful query with no parser diagnostic",
    "date": "2026-10-17",
    "verdict": "no match: no declaration states the completed compactification comparison bridge."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|lowerShriek|semilinear",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: abstract derived adjunction and triangle lemmas, ordinary limits, local cohomology, continuous maps, condensed counits or ordinary adic completion do not state the compactification normalization bridge. Abstract triangle identities are used as elementary calculations, not new DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction inverse limit counit comparison for compact support composition",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux, CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit_app, CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit, CompactlySupportedContinuousMap.comp, CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app, CompHausLike.LocallyConstant.counitApp, CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_limit_map",
+   "date": "2026-10-18",
+   "verdict": "no match: abstract derived adjunction and triangle lemmas, ordinary limits, local cohomology, continuous maps, condensed counits or ordinary adic completion do not state the compactification normalization bridge. Abstract triangle identities are used as elementary calculations, not new DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.unit",
+   "results": "12 hits: CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.left_triangle_components, CategoryTheory.Adjunction.right_triangle_components, CategoryTheory.Functor.isEquivalence_of_isRightAdjoint, CategoryTheory.Adjunction.left_triangle_components_assoc, CategoryTheory.Adjunction.right_triangle_components_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: abstract derived adjunction and triangle lemmas, ordinary limits, local cohomology, continuous maps, condensed counits or ordinary adic completion do not state the compactification normalization bridge. Abstract triangle identities are used as elementary calculations, not new DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coefficients identifies strict tower word comparison maps with the transpose of the reduction total limit unit",
+   "results": "8 hits: Profinite.NobelingProof.GoodProducts.smaller_factorization, Profinite.NobelingProof.projRestricts_eq_comp, Profinite.NobelingProof.GoodProducts.max_eq_eval_unapply, Profinite.NobelingProof.GoodProducts.range_equiv_factorization, InverseSystem.PEquivOn.restrict_equiv, Profinite.NobelingProof.GoodProducts.square_commutes, Monoid.CoprodI.NeWord.toWord, Profinite.NobelingProof.projRestricts_comp_projRestrict",
+   "date": "2026-10-18",
+   "verdict": "no match: abstract derived adjunction and triangle lemmas, ordinary limits, local cohomology, continuous maps, condensed counits or ordinary adic completion do not state the compactification normalization bridge. Abstract triangle identities are used as elementary calculations, not new DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composition of derived compact support functors defined by reduction towers equals the composition using the reduction inverse limit adjunction counit",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, localCohomology.diagramComp, Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.adjunction_left_triangle, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, AlgebraicTopology.DoldKan.Compatibility.τ₁, compactumToCompHausCompForget",
+   "date": "2026-10-18",
+   "verdict": "no match: abstract derived adjunction and triangle lemmas, ordinary limits, local cohomology, continuous maps, condensed counits or ordinary adic completion do not state the compactification normalization bridge. Abstract triangle identities are used as elementary calculations, not new DAG nodes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-identification-coefficient-transport",
@@ -102,5 +269,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sf-integral-compactification-comparison-bridge",
+  "worker": "stage1",
+  "summary": "Matched the constant and semilinear basic generators through one new strict-tower scalar-restriction lemma; calculated the direct single-compactification transpose and the nested counit formula explicitly, then compared the actual proper/open tower maps and used the complete-category equivalence. Preserved the statement, including identity and empty-open cases.",
+  "blueprint": "sk-thm-sf-identification proof, normalized trace sentence: comparison of the prescribed integral compact-support composition before taking its right-adjoint mate; source fix-lem-exchanges.proof.md Step 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   },
+   {
+    "node": "lem-sf-generator-reduction-coherence",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   },
+   {
+    "node": "lem-sf-cbc-compact-support-composition-limit",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   },
+   {
+    "node": "lem-sf-semilinear-proper-open-mate-pasting",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   },
+   {
+    "node": "lem-sf-ambient-proper-open-pasting",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic strict-tower, scalar-completion or proper/open normalization tool used to verify the specified integral composition entering the normalized trace; the identification unit does not supply these coefficient-system constructions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sf-generator-reduction-coherence",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-sf-cbc-compact-support-composition-limit",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NY-37be1433f",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-37be1433f (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sf-constant-semilinear-generator-comparison, every cited statement, the parent's use of the item (transport Steps 2-3), blueprint fix-lem-exchanges.proof.md Step 5 and Stacks 0E48 (remark-compatible-with-diagram). I re-derived Steps 2-8: (2) L(r_A)u = L(e)u d^{-1} = d^{-1}, by unit naturality and the right triangle; (3) r_v=(S_p r_j) r_{p,D} gives L(r_v)u = b Rp_*(d_j^{-1}) = d_v^{-1} by naturality of b and d_j = u^{-1} L(r_j)^{-1}, and the inverse transpose gives r_v = e R(d_v^{-1}); (4) the q_{VW} recursion matches U(r_v); (5) a_v = H(d_v^{-1}); (6) the two-word recursion with r_f substituted gives the stated factor order, and the types check; (7) Gamma_Q restricts to gamma_Q (system-realization and mate-pasting), and compositors are conjugates transported by the new node's unit/counit clause; (8) H is faithful on complete objects. Step 9 identity case: e_{RM} = R(u_M)^{-1}, consistent with the empty-word a = eta. My own small cases f=id, g=id (which is exactly the parent's formula) and X empty all agree. The item compares the semilinear and constant-tower coefficient categories explicitly through U and H; R = O_E with I = (t) meets the word theorem's hypotheses, and ell != char k meets the open-reduction node's. The new node is true, strictly smaller than the item and not a duplicate: I compared it with generator-reduction-coherence, proper-open-mate-pasting, system-realization, ring-sheaf-change-adjunction and completed-projection-coherence, and an rg search found nothing else. Its statement is self-contained, its source honestly marked as an agent obligation over 0E48, it has grep/LeanSearch/Loogle/LeanFinder searches, and its blueprint from/via is correct. There is no cycle and proof_deps equals the union of uses. I accept the ten tool_uses as black-box integral-coefficient tools that the identification unit does not supply; mate-pasting is a Mathlib leaf, so declaring it is superfluous. Nothing changed."
  }
 }

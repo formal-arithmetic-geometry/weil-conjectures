@@ -14,41 +14,126 @@
   "def-weil-closed-points",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Suppose $f:Y\\to\\operatorname{Spec}k$ is unramified. By [lem-trf-unramified-field-fibre-decomposition], $Y$ is a disjoint union of open subschemes $Y_i=\\operatorname{Spec}L_i$, with $L_i/k$ finite separable. Each $Y_i$ has one point $y_i$ by [def-weil-affine-spectrum]; its complement is the union of the other open components, so $y_i$ is closed in $Y$. The neighbourhood $Y_i$ is the smallest open neighbourhood of $y_i$, so the stalk of the structure sheaf is its section ring $L_i$ (the colimit defining the stalk has this final neighbourhood). Its maximal ideal is zero, and the canonical quotient to its residue field [def-weil-residue-field] is consequently an isomorphism. These identifications respect the $k$-structure, since the disjoint-union isomorphism is over $k$. This proves every assertion in the forward implication, including the vacuous case of an empty index set.",
+   "uses": [
+    "lem-trf-unramified-field-fibre-decomposition",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G7 (lemma-unramified-over-field), part (1) and its proof"
+   }
+  },
+  {
+   "text": "Conversely assume the pointwise conditions. Fix $y\\in Y$ and put $L=\\kappa(y)$. The equality $\\mathcal O_{Y,y}=L$ means that its canonical residue map is an isomorphism of $k$-algebras, not just an abstract ring isomorphism. Apply [lem-weil-pbc-separable-algebraic-differentials-base-change] to the tower $k\\subseteq k\\subseteq L$; its finiteness and separability hypotheses are exactly the hypotheses on $L/k$. It gives $\\Omega_{L/k}\\cong L\\otimes_k\\Omega_{k/k}=0$: the universal derivation of $k$ over itself is zero, so its representing module is zero by [def-weil-pbc-kahler-differentials]. Transport through the canonical residue isomorphism gives $\\Omega_{\\mathcal O_{Y,y}/k}=0$. By [lem-weil-pbc-formally-unramified-ring-iff-kahler-zero], the local ring map $k\\to\\mathcal O_{Y,y}$ is formally unramified. The local ring of the single point of $\\operatorname{Spec}k$ is $k$, since the whole one-point spectrum is the smallest neighbourhood and its section ring is $k$. Thus this is the stalk map of $f$.",
+   "uses": [
+    "lem-weil-pbc-separable-algebraic-differentials-base-change",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090W (lemma-characterize-separable-algebraic-field-extensions), (1) implies (2) implies (3); Tag 00UO (lemma-characterize-formally-unramified)"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-formally-unramified-stalk-neighbourhood] to $f$ at $y$, using its given local finite type hypothesis and the formally unramified stalk map proved in step 2. It gives an open neighbourhood $V_y$ of $y$ for which $V_y\\to\\operatorname{Spec}k$ is formally unramified. These neighbourhoods cover $Y$ as $y$ varies. No finite cover or quasi-compactness assumption is needed.",
+   "uses": [
+    "lem-sbc-formally-unramified-stalk-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF (lemma-unramified-at-point), equivalence (1) and (3), applied to the stalk differential vanishing"
+   }
+  },
+  {
+   "text": "Here is the local-to-global uniqueness argument. Given a first order thickening $T\\subset T'$ of affine schemes over $k$ and two lifts $a,b:T'\\to Y$ agreeing on $T$, the topological equality $|T|=|T'|$ from [def-sbc-first-order-thickening] shows that $a$ and $b$ have the same underlying point map. The opens $a^{-1}(V_y)=b^{-1}(V_y)$ therefore cover $T'$. Cover each of these opens by affine opens $W$. The closed subscheme $T\\cap W$ is affine, being cut out in the affine scheme $W$ by a square-zero ideal. The restrictions of $a,b$ to $W$ are lifts into $V_y$ of the same map on $T\\cap W$. Formal unramifiedness of $V_y\\to\\operatorname{Spec}k$ gives their equality by [def-weil-pbc-formally-unramified-morphism]. Equality on this open cover is equality of morphisms: both their continuous maps and their sheaf maps agree locally. Hence $a=b$, proving that $f$ is formally unramified. This argument also applies to $Y=\\varnothing$: a map $T'\\to\\varnothing$ exists only when $T'$ is empty, and is then unique.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-pbc-formally-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Definition 02H8 (definition-formally-unramified); lemma-formally-unramified, local criterion (2) implies (1), with the uniqueness/gluing argument written explicitly"
+   }
+  },
+  {
+   "text": "The morphism $f$ is locally of finite type by hypothesis and formally unramified by step 4. Apply [lem-weil-pbc-lft-formally-unramified-unramified] to conclude that its diagonal is an open immersion and hence that $f$ is unramified. Together with step 1 this proves the equivalence. Closedness was needed only in the conclusion of the forward direction; the converse has in fact used only the stronger local-ring and residue-extension conditions already assumed.",
+   "uses": [
+    "lem-weil-pbc-lft-formally-unramified-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HE (lemma-unramified-formally-unramified), (2) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-unramified-field-fibre-decomposition",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-weil-pbc-separable-algebraic-differentials-base-change",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+  "lem-sbc-formally-unramified-stalk-neighbourhood",
+  "def-sbc-first-order-thickening",
+  "def-weil-pbc-formally-unramified-morphism",
+  "lem-weil-pbc-lft-formally-unramified-unramified"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02G7 (lemma-unramified-over-field), part (1), with Tag 02GF (lemma-unramified-at-point), Algebra 090W and 00UO, and More on Morphisms 02HE for the local-ring converse"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "scheme locally of finite type over a field is unramified iff all local rings at points are residue fields with separable residue extensions",
-   "results": "Algebra.isUnramifiedAt_iff_map_eq; Algebra.FormallyUnramified.iff_map_maximalIdeal_eq; no scheme-level local criterion.",
+   "query": "A scheme locally of finite type over a field is unramified if and only if every local ring is its residue field and the residue fields are finite separable",
+   "results": "8 hits; Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.isUnramifiedAt_iff_map_eq, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.instFormallyUnramifiedResidueField, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.instFormallyUnramifiedResidueField_1. Read the returned statements: algebra-level local criteria, formal unramifiedness APIs and openness of the algebraic locus do not state the full scheme-level equivalence.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "FormallyUnramified, IsLocalRing, IsSeparable",
-   "results": "0 hits (unknown identifier FormallyUnramified in this pattern).",
+   "query": "Algebra.FormallyUnramified, IsLocalRing",
+   "results": "12 hits; Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing, Algebra.instFormallyUnramifiedResidueField, Algebra.instFormallyUnramifiedResidueField_1, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.FormallyUnramified.map_maximalIdeal, Algebra.FormallyUnramified.of_map_maximalIdeal. Read the returned statements: algebra-level local criteria, formal unramifiedness APIs and openness of the algebraic locus do not state the full scheme-level equivalence.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "unramified.*field|FormallyUnramified|separable in Mathlib/RingTheory/Unramified",
-   "results": "Mathlib/RingTheory/Unramified/Field.lean and LocalRing.lean contain algebra-level residue/separability criteria, but no scheme-level equivalence.",
+   "query": "unramified.*field|[Uu]nramified.*[Ss]talk|iff_map_maximalIdeal_eq",
+   "results": "25 hits; Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean. Read the returned statements: algebra-level local criteria, formal unramifiedness APIs and openness of the algebraic locus do not state the full scheme-level equivalence.",
    "date": "2026-10-18",
-   "verdict": "generalization: algebra-level ingredients only"
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "scheme locally of finite type over a field unramified iff every local ring is a residue field with separable residue extension",
-   "results": "Algebra.FormallyUnramified.iff_isSeparable; Algebra.FormallyUnramified.iff_map_maximalIdeal_eq; no scheme-level theorem.",
+   "query": "scheme unramified over field local rings residue fields separable",
+   "results": "8 hits; Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.FormallyUnramified.of_isSeparable, Algebra.Unramified, Algebra.FormallyUnramified.iff_isSeparable, Algebra.FormallyUnramified.isSeparable, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.instFormallyUnramifiedResidueField. Read the returned statements: algebra-level local criteria, formal unramifiedness APIs and openness of the algebraic locus do not state the full scheme-level equivalence.",
    "date": "2026-10-18",
-   "verdict": "generalization: algebra-level ingredients only"
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finite type morphism with finite separable field stalks is unramified locally at each point",
+   "results": "8 hits; Algebra.isOpen_unramifiedLocus, Algebra.unramifiedLocus, RingHom.FormallyUnramified.propertyIsLocal, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Unramified.finiteType, Algebra.FormallyUnramified.of_map_maximalIdeal, AlgebraicGeometry.FormallyUnramified, Algebra.unramifiedLocus_eq_univ_iff. Read the returned statements: algebra-level local criteria, formal unramifiedness APIs and openness of the algebraic locus do not state the full scheme-level equivalence.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-curve-lci-criterion",
@@ -73,5 +158,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-unramified-over-field-local-criterion",
+  "worker": "stage1",
+  "summary": "Kept the statement, including all points, closedness, canonical local-ring/residue equality, finite separability and empty schemes. Five steps: existing field-fibre decomposition gives necessity; differential base change for the tower k/k/L and the ring infinitesimal criterion give formally unramified stalks; the existing stalk-neighbourhood theorem gives a cover; an explicit square-zero lifting uniqueness argument proves global formal unramifiedness; local finite type then gives unramifiedness. No new nodes or Mathlib leaves. Searched source declarations, the whole DAG and blueprint, and Mathlib; no attachment or exact Mathlib theorem.",
+  "blueprint": "Serves the existing ancestry from lem-trf-local-term-locality, proof (1)--(2), normal-cone specialization and the nearby-duality alteration reduction, through the nodal-family chain. Specifically realizes both uses of the local criterion in lem-trf-nodal-curve-lci-criterion, proof steps 2 and 3 (Stacks 0C4E). The five steps make precise the field-local criterion from Stacks 02G7 used there; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-formally-unramified-stalk-neighbourhood",
+    "why": "Generic local-to-neighbourhood theorem for formally unramified stalk maps, used after proving the stalk condition over k. No node in the trace-formula unit supplies this scheme-local algebra tool; it does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-formally-unramified-stalk-neighbourhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-75dcba72c",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-75dcba72c (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the cited node statements, Stacks morphisms.tex 7785-7940 (02G7, 02GE, 02GF) and Mathlib Morphisms/FormallyUnramified.lean. The statement is unchanged and true: it is 02G7(1) plus 02GF (1)<=>(6) at s=Spec k. I tested it on the empty scheme, Spec L, k[eps], a purely inseparable extension and A^1. Step 1: the existing fibre-decomposition node (same unit, no cycle) gives the disjoint union; closedness and stalk=L_i follow in a few lines. Step 2: the tower k=k⊆L is allowed by the differential base-change node, so Omega_{L/k}=0, and 00UO holds for arbitrary ring maps; transport goes along the canonical k-isomorphism. Step 3: lem-sbc-formally-unramified-stalk-neighbourhood, used for its statement only; it is true (02GF (3)=>(1) plus 02HE), and the off-unit tool_use is declared and accepted. Step 4: correct elementary gluing on affine opens W, with T∩W⊂W again an affine square-zero thickening. Step 5: locally finite type plus formally unramified gives an open diagonal by 02HE/02GE. proof_deps equals the union of uses. There is no cycle, and the only citer (nodal-lci steps 2 and 3) matches the statement. No new nodes, no duplicate, no Mathlib match; no SGA is cited. Remark, not changed: the source place says 02G7 parts (1),(2), but the local form is 02GF(6); proof_origin names 02GF. No fixes."
  }
 }

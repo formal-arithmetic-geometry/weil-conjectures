@@ -1,0 +1,83 @@
+{
+ "id": "lem-sf-constant-semilinear-generator-comparison",
+ "kind": "statement",
+ "title": "Scalar restriction identifies the single proper and open reduction generators",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$, $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Schemes are separated finite type over $k$, with their small pro-etale sites [def-weil-scheme-morphism-properties, def-weil-pbc-proetale-site]. Put $\\widehat R_T=\\lim_n(A_n)_T$. Use the strict semilinear system category $\\mathscr S_T$, reduction $\\mathcal R_T$, total limit $\\mathcal L_T$, and actual unit and counit of [lem-coef-derived-system-evaluation-calculus]. Let $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\ge1}^{op},\\operatorname{Mod}(\\underline R_T))$ and use its derived category, strict reduction $\\mathcal R_T^{\\mathcal T}$ and total limit $\\mathcal L_T^{\\mathcal T}$ of [lem-sf-cbc-compact-support-composition-limit]. Let $U_T:D(\\mathscr S_T)\\to D(\\mathcal T_T)$ be exact termwise restriction along $\\underline R_T\\to(A_n)_T$, and let $H_T$ be restriction along $\\underline R_T\\to\\widehat R_T$, an equivalence on complete objects [lem-weil-pbc-constant-completion-equivalence].\n\nTake either a proper map $p:V\\to T$ and $A=S_p$, or a quasi-compact open immersion $j:V\\hookrightarrow T$ and $A=J_j$, with the simultaneous section operations of [lem-coef-semilinear-derived-sections]. Let $M$ be a derived-complete constructible integral complex on $V$; require its input and output systems to have compatible etale-origin witnesses and normalized reductions with cohomological and finite Tor amplitudes in common finite intervals, exactly as in [lem-sf-generator-reduction-coherence]. Let $A_{\\rm int}$ be integral proper direct image in the first case and localized completed-ring open extension in the second [lem-sf-integral-open-reduction-comparison]. Let $r_{A,M}:\\mathcal R_T(A_{\\rm int}M)\\to A\\mathcal R_VM$ be the specified basic coefficient comparison of [lem-sf-generator-reduction-coherence]. On constant coordinates put $A_c=Rp_*$ or $J_j^c=C_TJ_j$ respectively, and $\\widetilde A=R_p^{\\mathcal T}$ or $J_j$. Here $C_T=\\mathcal L_T^{\\mathcal T}\\mathcal R_T^{\\mathcal T}$ has its quotient-tower completion unit. Let $q_{A,HM}$ be precisely the one-letter comparison of [lem-sf-cbc-compact-support-composition-limit]: the diagram-site counit-tensor projection map for proper direct image, or the completed-open comparison defined by reduction of the completion unit.\n\nUse the canonical derived scalar-restriction identifications $U_TA\\cong\\widetilde A U_V$, and $\\rho_M:U_V\\mathcal R_VM\\cong\\mathcal R_V^{\\mathcal T}H_VM$, induced by the single strict quotient diagram and tensor reassociation. Identify $H_TA_{\\rm int}M\\cong A_cH_VM$ by the canonical proper direct-image scalar comparison, respectively the completed-open identification fixed by the completion unit. Then the two maps from $U_T\\mathcal R_T(A_{\\rm int}M)$ to $\\widetilde A\\mathcal R_V^{\\mathcal T}(H_VM)$ are equal:\n$$ (\\widetilde A\\rho_M)\\circ(U_TA\\cong\\widetilde A U_V)\\circ U_T(r_{A,M})\n =q_{A,H_VM}\\circ\\rho_{A_{\\rm int}M}.$$\nThe scalar-restriction operation comparisons intertwine the units and counits of the proper inverse-image/direct-image and open-extension/restriction adjunctions, with inverse image the exact termwise inverse image of [lem-coef-semilinear-derived-sections]. The identifications and the displayed equality are natural in the derived strict-tower category, including the quotient transitions. No compactification-composition comparison is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E48, remark-compatible-with-diagram, for compatibility of the counit-tensor projection map with change of ringed topoi. The strict varying-coefficient/constant-tower generator identification below is an additional agent-formulated obligation, not a verbatim assertion of the tag. The completion-unit normalization is the one in blueprint fix-lem-exchanges.proof.md Step 5 and lem-sf-cbc-compact-support-composition-limit."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-cbc-compact-support-composition-limit",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-generator-reduction-coherence",
+  "lem-sf-integral-open-reduction-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(pushforward|derived)|pushforward.*restrictScalars|semilinear.*tower",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module restriction, underived presheaf pushforward, abstract adjunctions, local cohomology, solidification and ordinary adic completion do not identify these specified derived diagram-site reduction generators. The grep candidate is PresheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:89-90; it is an underived definition, not this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars identifies derived coefficient reduction comparison for proper direct image and open extension by zero",
+   "results": "8 hits: RestrictScalars, PresheafOfModules.restrictScalarsObj, LinearMap.restrictScalarsₗ, PresheafOfModules.restrictScalars, LinearMap.restrictScalars, AlgHom.restrictScalars, LinearEquiv.restrictScalars, ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module restriction, underived presheaf pushforward, abstract adjunctions, local cohomology, solidification and ordinary adic completion do not identify these specified derived diagram-site reduction generators. The grep candidate is PresheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:89-90; it is an underived definition, not this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "12 hits: CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module restriction, underived presheaf pushforward, abstract adjunctions, local cohomology, solidification and ordinary adic completion do not identify these specified derived diagram-site reduction generators. The grep candidate is PresheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:89-90; it is an underived definition, not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of ring in derived diagram module categories preserves the unit counit projection formula map and the completion unit for open extension",
+   "results": "8 hits: localCohomology.diagram, Condensed.profiniteSolid, Condensed.profiniteSolidification, Condensed.profiniteSolidCounit, localCohomology.diagramComp, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.extendScalars_id_comp_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module restriction, underived presheaf pushforward, abstract adjunctions, local cohomology, solidification and ordinary adic completion do not identify these specified derived diagram-site reduction generators. The grep candidate is PresheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:89-90; it is an underived definition, not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from varying quotient coefficient systems to constant module towers preserves the canonical derived direct image coefficient projection comparison and completed extension by zero reduction map",
+   "results": "8 hits: IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.mkQ_comp_lift, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.transitionMap, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.eval_comp_of, AdicCompletion.transitionMap_comp_eval",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module restriction, underived presheaf pushforward, abstract adjunctions, local cohomology, solidification and ordinary adic completion do not identify these specified derived diagram-site reduction generators. The grep candidate is PresheafOfModules.pushforward at Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:89-90; it is an underived definition, not this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-integral-compactification-comparison-bridge",
+  "date": "2026-10-18",
+  "group": "NY"
+ },
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "Proof, normalized trace sentence: generator normalization needed to identify the prescribed integral compact-support composition before taking its adjunction mate.",
+   "via": [
+    "lem-sf-integral-compactification-comparison-bridge",
+    "lem-sf-identification-coefficient-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
