@@ -26,7 +26,9 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-simplicial-presheaf-projective-model"
  ],
  "proof": [
   {
@@ -269,5 +271,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce1610997",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Clause-by-clause match of the Lean to the node and Dugger Def 3.1/Prop 3.3. M: ModelCategory + CombinatorialModelCategory.{v,u,u} (locally presentable, so cocomplete; generator llp forms equivalent to rlp generation; functorial factorizations) + HasLimitsOfSize.{u,u}, which is implied, not stronger. Small D : Type u. Projective P on Dᵒᵖ ⥤ SSet.{u} with objectwise Kan W/F and cofibrations llp of objectwise I.rlp, same interface as the landed projective-model node, plus both functorial factorizations. Adjunction L ⊣ R preserving cof and trivial cof. For every fibrant X and every trivial fibration q : Q ⟶ R X with Q cofibrant, L.map q ≫ ε_X is a weak equivalence; quantifier order matches. Universes: M objects in free v, Homs and SSet in u, no universe equation. Edge cases checked: empty D, terminal M, X initial, identity replacement. Node diff vs clone: only lean and stmt_deps (+2 landed deps, no cycle). Statement verbatim in file. One theorem, proof sorry only, no definitions. Source/blueprint docstrings and 7-step proof docstring present. No duplicate notion found. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings. The Second reading section is only the tool's 2026-10-17 policy note, not treated as a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.DuggerHomotopicallySurjectiveMap",
+  "declaration": "HomotopicalAlgebra.exists_homotopically_surjective_presheaf_adjunction",
+  "file": "lean/Sheaf/AlgebraicTopology/DuggerHomotopicallySurjectiveMap.lean",
+  "statement": "theorem exists_homotopically_surjective_presheaf_adjunction {M : Type v} [Category.{u} M] [ModelCategory M] [HasLimitsOfSize.{u, u} M] (hM : CombinatorialModelCategory.{v, u, u} M) : ∃ (D : Type u) (_ : SmallCategory D) (P : ModelCategory (Dᵒᵖ ⥤ SSet.{u})) (L : (Dᵒᵖ ⥤ SSet.{u}) ⥤ M) (R : M ⥤ (Dᵒᵖ ⥤ SSet.{u})) (adj : L ⊣ R), P.categoryWithWeakEquivalences.weakEquivalences = (SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences).functorCategory Dᵒᵖ ∧ P.categoryWithFibrations.fibrations = (SSet.modelCategoryQuillen.J.rlp).functorCategory Dᵒᵖ ∧ P.categoryWithCofibrations.cofibrations = ((SSet.modelCategoryQuillen.I.rlp).functorCategory Dᵒᵖ).llp ∧ P.categoryWithCofibrations.cofibrations.HasFunctorialFactorization (P.categoryWithFibrations.fibrations ⊓ P.categoryWithWeakEquivalences.weakEquivalences) ∧ (P.categoryWithCofibrations.cofibrations ⊓ P.categoryWithWeakEquivalences.weakEquivalences).HasFunctorialFactorization P.categoryWithFibrations.fibrations ∧ (∀ (A B : Dᵒᵖ ⥤ SSet.{u}) (i : A ⟶ B), P.categoryWithCofibrations.cofibrations i → cofibrations M (L.map i)) ∧ (∀ (A B : Dᵒᵖ ⥤ SSet.{u}) (i : A ⟶ B), P.categoryWithCofibrations.cofibrations i → P.categoryWithWeakEquivalences.weakEquivalences i → weakEquivalences M (L.map i)) ∧ ∀ X : M, fibrations M (terminal.from X) → ∀ (Q : Dᵒᵖ ⥤ SSet.{u}) (q : Q ⟶ R.obj X), P.categoryWithCofibrations.cofibrations (initial.to Q) → P.categoryWithFibrations.fibrations q → P.categoryWithWeakEquivalences.weakEquivalences q → weakEquivalences M (L.map q ≫ adj.counit.app X)",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

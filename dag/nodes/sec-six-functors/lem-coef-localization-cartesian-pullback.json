@@ -24,7 +24,8 @@
   "place": "Proposition 5.3.16 (canonical localization pushout of Remark 5.3.13); Lemma 5.3.15 Read online; archive WANTED. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-universally-localizing-simplicial-map"
  ],
  "proof": [
   {
@@ -297,5 +298,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2134dcb90",
+  "group": "ND",
+  "result": "pass",
+  "note": "Statement matches node and GH Prop 5.3.16 clause by clause: W = Subcomplex with InnerFibration W.ι (Kerodon 01B8) containing all IsEquivalenceEdge; q localization via the landed IsLocalizationAtEdges.{u,v} (full functor-category equivalence, free v); p cartesianFibration (inner fibration plus target-prescribed Cartesian lifts, horn form equal to the mapping-space test via the landed criterion); E' = strict pullback q p (homotopy pullback since p Cartesian, HTT 3.3.1.3/4); T = {fst e in W_1 and snd e an equivalence in E}, exact; conclusion uses the same predicate. Edge cases (empty C/E, identity q/p, W = core, Δ¹ fibre, universes) covered. No duplicate in side/Mathlib. Node diff only lean and stmt_deps (landed dep, actually used); statement verbatim; one sorry theorem, no definitions; docstrings carry source and blueprint and the 4-step proof. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings. Second-reading section is the accepted 2026-10-17 placeholder."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizationCartesianPullback",
+  "declaration": "SSet.Enhanced.localization_cartesian_pullback",
+  "file": "lean/Sheaf/CategoryTheory/LocalizationCartesianPullback.lean",
+  "statement": "theorem localization_cartesian_pullback {C D E : SSet.{u}} [Quasicategory C] [Quasicategory D] [Quasicategory E] (W : C.Subcomplex) (_hW : InnerFibration W.ι) (_hEquivalences : ∀ e : C _⦋1⦌, IsEquivalenceEdge C e → e ∈ W.obj (op ⦋1⦌)) (q : C ⟶ D) (_hq : IsLocalizationAtEdges.{u, v} q (W.obj (op ⦋1⦌))) (p : E ⟶ D) (_hp : cartesianFibration p) : IsLocalizationAtEdges.{u, v} (pullback.snd q p) {e | (pullback.fst q p).app _ e ∈ W.obj (op ⦋1⦌) ∧ IsEquivalenceEdge E ((pullback.snd q p).app _ e)}",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing full functor-category IsLocalizationAtEdges predicate with arbitrary containing target universe. The subcategory W is a simplicial subset whose inclusion is an inner fibration (Kerodon Definition 4.1.2.2), with every equivalence included. Cartesian fibrations use the recorded horn interface, equivalent to the stated mapping-space criterion by HTT 2.4.4.3. Its strict pullback models the infinity-categorical pullback by HTT 3.3.1.4. No auxiliary notion is redefined; stmt_deps gains the landed localization definition."
  }
 }

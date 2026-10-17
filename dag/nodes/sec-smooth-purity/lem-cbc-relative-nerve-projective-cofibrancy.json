@@ -11,7 +11,8 @@
   "lem-coef-marked-point-cartesian-model",
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-monomorphism-boundary-cells",
-  "lem-coef-simplicial-projective-model-calculus"
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-marked-anodyne-lifting-calculus"
  ],
  "proof": [
   {
@@ -296,5 +297,31 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-941438503 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement and stmt_deps are identical to the live base, which I only read; there are no new nodes. All four cited statements are read in full: lem-coef-marked-point-cartesian-model, def-cbc-enhanced-diagrams-cones, lem-coef-infinity-monomorphism-boundary-cells (leaf SSet.relativeCellComplexOfMono) and lem-coef-simplicial-projective-model-calculus. Parent step 5 uses only the ∅→X clause, which step 8 supplies. HTT is not local (WANTED is recorded; the proof is marked agent-written), so I checked the steps from first principles. Step 1: the labels compose through the functor p(x), and degenerate edges are marked. Step 2: colimits in sSet^+/N(C) are degreewise; L_C(X)(c)_r=∐_τ X_{r,τ}×C(τ(r),c) preserves them, and the marking is checked both ways. Step 3: the complement of L_C(∂Δ^n) is the pairs with surjective z, so z(r)=n and the label is h; the set pushout of an injection gives C⊔(B∖A) with no cancellation needed, operators commute, and all markings are degenerate. Step 4: the nondegenerate edges of L_C(Δ^1)(c) are exactly (id,h), so the marking pushout is exact, including for a degenerate σ. Step 5: the free diagram is ∐_{C(b,c)}K by X⊗K=X×K^♯, the adjunction transposes the lifting problem to q_b, and the closure arguments are explicit. Steps 6–7: relative skeleton from the leaf's exact injective hypothesis while keeping X's markings, then one marking pushout. Edge cases tested: n=0, n=1 with non-mono composition, C terminal, C empty, empty hom-sets, degenerate base edges. The statement is true and not weakened. No circularity: nothing on the via chain is cited. Duplicate search (rg 'projectively cofibrant', 'C_{/c}') found only different nodes: marked-relative-nerve-quillen (left-adjoint existence only), locally-constant-presheaf-slice, cone-presheaf-adjunction. The searches are recorded honestly, with one bad grep marked as not evidence of absence. I accept the three declared tool_uses: generic model-category nodes that the parent already carries. Minor, unchanged: the pre-existing source.place still names Lemma 3.2.5.17(2) loosely, but the step sources and proof_origin give the precise attribution. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fb260339",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Read node, 5 stmt deps (Marked/cof/flatMap, flatToMarked, SimplicialProjectiveModelCalculus, Mathlib evaluationLeftAdjoint, ∂Δ), module, report. Every clause matches: Σ-pair simplices, operator label p(x).map(θ last≤last)≫g, postcomposition action, iff marking, maps (f x,g), F_b = evaluationLeftAdjoint, b=(yonedaEquiv σ).obj last for all n≥0, boundary and marking IsPushout with correct arg order and normalized vertical maps, injective-map clause via Marked.cof → LLP of objectwise cof.rlp (= projective cofibrations since model cofibrations = cof), cofibrant clause over every initial object. HEq types are propositionally equal; witness fixes L up to canonical iso; no added hypotheses; universe u standard small category. Edge cases n=0, degenerate σ, empty C/X, noncancellative C ok. Node diff: lean + landed stmt_dep lem-coef-marked-anodyne-lifting-calculus (no cycle, checked). No hollow defs, single sorry, docstrings with 8 steps, statement verbatim, lines ≤100. nt_compile.py: exit 0, 5.8 s, no warnings. Cosmetic only: report HTT numbers scrubbed to 'the project server'."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RelativeNerveProjectiveCofibrancy",
+  "declaration": "SSet.RelativeNerveProjective.relative_nerve_projective_cofibrancy",
+  "declarations": [
+   "SSet.RelativeNerveProjective.input",
+   "SSet.RelativeNerveProjective.cellMap",
+   "SSet.RelativeNerveProjective.Construction",
+   "SSet.RelativeNerveProjective.Statement",
+   "SSet.RelativeNerveProjective.relative_nerve_projective_cofibrancy"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RelativeNerveProjectiveCofibrancy.lean",
+  "statement": "theorem relative_nerve_projective_cofibrancy (C : Type u) [Category.{u} C] : Nonempty (Statement C)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Fully normalized witness for the slice diagram: degreewise pair equivalences and formulas fix operators, markings, actions, input maps and both free-cell vertical maps. Free diagrams use Mathlib evaluationLeftAdjoint. Projective cofibrations are the LLP of objectwise Marked.cof.rlp, the canonical projective cofibration class. No construction is extracted or chosen from the theorem; its only sorry is the entire node assertion."
  }
 }
