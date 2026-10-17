@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-accessible-ind-colimit-extension"
  ],
  "proof": [
   {
@@ -280,5 +281,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredPresentationCommonRefinement",
+  "declaration": "SSet.Presentability.exists_common_refinement",
+  "file": "lean/Sheaf/CategoryTheory/FilteredPresentationCommonRefinement.lean",
+  "statement": "theorem exists_common_refinement {E : SSet.{v}} [Quasicategory E] (hE : IsLocallySmall.{u, v} E) {κ : Cardinal.{u}} (hκ : Cardinal.aleph0 < κ) (hκreg : κ.IsRegular) (hEcolim : HasSmallKappaFilteredColimits.{u, v} E Cardinal.aleph0) {A₀ A₁ : Type v} [PartialOrder A₀] [PartialOrder A₁] (hA₀small : IsSmall.{u, v} (posetNerve A₀ inferInstance)) (hA₁small : IsSmall.{u, v} (posetNerve A₁ inferInstance)) (hA₀ : IsKappaFiltered.{u, v} κ (posetNerve A₀ inferInstance)) (hA₁ : IsKappaFiltered.{u, v} κ (posetNerve A₁ inferInstance)) (p₀ : posetNerve A₀ inferInstance ⟶ E) (p₁ : posetNerve A₁ inferInstance ⟶ E) (hc₀ : ∀ a : A₀, IsKappaCompact.{u, v} E κ (p₀.app (op ⦋0⦌) (ComposableArrows.mk₀ a))) (hc₁ : ∀ a : A₁, IsKappaCompact.{u, v} E κ (p₁.app (op ⦋0⦌) (ComposableArrows.mk₀ a))) (hcolim : ∃ (t₀ : (Enhanced.coconeCategory p₀) _⦋0⦌) (h₀ : Enhanced.IsColimiting p₀ t₀) (t₁ : (Enhanced.coconeCategory p₁) _⦋0⦌) (h₁ : Enhanced.IsColimiting p₁ t₁), ∃ e : E _⦋1⦌, E.δ 1 e = Enhanced.hocolim (F := p₀) ⟨t₀, h₀⟩ ∧ E.δ 0 e = Enhanced.hocolim (F := p₁) ⟨t₁, h₁⟩ ∧ Enhanced.IsEquivalenceEdge E e) (T₀ : Set.{v} A₀) (hT₀ : HasCardinalLT T₀ κ) (T₁ : Set.{v} A₁) (hT₁ : HasCardinalLT T₁ κ) : ∃ (B₀ : Set.{v} A₀) (B₁ : Set.{v} A₁), T₀ ⊆ B₀ ∧ T₁ ⊆ B₁ ∧ HasCardinalLT B₀ κ ∧ HasCardinalLT B₁ κ ∧ IsFiniteFilteredSubset B₀ ∧ IsFiniteFilteredSubset B₁ ∧ RestrictedColimitsEquivalent p₀ p₁ B₀ B₁",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Presentability.filteredPosetNerveQuasicategory",
+   "SSet.Presentability.subsetInclusion",
+   "SSet.Presentability.restrictDiagram",
+   "SSet.Presentability.IsFiniteFilteredSubset",
+   "SSet.Presentability.RestrictedColimitsEquivalent",
+   "SSet.Presentability.exists_common_refinement"
+  ],
+  "fixed_by": "NT-stage2-cc-271214f5c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-271214f5c",
+  "group": "Q57",
+  "result": "fix",
+  "note": "Clause-by-clause check against node and HTT 5.5.4.13: all clauses match except hEcolim, which quantified over every κ' : Cardinal.{u} with no regularity; since IsKappaSmall 0 K is always false, IsKappaFiltered 0 I is vacuous and the hypothesis forced ALL small quasicategory-indexed colimits (H3 stronger assumption; Lean witness compiled). Fixed by replacing it with the dependency predicate HasSmallKappaFilteredColimits.{u,v} E Cardinal.aleph0 (exactly 'all small filtered colimits'; old hypothesis implies it, so this only weakens it; removes an inlined H4 copy) and expanded the theorem docstring to the node's six proof steps (H8). Only citer has no Lean. posetNerve reuse and the new stmt_dep are correct and acyclic; helpers are not hollow; sorry only; universes u/v separate; edge cases (empty T, empty finite subset, κ>ℵ0) covered. nt_compile per file: delivered file clean, fixed file clean, witness clean. Fixes: fixes/FilteredPresentationCommonRefinement.lean (complete module; statement re-read by merge tool) and fixes/lem-coef-filtered-presentation-common-refinement.report.md."
  }
 }

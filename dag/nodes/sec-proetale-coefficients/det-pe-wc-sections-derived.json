@@ -22,7 +22,8 @@
   "det-pe-wc-sections-exact",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-sfb-right-derived-functor"
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
  ],
  "proof": [
   {
@@ -198,5 +199,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsDerived",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.wContractible_sections_derived",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.wContractible_sections_derived",
+   "AlgebraicGeometry.Scheme.ProEt.moduleEvaluation_additive",
+   "AlgebraicGeometry.Scheme.ProEt.moduleQuasiIsoKInjectiveResolutions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleWContractibleSectionsDerived.lean",
+  "statement": "theorem wContractible_sections_derived (X : Scheme.{t}) (D : Type t) [CommRing D] [IsWContractibleRing D] (f : Spec (CommRingCat.of D) ⟶ X) [WeaklyEtale f] (R : Sheaf (topology X) RingCat.{u}) [HasDerivedCategory.{wA} (ringedSiteModules.{max u v (t + 1)} R)] [HasDerivedCategory.{wB} (ModuleCat.{max u v (t + 1)} (R.obj.obj (op (ProEt.mk f))))] : (∀ K : CochainComplex (ringedSiteModules.{max u v (t + 1)} R) ℤ, IsIso ((Functor.rightDerivedFunctorOfQuasiIsoResolutionsUnit (SheafOfModules.evaluation.{max u v (t + 1)} R (op (ProEt.mk f))) (moduleQuasiIsoKInjectiveResolutions X R)).app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧ ∀ (F : ringedSiteModules.{max u v (t + 1)} R) (q : ℤ), 0 < q → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{max u v (t + 1)} (R.obj.obj (op (ProEt.mk f)))) q).obj ((Functor.rightDerivedFunctorOfQuasiIsoResolutions (SheafOfModules.evaluation.{max u v (t + 1)} R (op (ProEt.mk f))) (moduleQuasiIsoKInjectiveResolutions X R)).obj ((DerivedCategory.singleFunctor _ 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-851209ddc",
+  "group": "Q91",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause. The isomorphism clause is IsIso of the derived-functor unit at the class of an arbitrary unbounded K, i.e. the specified map. The vanishing clause covers every F and q>0 via the homology of RE(F[0]). There is no commutativity, boundedness or universe-equality assumption, and the site keeps universes t+1/t. The §1(B) repair of lem-weil-pbc-ring-sheaves-grothendieck is justified: the old upstream theorem needs one universe for site, ring and modules. The new isGrothendieckAbelianOfUniverses is the node's statement in a common universe, and the existing general variant needs commutative rings. Both helpers are real and sorry-free. Only the two expected node files differ, and both lean.statement strings appear verbatim. Both files compiled with no diagnostics via nt_compile.py on the side overlay. Minor, no action: the resolution helper also uses lem-sfb-grothendieck-k-injective, which is only in proof_deps; the statement does not depend on that proof."
  }
 }

@@ -285,5 +285,30 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-ec0741a31 (reviewer sub-agent of L); spot-checked: Read the item, all six steps and the full statements of all six cited nodes. Checked the source online at Kerodon Prop 3.4.1.11 (Tag 0110, Transitivity): commutative simplicial sets, right square a homotopy pullback, then left square ⇔ outer rectangle. The item states exactly this restricted to Kan complexes with the path model. The specified-homotopy clause goes beyond Kerodon; the delivery says so and proves it itself, so proof_origin=agent and the archive WANTED are right. No SGA is cited. Step 1: the endpoint-pair and single-endpoint lifting problems transpose to anodyne pushout-products (mono ∂I→I or ∂Δⁿ→Δⁿ against an anodyne horn), and the boundary characterization includes n=0. Step 2: E→C×C' and Q0→D×C' are pullbacks of (ev0,ev1) along c×id and g×k; C and D Kan make p and q fibrations; E→C is a trivial fibration, so j is a weak equivalence; r is a weak equivalence by hypothesis with the given η. Step 3: the horn data (η_x, kλ) agrees with the degenerate triangle (0,1,1) on j(C); the domain is the pushout-product of j with Λ²₁; F has the right endpoints, qF=p and Fj=r hold, and F is a weak equivalence by 2-of-3. Step 4: the fibration-invariance hypotheses hold exactly (α=F, β=id, γ=id, p and q fibrations); the identifications with P(c,h) and P(g,kh) are degreewise. Step 5: F_h∘l equals the outer comparison with the triangle-filler concatenation, and 2-of-3 gives left ⇔ outer. Step 6: the relative J-horn extension has fixed endpoints, M^J→M are trivial fibrations, so the result does not depend on the filler; in the strict case the outer path is constant. Edge cases: empty spaces, point spaces, discrete spaces, and pt→{0,1}→pt showing the right-square hypothesis is needed. proof_deps equal the union of uses, there is no cycle (140-node closure), and the route stays in unit sk-prop-sf-biduality-general apart from the definition def-cbc. No tool uses. No new nodes. rg duplicate search: lem-coef-sharp-pullback-calculus, lem-coef-kan-homotopy-pullback-invariance and lem-coef-rezk-diagonal-sharp do not state this; lem-coef-relative-right-kan-universal-restriction does a similar cancellation inline but is a consumer. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea3a9ecbd",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Read node, both stmt deps (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-cocartesian-mapping-criterion), Kerodon 0110, module, report (Worker report + Second reading by Q50 present), and exact declarations simplicialHomotopyPullback / homotopyPullbackComparison / IsHomotopyPullbackSquare / evaluation in the side clone. Strict theorems: Kan A..D' in SSet.{u}, maps and commutations match the diagram; P(g,k), P(c,h), P(g,h≫k) are the node's path models; left iff outer plus paste corollary correct. Specified clause: helper is a real nested pullback.lift with the supplied path (not hollow, not a duplicate of the constant-path comparison or the IsSquareComparison predicate); alpha/eta/omega orientations and ev0/ev1 equations match the node; existential triangle T with δ2=a≫η (01), δ0=α≫k_* (12), δ1=ω (02) checked in Lean (δ 2 sends 1↦1), so every concatenation representative is covered. Edge cases (empty, point, identity with nonconstant path) fine; no extra assumptions; single universe. lean.statement verbatim; docstrings carry source/blueprint and the proof steps; only sorry. nt_compile.py --json: rc 0, no diagnostics (a control copy with an injected error was reported). No findings beyond cosmetic redundancy of h_left/h_right."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityHomotopyPullbackPasting",
+  "declaration": "SSet.Enhanced.homotopy_pullback_pasting",
+  "declarations": [
+   "SSet.Enhanced.homotopy_pullback_pasting",
+   "SSet.Enhanced.homotopy_pullback_paste",
+   "SSet.Enhanced.specifiedHomotopyPullbackComparison",
+   "SSet.Enhanced.homotopy_pullback_pasting_specified"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityHomotopyPullbackPasting.lean",
+  "statement": "theorem homotopy_pullback_pasting {A C D A' C' D' : SSet.{u}} [KanComplex A] [KanComplex C] [KanComplex D] [KanComplex A'] [KanComplex C'] [KanComplex D'] (a : A ⟶ C) (d : C ⟶ D) (v : A ⟶ A') (h : A' ⟶ C') (c : C ⟶ C') (k : C' ⟶ D') (g : D ⟶ D') (h_left : a ≫ c = v ≫ h) (h_right : d ≫ g = c ≫ k) (h_right_pb : IsHomotopyPullbackSquare d c g k) : IsHomotopyPullbackSquare a v c h ↔ IsHomotopyPullbackSquare (a ≫ d) v g (h ≫ k)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The first two theorems state strict cancellation and pasting with the recorded constant-path predicate. The canonical pullback-lift helper supplies specified path coordinates, and homotopy_pullback_pasting_specified states the entire specified-homotopy clause for every triangle representative of concatenation. No extra notion or dependency is introduced."
  }
 }
