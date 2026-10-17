@@ -2,7 +2,7 @@
  "id": "lem-trf-finite-etale-marking-sections",
  "kind": "statement",
  "title": "Splitting a finite etale marking into disjoint sections after alteration",
- "statement": "Let $g:X\\to B$ be a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] morphism of finite presentation [def-sbc-locally-finite-presentation] between integral [def-pc-integral-scheme] excellent [def-exc-excellent-ring] Noetherian [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme] schemes, whose generic fibre [def-pc-scheme-fibre] over the generic point [def-sc-generic-point] $\\eta$ of $B$ is a geometrically integral [def-pc-geometrically-irreducible] curve. Let $V\\subseteq X$ be the open set of points at which $g$ is smooth [def-sbc-smooth-morphisms], and let $D\\subset X$ be an effective Cartier divisor (a closed subscheme [def-weil-closed-immersion] locally cut out by one non-zero-divisor), possibly empty, with $D\\subseteq V$ and $D\\to B$ proper and etale [def-weil-etale-morphism]. Then there are an integral excellent Noetherian scheme $B_1$ and a finite [def-weil-finite-integral-morphism] surjective morphism $b:B_1\\to B$ with the following properties, where $X_1=X\\times_BB_1$ [def-pc-fibre-product], $a:X_1\\to X$ and $g_1:X_1\\to B_1$ are the two projections, and $D_1=D\\times_XX_1$. (i) $X_1$ is integral, excellent and Noetherian, and $a$ is finite and surjective. (ii) $g_1$ is proper, flat and of finite presentation; its generic fibre is a geometrically integral curve; for every geometric point $\\bar t\\to B_1$ the geometric fibre [def-weil-geometric-fibre] of $g_1$ at $\\bar t$ is isomorphic to the geometric fibre of $g$ at $b\\circ\\bar t$; and $g_1$ is smooth at every point of $a^{-1}(V)$. (iii) There are an integer $n\\geq0$ and sections $s_1,\\dots,s_n$ of $g_1$ (morphisms with $g_1s_i=1_{B_1}$), with pairwise disjoint images, such that $D_1$ is the disjoint union of the closed subschemes $s_1(B_1),\\dots,s_n(B_1)$; in particular every $s_i$ lands in $a^{-1}(V)$, and $n=0$ when $D=\\varnothing$.",
+ "statement": "Let $g:X\\to B$ be a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] morphism of finite presentation [def-sbc-locally-finite-presentation] between integral [def-pc-integral-scheme] excellent [def-exc-excellent-ring] Noetherian [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme] schemes, whose generic fibre [def-pc-scheme-fibre] over the generic point [def-sc-generic-point] $\\eta$ of $B$ is a geometrically integral [def-pc-geometrically-irreducible] curve [def-pc-curve]. Let $V\\subseteq X$ be the open set of points at which $g$ is smooth [def-sbc-smooth-morphisms], and let $D\\subset X$ be an effective Cartier divisor (a closed subscheme [def-weil-closed-immersion] locally cut out by one non-zero-divisor), possibly empty, with $D\\subseteq V$ and $D\\to B$ proper and etale [def-weil-etale-morphism]. Then there are an integral excellent Noetherian scheme $B_1$ and a finite [def-weil-finite-integral-morphism] surjective morphism $b:B_1\\to B$ with the following properties, where $X_1=X\\times_BB_1$ [def-pc-fibre-product], $a:X_1\\to X$ and $g_1:X_1\\to B_1$ are the two projections, and $D_1=D\\times_XX_1$. (i) $X_1$ is integral, excellent and Noetherian, and $a$ is finite and surjective. (ii) $g_1$ is proper, flat and of finite presentation; its generic fibre is a geometrically integral curve; for every geometric point $\\bar t\\to B_1$ the geometric fibre [def-weil-geometric-fibre] of $g_1$ at $\\bar t$ is isomorphic to the geometric fibre of $g$ at $b\\circ\\bar t$; and $g_1$ is smooth at every point of $a^{-1}(V)$. (iii) There are an integer $n\\geq0$ and sections $s_1,\\dots,s_n$ of $g_1$ (morphisms with $g_1s_i=1_{B_1}$), with pairwise disjoint images, such that $D_1$ is the disjoint union of the closed subschemes $s_1(B_1),\\dots,s_n(B_1)$; in particular every $s_i$ lands in $a^{-1}(V)$, and $n=0$ when $D=\\varnothing$.",
  "source": {
   "document": "literature/stacks-project/pione.tex",
   "place": "Tag 0BQL (lemma-finite-etale-covering-normal-unramified), applied over the normalization of $B$ in a finite Galois extension of $\\kappa(\\eta)$ containing the residue fields of $D_\\eta$; cf. literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf, Exposé IX 1.4, p. 133 (normalized component of a base change). Integrality of $X_1$: flat base change of a geometrically integral generic fibre."
@@ -23,11 +23,191 @@
   "def-weil-etale-morphism",
   "def-weil-finite-integral-morphism",
   "def-pc-fibre-product",
-  "def-weil-geometric-fibre"
+  "def-weil-geometric-fibre",
+  "def-pc-curve"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The fibres of $D\\to B$ are discrete unions of spectra of finite separable residue-field extensions by [lem-weil-pbc-etale-fibre-discrete-separable-points]. They are quasi-compact: base change preserves properness [lem-weil-pbc-proper-fp-permanence](b), and a proper scheme over a field is of finite type, hence quasi-compact [def-weil-proper-morphism]. A quasi-compact discrete space is finite, since its singleton open cover has a finite subcover [def-weil-pbc-quasi-compact-scheme]. The base $B$ is locally Noetherian, so [thm-pqf-finite-iff-proper-finite-fibres] makes $D\\to B$ finite. In particular $D_\\eta=\\operatorname{Spec}C$ for a finite-dimensional commutative $K$-algebra $C$, where $K=\\kappa(\\eta)$.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-quasi-compact-scheme",
+    "thm-pqf-finite-iff-proper-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field); Tag 01W4; Tag 02OG in coherent.tex, proper with finite fibres"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-generic-separable-algebra-splitting] to $C$: choose a finite separable extension $L/K$ such that $(C\\otimes_K L)_{\\mathrm{red}}$ is a finite product of purely inseparable field extensions of $L$. By [lem-weil-pbc-etale-base-change-finite-limits](1) and [lem-weil-pbc-etale-fibre-discrete-separable-points], $\\operatorname{Spec}(C\\otimes_K L)$ is a finite disjoint union of spectra of finite separable extensions of $L$. Thus $C\\otimes_K L$ is already reduced, and each of its field factors is both separable and purely inseparable over $L$. Such a factor equals $L$: in positive characteristic a purely inseparable element has a power $p^r$ in $L$, so its minimal polynomial has only one distinct root, whereas a separable minimal polynomial has no repeated roots; consequently that polynomial has degree one. In characteristic zero pure inseparability already means equality [def-weil-pbc-finite-purely-inseparable-extension]. We have $D_\\eta\\times_K L\\cong\\coprod_{i=1}^n\\operatorname{Spec}L$, for some $n\\geq0$. If $D$ is empty, take $L=K$ and $n=0$.",
+   "uses": [
+    "lem-weil-pbc-generic-separable-algebra-splitting",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO and 02GL (etale base change and etale schemes over fields); finite-algebra splitting as in the cited DAG lemma"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-locally-noetherian-quasi-separated], $B$ is quasi-separated. Let $b:B_1\\to B$ be the normalization of $B$ in $L$ [def-fin-normalization-extension]. The normalization theorem [lem-weil-pbc-normalization-in-residue-field-extension], applied at the generic point of the integral scheme $B$, says that $B_1$ is normal and integral and has function field $L$ compatibly over $B$. Since $B$ is covered by affine opens with excellent rings, every affine open of $B$ has an excellent ring by [lem-trf-excellent-scheme-affine-cover]. On an affine $\\operatorname{Spec}R\\subset B$, its inverse image is the spectrum of the integral closure of $R$ in $L$. The excellent domain $R$ is quasi-excellent, hence Nagata by [lem-exc-quasi-excellent-nagata], and N-2 by [lem-weil-pbc-nagata-domain-n2]. The definition [def-weil-pbc-japanese-domain](2) makes that integral closure finite over $R$. Thus $b$ is finite. It is proper by [lem-weil-pbc-finite-morphism-permanence](c), taking the target's identity as the proper map, and hence closed [def-weil-proper-morphism]. Its image contains the generic point of $B$, so closedness and integrality of $B$ give surjectivity.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-weil-pbc-nagata-domain-n2",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-proper-morphism",
+    "lem-trf-excellent-scheme-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035H, 035I, 035L (normalization); algebra.tex Tags 032F, 0334; more-algebra.tex Tag 07QV; properties.tex Tag 01OY"
+   }
+  },
+  {
+   "text": "Form $X_1=X\\times_B B_1$ with projections $a,g_1$. Base change of the finite surjection $b$ makes $a$ finite and surjective by [lem-weil-pbc-finite-morphism-permanence](a) and [lem-weil-pbc-surjective-base-change]. Both $B_1$ and $X_1$ are excellent and Noetherian: every affine open of $B$ and of $X$ has an excellent ring by [lem-trf-excellent-scheme-affine-cover], and these affine inverse images cover $B_1$ and $X_1$; on affine inverse images for the finite maps $b$ and $a$, their coordinate rings are finite algebras over excellent rings, hence finite type (module generators also generate the algebra) and excellent by [lem-exc-finite-type-localization-excellent]. Finite morphisms are of finite type by the same module-generator observation, so [lem-weil-pbc-finite-type-over-noetherian] gives Noetherianness of both schemes from that of $B$ and $X$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-excellent-scheme-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL, 01S1, 01T6; more-algebra.tex Tag 07QU"
+   }
+  },
+  {
+   "text": "The projection $g_1$ is proper by [lem-weil-pbc-proper-fp-permanence](b), flat by [lem-weil-pbc-flat-morphism-base-change], and of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). The restriction $g|_V$ is smooth by the definition of the smooth locus. Its base change is $g_1|_{a^{-1}(V)}$, which is smooth by [lem-pc-proper-base-change](2). Thus every point of $a^{-1}(V)$ is a smooth point of $g_1$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4, 01U9, 01TS, 01VB (base-change permanence)"
+   }
+  },
+  {
+   "text": "The generic point $\\eta_1$ of $B_1$ has residue field $L$ and maps to $\\eta$. Associativity of the defining fibre products gives $(X_1)_{\\eta_1}\\cong X_\\eta\\times_K L$. This is geometrically integral: for any field extension $E/L$ its base change is $X_\\eta\\times_K E$, integral by the original geometric-integrality hypothesis [def-pc-geometrically-irreducible]. It is proper over $L$, as the base change of the proper $g_1$ along $\\operatorname{Spec}L\\to B_1$ [lem-weil-pbc-proper-fp-permanence](b), hence separated and of finite type over $L$ [def-weil-proper-morphism]; taking $E=L$ it is integral. It has dimension one by [lem-pc-dim-base-change], applied to the curve $X_\\eta/K$ [def-pc-curve]. Thus it is a geometrically integral curve over $L$. For any geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to B_1$, the same fibre-product identity gives $X_1\\times_{B_1}\\operatorname{Spec}\\Omega\\cong X\\times_B\\operatorname{Spec}\\Omega$, where the right-hand map to $B$ is $b\\circ\\bar t$. This compares geometric fibres over exactly the same algebraically closed field $\\Omega$.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-pc-dim-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "def-pc-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3 (lemma-dimension-preserved-field-extension); varieties.tex Tag 020H (geometric integrality)"
+   }
+  },
+  {
+   "text": "We verify integrality of the whole $X_1$, not just its generic fibre. Take a nonempty affine open $U=\\operatorname{Spec}A\\subseteq X_1$ mapping into an affine open $W=\\operatorname{Spec}R\\subseteq B_1$. The ring $R$ is a domain with fraction field $L$, since $B_1$ is integral with function field $L$. By [lem-weil-pbc-flat-morphism-affine-criterion], $A$ is flat over $R$. Tensoring the injection $R\\hookrightarrow L$ with $A$ is injective by [def-weil-pbc-flat-ring-map], giving $A\\hookrightarrow A\\otimes_R L$. Since $U$ is nonempty, $A\\neq0$, so the generic open $U_{\\eta_1}=\\operatorname{Spec}(A\\otimes_R L)$ is nonempty. It is an affine open of the integral generic fibre from Step 6; hence $A\\otimes_R L$, and therefore its subring $A$, is a domain. These opens $U$ cover $X_1$, so $X_1$ is reduced. Any two nonempty opens of $X_1$ contain such affine opens $U,U'$; their generic opens are nonempty opens of the same integral generic fibre, and therefore intersect. Hence any two nonempty opens of $X_1$ intersect, proving irreducibility. The generic fibre is nonempty, so $X_1$ is nonempty. Thus $X_1$ is integral [def-pc-integral-scheme], completing (i).",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-pbc-flat-ring-map",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize); algebra.tex Tag 00HB (flat modules preserve injections); elementary affine integrality argument"
+   }
+  },
+  {
+   "text": "The two pullback descriptions identify $D_1=D\\times_X X_1\\cong D\\times_B B_1$. It is finite by [lem-weil-pbc-finite-morphism-permanence](a), etale by [lem-weil-pbc-etale-base-change-finite-limits](1), and a closed subscheme of $X_1$ by [lem-weil-pbc-proper-fp-permanence](b). Put $T=\\coprod_{i=1}^n B_1$, with structural map $q:T\\to B_1$. The scheme coproduct exists with disjoint open-and-closed summands by [lem-weil-pbc-scheme-coproduct-family]. The map $q$ is finite: over an affine $\\operatorname{Spec}R$ its ring is $R^n$, generated as an $R$-module by the coordinate idempotents. It is etale, since on each summand it is the identity, so the affine-local etale definition holds there [def-weil-etale-morphism]. For $n=0$ the same descriptions use the zero algebra and the empty scheme. The generic fibre of $T$ is the disjoint union of $n$ copies of $\\operatorname{Spec}L$, identified in Step 2 with that of $D_1$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL (finite etale covers over normal integral schemes); morphisms.tex Tags 01WL, 02GO, 01QR; schemes.tex Tags 01JB, 01JC"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-normal-integral-generic-hom-full] over the normal integral base $B_1$ to the finite etale covers $T,D_1$ of Step 8. The generic isomorphism $T_{\\eta_1}\\cong(D_1)_{\\eta_1}$ and its inverse extend uniquely to $B_1$-morphisms $h:T\\to D_1$ and $k:D_1\\to T$. Their two composites restrict to the identity on the generic fibres. Uniqueness in the same cited statement, applied to each cover as both source and target, gives $kh=1_T$ and $hk=1_{D_1}$. Thus $h$ is an isomorphism over $B_1$. This uses full faithfulness on all finite etale covers, including empty and disconnected ones; it does not assume that $D_1$ is connected.",
+   "uses": [
+    "lem-sbc-normal-integral-generic-hom-full"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BQL and 0BQM (proposition-normal, generic restriction is fully faithful)"
+   }
+  },
+  {
+   "text": "For each summand inclusion $\\iota_i:B_1\\to T$ set $s_i$ equal to $B_1\\xrightarrow{\\iota_i}T\\xrightarrow{h}D_1\\hookrightarrow X_1$. Since $h$ is over $B_1$, $g_1s_i=1_{B_1}$. The summands of $T$ are pairwise disjoint open and closed subschemes [lem-weil-pbc-scheme-coproduct-family]. Their images under $h$ give a scheme-theoretic disjoint-union decomposition of $D_1$, and each is closed in $X_1$: compose its closed immersion into $D_1$ with $D_1\\hookrightarrow X_1$ (locally the composite of the two quotient maps on rings is surjective). Thus these closed subschemes are exactly $s_i(B_1)$. Since $D\\subseteq V$, the map $D_1\\to X_1$ factors through $a^{-1}(V)$ by the defining pullback, so every section lands there. When $D=\\varnothing$, Step 2 chose $n=0$ and this decomposition is empty. This proves (iii), while Steps 5 and 6 prove (ii).",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB and 01JC (disjoint-union construction); elementary composition of closed immersions and fibre-product identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "def-pc-curve",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-pc-dim-base-change",
+  "lem-pc-proper-base-change",
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-generic-separable-algebra-splitting",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-nagata-domain-n2",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-surjective-base-change",
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BQL and 0BQM, combined with normalization and base-change lemmas cited in the steps; explicit affine proof of total-space integrality"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +236,45 @@
    "results": "8 hits on etale algebra and normalization declarations; no exact theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale marking on a flat family of geometrically integral curves splits into disjoint sections after a finite surjective integral base change",
+   "results": "8 hits; Algebra.Etale.iff_exists_algEquiv_prod, RingHom.Etale.isStableUnderBaseChange, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.IsEtale.of_comp, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale scheme split into disjoint sections after finite extension and normalization of an integral base",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.IsFinite",
+   "results": "1 hits; AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.etale.*split|etale.*trivial|normalizationIn",
+   "results": "0 hits; ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale finite cover is trivial after a finite dominant base extension of a normal integral scheme",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.iff_exists_algEquiv_prod, AlgebraicGeometry.finite_appTop_of_universallyClosed, RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-excellent-base-marked-semistable-curve",
@@ -84,5 +299,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-etale-marking-sections",
+  "worker": "stage1",
+  "summary": "Split via finite separable generic splitting, finite normalization using excellence/Nagata, generic full faithfulness for finite etale covers, and an explicit affine flatness argument for integrality. Reused existing DAG tools throughout; no new nodes and no statement change. Maintainer reader FIX (2026-10-18): cited def-pc-curve in the statement and Step 6, which now proves the generic fibre separated and of finite type over L via properness of g_1; Steps 3-4 cite lem-trf-excellent-scheme-affine-cover so that every affine open of B and X is excellent.",
+  "blueprint": "Realizes the marking-to-sections clause recorded in blueprint.from.place, under lem-trf-local-term-locality: the finite base change normalizes a splitting field and preserves the curve family and its geometric fibres.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic algebraic-geometric tool used only with its stated hypotheses in the numbered proof; it supplies normalization, finite-cover splitting, or base-change permanence, not an alternative local-term or semistable-alteration route."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic algebraic-geometric tool used only with its stated hypotheses in the numbered proof; it supplies normalization, finite-cover splitting, or base-change permanence, not an alternative local-term or semistable-alteration route."
+   },
+   {
+    "node": "lem-sbc-normal-integral-generic-hom-full",
+    "why": "Generic algebraic-geometric tool used only with its stated hypotheses in the numbered proof; it supplies normalization, finite-cover splitting, or base-change permanence, not an alternative local-term or semistable-alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-generic-separable-algebra-splitting",
+    "why": "Generic algebraic-geometric tool used only with its stated hypotheses in the numbered proof; it supplies normalization, finite-cover splitting, or base-change permanence, not an alternative local-term or semistable-alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-domain-n2",
+    "why": "Generic algebraic-geometric tool used only with its stated hypotheses in the numbered proof; it supplies normalization, finite-cover splitting, or base-change permanence, not an alternative local-term or semistable-alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-weil-pbc-generic-separable-algebra-splitting",
+  "lem-weil-pbc-nagata-domain-n2"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-6572f61b2",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-6572f61b2 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement, all 10 steps and every cited node's statement were checked against the sources, including Stacks pione.tex Prop. 0BQM (proposition-normal: generic restriction of finite etale covers over a normal integral base is fully faithful), 02GL, 02OG, 07QU/07QV, 0334, 035H/035L, 01U5/00HB, 01JB/01JC. The delivery has no new nodes and uses no SGA. I believe the statement is true; no target is weakened. Edge cases tested: D empty (n=0, L=K), D already split, char 0 and char p, B a field, a non-normal excellent B. The route works: excellence makes the normalization B_1 of B in L finite; D_1 is finite etale over B_1 and split on the generic fibre, so it is split over the normal integral base B_1. Total-space integrality of X_1 is proved correctly from flatness. No duplicate (the etale-local splitting nodes are different statements) and no cycle. Repairs (3 small): (1) the statement and Step 6 used 'curve' without def-pc-curve, and Step 6 never showed the generic fibre of g_1 is separated and of finite type over L; it now cites def-pc-curve and gets both from properness of g_1 (lem-weil-pbc-proper-fp-permanence(b), def-weil-proper-morphism). (2) Steps 3 and 4 used every affine open of B and X as excellent although only the ring definition is cited; they now cite lem-trf-excellent-scheme-affine-cover (same unit, reviewed). proof_deps were recomputed. I accept the five declared tool_uses (excellent finite type 07QU, quasi-excellent Nagata 07QV, normal-integral generic Hom 0BQM, generic separable algebra splitting, Nagata domain N-2) as generic tools; none replaces a step of the unit's route.; 1 file(s) fixed by the reviewer"
  }
 }

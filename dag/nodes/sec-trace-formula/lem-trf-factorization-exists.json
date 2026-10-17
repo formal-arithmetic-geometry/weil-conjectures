@@ -12,32 +12,68 @@
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 034R, lemma-factorization-exists (lines 29383–29405); the Mathlib leaf realizes this argument through WfDvdMonoid factorization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "ACC principal ideals factorization",
-   "results": "WfDvdMonoid.exists_factors and generic factorization declarations; no direct ACC-principal-ideal theorem.",
+   "query": "Every nonzero nonunit element of a Noetherian integral domain factors as a finite product of irreducibles",
+   "results": "IsNoetherianRing.wfDvdMonoid (Mathlib/RingTheory/Noetherian/UniqueFactorizationDomain.lean), WfDvdMonoid.exists_factors and WfDvdMonoid.not_unit_iff_exists_factors_eq (Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean).",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "match"
   },
   {
    "tool": "loogle",
-   "query": "domain with ascending chain condition on principal ideals every nonzero nonunit factors into irreducibles",
-   "results": "No matching declaration (parser returned no hits).",
+   "query": "WfDvdMonoid.exists_factors IsNoetherianRing",
+   "results": "No hits (the parser does not resolve this combined name pattern); targeted LeanFinder and grep found the declarations.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "factorization|irreducible",
-   "results": "Generic factorization and irreducibility infrastructure, but no Stacks ACC-principal-ideal statement.",
+   "query": "wfDvdMonoid|exists_factors",
+   "results": "Mathlib/RingTheory/Noetherian/UniqueFactorizationDomain.lean:23-25 defines IsNoetherianRing.wfDvdMonoid; generic factorization declarations are in Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean.",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonzero nonunit element of a Noetherian integral domain is a finite product of irreducible elements",
+   "results": "WfDvdMonoid.not_unit_iff_exists_factors_eq, WfDvdMonoid.exists_factors, and IsNoetherianRing.wfDvdMonoid; the first gives a nonempty finite multiset with exact product and irreducible entries.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian integral domain nonzero nonunit finite product irreducibles",
+   "results": "WfDvdMonoid.not_unit_iff_exists_factors_eq and WfDvdMonoid.exists_factors in Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean, with IsNoetherianRing.wfDvdMonoid supplying the instance.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "WfDvdMonoid.not_unit_iff_exists_factors_eq",
+   "results": "WfDvdMonoid.not_unit_iff_exists_factors_eq, Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean, alias of not_isUnit_iff_exists_factors_eq.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "not_unit_iff_exists_factors_eq|exists_factors",
+   "results": "Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean:77 exists_factors; line 87 not_isUnit_iff_exists_factors_eq; line 102 alias not_unit_iff_exists_factors_eq.",
+   "date": "2026-10-18",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "WfDvdMonoid.not_isUnit_iff_exists_factors_eq",
+  "file": "Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean:87",
+  "how": "specializes in one line: for a nonzero a in a WfDvdMonoid (namespace WfDvdMonoid, variables [CommMonoidWithZero α] [WfDvdMonoid α], lines 43-49), ¬IsUnit a ↔ ∃ f : Multiset α, (∀ b ∈ f, Irreducible b) ∧ f.prod = a ∧ f ≠ ∅ (lines 87-100); the WfDvdMonoid instance is the inferred IsNoetherianRing.wfDvdMonoid for [CommSemiring R] [IsDomain R] [IsNoetherianRing R] (Mathlib/RingTheory/Noetherian/UniqueFactorizationDomain.lean:23-25); enumerating the nonempty multiset f gives a=b₁⋯b_k with k≥1. (The older name WfDvdMonoid.not_unit_iff_exists_factors_eq is a deprecated alias, line 102.)"
+ },
+ "status": "mathlib",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-local-ufd-boundary-factorization",
@@ -61,5 +97,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-factorization-exists",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf: IsNoetherianRing.wfDvdMonoid supplies WfDvdMonoid for a Noetherian integral domain, and WfDvdMonoid.not_unit_iff_exists_factors_eq gives a nonempty finite multiset of irreducibles with product equal to the input; enumerating it yields the stated finite product.",
+  "blueprint": "The item realizes the Tag 034R factorization step invoked in the ancestor blueprint proof; Mathlib supplies this result directly, so there are no natural-language proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-7b9bd6351",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-7b9bd6351 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item only, which becomes a Mathlib leaf with no new nodes. The statement (a Noetherian integral domain, every nonzero nonunit is a finite product of k>=1 irreducibles) is a special case of Stacks 034R (algebra.tex 29383-29405, ACC on principal ideals), since Noetherian gives ACC on principal ideals. This is exactly what its consumer lem-trf-regular-local-ufd-boundary-factorization uses for the regular local ring A. The cited def-weil-pbc-noetherian-ring is correct. I read the Mathlib source: the instance IsNoetherianRing.wfDvdMonoid is at Noetherian/UniqueFactorizationDomain.lean:23-25, and WfDvdMonoid.not_isUnit_iff_exists_factors_eq is at UniqueFactorizationDomain/Defs.lean:87. Its clauses give the nonzero input, the nonunit, the irreducible factors, the exact product and the nonempty multiset (k>=1), so the item is a one-line leaf. Edge cases checked: a field (vacuous), Z (12=2*2*3), k[x,y]_(x,y), and k=1 for an irreducible input. I searched the DAG and all blueprint snapshots with rg and found no duplicate; same_as [] is correct. It is not a target node. One B6/B8 fault is repaired in fixes/: mathlib_match named the deprecated alias not_unit_iff_exists_factors_eq (Defs.lean:102, deprecated 2026-08-02) while citing line 87. It now names the canonical declaration not_isUnit_iff_exists_factors_eq, and its how field gives the lines read. No tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }

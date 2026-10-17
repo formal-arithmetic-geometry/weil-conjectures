@@ -16,9 +16,53 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-ph-etale-comparison-hypotheses] with base scheme $S=T$. Use $\\mathcal C=\\mathrm{Sch}/T$, $\\tau=ph$, $\\tau'=\\mathrm{Et}$, $\\mathcal P$ the proper morphisms, and $\\mathcal A'_X$ the full subcategory of torsion small-etale-origin sheaves $\\pi_X^{-1}F_X$. That node gives the inclusion of the etale topology in ph, the comparison morphisms with identity direct image, the weak Serre condition, and all five properties needed for the general comparison theorem. In particular it supplies proper base-change stability, stability under restriction, the ph sheaf condition, stability under every proper higher direct image, and the three-stage refinement of every ph cover. Thus none of these properties is being inferred just from a definition. The slice $\\mathcal C/X$ is canonically the category of schemes over $X$: its objects are $U\\to X\\to T$, and its morphisms are exactly the $X$-morphisms. Its two induced cover structures are the big ph and big etale cover structures on $X$ because both are defined on the underlying families of scheme morphisms. All these sites use the compatible presentations in the item.",
+   "uses": [
+    "lem-trf-ph-etale-comparison-hypotheses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, and section-ph-etale; the hypotheses of Tag 0EZF are written out in the cited comparison-hypotheses node."
+   }
+  },
+  {
+   "text": "The given $F$ is a torsion abelian sheaf on $T_{\\mathrm{Et}}$, so $G=\\pi_T^{-1}F$ belongs to $\\mathcal A'_T$ by its definition in [lem-trf-ph-etale-comparison-hypotheses]. Property (3) of that node says that the underlying presheaf of $G$ is already a ph sheaf. The same node describes $\\epsilon_T^{-1}$ as ph sheafification and $\\epsilon_{T,*}$ as leaving the presheaf unchanged. Sheafification of an already ph sheaf has its canonical unit invertible: by the universal property of sheafification [def-weil-pbc-sheafification] its identity factors through that unit, and uniqueness makes the factor and unit mutual inverses. Consequently the particular map $G\\to\\epsilon_{T,*}\\epsilon_T^{-1}G$ in the statement is an isomorphism. This proves the asserted unit, rather than an unspecified isomorphism between its source and target.",
+   "uses": [
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0I, lemma-compare-ph-etale, Property (A-sheaf), proved there using Tag 0DDW, lemma-describe-pullback-pi-ph."
+   }
+  },
+  {
+   "text": "Let $H=\\epsilon_T^{-1}G$. By $G\\in\\mathcal A'_T$, this $H$ lies in the full subcategory $\\mathcal A_T$ defined as the inverse-image class in [lem-trf-refined-topology-comparison-vanishing]. Apply that theorem to the data verified in Step 1, and take its slice object $X$ to be $T\\xrightarrow{\\mathrm{id}}T$. It gives $(V_n)$ for every integer $n\\geq0$: $R^i\\epsilon_{T,*}H=0$ for $1\\leq i\\leq n$. For an arbitrary $q>0$, take $n=q$ and $i=q$. The resulting equality is exactly $R^q\\epsilon_{T,*}(\\epsilon_T^{-1}G)=0$. These are ordinary right derived functors on abelian sheaves by the cited theorem's convention. The hypothesis package uses all locally torsion sheaves, so neither choosing $n=q$ nor applying the theorem imposes a common annihilator or an invertibility assumption.",
+   "uses": [
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-refined-topology-comparison-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DE4, lemma-V-C-all-n-etale-ph, proof of (1), applying the first assertion of Tag 0EZF, sites-cohomology.tex, lemma-V-C-all-n-general."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-ph-etale-comparison-hypotheses",
+  "lem-trf-refined-topology-comparison-vanishing",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DE4, lemma-V-C-all-n-etale-ph, proof of (1); comparison hypotheses Tag 0F0I; general vanishing induction Tag 0EZF in sites-cohomology.tex."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +91,38 @@
    "results": "{\"t\": \"2026-10-17T18:16:46Z\", \"tool\": \"leansearch\", \"query\": \"Torsion etale sheaves are acyclic for the direct image from ph topology to etale topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso\"], \"digest\": \"901e169b54e4e78b\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned site definitions, coherent-site statements and the pullback of the free rank-one module do not assert ph-to-etale torsion acyclicity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a torsion sheaf pulled back from the small etale site, higher direct images from the ph site comparison vanish and the unit is an isomorphism",
+   "results": "{\"t\": \"2026-10-17T18:42:03Z\", \"tool\": \"leanfinder\", \"query\": \"For a torsion sheaf pulled back from the small etale site, higher direct images from the ph site comparison vanish and the unit is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackIso\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso\", \"CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous\"], \"digest\": \"b3eadb544914dc8f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module pullback-unit and generic sheaf adjunction statements do not assert ph comparison acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "epsilon, torsion, higher direct image",
+   "results": "{\"t\": \"2026-10-17T18:42:03Z\", \"tool\": \"loogle\", \"query\": \"epsilon, torsion, higher direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'epsilon'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: unknown identifier in query"
+  },
+  {
+   "tool": "grep",
+   "query": "ph.*etale|etale.*ph|epsilon.*torsion",
+   "results": "{\"t\": \"2026-10-17T18:42:03Z\", \"tool\": \"grep\", \"query\": \"ph.*etale|etale.*ph|epsilon.*torsion\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module pullback-unit and generic sheaf adjunction statements do not assert ph comparison acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a torsion sheaf pulled back from the small etale site, higher direct images from the ph site comparison vanish and the unit is an isomorphism",
+   "results": "{\"t\": \"2026-10-17T18:42:39Z\", \"tool\": \"leansearch\", \"query\": \"For a torsion sheaf pulled back from the small etale site, higher direct images from the ph site comparison vanish and the unit is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_hom_app_val_app\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Equivalence.sheafCongrPreregular_unitIso_hom_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"CategoryTheory.Equivalence.sheafCongr.unitIso_hom_app_val_app\", \"CategoryTheory.Equivalence.sheafCongr_unitIso\"], \"digest\": \"2b7a42526f80058a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module pullback-unit and generic sheaf adjunction statements do not assert ph comparison acyclicity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-etale-torsion-comparison",
@@ -75,5 +147,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ph-big-etale-torsion-acyclicity",
+  "worker": "stage1",
+  "summary": "Repair of returned delivery: removed the circular application of 0DE4(1) as its own proof and the unsupported degree-zero claim. Created statement-only nodes for the full 0F0I weak Serre/five-property hypothesis package and the general 0EZF vanishing induction. The item now verifies the specialization, obtains its canonical unit from the ph sheaf condition, and applies (V_n) with n=q. The statement and all its hypotheses are unchanged; previous item Mathlib searches and logs are retained.",
+  "blueprint": "Realizes the normal-cone specialization step in which Stacks 0DE4(1) kills higher epsilon_* on etale-origin torsion sheaves; the comparison is used by lem-trf-ph-etale-torsion-comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-a804af715",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-a804af715 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement and the Stacks sources: etale-cohomology.tex section-ph-etale (0DDW, the full proof of 0F0I lemma-compare-ph-etale, the proof of 0DE4(1)) and sites-cohomology.tex section-compare, 0EZ3 situation-compare, lemma-A and the (V_n) induction through 0EZF lemma-V-C-all-n-general. Item: the statement is unchanged. It is exactly 0DE4(1) at X=T with a_T=pi_T∘epsilon_T, torsion coefficients on the small etale site, no common annihilator and no invertibility condition. epsilon_T is induced by the identity, with epsilon_* the identity on presheaves, as in the source. The DAG's ph topology (generated by Zariski covers and proper surjective singletons) has the same sheaves as Stacks' ph topology by 0DBQ. Step 1: the comparison-hypotheses node states everything the step uses; the slice identification is written out. Step 2: G is a ph sheaf by property (3), so the unit is a sheafification unit and is invertible. This is elementary and gives the canonical map. Step 3: apply the general node at X=id_T and take n=q. This mirrors the source proof of 0DE4(1) and is no longer circular. New nodes: comparison-hypotheses matches 0F0I and 0EZ3 hypothesis by hypothesis: weak Serre spelled out, P=proper, A'_X the torsion sheaves pi^{-1}F, properties (1)-(5). The tests hold: weak Serre via the five lemma; ph sheaf property on proper surjective maps for Z/p in characteristic p; (4) needs no invertibility (0DDJ(2)); (5) holds for the generated topology via 0DET. refined-topology-comparison-vanishing is the first assertion of 0EZF with every hypothesis written out. It is site-theoretic, not a restatement of the item, and hypothesis (3) is necessary. Both nodes are statement-only, each with four recorded searches; their blueprint from/via fields are correct and same_as is empty. An rg for 0F0I, 0EZF, 0EZ3, 0DE4, 0DDW and the related labels finds no duplicate or generalization in the DAG. Route: everything stays in unit sk-i-curve-zero, there is no SGA citation and no tool_uses. Fix (C1/B3): ph/tau sheafification and its universal property were used with no definition node. I added [def-weil-pbc-sheafification] to the statements and stmt_deps of both new nodes, and to the uses of item step 2 and the item's proof_deps. The corrected files are under fixes/dag/nodes/sec-trace-formula/. No statement was changed or weakened.; 3 file(s) fixed by the reviewer"
  }
 }
