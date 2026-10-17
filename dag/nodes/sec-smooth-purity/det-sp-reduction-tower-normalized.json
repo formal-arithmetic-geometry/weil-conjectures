@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "The reduction tower of a complex is normalized",
- "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. For any scheme $T$, work on a small skeleton of its pro-étale site in the module universe [def-weil-pbc-proetale-site], and put $R_T=\\mathcal O_{E,T}=\\varprojlim_{n\\geq1}(\\mathcal O_E/\\ell^n)_T$ and $R_{T,n}=(\\mathcal O_E/\\ell^n)_T$, as in [sk-def-sp-coefficient-towers]. Use the ordinary unbounded derived category $D(R_T)$ of sheaves of $R_T$-modules [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. For $M\\in D(R_T)$ the reductions\n$$M/\\ell^n=M\\otimes^{\\mathbf L}_{R_T}R_{T,n}$$\nform an object $\\operatorname{red}_TM$ of $D(\\operatorname{Tow}(T,\\mathcal O_E))$, functorial in $M$, with these evaluations and quotient-induced transitions [det-sp-coefficient-towers-abelian]. All its reduction maps\n$$ (M/\\ell^n)\\otimes^{\\mathbf L}_{R_{T,n}}R_{T,m}\\longrightarrow M/\\ell^m\\qquad(1\\leq m\\leq n)$$\nare isomorphisms.\n\nHere $\\Dbc(T,\\mathcal O_E)$ and $\\Dctf(T,\\mathcal O_E/\\ell^n)$ mean bounded complexes with constructible cohomology and their finite-Tor subcategories over the pulled-back coefficient sheaves, as in [sk-def-sfb-constructible, det-def-sfb-constructible-tor-amplitude]; the completed integral sheaf is the $R_T$ above. If $M\\in\\Dbc(T,\\mathcal O_E)$, then\n$$\\operatorname{red}_TM\\in\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)_{\\mathrm{norm}}$$\n[sk-def-sp-normalized-towers]. More precisely $M$ has finite Tor amplitude, and every interval $[a,b]$ of Tor amplitude for $M$ is an interval of Tor amplitude, and of cohomological support, for every level $M/\\ell^n$.",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. For any scheme $T$, work on a small skeleton of its pro-étale site in the module universe [def-weil-pbc-proetale-site], and put $R_T=\\mathcal O_{E,T}=\\varprojlim_{n\\geq1}(\\mathcal O_E/\\ell^n)_T$ and $R_{T,n}=(\\mathcal O_E/\\ell^n)_T$, as in [sk-def-sp-coefficient-towers]. Use the ordinary unbounded derived category $D(R_T)$ of sheaves of $R_T$-modules [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. For $M\\in D(R_T)$ the reductions\n$$M/\\ell^n=M\\otimes^{\\mathbf L}_{R_T}R_{T,n}$$\nform an object $\\operatorname{red}_TM$ of $D(\\operatorname{Tow}(T,\\mathcal O_E))$, functorial in $M$, with these evaluations and quotient-induced transitions [det-sp-coefficient-towers-abelian]. All its reduction maps\n$$ (M/\\ell^n)\\otimes^{\\mathbf L}_{R_{T,n}}R_{T,m}\\longrightarrow M/\\ell^m\\qquad(1\\leq m\\leq n)$$\nare isomorphisms.\n\nHere $\\Dbc(T,\\mathcal O_E)$ and $\\Dctf(T,\\mathcal O_E/\\ell^n)$ mean bounded complexes with constructible cohomology and their finite-Tor subcategories over the pulled-back coefficient sheaves, as in [sk-def-sfb-constructible, det-def-sfb-constructible-tor-amplitude]; the completed integral sheaf is the $R_T$ above. Assume now that $T$ is quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism]. If $M\\in\\Dbc(T,\\mathcal O_E)$, then\n$$\\operatorname{red}_TM\\in\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)_{\\mathrm{norm}}$$\n[sk-def-sp-normalized-towers], where finite-level constructibility means [def-weil-proetale-constructible-sheaf]. More precisely $M$ has finite Tor amplitude, and every interval $[a,b]$ of Tor amplitude for $M$ is an interval of Tor amplitude, and of cohomological support, for every level $M/\\ell^n$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
   "place": "node det-sp-reduction-tower-normalized, order None"
@@ -21,7 +21,10 @@
   "sk-def-sfb-constructible",
   "det-def-sfb-constructible-tor-amplitude",
   "sk-def-sp-normalized-towers",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-proetale-constructible-sheaf"
  ],
  "proof": [
   {
@@ -52,7 +55,7 @@
    }
   },
   {
-   "text": "For every $n$, apply [lem-weil-pbc-ringed-topos-kflat-pullback] to the identity underlying topos and the ring map $R\\to R_n$. It says that $P_n=P\\otimes_RR_n$ is K-flat with flat terms over $R_n$. Therefore the source of the reduction map for $m\\leq n$ is computed by the ordinary complex $P_n\\otimes_{R_n}R_m$ by [lem-pur-derived-change-of-rings]. The map induced by the transition and the tensor/restriction adjunction in [det-sp-coefficient-towers-abelian] is\n$$ (x\\otimes c)\\otimes d\\longmapsto x\\otimes\\bar c d.$$\nIt has inverse $x\\otimes d\\mapsto(x\\otimes1)\\otimes d$. Both are well-defined by the balancing relations of [def-pur-sheaf-tensor-product], and commute with differentials; these formulas define mutually inverse maps first locally in the tensor presheaves and then in their sheafifications. This identifies the actual reduction map, not just its two endpoints, with an isomorphism. For $m=n$ the formulas are the tensor unit map; for three indices both composites send a pure tensor to $x\\otimes\\bar c\\bar d e$, proving compatibility.",
+   "text": "For every $n$, apply [lem-weil-pbc-ringed-topos-kflat-pullback] to the identity underlying topos and the ring map $R\\to R_n$. It says that $P_n=P\\otimes_RR_n$ is K-flat with flat terms over $R_n$. Therefore the source of the reduction map for $m\\leq n$ is computed by the ordinary complex $P_n\\otimes_{R_n}R_m$ by [lem-pur-derived-change-of-rings]. The reduction map is induced by the tower transition, as stated in [det-sp-coefficient-towers-abelian](3). The ordinary tensor adjunction here is the explicit bijection sending $f:P_n\\otimes_{R_n}R_m\\to P_m$ to $x\\mapsto f(x\\otimes1)$, with inverse sending $g:P_n\\to\\operatorname{Res}P_m$ to $(x\\otimes d\\mapsto d\\,g(x))$; balancing verifies the two maps are inverse. Since $P_n$ is K-flat this computes the derived transition-adjoint map, whose formula is\n$$ (x\\otimes c)\\otimes d\\longmapsto x\\otimes\\bar c d.$$\nIt has inverse $x\\otimes d\\mapsto(x\\otimes1)\\otimes d$. Both are well-defined by the balancing relations of [def-pur-sheaf-tensor-product], and commute with differentials; these formulas define mutually inverse maps first locally in the tensor presheaves and then in their sheafifications. This identifies the actual reduction map, not just its two endpoints, with an isomorphism. For $m=n$ the formulas are the tensor unit map; for three indices both composites send a pure tensor to $x\\otimes\\bar c\\bar d e$, proving compatibility.",
    "uses": [
     "lem-weil-pbc-ringed-topos-kflat-pullback",
     "lem-pur-derived-change-of-rings",
@@ -66,31 +69,35 @@
    }
   },
   {
-   "text": "First establish a finite Tor interval for $M$ without any quasi-compactness hypothesis on $T$. Choose $r\\leq s$ containing its cohomological support. Cover $T$ by affine opens $j:U\\hookrightarrow T$. By [lem-weil-pbc-site-pullback-abelian-exact] and [lem-sfb-alpha-iso], $j^*M$ has the same cohomological bound and remains constructible by the affine-local definition in [sk-def-sfb-constructible]. Each $U$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Thus [det-def-localizing-closure-ctf-equals-bc](2), with $\\Lambda=\\mathcal O_E$, gives Tor amplitude in $[r-1,s]$ for $j^*M$, uniformly over this cover. For any $R$-module sheaf $N$, the exact restriction and the tensor/pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify\n$$j^*\\mathcal H^q(M\\otimes_R^{\\mathbf L}N)=\\mathcal H^q(j^*M\\otimes_{R_U}^{\\mathbf L}j^*N).$$\nThese vanish for $q\\notin[r-1,s]$. Restrictions to affine opens are literal slice restrictions by [lem-weil-proetale-weakly-etale-localization]; their joint vanishing implies global vanishing: a section over any pro-etale object restricts to zero on its base changes to the affine cover, and the separatedness part of the sheaf axiom makes it zero. Hence $M$ has finite Tor amplitude on arbitrary $T$.\n\nNow fix any Tor interval $[a,b]$ for $M$, in the sense of [det-def-sfb-constructible-tor-amplitude]. For any $R_n$-module sheaf $N$ in degree zero, the K-flat representative $P_n$ of step 3 gives\n$$ (M/\\ell^n)\\otimes^{\\mathbf L}_{R_n}N\\simeq P_n\\otimes_{R_n}N\\cong P\\otimes_R\\operatorname{Res}_RN\\simeq M\\otimes_R^{\\mathbf L}\\operatorname{Res}_RN.$$\nThe middle map is $(x\\otimes c)\\otimes y\\mapsto x\\otimes cy$, with inverse $x\\otimes y\\mapsto(x\\otimes1)\\otimes y$, using [def-pur-sheaf-tensor-product]. Here is the one-K-flat-factor computation used in this display. For a module sheaf $N$ choose a flat-term K-flat resolution $Q\\to N$ by [lem-pc-kflat-resolution]. Its cone is acyclic, so tensoring it with the K-flat complex $P_n$ is acyclic by [def-pc-kflat-complex]. Since the tensor of a cone is the cone of the tensored map, $P_n\\otimes Q\\to P_n\\otimes N$ is a quasi-isomorphism. The two-K-flat computation in [lem-weil-pbc-site-derived-tensor-descent] therefore identifies $P_n\\otimes N$ with the derived tensor. Over $R$, choose a flat-term K-flat resolution $Q_R\\to\\operatorname{Res}_RN$. The cone of this resolution is acyclic, and $P\\otimes_R\\operatorname{Cone}(Q_R\\to\\operatorname{Res}_RN)$ is acyclic by K-flatness of $P$. Thus $P\\otimes_RQ_R\\to P\\otimes_R\\operatorname{Res}_RN$ is a quasi-isomorphism; the two-K-flat computation identifies its source with $M\\otimes_R^{\\mathbf L}\\operatorname{Res}_RN$, proving the right-hand identification. The identification of the reduction itself with $P_n$ was established in step 3. Restriction of scalars leaves the underlying object in degree zero. The right side therefore has cohomology only in $[a,b]$. This proves preservation of every Tor interval for all $n$, with no flatness assumption on $R\\to R_n$.",
+   "text": "For the constructibility conclusion assume from now on that $T$ is qcqs and $M\\in\\Dbc(T,\\mathcal O_E)$. Choose integers $r\\leq s$ containing its cohomological support. Apply [det-def-localizing-closure-ctf-equals-bc](2) directly on $T$, with $\\Lambda=\\mathcal O_E$: the coefficient sheaf is the pulled-back integral sheaf identified with $R_T$ in [sk-def-sp-coefficient-towers]. The cited statement gives Tor amplitude in $[r-1,s]$, so $M$ has finite Tor amplitude. All its hypotheses hold on $T$ itself; no affine-local-to-global constructibility claim is used.",
    "uses": [
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-sfb-alpha-iso",
-    "sk-def-sfb-constructible",
-    "lem-weil-pbc-affine-scheme-qcqs",
     "det-def-localizing-closure-ctf-equals-bc",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-proetale-weakly-etale-localization",
-    "det-def-sfb-constructible-tor-amplitude",
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "sk-def-sp-coefficient-towers"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
-    "place": "Clause (2), applied on affine opens; affine-local uniform bound is glued by the sheaf axiom. Then explicit K-flat scalar calculation as in the imported constructibility paragraph."
+    "place": "Clause (2), now applied directly to qcqs T"
    }
   },
   {
-   "text": "Fix an affine open $U$ of $T$ and a level $n$. For each of the finitely many nonzero cohomology sheaves $H^q(M)|_U$, use its constructibility in [sk-def-sfb-constructible] to obtain a finite stratification by constructible locally closed subschemes with finite constant local models. If all cohomology sheaves vanish, then $M=0$ in the derived category and all its reductions are zero, which are constructible using the one-stratum partition of $U$ (or the empty partition when $U$ is empty). Otherwise iterate [lem-weil-pbc-constructible-stratification-intersection] to take their common refinement: its strata are the actual scheme fiber products, with constructible locally closed images given by the finite intersections. This also supplies the scheme maps from each refined stratum to the original strata, so the local models pull back along actual morphisms. On a stratum $S$, pro-étale locally, each such cohomology sheaf is $R_S\\otimes_{\\underline{\\mathcal O_E}}\\underline N$ for a finitely presented $\\mathcal O_E$-module $N$. Exactness and tensor compatibility of restriction use [lem-sfb-alpha-iso], [lem-weil-pbc-site-pullback-abelian-exact] and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], as in step 4. Finite coefficient sheaves pull back to the same finite coefficient sheaves by [lem-sfb-alpha-iso] applied to the finite condensed ring.\n\nPut $A=\\mathcal O_E$. It is a DVR by [def-weil-l-adic-coefficient-extension](2), so is Noetherian: every ideal is principal, hence finitely generated. Write a finite presentation $A^u\\to A^v\\to N\\to0$. The kernel $L\\subset A^v$ of the last map is generated by the finitely many images of the standard basis of $A^u$; it is torsion-free because $A$ is a domain and $L$ is a submodule of a free module. Thus [lem-sc-dvr-fg-torsionfree-free] gives $L\\cong A^w$, and\n$$0\\longrightarrow A^w\\longrightarrow A^v\\longrightarrow N\\longrightarrow0$$\nis a finite free resolution. Exact constant inverse image [lem-weil-pbc-site-pullback-abelian-exact] gives the corresponding exact sheaf sequence. By [lem-weil-pbc-completed-constant-sheaf-reduction] with $I=(\\ell)$, $R_S=\\lim_k\\underline{A/\\ell^k}$ is flat over $\\underline A$, so tensoring this exact sequence with $R_S$ remains exact. We get a two-term free $R_S$-resolution of the local model. Free sheaves are flat, since their tensor functors are finite sums of the exact identity functor, as in [def-pc-flat-sheaf-modules]; the two-term complex is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Hence [lem-pur-derived-change-of-rings] computes its reduction by the same two-term matrix over the constant scalar ring $A_n=A/\\ell^n$.\n\nThis scalar ring is finite: the cofinality in [sk-def-sp-coefficient-towers] gives $\\varpi_E^N A\\subseteq\\ell^n A$ for some $N$, making $A_n$ a quotient of the finite ring $A_{E,N}$ of [def-weil-l-adic-coefficient-extension](4). Cohomology of the two-term matrix consists of finite $A_n$-modules. Each is finitely presented: use all its elements as generators of a finite free module, then all elements of the finite kernel as relations. Exact constant inverse image identifies cohomology of the sheaf matrix with these constant finite modules. Therefore $(H^q(M)|_S)\\otimes^{\\mathbf L}_{R_S}R_{S,n}$ has locally constant finite-type cohomology, in degrees $-1,0$, on the already constructible strata.",
+   "text": "Fix any Tor interval $[a,b]$ for $M$ [det-def-sfb-constructible-tor-amplitude]. For any $R_n$-module sheaf $N$ in degree zero, use the explicit sentence “Derived tensor is computed by replacing one factor by a K-flat resolution” in [lem-weil-pbc-ringed-projection-mate-exact], with the identity morphism of the ringed topos, first over $R_n$ to $P_n$ from step 3 and $N[0]$, and then over $R$ to $P$ and $\\operatorname{Res}_RN[0]$. Both K-flat complexes have flat terms by steps 1 and 3. This gives\n$$(M/\\ell^n)\\otimes^{\\mathbf L}_{R_n}N\\simeq P_n\\otimes_{R_n}N\\cong P\\otimes_R\\operatorname{Res}_RN\\simeq M\\otimes_R^{\\mathbf L}\\operatorname{Res}_RN.$$\nThe middle isomorphism is induced by $(x\\otimes c)\\otimes y\\mapsto x\\otimes cy$, with inverse $x\\otimes y\\mapsto(x\\otimes1)\\otimes y$; the balancing relations [def-pur-sheaf-tensor-product] make these sheaf maps, and they commute with differentials. Restriction of scalars leaves the underlying degree-zero sheaf unchanged. Thus the last object has cohomology only in $[a,b]$, proving that every level has Tor amplitude in $[a,b]$. This argument assumes no flatness of $R\\to R_n$.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, one-factor K-flat computation, applied twice to the explicit coefficient-balancing isomorphism"
+   }
+  },
+  {
+   "text": "If $M=0$, its reductions are zero and the one-stratum partition $T=T$ suffices (also when $T$ is empty). Otherwise, for each of the finitely many nonzero cohomology sheaves $H^q(M)$, the qcqs clause of [sk-def-sfb-constructible] supplies a finite stratification of $T$ by constructible locally closed subschemes with finite constant local models. Iterate [lem-weil-pbc-constructible-stratification-intersection] to take their common refinement; its strata are the actual scheme fiber products, and the induced maps to the original strata pull the local models back. On a refined stratum $S$, pro-étale locally, each cohomology sheaf is $R_S\\otimes_{\\underline{\\mathcal O_E}}\\underline N$ for a finitely presented $\\mathcal O_E$-module $N$. Exactness and tensor compatibility of restriction use [lem-sfb-alpha-iso], [lem-weil-pbc-site-pullback-abelian-exact] and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Finite coefficient sheaves pull back to the same finite coefficient sheaves by [lem-sfb-alpha-iso] applied to the finite condensed ring.\n\nPut $A=\\mathcal O_E$. It is a DVR by [def-weil-l-adic-coefficient-extension](2), hence Noetherian. A finite presentation $A^u\\to A^v\\to N\\to0$ has finitely generated torsion-free kernel $L\\subset A^v$, so [lem-sc-dvr-fg-torsionfree-free] gives $L\\cong A^w$ and a finite free resolution $0\\to A^w\\to A^v\\to N\\to0$. Exact constant inverse image [lem-weil-pbc-site-pullback-abelian-exact] and flatness of $R_S$ over $\\underline A$ from [lem-weil-pbc-completed-constant-sheaf-reduction] give a two-term free $R_S$-resolution of the local model. Finite free sheaves are flat because their tensor functors are finite sums of the exact identity functor [def-pc-flat-sheaf-modules], and the complex is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Thus [lem-pur-derived-change-of-rings] computes its reduction by the same two-term matrix over $A_n=A/\\ell^n$.\n\nThe scalar ring $A_n$ is finite: cofinality in [sk-def-sp-coefficient-towers] gives $\\varpi_E^N A\\subseteq\\ell^nA$ for some $N$, so $A_n$ is a quotient of the finite ring in [def-weil-l-adic-coefficient-extension](4). The kernel and cokernel of the resulting finite matrix are finite $A_n$-modules, hence finitely presented: take all elements as generators and all elements of the finite kernel as relations, and exact constant inverse image identifies the sheaf cohomology with these constant finite modules. Therefore $H^q(M)\\otimes_R^{\\mathbf L}R_n$, restricted to each stratum, has locally constant finite-type cohomology in degrees $-1,0$ on the same finite global stratification of $T$.",
    "uses": [
     "sk-def-sfb-constructible",
+    "lem-weil-pbc-constructible-stratification-intersection",
     "lem-sfb-alpha-iso",
     "lem-weil-pbc-site-pullback-abelian-exact",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
@@ -100,32 +107,31 @@
     "def-pc-flat-sheaf-modules",
     "lem-pc-bounded-above-flat-kflat-site",
     "lem-pur-derived-change-of-rings",
-    "sk-def-sp-coefficient-towers",
-    "lem-weil-pbc-constructible-stratification-intersection"
+    "sk-def-sp-coefficient-towers"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M (lemma-completion-flat), Tag 093J (lemma-constant-exact); finite free DVR resolution via More on Algebra Tag 0AUW (lemma-dedekind-torsion-free-flat, PID case); K-flatness by sites-cohomology.tex Tag 06YQ (lemma-bounded-flat-K-flat); agent expansion of the constructibility paragraph using the given constructible strata."
+    "place": "Tags 093M (lemma-completion-flat), 093J (lemma-constant-exact); DVR resolution via more-algebra.tex Tag 0AUW; K-flatness via sites-cohomology.tex Tag 06YQ. Constructibility is used globally on qcqs T."
    }
   },
   {
-   "text": "To pass from cohomology sheaves to the whole complex, use the standard truncations [def-sbc-standard-tstructure-derived-category]. For cohomological support in $[r,s]$, the successive triangles are\n$$\\tau_{\\leq q-1}M\\longrightarrow\\tau_{\\leq q}M\\longrightarrow H^q(M)[-q]\\longrightarrow(\\tau_{\\leq q-1}M)[1]\\qquad(r\\leq q\\leq s).$$\nThey follow by applying the standard cutoff triangle to $\\tau_{\\leq q}M$: its upper piece has just $H^q(M)$ in degree $q$. The initial object $\\tau_{\\leq r-1}M$ is zero and the final object $\\tau_{\\leq s}M$ is $M$. Exact derived coefficient change [lem-pur-derived-change-of-rings] and the exact coefficient-preserving restriction of step 5 carry these triangles to triangles on each stratum $S$ over $R_{S,n}$. For a resulting triangle $X\\to Y\\to Z\\to X[1]$, [lem-sf-derived-homology-long-exact] gives the short exact sequence\n$$0\\longrightarrow\\operatorname{coker}(H^{i-1}(Z)\\to H^i(X))\\longrightarrow H^i(Y)\\longrightarrow\\ker(H^i(Z)\\to H^{i+1}(X))\\longrightarrow0.$$The ring $A_n$ is Noetherian since it is finite (every ideal is generated by its finitely many elements). The small-site theorem [lem-weil-pbc-locally-constant-derived-serre] therefore makes the locally constant finite-type $A_n$-sheaves closed under precisely those kernels, cokernels and extensions. Starting from zero and the shifted sheaf reductions of step 5, finite induction in $q$ proves that the cohomology of $(M/\\ell^n)|_S$ is locally constant of finite type on each constructible stratum. Since $A_n$ is finite, these local modules are finite and finitely presented by the generator/relation argument in step 5. Thus [sk-def-sfb-constructible] proves constructibility of all level cohomology on $U$, and its affine-local convention proves the result on arbitrary $T$. This argument requires neither Noetherianity of $T$ nor a stratumwise perfect model for the whole complex.",
+   "text": "Use the standard truncations [def-sbc-standard-tstructure-derived-category]. For cohomological support in $[r,s]$, the successive triangles are\n$$\\tau_{\\leq q-1}M\\longrightarrow\\tau_{\\leq q}M\\longrightarrow H^q(M)[-q]\\longrightarrow(\\tau_{\\leq q-1}M)[1]\\qquad(r\\leq q\\leq s).$$\nThe initial object $\\tau_{\\leq r-1}M$ is zero and the final object $\\tau_{\\leq s}M$ is $M$. Exact derived coefficient change [lem-pur-derived-change-of-rings] carries these triangles to the finite levels; exact restriction to the strata and the coefficient-preserving tensor comparison in step 6 carry them to the stratum sites. For a resulting triangle, [lem-sf-derived-homology-long-exact] gives the short exact sequence\n$$0\\longrightarrow\\operatorname{coker}(H^{i-1}(Z)\\to H^i(X))\\longrightarrow H^i(Y)\\longrightarrow\\ker(H^i(Z)\\to H^{i+1}(X))\\longrightarrow0.$$\nThe ring $A_n$ is Noetherian since it is finite. The small-site theorem [lem-weil-pbc-locally-constant-derived-serre] closes locally constant finite-type $A_n$-sheaves under these kernels, cokernels and extensions. Starting from zero and the shifted reductions supplied by step 6, finite induction proves that the cohomology of $M/\\ell^n$ is locally constant of finite type on each stratum. Because $A_n$ is finite, a finitely generated local $A_n$-module is finite as a set, and each geometric stalk is that finite local module. The strata of step 6 partition $T$ globally into finitely many constructible locally closed subschemes with actual immersion maps. These verify every clause of [def-weil-proetale-constructible-sheaf]. Hence every level has constructible cohomology in the sense of [def-weil-proetale-constructible-sheaf], with the same global finite partition of $T$.",
    "uses": [
     "def-sbc-standard-tstructure-derived-category",
     "lem-pur-derived-change-of-rings",
     "lem-sf-derived-homology-long-exact",
     "lem-weil-pbc-locally-constant-derived-serre",
-    "sk-def-sfb-constructible"
+    "def-weil-proetale-constructible-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093U (lemma-kernel-finite-locally-constant), part (3); derived.tex Tag 08J5 (remark-truncation-distinguished-triangle) and Tag 05RS (lemma-cohomology-homological); finite induction on the standard truncation tower."
+    "place": "Tag 093U (3), with derived truncation triangles from derived.tex Tags 08J5 and 05RS; finite induction on the global constructible stratification"
    }
   },
   {
-   "text": "In the Tor test of step 4 take $N=R_n$. Tensoring with this unit returns $M/\\ell^n$, so its cohomology vanishes outside the same $[a,b]$. Steps 5--6 and [det-def-sfb-constructible-tor-amplitude](4) therefore put every level in $\\Dctf$, with both types of bound independent of $n$. Step 3 gives precisely all the normalization isomorphisms. These are the defining conditions of [sk-def-sp-normalized-towers], so the strict derived tower constructed in steps 1--2 belongs to its normalized full subcategory.",
+   "text": "In the Tor test of step 5 take $N=R_n$. Tensoring with this unit returns $M/\\ell^n$, so its cohomology vanishes outside the same $[a,b]$. Steps 5--7 give finite-Tor constructible levels with a common cohomological interval, and step 3 gives all normalization isomorphisms. These are the defining conditions of [sk-def-sp-normalized-towers], so the strict derived tower constructed in steps 1--2 belongs to its normalized full subcategory.",
    "uses": [
     "det-def-sfb-constructible-tor-amplitude",
     "sk-def-sp-normalized-towers"
@@ -133,16 +139,16 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
-    "place": "Constructibility conclusion; unit definition of normalized constructible towers"
+    "place": "Constructibility conclusion for qcqs T; unit definition of normalized constructible towers"
    }
   }
  ],
  "proof_deps": [
   "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
   "def-pur-sheaf-tensor-product",
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-l-adic-coefficient-extension",
+  "def-weil-proetale-constructible-sheaf",
   "det-def-localizing-closure-ctf-equals-bc",
   "det-def-sfb-constructible-tor-amplitude",
   "det-sp-coefficient-towers-abelian",
@@ -152,16 +158,15 @@
   "lem-sc-dvr-fg-torsionfree-free",
   "lem-sf-derived-homology-long-exact",
   "lem-sfb-alpha-iso",
-  "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
   "lem-weil-pbc-constructible-stratification-intersection",
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-proetale-weakly-etale-localization",
   "sk-def-sfb-constructible",
   "sk-def-sp-coefficient-towers",
   "sk-def-sp-normalized-towers"
@@ -169,7 +174,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
-  "place": "Expansion of the three imported proof paragraphs (construction, normalization, constructibility), using the cited Stacks results and existing integral-model interfaces; current markdown contains the statement only."
+  "place": "Imported construction, normalization and constructibility paragraphs expanded using Stacks; qcqs constructibility correction recorded in statement_change"
  },
  "mathlib_searches": [
   {
@@ -220,10 +225,38 @@
    "results": "8 hits: Ext, localCohomology.diagram, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, PresheafOfModules.HasDifferentials, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.Derivation'.Universal.mk, CategoryTheory.Functor.mapExactFunctor_smul, PresheafOfModules.Derivation.d_map",
    "date": "2026-10-16",
    "verdict": "no match: Ext and local cohomology are different functors; exact-functor derived-category maps require an exact functor and do not give nonflat derived coefficient change or strict towers; the remaining declarations concern presheaf differentials or Ext linearity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived reductions of a complex over a complete DVR form a normalized inverse system of constructible sheaves with uniform Tor amplitude",
+   "results": "HasDerivedCategory; DerivedCategory; HomologicalComplexUpToQuasiIso; SheafOfModules.hasLimitsOfShape; no declaration states the theorem",
+   "date": "2026-10-17",
+   "verdict": "no match: only general derived-category and limits infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "InverseSystem, DerivedCategory, TensorProduct, TorAmplitude",
+   "results": "0 hits; unknown identifier TorAmplitude",
+   "date": "2026-10-17",
+   "verdict": "no match: query returned no theorem and reported unknown identifier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived reductions over a complete discrete valuation ring form a normalized constructible tower",
+   "results": "Tilt; adicCompletion declarations; no normalized constructible tower theorem",
+   "date": "2026-10-17",
+   "verdict": "no match: returned valuation and adic-completion infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.?tower|reduction.?tower|adic.*constructible (subdirectory CategoryTheory)",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no relevant Mathlib source declarations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -245,8 +278,8 @@
   "date": "2026-10-17",
   "item": "det-sp-reduction-tower-normalized",
   "worker": "stage1",
-  "summary": "Audited the inherited split and kept arbitrary schemes. Constructed the strict tower by K-flat resolving-class localization and computed the actual normalization maps. Proved uniform Tor bounds on affine opens and glued them. Repaired finite-level constructibility using the constructible strata of the cohomology sheaves, finite free DVR resolutions and finite Postnikov induction with the small-site Serre theorem; no unsupported constructible-stratification assertion from the integral whole-complex local-model node is used. No new nodes or unit changes.",
-  "blueprint": "Imported construction paragraph: steps 1--2; normalization paragraph: step 3; constructibility paragraph: steps 4--7. The unit only defines normalized towers and has no proof steps. The current source markdown has the statement, while the three proof paragraphs are preserved in the imported JSON.",
+  "summary": "Repaired every returned point: retained arbitrary-scheme construction/normalization, restricted the false global-constructibility conclusion to qcqs T with statement_change and a four-citer audit, worked on T itself, separated finite Tor existence from preservation of Tor intervals, and cited the existing small-ringed-site single-K-flat-factor computation. Corrected the reduction-map explanation using the explicit ordinary tensor-adjunction formulas. No new nodes.",
+  "blueprint": "Construction paragraph: steps 1--2; normalization paragraph: step 3; constructibility paragraph: steps 4--8, now on qcqs T. The existing ringed-projection-mate tool supplies the one-factor tensor computation for step 5.",
   "tool_uses": [
    {
     "node": "lem-pc-kflat-resolution",
@@ -277,20 +310,12 @@
     "why": "Cartesianity of the pulled-back coefficient sheaves for scheme maps; keeps the integral and finite coefficient rings correct under restriction."
    },
    {
-    "node": "lem-weil-pbc-affine-scheme-qcqs",
-    "why": "Checks the qcqs hypothesis of the integral Tor theorem on each affine open of an arbitrary scheme."
-   },
-   {
     "node": "det-def-localizing-closure-ctf-equals-bc",
     "why": "The qcqs integral-coefficient Tor bound [r-1,s] supplies a bound independent of the affine open; the unit states the required uniformity but has no Tor-bound theorem."
    },
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "why": "Tensor compatibility for arbitrary ringed topoi; used only with coefficient-preserving exact inverse images to compare local derived reductions and tensor tests."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Identifies an affine open pro-étale site with a slice site, so the sheaf axiom glues the local vanishing used to prove a uniform Tor bound."
    },
    {
     "node": "lem-pc-bounded-above-flat-kflat-site",
@@ -315,6 +340,10 @@
    {
     "node": "lem-weil-pbc-constructible-stratification-intersection",
     "why": "Generic common-refinement theorem for constructible immersed strata on arbitrary schemes; supplies the actual fiber-product stratum maps needed to restrict all the cohomology-sheaf local models simultaneously."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Its statement explicitly computes derived tensor by replacing one factor by a K-flat resolution on small ringed sites. Apply to the identity ringed topos over R_n and over R in step 5; the normalized-tower unit has no such computation theorem."
    }
   ]
  },
@@ -335,15 +364,16 @@
   "lem-weil-pbc-completed-constant-sheaf-reduction",
   "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-locally-constant-derived-serre",
-  "lem-weil-pbc-constructible-stratification-intersection"
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-weil-pbc-ringed-projection-mate-exact"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q10-1fdaf924b",
-  "group": "Q10",
+  "reviewer": "NT-cc-Q72-2cbd40f5d",
+  "group": "Q72",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-1fdaf924b (reviewer sub-agent of L); spot-checked: PASS: I read the whole item, all seven steps, the statements of all 27 cited nodes, the main-20261015 statement, the three imported proof paragraphs, the unit/chapter records and Stacks 06YS/0G7E/06YQ/093M/093J/093U(3)/08J5/0AUW. Statement: it matches the source for arbitrary T, with coefficient ring R_T = lim (O_E/l^n)_T. D^b_c and D_ctf follow sk-def-sfb-constructible, the same convention as ctf-equals-bc. 'With the Tor amplitude bounds of M' is made precise, not weakened. Replacing det-sp-scalar-extension-functor is correct: it covers only finite rings, and R_T is not finite. Step 1: the strict tower axioms and homotopies check. Step 2: descent through K-flat localization (tensor-descent node) and the localization universal property; no functorial choice is hidden. Step 3: P_n is K-flat by 0G7E with u = id and R->R_n; the balancing formulas give the actual reduction map, including m=n and three indices. Step 4: ctf-equals-bc(2) is applied on qcqs affine opens with the same [r-1,s], glued by separatedness; the one-K-flat-factor argument for (M/l^n)(x)^L N = M(x)^L Res N is valid without flatness of R->R_n. Step 5: fibre-product common refinement with constructible strata; finite free DVR resolution; flatness of R_S over constant A; bounded flat implies K-flat; A_n is finite. Step 6: truncation triangles, a stated induction, and weak Serre closure over the Noetherian A_n on the small site. Step 7 is elementary. Checked cases: M=R_T; M=R_T/l (unramified E), whose reductions [R_n -l-> R_n] stay in [-1,0]; empty T; non-quasi-compact T. No new nodes. No existing node duplicates the item (def-weil-integral-reduction-tower, def-weil-pbc-bounded-constructible-tower, lem-coef-normalized-dvr-effectivity and others checked). I accept all 17 split_report.tool_uses as generic tools. Minor and acceptable: constant-sheaf exactness is cited through the inverse-image exactness node (inverse image to the point site, Stacks 093J). No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-2cbd40f5d (reviewer sub-agent of L); spot-checked: I read the item in full (8 steps), the base statement, the main-20261015 source and its proof, pur713-def-finite-constructible, the unit and chapter records, and every cited statement (26). Statement correction: the D^b_c clause is now restricted to qcqs T, and the construction/normalization clause stays for every T. The restriction is needed. sk-def-sfb-constructible is affine-local on arbitrary schemes, while the normalized-tower levels need the single finite global partition of def-weil-proetale-constructible-sheaf (the blueprint's finite definition uses the same global partition). I checked the counterexample: on T = disjoint union of A^d with flag sums of closed pushforwards, the ranks force at least d+1 strata on A^d, so no finite global partition exists on T. Restricting the Tor clauses to qcqs T as well goes slightly beyond what the counterexample needs, but it matches the source's single hypothesis and no citer needs the non-qcqs case. Citers: det-sp-normalized-equivalence uses only the arbitrary-T clause; field-extension-towers, integral-adjunction-bijection and integral-direct-image-tower use separated finite-type schemes over a field, which are qcqs; lem-trf-lattice-reduction-tower-normalized only mentions the item and does not cite it. Stage 1 does not own statement_change, so the report section is the record. The report wrongly says the node carries a statement_change field; it does not. The maintainer should log the source error. Steps: step 1 uses 06YS; step 2 descends through the flat-term K-flat localization, with no functorial choice of resolution; step 3 uses 0G7E with u = id, and I checked the explicit adjoint and its inverse; step 4 applies ctf-equals-bc(2) directly on qcqs T; step 5 uses the one-factor K-flat sentence in the statement of ringed-projection-mate-exact, with no flatness of R to R_n; step 6 uses 093M (sites-modules.tex:8261), 0AUW and 06YQ; step 7 is an induction over truncations with 093U(3) (sites-modules.tex:8542), and its start and end are set up; step 8 is elementary. Long step 6 (2601 chars): it is one local-model matrix computation with every non-elementary input cited, so it may stay. Edge cases: M=0, T empty, M=R_T, and ramified O_E/ϖ, whose levels stay in [-1,0] and are normalized. No new nodes and no SGA. Tool use lem-weil-pbc-ringed-projection-mate-exact accepted. The base tool_uses list two nodes the proof no longer cites (lem-weil-pbc-affine-scheme-qcqs, lem-weil-proetale-weakly-etale-localization); the maintainer can prune them. No fixes."
  },
  "lean_audit": {
   "master": {

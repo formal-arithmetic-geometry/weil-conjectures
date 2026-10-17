@@ -27,15 +27,9 @@
  ],
  "proof": [
   {
-   "text": "Work in the fixed small-site universe. First fix the coefficient/model identification. A module-object action $B\\otimes M\\to M$ [sk-def-sfb-module-objects] is, by the sheafified pointwise tensor of [sk-def-sfb-sheaf-tensor], precisely a family of bilinear section actions compatible with restrictions; its unit and associativity equations are the sectionwise module axioms of [def-weil-sheaf-of-modules-category]. This identifies the categories and their linear morphisms. The coequalizer of [def-sfb-modobj-relative-tensor] imposes the sectionwise relations $bm\\otimes n=m\\otimes bn$, and hence is the ordinary sheaf tensor over $B$; deriving on the same K-flat models identifies the two relative derived tensors. The currying identity of [lem-weil-pbc-ringed-internal-hom-exact-restriction], followed by [lem-pur-rhom-global-sections] on both sides, gives $\\operatorname{Hom}_D(T,R\\mathcal Hom(L,N))\\cong\\operatorname{Hom}_D(T\\otimes_B^{\\mathbf L}L,N)$. Thus the functorial sheaf-Hom model below is the right adjoint specified in [sk-def-sfb-derived-tensor-hom]. The comparisons between two right adjoints are obtained by transposing their counits; their composites transpose back to the original counits by the triangle identities, so they are mutually inverse and preserve evaluation. No discrete-coefficient substitution or completed tensor is being made. By [lem-pur-ringed-site-grothendieck-abelian], filtered colimits of module sheaves are exact. Consequently the termwise colimit of complexes commutes with kernels, images, cokernels and cohomology, and preserves objectwise quasi-isomorphisms of diagrams: apply exactness to $0\\to\\ker d^n\\to M^n\\to\\operatorname{im}d^n\\to0$ and $0\\to\\operatorname{im}d^{n-1}\\to\\ker d^n\\to H^nM\\to0$. Use the functorial complex model in [def-pur-derived-internal-hom]; its invariance under quasi-isomorphisms and [lem-weil-pbc-unbounded-derived-iso-cohomology] allow us to test each comparison on cohomology sheaves. We will also use diagrams with a common cohomological lower bound, by the following explicit reduction: for any functorial complex model $A_i$ with $H^n(A_i)=0$ for $n<c$, replace it by $T_c A_i$, with zero terms below $c$, term $\\operatorname{coker}(d^{c-1})$ in degree $c$, and unchanged terms above $c$. The natural maps $A_i\\to T_cA_i$ are quasi-isomorphisms. This operation commutes with filtered colimits by exactness, so every termwise bounded-below comparison we prove also applies to these uniformly cohomologically bounded-below diagrams. In what follows, say a source $A$ has property $P$ if its canonical internal-Hom comparison is an isomorphism for all such diagrams and there is an integer $d_A$, independent of the diagram and $c$, for which $R\\mathcal Hom(A,N_i)\\in D^{\\ge c+d_A}$ whenever $N_i\\in D^{\\ge c}$.",
+   "text": "Work in the fixed small-site universe. Apply [lem-sfb-module-object-ringed-site-derived-comparison] to identify the module-object derived tensor over $B$ and evaluation-defined internal Hom with the ordinary ringed-site models, preserving evaluation. By [lem-pur-ringed-site-grothendieck-abelian], filtered colimits of module sheaves are exact. Consequently the termwise colimit of complexes commutes with kernels, images, cokernels and cohomology, and preserves objectwise quasi-isomorphisms of diagrams: apply exactness to $0\\to\\ker d^n\\to M^n\\to\\operatorname{im}d^n\\to0$ and $0\\to\\operatorname{im}d^{n-1}\\to\\ker d^n\\to H^nM\\to0$. Use the functorial complex model in [def-pur-derived-internal-hom]; its invariance under quasi-isomorphisms and [lem-weil-pbc-unbounded-derived-iso-cohomology] allow us to test each comparison on cohomology sheaves. We will also use diagrams with a common cohomological lower bound, by the following explicit reduction: for any functorial complex model $A_i$ with $H^n(A_i)=0$ for $n<c$, replace it by $T_c A_i$, with zero terms below $c$, term $\\operatorname{coker}(d^{c-1})$ in degree $c$, and unchanged terms above $c$. The natural maps $A_i\\to T_cA_i$ are quasi-isomorphisms. This operation commutes with filtered colimits by exactness, so every termwise bounded-below comparison we prove also applies to these uniformly cohomologically bounded-below diagrams. In what follows, say a source $A$ has property $P$ if its canonical internal-Hom comparison is an isomorphism for all such diagrams and there is an integer $d_A$, independent of the diagram and $c$, for which $R\\mathcal Hom(A,N_i)\\in D^{\\ge c+d_A}$ whenever $N_i\\in D^{\\ge c}$.",
    "uses": [
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-sheaf-tensor",
-    "def-weil-sheaf-of-modules-category",
-    "def-sfb-modobj-relative-tensor",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections",
-    "sk-def-sfb-derived-tensor-hom",
+    "lem-sfb-module-object-ringed-site-derived-comparison",
     "lem-pur-ringed-site-grothendieck-abelian",
     "def-pur-derived-internal-hom",
     "lem-weil-pbc-unbounded-derived-iso-cohomology"
@@ -43,19 +37,14 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JA, 08JC: functorial derived Hom; exact filtered sheaf-colimit argument written out here."
+    "place": "Tags 08JA, 08JC for the functorial Hom model; the module-object comparison is the separately stated lemma cited here, and the exact filtered-colimit/truncation argument is written out."
    }
   },
   {
-   "text": "First prove $P$ with $d_L=0$ for a module sheaf $L$ having a finite constant local model on any scheme $T$. On a model chart, write $L=B_T\\otimes_{\\underline A}\\underline P$, where $A=\\mathcal O_E$ or $E$. For $A=E$, row reduction on a finite scalar presentation gives $P\\cong E^r$: select a basis of the column span in $E^b$ and extend it to a basis of $E^b$. Thus $L\\cong B_T^r$. For $A=\\mathcal O_E$, [lem-weil-l-adic-extension-integers-dvr] says $A$ is a DVR and PID, hence Noetherian since each ideal is generated by one element. Choose a finite free surjection $A^b\\twoheadrightarrow P$. Its kernel is finitely generated by [lem-weil-pbc-noetherian-submodule-finite] and torsion-free as a submodule of $A^b$, so is finite free by [lem-sc-dvr-fg-torsionfree-free]. This gives $0\\to A^a\\to A^b\\to P\\to0$. Constant sheafification is exact by [lem-weil-pbc-constant-module-section-properties], and $B_T\\cong\\varprojlim_n\\underline{A/\\pi^n}$ by [det-prop-sfb-qlbar-colimit-x-integral-limit]; [lem-weil-pbc-completed-constant-sheaf-reduction] makes $B_T$ flat over $\\underline A$. Therefore $[B_T^a\\to B_T^b]$ in degrees $[-1,0]$ resolves $L$. The model [lem-weil-pbc-ringed-site-bounded-free-rhom-model] now computes internal Hom into every target complex bounded below by $c$. Each term is a finite sum of target terms; the differential is $d_Nf-(-1)^nf d_P$. Taking a filtered colimit commutes with these finite sums and with this differential, giving an isomorphism of complexes on the chart, and these Hom complexes vanish in degrees below $c$. The chart restriction of the actual canonical comparison is this calculation, by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. For a chart $f:W\\to T$, [sk-prop-sfb-cartesian-coefficients] identifies coefficient pullback with exact inverse image. This pullback is left adjoint to direct image by [def-sfb-module-upper-lower-adjunction], so commutes with all small colimits by [lem-weil-pbc-left-adjoint-preserves-colimits]. Under the slice-site identification this is precisely the restriction used here. The charts are slice sites by [lem-weil-proetale-weakly-etale-localization], with the correct coefficient rings by [sk-prop-sfb-cartesian-coefficients]. They form a pro-étale cover, hence cover every object after base change; [lem-sfb-sheaf-cover-local-isomorphism] applied to each cohomology sheaf, then [lem-weil-pbc-unbounded-derived-iso-cohomology], gives the global comparison and its common bound. For uniformly cohomologically bounded targets use the reduction of step 1. No finite upper bound on the targets or global bound on chart ranks is used.",
+   "text": "First prove $P$ with $d_L=0$ for a sheaf $L$ having a finite constant local model on any scheme $T$ [sk-def-sfb-constructible]. On each model chart write $L=B_T\\otimes_{\\underline A}\\underline P$, where $A=\\mathcal O_E$ or $E$ and $P$ is finitely presented. By [lem-sfb-finite-constant-model-two-term-free-resolution], choose a resolution $[B_T^a\\to B_T^b]\\to L[0]$ in degrees $[-1,0]$; rationally one may take $a=0$. The model [lem-weil-pbc-ringed-site-bounded-free-rhom-model] now computes internal Hom into every target complex bounded below by $c$. Each term is a finite sum of target terms; the differential is $d_Nf-(-1)^nf d_P$. Taking a filtered colimit commutes with these finite sums and with this differential, giving an isomorphism of complexes on the chart, and these Hom complexes vanish in degrees below $c$. The chart restriction of the actual canonical comparison is this calculation, by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. For a chart $f:W\\to T$, [sk-prop-sfb-cartesian-coefficients] identifies coefficient pullback with exact inverse image. This pullback is left adjoint to direct image by [def-sfb-module-upper-lower-adjunction], so commutes with all small colimits by [lem-weil-pbc-left-adjoint-preserves-colimits]. Under the slice-site identification this is precisely the restriction used here. The charts are slice sites by [lem-weil-proetale-weakly-etale-localization], with the correct coefficient rings by [sk-prop-sfb-cartesian-coefficients]. They form a pro-étale cover, hence cover every object after base change; [lem-sfb-sheaf-cover-local-isomorphism] applied to each cohomology sheaf, then [lem-weil-pbc-unbounded-derived-iso-cohomology], gives the global comparison and its common bound. For uniformly cohomologically bounded targets use the reduction of step 1. No finite upper bound on the targets or global bound on chart ranks is used.",
    "uses": [
     "sk-def-sfb-constructible",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "lem-sc-dvr-fg-torsionfree-free",
-    "lem-weil-pbc-constant-module-section-properties",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-sfb-finite-constant-model-two-term-free-resolution",
     "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "def-sfb-module-upper-lower-adjunction",
@@ -68,7 +57,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI, bounded finite-free Hom model; sites-modules Tags 093J and 093M; Bhatt–Scholze Lemma 6.8.2(1) for the coefficient limit. Finite scalar-resolution calculation written out."
+    "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free); the scalar resolution is the separately stated lemma cited here. The finite Hom-complex calculation and cover descent remain explicit."
    }
   },
   {
@@ -145,35 +134,25 @@
  "proof_deps": [
   "def-pur-derived-internal-hom",
   "def-sbc-standard-tstructure-derived-category",
-  "def-sfb-modobj-relative-tensor",
   "def-sfb-module-upper-lower-adjunction",
-  "def-weil-sheaf-of-modules-category",
   "det-pe-bounded-continuity-direct-image",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-pur-rhom-global-sections",
   "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sc-dvr-fg-torsionfree-free",
   "lem-sf-derived-homology-long-exact",
   "lem-sf-derived-ses-triangle",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
   "lem-sfb-finite-model-stratum-filtration",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
   "lem-sfb-open-closed-internal-hom-formulas",
   "lem-sfb-sheaf-cover-local-isomorphism",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
   "lem-weil-pbc-condensed-open-closed-recollement",
-  "lem-weil-pbc-constant-module-section-properties",
   "lem-weil-pbc-five-lemma",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-noetherian-submodule-finite",
   "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "lem-weil-proetale-weakly-etale-localization",
   "sk-def-sfb-constructible",
-  "sk-def-sfb-derived-tensor-hom",
-  "sk-def-sfb-module-objects",
-  "sk-def-sfb-sheaf-tensor",
   "sk-prop-sfb-cartesian-coefficients"
  ],
  "proof_origin": {
@@ -324,7 +303,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-hom-preserves",
@@ -337,7 +316,7 @@
   "date": "2026-10-17",
   "item": "lem-sfb-constructible-internal-hom-continuity",
   "worker": "stage1",
-  "summary": "NV checked the topologically Noetherian, ordinary uncompleted integral/rational statement against the local-model definition and Bhatt–Scholze. The proof is written as finite scalar-resolution, internal open/closed adjunction, uniformly bounded-below direct-image continuity and finite sheaf/truncation devissage. Two new statement-only technical lemmas fill genuinely absent generic immersion and topological-filtration inputs. All non-elementary citations have been read with their actual hypotheses; no global-Ext result is silently used for internal Hom. No Lean attachment or Mathlib match was found.",
+  "summary": "Q26 repaired the human return on the two long non-elementary steps: the module-object/ringed-site closed derived comparison and the finite scalar-model length-one free resolution are now separate statement-only nodes. Steps 1 and 2 cite them and retain the explicit exact-colimit/truncation, finite Hom-complex, and cover-descent arguments. The item statement, route, steps 3–7, Lean record and maintainer fields are unchanged. Re-read sources and cited statements, checked small cases and logged actual Mathlib searches.",
   "blueprint": "lem-sfb-dc-hom-preserves.proof.md, last sentence 'The cases $\\underline E$ and $\\underline{\\Qlb}$ follow by inverting $\\ell$ and by descending to a finite extension $E$ ... see Bhatt–Scholze, §6.8': compatibility of internal Hom with inverting $\\ell$ and with the filtered coefficient colimit (parent steps 5 and 8). Steps 1–7 supply the constructible-source continuity required by localization and coefficient passage in parent steps 5 and 8; the parent itself is not cited, avoiding a cycle.",
   "tool_uses": [
    {
@@ -357,20 +336,8 @@
     "why": "Generic qcqs bounded-below direct-image continuity, applied only with its common lower-bound hypothesis verified. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
    },
    {
-    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "why": "Identification of the integral coefficient sheaf with its inverse-limit construction. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-pur-rhom-global-sections",
-    "why": "Together with the generic currying identity, identifies the sheaf-Hom model with the right adjoint defining the item’s internal Hom. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
     "node": "lem-pur-ringed-site-grothendieck-abelian",
     "why": "Exact filtered colimits in any small ringed-site module category; supplies the abelian-category infrastructure, not a six-functor preservation route. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-sc-dvr-fg-torsionfree-free",
-    "why": "Finitely generated torsion-free modules over a DVR are finite free. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
    },
    {
     "node": "lem-sf-derived-homology-long-exact",
@@ -385,20 +352,8 @@
     "why": "Detecting cohomology-sheaf comparison isomorphisms on a pro-etale cover. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
    },
    {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Scalar valuation ring is a DVR/PID; needed to resolve finite local models, not a constructibility result. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "why": "Flatness of that completed ring sheaf over its constant scalar ring. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
     "node": "lem-weil-pbc-condensed-open-closed-recollement",
     "why": "Ordinary bounded-below open/closed support adjunctions, exact colimit-preserving pullback and common lower bounds; no preservation theorem is imported. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-constant-module-section-properties",
-    "why": "Exactness of the constant sheaf scalar resolution. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
    },
    {
     "node": "lem-weil-pbc-five-lemma",
@@ -407,10 +362,6 @@
    {
     "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
     "why": "Generic preservation of small colimits by that chart pullback. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-submodule-finite",
-    "why": "Finite generation of the scalar kernel inside a finite free module. This is a generic tool; the restricted-functors unit has no replacement for this infrastructure."
    },
    {
     "node": "lem-weil-pbc-proetale-ringed-open-closed",
@@ -467,9 +418,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NV-b4a02ca75",
-  "group": "NV",
+  "reviewer": "NT-cc-Q26-6b9497bb6",
+  "group": "Q26",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-b4a02ca75 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, both new nodes and the statements of all 32 cited nodes in full. Also read: the parent lem-sfb-dc-hom-preserves (steps 5 and 8), the unit sk-def-sfb-dc-restricted-functors, Bhatt–Scholze 6.3.14/6.3.15/6.7.13/6.8.12 and Stacks 09Y5/08JB. The item statement is unchanged and not weakened; it keeps the common lower bound, which BS Remark 6.3.15 shows is needed. Coefficients are the ordinary layer-B D(Mod_{Λ_X}) for O_E or E, and step 1 identifies the closed-structure RHom with the ringed-site model by uniqueness of right adjoints. Steps: (2) the integral resolution is correct: PID, a free kernel, exact constant sheafification, and completed B flat over the constant O_E. The bounded-free model with b=0, a=c gives d_L=0, checked on O_E/π. (3) The recollement is used only on D^+; det-pe-bounded-continuity-direct-image needs qcqs, which follows from the Noetherian space; the five lemma and i^* give continuity of Ri^!. (4) and (5) use the new internal formulas and i_* commuting with filtered colimits on a qcqs scheme. (6) The cone argument is sound and d_{A[n]}=d_A+n is right. (7) Filtration plus truncation triangles finish it. proof_deps equals the union of uses; nothing cited is merged; no cycle. New node lem-sfb-finite-model-stratum-filtration is true (09Y5 good refinement, ordered by maximal strata, reduced strata factor through the original strata, monomorphic counits). It generalizes det-lem-coefficient-heart-filtration, which covers only E/Q̄ℓ with lisse strata and so cannot handle the integral torsion models the item needs. New node lem-sfb-open-closed-internal-hom-formulas is true unbounded (j^* and Γ_Z preserve K-injectives). It is not a duplicate: det-lem-formal-closed-support-adjunction is the global-RHom form, lem-weil-closed-costalk-duality is a different identity, and lem-weil-stratum-ambient-hom covers finite rings only. Both new nodes are statement-only, sourced, searched with all three kinds of search, and carry correct blueprint.from/via. The declared tool_uses are all generic infrastructure and I accept them; no SGA is cited. One implicit identification (the new node's RΓ_Z equals the recollement's Ri^! on D^+, since both are right adjoints of i_*) is elementary and needs no repair. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-6b9497bb6 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 7 steps, both new nodes, the statement of every cited node, the parent lem-sfb-dc-hom-preserves (steps 7 and 10) and the unit. Sources checked at the cited places: Bhatt–Scholze 6.3.14/6.3.15/6.8.2/6.8.11(3)/6.8.12, Stacks 093J, 093M, 08J9, 08JB. No SGA is cited. The item statement is unchanged and not weakened: it keeps the common lower bound, on ordinary layer-B D(Mod_{Λ_X}) for O_E or E. Step 1: the T_c truncation is a quasi-isomorphism when H^{<c}=0 and commutes with filtered colimits. Step 2: the bounded-free model on [B^a→B^b] gives terms N^n⊕N^{n-1}, a finite sum vanishing below c, so d_L=0 (checked on O_E/π^n); the cover hypothesis of the local-isomorphism lemma holds. Steps 3–7: the recollement is used on D^+ only; qcqs follows from the Noetherian space; Ri^! agrees with RΓ_Z as right adjoints of i_*; d_{A[n]}=d_A+n; the filtration plus truncation triangles finish. New node lem-sfb-finite-constant-model-two-term-free-resolution is true (PID kernel; B_T=lim(O_E/π^n)_T is flat over the constant sheaf by 093M; a=0 rationally; checked P=0, P=A, P=O_E/π^n, empty T), is not a duplicate, and does not restate the item. One fault, C5: new node lem-sfb-module-object-ringed-site-derived-comparison re-defined the existing equivalence def-weil-pbc-internal-abelian-sheaf-module-equivalence and re-asserted the monoidal/K-flat clauses of the existing lem-pe-internal-section-tensor-comparison without citing either; the report's not-duplicates list missed both. Fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-module-object-ringed-site-derived-comparison.json: the node now cites both, adds them to stmt_deps (no cycle), and states only the new derived internal-Hom comparison with evaluation and slice compatibility. The item file is unchanged and step 1 still reads correctly. I accept all 17 declared tool_uses as generic infrastructure.; 1 file(s) fixed by the reviewer"
  }
 }

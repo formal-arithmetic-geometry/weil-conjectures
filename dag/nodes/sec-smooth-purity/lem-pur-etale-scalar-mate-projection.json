@@ -16,9 +16,79 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F_A=f_A^{-1}$, $F_B=f_B^{-1}$, $R_A=Rf_{*,A}$, $R_B=Rf_{*,B}$ and $C=R_AJ$, $N=L_ZJ$, so $M=L_WC$. Write $e_{T,H}:U_TL_TH\\simeq H\\otimes_A^LB_T$ for the scalar/tensor identification. It is natural on morphisms: $e_{T,H'}\\,U_TL_T(v)=(v\\otimes1)e_{T,H}$. Indeed [lem-pur-change-of-rings-tensor-comparison] gives this identity on sheaves (with the tensor symmetry to put $B_T$ on the right). Apply it termwise to K-flat resolutions, which exist by [lem-pc-kflat-resolution] and compute scalar extension by [lem-pur-derived-change-of-rings]. Thus it gives precisely the canonical derived identification in the statement, including its action on morphisms. Let $a_H:F_AU_WH\\xrightarrow{\\sim}U_ZF_BH$ and $d_Q:U_WR_BQ\\xrightarrow{\\sim}R_AU_ZQ$ be the canonical comparisons of [lem-sbc-canonical-restrict-scalars-functor-comparisons], with these orientations. All uses of these comparisons below are on bounded-below objects: $M,N$ are bounded below by hypothesis, and the right derived images and exact inverse images of bounded-below objects are bounded below.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), and 07A7 (remark-base-change); explicit counit calculation for the coefficient comparison mentioned in more-etale.tex, Tag 0GL6"
+   }
+  },
+  {
+   "text": "Let $c_C:F_BL_WC\\xrightarrow{\\sim}L_ZF_AC$ be the canonical scalar/pullback comparison specified in the statement, and let $t_C:F_A(C\\otimes_A^LB_W)\\xrightarrow{\\sim}F_AC\\otimes_A^LB_Z$ be the inverse monoidal comparison used in [def-kun-projection-formula-map]. Under $e$, forgetting $c_C$ has exactly this normalization:\n$$e_{Z,F_AC}\\,U_Z(c_C)\\,a_{L_WC}=t_C\\,F_A(e_{W,C}).$$\nTo check it, take a K-flat resolution $P$ with flat terms of a complex representing $C$ [lem-pc-kflat-resolution]. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $F_AP$ remains K-flat with flat terms, and the derived tensor/pullback comparisons are the canonical comparisons on these models. Scalar extension is represented by $P\\otimes_AB_W$ [lem-pur-derived-change-of-rings]; inverse image is termwise exact as specified in [def-kun-projection-formula-map]. After forgetting coefficients both sides are the same ordinary comparison $F_A(P\\otimes_AB_W)\\to F_AP\\otimes_AB_Z$: the scalar/tensor identifications simply retain the tensor and its maps, with the fixed symmetry of step 1. This is a check of the two specified representatives, not an additional projection formula or an isomorphism assertion about direct image.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-change-of-rings-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), and 07A7 (remark-base-change); explicit counit calculation for the coefficient comparison mentioned in more-etale.tex, Tag 0GL6"
+   }
+  },
+  {
+   "text": "Put $b=d_N\\,U_W(\\beta_J):U_WM\\to R_AU_ZN$. The counit clause of [lem-sbc-restrict-scalars-derived-adjunction-identities], composed on the right with $F_A(d_N)$, reads\n$$\\varepsilon^A_{U_ZN}F_A(d_N)=U_Z(\\varepsilon^B_N)a_{R_BN}.$$\nConsequently the $A$-adjoint transpose of $b$ is\n$$\\begin{aligned}\n\\varepsilon^A_{U_ZN}F_A(b)\n&=U_Z(\\varepsilon^B_N)a_{R_BN}F_AU_W(\\beta_J)\\\\\n&=U_Z(\\varepsilon^B_N)U_ZF_B(\\beta_J)a_M\\\\\n&=U_Z\\bigl(L_Z(\\varepsilon^A_J)c_C\\bigr)a_M.\n\\end{aligned}$$\nThe second equality is naturality of $a$ [lem-sbc-canonical-restrict-scalars-functor-comparisons]; the third is the defining transpose equation for $\\beta_J$ under the canonical adjunction of [def-kun-projection-formula-map]. The counit identity applies with the bounded-below $B$-object $N$, and naturality applies to the morphism $\\beta_J$ between bounded-below $B$-objects $M$ and $R_BN$. Hence no comparison outside the domain of those cited nodes has been used. The counits $\\varepsilon^A,\\varepsilon^B$ of the cited identity are those of the inverse-image/direct-image adjunction of [sbc-def-base-change-map], which is the canonical derived adjunction of the termwise inverse image and $Ru_*K=Q(u_*I)$ on K-injective resolutions, restricted to $D^+$; [def-kun-unbounded-exchange] fixes this same canonical adjunction for the same functors on the unbounded module derived categories, and [def-kun-projection-formula-map] uses it. So on the bounded-below objects $U_ZN$, $N$ occurring here they are the counits of the adjunctions specified in the statement.",
+   "uses": [
+    "lem-sbc-restrict-scalars-derived-adjunction-identities",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "def-kun-projection-formula-map",
+    "sbc-def-base-change-map",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), and 07A7 (remark-base-change); explicit counit calculation for the coefficient comparison mentioned in more-etale.tex, Tag 0GL6"
+   }
+  },
+  {
+   "text": "Conjugate $b$ by $e_{W,C}$ on its source and $R_A(e_{Z,J})$ on its target. Naturality of the $A$-counit and step 3 say its transpose is\n$$e_{Z,J}U_ZL_Z(\\varepsilon^A_J)U_Z(c_C)a_MF_A(e_{W,C}^{-1})\n=(\\varepsilon^A_J\\otimes1_{B_Z})t_C,$$\nwhere the equality uses the naturality of $e$ from step 1 and the normalization from step 2. This is exactly the transpose defining $\\mathrm{PF}_f(J,B_W[0])$ in [def-kun-projection-formula-map]. The adjunction Hom bijection is injective, so the two original morphisms agree. Naturality is also on the stated domain: for $v:J\\to J'$ the naturality square for $\\varepsilon^A$ gives $v\\varepsilon^A_J=\\varepsilon^A_{J'}F_AR_A(v)$; applying $L_Z$, naturality of $c$ and the Hom bijection give $R_BL_Z(v)\\beta_J=\\beta_{J'}L_WR_A(v)$. The natural comparisons $d,e$ carry this square to the projection-morphism square. Only its endpoints must satisfy the hypotheses; no claim that arbitrary scalar extension preserves boundedness is needed.",
+   "uses": [
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), and 07A7 (remark-base-change); explicit counit calculation for the coefficient comparison mentioned in more-etale.tex, Tag 0GL6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities",
+  "sbc-def-base-change-map",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, coefficient compatibility; expanded canonical-mate calculation using sites-cohomology.tex Tags 07A4, 0G7E, 07A7 and the existing restriction-of-scalars identities"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,10 +138,66 @@
    "results": "{\"t\": \"2026-10-17T07:05:26Z\", \"tool\": \"grep\", \"query\": \"[Pp]rojection|[Tt]ensor|changeOfRings\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"bb0d3ce43307be64\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits give general support, exact-functor, scalar-restriction or adjunction notions, not this derived comparison/interval statement"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Ff]ormula|[Ss]calar.*[Mm]ate",
+   "results": "{\"t\": \"2026-10-17T08:17:33Z\", \"tool\": \"grep\", \"query\": \"projection.*[Ff]ormula|[Ss]calar.*[Mm]ate\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf counits and general adjunction identities do not state the derived coefficient/projection map identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjoint transpose commutes with restriction of coefficients and the projection formula",
+   "results": "{\"t\": \"2026-10-17T08:17:33Z\", \"tool\": \"leansearch\", \"query\": \"The adjoint transpose commutes with restriction of coefficients and the projection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearPMap.adjoint\", \"LinearMap.adjoint\", \"LinearMap.toMatrix_adjoint\", \"Matrix.toLin_conjTranspose\", \"ContinuousLinearMap.adjointAux\", \"Matrix.adjugate_transpose\", \"LinearPMap.adjoint_isFormalAdjoint\", \"LinearPMap.IsFormalAdjoint\"], \"digest\": \"2f29321f7d6c548b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf counits and general adjunction identities do not state the derived coefficient/projection map identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit_naturality",
+   "results": "{\"t\": \"2026-10-17T08:17:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.counit_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit_naturality\", \"CategoryTheory.LiftLeftAdjoint.counitCoequalises\", \"CategoryTheory.LiftLeftAdjoint.counitCoequalizes\"], \"digest\": \"52abaaf282565f67\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf counits and general adjunction identities do not state the derived coefficient/projection map identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting coefficients identifies the derived direct image scalar extension counit mate with the projection formula morphism",
+   "results": "{\"t\": \"2026-10-17T08:17:34Z\", \"tool\": \"leanfinder\", \"query\": \"Forgetting coefficients identifies the derived direct image scalar extension counit mate with the projection formula morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"Condensed.profiniteSolidCounit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\"], \"digest\": \"03c3c0e4c2370463\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf counits and general adjunction identities do not state the derived coefficient/projection map identification"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|changeOfRings|projection",
+   "results": "{\"t\": \"2026-10-17T08:17:47Z\", \"tool\": \"grep\", \"query\": \"restrictScalars|changeOfRings|projection\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"50bf9ecf4d6e2f4d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf counits and general adjunction identities do not state the derived coefficient/projection map identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image direct image adjunction counit commutes with forgetting the coefficient ring in derived categories of sheaves",
+   "results": "{\"t\": \"2026-10-17T08:17:51Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse image direct image adjunction counit commutes with forgetting the coefficient ring in derived categories of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"CategoryTheory.constantSheafAdj_counit_w\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"digest\": \"384ef721c7cce105\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf counits and general adjunction identities do not state the derived coefficient/projection map identification"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|scalar.*mate",
+   "results": "{\"t\": \"2026-10-17T08:41:36Z\", \"tool\": \"grep\", \"query\": \"projection.*formula|scalar.*mate\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general module scalar adjunctions do not state this derived sheaf scalar-mate/projection equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived scalar restriction mate projection formula counit",
+   "results": "{\"t\": \"2026-10-17T08:41:47Z\", \"tool\": \"leanfinder\", \"query\": \"derived scalar restriction mate projection formula counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.app'\"], \"digest\": \"41a7c6bc0c8e937c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general module scalar adjunctions do not state this derived sheaf scalar-mate/projection equality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-finite-compact-support-constructibility",
@@ -88,5 +214,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-etale-scalar-mate-projection",
+  "worker": "stage1",
+  "summary": "Four-step canonical counit calculation; statement unchanged. Existing restriction comparison and its counit identity are used on their bounded-below domains. Scalar tensor and pullback maps are normalized on K-flat models. No new nodes or Mathlib leaves. Searches and source inspection find no project attachment or Mathlib exact match.",
+  "blueprint": "Nearest blueprint ancestor prop-finite-compact-support-constructibility, main-20261015 proof Step 5: the clause that finite-level direct image commutes with finite coefficient reduction. Steps 1-2 normalize scalar/pullback maps, steps 3-4 identify the proper-factor scalar mate with the projection morphism.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-change-of-rings-tensor-comparison",
+    "why": "Generic scalar/tensor, K-flat, or projection-morphism construction used to normalize the coefficient map; this is not a replacement for any unit step."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic scalar/tensor, K-flat, or projection-morphism construction used to normalize the coefficient map; this is not a replacement for any unit step."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic scalar/tensor, K-flat, or projection-morphism construction used to normalize the coefficient map; this is not a replacement for any unit step."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Supplies the bounded-below inverse/direct-image scalar restriction comparisons, needed to type the coefficient mate."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Generic scalar/tensor, K-flat, or projection-morphism construction used to normalize the coefficient map; this is not a replacement for any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic scalar/tensor, K-flat, or projection-morphism construction used to normalize the coefficient map; this is not a replacement for any unit step."
+   },
+   {
+    "node": "lem-sbc-restrict-scalars-derived-adjunction-identities",
+    "why": "Supplies compatibility of the canonical coefficient comparison with the counit; it is a formal input to the unit coefficient-reduction clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-8a439f6a5",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-8a439f6a5 (reviewer sub-agent of L); spot-checked: Read the item, all 13 citations' statements, and Stacks more-etale 0GL6 (l.3739-3771), sites-cohomology 07A4/0G7E/06YS/07A7 and blueprint main-20261015 prop-finite-compact-support-constructibility Step 5. The statement is unchanged, has correct D+ hypotheses and uses the def-kun coefficient category. Small cases f=id, B=0, J=0 and nonflat Z->Z/2 are fine. Steps 1-4 recomputed: counit-clause orientation, naturality of a, the definition of beta, the e/t normalization on K-flat models, and the transpose equal to alpha_{J,B_W[0]}. All correct. No new nodes. Neighbours lem-sfb-etale-proetale-scalar-mate and lem-coef-finite-direct-image (a special-case clause under finite/constructible hypotheses) are not duplicates. Fix: step 3 silently identified the counits of the sbc-def-base-change-map D+ adjunction (the one the cited counit identity concerns) with those of the def-kun-projection-formula-map adjunction. Added one sentence and cited the definition nodes sbc-def-base-change-map and def-kun-unbounded-exchange; proof_deps updated. Declared tool_uses accepted as generic black-box tools (the unit cites only sk-def-av-jacobian). No SGA.; 1 file(s) fixed by the reviewer"
  }
 }

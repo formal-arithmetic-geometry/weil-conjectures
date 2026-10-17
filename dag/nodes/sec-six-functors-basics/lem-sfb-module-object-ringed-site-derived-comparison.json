@@ -1,0 +1,95 @@
+{
+ "id": "lem-sfb-module-object-ringed-site-derived-comparison",
+ "kind": "statement",
+ "title": "Module-object and ringed-site derived internal Hom agree",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with its pro-étale site taken small in the chosen universe [def-weil-size-convention, def-weil-pbc-proetale-site]. Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and put $B=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], a commutative ring object of abelian sheaves with the sheafified pointwise tensor over $\\mathbf Z$ [sk-def-sfb-sheaf-tensor]; write $B_{\\mathrm{sec}}$ for its section-ring sheaf. Let $\\mathcal A$ be the category of $B$-module objects [sk-def-sfb-module-objects], $\\mathcal M=\\operatorname{Mod}(B_{\\mathrm{sec}})$ the category of sheaves of $B_{\\mathrm{sec}}$-modules [def-weil-sheaf-of-modules-category], and $F:\\mathcal A\\simeq\\mathcal M$ the equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence], which leaves underlying abelian sheaves, sections and morphisms unchanged. Let $D(F)$ be its termwise extension to the ordinary uncompleted unbounded derived categories [sk-def-sfb-derived-categories], and identify the K-flat derived relative tensor [def-sfb-modobj-relative-tensor, sk-def-sfb-derived-tensor-hom] with the ordinary ringed-site K-flat derived tensor through the comparison of [lem-pe-internal-section-tensor-comparison]. Let $\\operatorname{RHom}^{\\mathcal A}_B$ be the derived internal Hom of $D(\\mathcal A)$, defined as the right adjoint of this derived relative tensor in [sk-def-sfb-derived-tensor-hom], and let $R\\mathcal Hom_{B_{\\mathrm{sec}}}$ be the functorial K-injective sheaf-Hom model of [def-pur-derived-internal-hom]. Then for all $K,N\\in D(\\mathcal A)$ there are isomorphisms\n$$D(F)\\bigl(\\operatorname{RHom}_{B}^{\\mathcal A}(K,N)\\bigr)\\cong R\\mathcal Hom_{B_{\\mathrm{sec}}}(D(F)K,D(F)N),$$\nnatural in $K$ (contravariantly) and $N$, which carry the evaluation morphism $K\\otimes^{\\mathbf L}_B\\operatorname{RHom}^{\\mathcal A}_B(K,N)\\to N$, transported by $D(F)$ and the tensor comparison, to the ringed-site evaluation $D(F)K\\otimes^{\\mathbf L}_{B_{\\mathrm{sec}}}R\\mathcal Hom_{B_{\\mathrm{sec}}}(D(F)K,D(F)N)\\to D(F)N$. For every object $U$ of $X_{\\mathrm{pro\\acute et}}$, restricting these isomorphisms to the slice site $X_{\\mathrm{pro\\acute et}}/U$ [def-pur-localized-ringed-site] gives the corresponding isomorphisms for the ring object $B|_U$ and its section-ring sheaf.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U), 08JB (lemma-restriction-RHom-to-U); agent comparison of these ringed-site models with the module-object definitions in blueprint sk-def-sfb-module-objects and sk-def-sfb-derived-tensor-hom. Sectionwise modules: sites-modules Tag 03CV (section-sheaves-modules). This comparison is not a verbatim Stacks statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-module-objects",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-modobj-relative-tensor",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-pur-derived-internal-hom",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "((moduleObj|moduleObject|Mod_).*(equiv|sheaf)|(equiv|sheaf).*(moduleObj|moduleObject))",
+   "results": "Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean, Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states this sheaf-theoretic comparison or resolution"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, ModuleCat",
+   "results": "SheafOfModules.evaluation, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.forgetToSheafModuleCat_obj_obj, SheafOfModules.forgetToSheafModuleCat_map_hom, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.forgetToSheafModuleCatOfIso, SheafOfModules.evaluationPreservesLimitsOfSize, SheafOfModules.Finite.evaluationPreservesFiniteLimits",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states this sheaf-theoretic comparison or resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module objects over a sheaf of commutative rings in abelian sheaves are equivalent to ordinary sheaves of modules, identifying derived tensor and derived internal Hom",
+   "results": "SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.unitHomEquiv, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.instCategory, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.instAbelian, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, SheafOfModules.unit",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states this sheaf-theoretic comparison or resolution"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module\", \"equivalence\", \"Sheaf\"",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states this sheaf-theoretic comparison or resolution"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between module objects in the tensor category of abelian sheaves and sheaves of modules on a ringed site, compatible with derived tensor Hom adjunction",
+   "results": "SheafOfModules, ModuleCat.monoidalClosedHomEquiv, SheafOfModules.mk, SheafOfModules.instCategory, SheafOfModules.hom_ext, PresheafOfModules.Monoidal.tensorHom, SheafOfModules.instPreadditive, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states this sheaf-theoretic comparison or resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "(moduleObj.*[Ee]quiv|[Ee]quiv.*moduleObj|ringed.*derived.*[Cc]omparison)",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states this sheaf-theoretic comparison or resolution"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-internal-hom-continuity",
+  "date": "2026-10-17",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "lem-sfb-dc-hom-preserves.proof.md, last sentence on inverting ell and descending coefficients: coefficient/model identification used in the returned continuity lemma's step 1, before applying the sheaf-valued Hom calculation.",
+   "via": [
+    "lem-sfb-constructible-internal-hom-continuity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -18,9 +18,149 @@
   "def-weil-proper-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R_t=R_t^{\\mathcal T}$ and suppress only the canonical compositors of the two operation definitions. Evaluation commutes with $J_c$. If $\\operatorname{ev}_nM\\cong C_X\\nu_X^*L_n$, the normalized finite scalar/open transport and the etale/pro-etale open comparison give\n$$\\operatorname{ev}_nJ_cM\\cong C_U\\nu_U^*(c^{\\mathrm{et}}_!L_n).$$\nHere scalar restriction changes only the action on the extension presheaf, and the forward open comparison is the inverse open-adjunction comparison specified in the finite-transport definition. The comparison for sheaves extends degreewise to complexes, since the extensions and scalar transport are exact. Exactness of etale extension implies $H^t(c_!L_n)=c_!H^t(L_n)$, so the witness is bounded below with the same bound as $L_n$. Thus $J_cM$ meets precisely the finite-origin hypothesis of the strict-tower calculus. No common bound or common finite coefficient ring over all levels is required.",
+   "uses": [
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), first paragraph; pro-etale finite-origin typing via the cited comparison nodes"
+   }
+  },
+  {
+   "text": "Apply the invertibility assertion of the strict-tower calculus to $Q$, at $J_cM$ as typed in step 1. Its proper maps are $p_Y,p$ and its quasi-compact open maps are $b,i$, exactly as supplied. Whiskering its natural isomorphism by $R_q$ and using $J_bJ_c\\cong J_a$ and $R_qR_p\\cong R_{qp}$ gives\n$$R_qJ_iR_{p_Y}J_c\\xrightarrow{R_q\\gamma_QJ_c}R_qR_pJ_bJ_c\\cong R_{qp}J_a.$$\nThis is the stated $D$, natural in $M$. All identifications have the normalized adjunction compositors of the operations; their compatibility with the canonical direct-image compositor is part of the calculus statement.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), first displayed calculation"
+   }
+  },
+  {
+   "text": "For the refinement write $r_j=p_{Y,j}$. Denote by $A$ the square with top $c_1$, bottom $c_2$, left $1_X$, right $w$; by $H$ the square with top $i_1$, bottom $i_2$, left $1_Y$, right $u$; and by $T$ the square with top $b_1$, bottom $b_2$, left $w$, right $v$. Write their comparisons as $\\gamma_A,\\gamma_H,\\gamma_T$. These are permitted proper/open squares: the four refinement equations give commutativity and the stated properness and quasi-compact openness supply every hypothesis. In particular $T$ need not be cartesian. The horizontal pasting of $A$ and $T$ is the square with top $a_1$, bottom $a_2$, left $1_X$, right $v$. The horizontal law therefore gives\n$$\\gamma_a=(\\gamma_TJ_{c_1})(J_{b_2}\\gamma_A). \\tag{1}$$\nThe refinement maps are, with these same compositors,\n$$C_f=R_{r_2}\\gamma_A,\\quad C_h=R_{q_2}\\gamma_H,\\quad C_{hf}=R_{q_2}R_{p_2}\\gamma_a.$$\nThe last targets are identified using $r_2w=r_1$, $q_2u=q_1$ and $p_2v=up_1$.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), squares A, D, E, F in the choice-independence proof; Tag 0F7D (lemma-shriek-proper-and-open-compose-horizontal)"
+   }
+  },
+  {
+   "text": "The vertical pasting of $T$ above $Q_2$ and the vertical pasting of $Q_1$ above $H$ have the same outer square: top $b_1$, bottom $i_2$, left $r_1=r_2w$, right $p_2v=up_1$. Apply the vertical law to both. It yields the equality with source $J_{i_2}R_{r_1}$ and target $R_{p_2}R_vJ_{b_1}\\cong R_uR_{p_1}J_{b_1}$,\n$$(R_{p_2}\\gamma_T)(\\gamma_{Q_2}R_w)=(R_u\\gamma_{Q_1})(\\gamma_HR_{r_1}). \\tag{2}$$\nEvery vertical is proper ($w,v,r_1,r_2,p_1,p_2,u,1_Y$); every horizontal here is one of the given quasi-compact opens. This invokes the calculus for general commutative squares, including $T$, rather than its cartesian special case.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose); Tag 0F7J, final paragraph of proof"
+   }
+  },
+  {
+   "text": "Naturality of $\\gamma_{Q_2}:J_{i_2}R_{r_2}\\to R_{p_2}J_{b_2}$ at the morphism $\\gamma_A:J_{c_2}\\to R_wJ_{c_1}$ gives\n$$(R_{p_2}J_{b_2}\\gamma_A)(\\gamma_{Q_2}J_{c_2})=(\\gamma_{Q_2}R_wJ_{c_1})(J_{i_2}R_{r_2}\\gamma_A). \\tag{3}$$\nIndeed at each $M$ this is exactly the naturality square for $\\gamma_{Q_2}$ with the two objects $J_{c_2}M$ and $R_wJ_{c_1}M$ of $D(\\mathcal T_{U_2})$. Thus it is an equality of strict-tower derived morphisms.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, proof, interchange of squares A and B; Tag 0F7F discussion of natural transformations"
+   }
+  },
+  {
+   "text": "Expand $C_{hf}D_2$ using (1), then (3), then (2). With composition read right to left this is\n$$\\begin{aligned}\nC_{hf}D_2\n&=R_{q_2}\\big[(R_{p_2}\\gamma_TJ_{c_1})(R_{p_2}J_{b_2}\\gamma_A)(\\gamma_{Q_2}J_{c_2})\\big]\\\\\n&=R_{q_2}\\big[(R_{p_2}\\gamma_TJ_{c_1})(\\gamma_{Q_2}R_wJ_{c_1})(J_{i_2}R_{r_2}\\gamma_A)\\big]\\\\\n&=R_{q_2}\\big[(R_u\\gamma_{Q_1}J_{c_1})(\\gamma_HR_{r_1}J_{c_1})(J_{i_2}R_{r_2}\\gamma_A)\\big]\\\\\n&=D_1(C_hF_{f,1})(F_{h,2}C_f).\n\\end{aligned}$$\nThe last line uses $R_{q_2}R_u=R_{q_1}$ and the definitions in step 3. Functoriality and associativity justify expanding and regrouping. Parenthesization independence in the calculus ensures that the same canonical identifications are used at each line.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), final comparison diagram and its verification"
+   }
+  },
+  {
+   "text": "For base change write $t:\\overline Y'\\to\\overline Y$, $s:\\overline X'\\to\\overline X$, $d:U'\\to U$, $y=g_Y$, and $x=g_X$. The compatible-tower statement supplies the pulled-back tower and the corresponding cartesian faces. Put $r=p_Y$. In these notations let\n$$E_q:G_gR_q\\to R_{q'}G_t,\\quad E_p:G_tR_p\\to R_{p'}G_s,\\quad E_r:G_yR_r\\to R_{r'}G_d.$$\nThe proper mate for $qp$ is $(R_{q'}E_p)(E_qR_p)$: this is pasting along the proper adjunctions, clause 2 of mate-pasting, applied to the two pullback squares and the normalized inverse-image compositors. Likewise the open comparison for $a=bc$ is $(J_{b'}\\beta_c)(\\beta_bJ_c)$ by the open-composition law of the calculus. Consequently\n$$e_{hf}=(R_{q'}R_{p'}J_{b'}\\beta_c)(R_{q'}R_{p'}\\beta_bJ_c)(R_{q'}E_pJ_bJ_c)(E_qR_pJ_bJ_c). \\tag{4}$$\nThis identifies the specified proper-then-open map, with no appeal to its evaluations.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change); sites-cohomology.tex Tags 0E46/0E47, pasting as the cited mate theorem"
+   }
+  },
+  {
+   "text": "Apply the base-change equation in the strict-tower calculus to $Q=(b,i,r,p)$ and the base change $t$. Its other projections are exactly $s,y,d$. It gives\n$$(R_{p'}\\beta_b)(E_pJ_b)(G_t\\gamma_Q)=(\\gamma_{Q'}G_d)(J_{i'}E_r)(\\beta_iR_r). \\tag{5}$$\nBoth sides start at $G_tJ_iR_r$ and end at $R_{p'}J_{b'}G_d$. The base-change map $t$ is arbitrary; no properness or smoothness of $g$ is required. The properness and quasi-compact openness hypotheses are those of $Q$ and its supplied pulled-back tower.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-compactifiable-compatible-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change), displayed diagram"
+   }
+  },
+  {
+   "text": "In $e_{hf}(G_gD)$, first use naturality of $E_q$ at $\\gamma_QJ_c$ to move that factor inside $R_{q'}$. Formula (4) makes the result\n$$R_{q'}\\big[(R_{p'}J_{b'}\\beta_c)(R_{p'}\\beta_bJ_c)(E_pJ_bJ_c)(G_t\\gamma_QJ_c)\\big](E_qJ_iR_rJ_c).$$\nSubstitute (5), whiskered by $J_c$. Naturality of $\\gamma_{Q'}$ at $\\beta_c:G_dJ_c\\to J_{c'}G_x$ says\n$$(R_{p'}J_{b'}\\beta_c)(\\gamma_{Q'}G_dJ_c)=(\\gamma_{Q'}J_{c'}G_x)(J_{i'}R_{r'}\\beta_c).$$\nThe previous expression is therefore\n$$R_{q'}\\big[(\\gamma_{Q'}J_{c'}G_x)(J_{i'}R_{r'}\\beta_c)(J_{i'}E_rJ_c)(\\beta_iR_rJ_c)\\big](E_qJ_iR_rJ_c).$$\nIts first factor is $D'G_x$, its next two factors are $F_h'e_f$, and its remaining factors are $e_hF_f$. This is exactly the asserted vertical interchange identity. The calculation only uses naturality and the cited strict-tower identity (5).",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change), applied inside the composition construction of Tag 0F7J"
+   }
+  },
+  {
+   "text": "For the refinement square with top $a_1$, bottom $a_2$, left $1_X$, right $v$, the finite-origin clause of the calculus applied to $M$ makes $C_{hf}$ invertible. Step 2 makes both $D_j$ invertible. Hence step 6 makes $H=(C_hF_{f,1})(F_{h,2}C_f)=D_1^{-1}C_{hf}D_2$ invertible, without a separate finite-origin assumption on $F_fM$.\nThe calculus cube applied to the three refinement squares gives $C'_\\bullet e_{\\bullet,2}=e_{\\bullet,1}(G C_\\bullet)$ for $f,h,hf$: the cube equation is on all inputs, even when the isomorphism assertion is restricted. Naturality of $e_h$ with $C_f$ then gives\n$$H'G_x\\,(F_{h,2}'e_{f,2})(e_{h,2}F_{f,2})=(F_{h,1}'e_{f,1})(e_{h,1}F_{f,1})(G_gH).$$\nSubstitute this equality and $C'_{hf}e_{hf,2}=e_{hf,1}G_gC_{hf}$ into step 9, together with $C_{hf}D_2=D_1H$ and its primed version; the identity is thereby identified under refinement. The compatible-tower theorem supplies a common refining tower for any two choices. For its two maps the preceding equations identify both $D$ and step 9. The refinement/exchange theorem, applied only to the compactifications of $hf$ at $M$, gives independence and the cocycle of the $C_{hf}$ comparisons. Since $H=D_1^{-1}C_{hf}D_2$, these properties also hold for the corresponding horizontal comparisons. Thus the transport is independent of the common refinement. Every equality used is before evaluation.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-complete-proetale-refinement-exchange-coherence",
+    "lem-cbc-compactifiable-compatible-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, choice independence and common refinements; Tag 0F7F for compatibility of the boundary maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-cbc-strict-constant-tower-operations",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-complete-proetale-refinement-exchange-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J (lemma-shriek-composition), 0F7C, 0F7D and 0F7F; explicit adaptation using the existing normalized strict-tower calculus. The source proves the etale case, not the strict-tower equations."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +189,45 @@
    "results": "No hits; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*(exchange|refinement)|properOpen|proper_open|strictTower|strict_tower",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state the normalized strict-tower composition/refinement and vertical base-change equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open interchange composition isomorphism for derived strict towers is natural under refinement and base change",
+   "results": "TopologicalSpace.Opens.mapComp, IsBaseChange.of_comp, CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.Over.iteratedSliceForwardNaturalityIso, TopologicalSpace.OpenNhds.inclusionMapIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state the normalized strict-tower composition/refinement and vertical base-change equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state the normalized strict-tower composition/refinement and vertical base-change equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of compact support direct images on strict inverse systems of proetale sheaves is coherent under proper refinements and base change",
+   "results": "LightProfinite.proj_comp_transitionMap, Condensed.isColimitLocallyConstantPresheaf_desc_apply, LightProfinite.proj_comp_transitionMapLE, Profinite.IndexFunctor.map_comp_π_app, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state the normalized strict-tower composition/refinement and vertical base-change equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of the composition comparison for compactified exceptional pushforward on sheaves, using interchange of extension by zero with proper derived pushforward",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuousComp', SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatTrans_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state the normalized strict-tower composition/refinement and vertical base-change equations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-cbc-complete-proetale",
@@ -69,5 +244,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-complete-proetale-composition-pasting-coherence",
+  "worker": "stage1",
+  "summary": "Q04: kept the statement, gave the explicit horizontal/vertical refinement calculation and the proper/open base-change calculation as actual strict-tower equalities; reused the existing calculus, finite transport, compatible towers and refinement/exchange theorem. No new nodes or Lean edits.",
+  "blueprint": "Realizes the final comparison-compatibility sentence of thm-cbc-complete-proetale.proof.md, main-20261015, and the historical ancestor opening on pasted-square coherence: composition and vertical pasting, extracted from returned step 8.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic exactness of etale open extension ensures the finite-level witness c_!L_n remains bounded below; the strict-tower calculus does not state this etale exactness theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-8dd15c607",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-8dd15c607 (reviewer sub-agent of L); spot-checked: I read the whole delivery, which has no new nodes: the item's statement, all 10 steps, the statement of every cited node, Stacks more-etale 0F7J (lemma-shriek-composition, l.3159ff, including the refinement cube) with its tag-to-label mapping for 0F7C/0F7D/0F7F, and both versions of the thm-cbc-complete-proetale blueprint proof (main-20261015, master l.24). I recomputed each step under the calculus convention gamma_Q: i_!R_r -> R_p k_!. Steps 1-2: J_cM satisfies the calculus finite-origin hypothesis because c_! is exact and commutes with the et/proet and scalar comparisons, and D=R_q gamma_Q J_c is then an isomorphism. Steps 3-6: square A pasted horizontally with T gives (1). T stacked over Q_2 and Q_1 stacked over H have the same outer square (b_1,i_2,r_1,up_1), which gives (2). Naturality gives (3). The four-line expansion gives C_hf D_2=D_1(C_h F_f1)(F_h2 C_f), with the correct direction and types. Steps 7-9: mate-pasting clause 2 and the open-composition law give e_hf. The calculus base-change equation (5) applies to the cartesian base change of Q (U'=U x_Y Y'). Naturality of E_q and gamma_Q' then yields exactly D'G_x, F_h'e_f and e_hF_f. Step 10: H=D_1^{-1}C_hf D_2 is invertible without assuming F_fM has finite origin. Independence and the cocycle come from the sibling refinement-exchange node applied to hf, where C_v=C_hf. The common refinement comes from the compatible-tower node, whose seven refinement equations match the item's. All verticals used are proper and all horizontals quasi-compact open; no qcqs or Noetherian condition is added and g is arbitrary. Edge cases checked: B=0, empty X, identity refinement, identity base change, i=id. The dependency closure does not contain the item, so there is no cycle. Duplicate candidates are not duplicates: lem-sp-coefficient-tower-shriek-calculus (varying O_E coefficients over a field), lem-sp-proper-open-tower-comparison (Noetherian), the sf composition nodes (finite or condensed coefficients over a field). I accept the declared tool use of lem-weil-pbc-extension-by-zero-exact for etale j_! exactness in step 1. No SGA source is cited, and the statement is unchanged and not weakened. Fixes, in a whole corrected item file: (1) step 7 formula (4) had the typo E_qJ_bJ_c, corrected to E_qR_pJ_bJ_c; (2) source.place now gives the label of 0F7C as well as 0F7D.; 1 file(s) fixed by the reviewer"
  }
 }
