@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FrobeniusTwist
+public import WeilConjectures.WeilSheaf.StalkComparison
 public import WeilConjectures.DeligneLaumon.Reduction.RealCurveConstituent
 
 /-!
@@ -61,21 +62,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {ι : PadicAlgCl l →+* ℂ} {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (F : WeilSheaf k₀ l X)
 
-omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
-private lemma linearEquivOfIso_toLinearMap {M N : WeilCoefficients.{u} l} (e : M ≅ N) :
-    (WeilCoefficients.linearEquivOfIso e).toLinearMap =
-      ((WeilCoefficients.toModuleCat l).map e.hom).hom :=
-  rfl
-
-omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
-private lemma toModuleCat_map_comp_hom {M N P : WeilCoefficients.{u} l} (f : M ⟶ N)
-    (g : N ⟶ P) :
-    ((WeilCoefficients.toModuleCat l).map (f ≫ g)).hom =
-      ((WeilCoefficients.toModuleCat l).map g).hom ∘ₗ
-        ((WeilCoefficients.toModuleCat l).map f).hom := by
-  rw [Functor.map_comp]
-  rfl
-
 /-- A transport of stalks `F_s ⟶ F_{s'}` along a square `g ≫ s = s' ≫ Frʲ`, with `g` commuting
 with `σᵐ`, intertwines the Frobenius relative to `𝔽_{qᵐ}` (for all `j` and `m`). -/
 lemma toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_stalkAt'
@@ -92,8 +78,8 @@ lemma toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_stalkAt'
         (F.stalkAt s m hs).frobeniusEnd =
       (F.stalkAt s' m hs').frobeniusEnd ∘ₗ ((WeilCoefficients.toModuleCat l).map
         (ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j))).hom := by
-  rw [frobeniusEnd_stalkAt, frobeniusEnd_stalkAt, ← toModuleCat_map_comp_hom,
-    ← toModuleCat_map_comp_hom,
+  rw [frobeniusEnd_stalkAt, frobeniusEnd_stalkAt, ← WeilCoefficients.toModuleCat_map_comp_hom,
+    ← WeilCoefficients.toModuleCat_map_comp_hom,
     F.globalSectionsTransport_frobeniusPowStr_comm' j m hg hs.symm hs'.symm hcomm]
 
 /-- The isomorphism `F_{t ≫ Frᵃ} ≅ F_t` of the iterated Weil structure, as an isomorphism of
@@ -115,7 +101,7 @@ noncomputable def stalkAtFrobeniusPowEquiv
   .ofComp (WeilCoefficients.linearEquivOfIso
       (asIso (ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr a))))
     (by
-      rw [linearEquivOfIso_toLinearMap, asIso_hom]
+      rw [WeilCoefficients.linearEquivOfIso_toLinearMap, asIso_hom]
       exact F.toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_stalkAt' hg ht' ht
         (by simp))
 
@@ -133,8 +119,8 @@ theorem map_stalkAtFrobeniusPowEquiv_stalkSubspace
     (F.stalkSubspace _ P).map (F.stalkAtFrobeniusPowEquiv ht a ht').toLinearEquiv.toLinearMap =
       F.stalkSubspace t ((⇑F.frobeniusTwist)^[a] P) := by
   rw [stalkSubspace_frobeniusTwist_iterate, stalkAtFrobeniusPowEquiv,
-    FrobeniusModule.Equiv.ofComp_toLinearEquiv, linearEquivOfIso_toLinearMap,
-    linearEquivOfIso_toLinearMap, asIso_hom,
+    FrobeniusModule.Equiv.ofComp_toLinearEquiv, WeilCoefficients.linearEquivOfIso_toLinearMap,
+    WeilCoefficients.linearEquivOfIso_toLinearMap, asIso_hom,
     F.stalkObjFrobeniusPowIso_hom_eq_globalSectionsTransport a t (Category.id_comp _)]
 
 /-- The reparametrisation `F_{σᵃ ≫ t} ≅ F_t`, as an isomorphism of Frobenius modules for the
@@ -155,7 +141,7 @@ noncomputable def stalkAtSpecFrobeniusPowEquiv
   FrobeniusModule.Equiv.symm <| .ofComp (WeilCoefficients.linearEquivOfIso
       (asIso (ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr 0))))
     (by
-      rw [linearEquivOfIso_toLinearMap, asIso_hom]
+      rw [WeilCoefficients.linearEquivOfIso_toLinearMap, asIso_hom]
       exact F.toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_stalkAt' hg ht ht'
         (by rw [Aut.pow_hom_comp_pow_hom, Aut.pow_hom_comp_pow_hom, Nat.add_comm]))
 
@@ -174,9 +160,9 @@ theorem map_stalkAtSpecFrobeniusPowEquiv_stalkSubspace
       F.stalkSubspace t P := by
   rw [stalkAtSpecFrobeniusPowEquiv, FrobeniusModule.Equiv.symm_toLinearEquiv,
     FrobeniusModule.Equiv.ofComp_toLinearEquiv, Submodule.map_symm_eq_iff,
-    linearEquivOfIso_toLinearMap, asIso_hom,
+    WeilCoefficients.linearEquivOfIso_toLinearMap, asIso_hom,
     ← F.stalkObjSpecFrobeniusPowIso_inv_eq_globalSectionsTransport a t, ← Iso.symm_hom,
-    ← linearEquivOfIso_toLinearMap, WeilCoefficients.linearEquivOfIso_symm,
+    ← WeilCoefficients.linearEquivOfIso_toLinearMap, WeilCoefficients.linearEquivOfIso_symm,
     Submodule.map_symm_eq_iff]
   exact F.stalkSubspace_specGeometricFrobenius_pow t P a
 

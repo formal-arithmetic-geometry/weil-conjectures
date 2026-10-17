@@ -5,16 +5,15 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPointsCount
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SubobjectStalk
 public import WeilConjectures.WeilSheaf.StalkCharpoly
-public import WeilConjectures.WeilSheaf.UpperStarPointwise
+public import WeilConjectures.WeilSheaf.StalkAtPurity
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
 
 /-!
 # Tools for comparing stalks of Weil sheaves along morphisms of geometric fibers
 
-This file collects three general facts used to compare the stalks of a Weil sheaf with those of
+This file collects general facts used to compare the stalks of a Weil sheaf with those of
 its pullback along a morphism `j : Ȳ ⟶ X̄` of geometric fibers intertwining Frobenius
 structures, where the two geometric fibers may live over different algebraic closures.
 
@@ -25,9 +24,6 @@ structures, where the two geometric fibers may live over different algebraic clo
   Frobenius module spanned by the images of equivariant maps is an eigenvalue of one of the
   sources; hence such a module is pure if the sources are
   (`FrobeniusModule.IsPureOfWeight.of_iSup_range_eq_top`).
-- `AlgebraicGeometry.Scheme.Hom.mem_finitePoints_of_comp_geometricGaloisFrobenius_pow`: a
-  geometric point fixed by `Frᵐ` up to `σᵐ`, `m ≥ 1`, lies over a point with finite residue field
-  whose degree divides `m`.
 -/
 
 @[expose] public section
@@ -176,58 +172,6 @@ theorem IsReal.of_equiv {ι' : K →+* ℂ} {M N : FrobeniusModule.{u, v} K} (e 
 
 end FrobeniusModule
 
-namespace AlgebraicGeometry.Scheme.Hom
-
-variable {k : Type u} [Field k] [Finite k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
-
-/-- A geometric point `s` of the geometric fiber with `s ≫ Frᵐ = σᵐ ≫ s`, `m ≥ 1`, lies over a
-point `x` with finite residue field whose degree divides `m`: the embedding `κ(x) ↪ k̄` given by
-`s` takes values in the elements fixed by the `m`-th power of the Frobenius. -/
-theorem mem_finitePoints_of_comp_geometricGaloisFrobenius_pow {m : ℕ} (hm : m ≠ 0)
-    {s : Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber}
-    (hs : s ≫ (f.geometricGaloisFrobenius ^ m).hom = (specGeometricFrobenius k ^ m).hom ≫ s) :
-    (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _) ∈ X.finitePoints ∧
-      f.degreeOver ((s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _)) ∣ m := by
-  let := Fintype.ofFinite k
-  set g := s ≫ f.geometricFiberProj
-  let σm := (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) ^ m)
-  let ψ : AlgebraicClosure k →+* AlgebraicClosure k := σm.symm.toRingEquiv.toRingHom
-  have hσ : σm.symm = FiniteField.frobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) ^ m := by
-    rw [← AlgEquiv.aut_inv]
-    simp [σm, FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv, inv_pow]
-  have hψ (a : AlgebraicClosure k) : ψ a = a ^ (Nat.card k ^ m) := by
-    change σm.symm a = _
-    rw [hσ, AlgEquiv.coe_pow, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate,
-      Nat.card_eq_fintype_card]
-  have hfix : (specGeometricFrobenius k ^ m).hom ≫ g = g := by
-    rw [← Category.assoc, ← hs, Category.assoc,
-      geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj]
-  have hψfix : Spec.map (CommRingCat.ofHom ψ) ≫ g = g := by
-    have hc : CommRingCat.ofHom σm.toRingEquiv.toRingHom ≫ CommRingCat.ofHom ψ = 𝟙 _ := by
-      ext a
-      exact σm.symm_apply_apply a
-    conv_lhs => rw [← hfix]
-    rw [specGeometricFrobenius_pow_hom, ← Category.assoc, ← Spec.map_comp, hc, Spec.map_id,
-      Category.id_comp]
-  let α := Spec.preimage (s ≫ f.geometricFiberToAlgebraicClosure)
-  let : Algebra k (AlgebraicClosure k) :=
-    (α.hom.comp (algebraMap k (AlgebraicClosure k))).toAlgebra
-  have hmem : g ∈ f.fixedFieldPoints ψ := by
-    refine ⟨?_, hψfix⟩
-    have h := s ≫= f.geometricFiber_condition
-    rw [← Category.assoc, ← Category.assoc,
-      ← Spec.map_preimage (s ≫ f.geometricFiberToAlgebraicClosure)] at h
-    refine h.trans ?_
-    simp only [Scheme.specAlgebraicClosure, Over.mk_hom, ← Spec.map_comp]
-    rfl
-  have key := f.mem_finitePoints_of_mem_fixedFieldPoints hm ψ hψ hmem
-  have hd : g.base default = g.base (IsLocalRing.closedPoint _) :=
-    congrArg g.base (Subsingleton.elim _ _)
-  rw [hd] at key
-  exact key
-
-end AlgebraicGeometry.Scheme.Hom
-
 namespace AlgebraicGeometry.WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
@@ -258,7 +202,9 @@ theorem IsReal.stalkAt {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} (h
     (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
       (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
     (F.stalkAt s m hs).IsReal ι := by
-  obtain ⟨hx, hdvd⟩ := Scheme.Hom.mem_finitePoints_of_comp_geometricGaloisFrobenius_pow _ hm hs
+  obtain ⟨hx, hdvd⟩ :=
+    Scheme.Hom.mem_finitePoints_and_degreeOver_dvd_of_geometricGaloisFrobenius_pow _ s
+      (Nat.pos_of_ne_zero hm) hs
   have hx₁ := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base
     (X ↘ Spec (CommRingCat.of k₀)) ⟨_, hx⟩
   exact (h ⟨_, hx⟩).of_charpoly_eq_pow _ (F.charpoly_frobeniusEnd_stalkAt_of_dvd _ s hx₁
