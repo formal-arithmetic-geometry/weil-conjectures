@@ -8,7 +8,9 @@
   "place": "Agent-formulated universal-arrow comparison extracted from the unit-compatibility argument for Gepner--Haugseng Lemma A.4.7. Kerodon Corollary 4.7.3.14 (02HM), read online, supplies the supporting uniqueness principle for initial objects, not this exact comma/mapping-space formulation. WANTED: an archived proof of the stated universal-arrow comparison. No Stacks tag states this quasicategorical result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-space-presheaf-right-kan-mapping-formula"
  ],
  "proof": [
   {
@@ -186,5 +188,28 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-639eca75e (reviewer sub-agent of L); spot-checked: Read the item and all cited statements in full; checked Kerodon sources, blueprint ancestry, parent application, all four proof steps, edge cases, duplicates and dependency cycles. The fixed-object comparison proof is complete and preserves every hypothesis and conclusion. No new nodes, repairs or accepted off-unit tool uses. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UniversalArrowComparison",
+  "declaration": "SSet.Enhanced.universal_arrow_comparison",
+  "declarations": [
+   "SSet.Enhanced.universalArrowMap",
+   "SSet.Enhanced.universal_arrow_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/UniversalArrowComparison.lean",
+  "statement": "theorem universal_arrow_comparison {C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (R : C ⟶ D) (d : D _⦋0⦌) (a a' : C _⦋0⦌) (η : (mappingSpace D d (R.app _ a)) _⦋0⦌) (η' : (mappingSpace D d (R.app _ a')) _⦋0⦌) (hη : ∀ c : C _⦋0⦌, IsWeakHomotopyEquivalence (universalArrowMap R η c)) (hη' : ∀ c : C _⦋0⦌, IsWeakHomotopyEquivalence (universalArrowMap R η' c)) : IsContractible (homotopyFiber (universalArrowMap R η a') η') ∧ ∀ p : (homotopyFiber (universalArrowMap R η a') η') _⦋0⦌, IsEquivalenceEdge C p.1.1.1 ∧ ∃ γ : (mappingSpace C a' a) _⦋0⦌, Nonempty (SSet.Edge ((universalArrowMap R η' a).app _ γ) η) ∧ Nonempty (SSet.Edge ((canonicalHomComposition C a a' a).app _ (γ, p.1.1)) (PresheafRightKan.identityPoint a)) ∧ Nonempty (SSet.Edge ((canonicalHomComposition C a' a a').app _ (p.1.1, γ)) (PresheafRightKan.identityPoint a'))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The test map is the actual mappingSpaceMap followed by precomposition with the supplied unit via the published canonicalHomComposition. Reuses PresheafRightKan.identityPoint for degenerate identity vertices. The two added, already landed statement dependencies own these helpers; no new composition or identity construction is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1911bc748",
+  "group": "NH",
+  "result": "pass",
+  "note": "Statement, dependencies, source/docstrings, edge cases, report sections, and compiler evidence all check out."
  }
 }

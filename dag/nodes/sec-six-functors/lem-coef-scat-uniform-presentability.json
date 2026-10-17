@@ -271,5 +271,35 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-089820714 (reviewer sub-agent of L); spot-checked: Read the item, all 11 steps, the statements of the five cited nodes and the citer lem-coef-scat-injective-universe-generators in full. Statement unchanged and true: sCat is the category of models of a countable finitary essentially-algebraic sketch, and for uncountable regular kappa an object is kappa-presentable exactly when it has fewer than kappa objects and simplices in total; kappa>aleph0 is needed because of the identity simplices. Tested the empty sCat, the one-object identity-only sCat, U(Delta^n), a discrete sCat with kappa objects, empty D and non-injective structure maps. Step 1: the sketch is written out and the statement of lem-coef-finite-limit-model-presentability covers small sketches with sortwise filtered colimits. Step 2: pointwise colimits from the universal property alone. Steps 3-4: the counting and star-cocone arguments are correct. Step 5: the round closure is bounded by regularity and cf kappa > omega. Steps 6-8: the filtered union and retraction converse are correct. Step 9: Mathlib leaf isCardinalPresentable_of_isColimit, hypotheses met. Steps 10-11: universe coding is elementary and gives the common representatives. All citations are in unit sk-prop-sf-biduality-general or are Mathlib leaves or definitions; no tool_uses needed; no new nodes; no duplicate found by rg over dag/nodes. Sources: HTT A.3.3.3/A.3.6.18 and Kelly section 9 are not under literature/, so they could not be checked at the place; WANTED is recorded, proof_origin is agent, and the mathematics was verified directly. No SGA used. Fix (E1 hypothesis check): step 3 applied the filtered-colimit elementwise leaf to a kappa-filtered index without saying it is filtered. I added the derivation (cocones on the empty diagram, two objects and a parallel pair) and def-weil-pbc-category-colimit to that step's uses, in fixes/dag/nodes/sec-six-functors/lem-coef-scat-uniform-presentability.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScatUniformPresentability",
+  "file": "lean/Sheaf/CategoryTheory/ScatUniformPresentability.lean",
+  "declaration": "CategoryTheory.CoherentNerve.scat_uniform_presentability",
+  "declarations": [
+   "CategoryTheory.CoherentNerve.scatSize",
+   "CategoryTheory.CoherentNerve.DiagramPointwisePresentable",
+   "CategoryTheory.CoherentNerve.HasScatFilteredPresentation",
+   "CategoryTheory.CoherentNerve.HasPointwiseScatColimits",
+   "CategoryTheory.CoherentNerve.scatLiftRegular",
+   "CategoryTheory.CoherentNerve.ScatUniverseIso",
+   "CategoryTheory.CoherentNerve.ScatDiagramUniverseIso",
+   "CategoryTheory.CoherentNerve.HasUniformScatRepresentatives",
+   "CategoryTheory.CoherentNerve.HasUniformDiagramRepresentatives",
+   "CategoryTheory.CoherentNerve.scat_uniform_presentability"
+  ],
+  "statement": "theorem scat_uniform_presentability (κ : Cardinal.{u}) [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < κ) (D : Type u) [SmallCategory D] (hD : Cardinal.mk (Arrow D) < κ) : IsCardinalLocallyPresentable SCat.{max u v} (Cardinal.lift.{v} κ) ∧ IsCardinalLocallyPresentable (D ⥤ SCat.{max u v}) (Cardinal.lift.{v} κ) ∧ (∀ A : SCat.{max u v}, IsCardinalPresentable A (Cardinal.lift.{v} κ) ↔ scatSize A < (Cardinal.lift.{v} κ)) ∧ (∀ F : D ⥤ SCat.{max u v}, IsCardinalPresentable F (Cardinal.lift.{v} κ) ↔ ∀ d : D, IsCardinalPresentable (F.obj d) (Cardinal.lift.{v} κ)) ∧ (∀ F : D ⥤ SCat.{max u v}, HasColimit F) ∧ (∀ (I : Type (max u v)) [PartialOrder I] [IsCardinalFiltered I (Cardinal.lift.{v} κ)] (F : I ⥤ SCat.{max u v}), ∃ c : Cocone F, Nonempty (IsColimit c)) ∧ (∀ (I : Type (max u v)) [PartialOrder I] [IsCardinalFiltered I (Cardinal.lift.{v} κ)] (F : I ⥤ (D ⥤ SCat.{max u v})), ∃ c : Cocone F, Nonempty (IsColimit c)) ∧ (∀ (A : SCat.{max u v}), HasScatFilteredPresentation A (Cardinal.lift.{v} κ)) ∧ (∀ (F : D ⥤ SCat.{max u v}), ∃ (I : Type (max u v)) (_ : PartialOrder I) (_ : IsCardinalFiltered I (Cardinal.lift.{v} κ)) (G : I ⥤ (D ⥤ SCat.{max u v})) (c : Cocone G), Nonempty (IsColimit c) ∧ Nonempty (c.pt ≅ F) ∧ ∀ i : I, DiagramPointwisePresentable D (G.obj i) (Cardinal.lift.{v} κ)) ∧ HasPointwiseScatColimits.{u, max u v} D ∧ HasUniformScatRepresentatives.{u, v} κ ∧ HasUniformDiagramRepresentatives.{u, v} D κ ∧ (∀ (I : Type (max u v)) [SmallCategory I] (F : I ⥤ SCat.{max u v}) [HasColimit F], Cardinal.mk (Arrow I) < (Cardinal.lift.{v} κ) → (∀ i : I, IsCardinalPresentable (F.obj i) (Cardinal.lift.{v} κ)) → IsCardinalPresentable (colimit F) (Cardinal.lift.{v} κ) ) ∧ (∀ (I : Type (max u v)) [SmallCategory I] (F : I ⥤ (D ⥤ SCat.{max u v})) [HasColimit F], Cardinal.mk (Arrow I) < (Cardinal.lift.{v} κ) → (∀ i : I, IsCardinalPresentable (F.obj i) (Cardinal.lift.{v} κ)) → IsCardinalPresentable (colimit F) (Cardinal.lift.{v} κ) )",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6808a5937",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source, Lean declarations, report, edge cases, and universe handling. scompile.py passed sandbox and library-side compilation; no substantive or mechanical defects found."
  }
 }
