@@ -1,8 +1,9 @@
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+public import Mathlib.CategoryTheory.Monoidal.Subcategory
 public import Mathlib.CategoryTheory.Sites.Point.Monoidal
-public import WeilConjectures.ConstructibleSheaf.MonoidalParts
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 
 @[expose] public noncomputable section
@@ -238,6 +239,91 @@ lemma Scheme.IsFiniteLocallyConstantSheaf.galoisAct_sheafFiberTensorIso'_inv_tmu
   exact (galoisAct_map_of_types s G g hB hT (ObjectProperty.homMk (Scheme.tensorPairing F₁ F₂))
     z).symm
 
+/-- The Galois representation on the stalk of a tensor product is the tensor product of the
+Galois representations, through `AlgebraicGeometry.Scheme.sheafFiberTensorIso'`. -/
+def Scheme.IsFiniteLocallyConstantSheaf.galoisRepTensorEquiv
+    {F₁ F₂ : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (h₁ : IsFiniteLocallyConstantSheaf F₁) (h₂ : IsFiniteLocallyConstantSheaf F₂)
+    (hT : IsFiniteLocallyConstantSheaf (F₁ ⊗ F₂)) :
+    (hT.galoisRep s G).Equiv ((h₁.galoisRep s G).tprod (h₂.galoisRep s G)) :=
+  .mk (Scheme.sheafFiberTensorIso' s F₁ F₂).toLinearEquiv fun g ↦ by
+    let e := (Scheme.sheafFiberTensorIso' s F₁ F₂).toLinearEquiv
+    have key (t) : hT.galoisRep s G g (e.symm t) =
+        e.symm ((h₁.galoisRep s G).tprod (h₂.galoisRep s G) g t) := by
+      induction t using TensorProduct.induction_on with
+      | zero => simp
+      | tmul x y =>
+        rw [Representation.tprod_apply, TensorProduct.map_tmul]
+        exact galoisAct_sheafFiberTensorIso'_inv_tmul s G g h₁ h₂ hT x y
+      | add t t' ht ht' => simp only [map_add, ht, ht']
+    ext w
+    obtain ⟨t, rfl⟩ := e.symm.surjective w
+    simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, key]
+    change e (e.symm _) = (h₁.galoisRep s G).tprod (h₂.galoisRep s G) g (e (e.symm t))
+    rw [e.apply_symm_apply, e.apply_symm_apply]
+
 end Galois
+
+/-- Finite locally constant sheaves of `Λ`-modules are closed under tensor products and contain
+the constant sheaf `Λ_Y`, so they form a full monoidal subcategory. -/
+instance Scheme.isMonoidal_isFiniteLocallyConstantSheaf :
+    ObjectProperty.IsMonoidal (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦
+      Scheme.IsFiniteLocallyConstantSheaf F) where
+  prop_unit := { }
+  prop_tensor _ _ h₁ h₂ := h₁.tensorObj h₂
+
+section GaloisRepFunctor
+
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) [Finite Λ]
+  (G : Type u) [Group G] [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
+  [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G]
+
+/-- **The geometric stalk is compatible with tensor products**: the representation of `G` on the
+stalk at `s` of `F₁ ⊗ F₂` is the tensor product of those on the stalks of `F₁` and `F₂`. The
+underlying linear map is `AlgebraicGeometry.Scheme.sheafFiberTensorIso'`,
+`(F₁ ⊗ F₂)_s ≅ F₁_s ⊗ F₂_s`. -/
+def Scheme.galoisRepFunctorTensorIso
+    (F₁ F₂ : ObjectProperty.FullSubcategory
+      (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦ IsFiniteLocallyConstantSheaf F)) :
+    (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).obj (F₁ ⊗ F₂) ≅
+      (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).obj F₁ ⊗
+        (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).obj F₂ :=
+  Rep.mkIso (F₁.2.galoisRepTensorEquiv s G F₂.2 (F₁ ⊗ F₂).2)
+
+lemma Scheme.galoisRepFunctorTensorIso_hom_hom_apply
+    (F₁ F₂ : ObjectProperty.FullSubcategory
+      (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦ IsFiniteLocallyConstantSheaf F))
+    (w : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
+      (F₁.obj ⊗ F₂.obj)) :
+    (Scheme.galoisRepFunctorTensorIso s G F₁ F₂).hom.hom w =
+      (Scheme.sheafFiberTensorIso' s F₁.obj F₂.obj).hom.hom w :=
+  rfl
+
+/-- Naturality of `AlgebraicGeometry.Scheme.galoisRepFunctorTensorIso` in both variables. -/
+@[reassoc]
+lemma Scheme.galoisRepFunctorTensorIso_hom_naturality
+    {F₁ F₁' F₂ F₂' : ObjectProperty.FullSubcategory
+      (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦ IsFiniteLocallyConstantSheaf F)}
+    (f₁ : F₁ ⟶ F₁') (f₂ : F₂ ⟶ F₂') :
+    (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).map (f₁ ⊗ₘ f₂) ≫
+        (Scheme.galoisRepFunctorTensorIso s G F₁' F₂').hom =
+      (Scheme.galoisRepFunctorTensorIso s G F₁ F₂).hom ≫
+        ((Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).map f₁ ⊗ₘ
+          (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).map f₂) := by
+  ext w
+  exact ConcreteCategory.congr_hom (Scheme.sheafFiberTensorIso'_hom_naturality s f₁.hom f₂.hom) w
+
+/-- **The geometric stalk is a tensor functor**, as an isomorphism of bifunctors
+`(F₁ ⊗ F₂)_s ≅ F₁_s ⊗ F₂_s` of representations of `G`, natural in `F₁` and `F₂`
+(`AlgebraicGeometry.Scheme.galoisRepFunctorTensorIso`). -/
+def Scheme.galoisRepFunctorTensorNatIso :
+    MonoidalCategory.tensor _ ⋙ Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ) ≅
+      (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).prod
+        (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)) ⋙
+        MonoidalCategory.tensor (Rep.{u + 1} Λ G) :=
+  NatIso.ofComponents (fun X ↦ Scheme.galoisRepFunctorTensorIso s G X.1 X.2)
+    fun f ↦ Scheme.galoisRepFunctorTensorIso_hom_naturality s G f.1 f.2
+
+end GaloisRepFunctor
 
 end AlgebraicGeometry
