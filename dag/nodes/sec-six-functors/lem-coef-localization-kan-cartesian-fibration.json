@@ -392,5 +392,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizationKanCartesianFibration",
+  "declaration": "SSet.Enhanced.localization_kan_cartesian_fibration",
+  "declarations": [
+   "SSet.Enhanced.cartesianLocalizationDiagrams",
+   "SSet.Enhanced.localization_kan_cartesian_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocalizationKanCartesianFibration.lean",
+  "statement": "theorem localization_kan_cartesian_fibration {W K E : SSet.{u}} [Quasicategory W] [Quasicategory K] [Quasicategory E] (η : W ⟶ K) [KanComplex K] (hη : IsWeakHomotopyEquivalence η) (π : E ⟶ K) (hπ : cartesianFibration π) : ∀ (T : SSet.{max (u + 1) v}), T.Quasicategory → ∃ e : ((ihom (SSet.uliftFunctor.{max (u + 1) v, u}.obj E)).obj T) ⟶ (cartesianLocalizationDiagrams (SSet.uliftFunctor.{max (u + 1) v, u}.map η) (SSet.uliftFunctor.{max (u + 1) v, u}.map π) T).toSSet, e ≫ (cartesianLocalizationDiagrams (SSet.uliftFunctor.{max (u + 1) v, u}.map η) (SSet.uliftFunctor.{max (u + 1) v, u}.map π) T).ι = (MonoidalClosed.pre (pullback.snd (SSet.uliftFunctor.{max (u + 1) v, u}.map η) (SSet.uliftFunctor.{max (u + 1) v, u}.map π))).app T ∧ IsFunctorEquivalence e ∧ IsFullyFaithful e",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper full subcomplex is the literal full subcategory of Fun(F',T) on diagrams carrying every edge whose image in E is an equivalence to an equivalence. The theorem uses the canonical pullback projection and precomposition map, with an explicit containing-universe lift for arbitrary sufficiently large targets; IsFunctorEquivalence and IsFullyFaithful retain all coherent transformations and mapping spaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8cc678096",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Lean statement and exact signature verified; sandbox and library compiles passed. Complete replacement report in fixes corrects the identity-fibration case: all edges of W must be inverted. Detailed checks and findings are in review.md."
  }
 }
