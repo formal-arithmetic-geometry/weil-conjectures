@@ -311,5 +311,24 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-2d97606f6 (reviewer sub-agent of L); spot-checked: I read the whole item, the statements of all 27 cited nodes and 9 stmt_deps, and the Stacks sources: 05K0 (more-morphisms l.12457), 0B3I (morphisms l.11237), 087S(1) (l.10848), 01WE (l.10631) and 00QG (algebra l.31291). Orgogozo Prop 2.3 has no local copy; the WANTED entry and proof_origin=agent are right. The statement is unchanged and true. I tested it with d=0, empty T or fibres (dimension -infinity), a non-Noetherian A, and non-dominant finite maps. Its use in lem-trf-bounded-dimension-projective-local-model matches the statement. Steps 3-6 hold as written. The ample sheaf on P^d_A over an arbitrary ring, the finite-to-bundle-projective step, 087S and 01WE give H-projectivity, and properness gives the quasi-compactness that def-pc-projective-morphism also needs. def-kun-projective and def-pc-projective-morphism use the same P({0..N};Y). The dimension bound comes from 00QG on the residue-field charts plus the open-cover lemma, whose quasi-sober and T0 hypotheses follow from sobriety. Two small faults, both repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-projective-envelope.json. (1) Step 1 inferred that u is quasi-compact from the chart cover without citing 01K4. It now cites lem-weil-pbc-affine-scheme-qcqs and lem-weil-pbc-qcqs-morphism-permanence(1): affine source, quasi-separated Q. (2) Step 2 proved only clause (3) of pqf-def-quasifinite, but Zariski main asks for 'everywhere quasi-finite'. The step now also checks clause (1) on T=Spec C over Q_0 with lem-weil-pbc-finite-ring-map-quasi-finite, and proof_deps is updated. The two new citations are Mathlib leaves in sk-thm-p1, which is on the route, and add no cycle. The rg duplicate search found nothing; lem-fin-finite-over-projective needs a Noetherian base and states something else. I accept the declared tool_uses: all nine nodes are on the route anyway. No SGA source is cited. There are no new nodes, so nothing is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a7cbdb51",
+  "group": "Q06",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: IsAffine B, d:ℕ, finite h into 𝔸(ULift (Fin d); B), ∃ P j p with IsOpenImmersion j, IsProjective p (side IsHProjective+QuasiCompact = def-pc-projective-morphism convention), IsProper p, j ≫ p = h ≫ structural map, ∀ b, topologicalKrullDim (p.fiber b) ≤ d in WithBot ℕ∞. No extra hypotheses or universe restriction; edge cases d=0, empty T/fibres (⊥), non-Noetherian base, non-dominant h covered. No definitions, only sorry, docstrings carry source/blueprint and six proof steps; lean.statement verbatim; report has Worker report and Second reading by Q06; no existing duplicate found. nt_compile --json: clean rc=0 (negative control errors as expected). Only finding (H8): theorem docstring step 3 had 'r ≫ j' for the factorization, corrected to 'j ≫ r' in fixes/lean/Sheaf/TraceFormula/FiniteProjectiveEnvelope.lean (whole file, signature unchanged, compiles clean)."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FiniteProjectiveEnvelope",
+  "declaration": "AlgebraicGeometry.exists_finite_projective_envelope",
+  "file": "lean/Sheaf/TraceFormula/FiniteProjectiveEnvelope.lean",
+  "statement": "theorem exists_finite_projective_envelope {B T : Scheme.{u}} [IsAffine B] (d : ℕ) (h : T ⟶ 𝔸(ULift.{u} (Fin d); B)) [IsFinite h] : ∃ (P : Scheme.{u}) (j : T ⟶ P) (p : P ⟶ B), IsOpenImmersion j ∧ IsProjective p ∧ IsProper p ∧ j ≫ p = h ≫ (𝔸(ULift.{u} (Fin d); B) ↘ B) ∧ ∀ b : B, topologicalKrullDim (p.fiber b) ≤ (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-8a7cbdb51"
  }
 }

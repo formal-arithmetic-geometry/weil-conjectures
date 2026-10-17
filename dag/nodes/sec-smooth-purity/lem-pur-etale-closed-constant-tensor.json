@@ -20,7 +20,8 @@
   "def-weil-abstract-derived-category",
   "def-pc-tensor-complex-sheaves",
   "def-weil-pbc-constant-sheaf",
-  "def-kun-derived-tensor"
+  "def-kun-derived-tensor",
+  "lem-kun-tensor-sym"
  ],
  "proof": [
   {
@@ -326,5 +327,56 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-b385a0e70 (reviewer sub-agent of L); spot-checked: Read all nine steps, cited statements, sources, and unit/chapter route; no new nodes. Stalk, pullback, tensor, flatness, and derived compatibility checks pass, including empty and nonreduced supports. Corrected step 8’s Tag 03EL source path in fixes; review.md records accepted tool uses and inherited citation annotations. No target weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2ca92348",
+  "group": "N3",
+  "result": "pass",
+  "note": "Read the node, dependency lean records, report and full module; checked the cited upstream declarations in clones/side (constantModulePushforwardMap, upperStarConstantSheafIso, singleFunctorObjTensorIso, leftDerivedUpperStarTensorComparison, singleFunctorCompLeftDerivedUpperStarIso, derivedTensorAssociator, derivedTensorSymmetry, ObjectProperty.flat, oplax upperStar from the monoidal adjunction). Every clause matches with no extra hypotheses: b_{v,C} as the adjoint of the canonical section pullback, IsIso, restriction compatibility, identity/composition, mu via restrictions + lowerStar lax mu + unit multiplication, IsIso, flatness, associativity/symmetry, oplax pullback square, derived mu via the flat K-flat iso with the derived associator/symmetry/pullback comparison. R1-R4 of the db27474 return are repaired (no HEq; canonical support maps; derivedTensor source; no .choose; lean.note). Statement field verbatim; stmt_deps gains only the landed lem-kun-tensor-sym (allowed); statement/proof unchanged; (u+1) coefficients follow the recorded def-kun-derived-tensor convention. sorry only in two docstring-tagged theorems; defs carry real data. nt_compile --json: 15.3 s and 17.0 s, rc=0, no errors or warnings. No fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PurEtaleClosedConstantTensor",
+  "declaration": "AlgebraicGeometry.Etale.closedConstantTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/PurEtaleClosedConstantTensor.lean",
+  "statement": "theorem closedConstantTensor (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) {C D E : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (j : D ⟶ X) [IsClosedImmersion j] (k : E ⟶ X) [IsClosedImmersion k] {X' : Scheme.{u}} (v : X' ⟶ X) : IsIso (closedConstantPullbackAdjoint A i v) ∧ IsIso (closedConstantPullbackAdjoint A j v) ∧ IsIso (closedConstantPullbackAdjoint A (intersectionSupport i j) v) ∧ closedConstantPullbackRestriction A i v ∧ closedConstantPullbackRestriction A j v ∧ closedConstantPullbackRestriction A (intersectionSupport i j) v ∧ ObjectProperty.flat (closedConstantModule A i) ∧ ObjectProperty.flat (closedConstantModule A j) ∧ ObjectProperty.flat (closedConstantModule A (intersectionSupport i j)) ∧ IsIso (closedConstantTensorMap A i j) ∧ closedConstantTensorCoherence A i j k ∧ closedConstantPullbackCoherence A i ∧ closedConstantPullbackCoherence A j ∧ closedConstantPullbackCoherence A (intersectionSupport i j) ∧ closedConstantTensorPullbackSquare A i j v ∧ IsIso (closedConstantDerivedTensorMap A i j) ∧ ClosedConstantDerivedTensorCoherence A i j k ∧ ClosedConstantDerivedTensorPullbackSquare A i j v",
+  "branch": "newtargets-dag",
+  "declarations": [
+   "AlgebraicGeometry.Etale.constantModuleSheaf",
+   "AlgebraicGeometry.Etale.closedConstantModule",
+   "AlgebraicGeometry.Etale.intersectionSupport",
+   "AlgebraicGeometry.Etale.intersectionSupport_isClosedImmersion",
+   "AlgebraicGeometry.Etale.closedConstantRestriction",
+   "AlgebraicGeometry.Etale.closedConstantRestriction₂",
+   "AlgebraicGeometry.Etale.constantModuleMultiplication",
+   "AlgebraicGeometry.Etale.closedConstantTensorMap",
+   "AlgebraicGeometry.Etale.closedConstantPullbackMap",
+   "AlgebraicGeometry.Etale.closedConstantSectionMap",
+   "AlgebraicGeometry.Etale.closedConstantPullbackAdjoint",
+   "AlgebraicGeometry.Etale.closedConstantPullbackRestriction",
+   "AlgebraicGeometry.Etale.closedConstantSupportChange",
+   "AlgebraicGeometry.Etale.closedConstantIdentitySupportMap",
+   "AlgebraicGeometry.Etale.closedConstantCompositionSupportMap",
+   "AlgebraicGeometry.Etale.closedConstantSymmetrySupportMap",
+   "AlgebraicGeometry.Etale.closedConstantAssociativitySupportMap",
+   "AlgebraicGeometry.Etale.closedConstantBaseChangeSupportMap",
+   "AlgebraicGeometry.Etale.closedConstantPullbackCoherence",
+   "AlgebraicGeometry.Etale.closedConstantTensorPullbackSquare",
+   "AlgebraicGeometry.Etale.closedConstantTensorCoherence",
+   "AlgebraicGeometry.Etale.closedConstantModule_flat",
+   "AlgebraicGeometry.Etale.closedConstantDerivedModule",
+   "AlgebraicGeometry.Etale.closedConstantFlatModelMap",
+   "AlgebraicGeometry.Etale.closedConstantDerivedTensorMap",
+   "AlgebraicGeometry.Etale.closedConstantDerivedPullbackMap",
+   "AlgebraicGeometry.Etale.closedConstantDerivedPairMap",
+   "AlgebraicGeometry.Etale.ClosedConstantDerivedTensorCoherence",
+   "AlgebraicGeometry.Etale.ClosedConstantDerivedTensorPullbackSquare",
+   "AlgebraicGeometry.Etale.closedConstantTensor"
+  ],
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair R1-R4: all support coherences use equalities after named canonical support-change maps, never HEq. Derived multiplication is singleFunctorObjTensorIso with closedConstantModule_flat followed by singleFunctor.map of the ordinary multiplication; derived associativity, symmetry and the canonical derived pullback square are stated. The noncanonical constantRingedModel and its IsFlatOnSite conjuncts were removed as authorized by R3. The global GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall is the published wrapper of Sheaf.monoidalCategory (its equality lemma is rfl); this specializes the sheafified sectionwise tensor to fixed ModuleCat A coefficients: locally every scalar in the constant ring sheaf is represented by an element of A, so after sheafification A-balancing and constant-ring-sheaf balancing agree. Its tensor functors therefore encode exactly the site tensor and exact tensoring recorded by def-pur-sheaf-tensor-product and def-pc-flat-sheaf-modules, in the accepted fixed-coefficient encoding; no alternative tensor construction is introduced."
  }
 }

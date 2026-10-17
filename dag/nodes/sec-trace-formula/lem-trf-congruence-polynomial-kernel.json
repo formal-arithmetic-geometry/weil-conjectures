@@ -195,5 +195,24 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-b4c740cde (reviewer sub-agent of L); spot-checked: I read the item and its seven steps in full, along with the parent lem-trf-fg-commutative-monoid-finite-presentation and the unit sk-i-curve-zero. Steps 1-4 prove ker φ = I: φ kills the differences; the support is grouped by quotient class; each class's coefficient sum vanishes; each class is rewritten as a sum of differences with a chosen representative. Steps 5-7 show that d(u,v) :⇔ [u]-[v]∈J is a congruence, using [u+w]-[v+w]=[w]([u]-[v]); by minimality c ⊆ d, so I=J. Every step is elementary and correct, and nothing needs cancellativity. Edge cases tested: A the zero ring, c equality, S empty, ℕ with 2~1 giving (t²-t) and 2~0 giving (t²-1), and the idempotent monoid {0,e} with e~0 giving kernel (t-1). Checked the Mathlib places in the sources: Con.mk'_ker at Hom.lean:150-155, lift lemmas at 201-213, Finsupp.mapDomain_apply_eq_sum at Basic.lean:1432-1434. A Mathlib grep found no kernel theorem for mapDomain or congruence quotients. A DAG search for monoid algebra, congruence, binomial, mapDomain and conGen found no duplicate or generalization. The delivery creates no new nodes, cites no SGA, declares no tool_uses, and its blueprint.from/same_as fields are filled. The statement matches how the parent uses it with A=ℤ, M=ℕⁿ. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ee6282d5",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Statement correct: M/A/c/q/A[N] rendered via AddCommMonoid, CommRing, AddCon, c.mk', AddMonoidAlgebra.mapDomainRingHom (MapDomain.lean:296); both clauses (ker = span of of' u - of' w with c u w; for all S, c = addConGen S gives span over S) match the node; no extra hypotheses, universes u,v independent and bound; edge cases (zero ring, c equality, S empty, noncancellative M) kept; 7-step proof checked. Base diff: one commit, 3 files, only the node's lean field added; lean.statement verbatim; proof only sorry (axioms incl. sorryAx); no duplicate/name clash in Mathlib/slopmaster2/side. Mechanical fixes: H8 missing module docstring added; H9 unused import Mathlib.Algebra.MonoidAlgebra.Ideal removed; report import list updated and fix section appended. nt_compile: delivered clean 4.6 s, fixed clean 1.9 s. Fix files: fixes/lean/Sheaf/TraceFormula/CongruencePolynomialKernel.lean, fixes/lem-trf-congruence-polynomial-kernel.report.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CongruencePolynomialKernel",
+  "file": "lean/Sheaf/TraceFormula/CongruencePolynomialKernel.lean",
+  "declaration": "congruence_polynomial_kernel",
+  "statement": "theorem congruence_polynomial_kernel {M : Type u} {A : Type v} [AddCommMonoid M] [CommRing A] (c : AddCon M) : RingHom.ker (AddMonoidAlgebra.mapDomainRingHom A c.mk') = Ideal.span {x : AddMonoidAlgebra A M | ∃ u w : M, c u w ∧ x = AddMonoidAlgebra.of' A M u - AddMonoidAlgebra.of' A M w} ∧ ∀ S : Set (M × M), c = addConGen (fun u w => (u, w) ∈ S) → RingHom.ker (AddMonoidAlgebra.mapDomainRingHom A c.mk') = Ideal.span {x : AddMonoidAlgebra A M | ∃ p : M × M, p ∈ S ∧ x = AddMonoidAlgebra.of' A M p.1 - AddMonoidAlgebra.of' A M p.2}",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-2ee6282d5"
  }
 }

@@ -27,7 +27,8 @@
   "lem-weil-pbc-comparison-pullback",
   "def-kun-projection-formula-map",
   "lem-pur-etale-open-derived-tensor",
-  "lem-cbc-proetale-extension-zero-comparison"
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-smooth-purity-projection-comparison-equation"
  ],
  "proof": [
   {
@@ -324,5 +325,27 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-cc5a4eb9a (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements and source passages. All seven steps correctly compare the specified proper/open projection maps; Tor bounds, mate directions and coefficient categories check out. No new nodes, cycles, forbidden trace/duality uses or long non-elementary steps. Accepted all fourteen declared tool uses. Detailed checks recorded in review.md; no fixes needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f33e87907",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Read the packet, item node, new helper node, both Lean modules, report and the cited declarations (ProEtale/Etale projectionMapOfCompactification, compactSupportSiteComparison, derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso, comparisonUpperStarCompUpperStarIso, recorded finiteExchangeProjection and supportSiteComparisonCoefficientPullbackIso). Every hypothesis matches the node (FiniteFieldDatum, l prime and l≠p, finite E/Q_l, n≥1, finite-type X/Y over k, f separated of finite type, fixed c, D^b_c M and H, finite Tor for H only). The equation C_D∘P_f(τ)∘PF^p = V_Y(PF^e)∘t∘(C_M⊗1) has the right order and directions. PF^p is the same declaration and body as def-exchange-projection's projection component. PF^e is built from the recorded def-kun-projection-formula-map and lem-pur-etale-open-derived-tensor declarations. t is .inv of the canonical tensor comparison. The pullback iso is the canonical mate. The bounded-below witnesses are existential Props, not extra hypotheses. No hollow definitions; only sorry; docstrings present; statements verbatim; universes bound; edge cases covered. The §1(B) records for def-weil-derived-tensor and def-compact-support-direct-image-detailed are exact upstream declarations with notes. nt_compile.py on both files: 9.9 s and 2.7 s, no errors or warnings. Non-blocking: no lean.note records the upstream tensor and pullback comparison declarations on their dependency nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectionComparisonEtaleOrigin",
+  "declaration": "AlgebraicGeometry.ProEtale.projectionComparison_etaleOrigin",
+  "statement": "theorem projectionComparison_etaleOrigin (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) [Fact (1 ≤ n)] {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (M : Etale.DerivedCategoryModule (Padic.coefficientExtensionRing l E n) X) (H : Etale.DerivedCategoryModule (Padic.coefficientExtensionRing l E n) Y) (_hM : Etale.DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) X M) (_hH : Etale.DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) Y H) (_hTor : ∃ a b : ℤ, Etale.DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) Y a b H) : projectionComparisonConclusion D l _hl E n f c M H _hM _hH _hTor",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectionComparisonEtaleOrigin.lean",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.projectionComparison_etaleOrigin"
+  ],
+  "note": "The theorem states the exact etale-origin comparison; the canonical equality and existential conclusion are exposed by the recorded helper node."
  }
 }

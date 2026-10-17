@@ -168,5 +168,24 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-a392014a2 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited node's statement, and the sources at the cited places (flat.tex Tag 081L l.3019 and Tag 0B48 l.3053, with proofs; morphisms.tex relative-dimension definition l.5564 and Tag 0397 l.5641). The item matches 0B48 with the locally-of-finite-presentation alternative and is not weakened. Its hypotheses are exactly what step 4 of lem-trf-finite-after-blowup supplies. The two new nodes state Stacks 081L(1) and Stacks 0397. They are not duplicates: lem-weil-pbc-ring-quasifinite-zero-fibre-dimension is only the affine pointwise version, and I checked 01TH, 02FZ and the flat specialization nodes. Neither restates a clause of the item. I tested both on small cases: Spec k(x) shows 0397 needs locally finite type, and k[t,x]/(tx) shows 081L needs flatness. Mathlib has no leaf for either; the nearest is locallyQuasiFinite_iff_isDiscrete_preimage_singleton at QuasiFinite.lean:276, which is about discrete fibres. Repairs: (1) Step 3 claimed lfp implies lft by definition, which is the locality lemma 01T2 and not a definition (C4); it now gets lft from proper (finite type) via def-weil-proper-morphism. (2) Step 1 never checked the lft hypothesis of the 0397 node for X_U to U and mislabelled which direction it used; it now argues from pqf-def-quasifinite (3) and def-weil-finite-type-morphism, and Step 2 now spells out why dim at most 0 means dim 0 (E1). (3) The 081L node used an undefined u(x) and an undefined 'dense' (B2/B3); both nodes now cite def-pc-scheme-fibre, and copy-pasted search verdict texts were corrected. Accepted tool use: pqf-lem-qf-locqf-qc (quasi-finite implies locally quasi-finite, other unit, not closed) is added to split_report.tool_uses. The report mentions a citations.json that the delivery does not contain. No SGA.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0e2e54ac",
+  "group": "N9",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0B48 (lfp alternative) clause by clause: IsProper/Flat/LocallyOfFinitePresentation f, U : S.Opens with Dense (U : Set S), [IsFinite (pullback.snd f U.ι)], conclusion IsFinite f. No extra hypotheses or universe restriction; edge cases (empty S, U=⊤, empty X) covered. §1(B) lean record for def-sbc-locally-finite-presentation is the exact Mathlib class, with lean.note. Only lean fields changed; report has Worker report and Second reading by N9. No duplicate found in Mathlib, side or slopmaster2. nt_compile: rc 0, clean (original and fixed). H8 fixed: docstring step 1 omitted the forward direction of lem-trf-locally-quasi-finite-relative-dimension-zero (step 2 relied on a bound never stated), step 2 omitted the dim<=0 => dim=0 argument, step 3 omitted the proper => finite type step; fixes/ProperFlatFiniteDenseOpen.lean is a complete replacement module changing only the docstring, signature unchanged so lean.statement stays verbatim."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ProperFlatFiniteDenseOpen",
+  "declaration": "AlgebraicGeometry.proper_flat_finite_dense_open",
+  "file": "lean/Sheaf/TraceFormula/ProperFlatFiniteDenseOpen.lean",
+  "statement": "theorem proper_flat_finite_dense_open {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (U : S.Opens) (hU : Dense (U : Set S)) [IsFinite (pullback.snd f U.ι)] : IsFinite f",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem states the proper, flat, locally finitely presented dense-open finiteness criterion from Stacks Tag 0B48."
  }
 }

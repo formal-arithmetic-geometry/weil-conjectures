@@ -14,7 +14,8 @@
   "def-nagata-relative-proj",
   "lem-weil-pbc-quasi-coherent-symmetric-algebra",
   "lem-weil-pbc-symmetric-algebra-graded",
-  "def-kun-projective"
+  "def-kun-projective",
+  "def-trf-canonical-symmetric-graded-algebra"
  ],
  "proof": [],
  "proof_deps": [],
@@ -145,5 +146,24 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-112ddea6a (reviewer sub-agent of L); spot-checked: I read the item and all 7 statement dependencies in full. The definition matches Stacks morphisms.tex 01W8(1) (l.10487-10501): X is isomorphic over S to a closed subscheme of P(E), with E quasi-coherent of finite type and no local-freeness condition. It also matches constructions.tex 01OB (l.4656-4690): P(E)=Proj_S(Sym E), and the EGA II 4.1.1 footnote says E need not be locally free. ILO IX Thm 1.2 (de Jong alteration, 'f' projectif', 'altérations projectives') confirms why this convention is needed; the parent's step 2 converts it to H-projective through the separate unsplit node lem-trf-projective-bundle-to-h-projective, and the item asserts no comparison theorem. Each dependency says what the item takes from it: pqf-def-coherent (quasi-coherent, finite type), the quasi-coherent symmetric-algebra lemma, the symmetric grading, def-nagata-relative-proj (quasi-coherent graded algebra, no A_0=O condition), closed immersion, and def-kun-projective (comparison only). The graded-sheaf passage follows the existing pattern of lem-pur-projective-bundle-tautological-geometry and def-nagata-relative-projective-space. Small cases checked: E=0 gives the empty scheme, E=O_S gives P(E)=S, E=O^{n+1} gives P^n_S, non-locally-free E is allowed, and an empty base gives only the empty X. Duplicate search: rg found 21 files; all are H-projective definitions or locally-free projective-bundle geometry, so there is no duplicate and same_as [] stands. The via chain to lem-trf-local-term-locality is verified. There are no new nodes, no proof steps, no SGA, and no target, so base change and coefficients do not arise. One fault (B5): the report claims tag 01OB was added, but source.place lacked it. I fixed source.place to cite Morphisms Tag 01W8(1) and Constructions Tag 01OB; the whole corrected file is in fixes/dag/nodes/sec-trace-formula/def-trf-projective-bundle-morphism.json. No tool_uses, no drop_nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9c4ee81f",
+  "group": "NW",
+  "result": "pass",
+  "note": "IsProjectiveBundle matches Stacks 01W8(1)/01OB (morphisms.tex l.10488-10501, constructions.tex l.4671-4690): exists E quasi-coherent (hE) and finite type, a closed immersion i into the canonical relProj with i ≫ relProjHom = f; no extra hypotheses, single universe u, lean.statement verbatim. The new §1(A) node def-trf-canonical-symmetric-graded-algebra has real data (sections = SymmetricAlgebra Γ(U) E(U), grade (range ι)^n, restrictions = SymmetricAlgebraSheaf.restriction, res_id/res_res proved). Its only sorrys are two named, true well-definedness theorems (degree preservation; base change under quasi-coherence), with proofs in docstrings. Not a duplicate: SymmetricGradedAlgebraData is only a presentation structure. Edge cases E=0, O_S, O^{n+1}, non-locally-free E and empty S checked. Both modules compile clean via nt_compile.py --json (8.1 s and 5.4 s, rc=0). Report has Worker report and Second reading sections. Minor, no action: one unused import."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism",
+  "declaration": "AlgebraicGeometry.IsProjectiveBundle",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleMorphism.lean",
+  "statement": "def IsProjectiveBundle {X S : Scheme.{u}} (f : X ⟶ S) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair: the symmetric algebra is now the actual canonical GradedAlgebraData, with section rings Sym(E(U)), grades powers of the degree-one inclusion range, and the canonical restriction maps. relProj and relProjHom are the landed upstream constructions. The mathematical statement is unchanged."
  }
 }

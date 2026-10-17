@@ -1,0 +1,110 @@
+{
+ "id": "def-trf-etale-acyclic-scheme",
+ "kind": "definition",
+ "title": "Étale-acyclic scheme",
+ "statement": "For a scheme $T$, say that $T$ is etale acyclic if every jointly surjective family of etale morphisms $\\{U_i\\to T\\}_{i\\in I}$ [def-weil-pbc-etale-site] has a section after taking the coproduct $\\coprod_i U_i\\to T$ in schemes. Equivalently for an affine scheme [def-weil-affine-spectrum], every connected component is strictly henselian local [def-weil-pbc-henselian-terminology].",
+ "source": {
+  "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+  "place": "Hübner–Schmidt, Definition 7.8 and Proposition 7.9, étale case, printed pp. 14–15"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scheme whose every jointly surjective etale family admits a section is etale acyclic",
+   "results": "No matching acyclicity predicate; only generic etale-site and affine-cover declarations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.IsEtaleAcyclic, etale cover section, strictly henselian",
+   "results": "0 hits; no such declaration.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*acyclic|acyclic.*etale|split.*etale.*cover",
+   "results": "No matching predicate in Mathlib or the project.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale acyclic scheme every etale covering splits",
+   "results": "Only generic etale topology and strictly henselian local results; no predicate.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-artin-tensor-etale-acyclic",
+  "date": "2026-10-18",
+  "group": "Q14"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Artin joins input: étale-acyclic affine schemes",
+   "via": [
+    "lem-trf-artin-tensor-etale-acyclic",
+    "lem-trf-projective-strict-local-intersection-acyclic",
+    "lem-trf-gabber-nearby-cycle-dimension-bound",
+    "lem-trf-gabber-strict-local-torsion-bound",
+    "lem-trf-finite-type-torsion-universal-star",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAcyclic",
+  "declaration": "AlgebraicGeometry.Scheme.IsEtaleAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAcyclic.lean",
+  "statement": "def AlgebraicGeometry.Scheme.IsEtaleAcyclic (T : Scheme.{u}) : Prop",
+  "by": "Q14",
+  "date": "2026-10-18",
+  "branch": "newtargets-dag",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63150bc51",
+  "group": "Q14",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63150bc51",
+  "group": "Q14",
+  "result": "fix",
+  "note": "Item Lean matches node clause by clause (IndEtale R Bj, IsEtaleAcyclic hyps, torsion F on small etale site of Spec(B1⊗B2), IsZero Etale.cohomology q for all q:ℤ>0 per the def-weil-pbc-etale-cohomology spelling); single universe forced by Algebra.IndEtale (R S : Type u). New node def-trf-etale-acyclic-scheme = Hübner–Schmidt Def 7.8; real def (section of coproduct for every jointly surjective family in T.Etale, ι : Type u without loss); H12 fields ok; no duplicate found. Item node diff vs clone only lean+stmt_deps. Both files compile clean via nt_compile.py (exit 0), as does the fixed module. Fixes: H8 item docstring now carries proof steps 1-5; H9 unused WeilConjectures.Mathlib.RingTheory.Henselian import removed; report corrected (wrong node id def-weil-pbc-etale-acyclic-scheme, IsStrictlyHenselianLocalRing not used). Signature unchanged so lean.statement stays verbatim."
+ }
+}

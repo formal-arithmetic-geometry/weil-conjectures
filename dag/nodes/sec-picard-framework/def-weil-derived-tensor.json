@@ -113,25 +113,21 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.SixFunctors.IntrinsicDerivedTensorOfUniverses",
-  "declaration": "SheafOfModules.ringedSiteDerivedTensorOfUniverses",
-  "declarations": [
-   "SheafOfModules.ringedSiteDerivedTensorOfUniverses"
-  ],
-  "file": "lean/Sheaf/SixFunctors/IntrinsicDerivedTensorOfUniverses.lean",
-  "statement": "def ringedSiteDerivedTensorOfUniverses {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r}) [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasDerivedCategory.{w} (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] (K L : DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) : DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))",
-  "branch": "newtargets-dag",
-  "by": "Q105",
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedTensor",
+  "statement": "def derivedTensor :\n    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n        DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)",
+  "branch": "slopmaster2",
+  "by": "Q98",
   "date": "2026-10-17",
-  "existing": false,
-  "note": "§1(B): the recorded intrinsic tensor takes coefficient and scheme data in the same universe and cannot apply to actual slice sites. This is its identical K-flat-resolve/total-tensor/localize construction for an arbitrary ringed site with independent object, morphism, coefficient and localization sizes. It specializes to the pro-etale site and its actual over-sites without changing any coefficient data or assuming flatness of the test object."
+  "existing": true,
+  "note": "Section 1(B), exact existing presentation repair: the currently recorded ringedSiteDerivedTensorOfUniverses has intrinsic SheafOfModules endpoints, whereas this consumer, compactification projections and canonical site comparison use fixed-ring ModuleCat-valued sheaves. The existing generic derivedTensor specialized to ModuleCat.{u+1} A supplies the same ordinary uncompleted K-flat total tensor in that presentation. No universe equality, boundedness, Tor hypothesis or chosen map is added. The generalized intrinsic construction remains in its published module."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-276776fd5",
-  "group": "Q105",
+  "reviewer": "NT-stage2-cc-f33e87907",
+  "group": "Q98",
   "result": "pass",
-  "note": "All clauses match the node. Recorded declarations used: coefficientExtensionRing l E 1 = O_E/ϖ, scalarReductionDerivedExtension index 0 = exponent 1 over the same constant k_V, IsComplete none, IsWeaklyContractible at V, homologyFunctor, ringedSiteDerivedRestrictionOfUniverses. The conclusion is sheaf vanishing on every slice for arbitrary U and L. No added hypotheses or universe equalities. Both §1(B) dependency modules are faithful universe generalizations of the recorded constructions; no hollow data. Records verbatim, only lean changed in node files. Docstrings carry source, blueprint and the 6-step proof. All three files compile with no errors via nt_compile.py."
+  "note": "Read the packet, item node, new helper node, both Lean modules, report and the cited declarations (ProEtale/Etale projectionMapOfCompactification, compactSupportSiteComparison, derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso, comparisonUpperStarCompUpperStarIso, recorded finiteExchangeProjection and supportSiteComparisonCoefficientPullbackIso). Every hypothesis matches the node (FiniteFieldDatum, l prime and l≠p, finite E/Q_l, n≥1, finite-type X/Y over k, f separated of finite type, fixed c, D^b_c M and H, finite Tor for H only). The equation C_D∘P_f(τ)∘PF^p = V_Y(PF^e)∘t∘(C_M⊗1) has the right order and directions. PF^p is the same declaration and body as def-exchange-projection's projection component. PF^e is built from the recorded def-kun-projection-formula-map and lem-pur-etale-open-derived-tensor declarations. t is .inv of the canonical tensor comparison. The pullback iso is the canonical mate. The bounded-below witnesses are existential Props, not extra hypotheses. No hollow definitions; only sorry; docstrings present; statements verbatim; universes bound; edge cases covered. The §1(B) records for def-weil-derived-tensor and def-compact-support-direct-image-detailed are exact upstream declarations with notes. nt_compile.py on both files: 9.9 s and 2.7 s, no errors or warnings. Non-blocking: no lean.note records the upstream tensor and pullback comparison declarations on their dependency nodes."
  }
 }

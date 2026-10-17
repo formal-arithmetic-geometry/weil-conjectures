@@ -169,5 +169,23 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-9f87790d3 (reviewer sub-agent of L); spot-checked: No changes made. The item matches Stacks Fields Tag 037J (fields.tex 3584-3607) exactly; its statement is unchanged. Step 1: the finite transcendence basis leaf and the algebraic-generators leaf give n=[K:L] finite. Step 2: the finite intermediate field k' is algebraic over k. The new leaf lem-zl-independence-algebraic-base (Algebra.IsAlgebraic.algebraicIndependent_iff, AlgebraicClosure.lean:96; its hypotheses hold for fields) makes x independent over k'. A correctly stated induction then uses the new leaf lem-zl-rational-function-degree (RatFunc.rank_ratFunc_ratFunc, Basic.lean:798, with algebraicity from Algebra.IsAlgebraic.of_finite, Integral.lean:108). It gives [k'(x):k(x)]=[k':k]. The denominator-clearing and evaluation identifications are written out and correct. Step 3: the elementary bound by n. Step 4: a maximal-degree argument that uses only that A is an algebraic subfield, which is correct. Small cases check out: K=k, k(t), Q(i)(t)/Q, and the inseparable case F_p(u^{1/p},t). Neither new node restates a clause of the item, and an rg search of the whole DAG found no duplicate. The route consists only of definitions and Mathlib leaves, so tool_uses is correctly empty. The blueprint route (paragraph 3, 0G4F to 0G4D to 037J) is kept and there is no SGA citation. Cosmetic only: the text mixes k′ and k', and the report mentions a citations.json that is not among the delivered files."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57f9f6f36",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Lean `algebraicClosure.finite_of_fg (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (hfg : (⊤ : IntermediateField k K).FG) : Module.Finite k (algebraicClosure k K)` renders Stacks 037J (fields.tex 3584-3607) and the node exactly. FG ⊤ is field finite generation, equivalent to EssFiniteType via fg_top_iff, so no stronger hypothesis. algebraicClosure is the recorded match of def-weil-relative-algebraic-closure. Module.Finite expresses finiteness. Universes are independent and bound. Edge cases checked: K=k, purely transcendental, finite K/k, inseparable char p. No Mathlib or project duplicate and no name collision. Only the node's lean field changed and lean.statement is verbatim. No defs, proof is sorry only, source and blueprint docstrings present, report sections present. nt_compile: rc=0, 2.0 s, no errors or warnings; probe confirmed the signature and only sorryAx plus standard axioms. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteRelativeAlgebraicClosure",
+  "declaration": "algebraicClosure.finite_of_fg",
+  "file": "lean/Sheaf/FieldTheory/FiniteRelativeAlgebraicClosure.lean",
+  "statement": "theorem finite_of_fg (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (hfg : (⊤ : IntermediateField k K).FG) : Module.Finite k (algebraicClosure k K)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

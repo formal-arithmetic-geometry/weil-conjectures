@@ -151,5 +151,23 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-a1c708b97 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited node's statement and the source Stacks Tag 0GTG (more-morphisms.tex, lemma-weak-relative-noether-normalization, l.8779, with its proof). The new node lem-trf-weak-relative-noether-normalization is faithful to 0GTG: a bound N on the fibre dimensions gives the maximum d <= N, and both the fibre dimension and quasi-finite match the definition nodes. I tested it on N=0, k[x,y]/(xy) with T->x+y, k[s,x]/(sx) and Z[x]. It is not a duplicate: rg over the DAG found only thm-zl-relative-noether, Noether normalization over a field or over a domain, and other different candidates. It is the affine core of the item, not a restatement of it. Mathlib has no match (exists_finite_inj_algHom_of_fg works over a field only). The item statement is unchanged from the base, and the parent lem-trf-bounded-dimension-projective-local-model gets from it exactly what it uses. The route is fine: every off-unit citation is a Mathlib leaf. I fixed three faults. (1) E5/C4 in Step 2: the chain-in-open-fibre argument now takes closures, and the step now proves that h is a finite-type morphism, which the child node assumes, using 01T2, lem-weil-pbc-morphism-affine-schemes-affine and affine permanence. (2) C4 in Step 3: pqf-def-quasifinite only gives isolated points, so the step now derives finite discrete fibres from quasi-compactness of the affine fibres; it also cites the affine-schemes node for the affineness of e. (3) B7: the new node's grep records said 'No hits', but grep -E gives 11 RingTheory files, so the alternation was evidently run as a basic regex. I marked those entries ineffective and added my real search, and I gave the new node an honest blueprint.from.place, since the ancestor's proof has no such paragraph. No tool_uses. The Orgogozo PDF is still WANTED. The report mentions a citations.json that is not in the delivery.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5636cb147",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: IsAffine B; LocallyOfFiniteType g; inline geometric point (Ω : Type u) with image point y (closedPoint Ω); N : ℕ; bound for all s : B on topologicalKrullDim (g.fiber s) in WithBot ℕ∞; ∃ affine open U containing the point, d ≤ N, e : U ⟶ 𝔸(ULift (Fin d); B) with IsSeparated, Scheme.Hom.IsQuasiFinite (the recorded pqf declaration; finite discrete fibres derived in proof step 3) and e ≫ (𝔸 ↘ B) = U.ι ≫ g. No extra hypotheses, one bound universe; the ULift is forced by Mathlib's AffineSpace. Edge cases N=0/d=0, empty fibres and nonempty Y checked; true via Stacks 0GTG. lean.statement verbatim; lean is the only changed node field; no new nodes; sorry only; docstrings have source place, blueprint tag and proof steps; no Mathlib or project duplicate found. nt_compile of the snapshot file is clean (3.9 s, no warnings). Report has a real Worker report; the Second reading section records the 2026-10-17 direct-delivery policy. Orgogozo PDF still WANTED, not blocking."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LocalQuasiFiniteProjection",
+  "file": "lean/Sheaf/TraceFormula/LocalQuasiFiniteProjection.lean",
+  "declaration": "AlgebraicGeometry.localQuasiFiniteProjection",
+  "statement": "theorem localQuasiFiniteProjection {B Y : Scheme.{u}} [IsAffine B] (g : Y ⟶ B) [LocallyOfFiniteType g] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) (N : ℕ) (hN : ∀ s : B, topologicalKrullDim (g.fiber s) ≤ (N : WithBot ℕ∞)) : ∃ U : Y.Opens, IsAffineOpen U ∧ y (closedPoint Ω) ∈ U ∧ ∃ d : ℕ, d ≤ N ∧ ∃ e : U.toScheme ⟶ 𝔸(ULift.{u} (Fin d); B), IsSeparated e ∧ Scheme.Hom.IsQuasiFinite e ∧ e ≫ (𝔸(ULift.{u} (Fin d); B) ↘ B) = U.ι ≫ g",
+  "existing": false,
+  "by": "Q23",
+  "date": "2026-10-17",
+  "branch": "newtargets-dag"
  }
 }

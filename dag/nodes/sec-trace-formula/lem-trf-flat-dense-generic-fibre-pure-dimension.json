@@ -277,16 +277,16 @@
   "file": "lean/Sheaf/TraceFormula/FlatDenseGenericFibrePureDimension.lean",
   "statement": "theorem flat_dense_generic_fibre_pure_dimension {X S : Scheme.{u}} [IsIntegral S] (f : X ⟶ S) [Flat f] [LocallyOfFiniteType f] (η : S) (hη : IsGenericPoint η (Set.univ : Set S)) (hdense : Dense (Set.range (f.fiberι η))) (d : ℕ) (hgeneric : ∀ C ∈ irreducibleComponents (f.fiber η), topologicalKrullDim C = (d : WithBot ℕ∞)) : (∀ s : S, Nonempty (f.fiber s) → ∀ C ∈ irreducibleComponents (f.fiber s), topologicalKrullDim C = (d : WithBot ℕ∞)) ∧ (∀ s : S, ∀ (Ω : Type u) [Field Ω] [Algebra (S.residueField s) Ω] [IsAlgClosed Ω], Nonempty (pullback (C := Scheme.{u}) (f.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) Ω)))) → ∀ C ∈ irreducibleComponents (pullback (C := Scheme.{u}) (f.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) Ω)))), topologicalKrullDim C = (d : WithBot ℕ∞))",
   "branch": "newtargets-dag",
-  "by": "Q06",
+  "by": "Q106",
   "date": "2026-10-18",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-5eef5d69b",
-  "group": "Q06",
+  "reviewer": "NT-stage2-cc-19a71677f",
+  "group": "Q106",
   "result": "pass",
-  "note": "Every clause of the node matches the Lean: IsIntegral S; IsGenericPoint η univ; Flat and LocallyOfFiniteType f; Dense (range f.fiberι η); d : ℕ; generic-fibre components have topologicalKrullDim d; both conclusions, for nonempty fibres and for nonempty geometric fibres X_s ×_κ(s) Spec Ω with Ω algebraically closed. Nothing is assumed beyond the node and the quantifier order is the same. Each Lean name is the recorded declaration for its dependency. Edge cases: d = 0 and empty X, fibres and geometric fibres are vacuous. Ω : Type u is forced by the pullback in Scheme.{u} and is the project convention, so it is not a hidden restriction. No new definitions; the only proof is sorry; docstrings give the source (0GSK/0GSJ, 02NJ/02NK), the blueprint tag and the six proof steps. The node changed only in its lean field, and lean.statement matches the signature exactly. nt_compile.py: no errors in 7.8 s; axioms are propext, sorryAx, Classical.choice, Quot.sound. The report has Worker report and Second reading by Q06 sections. Only minor point: the second reading is short."
+  "note": "Re-delivery of the statement Q06 landed in ebb5bbc6cb: Lean signature and body byte-identical; only an accurate docstring sentence, lean.by Q06->Q106 (the tool requires the delivering group) and the Q106 report (Worker report + Second reading by Q106) differ. Checked every clause against the node and Stacks 0GSK/0GSJ/02NJ/02NK: IsIntegral S, IsGenericPoint eta univ, Flat + LocallyOfFiniteType, Dense (range f.fiberι eta), d : ℕ, generic-fibre components of dimension d; both conclusions (nonempty fibres; nonempty geometric fibres, the pullback of fiberToSpecResidueField s along Spec Ω for any algebraically closed Ω) with the same quantifier order and no extra hypotheses. Edge cases: d = 0, empty X and empty fibres are vacuous. Ω : Type u is forced by the pullback in Scheme.{u} (project convention). The node's integral base is stronger than the source's irreducible base but is the node's own accepted choice. No definitions, sorry only, source and blueprint docstrings present, recorded declarations used, no pro-étale. nt_compile.py: no errors or warnings, about 2.5 s; axioms propext, sorryAx, Classical.choice, Quot.sound."
  }
 }

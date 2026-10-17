@@ -96,5 +96,29 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-6c925aca1 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the definition item only, with no new nodes, against Stacks divisors.tex §Strict transform, Definition definition-strict-transform (Tag 080D (1)), the remark after it and the proof of lemma-strict-transform. The statement matches 080D (1). Stacks allows any closed subscheme as centre; the item restricts to a finite-type quasi-coherent ideal 𝓘. That narrows the definition without weakening anything, since every user (lem-trf-flattening-by-admissible-blowup, lem-trf-flattening-module-by-admissible-blowup, lem-trf-strict-transform-affine-pushforward, def-nagata-admissible-blowup) uses finite-type centres. 'Sections supported on pr⁻¹E' is the same as 'restriction to the complement is zero'. The source's quasi-coherence claim about the kernel is not asserted, so no claim is hidden in the definition. The item keeps the source's point that the strict transform depends on the centre. Small cases agree: unit ideal gives F^b = p^*F; S = Spec k[t] with 𝓘 = (t) and F = k[t] ⊕ k[t]/(t) gives k[t], matching Stacks' N/a-power-torsion; zero ideal gives the empty scheme. def-nagata-strict-transform is the scheme closure, not this module quotient, so it is no duplicate, and same_as [] is correct. I read the cited nodes def-pc-scheme, pqf-def-coherent, def-nagata-global-blowup (with its glue data and local model) and def-pc-fibre-product; each says what the item uses. FIX: the item gave the module pullback p^* inline instead of citing the existing node def-pc-module-pullback. I added that citation to the statement and stmt_deps in fixes/dag/nodes/sec-trace-formula/def-trf-module-strict-transform.json, with no other change and no cycle. A definition has no proof steps, no tool_uses and no SGA source. The 5 recorded Mathlib searches (leanfinder ×2, leansearch, grep, loogle) found no match and could not be re-run on this machine. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bcd6278e",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read the node, Stacks divisors.tex 080D (1) with its notation and the remark on the centre, and every dependency declaration (IdealSheafData.blowup/blowupMap, toModules = the ideal sheaf, tensorPullback, Mathlib restrictAdjunction and restrictAdjunction_unit_app_app, IdealSheafData.support, Limits.pullback). Lean: open = (q≫b)⁻¹(S∖V(I)) = complement of q⁻¹E; K = kernel of the restriction unit p*F→j_*j^*p*F, sectionwise the sections vanishing on W∩(Y∖q⁻¹E); F^b = cokernel(kernel.ι). Exactly the node's hypotheses ([I.toModules.IsFiniteType], [F.IsQuasicoherent]); I retained; single explicit universe as the fibre product requires; edge cases unit/zero ideal, F=0, empty schemes and the k[t] torsion example agree. Commit 2bcd6278 changes only the module, the report and the item's lean key; the recorded statement equals stage2_delivery.py's signature; no sorry or theorems; source and blueprint docstrings on the module and all 4 defs; lines ≤100. nt_compile.py: rc 0, 3.0 s, no warnings. Second reading done by the same worker, disclosed and substantive; the Coherent import is unused for elaboration but is the recorded dependency module. Neither needs a change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleStrictTransform",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformOpen",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformRestriction",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformKernel",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleStrictTransform.lean",
+  "statement": "def moduleStrictTransform {X S : Scheme.{u}} (f : X ⟶ S) (I : S.IdealSheafData) [I.toModules.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] : (Limits.pullback f I.blowupMap).Modules",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

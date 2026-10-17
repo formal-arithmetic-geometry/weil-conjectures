@@ -211,5 +211,23 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-9483809dd (reviewer sub-agent of L); spot-checked: I read the item in full, all 15 cited node statements, the parent lem-trf-excellent-scheme-affine-cover and the unit sk-i-curve-zero. Sources read: Stacks morphisms.tex 07R4 (lemma-J), statement and whole proof, and more-algebra.tex 07P7 (definition-J). The statement is exactly 07R4 (4)=>(3) with the locally Noetherian hypothesis kept and nothing weakened. The source's 'S' in (4) means X, and the node records this. Step 1: the pointwise lft criterion, an iff whose condition holds with the whole affine pair (Y,V), gives h=Spec(R->B) locally of finite type, using the criterion's statement only. Step 2: id_V is a closed immersion, so j is an immersion; clause (2) of the immersion lemma makes j locally of finite type; clause (e) of proper-fp-permanence handles the composite; 01T6 makes Y locally Noetherian, which is harmless though not needed. Step 3: the affine basis inside f^{-1}(U_i), then the all-pairs criterion applied to (W_y,U_i), matching the last paragraph of the 07R4 proof. No intersection of affines is assumed affine and no finite subcover is used. Step 4: J-2 of A_y applied to C_y, then clause (c) of the stalk-localization lemma gives Reg(Y) ∩ W_y open, and the union is open. Step 5: the same identification for Y=Spec B gives the J-2 conclusion for an arbitrary finite type B. proof_deps equals the union of the step uses. Every cited statement is a Mathlib leaf and the rest are definitions, so there is no off-route use and tool_uses=[] is correct. No SGA is used. There are no new nodes. A grep of dag/nodes for J-2, 07R4, lemma-J and 'regular locus' found no duplicate. Edge cases checked: empty X (R=0), B=0, nonreduced B, infinite I. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-996ec9951",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement = Stacks 07R4 (4)=>(3) with locally Noetherian X ([IsLocallyNoetherian X]); arbitrary affine cover (I : Type v, iSup = top, no finiteness or nonemptiness); hypothesis and conclusion are the full J-2 clause over all finite type Type u algebras, character for character the clause of the recorded IsQuasiExcellent (def-exc-excellent-ring); no J-2 predicate exists in Mathlib or the project, so no duplicate definition; Type u algebra universe is the dependency convention and loses nothing; no extra assumptions; edge cases (empty I/X/V, B=0, nonreduced, infinite cover) covered; source and blueprint docstrings present, node's 5 proof steps in the theorem docstring; proof sorry only; lean.statement verbatim (script-checked); report has Worker report and Second reading by N9; nt_compile.py --json on the snapshot file: 5.3 s, exit 0, no errors (an error control confirmed diagnostics are reported). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.JTwoAffineCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/JTwoAffineCover.lean",
+  "declaration": "AlgebraicGeometry.j2_of_affine_open_cover",
+  "statement": "theorem j2_of_affine_open_cover (X : Scheme.{u}) [IsLocallyNoetherian X] (I : Type v) (U : I → X.affineOpens) (hU : ⨆ i : I, (U i : X.Opens) = ⊤) (hJ : ∀ i : I, ∀ (A : Type u) [CommRing A] [Algebra Γ(X, U i) A] [Algebra.FiniteType Γ(X, U i) A], IsOpen {p : PrimeSpectrum A | IsRegularLocalRing (Localization.AtPrime p.asIdeal)}) : ∀ V : X.affineOpens, ∀ (A : Type u) [CommRing A] [Algebra Γ(X, V) A] [Algebra.FiniteType Γ(X, V) A], IsOpen {p : PrimeSpectrum A | IsRegularLocalRing (Localization.AtPrime p.asIdeal)}",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

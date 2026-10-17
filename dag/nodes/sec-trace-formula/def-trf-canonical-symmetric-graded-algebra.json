@@ -1,0 +1,131 @@
+{
+ "id": "def-trf-canonical-symmetric-graded-algebra",
+ "kind": "definition",
+ "title": "Canonical symmetric-degree algebra on the affine basis",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal E$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Define the canonical affine-basis graded algebra $A_X(\\mathcal E)$, in the graded algebra interface used for relative Proj [def-nagata-relative-proj], as follows. For every affine open $U$, set $R_U=\\mathcal O_X(U)$, $M_U=\\mathcal E(U)$ and $A(U)=\\operatorname{Sym}_{R_U}(M_U)$. Its degree-$n$ submodule is $(\\operatorname{im}\\iota_{M_U})^n$, equivalently the image of the degree-$n$ tensor component [lem-weil-pbc-symmetric-algebra-graded]. Its structural $R_U$-algebra map is the canonical symmetric-algebra unit. For $U\\subseteq V$, its restriction is the unique ring homomorphism sending scalars by $R_V\\to R_U$ and $\\iota_{M_V}(m)$ to $\\iota_{M_U}(m|_U)$. These rings identify canonically with the affine sections of the symmetric algebra sheaf [lem-weil-pbc-quasi-coherent-symmetric-algebra].\n\nThe named well-definedness properties of this construction are that restriction preserves each degree and, since $\\mathcal E$ is quasi-coherent, each restriction is coefficientwise base change: $R_U\\otimes_{R_V} A(V)_n\\to A(U)_n$, $r\\otimes a\\mapsto r\\,a|_U$, is an isomorphism for every $n$. Restriction identities and composition are inherited from the symmetric-algebra presheaf. The homogeneous decomposition is the unique inverse of the summation map of the internal direct sum, and the rings, grades and restriction homomorphisms are the specified formulas, not data chosen from an existence assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-nagata-relative-proj",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01OB, definition-projective-bundle; affine symmetric algebra from Modules Tags 01CG and 01CL, with affine restriction base change of Constructions Tag 01LN"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical symmetric algebra of a quasi coherent sheaf as GradedAlgebraData on affine opens with symmetric degree and restriction maps",
+   "results": "hits=8; top=['SymAlg', 'SymmetricAlgebra', 'ExteriorAlgebra.gradedAlgebra', 'SymmetricPower', 'SymmetricAlgebra.ι', 'TensorAlgebra.gradedAlgebra', 'SymmetricAlgebra.isSymmetricAlgebra_ι', 'SymmetricAlgebra.instCommRing']; note=",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra, GradedAlgebraData",
+   "results": "hits=0; top=[]; note=loogle: unknown identifier 'GradedAlgebraData'",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric.*GradedAlgebraData|GradedAlgebraData.*symmetric",
+   "results": "hits=0; top=[]; note=",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical affine basis symmetric algebra of a quasi coherent module with symmetric degree grading and coefficientwise base change",
+   "results": "hits=8; top=['Module.Basis.symmetricAlgebra', 'SymmetricAlgebra', 'AffineBasis', 'IsBaseChange.basis.congr_simp', 'Module.Basis.baseChange', 'IsBaseChange.basis_apply', 'IsBaseChange.basis_repr_comp_apply', 'SymmetricAlgebra.instCommSemiring']; note=",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedAlgebraData|sectionGradedAlgebra|gradedRestriction in WeilConjectures/ and lean/Sheaf/",
+   "results": "No canonical constructor found. ProjectiveBundleTautologicalGeometry defines only the symmetric-degree presentation structure; VectorProjectiveCompletion has a presentation for O plus F and RelativeProjectiveSpace covers free modules. Neither gives the actual canonical GradedAlgebraData for arbitrary quasi-coherent E.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search symmetric graded; DAG search for canonical symmetric affine-basis graded algebra",
+   "results": "No exact construction node. Existing relative Proj, symmetric algebra and symmetric-grading nodes provide ingredients, not this canonical packaging.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-trf-projective-bundle-morphism",
+  "date": "2026-10-17",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The symmetric-degree algebra whose relative Proj is the projective bundle in the projective-bundle projectivity convention.",
+   "via": [
+    "def-trf-projective-bundle-morphism",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CanonicalSymmetricGradedAlgebra",
+  "declaration": "AlgebraicGeometry.SymmetricAlgebraSheaf.gradedAlgebraData",
+  "declarations": [
+   "AlgebraicGeometry.SymmetricAlgebraSheaf.sectionGradedAlgebra",
+   "AlgebraicGeometry.SymmetricAlgebraSheaf.restriction_mem_symmetricDegree",
+   "AlgebraicGeometry.SymmetricAlgebraSheaf.gradedRestriction",
+   "AlgebraicGeometry.SymmetricAlgebraSheaf.gradedRestriction_isGradedBaseChangeAlong",
+   "AlgebraicGeometry.SymmetricAlgebraSheaf.gradedAlgebraData"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalSymmetricGradedAlgebra.lean",
+  "statement": "def gradedAlgebraData {X : Scheme.{u}} (E : X.Modules) [E.IsQuasicoherent] : X.GradedAlgebraData",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9c4ee81f",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9c4ee81f",
+  "group": "NW",
+  "result": "pass",
+  "note": "IsProjectiveBundle matches Stacks 01W8(1)/01OB (morphisms.tex l.10488-10501, constructions.tex l.4671-4690): exists E quasi-coherent (hE) and finite type, a closed immersion i into the canonical relProj with i ≫ relProjHom = f; no extra hypotheses, single universe u, lean.statement verbatim. The new §1(A) node def-trf-canonical-symmetric-graded-algebra has real data (sections = SymmetricAlgebra Γ(U) E(U), grade (range ι)^n, restrictions = SymmetricAlgebraSheaf.restriction, res_id/res_res proved). Its only sorrys are two named, true well-definedness theorems (degree preservation; base change under quasi-coherence), with proofs in docstrings. Not a duplicate: SymmetricGradedAlgebraData is only a presentation structure. Edge cases E=0, O_S, O^{n+1}, non-locally-free E and empty S checked. Both modules compile clean via nt_compile.py --json (8.1 s and 5.4 s, rc=0). Report has Worker report and Second reading sections. Minor, no action: one unused import."
+ }
+}

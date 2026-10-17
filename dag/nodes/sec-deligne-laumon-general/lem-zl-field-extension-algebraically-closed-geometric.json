@@ -200,5 +200,23 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-8cd6aaf04 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the sources it cites; I changed no files. The item is Stacks 037P (algebra.tex l.11297) and its statement is unchanged. Step 1 reduces to finite separable extensions with the new 037K test, and the affine fibre-product leaf matches Spec(K⊗L) to the base change in def-pc-geometrically-irreducible. Step 2 uses the primitive-element leaf (Fields 030N), the minimal polynomial (monic and irreducible by its definition node) and the quotient leaf, whose algebraicity hypothesis holds. Step 3 is elementary: I checked that the map K⊗E→K[T]/(P_K) is well defined because P divides g−g' in k[T], and that the reverse map T↦1⊗α kills P_K. Step 4 does the monic normalization correctly and uses the 00H6 leaf; injectivity of k[T]→K[T] then contradicts irreducibility of P. Step 5 shows the quotient is a field by the PID/Bezout argument and is nonzero since deg≥1; the spectrum of a field is one point. New node 037K (1)⇔(2) for any commutative k-algebra (unsplit) matches Stacks l.11146. Small cases: R=0 false on both sides, R=k true, k×k false, k[ε]/(ε²) true. It is not a clause of the item and not a duplicate: rg over all DAG nodes found only the 054P/04KZ/037N nodes and a reducedness analogue, and the blueprint snapshots have no hit. New leaf: Polynomial.isIntegral_coeff_of_dvd (IsIntegral.lean:62, tagged 00H6(1); CommRing R, S with Algebra R S, as at l.30) followed by IsIntegral.isAlgebraic (Integral.lean:54) is a one-line specialization. Q=1 is trivial, and monicity is needed (X²=(tX)(t⁻¹X) over k(t)). Both new nodes record all three kinds of search. Every cited node is a mathlib leaf. The declared tool_use names a node in the same unit, so it is not needed and I do not accept it as a tool use; it is harmless. The parent 0G33 node uses the item exactly as stated, for K over its relative algebraic closure. No SGA, target or coefficient category is involved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae4b840e8",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Stacks 037P (algebra.tex lemma-field-extension-geometrically-irreducible) matches the node. The Lean has {k K : Type u} [Field k] [Field K] [Algebra k K]; the hypothesis ∀ x, IsAlgebraic k x → ∃ y, algebraMap k K y = x is exactly 'k algebraically closed in K'; the conclusion GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k K))) is the recorded Mathlib match. No extra assumptions; the shared universe is required by Spec.map and harmless by 037K. Edge cases identity, transcendental and any characteristic are covered. No duplicate found in pinned Mathlib Geometrically/, the side clone or slopmaster2. lean.statement is verbatim; docstrings carry the source and blueprint tag plus the five steps; sorry-only proof, no definitions. Report has Worker report and Second reading by Q04. nt_compile --json is clean (rc 0, 5.5 s), with a broken test file confirming the tool shows errors. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_of_isAlgebraic_mem",
+  "file": "lean/Sheaf/FieldTheory/FieldExtensionGeometricallyIrreducible.lean",
+  "statement": "theorem geometricallyIrreducible_of_isAlgebraic_mem {k K : Type u} [Field k] [Field K] [Algebra k K] (h : ∀ x : K, IsAlgebraic k x → ∃ y : k, algebraMap k K y = x) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k K)))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

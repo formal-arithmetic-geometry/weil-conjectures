@@ -13,7 +13,8 @@
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-henselian-terminology",
   "def-weil-affine-spectrum",
-  "def-weil-pbc-etale-site"
+  "def-weil-pbc-etale-site",
+  "def-trf-etale-acyclic-scheme"
  ],
  "proof": [
   {
@@ -197,5 +198,24 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-fa914fd9f (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, all 12 cited node statements, the parent's Steps 2-3 and unit sk-i-curve-zero. Hübner-Schmidt is not in literature/, so I fetched the PDF and read §6 (p.12), Thm 6.3/6.4 (p.13) and Def 7.8, Prop 7.9, Thm 7.10 with proof (pp.14-15). The item matches the side-DAG base in statement, source, blueprint and unit; only the proof fields, stmt_deps and searches were added, so nothing was weakened. Its statement is the n=2 étale case of Thm 7.10, with the parenthetical given by Prop 7.9. New node lem-trf-artin-henselian-tensor-residue-dichotomy is Thm 6.4 with n=2, hypothesis by hypothesis. Writing n=m∩B_j is forced. Checked on k^sep⊗k^sep, V^sh⊗_V K^sep, and B=0. New node lem-trf-affine-etale-cover-component-criterion is Prop 7.9. The component ring C/I_Z is H-S's colim A/eA. I re-proved both directions for an arbitrary ring: the section on each strictly henselian component spreads to a clopen neighbourhood, compactness of π_0 gives a finite disjoint refinement, and a component with two closed points gives a Zariski cover with no section. I also checked a ring that is not w-local, so the node correctly drops BS's w-local hypothesis. Neither new node duplicates an existing one (grep for quasi-acyclic, w-strictly local, section/split cover; det-pe-* nodes assume w-local) or restates a clause of the item. Steps: (1) uses the criterion and I_Z⊆n; (2) all hypotheses of the dichotomy node are in force; (3) separable algebraic over a separably closed field is trivial, so components are strictly henselian and covers split; (4) the epi lemma plus the section give a disjoint clopen gluing, kernels are sectionwise, so Γ is exact; (5) the K-injective model with the exact-functor Mathlib leaf gives H^q=0, including T empty. proof_deps equals the union of uses and the graph is acyclic. The only off-unit statements cited are Mathlib leaves, so no tool_uses are needed. No SGA is cited. proof_origin is agent with a WANTED line, which is correct since the paper is not local. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63150bc51",
+  "group": "Q14",
+  "result": "fix",
+  "note": "Item Lean matches node clause by clause (IndEtale R Bj, IsEtaleAcyclic hyps, torsion F on small etale site of Spec(B1⊗B2), IsZero Etale.cohomology q for all q:ℤ>0 per the def-weil-pbc-etale-cohomology spelling); single universe forced by Algebra.IndEtale (R S : Type u). New node def-trf-etale-acyclic-scheme = Hübner–Schmidt Def 7.8; real def (section of coproduct for every jointly surjective family in T.Etale, ι : Type u without loss); H12 fields ok; no duplicate found. Item node diff vs clone only lean+stmt_deps. Both files compile clean via nt_compile.py (exit 0), as does the fixed module. Fixes: H8 item docstring now carries proof steps 1-5; H9 unused WeilConjectures.Mathlib.RingTheory.Henselian import removed; report corrected (wrong node id def-weil-pbc-etale-acyclic-scheme, IsStrictlyHenselianLocalRing not used). Signature unchanged so lean.statement stays verbatim."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinTensorEtaleAcyclic",
+  "declaration": "artin_tensor_etale_acyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinTensorEtaleAcyclic.lean",
+  "statement": "theorem artin_tensor_etale_acyclic (R B₁ B₂ : Type u) [CommRing R] [CommRing B₁] [CommRing B₂] [Algebra R B₁] [Algebra R B₂] [Algebra.IndEtale R B₁] [Algebra.IndEtale R B₂] (h₁ : Scheme.IsEtaleAcyclic (Spec (.of B₁))) (h₂ : Scheme.IsEtaleAcyclic (Spec (.of B₂))) : ∀ (F : Sheaf (Scheme.smallEtaleTopology (Spec (.of (B₁ ⊗[R] B₂)))) AddCommGrpCat.{u + 1}), AlgebraicGeometry.Scheme.IsTorsionAbelianSheaf F → ∀ (q : ℤ), 0 < q → IsZero ((AlgebraicGeometry.Etale.cohomology AddCommGrpCat.{u + 1} (Spec (.of (B₁ ⊗[R] B₂))) q).obj ((DerivedCategory.singleFunctor (Sheaf (Scheme.smallEtaleTopology (Spec (.of (B₁ ⊗[R] B₂)))) AddCommGrpCat.{u + 1}) 0).obj F))",
+  "by": "Q14",
+  "date": "2026-10-18",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-63150bc51"
  }
 }

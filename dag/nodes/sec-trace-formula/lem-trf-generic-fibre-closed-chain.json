@@ -237,5 +237,28 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-122b67a96 (reviewer sub-agent of L); spot-checked: I read all of it. The item and every cited node statement were checked against Stacks morphisms.tex 02JX (lemma-alteration-dimension, generic-fibre paragraph of the equality proof), algebra.tex 00P0 (both clauses), algebra.tex 00E3 and varieties.tex 0478(2); all tags were checked in tags/tags. There are no new nodes. The only statement change adds def-weil-residue-field to stmt_deps, and the mathematical content is unchanged and true. The statement still requires the chain to start at the generic point and its points to be distinct, which is stronger than the source sentence, and it gives the parent lem-trf-closed-dominant-dimension exactly what that node uses. Small cases tested: Spec E with E/K finite (r=0), A^r, a closed point of Q[t] with residue field Q(sqrt2), and non-separated or non-quasi-compact integral schemes; in the last case only one affine chart is used. Step checks: step 1 takes a closed point from the Jacobson leaf with Z=X. Step 2 applies lem-kun-closed-point-field(a) on a finite-type affine chart U, not on X, which is only locally of finite type, and residue fields agree on the open U. Step 3 uses the fraction field from 01RV plus 00P0, giving dim A = dim A_m = r, which is finite. Step 4 contracts a chain of length r from A_m using 00E3(1), with conditions (a)-(c) checked. Step 5 is correctly marked elementary: the endpoints are forced to be (0) and m because the chain cannot be lengthened, and the specialization direction is right. proof_deps equals the union of the step uses. A DFS over 145 dependency nodes finds no cycle back to the item. No SGA source is cited. I accept the three declared off-unit tool uses (lem-kun-closed-point-field, lem-weil-pbc-finite-type-domain-dimension-trdeg, lem-weil-pbc-localization-prime-residue-field-iso): they are generic algebra that 02JX itself invokes. The duplicate search found only ingredient nodes in pbc and sc, so same_as=[] is correct. The recorded Mathlib searches report no match and my own grep agrees. No fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-307575ce3",
+  "group": "N8",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 02JX: Field K, IsIntegral X (nonempty), LocallyOfFiniteType over Spec K with no QuasiCompact; ∃ r:ℕ with trdeg=r; Fin (r+1) chain from genericPoint to closed x with ⤳ (orientation checked) and adjacent ≠; Module.Finite residue field. Edge cases checked: r=0, empty scheme excluded, non-qc schemes, universe convention. No hollow def, docstrings with source/blueprint and proof steps, sorry only, both report sections present. Finding (H4): helper residueFieldBaseRingHom duplicated the project's Scheme.Hom.residueFieldAlgebraMap (ZetaSeries.lean:224) used by the proof dependency lem-kun-closed-point-field and sibling modules. Fix: helper removed, clause uses residueFieldAlgebraMap, public import WeilConjectures.ZetaSeries; complete module, record note and report in fixes/. Kept functionFieldBaseRingHom (same composite as the curve-local Scheme.functionFieldRingHom in a heavy module, noted). nt_compile.py: delivered and fixed files both clean (2.4 s)."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GenericFibreClosedChain",
+  "declaration": "AlgebraicGeometry.exists_generic_fibre_closed_chain",
+  "declarations": [
+   "AlgebraicGeometry.functionFieldBaseRingHom"
+  ],
+  "file": "lean/Sheaf/TraceFormula/GenericFibreClosedChain.lean",
+  "statement": "theorem exists_generic_fibre_closed_chain {K : Type u} [Field K] {X : Scheme.{u}} [X.Over (Spec (.of K))] [IsIntegral X] [LocallyOfFiniteType (X ↘ Spec (.of K))] : ∃ r : ℕ, @Algebra.trdeg K X.functionField _ _ ((functionFieldBaseRingHom (K := K) (X := X)).toAlgebra) = (r : Cardinal) ∧ ∃ (x : X) (ξ : Fin (r + 1) → X), x ∈ closedPoints (X : Type u) ∧ ξ 0 = genericPoint X ∧ ξ (Fin.last r) = x ∧ (∀ i : Fin r, (ξ i.castSucc) ⤳ (ξ i.succ) ∧ ξ i.castSucc ≠ ξ i.succ) ∧ @Module.Finite K (X.residueField x) _ _ ((X ↘ Spec (.of K)).residueFieldAlgebraMap x).toAlgebra.toModule",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Maintainer review fix: the residue-field K-algebra is the project's existing AlgebraicGeometry.Scheme.Hom.residueFieldAlgebraMap (WeilConjectures.ZetaSeries), as in lem-kun-closed-point-field; the duplicate helper residueFieldBaseRingHom was removed. functionFieldBaseRingHom is the canonical composite ΓSpecIso.inv ≫ appTop ≫ germToFunctionField ⊤ (the same composite as the curve-local abbrev Scheme.functionFieldRingHom in WeilConjectures.AlgebraicGeometry.Curve.SerreDuality, which is not imported here because that module is a heavy curve-duality module).",
+  "fixed_by": "NT-stage2-cc-307575ce3"
  }
 }
