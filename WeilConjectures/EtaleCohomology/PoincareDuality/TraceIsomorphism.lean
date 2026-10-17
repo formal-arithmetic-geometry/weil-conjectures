@@ -249,8 +249,8 @@ theorem pointClass_eq [HasKummerClass.IsNormalized Λ] [Module.Injective Λ Λ] 
   rw [fundamentalClass_comp_counit_eq_of_section Λ a x y hx hy]
 
 omit [Finite Λ] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
-  [HasInvertibleExponent Λ X] [SmoothOfRelativeDimension d a] [GeometricallyConnected a]
-  [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] in
+  [HasInvertibleExponent Λ X]
+  [GeometricallyConnected a] [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] in
 /-- The shift isomorphisms of `Ra_*` and `Ra_!` combine into the identification `Ra_* ≅ Ra_!`
 at a shifted object. -/
 lemma rightDerivedLowerStarShiftIsoLowerShriek_hom_comp_commShiftIso_inv
@@ -264,8 +264,7 @@ lemma rightDerivedLowerStarShiftIsoLowerShriek_hom_comp_commShiftIso_inv
     Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv, Category.assoc]
   rw [reassoc_of% this, Iso.hom_inv_id_app]
   erw [Category.comp_id]
-
-
+omit [HasInvertibleExponent Λ (Spec (.of k))] [GeometricallyConnected a] in
 omit [GeometricallyConnected a] in
 /-- The trace of the class of a `k`-point is invertible, in a form with an arbitrary unit
 object `U` and identification `e : La^* U ≅ Λ_X`: up to isomorphisms it is the unit of
@@ -296,20 +295,32 @@ theorem isIso_homEquiv_fundamentalClass_comp_smoothTrace (γ : TateOrientation �
   have hC : IsIso adjB.counit := adjB.isIso_counit_of_iso_id
     (Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar _ x) _ ≪≫
       Functor.isoWhiskerLeft _ (rightDerivedLowerShriekIsoRightDerivedLowerStar _ a) ≪≫ ψ)
-  have n₁ := (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).inv.naturality
-    ((rightDerivedUpperShriekAdjunction _ x).counit.app ((tateObject Λ X d)⟦(2 * d : ℤ)⟧))
-  simp only [Functor.comp_map, Functor.id_map, Functor.id_obj] at n₁
+  have key : (((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).homEquiv U _
+        (e.hom ≫ fundamentalClass Λ d x a IsRegular.isRegularLocalRing_stalk ≫
+          (rightDerivedUpperShriekAdjunction _ x).counit.app _) ≫
+        (rightDerivedLowerStarShiftIsoLowerShriek a (tateObject Λ X d) (2 * d)).hom) ≫
+      ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ γ.smoothTrace) =
+      ((derivedUpperStarLowerStarAdjunction _ a).unit.app U ≫
+        (R((a)_*[ModuleCat.{u + 1} Λ])).map (e.hom ≫
+          fundamentalClass Λ d x a IsRegular.isRegularLocalRing_stalk)) ≫
+        (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).inv.app _ ≫
+        ((R(a)_![ModuleCat.{u + 1} Λ]).map ((rightDerivedUpperShriekAdjunction _ x).counit.app
+          ((tateObject Λ X d)⟦(2 * d : ℤ)⟧)) ≫ γ.smoothTrace) := by
+    rw [Category.assoc,
+      reassoc_of% rightDerivedLowerStarShiftIsoLowerShriek_hom_comp_commShiftIso_inv,
+      Adjunction.homEquiv_unit]
+    dsimp only [Functor.id_obj, Functor.comp_obj]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [(rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)
+      a).inv.naturality_assoc]
   have hT : IsIso ((R(a)_![ModuleCat.{u + 1} Λ]).map
       ((rightDerivedUpperShriekAdjunction _ x).counit.app ((tateObject Λ X d)⟦(2 * d : ℤ)⟧)) ≫
         γ.smoothTrace) := by
-    sorry
-  simp only [Functor.map_comp] at hB
-  rw [Category.assoc,
-    reassoc_of% rightDerivedLowerStarShiftIsoLowerShriek_hom_comp_commShiftIso_inv,
-    Adjunction.homEquiv_unit]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% n₁]
-  simp only [← Category.assoc]
+    unfold TateOrientation.smoothTrace Etale.smoothTrace
+    exact Adjunction.isIso_map_counit_app_comp_map_comp_counit_app
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) x)
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) a) hC _ _
+  rw [key]
   infer_instance
 
 omit [GeometricallyConnected a] in
@@ -319,6 +330,7 @@ theorem isIso_traceMap_pointClass (γ : TateOrientation Λ a d) (x : Spec (.of k
     [IsRegularImmersion d x] (hx : x ≫ a = 𝟙 _) : IsIso (γ.traceMap (pointClass a x)) :=
   isIso_homEquiv_fundamentalClass_comp_smoothTrace a γ x hx
     (leftDerivedUpperStarConstantComplexIso Λ a)
+
 omit [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))] [HasInvertibleExponent Λ X]
   [SmoothOfRelativeDimension d a] [GeometricallyConnected a] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] in
