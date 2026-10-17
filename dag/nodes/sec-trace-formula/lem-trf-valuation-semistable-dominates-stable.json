@@ -23,41 +23,127 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First assume $K$ separably closed. Apply [lem-trf-valuation-common-strict-semistable-refinement] to the two given $\\eta$-modifications $f,g$. It supplies a common strictly semistable (hence semistable) pair $(W,E)$ and $\\eta$-modifications $a:(W,E)\\to(C_{\\mathrm{st}},D_{\\mathrm{st}})$ and $b:(W,E)\\to(C^{\\prime},D^{\\prime})$ with $fa=gb$. The lemma requires no semistability of the base pair and no separatedness or properness over $S$.",
+   "uses": [
+    "lem-trf-valuation-common-strict-semistable-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1 final paragraph and Remark 4.5.2, printed p. 33."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-contracted-component-inclusion] to $a,b,f,g$. For every $s\\in S$, any irreducible component of $W_s$ contracted by $b_s$ is contracted by $a_s$. All its hypotheses hold: $W$ and $C^{\\prime}$ are semistable, $f$ is stable, and every generic map is the specified isomorphism. The conclusion is fibre-component data, not yet a factorization.",
+   "uses": [
+    "lem-trf-valuation-contracted-component-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 4.4.3(i), first sentence of its proof, printed p. 31."
+   }
+  },
+  {
+   "text": "The valuation ring $V$ is integrally closed: if $x\\in K\\setminus V$ were integral, then $x^{-1}$ would be in the maximal ideal of $V$, and multiplying a monic equation by $x^{-n}$ would give $1$ in that ideal. Thus $S$ is normal. By [lem-trf-geometrically-reduced-eta-normal], the semistable curve $C^{\\prime}$ is reduced and $\\eta$-normal. The other curves are reduced by the same lemma or flatness with smooth generic fibre. The component inclusion of Step 2 and [lem-trf-valuation-component-factorization] give a $C$-morphism $h:C^{\\prime}\\to C_{\\mathrm{st}}$ with $hb=a$ and the required generic map. To obtain the marking map, pull back the ideal of the closed subscheme $D_{\\mathrm{st}}$ along $h|_{D^{\\prime}}$. Every local section of its image vanishes on the generic fibre. Apply [lem-sc-flat-invertible-sections-torsion-free] on affine opens of the flat $V$-scheme $D^{\\prime}$ with the invertible module $\\mathcal O$: sections inject into their localizations at $V\\setminus\\{0\\}$, so the image ideal is zero. The closed-immersion factorization therefore gives $D^{\\prime}\\to D_{\\mathrm{st}}$. It lies over $D$ because both composites into $C$ agree and $D\\hookrightarrow C$ is a monomorphism. This proves the separably closed case, including an empty marking.",
+   "uses": [
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-trf-valuation-component-factorization",
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.2.3, printed p. 27, and Corollary 4.4.3(i); marking factorization by the flatness/torsion-free argument."
+   }
+  },
+  {
+   "text": "For arbitrary $K$, choose $V^s\\subset K^s$ by [lem-trf-valuation-separable-closure-extension]. Pull back $f,g$ to $S^s=\\operatorname{Spec}V^s$. They are proper by [lem-weil-pbc-proper-fp-permanence]. They retain their isomorphisms on the generic fibre and on the pulled-back common open. That open stays schematically dense: on affine charts the defining injective map into sections on the open stays injective after the flat extension $V\\to V^s$ (compute sections with a finite affine cover of the quasi-compact open). By [lem-trf-semistable-marked-base-change], all multipointed, semistable and geometric stability conditions persist. The extension maps generic point to generic point, so generic smoothness and etaleness persist as well. Steps 1--3 over the finite-height ring $V^s$, whose fraction field is separably closed, give a comparison of pairs $h^s$.",
+   "uses": [
+    "lem-trf-valuation-separable-closure-extension",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1 after valuation extension; flat base change and geometric stability, with the arbitrary-field descent argument made explicit."
+   }
+  },
+  {
+   "text": "Put $B=V^s\\otimes_V V^s$. The two pullbacks of $h^s$ agree after localizing $B$ at $V\\setminus\\{0\\}$, since there both are the fixed map $f_\\eta^{-1}g_\\eta$. They are maps over $C_B$ into $C_{\\mathrm{st},B}$, whose morphism to $C_B$ is proper and hence separated, by [lem-weil-pbc-proper-fp-permanence]. Their equalizer is consequently a closed subscheme of $C^{\\prime}_B$. Its defining ideal vanishes after the stated localization. Since $B$ is flat over $V$, $C^{\\prime}_B$ is flat over the original domain $V$. By [lem-sc-flat-invertible-sections-torsion-free] with $L=\\mathcal O$, on every affine open its sections have no $V$-torsion. Thus the equalizer ideal is zero and the curve maps agree. Exactly the same argument for the flat marking $D^{\\prime}_B$ and separated map $D_{\\mathrm{st},B}\\to D_B$ gives equality of marking maps. This proves the cocycle condition over $B$ directly; no claim that $B$ is a valuation ring is used.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Flat generic-fibre uniqueness argument; properness gives the closed relative diagonal."
+   }
+  },
+  {
+   "text": "The base-change maps $C^{\\prime}_{S^s}\\to C^{\\prime}$ and $D^{\\prime}_{S^s}\\to D^{\\prime}$ are fpqc covers. Apply [lem-weil-pbc-fpqc-representable-descent] separately with targets $C_{\\mathrm{st}}$ and $D_{\\mathrm{st}}$. Step 5 supplies precisely the equality on their double overlaps. The descended maps commute with the marking immersions and satisfy $fh=g$, since their composites do so on these covers and the uniqueness clause of the same descent lemma reflects equality. The generic restriction is $f_\\eta^{-1}g_\\eta$: on the generic fibre $f_\\eta$ is an isomorphism and $f_\\eta h_\\eta=g_\\eta$. This gives the asserted morphism of pairs over $V$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (descent-lemma-fpqc-universal-effective-epimorphisms), morphism descent and injectivity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-valuation-common-strict-semistable-refinement",
+  "lem-trf-valuation-component-factorization",
+  "lem-trf-valuation-contracted-component-inclusion",
+  "lem-trf-valuation-separable-closure-extension",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Corollary 4.4.3 and Proposition 4.5.1, with the component criterion, strict common model, and arbitrary-field fpqc descent written as six steps; local archival PDF WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Over a finite height valuation ring a semistable modification of a marked curve dominates every stable modification of that curve",
-   "results": "hits=8; top=['WeierstrassCurve.exists_isMinimal', 'WeierstrassCurve.instIsMinimalMinimal', 'WeierstrassCurve.IsMinimal', 'WeierstrassCurve.minimal', 'WeierstrassCurve.valuation_Δ_aux', 'WeierstrassCurve.IsGoodReduction', 'WeierstrassCurve.isMinimal_iff', 'WeierstrassCurve.IsMinimal.val_Δ_maximal']; note=; digest=46c7b89516d634fc. The semantic hits are minimal Weierstrass equations and good reduction of elliptic curves, not domination of marked semistable modifications; grep has no semistable or multipointed-curve theory.",
+   "query": "A semistable modification of a pointed curve over a finite height valuation ring dominates a stable modification",
+   "results": "hits=8; top=['WeierstrassCurve.exists_isMinimal', 'WeierstrassCurve.minimal', 'WeierstrassCurve.IsMinimal', 'WeierstrassCurve.valuation_Δ_aux', 'WeierstrassCurve.instIsMinimalMinimal', 'WeierstrassCurve.IsGoodReduction', 'WeierstrassCurve.isMinimal_iff', 'WeierstrassCurve.IsGoodReduction.goodReduction']; note=; digest=2a3a8f2a1c5aa34f. The semantic hits are minimal Weierstrass equations, not multipointed stable modifications; grep finds no semistable-curve theory.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Minimality of stable reduction of multipointed curves over valuation rings",
-   "results": "hits=8; top=['WeierstrassCurve.IsMinimal', 'WeierstrassCurve.isMinimal_iff', 'WeierstrassCurve.instIsMinimalMinimal', 'WeierstrassCurve.reduction', 'WeierstrassCurve.minimal', 'WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction', 'WeierstrassCurve.exists_isMinimal', 'WeierstrassCurve.isGoodReduction_iff']; note=; digest=1c99daab048682c9. The semantic hits are minimal Weierstrass equations and good reduction of elliptic curves, not domination of marked semistable modifications; grep has no semistable or multipointed-curve theory.",
+   "query": "Stable modification minimal among semistable modifications over a valuation ring",
+   "results": "hits=8; top=['WeierstrassCurve.isMinimal_iff', 'WeierstrassCurve.instIsMinimalMinimal', 'WeierstrassCurve.exists_isMinimal', 'WeierstrassCurve.IsMinimal.rec', 'WeierstrassCurve.minimal', 'WeierstrassCurve.IsMinimal.recOn', 'WeierstrassCurve.IsMinimal.casesOn', 'WeierstrassCurve.IsMinimal']; note=; digest=79e301d262b9510e. The semantic hits are minimal Weierstrass equations, not multipointed stable modifications; grep finds no semistable-curve theory.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"ValuationRing\", \"Scheme\"",
-   "results": "hits=0; top=[]; note=; digest=4f53cda18c2baa0c. The semantic hits are minimal Weierstrass equations and good reduction of elliptic curves, not domination of marked semistable modifications; grep has no semistable or multipointed-curve theory.",
+   "query": "\"ValuationRing\", \"AlgebraicGeometry.Scheme\"",
+   "results": "hits=0; top=[]; note=; digest=4f53cda18c2baa0c. The semantic hits are minimal Weierstrass equations, not multipointed stable modifications; grep finds no semistable-curve theory.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "stableReduction|semistable|semi.stable|multipointed",
-   "results": "hits=0; top=[]; note=; digest=4f53cda18c2baa0c. The semantic hits are minimal Weierstrass equations and good reduction of elliptic curves, not domination of marked semistable modifications; grep has no semistable or multipointed-curve theory.",
+   "query": "stable.modification|semistable|multipointed",
+   "results": "hits=0; top=[]; note=; digest=4f53cda18c2baa0c. The semantic hits are minimal Weierstrass equations, not multipointed stable modifications; grep finds no semistable-curve theory.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-uniqueness-normal",
@@ -84,5 +170,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-semistable-dominates-stable",
+  "worker": "stage1",
+  "summary": "Retained the statement. Separated the common strict model, contracted-component inclusion, and component-based factorization. Wrote marking factorization and the arbitrary-field fpqc cocycle argument explicitly. Reused the existing eta-normality, base-change, torsion-free-section, permanence and representable descent nodes. Four new statement-only nodes; none is a Mathlib leaf.",
+  "blueprint": "Realizes the semistable-alteration input in proof (1)--(2) of lem-trf-local-term-locality, via the valuation comparison in the current created.item ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "Generic tools in Steps 3 and 5: flat sections over the original domain inject into the generic localization, including on the nonvaluation overlap. No same-unit node states this general injectivity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-flat-invertible-sections-torsion-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-fb9858f45",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-fb9858f45 (reviewer sub-agent of L); spot-checked: Read the governing docs (AGENTS, GOAL, dag-sync, stage 1, brief, delivery-errors A-F), the report, the item, the 4 new nodes, every cited statement, unit sk-i-curve-zero, the chapter record and the parent's use of the item (uniqueness-normal step 4, which needs the arbitrary-K form). The item's statement and stmt_deps are byte-identical to the side DAG and to the Q91 creation, so nothing is weakened. uses equal proof_deps, there is no cycle (worker correctly avoided stable-reduction, which reaches this item via uniqueness-normal), and every cited id exists. Steps: (1) common-strict-refinement hypotheses match; (2) contracted-inclusion hypotheses match; (3) V is integrally closed, so Spec V is normal integral qcqs and the eta-normal lemma makes C' reduced and eta-normal; the factorization gives h with generic map f_eta^-1 g_eta; the marking ideal vanishes by flat torsion-freeness and lies over D by monomorphism; (4) proper base change and marked-base-change keep the hypotheses, and schematic density is preserved by flatness (at finite height the generic point is open); (5) both pullbacks are maps over C_B into a separated target, their equalizer ideal is V-torsion, and C'_B is flat over V, so they agree without B being a valuation ring; (6) V->V^s is affine and faithfully flat, so the base changes are fpqc coverings and the Mathlib representable-descent leaf gives h and, by its uniqueness clause, fh=g and the marking compatibility. New nodes: I proved component-factorization myself (the image graph is proper, quasi-finite and an eta-modification, so finite, so an isomorphism by eta-normality); separable-closure-extension is true (Chevalley extension, 0ASH torsion value groups give equal height, 0539 plus 00HR give faithful flatness; tags checked in the local Stacks tex); common-refinement (closure in X1 x_C X2, then a strict model; markings are overrings V_p, hence etale) and contracted-inclusion (exceptional tree with at most two boundary points would force an unstable contracted P^1) are true. All four are statement-only, self-contained, correctly cited, searched, and none restates the item. Duplicate scan: lem-trf-valuation-algebraic-height covers only the height clause of the extension node, so keep the new node, whose eventual split should cite it; I found no other duplicates. Accepted tool_use: lem-sc-flat-invertible-sections-torsion-free. Limitation: the Temkin PDF is not in literature/ and the network is blocked, so the Temkin place numbers are unverified; the item is marked agent-origin with a WANTED line. No fixes."
  }
 }

@@ -19,9 +19,99 @@
   "def-weil-geometric-fibre",
   "def-weil-pbc-complete-intersection-over-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-qcqs-morphism-permanence] (1), $g_0$ is quasi-compact because $U_0$ is quasi-compact and $V_0$ is quasi-separated. Choose a finite affine open cover $V_0=\\bigcup_a V_{a,0}$ so that each $V_{a,0}$ maps into an affine open $W_{a,0}\\subset S_{i_0}$: such affine neighbourhoods form a cover and quasi-compactness selects finitely many. The definition of quasi-compact morphism makes $g_0^{-1}(V_{a,0})$ quasi-compact. Choose a finite affine open cover $g_0^{-1}(V_{a,0})=\\bigcup_b U_{ab,0}$. These choices give finitely many triples $U_{ab,0}\\to V_{a,0}\\to W_{a,0}$. Their inverse images at every stage and at the limit remain open covers, since inverse image commutes with unions.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C3L (lemma-descend-syntomic), first paragraph; finite affine covers as in its proof."
+   }
+  },
+  {
+   "text": "Fix a triple, temporarily suppressing $a,b$. Write $W_0=\\operatorname{Spec}R_0$ and let $W_i\\subset S_i$ and $W\\subset S$ be its inverse images. The transition morphisms and limit projection are affine, so [lem-weil-pbc-affine-morphism-permanence] makes every $W_i$ and $W$ affine. By [lem-weil-pbc-limit-affine-transition], $W=\\varprojlim_{i\\geq i_0}W_i=\\operatorname{Spec}R$, where $R_i=\\Gamma(W_i,\\mathcal O)$ and $R=\\varinjlim R_i$. Apply [lem-weil-pbc-affine-chart-tensor-comparison] to this fixed triple. It gives fixed $R_0$-algebras $B_0,C_0$ and a finitely presented $R_0$-algebra map $B_0\\to C_0$, and identifies each chart morphism $U_i\\to V_i$ with $\\operatorname{Spec}(R_i\\otimes_{R_0}C_0)\\to\\operatorname{Spec}(R_i\\otimes_{R_0}B_0)$, and the limit chart with the same formula using $R$. The identifications respect the displayed ring maps; no finite presentation of $B_0$ over $R_0$ is asserted.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-chart-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C3L (lemma-descend-syntomic), affine reduction, with Tags 01YX/01YW and Schemes Tags 01JR/01I4."
+   }
+  },
+  {
+   "text": "The base change $g$ of $g_0$ is locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence] (3). Together with the given flatness and geometric-fibre assumption this is condition (1) of [lem-trf-syntomic-geometric-fibres-affine-criterion]. Its implication (1) to (2), applied to the affine pair $U\\to V$ of each triple, says that $R\\otimes_{R_0}B_0\\to R\\otimes_{R_0}C_0$ is flat and finitely presented and that every ordinary residue-field fibre ring is a local complete intersection. This checks the ordinary, rather than merely geometric, fibre hypothesis needed for the algebraic descent lemma.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-syntomic-geometric-fibres-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UD/01UE/01UF, with Algebra Tag 00SJ for the geometric formulation; Morphisms Tag 01TS for local finite presentation under base change."
+   }
+  },
+  {
+   "text": "For each of the finitely many triples apply [lem-trf-syntomic-ring-filtered-colimit-descent] to the system $R_i$, the fixed finitely presented map $B_0\\to C_0$ of step 2 and the three limit properties of step 3. Obtain an index $i_{ab}\\geq i_0$ at which $B_{i_{ab}}\\to C_{i_{ab}}$ is flat, finitely presented and has local-complete-intersection residue-field fibres. Choose a common upper bound $i$ for these finitely many indices and $i_0$. If there are no source charts, take $i=i_0$.",
+   "uses": [
+    "lem-trf-syntomic-ring-filtered-colimit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C3L (lemma-descend-syntomic), second paragraph: apply Algebra Tag 0C33 (lemma-colimit-lci) on each affine triple."
+   }
+  },
+  {
+   "text": "Fix $j\\geq i$ and a triple, and abbreviate $k=i_{ab}$. There is a canonical isomorphism $C_j\\cong B_j\\otimes_{B_k}C_k$: the map sends $(r\\otimes b)\\otimes(s\\otimes c)$ to $r\\alpha_{jk}(s)\\otimes\\varphi_0(b)c$, and its inverse sends $r\\otimes c$ to $(r\\otimes1)\\otimes(1\\otimes c)$; these formulas respect the balanced tensor relations and are inverse on pure tensors. Thus [lem-weil-pbc-flat-module-base-change] and [lem-weil-pbc-finite-presentation-base-change-composition] (1) give flatness and finite presentation of $B_j\\to C_j$. For a prime $\\mathfrak q\\subset B_j$, let $\\mathfrak p\\subset B_k$ be its inverse image. The induced field map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ gives the fibre identity\n$$C_j\\otimes_{B_j}\\kappa(\\mathfrak q)\\cong(C_k\\otimes_{B_k}\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q).$$\nBoth identifications are the associativity and cancellation of balanced tensors. The $\\kappa(\\mathfrak p)$-algebra in parentheses is of finite type, by finite presentation and [lem-weil-pbc-finite-presentation-base-change-composition] (1), and is a local complete intersection by step 4. Therefore [lem-weil-pbc-lci-field-change] makes the fibre over $\\mathfrak q$ a local complete intersection. This proves all three chart properties for every $j\\geq i$.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-lci-field-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SN (lemma-base-change-syntomic), its three-line proof via flat base change, finite presentation base change and Tag 00SJ; tensor identifications written explicitly."
+   }
+  },
+  {
+   "text": "At each $j\\geq i$, the affine pairs of step 2 form the target cover $V_j=\\bigcup_a V_{a,j}$ and source covers $g_j^{-1}(V_{a,j})=\\bigcup_b U_{ab,j}$ of step 1. Their ring maps have all three properties by step 5, so they satisfy condition (3) of [lem-trf-syntomic-geometric-fibres-affine-criterion]. Its implication (3) to (1) gives that $g_j$ is flat and locally of finite presentation and every geometric fibre is a local complete intersection over its algebraically closed field. These are exactly the asserted conclusions, simultaneously for every $j\\geq i$. Empty source covers and empty fibres are included in the criterion.",
+   "uses": [
+    "lem-trf-syntomic-geometric-fibres-affine-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UD (lemma-syntomic-characterize), (4) implies (1), combined with Tags 01UE/01UF and Algebra Tag 00SJ as in the affine criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-chart-tensor-comparison",
+  "lem-trf-syntomic-geometric-fibres-affine-criterion",
+  "lem-trf-syntomic-ring-filtered-colimit-descent",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-lci-field-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0C3L (lemma-descend-syntomic), finite affine reduction and Algebra Tag 0C33; the geometric reformulation is Morphisms Tags 01UD/01UE/01UF with Algebra Tag 00SJ; directed-tail persistence is the proof of Algebra Tag 00SN."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +147,45 @@
    "results": "{\"t\": \"2026-10-17T19:00:20Z\", \"tool\": \"leanfinder\", \"query\": \"A fixed finite presentation algebra becomes flat with complete intersection fibres at a finite stage of a directed colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.HasGoingDown.of_flat\", \"AdicCompletion.flat_of_isNoetherian\", \"Algebra.Smooth.exists_finiteType\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"38b9cca23c53cd8d\"}",
    "date": "2026-10-18",
    "verdict": "no match: returned smoothness, flatness and fpqc descent results neither provide syntomicity nor descend it through an inverse limit; the syntomic source grep is empty."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat finitely presented morphism with local complete intersection geometric fibres descends along an inverse limit with affine transition morphisms",
+   "results": "{\"t\": \"2026-10-17T19:21:05Z\", \"tool\": \"leanfinder\", \"query\": \"Flat finitely presented morphism with local complete intersection geometric fibres descends along an inverse limit with affine transition morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"f63ac2bfe44f2302\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits give flatness, smoothness, finite presentation, generic affine-local or colimit constructions; none states complete-intersection fibres or syntomic descent. The syntomic source search has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"syntomic\"",
+   "results": "{\"t\": \"2026-10-17T19:21:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits give flatness, smoothness, finite presentation, generic affine-local or colimit constructions; none states complete-intersection fibres or syntomic descent. The syntomic source search has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|CompleteIntersection|descend.*complete.intersection",
+   "results": "{\"t\": \"2026-10-17T19:21:03Z\", \"tool\": \"grep\", \"query\": \"syntomic|CompleteIntersection|descend.*complete.intersection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits give flatness, smoothness, finite presentation, generic affine-local or colimit constructions; none states complete-intersection fibres or syntomic descent. The syntomic source search has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Syntomic morphisms descend to a finite stage of a directed inverse limit of schemes",
+   "results": "{\"t\": \"2026-10-17T19:21:04Z\", \"tool\": \"leansearch\", \"query\": \"Syntomic morphisms descend to a finite stage of a directed inverse limit of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"bd78cfd1ac8b1a3a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits give flatness, smoothness, finite presentation, generic affine-local or colimit constructions; none states complete-intersection fibres or syntomic descent. The syntomic source search has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat family with complete intersection fibres exists at a finite stage of an inverse system",
+   "results": "{\"t\": \"2026-10-17T19:21:07Z\", \"tool\": \"leanfinder\", \"query\": \"A flat family with complete intersection fibres exists at a finite stage of an inverse system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"AdicCompletion.flat_of_isNoetherian\", \"AlgebraicGeometry.Flat\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AlgebraicGeometry.Flat.instDescScheme\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"b024726e499ba327\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits give flatness, smoothness, finite presentation, generic affine-local or colimit constructions; none states complete-intersection fibres or syntomic descent. The syntomic source search has no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-family-noetherian-approximation",
@@ -87,5 +212,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-complete-intersection-fibres-limit-descent",
+  "worker": "stage1",
+  "summary": "Expanded the 0C3L finite-affine proof into six steps using the existing uniform affine chart comparison. Created only the general affine-local geometric-fibre criterion and Algebra 0C33 as statement-only obligations. Proved directed-tail persistence explicitly from existing flatness, finite-presentation and lci field-change nodes. Statement and existing ancestry unchanged; no new definition or Mathlib leaf.",
+  "blueprint": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), via the nodal local equation: realizes the syntomic descent sentence in the proof of Stacks 0C5F needed for the finite-type integer model in 0CBY. This is a supporting algebraic tool, not a replacement of the current contracting-correspondence proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "General existence and affine coordinate description of inverse limits, used to put each triple into the ring-colimit setting; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-chart-tensor-comparison",
+    "why": "General uniform chart identification for a locally finitely presented map, used as an arrow isomorphism without any etaleness conclusion; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-lci-field-change",
+    "why": "Generic field-extension invariance of local complete intersections, used only for persistence of each residue-field fibre; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-chart-tensor-comparison",
+  "lem-weil-pbc-lci-field-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-44fdd4150",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-44fdd4150 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, every cited statement, and the Stacks sources: limits.tex Situation situation-descent-property and 0C3L lemma-descend-syntomic, algebra 0C33 lemma-colimit-lci, morphisms 01UD lemma-syntomic-characterize, 01UF lemma-syntomic-flat-fibres and lemma-local-complete-intersection, and algebra 00SJ lemma-lci-field-change. The item follows the 0C3L route. Step 1 builds a finite affine reduction using qc of g_0 (qcqs-permanence (1)) and the definition of a quasi-compact morphism, and never assumes affine intersections. Step 2 uses the uniform arrow isomorphism of the affine-chart tensor comparison. All of its hypotheses hold, and I checked in its proof that the finite presentation is on the ring map B to C, which is exactly 0C33 hypothesis (2). Steps 3 and 6 apply the new criterion (1)=>(2) and (3)=>(1). Step 4 is 0C33 on each chart, then one common bound i fixed before j is quantified. Step 5 is the 00SN base-change argument and is genuinely elementary: I checked C_j = B_j (x)_{B_k} C_k on pure tensors, and the fibre factors through kappa(p). Both new nodes are true. The criterion follows from 01UF, 01UD and 00SJ plus affine-locality of lci; the ring node is exactly 0C33 (syntomic case) with 00SL expanded. I tested constant systems, identity maps, zero rings and empty fibres, and non-Noetherian bases. rg over the DAG and a blueprint grep found no duplicates, so same_as [] is correct. Neither new node restates a clause of the parent, and there is no cycle. I accept the three declared tool uses (limit-affine-transition, affine-chart-tensor-comparison, lci-field-change) as generic black boxes. The item is not a target node and no SGA source is used. Fix: in lem-trf-syntomic-geometric-fibres-affine-criterion I added the missing [def-pc-fibre-product] citation for the arbitrary geometric fibre to both the statement and stmt_deps (B3). Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
