@@ -275,5 +275,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14c519c44",
+  "group": "Q07",
+  "result": "fix",
+  "note": "Statement matches node/HA 4.1.7.1-4.1.7.3: IsEnhancedSystem (equivalences, composition, homotopy via degenerate short edges) correct; markedFunctorSubcomplex is the full subcomplex of the actual ihom giving WCat mapping spaces; conjunct 1 gives G fully faithful (=⊤); conjunct 2 is the universal-arrow left adjoint with restriction r≫ι=pre q in all degrees and IsFunctorEquivalence; conjunct 3 says finite products (Finite I : Type u, empty included) of localization units are localizations of the coordinatewise system. No extra hypotheses, single universe u per stmt-dep convention, lean.statement verbatim, node unchanged except the lean field, no hollow defs, docstrings ok, worker and second-reading sections present. nt_compile rc 0, no diagnostics, for both delivered and fixed files. Finding F1 (stage-2 rule 7): proof-dep lem-coef-infinity-pointwise-adjoint-criterion has recorded module Sheaf.CategoryTheory.InfinityPointwiseAdjointCriterion, not imported; fixes/lean/Sheaf/CategoryTheory/SystemLocalizationUniversal.lean adds that non-public import only."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SystemLocalizationUniversal",
+  "declaration": "SSet.coef_system_localization_universal",
+  "declarations": [
+   "SSet.IsEnhancedSystem",
+   "SSet.markedFunctorSubcomplex",
+   "SSet.enhancedProductSystem",
+   "SSet.coef_system_localization_universal"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SystemLocalizationUniversal.lean",
+  "statement": "theorem coef_system_localization_universal : (∀ (C D : SSet.{u}), Quasicategory C → Quasicategory D → markedFunctorSubcomplex C (Enhanced.IsEquivalenceEdge C) D (Enhanced.IsEquivalenceEdge D) = ⊤) ∧ (∀ (C : SSet.{u}) (W : C _⦋1⦌ → Prop), Quasicategory C → IsEnhancedSystem C W → ∃ (Q : SSet.{u}) (q : C ⟶ Q), Quasicategory Q ∧ (∀ f, W f → Enhanced.IsEquivalenceEdge Q (q.app _ f)) ∧ ∀ (E : SSet.{u}), Quasicategory E → ∃ r : (ihom Q).obj E ⟶ (markedFunctorSubcomplex C W E (Enhanced.IsEquivalenceEdge E)).toSSet, r ≫ (markedFunctorSubcomplex C W E (Enhanced.IsEquivalenceEdge E)).ι = (MonoidalClosed.pre q).app E ∧ Enhanced.IsFunctorEquivalence r) ∧ (∀ (I : Type u) [Finite I] (C Q : I → SSet.{u}) (W : ∀ i, C i _⦋1⦌ → Prop) (q : ∀ i, C i ⟶ Q i), (∀ i, Quasicategory (C i)) → (∀ i, IsEnhancedSystem (C i) (W i)) → (∀ i, Quasicategory (Q i)) → (∀ i f, W i f → Enhanced.IsEquivalenceEdge (Q i) ((q i).app _ f)) → (∀ (i : I) (E : SSet.{u}), Quasicategory E → ∃ r : (ihom (Q i)).obj E ⟶ (markedFunctorSubcomplex (C i) (W i) E (Enhanced.IsEquivalenceEdge E)).toSSet, r ≫ (markedFunctorSubcomplex (C i) (W i) E (Enhanced.IsEquivalenceEdge E)).ι = (MonoidalClosed.pre (q i)).app E ∧ Enhanced.IsFunctorEquivalence r) → Quasicategory (∏ᶜ Q) ∧ (∀ f, enhancedProductSystem C W f → Enhanced.IsEquivalenceEdge (∏ᶜ Q) ((Limits.Pi.map q).app _ f)) ∧ ∀ (E : SSet.{u}), Quasicategory E → ∃ r : (ihom (∏ᶜ Q)).obj E ⟶ (markedFunctorSubcomplex (∏ᶜ C) (enhancedProductSystem C W) E (Enhanced.IsEquivalenceEdge E)).toSSet, r ≫ (markedFunctorSubcomplex (∏ᶜ C) (enhancedProductSystem C W) E (Enhanced.IsEquivalenceEdge E)).ι = (MonoidalClosed.pre (Limits.Pi.map q)).app E ∧ Enhanced.IsFunctorEquivalence r)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading replaced unconstrained Prop fields by the explicit universal-arrow formulation: actual quasicategories and closed systems, canonical restriction equivalences in all degrees, fully faithful equivalence-system inclusion, and localization by every finite product of units. The pointwise adjoint criterion gives the equivalent coherent adjunction. No localization predicate is duplicated; the formula is stated directly because the existing IsEdgeLocalization helper is owned by a downstream module.",
+  "fixed_by": "NT-stage2-cc-14c519c44"
  }
 }
