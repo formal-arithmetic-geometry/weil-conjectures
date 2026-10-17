@@ -13,6 +13,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.FiniteBoundary
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Trace
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.LowerStarTriangulated
+public import WeilConjectures.WeilSheaf.DirectImageRestriction
 public import WeilConjectures.WeilSheaf.DirectImageStalkMap
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.StalkUpperStar
@@ -160,61 +161,6 @@ theorem exists_isReduced_isClosedImmersion_range_eq_compl_of_curve {U C : Scheme
     .of_finite_preimage_singleton _ fun _ ↦ Set.toFinite _
   exact ⟨I.subscheme, inferInstance, I.subschemeι, inferInstance, inferInstance,
     IsFinite.of_locallyQuasiFinite _, inferInstance, hI⟩
-
-/-- The stalk of a pullback `φ^* F` at a closed point `x` is the stalk of `F` at `φ x`, with its
-local Frobenius, when `x` and `φ x` have the same degree over `k₀` (for instance for a closed
-immersion `φ`). -/
-theorem WeilSheaf.nonempty_equiv_stalk_upperStar {X Y : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y)
-    [φ.IsOver (Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l Y) (x : X.finitePoints)
-    (y : Y.finitePoints) (hxy : φ.base x.1 = y.1)
-    (hdeg : (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 =
-      (Y ↘ Spec (CommRingCat.of k₀)).degreeOver y.1) :
-    Nonempty ((((WeilSheaf.upperStar φ).obj F).stalk x).Equiv (F.stalk y)) := by
-  have hφ := comp_over φ (Spec (CommRingCat.of k₀))
-  set s := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x
-  have ht := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
-    (X ↘ Spec (CommRingCat.of k₀)) x
-  have ht' : (s ≫ Scheme.Hom.geometricFiberMap φ hφ) ≫
-      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom =
-      (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom ≫
-        (s ≫ Scheme.Hom.geometricFiberMap φ hφ) := by
-    rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
-      ← Category.assoc, ht, Category.assoc]
-  have : IsIso (𝟙 _ : (Scheme.Hom.geometricFiberMap φ hφ)^*[WeilCoefficients.{u} l].obj
-      F.obj.carrier.X ⟶ ((WeilSheaf.upperStar φ).obj F).obj.carrier.X) :=
-    inferInstanceAs (IsIso (𝟙 ((Scheme.Hom.geometricFiberMap φ hφ)^*[WeilCoefficients.{u} l].obj
-      F.obj.carrier.X)))
-  obtain ⟨e₁⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_upperStar
-    (G := (WeilSheaf.upperStar φ).obj F) (θ := 𝟙 _)
-    (WeilSheaf.upperStar_frobeniusStr_compatible (φ := φ) F) s _ ht ht'
-  set s' := (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint y
-  have hbase : (s' ≫ (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
-      (IsLocalRing.closedPoint (AlgebraicClosure k₀)) = y.1 :=
-    Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base _ y
-  have hss' : ((s ≫ Scheme.Hom.geometricFiberMap φ hφ) ≫
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
-        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
-      (s' ≫ (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
-        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) := by
-    rw [hbase, Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricFiberProj,
-      ← Category.assoc, ← hxy]
-    exact congrArg φ.base
-      (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base _ x)
-  have hs' := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
-    (Y ↘ Spec (CommRingCat.of k₀)) y
-  have key : ∀ (m : ℕ) (hm : m = (Y ↘ Spec (CommRingCat.of k₀)).degreeOver y.1)
-      (h₁ : s' ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-        (specGeometricFrobenius k₀ ^ m).hom ≫ s')
-      (h₂ : (s ≫ Scheme.Hom.geometricFiberMap φ hφ) ≫
-        ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-        (specGeometricFrobenius k₀ ^ m).hom ≫ (s ≫ Scheme.Hom.geometricFiberMap φ hφ)),
-      Nonempty ((F.stalkAt (s ≫ Scheme.Hom.geometricFiberMap φ hφ) m h₂).Equiv (F.stalk y)) := by
-    rintro m rfl h₁ h₂
-    exact F.nonempty_equiv_stalkAt _ _ hss' (by rw [hss', hbase]; exact y.2) _ h₂ h₁
-  obtain ⟨e₂⟩ := key _ hdeg (hdeg ▸ hs') ht'
-  exact ⟨e₁.symm.trans e₂⟩
 
 /-- The direct image of Weil sheaves commutes with constant twists. -/
 noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}

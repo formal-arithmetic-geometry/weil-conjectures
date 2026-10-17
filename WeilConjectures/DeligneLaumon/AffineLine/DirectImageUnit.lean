@@ -335,7 +335,7 @@ theorem isZero_or_isZero_of_exact (hD : D.sheaf.IsIrreducibleLisse)
       have := @IsIso.mono_of_iso _ _ _ _ _ hρθ
       exact (isZero_kernel_of_mono _).of_iso (PreservesKernel.iso ρ θ)
     -- `s ≫ θ` is an isomorphism
-    have : IsIso (adj.unit.app M) := (adj.isIso_unit_app_iff_of_iso eM').2
+    have : IsIso (adj.unit.app M) := (adj.isIso_unit_app_iff_of_iso_obj eM').2
       (Adjunction.isIso_unit_app_obj_of_isIso_counit_app adj D.sheaf)
     have : IsIso (adjV.unit.app ((upperStar D.j).obj M)) :=
       (D.lisse.of_iso ((upperStar D.j).mapIso eM' ≪≫ upperStarDirectImageIso D.j D.sheaf).symm

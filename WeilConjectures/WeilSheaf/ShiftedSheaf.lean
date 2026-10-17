@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.TraceFunction
+public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 
 /-!
 # Weil sheaves placed in degree `-1`
@@ -111,16 +112,6 @@ theorem traceFunction_eq_of_iso {K L : WeilComplex k₀ l X} (e : K ≅ L) (n : 
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     K.traceFunction n y = L.traceFunction n y :=
   finsum_congr fun a ↦ by rw [WeilSheaf.traceFunction_eq_of_iso ((homologySheaf a).mapIso e)]
-
-/-- The trace function of a Weil sheaf placed in degree `0` is that of the Weil sheaf. -/
-theorem traceFunction_toComplex (G : WeilSheaf k₀ l X) (n : ℕ)
-    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    (WeilSheaf.toComplex.obj G).traceFunction n y = G.traceFunction n y := by
-  rw [WeilSheaf.toComplex_obj]
-  rw [traceFunction_eq_sum _ {0} (fun a ha ↦
-      isZero_homologySheaf_singleComplex (Finset.notMem_singleton.1 ha) G),
-    Finset.sum_singleton, WeilSheaf.traceFunction_eq_of_iso (homologySheafSingleComplexIso 0 G)]
-  simp
 
 /-- The trace function of `G[1]` is the negative of that of the Weil sheaf `G`. -/
 theorem traceFunction_toShiftedComplex (G : WeilSheaf k₀ l X) (n : ℕ)
