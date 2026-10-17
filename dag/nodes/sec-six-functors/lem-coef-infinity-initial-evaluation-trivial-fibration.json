@@ -220,5 +220,27 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-3b77e0bc1 (reviewer sub-agent of L); spot-checked: I read the whole split. The item statement, source, created, unit and stmt_deps are byte-identical to the pre-split side-DAG copy. The statement matches Kerodon 038R Prop 5.6.6.19 (2)=>(3), read online: left fibrations over a quasicategory, initial d, strict Fun_{/B} and strict fiber T_b, trivial Kan including n=0. There are 0 new nodes, because the worker's two helper duals were dropped in the second reading. Step 1: clause (4) of relative-cone-equivalence gives D^op as a quasicategory and Map_{D^op}(x,d)~Map_D(d,x), which is contractible by def-cbc's definition of initial; terminal-anodyne (<= direction) then makes {d}->D^op right anodyne. Step 2: reversal sends Lambda^n_k to Lambda^n_{n-k} (n=1 checked), so q^op is a right fibration; right-fibration-exponentiation, which has no quasicategory hypothesis, gives rho^r. Step 3: I checked that r_n(beta)(a)=n-beta(m-a) respects operators and is an involution, so Fun(K,X)^op~Fun(K^op,X^op) naturally; r_n preserves the boundary, so rho is a trivial Kan fibration; correctly marked elementary. Step 4: iota(t)=(p pr_D,t) lands in Y, and the pullback is exactly Fun_{/B}(D,T) with ev_d; correctly marked elementary. proof_deps equals the union of the step uses. The DAG traversal (170 nodes) finds no cycle. All statement dependencies are in sk-prop-sf-biduality-general and the rest are definitions, so no tool_uses are needed and no SGA source is cited. Edge cases checked: Delta^0, Delta^1 with T=Delta^1, the cosieve {1}->Delta^1 giving an empty->empty map, empty T, and an empty base (impossible). Six candidate duplicates were read and none duplicates the item. One cosmetic change: blueprint.from.place was rephrased but still names paragraph 2 of prop-coef-integral-exceptional-adjoint; I left it. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3d14c566",
+  "group": "NW",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node (Kerodon 038R, 5.6.6.19, (2)=>(3)): quasicategories D, B, T in one free universe u; leftFibration = horns with n>=1, i<n; IsInitial = contractible outgoing mapping spaces; Fun_{/B}(D,T) = strict fiber of (ihom D).map q over diagramVertex p (= HomObj.ofNatTrans p, i.e. p∘pr_D); T_b = fiber q (p d); ev is uniquely fixed by its equation with evaluation D T d (the other leg goes to Δ[0]); conclusion I.rlp includes n=0 (vertex surjectivity), the recorded Mathlib match. No extra hypotheses; empty T, T_b and empty D handled as in the node. No definitions, sorry only, docstrings with source and blueprint, private proof imports, node differs from the side copy only in lean, lean.statement verbatim. nt_compile.py --json: rc 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InitialEvaluationTrivialFibration",
+  "declaration": "SSet.Enhanced.initialEvaluationTrivialKanFibration",
+  "declarations": [
+   "SSet.Enhanced.initialEvaluationTrivialKanFibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InitialEvaluationTrivialFibration.lean",
+  "statement": "theorem initialEvaluationTrivialKanFibration {D B T : SSet.{u}} [Quasicategory D] [Quasicategory B] [Quasicategory T] (p : D ⟶ B) (q : T ⟶ B) (hp : leftFibration p) (hq : leftFibration q) (d : D _⦋0⦌) (hd : IsInitial D d) : ∃ ev : fiber ((ihom D).map q) (diagramVertex p) ⟶ fiber q (p.app _ d), ev ≫ pullback.snd (SSet.const (X := Δ[0]) (p.app _ d)) q = pullback.snd (SSet.const (X := Δ[0]) (diagramVertex p)) ((ihom D).map q) ≫ evaluation D T d ∧ SSet.modelCategoryQuillen.I.rlp ev",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing strict fiber of the internal-hom postcomposition map to express Fun over B. The projection equation uniquely fixes the canonical evaluation map, so the existential is not an arbitrary trivial Kan fibration. No new definition or dependency needed."
  }
 }
