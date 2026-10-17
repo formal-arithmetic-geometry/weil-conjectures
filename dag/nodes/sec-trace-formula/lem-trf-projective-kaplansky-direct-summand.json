@@ -10,9 +10,95 @@
  "stmt_deps": [
   "def-weil-pbc-direct-sum-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the given direct-sum isomorphism and hence regard $M$ as $\\bigoplus_{j\\in J}N_j$ with its finite-support coordinates [def-weil-pbc-direct-sum-modules]. The map $a$ is injective since $ba=1$, so identify the original $P$ with $a(P)\\subseteq M$; its inverse on the image is $b$. Put $e=ab$. Then $e^2=a(ba)b=e$, its image is this copy of $P$, and $e(p)=p$ for $p\\in P$. Also $m=e(m)+(m-e(m))$ has second term in $\\ker b$, so $M=P\\oplus\\ker b$. For $A\\subseteq J$, let $M_A$ consist of families supported in $A$, and let $\\pi_A:M\\to M_A$ erase coordinates outside $A$. This is linear and fixes $M_A$ by its coordinate formula.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20476–20484 and 20500–20505; fixed-coordinate version of the two decompositions."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-countable-coordinate-closure] with $f=e$ and $C=\\{j\\}$ for each $j\\in J$. Choose an at most countable set $D_j\\subseteq J$ containing $j$ with $e(M_{D_j})\\subseteq M_{D_j}$. These choices are made over the set $J$; no bound on the size of $R$ or of $N_j$ is used. The complementary projection $1-e$ also preserves $M_{D_j}$, since $x-e(x)\\in M_{D_j}$ whenever $x\\in M_{D_j}$.",
+   "uses": [
+    "lem-trf-countable-coordinate-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552: countable matrix/support-closure step."
+   }
+  },
+  {
+   "text": "Choose a well-order of $J$ and identify it with an ordinal $\\kappa$. Define sets $A_\\alpha\\subseteq J$ for $\\alpha\\leq\\kappa$ by transfinite recursion: $A_0=\\varnothing$; $A_\\lambda=\\bigcup_{\\beta<\\lambda}A_\\beta$ at a nonzero limit; if $A_\\alpha=J$, put $E_\\alpha=\\varnothing$, and otherwise put $E_\\alpha=D_j$ for the least $j\\notin A_\\alpha$; set $A_{\\alpha+1}=A_\\alpha\\cup E_\\alpha$. Each $E_\\alpha$ is at most countable. Let $M_\\alpha=M_{A_\\alpha}$. Inductively $e(M_\\alpha)\\subseteq M_\\alpha$: at a successor every element of $M_{A_\\alpha\\cup E_\\alpha}$ is a sum of an element supported in $A_\\alpha$ and one supported in $E_\\alpha$, both preserved by $e$; at a limit any finite support in the increasing union lies in one earlier $A_\\beta$, so $M_\\lambda=\\bigcup_{\\beta<\\lambda}M_\\beta$ and is preserved as well. The base is $e(0)=0$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20500–20530 and 20555–20565: the transfinite recursion and its successor/limit invariants."
+   }
+  },
+  {
+   "text": "The recursion exhausts $J$ by stage $\\kappa$. More precisely, prove $\\{\\beta:\\beta<\\alpha\\}\\subseteq A_\\alpha$ for every $\\alpha\\leq\\kappa$ by ordinal induction. At $0$ this is empty. At a successor all indices below $\\alpha$ are already in $A_\\alpha$; if $\\alpha$ is absent then it is the least omitted index, so $E_\\alpha=D_\\alpha$ contains it. If it is already present, nothing needs adding to cover the initial segment through $\\alpha$. At a nonzero limit $\\lambda$, any $\\beta<\\lambda$ lies in $A_{\\beta+1}\\subseteq A_\\lambda$, since $\\beta+1<\\lambda$. Thus $A_\\kappa=J$ and $M_\\kappa=M$. This argument still enumerates indices of zero summands, so no inference that a missing summand must be nonzero is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20555–20560: transfinite induction showing exhaustion."
+   }
+  },
+  {
+   "text": "Put $P_\\alpha=P\\cap M_\\alpha$. The equality $P_\\alpha=e(M_\\alpha)$ follows in both directions: stability places $e(x)$ in $M_\\alpha$ and in $P$; conversely $p\\in P\\cap M_\\alpha$ satisfies $p=e(p)$. Hence $P_0=0$, $P_\\kappa=P$, and $P_\\lambda=\\bigcup_{\\beta<\\lambda}P_\\beta$ at every nonzero limit, using the union equality for $M_\\lambda$. For each $\\alpha<\\kappa$, the map $r_\\alpha:P_{\\alpha+1}\\to P_\\alpha$ given by $p\\mapsto e(\\pi_{A_\\alpha}(p))$ is linear and lands in $e(M_\\alpha)=P_\\alpha$. It fixes $P_\\alpha$, since $\\pi_{A_\\alpha}(p)=p=e(p)$ there. Thus every successor inclusion of the $P_\\alpha$ has an explicit retraction. No commutation of $e$ with the coordinate projection is assumed.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20489–20494: splitting the induced filtration on P; explicit retraction in coordinates."
+   }
+  },
+  {
+   "text": "Fix $\\alpha<\\kappa$ and put $B_\\alpha=A_{\\alpha+1}\\setminus A_\\alpha\\subseteq E_\\alpha$. Choose at most countable generating subsets $G_j\\subseteq N_j$ for $j\\in B_\\alpha$. The union of their canonical images is at most countable and generates $M_{B_\\alpha}$, because each coordinate family has finite support [def-weil-pbc-direct-sum-modules]. The map $M_{B_\\alpha}\\to P_{\\alpha+1}/P_\\alpha$ sending $z$ to $e(z)+P_\\alpha$ is linear with the quotient operations of [def-weil-pbc-quotient-module]. It is surjective: for $p\\in P_{\\alpha+1}$ decompose its coordinates as $p=y+z$ with $y\\in M_\\alpha$ and $z\\in M_{B_\\alpha}$; then $p=e(p)=e(y)+e(z)$ and $e(y)\\in P_\\alpha$, so its class is the class of $e(z)$. The images of the displayed countable generators therefore generate $P_{\\alpha+1}/P_\\alpha$. If $B_\\alpha$ is empty this quotient is zero and has the empty generating set.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20494–20499 and 20530–20533: countable generation of successive quotients, via an explicit surjection instead of the displayed quotient direct-sum identification."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-split-transfinite-module-filtration] to $X=P$ and the ordinal-indexed family $(P_\\alpha)_{\\alpha\\leq\\kappa}$: steps 4–5 give its endpoints, continuity, and split successor inclusions. It yields $P\\cong\\bigoplus_{\\alpha<\\kappa}(P_{\\alpha+1}/P_\\alpha)$. Set $I=\\{\\alpha:\\alpha<\\kappa\\}$ and $Q_\\alpha=P_{\\alpha+1}/P_\\alpha$; step 6 proves that every $Q_\\alpha$ is countably generated. Transport this isomorphism back to the original module $P$ using the inverse $b:a(P)\\to P$ from step 1. When $J$ is empty, $\\kappa=0$, the retract $P$ is zero, and this is the empty direct sum.",
+   "uses": [
+    "lem-trf-split-transfinite-module-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 058V (lemma-direct-sum-devissage) and 058X (theorem-kaplansky-direct-sum), proof lines 20489–20499: converting the induced dévissage of P to the required direct sum."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "lem-trf-countable-coordinate-closure",
+  "def-weil-pbc-quotient-module",
+  "lem-trf-split-transfinite-module-filtration"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20476–20565, and Tag 058V, lemma-direct-sum-devissage. The countable support closure is isolated; the transfinite recursion and the induced filtration on P are written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +127,45 @@
    "results": "No hits in Mathlib/Algebra/Module.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kaplansky theorem direct summand of a direct sum of countably generated modules",
+   "results": "{\"t\": \"2026-10-17T21:02:17Z\", \"tool\": \"leanfinder\", \"query\": \"Kaplansky theorem direct summand of a direct sum of countably generated modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.instProjectiveDFinsupp\", \"Module.Finite.instDirectSum\", \"Module.projective_def\", \"Module.Finite.of_pi\", \"Module.projective_def'\", \"FGModuleCat.instFiniteCarrierSigmaObjModuleCatOfFinite\", \"Module.Projective.out\", \"Submodule.quotientEquivDirectSum\"], \"digest\": \"920b62ee07fef70b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: direct-sum projectivity and finite-generation results do not give countable-summand decomposition; whole-source grep with a misplaced directory in the query returned unrelated countably-generated filters/measure spaces, and the corrected Algebra/Module grep returned no hits. Read Algebra/Module/Projective.lean:297–305."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum, Module.Projective",
+   "results": "{\"t\": \"2026-10-17T21:02:18Z\", \"tool\": \"loogle\", \"query\": \"DirectSum, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Module.Projective.directSum\", \"Module.Projective.directSum_iff\"], \"digest\": \"a9dd7aeea266f836\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: direct-sum projectivity and finite-generation results do not give countable-summand decomposition; whole-source grep with a misplaced directory in the query returned unrelated countably-generated filters/measure spaces, and the corrected Algebra/Module grep returned no hits. Read Algebra/Module/Projective.lean:297–305."
+  },
+  {
+   "tool": "grep",
+   "query": "Kaplansky|countably.generated|countably generated Algebra/Module",
+   "results": "{\"t\": \"2026-10-17T21:02:18Z\", \"tool\": \"grep\", \"query\": \"Kaplansky|countably.generated|countably generated Algebra/Module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Probability/Process/PartitionFiltration.lean\", \"Mathlib/Probability/Process/PartitionFiltration.lean\", \"Mathlib/Probability/Kernel/Disintegration/Density.lean\", \"Mathlib/Probability/Kernel/Disintegration/Density.lean\", \"Mathlib/Probability/Kernel/Disintegration/StandardBorel.lean\", \"Mathlib/Probability/Kernel/Disintegration/StandardBorel.lean\", \"Mathlib/Probability/Kernel/Disintegration/StandardBorel.lean\", \"Mathlib/Probability/Kernel/Disintegration/StandardBorel.lean\"], \"digest\": \"b04b726eb318ba5f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: direct-sum projectivity and finite-generation results do not give countable-summand decomposition; whole-source grep with a misplaced directory in the query returned unrelated countably-generated filters/measure spaces, and the corrected Algebra/Module grep returned no hits. Read Algebra/Module/Projective.lean:297–305."
+  },
+  {
+   "tool": "leansearch",
+   "query": "direct summand of a direct sum of countably generated modules",
+   "results": "{\"t\": \"2026-10-17T21:02:18Z\", \"tool\": \"leansearch\", \"query\": \"direct summand of a direct sum of countably generated modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectSum\", \"instInhabitedDirectSum\", \"DirectSum.induction_lon\", \"Module.Finite.instDirectSum\", \"Submodule.fg_finset_sup\", \"Module.Finite.instDFinsupp\", \"instIsSemisimpleModuleDFinsupp\", \"DirectSum.isInternal_submodule_iff_iSupIndep_and_iSup_eq_top\"], \"digest\": \"c7a6cb3d847cedc2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: direct-sum projectivity and finite-generation results do not give countable-summand decomposition; whole-source grep with a misplaced directory in the query returned unrelated countably-generated filters/measure spaces, and the corrected Algebra/Module grep returned no hits. Read Algebra/Module/Projective.lean:297–305."
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|Kaplansky|countably.generated|countablyGenerated|IsCountablyGenerated",
+   "results": "{\"t\": \"2026-10-17T21:07:59Z\", \"tool\": \"grep\", \"query\": \"devissage|Kaplansky|countably.generated|countablyGenerated|IsCountablyGenerated\", \"sub\": \"Algebra/Module\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: direct-sum projectivity and finite-generation results do not give countable-summand decomposition; whole-source grep with a misplaced directory in the query returned unrelated countably-generated filters/measure spaces, and the corrected Algebra/Module grep returned no hits. Read Algebra/Module/Projective.lean:297–305."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-projective-countable-decomposition",
@@ -76,5 +197,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-projective-kaplansky-direct-summand",
+  "worker": "stage1",
+  "summary": "Retained the full arbitrary-rank retract statement and split the proof into seven explicit steps. Added only the countable invariant coordinate-enlargement lemma and the general continuous split-transfinite-filtration lemma; both are statement-only inputs. The item itself performs the transfinite recursion with a fixed ordinal endpoint, proves exhaustion, writes the retractions on P, and proves countable quotient generation by an explicit surjection. No Lean declaration exactly states the item.",
+  "blueprint": "Expands the inherited ancestry clause: Theorem 058Y invokes Theorem 058X beneath the local-projective-freeness input 0593 in the flattening branch below lem-trf-local-term-locality. Steps 1–6 realize the two-decomposition and transfinite-construction paragraphs of 058X; step 7 uses the immediately preceding general dévissage lemma 058V. The updated ancestor contracting-correspondence route and the unit/chapter metadata are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q32-27a53f2c5",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-27a53f2c5 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, unit route, and Stacks Tags 058V/058X in full. All seven proof steps are correct; edge cases including empty, zero, singleton, finite, and limit cases check out. New nodes are self-contained, non-duplicate, statement-only, and properly searched/cited. Review written to review.md."
  }
 }

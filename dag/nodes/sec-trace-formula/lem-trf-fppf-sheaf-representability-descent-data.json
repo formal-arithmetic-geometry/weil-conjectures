@@ -15,9 +15,140 @@
   "def-pd-descent-datum",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An fppf covering $\\{W_a\\to W\\}$ is an fpqc covering in the sense of [def-weil-pbc-fpqc-covering]: flatness is part of [def-pc-fppf-site]. For every affine open $V\\subset W$, restrict the covering to $V$ using the base-change axiom in [def-weil-pbc-sites-and-cohomology]. Apply [lem-pc-fppf-affine-refinement] to obtain finitely many affine opens of the inverse images $W_a\\times_WV$ whose images cover $V$. These are also affine opens of $W_a$, since $W_a\\times_WV$ is the inverse-image open subscheme. They are precisely the finite affine opens required in the fpqc definition. This applies on the big fppf site over any of the bases occurring below.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-pc-fppf-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C, lemma-zariski-etale-smooth-syntomic-fppf-fpqc, deduced using Tag 021P, lemma-fppf-affine"
+   }
+  },
+  {
+   "text": "For any $B$-scheme $Z$, the presheaf $h_Z^B(W)=\\operatorname{Mor}_B(W,Z)$ is an fppf sheaf. Indeed, step 1 and [lem-weil-pbc-fpqc-representable-descent] glue any compatible family of maps $W_a\\to Z$ uniquely as scheme maps. The glued map is over $B$: its composite to $B$ equals $W\\to B$ because the two maps have equal restrictions, and the uniqueness clause of the same node applies with target $B$. Thus the equalizer sheaf condition in [def-weil-pbc-sites-and-cohomology] holds. In particular this applies to $h_{T_i}$ and to each $h_{X_i}^{T_i}$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W5, lemma-descent-data-sheaves"
+   }
+  },
+  {
+   "text": "Let $H$ be a sheaf as in the statement and choose $\\alpha_i:h_{X_i}\\xrightarrow{\\sim}h_{T_i}\\times H$. By [lem-pc-yoneda] the first projection of $\\alpha_i$ is induced by a unique map $p_i:X_i\\to T_i$. For a fixed $a:W\\to T_i$, taking fibres over $a$ gives $\\operatorname{Mor}_{T_i}(W,X_i)\\simeq H(W)$. Conversely, any such isomorphism on the slice gives $\\operatorname{Mor}_T(W,X_i)\\simeq\\coprod_{a\\in\\operatorname{Mor}_T(W,T_i)}H(W)=h_{T_i}(W)\\times H(W)$ by separating maps according to their composite with $p_i$. All maps commute with restriction, since precomposition sends the fibre over $a$ to the fibre over $a\\circ b$. Here slice restriction has the sectionwise meaning of [def-pur-localized-ringed-site].",
+   "uses": [
+    "lem-pc-yoneda",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W5, lemma-descent-data-sheaves"
+   }
+  },
+  {
+   "text": "Write $T_{ij}=T_i\\times_TT_j$. By the fibre-product universal property [def-pc-fibre-product], both $X_i\\times_TT_j$ and $T_i\\times_TX_j$ represent $h_{T_i}\\times H\\times h_{T_j}$. Apply [lem-pc-representable-unique] to the identification through this same functor to define $\\phi_{ij}$. Its two projections to $T_i,T_j$ are unchanged, so it is over $T_{ij}$ by [lem-pc-yoneda]. On a triple overlap, both $\\phi_{ik}$ and $\\phi_{jk}\\circ\\phi_{ij}$ preserve the three base coordinates and the $H$ coordinate; hence their induced transformations are equal, and Yoneda gives the cocycle. If $v:H\\to K$ is a sheaf map, $\\mathrm{id}_{h_{T_i}}\\times v$ gives a unique map between their representing schemes by Yoneda, over $T_i$. The same coordinate calculation shows compatibility with $\\phi_{ij}$. Yoneda's injectivity shows that these maps preserve identities and composition. This defines the functor $R$ from sheaves to scheme descent data.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-representable-unique",
+    "lem-pc-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W5, lemma-descent-data-sheaves"
+   }
+  },
+  {
+   "text": "Conversely, let $D=(X_i,\\phi_{ij})$ be a scheme descent datum. On the slice over $T_i$ put $F_i(W\\to T_i)=\\operatorname{Mor}_{T_i}(W,X_i)$, a sheaf by step 2. For $W\\to T_{ij}$, the map $\\phi_{ij}$ takes a map $W\\to X_i$ together with the prescribed $W\\to T_j$ to a unique map $W\\to X_j$ over $T_j$; its inverse gives the inverse transformation. Thus it defines an isomorphism $\\theta_{ij}:F_i|_{T_{ij}}\\to F_j|_{T_{ij}}$, and the scheme cocycle gives $\\theta_{ik}=\\theta_{jk}\\theta_{ij}$. Apply [lem-pe-set-sheaf-cover-descent] to obtain $H_D$ and $e_i:H_D|_{T_i}\\xrightarrow{\\sim}F_i$ with $e_j=\\theta_{ij}e_i$. The hypotheses of that node hold: use the universe-small big fppf site from [def-weil-size-convention], its fibre products [def-pc-fibre-product], its terminal object $T$, and the given set-indexed covering. Localization over that terminal object is the original site, with the slice restrictions of [def-pur-localized-ringed-site].",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "def-weil-size-convention",
+    "def-pc-fibre-product",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TR, lemma-glue-sheaves, and 04TQ, lemma-glue-maps, applied to the big fppf site"
+   }
+  },
+  {
+   "text": "For every $W/T$, the inverse of $e_i$ on the slice fibres gives the natural bijection $\\operatorname{Mor}_T(W,X_i)=\\coprod_{a:W\\to T_i}\\operatorname{Mor}_{T_i}((W,a),X_i)\\xrightarrow{\\sim}\\coprod_{a:W\\to T_i}H_D(W)=h_{T_i}(W)\\times H_D(W)$. Therefore $h_{T_i}\\times H_D$ is represented by $X_i$. On $W\\to T_{ij}$ the equality $e_j=\\theta_{ij}e_i$ says that the resulting comparison sends a map to $X_i$ to exactly its image under $\\phi_{ij}$. By [lem-pc-yoneda], $R(H_D)$ is isomorphic to $D$, including its specified overlap maps, rather than just its local schemes.",
+   "uses": [
+    "lem-pc-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W5, lemma-descent-data-sheaves"
+   }
+  },
+  {
+   "text": "A morphism $f:D\\to D'$ is a family $f_i:X_i\\to X'_i$ over $T_i$ satisfying $\\phi'_{ij}(f_i\\times\\mathrm{id})=(\\mathrm{id}\\times f_j)\\phi_{ij}$. Postcomposition yields $F_i\\to F'_i$ compatible with $\\theta_{ij}$. Conjugating by $e_i,e'_i$ gives maps $H_D|_{T_i}\\to H_{D'}|_{T_i}$ agreeing on double slices. The morphism clause of [lem-pe-set-sheaf-cover-descent] gives a unique global map $G(f):H_D\\to H_{D'}$. Its uniqueness gives $G(\\mathrm{id})=\\mathrm{id}$ and $G(gf)=G(g)G(f)$. Hence $G:D\\mapsto H_D$ is a functor. The local representing isomorphisms of step 6 commute with $f_i$ by their construction, so [lem-pc-yoneda] makes $RG\\cong\\mathrm{id}$ natural.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "lem-pc-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps; Tag 04TR, lemma-glue-sheaves"
+   }
+  },
+  {
+   "text": "Starting instead with $H$, the local identifications in step 3 and the gluing isomorphisms for $G(R(H))$ give isomorphisms $G(R(H))|_{T_i}\\to H|_{T_i}$. They agree on double overlaps because both transitions preserve the $H$ coordinate, as in step 4. By the morphism clause of [lem-pe-set-sheaf-cover-descent], these isomorphisms and their inverses glue to global maps. Their composites restrict to identities, so uniqueness in that clause makes them identities globally. The resulting isomorphism $GR(H)\\cong H$ is natural: for a map $H\\to K$ the two maps in the naturality square agree on each slice by the definition of $R$ and $G$, and hence agree globally by uniqueness. Together with step 7, this proves the asserted equivalence of categories and the identification of its local representing objects.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps; details omitted at the end of Descent Tag 02W5"
+   }
+  },
+  {
+   "text": "If $H\\simeq h_X$ for a $T$-scheme $X$, the universal property [def-pc-fibre-product] gives $h_{T_i}\\times H\\simeq h_{T_i\\times_TX}$. By [lem-pc-representable-unique] the representing schemes $X_i$ are isomorphic to $X\\times_TT_i$, and the isomorphisms induce exactly $\\phi_{ij}$ since both comparisons preserve the $X$ coordinate. Thus $R(H)$ is effective. Conversely, suppose a $T$-scheme $X$ and isomorphisms $X\\times_TT_i\\simeq X_i$ realize the datum $R(H)$. They give local isomorphisms $h_X|_{T_i}\\simeq H|_{T_i}$ by step 3. Effectivity says precisely that they agree on double overlaps. Step 2 makes $h_X$ a sheaf; apply [lem-pe-set-sheaf-cover-descent] to glue these local maps and their inverses. Uniqueness makes their composites identities. Hence $h_X\\simeq H$, proving representability. Effectivity here is exactly the covering-family definition in the statement, consistent with [def-pd-descent-datum].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-representable-unique",
+    "lem-pe-set-sheaf-cover-descent",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W5, lemma-descent-data-sheaves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pc-yoneda",
+  "def-pur-localized-ringed-site",
+  "def-pc-fibre-product",
+  "lem-pc-representable-unique",
+  "lem-pe-set-sheaf-cover-descent",
+  "def-weil-size-convention",
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W5, lemma-descent-data-sheaves; the sheaf gluing construction and omitted quasi-inverse checks are implemented by Sites Tags 04TR and 04TQ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +177,166 @@
    "results": "11 hits: Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descent|[Rr]epresentab",
+   "results": {
+    "t": "2026-10-17T21:08:06Z",
+    "tool": "grep",
+    "query": "descent|[Rr]epresentab",
+    "sub": "AlgebraicGeometry/Sites",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Representability.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Representability.lean"
+    ],
+    "digest": "229696d668b40acd"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected candidates concern Zariski open-immersion gluing or equivalence conditional on a stack hypothesis; none states the present scheme-descent/locally-representable-sheaf equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between locally representable sheaves on a site and descent data of representing objects",
+   "results": {
+    "t": "2026-10-17T21:08:06Z",
+    "tool": "leansearch",
+    "query": "Equivalence between locally representable sheaves on a site and descent data of representing objects",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.DescentData.ofObj",
+     "CategoryTheory.Pseudofunctor.isEquivalence_toDescentData",
+     "CategoryTheory.Sheaf.isSheaf_of_isRepresentable",
+     "CategoryTheory.GrothendieckTopology.yonedaEquiv",
+     "CategoryTheory.Pseudofunctor.DescentData",
+     "CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence",
+     "CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq",
+     "CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff"
+    ],
+    "digest": "e91bb6b2cc7b2bfc"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected candidates concern Zariski open-immersion gluing or equivalence conditional on a stack hypothesis; none states the present scheme-descent/locally-representable-sheaf equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.DescentData",
+   "results": {
+    "t": "2026-10-17T21:08:07Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Pseudofunctor.DescentData",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.DescentData",
+     "CategoryTheory.Pseudofunctor.DescentData.instCategory",
+     "CategoryTheory.Pseudofunctor.DescentData.Hom",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctor",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorIdIso",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence"
+    ],
+    "digest": "7e926cccd8f606db"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected candidates concern Zariski open-immersion gluing or equivalence conditional on a stack hypothesis; none states the present scheme-descent/locally-representable-sheaf equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme descent data on an fppf covering are equivalent to sheaves locally represented by schemes, with representability equivalent to effective descent",
+   "results": {
+    "t": "2026-10-17T21:08:07Z",
+    "tool": "leanfinder",
+    "query": "Scheme descent data on an fppf covering are equivalent to sheaves locally represented by schemes, with representability equivalent to effective descent",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "CategoryTheory.Pseudofunctor.isEquivalence_toDescentData",
+     "CategoryTheory.Pseudofunctor.isStackFor_iff",
+     "CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff",
+     "CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence",
+     "CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq",
+     "CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff"
+    ],
+    "digest": "9d6a72ebadbd8a59"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected candidates concern Zariski open-immersion gluing or equivalence conditional on a stack hypothesis; none states the present scheme-descent/locally-representable-sheaf equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "toDescentData|isStack|glue",
+   "results": {
+    "t": "2026-10-17T21:08:47Z",
+    "tool": "grep",
+    "query": "toDescentData|isStack|glue",
+    "sub": "CategoryTheory/Sites/Descent",
+    "ok": true,
+    "n_hits": 23,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/IsStack.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/IsStack.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/IsStack.lean"
+    ],
+    "digest": "a4bd4c5b30d97e86"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected candidates concern Zariski open-immersion gluing or equivalence conditional on a stack hypothesis; none states the present scheme-descent/locally-representable-sheaf equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing local representable functors into a sheaf from scheme descent data without assuming effective descent of the schemes",
+   "results": {
+    "t": "2026-10-17T21:08:49Z",
+    "tool": "leanfinder",
+    "query": "Gluing local representable functors into a sheaf from scheme descent data without assuming effective descent of the schemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor"
+    ],
+    "digest": "76c7150bec7ebb06"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected candidates concern Zariski open-immersion gluing or equivalence conditional on a stack hypothesis; none states the present scheme-descent/locally-representable-sheaf equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-affine-quotient-representable",
@@ -79,5 +366,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fppf-sheaf-representability-descent-data",
+  "worker": "stage1",
+  "summary": "Read Stacks 02W5 and its sheaf gluing and subcanonical inputs. Expanded both functors, overlap compatibility, their natural quasi-inverse isomorphisms and the representability/effectivity criterion using existing nodes only. No statement correction or new node. Searched the project and Mathlib; no exact closed declaration or one-line Mathlib specialization states this equivalence.",
+  "blueprint": "Preserves the existing ancestry through lem-trf-local-term-locality: the quotient-presentation support in Tag 0265, the first and third representability steps, uses the local schemes and effectivity criterion of Tag 02W5. This split supplies the two functors and the omitted equivalence checks at that support node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Finite affine refinement supplies the fpqc covering condition for an fppf family; this is a generic topology tool absent from the trace-formula unit."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Generic gluing of set sheaves and unique descent of sheaf morphisms supplies the inverse construction; no trace-formula-unit node states this site-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement",
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q03-65c9f1ad3",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-65c9f1ad3 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited DAG statements, Stacks Tags 02W5, 04TR, 04TQ, 022C, and 021P, plus unit/chapter context. All nine proof steps are mathematically supported; edge cases and hypotheses checked. No new nodes, repairs, SGA citations, route-pivot machinery, or coefficient/base-change issues. Review written to review.md."
  }
 }

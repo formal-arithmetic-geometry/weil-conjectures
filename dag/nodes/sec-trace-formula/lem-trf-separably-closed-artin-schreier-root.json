@@ -1,0 +1,93 @@
+{
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-separably-closed-value-group-divisible",
+  "date": "2026-10-18",
+  "group": "Q102"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "id": "lem-trf-separably-closed-artin-schreier-root",
+ "kind": "statement",
+ "title": "Artin–Schreier roots in a separably closed field",
+ "statement": "Let $K$ be a separably closed field [def-kun-separably-closed] [def-weil-field] of characteristic $p>0$ [def-pc-field-characteristic]. For every $a\\in K$ there exists $z\\in K$ such that $z^p-z=a$.",
+ "source": {
+  "document": "Mathlib/FieldTheory/IsSepClosed.lean",
+  "place": "IsSepClosed.exists_root_C_mul_X_pow_add_C_mul_X_add_C', lines 117–120; take n=p, coefficients (1,-1,-a), and simplify. Positive field characteristic has p≥2."
+ },
+ "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-weil-field",
+  "def-pc-field-characteristic"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "separably closed field characteristic p has a solution to y^p - y = a",
+   "results": "top hit IsSepClosed.exists_root_C_mul_X_pow_add_C_mul_X_add_C' (Mathlib.FieldTheory.IsSepClosed), together with IsSepClosed.exists_pow_nat_eq; no direct project theorem.",
+   "date": "2026-10-18",
+   "verdict": "generalization: IsSepClosed.exists_root gives a root of any nonconstant separable polynomial, specializing to T^p-T-a."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed.exists_root",
+   "results": "1 hit: IsSepClosed.exists_root.",
+   "date": "2026-10-18",
+   "verdict": "generalization: specializes in one line to T^p-T-a."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_root|IsSepClosed",
+   "results": "No grep hits returned by msearch; the declaration was read at Mathlib/FieldTheory/IsSepClosed.lean:95-97.",
+   "date": "2026-10-18",
+   "verdict": "generalization: declaration read directly despite empty grep index response."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed.exists_root_C_mul_X_pow_add_C_mul_X_add_C'",
+   "results": "1 hit, IsSepClosed.exists_root_C_mul_X_pow_add_C_mul_X_add_C', Mathlib.FieldTheory.IsSepClosed. Requires p divides n, 2≤n and the linear coefficient nonzero; n=p and coefficients (1,-1,-a) meet these conditions.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_root_C_mul_X_pow_add_C_mul_X_add_C'|exists_pow_nat_eq",
+   "results": "Mathlib/FieldTheory/IsSepClosed.lean:117 has the characteristic-p trinomial-root theorem; line 129 has exists_pow_nat_eq. Read both declarations and their hypotheses.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsSepClosed.exists_root_C_mul_X_pow_add_C_mul_X_add_C'",
+  "file": "Mathlib/FieldTheory/IsSepClosed.lean",
+  "line": 117,
+  "how": "specializes in one line: n=p, coefficients (1,-1,-a), p divides p, p≥2, and -1≠0. The conclusion z^p-z-a=0 is equivalent to z^p-z=a. Read lines 117–120."
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Agent-written root-extraction substep supplying the divisibility assertion in the Temkin finite-height passage (PDF lines 1565–1571), through the historical semistable-reduction ancestry recorded here.",
+   "via": [
+    "lem-trf-separably-closed-value-group-divisible",
+    "lem-trf-residual-curve-value-group",
+    "lem-trf-single-valuation-semistable-extraction",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

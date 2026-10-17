@@ -1,7 +1,7 @@
 {
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-residual-curve-value-group",
@@ -21,35 +21,114 @@
   "def-kun-separably-closed",
   "def-weil-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=V^\\times$. Products and inverses show that $U$ is a subgroup of $K^\\times$. On $\\Gamma=K^\\times/U$ define $v(a)\\le v(b)$ iff $b/a\\in V$. This is independent of representatives because multiplying by units preserves membership in $V$. Reflexivity and transitivity use $1\\in V$ and closure under products; antisymmetry follows because both ratios in $V$ mean their ratio is a unit. The inverse alternative gives totality, and cancelling a common factor gives translation invariance. Hence this is an ordered abelian group, $v(ab)=v(a)+v(b)$, $v(-a)=v(a)$ since $-1\\in U$, and $v(a)\\ge0$ iff $a\\in V$. It suffices to find $b\\in K^\\times$ with $n v(b)=v(a)$ for every $a\\in K^\\times$ and $n\\ge1$.",
+   "uses": [
+    "def-kun-separably-closed",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin, Stable Modification, finite-height argument, PDF lines 1565–1571: divisibility of the value group, with the quotient notation made explicit here."
+   }
+  },
+  {
+   "text": "Here is the unequal-value calculation directly from the subring definition. If $x,y,x+y$ are nonzero and $v(x)\\le v(y)$, then $y/x\\in V$ and $(x+y)/x=1+y/x\\in V$, so $v(x+y)\\ge v(x)$; exchanging $x,y$ proves $v(x+y)\\ge\\min(v(x),v(y))$ whenever the sum is nonzero. Now suppose $v(r)<v(s)$. Then $r+s\\ne0$, since $s=-r$ would imply equal values. The inequality gives $v(r+s)\\ge v(r)$. If this inequality were strict, apply the same inequality to $(r+s)+(-s)=r$: both summands have value strictly greater than $v(r)$, a contradiction. Thus $v(r+s)=v(r)$; the opposite strict order follows by exchanging the terms. This proves the needed identity for arbitrary rank without a discrete-valuation assumption.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Stacks Tags 00IF (lemma-properties-valuation) and 00ID (lemma-valuation-group), following Definition 00IE (definition-value-group). The elementary verification omitted there is supplied explicitly here for field elements."
+   }
+  },
+  {
+   "text": "Let $p=\\operatorname{char}K$. If $p=0$, the image of every positive integer $n$ in $K$ is nonzero, so [lem-trf-separably-closed-prime-to-char-root] gives $b^n=a$ and hence $n v(b)=v(a)$. If $p>0$, write $n=p^r m$ with $r\\ge0$ and $p\\nmid m$. The image of $m$ in $K$ is then nonzero, so the prime-to-characteristic factor can be extracted by [lem-trf-separably-closed-prime-to-char-root] once a $p^r$-th value root has been obtained.",
+   "uses": [
+    "def-pc-field-characteristic",
+    "lem-trf-separably-closed-prime-to-char-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin, Stable Modification, finite-height argument, PDF lines 1565–1571: separate the characteristic-primary factor from the prime-to-characteristic factor."
+   }
+  },
+  {
+   "text": "Assume $p=\\operatorname{char}K>0$. In a field $p$ is prime: if $p=uv$ with $1<u,v<p$, the nonzero elements $u\\cdot1$ and $v\\cdot1$ would have zero product. Also $p\\ne1$ since $1_K\\ne0$, so $p\\ge2$. For $\\gamma=v(a)=0$ take $\\delta=0$. For $\\gamma<0$, use [lem-trf-separably-closed-artin-schreier-root] to obtain $z^p-z=a$. Then $z\\ne0$, since $a\\ne0$, and $z\\notin V$, since otherwise $a=z^p-z\\in V$, contradicting $v(a)<0$. Hence $v(z)<0$ and $v(z^p)=p v(z)<v(z)=v(-z)$. The unequal-value identity proved in Step 2 gives $v(a)=v(z^p-z)=p v(z)$, so take $\\delta=v(z)$. For $\\gamma>0$, apply the negative-value case to $a^{-1}$ and negate the resulting class. No perfectness or rank assumption was used.",
+   "uses": [
+    "lem-trf-separably-closed-artin-schreier-root",
+    "def-pc-field-characteristic",
+    "def-weil-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Finite-height argument, PDF lines 1565–1571: divisibility assertion. Artin–Schreier p-division and the valuation identity are agent-written details, not a proof quoted from Temkin."
+   }
+  },
+  {
+   "text": "Iterating the preceding $p$-division $r$ times gives $c\\in K^\\times$ with $p^r v(c)=v(a)$. Apply [lem-trf-separably-closed-prime-to-char-root] to $c$ and $m$ to obtain $b\\in K^\\times$ with $b^m=c$. Then $n v(b)=p^r m v(b)=p^r v(c)=v(a)$. For $p=0$ this is the $r=0$, $m=n$ case already covered in Step 3.",
+   "uses": [
+    "lem-trf-separably-closed-prime-to-char-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin, Stable Modification, finite-height argument, PDF lines 1565–1571: combine p-divisibility with divisibility away from the characteristic."
+   }
+  },
+  {
+   "text": "Since every $a\\in K^\\times$ and every $n\\ge1$ admit $b$ with $n v(b)=v(a)$, every class in $\\Gamma$ has an $n$-th root. Returning to multiplicative notation, this says that for each $\\gamma\\in\\Gamma$ there is $\\delta\\in\\Gamma$ with $\\delta^n=\\gamma$, so $\\Gamma$ is divisible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin, Stable Modification, finite-height argument, PDF lines 1565–1571: conclusion that the value group is divisible."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-separably-closed",
+  "def-pc-field-characteristic",
+  "def-weil-field",
+  "lem-trf-separably-closed-artin-schreier-root",
+  "lem-trf-separably-closed-prime-to-char-root"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin finite-height argument, PDF lines 1565–1571, asserts divisibility. The characteristic decomposition, root extraction and elementary valuation calculation are supplied by the agent; the local PDF is unavailable."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "value group of a separably closed valued field is divisible",
-   "results": "8 hits: ValuationRing.instNontrivialValueGroup, ValuationRing.commGroupWithZero, ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup, and unrelated finite-field/local-field declarations; none states divisibility for separably closed fields.",
+   "results": "{\"t\": \"2026-10-17T20:40:57Z\", \"tool\": \"leanfinder\", \"query\": \"value group of a separably closed valued field is divisible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationRing.instNontrivialValueGroup\", \"IsNonarchimedeanLocalField.instCompatibleValueGroupWithZeroV\", \"ValuationRing.commGroupWithZero\", \"ValuativeRel.instMulArchimedeanValueGroupWithZeroOfIsRankLeOne\", \"ValuationRing.instInhabitedValueGroup\", \"Valuation.FiniteField.instIsTrivialOn\", \"Valuation.exists_div_eq_of_surjective\", \"Valuation.valuationSubring_not_isField\"], \"digest\": \"420c9ea2e28ac46b\"}",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Valuation, Divisible, IsSepClosed",
-   "results": "0 hits; loogle reported unknown identifier Divisible.",
+   "query": "IsSepClosed.exists_root, IsSepClosed.exists_pow_nat_eq",
+   "results": "{\"t\": \"2026-10-17T20:40:57Z\", \"tool\": \"loogle\", \"query\": \"IsSepClosed.exists_root, IsSepClosed.exists_pow_nat_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "divisible.*value|value.*divisible|separably.*closed",
-   "results": "0 hits in Mathlib/RingTheory/Valuation.",
+   "query": "value.?group|separably.?closed",
+   "results": "{\"t\": \"2026-10-17T20:40:57Z\", \"tool\": \"grep\", \"query\": \"value.?group|separably.?closed\", \"sub\": \"Mathlib/FieldTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "divisibility of the value group of a separably closed valued field",
-   "results": "8 hits: IsSepClosure.recOn, IsSepClosure.sep_closed, IsSepClosed.casesOn, ValuationRing.ValueGroup and value-group API declarations; none states divisibility.",
+   "query": "In a separably closed valued field the value group is divisible",
+   "results": "{\"t\": \"2026-10-17T21:01:56Z\", \"tool\": \"leansearch\", \"query\": \"In a separably closed valued field the value group is divisible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationRing.ValueGroup\", \"IsSepClosed.casesOn\", \"Valued.ResidueField\", \"IsSepClosed\", \"ValuationRing.instNontrivialValueGroup\", \"ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup\", \"ValuationSubring.ValueGroup\", \"ValuationRing.instInhabitedValueGroup\"], \"digest\": \"3e661da36c945c90\"}",
    "date": "2026-10-18",
    "verdict": "no match"
   }
@@ -58,7 +137,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proposition 4.3.1 proof, p. 27: after Abhyankar gives a torsion value-group quotient, separable closedness makes the ground-field value group divisible and hence the quotient trivial.",
+   "place": "Temkin finite-height argument, PDF lines 1565–1571: separable closedness makes the ground-field value group divisible, with the unequal-value valuation calculation used in the Artin–Schreier p-division step.",
    "via": [
     "lem-trf-residual-curve-value-group",
     "lem-trf-single-valuation-semistable-extraction",
@@ -76,5 +155,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-separably-closed-value-group-divisible",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Repaired the missing non-Archimedean argument by adding a short elementary Step 2 that derives the valuation inequality from (x+y)/x=1+y/x in V and then proves equality for unequal values by applying it to (r+s)-s=r. Step 4 uses that proved identity in Artin–Schreier p-division. The two retained root facts are Mathlib leaves. The sandbox created.item and Temkin provenance are corrected; report.md identifies that delivery packaging retains these two origin metadata fields and requests their maintainer correction.",
+  "blueprint": "Retains the historical semistable-reduction ancestry beneath lem-trf-local-term-locality. Supplies value-group divisibility used in the finite-height argument of Temkin (PDF lines 1565–1571); the Artin–Schreier and unequal-value calculations are agent-written details, not a proof quoted from Temkin."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q102-fccf8151d",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q102-fccf8151d (reviewer sub-agent of L); spot-checked: Mathematics and citations pass full review. Repair the item metadata: created.item/group must be lem-trf-separably-closed-value-group-divisible/Q102, and source.place must cite Temkin Step 4, PDF lines 1565–1571. Corrections are in fixes/dag/nodes/sec-trace-formula/lem-trf-separably-closed-value-group-divisible.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -15,9 +15,153 @@
   "def-weil-pbc-exterior-algebra",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the stated equivalence of the two descriptions of the objects. A finite locally free sheaf is flat: locally tensoring is a finite direct sum, hence exact. Thus a two-term model is K-flat by [lem-pc-bounded-above-flat-kflat], and its tensor with a degree-zero module has terms only in degrees $-1,0$. Conversely apply [lem-sf-site-perfect-tor-window] on the small Zariski site with $a=-1,b=0$. This gives local two-term models whose terms are summands of finite free sheaves. On an affine open a splitting is an idempotent matrix of sections; its image module is a summand of a finite free module. By [lem-weil-pbc-finite-projective-standard-free-cover], shrink to principal opens making that image free. Do this for both terms and take their common refinement. The resulting models are two-term finite locally free models with unchanged degree bounds. No regularity or quasi-compactness of $X$ is used.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-sf-site-perfect-tor-window",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0FJX, 08G7 (site-perfect-precise), 00NX; cohomology.tex Tag 06YD."
+   }
+  },
+  {
+   "text": "Work first over a commutative ring $A$ with good complexes $P=[P^{-1}\\to P^0]$ of finite projective modules. Set $D(P)=\\det_A(P^0)\\otimes\\det_A(P^{-1})^\\vee$ as in [lem-trf-surjective-two-term-determinant-calculus]. It is invertible: on the finite free localizations of [lem-weil-pbc-finite-projective-standard-free-cover], wedge products of bases identify each top exterior power with $A$ (also for rank zero). Good complexes are bounded above with projective terms, so [lem-sc-bounded-above-projective-kprojective] and [lem-coef-kprojective-derived-hom-bijection] identify their derived morphisms with chain maps modulo homotopy. In particular a derived isomorphism is represented by a quasi-isomorphism $a:P\\to Q$ and has a chain-map inverse up to homotopy. The surjective case already has the explicit map $T_a$ of the new calculus lemma.",
+   "uses": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM, opening paragraph; derived.tex Tag 064B."
+   }
+  },
+  {
+   "text": "For an arbitrary quasi-isomorphism $a:P\\to Q$, choose a finite free module $F$ and a surjection $p:F\\to Q^{-1}$. Let $M=[P^{-1}\\oplus F\\xrightarrow{d_P\\oplus1}P^0\\oplus F]$, let $b:M\\to P$ be projection, and put $c^{-1}=(a^{-1},p)$ and $c^0=(a^0,d_Qp)$. Then $c$ is a chain map homotopic to $ab$ by $h(x,f)=p(f)$ in degree zero. The kernel of $b$ is $[F\\xrightarrow{1}F]$, so $b$ and $c$ are quasi-isomorphisms. The map $c^{-1}$ is surjective. Given $y\\in Q^0$, surjectivity of $H^0(a)$ writes $y=a^0(x)+d_Q(z)$; lift $z$ through $p$ to see that $c^0$ is surjective. Hence both $b,c$ qualify for [lem-trf-surjective-two-term-determinant-calculus]. For any such good diagram (allowing $c\\simeq ab$) define its proposed map to be $T_cT_b^{-1}:D(P)\\to D(Q)$.",
+   "uses": [
+    "lem-trf-surjective-two-term-determinant-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM, existence of good diagrams."
+   }
+  },
+  {
+   "text": "For a good diagram for $1_P$, its two legs are homotopic, and the homotopy clause of [lem-trf-surjective-two-term-determinant-calculus] makes $T_cT_b^{-1}=1$. Next take good diagrams $(b_{12},c_{12})$ for $a:P_1\\to P_2$ and $(b_{23},c_{23})$ for $a':P_2\\to P_3$. Form the degreewise fibre product $N=M_{12}\\times_{P_2}M_{23}$, along $c_{12},b_{23}$, with projections $r,s$. Each projection is surjective; its kernel is the kernel complex of the other surjective leg, hence has an isomorphism as differential. The exact sequence on terms splits since the quotient terms are projective, so $N$ has finite projective terms. The projections are quasi-isomorphisms: a cycle lifts after correcting its differential using the acyclic kernel, and a lift of a boundary differs from a boundary by a kernel cycle, which is a kernel boundary. Thus $(b_{12}r,c_{23}s)$ is a good diagram for $a'a$. The equality $c_{12}r=b_{23}s$ and the composition clause of the calculus lemma give $T_{c_{12}}T_r=T_{b_{23}}T_s$. Rearranging yields $T_{c_{23}s}T_{b_{12}r}^{-1}=(T_{c_{23}}T_{b_{23}}^{-1})(T_{c_{12}}T_{b_{12}}^{-1})$.",
+   "uses": [
+    "lem-trf-surjective-two-term-determinant-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM, identity diagrams and composition via degreewise fibre products."
+   }
+  },
+  {
+   "text": "Fix a homotopy inverse $a':Q\\to P$ of $a$ from [lem-coef-kprojective-derived-hom-bijection] and fix one good diagram for $a'$. Compose it with any good diagram for $a$ using the preceding fibre product. Since $a'a\\simeq1_P$, the resulting legs are homotopic; step 4 makes its map the identity. Thus every proposed map for $a$ equals the inverse of the fixed map for $a'$, proving independence of good diagram. A good diagram for $a$ is also one for any homotopic representative, so the map depends only on the derived morphism. Step 4 now proves the composition law, and its identity calculation proves the identity law. Transport along identifications of a model with a derived object gives the determinant functor and its canonical comparisons between models: the comparison for a composite identification is the composite comparison, by this same law.",
+   "uses": [
+    "lem-coef-kprojective-derived-hom-bijection",
+    "lem-trf-surjective-two-term-determinant-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM, independence paragraph."
+   }
+  },
+  {
+   "text": "For a ring map $A\\to B$, the map $B\\otimes_A\\bigwedge^r V\\to\\bigwedge^r(B\\otimes_A V)$ sends $b\\otimes(v_1\\wedge\\cdots\\wedge v_r)$ to $b((1\\otimes v_1)\\wedge\\cdots\\wedge(1\\otimes v_r))$. It is an isomorphism for finite projective $V$: check on the free localizations of [lem-weil-pbc-finite-projective-standard-free-cover], where basis wedges give its inverse. Likewise $B\\otimes_A V^\\vee\\cong(B\\otimes_A V)^\\vee$ is checked on a finite basis. These formulas give $B\\otimes_A D(P)\\cong D(B\\otimes_A P)$. A surjective good map has split exact term sequences and kernel differential an isomorphism, so tensoring preserves its defining kernel sequences and quasi-isomorphism. The wedge-lift maps $\\gamma^i$ and $\\delta_N=\\det(d_N)$ in [lem-trf-surjective-two-term-determinant-calculus] commute with this scalar extension, directly by their displayed wedge formulas. Consequently $T_a$ commutes with scalar extension for surjective maps, and $T_cT_b^{-1}$ does so for all good diagrams. Identities and iterated scalar extension agree because both maps send a pure wedge tensor to the same wedge tensor. This also proves naturality in derived isomorphisms. No flatness of $A\\to B$ is required.",
+   "uses": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI, kernel and wedge construction; perfect.tex Tags 0FJX, 0FJY."
+   }
+  },
+  {
+   "text": "The preceding scalar-extension formula computes derived extension of scalars on good complexes. Indeed a finite projective module is flat: tensoring with it is a direct summand of tensoring with a finite free module, so preserves exactness. By [lem-pc-module-bounded-flat-kflat], a good complex is K-flat, hence ordinary tensor computes its derived tensor. In the special model $P=[V\\xrightarrow{1}V]$, apply the surjective-map construction of [lem-trf-surjective-two-term-determinant-calculus] to $P\\to0$. Its kernel is $P$, $\\delta_P=\\det(1_V)$, and the short-exact-sequence maps for quotient zero are identities. Thus $D(P)\\to A$ takes $\\det(1_V)$ to $1$. Under the ordinary symmetry identifying $D(P)$ with $(\\det V)^\\vee\\otimes\\det V$, this is exactly evaluation. This includes $V=0$.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-trf-surjective-two-term-determinant-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI, acyclic canonical element and kernel-normalized map; Tag 0FJM."
+   }
+  },
+  {
+   "text": "Choose an affine open cover $U_i=\\operatorname{Spec}A_i$ on which $L$ has a two-term finite free model. By [lem-pc-affine-qcoh-derived-equivalence], the local derived objects and their isomorphisms can be treated as ring complexes, so the construction in steps 2--7 gives invertible sheaves $\\mathcal D_i$ and maps on them. On an affine open $W\\subset U_i\\cap U_j$, restrict both models. The restriction and affine tensor identifications of [lem-pc-affine-derived-pullback-tensor-tilde], together with steps 6--7, identify their determinant sheaves with those computed over $\\Gamma(W,\\mathcal O_X)$. Apply the ring determinant functor to the comparison induced by their identifications with $L|_W$. Its composition law gives identity and cocycle identities on affine refinements of overlaps, hence on overlaps by the sheaf axiom. In particular we never assume intersections of affine opens are affine. The comparisons are compatible with further restriction by step 6.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJX, affine restriction paragraph; Tag 0FJY."
+   }
+  },
+  {
+   "text": "An open cover satisfies [def-weil-pbc-fpqc-covering]: its local ring maps are identities, hence flat; affine opens have finite subcovers by principal opens subordinate to the cover, by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. Apply [lem-pc-fpqc-descent] to the invertible sheaves and cocycles of step 8. Its equivalence gives an invertible sheaf $\\det(L)$, and full faithfulness glues the local determinant maps for every derived isomorphism. Local identity and composition identities remain identities after gluing. Refining two choices of models/covers to common affine subopens gives the canonical comparisons, independent of refinements by the same full faithfulness. On a finite locally free two-term model the construction is precisely $(\\bigwedge^a E^{-1})^\\vee\\otimes\\bigwedge^b E^0$, since that formula is checked on affine trivializations; varying ranks are handled on their rank-constant opens. The evaluation comparison of step 7 also glues. Thus all assertions other than arbitrary pullback have been established.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJX, gluing of invertible modules, morphisms and canonical sections; descent.tex Tag 023T."
+   }
+  },
+  {
+   "text": "Let $g:X'\\to X$ be any scheme morphism. Cover $X'$ by affine opens $V$ mapping into affine model opens $U=\\operatorname{Spec}A$ of step 8. A finite locally free model remains two-term finite locally free after ordinary pullback; by [lem-pc-flat-complex-derived-pullback] it represents $Lg^*L$. On $V=\\operatorname{Spec}B$, [lem-pc-affine-derived-pullback-tensor-tilde] identifies this with the derived scalar extension of the model. The map of step 6 therefore gives $g^*\\det(L)|_V\\cong\\det(Lg^*L)|_V$. Its naturality for model comparisons and its restriction compatibility show that these maps agree on affine refinements of overlaps. Full faithfulness in [lem-pc-fpqc-descent] glues them to the required natural isomorphism. For identities and composite scheme morphisms, use [lem-pc-ringed-spaces-derived-pullback-composition] to identify the derived pullbacks. On affine models both proposed determinant comparisons send pure wedge tensors to the same pure wedge tensor by step 6, so they coincide globally. The same local check gives naturality in $L$ and restriction compatibility. Arbitrary $g$ is allowed because only finite projective/locally free terms and split kernel sequences were tensored.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-fpqc-descent",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJY; cohomology.tex Tags 06YD and 0D5S."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-sf-site-perfect-tor-window",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-trf-surjective-two-term-determinant-calculus",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-pc-fpqc-descent",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJM, good diagrams, fibre products and independence; perfect.tex Tags 0FJX and 0FJY, affine gluing and pullback, with explicit scalar-extension checks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +193,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-lci-canonical-adjunction",
@@ -77,5 +221,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-two-term-perfect-determinant",
+  "worker": "stage1",
+  "summary": "Kept the imported statement. Constructed the affine determinant functor explicitly by good diagrams, proved independence and composition using fibre products, checked scalar extension on wedges, and glued objects and maps by existing descent. Retained just one lower-level unsplit input: the kernel-normalized determinant calculus for degreewise surjective quasi-isomorphisms; removed preliminary children that overlapped the item clauses. Read the cited statements and Stacks sources, searched Lean/Mathlib/blueprint, and checked zero, contractible, variable-rank and nonflat-base-change cases.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. This determinant input serves the local complete-intersection adjunction used before adding the markings; it does not alter the semistable-modification route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "K-flatness of two-term flat sheaf models verifies the Tor-window equivalence."
+   },
+   {
+    "node": "lem-sf-site-perfect-tor-window",
+    "why": "The generic ringed-site shortening theorem produces models in exactly the Tor window; this unit has no shortening theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Finite free localization covers control variable ranks, local invertibility, and basis checks."
+   },
+   {
+    "node": "lem-sc-bounded-above-projective-kprojective",
+    "why": "K-projectivity of bounded projective module complexes is generic homological algebra."
+   },
+   {
+    "node": "lem-coef-kprojective-derived-hom-bijection",
+    "why": "Derived morphisms between the good models are chain maps modulo homotopy."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ordinary tensor on a two-term projective module model computes derived tensor."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The affine derived equivalence identifies sheaf-derived morphisms with ring-derived morphisms."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Restriction and affine derived scalar extension identify the local constructions."
+   },
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "The definition supplies the exact covering hypotheses for descent."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Quasi-compactness of each affine open proves the chosen open cover satisfies the fpqc definition."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic descent of invertible modules and full faithfulness glue local objects and maps."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "A bounded flat sheaf model computes pullback termwise."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "The generic unital associative derived-pullback comparison identifies composite pullbacks."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-sf-site-perfect-tor-window",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-pc-fpqc-descent",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q92-c492a2c4f",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-c492a2c4f (reviewer sub-agent of L); spot-checked: Read both nodes in full and checked all ten steps against Stacks 0FJI–0FJM, 0FJX–0FJY and the cited interfaces. Verified normalization, nonflat pullback, edge cases, duplicates and absence of a dependency cycle. No repairs needed. Detailed checks and accepted tool uses are in review.md; unavailable pivot-history checks are explicitly noted."
  }
 }
