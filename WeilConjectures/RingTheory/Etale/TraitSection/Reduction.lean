@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Etale.Descent
 public import Mathlib.RingTheory.Finiteness.Descent
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 public import WeilConjectures.Mathlib.RingTheory.TotallySplit
+public import WeilConjectures.RingTheory.Etale.TraitSection.BaseChange
 
 /-!
 # Tools for the reduction of the trait case to a base containing roots of unity
@@ -126,3 +127,29 @@ theorem AlgHom.mem_range_map_of_forall_baseChange_eq {S L T C ι : Type*} [CommR
       exact ⟨t ⊗ₜ c, by rw [AlgHom.coe_tensorFixedPointsEquiv_tmul, ← hc]; rfl⟩
   rw [← hz]
   exact key z
+
+/-- **Invariants of the base change of a Galois cover.** If the `G`-invariants of the
+`B_K`-algebra `L` are `B_K`, then for a flat `B`-algebra `B₁` the `G`-invariants of
+`B₁ ⊗[B] L` (action on the second factor) come from `B₁ ⊗[B] B_K`. -/
+theorem Algebra.TraitSection.mem_range_of_forall_smul_eq {B B₁ Bk L : Type*} [CommRing B]
+    [CommRing B₁] [Algebra B B₁] [Module.Flat B B₁] [CommRing Bk] [Algebra B Bk] [CommRing L]
+    [Algebra Bk L] [Algebra B L] [IsScalarTower B Bk L]
+    (G : Type*) [Group G] [Finite G] [MulSemiringAction G L] [SMulCommClass G Bk L]
+    (hfix : ∀ x : L, (∀ g : G, g • x = x) → x ∈ Set.range (algebraMap Bk L))
+    (y : B₁ ⊗[B] L)
+    (hy : haveI : SMulCommClass G B L := ⟨fun g b x ↦ by
+        rw [IsScalarTower.algebraMap_smul (A := Bk) b x |>.symm, smul_comm g]
+        exact (IsScalarTower.algebraMap_smul (A := Bk) b (g • x))⟩
+      letI := rightTensorAction (B := B) (B₁ := B₁) (L := L) G
+      ∀ g : G, g • y = y) :
+    y ∈ Set.range (Algebra.TensorProduct.map (AlgHom.id B₁ B₁) (IsScalarTower.toAlgHom B Bk L)) := by
+  have : SMulCommClass G B L := ⟨fun g b x ↦ by
+    rw [IsScalarTower.algebraMap_smul (A := Bk) b x |>.symm, smul_comm g]
+    exact (IsScalarTower.algebraMap_smul (A := Bk) b (g • x))⟩
+  letI := rightTensorAction (B := B) (B₁ := B₁) (L := L) G
+  refine AlgHom.mem_range_map_of_forall_baseChange_eq (IsScalarTower.toAlgHom B Bk L)
+    (fun g : G ↦ MulSemiringAction.toAlgHom B L g) (fun x hx ↦ ?_) y fun g ↦ ?_
+  · obtain ⟨k, hk⟩ := hfix x hx
+    exact ⟨k, hk⟩
+  · rw [← rightTensorAction_smul_eq]
+    exact hy g

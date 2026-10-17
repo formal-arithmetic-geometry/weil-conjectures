@@ -3699,6 +3699,7 @@ public import WeilConjectures.RingTheory.Etale.InvariantsDescent
 public import WeilConjectures.RingTheory.Etale.InvariantsDescentAux
 public import WeilConjectures.RingTheory.Etale.KummerDescent
 public import WeilConjectures.RingTheory.Etale.TraitSection
+public import WeilConjectures.RingTheory.Etale.TraitSection.BaseChange
 public import WeilConjectures.RingTheory.Etale.TraitSection.Core
 public import WeilConjectures.RingTheory.Etale.TraitSection.KummerIntegralClosure
 public import WeilConjectures.RingTheory.Etale.TraitSection.Points
