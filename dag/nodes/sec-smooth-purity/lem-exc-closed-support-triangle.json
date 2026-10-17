@@ -43,27 +43,61 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-open-immersion-etale], $j$ is etale. The equivalence of sites [lem-weil-pbc-etale-site-localization-open] identifies $U_{\\mathrm{et}}$ with $T_{\\mathrm{et}}/U$. By both clauses of [lem-weil-pbc-etale-inverse-image-restriction], $j^*$ on underlying abelian sheaves is restriction, and its unit is restriction of sections. These statements extend to left $A$-modules by restricting each scalar action. The local description used here follows from [lem-weil-pbc-sheafification-plus-theorem]: its explicit formula expresses a section of $P^{++}$ on a cover by sections of $P^+$, each of which is on a further cover represented by sections of $P$. Composite covers therefore give representatives in $P$, and equality is tested after refinement of these covers. For the constant ring presheaf $P$, define addition, multiplication, negatives and the unit on a common refinement of representatives; local equality makes these well-defined, and the ring identities hold because they hold on representatives. The universal-property extension of a presheaf ring map preserves these operations locally, so this set sheafification is also the ring sheafification $A_S$. The covers and refinements on every object over $U$ are exactly the same in the two sites. Applying the displayed plus formula twice therefore identifies the restricted coefficient sheaf with $A_U$, including all ring operations. The direct image is $(j_*N)(V)=N(V\\times_TU)$ with its restricted constant-scalar action [def-weil-pbc-direct-image]. Restriction is additive and exact: kernels are sectionwise and cokernels are sheafified sectionwise cokernels [def-weil-sheaf-of-modules-category], and the covering families on every object over $U$ have just been identified. It therefore preserves quasi-isomorphisms by [lem-weil-pbc-exact-functor-complex-cohomology]. By [lem-pur-kinjective-restrict-localized], $j^*I$ is K-injective, so it resolves $j^*K$. The additive functor $j_*$ commutes with the finite sums, shifts and cone matrices of [def-weil-abstract-derived-category], hence its termwise application followed by localization is exact on the homotopy category. By [lem-weil-pbc-kinjective-total-derived] its total unbounded derived functor exists and $Rj_*j^*K$ is represented by $j_*j^*I$.",
+   "text": "By [lem-weil-pbc-open-immersion-etale], $j$ is etale, so [lem-weil-pbc-etale-site-localization-open] identifies $U_{\\mathrm{et}}$ with $T_{\\mathrm{et}}/U$, including its covering families. Apply [lem-pur-ring-presheaf-sheafification-localization] to the constant ring presheaf $P(V)=A$. Its unit-compatible ring isomorphism gives $A_U\\simeq A_T|_U$. This identifies the coefficient sheaves and every ring operation; the cited statement permits rings that are not commutative. The small skeleton from Step 1 meets its size hypothesis.",
    "uses": [
     "lem-weil-pbc-open-immersion-etale",
     "lem-weil-pbc-etale-site-localization-open",
+    "lem-pur-ring-presheaf-sheafification-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00XZ (section-localize), 00XR (lemma-when-shriek); ring-valued sheafification comparison of lem-pur-ring-presheaf-sheafification-localization"
+   }
+  },
+  {
+   "text": "For $S=T,U,Z$, [lem-weil-pbc-ring-sheafification-underlying-sets] identifies the underlying set sheaf of $A_S$ with the set sheafification of the constant presheaf. Apply [lem-weil-pbc-site-sheafification-sections-local] to that presheaf. Every local coefficient section is therefore represented on a cover by constants $a_\\lambda\\in A$, and equal representatives agree after refinement. These are precisely the local representatives and equality test used for scalar actions below. Both cited statements include the sheafification unit, so these constants are the images under the ring-presheaf unit.",
+   "uses": [
+    "lem-weil-pbc-ring-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YR (section-sheaves-algebraic-structures), items (beta) and (gamma); Tag 00WK (lemma-sections-sheafification)"
+   }
+  },
+  {
+   "text": "By both clauses of [lem-weil-pbc-etale-inverse-image-restriction], the abelian inverse image is restriction and its unit is restriction of sections. Restricting module actions and using the coefficient isomorphism in Step 2 gives $j^*$ on left modules [def-weil-sheaf-of-modules-category]. Its direct image has $(j_*N)(V)=N(V\\times_TU)$ [def-weil-pbc-direct-image]; $A_T(V)$ acts through restriction to $A_T(V\\times_TU)=A_U(V\\times_TU)$. The unit is module-linear by the semilinearity of restriction. By [lem-weil-pbc-site-restriction-exact], underlying abelian restriction is exact. The forgetful functors are faithful and exact by clause (1) of [lem-weil-pbc-module-sheaves-colimits-forgetful]. They detect exactness: the underlying cohomology of a three-term module complex is its abelian cohomology, and a module with zero underlying abelian sheaf is zero. Hence module restriction is exact as well. By [lem-weil-pbc-exact-functor-complex-cohomology], it preserves quasi-isomorphisms.",
+   "uses": [
     "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-direct-image",
     "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), exact forgetful functor; sites.tex Tags 00XZ and 00XR, exact localized restriction; etale-cohomology.tex Tag 03S2 (section-extension-by-zero), inverse image as restriction"
+   }
+  },
+  {
+   "text": "Exactness in Step 4 makes $j^*K\\to j^*I$ a quasi-isomorphism, and [lem-pur-kinjective-restrict-localized] makes $j^*I$ K-injective on the localized ringed site of Step 2. The additive functor $j_*$ commutes with the finite direct sums, shifts and cone matrices in [def-weil-abstract-derived-category]: apply it entry by entry, using additivity to preserve the minus signs and sums. Thus its termwise functor on homotopy categories followed by localization is exact. Apply [lem-weil-pbc-kinjective-total-derived], using Step 1 on $U$ for existence of K-injective replacements. Its computation clause identifies $Rj_*j^*K$ with $j_*j^*I$. This is the unbounded total derived functor, with no boundedness assumption.",
+   "uses": [
     "lem-pur-kinjective-restrict-localized",
     "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-sheafification-plus-theorem"
+    "lem-weil-pbc-kinjective-total-derived"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI (lemma-restrict-K-injective-to-open); etale-cohomology.tex Tag 03S2 (section-extension-by-zero); derived.tex Tag 070K (lemma-enough-K-injectives-implies); sites.tex Tags 00WB (theorem-plus) and 00WH (proposition-sheafification-adjoint), using their displayed plus formula"
+    "place": "Tag 08FI (lemma-restrict-K-injective-to-open); derived.tex Tag 070K (lemma-enough-K-injectives-implies)"
    }
   },
   {
-   "text": "Extend [lem-kun-04ca] from abelian sheaves to left $A$-modules as follows. An $A_S$-action is equivalently a compatible family of scalar endomorphisms indexed by $a\\in A$: using the local representatives and their refinement equality proved in Step 2, for a local section of $A_S$ represented on a cover by constants $a_\\lambda$, act on that cover by $a_\\lambda$ and glue; equality of representatives and the module axioms are local [def-weil-pbc-constant-sheaf], [def-weil-sheaf-of-modules-category]. Apply $i_*$ to these endomorphisms to obtain its module action. Conversely, for an abelian sheaf supported on $Z$, transport its scalar endomorphisms through the full faithfulness and essential-image equivalence of [lem-kun-04ca]. Faithfulness transports the additive, multiplicative and unit relations, and a map is $A$-linear exactly when it commutes with these scalar endomorphisms. Thus $i_*$ is fully faithful on left modules, with essential image the module sheaves having zero stalks off $Z$. Its inverse on that image is the abelian inverse image $i^*$ endowed with the transported action. This works for noncommutative $A$. Moreover $i_*$ is exact: on $Z$ the stalks are the original stalks by [lemma-openclosed-stalk-lowerstar], and off $Z$ they vanish by the essential-image assertion. Apply [prop-weil-pbc-geometric-stalks-exact] to a short exact module sequence, forgetting scalars. The cohomology of its pushed-forward three-term complex has zero geometric stalks, so is zero by [lemma-weil-pbc-geometric-stalk-conservative] applied to $0\\to H$. Exactness of modules is detected on underlying abelian sheaves by their kernel and cokernel formulas [def-weil-sheaf-of-modules-category]. By [lem-weil-pbc-exact-functor-complex-cohomology], termwise $i_*$ preserves quasi-isomorphisms and defines its exact derived functor without a resolution.",
+   "text": "Extend [lem-kun-04ca] from abelian sheaves to left $A$-modules as follows. An $A_S$-action is equivalently a compatible family of scalar endomorphisms indexed by $a\\in A$: using the local representatives and their refinement equality established in Step 3, for a local section of $A_S$ represented on a cover by constants $a_\\lambda$, act on that cover by $a_\\lambda$ and glue; equality of representatives and the module axioms are local [def-weil-pbc-constant-sheaf], [def-weil-sheaf-of-modules-category]. Apply $i_*$ to these endomorphisms to obtain its module action. Conversely, for an abelian sheaf supported on $Z$, transport its scalar endomorphisms through the full faithfulness and essential-image equivalence of [lem-kun-04ca]. Faithfulness transports the additive, multiplicative and unit relations, and a map is $A$-linear exactly when it commutes with these scalar endomorphisms. Thus $i_*$ is fully faithful on left modules, with essential image the module sheaves having zero stalks off $Z$. Its inverse on that image is the abelian inverse image $i^*$ endowed with the transported action. This works for noncommutative $A$. Moreover $i_*$ is exact: on $Z$ the stalks are the original stalks by [lemma-openclosed-stalk-lowerstar], and off $Z$ they vanish by the essential-image assertion. Apply [prop-weil-pbc-geometric-stalks-exact] to a short exact module sequence, forgetting scalars. The cohomology of its pushed-forward three-term complex has zero geometric stalks, so is zero by [lemma-weil-pbc-geometric-stalk-conservative] applied to $0\\to H$. Exactness of modules is detected on underlying abelian sheaves by their kernel and cokernel formulas [def-weil-sheaf-of-modules-category]. By [lem-weil-pbc-exact-functor-complex-cohomology], termwise $i_*$ preserves quasi-isomorphisms and defines its exact derived functor without a resolution.",
    "uses": [
     "lem-kun-04ca",
     "def-weil-pbc-constant-sheaf",
@@ -80,7 +114,7 @@
    }
   },
   {
-   "text": "For a left $A_T$-module sheaf $N$, set $F(N)=\\ker(N\\to j_*j^*N)$. Its sections on an etale $V\\to T$ are $\\ker(N(V)\\to N(V\\times_TU))$, by Step 2 and the sectionwise kernel formula [def-weil-sheaf-of-modules-category]. Over $U$ the restriction map is the identity, so $F(N)$ has zero stalks off $Z$. Step 3 gives a canonical supported-unit isomorphism $F(N)\\simeq i_*H(N)$, with $H(N)=i^*F(N)$ carrying its transported $A$-action. Also $j^*i_*M=0$: its value on an object over $U$ is $M(\\varnothing)=0$. Hence every map $i_*M\\to N$ has zero composite to $j_*j^*N$ by naturality of the open unit. The kernel universal property and full faithfulness of Step 3 give natural additive bijections $\\operatorname{Hom}_T(i_*M,N)=\\operatorname{Hom}_T(i_*M,F(N))=\\operatorname{Hom}_Z(M,H(N))$. Thus $i_*\\dashv H$ on sheaves, with counit $i_*H(N)\\simeq F(N)\\hookrightarrow N$. This constructs the sheaf right adjoint explicitly rather than taking its formula from the proof of [lem-exc-closed-ambient], whose statement asserts only a derived adjoint.",
+   "text": "For a left $A_T$-module sheaf $N$, set $F(N)=\\ker(N\\to j_*j^*N)$. Its sections on an etale $V\\to T$ are $\\ker(N(V)\\to N(V\\times_TU))$, by Step 4 and the sectionwise kernel formula [def-weil-sheaf-of-modules-category]. Over $U$ the restriction map is the identity, so $F(N)$ has zero stalks off $Z$. Step 6 gives a canonical supported-unit isomorphism $F(N)\\simeq i_*H(N)$, with $H(N)=i^*F(N)$ carrying its transported $A$-action. Also $j^*i_*M=0$: its value on an object over $U$ is $M(\\varnothing)=0$. Hence every map $i_*M\\to N$ has zero composite to $j_*j^*N$ by naturality of the open unit. The kernel universal property and full faithfulness of Step 6 give natural additive bijections $\\operatorname{Hom}_T(i_*M,N)=\\operatorname{Hom}_T(i_*M,F(N))=\\operatorname{Hom}_Z(M,H(N))$. Thus $i_*\\dashv H$ on sheaves, with counit $i_*H(N)\\simeq F(N)\\hookrightarrow N$. This constructs the sheaf right adjoint explicitly rather than taking its formula from the proof of [lem-exc-closed-ambient], whose statement asserts only a derived adjoint.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "lem-exc-closed-ambient"
@@ -109,7 +143,7 @@
    }
   },
   {
-   "text": "Naturality of $N\\to j_*j^*N$ makes $d_I$ restrict to the kernels $F(I^q)$, and the square of the restricted differential vanishes by cancellation of the kernel inclusion. Naturality of the supported-unit isomorphisms in Step 4 then identifies this kernel complex with $i_*H(I)$. The maps are the termwise sheaf counit of Step 4 and the termwise open unit of Step 2. By Step 5 and [lem-weil-pbc-cochain-complexes-degreewise-exact], they give a short exact sequence of complexes $0\\to i_*H(I)\\to I\\to j_*j^*I\\to0$.",
+   "text": "Naturality of $N\\to j_*j^*N$ makes $d_I$ restrict to the kernels $F(I^q)$, and the square of the restricted differential vanishes by cancellation of the kernel inclusion. Naturality of the supported-unit isomorphisms in Step 7 then identifies this kernel complex with $i_*H(I)$. The maps are the termwise sheaf counit of Step 7 and the termwise open unit of Step 4. By Step 8 and [lem-weil-pbc-cochain-complexes-degreewise-exact], they give a short exact sequence of complexes $0\\to i_*H(I)\\to I\\to j_*j^*I\\to0$.",
    "uses": [
     "lem-weil-pbc-cochain-complexes-degreewise-exact"
    ],
@@ -120,7 +154,7 @@
    }
   },
   {
-   "text": "The additive functor $H$ commutes termwise with finite direct sums and the shift and cone matrices [def-weil-abstract-derived-category], hence followed by localization is an exact functor on homotopy categories. Step 1 and [lem-weil-pbc-kinjective-total-derived] construct its total right derived functor $RH$, represented at $K$ by $H(I)$. Since $i_*$ is exact and left adjoint to $H$, [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $H(I)$ K-injective. By [lem-weil-pbc-termwise-adjunction-homotopy] and [lem-weil-pbc-kinjective-hom-derived], for every complex $M$ on $Z$ there are natural bijections $\\operatorname{Hom}_{D(T)}(Qi_*M,QI)=\\operatorname{Hom}_{K(T)}(i_*M,I)=\\operatorname{Hom}_{K(Z)}(M,H(I))=\\operatorname{Hom}_{D(Z)}(QM,QH(I))$. Here $Q$ is localization and $K(S)$ is the homotopy category of module complexes. Exactness of $i_*$ and the construction of $RH$ show that these expressions invert quasi-isomorphisms in the inputs. The Hom bijection into K-injectives identifies every derived morphism with a unique homotopy class, so the displayed naturality descends to both derived variables. Thus $RH$ is right adjoint to $i_*$. Identify it with $Ri^!$ of [lem-exc-closed-ambient] by the unique adjoint isomorphism compatible with the bijections (each represents the same Hom functor). The identity of $H(I)$ corresponds to $i_*H(I)\\simeq F(I)\\hookrightarrow I$, so the first map in Step 6 is the derived counit.",
+   "text": "The additive functor $H$ commutes termwise with finite direct sums and the shift and cone matrices [def-weil-abstract-derived-category], hence followed by localization is an exact functor on homotopy categories. Step 1 and [lem-weil-pbc-kinjective-total-derived] construct its total right derived functor $RH$, represented at $K$ by $H(I)$. Since $i_*$ is exact and left adjoint to $H$, [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $H(I)$ K-injective. By [lem-weil-pbc-termwise-adjunction-homotopy] and [lem-weil-pbc-kinjective-hom-derived], for every complex $M$ on $Z$ there are natural bijections $\\operatorname{Hom}_{D(T)}(Qi_*M,QI)=\\operatorname{Hom}_{K(T)}(i_*M,I)=\\operatorname{Hom}_{K(Z)}(M,H(I))=\\operatorname{Hom}_{D(Z)}(QM,QH(I))$. Here $Q$ is localization and $K(S)$ is the homotopy category of module complexes. Exactness of $i_*$ and the construction of $RH$ show that these expressions invert quasi-isomorphisms in the inputs. The Hom bijection into K-injectives identifies every derived morphism with a unique homotopy class, so the displayed naturality descends to both derived variables. Thus $RH$ is right adjoint to $i_*$. Identify it with $Ri^!$ of [lem-exc-closed-ambient] by the unique adjoint isomorphism compatible with the bijections (each represents the same Hom functor). The identity of $H(I)$ corresponds to $i_*H(I)\\simeq F(I)\\hookrightarrow I$, so the first map in Step 9 is the derived counit.",
    "uses": [
     "def-weil-abstract-derived-category",
     "lem-weil-pbc-kinjective-total-derived",
@@ -136,7 +170,7 @@
    }
   },
   {
-   "text": "We also identify the second arrow as the derived open unit. The restriction $j^*$ is exact by Step 2 and left adjoint to $j_*$: the abelian inverse/direct-image adjunction [def-weil-pbc-inverse-image] restricts to $A$-linear maps, since its naturality with respect to each scalar endomorphism makes a map commute with $a\\in A$ on one side exactly when its adjoint does on the other, and local constant representatives extend this to $A_S$-linearity. Therefore [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $j_*J$ K-injective when $J$ is K-injective. Applying [lem-weil-pbc-termwise-adjunction-homotopy] and [lem-weil-pbc-kinjective-hom-derived] gives $\\operatorname{Hom}_{D(U)}(j^*QM,QJ)=\\operatorname{Hom}_{K(U)}(j^*M,J)=\\operatorname{Hom}_{K(T)}(M,j_*J)=\\operatorname{Hom}_{D(T)}(QM,Qj_*J)$. This is the adjunction $j^*\\dashv Rj_*$. With $M=I$ and $J=j^*I$, the identity corresponds exactly to the termwise restriction $I\\to j_*j^*I$ in Step 6.",
+   "text": "We also identify the second arrow as the derived open unit. The restriction $j^*$ is exact by Step 4 and left adjoint to $j_*$: the abelian inverse/direct-image adjunction [def-weil-pbc-inverse-image] restricts to $A$-linear maps, since its naturality with respect to each scalar endomorphism makes a map commute with $a\\in A$ on one side exactly when its adjoint does on the other, and local constant representatives extend this to $A_S$-linearity. Therefore [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $j_*J$ K-injective when $J$ is K-injective. Applying [lem-weil-pbc-termwise-adjunction-homotopy] and [lem-weil-pbc-kinjective-hom-derived] gives $\\operatorname{Hom}_{D(U)}(j^*QM,QJ)=\\operatorname{Hom}_{K(U)}(j^*M,J)=\\operatorname{Hom}_{K(T)}(M,j_*J)=\\operatorname{Hom}_{D(T)}(QM,Qj_*J)$. This is the adjunction $j^*\\dashv Rj_*$. With $M=I$ and $J=j^*I$, the identity corresponds exactly to the termwise restriction $I\\to j_*j^*I$ in Step 9.",
    "uses": [
     "def-weil-pbc-inverse-image",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
@@ -150,7 +184,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to Step 6. Its first, middle and last complexes represent $i_*Ri^!K$, $K$ and $Rj_*j^*K$ by Steps 7, 1 and 2; Steps 7 and 8 identify the first two arrows with the counit and unit. This gives the asserted distinguished triangle. To check naturality on the entire derived category, its boundary can be described as $-p q^{-1}$: for $X=i_*H(I)$, $Y=I$ and $B=j_*j^*I$, the cone of $X\\to Y$ has its natural quasi-isomorphism $q:\\operatorname{Cone}(X\\to Y)\\to B$, and $p$ is its projection to $X[1]$. A map of representatives induces the maps of this short exact sequence and cone, so boundary naturality is exactly the naturality clause of the cited triangle node. If $f,g:I\\to I'$ are homotopic, additivity sends a homotopy to homotopies under $H$, the identity, and $j_*j^*$; hence the three maps of derived terms, and therefore the naturality equation, depend only on the homotopy class. Every derived morphism between these K-injective representatives has such a class by [lem-weil-pbc-kinjective-hom-derived]. Functorial replacement of Step 1 gives compatibility for input chain maps; a quasi-isomorphism induces a quasi-isomorphism between the replacements by naturality of their augmentation, hence a homotopy equivalence by the same Hom node. All three additive constructions preserve that homotopy equivalence, so the comparison triangles are isomorphic. Consequently the construction descends through localization, is independent of the chosen representative, and is natural for all derived morphisms. All complexes are unbounded and no cohomological or constructibility hypothesis has been imposed.",
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to Step 9. Its first, middle and last complexes represent $i_*Ri^!K$, $K$ and $Rj_*j^*K$ by Steps 10, 1 and 5; Steps 10 and 11 identify the first two arrows with the counit and unit. This gives the asserted distinguished triangle. To check naturality on the entire derived category, its boundary can be described as $-p q^{-1}$: for $X=i_*H(I)$, $Y=I$ and $B=j_*j^*I$, the cone of $X\\to Y$ has its natural quasi-isomorphism $q:\\operatorname{Cone}(X\\to Y)\\to B$, and $p$ is its projection to $X[1]$. A map of representatives induces the maps of this short exact sequence and cone, so boundary naturality is exactly the naturality clause of the cited triangle node. If $f,g:I\\to I'$ are homotopic, additivity sends a homotopy to homotopies under $H$, the identity, and $j_*j^*$; hence the three maps of derived terms, and therefore the naturality equation, depend only on the homotopy class. Every derived morphism between these K-injective representatives has such a class by [lem-weil-pbc-kinjective-hom-derived]. Functorial replacement of Step 1 gives compatibility for input chain maps; a quasi-isomorphism induces a quasi-isomorphism between the replacements by naturality of their augmentation, hence a homotopy equivalence by the same Hom node. All three additive constructions preserve that homotopy equivalence, so the comparison triangles are isomorphic. Consequently the construction descends through localization, is independent of the chosen representative, and is natural for all derived morphisms. All complexes are unbounded and no cohomological or constructibility hypothesis has been imposed.",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle",
     "lem-weil-pbc-kinjective-hom-derived"
@@ -170,13 +204,17 @@
   "lem-pur-kinjective-degreewise-existence",
   "lem-weil-pbc-open-immersion-etale",
   "lem-weil-pbc-etale-site-localization-open",
+  "lem-pur-ring-presheaf-sheafification-localization",
+  "lem-weil-pbc-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
   "lem-weil-pbc-etale-inverse-image-restriction",
   "def-weil-pbc-direct-image",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-pur-kinjective-restrict-localized",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-sheafification-plus-theorem",
   "lem-kun-04ca",
   "lemma-openclosed-stalk-lowerstar",
   "prop-weil-pbc-geometric-stalks-exact",
@@ -264,10 +302,38 @@
    "results": "8 hits: DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff",
    "date": "2026-10-16",
    "verdict": "no match; recollement search gives only generic t-structure and fraction results, and the source grep has no matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed support triangle for a closed immersion and open complement in derived category of etale sheaves",
+   "results": "8 hits: AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.instIsClosedImmersionInclusion, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap",
+   "date": "2026-10-17",
+   "verdict": "no match; hits concern scheme immersions or etale loci, not this derived sheaf triangle"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, distinguished triangle, closed immersion, open immersion",
+   "results": "0 hits; parser reported unexpected end of input (expected in)",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query parser rejected this pattern"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural distinguished triangle i_* Ri^! K to K to Rj_* j^* K for a closed immersion",
+   "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.triangleOfSES_distinguished, DerivedCategory.triangleOfSES, DerivedCategory.mem_distTriang_iff, CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, HomotopyCategory.Pretriangulated.isomorphic_distinguished, CategoryTheory.ObjectProperty.IsTriangulatedClosed₂.mk",
+   "date": "2026-10-17",
+   "verdict": "no match; generic derived-category SES triangles do not state the etale closed-support construction"
+  },
+  {
+   "tool": "grep",
+   "query": "K-injective|distinguished triangle|closed immersion [Mathlib/Algebra/Homology]",
+   "results": "0 hits in Mathlib/Algebra/Homology for this combined pattern",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -302,59 +368,23 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-existence",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-exc-closed-support-triangle",
   "worker": "stage1",
-  "summary": "Expanded the imported one-paragraph argument into nine checked steps. Reused existing nodes for all non-elementary ingredients; proved the sheaf support adjunction and injective restriction explicitly rather than using another node proof. Clarified arbitrary finite-ring left-module coefficients and total unbounded derived functors, and checked both adjunction maps and naturality. No new nodes.",
-  "blueprint": "Realizes every sentence of the blueprint Proof: injective-term resolution (1), open K-injective computation (2), closed supported kernel and adjunction (3-4,7), free-module extension/surjectivity (5), short exact complex sequence (6), triangle and naturality (8-9).",
+  "summary": "Repair of the human return dated 2026-10-17: replaced the 2276-character Step 2 by four short steps citing existing independent nodes for ring-sheafification localization, underlying-set sheafification and local representatives, and exact restriction/forgetful functors. Retained the proof route and all other steps, with step references renumbered. No duplicate nodes created; the statement and Lean record are unchanged.",
+  "blueprint": "Realizes the blueprint proof: choose an injective-term K-injective resolution; compute restriction and derived direct image; identify the supported kernel and closed adjunction; prove surjectivity on injective terms; form the short exact sequence; derive the triangle and identify its counit/unit maps and naturality.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
-    "why": "Generic tool: Module sheaves over arbitrary ring sheaves are Grothendieck. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representatives and refinement equality for coefficient sections; a generic sheafification tool, with no corresponding result in this unit."
    },
    {
-    "node": "lem-pur-kinjective-degreewise-existence",
-    "why": "Generic tool: Functorial K-injective resolutions with injective terms. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Exactness of abelian restriction to a localized site; a generic site-theoretic tool needed to justify exact module restriction."
    },
    {
-    "node": "lem-weil-pbc-etale-site-localization-open",
-    "why": "Generic tool: The localized small etale site at an etale open is the small etale site of the open. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
-   },
-   {
-    "node": "lem-weil-pbc-etale-inverse-image-restriction",
-    "why": "Generic tool: Inverse image along an etale morphism is restriction. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
-   },
-   {
-    "node": "lem-pur-kinjective-restrict-localized",
-    "why": "Generic tool: Restriction to a localized ringed site preserves K-injectivity. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Generic tool: Enough K-injectives compute total right derived functors. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
-   },
-   {
-    "node": "lem-kun-04ca",
-    "why": "Generic tool: Pushforward along a closed immersion. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
-   },
-   {
-    "node": "lemma-openclosed-stalk-lowerstar",
-    "why": "Generic tool: Stalks of $i_*$ on $Z$. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
-   },
-   {
-    "node": "lemma-weil-pbc-geometric-stalk-conservative",
-    "why": "Generic tool: Conservativity of geometric stalks. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
-   },
-   {
-    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "why": "Generic tool: A right adjoint of an exact functor preserves K-injective complexes. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
-   },
-   {
-    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-    "why": "Generic tool: An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise. Used only for its stated assertion, not to replace the exceptional-adjoint unit route; this unit has no corresponding general tool node."
-   },
-   {
-    "node": "lem-weil-pbc-sheafification-plus-theorem",
-    "why": "Generic sheafification tool: its explicit double-plus formula supplies local constant representatives and equality after refinement, used to justify the coefficient identifications and scalar actions; no corresponding tool in this unit."
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Clause (1) gives faithful exact scalar-forgetting for arbitrary sheaves of rings; used to detect exactness of module restriction, without a commutativity assumption."
    }
   ]
  },
@@ -370,15 +400,18 @@
   "lemma-weil-pbc-geometric-stalk-conservative",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-sheafification-plus-theorem"
+  "lem-weil-pbc-sheafification-plus-theorem",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NL-1995edda9",
-  "group": "NL",
+  "reviewer": "NT-cc-Q54-4cce5901b",
+  "group": "Q54",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-1995edda9 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and chapter/unit route. Verified all nine steps, noncommutative coefficients, unbounded resolutions, counit/unit maps, naturality, edge cases, duplicate candidates, and acyclicity. Accepted the twelve declared tool uses. No repairs needed; detailed findings are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-4cce5901b (reviewer sub-agent of L); spot-checked: I read the item and all 12 steps in full, along with the full statement of every cited node, the unit sk-prop-sf-existence and the chapter. The blueprint is identical in master, main-20261015 and main-20261017. I also read Stacks 0A45 (etale-cohomology l.14072), 093X (sites-cohomology l.1962) and 08FI (l.4314). The statement is the blueprint's, made precise without weakening: finite A, possibly noncommutative, with left A_S-modules in unbounded D(Mod(A_S)), the same coefficient category as lem-exc-closed-ambient. The first two arrows are named as the counit and unit. I tested Z empty, Z=T, K=0, A=0 and M_2(F_2). Step checks: in Step 2 the site and topology identification and the ring isomorphism e_P apply to arbitrary rings. In Step 4 forgetting scalars is faithful and exact, and the step proves it reflects exactness. In Step 5, lem-pur-kinjective-restrict-localized covers any sheaf of rings: its statement and Lean record use RingCat, and the commutative wording in def-pur-kinjective-complex is incidental. In Step 6, 04CA's scheme conventions impose no Noetherian hypothesis. Step 8 is the 093X free-module proof. I checked the Yoneda identity x|_{ac}=(x|_a)|_c. The existing abelian-sheaf node lem-weil-pbc-injective-sheaf-mono-restriction would not suffice, because an injective A_T-module need not be an injective abelian sheaf. Step 10 has the adjunction the right way round (u=H, v=i_* exact) and identifies RH with Ri^! by uniqueness of adjoints. Step 12 shows the boundary map depends only on homotopy classes, so the triangle is natural on all of D(T). There are no new nodes and no cycle among the 197 reachable nodes, and proof_deps equals the union of the steps' uses. I found no duplicates: the closest candidates are all pro-étale/condensed or state other results. All 14 off-route statements are declared, and I accept the 3 new tool uses (site-sheafification-sections-local, site-restriction-exact, module-sheaves-colimits-forgetful) as generic black-box tools. Note for the merge: the maintainer-owned tool_uses still lists lem-weil-pbc-sheafification-plus-theorem, which is no longer cited. I left it unedited because it is not split-owned. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
