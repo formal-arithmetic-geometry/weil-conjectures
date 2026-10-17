@@ -10,9 +10,81 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix z and write C_z=\\mathscr K(z,c), D_z=\\mathscr K(z,d). Postcomposition with L is L_z:C_z\\to D_z. For a=T's prescribed cone apex in D_z, form the right slice (D_z)_{/a} and its source projection q_a, then form E'_z=C_z\\times_{D_z,L_z,q_a}(D_z)_{/a}. The supporting coherent-witness statement gives that E'_z is a quasicategory and that (U_za,\\epsilon_a) is terminal. Its slice factor records an actual arrow simplex ending at a, so it retains the cone-edge and all higher comparison data needed below.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-adjunction-coherent-witnesses",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Observation 4.3.4 and Proposition 4.3.6, pp. 840--844; right-slice formulation via Kerodon 018F and 01KX."
+   }
+  },
+  {
+   "text": "The hypotheses of the supporting statement are exactly those of the item: $\\mathscr K$ locally quasicategorical, $L,U,\\eta,\\epsilon$ an adjunction in the homotopy 2-category, an object $z$ and a vertex $a\\in D_z$; no further witness is chosen. The distinguished vertex is admissible: $Ua\\in C_z$, and the counit edge $\\epsilon_a:LUa\\to a$ is a $1$-simplex $\\Delta^0\\star\\Delta^0\\to D_z$ with last vertex $a$, i.e. a vertex of $(D_z)_{/a}$, whose source $q_a(\\epsilon_a)=LUa=L_z(Ua)$ agrees with the image of $Ua$. Hence $(Ua,\\epsilon_a)$ is a vertex of $E'_z$, and it is the one the supporting statement declares terminal. Terminality is asserted in the right-slice pullback itself, so no identification with the fat comma or replacement of a slice arrow by a homotopic diagonal is made.",
+   "uses": [
+    "lem-coef-homotopy-adjunction-coherent-witnesses",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Observation 4.3.4 and Theorems 4.3.9 and 4.3.11, pp. 840--844."
+   }
+  },
+  {
+   "text": "Unpack T in C_z and D_z. Its 0\\to1 hom gives x:\\partial\\Delta^m\\to C_z. The 0\\to2 hom, including its apex a and the specified edge from the last 0\\to1 vertex to the apex, is equivalently a map \\partial\\Delta^m\\star\\Delta^0\\to D_z restricting on \\partial\\Delta^m to L_zx and on the final vertex to a. By the degreewise definition of the right slice, this is a map \\partial\\Delta^m\\to(D_z)_{/a}; together with x it gives a map a_T:\\partial\\Delta^m\\to E'_z. Its last vertex is literally (U_za,\\epsilon_a), because T prescribes Ua, a and the counit edge. Every face and degeneracy is preserved by restriction, so this identification is strict on the entire boundary.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-adjunction-coherent-witnesses",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Notation 4.2.6 and Observation 4.3.4, pp. 835--841; the join-slice model is Kerodon Construction 4.6.5.1 (01KX)."
+   }
+  },
+  {
+   "text": "Apply the dual final-object boundary criterion to the terminal object (U_za,\\epsilon_a) of the quasicategory E'_z over the point. Since m\\ge1, the boundary map a_T with its last vertex equal to that terminal object extends to a map \\widetilde a_T:\\Delta^m\\to E'_z restricting to a_T on all of \\partial\\Delta^m. The criterion is an exact simplicial lifting statement, so no boundary simplex is changed during the extension.",
+   "uses": [
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-homotopy-adjunction-coherent-witnesses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Observation 4.3.4 and Proposition 4.3.6, pp. 840--844."
+   }
+  },
+  {
+   "text": "Write \\widetilde a_T as its C_z component \\bar x:\\Delta^m\\to C_z and its right-slice component \\bar s:\\Delta^m\\star\\Delta^0\\to D_z. The pullback equation says that the initial face of \\bar s is exactly L_z\\bar x, while its final vertex is a; hence \\bar s is the 0\\to2 cone hom and \\bar x is the 0\\to1 hom of a simplicial functor \\overline T:3[\\Delta^m]\\to\\mathscr K, with fixed objects z,c,d and 1\\to2 arrow L. The restriction \\widetilde a_T|_{\\partial\\Delta^m}=a_T gives equality of both hom-simplicial maps, including the cone edge and all degeneracies, so \\overline T|_{3[\\partial\\Delta^m]}=T literally.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-adjunction-coherent-witnesses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Notation 4.2.6 and Observation 4.3.4, pp. 835--841."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-homotopy-adjunction-coherent-witnesses",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-slice-right-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Agent-written right-slice repair of the coherent counit boundary argument, based on Riehl--Verity Observation 4.3.4, Proposition 4.3.6 and Theorems 4.3.9/4.3.11; online source read, archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-coherent-adjunction-extension",
@@ -77,7 +149,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex adjunction before the inverse limit: supporting universal counit boundary extension for its enriched coherent adjunction.",
+   "place": "Proof paragraph 2, middle derived mapping-complex adjunction before the inverse limit: terminal counit boundary extension for the coherent adjunction.",
    "via": [
     "lem-coef-enriched-coherent-adjunction-extension",
     "lem-coef-linear-monad-tensor-enrichment",
@@ -88,5 +160,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-counit-cone-boundary-extension",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by replacing the fat comma with the pullback E'_z=C_z×_{D_z}(D_z)_{/a} of the right slice. The supporting coherent-witness statement now defines the fixed simplicial triangle witness and asserts terminality in this right-slice pullback. The boundary map is formed from the literal join-slice cone, and the filler unpacks through the pullback equation, giving strict agreement on every boundary hom-simplex.",
+  "blueprint": "The steps realize the ancestor proof paragraph's coherent derived adjunction before the inverse-limit calculation, specifically its universal counit boundary extension, as consumed by lem-coef-enriched-coherent-adjunction-extension."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-f219a7a8f",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-f219a7a8f (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement (def-cbc-enhanced-diagrams-cones, def-coef-coherent-adjunction-data, lem-coef-infinity-adjunction-mapping-equivalence, lem-coef-infinity-slice-right-fibration, lem-coef-infinity-relative-initial-boundary), the consumer lem-coef-enriched-coherent-adjunction-extension, the unit and the ancestor. Riehl-Verity is not in the local literature, so proof_origin=agent and the WANTED line are correct, and I checked the mathematics directly. X^▷ equals X⋆Δ^0 in the slice node's join convention. A functor 3[X]→K is exactly the pair x, s with s|_X=L_z x. So T|∂ is a map a_T:∂Δ^m→E'_z=C_z×_{D_z}(D_z)_{/a} with last vertex (Ua,εa); join-slice works for disconnected ∂Δ^1 because the apex is fixed. The final clause of relative-initial-boundary over Δ^0 (Map_{Δ^0}=Δ^0) gives the filler for m≥1, and unpacking the pullback gives a strict 3[Δ^m] extension. Small case m=1 is the factorisation of α through the counit. The new node is true: E'_z→C_z is a pulled-back right fibration with fibres Map(Lb,a), and the mapping equivalence (L_z⊣U_z inherited via 2-functoriality of K(z,-)) makes (Ua,εa) represent it, hence terminal. It is not a duplicate: def-coef-coherent-adjunction-data has the fat comma only, mapping-equivalence is not terminality, represented-family-slice-fibration and terminal-boundary nodes differ. It does not restate an item clause. Repairs (B1/B3, two faults): (1) new node statement rewritten to remove proof language and the unused 'chosen witness β_L / dual witness exists coherently' clause, now fully self-contained (K, L, U, η, ε with triangle identities in homotopy categories, z, a, E'_z, Ua, ε_a; conclusion: quasicategory and contractible Map into (Ua,εa)); stmt_deps reduced to def-cbc-enhanced-diagrams-cones and lem-coef-infinity-slice-right-fibration; title and source place adjusted. (2) Item step 2 no longer appeals to the nonexistent β_L hypothesis or padding citations: it checks that the hypotheses match and that (Ua,ε_a) is a vertex of E'_z; uses = new node + slice node; proof_deps recomputed. No statement weakened; route stays inside sk-prop-sf-biduality-general; no tool_uses; no SGA.; 2 file(s) fixed by the reviewer"
  }
 }

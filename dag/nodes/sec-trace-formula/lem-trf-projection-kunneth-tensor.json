@@ -2,7 +2,7 @@
  "id": "lem-trf-projection-kunneth-tensor",
  "kind": "statement",
  "title": "Exceptional Kunneth for a projection equals exceptional tensor after dualizing exchange",
- "statement": "Use the finite coefficient ring $A=A_{E,n}$ and normalized constructible operation datum of [def-fix-six-functor-datum]. Let $X,Y$ be separated finite-type $k$-schemes with admissible structure morphism $a_Y:Y\\to s=\\operatorname{Spec}k$ and admissible projection $p_1:X\\times_kY\\to X$, and put $a_X:X\\to s$ for the structure morphism, $p_2:X\\times_kY\\to Y$ for the second projection, and $\\omega_Y=a_Y^!A_s$. Let $M\\in D^b_{ctf}(X,A)$ and assume the displayed operations lie in the finite-Tor constructible domains of [def-trf-admissibility]. Use the exceptional Kunneth map $\\alpha_{\\operatorname{id}_X,a_Y}:M\\boxtimes\\omega_Y\\to p_1^!M$ of [def-sf-kv-maps](ii), with its specified $\\mathrm{Ku}_!$ and counits. Define $\\chi_{X,Y}:p_2^*\\omega_Y\\to p_1^!A_X$ to be the exceptional adjoint of\n$$Rp_{1!}p_2^*\\omega_Y\\xrightarrow{\\operatorname{Ex}_!^{-1}}a_X^*Ra_{Y!}\\omega_Y\\xrightarrow{a_X^*(\\varepsilon_{a_Y})}A_X,$$\nwhere the exchange is the compact-support exchange in the Cartesian structure square and the counit belongs to $Ra_{Y!}\\dashv a_Y^!$. For $T_{p_1}:p_1^!B\\otimes p_1^*N\\to p_1^!(B\\otimes N)$ use the projection-formula/counit transpose of [lem-trf-cohomological-evaluation-calculus]. Then, with canonical unit identifications and signed symmetry $\\sigma$,\n$$\\alpha_{\\operatorname{id}_X,a_Y}=T_{p_1}\\circ(\\chi_{X,Y}\\otimes1)\\circ\\sigma:\n p_1^*M\\otimes p_2^*\\omega_Y\\longrightarrow p_1^!M.$$\nConsequently the tensor--Hom transpose defining $\\kappa_{M,N}$ in [def-sf-kv-maps](iv) is exactly second-factor evaluation followed by this exceptional tensor composite. For $Y=X$, the map $\\chi_{X,X}$ is the $\\chi$ of [lem-trf-cohomological-evaluation-calculus](d), with the project's projection order.",
+ "statement": "Use the finite coefficient ring $A=A_{E,n}$ and normalized constructible operation datum of [def-fix-six-functor-datum]. Let $X,Y$ be separated finite-type $k$-schemes with admissible structure morphism $a_Y:Y\\to s=\\operatorname{Spec}k$ and admissible projection $p_1:X\\times_kY\\to X$, and put $a_X:X\\to s$ for the structure morphism, $p_2:X\\times_kY\\to Y$ for the second projection, and $\\omega_Y=a_Y^!A_s$. Let $M\\in D^b_{ctf}(X,A)$ and assume the displayed operations lie in the finite-Tor constructible domains of [def-trf-admissibility]. Use the exceptional Kunneth map $\\alpha_{\\operatorname{id}_X,a_Y}:M\\boxtimes\\omega_Y\\to p_1^!M$ of [def-sf-kv-maps](ii), with its specified $\\mathrm{Ku}_!$ and counits. Define $\\chi_{X,Y}:p_2^*\\omega_Y\\to p_1^!A_X$ to be the exceptional adjoint of\n$$Rp_{1!}p_2^*\\omega_Y\\xrightarrow{\\operatorname{Ex}_!^{-1}}a_X^*Ra_{Y!}\\omega_Y\\xrightarrow{a_X^*(\\varepsilon_{a_Y})}A_X,$$\nwhere the exchange is the compact-support exchange in the Cartesian structure square and the counit belongs to $Ra_{Y!}\\dashv a_Y^!$. For any admissible $g:U\\to V$ and $B,N$ in the indicated finite-Tor constructible domains, define $T_g:g^!B\\otimes g^*N\\to g^!(B\\otimes N)$ as the $Rg_!\\dashv g^!$ transpose of\n$$Rg_!(g^!B\\otimes g^*N)\\xrightarrow{\\operatorname{PF}_g^{-1}}Rg_!g^!B\\otimes N\\xrightarrow{\\varepsilon_g^!\\otimes1}B\\otimes N,$$\nusing the projection transformation and exceptional counit of [def-exchange-projection] and [def-trf-admissibility]. Then, with canonical unit identifications and signed symmetry $\\sigma$,\n$$\\alpha_{\\operatorname{id}_X,a_Y}=T_{p_1}\\circ(\\chi_{X,Y}\\otimes1)\\circ\\sigma:\n p_1^*M\\otimes p_2^*\\omega_Y\\longrightarrow p_1^!M.$$\nConsequently the tensor--Hom transpose defining $\\kappa_{M,N}$ in [def-sf-kv-maps](iv) is exactly second-factor evaluation followed by this exceptional tensor composite. For $Y=X$, the map $\\chi_{X,X}$ is the $\\chi$ of [lem-trf-cohomological-evaluation-calculus](d), with the project's projection order.",
  "source": {
   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
   "place": "§0.0.3, formula (0.4), and §4.4.3, diagrams (4.14)--(4.15), interchanging the two factors"
@@ -11,11 +11,123 @@
   "def-fix-six-functor-datum",
   "def-trf-admissibility",
   "def-sf-kv-maps",
+  "def-exchange-projection",
+  "prop-functor-package",
   "lem-trf-cohomological-evaluation-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work at the single finite coefficient stage $A=A_{E,n}$, in the specified $D^b_{ctf}$ domains. Put $Z=X\\times_kY$, $p=p_1$, $H=p_2^*\\omega_Y$ and $Q=p^*M\\otimes H=M\\boxtimes\\omega_Y$. The ordered product is [def-trf-external-product], and $\\alpha=\\alpha_{\\operatorname{id}_X,a_Y}$ is the map of [def-sf-kv-maps](ii). The exceptional adjunctions at $a_Y$ and $p$ are the specified constructible ones of [def-trf-admissibility], with the operation datum of [def-fix-six-functor-datum]. All the following pullbacks, tensors and compact-support images are in the domains assumed in the statement.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-trf-admissibility",
+    "def-trf-external-product",
+    "def-sf-kv-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.2--§0.4, finite-Tor convention and ordered external products"
+   }
+  },
+  {
+   "text": "The projection transformation is the specified natural map of [def-exchange-projection]. It is invertible on the inputs used here by [prop-functor-package](5); clause (4) likewise makes the compact-support structure-square exchange invertible. For any admissible $g$, the exceptional adjunction of [def-trf-admissibility] therefore transposes $(\\varepsilon_g^!\\otimes1)\\operatorname{PF}_{g;g^!B,N}^{-1}$ uniquely to $T_g:g^!B\\otimes g^*N\\to g^!(B\\otimes N)$. In particular $T_p$ is defined at $(B,N)=(A_X,M)$ without a cohomological pre-comparison hypothesis. Write $E=a_X^*(\\varepsilon_{a_Y})\\operatorname{Ex}_{!,2}^{-1}:Rp_!H\\to A_X$, where $\\operatorname{Ex}_{!,2}:a_X^*Ra_{Y!}\\omega_Y\\to Rp_!H$ is this compact-support exchange. The definition of $\\chi=\\chi_{X,Y}$ says exactly $\\varepsilon_{p,A_X}Rp_!(\\chi)=E$.",
+   "uses": [
+    "def-exchange-projection",
+    "prop-functor-package",
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(b), (0.2), and §0.4, the BC arrow in (0.4)"
+   }
+  },
+  {
+   "text": "Let $\\sigma_{\\mathrm{in}}:Q\\to H\\otimes p^*M$ be signed symmetry. By the definition of $T_p$ in Step 2, the $Rp_!\\dashv p^!$ adjunct of $T_p(\\chi\\otimes1)\\sigma_{\\mathrm{in}}$ is\n$$\n(\\varepsilon_{p,A_X}\\otimes1_M)\\operatorname{PF}_{p;p^!A_X,M}^{-1}\\,Rp_!(\\chi\\otimes1_M)\\,Rp_!(\\sigma_{\\mathrm{in}}).\n$$\nNaturality of the specified projection transformation [def-exchange-projection] in its first argument gives\n$$\n\\operatorname{PF}_{p;p^!A_X,M}^{-1}Rp_!(\\chi\\otimes1_M)\n=(Rp_!\\chi\\otimes1_M)\\operatorname{PF}_{p;H,M}^{-1}.\n$$\nSubstitute $\\varepsilon_{p,A_X}Rp_!\\chi=E$ from the exceptional-adjoint definition [def-trf-admissibility]. The adjunct is consequently the explicit map\n$$F=(E\\otimes1_M)\\operatorname{PF}_{p;H,M}^{-1}Rp_!(\\sigma_{\\mathrm{in}}):Rp_!Q\\to M.$$\nInvertibility of both projection transformations is [prop-functor-package](5).",
+   "uses": [
+    "def-exchange-projection",
+    "def-trf-admissibility",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(b), (0.2), and §4.4.3, (4.15), expanding the exceptional tensor map"
+   }
+  },
+  {
+   "text": "Now expand [def-sf-kv-maps](i) at $(f_1,f_2)=(\\operatorname{id}_X,a_Y)$ and $(B_1,B_2)=(M,\\omega_Y)$. Its notation becomes $T=U=X$, $V=W=Z$, $u=\\operatorname{id}_X$, $v=p$, and its fibre-product projections are $p:Z\\to X$ and $q=\\operatorname{id}_Z$; $K=M$, $H=p_2^*\\omega_Y$. Apply the canonical map stated in [thm-sf-kunneth-relative] over the separated finite-type base $X$. Its composition comparison with $q=\\operatorname{id}_Z$ is the identity by [prop-functor-package](3). Its projection transformation for $q$ and its base-change exchange for $u=\\operatorname{id}_X$ are identities: in the formulas of [def-exchange-projection] the pullbacks and direct images for the identity, their units and counits, and the identity open-immersion comparisons all reduce to identities under the same normalizations. The projection notation in the relative theorem is the same concrete transformation by [def-sf-pf]. Thus, reading its remaining arrows in order, the relative map is exactly\n$$\nRp_!(p^*M\\otimes H)\\xrightarrow{Rp_!(\\sigma_{\\mathrm{in}})}Rp_!(H\\otimes p^*M)\n\\xrightarrow{\\operatorname{PF}_{p;H,M}^{-1}}Rp_!H\\otimes M\n\\xrightarrow{\\sigma_{\\mathrm{out}}}M\\otimes Rp_!H.\n$$\nHere $\\sigma_{\\mathrm{out}}$ is signed symmetry. This computes the specified relative map from its defining arrows; no exterior-projection compatibility lemma is being applied.",
+   "uses": [
+    "def-sf-kv-maps",
+    "thm-sf-kunneth-relative",
+    "prop-functor-package",
+    "def-exchange-projection",
+    "def-sf-pf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/thm-sf-kunneth-relative.md",
+    "place": "statement, defining composite of the canonical relative product map, specialized to f=id_X and g=p_1"
+   }
+  },
+  {
+   "text": "To finish the definition of $\\mathrm{Ku}_!$, [def-sf-kv-maps](i) appends $\\operatorname{Ex}_{!,1}^{-1}\\otimes\\operatorname{Ex}_{!,2}^{-1}$. The first structure square is an identity square, so $\\operatorname{Ex}_{!,1}=1_M$ with the identity normalization of [prop-functor-package](3) and the formulas of [def-exchange-projection]. The second is precisely the Cartesian square with vertical arrows $p,a_Y$ and horizontal arrows $p_2,a_X$. Consequently\n$$\n\\mathrm{Ku}_!=(1_M\\otimes\\operatorname{Ex}_{!,2}^{-1})\\sigma_{\\mathrm{out}}\\operatorname{PF}_{p;H,M}^{-1}Rp_!(\\sigma_{\\mathrm{in}}).\n$$\nUse [lem-trf-exceptional-kunneth-counit] with $L_1=M$, $L_2=A_s$ and $e=1_Q$. The identity-factor exceptional counit is the identity under the normalized adjunction; the other is $\\varepsilon_{a_Y}$. Thus the adjunct of $\\alpha$ is\n$$\n(1_M\\otimes a_X^*\\varepsilon_{a_Y})\\mathrm{Ku}_!\n=(1_M\\otimes E)\\sigma_{\\mathrm{out}}\\operatorname{PF}_{p;H,M}^{-1}Rp_!(\\sigma_{\\mathrm{in}})=F.\n$$\nThe last equality is naturality of signed symmetry, $(1_M\\otimes E)\\sigma_{\\mathrm{out}}=(E\\otimes1_M)$ after the tensor-unit identifications. The finite-Tor and exceptional-admissibility hypotheses of the cited counit formula hold for $\\operatorname{id}_X,a_Y,p$ by the item hypotheses and the normalized identity adjunction.",
+   "uses": [
+    "def-sf-kv-maps",
+    "prop-functor-package",
+    "def-exchange-projection",
+    "lem-trf-exceptional-kunneth-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.4, (0.4), and §4.4.3, (4.14)--(4.15), matching the specified Künneth counits"
+   }
+  },
+  {
+   "text": "The adjunction bijection of [def-trf-admissibility] is injective. Steps 3 and 5 compute the same adjunct $F$, so $\\alpha=T_p(\\chi\\otimes1)\\sigma_{\\mathrm{in}}$. For the consequence, fix also $N\\in D^b_{ctf}(Y,A)$ in [def-sf-kv-maps](iv). The statement of [lem-trf-kv-evaluation-formula] identifies the tensor--Hom transpose of $\\kappa_{M,N}$ with $\\alpha\\circ e$, where $e$ reassociates $(M\\boxtimes D_YN)\\otimes p_2^*N$ and applies $1\\otimes p_2^*\\operatorname{ev}_N$ to obtain $M\\boxtimes\\omega_Y$. Substituting the equality just proved gives second-factor evaluation followed by $T_p(\\chi\\otimes1)\\sigma_{\\mathrm{in}}$, with precisely that lemma's signed constraints. Its coefficient, finite-Tor and admissibility assumptions are the ones fixed here.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-sf-kv-maps",
+    "lem-trf-kv-evaluation-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.4, the second map in (0.4) and its evaluation transpose"
+   }
+  },
+  {
+   "text": "When $Y=X$, clause (d) of [lem-trf-cohomological-evaluation-calculus] defines $\\chi$ as the $Rp_{1!}\\dashv p_1^!$ transpose of $a_X^*(\\varepsilon_{a_X,A_s}^!)\\circ(\\operatorname{Ex}_{!,a_X,a_X}(\\omega_X))^{-1}$. This is literally the definition of $\\chi_{X,Y}$ in the statement with $Y=X$, with the same project order $p_1,p_2$. Hence $\\chi_{X,X}$ is that normalized map. Only its displayed defining formula is compared; none of that node's cohomological-comparison identities or extra comparison hypotheses is invoked.",
+   "uses": [
+    "lem-trf-cohomological-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.4, BC in (0.4), specialized to the self-product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-fix-six-functor-datum",
+  "def-sf-kv-maps",
+  "def-sf-pf",
+  "def-trf-admissibility",
+  "def-trf-external-product",
+  "lem-trf-cohomological-evaluation-calculus",
+  "lem-trf-exceptional-kunneth-counit",
+  "lem-trf-kv-evaluation-formula",
+  "prop-functor-package",
+  "thm-sf-kunneth-relative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§0.3(b) (0.2), §0.4 (0.4), and §4.4.3 (4.14)--(4.15), factor-swapped; the canonical Ku_! is expanded directly using def-sf-kv-maps(i) and the defining map in thm-sf-kunneth-relative"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +163,38 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CharacterModule.dual_rTensor_conj_homEquiv, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.coev_def, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev; full returned signatures in lem-trf-projection-kunneth-tensor.search-output.txt",
    "date": "2026-10-17",
    "verdict": "no match: unitors, rigid tensor-Hom, slice-category counits and ordinary scheme-module adjunctions do not identify exceptional Kunneth with the specified projection exchange and exceptional tensor map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional Kunneth for a projection equals exceptional tensor after dualizing exchange, with T defined by projection formula and counit",
+   "results": "8 hits: CategoryTheory.coev_expComparison, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, HomologicalComplex.rightUnitor'_inv_comm; no six-functor match",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory tensor projection formula adjunction counit",
+   "results": "0 hits; unavailable because the service reported Unknown identifier CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*tensor|projection.*counit|Ku_! Mathlib/CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula counit transpose defines exceptional tensor map",
+   "results": "8 generic hits including TensorProduct.counit_def, CategoryTheory.ExponentiableMorphism.ev, and CategoryTheory.exp.coev; no six-functor match",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-specialization",
@@ -73,5 +213,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-projection-kunneth-tensor",
+  "worker": "stage1",
+  "summary": "Repaired the returned split without changing its unit or ancestry: expanded the canonical relative product at u=id_X and v=p_1, computed Ku_! including Ex_{!,2}^{-1}, compared both exceptional adjuncts explicitly, and cited the exact kappa evaluation formula. The unsupported exterior-projection citation and unaccepted tool declarations are removed. Seven steps, no new nodes; retained the logged Mathlib searches and the generic counit-defined T_g construction.",
+  "blueprint": "Preserves the created.item chain through lem-trf-trace-specialization to lem-trf-local-term-locality, sk-i-curve-zero proof paragraphs (1),(2): normal-cone specialization. Supplies the factor-swapped (0.4) normalization needed by the trace-specialization evaluation calculation; it changes no unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-7724a5cd4",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-7724a5cd4 (reviewer sub-agent of L); spot-checked: I read the item, all 11 cited statements and Varshavsky §0.3(b) (0.2), §0.4 (0.4) and §4.4.3 (4.14)-(4.15). In the source, ♦ is BC followed by t_{p!}. With the two factors swapped, this is the item's T_{p1}(χ⊗1)σ, and the item's T_g is the source's (0.2). The coefficient category is D^b_ctf at A_{E,n}, with the specified constructible adjunction. Step 3: PF naturality gives the adjunct F=(E⊗1)PF^{-1}Rp_!(σ_in). Step 4: I re-specialized def-sf-kv-maps(i) at (id_X,a_Y) and got T=U=X, V=W=Z, u=id, v=p, q=id_Z. thm-sf-kunneth-relative applies with B=X, f=id_X, g=p. Its composition, PF and Ex arrows for the identities are identities, leaving σ_out·PF^{-1}_{p;H,M}·Rp_!σ_in. Step 5: Ex_{!,1}=1, and Ex_{!,2} is the structure-square exchange (p,a_Y;p_2,a_X). The counit lemma at e=1_Q applies, and symmetry naturality plus the unitors give the same F. A_X sits in degree 0, so there is no extra sign. Step 6 uses the injectivity of the adjunction and lem-trf-kv-evaluation-formula, whose hypotheses match. Step 7 is the defining formula of clause (d). Edge cases M=0, Y=s, X=s and Y=X all check. The route stays inside sk-i-curve-zero (sk-d-trace-class, sk-thm-sf-kunneth-relative and sk-thm-sf-package are in its closure), so no tool_uses are needed. Ancestry matches blueprint_refs ancestor. There are no new nodes, no duplicates (rg over the DAG; blueprint search found 0) and no cycle; proof_deps equals the union of the step uses. The previous return points C4/E5, C5, B9 and the unit/tool_uses issue are repaired. Maintenance note only: the maintainer-owned source.place says §0.0.3, which does not exist in the paper; it should read §0.3(b)/§0.4. No fixes."
  }
 }

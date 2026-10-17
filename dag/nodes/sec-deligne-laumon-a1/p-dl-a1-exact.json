@@ -1,194 +1,321 @@
 {
-  "id": "p-dl-a1-exact",
-  "blueprint": {
-    "is": "p-dl-a1-exact",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Exactness at a fixed pure weight",
-  "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow C_0$ be a dense open immersion into a curve\n$C_0$ in the sense of [d-real-setup] (for instance $C_0=A_0$), with\nfinite closed complement $i:Z_0\\hookrightarrow C_0$. Let\n$0\\to F_1\\to F\\to F_2\\to0$ be a short exact sequence of lisse\n$\\Qlb$-Weil sheaves on $U_0$, all punctually $\\iota$-pure of the\nsame weight $w$ ([def-weil-punctual-weights]). Then the ordinary\nmiddle extension of [def-wf-middle-extension] is exact on it: the\nsequence of Weil sheaves on $C_0$\n\n$$\n0\\longrightarrow j_*F_1\\longrightarrow j_*F\n\\longrightarrow j_*F_2\\longrightarrow0\n$$\n\nis exact.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.md",
-    "place": "node p-dl-a1-exact, order 2784"
-  },
-  "stmt_deps": [
-    "def-weil-punctual-weights",
-    "def-wf-middle-extension"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1: the obstruction is a connecting map.* The short exact\nsequence is a distinguished triangle $F_1\\to F\\to F_2\\xrightarrow{+1}$\nof Weil complexes on $U_0$. The derived direct image\n[def-weil-derived-direct-image] is a triangulated functor and, with\nits Weil structure and equivariant structure maps from\n[lem-fix-weil-operations], gives a distinguished triangle of Weil\ncomplexes $Rj_*F_1\\to Rj_*F\\to Rj_*F_2\\xrightarrow{+1}$ on $C_0$.\nSince $R^rj_*=0$ for $r<0$ and $R^0j_*=j_*$ is the ordinary direct\nimage ([def-wf-middle-extension]), its long exact sequence of\ncohomology sheaves begins\n\n$$\n0\\to j_*F_1\\to j_*F\\to j_*F_2\\xrightarrow{\\ \\delta\\ }R^1j_*F_1\\to\\cdots,\n$$\n\nand all maps, in particular $\\delta$, are morphisms of Weil sheaves.\nHence the asserted sequence is exact if and only if $\\delta=0$, and it\nsuffices to show that $\\delta$ vanishes on every geometric stalk.",
-      "uses": [
-        "def-weil-derived-direct-image",
-        "lem-fix-weil-operations",
-        "def-wf-middle-extension"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 2: the open part.* By the unit/counit identities of\n[prop-weil-open-closed-recollement-adjunctions],\n$j^*Rj_*F_1\\simeq F_1$, so $j^*R^1j_*F_1=\\mathcal H^1(F_1)=0$ and\n$\\delta$ vanishes at every geometric point of $U$. It remains to treat\na geometric point $\\bar s$ over a closed point $s\\in Z_0$. There\n$\\delta_{\\bar s}:(j_*F_2)_{\\bar s}\\to(R^1j_*F_1)_{\\bar s}$ commutes\nwith the local geometric Frobenius $F_s$, since $\\delta$ is a morphism\nof Weil sheaves. Write $q_s=|\\kappa(s)|$.",
-      "uses": [
-        "prop-weil-open-closed-recollement-adjunctions"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: the source has weights at most $w$.* $F_2$ is punctually\npure, hence punctually mixed of weights at most $w$. The boundary\nsemicontinuity [lem-wf-boundary-semicontinuity], applied to $j$ and\n$F_2$ with $\\beta=w$, shows that every eigenvalue $\\alpha$ of $F_s$ on\n$(j_*F_2)_{\\bar s}$ satisfies $|\\iota(\\alpha)|^2\\le q_s^{w}$.",
-      "uses": [
-        "lem-wf-boundary-semicontinuity"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 4: the target has weights at least $w+2$.* The local boundary\nduality [lem-a1-local-boundary-duality] for $F_1$ gives an\n$F_s$-equivariant isomorphism\n\n$$\n(R^1j_*F_1)_{\\bar s}^\\vee\\simeq(j_*F_1^\\vee)_{\\bar s}(1);\n$$\n\nin particular $(R^1j_*F_1)_{\\bar s}$ is finite-dimensional, and on the\nleft $F_s$ acts contragrediently. The dual $F_1^\\vee$ is lisse and\npunctually $\\iota$-pure of weight $-w$ by [lem-tw-dual-negation], so\n[lem-wf-boundary-semicontinuity] with $\\beta=-w$ bounds the\neigenvalues of $F_s$ on $(j_*F_1^\\vee)_{\\bar s}$ by\n$|\\iota(\\cdot)|^2\\le q_s^{-w}$. On the twist by $(1)$ the local\nFrobenius is multiplied by $q_s^{-1}$ ([lem-wf-tate-twist-frobenius]),\nso the eigenvalues on $(j_*F_1^\\vee)_{\\bar s}(1)$ satisfy\n$|\\iota(\\cdot)|^2\\le q_s^{-w-2}$. The eigenvalues of the contragredient\naction are the inverses $\\gamma^{-1}$ of the eigenvalues $\\gamma$ of\n$F_s$ on $(R^1j_*F_1)_{\\bar s}$ ([p-linear-spectra]). Hence\n$|\\iota(\\gamma)|^{-2}\\le q_s^{-w-2}$, that is,\n\n$$\n|\\iota(\\gamma)|^2\\ \\ge\\ q_s^{\\,w+2}\n$$\n\nfor every eigenvalue $\\gamma$ of $F_s$ on $(R^1j_*F_1)_{\\bar s}$.",
-      "uses": [
-        "lem-a1-local-boundary-duality",
-        "lem-tw-dual-negation",
-        "lem-wf-boundary-semicontinuity",
-        "lem-wf-tate-twist-frobenius",
-        "p-linear-spectra"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 5: the weight gap.* Let $I\\subseteq(R^1j_*F_1)_{\\bar s}$ be the\nimage of $\\delta_{\\bar s}$. It is $F_s$-stable, a quotient of\n$(j_*F_2)_{\\bar s}$ and a subspace of $(R^1j_*F_1)_{\\bar s}$. By\n[lem-a1-spectrum-exact-sequence], applied to the two short exact\nsequences of Frobenius modules exhibiting $I$ as a quotient and as a\nsubobject, every eigenvalue $\\lambda$ of $F_s$ on $I$ satisfies both\n$|\\iota(\\lambda)|^2\\le q_s^{w}$ (Step 3) and\n$|\\iota(\\lambda)|^2\\ge q_s^{w+2}$ (Step 4). Since $q_s>1$ these are\nincompatible, so $I$ has no eigenvalue; being a finite-dimensional\nspace over the algebraically closed field $\\Qlb$, it is zero. Thus\n$\\delta_{\\bar s}=0$ for every boundary point, $\\delta=0$ by Step 2,\nand the sequence is exact by Step 1.",
-      "uses": [
-        "lem-a1-spectrum-exact-sequence"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-weil-derived-direct-image",
-    "lem-fix-weil-operations",
+ "id": "p-dl-a1-exact",
+ "blueprint": {
+  "is": "p-dl-a1-exact",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exactness at a fixed pure weight",
+ "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow C_0$ be a dense quasi-compact open immersion\ninto a smooth curve $C_0$ over $k_0$, that is, a $k_0$-scheme smooth of\nrelative dimension one (for instance $C_0=A_0$), with\nclosed complement $i:Z_0\\hookrightarrow C_0$. Let\n$0\\to F_1\\to F\\to F_2\\to0$ be a short exact sequence of lisse\n$\\Qlb$-Weil sheaves on $U_0$, with $F_1$ and $F_2$ punctually\n$\\iota$-pure of the same weight $w$ ([def-weil-punctual-weights]). Then the ordinary\nmiddle extension of [def-wf-middle-extension] is exact on it: the\nsequence of Weil sheaves on $C_0$\n\n$$\n0\\longrightarrow j_*F_1\\longrightarrow j_*F\n\\longrightarrow j_*F_2\\longrightarrow0\n$$\n\nis exact.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.md",
+  "place": "node p-dl-a1-exact, order 2784"
+ },
+ "stmt_deps": [
+  "rem-dl-a1-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-punctual-weights",
+  "def-wf-middle-extension"
+ ],
+ "proof": [
+  {
+   "text": "Work locally on an affine finite-type open $W_0\\subset C_0$. Such opens cover a smooth $k_0$-scheme, and the constructible-fibre criterion [lem-dl-a1-constructible-fibres-exact] permits this local test for exactness. The section formula [def-wf-middle-extension] gives $(j_*G)|_{W_0}=j_{W,*}(G|_{U_0\\cap W_0})$, for the maps as well as the objects. Write $G_1,G,G_2$ for the restricted terms and $j_W:U_0\\cap W_0\\hookrightarrow W_0$. By [lem-dl-a1-weil-open-image-delta] there is a natural exact sequence\n$$0\\to j_{W,*}G_1\\to j_{W,*}G\\to j_{W,*}G_2\\xrightarrow{\\delta_W}R^1j_{W,*}G_1.$$\nIts terms are constructible and its maps are Weil-equivariant. Thus it is enough to prove $\\delta_W=0$, and the same fibre criterion says it is enough to prove this on every geometric coefficient fibre. We use the long exact sequence on underlying geometric derived objects and its naturality; no triangulated structure on the category of Frobenius-fixed pairs is asserted.",
+   "uses": [
+    "lem-dl-a1-constructible-fibres-exact",
     "def-wf-middle-extension",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "lem-wf-boundary-semicontinuity",
-    "lem-a1-local-boundary-duality",
-    "lem-tw-dual-negation",
-    "lem-wf-tate-twist-frobenius",
-    "p-linear-spectra",
-    "lem-a1-spectrum-exact-sequence"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.md",
-    "place": "## Proof"
+    "lem-dl-a1-weil-open-image-delta"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+    "place": "Step 1, obstruction by the connecting map, with the Zariski-local interpretation needed by the current smooth-curve statement."
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_remark"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2784,
-  "blueprint_uses": [
+  {
+   "text": "On $U_0\\cap W_0$, the target of $\\delta_W$ restricts to zero by [lem-dl-a1-weil-open-image-delta], so all its fibres there vanish. At a boundary point $s$, use [lem-dl-a1-constant-field-charts] to obtain $k'_0=\\kappa(s)$ and a geometrically connected smooth affine curve $V_0/k'_0$ with a rational point $t$ above $s$. The comparison isomorphisms identify the source, target and connecting map at $s$ with those for the pulled-back short exact sequence on $U_V\\subset V_0$, and identify $F_t$ with $F_s$ and $q_t$ with $q_s$. The pullback is short exact by the exact fibre criterion [lem-dl-a1-constructible-fibres-exact]: its fibres are the original exact vector-space sequences. Its outer terms remain pure of weight $w$ by the chart lemma. Hence we may compute $\\delta_{W,\\bar s}$ using this chart. Write $H_1,H,H_2$ for the three pulled-back lisse sheaves and $j_V$ for the open immersion.",
+   "uses": [
+    "lem-dl-a1-weil-open-image-delta",
+    "lem-dl-a1-constant-field-charts",
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+    "place": "Step 2 and the unit proof’s affine/geometric-connectedness reduction."
+   }
+  },
+  {
+   "text": "The curve $V_0$ and the dense open $U_V$ in the chart are geometrically connected and smooth, and the complement is finite. Thus they satisfy [d-real-setup] over the finite field $k'_0$. A lisse sheaf has constant rank on the connected $U_V$. If $H_2=0$, the source of the connecting map is zero; if $H_1=0$, its target is zero, since the direct-image functors in [lem-dl-a1-weil-open-image-delta] send zero to zero. Otherwise both ranks are positive. For every closed point of $U_V$, purity of $H_2$ gives the squared bound $|\\iota(\\alpha)|^2=q_x^w$. Applying [lem-wf-boundary-semicontinuity] with $\\beta=w$ now gives\n$$|\\iota(\\alpha)|^2\\le q_s^w$$\nfor every eigenvalue on $(j_{V,*}H_2)_{\\bar t}$. This checks the positive-rank and geometrically-connected hypotheses rather than applying semicontinuity directly to the possibly disconnected original curve.",
+   "uses": [
     "d-real-setup",
-    "def-weil-derived-direct-image",
-    "def-weil-punctual-weights",
-    "def-wf-middle-extension",
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-dl-a1-weil-open-image-delta",
+    "lem-wf-boundary-semicontinuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+    "place": "Step 3, including zero-rank cases and the hypotheses of boundary semicontinuity."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-local-boundary-duality] to $j_V$ and $H_1$. Its smooth-curve and lisse hypotheses hold on the chart, and it identifies finite-dimensional Frobenius modules\n$$(R^1j_{V,*}H_1)_{\\bar t}^{\\vee}\\simeq(j_{V,*}H_1^{\\vee})_{\\bar t}(1).$$\nThe dual sheaf is lisse and pure of weight $-w$ by [lem-tw-dual-negation]. Applying [lem-wf-boundary-semicontinuity] to it, which has the same positive rank as $H_1$, bounds its ordinary middle-extension eigenvalues by $q_s^{-w}$ in squared absolute value. By [lem-wf-tate-twist-frobenius], twisting by $(1)$ multiplies Frobenius by $q_s^{-1}$, so the squared bounds on the displayed dual module are $q_s^{-w-2}$.",
+   "uses": [
     "lem-a1-local-boundary-duality",
-    "lem-a1-spectrum-exact-sequence",
-    "lem-fix-weil-operations",
     "lem-tw-dual-negation",
     "lem-wf-boundary-semicontinuity",
-    "lem-wf-tate-twist-frobenius",
+    "lem-wf-tate-twist-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+    "place": "Step 4, local duality, dual purity, and the sign of the Tate twist."
+   }
+  },
+  {
+   "text": "Frobenius is invertible. By the contragredient clause of [p-linear-spectra], each eigenvalue $\\gamma$ on $(R^1j_{V,*}H_1)_{\\bar t}$ has inverse $\\gamma^{-1}$ on its dual. The preceding bound gives $|\\iota(\\gamma)|^{-2}\\le q_s^{-w-2}$, hence\n$$|\\iota(\\gamma)|^2\\ge q_s^{w+2}.$$\nThe reciprocal is legitimate because $\\gamma\\ne0$. The chart identifications transfer both this lower bound and the upper bound of the preceding steps to the original source and target of $\\delta_{W,\\bar s}$.",
+   "uses": [
     "p-linear-spectra",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "rem-dl-a1-conventions"
-  ],
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.AffineLine.Exactness",
-    "declaration": "AlgebraicGeometry.shortExact_map_directImage",
-    "branch": "slopmaster2",
-    "line": 58,
-    "sorry_free": false,
-    "body_lines": 1
+    "lem-dl-a1-constant-field-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+    "place": "Step 4, final inverse-eigenvalue inequality; elementary arithmetic after the cited spectrum/comparison statements."
+   }
   },
-  "blueprint_lean": [
-    "AlgebraicGeometry.shortExact_map_directImage"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.shortExact_map_directImage"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.shortExact_map_directImage",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.Exactness",
-          "lines": [
-            44,
-            69
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-p-dl-a1-exact",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow C_0$ be a dense quasi-compact open immersion\ninto a smooth curve $C_0$ over $k_0$, that is, a $k_0$-scheme smooth of\nrelative dimension one (for instance $C_0=A_0$), with\nclosed complement $i:Z_0\\hookrightarrow C_0$. Let\n$0\\to F_1\\to F\\to F_2\\to0$ be a short exact sequence of lisse\n$\\Qlb$-Weil sheaves on $U_0$, with $F_1$ and $F_2$ punctually\n$\\iota$-pure of the same weight $w$ ([def-weil-punctual-weights]). Then the ordinary\nmiddle extension of [def-wf-middle-extension] is exact on it: the\nsequence of Weil sheaves on $C_0$\n\n$$\n0\\longrightarrow j_*F_1\\longrightarrow j_*F\n\\longrightarrow j_*F_2\\longrightarrow0\n$$\n\nis exact.",
-    "proof": [
-      {
-        "text": "*Step 1: the obstruction is a connecting map.* The short exact\nsequence is a distinguished triangle $F_1\\to F\\to F_2\\xrightarrow{+1}$\nof Weil complexes on $U_0$. The derived direct image\n[def-weil-derived-direct-image] is a triangulated functor and, with\nits Weil structure and equivariant structure maps from\n[lem-fix-weil-operations], gives a distinguished triangle of Weil\ncomplexes $Rj_*F_1\\to Rj_*F\\to Rj_*F_2\\xrightarrow{+1}$ on $C_0$.\nSince $R^rj_*=0$ for $r<0$ and $R^0j_*=j_*$ is the ordinary direct\nimage ([def-wf-middle-extension]), its long exact sequence of\ncohomology sheaves begins\n\n$$\n0\\to j_*F_1\\to j_*F\\to j_*F_2\\xrightarrow{\\ \\delta\\ }R^1j_*F_1\\to\\cdots,\n$$\n\nand all maps, in particular $\\delta$, are morphisms of Weil sheaves.\nHence the asserted sequence is exact if and only if $\\delta=0$, and it\nsuffices to show that $\\delta$ vanishes on every geometric stalk.",
-        "uses": [
-          "def-weil-derived-direct-image",
-          "lem-fix-weil-operations",
-          "def-wf-middle-extension"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 2: the open part.* By the unit/counit identities of\n[prop-weil-open-closed-recollement-adjunctions],\n$j^*Rj_*F_1\\simeq F_1$, so $j^*R^1j_*F_1=\\mathcal H^1(F_1)=0$ and\n$\\delta$ vanishes at every geometric point of $U$. It remains to treat\na geometric point $\\bar s$ over a closed point $s\\in Z_0$. There\n$\\delta_{\\bar s}:(j_*F_2)_{\\bar s}\\to(R^1j_*F_1)_{\\bar s}$ commutes\nwith the local geometric Frobenius $F_s$, since $\\delta$ is a morphism\nof Weil sheaves. Write $q_s=|\\kappa(s)|$.",
-        "uses": [
-          "prop-weil-open-closed-recollement-adjunctions"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 3: the source has weights at most $w$.* $F_2$ is punctually\npure, hence punctually mixed of weights at most $w$. The boundary\nsemicontinuity [lem-wf-boundary-semicontinuity], applied to $j$ and\n$F_2$ with $\\beta=w$, shows that every eigenvalue $\\alpha$ of $F_s$ on\n$(j_*F_2)_{\\bar s}$ satisfies $|\\iota(\\alpha)|^2\\le q_s^{w}$.",
-        "uses": [
-          "lem-wf-boundary-semicontinuity"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 4: the target has weights at least $w+2$.* The local boundary\nduality [lem-a1-local-boundary-duality] for $F_1$ gives an\n$F_s$-equivariant isomorphism\n\n$$\n(R^1j_*F_1)_{\\bar s}^\\vee\\simeq(j_*F_1^\\vee)_{\\bar s}(1);\n$$\n\nin particular $(R^1j_*F_1)_{\\bar s}$ is finite-dimensional, and on the\nleft $F_s$ acts contragrediently. The dual $F_1^\\vee$ is lisse and\npunctually $\\iota$-pure of weight $-w$ by [lem-tw-dual-negation], so\n[lem-wf-boundary-semicontinuity] with $\\beta=-w$ bounds the\neigenvalues of $F_s$ on $(j_*F_1^\\vee)_{\\bar s}$ by\n$|\\iota(\\cdot)|^2\\le q_s^{-w}$. On the twist by $(1)$ the local\nFrobenius is multiplied by $q_s^{-1}$ ([lem-wf-tate-twist-frobenius]),\nso the eigenvalues on $(j_*F_1^\\vee)_{\\bar s}(1)$ satisfy\n$|\\iota(\\cdot)|^2\\le q_s^{-w-2}$. The eigenvalues of the contragredient\naction are the inverses $\\gamma^{-1}$ of the eigenvalues $\\gamma$ of\n$F_s$ on $(R^1j_*F_1)_{\\bar s}$ ([p-linear-spectra]). Hence\n$|\\iota(\\gamma)|^{-2}\\le q_s^{-w-2}$, that is,\n\n$$\n|\\iota(\\gamma)|^2\\ \\ge\\ q_s^{\\,w+2}\n$$\n\nfor every eigenvalue $\\gamma$ of $F_s$ on $(R^1j_*F_1)_{\\bar s}$.",
-        "uses": [
-          "lem-a1-local-boundary-duality",
-          "lem-tw-dual-negation",
-          "lem-wf-boundary-semicontinuity",
-          "lem-wf-tate-twist-frobenius",
-          "p-linear-spectra"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 5: the weight gap.* Let $I\\subseteq(R^1j_*F_1)_{\\bar s}$ be the\nimage of $\\delta_{\\bar s}$. It is $F_s$-stable, a quotient of\n$(j_*F_2)_{\\bar s}$ and a subspace of $(R^1j_*F_1)_{\\bar s}$. By\n[lem-a1-spectrum-exact-sequence], applied to the two short exact\nsequences of Frobenius modules exhibiting $I$ as a quotient and as a\nsubobject, every eigenvalue $\\lambda$ of $F_s$ on $I$ satisfies both\n$|\\iota(\\lambda)|^2\\le q_s^{w}$ (Step 3) and\n$|\\iota(\\lambda)|^2\\ge q_s^{w+2}$ (Step 4). Since $q_s>1$ these are\nincompatible, so $I$ has no eigenvalue; being a finite-dimensional\nspace over the algebraically closed field $\\Qlb$, it is zero. Thus\n$\\delta_{\\bar s}=0$ for every boundary point, $\\delta=0$ by Step 2,\nand the sequence is exact by Step 1.",
-        "uses": [
-          "lem-a1-spectrum-exact-sequence"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Let $I$ be the image of the Frobenius-equivariant map $\\delta_{W,\\bar s}$. It is a finite-dimensional Frobenius-stable subspace of the target and a quotient of the source. The restrictions of Frobenius are automorphisms: an injective endomorphism of a finite-dimensional invariant subspace is surjective, so the kernel and image are stable also under its inverse. Apply [lem-a1-spectrum-exact-sequence] to the source-kernel-image sequence and to the image-target-cokernel sequence. Every eigenvalue $\\lambda$ on $I$ would satisfy both\n$$|\\iota(\\lambda)|^2\\le q_s^w\\quad\\hbox{and}\\quad|\\iota(\\lambda)|^2\\ge q_s^{w+2}.$$\nThese contradict $q_s>1$. If $I$ were nonzero, [p-linear-triangular], over the algebraically closed coefficient field, would supply a one-dimensional invariant subspace and hence an eigenvalue. Therefore $I=0$ and $\\delta_{W,\\bar s}=0$. This holds at every boundary point. Together with the vanishing on the open, [lem-dl-a1-constructible-fibres-exact] gives $\\delta_W=0$. The exact sequence in step 1 is short exact on each $W_0$, hence the asserted sequence is short exact on $C_0$.",
+   "uses": [
+    "lem-a1-spectrum-exact-sequence",
+    "p-linear-triangular",
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+    "place": "Step 5, the strict weight gap and stalkwise conclusion."
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-dl-a1-constructible-fibres-exact",
+  "def-wf-middle-extension",
+  "lem-dl-a1-weil-open-image-delta",
+  "lem-dl-a1-constant-field-charts",
+  "d-real-setup",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-wf-boundary-semicontinuity",
+  "lem-a1-local-boundary-duality",
+  "lem-tw-dual-negation",
+  "lem-wf-tate-twist-frobenius",
+  "p-linear-spectra",
+  "lem-a1-spectrum-exact-sequence",
+  "p-linear-triangular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+  "place": "Steps 1–5, expanded using sk-p-dl-a1-exact.proof.md affine-chart sentence; fixed-pair triangle and coefficient-domain citation repairs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The direct image of lisse Weil sheaves under a dense open immersion of smooth curves is exact on short exact sequences whose outer terms are pure of the same weight",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, Profinite.NobelingProof.succ_exact, CategoryTheory.Functor.exact_tfae, ModuleCat.localizedModule_functor_map_exact, CategoryTheory.ShortComplex.exact_iff_exact_map_forget₂, SnakeLemma.exact_δ'_right, SnakeLemma.exact_δ'_left",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib notion of adic Weil sheaves with punctual weights; the hits are generic exactness, ordinary scheme-module pushforward, or abstract group cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|PunctuallyPure|middleExtension",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib notion of adic Weil sheaves with punctual weights; the hits are generic exactness, ordinary scheme-module pushforward, or abstract group cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilSheaf, ShortComplex.ShortExact",
+   "results": "0 hits: none; loogle: unknown identifier 'WeilSheaf'",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib notion of adic Weil sheaves with punctual weights; the hits are generic exactness, ordinary scheme-module pushforward, or abstract group cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exactness of direct image of pure lisse l-adic sheaves on a smooth curve",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, SheafOfModules.instIsRightAdjointPushforward, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib notion of adic Weil sheaves with punctual weights; the hits are generic exactness, ordinary scheme-module pushforward, or abstract group cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The invariants functor for local inertia on l-adic Weil representations is exact on extensions of two pure sheaves of the same weight",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, Condensed.instAB4StarCondensedMod, Rep.coinvariantsShortComplex_shortExact, groupCohomology.H1InfRes_exact, AdicCompletion.map_exact, groupHomology.H1CoresCoinfOfTrivial_exact, groupHomology.H1CoresCoinf_exact, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib notion of adic Weil sheaves with punctual weights; the hits are generic exactness, ordinary scheme-module pushforward, or abstract group cohomology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_remark"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2784,
+ "blueprint_uses": [
+  "d-real-setup",
+  "def-weil-derived-direct-image",
+  "def-weil-punctual-weights",
+  "def-wf-middle-extension",
+  "lem-a1-local-boundary-duality",
+  "lem-a1-spectrum-exact-sequence",
+  "lem-fix-weil-operations",
+  "lem-tw-dual-negation",
+  "lem-wf-boundary-semicontinuity",
+  "lem-wf-tate-twist-frobenius",
+  "p-linear-spectra",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "rem-dl-a1-conventions"
+ ],
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.Exactness",
+  "declaration": "AlgebraicGeometry.shortExact_map_directImage",
+  "branch": "slopmaster2",
+  "line": 58,
+  "sorry_free": false,
+  "body_lines": 1
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.shortExact_map_directImage"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.shortExact_map_directImage"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.shortExact_map_directImage",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.Exactness",
+     "lines": [
+      44,
+      69
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-exact",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow C_0$ be a dense quasi-compact open immersion\ninto a smooth curve $C_0$ over $k_0$, that is, a $k_0$-scheme smooth of\nrelative dimension one (for instance $C_0=A_0$), with\nclosed complement $i:Z_0\\hookrightarrow C_0$. Let\n$0\\to F_1\\to F\\to F_2\\to0$ be a short exact sequence of lisse\n$\\Qlb$-Weil sheaves on $U_0$, with $F_1$ and $F_2$ punctually\n$\\iota$-pure of the same weight $w$ ([def-weil-punctual-weights]). Then the ordinary\nmiddle extension of [def-wf-middle-extension] is exact on it: the\nsequence of Weil sheaves on $C_0$\n\n$$\n0\\longrightarrow j_*F_1\\longrightarrow j_*F\n\\longrightarrow j_*F_2\\longrightarrow0\n$$\n\nis exact.",
+  "proof": [
+   {
+    "text": "*Step 1: the obstruction is a connecting map.* The short exact\nsequence is a distinguished triangle $F_1\\to F\\to F_2\\xrightarrow{+1}$\nof Weil complexes on $U_0$. The derived direct image\n[def-weil-derived-direct-image] is a triangulated functor and, with\nits Weil structure and equivariant structure maps from\n[lem-fix-weil-operations], gives a distinguished triangle of Weil\ncomplexes $Rj_*F_1\\to Rj_*F\\to Rj_*F_2\\xrightarrow{+1}$ on $C_0$.\nSince $R^rj_*=0$ for $r<0$ and $R^0j_*=j_*$ is the ordinary direct\nimage ([def-wf-middle-extension]), its long exact sequence of\ncohomology sheaves begins\n\n$$\n0\\to j_*F_1\\to j_*F\\to j_*F_2\\xrightarrow{\\ \\delta\\ }R^1j_*F_1\\to\\cdots,\n$$\n\nand all maps, in particular $\\delta$, are morphisms of Weil sheaves.\nHence the asserted sequence is exact if and only if $\\delta=0$, and it\nsuffices to show that $\\delta$ vanishes on every geometric stalk.",
+    "uses": [
+     "def-weil-derived-direct-image",
+     "lem-fix-weil-operations",
+     "def-wf-middle-extension"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2: the open part.* By the unit/counit identities of\n[prop-weil-open-closed-recollement-adjunctions],\n$j^*Rj_*F_1\\simeq F_1$, so $j^*R^1j_*F_1=\\mathcal H^1(F_1)=0$ and\n$\\delta$ vanishes at every geometric point of $U$. It remains to treat\na geometric point $\\bar s$ over a closed point $s\\in Z_0$. There\n$\\delta_{\\bar s}:(j_*F_2)_{\\bar s}\\to(R^1j_*F_1)_{\\bar s}$ commutes\nwith the local geometric Frobenius $F_s$, since $\\delta$ is a morphism\nof Weil sheaves. Write $q_s=|\\kappa(s)|$.",
+    "uses": [
+     "prop-weil-open-closed-recollement-adjunctions"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: the source has weights at most $w$.* $F_2$ is punctually\npure, hence punctually mixed of weights at most $w$. The boundary\nsemicontinuity [lem-wf-boundary-semicontinuity], applied to $j$ and\n$F_2$ with $\\beta=w$, shows that every eigenvalue $\\alpha$ of $F_s$ on\n$(j_*F_2)_{\\bar s}$ satisfies $|\\iota(\\alpha)|^2\\le q_s^{w}$.",
+    "uses": [
+     "lem-wf-boundary-semicontinuity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 4: the target has weights at least $w+2$.* The local boundary\nduality [lem-a1-local-boundary-duality] for $F_1$ gives an\n$F_s$-equivariant isomorphism\n\n$$\n(R^1j_*F_1)_{\\bar s}^\\vee\\simeq(j_*F_1^\\vee)_{\\bar s}(1);\n$$\n\nin particular $(R^1j_*F_1)_{\\bar s}$ is finite-dimensional, and on the\nleft $F_s$ acts contragrediently. The dual $F_1^\\vee$ is lisse and\npunctually $\\iota$-pure of weight $-w$ by [lem-tw-dual-negation], so\n[lem-wf-boundary-semicontinuity] with $\\beta=-w$ bounds the\neigenvalues of $F_s$ on $(j_*F_1^\\vee)_{\\bar s}$ by\n$|\\iota(\\cdot)|^2\\le q_s^{-w}$. On the twist by $(1)$ the local\nFrobenius is multiplied by $q_s^{-1}$ ([lem-wf-tate-twist-frobenius]),\nso the eigenvalues on $(j_*F_1^\\vee)_{\\bar s}(1)$ satisfy\n$|\\iota(\\cdot)|^2\\le q_s^{-w-2}$. The eigenvalues of the contragredient\naction are the inverses $\\gamma^{-1}$ of the eigenvalues $\\gamma$ of\n$F_s$ on $(R^1j_*F_1)_{\\bar s}$ ([p-linear-spectra]). Hence\n$|\\iota(\\gamma)|^{-2}\\le q_s^{-w-2}$, that is,\n\n$$\n|\\iota(\\gamma)|^2\\ \\ge\\ q_s^{\\,w+2}\n$$\n\nfor every eigenvalue $\\gamma$ of $F_s$ on $(R^1j_*F_1)_{\\bar s}$.",
+    "uses": [
+     "lem-a1-local-boundary-duality",
+     "lem-tw-dual-negation",
+     "lem-wf-boundary-semicontinuity",
+     "lem-wf-tate-twist-frobenius",
+     "p-linear-spectra"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 5: the weight gap.* Let $I\\subseteq(R^1j_*F_1)_{\\bar s}$ be the\nimage of $\\delta_{\\bar s}$. It is $F_s$-stable, a quotient of\n$(j_*F_2)_{\\bar s}$ and a subspace of $(R^1j_*F_1)_{\\bar s}$. By\n[lem-a1-spectrum-exact-sequence], applied to the two short exact\nsequences of Frobenius modules exhibiting $I$ as a quotient and as a\nsubobject, every eigenvalue $\\lambda$ of $F_s$ on $I$ satisfies both\n$|\\iota(\\lambda)|^2\\le q_s^{w}$ (Step 3) and\n$|\\iota(\\lambda)|^2\\ge q_s^{w+2}$ (Step 4). Since $q_s>1$ these are\nincompatible, so $I$ has no eigenvalue; being a finite-dimensional\nspace over the algebraically closed field $\\Qlb$, it is zero. Thus\n$\\delta_{\\bar s}=0$ for every boundary point, $\\delta=0$ by Step 2,\nand the sequence is exact by Step 1.",
+    "uses": [
+     "lem-a1-spectrum-exact-sequence"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "p-dl-a1-exact",
+  "worker": "stage1",
+  "summary": "Applied the current main-20261015 statement (dense quasi-compact open into an arbitrary smooth curve, purity only of the outer terms). Kept the local boundary-duality and semicontinuity route, added three strictly auxiliary unsplit interfaces for the adic connecting sequence, constructible fibre exactness/detection, and pointed geometric affine chart comparison. Removed the false use of finite-coefficient recollement adjunctions and avoided asserting a triangulated structure on fixed pairs. Checked zero ranks, coefficient domains, finite complement on charts, Frobenius transport, and the Tate-twist sign.",
+  "blueprint": "Current p-dl-a1-exact Steps 1–5 are realized by steps 1–6; current unit proof affine-neighborhood sentence by steps 1–3; its entire weight-gap paragraph by steps 3–6.",
+  "tool_uses": [
+   {
+    "node": "lem-tw-dual-negation",
+    "why": "Generic dual-purity negation used in Step 4; no local exactness unit node replaces it."
+   },
+   {
+    "node": "lem-wf-tate-twist-frobenius",
+    "why": "Generic local action of the Tate twist used to obtain the two-unit weight gap."
+   },
+   {
+    "node": "p-linear-spectra",
+    "why": "Generic contragredient spectrum calculation in Step 5."
+   },
+   {
+    "node": "p-linear-triangular",
+    "why": "Generic finite-dimensional eigenvalue existence in Step 6."
+   },
+   {
+    "node": "lem-a1-spectrum-exact-sequence",
+    "why": "Generic spectrum of subquotients in Step 6; does not replace the unit weight argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-tw-dual-negation",
+  "lem-wf-tate-twist-frobenius",
+  "p-linear-spectra",
+  "p-linear-triangular",
+  "lem-a1-spectrum-exact-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-f72cc040b",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-f72cc040b (reviewer sub-agent of L); spot-checked: Read the item and its main-20261015 blueprint_update, the unit and both blueprint proof files, all three new nodes and every cited statement. The item copies the current blueprint statement verbatim (any smooth curve, dense quasi-compact open, purity of F_1 and F_2 only), so no target is weakened. Steps 1-6 check: affine finite-type opens W_0 are separated with dense U_0∩W_0. The delta node gives the 4-term sequence and j^*R^1j_*=0, replacing the false recollement citation and the blueprint's assumption that fixed pairs form a triangulated category. The pointed chart V_0 ⊂ W_0×κ(s) is a connected component through the diagonal rational point t; it is affine, smooth and geometrically connected by Stacks 04KV, and h is étale. On the chart F_t=F_s, q_t=q_s and purity is preserved. The chart meets d-real-setup over F_{q^d}, and the rank-0 cases are handled before semicontinuity (β=w gives the upper bound q^w). Duality plus lem-tw-dual-negation, semicontinuity with β=-w and the Tate twist m=1 give q^{-w-2} (sign checked), and inversion (p-linear-spectra) gives the lower bound q^{w+2}. lem-a1-spectrum-exact-sequence and p-linear-triangular then make the image of δ zero. All three new nodes are true and none is a duplicate; I checked them against Bhatt–Scholze 6.8.4/6.8.5/6.8.7/6.8.14 and Stacks 0D6G/05TE/03PU/04KV. The delta node and the fibre-detection node are not covered by lem-weil-heart-short-exact-triangles, lem-cbc-proetale-stalk-conservative or lem-weil-point-fibre-equivalence. No node restates a clause of the item. All declared tool_uses are accepted. Batch-5: rem-dl-a1-conventions, def-pod-lisse-l-adic-sheaves, def-wf-middle-extension, def-weil-local-frobenius-trace and def-weil-punctual-weights are general definitions; their closure reaches only the eigenvalue-independence lemma lem-weil-local-frobenius-conjugacy-class. p-linear-triangular is dependency-free triangularization. None is given by either assumption or is a step of their proofs. No fixes."
+ }
 }

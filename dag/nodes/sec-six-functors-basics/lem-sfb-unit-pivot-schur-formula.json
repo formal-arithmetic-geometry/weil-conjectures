@@ -10,9 +10,72 @@
  "stmt_deps": [
   "def-weil-matrix"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $b(t)=a(t)^{-1}$, so $a(t)b(t)=b(t)a(t)=1$. Matrices are entry families as in [def-weil-matrix]; multiplication here is the finite sum $(XY)_{ij}=\\sum_k X_{ik}Y_{kj}$. Set $N=L_1-I_n$ and $P=R_0-I_m$. Only the entries $N_{i1}=-bK_{i1}$ for $i>1$ can be nonzero, and row $1$ of $N$ is zero, so every summand $N_{ik}N_{kj}$ vanishes. Thus $N^2=0$. Likewise only $P_{1j}=-bK_{1j}$ for $j>1$ can be nonzero, and column $1$ of $P$ is zero, so $P^2=0$. Expanding gives $(I+N)(I-N)=(I-N)(I+N)=I$ and the same identities for $P$. Hence $L_1^{-1}=I-N$ and $R_0^{-1}=I-P$.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent auxiliary calculation for the continuous-pivot step; HRS Theorem 6.12(2), printed pp. 18–19, motivates continuous division but does not state this matrix identity."
+   }
+  },
+  {
+   "text": "The diagonal matrix $D=\\operatorname{diag}(a,1,\\ldots,1)$ satisfies $DL_0=L_0D=I_n$, using $ab=ba=1$. Therefore the prescribed product $L=L_0L_1$ has two-sided inverse $(I-N)D$: multiplication in either order cancels adjacent inverse factors. Entrywise, $L_{11}=b$, $L_{i1}=-bK_{i1}$ for $i>1$, and all remaining entries are those of $I_n$. Its inverse has $(L^{-1})_{11}=a$, $(L^{-1})_{i1}=K_{i1}$ for $i>1$, and the remaining identity entries, since $bK_{i1}a=K_{i1}$ by commutativity. Thus $L(t)\\in\\operatorname{GL}_n(A)$ and $R_0(t)\\in\\operatorname{GL}_m(A)$ for every $t$; here $\\operatorname{GL}_r(A)$ means the square matrices with a two-sided multiplicative inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent auxiliary calculation for the continuous-pivot step; HRS Theorem 6.12(2), printed pp. 18–19, motivates continuous division but does not state this matrix identity."
+   }
+  },
+  {
+   "text": "Fix $t$ and suppress it in the notation. Column $1$ of $R_0$ is the first basis column, so $(KR_0)_{i1}=K_{i1}$. For $j>1$ its column $j$ has only the diagonal entry $1$ and the extra entry $-bK_{1j}$ in row $1$. Thus $(KR_0)_{ij}=K_{ij}-K_{i1}bK_{1j}$. In particular $(KR_0)_{1j}=K_{1j}-abK_{1j}=0$ for $j>1$, and $(KR_0)_{11}=a$. For $i,j>1$ the same formula is precisely $H_{ij}$, because $A$ is commutative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent auxiliary calculation for the continuous-pivot step; HRS Theorem 6.12(2), printed pp. 18–19, motivates continuous division but does not state this matrix identity."
+   }
+  },
+  {
+   "text": "Put $B=KR_0$. Row $1$ of $L_1$ is the first basis row, and for $i>1$, $(L_1B)_{ij}=B_{ij}-bK_{i1}B_{1j}$. At $j=1$ this is $K_{i1}-bK_{i1}a=0$. At $j>1$, $B_{1j}=0$, so it is $H_{ij}$. Consequently $L_1KR_0$ has corner $a$, zero remaining entries in its first row and column, and reduced block $H$. Left multiplication by $L_0$ multiplies only row $1$ by $b$, changing that corner to $ba=1$. This proves $LKR_0=\\begin{pmatrix}1&0\\\\0&H\\end{pmatrix}$ with exactly the order $L_0L_1$ in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent auxiliary calculation for the continuous-pivot step; HRS Theorem 6.12(2), printed pp. 18–19, motivates continuous division but does not state this matrix identity."
+   }
+  },
+  {
+   "text": "For each fixed entry index, the displayed entries of $L$, $L^{-1}$, $R_0$ and $R_0^{-1}$ are constants or one of $a$, $b$, $K_{i1}$, $\\pm bK_{i1}$, $\\pm bK_{1j}$. The functions $a$ and all $K_{ij}$ are continuous by hypothesis, and $b$ is continuous by the separate hypothesis on the pivot inverse. Products, negatives and differences of these functions are continuous: for example $t\\mapsto(b(t),K_{i1}(t))$ is continuous into $A\\times A$, and composing with the continuous ring multiplication gives $bK_{i1}$; negation and subtraction work in the same way. Applying this twice to $H_{ij}=K_{ij}-bK_{i1}K_{1j}$ proves continuity of every residual entry. These are exactly the entrywise continuity assertions, including those of both inverse families; no continuity of inversion on the whole unit group is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent auxiliary calculation for the continuous-pivot step; HRS Theorem 6.12(2), printed pp. 18–19, motivates continuous division but does not state this matrix identity."
+   }
+  },
+  {
+   "text": "When $n=1$ there are no indices $i>1$, and when $m=1$ there are no indices $j>1$. The corresponding reduced block has an empty row or column set; the same finite-sum calculations still apply. In particular for $m=n=1$ they give $b\\,a=1$. If $T$ is empty all pointwise assertions are vacuous and the unique entry functions are continuous. Thus the calculation covers every case allowed by $m,n\\geq1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent auxiliary calculation for the continuous-pivot step; HRS Theorem 6.12(2), printed pp. 18–19, motivates continuous division but does not state this matrix identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Agent auxiliary calculation for the continuous-pivot step; HRS Theorem 6.12(2), printed pp. 18–19, motivates continuous division but does not state this matrix identity."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +104,45 @@
    "results": "Mathlib/LinearAlgebra/Matrix/Transvection.lean and Mathlib/LinearAlgebra/Matrix/SchurComplement.lean contain algebraic ingredients only; no topological family lemma.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromBlocks_eq_of_invertible|continuous.*mul|transvection.*inv",
+   "results": "SchurComplement.lean:50,61 algebraic LDU identities; Transvection.lean:178,191,195 inverse identities for individual transvections; SpecialLinearGroup.lean inverse identities. None is the complete continuous rectangular unit-pivot assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous matrix with a unit upper left entry can be reduced by continuous elementary row and column operations to one direct sum its Schur complement",
+   "results": "Matrix.fromBlocks_eq_of_invertible₁₁ (SchurComplement) is an algebraic LDU identity. Other hits concern invertibility of square blocks, Hermitian forms, and continuity of block diagonal matrices. The source at SchurComplement.lean:50–58 was read: it does not state the prescribed continuous rectangular factorization or its inverse-continuity clauses.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.fromBlocks",
+   "results": "Matrix.fromBlocks and its block projections, entries, transpose and submatrix identities (Data.Matrix.Block). These define block matrices; none states the continuous unit-pivot elimination.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous rectangular matrix unit pivot Schur elimination with explicit continuous invertible elementary row and column matrices",
+   "results": "Matrix.Pivot.listTransvecCol/listTransvecRow and square field diagonalization declarations; Matrix.GeneralLinearGroup.continuous_upperRightHom only treats GL₂ unipotents; Continuous.matrix_cramer. No full match.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gaussian elimination over a topological commutative ring with a continuously invertible scalar pivot gives continuous triangular factors and continuous inverses",
+   "results": "LDL.invertibleLowerInv and LDL.lowerInv concern positive-definite matrices; Matrix.Pivot list-transvection lemmas concern square matrices over fields. No arbitrary commutative topological-ring rectangular assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-continuous-integral-pivot-splitting",
@@ -65,5 +163,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-unit-pivot-schur-formula",
+  "worker": "stage1",
+  "summary": "Expanded the continuous unit-pivot calculation into explicit square-zero inverses, the inverse of L0L1, column elimination, row elimination and normalization, entrywise continuity, and empty-block cases. No statement change or new node. HRS supplies contextual continuous-division motivation, not the matrix formula; the proof is explicitly agent-written.",
+  "blueprint": "Realizes the continuous Smith-elimination refinement of lem-sfb-dc-hom-preserves through integral-lfp-constant-model-comparison, continuous-integral-matrix-local-smith and continuous-integral-pivot-splitting: the elementary elimination and normalization of one unit pivot."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-06a1e72a8",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-06a1e72a8 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all 6 steps. I also read def-weil-matrix, which supplies only the entry-family notion the item uses, and the consumer lem-sfb-continuous-integral-pivot-splitting, whose step 1 applies the item with the same order L0L1, R0 and residual block. I recomputed every step by hand. Step 1: N^2=0 and P^2=0, so the inverses are I-N and I-P. Step 2: L^{-1}=(I-N)D, with entries a and K_i1. Step 3: column elimination makes row 1 vanish because ab=1. Step 4: row elimination uses ba=1; L0 then scales row 1 by b to give a corner of 1, and the order is correct by associativity. Step 5: continuity uses only the topological-ring operations and the separate hypothesis that the pivot inverse is continuous. Step 6: empty blocks and empty T. Every step is honestly elementary. I ran my own test on 16200 random cases over Z/1, Z/4, Z/6, Z/8, Z/9 and Z/12 with shapes up to 3x3; all identities and both two-sided inverses hold. The delivery has no new nodes, so no duplicate, restated-clause or drop question arises. A grep of dag/nodes for pivot/Schur candidates (the pc minor-block, abelian-varieties residue pivot, pbc homotopy-cancellation and pbc continuous-field elimination nodes) found nothing that states or generalizes the item. The proof cites no statement node, so it stays on its route, has no tool_uses and cites no SGA. I checked HRS arXiv:2305.18131 Theorem 6.12(2), pp. 18-19: it proves continuous division and principality of ideals, not this identity. proof_origin (by agent) already says so, but the maintainer-owned source.place phrase claiming HRS uses it as a standard calculation overstates the source. I left that field unchanged because it is not split-owned, and suggest the maintainer adopt the worker's wording. The item is not a target, so the base-change and coefficient-category check does not apply. No fixes."
  }
 }

@@ -1,0 +1,115 @@
+{
+ "id": "lem-coef-homotopy-adjunction-coherent-witnesses",
+ "kind": "statement",
+ "title": "Counit object is terminal in the right-slice pullback of a homotopy-2-category adjunction",
+ "statement": "Use simplicial sets, quasicategories, degreewise pullbacks, right-pinched mapping spaces and contractibility of [def-cbc-enhanced-diagrams-cones], and the right slice $\\mathcal C_{/t}$ over a vertex with its source projection of [lem-coef-infinity-slice-right-fibration]. Let $\\mathscr K$ be a simplicial category (simplicial hom-sets, identity vertices, strictly associative unital simplicial composition) whose every hom-simplicial set is a quasicategory. Its homotopy $2$-category has the same objects, hom-categories the homotopy categories of these quasicategories, and composition induced by that of $\\mathscr K$. Let $L\\in\\mathscr K(c,d)_0$ and $U\\in\\mathscr K(d,c)_0$, and let $\\eta:1_c\\to UL$ be an edge of $\\mathscr K(c,c)$ and $\\epsilon:LU\\to1_d$ an edge of $\\mathscr K(d,d)$ whose classes form an adjunction $L\\dashv U$ in the homotopy $2$-category: writing whiskering as composition in $\\mathscr K$ with a degenerate edge, $[\\epsilon L]\\circ[L\\eta]=[1_L]$ in the homotopy category of $\\mathscr K(c,d)$ and $[U\\epsilon]\\circ[\\eta U]=[1_U]$ in that of $\\mathscr K(d,c)$.\n\nFix an object $z$ and a vertex $a\\in\\mathscr K(z,d)$. Put $C_z=\\mathscr K(z,c)$ and $D_z=\\mathscr K(z,d)$, let $L_z:C_z\\to D_z$ be the simplicial map of composition with $L$, let $q_a:(D_z)_{/a}\\to D_z$ be the source projection of the right slice over $a$, and form the degreewise pullback\n$$E'_z=C_z\\times_{L_z,D_z,q_a}(D_z)_{/a}.$$\nIts vertices are pairs $(b,\\alpha)$ with $b\\in C_z$ and $\\alpha:L_zb\\to a$ an edge of $D_z$. Let $Ua\\in C_z$ be the composite of $a$ and $U$, and $\\epsilon_a:LUa\\to a$ the edge of $D_z$ obtained by composing $\\epsilon$ with the degenerate edge at $a$; thus $(Ua,\\epsilon_a)$ is a vertex of $E'_z$. Then $E'_z$ is a quasicategory and $(Ua,\\epsilon_a)$ is terminal in it: for every vertex $(b,\\alpha)$ of $E'_z$ the right-pinched mapping space $\\operatorname{Map}_{E'_z}((b,\\alpha),(Ua,\\epsilon_a))$ is contractible.",
+ "source": {
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Riehl--Verity, Observation 4.3.4 and Theorems 4.3.9 and 4.3.11, pp. 840--844 (terminality of the counit in the slice over a); right slice as in Kerodon 018F/01KX. Online source read; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-slice-right-fibration"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally quasicategorical simplicial category adjunction in the homotopy 2-category admits coherent unit and counit triangle witnesses",
+   "results": "CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor; SSet.Truncated.nerve₂Adj; CategoryTheory.nerveAdjunction; SSet.QCat.bicategory; CategoryTheory.Bicategory.Adjunction.left_triangle; CategoryTheory.Bicategory.Adjunction.right_triangle; CategoryTheory.Adjunction.Localization.η; CategoryTheory.Adjunction.localization",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has ordinary simplicial-set homotopy-category and bicategory adjunction declarations, but no coherent-witness theorem for locally quasicategorical simplicial categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Bicategory.Adjunction, SimplicialCategory",
+   "results": "loogle: unknown identifier 'SimplicialCategory'; no hits",
+   "date": "2026-10-17",
+   "verdict": "unavailable/invalid pattern: corrected namespace search below"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*2.*categor.*adjunction|coherent.*triangle.*witness [Mathlib/CategoryTheory]",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction in the homotopy bicategory of quasicategories lifts to coherent triangle data",
+   "results": "CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor; SSet.Truncated.nerve₂Adj; CategoryTheory.Bicategory.LeftLift.IsKan.adjunction; CategoryTheory.Bicategory.LeftLift.IsAbsKan.adjunction; CategoryTheory.nerveAdjunction; SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac; CategoryTheory.Bicategory.Adjunction.homEquiv₁",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary or truncated simplicial-set bicategories, not the stated coherent lifting theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Bicategory.Adjunction, SSet.QCat.bicategory",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Bicategory.Adjunction|QCat.bicategory [Mathlib/AlgebraicTopology]",
+   "results": "Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:66: instance QCat.bicategory : Bicategory QCat",
+   "date": "2026-10-17",
+   "verdict": "no match: only the ambient bicategory instance is present"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy 2-category adjunction with an explicitly chosen simplicial triangle witness gives a terminal object in the pullback of a right slice",
+   "results": "CategoryTheory.Bicategory.Adj.Hom.adj; CategoryTheory.mkTerminalOfRightAdjoint; SSet.Truncated.HomotopyCategory.isTerminal; no locally quasicategorical right-slice theorem",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary bicategories, ordinary comma categories, or truncated simplicial sets; none states the locally quasicategorical right-slice pullback with an explicit simplicial witness."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mkTerminalOfRightAdjoint",
+   "results": "CategoryTheory.mkTerminalOfRightAdjoint in Mathlib/CategoryTheory/Adjunction/Comma.lean:150",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CostructuredArrow terminality, not a quasicategory right-slice pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy 2-category adjunction gives terminal counit object in a quasicategory slice pullback",
+   "results": "CategoryTheory.mkTerminalOfRightAdjoint; CategoryTheory.Over.postAdjunctionLeft_counit_app_left; SSet.Truncated.nerve₂Adj; no right-slice pullback theorem",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary over/comma adjunctions or truncated nerve constructions and do not provide the stated coherent result."
+  },
+  {
+   "tool": "grep",
+   "query": "mkTerminalOfRightAdjoint|right.?slice|homotopy.*2.*adjunction",
+   "results": "Mathlib/CategoryTheory/Adjunction/Comma.lean:150,166; no quasicategory right-slice result",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary comma terminality and unrelated right-slice text occur."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-counit-cone-boundary-extension",
+  "date": "2026-10-17",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle derived mapping-complex adjunction before the inverse limit: coherent unit and counit data underlying the universal boundary extension.",
+   "via": [
+    "lem-coef-counit-cone-boundary-extension",
+    "lem-coef-enriched-coherent-adjunction-extension",
+    "lem-coef-linear-monad-tensor-enrichment",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

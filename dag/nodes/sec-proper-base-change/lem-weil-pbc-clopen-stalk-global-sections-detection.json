@@ -14,9 +14,65 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\bar z$ over $z$. Let $\\mathcal A_z$ have the clopen neighbourhoods $W$ of $z$ as objects and inclusions as arrows. It is nonempty (it contains $E$), intersections give common refinements, and there is at most one arrow between any two objects, so it is cofiltered. The structural hypotheses of [lem-weil-pbc-clopen-etale-neighbourhood-cofinality] are exactly our hypotheses on $K$, $C$ and the clopen basis. Its pointed maps $W\\to V$ give condition (i) of [lem-weil-pbc-initial-functor-cofiltered-criterion]. For condition (ii), take $W_1=W_2=W$ in its agreement assertion: the resulting inclusion $W_3\\hookrightarrow W$ equalizes any two pointed maps from $W$ to the same $V$. Apply that criterion to the inclusion of $\\mathcal A_z$ into pointed etale neighbourhoods and the functor $V\\mapsto G(V)$ with values in abelian groups. By [def-weil-pbc-geometric-stalks] the full colimit is $G_{\\bar z}$. Thus the canonical map from the clopen colimit is an isomorphism. The criterion identifies its component on $G(W)$ with the germ at $(W,\\bar z_W)$, so this is precisely the map in the statement, including its restriction transition maps.",
+   "uses": [
+    "lem-weil-pbc-clopen-etale-neighbourhood-cofinality",
+    "lem-weil-pbc-initial-functor-cofiltered-criterion",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PN, section-stalks; Tag 040R, definition-stalk; agent-written clopen refinement of the setting in Tag 0EZV, lemma-check-stalks-better"
+   }
+  },
+  {
+   "text": "For any clopen $W\\subseteq E$, put $W^c=E\\setminus W$ with its open-subscheme structure. The inclusions of $W$ and $W^c$ are etale by [lem-weil-pbc-open-immersion-etale], and they are jointly surjective, hence a cover by [def-weil-pbc-etale-site]. The empty covering and the sheaf equalizer condition of [def-weil-pbc-abelian-etale-sheaves] give $G(\\varnothing)=0$. Since $W\\times_E W^c=\\varnothing$, any $s\\in G(W)$ and the zero section on $W^c$ agree on the mixed overlaps; on the self-overlaps they agree identically. The same equalizer condition therefore gives a unique $\\widetilde s\\in G(E)$ restricting to $s$ on $W$ and to zero on $W^c$. Uniqueness shows $\\widetilde{s+s'}=\\widetilde s+\\widetilde{s'}$ and $\\widetilde 0=0$. Thus extension by zero is a homomorphism $e_W:G(W)\\to G(E)$ with restriction composed with $e_W$ equal to the identity.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PN, section-stalks; Tag 040R, definition-stalk; agent-written clopen refinement of the setting in Tag 0EZV, lemma-check-stalks-better"
+   }
+  },
+  {
+   "text": "Let $g:G(E)\\to G_{\\bar z}$ be the canonical germ homomorphism. For each clopen neighbourhood $W$ of $z$, functoriality of germs gives $g\\circ e_W(s)=s_{\\bar z}$, by Step 2. Consequently every clopen-colimit coprojection has image contained in $H=\\operatorname{im}g$. To see that $H=G_{\\bar z}$ without assuming any extra colimit-preservation theorem, let $q:G_{\\bar z}\\to G_{\\bar z}/H$ be the quotient homomorphism. Every coprojection followed by $q$ is zero. The colimit universal property from Step 1 implies that $q$ is the zero map; since $q$ is surjective its quotient is zero. Hence $H=G_{\\bar z}$ and $g$ is surjective. If $G(E)=0$, this surjection has zero source, so $G_{\\bar z}=0$. This applies independently to every geometric point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PN, section-stalks; Tag 040R, definition-stalk; agent-written clopen refinement of the setting in Tag 0EZV, lemma-check-stalks-better"
+   }
+  },
+  {
+   "text": "Finally take $C=K$ and $E=T=\\operatorname{Spec}K$. A field has precisely the zero prime, its localization there is itself, and its one-point spectrum has a clopen basis. Step 1 applies to every abelian etale sheaf $F$ on $T$ and every geometric point $\\bar t$. The only clopen neighbourhood of the unique point is $T$ itself, so the clopen diagram has just the object $F(T)$ and its identity map. Its colimit is $F(T)$, and the canonical isomorphism of Step 1 is the germ map $F(T)\\to F_{\\bar t}$. This proves the final clause even when $K$ is separably closed but not algebraically closed, and for arbitrary algebraically closed $\\Omega$ in the geometric point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PN, section-stalks; Tag 040R, definition-stalk; agent-written clopen refinement of the setting in Tag 0EZV, lemma-check-stalks-better"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-clopen-etale-neighbourhood-cofinality",
+  "lem-weil-pbc-initial-functor-cofiltered-criterion",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PN, section-stalks; Tag 040R, definition-stalk; agent-written clopen refinement of the setting in Tag 0EZV, lemma-check-stalks-better"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +108,45 @@
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme whose local rings are a separably closed field and with a clopen basis, the geometric stalk of an abelian etale sheaf is the colimit of clopen sections and global sections surject onto each stalk",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*clopen|clopen.*stalk|global.*stalk",
+   "results": "[grep] OK 0 hit(s): none. Searched AlgebraicGeometry/ under Mathlib/.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian etale sheaf on a scheme with separably closed field local rings has stalks computed on clopen neighborhoods; every germ extends to a global section",
+   "results": "[leansearch] OK 8 hit(s): TopCat.Presheaf.Γgerm, ModuleCat.Tilde.toOpen_germ_apply, TopCat.Presheaf.section_ext, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.StructureSheaf.germ_toOpen, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"IsClopen\"",
+   "results": "[loogle] OK 0 hit(s): none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric etale stalk functor equals sections on a separably closed field; on a zero dimensional scheme germs are represented by sections over open and closed neighborhoods",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, AlgebraicGeometry.Scheme.fromSpecStalk_app, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-strict-local-geometric-fibre-test",
@@ -92,5 +183,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-clopen-stalk-global-sections-detection",
+  "worker": "stage1",
+  "summary": "Proved the clopen colimit formula using the existing pointed-neighbourhood cofinality and initial-functor criterion; wrote out extension by zero using the sheaf equalizer condition, the elementary quotient argument for germ surjectivity, and the one-point specialization. No statement changes and no new nodes. Repair of the refused landing: revalidated all six cited statements on the current DAG, made the equalization specialization explicit, and refreshed the cofinality quotation after its initiality-definition citation was added.",
+  "blueprint": "Realizes the inherited from.place of thm-weil-pbc-direct-image-finiteness-proper: the clopen cofinal system computes geometric stalks, clopen gluing extends sections globally, and Spec K is the one-point case."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-5eeade3ad",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-5eeade3ad (reviewer sub-agent of L); spot-checked: I read the whole item: its unchanged statement, all 4 steps, and the full statement of each of its 6 cited nodes. The delivery has no new nodes. Step 1: the clopen neighbourhoods of z form a cofiltered poset (it contains E and is closed under intersection). The cofinality lemma (same unit, split and reviewed, with the same hypotheses: separably closed K, K->C_z an isomorphism, clopen basis, any geometric point) gives conditions (i) and (ii) of the cofiltered criterion. For (ii) it takes W1=W2=W in the agreement clause. The criterion then gives the canonical colimit isomorphism with germ components. Its pointed neighbourhoods match those in the geometric-stalks definition. Step 2: W and its complement are open, etale and jointly surjective, so they cover E. G(empty)=0 follows from the empty cover, and W x_E W^c is empty, so extension by zero is unique and additive. Step 3: the quotient argument for surjectivity is elementary and correct. Step 4: the case C=K has one point and a one-object diagram. Small cases tested: C=0, C=K with K imperfect, C=KxK (surjective but not injective), and locally constant functions on a profinite set. The statement is exactly what the parent lem-weil-pbc-strict-local-geometric-fibre-test uses. Sources read: Stacks etale-cohomology 03PN, 03PQ, 040R, 09AY and the proof of 0EZV. The node is correctly labelled an agent-written refinement. Route: cofinality is in the same unit and the other citations are mathlib leaves or definitions. No cycle (the cofinality node does not depend on this item), no tool_uses, no SGA. A duplicate search with rg (clopen+stalk, strictly henselian+global sections) found no node that states the item. Error lists A-F are clean. No fixes were made."
  }
 }

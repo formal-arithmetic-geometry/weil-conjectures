@@ -1,0 +1,90 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-open-projection-exchange",
+  "date": "2026-10-17",
+  "group": "Q26"
+ },
+ "id": "lem-asd-adjunction-projection-map-mate",
+ "kind": "statement",
+ "title": "Projection maps of left adjoints are compatible with mates",
+ "statement": "Let $\\mathcal C_1,\\mathcal D_1,\\mathcal C_2,\\mathcal D_2$ be categories. For $i=1,2$ let $F_i:\\mathcal C_i\\to\\mathcal D_i$ be left adjoint to $G_i:\\mathcal D_i\\to\\mathcal C_i$, with unit $\\eta_i$ and counit $\\varepsilon_i$, and let $H_i:\\mathcal D_i\\to\\mathcal C_i$ be another functor. Let $T_i:\\mathcal C_i\\times\\mathcal C_i\\to\\mathcal C_i$ and $S_i:\\mathcal D_i\\times\\mathcal D_i\\to\\mathcal D_i$ be bifunctors. Give natural comparison maps\n$$\\delta_i(X,Y):T_i(G_iX,H_iY)\\longrightarrow G_iS_i(X,Y)\\qquad(X,Y\\in\\mathcal D_i).$$\nFor $K\\in\\mathcal C_i$, $M\\in\\mathcal D_i$, define $\\pi_i(K,M):F_iT_i(K,H_iM)\\to S_i(F_iK,M)$ as the adjoint transpose of\n$$T_i(K,H_iM)\\xrightarrow{T_i(\\eta_{i,K},1)}T_i(G_iF_iK,H_iM)\\xrightarrow{\\delta_i(F_iK,M)}G_iS_i(F_iK,M).$$\nHere adjoint transpose of $f:A\\to G_iB$ means $\\varepsilon_{i,B}\\circ F_i(f)$; thus this definition fixes the projection map without any monoidal axioms.\n\nLet $P:\\mathcal C_1\\to\\mathcal C_2$ and $Q:\\mathcal D_1\\to\\mathcal D_2$ be functors, with natural maps\n$$p_{A,B}:P T_1(A,B)\\to T_2(PA,PB),\\qquad q_{X,Y}:Q S_1(X,Y)\\to S_2(QX,QY).$$\nGive natural transformations with components\n$$\\tau_X:P G_1X\\to G_2QX,\\quad\\rho_Y:P H_1Y\\to H_2QY,\\quad b_K:F_2PK\\to QF_1K.$$\nAssume the following two equations (composition is right to left): for every $K\\in\\mathcal C_1$,\n$$G_2(b_K)\\circ\\eta_{2,PK}=\\tau_{F_1K}\\circ P(\\eta_{1,K});$$\nand for every $X,Y\\in\\mathcal D_1$,\n$$G_2(q_{X,Y})\\circ\\tau_{S_1(X,Y)}\\circ P(\\delta_1(X,Y))\n=\\delta_2(QX,QY)\\circ T_2(1_{G_2QX},\\rho_Y)\\circ T_2(\\tau_X,1_{PH_1Y})\\circ p_{G_1X,H_1Y}.$$\nThen for every $K\\in\\mathcal C_1$, $M\\in\\mathcal D_1$,\n$$q_{F_1K,M}\\circ Q(\\pi_1(K,M))\\circ b_{T_1(K,H_1M)}\n=S_2(b_K,1_{QM})\\circ\\pi_2(PK,QM)\\circ F_2(T_2(1_{PK},\\rho_M))\\circ F_2(p_{K,H_1M}).$$\nThis is an equality of maps $F_2P T_1(K,H_1M)\\to S_2(QF_1K,QM)$, natural in $K,M$. None of the displayed comparison maps is required to be an isomorphism. All categorical data used here (bifunctors, natural transformations, adjunction units and counits, and their transposes) are explicitly specified in this statement. Categories have the identities and associative composition of [def-nagata-category]. A functor preserves identities and composition; a bifunctor is a functor from a product category. A natural transformation $\\alpha:F\\to G$ has components $\\alpha_X:FX\\to GX$ satisfying $G(f)\\circ\\alpha_X=\\alpha_Y\\circ F(f)$ for every $f:X\\to Y$. The units and counits satisfy the two adjunction triangle identities. The mate and adjoint-transpose conventions are those of [def-weil-pbc-adjunction-mate].",
+ "source": {
+  "document": "WeilConjectures/CategoryTheory/Adjunction/ProjectionMapCompat.lean",
+  "place": "CategoryTheory.Adjunction.projectionMap_mate, statement lines 223-236, proof lines 237-263; full category, functor and bifunctor hypotheses lines 195-204. ProjectionMap.lean lines 60-109 define the adjoint transpose and projection map."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Categorical projection map mate theorem for monoidal adjunctions",
+   "results": "CategoryTheory.Adjunction.ε_comp_map_ε; CategoryTheory.Adjunction.ε_comp_map_ε_assoc; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_apply; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.rightAdjointMate_comp; CategoryTheory.rightAdjointMate; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Mathlib declarations do not state this project-specific lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.projectionMap_mate, Adjunction.projectionMapTranspose_app_app",
+   "results": "loogle: unknown identifier 'Adjunction.projectionMap_mate'",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib declaration states this project theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap_mate|projectionMapTranspose_app_app",
+   "results": "0 hits in the requested Mathlib search subdirectory WeilConjectures/.",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: the original command selected a nonexistent subdirectory of Mathlib; retained as a historical logged query, superseded by the real CategoryTheory source search below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection maps of left adjoints are compatible with mates",
+   "results": "CategoryTheory.Functor.RightExtension.postcomp₁_obj_left_map; CategoryTheory.mateEquiv_counit; CategoryTheory.frobeniusMorphism_mate; CategoryTheory.unit_mateEquiv; CategoryTheory.mateEquiv_apply; CategoryTheory.Comma.map_fst; CategoryTheory.mateEquiv_square; CategoryTheory.Bicategory.mateEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Mathlib declarations do not state this project-specific lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection morphisms of left adjoints to bifunctors are compatible with mates of natural transformations between two adjunctions",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompNatTrans_app; CategoryTheory.mateEquiv_apply; CategoryTheory.Adjunction.leftAdjointCompNatTrans; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm; CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: mateEquiv_square is pasting of squares for adjunctions; frobeniusMorphism is for cartesian closed monoidal categories. Neither states this theorem for arbitrary bifunctors and arbitrary comparison maps."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|frobeniusMorphism|mateEquiv_square",
+   "results": "Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: mateEquiv_square is pasting of squares for adjunctions; frobeniusMorphism is for cartesian closed monoidal categories. Neither states this theorem for arbitrary bifunctors and arbitrary comparison maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_square",
+   "results": "CategoryTheory.mateEquiv_square",
+   "date": "2026-10-17",
+   "verdict": "no match: mateEquiv_square is pasting of squares for adjunctions; frobeniusMorphism is for cartesian closed monoidal categories. Neither states this theorem for arbitrary bifunctors and arbitrary comparison maps."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-asd-smooth-generic-direct-image",
+   "place": "Proof, last paragraph, open-extension tensor/base-change factor: the mate and tensor-coherence subclaims used in the compact projection/exchange compatibility",
+   "via": [
+    "lem-asd-open-projection-exchange",
+    "lem-asd-compact-projection-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

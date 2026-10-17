@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+ "kind": "statement",
+ "title": "Ringed slice over an arbitrary sheaf: element-site presentation and exact extension by zero",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], let $R$ be a sheaf of commutative rings, and let $A$ be a sheaf of sets in the chosen universe. Form the site $\\mathcal C/A$ whose objects are pairs $(U,s)$ with $U\\in\\mathcal C$ and $s\\in A(U)$, whose arrows $(V,t)\\to(U,s)$ are arrows $v:V\\to U$ with $A(v)(s)=t$, and whose covering families are those whose underlying families in $\\mathcal C$ cover. This is a small site. There is a geometric equivalence $\\operatorname{Sh}(\\mathcal C/A)\\simeq\\operatorname{Sh}(\\mathcal C)/A$ taking $(F\\xrightarrow p A)$ to $((U,s)\\mapsto\\{x\\in F(U):p(x)=s\\})$. Under this equivalence the ring $R_A=R\\times A\\to A$ corresponds to the sheaf $(U,s)\\mapsto R(U)$. The localization geometric morphism $j_A:\\operatorname{Sh}(\\mathcal C)/A\\to\\operatorname{Sh}(\\mathcal C)$ has module pullback $j_A^*:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R_A)$ [def-weil-sheaf-of-modules-category] given by $(j_A^*M)(U,s)=M(U)$. This functor is exact and has an exact additive left adjoint $j_{A!}$. For an $R_A$-module sheaf $L$ on $\\mathcal C/A$, $j_{A!}L$ is the module sheafification [def-weil-presheaf-modules-sheafification] of the presheaf $U\\mapsto\\bigoplus_{s\\in A(U)}L(U,s)$; restriction along $v:V\\to U$ sends the summand indexed by $s$ to that indexed by $A(v)(s)$ using the restriction of $L$. For any map of sheaves $B\\to A$, applying this construction inside $\\operatorname{Sh}(\\mathcal C)/A$ identifies its localization at $B\\to A$ with $\\operatorname{Sh}(\\mathcal C)/B$, with restricted ring $R_B$; the resulting restriction composed with $j_A^*$ is canonically $j_B^*$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IE, lemma-localize-ringed-topos, clauses (1)-(4); Tag 04J4, lemma-relocalize-ringed-topos; exactness is the extension-by-zero exactness of lemma-extension-by-zero-exact, applied to the element-site model. Element-site presentation: sites.tex, Tag 0791, lemma-localize-topos-site."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localize.*[Ss]heaf|[Ss]heaf.*[Oo]ver|over.*[Aa]djunction|extensionByZero [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "17 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean. Read returned types: no declaration states the full assertion. Site-object restriction and ordinary sheafification adjunctions do not give the arbitrary-sheaf slice assertion; site equivalences do not cover arbitrary equivalences of topoi.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an arbitrary sheaf F on a small ringed site, restriction to the slice topos over F is exact and has an exact extension by zero left adjoint",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes, CategoryTheory.HasSheafify.isLeftExact, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, CategoryTheory.constantSheafΓAdj, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous. Read returned types: no declaration states the full assertion. Site-object restriction and ordinary sheafification adjunctions do not give the arbitrary-sheaf slice assertion; site equivalences do not cover arbitrary equivalences of topoi.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"over\", \"adjunction\"",
+   "results": "0 hits: . Read returned types: no declaration states the full assertion. Site-object restriction and ordinary sheafification adjunctions do not give the arbitrary-sheaf slice assertion; site equivalences do not cover arbitrary equivalences of topoi.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The slice topos over a sheaf F is sheaves on the category of pairs (U,s in F(U)); restriction of ring module sheaves to this slice has an exact left adjoint given by sheafified sums over s",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.sheafificationAdjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous. Read returned types: no declaration states the full assertion. Site-object restriction and ordinary sheafification adjunctions do not give the arbitrary-sheaf slice assertion; site equivalences do not cover arbitrary equivalences of topoi.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf.*[Ee]lements|[Ee]lements.*[Ss]heaf|sheafOver|overSheaf|slice.*[Ss]heaf [CategoryTheory/Sites]",
+   "results": "23 hits: Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean. Read returned types: no declaration states the full assertion. Site-object restriction and ordinary sheafification adjunctions do not give the arbitrary-sheaf slice assertion; site equivalences do not cover arbitrary equivalences of topoi.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf A, the category of elements site presents the slice topos Sh(C)/A, with exact restriction and exact left adjoint on sheaves of modules",
+   "results": "8 hits: SheafOfModules.Presentation, CategoryTheory.Sheaf.over, SheafOfModules.over, SheafOfModules.instCategory, CategoryTheory.sheafOver, CategoryTheory.Sheaf.instCategorySheaf, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction. Read returned types: no declaration states the full assertion. Site-object restriction and ordinary sheafification adjunctions do not give the arbitrary-sheaf slice assertion; site equivalences do not cover arbitrary equivalences of topoi.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ringed-presentation-transport",
+  "date": "2026-10-17",
+  "group": "NS"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Supporting presentation change for the ambient direct-image/completion comparison in the scalar-extension exchange clause: slicing at arbitrary sheaves, rather than only representable site objects.",
+   "via": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

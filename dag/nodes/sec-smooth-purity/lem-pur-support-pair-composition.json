@@ -14,9 +14,49 @@
   "def-sp-injective-resolutions",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take the degreewise adjoints $b:I\\to RJ$ of $h$ and $c:J\\to R_vP$ of $k$. The composite data satisfy the hypotheses of [lem-pur-support-pair-chain-coherence] for $v\\circ u$: precomposition with $v\\circ u$ is $R\\circ R_v$, which preserves abelian sheaves; $M\\circ L$ is additive and exact and left adjoint to $R\\circ R_v$ through the composite Hom bijection; and $(vu)(m)\\circ v(s)s'=v(u(m)s)s'=v(tm')s'=v(t)\\,v(m')s'=v(t)t'm''$. Under that Hom bijection the adjoint of $k\\circ M(h)$ is $R(c)\\circ b$, since transposing $k\\circ M(h)$ across $M\\dashv R_v$ gives $R_v$-adjoint $c\\circ h$, whose transpose across $L\\dashv R$ is $R(c)\\circ b$. Apply clause (1) of [lem-pur-support-pair-chain-coherence] to $h$, to $k$, and to $k\\circ M(h)$ with the composite data. The T-component for the composite is $P(v(t)t')\\circ c_{uT}\\circ b_T=P(t')\\circ P(v(t))\\circ c_{uT}\\circ b_T$. Naturality of the sheaf map $c:J\\to R_vP$ along $t:T'\\to uT$ gives $P(v(t))\\circ c_{uT}=c_{T'}\\circ J(t)$, so this equals $(P(t')\\circ c_{T'})\\circ(J(t)\\circ b_T)$, the composite of the T-components for $k$ and for $h$. The same computation with $s,s'$ and naturality of $c$ along $s$ gives the V-components. The kernel inclusions are monomorphisms, so the kernel map of the composite, being the unique map compatible with the inclusions, equals the composite of the two kernel maps. Hence the diagram map for $k\\circ M(h)$ and $(v\\circ u,v(t)\\circ t',v(s)\\circ s')$ is the composite of the diagram maps for $h$ and $k$.",
+   "uses": [
+    "lem-pur-support-pair-chain-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Theorem 9.4, pp. 65-67, functoriality in the pair; Stacks sites.tex Tag 03CB for composition of site morphisms and adjunction transposition"
+   }
+  },
+  {
+   "text": "If h is replaced by a homotopic representative, clause (2) of [lem-pur-support-pair-chain-coherence] supplies compatible homotopies on the T-, V-, and kernel components; applying the degreewise adjoint of the homotopy for h and then the chain map k gives the same homotopy for the composite. The analogous assertion holds when k is changed. Thus the chain-level equality in Step 1 survives passage to cohomology, and the two routes induce the same maps on all three cohomology groups.",
+   "uses": [
+    "lem-pur-support-pair-chain-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Theorem 9.4, pp. 65-67, functoriality and independence of injective representatives; Stacks derived.tex Tag 070I"
+   }
+  },
+  {
+   "text": "For bounded-below injective representatives $I,J,P$, clause (2) of [lem-pur-support-pair-chain-coherence] says that every derived morphism has a chain representative unique up to homotopy and that the three induced cohomology maps are unchanged under replacing representatives. Since $M$ is exact, $Q(M(h))$ is $M$ applied to the derived morphism represented by $h$, so $k\\circ M(h)$ represents the composite derived morphism. Apply clause (2) once to $h$, once to $k$, and once to the composite with the data checked in Step 1. The equality from Steps 1–2 is therefore independent of all representative choices and is precisely the asserted composition identity on cohomology.",
+   "uses": [
+    "lem-pur-support-pair-chain-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Theorem 9.4, pp. 65-67, derived functor representatives and functoriality; Stacks derived.tex Tag 070I"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-support-pair-chain-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Theorem 9.4, pp. 65-67, with the composition calculation written from the adjunction Hom-bijections and the chain-level refinement in lem-pur-support-pair-chain-coherence"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-with-support-exactness",
@@ -74,10 +114,25 @@
  "blueprint": {
   "from": {
    "node": "thm-pur-with-support-exactness",
-   "place": "Proof Step 3, final sentence: 'the functoriality in the pair and in F is the functoriality of all the maps'; extracted composition clause from returned Step 7",
+   "place": "Proof Step 3, final sentence: “the functoriality in the pair and in F is the functoriality of all the maps”; extracted composition clause from returned Step 7.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-support-pair-composition",
+  "worker": "stage1",
+  "summary": "Audited the imported composition-coherence statement against Milne Section 9, Theorem 9.4 and the existing chain-level coherence node. No new node is needed: the component construction, homotopy invariance, and representative independence are already stated by lem-pur-support-pair-chain-coherence; the remaining composition identity is the direct two-step Hom-bijection calculation for composite adjunctions. Filled a three-step proof and retained the imported Mathlib search log.",
+  "blueprint": "Realizes the extracted composition clause from thm-pur-with-support-exactness Proof Step 3 final sentence (“the functoriality in the pair and in F is the functoriality of all the maps”) and the returned Step 7 composition refinement."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-f5288da61",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-f5288da61 (reviewer sub-agent of L); spot-checked: I read the item, the one node it cites (lem-pur-support-pair-chain-coherence, same unit sk-prop-a1-kummer, clauses (1) and (2)) and the node that uses the item (thm-pur-with-support-exactness, Step 8 cites it with M=g^{-1}). Sources checked: Milne LEC §9 Thm 9.4 (pp. 65-67) states only 'functorial in the pairs and F', so the lemma is agent-written and proof_origin.by=agent is correct. Stacks 03CB (sites-lemma-composition-morphisms-sites) and 070I (derived-lemma-K-injective) exist and match how they are used. The statement is true. The composite relation (vu)(m)v(s)s'=v(u(m)s)s'=v(tm')s'=v(t)v(m')s'=v(t)t'm'' holds. R∘R_v is precomposition with v∘u, and M∘L is additive and exact, so clause (1)/(2) applies to the composite data. On the T-component, P(v(t)t')c_{uT}b_T = P(t')c_{T'}J(t)b_T by naturality of c along t; V is the same with s. The kernel maps agree because the inclusions are monic. Small cases checked: identity functors and maps, h=0 or k=0, V=T (zero kernels), initial V. The node does not restate clause (1), which covers only one adjunction. A grep for duplicates over support/restriction-kernel/composition nodes found none. No cycle, no SGA citation, no off-unit use, no tool_uses needed. One small repair (E5): Step 1 said 'the relations make these composites commute' without writing the naturality-of-c equation the identity needs, and without checking that the composite data meet the cited clause's hypotheses. Step 3 did not say why k∘M(h) represents the composite derived morphism (M exact). Both are rewritten in fixes/dag/nodes/sec-smooth-purity/lem-pur-support-pair-composition.json; the statement, dependencies and all other fields are unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

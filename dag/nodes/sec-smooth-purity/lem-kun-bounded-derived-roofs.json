@@ -2,19 +2,114 @@
  "id": "lem-kun-bounded-derived-roofs",
  "kind": "statement",
  "title": "Bounded representatives and bounded roofs in the derived category",
- "statement": "Let $R$ be a commutative ring and let $D^b(R)$ be the bounded derived category of $R$-modules [def-weil-pbc-bounded-derived-subcategories, def-weil-abstract-derived-category]. Every $C\\in D^b(R)$ admits integers $a\\le b$, a cochain complex of $R$-modules $K$ [def-weil-abstract-derived-category] with $K^n=0$ for $n<a$ or $n>b$, and an isomorphism $C\\cong Q(K)$ [def-weil-abstract-derived-category]. If $K$ and $L$ are bounded representatives of $C$ and $C'$, every morphism $u:C\\to C'$ in the derived localization is represented by a roof $K\\xleftarrow{s}M\\xrightarrow{g}L$ [def-weil-abstract-derived-category] with $M$ bounded and $s$ a quasi-isomorphism [def-weil-abstract-derived-category]. Any two such bounded roofs representing the same derived morphism have a common bounded refinement by quasi-isomorphisms [def-weil-abstract-derived-category]; hence the resulting roof class is independent of the bounded representatives and of the chosen refinement.",
+ "statement": "Let $R$ be a commutative ring and let $D^b(R)$ be the bounded derived category of $R$-modules [def-weil-pbc-bounded-derived-subcategories, def-weil-abstract-derived-category]. Write $K(R)$ for the homotopy category of cochain complexes: its morphisms are chain maps modulo homotopies $f-g=dh+hd$, where $h^n:K^n\\to L^{n-1}$. The localization $Q:\\mathrm{CoCh}(R)\\to D(R)$ factors through $K(R)$ [def-weil-abstract-derived-category]. Every $C\\in D^b(R)$ admits integers $a\\le b$, a cochain complex $K$ with $K^n=0$ for $n<a$ or $n>b$, and an isomorphism $C\\cong Q(K)$. For bounded representatives $K,L$ of $C,C'$, every $u:C\\to C'$ is represented, after transport along those isomorphisms, by a roof $K\\xleftarrow{s}M\\xrightarrow{g}L$ with $M$ bounded and $s$ a quasi-isomorphism. If $(M_i,s_i,g_i)$, $i=1,2$, are two such roofs with the same endpoints and the same derived morphism, there are a bounded complex $P$ and quasi-isomorphisms $v_i:P\\to M_i$ such that $s_1\\circ v_1$ is chain homotopic to $s_2\\circ v_2$ and $g_1\\circ v_1$ is chain homotopic to $g_2\\circ v_2$. Thus the roof equivalence is taken in $K(R)$, and the resulting derived morphism is independent of bounded representatives and refinements after transport along the chosen isomorphisms.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tags 05RW (bounded complexes in the bounded derived category), 05S6 (bounded derived localization), together with the bounded fraction refinements in Mathlib.Algebra.Homology.DerivedCategory.Fractions."
  },
  "stmt_deps": [
   "def-weil-pbc-bounded-derived-subcategories",
-  "def-weil-abstract-derived-category",
-  "def-sbc-standard-tstructure-derived-category"
+  "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-bounded-derived-subcategories], $C\\in D^b(R)$ has cohomology zero below some $a$ and above some $b$; decrease $a$ or increase $b$ to ensure $a\\le b$. Apply [lem-sfb-bounded-representative] to $R$-modules to obtain $K$ supported in $[a,b]$ and $C\\cong Q(K)$. Do this also for $C'$. This includes zero objects, for which any interval may be used.",
+   "uses": [
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-sfb-bounded-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RW, lemma-bounded-derived; Tag 05RV, lemma-complex-cohomology-bounded"
+   }
+  },
+  {
+   "text": "For bounded representatives $K,L$, choose $a\\le b$ with $K$ supported in $[a,b]$ and $L$ zero below $a$. Transport $u$ along the two specified representative isomorphisms to $f:Q(K)\\to Q(L)$. Apply [lem-kun-derived-bounded-roof-factorization] to obtain a bounded $M$ supported in $[a,b]$, $s:M\\to K$, $g:M\\to L$, and $f=Q(g)\\circ Q(s)^{-1}$. The denominator is a quasi-isomorphism: if $Q(s)$ is invertible, each $H^n(Q(s))$ is invertible, and the cohomology functors factor through $Q$ by [def-weil-abstract-derived-category]. Thus each $H^n(s)$ is invertible, which is the definition of a quasi-isomorphism.",
+   "uses": [
+    "lem-kun-derived-bounded-roof-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RW, lemma-bounded-derived; Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:115-134"
+   }
+  },
+  {
+   "text": "Suppose $(M_i,s_i,g_i)$ represent the same morphism between $Q(K)$ and $Q(L)$. Work in $K(R)$, not in the category of chain maps. By [lem-pc-quasi-isomorphisms-multiplicative-system], quasi-isomorphisms in $K(R)$ have a right calculus of fractions and the localization is $D(R)$. Apply [lem-pc-right-fraction-common-refinement] in this category. It gives an object represented by a complex $Z$ and chain-map representatives $t_i:Z\\to M_i$ such that $s_1t_1=s_2t_2$ and $g_1t_1=g_2t_2$ in $K(R)$, with the common denominator $s_1t_1$ a quasi-isomorphism. The two equalities mean chain homotopies, not strict equalities. No calculus of fractions for quasi-isomorphisms in $\\mathrm{CoCh}(R)$ is asserted.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic; Tag 05RU, definition-unbounded-derived-category; Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean:896-898,973-979"
+   }
+  },
+  {
+   "text": "Both $t_i$ are quasi-isomorphisms by the following explicit two-out-of-three calculation. For every $n$, functoriality gives $H^n(s_it_i)=H^n(s_i)H^n(t_i)$. The first factor and the product are isomorphisms; hence $H^n(t_i)=H^n(s_i)^{-1}H^n(s_it_i)$ is an isomorphism. Here the common denominator in Step 3 supplies the product for each $i$. Choose integers $a<b$ so that all four bounded complexes $M_1,M_2,K,L$ vanish outside $[a,b]$. Since $t_1$ is a quasi-isomorphism, $H^n(Z)=0$ outside this interval.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, quasi-isomorphisms defined by cohomology; elementary isomorphism cancellation"
+   }
+  },
+  {
+   "text": "Put $T=\\tau_{\\le b}Z$ and $P=\\tau_{\\ge a}T$, with canonical maps $j:T\\to Z$ and $q:T\\to P$; the direction is the zigzag $Z\\xleftarrow{j}T\\xrightarrow{q}P$. By [def-kun-truncations], upper truncation retains cohomology in degrees $n\\le b$ and kills it above, while lower truncation retains cohomology in degrees $n\\ge a$ and kills it below. On the retained degrees the canonical maps induce these identifications (at the cutoffs these are the kernel inclusion and cokernel projection). The vanishing from Step 4 therefore makes both $j$ and $q$ quasi-isomorphisms. The same formulas show that $P$ is supported in $[a,b]$.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical upper and lower truncations; derived.tex Tag 05RV"
+   }
+  },
+  {
+   "text": "Write $r_i=t_i\\circ j:T\\to M_i$. It factors through a chain map $v_i:P\\to M_i$ with $v_iq=r_i$: above $a$ use $r_i^n$, below $a$ use zero, and in degree $a$ use the map from $T^a/\\operatorname{im}d_T^{a-1}$ induced by $r_i^a$. It exists because $r_i^a d_T^{a-1}=d_{M_i}^{a-1}r_i^{a-1}=0$, as $M_i^{a-1}=0$. These formulas commute with the differentials, including the differential out of degree $a$. Since $r_i=t_ij$ is a quasi-isomorphism, $H^n(v_i)=H^n(r_i)H^n(q)^{-1}$ is invertible for every $n$. Thus $v_1,v_2$ are quasi-isomorphisms.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, lower-truncation cokernel formula; explicit factorization"
+   }
+  },
+  {
+   "text": "Choose the homotopy between $s_1t_1$ and $s_2t_2$ from Step 3. Restrict its components along $j$ to get $h^n:T^n\\to K^{n-1}$. At degree $b$ the homotopy equation still holds because $d_Z^b$ vanishes on $\\ker d_Z^b=T^b$; above $b$ the source is zero. This homotopy descends along $q$: its degree-$a$ component has target $K^{a-1}=0$ and so factors through $P^a$, its components below $a$ are zero, and above $a$ keep $h^n$. The homotopy equation in degree $a$ follows by precomposing with the surjection $q^a$; the equations above $a$ are unchanged and those below are zero. This gives $s_1v_1\\simeq s_2v_2$. Apply the same construction with target $L$ to the other homotopy to obtain $g_1v_1\\simeq g_2v_2$. This is the required bounded refinement in $K(R)$. Homotopic maps have the same class there, so localization gives the same fraction. For other representative isomorphisms, transport the endpoints as in Step 2; the equality criterion just proved applies to all roof choices for that transported morphism.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, kernel and cokernel formulas; explicit homotopy descent along the zigzag"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-kun-derived-bounded-roof-factorization",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-sfb-bounded-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RT, 05RU, 05RV, 05RW and homology.tex Tag 0118; explicit bounded-refinement and homotopy-descent argument using the Mathlib right-fraction criterion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +138,38 @@
    "results": "HasDerivedCategory; HasDerivedCategory.standard; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
    "date": "2026-10-17",
    "verdict": "generalization: the separate Mathlib declarations provide the ingredients but not the complete statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equal bounded roofs in the derived category have bounded common refinements whose chain maps commute up to chain homotopy",
+   "results": "Returned DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, left_fac_of_isStrictlyLE_of_isStrictlyGE, right_fac, and localization homotopy-factorization declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match: bounded factorization is present; no complete common bounded homotopy-refinement theorem returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.RightFraction.map_eq_iff",
+   "results": "CategoryTheory.MorphismProperty.RightFraction.map_eq_iff, Mathlib.CategoryTheory.Localization.CalculusOfFractions.",
+   "date": "2026-10-17",
+   "verdict": "match for the general equality-of-fractions ingredient, not the combined item."
+  },
+  {
+   "tool": "grep",
+   "query": "RightFraction.map_eq_iff|RightFractionRel|map_eq_iff_precomp",
+   "results": "Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean:896,900,901,906,908 (five-hit cap); the defining relation and theorem were read at 896,973,984.",
+   "date": "2026-10-17",
+   "verdict": "match for the general fraction relation; no boundedness in this declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi isomorphisms in the homotopy category have a right calculus of fractions and satisfy two out of three",
+   "results": "DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso; HomologicalComplex.instHasTwoOutOfThreePropertyQuasiIso; HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso; quasiIso_comp.",
+   "date": "2026-10-17",
+   "verdict": "match for the homotopy-category calculus ingredient; cancellation on cohomology is written explicitly in Step 4."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-derived-canonical-filtration",
@@ -58,7 +181,7 @@
  "blueprint": {
   "from": {
    "node": "lem-kun-0f0f",
-   "place": "Preliminary integral homological algebra: bounded roofs/common refinements used to make the canonical truncation filtration independent of representatives.",
+   "place": "Preliminary integral homological algebra for the canonical truncation filtration: bounded representatives and roofs, and equality via bounded refinements in the homotopy category (the original chain-map reading is false).",
    "via": [
     "lem-kun-derived-canonical-filtration",
     "lem-kun-bounded-tensor-tor-spectral-sequence",
@@ -68,5 +191,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-bounded-derived-roofs",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: strict common chain-map refinement is false (contractible cone counterexample in report). Corrected the third clause to homotopy-commutative refinements. Reused existing Mathlib leaves for bounded representatives and the homotopy-category calculus and equal-roof criterion, wrote out two-out-of-three by cohomology cancellation, and rebuilt bounded refinement along Z <- tau_LE Z -> tau_GE tau_LE Z with explicit map and homotopy descent. The two duplicate proposed leaves are archived outside the delivery DAG.",
+  "blueprint": "The preliminary homological-algebra construction for ancestor lem-kun-0f0f through lem-kun-derived-canonical-filtration; steps 1-2 realize bounded representatives and roofs, steps 3-7 give the homotopy-category refinement actually required.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-889ca8da9",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-889ca8da9 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the new leaf, every cited statement, the sole citer lem-kun-derived-canonical-filtration (all 5 steps), the unit, Stacks 05RV/05RW and 0118 with tags checked against the tag map, and Mathlib Fractions.lean:1-140. STATEMENT-DISPUTED is correct. The old strict common refinement fails for Z[0] mapped by the identity into the cone of id_Z: this map is null-homotopic, and a strict refinement would force H^0(t)=0. The new clause asks for homotopy-commutative refinements by quasi-isomorphisms from a bounded P, which is the true statement (equality in K(R)). The citer still works: every chain homotopy preserves the tau_{<=m} filtration, I checked this degree by degree, and the v_i lie in W. The new node lem-kun-derived-bounded-roof-factorization exactly matches DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE at Fractions.lean:115, hypothesis by hypothesis, and has no duplicate in the DAG (script sweep over right_fac/left_fac/exists_rightFraction matches). Steps 1-7 are all correct. Step 2: invertible Q(s) gives a quasi-isomorphism through H^n∘Q≅H^n. Step 3: the right-fraction criterion in K(R) gives homotopies. Step 4: two-out-of-three on cohomology; for i=2 it needs s_2t_2 homotopic to s_1t_1, which the text leaves implicit but is elementary. Steps 5-7: tau_{<=b} then tau_{>=a}; the factorization through the cokernel at degree a uses M_i^{a-1}=0, and the homotopy descends because K^{a-1}=L^{a-1}=0, checked by precomposing with the surjection q^a. Off-unit citations are only Mathlib leaves, so tool_uses=[]. No SGA source is used. No fixes. Maintainer note: the item's top-level source.place still names 05S6, which is the filtered lemma and is not used; replace it with 05RW/05RV/05RT."
  }
 }
