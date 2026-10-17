@@ -430,7 +430,7 @@
   "file": "lean/Sheaf/RingTheory/PowerPerturbationFibreDimension.lean",
   "statement": "theorem power_perturbation_fibre_dimension {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) (hφ : RingHom.FiniteType φ) (a b : S) (d : ℕ) (h : ∀ y : Spec (.of (MvPolynomial (Fin 1) R)), topologicalKrullDim ((powerPerturbationMap φ a).fiber y) ≤ (d : WithBot ℕ∞)) : ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n → ∀ y : Spec (.of (MvPolynomial (Fin 1) R)), topologicalKrullDim ((powerPerturbationMap φ (a ^ n + b)).fiber y) ≤ (d : WithBot ℕ∞)",
   "branch": "newtargets-dag",
-  "by": "NZ",
+  "by": "Q13",
   "date": "2026-10-18",
   "existing": false,
   "note": "The helper powerPerturbationMap is recorded in declarations; it is the canonical Spec map induced by polynomial evaluation at c.",
@@ -439,9 +439,9 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-bbbca714b",
-  "group": "NZ",
-  "result": "fix",
-  "note": "Statement matches node and Stacks 0GTF clause by clause: RingHom.FiniteType phi, a b : S, d : N, f_c = Spec.map of MvPolynomial.eval2Hom phi (fun _ : Fin 1 => c) (checked X 0 -> c, C r -> phi r), Scheme.Hom.fiber with topologicalKrullDim <= d in WithBot N-infinity (empty fibres = bottom), exists n0, for all n >= n0, all fibres. No extra hypotheses; the single universe is forced by Spec S -> Spec R[t] and loses no case for finite type. Helper has real data; proof is sorry only (print axioms: sorryAx); source and blueprint docstrings present; imports Mathlib only; lines <= 100; lean.statement verbatim; report has Worker report and Second reading by NZ. Dependency record def-weil-pbc-finite-type-algebra moved from Algebra.FiniteType to RingHom.FiniteType (same notion, lean.note present; accepted, though listing both would be better for existing Algebra.FiniteType citers). Finding H8: the proof docstring summarised the 15-step node proof; fixes/PowerPerturbationFibreDimension.lean replaces only that docstring with steps 1-15. nt_compile: delivered file clean in 2.1 s, fixed file clean in 2.2 s."
+  "reviewer": "NT-stage2-Codex-da3a1e698",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable node, all five statement dependencies, Stacks 0GTF, exact Lean declarations, universes, edge cases, docstrings, report sections, and route-pivot exclusions. No faults found. Reproduced compilation through scompile.py: exit 0, library module 2.2 seconds. No repository changes."
  }
 }

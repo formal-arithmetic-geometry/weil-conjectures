@@ -16,7 +16,8 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-algebraically-closed-coefficients",
   "def-weil-rationalization-karoubi",
-  "def-weil-integral-rational-qbar-compact-support"
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-compact-support-coefficient-action"
  ],
  "proof": [
   {
@@ -235,5 +236,23 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-dbb05f32e (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, master sources, report, and unit/chapter route. All four steps, associator directions, inverse calculations, edge cases, and dependency checks pass. Accepted lem-fix-operation-reduction as the declared comparison tool. No new nodes or repairs. Condensed-category and exchange-map comparisons remain separate target obligations; review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ba9758a7d",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, helper normalization, universes, edge cases, and route-pivot compliance. All four modules compiled cleanly through scompile.py. No delivery faults found; two snapshot-omitted node records were verified in the immutable commit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportFiniteFieldIndependence",
+  "declaration": "WeilConjectures.sfCompactSupportFiniteFieldIndependence",
+  "file": "lean/Sheaf/Paper/CompactSupportFiniteFieldIndependence.lean",
+  "statement": "theorem sfCompactSupportFiniteFieldIndependence (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} {f : X ⟶ Y} (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀)) [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] : ∀ (c : Compactification f), ∃ S : SfCompactSupportCoefficientAction l K₀ _hl Ω c, (∀ (A P : Pair l Ω X) (α : A ≅ P), S.comparison α α = Iso.refl (S.value A)) ∧ (∀ (A B C P : Pair l Ω X) (α : A ≅ P) (β : B ≅ P) (γ : C ≅ P), S.comparison α β ≪≫ S.comparison β γ = S.comparison α γ) ∧ (∀ (A B : Pair l Ω X) (M N : Padic.FiniteCoefficientFields l Ω) (hAM : A.stage ≤ M) (hBM : B.stage ≤ M) (hAN : A.stage ≤ N) (hBN : B.stage ≤ N) (uM : StageHom A B ⟨M, hAM, hBM⟩) (uN : StageHom A B ⟨N, hAN, hBN⟩), ofHom A B M hAM hBM uM = ofHom A B N hAN hBN uN → S.representative A B M hAM hBM uM = S.representative A B N hAN hBN uN) ∧ (∀ (E L : Padic.FiniteCoefficientFields l Ω) (_hEL : E ≤ L) (K_E : Stage l Ω X E) (K_L : Stage l Ω X L) (Kq : Pair l Ω X) (α_E : (⟨E, K_E⟩ : Pair l Ω X) ≅ Kq) (α_L : (⟨L, K_L⟩ : Pair l Ω X) ≅ Kq), ∀ (M : Padic.FiniteCoefficientFields l Ω) (hE : E ≤ M) (hL : L ≤ M) (uM : StageHom (⟨E, K_E⟩ : Pair l Ω X) (⟨L, K_L⟩ : Pair l Ω X) ⟨M, hE, hL⟩), ofHom (⟨E, K_E⟩ : Pair l Ω X) (⟨L, K_L⟩ : Pair l Ω X) M hE hL uM = α_E.hom ≫ α_L.inv → (S.comparison α_E α_L).hom = S.representative (⟨E, K_E⟩ : Pair l Ω X) (⟨L, K_L⟩ : Pair l Ω X) M hE hL uM)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

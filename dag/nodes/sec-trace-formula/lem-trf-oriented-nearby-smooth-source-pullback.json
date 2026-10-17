@@ -210,5 +210,34 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-09a38b925 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the Stacks sources (0GJQ l.19167, 0GJR, 0EZU, 0EYU) and the unit sk-i-curve-zero in full. The item statement is true and unweakened. I repaired three faults. (E4) Step 2 and the new node used the geometric fibre X_(x)x_{S_(s)} t. That is Stacks' local-acyclicity fibre, but lem-trf-oriented-point-cohomology (second factor 1_S) and the strict-local description give the stalk at point (x,t,c) as RΓ(X_(x)x_{S_(s)} S_(t)), with S_(t) taken through the specialization c. I rewrote step 2 and the new node with S_(t), and added the missing identification \\bar h z_{x,t,c} = z_{h(x),t,c} through the universal property. The corrected node is true: smooth base change (0EYU) for X x_Y Y_(y) -> Y_(y) against the affine map Y_(y)x_{S_(s)}S_(t) -> Y_(y), then stalks at x (0EZU), which is the proof pattern of 0GJQ. I checked the cases t=s, h étale and X empty. (E1) Step 5 applied the Noetherian-only new node over an arbitrary S'. I rewrote it as pure mate pasting: \\bar h v_f = v_g \\bar h' from uniqueness in the universal property, then mate-pasting clauses 1 and 2. (B9) The new node's blueprint.from.via was missing the item's chain. Small edits: the new node's source now cites 0GJQ/0EZU/0EYU; I removed the unused stmt_dep def-trf-oriented-constructible-sheaf and recomputed proof_deps. I accepted no tool_uses and removed the three declared ones, because no step of the item cites those nodes. Duplicate search found nothing (smooth-source-exchange, the pbc local-acyclicity nodes, exchange-strict-local-cohomology, the sbc derived smooth base change nodes, the blueprint). The new node is strictly smaller than the item and is not a restated clause.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-754809cb0",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source, Lean module, docstrings, report sections, edge cases, route-pivot compliance, and universes. scompile.py compiled both sandbox and library files successfully; no substantive findings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.OrientedNearbySmoothSourcePullback",
+  "declaration": "AlgebraicGeometry.orientedNearby_smoothSource_pullback",
+  "declarations": [
+   "AlgebraicGeometry.OrientedNearbyCycles.squareCompositeFirst",
+   "AlgebraicGeometry.OrientedNearbyCycles.squareCompositeSecond",
+   "AlgebraicGeometry.OrientedNearbyCycles.smoothSourceVanishingSquare_existsUnique",
+   "AlgebraicGeometry.OrientedNearbyCycles.smoothSourceVanishingSquare",
+   "AlgebraicGeometry.OrientedNearbyCycles.smoothSourceEtalePullSquare",
+   "AlgebraicGeometry.OrientedNearbyCycles.smoothSourceVanishingPullSquare",
+   "AlgebraicGeometry.OrientedNearbyCycles.SmoothSourceBaseChangeCompatible",
+   "AlgebraicGeometry.orientedNearby_smoothSource_pullback"
+  ],
+  "statement": "theorem orientedNearby_smoothSource_pullback {S X Y : Scheme.{u}} (h : X ⟶ Y) (g : Y ⟶ S) [IsNoetherian S] [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] [Smooth h] [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ S] (L : EtaleDerived Y Λ) (hL : IsBounded (etaleDatum Y) (Coeff Λ) L) (hLc : ∀ q : ℤ, ∃ F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ)), Scheme.IsConstructibleEtaleModuleSheaf F ∧ Nonempty ( (PresheafOfModules.forgetToPresheafModuleCat (op (⊤_ (EtaleSite.{u, u + 1} Y))) terminalIsTerminal.op).obj ((PresheafOfModules.restrictScalars (Functor.whiskerRight (toSheafify (etaleTopology.{u, u + 1} Y) ((Functor.const (EtaleSite.{u, u + 1} Y)ᵒᵖ).obj (CommRingCat.of (Coeff.{u, u + 1} Λ)))) (forget₂ CommRingCat RingCat))).obj ((DerivedCategory.homologyFunctor ((etaleDatum.{u, u + 1} Y).modules (Coeff.{u, u + 1} Λ)) q).obj L).val) ≅ (AsSmall.down : EtaleSite.{u, u + 1} Y ⥤ Y.Etale).op ⋙ F.obj)) : IsIso (baseChange g (h ≫ g) h (𝟙 S) (by simp) Λ L) ∧ SmoothSourceBaseChangeCompatible h g Λ L",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/OrientedNearbySmoothSourcePullback.lean",
+  "note": "Repair of a0f2677a3df0: degreewise constructibility via the existing AsSmall/Coeff linear transport; coefficient universe justified by the recorded D^b_c interface; object-level IsIso conjoined with the all-Cartesian-base-change ordinary mate-pasting equality. The endpoint identifications are constructed from canonical etale site composition and the unique oriented-product square with both projection equations fixed. Helpers belong to proof step 5 of this node; both postponed theorems have source and proof docstrings."
  }
 }

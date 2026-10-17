@@ -195,5 +195,23 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-f5e5fcd96 (reviewer sub-agent of L); spot-checked: I read the whole item, the report, the unit, the parent lem-sfb-left-resolution-bounded-minus, every cited statement and the full Lean source LeftResolution/CochainComplexMinus.lean l.1-283 (slopmaster2 copy; all copies identical). The statement agrees with the source. The source variables (l.32-36, 90) match the item; the only extra hypothesis is that iota is additive, which the source adds only at l.208. It is harmless because the parent and bicomplex-total-exists carry it. totalπ' (l.151-165) is the total map of the columnwise augmentations iotaR(K^p)->K^p[0], and the naturality orientation (l.172-178) matches the item. I tested K=0, K=X[0] and a two-column K; the statement is true. Step 1 is correct. Step 2 is correct but terse, so I wrote out the bidegree check: zero target for q!=0, and naturality of pi for q=0. Step 3 used lem-pc-bounded-above-double-complex-total-comparison, whose hypotheses match BicomplexColumns.lean:1055-1061 exactly with x0=b, y0=0. However, step 3 took the support and total-existence of the target singleRow_0(K) from bicomplex-total-exists, which covers only B_K and iotaB_K (a C4 gap). The fixed step 3 cites single-row-total for that total and states the elementary support (column p is K^p in degree 0). I accept the comparison lemma as a generic off-unit tool: neither the unit nor its cited unit sk-def-sfb-derived-categories has such a node, the source applies the same Lean lemma at l.204, and the parent's reviewer accepted the same tool use. There are no new nodes. I found no duplicate (grep of dag/nodes; blueprint_refs search returned 0). There is no restatement, the graph stays acyclic, proof_deps equals the union of the step uses, the blueprint fields are present, and no SGA source is used. The corrected item is in fixes/dag/nodes/sec-proetale-coefficients/; the statement and dependency lists are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fa3db5641",
+  "group": "N7",
+  "result": "pass",
+  "note": "Statement, source construction, dependencies, docstrings, edge cases, route, and compiler evidence all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LeftResolutionTotalizedAugmentation",
+  "declaration": "CategoryTheory.Abelian.LeftResolution.totalizedAugmentation_natural_quasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/LeftResolutionTotalizedAugmentation.lean",
+  "statement": "theorem totalizedAugmentation_natural_quasiIso {A : Type uA} [Category.{vA, uA} A] [Abelian A] {C : Type uC} [Category.{vC, uC} C] [Preadditive C] [HasZeroObject C] [HasFiniteCoproducts C] {ι : C ⥤ A} [ι.Full] [ι.Faithful] [ι.Additive] (Λ : LeftResolution ι) [Λ.F.PreservesZeroMorphisms] : (∀ (K : CochainComplex.Minus A), QuasiIso (Λ.totalπ' K)) ∧ (∀ {K L : CochainComplex.Minus A} (φ : K ⟶ L), HomologicalComplex₂.total.map ((ι.mapHomologicalComplex₂ (ComplexShape.up ℤ) (ComplexShape.up ℤ)).map (Λ.bicomplexFunctor.map φ.hom)) (ComplexShape.up ℤ) ≫ Λ.totalπ' L = Λ.totalπ' K ≫ HomologicalComplex₂.total.map ((HomologicalComplex₂.singleRow A (ComplexShape.up ℤ) (ComplexShape.up ℤ) 0).map φ.hom) (ComplexShape.up ℤ))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

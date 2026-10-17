@@ -1,0 +1,138 @@
+{
+ "id": "def-weil-compact-support-finite-action",
+ "kind": "definition",
+ "title": "Chosen normalized finite compact-support action",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime, $K_0$ a field in which $\\ell$ is invertible, and $f:X\\to Y$ a separated finite-type morphism between finite-type $K_0$-schemes [def-weil-scheme-morphism-properties]. Fix a compactification $c$ and the integral and rational values of [def-weil-integral-rational-qbar-compact-support]. For a finite extension $E/\\mathbf Q_\\ell$, let $P_E(F)$ be exactly the integral-functor predicate of [lem-weil-compact-support-representative-independence], after its specified strict tower, evaluations, derived-limit functor, unit and Roos projections have been chosen. It retains integral additivity and linearity, literal value equalities, and the projection-preserving natural identification with that fixed strict-tower realization. Define $F_E$ by that existential with predicate $P_E$. This is the already normalized functor, rather than a new arbitrary action on its objects.\n\nUsing the raw scalar localization of [def-weil-rationalization-karoubi], define $G_E$ on objects by the integral output of $F_E$ and on every Hom by the scalar extension of the integral linear map: $a\\otimes v\\mapsto a\\otimes F_E(v)$. This map preserves identities and composition. The integral output is the literal integral compact-support value. For $n\\geq0$, define $r_{E,n}$ to be the tensor/restriction adjunct of the very $n$-th Roos projection used in the chosen integral compact-support value, using the adjunction of [lem-weil-derived-scalar-extension-restriction-adjunction] and the tower of [def-weil-integral-reduction-tower]. This adjunct is invertible. Transport it along the integral value equality to obtain the fixed reduction isomorphism for $F_E$.",
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-compact-support-representative-independence",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Tensor reassociation, compact-support reduction, and transported coefficient comparisons; used in finite-field-independence proof step 1"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapLinearMap",
+   "results": "3 hits: CategoryTheory.Functor.mapLinearMap, CategoryTheory.Functor.coe_mapLinearMap, CategoryTheory.Functor.mapLinearMap_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical or ordinary module constructions; not this normalized compact-support or mixed reduction construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical mixed derived reduction tensor unit under a finite extension of l-adic coefficient fields and completion",
+   "results": "8 hits: BDeRhamPlus, BDeRham, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, instCommRingBDeRhamPlus, AdicCompletion.ofTensorProduct_tmul, Padic.adicCompletionEquiv, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, AdicCompletion.ofTensorProduct",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical or ordinary module constructions; not this normalized compact-support or mixed reduction construction"
+  },
+  {
+   "tool": "grep",
+   "query": "mixedReduction|compactSupport.*[Ff]unctor|[Ff]unctor.*compactSupport",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical or ordinary module constructions; not this normalized compact-support or mixed reduction construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical functor on rational constructible derived categories from compact support strict towers and Roos derived inverse limits",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.totalLeftDerived, DerivedCategory.Q",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical or ordinary module constructions; not this normalized compact-support or mixed reduction construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation between derived reduction tensor functors induced by extension of coefficient fields and completed scalar extension, specified on pure tensors",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedNatTrans_app, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.rightDerivedNatTrans, ModuleCat.ExtendRestrictScalarsAdj.unit, CategoryTheory.Functor.leftDerivedNatTrans, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendScalars.map', ModuleCat.ExtendScalars.map_tmul",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical or ordinary module constructions; not this normalized compact-support or mixed reduction construction"
+  },
+  {
+   "tool": "grep",
+   "query": "sfMixedReductionUnit|sfCompactSupportFiniteFunctor|mixed.reduction.unit|compact.support.finite.action in dag/nodes, lean/Sheaf, and WeilConjectures; blueprint_refs.py search mixed reduction unit / compact support finite action",
+   "results": "No matches in the published DAG or Lean sources; both blueprint searches returned 0 nodes. CompactSupportRepresentativeIndependence gives the normalized existential reused here; IntegralOperationsScalarComparisons supplies the normalized completion map.",
+   "date": "2026-10-17",
+   "verdict": "no existing specialized construction; use the published ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "mixed.{0,20}reduc|reduc.{0,20}mixed|[Rr]eductionUnit|reduction.{0,12}unit|unit.{0,12}reduction in lean/Sheaf/Paper and WeilConjectures",
+   "results": "Related hits include sfDerivedReductionUnit, IntegralHomReduction.reductionUnit and point reduction units. Read their signatures: they are single-coefficient quotient units (or units at geometric points), not the mixed E-to-L reduction/completion unit. No finite-field-independence declaration was found.",
+   "date": "2026-10-17",
+   "verdict": "no duplicate: reuse the published reduction/tensor and completion ingredients"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-compact-support-finite-field-independence",
+  "date": "2026-10-17",
+  "group": "Q103"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Finite-field-independence proof step 1: pinned finite action and tensor-unit coefficient comparisons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportFiniteAction",
+  "declaration": "WeilConjectures.SfCompactSupportFiniteRealizationSpec",
+  "file": "lean/Sheaf/Paper/CompactSupportFiniteAction.lean",
+  "statement": "def SfCompactSupportFiniteRealizationSpec (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : (sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y) → Prop",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.SfCompactSupportFiniteRealizationSpec",
+   "WeilConjectures.sfCompactSupportFiniteRealization",
+   "WeilConjectures.sfCompactSupportFiniteIntegralFunctor",
+   "WeilConjectures.sfCompactSupportFiniteIntegralFunctor_linear",
+   "WeilConjectures.sfCompactSupportFiniteHomMap",
+   "WeilConjectures.sfCompactSupportFiniteHomMap_laws",
+   "WeilConjectures.sfCompactSupportFiniteFunctor",
+   "WeilConjectures.sfCompactSupportFiniteIntegralFunctor_obj",
+   "WeilConjectures.sfCompactSupportChosenReduction",
+   "WeilConjectures.sfCompactSupportChosenReduction_isIso",
+   "WeilConjectures.sfCompactSupportFiniteReductionIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ba9758a7d",
+  "group": "Q103",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ba9758a7d",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, helper normalization, universes, edge cases, and route-pivot compliance. All four modules compiled cleanly through scompile.py. No delivery faults found; two snapshot-omitted node records were verified in the immutable commit."
+ }
+}

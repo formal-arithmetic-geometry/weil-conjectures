@@ -295,5 +295,23 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-a1a443486 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, all 16 cited node statements and the 5 statement deps, plus Stacks 0DDW (lemma-describe-pullback-pi-ph, full proof) and 0A3T (lemma-proper-pushforward-stalk). The statement is unchanged and faithful to 0DDW's proper-surjection equalizer for any abelian G, with no torsion hypothesis; 0A3T has none either. Steps: (1) H, J, units and sectionwise kernel E, using sheafification-exact(1) and the composite-unit identity from sites-and-cohomology (3)-(4). (2) r_i and q proper by 01W4/01W3, and R=W×_P W. (3) Stalks from the torsion-free geometric-point exchange (0A3T, used with coefficient ring Z) and pullback-stalk(2). (4) The specified arrows checked on representatives with the underived-exchange formula and the stalk-germ compatibility (03Q1(3)). (5) A rational section e of the nonempty finite-type fibre over the algebraically closed k, from 01S1, 0478 and 01TB/00FV. (6) Contraction h=(id,e a) gives z=a^♯e^♯z and a^♯ is injective; this is a correct explicit replacement for 0DDW's last paragraph, which has a first/second typo. (7) Stalk exactness and conservativity give θ iso; empty U holds vacuously. (8) Global sections give the stated equalizer. Edge cases checked: empty U, disconnected fibre, nonreduced fibre, identity p, zero G. No new nodes; no duplicate of 0DDW elsewhere in the DAG. No cycle in the 2355-node closure. The parent's use matches the statement. All 11 off-unit tool_uses are accepted as generic tools. No SGA. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-29e3c575e",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, docstrings, edge cases, route-pivot constraints, and small-etale APIs checked; scompile.py passed with server confirmation; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSurjectionEtaleSectionEqualizer",
+  "declaration": "AlgebraicGeometry.Etale.properSurjectiveEtaleSectionEqualizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSurjectionEtaleSectionEqualizer.lean",
+  "statement": "theorem properSurjectiveEtaleSectionEqualizer {U V : Scheme.{u}} (p : V ⟶ U) [IsProper p] [Surjective p] (G : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) : Function.Injective (pullSection p G (V := Scheme.Etale.mk (𝟙 V)) (U := Scheme.Etale.mk (𝟙 U)) p ((Category.comp_id _).trans (Category.id_comp _).symm)) ∧ ∀ σ' : ((p)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj (op (Scheme.Etale.mk (𝟙 V))), restrictAlong p G (pullback.fst p p) (pullback.fst p p ≫ p) rfl (V := Scheme.Etale.mk (𝟙 V)) (V' := Scheme.Etale.mk (𝟙 (pullback p p))) (pullback.fst p p) ((Category.comp_id _).trans (Category.id_comp _).symm) σ' = restrictAlong p G (pullback.snd p p) (pullback.fst p p ≫ p) pullback.condition (V := Scheme.Etale.mk (𝟙 V)) (V' := Scheme.Etale.mk (𝟙 (pullback p p))) (pullback.snd p p) ((Category.comp_id _).trans (Category.id_comp _).symm) σ' ↔ ∃ σ : G.obj.obj (op (Scheme.Etale.mk (𝟙 U))), pullSection p G (V := Scheme.Etale.mk (𝟙 V)) (U := Scheme.Etale.mk (𝟙 U)) p ((Category.comp_id _).trans (Category.id_comp _).symm) σ = σ'",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
