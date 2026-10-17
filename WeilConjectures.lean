@@ -3699,6 +3699,9 @@ public import WeilConjectures.RingTheory.Etale.InvariantsDescent
 public import WeilConjectures.RingTheory.Etale.InvariantsDescentAux
 public import WeilConjectures.RingTheory.Etale.KummerDescent
 public import WeilConjectures.RingTheory.Etale.TraitSection
+public import WeilConjectures.RingTheory.Etale.TraitSection.Core
+public import WeilConjectures.RingTheory.Etale.TraitSection.KummerIntegralClosure
+public import WeilConjectures.RingTheory.Etale.TraitSection.Points
 public import WeilConjectures.RingTheory.Etale.TraitSection.Rigidity
 public import WeilConjectures.RingTheory.EtaleAlgebraLift
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftEtaleFP
@@ -3768,6 +3771,7 @@ public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomia
 public import WeilConjectures.RingTheory.IntegrallyClosed.DepthTwo
 public import WeilConjectures.RingTheory.IntegrallyClosed.RegularPairAvoid
 public import WeilConjectures.RingTheory.Invariant.Kummer
+public import WeilConjectures.RingTheory.Invariant.TensorIntegralClosure
 public import WeilConjectures.RingTheory.JacobianPresentationLift
 public import WeilConjectures.RingTheory.Kaehler.LocalizationPolynomial
 public import WeilConjectures.RingTheory.Kaehler.Trace
