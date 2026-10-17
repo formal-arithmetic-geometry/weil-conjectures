@@ -18,9 +18,115 @@
   "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian, so the finitely generated $k$-algebra $S$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Applying [lem-weil-pbc-flat-local-ring-maps] to the (flat) identity map $S\\to S$ and the prime $\\mathfrak p$ shows that $A=S_{\\mathfrak p}$ is a Noetherian local ring, with maximal ideal $\\mathfrak m=\\mathfrak pA$ and residue field $A/\\mathfrak m=S/\\mathfrak p=F$ ($\\mathfrak p$ being maximal; localization is exact). Since $\\mathfrak m$ is an ideal of the Noetherian ring $A$, its completion $\\widehat A$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. The completion-local-ring lemma [lem-weil-pbc-local-completion-local-ring] applied to $(A,\\mathfrak m)$ says that $\\widehat A$ is local, its maximal ideal is $\\mathfrak m\\widehat A$, and $A/\\mathfrak m=F\\to\\widehat A/\\mathfrak m\\widehat A$ is an isomorphism; and [lem-weil-pbc-adic-completion-mod-ideal] (with $I=\\mathfrak m$, finitely generated) says that $\\widehat A$ is $\\mathfrak m\\widehat A$-adically complete. Thus the first local and residue assertions of the item hold, and $\\widehat A$ is a complete local $k$-algebra (through $k\\to S\\to A\\to\\widehat A$) with residue field $F$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C52, lemma-complete-local-ring-structure-as-algebra (proof: completeness of the right hand side by Algebra Lemma 05GG lemma-hathat-finitely-generated), with Algebra Tags 00FN, 0316, 05GI and 05GG."
+   }
+  },
+  {
+   "text": "By step 1, $\\widehat A$ is a complete local $k$-algebra whose residue field $F$ is finite separable over $k$, so the residue-field section lemma [lem-trf-separable-residue-coefficient-section] supplies a $k$-algebra map $\\sigma:F\\to\\widehat A$ with $F\\xrightarrow{\\sigma}\\widehat A\\to\\widehat A/\\mathfrak m\\widehat A=F$ the identity. Choose generators $y_1,\\ldots,y_n$ of the maximal ideal $\\mathfrak m\\widehat A$ (images of generators of the finitely generated ideal $\\mathfrak m$). By the universal property of power series over a complete ring [lem-weil-pbc-power-series-universal-property-complete] (with $\\Lambda=F$, $T=\\widehat A$, $\\mathfrak a=\\mathfrak m\\widehat A$, $\\alpha=\\sigma$, $t_i=y_i$) there is a ring map $\\Phi:F[[t_1,\\ldots,t_n]]\\to\\widehat A$ equal to $\\sigma$ on constants and with $\\Phi(t_i)=y_i$; it is a map of $F$-algebras for the $F$-structure through $\\sigma$, and it is continuous since $\\Phi((t_1,\\ldots,t_n)^r)\\subseteq(\\mathfrak m\\widehat A)^r$. By [lem-weil-pbc-power-series-field-cohen-regular-complete] (case $\\Lambda=F$), $R_0=F[[t_1,\\ldots,t_n]]$ is a Noetherian local ring, complete for $I=(t_1,\\ldots,t_n)$. Then $I\\widehat A=(y_1,\\ldots,y_n)=\\mathfrak m\\widehat A$, $\\widehat A$ is $\\mathfrak m\\widehat A$-adically complete, hence Hausdorff (step 1), and $R_0\\to\\widehat A/\\mathfrak m\\widehat A=F$ is surjective because it restricts to $\\mathrm{id}_F$ on constants; so $\\Phi$ is surjective by [lem-weil-pbc-complete-source-surjective-mod-ideal]. Its kernel is finitely generated, say by $f_1,\\ldots,f_s$, because $R_0$ is Noetherian. Finally the composite $R_0\\xrightarrow{\\Phi}\\widehat A\\to F$ sends a constant $c$ to $c$ and each $t_i$ to $\\bar y_i=0$, so it is the constant-term map, whose kernel is $(t_1,\\ldots,t_n)$; hence $\\ker\\Phi\\subseteq(t_1,\\ldots,t_n)$. (This is the argument of Tag 0C52; the Cohen structure theorem with its unrelated coefficient ring is not needed once $\\sigma$ is fixed.)",
+   "uses": [
+    "lem-trf-separable-residue-coefficient-section",
+    "lem-weil-pbc-power-series-universal-property-complete",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-complete-source-surjective-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C52, lemma-complete-local-ring-structure-as-algebra, last paragraph of the proof (kappa[[x_1..x_n]] -> O^, x_i -> f_i, surjective by Algebra Lemma 0315 lemma-completion-generalities), with More Algebra Tag 0C34 lemma-lift-residue-field."
+   }
+  },
+  {
+   "text": "If the presentation in step 2 has $n<2$, adjoin $2-n$ dummy variables and add them to the kernel generators. The quotient, section, continuity, and containment of the kernel in the variable ideal are unchanged, so we may and do take $n\\ge2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C52, completion presentation; dummy-variable padding."
+   }
+  },
+  {
+   "text": "For an arbitrary presentation chosen in the statement, the completed-Jacobian lemma [lem-trf-completed-jacobian-differentials] applies with the given finite-separable extension $F/k$, section $\\sigma$, and generators $f_j$. Its explicitly defined map sends $e_i$ to the continuous differential $\\widehat d(t_i)$ and identifies the Jacobian cokernel with $\\Omega_{A/k}\\otimes_A\\widehat A$; hence the differential clause holds for every presentation.",
+   "uses": [
+    "lem-trf-completed-jacobian-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D, Jacobian presentation in the algebraically closed proof, with the continuous finite-separable coefficient-field extension."
+   }
+  },
+  {
+   "text": "Let $K/k$ be an extension field containing the specified $k$-embedded copy $\\iota:F\\hookrightarrow K$, and define $\\mathfrak q$ and $B$ as in the statement. The evaluation map $S\\otimes_kK\\to K$ is surjective ($1\\otimes\\lambda\\mapsto\\lambda$), so $\\mathfrak q$ is a maximal ideal with residue field $K$, and $\\mathfrak q\\cap S=\\ker(S\\to F\\xrightarrow{\\iota}K)=\\mathfrak p$ since $\\iota$ is injective. The field-extension base-change lemma [lem-weil-pbc-field-extension-base-change-faithfully-flat] makes $S\\to S\\otimes_kK$ faithfully flat. A presentation $S\\cong k[x_1,\\ldots,x_m]/\\mathfrak a$ gives $S\\otimes_kK\\cong K[x_1,\\ldots,x_m]/\\mathfrak aK[x]$, so $S\\otimes_kK$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Localizing at $\\mathfrak q$ over $\\mathfrak p$, [lem-weil-pbc-flat-local-ring-maps] gives a flat local map $A\\to B$ of Noetherian local rings, and the local-flat faithful-flat lemma [lem-pc-local-flat-faithful-flat-reflects-surjective] upgrades it to faithfully flat. For the fibre: by exactness of $-\\otimes_kK$ and of localization, $B/\\mathfrak mB=\\big((S/\\mathfrak p)\\otimes_kK\\big)_{\\bar{\\mathfrak q}}=(F\\otimes_kK)_{\\bar{\\mathfrak q}}$, where $\\bar{\\mathfrak q}$ is the kernel of $F\\otimes_kK\\to K$, $a\\otimes\\lambda\\mapsto\\iota(a)\\lambda$. Since $F/k$ is finite separable, $F\\otimes_kK$ is reduced by [lem-weil-pbc-finite-separable-tensor-field-reduced] (with $L=k$, $K'=F$, $E=K$). It is a finite-dimensional $K$-algebra, so every prime of it is maximal (a domain finite over a field is a field), hence $(F\\otimes_kK)_{\\bar{\\mathfrak q}}$ has a unique prime ideal, which is therefore its nilradical, which is $0$ by reducedness (localization of a reduced ring is reduced). So $B/\\mathfrak mB$ is a field, hence equal to the residue field $B/\\mathfrak qB=K$ of $\\mathfrak q$, i.e. $\\mathfrak mB=\\mathfrak qB=\\mathfrak m_B$. Thus all local-flatness, maximal-ideal, and residue-field clauses hold.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-weil-pbc-finite-separable-tensor-field-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0C4Y (lemma-change-fields-flat, parts (1), (3), (4)) and 0C50 (lemma-change-fields-algebraic-unramified, proof: the fibre ring has dimension 0 and is reduced, hence a field; reducedness by Algebra Tag 030U)."
+   }
+  },
+  {
+   "text": "Apply the completion-presentation base-change lemma [lem-trf-field-extension-completion-presentation] to the chosen presentation, using the $k$-embedding $F\\hookrightarrow K$. The inverse-limit computation identifies $\\widehat B$ with $K[[t_1,\\ldots,t_n]]/(f_1,\\ldots,f_s)$ as complete local $K$-algebras and preserves the images of all variables.",
+   "uses": [
+    "lem-trf-field-extension-completion-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54, lemma-base-change-complete-local-ring, using Tags 0C4Y and 0C50."
+   }
+  },
+  {
+   "text": "Finally apply [lem-trf-completed-jacobian-differentials] over the base field $K$ to the finite-type $K$-algebra $S\\otimes_kK$, the maximal ideal $\\mathfrak q$, and the local ring $B$. Its residue field is $K$, the identity extension $K/K$ is finite separable, and the canonical section $K\\to\\widehat B$ is the structural map. The transported presentation from step 6 therefore gives the same Jacobian cokernel for $\\Omega_{B/K}\\otimes_B\\widehat B$, with the variable images identified as asserted.",
+   "uses": [
+    "lem-trf-completed-jacobian-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D, Jacobian differential presentation after the finite-separable coefficient-field extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-trf-completed-jacobian-differentials",
+  "lem-trf-field-extension-completion-presentation",
+  "lem-trf-separable-residue-coefficient-section",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C52, 0C54, 0C4Y and 0C50, together with Curves Tag 0C4D."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +165,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-point-local-criterion",
@@ -71,7 +177,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Algebraic-to-formal differential and field-change comparisons needed in the pointwise nodal ingredient, Curves 0C4D, first proof paragraph and descent/ascent paragraphs.",
+   "place": "Formal power-series presentation, completed Jacobian comparison, and field-change/base-change clauses in the pointwise nodal ingredient (Curves 0C4D route).",
    "via": [
     "lem-trf-nodal-point-local-criterion",
     "lem-trf-nodal-curve-lci-criterion",
@@ -85,5 +191,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-separable-closed-point-formal-presentation",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by removing the duplicate Cohen-presentation and local-field-change auxiliaries, which are supplied by existing DAG nodes. Added only the Tag 0C34 coefficient-section lemma, retained the Tag 0C54 completion-limit lemma and the completed Jacobian lemma, expanded every item proof step into an argument, corrected the k-embedding and explicit differential map, and fixed blueprint ancestry.",
+  "blueprint": "Realizes the ancestor formal-presentation, Jacobian-comparison, and field-change paragraphs for the pointwise nodal ingredient (Curves 0C4D route), with the Tag 0C34 section, Tag 0C54 completion limit, and completed continuous Jacobian comparison split out.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-edfe157d9",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-edfe157d9 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited node's statement and the Stacks sources: More Algebra 0C34 (lemma-lift-residue-field), Varieties 0C4Y, 0C50, 0C52 and 0C54, and the Jacobian passage of Curves 0C4D. The unit route reaches sk-thm-p1, so no tool use is needed. No SGA source is cited. All four statements are true. I tested them on k[x] at (x), on k[[u,v]]/(uv), on R[x] at (x^2+1) with base change to C, and on the inseparable case F_p(a)[x]/(x^p-a), which shows the separability hypothesis is needed. The 0C54 node does not need Stacks' dimension hypothesis, because the point it uses forces the fibre ring to be K. None of the new nodes duplicates an existing node. Steps 4 and 6 each cite a new node that is one clause of the item; I accept this because the item bundles independent sourced facts and the Jacobian node is used twice (over k and over K). I repaired three citation faults by rewriting the item file in fixes/: (1) step 1, C1: 'the completion of A is Noetherian' had no citation; now it cites adic-completion-noetherian, plus finite-type-algebra-noetherian, flat-local-ring-maps and adic-completion-mod-ideal (completeness). (2) step 2, C4/E5: the Cohen nodes give an unrelated coefficient ring and no F-algebra surjection through the section; the step is now the 0C52 argument, with power-series-universal-property-complete, power-series-field-cohen-regular-complete and complete-source-surjective-mod-ideal (Tag 0315), and an elementary check that the kernel lies in (t). (3) step 5, C1/E5: the separability input (the tensor product of F and K over k is reduced) and the Noetherianity of the tensor product of S and K were missing; it now cites finite-separable-tensor-field-reduced (Tag 030U) and finite-type-algebra-noetherian and writes out the 0C50 argument. No statement was changed and no node is dropped.; 1 file(s) fixed by the reviewer"
  }
 }
