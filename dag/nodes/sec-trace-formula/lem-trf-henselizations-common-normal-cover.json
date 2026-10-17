@@ -147,5 +147,23 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-a2d0e4dae (reviewer sub-agent of L); spot-checked: Read all required instructions, packet, report, item, new nodes, cited nodes, unit route, blueprint proof, and source locations. Statements and hypotheses match Tags 030A and 05WQ; localization, henselization, compatibility, edge cases, duplicate checks, searches, route restrictions, and DAG acyclicity all pass. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselizationsCommonNormalCover",
+  "declaration": "RingHom.exists_common_normal_henselization_cover",
+  "file": "lean/Sheaf/RingTheory/HenselizationsCommonNormalCover.lean",
+  "statement": "theorem exists_common_normal_henselization_cover (A : Type u) [CommRing A] (p₁ p₂ : Ideal A) [p₁.IsPrime] [p₂.IsPrime] : ∃ (P : Type u) (_ : CommRing P) (_ : IsDomain P) (_ : IsIntegrallyClosed P) (π : P →+* A), Function.Surjective π ∧ ∀ (p : Ideal A) [hp : p.IsPrime] (_ : p = p₁ ∨ p = p₂) (q : Ideal P) [hq : q.IsPrime] (hqp : q = Ideal.comap π p), ∃ (HP HA : Type u) (_ : CommRing HP) (_ : CommRing HA) (_ : Algebra (Localization.AtPrime q) HP) (_ : Algebra (Localization.AtPrime p) HA) (_ : HenselianLocalRing HP) (_ : HenselianLocalRing HA) (_ : Algebra.IsHenselizationAtPrime P q HP) (_ : Algebra.IsHenselizationAtPrime A p HA) (φ : HP →+* HA), IsLocalHom φ ∧ Function.Surjective φ ∧ IsLocalHom (Localization.localRingHom q p π hqp) ∧ φ.comp (algebraMap (Localization.AtPrime q) HP) = (algebraMap (Localization.AtPrime p) HA).comp (Localization.localRingHom q p π hqp) ∧ φ.comp ((algebraMap (Localization.AtPrime q) HP).comp (algebraMap P (Localization.AtPrime q))) = (algebraMap (Localization.AtPrime p) HA).comp ((algebraMap A (Localization.AtPrime p)).comp π)",
+  "by": "Q105",
+  "date": "2026-10-18",
+  "existing": false,
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d96740df",
+  "group": "Q105",
+  "result": "fix",
+  "note": "Item RingHom.exists_common_normal_henselization_cover matches the node clause by clause (normal domain as IsDomain+IsIntegrallyClosed, surjective π, q = comap π p for p ∈ {p₁,p₂}, local localRingHom, existential HP/HA with Algebra.IsHenselizationAtPrime, φ local and surjective, both compatibility equations; no finite-generation assumption; single universe u, faithful because henselizations are unique up to unique iso). Edge cases p₁=p₂, A=0 and non-noetherian A are covered; docstrings, sorry-only proof and verbatim lean.statement are fine; no duplicate found in Mathlib, slopmaster2 or side. nt_compile --json: item rc 0; a negative control errors; #print axioms shows only sorryAx beyond the standard axioms. Fault (H12/H13): the delivery carries a stale copy of lean/Sheaf/TraceFormula/HenselizationQuotientAtPrime.lean, the older version NQ's landed module corrected (its henselization algebra on the quotient is an arbitrary existential not tied to the map from R⧸I, and its signature differs from the landed node's lean.statement), and the report wrongly says it adds the node. Fix: fixes/HenselizationQuotientAtPrime.lean is the landed NQ file byte-for-byte (compiles rc 0), so landing leaves it unchanged; fixes/<item>.report.md corrects the Dependency modules section. Item module and record unchanged."
  }
 }

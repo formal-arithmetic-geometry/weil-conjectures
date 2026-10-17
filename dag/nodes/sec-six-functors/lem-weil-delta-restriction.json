@@ -446,21 +446,28 @@
    "AlgebraicGeometry.Etale.deltaRestrictionBraiding",
    "AlgebraicGeometry.ProEtale.deltaRestrictionBraiding",
    "AlgebraicGeometry.Etale.deltaRestrictionPairingBraiding",
-   "AlgebraicGeometry.ProEtale.deltaRestrictionPairingBraiding"
+   "AlgebraicGeometry.ProEtale.deltaRestrictionPairingBraiding",
+   "AlgebraicGeometry.ProEtale.deltaRestrictionTensorComparison_normalized",
+   "AlgebraicGeometry.ProEtale.DeltaRestrictionTensorComparison",
+   "AlgebraicGeometry.ProEtale.IsNormalizedDeltaRestrictionTensor",
+   "AlgebraicGeometry.ProEtale.deltaRestrictionNativeTensor",
+   "AlgebraicGeometry.ProEtale.deltaRestrictionNativeHom",
+   "AlgebraicGeometry.ProEtale.deltaRestrictionNativeAdjunction"
   ],
   "file": "lean/Sheaf/Paper/DeltaRestriction.lean",
   "statement": "theorem delta_restriction {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {W Y : Scheme.{u}} (j : W ⟶ Y) (aY : Y ⟶ Spec (.of k)) [Etale j] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated (j ≫ aY)] [LocallyOfFiniteType (j ≫ aY)] [QuasiCompact (j ≫ aY)] : DualDeltaRestriction (upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategory (derivedTensor (ModuleCat.{u + 1} Λ) Y) (derivedHom (ModuleCat.{u + 1} Λ) Y) (derivedTensor (ModuleCat.{u + 1} Λ) W) (derivedHom (ModuleCat.{u + 1} Λ) W) (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ)) (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ)) (fun K L ↦ ((deltaRestrictionBraiding Λ aY).app K).app L) (fun K L ↦ ((deltaRestrictionBraiding Λ (j ≫ aY)).app K).app L) (deltaRestrictionTensorIso Λ j) (dualizingComplex (ModuleCat.{u + 1} Λ) aY) (dualizingComplex (ModuleCat.{u + 1} Λ) (j ≫ aY)) (deltaRestrictionDualizingIso Λ j aY)",
   "branch": "newtargets-dag",
-  "by": "NP",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "Q145",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "§1(B): the published module references removed pro-etale derivedHom and derivedTensorHomAdjunction wrappers and imports the legacy UpperLowerStar.Iso alongside the finite-coefficient module declaring the same names. Retain the entire etale and pro-etale restriction statements and all generic evaluation-transpose maps. Unfold the pro-etale tensor/Hom/adjunction wrappers to their exact native definitions and use the finite-coefficient ordinary pullback. The canonical derived tensor comparison is characterized by its ordinary oplax comparison on homotopy complexes and the localization tensor square, which uniquely determines its data; no arbitrary isomorphism or additional hypothesis is introduced."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-339759ce7",
-  "group": "NP",
+  "reviewer": "NT-stage2-cc-cb66fb330",
+  "group": "Q145",
   "result": "pass",
-  "note": "Wrote review.md. Checked all statement dependencies, source correspondence, canonical constructions, universes, edge cases, docstrings, and verbatim signature. Immutable module compiled cleanly through scompile.py in sandbox and library contexts. No fixes needed."
+  "note": "Read node, all 18 stmt_deps, source place, report, both delivered modules and the used side declarations. Clause-by-clause match: hypotheses (finite-field datum, l prime, l != p, finite E, separated finite-type X, uniform universe u), D^b_c = D^b_ctf, preservation, IsEquivalence of restricted dual, exactness with CommShift, evaluation-defined comparisons invertible with evaluation and all-transposes compatibility, Roos IsDerivedLimitTriangle on conjugated transition with transition_evaluation, Tor bound [-b-2d,-a] for every d >= dim X, reduction of delta to finite delta, biduality, naturality. omega and r as general inputs: sound generalization that citers can instantiate with prop_coef_integral_dualizing (counit comparison followed by e n). delta is the generic restrictionDualDelta, fixed by normalized presentations and signed symmetry; not a second definition. Section 1(B) DeltaRestriction repair: native tensor/Hom/adjunction aliases; tensor comparison uniquely fixed by its normalization on homotopy complexes; delta_restriction statement unchanged apart from reformatting; node change only in lean fields. Lean statements match the files verbatim. Edge cases covered (empty X with d=0, K=0, a=b, residue level, ramified E). Docstrings, no hollow definitions, sorry-only proofs. nt_compile of DeltaRestriction, EtaleGeometricBiduality, FiniteStageVerdierBiduality and IntegralVerdier: rc 0, no errors or warnings (10.2/5.3/4.6/34.3 s). Second reading is a substantive self-reading. No faults."
  }
 }

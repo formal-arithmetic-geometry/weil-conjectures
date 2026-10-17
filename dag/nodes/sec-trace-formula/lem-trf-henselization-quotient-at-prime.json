@@ -147,22 +147,23 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-0db3abe73 (reviewer sub-agent of L); spot-checked: The mathematics and source checks pass, including I=0 and I=m edge cases. Step 1 uses the cross-unit finite-map lemma as a generic tool but the submitted split_report omitted the required tool_uses declaration. A complete corrected item JSON adding that declaration is under fixes/dag/nodes/sec-trace-formula/lem-trf-henselization-quotient-at-prime.json.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
+  "existing": false,
   "module": "Sheaf.TraceFormula.HenselizationQuotientAtPrime",
   "declaration": "Algebra.henselization_quotient_at_prime",
   "file": "lean/Sheaf/TraceFormula/HenselizationQuotientAtPrime.lean",
   "statement": "theorem henselization_quotient_at_prime (R : Type u) [CommRing R] [IsLocalRing R] (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) (H : Type u) [CommRing H] [Algebra (Localization.AtPrime (IsLocalRing.maximalIdeal R)) H] [HenselianLocalRing H] (hH : Algebra.IsHenselizationAtPrime R (IsLocalRing.maximalIdeal R) H) : ∃ (hJ : Ideal H), hJ = Ideal.map ((algebraMap (Localization.AtPrime (IsLocalRing.maximalIdeal R)) H).comp (algebraMap R (Localization.AtPrime (IsLocalRing.maximalIdeal R)))) I ∧ Function.Surjective (Ideal.Quotient.mk hJ) ∧ IsLocalHom (Ideal.Quotient.mk hJ) ∧ ∃ (aQI : Algebra (R ⧸ I) (H ⧸ hJ)), (algebraMap (R ⧸ I) (H ⧸ hJ)).comp (Ideal.Quotient.mk I) = (Ideal.Quotient.mk hJ).comp ((algebraMap (Localization.AtPrime (IsLocalRing.maximalIdeal R)) H).comp (algebraMap R (Localization.AtPrime (IsLocalRing.maximalIdeal R)))) ∧ ∃ (hp : (Ideal.map (Ideal.Quotient.mk I) (IsLocalRing.maximalIdeal R)).IsPrime) (aH : Algebra (Localization.AtPrime (Ideal.map (Ideal.Quotient.mk I) (IsLocalRing.maximalIdeal R))) (H ⧸ hJ)), (algebraMap (Localization.AtPrime (Ideal.map (Ideal.Quotient.mk I) (IsLocalRing.maximalIdeal R))) (H ⧸ hJ)).comp (algebraMap (R ⧸ I) (Localization.AtPrime (Ideal.map (Ideal.Quotient.mk I) (IsLocalRing.maximalIdeal R)))) = algebraMap (R ⧸ I) (H ⧸ hJ) ∧ ∃ (hQ : HenselianLocalRing (H ⧸ hJ)), @Algebra.IsHenselizationAtPrime (R ⧸ I) _ (Ideal.map (Ideal.Quotient.mk I) (IsLocalRing.maximalIdeal R)) (H ⧸ hJ) hp _ aH hQ",
-  "branch": "newtargets-dag",
-  "by": "NQ",
+  "by": "Q105",
   "date": "2026-10-18",
-  "existing": false,
-  "fixed_by": "NT-stage2-cc-37a8f557a"
+  "note": "Dependency interface supplied in this repair because the returned item cited Tag 05WQ without a delivered DAG node or Lean declaration.",
+  "branch": "newtargets-dag",
+  "fixed_by": "NT-stage2-cc-2d96740df"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-37a8f557a",
-  "group": "NQ",
+  "reviewer": "NT-stage2-cc-2d96740df",
+  "group": "Q105",
   "result": "fix",
-  "note": "Delivered Algebra.henselization_quotient_at_prime compiles (nt_compile --json, rc 0) and matches the node on hypotheses (local R, I ≤ m, H with IsHenselizationAtPrime at m, one universe u forced by the dependency), IR^h, surjectivity, locality and the induced R/I structure map. Fault (H3, weaker conclusion): the henselization algebra aH on H⧸hJ was an arbitrary existential not tied to aQI or the canonical quotient structure map, so the Lean only said H⧸hJ is a henselization for some structure map (counterexample: I=m, residue field ℚ(t), aH twisted by an automorphism). Fix: fixes/HenselizationQuotientAtPrime.lean moves aQI and its factorization first and adds algebraMap((R⧸I)_{m/I}, H⧸hJ) ∘ algebraMap(R⧸I, (R⧸I)_{m/I}) = algebraMap(R⧸I, H⧸hJ) before the IsHenselizationAtPrime clause, which pins aH to the canonical map; the docstring proof is expanded to follow the node's steps. Fixed file compiles (rc 0, 3.5 s); a negative control (no aQI) fails to synthesize Algebra (R⧸I) (H⧸hJ), so the equation uses aQI. lean.statement is re-read by refit_record. Checked Stacks 05WQ/05WP (tags confirmed), edge cases I=0, I=m, I⊄m; no duplicate in Mathlib, side Sheaf or slopmaster2; docstrings, report sections and sorry-only proof are fine. Minor stage-1 note: the node's proof-step source cites 05WR where 05WP is meant."
+  "note": "Item RingHom.exists_common_normal_henselization_cover matches the node clause by clause (normal domain as IsDomain+IsIntegrallyClosed, surjective π, q = comap π p for p ∈ {p₁,p₂}, local localRingHom, existential HP/HA with Algebra.IsHenselizationAtPrime, φ local and surjective, both compatibility equations; no finite-generation assumption; single universe u, faithful because henselizations are unique up to unique iso). Edge cases p₁=p₂, A=0 and non-noetherian A are covered; docstrings, sorry-only proof and verbatim lean.statement are fine; no duplicate found in Mathlib, slopmaster2 or side. nt_compile --json: item rc 0; a negative control errors; #print axioms shows only sorryAx beyond the standard axioms. Fault (H12/H13): the delivery carries a stale copy of lean/Sheaf/TraceFormula/HenselizationQuotientAtPrime.lean, the older version NQ's landed module corrected (its henselization algebra on the quotient is an arbitrary existential not tied to the map from R⧸I, and its signature differs from the landed node's lean.statement), and the report wrongly says it adds the node. Fix: fixes/HenselizationQuotientAtPrime.lean is the landed NQ file byte-for-byte (compiles rc 0), so landing leaves it unchanged; fixes/<item>.report.md corrects the Dependency modules section. Item module and record unchanged."
  }
 }

@@ -29,7 +29,8 @@
   "def-weil-derived-complete",
   "def-weil-derived-limit",
   "def-kun-topological-krull-dimension",
-  "lem-weil-duality-pairing"
+  "lem-weil-duality-pairing",
+  "lem-weil-delta-restriction"
  ],
  "proof": [
   {
@@ -315,5 +316,40 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-aefccbf32 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, report, all cited node statements and sources, and Stacks Tags 08TC, 08J9, 08JA, 08JC. Verified all eight proof steps, hypotheses, coefficient/base-change typing, Roos reconstruction, finite-level duality, edge cases including R/(π), duplicate/cycle checks, and Mathlib searches. No new nodes or unresolved faults. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralVerdier",
+  "declaration": "WeilConjectures.integral_verdier_biduality",
+  "declarations": [
+   "WeilConjectures.IntegralVerdier.SignedSymmetry",
+   "WeilConjectures.IntegralVerdier.Ambient",
+   "WeilConjectures.IntegralVerdier.dual",
+   "WeilConjectures.IntegralVerdier.finiteDual",
+   "WeilConjectures.IntegralVerdier.delta",
+   "WeilConjectures.IntegralVerdier.restrictedDual",
+   "WeilConjectures.IntegralVerdier.comparison",
+   "WeilConjectures.IntegralVerdier.finiteTerms",
+   "WeilConjectures.IntegralVerdier.restrictedComparison",
+   "WeilConjectures.IntegralVerdier.finiteTransition",
+   "WeilConjectures.IntegralVerdier.finiteLeg",
+   "WeilConjectures.IntegralVerdier.finiteEvaluation",
+   "WeilConjectures.IntegralVerdier.dualizingTransition",
+   "WeilConjectures.IntegralVerdier.Conclusion",
+   "WeilConjectures.integral_verdier_biduality"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralVerdier.lean",
+  "statement": "theorem integral_verdier_biduality (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] (ω : sfIntegralConstructibleCategory l E X) (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅ integralDualizingFiniteTerm l E D X n) : IntegralVerdier.Conclusion l E X D hl ω r",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb66fb330",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Read node, all 18 stmt_deps, source place, report, both delivered modules and the used side declarations. Clause-by-clause match: hypotheses (finite-field datum, l prime, l != p, finite E, separated finite-type X, uniform universe u), D^b_c = D^b_ctf, preservation, IsEquivalence of restricted dual, exactness with CommShift, evaluation-defined comparisons invertible with evaluation and all-transposes compatibility, Roos IsDerivedLimitTriangle on conjugated transition with transition_evaluation, Tor bound [-b-2d,-a] for every d >= dim X, reduction of delta to finite delta, biduality, naturality. omega and r as general inputs: sound generalization that citers can instantiate with prop_coef_integral_dualizing (counit comparison followed by e n). delta is the generic restrictionDualDelta, fixed by normalized presentations and signed symmetry; not a second definition. Section 1(B) DeltaRestriction repair: native tensor/Hom/adjunction aliases; tensor comparison uniquely fixed by its normalization on homotopy complexes; delta_restriction statement unchanged apart from reformatting; node change only in lean fields. Lean statements match the files verbatim. Edge cases covered (empty X with d=0, K=0, a=b, residue level, ramified E). Docstrings, no hollow definitions, sorry-only proofs. nt_compile of DeltaRestriction, EtaleGeometricBiduality, FiniteStageVerdierBiduality and IntegralVerdier: rc 0, no errors or warnings (10.2/5.3/4.6/34.3 s). Second reading is a substantive self-reading. No faults."
  }
 }
