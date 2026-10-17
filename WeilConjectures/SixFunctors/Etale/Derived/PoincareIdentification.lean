@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalVerdierDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
+public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 
 /-!
 # The adjoint of the Poincaré pairing is global Verdier duality
@@ -27,15 +29,15 @@ Verdier-duality isomorphism `(Ra_! K)^∨ ≅ Ra_* 𝔻_X K`. This is blueprint
 - `AlgebraicGeometry.Etale.exchangePairing`: the pairing
   `Ra_! M ⊗ᴸ Ra_* RHom(M, Ra^! N) ⟶ N` (cup product, evaluation, counit of `Ra_! ⊣ Ra^!`),
   whose adjoint is the tensor–Hom exchange.
-- `AlgebraicGeometry.Etale.mixedSupportCupProductNatTrans`: the mixed-support cup product as a
-  natural transformation in its second variable.
+- `AlgebraicGeometry.Etale.projectionMapApp`: the components of the projection map, with
+  source and target written through `Ra_!`, `-⊗ᴸ-` and `La^*`.
 - `AlgebraicGeometry.Etale.purityVerdierDualMap`: the purity identification
   `(K^∨ ⊗ᴸ T)[2d] ⟶ 𝔻_X K` attached to `γ`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_app`: the tensor–Hom
-  exchange is the adjoint of `AlgebraicGeometry.Etale.exchangePairing`.
+- `AlgebraicGeometry.Etale.uncurry_derivedHomRightDerivedLowerShriekIso_hom_app_app`: the
+  tensor–Hom exchange is the adjoint of `AlgebraicGeometry.Etale.exchangePairing`.
 - `AlgebraicGeometry.Etale.isIso_purityVerdierDualMap`: the purity identification is an
   isomorphism for perfect `K`.
 - `AlgebraicGeometry.Etale.curry_poincarePairing_eq` (`thm-pod-identification-of-the-comparison`):
@@ -77,46 +79,67 @@ namespace Etale
 variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
 
 section CupProduct
+/-- The projection map `Ra_! K ⊗ᴸ - ⟶ Ra_!(K ⊗ᴸ La^* -)` (`AlgebraicGeometry.Etale.projectionMap`)
+at `K`, as a natural transformation with target written as a composite of functors. -/
+noncomputable def projectionMapComp (K : 𝐃(X, A)) :
+    (derivedTensor A Y).obj ((R(a)_![A]).obj K) ⟶
+      L((a)^*[A]) ⋙ (derivedTensor A X).obj K ⋙ R(a)_![A] :=
+  (projectionMap A a).app K
 
-/-- The mixed-support cup product `Ra_! K ⊗ᴸ Ra_* L ⟶ Ra_!(K ⊗ᴸ L)`
-(`AlgebraicGeometry.Etale.mixedSupportCupProduct`) as a natural transformation in `L`. -/
-noncomputable def mixedSupportCupProductNatTrans (K : 𝐃(X, A)) :
-    R((a)_*[A]) ⋙ (derivedTensor A Y).obj ((R(a)_![A]).obj K) ⟶
-      (derivedTensor A X).obj K ⋙ R(a)_![A] :=
-  Functor.whiskerLeft R((a)_*[A])
-      (((projectionMap A a).app K : (derivedTensor A Y).obj ((R(a)_![A]).obj K) ⟶
-        L((a)^*[A]) ⋙ (derivedTensor A X).obj K ⋙ R(a)_![A])) ≫
-    (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight (derivedUpperStarLowerStarAdjunction A a).counit
-        ((derivedTensor A X).obj K ⋙ R(a)_![A]) ≫ (Functor.leftUnitor _).hom
+instance (K : 𝐃(X, A)) : NatTrans.CommShift (projectionMapComp A a K) ℤ :=
+  commShift_projectionMap_app A (f := a) K
 
-lemma mixedSupportCupProductNatTrans_app (K : 𝐃(X, A)) (L : 𝐃(X, A)) :
-    (mixedSupportCupProductNatTrans A a K).app L = mixedSupportCupProduct A a K L := by
-  simp [mixedSupportCupProductNatTrans, mixedSupportCupProduct]
+/-- The component `Ra_! K ⊗ᴸ M ⟶ Ra_!(K ⊗ᴸ La^* M)` of the projection map
+(`AlgebraicGeometry.Etale.projectionMap`). -/
+noncomputable def projectionMapApp (K : 𝐃(X, A)) (M : 𝐃(Y, A)) :
+    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj M ⟶
+      (R(a)_![A]).obj (((derivedTensor A X).obj K).obj ((L((a)^*[A])).obj M)) :=
+  (projectionMapComp A a K).app M
 
-/-- The mixed-support cup product is natural in its second variable. -/
+omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
 @[reassoc]
-lemma mixedSupportCupProduct_naturality (K : 𝐃(X, A)) {L L' : 𝐃(X, A)} (g : L ⟶ L') :
-    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map ((R((a)_*[A])).map g) ≫
-        mixedSupportCupProduct A a K L' =
-      mixedSupportCupProduct A a K L ≫ (R(a)_![A]).map (((derivedTensor A X).obj K).map g) := by
-  rw [← mixedSupportCupProductNatTrans_app, ← mixedSupportCupProductNatTrans_app]
-  exact (mixedSupportCupProductNatTrans A a K).naturality g
+lemma projectionMapApp_naturality (K : 𝐃(X, A)) {M M' : 𝐃(Y, A)} (g : M ⟶ M') :
+    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map g ≫ projectionMapApp A a K M' =
+      projectionMapApp A a K M ≫
+        (R(a)_![A]).map (((derivedTensor A X).obj K).map ((L((a)^*[A])).map g)) :=
+  (projectionMapComp A a K).naturality g
 
-/-- The mixed-support cup product commutes with the shifts in its second variable. -/
-instance commShift_mixedSupportCupProductNatTrans (K : 𝐃(X, A)) :
-    NatTrans.CommShift (mixedSupportCupProductNatTrans A a K) ℤ := by
-  have := commShift_projectionMap_app A (f := a) K
-  dsimp only [mixedSupportCupProductNatTrans]
-  infer_instance
+omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
+@[reassoc]
+lemma projectionMapApp_shift (K : 𝐃(X, A)) (M : 𝐃(Y, A)) (n : ℤ) :
+    (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso n).hom.app M ≫
+        (projectionMapApp A a K M)⟦n⟧' =
+      projectionMapApp A a K (M⟦n⟧) ≫
+        (R(a)_![A]).map (((derivedTensor A X).obj K).map
+          (((L((a)^*[A])).commShiftIso n).hom.app M)) ≫
+        (R(a)_![A]).map ((((derivedTensor A X).obj K).commShiftIso n).hom.app
+          ((L((a)^*[A])).obj M)) ≫
+        ((R(a)_![A]).commShiftIso n).hom.app _ := by
+  have h := NatTrans.shift_app_comm (projectionMapComp A a K) n M
+  simp only [Functor.commShiftIso_comp_hom_app, Functor.comp_obj, Functor.comp_map] at h
+  exact h
 
-/-- The mixed-support cup product commutes with the shifts in its second variable,
-componentwise: for `n : ℤ`,
-```
-Ra_! K ⊗ᴸ (Ra_* L)[n] ≅ (Ra_! K ⊗ᴸ Ra_* L)[n] --(⌣_c)[n]--> (Ra_!(K ⊗ᴸ L))[n] ≅ Ra_!((K ⊗ᴸ L)[n])
-```
-is `Ra_! K ⊗ᴸ (Ra_* L)[n] ≅ Ra_! K ⊗ᴸ Ra_*(L[n]) --⌣_c--> Ra_!(K ⊗ᴸ L[n]) ≅ Ra_!((K ⊗ᴸ L)[n])`.
--/
+omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
+@[reassoc]
+lemma projectionMapApp_naturality_commShiftIso_inv (K L : 𝐃(X, A)) (n : ℤ) :
+    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map
+        (((R((a)_*[A])).commShiftIso n).inv.app L) ≫
+      projectionMapApp A a K ((R((a)_*[A])).obj (L⟦n⟧)) =
+    projectionMapApp A a K (((R((a)_*[A])).obj L)⟦n⟧) ≫
+      (R(a)_![A]).map (((derivedTensor A X).obj K).map ((L((a)^*[A])).map
+        (((R((a)_*[A])).commShiftIso n).inv.app L))) :=
+  projectionMapApp_naturality A a K _
+
+omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
+lemma mixedSupportCupProduct_eq_projectionMapApp (K L : 𝐃(X, A)) :
+    mixedSupportCupProduct A a K L =
+      projectionMapApp A a K ((R((a)_*[A])).obj L) ≫
+        (R(a)_![A]).map (((derivedTensor A X).obj K).map
+          ((derivedUpperStarLowerStarAdjunction A a).counit.app L)) := by
+  rw [mixedSupportCupProduct_eq]
+  rfl
+
+omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
 @[reassoc]
 lemma commShiftIso_hom_app_comp_mixedSupportCupProduct_shift (K L : 𝐃(X, A)) (n : ℤ) :
     (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso n).hom.app _ ≫
@@ -125,13 +148,20 @@ lemma commShiftIso_hom_app_comp_mixedSupportCupProduct_shift (K L : 𝐃(X, A)) 
           (((R((a)_*[A])).commShiftIso n).inv.app L) ≫
         mixedSupportCupProduct A a K (L⟦n⟧) ≫
           (R(a)_![A]).map ((((derivedTensor A X).obj K).commShiftIso n).hom.app L) := by
-  have h := NatTrans.shift_app_comm (mixedSupportCupProductNatTrans A a K) n L
-  rw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app,
-    mixedSupportCupProductNatTrans_app, mixedSupportCupProductNatTrans_app] at h
-  rw [← cancel_epi (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map
-    (((R((a)_*[A])).commShiftIso n).hom.app L)), ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-    Functor.map_id, Category.id_comp, reassoc_of% h]
-  simp
+  rw [mixedSupportCupProduct_eq_projectionMapApp, mixedSupportCupProduct_eq_projectionMapApp]
+  simp only [Category.assoc]
+  rw [projectionMapApp_naturality_commShiftIso_inv_assoc, Functor.map_comp, Category.assoc,
+    projectionMapApp_shift_assoc]
+  congr 1
+  rw [← Functor.commShiftIso_hom_naturality_assoc]
+  simp only [Functor.id_obj, Iso.hom_inv_id_app]
+  erw [Category.comp_id]
+  simp only [← Functor.map_comp]
+  congr 1
+  rw [← Functor.commShiftIso_hom_naturality, Adjunction.shift_counit_app]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 end CupProduct
 
@@ -143,7 +173,7 @@ section Exchange
 
 the mixed-support cup product, `Ra_!` of the evaluation `M ⊗ᴸ RHom(M, Ra^! N) ⟶ Ra^! N`, and
 the counit of `Ra_! ⊣ Ra^!`. Its tensor–internal-hom adjoint is the tensor–Hom exchange
-(`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_app`). -/
+(`AlgebraicGeometry.Etale.uncurry_derivedHomRightDerivedLowerShriekIso_hom_app_app`). -/
 noncomputable def exchangePairing (M : 𝐃(X, A)) (N : 𝐃(Y, A)) :
     ((derivedTensor A Y).obj ((R(a)_![A]).obj M)).obj
         ((R((a)_*[A])).obj ((RHom(X)[A].obj (op M)).obj ((R(a)^![A]).obj N))) ⟶ N :=
@@ -151,21 +181,26 @@ noncomputable def exchangePairing (M : 𝐃(X, A)) (N : 𝐃(Y, A)) :
     (R(a)_![A]).map ((derivedTensorHomAdjunction A M).counit.app _) ≫
       (rightDerivedUpperShriekAdjunction A a).counit.app N
 
+omit [HasSmallSiteSheafify A] in
 /-- The tensor–Hom exchange `Ra_* RHom(M, Ra^! N) ⟶ RHom(Ra_! M, N)`
 (`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`) is the tensor–internal-hom
 adjoint of the pairing `AlgebraicGeometry.Etale.exchangePairing`. -/
-theorem derivedHomRightDerivedLowerShriekIso_hom_app_app [IsIso (projectionMap A a)]
+theorem uncurry_derivedHomRightDerivedLowerShriekIso_hom_app_app [IsIso (projectionMap A a)]
     (M : 𝐃(X, A)) (N : 𝐃(Y, A)) :
-    ((derivedHomRightDerivedLowerShriekIso A a).app (op M)).hom.app N =
-      MonoidalClosed.curry (exchangePairing A a M N) := by
-  rw [MonoidalClosed.eq_curry_iff, MonoidalClosed.uncurry_eq]
-  have h := conjugateEquiv_counit
-    (((derivedTensorHomAdjunction₂ A X).comp (derivedUpperStarLowerStarAdjunction A a)
-      (rightDerivedUpperShriekAdjunction A a)).adj M)
-    (((derivedTensorHomAdjunction₂ A Y).precomp R(a)_![A]).adj M)
-    ((projectionMap A a).app M) N
-  refine h.trans ?_
-  simp [exchangePairing, mixedSupportCupProduct, Adjunction.comp_counit_app]
+    MonoidalClosed.uncurry (((derivedHomRightDerivedLowerShriekIso A a).app (op M)).hom.app N) =
+      exchangePairing A a M N := by
+  obtain ⟨e, he, hPF⟩ : ∃ e, derivedHomRightDerivedLowerShriekIso A a =
+      ((derivedTensorHomAdjunction₂ A X).comp (derivedUpperStarLowerStarAdjunction A a)
+        (rightDerivedUpperShriekAdjunction A a)).conjugateIso
+        ((derivedTensorHomAdjunction₂ A Y).precomp R(a)_![A]) e ∧
+      ∀ M' L', (e.hom.app M').app L' = projectionMapApp A a M' L' :=
+    ⟨_, rfl, fun _ _ ↦ rfl⟩
+  rw [he]
+  refine (MonoidalClosed.uncurry_eq _).trans
+    ((ParametrizedAdjunction.map_conjugateIso_app_hom_app_comp_counit _ _ e (op M) N).trans ?_)
+  rw [hPF, exchangePairing, mixedSupportCupProduct_eq_projectionMapApp]
+  simp only [ParametrizedAdjunction.comp_adj, Adjunction.comp_counit_app, Category.assoc]
+  rfl
 
 end Exchange
 
@@ -187,6 +222,7 @@ noncomputable def purityVerdierDualMap (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingC
   MonoidalClosed.curry ((((derivedTensor A X).obj K).commShiftIso (2 * d : ℤ)).hom.app _ ≫
     (twistedEvaluation T K)⟦(2 * d : ℤ)⟧' ≫ γ.hom)
 
+omit [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A] in
 /-- Blueprint `thm-sf-dual-perfect` (the identification used by
 `thm-pod-identification-of-the-comparison`): for a perfect `K`, the purity identification
 `(K^∨ ⊗ᴸ T)[2d] ⟶ 𝔻_X K` is an isomorphism. -/
@@ -201,10 +237,12 @@ theorem isIso_purityVerdierDualMap (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingCompl
               (fun g ↦ (shiftFunctor _ (2 * d : ℤ)).preimage g) := by
     funext g
     simp only [Function.comp_apply, purityVerdierDualMap]
-    rw [← MonoidalClosed.curry_natural_left]
+    refine (MonoidalClosed.curry_natural_left _ _).symm.trans ?_
     congr 1
     obtain ⟨y, rfl⟩ := (shiftFunctor (𝐃(X, A)) (2 * d : ℤ)).map_surjective g
-    rw [Functor.preimage_map, Functor.map_comp, Functor.commShiftIso_hom_naturality_assoc]
+    rw [Functor.preimage_map]
+    change ((derivedTensor A X).obj K).map (y⟦(2 * d : ℤ)⟧') ≫ _ = _
+    rw [Functor.commShiftIso_hom_naturality_assoc]
     simp
   rw [e]
   refine Function.Bijective.comp ⟨MonoidalClosed.curry_injective,
@@ -214,7 +252,7 @@ theorem isIso_purityVerdierDualMap (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingCompl
   refine Function.Bijective.comp ⟨(shiftFunctor _ _).map_injective,
     (shiftFunctor _ _).map_surjective⟩ ?_
   refine (bijective_derivedTensor_map_comp_twistedEvaluation A hK W).comp ?_
-  exact ⟨fun g g' h ↦ (shiftFunctor _ (2 * d : ℤ)).map_injective (by simpa using h),
+  exact ⟨fun g g' h ↦ by simpa using congrArg (shiftFunctor _ (2 * d : ℤ)).map h,
     fun y ↦ ⟨y⟦(2 * d : ℤ)⟧', by simp⟩⟩
 
 end Purity
@@ -222,6 +260,8 @@ end Purity
 section Identification
 
 variable {A} {d : ℕ} {T : 𝐃(X, A)} [IsIso (projectionMap A a)]
+
+omit [HasSmallSiteSheafify A]
 
 /-- Blueprint `thm-pod-identification-of-the-comparison`: Identification of the Poincaré pairing
 with Verdier duality.
@@ -242,52 +282,76 @@ theorem curry_poincarePairing_eq (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex
       ((R((a)_*[A])).commShiftIso (2 * d : ℤ)).inv.app _ ≫
         (R((a)_*[A])).map (purityVerdierDualMap a γ K) ≫
           (globalVerdierDualityIso A a K).inv := by
-  rw [MonoidalClosed.curry_eq_iff, MonoidalClosed.uncurry_natural_left,
-    MonoidalClosed.uncurry_natural_left, globalVerdierDualityIso_inv,
-    derivedHomRightDerivedLowerShriekIso_hom_app_app, MonoidalClosed.uncurry_curry,
-    exchangePairing]
+  refine (MonoidalClosed.curry_eq_iff _ _).2
+    (Eq.symm ((MonoidalClosed.uncurry_natural_left _ _).trans ?_))
+  erw [MonoidalClosed.uncurry_natural_left]
+  rw [globalVerdierDualityIso_inv]
+  erw [uncurry_derivedHomRightDerivedLowerShriekIso_hom_app_app]
+  rw [exchangePairing]
+  symm
   change _ = ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map _ ≫
     ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map _ ≫ _
-  rw [mixedSupportCupProduct_naturality_assoc, ← Functor.map_comp_assoc,
-    ← Functor.map_comp_assoc]
+  erw [reassoc_of% (mixedSupportCupProduct_naturality_right A a K (purityVerdierDualMap a γ K))]
   have hu : ((derivedTensor A X).obj K).map (purityVerdierDualMap a γ K) ≫
       (derivedTensorHomAdjunction A K).counit.app (dualizingComplex A a) =
       (((derivedTensor A X).obj K).commShiftIso (2 * d : ℤ)).hom.app _ ≫
         (twistedEvaluation T K)⟦(2 * d : ℤ)⟧' ≫ γ.hom := by
-    rw [purityVerdierDualMap, ← MonoidalClosed.uncurry_curry
-      ((((derivedTensor A X).obj K).commShiftIso (2 * d : ℤ)).hom.app _ ≫
-        (twistedEvaluation T K)⟦(2 * d : ℤ)⟧' ≫ γ.hom), MonoidalClosed.uncurry_eq,
-      MonoidalClosed.curry_uncurry]
-    rfl
-  rw [hu, poincarePairing, poincarePairingEvaluation, smoothTrace]
+    exact (MonoidalClosed.uncurry_eq _).symm.trans (MonoidalClosed.uncurry_curry _)
+  have hu' : (R(a)_![A]).map (((derivedTensor A X).obj K).map (purityVerdierDualMap a γ K)) ≫
+      (R(a)_![A]).map ((derivedTensorHomAdjunction A K).counit.app (dualizingComplex A a)) =
+      (R(a)_![A]).map ((((derivedTensor A X).obj K).commShiftIso (2 * d : ℤ)).hom.app _) ≫
+        (R(a)_![A]).map ((twistedEvaluation T K)⟦(2 * d : ℤ)⟧') ≫ (R(a)_![A]).map γ.hom := by
+    refine (Functor.map_comp _ _ _).symm.trans ((congrArg (R(a)_![A]).map hu).trans ?_)
+    simp only [Functor.map_comp]
+  erw [reassoc_of% hu']
+  rw [poincarePairing, poincarePairingEvaluation, smoothTrace]
   simp only [Functor.map_comp, Category.assoc]
-  rw [← Functor.commShiftIso_inv_naturality_assoc,
+  rw [Functor.commShiftIso_inv_naturality_assoc,
     reassoc_of% commShiftIso_hom_app_comp_mixedSupportCupProduct_shift]
 
 /-- Blueprint `thm-pod-identification-of-the-comparison`: Identification of the Poincaré pairing
 with Verdier duality.
 
 For `K` perfect over `Λ_X`, the tensor–internal-hom adjoint
-`β_K^♯ : (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨` of the derived Poincaré pairing is an isomorphism,
-and its inverse is the global Verdier-duality isomorphism
-`(Ra_! K)^∨ ≅ Ra_* 𝔻_X K` (`AlgebraicGeometry.Etale.globalVerdierDualityIso`) followed by the
-inverse of the smooth-purity identification `𝔻_X K ≅ (K^∨ ⊗ᴸ T)[2d]`
-(`AlgebraicGeometry.Etale.purityVerdierDualMap`, an isomorphism by
-`AlgebraicGeometry.Etale.isIso_purityVerdierDualMap`) and the shift compatibility of `Ra_*`.
-Over `Y = Spec k` this is `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K) ≅ RΓ(X, K^∨(d))[2d]`. -/
+`β_K^♯ : (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨` of the derived Poincaré pairing is an isomorphism:
+by `AlgebraicGeometry.Etale.curry_poincarePairing_eq` it is a composite of isomorphisms, the
+purity identification being one by `AlgebraicGeometry.Etale.isIso_purityVerdierDualMap`. -/
+theorem isIso_curry_poincarePairing (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a) {K : 𝐃(X, A)}
+    (hK : IsDualizable K) : IsIso (MonoidalClosed.curry (poincarePairing a γ K)) := by
+  have := isIso_purityVerdierDualMap a γ hK
+  rw [curry_poincarePairing_eq]
+  exact @IsIso.comp_isIso _ _ _ _ _ _ _ inferInstance
+    (@IsIso.comp_isIso _ _ _ _ _ _ _ (Functor.map_isIso _ _) (Iso.isIso_inv _))
+
+/-- Blueprint `thm-pod-identification-of-the-comparison`: Identification of the Poincaré pairing
+with Verdier duality.
+
+For `K` perfect over `Λ_X`, the inverse of the isomorphism
+`β_K^♯ : (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨`
+(`AlgebraicGeometry.Etale.isIso_curry_poincarePairing`) is the global Verdier-duality
+isomorphism `(Ra_! K)^∨ ≅ Ra_* 𝔻_X K` (`AlgebraicGeometry.Etale.globalVerdierDualityIso`)
+followed by the inverse of the smooth-purity identification `𝔻_X K ≅ (K^∨ ⊗ᴸ T)[2d]` and the
+shift compatibility of `Ra_*`. Over `Y = Spec k` this is
+`RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K) ≅ RΓ(X, K^∨(d))[2d]`. -/
 theorem inv_curry_poincarePairing_eq (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex A a) {K : 𝐃(X, A)}
     (hK : IsDualizable K) :
+    haveI := isIso_curry_poincarePairing a γ hK
     haveI := isIso_purityVerdierDualMap a γ hK
-    IsIso (MonoidalClosed.curry (poincarePairing a γ K)) ∧
-      inv (MonoidalClosed.curry (poincarePairing a γ K)) =
-        (globalVerdierDualityIso A a K).hom ≫
-          (R((a)_*[A])).map (inv (purityVerdierDualMap a γ K)) ≫
-            ((R((a)_*[A])).commShiftIso (2 * d : ℤ)).hom.app _ := by
-  haveI := isIso_purityVerdierDualMap a γ hK
-  have h := curry_poincarePairing_eq a γ K
-  refine ⟨by rw [h]; infer_instance, ?_⟩
-  rw [h]
-  simp [← Functor.map_inv]
+    inv (MonoidalClosed.curry (poincarePairing a γ K)) =
+      (globalVerdierDualityIso A a K).hom ≫
+        (R((a)_*[A])).map (inv (purityVerdierDualMap a γ K)) ≫
+          ((R((a)_*[A])).commShiftIso (2 * d : ℤ)).hom.app _ := by
+  have := isIso_curry_poincarePairing a γ hK
+  have := isIso_purityVerdierDualMap a γ hK
+  refine IsIso.inv_eq_of_hom_inv_id ?_
+  have hE := ((((R((a)_*[A])).commShiftIso (2 * d : ℤ)).app _).symm ≪≫
+    (R((a)_*[A])).mapIso (asIso (purityVerdierDualMap a γ K)) ≪≫
+      (globalVerdierDualityIso A a K).symm).hom_inv_id
+  simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Functor.mapIso_hom,
+    Functor.mapIso_inv, asIso_hom, asIso_inv, Iso.app_hom, Iso.app_inv, Category.assoc] at hE
+  rw [curry_poincarePairing_eq]
+  refine (Category.assoc _ _ _).trans ((congrArg (_ ≫ ·) (Category.assoc _ _ _)).trans ?_)
+  exact hE
 
 end Identification
 
