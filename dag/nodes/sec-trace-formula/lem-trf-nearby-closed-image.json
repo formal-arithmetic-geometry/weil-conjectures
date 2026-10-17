@@ -15,9 +15,129 @@
   "def-weil-closed-immersion",
   "def-weil-pbc-etale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Orgogozo's displayed Lemma 3.2.2 uses $\\mathbf Z/n$ coefficients. Here we prove its closed-image argument directly for the stated finite commutative $\\Lambda$. If $n\\Lambda=0$, the map $\\mathbf Z/n\\to\\Lambda$, $\\bar k\\mapsto k1_\\Lambda$, is well defined and unital. Illusie, Theorem 1.6.1 and its following paragraph, explicitly extends Orgogozo's proof to these coefficient algebras. The module-valued tube formula used in Step 3 allows any commutative ring, and the sections comparison used in Step 6 allows any unital ring; thus neither step requires $\\Lambda$ to be cyclic. The faithful exact forgetful functor of [lem-weil-pbc-module-sheaves-colimits-forgetful](1) commutes with kernels and cokernels, hence with cohomology. A module whose underlying abelian sheaf is zero is zero, so this functor detects cone-cohomology vanishing. We use no assertion that it preserves injectives or derived direct images.\n\nFix arbitrary $B\\to S$ and $u:B'\\to B$. Put $E=F\\times_SB$, $E'=F\\times_SB'$, $Y=X\\times_SB$, $Y'=X\\times_SB'$, and $L=K|_Y$. The maps $E\\hookrightarrow B$ and $E'\\hookrightarrow B'$ are closed immersions by [lem-weil-pbc-closed-immersion-base-change]. The fibre-product universal property [def-pc-fibre-product] identifies $Y=X\\times_FE$ and $Y'=X\\times_FE'$: a map to $X$ already has its map to $F$, so its compatibility over $S$ with a map to $B$ is exactly a map to $E$. These identifications preserve all projections. Exact inverse image in [def-trf-oriented-nearby-cycles] keeps $L$ and its further restrictions bounded below. No Noetherian hypothesis on $B$ or $B'$ will be used.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Sections 1.2--1.5, especially (1.2.3), (1.3.1)--(1.3.2), (1.4.3); Theorem 1.6.1 and the following coefficient-extension paragraph, printed pp. 6--9. The closed-image argument follows Orgogozo Lemma 3.2.2, printed pp. 7--8."
+   }
+  },
+  {
+   "text": "For either closed immersion $i:Z\\hookrightarrow W$ above (that is, $E\\hookrightarrow B$ or $E'\\hookrightarrow B'$) and a geometric point $a$ of $Z$, [lem-trf-closed-immersion-strict-localization-cartesian] gives a canonical Cartesian identification $(j_Z,h):Z_{(a)}\\xrightarrow{\\sim}Z\\times_WW_{(a)}$, where $h$ is the local map of [lem-weil-pbc-strict-henselization-functoriality](3) for $i$; it keeps the nilpotent structure of $Z$. These identifications use exactly the structural maps. A composite of two local maps of (3) is local, is compatible with the structural maps, and induces the composite of the residue inclusions of (2); so by the uniqueness in (3) the composite $Y_{(x)}\\to E_{(a)}\\to B_{(a)}$ is the local map for $Y\\to B$. In the same way, the local maps $E'_{(a')}\\to E_{(a)}$ and $B'_{(a')}\\to B_{(a)}$ induced by $u$ commute with the two squares, since both composites $E'_{(a')}\\to B_{(a)}$ are the local map for $E'\\to B$. If $b\\in E$, a chosen specialization $c:B_{(b)}\\to B_{(a)}$ of $B$-schemes restricts to $E\\times_BB_{(b)}\\to E\\times_BB_{(a)}$, i.e. to a morphism $E_{(b)}\\to E_{(a)}$ of $E$-schemes, by the fibre-product universal property [def-pc-fibre-product]. The specialization itself need not be local.",
+   "uses": [
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WS, lemma-quotient-strict-henselization; scheme interpretation Tag 04HX, lemma-describe-etale-local-ring (etale-cohomology.tex); functorial maps Tag 04GU."
+   }
+  },
+  {
+   "text": "Write $g:Y\\to B$ and $g':Y'\\to B'$. Choose an arbitrary oriented point $z'=(x',b',c')$ of $V_{g'}$, where $a'=g'(x')$ and $c':B'_{(b')}\\to B'_{(a')}$ is the specialization. Write $(x,b,c)$ for its image in $V_g$ and $a=g(x)$. The points $a',a$ lie in $E',E$. By [lem-trf-oriented-point-cohomology], applied with second morphism the identity of the base, the source and target stalks of the ordinary comparison are canonically\n$$R\\Gamma(M,L|_M),\\quad R\\Gamma(M',L|_{M'}),\\qquad M=Y_{(x)}\\times_{B_{(a)}}B_{(b)},\\quad M'=Y'_{(x')}\\times_{B'_{(a')}}B'_{(b')}.$$\nHere the maps from $M,M'$ to $Y,Y'$ are the natural ones. Pullback of a source complex to $z'$ is its pullback to the image point $z$, by composition of inverse images. The formula applies because the complexes are bounded below; it requires neither finite type nor Noetherian bases. The oriented points in [lem-trf-oriented-product-points-conservative] detect isomorphisms and vanishing of sheaves. Since their inverse images are exact, they commute with kernels, cokernels and hence cohomology, and take a cone to its termwise cone. It therefore suffices to prove the desired cone vanishing at these points.",
+   "uses": [
+    "lem-trf-oriented-point-cohomology",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 3.2.2 and its proof, printed pp. 7--8; universal version following the lemma. Local archival PDF WANTED; author PDF read online."
+   }
+  },
+  {
+   "text": "If $b'\\notin E'$, then $b\\notin E$, since $E'=E\\times_BB'$. The structural morphism $B_{(b)}\\to B$ maps its closed point to $b$, by [lem-weil-pbc-strict-henselization-functoriality](1). Its inverse image of the open $B\\setminus E$ thus contains the closed point of a local spectrum and is the whole spectrum: a principal open containing the maximal ideal is defined by a unit. Hence $E\\times_BB_{(b)}$ is empty, as is $E'\\times_{B'}B'_{(b')}$. As $Y_{(x)}$ maps to $E$ and $Y'_{(x')}$ to $E'$, the tube projections force $M=M'=\\varnothing$, using [def-pc-fibre-product]. Every module sheaf on the empty scheme has its unique section on the empty object, so its sections complex is zero, as are its derived sections. Thus the stalk comparison in this case is $0\\to0$, with zero cone.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 3.2.2 and its proof, printed pp. 7--8; universal version following the lemma. Local archival PDF WANTED; author PDF read online."
+   }
+  },
+  {
+   "text": "If $b'\\in E'$, then $b\\in E$. Step 2 restricts $c'$ and $c$ to specializations in $E'$ and $E$, giving oriented points for $Y'\\to E'$ and $Y\\to E$. Put\n$$N=Y_{(x)}\\times_{E_{(a)}}E_{(b)},\\qquad N'=Y'_{(x')}\\times_{E'_{(a')}}E'_{(b')}.$$\nThe Cartesian identities of Step 2 give $E_{(a)}\\times_{B_{(a)}}B_{(b)}\\cong E_{(b)}$, and likewise on $B'$. Reassociating fibre products [def-pc-fibre-product] therefore gives $M\\cong N$ and $M'\\cong N'$. For clarity, a pair of maps to $Y_{(x)}$ and $B_{(b)}$ agreeing over $B_{(a)}$ determines its unique map to $E_{(b)}$, because the first already maps to $E_{(a)}$; forgetting that map is the inverse. The two constructions preserve the projections to $Y$ and commute with the induced map $M'\\to M$, by uniqueness in that same universal property. This uses the scheme-theoretic closed subschemes, including their nilpotents.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 3.2.2 and its proof, printed pp. 7--8; universal version following the lemma. Local archival PDF WANTED; author PDF read online."
+   }
+  },
+  {
+   "text": "The identifications also identify the comparison arrows, not just their endpoints. Here is the formal check. The formula in [lem-trf-oriented-point-cohomology] is induced by restriction from pointed triple neighbourhoods to the tube. By [def-trf-oriented-nearby-cycles], $\\beta$ is the mate of the pullback square followed by the counit. Pasting with a pointed-neighbourhood restriction and then with the tube projection gives, by [lem-weil-pbc-mate-pasting](1),(2), the unit-defined cohomology pullback along $m:M'\\to M$. On sections this says: restrict a section from a triple to its inverse-image triple, then to $M'$, which equals restriction to $M$ followed by pullback along $m$, since the projection composites agree. The unit description of this derived pullback is [lem-weil-pbc-cohomology-pullback-derived-unit](2); [lem-pe-left-module-derived-evaluation-forget] makes that description valid after forgetting the constant $\\Lambda$-action and preserves cohomology pullback. Applying the same check over $E'\\to E$ gives pullback along $N'\\to N$. The commuting projection squares in Step 5 identify these two scheme maps. Thus the cohomology comparison square commutes in every degree, and in the derived category before taking cohomology. This is an application of the cited mate identities to the specified maps, with no base-change invertibility being presumed.",
+   "uses": [
+    "lem-trf-oriented-point-cohomology",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-pe-left-module-derived-evaluation-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 3.2.2 and its proof, printed pp. 7--8; universal version following the lemma. Local archival PDF WANTED; author PDF read online."
+   }
+  },
+  {
+   "text": "Assume $P_r(f_F,K)$. Its definition [def-trf-orgogozo-induction-data] applies to the preliminary base change $E\\to F$ and then $E'\\to E$. It says that the cone of this comparison for $Y\\to E$ has zero cohomology in all degrees $i\\le r$. At points with $b'\\in E'$, Steps 5--6 identify the ambient stalk cone with that cone's stalk, so it too vanishes through degree $r$. At points outside $E'$ Step 4 gives a zero cone in every degree. Exactness and conservativity of [lem-trf-oriented-product-points-conservative] now give $H^i\\operatorname{Cone}(\\beta_{g,u,L})=0$ for every $i\\le r$. Both $B\\to S$ and $B'\\to B$ were arbitrary, exactly the two quantifiers in $P_r(f,K)$. This proves the truncated implication for each integer $r$.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 3.2.2 and its proof, printed pp. 7--8; universal version following the lemma. Local archival PDF WANTED; author PDF read online."
+   }
+  },
+  {
+   "text": "Finally assume full $\\Psi$-goodness for $(f_F,K)$ as defined in [def-trf-oriented-nearby-cycles]. For any $B'\\to S$, apply Steps 1--6 with $B=S$, $E=F$ and $E'=F\\times_SB'$. The comparison over $E'\\to F$ is an isomorphism by that hypothesis. Hence the ambient comparison is an isomorphism at the points whose generization lies in $E'$, and it is $0\\to0$ at all other points. Conservativity [lem-trf-oriented-product-points-conservative] makes it an isomorphism on $V_{f_{B'}}$. This holds for every $B'\\to S$, so $(f,K)$ is $\\Psi$-good. This argument uses full invertibility directly; it does not assume a uniform truncation bound or replace the universal quantifier by finite-type base changes.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 3.2.2 and its proof, printed pp. 7--8; universal version following the lemma. Local archival PDF WANTED; author PDF read online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-orgogozo-induction-data",
+  "def-trf-oriented-nearby-cycles",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-trf-oriented-point-cohomology",
+  "lem-trf-oriented-product-points-conservative",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Orgogozo, Lemma 3.2.2 and its proof, printed pp. 7--8; universal version following the lemma. Local archival PDF WANTED; author PDF read online.",
+  "note": "Agent expansion of Orgogozo's two-case proof, retaining arbitrary finite commutative Lambda. The source lemma is cyclic-coefficient; Illusie Theorem 1.6.1 and its following paragraph explicitly authorize the Z/n-algebra extension of Orgogozo's proof. Steps 3 and 6 use the existing arbitrary-ring module tube/sections interfaces, rather than applying the cyclic source lemma to Lambda. Local archival PDFs WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +173,45 @@
    "results": "{\"t\": \"2026-10-17T15:50:05Z\", \"tool\": \"leansearch\", \"query\": \"Universal truncated nearby cycle base change over a reduced closed image implies the same comparison over the ambient base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\"], \"digest\": \"e8fe6d75af3a484b\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures in work/lem-trf-nearby-closed-image.leansearch.txt; the hits concern ordinary scheme properties, normed-ring units, simplicial objects or homological cycles, and do not state this nearby-cycle/alteration assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nearby cycles for a morphism factoring through a closed subscheme commute with arbitrary base change if they do over the closed subscheme",
+   "results": "{\"t\": \"2026-10-17T16:18:59Z\", \"tool\": \"leanfinder\", \"query\": \"Nearby cycles for a morphism factoring through a closed subscheme commute with arbitrary base change if they do over the closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_comp\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap_subschemeι\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\"], \"digest\": \"a6f223bc5b2ad3fb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ideal-sheaf/pullback identities or ordinary mapping-cone and truncation lemmas have no nearby-cycle or closed-image base-change assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "nearby.?cycle|vanishing.?topos|Milnor.?tube",
+   "results": "{\"t\": \"2026-10-17T16:19:13Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|Milnor.?tube\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no nearby-cycle, vanishing-topos or Milnor-tube declaration found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change for nearby cycles over a closed subscheme implies base change over the ambient scheme",
+   "results": "{\"t\": \"2026-10-17T16:19:13Z\", \"tool\": \"leansearch\", \"query\": \"Base change for nearby cycles over a closed subscheme implies base change over the ambient scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\"], \"digest\": \"13db56ac8b297c2b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned scheme-morphism stability lemmas do not state a nearby-cycle comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearby\"",
+   "results": "{\"t\": \"2026-10-17T16:19:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"nearby\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Units.ofNearby\", \"Units.val_ofNearby\"], \"digest\": \"bee6463c6c16739d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only Units.ofNearby and Units.val_ofNearby, concerning units of normed rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cone of a nearby cycle base change comparison is zero in low degrees when the morphism factors through a closed immersion",
+   "results": "{\"t\": \"2026-10-17T16:19:14Z\", \"tool\": \"leanfinder\", \"query\": \"The cone of a nearby cycle base change comparison is zero in low degrees when the morphism factors through a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.isZero_X_iff\", \"DerivedCategory.isZero_of_isGE\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"DerivedCategory.isZero_of_isLE\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat\"], \"digest\": \"76e80e3488f28175\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ideal-sheaf/pullback identities or ordinary mapping-cone and truncation lemmas have no nearby-cycle or closed-image base-change assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-orgogozo-good-modification",
@@ -78,5 +233,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nearby-closed-image",
+  "worker": "stage1",
+  "summary": "Repaired E7 without changing the statement: identified Orgogozo Lemma 3.2.2 as cyclic-coefficient, added Illusie Theorem 1.6.1's explicit Z/n-algebra extension source and the elementary algebra map Z/n -> Lambda, and checked every coefficient-sensitive interface has arbitrary-ring scope. The eight-step direct tube argument and actual comparison-arrow check are retained. Corrected created.item/group using the reviewer's supplied JSON. No new nodes. Q70 maintainer reader (8c5501b2): step 2 now cites the new statement-only node lem-trf-closed-immersion-strict-localization-cartesian (Stacks 05WS via 05WR/04GU, canonical-map form), because the existing quotient core and the definition of strict henselization give only an unspecified strict-henselization structure on the quotient, not that the functoriality map (j_Z,h) is an isomorphism; the three tool uses no longer cited were removed.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof of (1) and (2), normal-cone specialization: the supporting Orgogozo closed-image reduction used by lem-trf-orgogozo-good-modification. Historical ancestry retained. Whole-blueprint searches for nearby, closed image and 05WS found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic functoriality and closed-point description of strict localizations, needed for canonical projection and specialization maps."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic stability of closed immersions, used only to form the arbitrary-base-change closed subschemes."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal identities for adjunction mates, used only to identify the specified comparison arrows under tube restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "why": "Generic unit-and-Leray formula for cohomology pullback, used to check the tube comparison arrow."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Generic constant-module/abelian derived sections comparison, explicitly compatible with cohomology pullback, for the coefficient comparison in step 6."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic faithful exact functor for sheaves of modules; used only to detect cohomology vanishing in the coefficient-scope audit, not to identify derived direct images. This unit has no such module-sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-8c5501b21",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-8c5501b21 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps and every cited statement in full: def-trf-orgogozo-induction-data, def-trf-oriented-nearby-cycles, point-cohomology, points-conservative, the strict-henselization functoriality, chart-comparison and 05WS-core nodes, mate-pasting, derived-unit, derived-evaluation-forget, module-forgetful, closed-immersion base change and fibre product. Also read def-sc-ring-strict-henselization, the sbc quotient family and Stacks algebra.tex 05WS/05WR. The statement is unchanged and correct. It uses P_r on both sides, with both quantifiers and the cutoff i<=r. The comparison beta is the mate followed by the counit. The coefficient category is D(Mod Lambda_{V_f}) throughout. Allowing any closed subscheme F is a valid generalization, and the parent's step 7 needs it for the nonreduced total transform. Steps 1, 3-5, 7 and 8 are correct; step 6 is accepted. One fault, in step 2 (C4/E5). The step needs the canonical identification (j_Z,h): Z_(a) -> Z x_W W_(a), with h the local map of functoriality (3). The cited quotient core and the definition give only some strict-henselization structure on C/IC, so its isomorphism to the strict local ring of Z can differ from h by a Galois twist on residue fields, and the uniqueness in (3) does not apply. Fix: a new statement-only node, lem-trf-closed-immersion-strict-localization-cartesian. Its source is Stacks 05WS via 05WR/04GU, whose statement gives exactly this canonical map. Its unit is sk-i-curve-zero and its blueprint ancestor is lem-trf-local-term-locality. Searches in the DAG and blueprint found no duplicate. Small cases tested: Z=W, k[e]/e^2 -> k, Z -> F_p, the closed point of a trait. Step 2 is rewritten to cite it, and proof_deps is recomputed. Three tool_uses no longer cited were removed: chart comparison, quotient core, affine fibre product. Accepted tool_uses: strict-henselization functoriality, closed-immersion base change, mate-pasting, derived-unit, derived-evaluation-forget, module-sheaves-forgetful. The Orgogozo and Illusie PDFs are not local and there is no network, so they remain WANTED. The source facts used are confirmed by the prior reader's record and by ILO XI.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
