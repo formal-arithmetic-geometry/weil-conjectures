@@ -93,12 +93,11 @@
    }
   },
   {
-   "text": "Use [lem-coef-inner-anodyne-pushout-product] with the ordinary inner horn and the boundary inclusion. The horn has the left lifting property against inner fibrations by their definition, and the boundary is degreewise injective. This gives the ordinary rectangular map $u:K\\to L=\\Delta^n\\times\\Delta^m$ in the lifting-property inner-anodyne class. Here is the comparison with the generated class needed below. Apply [lem-coef-small-object-cell-factorization] to simplicial sets and the small, countable set $I$ of inner horn inclusions, with $\\kappa=\\aleph_0$. Simplicial sets have small Hom sets and colimits formed degreewise in sets. Every horn has finitely many nondegenerate simplices: a map from it into a continuous chain factors at one finite stage containing their finitely many images, and its finitely many compatibility equalities hold at a later finite stage. The same finite-data argument detects equality of two maps. This verifies the node's smallness hypothesis. Its last assertion makes $u$ a retract of a transfinite composite of pushouts of small coproducts of inner horns. This is precisely the comparison named SSet.innerAnodyneExtensions_eq_retracts_transfiniteCompositions at Inner/Basic.lean:89-92. Such cell pushouts also give pushouts in $P(\\Delta)$: in each degree the horn leg is injective, so the homotopy pushout of the discrete span has contractible components and equals its set pushout. At a limit ordinal $\\lambda$, the stage is the increasing union in each degree. Write it as the coproduct over its elements $x$ of the diagrams equal to $*$ on the set $Q_x$ of earlier stages containing $x$ and to $\\varnothing$ elsewhere. Each $Q_x$ is an upward-closed tail of $\\lambda$ with an initial element. For each stage $b<\\lambda$ the comma category $(b\\downarrow Q_x)$ is the part of $Q_x$ above $b$. It is nonempty and has an initial element, so its nerve is weakly contractible: the transformation from the constant functor at that element gives a homotopy to the identity. By condition (3) of [lem-coef-infinity-cofinality-space-test] the inclusion $Q_x\\subseteq\\lambda$ is final. The same condition, applied to $Q_x\\to\\Delta^0$, gives $\\operatorname{colim}_{Q_x}*\\simeq*$. Since colimits commute with coproducts, the homotopy colimit of the chain is the union. A small coproduct of horn attachments can be performed one at a time along a well-order. Thus $u$ lies in the weakly saturated class $\\mathcal A_\\Delta$ of [lem-coef-simple-inner-anodyne-base-change], with its space-valued-presheaf convention.",
+   "text": "Use [lem-coef-inner-anodyne-pushout-product] with the ordinary inner horn $\\Lambda^n_i\\hookrightarrow\\Delta^n$ and the boundary inclusion $\\partial\\Delta^m\\hookrightarrow\\Delta^m$. The horn has the left lifting property against inner fibrations, since these are defined by the right lifting property against inner horns, and the boundary is degreewise injective. This gives the ordinary rectangular map $u:K\\to L=\\Delta^n\\times\\Delta^m$, where the degreewise pushout $K$ is the union $(\\Lambda^n_i\\times\\Delta^m)\\cup(\\Delta^n\\times\\partial\\Delta^m)$ inside $L$, in the lifting-property inner-anodyne class. By [lem-coef-inner-horn-cell-generation] that class is exactly the class of arrow retracts of small continuous transfinite composites of pushouts of small coproducts of inner horn inclusions, with colimits formed degreewise in sets. Regard simplicial sets as discrete space-valued presheaves on $\\Delta$, as in the item. Then [lem-coef-discrete-inner-cell-transfer] puts $u$ in the class generated in $P(\\Delta)$ by the discrete inner horns under pushouts, transfinite compositions and retracts. That class is, by the same generators and closure operations, the class $\\mathcal A_\\Delta$ of [lem-coef-simple-inner-anodyne-base-change].",
    "uses": [
     "lem-coef-inner-anodyne-pushout-product",
-    "lem-coef-small-object-cell-factorization",
-    "lem-coef-simple-inner-anodyne-base-change",
-    "lem-coef-infinity-cofinality-space-test"
+    "lem-coef-inner-horn-cell-generation",
+    "lem-coef-discrete-inner-cell-transfer"
    ],
    "elementary": false,
    "source": {
@@ -119,7 +118,7 @@
    }
   },
   {
-   "text": "Identify the last pullback. Pulling back $\\Lambda_i^n\\times\\Delta^m\\subset L$ gives $\\Lambda_i^n(\\boldsymbol c)\\boxtimes\\Delta^m(\\boldsymbol d)$; pulling back $\\Delta^n\\times\\partial\\Delta^m$ gives $\\Delta^n(\\boldsymbol c)\\boxtimes\\partial\\Delta^m(\\boldsymbol d)$; their intersection gives the external product of horn and boundary. These identities follow by reassociating the pointwise fiber products in the definitions. Restriction and pullback preserve the gluing pushout by step 1, so the pullback of their union $K$ is exactly the displayed pushout domain in the item. The inner-anodyne conclusion of step 8 is therefore the asserted prism map.",
+   "text": "Identify the last pullback. Pulling back $\\Lambda_i^n\\times\\Delta^m\\subset L$ gives $\\Lambda_i^n(\\boldsymbol c)\\boxtimes\\Delta^m(\\boldsymbol d)$; pulling back $\\Delta^n\\times\\partial\\Delta^m$ gives $\\Delta^n(\\boldsymbol c)\\boxtimes\\partial\\Delta^m(\\boldsymbol d)$; their intersection gives the external product of horn and boundary. These identities follow by reassociating the pointwise fiber products in the definitions. The union $K$ is the pushout in $P(\\Delta)$ of the two pieces over their intersection, by the injective-leg argument of step 2; restriction and pullback preserve this gluing pushout by step 1, so the pullback of their union $K$ is exactly the displayed pushout domain in the item. The inner-anodyne conclusion of step 8 is therefore the asserted prism map.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -141,12 +140,13 @@
  ],
  "proof_deps": [
   "def-coef-segal-presheaf-localization",
+  "lem-coef-discrete-inner-cell-transfer",
   "lem-coef-infinity-cofinality-space-test",
   "lem-coef-infinity-finite-poset-kan-extension",
   "lem-coef-infinity-yoneda-presheaf-limits",
   "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-inner-horn-cell-generation",
   "lem-coef-simple-inner-anodyne-base-change",
-  "lem-coef-small-object-cell-factorization",
   "lem-coef-space-universal-colimits"
  ],
  "proof_origin": {
@@ -156,71 +156,36 @@
  },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "innerAnodyne|Segal.*presheaf|labelled.*horn",
-   "results": "{\"t\": \"2026-10-16T19:04:01Z\", \"tool\": \"grep\", \"query\": \"innerAnodyne|Segal.*presheaf|labelled.*horn\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"3e3cde5592784fae\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: SSet.innerAnodyneExtensions.horn_ι (Inner/Basic.lean:55-59) and prodStdSimplex.innerAnodyneExtensions_unionProd_ι (Inner/PushoutProduct.lean:55-61) concern ordinary set-valued simplicial sets. StrictSegal.lean:42-60 is a strict Segal condition; Path.lean:381-385 identifies an ordinary horn spine. None supplies the labelled-presheaf horn filtration or the pullback transport from ordinary prisms over C_⊗ and D_⊗. This extra transport is not a one-line specialization."
+   "tool": "leanfinder",
+   "query": "For small monoidal infinity categories, prove labelled spine to inner horn finite filtration, labelled boundary colimits, and boundary horn prism pushout products are inner anodyne",
+   "results": "{\"t\": \"2026-10-17T07:27:52Z\", \"tool\": \"leanfinder\", \"query\": \"For small monoidal infinity categories, prove labelled spine to inner horn finite filtration, labelled boundary colimits, and boundary horn prism pushout products are inner anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.Quasicategory\"], \"digest\": \"3cd355cd1c9c7626\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary simplicial sets or unrelated monoidal/category facts; none states labelled presheaf filtration and prism transport."
   },
   {
    "tool": "leansearch",
-   "query": "Labelled simplices in space valued Segal presheaves have inner anodyne boundary horn pushout products",
-   "results": "{\"t\": \"2026-10-16T19:04:02Z\", \"tool\": \"leansearch\", \"query\": \"Labelled simplices in space valued Segal presheaves have inner anodyne boundary horn pushout products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₁.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.StrictSegal.quasicategory\", \"SSet.horn₂₀.isPushout\", \"SSet.quasicategory_of_filler\", \"SSet.boundary\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"882fd3ea887f98e5\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: SSet.innerAnodyneExtensions.horn_ι (Inner/Basic.lean:55-59) and prodStdSimplex.innerAnodyneExtensions_unionProd_ι (Inner/PushoutProduct.lean:55-61) concern ordinary set-valued simplicial sets. StrictSegal.lean:42-60 is a strict Segal condition; Path.lean:381-385 identifies an ordinary horn spine. None supplies the labelled-presheaf horn filtration or the pullback transport from ordinary prisms over C_⊗ and D_⊗. This extra transport is not a one-line specialization."
+   "query": "For small monoidal infinity categories, prove labelled spine to inner horn finite filtration, labelled boundary colimits, and boundary horn prism pushout products are inner anodyne",
+   "results": "{\"t\": \"2026-10-17T07:28:25Z\", \"tool\": \"leansearch\", \"query\": \"For small monoidal infinity categories, prove labelled spine to inner horn finite filtration, labelled boundary colimits, and boundary horn prism pushout products are inner anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mon.hasLimitsOfShape\", \"CommMonCat.hasLimitsOfShape\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.casesOn\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"CommMonCat.FilteredColimits.colimit\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"CategoryTheory.Limits.WalkingMultispan.instSmallOfLOfR\"], \"digest\": \"e418135fe33d3b7c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary simplicial sets or unrelated monoidal/category facts; none states labelled presheaf filtration and prism transport."
   },
   {
    "tool": "loogle",
-   "query": "SSet.innerAnodyneExtensions, SSet.stdSimplex",
-   "results": "{\"t\": \"2026-10-16T19:04:02Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions, SSet.stdSimplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.innerAnodyneExtensions.horn_ι\", \"SSet.prodStdSimplex.innerAnodyneExtensions_unionProd_ι\"], \"digest\": \"f40bae30e07373c2\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: SSet.innerAnodyneExtensions.horn_ι (Inner/Basic.lean:55-59) and prodStdSimplex.innerAnodyneExtensions_unionProd_ι (Inner/PushoutProduct.lean:55-61) concern ordinary set-valued simplicial sets. StrictSegal.lean:42-60 is a strict Segal condition; Path.lean:381-385 identifies an ordinary horn spine. None supplies the labelled-presheaf horn filtration or the pullback transport from ordinary prisms over C_⊗ and D_⊗. This extra transport is not a one-line specialization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Labelled inner horn inclusions in presheaves on a monoidal infinity category generate Segal equivalences and their pushout product with a labelled simplex boundary is inner anodyne",
-   "results": "{\"t\": \"2026-10-16T19:04:03Z\", \"tool\": \"leanfinder\", \"query\": \"Labelled inner horn inclusions in presheaves on a monoidal infinity category generate Segal equivalences and their pushout product with a labelled simplex boundary is inner anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"c827b037d2e6a7e4\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: SSet.innerAnodyneExtensions.horn_ι (Inner/Basic.lean:55-59) and prodStdSimplex.innerAnodyneExtensions_unionProd_ι (Inner/PushoutProduct.lean:55-61) concern ordinary set-valued simplicial sets. StrictSegal.lean:42-60 is a strict Segal condition; Path.lean:381-385 identifies an ordinary horn spine. None supplies the labelled-presheaf horn filtration or the pullback transport from ordinary prisms over C_⊗ and D_⊗. This extra transport is not a one-line specialization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Inner anodyne maps of labelled space valued presheaves on C tensor and base change of horns along simple maps, Segal spine filtrations",
-   "results": "{\"t\": \"2026-10-16T19:04:34Z\", \"tool\": \"leanfinder\", \"query\": \"Inner anodyne maps of labelled space valued presheaves on C tensor and base change of horns along simple maps, Segal spine filtrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal\", \"CategoryTheory.SimplicialNerve\", \"SSet.horn.spineId_map_hornInclusion\", \"CategoryTheory.nerve\", \"SSet.StrictSegal.spineToSimplex_map\"], \"digest\": \"65c5de195058ad39\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: SSet.innerAnodyneExtensions.horn_ι (Inner/Basic.lean:55-59) and prodStdSimplex.innerAnodyneExtensions_unionProd_ι (Inner/PushoutProduct.lean:55-61) concern ordinary set-valued simplicial sets. StrictSegal.lean:42-60 is a strict Segal condition; Path.lean:381-385 identifies an ordinary horn spine. None supplies the labelled-presheaf horn filtration or the pullback transport from ordinary prisms over C_⊗ and D_⊗. This extra transport is not a one-line specialization."
+   "query": "SSet.innerAnodyneExtensions, SSet.prodStdSimplex, CategoryTheory.Nerve.strictSegal",
+   "results": "{\"t\": \"2026-10-17T07:28:59Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions, SSet.prodStdSimplex, CategoryTheory.Nerve.strictSegal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.prodStdSimplex'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary simplicial sets or unrelated monoidal/category facts; none states labelled presheaf filtration and prism transport."
   },
   {
    "tool": "grep",
-   "query": "simple.*map|label.*horn|spine.*filtration",
-   "results": "{\"t\": \"2026-10-16T19:27:01Z\", \"tool\": \"grep\", \"query\": \"simple.*map|label.*horn|spine.*filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Diffeology/Basic.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Module.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/AffineSpace.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\"], \"digest\": \"73b5bca521e03492\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. PushoutProduct.lean:55-61,113-124 and Basic.lean:40-59 concern ordinary set-valued simplicial sets, not labelled space-valued presheaves. Path.lean:381-385 is an ordinary horn spine identity. Neither these declarations nor the other returned hits state labelled filtration or simple-map pullback transport; that transport is additional mathematical content."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"innerAnodyneExtensions\", \"unionProd\"",
-   "results": "{\"t\": \"2026-10-16T19:27:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"innerAnodyneExtensions\\\", \\\"unionProd\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"SSet.innerAnodyneExtensions_unionProd_ι\", \"SSet.innerAnodyneExtensions_unionProd_ι'\", \"SSet.prodStdSimplex.innerAnodyneExtensions_unionProd_ι\"], \"digest\": \"b9d9c181b7c537c5\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. PushoutProduct.lean:55-61,113-124 and Basic.lean:40-59 concern ordinary set-valued simplicial sets, not labelled space-valued presheaves. Path.lean:381-385 is an ordinary horn spine identity. Neither these declarations nor the other returned hits state labelled filtration or simple-map pullback transport; that transport is additional mathematical content."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Base change of simplicial inner horns along representable labelled presheaves and products with boundaries",
-   "results": "{\"t\": \"2026-10-16T19:27:03Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of simplicial inner horns along representable labelled presheaves and products with boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.const\", \"SSet.horn.yonedaEquiv_ι\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn₃₁.desc\", \"SSet.horn₃₂.desc\", \"SSet.horn.face\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₁.ι₂_desc\"], \"digest\": \"c2e28a5c2dcb83d4\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. PushoutProduct.lean:55-61,113-124 and Basic.lean:40-59 concern ordinary set-valued simplicial sets, not labelled space-valued presheaves. Path.lean:381-385 is an ordinary horn spine identity. Neither these declarations nor the other returned hits state labelled filtration or simple-map pullback transport; that transport is additional mathematical content."
-  },
-  {
-   "tool": "grep",
-   "query": "innerAnodyneExtensions_unionProd_ι|horn.spineId_map_hornInclusion|Segal.*[Pp]resheaf",
-   "results": "{\"t\": \"2026-10-16T19:27:40Z\", \"tool\": \"grep\", \"query\": \"innerAnodyneExtensions_unionProd_ι|horn.spineId_map_hornInclusion|Segal.*[Pp]resheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"b32e4299e49a40bb\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. PushoutProduct.lean:55-61,113-124 and Basic.lean:40-59 concern ordinary set-valued simplicial sets, not labelled space-valued presheaves. Path.lean:381-385 is an ordinary horn spine identity. Neither these declarations nor the other returned hits state labelled filtration or simple-map pullback transport; that transport is additional mathematical content."
+   "query": "innerAnodyneExtensions|labelled|spine.*horn",
+   "results": "{\"t\": \"2026-10-17T07:29:31Z\", \"tool\": \"grep\", \"query\": \"innerAnodyneExtensions|labelled|spine.*horn\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"b9b61975ed4632f0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary simplicial sets or unrelated monoidal/category facts; none states labelled presheaf filtration and prism transport."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-external-local-equivalences",
@@ -233,16 +198,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-labelled-spine-prism-horn-calculus",
   "worker": "stage1",
-  "summary": "Repaired E3 with a simultaneous strong induction through two blocks and paired (S,S union {i}) inner-horn attachments, including the exact attaching intersection. Repaired E5/C1 by isolating the genuine simple-map base-change lemma, checking its actual projection criterion and citing the existing general small-object Mathlib leaf for the lifting/saturation comparison with finite-horn smallness proved explicitly. Added a general space-colimit universality prerequisite rather than attributing it to a definition; supplied represented transported faces, corrected boundary wording, and removed the false uniqueness claim for maps to the unit. Statement unchanged. Second reading corrects the attribution of the base-change source and makes the ordinary-to-space-valued attaching-square comparison explicit before its first use. Maintainer review fix (2026-10-17): step 6 was marked elementary but computed a homotopy colimit over the face poset without a citation. It now proves this from lem-coef-infinity-finite-poset-kan-extension and lem-coef-infinity-cofinality-space-test. Steps 2 and 7 replace the tree and contractible-tail remarks with a coproduct decomposition and the same finality test.",
+  "summary": "Audited the existing reviewed split and retained its ten-step proof. The proof explicitly establishes labelled face pullbacks, the paired-cell finite spine-to-horn filtration, boundary colimits, and the labelled rectangular prism via the ordinary pushout-product and the simple-map base-change criterion. I verified every cited dependency statement, checked the edge cases n=2, m=0 and m=1, and found no duplicate or statement error. No new nodes were needed.",
   "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 before R lim: enriched tensor cocontinuity foundation, following Haugseng Corollary 6.5 and Proposition 6.9 through Proposition 7.1 and Corollaries 7.2,7.4-7.5."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q27-436d184f2",
-  "group": "Q27",
+  "reviewer": "NT-cc-Q53-95182c04f",
+  "group": "Q53",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-436d184f2 (reviewer sub-agent of L); spot-checked: I read all of it: the item, both new nodes, every cited statement, both parents that cite the item, the unit sk-prop-sf-biduality-general (it has no steps), and Haugseng arXiv:2311.13362v1 Def. 6.1-6.2, Prop. 6.4/Cor. 6.5, Def. 6.7, Prop. 6.9, Prop. 7.1, Cor. 7.2, 7.4, 7.5 and Kerodon 05V5, both online. The item's statement is unchanged, and every clause the parents use is in it. Steps 3-5 and 8-10 are correct. I checked the filtration by hand on n=2 and on n=3, i=1. The labelled-face pullbacks, the simplicity computation (including k=0), the prism domain and the vertex formula (no uniqueness of maps into the unit is claimed) all hold. New node lem-coef-space-universal-colimits agrees with Kerodon 05V5; I tested J empty and f identity, and found no duplicate in the DAG. New node lem-coef-simple-inner-anodyne-base-change agrees exactly with Haugseng Def. 6.7 and Prop. 6.9, including all a>=0, representability and the adjoint projection being an equivalence. It is strictly more general than the item and not a restatement. Every statement cited is in the same unit, the graph stays acyclic, no SGA is used and no tool_uses are needed. One repairable fault, C2/C1, now fixed in fixes/dag/nodes/sec-six-functors/lem-coef-labelled-spine-prism-horn-calculus.json. Step 6 was marked elementary but computed a homotopy colimit over the face poset with no citation, and steps 2 and 7 relied on unstated colimit facts ('the graph is a tree', 'a contractible tail'). Step 6 now cites lem-coef-infinity-finite-poset-kan-extension and lem-coef-infinity-cofinality-space-test, and is no longer marked elementary. Step 2 now uses an elementary coproduct decomposition of the span. Step 7 cites the finality test for ordinal tails. proof_deps is the union of the steps' uses, and split_report.summary has one added sentence. No other field changed and no node is dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-95182c04f (reviewer sub-agent of L); spot-checked: Read the whole item and every cited statement, and checked the source online: Haugseng arXiv:2311.13362v1 Def 6.1-6.2, Prop 6.4/Cor 6.5, Def 6.7, Prop 6.9, Prop 7.1, Cor 7.2/7.4/7.5. The statement agrees with the source; Cor 7.4 has its factors the other way round, which the item's exchange clause covers. The delivery has no new nodes and keeps the ten-step proof that Q27 had already reviewed. Checks: step 1 cartesian-lift identification works for any alpha; steps 2-4 paired-cell induction verified by hand, including n=2 and n=3, i=1, with the attaching intersection exactly the inner horn; step 5 pullback pasting; step 6 boundary colimit, with surjective beta, P_beta initial/upward closed, Kan-extension and cofinality hypotheses, m=0 and m=1; step 8 simplicity including k=0; step 9 domain; step 10 vertex formula with empty-tensor units. Long steps: step 6 is one colimit computation from the three cited nodes and stays. Step 7 hid two inline arguments, now fixed (C1/C5 and the long-step rule): (a) it re-derived through the small-object node, and named an uncited Mathlib declaration for, the equality of the inner-anodyne lifting class with retracts of cell maps; the existing Mathlib leaf lem-coef-inner-horn-cell-generation (Inner/Basic.lean:89-92) states exactly this and is now cited; (b) it proved inline that degreewise inner-horn cell maps lie in the infinity-categorical class A_Delta in P(Delta). No node in the DAG states (b), so it is now the new statement-only node lem-coef-discrete-inner-cell-transfer (created.item = this item, same unit, from = prop-coef-integral-exceptional-adjoint, via [item,...]); its Mathlib search is grep only, because LeanSearch, LeanFinder and Loogle cannot be reached from this machine. Step 9 also gained a clause noting that the union K is a pushout in P(Delta) by step 2's argument. proof_deps changed: lem-coef-small-object-cell-factorization removed, the two new citations added. Statement unchanged, no cycle, no duplicate, no SGA, no tool_uses.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean_audit": {
   "master": {
