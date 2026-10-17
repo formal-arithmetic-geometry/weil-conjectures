@@ -11,9 +11,104 @@
   "lem-coef-simplicial-inversion-universal-property",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-simplicial-projective-model-calculus], $\\mathcal A^D$ is a combinatorial simplicial model category and its bifibrant diagrams have bifibrant values. Its mapping sets are enriched ends. Consequently evaluation restricts to the displayed enriched functor $e:\\mathcal B\\times D\\to\\mathcal A^{cf}$: on maps, evaluate an enriched transformation at $d$ and then apply the diagram's action on $D(d,d')$; enriched naturality makes the two orders equal. Thus the proposed evaluation has the asserted target, including when $D$ is not locally Kan.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.4.13 and proof using A.3.4.12, printed pp.889–890; subset condition in the third bijection of A.3.5.14, printed p.896. Agent expansion; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Currying identifies $\\mathcal A^{I\\times D}$ with $(\\mathcal A^D)^I$. Explicitly, send $F$ to $i\\mapsto(d\\mapsto F(i,d))$. On a pair of mapping simplices use the action of $F$ on $I(i,i')\\times D(d,d')$; conversely compose the $I$-action with the $D$-action. These actions commute by enriched naturality, and the identity and composition equations give inverse constructions on objects and transformations. The enriched-end equations agree too: both impose naturality separately in $I$ and $D$. Under this identification, a map is a weak equivalence or a fibration in either projective model precisely when every $(i,d)$ component is one, by [lem-coef-simplicial-projective-model-calculus]. Trivial fibrations therefore agree, and cofibrations agree since they are exactly the maps lifting against all trivial fibrations. The identification is consequently an isomorphism of model categories and induces a bijection on object classes modulo weak equivalence.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.4.13 and proof using A.3.4.12, printed pp.889–890; subset condition in the third bijection of A.3.5.14, printed p.896. Agent expansion; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-diagram-equivalence-classes] first to the coefficient model category $\\mathcal A^D$ with index $I$, and then to $\\mathcal A$ with index $I\\times D$. Together with step 2 this gives bijections\n$$\\operatorname{Hom}_{h\\mathrm{sCat}}(I,\\mathcal B)\\cong\\pi_0((\\mathcal A^D)^I)\\cong\\pi_0(\\mathcal A^{I\\times D})\\cong\\operatorname{Hom}_{h\\mathrm{sCat}}(I\\times D,\\mathcal A^{cf}).$$\nThe cited classification allows arbitrary small indices. Both indices are small in the original universe, while the coefficient categories fit in the enlarged universe. In particular neither cofibrancy nor local Kan mapping sets of $I,D$ have been assumed.",
+   "uses": [
+    "lem-coef-simplicial-diagram-equivalence-classes",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.4.13 and proof using A.3.4.12, printed pp.889–890; subset condition in the third bijection of A.3.5.14, printed p.896. Agent expansion; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The composite in step 3 is the asserted map. Represent a class on the left by the projectively bifibrant $I$-diagram $P$ in $\\mathcal A^D$ supplied by the classification [lem-coef-simplicial-diagram-equivalence-classes]. Evaluation at $i$ takes $P$ to a bifibrant $D$-diagram by [lem-coef-simplicial-projective-model-calculus], so $P$ is a simplicial functor $I\\to\\mathcal B$. Step 2's uncurried diagram $\\widetilde P$ is bifibrant and satisfies $\\widetilde P(i,d)=P(i)(d)$, with its action exactly $e\\circ(P\\times1_D)$. The two classification maps therefore send its class to the required evaluated class. This also proves well-definedness for derived classes. Products descend to $h\\mathrm{sCat}$: [lem-coef-realization-finite-limits] identifies realization of a product of mapping sets with its product in k-spaces; paths and based sphere maps and their homotopies into a product are coordinate pairs. Products thus preserve weak homotopy equivalences of mapping sets, and $\\pi_0(C\\times D)=\\pi_0C\\times\\pi_0D$. A quasi-inverse and unit/counit for an equivalence of ordinary categories remain such after taking a product with an identity. Hence products preserve Dwyer–Kan equivalences, justifying the displayed operation also for a general representative of $[g]$.",
+   "uses": [
+    "lem-coef-simplicial-diagram-equivalence-classes",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.4.13 and proof using A.3.4.12, printed pp.889–890; subset condition in the third bijection of A.3.5.14, printed p.896. Agent expansion; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For any simplicial model category $\\mathcal M$, [lem-coef-simplicial-model-nerve-localization] identifies $N_{\\mathrm{hc}}(\\mathcal M^{cf})$ with the infinity localization of $N(\\mathcal M)$, compatibly with inclusion on bifibrant objects and with enriched mapping spaces and their compositions. The homotopy category of its bifibrant nerve is $\\pi_0\\mathcal M^{cf}$: its arrows are components of the stated enriched mapping spaces, and composition is induced by their enriched composition. By [lem-coef-localization-homotopy-category], the induced homotopy category of that infinity localization is the ordinary localization of $\\mathcal M$ at its model weak equivalences. Thus a vertex map $u$ between bifibrant objects is invertible in $\\pi_0\\mathcal M^{cf}$ exactly when its ordinary localization image is invertible. Apply [lem-coef-model-localization-detects-weak-equivalences] to conclude that this is equivalent to $u$ being a model weak equivalence. This uses the pending nerve-localization statement as a cited theorem; it does not use or restore its withdrawn decomposition.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-localization-homotopy-category",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.4.13 and proof using A.3.4.12, printed pp.889–890; subset condition in the third bijection of A.3.5.14, printed p.896. Agent expansion; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply step 5 to $\\mathcal M=\\mathcal A^D$ and to $\\mathcal M=\\mathcal A$. For a vertex transformation $u:P\\to Q$ between projectively bifibrant diagrams, it gives\n$$[u]\\text{ invertible in }\\pi_0\\mathcal B\\iff u\\in W_{\\mathcal A^D}\\iff (\\forall d)\\ u_d\\in W_{\\mathcal A}\\iff (\\forall d)\\ [u_d]\\text{ invertible in }\\pi_0\\mathcal A^{cf}.$$\nThe middle equivalence is exactly the objectwise weak-equivalence assertion of [lem-coef-simplicial-projective-model-calculus], which also ensures that all endpoints $P(d),Q(d)$ are bifibrant. Represent $[g]$ by $P$ as in step 4 and apply this criterion to the vertex transformation $P(s)$ for every $s\\in S$. Its evaluated component is precisely $\\widetilde P(s,1_d)$. This proves the subset assertion and its equivalent transformation formulation. Invertibility is unchanged by the natural isomorphisms induced by changing representatives, so the condition depends only on the derived class.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.4.13 and proof using A.3.4.12, printed pp.889–890; subset condition in the third bijection of A.3.5.14, printed p.896. Agent expansion; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For restriction $a:I'\\to I$, the formula $\\widetilde{P\\circ a}(i',d)=P(a(i'))(d)$ identifies evaluation after restriction with restriction along $a\\times1_D$. The naturality clause of [lem-coef-simplicial-diagram-equivalence-classes] identifies these operations on derived classes even when a projective replacement is needed. For $b:D'\\to D$, restriction $b^*$ preserves objectwise weak equivalences and fibrations by [lem-coef-simplicial-projective-model-calculus]. Apply restriction to the diagrams in step 3 and then take bifibrant representatives. Since $b^*$ preserves weak equivalences, the replacement arrows give the same weak-equivalence classes as restricting before replacement. Currying commutes with this restriction by the formula $\\widetilde{b^*P}(i,d')=P(i)(b(d'))$, on both objects and action maps. The naturality of classification therefore gives the claimed square with derived enriched restriction on $\\mathcal B$ and restriction along $1_I\\times b$ on the right. Identities and composites follow from these same pointwise formulas and the independence of replacement classes.",
+   "uses": [
+    "lem-coef-simplicial-diagram-equivalence-classes",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.4.13 and proof using A.3.4.12, printed pp.889–890; subset condition in the third bijection of A.3.5.14, printed p.896. Agent expansion; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-simplicial-diagram-equivalence-classes",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-localization-homotopy-category",
+  "lem-coef-model-localization-detects-weak-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition A.3.4.13 and proof using A.3.4.12, printed pp.889–890; subset condition in the third bijection of A.3.5.14, printed p.896. Agent expansion; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +151,38 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
    "verdict": "no match: Enriched/Basic.lean:497-515 constructs a presheaf of graded enriched transformations and leaves enrichment of the functor category as a TODO. SimplicialCategory/Basic.lean:49-72 supplies only simplicial enrichment. SimplicialSet/NerveAdjunction.lean:452-468 concerns the ordinary homotopy-category functor on simplicial sets. The general derived-adjunction search hits do not construct the enriched projective-diagram exponential or its pointwise equivalence criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erived.*[Ee]xponential|[Ss]implicial.*[Pp]rojective|[Pp]rojective.*[Ss]implicial",
+   "results": "{\"t\": \"2026-10-17T08:16:00Z\", \"tool\": \"grep\", \"query\": \"[Dd]erived.*[Ee]xponential|[Ss]implicial.*[Pp]rojective|[Pp]rojective.*[Ss]implicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary enriched-functor, cartesian-closed, ordinary homotopy-class and simplicial-set homotopy-category declarations do not state the derived enriched projective-diagram exponential. Read Enriched/Basic.lean:497–515, SimplicialCategory/Basic.lean:49–72 and SimplicialSet/NerveAdjunction.lean:452–468. No Bergner-model enriched diagram evaluation theorem is present."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"equiv\"",
+   "results": "{\"t\": \"2026-10-17T08:16:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.enrichedFunctorTypeEquivFunctor\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor_apply_obj\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor_symm_apply_obj\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor_symm_apply_map\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor_apply_map\"], \"digest\": \"591b6c24bec48439\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary enriched-functor, cartesian-closed, ordinary homotopy-class and simplicial-set homotopy-category declarations do not state the derived enriched projective-diagram exponential. Read Enriched/Basic.lean:497–515, SimplicialCategory/Basic.lean:49–72 and SimplicialSet/NerveAdjunction.lean:452–468. No Bergner-model enriched diagram evaluation theorem is present."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation exponential bijection in the homotopy category of simplicial categories for bifibrant enriched projective diagrams",
+   "results": "{\"t\": \"2026-10-17T08:16:08Z\", \"tool\": \"leanfinder\", \"query\": \"Derived evaluation exponential bijection in the homotopy category of simplicial categories for bifibrant enriched projective diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.curriedInverse\", \"SSet.hoFunctor.terminalIso\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"SSet.hoFunctor.unitHomEquiv\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"eba4e59d45ea64bc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary enriched-functor, cartesian-closed, ordinary homotopy-class and simplicial-set homotopy-category declarations do not state the derived enriched projective-diagram exponential. Read Enriched/Basic.lean:497–515, SimplicialCategory/Basic.lean:49–72 and SimplicialSet/NerveAdjunction.lean:452–468. No Bergner-model enriched diagram evaluation theorem is present."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy classes of enriched functors into bifibrant projective diagram model categories satisfy an exponential adjunction",
+   "results": "{\"t\": \"2026-10-17T08:45:06Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy classes of enriched functors into bifibrant projective diagram model categories satisfy an exponential adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.exp\", \"CategoryTheory.MonoidalClosed.FunctorCategory.adj\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv.congr_simp\", \"CategoryTheory.exponentialIdealReflective\", \"CategoryTheory.Cat.closed\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedCategory\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedOrdinaryCategory\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\"], \"digest\": \"ad992140586fa21d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary enriched-functor, cartesian-closed, ordinary homotopy-class and simplicial-set homotopy-category declarations do not state the derived enriched projective-diagram exponential. Read Enriched/Basic.lean:497–515, SimplicialCategory/Basic.lean:49–72 and SimplicialSet/NerveAdjunction.lean:452–468. No Bergner-model enriched diagram evaluation theorem is present."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-inversion-product-parameter",
@@ -91,5 +214,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-derived-exponential",
+  "worker": "stage1",
+  "summary": "Proved the evaluation bijection via the existing classification of enriched projective diagram object classes and explicit currying, with pointwise equivalence detection through model localization and full restriction naturality. No new nodes. Supporting records use the repaired acyclic maintenance base; the pending nerve-localization theorem is cited only by its retained statement.",
+  "blueprint": "Realizes the derived enriched coefficient-adjunction foundation beneath paragraph 2 of prop-coef-integral-exceptional-adjoint, through the existing inversion-product-parameter ancestry. Keeps its diagram/evaluation route and original coefficient-independent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-83df53237",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-83df53237 (reviewer sub-agent of L); spot-checked: I read the item in full and every cited statement: inversion-universal-property, projective-model-calculus, diagram-equivalence-classes, realization-finite-limits, model-nerve-localization, localization-homotopy-category, model-localization-detects-weak-equivalences, plus boundary-collapse-test and the only citer, inversion-product-parameter. I checked the source in HTT (Harvard PDF fetched read-only with pdftotext into /tmp). Prop. A.3.4.13, printed p.890: evaluation (A^C)°⊗C→A° gives Hom(D,(A^C)°)≅Hom(C⊗D,A°) for every small D, proved by identifying both sides with π0 A^{C⊗D} through A.3.4.12, p.889–890. The item's subset clause is the Hom^W ≅ Hom^{W'} bijection in Lemma A.3.5.14, p.896. The statement is this result over Kan-model sSet, with no added or dropped hypothesis and no cofibrancy or local-Kan condition on I or D. It is unchanged from the side DAG copy, which is still unsplit. Step checks: (1) evaluation is a simplicial functor on end mapping sets, by enriched naturality. (2) Currying (A^D)^I≅A^{I×D}; the two model structures have the same weak equivalences and fibrations, hence the same cofibrations. (3) The classification is applied twice with valid hypotheses, and the chunk clause is unused. (4) The uncurried bifibrant representative equals e∘(P×1_D) exactly, and ×D preserves DK equivalences through finite products under realization. (5) The bifibrant π0 iso ⇔ W criterion follows from the three cited statements, each of which says what the step takes. (6) The objectwise criterion holds, with P(s)_d=P̃(s,1_d). (7) Naturality in I and in D: the D-direction makes precise, through the classification, the derived restriction the statement leaves undefined, and the citer uses only I-naturality. Small cases D=∅, I=∅, D=*, S=∅ all check. All deps are in the item's own unit sk-prop-sf-biduality-general, so there are no tool_uses. The dependency closure of 252 nodes contains no cycle. There are no new nodes and no duplicate. The searches cover all three kinds. No fixes were made."
  }
 }
