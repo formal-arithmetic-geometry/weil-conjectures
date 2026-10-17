@@ -9,11 +9,114 @@
  },
  "stmt_deps": [
   "def-weil-pbc-qbar-category",
-  "def-per-support-condition"
+  "def-per-support-condition",
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-completed-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-adic-heart-pullback-fibres] in the coefficient categories specified in the statement. Its degree-zero pullback preserves short exact sequences: at a geometric point $\\bar x$ of $X$ the resulting sequence identifies with the original sequence at $f\\bar x$, and the exact, jointly conservative geometric fibre functors detect exactness. Its exact triangulated functor $Lf^*$ therefore preserves both halves of the bounded standard t-structure. Explicitly, an object with cohomology in $[a,b]$ is built from its finitely many cohomology sheaves $\\mathcal H^j(K)[-j]$ by the ordinary truncation triangles; pullback takes each such term to a sheaf in the same degree. Induction on $b-a$, using that $D^{\\le r}$ and $D^{\\ge r}$ are closed under extensions and the long exact cohomology sequence of each distinguished triangle (clauses 2 and 5 of [lem-weil-heart-short-exact-triangles]), leaves the interval unchanged. Thus pullback of the canonical truncation triangle at any integer $r$ is again a truncation triangle: its first term has degrees at most $r$, and its last term has degrees at least $r+1$. Since a truncation triangle at $r$ is unique up to unique isomorphism and the truncations are functors (clause 1 of [lem-weil-heart-short-exact-triangles], for the t-structure of [def-weil-t-structure] specified in [lem-per-adic-heart-pullback-fibres]), this gives the canonical comparisons with the truncations of $Lf^*K$. Taking the degree-$r$ term gives the natural isomorphism $\\mathcal H^r(Lf^*K)\\cong f^*\\mathcal H^r(K)$ of cohomology objects; by the cited adic lemma these are, at a finite stage, the images of the ambient cohomology sheaves of [def-weil-derived-cohomology-sheaves] of integral representatives. All maps are at a common finite coefficient field and compatible with enlargement by the cited fibre lemma, so the identification is canonical in the specified $\\overline{\\mathbf Q}_\\ell$ category.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres",
+    "def-weil-t-structure",
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; bounded truncation argument spelling out the first paragraph of the blueprint proof"
+   }
+  },
+  {
+   "text": "For the cohomological shift convention, a representative $C[d]$ has term $C^{n+d}$ in degree $n$ and differential $(-1)^d d_C^{n+d}$. Multiplication of a differential by $\\pm1$ changes neither its kernel nor its image, so the quotient description of [def-weil-derived-cohomology-sheaves] gives $\\mathcal H^n(C[d])\\cong\\mathcal H^{n+d}(C)$. Set $n=-i$ and use Step 1 with $r=-i+d$. This gives the asserted canonical identification $\\mathcal H^{-i}(Lf^*K[d])\\cong f^*\\mathcal H^{-i+d}(K)$.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+    "place": "First paragraph: the shift identity $H^n(C[d])=H^{n+d}(C)$"
+   }
+  },
+  {
+   "text": "Put $\\mathcal F=\\mathcal H^{-i+d}(K)$, and let $S$ be its nonzero-geometric-fibre locus in $Y$. By [lem-per-adic-heart-pullback-fibres], this is constructible, independent of the chosen geometric point over a given point. The same lemma gives $(f^*\\mathcal F)_{\\bar x}\\cong\\mathcal F_{f\\bar x}$, so this fibre is nonzero exactly when $f(x)\\in S$. For an object of the $\\overline{\\mathbf Q}_\\ell$-coefficient heart, the support in [def-per-support-condition] is read as this nonzero-geometric-fibre locus, which depends only on the isomorphism class: the support of the ambient cohomology sheaf of an integral representative can be enlarged by $\\varpi$-power torsion that is zero in the rational category. Hence $\\operatorname{Supp}(f^*\\mathcal F)=f^{-1}S$. If supports are instead taken as closures of these loci, Step 6 shows that the dimensions are unchanged. If $S$ is empty, both support dimensions in the desired inequality are $-\\infty$, with $-\\infty+d=-\\infty$, and the result follows. Assume henceforth that $S$ is nonempty.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres",
+    "def-per-support-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.6 and 6.8.10 and Remark 6.8.15; the blueprint first-paragraph support-preimage calculation"
+   }
+  },
+  {
+   "text": "Let $Z$ be the reduced closed subscheme of $Y$ with underlying closed subset $\\overline S$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. By [lem-per-constructible-subset-closure-dimension], $\\dim Z=\\dim S$. Form $W=X\\times_Y Z$ and its projection $g:W\\to Z$. By [lem-sbc-smooth-relative-dimension-permanence], $g$ is smooth of relative dimension $d$. By [lem-weil-pbc-closed-immersion-base-change], $W\\to X$ is a closed immersion and identifies its underlying space with $f^{-1}(\\overline S)$. On affine charts $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ of $f$ where $Z$ is cut out by $I\\subseteq R$, this identification is the equality $B\\otimes_R(R/I)=B/IB$: a prime of $B$ lies in this closed subscheme exactly when its contraction contains $I$. Both $Z$ and $W$ are finite type over $k$: in affine finite-type charts of $Y$ and $X$ their closed subschemes are spectra of quotients of finitely generated $k$-algebras, and finite affine covers suffice. By [lem-weil-pbc-finite-type-over-noetherian], both are Noetherian, since a field has only the ideals $0$ and $k$ and hence is Noetherian. These are precisely the local Noetherian hypotheses needed below. No claim that $S$ itself is closed is used.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-per-constructible-subset-closure-dimension",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFF applied after smooth base change to the reduced closure of the constructible support"
+   }
+  },
+  {
+   "text": "For each $w\\in W$ with $z=g(w)$, [lem-per-smooth-local-dimension] and the relative-dimension convention of [def-sbc-smooth-morphisms] give $\\dim_w W=\\dim_z Z+d$. By [lem-weil-pbc-dimension-supremum-local-dimensions], $\\dim_z Z\\leq\\dim Z$ and $\\dim W=\\sup_{w\\in W}\\dim_w W$. Taking this supremum yields $\\dim W\\leq\\dim Z+d$. If $W$ is empty the same bound follows from $\\dim W=-\\infty$, so no surjectivity of $f$ onto the support is assumed.",
+   "uses": [
+    "lem-per-smooth-local-dimension",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFF, lemma-smoothness-dimension, and the supremum of local topological dimensions"
+   }
+  },
+  {
+   "text": "For any subset $A$ of a topological space $B$, closing in $B$ each term of a chain of irreducible closed subsets of $A$ gives a chain of irreducible closed subsets of $B$ of the same length: closure preserves irreducibility, and intersecting those closures with $A$ recovers the original closed subsets, so strictness is preserved. Thus $\\dim A\\leq\\dim B$. Apply this to $f^{-1}S\\subseteq |W|$ with the induced topologies. Steps 2–5 now give\n$$\\dim\\operatorname{Supp}\\mathcal H^{-i}(Lf^*K[d])=\\dim(f^{-1}S)\\leq\\dim W\\leq\\dim Z+d=\\dim S+d=\\dim\\operatorname{Supp}\\mathcal H^{-i+d}(K)+d.$$\nThis includes a pullback with empty support. If supports are taken as closures, the outer terms do not change: $\\dim\\overline S=\\dim S$ by [lem-per-constructible-subset-closure-dimension] on $Y$; and $f^{-1}S$ is the union of the preimages of finitely many locally closed pieces of $S$, which are locally closed by continuity, so it is constructible in the Noetherian space $|X|$ by [def-weil-constructible-subset], and the same lemma on the finite-type $k$-scheme $X$ gives that its closure has dimension $\\dim f^{-1}S$. This completes the inequality for every integer $i$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-per-constructible-subset-closure-dimension",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+    "place": "First paragraph: conclude the support-dimension inequality from the fibre-dimension bound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-per-support-condition",
+  "def-sbc-smooth-morphisms",
+  "def-weil-constructible-subset",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-t-structure",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-constructible-subset-closure-dimension",
+  "lem-per-smooth-local-dimension",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+  "place": "First paragraph, expanded using Bhatt–Scholze constructible coefficient calculus and Stacks Tag 0AFF; closure-of-support correction to the original source note"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +173,45 @@
    "results": "Unrelated smooth algebra and manifold results; no derived inverse-image cohomology theorem",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*pullback|pullback.*support|cohomology.*[sS]mooth|[sS]mooth.*cohomology",
+   "results": "Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean; grep directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology sheaves and support dimension of shifted smooth inverse image of bounded constructible l-adic complexes",
+   "results": "TopCat.Sheaf.instIsLeftAdjointPullback, CochainComplex.isStrictlyGE_shift, TopCat.Sheaf.pullback, TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmoothOfRelativeDimension, topologicalKrullDim",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsSmoothOfRelativeDimension'; No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism of relative dimension d, derived pullback of a constructible l-adic complex commutes with cohomology and raises support dimension by at most d",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of an l-adic constructible complex has cohomology pulled back and support bounded by the base support dimension plus the smooth fibre dimension",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, chevalley_mvPolynomial_mvPolynomial, Topology.IsConstructible.preimage, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsConstructible.preimage_of_isOpenEmbedding, ChevalleyThm.chevalley_polynomialC, Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-smooth-pullback-t-exact",
@@ -90,5 +228,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-smooth-pullback-support-dimension",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split the cohomology and support estimate using degree-zero adic pullback and geometric fibres, an explicit bounded-truncation argument and shift calculation, and smooth base change to the reduced closure of the constructible support. Added three statement-only inputs after searching the DAG, whole blueprint and Lean source and recording Mathlib searches. The source note’s phrase reduced support requires its closure because a constructible support need not be closed; no stronger closed-support assertion is used.",
+  "blueprint": "Realizes precisely the first paragraph of lem-per-smooth-pullback-t-exact.proof.md: exactness on cohomology, the index shift, support as preimage, and the dimension increase bound.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Step 4 takes the reduced closed scheme structure on the closure of the support; this generic scheme construction is absent from the perverse unit."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Step 4 takes preservation of smoothness and relative dimension under arbitrary base change; this generic geometric tool is absent from the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Step 4 uses that the base change of a closed immersion is closed to identify W as the closed inverse image of the support closure."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step 4 checks that the finite-type closed support models satisfy the local Noetherian hypotheses of the smooth dimension formula."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Step 5 passes from the local smooth dimension formula to the global bound by taking a supremum; the perverse unit has no such topological tool."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Step 1 takes uniqueness of truncation triangles, extension closure of the aisles and the long exact cohomology sequence for an abstract t-structure; generic BBD 1.3 tool, no node of the perverse unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-dd27d6a27",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-dd27d6a27 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, the blueprint proof of lem-per-smooth-pullback-t-exact (first paragraph), Stacks 0AFF (morphisms.tex lemma-smoothness-dimension), Stacks 00OT (algebra.tex) and Bhatt–Scholze 6.8.2–6.8.15. Batch-5 check: lem-per-adic-heart-pullback-fibres -> def-pod-lisse-l-adic-sheaves is allowed. That node is a general definition of Weil II lisse sheaves, not a step of either assumed proof. Its 103-node closure reaches only one other sec-poincare-duality node, the definition def-pod-ring-scalar-extension, plus generic algebra lemmas, and no nt-assume leaf, sk-thm-trace node or batch-4 target. I fixed three repairable faults. (1) E2: lem-per-adic-heart-pullback-fibres described the E and Qlbar heart as the objects whose ordinary cohomology vanishes outside degree 0. This is false and not closed under isomorphism: A/varpi in degree 1 is zero rationally. The node now uses the existing prop-weil-localized-tstructure and prop-weil-pbc-integral-tstructure, with classes defined up to isomorphism and cohomology equal to Q of the ambient sheaves. (2) C1/C4: Step 1 used extension closure, the long exact cohomology sequence and uniqueness of truncation triangles while citing only def-weil-t-structure. It now cites lem-weil-heart-short-exact-triangles (clauses 1, 2, 5), declared as a tool use. (3) C4/E6: Step 3 identified Supp with the nonzero-fibre locus without saying how it reads def-per-support-condition, which leaves rational support undefined; the sibling lem-per-tate-twist-support-condition uses closures. Step 3 now states its reading, and Step 6 also proves the bound under the closure reading using the new closure lemma, so it is no longer marked elementary. The statement and coefficient category are unchanged. The new nodes lem-per-smooth-local-dimension (exactly 0AFF) and lem-per-constructible-subset-closure-dimension (true over a field; the DVR generic point shows a broader version would fail) are correct and not duplicates. Steps 2, 4 and 5 check out, including the shift sign, empty supports, the nonclosed support handled via its reduced closure, and the Noetherian hypotheses. I accept all six declared tool uses.; 2 file(s) fixed by the reviewer"
  }
 }

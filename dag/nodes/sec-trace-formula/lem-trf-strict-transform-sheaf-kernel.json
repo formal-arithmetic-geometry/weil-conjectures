@@ -1,0 +1,78 @@
+{
+ "id": "lem-trf-strict-transform-sheaf-kernel",
+ "kind": "statement",
+ "title": "Kernel and support description of a sheaf strict transform",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $Z\\subseteq S$ be a closed subscheme [def-weil-closed-immersion] whose defining ideal is finite-type quasi-coherent [pqf-def-coherent], let $b:S'=\\operatorname{Bl}_Z(S)\\to S$ [def-nagata-global-blowup], and let $f:X\\to S$ be a scheme morphism [def-pc-scheme]. For a quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent], write $p:X\\times_S S'\\to X$ for the projection and $\\mathcal F^{\\mathrm{st}}$ for its module strict transform [def-trf-module-strict-transform]. The canonical map $p^*\\mathcal F\\twoheadrightarrow\\mathcal F^{\\mathrm{st}}$ is surjective; its kernel is the subsheaf of local sections supported on $(f\\circ p)^{-1}(Z)$, and this kernel is a quasi-coherent submodule, so $\\mathcal F^{\\mathrm{st}}$ is a quasi-coherent $\\mathcal O_{X\\times_SS'}$-module. Consequently the map is an isomorphism over the complement of that inverse image, and $\\mathcal F^{\\mathrm{st}}$ has no nonzero local sections supported on $(f\\circ p)^{-1}(Z)$. When $\\mathcal F=\\mathcal O_X$, the kernel of $\\mathcal O_{X\\times_SS'}\\twoheadrightarrow\\mathcal O_X^{\\mathrm{st}}$ is the ideal sheaf of the scheme strict transform $i:X'\\hookrightarrow X\\times_SS'$ of $X$ along $b$ relative to $U=S\\setminus Z$ [def-nagata-strict-transform], so that $\\mathcal O_X^{\\mathrm{st}}\\cong i_*\\mathcal O_{X'}$ as quotients of $\\mathcal O_{X\\times_SS'}$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080D, definition-strict-transform (1)-(2) and the paragraph preceding it, together with Properties Tag 07ZP (lemma-sections-supported-on-closed-subset) and Morphisms Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image) for the scheme-theoretic image of the retrocompact preserved open."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-global-blowup",
+  "pqf-def-coherent",
+  "def-trf-module-strict-transform",
+  "def-nagata-strict-transform"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a quasi-coherent sheaf, the strict transform under a blowup is the quotient of pullback by sections supported on the inverse image of the center",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support_comap; AlgebraicGeometry.Scheme.IdealSheafData.ideal_map; AlgebraicGeometry.Scheme.IdealSheafData.comapIso; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.Scheme.IdealSheafData.comap; AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app; AlgebraicGeometry.Scheme.IdealSheafData.support_map; AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, strictTransform, supported sections",
+   "results": "loogle: unknown identifier 'strictTransform'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|quasi-coherent|sections supported",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-coherent sheaf strict transform quotient by sections supported on blowup center",
+   "results": "ModuleCat.tildeInType; SheafOfModules.QuasicoherentData.I; SheafOfModules.QuasicoherentData.X; SheafOfModules.QuasicoherentData.presentation; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj; AlgebraicGeometry.Scheme.IdealSheafData.map; AlgebraicGeometry.Scheme.IdealSheafData; AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-composition",
+  "date": "2026-10-18",
+  "group": "Q75"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting argument for the Orgogozo modification input: the strict-transform composition step in the finite-after-blowup reduction (Tag 080I, proof: 'By definition there is a surjection p^*F -> F' ...' and 'The kernel of the surjection p^*F -> F' is supported on (f o p)^{-1}Z'); this node states the kernel/support facts used there.",
+   "via": [
+    "lem-trf-strict-transform-composition",
+    "lem-trf-finite-after-blowup",
+    "lem-trf-alteration-finite-refinement",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
