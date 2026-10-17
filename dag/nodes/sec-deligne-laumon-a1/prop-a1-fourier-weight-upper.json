@@ -14,9 +14,149 @@
   "def-wf-middle-extension",
   "def-weil-punctual-weights"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [prop-fd-zero-extension-comparison] to the given Fourier-partner isomorphism. Its hypotheses are precisely the nontriviality of $\\psi$, nonzero Weil irreducibility and constituent-nonexceptionality of $\\mathcal M$, and its punctual purity of weight $w$; geometric irreducibility and unramifiedness at infinity are unnecessary. The complement of $U_0$ is finite: a proper closed subset of $\\operatorname{Spec}k_0[x]$ is the zero set of a nonzero polynomial and has finitely many closed points. Obtain $\\mathcal G,\\mathcal B'$ with $\\operatorname{FT}_\\psi(j_!\\mathcal M[1])\\cong\\mathcal G[1]$ and $0\\to\\mathcal B'\\to\\mathcal G\\to j'_*\\mathcal M'\\to0$, where $\\mathcal B'$ is lisse on the entire dual line and its closed-point eigenvalues satisfy $|\\iota\\alpha|^2\\le q_y^w$. Put $r=\\operatorname{rank}\\mathcal M>0$ and $b=\\operatorname{rank}\\mathcal B'\\ge0$. Ranks are constant on the connected opens in question, by the finite-rank local trivializations in [def-pod-lisse-l-adic-sheaves].",
+   "uses": [
+    "prop-fd-zero-extension-comparison",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/sk-p-dl-a1-fourier-weight.proof.md",
+    "place": "First paragraph: introduce the correction and its ranks"
+   }
+  },
+  {
+   "text": "Fix $n\\ge1$ and $x\\in X_0(\\mathbf F_{q^n})$, $X_0\\in\\{U_0,A'_0\\}$, above a closed point $y$ of degree $e$; then $e\\mid n$. Restrict to $\\operatorname{Spec}\\kappa(y)$ (a Weil pullback by [prop-weil-operations]; same point and Weil iterates, hence the same stalk operators). By [prop-weil-pbc-common-stage-calculus] represent the object, its Weil map and inverse at one finite stage $E$ of [def-weil-pbc-qbar-category]; on each geometric component [lem-weil-point-fibre-equivalence] identifies the sheaf with a finite-dimensional $E$-space, and a basis gives a free lattice whose reductions are finite free in degree $0$, so of finite Tor dimension. This is the integral representative required by [lem-trf-rational-local-frobenius-powers]; take as starting lift the geometric point $\\bar y$ defining $F_y$. That lemma makes the normalized operator at $x$ conjugate to the $(n/e)$-th power of the normalized operator at $\\bar y$. By [lem-trf-local-frobenius-transport-normalization] the point transport of [def-weil-local-frobenius-trace] equals the scheme-Frobenius transport, so after composing with the iterated Weil map both normalized operators are those of [def-weil-local-frobenius-trace]: $F^{(n)}_x$ is conjugate to $F_y^{n/e}$, also after extension to $\\overline{\\mathbf Q}_\\ell$. By [p-linear-triangular] choose a basis adapted to an $F_y$-invariant full flag; the diagonal entries of $F_y^{n/e}$ are $\\alpha_i^{n/e}$, so by [def-weil-endomorphism-trace] its trace is their sum. For $\\mathcal M$, [def-weil-punctual-weights] gives $|\\iota\\alpha_i|=q^{ew/2}$; for $\\mathcal B'$ Step 1 gives $\\le$. The triangle inequality gives $|\\iota t_{\\mathcal M,n}(x)|\\le rq^{nw/2}$ on $U_0(\\mathbf F_{q^n})$ and $|\\iota t_{\\mathcal B',n}(x)|\\le bq^{nw/2}$ on $A'_0(\\mathbf F_{q^n})$, including repeated eigenvalues, nonsemisimple Frobenius and $b=0$.",
+   "uses": [
+    "prop-weil-operations",
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-pbc-qbar-category",
+    "lem-weil-point-fibre-equivalence",
+    "lem-trf-rational-local-frobenius-powers",
+    "lem-trf-local-frobenius-transport-normalization",
+    "def-weil-local-frobenius-trace",
+    "p-linear-triangular",
+    "def-weil-endomorphism-trace",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/sk-p-dl-a1-fourier-weight.proof.md",
+    "place": "First and second paragraphs: bounds for the two trace functions"
+   }
+  },
+  {
+   "text": "Set $K=(j_!\\mathcal M)[1]$. To compute its trace function in the adic coefficient category, apply the arbitrary compact-support base-change clause of [prop-functor-package] to the open immersion $j$ and each geometric point of the line. The fibre of $j$ is that point when it lies in $U$, and is empty otherwise, so the fibre of $j_!\\mathcal M$ is the fibre of $\\mathcal M$ in the first case and the zero complex in the second (direct image for the identity, respectively for the empty source). These are comparisons on $D^b_c(-,\\overline{\\mathbf Q}_\\ell)$, not an assertion about discrete rational coefficients on the small etale site. The Weil-equivariance clause of [prop-weil-operations] makes them commute with the local return Frobenius. By the alternating-trace definition [def-fd-trace-function], shifting a sheaf by $[1]$ negates its trace. Thus $t_{K,n}(x)=-t_{\\mathcal M,n}(x)$ for $x\\in U_0(\\mathbf F_{q^n})$ and $t_{K,n}(x)=0$ otherwise. There are exactly $q^n$ points of the affine line, identified with the elements of $\\mathbf F_{q^n}$ by their coordinate. Step 2 consequently gives $\\sum_{x\\in A_0(\\mathbf F_{q^n})}|\\iota t_{K,n}(x)|^2\\le r^2 q^{n(w+1)}$.",
+   "uses": [
+    "prop-functor-package",
+    "prop-weil-operations",
+    "def-fd-trace-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/sk-p-dl-a1-fourier-weight.proof.md",
+    "place": "First paragraph: zero-extension trace function and point count"
+   }
+  },
+  {
+   "text": "Apply [cor-fd-plancherel] to $K$ of Step 3. By Step 1 its transform is $\\mathcal G[1]$, whose trace is $-t_{\\mathcal G,n}$ by [def-fd-trace-function]. Squaring removes this sign, so $\\sum_{y\\in A'_0(\\mathbf F_{q^n})}|\\iota t_{\\mathcal G,n}(y)|^2=q^n\\sum_{x\\in A_0(\\mathbf F_{q^n})}|\\iota t_{K,n}(x)|^2\\le r^2q^{n(w+2)}$. Also the bound on $\\mathcal B'$ from Step 2 and the same point count give $\\sum_{y\\in A'_0(\\mathbf F_{q^n})}|\\iota t_{\\mathcal B',n}(y)|^2\\le b^2q^{n(w+1)}$.",
+   "uses": [
+    "cor-fd-plancherel",
+    "def-fd-trace-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/sk-p-dl-a1-fourier-weight.proof.md",
+    "place": "First two displayed estimates: Plancherel and the correction energy"
+   }
+  },
+  {
+   "text": "For a closed point $y$ of $U'_0$, apply [lem-wf-rational-stalk-exact] to the short exact sequence in Step 1. On $U'_0$ its last sheaf restricts to $\\mathcal M'$: by the sections formula of [def-wf-middle-extension], $V\\times_{A'_0}U'_0=V$ for $V$ over $U'_0$. Thus the stalk sequence is $0\\to\\mathcal B'_{\\bar y}\\to\\mathcal G_{\\bar y}\\to\\mathcal M'_{\\bar y}\\to0$, with commuting Frobenius. A basis of the subspace extended by lifts of a quotient basis makes the Frobenius matrix block upper triangular, with the subspace and quotient matrices on its diagonal. Every positive power has the corresponding powers as diagonal blocks. Summing diagonal entries by [def-weil-endomorphism-trace] and using, for each of $\\mathcal B',\\mathcal G,\\mathcal M'$ at each rational point, the conjugacy $F^{(n)}_x\\sim F_y^{n/e}$ obtained exactly as in Step 2 (restriction to $\\operatorname{Spec}\\kappa(y)$, free lattice, [lem-trf-rational-local-frobenius-powers] and [lem-trf-local-frobenius-transport-normalization]) therefore gives $t_{\\mathcal M',n}(y)=t_{\\mathcal G,n}(y)-t_{\\mathcal B',n}(y)$ for every $y\\in U'_0(\\mathbf F_{q^n})$. No splitting of the Weil-sheaf sequence is asserted.",
+   "uses": [
+    "lem-wf-rational-stalk-exact",
+    "def-wf-middle-extension",
+    "def-weil-endomorphism-trace",
+    "lem-trf-rational-local-frobenius-powers",
+    "lem-trf-local-frobenius-transport-normalization",
+    "prop-weil-operations",
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-pbc-qbar-category",
+    "lem-weil-point-fibre-equivalence",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/sk-p-dl-a1-fourier-weight.proof.md",
+    "place": "Third paragraph: trace additivity on the partner open"
+   }
+  },
+  {
+   "text": "For complex $a,c$, $|a-c|^2\\le(|a|+|c|)^2\\le2|a|^2+2|c|^2$, since $(|a|-|c|)^2\\ge0$. Apply this to Step 5 and sum. All summands are nonnegative, so the sums over $U'_0(\\mathbf F_{q^n})$ are bounded by those over the whole dual line in Step 4. Consequently $S_n(U'_0,\\mathcal M')\\le2r^2q^{n(w+2)}+2b^2q^{n(w+1)}\\le2(r^2+b^2)q^{n(w+2)}$. The last inequality uses $q>1$ and $q^{n(w+1)}=q^{n(w+2)}q^{-n}\\le q^{n(w+2)}$, valid for every real $w$. The constant $C=2(r^2+b^2)$ is positive because $r>0$, and independent of $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/sk-p-dl-a1-fourier-weight.proof.md",
+    "place": "Third paragraph: squared difference and the uniform exponential bound"
+   }
+  },
+  {
+   "text": "The given $\\mathcal M'$ is nonzero. Indeed, if it were zero, its ordinary direct image would be zero, so the assumed isomorphism would give $\\operatorname{FT}_\\psi((j_*\\mathcal M)[1])=0$. Apply the inverse-character transform and [lem-fd-inversion] in rank one to obtain $((j_*\\mathcal M)[1])(-1)=0$. The Tate line is locally free of rank one at integral coefficients by [lem-pur-twist-sheaf-locally-free](3), and [def-coefficient-twists-detailed] carries it and its dual to the rational/common-stage categories. Locally the evaluation of the line tensored with its dual is multiplication of scalars and is an isomorphism, so tensoring by the two lines gives mutually inverse functors. Shift is also invertible. Hence $j_*\\mathcal M=0$. Restriction back to $U_0$ is $\\mathcal M$ by the sections formula of [def-wf-middle-extension], contradicting the hypothesis $\\mathcal M\\ne0$. Here the transform takes zero to zero because it is an exact triangulated functor by [def-fd-transform].",
+   "uses": [
+    "lem-fd-inversion",
+    "def-wf-middle-extension",
+    "def-fd-transform",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/sk-p-dl-a1-fourier-weight.proof.md",
+    "place": "Final paragraph: nonvanishing of the prescribed Fourier partner"
+   }
+  },
+  {
+   "text": "The dense open $U'_0$ is a smooth geometrically connected affine curve: its finite complement in $\\operatorname{Spec}k_0[x]$ is cut out by a product $f$ of distinct irreducible polynomials, so $U'_0=\\operatorname{Spec}k_0[x,1/f]$ (take $f=1$ for empty complement). Over any field extension the coordinate $x$ lifts across a nilpotent quotient and $f(x)$ remains a unit, proving the infinitesimal lifting property; the presentation $k_0[x,z]/(zf(x)-1)$ is finite, so this is a smooth curve. Its base change to $k$ is integral, as $k[x,1/f]$ is a domain, and has dimension one, so it is geometrically connected. The sheaf $\\mathcal M'$ is lisse and pure of weight $v$ by hypothesis, and nonzero by Step 7. Apply [sk-l-dl-a1-energy] with $V_0=U'_0$, $N=\\mathcal M'$, $B=w+2$ and $C=2(r^2+b^2)>0$, using Step 6 for every $n\\ge1$. Its conclusion is $v\\le B-1=(w+2)-1=w+1$.",
+   "uses": [
+    "sk-l-dl-a1-energy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/sk-p-dl-a1-fourier-weight.proof.md",
+    "place": "Final paragraph: apply the trace-energy criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-fd-plancherel",
+  "def-coefficient-twists-detailed",
+  "def-fd-trace-function",
+  "def-fd-transform",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-endomorphism-trace",
+  "def-weil-local-frobenius-trace",
+  "def-weil-pbc-qbar-category",
+  "def-weil-punctual-weights",
+  "def-wf-middle-extension",
+  "lem-fd-inversion",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-trf-local-frobenius-transport-normalization",
+  "lem-trf-rational-local-frobenius-powers",
+  "lem-weil-point-fibre-equivalence",
+  "lem-wf-rational-stalk-exact",
+  "p-linear-triangular",
+  "prop-fd-zero-extension-comparison",
+  "prop-functor-package",
+  "prop-weil-operations",
+  "prop-weil-pbc-common-stage-calculus",
+  "sk-l-dl-a1-energy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/sk-p-dl-a1-fourier-weight.proof.md",
+  "place": "Entire proof, expanded into correction, trace bounds, Plancherel, additivity, nonvanishing and energy detection"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +213,45 @@
    "results": "FourierTransform integral and FourierPair declarations only; no relevant result",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FourierPartner|PunctuallyPureOfWeight|traceEnergy",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform of pure lisse sheaf weight upper bound",
+   "results": "FourierTransform.fourierₗ; FourierTransform.fourier; FourierTransform; Real.zero_at_infty_fourier; FourierTransform.term𝓕; FourierTransform.fourierₗ_apply; Real.fourier_comp_linearIsometry; VectorFourier.norm_fourierIntegral_le_integral_norm",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upper weight bound for the Fourier Deligne transform of a pure lisse Weil sheaf using Plancherel and trace energy",
+   "results": "VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le; VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le; Real.pow_mul_norm_iteratedFDeriv_fourier_le; Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le; Fourier.norm_fourierIntegral_le_integral_norm; VectorFourier.norm_fourierPowSMulRight_le; VectorFourier.norm_fourierIntegral_le_integral_norm; VectorFourier.norm_fourierSMulRight_le",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace energy bound over a finite field implies an upper bound on the punctual weight of a pure lisse sheaf",
+   "results": "BoundingSieve.weights; BoundingSieve.weights_nonneg; NumberField.hermiteTheorem.boundOfDiscBdd; FiniteField.trace_to_zmod_nondegenerate; Mathlib.Meta.Positivity.evalBoundingSieveWeights; BoundingSieve.siftedSum_le_mainSum_errSum_of_upperMoebius; LieModule.trace_toEnd_genWeightSpace; ClassGroup.normBound",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "cor-a1-fourier-middle-hc1",
@@ -93,5 +268,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "prop-a1-fourier-weight-upper",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported provenance; expanded the unit's actual zero-extension/correction/Plancherel/energy route into eight steps. Reused all needed nodes, proved nonvanishing for the prescribed partner by inversion, and made the rational-point Frobenius and exact-stalk calculations explicit. No new nodes. Maintainer reader (2026-10-18): Steps 2 and 5 now cite the transport normalization and the point lattice construction identifying the trf-normalized local operators with those of def-weil-local-frobenius-trace.",
+  "blueprint": "Realizes the upper-bound assertion used in Step 2 of cor-a1-fourier-middle-hc1, following all paragraphs of sk-p-dl-a1-fourier-weight.proof.md. The misleading exact-weight corollary is not used.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-rational-local-frobenius-powers",
+    "why": "Passes from a closed-point weight bound to return Frobenius at F_{q^n}-points; none of the Fourier-weight unit nodes supplies this local-operator comparison."
+   },
+   {
+    "node": "def-weil-endomorphism-trace",
+    "why": "Supplies ordinary matrix trace for the diagonal-sum calculations; no Fourier-weight unit node defines linear trace."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Uses only compact-support base change for an open immersion and a geometric point to identify zero-extension fibres in the adic coefficient category; no Fourier-weight unit node states that general comparison."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "Uses only Weil-equivariance of the base-change comparison, so the zero-extension fibre comparison respects local Frobenius; the unit has no such equivariance statement."
+   },
+   {
+    "node": "def-fd-trace-function",
+    "why": "Defines the alternating local trace and its sign under a shift; the unit uses this trace notion without redefining it."
+   },
+   {
+    "node": "lem-wf-rational-stalk-exact",
+    "why": "Turns the correction short exact sequence into Frobenius-equivariant exact rational stalk sequences; the unit has no stalk-exactness lemma."
+   },
+   {
+    "node": "def-wf-middle-extension",
+    "why": "Uses only ordinary direct-image sections and restriction back to the open; no Fourier-weight unit node defines this operation."
+   },
+   {
+    "node": "lem-fd-inversion",
+    "why": "Uses only conservativity of the Fourier transform, by its inverse-character composite, to exclude a zero prescribed partner; no unit node states this inverse."
+   },
+   {
+    "node": "def-pod-lisse-l-adic-sheaves",
+    "why": "Finite-rank local triviality supplies the constant ranks used in the estimates."
+   },
+   {
+    "node": "def-weil-punctual-weights",
+    "why": "Supplies the eigenvalue definition of punctual purity."
+   },
+   {
+    "node": "def-fd-transform",
+    "why": "Uses the transform being an exact triangulated functor, so it carries zero to zero."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Step 7 uses the integral rank-one Tate line and its rational/common-stage dual to cancel the twist in Fourier inversion; this is a generic coefficient fact, not a different weight-proof route."
+   },
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Step 7 uses the integral rank-one Tate line and its rational/common-stage dual to cancel the twist in Fourier inversion; this is a generic coefficient fact, not a different weight-proof route."
+   },
+   {
+    "node": "lem-trf-local-frobenius-transport-normalization",
+    "why": "Identifies the point transport of def-weil-local-frobenius-trace with the scheme-Frobenius transport, so the normalized operators of lem-trf-rational-local-frobenius-powers are the local operators of the trace function and of punctual weights; a local normalization fact, not the trace formula."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Represents a Qlb Weil sheaf restricted to a closed point at one finite coefficient stage, to supply the integral representative required by the local-power lemma."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Identifies a constructible sheaf on a geometric point with its finite-dimensional fibre, giving a free lattice with finite free reductions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-rational-local-frobenius-powers",
+  "def-weil-endomorphism-trace",
+  "prop-functor-package",
+  "prop-weil-operations",
+  "def-fd-trace-function",
+  "lem-wf-rational-stalk-exact",
+  "def-wf-middle-extension",
+  "lem-fd-inversion",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-punctual-weights",
+  "def-fd-transform",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "lem-trf-local-frobenius-transport-normalization",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-weil-point-fibre-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-3702382ce",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-3702382ce (reviewer sub-agent of L); spot-checked: I read the full item, the unit (main-20261015 statement and proof), and every cited statement. The statement is unchanged and keeps every hypothesis. The route matches the unit: correction prop-fd-zero-extension-comparison, Plancherel cor-fd-plancherel, energy sk-l-dl-a1-energy, with the existence of the weight taken from thm-fd-generic-fourier-sheaf-pure. No SGA source is cited and no new nodes are created. Steps 1, 3, 4, 6, 7 and 8 are correct: the hypotheses match, the Plancherel arithmetic r^2 q^{n(w+2)} and b^2 q^{n(w+1)} checks out, the comparison of q-powers holds for any real w, Step 7 shows the given partner M' is nonzero by inversion and twist cancellation, and Step 8 shows U'_0 is a smooth geometrically connected affine curve. One fault, which I repaired (C4/E6): Steps 2 and 5 used lem-trf-rational-local-frobenius-powers, whose local Frobenius operators come from the trace-formula chapter's construction. The trace function and the weights use the operators of def-weil-local-frobenius-trace, and the steps never identified the two. The lemma's integral-lattice hypothesis was also only asserted. The corrected node in fixes/ now restricts to Spec kappa(y), works at one finite coefficient stage (prop-weil-pbc-common-stage-calculus), takes a free lattice via lem-weil-point-fibre-equivalence, and cites lem-trf-local-frobenius-transport-normalization, the same repair as in the reviewed sibling lem-fd-l2-middle-extension. I updated proof_deps and added three tool_uses. Batch-5 check: each listed citation lies outside both assumptions and is not part of their proofs. def-fd-trace-function and def-pod-lisse-l-adic-sheaves are definitions, and p-linear-triangular is linear algebra. Plancherel, inversion, the correction and the energy lemma are Fourier or route results that use the trace formula or Poincare duality at most as consumers. prop-weil-operations is used only for Frobenius-equivariance of base change, which the Poincare-duality assumption explicitly does not give. The two trace-formula-chapter lemmas are local statements about stalk operators, and a graph traversal of the added normalization lemma reaches no trace-formula or Poincare-duality theorem. For the maintainer: sk-l-dl-a1-energy itself cites sk-thm-trace-transport and should cite nt-assume-trace-formula when it is split. The statement does not cite rem-dl-a1-conventions for 'irreducible lisse'; this is inherited and left unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
