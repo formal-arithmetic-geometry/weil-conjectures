@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
-  "def-coef-infinity-relative-join"
+  "def-coef-infinity-relative-join",
+  "lem-coef-infinity-join-cone-calculus"
  ],
  "proof": [
   {
@@ -171,5 +172,35 @@
   "group": "Q138",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-7d3debe41 (reviewer sub-agent of L); spot-checked: Read the item, its four steps, the three cited definitions in full, and step 8 of lem-coef-filtered-cocartesian-section-cofinality, which cites the item. The construction is correct and each step is elementary. Step 1 defines P with epsilon = delta and labels j(z, sigma|_I) and sigma|_{I^c}; it restricts to i_K j and i_X. Step 2 defines J with epsilon = delta wedge t, using that a k is constant at x. Step 3 checks the four exact restrictions and the apex edge. Step 4 covers Z empty, where C_Z = K = Z^triangleright = Delta^0. I tested Z = Delta^0 with X = Delta^0 or Delta^1, plus Z empty. I made three fixes in fixes/dag/nodes/sec-six-functors/lem-coef-relative-join-fixed-source-prism.json. (1) C3/B3: the steps use the join block form of Z^triangleright and K star X, which is defined in def-coef-infinity-relative-cone, but did not cite it; I added it to the uses of steps 1-4 and to proof_deps. (2) E5: as written, step 2 gave the empty label when I is empty, which is wrong when I is empty and the tail is nonempty (the apex at t = 0, or Z empty). That zero block must carry the degenerate k(p). The step also never stated that a nonempty tail forces t = 0 on I, and it asserted rather than checked that the construction respects the simplicial operators. I rewrote step 2 as an explicit two-case rule; the two cases agree because c(z,0) = p, and the operator check is now written out. (3) Step 3 now states the gluing identity k c_1(z) = j(z,x). The statement is unchanged, there are no new nodes, and there are no tool_uses. No duplicate found: an rg over dag/nodes for 'fixed-source', the C_Z pushout and Z^triangleright x Delta^1 finds only the item and its citer, and lem-coef-relative-join-prism-comparison, lem-coef-cocartesian-relative-cylinder-extension and lem-coef-infinity-fiber-cocone-simplex-extension state different things. The source, HTT Lemma 5.4.4.2 p. 433, is not archived, so I could not read the printed page; the proof uses only the cited definitions. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-881f705e7",
+  "group": "NU",
+  "result": "pass",
+  "note": "All node clauses match the Lean: C_Z is the landed fatLeftJoinCone pushout; K, j, k and a are real pushouts and pushout.desc; T is relativeJoin a (𝟙 X); P is over X and J over the constant x; the five restriction clauses hold; the apex edge is fixed by both relative-join coordinates and agrees with the endpoint clauses. Empty Z and single universe u covered; no extra hypotheses. Only the theorem is sorry; source and blueprint docstrings present; lean.statement verbatim; node changes only lean plus the landed stmt_dep lem-coef-infinity-join-cone-calculus (no cycle); no duplicate found. nt_compile.py --json: rc 0, no diagnostics, confirmed against an injected-error control. Second-reading section is the accepted 2026-10-17 placeholder. Only cosmetic: report link text 'Lemma the project server'."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeJoinFixedSourcePrism",
+  "declaration": "SSet.Enhanced.relativeJoin_fixedSourcePrism",
+  "declarations": [
+   "SSet.Enhanced.fixedSourceCylinderQuotient",
+   "SSet.Enhanced.fixedSourceCylinderPoint",
+   "SSet.Enhanced.fixedSourceCylinderTop",
+   "SSet.Enhanced.fixedSourceGraph",
+   "SSet.Enhanced.fixedSourcePrismAttachment",
+   "SSet.Enhanced.fixedSourcePrismProduct",
+   "SSet.Enhanced.fixedSourcePrismCylinder",
+   "SSet.Enhanced.fixedSourcePrismBase",
+   "SSet.Enhanced.relativeJoin_fixedSourcePrism"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeJoinFixedSourcePrism.lean",
+  "statement": "theorem relativeJoin_fixedSourcePrism (Z X : SSet.{u}) (x : Δ[0] ⟶ X) : ∃ (P : rightJoinCone Z ⊗ X ⟶ relativeJoin (fixedSourcePrismBase Z x) (𝟙 X)) (J : rightJoinCone Z ⊗ Δ[1] ⟶ relativeJoin (fixedSourcePrismBase Z x) (𝟙 X)), P ≫ relativeJoinProjection (fixedSourcePrismBase Z x) (𝟙 X) = snd (rightJoinCone Z) X ∧ J ≫ relativeJoinProjection (fixedSourcePrismBase Z x) (𝟙 X) = stdSimplex.isTerminalObj₀.from (rightJoinCone Z ⊗ Δ[1]) ≫ x ∧ (rightJoinConeInclusion Z ⊗ₘ 𝟙 X) ≫ P = fixedSourcePrismProduct Z x ≫ relativeJoinInl (fixedSourcePrismBase Z x) (𝟙 X) ∧ (orderedJoinInr Z Δ[0] ⊗ₘ 𝟙 X) ≫ P = snd Δ[0] X ≫ relativeJoinInr (fixedSourcePrismBase Z x) (𝟙 X) ∧ coneCylinderEnd (rightJoinCone Z) 0 ≫ J = stdSimplex.isTerminalObj₀.from (rightJoinCone Z) ≫ fixedSourceCylinderPoint Z ≫ fixedSourcePrismCylinder Z x ≫ relativeJoinInl (fixedSourcePrismBase Z x) (𝟙 X) ∧ coneCylinderEnd (rightJoinCone Z) 1 ≫ J = lift (𝟙 (rightJoinCone Z)) (stdSimplex.isTerminalObj₀.from (rightJoinCone Z) ≫ x) ≫ P ∧ (rightJoinConeInclusion Z ⊗ₘ 𝟙 Δ[1]) ≫ J = fixedSourceCylinderQuotient Z ≫ fixedSourcePrismCylinder Z x ≫ relativeJoinInl (fixedSourcePrismBase Z x) (𝟙 X) ∧ (orderedJoinInr Z Δ[0] ⊗ₘ 𝟙 Δ[1]) ≫ J ≫ relativeJoinFst (fixedSourcePrismBase Z x) (𝟙 X) = lift (snd Δ[0] Δ[1]) (stdSimplex.isTerminalObj₀.from (Δ[0] ⊗ Δ[1])) ≫ relativeJoinRho Δ[0] ≫ orderedJoinFunctor.map (fixedSourceCylinderPoint Z ≫ fixedSourcePrismCylinder Z x, x) ∧ (orderedJoinInr Z Δ[0] ⊗ₘ 𝟙 Δ[1]) ≫ J ≫ relativeJoinSnd (fixedSourcePrismBase Z x) (𝟙 X) = lift (snd Δ[0] Δ[1]) (stdSimplex.isTerminalObj₀.from (Δ[0] ⊗ Δ[1]) ≫ x)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses fatLeftJoinCone and coneCylinderEnd from the added landed statement dependency lem-coef-infinity-join-cone-calculus. Helpers construct the prescribed pushout, its legs and its base map. The apex interval is specified by both relative-join pullback coordinates as equalities of full simplicial maps. No statement correction or dependency repair."
  }
 }

@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "lem-coef-sorted-simplicial-algebra-model",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-cofibrant-homotopy-groupoid-completion"
  ],
  "proof": [
   {
@@ -307,5 +308,27 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-f74264e43 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 12 steps, the full statements of the six cited nodes, the one citer, and Dwyer–Kan (the Rochester scan of Simplicial localizations of categories, not in literature/): printed p.281 (10.1, 10.2, 10.4) as a page image, and 1.4(v)-(vii), 3.1-3.8 and 7.4-7.6 from a text extraction of the same scan. The statement matches 10.2 exactly: V and B cofibrant and v a cofibration, B[V^{-1}] the pushout with degreewise groupoid completion, NB the diagonal of the degreewise nerves. It drops no hypothesis and is not weakened. The invertibility condition belongs only to 10.4, as the item says. No target node is involved, so no base-change or coefficient check applies; no SGA is used. Checked every step. Step 1: F(Delta^m)_q = F(dDelta^m)_q * P(surjections), and colimits are degreewise. Step 2: both lifts commute (p_B j s_V = v), giving a retract of pairs. Steps 3-4: the word presentation and the stack proof of unique reduced words. Step 5: the comma category is the free category on the element graph. Step 6: T_b is a tree because each nonempty word has exactly one edge to a shorter word; tested loops, parallel edges, S empty and S=Q. Step 7: leaf retraction with a natural transformation that need not be invertible. Step 8: the filtered-colimit clause's hypotheses hold. Step 9: Quillen A for (b|u), which matches the cited node. Step 10: the exchanged-direction diagonal clause. Steps 11-12: functoriality and retract closure. All six cited nodes are split, reviewed and in the item's unit, so no tool_uses are needed. Their dependency closures avoid the item. Confirmed that citing free-category-groupoid-nerve, free-product-nerve-gluing or fixed-object-simplicial-free-calculus would create a cycle. No new nodes. No existing node duplicates the partial-inversion result; completion-nerve is the special case V=B. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3faf1051c",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Clause-by-clause match: O:Type u small set; V B P : Fixed O with object-fixing functors; cofibrancy hV/hB = fixedCofibrations (llp of mappingwise trivial Kan fibrations) of discreteInclusion from the identity-only discrete O; hv cofibration; G(V) via the landed DegreewiseGroupoidCompletion (strict localization at all arrows in every degree); B[V^-1] as IsColimit PushoutCocone in Fixed O; conclusion IsWeakHomotopyEquivalence (diagonalNerveMap (bundleMap i)) with diagonalNerve = diag of degreewise nerves (p=0, empty products correct). No extra hypotheses, no universe restriction, edge cases covered. Only the item node changed; stmt_deps gained the landed lem-coef-cofibrant-homotopy-groupoid-completion, checked acyclic (203-node closure excludes the item). lean.statement verbatim; no defs, sorry-only proof, docstrings with source/blueprint and all 12 steps, imports per contract, lines <=100. nt_compile.py --json: exit 0, no errors or warnings. Report has Worker report and the Second reading by Q62 section (2026-10-17 policy note)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CofibrantLocalizationDiagonalNerve",
+  "declaration": "SSet.Bergner.cofibrant_localization_diagonal_nerve",
+  "declarations": [
+   "SSet.Bergner.cofibrant_localization_diagonal_nerve"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CofibrantLocalizationDiagonalNerve.lean",
+  "statement": "theorem cofibrant_localization_diagonal_nerve {O : Type u} (V B : Fixed O) (v : V ⟶ B) (hV : fixedCofibrations O (discreteInclusion V)) (hB : fixedCofibrations O (discreteInclusion B)) (hv : fixedCofibrations O v) (C : DegreewiseGroupoidCompletion V) (P : Fixed O) (i : B ⟶ P) (j : C.target ⟶ P) (hcompat : v ≫ i = C.unit ≫ j) (hpush : IsColimit (PushoutCocone.mk i j hcompat)) : SSet.Enhanced.IsWeakHomotopyEquivalence (CategoryTheory.CoherentNerve.diagonalNerveMap (bundleMap i))",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The source completion G(V) is represented by the existing DegreewiseGroupoidCompletion interface from lem-coef-cofibrant-homotopy-groupoid-completion: C.target is the fixed-object degreewise groupoid completion and C.unit is its canonical localization map. The pushout is stated by its PushoutCocone IsColimit universal property. The theorem quantifies over every such universal-property realization, which is invariant under its unique comparison isomorphism."
  }
 }

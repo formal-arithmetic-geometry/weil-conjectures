@@ -281,5 +281,31 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-af1067a23 (reviewer sub-agent of L); spot-checked: The proof is correct and complete. I read the item, all 10 steps, the full statements of the 14 cited nodes, the unit route, the blueprint ancestor and the citer lem-coef-arrow-target-cartesian-pullbacks. HTT is not archived under literature/, so I checked the steps against HTT Prop. 2.4.4.3 from my knowledge of the text; the worker records it as WANTED. The statement is unchanged and has exactly HTT's hypotheses (inner fibration, quasicategories, one edge). Its commutation datum is made precise as the slice roof (Steps 8-9), which is canonical because the homotopies between two sections of the trivial fibration r_{p(x)} form a contractible space. Step 2: the pushout-join clause applies with A=Λ^m_i and {1}⊂Δ^1. Step 3: the boundary domain is exactly Λ^{m+2}_{m+2} with final edge s, and m=0 is Λ^2_2. Step 4: φ_z is a Kan fibration, via lem-coef-infinity-inner-mapping-fiber and lem-cbc-right-fibration-space-fiber. Step 5: both directions are right, and contractible-fibers needs no condition on the base. Step 6: the strict comparison is φ_z and the right leg is a Kan fibration. Step 7: the boundary domain is the inner horn Λ^{m+2}_{m+1}. Step 8: the prism edges are j r_u, the constant edge and j r_v, giving postcomposition = [r_v][r_u]^{-1}. Small cases agree: N([1]) over a point, p=id, B=pt. No new nodes, no cycle, no duplicate (the cocartesian criterion is the opposite orientation). Not a target node, so no base-change morphism or coefficient category is involved; no SGA source. FIX (C8): two statements of unit sk-prop-sf-cbc, which is outside the route of sk-prop-sf-biduality-general, are used as generic black boxes but were not declared: lem-cbc-right-fibration-space-fiber (Steps 1 and 4) and lem-cbc-kan-fibration-fiber-criterion (Step 5). The corrected item appends both to split_report.tool_uses, as the sibling nodes already carry them; nothing else changed. Accepted tool uses: these two plus lem-weil-pbc-trivial-kan-homotopy-equivalence, which is actually on the route (sk-prop-h2).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-adb538fb4",
+  "group": "Q59",
+  "result": "fix",
+  "note": "H3: the delivered RHS used canonicalPostcompositionMap for E and B, each an independent Classical.choose of a composition representative fixed only up to homotopy, while IsHomotopyPullbackSquare needs strict commutation. The iff is therefore unprovable, e.g. for p an automorphism of E=B where every edge is Cartesian, and is not the node's coherent square (Steps 8-9). Fix: complete replacement module presenting the square by canonical fixed-second-edge triangle roofs (cartesianPostcompositionSource/Inclusion/cartesianPostcomposition, a pullback of spineRestriction), the exact dual of the landed infinity_cocartesian_mapping_criterion. u and g are pinned by monomorphic inclusions, the right map is arrowSpaceMap p z y, hypotheses unchanged. Lean record and report fixes included. Clause-by-clause check otherwise ok (IsCartesianEdge = final outer horns, InnerFibration, endpoints δ1/δ0, z unrestricted, one universe u). No hollow defs, sorry only in the theorem proof, docstrings carry source and blueprint tag, no duplicate. Fixed file compiles with nt_compile.py: no errors or warnings, exit 0; a negative control shows errors are reported. IsHomotopyPullbackSquare/spineRestriction owners are recorded in lean.note because a lean-only fix cannot add stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCartesianMappingCriterion",
+  "declaration": "SSet.Enhanced.infinity_cartesian_mapping_criterion",
+  "declarations": [
+   "SSet.Enhanced.cartesianPostcompositionSource",
+   "SSet.Enhanced.cartesianPostcompositionInclusion",
+   "SSet.Enhanced.cartesianPostcomposition",
+   "SSet.Enhanced.infinity_cartesian_mapping_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCartesianMappingCriterion.lean",
+  "statement": "theorem infinity_cartesian_mapping_criterion (E B : SSet.{u}) [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (_hp : InnerFibration p) (x y : E _⦋0⦌) (s : Δ[1] ⟶ E) (_hsx : E.δ 1 (SSet.yonedaEquiv s) = x) (_hsy : E.δ 0 (SSet.yonedaEquiv s) = y) : IsCartesianEdge p s ↔ ∀ z : E _⦋0⦌, ∃ (u : (arrowMappingSpace E x y) _⦋0⦌) (g : cartesianPostcompositionSource E z x y u ⟶ cartesianPostcompositionSource B (p.app _ z) (p.app _ x) (p.app _ y) ((arrowSpaceMap p x y).app _ u)), (arrowMappingSpaceInclusion E x y).app _ u = diagramVertex s ∧ g ≫ cartesianPostcompositionInclusion B (p.app _ z) (p.app _ x) (p.app _ y) ((arrowSpaceMap p x y).app _ u) = cartesianPostcompositionInclusion E z x y u ≫ (ihom Δ[2]).map p ∧ IsHomotopyPullbackSquare (cartesianPostcomposition E z x y u) g (arrowSpaceMap p z y) (cartesianPostcomposition B (p.app _ z) (p.app _ x) (p.app _ y) ((arrowSpaceMap p x y).app _ u))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reviewer fix: presents the canonical coherent postcomposition square by its fixed-second-edge triangle roofs (the slice representative of node Steps 8-9), built by base change of the recorded spineRestriction, as in the landed cocartesian dual lem-coef-infinity-cocartesian-mapping-criterion. The point u and the left vertical map g are fixed by monomorphic ambient inclusions; the right vertical map is the existing arrowSpaceMap. Natural right-pinch equivalences identify these models with the right-pinched mapping spaces of the node. The delivered version used canonicalPostcompositionMap for E and B, each an independent Classical.choose of a composition representative known only up to homotopy, so IsHomotopyPullbackSquare (which needs strict commutation) could fail for an edge that is Cartesian, e.g. for an automorphism p. Uses the landed interfaces of def-coef-infinity-relative-cone (IsHomotopyPullbackSquare) and lem-cbc-simplicial-composition-spine (spine restriction); no new node, no statement correction.",
+  "fixed_by": "NT-stage2-cc-adb538fb4"
  }
 }

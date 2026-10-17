@@ -189,5 +189,29 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-dce3b3f44 (reviewer sub-agent of L); spot-checked: Read the item, the full statement of its only citation def-cbc-enhanced-diagrams-cones, the consumer lem-coef-quasicategory-classification-realization (steps 3-4) and Kerodon 00T0 online. Kerodon 00T0 is Subsection 3.1.1 'Kan Fibrations'; Definition 3.1.1.1 and Remarks 3.1.1.6 (pullback), 3.1.1.10 (composition) and 3.1.1.11 (Kan source over a Kan base) are numbered as cited. The source is not archived locally; the report has a WANTED line and proof_origin.by is agent. The statement is true and is not weakened. Its endpoint convention (the last E coordinate, matched to s) matches the consumer's step 4. The hypothesis that E is Kan is redundant but harmless. Step 1 states the simultaneous induction and its base before use. Step 2: the lift of b along s over t_{k-1}v has the right compatibility, and (v, b~) lies in P_k. Step 3: lifting along t over c first, then along t_{k-1} over s e, is correct, and every equality is checked. Step 4: Kan-ness of P_k follows from the induction plus step 2. Each step is a genuine one- or two-lift elementary argument from the degreewise-pullback and Kan definitions in the cited node. Edge cases tested: k=1, a point, discrete spans (no surjectivity is used), and empty E or B (vacuous, because horns in positive dimension are nonempty). The delivery creates no new nodes. Searched dag/nodes with rg for duplicates: the Kan-Quillen model nodes, kan-iterated-chain-comparison (a different claim), kan-fibration-tower-limit (an infinite limit) and the other Kan pullback nodes do not state this. Only a definition is cited, so the unit route is unaffected and no tool_uses are needed. No SGA is cited. Shape: one commit, the item plus a report with Review by Q12, and the blueprint fields are present. Minor issue, left unchanged: some mathlib_searches verdict texts mention the neighbouring item's constant-path comparison. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6e741691",
+  "group": "NS",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: Kan B,E; s,t Fibration (Mathlib horn RLP, all horns n>=1); P1=E with endpoint t, P(n+2)=pullback(endpoint n, s) with endpoint snd≫t, all checked by rfl; conclusions Kan levels, endpoint fibrations, pullback.fst projection fibrations for k>=2; no extra hypotheses, one universe u, empty cases admitted. Tower is a real Nat.rec; source/blueprint docstrings present; only the theorem is sorry; lean.statement verbatim; stmt_deps correct; no duplicate found. nt_compile --json clean (rc 0, no messages). Minor non-blocking: the report's Source-check paragraph has substituted text in place of the Kerodon remark numbers."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanIteratedPullbackFibrancy",
+  "declaration": "SSet.Enhanced.kan_iterated_pullback_fibrancy",
+  "declarations": [
+   "SSet.Enhanced.kanPullbackTower",
+   "SSet.Enhanced.kanPullbackLevel",
+   "SSet.Enhanced.kanPullbackEndpoint",
+   "SSet.Enhanced.kan_iterated_pullback_fibrancy"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/KanIteratedPullbackFibrancy.lean",
+  "statement": "theorem kan_iterated_pullback_fibrancy {B E : SSet.{u}} [B.KanComplex] [E.KanComplex] (s t : E ⟶ B) [Fibration s] [Fibration t] : (∀ n : ℕ, KanComplex (kanPullbackLevel s t n)) ∧ (∀ n : ℕ, Fibration (kanPullbackEndpoint s t n)) ∧ (∀ n : ℕ, Fibration (pullback.fst (kanPullbackEndpoint s t n) s))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
