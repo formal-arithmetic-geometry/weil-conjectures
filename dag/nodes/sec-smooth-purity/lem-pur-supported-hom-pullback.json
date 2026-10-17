@@ -1,0 +1,83 @@
+{
+ "id": "lem-pur-supported-hom-pullback",
+ "kind": "statement",
+ "title": "Pullback compatibility of the supported-Hom identification",
+ "statement": "Fix the finite coefficient datum of [def-pur-conventions], with $A=A_{E,n}$. Let $h:X'\\to X$ be a morphism of schemes [def-pc-scheme], let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and form the Cartesian square with $Z'=X'\\times_XZ$, $i':Z'\\hookrightarrow X'$ and $g:Z'\\to Z$ [def-weil-pbc-cartesian-square]. Let $F$ be a bounded-below complex of etale $A$-module sheaves and let $a\\in\\mathbf Z$; use the ordinary module derived categories of [def-weil-pbc-derived-categories], the inverse and direct images of [def-weil-pbc-inverse-image, def-weil-pbc-direct-image], and supported cohomology of [def-pur-support-cohomology]. Write\n$$\n\\chi_{i,F}^a:H_Z^a(X,F)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(X_{\\mathrm{et}},A)}(i_*A_Z,F[a])\n$$\nfor the canonical supported-Hom identification induced by [lem-amb-closed-support-hom]. Let $c:h^{-1}i_*A_Z\\xrightarrow{\\sim}i'_*A_{Z'}$ be the canonical closed-immersion exchange, with the canonical identification $g^{-1}A_Z=A_{Z'}$. Then for every $\\alpha\\in H_Z^a(X,F)$,\n$$\n\\chi_{i',h^{-1}F}^a(h^*\\alpha)=h^{-1}(\\chi_{i,F}^a(\\alpha))\\circ c^{-1}.\n$$\nHere $h^*$ on supported groups is the canonical pullback in the localization sequence [thm-pur-with-support-exactness], and the right side uses exact inverse image and its canonical shift comparison. The same equality holds on the small pro-etale sites for $F_{\\mathrm{proet}}=\\nu_X^{-1}F$, with $\\chi$ the identification of [lem-pur-supported-hom] and the canonical supported-constant comparison there; $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ is [def-weil-pbc-site-comparison-morphism]. The two identifications agree under the site comparison: let $\\nu^*:H^a_Z(X_{\\mathrm{et}},F)\\to H^a_Z(X_{\\mathrm{proet}},F_{\\mathrm{proet}})$ be the map induced by the exact inverse image $\\nu_X^{-1}$ on derived supported sections, and $\\gamma:\\nu_X^{-1}i_*A_Z\\xrightarrow{\\sim}i_*A_Z$ the canonical supported-constant comparison; then $\\chi^{a,\\mathrm{proet}}_{i,F_{\\mathrm{proet}}}(\\nu^*\\alpha)=\\nu_X^{-1}(\\chi^a_{i,F}(\\alpha))\\circ\\gamma^{-1}$, and likewise on $X'$. These comparisons commute with $h^*$ and with $c$, so the etale equality is carried to the pro-etale one. No finiteness hypothesis on $h$ or on $X'$ and no purity isomorphism is assumed.",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Theorem 9.4 and its Ext proof on pp. 66–67, with Example 9.5; explicit pullback compatibility formulated by the agent from the kernel-of-restriction construction"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-pur-support-cohomology",
+  "lem-amb-closed-support-hom",
+  "thm-pur-with-support-exactness",
+  "lem-pur-supported-hom",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology with closed support identifies with derived morphisms from the constant sheaf on the closed subscheme naturally under arbitrary pullback; the adjoint restricts by the exceptional counit mate.",
+   "results": "CategoryTheory.constantSheafAdj_counit_app; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; CategoryTheory.constantSheafΓAdj; CompHausLike.LocallyConstant.counit; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; TopCat.Sheaf.pullbackPushforwardAdjunction; CompHausLike.LocallyConstant.counit_app_val. These are ordinary adjunctions, not supported derived cohomology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under a Cartesian square of the Ext description of cohomology supported on a closed subscheme and the exceptional inverse-image adjunction.",
+   "results": "AlgebraicGeometry.Scheme.Hom.map_appLE, naturality_assoc, map_appLE_assoc, naturality, appLE_map, appLE_map_assoc; AlgebraicGeometry.Spec_Γ_naturality_assoc; ModuleCat.Tilde.toOpen_res. Read the displayed types: all concern structure-sheaf section maps, not supported cohomology.",
+   "date": "2026-10-17",
+   "verdict": "no match: second phrasing also gives no supported-cohomology identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, CategoryTheory.Functor",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor and its composition/naturality lemmas; CategoryTheory.Functor.mapExtAddHom and mapExtLinearMap. Read Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean: this supplies abstract Ext transport but no identification with supported sections or compatibility of that identification with a closed pair.",
+   "date": "2026-10-17",
+   "verdict": "no match: the geometric supported-Hom identification is an additional theorem, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "supported|support.*cohomology|exceptional|upperShriek",
+   "results": "CategoryTheory/Preadditive/Injective/Resolution.lean:41; CategoryTheory/Preadditive/Projective/Resolution.lean:39; CategoryTheory/Abelian/Injective/Extend.lean:95; CategoryTheory/Abelian/Projective/Extend.lean:91. Only complexes supported in a degree, not a closed subscheme.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|mapExactFunctor_hom",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean:40,47,69; Map.lean:21,24,29,31,33. Read Map.lean: abstract transport of Ext, no etale/pro-etale support statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-affine-line-orientation",
+  "date": "2026-10-17",
+  "group": "Q128"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-affine-line-orientation",
+   "place": "Proof: restriction of the supported coordinate boundary to a geometric fibre; the supported-Hom identification must commute with pullback of the closed pair",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
