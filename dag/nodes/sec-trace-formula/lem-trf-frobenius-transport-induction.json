@@ -1,11 +1,60 @@
 {
  "id": "lem-trf-frobenius-transport-induction",
  "kind": "statement",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an object $M$. Write\n$$E_r(M)=\\eta_{T^{r-1}M}\\circ\\cdots\\circ\\eta_M:H(M)\\longrightarrow H(T^rM)$$\nfor $r\\geq1$, with $E_1(M)=\\eta_M$. Thus $E_{r+1}(M)=\\eta_{T^rM}\\circ E_r(M)$ and $S_r(M)=H(d_{r,M}^{-1})\\circ E_r(M)$. These are definitions of the displayed composites; composition and reassociation use [def-nagata-category]. The canonical functor associators identify the successive domains.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Proof, the m-th-iterate assertion: expand the missing composition and naturality calculation; induction identifying repeated degree-one transport with the direct transport along g_gamma^m"
+   }
+  },
+  {
+   "text": "For $r=1$, $d_1=\\mathrm{id}_T$, so preservation of identities by $H$ and the identity law of [def-nagata-category] give\n$$S_1(M)=H(\\mathrm{id}_{TM})\\circ\\eta_M=\\eta_M=\\tau_1(M).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Proof, the m-th-iterate assertion: expand the missing composition and naturality calculation; induction identifying repeated degree-one transport with the direct transport along g_gamma^m"
+   }
+  },
+  {
+   "text": "Suppose $S_r(M)=\\tau_r(M)$. The inverse identities for $d_{r,M}$ and functoriality of $H$ give $H(d_{r,M})\\circ S_r(M)=E_r(M)$. Naturality of $\\eta$, applied to the morphism $d_{r,M}:P_rM\\to T^rM$, says\n$$\\eta_{T^rM}\\circ H(d_{r,M})=H(T(d_{r,M}))\\circ\\eta_{P_rM}.$$\nSubstitute this into the definition of $S_{r+1}$, use the assumed coherence $d_{r+1,M}^{-1}\\circ T(d_{r,M})=b_{r,M}$, and use preservation of composition by $H$. With composition reassociated by [def-nagata-category], this gives\n$$\\begin{aligned}\nS_{r+1}(M)&=H(d_{r+1,M}^{-1})\\circ\\eta_{T^rM}\\circ E_r(M)\\\\\n&=H(d_{r+1,M}^{-1})\\circ H(T(d_{r,M}))\\circ\\eta_{P_rM}\\circ S_r(M)\\\\\n&=H(b_{r,M})\\circ\\eta_{P_rM}\\circ\\tau_r(M)=\\tau_{r+1}(M).\n\\end{aligned}$$\nThe penultimate substitution uses the induction hypothesis; the last equality is the given recurrence. In particular, no naturality of the maps $\\tau_r$ is required.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Proof, the m-th-iterate assertion: expand the missing composition and naturality calculation; induction identifying repeated degree-one transport with the direct transport along g_gamma^m"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 prove $S_r(M)=\\tau_r(M)$ by ordinary induction on the positive integer $r$ (equivalently, induction on $r-1\\in\\mathbf N$). Since $M$ was arbitrary, this proves the assertion for every $r\\geq1$ and every object $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Proof, the m-th-iterate assertion: expand the missing composition and naturality calculation; induction identifying repeated degree-one transport with the direct transport along g_gamma^m"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "The m-th-iterate assertion: explicit induction using naturality of eta and the stated coherence"
+ },
  "chapter": "sec-trace-formula",
  "unit": "sk-d-weil",
  "created": {
@@ -29,35 +78,56 @@
    "query": "iterate|iterat",
    "results": "0 hits: ; subdirectory Mathlib/CategoryTheory/Functor",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern naturality alone, conjugation of one endomorphism, or small-object iterations; none states the coherent-functor transport recurrence"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"iterate\", CategoryTheory.NatTrans",
-   "results": "0 hits: ",
-   "date": "2026-10-17",
-   "verdict": "no match: the hits concern naturality alone, conjugation of one endomorphism, or small-object iterations; none states the coherent-functor transport recurrence"
+   "verdict": "no match: general naturality, conjugation, sequence, or small-object iteration results do not state the coherent-functor transport recurrence"
   },
   {
    "tool": "leansearch",
-   "query": "Iteration of a natural transformation between a functor H and H composed with an endofunctor T respects coherent isomorphisms of powers",
-   "results": "8 hits: CategoryTheory.NatTrans.naturality_2_assoc, CategoryTheory.NatTrans.naturality_1, CategoryTheory.NatTrans.naturality_1_assoc, CategoryTheory.Iso.conj_pow, CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty, CategoryTheory.MorphismProperty.naturalityProperty.isStableUnderComposition, CategoryTheory.Endofunctor.Coalgebra.functorOfNatTransComp, CategoryTheory.Over.iteratedSliceForwardNaturalityIso",
+   "query": "Iterating a natural transformation H to H composed with T agrees with a sequence of maps satisfying its recurrence after coherent comparisons of functor powers",
+   "results": "8 hits: CategoryTheory.NatTrans.ofSequence_app, CategoryTheory.NatTrans.ofSequence, ContinuousCohomology.MultiInd.functor, CategoryTheory.NatTrans.recOn, CategoryTheory.NatTrans.ofOpSequence, CategoryTheory.NatTrans.rec, CategoryTheory.Endofunctor.Coalgebra.functorOfNatTrans, CategoryTheory.LaxMonoidalFunctor.Hom.rec",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern naturality alone, conjugation of one endomorphism, or small-object iterations; none states the coherent-functor transport recurrence"
+   "verdict": "no match: general naturality, conjugation, sequence, or small-object iteration results do not state the coherent-functor transport recurrence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.map_comp",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: general naturality, conjugation, sequence, or small-object iteration results do not state the coherent-functor transport recurrence"
   },
   {
    "tool": "leanfinder",
-   "query": "A natural transformation eta from H to H composed with T can be iterated. With coherent comparisons P_r isomorphic to T^r and identity first comparison, repeated eta equals any sequence satisfying the successor recurrence",
-   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans, CategoryTheory.SmallObject.SuccStruct.Iteration.congr_map, CategoryTheory.SmallObject.SuccStruct.ofNatTrans, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans_assoc, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_refl, CategoryTheory.SmallObject.iterationFunctorMapSuccAppArrowIso, CategoryTheory.SmallObject.SuccStruct.Iteration.arrow_mk_mapObj",
+   "query": "A natural transformation eta from H to H composed with an endofunctor T iterates compatibly with coherent natural isomorphisms P_r to T^r and a successor recurrence",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.ofNatTrans, CategoryTheory.SmallObject.SuccStruct.ιIterationFunctor, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans_assoc, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans, CategoryTheory.SmallObject.SuccStruct.ofNatTrans_succ, CategoryTheory.SmallObject.SuccStruct.iterationFunctor_map_succ, CategoryTheory.SmallObject.SuccStruct.iterationFunctor_map_succ_assoc",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern naturality alone, conjugation of one endomorphism, or small-object iterations; none states the coherent-functor transport recurrence"
+   "verdict": "no match: general naturality, conjugation, sequence, or small-object iteration results do not state the coherent-functor transport recurrence"
   },
   {
    "tool": "grep",
    "query": "naturality_2_assoc|conj_pow|iterate.*[Nn]at[Tt]rans|[Nn]at[Tt]rans.*iterate",
    "results": "1 hits: Mathlib/CategoryTheory/Conj.lean; subdirectory Mathlib/CategoryTheory",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern naturality alone, conjugation of one endomorphism, or small-object iterations; none states the coherent-functor transport recurrence"
+   "verdict": "no match: general naturality, conjugation, sequence, or small-object iteration results do not state the coherent-functor transport recurrence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iteration of a natural transformation between a functor H and H composed with an endofunctor T respects coherent isomorphisms of powers",
+   "results": "8 hits: CategoryTheory.NatTrans.naturality_2_assoc, CategoryTheory.NatTrans.naturality_1, CategoryTheory.NatTrans.naturality_1_assoc, CategoryTheory.Iso.conj_pow, CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty, CategoryTheory.MorphismProperty.naturalityProperty.isStableUnderComposition, CategoryTheory.Endofunctor.Coalgebra.functorOfNatTransComp, CategoryTheory.Over.iteratedSliceForwardNaturalityIso",
+   "date": "2026-10-17",
+   "verdict": "no match: general naturality, conjugation, sequence, or small-object iteration results do not state the coherent-functor transport recurrence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iterate\", CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: general naturality, conjugation, sequence, or small-object iteration results do not state the coherent-functor transport recurrence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation eta from H to H composed with an endofunctor T can be iterated. With coherent comparisons P_r isomorphic to T^r and identity first comparison, repeated eta equals any sequence satisfying the successor recurrence",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.ofNatTrans, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj, CategoryTheory.SmallObject.SuccStruct.Iteration.congr_map, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans_assoc, CategoryTheory.SmallObject.SuccStruct.iterationFunctor_map_succ, CategoryTheory.SmallObject.SuccStruct.ofNatTrans_succ, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_refl",
+   "date": "2026-10-17",
+   "verdict": "no match: general naturality, conjugation, sequence, or small-object iteration results do not state the coherent-functor transport recurrence"
   }
  ],
  "blueprint": {
@@ -68,5 +138,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-frobenius-transport-induction",
+  "worker": "stage1",
+  "summary": "Expanded the m-th-iterate assertion into a direct induction. The auxiliary repeated composite E_r is defined, the r=1 case follows from d_1=id and functoriality, and the successor equality is obtained by naturality of eta, the coherence d_{r+1}^{-1}∘T(d_r)=b_r, and functoriality of H. No additional child node is needed.",
+  "blueprint": "Steps 1-4 realize the proof's m-th-iterate assertion: define the repeated degree-one composite, verify the base, perform the naturality/coherence calculation, and conclude by induction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-db2685153",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-db2685153 (reviewer sub-agent of L); spot-checked: I read the item in full, along with its parent lem-trf-frobenius-operator-compact-description (all 5 steps), def-nagata-category (Mathlib leaf CategoryTheory.Category), the sk-d-weil unit (no steps) and the main-20261015 parent statement and proof. The statement is byte-identical to the base node; the delivery changes only status, proof, proof_deps, proof_origin, the searches and split_report. It adds no new nodes and declares no tool uses. The types are consistent: T(d_r):TP_rM->T^{r+1}M and d_{r+1}^{-1}:T^{r+1}M->P_{r+1}M, so the coherence equals b_r; S_r and tau_r both map H(M)->H(P_rM). I checked small cases: r=1; r=2, where b_1=d_2^{-1} because d_1=id; the identity-functor case, where both sides are eta^r; one-object (monoid) categories, where the factor order is right; and the empty category. Step 3 checked: H(d_r)S_r=E_r, naturality of eta at u=d_{r,M} gives eta_{T^rM}H(d_r)=H(Td_r)eta_{P_rM}, then coherence, the induction hypothesis and the recurrence. The parent's step 3 supplies every hypothesis (C=D^b_c, H=RGamma_c, P_1=T, d_1=id, eta=tau_c natural). The nearest existing node, lem-trf-global-frobenius-iterate-formula (powers of a G-algebra operator), is a different statement, not a duplicate. The item is not a restated parent clause: it is the induction the parent applies. There is no route issue, no SGA, no target or coefficient category involved, and no changes."
  }
 }
