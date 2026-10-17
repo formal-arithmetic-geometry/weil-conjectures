@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-tw-dual-negation",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Weight of the linear dual",
- "statement": "In the setting of [def-weil-punctual-weights], if a lisse\nWeil sheaf $\\mathcal F$ is\npunctually $\\iota$-pure of weight $w$, then its linear dual\n$\\mathcal F^\\vee$ ([def-real-weil-representation-operations]) is punctually $\\iota$-pure of weight $-w$.",
+ "statement": "Fix primes $p$ and $\\ell\\ne p$, an integer $a\\ge1$, $q=p^a$, $k_0=\\mathbf F_q$, an algebraic closure $k$ of $k_0$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and an isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. Let $Y_0$ be a finite-type $k_0$-scheme and put $Y=Y_0\\times_{k_0}k$. Let $\\mathcal F$ be a lisse finite-rank $\\Qlb$-Weil sheaf [def-weil-weil-sheaf-complex], and let $w\\in\\mathbf R$. If $\\mathcal F$ is punctually $\\iota$-pure of weight $w$ [def-weil-punctual-weights], then its linear dual $\\mathcal F^\\vee=\\mathcal Hom_{\\Qlb}(\\mathcal F,\\Qlb_Y)$, with the contragredient Weil structure of [def-real-weil-representation-operations], is punctually $\\iota$-pure of weight $-w$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-dual-negation.md",
   "place": "node lem-tw-dual-negation, order 2599"
@@ -19,18 +19,33 @@
  ],
  "proof": [
   {
-   "text": "The Frobenius eigenvalues on the dual stalk at a closed point $y$ are\nthe inverses of the eigenvalues of $F_y$ on $\\mathcal F_{\\bar y}$ ([p-linear-spectra])\n(the dual representation), so the complex moduli are\n$q_y^{-w/2}$ by [lem-tw-multiplicativity], which is weight $-w$\nin [def-weil-punctual-weights].",
+   "text": "Fix any closed point $y$ and geometric point $\\bar y$ over it, and put $V=\\mathcal F_{\\bar y}$ and $A=F_{y,\\mathcal F}$. By [lem-tw-dual-stalk-frobenius], $\\mathcal F^\\vee$ is a constructible $\\Qlb$-Weil sheaf, so [def-weil-punctual-weights] applies to it, and this comparison identifies the Frobenius of $(\\mathcal F^\\vee)_{\\bar y}$ with $(A^{-1})^*$ on $V^\\vee$. Here $V$ is finite-dimensional and $A$ is invertible, as specified by this comparison. The dual clause of [p-linear-spectra] therefore gives every eigenvalue $\\beta$ of the dual stalk as $\\beta=\\alpha^{-1}$ for an eigenvalue $\\alpha$ of $A$. Also $\\alpha\\ne0$: if $Av=0v$ for a nonzero eigenvector, applying $A^{-1}$ gives $v=0$, a contradiction.",
    "uses": [
+    "lem-tw-dual-stalk-frobenius",
     "p-linear-spectra",
-    "lem-tw-multiplicativity",
     "def-weil-punctual-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-dual-negation.md",
+    "place": "Proof, first sentence; expanded using the complex absolute-value definition of punctual purity"
+   }
+  },
+  {
+   "text": "For the eigenvalue $\\alpha$ just obtained, punctual purity [def-weil-punctual-weights] says $|\\iota(\\alpha)|=q_y^{w/2}$, where $q_y=\\#\\kappa(y)>0$. Since $\\iota$ is a field isomorphism and $\\alpha\\ne0$,\n$$\n |\\iota(\\beta)|=|\\iota(\\alpha^{-1})|=|\\iota(\\alpha)^{-1}|=|\\iota(\\alpha)|^{-1}=(q_y^{w/2})^{-1}=q_y^{(-w)/2}.\n$$\nThe last equality is the elementary exponent identity for a positive real base. This holds for every dual eigenvalue at every closed point, so, $\\mathcal F^\\vee$ being a constructible $\\Qlb$-Weil sheaf by step 1, it is exactly punctual $\\iota$-purity of weight $-w$ in [def-weil-punctual-weights].",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-dual-negation.md",
+    "place": "Proof, first sentence; expanded using the complex absolute-value definition of punctual purity"
+   }
   }
  ],
  "proof_deps": [
+  "lem-tw-dual-stalk-frobenius",
   "p-linear-spectra",
-  "lem-tw-multiplicativity",
   "def-weil-punctual-weights"
  ],
  "proof_origin": {
@@ -38,9 +53,45 @@
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-dual-negation.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|IsPunctuallyPureOfWeight|IsPureOfWeight",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: no lisse Weil sheaf or Frobenius-equivariant dual-stalk theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dual of a pure lisse Weil sheaf has negative weight",
+   "results": "LieAlgebra.IsKilling.coroot_neg, FDRep.char_dual, LieModule.Weight.coe_neg, RootPairing.Hom.weight_coweight_transpose_apply, LieModule.Weight.toLinear_neg, Representation.dual, RootPairing.Hom.weight_coweight_transpose, Lat.dualEquiv_inverse",
+   "date": "2026-10-17",
+   "verdict": "no match: no lisse Weil sheaf or Frobenius-equivariant dual-stalk theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPunctuallyPureOfWeight\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: no lisse Weil sheaf or Frobenius-equivariant dual-stalk theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The linear dual of a lisse Weil sheaf punctually pure of weight w is punctually pure of weight minus w",
+   "results": "CategoryTheory.Sheaf.H, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.ofSheafLightProfinite, LightCondAb.ofSheafLightProfinite, instAbelianLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: no lisse Weil sheaf or Frobenius-equivariant dual-stalk theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eigenvalues of the contragredient inverse transpose are reciprocal eigenvalues and complex absolute values invert",
+   "results": "Matrix.eigenvalues_self_mul_conjTranspose_nonneg, Matrix.eigenvalues_conjTranspose_mul_self_nonneg, Matrix.spectrum_toEuclideanLin, Module.End.HasUnifEigenvalue.of_mem_spectrum, Module.End.mem_eigenspace_intrinsicStar_iff, Module.End.spectrum_intrinsicStar, Module.End.hasUnifEigenvalue_iff_mem_spectrum, Matrix.IsHermitian.spectrum_toEuclideanLin",
+   "date": "2026-10-17",
+   "verdict": "no match: no lisse Weil sheaf or Frobenius-equivariant dual-stalk theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +120,20 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-r-real-linear"
+ "unit": "sk-r-real-linear",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-tw-dual-negation",
+  "worker": "stage1",
+  "summary": "Expanded the full coefficient and scheme datum without changing hypotheses; separated the dual-stalk comparison, reciprocal-spectrum theorem, and elementary complex-norm calculation. Removed the inapplicable ell-adic multiplicativity citation; the exact project dual-stalk theorem is supplied as an attachment candidate.",
+  "blueprint": "The first sentence of the master proof and the unchanged main-20261015 statement: contragredient stalk, inverse eigenvalues, and complex norms. The unit duality-negates-weights consequence is realized without using the incompatible valuation convention."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-e7779404d",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-e7779404d (reviewer sub-agent of L); spot-checked: I read the whole delivery: master and main-20261015 blueprint statement and proof (identical), the unit sk-r-real-linear Duality paragraph, and every cited node in full, including the blueprint_updates of p-linear-spectra and def-weil-punctual-weights. The item statement matches the blueprint with the same hypotheses: finite-type Y_0, lisse finite-rank sheaf, Qlb coefficients, fixed iota, real w. Nothing is weakened. Step 1 is correct: the new node's identity c(F_{F^vee} lambda)(v) = c(lambda)(F^{-1}v) makes the dual Frobenius conjugate to (A^{-1})^*, which is the f^vee of p-linear-spectra (invertible f), so the dual eigenvalues are the alpha^{-1}. p-linear-spectra is in a cited unit, so it is on route. Step 2 is genuinely elementary: |iota(alpha^{-1})| = q_y^{-w/2}. I tested the sign on the Tate twist (q^{-1} becomes q, weight -2 becomes +2), a unipotent block, empty Y_0 and rank 0. Removing the lem-tw-multiplicativity citation is justified: def-tw-eigenvalue normalizes the ell-adic valuation by v(q)=1, which is impossible for ell != p, and its weights are integers. This should go to HUMAN.md. The new node lem-tw-dual-stalk-frobenius is true, statement-only, makes no weight claim and is strictly smaller than the item. I searched dag/nodes for duplicates; the closest candidates (p-real-operations, prop-pod-dual-tate-data-compatibility, def-pod-dual-tate-datum, lem-per-dual-lisse-tensor, lem-a1-local-boundary-duality) do not state it. The Lean candidate WeilSheaf.nonempty_equiv_stalk_dual (slopmaster2 Dual.lean:347, via stalkAtDualEquiv) is plausible, but it is in the pro-etale model, so I do not certify the attachment. FIX: step 2 applied def-weil-punctual-weights to F^vee, which needs F^vee to be a constructible Qlb-Weil sheaf, and nothing cited said so. I added to the new node the clause that F^vee is again a lisse finite-rank, hence constructible, Qlb-Weil sheaf (true; Lean IsLisse.dual). Item steps 1 and 2 now take it from there, and step 1's uses now include def-weil-punctual-weights. Noted but not repaired, all inherited from the blueprint: 'lisse' has no definition node in the constructible-heart model, and the contragredient structure is cited to the Weil-representation definition; the new node writes the sheaf-level structure inline. The report mentions a citations.json that is not in the commit. No tool_uses, no drops, no SGA.; 2 file(s) fixed by the reviewer"
+ }
 }

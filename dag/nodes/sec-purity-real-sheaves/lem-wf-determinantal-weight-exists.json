@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-determinantal-weight-exists",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Purity of the determinant line",
@@ -12,45 +12,143 @@
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-exists.md",
   "place": "node lem-wf-determinantal-weight-exists, order 2632"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-curve",
+  "def-wf-fundamental-representation",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-real-weil-representation-operations",
+  "def-mg-determinant-line",
+  "def-weil-punctual-weights",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-hypotheses"
+ ],
  "proof": [
   {
-   "text": "The determinant line $\\det(\\mathcal V)=\\bigwedge^r\\mathcal V$ of\n[def-mg-determinant-line] is a lisse Weil sheaf of rank one on\n$X_0$. With respect to the fundamental representation of\n[def-wf-fundamental-representation] it is given by the continuous\ncharacter $\\chi_{\\det}=\\det\\circ\\rho_{\\mathcal V}$ of $W(X_0,\\bar x)$\nwith values in the finite coefficient field $E$ over which\n$\\mathcal V$ is defined. The finite geometric image theorem\n[thm-wf-rank-one-finite-geometric-image-curve], applied to the normal\ngeometrically connected curve $X_0$ and to $\\chi_{\\det}$, says that\n$\\chi_{\\det}(\\pi_1(X))$ is finite; hence the purity statement of\n[cor-wf-rank-one-punctual-purity-curve] applies to\n$\\det(\\mathcal V)$ and exhibits a real number $a$ with\n$|\\iota(\\alpha)|=q_y^{a/2}$ for every closed point $y\\in|X_0|$ and\nevery eigenvalue $\\alpha$ of the local geometric-Frobenius operator\n$F_y$ of [def-weil-local-frobenius-trace]. This is punctual\n$\\iota$-purity of weight $a$ in the sense of\n[def-weil-punctual-weights].",
+   "text": "Choose a geometric base point of $X=X_0\\times_{k_0}k$. Use the fundamental representation of [def-wf-fundamental-representation], which is continuous by [lem-wf-weil-fundamental-representation]. Its finite coefficient field can be chosen as follows. By [def-pod-lisse-l-adic-sheaves], the underlying lisse $\\Qlb$-sheaf is represented by a lisse $E$-sheaf for some finite $E/\\mathbf Q_\\ell$. Choose an $E$-basis of its fibre. The degree-one Weil operator $T_s$ in [def-wf-fundamental-representation] and its inverse have finitely many matrix entries in $\\Qlb$. Enlarge $E$ to contain these entries; this remains finite over $\\mathbf Q_\\ell$. The conjugation identity for $T_s$ and the geometric action holds over this $E$, since it holds after the injective scalar extension to $\\Qlb$. Consequently the formula $\\rho(\\gamma s^n)=\\rho_{\\rm geom}(\\gamma)T_s^n$ gives the same Weil representation over $E$. By [cor-galois-lisse-representations](2), the lisse $E$-model gives a continuous $E$-representation of $\\pi_1(X,\\bar x)$ on its fibre, and the equivalence commutes with scalar extension to $\\Qlb$; hence $\\rho_{\\rm geom}$ is this $E$-representation extended to $V$, and in the chosen $E$-basis it takes values in $\\operatorname{GL}_r(E)$. Since $T_s^{\\pm1}$ also has entries in $E$, $\\rho$ takes values in $\\operatorname{GL}_r(E)$, and it is continuous by [lem-wf-weil-fundamental-representation] ($E$ carries the subspace topology of $\\Qlb$). Thus it is a continuous $E$-representation.",
+   "uses": [
+    "def-wf-fundamental-representation",
+    "lem-wf-weil-fundamental-representation",
+    "def-pod-lisse-l-adic-sheaves",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-exists.proof.md",
+    "place": "proof, first paragraph"
+   }
+  },
+  {
+   "text": "By [def-mg-determinant-line], $\\mathcal L=\\det(\\mathcal V)$ is the rank-one lisse Weil sheaf with character $\\chi=\\det\\circ\\rho:W(X_0)\\to E^\\times$. This character is continuous: in the chosen finite basis its value is the determinant polynomial in the matrix entries of $\\rho$; the inverse is obtained by applying that polynomial to $\\rho(g^{-1})$. The curve in the statement is normal and geometrically connected by hypothesis, and by [def-pc-curve] it is integral, separated and of finite type over $k_0$ and of dimension one, hence irreducible and pure of dimension one; the coefficient convention of [def-weil-punctual-weights] has $\\ell\\ne p$, hence $\\ell\\nmid q$. Therefore [thm-wf-rank-one-finite-geometric-image-curve] applies to $\\chi$ and gives finite geometric image. Now [cor-wf-rank-one-punctual-purity-curve], for this same character and the restriction of the fixed $\\iota$ to $E$, says that $\\mathcal L$ is punctually $\\iota$-pure of the real weight $a=2\\log_q|\\iota(c)|$, where $c=\\chi(s)\\ne0$. This proves existence in exactly the punctual-purity convention of [def-weil-punctual-weights].",
+   "uses": [
+    "def-pc-curve",
+    "def-mg-determinant-line",
+    "def-weil-punctual-weights",
+    "thm-wf-rank-one-finite-geometric-image-curve",
+    "cor-wf-rank-one-punctual-purity-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-exists.proof.md",
+    "place": "proof, first paragraph"
+   }
+  },
+  {
+   "text": "There is a closed point $y$ of $X_0$. Indeed $X_0$ is nonempty by geometric connectedness in [def-weil-geometric-hypotheses], and quasi-compact because its structure morphism is of finite type ([def-weil-finite-type-morphism]). Its topology is Kolmogorov: distinct points in an affine chart are distinct prime ideals and are distinguished by a basic open $D(f)$ ([def-weil-affine-spectrum]); if two points have no common affine chart, any affine neighborhood of the first omits the second. Hence [lem-sc-quasi-compact-kolmogorov-closed-point] applies to $X_0$. By [lem-kun-closed-point-field](a), $\\kappa(y)$ is finite over $k_0$, so it is a finite field with cardinality $q_y>1$.",
+   "uses": [
+    "def-weil-geometric-hypotheses",
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-exists.proof.md",
+    "place": "proof, second paragraph: existence of a closed point"
+   }
+  },
+  {
+   "text": "Suppose $a$ and $a'$ are both punctual purity weights of $\\mathcal L$. By [def-mg-determinant-line] its stalk at the point chosen in step 3 is one-dimensional. The local operator $F_y$ of [def-weil-local-frobenius-trace] is a composite of isomorphisms (point transport, pullback comparisons and the iterated Weil isomorphism). In a basis $v\\ne0$ write $F_y(v)=\\alpha v$; invertibility gives $\\alpha\\ne0$. The two purity conditions in [def-weil-punctual-weights] give $q_y^{a/2}=|\\iota(\\alpha)|=q_y^{a'/2}$. Taking real logarithms gives $(a/2)\\log q_y=(a'/2)\\log q_y$. Since $q_y>1$, $\\log q_y>0$, so $a=a'$. Together with step 2 this proves exactly one real purity weight. This argument uses only that the determinant has rank one; irreducibility is not needed for this particular conclusion.",
    "uses": [
     "def-mg-determinant-line",
-    "def-wf-fundamental-representation",
-    "thm-wf-rank-one-finite-geometric-image-curve",
-    "cor-wf-rank-one-punctual-purity-curve",
     "def-weil-local-frobenius-trace",
     "def-weil-punctual-weights"
    ],
-   "elementary": false
-  },
-  {
-   "text": "For uniqueness, suppose that $\\det(\\mathcal V)$ is punctually\n$\\iota$-pure of weights $a$ and $a'$ in the sense of\n[def-weil-punctual-weights]. The curve $X_0$ has a closed point\n$y$. The operator $F_y$ of\n[def-weil-local-frobenius-trace] is an automorphism of the\none-dimensional stalk at $y$, because the Weil structure of\n$\\det(\\mathcal V)$ is an isomorphism, so $F_y$ has a nonzero\neigenvalue $\\alpha$; then\n$q_y^{a/2}=|\\iota(\\alpha)|=q_y^{a'/2}$ with\n$q_y=\\#\\kappa(y)>1$, so $a=a'$.",
-   "uses": [
-    "def-weil-punctual-weights",
-    "def-weil-local-frobenius-trace"
-   ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-exists.proof.md",
+    "place": "proof, second paragraph: uniqueness"
+   }
   }
  ],
  "proof_deps": [
-  "def-mg-determinant-line",
   "def-wf-fundamental-representation",
+  "lem-wf-weil-fundamental-representation",
+  "def-pod-lisse-l-adic-sheaves",
+  "cor-galois-lisse-representations",
+  "def-pc-curve",
+  "def-mg-determinant-line",
+  "def-weil-punctual-weights",
   "thm-wf-rank-one-finite-geometric-image-curve",
   "cor-wf-rank-one-punctual-purity-curve",
-  "def-weil-local-frobenius-trace",
-  "def-weil-punctual-weights"
+  "def-weil-geometric-hypotheses",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-kun-closed-point-field",
+  "def-weil-local-frobenius-trace"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-exists.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-exists.proof.md",
+  "place": "First paragraph (rank-one reduction) and second paragraph (closed point and uniqueness), with finite-coefficient details expanded from the lisse coefficient conventions."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsPunctuallyPure|HasDetWeight|determinantal|lisse.*Weil|Weil.*sheaf",
+   "results": "Hits: none. None states punctual purity of the determinant of a lisse Weil sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant of a lisse Weil sheaf on a curve over a finite field is punctually pure of a unique real weight",
+   "results": "Hits: LinearMap.det_eq_det_mul_det, LinearEquiv.det, ContinuousLinearMap.det, WeierstrassCurve.isUnit_Δ, NumberField.mixedEmbedding.det_fderivPolarCoordRealSymm, NumberField.mixedEmbedding.fundamentalCone.abs_det_completeBasis_equivFunL_symm, LieModule.Weight.instFinite, Complex.det_conjAe. None states punctual purity of the determinant of a lisse Weil sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weil\", \"pure\"",
+   "results": "Hits: none. None states punctual purity of the determinant of a lisse Weil sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an irreducible lisse Weil sheaf on a geometrically connected curve over a finite field, its determinant line has a unique real punctual purity weight",
+   "results": "Hits: WittVector.isocrystal_classification, FDRep.simple_iff_char_is_norm_one, groupCohomology.Hilbert90.aux_ne_zero, LieModule.zero_lt_finrank_genWeightSpace, FDRep.finrank_hom_simple_simple, FDRep.char_one, FDRep.simple_iff_end_is_rank_one, LieModule.exists₂_genWeightSpace_smul_add_eq_bot. None states punctual purity of the determinant of a lisse Weil sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "punctual.*pur|pur.*weight|frobeniusWeight|IsLisse|WeilGroup",
+   "results": "Only Mathlib/NumberTheory/SelbergSieve.lean:97, a tactic quotation using pure and sieve weights; no Weil purity statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rank one continuous character of the Weil group of a curve over a finite field has Frobenius eigenvalues with the same normalized complex absolute value at all closed points",
+   "results": "Hits: spectralNorm_unique_of_finiteDimensional_normal, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, NumberField.InfinitePlace.card_eq_card_isUnramifiedIn, spectralNorm_eq_invariantExtension, FiniteField.algebraMap_norm_eq_pow, NumberField.InfinitePlace.card_isUnramified_compl, IsUnramifiedAtInfinitePlaces.card_infinitePlace, spectralNorm_eq_iSup_of_finiteDimensional_normal. None states punctual purity of the determinant of a lisse Weil sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -77,5 +175,30 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-detweights"
+ "unit": "sk-d-real-detweights",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-determinantal-weight-exists",
+  "worker": "stage1",
+  "group": "Q136",
+  "summary": "Checked current blueprint and project Lean; no exact complete attachment. Retained the statement and rank-one purity route. Expanded finite-coefficient descent and the determinant character; supplied existing closed-point and residue-field results for uniqueness. No new nodes. All citations checked against statements; genuine off-unit tool uses declared.",
+  "blueprint": "Current main-20261015 item proof paragraph 1 is realized by steps 1-2; paragraph 2 by steps 3-4. Unit sk-d-real-detweights uses rank-one purity from sk-p-real-rankone; this route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic residue-field finiteness at a closed point of a finite-type scheme; needed for q_y>1, with no substitute in the determinant-weight unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-68e49376d",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-68e49376d (reviewer sub-agent of L); spot-checked: I read the whole item, the main-20261015 blueprint text and proof (the same as master apart from the order number), the unit sk-d-real-detweights, the chapter record, and the statement of every cited node, including their blueprint_updates. The statement is unchanged and the delivery adds no new nodes. The route is det∘ρ, then the finite geometric image theorem and the rank-one purity corollary from sk-p-real-rankone (the unit's own route), then a closed point for uniqueness. Hypotheses checked: normal and geometrically connected (nonempty) come from the statement, ℓ≠p comes from def-weil-punctual-weights, and E finite with χ continuous comes from step 1. The T0 argument is correct; the closed point comes from the Mathlib leaf IsClosed.exists_closed_singleton, and q_y>1 from lem-kun-closed-point-field(a). F_y is a composite of isomorphisms (point transports, comparisons and θ), so its eigenvalue is nonzero and a=a'. Edge cases tested: constant sheaf (weight 0), degree character (weight 2log_q|ι(c)|), empty X_0 (excluded by nonemptiness), r=0 (excluded by irreducibility). No cycle, and proof_deps equals the union of the uses. Fixes: (1) step 2 used separated, finite type and pure dimension one with no definition of 'curve'. I added def-pc-curve (integral, separated, finite type, dimension 1, hence pure) to stmt_deps and to step 2. (2) Step 1 used, without a citation, that ρ_geom is the scalar extension of the lisse E-model's continuous E-representation. I added cor-galois-lisse-representations(2), which is on route via sk-lem-finite, and wrote out that ρ is GL_r(E)-valued and continuous. (3) I trimmed tool_uses to lem-kun-closed-point-field, the only off-route node (sk-prop-sf-kunneth-ordinary), and accepted it as a generic residue-field fact. lem-wf-weil-fundamental-representation (sk-d-monodromy) and the Kolmogorov closed-point lemma (sk-def-pic, a Mathlib leaf) are on route and need no declaration. A pre-existing DAG-wide identification between the pro-étale constructible heart and Weil II lisse Weil sheaves is noted in review.md as an observation, not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ }
 }

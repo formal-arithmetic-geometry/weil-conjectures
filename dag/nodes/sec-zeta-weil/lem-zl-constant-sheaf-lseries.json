@@ -4,9 +4,104 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
   "place": "Trace-transport setup specialized to the constant coefficient object; hidden construction in the rationality proof's Step 4"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the normalized constant datum of [lem-zl-constant-weil-datum], not an arbitrary Weil structure on the underlying constant sheaf. Its geometric and model Weil maps send each constant stalk element $a\\in A_n$ to $a$. For $m\\geq1$, the iterate in [def-trf-iterated-weil-map] still sends $a$ to $a$: the base case is the specified map; adjoining the next pulled-back map composes the identity with the identity on the constant stalk. The pullback-composition identifications merely regroup these same constant coefficient identifications. The same calculation applies to the geometric iterate in [def-weil-local-frobenius-trace]. In particular no scalar multiplier or Tate twist is introduced by iteration.",
+   "uses": [
+    "lem-zl-constant-weil-datum",
+    "def-trf-iterated-weil-map",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+    "place": "Setup, normalized compatible tower and its rationalization; expansion of the constant-datum specialization"
+   }
+  },
+  {
+   "text": "Fix a closed point $y$ and a point $x\\in Y_0(\\mathbf F_{q^{d_y}})$ above it as in the statement. In the local geometric construction of [def-weil-local-frobenius-trace], follow a constant coefficient $a$ through the point transport of [def-weil-frobenius-point-transport]: restriction takes the constant section $a$ to the constant section $a$, insertion into the inverse-image colimit keeps its label $a$, and the pullback comparison sends it to $a\\otimes1$. The canonical constant structure from [def-weil-constant-weil-structure] sends $a\\otimes1$ back to $a$. Repeating this $d_y$ times and applying Step 1 gives $F_y=1$. This computation is valid at each finite level and on the completed coefficient object: there the canonical structure is defined by its commuting projections to the finite levels, so the same calculation fixes every compatible family $(a_n)_n$. At the rational stage both the point transport and the constant structure are their integral maps tensored with $E$, hence fix every $a\\otimes\\lambda$. The stalk is $E$ in degree zero by the rational constant datum [lem-zl-constant-weil-datum]; there are no other cohomological degrees. The return used here is $g_Y^{d_y}\\bar x=\\bar xg_s^{d_y}$, not an equality $g_Y^{d_y}\\bar x=\\bar x$.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-frobenius-point-transport",
+    "def-weil-constant-weil-structure",
+    "lem-zl-constant-weil-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+    "place": "Setup, rationalized constant datum; explicit geometric local transport on constant sections"
+   }
+  },
+  {
+   "text": "At finite level use instead the displayed local composite in [def-trf-frobenius-operators], with $m=d_y$. Its first arrow $\\rho_{x,m}$ identifies the constant stalk with the stalk pulled back by $\\Phi^m$ at the fixed point, and keeps $a\\in A_n$ unchanged. The remaining arrows compose as $\\varphi_n^{[m]}\\circ\\kappa^{(m)}$, exactly the scheme-Frobenius map $u_m$ of [def-trf-iterated-weil-map]. For $m=1$ this is the canonical model map by the last sentence of [lem-zl-constant-weil-datum]. By the multiplicative-iterate assertion of [prop-trf-scheme-galois-comparison], for successive $m$ this composite is the composite of the pulled-back canonical model maps, all identities on constant stalks by Step 1. Thus the complete composite sends $a$ to $a$, and $F_{x,d_y}=1_{A_n}$ for every $n$. The transitions are coefficient reductions, so these identities are compatible and induce the identity on the integral realization. Rationalizing that identity gives $1_E$ on the rationalized constant datum. This uses realization of the whole compatible system followed by rationalization; it does not tensor an individual torsion module $A_n$ with $E$.",
+   "uses": [
+    "def-trf-frobenius-operators",
+    "def-trf-iterated-weil-map",
+    "lem-zl-constant-weil-datum",
+    "prop-trf-scheme-galois-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+    "place": "Setup, compatible finite-level Weil pairs; explicit constant model-map stalk calculation"
+   }
+  },
+  {
+   "text": "For either rational local operator obtained in Steps 2 and 3, choose the single-element basis $(1)$ of the one-dimensional $E$-vector space $E$. The matrix of $1-T^{d_y}F_y$ is the $1\\times1$ matrix $(1-T^{d_y})$. Its determinant, by the one-term determinant formula, is $1-T^{d_y}$. The constant complex is concentrated in degree zero, so the alternating stalk determinant has just this factor. Its formal inverse is $\\sum_{j\\geq0}T^{jd_y}$, since multiplying by $1-T^{d_y}$ cancels every coefficient of positive degree and leaves constant coefficient $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+    "place": "Clause (b), local determinant specialized to the constant rank-one stalk"
+   }
+  },
+  {
+   "text": "Apply [prop-euler-product] to the finite-type scheme $Y_0$. It gives the coefficientwise locally finite identity $Z(Y_0,T)=\\prod_y(1-T^{d_y})^{-1}$ over $\\mathbf Q$. Its notation is that of [def-weil-point-counts-zeta], which agrees here with [sk-def-zeta]: both use the same field-valued points over the specified subfield $\\mathbf F_{q^r}\\subset k$, and both define $Z=\\exp(\\sum_{r\\geq1}N_rT^r/r)$ and $d_y=[\\kappa(y):k_0]$. The finite-type finiteness of these point sets supplied by clause 1 of [lem-weil-point-counts-finite] means that the infinite-set convention in [sk-def-zeta] never intervenes. Thus this is exactly the zeta series occurring in the conclusion, not a series of unnormalized point counts.",
+   "uses": [
+    "prop-euler-product",
+    "def-weil-point-counts-zeta",
+    "sk-def-zeta",
+    "lem-weil-point-counts-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-euler/prop-euler-product.md",
+    "place": "Closed-point and integral-series identity, displayed product and its local finiteness"
+   }
+  },
+  {
+   "text": "Fix $M\\geq0$. Clause 2 of [lem-weil-point-counts-finite] makes the set of closed points with $d_y\\leq M$ finite, and by [prop-euler-product] only these points affect the product modulo $T^{M+1}$. Each other local factor from Step 4 is $1$ modulo $T^{M+1}$. Apply the coefficientwise ring homomorphism $\\iota:\\mathbf Q[[T]]\\to E[[T]]$ of [def-weil-coefficientwise-ring-hom-map] to this finite truncated product. It preserves multiplication and fixes $T$ and $1$, hence sends each inverse factor to the inverse of $1-T^{d_y}$ (apply it to the equation defining the inverse). It follows that modulo $T^{M+1}$ the product of the constant-sheaf local determinant inverses is $\\iota Z(Y_0,T)$. The same finite set of factors works over $E$, proving local finiteness there. Taking $M$ equal to each coefficient index proves equality of the formal series. For $M=0$ all products have value $1$ modulo $T$; if $Y_0$ is empty every product is the empty product $1$.",
+   "uses": [
+    "prop-euler-product",
+    "def-weil-coefficientwise-ring-hom-map",
+    "lem-weil-point-counts-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+    "place": "Clause (b), coefficientwise product under a coefficient embedding; finite truncations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-constant-weil-datum",
+  "def-trf-iterated-weil-map",
+  "def-weil-local-frobenius-trace",
+  "def-weil-frobenius-point-transport",
+  "def-weil-constant-weil-structure",
+  "def-trf-frobenius-operators",
+  "prop-trf-scheme-galois-comparison",
+  "prop-euler-product",
+  "def-weil-point-counts-zeta",
+  "sk-def-zeta",
+  "lem-weil-point-counts-finite",
+  "def-weil-coefficientwise-ring-hom-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+  "place": "Setup and clause (b), constant-datum specialization; geometric stalk and finite truncation computations written out by Q75"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +158,73 @@
    "results": "ZMod.LFunction, NumberField.dedekindZeta, DirichletCharacter.LFunctionTrivChar, DirichletCharacter.LFunctionTrivChar₁, ZMod.LFunction_modOne_eq, ArithmeticFunction.LSeries_zeta_eulerProduct_exp_log, DirichletCharacter.LFunctionTrivChar_eq_mul_riemannZeta, DirichletCharacter.LSeries_eulerProduct_tprod",
    "date": "2026-10-17",
    "verdict": "no match: generic constant sheaves, coefficient maps, condensed modules or classical analytic L-functions do not state this scheme/Weil assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The L series of the rank one constant Weil sheaf over a finite field equals the Hasse Weil zeta formal power series",
+   "results": "ArithmeticFunction.LSeries_zeta_eq, DirichletCharacter.LSeries_modOne_eq, ZMod.LFunction_eq_LSeries and classical analytic L-functions; none concerns scheme/Weil stalks.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*Weil|Frobenius.*stalk|zetaSeries_eq_tprod|lSeries",
+   "results": "25 hits, classical analytic LSeries files and imports; none gives the scheme/Weil assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For the constant rank one etale sheaf local Frobenius is identity and its Euler product is the zeta function of a scheme over a finite field",
+   "results": "iterateFrobeniusEquiv_one, frobenius_one, finite-field Frobenius order and StructureSheaf.const_one; different notions, no local Weil operator or formal scheme zeta identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, CategoryTheory.Functor",
+   "results": "CategoryTheory.constantSheaf and constantSheafAdj, isConstant_of_iso and related categorical constant-sheaf statements; source ConstantSheaf.lean:66–91 read; no local Frobenius or zeta identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant coefficient sheaf has trivial local Frobenius and determinant one minus T to the residue field degree",
+   "results": "StructureSheaf.const_one, const_self, restriction identities and WittVector.instIsocrystalStandardOneDimIsocrystal; no local Weil operator statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "zetaSeries_eq_tprod|constantSheaf|Frobenius",
+   "results": "9 hits under NumberTheory: GaussSum, cyclotomic Galois comments and FrobeniusNumber; no Weil-sheaf identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constant Weil sheaf has identity local Frobenius and its Euler product L-series equals the zeta series",
+   "results": "LSeries_one_eq_riemannZeta, ArithmeticFunction.LSeries_zeta_eq, constant-sheaf essential-image lemmas, frobenius_one, WittVector.frobenius_zmodp; no match.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, CategoryTheory.constantSheaf, Frobenius",
+   "results": "0 hits with error unknown identifier Frobenius; invalid query, use the earlier valid categorical Loogle search.",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier; superseded by valid categorical Loogle search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf local Frobenius identity Euler product zeta series",
+   "results": "AlgebraicGeometry.StructureSheaf.const_mul_rev, const_one, const_self, const_mul_cancel', const_mul_cancel, const_mul, BDeRham and BDeRhamPlus; none states the local Weil-operator or scheme-zeta assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-rationality",
@@ -75,7 +233,7 @@
  },
  "id": "lem-zl-constant-sheaf-lseries",
  "title": "Constant sheaf local factors and zeta L-series",
- "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$ and $E=\\Q_\\ell$ [def-weil-l-adic-numbers]. Let $Y_0$ be a separated finite-type $k_0$-scheme [def-weil-scheme-morphism-properties] with $Y=Y_0\\times_{k_0}k$, equipped with the normalized compatible constant datum of [lem-zl-constant-weil-datum]. For every closed point $y$ of $Y_0$, of degree $d_y=[\\kappa(y):k_0]$, the one-circuit local Frobenius on the constant stalk $E$ in degree zero is the identity in both of its forms: the operator $F_y$ of [def-weil-local-frobenius-trace] for the canonical Weil structure $(E_Y,\\theta_E)$, and the rationalization to $E$ of the compatible finite-level stalk operators $F_{x,d_y}$ of [def-trf-frobenius-operators] for the levels $((A_n)_Y,\\varphi_n)$ of that datum, where $x\\in Y_0(\\mathbf F_{q^{d_y}})$ is a point with image $y$ (given by a $k_0$-embedding $\\kappa(y)\\hookrightarrow\\mathbf F_{q^{d_y}}$); each finite-level operator $F_{x,d_y}$ is the identity of the stalk $A_n$. Hence, for either operator, the local determinant factor is $\\det(1-T^{d_y}F_y\\mid E)=1-T^{d_y}$. The Euler product defining the constant sheaf's $L$-series, namely $\\prod_y\\det(1-T^{d_y}F_y\\mid E)^{-1}$, is coefficientwise locally finite and equals the coefficientwise image of $Z(Y_0,T)$ [sk-def-zeta] under $\\iota:\\Q\\hookrightarrow E$ [def-weil-coefficientwise-ring-hom-map].",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$ and $E=\\Q_\\ell$ [def-weil-l-adic-numbers]. Let $Y_0$ be a separated finite-type $k_0$-scheme [def-weil-scheme-morphism-properties] with $Y=Y_0\\times_{k_0}k$, equipped with the normalized compatible constant datum of [lem-zl-constant-weil-datum]. For every closed point $y$ of $Y_0$, of degree $d_y=[\\kappa(y):k_0]$, the one-circuit local Frobenius on the constant stalk $E$ in degree zero is the identity in both of its forms: the operator $F_y$ of [def-weil-local-frobenius-trace] for the canonical Weil structure $(E_Y,\\theta_E)$, and the operator on $E$ obtained by integral realization of the compatible stalk operators $F_{x,d_y}$ and then rationalization of [def-trf-frobenius-operators] for the levels $((A_n)_Y,\\varphi_n)$ of that datum, where $x\\in Y_0(\\mathbf F_{q^{d_y}})$ is a point with image $y$ (given by a $k_0$-embedding $\\kappa(y)\\hookrightarrow\\mathbf F_{q^{d_y}}$); each finite-level operator $F_{x,d_y}$ is the identity of the stalk $A_n$. Hence, for either operator, the local determinant factor is $\\det(1-T^{d_y}F_y\\mid E)=1-T^{d_y}$. The Euler product defining the constant sheaf's $L$-series, namely $\\prod_y\\det(1-T^{d_y}F_y\\mid E)^{-1}$, is coefficientwise locally finite and equals the coefficientwise image of $Z(Y_0,T)$ [sk-def-zeta] under $\\iota:\\Q\\hookrightarrow E$ [def-weil-coefficientwise-ring-hom-map].",
  "stmt_deps": [
   "def-weil-finite-field-fiber",
   "def-weil-l-adic-numbers",
@@ -96,5 +254,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-constant-sheaf-lseries",
+  "worker": "stage1",
+  "summary": "Expanded both constant local Frobenius calculations, computed the rank-one determinant, and used the existing locally finite closed-point Euler product. No new nodes. Clarified that compatible finite operators are realized integrally before rationalization, rather than tensoring each torsion stalk with E.",
+  "blueprint": "sk-thm-rationality, first proof sentence, as repaired in its Steps 4–6: identifies the normalized constant datum local factors with the closed-point zeta factors needed for trace transport. Steps 1–4 handle both operator conventions; Steps 5–6 identify the locally finite product.",
+  "tool_uses": [
+   {
+    "node": "prop-trf-scheme-galois-comparison",
+    "why": "Its multiplicative iterate identifies the local finite-coefficient composite with the iterate of the constant model map; this generic comparison is a tool for the existing constant-datum route, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-97909db63",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-97909db63 (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited node statements in full, plus def-trf-adic-system, def-trf-strict-weil-complex and the blueprint_updates. Sources checked: main-20261015 sk-thm-trace-transport _section.md (the setup and clause (b), the locally finite L-series) and sk-prop-euler/prop-euler-product.md. The statement is true. The only change replaces 'rationalization of compatible finite operators' with 'integral realization of the compatible stalk operators, then rationalization'. This clarifies the wording without changing the meaning, and the report names it. No hypothesis is weakened. Steps 1-3 are correct definitional computations: the datum lemma makes the geometric and model Weil maps identity on constant stalks; c_n is adjoint to a -> constant section a, and the c_{O_E} and theta_E levels are its inverse limit and its tensor with E; kappa_N(x) = x tensor 1; rho_{x,m} uses Phi^m xbar = xbar; the multiplicative iterate kappa^(m) reduces u_m to pulled-back u_1, and u_1 is the model map. Steps 4-6: the 1x1 determinant 1-T^d, then the Euler product, truncated modulo T^{M+1}, sent through the ring homomorphism iota. The zeta-series conventions agree, and the empty scheme and M=0 are handled. Small cases tested: Spec F_q, A^1, Spec F_{q^2} and the empty scheme. There are no new nodes. An rg search over dag/nodes found no duplicate: thm-trf-l-function-euler-product and sk-thm-trace-transport are general, lem-zl-constant-weil-datum does not state F_y, F_{x,d} or the L-series, and there is no relabelling. Route: sk-prop-euler and sk-prop-sf-rf-shriek-preservation are in the closure of the unit's uses; lem-weil-point-counts-finite is Lean-closed and so a tool. I accept the declared tool use of prop-trf-scheme-galois-comparison; it is harmless because the node is already in the route. No SGA source is cited. No fixes were made."
  }
 }

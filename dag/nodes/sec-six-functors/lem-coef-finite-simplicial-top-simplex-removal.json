@@ -1,0 +1,96 @@
+{
+ "id": "lem-coef-finite-simplicial-top-simplex-removal",
+ "kind": "statement",
+ "title": "Removing one top-dimensional nondegenerate simplex",
+ "statement": "Let $A$ be a simplicial set with finitely many nondegenerate simplices, in the conventions of [def-weil-pbc-simplicial-set]. Let $d\\geq0$ and assume every nondegenerate simplex of $A$ has dimension at most $d$. Choose a nondegenerate simplex $\\sigma\\in A_d$. For each $m\\geq0$ define\n$$U_m=A_m\\setminus\\{A(\\alpha)(\\sigma)\\mid\\alpha:[m]\\twoheadrightarrow[d]\\text{ is order preserving}\\}.$$\nThen the $U_m$, with the operators restricted from $A$, form a simplicial subset $U\\subseteq A$. Under this inclusion the nondegenerate simplices of $U$ are exactly the nondegenerate simplices of $A$ other than $\\sigma$. In particular $U$ has finitely many nondegenerate simplices, all of dimension at most $d$, and one fewer nondegenerate $d$-simplex than $A$. Moreover $U_m=A_m$ for $m<d$, $A_d=U_d\\amalg\\{\\sigma\\}$, and every simplex of $A_m\\setminus U_m$ for $m>d$ is degenerate in $A$. The case $d=0$ and the possibility $U=\\varnothing$ are included.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Stacks Tag 018S (lemma-add-simplices), proof: construct the intermediate simplicial subset by adjoining all degeneracies of one nondegenerate simplex, read in reverse at a maximal-dimensional simplex. The resulting deletion formulation is agent-written; the source statement assumes nonempty degrees."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "remove|erase|glue_simplex|attach",
+   "results": "11 hits; Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean; Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean; searched AlgebraicTopology/SimplicialSet",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration constructs the complement of the degeneracies of a specified maximal-dimensional simplex and identifies its remaining nondegenerate simplices; skeletal cell decompositions require an additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite simplicial set with a chosen top dimensional nondegenerate simplex is a boundary pushout of the subcomplex obtained by removing that simplex and its degeneracies",
+   "results": "8 hits; SSet.boundary; SSet.Finite.finite; SSet.Subcomplex.ofSimplex; SSet.degenerate_eq_top_of_hasDimensionLT; Simplicial.term∂Δ[_]; SSet.nonDegenerate; SSet.modelCategoryQuillen.boundary_ι_mem_I; SSet.instFiniteElemObjOppositeSimplexCategoryOpMkNonDegenerateOfFinite",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration constructs the complement of the degeneracies of a specified maximal-dimensional simplex and identifies its remaining nondegenerate simplices; skeletal cell decompositions require an additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Subcomplex\", \"nonDegenerate\"",
+   "results": "6 hits; SSet.Subcomplex.eq_top_iff_contains_nonDegenerate; SSet.Subcomplex.mem_nonDegenerate_iff; SSet.Subcomplex.le_iff_contains_nonDegenerate; SSet.Subcomplex.iSup_ofSimplex_nonDegenerate_eq_top; SSet.Subcomplex.PairingCore.nonDegenerate₁; SSet.Subcomplex.PairingCore.nonDegenerate₂",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration constructs the complement of the degeneracies of a specified maximal-dimensional simplex and identifies its remaining nondegenerate simplices; skeletal cell decompositions require an additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Removing a maximal dimensional nondegenerate simplex from a finite simplicial set leaves a subcomplex and recovers the set by attaching that simplex along its boundary",
+   "results": "8 hits; SSet.Subcomplex.N.mk_surjective; SSet.Subcomplex.N.mk_simplex; SSet.Subcomplex.N.mk; SSet.Subcomplex.Pairing; SSet.Subcomplex.PairingCore; SSet.Subcomplex.ofSimplex; SSet.Subcomplex.PairingCore.surjective'; SSet.Subcomplex.N",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration constructs the complement of the degeneracies of a specified maximal-dimensional simplex and identifies its remaining nondegenerate simplices; skeletal cell decompositions require an additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "def.*[Nn]onDegenerate|def.*[Ss]keleton|def.*[Cc]ompl|lemma.*[Ss]ubcomplex",
+   "results": "5 hits; 17; 46; 126; 252; 325; searched AlgebraicTopology/SimplicialSet/Skeleton.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration constructs the complement of the degeneracies of a specified maximal-dimensional simplex and identifies its remaining nondegenerate simplices; skeletal cell decompositions require an additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial subset can be defined by a collection of nondegenerate simplices closed under faces, in particular all simplices except a chosen maximal dimensional simplex",
+   "results": "8 hits; SSet.Subcomplex.ofSimplex; SSet.Subcomplex.N.mk; SSet.Subcomplex; SSet.S.subcomplex; SSet.boundary; SSet.Subcomplex.N; SSet.Subcomplex.N.mk'; SSet.horn",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration constructs the complement of the degeneracies of a specified maximal-dimensional simplex and identifies its remaining nondegenerate simplices; skeletal cell decompositions require an additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeCellComplexOfMono|relativeCellComplexCellsEquiv|def relativeCellComplex",
+   "results": "7 hits; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean; searched AlgebraicTopology/SimplicialSet",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration constructs the complement of the degeneracies of a specified maximal-dimensional simplex and identifies its remaining nondegenerate simplices; skeletal cell decompositions require an additional construction, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cat-infinity-filtered-finite-calculus",
+  "date": "2026-10-17",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, supporting finite-stage coherent mapping adjunction: the top-simplex removal subargument of the finite-domain double induction in step 5 of lem-coef-cat-infinity-filtered-finite-calculus.",
+   "via": [
+    "lem-coef-cat-infinity-filtered-finite-calculus",
+    "lem-coef-filtered-operadic-unstraightening",
+    "lem-coef-many-object-operad-accessibility",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

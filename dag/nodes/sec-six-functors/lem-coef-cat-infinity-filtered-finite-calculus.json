@@ -87,12 +87,9 @@
    }
   },
   {
-   "text": "First compute the space-valued functor $H_A(C)=\\operatorname{Fun}(A,C)^\\simeq$ for a finite simplicial set $A$. Use an outer induction on dimension (the empty set has dimension $-1$), and at each dimension $d\\geq0$ an inner induction on the number of nondegenerate $d$-simplices. For a chosen top simplex $\\sigma$, remove precisely the simplices whose unique nondegenerate ancestor is $\\sigma$ to form $U\\subseteq A$. This is a simplicial subset: factor any ordinal operator through its surjective and injective parts; a proper face of any other ancestor has dimension less than $d$ and cannot have ancestor $\\sigma$, while an identity injective part preserves that other ancestor. Nondegenerate decomposition gives this description and shows $U$ has one fewer top simplex and all lower-dimensional simplices. The simplex gluing theorem gives $A=U\\amalg_{\\partial\\Delta^d}\\Delta^d$, allowing identified attaching faces. In every simplicial degree, maps from this pushout are pairs of maps agreeing on the boundary, so $\\operatorname{Fun}(A,C)=\\operatorname{Fun}(U,C)\\times_{\\operatorname{Fun}(\\partial\\Delta^d,C)}\\operatorname{Fun}(\\Delta^d,C)$. Boundary restriction on the last factor is an isofibration by exponentiation. Hence this is a homotopy pullback in $\\operatorname{Cat}_\\infty$ by the isofibration pullback theorem, and applying the core, which preserves limits by step 1 at $n=0$, makes it a homotopy pullback of spaces. For a simplex $\\Delta^d$, $H_{\\Delta^d}=R(-)_d$ preserves filtered colimits by step 2. For the empty set $H_{\\varnothing}$ is terminal and the empty-shape space comparison gives preservation. The boundary is finite of dimension less than $d$, so its assertion is available by the outer induction even if its faces identify in $A$; the assertion for $U$ is available by the inner induction, or the outer induction if no top simplices remain. Space finite-limit exactness therefore gives preservation for $H_A$ and completes both inductions. No assumption that $A$ is a quasicategory is used.",
+   "text": "Set $H_A(C)=\\operatorname{Fun}(A,C)^\\simeq$. We prove that $H_A$ preserves small filtered colimits for every finite simplicial set $A$, by outer induction on dimension (the empty set has dimension $-1$) and inner induction on the number of top-dimensional nondegenerate simplices. For $A=\\varnothing$, $H_A$ is the terminal space and preservation follows from the empty-shape clause of space finite-limit exactness. For $A=\\Delta^d$, $H_A=R(-)_d$ by the complete Segal comparison, so preservation follows from step 2.",
    "uses": [
-    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
-    "lem-weil-pbc-simplicial-set-glue-simplex",
-    "lem-coef-infinity-isofibration-exponentiation",
-    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-complete-segal-quasicategory-comparison",
     "lem-coef-spaces-kappa-limit-filtered-colimit"
    ],
    "elementary": false,
@@ -102,7 +99,43 @@
    }
   },
   {
-   "text": "For $L=\\varnothing$, the functor $\\operatorname{Fun}(L,-)$ is constant at the terminal category and preserves filtered colimits by step 4. For nonempty finite $L$, examine the canonical map $\\operatorname{colim}_I\\operatorname{Fun}(L,D_i)\\to\\operatorname{Fun}(L,C)$ after applying $R(-)_n$. By step 2 its source becomes $\\operatorname{colim}_I\\operatorname{Fun}(\\Delta^n\\times L,D_i)^\\simeq$, and the target is $\\operatorname{Fun}(\\Delta^n\\times L,C)^\\simeq$, using the exponential identity from the definition of internal functor simplicial sets. The product $\\Delta^n\\times L$ is finite: each nondegenerate product simplex has dimension at most $n+\\dim L$, since in greater dimension its two coordinates have a common degeneracy, and there are finitely many possibilities in each of the remaining degrees. Step 5 says this map is an equivalence. The comparisons respect precomposition with every simplex operator; equivalence detection by $R$ proves preservation by $\\operatorname{Fun}(L,-)$.",
+   "text": "For nonempty $A$ of dimension $d$, choose a nondegenerate $d$-simplex $\\sigma$. Apply [lem-coef-finite-simplicial-top-simplex-removal] to obtain $U\\subseteq A$, finite with one fewer nondegenerate $d$-simplex and the same lower-dimensional simplices. Its last three clauses are precisely hypotheses (1)-(3) of [lem-weil-pbc-simplicial-set-glue-simplex]. That theorem therefore gives the pushout $A=U\\amalg_{\\partial\\Delta^d}\\Delta^d$ with the characteristic map of $\\sigma$. The attaching map is allowed to identify faces; $d=0$ gives the empty boundary.",
+   "uses": [
+    "lem-coef-finite-simplicial-top-simplex-removal",
+    "lem-weil-pbc-simplicial-set-glue-simplex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Section 3.3, supporting finite-data argument for Proposition 3.3.2 and Theorem 3.3.1; details below are agent-written, not a claim that the paper proves each foundational comparison."
+   }
+  },
+  {
+   "text": "The defining formula for internal functor simplicial sets turns this pushout into the strict simplicial pullback\n$$\\operatorname{Fun}(A,C)=\\operatorname{Fun}(U,C)\\times_{\\operatorname{Fun}(\\partial\\Delta^d,C)}\\operatorname{Fun}(\\Delta^d,C).$$\nIndeed in degree $n$, product with $\\Delta^n$ preserves the degreewise pushout (a pair $(a,t)$ is glued at the same $t$), and maps from that pushout are exactly pairs agreeing on its boundary; restriction in $n$ preserves this identification. Boundary restriction from the last factor is an isofibration by [lem-coef-infinity-isofibration-exponentiation], since the boundary inclusion is degreewise injective. The isofibration pullback theorem makes the square a pullback in $\\operatorname{Cat}_\\infty$. Taking cores preserves it by step 1 with $n=0$. Hence, naturally in $C$ and all restriction maps,\n$$H_A(C)\\simeq H_U(C)\\times^h_{H_{\\partial\\Delta^d}(C)}H_{\\Delta^d}(C).$$",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Section 3.3, supporting finite-data argument for Proposition 3.3.2 and Theorem 3.3.1; details below are agent-written, not a claim that the paper proves each foundational comparison."
+   }
+  },
+  {
+   "text": "The boundary $\\partial\\Delta^d$ is finite of dimension less than $d$: its nondegenerate simplices correspond to proper nonempty subsets of $[d]$. Thus $H_{\\partial\\Delta^d}$ preserves filtered colimits by the outer induction (for $d=0$ use the empty base case). The assertion for $H_U$ is the inner induction hypothesis, or the outer one when no $d$-simplices remain; $U$ has no higher nondegenerate simplices by the removal lemma. The simplex case gives preservation for $H_{\\Delta^d}$. Apply space finite-limit exactness to the natural pullback of step 7. It identifies the canonical map $\\operatorname{colim}_i H_A(D_i)\\to H_A(C)$ with an equivalence of the two pullbacks. This proves the induction step and both inductions. No quasicategory hypothesis on $A$ is used.",
+   "uses": [
+    "lem-coef-spaces-kappa-limit-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Section 3.3, supporting finite-data argument for Proposition 3.3.2 and Theorem 3.3.1; details below are agent-written, not a claim that the paper proves each foundational comparison."
+   }
+  },
+  {
+   "text": "For $L=\\varnothing$, the functor $\\operatorname{Fun}(L,-)$ is constant at the terminal category and preserves filtered colimits by step 4. For nonempty finite $L$, examine the canonical map $\\operatorname{colim}_I\\operatorname{Fun}(L,D_i)\\to\\operatorname{Fun}(L,C)$ after applying $R(-)_n$. By step 2 its source becomes $\\operatorname{colim}_I\\operatorname{Fun}(\\Delta^n\\times L,D_i)^\\simeq$, and the target is $\\operatorname{Fun}(\\Delta^n\\times L,C)^\\simeq$, using the exponential identity from the definition of internal functor simplicial sets. The product $\\Delta^n\\times L$ is finite: each nondegenerate product simplex has dimension at most $n+\\dim L$, since in greater dimension its two coordinates have a common degeneracy, and there are finitely many possibilities in each of the remaining degrees. Step 8 says this map is an equivalence. The comparisons respect precomposition with every simplex operator; equivalence detection by $R$ proves preservation by $\\operatorname{Fun}(L,-)$.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-complete-segal-quasicategory-comparison",
@@ -127,7 +160,7 @@
    }
   },
   {
-   "text": "The objects, arrows and specified simplices in the finite collection generate a finite simplicial subset $L$ of $C$ (take their faces and degeneracies; only finitely many nondegenerate faces occur). The inclusion is an object of $\\operatorname{Fun}(L,C)$. Steps 5 and 7 applied to $H_L$ show that its component comes from some $\\operatorname{Fun}(L,D_i)^\\simeq$. A path in this core is precisely a coherent equivalence of these diagrams, so the resulting $L\\to D_i$ represents all of the prescribed data simultaneously up to coherent equivalence. Multiple finite collections may equally be joined as a finite disjoint union. The case with no prescribed data is covered by nonemptiness of $I$.",
+   "text": "The objects, arrows and specified simplices in the finite collection generate a finite simplicial subset $L$ of $C$ (take their faces and degeneracies; only finitely many nondegenerate faces occur). The inclusion is an object of $\\operatorname{Fun}(L,C)$. Steps 8 and 10 applied to $H_L$ show that its component comes from some $\\operatorname{Fun}(L,D_i)^\\simeq$. A path in this core is precisely a coherent equivalence of these diagrams, so the resulting $L\\to D_i$ represents all of the prescribed data simultaneously up to coherent equivalence. Multiple finite collections may equally be joined as a finite disjoint union. The case with no prescribed data is covered by nonemptiness of $I$.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones"
    ],
@@ -151,7 +184,7 @@
    }
   },
   {
-   "text": "For $u:i\\to j$ in $J$ use the two coherently transported vertices $D(u)x,D(u)y$. They define a coherent point over $R(D_j)_0^2$. The complete Segal mapping-space comparison identifies $\\operatorname{Map}_{D_j}(D(u)x,D(u)y)$ with the homotopy fiber of $R(D_j)_1\\to R(D_j)_0^2$ at this point. Take the filtered colimit of these homotopy pullbacks over $J$. Space finite-limit exactness and its empty-shape clause identify the colimit of the point diagrams with a point and the resulting square with the homotopy fiber of $R(C)_1\\to R(C)_0^2$ at $(r_ix,r_iy)$, using step 9 and preservation of the $R$ levels. This is $\\operatorname{Map}_C(r_ix,r_iy)$. The map is induced by the cocone on arrows, so it is exactly the displayed comparison. Naturality in the objects follows from the natural mapping-fiber comparison. For composition, use $R(D_j)_2\\simeq R(D_j)_1\\times_{R(D_j)_0}R(D_j)_1$: $d_1$ gives composition, the outer faces give the two factors, and the degeneracy gives the identity. Preservation of these levels and face maps makes this same calculation commute with precomposition and postcomposition. In every higher degree the same simplicial operators are retained, so the comparison respects their coherent associativity and all higher compositions as well.",
+   "text": "For $u:i\\to j$ in $J$ use the two coherently transported vertices $D(u)x,D(u)y$. They define a coherent point over $R(D_j)_0^2$. The complete Segal mapping-space comparison identifies $\\operatorname{Map}_{D_j}(D(u)x,D(u)y)$ with the homotopy fiber of $R(D_j)_1\\to R(D_j)_0^2$ at this point. Take the filtered colimit of these homotopy pullbacks over $J$. Space finite-limit exactness and its empty-shape clause identify the colimit of the point diagrams with a point and the resulting square with the homotopy fiber of $R(C)_1\\to R(C)_0^2$ at $(r_ix,r_iy)$, using step 12 and preservation of the $R$ levels. This is $\\operatorname{Map}_C(r_ix,r_iy)$. The map is induced by the cocone on arrows, so it is exactly the displayed comparison. Naturality in the objects follows from the natural mapping-fiber comparison. For composition, use $R(D_j)_2\\simeq R(D_j)_1\\times_{R(D_j)_0}R(D_j)_1$: $d_1$ gives composition, the outer faces give the two factors, and the degeneracy gives the identity. Preservation of these levels and face maps makes this same calculation commute with precomposition and postcomposition. In every higher degree the same simplicial operators are retained, so the comparison respects their coherent associativity and all higher compositions as well.",
    "uses": [
     "lem-coef-complete-segal-quasicategory-comparison",
     "lem-coef-spaces-kappa-limit-filtered-colimit"
@@ -163,7 +196,7 @@
    }
   },
   {
-   "text": "For a coherent transformation $p:D\\to\\Delta_I B$, apply $R$ to $p$ and to the induced cocone $p_C:C\\to B$. Naturality of the preceding construction gives its comparison as a map of spaces over the fixed $M=\\operatorname{Map}_B(p_i(x),p_i(y))$. The coherent triangles $p_jD(u)\\simeq p_i$ identify the two endpoints throughout $J$ with those at $i$; these identifications and their higher compatibilities, not strict equality of endpoints, specify the maps to $M$. By the fixed-object filtered-colimit clause applied in spaces, $\\operatorname{colim}_J\\Delta_J M\\simeq M$. For the specified vertex $f\\in M$, express each $\\operatorname{Map}_{D_j}^f$ as $\\operatorname{Map}_{D_j}\\times_M^h\\{f\\}$. Space finite-limit exactness takes their filtered colimit to $(\\operatorname{colim}_J\\operatorname{Map}_{D_j})\\times_M^h\\{f\\}$, which step 10 identifies over $M$ with $\\operatorname{Map}_C^f$. All maps are induced by the given functors to $B$, and the natural simplicial mapping-space comparisons, so this also proves the asserted naturality under those functors. Nothing in the argument requires an injective map on objects or a fully faithful transition functor; the pullbacks are homotopy pullbacks throughout.",
+   "text": "For a coherent transformation $p:D\\to\\Delta_I B$, apply $R$ to $p$ and to the induced cocone $p_C:C\\to B$. Naturality of the preceding construction gives its comparison as a map of spaces over the fixed $M=\\operatorname{Map}_B(p_i(x),p_i(y))$. The coherent triangles $p_jD(u)\\simeq p_i$ identify the two endpoints throughout $J$ with those at $i$; these identifications and their higher compatibilities, not strict equality of endpoints, specify the maps to $M$. By the fixed-object filtered-colimit clause applied in spaces, $\\operatorname{colim}_J\\Delta_J M\\simeq M$. For the specified vertex $f\\in M$, express each $\\operatorname{Map}_{D_j}^f$ as $\\operatorname{Map}_{D_j}\\times_M^h\\{f\\}$. Space finite-limit exactness takes their filtered colimit to $(\\operatorname{colim}_J\\operatorname{Map}_{D_j})\\times_M^h\\{f\\}$, which step 13 identifies over $M$ with $\\operatorname{Map}_C^f$. All maps are induced by the given functors to $B$, and the natural simplicial mapping-space comparisons, so this also proves the asserted naturality under those functors. Nothing in the argument requires an injective map on objects or a fully faithful transition functor; the pullbacks are homotopy pullbacks throughout.",
    "uses": [
     "lem-coef-complete-segal-quasicategory-comparison",
     "lem-coef-infinity-coslice-colimit-formula",
@@ -185,11 +218,12 @@
   "lem-coef-spaces-kappa-limit-filtered-colimit",
   "lem-coef-segal-equivalence-subspace-filtered",
   "lem-coef-infinity-coslice-colimit-formula",
-  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-coef-finite-simplicial-top-simplex-removal",
   "lem-weil-pbc-simplicial-set-glue-simplex",
+  "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-isofibration-exponentiation",
   "lem-coef-infinity-isofibration-pullback-limit",
-  "def-cbc-enhanced-diagrams-cones",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
   "def-coef-presentable-infinity-category",
   "lem-coef-infinity-cofinal-coslice-calculus",
   "lem-coef-infinity-cofinal-comma-criterion"
@@ -300,7 +334,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-operadic-unstraightening",
@@ -325,8 +359,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-cat-infinity-filtered-finite-calculus",
   "worker": "stage1",
-  "summary": "Kept every statement clause and hypothesis. Eleven steps prove the comparisons using the marked model, existing space exactness and complete Segal comparison, with one new statement-only equivalence-subspace lemma for arbitrary Segal objects. Finite functor categories are proved by simplex attachment; the coslice reindexing and all fixed-base mapping fibers are explicit. No project attachment or Mathlib match.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-stage mapping adjunction; supporting argument of lem-coef-many-object-operad-accessibility, Proposition 4.1.7 via Section 3.3: finite-data calculations in the proof of Proposition 3.3.2 and Theorem 3.3.1. Steps 1–6 supply finite-stage coherent category calculus; steps 7–11 supply simultaneous finite representatives, actual mapping-space comparisons and comparisons over a fixed base.",
+  "summary": "Repaired the returned 2023-character step 5 without changing the statement or Lean record. Extracted the top-simplex deletion subargument into a statement-only node; reused existing simplex-gluing, isofibration-exponentiation and homotopy-pullback nodes for the comparisons; retained the original double induction as four short complete steps with explicit bases and induction hypotheses. Corrected the interrupted repair, which applied the nonempty-degree 018S node to an empty domain and omitted the induction conclusion.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-stage mapping adjunction, via the existing finite-data calculus route. Original step 5 is now steps 5–8: induction bases, top-simplex deletion/gluing, functor/core pullback, and induction conclusion; original steps 6–11 become 9–14 with only reference-number changes.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
@@ -343,12 +377,12 @@
   "lem-weil-pbc-simplicial-set-glue-simplex"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q87-18196e680",
-  "group": "Q87",
+  "reviewer": "NT-cc-Q67-afc2755d0",
+  "group": "Q67",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-18196e680 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the new node and every cited statement (16 proof deps, 4 statement deps) in full; review.md has the details. The proof checks out. Steps 1-2 build Cat∞ limits and colimits from the marked model plus the coherent-diagrams theorem; corepresentable R_n preserves limits; the pointwise colimit Z is Segal by spaces exactness at aleph_0 and complete by the new lemma, and fullness of CSS then gives R(C)≃Z. Step 3 checks the comparison degreewise, including K=∅. Step 4 gives base change with the structural map C→B induced by the cocone, via the fixed-object clause for constant B and T. Step 5 is a correctly set-up double induction using glue-simplex, exponentiation along the mono ∂Δ^d→Δ^d and the isofibration-pullback theorem. Step 6 uses the simplicial isomorphism Fun(Δ^n,Fun(L,C))≅Fun(Δ^n×L,C) with the dimension bound proved. Steps 7-8 are genuinely elementary component arguments. Step 9: the comma J×^h_I I_{a/} is the cocone category on {i,a}, which is filtered and hence weakly contractible, so J→I is cofinal. Steps 10-11 are homotopy fibres of R_1→R_0^2 and over f in a fixed M, both finite limits. The ℵ0-small definition matches 'finite'. The parent filtered-operadic-unstraightening uses only clauses that are present, so nothing is weakened. New node lem-coef-segal-equivalence-subspace-filtered is true: filtered colimits preserve monomorphisms, maps of Segal objects preserve invertible edges, and an inverse with its two pi_0 equations lifts to a common stage because pi_0 Map commutes with filtered colimits. Small cases tested: incomplete nerves where the inverse appears later, empty stages, non-injective transitions. B1-B9 hold; all three search kinds are recorded; scanning all DAG statements found no duplicate; it is not a clause of the item. Route: the two sk-prop-h2 simplicial combinatorics tool_uses (nondegenerate decomposition, glue simplex) are accepted. No SGA is used. The Gepner–Haugseng, Rezk and Joyal–Tierney online sources are not archived and I did not fetch them; they are WANTED, proof_origin is agent, and I checked the mathematics independently. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-afc2755d0 (reviewer sub-agent of L); spot-checked: I read the delivery in full: all 14 steps, the new node, every cited statement, Stacks 018R/018S in simplicial.tex and the blueprint ancestor proof paragraph 2. The only change is that the old 2023-character step 5 is now a set-up double induction in steps 5-8: bases A=∅ and A=Δ^d in step 5; top-simplex removal plus glue-simplex 018R pushout in step 6; strict pullback of Fun(-,C), isofibration by exponentiation along ∂Δ^d↪Δ^d, Cat∞ pullback by the isofibration-pullback node and cores by R_0 in step 7; outer/inner hypotheses plus cospan finite-limit exactness in step 8. Old steps 6-11 are renumbered 9-14 and their cross-references are correct. The statement is unchanged as far as I could check without a diff, and nothing is weakened. New node lem-coef-finite-simplicial-top-simplex-removal is true by Eilenberg-Zilber uniqueness and needs its max-dimension hypothesis (counterexample without it: an edge of Δ²). Tested on Δ⁰ (U=∅), Δ¹, Δ¹/∂Δ¹, Δ², and d=0 discrete sets. Its last three clauses are exactly hypotheses (1)-(3) of glue-simplex. It is not a duplicate: add-simplices needs nonempty degrees and adds from the bottom, and glue-simplex assumes these clauses. B1-B7 hold, three search kinds are recorded, and step lengths and proof_deps are correct. I accept the tool uses of the sk-prop-h2 nodes glue-simplex and nondegenerate-decomposition. No SGA is used. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CatInfinityFilteredFiniteCalculus",
