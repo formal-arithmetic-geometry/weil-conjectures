@@ -290,5 +290,32 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-bee2d9dba (reviewer sub-agent of L); spot-checked: Read the item's statement and all 9 steps in full, together with the statements of the four cited nodes. The delivery adds 0 new nodes and leaves the statement unchanged. Step 1: I checked that the action a(u,x)=phi_u(x,id_[r]) is simplicial (theta^*u corresponds to phi_u o (id x theta)), that it sends marked edges to marked edges, and that the coproducts are U-small. They exist by the degreewise-colimit clause of lem-coef-sset-pullback-preserves-colimits, and only that clause is used. Step 2: the quotient uses relations in every degree, the base map is well defined, and degenerate edges are marked via s_0[i,x0]=[i,s_0x0]. Step 4: I checked independently that the degreewise relation is equivalent to the enriched condition h_j o (phi_u x id) = h_i o pr, using phi_u(y,sigma)=a(sigma^*u,y). Step 5 picks a marked representative of each marked edge, which is required because other representatives need not be marked. Step 6 gives an isomorphism of simplicial sets that is enriched-natural in Y, not only a bijection on vertices. Step 7: the generated relation does not depend on the universe because zigzags are finite, and nothing bounds the size of Y. Steps 8 and 9 (naturality in F, empty I) are correct. Small cases tested: discrete I, I=[1], a one-object simplicial monoid whose 1-simplices impose real relations, empty I and empty B. Every statement cited is in the same unit; def-weil-size-convention is a definition used as a notion. No tool_uses, no cycle (BFS from each cited node does not reach the item), and no duplicate: lem-coef-enriched-diagram-size-generation and the colimit clause of lem-coef-marked-point-cartesian-model are different statements. HTT is not in literature/ and the report lists it as WANTED; it is cited for conventions only, with proof_origin agent. There is no SGA citation, this is not a target node, and nothing is weakened. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MarkedEnrichedColimitUniverse",
+  "declaration": "SSet.Marked.EnrichedColimit.marked_enriched_colimit_universe",
+  "declarations": [
+   "SSet.Marked.EnrichedColimit.Diagram",
+   "SSet.Marked.EnrichedColimit.Cocone",
+   "SSet.Marked.EnrichedColimit.ParameterMap",
+   "SSet.Marked.EnrichedColimit.Family",
+   "SSet.Marked.EnrichedColimit.IsColimitIn",
+   "SSet.Marked.EnrichedColimit.marked_enriched_colimit_universe"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MarkedEnrichedColimitUniverse.lean",
+  "statement": "theorem marked_enriched_colimit_universe (B : Marked.{u}) (I : SCat.{u}) (F : Diagram B I) : ∃ C : Cocone F, IsColimitIn.{u, 0} C ∧ IsColimitIn.{u, v} C",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The tensor-action presentation includes the base, unit and composition equations. The canonical restriction universal property is expressed by unique factorization for every sharp simplicial parameter, with the same small apex and legs against arbitrary enlarged targets. The zero additional universe gives the small assertion. No change to the DAG statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-affb75236",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, HTT sources, universes, naturality, edge cases, and maintainer gates. Exact snapshot module compiles cleanly through scompile.py. No corrections required."
  }
 }

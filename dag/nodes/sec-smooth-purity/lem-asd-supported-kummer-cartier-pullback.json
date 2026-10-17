@@ -230,5 +230,29 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-a6e706327 (reviewer sub-agent of L); spot-checked: I read the item, the statement of every cited node, the citer, the unit record and the sources in full. The statement matches Stacks Tag 0C4U (divisors.tex lemma-pullback-effective-Cartier-divisors, l.2764; proof omitted there), and the canonical section matches definition-invertible-sheaf-effective-Cartier-divisor (l.2659). The morphism h is arbitrary and the only extra condition is that D' is Cartier. The complement-trivialization clause follows from the canonical-section clause. I checked each step. Step 1: s=f e. Step 2: lem-pc-closed-subscheme-base-change-ideal-image needs only a closed immersion and an arbitrary map, and gives I_{D'}=g_i O. Step 3: g=ua and a=vg give vu=1, so g_i is regular; this needs the Cartier hypothesis on D' and fails for k[t]->k. Step 4: e_i=u^{-1}e_j, so the local maps agree on overlaps. Step 5: only clause (1) of the gluing node (glued morphisms and their uniqueness) is used. Step 6: the pullback of the canonical section is sent to the canonical section of D'. I recomputed every calculation. Edge cases checked: D empty, T' empty, and a non-flat map Z[t]->F_p[t]. Duplicate candidates (flat-pullback, divisor-line-bundle-properties, recd-pullback) all assume flatness or a relative divisor, so none is a duplicate. There are no new nodes and no cycle. The blueprint place quote in lem-amb-cartier-kummer-map.proof.md, final paragraph, matches word for word. I accept two tool_uses: lem-pc-closed-subscheme-base-change-ideal-image and lem-weil-pbc-glue-sheaves-of-modules. One remark, not a fault of this delivery: the item's unit binding sk-prop-sf-cbc is maintainer-owned. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedKummerCartierPullback",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.exists_tensorPullback_dual_toModules_iso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.tensorPullbackUnitDualMap",
+   "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.exists_tensorPullback_dual_toModules_iso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKummerCartierPullback.lean",
+  "statement": "theorem exists_tensorPullback_dual_toModules_iso (h : T' ⟶ T) {J : T.IdealSheafData} (hJ : J.IsInvertible) (hJ' : (J.comap h).IsInvertible) : ∃ e : (Scheme.Modules.tensorPullback h).obj J.toModulesᵛ ≅ (J.comap h).toModulesᵛ, tensorPullbackUnitDualMap h ≫ (Scheme.Modules.tensorPullback h).map (Modules.dualMap J.toModulesι) ≫ e.hom = Modules.dualMap (J.comap h).toModulesι",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper tensorPullbackUnitDualMap is the canonical dual structure-sheaf comparison used to render the canonical-section clause.",
+  "fixed_by": "NT-stage2-Codex-56e756a0a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-56e756a0a",
+  "group": "Q111",
+  "result": "fix",
+  "note": "Mathematics and compilation pass; supplied complete replacement adding the missing source citation to tensorPullbackUnitDualMap’s docstring."
  }
 }
