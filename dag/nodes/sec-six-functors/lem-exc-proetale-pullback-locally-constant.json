@@ -1,0 +1,98 @@
+{
+ "id": "lem-exc-proetale-pullback-locally-constant",
+ "kind": "statement",
+ "title": "Pullback of locally constant finite module sheaves",
+ "statement": "Let $f:V\\to X$ be any morphism of schemes [def-pc-scheme] and let $A$ be a finite commutative ring. Use their small pro-etale sites [def-weil-pbc-proetale-site] and constant ring sheaves $A_X,A_V$ [def-weil-pbc-constant-sheaf]. The module inverse image $f^*$ is that of [def-weil-proetale-inverse-image], with the canonical coefficient-ring isomorphism $f^{-1}A_X\\cong A_V$ of [prop-weil-pbc-proetale-constant-ring-map]. Suppose $F$ is an $A_X$-module sheaf which is locally constant [def-weil-proetale-locally-constant-sheaf] with finite module models: it admits a pro-etale covering $\\{U_j\\to X\\}$ and isomorphisms $F|_{U_j}\\cong\\underline{M_j}_{U_j}$, where every $M_j$ is a finite $A$-module. Then on the base-changed covering $\\{V\\times_XU_j\\to V\\}$ there are isomorphisms of module sheaves\n$$\n (f^*F)|_{V\\times_XU_j}\\cong\\underline{M_j}_{V\\times_XU_j}.\n$$\nIn particular, $f^*F$ is locally constant with the same finite module models. This assertion includes empty schemes and empty covering members.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093R, lemma-pullback-locally-constant, specialized to the geometric morphism of small pro-etale topoi and sheaves of modules over the fixed finite ring A; finite models and the displayed covering comparison make explicit the local-trivialization assertion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-proetale-locally-constant-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a morphism of topoi preserves constant module sheaves and finite locally constant module sheaves, with the same constant values",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjUnitToUnit, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; none states locally constant finite module pullback on arbitrary sites/topoi",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Mathlib declarations concern free sheaves or condensed modules, not the general locally constant finite-module statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image along a morphism of sites preserves locally constant sheaves of modules and their finite constant values",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CompHausLike.LocallyConstant.functor_map_val, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CompHausLike.LocallyConstantModule.functor_map_val; none states the requested module pullback result",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations give finite-limit preservation or constant-sheaf characterizations, not local constancy of module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"sheafPullback\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant|isLocallyConstant|pullback.*constant|constant.*pullback",
+   "results": "0 hits in Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: no module-sheaf locally constant pullback declaration in the relevant Mathlib source"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*[Cc]onstant|[Cc]onstant.*inverseImage|pullback.*[Ll]ocallyConstant|[Ll]ocallyConstant.*pullback",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: no general sheaf local-constancy pullback declaration in the searched Mathlib source"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsConstant\"",
+   "results": "12 hits: CategoryTheory.Sheaf.IsConstant, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.isConstant_iff_mem_essImage",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf characterizations, locally constant functions, or condensed constructions do not state pro-etale module inverse image preserving finite local trivializations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a locally constant sheaf of modules over a constant ring is locally constant and preserves its module values and finite local constancy",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, CompHausLike.LocallyConstantModule.functorToPresheaves, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, CondensedMod.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf characterizations, locally constant functions, or condensed constructions do not state pro-etale module inverse image preserving finite local trivializations"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant|isLocallyConstant|pullback.*constantSheaf|constantSheaf.*pullback|sheafPullback.*constant|constant.*sheafPullback",
+   "results": "25 hits: Mathlib/Probability/Distributions/Gaussian/CharFun.lean, Mathlib/Analysis/Calculus/MeanValue.lean, Mathlib/Analysis/Calculus/MeanValue.lean, Mathlib/Analysis/Calculus/MeanValue.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf characterizations, locally constant functions, or condensed constructions do not state pro-etale module inverse image preserving finite local trivializations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-exc-explicit-preservation",
+  "date": "2026-10-17",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "thm-exc-explicit-preservation",
+   "place": "Imported proof paragraph 1, constructibility calculation: inverse image of each locally constant finite module trivialization remains locally constant with the same finite module labels",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
