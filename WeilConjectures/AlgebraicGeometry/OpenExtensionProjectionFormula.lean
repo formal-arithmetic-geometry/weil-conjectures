@@ -93,7 +93,7 @@ theorem exists_openExtension_projectionFormula (X : Scheme.{u})
   dsimp
   intro m
   letI := m
-  obtain ⟨J, adj, _⟩ := exists_openExtension_derivedAdjunction X U
+  obtain ⟨J, ⟨adj⟩⟩ := exists_openExtension_derivedAdjunction X U
   refine ⟨J, adj, ?_⟩
   exact openExtension_projection_formula_of_adjunction X U m J adj
 
