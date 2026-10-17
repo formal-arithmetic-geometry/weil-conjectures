@@ -91,10 +91,12 @@ theorem relativeTensorPullback_kFlat_model
     (forget₂ CommRingCat.{u} RingCat.{u})).obj R
   let V := SheafOfModules.toSheaf B
   let W := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
-  have hV := CategoryTheory.moduleSheaves_colimits_forgetful B
+  have hV := CategoryTheory.moduleSheaves_colimits_forgetful.{u, u, u, u}
+    B
   have : PreservesFiniteLimits V := hV.2.1
   have : PreservesFiniteColimits V := hV.2.2.1
-  have hW := CategoryTheory.moduleSheaves_colimits_forgetful (moduleRings X.toRingedSpace)
+  have hW := CategoryTheory.moduleSheaves_colimits_forgetful.{u, u, u, u}
+    (moduleRings X.toRingedSpace)
   have : PreservesFiniteLimits W := hW.2.1
   have : PreservesFiniteColimits W := hW.2.2.1
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
