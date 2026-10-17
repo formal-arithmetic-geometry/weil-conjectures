@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.AffineClosedEtaleNeighborhoodComparison
 import WeilConjectures.AlgebraicGeometry.InjectiveModuleSheafHCohomology
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 
 /-! # Affine case of restricted injective acyclicity
 
@@ -55,15 +56,20 @@ theorem Etale.subsingleton_H_affine_closed_of_injective
     Subsingleton (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         ((i)^*[ModuleCat.{u + 1} Λ].obj J)) q) := by
-  obtain ⟨I, hI, hfiltered, Y, v, hv, H, c, ⟨hc⟩, ⟨e⟩, hH⟩ :=
+  obtain ⟨I, _, _, _, Y, v, _, _, _, _, hv, _, H, eH, _, c, ⟨hc⟩, e, _⟩ :=
     Etale.affine_closed_etale_neighborhood_comparison Λ i J q
+  let hiso {W : Scheme.{u}} {F F' : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}}
+      (α : F ≅ F') : AddCommGrpCat.of (Sheaf.H F q) ≅ AddCommGrpCat.of (Sheaf.H F' q) :=
+    (Sheaf.functorH _ q).mapIso α
   have hzero : IsZero H := H.isZero_iff.mpr fun a ↦ by
     have : Etale (v a) := hv a
     have := Etale.injective_upperStar_obj_of_etale Λ (v a) J
     have := Etale.subsingleton_H_underlying_of_injective_module Λ (Y a)
       ((v a)^*[ModuleCat.{u + 1} Λ].obj J) q hq
-    obtain ⟨ea⟩ := hH a
-    exact (AddCommGrpCat.isZero_of_subsingleton _).of_iso ea
-  exact AddCommGrpCat.subsingleton_of_isZero ((hc.isZero_pt hzero).of_iso e)
+    obtain ⟨ea⟩ := pullback_forget_modules_iso Λ (v a) J
+    exact (AddCommGrpCat.isZero_of_subsingleton _).of_iso (eH a ≪≫ hiso ea.symm)
+  obtain ⟨ei⟩ := pullback_forget_modules_iso Λ i J
+  exact AddCommGrpCat.subsingleton_of_isZero
+    ((hc.isZero_pt hzero).of_iso (hiso ei ≪≫ e.symm))
 
 end AlgebraicGeometry
