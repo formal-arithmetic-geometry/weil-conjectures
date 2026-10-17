@@ -3,22 +3,86 @@
  "blueprint": {
   "is": "pur713-def-pullback-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Comparison of the two pullbacks, finite coefficients",
- "statement": "For the Cartesian square $\\square$, define\n\n$$\nc_{\\square,\\mathcal O_E/\\varpi^n}:=\\mu_{f,g',\\mathcal O_E/\\varpi^n}^{-1}\\circ\\mu_{g,f',\\mathcal O_E/\\varpi^n}:\nLf'^*_{\\mathcal O_E/\\varpi^n}Lg^*_{\\mathcal O_E/\\varpi^n}\\xrightarrow{\\sim}Lg'^*_{\\mathcal O_E/\\varpi^n}Lf^*_{\\mathcal O_E/\\varpi^n},\n$$\n\na natural isomorphism of functors $D(Y_{\\Proet},\\mathcal O_E/\\varpi^n)\\to D(X'_{\\Proet},\\mathcal O_E/\\varpi^n)$, using $L(gf')^*_{\\mathcal O_E/\\varpi^n}=L(fg')^*_{\\mathcal O_E/\\varpi^n}$ since $gf'=fg'$, and $\\mu$ of Definition “Composition comparison for finite-coefficient derived inverse image” (`pur713-def-pull-composition`), invertible by Lemma “The finite-coefficient inverse-image composition comparison is invertible” (`pur713-lem-pull-composition`).",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and chosen uniformizer $\\varpi$, and an integer $n\\geq1$. Put $A=\\mathcal O_E/\\varpi^n$ [def-weil-l-adic-coefficient-extension]. Let $\\square=(f,f',g,g',\\alpha)$ be a Cartesian square of schemes [def-weil-pbc-cartesian-square], with arrows\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n\\qquad fg'=gf'.\n$$\nFor each scheme $T$ in the square, use its small pro-etale site, constant coefficient ring sheaf $A_T$, and ambient unbounded category $D(T_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site]. For a morphism $u:U\\to V$, use the canonical ring-sheaf isomorphism $c_u:u^{-1}A_V\\xrightarrow{\\sim}A_U$ [prop-weil-pbc-proetale-constant-ring-map] and the derived module pullback $Lu_A^*:D(V_{\\mathrm{proet}},A)\\to D(U_{\\mathrm{proet}},A)$ of [def-weil-pbc-proetale-operations].\n\nFor composable $h:Z\\to W$ and $k:W\\to V$, write\n$$\n\\mu_{k,h,A}:=(c_{h,k}^{\\mathrm{der}})^{-1}:\nLh_A^*Lk_A^*\\xrightarrow{\\sim}L(kh)_A^*,\n$$\nwhere $c_{h,k}^{\\mathrm{der}}:L(kh)_A^*\\xrightarrow{\\sim}Lh_A^*Lk_A^*$ is the canonical isomorphism of [lem-weil-pbc-proetale-derived-pullback-composition], specialized to the constant sheaves $A_V,A_W,A_Z$ with the identifications $c_k$ and $c_h$. The identification that this lemma gives $(kh)^{-1}A_V\\cong A_Z$, namely $c_h\\circ h^{-1}(c_k)$ composed with the canonical isomorphism $(kh)^{-1}\\cong h^{-1}k^{-1}$, equals $c_{kh}$: both are ring-sheaf maps whose adjoints $A_V\\to(kh)_*A_Z$ send each constant section $a$ to the constant section $a$ (the defining formula of $\\rho$ in [prop-weil-pbc-proetale-constant-ring-map], applied to $k$, $h$ and $kh$), and such a map is determined by its values on the constant presheaf, whose sheafification is $A_V$. Hence the functor $L(kh)^*$ of that lemma is $L(kh)_A^*$ as defined above. Define\n$$\nc_{\\square,A}:=\\mu_{f,g',A}^{-1}\\circ\\mu_{g,f',A}:\nLf'^*_ALg^*_A\\xrightarrow{\\sim}Lg'^*_ALf^*_A.\n$$\nIn this formula the targets of $\\mu_{g,f',A}$ and of $\\mu_{f,g',A}$ are the same functor $Lu_A^*$, $u=gf'=fg'$, formed with the single identification $c_u$; no further identification is involved. Thus $c_{\\square,A}$ is the specified natural isomorphism of functors $D(Y_{\\mathrm{proet}},A)\\to D(X'_{\\mathrm{proet}},A)$; the notation $c_{\\square,\\mathcal O_E/\\varpi^n}$ means this same isomorphism.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/pur713-def-pullback-comparison.md",
   "place": "node pur713-def-pullback-comparison, order 2353"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-proetale-site",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism comparing the two composites of derived inverse image functors on pro-etale sheaves with finite coefficients in a commutative square of schemes",
+   "results": "The eight hits concern Scheme.Modules pseudofunctor composition and associativity, restrictFunctorComp, a condensed-set comparison, and SheafOfModules.freeFunctorCompPullbackIso. Read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:233-250: its pullbackComp is for ordinary structure-sheaf modules, not unbounded pro-etale derived categories with constant finite coefficients.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|derivedPullback.*[Cc]omp|pullbackSquareComparison",
+   "results": "Ten hits in Mathlib/AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean. Read Proetale.lean:47-80: these define the topology and its comparison with the etale topology, not derived inverse-image composition or the square comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two composites of derived inverse image on proetale finite coefficient sheaves in a commutative square are canonically isomorphic",
+   "results": "Eight hits, including SheafOfModules.pullbackComp, sheafPushforwardContinuousComp inverse components, overMapPullbackComp and categorical pullback transport. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:148-174: pullbackComp acts on ordinary sheaves of modules; passing to unbounded derived functors is additional content, not a one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.trans, CategoryTheory.Iso.symm",
+   "results": "Twelve hits, including Iso.self_symm_id, Iso.symm_self_id, Iso.trans_symm and whiskering coherence. These are generic operations on already supplied isomorphisms, not the required derived pullback-composition data.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|mapDerivedCategory.*Comp|leftDerived.*Comp",
+   "results": "Twenty-five hits: MonoOver.pullbackComp, Over.pullbackComp, locally Cartesian closed chosen-pullback coherence, leftDerivedNatTrans_comp and ordinary abelian left-derived natural transformation composition, plus Sites/PseudofunctorSheafOver. These do not supply the required unbounded derived inverse-image comparison on constant-coefficient pro-etale module sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition isomorphism for unbounded derived pullback of modules on ringed topoi giving a square comparison from equality of composite scheme morphisms",
+   "results": "Eight hits, including Scheme.Modules.pullbackComp and its pseudofunctor laws, SheafOfModules.pullbackComp and pullback_assoc. The source of the two pullbackComp definitions was read at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:241 and Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167. Both are underived. No match for the required unbounded derived pro-etale construction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image on sheaves of modules induces a functor on the unbounded derived category and respects composition",
+   "results": "Eight hits: Ext.mapExactFunctor_hom, Ext.mapExactFunctor, Functor.mapDerivedCategory, mapDerivedCategoryFactorsh, mapDerivedCategoryFactors and associated linearity/lifting declarations. Independently read Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:29-144. These provide the functor induced by an exact functor, not the composition/square comparison for pro-etale module pullbacks.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Cc]omp|mapDerivedCategoryComp",
+   "results": "Six hits: mapDerivedCategoryFactors_hom_naturality at ExactFunctor.lean:47, mapDerivedCategoryFactorsh_hom_app at :66, their uses at :68, :101, :131, and Ext/Map.lean:75. No mapDerivedCategoryCompIso in this pinned source. Read ExactFunctor.lean:29-144; no exact leaf for the comparison definition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -40,5 +104,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-pullback-comparison",
+  "worker": "stage1",
+  "summary": "Split this definition into its existing coefficient datum, Cartesian square, small pro-etale coefficient categories, canonical coefficient ring identifications, unbounded derived module pullbacks, and canonical derived pullback-composition isomorphism. Replaced two absent textual pur713 composition references by the existing general Stacks 0D6D node, explicitly taking its inverse to match the blueprint orientation. No new nodes or Lean attachments; no change of coefficient category or unit route.",
+  "blueprint": "Realizes the whole definition pur713-def-pullback-comparison (order 2353) in main-20261015: its displayed mu-inverse composite, the common-composite identification, and natural-isomorphism type. This supplies the ordinary source comparison used in the surrounding unit sk-prop-sp-purity-bc; it does not prove the unit purity base-change assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-59fdb4070",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-59fdb4070 (reviewer sub-agent of L); spot-checked: I read the item in full, the blueprint definition (main-20261015, order 2353), the unit sk-prop-sp-purity-bc and its proof, the consumer pur713-def-star-exchange, the six cited statements, the layer-A unbounded finite-coefficient category in sk-def-sfb-derived-categories, and Stacks 0D6D (sites-cohomology.tex:3657-3680). The blueprint's references pur713-def-pull-composition, pur713-lem-pull-composition and pur713-def-derived-pull exist in no blueprint snapshot. The worker correctly replaced them with def-weil-pbc-proetale-operations and lem-weil-pbc-proetale-derived-pullback-composition, with mu = c^{-1} in the blueprint's direction. The arrows, the source/target D(Y_proet,A) -> D(X'_proet,A), the unbounded small pro-etale category with constant A_T, and the absence of extra hypotheses all match the source. There are no new nodes and no duplicates (def-exchange-projection has extra hypotheses; the module variant is a different category). There is no SGA citation, and no tool_uses are needed for a definition's stmt_deps. I checked n=1, n>1, the zero complex, empty X', identity squares and equal factorizations. One repairable fault (E5, mild): the statement left implicit that the composition lemma's composite coefficient identification equals c_{kh}, and said 'identified by transport along gf'=fg''. The corrected statement-only JSON is in fixes/dag/nodes/sec-smooth-purity/pur713-def-pullback-comparison.json. It shows the agreement by constant sections (from rho in prop-weil-pbc-proetale-constant-ring-map) and says that both mu land in the single functor Lu_A^*, u=gf'=fg'. All other fields are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
