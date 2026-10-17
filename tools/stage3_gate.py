@@ -41,9 +41,9 @@ EXCEPTIONS = pathlib.Path(ROOT) / "coord" / "upstream-statement-exceptions.tsv"
 
 def upstream_exceptions() -> dict[str, set[str]]:
     """module -> the entries of coord/upstream-statement-exceptions.tsv for it (columns: module, entry, reason; an entry
-    is a declaration as the module writes it, `import <Module>` for a public import, or `(new module)`). These are the
-    corrections of false upstream statements that we make ourselves and send upstream as their own PR (the human,
-    2026-10-17); rule 4 below does not refuse them, and no reader is asked for them."""
+    is a declaration as the module writes it (changed or new), `import <Module>` for a public import, or
+    `(new module)`). These are the corrections of false upstream statements that we make ourselves and send upstream
+    as their own PR (the human, 2026-10-17); rule 4 below does not refuse them, and no reader is asked for them."""
     out: dict[str, set[str]] = collections.defaultdict(set)
     try:
         lines = EXCEPTIONS.read_text(encoding="utf-8").splitlines()
@@ -115,7 +115,8 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         changed = [k for k in d["statement_changed"] if k not in ok]
         if changed: bad.append("changes the statement of " + short(changed))
         if d["removed"]: bad.append("removes " + short(d["removed"]))
-        if d["public_added"]: bad.append("adds public declaration(s) " + short(d["public_added"]))
+        added = [k for k in d["public_added"] if k not in ok]
+        if added: bad.append("adds public declaration(s) " + short(added))
         # launcher, 2026-10-17: filling a body that is `sorry` upstream is allowed for any declaration (instance, def,
         # ...) whose signature (name, binders, type, attributes) is unchanged; those are checked just above and below.
         # Changing a non-sorry body of a non-theorem declaration stays refused.

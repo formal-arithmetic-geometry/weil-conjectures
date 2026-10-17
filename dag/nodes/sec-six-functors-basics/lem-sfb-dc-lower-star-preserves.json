@@ -6,8 +6,8 @@
   "same_as": []
  },
  "kind": "statement",
- "title": "$Rf_*$ preserves bounded constructible complexes ($\\ell$-adic $\\Lambda$)",
- "statement": "Let $\\Lambda$ be one of the $\\ell$-adic condensed rings $\\underline{\\cO}_E$, $\\underline E$\n($E/\\mathbf Q_\\ell$ finite; [sk-def-sfb-condensed-ring]) or $\\underline{\\Qlb}$\n([sk-def-sfb-qlbar-condensed]), and let $f\\colon X\\to Y$ be a morphism of the setting of\n[sk-def-sfb-dc-setting]. If $K\\in D(\\Mod_{\\Lambda_X})$ is bounded constructible\n([sk-def-sfb-bounded-constructible]), then so is $Rf_*K\\in D(\\Mod_{\\Lambda_Y})$\n([sk-def-sfb-module-derived-pushpull]).",
+ "title": "$Rf_*$ preserves bounded constructible complexes ($\\ell$-adic and $\\ell$-torsion $\\Lambda$)",
+ "statement": "Let $\\ell$ be the prime of [sk-def-sfb-dc-setting], invertible in $k$, and let $\\Lambda$ be one of the\nfollowing commutative condensed rings ([sk-def-sfb-condensed-ring]):\n\n- $\\underline E$ for a finite extension $E$ of $\\mathbf Q_\\ell$;\n- $\\underline{\\cO}_E$ for a finite extension $E$ of $\\mathbf Q_\\ell$, where $\\cO_E$ is the ring of integers either of a\n  subfield $E\\subseteq\\Qlb$ (with the topology restricted from $\\Qlb$) or of a finite normed extension $E$ of\n  $\\mathbf Q_\\ell$, given as its closed unit ball $\\{x\\in E:|x|\\le1\\}$;\n- $\\underline{\\Qlb}$ ([sk-def-sfb-qlbar-condensed]);\n- $\\underline T$ for a finite discrete ring $T$ with $\\ell^nT=0$ for some $n\\ge0$.\n\nLet $f\\colon X\\to Y$ be a morphism of the setting of [sk-def-sfb-dc-setting]. If $K\\in D(\\Mod_{\\Lambda_X})$ is\nbounded constructible ([sk-def-sfb-bounded-constructible]), then so is $Rf_*K\\in D(\\Mod_{\\Lambda_Y})$\n([sk-def-sfb-module-derived-pushpull]). For a general $\\Lambda$ this fails: for the constant discrete ring\n$\\mathbf F_p$, $p$ the characteristic of $k$, and $f\\colon\\mathbf A^1_k\\to\\operatorname{Spec}k$ with $k$\nalgebraically closed, the Artin--Schreier sequence gives $H^1(\\mathbf A^1,\\mathbf F_p)=k[t]/(F-1)k[t]$, which is\ninfinite.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/lem-sfb-dc-lower-star-preserves.md",
   "place": "node lem-sfb-dc-lower-star-preserves, order 1781",
@@ -348,14 +348,6 @@
   "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
   "lem-pc-right-derived-functor-triangulated"
  ],
- "reviewed": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-Codex-Q37-d9be3c030",
-  "group": "Q37",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-d9be3c030 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources and chapter/unit route. Checked all eight steps, coefficient categories, canonical scalar comparisons, master target interface, edge cases and dependency cycles. No new nodes or mathematical repairs needed. Accepted all sixteen declared tool uses; details recorded in review.md."
- },
  "lean_audit": {
   "master": {
    "state": "none",
@@ -367,5 +359,18 @@
    "decls": [],
    "missing": []
   }
- }
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "L",
+  "old_statement": "Let $\\Lambda$ be one of the $\\ell$-adic condensed rings $\\underline{\\cO}_E$, $\\underline E$\n($E/\\mathbf Q_\\ell$ finite; [sk-def-sfb-condensed-ring]) or $\\underline{\\Qlb}$\n([sk-def-sfb-qlbar-condensed]), and let $f\\colon X\\to Y$ be a morphism of the setting of\n[sk-def-sfb-dc-setting]. If $K\\in D(\\Mod_{\\Lambda_X})$ is bounded constructible\n([sk-def-sfb-bounded-constructible]), then so is $Rf_*K\\in D(\\Mod_{\\Lambda_Y})$\n([sk-def-sfb-module-derived-pushpull]).",
+  "what": "Coefficient cases aligned with the Lean hypothesis IsFinitenessCoefficient of boundedConstructible_rightDerivedLowerStar_obj (live 7360fe485e): added O_E as the closed unit ball of a finite normed extension and the finite discrete rings killed by a power of ell (torsion coefficients, SGA 4 1/2 [Th. finitude]); the counterexample for a general Lambda recorded. The proof covers only the l-adic cases and must be extended to the new ones; review withdrawn.",
+  "source": "SGA 4 1/2, [Th. finitude] 1.1 (torsion coefficients); Bhatt-Scholze, Section 6.8 (l-adic coefficients)",
+  "citers": [
+   "def-sfb-dc-lower-star",
+   "det-prop-closed-adjoint-constructible-support",
+   "sk-def-sfb-dc-restricted-functors"
+  ]
+ },
+ "lead_note": "2026-10-17 (L): statement extended to the coefficient cases of IsFinitenessCoefficient (torsion, unit ball); review withdrawn for re-review; the proof steps still treat only O_E, E, Qlbar. Previous review: {\"date\": \"2026-10-16\", \"by\": \"L\", \"reviewer\": \"NT-Codex-Q37-d9be3c030\", \"group\": \"Q37\", \"result\": \"pass\", \"note\": \"mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-d9be3c030 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, s"
 }
