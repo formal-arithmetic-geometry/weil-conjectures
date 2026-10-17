@@ -10,9 +10,49 @@
  "stmt_deps": [
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary $R$-module $L$ and write $v=1_L\\otimes_R u:L\\otimes_R M\\to L\\otimes_R M'$. The hypothesis that $u$ is universally injective says exactly that $v$ is injective. Give $L\\otimes_R M$ and $L\\otimes_R M'$ their natural $S$-module structures through the second tensor factors; then $v$ is $S$-linear because $u$ is $S$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CM, lemma-universally-injective-localize, part (1), first sentence and the definition of universal injectivity"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] with base ring $R$, algebra $S$, multiplicative subset $T$, first $S$-module $M$ (respectively $M'$), and second $R$-module $L$. Its explicit fraction formula, followed by the symmetry of tensor factors, gives isomorphisms $\\theta_M:T^{-1}(L\\otimes_R M)\\xrightarrow{\\sim}L\\otimes_R T^{-1}M$ and $\\theta_{M'}:T^{-1}(L\\otimes_R M')\\xrightarrow{\\sim}L\\otimes_R T^{-1}M'$, sending $(l\\otimes m)/t$ to $l\\otimes(m/t)$. On each pure fraction, $\\theta_{M'}((T^{-1}v)((l\\otimes m)/t))=l\\otimes(u(m)/t)=(L\\otimes_R T^{-1}u)(\\theta_M((l\\otimes m)/t))$. Since pure tensors and fractions generate the localized modules, this proves that the square with $T^{-1}v$ and $L\\otimes_R T^{-1}u$ commutes.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK, lemma-tensor-localization, together with Tag 00D2, lemma-tensor-with-bimodule; explicit fraction formula and naturality"
+   }
+  },
+  {
+   "text": "The map $T^{-1}v$ is injective by the fraction description of localization [def-weil-pbc-module-localization]: if $(T^{-1}v)(x/t)=v(x)/t=0$, then some $s\\in T$ satisfies $s\\,v(x)=0$; injectivity of $v$ gives $s x=0$, hence $x/t=0$. Therefore the commutative square in Step 2 and the isomorphisms $\\theta_M,\\theta_{M'}$ show that $L\\otimes_R T^{-1}u$ is injective. As $L$ was arbitrary, $T^{-1}u$ is universally injective over $R$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CM, proof of lemma-universally-injective-localize, part (1), lines 20179--20185 (localization is exact and the tensor-localization identification)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05CM, lemma-universally-injective-localize, part (1), direct proof after specializing the base multiplicative subset to {1}"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +84,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-generic-basis-universal-injective",
@@ -73,5 +113,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-universal-injective-localization",
+  "worker": "stage1",
+  "summary": "Kept the imported statement, which is Tag 05CM(1) specialized to the multiplicative subset {1} in the base ring. The proof fixes an arbitrary R-module, uses the existing localization-over-a-base tensor isomorphism to identify the localized tensor map, and writes the injectivity check directly from the fraction criterion. No new nodes were needed.",
+  "blueprint": "Realizes the proof sentence in lem-trf-local-term-locality's semistable-alteration input: within the 05I3 (1)⇒(2) argument, localization preserves universal injectivity.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-634bcd1d7",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-634bcd1d7 (reviewer sub-agent of L); spot-checked: I read the whole item and every node it cites; the delivery adds no new nodes. The statement is Stacks Tag 05CM(1) (algebra.tex, lemma-universally-injective-localize), A-part, with A=R, B=S, S'=T; I checked the hypotheses one by one against the source and nothing is weakened. The parent lem-trf-local-generic-basis-universal-injective uses it with T=S∖q, which matches. Step 2 cites lem-weil-pbc-localization-tensor-over-base, a Mathlib leaf (IsLocalizedModule.rTensor), for the fraction isomorphisms. That node's stated naturality is in N, not M, but the step correctly proves the square for u directly on pure fractions. Step 3 is localization exactness through the kernel criterion of def-weil-pbc-module-localization, using S-linearity of v from step 1; it is genuinely elementary. I tested T={1}, 0∈T, zero modules, u=id, and ×2 on Z localized to Q; the last shows the converse fails, which the statement correctly does not claim. An rg over dag/nodes for 05CM and universal injectivity found no duplicate (check-stalks, residue and flat-cokernel state different things). All citations are definitions or Mathlib leaves, so the unit route is kept, no tool_uses are needed and no SGA source is used. Fix: in proof step 1 the JSON had `M\\to` written with a single backslash, which decodes to a TAB followed by 'o' (B4). The whole corrected file is in fixes/dag/nodes/sec-trace-formula/lem-trf-local-universal-injective-localization.json; nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
