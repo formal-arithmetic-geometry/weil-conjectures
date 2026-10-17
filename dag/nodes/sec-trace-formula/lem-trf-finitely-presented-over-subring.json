@@ -11,9 +11,71 @@
   "def-weil-pbc-finite-type-algebra",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the finite-type hypothesis, choose n and a surjective R-algebra map R[x_1, ..., x_n] to S. By finite presentation of M over R, choose R-generators y_1, ..., y_m and finitely many relation vectors (a_{i1}, ..., a_{im}) generating the kernel of R^m to M.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0561, proof: “We may assume S = R[x_1, ..., x_n]/J” through the choice of generators and relations"
+   }
+  },
+  {
+   "text": "For every i,j, express x_i y_j as an R-linear combination sum_k a_{ijk} y_k. Let N be the S-module on generators y_1, ..., y_m with the finitely many R-relation vectors and the nm action relations x_i y_j = sum_k a_{ijk} y_k. Thus N has a presentation S^{t+nm} to S^m to N to 0, so N is finitely presented as an S-module.",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0561, proof: the paragraph constructing N and its finite presentation"
+   }
+  },
+  {
+   "text": "The assignment of the generators of N to the corresponding elements y_j of M respects all defining relations, and the y_j generate M as an R-module, hence as an S-module. It therefore induces a surjective S-linear map phi:N to M.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0561, proof: “By construction there is a surjective map phi : N to M.”"
+   }
+  },
+  {
+   "text": "Every element of N is represented by polynomial coefficients in the x_i. Applying the action relations lowers the total polynomial degree one monomial at a time, so the polynomial reduces inductively to an R-linear combination of the generators; this is exactly the polynomial-action reduction lemma. If such a reduced combination maps to zero in M, its coefficient vector lies in the R-span of the chosen relation vectors, which are also defining relations in N. Hence ker(phi)=0.",
+   "uses": [
+    "lem-trf-polynomial-action-reduction",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0561, proof: the paragraph beginning “Suppose z = ...” through the conclusion that phi is injective"
+   }
+  },
+  {
+   "text": "The map phi is therefore an isomorphism, and the finite presentation of N over S transfers to M.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0561, end of proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-trf-polynomial-action-reduction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0561 proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,7 +107,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-flat-finite-module-presentation",
@@ -57,7 +119,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The finite-presentation reduction in Tag 0GSG: More on Algebra Lemma 0GSE, part (2), applied to the flat target module M.",
+   "place": "Supporting finite-presentation input in the valuation/flat-module branch below the normal-cone locality argument; the Tag 0561 transfer is the algebraic tool used by the descendant valuation presentation lemmas.",
    "via": [
     "lem-trf-valuation-flat-finite-module-presentation",
     "lem-trf-valuation-finite-module-injectivity",
@@ -84,5 +146,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finitely-presented-over-subring",
+  "worker": "stage1",
+  "summary": "Replaced the empty proof with the Tag 0561 finite-generator and relation construction. The degree-reduction calculation is isolated as lem-trf-polynomial-action-reduction; the remaining steps prove the finite presentation, induced isomorphism, and transfer. This is supporting algebra beneath the inherited valuation branch and does not replace the sk-i-curve-zero local-term statement or route.",
+  "blueprint": "The steps realize the supporting finite-presentation input used by the valuation/flat-module descendants below the inherited normal-cone locality ancestry; no unit statement or route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q93-9d1fae549",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-9d1fae549 (reviewer sub-agent of L); spot-checked: Read the item, auxiliary node, cited definitions, unit/chapter route, Stacks Tag 0561 source, and delivery rules A–F. All hypotheses, proof steps, edge cases, searches, and route constraints check out; review.md records the checks."
  }
 }
