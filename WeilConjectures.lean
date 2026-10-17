@@ -3774,6 +3774,7 @@ public import WeilConjectures.RingTheory.IdempotentsDeterminedModuloRadical
 public import WeilConjectures.RingTheory.ImprovePresentationSmoothConormalFree
 public import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorization
 public import WeilConjectures.RingTheory.IndStandardSmooth
+public import WeilConjectures.RingTheory.InertiaIndEtale
 public import WeilConjectures.RingTheory.InertiaStrictHenselization
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
 public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial
@@ -4595,6 +4596,7 @@ public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.BoundaryStalkFrobenius
 public import WeilConjectures.WeilSheaf.BoundaryStalkGaloisInvariants
 public import WeilConjectures.WeilSheaf.BoundaryStalkSpecialization
+public import WeilConjectures.WeilSheaf.BoundaryStrictHenselization
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyExact

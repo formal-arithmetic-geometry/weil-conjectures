@@ -167,6 +167,7 @@ theorem indEtale_inertiaInvariants_of_isAffineOpen :
 noncomputable abbrev sectionsStructHom : k₀ →+* Γ(C, W) :=
   (Spec.preimage (hW.fromSpec ≫ (C ↘ Spec (.of k₀)))).hom
 
+omit [IsDedekindDomain Γ(C, W)] in
 include hxW in
 /-- **An algebraic closure of `k₀` in `B_Q^{I_Q}`.** There are ring maps `ε : k̄ ⟶ B_Q^{I_Q}`
 compatible with the structure maps from `k₀`, and `r : B_Q^{I_Q} ⟶ k̄` with kernel the maximal
@@ -270,22 +271,26 @@ lemma algebraMap_inertiaInvariants_mem_nonunits_iff [Q.IsMaximal] (a : Γ(C, W))
 
 set_option maxHeartbeats 1000000 in
 -- the `Spec`/`CommRingCat.ofHom` rewriting in this proof is slow
+omit [IsDedekindDomain Γ(C, W)] in
 include hxW in
-/-- **The geometric point.** There are ring maps `ε : k̄ ⟶ B_Q^{I_Q}` and `r : B_Q^{I_Q} ⟶ k̄`
-with `r ∘ ε = id` and kernel of `r` the maximal ideal, such that `Spec B_Q^{I_Q} ⟶ C` and
-`Spec ε` define a morphism to `C̄ = C ×_{k₀} k̄` and `Spec r` composed with `Spec B_Q^{I_Q} ⟶ C`
-is the geometric point `x̄ ⟶ C` over `x`. The maps of
-`AlgebraicGeometry.exists_algebraicClosure_inertiaInvariants` are twisted by a `k₀`-automorphism
-of `k̄` matching the embedding `κ(x) ↪ k̄` chosen by `x̄`. -/
+/-- **The canonical geometric point.** There are ring maps `ε : k̄ ⟶ B_Q^{I_Q}` and
+`r : B_Q^{I_Q} ⟶ k̄` with `r ∘ ε = id` and kernel of `r` the maximal ideal, such that
+`Spec B_Q^{I_Q} ⟶ C` and `Spec ε` define a morphism to `C̄ = C ×_{k₀} k̄`, and `Spec r` composed
+with `Spec B_Q^{I_Q} ⟶ C` is the geometric point `Spec ι' ≫ (Spec κ(x) ⟶ C)` over `x` for a
+`k₀`-embedding `ι' : κ(x) ↪ k̄`. Note that `ι'` is determined by `Q` and by the embedding
+`k̄ ↪ Ω` given by `ε`, so it need not be the embedding chosen by
+`Scheme.Hom.geometricFiberPointOfFinitePoint`. -/
 theorem exists_algebraicClosure_inertiaInvariants_geometricPoint :
     ∃ (ε : AlgebraicClosure k₀ →+* Ideal.inertiaInvariants C.functionField Q)
       (r : Ideal.inertiaInvariants C.functionField Q →+* AlgebraicClosure k₀),
       r.comp ε = RingHom.id _ ∧ (∀ a, r a = 0 ↔ ¬ IsUnit a) ∧
       specInertiaInvariantsTo hW Q ≫ (C ↘ Spec (.of k₀)) =
         Spec.map (CommRingCat.ofHom ε) ≫ (Scheme.specAlgebraicClosure k₀).hom ∧
-      Spec.map (CommRingCat.ofHom r) ≫ specInertiaInvariantsTo hW Q =
-        (C ↘ Spec (.of k₀)).geometricFiberPointOfFinitePoint x ≫
-          (C ↘ Spec (.of k₀)).geometricFiberProj := by
+      ∃ ι' : C.residueField x.1 ⟶ CommRingCat.of (AlgebraicClosure k₀),
+        ι'.hom.comp ((C ↘ Spec (.of k₀)).residueFieldAlgebraMap x.1) =
+          algebraMap k₀ (AlgebraicClosure k₀) ∧
+        Spec.map (CommRingCat.ofHom r) ≫ specInertiaInvariantsTo hW Q =
+          Spec.map ι' ≫ C.fromSpecResidueField x.1 := by
   classical
   set A := Ideal.inertiaInvariants C.functionField Q
   set p := C ↘ Spec (.of k₀)
@@ -298,7 +303,8 @@ theorem exists_algebraicClosure_inertiaInvariants_geometricPoint :
       (hε' : ε'.comp (algebraMap k₀ (AlgebraicClosure k₀)) =
         ε.comp (algebraMap k₀ (AlgebraicClosure k₀))) :
       gA ≫ p = Spec.map (CommRingCat.ofHom ε') ≫ (Scheme.specAlgebraicClosure k₀).hom := by
-    have hfp : hW.fromSpec ≫ p = Spec.map (CommRingCat.ofHom (sectionsStructHom (k₀ := k₀) hW)) := by
+    have hfp : hW.fromSpec ≫ p =
+        Spec.map (CommRingCat.ofHom (sectionsStructHom (k₀ := k₀) hW)) := by
       rw [CommRingCat.ofHom_hom, Spec.map_preimage]
     simp only [gA, specInertiaInvariantsTo, Category.assoc, hfp, Scheme.specAlgebraicClosure,
       Over.mk_hom, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hφ, hε']
@@ -323,7 +329,7 @@ theorem exists_algebraicClosure_inertiaInvariants_geometricPoint :
   have hcond₀ : s₀ ≫ p = 𝟙 _ ≫ (Scheme.specAlgebraicClosure k₀).hom := by
     rw [Category.assoc, hgAp ε rfl, ← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
       hrε, Category.id_comp]
-    rfl
+    rw [CommRingCat.ofHom_id, Spec.map_id, Category.id_comp]
   have hι'k : ι'.hom.comp (p.residueFieldAlgebraMap x.1) =
       algebraMap k₀ (AlgebraicClosure k₀) := by
     have := p.residueFieldAlgebraMap_comp_eq_of_comp_geometricFiberProj
@@ -333,37 +339,7 @@ theorem exists_algebraicClosure_inertiaInvariants_geometricPoint :
     rw [show pullback.lift s₀ (𝟙 _) hcond₀ ≫ p.geometricFiberToAlgebraicClosure = 𝟙 _ from
       pullback.lift_snd _ _ _, Spec.preimage_id] at this
     exact this
-  -- the twist `τ` matching `ι'` with the embedding chosen by `x̄`
-  obtain ⟨ι, hιk, hι⟩ := p.exists_geometricFiberPointOfFinitePoint_comp_geometricFiberProj x
-  letI : Algebra (C.residueField x.1) (AlgebraicClosure k₀) := ι'.hom.toAlgebra
-  letI : Algebra k₀ (C.residueField x.1) := (p.residueFieldAlgebraMap x.1).toAlgebra
-  have : IsScalarTower k₀ (C.residueField x.1) (AlgebraicClosure k₀) :=
-    IsScalarTower.of_algebraMap_eq fun c ↦ (RingHom.congr_fun hι'k c).symm
-  have : Algebra.IsAlgebraic (C.residueField x.1) (AlgebraicClosure k₀) :=
-    Algebra.IsAlgebraic.tower_top k₀
-  let ιA : C.residueField x.1 →ₐ[k₀] AlgebraicClosure k₀ :=
-    { ι.hom with commutes' := fun c ↦ RingHom.congr_fun hιk c }
-  obtain ⟨τ, hτ⟩ := IsAlgClosed.surjective_domRestrict_of_isAlgebraic (K := k₀)
-    (L := C.residueField x.1) (M := AlgebraicClosure k₀) (E := AlgebraicClosure k₀) ιA
-  have hτι (y : C.residueField x.1) : τ (ι'.hom y) = ι.hom y := AlgHom.congr_fun hτ y
-  let τe : AlgebraicClosure k₀ ≃ₐ[k₀] AlgebraicClosure k₀ :=
-    AlgEquiv.ofBijective τ (Algebra.IsAlgebraic.algHom_bijective τ)
-  refine ⟨ε.comp τe.symm.toRingEquiv.toRingHom, τe.toRingEquiv.toRingHom.comp r₀, ?_, fun a ↦ ?_,
-    hgAp _ ?_, ?_⟩
-  · refine RingHom.ext fun z ↦ ?_
-    change τe (r₀ (ε (τe.symm z))) = z
-    rw [show r₀ (ε (τe.symm z)) = τe.symm z from RingHom.congr_fun hrε _, τe.apply_symm_apply]
-  · change τe (r₀ a) = 0 ↔ _
-    rw [map_eq_zero_iff τe τe.injective, hker]
-  · refine RingHom.ext fun c ↦ ?_
-    change ε (τe.symm (algebraMap k₀ _ c)) = _
-    rw [AlgEquiv.commutes]
-    rfl
-  · have hτ' : ι' ≫ CommRingCat.ofHom τe.toRingEquiv.toRingHom = ι := by
-      ext y
-      exact hτι y
-    rw [hι, ← hτ', Spec.map_comp, Category.assoc, ← hι', CommRingCat.ofHom_comp, Spec.map_comp,
-      Category.assoc]
+  exact ⟨ε, r₀, hrε, hker, hgAp ε rfl, ι', hι'k, hι'⟩
 
 end Boundary
 
