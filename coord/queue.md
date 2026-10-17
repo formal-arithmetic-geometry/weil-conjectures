@@ -25,12 +25,12 @@
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof |
 | `WeilConjectures.WeilSheaf.DenseOpen` | 7 | 1 | proof |
 | `WeilConjectures.WeilSheaf.LowerShriekOperations` | 7 | 3 | proof |
-| `Sheaf.CategoryTheory.DerivedPerfectSmallClassCoreAlpha` | 8 | 1 | proof |
-| `Sheaf.CategoryTheory.DerivedPerfectSmallClassFactorization` | 8 | 1 | proof |
 | `Sheaf.RingTheory.FiniteAlgebraExtremallyDisconnected` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.TraceIsomorphism` | 9 | 1 | proof |
+| `Sheaf.CategoryTheory.AlphaCompactClassSmallClosed` | 10 | 1 | proof |
+| `Sheaf.CategoryTheory.GrothendieckDerivedPerfectWellGenerators` | 10 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 10 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` | 11 | 2 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | 11 | 1 | proof |
