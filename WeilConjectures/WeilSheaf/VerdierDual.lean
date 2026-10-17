@@ -42,7 +42,9 @@ they are stated here with `sorry`, each with the blueprint node it renders:
 - `fix-cor-verdier-exchange`: `𝔻_Y Rf₀! ≅ Rf_* 𝔻_X`;
 - `cor-pur-adic-and-rational-smooth-dualizing-complexes`: `ω_X ≅ ℚ̄_ℓ(d)[2d]` for `X` smooth of
   pure dimension `d`;
-- `lem-sf-hom-finite-projective`: `RHom(P, N) ≅ P^∨ ⊗ N` and `P ≅ P^∨∨` for a lisse `P`.
+- `lem-sf-hom-finite-projective`: `RHom(P, N) ≅ P^∨ ⊗ N` for a lisse `P` (its biduality
+  clause `P ≅ P^∨∨` is `AlgebraicGeometry.WeilSheaf.nonempty_iso_dual_dual`, in
+  `WeilConjectures.WeilSheaf.Bidual`).
 
 All isomorphisms are stated as the existence of an isomorphism, as in
 `WeilConjectures.WeilSheaf.LowerShriekFunctoriality`.
@@ -229,17 +231,5 @@ theorem nonempty_tensorLisse_dual_iso_derivedHom (P : WeilSheaf k₀ l X) (hP : 
 end Lisse
 
 end WeilComplex
-
-namespace WeilSheaf
-
-variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- **Biduality of a lisse sheaf** (blueprint: `lem-sf-hom-finite-projective`, "the canonical
-map `P ⟶ P^∨∨` is an isomorphism"). -/
-theorem nonempty_iso_dual_dual (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :
-    Nonempty (P ≅ (P.dual hP).dual hP.dual) :=
-  sorry
-
-end WeilSheaf
 
 end AlgebraicGeometry
