@@ -10,9 +10,64 @@
  "stmt_deps": [
   "lem-coef-reedy-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to $T\\dashv U$ and to each latching diagram of $S$. These diagrams are small: their objects are nonidentity injections into a fixed finite ordinal and their arrows are commuting triangles. The canonical isomorphism $L_n(TS)\\cong T(L_nS)$ identifies the latching map into $T(S^n)$ with $T(L_nS\\to S^n)$, because both agree on every latching coprojection. The latter is a cofibration by the hypothesis on $T$ and the Reedy cofibrancy of $S$. Cofibrations are unchanged by these isomorphisms: transport any lifting square across the isomorphism and use their left-lifting characterization in [lem-coef-reedy-model-structure]. Thus $TS$ is Reedy cofibrant. This includes $n=0$, whose latching category is empty; the same colimit-preservation statement identifies $T0$ with an initial object, so $TX$ is cofibrant.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Stacks 0038 (categories.tex, lemma-adjoint-exact), part (1); Hovey Theorem 5.2.5, latching characterization; transport of latching maps written out."
+   }
+  },
+  {
+   "text": "Let $f:A\\to B$ be any weak equivalence between cofibrant objects of $\\mathcal M$. The cofibrant clause of [lem-coef-brown-split-factorizations] gives $i:A\\to V$ and $s:B\\to V$ cofibrations and $q:V\\to B$ a trivial fibration, with $qi=f$ and $qs=1_B$. Two-out-of-three in [lem-coef-reedy-model-structure] makes $i$ and $s$ weak equivalences, hence trivial cofibrations. Therefore $T(i)$ and $T(s)$ are weak equivalences by assumption. Since $T(q)T(s)=1_{TB}$, two-out-of-three makes $T(q)$ a weak equivalence, and then $T(f)=T(q)T(i)$ is one too. This proves the moreover clause without presuming that $T$ preserves trivial fibrations.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Lemma 1.1.12, printed pp. 6-7; split factorization supplied by the existing Mathlib leaf."
+   }
+  },
+  {
+   "text": "The objectwise-cofibrancy conclusion of [lem-coef-reedy-model-structure] applies to $S$, so every $S^n$ is cofibrant; $X$ is cofibrant by hypothesis. Step 2 therefore sends every augmentation component $p^n:S^n\\to X$ to a weak equivalence. For any $\\theta:[m]\\to[n]$, naturality gives $p^n S(\\theta)=p^m$; since both augmentation components are weak equivalences, two-out-of-three makes $S(\\theta)$ one too. Its two endpoints are cofibrant, so step 2 makes $T(S(\\theta))$ a weak equivalence. This proves every claimed structure-map and augmentation-map assertion for $TS$.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Lemma 1.1.12 and Definition 5.2.7; the augmentation naturality equation and two-out-of-three."
+   }
+  },
+  {
+   "text": "Write $0_\\Delta$ for the constant diagram at the initial object of $\\mathcal N$, which is initial in its cosimplicial diagram category. In the Reedy model structure of [lem-coef-reedy-model-structure], form the commutative square with upper map $0_\\Delta\\to S'$, left map $0_\\Delta\\to TS$, right map $p':S'\\to\\operatorname{const}(TX)$, and lower map $T(p)$. It commutes by initiality. Step 1 makes its left map a Reedy cofibration, while its right map is a Reedy trivial fibration by hypothesis. The lifting axiom gives a natural transformation $a:TS\\to S'$ with $p'a=T(p)$. In degree zero this equation is $1_{TX}a^0=T(1_X)=1_{TX}$, hence $a^0=1_{TX}$. Reedy weak equivalences are objectwise, so each $p'^n$ is a weak equivalence. Step 3 gives the same property for $T(p^n)$; the equation $p'^n a^n=T(p^n)$ and two-out-of-three prove that every $a^n$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Lemma 5.5.1, printed p. 133, lifting pattern; the initial-source variant uses the cofibrant-object hypothesis available here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-brown-split-factorizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction: explicit elementary extraction from the cited Reedy model-structure and Brown factorization nodes; checked against Hovey Lemmas 1.1.12 and 5.5.1 online. A local Hovey copy is requested in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +110,45 @@
    "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
    "date": "2026-10-17",
    "verdict": "no match: ordinary cosimplicial-object definitions, model-category axioms and natural transformations into the ordinary homotopy category do not supply this double-resolution or hammock comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left Quillen functor preserves Reedy cofibrant cosimplicial frames and weak equivalences between cofibrant objects",
+   "results": "8 hits: HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism, HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism, HomotopicalAlgebra.CofibrantObject.localizerMorphism, HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences, HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff, HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans, HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization, HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism; digest e1c683fb13016596",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern cofibrant replacements, ordinary localizers or ground-model lifting, and do not supply the Reedy cosimplicial comparison stated here."
+  },
+  {
+   "tool": "grep",
+   "query": "Ken.Brown|[Ii]sLeftQuillen|Reedy|[Cc]osimplicial.*[Ff]ram [AlgebraicTopology]",
+   "results": "7 hits: Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean; digest e261c25fae4377a7",
+   "date": "2026-10-17",
+   "verdict": "no match: only the Brown factorization and the definition of a Reedy category occur; Mathlib explicitly lists the Reedy diagram model structure as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left Quillen functors preserve weak equivalences between cofibrant objects and Reedy cofibrant cosimplicial resolutions",
+   "results": "8 hits: HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences, HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff, HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff, HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans, HomotopicalAlgebra.CofibrantObject.HoCat.resolution, HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution; digest 32d343e7111a2b90",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern cofibrant replacements, ordinary localizers or ground-model lifting, and do not supply the Reedy cosimplicial comparison stated here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftQuillen\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern cofibrant replacements, ordinary localizers or ground-model lifting, and do not supply the Reedy cosimplicial comparison stated here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reedy model structure on cosimplicial diagrams lifting against an acyclic fibration with a cofibrant source",
+   "results": "8 hits: HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual, HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick, HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood, SSet.modelCategoryQuillen.instCategoryWithFibrations, HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj, SSet.modelCategoryQuillen.instCategoryWithCofibrations, HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution, SSet.modelCategoryQuillen.fibrations_eq; digest 01a510986a8bb2e1",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern cofibrant replacements, ordinary localizers or ground-model lifting, and do not supply the Reedy cosimplicial comparison stated here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cosimplicial-frame-mapping",
@@ -82,5 +172,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-reedy-left-frame-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing Mathlib leaves for left-adjoint preservation of colimits and Brown split factorization, and the existing Reedy model-structure theorem. The proof identifies the transported latching maps, proves the Brown weak-equivalence consequence explicitly, checks all source components are cofibrant, and constructs the comparison by a single Reedy lifting square; its degree-zero component is forced by the augmentation equation. No new nodes or Lean changes. Every step is elementary relative to its cited statements and is under 2000 characters.",
+  "blueprint": "Realizes the derived coefficient adjunction in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, via the inherited chain, specifically cosimplicial-frame-mapping step 13 (left-Quillen frame comparison). The unit and chapter route is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-69904f7fa",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-69904f7fa (reviewer sub-agent of L); spot-checked: Read in full: the item, the statements of lem-coef-reedy-model-structure, lem-coef-brown-split-factorizations (BrownLemma.lean:48-53,85-87) and lem-weil-pbc-left-adjoint-preserves-colimits (Stacks 0038, categories.tex:3472 part (1)), parent lem-coef-cosimplicial-frame-mapping step 13, blueprint main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2, and unit sk-prop-sf-biduality-general. The statement is unchanged and correct. Step 1: the latching categories of Delta are small, and T preserves their colimits. The transported latching map equals T(L_nS->S^n) because the two agree on coprojections. That map is a cofibration, and cofibrations are closed under isomorphism by their LLP characterization. For n=0, T0 is initial, so TX is cofibrant. Step 2: Ken Brown from the split factorization (qi=f, qs=1). Two-out-of-three makes i and s trivial cofibrations, then T(q) and T(f) are weak equivalences; both endpoints are cofibrant, as the leaf requires. Step 3: Reedy cofibrant implies objectwise cofibrant, so step 2 applies to every p^n and, by naturality and two-out-of-three, to every S(theta). Step 4: lift 0_Delta->TS (a Reedy cofibration by step 1) against p' (a Reedy trivial fibration by hypothesis). p'^0=1 and T(p^0)=1 force a^0=1, and objectwise weak equivalences plus two-out-of-three give every a^n. Small cases checked: identity adjunction, n=0, X not fibrant. No new nodes. No duplicate found by rg; the simplicial-frame-comparison node is the dual statement. Route stays in the unit plus a Mathlib leaf, so no tool_uses. No SGA. Hovey is not local: WANTED is recorded and proof_origin is agent. No fixes."
  }
 }

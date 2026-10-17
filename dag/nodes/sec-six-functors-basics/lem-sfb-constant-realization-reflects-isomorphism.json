@@ -3,11 +3,82 @@
  "kind": "statement",
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $j_U^*$ for restriction of module sheaves to the localized ringed site and put $F=j_U^*\\circ c_J:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(\\underline R|_U)$. The constant module functor is additive and exact by [def-sfb-site-derived-constant-module-functor]; module restriction is additive and exact by [def-weil-pbc-ringed-derived-restriction]. Their composite is therefore additive and exact. Applying the two termwise representative comparisons gives $c(QK)|_U\\cong Q(FK)$ for every, possibly unbounded, complex $K$ of $R$-modules. These comparisons are natural in chain maps. Here $F(T)=\\underline T|_U$ and no connectedness of $U$ is required.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J, lemma-constant-exact; Section 03DH, section-localize; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "For a representative complex $K$ and any $i\\in\\mathbf Z$, apply [lem-weil-pbc-exact-functor-complex-cohomology] to the exact functor $F$ of step 1. It gives the canonical comparison $H^i(FK)\\cong F(H^i(K))$, induced by the preserved kernel and image of the differentials and natural in chain maps. The representative comparison in step 1 and the cohomology factorization through $Q$ in [def-weil-abstract-derived-category] consequently give $H^i(c(QK)|_U)\\cong\\underline{H^i(QK)}|_U$. Every derived object has a complex representative, so this constructs the asserted isomorphism on objects in all degrees.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, kernel and cokernel argument, applied degreewise; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "The comparisons in step 2 are natural for all derived morphisms, not only for chain maps: by [def-weil-abstract-derived-category], $D(R)$ is the localization at quasi-isomorphisms. Naturality holds for the image $Q(a)$ of each chain map $a$. For a quasi-isomorphism $s$, both functors in the comparison send $Q(s)$ to an isomorphism, so multiplying its naturality square by these inverses proves naturality for $Q(s)^{-1}$. Composing squares proves naturality for every composite of these generators, hence for every morphism of the localization. This also makes the comparison independent of a chosen representative up to the canonical comparison isomorphisms. In particular $H^i(c(f)|_U)$ corresponds to $F(H^i(f))$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category, localization at quasi-isomorphisms; agent naturality verification"
+   }
+  },
+  {
+   "text": "Now suppose $c(f)|_U$ is an isomorphism and fix $i\\in\\mathbf Z$. Applying the functor $H^i$ to an inverse shows that $H^i(c(f)|_U)$ is an isomorphism; by step 3, so is $F(g)$, where $g=H^i(f)$. Part (a) of [lem-sp-exact-functor-preserves-homology], applied to the exact functor $F$, identifies $F(\\ker g)$ with $\\ker F(g)=0$ and $F(\\operatorname{coker}g)$ with $\\operatorname{coker}F(g)=0$. Thus $\\underline{\\ker g}|_U$ and $\\underline{\\operatorname{coker}g}|_U$ are zero module sheaves. Apply [lem-sfb-constant-realization-detects-zero] separately to the two $R$-modules $\\ker g$ and $\\operatorname{coker}g$. Its nonemptiness hypothesis is precisely the hypothesis on $U$ in the statement; it gives $\\ker g=0$ and $\\operatorname{coker}g=0$. The first equality says $g$ is injective, while the second says every target element is an image. Hence $g$ is a bijective linear map, whose inverse is linear, and is an isomorphism.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-sfb-constant-realization-detects-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; nonempty constant-module detection uses sites.tex Tags 00WB and 00WK, as stated in lem-sfb-constant-realization-detects-zero"
+   }
+  },
+  {
+   "text": "Step 4 proves that $H^i(f)$ is an isomorphism for every integer $i$. The criterion [lem-weil-pbc-unbounded-derived-iso-cohomology], applied to the abelian category $\\operatorname{Mod}(R)$, now gives that $f$ is an isomorphism in $D(R)$. This criterion is explicitly unbounded. All preceding exactness and detection statements apply to arbitrary modules over any commutative ring, so the argument introduces no finiteness, Noetherian, or boundedness assumption.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic, and Tag 05RU, definition-unbounded-derived-category; Mathlib DerivedCategory.isIso_iff as recorded by the cited node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-sfb-constant-realization-detects-zero",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093J, lemma-constant-exact; derived.tex Tags 015F and 05RT; agent combination with existing nonempty constant-sheaf detection and explicit localization naturality"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-wcontractible-constant-reductions-ml",
@@ -28,7 +99,8 @@
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category",
   "def-pur-localized-ringed-site",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-ringed-derived-restriction"
  ],
  "mathlib_searches": [
   {
@@ -65,6 +137,41 @@
    "results": "10 hits: CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.GrothendieckTopology.IsLocalSite.instFaithfulSheafConstantSheafOfHasColimitsOfSizeOfHasProducts, CategoryTheory.GrothendieckTopology.IsLocalSite.faithful_constantSheaf, CategoryTheory.GrothendieckTopology.IsLocalSite.fullyFaithfulConstantSheaf, CategoryTheory.GrothendieckTopology.IsLocalSite.fullyFaithfulCoconstantSheaf, CategoryTheory.GrothendieckTopology.IsLocalSite.instFaithfulSheafCoconstantSheaf, CondensedMod.LocallyConstant.instFaithfulSheafCompHausCoherentTopologyTypeConstantSheaf, LightCondMod.LocallyConstant.instFaithfulSheafLightProfiniteCoherentTopologyTypeConstantSheaf",
    "date": "2026-10-17",
    "verdict": "no match: the hits state local sheafification, ordinary module tensor, or condensed/local-site results; none states this pro-étale detection or general ring-sheaf derived normalization lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(Derived|derived|homology|reflects)|mapDerivedCategory.*(homology|iso)",
+   "results": "4 hits: Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constant module realization over a nonempty pro-étale object, together with natural derived cohomology and reflection; generic derived and exact-functor inputs are reused through existing nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaf realization commutes with cohomology and detects derived isomorphisms on nonempty schemes",
+   "results": "8 hits: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant.recOn, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.constantCommuteCompose, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, LightCondensed.IsDiscrete",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constant module realization over a nonempty pro-étale object, together with natural derived cohomology and reflection; generic derived and exact-functor inputs are reused through existing nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"ReflectsIsomorphisms\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constant module realization over a nonempty pro-étale object, together with natural derived cohomology and reflection; generic derived and exact-functor inputs are reused through existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived constant module sheaf functor restricted to a nonempty proetale object reflects isomorphisms and commutes with cohomology",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteFree, LightCondMod.LocallyConstant.functor, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, CondensedMod.LocallyConstant.functorIsoDiscrete",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constant module realization over a nonempty pro-étale object, together with natural derived cohomology and reflection; generic derived and exact-functor inputs are reused through existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact constant module sheaf functor detects isomorphisms in the unbounded derived category by kernels and cokernels of cohomology maps",
+   "results": "8 hits: DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.instIsIsoMapCochainComplexIntQ, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.isKInjective_iff_of_iso",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constant module realization over a nonempty pro-étale object, together with natural derived cohomology and reflection; generic derived and exact-functor inputs are reused through existing nodes"
   }
  ],
  "blueprint": {
@@ -80,5 +187,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-constant-realization-reflects-isomorphism",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied a five-step proof using only existing nodes. Compared exact constant realization and exact slice restriction on representative complexes; verified naturality on localization generators; reflected isomorphisms by detecting the kernels and cokernels of cohomology maps on a nonempty object, then used the unbounded derived cohomology criterion. Added the definition dependency for derived restriction. No new nodes or new Mathlib leaves.",
+  "blueprint": "det-lem-integral-models-stacks, the integral criterion invoked by its proof (unit sk-lem-integral-models step (1)-(2)); this is the preparatory constant-realization reflection argument in the 09C5 local perfect lifting route through lem-sfb-wcontractible-constant-reductions-ml."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-a51a97527",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-a51a97527 (reviewer sub-agent of L); spot-checked: I read the whole item and all its steps; the delivery has no new nodes. The statement is unchanged and true. The only change is that def-weil-pbc-ringed-derived-restriction was added to stmt_deps, which is correct: the statement's restriction to U on the derived category needs that definition. The nonempty-U hypothesis is necessary: for U empty, f: Z -> 0 in degree 0 has c(f)|_U an isomorphism although f is not. It is used only in step 4. Step 1 (marked elementary) is correct: constant realization is exact by def-sfb-site-derived-constant-module-functor, matching Stacks 093J lemma-constant-exact, and restriction is exact by def-weil-pbc-ringed-derived-restriction. Step 2 applies the Mathlib leaf lem-weil-pbc-exact-functor-complex-cohomology to the exact composite F, together with the factorization H^r∘Q ≅ H^r from def-weil-abstract-derived-category. Step 3 (marked elementary) extends naturality from chain maps to all derived morphisms, which is correct for a localization. Step 4 uses part (a) of lem-sp-exact-functor-preserves-homology (kernels and cokernels are preserved) and then lem-sfb-constant-realization-detects-zero (same unit, split and reviewed; I read its proof), and that lemma's hypotheses hold. Step 5 is the unbounded criterion lem-weil-pbc-unbounded-derived-iso-cohomology, which matches DerivedCategory.isIso_iff exactly. Route: every off-unit statement cited is a Mathlib leaf, so no tool_uses are needed and none are accepted; no SGA is cited. Duplicates: I searched dag/nodes with rg and rejected the closest candidates (perfect-constant-derived-map-local, perfect-constant-local-chain-representative, kun-geometric-point-derived-constants, completed-constant-finite-complex-realization, pur-etale-iso-descent, locally-constant-tensor, trf-dnc-contractible-constant-defect). The item is a strict tool of its parent lem-sfb-wcontractible-constant-reductions-ml, not a restated clause of it. Searches record all three kinds. Minor, no change made: the report names citations.json and searches.jsonl, which are not in the commit. No fixes."
  }
 }

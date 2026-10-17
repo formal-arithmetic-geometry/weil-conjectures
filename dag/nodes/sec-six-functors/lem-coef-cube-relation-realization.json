@@ -10,9 +10,81 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $J=(\\{L,R\\}\\times\\{0,\\ldots,i-1\\})\\amalg\\{i+1,\\ldots,n\\}$, of cardinality $m=n+i$. Encode $(U,V)\\in D_{n,i}$ by $W\\subseteq J$: $(L,j)\\in W$ means $j\\in U$, $(R,j)\\in W$ means $j\\in V$, and a tail label $j$ belongs to $W$ exactly when $j\\in U\\cap V$. The inverse inserts $i$ in both sets, assigns the left and right labels separately, and inserts each tail label in both. These formulas are mutually inverse and preserve inclusion. Similarly $T_{n,i}$ has independent coordinates $x_{L,j}=p_j$, $x_{R,j}=q_j$ for $j<i$ and $x_j=p_j=q_j$ for $j>i$; reinserting the two constant coordinates $1$ and copying each tail coordinate gives its inverse. Both coordinate maps are continuous in the displayed subspace topologies. In this notation the proposed map is $H([W_\\bullet;w])=\\sum_a w_a\\chi_{W_a}$ followed by this explicit coordinate insertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical description preceding Remark 2.2.2.6, printed p.76 (zero-based PDF page 93); agent expansion of the relation-space coordinate comparison. WANTED archive; online original read 2026-10-17."
+   }
+  },
+  {
+   "text": "For any monotone $\\alpha:[s]\\to[r]$, the nerve operator restricts a chain to $W_{\\alpha(0)},\\ldots,W_{\\alpha(s)}$. The coordinate identity\n$$\\sum_{b=0}^{s}t_b\\chi_{W_{\\alpha(b)}}=\\sum_{a=0}^{r}\\left(\\sum_{\\alpha(b)=a}t_b\\right)\\chi_{W_a}$$\nis exactly the realization identification of [def-cbc-enhanced-diagrams-cones]. Thus $H$ is well-defined on the quotient, including zero weights and repetitions. Each simplex map is a finite sum of scalar multiples of fixed real vectors, hence continuous, so the quotient topology makes $H$ continuous. Nonnegative weights with sum $1$ give coordinates in $[0,1]$; after coordinate insertion they have $p_i=q_i=1$ and equal tails, as required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical description preceding Remark 2.2.2.6, printed p.76 (zero-based PDF page 93); agent expansion of the relation-space coordinate comparison. WANTED archive; online original read 2026-10-17."
+   }
+  },
+  {
+   "text": "Let $x\\in[0,1]^J$. For $m>0$, choose an enumeration $\\sigma_1,\\ldots,\\sigma_m$ of $J$ with $x_{\\sigma_1}\\geq\\cdots\\geq x_{\\sigma_m}$. Set $W_0=\\varnothing$, $W_k=\\{\\sigma_1,\\ldots,\\sigma_k\\}$ and\n$$w_0=1-x_{\\sigma_1},\\quad w_k=x_{\\sigma_k}-x_{\\sigma_{k+1}}\\ (1\\leq k<m),\\quad w_m=x_{\\sigma_m}.$$\nThese weights are nonnegative and sum to $1$. They specify a realization point by [def-cbc-enhanced-diagrams-cones]. Its coordinate at $\\sigma_j$ is $\\sum_{k=j}^{m}w_k=x_{\\sigma_j}$, so $H$ is surjective. When $m=0$, use the single vertex $W_0=\\varnothing$ with weight $1$; both its coordinate cube and its realization are singletons. This also covers $n=i=0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical description preceding Remark 2.2.2.6, printed p.76 (zero-based PDF page 93); agent expansion of the relation-space coordinate comparison. WANTED archive; online original read 2026-10-17."
+   }
+  },
+  {
+   "text": "By [lem-cbc-realization-cw-subcomplex], a realization point has a unique nondegenerate chain with positive weights. For a nerve of an inclusion poset, nondegenerate means a strictly increasing chain: an adjacent repetition is a degeneracy, and a degeneracy repeats a vertex. Write this chain $W_0\\subsetneq\\cdots\\subsetneq W_r$. The coordinates of its image are $1$ on $W_0$, $0$ outside $W_r$, and $s_a=\\sum_{b=a}^{r}w_b$ on $W_a\\setminus W_{a-1}$ for $1\\leq a\\leq r$. If $r>0$, every difference is nonempty and $1>s_1>\\cdots>s_r>0$. Thus the image recovers these groups as its distinct intermediate coordinate levels, recovers $W_0$ as the coordinates equal to $1$, and recovers every $W_a$ by adjoining the groups in decreasing-level order. It recovers the weights as $w_0=1-s_1$, $w_a=s_a-s_{a+1}$ for $1\\leq a<r$, and $w_r=s_r$. If there are no intermediate levels, $r=0$, the image is the characteristic vector of $W_0$ and the sole weight is $1$. Hence image coordinates determine the positive representative uniquely, so $H$ is injective. In particular ties in step 3 give the same point, and zero endpoint weights cause no ambiguity.",
+   "uses": [
+    "lem-cbc-realization-cw-subcomplex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical description preceding Remark 2.2.2.6, printed p.76 (zero-based PDF page 93); agent expansion of the relation-space coordinate comparison. WANTED archive; online original read 2026-10-17."
+   }
+  },
+  {
+   "text": "For each enumeration $\\sigma$ of $J$, let $C_\\sigma=\\{x\\in[0,1]^J:x_{\\sigma_1}\\geq\\cdots\\geq x_{\\sigma_m}\\}$. These finitely many closed sets cover the cube. On $C_\\sigma$ the weights in step 3 depend continuously on $x$, and the chain $W_\\bullet$ is fixed, so the characteristic simplex map of [def-cbc-enhanced-diagrams-cones] makes the inverse $I_\\sigma:C_\\sigma\\to|N(D_{n,i})|$ continuous (interpreting $W_k$ by step 1). Steps 3 and 4 show these maps all equal the set-theoretic inverse of $H$ on their domains. To check continuity of the assembled inverse, let $B$ be any closed subset of the realization. Its inverse image is $\\bigcup_\\sigma I_\\sigma^{-1}(B)$. Each term is closed in $C_\\sigma$, hence closed in the cube since $C_\\sigma$ is closed; the union is finite, hence closed. Thus the inverse is continuous. For $m=0$ it is the constant characteristic map of the single vertex. Combining with the coordinate insertion of step 1 proves the required homeomorphism for the ordinary subspace topology.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical description preceding Remark 2.2.2.6, printed p.76 (zero-based PDF page 93); agent expansion of the relation-space coordinate comparison. WANTED archive; online original read 2026-10-17."
+   }
+  },
+  {
+   "text": "The same identity in step 2, applied to a chain of single subsets, makes $c_{n,i}$ well-defined and continuous. The nerve of the first poset projection sends $[(U_a,V_a)_a;w]$ to $[(U_a)_a;w]$ and the second sends it to $[(V_a)_a;w]$, by the nerve and realization formulas of [def-cbc-enhanced-diagrams-cones]. Therefore their composites with $c_{n,i}$ are respectively $\\sum_a w_a\\chi_{U_a}$ and $\\sum_a w_a\\chi_{V_a}$, exactly the two components of $H$ after coordinate insertion. These equalities hold on every quotient representative, proving both projection compatibilities.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical description preceding Remark 2.2.2.6, printed p.76 (zero-based PDF page 93); agent expansion of the relation-space coordinate comparison. WANTED archive; online original read 2026-10-17."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-realization-cw-subcomplex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 2.2.2, cubical description preceding Remark 2.2.2.6, printed p.76 (zero-based PDF page 93); agent expansion of the relation-space coordinate comparison. WANTED archive; online original read 2026-10-17."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +127,73 @@
    "results": "{\"t\": \"2026-10-17T08:39:49Z\", \"tool\": \"grep\", \"query\": \"toTop|realization|Homeomorph\", \"sub\": \"AlgebraicTopology/SimplicialSet/ProdStdSimplex.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned types concern nerves of products of standard simplices, Cech nerves, abstract pullbacks or the definition of realization; none supplies the characteristic-coordinate homeomorphism from the specified finite relation-poset realization to its ordinary Euclidean subspace. Read ProdStdSimplex.lean:45-67 and TopCat/Limits/Pullbacks.lean:31-87; the former has no realization theorem and the latter only identifies an already-topological pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite poset P, the geometric realization of the nerve maps homeomorphically to the order complex embedded in Euclidean space by barycentric sums of vertices",
+   "results": "{\"t\": \"2026-10-17T10:06:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite poset P, the geometric realization of the nerve maps homeomorphically to the order complex embedded in Euclidean space by barycentric sums of vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.isoNerve\", \"TopCat.toSSetObjEquiv\", \"SSet.toTopSimplex\", \"CategoryTheory.nerve.representableBy\", \"SimplexCategory.toTopObjOneHomeo\", \"SSet.toTop\", \"SSet.stdSimplex.isoNerve_hom_app_apply\", \"SSet.stdSimplex.nonDegenerateEquiv_symm_apply_coe\"], \"digest\": \"1c9bf35c3b7b05bb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply standard simplices, nerve nondegeneracy, a realization functor, or interval homeomorphisms; none states the finite Boolean characteristic-coordinate homeomorphism or the relation-space comparison. Read SingularSet.lean:63-100, NerveNondegenerate.lean:32-70, and ProdStdSimplex.lean:38-85."
+  },
+  {
+   "tool": "loogle",
+   "query": "OrderComplex, Nerve, geometric realization, Homeomorph",
+   "results": "{\"t\": \"2026-10-17T10:06:55Z\", \"tool\": \"loogle\", \"query\": \"OrderComplex, Nerve, geometric realization, Homeomorph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'OrderComplex'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply standard simplices, nerve nondegeneracy, a realization functor, or interval homeomorphisms; none states the finite Boolean characteristic-coordinate homeomorphism or the relation-space comparison. Read SingularSet.lean:63-100, NerveNondegenerate.lean:32-70, and ProdStdSimplex.lean:38-85."
+  },
+  {
+   "tool": "grep",
+   "query": "OrderComplex|geometricRealization|realization.*nerve|Nerve",
+   "results": "{\"t\": \"2026-10-17T10:06:55Z\", \"tool\": \"grep\", \"query\": \"OrderComplex|geometricRealization|realization.*nerve|Nerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\"], \"digest\": \"0d99b9b115c83557\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply standard simplices, nerve nondegeneracy, a realization functor, or interval homeomorphisms; none states the finite Boolean characteristic-coordinate homeomorphism or the relation-space comparison. Read SingularSet.lean:63-100, NerveNondegenerate.lean:32-70, and ProdStdSimplex.lean:38-85."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of the poset of subsets of a finite set containing a fixed element is homeomorphic to the cube face via barycentric characteristic vectors",
+   "results": "{\"t\": \"2026-10-17T10:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of the poset of subsets of a finite set containing a fixed element is homeomorphic to the cube face via barycentric characteristic vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.faceSingletonIso\", \"SSet.stdSimplex.facePairIso\", \"SSet.stdSimplex.faceRepresentableBy\", \"SSet.stdSimplex.faceSingletonComplIso\", \"SimplexCategory.toTopObjOneHomeo\", \"stdSimplexHomeomorphUnitInterval_one\", \"SSet.stdSimplex.isoNerve\", \"SSet.stdSimplex.face_eq_ofSimplex\"], \"digest\": \"731429f92a53f526\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply standard simplices, nerve nondegeneracy, a realization functor, or interval homeomorphisms; none states the finite Boolean characteristic-coordinate homeomorphism or the relation-space comparison. Read SingularSet.lean:63-100, NerveNondegenerate.lean:32-70, and ProdStdSimplex.lean:38-85."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.toTop, CategoryTheory.nerve, Homeomorph",
+   "results": "{\"t\": \"2026-10-17T10:09:20Z\", \"tool\": \"loogle\", \"query\": \"SSet.toTop, CategoryTheory.nerve, Homeomorph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply standard simplices, nerve nondegeneracy, a realization functor, or interval homeomorphisms; none states the finite Boolean characteristic-coordinate homeomorphism or the relation-space comparison. Read SingularSet.lean:63-100, NerveNondegenerate.lean:32-70, and ProdStdSimplex.lean:38-85."
+  },
+  {
+   "tool": "grep",
+   "query": "characteristic.*vector|nerve.*poset|realization.*cube",
+   "results": "{\"t\": \"2026-10-17T10:09:20Z\", \"tool\": \"grep\", \"query\": \"characteristic.*vector|nerve.*poset|realization.*cube\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"a8d14365db374711\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply standard simplices, nerve nondegeneracy, a realization functor, or interval homeomorphisms; none states the finite Boolean characteristic-coordinate homeomorphism or the relation-space comparison. Read SingularSet.lean:63-100, NerveNondegenerate.lean:32-70, and ProdStdSimplex.lean:38-85."
+  },
+  {
+   "tool": "grep",
+   "query": "Boolean.*(realiz|homeomorph)|((realiz|homeomorph).*(powerset|Boolean|cube))",
+   "results": "{\"t\": \"2026-10-17T10:22:00Z\", \"tool\": \"grep\", \"query\": \"Boolean.*(realiz|homeomorph)|((realiz|homeomorph).*(powerset|Boolean|cube))\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply standard simplices, nerve nondegeneracy, a realization functor, or interval homeomorphisms; none states the finite Boolean characteristic-coordinate homeomorphism or the relation-space comparison. Read SingularSet.lean:63-100, NerveNondegenerate.lean:32-70, and ProdStdSimplex.lean:38-85."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric realization of the nerve of a Boolean lattice triangulates the cube by sorting coordinates",
+   "results": "{\"t\": \"2026-10-17T10:22:00Z\", \"tool\": \"leansearch\", \"query\": \"Geometric realization of the nerve of a Boolean lattice triangulates the cube by sorting coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"CategoryTheory.nerve.representableBy\", \"CategoryTheory.Nerve.isStrictSegal\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"PartialOrder.mem_nerve_nonDegenerate_iff_strictMono\", \"PartialOrder.mem_nerve_nonDegenerate_iff_injective\", \"SimplexCategory.toTopObj\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"6868973edbdce523\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply standard simplices, nerve nondegeneracy, a realization functor, or interval homeomorphisms; none states the finite Boolean characteristic-coordinate homeomorphism or the relation-space comparison. Read SingularSet.lean:63-100, NerveNondegenerate.lean:32-70, and ProdStdSimplex.lean:38-85."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric realization of the nerve of a finite Boolean lattice is homeomorphic to the unit cube by barycentric sums of characteristic vectors",
+   "results": "{\"t\": \"2026-10-17T10:22:02Z\", \"tool\": \"leanfinder\", \"query\": \"The geometric realization of the nerve of a finite Boolean lattice is homeomorphic to the unit cube by barycentric sums of characteristic vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.toTopObjOneHomeo\", \"SimplexCategory.toTop_obj\", \"stdSimplexHomeomorphUnitInterval\", \"stdSimplexHomeomorphUnitInterval_one\", \"SimplexCategory.toTop₀_obj\", \"SSet.stdSimplex.isoNerve\", \"TopCat.toSSetObjEquiv\", \"SimplexCategory.toTop\"], \"digest\": \"c7586cb1da6b4c69\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply standard simplices, nerve nondegeneracy, a realization functor, or interval homeomorphisms; none states the finite Boolean characteristic-coordinate homeomorphism or the relation-space comparison. Read SingularSet.lean:63-100, NerveNondegenerate.lean:32-70, and ProdStdSimplex.lean:38-85."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pinched-cube-latching",
@@ -86,5 +221,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cube-relation-realization",
+  "worker": "stage1",
+  "summary": "Retained the characteristic-coordinate statement and completed its cubical comparison directly: encode the relation poset by its independent Boolean coordinates, descend the barycentric formula, sort coordinates for an inverse, use the existing realization normal-form theorem for uniqueness, and verify inverse continuity on a finite closed cover and both projections. No new nodes; two uncommitted proposed nodes of the earlier attempt were archived as unnecessary.",
+  "blueprint": "The foundational enhancement below prop-coef-integral-exceptional-adjoint, via lem-coef-pinched-cube-latching: relation-space characteristic comparison in its returned Step 7. The coordinate triangulation supplies the realization justification for HTT Section 2.2.2 before Remark 2.2.2.6.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-cw-subcomplex",
+    "why": "Generic realization normal-form theorem: step 4 uses its unique positive nondegenerate representative. It does not replace any geometric or coefficient step of the biduality unit; no node of that unit supplies this topological normal form."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-cw-subcomplex"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-3235897e4",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-3235897e4 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, both cited nodes in full (def-cbc-enhanced-diagrams-cones, lem-cbc-realization-cw-subcomplex), the step of the parent lem-coef-pinched-cube-latching that cites the item, the unit record and the docs A-F. The statement is true as written and is self-contained. Under the encoding by labels J (|J|=n+i), the poset D_{n,i} is isomorphic to P(J), so the claim reduces to the characteristic-coordinate triangulation |N(P(J))| ≅ [0,1]^J followed by the linear map [0,1]^J ≅ T_{n,i}. It matches the parent's HTT §2.2.2 cube quotient, where on the face with coordinate i equal to 1, points with equal coordinates above i are identified. HTT itself is not archived; this is recorded as WANTED and proof_origin.by=agent is correct. Small cases checked: n=i=0, i=0, i=n, and n=1 with i=0 or i=1. Step 1: the bijection is order-preserving in both directions. It silently uses the fact that a poset isomorphism induces a homeomorphism of realizations; I accept that as elementary. Step 2: the displayed identity is exactly def-cbc's |alpha|-relation. Step 3: the sorting weights telescope to the input coordinates. Step 4: it uses the statement (not the proof) of lem-cbc-realization-cw-subcomplex for the unique positive nondegenerate representative. Strict chains with positive weights give distinct levels 1>s_1>...>s_r>0, so H is injective. Step 5: the finite closed cover C_sigma plus a written-out closed-set pasting argument correctly gives continuity of the inverse. Step 6: the projection compatibility is correct, and c_{n,i} is well-defined by step 2's identity. Duplicate search over dag/nodes (characteristic vector/coordinate, Boolean, triangulation, [0,1]^, order complex) found nothing that states this result. There are no new nodes, no cycle (neither cited closure reaches the item) and no SGA citation. The search records cover leanfinder, loogle and grep. This is not a target node, so no base-change morphism or coefficient category is involved. I accept the declared tool use of lem-cbc-realization-cw-subcomplex (unit sk-prop-sf-cbc): it is the generic realization normal form, used as a black box, and replaces no step of the biduality route. No changes made; review.md written."
  }
 }

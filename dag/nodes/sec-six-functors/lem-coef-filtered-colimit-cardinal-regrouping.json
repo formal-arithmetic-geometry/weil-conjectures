@@ -11,9 +11,106 @@
   "def-weil-size-convention",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $S$ be a set of fewer than $\\lambda$ arrows. Choose $j_0\\in J$ using filtered nonemptiness in [def-weil-pbc-category-colimit]. Put $E_0=S\\cup\\{1_{j_0}\\}$ and let $O_n$ be the set of endpoints of arrows in $E_n$. Recursively form an increasing sequence of arrow sets. To obtain $E_{n+1}$ retain $E_n$ and adjoin: $1_x$ for every $x\\in O_n$; $g\\circ f$ for every composable pair $f,g\\in E_n$; two chosen arrows $x\\to z_{x,y}$ and $y\\to z_{x,y}$ for every $(x,y)\\in O_n^2$; and one chosen arrow $h_{f,g}:y\\to z_{f,g}$ with $h_{f,g}f=h_{f,g}g$ for every parallel pair $f,g:x\\to y$ in $E_n$. The last two choices exist by the two filteredness conditions in the cited definition. They are choices from sets because $J$ is small. Define $E=\\bigcup_{n<\\omega}E_n$ and $O=\\bigcup_{n<\\omega}O_n$. This construction adds only the displayed witnesses, not every arrow between the selected objects.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002V (definition-directed) and 002F (definition-colimit); agent-written bounded non-full closure and cocone argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "Every $E_n$ has size less than $\\lambda$. For the base this follows from $|S|<\\lambda$ and adjoining one element. Inductively put $\\theta=\\max(\\aleph_0,|E_n|)<\\lambda$, using uncountability. The endpoints satisfy $|O_n|\\leq 2|E_n|\\leq\\theta$. By [lem-coef-infinite-cardinal-square-power], $\\theta\\cdot\\theta=\\theta$. Thus each of the composable-pair, object-pair and parallel-pair indexing sets in step 1 has size at most $\\theta$; each index contributes at most two arrows. The finite union of these families still has size at most $\\theta$: finite disjoint labels and an extra binary choice embed into a finite subset of $\\theta$, and then into $\\theta\\times\\theta$. Hence $|E_{n+1}|\\leq\\theta<\\lambda$. Finally $\\omega<\\lambda$ and the assumed regular-union property give $|E|<\\lambda$. This is induction on $n$, followed by one countable union, with no assumption that the full subcategory on $O$ is small in cardinality.",
+   "uses": [
+    "lem-coef-infinite-cardinal-square-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002V (definition-directed) and 002F (definition-colimit); agent-written bounded non-full closure and cocone argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "The sets $O,E$ define a subcategory $K\\subseteq J$: every object in $O$ acquires its identity at a later stage, and any composable pair in $E$ belongs to some common $E_n$ and acquires its composite in $E_{n+1}$. Its laws are those of $J$. It is nonempty because it contains $j_0$. For two objects, or two parallel arrows, a common finite stage contains them, so the next stage supplies the common target, or the equalizing arrow, inside $K$. These are precisely the three filteredness conditions of [def-weil-pbc-category-colimit]. To see the finite-diagram formulation directly, first send the finitely many diagram objects to a common object by repeatedly using the two-object condition. For each diagram arrow, equalize the two resulting parallel maps into that object, postcomposing all legs each time. There are finitely many arrows, and postcomposition preserves equations already imposed. The empty diagram uses $j_0$. Thus $K$ is filtered, has fewer than $\\lambda$ arrows by step 2, and contains $S$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002V (definition-directed) and 002F (definition-colimit); agent-written bounded non-full closure and cocone argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "A subcategory of the small category $J$ is specified by subsets of its object and arrow sets satisfying identity and composition closure. The collection of such pairs is a subset of the product of two small power sets, so $P_J$ is small in the chosen universe of [def-weil-size-convention]; inclusion is a partial order. Applying steps 1-3 to $S=\\varnothing$ proves nonemptiness. Given a family $(K_a)_{a\\in A}$ in $P_J$ with $|A|<\\lambda$, regularity bounds $S=\\bigcup_a\\operatorname{Mor}(K_a)$ by $\\lambda$. Apply steps 1-3 to this $S$. The resulting member contains every $K_a$, including its objects because each object's identity belongs to $S$. It is an upper bound. This proves $\\lambda$-directedness, including the empty family; finite directedness follows since $\\lambda$ is infinite. Applying step 3 to singleton arrow sets also shows that every arrow of $J$, and every object via its identity, occurs in a member.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002V (definition-directed) and 002F (definition-colimit); agent-written bounded non-full closure and cocone argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "For $K\\in P_J$ choose $Y_K=\\operatorname{colim}_{j\\in K}X(j)$ with coprojections $i_{K,j}$. All these colimits exist because $K$ is small and $\\mathcal A$ has all small colimits. For an inclusion $K\\subseteq H$, the cocone $(i_{H,j})_{j\\in K}$ induces a unique $t_{K,H}:Y_K\\to Y_H$ with $t_{K,H}i_{K,j}=i_{H,j}$, by [def-weil-pbc-category-colimit]. The identity on $Y_K$ has this property for $K=H$, so $t_{K,K}=1$; for $K\\subseteq H\\subseteq R$, both $t_{H,R}t_{K,H}$ and $t_{K,R}$ have this property, so they are equal. This constructs exactly the outer diagram in the statement. Its small colimit $L=\\operatorname{colim}_{K\\in P_J}Y_K$ exists by step 4; write $k_K:Y_K\\to L$ for its coprojections.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002V (definition-directed) and 002F (definition-colimit); agent-written bounded non-full closure and cocone argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "Write $C=\\operatorname{colim}_{j\\in J}X(j)$ and $a_j:X(j)\\to C$ for its coprojections. For each $K$, restriction induces $q_K:Y_K\\to C$ with $q_Ki_{K,j}=a_j$, by [def-weil-pbc-category-colimit]. For $K\\subseteq H$, both $q_Ht_{K,H}$ and $q_K$ have the same composites with all $i_{K,j}$ and hence agree. Thus the $q_K$ form an outer cocone and give the canonical map $q:L\\to C$ with $qk_K=q_K$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002V (definition-directed) and 002F (definition-colimit); agent-written bounded non-full closure and cocone argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "For each $j\\in J$ choose $K\\in P_J$ containing $j$, using step 4, and set $b_j=k_Ki_{K,j}:X(j)\\to L$. This is independent of the choice: if $H$ also contains $j$, choose a common upper bound $R$ in $P_J$. The equations $k_Rt_{K,R}=k_K$ and $t_{K,R}i_{K,j}=i_{R,j}$ give $k_Ki_{K,j}=k_Ri_{R,j}$, and the same calculation for $H$ gives equality. For any arrow $f:j\\to j'$, choose a member $K$ containing $f$, by step 3. Both endpoints lie in $K$, so independence allows computation there: $b_{j'}X(f)=k_Ki_{K,j'}X(f)=k_Ki_{K,j}=b_j$. Hence $b$ is a cocone on $X$, and [def-weil-pbc-category-colimit] supplies $r:C\\to L$ with $ra_j=b_j$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002V (definition-directed) and 002F (definition-colimit); agent-written bounded non-full closure and cocone argument, not a theorem asserted by these tags."
+   }
+  },
+  {
+   "text": "For each $j$, choosing $K$ containing it gives $qra_j=qb_j=qk_Ki_{K,j}=a_j$. Uniqueness in [def-weil-pbc-category-colimit] therefore gives $qr=1_C$. Conversely, for every $K$ and $j\\in K$, $rqk_Ki_{K,j}=ra_j=b_j=k_Ki_{K,j}$. Inner colimit uniqueness gives $rqk_K=k_K$ for every $K$, and outer colimit uniqueness gives $rq=1_L$. Thus the canonical $q$ of step 6 is an isomorphism with inverse $r$. It has precisely the specified compatibility with both colimit cocones. This proves the claimed canonical isomorphism without invoking a cofinality theorem or identifying ordinary colimits with coherent colimits.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002V (definition-directed) and 002F (definition-colimit); agent-written bounded non-full closure and cocone argument, not a theorem asserted by these tags."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-infinite-cardinal-square-power",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Agent argument using definitions 002V (definition-directed) and 002F (definition-colimit), and the existing infinite-cardinal square Mathlib leaf. This fills the auxiliary regrouping step extracted from HA B.0.20, rather than attributing this general lemma to HA."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +139,73 @@
    "results": "{\"t\": \"2026-10-17T08:42:33Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered colimit can be regrouped as a lambda directed colimit of its lambda small filtered subdiagrams for uncountable regular lambda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasCardinalFilteredColimits.hasColimitsOfShape\", \"CategoryTheory.HasCardinalFilteredColimits\", \"CategoryTheory.instHasCardinalFilteredColimitsOfHasColimitsOfSize\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\", \"CategoryTheory.IsCardinalFiltered.max\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.exists_colimitsOfShape\", \"HasCardinalLT.Set.isColimitCocone\", \"CategoryTheory.isFiltered_of_isCardinalDirected\"], \"digest\": \"6b0bf83f35f1bc57\"}",
    "date": "2026-10-17",
    "verdict": "no match: read CategoryTheory/Filtered/Small.lean:33-58,104-105 and Presentable/CardinalDirectedPoset.lean:43-103. The former constructs a full filtered closure with a universe bound; it gives neither a strict cardinal bound on the arrows nor the directed system of non-full bounded filtered subcategories and its colimit isomorphism. The latter concerns colimits of cardinal-directed posets, not this regrouping. Cardinal-filtered existence and definition hits do not assert the claimed theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*subcategor|subcategor.*filtered|colimit.*(union|iUnion)|isColimit.*(union|iUnion)",
+   "results": "{\"t\": \"2026-10-17T11:39:23Z\", \"tool\": \"grep\", \"query\": \"filtered.*subcategor|subcategor.*filtered|colimit.*(union|iUnion)|isColimit.*(union|iUnion)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/FinallySmall.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean\", \"Mathlib/CategoryTheory/Limits/Set.lean\"], \"digest\": \"69d75782386e1bdd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Fubini.lean:510 and Limits/Shapes/Grothendieck.lean:54-79,136-146,200-202. Fubini has a fixed product index; fiberwise colimits compare with a Grothendieck total category. Neither supplies the bounded non-full cover or identifies its total colimit with the J-colimit. Filtered/Small.lean gives only full-universe closure. The item is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered, CategoryTheory.Subcategory",
+   "results": "{\"t\": \"2026-10-17T11:39:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsFiltered, CategoryTheory.Subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Subcategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected the query because CategoryTheory.Subcategory is an unknown identifier; this is not an absence result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regroup a diagram colimit over a directed cover by subcategories as the iterated colimit",
+   "results": "{\"t\": \"2026-10-17T11:39:23Z\", \"tool\": \"leansearch\", \"query\": \"Regroup a diagram colimit over a directed cover by subcategories as the iterated colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim\", \"CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit\", \"CategoryTheory.Limits.ColimitPresentation.bind\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_f\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit\", \"CategoryTheory.SmallObject.SuccStruct.Iteration.isColimit\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_f\"], \"digest\": \"a78240c4e8db3fd1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Fubini.lean:510 and Limits/Shapes/Grothendieck.lean:54-79,136-146,200-202. Fubini has a fixed product index; fiberwise colimits compare with a Grothendieck total category. Neither supplies the bounded non-full cover or identifies its total colimit with the J-colimit. Filtered/Small.lean gives only full-universe closure. The item is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every small filtered category is the directed union of its filtered subcategories with fewer than an uncountable regular cardinal many morphisms",
+   "results": "{\"t\": \"2026-10-17T11:39:24Z\", \"tool\": \"leanfinder\", \"query\": \"Every small filtered category is the directed union of its filtered subcategories with fewer than an uncountable regular cardinal many morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isFiltered_of_isCardinalDirected\", \"CategoryTheory.IsCardinalFiltered\", \"CategoryTheory.HasCardinalFilteredGenerator\", \"CategoryTheory.HasCardinalFilteredGenerators\", \"CategoryTheory.isFiltered_of_isCardinalFiltered\", \"CategoryTheory.IsCardinalFiltered.of_le\", \"CategoryTheory.isCardinalFiltered_iff\", \"CategoryTheory.HasCardinalFilteredGenerator.exists_generator\"], \"digest\": \"a9d8184ca56e13c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered and cardinal-directed presentation hits concern cardinal-filteredness and reindexing; they do not construct the bounded non-full subcategories or assert this colimit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Subcategory|Grothendieck|isColimit",
+   "results": "{\"t\": \"2026-10-17T11:41:39Z\", \"tool\": \"grep\", \"query\": \"Subcategory|Grothendieck|isColimit\", \"sub\": \"CategoryTheory/Limits/Shapes/Grothendieck\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Fubini.lean:510 and Limits/Shapes/Grothendieck.lean:54-79,136-146,200-202. Fubini has a fixed product index; fiberwise colimits compare with a Grothendieck total category. Neither supplies the bounded non-full cover or identifies its total colimit with the J-colimit. Filtered/Small.lean gives only full-universe closure. The item is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"filteredClosure\"",
+   "results": "{\"t\": \"2026-10-17T11:41:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"filteredClosure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsCofiltered.cofilteredClosure\", \"CategoryTheory.IsFiltered.filteredClosure\", \"CategoryTheory.IsCofiltered.cofilteredClosure.base\", \"CategoryTheory.IsFiltered.filteredClosure.base\", \"CategoryTheory.IsCofiltered.small_fullSubcategory_cofilteredClosure\", \"CategoryTheory.IsFiltered.small_fullSubcategory_filteredClosure\", \"CategoryTheory.IsCofiltered.instEssentiallySmallFullSubcategoryCofilteredClosure\", \"CategoryTheory.IsCofiltered.instIsCofilteredOrEmptyFullSubcategoryCofilteredClosure\"], \"digest\": \"05c057eff72b03c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Filtered/Small.lean:33-105. Full filteredClosure and its small-universe bound do not give a strict arrow-cardinal bound for non-full subcategories, nor the regrouping assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For uncountable regular lambda, filtered subdiagrams of size below lambda form a lambda directed poset and their colimits recover any filtered colimit",
+   "results": "{\"t\": \"2026-10-17T11:41:42Z\", \"tool\": \"leanfinder\", \"query\": \"For uncountable regular lambda, filtered subdiagrams of size below lambda form a lambda directed poset and their colimits recover any filtered colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.iSup\", \"CategoryTheory.HasCardinalFilteredColimits\", \"CategoryTheory.instHasCardinalFilteredColimitsOfHasColimitsOfSize\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.iSup_P\", \"CategoryTheory.IsCardinalFiltered.max\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.sup\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.iSup_W\", \"CategoryTheory.HasCardinalFilteredColimits.hasColimitsOfShape\"], \"digest\": \"401aecabda41dad4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Fubini.lean:510 and Limits/Shapes/Grothendieck.lean:54-79,136-146,200-202. Fubini has a fixed product index; fiberwise colimits compare with a Grothendieck total category. Neither supplies the bounded non-full cover or identifies its total colimit with the J-colimit. Filtered/Small.lean gives only full-universe closure. The item is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitCoconeFiberwiseColimitOfCocone|colimitUncurryIsoColimitCompColim|filteredClosure|small_fullSubcategory_filteredClosure",
+   "results": "{\"t\": \"2026-10-17T11:45:22Z\", \"tool\": \"grep\", \"query\": \"isColimitCoconeFiberwiseColimitOfCocone|colimitUncurryIsoColimitCompColim|filteredClosure|small_fullSubcategory_filteredClosure\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\"], \"digest\": \"62118bc77eb63228\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Filtered/Small.lean:33-105. Full filteredClosure and its small-universe bound do not give a strict arrow-cardinal bound for non-full subcategories, nor the regrouping assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitFiberwiseColimitIso|isColimitCoconeFiberwiseColimitOfCocone|colimitUncurryIsoColimitCompColim",
+   "results": "{\"t\": \"2026-10-17T11:52:20Z\", \"tool\": \"grep\", \"query\": \"colimitFiberwiseColimitIso|isColimitCoconeFiberwiseColimitOfCocone|colimitUncurryIsoColimitCompColim\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\"], \"digest\": \"f8135980df84ee88\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Fubini.lean:510 and Limits/Shapes/Grothendieck.lean:54-79,136-146,200-202. Fubini has a fixed product index; fiberwise colimits compare with a Grothendieck total category. Neither supplies the bounded non-full cover or identifies its total colimit with the J-colimit. Filtered/Small.lean gives only full-universe closure. The item is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-categorical-pattern-model-calculus",
@@ -72,5 +232,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-filtered-colimit-cardinal-regrouping",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eight explicit steps construct bounded non-full filtered subcategories by a countable closure, count the arrows using the existing cardinal square leaf, establish the small lambda-directed index, construct its colimit functor, and give mutually inverse canonical comparison maps. No new nodes. Existing interrupted search logs were read and retained; source and Mathlib candidates were checked.",
+  "blueprint": "Auxiliary ordinary accessibility regrouping in step 4 of lem-coef-categorical-pattern-model-calculus, serving paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction infrastructure), through the retained blueprint.from.via chain. No unit or chapter route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-1dd8ed193",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-1dd8ed193 (reviewer sub-agent of L); spot-checked: I read the whole item and all eight steps. The statement, stmt_deps and blueprint are identical to the side DAG, where the item is still unsplit; only the proof-side fields changed, and there are no new nodes. I checked the three cited nodes: def-weil-pbc-category-colimit gives filteredness and the uniqueness of colimit factorizations; lem-coef-infinite-cardinal-square-power gives theta*theta=theta for an infinite theta in U; def-weil-size-convention gives the universes. Stacks categories.tex labels definition-directed (002V, l.2131) and definition-colimit (002F, l.1310) are cited correctly. HA B.0.20 is not under literature/, so the WANTED line and proof_origin.by=agent are right. Steps 1-3: a countable closure that adds identities, composites, common-target arrows and equalizing arrows gives a non-full filtered K with |E|<lambda. The count uses theta=max(aleph0,|E_n|)<lambda, the square leaf and regularity. I checked the finite-diagram filteredness reduction, including the empty diagram. Step 4: P_J is small by universe power sets; upper bounds of fewer than lambda members come from closing the union of their arrows (objects enter through identities); the empty family is covered. Steps 5-8: the transition maps, the map q, the cocone b (independent of the chosen member, using an upper bound of two members) and the identities qr=1 and rq=1 all follow from uniqueness; I checked every composition direction. Small cases tested: terminal J; J=omega with lambda=aleph1; parallel arrows a->b with a terminal t, which shows why non-full subcategories are needed. Duplicate search found nothing that states this item: small-directed-superset, presentable-presentation-comparison, accessible-subdiagram-criterion, filtered-presentation-common-refinement, colimit-subdiagram-approximation (the infinity-categorical version, with no filteredness of the pieces) and infinity-cofinal-kappa-poset all differ. Parent categorical-pattern-model-calculus step 4 uses the item exactly as stated. There is no route departure, no tool_uses, and no SGA or coefficient question applies. One harmless wording point: step 7 says 'by step 3' for the arrow-containment fact, which is stated at the end of step 4. No fixes were written."
  }
 }

@@ -2,11 +2,68 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $f=q|_K$ and $x=q(*)$, and let $\\alpha:f\\to\\Delta_Kx$ be the specified coherent cocone. The functor $p:\\mathcal C\\to\\Delta^0$ is an inner fibration: a lifting problem for an inner horn is just an inner horn in $\\mathcal C$, which has a filler since $\\mathcal C$ is a quasicategory; the filler lies over the given simplex because $\\Delta^0$ has a unique simplex in every degree.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Inner horn and inner-fibration definitions; direct terminal-base argument."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-relative-cone-constant-test] to $D=\\mathcal C$, $B=\\Delta^0$, this $p$, the given small $K$, and the given $q$. Its associated cocone is exactly $\\alpha$: both are obtained using the same map $K\\times\\Delta^1\\to K^{\\triangleright}$. It says that $q$ is a $p$-colimit diagram if and only if, for every vertex $z$ of $\\mathcal C$, the square with top row $\\operatorname{Map}_{\\mathcal C}(x,z)\\to\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(f,\\Delta_Kz)$, sending $u$ to $\\Delta_K(u)\\alpha$, and bottom row $\\operatorname{Map}_{\\Delta^0}(*,*)\\to\\operatorname{Map}_{\\operatorname{Fun}(K,\\Delta^0)}(pf,\\Delta_K*)$ is a homotopy pullback. That lemma applies to any functor and imposes no colimit-existence hypothesis.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-constant-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Proposition 7.1.6.19, equivalence of all-diagram and constant-target tests, in the apex form stated by lem-coef-infinity-relative-cone-constant-test."
+   }
+  },
+  {
+   "text": "For every simplicial set $L$, the definition $\\operatorname{Fun}(L,\\Delta^0)_n=\\operatorname{Hom}_{\\mathrm{sSet}}(L\\times\\Delta^n,\\Delta^0)$ gives one simplex in every degree. The same is true of the right-pinched mapping spaces in $\\Delta^0$, so both spaces in the bottom row of step 2 are literally $\\Delta^0$. Their path object also has one simplex in every degree. Consequently the path-pullback model for this square is $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(f,\\Delta_Kz)\\times_{\\Delta^0}\\operatorname{Fun}(\\Delta^1,\\Delta^0)\\times_{\\Delta^0}\\Delta^0$, identified degreewise with its first factor. Under this identification the comparison is exactly $u\\mapsto\\Delta_K(u)\\alpha$. Thus the square is a homotopy pullback precisely when this map is a weak homotopy equivalence. The unique coherence path in the bottom-right point contributes no additional data.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Terminal specialization of the explicit path-pullback definition; all identifications are degreewise."
+   }
+  },
+  {
+   "text": "The cocone dual of [lem-cbc-enhanced-functor-cone-calculus] says that $\\alpha:f\\to\\Delta_Kx$ is colimiting precisely when $\\operatorname{Map}_{\\mathcal C}(x,z)\\to\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(f,\\Delta_Kz)$, $u\\mapsto\\Delta_K(u)\\alpha$, is an equivalence for every $z$. This is the very condition obtained in steps 2 and 3, so it proves both implications. Its criterion uses arbitrary small shapes and specified cocones, without requiring other colimits. In particular, for $K=\\varnothing$ the functor category on $K$ is a point, and the condition is that every $\\operatorname{Map}_{\\mathcal C}(x,z)$ be contractible, exactly initiality of $x$. Thus no nonempty-shape assumption entered the proof.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Cocone dual of the mapping-space characterization of limits in lem-cbc-enhanced-functor-cone-calculus; combination with the terminal-base computation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction; supporting terminal-relative/absolute colimit comparison in the intermediate-presheaf Kan foundation. Argument from the existing constant-target test and coherent cocone criterion; online check Kerodon 02X1."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-intermediate-presheaf-kan",
@@ -46,6 +103,42 @@
    "results": "{\"t\": \"2026-10-17T08:43:00Z\", \"tool\": \"grep\", \"query\": \"punitCoconeIsColimit|hasColimit_iff_hasInitial_cocone\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/Comma.lean\", \"Mathlib/CategoryTheory/Limits/Unit.lean\", \"Mathlib/CategoryTheory/Limits/Unit.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Reflexive.lean\"], \"digest\": \"5808aad80eb78c70\"}",
    "date": "2026-10-17",
    "verdict": "candidate only: Mathlib result is ordinary-category and does not state the coherent infinity-categorical statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasicategory, an absolute colimit cocone is a relative colimit for the functor to the terminal category",
+   "results": "{\"t\": \"2026-10-17T10:04:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory, an absolute colimit cocone is a relative colimit for the functor to the terminal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.hasColimits\", \"SSet.Quasicategory\", \"CategoryTheory.Limits.colimitOfDiagramTerminal\", \"SSet.horn.isColimit\", \"SSet.hasDimensionLT_of_isColimit\", \"CategoryTheory.IsUniversalColimit.isColimit\", \"SSet.finite_of_isColimit\"], \"digest\": \"0a4ae3381b467eea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocone/colimit results and simplicial-set horn or ambient colimit results do not state relative colimits inside a quasicategory. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:335-355 and AlgebraicTopology/Quasicategory/Basic.lean:33-87; the former uses ordinary categories, the latter has only inner horn filling."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Colimit\"",
+   "results": "{\"t\": \"2026-10-17T10:04:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocone/colimit results and simplicial-set horn or ambient colimit results do not state relative colimits inside a quasicategory. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:335-355 and AlgebraicTopology/Quasicategory/Basic.lean:33-87; the former uses ordinary categories, the latter has only inner horn filling."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.colimit|colimit.diagram|cocone",
+   "results": "{\"t\": \"2026-10-17T10:04:44Z\", \"tool\": \"grep\", \"query\": \"relative.colimit|colimit.diagram|cocone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocone/colimit results and simplicial-set horn or ambient colimit results do not state relative colimits inside a quasicategory. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:335-355 and AlgebraicTopology/Quasicategory/Basic.lean:33-87; the former uses ordinary categories, the latter has only inner horn filling.",
+   "subdirectory": "AlgebraicTopology/Quasicategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An infinity categorical colimit is initial among cocones and is a relative colimit over the one point simplicial set",
+   "results": "{\"t\": \"2026-10-17T10:05:55Z\", \"tool\": \"leansearch\", \"query\": \"An infinity categorical colimit is initial among cocones and is a relative colimit over the one point simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CoconeTypes.IsColimit\", \"CategoryTheory.Limits.hasColimit_iff_hasInitial_cocone\", \"CategoryTheory.Limits.Cocone.isColimitEquivIsInitial\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.Limits.punitCoconeIsColimit\", \"CategoryTheory.Limits.isColimitOfConeOfCoconeUnop\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.Limits.colimitConstInitial\"], \"digest\": \"42aa8a710cefc357\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocone/colimit results and simplicial-set horn or ambient colimit results do not state relative colimits inside a quasicategory. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:335-355 and AlgebraicTopology/Quasicategory/Basic.lean:33-87; the former uses ordinary categories, the latter has only inner horn filling."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from cone diagrams induces equivalences of mapping spaces precisely for universal colimit cocones in quasicategories",
+   "results": "{\"t\": \"2026-10-17T10:06:02Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from cone diagrams induces equivalences of mapping spaces precisely for universal colimit cocones in quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsUniversalColimit.whiskerEquivalence_iff\", \"CategoryTheory.IsUniversalColimit.whiskerEquivalence\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Limits.IsColimit.homEquiv\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_apply_desc\", \"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.Limits.Types.isColimit_iff_coconeTypesIsColimit\"], \"digest\": \"8407a84b449fcf6c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocone/colimit results and simplicial-set horn or ambient colimit results do not state relative colimits inside a quasicategory. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:335-355 and AlgebraicTopology/Quasicategory/Basic.lean:33-87; the former uses ordinary categories, the latter has only inner horn filling."
   }
  ],
  "blueprint": {
@@ -66,5 +159,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-absolute-terminal-relative-colimit",
+  "worker": "stage1",
+  "summary": "Four steps: inner horns over the point; the existing relative constant-target test; degreewise simplification of its bottom row and path pullback; the existing coherent cocone criterion. No new nodes and no statement change. All proof citations checked against current statements, including arbitrary shapes and absence of colimit-existence hypotheses.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction), through the recorded enriched coefficient and intermediate-presheaf Kan ancestry: realizes the supporting terminal-relative/absolute comparison used in step 4 of lem-coef-infinity-intermediate-presheaf-kan.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cocone mapping-space criterion; this unit has no replacement for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-36cd37e0d",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-36cd37e0d (reviewer sub-agent of L); spot-checked: I read in full the item, the statements of all 5 cited nodes, the parent intermediate-presheaf-kan (step 4 uses exactly this statement), the unit record, and paragraph 2 of the main-20261015 ancestor prop-coef-integral-exceptional-adjoint. The delivery has no new nodes and does not change the statement. Step 1: inner horns over Delta^0 are filled because C is a quasicategory, and any filler lies over the unique simplex; this is elementary and correct. Step 2: lem-coef-infinity-relative-cone-constant-test needs only a functor of quasicategories, a small K and any q, with no fibration or colimit-existence hypothesis. Its cocone K x Delta^1 -> K^triangleright is the same as the item's, and the apex-form square is quoted exactly. Step 3: Fun(L,Delta^0), Map_{Delta^0} and Fun(Delta^1,Delta^0) are a single simplex in every degree, including for L empty. So the path-pullback model of def-coef-infinity-relative-cone is degreewise the upper-right corner, the comparison map is the top map, and the square commutes strictly. Homotopy pullback is therefore equivalent to the top map being a weak equivalence; elementary. Step 4: the cocone dual of lem-cbc-enhanced-functor-cone-calculus (any shape, initial objects of the cocone category) gives exactly that map. Small cases: K empty gives initiality of x on both sides; K a point; a two-object discrete C (both sides fail); C = Delta^0. No cycle: none of the dependencies reaches the item. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, from unit sk-prop-sf-cbc, which the unit does not cite; it is a generic black box and is already used by the in-unit constant-test node. No duplicate: fiber-relative-colimit-criterion would need a cocartesian-fibration argument for C -> Delta^0, and relative-cone-initial-corner states something different. The Mathlib searches find only ordinary-category results, so no match. No SGA is used and no fixes were made."
  }
 }
