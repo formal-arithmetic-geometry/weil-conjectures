@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
-public import WeilConjectures.SixFunctors.Etale.Perverse.AffinePushforward
+public import WeilConjectures.SixFunctors.Etale.Perverse.AffineDirectImage
 
 /-!
 # The perverse classes under the operations
@@ -339,7 +339,9 @@ theorem isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar (d : 
 
 /-- **Artin–Gabber**, cosupport side: under the hypotheses of `isPerverseLE_lowerShriek`, the
 compactly supported pushforward carries `ᵖD^{≥n}(X) ∩ Dctf(X)` into `ᵖD^{≥n-d}(Y)`, by Verdier
-exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` and the support estimate for `Rf_*`.
+exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` and the support estimate for `Rf_*` along the affine `f`
+(`AlgebraicGeometry.Etale.DerivedCategory.supportCondition_shift_rightDerivedLowerStar`), which
+does not use the bound on the fibre dimension.
 (blueprint: `lem-per-artin-gabber-affine-curve`) -/
 <<<<<<< HEAD
 theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [PerfectField k] [IsAffineHom f]
@@ -349,27 +351,12 @@ theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [Locall
     [PerfectField k]
 >>>>>>> origin/bundle/sec-deligne-laumon-a1-b1
     [HasCompactification f] [QuasiCompact f] [HasCompactification (f ≫ aY)]
-    (hf : ∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (d : ℕ∞)) {n : ℤ}
+    (_hf : ∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (d : ℕ∞)) {n : ℤ}
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseGE (f ≫ aY) n K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     IsPerverseGE aY (n - d) ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
   isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar aY d f
-    -- PLAN (artingabber). The full support estimate (Stacks `0F0X`) needs the strict
-    -- henselisation stalk formula, which the repository lacks. Specialise to `dim Y ≤ d`
-    -- (the blueprint instance `p₂ : 𝔸¹ × 𝔸¹ ⟶ 𝔸¹`, `d = 1`), where the weak form suffices:
-    -- `Rᵖf_* G = 0` for `p > dim supp G`. If `Hⁿ(Rf_* M) ≠ 0`, dévissage gives
-    -- `Rⁿ⁻ᶜ f_* Hᶜ M ≠ 0`, so `n - c ≤ dim supp Hᶜ M ≤ m - c`, i.e. `n ≤ m`; and supports in
-    -- `Y` have dimension `≤ d`.
-    -- Weak form: reduce to `G = i_* G'` on the closed support `Z` (`dim Z ≤ e`), i.e. to
-    -- `Rᵖ g_* F = 0` (`p > e`) for affine `g : Z ⟶ Y`. Let `K = kˢᵉᵖ = ⋃ L` (finite `L`).
-    -- (A) `Rᵖ(Z_K ⟶ Y)_* = 0` for `p > e`: `W ×_Y Z_K` is affine of finite type over `K`
-    --     for affine `W` étale over `Y`, so `thm-sc-affine-torsion-cd` (`c = 0`) applies.
-    -- (L) limit theorem `higherDirectImage_limit` for the system `Z_L` over `Y`: a stalk
-    --     element of `Rᵖg_* F` dies in some `Rᵖ(Z_L ⟶ Y)_*`.
-    -- (B) the transition `Rᵖ g_* F ⟶ Rᵖ(Z_L ⟶ Y)_* F|` is mono: after the étale surjective
-    --     base change `Y_L ⟶ Y` (étale base change) it splits, `Z_L ×_Y Y_L ⟶ Z ×_Y Y_L`
-    --     having a section.
-    (fun _ _ _ _ ↦ sorry) hK hK'
+    (fun _ hM _ hm ↦ supportCondition_shift_rightDerivedLowerStar aY f d hm hM) hK hK'
 
 end LowerShriek
 
