@@ -16,9 +16,41 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let T_h be the set of points z of Z for which h is unramified on some open neighbourhood of z. By the definition of W_h as the union of all such opens, W_h has underlying point set T_h. Stacks, Morphisms, Tag 0475 (lemma-set-points-where-fibres-unramified), identifies T_h with the set of points whose fibre Z_{h(z)} is unramified over the residue field at that point, proves that this set is open, and proves for every base change h' that T_{h'}=(g')^{-1}(T_h). For the forward inclusion in the base-change equality directly from the union description, base-change each unramified open using [lem-weil-pbc-unramified-base-change-open] (and its open-restriction clause); Tag 0475 supplies the converse and the pointwise identification. Therefore W_h is open, has the fibrewise description in the statement, and commutes with arbitrary base change.",
+   "uses": [
+    "lem-weil-pbc-unramified-base-change-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0475 (lemma-set-points-where-fibres-unramified), statement and proof"
+   }
+  },
+  {
+   "text": "Fix z in Z, put s=h(z), and write h_s:Z_s=Z×_S Spec κ(s)→Spec κ(s) for the fibre morphism. The fibre morphism is locally of finite type by [lem-weil-pbc-lft-base-change], applied to h and Spec κ(s)→S. Apply [lem-trf-unramified-maximal-ideal-residue-criterion] to h_s at z. Since the base local ring κ(s) is a field, its maximal ideal is zero; hence the criterion says that z is unramified in the fibre exactly when the maximal ideal of O_{Z_s,z} is zero and κ(z)/κ(s) is finite separable. The canonical residue map O_{Z_s,z}→κ(z) is then an isomorphism, and conversely that isomorphism says the maximal ideal is zero. This is precisely the displayed local-ring and residue-field characterization.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-trf-unramified-maximal-ideal-residue-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF (lemma-unramified-at-point), equivalence (1) with (6), applied to the scheme-theoretic fibre"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-pbc-lft-base-change",
+  "lem-trf-unramified-maximal-ideal-residue-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0475 (lemma-set-points-where-fibres-unramified), with Tag 02GF (lemma-unramified-at-point), equivalence (1) with (6)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,7 +110,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "created": {
@@ -90,14 +122,43 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical stability-locus input to the specialization/alteration branch below lem-trf-local-term-locality (1)--(2), through lem-trf-stable-modification-stability-locus and its constructibility lemma: source-local nodal openness in Temkin Lemma 5.1(i)--(ii), expanded by Stacks 0DSC.",
+   "place": "Historical stability-locus input to the specialization/alteration branch below clauses (1)--(2): the source-local unramified locus and its arbitrary-base-change stability used in the nodal-open construction.",
    "via": [
-    "lem-trf-nodal-open-locus",
+    "lem-trf-unramified-locus-base-change",
     "lem-trf-stable-modification-constructibility",
     "lem-trf-stable-modification-stability-locus"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-unramified-locus-base-change",
+  "worker": "stage1",
+  "summary": "Kept the imported statement unchanged. The proof has two steps: Tag 0475 identifies the union of unramified source neighbourhoods with the fibrewise unramified point set, proves openness, and proves arbitrary base-change compatibility; then the existing maximal-ideal/residue criterion (Tag 02GF), applied to each locally-finite-type scheme-theoretic fibre, gives the canonical local-ring/residue-field formulation. No new DAG nodes were needed and no Mathlib declaration states the full scheme-level assertion.",
+  "blueprint": "Realizes the historical stability-locus input below lem-trf-local-term-locality clauses (1)--(2), namely openness of the unramified source locus, its fibrewise description, and arbitrary base-change stability used by the nodal-open construction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-base-change-open",
+    "why": "The forward inclusion in base-change compatibility base-changes each unramified open and restricts the resulting morphism; this generic permanence fact is outside the trace-formula unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "The fibre morphism is locally of finite type after base change; this generic morphism permanence fact is outside the trace-formula unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-pbc-lft-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-9f0ecd3ef",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-9f0ecd3ef (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited DAG nodes, and Stacks Tags 0475 and 02GF. Statement, hypotheses, fibre/base-change morphism, proof steps, edge cases, dependencies, route locks, and tool uses check out. No new nodes or repairs are needed. The report mentions an absent citations.json, but direct source and DAG verification was completed."
  }
 }

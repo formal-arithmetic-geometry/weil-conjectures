@@ -1,0 +1,85 @@
+{
+ "id": "lem-trf-etale-local-ring-flatness",
+ "kind": "statement",
+ "title": "Module flatness over an etale base local ring",
+ "statement": "Let $e:T\\to S$ be an etale morphism of schemes [def-pc-scheme, def-weil-etale-morphism]. Let $t\\in T$, put $s=e(t)$, and let $M$ be an $\\mathcal O_{T,t}$-module. Regard $M$ as an $\\mathcal O_{S,s}$-module through the stalk map $e_t^\\sharp:\\mathcal O_{S,s}\\to\\mathcal O_{T,t}$; stalks and scalar actions are as in [def-pc-module-stalk-functor]. Then $M$ is flat over $\\mathcal O_{S,s}$ if and only if it is flat over $\\mathcal O_{T,t}$, where module flatness is as in [def-weil-pbc-flat-ring-map]. No finiteness assumption on $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05BA, lemma-etale-flat-up-down-local-ring; proof via Tag 05B9, lemma-etale-flat-up-down."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-pc-module-stalk-functor",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism T to S and a module over the local ring at t flatness over the local ring of S is equivalent to flatness over the local ring of T",
+   "results": "RingHom.Etale.propertyIsLocal, RingHom.Flat.localRingHom, Algebra.FormallyEtale.localization_map and localization_base: ring/stalk properties, no module equivalence.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat module over smaller base ring is flat over an unramified essentially finite type algebra",
+   "results": "Algebra.FormallyUnramified.flat_of_restrictScalars; Module.Flat.trans. Read Unramified/Finite.lean:275 and its assumptions: the algebraic implication requires FormallyUnramified and EssFiniteType. It is a useful algebraic candidate, but the scheme-stalk formulation additionally needs the comparison of an etale stalk map with those algebra instances.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyUnramified.flat_of_restrictScalars",
+   "results": "One hit, Mathlib.RingTheory.Unramified.Finite, same algebraic candidate; not itself a statement about local rings of etale scheme morphisms.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_restrictScalars",
+   "results": "Mathlib/RingTheory/Unramified/Finite.lean:26,275. Read declaration and surrounding assumptions; no scheme-stalk comparison here.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "module over etale scheme stalk ring is flat over original base stalk if and only if flat over etale stalk",
+   "results": "Module.flat_iff_of_isLocalization, AlgebraicGeometry.Flat.stalkMap and iff_flat_stalkMap, Module.Flat.of_isLocalizedModule: no full etale-stalk module equivalence.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-elementary-devissage-flatness",
+  "date": "2026-10-18",
+  "group": "Q107"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "mathlib_candidate": {
+  "declaration": "Algebra.FormallyUnramified.flat_of_restrictScalars",
+  "file": "Mathlib/RingTheory/Unramified/Finite.lean",
+  "line": 275,
+  "why_not_leaf": "Algebraic forward implication only; identifying the etale scheme stalk map with an essentially finite type formally unramified algebra, and the converse flat-scalar restriction, are further statements rather than a one-line specialization of this declaration."
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting Tag 057U step of the Tag 05I7/05I6 flatness branch: replace flatness over the base by flatness over its etale neighbourhood, at each local ring.",
+   "via": [
+    "lem-trf-elementary-devissage-flatness",
+    "lem-trf-finite-type-flat-etale-neighborhood",
+    "lem-trf-flat-finite-type-flat-point-local"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
