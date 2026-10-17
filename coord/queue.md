@@ -1,6 +1,6 @@
 # Work queue
 
-42 items; claim with `tools/claim.py next <group> [--stage N]`.
+39 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (42)
+## Stage 3: modules to prove (39)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -49,17 +49,13 @@
 | `Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison` | 15 | 1 | proof |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization` | 15 | 1 | proof |
 | `Sheaf.RingTheory.LciConormalFreeRankCodimension` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FormalFunctionsAffinePushforwardSections` | 17 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation` | 30 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
 
-Also listed above and claimable: 4 modules whose proof uses a node that has no Lean declaration yet.
+Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs` | 3 | 2 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic` | 3 | 7 |
-| `Sheaf.AlgebraicGeometry.FormalFunctionsAffinePushforwardSections` | 17 | 1 |
 | `Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting` | 21 | 1 |
