@@ -61,7 +61,8 @@ theorem exists_external_constant_sections_tensor_comparison
         ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj
           (externalCupCoefficients f g F G)).val)  := by
   classical
-  obtain ⟨φ, hφ⟩ := exists_external_constant_sections_tensor_map k X Y f g F G
+  let φ := externalConstantSectionsTensorMap k X Y f g F G
+  have hφ := externalConstantSectionsTensorMap_app_bijective_iff k X Y f g F G
   let A := (PresheafOfModules.pushforward₀
     (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V)) Y.ringCatSheaf.obj)
   have hb (V : Y.Opens) (hV : IsAffineOpen V) :
