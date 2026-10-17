@@ -2118,6 +2118,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Associator
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.LeftUnitorShift
@@ -4340,6 +4341,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Fin
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalDualizable
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Localization
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizationFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible
@@ -4372,6 +4374,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Derived
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.KFlat
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.WeilComplex
@@ -4454,6 +4457,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.U
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
 public import WeilConjectures.SixFunctors.ProEtale.WeaklyContractibleCohomology
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
