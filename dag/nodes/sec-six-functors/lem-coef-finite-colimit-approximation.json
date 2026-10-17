@@ -46,11 +46,12 @@
    }
   },
   {
-   "text": "We first establish a reusable intermediate assertion for any $G:A\\to B$ with the finite-limit and right approximation hypotheses of step 1: its map on cores is a weak homotopy equivalence. Fix $b\\in B$ and let $P_b$ be the homotopy fiber of $G^\\simeq:A^\\simeq\\to B^\\simeq$ over $b$. These cores are Kan, and the mapping-path construction makes $P_b$ Kan by [lem-cbc-kan-fibration-fiber-criterion]. A map from a finite simplicial set $K$ to $P_b$ gives a diagram $X:K\\to A^\\simeq$ and a natural equivalence $\\tau:GX\\to\\Delta_K b$. Choose its inverse $\\lambda:\\Delta_K b\\to GX$. Choose a limit cone $\\iota:\\Delta_K z\\to X$ in $A$; its image is a limit cone in $B$. The cone mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] says that\n$$\\operatorname{Map}_B(b,Gz)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,B)}(\\Delta_K b,GX)$$\nis an equivalence. Hence there is $\\psi:b\\to Gz$ together with a path $G\\iota\\circ\\Delta_K\\psi\\simeq\\lambda$, on the whole coherent diagram, not merely on its vertices. Right approximation gives $v:z'\\to z$ and an equivalence $e:b\\to Gz'$ with $Gv\\circ e\\simeq\\psi$. Put $\\alpha=\\iota\\circ\\Delta_K v:\\Delta_K z'\\to X$. Then $G\\alpha\\circ\\Delta_K e\\simeq\\lambda$. Every component of $G\\alpha$ is therefore an equivalence, and conservativity makes every component of $\\alpha$ an equivalence. The pointwise criterion makes $\\alpha$ a natural equivalence. Its simplicial map $K\\times\\Delta^1\\to A$ factors through $A^\\simeq$: all edges of $X$, of the constant diagram and of $\\alpha$ are equivalences, and the remaining edges are their composites as witnessed by the transformation simplices. Together with $\\tau G\\alpha\\simeq\\Delta_K(e^{-1})$, this gives a homotopy in $P_b$ between the given $K$-diagram and the constant diagram at $(z',e^{-1})$. More explicitly the mapping-path fiber is the space of pairs $(X,\\tau)$, and a path between such pairs is a path $\\alpha$ in the first coordinate with a homotopy from $\\tau G\\alpha$ to the second path; the displayed coherent homotopy supplies precisely that compatibility. For $K=\\varnothing$ the same construction uses a terminal $z$ and produces a vertex of $P_b$.",
+   "text": "For any functor $G:A\\to B$ with the finite-limit, conservativity and right approximation hypotheses of step 1, fix $b\\in B$ and let $P_b$ be the mapping-path homotopy fiber of $G^\\simeq:A^\\simeq\\to B^\\simeq$ over $b$. The cores are Kan by [lem-cbc-enhanced-functor-cone-calculus], and $P_b$ is Kan by [lem-cbc-kan-fibration-fiber-criterion]. Apply [lem-coef-finite-core-fiber-contraction]: $P_b$ is nonempty, and every map $K\\to P_b$ with $K$ finite is simplicially homotopic to a constant map. Its hypotheses hold because the finite coherent limits and their preservation are exactly those established in step 1, and the approximation triangle has the orientation $[\\psi]=[G(v)e]$. This includes the empty shape, using a terminal object. We now deduce weak contractibility from these finite-diagram contractions.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-cbc-enhanced-functor-cone-calculus",
-    "lem-cbc-kan-fibration-fiber-criterion"
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-coef-finite-core-fiber-contraction"
    ],
    "elementary": false,
    "source": {
@@ -74,7 +75,7 @@
    }
   },
   {
-   "text": "For $t\\in A$ write $S_t=A_{/t}$ for the join slice of [lem-coef-infinity-slice-right-fibration]. Its $n$-simplices are maps $\\Delta^n\\star\\Delta^0\\to A$ with final vertex $t$. It is equivalent over $A$ to the target-fixed arrow category $T_t$ by [lem-coef-infinity-slice-arrow-equivalence]. We will use its join presentation for finite limits and its arrow presentation for approximation. For a finite $K$ and $q:K\\to S_t$, its simplices assemble to $\\widehat q:K\\star\\Delta^0\\to A$ with last vertex $t$, as in [lem-coef-join-slice-diagram-isomorphisms]. This shape is finite, including when $K$ is empty. The join cone category of $q$ in $S_t$ is degreewise isomorphic to the join cone category of $\\widehat q$ in $A$: an $n$-simplex on either side is a map\n$$\\Delta^n\\star K\\star\\Delta^0\\longrightarrow A$$\nrestricting to $\\widehat q$ on $K\\star\\Delta^0$. The identification respects all operators by associativity of ordered concatenation. The dual of [lem-coef-join-slice-cocone-comparison] identifies these join cone categories with the coherent comma cone categories and identifies terminal vertices with limiting cones. Choose a limit of $\\widehat q$ in $A$. Its cone gives the corresponding terminal vertex on both sides, hence a limit of $q$ in $S_t$. Applying $G$ to that cone gives a limit of $G\\widehat q$ by finite-limit preservation. The same degreewise identification and its naturality therefore show that the induced $G_t:S_t\\to B_{/Gt}$ preserves finite limits. For $K=\\varnothing$, $\\widehat q$ is the single object $t$, so the resulting terminal object in $S_t$ is $1_t$; no assertion that the projection creates empty limits is used.",
+   "text": "For $t\\in A$ write $S_t=A_{/t}$ for the join slice of [lem-coef-infinity-slice-right-fibration]. Its $n$-simplices are maps $\\Delta^n\\star\\Delta^0\\to A$ with final vertex $t$. It is equivalent over $A$ to the target-fixed arrow category $T_t$ by [lem-coef-infinity-slice-arrow-equivalence]. We will use its join presentation for finite limits. For a finite $K$ and $q:K\\to S_t$, its simplices assemble to $\\widehat q:K\\star\\Delta^0\\to A$ with last vertex $t$, as in [lem-coef-join-slice-diagram-isomorphisms]. This shape is finite, including when $K$ is empty. The join cone category of $q$ in $S_t$ is degreewise isomorphic to the join cone category of $\\widehat q$ in $A$: an $n$-simplex on either side is a map\n$$\\Delta^n\\star K\\star\\Delta^0\\longrightarrow A$$\nrestricting to $\\widehat q$ on $K\\star\\Delta^0$. The identification respects all operators by associativity of ordered concatenation. The dual of [lem-coef-join-slice-cocone-comparison] identifies these join cone categories with the coherent comma cone categories and identifies terminal vertices with limiting cones. Choose a limit of $\\widehat q$ in $A$. Its cone gives the corresponding terminal vertex on both sides, hence a limit of $q$ in $S_t$. Applying $G$ to that cone gives a limit of $G\\widehat q$ by finite-limit preservation. The same degreewise identification and its naturality therefore show that the induced $G_t:S_t\\to B_{/Gt}$ preserves finite limits. For $K=\\varnothing$, $\\widehat q$ is the single object $t$, so the resulting terminal object in $S_t$ is $1_t$; no assertion that the projection creates empty limits is used.",
    "uses": [
     "lem-coef-infinity-slice-right-fibration",
     "lem-coef-infinity-slice-arrow-equivalence",
@@ -88,12 +89,9 @@
    }
   },
   {
-   "text": "The functor $G_t$ also reflects equivalences and has right approximation. Check this in the arrow presentations $T_t,T_{Gt}$, using their natural equivalences with the join slices. The join-slice projections are right fibrations by [lem-coef-infinity-slice-right-fibration]. Apply the conservativity assertion of [lem-cbc-left-fibration-equivalence-lift] to their opposites, which are left fibrations because reversing vertices interchanges the horn ranges $0<i\\leq n$ and $0\\leq i<n$. Hence those projections reflect equivalences. Their arrow presentations are equivalent over the base by [lem-coef-infinity-slice-arrow-equivalence], so the arrow projections also reflect equivalences. In particular an edge of $T_t$ is an equivalence whenever its source component is, and the same holds over $B$. It follows that $G_t$ is conservative, since $G$ is. For right approximation let $a:c\\to t$, $b:d\\to Gt$ be objects and let $\\psi:b\\to Ga$ be an arrow of $T_{Gt}$. Its data are $\\psi_0:d\\to Gc$ and a homotopy $Ga\\,\\psi_0\\simeq b$. Apply right approximation in $A,B$ to $\\psi_0$, obtaining $v:c'\\to c$ and an equivalence $e:d\\to Gc'$ with $Gv\\,e\\simeq\\psi_0$. Define $a'=av:c'\\to t$. The edge $v:a'\\to a$ is a morphism over $t$. Equip $e$ with the homotopy $G(a')e=Ga\\,Gv\\,e\\simeq Ga\\,\\psi_0\\simeq b$, obtaining an equivalence $b\\to G(a')$ over $Gt$. The homotopy $Gv\\,e\\simeq\\psi_0$, with exactly this chosen composite compatibility, identifies its composite with $G_t(v)$ with the original $\\psi$ in the slice homotopy category. This is a statement about the whole slice mapping space: the cone-calculus formula expresses that mapping space as the homotopy fiber of $\\operatorname{Map}_B(d,Gc)\\to\\operatorname{Map}_B(d,Gt)$ over $b$; concatenating the indicated paths gives the path in that fiber. It is not an inference from equality of underlying morphisms alone. Hence right approximation holds in the arrow slices and, via their coherent quasi-inverses over the base, in the join slices. Equivalences transport finite limits by the cone mapping-space criterion and the mapping-space equivalences in [lem-cbc-enhanced-functor-cone-calculus].",
+   "text": "The functor $G$ of step 1 reflects equivalences and has right approximation. Apply [lem-coef-right-approximation-slice] at $t$: the induced $G_t:S_t=A_{/t}\\to B_{/Gt}$ is conservative and has right approximation, with equality in the slice homotopy category including its structural compatibility homotopy. This applies directly to the join slices used in step 4; no underlying-arrow equality is substituted for a slice equality. Together with finite-limit existence and preservation from step 4, these are all hypotheses needed to apply the uniform core argument of steps 2-3 to $G_t$.",
    "uses": [
-    "lem-cbc-enhanced-functor-cone-calculus",
-    "lem-coef-infinity-slice-arrow-equivalence",
-    "lem-coef-infinity-slice-right-fibration",
-    "lem-cbc-left-fibration-equivalence-lift"
+    "lem-coef-right-approximation-slice"
    ],
    "elementary": false,
    "source": {
@@ -113,7 +111,7 @@
    }
   },
   {
-   "text": "For clarity, both vertical arrows in step 6 are Kan fibrations, and their ordinary fibers are the required mapping spaces. We check this uniformly for either pair $(E,z)=(A,t)$ or $(E,z)=(B,Gt)$. Put $p:E_{/z}\\to E$. This is a right fibration by [lem-coef-infinity-slice-right-fibration], and the dual conservativity assertion of [lem-cbc-left-fibration-equivalence-lift] makes it conservative, as in step 5. It is also an isofibration in the sense of [lem-coef-infinity-core-kan-fibration]. To lift an equivalence $h:p(s)\\to a$, choose an inverse $h^{-1}$ and its triangle $h^{-1}h\\simeq1_{p(s)}$. First lift $h^{-1}$ with target $s$ using the right $1$-horn lifting property, getting $s'\\to s$ over $h^{-1}$. The right $2$-horn consisting of this edge and $1_s$, over the chosen triangle with vertices $p(s),a,p(s)$, fills to an edge $s\\to s'$ projecting to the specified edge $h$. Conservativity makes this lift an equivalence. Inner-horn lifting is already part of the right-fibration condition. The core-fibration theorem now makes $p^\\simeq$ a Kan fibration. Every simplex in its ordinary fiber over $x$ belongs to the core, since every edge projects to $1_x$ and conservativity makes it an equivalence. Hence its fiber at any $w\\in E$ equals the entire fiber of $p$, namely the right-pinched $\\operatorname{Map}_E(w,z)$ by the slice theorem. Substituting $(E,z,w)=(A,t,x)$ and $(B,Gt,Gx)$ gives the two claimed fibers. All identifications commute with $G$ because the slice projection and the restriction-to-initial-face formulas do.",
+   "text": "For clarity, both vertical arrows in step 6 are Kan fibrations, and their ordinary fibers are the required mapping spaces. We check this uniformly for either pair $(E,z)=(A,t)$ or $(E,z)=(B,Gt)$. Put $p:E_{/z}\\to E$. This is a right fibration by [lem-coef-infinity-slice-right-fibration], and its opposite $p^{op}$ is a left fibration, because reversing vertices exchanges the horn ranges $0<i\\leq n$ and $0\\leq i<n$, so the conservativity assertion of [lem-cbc-left-fibration-equivalence-lift] applied to $p^{op}$ makes $p$ conservative. It is also an isofibration in the sense of [lem-coef-infinity-core-kan-fibration]. To lift an equivalence $h:p(s)\\to a$, choose an inverse $h^{-1}$ and its triangle $h^{-1}h\\simeq1_{p(s)}$. First lift $h^{-1}$ with target $s$ using the right $1$-horn lifting property, getting $s'\\to s$ over $h^{-1}$. The right $2$-horn consisting of this edge and $1_s$, over the chosen triangle with vertices $p(s),a,p(s)$, fills to an edge $s\\to s'$ projecting to the specified edge $h$. Conservativity makes this lift an equivalence. Inner-horn lifting is already part of the right-fibration condition. The core-fibration theorem now makes $p^\\simeq$ a Kan fibration. Every simplex in its ordinary fiber over $x$ belongs to the core, since every edge projects to $1_x$ and conservativity makes it an equivalence. Hence its fiber at any $w\\in E$ equals the entire fiber of $p$, namely the right-pinched $\\operatorname{Map}_E(w,z)$ by the slice theorem. Substituting $(E,z,w)=(A,t,x)$ and $(B,Gt,Gx)$ gives the two claimed fibers. All identifications commute with $G$ because the slice projection and the restriction-to-initial-face formulas do.",
    "uses": [
     "lem-coef-infinity-slice-right-fibration",
     "lem-coef-infinity-core-kan-fibration",
@@ -157,6 +155,7 @@
   "lem-cbc-kan-fibration-fiber-criterion",
   "lem-cbc-left-fibration-equivalence-lift",
   "lem-cbc-realization-compact-finite-support",
+  "lem-coef-finite-core-fiber-contraction",
   "lem-coef-homotopy-groups-basepoint-change",
   "lem-coef-infinity-core-kan-fibration",
   "lem-coef-infinity-full-essential-image",
@@ -166,6 +165,7 @@
   "lem-coef-join-slice-diagram-isomorphisms",
   "lem-coef-kan-homotopy-pullback-invariance",
   "lem-coef-kan-quillen-right-proper",
+  "lem-coef-right-approximation-slice",
   "lem-coef-simplicial-realization-cylinder"
  ],
  "proof_origin": {
@@ -274,10 +274,32 @@
    "results": "{\"t\": \"2026-10-16T22:44:41Z\", \"tool\": \"leanfinder\", \"query\": \"A left exact conservative functor of infinity categories is an equivalence when every map into its image factors through an equivalence and the image of a map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.HasExactColimitsOfShape.of_codomain_equivalence\", \"CategoryTheory.HasExactLimitsOfShape.of_codomain_equivalence\", \"CategoryTheory.HasExactColimitsOfShape.of_domain_equivalence\", \"CategoryTheory.LocalizerMorphism.isEquivalence_iff\", \"CategoryTheory.exactFunctor_iff\", \"CategoryTheory.ExactFunctor\", \"CategoryTheory.LocalizerMorphism.isEquivalence_imp\"], \"digest\": \"03a9dd0f8a3c748f\"}",
    "date": "2026-10-17",
    "verdict": "No exact match: the returned exact-functor statements concern ordinary abelian categories, the exact-limit/colimit transfer statements assume an ordinary equivalence, and the localizer-morphism criteria concern ordinary localizations. None states the quasicategorical right-approximation criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "approximation|quasicategor",
+   "results": "{\"t\": \"2026-10-17T07:53:54Z\", \"tool\": \"grep\", \"query\": \"approximation|quasicategor\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed ordinary-category and homotopy-category declarations do not state the quasicategorical finite-colimit approximation criterion.",
+   "sub": "CategoryTheory/Localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite colimit preserving conservative functor of infinity categories with left approximation is an equivalence",
+   "results": "{\"t\": \"2026-10-17T07:53:54Z\", \"tool\": \"leansearch\", \"query\": \"A finite colimit preserving conservative functor of infinity categories with left approximation is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.preservesColimitsOfShape_of_equiv\", \"CategoryTheory.Limits.hasColimit_of_equivalence_comp\", \"CategoryTheory.Functor.createsColimitsOfIsEquivalence\", \"CategoryTheory.Adjunction.isEquivalence_preservesColimits\", \"CategoryTheory.ObjectProperty.congr_preservesColimitsOfShape\", \"CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor\", \"CategoryTheory.preservesFiniteColimits_iff_coflat\", \"CategoryTheory.ObjectProperty.preservesFiniteColimits_iff\"], \"digest\": \"2311b9089d37ec0f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed ordinary-category and homotopy-category declarations do not state the quasicategorical finite-colimit approximation criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A conservative functor of quasicategories preserving finite colimits and satisfying left approximation App 2 is an equivalence",
+   "results": "{\"t\": \"2026-10-17T07:54:00Z\", \"tool\": \"leanfinder\", \"query\": \"A conservative functor of quasicategories preserving finite colimits and satisfying left approximation App 2 is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isEquivalence\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\"], \"digest\": \"795f856cd770146d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed ordinary-category and homotopy-category declarations do not state the quasicategorical finite-colimit approximation criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-localization-products",
@@ -302,7 +324,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-finite-colimit-approximation",
   "worker": "stage1",
-  "summary": "Kept the statement and statement dependencies. Gave a nine-step proof: opposite right approximation, an explicit finite-diagram contraction of each core homotopy fiber, compact-support/basepoint verification, finite join-slice limits, approximation in slices with its compatibility homotopy, and comparison of mapping-space fibers. Reused existing nodes only; no new nodes or Mathlib leaves. Avoided the cyclic broad straightening and Yoneda inputs.",
+  "summary": "Repair of the 2026-10-17 long-step return. Preserved the statement, stmt_deps, Lean record, original route and steps 1,3,4,6,7,8,9 verbatim. Replaced steps 2 and 5 by short applications of two new statement-only lemmas: finite core-fiber diagram contraction and right approximation in slices. Read Cisinski Lemma 7.6.7 and Proposition 7.6.5/Remark 7.6.6, checked every cited node, logged Mathlib searches, and supplied verbatim citation quotes. Original extracted arguments are retained in report.md.",
   "blueprint": "Historical master prop-coef-integral-exceptional-adjoint proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation; the recorded rectification ancestry uses products of Brown localizations, whose final comparison invokes this finite-colimit criterion. The split supplies that criterion by the dual of Cisinski Theorem 7.6.10 without changing the unit route.",
   "tool_uses": [
    {
@@ -311,7 +333,7 @@
    },
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Steps 1, 2 and 5 use Kan mapping spaces, the coherent limit-cone mapping-space criterion, pointwise natural equivalences and the slice mapping-space fiber formula; no coefficient-unit node states this general calculus."
+    "why": "Steps 1 and 2 use Kan mapping spaces and Kan cores, and the inverse-of-equivalence orientation of the approximation triangle; no coefficient-unit node states this general calculus."
    },
    {
     "node": "lem-cbc-kan-fibration-fiber-criterion",
@@ -319,7 +341,7 @@
    },
    {
     "node": "lem-cbc-left-fibration-equivalence-lift",
-    "why": "Steps 5 and 7 apply its dual to right slice fibrations to obtain reflection of equivalences; this generic one-sided-fibration theorem is not separately stated in the coefficient unit."
+    "why": "Step 7 applies its dual to right slice fibrations to obtain reflection of equivalences; this generic one-sided-fibration theorem is not separately stated in the coefficient unit."
    },
    {
     "node": "lem-cbc-realization-compact-finite-support",
@@ -335,12 +357,12 @@
   "lem-cbc-realization-compact-finite-support"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q45-38af6e8dd",
-  "group": "Q45",
+  "reviewer": "NT-cc-NO-04babdd61",
+  "group": "NO",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-38af6e8dd (reviewer sub-agent of L); spot-checked: Read the whole delivery and reviewed it against Cisinski CatLR.pdf, which is not archived, so I fetched it read-only and extracted text only under /tmp. Places read: Def 7.6.1 App1/App2 (pp.386-387), Prop 7.6.5 and Rem 7.6.6 (p.387), Lemma 7.6.7 with proof (pp.387-388), Thm 7.6.10 with full proof (pp.389-390), Cor 7.3.29 (p.358). The item statement is exactly the dual of Thm 7.6.10 (iii)=>(i) with weak equivalences the invertible maps. I checked the App2 orientation by computing the dual, and the target is not weakened. Statement and stmt_deps are unchanged. I read all 15 cited statements and each says what its step takes from it. Step 1: the opposite-inverse orientation is right. Step 2: Lemma 7.6.7 with actual finite limits; the cone mapping-space criterion, approximation, conservativity and pointwise equivalences are used correctly, alpha lands in the core, and the compatibility tau*G(alpha) ~ Delta(e^-1) holds; K empty uses a terminal object. Step 3: compact support, the realization cylinder and basepoint change (beta o (f1)_* = (f0)_* with f1 constant) give weak contractibility, then the fiber criterion applies. Step 4: the degreewise identification (A_/t)_/q = A_/qhat and the dual join-slice comparison give terminal = limit. Step 5: the slice projections reflect equivalences via the dual left-fibration lemma (horn ranges checked); approximation in T_t with the compatibility Ga*theta.h, using the cone-calculus fiber formula for Map in T. Step 6: uniform substitution, not circular. Step 7: I rechecked the prescribed-source lift built from a Lambda^1_1 lift followed by a Lambda^2_2 fill, and the fiber of p^~ is all of Map(x,t). Step 8: the right-proper replacement and homotopy-pullback-invariance hypotheses (cu=u'a, cv=v'b) hold. Step 9: terminal-object essential surjectivity, then full-essential-image with Y0=B. No new nodes. An rg search for duplicates found none. The closure of 164 nodes has no cycle, missing node or merged node; note that join-slice-cocone-comparison is still unsplit and its future split must avoid this item. proof_deps equals the union of uses, and the three kinds of Mathlib search are recorded. Universe enlargement for the cited small-quasicategory nodes is routine. I accept the 5 declared off-unit generic cbc tool_uses (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-cbc-kan-fibration-fiber-criterion, lem-cbc-left-fibration-equivalence-lift, lem-cbc-realization-compact-finite-support). No SGA. No fixes written. Details are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-04babdd61 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, and the Cisinski CatLR text (not archived; extracted at /tmp/catlr-nd): Def 7.6.1 App1/App2 (pp.386-387), Rem 7.6.2, Prop 7.6.5 with Rem 7.6.6 (p.387), Lemma 7.6.7 with proof (pp.387-388) and Thm 7.6.10 with proof (pp.389-390). Item: the statement is unchanged and is exactly the dual of Thm 7.6.10 (iii)=>(i). I rechecked the App2 orientation by dualising ([psi]=[G(v)e] with e the inverse of the opposite), so the target is not weakened. New node lem-coef-finite-core-fiber-contraction: P_b is exactly the def-cbc homotopy fiber of G^≃, and the conclusion is the Delta^1-contraction claim proved inside Lemma 7.6.7, generalised to finite simplicial shapes, which the assumed finite limits allow. It is true (P_b is a contractible Kan complex) and the direct cone-lift argument also works. Tested on K empty (terminal object, then approximation gives the vertex (a',e^-1)), K a point and G the identity. New node lem-coef-right-approximation-slice: matches Prop 7.6.5 with Rem 7.6.6. I checked conservativity through the conservative right fibration A_/t->A, and approximation with a'=av, where the homotopy h is a path in the fiber Map_{B/Gt}. Tested on A empty, G the identity and t terminal. Neither child restates a clause of the parent; both are statement-only with blueprint ancestry and real 3-kind searches. An rg duplicate search (approximation, 7.6.5/7.6.7/7.6.10, core/homotopy fiber) found no duplicate; I read the candidates infinity-equivalence-section-restriction, weakly-contractible-cocone-colimits, the brown-* nodes and common-chunk. Steps 2 and 5 apply the children correctly, steps 1, 3, 4 and 6-9 are unchanged, I checked every cited statement, proof_deps equals the union of uses, and there is no cycle. I accept the 5 generic cbc tool_uses. Fix (one fault): step 7's 'as in step 5' pointed to an argument the repair removed from step 5, so I replaced it with the one-line opposite-left-fibration argument citing the same node. I also dropped the stale phrase about the arrow presentation in step 4 and corrected the step numbers in the split_report tool_uses reasons. No statement, uses or deps changed. No SGA.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

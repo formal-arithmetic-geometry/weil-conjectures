@@ -10,11 +10,124 @@
  "stmt_deps": [
   "sk-def-sfb-module-pushforward-pullback",
   "def-weil-pbc-additive-functor",
+  "def-galois-exact-functor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-transport",
+  "def-sfb-modobj-extension",
+  "def-sfb-alpha"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\Sh(Y_{\\mathrm{proét}},\\Ab)$, $\\mathcal D=\\Sh(X_{\\mathrm{proét}},\\Ab)$, $F=f^*_{\\Ab}$, $R=\\Lambda_Y$, $S=\\Lambda_X$, and $R'=FR$. Abelian sheaves on either small pro-étale site form an abelian category by [lem-weil-pbc-site-sheaves-enough-injectives]. By [det-def-sfb-sheaf-tensor-closed], their sheaf tensor products are closed symmetric monoidal, additive and colimit-preserving in either variable. Thus tensoring on the left by $R,R',S$ preserves finite colimits. The rings $R,S$ are commutative by [sk-def-sfb-pulled-back-coefficients]. The inverse image is strong monoidal by [def-sfb-finite-upper-star-monoidal], and sends commutative rings to commutative rings by [lem-sfb-finite-upper-star-braided], so $R'$ has the requisite commutative transported ring structure. Apply [lem-sfb-modobj-abelian] to $R$ in $\\mathcal C$ and to $R',S$ in $\\mathcal D$: all three module categories are abelian. The equalizers and coequalizers required for scalar extension also exist in $\\mathcal D$: by [def-sp-abelian] it has kernels and cokernels, and the equalizer, respectively coequalizer, of $a,b$ is the kernel, respectively cokernel, of $a-b$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "det-def-sfb-sheaf-tensor-closed",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-finite-upper-star-monoidal",
+    "lem-sfb-finite-upper-star-braided",
+    "lem-sfb-modobj-abelian",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Setting paragraph: abelian and monoidal hypotheses for the three coefficient rings"
+   }
+  },
+  {
+   "text": "The abelian direct image $T=f_*^{\\Ab}$ is additive from its restriction formula [def-sfb-finite-lower-star]: on every object $V$, $T(u+v)_V=(u+v)_{V\\times_YX}=u_{V\\times_YX}+v_{V\\times_YX}$. Use $F\\dashv T$ from [def-sfb-finite-upper-lower-star-adjunction], with unit $\\eta$. For parallel sheaf maps $u,v:A\\to B$, the adjunction bijection sends $F(u+v)$ to $TF(u+v)\\eta_A=\\eta_B(u+v)$, and sends $Fu+Fv$ to $T(Fu+Fv)\\eta_A=TFu\\eta_A+TFv\\eta_A=\\eta_Bu+\\eta_Bv$. The two images coincide by bilinearity, so injectivity gives $F(u+v)=Fu+Fv$. Setting $u=v=0$ and cancelling gives $F0=0$, and then negatives follow. This is additivity in [def-weil-pbc-additive-functor].",
+   "uses": [
+    "def-sfb-finite-lower-star",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Setting paragraph: expand additivity of the abelian inverse image"
+   }
+  },
+  {
+   "text": "The functor $F$ is exact by [lem-sfb-finite-upper-star-exact]. The transport $G=\\operatorname{mapMod}(F):\\Mod_R(\\mathcal C)\\to\\Mod_{R'}(\\mathcal D)$ exists by [def-sfb-modobj-transport], whose statement gives the equality $U_{R'}G=FU_R$ on both objects and morphisms. Apply [det-prop-sfb-module-pullback-exact-lifted] with these $F,G,R,R'$: the additive exactness of $F$ is step 2 and the cited inverse-image lemma; all abelian, tensor-additivity and right-exactness hypotheses were checked in step 1. Hence $G$ is additive and preserves finite limits and finite colimits.",
+   "uses": [
+    "lem-sfb-finite-upper-star-exact",
+    "def-sfb-modobj-transport",
+    "det-prop-sfb-module-pullback-exact-lifted"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Transport paragraph: apply the general lifting lemma to mapMod"
+   }
+  },
+  {
+   "text": "By [lem-sfb-alpha-ring-hom], $\\alpha_f:R'\\to S$ is a morphism of ring objects, for the ring structure on $R'=FR$ transported along the strong monoidal $F$ (the one of step 3), and by [lem-sfb-alpha-iso] it is invertible; the inverse of an invertible morphism of ring objects is again one (apply $\\alpha_f^{-1}$, resp. $\\alpha_f^{-1}\\otimes\\alpha_f^{-1}$, to the unit and multiplication identities of $\\alpha_f$), so $\\alpha_f$ is an isomorphism of ring objects. Let $H=\\operatorname{Res}_{\\alpha_f^{-1}}:\\Mod_{R'}(\\mathcal D)\\to\\Mod_S(\\mathcal D)$. The direction follows from $\\alpha_f^{-1}:S\\to R'$. By [def-sfb-modobj-restriction], $H$ changes only the action and is the identity on underlying objects and morphisms, so $U_SH=\\operatorname{Id}_{\\mathcal D}U_{R'}$. Apply [det-prop-sfb-module-pullback-exact-lifted] with base functor $\\operatorname{Id}_{\\mathcal D}$ and module functor $H$, source monoid $R'$ and target monoid $S$. The identity preserves sums and every universal property directly, and the remaining hypotheses are step 1. Thus $H$ is additive and exact.",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "lem-sfb-alpha-ring-hom",
+    "def-sfb-modobj-restriction",
+    "det-prop-sfb-module-pullback-exact-lifted"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Extension of scalars paragraph: exactness of inverse scalar restriction"
+   }
+  },
+  {
+   "text": "Step 1 verifies all the ambient hypotheses in [def-sfb-modobj-restriction-equivalence]: closed braided structure, equalizers and coequalizers, and preservation of colimits by both tensor factors; $R'$ is commutative and step 4 supplies the ring isomorphism. Thus [def-sfb-modobj-extension-along-iso] gives a natural isomorphism $\\theta:E=\\operatorname{Ext}_{\\alpha_f}\\xrightarrow{\\sim}H$. For $u,v:M\\to N$, naturality yields $E(u+v)=\\theta_N^{-1}H(u+v)\\theta_M=\\theta_N^{-1}(Hu+Hv)\\theta_M=Eu+Ev$. For a finite diagram $D$ and a limiting cone $c$ with vertex $A$, a cone $b_j:B\\to E(D_j)$ becomes the cone $\\theta_{D_j}b_j$ over $HD$. Since $Hc$ is limiting, it has a unique factorization $t:B\\to HA$. The map $\\theta_A^{-1}t$ is the unique factorization through $Ec$, by naturality and invertibility of $\\theta$. This proves finite-limit preservation by $E$. For a cocone $b_j:E(D_j)\\to B$, compose with $\\theta_{D_j}^{-1}$, factor uniquely through $HA$ using the colimit property of $Hc$, and compose the resulting map $HA\\to B$ with $\\theta_A$. This proves finite-colimit preservation. Hence $E$ is additive and exact.",
+   "uses": [
+    "def-sfb-modobj-restriction-equivalence",
+    "def-sfb-modobj-extension-along-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Extension of scalars paragraph, final sentence: expand invariance under natural isomorphism"
+   }
+  },
+  {
+   "text": "The pullback in [sk-def-sfb-module-pushforward-pullback] is exactly $E\\circ G$. For parallel module maps $u,v$, $(EG)(u+v)=E(Gu+Gv)=EGu+EGv$. If $c$ is a limiting cone for a finite diagram, $Gc$ is limiting by step 3 and $E(Gc)$ is limiting by step 5; the same argument for colimiting cocones proves finite-colimit preservation. Thus the composite is additive and exact in the sense of [def-galois-exact-functor], as are both factors by steps 3 and 5. This proves every assertion without any finiteness or characteristic condition on $\\Lambda$.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-galois-exact-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Conclusion paragraph: compose the two additive exact factors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "det-def-sfb-sheaf-tensor-closed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-sfb-finite-upper-star-braided",
+  "lem-sfb-modobj-abelian",
+  "def-sp-abelian",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-weil-pbc-additive-functor",
+  "lem-sfb-finite-upper-star-exact",
+  "def-sfb-modobj-transport",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-alpha-ring-hom",
+  "def-sfb-modobj-restriction",
+  "def-sfb-modobj-restriction-equivalence",
+  "def-sfb-modobj-extension-along-iso",
+  "sk-def-sfb-module-pushforward-pullback",
   "def-galois-exact-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+  "place": "Setting, Transport, Extension of scalars, Conclusion; elementary calculations expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,10 +170,59 @@
    "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean:856 only has a TODO for mapMod F A; no module-object pullback exactness theorem. Read the ordinary sheaf pullback candidate at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:150–182.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|module.*pullback|pullback.*exact",
+   "results": "1 hits; Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for this general condensed-ring module pullback: no module-object pullback exactness declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of modules over a condensed coefficient ring on pro-etale sheaves preserves finite limits and finite colimits",
+   "results": "0 hits; ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMod",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.Functor.mapMod'",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern: identifier absent from Mathlib; followed by a valid pattern search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal inverse image functor induces an exact functor on module objects, followed by extension along an isomorphism of coefficient rings",
+   "results": "8 hits; CategoryTheory.monoidalLinearOfFaithful, CategoryTheory.MonoidalLinear.ofFaithful, ModuleCat.localizedModule_functor_map_exact, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.ExactPairing.ofFullyFaithful, LightCondensed.instMonoidalCategoryLightCondMod, CategoryTheory.exactPairingOfFullyFaithful, CategoryTheory.Functor.linear_of_full_essSurj_comp",
+   "date": "2026-10-17",
+   "verdict": "no match for this general condensed-ring module pullback: only generic monoidal, localization, flat ordinary-module, or condensed-category results"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits, CategoryTheory.Mod_",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match for this general condensed-ring module pullback: no module-object pullback exactness declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along an isomorphism of sheaves of rings is exact, and transport of module objects by an additive exact monoidal functor is exact",
+   "results": "8 hits; ModuleCat.localizedModule_functor_map_exact, Condensed.instAB4StarCondensedMod, CategoryTheory.Functor.mapExactFunctor_smul, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, instAbelianCondensedMod, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-17",
+   "verdict": "no match for this general condensed-ring module pullback: only generic monoidal, localization, flat ordinary-module, or condensed-category results"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ee]xact|[Ee]xact.*pullback|mapMod",
+   "results": "25 hits; Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for this general condensed-ring module pullback: no module-object pullback exactness declaration"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-sfb-dc-upper-star-comp",
@@ -77,5 +239,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-prop-sfb-module-pullback-exact-main",
+  "worker": "stage1",
+  "summary": "Expanded the current blueprint proof into six steps using only existing DAG nodes. Verified the abelian, monoidal, commutative-ring and exactness hypotheses, proved abelian inverse-image additivity and natural-isomorphism invariance explicitly, and retained the original statement. No new nodes and no attachment for the full general coefficient statement.",
+  "blueprint": "Serves the ambient-comparison paragraph of def-sfb-dc-upper-star-comp before identifying Lh* with D(h*). Realizes the current item-source proof: Setting in steps 1–2, Transport in step 3, Extension of scalars in steps 4–5, Conclusion in step 6.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-sheaf-tensor-closed",
+    "why": "Generic sheaf-tensor closedness, additivity and cocontinuity verify the ambient hypotheses; the restriction-of-derived-functors unit does not prove this monoidal tool."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic algebraic lifting criterion is applied to transport and inverse scalar restriction, following the item source; it is not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Cartesian coefficient comparison makes inverse scalar restriction available; the restriction-of-derived-functors unit does not establish this coefficient-system fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-sheaf-tensor-closed",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-sfb-alpha-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-47952293a",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-47952293a (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 source (Setting, Transport, Extension of scalars, Conclusion), both units and every cited statement. The statement agrees with the source: arbitrary commutative condensed Lambda, any f, module objects in abelian pro-etale sheaves with the sheafified tensor over Z, f^*=Ext_{alpha_f} o mapMod(f^*_Ab). Nothing is weakened. Steps 1-3, 5 and 6 are correct and every hypothesis is in force: abelian monoidal categories with additive, cocontinuous tensor; Lambda_Y, f^*Lambda_Y and Lambda_X commutative; F additive (by the adjunction transpose) and exact; U G = F U for the lifted lemma; Res_{alpha^{-1}} in the right direction; the hypotheses of the extension-along-iso nodes; and the transfer along theta. One C4 fault, which I repaired: step 4 claimed alpha_f is an isomorphism of ring objects from lem-sfb-alpha-iso, which only states that alpha_f is an isomorphism. Step 4 now also cites lem-sfb-alpha-ring-hom (on the route, reviewed) and adds the line that the inverse of a ring-object isomorphism is a ring-object map. The proof_deps are updated and I checked that no cycle results. There are no new nodes, and no duplicate exists in the DAG (sk-prop-sfb-cartesian-coefficients covers admissible Lambda only). I accept the tool uses det-prop-sfb-module-pullback-exact-lifted and lem-sfb-alpha-iso, both prescribed by the source; det-def-sfb-sheaf-tensor-closed is on the route, so its declaration was unnecessary. Edge cases checked: identity f, empty X, Lambda=0, Z/4 coefficients, and Z->Z/2 as a negative case. Maintenance note: the item is exactly the statement of unit sk-prop-sfb-module-pullback-exact (realized.statement is empty) but is bound to sk-def-sfb-dc-restricted-functors, and its blueprint.is is null. The maintainer should consider rebinding it.; 1 file(s) fixed by the reviewer"
  }
 }

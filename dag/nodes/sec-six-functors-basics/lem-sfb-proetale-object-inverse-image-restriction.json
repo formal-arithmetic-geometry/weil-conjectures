@@ -1,0 +1,78 @@
+{
+ "id": "lem-sfb-proetale-object-inverse-image-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-heart-bound-lattice",
+   "place": "proof, Milnor paragraph: '... has vanishing outer terms when $q-1>2d$, by [det-proper-heart-bound-torsion]', which uses the groups $H^q(X_V,a_!(L_0/\\pi_E^n))$ of the restriction to $X_V$ (Completeness paragraph, last sentence: 'Restriction to $X_V$ ...') as the groups of the torsion statement, computed with the inverse image along $X_V\\to X$",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pro-étale inverse image along a site object is slice restriction",
+ "statement": "Let $X$ be a scheme, $A$ a commutative ring, and $r\\colon W\\to X$ a morphism of schemes such that $W\\xrightarrow{r}X$ is an object of the small pro-étale site $X_{\\mathrm{proét}}$ [def-weil-pbc-proetale-site]. Identify $W_{\\mathrm{proét}}$ with the localization $X_{\\mathrm{proét}}/W$ by the equivalence of [lem-weil-proetale-weakly-etale-localization], and for a sheaf $G$ of sets, of abelian groups or of $A_X$-modules on $X_{\\mathrm{proét}}$ write $G|_W$ for its restriction, $G|_W(U\\to W)=G(U\\to W\\xrightarrow{r}X)$, with the restriction maps of $G$. Let $u_r$, the presheaf inverse image $u_{r,p}$, the inverse image $r^{-1}=(u_{r,p}-)^\\#$, the structure map $c^r_A\\colon r^{-1}A_X\\to A_W$ and the module pullback $r^*G=r^{-1}G\\otimes_{r^{-1}A_X}A_W$ be those of [def-weil-proetale-inverse-image], with $A_X,A_W$ the constant sheaves of rings [def-weil-pbc-constant-sheaf]. Then:\n\n1. For every object $U\\to W$ of $W_{\\mathrm{proét}}$, the pair $(U\\to W\\xrightarrow{r}X,\\ \\varphi_0)$ with $\\varphi_0=(\\mathrm{str},\\mathrm{id}_U)\\colon U\\to W\\times_XU=u_r(U\\to X)$ is an initial object of the indexing category $\\mathcal I_U$ of [def-weil-proetale-inverse-image]. Consequently the coprojections indexed by these pairs give an isomorphism of presheaves $G|_W\\xrightarrow{\\sim}u_{r,p}G$, natural in $G$, and the canonical map $u_{r,p}G\\to r^{-1}G$ to the sheafification [def-weil-pbc-sheafification] is an isomorphism; thus $r^{-1}G\\cong G|_W$ naturally in $G$, for sheaves of sets, of abelian groups and of rings.\n2. Under this identification $r^{-1}A_X\\cong A_X|_W$, the structure map $c^r_A$ is a ring isomorphism $A_X|_W\\to A_W$, namely the inverse of the isomorphism $A_W\\to A_X|_W$ of clause (2) of [lem-weil-proetale-weakly-etale-localization].\n3. For every sheaf $G$ of $A_X$-modules there is an isomorphism of sheaves of $A_W$-modules $r^*G\\cong G|_W$, natural in $G$, where $G|_W$ is an $A_W$-module through the isomorphism of (2); in particular the underlying abelian sheaf of $r^*G$ is that of $G|_W$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CE (lemma-localize-given-products): for $U\\in\\mathcal C$ with products of pairs, $v(X)=X\\times U/U$ defines the morphism of sites $\\mathcal C/U\\to\\mathcal C$ whose topos morphism is $j_U$ (inverse image = restriction); applied to the base-change functor of proetale.tex Tag 09A5. Pro-étale analogue of the DAG node lem-weil-pbc-etale-inverse-image-restriction (étale case)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ProEtale|proetale|Proetale over Mathlib/",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean (proetalePrecoverage, proetaleTopology, ProEt site, equivOfIsEmpty, topology lemmas), Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; no inverse image along an object of the pro-étale site",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback|Sheaf.over in Mathlib/CategoryTheory/Sites/Over.lean",
+   "results": "Mathlib/CategoryTheory/Sites/Over.lean:288 overPullback (restriction Sheaf J A ⥤ Sheaf (J.over X) A as pushforward along Over.forget), :512 Sheaf.over; read lines 270-300. No comparison of the base-change-functor inverse image of a morphism of sites with this restriction.",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has the slice restriction functor but not its identification with the inverse image of the base-change functor u_r"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image along an object of a site equals restriction to the slice site",
+   "results": "not run: the search services are not reachable from the review machine",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "GrothendieckTopology.overPullback",
+   "results": "not run: the search services are not reachable from the review machine",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "det-proper-heart-bound-lattice",
+  "date": "2026-10-17",
+  "group": "Q150"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-proper-heart-bound",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

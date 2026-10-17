@@ -13,11 +13,138 @@
   "def-weil-finite-coefficient-point",
   "def-weil-exceptional-adjoint-admissibility",
   "def-weil-full-cohomological-dimension",
-  "def-weil-compactifications-refinements"
+  "def-weil-compactifications-refinements",
+  "def-weil-ambient-exceptional-adjoint",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-proetale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take the scheme base $S=s$; the identity is separated, finite type, proper and an open immersion directly from these definitions, and $\\ell$ is invertible since $\\ell\\ne p$. Put $A=A_{E,n}$ and $D_T=D(T_{\\mathrm{proet}},A)$. For any scheme $T$, the formula $(f_*M)(V)=M(V\\times_YX)$ of [def-weil-proetale-module-direct-image], with $f=\\operatorname{id}_T$, identifies $f_*$ naturally with the identity: $V\\times_TT\\cong V$, compatibly with restrictions and the constant-ring action. It is exact. In the construction [def-weil-derived-direct-image], a quasi-isomorphism $K\\to I$ to a K-injective complex then gives $R(\\operatorname{id}_T)_*K=I\\cong K$; this is the natural identity identification of [lem-weil-derived-direct-image-composition]. Also extension by zero for $\\operatorname{id}_T$ in [def-weil-extension-by-zero] is the identity, since every test object factors through $T$ and the presheaf being sheafified is already $M$. Thus the chosen identity compactification has compact-support candidate $F_0=R(\\operatorname{id}_s)_*\\operatorname{id}_!\\cong\\operatorname{id}_{D_s}$ by [def-weil-compact-support-candidate].",
+   "uses": [
+    "def-weil-proetale-module-direct-image",
+    "def-weil-derived-direct-image",
+    "lem-weil-derived-direct-image-composition",
+    "def-weil-extension-by-zero",
+    "def-weil-compact-support-candidate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "identity compactification; explicit identity direct-image and extension-by-zero computations"
+   }
+  },
+  {
+   "text": "Check both clauses of [def-weil-full-cohomological-dimension] for its chosen proper part $p=\\operatorname{id}_s$. For any module sheaf $M$, step 1 gives $Rp_*(\\iota_sM)\\cong\\iota_sM$. Its cohomology in degree $r>0$ is zero, since the complex has only its degree-zero term; use the kernel/image description in [def-weil-derived-cohomology-sheaves]. For every object $v:V\\to s$ of the pro-etale site, $s\\times_sV\\cong V$ and $p_V$ is the identity under this canonical identification. Apply the very same calculation on $V$ to the pulled-back sheaf $g_V^*M$: $\\mathcal H^r(R(p_V)_*(\\iota_Vg_V^*M))=0$ for $r>0$. This does not require $V$ to be finite type or the sheaf to be constructible. Hence $\\operatorname{FullCD}(\\operatorname{id}_s,A;0)$.",
+   "uses": [
+    "def-weil-full-cohomological-dimension",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "full cohomological dimension at the identity and all pro-etale base changes"
+   }
+  },
+  {
+   "text": "Let $d=(s\\xrightarrow{j_d}Z_d\\xrightarrow{p_d}s)$ be any compactification in [def-weil-compactifications-refinements]. The relation $p_dj_d=\\operatorname{id}_s$ makes $j_d$ a section of $p_d$. Properness includes separatedness by [def-weil-proper-morphism]. Therefore [lem-weil-pbc-section-separated-closed-immersion] applies and makes $j_d$ a closed immersion. It is already an open immersion, so its image and its complement are disjoint open subschemes covering $Z_d$. The section identifies its image with $s$, with inverse the restriction of $p_d$.",
+   "uses": [
+    "def-weil-compactifications-refinements",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-section-separated-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KT (schemes-lemma-section-immersion): closed-immersion assertion for a section of a separated morphism"
+   }
+  },
+  {
+   "text": "For the open-and-closed $j_d$ of step 3, the definitions [def-weil-extension-by-zero, def-weil-proetale-module-direct-image] identify $j_{d!}M$ with $j_{d*}M$. Indeed each test scheme $W\\to Z_d$ is covered by the two disjoint opens $W_s=W\\times_{Z_d}s$ and $W_C$ over the complement. The sheafification defining $j_{d!}M$ has restrictions $M$ and zero on these two pieces, and gluing gives $M(W_s)\\times0=M(W_s)=(j_{d*}M)(W)$. This is natural in both $W$ and $M$. The same two-piece gluing identifies module sheaves on $Z_d$ with pairs of module sheaves on its two open pieces; morphisms and their kernels and cokernels are computed in the two components. Hence the inclusion $M\\mapsto(M,0)$, namely $j_{d*}$, is exact. Applying it to a quasi-isomorphism $K\\to I$ preserves that quasi-isomorphism, so the K-injective formula [def-weil-derived-direct-image] gives the canonical identification $j_{d!}=j_{d*}\\cong Rj_{d*}$ on all of $D_s$.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "elementary sheaf gluing on the two clopen pieces; all ambient complexes"
+   }
+  },
+  {
+   "text": "For every $d$, combine step 4 with the finite-level composition isomorphism of [lem-weil-derived-direct-image-composition] to obtain a natural isomorphism\n$$\\beta_d:F_d=Rp_{d*}j_{d!}\\xrightarrow{\\sim}Rp_{d*}Rj_{d*}\\xrightarrow{\\sim}R(p_dj_d)_*\\xrightarrow{\\sim}\\operatorname{id}_{D_s}.$$\nHere $F_d$ is exactly the ambient candidate of [def-weil-compact-support-candidate]. For a refinement $u:d\\to e$, $uj_d=j_e$ and $p_eu=p_d$. Steps 3–4 and the same composition theorem identify $Ru_*j_{d!}\\cong Ru_*Rj_{d*}\\cong Rj_{e*}\\cong j_{e!}$ on the whole ambient category. Use this isomorphism and proper composition to define $\\theta_u:F_d\\xrightarrow{\\sim}F_e$. Associativity and the identity laws in the cited theorem give $\\beta_e\\theta_u=\\beta_d$, since both paths are the inverse composition comparison for $p_euj_d=\\operatorname{id}_s$. Thus $\\theta_u=\\beta_e^{-1}\\beta_d$, $\\theta_{\\operatorname{id}}=\\operatorname{id}$ and $\\theta_{vu}=\\theta_v\\theta_u$. This establishes the needed ambient comparisons directly for this morphism.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition",
+    "def-weil-compact-support-candidate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "identity adjoint assertion: compactification comparisons via the clopen section"
+   }
+  },
+  {
+   "text": "For each $d$ choose $G_d=\\operatorname{id}_{D_s}$. Define the adjunction $F_d\\dashv G_d$ by the natural bijection $h\\mapsto h\\circ\\beta_{d,K}^{-1}$ from $\\operatorname{Hom}(F_dK,L)$ to $\\operatorname{Hom}(K,L)$; its inverse is $a\\mapsto a\\circ\\beta_{d,K}$. The unit is $\\eta^d_K=\\beta_{d,K}^{-1}$ and the counit is $\\varepsilon^d_L=\\beta_{d,L}$. In the identification $F_d\\cong\\operatorname{id}$ both are identities. Set $\\rho_u:G_e\\to G_d$ to be the identity. The refinement equations of [def-weil-ambient-exceptional-adjoint] now read $\\beta_e^{-1}=\\theta_u\\beta_d^{-1}$ and $\\beta_d=\\beta_e\\theta_u$, which are step 5. The composition equations for $\\theta$ were proved there and those for $\\rho$ are identities. Together with step 2 this supplies the full ambient datum for the chosen compactification. If an already chosen right adjoint is used instead, [det-sp-unique-right-adjoint] gives its unique counit-compatible natural isomorphism to this one; hence the assertion is about canonical adjunction identifications, not a literal equality of independently chosen models.",
+   "uses": [
+    "def-weil-ambient-exceptional-adjoint",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "identity is its own right adjoint; units, counits and all refinement equations"
+   }
+  },
+  {
+   "text": "In the identity model $G_0L=L$, so a bounded constructible object in $D_c^{[a,b]}(s,A)$ has exactly the same cohomology and remains in that interval [def-weil-constructible-intervals]. For every sheaf $M$ in degree zero the complexes $(G_0L)\\otimes_A^LM$ and $L\\otimes_A^LM$ are identical; therefore every Tor-amplitude interval for $L$ is unchanged [def-weil-finite-tor-amplitude]. Both properties are invariant under the natural isomorphism of step 6. Consequently clauses (2) and (3) of [def-weil-exceptional-adjoint-admissibility] hold with $c_f^-=c_f^+=0$, while clause (1) is steps 2 and 6.",
+   "uses": [
+    "def-weil-constructible-intervals",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-exceptional-adjoint-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "the preservation clauses with zero shifts"
+   }
+  },
+  {
+   "text": "Let $T$ be any of the finite-reduction or scalar-extension functors between coefficient stages. At $s$ the source and target coefficient-change functors are the same $T$. In the identity models of the preceding steps, the left-functor comparison is $T\\operatorname{id}=\\operatorname{id}T$, with component $1_{TL}$: on a K-flat representative $P$, the geometric coefficient comparison for the identity sends $P\\otimes B$ to the same $P\\otimes B$ by the identity. The right-adjoint comparison is its mate: the transpose of $T(\\varepsilon_L)$ composed with the inverse left comparison. Both factors are identities, and transposition in $\\operatorname{id}\\dashv\\operatorname{id}$ is the identity on the Hom set. Its component is therefore $1_{TL}$, also when $T$ is not exact before deriving it. Identity and successive-change diagrams commute because their arrows are identities after the specified coefficient-change identifications. The point stages in [def-weil-finite-coefficient-point] are kept separate: at integral coefficients the identity preserves the derived-complete category, at $E$ it acts identically on the rationalized objects and morphisms, and at $\\Qlb$ it acts identically on every common finite-stage representative. The bounds $0,0,0$ above do not depend on $E$ or $n$. The last paragraph of [def-weil-exceptional-adjoint-admissibility] therefore gives admissibility at $\\mathcal O_E$, $E$ and $\\Qlb$ as claimed.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "def-weil-exceptional-adjoint-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "finite reductions, scalar extension and the uniform higher-stage definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-module-direct-image",
+  "def-weil-derived-direct-image",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-extension-by-zero",
+  "def-weil-compact-support-candidate",
+  "def-weil-full-cohomological-dimension",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-compactifications-refinements",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "def-weil-ambient-exceptional-adjoint",
+  "det-sp-unique-right-adjoint",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+  "place": "identity-adjunction sentence, expanded to the optional ambient admissibility notion using the clopen sections of identity compactifications"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,10 +209,45 @@
    "date": "2026-10-17",
    "verdict": "no match",
    "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "identity.*admissib|admissib.*identity|FullCD|exceptionalAdjoint",
+   "results": "0 hits: . Read returned types: the identity adjunction itself is present, but none states pro-etale ambient admissibility, its bounds, and all compactification comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The identity functor is its own right adjoint with identity unit and counit",
+   "results": "8 hits: CategoryTheory.Adjunction.instInhabitedId, CategoryTheory.Adjunction.id, CategoryTheory.Bicategory.Adjunction.instInhabitedId, CategoryTheory.Equivalence.refl_toAdjunction, CategoryTheory.Bicategory.Adjunction.id, CategoryTheory.Adjunction.id_counit, CategoryTheory.Bicategory.Adjunction.ofCat_id, CategoryTheory.Adjunction.CoreUnitCounit.unit. Read returned types: the identity adjunction itself is present, but none states pro-etale ambient admissibility, its bounds, and all compactification comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.id",
+   "results": "12 hits: CategoryTheory.Adjunction.id, CategoryTheory.Equivalence.refl_toAdjunction, CategoryTheory.Adjunction.id_unit, CategoryTheory.Adjunction.id_counit, CategoryTheory.Adjunction.instIsMonoidalId, CategoryTheory.conjugateEquiv_adjunction_id, CategoryTheory.conjugateEquiv_adjunction_id_symm, CategoryTheory.conjugateEquiv_leftUnitor_hom. Read returned types: the identity adjunction itself is present, but none states pro-etale ambient admissibility, its bounds, and all compactification comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity scheme morphism is exceptional-adjoint admissible on ambient pro-etale derived categories with zero bounds and coherent refinements",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.sourceLocalClosure.instContainsIdentitiesScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.etaleTopology. Read returned types: the identity adjunction itself is present, but none states pro-etale ambient admissibility, its bounds, and all compactification comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity compactification gives zero full cohomological dimension and identity exceptional adjunction with coefficient comparisons",
+   "results": "8 hits: CochainComplex.instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat, CochainComplex.instIsStrictlyGEExtendNatIntEmbeddingUpNatOfNat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CochainComplex.exists_iso_single, CategoryTheory.HasInjectiveDimensionLT.subsingleton. Read returned types: the identity adjunction itself is present, but none states pro-etale ambient admissibility, its bounds, and all compactification comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-point",
@@ -102,5 +264,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-point-identity-admissibility",
+  "worker": "stage1",
+  "summary": "Proved the stronger optional ambient admissibility of the point identity directly. Checked FullCD on arbitrary sheaves and arbitrary site base changes; all identity compactifications have clopen section, giving ambient compact-support identity comparisons, explicit adjunction/refinement equations, zero interval and Tor bounds, and identity coefficient mates. No new nodes and no statement changes. The generic compactification comparison is only used as background, never to extend its etale-origin scope.",
+  "blueprint": "lem-sf-point.proof.md: identity is its own right adjoint; supplies the optional ambient hypothesis recorded in this created node's ancestry. The unit's exchange-then-point-evaluation route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Generic scheme-theoretic section lemma needed to show that each identity compactification has a clopen section; not supplied by a statement of the global-duality unit."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic uniqueness of counit-compatible adjunction identifications, used only to compare any chosen right adjoint with the explicit identity model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "det-sp-unique-right-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-875660546",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-875660546 (reviewer sub-agent of L); spot-checked: Read in full: the item, its base version (statement, source, blueprint and unit unchanged, so no target is weakened), every cited node's current statement, the lem-sf-point proof in blueprint main-20261015, the citer lem-sf-point and def-pod-conventions (a_X=id_s for X_0=Spec k_0), the unit and chapter route, and Stacks schemes.tex l.4275 Tag 01KT. Hypotheses: the base is S=s=Spec F̄_q and l≠p. The geometric hypotheses of def-weil-compactifications-refinements apply only over finite-field bases, so they are not needed here. Step 1: id_*, id_! and R(id)_* are the identity, matching the identity clause of the composition lemma. Step 2: FullCD(id,A;0) holds in both clauses, including site objects V that are not of finite type; p_V is an isomorphism, so its direct image is exact. Step 3: p_d j_d=id with p_d separated makes j_d a closed immersion by 01KT, so it is open and closed. Step 4: two-piece gluing gives j_!=j_*, exact, and equal to Rj_*. Step 5: beta_d and theta_u are built from clause 1 of lem-weil-derived-direct-image-composition (all unbounded complexes at finite level); its associativity gives beta_e theta_u=beta_d. The etale-origin comparison is not extended. Step 6: I recomputed the unit beta^-1 and counit beta; both refinement equations of def-weil-ambient-exceptional-adjoint reduce to theta_u=beta_e^-1 beta_d. Step 7: interval and Tor bounds are 0. Step 8: the coefficient mates are identities and the bounds are uniform. Edge cases: Z_d=s⊔C with C an elliptic curve, where FullCD for p_d is not required; Z/l^2→Z/l; n=1. No new nodes and no duplicate found by rg. Route: the composition lemma is in the cited unit sk-def-sf-operations; the section lemma and adjoint uniqueness are Mathlib leaves, and their declared tool_uses are accepted. No SGA citations. proof_deps equals the union of the step uses. No fixes."
  }
 }

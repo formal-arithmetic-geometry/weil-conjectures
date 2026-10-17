@@ -43,12 +43,13 @@
    }
   },
   {
-   "text": "Let $g:X_V\\to X$ be the projection. Since $V\\to Y$ is an object of the pro-étale site, it is weakly étale; base-change stability [lem-weil-pbc-weakly-etale-composition-base-change] makes $g$ weakly étale. The site equivalence [lem-weil-proetale-weakly-etale-localization] identifies $(X_V)_{\\mathrm{proét}}$ with $X_{\\mathrm{proét}}/X_V$. Write $F$ for restriction to this slice with the restricted ring sheaf. It is exact by [lem-pur-site-restriction-module-adjunction-exact]. It preserves products, since limits of module sheaves are sectionwise [lem-weil-pbc-module-sheaves-limits-sectionwise]: on an object $W\\to X_V$ both $F(\\prod_nM_n)$ and $\\prod_nF(M_n)$ have sections $\\prod_nM_n(W\\to X)$. The comparison respects projections, restrictions and the coefficient action because each is componentwise. We keep the restricted coefficient sheaf in this calculation, so it requires no identification with discrete constant $\\mathcal O_E$ coefficients.",
+   "text": "Let $g:X_V\\to X$ be the projection. Since $V\\to Y$ is an object of the pro-étale site, it is weakly étale; base-change stability [lem-weil-pbc-weakly-etale-composition-base-change] makes $g$ weakly étale. Moreover $X_V\\to X$ is the image $u_p(V)$ of $V$ under the base-change functor $u_p:Y_{\\mathrm{proét}}\\to X_{\\mathrm{proét}}$ of [def-weil-proetale-inverse-image], which that definition shows to be well defined; so $X_V$ is an object of $X_{\\mathrm{proét}}$. The site equivalence [lem-weil-proetale-weakly-etale-localization] identifies $(X_V)_{\\mathrm{proét}}$ with $X_{\\mathrm{proét}}/X_V$. Write $F$ for restriction to this slice with the restricted ring sheaf. It is exact by [lem-pur-site-restriction-module-adjunction-exact]. It preserves products, since limits of module sheaves are sectionwise [lem-weil-pbc-module-sheaves-limits-sectionwise]: on an object $W\\to X_V$ both $F(\\prod_nM_n)$ and $\\prod_nF(M_n)$ have sections $\\prod_nM_n(W\\to X)$. The comparison respects projections, restrictions and the coefficient action because each is componentwise. We keep the restricted coefficient sheaf in this calculation, so it requires no identification with discrete constant $\\mathcal O_E$ coefficients.",
    "uses": [
     "lem-weil-pbc-weakly-etale-composition-base-change",
     "lem-weil-proetale-weakly-etale-localization",
     "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
@@ -81,23 +82,44 @@
    }
   },
   {
-   "text": "First handle $d<0$ directly. If $x\\in X$, choose an algebraic closure $\\Omega$ of $\\kappa(x)$. The composite $\\operatorname{Spec}\\Omega\\to X\\to Y$ is a geometric point of $Y$, and the first arrow supplies a point of the corresponding geometric fibre. A nonempty scheme has Krull dimension at least zero (a one-point chain has length zero), contradicting the bound $d<0$. Hence $X=\\varnothing$, so $X_V=\\varnothing$ and all the groups in the conclusion vanish. We may therefore suppose $d\\geq0$, as required by the current torsion-bound statement.\n\nUse [lem-pc-derived-limit-milnor-sequence] for the tower $C_n$ in $D(\\operatorname{Ab})$. It yields\n$$0\\to R^1\\varprojlim_n H^{q-1}(C_n)\\to H^q(X_V,K|_{X_V})\\to\\varprojlim_n H^q(C_n)\\to0.$$\nWe now identify $H^r(C_n)$ with the group in the torsion-bound statement. Its sheaf $a_!(L_0/\\pi_E^nL_0)$ is, by its displayed definition $a_!=i_*u_!$, the same module $N_n$ as in step 1, and only its underlying abelian sheaf matters below.\n\n(a) *The inverse image $r^*$ is the slice restriction.* Let $r:X_V\\to X$ be the projection; by step 2 it is an object of $X_{\\mathrm{proét}}$. In [def-weil-proetale-inverse-image] for $r$, the base-change functor is $u_r(W\\to X)=(X_V\\times_XW\\to X_V)$. Fix an object $U\\to X_V$ of $(X_V)_{\\mathrm{proét}}$ and let $U_X=(U\\to X_V\\to X)$ be the corresponding object of $X_{\\mathrm{proét}}$ under the equivalence (1) of [lem-weil-proetale-weakly-etale-localization]. Put $\\varphi_0=(\\mathrm{str},\\mathrm{id}_U):U\\to X_V\\times_XU_X$. If $(W,\\varphi)$ is an object of the indexing category $\\mathcal I_U$, then $\\varphi$ is an $X_V$-morphism, so its first component is the structure map, and $a=\\mathrm{pr}_2\\varphi:U\\to W$ is an $X$-morphism with $u_r(a)\\varphi_0=(\\mathrm{str},a)=\\varphi$; any $a'$ with $u_r(a')\\varphi_0=\\varphi$ has $a'=\\mathrm{pr}_2\\varphi=a$. Thus $(U_X,\\varphi_0)$ is initial in $\\mathcal I_U$, hence terminal in $\\mathcal I_U^{\\mathrm{op}}$, and the colimit defining $(u_{r,p}G)(U)$ is $G(U\\to X)=G|_{X_V}(U)$, compatibly with restrictions (restriction along $b:U'\\to U$ sends $\\varphi_0$ to the composite of $\\varphi_0'$ with $\\mathrm{id}\\times b$). So $u_{r,p}G=G|_{X_V}$, which is a sheaf by (3) of the same lemma; its sheafification is therefore itself, as the identity map satisfies the universal property of [def-weil-pbc-sheafification]. Applied to the constant ring this gives $r^{-1}A_X=A_X|_{X_V}$. The structure map $c^r_A$ is the identity on constant sections, so it is the isomorphism $A_{X_V}\\to A_X|_{X_V}$ of (2) of [lem-weil-proetale-weakly-etale-localization] (by its uniqueness clause), and the module pullback $r^{-1}G\\otimes_{r^{-1}A_X}A_{X_V}$ along an isomorphism of ring sheaves is $G|_{X_V}$. Hence the underlying abelian sheaf of $r^*N_n$ is that of $N_n|_{X_V}=F(N_n)$, for $A=A_n$ (and for $A=\\mathbf Z$).\n\n(b) *Cohomology does not depend on the coefficient ring.* The categories of sheaves of modules on the small site $(X_V)_{\\mathrm{proét}}$ over the restricted ring $\\mathcal O_{E,X}|_{X_V}$, over the constant ring $(A_n)_{X_V}$ and over $\\mathbf Z$ are Grothendieck abelian by [prop-pur-kinjective-resolutions-exist], hence have enough injectives by [lem-sp-grothendieck-enough-injectives]. By [lem-sp-kinjective-computes] (2), applied to the left exact functor of sections over the terminal object $X_V$ and to a module $M$ placed in degree zero, $H^r$ of the derived sections computed with a K-injective resolution, as in step 4 and in [def-sfb-finite-derived-global-sections], is the right derived functor $R^r\\Gamma(X_V,-)(M)$ computed with injective module resolutions. By [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] this is $H^r(X_V,M_{ab})$, the cohomology of the underlying abelian sheaf. \n\n(c) For each $n$, the isomorphism $B_n\\simeq N_n$ of step 1, restricted by the triangulated functor $F$ of step 3, gives an isomorphism of $B_n|_{X_V}$ with the sheaf $N_n|_{X_V}$ placed in degree zero; applying $R\\Gamma(X_V,-)$, (b) for the restricted integral ring and for the coefficient ring used in [det-proper-heart-bound-torsion], and (a), we obtain for every $r$\n$$H^r(C_n)\\simeq H^r\\bigl(X_V,(N_n|_{X_V})_{ab}\\bigr)\\simeq H^r\\bigl(X_V,r^*a_!(L_0/\\pi_E^nL_0)\\bigr).$$\nIf $q>2d+1$ then $q-1>2d$ and $q>2d$. The torsion-bound statement [det-proper-heart-bound-torsion], applied with the nonnegative integer $d$, therefore makes every term of the two end towers in the exact sequence zero. This conclusion is independent of their transition maps, and needs no naturality of the individual isomorphisms just used. The inverse limit of the zero tower is zero, and its first derived limit is zero: the zero complex is an injective resolution of the zero object in the tower category, so applying inverse limit gives the zero complex. The exact sequence now has zero outer terms, forcing its middle group $H^q(X_V,a_!L_0)$ to vanish. This includes $d=0$ (the claimed range is $q>1$), the zero lattice, and the empty scheme; it makes no assertion about the borderline $q=2d+1$.",
+   "text": "First handle $d<0$ directly. If $x\\in X$, choose an algebraic closure $\\Omega$ of $\\kappa(x)$. The composite $\\operatorname{Spec}\\Omega\\to X\\to Y$ is a geometric point of $Y$, and the first arrow supplies a point of the corresponding geometric fibre. A nonempty scheme has Krull dimension at least zero (a one-point chain has length zero), contradicting the bound $d<0$. Hence $X=\\varnothing$, so $X_V=\\varnothing$ and all the groups in the conclusion vanish. We may therefore suppose $d\\geq0$, as required by the current torsion-bound statement. (Here dimension is the Krull dimension of [def-kun-topological-krull-dimension], which is $-\\infty$ exactly for the empty space.)",
    "uses": [
-    "lem-pc-derived-limit-milnor-sequence",
-    "det-proper-heart-bound-torsion",
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-    "lem-sp-kinjective-computes",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Milnor paragraph (bound $d$ of the torsion statement); the case $d<0$ is reduced to the empty scheme from the definition, Stacks Tag 0055 (definition-Krull)"
+   }
+  },
+  {
+   "text": "We identify, for $C_n=R\\Gamma(X_V,B_n|_{X_V})$ of step 4, each group $H^r(C_n)$ with the group in the torsion-bound statement [det-proper-heart-bound-torsion]. Its sheaf $a_!(L_0/\\pi_E^nL_0)$ is, by its displayed definition $a_!=i_*u_!$, the same module $N_n$ as in step 1, and only its underlying abelian sheaf matters below.\n\n(a) *The inverse image $r^*$ is the slice restriction.* Let $r:X_V\\to X$ be the projection; by step 2 it is an object of $X_{\\mathrm{proét}}$. By [lem-sfb-proetale-object-inverse-image-restriction], applied to $W=X_V$, for $A=A_n$ (and for $A=\\mathbf Z$) the underlying abelian sheaf of the module pullback $r^*N_n=r^{-1}N_n\\otimes_{r^{-1}A_X}A_{X_V}$ of [def-weil-proetale-inverse-image] is that of $N_n|_{X_V}=F(N_n)$.\n\n(b) *Cohomology does not depend on the coefficient ring.* The categories of sheaves of modules on the small site $(X_V)_{\\mathrm{proét}}$ over the restricted ring $\\mathcal O_{E,X}|_{X_V}$, over the constant ring $(A_n)_{X_V}$ and over $\\mathbf Z$ are Grothendieck abelian by [prop-pur-kinjective-resolutions-exist], hence have enough injectives by [lem-sp-grothendieck-enough-injectives]. By [lem-sp-kinjective-computes] (2), applied to the left exact functor of sections over the terminal object $X_V$ and to a module $M$ placed in degree zero, $H^r$ of the derived sections computed with a K-injective resolution, as in step 4 and in [def-sfb-finite-derived-global-sections], is the right derived functor $R^r\\Gamma(X_V,-)(M)$ computed with injective module resolutions. By [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] this is $H^r(X_V,M_{ab})$, the cohomology of the underlying abelian sheaf.\n\n(c) For each $n$, the isomorphism $B_n\\simeq N_n$ of step 1, restricted by the triangulated functor $F$ of step 3, gives an isomorphism of $B_n|_{X_V}$ with the sheaf $N_n|_{X_V}$ placed in degree zero; applying $R\\Gamma(X_V,-)$, (b) for the restricted integral ring and for the coefficient ring used in [det-proper-heart-bound-torsion], and (a), we obtain for every $r$\n$$H^r(C_n)\\simeq H^r\\bigl(X_V,(N_n|_{X_V})_{ab}\\bigr)\\simeq H^r\\bigl(X_V,r^*a_!(L_0/\\pi_E^nL_0)\\bigr).$$",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "def-weil-proetale-inverse-image",
     "prop-pur-kinjective-resolutions-exist",
     "lem-sp-grothendieck-enough-injectives",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-sheafification",
-    "def-sfb-finite-derived-global-sections"
+    "lem-sp-kinjective-computes",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "def-sfb-finite-derived-global-sections",
+    "det-proper-heart-bound-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), second displayed equality; inverse image along a localization as in sites.tex Tag 03CE (lemma-localize-given-products); realizes the identification implicit in the blueprint Milnor paragraph, which writes $H^q(X_V,a_!(L_0/\\pi_E^n))$ for both groups"
+   }
+  },
+  {
+   "text": "We may suppose $d\\geq0$ by step 5. Use [lem-pc-derived-limit-milnor-sequence] for the tower $C_n$ in $D(\\operatorname{Ab})$. It yields\n$$0\\to R^1\\varprojlim_n H^{q-1}(C_n)\\to H^q(X_V,K|_{X_V})\\to\\varprojlim_n H^q(C_n)\\to0.$$ By step 6, $H^r(C_n)\\simeq H^r(X_V,r^*a_!(L_0/\\pi_E^nL_0))$ for every $r$ and $n$. If $q>2d+1$ then $q-1>2d$ and $q>2d$. The torsion-bound statement [det-proper-heart-bound-torsion], applied with the nonnegative integer $d$, therefore makes every term of the two end towers in the exact sequence zero. This conclusion is independent of their transition maps, and needs no naturality of the individual isomorphisms just used. The inverse limit of the zero tower is zero, and its first derived limit is zero: the zero complex is an injective resolution of the zero object in the tower category, so applying inverse limit gives the zero complex. The exact sequence now has zero outer terms, forcing its middle group $H^q(X_V,a_!L_0)$ to vanish. This includes $d=0$ (the claimed range is $q>1$), the zero lattice, and the empty scheme; it makes no assertion about the borderline $q=2d+1$.",
+   "uses": [
+    "lem-pc-derived-limit-milnor-sequence",
+    "det-proper-heart-bound-torsion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KY (lemma-break-long-exact-sequence) and Tag 07KW (lemma-compute-Rlim), applied after the source blueprint Milnor paragraph and its torsion-bound input; coefficient comparison by Stacks sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree) and inverse image along a localization by sites.tex Tag 03CE (lemma-localize-given-products)"
+    "place": "Tag 07KY (lemma-break-long-exact-sequence) and Tag 07KW (lemma-compute-Rlim), applied as in the blueprint Milnor paragraph with its torsion-bound input"
    }
   }
  ],
@@ -107,19 +129,20 @@
   "lem-weil-proetale-weakly-etale-localization",
   "lem-pur-site-restriction-module-adjunction-exact",
   "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-proetale-inverse-image",
   "lem-sf-exact-functor-derived-triangulated",
   "det-pe-products-derived",
   "def-weil-derived-limit",
   "lem-kun-site-rgamma-derived-limit",
-  "lem-pc-derived-limit-milnor-sequence",
-  "det-proper-heart-bound-torsion",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lem-sp-kinjective-computes",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-proetale-object-inverse-image-restriction",
   "prop-pur-kinjective-resolutions-exist",
   "lem-sp-grothendieck-enough-injectives",
-  "def-weil-proetale-inverse-image",
-  "def-weil-pbc-sheafification",
-  "def-sfb-finite-derived-global-sections"
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "def-sfb-finite-derived-global-sections",
+  "det-proper-heart-bound-torsion",
+  "lem-pc-derived-limit-milnor-sequence"
  ],
  "proof_origin": {
   "by": "agent",
@@ -199,7 +222,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -219,8 +242,8 @@
   "date": "2026-10-17",
   "item": "det-proper-heart-bound-lattice",
   "worker": "stage1",
-  "summary": "Restored the inherited separated finite-type scheme setting explicitly (the imported standalone statement suppressed the Noetherian scope used by its proof). Replaced the sketch by five steps: integral lattice completeness using its canonical derived-reduction tower; weakly étale slice restriction; an explicit image Roos triangle; derived sections on a ringed site; and the abelian-group Milnor sequence with the torsion bound. No new nodes. The preliminary ringed-space and product-preservation citation mismatches were corrected before delivery. The original conclusion and bound are retained. The second reader made explicit that the standing finite-type scope applies to X, Y and S, not to the pro-etale test scheme V or X_V, and replaced the truncated imported Milnor source entry by exact source labels. The resumed worker refreshed the torsion citation after its statement changed and proved the negative-dimension-bound case directly before invoking its nonnegative-bound version; no integer bound is discarded. Maintainer reader (FIX): step 5 now proves the identification of H^r(C_n) with the torsion-bound group: the inverse image along the site object X_V is the slice restriction (written out from the definition), and cohomology is independent of the coefficient ring (existing Stacks 03FD node); step 3's undefined t_n was renamed to the transition f_n.",
-  "blueprint": "Completeness paragraph is realized by steps 1–3 (step 1 reuses the existing general integral-model statement for lattice and extension completeness; steps 2–3 prove restriction preservation). Sections paragraph is step 4. Milnor paragraph is step 5. These realize unit sk-lem-proper-heart-bound steps 2 and 4 without replacing the torsion/Milnor route.",
+  "summary": "Restored the inherited separated finite-type scheme setting explicitly (the imported standalone statement suppressed the Noetherian scope used by its proof). Replaced the sketch by five steps: integral lattice completeness using its canonical derived-reduction tower; weakly étale slice restriction; an explicit image Roos triangle; derived sections on a ringed site; and the abelian-group Milnor sequence with the torsion bound. No new nodes. The preliminary ringed-space and product-preservation citation mismatches were corrected before delivery. The original conclusion and bound are retained. The second reader made explicit that the standing finite-type scope applies to X, Y and S, not to the pro-etale test scheme V or X_V, and replaced the truncated imported Milnor source entry by exact source labels. The resumed worker refreshed the torsion citation after its statement changed and proved the negative-dimension-bound case directly before invoking its nonnegative-bound version; no integer bound is discarded. Maintainer reader (FIX): step 5 now proves the identification of H^r(C_n) with the torsion-bound group: the inverse image along the site object X_V is the slice restriction (written out from the definition), and cohomology is independent of the coefficient ring (existing Stacks 03FD node); step 3's undefined t_n was renamed to the transition f_n. Maintainer reader (second pass, FIX): the inline proof that the pro-étale inverse image along the site object X_V is the slice restriction was moved into the new statement-only node lem-sfb-proetale-object-inverse-image-restriction (pro-étale analogue of lem-weil-pbc-etale-inverse-image-restriction); the long step 5 was divided into step 5 (d<0), step 6 (identification of H^r(C_n) with the torsion-bound group) and step 7 (Milnor sequence and conclusion); step 2 now cites the base-change functor of def-weil-proetale-inverse-image for X_V being an object of X_proét.",
+  "blueprint": "Completeness paragraph is realized by steps 1–3 (step 1 reuses the existing general integral-model statement for lattice and extension completeness; steps 2–3 prove restriction preservation). Sections paragraph is step 4. Milnor paragraph is steps 5–7 (step 6 with lem-sfb-proetale-object-inverse-image-restriction makes precise the source's identification of the restricted reduction with the torsion-bound group). These realize unit sk-lem-proper-heart-bound steps 2 and 4 without replacing the torsion/Milnor route.",
   "tool_uses": [
    {
     "node": "sk-lem-integral-models",
@@ -277,12 +300,12 @@
   "prop-pur-kinjective-resolutions-exist"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NA-10b115b00",
-  "group": "NA",
+  "reviewer": "NT-cc-Q150-01b0d94bd",
+  "group": "Q150",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-10b115b00 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, the unit and the main-20261015 lattice and torsion statements and proof, all eleven cited node statements plus the torsion node's proof, and the Stacks tags 09BM, 09BP, 0D6K, 08U1, 07KY, 07KW, 094U, 03DJ, 03DB, 015F, 07KC, 08TC and 00XZ (all labels correct). The statement is the torsion node's situation made explicit: the standing finite-type setting applies to X, Y and S (V and X_V are not restricted), the bound d stays an integer with d<0 proved directly (X empty), and the completed O_{E,X}=p_X^*O_E coefficients are used throughout, so the target is not weakened. Steps 1-4 hold: integral-models clauses (2) and (4) give completeness and the reductions; weakly étale slice restriction is exact and preserves products sectionwise; the image Roos triangle is checked after each projection; ringed-site derived sections commute with the derived limit. There are no new nodes and no cycle. One repairable C1/E6 fault was in step 5: it identified H^r(C_n), computed over the restricted integral ring in the slice, with the torsion node's H^q of r^* a_!(L0/π^n) (finite or abelian coefficients) without citation. Fixed in fixes/dag/nodes/sec-six-functors-basics/det-proper-heart-bound-lattice.json. (a) r^* is slice restriction: written out from def-weil-proetale-inverse-image (an initial object of I_U) and clauses (1)-(3) of the localization lemma, which is Stacks 03CE. (b) Cohomology is independent of the ring: prop-pur-kinjective-resolutions-exist, lem-sp-grothendieck-enough-injectives, lem-sp-kinjective-computes (2), and the existing 03FD node lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison. Also renamed the undefined t_n in step 3 to f_n. proof_deps updated. Accepted the seven declared tool_uses and added three: the 03FD node, lem-sp-kinjective-computes and prop-pur-kinjective-resolutions-exist. Edge cases checked: d<0, d=0, the zero lattice, empty V, and the excluded q=2d+1. Details in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-01b0d94bd (reviewer sub-agent of L); spot-checked: I read the whole item. It is a re-delivery of an already split node with no new nodes. Against the main-20261015 lattice proof (Completeness, Sections and Milnor paragraphs), the statement is not weakened. d stays an integer and the case d<0 is handled directly. Coefficients stay the restricted O_{E,X} throughout and the finite A_n coefficients of the torsion node are compared explicitly. I read every cited node statement. I checked these Stacks labels against tags/tags: 09BM, 09BP, 094U, 03DJ, 03DB, 015F, 07KC, 08TC, 0D6K, 07KY, 07KW, 03CE, 03FD, 08U1. I read the text of 0D6K, 03FD, 03CE and 09BP. There is no cycle and no duplicate (searched for '2d+1'). The flagged step 5 (5030 characters) hid a lemma. Its part (a) proved inline a general comparison: the pro-étale inverse image of def-weil-proetale-inverse-image along an object W->X of X_proét is restriction to the slice (initial object of I_U, sheafification, structure map c^r_A, module pullback). This is the pro-étale analogue of lem-weil-pbc-etale-inverse-image-restriction and Stacks 03CE, and no existing DAG or blueprint node states it. FIX: (1) new statement-only node lem-sfb-proetale-object-inverse-image-restriction (unsplit, same unit, created.item set to the item). I checked that it is true. Mathlib grep shows Sites/Over.lean overPullback but no identification with this inverse image. LeanSearch and Loogle could not be reached from this machine and are recorded as unavailable. (2) The old step 5 is now three steps: d<0 (elementary, cites def-kun-topological-krull-dimension); the identification of H^r(C_n) with the torsion group (the new node plus the K-injective and 03FD nodes); and the Milnor conclusion. (3) Step 2 now cites the base-change functor u_p of def-weil-proetale-inverse-image, so that X_V is an object of X_proét, which the localization lemma needs. proof_deps recomputed. The ten declared tool_uses are accepted. Edge cases checked: d<0, d=0, zero lattice, empty V, borderline q=2d+1 excluded.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean_audit": {
   "master": {

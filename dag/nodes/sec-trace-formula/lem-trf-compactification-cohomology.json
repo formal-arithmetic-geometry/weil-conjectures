@@ -52,22 +52,59 @@
    }
   },
   {
-   "text": "The bounded constructible hypothesis on $K$, with exactly the finite-torsion convention of [def-weil-finite-torsion-constructibility], permits [prop-finite-compact-support-constructibility] to be applied to $a_X:X\\to s$, with $K_0=k$ and coefficient $A=A_{E,n}$. Its restriction $Ra_{X!}:D^b_c(X,A)\\to D^b_c(s,A)$ gives $Ra_{X!}K\\in D^b_c(s,A)$. By the isomorphism in Step 2 the object $R\\bar a_*j_!K$ is also in $D^b_c(s,A)$: an isomorphism preserves each cohomology sheaf up to isomorphism, so it preserves both the finite nonzero range and constructibility. Thus the functor $\\operatorname{Fib}_s:D^b_c(s,A)\\to D^b_{\\mathrm{fin}}(A)$ of [def-weil-finite-coefficient-point] applies to both sides. Set $C_{j,K}=\\operatorname{Fib}_s(\\theta_{c_*,c,K})$. Its inverse is $\\operatorname{Fib}_s(\\theta_{c_*,c,K}^{-1})$, by the functor laws. By the formulas in [def-weil-ordinary-compact-cohomology], its source is $R\\Gamma_c(X,K)=\\operatorname{Fib}_s(Ra_{X!}K)$ and its target is $R\\Gamma(\\bar X,j_!K)=\\operatorname{Fib}_s(R\\bar a_*j_!K)$. For the input of the ordinary-cohomology notation, also apply [prop-finite-compact-support-constructibility] to the separated finite-type open immersion $j:X\\to\\bar X$. Here $\\bar a$ is separated and of finite type because it is proper, by [def-weil-proper-morphism]. In the triangle $X\\xrightarrow{j}\\bar X\\xrightarrow{\\bar a}s$, the finite-type morphism $a_X$ and separated target morphism $\\bar a$ satisfy [lemma-nagata-open-immersion-qc-over-separated-target], so $j$ is quasi-compact. (Equivalently, its current quasi-compact/quasi-separated formulation applies: finite type implies quasi-compact, and a closed diagonal is quasi-compact.) Thus [lem-weil-pbc-qc-open-immersion-finite-type] makes $j$ finite type. The open immersion identifies $X$ with an open subscheme of $\\bar X$, hence $X\\times_{\\bar X}X=X$ and $\\Delta_j$ is the identity, a closed immersion; $j$ is separated by [def-weil-proper-morphism]. Its compactification $(j,\\operatorname{id}_{\\bar X})$ has candidate $R(\\operatorname{id}_{\\bar X})_*j_!=j_!$ by [def-weil-compact-support-candidate]: direct image by the identity is the identity exact functor, so its derived functor is the identity. Coherence on our witnessed object identifies this candidate with the compact-support functor for $j$. Thus the same restriction theorem gives $j_!K\\in D^b_c(\\bar X,A)$, as required to use the ordinary-cohomology definition. These are precisely the coefficient complexes in the assertion.",
+   "text": "Apply [prop-finite-compact-support-constructibility] to $a_X:X\\to s$ with $K_0=k$, $A=A_{E,n}$ and the given $K\\in D^b_c(X,A)$ of [def-weil-finite-torsion-constructibility]. Step 1 verifies the separated finite-type and coefficient hypotheses. The restriction clause gives $Ra_{X!}K\\in D^b_c(s,A)$. By [lem-weil-proetale-dbc-triangulated], bounded constructibility is closed under isomorphisms. The isomorphism of Step 2 therefore also gives $R\\bar a_*j_!K\\in D^b_c(s,A)$.",
    "uses": [
-    "def-weil-finite-torsion-constructibility",
     "prop-finite-compact-support-constructibility",
-    "def-weil-finite-coefficient-point",
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-compact-support-candidate",
-    "prop-compactification-coherence-detailed",
-    "def-weil-proper-morphism",
-    "lemma-nagata-open-immersion-qc-over-separated-target",
-    "lem-weil-pbc-qc-open-immersion-finite-type"
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-proetale-dbc-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
-    "place": "Second paragraph, apply the fibre functor; domain justified by compact-support bounded constructibility"
+    "place": "Second paragraph, fibre-functor domain and open-extension normalization"
+   }
+  },
+  {
+   "text": "The proper structure map $\\bar a:\\bar X\\to s$ is separated and finite type by [def-weil-proper-morphism], so $\\bar X$ is a finite-type $k$-scheme. Apply [lemma-nagata-open-immersion-qc-over-separated-target] to $X\\xrightarrow j\\bar X\\xrightarrow{\\bar a}s$: $a_X$ is finite type and $\\bar a$ is separated. It gives quasi-compactness of $j$, and [lem-weil-pbc-qc-open-immersion-finite-type] then gives finite type. Finally an open immersion identifies $X\\times_{\\bar X}X$ with $X$; under that identification its diagonal is the identity and hence a closed immersion. The separatedness definition in [def-weil-proper-morphism] thus makes $j$ separated.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
+    "place": "Second paragraph, fibre-functor domain and open-extension normalization"
+   }
+  },
+  {
+   "text": "Apply [prop-compactification-coherence-detailed] to $f=j:X\\to\\bar X$ with $K_0=k$ and $A=A_{E,n}$: $X$ and $\\bar X$ are finite-type $k$-schemes and $j$ is separated of finite type by Step 4, and $K$ with its retained witness lies in the domain of Step 1. The pair $c_j=(j,\\operatorname{id}_{\\bar X})$ is an object of $\\operatorname{Comp}(j)$ in [def-weil-compactifications-refinements]: $\\operatorname{id}_{\\bar X}\\circ j=j$, and $\\operatorname{id}_{\\bar X}$ is proper by [def-weil-proper-morphism], since its diagonal is an isomorphism, it is of finite type, and each of its base changes is an isomorphism, hence closed. If $Rj_!=Rj_!^{c'}$ is defined by the compactification $c'$ chosen in [def-compact-support-direct-image-detailed], the proposition gives an isomorphism $Rj_!K\\xrightarrow{\\sim}Rj_!^{c_j}K$, and [def-weil-compact-support-candidate] gives $Rj_!^{c_j}K=R(\\operatorname{id}_{\\bar X})_*j_!K$. By [def-weil-derived-direct-image], $R(\\operatorname{id}_{\\bar X})_*M=\\operatorname{id}_*I=I$ for the chosen K-injective resolution $M\\to I$, and this quasi-isomorphism is an isomorphism $M\\xrightarrow{\\sim}R(\\operatorname{id}_{\\bar X})_*M$ in the derived category. Hence $Rj_!K\\cong j_!K$. The restriction clause of [prop-finite-compact-support-constructibility], applied to $j$ with the same $k$, $A$ and $K\\in D^b_c(X,A)$, gives $Rj_!K\\in D^b_c(\\bar X,A)$. Closure under isomorphisms in [lem-weil-proetale-dbc-triangulated] gives $j_!K\\in D^b_c(\\bar X,A)$, the bounded-constructible input required by the ordinary-cohomology notation.",
+   "uses": [
+    "prop-compactification-coherence-detailed",
+    "def-weil-compactifications-refinements",
+    "def-weil-proper-morphism",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-compact-support-candidate",
+    "def-weil-derived-direct-image",
+    "prop-finite-compact-support-constructibility",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
+    "place": "Second paragraph, fibre-functor domain and open-extension normalization"
+   }
+  },
+  {
+   "text": "The functor $\\operatorname{Fib}_s:D^b_c(s,A)\\to D^b_{\\mathrm{fin}}(A)$ of [def-weil-finite-coefficient-point] applies to the two objects of Step 3. Set $C_{j,K}=\\operatorname{Fib}_s(\\theta_{c_*,c,K})$. Its inverse is $\\operatorname{Fib}_s(\\theta_{c_*,c,K}^{-1})$, since a functor preserves identities and composition. By [def-weil-ordinary-compact-cohomology], its source is $R\\Gamma_c(X,K)=\\operatorname{Fib}_s(Ra_{X!}K)$ and its target is $R\\Gamma(\\bar X,j_!K)=\\operatorname{Fib}_s(R\\bar a_*j_!K)$. The preceding step justified the input $j_!K$ of this last notation.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
+    "place": "Second paragraph, fibre-functor domain and open-extension normalization"
    }
   },
   {
@@ -105,13 +142,15 @@
   "def-compact-support-direct-image-detailed",
   "def-weil-compact-support-candidate",
   "prop-compactification-coherence-detailed",
-  "def-weil-finite-torsion-constructibility",
   "prop-finite-compact-support-constructibility",
-  "def-weil-finite-coefficient-point",
-  "def-weil-ordinary-compact-cohomology",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-proetale-dbc-triangulated",
   "def-weil-proper-morphism",
   "lemma-nagata-open-immersion-qc-over-separated-target",
-  "lem-weil-pbc-qc-open-immersion-finite-type"
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
@@ -240,7 +279,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -282,8 +321,8 @@
   "date": "2026-10-17",
   "item": "lem-trf-compactification-cohomology",
   "worker": "stage1",
-  "summary": "Statement unchanged. Expanded the existing compactification-comparison route into five steps: identify the witnessed domain and candidates; invoke the existing natural coherent comparison; verify the bounded-constructible fibre-functor domain using the existing finite compact-support theorem; apply the fibre functor; spell out naturality and change-of-compactification equations. No new nodes or Mathlib leaves. Searched the project source and Mathlib; no full attachment or Mathlib match.",
-  "blueprint": "main-20261015 lem-trf-compactification-cohomology.proof.md: first paragraph is Steps 1-2, fibre-functor paragraph is Step 3, final naturality/cocycle sentences are Steps 4-5. This supports the compactification identification in sk-thm-trace-formula Step 2; this item is not the unit key statement.",
+  "summary": "Repair of the human return: statement and Lean record unchanged; original Steps 1, 2, 4 and 5 retained verbatim. Replaced the 2487-character Step 3 by four short steps. Bounded-constructible closure under isomorphisms cites its existing theorem; geometry uses the existing qc and finite-type lemmas; the open-immersion normalization Rj_!K = j_!K is written out in Step 5 from compactification coherence applied to j with the compactification (j, id) and the K-injective definition of R(id)_*; the existing restriction theorem then gives the ordinary-cohomology input domain. No finite-Tor assumption or new route. (Maintainer reader 2026-10-17: the statement-only normalization node proposed by the delivery was a two-line consequence of existing nodes, folded into Step 5 and dropped.)",
+  "blueprint": "main-20261015 compactification-cohomology proof: first paragraph remains Steps 1-2; fibre-functor paragraph is expanded in Steps 3-6, with the open-immersion normalization written out in Step 5; final naturality and cocycle paragraphs remain Steps 7-8.",
   "tool_uses": [
    {
     "node": "prop-compactification-coherence-detailed",
@@ -302,9 +341,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q72-13193f799",
-  "group": "Q72",
+  "reviewer": "NT-cc-NO-226b2cfd8",
+  "group": "NO",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-13193f799 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, with the current main-20261015 blueprint statement and proof and the master snapshot. The item statement is verbatim and not weakened. The delivery has 0 new nodes and one commit. proof_deps equals the union of the step uses, and a DFS over the snapshot DAG finds no cycle. I opened the statement of every cited node: def-trf-coefficient-conventions, def-weil-compactifications-refinements, def-weil-pbc-etale-origin-witness, def-sf-etale-origin-subcategory (a full induced subcategory, so all ambient morphisms count), def-compact-support-direct-image-detailed, def-weil-compact-support-candidate, prop-compactification-coherence-detailed (natural iso, independence and cocycle all in the statement, on the witnessed domain), prop-finite-compact-support-constructibility (only its restriction to D^b_c is used), def-weil-finite-coefficient-point (Fib_s item 1), def-weil-ordinary-compact-cohomology, def-weil-proper-morphism, lemma-nagata-open-immersion-qc-over-separated-target (the blueprint_update form also applies) and lem-weil-pbc-qc-open-immersion-finite-type. The hypotheses hold at each use: field k, finite type, separated, ell != p invertible, A_{E,n} with n>=1. j is quasi-compact, of finite type and separated (its diagonal is an isomorphism), and (j,id) is a compactification with candidate j_!. That gives j_!K and both direct-image values in D^b_c, because D^b_c is isomorphism-closed. Only minor wording: R(id)_* is the identity up to natural isomorphism, which is harmless. Naturality and cocycle are Fib_s applied to the cited equations. Coefficient categories stay pro-etale A_{E,n} throughout. Stacks 0GL0 (more-etale.tex:4711) is background for the cited DAG proposition only. No finite-Tor or SGA route is used. Every cited unit is in the transitive route of sk-thm-trace-formula, so the two declared tool_uses (prop-compactification-coherence-detailed, prop-finite-compact-support-constructibility) are redundant but accurate; accepted. No duplicate found: prop-weil-proper-compact-coincidence is only the proper special case. Edge cases checked: K=0, X proper with the identity compactification, empty X, an extra disjoint component of Xbar, n=1. No fixes; review.md written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-226b2cfd8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement, which matches the main-20261015 and master blueprint texts word for word with the same pro-etale A_{E,n} D^b_c coefficients, all 8 steps, the new node, and the statement of every cited node. Steps 1-4 and 6-8 are correct. Step 1 instantiates the conventions and the candidate formula. Steps 2, 7 and 8 use the natural isomorphism, naturality and cocycle that prop-compactification-coherence-detailed states, on the witnessed domain. Steps 3 and 5 use only the restriction clause of prop-finite-compact-support-constructibility plus closure under isomorphism. Step 4 gets quasi-compactness from the Nagata lemma (a_X finite type, abar separated), then finite type, and separatedness from the identity diagonal. Fib_s is defined because k is algebraically closed. Every cited unit is on the route of sk-thm-trace-formula, so the two declared tool_uses are redundant but accurate and I accept them. Fault (C1 exception, D1): the new statement-only node lem-trf-open-compact-support-normalization (Rj_! = j_! on witnessed complexes) is true but follows in a few lines from existing nodes: coherence applied to f=j against the compactification (j, id_Xbar), the candidate formula Rj_!^{(j,id)} = R(id)_* j_!, and R(id)_* = id from the K-injective definition in def-weil-derived-direct-image. I folded that argument into Step 5 (1547 characters, below the 2000 limit), recomputed proof_deps (adding def-weil-derived-direct-image), updated split_report.summary and split_report.blueprint, and dropped the node. Nothing else cites it. The duplicate search found no existing node with the normalization; lem-trf-open-ctf needs finite Tor amplitude and cannot replace Step 5. Edge cases checked: K=0, empty X, proper X with the identity compactification, an extra component of Xbar, n=1. The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-compactification-cohomology.json and the details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

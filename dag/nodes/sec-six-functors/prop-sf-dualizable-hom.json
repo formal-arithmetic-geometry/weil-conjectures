@@ -121,54 +121,95 @@
    }
   },
   {
-   "text": "At a rational stage, the local model has terms that are direct summands of finite sums of the coefficient unit in the scalar-localized category, by the site-perfect definition. This does not require an integral perfect lattice. First justify slice restriction for these coefficient operations. Ordinary derived Hom commutes with slice restriction by the cited ringed-Hom theorem. Restriction of sheaves is exact and computed by evaluation on objects over $U$; consequently it commutes with sectionwise countable products and with the finite matrices defining cones. Restrict the K-flat resolutions in the definition of integral tensor; the ringed-topos theorem makes the restrictions K-flat. Thus the Roos complex defining the completed tensor restricts to the Roos complex of the restricted finite tensors. Their maps, evaluation and its transpose restrict by the same formulas. Taking scalar localization gives these identifications for rational operations. No assertion about inverse image for an arbitrary scheme morphism is needed here.\n\nFor fixed local $M$, let $\\mathcal S$ consist of the first variables for which $\\theta_{-,M}$ is invertible. The unit is in $\\mathcal S$ by the unit adjunction, and finite sums and retracts are in $\\mathcal S$ by additivity and naturality: apply both functors to inclusion and retraction, whose composite is the identity. Both contravariant functors $R\\mathcal Hom(-,\\Lambda_X)\\otimes^L M$ and $R\\mathcal Hom(-,M)$ are exact. The Hom theorem supplies exactness of Hom. Total tensor carries a cone to the cone of the induced tensor map (on a shifted summand the usual comparison multiplies by the sign of the degree in the other factor); hence the finite tensors are exact. Countable products are exact, and the same cone matrices show that the Roos construction of completed tensor is exact. Scalar localization is exact. Evaluation forms a morphism of the resulting triangles: before localization this is the natural evaluation chain map of step 5, and localization preserves its equations. The triangle two-out-of-three lemma therefore makes $\\mathcal S$ closed under shifts and extensions. For a bounded local model $P$ in degrees $[a,b]$, start with $\\sigma_{\\geq b+1}P=0$ and descend using the degreewise split cone triangles\n$$\n\\sigma_{\\geq r+1}P\\longrightarrow\\sigma_{\\geq r}P\\longrightarrow P^r[-r]\\longrightarrow(\\sigma_{\\geq r+1}P)[1].\n$$\nEach $P^r[-r]$ is in $\\mathcal S$, so induction proves invertibility of the actual rational comparison on the chosen cover. Global detection in a scalar localization needs the following separate argument.",
+   "text": "At the rational stage $K,M\\in D^b_c(X,E)$ are objects of $D^b_c(X,\\mathcal O_E)$, and by the coefficient-operation definition the rational evaluation comparison is the image under the localization functor $Q$ of the integral comparison $\\theta_{K,M}$ (operations act on objects as the integral ones and on morphisms by linear extension). Since $D^b_c(X,\\mathcal O_E)$ is a full subcategory of $D(X_{\\mathrm{proet}},\\mathcal O_E)$ and both Hom groups are tensored with $E$, $D^b_c(X,E)$ is a full subcategory of the ambient scalar localization $D(X_{\\mathrm{proet}},\\mathcal O_E)[1/\\varpi_E]$. For an object $U$, [lem-sf-rational-slice-completed-evaluation] makes $j_U^*K,j_U^*M$ derived complete and carries $\\theta_{K,M}$, also after scalar localization, to $\\theta_{j_U^*K,j_U^*M}$. All local work below is done in the ambient scalar localizations on slices, so no constructibility of slice internal Homs is needed.",
    "uses": [
-    "def-weil-site-perfect-complex",
+    "lem-sf-rational-slice-completed-evaluation",
     "def-weil-derived-pullback-tensor-hom",
     "def-pur-integral-derived-operations",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-linear-scalar-localization-triangulated",
-    "lem-sf-triangle-morphism-iso",
-    "lem-fix-operation-reduction",
-    "lem-weil-proetale-countable-products-exact"
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
-    "place": "Unit sk-prop-sf-dualizable-biduality, finite-free/retract and bounded-complex argument; formal coefficient-stage extension"
+    "place": "Unit sk-prop-sf-dualizable-biduality, formal coefficient-stage extension"
    }
   },
   {
-   "text": "For rational global detection, choose an integral representative $C$ of a cone of $\\theta$ in the scalar-localized category. More explicitly, write the rational map as an integral numerator divided by a power of $\\varpi_E$ and take the cone of that numerator: multiplying by an invertible scalar does not change whether its cone is zero. The integral endpoints and their cone are in $D^b_c(X,\\mathcal O_E)$ by the coefficient definitions and the integral triangulated-subcategory theorem. The finite-type definition gives a finite affine open cover of $X$; on each such affine, the definition of a pro-etale covering refines our model cover by finitely many affine opens of its members. Collecting these gives a finite covering $\\{U_j\\to X\\}_{j=1}^t$ on which step 8 applies. If $X$ is empty there is nothing to detect. In the scalar localization, $C|_{U_j}=0$. Its identity therefore maps to zero in $\\operatorname{End}(C|_{U_j})\\otimes_{\\mathcal O_E}E$. The tensor-localization isomorphism and the definition of module localization say exactly that $\\varpi_E^{N_j}\\operatorname{id}_{C|_{U_j}}=0$ for some $N_j\\geq0$. With $N=\\max_jN_j$, exact restriction and the sheaf separatedness axiom imply $\\varpi_E^N H^d(C)=0$ globally for every $d$.\n\nHere $C$ has bounded cohomology, and this follows from the coefficient definitions rather than being an extra hypothesis: its reductions have a common support interval $[u,v]$. Exact countable products imply that the product of their scalar restrictions also has cohomology in $[u,v]$. The long exact sequence of the Roos triangle for the derived-complete $C$ therefore puts $H^d(C)$ in $[u,v+1]$. Apply the canonical truncation triangles to $C$ in this finite interval. In any triangle $A\\xrightarrow{i}B\\xrightarrow{p}D\\to A[1]$, if $\\varpi_E^e\\operatorname{id}_A=0$ and $\\varpi_E^f\\operatorname{id}_D=0$, then $p\\circ(\\varpi_E^f\\operatorname{id}_B)=0$, so exactness of $\\operatorname{Hom}(B,-)$ gives $\\varpi_E^f\\operatorname{id}_B=i\\circ h$; multiplying by $\\varpi_E^e$ gives $\\varpi_E^{e+f}\\operatorname{id}_B=0$. Starting with $\\tau_{\\leq u-1}C=0$ and adjoining $H^d(C)[-d]$, killed by $\\varpi_E^N$, the truncation triangles give $\\varpi_E^{N(v-u+2)}\\operatorname{id}_C=0$. Inverting $\\varpi_E$ makes $C$ zero. Thus the global rational comparison is invertible. This argument uses finite covers and a uniform cohomological bound; it does not identify rational local vanishing with integral sheaf vanishing.",
+   "text": "Fix a member $U$ of the chosen covering and put $M_U=j_U^*M$, derived complete by step 8. Let $\\mathcal S_{M_U}$ be the class of objects $L$ of the derived category of $\\widehat{\\mathcal O}_{E,X}|_U$-modules on the slice for which $Q(\\theta_{L,M_U})$ is invertible in its scalar localization. The exactness and closure statement [lem-sf-rational-thick-evaluation], applied on the slice, puts the unit and zero in $\\mathcal S_{M_U}$ and makes it closed under isomorphisms and retracts in the scalar localization, finite sums, shifts, and extensions.",
+   "uses": [
+    "lem-sf-rational-thick-evaluation",
+    "def-weil-linear-scalar-localization",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Unit sk-prop-sf-dualizable-biduality, finite-free/retract and bounded-complex argument"
+   }
+  },
+  {
+   "text": "By the rational clause of the site-perfect definition, $j_U^*K\\cong P$ for a bounded complex $P$ of module sheaves in degrees $[a,b]$ whose terms $P^r[0]$ are direct summands, in the scalar-localized category on $U$, of finite sums of the unit. The isomorphism and the retractions are morphisms with Hom groups those of the derived category on the slice tensored with $E$, so they hold in the ambient scalar localization. Write $\\sigma_{\\geq r}P$ for the brutal truncation (zero below $r$, unchanged from degree $r$ on). The sequence $0\\to\\sigma_{\\geq r+1}P\\to\\sigma_{\\geq r}P\\to P^r[-r]\\to0$ is split in every degree, so the degreewise-split triangle lemma gives a distinguished triangle with these three objects; its image under $Q$ is distinguished [lem-weil-linear-scalar-localization-triangulated]. Start at $\\sigma_{\\geq b+1}P=0$. Each $P^r[-r]$ lies in $\\mathcal S_{M_U}$ by the unit, sum, retract and shift clauses of step 9. Descending induction gives $P=\\sigma_{\\geq a}P\\in\\mathcal S_{M_U}$, hence $j_U^*K\\in\\mathcal S_{M_U}$: $Q(\\theta_{j_U^*K,j_U^*M})$ is invertible. For $V\\to U$ the same holds over $V$, since restriction along $V\\to U$ is an exact functor carrying this comparison to the one over $V$ (step 8).",
+   "uses": [
+    "lem-sf-rational-thick-evaluation",
+    "def-weil-site-perfect-complex",
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "lem-sf-rational-slice-completed-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Unit sk-prop-sf-dualizable-biduality, bounded-complex argument"
+   }
+  },
+  {
+   "text": "For global rational detection: the rational internal Hom of the coefficient-operation definition is an operation only on pairs whose integral internal Hom is constructible, so the rational assertion concerns $M$ with $R\\mathcal Hom(K,\\widehat{\\mathcal O}_{E,X})$ and $R\\mathcal Hom(K,M)$ in $D^b_c(X,\\mathcal O_E)$; the completed tensor then lies there by the same definition. The rational comparison is $Q(f)$ for the integral numerator $f=\\theta_{K,M}$ (step 8). Take an integral cone $C$ of $f$; it lies in the integral category by [lem-weil-integral-constructible-triangulated]. Since $Q$ is exact, $Q(f)$ is invertible exactly when $Q(C)$ is zero.",
    "uses": [
     "def-weil-rationalization-karoubi",
-    "def-weil-linear-scalar-localization",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-type-morphism",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-localization-module-tensor",
-    "def-weil-pbc-module-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
     "lem-weil-integral-constructible-triangulated",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-derived-complete",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-truncation-triangle",
-    "lem-weil-pbc-hom-into-triangle-exact"
+    "def-weil-derived-pullback-tensor-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
-    "place": "Local bounded-complex proof; scalar-localized local-to-global detection expanded here using the coefficient definitions"
+    "place": "Local bounded-complex proof; scalar-localized local-to-global detection"
    }
   },
   {
-   "text": "For $\\overline{\\mathbf Q}_\\ell$, the definition of site-perfectness gives $K$ as the common-stage image of a site-perfect object over some finite coefficient extension. The common-stage definition likewise represents $M$ over a finite extension. Choose their compositum $L$, a finite common coefficient field, and extend both representatives to $L$. Exact scalar extension preserves the unit, finite sums, retractions and the finite cone construction of the local perfect model. Hence the representative of $K$ at this common field is still site-perfect. The coefficient comparisons identify the scalar-extended dual, tensor and internal Hom, and preserve evaluation; therefore they identify the representative of $\\theta$ with the rational comparison over $L$ proved invertible in steps 8--9. That inverse over $L$ represents an inverse in the common-stage category, since its two inverse equations remain equations after passing to the common-stage morphism classes. Together with steps 1--7 this proves the assertion at every allowed coefficient stage.",
+   "text": "The finite-type definition gives a finite affine open cover of $X$. On each affine, the pro-etale covering definition refines the local-model cover by finitely many affine opens $W$ of its members. Collect these into a finite family $\\{W_j\\to X\\}$; it is a covering, since $X$ is separated, so each $W_j\\times_XV$ is affine for an affine open $V$ and finitely many of them cover $V$. By step 10 and the slice comparison, the restriction of $\\theta_{K,M}$ to $W_j$ becomes invertible in the ambient scalar localization over $W_j$. Exact slice restriction carries the cone triangle of $\\theta_{K,M}$ to one for the restricted map, so $C|_{W_j}$ has zero image there. The finite-cover localization lemma gives $N\\geq0$ with $\\varpi_E^N\\mathcal H^d(C)=0$ for every $d$. For the empty scheme this holds without a nonempty covering.",
+   "uses": [
+    "lem-sf-rational-local-global-power-torsion",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-proetale-site",
+    "def-sf-datum",
+    "lem-sf-rational-slice-completed-evaluation",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Local bounded-complex proof; scalar-localized local-to-global detection expanded here"
+   }
+  },
+  {
+   "text": "By the integral-category definition, the reductions of $C$ have one cohomological interval $[u,v]$. Exact countable products put both products in its Roos triangle in $[u,v]$ as well. The long exact cohomology sequence thus gives $H^d(C)=0$ outside $[u,v+1]$. Apply the bounded-cone torsion lemma with the exponent $N$ from the preceding step and this finite interval: a power of $\\varpi_E$ kills $\\operatorname{id}_C$. Its rational image, and hence the rational cone of $\\theta$, is zero. This proves the global rational comparison is invertible.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "def-weil-derived-complete",
+    "lem-sf-rational-bounded-cone-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Local bounded-complex proof; scalar-localized local-to-global detection expanded here"
+   }
+  },
+  {
+   "text": "For $\\overline{\\mathbf Q}_\\ell$, the definition of site-perfectness gives $K$ as the common-stage image of a site-perfect object over some finite coefficient extension. The common-stage definition likewise represents $M$ over a finite extension. Choose their compositum $L$, a finite common coefficient field, and extend both representatives to $L$. Exact scalar extension preserves the unit, finite sums, retractions and the finite cone construction of the local perfect model. Hence the representative of $K$ at this common field is still site-perfect. The coefficient comparisons identify the scalar-extended dual, tensor and internal Hom, and preserve evaluation; therefore they identify the representative of $\\theta$ with the rational comparison over $L$ proved invertible in steps 8--13. That inverse over $L$ represents an inverse in the common-stage category, since its two inverse equations remain equations after passing to the common-stage morphism classes. Together with steps 1--7 this proves the assertion at every allowed coefficient stage.",
    "uses": [
     "def-weil-site-perfect-complex",
     "def-weil-algebraically-closed-coefficients",
@@ -184,42 +225,43 @@
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-site-perfect-complex",
-  "def-weil-pbc-strict-perfect-coefficient-package",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-finite-projective-internal-hom-evaluation",
-  "def-pur-hom-complex",
-  "def-pur-derived-internal-hom",
-  "lem-pc-bounded-exact-term-hom-quasi-iso",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-kflat-resolution",
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-integral-derived-operations",
   "def-sf-datum",
-  "lem-fix-operation-reduction",
-  "lem-weil-integral-constructible-triangulated",
-  "lem-pur-derived-change-of-rings",
+  "def-weil-abstract-derived-category",
+  "def-weil-algebraically-closed-coefficients",
   "def-weil-derived-complete",
   "def-weil-derived-complete-integral-detailed",
-  "def-pur-integral-derived-operations",
-  "lem-weil-linear-scalar-localization-triangulated",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-proetale-countable-products-exact",
-  "def-weil-rationalization-karoubi",
-  "def-weil-linear-scalar-localization",
+  "def-weil-derived-pullback-tensor-hom",
   "def-weil-finite-type-morphism",
+  "def-weil-linear-scalar-localization",
   "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-localization-module-tensor",
-  "def-weil-pbc-module-localization",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-weil-rationalization-karoubi",
+  "def-weil-site-perfect-complex",
+  "lem-fix-operation-reduction",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-finite-projective-internal-hom-evaluation",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-site-restriction-module-adjunction-exact",
   "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-truncation-triangle",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "def-weil-algebraically-closed-coefficients",
+  "lem-sf-rational-bounded-cone-torsion",
+  "lem-sf-rational-local-global-power-torsion",
+  "lem-sf-rational-slice-completed-evaluation",
+  "lem-sf-rational-thick-evaluation",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-countable-products-exact",
   "lem-weil-scalar-extension-exact-triangulated"
  ],
  "proof_origin": {
@@ -300,7 +342,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -329,11 +371,11 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-dualizable-biduality",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "prop-sf-dualizable-hom",
   "worker": "stage1",
-  "summary": "Expanded the imported contextual statement into its explicit six-functor datum and coefficient notation without changing its mathematical content; replaced the imported one-paragraph sketch by a local bounded-Hom calculation with explicit Koszul sign and canonical-map identification, local-to-global detection, and separate completed integral and rational/common-stage arguments. Reused existing generic nodes throughout: no new nodes. Rejected the near Lean attachment because it assumes dualizability and concludes only existence of an isomorphism. Second reading supplies slice restriction for completed operations, an explicit finite-cover/uniform-power argument for rational local detection, and a separate common-field step.",
-  "blueprint": "Realizes the item proof: local P and K-injective models in steps 1--3, termwise Hom-dual-tensor identification and differential compatibility in steps 4--5, the implicit locality step in step 6, and the coefficient-stage meaning inherited from sk-def-sf-operations in steps 7--10. The unit route (finite free, retract, bounded complex) is unchanged.",
+  "summary": "Repaired the returned split by extracting the hidden non-elementary arguments of former steps 8 and 9 into four statement-only lemma nodes: slice compatibility of completed and rational operations, triangulated closure of the rational evaluation class, finite-cover power-torsion detection, and bounded-cone torsion via truncations. Replaced the two overlong steps by six shorter steps preserving the original finite-level, integral, rational, and common-stage route. Maintainer reader (2026-10-17): steps 8-12 and three of the new statements recast in the ambient scalar localizations of the derived categories on slices, so that the local rational argument needs no constructibility of slice internal Homs; stale tool uses of the former step 9 removed.",
+  "blueprint": "Finite-level local calculation in steps 1–6, integral reduction in step 7, rational slice compatibility and bounded-complex induction in steps 8–10, finite-cover detection and bounded-cone torsion in steps 11–13, and common-field passage in step 14. The route and proposition statement are unchanged.",
   "tool_uses": [
    {
     "node": "lem-pc-finite-projective-internal-hom-evaluation",
@@ -388,20 +430,8 @@
     "why": "Exact scalar extension preserves the rational finite-filtration argument and the common coefficient field."
    },
    {
-    "node": "lem-weil-pbc-localization-module-tensor",
-    "why": "Interprets a vanishing localized identity as a power-torsion identity, for rational local detection."
-   },
-   {
     "node": "lem-sf-derived-homology-long-exact",
     "why": "Bounds the cohomology of a derived-complete representative from its uniformly bounded reductions."
-   },
-   {
-    "node": "lem-weil-pbc-truncation-triangle",
-    "why": "Reconstructs a bounded integral cone from its cohomology terms to pass from power-torsion cohomology to a power-torsion identity."
-   },
-   {
-    "node": "lem-weil-pbc-hom-into-triangle-exact",
-    "why": "Factors the power of the scalar on a triangle middle term through its first term; supplies the explicit annihilation induction."
    }
   ]
  },
@@ -425,11 +455,11 @@
   "lem-weil-pbc-hom-into-triangle-exact"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NW-a08b3115c",
-  "group": "NW",
+  "reviewer": "NT-cc-Q94-7436887f3",
+  "group": "Q94",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-a08b3115c (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source locations. Verified all ten steps, canonical evaluation signs, completed/rational coefficient arguments, edge cases, duplicate candidates and dependency acyclicity. Accepted all 17 declared tool uses. No new nodes or repairs; detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-7436887f3 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, the unit and chapter, the master and main-20261015 blueprint text, Stacks 08JJ and every cited statement in full. Steps 1-7, 13 and 14 are correct: I recomputed the signs in steps 4-5 (both components give (-1)^{ij}), and the bound of step 13, H^d(C)=0 outside [u,v+1], follows from the integral-category amplitude, exact countable products and the long exact sequence. The item statement is unchanged and not weakened. Fault 1 (E1/C4): step 10 applied the closure clauses of lem-sf-rational-thick-evaluation, which hold only 'whenever the objects lie in their stated domains', to sigma_{>=r}P and P^r[-r] on slices. The rational RHom (def-weil-derived-pullback-tensor-hom) is defined only for pairs whose integral internal Hom is constructible, and nothing shows this on non-quasi-compact weakly etale slices. A rational retract of a constructible object need not be integrally constructible (Y+T with T a varpi^c-torsion object). For the same reason, local-global-power-torsion assumed slice constructibility and slice-completed-evaluation asserted it with no precise meaning. Repair: steps 8-12 and these three new statements now work in the ambient scalar localizations D(slice, O^)[1/varpi], where the completed tensor and RHom are always defined and the localization is triangulated. D^b_c(X,E) embeds fully there, so global invertibility is unchanged. The thick lemma now takes M derived complete, which the unit clause and the adjunct need. Local-global takes any C, with zero image equivalent to varpi^{N_j} id = 0. The slice lemma now asserts derived completeness of the restrictions, which is true because j^* is exact and sectionwise. Step 12 now justifies the finite covering by separatedness of X, and step 11 states the domain presupposition. Fault 2 (brief section 3): all four new nodes lacked merged_into and lean_audit; both are added. Three stale tool uses from the former step 9 are removed. All four new statements are true and were tested on small cases: N=0, u=v, C=0, t=0/X empty, a point. They are statement-only, strictly smaller than the item and duplicate nothing: grep of power-torsion, thick and Roos/slice nodes; lem-sf-generating-class-determination supplies only the formal closure. I accept the 14 remaining tool uses. No SGA source is used. Corrected files are in fixes/dag/nodes/sec-six-functors/ (the item and the four new nodes).; 5 file(s) fixed by the reviewer"
  }
 }

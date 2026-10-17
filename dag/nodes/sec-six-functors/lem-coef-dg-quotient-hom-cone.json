@@ -77,7 +77,7 @@
    }
   },
   {
-   "text": "Put $G_c(A)=\\mathcal C_c(A,Y)$ and $F_c(A)=\\mathcal C_c(X,A)$. Their values, and all mapping complexes of $\\mathcal A_c$, are homotopically flat by Step 1, so [lem-coef-dg-two-sided-bar-derived-tensor] gives the unnormalized direct-sum bar model $B=\\bigoplus_{n\\geq0}V_n[n]$ for their derived tensor. Write a homogeneous tensor in $V_n$ as $x=a_0\\otimes\\cdots\\otimes a_{n+1}$, where $a_0\\in G_c(A_n)$, $a_{n+1}\\in F_c(A_0)$ and the intermediate factors are the successive morphisms of $\\mathcal A_c$ in descending order. The word formula of [lem-coef-dgcat-free-cell-calculus] identifies the length-zero part of $Q(X,Y)$ with $\\mathcal C_c(X,Y)$. Define a graded isomorphism from $B[1]$ onto its positive-length part by\n$$\\Phi_n(x)=(-1)^{\\alpha_n(x)}a_0\\varepsilon_{A_n}a_1\\varepsilon_{A_{n-1}}\\cdots a_n\\varepsilon_{A_0}a_{n+1},\\qquad \\alpha_n(x)=n+\\sum_{j=0}^{n+1}(n+1-j)|a_j|.$$\nHere there are $n+1$ contractions, so the degree is $\\sum_j|a_j|-n-1$, as required for $V_n[n+1]$. Put $S_i=\\sum_{j=0}^i|a_j|$. In the word differential the term differentiating $a_j$ has sign $(-1)^{S_{j-1}-j}$, with $S_{-1}=0$. Differentiating $a_j$ changes $\\alpha_n$ by $n+1-j$; these two exponents identify the internal differential with $(-1)^{n+1}d_{V_n}$, the internal part of $-d_B$. Deleting contraction number $i$ from the left has sign $(-1)^{S_i-i}$. For $n\\geq1$, merging $a_i,a_{i+1}$ changes the exponent by $\\alpha_n(x)-\\alpha_{n-1}(\\partial_i x)=S_i+1$ modulo $2$, hence the induced coefficient is $(-1)^{i+1}$. This is exactly the negative of the bar face coefficient $(-1)^i$. For $n=0$ the deletion lands in length zero with sign $(-1)^{|a_0|+S_0}=1$, giving composition $a_0a_1$. Thus the full word complex is $\\mathcal C_c(X,Y)\\oplus B[1]$ with differential\n$$\\begin{pmatrix}d_{\\mathcal C_c}&\\mathrm{ev}\\\\0&-d_B\\end{pmatrix},$$\nwhere $\\mathrm{ev}$ is composition on $V_0$ and zero on higher bar degrees. This is the mapping cone of evaluation, and inclusion of its length-zero summand is the map induced by the word quotient functor.",
+   "text": "Put $G_c(A)=\\mathcal C_c(A,Y)$ and $F_c(A)=\\mathcal C_c(X,A)$. Step 1 makes both modules objectwise homotopically flat and all mapping complexes of $\\mathcal A_c$ homotopically flat. Thus [lem-coef-dg-two-sided-bar-derived-tensor] supplies $B=\\bigoplus_{n\\geq0}V_n[n]$ as their derived tensor. By [lem-coef-dgcat-free-cell-calculus], the length-zero summand of $Q(X,Y)$ is $\\mathcal C_c(X,Y)$; its length-$n+1$ summand is the tensor $V_n$ interleaved with $n+1$ degree-$-1$ contraction generators. These direct sums are graded decompositions, not decompositions into subcomplexes.",
    "uses": [
     "lem-coef-dg-two-sided-bar-derived-tensor",
     "lem-coef-dgcat-free-cell-calculus"
@@ -89,7 +89,32 @@
    }
   },
   {
-   "text": "The maps $G_c\\to v^*h_Y$ and $F_c\\to v^*h^X$ induced by $p$ are objectwise quasi-isomorphisms. The invariance and naturality in [lem-coef-dg-two-sided-bar-derived-tensor], followed by the comparison of Step 4, identify $B$ with $h_Y\\otimes^{\\mathbf L}_{\\mathcal A}h^X$. The morphism $\\mathcal C_c(X,Y)\\to\\mathcal C(X,Y)$ is also a quasi-isomorphism. All these maps commute with evaluation because $p(gf)=p(g)p(f)$; hence the cone triangle from Step 5 becomes exactly the displayed cofiber sequence of the statement, with its first arrow evaluation and its second arrow induced by $j$. Precomposition in $X$ and postcomposition in $Y$ act on every word and every bar factor and commute with the Leibniz differential, so the comparison is natural in both variables. Semi-free tensor invariance gives independence of input resolutions; the enhanced universal property of Step 3 identifies different quotient models compatibly with their maps. No flatness of $\\mathcal C$ was used: all underived bar computations took place over the locally flat replacement $\\mathcal C_c$.",
+   "text": "Apply [lem-coef-interleaved-tensor-suspension] on every tuple of intermediate objects and take the direct sum. It identifies $B[1]$ with the positive-length graded summands by\n$$\\Phi_n(a_0\\otimes\\cdots\\otimes a_{n+1})=(-1)^{n+\\sum_j(n+1-j)|a_j|}a_0\\varepsilon_{A_n}a_1\\cdots a_n\\varepsilon_{A_0}a_{n+1}.$$\nThe lemma identifies the length-preserving internal differential with $(-1)^{n+1}d_{V_n}$, exactly the internal part of $-d_B$ from [lem-coef-dg-two-sided-bar-derived-tensor]. There is no use of a flatness assumption in this sign comparison.",
+   "uses": [
+    "lem-coef-interleaved-tensor-suspension",
+    "lem-coef-dg-two-sided-bar-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld §§3.1 and 3.6(i): unnormalized word/bar differential; the quotient includes its length-zero summand."
+   }
+  },
+  {
+   "text": "The Leibniz differential of [lem-coef-dgcat-free-cell-calculus] has, besides the internal terms, only terms deleting one contraction because $d\\varepsilon_A=1_A$. Apply [lem-coef-contraction-word-bar-faces] to these terms. In bar degree $n\\geq1$ it gives $\\sum_{i=0}^n(-1)^{i+1}\\partial_i$, the negative of the bar-face differential in [lem-coef-dg-two-sided-bar-derived-tensor]; in bar degree zero it gives composition with sign $+1$. Hence under $\\mathrm{id}\\oplus\\Phi$ the full word differential on $\\mathcal C_c(X,Y)\\oplus B[1]$ is\n$$\\begin{pmatrix}d_{\\mathcal C_c}&\\mathrm{ev}\\\\0&-d_B\\end{pmatrix},$$\nwhere evaluation is composition on $V_0$ and zero on higher bar degrees. This is the defining mapping-cone differential. Inclusion of the length-zero summand is the word quotient functor's map, so its cone triangle has both canonical arrows required in the statement.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-contraction-word-bar-faces",
+    "lem-coef-dg-two-sided-bar-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld §§3.1 and 3.6(i): unnormalized word/bar differential; the quotient includes its length-zero summand."
+   }
+  },
+  {
+   "text": "The maps $G_c\\to v^*h_Y$ and $F_c\\to v^*h^X$ induced by $p$ are objectwise quasi-isomorphisms. The invariance and naturality in [lem-coef-dg-two-sided-bar-derived-tensor], followed by the comparison of Step 4, identify $B$ with $h_Y\\otimes^{\\mathbf L}_{\\mathcal A}h^X$. The morphism $\\mathcal C_c(X,Y)\\to\\mathcal C(X,Y)$ is also a quasi-isomorphism. All these maps commute with evaluation because $p(gf)=p(g)p(f)$; hence the cone triangle from Steps 5–7 becomes exactly the displayed cofiber sequence of the statement, with its first arrow evaluation and its second arrow induced by $j$. Precomposition in $X$ and postcomposition in $Y$ act on every word and every bar factor and commute with the Leibniz differential, so the comparison is natural in both variables. Semi-free tensor invariance gives independence of input resolutions; the enhanced universal property of Step 3 identifies different quotient models compatibly with their maps. No flatness of $\\mathcal C$ was used: all underived bar computations took place over the locally flat replacement $\\mathcal C_c$.",
    "uses": [
     "lem-coef-dg-two-sided-bar-derived-tensor"
    ],
@@ -116,6 +141,7 @@
   }
  ],
  "proof_deps": [
+  "lem-coef-contraction-word-bar-faces",
   "lem-coef-dg-enrichment-rectification",
   "lem-coef-dg-finite-twisted-extension",
   "lem-coef-dg-free-cell-mapping-fibre",
@@ -125,6 +151,7 @@
   "lem-coef-dgcat-model-structure",
   "lem-coef-enhanced-localization-universal",
   "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-interleaved-tensor-suspension",
   "lem-kun-distinguished-cone-zero"
  ],
  "proof_origin": {
@@ -212,7 +239,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-module-projective-resolution",
   "by": "worker",
@@ -234,10 +261,10 @@
   }
  },
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-coef-dg-quotient-hom-cone",
   "worker": "stage1",
-  "summary": "Replaced the prior underived quotient argument: first choose a locally flat cofibrant dg model, compute contraction-cell fibres, test all enriched parameter categories to obtain coherent universality, compare derived tensors by a semi-free filtration, and identify the full word differential with the evaluation cone. The final pretriangulated assertion uses finite twisted complexes and the existing distinguished-cone-zero theorem, without an erroneous assertion about exactly which nonsaturated maps are inverted. Three supporting statement-only nodes; no new definition or clause of the item is deferred. Second reading fixes the bar suspension convention and supplies the all-length Koszul signs and an elementwise filtration argument.",
+  "summary": "Q62 repair of the human return: preserved the statement, Lean record and proof route; extracted the arbitrary-length internal suspension-sign identification and deletion/bar-face comparison into two generic statement-only nodes. Replaced former step 5 by three short steps using their precise conclusions, retaining length zero and both canonical arrows. Other proof steps are verbatim apart from the forced numbering reference in former step 6. No flatness added to the original category.",
   "blueprint": "Realizes the generic derived mapping-complex calculation supporting paragraph 2 of prop-coef-integral-exceptional-adjoint (derived coefficient adjunction before total inverse limit), via the inherited four intervening nodes. It changes neither the unit statement nor the unit proof route.",
   "tool_uses": [
    {
@@ -250,11 +277,11 @@
   "lem-kun-distinguished-cone-zero"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q49-340fef6d2",
-  "group": "Q49",
+  "reviewer": "NT-cc-Q62-78f0ae8fb",
+  "group": "Q62",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-340fef6d2 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements; checked Drinfeld/Keller sources, all seven steps, three new nodes, target coefficients and base-change direction. No duplicates or cycles found; 6,660 cone-sign checks passed. Accepted the cone-zero tool use. Detailed review written to review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-78f0ae8fb (reviewer sub-agent of L); spot-checked: Verdict PASS, with no fixes and no nodes dropped. Full review is in review.md. This repair answers the human's 2026-10-17 return: the former step 5 (2038 characters, with hidden sign work) is now steps 5-7, which cite two new statement-only nodes. The item statement is unchanged, and steps 1-4, 8 and 9 keep the previously accepted argument (I re-read them). Source: I read Drinfeld (arXiv math/0210114v7, not in literature/) online. Section 3.1 adjoins degree -1 maps epsilon_U with d(epsilon_U)=id_U; equation (3.1) is a graded direct sum of tensor products with a k[1] factor for each epsilon, and (3.2) holds only on the associated graded. Section 3.2 gives the one-object bar-resolution cone, and 3.6(i) the flat bar computation. The new steps and both children cite exactly these places. Step 5: the bar node's flatness hypotheses hold because step 1 replaces the category by a locally flat cofibrant C_c. Step 6: the interleaved-tensor child gives internal differential (-1)^{n+1}d_V, which is the internal part of -d_B. Step 7: the deletion child's coefficient (-1)^{S_i-i} is the Koszul sign of d(epsilon)=1; it gives the faces sum (-1)^{i+1}d_i, and +ev in bar degree 0. The resulting matrix [[d,ev],[0,-d_B]] is exactly the cone convention of def-weil-abstract-derived-category, and ev is a chain map. I proved both children by hand: for the first, both sides' signs agree for every factor position j; for the second, alpha_n - alpha_{n-1} = 1+S_i, which gives (-1)^{i+1}. An exhaustive parity check found 0 failures in 7,080,075 identities (n=0..6, degrees -2..2). Small cases: n=0, n=1 with all degrees zero, zero factors, an empty subcategory, repeated objects. Both children are self-contained and true. They are generic operator identities, not restated clauses of the item. A search of the DAG for interleaving, bar faces, contraction and suspension/Koszul signs found no duplicate. Each child records real grep, Loogle, LeanFinder and LeanSearch searches with no match. Bookkeeping: blueprint from.node and the via chain are correct; proof_deps equals the union of all step citations; every cited node exists and is unmerged; there is no cycle back to the item; every step is under 2000 characters; no SGA source is used. The tool use lem-kun-distinguished-cone-zero (a Mathlib leaf) is accepted."
  }
 }

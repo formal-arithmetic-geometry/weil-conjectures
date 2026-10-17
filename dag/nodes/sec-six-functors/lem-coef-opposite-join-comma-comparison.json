@@ -1,0 +1,96 @@
+{
+ "id": "lem-coef-opposite-join-comma-comparison",
+ "kind": "statement",
+ "title": "Opposite coherence for join-slice and comma-cone comparisons",
+ "statement": "Use simplicial sets, quasicategories, internal functor objects and coherent comma cones from [def-cbc-enhanced-diagrams-cones]. For a simplicial set $K$ define $K^{\\mathrm{op}}_m=K_m$ with the operator of $\\alpha:[r]\\to[m]$ given by the operator of $\\alpha^\\vee(i)=m-\\alpha(r-i)$ on $K$. For a simplicial map $f$, $f^{\\mathrm{op}}$ has the same degreewise components. Let $Y$ be a small simplicial set, $C$ a quasicategory and $d:Y\\to C$ a diagram. Put $Q=C_{/d}$ with its left join-slice construction from [lem-coef-infinity-slice-right-fibration], and $V=(\\Delta_Y\\downarrow d)$ with its coherent comma construction. Put $a=d^{\\mathrm{op}}:Y^{\\mathrm{op}}\\to C^{\\mathrm{op}}$. Then $C^{\\mathrm{op}}$ is a quasicategory, and the right join slice $J_a$, coherent cocone category $P_a$ and fat-join comparison $r_a:J_a\\to P_a$ are those of [lem-coef-join-slice-cocone-comparison]. There are natural simplicial isomorphisms over $C^{\\mathrm{op}}$\n$$R:Q^{\\mathrm{op}}\\xrightarrow{\\cong}J_a,\\qquad S:V^{\\mathrm{op}}\\xrightarrow{\\cong}P_a.$$\nIn degree $m$, $R$ takes $H:\\Delta^m\\star Y\\to C$ to $H^{\\mathrm{op}}$ precomposed with the ordered-block reversal $Y^{\\mathrm{op}}\\star\\Delta^m\\cong(\\Delta^m\\star Y)^{\\mathrm{op}}$; the parameter simplex is identified with $(\\Delta^m)^{\\mathrm{op}}$ by $i\\mapsto m-i$. For $S$, represent a comma simplex by an apex map $x:\\Delta^m\\to C$ and a map $h:Y\\times\\Delta^m\\times\\Delta^1\\to C$ with $h(y,t,0)=x(t)$ and $h(y,t,1)=d(y)$. Its image is obtained by taking opposites, reversing the parameter simplex and the interval, so that the resulting cocone starts at $a$ and ends at the constant diagram at the reversed apex. Both isomorphisms commute with all simplex operators and with restriction in $Y$ and postcomposition in $C$.\n\nThese isomorphisms identify the specified comparison cones, not just their apices. Explicitly, for every vertex $\\ell:\\Delta^0\\star Y\\to C$ of $Q$, the vertex $S_0^{-1}(r_{a,0}(R_0(\\ell)))$ of $V$ is exactly $\\ell$ precomposed with the fat left-cone collapse\n$$T_Y=\\Delta^0\\amalg_{Y\\times\\{0\\}}(Y\\times\\Delta^1)\\longrightarrow\\Delta^0\\star Y$$\nof [lem-coef-infinity-join-cone-calculus]. Here the equality is under the defining equality of the degree-zero sets of a simplicial set and its opposite. It fixes the entire boundary diagram and the cone vertex. All assertions allow $Y=\\varnothing$.",
+ "source": {
+  "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+  "place": "Riehl–Verity, Definition 2.1.14 (simplicial opposite), Definitions 3.2.4–3.2.5 and Example 3.2.6 (join/comma cones), and the cone in (6.1.1), published pp. 680, 684–685 and 707. Agent refinement: explicit opposite isomorphisms and compatibility with the prescribed fat-join comparison of the existing DAG nodes. Author-hosted PDF read in the retained sandbox; archival copy WANTED. No Stacks tag states this simplicial comparison."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-infinity-join-cone-calculus"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diamond|fatJoin|join.*[Oo]p|[Oo]p.*[Jj]oin|[Ss]lice.*[Oo]p|[Oo]p.*[Ss]lice",
+   "results": "{\"t\": \"2026-10-17T09:22:03Z\", \"tool\": \"grep\", \"query\": \"diamond|fatJoin|join.*[Oo]p|[Oo]p.*[Jj]oin|[Ss]lice.*[Oo]p|[Oo]p.*[Ss]lice\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\"], \"digest\": \"1c4889e9d095be51\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary-category Join.opEquiv is not a simplicial-set join/comma comparison. Read Mathlib/CategoryTheory/Join/Opposites.lean:14–49 and 87–144. Read AlgebraicTopology/SimplicialSet/Op.lean:14–26,39–92, SimplexCategory/Rev.lean:25–84, SimplicialObject/Op.lean:34–92 and SimplicialSet/Monoidal.lean:245–265: these give reversal, products and involutivity, but no join-slice/comma isomorphisms or identification of the fat-cone comparison. The StrictSegal hits assume a strict Segal simplicial set and concern ordinary pointwise Kan extensions, not arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reversing simplex vertex order swaps coherent cones and cocones and commutes with the fat join to ordinary join collapse",
+   "results": "{\"t\": \"2026-10-17T09:22:03Z\", \"tool\": \"leansearch\", \"query\": \"Reversing simplex vertex order swaps coherent cones and cocones and commutes with the fat join to ordinary join collapse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op\", \"SimplexCategory.revEquivalence_functor\", \"SimplexCategory.revEquivalence\", \"SimplexCategory.rev_map_σ\", \"SimplexCategory.rev_map_apply\", \"SimplexCategory.rev\", \"SimplicialObject.opFunctor\", \"SSet.opFunctor\"], \"digest\": \"c0527fa3e6a85660\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary-category Join.opEquiv is not a simplicial-set join/comma comparison. Read Mathlib/CategoryTheory/Join/Opposites.lean:14–49 and 87–144. Read AlgebraicTopology/SimplicialSet/Op.lean:14–26,39–92, SimplexCategory/Rev.lean:25–84, SimplicialObject/Op.lean:34–92 and SimplicialSet/Monoidal.lean:245–265: these give reversal, products and involutivity, but no join-slice/comma isomorphisms or identification of the fat-cone comparison. The StrictSegal hits assume a strict Segal simplicial set and concern ordinary pointwise Kan extensions, not arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.op, SSet.join",
+   "results": "{\"t\": \"2026-10-17T09:22:04Z\", \"tool\": \"loogle\", \"query\": \"SSet.op, SSet.join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.join'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: this query failed to resolve SSet.join; it is not evidence of absence. The subsequent valid SSet.opFunctor, SSet.op query was read instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite simplicial sets identify left join slice cones and coherent comma cones with right join slice cocones, compatibly with the fat join collapse comparison",
+   "results": "{\"t\": \"2026-10-17T09:22:05Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite simplicial sets identify left join slice cones and coherent comma cones with right join slice cocones, compatibly with the fat join collapse comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.inclLeftCompOpEquivInverse\", \"CategoryTheory.Join.InclLeftCompRightOpOpEquivFunctor\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"CategoryTheory.Join.InclRightCompRightOpOpEquivFunctor\", \"CategoryTheory.Join.inclRightCompOpEquivInverse\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"CategoryTheory.Join.opEquiv_functor_map_op_inclLeft\"], \"digest\": \"d517f69023639806\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary-category Join.opEquiv is not a simplicial-set join/comma comparison. Read Mathlib/CategoryTheory/Join/Opposites.lean:14–49 and 87–144. Read AlgebraicTopology/SimplicialSet/Op.lean:14–26,39–92, SimplexCategory/Rev.lean:25–84, SimplicialObject/Op.lean:34–92 and SimplicialSet/Monoidal.lean:245–265: these give reversal, products and involutivity, but no join-slice/comma isomorphisms or identification of the fat-cone comparison. The StrictSegal hits assume a strict Segal simplicial set and concern ordinary pointwise Kan extensions, not arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "fatJoin|fat_join|joinSlice|join_slice|commaCone|comma_cone|opEquivalence|opFunctorCompOpFunctorIso",
+   "results": "{\"t\": \"2026-10-17T09:23:07Z\", \"tool\": \"grep\", \"query\": \"fatJoin|fat_join|joinSlice|join_slice|commaCone|comma_cone|opEquivalence|opFunctorCompOpFunctorIso\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\"], \"digest\": \"887d2e59e0426b6a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary-category Join.opEquiv is not a simplicial-set join/comma comparison. Read Mathlib/CategoryTheory/Join/Opposites.lean:14–49 and 87–144. Read AlgebraicTopology/SimplicialSet/Op.lean:14–26,39–92, SimplexCategory/Rev.lean:25–84, SimplicialObject/Op.lean:34–92 and SimplicialSet/Monoidal.lean:245–265: these give reversal, products and involutivity, but no join-slice/comma isomorphisms or identification of the fat-cone comparison. The StrictSegal hits assume a strict Segal simplicial set and concern ordinary pointwise Kan extensions, not arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.opFunctor, SSet.op",
+   "results": "{\"t\": \"2026-10-17T09:23:07Z\", \"tool\": \"loogle\", \"query\": \"SSet.opFunctor, SSet.op\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.opFunctor_map\", \"SSet.Subcomplex.preimage_op_unionProd\"], \"digest\": \"8d965abcd8ce4d52\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary-category Join.opEquiv is not a simplicial-set join/comma comparison. Read Mathlib/CategoryTheory/Join/Opposites.lean:14–49 and 87–144. Read AlgebraicTopology/SimplicialSet/Op.lean:14–26,39–92, SimplexCategory/Rev.lean:25–84, SimplicialObject/Op.lean:34–92 and SimplicialSet/Monoidal.lean:245–265: these give reversal, products and involutivity, but no join-slice/comma isomorphisms or identification of the fat-cone comparison. The StrictSegal hits assume a strict Segal simplicial set and concern ordinary pointwise Kan extensions, not arbitrary quasicategories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-coherent-weight-limit-recognition",
+  "date": "2026-10-17",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, inverse-limit mapping-space calculation: mapping out of the small free-diagram colimit, without using space-valued straightening or model rectification. Technical recognition of the explicitly constructed coherent cone via its enriched join weight. Opposite join/comma comparison and identity of the actual fat-cone image, extracted from the recognition lemma’s former final step.",
+   "via": [
+    "lem-coef-coherent-weight-limit-recognition",
+    "lem-coef-right-fibration-section-limit",
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

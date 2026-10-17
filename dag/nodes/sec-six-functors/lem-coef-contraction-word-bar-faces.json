@@ -1,0 +1,73 @@
+{
+ "id": "lem-coef-contraction-word-bar-faces",
+ "kind": "statement",
+ "title": "Contraction deletion agrees with suspended bar faces",
+ "statement": "Fix universes as in [def-weil-size-convention] and tensor and cochain conventions as in [def-weil-pbc-module-tensor-product] and [def-weil-abstract-derived-category]. Let $\\mathcal C$ be a small dg category over $\\mathbf Z$: its mapping objects are cochain complexes with associative unital chain-map composition. Let $\\mathcal A$ be a full dg subcategory and $X,Y$ objects of $\\mathcal C$. For $n\\geq0$ let $V_n$ be the direct sum, over $A_0,\\ldots,A_n\\in\\mathcal A$, of\n$$\\mathcal C(A_n,Y)\\otimes\\mathcal A(A_{n-1},A_n)\\otimes\\cdots\\otimes\\mathcal A(A_0,A_1)\\otimes\\mathcal C(X,A_0),$$\nwith $V_0=\\bigoplus_{A_0}\\mathcal C(A_0,Y)\\otimes\\mathcal C(X,A_0)$. Let $W_n$ be the corresponding graded tensor sums with a formal rank-one degree-$-1$ generator $\\varepsilon_{A}$ inserted at each of the $n+1$ intermediate objects; write their pure tensors as words $a_0\\varepsilon_{A_n}a_1\\cdots a_n\\varepsilon_{A_0}a_{n+1}$. These are tensors, with no balanced relations. Define the graded isomorphism $\\Phi_n:V_n[n+1]\\to W_n$ by multiplying each such word by $(-1)^{\\alpha_n}$, where $\\alpha_n=n+\\sum_{j=0}^{n+1}(n+1-j)|a_j|$. For $n\\geq1$, define $\\partial_i:V_n\\to V_{n-1}$, $0\\leq i\\leq n$, by composing factors $a_i,a_{i+1}$ and omitting their shared intermediate object. Define the degree-$1$ map $D_{\\rm del}:W_n\\to W_{n-1}$ on each homogeneous word as the sum of these separator deletions, composing adjacent factors, with coefficient $(-1)^{S_i-i}$ for deletion number $i$ from the left, where $S_i=\\sum_{j=0}^{i}|a_j|$. For $n=0$, define $D_{\\rm del}:W_0\\to\\mathcal C(X,Y)$ by the same rule, deleting the sole separator and composing. All formulas extend to the tensor sums as homomorphisms, and\n$$\\Phi_{n-1}^{-1}D_{\\rm del}\\Phi_n=\\sum_{i=0}^{n}(-1)^{i+1}\\partial_i\\quad(n\\geq1),\\qquad D_{\\rm del}\\Phi_0=\\mathrm{ev},$$\nwhere $\\mathrm{ev}:V_0\\to\\mathcal C(X,Y)$ is composition. The first equality is between degree-$1$ maps from $V_n[n+1]$ to $V_{n-1}[n]$. The formulas are natural under dg functors carrying the chosen objects and full subcategory into corresponding data. They require no flatness, pretriangulatedness, or quotient universal property.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Drinfeld, DG quotients of DG categories, section 3.1 (differential obtained from d(epsilon_U)=id_U), section 3.2 and section 3.6(i); agent-explicit all-length deletion/face and augmentation sign calculation. No Stacks tag states this dg-word comparison."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dg.?quotient|Drinfeld|bar.*face|contract.*word|word.*contract",
+   "results": "{\"t\": \"2026-10-17T08:30:40Z\", \"tool\": \"grep\", \"query\": \"dg.?quotient|Drinfeld|bar.*face|contract.*word|word.*contract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\"], \"digest\": \"07f319179c70f800\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read AlternatingFaceMapComplex.lean:63-70 and Monoidal/Center.lean:70-110. Alternating-face and Dold-Kan declarations define simplicial differentials, and Rep.barComplex concerns group resolutions. None identifies graded dg-word contraction deletion with suspended bar faces or proves the specified evaluation sign. The Drinfeld hits are the unrelated monoidal center."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bar\", \"differential\"",
+   "results": "{\"t\": \"2026-10-17T08:30:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"bar\\\", \\\"differential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read AlternatingFaceMapComplex.lean:63-70 and Monoidal/Center.lean:70-110. Alternating-face and Dold-Kan declarations define simplicial differentials, and Rep.barComplex concerns group resolutions. None identifies graded dg-word contraction deletion with suspended bar faces or proves the specified evaluation sign. The Drinfeld hits are the unrelated monoidal center."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the dg category freely adjoining contracting homotopies, deleting a contraction corresponds under the suspension Koszul sign to the negative alternating bar face; length one gives composition",
+   "results": "{\"t\": \"2026-10-17T08:30:50Z\", \"tool\": \"leanfinder\", \"query\": \"In the dg category freely adjoining contracting homotopies, deleting a contraction corresponds under the suspension Koszul sign to the negative alternating bar face; length one gives composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.N₂_obj_X_d\", \"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.hσ'\", \"AlgebraicTopology.alternatingFaceMapComplex_obj_d\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_σ\"], \"digest\": \"bbb01505b4b15f8f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read AlternatingFaceMapComplex.lean:63-70 and Monoidal/Center.lean:70-110. Alternating-face and Dold-Kan declarations define simplicial differentials, and Rep.barComplex concerns group resolutions. None identifies graded dg-word contraction deletion with suspended bar faces or proves the specified evaluation sign. The Drinfeld hits are the unrelated monoidal center."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alternating faces in the two sided bar construction agree with contraction deletion in a differential graded category word complex after an explicit suspension sign",
+   "results": "{\"t\": \"2026-10-17T08:32:01Z\", \"tool\": \"leansearch\", \"query\": \"Alternating faces in the two sided bar construction agree with contraction deletion in a differential graded category word complex after an explicit suspension sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj\", \"AlgebraicTopology.AlternatingFaceMapComplex.objD\", \"AlgebraicTopology.alternatingFaceMapComplex\", \"Rep.barComplex.d_single\", \"AlgebraicTopology.alternatingFaceMapComplex_obj_d\", \"AlgebraicTopology.AlternatingCofaceMapComplex.d_eq_unop_d\", \"AlgebraicTopology.AlternatingCofaceMapComplex.objD\"], \"digest\": \"44c218ff96cbcb9a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read AlternatingFaceMapComplex.lean:63-70 and Monoidal/Center.lean:70-110. Alternating-face and Dold-Kan declarations define simplicial differentials, and Rep.barComplex concerns group resolutions. None identifies graded dg-word contraction deletion with suspended bar faces or proves the specified evaluation sign. The Drinfeld hits are the unrelated monoidal center."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dg-quotient-hom-cone",
+  "date": "2026-10-17",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: mapping-complex coefficient adjunction before the derived inverse limit; contraction deletion and bar-face/evaluation signs in dg-quotient Hom calculation (returned item step 5).",
+   "via": [
+    "lem-coef-dg-quotient-hom-cone",
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

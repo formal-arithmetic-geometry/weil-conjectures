@@ -11,8 +11,7 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-cube-latching",
   "def-coef-coherent-nerve-infrastructure",
-  "lem-coef-infinity-join-cone-calculus",
-  "lem-coef-right-straightening-fiber-comparison"
+  "lem-coef-infinity-join-cone-calculus"
  ],
  "proof": [
   {
@@ -24,20 +23,20 @@
    ],
    "elementary": false,
    "source": {
-    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
     "place": "Definition 5.2.8, Corollary 5.2.4, and §6.1 opening adjunction (6.1.1)–(6.1.3)."
    }
   },
   {
-   "text": "The enriched natural-transformation spaces occurring below are Kan. To verify this without assuming an underived equalizer preserves fibrancy, take $S=Y^{\\mathrm{op}}$ in [lem-coef-cone-presheaf-adjunction]. Reversing the ordered labels identifies $\\mathfrak C[S]^{\\mathrm{op}}$ with $A$: on each simplex it reverses the finite interval and its endpoint-containing subsets, preserving inclusion and union; it therefore respects all simplex operators and the simplex-colimit realization. Under the same reversal the last-cone presheaf $L_S(S)(s)=\\mathfrak C[S\\star\\Delta^0](s,v)$ is $W_Y$. In the formula defining $L_S$, the pushout at the identity $S\\to S$ is unchanged. Applying its monomorphism-to-projective-cofibration clause to $\\varnothing\\to S$ makes $W_Y$ projectively cofibrant. For every $Z$, $G_Z=\\mathcal D(Z,F(-))$ is a simplicial $A$-diagram of Kan complexes, hence projectively fibrant. The Kan model category is combinatorial and simplicial by [lem-coef-simplicial-presheaf-projective-model]; apply [lem-coef-simplicial-projective-model-calculus] to its diagrams over the small enriched category $A$. Its mapping axiom at $\\varnothing\\to W_Y$ and $G_Z\\to1$ says that $T_Z=\\underline{\\operatorname{Nat}}(W_Y,G_Z)$ is Kan. Both its enrichment and its tensor are the degreewise constructions in the item.",
+   "text": "The mapping simplicial sets $T_Z=\\underline{\\operatorname{Nat}}(W_Y,G_Z)$, where $G_Z=\\mathcal D(Z,F(-))$, are Kan. Indeed [lem-coef-join-cone-weight-cofibrancy] applies to the small simplicial set $Y$, without any local Kan condition on $A=\\mathfrak C[Y]$, and makes precisely the outgoing weight $W_Y$ projectively cofibrant. The Kan model structure is combinatorial and simplicial by [lem-coef-simplicial-presheaf-projective-model]. Consequently [lem-coef-simplicial-projective-model-calculus] applies to its enriched diagrams over the small simplicial category $A$. The diagram $G_Z$ is projectively fibrant because each $\\mathcal D(Z,F(a))$ is Kan. Apply the simplicial model axiom in this projective model structure to the cofibration $\\varnothing\\to W_Y$ and fibration $G_Z\\to1$. Its induced mapping map is $T_Z\\to1$, since maps from the initial diagram or to the terminal diagram are unique. It is a Kan fibration, proving the assertion. The mapping set has the degree-$n$ enriched natural maps $W_Y\\times\\Delta^n\\to G_Z$ specified in the item, since tensors and mapping ends are the stated objectwise ones.",
    "uses": [
-    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-join-cone-weight-cofibrancy",
     "lem-coef-simplicial-presheaf-projective-model",
     "lem-coef-simplicial-projective-model-calculus"
    ],
    "elementary": false,
    "source": {
-    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
     "place": "Lemma 5.2.9 and Proposition 4.1.5: cofibrancy of the coherent weight and fibrancy of its weighted ends; expressed through existing projective-model interfaces."
    }
   },
@@ -49,7 +48,7 @@
    ],
    "elementary": false,
    "source": {
-    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
     "place": "Proposition 6.1.8, (6.1.10), and the cubical presentation at the end of printed p. 45; fix the last vertex cone before solving the extension."
    }
   },
@@ -61,7 +60,7 @@
    ],
    "elementary": false,
    "source": {
-    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
     "place": "Lemma 6.1.11 and the terminal-base specialization of Lemma 6.1.13: explicit mapping-path factorization replaces the comma-object notation."
    }
   },
@@ -73,44 +72,80 @@
    ],
    "elementary": false,
    "source": {
-    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
     "place": "Lemma 6.1.11 and Corollary 6.1.16, with the relative cube boundary and n=1 written explicitly."
    }
   },
   {
-   "text": "By [lem-coef-infinity-slice-right-fibration], $C_{/d}$ is a quasicategory, so $C_{/d}\\to\\Delta^0$ lifts every inner horn. Every right-pinched mapping space of $\\Delta^0$ is $\\Delta^0$, and a filler over $\\Delta^0$ is just an extension. Hence [lem-coef-infinity-relative-initial-boundary], applied to $Q\\to\\Delta^0$ for a quasicategory $Q$, says: a vertex $t$ is terminal (every $\\operatorname{Map}_Q(x,t)$ contractible) if and only if every $\\partial\\Delta^m\\to Q$ with $m\\ge1$ and last vertex $t$ extends to $\\Delta^m$ (its final clause), and $t$ is initial (every $\\operatorname{Map}_Q(t,x)$ contractible) if and only if every such boundary with first vertex $t$ extends (its initial clause). Step 5 proves the boundary-extension property into $\\ell$ for every $m\\ge1$, so $\\ell$ is terminal in $C_{/d}$. To express this in the comma convention of the item, let $\\rho$ be the vertex reversal $i\\mapsto m-i$ of $\\Delta^m$. It exchanges $\\Lambda^m_i$ and $\\Lambda^m_{m-i}$, so $C^{\\mathrm{op}}$ is a quasicategory. Apply [lem-coef-join-slice-cocone-comparison] to $L=Y^{\\mathrm{op}}$, $\\mathcal E=C^{\\mathrm{op}}$ and $a=d^{\\mathrm{op}}$. Since $(Y^{\\mathrm{op}}\\star\\Delta^m)^{\\mathrm{op}}=(\\Delta^m)^{\\mathrm{op}}\\star Y\\cong\\Delta^m\\star Y$ via $\\rho$, reversal identifies $J_{d^{\\mathrm{op}}}$ with $(C_{/d})^{\\mathrm{op}}$. Likewise $\\operatorname{Fun}(Y^{\\mathrm{op}},C^{\\mathrm{op}})\\cong\\operatorname{Fun}(Y,C)^{\\mathrm{op}}$, degreewise through $\\rho$, and reversal of $\\Delta^1$ identify $P_{d^{\\mathrm{op}}}$ with $(\\Delta_Y\\downarrow d)^{\\mathrm{op}}$, where $(\\Delta_Y\\downarrow d)$ is the cone category of [def-cbc-enhanced-diagrams-cones]. Reversal alone does not turn right-pinched terminality into right-pinched initiality, so the boundary criterion is used on both sides. A boundary of $J_{d^{\\mathrm{op}}}$ with first vertex $\\ell$ is a reversed boundary of $C_{/d}$ with last vertex $\\ell$. Step 5 and the initial clause therefore make $\\ell$ initial in the quasicategory $J_{d^{\\mathrm{op}}}$. By the comparison node, its associated cocone is initial in $P_{d^{\\mathrm{op}}}$, which is a quasicategory because the comparison is a functor equivalence of quasicategories. By the initial clause, every boundary of $P_{d^{\\mathrm{op}}}$ with first vertex that cocone extends. Equivalently, every boundary of $(\\Delta_Y\\downarrow d)$ with last vertex the corresponding cone extends. By the final clause this cone is terminal in $(\\Delta_Y\\downarrow d)$, that is, limiting. On vertices it precomposes $\\ell$ with the fat-cone collapse $\\Delta^0\\amalg_{Y\\times\\{0\\}}(Y\\times\\Delta^1)\\to\\Delta^0\\star Y$, after interchanging the interval endpoints under reversal. This is exactly the fixed-boundary, fixed-vertex comparison specified by [lem-coef-infinity-join-cone-calculus], not a newly chosen cone with the same vertex. Thus that specified image of $\\ell$ is limiting as required.",
+   "text": "Put $Q=C_{/d}$. By [lem-coef-infinity-slice-right-fibration], $Q$ is a quasicategory, so $Q\\to\\Delta^0$ is an inner fibration. Every right-pinched mapping space of $\\Delta^0$ is $\\Delta^0$. Therefore the final clause of [lem-coef-infinity-relative-initial-boundary], applied over $\\Delta^0$, says that a vertex $t$ of $Q$ is terminal exactly when every boundary $\\partial\\Delta^m\\to Q$ with $m\\ge1$ and last vertex $t$ extends to $\\Delta^m$. Step 5 proves precisely this property for $t=\\ell$. Thus $\\ell$ is terminal in the join slice. The initial clause of the same node gives the corresponding criterion with first vertex $t$; we will use that clause to handle the opposite convention without identifying left-pinched and right-pinched mapping spaces.",
    "uses": [
     "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Theorem 6.1.4 proof on printed p. 49 and Example 3.2.6: terminal boundary test, followed by the existing join-slice/comma comparison in its dual form."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-opposite-join-comma-comparison] to the small diagram $d:Y\\to C$ obtained in Step 1. It supplies the quasicategory $C^{\\mathrm{op}}$, the diagram $a=d^{\\mathrm{op}}$ and simplicial isomorphisms $R:Q^{\\mathrm{op}}\\cong J_a$ and $S:(\\Delta_Y\\downarrow d)^{\\mathrm{op}}\\cong P_a$, where $Q=C_{/d}$. In particular these are isomorphisms on all boundary simplices, with first and last vertices exchanged by reversal, not just bijections on objects. The comparison $r_a:J_a\\to P_a$ is the specified fat-join comparison of [lem-coef-join-slice-cocone-comparison]. Both $J_a$ and $P_a$ are quasicategories by that node.",
+   "uses": [
+    "lem-coef-opposite-join-comma-comparison",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Theorem 6.1.4 proof on printed p. 49 and Example 3.2.6: terminal boundary test, followed by the existing join-slice/comma comparison in its dual form."
+   }
+  },
+  {
+   "text": "A boundary in $J_a\\cong Q^{\\mathrm{op}}$ with first vertex $R_0(\\ell)$ reverses to a boundary in $Q$ with last vertex $\\ell$. Step 5 supplies its extension. The initial boundary criterion of [lem-coef-infinity-relative-initial-boundary], applied over $\\Delta^0$, makes $R_0(\\ell)$ initial in $J_a$. By [lem-coef-join-slice-cocone-comparison], $r_{a,0}(R_0(\\ell))$ is initial in $P_a$. The same criterion gives every boundary extension with that first vertex in $P_a$. Through the simplicial isomorphism $S$ of [lem-coef-opposite-join-comma-comparison], these are exactly the boundary extensions in $(\\Delta_Y\\downarrow d)$ with last vertex $v=S_0^{-1}(r_{a,0}(R_0(\\ell)))$. This comma category is a quasicategory: its opposite is isomorphic to $P_a$, and reversing an inner horn $\\Lambda_i^m$ gives the inner horn $\\Lambda_{m-i}^m$. The final boundary criterion therefore makes $v$ terminal, hence limiting by [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
     "lem-coef-infinity-relative-initial-boundary",
-    "def-cbc-enhanced-diagrams-cones",
     "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-opposite-join-comma-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Theorem 6.1.4 proof on printed p. 49 and Example 3.2.6: terminal boundary test, followed by the existing join-slice/comma comparison in its dual form."
+   }
+  },
+  {
+   "text": "The last clause of [lem-coef-opposite-join-comma-comparison] identifies the vertex $v$ of Step 8 with $\\ell$ precomposed with the actual collapse $T_Y\\to\\Delta^0\\star Y$ of [lem-coef-infinity-join-cone-calculus]. It fixes the entire boundary and the cone vertex. Thus the cone proved limiting in Step 8 is precisely the fixed-boundary, fixed-vertex comparison image specified in the statement, which proves the conclusion.",
+   "uses": [
+    "lem-coef-opposite-join-comma-comparison",
     "lem-coef-infinity-join-cone-calculus"
    ],
    "elementary": false,
    "source": {
-    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
     "place": "Theorem 6.1.4 proof on printed p. 49 and Example 3.2.6: terminal boundary test, followed by the existing join-slice/comma comparison in its dual form."
    }
   }
  ],
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-cone-presheaf-adjunction",
   "lem-coef-infinity-join-cone-calculus",
   "lem-coef-infinity-relative-initial-boundary",
   "lem-coef-infinity-slice-right-fibration",
   "lem-coef-join-boundary-cubical-extension",
+  "lem-coef-join-cone-weight-cofibrancy",
   "lem-coef-join-slice-cocone-comparison",
   "lem-coef-kan-coherent-nerve-quasicategory",
   "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-opposite-join-comma-comparison",
   "lem-coef-pinched-cube-latching",
   "lem-coef-simplicial-presheaf-projective-model",
   "lem-coef-simplicial-projective-model-calculus"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
-  "place": "Online Riehl–Verity §§5.2–5.3 and 6.1, in particular Proposition 6.1.8 and Lemma 6.1.11. Expanded cubical argument uses a direct mapping-path trivial-fibration construction, then the existing terminal boundary and dual join-slice comparison. Archival copy WANTED."
+  "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+  "place": "Retained join-boundary proof following Riehl–Verity §§5.2–5.3 and 6.1, checked against the published author-hosted PDF; mapping-path factorization expanded directly, and the fixed-boundary comma comparison expanded using existing DAG nodes. Archival copy WANTED."
  },
  "mathlib_searches": [
   {
@@ -287,10 +322,38 @@
    "results": "{\"t\": \"2026-10-17T03:47:33Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial functor out of the realized join is determined by its two restrictions and natural maps from products of cone weights to mapping spaces; boundary fillers reduce to two compatible cube maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.MulStruct.map\", \"CategoryTheory.SimplicialNerve\", \"SSet.modelCategoryQuillen.J\", \"SSet.cosk\", \"CategoryTheory.nerve\", \"SSet.IsStrictSegal\", \"SSet.toTopSimplex\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"e1160294996ce7c2\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary enriched ends and ordinary Type-valued weighted limits are not coherent weighted homotopy-limit recognition. SimplicialNerve.lean:12–33 leaves the locally Kan nerve theorem as a project. The new algebraic-join searches likewise found only ordinary joins, simplex primitives and definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "weighted.*limit|coherent.*limit|locally.*Kan",
+   "results": "{\"t\": \"2026-10-17T08:06:37Z\", \"tool\": \"grep\", \"query\": \"weighted.*limit|coherent.*limit|locally.*Kan\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\"], \"digest\": \"92cb7cf350f66801\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:12–33,54–105, Weighted/HasWeightedLimit.lean:10–43, Enriched/Limits/HasConicalLimits.lean:45–60 and Sites/Coherent/SequentialLimit.lean:14–24. These concern the coherent-nerve definition, ordinary Type-valued weighted limits, strict enriched conical limits, or coherent topoi, not homotopy weighted recognition in a locally Kan simplicial category. Semantic search hits were ordinary IsLimit/opposite/conical-limit results or pointwise existence of simplicial limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy coherent cone in the coherent nerve of a locally Kan simplicial category is limiting if its weighted mapping space comparison is a weak homotopy equivalence for every object",
+   "results": "{\"t\": \"2026-10-17T08:06:48Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy coherent cone in the coherent nerve of a locally Kan simplicial category is limiting if its weighted mapping space comparison is a weak homotopy equivalence for every object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"CategoryTheory.SimplicialObject.instHasLimits\", \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"SSet.Truncated.hasLimits\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimitsOfShape\", \"LightDiagram.isLimit\"], \"digest\": \"288ff4c6510c2232\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:12–33,54–105, Weighted/HasWeightedLimit.lean:10–43, Enriched/Limits/HasConicalLimits.lean:45–60 and Sites/Coherent/SequentialLimit.lean:14–24. These concern the coherent-nerve definition, ordinary Type-valued weighted limits, strict enriched conical limits, or coherent topoi, not homotopy weighted recognition in a locally Kan simplicial category. Semantic search hits were ordinary IsLimit/opposite/conical-limit results or pointwise existence of simplicial limits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cone in the homotopy coherent nerve is a limit if it represents the weighted enriched mapping space functor",
+   "results": "{\"t\": \"2026-10-17T08:39:10Z\", \"tool\": \"leansearch\", \"query\": \"A cone in the homotopy coherent nerve is a limit if it represents the weighted enriched mapping space functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isLimitConeOfCoconeRightOp\", \"CategoryTheory.Limits.IsLimit.mk\", \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\", \"CategoryTheory.Limits.Cone.isLimitOfIsIsoLimMapπ\", \"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.Limits.isLimitOfCoconeRightOpOfCone\", \"CategoryTheory.Limits.IsLimit.ofRepresentableBy\"], \"digest\": \"9cf1d64e3edbf499\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:12–33,54–105, Weighted/HasWeightedLimit.lean:10–43, Enriched/Limits/HasConicalLimits.lean:45–60 and Sites/Coherent/SequentialLimit.lean:14–24. These concern the coherent-nerve definition, ordinary Type-valued weighted limits, strict enriched conical limits, or coherent topoi, not homotopy weighted recognition in a locally Kan simplicial category. Semantic search hits were ordinary IsLimit/opposite/conical-limit results or pointwise existence of simplicial limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy weighted limits in a locally Kan enriched category yield limits in its homotopy coherent nerve",
+   "results": "{\"t\": \"2026-10-17T08:39:21Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy weighted limits in a locally Kan enriched category yield limits in its homotopy coherent nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasLimits\", \"SSet.Truncated.hasLimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimitsOfShape\", \"CategoryTheory.Enriched.HasConicalLimit\", \"CategoryTheory.Enriched.HasConicalLimitsOfShape.hasConicalLimit\"], \"digest\": \"0480e91d82ae347a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:12–33,54–105, Weighted/HasWeightedLimit.lean:10–43, Enriched/Limits/HasConicalLimits.lean:45–60 and Sites/Coherent/SequentialLimit.lean:14–24. These concern the coherent-nerve definition, ordinary Type-valued weighted limits, strict enriched conical limits, or coherent topoi, not homotopy weighted recognition in a locally Kan simplicial category. Semantic search hits were ordinary IsLimit/opposite/conical-limit results or pointwise existence of simplicial limits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-right-fibration-section-limit",
@@ -325,17 +388,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-coherent-weight-limit-recognition",
   "worker": "stage1",
-  "summary": "Replaced an invalid draft invoking recognition as a black box with a complete six-step join-boundary/cube lifting proof. One new statement-only algebraic lemma states the join-realization and cubical extension calculation; all cofibrancy, Kan, terminal-boundary and cone-convention interfaces are existing nodes. The item statement is unchanged.",
-  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2, displayed derived mapping-limit calculation: technical recognition for its retained coherent-diagram mapping-space foundation. This technical lemma is not a separate sentence of the original blueprint.",
+  "summary": "Continued the retained join-boundary/cube proof and kept the statement and Lean record unchanged. Reused the existing outgoing-weight cofibrancy theorem. Repaired the human’s 2026-10-17 long-step note by extracting the natural opposite join-slice/comma identifications and their compatibility with the specified fat-cone collapse as one new statement-only coherence lemma. The final steps now cite this lemma instead of carrying its comparison argument inline.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2: technical recognition of the coherent cone used for the displayed inverse-limit mapping calculation. This technical lemma is below the unit route; it is not itself a separate sentence of the original blueprint. The ancestry and unit binding are retained.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q57-340389d46",
-  "group": "Q57",
+  "reviewer": "NT-cc-Q04-609df1cf5",
+  "group": "Q04",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-340389d46 (reviewer sub-agent of L); spot-checked: Decision FIX, one repair. The item statement is unchanged and matches the RV recognition theorem: every-Z weak equivalence, locally Kan D, the item's fixed-boundary fixed-vertex convention, and Y=∅ reduces to terminality. Source access: the Riehl–Verity PDF is online only and WANTED, it is not under literature/, a file-name search found no copy, and the review service blocks network access. My full-text grep of /home/ubuntu was stopped at its time limit without a match, so it does not prove absence. I could not open the cited pages, so I checked every claim directly from the subset-poset definition of C[-]. New node lem-coef-join-boundary-cubical-extension is true: I checked the cross-mapping formula on Δ⁰⋆Δ⁰, Δ¹⋆Δ⁰ and Δ¹⋆Δ¹; ∂Δⁿ⋆Δ⁰ is the horn Λⁿ⁺¹ₙ₊₁, whose hom(0,v) is exactly V=∂Q×Δ¹∪Q×{0}; the extension data (a,c) with its three equations is checked at n=1, n=2, Y=∅ and empty mapping sets. It is statement-only, self-contained, searched, not a duplicate (rigidification-boundary-cube, pinched-cube-latching, cone-boundary-projective-cells and quasicategory-simplex-join-attachment differ) and strictly smaller than the item. Steps 1–5 are correct: the collage and C⊣N_hc adjunction; cofibrancy of W_Y through L_S at S=Y^op and SM7 for Kan T_Z; the reduction with Z=H(0); the path-object fibration e is trivial by 2-of-3 even when u is not a fibration; the lift, including n=1. Fault in Step 6 (E5/C1): it claimed that simplex reversal 'exchanges initial with terminal objects'. def-cbc defines both through right-pinched mapping spaces, so reversal gives left-pinched spaces, and that comparison was uncited. Repaired with no new node by citing the same-unit lem-coef-infinity-relative-initial-boundary over Δ⁰, which gives initial and terminal boundary-filling criteria. The chain is now: terminal in C_{/d}, initial in J_{d^op}, initial cocone in P_{d^op}, boundary filling in (Δ_Y↓d) ≅ P^op, terminal, hence limiting. This removes the off-unit tool lem-cbc-terminal-boundary-extension; tool_uses=[], none accepted. Corrected item in fixes/dag/nodes/sec-six-functors/; proof_deps recomputed. No cycles, no SGA.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-609df1cf5 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited node statement in full. The Riehl–Verity source PDF is not under literature/ and there is no network access, so I checked each step against the cited DAG statements, not the paper. The proof_origin=agent and WANTED marks are correct. The item statement is unchanged and not weakened. Edge cases hold: Y empty gives terminality of L, Y a point gives lambda an equivalence, and empty mapping sets need no nonemptiness. Step 1: collage from join-boundary-cubical-extension and the C-N_hc adjunction from the colimit definition in pinched-cube-latching; the nerve is a quasicategory because D is locally Kan. Step 2: weight-cofibrancy plus the free-functor adjunction makes W_Y projectively cofibrant, and SM7 makes T_Z Kan; the cell-to-cofibrant translation is implicit but routine. Step 3: u(f)=f^*lambda at Z=H(0) is the given hypothesis. Step 4: the path factorization is correct, {1}=Lambda^1_1, and two-out-of-three does not need u to be a fibration. Step 5: the lift gives exactly the three equations of the cubical lemma, including n=1. Step 6: the relative-initial-boundary criterion over Delta^0 gives terminality. Steps 7–9: the opposite transfer through J_a and P_a uses the cocone comparison's initial-iff-colimiting clause and the initial and final boundary criteria, with no left/right-pinched identification. The new node lem-coef-opposite-join-comma-comparison is true: I checked R, S and the strict collapse identity e'(i)=1-e(k-i) by hand, at Y empty and Y a point. It is statement-only, self-contained, single-escaped TeX, with three kinds of Mathlib search, correct blueprint.from and via, and same_as []. It is strictly smaller than the item and duplicates none of twisted-arrow-left-fibration, infinity-relative-cone, join-slice-cocone-comparison or infinity-join-cone-calculus. All cited statements are in unit sk-prop-sf-biduality-general apart from the definition def-cbc. tool_uses is empty and none were accepted. There is no SGA citation. No fixes were made."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

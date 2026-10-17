@@ -33,12 +33,9 @@
    }
   },
   {
-   "text": "By [sk-def-sfb-sheaf-tensor] with $\\mathcal A=\\Ab$, abelian sheafification exists and is strong symmetric monoidal. Thus its local equivalences are monoidal: if $a(f)$ is invertible then $a(f\\otimes P)\\cong a(f)\\otimes a(P)$ is invertible for every presheaf $P$. The ring object $\\Lambda_T$ in abelian sheaves is a sheaf of rings, and its internal module objects identify with sectionwise module sheaves by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Apply [lem-weil-pbc-ring-sheaves-grothendieck] on a small model of $T_{\\mathrm{pro\\acute et}}$, in the fixed sheaf-value universe, for $T=U,X$. For each internal module category, let $E_T$ be this equivalence to sectionwise modules. A colimit is obtained by applying a quasi-inverse of $E_T$ to the colimit of the image diagram: the equivalence of Hom sets verifies its universal property. Kernels and cokernels are identified by those same universal properties, so exactness of filtered colimits is inherited. A quasi-inverse image of a generator is a generator, since the fully faithful $E_T$ detects distinct maps. Thus both internal module categories are Grothendieck abelian. By [lem-kun-grothendieck-derived-coproducts], both ambient derived categories have all small coproducts, computed by termwise coproducts of arbitrary representatives. The sheaf-level adjunction $j_!\\dashv j^*$ of [sk-def-sfb-module-lower-shriek] and [lem-weil-pbc-left-adjoint-preserves-colimits], applied to the small discrete indexing category $I$, give\n$$j_!\\Bigl(\\bigoplus_{s\\in I}K_s^r\\Bigr)\\cong\\bigoplus_{s\\in I}j_!K_s^r.$$\nWrite $\\iota_s^r$ for the degree-$r$ coprojections. The comparison identifies the target coprojection with $j_!\\iota_s^r$, and functoriality gives $(j_!d^r)(j_!\\iota_s^r)=(j_!\\iota_s^{r+1})(j_!d_s^r)$. Equality on every coprojection proves compatibility with the differentials. Thus the comparisons give an isomorphism of complexes and hence $J(\\bigoplus_sK_s)\\cong\\bigoplus_sJ(K_s)$ in the derived category. For $I=\\varnothing$, both coproduct complexes are zero and the exact additive $j_!$ sends zero to zero, so this comparison is also invertible. No boundedness or constructibility assumption is imposed on this family.",
+   "text": "By [det-def-localizing-closure-existence], clause (1), applied on $T=U$ and on $T=X$ to the commutative condensed ring $\\Lambda$, both ambient derived categories $D(\\Mod_{\\Lambda_T})$ have all small direct sums, and the sum of a small family $(K_s)_{s\\in I}$ is represented by the termwise coproduct complex $(\\bigoplus_sK_s)^r=\\bigoplus_sK_s^r$ with the termwise coprojections. No boundedness or constructibility assumption is imposed on the family. The sheaf-level adjunction $j_!\\dashv j^*$ of [sk-def-sfb-module-lower-shriek] and [lem-weil-pbc-left-adjoint-preserves-colimits], applied to the small discrete indexing category $I$, give\n$$j_!\\Bigl(\\bigoplus_{s\\in I}K_s^r\\Bigr)\\cong\\bigoplus_{s\\in I}j_!K_s^r,$$\nthe comparison identifying the target coprojections with the $j_!\\iota_s^r$, where $\\iota_s^r$ are the degree-$r$ coprojections. Functoriality gives $(j_!d^r)(j_!\\iota_s^r)=(j_!\\iota_s^{r+1})(j_!d_s^r)$; equality on every coprojection proves compatibility with the differentials. Thus the comparisons form an isomorphism of complexes $J(\\bigoplus_sK_s)\\cong\\bigoplus_sJ(K_s)$ compatible with the coprojections, hence $J$ preserves all small direct sums in the derived categories. For $I=\\varnothing$ both complexes are zero, and the exact additive $j_!$ sends zero to zero.",
    "uses": [
-    "sk-def-sfb-sheaf-tensor",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-kun-grothendieck-derived-coproducts",
+    "det-def-localizing-closure-existence",
     "sk-def-sfb-module-lower-shriek",
     "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
@@ -49,10 +46,10 @@
    }
   },
   {
-   "text": "Let $K\\in\\Dctf(U,\\Lambda)$. By [sk-def-sfb-constructible] it is bounded constructible in the module-object sense. Apply [lem-sfb-dc-open-lower-shriek-preserves] to $j$ and $\\Lambda$. Its scheme hypothesis is exactly our standing separated finite-type setting, and it allows every commutative condensed ring, hence each of the admissible rings here. It concludes that the same levelwise object $JK$ is bounded constructible on $X$. Thus this use is the extension-by-zero preservation theorem already available in the restricted-functor package, with no passage to a different coefficient category.",
+   "text": "Let $K\\in\\Dctf(U,\\Lambda)$. By [sk-def-sfb-constructible] there are integers $a\\le b$ with $H^r(K)=0$ for $r\\notin[a,b]$, and every $H^r(K)$ is a constructible $\\Lambda_U$-module in the sense of that definition: finite constant local models on the strata of a finite stratification of $U$ by constructible locally closed subschemes. By step 1, $H^r(JK)\\cong j_!H^r(K)$ for every $r$. Hence $H^r(JK)=0$ for $r\\notin[a,b]$, and by [lem-sf-open-extension-zero-constant-model-constructible] each $j_!H^r(K)$, and so each isomorphic module $H^r(JK)$, is constructible on $X$ in the same constant-local-model sense (a finite constant local model transfers along an isomorphism of $\\Lambda_X$-modules by composing the local isomorphisms). Thus $JK\\in\\Dbc(X,\\Lambda)$ in the sense of [sk-def-sfb-constructible], for the same coefficient ring $\\Lambda$ and in the same ambient category.",
    "uses": [
     "sk-def-sfb-constructible",
-    "lem-sfb-dc-open-lower-shriek-preserves"
+    "lem-sf-open-extension-zero-constant-model-constructible"
    ],
    "elementary": false,
    "source": {
@@ -89,13 +86,10 @@
  "proof_deps": [
   "sk-def-sfb-module-lower-shriek",
   "lem-sf-exact-functor-derived-triangulated",
-  "sk-def-sfb-sheaf-tensor",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-kun-grothendieck-derived-coproducts",
+  "det-def-localizing-closure-existence",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "sk-def-sfb-constructible",
-  "lem-sfb-dc-open-lower-shriek-preserves",
+  "lem-sf-open-extension-zero-constant-model-constructible",
   "sk-prop-sfb-cartesian-coefficients",
   "det-lem-int-tensor-projection",
   "det-proper-image-localizing-principle",
@@ -172,7 +166,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -192,32 +186,20 @@
   "date": "2026-10-16",
   "item": "det-proper-image-localizing-open",
   "worker": "stage1",
-  "summary": "Made the source standing scheme setting and ordinary module-object categories explicit; supplied exactness, arbitrary derived coproducts, bounded constructibility and a uniform Tor-interval proof from existing nodes. No new nodes. Recorded the omitted-setting issue and the unsupported integral equality in the report.",
-  "blueprint": "Steps 1-2 realize Formal properties; step 3 realizes Constructibility using the theorem beneath the cited restricted-functor package; step 4 realizes Finite Tor amplitude uniformly by its open tensor argument; step 5 realizes Localizing categories. The chapter and unit route are unchanged.",
+  "summary": "Made the source standing scheme setting and ordinary module-object categories explicit; supplied exactness, arbitrary derived coproducts, bounded constructibility and a uniform Tor-interval proof from existing nodes. No new nodes. Recorded the omitted-setting issue and the unsupported integral equality in the report. Maintainer-reader repair (2026-10-17): step 3 now proves constructibility in the constant-local-model sense of sk-def-sfb-constructible through the new statement node lem-sf-open-extension-zero-constant-model-constructible (lem-sfb-dc-open-lower-shriek-preserves only gives the weaker locally-finitely-presented constructibility of sk-def-sfb-bounded-constructible); step 2 cites det-def-localizing-closure-existence (1) instead of re-proving Grothendieck abelianness and derived coproducts inline.",
+  "blueprint": "Steps 1-2 realize Formal properties; step 3 realizes Constructibility (the exactness identity and the stratification of X by the strata of U and the closed complement) through lem-sf-open-extension-zero-constant-model-constructible; step 4 realizes Finite Tor amplitude uniformly by its open tensor argument; step 5 realizes Localizing categories. The chapter and unit route are unchanged.",
   "tool_uses": [
+   {
+    "node": "det-def-localizing-closure-existence",
+    "why": "Clause (1) gives all small direct sums of the ambient module-object derived categories, computed termwise; a generic existence statement of the localizing-closure definition, not a constructibility result of another unit."
+   },
    {
     "node": "lem-sf-exact-functor-derived-triangulated",
     "why": "Derives the exact additive sheaf functor as a triangulated functor; this general categorical construction is not a separate result of this unit."
    },
    {
-    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "why": "Identifies internal module objects with ring-sheaf modules for applying the general Grothendieck theorem; no new operation or route is introduced."
-   },
-   {
-    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
-    "why": "Supplies Grothendieck abelianness for the two ringed-site module categories; the unit has no such general existence theorem."
-   },
-   {
-    "node": "lem-kun-grothendieck-derived-coproducts",
-    "why": "Computes arbitrary coproducts in the unbounded derived categories termwise; this general derived-category tool is not a constructibility result."
-   },
-   {
     "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
     "why": "Turns the existing sheaf-level open adjunction into preservation of all small coproducts; this is a generic categorical tool."
-   },
-   {
-    "node": "lem-sfb-dc-open-lower-shriek-preserves",
-    "why": "The extension-by-zero preservation theorem underlying the restricted-functor package explicitly used by the blueprint proof; it treats all condensed coefficient rings."
    },
    {
     "node": "sk-prop-sfb-cartesian-coefficients",
@@ -242,15 +224,16 @@
   "lem-sfb-dc-open-lower-shriek-preserves",
   "sk-prop-sfb-cartesian-coefficients",
   "det-lem-int-tensor-projection",
-  "det-proper-image-localizing-principle"
+  "det-proper-image-localizing-principle",
+  "det-def-localizing-closure-existence"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NB-ea02dce06",
-  "group": "NB",
+  "reviewer": "NT-cc-Q125-bf61a7891",
+  "group": "Q125",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-ea02dce06 (reviewer sub-agent of L); spot-checked: Reviewed the repaired statement and all five proof steps against the current blueprint, cited DAG statements, Stacks locations, unit route, hypotheses, coefficient categories, base-change specialization, edge cases, duplicate searches, and delivery-error criteria. No new nodes or repairs are needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-bf61a7891 (reviewer sub-agent of L); spot-checked: Read the item, the main-20261015 blueprint statement and proof of det-proper-image-localizing-open, the unit sk-lem-sf-open-ctf, and every cited node statement. Steps 1, 4 and 5 are correct. Step 4 specializes det-lem-int-tensor-projection with u=j, i=id_X; its tensor and u_! agree with the Tor definition of sk-def-sfb-constructible, so it proves the Tor interval for all admissible Λ in the module-object category. Step 5 meets every hypothesis of det-proper-image-localizing-principle. Fault 1, step 3 (C4/E6): lem-sfb-dc-open-lower-shriek-preserves only gives constructibility in the locally-finitely-presented sense (sk-def-sfb-bounded-constructible / def-sfb-constructible-module). Dctf of sk-def-sfb-constructible needs finite constant local models, which det-def-sfb-constructible-local-model says is strictly stronger, so JK∈Dctf(X) was not proved. Repair: new statement-only node lem-sf-open-extension-zero-constant-model-constructible (unit sk-lem-sf-open-ctf, from = the blueprint 'Constructibility' paragraph). It says the strata of U plus the reduced complement X∖U stratify X, (j_!M)|_{U_a}≅M|_{U_a} and (j_!M)|_Z=0. Tested on U=∅, U=X and M=0. Step 3 now uses this node with H^r(JK)≅j_!H^r(K) from step 1. Fault 2, step 2 (2201 characters): it proved inline the Grothendieck property and the termwise derived coproducts, which det-def-localizing-closure-existence (1) already states. It now cites that node (checked: no cycle), and what remains (1288 characters) is the routine argument that j_! commutes with coproducts. split_report tool_uses and proof_deps are updated. The maintainer should drop the stale top-level tool_uses entries for lem-sfb-dc-open-lower-shriek-preserves, def-weil-pbc-internal-abelian-sheaf-module-equivalence, lem-weil-pbc-ring-sheaves-grothendieck and lem-kun-grothendieck-derived-coproducts. Route: lem-trf-open-ctf works in a different finite-torsion coefficient category, so the uniform Tor argument is accepted. det-thm-sf-ctf-stability-direct-images (2) generalizes clause 1 but lies downstream, so it is not cited. The statement is unchanged and no target is weakened.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean_audit": {
   "master": {
