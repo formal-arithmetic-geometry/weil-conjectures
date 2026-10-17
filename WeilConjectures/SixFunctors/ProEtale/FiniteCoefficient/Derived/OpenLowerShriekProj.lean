@@ -38,6 +38,8 @@ direction: its open part is the inverse `(derivedOpenImmersionLowerShriekProject
   isomorphism.
 - `AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionIso j`: the resulting
   isomorphism of bifunctors.
+- `AlgebraicGeometry.ProEtale.derivedTensorOpenImmersionLowerShriekIso j K L`: the projection
+  formula `j_!K ⊗ᴸ L ≅ j_!(K ⊗ᴸ Lj^*L)` (blueprint `lem-cbc-extension-zero-projection-formula`).
 
 ## The argument
 
@@ -217,6 +219,29 @@ noncomputable def derivedOpenImmersionLowerShriekProjectionIso :
 lemma derivedOpenImmersionLowerShriekProjectionIso_hom :
     (derivedOpenImmersionLowerShriekProjectionIso A j).hom =
       derivedOpenImmersionLowerShriekProjectionMap A j :=
+  rfl
+
+
+/-- Blueprint `lem-cbc-extension-zero-projection-formula`: Projection formula for extension by
+zero.
+
+For an open immersion `j : U ⟶ X`, `K` in `D(U_proét)` and `L` in `D(X_proét)`, the canonical map
+`(j_!K) ⊗ᴸ L ⟶ j_!(K ⊗ᴸ Lj^*L)` is an isomorphism; it is the inverse of the projection map
+`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionMap` (the transpose along
+`j_! ⊣ j^*` of `(η ⊗ᴸ 1)`, `η` the unit of `j_! ⊣ j^*`). This holds for every coefficient category
+`A` as above, in particular for `A = ModuleCat Λ` with `Λ` a finite ring. -/
+noncomputable def derivedTensorOpenImmersionLowerShriekIso
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) A))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    ((-⊗ᴸ-(X)[A]).obj (D((j)_!open[A]).obj K)).obj L ≅
+      D((j)_!open[A]).obj (((-⊗ᴸ-(U)[A]).obj K).obj (L((j)^*[A]).obj L)) :=
+  (((derivedOpenImmersionLowerShriekProjectionIso A j).app K).app L).symm
+
+lemma derivedTensorOpenImmersionLowerShriekIso_inv
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) A))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    (derivedTensorOpenImmersionLowerShriekIso A j K L).inv =
+      ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app L :=
   rfl
 
 end ProEtale

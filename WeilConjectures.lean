@@ -1176,6 +1176,7 @@ public import WeilConjectures.AlgebraicGeometry.GaloisCategories
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.CoordinateDimension
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.GeometricGenericFiber
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.ProjectiveCoordinate
+public import WeilConjectures.AlgebraicGeometry.GenericFiber.PurelyInseparableModel
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.RadicialSmoothing
 public import WeilConjectures.AlgebraicGeometry.GenericFiniteness
 public import WeilConjectures.AlgebraicGeometry.GenericStalkVanishingPropagation
@@ -1450,6 +1451,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberSections
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Limit
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.LimitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceEqualizer
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRefine
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRing
@@ -2458,6 +2460,8 @@ public import WeilConjectures.CategoryTheory.StageSectionFunctorFromTransitions
 public import WeilConjectures.CategoryTheory.StageSectionTransitionExistence
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
+public import WeilConjectures.CategoryTheory.StageSystem.IdempotentComplete
+public import WeilConjectures.CategoryTheory.StageSystem.Preadditive
 public import WeilConjectures.CategoryTheory.SubobjectHomologyStep
 public import WeilConjectures.CategoryTheory.TowerSplitEnvelope
 public import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
@@ -2477,6 +2481,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerRoosT
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existence
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
 public import WeilConjectures.CategoryTheory.Triangulated.PBCDerivedLimitTowerCone
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
@@ -2521,6 +2526,7 @@ public import WeilConjectures.Compactification.Over
 public import WeilConjectures.Compactification.OverRefinement
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementOfIsPullback
 public import WeilConjectures.Compactification.RefinementPullback
 public import WeilConjectures.Compactification.RefinementUniqueness
 public import WeilConjectures.Compactification.StrictTransform
@@ -4220,6 +4226,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Coherence
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Cube
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Identity
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Pasting
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
@@ -4321,6 +4328,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.Complete.CompletedPullback
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField
