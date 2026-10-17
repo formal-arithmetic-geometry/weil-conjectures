@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "prop-sf-pf-coherence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coherence of the projection formula",
- "statement": "In the setting of [def-sf-datum], the projection transformations\nsatisfy: naturality in $K$, $L$, $f$ and the coefficient ring; the identity\nfor $f=\\operatorname{id}$; the associativity pentagon for composable\n$f,g$, compatible with the composition law (A4), i.e. the isomorphism\n$\\alpha_{g,f}:Rg_!Rf_!\\cong R(gf)_!$ of [thm-sf-comp-composition]; independence of the chosen\ncompactification; the identification with the direct-image projection\nformula through $Rf_!\\cong Rf_*$ for proper $f$; compatibility with base\nchange, i.e. for a Cartesian square $(f',g',f,g)$ the square\n\n$$\n\\begin{array}{ccc}\nLg^*\\bigl(Rf_!K\\otimes^L_\\Lambda L\\bigr)&\\xrightarrow{\\ Lg^*\\operatorname{PF}_{f,K,L}\\ }&\nLg^*Rf_!\\bigl(K\\otimes^L_\\Lambda Lf^*L\\bigr)\\\\\n{\\scriptstyle \\operatorname{Ex}_!\\otimes1}\\downarrow&&\\downarrow{\\scriptstyle \\operatorname{Ex}_!}\\\\\nRf'_!Lg'^*K\\otimes^L_\\Lambda Lg^*L&\\xrightarrow{\\ \\operatorname{PF}_{f',Lg'^*K,Lg^*L}\\ }&\nRf'_!\\bigl(Lg'^*K\\otimes^L_\\Lambda Lf'^*Lg^*L\\bigr)\n\\end{array}\n$$\n\ncommutes, with $\\operatorname{Ex}_!$ the exchange of axiom (A2) and the\nvertical arrows read through the monoidality isomorphisms\n$Lg^*(M\\otimes^LN)\\cong Lg^*M\\otimes^LLg^*N$ and $Lg'^*Lf^*\\cong Lf'^*Lg^*$\n(the projection formula commutes with base change; SGA 4, XVII, §5.2); and\ncompatibility with finite reduction, scalar extension and the pro-étale\nrealization.",
+ "statement": "Fix a six-functor datum satisfying the data and axioms of [def-sf-datum]. For every separated finite-type morphism in this datum, the projection transformations of [def-sf-pf]\nsatisfy: naturality in $K$, $L$, $f$ and the coefficient ring; the identity\nfor $f=\\operatorname{id}$; the associativity pentagon for composable\n$f,g$, compatible with the composition law (A4), i.e. the isomorphism\n$\\alpha_{g,f}:Rg_!Rf_!\\cong R(gf)_!$ of [thm-sf-comp-composition]; independence of the chosen\ncompactification; the identification with the direct-image projection\nformula through $Rf_!\\cong Rf_*$ for proper $f$; compatibility with base\nchange, i.e. for a Cartesian square $(f',g',f,g)$ the square\n\n$$\n\\begin{array}{ccc}\nLg^*\\bigl(Rf_!K\\otimes^L_\\Lambda L\\bigr)&\\xrightarrow{\\ Lg^*\\operatorname{PF}_{f,K,L}\\ }&\nLg^*Rf_!\\bigl(K\\otimes^L_\\Lambda Lf^*L\\bigr)\\\\\n{\\scriptstyle \\operatorname{Ex}_!\\otimes1}\\downarrow&&\\downarrow{\\scriptstyle \\operatorname{Ex}_!}\\\\\nRf'_!Lg'^*K\\otimes^L_\\Lambda Lg^*L&\\xrightarrow{\\ \\operatorname{PF}_{f',Lg'^*K,Lg^*L}\\ }&\nRf'_!\\bigl(Lg'^*K\\otimes^L_\\Lambda Lf'^*Lg^*L\\bigr)\n\\end{array}\n$$\n\ncommutes, with $\\operatorname{Ex}_!$ the exchange of axiom (A2) and the\nvertical arrows read through the monoidality isomorphisms\n$Lg^*(M\\otimes^LN)\\cong Lg^*M\\otimes^LLg^*N$ and $Lg'^*Lf^*\\cong Lf'^*Lg^*$\n(the projection formula commutes with base change); and\ncompatibility with finite reduction, scalar extension and the pro-étale\nrealization.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.md",
   "place": "node prop-sf-pf-coherence, order 2102",
@@ -20,40 +20,199 @@
  },
  "stmt_deps": [
   "def-sf-datum",
+  "def-sf-pf",
   "thm-sf-comp-composition"
  ],
  "proof": [
   {
-   "text": "All projection transformations appearing below are those of\n[def-sf-pf].\nNaturality is the naturality of the mate construction, which uses only the\nnatural units and counits of the axioms; for $f=\\operatorname{id}$ the two\nadjunctions are the identity adjunction and the mate of the identity is the\nidentity. The pentagon: both sides are mates of the same composite of the\ntwo component mate constructions, because the units and counits of composite\nadjunctions are the pasted ones by [fix-prop-adjunctions], item (3)\n(through the composition isomorphism of [thm-sf-comp-composition]),\nand pasting of mates is associative; the associativity of the derived tensor\nproduct identifies the two tensor reassociations. Independence of the\ncompactification is the compatibility of the refinement comparisons with\nthe counits and with $j_!$, together with naturality. The proper case is\n(A4). Compatibility with base change: choose a compactification\n$f=p\\circ j$ and base change it along $g$ to $f'=p'\\circ j'$, with\n$\\bar g':\\overline X'\\to\\overline X$ over $g$; by (A2) and (A4),\n$\\operatorname{Ex}_!$ is the identification $L\\bar g'^*j_!\\cong j'_!Lg'^*$\nfollowed by the proper-base-change exchange $\\operatorname{Ex}_*$ for $p$.\nOn the $j_!$ factor both composites take values in the essential image of\n$j'_!$, where a map is determined by its restriction to $X'$, and both\nrestrict to the identity. On the $p$ factor, for $M$ on $\\overline X$:\n$\\operatorname{PF}_{p,M,L}$ is the transpose under $Lp^*\\dashv Rp_*$ of\n$\\varepsilon_p\\otimes1$ ($\\varepsilon_p$ the counit) read through the\nmonoidality of $Lp^*$, and $\\operatorname{Ex}_*$ is the mate of\n$L\\bar g'^*Lp^*\\cong Lp'^*Lg^*$ under $Lp^*\\dashv Rp_*$ and\n$Lp'^*\\dashv Rp'_*$; transposing the two composites\n$Lg^*(Rp_*M\\otimes^LL)\\to Rp'_*(L\\bar g'^*M\\otimes^LLp'^*Lg^*L)$ under\n$Lp'^*\\dashv Rp'_*$ gives, by the pasting compatibility of mates\n([lem-sf-mate]) and the triangle identity for $p$, one and the same map\n$Lp'^*Lg^*(Rp_*M\\otimes^LL)\\to L\\bar g'^*M\\otimes^LLp'^*Lg^*L$, namely\n$L\\bar g'^*\\varepsilon_p\\otimes1$ read through the monoidality isomorphisms;\nso the two composites are mates of the same composite. The same computation\nwith an arbitrary $L'$ on $Y'$ in place of $Lg^*L$ identifies\n$\\operatorname{PF}_{p'}\\circ(\\operatorname{Ex}_*\\otimes1)$ with the\ntranspose of $L\\bar g'^*\\varepsilon_p\\otimes1$, which is the form used for\nthe symmetry of the relative product. The last clause is\n[prop-sf-pf-reduction], [thm-sf-pf-field] and [thm-sf-pf-proetale].",
+   "text": "Use the canonical projection transformations of [def-sf-pf], not mates for the exceptional adjunction. For a chosen compactification $c=(j,p)$, [def-exchange-projection] gives precisely $\\operatorname{PF}^c=Rp_*(\\gamma_j)\\circ\\pi_p$, where $\\pi_p$ is the ordinary pullback/direct-image counit mate. Apply [fix-prop-projection-formula] to this same transformation: its statement gives naturality in $K,L$, compatibility with $\\alpha_{g,f}$ (the associativity pentagon), compatibility with the compactification comparisons, and agreement with the direct-image formula for proper $f$. Its operation datum is the underlying datum of [def-sf-datum], so its $K\\in D^b_c$, $L\\in D^b_{ctf}$ hypotheses hold on the domains in question. In particular these are compatibilities of the actual transformations, not just of the underlying functors or of their invertibility. For $f=\\mathrm{id}$ choose $j=p=\\mathrm{id}$. The unit, counit, pullback-composition comparison and open projection identification are identities in this normalization, so the displayed composite is the identity. Compactification compatibility then gives the identity in any choice. This uses neither exceptional mates nor a tensor assertion about the proper/open interchange map. At finite coefficients, [cor-cbc-proper-coincidence] identifies not only the functors for the compactification $(\\operatorname{id},f)$ but also its compact-support exchange with the proper exchange. Thus the proper specialization of the base-change square proved below uses exactly the direct-image exchange named in the statement.",
    "uses": [
     "def-sf-pf",
+    "def-exchange-projection",
+    "def-sf-datum",
+    "fix-prop-projection-formula",
+    "cor-cbc-proper-coincidence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "First paragraph: naturality, identity, pentagon, compactification independence, and proper case"
+   }
+  },
+  {
+   "text": "Fix the Cartesian square in the statement and choose $f=pj$ and its base change $f'=p'j'$, writing $h:\\overline X'\\to\\overline X$ and $a:X'\\to X$ for the upper base changes. Write $F=Lp^*$, $F'=Lp'^*$, $G=Lg^*$, $H=Lh^*$, $R=Rp_*$, $R'=Rp'_*$. The ordinary adjunctions, including the completed ones at $\\mathcal O_E$, are [fix-prop-adjunctions](1); [fix-lem-exchanges] identifies the actual exchanges with their adjunction mates and with the compactification composite. Use the canonical tensor comparisons $\\mu$ of [lem-pur-derived-pullback-tensor-iso]. Unlike mere naturality of $\\mu$, its composition clause says that the canonical comparison $\\theta:F'G\\xrightarrow{\\sim}HF$ is monoidal. Explicitly, for objects $A,B$ on $Y$,\n$$\\mu_{H;FA,FB}\\,H(\\mu_{F;A,B})\\,\\theta_{A\\otimes B}=(\\theta_A\\otimes\\theta_B)\\,\\mu_{F';GA,GB}\\,F'(\\mu_{G;A,B}).$$\nHere and below juxtaposition composes right to left and tensors are derived (completed at the integral stage). This equation is obtained by applying the lemma's composition formula to each of the two paths $ph=gp'$ and canceling their common comparison with pullback along that morphism. The lemma states it at every coefficient stage, so this is an equality of integral morphisms as well, not an assertion inferred from their finite reductions. For the integral calculation all intermediate objects are constructible: extension by zero preserves bounded constructibility by the exactness and finite-stratification argument in step 3, including for an input $K\\in D^b_c$ without a finite-Tor hypothesis; completed pullback and tensor preserve constructibility by [lem-pur-integral-operations-preserve-constructible]; and the proper direct images are constructible by [lem-sf-integral-direct-image-constructible]. Hence the all-stage tensor theorem and the constructible adjunctions used below apply to $M=j_!K$, $RM$, $Q=M\\otimes FL$ and their base changes.",
+   "uses": [
     "fix-prop-adjunctions",
-    "thm-sf-comp-composition",
-    "lem-sf-mate",
+    "fix-lem-exchanges",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sf-integral-direct-image-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph: canonical pullback, tensor, and square identifications"
+   }
+  },
+  {
+   "text": "We first check the open factor. Put $P=FL$, $J=Lj^*$ and $J'=Lj'^*$. Let $\\gamma_j:j_!K\\otimes P\\to j_!(K\\otimes JP)$ be the canonical open projection identification, and let $\\beta:Hj_!\\to j'_!La^*$ be the open base-change identification. At finite coefficients their invertibility is [lem-cbc-extension-zero-projection-formula] and [lem-cbc-proetale-extension-zero-base-change]. On the open slice, extension by zero followed by restriction is the identity: this follows directly by restricting the extension-by-zero presheaf to that slice, or from the unit isomorphism in [det-sf-open-closed-sequence-ring-sheaf](1). By [lem-sf-exact-functor-derived-triangulated] both exact functors descend termwise; their units, counits and triangle identities descend with them, so $j'_!$ is fully faithful there. Both routes from $H(j_!K\\otimes P)$ to $j'_!(La^*K\\otimes J'HP)$ are consequently determined by $J'$: identify the source with an object in the image of $j'_!$ using $\\mu_H$, $\\beta_K$ and $\\gamma_{j'}$. The first route is $H\\gamma_j$, then $\\beta_{K\\otimes JP}$, then $j'_!\\mu_a$ and the comparison $La^*J\\cong J'H$. The other is $\\mu_H$, then $\\beta_K\\otimes1$, then $\\gamma_{j'}$. After restriction, the canonical $\\gamma$ and $\\beta$ become identities; the remaining two identifications are equal by the composition coherence of [lem-pur-derived-pullback-tensor-iso]. Thus both restricted routes are the identity on $La^*K\\otimes J'HP$, and full faithfulness proves their equality.\nThe same restriction argument applies integrally. The open schemes in a compactification here are quasi-compact, since all schemes are of finite type over the field and hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; in particular the quasi-compact hypotheses on the two open lemmas apply. By [lem-weil-proetale-weakly-etale-localization] the open topos is the slice topos. By [lem-weil-pbc-module-sheaves-colimits-forgetful](2), limits of module sheaves are sectionwise, so the coefficient sheaf on an open is the restriction of the completed coefficient sheaf. Countable products of modules over the completed ring sheaf are exact by [lem-weil-proetale-countable-products-exact], and termwise product complexes compute derived products by [lem-weil-derived-limit-products-core]. For a strict tower $C_n$ with transitions $t_n$, restriction sends its product mapping fiber $\\operatorname{Fib}(1-t:\\prod C_n\\to\\prod C_n)$ to $\\operatorname{Fib}(1-j^*t:\\prod j^*C_n\\to\\prod j^*C_n)$: products are sectionwise and restriction is exact, so both the differential and the maps agree termwise. Use the functor on strict towers of [prop-weil-pbc-rlim-functoriality] for maps, rather than choosing a morphism of abstract Roos triangles. The canonical quotient-completion unit is invertible on complete objects by [lem-weil-pbc-constant-completion-equivalence], which identifies Koszul and quotient completion, respecting units. Its restriction is the same unit for the restricted tower. Consequently restriction preserves completeness, and the construction of [def-weil-pbc-completed-pullback] identifies completed open pullback with ordinary restriction, with the identity unit normalization. Extension by zero is complete and the canonical completed $\\beta$ is [lem-cbc-completed-extension-zero-comparison]. For the completed ring sheaf, [lem-weil-pbc-ringed-slice-extension-tensor] supplies the ordinary sheaf tensor identification. Resolve both inputs by flat-term K-flat complexes using [lem-pc-kflat-resolution]. Extension by zero preserves these K-flat complexes: for an acyclic ambient complex $C$, its tensor with $j_!V$ is $j_!(V\\otimes j^*C)$ by that sheaf tensor identification, which is acyclic since restriction and extension are exact. The same argument on sheaves shows preservation of flat terms. It also applies with the ambient module $(A_{E,n})_X$: taking a flat-term K-flat representative of $K$ gives $(j_!K)\\otimes_B^L(A_{E,n})_X\\cong j_!(K\\otimes_{B|_U}^L(A_{E,n})_U)$, compatibly with the quotient transitions. At finite coefficients extension by zero is exact, so its cohomology is the extension by zero of the input cohomology. Each finite constructible partition of $U$ from [def-weil-finite-torsion-constructibility] remains a finite partition into locally closed constructible subschemes of $X$ after adjoining the closed complement, on which the cohomology is zero. Thus extension by zero preserves constructibility and the cohomology interval. The displayed reduction isomorphism, completeness from [lem-cbc-completed-extension-zero-comparison], and the unchanged uniform interval imply $j_!K\\in D^b_c(X,\\mathcal O_E)$ by [def-weil-derived-complete-integral-detailed]. This proves the domain assertion in step 2 for every bounded constructible integral $K$, without assuming finite Tor amplitude for it. The sheaf tensor identification therefore computes the ambient derived open projection map, and its restriction is the identity on local pure tensors. For $K,P$ constructible, [lem-fix-constructible-tensor-completion] identifies the ambient tensors with the completed ones by the specified quotient-tower map. On these representatives the open tensor identification commutes with each coefficient quotient: both send a section supported on the open tensored with a section to their same tensor on that open. Hence it is a map of the strict quotient diagrams, and applying their actual limit gives precisely the completed open projection map. Restricting this construction is still the identity map of that diagram. This normalization also follows by restricting its specified reduction-tower construction: every unit map on the open is the same identity of the strict tower, so applying the limit gives the identity, not an unspecified lift. The exact module adjunction and its identity unit still give full faithfulness in the full complete subcategories. Rationalization and common-field presentation preserve this unit and the restricted identities, so the open calculation holds at the field stages too. No proper/open interchange map is used for this tensor calculation.",
+   "uses": [
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph: both open-factor routes lie in the image of j′_! and restrict to the identity"
+   }
+  },
+  {
+   "text": "For the proper factor let $M=j_!K$, $Q=M\\otimes FL$, and set $e_M:\\,GRM\\to R'HM$. By [def-exchange-projection] its transpose is $\\tau_M=H(\\varepsilon_M)\\circ\\theta_{RM}:F'GRM\\to HM$. The projection $\\pi_p$ is the mate of $(\\varepsilon_M\\otimes1)\\mu_F$, so\n$$\\varepsilon_Q\\,F(\\pi_{p;M,L})=(\\varepsilon_M\\otimes1)\\mu_{F;RM,L}.$$\nTranspose both routes under $F'\\dashv R'$, to the common target $HM\\otimes F'GL$. The route using $\\pi_{p'}\\circ(e_M\\otimes1)\\circ\\mu_G$ transposes, by naturality of $\\mu_{F'}$, to\n$$(\\varepsilon'_{HM}F'e_M\\otimes1)\\mu_{F';GRM,GL}F'\\mu_{G;RM,L}=(\\tau_M\\otimes1)\\mu_{F';GRM,GL}F'\\mu_{G;RM,L}.$$\nFor the other route the transpose, including its target identification, is\n$$(1\\otimes\\theta_L^{-1})\\mu_{H;M,FL}\\,H\\varepsilon_Q\\,\\theta_{RQ}\\,F'G(\\pi_{p;M,L}).$$\nNaturality of $\\theta$ moves $F'G\\pi_p$ to $HF\\pi_p$; insert the preceding counit equation, then use naturality of $\\mu_H$ and the monoidality equation in step 2. The result is\n$$(1\\otimes\\theta_L^{-1})(H\\varepsilon_M\\otimes1)(\\theta_{RM}\\otimes\\theta_L)\\mu_{F';GRM,GL}F'\\mu_{G;RM,L}=(\\tau_M\\otimes1)\\mu_{F';GRM,GL}F'\\mu_{G;RM,L}.$$\nThus the transposes coincide, and the adjunction bijection gives equality of the original maps. The mate and triangle identities used here are exactly [fix-prop-adjunctions](1); no exceptional adjunction is involved. The same algebra is valid in the completed integral categories using the completed adjunction and the monoidality already supplied in step 2. It proves integral commutativity directly, without testing equality on finite evaluations.",
+   "uses": [
+    "def-exchange-projection",
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph: proper-factor counit-mate calculation, with both transposes expanded"
+   }
+  },
+  {
+   "text": "Expand the two routes of the required compact-support square by $\\operatorname{PF}^c=R(\\gamma_j)\\pi_p$ and $\\operatorname{Ex}_!^c=R'(\\beta)e_{j_!(-)}$ from [def-exchange-projection]. Naturality of the proper exchange moves $G R(\\gamma_j)$ across $e$; the proper-factor equality of step 4 moves $G\\pi_p$ across it. Step 4 inserts $\\theta_L^{-1}:HFL\\to F'GL$ on the second tensor factor. Naturality of the open projection map identifies applying $\\gamma_{j'}$ after $1\\otimes\\theta_L^{-1}$ with applying $j'_!(1\\otimes J'\\theta_L^{-1})$ after $\\gamma_{j'}$. The comparison of the final pullbacks is the explicit composite $La^*JFL\\cong J'HFL\\xrightarrow{J'\\theta_L^{-1}}J'F'GL\\cong Lf'^*GL$. With this identification the remaining interior square is exactly the equality for $\\beta,\\gamma,\\mu$ proved in step 3; pullback-composition coherence in [lem-pur-derived-pullback-tensor-iso] gives the comparison used in the displayed target. Applying $R'$ and composing gives the displayed square for $c,c'$. [fix-lem-exchanges](4) says the exchanges intertwine refinement comparisons, while [fix-prop-projection-formula] says this for the projection maps. Conjugating the proved square by those comparisons gives the same square for the compactification-independent functors. This proves the required base-change compatibility at finite and integral stages. Applying rationalization to this equality, and then representing all objects and maps over one common finite field, proves the two field-stage equalities. Functors preserve this actual equality of morphisms; no faithfulness of reduction or finite evaluations is being assumed. Naturality in the morphism data is with respect to these canonical comparisons: units and counits are natural, the tensor and square comparisons are natural, and [fix-lem-exchanges](1) supplies naturality with respect to morphisms of squares. Composing these natural maps and using the compactification and composition compatibilities of step 1 proves the asserted naturality in $f$.",
+   "uses": [
+    "def-exchange-projection",
+    "fix-lem-exchanges",
+    "fix-prop-projection-formula",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph: paste the open and proper squares and remove the compactification choice"
+   }
+  },
+  {
+   "text": "For coefficient change, [fix-prop-projection-formula] already states that this same projection transformation commutes with finite reduction on its finite-Tor domains and scalar extension. At finite levels the precise reduction square is [prop-sf-pf-reduction]; at $E$ and $\\overline{\\mathbf Q}_\\ell$, [thm-sf-pf-field] specifies the chosen integral representatives, rationalization and common-stage comparisons, with no reduction functor from rational coefficients to a finite ring. These give the corresponding assertions of the item. For pro-étale realization use the comparison data of (A5) in [def-sf-datum] and the coefficient/site comparison data in [def-exchange-projection]: they carry the units, counits, pullback-tensor comparisons and the open identifications to their counterparts. Substitution in $\\pi_p=Rp_*((\\varepsilon_p\\otimes1)\\mu_p)\\eta_p$ and $\\operatorname{PF}^c=Rp_*\\gamma_j\\,\\pi_p$ therefore carries the projection transformation itself to its realization. Substitution in the two equal transposes of step 4 and in the open identity of step 3 carries those equalities to their realizations as well. This is functoriality of a specified composite, rather than a consequence of invertibility of a projection formula. All finite computations above already took place on the pro-étale site, and all integral computations took place in the completed category itself. Thus neither the étale finite projection-formula theorem nor equality after reduction is used to establish the integral square. The supplied comparisons and these identities also prove naturality in the coefficient ring. On the pro-etale finite-Tor domains, [thm-sf-pf-proetale] identifies the projection isomorphism with precisely the proper counit projection followed by the open tensor comparison, and its completed, rational and common-stage versions. Consequently the identities just proved concern that specified pro-etale projection isomorphism. This theorem supplies this identification and its invertibility; the equality of the base-change routes was proved directly in steps 2-5.",
+   "uses": [
+    "fix-prop-projection-formula",
     "prop-sf-pf-reduction",
     "thm-sf-pf-field",
+    "def-sf-datum",
+    "def-exchange-projection",
     "thm-sf-pf-proetale"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Last sentence: finite reduction, scalar extension, and pro-étale realization"
+   }
   }
  ],
  "proof_deps": [
+  "cor-cbc-proper-coincidence",
+  "def-exchange-projection",
+  "def-sf-datum",
   "def-sf-pf",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-completed-pullback",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "fix-lem-exchanges",
   "fix-prop-adjunctions",
-  "thm-sf-comp-composition",
-  "lem-sf-mate",
+  "fix-prop-projection-formula",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
   "prop-sf-pf-reduction",
+  "prop-weil-pbc-rlim-functoriality",
   "thm-sf-pf-field",
   "thm-sf-pf-proetale"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proof: canonical compactification formula, open restriction, and proper transpose argument; formal equations expanded in this repair"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula.*(baseChange|compactification)|[Pp]rojection.*[Cc]oherence|[Cc]ompactification.*[Pp]rojection",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern abstract monoidal adjunctions, ordinary linear base change, resolutions or condensed-module presentations; none states compact-support PF transformation coherence at the four coefficient stages."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity and base change compatibility of projection formula for compactly supported l-adic sheaf cohomology",
+   "results": "groupCohomology.π_map_assoc; LinearMap.baseChange_baseChange; IsBaseChange.comp_iff; CategoryTheory.ProjectiveResolution.π'_f_zero_assoc; CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'_assoc; RingHom.IsStableUnderBaseChange; WeierstrassCurve.Projective.baseChange_addXYZ; LinearMap.baseChange_comp",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern abstract monoidal adjunctions, ordinary linear base change, resolutions or condensed-module presentations; none states compact-support PF transformation coherence at the four coefficient stages."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SixFunctorFormalism",
+   "results": "loogle: unknown identifier 'CategoryTheory.SixFunctorFormalism'",
+   "date": "2026-10-16",
+   "verdict": "No match: query rejected for unknown identifier; corrected categorical pattern tried next"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support projection formula coherence with base change and compactification in l-adic six functors",
+   "results": "LightCondensed.ihomPoints_symm_comp; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondMod.hom_naturality_apply; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern abstract monoidal adjunctions, ordinary linear base change, resolutions or condensed-module presentations; none states compact-support PF transformation coherence at the four coefficient stages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Six operations on constructible sheaves, compact support tensor projection transformation is independent of compactification and commutes with exchange",
+   "results": "LightCondensed.ihomPoints_symm_comp; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern abstract monoidal adjunctions, ordinary linear base change, resolutions or condensed-module presentations; none states compact-support PF transformation coherence at the four coefficient stages."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "CategoryTheory.Adjunction.map_η_comp_η; CategoryTheory.Adjunction.ε_comp_map_ε; CategoryTheory.Adjunction.map_η_comp_η_assoc; CategoryTheory.Adjunction.ε_comp_map_ε_assoc; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.mapAddMon; CategoryTheory.Adjunction.mapMon",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern abstract monoidal adjunctions, ordinary linear base change, resolutions or condensed-module presentations; none states compact-support PF transformation coherence at the four coefficient stages."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -86,5 +245,129 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-pf-coherence"
+ "unit": "sk-prop-sf-pf-coherence",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-sf-pf-coherence",
+  "worker": "stage1",
+  "summary": "Repaired the returned five-step split. The independent existing fix-prop-projection-formula supplies its explicitly stated pentagon, compactification, proper and coefficient compatibilities. The remaining base-change proof now uses the full all-stage tensor/composition coherence theorem, proves the open factor by fully faithful restriction, and computes both proper-factor transposes explicitly inside the actual finite or completed category. Removed the prohibited bibliographic citation. No new nodes or Lean changes. Restored the unit’s proper-exchange and pro-etale theorem dependencies with their precise finite/domain qualifications after the server unit-route check. Second reading adds the derived-product and strict-tower citations, proves open constructibility without an extra finite-Tor hypothesis on K, and spells out the target comparison in the pasting.",
+  "blueprint": "First paragraph: naturality, identity, pentagon and compactification/proper compatibility (step 1); base-change paragraph: coherent identifications (step 2), open factor (step 3), proper factor (step 4), pasting (step 5); last sentence: coefficient and realization compatibility (step 6).",
+  "tool_uses": [
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Independent all-stage projection theorem explicitly supplies composition pentagon, compactification, proper, and coefficient compatibilities; the unit has no other theorem stating these facts."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic canonical tensor-pullback coherence, including composition at integral coefficients, needed to compare the transposes; the unit does not state this tool."
+   },
+   {
+    "node": "det-sf-open-closed-sequence-ring-sheaf",
+    "why": "Exact open adjunction with invertible unit for arbitrary ring sheaves; used only for fully faithful restriction, not a replacement proof route."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Canonical open-immersion tensor isomorphism is the open factor in the unit’s compactification argument."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "Canonical open base-change identification is the other open-factor edge in the unit’s argument."
+   },
+   {
+    "node": "lem-cbc-completed-extension-zero-comparison",
+    "why": "Completed extension by zero and its actual canonical base-change comparison supply the integral open factor."
+   },
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Canonical ambient/completed tensor comparison on constructibles fixes the integral open projection normalization."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Identifies the actual exchanges with canonical mates/compactification composites and states refinement and square naturality; needed to identify the arrows in the unit’s square."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Exact sheaf extension/restriction functors descend to derived categories, so their unit/counit identities prove full faithfulness there."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies an open pro-etale topos with the slice; used only for restriction of coefficients and maps."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Sectionwise limits fix the completed coefficient sheaf on the open and restriction of the strict reduction model."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite type over the field makes the compactification schemes Noetherian, to check qcqs and quasi-compact open hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Checks the quasi-separated hypothesis of the open ring-sheaf lemma."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Checks the domains of completed tensor/pullback for every input of the monoidality theorem."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Checks the domain of the all-stage tensor comparison on proper direct-image objects."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Ordinary sheaf tensor identification over the completed ring sheaf; it fixes the integral open projection map before completion."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides flat-term K-flat models on which the open tensor map and its strict quotient construction are computed."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products over the completed coefficient sheaf justify the strict product/fiber computation in the integral open normalization."
+   },
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "Termwise products compute derived products once exactness is established; sectionwise sheaf limits alone do not give this."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "The functor on strict towers sends the actual identity of reduction diagrams to an identity; no arbitrary cone map or faithful-evaluation claim is used."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Identifies quotient and Koszul completeness respecting their units, so restriction of the strict tower preserves completeness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-projection-formula",
+  "lem-pur-derived-pullback-tensor-iso",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-fix-constructible-tensor-completion",
+  "fix-lem-exchanges",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-a3f8caca5",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-a3f8caca5 (reviewer sub-agent of L); spot-checked: Read the item in full: the statement, all 6 steps, the unit record and the main-20261015 blueprint statement and proof. I read the full statement of every cited node and all 15 proof steps of fix-prop-projection-formula. The statement matches main-20261015 clause by clause; only the SGA parenthetical was dropped, and no target is weakened. There are no new nodes. proof_deps equals the union of the steps' uses, and every cited id exists and is not merged. The transitive closure of the cited nodes never reaches the item, so there is no cycle. Step 1 cites fix-prop-projection-formula for naturality, the pentagon with alpha_{g,f}, compactification independence, the proper case and coefficient compatibility: same datum, same K/L domains, same def-exchange-projection map. The blueprint proves that node from this item, but its reviewed DAG split proves these clauses independently by mate pasting and proper/open calculus (its steps 7-12), so I accept the tool use. Identity case: substituting j=p=id gives the identity. cor-cbc-proper-coincidence gives the proper exchange. Step 2: I derived the monoidality equation for theta from the composition clause of lem-pur-derived-pullback-tensor-iso, which holds at every stage. Step 4: I recomputed both transposes under F' -| R'; both equal (tau_M x 1) mu_{F'} F' mu_G, so the proper factor commutes. Step 5: I expanded Ex_! = R'(beta) e and PF = R(gamma) pi; after naturality of e and pi_{p'} and step 4, the two routes differ only by the open square of step 3. Step 3: j'_! is fully faithful by the unit isomorphism of det-sf-open-closed-sequence-ring-sheaf(1), with its qcqs hypotheses checked. Both routes restrict to the identity, so they are equal. The integral case is handled with strict towers and the completed beta and tensor nodes, never by finite evaluation. Constructibility of j_!K for K in D^b_c without finite Tor is shown by finite strata. Step 6 uses prop-sf-pf-reduction (finite Tor), thm-sf-pf-field (integral representatives) and thm-sf-pf-proetale (identification only), plus the A5 comparison data. Edge cases checked: f=id, g=id, proper f, empty open, n=1, and K of infinite Tor dimension over A_{E,2}. I accept all 21 declared tool uses. No changes made. Maintenance note: the delivered source field still has the master path and the SGA 4 external entry, contrary to the report. source is not a split-owned field, so I wrote no fix; no proof step cites SGA."
+ }
 }
