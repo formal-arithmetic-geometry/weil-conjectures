@@ -15,9 +15,128 @@
   "def-weil-pbc-constant-sheaf",
   "lem-trf-nearby-proper-source-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=S_{(a)}$ and let $B\\to A$ be the generization map used in the sliced $i_a^*Rj_{b,*}$ construction. Thus $B=S_{(b)}$ for a strict-local slice (or $B=\\operatorname{Spec}\\Omega_b$ for its geometric-point slice). Write $Z_A=Z\\times_S A$, $Z_B=Z_A\\times_A B$, $j_Z:Z_B\\to Z_A$, and $i_Z:Z_a\\to Z_A$, for $Z=X,Y,W$. These are precisely the sliced functors and cones specified in lem-trf-nearby-proper-source-exchange; only its definition of $C$, not its proper-exchange assertion, is used. The same notation with primes applies over $T$. Each $j_Z$ is qcqs: $B\\to A$ is a map between affine schemes, hence on a principal affine open its inverse image is principal affine, and its diagonal is the closed affine immersion given by the surjective multiplication map $\\mathcal O(B)\\otimes_{\\mathcal O(A)}\\mathcal O(B)\\to\\mathcal O(B)$; qcqs is preserved by base change. The restrictions $h_A:W_A\\to Y_A$ and $h_T:W_T\\to Y_T$ are smooth. Indeed finite presentations base change by tensoring their presentations, and an infinitesimal lifting problem for the base change is solved by lifting the map to $W$ and pairing it with the already given map to the new base. The same argument applies to every further base change. Finally, $\\underline M$ is bounded constructible: it is finite locally constant on the single stratum which is the whole scheme, in degree zero. Its pullbacks are again the same constant sheaf.",
+   "uses": [
+    "lem-trf-nearby-proper-source-exchange",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-constructible-complexes",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian. Application: Orgogozo, Lemma 4.2 proof, printed p. 12, and identity case at beginning of section 4, printed p. 11 (author PDF read online; archival PDF WANTED)."
+   }
+  },
+  {
+   "text": "Apply sbc-thm-bounded-derived-smooth-base-change with smooth map $h_A:W_A\\to Y_A$ and qcqs map $j_Y:Y_B\\to Y_A$. The constant finite $\\Lambda$-module $\\underline M$ on $Y_B$ satisfies its coefficient and constructibility hypotheses by step 1; the annihilating integer remains invertible after all these pullbacks. The ordinary exchange is therefore an isomorphism\n$$h_A^*Rj_{Y,*}\\underline M\\xrightarrow{\\sim}Rj_{W,*}\\underline M.$$\nPulling back by $i_W$, using $h_Ai_W=i_Yh_a$, gives\n$$\\alpha:h_a^*\\Psi^g_{a,b}\\underline M\\xrightarrow{\\sim}\\Psi^{f|_W}_{a,b}\\underline M.$$\nOver $T$ the identical argument gives $\\alpha_T:h_{a_T}^*\\Psi^{g_T}_{a_T,b_T}\\underline M\\xrightarrow{\\sim}\\Psi^{f_T|_{W_T}}_{a_T,b_T}\\underline M$. Here exact module inverse image is the termwise inverse image. The restriction from $X$ to $W$ in these formulas does not alter the stalk at the point in question: etale localization exchange applied to the open immersion $W_A\\to X_A$ identifies $(Rj_{X,*}\\underline M)|_{W_A}$ with $Rj_{W,*}\\underline M$. The cited forget-coefficients exchange identifies this statement for modules with the abelian version of etale localization. The same holds over $T$.",
+   "uses": [
+    "sbc-thm-bounded-derived-smooth-base-change",
+    "sbc-def-base-change-map",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-etale-localization-exchange",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian. Application: Orgogozo, Lemma 4.2 proof, printed p. 12, and identity case at beginning of section 4, printed p. 11 (author PDF read online; archival PDF WANTED)."
+   }
+  },
+  {
+   "text": "Let $u_Y:Y_{a_T}\\to Y_a$ and $u_W:W_{a_T}\\to W_a$. Write $\\beta_g$ and $\\beta_W$ for the ordinary sliced comparisons over $T$. The square with top row $h_{a_T}^*u_Y^*\\Psi^g\\underline M\\to h_{a_T}^*\\Psi^{g_T}\\underline M$, bottom row $u_W^*\\Psi^{f|_W}\\underline M\\to\\Psi^{f_T|_{W_T}}\\underline M$, and vertical maps $u_W^*\\alpha$, $\\alpha_T$, commutes. Here the top arrow is $h_{a_T}^*\\beta_g$ and the bottom one is $\\beta_W$, with the canonical inverse-image composition identifications understood. To check the arrows, before restricting by $i_W$ transpose each exchange under the appropriate $j^*\\dashv Rj_*$: its transpose is the inverse-image square identification followed by the pullback of the $j$-counit, exactly the formula in sbc-def-base-change-map. Pasting first the source square then the base square, or first the base square then the source square, gives the same inverse-image square. Mate pasting (clauses 1 and 2) consequently gives the same comparison. The slice squares need not be cartesian; only the counit formula of def-trf-oriented-nearby-cycles for a commutative square is used. The same pasting also compares the restriction from $X$ to $W$ with the comparisons: the restriction isomorphisms $\\rho:(\\Psi^f\\underline M)|_{W_a}\\xrightarrow{\\sim}\\Psi^{f|_W}\\underline M$ and $\\rho_T$ of step 2 are, by the statement of lem-weil-pbc-etale-localization-exchange, the exchange morphisms of the cartesian squares $W_B\\to X_B$ over $W_A\\to X_A$ (followed by $i_W^*$), with the same transposed form. Pasting it with the base square in either order, mate pasting gives $\\rho_T\\circ(\\beta_f|_{W_{a_T}})=\\beta_W\\circ u_W^*\\rho$. Hence $C^f_T(\\underline M)|_{W_{a_T}}\\simeq C^{f|_W}_T(\\underline M)$, by the cone transport of step 4. Repeating the pasting for $T'\\to T\\to S$ proves compatibility of the square with every further base change.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-etale-localization-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian. Application: Orgogozo, Lemma 4.2 proof, printed p. 12, and identity case at beginning of section 4, printed p. 11 (author PDF read online; archival PDF WANTED)."
+   }
+  },
+  {
+   "text": "Take cones of the comparison square of step 3, obtaining\n$$h_{a_T}^*C^g_T(\\underline M)\\simeq C^{f|_W}_T(\\underline M).$$\nThis is a formal consequence of an isomorphism of arrows: transport a cone triangle of the top arrow along the two vertical isomorphisms; TR1 makes the transported triangle a cone triangle of the bottom arrow. Equivalently, on compatible complex representatives use $C(u)^r=L^r\\oplus K^{r+1}$ and its displayed matrix differential from def-weil-abstract-derived-category. Exact inverse image commutes with this finite-sum construction, so this choice of cone comparison respects the pastings in step 3. Now take the geometric stalk at $x_T$. By definition of inverse image along the composite geometric point, $(h_{a_T}^*C^g_T)_{x_T}=(C^g_T)_{y_T}$. The restriction compatibility at the end of step 3, with the same transport of cone triangles, identifies the other stalk with $(C^f_T)_{x_T}$. Inverting the resulting isomorphism gives the displayed assertion of the item. The same simultaneous cone construction on the pasted comparisons gives its further-base-change compatibility; no properness of $h$ has been used.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-kun-stalk-as-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian. Application: Orgogozo, Lemma 4.2 proof, printed p. 12, and identity case at beginning of section 4, printed p. 11 (author PDF read online; archival PDF WANTED)."
+   }
+  },
+  {
+   "text": "For the identity morphism of an arbitrary scheme $S$, define\n$$\\theta_S:p_2^*\\underline M\\longrightarrow R\\Psi_{1_S}\\underline M$$\nas the adjoint of $\\psi_{1_S}^*p_2^*\\underline M=\\underline M\\xrightarrow{1}\\underline M$; this uses $p_2\\psi_{1_S}=1_S$. At a vanishing-topos point $(a,b\\to a)$, the oriented-point cohomology formula, applied to $X=Y=S$ and both maps the identity, identifies its target with\n$$R\\Gamma(S_{(a)}\\times_{S_{(a)}}S_{(b)},\\underline M)=R\\Gamma(S_{(b)},\\underline M).$$\nIts source stalk is $M$, and the map sends $m$ to the corresponding constant section. The strict-local ring is strictly henselian. The germ isomorphism and the constant-sheaf stalk formula identify its degree-zero sections with $M$; all positive cohomology vanishes by strictly henselian etale acyclicity. These assertions also hold with $\\Lambda$-module coefficients: the germ isomorphism is $\\Lambda$-linear, and identifies module sections with the exact module stalk functor, so its positive derived functors vanish. Thus $\\theta_S$ is an isomorphism at every oriented point, and conservativity of those points makes it an isomorphism on the vanishing topos. Its inverse is the claimed $R\\Psi_{1_S}\\underline M\\simeq p_2^*\\underline M$.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-point-cohomology",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian. Application: Orgogozo, Lemma 4.2 proof, printed p. 12, and identity case at beginning of section 4, printed p. 11 (author PDF read online; archival PDF WANTED)."
+   }
+  },
+  {
+   "text": "For any $q:T\\to S$ let $v:V_{1_T}\\to V_{1_S}$ be the induced morphism. There is a canonical identification $v^*p_{2,S}^*\\underline M=p_{2,T}^*\\underline M$, since $p_{2,S}v=q p_{2,T}$ and pullback preserves constants. Under it,\n$$\\beta_q\\circ v^*\\theta_S=\\theta_T.$$\nIndeed transposition under $\\psi_{1_T}^*\\dashv R\\Psi_{1_T}$ takes the left side to the pullback of $\\varepsilon_S\\circ\\psi_{1_S}^*\\theta_S=1_{\\underline M}$; this equality is the defining adjunction equation for $\\theta_S$. The right side has precisely the same adjunct $1_{\\underline M}$. Uniqueness in the adjunction proves the equality. Both $\\theta$ maps are invertible by step 5, hence so is $\\beta_q$. This proves $\\Psi$-goodness for the identity over every scheme. For $T'\\to T\\to S$, applying this same equality twice gives the composite $\\theta_{T'}\\,(v_{T'/T}^*v_{T/S}^*\\theta_S)^{-1}$, which is also the expression for the composite base change by mate pasting. Thus the identity isomorphism has the asserted compatibility with arbitrary and iterated base changes.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian. Application: Orgogozo, Lemma 4.2 proof, printed p. 12, and identity case at beginning of section 4, printed p. 11 (author PDF read online; archival PDF WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-nearby-proper-source-exchange",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-constructible-complexes",
+  "lemma-constructible-pullback-constant",
+  "sbc-thm-bounded-derived-smooth-base-change",
+  "sbc-def-base-change-map",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-localization-exchange",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-trf-oriented-nearby-cycles",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-kun-stalk-as-pullback",
+  "lem-trf-oriented-point-cohomology",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-trf-oriented-product-points-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0EYU and 03QO, with the existing derived smooth-exchange and oriented-point interfaces. Agent-written expansion of Orgogozo Lemma 4.2 and the identity case; the Orgogozo author PDF was read online but is not locally archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +172,45 @@
    "results": "{\"t\": \"2026-10-17T15:50:18Z\", \"tool\": \"leansearch\", \"query\": \"Smooth source morphisms identify the stalks of sliced nearby cycle base change cones for constant finite coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"smoothSheafCommRing.nonunits_stalk\"], \"digest\": \"0543dbcf9d0df22f\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures in work/lem-trf-nearby-smooth-source-exchange.leansearch.txt; the hits concern ordinary scheme properties, normed-ring units, simplicial objects or homological cycles, and do not state this nearby-cycle/alteration assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "nearby.*smooth|smooth.*nearby|nearbyCycles|IsPsiGood",
+   "results": "{\"t\": \"2026-10-17T16:18:50Z\", \"tool\": \"grep\", \"query\": \"nearby.*smooth|smooth.*nearby|nearbyCycles|IsPsiGood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no nearby-cycle, Psi-goodness or smooth nearby-exchange declaration occurs in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearby\"",
+   "results": "{\"t\": \"2026-10-17T16:18:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"nearby\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Units.ofNearby\", \"Units.val_ofNearby\"], \"digest\": \"bee6463c6c16739d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Units.ofNearby and Units.val_ofNearby concern normed-ring units, not etale nearby cycles."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth pullback commutes with nearby cycles of constant finite sheaves",
+   "results": "{\"t\": \"2026-10-17T16:18:50Z\", \"tool\": \"leansearch\", \"query\": \"Smooth pullback commutes with nearby cycles of constant finite sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"ContMDiffOn.mpullback_vectorField_preimage\", \"SheafOfModules.pullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.Functor.sheafPullback\", \"TopCat.Presheaf.germ_stalkPullbackHom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"5f3f7ffe3c0ed83d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned sheaf pullback constructions, manifold vector fields and general pullback adjunctions; none states smooth exchange for nearby cycles or the identity Psi-goodness assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth pullback commutes with sliced nearby cycles and identifies base change comparison cones for constant finite coefficients",
+   "results": "{\"t\": \"2026-10-17T16:18:51Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth pullback commutes with sliced nearby cycles and identifies base change comparison cones for constant finite coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_assoc\", \"PresheafOfModules.pullbackComp\"], \"digest\": \"d5f528a0fb3a5f53\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures; hits give pullback coherence, etale stability or Kaehler differential base change, not etale nearby-cycle exchange or Psi-goodness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology smooth base change identifies the derived direct image under an affine generization after pulling back along a smooth morphism",
+   "results": "{\"t\": \"2026-10-17T16:19:10Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomology smooth base change identifies the derived direct image under an affine generization after pulling back along a smooth morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\"], \"digest\": \"3d41c59f66f8f7be\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures; hits give pullback coherence, etale stability or Kaehler differential base change, not etale nearby-cycle exchange or Psi-goodness."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-orgogozo-good-modification",
@@ -78,5 +232,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nearby-smooth-source-exchange",
+  "worker": "stage1",
+  "summary": "Expanded smooth source exchange using the existing finite-coefficient derived smooth base-change theorem, checked the ordinary counit comparison square by mate pasting, and constructed the identity nearby-cycle isomorphism and its arbitrary base-change compatibility. No new nodes or statement changes.",
+  "blueprint": "lem-trf-local-term-locality, proof of (1) and (2), final paragraph: specialization to the normal cone; through trace specialization, external product and trait comparison, this realizes the smooth-locus and identity input to the Orgogozo modification argument.",
+  "tool_uses": [
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic Pullback of a constant sheaf interface used in the indicated proof step, with its stated hypotheses checked; the local-term unit supplies no replacement for this sheaf/cohomology/adjunction tool."
+   },
+   {
+    "node": "sbc-thm-bounded-derived-smooth-base-change",
+    "why": "The generic finite-ring smooth-exchange theorem applied to the affine generization leg in the slices; the Orgogozo smooth-locus argument requires precisely smooth exchange, and no local-term node proves this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact interface used in the indicated proof step, with its stated hypotheses checked; the local-term unit supplies no replacement for this sheaf/cohomology/adjunction tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-localization-exchange",
+    "why": "Generic Exchange along an etale morphism of the target is an isomorphism interface used in the indicated proof step, with its stated hypotheses checked; the local-term unit supplies no replacement for this sheaf/cohomology/adjunction tool."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic The derived exchange morphism commutes with forgetting the coefficient ring interface used in the indicated proof step, with its stated hypotheses checked; the local-term unit supplies no replacement for this sheaf/cohomology/adjunction tool."
+   },
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Generic A stalk is inverse image to a geometric point interface used in the indicated proof step, with its stated hypotheses checked; the local-term unit supplies no replacement for this sheaf/cohomology/adjunction tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic Strict henselizations at a geometric point and their functoriality interface used in the indicated proof step, with its stated hypotheses checked; the local-term unit supplies no replacement for this sheaf/cohomology/adjunction tool."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Generic Global sections over a strictly henselian local scheme are the stalk at the closed point interface used in the indicated proof step, with its stated hypotheses checked; the local-term unit supplies no replacement for this sheaf/cohomology/adjunction tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic Geometric stalks of a constant etale sheaf interface used in the indicated proof step, with its stated hypotheses checked; the local-term unit supplies no replacement for this sheaf/cohomology/adjunction tool."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "why": "Generic Etale cohomology of a strictly henselian local scheme vanishes in positive degrees interface used in the indicated proof step, with its stated hypotheses checked; the local-term unit supplies no replacement for this sheaf/cohomology/adjunction tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-constructible-pullback-constant",
+  "sbc-thm-bounded-derived-smooth-base-change",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-localization-exchange",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-kun-stalk-as-pullback",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-cbceac83d",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-cbceac83d (reviewer sub-agent of L); spot-checked: I read the whole item, the statements of all 23 cited nodes (including the blueprint_update texts), the parent's steps 9 and 10, the chapter and the unit sk-i-curve-zero. The source, Orgogozo Lemma 4.2, is not in the local literature, so its WANTED line stands and proof_origin=agent is correct. I cross-checked the vanishing-topos stalk description against ILO Exp. XI §4 (4.d/4.e, Prop. 4.4, Rem. 4.5). The statement is true and is not weakened. Edge cases checked: W empty, M=0, h=id, the nonproper smooth A^1 projection, identity base change, and a non-Noetherian S in the identity clause. Step 1: elementary qcqs, smoothness-under-base-change and constructibility checks are correct. Step 2: sbc-thm-bounded-derived-smooth-base-change matches with f=h_A smooth, g=j_Y affine hence qcqs, K=M in D^b_c, and N invertible on Y_A. Etale-localization-exchange with f=j_X and forget-coefficients (2),(3) are correct. Step 3: the mate-pasting cube is correct. Steps 5 and 6: the oriented-point formula with X=Y=S gives RGamma(S_(b),M)=M (strict henselization, germ and constant stalk, acyclicity, exactness on modules), and conservativity plus the adjunct-uniqueness argument for beta_q are correct. One E5 gap, which I repaired: step 4 took (C^f_T)_{x_T} from step 2, but step 2 identified only the objects Psi^f|_W and Psi^{f|W}. It never showed that the X-to-W restriction isomorphism commutes with the comparison arrows, which the cone identification needs. Step 3 now proves rho_T∘(beta_f|W)=beta_W∘u_W^*rho by the same mate pasting, since rho is an exchange morphism by the statement of lem-weil-pbc-etale-localization-exchange. It also notes that the slice squares are only commutative, so only the counit formula is used, and it now cites etale-localization-exchange. Step 4 cites this compatibility. proof_deps are unchanged and equal the union of the uses. There are no new nodes, no duplicates (I checked finiteness-exchange, strict-local-description and proper-source-exchange) and no cycle. The chapter route goes through sec-six-functors to sec-smooth-base-change. I accept the 10 declared generic tool_uses. No SGA is cited. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-nearby-smooth-source-exchange.json.; 1 file(s) fixed by the reviewer"
  }
 }

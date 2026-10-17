@@ -2,7 +2,7 @@
  "id": "def-trf-orgogozo-induction-data",
  "kind": "definition",
  "title": "Truncated universal nearby-cycle comparison and alteration geometry",
- "statement": "For a finite commutative ring $\\Lambda$, a scheme morphism $f:X\\to S$, and $K\\in D^b(X_{\\mathrm{Et}},\\Lambda)$, use the vanishing topos and ordinary comparison $\\beta$ of [def-trf-oriented-nearby-cycles]. For $r\\in\\mathbf Z$, write $P_r(f,K)$ if for every $T\\to S$ and every $T'\\to T$ the cone of the ordinary comparison for $(f_T,K_T)$ and $T'\\to T$ has $H^i=0$ for all $i\\le r$. Thus the quantifier includes comparisons after an arbitrary preliminary base change, and does not merely truncate the comparison over $S$.\n\nA modification of a reduced Noetherian scheme $S$ is a proper morphism $S'\\to S$ [def-weil-proper-morphism] which is an isomorphism over a dense open $U\\subset S$ and for which the inverse image of $U$ is dense in $S'$. An alteration is a proper surjective morphism, finite over a dense open of the target, all of whose irreducible components dominate irreducible components of the target. A semistable tower datum for this proof consists of an identity, or a finite tower of proper flat morphisms [def-weil-flat-morphism] whose geometric fibres are connected reduced curves with only ordinary double points, together with, for each factor, a chosen closed subscheme finite over its base [def-weil-closed-immersion, def-weil-finite-integral-morphism] whose complement is smooth [def-sbc-smooth-morphisms]. At a geometric ordinary double point the completed local ring of the fibre is $\\Omega[[u,v]]/(uv)$. An almost plurinodal datum here means a finite disjoint union of these semistable towers and a proper morphism with nowhere dense image. This is the proper tower data underlying the projective plurinodal morphisms supplied by the alteration theorem. Excellence of a scheme means excellence of every affine coordinate ring [def-exc-excellent-ring].",
+ "statement": "For a finite commutative ring $\\Lambda$, a scheme morphism $f:X\\to S$, and $K\\in D^b(X_{\\mathrm{Et}},\\Lambda)$, use the vanishing topos and ordinary comparison $\\beta$ of [def-trf-oriented-nearby-cycles]. For $r\\in\\mathbf Z$, write $P_r(f,K)$ if for every $T\\to S$ and every $T'\\to T$ the cone of the ordinary comparison for $(f_T,K_T)$ and $T'\\to T$ has $H^i=0$ for all $i\\le r$. Thus the quantifier includes comparisons after an arbitrary preliminary base change, and does not merely truncate the comparison over $S$.\n\nA modification of a reduced [def-pc-reduced-scheme] Noetherian scheme $S$ (quasi-compact and locally Noetherian [pqf-def-locnoeth]) is a proper morphism $S'\\to S$ [def-weil-proper-morphism] which is an isomorphism over a dense open subscheme $U\\subset S$ [def-weil-open-immersion], i.e. $S'\\times_SU\\to U$ is an isomorphism [def-pc-fibre-product], and for which the inverse image of $U$ is dense in $S'$. An alteration is a proper surjective morphism, finite over a dense open of the target, all of whose irreducible components [def-weil-irreducible-components] dominate irreducible components of the target. A semistable tower datum for this proof consists of an identity, or a finite tower of proper flat morphisms [def-weil-flat-morphism] whose geometric fibres [def-weil-geometric-fibre] are connected reduced curves (schemes of pure dimension one [def-weil-pure-dimension]) with only ordinary double points, together with, for each factor, a chosen closed subscheme finite over its base [def-weil-closed-immersion, def-weil-finite-integral-morphism] whose complement is smooth over that base [def-sbc-smooth-morphisms]. At a geometric ordinary double point the completion of the local ring of the fibre at its maximal ideal [def-weil-pbc-adic-completion] is $\\Omega[[u,v]]/(uv)$. An almost plurinodal datum here means a finite disjoint union of these semistable towers and a proper morphism with nowhere dense image. This is the proper tower data underlying the projective plurinodal morphisms supplied by the alteration theorem. Excellence of a scheme means excellence of every affine coordinate ring [def-exc-excellent-ring].",
  "source": {
   "document": "literature/orgogozo-modifications-cycles-proches.pdf",
   "place": "§§1, 3.1, 3.3, pp. 2, 5, 8--9 of the 28-page author PDF; universal truncated comparison and geometric terminology. Local archival PDF WANTED; author PDF read online.",
@@ -15,7 +15,15 @@
   "def-weil-flat-morphism",
   "def-weil-finite-integral-morphism",
   "def-weil-closed-immersion",
-  "def-sbc-smooth-morphisms"
+  "def-sbc-smooth-morphisms",
+  "pqf-def-locnoeth",
+  "def-pc-reduced-scheme",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-irreducible-components",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-adic-completion"
  ],
  "proof": [],
  "proof_deps": [],
@@ -58,7 +66,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-orgogozo-good-modification",
@@ -80,5 +88,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-trf-orgogozo-induction-data",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against Orgogozo §§1, 3.1 and 3.3 and the seven cited DAG definitions. The universal property P_r, modification, alteration, semistable tower, almost plurinodal datum and excellence clauses are all definition data, and every non-primitive notion used in them is supplied by an existing statement dependency. No child node is needed; no proof steps or proof dependencies apply to a definition.",
+  "blueprint": "Realizes the Orgogozo modification input to the trait nearby-cycle comparison: universal truncated comparison and the geometric terminology in §§1, 3.1 and 3.3, pp. 2, 5 and 8--9 of the author PDF.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-615a3391c",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-615a3391c (reviewer sub-agent of L); spot-checked: Read the whole item, its 7 stmt_deps, all 10 nodes that cite it, the unit sk-i-curve-zero and the blueprint ancestor. The delivery adds no new nodes; the item is a definition with no proof steps. Source: the Orgogozo IMRN 2006 PDF is not in literature/ and network access is blocked, so I could not read §§1, 3.1, 3.3 at the cited place (already WANTED, as in the Q28 review). I checked the geometric terms against the archived Illusie–Laszlo–Orgogozo (Travaux de Gabber) instead. Its alteration (proper, surjective, generically finite, maximally dominating; p.148) and nodal curve (proper flat, connected 1-dimensional geometric fibres, only ordinary quadratic points; IX p.131) match the item. Its R-Psi and base-change map (§4, (4.d)/(4.e)) agree with the comparison beta of def-trf-oriented-nearby-cycles. P_r: H^i(cone)=0 for i<=r means iso on H^i for i<=r and injective on H^{r+1}. P_r for all r is equivalent to Psi-good, by composing beta across T'->T->S. The double quantifier is genuinely needed: the octahedral axiom loses one degree, so truncation over S alone would not suffice. Checked against the citers: hyperdescent spectral-sequence bookkeeping, including the r=-1 case with K in D^{>=0}; closed image; finite descent; proper exchange; spread-out. Edge cases: identity modification and identity tower, Lambda=0, r<<0. No hidden existence claim and no duplicate definition in the DAG. Base change is the Cartesian square over T'->T with constant finite Lambda on small étale topoi; no target node involved. No SGA, no tool_uses. FIX (B3, missing citations, one fault): reduced, Noetherian, isomorphism over U, irreducible components, geometric fibres, curve (pure dimension 1) and completed local ring had no citation. Added pqf-def-locnoeth, def-pc-reduced-scheme, def-weil-open-immersion, def-pc-fibre-product, def-weil-irreducible-components, def-weil-geometric-fibre, def-weil-pure-dimension and def-weil-pbc-adic-completion, inline and in stmt_deps. Also made 'complement is smooth' read 'smooth over that base'. None of the 8 is merged and none cites the item, so no cycle; meaning unchanged. Corrected file: fixes/dag/nodes/sec-trace-formula/def-trf-orgogozo-induction-data.json; details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
