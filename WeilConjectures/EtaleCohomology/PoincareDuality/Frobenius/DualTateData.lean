@@ -170,7 +170,8 @@ Weil datum `φ : Lg^* K ≅ K`, the Frobenius `F_{K^∨}` being that of the cont
 `def-pod-dual-tate-datum`, whose equivariance is supplied by
 `prop-pod-dual-tate-data-compatibility`
 (`AlgebraicGeometry.Etale.isWeilPairing_coefficientEvaluation`). -/
-theorem untwistedDegreewisePoincarePairing_frobeniusOperator_of_iso (sq : IsPullback g a a h)
+theorem untwistedDegreewisePoincarePairing_frobeniusOperator_of_iso [HasInvertibleExponent Λ X]
+    [HasInvertibleExponent Λ Y] (sq : IsPullback g a a h)
     (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
     (τ : (L((h)^*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ Y (-d)) ⟶ tateObject Λ Y (-d))

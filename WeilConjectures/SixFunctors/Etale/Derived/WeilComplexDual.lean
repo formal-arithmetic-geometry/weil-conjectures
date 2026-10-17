@@ -118,8 +118,8 @@ The Weil structure of the dual strict Weil complex is the contragredient datum `
 theorem coefficientDual_frobenius_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (coefficientDual aX K).frobenius.hom.hom =
       contragredientWeilDatum _ g.hom ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) := by
-  rw [coefficientDual, internalHom_obj_obj_frobenius, internalHomFrobenius_hom_hom,
-    contragredientWeilDatum, unit_frobenius_hom_hom]
+  refine (internalHomFrobenius_hom_hom aX K (unit Λ g)).trans ?_
+  rw [unit_frobenius_hom_hom, contragredientWeilDatum]
   exact congrArg (leftDerivedUpperStarDerivedHomComparison _ g.hom K.obj.obj (𝟙_ _) ≫ ·)
     ((RHom(X)[ModuleCat.{u + 1} Λ].map K.frobenius.inv.hom.op).naturality
       (leftDerivedUpperStarUnitIso _ g.hom).hom).symm
@@ -133,7 +133,7 @@ and `(K^∨, φ_{K^∨})` to the unit strict Weil complex. -/
 noncomputable def coefficientEvaluation (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     ((tensor Λ g).obj K).obj (coefficientDual aX K) ⟶ unit Λ g where
   hom := ObjectProperty.homMk (DerivedCategory.coefficientEvaluation K.obj.obj)
-  comm := ObjectProperty.hom_ext <| by
+  comm := ObjectProperty.hom_ext _ <| by
     rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
       ObjectProperty.homMk_hom, DerivedCategoryFiniteTor.leftDerivedUpperStar_map_hom,
       ObjectProperty.homMk_hom, tensor_obj_obj_frobenius, tensorFrobenius_hom_hom,
@@ -166,8 +166,8 @@ theorem twistedCoefficientDual_frobenius_hom_hom (K T : WeilComplex (ModuleCat.{
           (contragredientWeilDatum _ g.hom ((DerivedCategoryFiniteTor.ι _ X).mapIso
             K.frobenius))).app _ ≫
           ((derivedTensor _ X).obj _).map T.frobenius.hom.hom := by
-  rw [twistedCoefficientDual, tensor_obj_obj_frobenius, tensorFrobenius_hom_hom,
-    coefficientDual_frobenius_hom_hom]
+  refine (tensorFrobenius_hom_hom (coefficientDual aX K) T).trans ?_
+  rw [coefficientDual_frobenius_hom_hom]
   rfl
 
 /-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data.
@@ -180,7 +180,7 @@ and the twisted dual (`AlgebraicGeometry.Etale.WeilComplex.twistedCoefficientDua
 noncomputable def twistedEvaluation (K T : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     ((tensor Λ g).obj K).obj (twistedCoefficientDual aX K T) ⟶ T where
   hom := ObjectProperty.homMk (Etale.twistedEvaluation T.obj.obj K.obj.obj)
-  comm := ObjectProperty.hom_ext <| by
+  comm := ObjectProperty.hom_ext _ <| by
     rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
       ObjectProperty.homMk_hom, DerivedCategoryFiniteTor.leftDerivedUpperStar_map_hom,
       ObjectProperty.homMk_hom, tensor_obj_obj_frobenius, tensorFrobenius_hom_hom,
