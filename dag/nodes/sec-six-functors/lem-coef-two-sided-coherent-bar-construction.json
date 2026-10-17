@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Coherent two-sided bar from a bimodule and a left module.",
+   "place": "Proof, second paragraph, displayed derived-Hom calculation, middle isomorphism $R\\varprojlim_n R\\operatorname{Hom}_{Y,A_n}(Rf_{!,n}K_n,L_n)\\cong R\\varprojlim_n R\\operatorname{Hom}_{X,A_n}(K_n,Rf_n^!L_n)$, and the following sentence \"Hence this calculation defines the adjunction and its specified maps\". The via chain supplies a coherent realization of that finite-coefficient adjunction; this item is its two-sided-bar foundation through lem-coef-infinity-free-module-bar. The ancestor does not explicitly discuss bars or regular words.",
    "via": [
     "lem-coef-infinity-free-module-bar",
     "lem-coef-infinity-monadic-bar",
@@ -98,15 +98,60 @@
    }
   },
   {
-   "text": "The restriction equivalence of [lem-coef-composable-bimodule-operad-segal] retains full coherent maps of both input modules. Applying the transport and mapping-space factorization of [lem-coef-infinity-pointwise-cocartesian-transport] with these parameter simplices, or jointly on their products with the small word category, makes the construction and augmentation natural in $P,Q$. Parenthesizing tensor products in stages is successive transport; its comparison with one total contraction is the cited transport-composition coherence. An inserted unit block is the nullary operation, and composing it with its neighbouring block gives the original operation by the operadic unit law. Consequently every further substitution has the same comparison simplex; this proves compatibility with insertion and removal of unit blocks, not just the degeneracy identities. For the regular specialization $B=A$ and $P=A$ with both actions given by multiplication, the unit insertion before this first factor after forgetting its left action has the following explicit extension. Take the category of words $a_1^kq$, $k\\geq0$, with all allowed block maps over endpoint-preserving interval maps retaining the final $q$. Restrict $F_0$ to these words, and apply the cited transport theorem to their total contractions to $m$, composed with the specified base equivalence from step 2. On $a_1^kq$ this evaluates to $A^{\\otimes k}\\otimes U_AQ$. A map from the word of length $k+1$ to the word of length $k+2$ has opposite interval map $h:[k+2]\\to[k+1]$ given by $h(0)=h(1)=0$ and $h(j)=j-1$ for $2\\leq j\\leq k+2$; its first output block is empty, so its evaluation is the leading unit insertion. Identifying the regular word $p a_1^nq$ with $a_1^{n+1}q$ identifies its operations with this restriction, since both actions on the regular factor are multiplication. Every string involving the leading insertion is now a simplex of this one word category; the coherent $F_0$ and transport provide its compatibility with all contractions. This extension is in $\\mathcal M$ after forgetting the external action; no linearity of the leading-unit map is asserted. All constructions used only the given operations and cocartesian transport.",
+   "text": "The equivalence in [lem-coef-composable-bimodule-operad-segal] is an equivalence of infinity-categories of input structures, including their coherent maps. Represent a parameter simplex by its family over a small simplicial set $T$, and apply [lem-coef-infinity-pointwise-cocartesian-transport] once with index $T\\times N(\\mathsf{Pre})$, where $\\mathsf{Pre}$ is the prefix-word category of step 5. Its constant-output fiber is $\\operatorname{Fun}(T\\times N(\\mathsf{Pre}),\\mathcal M)$. Restricting this lifted transformation to any face, degeneracy or vertex of $T$ again has cocartesian vertex components, so is the transport of that restricted input family by the pointwise criterion. Restricting further to zero-prefix words gives the asserted family of bars. The same restriction of the mapping-space factorization in step 6 gives its family of augmentations. Thus the construction retains every input-map simplex and is natural in $P,Q$ and the specified balanced pairing.",
    "uses": [
     "lem-coef-composable-bimodule-operad-segal",
     "lem-coef-infinity-pointwise-cocartesian-transport"
    ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7, applied to parameterized input families; restriction of a coherent diagram and the pointwise criterion."
+   }
+  },
+  {
+   "text": "For two consecutive word substitutions, apply the composition clause of [lem-coef-infinity-pointwise-cocartesian-transport]: successive transports agree coherently with transport along their composite, compatibly with the precomposition maps used in step 6. Repeating this clause for a finite string gives the same specified coherent comparisons. Staged parenthesizations are these successive transports, so this supplies the asserted compatibility with total ordered-word contraction.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7; direct specialization of coherent transport composition."
+   }
+  },
+  {
+   "text": "In the operator category of [lem-coef-composable-bimodule-operad-segal], an empty algebra block is its nullary operation. Inserting it and then contracting it with a neighbouring block substitutes that nullary operation into the multiplication or module action, yielding the original operation: the permitted operation set is a singleton and substitution is unital. Apply the coherent functor $F_0$ to this equality and to strings containing it. The composition comparison of [lem-coef-infinity-pointwise-cocartesian-transport] identifies evaluation by those substitutions with evaluation by total contraction. Hence adding and removing unit blocks gives the asserted unit comparison with all further substitution coherences.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Constructions 4.2.2.6 and 4.4.2.7; nullary operations, operadic substitution, and transport composition."
+   }
+  },
+  {
+   "text": "In the specialization $B=A$, $P=A$ with both actions multiplication, the regular lift constructed in step 2 satisfies the hypotheses of [lem-coef-two-sided-bar-leading-unit-extension]. That node evaluates the restricted word $a_1^kq$ as $A^{\\otimes k}\\otimes U_AQ$ and evaluates the opposite interval map $h(0)=h(1)=0$, $h(j)=j-1$ for $j\\ge2$, as $\\eta_A\\otimes\\operatorname{id}$ in $\\mathcal M$ after forgetting the external action.",
+   "uses": [
+    "lem-coef-two-sided-bar-leading-unit-extension"
+   ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
-    "place": "Construction 4.2.2.6 and Example 4.7.2.7, ordered words and nullary operations; Construction 4.4.2.7, coherent transport."
+    "place": "Higher Algebra, Construction 4.4.2.7 and action-valued Example 4.4.2.12, regular leading-unit specialization."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-two-sided-bar-regular-word-identification] to the same regular lift: the regular bimodule $P=A$ of step 2 is the algebra $A$ restricted along $\\mathsf{BM}_{01}\\to\\mathsf{Ass}_1$ (all three colours to $a_1$), which is that node's hypothesis. Relabelling $p$ as the first $a_1$ gives the functor $r:R\\to W$, and its evaluated comparison identifies the regular bar diagram $Y$ with $X\\circ N(r)$, coherently for all strings in $R$. The larger diagram $X$ also evaluates strings in $W$ containing a leading-unit insertion, as in step 10. Thus $X$ extends the regular bar evaluation to those strings. This comparison takes place in $\\mathcal M$ after forgetting the external left action; it does not assert that a leading insertion lies in the image of $r$ or is $A$-linear.",
+   "uses": [
+    "lem-coef-two-sided-bar-regular-word-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, Construction 4.4.2.7 and Example 4.4.2.12, regular-word identification."
    }
   }
  ],
@@ -114,7 +159,9 @@
   "lem-coef-cocartesian-straightening",
   "def-coef-monoidal-infinity-category",
   "lem-coef-composable-bimodule-operad-segal",
-  "lem-coef-infinity-pointwise-cocartesian-transport"
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-two-sided-bar-leading-unit-extension",
+  "lem-coef-two-sided-bar-regular-word-identification"
  ],
  "proof_origin": {
   "by": "agent",
@@ -222,7 +269,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-free-module-bar",
@@ -235,17 +282,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-two-sided-coherent-bar-construction",
   "worker": "stage1",
-  "summary": "Seven-step construction through the planar operator word category, operadic Segal gluing, and existing pointwise cocartesian transport. Explicit consecutive-block maps construct the entire simplicial index functor; prefix algebra words retain B-linearity, and the mapping-space transport property produces the specified balanced augmentation. New statement-only lemma isolates operadic gluing, with no bar or realization assertion. Avoided the presentably monoidal active-slice free-algebra formula, whose hypotheses do not apply here. No statement change. Second reading makes the homotopy-fiber base identification explicit and constructs the regular leading-unit extension on the enlarged word category.",
-  "blueprint": "Supports prop-coef-integral-exceptional-adjoint, proof paragraph 2, middle mapping-complex adjunction, through the recorded free-module-bar ancestry. Steps 1-2 encode the given action and pair of modules; steps 3-5 prove the whole coherent two-sided word bar and explicit generators; step 6 proves the balanced augmentation; step 7 proves naturality and unit-word compatibility.",
+  "summary": "Repair of C5 and B9 at returned head e87e6e7a5b: removed the three unneeded parameter, total-contraction and nullary-unit helper nodes from the proposed delivery. Steps 7–9 now give the short arguments directly using the existing operad and pointwise transport statements. Retained the two regular-word supporting nodes and their statements/searches. Replaced fabricated ancestor clauses on the item and those two nodes with the actual displayed finite-coefficient derived-Hom adjunction and its following sentence, explaining the supporting via chain. Statement, Lean record and steps 1–6 are unchanged; every step is under 2000 characters.",
+  "blueprint": "Proof, second paragraph, displayed derived-Hom calculation, middle isomorphism $R\\varprojlim_n R\\operatorname{Hom}_{Y,A_n}(Rf_{!,n}K_n,L_n)\\cong R\\varprojlim_n R\\operatorname{Hom}_{X,A_n}(K_n,Rf_n^!L_n)$, and the following sentence \"Hence this calculation defines the adjunction and its specified maps\". The recorded via chain expands the coherent finite adjunction through monadic bar resolutions. Steps 1–6 construct the action-valued bar and balanced augmentation; steps 7–9 specialize existing functoriality, composition and unit substitution; steps 10–11 cite the two regular-word supporting comparisons. These are foundational refinements below the ancestor, not extra clauses attributed to its text.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q43-6313ae95c",
-  "group": "Q43",
+  "reviewer": "NT-cc-Q119-80c13a9f0",
+  "group": "Q119",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-6313ae95c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-composable-bimodule-operad-segal, all four cited statements, the parent lem-coef-infinity-free-module-bar and unit sk-prop-sf-biduality-general in full. Source checked in Higher Algebra (2017): Def 4.4.1.1, Not 4.4.1.9-10, Prop 4.4.1.11, Prop 4.4.1.17, Def 4.3.1.1 (BM has no nullary operations into m), Rem 4.4.2.2, Not 4.4.2.4, Constr 4.4.2.7, Thm 4.4.2.8 (not used) and Ex 4.4.2.11-12. Item statement, stmt_deps and blueprint are unchanged from the side DAG. It is not a target, so no base-change morphism or coefficient check applies. Step 1: straightening gives the operadic target, and the mapping-space product comes from the homotopy-pullback square. Step 2: the colour map g (a0,a1,p to v, q to m, a2 to t) equals the retraction of HA Ex 4.4.2.12. Step 3: I recomputed the interval formula (0 to 0, j+1 to f(j)+1, m+2 to n+2); its blocks agree with HA Not 4.4.2.4, and marking the step elementary is correct. Step 4: every hypothesis of pointwise cocartesian transport holds, with K = N(Delta^op) and gamma = beta composed with the equivalence qF0w ~ gw; this is HA Constr 4.4.2.7. Step 5: the B-action comes from prefix words a0^r p a1^n q; d0, di, dn and si (s0 included) check out. It relies on the DAG's shared informal meaning of LMod_B, noted for stage 2 but not a fault. Step 6: the augmentation follows from the mapping-space fibre formula and the given balanced, B-linear pairing. Step 7: naturality, unit blocks and the leading-unit map h(0)=h(1)=0, h(j)=j-1 are checked. The new node is a true planar form of HA 4.4.1.11 / Rem 4.4.2.2: its operations match Def 4.4.1.1 with no p,q composite and no nullary operations into p or q. It is statement-only, self-contained and searched in Mathlib with four kinds of search. It is not a restatement of an item clause and does not duplicate any of the seven operad and bar nodes I opened. Route: every cited node is in the item's unit; tool_uses is empty; no cycle; no SGA. HA is cited by URL with a WANTED recorded, as in about 50 other nodes. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-80c13a9f0 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full: composable-bimodule-operad-segal, pointwise-cocartesian-transport, cocartesian-straightening, monoidal-infinity-category and coherent-bar-word-data. Also read the parent free-module-bar (steps 4-6), the unit and chapter records, and the ancestor prop-coef-integral-exceptional-adjoint. Its proof, second paragraph, has the displayed calculation with the middle isomorphism, followed by 'Hence this calculation defines the adjunction and its specified maps'. That place exists, so B9 is repaired, and the via chains are consistent. Higher Algebra is not archived and I could not open the PDF. Construction 4.4.2.7, Example 4.4.2.12 and Construction 4.2.2.6 are the right places as far as I know the 2017 numbering; only the construction is claimed, not Theorem 4.4.2.8. The item statement, its Lean record and steps 1-6 are unchanged. Steps 7-9 inline the three removed helpers as genuine short specializations of the transport and operad statements, which settles C5. I recomputed the step-3 interval formula and the leading-unit map h(0)=h(1)=0, h(j)=j-1: its first output block is empty, so it evaluates to eta tensor id. Edge cases checked: k=0 (Q to A tensor Q); n=0 and n=1 for the relabelling r: R to W; leading insertions are not in the image of r. No duplicates: checked the extra-degeneracy, split-coproduct-bar, word-path, coherent-bar-word-data and module-section nodes, plus an rg search of dag/nodes. All cited nodes are in the item's unit, so tool_uses is empty and no tool use needs accepting. No SGA, no cycle; the item is not a target, so no base-change or coefficient check applies. Three fixes written: (1) regular-word-identification had a vague 'regular lift' hypothesis under which the coherent comparison could fail. It now says F restricted to BM_01 is the algebra A pulled back along the operad map BM_01 to Ass_1 that sends a0, p, a1 to a1. I also removed its unused stmt_dep on the leading-unit lemma and replaced its redundant last sentence. (2) leading-unit-extension: the same precise phrase replaces its vague sentence about the regular identification. (3) Item: in step 7 the prefix-word category is renamed Pre, because steps 10-11 use W for another category; step 11 now says why the regular bimodule meets the hypothesis. Note for the maintainer: the item statement has no regular leading-unit clause, and the parent free-module-bar step 5 relies on it. That parent step should later cite the two new nodes directly.; 3 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

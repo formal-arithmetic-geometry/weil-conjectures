@@ -11,9 +11,65 @@
   "def-coef-zigzag-homotopy-calculus",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The poset $\\mathcal F_x(T)$ is small because it is a collection of subsets of the small vertex set of $T$. It is nonempty because it contains the singleton subtree $\\{x\\}$. Given finite connected subtrees $S_1,\\ldots,S_r$ containing $x$, take the union of the finitely many unique finite paths in $T$ joining $x$ to every vertex of every $S_i$. This union is a finite connected subtree containing all $S_i$, hence an upper bound. For a pair of inclusions there is at most one morphism, and inclusions are equalized automatically; therefore this nonempty poset is filtered in the sense of [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), finite-subdiagram reduction; finite connected support in a tree made explicit."
+   }
+  },
+  {
+   "text": "An $n$-simplex of $NZ_w^{C_T}(x,x)$ is a string of $n$ composable morphisms in the zigzag category [def-coef-zigzag-homotopy-calculus]. Each morphism contains finitely many diagram vertices, finitely many vertical arrows, and finitely many finite path words in $T$; the fixed zigzag word contributes only finitely many horizontal positions. Hence the whole string uses a finite set of vertices and edges of $T$. Adjoin to that finite support all vertices and edges on the unique finite paths from $x$ to its vertices. The result is a finite connected subtree $S$ containing $x$. Every path word and every commuting square in the simplex lies in the free path category $C_S$, so the simplex is the image of an $n$-simplex of $NZ_w^{C_S}(x,x)$. This also covers identity horizontal arrows, whose support is empty.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), reduction of a finite zigzag diagram to a finite subdiagram."
+   }
+  },
+  {
+   "text": "For every inclusion $S\\subseteq S'$ in $\\mathcal F_x(T)$, the induced map $C_S\\to C_{S'}$ is injective on vertices and on finite directed edge words, hence on each object and morphism set of the fixed-word zigzag categories; applying the ordinary nerve gives a degreewise injective map. Thus the maps form a diagram of simplicial sets and the canonical map from its degreewise colimit is defined. If two simplices from $S$ and $S'$ have the same image in $NZ_w^{C_T}(x,x)$, their finitely many data can be placed in one finite connected subtree $U$ containing $x$ and containing both $S$ and $S'$ (take the finite union of paths from $x$ to the vertices of $S\\cup S'$). The two images in $NZ_w^{C_U}(x,x)$ are then equal because the inclusion into $C_T$ is injective on all finite path words and commuting diagrams. By the equality clause of [lem-coef-small-set-colimit-quotient], these are exactly the identifications made in the degreewise colimit.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-small-set-colimit-quotient",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), compatibility of finite subdiagram inclusions; finite support comparison."
+   }
+  },
+  {
+   "text": "Fix $n$. Step 2 proves surjectivity of the canonical degree-$n$ map: every $n$-simplex of the target comes from some finite subtree. Step 3 proves injectivity: two representatives have equal images exactly when they agree after passage to a common upper subtree, which is the equivalence relation presented by the set colimit quotient [lem-coef-small-set-colimit-quotient]. Therefore the degree-$n$ map is a bijection for every $n$. The bijections commute with every simplicial face and degeneracy, since all structure maps are induced by restriction of the same nerve operations and the colimit cocone maps. Consequently the canonical map of simplicial sets is an isomorphism. The construction is the finite-subtree colimit formulation of the finite-diagram reduction in Dwyer--Kan Section 5.8(iii).",
+   "uses": [
+    "lem-coef-small-set-colimit-quotient",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), finite diagrams suffice; agent-explicit degreewise colimit argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-zigzag-homotopy-calculus",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-small-set-colimit-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Section 5.8(iii), finite-diagram reduction; finite-subtree degreewise colimit argument expanded by the agent."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-factor-hammock-comparison",
@@ -79,5 +135,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-tree-zigzag-finite-subtree-colimit",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against Dwyer--Kan Section 5.8(iii), the item dependencies, the whole DAG, and both read-only Lean source trees; no finished project declaration or duplicate blueprint node exists. The proof is split into filteredness of finite connected subtrees, finite support of every nerve simplex, injectivity/equality after passage to a common subtree, and the resulting degreewise bijection. The existing set-colimit quotient node supplies the representative and equality clauses; no new node is needed.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint, proof paragraph 2: the fixed-word tree contraction reduces to finite diagrams, made explicit as the finite-subtree colimit presentation (Dwyer--Kan Section 5.8(iii))."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-cdb1a2cbf",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-cdb1a2cbf (reviewer sub-agent of L); spot-checked: I read the whole item, every cited statement (def-coef-zigzag-homotopy-calculus, def-weil-pbc-category-colimit, lem-coef-small-set-colimit-quotient), all 8 steps of the citer lem-coef-free-factor-hammock-comparison (its step 5 uses exactly this statement), and Dwyer–Kan, Calculating simplicial localizations §5.8(iii), p.25 ('one may clearly assume that W has only a finite number of generators'). The item states that 'clearly' precisely, and proof_origin.by=agent is correct. The statement is true. W=C_T, so + and +_W coincide. C_T is thin because tree paths are unique, so C_S->C_T is injective on objects and morphisms (in fact full). I tested it on the singleton tree, the empty word, an infinite ray with w='-+', and an infinite star with w='+-'. Step 1: the poset is small, nonempty and has upper bounds (the union of the S_i); it is correctly marked elementary. Step 2: every simplex has finite support, and a path u->v lies in the union of the paths x-u and x-v, which is in S, so the simplex comes from C_S. Step 3: functors injective on objects and morphisms give degreewise injective nerve maps; equal images are identified in U containing S and S', and the equality clause of the quotient lemma gives equality in the colimit. Step 4: the degreewise bijection commutes with faces and degeneracies, so it is an isomorphism of simplicial sets. proof_deps equals the union of the uses, and the stmt_deps are both used. Route: same unit as the citer; only definitions and a same-unit Mathlib leaf are cited, so no tool_uses are needed. The blueprint via chain is the citer's chain with the citer in front, and same_as=[]. My rg search of dag/nodes found no duplicate. No new nodes, no SGA, no fixes. One harmless slip: the report lists a citations.json that is not in the commit. DK is cited by URL rather than from literature/, as in 34 existing nodes; I read it at the cited place."
  }
 }

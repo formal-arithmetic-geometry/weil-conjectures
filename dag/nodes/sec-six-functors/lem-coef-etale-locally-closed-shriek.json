@@ -20,9 +20,201 @@
   "lem-coef-finite-direct-image",
   "lem-coef-etale-open-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $u:V=X\\setminus g(Z)\\hookrightarrow X$ for the complementary open, reserving $j$ for $S\\hookrightarrow Z$. On an affine $\\operatorname{Spec}R\\subset X$, the intersection with $Z$ is $\\operatorname{Spec}(R/I)$, so $Z$ is finite type over $k$. Both $X$ and $Z$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and their open subschemes are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. All these open immersions are quasi-compact: their inverse images in affine opens are opens in Noetherian spaces. Hence $u$ and $j$ are finite type by [lem-weil-pbc-qc-open-immersion-finite-type]; they are separated since their diagonals are identities. Thus $V,S,Z$ are separated finite-type $k$-schemes. The rings $A,B$ are finite by [def-weil-l-adic-coefficient-extension]. Moreover $B$ is a finite $A$-module, being a quotient of $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 3: hypotheses for the closed-support route; Stacks 01T6 and the affine quotient description"
+   }
+  },
+  {
+   "text": "Choose a nonnegative finite cohomological-dimension bound $c$ for $Ru_*$ using [lem-etale-finite-type-sep-closed-derived-dimension], increasing its integer bound to its maximum with zero. Its hypotheses hold because $k$ is algebraically closed and the additive group of $A$ is torsion. Every constructible $A$-module sheaf $H$ on $V$ has bounded constructible $Ru_*H$ by [sbc-thm-finiteness-finite-type]. The prime-to-characteristic hypothesis holds: by clause (5) of [lem-weil-l-adic-extension-integers-dvr], in the DVR $\\mathcal O_E$ write $\\ell=v\\varpi_E^e$ with $v$ a unit and $e\\ge1$; for $er\\ge n$ the integer $\\ell^r$ annihilates $A$ and is invertible in $k$. In particular all $R^qu_*H$ are constructible. Choose a Tor interval $[a,b]$ for $M$. Apply [prop-exc-closed-tor] to $g,u,A,M,c$. It proves that $N=Rg_A^!M$ is bounded constructible of Tor amplitude $[a,b+c+1]$. This is the ambient ordinary étale adjoint in that node, with no pro-étale replacement.",
+   "uses": [
+    "lem-etale-finite-type-sep-closed-derived-dimension",
+    "sbc-thm-finiteness-finite-type",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "prop-exc-closed-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 3, finite-Tor closed exceptional restriction; Stacks 0F10 and the cited closed-support Tor theorem"
+   }
+  },
+  {
+   "text": "We need the étale restrictions $u^*M$ and $j^*N$ to be in $D^b_{ctf}$. Inverse image on constant-ring module sheaves is exact by [prop-weil-pbc-inverse-image-modules-exact]. It commutes with cohomology, and constructibility of the underlying sheaves is preserved by [prop-constructible-pullback]. For the Tor condition take a bounded flat model using the explicit small-étale clause of [lem-sf-flat-model]. This model is K-flat by [lem-weil-pbc-independent-bounded-flat-kflat]. The ringed-topos pullback of this model has flat terms and is K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; inverse image is this module pullback because the coefficient ring is constant. It remains in the same finite range. Tensoring this flat model with any degree-zero module sheaf computes derived tensor and has terms only in that range. This gives the required Tor bound, for $u^*M$ and for $j^*N$. The same pullback/tensor comparison, or the open-restriction comparison of [lem-coef-etale-open-tensor], supplies the natural scalar identification $F_Vu^*\\cong u^*F_X$ and $F_Sj^*\\cong j^*F_Z$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-constructible-pullback",
+    "lem-sf-flat-model",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 3, restriction to the stratum; small-étale flat-model argument and Stacks 07A4/0G7E"
+   }
+  },
+  {
+   "text": "For either coefficient ring, $g_*$ is exact and fully faithful on the ordinary derived categories. Here is the passage from sheaves to complexes used below. The closed-support equivalence [lem-kun-04ca] is fully faithful and has left inverse $g^*$ on abelian sheaves. It lifts to constant-ring module sheaves by transporting each scalar endomorphism; faithfulness transports the ring-action equations and detects linearity of morphisms. The natural stalk formula [lemma-openclosed-stalk-lowerstar] gives the original stalk on $Z$; off $Z$ the stalk is zero by the essential-image clause of [lem-kun-04ca]. Exactness of stalks [prop-weil-pbc-geometric-stalks-exact] and their conservativity [lemma-weil-pbc-geometric-stalk-conservative] therefore show $g_*$ is exact on module sheaves. The exact $g^*$ of [prop-weil-pbc-inverse-image-modules-exact] and $g_*$ descend termwise, together with their adjunction and invertible counit $g^*g_*\\cong1$. Indeed the termwise unit, counit and triangle identities descend along localization. This proves derived full faithfulness. In particular $g_*$ reflects isomorphisms, and for $L$ in its image the map $\\operatorname{Hom}(L,g_*Rg^!T)\\to\\operatorname{Hom}(L,T)$ induced by the exceptional counit is bijective: write $L=g_*Q$ and use full faithfulness and $g_*\\dashv Rg^!$ from [lem-exc-closed-ambient].",
+   "uses": [
+    "lem-kun-04ca",
+    "lemma-openclosed-stalk-lowerstar",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-exc-closed-ambient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks 04CA (proposition-closed-immersion-pushforward), 04FX and 03PU; module and derived passage written out"
+   }
+  },
+  {
+   "text": "By [lem-coef-finite-direct-image], applied only to its ordinary étale clause, there are natural isomorphisms $c_{u,u^*M}:F_XRu_{*,A}u^*M\\cong Ru_{*,B}F_Vu^*M$ and $c_{g,N}:F_Xg_{*,A}N\\cong g_{*,B}F_ZN$. All their inputs are bounded constructible finite-Tor by Steps 2–3, and the geometric and coefficient hypotheses were checked in Step 1. Put $d=Ru_{*,B}(F_Vu^*M\\cong u^*F_XM)\\circ c_{u,u^*M}$. This is the isomorphism on the third terms of the two closed-support triangles. The definition of $c$ here is exactly the inverse-image/direct-image counit transpose required in the statement, not an arbitrary projection-formula isomorphism.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 3: move finite coefficient change through the complementary open direct image"
+   }
+  },
+  {
+   "text": "Let $\\eta_A:M\\to Ru_{*,A}u^*M$ and $\\eta_B:F_XM\\to Ru_{*,B}u^*F_XM$ be the ordinary units. Then $d\\circ F_X\\eta_A=\\eta_B$. To check this equality, transpose both maps by $u^*\\dashv Ru_{*,B}$. By the defining counit normalization of [lem-coef-finite-direct-image], the transpose of the left side, under the open scalar identifications of [lem-coef-etale-open-tensor], is $F_V(\\varepsilon^A_{u,u^*M}\\circ u^*\\eta_A)=F_V(1_{u^*M})$. This is the identity by the adjunction triangle identity. The transpose of $\\eta_B$ is also the identity. The Hom bijection therefore gives the displayed equality. This calculation is in $B$-module derived categories even when $B$ is not flat over $A$.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 3, normalization of the open-unit square; adjunction transpose expanded"
+   }
+  },
+  {
+   "text": "Use [lem-exc-closed-support-triangle] over $A$ at $M$ and over $B$ at $F_XM$. Apply the exact triangulated scalar functor [lem-pur-derived-change-of-rings] to the first triangle, obtaining $F_Xg_*N\\to F_XM\\to F_XRu_*u^*M\\to$. The second triangle is $g_{*,B}Rg_B^!F_XM\\to F_XM\\to Ru_{*,B}u^*F_XM\\to$. Step 6 gives a square on the middle and third terms with maps $1$ and $d$. Rotate both distinguished triangles and apply TR3 of [def-weil-triangulated-category], then rotate back. It supplies a first map $t:F_Xg_*N\\to g_{*,B}Rg_B^!F_XM$ and a morphism of triangles $(t,1,d)$. Since $1$ and $d$ are isomorphisms, [lem-sf-triangle-morphism-iso] implies that $t$ is an isomorphism. Its first square says $\\varepsilon_{g,B,F_XM}\\circ t=F_X\\varepsilon_{g,A,M}$.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks 0A45 (lemma-cohomology-with-support-triangle), rotation/TR3, and 014A (lemma-third-isomorphism-triangle)"
+   }
+  },
+  {
+   "text": "By the adjoint definition of $b=b_{g,M}$ in the statement, $\\varepsilon_{g,B,F_XM}\\circ g_{*,B}b\\circ c_{g,N}=F_X\\varepsilon_{g,A,M}$. Thus $t$ and $g_{*,B}b\\circ c_{g,N}$ have the same composite with the exceptional counit. Their source is $F_Xg_*N\\cong g_{*,B}F_ZN$, in the image of the fully faithful closed direct image. The bijection proved in Step 4 makes the two maps equal. Since $t$ and $c_{g,N}$ are isomorphisms, so is $g_{*,B}b$, and reflection from Step 4 proves that $b$ is an isomorphism. No uniqueness of arbitrary cone completions was assumed. Naturality of $b$ follows by transposing the natural transformation $F_X\\varepsilon_{g,A}\\circ c_g^{-1}$ through the natural Hom bijection of [lem-exc-closed-ambient], using naturality of $c_g$ from [lem-coef-finite-direct-image].",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 3: identify the support-triangle comparison with the specified exceptional transpose"
+   }
+  },
+  {
+   "text": "For $P\\in D^b_{ctf}(S_{\\mathrm{et}},A)$, the complex $j_!P$ is bounded constructible by [lem-weil-pbc-extension-by-zero-exact] and [lem-fin-extension-by-zero]: its cohomology is $j_!\\mathcal H^r(P)$. For a degree-zero module sheaf $H$ on $Z$, [lem-coef-etale-open-tensor] identifies $j_!P\\otimes_A^LH$ with $j_!(P\\otimes_A^Lj^*H)$. Exactness of restriction and of $j_!$ gives the same finite Tor bound as for $P$. Hence [lem-coef-finite-direct-image] applies to $g$ at $j_!P$. Its $c_{g,j_!P}$ followed by $g_{*,B}q_{j,P}$ is the natural isomorphism $q_{s,P}$ of the statement. Also $b_{s,M}$ is the restriction of the isomorphism of Step 8 after the scalar/restriction identification of [lem-coef-etale-open-tensor], so it is a natural isomorphism. Step 3 already proved that its $A$-source before coefficient change is bounded constructible finite-Tor.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-fin-extension-by-zero",
+    "lem-coef-etale-open-tensor",
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 4, extension by zero and compact-support coefficient identification; Stacks 03DJ and constructible extension by zero"
+   }
+  },
+  {
+   "text": "The closed adjunction of [lem-exc-closed-ambient] and the derived open adjunction, with its degreewise counit normalization in [lem-coef-etale-open-tensor], compose. Explicitly the two Hom bijections are $\\operatorname{Hom}_X(g_*j_!P,M)\\cong\\operatorname{Hom}_Z(j_!P,Rg^!M)\\cong\\operatorname{Hom}_S(P,j^*Rg^!M)$. They are natural in both variables, hence give $Rs_!\\dashv Rs^!$. The inverse bijections send the identity of $j^*Rg^!M$ first to $\\varepsilon_{j,Rg^!M}$ and then to $\\varepsilon_{g,M}\\circ g_*\\varepsilon_{j,Rg^!M}$. This is the asserted composite counit over either $A$ or $B$.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 4: composition of the closed and open adjunctions and its counit"
+   }
+  },
+  {
+   "text": "Set $N=Rg_A^!M$, $N'=Rg_B^!F_XM$ and write $b:F_ZN\\to N'$. Suppress only the canonical open scalar identifications, so $b_s=j^*b$. Expand the left side of the desired identity using Step 10 and the definition of $q_s$; it is\n$$\\varepsilon_{g,B}\\,g_{*,B}(\\varepsilon_{j,B,N'})\\,g_{*,B}j_!(j^*b)\\,g_{*,B}q_{j,j^*N}\\,c_{g,j_!j^*N}.$$\nNaturality of the open counit changes its two middle factors to $g_{*,B}b\\,g_{*,B}\\varepsilon_{j,B,F_ZN}$. The open coefficient-counit identity of [lem-coef-etale-open-tensor] then changes $\\varepsilon_{j,B,F_ZN}q_{j,j^*N}$ to $F_Z\\varepsilon_{j,A,N}$. Naturality of $c_g$ in [lem-coef-finite-direct-image], at the morphism $\\varepsilon_{j,A,N}:j_!j^*N\\to N$, gives\n$$g_{*,B}(F_Z\\varepsilon_{j,A,N})\\,c_{g,j_!j^*N}=c_{g,N}\\,F_X(g_{*,A}\\varepsilon_{j,A,N}).$$\nThe closed transpose identity of Step 8 now makes the whole expression\n$$F_X\\varepsilon_{g,A,M}\\,F_X(g_{*,A}\\varepsilon_{j,A,N})=F_X\\varepsilon_{s,A,M}.$$\nAll coefficient comparisons used here are defined on their stated domains: $N,j^*N,j_!j^*N$ are finite-Tor bounded constructible by Steps 2, 3 and 9. This proves the specified equality, including its actual morphisms.",
+   "uses": [
+    "lem-coef-etale-open-tensor",
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 4: exceptional-counit compatibility, expanded as a composition calculation"
+   }
+  },
+  {
+   "text": "If $S=Z$ and $j=1_Z$, restriction and extension by zero are identities. The normalized open scalar comparison restricts to the identity everywhere, hence $q_j=1$ by [lem-coef-etale-open-tensor]. Thus $Rs_!=g_*$, $Rs^!=Rg^!$, $q_s=c_g$, and $b_s=b_g$; the last equality becomes precisely the closed transpose identity of Step 8. This proves the closed specialization as well.",
+   "uses": [
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 3, closed case recovered by taking the open immersion to be the identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-etale-finite-type-sep-closed-derived-dimension",
+  "sbc-thm-finiteness-finite-type",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "prop-exc-closed-tor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-constructible-pullback",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-coef-etale-open-tensor",
+  "lem-kun-04ca",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-exc-closed-ambient",
+  "lem-coef-finite-direct-image",
+  "lem-exc-closed-support-triangle",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-fin-extension-by-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof paragraphs 3–4, expanded through the ordinary étale closed-support triangle (Stacks 0A45), finite Tor bound, and explicit adjunction counit calculations; current main-20261015 counterpart is sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.md"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +250,45 @@
    "results": "No hits. No hits in CategoryTheory.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient rings commutes with closed immersion exceptional restriction via localization triangle",
+   "results": "8 hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.basicOpenToSpec_SpecMap_awayMap, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι, AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE_assoc; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived closed immersion exceptional inverse image commutes with nonflat coefficient change",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Triangle\", \"isIso\"",
+   "results": "10 hits: CategoryTheory.Pretriangulated.Triangle.instIsIsoHom₁, CategoryTheory.Pretriangulated.Triangle.instIsIsoHom₂, CategoryTheory.Pretriangulated.Triangle.instIsIsoHom₃, CategoryTheory.Pretriangulated.Triangle.isIso_of_isIsos, CategoryTheory.Pretriangulated.Triangle.isZero₁_of_isIso₂, CategoryTheory.Pretriangulated.Triangle.isZero₃_of_isIso₁, CategoryTheory.Pretriangulated.Triangle.isZero₁_iff_isIso₂, CategoryTheory.Pretriangulated.Triangle.isZero₃_iff_isIso₁; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*(shriek|exceptional)|supportTriangle",
+   "results": "0 hits: ; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact scalar extension carries a closed support localization triangle to the new closed support triangle",
+   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Triangulated.Localization.isTriangulated; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-coef-finite-hom",
@@ -78,5 +305,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-etale-locally-closed-shriek",
+  "worker": "stage1",
+  "summary": "Q109 gives an ordinary étale support-triangle proof in twelve steps, verifies finite-Tor preservation and all direct-image comparison domains, identifies the triangle isomorphism with the specified exceptional transpose, and calculates the locally closed counit identity. Statement retained. No new nodes.",
+  "blueprint": "thm-coef-finite-hom Proof paragraph 3: Steps 1–8 prove finite-Tor closed exceptional restriction and the normalized coefficient isomorphism; paragraph 4: Steps 9–11 prove open extension, composite adjunction and counit coherence; Step 12 gives the closed specialization.",
+  "tool_uses": [
+   {
+    "node": "lem-etale-finite-type-sep-closed-derived-dimension",
+    "why": "Generic étale finite cohomological dimension supplies a uniform bound on all module sheaves for the complementary open."
+   },
+   {
+    "node": "sbc-thm-finiteness-finite-type",
+    "why": "Generic finite-coefficient finiteness gives constructibility of each higher complementary-open direct image."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic the valuation ring of a finite extension of $\\mathbf q_\\ell$ is a discrete valuation ring with finite residue field used with its stated hypotheses; this supplies a local tool within the closed-support proof, not a replacement of the unit route."
+   },
+   {
+    "node": "prop-exc-closed-tor",
+    "why": "The ordinary étale support theorem supplies the finite-Tor closed restriction, without importing an exceptional coefficient comparison."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic bounded flat model of finite tor amplitude used with its stated hypotheses; this supplies a local tool within the closed-support proof, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic bounded-above flat complexes are k-flat at independent universes used with its stated hypotheses; this supplies a local tool within the closed-support proof, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor comparison for arbitrary ringed topoi used with its stated hypotheses; this supplies a local tool within the closed-support proof, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic pushforward along a closed immersion used with its stated hypotheses; this supplies a local tool within the closed-support proof, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic closed-immersion right adjoint before restriction used with its stated hypotheses; this supplies a local tool within the closed-support proof, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "The counit/unit normalized ordinary étale support triangle is the geometric localization tool for this coefficient calculation."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived change of rings along a morphism of sheaves of rings, computed by k-flat resolutions used with its stated hypotheses; this supplies a local tool within the closed-support proof, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-etale-finite-type-sep-closed-derived-dimension",
+  "sbc-thm-finiteness-finite-type",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "prop-exc-closed-tor",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-kun-04ca",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-1b6321734",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-1b6321734 (reviewer sub-agent of L); spot-checked: Read all twelve steps of the item, every cited statement (26 proof deps, 11 stmt deps), unit sk-prop-sf-biduality-general and its transitive route, and master thm-coef-finite-hom proof paragraphs 3–4 (main-20261015 has the statement only). Statement and stmt_deps are unchanged from the side base. There are no new nodes, no SGA citations and no cycle; proof_deps equals the union of the step uses. Every off-route non-leaf citation is either declared in tool_uses (all 11 accepted as generic étale tools) or slopmaster2-closed (lemma-openclosed-stalk-lowerstar, lem-fin-extension-by-zero). Stacks tags 0A45 (etale-cohomology.tex line 14072), 0F10, 014A, 04CA and 04FX resolve to the cited labels. Hypotheses checked: Step 2 matches prop-exc-closed-tor exactly (all-module cohomological-dimension bound, constructible R^q u_*, quasi-compact complement, same ambient Rg^! as lem-exc-closed-ambient). Steps 1 and 5 satisfy lem-coef-finite-direct-image (B a finite A-algebra; u and g separated finite type). Steps 3 and 9 prove finite Tor for u^*M, j^*N and j_!P. I recomputed the Step 6 transpose and the Step 7 TR3 rotation sign, giving ε_B∘t=F_Xε_A. Step 8 identifies t with g_*b∘c through the fully-faithful-image Hom bijection of Step 4. I re-derived the Step 11 counit calculation (counit naturality, open coefficient-counit identity, c_g naturality, Step 8) and Step 12 (j=id). Not duplicated by lem-coef-finite-closed-shriek (pro-étale), lem-coef-finite-free-extension (finite free B) or the purity coefficient comparisons. Edge cases checked: S empty, Z=X, n=m, nonflat Z/ℓ^2→Z/ℓ. Minor, not repaired: Step 2 does not say why e≥1 (it holds since |ℓ|<1), and Step 3's 'or' for the scalar identification is loose but harmless."
  }
 }
