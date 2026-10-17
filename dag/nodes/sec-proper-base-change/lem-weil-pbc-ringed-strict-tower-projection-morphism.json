@@ -17,9 +17,125 @@
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-pbc-ringed-topoi-derived-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-injective representative $I^\\bullet\\to E$ and put $N=f_*I^\\bullet$, so that $Q(N)$ represents $Rf_*E$ by the K-injective definition of derived direct image; $N$ itself need not be K-injective when $f$ is not flat, and this is never used. For each $n$ put $C_n=\\operatorname{Tot}(N\\otimes_{R_Y}P_n)$, $J_n=\\operatorname{Tot}(I^\\bullet\\otimes_{R_X}f^*P_n)$, and $B_n=f_*J_n$. The bounded finite-free complexes $P_n$ and $f^*P_n$ are K-flat, and the tensor totalizations are the complexes specified in [def-pc-tensor-complex-sheaves]; the chain-representative clause of [def-weil-pbc-projection-formula-arrows] identifies $C_n$ with the derived tensor on the $Y$ side and $B_n$ with the derived direct image of the $X$-side tensor. If the representatives named in the statement are different, the canonical localization comparisons transport these models and their maps, so the resulting tower objects are representative-independent.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-projection-formula-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0943, section-projection-formula (canonical map and representative comparison)"
+   }
+  },
+  {
+   "text": "Apply the representative-independent pullback comparison of [lem-weil-pbc-ringed-topoi-derived-pullback] to every $P_n$, transition $p_n$, and augmentation $z_n$. It identifies $Lf^*P_n$ with the termwise complex $f^*P_n$, and carries $p_n$ and $z_n$ to $p'_n$ and $z'_n$. Thus the $J_n$ form the strict augmented tower $T_\\bullet(E)$ used in the statement.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0943, section-projection-formula (naturality of the canonical map)"
+   }
+  },
+  {
+   "text": "For each $n$, use the actual term maps in [def-weil-pbc-projection-formula-arrows] with $h=f$, $I^\\bullet$ as its K-injective complex, and $F^\\bullet=P_n$. They are maps $t_{I^a,P_n^r}:N^a\\otimes_{R_Y}P_n^r\\to f_*(I^a\\otimes_{R_X}f^*P_n^r)$, with inverse maps $s_{a,r}$, and the displayed naturality equation for $t$ makes them commute with both differentials. Finite totalization therefore gives a chain map $\\tau_n:C_n\\to B_n$, inverse to the totalized $s_n$. By [lemma-weil-pbc-projection-formula-totalization], the derived class of $\\tau_n$ is the projection transformation $\\alpha_{E,P_n}$, under the canonical derived-pullback comparison, and $Q(B_n)$ is the level-$n$ object computing $Rf_*T_n(E)$.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "lemma-weil-pbc-projection-formula-totalization",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0943, section-projection-formula (equation-projection-formula-map and finite totalization)"
+   }
+  },
+  {
+   "text": "The naturality equation $B(u)t=t'A(u)$ in [def-weil-pbc-projection-formula-arrows], applied to each coefficient transition $p_n:P_{n+1}\\to P_n$, gives a strict equality of the bidegree maps defining $\\tau_{n+1}$ and $\\tau_n$. Since totalization is a finite direct sum in each degree, these equalities say that $\\tau_\\bullet:C_\\bullet\\to f_*^{\\operatorname{Tow}}J_\\bullet$ is a morphism of strict chain towers. Define $u$ to be the composite in the derived tower category\n$$Q(C_\\bullet)\\xrightarrow{Q(\\tau_\\bullet)}Q(f_*^{\\operatorname{Tow}}J_\\bullet)\\longrightarrow Rf_*^{\\operatorname{Tow}}T_\\bullet(E),$$\nwhere the second arrow is the canonical total-derived-functor comparison. For its evaluation, $\\operatorname{ev}_n$ is right adjoint to the exact functor sending a module $A$ to the tower with $A$ at levels $m\\le n$, identity transitions there, and $0$ above (exactness is levelwise by [lem-weil-tower-category-levelwise-abelian]); so by [lem-weil-pbc-right-adjoint-preserves-kinjective] it preserves K-injective tower complexes. Hence, for a K-injective tower resolution $j:J_\\bullet\\to J'_\\bullet$, the second arrow is $Q(f_*^{\\operatorname{Tow}}j)$, and the evaluation identification $\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}\\cong Rf_*\\operatorname{ev}_n$ of [lem-weil-ringed-tower-pushforward-limit-comparison] carries its $n$-th component to the canonical map $Q(f_*J_n)\\to Rf_*J_n$, an isomorphism because $J_n$ is K-injective. Thus the evaluation of $u$ is the class of $\\tau_n$, hence $\\alpha_{E,P_n}$. The construction is made before localization, so it does not identify $D(\\operatorname{Tow})$ with $\\operatorname{Tow}(D)$.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-abstract-derived-category",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0943, section-projection-formula (naturality of the canonical map); chain-level tower realization"
+   }
+  },
+  {
+   "text": "For a chain map of augmented coefficient towers $(P_\\bullet,p_\\bullet,z_\\bullet)\\to(\\widetilde P_\\bullet,\\widetilde p_\\bullet,\\widetilde z_\\bullet)$, the same coefficient naturality of $t$ commutes with the map in the coefficient variable on every bidegree. Finite totalization and the canonical comparison to the levelwise derived direct image preserve these equalities. Thus the strict tower map $\\tau_\\bullet$, and consequently $u$, is natural in maps of the entire augmented tower. Naturality in $E$: a morphism $E\\to E'$ is represented on the chosen K-injective representatives by a chain map $g:I^\\bullet\\to I'^\\bullet$, unique up to homotopy. Naturality of $t$ in the module variable gives $\\tau'_\\bullet\\circ\\operatorname{Tot}(f_*g\\otimes1)=f_*\\operatorname{Tot}(g\\otimes1)\\circ\\tau_\\bullet$ termwise, and a homotopy $h$ between two such $g$ is carried to the homotopies $\\operatorname{Tot}(f_*h\\otimes1)$ and $f_*\\operatorname{Tot}(h\\otimes1)$, which the same equation intertwines. Hence $u$ is natural in $E$.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0943, section-projection-formula (naturality in the coefficient complex)"
+   }
+  },
+  {
+   "text": "The strict-tower homotopy-limit statement [lem-weil-pbc-ringed-strict-tower-homotopy-limit] supplies the exact functor $L_Y$ and its natural Roos distinguished triangle. Applying this functor to $u$, which is the image in $D(\\operatorname{Tow}(R_Y))$ of the strict chain-tower map $f_*^{\\operatorname{Tow}}(j)\\circ\\tau_\\bullet:C_\\bullet\\to f_*^{\\operatorname{Tow}}J'_\\bullet$ of Step 4, gives the maps on the first and both product terms; the naturality of the Roos construction gives the commuting squares, including the connecting square. Therefore $L_Y(u)$ is a morphism of the natural Roos triangles.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, tower-topos proof"
+   }
+  },
+  {
+   "text": "The naturality of the same term maps $t$ at $z_n:R_Y[0]\\to P_n$, together with the tensor-unit normalization $\\alpha_{E,R_Y}=1_{Rf_*E}$ from [lem-weil-pbc-ringed-projection-mate-exact], gives an equality of chain maps $\\tau_n(1_N\\otimes z_n)=f_*(1_I\\otimes z'_n):N\\to B_n$. These equalities commute with the transitions by the already established strict tower equation. Let $c_X(I)$ and $c_Y(N)$ denote the constant towers; the equalities assemble to the strict square\n$$\n\\begin{CD}\nc_Y(N) @>{\\iota_Y}>> C_\\bullet\\\\\n@V{\\cong}VV @VV{\\tau_\\bullet}V\\\\\nf_*^{\\operatorname{Tow}}c_X(I) @>{f_*^{\\operatorname{Tow}}\\iota_X}>> f_*^{\\operatorname{Tow}}J_\\bullet,\n\\end{CD}\n$$\nwhere $\\iota_X$ and $\\iota_Y$ are the maps induced by $1\\otimes z'_\\bullet$ and $1\\otimes z_\\bullet$.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0943, section-projection-formula (unit normalization and coefficient naturality)"
+   }
+  },
+  {
+   "text": "The evaluation functor $\\operatorname{ev}_1$ on towers is exact by [lem-weil-tower-category-levelwise-abelian]. The constant-tower functor $c$ is its right adjoint: a map from a tower $H_\\bullet$ to $c(I)$ is uniquely determined by its component $H_1\\to I$, since every $H_n\\to H_1$ is the composite of the transitions. Hence [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $c_X(I)$ K-injective, because $I$ is. No such claim is made for $c_Y(N)$: $N=f_*I$ need not be K-injective for non-flat $f$, and it is not needed. For a strict tower complex $H$ write $\\kappa_H:Q(\\lim H)\\to L(H)$ for the canonical total-derived-functor comparison, natural in strict tower maps, and $\\gamma_H:Q(f_*^{\\operatorname{Tow}}H)\\to Rf_*^{\\operatorname{Tow}}H$ likewise; so $u=\\gamma_{J}Q(\\tau_\\bullet)$ by Step 4. Put $\\lambda_X=\\kappa_{c_X(I)}:Q(I)\\to L_Xc_X(I)$, an isomorphism since $c_X(I)$ is K-injective with limit $I$, and $\\lambda_Y=\\kappa_{c_Y(N)}:Q(N)\\to L_Yc_Y(N)$, whose invertibility is not used. By the definition in the statement and naturality of $\\kappa$, $\\zeta_X=\\kappa_JQ(\\lim\\iota_X)=L_X(\\iota_X)\\lambda_X$ and $\\zeta_Y=\\kappa_CQ(\\lim\\iota_Y)=L_Y(\\iota_Y)\\lambda_Y$, with $Rf_*E$ identified with $Q(N)$ through the canonical isomorphism $Q(f_*I)\\to Rf_*Q(I)$. The comparison $a_{f,M}$ of [lem-weil-ringed-tower-pushforward-limit-comparison] is induced by the equality of underived composites $f_*\\lim=\\lim f_*^{\\operatorname{Tow}}$, i.e. it is compatible with the canonical comparisons from $Q$ of that common composite to both derived composites. For $M=c_X(I)$ the common value is $f_*I=N=\\lim c_Y(N)$ with $f_*^{\\operatorname{Tow}}c_X(I)=c_Y(N)$ strictly, and the canonical comparison to $Rf_*L_Xc_X(I)$ is $Rf_*(\\lambda_X)$ after $Q(N)\\cong Rf_*Q(I)$, while that to $L_YRf_*^{\\operatorname{Tow}}c_X(I)$ is $L_Y(\\gamma_{c_X(I)})\\lambda_Y$. Hence $a_{f,c_X(I)}Rf_*(\\lambda_X)=L_Y(\\gamma_{c_X(I)})\\lambda_Y$. Naturality of $a$ along $\\iota_X$ and of $\\gamma$ give\n$$L_Y(\\gamma_J)\\,L_Y(Q f_*^{\\operatorname{Tow}}\\iota_X)\\,\\lambda_Y=a_{f,T}\\,Rf_*(L_X\\iota_X)\\,Rf_*(\\lambda_X).$$\nThe square of Step 7 gives $Q(\\tau_\\bullet)Q(\\iota_Y)=Q(f_*^{\\operatorname{Tow}}\\iota_X)$ under $c_Y(N)=f_*^{\\operatorname{Tow}}c_X(I)$. Applying $L_Y$, composing with $L_Y(\\gamma_J)$ and using the displayed identity yields\n$$L_Y(u)\\,\\zeta_Y=a_{f,T}\\,Rf_*(\\zeta_X).$$\nThis uses the coaugmentation of the constant towers; compatibility with tower projections alone is not used.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, tower-topos proof; Tag 0A0G, augmented-tower compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-projection-formula-arrows",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lemma-weil-pbc-projection-formula-totalization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0943, section-projection-formula; Tag 0A07, lemma-Rf-commutes-with-Rlim; augmented strict-tower refinement of Tag 0A0G"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +174,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-pushforward-completion",
@@ -70,12 +186,36 @@
  "blueprint": {
   "from": {
    "node": "prop-weil-pbc-scalar-extension",
-   "place": "Last paragraph, “the exchange is the canonical ambient ringed-topos mate ... followed by derived completion and the direct-image/completion comparison”: supporting comparison used in completing the mate. Projection maps as a morphism of strict derived towers",
+   "place": "Last paragraph, “the exchange is the canonical ambient ringed-topos mate ... followed by derived completion and the direct-image/completion comparison”: strict-tower projection map and its augmented-limit compatibility.",
    "via": [
     "lem-weil-pbc-ringed-pushforward-completion"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-ringed-strict-tower-projection-morphism",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: choose a K-injective I and N=f_*I for the chain models; construct the strict tower map before localization by totalizing the coefficient-natural maps t from def-weil-pbc-projection-formula-arrows and composing Q f_*^{Tow} with its canonical derived comparison; and prove the final identity through constant-tower coaugmentations, using exact ev_1, the right-adjoint K-injective lemma, and naturality plus common-underived normalization of the pushforward/limit comparison. No new nodes were needed.",
+  "blueprint": "The imported blueprint ancestor prop-weil-pbc-scalar-extension has no separate proof text for this supporting lemma; the steps realize its last-paragraph supporting comparison by the Tag 0943 projection-map construction and Tag 0A07/0A0G tower-limit compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "The item uses this generic comparison as a tool to transport the strict coaugmentation square through derived pushforward and inverse limit; the projection-morphism unit supplies the chain-level tower map but not this independent comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-e1b0af478",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-e1b0af478 (reviewer sub-agent of L); spot-checked: I read the whole item (unchanged statement, 8 steps, no new nodes), the full statement of every cited node and the parent lem-weil-pbc-ringed-pushforward-completion (its Steps 10 and 12 use exactly what this item states). Stacks sources checked at the cited places: 0943 (sites-cohomology-section-projection-formula; same map direction and coefficient categories as α in the mate node and π in def-weil-pbc-projection-formula-arrows), 0A07 (tower-topos proof), 0A0G (proof uses levelwise projection formula plus 0A07; this item supplies the missing tower coherence), 0940, and sites-cohomology-lemma-K-injective-flat. No duplicate in the DAG. Small cases P=R_Y[0] constant, P=0 and f=id are consistent. One false inference, fixed: Step 8 said the right-adjoint lemma makes c_Y(N) K-injective, which needs N=f_*I K-injective, and that holds only for flat f (Stacks lemma-K-injective-flat). The step is rewritten so that ζ_X and ζ_Y come from naturality of the canonical comparisons Q lim→L, with λ_Y not required to be invertible; the normalization a∘Rf_*(λ_X)=L_Y(γ)λ_Y on c_X(I), plus naturality of a and γ, gives the equation. Step 1 wording ('K-injective model N') is corrected the same way. One missing argument, fixed: Step 5 now proves naturality of u in E, which the statement asserts (chain maps up to homotopy on K-injective representatives, intertwined by t). Two clarifications: Step 4 now says why the evaluation identification sends the comparison to Q f_*J_n→Rf_*J_n (ev_n has an exact left adjoint, so it preserves K-injectives); Step 6 now says u is the image of the strict chain map f_*^Tow(j)∘τ. Step 7's chain-level unit identity for t_{I,R_Y} follows directly from the definition of t, so I judged it elementary. Corrected file: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-ringed-strict-tower-projection-morphism.json. proof_deps still equals the union of uses; statement, stmt_deps and blueprint fields are unchanged. Accepted tool use: lem-weil-ringed-tower-pushforward-limit-comparison (sk-def-sf-operations), a generic comparison of direct image with the derived limit. lem-weil-pbc-right-adjoint-preserves-kinjective (sk-def-exchange) is on the unit's route.; 1 file(s) fixed by the reviewer"
  }
 }

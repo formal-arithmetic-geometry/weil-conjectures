@@ -12,9 +12,91 @@
   "def-coef-infinity-fibrations",
   "def-coef-categorical-pattern-fibrancy"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $r:E_a\\to\\Delta^1$ and $j:E_a\\to E$. The pullback is degreewise, by [def-cbc-enhanced-diagrams-cones]. Every inner-horn lifting problem for $r$ projects to one for $p$; combine its filler in $E$ with the prescribed simplex in $\\Delta^1$ to obtain the filler in $E_a$. Thus $r$ is inner. Since $\\Delta^1$ is a quasicategory, filling its inner horn first and then lifting shows that $E_a$ is a quasicategory. The same argument over a constant base simplex makes every strict fibre $E_c$ a quasicategory. If $v$ is $p$-cocartesian, any outer-horn problem for $(v,\\mathrm{id})$ projects to a problem with first edge $v$ in $E$. Its $p$-cocartesian filler, paired with the prescribed simplex of $\\Delta^1$, fills the original problem. This proves global implies local, directly from [def-coef-infinity-fibrations], without assuming lifts from other sources.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.1.11 and Remark 2.4.1.12, opposite dual; degreewise horn calculation."
+   }
+  },
+  {
+   "text": "We will use the following immediate consequence of [lem-cbc-inner-fibration-equivalence-outer-horn-lift]. An equivalence edge in the total quasicategory of any inner fibration is cocartesian for that fibration: apply its first-outer-horn clause in every dimension $n\\geq2$, exactly the predicate of [def-coef-infinity-fibrations]. In particular an equivalence of $E_d$ is $p$-cocartesian after inclusion into $E$, because its inverse and its two inverse triangles remain inverse witnesses under the simplicial inclusion, using [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.5, opposite dual; equivalence outer-horn criterion."
+   }
+  },
+  {
+   "text": "Suppose $u:x\\to y$ is locally cocartesian, and choose the hypothesized global lift $v:x\\to z$ of $a$. In $E_a$ both $\\widetilde v$ and $\\widetilde u$ are $r$-cocartesian (Step 1). Apply [lem-coef-infinity-cocartesian-composition-initiality] to the inner fibration $r$ and base edge $01$. Both are initial in its lift quasicategory $L((x,0),01)$. Its comparison clause supplies an edge between these initial lifts, with target comparison $h:(z,1)\\to(y,1)$ an equivalence in the strict fibre $r^{-1}(1)=E_d$, and with its commuting $2$-simplex. Projecting to $E$ gives the triangle with edges $v,h,u$, lying over the simplex $s_1a$ (vertices $c,d,d$). The strict fibre identification here is degreewise: a simplex over the constant vertex $1$ is precisely an $E$-simplex over the constant vertex $d$. Thus the comparison and its inverse witnesses really lie in $E_d$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9 and Remark 2.4.2.13, opposite duals; uniqueness of the locally cocartesian lift."
+   }
+  },
+  {
+   "text": "The comparison $h$ from Step 3 is $p$-cocartesian by Step 2. In the triangle $(v,h,u)$ its first edge $v$ is $p$-cocartesian by hypothesis. The cancellation/composition clause of [lem-coef-infinity-cocartesian-composition-initiality] therefore says that $h$ is $p$-cocartesian if and only if $u$ is. This proves local implies global, completing the first equivalence. Only the one lift $v$ with the prescribed source was used.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.7 and Remark 2.4.2.13, opposite duals."
+   }
+  },
+  {
+   "text": "Now let $a=\\mathrm{id}_c$. The degenerate lift $1_x$ is globally cocartesian by [lem-coef-infinity-cocartesian-composition-initiality], so the first equivalence applies without any further existence assumption. If $u$ is globally cocartesian, apply the initial-lift comparison of that node to $1_x$ and $u$ in $L(x,\\mathrm{id}_c)$ for $p$ itself. It yields an equivalence $h:x\\to y$ in $E_c$ and a triangle $(1_x,h,u)$ over the constant $2$-simplex at $c$. All of this triangle lies in $E_c$. By [lem-coef-infinity-mapping-composition], its classes in $h(E_c)$ satisfy $[u]=[h][1_x]=[h]$. The class $[h]$ is invertible, hence the same node's characterization of invertible classes proves that $u$ is an equivalence in $E_c$. Conversely a fibre equivalence is globally cocartesian by Step 2 and locally cocartesian by Step 1. This proves all three equivalent conditions with the equivalence in the strict fibre, rather than just in $E$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.4.1.6, Remark 2.4.1.9 and Proposition 2.4.1.5, opposite duals; fibrewise comparison."
+   }
+  },
+  {
+   "text": "Finally condition (i) of [def-coef-categorical-pattern-fibrancy] makes $p$ inner; its total space is a quasicategory by the same horn argument as Step 1 since $C$ is a quasicategory. Condition (ii) gives a global cocartesian lift for every source over every $a\\in S$, and identifies $T$ with precisely the global cocartesian edges over $S$. Apply Steps 1--4 separately to each such source and edge to replace global by local in this description of $T$. Every degenerate edge belongs to $S$, so Step 5 identifies its marked lifts with precisely the equivalences in $E_c$. No use of the cone conditions (iii)--(iv), nonempty fibres, or additional base edges is required.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, Lemma B.2.4(a), printed pp.1483--1484, under the fully scaled pattern convention of the DAG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-categorical-pattern-fibrancy",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Opposite dual of HTT Remark 2.4.2.13, expanded using initiality of lifts (Remark 2.4.1.9) and composition (Proposition 2.4.1.7); applied to HA Lemma B.2.4(a). Sources read online; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +132,45 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|coCartesian",
+   "results": "{\"t\": \"2026-10-17T12:09:42Z\", \"tool\": \"grep\", \"query\": \"cocartesian|coCartesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-78; these concern ordinary categories and Hom-set universal properties. Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:55-97 supplies inner-horn lifting only; no local/global quasicategorical cocartesian-edge comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocartesian arrows of infinity categories detected by restriction to a single base edge and equivalences in the fiber",
+   "results": "{\"t\": \"2026-10-17T12:09:42Z\", \"tool\": \"leansearch\", \"query\": \"Cocartesian arrows of infinity categories detected by restriction to a single base edge and equivalences in the fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.mk\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsCocartesian.recOn\"], \"digest\": \"1c3ca62ec142745a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-78; these concern ordinary categories and Hom-set universal properties. Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:55-97 supplies inner-horn lifting only; no local/global quasicategorical cocartesian-edge comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocartesian\"",
+   "results": "{\"t\": \"2026-10-17T12:09:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\"], \"digest\": \"e657772dd468ef8f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-78; these concern ordinary categories and Hom-set universal properties. Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:55-97 supplies inner-horn lifting only; no local/global quasicategorical cocartesian-edge comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cocartesian edges of an inner fibration of quasicategories agree with global cocartesian edges when a global cocartesian lift with that source exists",
+   "results": "{\"t\": \"2026-10-17T12:09:44Z\", \"tool\": \"leanfinder\", \"query\": \"Local cocartesian edges of an inner fibration of quasicategories agree with global cocartesian edges when a global cocartesian lift with that source exists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.ext\"], \"digest\": \"1cee85ff27375870\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-78; these concern ordinary categories and Hom-set universal properties. Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:55-97 supplies inner-horn lifting only; no local/global quasicategorical cocartesian-edge comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to one simplex detects cocartesian morphisms when an inner fibration has a universal outgoing lift",
+   "results": "{\"t\": \"2026-10-17T12:10:20Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to one simplex detects cocartesian morphisms when an inner fibration has a universal outgoing lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\"], \"digest\": \"efe3c479aece93e6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-78; these concern ordinary categories and Hom-set universal properties. Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:55-97 supplies inner-horn lifting only; no local/global quasicategorical cocartesian-edge comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pattern-fibered-edge-detection",
@@ -81,5 +198,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-local-global",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six explicit steps compare the local lifts via their initiality, retain the comparison triangle, apply cocartesian composition, prove the degenerate-edge equivalence in the strict fibre, and use only pattern conditions (i)--(ii). No new nodes and no attachment. Server node copied because the shared checkout was stale.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, finite-coefficient mapping-complex adjunction; auxiliary marked operadic models via the inherited chain. Realizes the local/global edge comparison hidden in HA B.2.4(a) used by pattern-fibered-edge-detection. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Generic equivalence-edge outer-horn lifting for any inner fibration, used in Step 2; the unit has no replacement for this simplicial foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-4930b362e",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-4930b362e (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, six steps, no new nodes. Also read the full statements of all six cited nodes, the parent lem-coef-pattern-fibered-edge-detection and unit sk-prop-sf-biduality-general. Sources were not archived in literature/, so I fetched the PDFs and read them at the cited places. HTT Remark 2.4.2.13 is the one-lift local-implies-global comparison (cartesian form; the item is its opposite with a prescribed source), using Prop 2.4.1.5/2.4.1.7, Cor 2.4.1.6 and Rem 2.4.1.9. HA Lemma B.2.4 step (a), pp.1483-1484, identifies the markings with locally coCartesian edges, matching the item's final clause. No SGA is used. Step 1 is elementary: the pullback is degreewise, r is inner, E_a and E_c are quasicategories, and global implies local. Step 2: the outer-horn lemma makes equivalences cocartesian, and a fibre equivalence stays an equivalence in E. Step 3: composition-initiality applies to r (hypotheses from Step 1); the two initial lifts give the triangle (v,h,u) over s_1a with h an equivalence in E_d. Step 4: the composition clause with v as first edge gives u cocartesian. Step 5: 1_x is cocartesian; comparing 1_x with u gives a triangle inside E_c, and mapping-composition gives [u]=[h], so u is an equivalence in E_c. Step 6 uses only pattern conditions (i)-(ii) and the fact that S contains the degenerate edges. Small cases checked: E=F x C, base Delta^0, degenerate edge with distinct vertices, empty fibres. No duplicate found by rg across the DAG. proof_deps equals the union of step uses and there is no cycle. Accepted tool_use: lem-cbc-inner-fibration-equivalence-outer-horn-lift, a generic simplicial lemma that the same-unit initiality node already uses. No fixes."
  }
 }

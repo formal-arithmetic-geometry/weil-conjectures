@@ -20,9 +20,79 @@
   "def-weil-closed-immersion",
   "def-kun-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-nodal-family-fitting-singular] to f. Flatness and local finite presentation are hypotheses, and every geometric fibre is a nonempty equidimensional one-dimensional fibre with at-worst-nodal singularities by the completed-local-ring assumption. The node gives the open relative smooth locus U, identifies its complement with the support of the first-Fitting singular subscheme, and proves that this singular subscheme is unramified over Y. Define S_f to be that canonical singular subscheme using [def-trf-first-fitting-singular-subscheme].",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular",
+    "def-trf-first-fitting-singular-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59 and 0C5A; Divisors Tag 0C3K"
+   }
+  },
+  {
+   "text": "Fix a point $y\\in Y$ and let $Z=S_f\\times_Y\\operatorname{Spec}\\kappa(y)$ be the scheme-theoretic fibre of $S_f\\to Y$; by [def-pc-scheme-fibre] its underlying space is homeomorphic to the underlying fibre of $S_f$ over $y$, so it suffices to show $Z$ has finitely many points. By step 1, $S_f\\to Y$ is unramified, so $Z\\to\\operatorname{Spec}\\kappa(y)$ is unramified by clause (1) of [lem-weil-pbc-unramified-base-change-open]. Since $Z=S_f\\times_X X_y$ (associativity of fibre products) and $S_f\\to X$ is a closed immersion, $Z\\to X_y$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. The fibre $X_y\\to\\operatorname{Spec}\\kappa(y)$ is projective by [lem-pc-projective-base-change], i.e. a closed subscheme of $\\mathbf P^N_{\\kappa(y)}$ [def-kun-projective], hence of finite type over $\\kappa(y)$ ($\\mathbf P^N_{\\kappa(y)}$ is covered by $N+1$ affine charts that are polynomial rings in $N$ variables, and a closed immersion is of finite type). By [lem-weil-pbc-unramified-over-field-discrete] the underlying space of $Z$ is discrete, so of dimension at most zero, and [lem-pc-zero-dimensional-closed-subscheme-finite] shows $Z$ is affine, finite over $\\kappa(y)$. An affine scheme is quasi-compact, and a discrete quasi-compact space is finite. Hence every underlying fibre of $S_f\\to Y$ is finite.",
+   "uses": [
+    "lem-weil-pbc-unramified-base-change-open",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-projective-base-change",
+    "def-kun-projective",
+    "lem-weil-pbc-unramified-over-field-discrete",
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G7 (lemma-unramified-over-field); Tag 02GA (base change unramified); Tag 01JY (closed immersion base change)"
+   }
+  },
+  {
+   "text": "For an arbitrary morphism Y_1\\to Y with Y_1 Noetherian, form f_1:X\\times_Y Y_1\\to Y_1. Projectivity is preserved by [lem-pc-projective-base-change], flatness by [lem-weil-pbc-flat-morphism-base-change], and local finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. For a geometric point of Y_1, associativity of the fibre products identifies the geometric fibre of f_1 with the geometric fibre of f over its image. Thus nonemptiness, connectedness, pure dimension one, and the completed nodal local-ring condition are inherited directly from the hypotheses on f.",
+   "uses": [
+    "lem-pc-projective-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WF, 01U9 and 01TS; curves Tag 0C5B"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-family-fitting-singular] to f_1. Its formation clause gives the scheme-theoretic equality Sing(f_1)=S_f\\times_Y Y_1, while its support clause identifies the support with the nonsmooth locus of f_1. Therefore the smooth locus is U\\times_Y Y_1, and S_f\\times_Y Y_1 is closed and unramified over Y_1. This uses the Fitting-subsheme base-change equality itself and makes no claim about commuting reduced closed subschemes.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59 and 0C5B; Divisors Tag 0C3I and 0C3K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-pc-scheme-fibre",
+  "def-trf-first-fitting-singular-subscheme",
+  "lem-pc-projective-base-change",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-pbc-unramified-over-field-discrete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C59 and 0C5B, with Divisors Tags 0C3I--0C3K for Fitting formation and the smooth-locus identification"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +121,38 @@
    "results": "{\"t\": \"2026-10-17T15:25:04Z\", \"tool\": \"grep\", \"query\": \"nodal|singularLocus|normalCrossing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: smooth-chart/base-change, Weierstrass-curve, field-theory or ordinary normalization facts do not assert this geometric existence or nodal-family theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective flat finitely presented family of nodal curves has an open smooth locus and a singular Fitting subscheme unramified over the base with finite fibres, stable under arbitrary base change",
+   "results": "AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth. No declaration states the nodal Fitting-subsheme theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProjective, AlgebraicGeometry.Flat, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsFinite",
+   "results": "0 hits; unknown identifier AlgebraicGeometry.IsProjective.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|Sing\\(f\\)|Fitting.*Omega|unramified.*fibre in AlgebraicGeometry",
+   "results": "0 hits in Mathlib AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "nodal family singular Fitting subscheme unramified finite fibres base change",
+   "results": "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.FormallyUnramified.casesOn; AlgebraicGeometry.FormallyUnramified.recOn; AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange; RingHom.isStandardSmooth_isStableUnderBaseChange. No declaration states the geometric nodal-family existence theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-plurinodal-alteration",
@@ -76,5 +174,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-projective-nodal-family-geometry",
+  "worker": "stage1",
+  "summary": "Split the projective nodal-family statement into the canonical first-Fitting singular-subsheme construction, its nodal-family unramified/smooth-locus/base-change theorem, finite geometric fibres via discreteness and zero-dimensional finiteness, and the remaining projective/flat/finite-presentation and fibre-property base-change checks. Corrected the imported creator metadata to Q87 and recorded the required Mathlib searches.",
+  "blueprint": "Realizes the parent blueprint's normal-cone-specialization input: the nodal-family geometry used in proof (1)--(2), with the Stacks Tags 0C59 and 0C5B route made explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-bff05ddfc",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-bff05ddfc (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources: Stacks curves 0C59, 0C5A, 0C5B, definition-nodal and definition-multicross; divisors 0C3I, 0C3J, 0C3K; more-algebra 07Z8; and blueprint main-20261015 lem-trf-local-term-locality. The new lemma lem-trf-nodal-family-fitting-singular is a true, more general Stacks package and does not restate the item: (1)⇒(2) of 0C59, plus 0C3K with d=1, 0C3I and 0C5B. I tested it on xy=t over k[t] and its base change t=s^2, where Sing becomes Spec k[s]/(s^2), which is non-reduced as the item's disclaimer allows. Its hypotheses match the item. No duplicate exists anywhere in the DAG, and there is no Fitting ideal in Mathlib. Two repairs, in fixes/: (B2/B3) def-trf-first-fitting-singular-subscheme did not say which minors define Fit_1 and wrongly assumed a finite presentation of Omega_{A/R} for a morphism only locally of finite type. It now defines Fit_1 by the (n-1)-minors of matrices with rows in the relation module, as in 07Z8, cites its notions inline and adds 07Z6, 07Z8 and 07ZA to the source. (C1) Item step 2 reduced from geometric fibres to ordinary fibres with no citation and used closed-immersion base change without a node. It now works on the ordinary fibre Z=S_f x_Y kappa(y) directly, citing def-pc-scheme-fibre, unramified base change, the Mathlib leaf lem-weil-pbc-closed-immersion-base-change, projective base change, unramified-over-field-discrete and zero-dimensional-closed-subscheme-finite, and ends with: discrete and affine, hence quasi-compact, hence finite. proof_deps are updated and there is no cycle. Steps 1, 3 and 4 are correct as delivered. The item statement is unchanged. Note: the report says the item's created metadata was corrected, but the file still names Q88/lem-trf-plurinodal-alteration; that field is maintainer-owned and I left it. Tools from other units to record at the merge: lem-pc-projective-base-change, lem-pc-zero-dimensional-closed-subscheme-finite, lem-weil-pbc-unramified-over-field-discrete and lem-weil-pbc-unramified-base-change-open.; 2 file(s) fixed by the reviewer"
  }
 }

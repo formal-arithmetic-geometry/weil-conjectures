@@ -1,0 +1,87 @@
+{
+ "id": "lem-trf-generic-smooth-boundary-preparation",
+ "kind": "statement",
+ "title": "Generic smooth curve and etale boundary after inseparable preparation",
+ "statement": "Let $S$ be either the spectrum of a field or an excellent integral trait (the spectrum of a discrete valuation ring) [def-exc-excellent-ring, def-sc-discrete-valuation-ring]. Let $X$ be an integral scheme [def-pc-integral-scheme] with a proper [def-weil-proper-morphism] dominant finite-type [def-weil-finite-type-morphism] morphism $X\\to S$, and let $Z\\subset X$ be a nowhere dense closed subscheme [def-weil-closed-immersion] (its underlying set does not contain the generic point [def-sc-generic-point] of $X$). Let $Y$ be an excellent integral scheme with a projective [def-kun-projective] dominant morphism $Y\\to S$, let $X_0$ be an excellent integral scheme, let $a:X_0\\to X$ be a proper dominant generically finite morphism and $g:X_0\\to Y$ a proper dominant morphism such that the composites $X_0\\xrightarrow{a}X\\to S$ and $X_0\\xrightarrow{g}Y\\to S$ are equal, and assume that the extension of function fields $\\kappa(Y)\\subset\\kappa(X_0)$ [def-sc-function-field] induced by $g$ has transcendence degree one [def-kun-transcendence-degree]. Then there are an excellent integral scheme $Y_1$ with a projective, proper, dominant, generically finite morphism $b:Y_1\\to Y$ such that the composite $Y_1\\xrightarrow{b}Y\\to S$ is projective and the extension $\\kappa(Y)\\subset\\kappa(Y_1)$ is finite purely inseparable [def-pc-field-extension, def-weil-pbc-finite-purely-inseparable-extension], an excellent integral scheme $X_1$, and morphisms $c:X_1\\to X_0$ and $f:X_1\\to Y_1$ with $g\\circ c=b\\circ f$, such that $h=a\\circ c:X_1\\to X$ is proper, dominant and generically finite, $f$ is proper and dominant, and, for the generic point $y_1$ of $Y_1$, the fibre $(X_1)_{y_1}$ [def-pc-scheme-fibre] is a smooth [def-sbc-smooth-morphisms] irreducible curve over $\\kappa(y_1)$ and the fibre $((h^{-1}Z)_{\\mathrm{red}})_{y_1}$ of the reduced inverse image [def-weil-pbc-scheme-reduction] is finite [def-weil-finite-integral-morphism] etale [def-weil-etale-morphism] over $\\kappa(y_1)$ (possibly empty). Generically finite means finite over a dense open of the target. Excellence of a scheme means excellence of its affine coordinate rings.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X, proof of Theorem 3.5, Step 5, printed pp. 163--164: choose a finite purely inseparable extension K/k(Y) such that Nor(X_eta x K) and the reduced boundary are smooth, extend K to a projective alteration Y'->Y, and replace X over Y'. Gabber's 'schematic closure of X_K in X x_Y Y'' is read as the normalization of the dominant component of X_0 x_Y Y_1 (X_K is a normalization, not a subscheme; the closure alone can keep a non-smooth generic fibre, e.g. y^2=x^p-t over F_p(t)). Existence of K: Stacks varieties-lemma-finite-extension-geometrically-normal and algebra-lemma-make-separable."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-exc-excellent-ring",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-closed-immersion",
+  "def-kun-projective",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-kun-transcendence-degree",
+  "def-pc-scheme-fibre",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-finite-integral-morphism",
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "After a finite purely inseparable extension the generic fibre of a finite type integral scheme and the reduced boundary become smooth and etale",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.FormallyEtale.of_isSeparable_aux; Algebra.etaleLocus; no geometric preparation theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSmooth IsEtale IsPurelyInseparable",
+   "results": "none; loogle reported Unknown identifier IsSmooth",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query identifiers not found"
+  },
+  {
+   "tool": "grep",
+   "query": "purely inseparable|smoothLocus|IsEtale AlgebraicGeometry",
+   "results": "recorded msearch.py grep returned Mathlib source hits; no combined theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic smoothness after purely inseparable alteration and finite etale reduced boundary",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn; Algebra.FormallySmooth.of_perfectField; AlgebraicGeometry.IsEtale.instIsSmooth; no complete preparation theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-alteration-relative-curve-preparation",
+  "date": "2026-10-17",
+  "group": "Q82"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Expose X, proof of Theorem 3.5, Step 5: after the relative-curve factorization, pass to a finite purely inseparable extension of k(Y), take the normalizations, and spread the resulting generic preparation over a projective alteration of Y.",
+   "via": [
+    "lem-trf-alteration-relative-curve-preparation",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

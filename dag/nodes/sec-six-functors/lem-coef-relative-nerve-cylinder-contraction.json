@@ -13,9 +13,84 @@
   "lem-cbc-strict-presentation-transport-representation",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the subset-indexed relative-nerve construction to the strict diagram [1] → sSet with values P,Q and transition u. Its simplices are exactly the displayed mixed P/Q data, and its map to N([1]) is an inner fibration with endpoint fibres P and Q. The canonical map from the simplicial replacement is i:S→N. The same formula defines h: on a pure P simplex use u, and on a simplex meeting the Q end use its Q datum. Thus h|P=u, h|Q=id, and the transition edge p→u(p) is cocartesian. This also proves smallness and that no injectivity of u is used.",
+   "uses": [
+    "lem-cbc-strict-presentation-transport-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §3.2.5, Definition 3.2.5.2 and the relative-nerve transport construction"
+   }
+  },
+  {
+   "text": "By the formula of the relative nerve, an n-simplex of N is either a simplex x∈P_n (σ constant 0), a simplex y∈Q_n (σ constant 1), or, when σ is 0 exactly on [0,k] with 0≤k<n, a pair (x,y) with x∈P_k, y∈Q_n and y|Δ^{[0,k]}=u(x); indeed t_J=t_{[n]}|Δ^J for J meeting [k+1,n], t_J=t_{[0,k]}|Δ^J for J⊆[0,k], and the only remaining compatibility is t_{[n]}|Δ^{[0,k]}=u t_{[0,k]}. In these terms h(x)=u(x), h(x,y)=y, h(y)=y. Define θ:N×Δ¹→N on (s,τ), with s over σ and τ:[n]→[1], as the simplex over σ'=max(σ,τ) whose P-datum is the P-datum of s restricted to the initial segment where σ'=0 and whose Q-datum is h(s) when σ'≠0. Since σ'⁻¹(0)⊆σ⁻¹(0) and h(s) restricts to u of the P-datum on σ⁻¹(0), this is a simplex of N; restriction along an operator commutes with max, with restriction of the P-datum and with h, so θ is simplicial. For τ=0 it returns s, for τ=1 it returns h(s)∈Q, it is the projection on Q×Δ¹, on a P-simplex x it is (x|_{τ=0},u(x))=i(x,τ), and its Q-datum is always h(s); hence θ:id_N⇒ι_Q^N h, fixed on Q, with θ|_{P×Δ¹}=i|_{P×Δ¹} and hθ=h pr_N. No injectivity of u is used.",
+   "uses": [
+    "lem-cbc-strict-presentation-transport-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §3.2.5, Definition 3.2.5.2 (relative nerve); agent's explicit max-formula for the contraction"
+   }
+  },
+  {
+   "text": "N is a quasicategory, since N→N([1]) is an inner fibration (Step 1) and N([1]) is one; as the trivial fibration k has the right lifting property against every degreewise injective map, in particular against inner horn inclusions, M is a quasicategory too. Let A=M×∂Δ¹ ∪ (P⊔Q)×Δ¹ ⊆ M×Δ¹, where P,Q are the endpoint fibres of M. Define a:A→M by id_M on M×{0}, ι_Qw on M×{1}, the composite P×Δ¹→S→M of j on P×Δ¹, and the projection on Q×Δ¹. These agree on overlaps: on P×{0} because j is the identity on the 0-fibre; on P×{1} because j(p,1)=u(p) and w(p)=hk(p)=h(p)=u(p); on Q×{0,1} because w|_Q=hk|_Q=id. The square with a, the inclusion A⊆M×Δ¹, θ(k×id) and k commutes: on M×{0} and M×{1} since θ starts at id_N and ends at ι_Q^Nh and kι_Q=ι_Q^N; on P×Δ¹ since kj=i=θ|_{P×Δ¹}; on Q×Δ¹ since k and θ are the identity there. A⊆M×Δ¹ is degreewise injective, a cofibration, and k is a trivial fibration, so the weak factorization system (cofibrations, trivial fibrations) of the Joyal model structure gives a lift Θ:M×Δ¹→M with Θ|_A=a and kΘ=θ(k×id).",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Theorem 2.2.5.1 (Joyal model structure; lifting of monomorphisms against trivial fibrations)"
+   }
+  },
+  {
+   "text": "The endpoint identities in the filler give Θ|_{P×Δ¹}=j|_{P×Δ¹} and that Θ is fixed on Q. Since w=hk, compose kΘ=θ(k×id) with h and use hθ=h pr_N and hk=w to obtain wΘ=w pr_M. The same calculation on the other endpoint gives the stated maps ι_Q and ι_Q^N and all four displayed homotopy identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "formal endpoint and projection calculation from the preceding construction"
+   }
+  },
+  {
+   "text": "For H:M→E, apply H to Θ; M is a quasicategory by Step 3, so its slices M_{/d} are those of the slice node. Its restriction to P×Δ¹ is the prescribed transformation η:A⇒Fu. For d∈Q, the right-fibration description of the coherent slices identifies J and J' with the simplicial spaces of arrows to d. Naturality of the single simplicial homotopy HΘ gives, on every simplex of J, a prism between the tautological H-cocone and the pullback along w_d of the F-cocone; at (p,α) its edge is the composite F(α)η_p. The cone calculus and the canonical mapping-space composition supply all higher composition homotopies, so this is an identification of coherent cocones, not merely of components.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §3.2.5 prism; coherent-slice and cone-calculus verification"
+   }
+  },
+  {
+   "text": "If qH=bw, then applying q to the prism preserves the same specified base cocone because bwΘ=bw pr_M. Restricting to a wide subcategory B_C simply selects those slice simplices whose b- or bw-image lies in B_C; closure under composition makes this a simplicial restriction, and the same prism restricts. Empty fibres and noninjective u cause no change, since every construction was simplicial and fibrewise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "base-change and wide-subcategory restriction calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-presentation-transport-representation",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "paragraph beginning For K; coherent relative-nerve prism retained from the returned route"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-mapping-cylinder",
@@ -74,5 +149,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-nerve-cylinder-contraction",
+  "worker": "stage1",
+  "summary": "Split the endpoint-fixed relative-nerve contraction into six complete steps: explicit relative-nerve construction, simplexwise contraction, prescribed-boundary lifting through the trivial Joyal fibration, endpoint identities, coherent slice-cocone prism, and base restriction. No new nodes were needed; all non-elementary external facts are cited from existing DAG statements.",
+  "blueprint": "The ancestral prop-coef-integral-exceptional-adjoint proof paragraph beginning For K supplies the coherent relative-nerve prism route; the six steps make its HTT 3.2.5 and 2.2.5.1 construction explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-strict-presentation-transport-representation",
+    "why": "Its relative-nerve formula and cocartesian transport construct N, h and the transition edges used by the contraction."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Its coherent cone and mapping-space statements compare the full cocone prism after applying H."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-strict-presentation-transport-representation",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-52eff8346",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-52eff8346 (reviewer sub-agent of L); spot-checked: I read the whole item and the full statements of all seven cited nodes. The statement is unchanged from the base. No new nodes. No SGA is cited. This is not a target node. I checked the statement directly and it is true. In the relative nerve N, a mixed simplex is a pair (x in P_k, y in Q_n) with y restricted to [0,k] equal to u(x). The homotopy theta(s,tau) is the simplex over max(sigma,tau) with Q-datum h(s); it starts at id, ends at the inclusion of Q composed with h, is fixed on Q, equals i on P x Delta^1, and satisfies h theta = h pr. Theta exists by lifting the boundary map on A = M x boundary(Delta^1) union (P and Q) x Delta^1 against the trivial fibration k. The overlaps agree because j(p,1) = u(p) = w(p) and w restricted to Q is the identity. Then w Theta = w pr follows. Applying H to Theta gives the cocone prism, with component F(alpha) eta_p. The q and B_C clauses follow from bw Theta = bw pr. Edge cases checked: P empty, Q empty, u = id, noninjective u, empty slice. Faults repaired in fixes/dag/nodes/sec-six-functors/lem-coef-relative-nerve-cylinder-contraction.json: (1) C4/E3: step 3 cited lem-coef-endpoint-fixed-inner-horn-refinement to claim the inclusion of A into M x Delta^1 is a trivial cofibration; that node does not say this and it is not true in general. I rewrote the step to check the overlaps and the commuting square explicitly and lift using only the (cofibrations, trivial fibrations) weak factorization system of lem-coef-joyal-model-structure. The refinement node is removed from the item's citations but stays cited by the parent. (2) E5: step 2 only gestured at the construction of theta; it now gives the explicit simplices of N and the max-formula for theta. (3) Step 5 used slices of M without showing M is a quasicategory; added (N to Delta^1 is an inner fibration and k is a trivial fibration). proof_deps is recomputed. The two declared tool uses, lem-cbc-strict-presentation-transport-representation and lem-cbc-enhanced-functor-cone-calculus, are generic infinity-category tools and I accept them. HTT is not in literature/, so proof_origin by agent and the WANTED lines are correct. The cited blueprint paragraph ('For K' in prop-coef-integral-exceptional-adjoint.proof.md) exists. Duplicate search: of about 100 rg hits, the closest five (enriched-mapping-cylinder-localization, cocartesian-relative-cylinder-extension, operadic-collage-comparison, mapping-simplex-final-edge, join-slice-cocone-comparison) do not state this lemma.; 1 file(s) fixed by the reviewer"
  }
 }

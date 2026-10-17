@@ -11,9 +11,89 @@
   "lem-coef-adjunction-squiggle-normal-form",
   "lem-coef-adjunction-fillable-parent-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $w=w(a)$ and $k=k(a)$. By [lem-coef-adjunction-squiggle-normal-form], compute $d_i a$ by applying $q_i(t)=t$ for $t\\leq i$ and $q_i(t)=t-1$ for $t>i$, where the old alphabet is $0,\\ldots,n+1$, and then cancelling equal adjacent pairs. Each cancellation deletes two letters, hence decreases width by two. Cut the reduced string at its endpoint symbols to obtain its atomic factors; widths add under concatenation. To remove degeneracies from a factor, list its distinct internal numerical letters $t_1<\\cdots<t_r$ and replace $t_j$ by $j$. This leaves width unchanged, makes its dimension $r\\leq n-1$, and replaces any retained numerical letter $t_j$ by $j\\leq t_j$. These operations give exactly the nondegenerate factors specified in the statement, by uniqueness of the normal form. By [lem-coef-adjunction-fillable-parent-bijection], for every such factor $b$, $w(g(b))\\leq w(b)+1$: a fillable factor is unchanged, a nonfillable factor with target $-$ has a parent of the same width, and one with target $+$ has a parent of width one greater.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Coordinate preliminaries for the factor decomposition in Proposition 4.2.15, pp. 839--840; normal form and parent formulas from the two cited nodes"
+   }
+  },
+  {
+   "text": "First suppose $i\\ne k-1,k$. The two levels identified by $q_i$ are disjoint from $k$. Consequently the first internal letter becomes $k'=k-1$ if $i<k-1$, and $k'=k$ if $i>k$; in either case $1\\leq k'\\leq n-1$. Since $k$ occurred only once, $k'$ still occurs only once. No cancellation can delete this letter, because deleting a letter requires an equal neighbour. The initial $-$ cannot cancel either: the surviving $k'$ separates it from the rest of the string. Thus the first atomic factor contains this internal letter and has width at least two. On removing its degeneracies, its nondegenerate factor $b_1$ still has target $-$ and a unique first internal letter, hence is fillable by [lem-coef-adjunction-fillable-parent-bijection]. Step 1 gives $w(b_1)\\leq w$, $k(b_1)\\leq k'\\leq k$, and $\\dim b_1\\leq n-1$. If width drops, the first rank coordinate drops; otherwise depth drops or stays equal, and in the latter case dimension drops. Therefore $\\rho(g(b_1))=\\rho(b_1)<\\rho(a)$.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proposition 4.2.15, p. 839, first bullet: the first atomic factor when the face index is neither depth nor depth minus one"
+   }
+  },
+  {
+   "text": "Still in the case of step 2, every further atomic factor $b_j$ has $w(b_j)\\leq w-2$: the first factor already contributes at least two to the total reduced width, which is at most $w$, and all other widths are nonnegative. Step 1 and the parent-width formula of [lem-coef-adjunction-fillable-parent-bijection] give $w(g(b_j))\\leq w(b_j)+1\\leq w-1<w$. This proves the required strict lexicographic inequality for all remaining factors, regardless of their targets, degeneracies, or fillability.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proposition 4.2.15, p. 839, first bullet: later factors have width at most the original width minus two"
+   }
+  },
+  {
+   "text": "It remains to take $i=k-1$. If $w=2$, atomicity and nondegeneracy force $a=(-,1,-)$ and $n=k=1$: there is only one internal letter, and every numerical level must occur. Applying $q_0$ gives $(-,-,-)$, which reduces to the singleton identity $(-)$. Its atomic word is empty, so there is nothing to check. Positive dimension excludes $w=1$. Hence in all remaining cases $w>2$, and $a_2$ is internal; strict alternation gives $1\\leq a_2<k$, so $k\\geq2$.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proposition 4.2.15, p. 839, second bullet: the width-two counit and the bound on depth for larger width"
+   }
+  },
+  {
+   "text": "Suppose $i=k-1$ and $a_2=k-1$. The map $q_{k-1}$ identifies the adjacent letters $a_1=k$ and $a_2=k-1$, so at least one equal pair is cancelled. Thus the reduced width is at most $w-2$. Since $k\\geq2$ and $k\\leq n$, this face map identifies two internal levels, and no internal letter becomes an endpoint symbol. Reductions introduce no new letters. The result is therefore either an identity, whose word is empty, or a single atomic arrow. In the latter case remove its degeneracies to obtain $b$ of width at most $w-2$. The width bound from step 1, using [lem-coef-adjunction-fillable-parent-bijection], gives $w(g(b))\\leq w-1<w$, as required. This also covers further cancellations and loss of numerical levels during reduction.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proposition 4.2.15, pp. 839--840, second bullet, subcase where the first internal letter is one above the second"
+   }
+  },
+  {
+   "text": "Finally suppose $i=k-1$ and $a_2<k-1$. The only distinct letters merged by $q_{k-1}$ are $k-1,k$. The unique occurrence of $k$ is at position 1, whose neighbours are $-$ and $a_2<k-1$. Hence the mapped string has no equal adjacent pair and needs no reduction. Its width is $w$. Both merged levels are internal, so it remains atomic with target $-$. Every new numerical level occurs, since every old numerical level occurred and $q_{k-1}$ maps the old internal levels onto the new ones. Thus this face $b=d_{k-1}a$ is nondegenerate of dimension $n-1$. Nondegeneracy of $a$ also supplies an occurrence of $k-1$; it is neither $a_1$ nor $a_2$, hence is at a position greater than 2. After applying $q_{k-1}$, the first internal letter $k-1$ therefore occurs again, so $b$ is nonfillable. Its target is $-$, so [lem-coef-adjunction-fillable-parent-bijection] gives $w(b^\\dagger)=w$ and $k(b^\\dagger)=b_1=k-1$. Consequently $\\rho(g(b))=\\rho(b^\\dagger)<\\rho(a)$ by the second coordinate. This is the only atomic factor. Together with steps 2--5, these cases exhaust $i\\ne k$ and every factor in its normal word.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proposition 4.2.15, p. 840, final subcase: no reduction, repeated initial level, and parent of depth one smaller"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-adjunction-squiggle-normal-form",
+  "lem-coef-adjunction-fillable-parent-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Proposition 4.2.15, pp. 839--840, expanded coordinate proof from the stated normal-form and parent formulas; online source read, archival copy WANTED"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +122,45 @@
    "results": "{\"t\": \"2026-10-17T15:01:05Z\", \"tool\": \"grep\", \"query\": \"computad|squiggle|walking.*adjunction|adjunction.*cell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: Pairing.RankFunction.wf_ancestralRel (AnodyneExtensions/Rank.lean:58) assumes an already supplied rank inequality; it does not prove the squiggle-specific inequality or its factorwise formulation. SimplexCategory factorization results only factor ordinal maps. Both semantic phrasings read."
+  },
+  {
+   "tool": "grep",
+   "query": "squiggle|walkingAdjunction|fillable|nondistinguished",
+   "results": "{\"t\": \"2026-10-17T16:01:57Z\", \"tool\": \"grep\", \"query\": \"squiggle|walkingAdjunction|fillable|nondistinguished\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no squiggle, walkingAdjunction, fillable or nondistinguished declarations in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nondistinguished faces of atomic strings in the free adjunction decrease the width depth dimension rank after taking fillable parents",
+   "results": "{\"t\": \"2026-10-17T16:01:57Z\", \"tool\": \"leansearch\", \"query\": \"Nondistinguished faces of atomic strings in the free adjunction decrease the width depth dimension rank after taking fillable parents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.Pairing.rank'_lt\", \"SSet.Subcomplex.PairingCore.WeakRankFunction.lt\", \"SSet.Subcomplex.Pairing.RankFunction.lt\", \"SSet.Subcomplex.Pairing.WeakRankFunction.lt\", \"Mathlib.Tactic.Widget.StringDiagram.Node.atom.elim\", \"Mathlib.Tactic.Widget.StringDiagram.AtomNode.vPos\", \"FreeSimplexQuiver.Hom.δ.sizeOf_spec\", \"FreeSimplexQuiver.σ\"], \"digest\": \"f27760dd50b70377\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Pairing.RankFunction.lt is a field of an assumed rank function, not a proof of this concrete rank decrease; rank'_lt concerns an already accessible ancestral relation. Other hits describe string-diagram widget nodes or ordinal generators."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, WellFounded",
+   "results": "{\"t\": \"2026-10-17T16:01:58Z\", \"tool\": \"loogle\", \"query\": \"SSet, WellFounded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"SSet.Subcomplex.Pairing.wf\", \"SSet.Subcomplex.Pairing.IsRegular.wf\", \"SSet.Subcomplex.Pairing.IsRegular.mk\", \"SSet.Subcomplex.PairingCore.IsRegular.wf\", \"SSet.Subcomplex.PairingCore.IsRegular.mk\", \"SSet.Subcomplex.Pairing.RankFunction.wf_ancestralRel\", \"SSet.Subcomplex.Pairing.WeakRankFunction.wf_ancestralRel\"], \"digest\": \"f5634a22b0ecb2ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Pairing.wf and Pairing.RankFunction.wf_ancestralRel assume regularity or a supplied decreasing rank; they do not establish the specific squiggle inequality. Read Rank.lean:46--63."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclic matching on reduced alternating strings for the free adjunction: rank decreases on other faces",
+   "results": "{\"t\": \"2026-10-17T16:01:58Z\", \"tool\": \"leanfinder\", \"query\": \"Acyclic matching on reduced alternating strings for the free adjunction: rank decreases on other faces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.Pairing.rank'_lt\", \"SSet.Subcomplex.Pairing.rank_lt\", \"SSet.Subcomplex.Pairing.WeakRankFunction.lt\", \"SSet.Subcomplex.Pairing.RankFunction.lt\", \"SSet.Subcomplex.PairingCore.WeakRankFunction.lt\", \"SSet.Subcomplex.Pairing.rank'_eq\", \"SSet.Subcomplex.Pairing.RankFunction.isRegular\", \"SSet.Subcomplex.PairingCore.RankFunction.lt\"], \"digest\": \"79bf27aaf9b86fb1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: both phrasings returned general simplex factorizations, horn filling, or rank functions for already regular pairings; none constructs or ranks the free-adjunction squiggles."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the walking adjunction, every nondistinguished face of a fillable squiggle is generated by fillable arrows of smaller lexicographic width depth dimension",
+   "results": "{\"t\": \"2026-10-17T16:01:59Z\", \"tool\": \"leanfinder\", \"query\": \"In the walking adjunction, every nondistinguished face of a fillable squiggle is generated by fillable arrows of smaller lexicographic width depth dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.faces\", \"SimplexCategoryGenRel.exists_normal_form_P_σ\", \"SSet.Quasicategory.hornFilling\", \"SimplexCategoryGenRel.P_δ\", \"SimplexCategoryGenRel.exists_P_σ_P_δ_factorization\", \"SimplexCategoryGenRel.P_σ\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.J\"], \"digest\": \"f314a776feca0f4a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: both phrasings returned general simplex factorizations, horn filling, or rank functions for already regular pairings; none constructs or ranks the free-adjunction squiggles."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-walking-adjunction-cell-filtration",
@@ -69,5 +184,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-adjunction-nondistinguished-face-rank",
+  "worker": "stage1",
+  "summary": "Preserved the statement and wrote all nondistinguished-face cases directly from the two existing normal-form and parent-bijection statements, including arbitrary degeneracies, later atomic factors, the width-two identity, and both adjacent-depth subcases. No new nodes; no statement correction. Read Riehl--Verity online, searched the project, whole DAG/blueprint and Mathlib, and checked small strings.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2, middle enriched mapping-complex adjunction before inverse limit: the coherent finite-system realization uses the walking-adjunction cell filtration. Steps 1--6 supply its factorwise rank decrease in the lexicographic filtration; this is the exact Proposition 4.2.15 nondistinguished-face analysis already recorded in blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-bff06baba",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-bff06baba (reviewer sub-agent of L); spot-checked: I read the item in full, both cited statements in full (squiggle-normal-form; fillable-parent-bijection, including both parent-width branches), the parent cell-filtration step 3 that uses the item, and Riehl-Verity Adv. Math. 286 (online PDF, read as text in /tmp): Def 4.1.1, Obs 4.1.2, Lemmas 4.1.3-4.1.4 (pp. 832-834) and Prop 4.2.15 with its proof (pp. 838-840). The statement is the source's 'a.delta^l in A_{i-1} for l != k' written factorwise through the lexicographic (w,k,n) rank, which is exactly what the parent uses; it is not weakened and it restates no parent clause. Step 1: face, deletion, concatenation and compression facts all come from the normal-form statement, and w(g(b)) <= w(b)+1 comes from the parent formula. Steps 2-3 (i not k-1 or k): the unique letter k' = q_i(k) satisfies 1 <= k' <= n-1, which I checked at i=0 and i=n. It cannot be deleted, so the first factor is fillable with rank (<=w, <=k, <=n-1), and later factors have width <= w-2, so their parents have width <= w-1. Step 4 (elementary): width 2 forces a = epsilon, whose face d_0 is an identity; otherwise k >= 2. Step 5 (a_2 = k-1): a pair cancels, so the result is at most one atomic factor of width <= w-2. Step 6 (a_2 < k-1): no reduction, width w, nondegenerate and nonfillable, and its parent has depth k-1. Steps 5-6 are the source's two subcases. Independent enumeration over n <= 5, w <= 9: all 9898 factor inequalities hold (one empty-word face), and (a^-)^dagger = a holds for all 1255 fillable arrows. There are no new nodes. The rg duplicate search finds no duplicate. The searches recorded in mathlib_searches have real results, and mathlib_match null is correct. The route is combinatorial with no SGA, not a target node, and the unit is unchanged. No tool_uses and no fixes."
  }
 }

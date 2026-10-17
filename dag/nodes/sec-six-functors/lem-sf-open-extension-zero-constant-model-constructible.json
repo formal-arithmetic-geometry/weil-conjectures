@@ -26,9 +26,109 @@
   "det-def-sfb-constructible-local-model",
   "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite-type-over-a-field case in [def-weil-constructible-subset] applies by [sk-def-sfb-dc-setting]: X is Noetherian, and every locally closed subset is constructible. To view each given stratum as a locally closed subscheme of X, factor its immersion into U as a closed immersion into an open subscheme W of U followed by W→U; W is also open in X, so the same closed immersion into W defines the required immersion into X. The closed subset X\\U has the reduced induced closed subscheme Z by [lem-weil-pbc-reduced-induced-closed-subscheme]. Its image is closed, hence locally closed and constructible. The strata remain pairwise disjoint and cover U; adding Z gives a finite disjoint cover of X, hence the stratification of [def-constructible-stratification]. Moreover j is quasi-compact: for any affine open V in X, U∩V is quasi-compact, since U is retrocompact in the Noetherian space X by [def-weil-constructible-subset].",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-constructible-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "paragraph 'Constructibility'"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] with $A=\\Lambda_X$ and the complementary pair $(j,i\\colon Z\\to X)$ of step 1; its hypothesis that $j$ is quasi-compact was checked there. Its functors are sectionwise module functors, which we now identify with the module-object functors. By [sk-def-sfb-ring-object] the sheaf tensor product is the sheafified sectionwise tensor product, so a map from it to a sheaf is a compatible family of sectionwise bilinear maps; hence the ring and module objects of [sk-def-sfb-module-objects] are exactly the sheaves of rings and of modules of [def-weil-sheaf-of-modules-category], with the same morphisms. For $g\\in\\{j,i\\}$ with source $T$, the inverse image $g^{-1}$ of [def-weil-proetale-inverse-image] and the pullback $g^*_{\\Ab}$ of [def-sfb-finite-upper-star] are both the sheafification of the colimit of $\\mathcal F(V)$ over the same category of pairs $(V,\\,T'\\to T\\times_XV)$, the left Kan extension along the opposite of the base-change functor. The canonical comparison $g^{-1}\\cong g^*_{\\Ab}$ respects the sectionwise ring and module operations, so it identifies $g^{-1}\\Lambda_X$ with the ring object $g^*_{\\Ab}\\Lambda_X$ and $g^{-1}$ on modules with $\\operatorname{mapMod}(g^*_{\\Ab})$. The module $j_!$ of the ringed theorem is left adjoint to $j^{-1}$, and $j^{\\mathrm{lin}}_!$ of [def-sfb-module-linear-open-lower-shriek] is left adjoint to $\\operatorname{mapMod}(j^*_{\\Ab})$. These are two left adjoints of one functor $\\Mod_{\\Lambda_X}\\to\\Mod_{j^*\\Lambda_X}$, so by [lem-weil-pbc-conjugate-iso-unit-equation] with $\\delta=\\mathrm{id}$ they are naturally isomorphic.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-def-sfb-ring-object",
+    "sk-def-sfb-module-objects",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-proetale-inverse-image",
+    "def-sfb-finite-upper-star",
+    "def-sfb-module-linear-open-lower-shriek",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open), in the ringed form stated by lem-weil-pbc-proetale-ringed-open-closed; module action as in sk-def-sfb-module-lower-shriek"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-coefficient-morphisms], $\\alpha_j\\colon j^*\\Lambda_X\\to\\Lambda_U$ and $\\alpha_i\\colon i^*\\Lambda_X\\to\\Lambda_Z$ are isomorphisms of ring objects, so clause 5 of [sk-def-sfb-change-of-scalars] gives $\\operatorname{Ext}_{\\alpha}\\cong\\operatorname{Res}_{\\alpha^{-1}}$, a quasi-inverse of $\\operatorname{Res}_\\alpha$. The module pullback is $g^*=\\operatorname{Ext}_{\\alpha_g}\\circ\\operatorname{mapMod}(g^*_{\\Ab})$ [sk-def-sfb-module-pushforward-pullback], and $j_!=j^{\\mathrm{lin}}_!\\circ\\operatorname{Res}_{\\alpha_j}$ [sk-def-sfb-module-lower-shriek]. With step 2 and the identities $j^{-1}j_!\\cong\\mathrm{id}$ and $i^{-1}j_!=0$ of [lem-weil-pbc-proetale-ringed-open-closed], applied to the $j^{-1}\\Lambda_X$-module $\\operatorname{Res}_{\\alpha_j}M$, this gives $j^*j_!M\\cong\\operatorname{Ext}_{\\alpha_j}\\operatorname{Res}_{\\alpha_j}M\\cong M$ as $\\Lambda_U$-modules. It also gives $i^*j_!M\\cong\\operatorname{Ext}_{\\alpha_i}(0)=0$ as $\\Lambda_Z$-modules, since the left adjoint $\\operatorname{Ext}_{\\alpha_i}$ is additive and sends zero to zero. For the immersion $h_a\\colon U_a\\to U$ of a stratum, $j\\circ h_a$ is the immersion of step 1, and the composition isomorphism $(j\\circ h_a)^*\\cong h_a^*j^*$ of [sk-def-sfb-module-pushforward-pullback] gives $(j_!M)|_{U_a}\\cong h_a^*M=M|_{U_a}$.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open), in the ringed form stated by lem-weil-pbc-proetale-ringed-open-closed; module action as in sk-def-sfb-module-lower-shriek"
+   }
+  },
+  {
+   "text": "Write N=j_!M. For each a choose the pro-étale cover {V_ai→U_a}, finitely presented Λ(*)-modules P_ai, and isomorphisms M|_{V_ai}≅Λ_{V_ai}⊗_{Λ(*)}P_ai given by [det-def-sfb-constructible-local-model]. Pull back the isomorphism N|_{U_a}≅M|_{U_a} of step 3 to V_ai, then compose with this chosen isomorphism. This explicitly gives N|_{V_ai}≅Λ_{V_ai}⊗_{Λ(*)}P_ai, using precisely the same cover, modules and scalar maps. Restriction means module pullback, and iterated restrictions agree by [sk-def-sfb-module-pushforward-pullback]. On Z, step 3 gives N|_Z=0; use the identity cover and P=0, whose finite presentation is Λ(*)^0→Λ(*)^0→0 and whose scalar extension is zero. The stratification in step 1 and these local models give constructibility by [sk-def-sfb-constructible].",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "paragraph 'Constructibility': restrictions are locally constant on the same strata and zero on the added closed stratum"
+   }
+  },
+  {
+   "text": "The construction also handles the empty-open and identity-open cases. If U=∅, every object of its small pro-étale site is empty, and the empty covering forces every abelian sheaf value to be zero; hence M=0. The additive extension by zero of [def-sfb-module-open-lower-shriek] sends this to zero, and the rank-zero presentation in step 4 gives a constant local model on X. If U=X, Z=∅ and the original strata and models already suffice. An empty stratum may be retained in the finite-family definition [def-constructible-stratification], or omitted. The same argument also covers X=∅.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-sfb-module-open-lower-shriek",
+    "det-def-sfb-constructible-local-model",
+    "def-constructible-stratification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "paragraph 'Constructibility'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-sfb-finite-upper-star",
+  "def-sfb-module-linear-open-lower-shriek",
+  "def-sfb-module-open-lower-shriek",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "det-def-sfb-constructible-local-model",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-ring-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+  "place": "paragraph 'Constructibility', expanded using the cited module and ringed pro-étale statements"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -36,10 +136,73 @@
    "results": "first pattern: only unrelated LinearAlgebra/InvariantBasisNumber, Algebra/Group/Pi/Lemmas, LinearAlgebra/Pi, LinearAlgebra/Dimension/StrongRankCondition (extend-by-zero of functions); second: Topology/Constructible, Topology/Spectral/ConstructibleTopology, RingTheory/Spectrum/Prime/{ConstructibleSet,Chevalley,ChevalleyComplexity,Topology}, AlgebraicGeometry/Morphisms/FinitePresentation (constructible subsets only)",
    "date": "2026-10-17",
    "verdict": "no match: Mathlib has no pro-etale module sheaves, extension by zero of sheaves, or constructible sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero preserves finite constant local model constructibility for pro-etale module objects",
+   "results": "ModuleCat.Tilde.exists_const; ModuleCat.Tilde.const; ModuleCat.Tilde.res_const; Profinite.NobelingProof.Nobeling_aux; Module.isLocallyConstant_rankAtStalk; Module.isLocallyConstant_rankAtStalk_freeLocus; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType. None states the pro-etale condensed-module result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsConstructibleModuleObject, openImmersionLowerShriek",
+   "results": "0 hits; unknown identifier IsConstructibleModuleObject.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject|openImmersionLowerShriek|constant local model",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero preserves finite constant local models for module objects on pro-etale schemes",
+   "results": "DFinsupp.lmk; FractionalIdeal.extended_zero; ContMDiff.extend_zero; Finsupp.extendDomain.congr_simp; LocallyConstant.instZero; ContinuousLinearMap.extend_zero; AlgebraicGeometry.StructureSheaf.const_zero; no constructible pro-etale module declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extendByZero|lowerShriek|IsConstructibleSheaf",
+   "results": "Mathlib/Algebra/Group/Pi/Lemmas.lean; Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean; Mathlib/LinearAlgebra/InvariantBasisNumber.lean; Mathlib/LinearAlgebra/Pi.lean; Mathlib/LinearAlgebra/Pi.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state extension by zero for constructible modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of a sheaf of modules preserves constructibility",
+   "results": "ContMDiff.extend_zero; DFinsupp.lmk; Function.ExtendByZero.linearMap; HasCompactSupport.extend_zero; Finsupp.extendDomain; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; Finsupp.extendDomain.congr_simp; Function.extend_zero",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state extension by zero for constructible modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"shriek\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state extension by zero for constructible modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of a constructible sheaf of modules over a condensed ring preserves finite constant local models on a finite stratification",
+   "results": "CondensedMod.LocallyConstant.functor; Condensed.finFree; CompHausLike.LocallyConstantModule.functor; Condensed.profiniteSolid; CondensedMod.ofSheafStonean; LightCondMod.LocallyConstant.functor; CondensedMod.ofSheafCompHaus; CondensedMod.ofSheafProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state extension by zero for constructible modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf locally given by finitely presented constant modules on finitely many locally closed strata remains so after extension by zero across an open immersion",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFiniteType; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state extension by zero for constructible modules over an arbitrary condensed ring"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -56,5 +219,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-open-extension-zero-constant-model-constructible",
+  "worker": "stage1",
+  "summary": "Retained the previous attempt and its logged Mathlib searches. Repaired its non-verbatim citations and the unsupported restriction/vanishing step by citing the existing ringed pro-étale open-closed theorem, checking quasi-compactness and the coefficient-linear action explicitly. Expanded reuse of the local models and checked empty-open, identity-open, empty-scheme, and zero-coefficient cases. No new nodes or statement changes.",
+  "blueprint": "The blueprint paragraph 'Constructibility': exactness/restriction on the original strata, adjoining the closed complement as a zero stratum, and inheritance of the local models.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ringed pro-étale restriction and zero-extension identities; the unit sketch uses these facts but supplies no separate ringed statement."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic existence of the reduced induced structure on the closed complement; the unit sketch supplies no construction of that scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-5a84c8104",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-5a84c8104 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the mathematics is correct. The statement is unchanged and not weakened; it uses the DAG's constant-local-model constructibility notion (sk-def-sfb-constructible, det-def-sfb-constructible-local-model), which is what Dctf uses in the parent det-proper-image-localizing-open. It is not a duplicate: lem-sfb-dc-open-lower-shriek-preserves proves the weaker locally finitely presented version. Step 1 (Noetherian, locally closed strata are constructible, immersions compose, reduced Z by lem-weil-pbc-reduced-induced-closed-subscheme, j quasi-compact) checked. Old step 3, local models on the same covers and modules with the zero model on Z, checked. Edge-case step checked: U empty, U=X, X empty, M=0, zero ring, non-reduced X. Sources read: blueprint main-20261015 sk-prop-proper-image-localizing-open.proof.md paragraph 'Constructibility', and Stacks proetale.tex 09AG, 09BN, 09AH. One repairable fault, E5: step 2 only asserted that the ringed theorem's j_!, j^{-1} and i^{-1} (lem-weil-pbc-proetale-ringed-open-closed, which works with sectionwise modules) are the module-object functors j^lin_! o Res_alpha and Ext_alpha o mapMod(g^*_Ab). I wrote that identification out as a new step 2, following steps 4-5 of lem-sfb-dc-open-lower-shriek-preserves: module objects are sectionwise modules, g^{-1} equals g^*_Ab as the same Kan extension, and the two left adjoints of one functor are isomorphic by the Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation. New step 3 then derives j^*j_!M=M and i^*j_!M=0 using clause 5 of sk-def-sfb-change-of-scalars and the composition isomorphism. Old steps 3 and 4 are renumbered 4 and 5, and proof_deps is recomputed. I accept both tool uses: lem-weil-pbc-proetale-ringed-open-closed and lem-weil-pbc-reduced-induced-closed-subscheme. All cited ids exist, there is no cycle and no SGA source. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-sf-open-extension-zero-constant-model-constructible.json and the full review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

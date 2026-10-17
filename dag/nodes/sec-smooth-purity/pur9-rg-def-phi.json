@@ -3,25 +3,72 @@
  "blueprint": {
   "is": "pur9-rg-def-phi",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The smooth-purity comparison for a regular immersion",
- "statement": "On a connected component of $X$ of dimension $N$, with $m=N-c$ (Lemma “Dimension of a regular immersion” (`pur9-rg-lem-dimension`, in [sk-lem-regular-smooth])), let $\\Phi_i:(\\mathcal O_E/\\varpi^n)_Z\\to Ri^!_{\\mathcal O_E/\\varpi^n}(\\mathcal O_E/\\varpi^n)_X(c)[2c]$ be the composite in $D(Z_{\\Proet},\\mathcal O_E/\\varpi^n)$ of: $\\Pi_{a_Z}^{-1}$ of Theorem “Finite-coefficient smooth purity” (`pur9-thm-smooth-purity`, in [sk-thm-smooth-purity]), twisted by $(-m)[-2m]$; the comparison $c_{a_X,i}:\\omega_{a_Z}\\cong Ri^!_{\\mathcal O_E/\\varpi^n}\\omega_{a_X}$ of Lemma “The exceptional composition comparison is invertible” (`pur9-lem-upper-shriek-composition`) and Lemma “Smoothness of the two structure morphisms” (`pur9-rg-lem-smooth`, in [sk-lem-regular-smooth]), twisted by $(-m)[-2m]$; $Ri^!_{\\mathcal O_E/\\varpi^n}\\Pi_{a_X}$, twisted by $(-m)[-2m]$; and the isomorphisms of Lemma “Twists pass through the exceptional inverse image of a closed immersion” (`pur9-cp-lem-twist`, in [sk-lem-coprojection]) moving the twists $(N)[2N]$ and $(-m)[-2m]$ through $Ri^!_{\\mathcal O_E/\\varpi^n}$, with $N-m=c$; assembled over the components of $X$, the categories over a disjoint union being products.",
+ "statement": "In the finite-coefficient purity conventions of [def-pur-conventions], let $i:Z\\hookrightarrow X$ be a regular closed immersion of pure codimension $c$ as in [def-pur-regular-immersion], with $X$ smooth over the perfect field $k$ and $Z$ regular. Let $a_X:X\\to\\operatorname{Spec}k$ be the structure morphism and $a_Z=a_X\\circ i$; both are smooth by [lem-pur-regular-immersion-smooth-structure]. Put $\\Lambda=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and work in $D(Z_{\\Proet},\\Lambda)$ [def-weil-pbc-proetale-site] with the exceptional inverse image of [def-weil-exceptional-inverse-image]. Write\n$$\n\\omega_{a_X}=Ra_X^!\\Lambda_{\\operatorname{Spec}k},\\qquad \\omega_{a_Z}=Ra_Z^!\\Lambda_{\\operatorname{Spec}k}.\n$$\nFor composable separated finite-type morphisms $f,g$ of finite-type $k$-schemes, $c_{g,f}:R(gf)^!\\to Rf^!Rg^!$ denotes the composition comparison of [pur9-def-upper-shriek-composition]; it is an isomorphism, being the adjunction conjugate [def-weil-pbc-adjunction-conjugate] of the composition isomorphism $\\alpha_{g,f}$ of [thm-sf-comp-composition].\n\n*Connected case.* Suppose first that $X$ is connected, of dimension $N$, so that $a_X$ is smooth of pure relative dimension $N$. If $Z=\\varnothing$, put $\\Phi_i=0$ (both objects are zero). Otherwise $Z$ has pure dimension $m=N-c$ by [lem-pur-regular-immersion-smooth-structure], and $a_Z$ is smooth of pure relative dimension $m$. Put $c_{a_X,i}=c_{a_X,i,\\Lambda_{\\operatorname{Spec}k}}:\\omega_{a_Z}\\xrightarrow{\\sim}Ri^!\\omega_{a_X}$, and let\n$$\n\\Pi_{a_X}:\\omega_{a_X}\\xrightarrow{\\sim}\\Lambda_X(N)[2N],\\qquad\n\\Pi_{a_Z}:\\omega_{a_Z}\\xrightarrow{\\sim}\\Lambda_Z(m)[2m]\n$$\nbe the canonical smooth-purity orientations specified by [def-pur-smooth-purity-map] (for $f=a_X$, $d=N$ and for $f=a_Z$, $d=m$). Define\n$$\n\\Phi_i:\\Lambda_Z\\longrightarrow Ri^!\\bigl(\\Lambda_X(c)[2c]\\bigr)\n$$\nin $D(Z_{\\Proet},\\Lambda)$ as the specified composite $\\Phi(i;c_{a_X,i},\\Pi_{a_X},\\Pi_{a_Z})$ of [lem-pur-twist-cancellation], for the data $N=m+c$, $\\omega_X=\\omega_{a_X}\\in D^b_c(X,\\Lambda)$, $\\omega_Z=\\omega_{a_Z}\\in D^b_c(Z,\\Lambda)$ [def-weil-exceptional-inverse-image], $b=c_{a_X,i}$, $\\Pi_X=\\Pi_{a_X}$ and $\\Pi_Z=\\Pi_{a_Z}$:\n$$\n\\Lambda_Z\\xrightarrow{\\Pi_{a_Z}^{-1}(-m)[-2m]}\\omega_{a_Z}(-m)[-2m]\\xrightarrow{c_{a_X,i}(-m)[-2m]}(Ri^!\\omega_{a_X})(-m)[-2m]\\xrightarrow{(Ri^!\\Pi_{a_X})(-m)[-2m]}\\bigl(Ri^!(\\Lambda_X(N)[2N])\\bigr)(-m)[-2m]\\xrightarrow{\\sim}Ri^!\\bigl(\\Lambda_X(c)[2c]\\bigr),\n$$\nthe last arrow being, as specified there, the inverse co-projection isomorphism for the Tate shift [lem-pur-coprojection] followed by twist additivity and $N-m=c$.\n\n*General case.* Let $X_1,\\dots,X_r$ be the connected components of $X$ (finitely many, $X$ being of finite type over $k$), with open and closed inclusions $j_s:X_s\\hookrightarrow X$; put $Z_s=i^{-1}(X_s)$, with open and closed inclusion $j'_s:Z_s\\hookrightarrow Z$ and induced closed immersion $i_s:Z_s\\hookrightarrow X_s$, so that $i\\circ j'_s=j_s\\circ i_s$. Each $i_s$ again satisfies the hypotheses above (the conditions of [def-pur-regular-immersion] are on the local rings at points of $Z_s$, which are unchanged), so $\\Phi_{i_s}$ is defined by the connected case. Put $L=\\Lambda_X(c)[2c]$, so $Lj_s^*L=\\Lambda_{X_s}(c)[2c]$, and let\n$$\n\\beta_s:Ri_s^!Lj_s^*L\\xrightarrow{Ri_s^!\\rho_{j_s,L}^{-1}}Ri_s^!Rj_s^!L\\xrightarrow{c_{j_s,i_s,L}^{-1}}R(j_si_s)^!L=R(ij'_s)^!L\\xrightarrow{c_{i,j'_s,L}}Rj'^{\\,!}_sRi^!L\\xrightarrow{\\rho_{j'_s,Ri^!L}}Lj'^{\\,*}_sRi^!L,\n$$\nwhere $\\rho_e:Re^!\\simeq Le^*$ is the canonical isomorphism of [lem-pur-finite-etale-dualizing-normalization] for the etale maps $e=j_s,j'_s$. Then $\\Phi_i:\\Lambda_Z\\to Ri^!(\\Lambda_X(c)[2c])$ is the unique morphism with $Lj'^{\\,*}_s\\Phi_i=\\beta_s\\circ\\Phi_{i_s}$ for every $s$ (using $Lj'^{\\,*}_s\\Lambda_Z=\\Lambda_{Z_s}$); it exists and is unique because restriction to the finite open and closed cover $(Z_s)_s$ is an equivalence $D(Z_{\\Proet},\\Lambda)\\simeq\\prod_sD(Z_{s,\\Proet},\\Lambda)$ by [lem-pur-finite-clopen-derived-decomposition]. When $X$ is connected this recovers the connected-case $\\Phi_i$ (with $r=1$, $j_1$ and $j'_1$ identities, $\\beta_1$ the identity after the identity normalizations of [thm-sf-comp-composition] and [lem-pur-finite-etale-dualizing-normalization] (2)).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/pur9-rg-def-phi.md",
   "place": "node pur9-rg-def-phi, order 2376"
  },
  "stmt_deps": [
-  "sk-lem-regular-smooth",
-  "sk-lem-coprojection"
+  "def-pur-conventions",
+  "def-pur-regular-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-exceptional-inverse-image",
+  "lem-pur-regular-immersion-smooth-structure",
+  "pur9-def-upper-shriek-composition",
+  "thm-sf-comp-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-pur-smooth-purity-map",
+  "lem-pur-twist-cancellation",
+  "lem-pur-coprojection",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-pur-finite-clopen-derived-decomposition"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "definition of smooth purity comparison map for a regular closed immersion using exceptional inverse image, smooth purity orientations, composition comparison and Tate twists",
+   "results": "8 hits, including AlgebraicGeometry.Proj.pullbackAwayιIso, Scheme.Hom.liftCoborder, IsSmoothOfRelativeDimension and immersion declarations; none concerns derived exceptional inverse image or smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ri^!, smooth purity, Tate twist, regular immersion",
+   "results": "0 hits; query parser error: expected subscript character (not a Mathlib match).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsClosedImmersion",
+   "results": "0 hits; unknown identifier 'AlgebraicGeometry.IsSmooth'.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|regular immersion|rightDerivedUpperShriek|TateTwist in Mathlib/",
+   "results": "No hits in Mathlib/.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth purity comparison map for a regular immersion",
+   "results": "8 hits, all generic manifold smoothness or ordinary scheme pullback/immersion declarations; no derived exceptional inverse image or Tate-twist purity comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -47,5 +94,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur9-rg-def-phi",
+  "worker": "stage1",
+  "summary": "Audited the imported smooth-purity comparison definition against the main-20261015 blueprint and the current DAG. No Lean declaration states it exactly. Repaired the dangling pur9 references and made the regular-immersion, coefficient, pro-etale, dualizing-object, and component hypotheses explicit. The comparison is now expressed using existing nodes for regular-immersion smoothness/dimension, the smooth-purity orientation, exceptional composition mate, compact-support composition isomorphism, mate preservation of isomorphisms, and twist passage through Ri^!. No new nodes were needed; this is a definition and has no proof steps. Maintainer review (Q95 reader, 2026-10-18): fixed the TeX \\Lambda; removed the unneeded citation of thm-pur-finite-coefficient-smooth-purity (Pi_f is already an isomorphism by its specification); defined the connected-case composite as the specified composite Phi(i;b,Pi_X,Pi_Z) of lem-pur-twist-cancellation (which fixes the co-projection and twist-additivity identifications, previously left uncited), recorded the empty-Z case, and the assembly over connected components through lem-pur-finite-clopen-derived-decomposition and the etale normalization rho_e of lem-pur-finite-etale-dualizing-normalization; same_as set to [] after the search.",
+  "blueprint": "Realizes the complete composite in literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/pur9-rg-def-phi.md, including the componentwise dimension relation m=N-c, the Pi_aZ and Pi_aX orientations, c_{a_X,i}, twist cancellation, and assembly over components."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-012da2a12",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-012da2a12 (reviewer sub-agent of L); spot-checked: I read pur9-rg-def-phi in full against main-20261015 sk-thm-regular/pur9-rg-def-phi.md and sk-thm-regular.proof.md Steps 1-2. I also read the statement of every cited node. The delivery has no new nodes. The composite matches the blueprint and Step 2a of the citer sk-thm-regular: Pi_{a_Z}^{-1}, then c_{a_X,i}, then Ri^!Pi_{a_X}, then the twist arrows, with N-m=c, giving Lambda_Z -> Ri^!(Lambda_X(c)[2c]) in D(Z_proet,A_{E,n}). Checks: pur9-def-upper-shriek-composition with g=a_X, f=i gives omega_{a_Z} -> Ri^!omega_{a_X}, so the direction is right. That map is an isomorphism because it is the adjunction conjugate (def-weil-pbc-adjunction-conjugate) of alpha from thm-sf-comp-composition. The Pi_f of def-pur-smooth-purity-map apply to a_X (d=N) and a_Z (d=m) on each component. lem-pur-regular-immersion-smooth-structure gives the smoothness and m=N-c; its blueprint_update, a stalk-dimension equality, still implies this. Small cases tested: Z empty; Z a point in A^N, consistent with Step 4c (Thom class); components of different dimensions, where only the componentwise construction is well typed; c=0 is excluded since def-pur-regular-immersion requires c>=1. Not a duplicate of lem-pur-twist-cancellation (the general composite, of which this is the canonical instance), def-pur-smooth-purity-map or pur9-def-upper-shriek-composition; same_as set to []. Faults repaired in fixes/dag/nodes/sec-smooth-purity/pur9-rg-def-phi.json: (1) B4: '$Lambda=' was missing its backslash. (2) C1/B3: the assembly over components and the twist identifications cited no node. The connected case is now the specified composite Phi(i;b,Pi_X,Pi_Z) of lem-pur-twist-cancellation (through lem-pur-coprojection). The general case uses the clopen equivalence of lem-pur-finite-clopen-derived-decomposition and beta_s built from rho_e of lem-pur-finite-etale-dualizing-normalization and c_{j_s,i_s}, c_{i,j'_s}. The empty-Z case is stated. (3) The unused citation of thm-pur-finite-coefficient-smooth-purity is removed: Pi_f is already an isomorphism by its specification. The definition is not weakened and has no cycle. Batch 5: def-pur-smooth-purity-map is kept. It is a general definition that neither assumption gives; the PD assumption takes smoothPurityIso as given data. The lem-pod/lem-trf nodes it reaches are generic foundational lemmas (stalk tensor, integral pullback composition, adjoint mates), reached through sk-def-purity-conv and def-weil-exceptional-inverse-image, which were already cited. thm-pur-finite-coefficient-smooth-purity is dropped, as unneeded and outside both assumptions anyway. lem-pur-immersion-twist is replaced by lem-pur-twist-cancellation and lem-pur-coprojection, the general closed-immersion co-projection, also outside both assumptions. Maintainer notes: lem-pur-etale-orientation-locality and Step 4d of sk-thm-regular treat c=0, which falls outside c>=1; this predates the delivery. Possible tool_uses: lem-pur-finite-etale-dualizing-normalization (sk-thm-smooth-purity) and lem-pur-finite-clopen-derived-decomposition (sk-def-purity-conv).; 1 file(s) fixed by the reviewer"
  }
 }

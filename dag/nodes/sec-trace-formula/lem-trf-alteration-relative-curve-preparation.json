@@ -20,11 +20,58 @@
   "def-kun-dimension",
   "def-weil-closed-immersion",
   "def-weil-finite-integral-morphism",
-  "def-kun-projective"
+  "def-kun-projective",
+  "def-sc-generic-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-relative-curve-factorization] to the given proper dominant finite-type $X\\to S$ with $X$ integral and $\\dim X_s=d\\geq1$. It supplies an excellent integral $Y_0$ with a projective dominant finite-type morphism $Y_0\\to S$ and $\\dim(Y_0)_s=d-1$, an excellent integral $X_0$, a proper dominant generically finite $a:X_0\\to X$ and a proper dominant $g:X_0\\to Y_0$ with equal composites $X_0\\to X\\to S$ and $X_0\\to Y_0\\to S$, and $\\operatorname{trdeg}_{\\kappa(Y_0)}\\kappa(X_0)=1$.",
+   "uses": [
+    "lem-trf-relative-curve-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163"
+   }
+  },
+  {
+   "text": "These are exactly the hypotheses of [lem-trf-generic-smooth-boundary-preparation] (with $Y=Y_0$), together with the given nowhere dense $Z\\subset X$. It gives an excellent integral $Y_1$ with a projective proper dominant generically finite $b:Y_1\\to Y_0$, the composite $Y_1\\to S$ projective, $\\kappa(Y_1)/\\kappa(Y_0)$ finite purely inseparable; an excellent integral $X_1$ with $c:X_1\\to X_0$, $f:X_1\\to Y_1$, $g\\circ c=b\\circ f$, $h=a\\circ c$ proper dominant generically finite, $f$ proper dominant; and, at the generic point $y_1$ of $Y_1$, a smooth irreducible curve $(X_1)_{y_1}$ and a finite etale $((h^{-1}Z)_{\\mathrm{red}})_{y_1}$.",
+   "uses": [
+    "lem-trf-relative-curve-factorization",
+    "lem-trf-generic-smooth-boundary-preparation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed pp. 163–164"
+   }
+  },
+  {
+   "text": "Put $Y=Y_1$ and $y=y_1$. The structure map of $X_1$ is the composite through $Y$, and $h$ is an $S$-morphism: $(X\\to S)\\circ a\\circ c=(Y_0\\to S)\\circ g\\circ c=(Y_0\\to S)\\circ b\\circ f$. The morphism $Y\\to S$ is projective by step 2, hence proper by [lem-pc-projective-proper] (and so of finite type); it is dominant as the composite of the dominant maps $b$ and $Y_0\\to S$ (elementary: the generic point of $Y$ goes to that of $Y_0$, then to $s$). For the dimension: $Y$ is integral and dominates $S$, so $Y_s$ is a finite-type $\\kappa(s)$-scheme whose underlying set is the set of points of $Y$ over $s$; it contains the generic point of $Y$, whose closure in $Y_s$ is all of $Y_s$ and whose residue field is $\\kappa(Y)$. [lem-sc-closed-irreducible-dimension-trdeg] with $C=Y_s$ gives $\\dim Y_s=\\operatorname{trdeg}_{\\kappa(s)}\\kappa(Y)$, and likewise $\\dim (Y_0)_s=\\operatorname{trdeg}_{\\kappa(s)}\\kappa(Y_0)=d-1$. Since $\\kappa(Y)/\\kappa(Y_0)$ is finite, hence algebraic, a transcendence basis of $\\kappa(Y_0)$ over $\\kappa(s)$ is one of $\\kappa(Y)$ (elementary), so $\\dim Y_s=d-1$. The remaining clauses are those of step 2 verbatim.",
+   "uses": [
+    "lem-trf-generic-smooth-boundary-preparation",
+    "lem-pc-projective-proper",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed pp. 163–164; dimension preservation under finite algebraic generic-field extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-relative-curve-factorization",
+  "lem-trf-generic-smooth-boundary-preparation",
+  "lem-pc-projective-proper",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X, proof of Theorem 3.5, Step 5 (printed pp. 163–164), with the projective relative-curve factorization and inseparable generic preparation separated into two cited nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +103,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-plurinodal-alteration",
@@ -68,7 +115,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), normal-cone specialization and the nearby-duality alteration reduction; Expose X, proof of Theorem 3.5, Step 2 (projective reduction) and Step 5 (factorization through a relative curve and inseparable preparation), printed pp. 162--164; take the reduced inverse image of the boundary.",
+   "place": "Expose X, proof of Theorem 3.5, Step 2 (projective reduction) and Step 5 (factorization through a relative curve and inseparable preparation), printed pp. 162–164; take the reduced inverse image of the boundary.",
    "via": [
     "lem-trf-plurinodal-alteration",
     "lem-trf-nearby-cycle-verdier-duality",
@@ -78,5 +125,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-alteration-relative-curve-preparation",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Exposé X, Theorem 3.5, especially Steps 2 and 5. No Lean declaration attaches. Split the proof into the projective relative-curve factorization and the finite purely inseparable generic smooth-boundary preparation, then checked that the resulting alteration preserves properness, dominance, excellence and the generic-fibre dimension. Added a missing generic-point statement dependency and the existing dimension base-change lemma. Maintainer review (2026-10-18): new-node statements made self-contained (explicit X_0, compatibility g∘c=b∘f, normalization instead of bare schematic closure), Y_1→S projectivity moved into the preparation node, step 3 now cites projective⇒proper and the dimension–trdeg lemma as declared tool uses.",
+  "blueprint": "Step 1 realizes Step 5's rational-map/schematic-image factorization; Step 2 realizes Step 5's finite purely inseparable extension, normalization and schematic-closure preparation; Step 3 realizes the dimension and property-preservation checks and the reduced inverse-boundary conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Step 3 takes only 'projective implies proper' for Y->S; no node of sk-i-curve-zero states this generic scheme fact (already accepted as a tool for the parent lem-trf-plurinodal-alteration)."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Step 3 takes dim = transcendence degree of the generic residue field for the generic fibres of Y_0 and Y; generic dimension theory, no node of sk-i-curve-zero states it (already accepted as a tool for the parent)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-de13d2dc5",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-de13d2dc5 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, every cited statement, the parent lem-trf-plurinodal-alteration and unit sk-i-curve-zero, plus Gabber's Exposé X Theorem 3.5 Steps 1–6 (printed pp. 162–165) and the Stacks lemmas varieties-lemma-finite-extension-geometrically-normal and algebra-lemma-make-separable. The item statement matches Step 5 and the parent's needs, and is unchanged. I found three faults and repaired them in fixes/dag/nodes/sec-trace-formula/. (1) B2/E, lem-trf-generic-smooth-boundary-preparation: its hypotheses were only 'satisfy [lem-trf-relative-curve-factorization]', 'compatible' was undefined, and the clause 'obtained by base change and schematic closure' is false if read literally. Over F_p(t), y^2=x^p-t stays a reduced cusp after every purely inseparable base change, so smoothness needs the normalization. This copies an imprecision in Gabber's Step 5 (X_K is Nor(X_eta x K)), which I report under a Source error heading. The node is rewritten self-contained, with c:X_1->X_0, g∘c=b∘f, h=a∘c, and Y_1->S projective. (2) B2, lem-trf-relative-curve-factorization: X_0 had no hypotheses (it was not integral, so kappa(X_0) was undefined) and a was not stated to be an S-morphism. I added an excellent integral X_0 and equal composites to S; the statement holds by the graph-closure construction with Y=P^{d-1}_S. (3) C1/C8, item step 3: properness and projectivity of the composite were used with no node, and the off-unit lem-sc-closed-irreducible-dimension-trdeg was used with empty tool_uses. Step 3 now cites lem-pc-projective-proper and the dimension–trdeg lemma, declared and accepted as tool uses (both are already accepted for the parent), and writes out the dimension argument. Small cases checked: d=1, Z empty, the trait case, and separable boundary residue fields. Duplicate search (rg over the DAG, grep of the blueprint) found no duplicates and no restated clauses; nothing dropped.; 3 file(s) fixed by the reviewer"
  }
 }
