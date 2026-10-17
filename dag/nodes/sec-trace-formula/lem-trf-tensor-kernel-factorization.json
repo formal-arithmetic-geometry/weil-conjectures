@@ -11,9 +11,77 @@
   "def-sc-finitely-presented-module",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=V/f(U)$ and $\\delta:U\\to W\\oplus V$, $\\delta(u)=(g(u),-f(u))$. Define $P=(W\\oplus V)/\\delta(U)$, with quotient map $\\rho$, and maps $a(w)=\\rho(w,0)$, $b(v)=\\rho(0,v)$. These are linear and $a\\circ g=b\\circ f$, since $\\rho(g(u),-f(u))=0$. The map $p:P\\to C$, $p(\\rho(w,v))=[v]$, is well defined, linear and surjective: $-f(u)$ has zero class and every $[v]$ is $p(b(v))$. Moreover $\\ker p=a(W)$. Indeed, $p(\\rho(w,v))=0$ means $v=f(u)$ for some $u$, and the relation gives $\\rho(w,v)=\\rho(w+g(u),0)=a(w+g(u))$; conversely $pa=0$. Thus $W\\xrightarrow{a}P\\xrightarrow{p}C\\to0$ is exact, with the given finitely presented module $C$ [def-sc-finitely-presented-module].",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059D, lemma-domination, pushout construction and equality of cokernels; explicit quotient calculation as in Tag 0AUM, lemma-domination-universally-injective."
+   }
+  },
+  {
+   "text": "For any $R$-module $Q$, abbreviate $f_Q=f\\otimes\\mathrm{id}_Q$ and similarly for other maps. From the bilinear universal property [def-weil-pbc-module-tensor-product] there are inverse linear maps $D:(W\\oplus V)\\otimes_RQ\\to(W\\otimes_RQ)\\oplus(V\\otimes_RQ)$ and $E$ given by $D((w,v)\\otimes q)=(w\\otimes q,v\\otimes q)$ and $E(x,y)=(\\iota_W\\otimes1)(x)+(\\iota_V\\otimes1)(y)$. Here $\\iota_W(w)=(w,0)$ and $\\iota_V(v)=(0,v)$. The identities $DE=1$ and $ED=1$ follow on pure tensors from $(w,v)=(w,0)+(0,v)$, and then on all elements because pure tensors generate. Under this isomorphism $\\delta_Q(z)=(g_Q(z),-f_Q(z))$ and $\\rho_Q(E(t,0))=a_Q(t)$: each identity holds on pure tensors, hence everywhere.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, tensoring the explicit pushout; finite-sum comparison written from the tensor universal property."
+   }
+  },
+  {
+   "text": "The quotient sequence $U\\xrightarrow{\\delta}W\\oplus V\\xrightarrow{\\rho}P\\to0$ is exact by construction. Apply [lem-weil-pbc-tensor-right-exact] with any finitely presented $Q$ to obtain $\\ker\\rho_Q=\\operatorname{im}\\delta_Q$. If $t\\in W\\otimes_RQ$ has $a_Q(t)=0$, step 2 gives $E(t,0)\\in\\ker\\rho_Q$, so $E(t,0)=\\delta_Q(z)$ for some $z\\in U\\otimes_RQ$. Applying $D$ gives $(t,0)=(g_Q(z),-f_Q(z))$. Hence $f_Q(z)=0$, and the hypothesis on this finitely presented $Q$ gives $g_Q(z)=0$. Thus $t=0$. This proves that $a_Q$ is injective for every finitely presented $Q$; no injectivity of $f$ or $\\delta$ was assumed.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, tensor-kernel calculation; Tag 059C, lemma-domination-fp, finite-test reduction performed on the pushout inclusion."
+   }
+  },
+  {
+   "text": "The factor-swap maps $W\\otimes_RQ\\to Q\\otimes_RW$, $w\\otimes q\\mapsto q\\otimes w$, and their analogues for $P$ are inverse to the reverse swaps by the bilinear universal property [def-weil-pbc-module-tensor-product]; they intertwine $a\\otimes1$ and $1\\otimes a$ on pure tensors. Thus step 3 verifies exactly the finitely presented tests of [lem-trf-universal-injective-finite-test] for $a:W\\to P$. That node gives injectivity of $a\\otimes\\mathrm{id}_Q$ for every $Q$. Taking $Q=R$ also makes $a$ itself injective, using $M\\otimes_RR\\cong M$, $m\\otimes r\\mapsto rm$, with inverse $m\\mapsto m\\otimes1$. Tensor right exactness [lem-weil-pbc-tensor-right-exact], now applied to the exact sequence of step 1 for each $Q$, gives exactness and surjectivity at the other two terms. Consequently $0\\to W\\xrightarrow{a}P\\xrightarrow{p}C\\to0$ is universally exact.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-universal-injective-finite-test",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 058K (theorem-universally-exact-criteria), finite tests, and 059D (lemma-domination), universal exactness of the pushout inclusion."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-universally-exact-fp-split] with $A=W$, $B=P$, $i=a$ and the module $C=V/f(U)$. Step 1 gives $p$ surjective and $\\ker p=a(W)$, step 4 gives injectivity and universal exactness, and the hypothesis gives finite presentation of $C$. Obtain an $R$-linear $r:P\\to W$ with $ra=\\mathrm{id}_W$. Put $h=r\\circ b:V\\to W$. The relation in step 1 gives $h\\circ f=rbf=rag=g$. This is the required factorization.",
+   "uses": [
+    "lem-trf-universally-exact-fp-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059D, lemma-domination, application of Tag 058L (lemma-universally-exact-split) and the final pushout factorization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-trf-universal-injective-finite-test",
+  "lem-trf-universally-exact-fp-split"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059D, lemma-domination, with its explicit pushout model from Tag 0AUM. Tags 059C and 058K supply the finite-test reduction, applied to the pushout inclusion via the existing finite-test node. All quotient and tensor-kernel calculations are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +124,45 @@
    "results": "{\"t\": \"2026-10-17T21:31:10Z\", \"tool\": \"grep\", \"query\": \"059C|059D|[Pp]ure|[Dd]ominat|universally.*injective\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean\"], \"digest\": \"6783ce40b521df9f\"}",
    "date": "2026-10-18",
    "verdict": "no match: tensor right exactness and tensorKer do not give the required factorization. Module.Flat.exists_factorization_of_finitePresentation (Flat/EquationalCriterion.lean:270) assumes a flat target and factors through an unspecified finite free module. IsLocalRing.split_injective_iff_lTensor_residueField_injective (LocalRing/Module.lean:334) assumes a local ring and a finite free target. Neither states this kernel-test criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "universally-exact-split|universally.*injective|finite.*presentation",
+   "results": "{\"t\": \"2026-10-17T21:49:04Z\", \"tool\": \"grep\", \"query\": \"universally-exact-split|universally.*injective|finite.*presentation\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\"], \"digest\": \"44cd7074130512fa\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned tensor right-exactness, tensorKer, and presentation-of-cokernel results do not assert a factorization. The flat equational factorization theorem assumes a flat target and factors through an unspecified finite free module. The item has no flatness assumption and specifies the map through which to factor."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.ker, LinearMap.rTensor, Module.FinitePresentation",
+   "results": "{\"t\": \"2026-10-17T21:49:04Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.ker, LinearMap.rTensor, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned tensor right-exactness, tensorKer, and presentation-of-cokernel results do not assert a factorization. The flat equational factorization theorem assumes a flat target and factors through an unspecified finite free module. The item has no flatness assumption and specifies the map through which to factor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the cokernel of a module map is finitely presented, inclusion of tensor kernels for all finitely presented modules implies the second map factors through the first",
+   "results": "{\"t\": \"2026-10-17T21:49:04Z\", \"tool\": \"leansearch\", \"query\": \"If the cokernel of a module map is finitely presented, inclusion of tensor kernels for all finitely presented modules implies the second map factors through the first\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.tensorKer_coe\", \"Module.Presentation.ofExact\", \"TensorProduct.map_ker\", \"Module.Flat.ker_lTensor_eq\", \"ModuleCat.cokernelIsColimit\", \"LinearMap.kerLTensorEquivOfSurjective\", \"Module.Presentation.cokernel_var\", \"Algebra.TensorProduct.rTensor_ker\"], \"digest\": \"dec24676348242ca\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned tensor right-exactness, tensorKer, and presentation-of-cokernel results do not assert a factorization. The flat equational factorization theorem assumes a flat target and factors through an unspecified finite free module. The item has no flatness assumption and specifies the map through which to factor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor kernel domination of linear maps with finitely presented cokernel implies factorization through the map",
+   "results": "{\"t\": \"2026-10-17T21:49:06Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor kernel domination of linear maps with finitely presented cokernel implies factorization through the map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"TensorProduct.map_ker\", \"LinearMap.tensorKer\", \"lTensor.toFun\", \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"Module.Flat.exists_factorization_of_apply_eq_zero_of_free\", \"lTensor.inverse_of_rightInverse\", \"rTensor.toFun\"], \"digest\": \"9b59911e16d474dd\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned tensor right-exactness, tensorKer, and presentation-of-cokernel results do not assert a factorization. The flat equational factorization theorem assumes a flat target and factors through an unspecified finite free module. The item has no flatness assumption and specifies the map through which to factor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given two linear maps with common source and finitely presented cokernel of the first, inclusions of kernels after tensoring give factorization of the second",
+   "results": "{\"t\": \"2026-10-17T21:53:10Z\", \"tool\": \"leanfinder\", \"query\": \"Given two linear maps with common source and finitely presented cokernel of the first, inclusions of kernels after tensoring give factorization of the second\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"LinearMap.tensorKer\", \"TensorProduct.map_ker\", \"lTensor.toFun\", \"LinearMap.tensorKerEquiv\", \"rTensor.toFun\", \"lTensor.inverse_comp_lTensor\", \"rTensor.inverse_comp_rTensor\"], \"digest\": \"da587dc1d22b6ca1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned tensor right-exactness, tensorKer, and presentation-of-cokernel results do not assert a factorization. The flat equational factorization theorem assumes a flat target and factors through an unspecified finite free module. The item has no flatness assumption and specifies the map through which to factor."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-mittag-leffler-hom-systems",
@@ -92,5 +195,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-tensor-kernel-factorization",
+  "worker": "stage1",
+  "summary": "Retained the statement unchanged. Read Stacks 059C, 0AUM, 059D and 058L and expanded the quotient pushout, finite-sum tensor identification, tensor-kernel calculation, universal injectivity finite test, and retraction factorization. Reused tensor right exactness and the existing universal-injectivity finite-test node. Added one statement-only node for 058L; no exact project attachment or Mathlib leaf was found.",
+  "blueprint": "Retains the historical ancestor and via chain of the existing item. Realizes the supporting proof of Tag 059E (2) to (3) used in parent lem-trf-mittag-leffler-hom-systems step 5: the invocation of Tag 059D with finitely presented transition cokernel. Steps 1-4 expand its pushout and domination inputs, step 5 expands its splitting and factorization sentence. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-608d698d3",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-608d698d3 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, Stacks Tags 059C, 0AUM, 059D, 058K, and 058L, plus the unit/chapter route. The quotient, tensor-kernel, finite-test, universal-exactness, and splitting arguments are correct; hypotheses and edge cases check out. No duplicate, route-pivot, batch-5, citation, or long-step fault found. Detailed review written to review.md."
  }
 }

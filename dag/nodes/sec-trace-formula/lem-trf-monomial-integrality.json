@@ -2,20 +2,57 @@
  "id": "lem-trf-monomial-integrality",
  "kind": "statement",
  "title": "Integrality criterion for a monomial",
- "statement": "Let $k$ be a field, $P$ a submonoid of an abelian group $G$, and $g\\in G$. In the group algebra $k[G]$, the monomial $e^g$ is integral over the subalgebra $k[P]$ if and only if there exists an integer $n>0$ with $ng\\in P$. Consequently, for every such $P$, the subalgebra $k[P^{\\mathrm{sat}}]$ is integral over $k[P]$, since it is spanned by monomials integral over $k[P]$. We use the monoid and group-completion conventions of [def-trf-fine-fan-blowup].",
+ "statement": "Let $k$ be a field, $P$ a submonoid of an abelian group $G$, and $g\\in G$, using additive monoid notation as in [def-trf-fine-fan-blowup]. For a submonoid $Q\\subseteq G$, write $k[Q]=\\bigoplus_{q\\in Q}ke^q\\subseteq k[G]$, with $e^qe^{q'}=e^{q+q'}$ and identity $e^0$. Thus its elements are finite sums of these basis monomials. Put $P^{\\mathrm{sat}}=\\{h\\in G:\\exists n\\geq1,\\ nh\\in P\\}$, with saturation here taken in the specified ambient group $G$. In $k[G]$, the monomial $e^g$ is integral over the subalgebra $k[P]$ [def-weil-pbc-integral-closure] if and only if there exists an integer $n>0$ with $ng\\in P$. Consequently, for every such $P$, the subalgebra $k[P^{\\mathrm{sat}}]$ is integral over $k[P]$, meaning that each of its elements is integral over $k[P]$. No finite-generation or torsion-freeness hypothesis is imposed.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose VIII, Lemma 3.2.9 and the monomial-basis normalization argument, printed p.104"
  },
  "stmt_deps": [
-  "def-trf-fine-fan-blowup"
+  "def-trf-fine-fan-blowup",
+  "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Suppose $e^g$ is integral over $k[P]$. By [def-weil-pbc-integral-closure] there are $d\\geq1$ and $a_i\\in k[P]$ for $0\\leq i<d$ such that $e^{dg}+\\sum_{i<d}a_i e^{ig}=0$. For $h\\in G$, denote the coefficient of $e^h$ in $a_i$ by $c_i(h)$; it is zero when $h\\notin P$. Multiplication by $e^{ig}$ shifts the basis index by $ig$, so the coefficient of $e^{dg}$ in this equation is $1+\\sum_{i<d}c_i((d-i)g)=0$ in $k$. If every $(d-i)g$ were outside $P$, the sum would vanish and give $1=0$, contrary to $k$ being a field. Hence for some $i<d$, $n=d-i>0$ satisfies $ng\\in P$. This coefficient calculation only uses cancellation in the group $G$; distinct powers of $g$ need not be distinct.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.17 and Lemma 3.2.9, printed pp.101,104: supporting algebraic lemma; direct monomial-coefficient argument supplied by the worker, not a quotation of the source proof."
+   }
+  },
+  {
+   "text": "Conversely, if $n\\geq1$ and $ng\\in P$, the polynomial $T^n-e^{ng}\\in k[P][T]$ is monic of degree $n$ and vanishes at $e^g$, since $(e^g)^n=e^{ng}$. By [def-weil-pbc-integral-closure] this is exactly integrality of $e^g$ over $k[P]$. Together with Step 1 this proves the equivalence.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.17 and Lemma 3.2.9, printed pp.101,104: supporting algebraic lemma; direct monomial-coefficient argument supplied by the worker, not a quotation of the source proof."
+   }
+  },
+  {
+   "text": "The set $Q=P^{\\mathrm{sat}}$ is a submonoid containing $P$: $0\\in Q$, and if $ah,bh'\\in P$ for positive $a,b$, then $ab(h+h')=b(ah)+a(bh')\\in P$. Every $h\\in Q$ has $nh\\in P$ for some $n\\geq1$, so Step 2 makes $e^h$ integral over $R=k[P]$. Apply [def-weil-pbc-integral-closure] to the inclusion $R\\hookrightarrow k[G]$: its statement says that the set $C$ of integral elements is a subring containing $R$. Every scalar $c e^0$ lies in $R$, hence in $C$; thus each $c e^h=(c e^0)e^h$ lies in $C$. Each element of $k[Q]$ is a finite sum of such terms, and repeated closure under addition (starting from $0\\in C$ for the empty sum) puts it in $C$. Consequently every element of $k[P^{\\mathrm{sat}}]$ is integral over $k[P]$, as asserted.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GO, lemma-integral-closure-is-ring, together with Tags 00GI (definition-integral-ring-map) and 00GP (definition-integral-closure)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose VIII, Lemma 3.2.9 and the monomial-basis normalization argument, printed p.104"
+  "place": "Algebraic input supporting ILO VIII 3.2.9; direct coefficient extraction and explicit monic binomial, followed by the existing Stacks 00GO integral-closure subring Mathlib leaf. ILO does not contain this coefficient proof."
  },
  "mathlib_searches": [
   {
@@ -45,10 +82,80 @@
    "results": "Returned generic integralClosure, IsIntegralClosure, and normal-closure declarations; none identifies saturated monoid algebras.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*(IsIntegral|integralClosure|saturation)|IsIntegral.*MonoidAlgebra",
+   "results": "{\"t\": \"2026-10-17T21:47:20Z\", \"tool\": \"grep\", \"query\": \"MonoidAlgebra.*(IsIntegral|integralClosure|saturation)|IsIntegral.*MonoidAlgebra\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the entire criterion: general integrality/power criteria and polynomial coefficient results do not force a positive multiple of the group exponent into P"
+  },
+  {
+   "tool": "leansearch",
+   "query": "monomial integrality criterion for affine semigroup algebra saturation",
+   "results": "{\"t\": \"2026-10-17T21:47:20Z\", \"tool\": \"leansearch\", \"query\": \"monomial integrality criterion for affine semigroup algebra saturation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.saturation\", \"instIsIntegralMvPolynomial\", \"MvPolynomial.isIntegral_iff_isIntegral_coeff\", \"Subalgebra.mem_saturation_iff\", \"IsIntegral.of_aeval_monic\", \"Subalgebra.le_saturation\", \"IsIntegral.of_mem_of_fg\", \"IsIntegral.of_aeval_monic_of_isIntegral_coeff\"], \"digest\": \"48ffd69d7c566eb1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the entire criterion: general integrality/power criteria and polynomial coefficient results do not force a positive multiple of the group exponent into P"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra IsIntegral monomial saturation",
+   "results": "{\"t\": \"2026-10-17T21:47:21Z\", \"tool\": \"loogle\", \"query\": \"MonoidAlgebra IsIntegral monomial saturation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Application type mismatch: The argument\\n  IsIntegral\\nhas type\\n  (R : Type ?u.4) → {A : Type ?u.3} → [inst : CommRing R] → [inst_1 : Ring A] → [Algebra R A] → A → Prop\\nbut is expected to have type\\n  Ty\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable: malformed Loogle pattern; replaced by the quoted-name query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monomial e^g is integral over monoid algebra k[P] iff n g belongs to P",
+   "results": "{\"t\": \"2026-10-17T21:47:22Z\", \"tool\": \"leanfinder\", \"query\": \"monomial e^g is integral over monoid algebra k[P] iff n g belongs to P\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegral\", \"IsAlmostIntegral\", \"PowerBasis.isIntegral_gen\", \"Algebra.isIntegral_def\", \"isIntegral_algebraMap\", \"Algebra.isIntegral_iff\", \"PowerBasis.repr_pow_isIntegral\", \"Algebra.IsIntegral.isIntegral\"], \"digest\": \"13ca6c08e9d73363\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the entire criterion: general integrality/power criteria and polynomial coefficient results do not force a positive multiple of the group exponent into P"
+  },
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra).*(integral|IsIntegral)|integral.*(MonoidAlgebra|AddMonoidAlgebra)",
+   "results": "{\"t\": \"2026-10-17T21:49:32Z\", \"tool\": \"grep\", \"query\": \"(MonoidAlgebra|AddMonoidAlgebra).*(integral|IsIntegral)|integral.*(MonoidAlgebra|AddMonoidAlgebra)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the entire criterion: general integrality/power criteria and polynomial coefficient results do not force a positive multiple of the group exponent into P"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"AddMonoidAlgebra\"",
+   "results": "{\"t\": \"2026-10-17T21:49:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegral\\\", \\\"AddMonoidAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"instIsIntegralAddMonoidAlgebraOfIsPushout\"], \"digest\": \"db40ff19d132465c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: instIsIntegralAddMonoidAlgebraOfIsPushout changes coefficients, not the exponent monoid; inspected its type by a subsequent exact-name query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A basis group element of a group ring is integral over a submonoid ring exactly when a positive power lies in the submonoid.",
+   "results": "{\"t\": \"2026-10-17T21:49:33Z\", \"tool\": \"leanfinder\", \"query\": \"A basis group element of a group ring is integral over a submonoid ring exactly when a positive power lies in the submonoid.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerBasis.isIntegral_gen\", \"IsAlmostIntegral\", \"PowerBasis.repr_gen_pow_isIntegral\", \"PowerBasis.repr_pow_isIntegral\", \"IsIntegral\", \"IsIntegral.of_pow\", \"IsIntegrallyClosedIn.exists_algebraMap_eq_of_pow_mem_subalgebra\", \"IsIntegral.mem_span_pow\"], \"digest\": \"4457f41100cf198b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the entire criterion: general integrality/power criteria and polynomial coefficient results do not force a positive multiple of the group exponent into P"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsIntegralAddMonoidAlgebraOfIsPushout|theorem IsIntegral.of_pow",
+   "results": "{\"t\": \"2026-10-17T21:50:12Z\", \"tool\": \"grep\", \"query\": \"instIsIntegralAddMonoidAlgebraOfIsPushout|theorem IsIntegral.of_pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IntegralClosure/IsIntegral/Basic.lean\"], \"digest\": \"031146dd4f220054\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the entire criterion: general integrality/power criteria and polynomial coefficient results do not force a positive multiple of the group exponent into P"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"instIsIntegralAddMonoidAlgebraOfIsPushout\"",
+   "results": "{\"t\": \"2026-10-17T21:50:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"instIsIntegralAddMonoidAlgebraOfIsPushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"instIsIntegralAddMonoidAlgebraOfIsPushout\"], \"digest\": \"db40ff19d132465c\"}",
+   "date": "2026-10-18",
+   "verdict": "ingredient only: integral coefficient extension R to S induces integrality of their monoid algebras for the same monoid; not a criterion for a submonoid of a group"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral.of_pow\"",
+   "results": "{\"t\": \"2026-10-17T21:50:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegral.of_pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsIntegral.of_pow\"], \"digest\": \"bc82f635f7781801\"}",
+   "date": "2026-10-18",
+   "verdict": "ingredient only: integrality descends from a positive power; does not prove the necessary condition on monomial support"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "created": {
@@ -73,5 +180,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-monomial-integrality",
+  "worker": "stage1",
+  "summary": "Proved the criterion by extracting the coefficient of the leading monomial in a monic equation and by the explicit binomial T^n-e^(ng). Derived the saturation extension from the existing integral-closure subring Mathlib leaf. Added inline group-algebra and ambient-saturation notation and the existing integrality definition dependency, without restricting any hypothesis. Read ILO VIII 3.1.17/3.2.9 and corrected the source description: the criterion and coefficient proof are agent-supplied algebraic input, not a proof written in ILO. No new nodes or Lean attachments. Tested torsion, characteristic dividing torsion, non-finitely generated P, units, g=0, and ambient G larger than P^gp.",
+  "blueprint": "Realizes the algebraic affine-chart input of ILO VIII 3.2.9 used in lem-trf-affine-monoid-algebra-normalization, on the historical alteration/toric branch below lem-trf-local-term-locality (proof (1)--(2)); preserves its assigned chapter/unit and ancestry. Step 1 gives necessity, Step 2 sufficiency, Step 3 the integral saturation inclusion. Whole-blueprint searches for monomial and monomial integrality found no equivalent node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q85-31e1c54d7",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-31e1c54d7 (reviewer sub-agent of L); spot-checked: Read the full packet, item, unit/chapter route, cited DAG node, ILO VIII 3.1.17 and 3.2.9, and Stacks Tags 00GI/00GO/00GP. The coefficient argument and binomial converse are correct for arbitrary ambient abelian groups, including torsion and non-domain group algebras; saturation is correctly shown integral via the cited integral-closure subring statement. No hidden hypotheses, circularity, duplicate node, route-pivot machinery, SGA citation, or long-step fault. Edge cases and related normalization/support nodes were checked. Wrote review.md; no fixes or accepted tool_uses."
  }
 }

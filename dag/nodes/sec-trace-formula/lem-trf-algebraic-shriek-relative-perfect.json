@@ -14,9 +14,69 @@
   "def-weil-flat-morphism",
   "def-pc-ring-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $R\\to A$ is flat and of finite type over Noetherian rings, the flat-finite-presentation-perfect theorem makes it a perfect ring map; the polynomial presentation $P\\twoheadrightarrow A$ then makes $A$ a perfect $P$-complex with a bounded finite-projective resolution.",
+   "uses": [
+    "lem-trf-flat-polynomial-quotient-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 067J, lemma-flat-finite-presentation-perfect, and 068Y, lemma-perfect-ring-map; applied to the chosen polynomial presentation as in dualizing.tex Tag 0BZW."
+   }
+  },
+  {
+   "text": "Apply bounded coherent upper shriek to $R[0]$, which has its only cohomology the cyclic module $R$. Step 1 verifies that $A$ is perfect over the chosen polynomial presentation. The polynomial model of [lem-trf-algebraic-shriek-calculus] identifies this upper-shriek object with $K=R\\operatorname{Hom}_P(A,P)[n]$, with its natural $A$-action. Thus $K$ has bounded finitely generated cohomology over $A$. Apply [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] to the Noetherian ring $A$: boundedness supplies its upper cohomology bound and each cohomology module is finite, so $K$ is pseudo-coherent, represented by a bounded-above complex of finite free $A$-modules.",
+   "uses": [
+    "lem-trf-upper-shriek-bounded-coherent",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK, lemma-shriek-boundedness; Tag 0BZW, lemma-relative-dualizing-algebraic (1)(a); more-algebra.tex, Tag 066E, lemma-Noetherian-pseudo-coherent (2)."
+   }
+  },
+  {
+   "text": "By Step 1, $A$ is a perfect $P$-complex. Perfect-complex derived biduality makes $D=R\\operatorname{Hom}_P(A,P)$ perfect, so choose a bounded finite-projective $P$-complex $E$ representing it. Each term is a direct summand of a finite free $P$-module, and hence is $R$-flat: $P$ has its monomial basis over $R$, direct sums of copies of $R$ preserve injections under tensor, and the same holds for a direct summand. If $E$ is supported in degrees $[u,v]$, its shifted bounded flat model computes $K\\otimes_R^{\\mathbf L}M=E[n]\\otimes_R M$ for every $R$-module $M$ and vanishes outside $[u-n,v-n]$. This gives one finite Tor interval independent of $M$.",
+   "uses": [
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-trf-perfect-complex-derived-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW, lemma-relative-dualizing-algebraic, part (1)(b), using More on Algebra Tag 07VI."
+   }
+  },
+  {
+   "text": "Put $D=R\\operatorname{Hom}_P(A,P)\\in D(A)$ with its coinduced action, so $K=D[n]$. Apply [lem-trf-algebraic-shriek-derived-hom-adjunction] to $P\\to A$ with $X=D[n]$ and $Y=P[n]$. After restriction of scalars it gives\n$$U R\\operatorname{Hom}_A(K,K)\\cong R\\operatorname{Hom}_P(UD[n],P[n])\\cong R\\operatorname{Hom}_P(R\\operatorname{Hom}_P(A,P),P).$$\nThe same node identifies the transported scalar-action map with the canonical double-dual evaluation $A\\to R\\operatorname{Hom}_P(R\\operatorname{Hom}_P(A,P),P)$; this is the compatibility $a\\mapsto(h\\mapsto h(a))$, not merely an isomorphism of the two objects. Since Step 1 made $A$ perfect over $P$, [lem-trf-perfect-complex-derived-biduality] makes this evaluation map an isomorphism. Restriction of scalars reflects isomorphisms: the cohomology of the cone has exactly the same underlying groups before and after restriction. The original scalar map is therefore an isomorphism in $D(A)$.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "lem-trf-perfect-complex-derived-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW, lemma-relative-dualizing-algebraic, part (1)(c), displayed double-Hom calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-algebraic-shriek-calculus",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-trf-perfect-complex-derived-biduality",
+  "lem-trf-upper-shriek-bounded-coherent",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZW, lemma-relative-dualizing-algebraic, proof of parts (1) and (2)(a), with the polynomial model from the algebraic upper-shriek construction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-duality-polynomial-chart",
@@ -60,7 +120,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Relative perfection of algebraic upper shriek for flat Noetherian algebras.",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: coherent relative-duality polynomial-chart input; relative perfection of algebraic upper shriek for flat Noetherian algebras.",
    "via": [
     "lem-trf-relative-duality-polynomial-chart",
     "lem-trf-flat-lci-canonical-adjunction",
@@ -77,5 +137,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-algebraic-shriek-relative-perfect",
+  "worker": "Q102",
+  "summary": "Repair of the returned split: replaced the missing finite-presentation citation with the existing Noetherian pseudo-coherent cohomology criterion (the exact derived-complex statement needed), and isolated the internal derived-coinduction adjunction with scalar-to-bidual evaluation compatibility in a new statement-only prerequisite. Step 4 explicitly applies that comparison before perfect-complex biduality; the target statement is unchanged.",
+  "blueprint": "The coherent relative-duality polynomial-chart input and its algebraic upper-shriek relative-perfection component in the ancestor proof of lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic ring-complex criterion used in Step 2 to turn bounded finite cohomology over the Noetherian ring A into a finite-free pseudo-coherent model; no node of the trace-formula unit states this general commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q102-186f985d9",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q102-186f985d9 (reviewer sub-agent of L); spot-checked: Read all mandated coordination files, the item, four new nodes, cited statements, unit/chapter route, blueprint, and Stacks sources. Verified every proof step, hypotheses, shifts, scalar/evaluation comparison, edge cases, searches, duplicates, route-pivot compliance, and ordinary derived coefficient categories. Wrote review.md; JSON syntax checks pass. No repairs needed."
  }
 }

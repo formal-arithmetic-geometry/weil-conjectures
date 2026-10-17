@@ -14,9 +14,113 @@
   "lem-pur-derived-change-of-rings",
   "def-pc-ring-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose integers $a,b$ and representatives $E\\simeq Q_RP$, $L\\simeq Q_RN$, with $P^p=0$ for $p>b$, every $P^p$ finite free, and $N^q=0$ for $q<a$. The first choice is exactly [def-pc-ring-pseudo-coherent-complex]; the second follows from the equivalence in [def-sbc-standard-tstructure-derived-category] between cohomological and representative lower bounds. A free module is projective: lift the images of its basis vectors through any surjection and extend linearly. Write $F(C)=C\\otimes_R S$ termwise; in formulas we write $s\\otimes x$ for $x\\otimes s$ using the canonical tensor swap, whose inverse swaps back. Write and $Q_R,Q_S$ for localization into the corresponding derived categories.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism, proof of (3), with K=S concentrated in degree zero; Tag 064P for pseudo-coherence"
+   }
+  },
+  {
+   "text": "Flatness makes $F$ exact by [lem-weil-pbc-flat-tensor-exact]. More explicitly, for any complex $C$ put $Z^i=\\ker d_C^i$ and $B^i=\\operatorname{im}d_C^{i-1}$. Applying exact tensor to $0\\to Z^i\\to C^i\\to B^{i+1}\\to0$ and $0\\to B^i\\to Z^i\\to H^i(C)\\to0$ identifies the cycles and boundaries of $F(C)$ with $F(Z^i)$ and $F(B^i)$, and gives $H^i(F(C))\\cong S\\otimes_RH^i(C)$. The identifications commute with chain maps, so $F$ preserves quasi-isomorphisms. This argument has no boundedness hypothesis on $C$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A(3), flatness reduction; exactness of flat tensor: algebra.tex, lemma-flat (Tag 00HD)"
+   }
+  },
+  {
+   "text": "For any $C$, choose a K-flat resolution $K\\to C$ using [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings], $LF(Q_RC)$ is canonically represented by $F(K)$. Step 2 makes $F(K)\\to F(C)$ a quasi-isomorphism, hence gives the natural comparison $LF(Q_RC)\\simeq Q_SF(C)$, for arbitrary $C$, including the Hom complex used below. These comparisons respect the resolution comparisons of the cited theorem. The extension/restriction adjunction exists by [lem-sc-mixed-global-extension-adjunction]. Its unit is represented here by $c\\mapsto1\\otimes c$: restriction is termwise exact, both functors preserve quasi-isomorphisms, and the ordinary unit and counit $s\\otimes y\\mapsto sy$ descend with their triangle identities. Thus they give the stated derived adjunction and its unit under the canonical comparisons.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-sc-mixed-global-extension-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A(3), exact scalar extension; lemma-tensor-hom-adjoint and Equation 0E1X; K-flat existence/computation: sites-cohomology.tex, Tag 06YS"
+   }
+  },
+  {
+   "text": "Put $H=\\operatorname{Hom}_R^\\bullet(P,N)$ and $H'=\\operatorname{Hom}_S^\\bullet(FP,FN)$. By [lem-pod-projective-hom-evaluation-model], $Q_RH$ represents $R\\operatorname{Hom}_R(E,L)$, naturally in the representatives. The terms of $FP$ are finite free over $S$ (the tensors of a basis form a basis), and it is bounded above by $b$. The same theorem over $S$ therefore identifies $Q_SH'$ with $R\\operatorname{Hom}_S(LFE,LFL)$, using Step 3 for $P,N$. The product terms and differentials here are precisely those of [def-pur-hom-complex]: on the one-object site the formula is the ordinary module product-total Hom formula. These models also apply with target $\\operatorname{Res}(FN)$, since the cited projective-Hom theorem permits any target complex.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective; Tag 0ATK(3), explicit Hom models"
+   }
+  },
+  {
+   "text": "Use the actual scalar-extension functor as $F$ in [lem-pc-normalized-ring-hom-extension]. This gives a chain map $\\chi:F(H)\\to H'$ with degree-$n$ formula $\\chi(s\\otimes f)_p(t\\otimes x)=st\\otimes f_p(x)$. The object equalities required there are the scalar-extension object identifications themselves. In particular its Hom projections and pure-tensor normalization agree with the extension data of [def-pc-perfect-rhom-base-change-map]. We use only the chain-map/extension-data part of that definition, not its perfect-source derived comparison.",
+   "uses": [
+    "lem-pc-normalized-ring-hom-extension",
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Equation 0E1X and Tag 0A6A; explicit normalized comparison used in Tag 0ATK(3)"
+   }
+  },
+  {
+   "text": "Fix $n$ and set $c=a-n$. Let $P_c=\\sigma_{\\ge c}P$, the stupid truncation of [def-kun-truncations]. It is bounded with finite free, hence finite projective, terms. By [def-pur-hom-complex], restriction identifies $\\operatorname{Hom}_R^n(P,N)$ with $\\operatorname{Hom}_R^n(P_c,N)$: all removed factors have $p<c$, hence $N^{p+n}=0$. The inverse inserts zero components. The identical statement holds over $S$, because $(FN)^q=0$ for $q<a$. Under these degree-$n$ identifications $\\chi_n$ is exactly the degree-$n$ comparison for $P_c,N$, by the projection formula of Step 5. That comparison is an isomorphism by [lem-pc-perfect-ring-hom-scalar-extension], whose source $P_c$ is bounded finite projective; it requires neither K-flatness of $N$ nor additional ring hypotheses. Therefore every $\\chi_n$ is invertible. Their inverses form a chain map by rearranging $\\chi_{n+1}d=d\\chi_n$, so $\\chi$ is an isomorphism of complexes. The truncation depends on $n$ only for this degreewise verification; it is never substituted for $E$ in the derived category.",
+   "uses": [
+    "def-kun-truncations",
+    "def-pur-hom-complex",
+    "lem-pc-perfect-ring-hom-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK(3), finite-support Hom calculation, specialized to K=S[0]; bounded comparison: Tag 0A6A(1)"
+   }
+  },
+  {
+   "text": "We verify that $Q_S\\chi$, under Steps 3--4, is the map in the statement. At the complex level the extension/restriction Hom identification sends an $S$-linear family $g_p:S\\otimes P^p\\to(FN)^{p+n}$ to $x\\mapsto g_p(1\\otimes x)$; its inverse sends $h_p$ to $(t\\otimes x\\mapsto t h_p(x))$. These formulas are inverse and commute with $d_Nf-(-1)^nfd_P$. Applying [lem-pod-projective-hom-evaluation-model] over $R$ to $P,\\operatorname{Res}(FN)$ and over $S$ to $FP,FN$ therefore gives the derived internal-Hom identification of Tag 0E1W in these models. Applying Hom to the unit $N\\to\\operatorname{Res}(FN)$ gives $f_p\\mapsto(x\\mapsto1\\otimes f_p(x))$. Its image under the inverse identification is $f_p\\mapsto(t\\otimes x\\mapsto t\\otimes f_p(x))$. By the extension/restriction adjunction [lem-sc-mixed-global-extension-adjunction], whose unit was identified in Step 3, the $S$-linear adjoint is $s\\otimes f_p\\mapsto(t\\otimes x\\mapsto st\\otimes f_p(x))$. This is exactly the normalized map of [lem-pc-normalized-ring-hom-extension]. Thus Step 6 proves the required canonical map invertible. Naturality in $E,L$ follows from the functorial unit, Hom, and adjunction construction of this canonical map (all comparisons above are natural); it consequently holds for arbitrary derived morphisms, not just chain maps of the chosen representatives.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-sc-mixed-global-extension-adjunction",
+    "lem-pc-normalized-ring-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1W, lemma-upgrade-adjoint-tensor-RHom, proof; Equation 0E1X and Tag 0A6A(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-mixed-global-extension-adjunction",
+  "lem-pod-projective-hom-evaluation-model",
+  "def-pur-hom-complex",
+  "lem-pc-normalized-ring-hom-extension",
+  "def-pc-perfect-rhom-base-change-map",
+  "def-kun-truncations",
+  "lem-pc-perfect-ring-hom-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A(3), via Tag 0ATK(3) finite-support calculation with K=S[0], expanded degreewise by bounded stupid truncations; Tag 0A66 supplies the Hom model and Tags 0E1W/0E1X identify the canonical map."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +163,38 @@
    "results": "{\"t\": \"2026-10-17T21:18:08Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of the derived Hom complex computed by a bounded above finite free complex and a bounded below target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ext\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"HomologicalComplex.HasGoodTensor₁₂\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.ProjectiveResolution.isoExt\", \"CategoryTheory.Functor.mapExtLinearMap_apply\"], \"digest\": \"2585a5c3c4ef05e0\"} Read the returned signatures: The hits are ordinary flat extension exactness, Ext functoriality, and derived-category localization; no pseudo-coherent derived-Hom base-change statement. The precise Algebra grep returned zero hits.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a bounded above finite free complex to a bounded below complex commutes with flat scalar extension",
+   "results": "{\"t\": \"2026-10-17T21:40:38Z\", \"tool\": \"leanfinder\", \"query\": \"Derived Hom from a bounded above finite free complex to a bounded below complex commutes with flat scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ext\", \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"CategoryTheory.Functor.mapExtLinearMap_coe\", \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"CategoryTheory.Abelian.Ext.hom\", \"CategoryTheory.ProjectiveResolution.mk₀_comp_extMk\", \"CategoryTheory.Abelian.Ext.homEquiv\", \"CategoryTheory.Abelian.Ext.postcompOfLinear\"], \"digest\": \"ea7c8e4d30dd8f3f\"} Read hits: Ext functoriality and linear structures, complex bifunctors, or ordinary flatness/base-change of modules; none states the pseudo-coherent derived-Hom comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom, TensorProduct, Module.Flat",
+   "results": "{\"t\": \"2026-10-17T21:40:39Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.Hom, TensorProduct, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: Ext functoriality and linear structures, complex bifunctors, or ordinary flatness/base-change of modules; none states the pseudo-coherent derived-Hom comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|pseudo.?coherent|bounded.?below",
+   "results": "{\"t\": \"2026-10-17T21:40:39Z\", \"tool\": \"grep\", \"query\": \"RHom|pseudo.?coherent|bounded.?below\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean\"], \"digest\": \"97e6c975ab97f587\"} Read hits: Ext functoriality and linear structures, complex bifunctors, or ordinary flatness/base-change of modules; none states the pseudo-coherent derived-Hom comparison. Directory: Mathlib/Algebra/Homology.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded above finite free Hom bounded below flat base change",
+   "results": "{\"t\": \"2026-10-17T21:40:39Z\", \"tool\": \"leansearch\", \"query\": \"bounded above finite free Hom bounded below flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"IsBaseChange.free\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"RingHom.Flat\", \"Module.Flat.of_free\"], \"digest\": \"22ca20b1bf22b368\"} Read hits: Ext functoriality and linear structures, complex bifunctors, or ordinary flatness/base-change of modules; none states the pseudo-coherent derived-Hom comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-shriek-calculus",
@@ -92,5 +224,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-pseudocoherent-rhom-flat-base-change",
+  "worker": "stage1",
+  "summary": "Preserved the exact statement, creator and blueprint ancestry. Expanded Stacks 0A6A(3) through explicit representatives, flat cohomology computation, K-flat comparison, natural projective Hom models and the canonical unit/adjunction map. No new node is needed: the existing bounded finite-projective Hom scalar-extension theorem applies to a different stupid cutoff in each degree. All citations were checked against their full statements; searches and source/edge-case review are recorded in report.md.",
+  "blueprint": "Realizes the technical bounded-below flat scalar-extension input specified at the end of blueprint.from.place, in the algebraic-shriek-calculus dependency of the local-term-locality ancestry. The chapter, unit, original created.item and entire from.via chain are retained. Whole-blueprint searches found no second node stating this auxiliary result.",
+  "tool_uses": [
+   {
+    "node": "def-pc-ring-pseudo-coherent-complex",
+    "why": "The algebraic auxiliary requires its actual bounded-above finite-free model; this definition is independent of the trace-formula unit route."
+   },
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "Its equivalence supplies a representative with zero terms below a bound from the cohomological D+ hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic exactness of flat tensor is used on cycles and boundaries, not as a replacement for any geometric route step."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of a K-flat resolution makes the derived change-of-rings computation applicable to arbitrary complexes."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of scalar extension; the proof separately establishes flat tensor preserves every quasi-isomorphism."
+   },
+   {
+    "node": "lem-sc-mixed-global-extension-adjunction",
+    "why": "Generic derived extension/restriction adjunction identifies the canonical base-change morphism and its unit."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic natural product-total Hom model for bounded-above projective sources, with arbitrary target; no trace-formula unit node supplies it."
+   },
+   {
+    "node": "def-pur-hom-complex",
+    "why": "Shared product-total Hom terms and differential; no change of the unit proof route."
+   },
+   {
+    "node": "lem-pc-normalized-ring-hom-extension",
+    "why": "Generic chain map with the actual shared Hom projections and pure-tensor normalization; used to identify the canonical map."
+   },
+   {
+    "node": "def-pc-perfect-rhom-base-change-map",
+    "why": "Only its normalized chain extension data are used; its perfect-source derived comparison is not applied to the pseudo-coherent source."
+   },
+   {
+    "node": "def-kun-truncations",
+    "why": "Generic stupid truncation of explicit complexes; only used degreewise and never asserted to represent E."
+   },
+   {
+    "node": "lem-pc-perfect-ring-hom-scalar-extension",
+    "why": "Bounded finite-projective chain comparison applied to each bounded cutoff P_c; the unit route does not supply this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-mixed-global-extension-adjunction",
+  "lem-pod-projective-hom-evaluation-model",
+  "def-pur-hom-complex",
+  "lem-pc-normalized-ring-hom-extension",
+  "def-pc-perfect-rhom-base-change-map",
+  "def-kun-truncations",
+  "lem-pc-perfect-ring-hom-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q71-8ef7ac018",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q71-8ef7ac018 (reviewer sub-agent of L); spot-checked: Reviewed the full item, all seven proof steps, cited DAG statements and sources, unit/chapter route, hypotheses, canonical base-change map, coefficient categories, edge cases, tool uses, and route restrictions. No defects or repairs required; review.md written."
  }
 }
