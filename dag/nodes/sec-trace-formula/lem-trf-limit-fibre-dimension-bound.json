@@ -2,7 +2,7 @@
  "id": "lem-trf-limit-fibre-dimension-bound",
  "kind": "statement",
  "title": "Fibre dimension bounds descend to a finite stage",
- "statement": "Let $I$ be a nonempty directed set and $(S_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions] with affine transition morphisms [pqf-def-affine-morphism] and limit $S$ [lem-weil-pbc-limit-affine-transition]. Let $(X_i\\to S_i)_{i\\in I}$ be an inverse system of finite-type morphisms [def-weil-finite-type-morphism] such that for $i\\le j$ the canonical map $X_j\\to X_i\\times_{S_i}S_j$ is a closed immersion [def-weil-closed-immersion], and let $X\\to S$ be its limit. Fix an integer $d\\ge0$. If every fibre of $X\\to S$ has topological dimension at most $d$ [def-kun-topological-krull-dimension], then for some $i$ every fibre of $X_i\\to S_i$ has dimension at most $d$.",
+ "statement": "Let $I$ be a nonempty directed set and $(S_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions] with affine transition morphisms [pqf-def-affine-morphism] and limit $S$ [lem-weil-pbc-limit-affine-transition]. Let $(X_i\\to S_i)_{i\\in I}$ be an inverse system of finite-type morphisms [def-weil-finite-type-morphism] such that for $i\\le j$ the canonical map [def-pc-fibre-product] $X_j\\to X_i\\times_{S_i}S_j$ is a closed immersion [def-weil-closed-immersion], and let $X\\to S$ be its limit. Fix an integer $d\\ge0$. If every scheme-theoretic fibre [def-pc-scheme-fibre] of $X\\to S$ has topological dimension at most $d$ [def-kun-topological-krull-dimension], then for some $i$ every fibre of $X_i\\to S_i$ has dimension at most $d$.",
  "source": {
   "document": "literature/stacks-project/limits.tex",
   "place": "Tag 05M5, lemma-limit-dimension"
@@ -13,11 +13,134 @@
   "lem-weil-pbc-limit-affine-transition",
   "def-weil-finite-type-morphism",
   "def-weil-closed-immersion",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $i_0\\in I$ and work over the cofinal directed tail $J=\\{i\\mid i\\ge i_0\\}$. A compatible cone on this tail extends uniquely to $I$: for an arbitrary $i$, choose $j\\ge i,i_0$ and compose the cone map to stage $j$ with the transition to $i$; a common upper bound makes the result independent of the choice. Thus the limits are unchanged. Choose a finite affine open cover $(V_{0,b})_b$ of the quasi-compact scheme $S_{i_0}$. Since $f_{i_0}$ is of finite type, its definition gives a finite affine open cover of each $f_{i_0}^{-1}(V_{0,b})$. Index all these finitely many source charts by $a$, writing $W_{0,a}$ and $b(a)$ with $f_{i_0}(W_{0,a})\\subset V_{0,b(a)}$. For $i\\in J$ put $V_{i,b}=S_i\\times_{S_{i_0}}V_{0,b}$ and $W_{i,a}=X_i\\times_{X_{i_0}}W_{0,a}$, the open inverse images. These cover $S_i$ and $X_i$, respectively. Write $V_b\\subset S$ and $W_a\\subset X$ for their limit-stage inverse images.",
+   "uses": [
+    "lem-pqf-finite-affine-cover-qc-open",
+    "def-weil-finite-type-morphism",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5, reduction to finitely many affine charts; cofinal-tail argument written out"
+   }
+  },
+  {
+   "text": "Each $V_{i,b}$ is affine by the assumed affineness of $S_i\\to S_{i_0}$. The comparison at $i_0\\le i$, restricted over $W_{0,a}\\times_{V_{0,b(a)}}V_{i,b(a)}$, gives a closed immersion $W_{i,a}\\hookrightarrow W_{0,a}\\times_{V_{0,b(a)}}V_{i,b(a)}$: the restriction is its base change, as follows by comparing the two projections in the fibre-product universal property. The target is affine by the affine fibre-product theorem, so the closed-immersion affine criterion makes $W_{i,a}$ affine. Likewise, for $j\\ge i$, restricting the given comparison gives a closed immersion $W_{j,a}\\hookrightarrow W_{i,a}\\times_{V_{i,b(a)}}V_{j,b(a)}$. Put $A_{i,a}=\\Gamma(V_{i,b(a)},\\mathcal O)$ and $C_{i,a}=\\Gamma(W_{i,a},\\mathcal O)$. The affine-pairs characterization of local finite type, applied to the affine opens $W_{i,a}\\subset X_i$ and $V_{i,b(a)}\\subset S_i$, says $A_{i,a}\\to C_{i,a}$ is finite type. The fibre-product identification and the same closed-immersion criterion identify each comparison with a surjection $A_{j,a}\\otimes_{A_{i,a}}C_{i,a}\\twoheadrightarrow C_{j,a}$.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QR (base change), 01QO (affine closed-immersion criterion), 01T2 (affine pairs); schemes.tex Tags 01I4 and 01JQ"
+   }
+  },
+  {
+   "text": "The open scheme $W_a=X\\times_{X_{i_0}}W_{0,a}$ is the limit of $(W_{i,a})_{i\\in J}$. Indeed, maps from a scheme $T$ to all $W_{i,a}$ give compatible maps $T\\to X_i$, hence a unique map $T\\to X$. Its stage-$i_0$ map already factors through $W_{0,a}$, so the fibre-product universal property factors it uniquely through $W_a$. Conversely a map to $W_a$ gives all those maps to $W_{i,a}$ by the same property. The two operations are inverse, including on projections. The identical argument gives $V_b=\\varprojlim_{i\\in J}V_{i,b}$. Since all these stages are affine, the affine case of the limit theorem gives compatible identifications $V_{b(a)}=\\operatorname{Spec}A_a$ and $W_a=\\operatorname{Spec}C_a$, where $A_a=\\varinjlim_{i\\in J}A_{i,a}$ and $C_a=\\varinjlim_{i\\in J}C_{i,a}$. The morphism $W_a\\to V_{b(a)}$ corresponds to the induced ring map $A_a\\to C_a$. Here the morphisms between affine stages are affine: the singleton affine cover of the target has affine inverse image, so the affine-local-target criterion applies.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-limit-affine-transition",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YW and 01YX; the chart-limit universal property is written out"
+   }
+  },
+  {
+   "text": "For $s\\in V_{b(a)}$, the fibre of $W_a\\to V_{b(a)}$ is an open subscheme of $X_s$. To see this, base change the open immersion $W_a\\hookrightarrow X$ to the fibre over $s$; replacing the base by its open $V_{b(a)}$ does not change the residue field, since the local rings are restrictions of the same structure sheaf. Every point of this open fibre has the same local topological dimension as in $X_s$, by open-subspace invariance, and this is at most $d$ because the entire $X_s$ is a neighbourhood of each of its points. The supremum-of-local-dimensions theorem therefore bounds the whole chart fibre by $d$. In affine coordinates these fibres are $\\operatorname{Spec}(C_a\\otimes_{A_a}\\kappa(s))$. Thus every prime of $A_a$ satisfies the dimension hypothesis of the affine limit bound.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055 (local dimension), Tag 0B7I (supremum); schemes.tex Tags 01JY and 01I4"
+   }
+  },
+  {
+   "text": "For each of the finitely many $a$, apply the affine inverse-system dimension bound to $(A_{i,a}\\to C_{i,a})_{i\\in J}$. Its finite-type and comparison-surjectivity hypotheses are exactly Step 2, its colimit identifications are Step 3, and its fibre-dimension hypothesis is Step 4. It supplies $i_a\\in J$ such that every fibre of $W_{i_a,a}\\to V_{i_a,b(a)}$ has dimension at most $d$.",
+   "uses": [
+    "lem-weil-pbc-affine-limit-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5, affine case already split in lem-weil-pbc-affine-limit-fibre-dimension-bound"
+   }
+  },
+  {
+   "text": "These chart bounds persist from $i$ to every $j\\ge i$. Fix $x_j\\in W_{j,a}$ with images $x_i\\in W_{i,a}$ and $s_j\\in V_{j,b(a)}$, $s_i\\in V_{i,b(a)}$. The closed comparison of Step 2, base changed to $\\operatorname{Spec}\\kappa(s_j)$, embeds the fibre $(W_{j,a})_{s_j}$ as a closed subscheme of $(W_{i,a})_{s_i}\\times_{\\kappa(s_i)}\\kappa(s_j)$. At the point corresponding to $x_j$, the latter has the same local dimension as $(W_{i,a})_{s_i}$ at $x_i$, by local fibre-dimension invariance under base change. This applies because the finite-type affine coordinate map of Step 2 defines a locally finite-type chart morphism. A closed subspace has local dimension at most the ambient local dimension: intersect an ambient open neighbourhood attaining the minimum in the definition with the closed subspace; its irreducible closed chains remain irreducible closed chains in that ambient neighbourhood. Thus the local dimension of $(W_{j,a})_{s_j}$ at $x_j$ is at most $d$ if all fibres at $i$ have dimension at most $d$. Taking the supremum over its points gives the same bound for the whole fibre. Empty fibres satisfy it as well.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-kun-topological-dimension-at-point",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QR and Tag 02FY (lemma-dimension-fibre-after-base-change), part (1); topology.tex Tags 0055 and 0B7I"
+   }
+  },
+  {
+   "text": "Choose a common upper bound $j\\in J$ for the finite set of indices $i_a$. Step 6 gives the bound for every chart morphism $W_{j,a}\\to V_{j,b(a)}$. For an arbitrary $s_j\\in S_j$ and a point $x_j\\in(X_j)_{s_j}$, choose a chart $W_{j,a}$ containing its image in $X_j$; then $s_j\\in V_{j,b(a)}$. Base change of this open immersion identifies the chart fibre with an open neighbourhood of $x_j$ in $(X_j)_{s_j}$. Open-subspace invariance identifies their local dimensions, so the local dimension at $x_j$ is at most $d$. Their supremum is the dimension of $(X_j)_{s_j}$, hence is at most $d$. This holds for every $s_j$. If there were no source charts in Step 1, $X_{i_0}$ was empty and the maps $X_i\\to X_{i_0}$ make all sources on the tail empty, so $i_0$ already works. Empty bases and empty fibres impose no additional case.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5, finite-cover globalization; topology.tex Tag 0B7I"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-open-immersion-base-change",
+  "pqf-def-affine-morphism",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 05M5, lemma-limit-dimension: finite affine-cover reduction to the existing affine proof, with persistence and chart-limit identifications written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +169,45 @@
    "results": "0 hits",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(fiber|fibre).*(dimension|krullDim).*(limit|colimit)|(limit|colimit).*(dimension|krullDim)",
+   "results": "5 hits; top=['Mathlib/Probability/Process/FiniteDimensionalLaws.lean', 'Mathlib/Probability/CentralLimitTheorem.lean', 'Mathlib/Algebra/Category/FGModuleCat/Limits.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean', 'Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean']; note=; digest=cb24fdc21fd7a862. Read hits: general affine-limit approximation, closed-point compactness, finite morphisms, and order-dimension bounds do not state eventual fibre dimension for this system.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bound on dimensions of fibres of a limit of finite type morphisms of schemes descends to some finite stage",
+   "results": "8 hits; top=['AlgebraicGeometry.IsFinite.finite_preimage_singleton', 'AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite', 'AlgebraicGeometry.IsFinite.recOn', 'AlgebraicGeometry.IsProper.toLocallyOfFiniteType', 'AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget', 'AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation', 'AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType']; note=; digest=0d98debf2998eb80. Read hits: general affine-limit approximation, closed-point compactness, finite morphisms, and order-dimension bounds do not state eventual fibre dimension for this system.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"krullDim\", \"isLimit\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read hits: general affine-limit approximation, closed-point compactness, finite morphisms, and order-dimension bounds do not state eventual fibre dimension for this system.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For inverse systems of finite type scheme morphisms with affine transitions and closed immersion comparison maps, a fibre dimension bound at the limit holds at a finite stage",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType', 'AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index', 'AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', 'AlgebraicGeometry.exists_map_preimage_le_map_preimage', 'AlgebraicGeometry.exists_appTop_π_eq_of_isLimit', \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", 'AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit']; note=; digest=c495dc98d1fa3cc0. Read hits: general affine-limit approximation, closed-point compactness, finite morphisms, and order-dimension bounds do not state eventual fibre dimension for this system.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An upper bound on relative Krull dimensions eventually holds for inverse limits of quasi compact schemes with closed embedding comparison morphisms",
+   "results": "8 hits; top=['AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", 'AlgebraicGeometry.exists_map_preimage_le_map_preimage', 'AlgebraicGeometry.exists_appTop_π_eq_of_isLimit', 'Order.krullDim_le_of_krullDim_preimage_le', 'AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit', 'AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit', 'AlgebraicGeometry.exists_map_eq_top']; note=; digest=b3c4730dfdb25da8. Read hits: general affine-limit approximation, closed-point compactness, finite morphisms, and order-dimension bounds do not state eventual fibre dimension for this system.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-pure-relative-dimension-finite-stage",
@@ -77,5 +235,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-limit-fibre-dimension-bound",
+  "worker": "stage1",
+  "summary": "Reduced general 05M5 to its existing affine ring-system case using finitely many affine charts. Checked restricted closed comparisons, finite-type coordinate maps, affine chart limits, dimension locality, persistence at later indices, and the common upper bound. No new nodes and no statement weakening. Added explicit fibre-product and fibre notion dependencies and corrected doubled TeX escaping. The erroneous final arrow in the printed source proof is not used.",
+  "blueprint": "Realizes the finite-stage dimension-bound subsidiary input at ancestor lem-trf-local-term-locality, proof (1)--(2), semistable-alteration/nearby-cycle branch, through the unchanged ancestry recorded in blueprint.from.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Identifies local fibre dimensions after arbitrary residue-field extension."
+   },
+   {
+    "node": "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+    "why": "The strictly affine ring case supplies finite-stage bounds on each chart; this unit has no such algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "The affine-limit representation identifies chart coordinate rings with colimits."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-1bb9e2b1c",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-1bb9e2b1c (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, parent, every cited node statement, and cited literature, including Stacks Tag 05M5. The statement and hypotheses match the source; the seven steps correctly globalize the existing affine bound, with valid base-change, chart, persistence, and edge-case arguments. No circularity, duplicate/restated node, hidden long-step lemma, route-pivot machinery, SGA violation, or target weakening found. Review written to review.md."
  }
 }

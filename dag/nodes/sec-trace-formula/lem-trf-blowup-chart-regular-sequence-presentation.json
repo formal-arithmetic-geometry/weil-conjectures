@@ -11,9 +11,73 @@
   "def-weil-pbc-regular-sequence",
   "def-nagata-blowup-chart-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=R[y_2,\\ldots,y_s]$, $f_1=a$, $f_i=a_i$ for $i\\ge2$, $q_i=ay_i-a_i$, $J=(q_2,\\ldots,q_s)$ and $Q=S/J$. For each prefix ideal $K=(f_1,\\ldots,f_{j-1})$ in $R$, a polynomial lies in $KS$ exactly when all its coefficients lie in $K$: one implication follows by multiplying coefficients; for the converse, express each of the finitely many coefficients as a sum of multiples of the generators of $K$ and group these sums into polynomials. Consequently $S/KS=(R/K)[y_2,\\ldots,y_s]$. If $f_jP\\in KS$, injectivity of multiplication by $f_j$ on $R/K$, supplied by [def-weil-pbc-regular-sequence], forces every coefficient of $P$ into $K$, hence $P\\in KS$. Thus the images of $f_1,\\ldots,f_s$ in $S$ satisfy successive injectivity. The final quotient is nonzero because $(R/I)[y_2,\\ldots,y_s]$ contains the nonzero constant $1$, as $R/I\\ne0$ by regularity; hence this sequence is regular in $S$. This uses no permutation of a regular sequence and no Noetherian hypothesis.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ, lemma-blowup-regular-sequence: polynomial extension of the original sequence; coefficientwise verification of the flat-base-change step."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-sequence-koszul-regular] to the regular sequence in the commutative ring $S$ established in Step 1, using its final clause that every regular sequence in a ring is Koszul-regular. It gives vanishing of $H_1(K_\\bullet(S,f_1,\\ldots,f_s))$. In particular every vector $v\\in S^s$ with $\\sum f_iv_i=0$ is a boundary: by [def-weil-pbc-koszul-complex] there are $b_{ij}\\in S$, $1\\le i<j\\le s$, such that $v=\\sum_{i<j} b_{ij}(f_i e_j-f_j e_i)$. Here the asserted formula uses both the displayed basis of $K_2$ and its displayed differential, not merely the name of the complex.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ, lemma-blowup-regular-sequence, H_1-vanishing argument; Tag 062F, lemma-regular-koszul-regular; Tags 0622/0623 for the explicit low-degree Koszul differential."
+   }
+  },
+  {
+   "text": "We prove multiplication by $a$ on $Q$ is injective by writing out the degree-one Koszul calculation of Step 2. Suppose $ah=\\sum_{i=2}^s c_iq_i$ in $S$. Then $v=(h-\\sum_{i=2}^s c_i y_i,c_2,\\ldots,c_s)$ satisfies $\\sum f_i v_i=0$. Define the $S$-linear map $\\lambda:S^s\\to S$ by $\\lambda(e_1)=1$ and $\\lambda(e_i)=y_i$ for $i\\ge2$, so $\\lambda(v)=h$. The boundary expression in Step 2 gives $h=\\sum_{i<j}b_{ij}\\lambda(f_i e_j-f_j e_i)$. For $i=1$ its summand factor is $ay_j-a_j=q_j\\in J$; for $2\\le i<j$ it is $a_i y_j-a_j y_i=y_iq_j-y_jq_i\\in J$. Hence $h\\in J$, proving the claimed injectivity. Iterating this implication proves that $Q$ has no nonzero element killed by any power of $a$. The sign in this calculation is exactly $d_2(e_i\\wedge e_j)=f_i e_j-f_j e_i$ of [def-weil-pbc-koszul-complex].",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ, lemma-blowup-regular-sequence: the final H_1-to-torsion-free inference, written in the degree-one syzygy coordinates rather than mapping-cone notation."
+   }
+  },
+  {
+   "text": "Let $B=R[I/a]\\subseteq R_a$ be the subalgebra of [def-nagata-blowup-chart-ring]. Evaluation $y_i\\mapsto a_i/a$ kills every $q_i$, so gives $\\phi:Q\\to B$. It is onto: if $x=ra+\\sum_{i=2}^s r_i a_i\\in I$, then $x/a=r+\\sum r_i(a_i/a)$, so the image contains every subalgebra generator. To calculate the kernel directly, write $P=\\sum_\\nu r_\\nu y^\\nu\\in S$ and choose $D\\ge|\\nu|$ for every monomial in its finite support. Repeated multiplication of the relations $ay_i\\equiv a_i\\pmod J$ gives $a^DP\\equiv c\\pmod J$, where $c=\\sum_\\nu r_\\nu a^{D-|\\nu|}\\prod_{i=2}^s a_i^{\\nu_i}\\in R$. If $\\phi([P])=0$, its image in $R_a$ is $c/a^D=0$. By the defining equality of localization fractions, some $N\\ge0$ has $a^Nc=0$ in $R$. Therefore $a^{N+D}P\\in J$. Conversely an $a$-power-torsion class maps to zero because $a$ is invertible in $R_a$. Thus $\\ker\\phi$ is exactly the $a$-power torsion, with the denominator calculation explicit.",
+   "uses": [
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ, opening reduction to the quotient-description lemma; Algebra Tag 0G8S, lemma-affine-blowup-quotient-description, proved here directly from fractions."
+   }
+  },
+  {
+   "text": "Step 3 makes the kernel computed in Step 4 zero, and Step 4 proves surjectivity. Hence $\\phi$ is an $R$-algebra isomorphism, with $[y_i]\\mapsto a_i/a$ as asserted. It is canonical since an $R$-algebra map out of $Q$ is determined by the images of the displayed polynomial generators. For $s=1$ all sums and pairs are empty; the same proof says $J=0$, $Q=R$, and the chart $R[(a)/a]$ is the image of $R$ in $R_a$, identified with $R$ because $a$ is a nonzerodivisor. Thus the one-element case is included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ, lemma-blowup-regular-sequence, conclusion; the chart is the subalgebra defined in Step 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-chart-ring",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-regular-sequence-koszul-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BIQ, lemma-blowup-regular-sequence: explicit degree-one Koszul syzygy realization of its H_1 argument, and a direct fraction proof of the Tag 0G8S kernel reduction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +106,59 @@
    "results": "Only generic algebra presentation declarations; no blowup result.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine blowup chart of an ideal generated by a regular sequence has presentation by the relations a times y_i minus a_i",
+   "results": "Hits: StandardEtalePresentation.toPresentation, StandardEtalePresentation.toPresentation_relation, Algebra.PreSubmersivePresentation.naive_toPresentation, StandardEtalePresentation.toPresentation_val, StandardEtalePresentation.toPresentation_σ', Algebra.SubmersivePresentation.ofHasCoeffs, StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation, Algebra.SubmersivePresentation.isStandardSmooth.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|Blowup|blowUp|chartRing",
+   "results": "No hits.  Searched Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine blowup chart along a regular sequence is a polynomial ring quotient by a y_i minus a_i",
+   "results": "Hits: RingTheory.Sequence.IsRegular, RingTheory.Sequence.isRegular_cons_iff, RingTheory.Sequence.IsRegular.recOn, RingTheory.Sequence.IsRegular.ndrecIterModByRegular, WeierstrassCurve.Affine.CoordinateRing.instAlgebra, StandardEtalePair.Ring, RingTheory.Sequence.IsRegular.recIterModByRegular, RingTheory.Sequence.isWeaklyRegular_iff.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, MvPolynomial",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ReesAlgebra|reesAlgebra|IsRegular.*[Pp]olynomial|[Pp]olynomial.*IsRegular",
+   "results": "Hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean.  Searched Mathlib/RingTheory.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of evaluating polynomials y_i at a_i divided by a is generated by a y_i minus a_i when a,a_i is a regular sequence",
+   "results": "Hits: Algebra.Generators.ker_eq_ker_aeval_val, MvPolynomial.ker_eval₂Hom_universalFactorizationMap, Algebra.Generators.ker, Algebra.Generators.aeval_val_eq_zero, Polynomial.ker_evalRingHom, Polynomial.annIdealGenerator, Algebra.Generators.kerCompPreimage, Algebra.Generators.ker_naive.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_evalRingHom|ker_eval₂Hom_universalFactorizationMap|ker_eq_ker_aeval_val|def reesAlgebra",
+   "results": "Mathlib/RingTheory/Polynomial/Ideal.lean:40 Polynomial.ker_evalRingHom; Polynomial/UniversalFactorizationRing.lean:191 MvPolynomial.ker_eval₂Hom_universalFactorizationMap; Extension/Generators.lean:630 Algebra.Generators.ker_eq_ker_aeval_val; ReesAlgebra.lean:39 reesAlgebra. Read these source statements: evaluation at a ring element, universal monic factorization, kernel notation, and the Rees subalgebra definition respectively; none is the chart presentation under regular-sequence hypotheses.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-permissible-coordinate-chart",
@@ -64,5 +177,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-blowup-chart-regular-sequence-presentation",
+  "worker": "stage1",
+  "summary": "Kept the correct Tag 0BIQ regular-sequence chart statement. Gave a complete five-step proof: polynomial successive injectivity coefficientwise, the existing regular-to-Koszul theorem, explicit degree-one boundary calculation proving a-torsion-freeness, explicit denominator computation of the chart-map kernel, and canonical bijectivity. Reused existing nodes throughout; no new nodes or Mathlib leaves.",
+  "blueprint": "Serves the existing blueprint.from place, Lemma 4.2.9 coordinate-chart proof in the alteration/specialization support chain under lem-trf-local-term-locality: compute the standard blowup charts. The five steps prove precisely the regular-sequence quotient presentation used by lem-trf-permissible-coordinate-chart; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic commutative-algebra tool: successive injectivity implies vanishing of first Koszul homology over the polynomial ring. The trace unit has no replacement for this general algebraic fact; this implements the source 0BIQ H_1 argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-koszul-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-2f402bd92",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-2f402bd92 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited DAG statements, unit route, Stacks Tags 0BIQ and 0G8S, and required governance files. Verified all five proof steps, hypotheses, signs, localization kernel argument, edge cases, searches, route restrictions, and accepted tool use. Wrote review.md; no faults found."
  }
 }
