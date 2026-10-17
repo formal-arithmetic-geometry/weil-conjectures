@@ -21,7 +21,9 @@
   "def-weil-geometric-fibre",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification"
  ],
  "proof": [
   {
@@ -247,5 +249,23 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-57b4f104b (reviewer sub-agent of L); spot-checked: I read the item, all six new nodes, the cited statements (uniqueness-normal, glue-schemes, proper-fp-permanence and the definition nodes), the unit sk-i-curve-zero and the neighbouring Temkin and de Jong nodes in full. The item statement is unchanged and is not weakened, and the parent lem-trf-temkin-stable-modification step 2 uses it exactly as stated. The seven steps are correct. Step 1: local uniformization over the finitely many generic components. Step 2: one proper modification X_1 covered by the W_i. Step 3: strict cofinality, then marking separation. Step 4: local contraction, with stability kept on the overlaps. Step 5: the cocycle comes from uniqueness over normal T, and the integral-closedness of a valuation ring and its localizations is checked. Step 6: gluing. Step 7: compose and contract again relative to X, since stability relative to X_1 does not give it relative to X. I proved the two general new nodes myself: the common cover (Nagata compactification per component closure, a closure in the fibre product, and covering by separatedness) and the horizontal models (all generic points lie over eta, so the model is torsion-free and flat; flat finite type over a valuation ring gives finite presentation; finite birational onto a normal curve is an isomorphism; schematic closure of the marking). I tested the other four at height zero, with an empty curve, an already strict or stable model, and nonseparated marking closures; they are plausible inputs and none restates the item. There are no duplicates in the DAG (Riemann-Zariski refinement, spreading, flatification and proper-birational nodes all compared), no cycle, and uses equal proof_deps. Faults repaired in fixes/: (1) B3: 'separably closed' had no definition in the item or in five new nodes, so I cited def-kun-separably-closed and added it to stmt_deps; (2) B3: horizontal-models used 'modification' without defining it and left 'irreducible components' uncited, as did local-uniformization, so I added the inline definition and def-weil-irreducible-components; (3) step 3 of the item did not say why Z_i is reduced, so I added one sentence from the already-cited horizontal node. Limitation: the Temkin PDF is not in literature/ and I have no network, so I could not check the Temkin page and proposition places. The delivery marks this as agent-origin with a WANTED line, and I checked the mathematics independently. Accepted tool_uses: glue-schemes and proper-fp-permanence, both Mathlib-status generic tools.; 6 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.ValuationStableReduction",
+  "declaration": "AlgebraicGeometry.MultipointedCurve.exists_stableEtaModification_of_isSepClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ValuationStableReduction.lean",
+  "statement": "theorem exists_stableEtaModification_of_isSepClosed (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (C : MultipointedCurve (Spec (.of V))) (hsmooth : Smooth (pullback.snd C.x (Spec.map (CommRingCat.ofHom V.subtype)))) (hmarking : Etale (pullback.snd C.d (Spec.map (CommRingCat.ofHom V.subtype)))) : ∃ C' : MultipointedCurve (Spec (.of V)), ∃ f : Hom C' C, f.IsStable (Spec.map (CommRingCat.ofHom V.subtype))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d6a9f2296",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked statement clauses, concrete dependency definitions, Temkin source, edge cases, verbatim signature, report sections, and route-pivot exclusions. Per-file scompile.py compilation passed for sandbox and library views. No fixes required; branch head unchanged."
  }
 }

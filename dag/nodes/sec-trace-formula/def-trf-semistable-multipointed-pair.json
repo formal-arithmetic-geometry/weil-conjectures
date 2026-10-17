@@ -1,0 +1,124 @@
+{
+ "id": "def-trf-semistable-multipointed-pair",
+ "kind": "definition",
+ "title": "Underlying marked pairs, semistability and geometric stability",
+ "status": "split",
+ "statement": "For a scheme $T$, an underlying pair $P=(X,D,i)$ consists of two schemes over $T$ and a morphism $i:D\\to X$ over $T$. Forgetting the property proofs of a multipointed curve [def-trf-multipointed-curve] gives such a pair. A pair is multipointed exactly when it is equal to the underlying pair of a multipointed curve in that sense; this retains flatness, finite presentation, pure relative dimensions $1$ and $0$ and the closed immersion, with empty marking permitted and no separatedness or properness assumption. The canonical base change of a pair along $g:T'\\to T$ is $(X\\times_TT',D\\times_TT',i_{T'})$, using the pullback functor [def-pc-fibre-product]. The pair is semistable if it is multipointed, $D\\to T$ is etale [def-weil-etale-morphism], its image lies in the relative smooth locus [def-sbc-smooth-morphisms], and every nonsmooth point of each chosen algebraic-closure geometric fibre [def-weil-geometric-fibre] is an ordinary double point, using the scalar-compatible maximal-ideal completion predicate of [def-trf-orgogozo-induction-data]. For an over-$T$ morphism $f:X\\to Y$ of underlying pairs, geometric stability means that on every chosen geometric fibre there is no irreducible component [def-weil-irreducible-components] isomorphic over its scalar field to the projective line [def-nagata-projective-space-base-change], contracted by $f$ to a point and meeting the union of marking and nonsmooth locus in at most two distinct points. Such a component is represented by a closed immersion from the projective line whose range is an irreducible component; special points are counted in that range, not on its normalization.",
+ "stmt_deps": [
+  "def-trf-multipointed-curve",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-trf-orgogozo-induction-data",
+  "def-weil-irreducible-components",
+  "def-nagata-projective-space-base-change"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Section 1.2, pages 2–3: multipointed curves, semistability and exceptional components; Stacks 0C56 for ordinary nodes."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "semistability and geometric stability of a marked relative curve with canonical pullback pair",
+   "results": "{\"t\": \"2026-10-17T19:49:02Z\", \"tool\": \"leansearch\", \"query\": \"semistability and geometric stability of a marked relative curve with canonical pullback pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangePullbacks\", \"CategoryTheory.MorphismProperty.pullbacks_le\", \"CategoryTheory.MorphismProperty.isStableUnderBaseChange_iff_pullbacks_le\", \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"e1f4b132d6e413c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: reuse the constituent declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "Semistable|Multipointed|GeometricStability",
+   "results": "{\"t\": \"2026-10-17T19:49:16Z\", \"tool\": \"grep\", \"query\": \"Semistable|Multipointed|GeometricStability\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: reuse the constituent declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "semistable multipointed pair ordinary nodes etale marking and no contracted projective line with at most two special points",
+   "results": "{\"t\": \"2026-10-17T19:49:20Z\", \"tool\": \"leanfinder\", \"query\": \"semistable multipointed pair ordinary nodes etale marking and no contracted projective line with at most two special points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"WeierstrassCurve.Projective.NonsingularLift\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.FormallyUnramified\"], \"digest\": \"1abae1b43e643e4a\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: reuse the constituent declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "rg MultipointedPair|HasGeometricStability|structure.*[Ss]emistable|def.*[Ss]emistable in lean/Sheaf and WeilConjectures; rg semistability/geometric stability in DAG; blueprint_refs.py search semistable multipointed",
+   "results": "The existing node def-trf-multipointed-curve records AlgebraicGeometry.MultipointedCurve in Sheaf.TraceFormula.MultipointedCurve; it is reused through ofCurve and exact equality of the underlying pair. Orgogozo.IsOrdinaryDoublePoint and geometricPoint are reused. Orgogozo.IsSemistableGeometricCurve has extra connectedness and is not the marked relative-curve notion. No MultipointedPair, HasGeometricStability or marked relative semistability definition found in the project or upstream. DAG hits are theorem uses and the existing multipointed-curve structure, not another semistability definition. blueprint_refs.py: 0 blueprint nodes.",
+   "date": "2026-10-17",
+   "verdict": "Reuse landed multipointed definition; no existing semistable-pair/stability interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semistable-marked-base-change",
+  "date": "2026-10-17",
+  "group": "Q24"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability.",
+   "via": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemistableMultipointedPair",
+  "declaration": "AlgebraicGeometry.MultipointedPair",
+  "declarations": [
+   "AlgebraicGeometry.MultipointedPair",
+   "AlgebraicGeometry.MultipointedPair.baseChange",
+   "AlgebraicGeometry.MultipointedPair.ofCurve",
+   "AlgebraicGeometry.MultipointedPair.IsMultipointed",
+   "AlgebraicGeometry.MultipointedPair.IsSemistable",
+   "AlgebraicGeometry.MultipointedPair.HasGeometricStability"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemistableMultipointedPair.lean",
+  "statement": "structure MultipointedPair (T : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-806d42c2e",
+  "group": "Q24",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-806d42c2e",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source places, both Lean modules, docstrings, edge cases, route-pivot compliance, and required scompile path. No substantive or mechanical defects found; review.md records the checks."
+ }
+}

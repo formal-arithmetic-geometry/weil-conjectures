@@ -24,7 +24,10 @@
   "def-weil-irreducible-components",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-pure-dimension"
+  "def-weil-pure-dimension",
+  "def-trf-multipointed-curve",
+  "def-trf-orgogozo-induction-data",
+  "def-trf-semistable-multipointed-pair"
  ],
  "proof": [
   {
@@ -529,5 +532,33 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-a608d6d07 (reviewer sub-agent of L); spot-checked: I read all 14 steps against the full statements of the 41 cited nodes, Stacks curves.tex Tags 0C59, 0C5B, 0C56 and lemma-nodal-lci, the unit sk-i-curve-zero and the parent lem-trf-temkin-stable-modification. The Temkin PDF is not in literature/, so the worker's WANTED line and proof_origin=agent are correct. One fault, E1 (a hypothesis that is never verified): the item defines semistability on def-weil-geometric-fibre, the chosen algebraic closure, and Step 13 relies on that reading. Steps 4, 6 and 11 apply lem-trf-nodal-family-fitting-singular and lem-trf-nodal-family-etale-local-model, which both need nodal fibres over every algebraically closed Ω, and the split never derives that. Nodality over every Ω is the item's own conclusion for T'=Spec Ω, so the argument assumed what it proves. Repair: a new statement-only, unsplit node lem-trf-node-algebraically-closed-extension (Stacks 0C56, direction (1)⇒(2): for algebraically closed k⊆Ω, nodal nonsmooth points of a locally finite type C give nodal nonsmooth points of C_Ω). I checked it on small cases and through the completion argument; no DAG node, blueprint node or Mathlib declaration states it. Step 4 now verifies both hypotheses for every geometric point: it embeds the chosen closure into Ω, cites qcqs-permanence (3) and the new node, and uses Step 2 for dimension. Step 6 refers back to Step 4, Step 11 cites the new node, and proof_deps is again the union of uses. review_split passes on the fixed files. All 30 declared tool_uses are generic permanence, dimension, completion and approximation tools, and I accept them. The other steps were checked hypothesis by hypothesis and are correct; there is no SGA source and the statement is unchanged.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange",
+  "declaration": "AlgebraicGeometry.MultipointedPair.isMultipointed_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.MultipointedPair.isMultipointed_baseChange",
+   "AlgebraicGeometry.MultipointedPair.generic_smooth_etale_baseChange",
+   "AlgebraicGeometry.MultipointedPair.isSemistable_baseChange",
+   "AlgebraicGeometry.MultipointedPair.smoothLocus_baseChange",
+   "AlgebraicGeometry.MultipointedPair.isMultipointed_isSemistable_iff_openCover",
+   "AlgebraicGeometry.MultipointedPair.geometricStability_baseChange",
+   "AlgebraicGeometry.MultipointedPair.geometricStability_iff_openCover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemistableMarkedBaseChange.lean",
+  "statement": "theorem isMultipointed_baseChange {T T' : Scheme.{u}} (P : MultipointedPair T) (g : T' ⟶ T) (hP : P.IsMultipointed) : (P.baseChange g).IsMultipointed",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The seven declarations together state all clauses. The new semistable-pair interface reuses the landed MultipointedCurve structure through ofCurve and exact equality of underlying pairs; it supplies canonical base change and the semistability and geometric-stability predicates without replacing the landed node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-806d42c2e",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source places, both Lean modules, docstrings, edge cases, route-pivot compliance, and required scompile path. No substantive or mechanical defects found; review.md records the checks."
  }
 }

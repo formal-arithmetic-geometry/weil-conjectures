@@ -157,5 +157,23 @@
   "group": "Q147",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-fc4ddd9e6 (reviewer sub-agent of L); spot-checked: Read the item, the 3 new nodes, all cited definition nodes and the sources: Stacks more-morphisms.tex 0GSG (l.5043-5090), algebra.tex 046Y (l.32770), more-algebra.tex 0GSE(2) (l.6005-6044). The item matches 0GSG hypothesis for hypothesis and is not weakened. The steps follow the 0GSG proof: reduce to P_q, approximate N by finitely presented modules (fp-reduction node), get finite presentation of M from 0GSE(2), then apply 046Y with source and target exchanged; step 5 (the kernel argument) is elementary and correct. The helper node is a faithful 046Y, with local R->S, essentially finite presentation written out, both modules finitely presented, flat target and injective fibre. The 0GSE(2) node is faithful. The fp-reduction node is true, because B/m_A B is Noetherian. No new node restates a clause of the item. Duplicate check: rg over the DAG for 046Y/0GSE/0GSG and the key terms found no duplicates; 00R7 and 01PJ/01PK are different statements. My own Mathlib grep found no leaf. No SGA is used, and there is no off-unit tool use. Small cases tested: field base; N=0; free N and M; A=k[[t]], B=A[x]_(t,x) with u=mult by x (hypothesis holds, conclusion holds) and u=mult by t (hypothesis fails, B/tB not flat). FIXES: (1) item step 1 only asserted that B is a quotient of P_q, but the cited definition gives B = W^{-1}C. I wrote out q=rho^{-1}(m_B), the factorization through P_q, surjectivity, the locality of A->P_q, and why the hypotheses are unchanged. (2) fp-reduction used 'valuation ring', m_A and m_B undefined (B2/B3); I added an inline definition, introduced the ideals and made the induced map explicit. Not repaired, flagged for the maintainer: the fp-reduction and flat-presentation nodes record no LeanSearch query (their Loogle query was malformed and marked unavailable). Absence from Mathlib is supported by the item/046Y LeanSearch records and by my grep. The report also lists citations.json files that are not in the commit.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ValuationFiniteModuleInjectivity",
+  "file": "lean/Sheaf/TraceFormula/ValuationFiniteModuleInjectivity.lean",
+  "declaration": "Algebra.valuation_finite_module_injectivity",
+  "statement": "theorem valuation_finite_module_injectivity (A : Type u) (B : Type v) (N : Type w) (M : Type z) [CommRing A] [IsDomain A] [ValuationRing A] [CommRing B] [IsLocalRing B] [Algebra A B] [Algebra.EssFiniteType A B] [IsLocalHom (algebraMap A B)] [AddCommGroup N] [AddCommGroup M] [Module B N] [Module B M] [Module A N] [Module A M] [IsScalarTower A B N] [IsScalarTower A B M] [Module.Finite B N] [Module.Finite B M] (u : N →ₗ[B] M) [Module.Flat A M] (h_fibre : Function.Injective (Submodule.mapQ ((IsLocalRing.maximalIdeal A) • (⊤ : Submodule A N)) ((IsLocalRing.maximalIdeal A) • (⊤ : Submodule A M)) (u.restrictScalars A) (by rw [← Submodule.map_le_iff_le_comap, Submodule.map_smul'', Submodule.map_top] exact Submodule.smul_mono (I := IsLocalRing.maximalIdeal A) (J := IsLocalRing.maximalIdeal A) (N := LinearMap.range (u.restrictScalars A)) (P := (⊤ : Submodule A M)) le_rfl le_top))) : Function.Injective u ∧ Module.Flat A (M ⧸ Submodule.restrictScalars A (LinearMap.range (u.restrictScalars A)))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-18"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-206c843ae",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Tag 0GSG statement and dependencies match; docstrings/report sections are present; no hollow definitions or route-pivot machinery; scompile.py local and server confirmation passed with only intentional sorry."
  }
 }
