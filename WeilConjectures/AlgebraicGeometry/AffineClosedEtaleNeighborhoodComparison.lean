@@ -43,7 +43,9 @@ private theorem cohomologyMap_comp_leg {Z T S X : Scheme.{u}} (kk : Z ⟶ T) (ι
             (cohomologyMap ι (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q y))) =
       Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (kk ≫ ι) v i hs).inv.app G) q
         (cohomologyMap (kk ≫ ι) (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q y) := by
-  rw [cohomologyMap_map, (cohomologyPullbackFunctorial kk ι
+  rw [cohomologyMap_map]
+  dsimp only [Functor.comp_obj]
+  rw [(cohomologyPullbackFunctorial kk ι
     (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1, ← Sheaf.H.map_comp_apply,
     ← Sheaf.H.map_comp_apply]
   congr 2
@@ -181,6 +183,7 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
     ext x
     simp only [AddCommGrpCat.hom_comp, AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp,
       Function.comp_apply, φ]
-    exact cohomologyMap_comp_leg kk (Spec.map (c.ι.app a)) (v a) t i (wt a) hi' (hs a) G q _
+    exact congrArg Abelian.Ext.hom
+      (cohomologyMap_comp_leg kk (Spec.map (c.ι.app a)) (v a) t i (wt a) hi' (hs a) G q _)
 
 end AlgebraicGeometry
