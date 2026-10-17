@@ -236,5 +236,35 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-2ba248686 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-inverse-gadget-categorical-contractibility, every cited node's statement and Kerodon 05ZJ/05ZK/05ZL online (not archived; WANTED stands). Statements: the item matches 05ZL with Q and e expanded (edge {1,2}, edges 02 and 13 collapsed separately, C and W arbitrary). The child matches 05ZJ in the whole-functor-category sense, which is condition (ii) of the existing lem-coef-joyal-functor-equivalence-test. Small cases on Q: faces 012/123/013/023 give ba=1, cb=1, a=03=c, so hQ is the walking isomorphism; E empty, E=Δ0 and nerves of ordinary categories also check out. The child is strictly smaller than the item. An rg search of the whole DAG found no duplicate: the infinite-nerve J node, the Bergner and Segal-space nodes and the homotopy-category calculus nodes state other things. Step checks: step 1 injectivity holds degree by degree. Step 2 uses only what lem-coef-infinity-mapping-composition states. Step 3: the min(s,t) contraction is correct, and its inverse and triangle witnesses stay in the full subcategory H(E). Step 4: the two-out-of-three calculation is correct. Step 5: product of the same quasi-inverse in every coordinate, so no choice over W. Step 6: every hypothesis of lem-coef-localization-monomorphic-pushout holds (u0=1, v0=i injective by step 1, p=(1,i,1), V=(∅,V,∅)), the pushouts are C and D, and the edge set is f(V)=W. Edge cases: W empty, C empty, degenerate edges and shared endpoints. No cycle. Two repairs to the item, written to fixes: (C1/C2) step 4 used, without citing them, that the functor simplicial sets are quasicategories and that composites of equivalence edges are equivalences; it now cites lem-cbc-enhanced-functor-cone-calculus and lem-coef-infinity-mapping-composition, both already in proof_deps. (C8) lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) is off the unit's route and was not declared; split_report.tool_uses now declares it for functor-category fibrancy only, and I accept that tool use. The statements and the child are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-163a2ac49",
+  "group": "Q68",
+  "result": "fix",
+  "note": "Statement correct: Q = pushout of Δ[3] along the Bool-indexed edges 02/13 to two separate Δ[0] points; e = edge 12 then pushout.inl; D = presheaf pushout of ∐_W Δ[1] → C (yonedaEquiv.symm w) and ∐_W e; conclusion IsLocalizationAtEdges.{u,v} j W exactly as recorded (∀ E quasicategory in max u v, ∃ r with r ≫ ι = pre(ulift j) ∧ IsFunctorEquivalence r); no quasicategory assumption on C or D; edge cases W=∅, C=∅, degenerate and shared-endpoint edges covered. Gates pass: no hollow defs, only sorry, source/blueprint docstrings and proof plan present, lean.statement verbatim, node changed only in lean, non-public proof-dep imports follow add_proof_imports rule. nt_compile.py rc 0, no errors or warnings. FIX: H11, the report's '## Second reading by Q68' was a placeholder saying no reading was done; fixes/lem-coef-simplicial-edge-inversion-pushout.report.md gives a real clause-by-clause reading and rewrites a garbled worker-report sentence. Note: inverseTetrahedron (lem-coef-finite-inverse-tetrahedron) is an isomorphic Q outside the item's deps; no change, flagged for the lead."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialEdgeInversionPushout",
+  "declaration": "SSet.Enhanced.edgeInversionPushout_isLocalization",
+  "declarations": [
+   "SSet.Enhanced.inverseGadgetEdges",
+   "SSet.Enhanced.inverseGadgetCollapse",
+   "SSet.Enhanced.inverseGadget",
+   "SSet.Enhanced.inverseGadgetEdge",
+   "SSet.Enhanced.edgeInversionAttachingMap",
+   "SSet.Enhanced.edgeInversionGadgetMap",
+   "SSet.Enhanced.edgeInversionPushout",
+   "SSet.Enhanced.edgeInversionPushoutMap",
+   "SSet.Enhanced.edgeInversionPushout_isLocalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialEdgeInversionPushout.lean",
+  "statement": "theorem edgeInversionPushout_isLocalization (C : SSet.{u}) (W : Set (C _⦋1⦌)) : IsLocalizationAtEdges.{u, v} (edgeInversionPushoutMap C W) W",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Defines the finite inverse gadget Q, its distinguished edge, the degreewise pushout attachment, and states the localization property with the recorded arbitrary-shape localization predicate."
  }
 }

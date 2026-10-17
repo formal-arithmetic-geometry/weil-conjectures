@@ -213,5 +213,23 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-41347610f (reviewer sub-agent of L); spot-checked: I read the whole delivery and found nothing to fix; no files changed and fixes/ is empty. It is one commit containing the item and its report; it adds no new nodes and changes no unit. proof_deps equals the union of the step uses. Sources checked in the Stacks project: 070I (derived.tex:9632, lemma-K-injective, (1)⇒(3)), 070H, 079L (injectives.tex:1633, used only as motivation; it is a K-injectivity criterion, not this conclusion) and 0117. Step 1: the cokernel is computed degreewise and is degreewise short exact because each i^r is monic; the long exact sequence leaf with acyclic C makes H^r(i) an isomorphism, which is a quasi-isomorphism as def-weil-abstract-derived-category defines it. Step 2: lem-weil-pbc-kinjective-hom-derived uses the same null-homotopy K-injectivity as def-pur-kinjective-complex; Q(i) is invertible, so surjectivity gives [g0] and injectivity gives [g0 i]=[f]; the homotopy sign g0 i - f = dh + hd matches the definition. Step 3: the first clause of def-sp-injective-resolutions extends h^r along the monic i^r, choosing independently in each degree; this is elementary. Step 4: I checked by hand that d t = d H d = t d and t i = g0 i - f, so g = g0 - t is a chain map with g i = f. Step 5: by lem-coef-sheaf-flat-model a trivial cofibration is a termwise monic quasi-isomorphism, the long exact sequence forces its cokernel to be acyclic, and since (trivial cofibration, fibration) is a stated weak factorization system, the right lifting property for I→0 is fibrancy. Both hypotheses are needed: (N'→N')⊇(M'→M') shows the conclusion forces injective terms, and the inclusion of the Z/4 complex with differential 2 into its cone shows K-injectivity is needed. Small cases A=0, i an isomorphism and I=0 are consistent, and no boundedness is assumed. Route: the two off-unit citations are both Mathlib leaves, the flat-model node is in the same unit, there is no SGA, and no tool_uses are needed. A search for fibrant / termwise-injective / lifting nodes found no duplicate, and no new node restates a clause of its parent. This is not a target node, so the base-change morphism check does not apply; the coefficient category Mod(R) on a small site matches the flat-model node. The citing steps 8 and 9 of lem-coef-semilinear-derived-sections use exactly this fibrancy statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b03900423",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Single commit (module + node lean record + report), snapshot identical. Every clause matches: site/IsSiteForCoverings, R in CommRingCat.{max u v w} as in lem-coef-sheaf-flat-model, Complex R, Mathlib IsKInjective, Injective (I.X r) for all r, Mono (i.f r), (cokernel i).Acyclic, ∃ g, i ≫ g = f; fibrancy fib D.model (0 : I ⟶ 0) plus the explicit RLP against cof∧weq, for every FlatModelData D. No extra hypotheses or universe equalities. Statement field verbatim. Docstrings carry source, blueprint tag and the five proof steps; proof is sorry; no new definitions. No duplicate found in project Lean or Mathlib. nt_compile --json clean (rc=0, no errors; diagnostics confirmed live with a broken copy; axioms only sorryAx + standard). Mathematics and edge cases checked. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KInjectiveFlatModelFibrant",
+  "declaration": "CategoryTheory.CoefficientFlatModel.extension_and_fibrant_of_isKInjective",
+  "file": "lean/Sheaf/Algebra/Homology/KInjectiveFlatModelFibrant.lean",
+  "statement": "theorem extension_and_fibrant_of_isKInjective {C : Type u} [Category.{v} C] {J : Precoverage C} (_hJ : J.IsSiteForCoverings) (R : Sheaf J.toGrothendieck CommRingCat.{max u v w}) (I : Complex.{u, v, w} R) [I.IsKInjective] [∀ r : ℤ, Injective (I.X r)] : (∀ {A B : Complex.{u, v, w} R} (i : A ⟶ B), (∀ r : ℤ, Mono (i.f r)) → (cokernel i).Acyclic → ∀ f : A ⟶ I, ∃ g : B ⟶ I, i ≫ g = f) ∧ (∀ D : FlatModelData.{u, v, w} R, fib D.model (0 : I ⟶ (0 : Complex.{u, v, w} R)) ∧ ∀ {A B : Complex.{u, v, w} R} (i : A ⟶ B), cof D.model i → weq D.model i → HasLiftingProperty i (0 : I ⟶ (0 : Complex.{u, v, w} R)))",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

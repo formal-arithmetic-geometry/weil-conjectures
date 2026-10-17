@@ -206,5 +206,34 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-0b9738db1 (reviewer sub-agent of L); spot-checked: I read HTT from a local copy left in /tmp by an earlier review (/tmp/q72htt/htt.pdf, 2017 version) and checked A.3.4.6 (p.886), A.3.4.11 (p.889), A.3.4.12-13 (pp.889-890), A.3.5.5 (p.893) and A.3.5.14 (p.896); every printed page cited in the nodes is correct. HTT is still not archived in literature/, so the WANTED line stands. The item is A.3.5.14 for S=sSet with no hypothesis added and nothing weakened; this is not a target node, so no coefficient category or base-change morphism is involved. Step 1: injectivity of restriction along q gives i v=1, so q is essentially surjective on pi0. Step 2: products preserve DK equivalences (via lem-coef-realization-finite-limits), and the universal property gives r with r q'=q x 1. Step 3: the projective model and the new exponential translate the W condition into the W_D condition. Step 4: I traced the composite of the four bijections myself; it is r^*, by naturality of the exponential in I and injectivity of restriction along q'. The universal property is applied with large targets in an enlarged universe, as in HTT. Step 5: pi0(r) is essentially surjective, so the detector applies. Step 6: both sides of the naturality square restrict along q' to the same map, and injectivity gives equality; identities and composition follow the same way. New node lem-coef-simplicial-model-target-test: I proved it from A.3.4.6 and A.3.4.11. Essential surjectivity is genuinely needed for the surjectivity half, and HTT uses it silently. Tested on empty X and Y and on BS^1 -> point. New node lem-coef-simplicial-derived-exponential: it is A.3.4.13 plus a pointwise criterion, which is true because a map of projectively bifibrant diagrams is a weak equivalence exactly when every component is one. Tested with D or I empty and D terminal. Neither new node duplicates an existing one: the existing nodes for A.3.4.11 (lem-coef-simplicial-fully-faithful-homotopy-image) and A.3.4.12 (lem-coef-simplicial-diagram-equivalence-classes) state different results and also reach the item through lem-coef-coherent-nerve-comparison, so citing them would close a cycle. Neither new node restates a clause of the item. A reachability check on the snapshot found no cycle. All uses are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. The blueprint fields are correct and no SGA source is used. Advisory: the future splits of the two new nodes must follow HTT's chunk proofs rather than the existing coherent-nerve nodes. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6e72ae04",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Read the node, the dependency lem-coef-simplicial-inversion-universal-property (MappingProperty, InvertsMarked, Uniqueness, InducedMaps, CompositionCompatibility), Pair/PairHom, the Bergner localization, productIndex/productEnrichment and homEquiv'. Every clause matches: arbitrary W; the existing coordinatewise product is reused (H4); productPair marks exactly W_D, confirmed by three compiled probes (every (w,1_d) is marked, a marked arrow has d=d', a marked vertex is HEq (w,1_d)); units are quantified via MappingProperty, which fixes them up to unique iso; ProductComparison gives a unique r with Q k ≫ r = Q(q×1), IsIso r, and every three-arrow representative a DK equivalence; ProductNaturality covers marking-preserving f and arbitrary g; the ∃ E ProductDescent is harmless because E.map does not depend on E (Q×Q is a localization). No fibrancy or saturation hypotheses, universe u bound, no hollow defs, the only sorry is the theorem, docstrings and the 6-step proof present, the record statement is verbatim, max line 89, the node changed only in lean. nt_compile on the side overlay is clean with no warnings. Advisories: H11 second-reading section is a self-check (dispatcher brief, as in Q63); stage 3 will need productIndex moved below MarkedConeExternalProduct to avoid an import cycle along the chain marked-cone → ... → localization-comparison-calculus → this item."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialInversionProductParameter",
+  "declaration": "CategoryTheory.SimplicialInversion.simplicial_inversion_product_parameter",
+  "declarations": [
+   "CategoryTheory.SimplicialInversion.productMap",
+   "CategoryTheory.SimplicialInversion.product",
+   "CategoryTheory.SimplicialInversion.productPair",
+   "CategoryTheory.SimplicialInversion.ProductDescent",
+   "CategoryTheory.SimplicialInversion.ProductDescent.map",
+   "CategoryTheory.SimplicialInversion.ProductComparison",
+   "CategoryTheory.SimplicialInversion.ProductNaturality",
+   "CategoryTheory.SimplicialInversion.simplicial_inversion_product_parameter"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialInversionProductParameter.lean",
+  "statement": "theorem simplicial_inversion_product_parameter : ∃ E : ProductDescent.{u}, (∀ (P : Pair.{u}) (D L K : SCat.{u}) (q : P.category ⟶ L) (k : (productPair P D).category ⟶ K), MappingProperty P (bergnerHomotopyFunctor.map q) → MappingProperty (productPair P D) (bergnerHomotopyFunctor.map k) → ProductComparison P D L K q k) ∧ ProductNaturality E",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the existing coordinatewise productIndex and productEnrichment definitions, marked Pair, Bergner homotopy category, and MappingProperty. Comparison classes are uniquely fixed by the localization-unit triangle; naturality uses the induced unit triangles and product descent. Representatives include strict functors and three-arrow replacement representatives. No fibrancy or saturation restrictions. The product-owner theorem is not a proof input; its downstream DAG node is not added as a prerequisite."
  }
 }

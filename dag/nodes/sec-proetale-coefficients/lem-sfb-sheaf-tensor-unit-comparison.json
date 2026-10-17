@@ -210,5 +210,37 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6f7404cfc (reviewer sub-agent of L); spot-checked: I read the item in full: six steps, no new nodes. Statement, stmt_deps, source and blueprint fields match the base copy; only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed. Sources checked: blueprint main-20261015 det-def-sfb-sheaf-tensor-structure.md and .proof.md (second paragraph: structure maps are conjugates of the objectwise ones by unit comparisons), and the statements of det-def-sfb-sheaf-tensor-presheaf, def-weil-pbc-sheafification (a Mathlib leaf, so not route) and det-def-sfb-sheaf-tensor-local-iso (Hom characterization of W and clause 1). Type checks: α*, λ*, ρ* and β* match the blueprint composites, and d(f,g) lands in i(F⋆G). Step 1: η_X is in W by the universal property; clause 1 gives every inverse used; iε∘η=id follows from uniqueness. Step 2: unit naturality and its cancellation form are correct. Step 3: the associator calculation cancels a(t)^{-1}, then uses unit naturality and associator naturality; correct. Steps 4–5: the unitor calculations use iε_F∘η_{iF}=id; correct. Step 6: symmetry is correct. Edge cases: with the identity reflector, zero objects or zero maps the identities reduce to naturality or hold trivially; f, g, h are never cancelled and no flatness is used. The parent's step 4 uses exactly these four formulas. Graph: acyclic (the cited nodes' dependencies do not reach the item); no off-unit tool use; no SGA. Duplicate search over dag/nodes found only the unit and parent monoidal-structure claims and lem-sfb-monoidal-adjunction-mates, none of which states these identities. I accept the Mathlib searches (grep, loogle, leansearch, leanfinder): no exact match. No fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-910acaa1b",
+  "group": "NG",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: hypotheses as in deps (EssentiallySmall.{w}, IsGrothendieckAbelian.{w}, symmetric closed monoidal preadditive, HasWeakSheafify), alpha*/lambda*/rho*/beta* are the node's composites, inverses canonical via asIso + J.W_iff + sheafification_tensor_local_iso, eps = adjunction counit, d(f,g) = (f⊗g)≫toSheafify with arbitrary leaves, all four equalities present. No hollow defs, only the theorem is sorry, no duplicate (Mathlib/project sheaf monoidal structures are abstract localization lifts), lean.statement verbatim, node changed only in lean, universes independent. nt_compile.py clean on snapshot and on fix. H8 fixed: theorem docstring lacked source document/place and condensed the six proof steps; fixes/SheafTensorUnitComparison.lean is the complete replacement module, docstring only, signature unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafTensorUnitComparison",
+  "declaration": "CategoryTheory.sfbSheafTensorUnitComparison",
+  "file": "lean/Sheaf/CategoryTheory/SheafTensorUnitComparison.lean",
+  "statement": "theorem sfbSheafTensorUnitComparison {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] (J : GrothendieckTopology C) {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{w} A] [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A] [MonoidalPreadditive A] [HasWeakSheafify J A] {P Q R : Cᵒᵖ ⥤ A} {F G H : Sheaf J A} (f : P ⟶ F.obj) (g : Q ⟶ G.obj) (h : R ⟶ H.obj) : (sfbSheafD J (sfbSheafD J f g) h) ≫ (sfbSheafAssociator J F G H).hom = (α_ P Q R).hom ≫ sfbSheafD J f (sfbSheafD J g h) ∧ (sfbSheafD J (toSheafify J ((Functor.const Cᵒᵖ).obj (𝟙_ A))) f) ≫ (sfbSheafLeftUnitor J F).hom = (λ_ P).hom ≫ f ∧ (sfbSheafD J f (toSheafify J ((Functor.const Cᵒᵖ).obj (𝟙_ A)))) ≫ (sfbSheafRightUnitor J F).hom = (ρ_ P).hom ≫ f ∧ (sfbSheafD J f g) ≫ (sfbSheafBraiding J F G).hom = (β_ P Q).hom ≫ sfbSheafD J g f",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.sfbSheafTensor",
+   "CategoryTheory.sfbSheafTensorMap",
+   "CategoryTheory.sfbSheafEpsilon",
+   "CategoryTheory.sfbSheafD",
+   "CategoryTheory.sfbSheafTensorUnitLeftIso",
+   "CategoryTheory.sfbSheafTensorUnitRightIso",
+   "CategoryTheory.sfbSheafAssociator",
+   "CategoryTheory.sfbSheafLeftUnitor",
+   "CategoryTheory.sfbSheafRightUnitor",
+   "CategoryTheory.sfbSheafBraiding",
+   "CategoryTheory.sfbSheafTensorUnitComparison"
+  ],
+  "fixed_by": "NT-stage2-cc-910acaa1b"
  }
 }
