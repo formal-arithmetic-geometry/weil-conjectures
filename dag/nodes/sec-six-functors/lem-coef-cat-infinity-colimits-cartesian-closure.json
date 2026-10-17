@@ -28,21 +28,182 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work relative to $\\mathcal U$, reserving a larger universe for the category of all $\\mathcal U$-small objects. Let $\\mathcal M$ be the category of $\\mathcal U$-small marked simplicial sets with the marked model over a point of [lem-coef-marked-point-cartesian-model]. That statement gives a combinatorial simplicial model category, all objects cofibrant, with fibrant objects exactly $B^\\natural$ for small quasicategories $B$. It also identifies $N_{\\mathrm{hc}}(\\mathcal M^{\\mathrm{cf}})$ with $\\mathrm{Cat}_{\\infty,\\mathcal U}$. In particular no model structure on unmarked simplicial sets enriched by its non-Kan functor objects is being assumed. The mapping-space comparison of [lem-coef-coherent-nerve-comparison], followed by the marked model's identity for its Kan enrichment, gives natural equivalences $\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(B,E)\\simeq\\operatorname{Fun}(B,E)^\\simeq$, compatible with composition.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7; Corollary 3.1.4.4 and Remark 3.1.4.6; Proposition 1.1.5.10 and Theorem 2.2.0.1."
+   }
+  },
+  {
+   "text": "For every $\\mathcal U$-small family $(A_i)_{i\\in J}$, the degreewise product $\\prod_i A_i$ is a quasicategory: pair the fillers of each inner horn coordinatewise. The degreewise coproduct $\\coprod_i A_i$ is also a quasicategory: the edge graph of an inner horn is connected, so any horn into this coproduct lies in one summand and can be filled there. Degreewise pairing and restriction give\n$$\\operatorname{Fun}(T,\\prod_i A_i)=\\prod_i\\operatorname{Fun}(T,A_i),\\qquad \\operatorname{Fun}(\\coprod_i A_i,E)=\\prod_i\\operatorname{Fun}(A_i,E).$$\nAn edge in a product is an equivalence exactly when each coordinate is: pair the inverse edges and both triangular witnesses. Thus cores commute with these products. For the discrete shape $J$ one has $\\operatorname{Fun}(J,\\mathscr C)=\\prod_{j\\in J}\\mathscr C$ degreewise, and a right-pinched mapping space in a degreewise product of quasicategories is the product of the coordinate mapping spaces, directly from the definition. Hence, by the mapping-space formula of step 1, the projection cone gives $\\operatorname{Map}(T,\\prod_iA_i)\\simeq\\prod_i\\operatorname{Map}(T,A_i)$ and the inclusion cocone gives $\\operatorname{Map}(\\coprod_iA_i,E)\\simeq\\prod_i\\operatorname{Map}(A_i,E)$, and the cone criterion of [lem-cbc-enhanced-functor-cone-calculus] and its dual make these objects, with their actual projections and inclusions, products and coproducts in $\\mathrm{Cat}_{\\infty,\\mathcal U}$. This includes the empty family: $\\Delta^0$ is terminal and the empty simplicial set is initial. All these simplicial sets are $\\mathcal U$-small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Degreewise products, coproducts, inverse-triangle witnesses; compare Scholze Lecture II basic fact (7)."
+   }
+  },
+  {
+   "text": "We will use the following explicit small replacement. For any $\\mathcal U$-small simplicial set $X$, apply [lem-coef-small-object-cell-factorization] to $X\\to\\Delta^0$ and the set of all inner horn inclusions, with $\\kappa=\\aleph_0$. The domains have finitely many nondegenerate simplices, so maps from them into a continuous chain of these monomorphisms factor at a finite stage, and equality does too. This checks the smallness hypothesis. The result is an inner-horn cell map $j:X\\to RX$ with $RX$ a $\\mathcal U$-small quasicategory. The map $j$ has the left lifting property against inner fibrations, and [lem-coef-inner-anodyne-pushout-product] says that $j\\mathbin\\square i$ has the same property for every monomorphism $i$. Consequently, for every quasicategory $E$, a lifting problem against $i$ for\n$$j^*:\\operatorname{Fun}(RX,E)\\longrightarrow\\operatorname{Fun}(X,E)$$\nis, by evaluation, a lifting problem for $E\\to\\Delta^0$ against $j\\mathbin\\square i$, and has a solution. The two functor objects are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. Since $j^*$ lifts against every Joyal cofibration, the weak-factorization-system characterization in [lem-coef-joyal-model-structure] makes it a Joyal trivial fibration. The characterization in [lem-coef-joyal-quasicategory-characterizations] therefore makes it a functor equivalence; its restriction to cores is an equivalence of spaces: its simplicial quasi-inverse restricts to the cores, and the two inverse natural equivalences restrict to simplicial homotopies there. Indeed, in each homotopy the parameter edges are equivalences by its vertex components, and the remaining edges are images of equivalences from the source core; the defining triangles express an arbitrary edge as their composite. Thus these homotopies land in the target core. This argument also applies to targets in any larger universe: the same small inner-horn cell map remains left orthogonal there, since cell lifts extend by pushouts, coproducts and transfinite recursion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries 2.3.2.4-2.3.2.5; small-object cell factorization as in the cited Mathlib node; Theorem 2.2.5.1."
+   }
+  },
+  {
+   "text": "Consider any span $A\\leftarrow B\\to C$ in $\\mathrm{Cat}_{\\infty,\\mathcal U}$. Its two arrows are actual functors by step 1. Factor $B\\to A$ in the small Joyal model as a monomorphism $B\\hookrightarrow A'$ followed by a trivial fibration $A'\\to A$. The object $A'$ is fibrant because $A'\\to A\\to\\Delta^0$ is a composite of fibrations. By [lem-coef-joyal-quasicategory-characterizations], $A'\\to A$ is a functor equivalence, so this replacement gives an equivalent span. Form the degreewise pushout $P_0=A'\\amalg_B C$ and its small inner-horn replacement $P_0\\to P$ from step 3. For any quasicategory $E$, restriction gives an equality\n$$\\operatorname{Fun}(P_0,E)=\\operatorname{Fun}(A',E)\\times_{\\operatorname{Fun}(B,E)}\\operatorname{Fun}(C,E).$$\nBy [lem-coef-infinity-isofibration-exponentiation], the first restriction map to $\\operatorname{Fun}(B,E)$ is an isofibration. Apply [lem-coef-infinity-isofibration-pullback-limit] to these three functor quasicategories, and take its displayed mapping-space formula at $Q=\\Delta^0$. Together with step 3 this gives\n$$\\operatorname{Fun}(P,E)^\\simeq\\simeq\\operatorname{Fun}(A',E)^\\simeq\\mathop\\times^h_{\\operatorname{Fun}(B,E)^\\simeq}\\operatorname{Fun}(C,E)^\\simeq.$$\nThe comparison is induced by the actual pushout inclusions. The square with vertices $B,A',C,P$ formed by $B\\hookrightarrow A'$, $B\\to C$ and the composites of the pushout inclusions with $P_0\\to P$, which commute strictly, is a coherent square in $\\mathrm{Cat}_\\infty$ (constant homotopy), and by step 1 the displayed comparison is, for every $E$, its projection-induced comparison $\\operatorname{Map}(P,E)\\to\\operatorname{Map}(A',E)\\times^h_{\\operatorname{Map}(B,E)}\\operatorname{Map}(C,E)$. Apply [lem-coef-infinity-terminal-pullback-criterion] in the opposite quasicategory $\\mathrm{Cat}_\\infty^{\\mathrm{op}}$, where this square is a cone on the cospan $A'\\to B\\leftarrow C$ and its mapping spaces are those of $\\mathrm{Cat}_\\infty$ with source and target exchanged: the comparison being an equivalence for every $E$, the square is a limiting cone there, that is, a pushout of $A'\\leftarrow B\\to C$ in $\\mathrm{Cat}_\\infty$. Here is the cocone and its universal property for the original span explicitly. Write $f:B\\to A$, $g:B\\to C$, $i:B\\to A'$, $q:A'\\to A$, with $qi=f$, and let $u:A'\\to P$, $v:C\\to P$ be the constructed maps. Choose a simplicial quasi-inverse $s:A\\to A'$ of $q$ and inverse natural equivalences $sq\\simeq\\operatorname{id}_{A'}$, $qs\\simeq\\operatorname{id}_A$. The maps $us:A\\to P$ and $v:C\\to P$ have comparison $usf=usqi\\simeq ui=vg$. For each $E$, precomposition $q^*:\\operatorname{Fun}(A,E)^\\simeq\\to\\operatorname{Fun}(A',E)^\\simeq$ has homotopy inverse $s^*$ and commutes with restriction to $B$ because $qi=f$. It therefore induces an equivalence between the original span's path-space pullback and the displayed one: apply $q^*$ or $s^*$ to the endpoint map and use the chosen inverse natural equivalence on its comparison path; their two composites are homotopic to the identity by $sq\\simeq\\operatorname{id}_{A'}$ and $qs\\simeq\\operatorname{id}_A$, with all simplicial parameters retained. Under this equivalence the comparison induced by $us,v$ is the one already proved universal. The same criterion, whose comparisons are natural and invariant under equivalences of apices and diagrams, now makes this actual cocone a pushout of the original span. Its apex is $\\mathcal U$-small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-terminal-pullback-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.3.2.5; the direct pushout calculation uses Kerodon 01F1 and 033R, with the coherent cone criterion."
+   }
+  },
+  {
+   "text": "For a cospan $A\\to B\\leftarrow C$, factor $A\\to B$ in the small Joyal model as a trivial cofibration $A\\to A'$ followed by a fibration $A'\\to B$. Its source $A'$ is a quasicategory, and [lem-coef-joyal-quasicategory-characterizations] identifies $A\\to A'$ as a functor equivalence and $A'\\to B$ as an isofibration. By [lem-coef-infinity-isofibration-pullback-limit], the degreewise pullback $A'\\times_B C$, with its projections, is a pullback in $\\mathrm{Cat}_{\\infty,\\mathcal U}$. The theorem includes quasicategory closure and the mapping-space universal property for every test object; no fibration condition on $C\\to B$ is needed. Explicitly write the original arrows as $f:A\\to B$ and $g:C\\to B$, the factorization as $t:A\\to A'$, $p:A'\\to B$ with $pt=f$, and the pullback projections as $a:D\\to A'$, $c:D\\to C$ with $pa=gc$. Choose a simplicial quasi-inverse $s:A'\\to A$ with inverse natural equivalences $ts\\simeq\\operatorname{id}_{A'}$ and $st\\simeq\\operatorname{id}_A$. The maps $sa:D\\to A$ and $c:D\\to C$ form a coherent cone, with comparison $fsa=ptsa\\simeq pa=gc$. For every test quasicategory $Q$, postcomposition with $t$ identifies $\\operatorname{Map}(Q,A)$ with $\\operatorname{Map}(Q,A')$, compatibly over $\\operatorname{Map}(Q,B)$ since $pt=f$. Postcomposition with $s$ and the two chosen homotopies give its inverse on the path-space pullbacks, by applying the homotopies to the comparison paths in every simplicial degree. The displayed universal comparison for $D$ is consequently also the comparison for this original cone. The square criterion of [lem-coef-infinity-terminal-pullback-criterion], applied to this projection-induced comparison and using its invariance under equivalences of cospan diagrams, proves that it is a pullback. All objects used are $\\mathcal U$-small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-terminal-pullback-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/033R",
+    "place": "Corollary 4.5.3.28; Joyal factorization and fibration characterization as in Cisinski Theorem 3.6.1 and Corollary 3.6.6."
+   }
+  },
+  {
+   "text": "Apply the existence clause of [lem-coef-infinity-small-colimit-generation] to $\\mathrm{Cat}_{\\infty,\\mathcal U}$: step 2 supplies all $\\mathcal U$-small coproducts, including the empty one, and step 4 supplies all pushouts. Thus every $\\mathcal U$-small simplicial diagram has a colimit, with no ordinary-nerve restriction on its shape. Apply the same theorem to the opposite infinity category: step 2 supplies its small coproducts by products in the original category, and step 5 supplies its pushouts by pullbacks in the original category. Opposites reverse simplicial order and interchange cone and cocone conditions, so the resulting colimits are all $\\mathcal U$-small limits in the original category. No new diagram-model comparison or localization theorem is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-small-colimit-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.3.22 and its opposite, printed p.356 (PDF p.371); also HTT Proposition 4.4.2.6."
+   }
+  },
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], $\\operatorname{Fun}(A,E)$ is a quasicategory. It is $\\mathcal U$-small when $A,E$ are, because in each degree its simplices are a subset of the set of maps between two $\\mathcal U$-small simplicial sets. Construct the exponential comparison before passing to cores: for each $n$, curry a map $T\\times\\Delta^n\\to\\operatorname{Fun}(A,E)$ to a map $A\\times T\\times\\Delta^n\\to E$ by evaluation, and permute the first two factors. To spell out the inverse, given $v:A\\times T\\times\\Delta^n\\to E$, its image at an $m$-simplex $(t,u)$ of $T\\times\\Delta^n$ is the map $A\\times\\Delta^m\\to E$ whose value at an $r$-simplex $(a,\\theta:[r]\\to[m])$ is $v_r(a,T(\\theta)t,u\\theta)$. Evaluation in the other direction sends $(a,t,u)$ in degree $m$ to the value of the map $h_m(t,u)$ at $(a,\\operatorname{id}_{[m]})$. These formulas are inverse by simplicial naturality and commute with restriction along every $[m]\\to[n]$. They give a natural simplicial isomorphism $\\operatorname{Fun}(T,\\operatorname{Fun}(A,E))\\cong\\operatorname{Fun}(T\\times A,E)$. In particular every edge and every higher coherent transformation is retained.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Internal-Hom construction in Section 3.1.3; direct degreewise exponential calculation from the functor simplicial-set definition. Functor closure: Scholze Lecture II, basic fact (1), printed p.14."
+   }
+  },
+  {
+   "text": "The simplicial isomorphism of step 7 preserves equivalence edges and their inverse-triangle witnesses in both directions, so restricts to an isomorphism on cores. Combine this with step 1 to obtain natural mapping-space equivalences $\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(T,\\operatorname{Fun}(A,E))\\simeq\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(T\\times A,E)$. The map is induced by the actual evaluation functor $\\operatorname{Fun}(A,E)\\times A\\to E$. Naturality is on mapping Kan complexes, not just components: precomposition in $T,A$ and postcomposition in $E$ commute with the evaluation and currying formulas for every simplex. The product functor is itself coherent: on mapping Kan complexes send a simplex $h$ to $h\\times\\operatorname{id}_A$; this respects identities and composition degreewise, hence induces a functor on coherent nerves. For each $E$ this represents the presheaf $T\\mapsto\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(T\\times A,E)$. Apply [lem-coef-infinity-pointwise-adjoint-criterion] in a larger pair of universes containing $\\mathrm{Cat}_{\\infty,\\mathcal U}$ as a small simplicial set, so that its small-mapping-space hypothesis holds. By that criterion, these representing objects assemble to a coherent right adjoint of $(-)\\times A$; its counit is the displayed evaluation map. With the product verified in step 2, this is precisely the cartesian internal-Hom universal property. The stronger, un-cored isomorphism in step 7 proves the displayed functor-quasicategory equivalence in the statement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3 internal Homs; Proposition 3.1.4.2 and Corollary 3.1.4.3; elementary restriction of the explicit exponential isomorphism to cores."
+   }
+  },
+  {
+   "text": "For a fixed $\\mathcal U$-small simplicial shape $K$, step 6 supplies colimiting cocones and limiting cones for every diagram $p:K\\to\\mathrm{Cat}_{\\infty,\\mathcal U}$. By [lem-cbc-enhanced-functor-cone-calculus], their universal maps give the natural mapping-space representations\n$$\\operatorname{Map}(\\operatorname{colim}p,E)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathrm{Cat}_\\infty)}(p,\\Delta_K E),\\qquad\\operatorname{Map}(E,\\operatorname{lim}p)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathrm{Cat}_\\infty)}(\\Delta_K E,p).$$\nApply respectively the left- and right-adjoint clauses of [lem-coef-infinity-pointwise-adjoint-criterion] to the constant-diagram functor. Choose a larger pair of universes in which both its source and target fit as small simplicial sets; their mapping spaces are then small. The criterion assembles these representing objects and universal maps into coherent colimit and limit functors and their units and counits, including all transformations. The contractibility assertion of the cone-calculus statement gives independence of the universal choices. The exponential comparison in step 7 is already natural in every simplicial parameter, and step 8 assembles its right adjoint coherently. Thus naturality does not depend on assuming that ordinary model replacements are enriched functors.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.2.4.3 and its dual; Proposition 5.2.4.2 and its opposite."
+   }
+  },
+  {
+   "text": "Let $\\mathcal V$ contain $\\mathcal U$ and any additional target quasicategory under consideration. The inclusion $\\mathrm{Cat}_{\\infty,\\mathcal U}\\to\\mathrm{Cat}_{\\infty,\\mathcal V}$ is induced on coherent nerves by the enriched inclusion: its mapping Kan complexes on the old objects are identical, since simplicial map sets, equivalence witnesses and composition are unchanged. Step 2's coproduct and product formulas are valid against any $\\mathcal V$-small test object. The pushout construction of step 4 is also still universal there: the monomorphism $B\\hookrightarrow A'$ is unchanged; the equivalence $A'\\to A$ retains its simplicial quasi-inverse and inverse-triangle witnesses; the same degreewise pushout $P_0$ and same small inner-horn cell replacement $P_0\\to P$ have the mapping property of step 3 against all $\\mathcal V$-small targets. The exponentiation and isofibration-pullback statements used in the calculation apply in $\\mathcal V$. Thus the inclusion preserves the constructed small coproducts and pushouts. The preservation clause of [lem-coef-infinity-small-colimit-generation] now proves that it preserves every $\\mathcal U$-small colimit, including its cocone. For completeness it also preserves products and pullbacks: the isofibration of step 5 is characterized by finite horns and equivalence lifts, so remains an isofibration, and its degreewise pullback and comparison remain the same. The opposite preservation criterion gives the limit assertion as well. Finally step 7's sets of simplicial maps, evaluation, restrictions and currying formulas are identical under enlargement, so the internal Hom and its full coherent exponential comparison remain valid. This proves precisely the claimed universe clause without calling a large diagram small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-small-colimit-generation",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.3.23 and its opposite, printed p.356; universe-relative inner-horn replacement and Kerodon 01F1/033R."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-coherent-nerve-comparison",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-terminal-pullback-criterion",
+  "lem-coef-infinity-small-colimit-generation",
+  "lem-coef-infinity-pointwise-adjoint-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Direct products/coproducts, inner-horn replacement and simplicial pushout/pullback proof, following HTT Corollaries 2.3.2.4-2.3.2.5, Kerodon 01F1 and 033R, and Cisinski Theorem 7.3.22 / Proposition 7.3.23. The degreewise exponential proof is retained. This replaces the now-cyclic enriched-diagram citation; no new nodes or changed statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "The infinity category of small quasicategories has small colimits and is cartesian closed with coherent functor categories as internal Hom",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.hasColimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.Limits.HasColimits SSet\", \"doc\": \"The category of simplicial sets admits all colimits, meaning that every diagram in this category has a colimit object.\"}\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"SSet.instCartesianMonoidalCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"CategoryTheory.CartesianMonoidalCategory SSet\", \"doc\": \"The category of simplicial sets is equipped with a Cartesian monoidal category structure, inherited pointwise from the Cartesian monoidal structure on the category of types. This structure uses object\"}\n  {\"name\": \"SSet.instMonoidalClosed\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"CategoryTheory.MonoidalClosed SSet\", \"doc\": \"The category of simplicial sets is equipped with a monoidal closed structure, where the internal hom-functor is defined via the Hom-tensor adjunction. This structure arises from the fact that simplici\"}\n  {\"name\": \"SSet.QCat.bicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.Bicategory SSet.QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with a bicategory structure, obtained by transporting the enrichment along the homotopy category functor for simplicial sets. This structure uses th\"}\n  {\"name\": \"SSet.hasLimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.Limits.HasLimits SSet\", \"doc\": \"The category of simplicial sets has all limits, meaning that for every diagram $D : \\\\mathcal{J} \\\\to \\\\text{SSet}$ where $\\\\mathcal{J}$ is a category of the same size as $\\\\text{SSet}$, the limit of $D$ e\"}\n  {\"name\": \"CategoryTheory.Cat.instHasColimits\", \"module\": \"Mathlib/CategoryTheory/Category/Cat/Colimit\", \"type\": \"CategoryTheory.Limits.HasColimits CategoryTheory.Cat\", \"doc\": \"The category $\\\\mathsf{Cat}$, whose objects are small categories and morphisms are functors between them, has all colimits. This means that for any diagram in $\\\\mathsf{Cat}$, there exists a colimit wit\"}\n  {\"name\": \"SSet.QCat.strictBicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.Bicategory.Strict SSet.QCat\", \"doc\": \"The bicategory structure on the category of quasi-categories (QCat) is strict, meaning all associator and unitor 2-cells are identity 2-cells. This strict structure is obtained by transporting the enr\"}\n",
+   "results": "[leanfinder] OK 8 hit(s); returned SSet.hasColimits and SSet.instMonoidalClosed, but no result about the infinity category of quasicategories or coherent functor categories.",
    "date": "2026-10-16",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "\"Quasicategory\", \"Functor\" , \"Colimit\"",
-   "results": "[loogle] OK 0 hit(s)\n",
+   "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-16",
    "verdict": "no match"
   },
@@ -50,20 +211,115 @@
    "tool": "grep",
    "query": "quasicategor.*colimit|cartesian.*closed|Fun.*Fun",
    "sub": "AlgebraicTopology/Quasicategory",
-   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"28\", \"text\": \"Future work will use the fact that quasicategories define a cartesian closed subcategory\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"57\", \"text\": \"    (hoFunctor.unitHomEquiv · |>.trans <| Functor.equivCatHom _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"58\", \"text\": \"      (congrArg (Functor.toCatHom) <| hoFunctor.unitHomEquiv_eq · ·)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"line\": \"46\", \"text\": \"  refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"297\", \"text\": \"  ⟨fun ⟨h⟩ ↦ h.homotopyCategory₂_fac, fun h ↦ ⟨.ofHomotopyCategory₂Fac h⟩⟩\"}\n",
+   "results": "[grep] OK 5 hit(s); the hits concern the ordinary simplicial-set category and explicitly say the quasicategory cartesian-closed result is future work, so none states this node.",
    "date": "2026-10-16",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Small quasicategories form a cartesian closed infinity category with all small colimits",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Cat.closed\", \"module\": \"Mathlib.CategoryTheory.Category.Cat.CartesianClosed\", \"type\": \": Closed (Cat.of C)\", \"doc\": \"The category $\\\\mathsf{Cat}$ of small categories is Cartesian closed, meaning it has a Cartesian monoidal structure with categorical products as the tensor product and functor categories $[\\\\mathcal{C},\"}\n  {\"name\": \"CategoryTheory.Cat.cartesianClosed\", \"module\": \"Mathlib.CategoryTheory.Category.Cat.CartesianClosed\", \"type\": \": MonoidalClosed Cat.{u, u}\", \"doc\": \"The category $\\\\mathsf{Cat}$ of small categories is Cartesian closed, meaning it has a Cartesian monoidal structure with categorical products as the tensor product and functor categories $[\\\\mathcal{C},\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"SSet.hasColimits\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Basic\", \"type\": \": HasColimits SSet\", \"doc\": \"The category of simplicial sets admits all colimits, meaning that every diagram in this category has a colimit object.\"}\n  {\"name\": \"CategoryTheory.Limits.HasColimitsOfSize.recOn\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {motive : CategoryTheory.Limits.HasColimitsOfSize.{v₁, u₁, v, u} C → Sort u_1} →\\n      (t : CategoryTheory.Limits.HasColimitsOfSize.{v₁, u₁, v, u} C) →\\n        ((has_colimits_of_shape :\\n              ∀ (J : Type u₁) [inst_1 : CategoryT\", \"doc\": \"A proposition stating that the category has all colimits of shape $J$ for every small category $J$. This means that for any small diagram category $J$ and any functor $F: J \\\\to \\\\mathcal{C}$, there exi\"}\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"SSet.Truncated.instMonoidalClosed\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Monoidal\", \"type\": \": MonoidalClosed (Truncated.{u} n)\", \"doc\": \"The category of $ n $-truncated simplicial sets, equipped with the Cartesian monoidal structure, is a monoidal closed category. This means it has an internal hom-functor $[X, Y]$ such that for all obj\"}\n  {\"name\": \"CategoryTheory.cartesianClosedOfEquiv\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Cartesian\", \"type\": \"(e : C ≌ D) [MonoidalClosed C] : MonoidalClosed D\", \"doc\": \"Given an equivalence between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, if $\\\\mathcal{C}$ is Cartesian closed, then $\\\\mathcal{D}$ inherits a Cartesian closed structure by transferring the monoidal clo\"}\n",
+   "results": "[leansearch] OK 8 hit(s); returned ordinary Cat cartesian closure, SSet.hasColimits, and SSet.QCat, but no infinity-categorical statement.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of small quasicategories has small limits colimits and coherent functor quasicategories as cartesian internal Hom",
+   "results": "8 hits: SSet.QCat, SSet.QCat.bicategory, SSet.hasLimits, CategoryTheory.Nerve.quasicategory, SSet.QCat.catEnrichedOrdinaryCategory, SSet.Truncated.hasLimits, SSet.QCat.strictBicategory, SSet.Truncated.instCategoryHomotopyCategory₂.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Cat cartesian closure, ordinary simplicial-set limits and colimits, and the strict bicategory QCat do not state the coherent Cat-infinity theorem. Read StrictBicategory.lean:14-31, including its future-work clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Functor\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Cat cartesian closure, ordinary simplicial-set limits and colimits, and the strict bicategory QCat do not state the coherent Cat-infinity theorem. Read StrictBicategory.lean:14-31, including its future-work clause."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.closed|[Cc]olimit|internal.Hom",
+   "results": "2 hits: Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:21 (homotopy categories of simplicial internal homs) and :28 (cartesian closure is future work).",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Cat cartesian closure, ordinary simplicial-set limits and colimits, and the strict bicategory QCat do not state the coherent Cat-infinity theorem. Read StrictBicategory.lean:14-31, including its future-work clause.",
+   "sub": "AlgebraicTopology/Quasicategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinity category of quasicategories is complete cocomplete and cartesian closed",
+   "results": "8 hits: SSet.QCat, SSet.Quasicategory, CategoryTheory.CartesianClosed, CategoryTheory.Cat.closed, CategoryTheory.Cat.cartesianClosed, SSet.Quasicategory.mk, CategoryTheory.CartesianClosed.mk, CategoryTheory.Functor.functorCategoryMonoidalClosed.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Cat cartesian closure, ordinary simplicial-set limits and colimits, and the strict bicategory QCat do not state the coherent Cat-infinity theorem. Read StrictBicategory.lean:14-31, including its future-work clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent nerve of small quasicategories with mapping Kan complexes given by cores of functor quasicategories admits small homotopy limits and colimits",
+   "results": "8 hits: SSet.hasColimits, SSet.hasLimits, SSet.QCat, SSet.Truncated.hasLimits, SSet.QCat.bicategory, CategoryTheory.Nerve.quasicategory, CategoryTheory.Nerve.isStrictSegal, CategoryTheory.nerveFunctor.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Cat cartesian closure, ordinary simplicial-set limits and colimits, and the strict bicategory QCat do not state the coherent Cat-infinity theorem. Read StrictBicategory.lean:14-31, including its future-work clause."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategor|CartesianClosed|hasColimits",
+   "results": "25 hits in AlgebraicTopology/Quasicategory, concerning QCat strict bicategories, ordinary nerves, inner-horn definitions, and two-truncated homotopy categories; no coherent Cat-infinity (co)limits.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Cat cartesian closure, ordinary simplicial-set limits and colimits, and the strict bicategory QCat do not state the coherent Cat-infinity theorem. Read StrictBicategory.lean:14-31, including its future-work clause.",
+   "sub": "AlgebraicTopology/Quasicategory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of small quasicategories has small limits colimits and coherent functor quasicategories as cartesian internal Hom",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.QCat.strictBicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.Bicategory.Strict SSet.QCat\", \"doc\": \"The bicategory structure on the category of quasi-categories (QCat) is strict, meaning all associator and unitor 2-cells are identity 2-cells. This strict structure is obtained by transporting the enr\"}\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"SSet.QCat.bicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.Bicategory SSet.QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with a bicategory structure, obtained by transporting the enrichment along the homotopy category functor for simplicial sets. This structure uses th\"}\n  {\"name\": \"SSet.hasLimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.Limits.HasLimits SSet\", \"doc\": \"The category of simplicial sets has all limits, meaning that for every diagram $D : \\\\mathcal{J} \\\\to \\\\text{SSet}$ where $\\\\mathcal{J}$ is a category of the same size as $\\\\text{SSet}$, the limit of $D$ e\"}\n  {\"name\": \"SSet.hasColimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.Limits.HasColimits SSet\", \"doc\": \"The category of simplicial sets admits all colimits, meaning that every diagram in this category has a colimit object.\"}\n  {\"name\": \"SSet.QCat.catEnrichedOrdinaryCategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.EnrichedOrdinaryCategory CategoryTheory.Cat SSet.QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with an ordinary category structure enriched over the category of small categories (Cat). This structure is obtained by transporting the enrichment \"}\n  {\"name\": \"SSet.instMonoidalClosed\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"CategoryTheory.MonoidalClosed SSet\", \"doc\": \"The category of simplicial sets is equipped with a monoidal closed structure, where the internal hom-functor is defined via the Hom-tensor adjunction. This structure arises from the fact that simplici\"}\n  {\"name\": \"SSet.largeCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.LargeCategory SSet\", \"doc\": \"The category of simplicial sets is equipped with a large category structure, where objects are simplicial sets (functors from $\\\\Delta^\\\\text{op}$ to the category of types) and morphisms are natural tra\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Cat, simplicial sets, or the homotopy bicategory QCat, rather than the coherent infinity category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Functor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Cat, simplicial sets, or the homotopy bicategory QCat, rather than the coherent infinity category."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.closed|[Cc]olimit|internal.Hom",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"21\", \"text\": \"homotopy categories of the simplicial internal homs, defined by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"28\", \"text\": \"Future work will use the fact that quasicategories define a cartesian closed subcategory\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Cat, simplicial sets, or the homotopy bicategory QCat, rather than the coherent infinity category.",
+   "sub": "AlgebraicTopology/Quasicategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinity category of quasicategories is complete cocomplete and cartesian closed",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"CategoryTheory.CartesianClosed\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Cartesian\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.MonoidalCategory C] → Type (max u v)\", \"doc\": \"A category equipped with finite products and an internal hom-functor $[-,-]$ satisfying the adjunction condition: for all objects $A, B, C$, there is a natural isomorphism $\\\\mathrm{Hom}(A \\\\times B, C)\"}\n  {\"name\": \"CategoryTheory.Cat.closed\", \"module\": \"Mathlib.CategoryTheory.Category.Cat.CartesianClosed\", \"type\": \": Closed (Cat.of C)\", \"doc\": \"The category $\\\\mathsf{Cat}$ of small categories is Cartesian closed, meaning it has a Cartesian monoidal structure with categorical products as the tensor product and functor categories $[\\\\mathcal{C},\"}\n  {\"name\": \"CategoryTheory.Cat.cartesianClosed\", \"module\": \"Mathlib.CategoryTheory.Category.Cat.CartesianClosed\", \"type\": \": MonoidalClosed Cat.{u, u}\", \"doc\": \"The category $\\\\mathsf{Cat}$ of small categories is Cartesian closed, meaning it has a Cartesian monoidal structure with categorical products as the tensor product and functor categories $[\\\\mathcal{C},\"}\n  {\"name\": \"SSet.Quasicategory.mk\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"∀ {S : SSet},\\n  (∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n      0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ) →\\n    S.Quasicategory\", \"doc\": \"A simplicial set $ S $ is a quasi-category if for every inner horn $ \\\\Lambda^k[n] \\\\to S $, there exists a filler $ \\\\Delta[n] \\\\to S $ extending it, for all $ 0 < k < n $.\"}\n  {\"name\": \"CategoryTheory.CartesianClosed.mk\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Cartesian\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      autoParam ((X : C) → CategoryTheory.Closed X) CategoryTheory.MonoidalClosed.closed._autoParam →\\n        CategoryTheory.MonoidalClosed C\", \"doc\": \"A constructor that builds a Cartesian closed category structure on a category $\\\\mathcal{C}$ by providing the category instance, Cartesian monoidal structure (with product as tensor product), and expon\"}\n  {\"name\": \"CategoryTheory.Functor.functorCategoryMonoidalClosed\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Complete\", \"type\": \": MonoidalClosed (I ⥤ C)\", \"doc\": \"If $\\\\mathcal{C}$ is a monoidal closed category, then the category of functors $[\\\\mathcal{I}, \\\\mathcal{C}]$ from a small category $\\\\mathcal{I}$ to $\\\\mathcal{C}$ is also monoidal closed. The tensor prod\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Cat, simplicial sets, or the homotopy bicategory QCat, rather than the coherent infinity category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy coherent nerve of quasicategories and cores of functor categories admits homotopy colimits and exponential objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C → (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, this function constructs a morphism from $X$ to the 2-truncated nerve of $\\\\mathcal{C}$ by lifting a functor $F: X.\\\\text{HomotopyCateg\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"CategoryTheory.nerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor ⊣ CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.SimplicialNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.SimplicialCategory C] → SSet\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a simplicial category structure (enriched over simplicial sets), the simplicial nerve is a simplicial set where each $n$-simplex corresponds to an enriched\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C)) → CategoryTheory.Functor X.HomotopyCategory C\", \"doc\": \"Given a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, along with a natural transformation $\\\\phi: X \\\\to \\\\text{trunc}_2(\\\\text{Nerve}(\\\\mathcal{C}))$, this constructs a functor from the hom\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary Cat, simplicial sets, or the homotopy bicategory QCat, rather than the coherent infinity category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of all small colimits in the quasi category of quasi categories and exponentials by functor infinity categories",
+   "results": "{\"t\": \"2026-10-17T02:08:52Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of all small colimits in the quasi category of quasi categories and exponentials by functor infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"SSet.Truncated.hasColimits\", \"SSet.QCat.bicategory\", \"SSet.Truncated.instMonoidalClosed\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"SSet.QCat\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"388d0f8be78e4bc5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state ordinary simplicial-set (co)limits or the homotopy bicategory QCat, not coherent Cat-infinity (co)limits. Independently read StrictBicategory.lean:14-31 and 49-70."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.closed|[Cc]olimit|Future work",
+   "results": "{\"t\": \"2026-10-17T02:10:12Z\", \"tool\": \"grep\", \"query\": \"cartesian.closed|[Cc]olimit|Future work\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"16b6bbd98402e776\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state ordinary simplicial-set (co)limits or the homotopy bicategory QCat, not coherent Cat-infinity (co)limits. Independently read StrictBicategory.lean:14-31 and 49-70.",
+   "sub": "AlgebraicTopology/Quasicategory"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "maintenance",
   "item": "lem-coef-simplicial-model-coherent-diagrams",
@@ -83,5 +339,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "worker": "stage1",
+  "summary": "Repaired the server preflight dependency cycle by replacing enriched-diagram-model citations with direct small products, coproducts, inner-horn replacement, simplicial pushouts and isofibration pullbacks. The existing generic small-colimit-generation theorem gives arbitrary simplicial shapes and universe preservation; the existing pointwise-adjoint criterion supplies coherent naturality. Retained the statement, full degreewise exponential proof, earlier searches and blueprint route. Ten proof steps, no new nodes and no new Mathlib leaves. Independent second reader expanded the core homotopies, both equivalence changes of (co)cones, and the coherent product functor; added the cone-calculus citation in step 5 and independently repeated logged searches.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: displayed derived coefficient-adjunction / R inverse-limit calculation and the following sentences on naturality of finite units, counits and triangle identities. These steps supply only the foundational Cat-infinity colimit and functor-category input beneath the coherent diagram comparison, leaving that coefficient route intact.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic infinity-category foundation used as a black box in the direct (co)limit/exponential construction; it does not replace a coefficient or geometric step of the bound unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NX-7282f8064",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-7282f8064 (reviewer sub-agent of L); spot-checked: I read in full the item, all ten steps and the full statements of all twelve cited nodes, plus lem-coef-infinity-terminal-pullback-criterion and def-coef-coherent-pullback-comparison. I checked HTT §3.3.3 opening, Cor 2.3.2.4–2.3.2.5, Prop 4.4.2.6 and Prop 5.2.4.2, Cisinski 6.6.9, 7.3.22 and 7.3.23, and the main-20261015 ancestor's proof paragraph 2. The statement is true, unchanged, not weakened, and not a duplicate of any existing node. Small cases pass: empty and point shapes, a span with empty middle, a cospan over the point, and exponentials with empty or point source. There are no new nodes. The dependency closure has no cycle, and the newly cited node's 129-node closure does not reach the item. I accept the declared tool use lem-cbc-enhanced-functor-cone-calculus. Two citation faults, both fixed in the item JSON under fixes/dag/nodes/sec-six-functors/. (1) C1/C2, step 2: the step went from mapping-space formulas to (co)products in Cat∞ without citing the cone criterion; I added lem-cbc-enhanced-functor-cone-calculus and its dual, wrote out the discrete-shape identity, and set elementary=false. (2) C1/E5, steps 4–5: the description of span cocones and cospan cones as a path-space pullback stood in for the mapping-space criterion for (co)cartesian squares; I now cite the existing same-unit reviewed node lem-coef-infinity-terminal-pullback-criterion (applied in Cat∞^op for step 4) and its invariance clause. proof_deps is recomputed. All other steps are verified as written: the small-object and inner-anodyne hypotheses, Joyal trivial fibrations, the isofibration-pullback hypotheses, the currying formulas, pointwise-adjoint sizes and universe enlargement.; 1 file(s) fixed by the reviewer"
  }
 }
