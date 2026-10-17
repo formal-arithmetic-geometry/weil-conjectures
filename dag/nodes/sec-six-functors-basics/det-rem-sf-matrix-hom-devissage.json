@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-rem-sf-matrix-hom-devissage",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Internal Hom preserves finite Tor amplitude by dévissage",
- "statement": "Let $k$ be a separably closed field, $\\ell\\ne\\operatorname{char}(k)$, $A$ a\nfinite commutative $\\ell$-primary ring, and $X$ a scheme of finite type over\n$k$. For $K,L\\in\\Dctf(X_{\\mathrm{ét}},A)$, the internal Hom\n$R\\mathcal Hom_A(K,L)$ lies in $\\Dctf(X_{\\mathrm{ét}},A)$.",
+ "statement": "Let $k$ be a separably closed field, $\\ell\\ne\\operatorname{char}(k)$, $A$ a\nfinite commutative $\\ell$-primary ring, and $X$ a scheme of finite type over\n$k$. For $K,L\\in\\Dctf(X_{\\mathrm{ét}},A)$, the internal Hom\n$R\\mathcal Hom_A(K,L)$ lies in $\\Dctf(X_{\\mathrm{ét}},A)$.\n\nHere $\\Dctf(X_{\\mathrm{ét}},A)$ denotes the full subcategory of the ordinary derived category of sheaves of modules over the constant ring sheaf $A_X$ on the small étale site consisting of bounded constructible complexes [def-weil-pbc-constructible-complexes] with Tor amplitude in some interval $[a,b]$, $a\\leq b$, against every degree-zero $A_X$-module sheaf [def-kun-tor-amplitude]. The internal Hom is the ambient derived internal Hom of the ringed site [def-pur-derived-internal-hom]. No separatedness assumption on $X$ or presentation of $A$ as a quotient of a discrete valuation ring is imposed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
   "place": "node det-rem-sf-matrix-hom-devissage, order None",
@@ -18,58 +18,284 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-pur-derived-internal-hom"
+ ],
  "proof": [
   {
-   "text": "We use Noetherian induction on $X$: assume the statement for every proper\nclosed subscheme of $X$ (with reduced structure) and every pair of objects on\nit. The empty scheme is trivial.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 1: a good dense open.* By Stacks, Tag\n[0F4M](https://stacks.math.columbia.edu/tag/0F4M), $K$ is represented by a\nbounded complex $K^\\bullet$ of constructible flat $A$-module sheaves. Each of\nthe finitely many nonzero terms is finite locally constant on a dense open of\n$X$; let $j:U\\hookrightarrow X$ be the intersection of these opens and\n$i:Z\\hookrightarrow X$ its reduced closed complement, a proper closed subset\nwhen $X\\neq\\emptyset$. On $U$ each $K^q|_U$ is étale locally the constant sheaf\non a finite flat $A$-module; since $A$ is finite (hence Artinian), a finite flat\n$A$-module is projective. So $j^*K$ is étale locally a bounded complex $P$ of\nfinite projective $A$-modules.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 2: the open part.* For such $P$, [lem-sf-hom-finite-projective] applied\ntermwise (and the finiteness of the complex) shows that the canonical map\n$P^\\vee\\otimes^{\\mathbf L}_AN\\to R\\mathcal Hom_A(P,N)$ is an isomorphism for\nevery $N$, where $P^\\vee$ is the termwise dual, again a bounded complex of\nfinite projective modules. These local isomorphisms are the restrictions of the\nglobal canonical map\n$(j^*K)^\\vee\\otimes^{\\mathbf L}_Aj^*L\\to R\\mathcal Hom_A(j^*K,j^*L)$, which is\ntherefore an isomorphism. The complex $(j^*K)^\\vee$ is a bounded complex of\nconstructible flat sheaves, and tensoring a bounded flat constructible model of\n$j^*L$ in degrees $[a,b]$ with a flat bounded complex in degrees $[c,e]$ gives\none in degrees $[a+c,b+e]$; hence $R\\mathcal Hom_A(j^*K,j^*L)\\in\\Dctf(U,A)$.\nBy [lem-weil-stratum-ambient-hom] for $s=j$ (where $Rj_!=j_!$ and\n$Rj^!=j^*$),\n\n$$\nR\\mathcal Hom_A(j_!j^*K,L)\\simeq Rj_*R\\mathcal Hom_A(j^*K,j^*L),\n$$\n\nwhich lies in $\\Dctf(X,A)$ by [cor-fin-deligne-open-finite-coefficients]\n(constructibility) and [det-cor-sf-direct-image-ctf-open-tor] (Tor amplitude).",
+   "text": "We prove the assertion simultaneously for all pairs of objects on each finite-type $k$-scheme, by Noetherian induction on reduced closed subsets of a fixed $X$. The field spectrum is Noetherian (a field has only two ideals); hence $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The minimal-closed-subset principle [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] justifies induction on proper closed subsets. Give each such subset its reduced induced closed structure using [lem-weil-pbc-reduced-induced-closed-subscheme]; it is still finite type over $k$, since affine coordinate rings are quotients of finite-type $k$-algebras. Use the original, possibly nonreduced $X$ for the top case and the reduced induced closed schemes for its strict descendants. A closed subset of a descendant is closed in $X$, and the two reduced induced structures agree by the uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme]. The inductive hypothesis is the conclusion for every pair in $\\Dctf(Z_{\\mathrm{ét}},A)$ for every such proper closed subscheme $Z$. On the empty scheme all module sheaves are zero, so the conclusion holds.",
    "uses": [
-    "lem-sf-hom-finite-projective",
-    "lem-weil-stratum-ambient-hom",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, induction paragraph"
+   }
+  },
+  {
+   "text": "We record the closure and inverse-image facts used throughout the induction. Clause (3) of [det-sf-flat-model-generation], with its explicit ordinary étale constant-$A$ convention, says that $\\Dctf$ is closed under shifts, cones, retracts and isomorphisms; in particular it has the two-out-of-three property in distinguished triangles. For every scheme considered here, [thm-constructible-serre] supplies closure of constructible $A$-module sheaves under kernels, cokernels and extensions; zero and isomorphism invariance follow from the definition. Thus the explicit weak-Serre hypothesis of the main-20261015 statement of [prop-constructible-derived-subcategory] holds throughout the proof. Finite direct sums are constructible by the split exact sequences, and retracts are constructible as kernels of $1-e$ for an idempotent $e$. For every morphism between the Noetherian schemes at issue, inverse image preserves $\\Dctf$: choose a bounded flat constructible representative by [lem-sf-etale-flat-constructible], apply the exact inverse image of constant-$A$ modules [prop-weil-pbc-inverse-image-modules-exact] termwise, and use [lem-weil-pbc-ringed-topos-flat-module-pullback] for flatness and [lem-weil-pbc-constructible-etale-set-pullback] for constructibility of the underlying sheaf of sets. They are constructible as $A$-module sheaves: on each pulled-back stratum, after trivializing the finite set sheaf, the finitely many addition and scalar maps are locally constant, so a finite refinement of the covering makes the restriction constant as an $A$-module sheaf (as in Step 4). The resulting complex is bounded in the same degrees. Its bounded constructible cohomology follows by the stupid filtration and [prop-constructible-derived-subcategory], and the converse direction of [lem-sf-etale-flat-constructible] gives the Tor bound. In particular this applies to $j^*$ and $i^*$ below.",
+   "uses": [
+    "det-sf-flat-model-generation",
+    "lem-sf-etale-flat-constructible",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-constructible-etale-set-pullback",
+    "prop-constructible-derived-subcategory",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, Steps 1 and 3: flat models, inverse image, and triangulated closure"
+   }
+  },
+  {
+   "text": "For a closed immersion $i:Z\\hookrightarrow X$, direct image also preserves $\\Dctf$ in this setting. Indeed [lemma-openclosed-stalk-lowerstar] identifies $(i_*F)_{\\bar x}$ with $F_{\\bar z}$ at a point on $Z$; outside $Z$ it is zero by [lem-kun-04ca]. These formulas, exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact], and their conservativity [lemma-weil-pbc-geometric-stalk-conservative] show that $i_*$ on module sheaves is exact. They also show it preserves flatness: by [lem-pod-etale-stalk-tensor-scalar], tensoring a short exact sequence with $i_*F$ has stalkwise the tensor sequence with the flat $A$-module $F_{\\bar z}$ on $Z$, and the zero sequence off $Z$. Here flatness of $F_{\\bar z}$ follows from [lem-weil-pbc-ringed-topos-flat-module-pullback] applied to the geometric point of the topos, whose inverse image is the stalk. Exactness is detected by applying the exact conservative stalks to kernels and cokernels. By [lem-fin-closed-immersion] $i_*$ preserves constructibility. Applying $i_*$ termwise to a bounded flat constructible model therefore gives another such model; [prop-constructible-derived-subcategory] and [lem-sf-etale-flat-constructible] put its derived object in $\\Dctf(X_{\\mathrm{ét}},A)$.",
+   "uses": [
+    "lemma-openclosed-stalk-lowerstar",
+    "lem-kun-04ca",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-fin-closed-immersion",
+    "prop-constructible-derived-subcategory",
+    "lem-sf-etale-flat-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, Step 3: exact closed direct image carries flat constructible models to such models"
+   }
+  },
+  {
+   "text": "Assume $X$ is nonempty. Choose bounded flat constructible models $P^\\bullet,Q^\\bullet$ for $K,L$ using [lem-sf-etale-flat-constructible], with supports $[c,e]$ and $[a,b]$. Apply [prop-constructible-generic-constancy] to each of the finitely many nonzero $P^q$, and intersect the resulting dense opens. This gives a dense open $j:U\\hookrightarrow X$ on which all $P^q$ are finite locally constant. The local trivializations can be chosen $A$-linear: after trivializing the finite underlying set sheaf, the finitely many addition and scalar-action maps are locally constant, so refine finitely many times. Clause (1) of [det-sf-flat-model-generation] says the stalks of each flat constructible $P^q$ are finite projective $A$-modules. Thus étale locally on $U$ each of the finitely many $P^q$ is a direct summand of a finite free constant-$A$ sheaf, simultaneously on the covering family of finite fibre products over $U$ of members of the individual trivializing covers; the family covers because each geometric point lifts through each of the finitely many covers. The complement has the reduced structure $i:Z\\hookrightarrow X$ from Step 1 and is a proper closed subset. Every open of a Noetherian scheme is Noetherian [lem-weil-pbc-noetherian-open-subscheme-noetherian]; thus $U$ is quasi-compact and finite type over $k$ (on affine charts the quasi-compact open is covered by finitely many principal opens).",
+   "uses": [
+    "lem-sf-etale-flat-constructible",
+    "prop-constructible-generic-constancy",
+    "det-sf-flat-model-generation",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, Step 1: the good dense open"
+   }
+  },
+  {
+   "text": "On $U$, form the ordinary sheaf Hom complex $H^\\bullet=\\mathcal Hom_A^\\bullet(P^\\bullet|_U,Q^\\bullet|_U)$ and its canonical map to the Hom complex into a K-injective resolution of $Q^\\bullet|_U$. On each member $V$ of the étale covering of Step 4 on which the finitely many $P^q$ are direct summands of finite free constant sheaves, [lem-weil-pbc-ringed-site-bounded-free-rhom-model] identifies the restriction of that map with the canonical quasi-isomorphism computing derived internal Hom on the slice; the lower bound on $Q$ and upper bound on $P$ are exactly its hypotheses. Derived internal Hom commutes with these slice restrictions by [lem-weil-pbc-ringed-internal-hom-exact-restriction], so the map is a quasi-isomorphism globally: the cohomology sheaves of its cone vanish on a covering, hence vanish. For each degree pair $(q,r)$, apply [lem-sfb-lisse-split-hom-flat-constructible] on the Noetherian scheme $U$ (Step 4) with $E=P^q|_U$, which is a direct summand of a finite free constant sheaf on each member of the covering of Step 4, and $G=Q^r|_U$, which is flat and constructible as the inverse image of a flat constructible sheaf along the open immersion $j$ (Step 2): $\\mathcal Hom_A(P^q|_U,Q^r|_U)$ is flat and constructible. Finite direct sums of flat constructible sheaves are constructible by Step 2 and flat since tensor product distributes over finite sums. Thus $H^n=\\bigoplus_q\\mathcal Hom(P^q,Q^{q+n})$ (a finite sum) is flat constructible, and it is zero unless some $q$ satisfies $c\\leq q\\leq e$ and $a\\leq q+n\\leq b$, i.e. outside $[a-e,b-c]$. Bounded constructibility of the cohomology follows from [prop-constructible-derived-subcategory] by the finite stupid filtration, and the flat-model equivalence [lem-sf-etale-flat-constructible] (interval $[a-e,b-c]$, nonempty since $a\\leq b$, $c\\leq e$) yields $R\\mathcal Hom_A(j^*K,j^*L)\\in\\Dctf(U_{\\mathrm{ét}},A)$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-lisse-split-hom-flat-constructible",
+    "prop-constructible-derived-subcategory",
+    "lem-sf-etale-flat-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, Step 2: local Hom calculation and bounded flat constructible representative"
+   }
+  },
+  {
+   "text": "The functor $Rj_*$ sends every $C\\in\\Dctf(U_{\\mathrm{ét}},A)$ into $\\Dctf(X_{\\mathrm{ét}},A)$. Constructibility and boundedness follow from [cor-fin-deligne-open-finite-coefficients]: the finite ring $A$ is killed by a power of $\\ell$, an integer invertible in $k$. By [lem-kun-0f10] choose a finite integer $d\\geq\\operatorname{cd}(j)$. Clause (2) of [det-cor-sf-direct-image-ctf-open-tor] then takes any Tor interval $[v,w]$ for $C$ to $[v,w+d]$ for $Rj_*C$, against all étale module sheaves. The fields, coefficients and finite-type hypotheses in that statement agree with ours; no separatedness of $X$ is required. We use only its étale clause (2).",
+   "uses": [
     "cor-fin-deligne-open-finite-coefficients",
+    "lem-kun-0f10",
     "det-cor-sf-direct-image-ctf-open-tor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, Step 2: constructibility and Tor bound for open direct image"
+   }
   },
   {
-   "text": "*Step 3: the closed part.* Let $i^!=R\\underline\\Gamma_Z$ be the right adjoint\nof $i_*$. The localization triangle\n$i_*i^!L\\to L\\to Rj_*j^*L\\to$ and Step 2's direct-image bound show\n$i_*i^!L\\in\\Dctf(X,A)$; since $i_*$ is exact and $i^*i_*=\\mathrm{id}$, and\n$i^*$ preserves bounded flat constructible models, $i^!L\\simeq i^*i_*i^!L$\nlies in $\\Dctf(Z,A)$. Likewise $i^*K\\in\\Dctf(Z,A)$. By\n[lem-weil-stratum-ambient-hom] for $s=i$,\n\n$$\nR\\mathcal Hom_A(i_*i^*K,L)\\simeq i_*R\\mathcal Hom_A(i^*K,i^!L),\n$$\n\nand $R\\mathcal Hom_A(i^*K,i^!L)\\in\\Dctf(Z,A)$ by the induction hypothesis\napplied to $Z$. As $i_*$ is exact and carries flat constructible models to flat\nconstructible models, the left side is in $\\Dctf(X,A)$.",
+   "text": "Apply [lem-weil-stratum-ambient-hom] to the open immersion $s=j$, for which the factorization is the identity closed immersion followed by $j$ and hence $Rs^!=j^*$. It gives $R\\mathcal Hom_A(j_!j^*K,L)\\cong Rj_*R\\mathcal Hom_A(j^*K,j^*L)$. The inner object is in $\\Dctf(U_{\\mathrm{ét}},A)$ by Step 5 and its direct image is in $\\Dctf(X_{\\mathrm{ét}},A)$ by Step 6. This proves the open outer term needed for gluing, without an internal-Hom pullback assertion for a closed immersion.",
    "uses": [
     "lem-weil-stratum-ambient-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, end of Step 2: open ambient-Hom identity"
+   }
   },
   {
-   "text": "*Step 4: gluing.* Apply the exact functor $R\\mathcal Hom_A(-,L)$ to the\nlocalization triangle $j_!j^*K\\to K\\to i_*i^*K\\to$. This gives a distinguished\ntriangle\n\n$$\nR\\mathcal Hom_A(i_*i^*K,L)\\to R\\mathcal Hom_A(K,L)\\to R\\mathcal Hom_A(j_!j^*K,L)\\to\n$$\n\nwhose outer terms lie in $\\Dctf(X,A)$ by Steps 2 and 3. Since $\\Dctf(X,A)$ is a\ntriangulated subcategory ([def-weil-finite-tor-amplitude]), the middle term\ndoes too.",
+   "text": "The ambient support triangle [lem-exc-closed-support-triangle] gives $i_*Ri^!L\\to L\\to Rj_*j^*L\\to$. Here $j^*L\\in\\Dctf(U_{\\mathrm{ét}},A)$ by Step 2, so $Rj_*j^*L$ is in $\\Dctf$ by Step 6. Two-out-of-three from Step 2 gives $i_*Ri^!L\\in\\Dctf(X_{\\mathrm{ét}},A)$. Applying $i^*$ and using $i^*i_*\\cong\\mathrm{id}$ from [prop-openclosed-lowerstar-fully-faithful] gives $Ri^!L\\in\\Dctf(Z_{\\mathrm{ét}},A)$. This counit extends degreewise to the derived categories because both inverse image and closed direct image are exact, as established in Steps 2 and 3. Also $i^*K\\in\\Dctf(Z_{\\mathrm{ét}},A)$ by Step 2.",
    "uses": [
-    "def-weil-finite-tor-amplitude"
+    "lem-exc-closed-support-triangle",
+    "prop-openclosed-lowerstar-fully-faithful"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, Step 3: derive finite Tor amplitude of the exceptional restriction from the support triangle"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-stratum-ambient-hom] to $s=i$, with identity open factor. The isomorphism is $R\\mathcal Hom_A(i_*i^*K,L)\\cong i_*R\\mathcal Hom_A(i^*K,Ri^!L)$; ordinary $i_*$ agrees with its derived functor by Step 3. The two inputs on $Z$ are in $\\Dctf$ by Step 8. Since $Z$ is a proper reduced closed subscheme, the inductive hypothesis applies and puts their internal Hom in $\\Dctf(Z_{\\mathrm{ét}},A)$. Step 3 puts its direct image in $\\Dctf(X_{\\mathrm{ét}},A)$. This proves the closed outer term; it uses no preservation theorem for $Ri^!$ beyond what Step 8 just proved.",
+   "uses": [
+    "lem-weil-stratum-ambient-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, Step 3: closed ambient-Hom identity and induction"
+   }
+  },
+  {
+   "text": "Use [lem-cbc-open-closed-recollement] on the bounded object $K$ to obtain $j_!j^*K\\to K\\to i_*i^*K\\to$. By [lem-sf-hom-triangulated], applying $R\\mathcal Hom_A(-,L)$ gives the distinguished triangle $R\\mathcal Hom_A(i_*i^*K,L)\\to R\\mathcal Hom_A(K,L)\\to R\\mathcal Hom_A(j_!j^*K,L)\\to$. Its first and third terms are in $\\Dctf$ by Steps 9 and 7. The two-out-of-three property established in Step 2 gives the desired conclusion for the middle term, completing the induction.",
+   "uses": [
+    "lem-cbc-open-closed-recollement",
+    "lem-sf-hom-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "Proof, Step 4: gluing"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sf-hom-finite-projective",
-  "lem-weil-stratum-ambient-hom",
   "cor-fin-deligne-open-finite-coefficients",
   "det-cor-sf-direct-image-ctf-open-tor",
-  "def-weil-finite-tor-amplitude"
+  "det-sf-flat-model-generation",
+  "lem-cbc-open-closed-recollement",
+  "lem-exc-closed-support-triangle",
+  "lem-fin-closed-immersion",
+  "lem-kun-04ca",
+  "lem-kun-0f10",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-sf-etale-flat-constructible",
+  "lem-sf-hom-triangulated",
+  "lem-sfb-lisse-split-hom-flat-constructible",
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-stratum-ambient-hom",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-derived-subcategory",
+  "prop-constructible-generic-constancy",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-constructible-serre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
-  "place": "## Proof"
+  "place": "Proof, Noetherian induction and Steps 1–4, with the general ringed-site model of Stacks Tag 08JI replacing the coefficient-restricted finite-projective citation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor|Dctf|finiteTor.*[Hh]om|[Hh]om.*finiteTor",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern generic derived categories, underived module duality, monoidal structures, or constructible subsets, not étale constructible finite-Tor internal-Hom preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom preserves constructibility and finite Tor dimension on the small etale site",
+   "results": "CategoryTheory.sheafHom; CategoryTheory.Sheaf.Hom; CategoryTheory.MonoidalClosed.internalHom; CategoryTheory.ihom; CategoryTheory.internalHom; SheafOfModules.Hom.mk; CategoryTheory.isInternallyProjective; CategoryTheory.Closed",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern generic derived categories, underived module duality, monoidal structures, or constructible subsets, not étale constructible finite-Tor internal-Hom preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of two bounded constructible complexes of finite Tor amplitude on the etale site of a finite type scheme over a separably closed field has bounded constructible cohomology and finite Tor amplitude",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; DerivedCategory.left_fac_of_isStrictlyGE; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern generic derived categories, underived module duality, monoidal structures, or constructible subsets, not étale constructible finite-Tor internal-Hom preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"Hom\"",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern generic derived categories, underived module duality, monoidal structures, or constructible subsets, not étale constructible finite-Tor internal-Hom preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of constructible etale sheaves with finite Tor dimension is closed under derived internal Hom for finite coefficient rings with invertible torsion",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; instAbelianCondensedMod; CategoryTheory.Sheaf.H; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern generic derived categories, underived module duality, monoidal structures, or constructible subsets, not étale constructible finite-Tor internal-Hom preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*projective|projective.*finite",
+   "results": "No hits; searched Mathlib/Algebra/Category/ModuleCat/Sheaf.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern generic derived categories, underived module duality, monoidal structures, or constructible subsets, not étale constructible finite-Tor internal-Hom preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a ringed site derived internal Hom from a finite locally projective module sheaf P is P dual derived tensor N",
+   "results": "dualTensorHomEquivOfBasis; dualTensorHomEquiv; TensorProduct.AlgebraTensorModule.dualDistrib; dualTensorHom; Module.dual_finite; lTensorHomEquivHomLTensor; dualTensorHom_apply; Module.dual_projective",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern generic derived categories, underived module duality, monoidal structures, or constructible subsets, not étale constructible finite-Tor internal-Hom preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomObjIsoTensor\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern generic derived categories, underived module duality, monoidal structures, or constructible subsets, not étale constructible finite-Tor internal-Hom preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally projective sheaf P of modules over a sheaf of commutative rings on any site derived internal Hom from P is canonically its dual tensor the second complex",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern generic derived categories, underived module duality, monoidal structures, or constructible subsets, not étale constructible finite-Tor internal-Hom preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf Hom of perfect constructible complexes is constructible and has finite Tor dimension",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.isLE_Q_obj_iff; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-17",
+   "verdict": "no match: derived-category support bounds and constructible subsets, not constructible sheaf Hom or finite Tor dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible.*[Hh]om|[Hh]om.*IsConstructible|[Tt]orAmplitude.*[Hh]om|[Hh]om.*[Tt]orAmplitude",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: derived-category support bounds and constructible subsets, not constructible sheaf Hom or finite Tor dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible_derivedHom|constructibleFiniteTor_derivedHom|[Cc]onstructible.*[Ii]nternalHom",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic etale morphism and derived t-structure facts; no internal-Hom constructibility or finite-Tor preservation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of etale derived complexes with finite constructible cohomology and finite tor dimension is stable under internal hom",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; Algebra.FormallyEtale.instForallOfFinite; DerivedCategory.isGE_Q_obj_iff; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: generic etale morphism and derived t-structure facts; no internal-Hom constructibility or finite-Tor preservation theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -99,5 +325,164 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-rem-sf-matrix-hom-devissage",
+  "worker": "stage1",
+  "summary": "Retained the full arbitrary finite commutative ell-primary coefficient ring and nonseparated finite-type scheme statement. Expanded the Noetherian induction into ten steps with existing general étale flat models, explicit closed-pushforward flatness, local split-projective Hom calculation, separate open-image bounds, ambient support triangle, and gluing. Replaced coefficient-restricted imported citations and created no new nodes. Second reading supplies the updated constructible-derived-subcategory theorem’s weak-Serre hypothesis and spells out common covering refinements and local flatness detection. Maintainer reading (2026-10-17): the local Hom-sheaf flatness/constructibility argument of Step 5 was moved into the new statement node lem-sfb-lisse-split-hom-flat-constructible, and Step 2 now states the A-module refinement for constructibility of pulled-back terms.",
+  "blueprint": "Induction paragraph → step 1; good dense open → step 4; open Hom model and direct image → steps 5–7; closed part → steps 3, 8–9; gluing → steps 2, 10. Steps 2–3 provide the model and closure checks the source uses implicitly.",
+  "tool_uses": [
+   {
+    "node": "cor-fin-deligne-open-finite-coefficients",
+    "why": "The open-image constructibility input explicitly required by the blueprint. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "det-cor-sf-direct-image-ctf-open-tor",
+    "why": "The open-image Tor bound explicitly required by the blueprint. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "det-sf-flat-model-generation",
+    "why": "Only the generic triangulated closure and finite-projective stalk clauses are used, not its generation proof as a replacement for induction. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "The ordinary localization triangle used in the blueprint’s gluing step. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "The ambient support triangle used in Step 3 to establish that Ri!L has finite Tor amplitude. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-fin-closed-immersion",
+    "why": "Closed pushforward preserves constructibility; no global six-operations theorem is invoked. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Closed direct images vanish off the closed subset. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "A finite cohomological-dimension bound for the open immersion. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Tensor products commute with geometric stalks, used only in the elementary closed-pushforward flatness check. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sf-etale-flat-constructible",
+    "why": "Generic finite-ring étale bounded flat constructible model (Stacks 03TT), exactly the source’s model step. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Exactness of derived internal Hom in its contravariant variable, needed for gluing. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-set-pullback",
+    "why": "Constructibility under inverse image in the model argument. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite type over a field implies Noetherian, needed to justify the unit’s closed-subset induction. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Ensures the dense open is quasi-compact and of finite type. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "The minimal-closed-subset principle is the induction mechanism, not an alternative route. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Constructs the reduced complement used in the blueprint’s induction. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Derived Hom commutes with slice restriction, needed to test the local model. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "General constant-ring local Hom computation (08JI), avoiding the restricted coefficient and field hypotheses in lem-sf-hom-finite-projective. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Preservation of flatness under inverse image, including the point functor. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-stratum-ambient-hom",
+    "why": "The two ambient open/closed Hom identities explicitly required by the blueprint. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Closed direct-image stalks on the closed image, used to check exactness and flatness. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Stalkwise kernels and cokernels detect exactness. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "prop-constructible-derived-subcategory",
+    "why": "Bounded complexes of constructible terms have bounded constructible cohomology via their stupid filtration. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "prop-constructible-generic-constancy",
+    "why": "Chooses the good dense open of the blueprint’s Step 1. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "prop-openclosed-lowerstar-fully-faithful",
+    "why": "Identifies i* i*direct with the identity, so the support complex descends to Z. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness of geometric stalks in the explicit flatness check. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact inverse image for constant coefficients in the ambient étale module category. No statement of this preservation-matrix unit supplies this generic tool."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Discharges the weak-Serre hypothesis explicitly required by the current blueprint version of prop-constructible-derived-subcategory, and gives constructibility of finite sums in the local Hom model. No statement of this preservation-matrix unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-fin-deligne-open-finite-coefficients",
+  "det-cor-sf-direct-image-ctf-open-tor",
+  "det-sf-flat-model-generation",
+  "lem-cbc-open-closed-recollement",
+  "lem-exc-closed-support-triangle",
+  "lem-fin-closed-immersion",
+  "lem-kun-04ca",
+  "lem-kun-0f10",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-sf-etale-flat-constructible",
+  "lem-sf-hom-triangulated",
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-stratum-ambient-hom",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-derived-subcategory",
+  "prop-constructible-generic-constancy",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-52d06585e",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-52d06585e (reviewer sub-agent of L); spot-checked: I read the whole delivery: the main-20261015 blueprint statement and proof, the unit, Stacks 08JI at its label, and the full statement (with any blueprint_update) of all 36 cited nodes. The statement matches the blueprint hypothesis by hypothesis: arbitrary finite commutative ell-primary A, separably closed k, nonseparated finite-type X, ordinary étale Dctf. The route is the blueprint's: dense open, local Hom, j_!/i_* identities, support triangle, induction, gluing. No SGA source, no pro-étale clause, no cycle. Steps 1, 3, 4 and 6–10 check out: the cd bound from lem-kun-0f10 feeds clause 2 of det-cor-sf-direct-image-ctf-open-tor (all module sheaves), the same ambient Ri^! appears in the support triangle and the Hom identity, K is in D^+ for the recollement, and Ri^!L is never assumed constructible. thm-sf-hom-ctf and lem-weil-verdier-preservation-strata are restricted special cases of this item, not duplicates. Repairs: (1) Step 5 (2502 chars) proved inline a sub-claim with its own hypotheses: Hom from an étale-locally split lisse sheaf into a flat constructible sheaf is flat and constructible. I made it the statement-only node lem-sfb-lisse-split-hom-flat-constructible, tested on E=0, E=A, E=A^t, empty U, varying idempotents and A=F_ell[x,y]/(x,y)^2, and checked that no existing node states it. Step 5 now cites it and keeps the 08JI/08JB local-to-global argument and the [a-e,b-c] degree check. lem-pc-finite-projective-internal-hom-evaluation and lem-sf-finite-projective-dual dropped out of proof_deps and tool_uses. (2) In Step 2, lem-weil-pbc-constructible-etale-set-pullback only gives constructibility of the underlying sheaf of sets; I added the A-module refinement (the Step 4 argument). The remaining 28 tool_uses are accepted. Every step is now under 2000 chars. The new node's Mathlib search is three greps with no hits; LeanSearch, Loogle and LeanFinder are unreachable from this machine and are recorded as unavailable.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

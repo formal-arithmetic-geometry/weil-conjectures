@@ -14,9 +14,92 @@
   "def-trf-fixed-scheme",
   "lem-sf-proetale-constructible-origin"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the small etale filtered construction and its transport to the pro-etale coefficient categories specified in the statement. The finite filtered etale/pro-etale comparison, including compatibility with operations and trace transformations, is the last paragraph of [lem-trf-filtered-operations-hom]. The ordinary bounded constructible comparison is [lem-sf-proetale-constructible-origin]; no arbitrary filtered enhancement of a triangulated equivalence is inferred. The finite-stage six-functor and duality domains are those of [prop-functor-package], so the auxiliary structure, diagonal, projection and fixed-square operations used to define the trace class are available. Put $G=Rc_{1!}c_2^*$, $F=\\operatorname{Fix}(c)$, $d:F\\to X$, $K_r=\\operatorname{gr}^r\\widetilde K$ and $N=R\\Gamma(F,\\omega_{F,A})$, with $N$ concentrated in filtration degree zero. The filtered duality calculus [lem-trf-filtered-operations-hom] makes $G\\widetilde K$ an object of the same filtered constructible domain, with underlying $G\\omega\\widetilde K$ and graded pieces $GK_r$. In this proof $H$ and $N$ are complexes of abelian groups, not internal sheaf Hom objects. Filtered derived global sections on a scheme $T$ mean the global filtered Hom $R\\operatorname{Hom}^F_T(A_T,-)$ from the coefficient unit in filtration degree zero, as supplied by [lem-trf-filtered-operations-hom]. Its graded comparison is the one-variable case of that node's global Hom formula.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "prop-functor-package",
+    "lem-trf-filtered-operations-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.2.1--5.2.2 and §5.3.1 (with the two legs interchanged to match this project)"
+   }
+  },
+  {
+   "text": "Set $H=R\\operatorname{Hom}^F_X(G\\widetilde K,\\widetilde K)$, the global filtered Hom complex in $DF(\\mathbf{Ab})$. We construct a filtered map $\\widetilde\\tau':H\\to N$ by working with global derived Hom throughout. For ordinary independent inputs $P,Q\\in D^b_{ctf}(X,A)$ put $B=Q\\boxtimes D_XP$. Exceptional adjunction gives\n$$R\\operatorname{Hom}_X(GP,Q)\\simeq R\\operatorname{Hom}_C(c_2^*P,c_1^!Q).$$\nThe exceptional internal-Hom exchange of [lem-trf-exceptional-internal-hom-exchange], applied to the total map $c$ and $(p_2^*P,p_1^!Q)$, followed by the inverse of [thm-trf-kunneth-verdier] at $(M,N)=(Q,P)$, gives\n$$R\\mathcal Hom(c_2^*P,c_1^!Q)\\simeq Rc^!R\\mathcal Hom(p_2^*P,p_1^!Q)\\simeq Rc^!B.$$\nThe composition comparisons identify $c^*p_2^*=c_2^*$ and $c^!p_1^!=c_1^!$. Apply derived global sections to this comparison. Next use the ordinary-adjunction unit $B\\to R\\Delta_*L\\Delta^*B$ and the fixed-square base-change comparison of [lem-trf-trace-map-from-external-duality]. The result is the pre-evaluation map\n$$T''_{P,Q}:R\\operatorname{Hom}_X(GP,Q)\\longrightarrow R\\Gamma(F,Rd^!(D_XP\\otimes^LQ)).$$\nIndeed the intermediate target is $R\\Gamma(C,Rc^!R\\Delta_*L\\Delta^*B)$; fixed-square base change identifies it with $R\\Gamma(F,Rd^!L\\Delta^*B)$, and diagonal pullback and signed tensor symmetry identify $L\\Delta^*B=Q\\otimes^LD_XP$ with $D_XP\\otimes^LQ$. All these arrows are natural separately in the contravariant variable $P$ and the covariant variable $Q$, because the cited external-Hom and exceptional-exchange comparisons are natural in both variables. They have compatible filtered lifts by [lem-trf-filtered-operations-hom]; filtered global sections are as defined in Step 1. The filtered lift of the Künneth comparison is invertible, so its inverse used above exists in the filtered category: by the same node its graded maps are direct sums of ordinary Künneth comparisons, hence isomorphisms, so its cone has zero graded pieces and is zero, the graded pieces jointly detecting zero objects. On setting both variables to $\\widetilde K$, compose the filtered $T''$ with $R\\Gamma^F(F,Rd^!(-))$ of evaluation and $Rd^!\\omega_X\\simeq\\omega_{F,A}$ to obtain $\\widetilde\\tau'$. On forgetting the filtration and applying exceptional adjunction, this is exactly the global trace-map composite of [lem-trf-trace-map-from-external-duality]. Indeed at $P=Q=K$ the composite of the compositors, the exchange and $Rc^!$ of the inverse Künneth comparison is the external-duality comparison $\\xi:\\mathcal H_c(K)\\simeq Rc^!(K\\boxtimes^L_AD_XK)$ of [thm-trf-verdier-duality] that the trace map uses, with the external product in the same order; and the rearrangement of unit, fixed-square base change and $e'$ is naturality of base change, since $e_K=R\\Delta_*(e')\\circ(\\text{unit})$. In that composite its $e_K$ is the ordinary-adjunction transpose of diagonal evaluation. Thus [def-trf-trace-class] identifies its value on $\\omega\\widetilde u$ with $\\operatorname{Tr}_{c,\\omega\\widetilde K}(u)$. Every construction here uses the constructible domains checked in Step 1, including the total map $c$, both projections and the structure maps; no sheafified adjunction is being deduced merely from an abstract triangulated Hom bijection.",
+   "uses": [
+    "lem-trf-trace-map-from-external-duality",
+    "lem-trf-filtered-operations-hom",
+    "lem-trf-exceptional-internal-hom-exchange",
+    "thm-trf-kunneth-verdier",
+    "def-trf-trace-class",
+    "thm-trf-verdier-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, construction of Tr′ and factorization through Tr″ followed by evaluation"
+   }
+  },
+  {
+   "text": "By the global Hom statement of [lem-trf-filtered-derived-hom-calculus],\n$$\\operatorname{gr}^0H\\simeq\\bigoplus_r R\\operatorname{Hom}_X(GK_r,K_r).$$\nApply the graded-transformation compatibility of [lem-trf-filtered-operations-hom] to the pre-evaluation transformation $T''$ of Step 2, using its bifiltered tensor/internal-Hom formulas and global Hom formula. The first variable is contravariant: its degree $r$ contributes dual filtration degree $-r$. Thus total degree zero pairs exactly equal input indices. The resulting degree-zero transformation is the direct sum of the ordinary maps\n$$R\\operatorname{Hom}_X(GK_r,K_r)\\longrightarrow R\\Gamma(F,Rd^!(D_XK_r\\otimes^LK_r)).$$\nThe compatibility clause identifies the arrows themselves, not just their source and target objects.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus",
+    "lem-trf-filtered-operations-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, gr^0(Tr″), using Lemma 5.1.4(ii)"
+   }
+  },
+  {
+   "text": "Check evaluation separately, since it is not a transformation in two independent copies of $K$. The convention of [def-trf-dualizing-complex] makes evaluation $D_X^F\\widetilde K\\otimes^L\\widetilde K\\to\\omega_X$ the transpose of $1_{D_X^F\\widetilde K}$ under the filtered tensor--Hom adjunction of [lem-trf-filtered-operations-hom]. The duality index formula, obtained by setting the second internal-Hom variable equal to $\\omega_X$ in filtration degree zero, gives $\\operatorname{gr}^{-r}D_X^F\\widetilde K\\simeq D_XK_r$. The global morphism-projection clause of [lem-trf-filtered-derived-hom-calculus] sends that identity to the identities of these graded duals. Compatibility of the adjunction and evaluation with the graded comparisons, in [lem-trf-filtered-operations-hom], therefore identifies evaluation on the summand $D_XK_r\\otimes^LK_r$ with the ordinary evaluation of $K_r$. The signed symmetry in Step 2 is the same ordinary derived symmetry on that summand. Composing with Step 3, the restriction of $\\operatorname{gr}^0\\widetilde\\tau'$ to $R\\operatorname{Hom}_X(GK_r,K_r)$ is the ordinary trace map $\\tau'_{K_r}$. There is no factor $(-1)^r$, since $r$ is a filtration index and carries no cochain shift.",
+   "uses": [
+    "lem-trf-filtered-operations-hom",
+    "lem-trf-filtered-derived-hom-calculus",
+    "def-trf-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, evaluation compatibility from gr^i(Id)=Id"
+   }
+  },
+  {
+   "text": "The global Hom identification in [lem-trf-filtered-derived-hom-calculus] represents $\\widetilde u$ by $[\\widetilde u]\\in H^0(\\omega t^{\\geq0}H)$. Its image in $H^0(\\omega H)$ is the underlying map. Since $N=R\\Gamma(F,\\omega_{F,A})$ is in filtration degree zero, $t^{\\geq0}N=N=t^{\\leq0}N$. Apply first $t^{\\geq0}$ and then the natural quotient to $t^{\\leq0}$ to $\\widetilde\\tau'$. Naturality of this quotient gives the factorization\n$$\\omega t^{\\geq0}H\\longrightarrow\\operatorname{gr}^0H\\xrightarrow{\\operatorname{gr}^0\\widetilde\\tau'}N.$$\nHere $t^{\\leq0}t^{\\geq0}H$ is the degree-zero filtered object associated to $\\operatorname{gr}^0H$, so this is an equality of maps in the localized category, using its actual truncation functors. The same Hom lemma sends $[\\widetilde u]$ under the projection to the tuple $(\\operatorname{gr}^r\\widetilde u)_r$. Step 4 therefore evaluates its image as $\\sum_r\\tau'_{K_r}(\\operatorname{gr}^r\\widetilde u)$. By [def-trf-trace-class] and exceptional adjunction these summands are $\\operatorname{Tr}_{c,K_r}(u_r)$, while the original image is $\\operatorname{Tr}_{c,\\omega\\widetilde K}(u)$. This gives the desired identity in $H^0(F,\\omega_{F,A})=\\operatorname{Hom}_{D(F,A)}(A_F,\\omega_{F,A})$. Only finitely many $K_r$ are nonzero. The last paragraph of [lem-trf-filtered-operations-hom] identifies both the filtered objects and these trace-construction transformations under the finite-coefficient etale/pro-etale comparison, giving the displayed identity in the specified pro-etale category. At no point was the coefficient morphism inverted.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus",
+    "lem-trf-filtered-operations-hom",
+    "def-trf-trace-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, final two paragraphs: factorization through gr^0 and §5.1.5 graded projection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-dualizing-complex",
+  "def-trf-trace-class",
+  "lem-sf-proetale-constructible-origin",
+  "lem-trf-exceptional-internal-hom-exchange",
+  "lem-trf-filtered-derived-hom-calculus",
+  "lem-trf-filtered-operations-hom",
+  "lem-trf-trace-map-from-external-duality",
+  "prop-functor-package",
+  "thm-trf-kunneth-verdier",
+  "thm-trf-verdier-duality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1--5.2 and Lemma 5.3.2, with his legs interchanged: his c_1 is our c_2 and his c_2 is our c_1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +128,59 @@
    "results": "8 hits: HomologicalComplex.instAdditiveHomologyFunctor, CochainComplex.HomComplex.Cochain.map_add, CochainComplex.HomComplex.CohomologyClass.mk_add, Matrix.traceAddMonoidHom, DerivedCategory.instAdditiveHomotopyCategoryIntUpQh, CategoryTheory.Functor.instAdditiveOfIsHomological, DerivedCategory.instAdditiveCochainComplexIntQ, CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass",
    "date": "2026-10-17",
    "verdict": "no match: linear-map traces on invariant submodules and additive homology functors do not give a sheaf-valued Verdier trace class of a filtered cohomological correspondence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier trace class of a bounded filtered constructible correspondence equals the sum of trace classes of associated graded pieces",
+   "results": "8 hits: LinearMap.trace_eq_sum_trace_restrict', LinearMap.trace_eq_zero_of_mapsTo_ne, LinearMap.trace_eq_sum_trace_restrict, LieModule.trace_comp_toEnd_genWeightSpace_eq, LieModule.traceForm_eq_sum_genWeightSpaceOf, LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, LieModule.trace_toEnd_genWeightSpace",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary additive derived categories and finite linear-map traces do not state filtered Verdier trace-class additivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "trace graded DerivedCategory HomologicalComplex",
+   "results": "0 hits:  ; loogle: Unknown identifier `trace`",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: Unknown identifier `trace`; no absence evidence"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*trace|trace.*graded|associated graded.*trace",
+   "results": "0 hits:  ; Mathlib subdirectory: Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary additive derived categories and finite linear-map traces do not state filtered Verdier trace-class additivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered derived category trace class additivity associated graded cohomological correspondence",
+   "results": "8 hits: DerivedCategory.instAdditiveShiftFunctorInt, DerivedCategory.instAdditiveCochainComplexIntQ, HasDerivedCategory.standard, CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt, DerivedCategory.instAdditiveHomotopyCategoryIntUpQh, DerivedCategory.instPreadditive, DerivedCategory.instAdditiveSingleFunctor, CategoryTheory.Triangulated.TStructure.instAdditiveTruncGE",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary additive derived categories and finite linear-map traces do not state filtered Verdier trace-class additivity"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier.*trace|trace.*Verdier|filteredTrace|traceClass",
+   "results": "25 hits: Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/FastInstance.lean, Mathlib/Tactic/DeriveFintype.lean, Mathlib/Tactic/DeriveCountable.lean, Mathlib/Tactic/MoveAdd.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the results are additive Ext and truncation facts or tactic trace registration, not filtered cohomological-correspondence Verdier trace classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite filtration of a complex of sheaves, the Lefschetz Verdier trace of a cohomological correspondence is additive on the associated graded complexes",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_add, CategoryTheory.Functor.instAdditiveOfIsHomological, CategoryTheory.Triangulated.TStructure.instAdditiveTruncGE, CategoryTheory.Abelian.Ext.sum_comp, CategoryTheory.Triangulated.TStructure.instAdditiveTruncLT, CategoryTheory.InjectiveResolution.add_extMk, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, CategoryTheory.Abelian.Ext.comp_sum",
+   "date": "2026-10-17",
+   "verdict": "no match: the results are additive Ext and truncation facts or tactic trace registration, not filtered cohomological-correspondence Verdier trace classes"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier.*[Tt]race|[Tt]race.*Verdier|filteredTrace",
+   "results": "0 hits: ; restricted to Mathlib/Algebra",
+   "date": "2026-10-17",
+   "verdict": "no match in Mathlib/Algebra for this geometric trace construction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-term-locality",
@@ -65,5 +197,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-trace-additivity",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by removing two duplicate supporting nodes and routing the filtered RHom and duality arguments through the existing filtered derived-Hom and filtered operations/Hom framework nodes. The cross-unit filtered operations/Hom comparison is declared as a tool use. The item statement and five-step Varshavsky proof route are retained; no Lean work. Independent second reader rewrote the argument uniformly using global filtered Hom, supplied the two-variable external-duality comparisons explicitly, specified the evaluation convention, and replaced the roof factorization assertion by naturality of filtration truncation.",
+  "blueprint": "Supplies the general filtered trace input used in the ancestor lem-trf-local-term-locality localization/additivity step, using the existing filtered operations/Hom and derived-Hom framework statements.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-filtered-operations-hom",
+    "why": "The item unit needs the existing filtered six-operations/Hom comparison, including its finite-coefficient etale/pro-etale compatibility and graded trace-construction transformations; this generic framework lemma belongs to unit sk-i-additivity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-filtered-operations-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-39a62be61",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-39a62be61 (reviewer sub-agent of L); spot-checked: I read the whole mathematics against Varshavsky §5.1.1–5.2.2 and Lemma 5.3.2 (printed pp. 39–43). The item statement matches Lemma 5.3.2 with the legs swapped to the project's convention u: c_2^*K→c_1^!K. A=A_{E,n} with n≥1 satisfies the source's coefficient hypothesis, and the hypothesis is a genuine filtered morphism, so nothing is weakened. Small cases check out: a point over a field; zero ũ or zero K̃; an empty fixed locus; a single graded piece in any degree, with no sign; gaps; shifted indices; n>1. Step 1 is covered by lem-sf-proetale-constructible-origin (ii) and the last paragraph of lem-trf-filtered-operations-hom. In Step 2 I checked every arrow: the exchange at (c, p_2^*P, p_1^!Q); κ at (M,N)=(Q,P), with the factors in the right order; the compositors; then the unit, Bc and the signed symmetry. Step 3: the indices for gr^0 H and for gr^0 of the target are correct. Step 4 matches the ev convention of def-trf-dualizing-complex. Step 5's truncation-naturality factorization is correct. Step 2 (2464 characters) may stay as one step: it builds one composite from cited comparisons and identifies it with the cited trace map, and proves no sub-claim inline. No new nodes; no duplicate in the DAG (I checked lem-trf-trace-triangle-compatibility, prop-trf-trace-class-additivity, lem-trf-invariant-localization-filtered-lift and the other filtered-operation lemmas); no cycle. I accept the tool use of lem-trf-filtered-operations-hom from sk-i-additivity: it is the generic filtered six-operations framework, and nothing on the route of sk-i-curve-zero provides it. FIX in step 2: (a) added the missing citation of thm-trf-verdier-duality to identify, at P=Q=K, the composite of exchange and Rc^!κ^{-1} with the ξ used by lem-trf-trace-map-from-external-duality, and stated that moving e_K past Bc is naturality of base change; (b) added why the filtered Künneth lift is invertible (its graded maps are ordinary κ's, and graded pieces detect zero objects). proof_deps gains thm-trf-verdier-duality; the statement is unchanged. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-filtered-trace-additivity.json.; 1 file(s) fixed by the reviewer"
  }
 }
