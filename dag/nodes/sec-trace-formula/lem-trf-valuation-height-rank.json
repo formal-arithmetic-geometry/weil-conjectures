@@ -9,43 +9,76 @@
   "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
  },
  "stmt_deps": [
-  "def-weil-field"
+  "def-weil-field",
+  "def-trf-rational-rank"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leansearch",
-   "query": "prime ideal chain length valuation ring rational rank value group",
-   "results": "8 hits; Ideal.primeHeight and ValuationRing.valuation, but no chain/rational-rank comparison.",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "text": "The quotient $\\Gamma=K^\\times/A^\\times$ carries the total order $[x]\\le[y]$ exactly when $y/x\\in A$: the valuation-ring alternative applied to $y/x$ gives comparability, and multiplication by a representative preserves the relation. The quotient is well defined because multiplying $x$ or $y$ by units does not change membership in $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, p. 7, the quotient-order construction and the valuation-ring/value-group setup; checked in the author’s v3 PDF online."
+   }
   },
   {
+   "text": "Apply [lem-trf-valuation-prime-convex-correspondence] to the given valuation ring. Its canonical order anti-isomorphism sends the strict prime chain $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ to a strict chain of $n$ convex subgroups of $\\Gamma$.",
+   "uses": [
+    "lem-trf-valuation-prime-convex-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, p. 7, lines 401–416: overrings, points of Spec, and convex subgroups of the value group; checked in the author’s v3 PDF online."
+   }
+  },
+  {
+   "text": "By [lem-trf-convex-chain-rational-rank], every strict chain of $n$ convex subgroups of $\\Gamma$ has $n\\le\\dim_{\\mathbf Q}(\\Gamma\\otimes_{\\mathbf Z}\\mathbf Q)=\\operatorname{rrk}(\\Gamma)$. This is the required inequality.",
+   "uses": [
+    "lem-trf-convex-chain-rational-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, pp. 7–8, the convex-subgroup/height discussion together with Lemma 2.1.2 and Corollary 2.1.3(i); the ordered-group chain bound is the stated convex-rank consequence, checked in the author’s v3 PDF online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-valuation-prime-convex-correspondence",
+  "lem-trf-convex-chain-rational-rank"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§2.1, pp. 7–8, including the valuation-ring/value-group correspondence, Lemma 2.1.2 and Corollary 2.1.3(i); checked in the author’s v3 PDF online."
+ },
+ "mathlib_searches": [
+  {
    "tool": "leanfinder",
-   "query": "The length of a finite chain of prime ideals in a valuation ring is at most the rational rank of its value group",
-   "results": "8 hits; rank-one and valuation APIs, but no prime-chain bound.",
+   "query": "strict chain of convex subgroups ordered abelian group bounded by rational rank",
+   "results": "8 hits for ArchimedeanClass subgroup strictness and HahnEmbedding structures; none states the chain/rational-rank bound.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "ValuationSubring, prime ideals, rank",
-   "results": "0 hits; service returned no matching declaration.",
+   "query": "ConvexSubgroup rational rank ordered group",
+   "results": "0 hits; service reported unknown identifier ConvexSubgroup.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "prime.*chain|convex.*subgroup|rank.*value.*group",
-   "results": "13 hits in valuation rank files, but no theorem comparing chain length and rational rank.",
+   "query": "convex.*subgroup|Convex|archimedean.*rank (Algebra/Order)",
+   "results": "1 unrelated hit in Mathlib/Algebra/Order/Nonneg/Module.lean; no convex subgroup chain theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-abhyankar-finite-type-field-height",
@@ -59,6 +92,7 @@
    "node": "lem-trf-local-term-locality",
    "place": "The finite-height input in the ancestor's specialization/nearby-cycle branch, via Temkin §2.1: prime ideals correspond to convex subgroups, so a strict prime chain has length at most the value-group rational rank.",
    "via": [
+    "lem-trf-valuation-height-rank",
     "lem-trf-riemann-zariski-finite-refinement",
     "lem-trf-temkin-stable-modification",
     "lem-trf-stable-modification-flat-curve-pair",
@@ -72,5 +106,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-height-rank",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by checking Temkin’s v3 PDF online: §2.1 pp. 7–8 gives the valuation-ring/value-group and convex-subgroup correspondence, Lemma 2.1.2 and Corollary 2.1.3(i). I retained the statement, explicit two-node proof, and no-match Mathlib searches, corrected the item creation record to Q19, and prepended the item to its inherited blueprint via chain. The local archive remains WANTED, but the cited source and both supporting statements were read online.",
+  "blueprint": "Realizes the Temkin §2.1 valuation-theoretic sentence in the ancestor finite-height branch: prime ideals correspond to convex subgroups and strict convex chains are bounded by rational rank."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-89f5076cb",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-89f5076cb (reviewer sub-agent of L); spot-checked: Two repairable faults: the item’s created record still named lem-trf-abhyankar-finite-type-field-height and group NY; the correction is in fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-height-rank.json. The existing def-trf-rational-rank definition was also missing from stmt_deps and is added there. Mathematics, Temkin source checks, hypotheses, edge cases, routes, and new-node distinctions are documented in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

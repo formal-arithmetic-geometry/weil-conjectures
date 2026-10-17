@@ -16,9 +16,68 @@
   "def-weil-pbc-depth",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and a nonempty open subset $O\\subseteq X_s$, and choose $x\\in O$. By [def-pc-scheme-fibre], identify $X_s$ homeomorphically with the subspace $f^{-1}(s)$ of $X$. Thus there is an open $W\\subseteq X$ with $O=W\\cap f^{-1}(s)$. Choose an affine open $V=\\operatorname{Spec}R$ of $S$ containing $s$, and then, using [lem-weil-pbc-affine-opens-basis], an affine open $U=\\operatorname{Spec}A$ with $x\\in U\\subseteq W\\cap f^{-1}(V)$. The induced open $U_s\\subseteq X_s$ is nonempty and contained in $O$, and $f(U)\\subseteq V$. For an empty fibre the density assertion is vacuous.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT (affine opens form a basis) and the fibre-topology identification used in Tag 045U"
+   }
+  },
+  {
+   "text": "For the affine opens $U=\\operatorname{Spec}A$ and $V=\\operatorname{Spec}R$ just chosen, [lem-weil-pbc-lfp-affine-opens-finite-presentation] gives a finite presentation $A\\cong R[t_1,\\ldots,t_n]/(g_1,\\ldots,g_m)$. Apply [lem-weil-pbc-affine-chart-base-change-iso] with $Z=X$, $T=\\operatorname{Spec}\\kappa(s)$, base open $V$, and source open $U$; the inverse image of $V$ in $T$ is all of $T$. Its isomorphism identifies $U_s$ with $\\operatorname{Spec}(\\kappa(s)\\otimes_R A)$. The elementary tensor symmetry $a\\otimes c\\mapsto c\\otimes a$ identifies this ring with $B=A\\otimes_R\\kappa(s)$. The elements $t_i\\otimes1$ generate $B$ as a $\\kappa(s)$-algebra: expand each $a\\in A$ as a polynomial in the $t_i$, and each tensor as a sum of pure tensors. Thus $B$ is finite type in the sense of [def-weil-pbc-finite-type-algebra].",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "def-weil-pbc-finite-type-algebra",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 and 01JR; Morphisms Tag 01TQ"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-generic-cm-locus-field] to the finite type $\\kappa(s)$-algebra $B=A\\otimes_R\\kappa(s)$. Since $U_s$ is nonempty, its affine spectrum contains a prime $\\mathfrak q$ with Cohen–Macaulay localization $B_{\\mathfrak q}$. Let $y\\in U_s\\subseteq O$ be the corresponding point. By [lem-weil-pbc-affine-open-stalk-localization], applied to the affine open $U_s$ of $X_s$ and its affine ring identification, $B_{\\mathfrak q}\\cong\\mathcal O_{X_s,y}$ as local rings. Ring isomorphisms identify ideals, prime chains and regular sequences, so they preserve Noetherianity, Krull dimension and depth as defined in [def-weil-pbc-depth] and [def-weil-pbc-krull-dimension-ring]. Hence $y\\in C_s\\cap O$. Since $s$ and $O$ were arbitrary, $C_s$ is dense in every fibre.",
+   "uses": [
+    "lem-trf-generic-cm-locus-field",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "def-pc-scheme-fibre",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RG, label lemma-generic-CM; for the affine open stalk identification, schemes.tex Tag 01HV (lemma-spec-sheaves), (6), and Tag 01HF (example-open-subspace)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-trf-generic-cm-locus-field",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 045U, assertions (1) and (3), with the affine fibre argument supplied by Algebra Tag 00RG"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometrically-connected-fibre-open-spreading",
@@ -69,7 +128,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The elementary-etale finite-over-smooth ingredient (Stacks 057K) in the 057S flatification route for the horizontal curve reduction of lem-trf-local-term-locality: in the application of 057J to the smooth intermediate scheme, the preliminary spreading of the specified fibre open with geometrically connected fibres (055W). In the proof of 055W: the choice of a closed point where h is Cohen–Macaulay, using the fibrewise density assertion of 045U together with the existing openness and Jacobson statements.",
+   "place": "The proof of the 055W spreading lemma: the choice of a closed point where h is Cohen–Macaulay, using the fibrewise density assertion of 045U together with the existing openness and Jacobson statements.",
    "via": [
     "lem-trf-geometrically-connected-fibre-open-spreading",
     "lem-trf-geometrically-integral-fibre-neighbourhood",
@@ -88,5 +147,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-lfp-cm-locus-fibre-dense",
+  "worker": "stage1",
+  "summary": "Audited the imported Tag 045U statement and split its proof into affine fibre reduction plus the finite-type-over-a-field Cohen–Macaulay density input of Tag 00RG. The statement is unchanged; every step records the affine chart, finite-type fibre-ring, and stalk identification used. Maintainer reading: choose the base affine before the source affine, specify the tensor-order symmetry and finite generators, and cite the existing affine-open stalk/localization theorem rather than the general definition of a stalk.",
+  "blueprint": "Realizes the 055W proof sentence choosing a closed Cohen–Macaulay point from the fibrewise density assertion of 045U."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-d607e785d",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-d607e785d (reviewer sub-agent of L); spot-checked: Read both nodes and cited mathematics in full. Stacks 045U and 00RG support the statements. Corrected affine-chart selection order, added the existing affine stalk/localization citation, and restored complete blueprint ancestry. Whole corrected JSON files and review.md are written; the corrected dependency closure has no missing nodes or cycles.; 2 file(s) fixed by the reviewer"
  }
 }

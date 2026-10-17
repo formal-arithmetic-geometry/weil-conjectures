@@ -1,0 +1,128 @@
+{
+ "id": "lem-trf-polynomial-shear-leading-coefficient",
+ "kind": "statement",
+ "title": "Triangular polynomial substitution with scalar leading coefficient",
+ "statement": "Let $R$ be a commutative ring, let $n\\ge1$, and let $g\\in R[x_1,\\ldots,x_n]$ be nonconstant, meaning $g$ is not in the image of the constant-polynomial map $R\\to R[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring]. There exist positive integers $e_1,\\ldots,e_{n-1}$, an integer $d>0$, a nonzero coefficient $a\\in R$ of $g$, and polynomials $b_j\\in R[x_1,\\ldots,x_{n-1}]$ for $0\\le j<d$, such that $$g(x_1+x_n^{e_1},\\ldots,x_{n-1}+x_n^{e_{n-1}},x_n)=a x_n^d+\\sum_{j=0}^{d-1} b_j x_n^j.$$ For $n=1$ the exponent list is empty and the displayed substitution is the identity.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051N, lemma-helper-polynomial, lines 27963-27994 (with Tag 051M, lemma-helper, in its proof); tags verified in tags/tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial triangular change of variables makes a nonconstant multivariate polynomial monic up to multiplication by a nonzero scalar",
+   "results": "Actual search: 8 hits; Polynomial.freeMonic, Polynomial.MonicDegreeEq.freeMonic, Polynomial.monic_freeMonic, Polynomial.monic_mul_leadingCoeff_inv, Polynomial.monic_restriction, Polynomial.monic_mul_C_of_leadingCoeff_mul_eq_one, Polynomial.monic_C_mul_of_mul_leadingCoeff_eq_one, Polynomial.UniversalFactorizationRing.monicDegreeEq. The returned freeMonic and monic scalar-normalization facts do not construct a triangular variable change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NoetherNormalization",
+   "results": "Actual search: 0 hits; none. loogle: unknown identifier 'NoetherNormalization'. The parser reported unknown identifier NoetherNormalization; no absence conclusion is drawn from it.",
+   "date": "2026-10-18",
+   "verdict": "unavailable: identifier rejected by Loogle"
+  },
+  {
+   "tool": "grep",
+   "query": "T_leadingcoeff_isUnit|leadingCoeff_finSuccEquiv_t|monic.*(automorph|equiv)|exists.*(monic|leadingCoeff) [Mathlib/RingTheory/NoetherNormalization.lean]",
+   "results": "Actual search: 4 hits; 124, 143, 167, 185. Read installed NoetherNormalization.lean:124-169: these are private lemmas over a field, not the asserted theorem over every commutative ring.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial shear makes the leading coefficient of a nonconstant polynomial a unit",
+   "results": "Actual search: 8 hits; Polynomial.leadingCoeff, MonomialOrder.isUnit_leadingCoeff, Polynomial.IsPrimitive, Polynomial.leadingCoeff_map_eq_of_isUnit_leadingCoeff, Polynomial.monic_mul_leadingCoeff_inv, Polynomial.leadingCoeffHom, Polynomial.Monic.isUnit_leadingCoeff_of_dvd, Polynomial.isUnit_iff_degree_eq_zero. Leading coefficients, primitive polynomials and scalar normalization do not give this variable substitution.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over any commutative ring a triangular substitution x_i plus high powers of x_n makes the leading coefficient in x_n a nonzero coefficient of the original nonconstant polynomial",
+   "results": "Actual search: 8 hits; Polynomial.eraseLead_ne_zero, WeierstrassCurve.coeff_preΨ'_ne_zero, MvPolynomial.coeff_toPolynomialAdjoinImageCompl_ne_zero, Polynomial.nextCoeff_ne_zero, WeierstrassCurve.coeff_preΨ_ne_zero, MonomialOrder.degree_ne_zero_of_sub_leadingTerm_ne_zero, MvPolynomial.coeff_rename_ne_zero, Polynomial.integralNormalization_coeff_degree_ne. Results concern eraseLead, division polynomials, separably generated fields, monomial orders and integral normalization; none states this substitution lemma.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Polynomial.leadingCoeff",
+   "results": "Actual search: 2 hits; MvPolynomial.symmetricSubalgebra.aevalMultiset_map_aroots_mem_range_algebraMap, NoetherNormalization.varChange_leadingCoeff_isUnit. Online Loogle returns NoetherNormalization.varChange_leadingCoeff_isUnit over a field. Installed source has no varChange and only private T_leadingcoeff_isUnit; moreover the new node is the Stacks arbitrary-ring coefficient assertion, not only the field unit assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match in installed Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "helper.polynomial|T_leadingcoeff_isUnit|leadingCoeff_finSuccEquiv_t|sum_r_mul_ne [Mathlib/RingTheory]",
+   "results": "Actual search: 5 hits; Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/NoetherNormalization.lean. The installed source contains private field-only sum_r_mul_ne, leadingCoeff_finSuccEquiv_t and T_leadingcoeff_isUnit, inspected at lines 90-169.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Triangular substitution by large powers separates monomial degrees and produces scalar leading coefficient over a commutative ring",
+   "results": "Actual search: 8 hits; MvPowerSeries.subst_monomial, MonomialOrder.degree_pow_of_pow_leadingCoeff_ne_zero, MonomialOrder.coeff_pow_nsmul_degree, MvPowerSeries.substAlgHom_monomial, MonomialOrder.degree_pow_le, MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree, MvPowerSeries.substAlgHom, MonomialOrder.leadingCoeff_pow. Power-series substitution and monomial-order degree/leading-coefficient formulas do not give the triangular variable change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "varChange|T_leadingcoeff_isUnit|private.*abbrev T [Mathlib/RingTheory/NoetherNormalization.lean]",
+   "results": "Actual search: 3 hits; 87, 143, 185. No varChange was found; only the private field-specific T construction and T_leadingcoeff_isUnit at lines 87 and 143.",
+   "date": "2026-10-18",
+   "verdict": "no match in installed Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"varChange_leadingCoeff_isUnit\"",
+   "results": "Actual search: 1 hits; NoetherNormalization.varChange_leadingCoeff_isUnit. The online public field-specific theorem is not present in the installed checkout; the local-source grep below confirms this.",
+   "date": "2026-10-18",
+   "verdict": "no match in installed Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "varChange|T_leadingcoeff_isUnit|leadingCoeff_finSuccEquiv_t [Mathlib/RingTheory]",
+   "results": "Actual search: 4 hits; Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/NoetherNormalization.lean. Installed NoetherNormalization.lean:124,143,167,185 gives only private field-specific helpers, with no public varChange theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-refined-noether-normalization-prime",
+  "date": "2026-10-18",
+  "group": "Q85"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The refined Noether-normalization step (Stacks 051P) of the affine polynomial chart in the recorded 057K--057L/057S route: the application of helper-polynomial (051N) to make a chosen nonzero relation monic after a triangular change of variables.",
+   "via": [
+    "lem-trf-refined-noether-normalization-prime",
+    "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
