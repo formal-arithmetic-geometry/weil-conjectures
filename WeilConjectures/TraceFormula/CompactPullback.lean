@@ -345,7 +345,8 @@ lemma boundedConstructibleUpperStarId_inv_app_comp_baseChange_app
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
         ((boundedConstructibleUpperStarId _ ℓ X).inv.app M) := by
   have : IsProper (𝟙 X : X ⟶ X).left := inferInstanceAs (IsProper (𝟙 X.left))
-  have : IsProper (𝟙 (point k) : point k ⟶ point k).left := inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
+  have : IsProper (𝟙 (point k) : point k ⟶ point k).left :=
+    inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
   rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv]
   exact mateEquiv_symm_app_of_iso_aux _ _ _ _ _ _
     (boundedConstructibleUpperStarLowerShriekAdjunction_id_unit_app ℓ X)
@@ -367,7 +368,7 @@ lemma compactPullback_id_app [IsProper (𝟙 X : X ⟶ X).left]
     Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app, Iso.trans_hom,
     Iso.symm_hom, Category.assoc] at hu
   rw [compactPullback_app, boundedConstructibleLowerShriekCompToPoint_hom_app, ← hu]
-  simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp]
   congr 2
   rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ (𝟙 X) (toPoint X)).hom.app
     _), Iso.hom_inv_id_app_assoc, ← Functor.map_comp, hl]
@@ -487,5 +488,24 @@ lemma frobeniusCompactOperator_eq_pow [IsProper Φ.left]
     rfl
 
 end Frobenius
+
+namespace WeilBoundedConstructible
+
+variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] {Φ : X ⟶ X}
+
+variable {ℓ} in
+/-- The iterated Weil structures `φ_m` of a Weil object are the iterates of its structure
+isomorphism `φ` as a Frobenius coefficient morphism (blueprint
+`def-trf-frobenius-coefficient-morphism`, example). -/
+lemma iterateStr_hom_eq_frobeniusCoefficientIterate (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
+    (K.iterateStr m).hom = frobeniusCoefficientIterate K.str.hom m := by
+  induction m with
+  | zero => exact (Category.id_comp _).symm
+  | succ m ih =>
+    simp only [iterateStr, frobeniusCoefficientIterate, Iso.trans_hom, eqToIso.hom, Iso.app_hom,
+      Functor.mapIso_hom, ih]
+
+end WeilBoundedConstructible
 
 end AlgebraicGeometry.ProEtale.CondensedRing
