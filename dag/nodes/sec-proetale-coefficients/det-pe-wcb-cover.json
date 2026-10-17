@@ -155,5 +155,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7d758744",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Every clause matches. X : Scheme.{u}, U : X.ProEt (Mathlib small site). The cover is Presieve.ofArrows W f ∈ precoverage X U (weakly etale, jointly surjective, finite affine refinement = def-weil-pbc-proetale-covering). Each source is Spec D ≅ (W i).left with IsWContractibleRing D, and each map factors through an open immersion Spec B → U.left by φ with RingHom.FaithfullyFlat and RingHom.IndEtale (toAlgebra forms of the recorded Module.FaithfullyFlat/Algebra.IndEtale); the factorization equation has the right orientation and the same family carries cover and factorization. Edge cases: empty U/X allowed via bot_mem_propQCPrecoverage; no Nonempty or finiteness hypothesis; universes consistent (I, D, B in u; site objects u+1). Upstream exists_isWeaklyContractible_cover lacks the ring and factorization data, so it is not an existing match. No definitions, only sorry, docstrings have source, blueprint tag and three proof steps; lean.statement verbatim; commit touches only report, node lean field and module; report has both sections. nt_compile.py --json: rc 0, 1.8 s, no errors or warnings; a probe copy confirmed real elaboration (closed signature, axioms propext/sorryAx/Classical.choice/Quot.sound). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.WContractibleAffineCover",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.exists_wContractible_affine_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/WContractibleAffineCover.lean",
+  "statement": "theorem exists_wContractible_affine_cover (X : Scheme.{u}) (U : X.ProEt) : ∃ (I : Type u) (W : I → X.ProEt) (f : ∀ i : I, W i ⟶ U), Presieve.ofArrows W f ∈ precoverage X U ∧ ∀ i : I, ∃ (D : CommRingCat.{u}), IsWContractibleRing D ∧ ∃ (e : Spec D ≅ (W i).left) (B : CommRingCat.{u}) (φ : B ⟶ D) (j : Spec B ⟶ U.left), IsOpenImmersion j ∧ φ.hom.FaithfullyFlat ∧ φ.hom.IndEtale ∧ e.hom ≫ (f i).left = Spec.map φ ≫ j",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
