@@ -45,23 +45,4 @@ theorem Scheme.isClosedImmersion_specMap_tensor_functionField
   exact CategoryTheory.MorphismProperty.of_isPullback
     (Scheme.isPullback_affine_local_functionField_diagonal X U hU x hx hdim) inferInstance
 
-/-- A closed immersion between affine spectra induces a surjective ring map.
-Source: Stacks Project, Morphisms Lemma 01IQ (blueprint: lem-sc-closed-immersion-affine-surjective).
-The affine closed-immersion criterion gives surjectivity on global sections; the
-canonical global-sections isomorphisms for spectra transport this to the original map. -/
-theorem surjective_of_isClosedImmersion_specMap
-    (R S : CommRingCat.{u}) (f : R ⟶ S)
-    [IsClosedImmersion (Spec.map f)] : Function.Surjective f := by
-  obtain ⟨_, hsurj⟩ := IsClosedImmersion.isAffine_surjective_of_isAffine (Spec.map f)
-  intro a
-  obtain ⟨b, hb⟩ := hsurj ((Scheme.ΓSpecIso S).inv a)
-  refine ⟨(Scheme.ΓSpecIso R).hom b, ?_⟩
-  have hnat := DFunLike.congr_fun
-    (congrArg CommRingCat.Hom.hom (Scheme.ΓSpecIso_naturality f)) b
-  calc
-    f.hom ((Scheme.ΓSpecIso R).hom b) =
-        (Scheme.ΓSpecIso S).hom ((Spec.map f).appTop.hom b) := hnat.symm
-    _ = (Scheme.ΓSpecIso S).hom ((Scheme.ΓSpecIso S).inv a) := by rw [hb]
-    _ = a := by simp
-
 end AlgebraicGeometry

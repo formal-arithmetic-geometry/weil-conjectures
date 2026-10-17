@@ -114,7 +114,7 @@ theorem GaloisCover.stalk_normalization_depth_two_section_source {S C : Scheme.{
     let : Flat (n ∣_ W) := hflat
     infer_instance
   refine ⟨V, hxV, ?_⟩
-  exact finiteEtale_stalk_normalization_etale_of_flat hS c U hηU PA s hs hmin
+  exact finiteEtale_stalk_normalization_etale_of_flat c U PA s hs hmin
     hdepth hn V hflatV
 
 end AlgebraicGeometry.Scheme

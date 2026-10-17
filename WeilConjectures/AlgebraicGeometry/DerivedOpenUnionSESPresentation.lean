@@ -61,8 +61,6 @@ private theorem map_pair_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.unusedVariables false in
--- The existential eC binder is intentionally used only to assert existence, as in the signature.
 set_option maxHeartbeats 800000 in
 -- Comparing the transported module functors requires additional elaboration heartbeats.
 /-- A short exact sequence of complexes representing the three direct-image terms
@@ -127,7 +125,7 @@ theorem derived_open_union_ses_presentation
         (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ))
       (eA : DerivedCategory.Q.obj S.X₁ ≅ A)
       (eB : DerivedCategory.Q.obj S.X₂ ≅ B)
-      (eC : DerivedCategory.Q.obj S.X₃ ≅ C),
+      (_ : DerivedCategory.Q.obj S.X₃ ≅ C),
       S.ShortExact ∧ DerivedCategory.Q.map S.f ≫ eB.hom = eA.hom ≫ b := by
   classical
   dsimp only

@@ -29,7 +29,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 namespace DecreasingFiltration
 
-/-- Compatibility accessor for SHEAF's filtration API; the filtration is upstream's. -/
+/-- Compatibility accessor for the filtration API; the filtration is upstream's. -/
 @[simp] abbrev step {A : C} (F : DecreasingFiltration A) := F.F
 
 omit [Abelian C] in

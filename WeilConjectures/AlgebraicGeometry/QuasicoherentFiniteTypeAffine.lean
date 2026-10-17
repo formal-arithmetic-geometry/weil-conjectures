@@ -245,7 +245,9 @@ private theorem finitePresentation_fromSpec_of_over (M : X.Modules) {U : X.Opens
   exact @isFinitePresentation_of_iso (Spec Γ(X, U)) _ _
     (((restrictFunctorComp f U.ι).app M).symm ≪≫ (restrictFunctorCongr hf).app M) this
 
-private theorem finite_sections_of_finiteType (F : X.Modules)
+/-- The sections of a quasi-coherent module of finite type over an affine open `U` form a
+finitely generated `Γ(X, U)`-module. -/
+theorem finite_sections_of_finiteType (F : X.Modules)
     [F.IsQuasicoherent] [F.IsFiniteType] {U : X.Opens} (hU : IsAffineOpen U) :
     Module.Finite Γ(X, U) Γ(F, U) := by
   obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F

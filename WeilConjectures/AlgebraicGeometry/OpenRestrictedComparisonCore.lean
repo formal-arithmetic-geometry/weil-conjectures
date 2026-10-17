@@ -89,7 +89,6 @@ private theorem additive_comparisonIntoPullback_naturality
 
 
 set_option linter.unusedVariables false in
--- The statement retains its original universally quantified K-flatness certificate.
 set_option maxHeartbeats 1600000 in
 -- Transporting nested derived stalk functors requires extra elaboration heartbeats.
 /-- The open comparison square when the restricted representative data are supplied.

@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Action.Continuous
 public import Mathlib.CategoryTheory.Action.Concrete
 public import Mathlib.CategoryTheory.Types.Basic
 public import Mathlib.FieldTheory.KrullTopology
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGeometricAction
 import WeilConjectures.AlgebraicGeometry.EtaleFieldPointFunctorEssSurj
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
@@ -29,12 +30,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-instance hasForget₂TypeTopCat : HasForget₂ (Type u) TopCat :=
-  ⟨TopCat.discrete, rfl⟩
-
-instance hasForget₂DiscreteContActionType (G : Type*) [Monoid G] [TopologicalSpace G] :
-    HasForget₂ (DiscreteContAction (Type u) G) (Type u) :=
-  HasForget₂.trans (DiscreteContAction (Type u) G) (ContAction (Type u) G) (Type u)
+attribute [local instance] etaleFieldDiscreteForget₂ etaleFieldActionForget₂
 
 /-- Stacks Project, Tags 03QR and 03QS (blueprint: lem-exc-etale-field-gsets).
 The geometric-point functor carries the Galois action by precomposition. An étale scheme

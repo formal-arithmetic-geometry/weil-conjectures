@@ -179,7 +179,7 @@ direct image of that zero object, hence zero. Thus the restricted unit on V
 is a map between zero objects and is invertible. This proves both allowed
 values of W. The argument also covers empty opens and empty T. -/
 theorem supported_open_pushforward_local_comparisons_first (X : Scheme.{u}) (U : X.Opens)
-    (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))
+    (T : Set X) (hT : IsClosed T)
     (V : X.Opens) (hV : (V : Set X) = Tᶜ)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ V : X.Opens,
@@ -199,7 +199,6 @@ theorem supported_open_pushforward_local_comparisons_first (X : Scheme.{u}) (U :
       ∀ W : X.Opens, W = U ∨ W = V →
         IsIso ((SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) W).mapDerivedCategory.map (adj.unit.app E))) := by
-  have _ := hTU
   intro adj E hE W hW
   rcases hW with hW | hW
   · subst W
@@ -307,10 +306,10 @@ zero, by stalkwise vanishing of cohomology. Tag 08FE makes restriction of R(F)
 to V zero. Restriction of extension by zero to V is extension by zero from
 U intersect V, hence also zero; transport along the left-adjoint isomorphism
 makes restriction of S(F) zero. Thus phi on V is invertible between zero
-objects. No perfectness is needed for this local calculation, but its existing
-hypothesis is retained. Empty opens and empty T obey the same zero argument. -/
+objects. No perfectness is needed for this local calculation. Empty opens and
+empty T obey the same zero argument. -/
 theorem supported_open_pushforward_local_comparisons_second (X : Scheme.{u}) (U : X.Opens)
-    (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))
+    (T : Set X) (hT : IsClosed T)
     (V : X.Opens) (hV : (V : Set X) = Tᶜ)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ V : X.Opens,
@@ -329,7 +328,7 @@ theorem supported_open_pushforward_local_comparisons_second (X : Scheme.{u}) (U 
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
             (Modules.overEquiv U)).mapDerivedCategory)
-        (F : schemeDerivedCategory U.toScheme), IsPerfect U.toScheme F →
+        (F : schemeDerivedCategory U.toScheme),
       (∀ (n : ℤ) (x : U.toScheme), x.val ∉ T →
         Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf
@@ -339,9 +338,7 @@ theorem supported_open_pushforward_local_comparisons_second (X : Scheme.{u}) (U 
         ∀ W : X.Opens, W = U ∨ W = V →
           IsIso ((SheafOfModules.overFunctor.{u}
             (moduleRings X.toRingedSpace) W).mapDerivedCategory.map φ)) := by
-  have _ := hTU
-  intro adj S adjS F hperfect hF φ hφ W hW
-  have _ := hperfect
+  intro adj S adjS F hF φ hφ W hW
   rcases hW with hW | hW
   · subst W
     let ff := open_direct_image_fullyFaithful X U
@@ -387,7 +384,7 @@ counit identification for Rj_*. Thus this restriction is invertible. On V
 both endpoints are zero, so the restriction is invertible there too.
 Empty opens and T empty use the zero-object statements with no stalks to test. -/
 theorem supported_open_pushforward_local_comparisons (X : Scheme.{u}) (U : X.Opens)
-    (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))
+    (T : Set X) (hT : IsClosed T)
     (V : X.Opens) (hV : (V : Set X) = Tᶜ)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ V : X.Opens,
@@ -418,7 +415,7 @@ theorem supported_open_pushforward_local_comparisons (X : Scheme.{u}) (U : X.Ope
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
             (Modules.overEquiv U)).mapDerivedCategory)
-        (F : schemeDerivedCategory U.toScheme), IsPerfect U.toScheme F →
+        (F : schemeDerivedCategory U.toScheme),
       (∀ (n : ℤ) (x : U.toScheme), x.val ∉ T →
         Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf
@@ -428,7 +425,7 @@ theorem supported_open_pushforward_local_comparisons (X : Scheme.{u}) (U : X.Ope
         ∀ W : X.Opens, W = U ∨ W = V →
           IsIso ((SheafOfModules.overFunctor.{u}
             (moduleRings X.toRingedSpace) W).mapDerivedCategory.map φ)) := by
-  exact ⟨supported_open_pushforward_local_comparisons_first X U T hT hTU V hV,
-    supported_open_pushforward_local_comparisons_second X U T hT hTU V hV⟩
+  exact ⟨supported_open_pushforward_local_comparisons_first X U T hT V hV,
+    supported_open_pushforward_local_comparisons_second X U T hT V hV⟩
 
 end AlgebraicGeometry.Scheme

@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # A generic lisse stratum in an irreducible closed subset
@@ -36,8 +37,9 @@ private lemma lisse_of_iso {Y : Scheme.{u}}
     exact Sheaf.isConstant_congr _
       ((Y.smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e)
-  · intro Ω _ _ s
-    have := hfin Ω s
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
+    have := (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+      (hfin.isFinitelyGenerated_sheafFiber Ω s)
     exact Finite.of_equiv _
       (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
 

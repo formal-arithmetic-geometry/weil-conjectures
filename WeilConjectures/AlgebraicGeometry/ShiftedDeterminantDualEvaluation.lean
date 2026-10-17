@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.AlgebraicGeometry.DeterminantDualEvaluation
@@ -142,12 +142,12 @@ theorem shiftedDeterminant_dual_evaluation
     (M : X.Modules) (d : ℕ) (hfree : M.IsFiniteLocallyFreeOfRank d) :
     Nonempty ((((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
-        (Scheme.Modules.exteriorSheaf
+        (Scheme.Modules.exteriorPower
           (SheafOfModules.homObj (R := X.sheaf) M
             (SheafOfModules.unit X.ringCatSheaf)) d))⟦-(d : ℤ)⟧ ⊗
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
-          (Scheme.Modules.exteriorSheaf M d))⟦(d : ℤ)⟧) ≅
+          (Scheme.Modules.exteriorPower M d))⟦(d : ℤ)⟧) ≅
       𝟙_ (schemeDerivedCategory X)) := by
   let := SheafOfModules.monoidalCategory X.sheaf
   let := SheafOfModules.symmetricCategory X.sheaf
@@ -162,10 +162,10 @@ theorem shiftedDeterminant_dual_evaluation
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
     CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u, u} _
   obtain ⟨e⟩ := determinant_dual_evaluation X M d hfree
-  let L : SheafOfModules.{u} (moduleRings X.toRingedSpace) := Scheme.Modules.exteriorSheaf
+  let L : SheafOfModules.{u} (moduleRings X.toRingedSpace) := Scheme.Modules.exteriorPower
     (SheafOfModules.homObj (R := X.sheaf) M
       (SheafOfModules.unit X.ringCatSheaf)) d
-  let F : SheafOfModules.{u} (moduleRings X.toRingedSpace) := Scheme.Modules.exteriorSheaf M d
+  let F : SheafOfModules.{u} (moduleRings X.toRingedSpace) := Scheme.Modules.exteriorPower M d
   let S := DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0
   have hL : ObjectProperty.flat L := ObjectProperty.flat_of_tensorIso e

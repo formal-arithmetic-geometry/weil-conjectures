@@ -12,6 +12,12 @@ import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.DiagonalConormal
 import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineSectionsChosen
 
+/-! # Affine sections of the diagonal conormal derivation
+
+On affine opens `U` of `X` over `V` of `S`, the conormal sheaf of the diagonal is identified
+with the module of Kähler differentials of `Γ(X, U)` over `Γ(S, V)`, together with the
+formula for one normalized derivation (Stacks Project, Tags 01KJ, 01R3, 08S2, 00RW). -/
+
 @[expose] public section
 
 universe u

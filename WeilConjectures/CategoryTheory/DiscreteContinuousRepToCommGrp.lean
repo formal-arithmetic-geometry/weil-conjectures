@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
-public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGeometricAction
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 
 /-!
@@ -22,6 +22,9 @@ universe u w
 open CategoryTheory Opposite MonoidalCategory CartesianMonoidalCategory
 
 namespace Rep
+
+attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 

@@ -108,9 +108,6 @@ private theorem frame_relations {X : Scheme.{u}} {ι : Type v}
   have hr := ((he b).map hb).smul_left_injective h
   rw [hN', ← mul_smul, hr]
 
--- The identity and inverse assumptions are redundant for unit-valued cocycles,
--- but belong to the existing signature.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Units on pairwise overlaps satisfying the Čech identities glue the trivial local
 modules to an invertible module with chosen frames, uniquely up to the unique
@@ -125,7 +122,7 @@ transition isomorphisms; the inverse units give their inverses
 (`def-sc-invertible-module`). Step 2: multiplication by a unit and its inverse
 are inverse maps; after restriction to any triple overlap, `hcoc` says their
 composites equal the direct transition. The gluing theorem requires only this
-cocycle condition, so the redundant `hid` and `hinv` hypotheses are not needed. Step 3: apply
+cocycle condition; the identity and inverse relations follow from it. Step 3: apply
 `lem-weil-pbc-glue-sheaves-of-modules` to obtain a module and compatible
 trivializations. Their inverse images of 1 are the frames `e`, and compatibility
 reads `e a = g a b • e b` on the overlap. Step 4: these frames make the module
@@ -139,10 +136,6 @@ theorem exists_invertible_of_cech_transition
     {X : Scheme.{u}} {ι : Type v} (U : ι → X.Opens)
     (hcover : ⨆ a, U a = ⊤)
     (g : ∀ a b, Γ(X, U a ⊓ U b)ˣ)
-    (hid : ∀ a, g a a = 1)
-    (hinv : ∀ a b (W : X.Opens) (ha : W ≤ U a) (hb : W ≤ U b),
-      Units.map (X.presheaf.map (homOfLE (le_inf hb ha)).op).hom.toMonoidHom (g b a) =
-        (Units.map (X.presheaf.map (homOfLE (le_inf ha hb)).op).hom.toMonoidHom (g a b))⁻¹)
     (hcoc : ∀ a b c (W : X.Opens)
       (ha : W ≤ U a) (hb : W ≤ U b) (hc : W ≤ U c),
       Units.map (X.presheaf.map (homOfLE (le_inf ha hc)).op).hom.toMonoidHom (g a c) =
@@ -158,8 +151,6 @@ theorem exists_invertible_of_cech_transition
           (g a b).val • L'.presheaf.map (homOfLE inf_le_right).op (e' b)) →
         ∃! f : L' ≅ L, ∀ a, f.hom.app (U a) (e' a) = e a := by
   classical
-  -- The gluing theorem needs only the cocycle condition for unit transitions.
-  clear hid hinv
   let F (a : ι) := SheafOfModules.unit (X.ringCatSheaf.over (U a))
   let φ (a b : ι) :
       (SheafOfModules.overMap X.ringCatSheaf

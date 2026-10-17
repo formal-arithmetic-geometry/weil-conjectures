@@ -40,6 +40,6 @@ The predicate expands the definition of finite locally constant sheaf from
 morphisms as its arrows. -/
 abbrev FLC (Y : Scheme.{u}) : Type (u + 2) :=
   ObjectProperty.FullSubcategory
-    (IsFiniteLocallyConstantEtaleSheafOfSets (T := Y))
+    (IsFiniteLocallyConstantSheafOfTypes (T := Y))
 
 end AlgebraicGeometry.Scheme

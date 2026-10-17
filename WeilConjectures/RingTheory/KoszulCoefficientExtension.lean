@@ -74,7 +74,7 @@ theorem exists_koszul_coefficient_extension
     q (exteriorPower.pairingDual (A ⧸ I) I.Cotangent r w
       (exteriorPower.ιMulti (A ⧸ I) r
         (fun i ↦ koszulConormalVector A I r f hf (v i))))) := by
-  obtain ⟨χ, hχ⟩ := exists_koszul_coefficient_extension_chi A I r f hreg hf T S hs
+  obtain ⟨χ, hχ⟩ := exists_koszul_coefficient_extension_chi A r f S
   obtain ⟨ν, hν⟩ := exists_koszul_coefficient_extension_nu A I r f hreg hf T S hs q hq
   exact ⟨χ, ν, hχ, hν⟩
 

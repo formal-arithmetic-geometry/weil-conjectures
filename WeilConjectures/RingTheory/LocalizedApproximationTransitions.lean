@@ -105,7 +105,6 @@ theorem localized_approximation_transition_base_change
       ∃ e : Bₗ.obj j ⊗[Bₗ.obj i] Dₗ.obj i ≃ₗ[Bₗ.obj j] Dₗ.obj j,
         ∀ (b : Bₗ.obj j) (x : Dₗ.obj i),
           e (b ⊗ₜ[Bₗ.obj i] x) = b • (Dₗ.map f).hom x) := by
-  -- Compatibility of primes is retained in the interface; the universal-property proof
   -- below only needs the supplied commuting localization squares.
   have _ := hq
   constructor

@@ -29,7 +29,7 @@ namespace MvPowerSeries
 /-- The universal property used in Stacks Project, proofs of Tags 07NL, 07NN and 032A.
 (blueprint: lem-weil-pbc-power-series-universal-property-complete)
 
-Proof (explicit, following the six steps of the DAG node):
+Proof (explicit, following the six steps of the blueprint node):
 1. Using def-weil-pbc-multivariate-power-series, form the finite sums P_m of terms of degree
 less than m. Since every t_i lies in a, a monomial of degree d evaluates into a^d, so the
 partial sums agree modulo a^m whenever the truncation degree is at least m.

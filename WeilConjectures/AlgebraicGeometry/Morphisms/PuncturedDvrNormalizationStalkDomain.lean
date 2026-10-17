@@ -54,7 +54,6 @@ private theorem domain_stalk_of_flat {Y Z : Scheme.{u}}
     ‹Module.FaithfullyFlat (Z.presheaf.stalk (g y)) (Y.presheaf.stalk y)›
   exact hf.injective.isDomain (g.stalkMap y).hom
 
--- The boundary hypothesis is retained for the existing interface.
 set_option linter.unusedVariables false in
 /-- The normalization stalk in the punctured DVR situation is a domain.
 (blueprint: lem-sbc-punctured-dvr-normalization-stalk-domain)

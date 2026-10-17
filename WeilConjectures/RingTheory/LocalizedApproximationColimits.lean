@@ -269,7 +269,7 @@ theorem localized_approximation_colimits
         (contractedPrime_map B κ q i j f) x)
   let g : ∀ i, Nq.obj i →+ LocalizedModule q.asIdeal.primeCompl M := fun i ↦
     primeModuleMap _ _ (κ.app i).hom rfl (ν.app i).hom (hν i)
-  obtain ⟨eN, heN⟩ := localizedModuleColimitComparison B D Nq κ ν hB hD hs hν q
+  obtain ⟨eN, heN⟩ := exists_colimit_addEquiv_localizedModule B D Nq κ ν hB hD hs hν q
     (fun _ ↦ AddEquiv.refl _) (by
       intro i j f x s
       exact ⟨⟨(B.map f).hom s, by

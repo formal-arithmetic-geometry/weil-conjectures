@@ -54,7 +54,6 @@ private theorem exists_reciprocal_frames
       · exact le_sup_left
       · exact le_sup_right
     · exact sup_le (le_iSup A false) (le_iSup A true)
-  have hq : ∀ a, q a a = 1 := by intro a; cases a <;> rfl
   have hrestrict {P Q W : X.Opens} (i : Q ⟶ P) (j : W ⟶ Q)
       (z : Γ(X, P)ˣ) :
       Units.map (X.presheaf.map j.op).hom.toMonoidHom
@@ -90,7 +89,7 @@ private theorem exists_reciprocal_frames
     · rw [hi false true W hb ha]
       simp [q]
   obtain ⟨L, e, hL, he, htrans, -⟩ :=
-    exists_invertible_of_cech_transition A hA q hq hi hc
+    exists_invertible_of_cech_transition A hA q hc
   exact ⟨L, e false, e true, hL, he false, he true, htrans false true⟩
 
 private theorem exists_section_of_pair {X : Scheme.{u}} (M : X.Modules)

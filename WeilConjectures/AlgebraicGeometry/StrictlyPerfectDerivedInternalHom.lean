@@ -151,7 +151,7 @@ theorem isIso_homComplex_resolution_of_isStrictlyPerfect
       ((sheafCompose ((Opens.grothendieckTopology X).over U)
         (forget₂ CommRingCat RingCat)).obj (X.sheaf.over U)))]
     (P M : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
-    (_hP : IsStrictlyPerfect X U P) :
+    (hP : IsStrictlyPerfect X U P) :
     Nonempty (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P M) ≅
       (derivedInternalHom ((Opens.grothendieckTopology X).over U) (X.sheaf.over U)).obj
         (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj M)) ∧
@@ -170,13 +170,13 @@ theorem isIso_homComplex_resolution_of_isStrictlyPerfect
         (ShortComplex.mk
           (SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X n)) S.f)
           (SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X n)) S.g) hz).ShortExact := by
-    obtain ⟨m, ι, π, hιπ⟩ := _hP.2 n
+    obtain ⟨m, ι, π, hιπ⟩ := hP.2 n
     exact internalHom_shortExact_of_finiteFree_retract
       ((Opens.grothendieckTopology X).over U) (X.sheaf.over U) (P.X n) m ι π hιπ S hS
   have hq {N N' : CochainComplex A ℤ} (f : N ⟶ N') [QuasiIso f] :
       QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map f) :=
     quasiIso_homComplex_map_of_bounded_exact_terms
-      ((Opens.grothendieckTopology X).over U) (X.sheaf.over U) P _hP.1 hexact f
+      ((Opens.grothendieckTopology X).over U) (X.sheaf.over U) P hP.1 hexact f
   have hcomp (I : CochainComplex A ℤ ⥤ CochainComplex A ℤ)
       (η : 𝟭 (CochainComplex A ℤ) ⟶ I)
       (hI : ∀ N, QuasiIso (η.app N) ∧ (I.obj N).IsKInjective) :

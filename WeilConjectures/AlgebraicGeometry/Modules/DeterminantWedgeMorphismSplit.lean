@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
@@ -30,15 +30,15 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem exterior_sheafification_unit_map {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
-    {U V : X.Opens} (f : V ⟶ U) (z : (exteriorSheafPresheaf M n).obj (op U)) :
-    (exteriorSheaf M n).val.map f.op (((PresheafOfModules.sheafificationAdjunction.{v}
-      (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf M n)).app (op U) z) =
+    {U V : X.Opens} (f : V ⟶ U) (z : (M.val.exteriorPower (R := X.presheaf) n).obj (op U)) :
+    (exteriorPower M n).val.map f.op (((PresheafOfModules.sheafificationAdjunction.{v}
+      (𝟙 X.ringCatSheaf.obj)).unit.app (M.val.exteriorPower (R := X.presheaf) n)).app (op U) z) =
       ((PresheafOfModules.sheafificationAdjunction.{v}
-        (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf M n)).app (op V)
-          ((exteriorSheafPresheaf M n).map f.op z) := by
+        (𝟙 X.ringCatSheaf.obj)).unit.app (M.val.exteriorPower (R := X.presheaf) n)).app (op V)
+          ((M.val.exteriorPower (R := X.presheaf) n).map f.op z) := by
   exact (PresheafOfModules.naturality_apply
     ((PresheafOfModules.sheafificationAdjunction.{v}
-      (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf M n)) f.op z).symm
+      (𝟙 X.ringCatSheaf.obj)).unit.app (M.val.exteriorPower (R := X.presheaf) n)) f.op z).symm
 
 private theorem generated_sheafification_induction {X : Scheme.{v}}
     (Q : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj)
@@ -233,52 +233,52 @@ private theorem bijective_of_locally_bijective {X : Scheme.{v}} {A D : X.Modules
 set_option backward.isDefEq.respectTransparency false in
 private theorem bijective_of_comparison {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
-    (φ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ⟶ exteriorSheaf S.X₂ r₂)
+    (φ : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃ ⟶ exteriorPower S.X₂ r₂)
     (hφ : ∀ (V : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op V))
       (b : Fin r₃ → S.X₃.val.obj (op V)) (c : Fin r₃ → S.X₂.val.obj (op V)),
       (∀ i, S.g.val.app (op V) (c i) = b i) →
       φ.val.app (op V)
-        (tmulSection (exteriorSheafSection S.X₁ r₁ V a)
-          (exteriorSheafSection S.X₃ r₃ V b)) =
-        exteriorSheafSection S.X₂ r₂ V
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := V) a)
+          (wedge (M := S.X₃) (r := r₃) (U := V) b)) =
+        wedge (M := S.X₂) (r := r₂) (U := V)
           (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op V) (a j)) c (Fin.cast hr i)))
     (U : X.Opens)
     (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))
     (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b)
     (d : ∀ (W : X.Opens), W ≤ U →
-      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)
-        ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))
+      (exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.obj (op W)
+        ≃ₗ[X.presheaf.obj (op W)] (exteriorPower S.X₂ r₂).val.obj (op W))
     (hdwedge : ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))
       (b : Fin r₃ → S.X₃.val.obj (op W)),
-      d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)
-        (exteriorSheafSection S.X₃ r₃ W b)) =
-      exteriorSheafSection S.X₂ r₂ W
+      d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)
+        (wedge (M := S.X₃) (r := r₃) (U := W) b)) =
+      wedge (M := S.X₂) (r := r₂) (U := W)
         (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))
           (fun j ↦ l W hW (b j)) (Fin.cast hr i)))
     (hdmap : ∀ (W V : X.Opens) (hW : W ≤ U) (hVW : V ≤ W) x,
-      (exteriorSheaf S.X₂ r₂).val.map (homOfLE hVW).op (d W hW x) =
+      (exteriorPower S.X₂ r₂).val.map (homOfLE hVW).op (d W hW x) =
         d V (hVW.trans hW)
-          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
+          ((exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.map
             (homOfLE hVW).op x)) :
     ∀ W ≤ U, Function.Bijective (φ.app W) := by
   have hpure (W : X.Opens) (hW : W ≤ U)
       (a : Fin r₁ → S.X₁.val.obj (op W)) (b : Fin r₃ → S.X₃.val.obj (op W)) :
-      φ.val.app (op W) (tmulSection (exteriorSheafSection S.X₁ r₁ W a)
-        (exteriorSheafSection S.X₃ r₃ W b)) =
-      d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)
-        (exteriorSheafSection S.X₃ r₃ W b)) := by
+      φ.val.app (op W) (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)
+        (wedge (M := S.X₃) (r := r₃) (U := W) b)) =
+      d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)
+        (wedge (M := S.X₃) (r := r₃) (U := W) b)) := by
     exact (hφ W a b (fun i ↦ l W hW (b i)) (fun i ↦ hl W hW (b i))).trans
       (hdwedge W hW a b).symm
-  have hsecond := generated_sheafification_induction (exteriorSheafPresheaf S.X₃ r₃)
-    (fun W ↦ Set.range (exteriorPower.ιMulti (X.presheaf.obj (op W)) r₃))
-    (fun W ↦ exteriorPower.ιMulti_span _ _ _)
+  have hsecond := generated_sheafification_induction (S.X₃.val.exteriorPower (R := X.presheaf) r₃)
+    (fun W ↦ Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r₃))
+    (fun W ↦ _root_.exteriorPower.ιMulti_span _ _ _)
     (fun W y ↦ ∀ hW : W ≤ U, ∀ a : Fin r₁ → S.X₁.val.obj (op W),
-      φ.val.app (op W) (tmulSection (exteriorSheafSection S.X₁ r₁ W a) y) =
-        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a) y))
+      φ.val.app (op W) (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a) y) =
+        d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a) y))
     (by intro W hW a; simp only [tmulSection_zero, map_zero])
     (by
       intro W x y hx hy hW a
-      rw [tmulSection_add (M := exteriorSheaf S.X₁ r₁) (N := exteriorSheaf S.X₃ r₃),
+      rw [tmulSection_add (M := exteriorPower S.X₁ r₁) (N := exteriorPower S.X₃ r₃),
         map_add, map_add, hx hW a, hy hW a])
     (by
       intro W c x hx hW a
@@ -291,27 +291,27 @@ private theorem bijective_of_comparison {X : Scheme.{v}}
       intro V f hf
       rw [tensor_section_map]
       have hm := exterior_sheafification_unit_map S.X₁ r₁ f
-        (exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁ a)
-      have hr := (Classical.choose_spec
-        (exteriorSheafRestriction_existsUnique S.X₁ r₁ f.op)).1 a
-      have hm' : (exteriorSheaf S.X₁ r₁).val.map f.op
-          (exteriorSheafSection S.X₁ r₁ W a) =
-        exteriorSheafSection S.X₁ r₁ V (fun i ↦ S.X₁.val.map f.op (a i)) :=
+        (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁ a)
+      have hr :=
+        (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := X.presheaf) S.X₁.val r₁ f.op) a
+      have hm' : (exteriorPower S.X₁ r₁).val.map f.op
+          (wedge (M := S.X₁) (r := r₁) (U := W) a) =
+        wedge (M := S.X₁) (r := r₁) (U := V) (fun i ↦ S.X₁.val.map f.op (a i)) :=
         hm.trans (congrArg
           (((PresheafOfModules.sheafificationAdjunction.{v}
             (𝟙 X.ringCatSheaf.obj)).unit.app
-              (exteriorSheafPresheaf S.X₁ r₁)).app (op V)) hr)
+              (S.X₁.val.exteriorPower (R := X.presheaf) r₁)).app (op V)) hr)
       rw [hm']
       exact ht V f hf ((leOfHom f).trans hW) (fun i ↦ S.X₁.val.map f.op (a i)))
-  have hfirst := generated_sheafification_induction (exteriorSheafPresheaf S.X₁ r₁)
-    (fun W ↦ Set.range (exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁))
-    (fun W ↦ exteriorPower.ιMulti_span _ _ _)
-    (fun W x ↦ ∀ hW : W ≤ U, ∀ y : (exteriorSheaf S.X₃ r₃).val.obj (op W),
+  have hfirst := generated_sheafification_induction (S.X₁.val.exteriorPower (R := X.presheaf) r₁)
+    (fun W ↦ Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁))
+    (fun W ↦ _root_.exteriorPower.ιMulti_span _ _ _)
+    (fun W x ↦ ∀ hW : W ≤ U, ∀ y : (exteriorPower S.X₃ r₃).val.obj (op W),
       φ.val.app (op W) (tmulSection x y) = d W hW (tmulSection x y))
     (by intro W hW y; simp only [zero_tmulSection, map_zero])
     (by
       intro W x y hx hy hW z
-      rw [add_tmulSection (M := exteriorSheaf S.X₁ r₁) (N := exteriorSheaf S.X₃ r₃),
+      rw [add_tmulSection (M := exteriorPower S.X₁ r₁) (N := exteriorPower S.X₃ r₃),
         map_add, map_add, hx hW z, hy hW z])
     (by
       intro W c x hx hW y
@@ -323,9 +323,9 @@ private theorem bijective_of_comparison {X : Scheme.{v}}
       apply local_comparison_eq φ U d hdmap W hW _ T hT
       intro V f hf
       rw [tensor_section_map]
-      exact ht V f hf ((leOfHom f).trans hW) ((exteriorSheaf S.X₃ r₃).val.map f.op y))
-  have hall := tensor_section_induction (exteriorSheaf S.X₁ r₁)
-    (exteriorSheaf S.X₃ r₃)
+      exact ht V f hf ((leOfHom f).trans hW) ((exteriorPower S.X₃ r₃).val.map f.op y))
+  have hall := tensor_section_induction (exteriorPower S.X₁ r₁)
+    (exteriorPower S.X₃ r₃)
     (fun W x ↦ ∀ hW : W ≤ U, φ.val.app (op W) x = d W hW x)
     (by intro W hW; simp only [map_zero])
     (by intro W x y hx hy hW; rw [map_add, map_add, hx hW, hy hW])
@@ -371,14 +371,14 @@ and the empty open or empty scheme. -/
 theorem determinant_wedgeMorphism_bijective_of_split {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]
-    (φ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ⟶ exteriorSheaf S.X₂ r₂)
+    (φ : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃ ⟶ exteriorPower S.X₂ r₂)
     (hφ : ∀ (V : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op V))
       (b : Fin r₃ → S.X₃.val.obj (op V)) (c : Fin r₃ → S.X₂.val.obj (op V)),
       (∀ i, S.g.val.app (op V) (c i) = b i) →
       φ.val.app (op V)
-        (tmulSection (exteriorSheafSection S.X₁ r₁ V a)
-          (exteriorSheafSection S.X₃ r₃ V b)) =
-        exteriorSheafSection S.X₂ r₂ V
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := V) a)
+          (wedge (M := S.X₃) (r := r₃) (U := V) b)) =
+        wedge (M := S.X₂) (r := r₂) (U := V)
           (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op V) (a j)) c (Fin.cast hr i)))
     (U : X.Opens)
     (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)

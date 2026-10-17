@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChartSectionEquiv
 import WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections
@@ -51,14 +51,14 @@ theorem exists_selfTor_conormal_wedge_chart
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens) :
     let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
-    let E := Scheme.Modules.exteriorSheaf N n
+    let E := Scheme.Modules.exteriorPower N n
     let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n
     let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
       Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i
     ∃ s : E.over (i ⁻¹ᵁ U.1) ≅ (T.obj M).over (i ⁻¹ᵁ U.1),
       ∀ b : Fin n → i.ker.toModules.val.obj (op U.1),
         s.hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))
-            (Scheme.Modules.exteriorSheafSection N n (i ⁻¹ᵁ U.1)
+            (Scheme.Modules.wedge (M := N) (r := n) (U := (i ⁻¹ᵁ U.1))
               (fun j ↦ ((Classical.choose
                 (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
                   i.ker.toModules).val.app (op U.1) (b j))) =

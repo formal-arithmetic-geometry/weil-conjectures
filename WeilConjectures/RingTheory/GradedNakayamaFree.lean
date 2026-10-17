@@ -131,7 +131,7 @@ theorem graded_nakayama_free (k : Type u) [Field k]
       exact ⟨d i, hb i⟩
     · exact b.span_eq
   obtain ⟨hK, s, hs, _, hspan⟩ :=
-    graded_kernel_finite ℱ hF ℳ hℳ hsmulF hsmul hfiniteF hN q hq hgraded
+    graded_kernel_finite ℱ hF ℳ hℳ hsmulF hfiniteF q hgraded
   let : Module.Finite (MvPolynomial (Fin 2) k) q.ker :=
     Module.Finite.of_fg (hspan ▸ Submodule.fg_span hs)
   let 𝒦 : ℤ → AddSubgroup q.ker := fun j ↦ (ℱ j).comap q.ker.subtype.toAddMonoidHom

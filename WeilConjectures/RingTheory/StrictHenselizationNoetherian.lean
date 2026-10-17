@@ -35,7 +35,7 @@ Proof: The map from the base ring to its strict henselization is faithfully flat
 Noetherianity descends. Conversely, when the base is Noetherian, the completion of the
 strict henselization is Noetherian and faithfully flat over it; faithfully flat descent
 then gives Noetherianity of the strict henselization. These are the three proof steps
-recorded in the DAG (lem-sc-strict-henselization-faithfully-flat,
+recorded in the blueprint (lem-sc-strict-henselization-faithfully-flat,
 lem-weil-pbc-faithfully-flat-descent-noetherian, and
 lem-sc-strict-henselization-completion-noetherian).
 (blueprint: lem-sc-strict-henselization-noetherian). -/

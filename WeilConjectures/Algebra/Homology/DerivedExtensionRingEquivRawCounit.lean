@@ -75,7 +75,7 @@ theorem exists_derivedExtension_ringEquiv_raw_counit
             ε₀.app (π₀.obj (V.obj K)) ≫ S₀.map (t.hom.app K) := by
   dsimp only
   intro t
-  obtain ⟨E, q, _⟩ := exists_raw_transport L₀ L ε₀ ε h₀ h eR eB hRB t
+  obtain ⟨E, ⟨q⟩⟩ := exists_raw_transport eB
   obtain ⟨a, ha⟩ := raw_compatibility L₀ L ε₀ ε h₀ h eR eB hRB E q t
   exact ⟨E, q, a, ha⟩
 

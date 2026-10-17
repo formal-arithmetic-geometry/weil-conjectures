@@ -11,8 +11,8 @@ public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.AB
-import WeilConjectures.RepresentationTheory.DiscreteResolutionContinuousCohomology
-import WeilConjectures.RepresentationTheory.ContinuousCohomologyCoefficientEquiv
+public import WeilConjectures.RepresentationTheory.DiscreteResolutionContinuousCohomology
+public import WeilConjectures.RepresentationTheory.ContinuousCohomologyCoefficientEquiv
 
 /-!
 # Derived invariants and homogeneous continuous cohomology
@@ -29,8 +29,8 @@ open CategoryTheory
 
 namespace Rep
 
-/-- Derived invariants transported across an abelian equivalence are computed by
-homogeneous continuous cochains, including a change of coefficient universe.
+/-- Additive equivalence between derived invariants transported across an abelian equivalence
+and homogeneous continuous cohomology, including a change of coefficient universe.
 
 Source: Stacks Project, Etale Cohomology, Section 0DVG, profinite comparison.
 (blueprint: lem-sc-discrete-invariants-continuous-comparison).
@@ -55,11 +55,11 @@ jointly continuous maps. Evaluate an equivariant homogeneous cochain at
 inhomogeneous differential, by expanding the recursive homogeneous differential.
 The equivariant linear equivalence e transports these complexes, including between
 universes. Kernel modulo image computes the underlying TopModuleCat homology, so
-these inverse cochain transformations descend to the claimed equivalence.
+these inverse cochain transformations descend to the claimed additive equivalence.
 The representation universe is at least the group universe so coinduced modules
 remain in the same category. No finite-ring assumption is used: the scalar ring is the
 discrete integers. -/
-theorem nonempty_equiv_rightDerived_continuousCohomology
+noncomputable def rightDerivedAddEquivContinuousCohomology
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     (A : Type v) [Category.{w} A] [Abelian A] [HasInjectiveResolutions A]
@@ -71,12 +71,12 @@ theorem nonempty_equiv_rightDerived_continuousCohomology
     (e : (E.functor.obj F).obj.V ≃ₗ[ℤ] N.V)
     (he : ∀ (g : G) (x : (E.functor.obj F).obj.V),
       e ((E.functor.obj F).obj.ρ g x) = N.ρ g (e x)) (q : ℕ) :
-    Nonempty ((Γ.rightDerived q).obj F ≃ continuousCohomology q N) := by
+    (Γ.rightDerived q).obj F ≃+ continuousCohomology q N := by
   classical
   let V := E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
     forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat
   let _ : V.Additive := Functor.additive_of_iso η
-  obtain ⟨I⟩ := HasInjectiveResolution.out (Z := F)
+  let I := injectiveResolution F
   let : TopologicalSpace (E.functor.obj F).obj.V := ⊥
   let : DiscreteTopology (E.functor.obj F).obj.V := ⟨rfl⟩
   let ρ : ContRepresentation ℤ G (E.functor.obj F).obj.V :=
@@ -93,12 +93,12 @@ theorem nonempty_equiv_rightDerived_continuousCohomology
             (E.functor.obj F).obj.ρ g ((E.functor.obj F).obj.ρ h x)
           simp [map_mul] }
   let M : TopRep.{max u s} ℤ G := TopRep.of ρ
-  obtain ⟨a⟩ := nonempty_equiv_invariantResolution_continuousCohomology
+  let a := invariantResolutionHomologyAddEquivContinuousCohomology
     G A E F I M (LinearEquiv.refl ℤ _) (fun _ _ ↦ rfl) q
-  obtain ⟨b⟩ := nonempty_equiv_continuousCohomology_coefficients G M N e he q
+  let b := continuousCohomologyAddEquivOfCoefficients G M N e he q
   let c := (I.isoRightDerivedObj Γ q) ≪≫
     (HomologicalComplex.homologyFunctor AddCommGrpCat (ComplexShape.up ℕ) q).mapIso
       ((NatIso.mapHomologicalComplex η (ComplexShape.up ℕ)).app I.cocomplex)
-  exact ⟨c.addCommGroupIsoToAddEquiv.toEquiv.trans (a.trans b)⟩
+  exact c.addCommGroupIsoToAddEquiv.trans (a.trans b)
 
 end Rep

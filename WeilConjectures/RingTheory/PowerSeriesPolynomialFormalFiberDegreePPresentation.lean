@@ -88,8 +88,8 @@ theorem formalFiber_polynomial_degreePPresentation
         Ideal.span ({Polynomial.X ^ p - Polynomial.C f} : Set (Polynomial R))) ≃+* T) := by
   intro A K C R T
   obtain ⟨a, ha⟩ := hpow
-  obtain ⟨D, hD⟩ := FormalFiberDegreePDerivation k p n m q L M z hz a ha hdeg
-  have hiso := FormalFiberDegreePQuotient K L M ((⊥ : Ideal A).Fiber C)
+  obtain ⟨D, hD⟩ := exists_derivation_isUnit_tmul_formalFiber k p n m q L M z hz a ha hdeg
+  have hiso := nonempty_quotient_X_pow_sub_C_ringEquiv_tensorProduct K L M ((⊥ : Ideal A).Fiber C)
     p z hz a ha hdeg
   exact ⟨Algebra.TensorProduct.includeLeftRingHom a, D, hD, hiso⟩
 

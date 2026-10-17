@@ -193,6 +193,6 @@ theorem projectiveLine_twist_multiplication (k : Type u) [Field k] :
   obtain ⟨μ, hmul⟩ := projectiveLine_twist_product_morphism k
   have hμ : ∀ n m : ℤ, IsIso (μ n m) := multiplication_isIso k μ hmul
   exact ⟨Proj.isInvertible_twist _ 1 (degree_one_cover k), μ, hμ, hmul,
-    projectiveLine_twist_coherent_powers k μ hμ hmul, coordinate_locus k⟩
+    projectiveLine_twist_coherent_powers k μ hμ, coordinate_locus k⟩
 
 end AlgebraicGeometry

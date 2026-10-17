@@ -36,11 +36,11 @@ theorem exists_irreducible_refinement
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (S : Stratification X)
     (hS : ∀ i : Fin S.n,
-      IsFiniteLocallyConstantEtaleSheafOfSets
+      IsFiniteLocallyConstantSheafOfTypes
         ((etaleSetPullback (S.immersion i)).obj F)) :
     ∃ T : Stratification X, ∀ i : Fin T.n,
       IrreducibleSpace (T.domain i) ∧
-        IsFiniteLocallyConstantEtaleSheafOfSets
+        IsFiniteLocallyConstantSheafOfTypes
           ((etaleSetPullback (T.immersion i)).obj F) := by
   obtain ⟨T, hTS, hI⟩ := exists_irreducible_refinement_topological X S
   refine ⟨T, ?_⟩

@@ -35,7 +35,7 @@ namespace IsLocalRing
 Source: Stacks Project, Algebra, Lemma Tag 032D; Cohen rings are Definition Tag 0327.
 (blueprint: lem-weil-pbc-complete-local-domain-finite-over-regular)
 
-Proof outline (the DAG proof, to be formalized in stage 3):
+Proof outline:
 
 1. (Coefficient ring; the two cases.) By [lem-weil-pbc-cohen-coefficient-ring-exists] (R is
 $\mathfrak m$-adically complete [def-weil-pbc-adically-complete-ring]) choose a coefficient ring

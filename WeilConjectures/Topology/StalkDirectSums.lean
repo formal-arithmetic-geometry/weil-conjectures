@@ -35,8 +35,6 @@ open Classical in
 /-- Stacks Project, Tag 009E, item (5) (blueprint: lem-pc-stalk-direct-sums).
 The stalk of the sheaf coproduct is linearly isomorphic to the direct sum of the stalks.
 The equation on germs specifies the canonical comparison in the stated direction.
-Sectionwise commutativity makes the structure sheaf a sheaf of commutative rings,
-as required by the ringed-space convention of `def-weil-locally-ringed-space-morphism`.
 
 Proof: compose the forgetful functor to presheaf modules with the linear module stalk
 functor of `def-weil-pbc-module-stalk`. After forgetting its target module structure,
@@ -50,11 +48,10 @@ associated linear equivalence. The coproduct comparison carries each stalk injec
 to the corresponding categorical injection, and `coprodIsoDirectSum` carries this to
 `DirectSum.lof`. Applying this morphism identity to the germ of a section, and using
 `stalkFunctor_map_germ_apply`, gives the required formula. This argument works for
-arbitrary index sets, including the empty set, and does not require commutativity.
+arbitrary index sets, including the empty set.
 -/
 theorem exists_stalk_directSum_linearEquiv
     {X : TopCat.{u}} (R : X.Sheaf RingCat.{u}) (I : Type u)
-    (_hcomm : ∀ (U : Opens X) (r s : R.obj.obj (op U)), r * s = s * r)
     (F : I → SheafOfModules.{u} R) (x : X) :
     ∃ e : (stalk (C := AddCommGrpCat.{u}) (X := X) (∐ F).val.presheaf x)
         ≃ₗ[stalk (C := RingCat.{u}) (X := X) R.obj x]
