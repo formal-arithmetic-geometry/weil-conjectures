@@ -27,7 +27,11 @@
   "place": "Proposition 4.2.1.5 and Corollaries 4.2.1.7-4.2.1.8, printed pp. 241-242; Proposition 4.2.1.6 and the dual of Proposition 2.1.2.1 supply the left-fibration and Kan-fiber assertions. Corollary 4.2.1.8 applied in Fun(L,E) compares the unpinched fixed-endpoint fiber to the specified right-pinched mapping space. The fat-join adjunction identifies the fat slice with the coherent cocone category. No Stacks tag for this comparison."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-blunt-sharp-join-equivalence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -244,5 +248,35 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-7726a4208 (reviewer sub-agent of L); spot-checked: I read the item, all 18 cited node statements, the unit sk-prop-sf-biduality-general, the main-20261015 ancestor proof paragraph 2, possible duplicates (blunt-join-comparison, join-cone-calculus, join-cocone-associativity, cofinal-coslice-calculus) and the current citers. The statement is unchanged; it is generic quasicategory infrastructure with no coefficient category or base-change morphism. HTT 4.2.1 is not in literature (I checked LIST.md), so the WANTED line and proof_origin=agent are correct. Step 1: exponentiation with the empty map into L and with the boundary of the interval, then a pullback, makes P_a a quasicategory with an isofibration apex map; J_a comes from join-cocone-associativity. Step 2: both restrictions to Fun(L,E) are isofibrations; base change along the vertex a gives r_R; B_R is isomorphic to Fun(R,P_a) because products preserve the pushouts degreewise; r_R(F_e)=ce by naturality of c. Step 3: R x I -> R is a categorical equivalence (homotopy from the groupoid plus pointwise-equivalences plus the Joyal test); join preservation applies; I checked degreewise injectivity of B glued to B along L and that Fun_{f_A}(B,Q)=A_R, so the relative cylinder criterion applies, followed by currying, the invertible interval and triangle calculus. Step 4: the bijection on classes for R=P_a and R=J_a gives a quasi-inverse, strictly over E. Step 5: base change at a vertex T; the coherent fiber is U_D(a, constant T), which pinch-comparison makes Kan; J_a^op is the slice of E^op in the slice-right-fibration convention, its fibers are Kan by right-fibration-fibers, and horn reversal carries this back. Step 6: I checked that the collapse formula commutes with shape restriction and postcomposition; the left-fibration claims come from opposites. Step 7: initiality transfers through mapping-space equivalences and mapping-composition. Empty-L, empty-E and L a point in a nerve are consistent. proof_deps equals the union of uses, the 163-node closure has no cycle, there are no new nodes, and no SGA is used. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a generic black box. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.JoinSliceCoconeComparison",
+  "declaration": "SSet.Enhanced.join_slice_cocone_comparison",
+  "declarations": [
+   "SSet.Enhanced.joinCoconeStandardFunctor",
+   "SSet.Enhanced.JoinCoconeSimplex",
+   "SSet.Enhanced.joinCocone",
+   "SSet.Enhanced.joinCoconeProjection",
+   "SSet.Enhanced.bluntJoinCylinderIncl",
+   "SSet.Enhanced.IsJoinCoconeComparison",
+   "SSet.Enhanced.JoinCoconeComparisonNaturality",
+   "SSet.Enhanced.JoinCoconeFiberComparison",
+   "SSet.Enhanced.join_slice_cocone_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/JoinSliceCoconeComparison.lean",
+  "statement": "theorem join_slice_cocone_comparison : ∃ κ : ∀ L X : SSet.{u}, bluntJoin L X ⟶ orderedJoinFunctor.obj (L, X), (∀ L X : SSet.{u}, bluntJoinBaseIncl L X ≫ κ L X = orderedJoinInl L X) ∧ (∀ L X : SSet.{u}, pushout.inr _ (bluntJoinRightProjection L X) ≫ κ L X = orderedJoinInr L X) ∧ (∀ (L X : SSet.{u}) (n : SimplexCategory) (l : L.obj (op n)) (t : (Δ[1] : SSet.{u}).obj (op n)) (x : X.obj (op n)), (bluntJoinCylinderIncl L X ≫ κ L X).app (op n) ((l, t), x) = bluntSharpCylinderSimplex L X n l t x) ∧ ∃ c : ∀ {L E : SSet.{u}} (a : L ⟶ E), joinCocone a ⟶ coconeCategory a, (∀ (L E : SSet.{u}) (a : L ⟶ E), IsJoinCoconeComparison κ a (c a)) ∧ JoinCoconeComparisonNaturality c ∧ ∀ (L E : SSet.{u}) [Quasicategory E] (a : L ⟶ E), (∀ (n : SimplexCategory) (σ : (joinCoconeStandardFunctor L).obj n ⟶ E), orderedJoinInl L (stdSimplex.obj n) ≫ σ = a → ∃! s : JoinCoconeSimplex a n, s.extension = σ) ∧ Quasicategory (joinCocone a) ∧ Quasicategory (coconeCategory a) ∧ IsFunctorEquivalence (c a) ∧ c a ≫ calculusApex a false = joinCoconeProjection a ∧ (∀ T : E _⦋0⦌, JoinCoconeFiberComparison a (c a) T) ∧ (∀ s : (joinCocone a) _⦋0⦌, IsInitial (joinCocone a) s ↔ IsColimiting a ((c a).app _ s)) ∧ (∀ (n : ℕ) (i : Fin (n + 1)), 1 ≤ n → i.val < n → HasLiftingProperty (horn n i).ι (joinCoconeProjection a)) ∧ (∀ (n : ℕ) (i : Fin (n + 1)), 1 ≤ n → i.val < n → HasLiftingProperty (horn n i).ι (calculusApex a false))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The right-oriented sharp cocone slice and its structural helpers belong to this node. Reuses the existing ordered join, endpoint-pushout blunt join, coherent comma and pinch constructions. Second reading repaired the collapse parameter to be an actual map from the blunt join, with both pure-summand equations and the cylinder formula; IsJoinCoconeComparison uses its cylinder restriction. No extra categorical-equivalence clause is added for the collapse. All mathematical theorem proofs are postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c59d89463",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read the node, all 5 stmt_deps declarations (EnhancedDiagramsCones coconeCategory/comma/IsInitial/IsColimiting/mappingSpace/IsFunctorEquivalence; EnhancedFunctorConeCalculus calculusFiber/Apex/CommaArrow; BluntJoinComparison bluntJoin; BluntSharpJoinEquivalence bluntSharpCylinderSimplex; RightPinchComparison rightPinchPrism) and the full module. Every node clause is rendered, not weaker and not stronger: J_a with exact simplices (∃! clause); P_a = coconeCategory; collapse κ out of bluntJoin pinned by both pure summands and the cylinder formula (the second reading's repair is correct); c pinned by apex plus doubly uncurried arrow, with endpoints checked; quasicategories, IsFunctorEquivalence, strict over E; Kan strict fibers, induced cT pinned by ι, homotopy inverses; right-pinch map Map(a,Δ_L T) → fiber pinned in every degree; strict naturality in L and E; apex naturality as left-fibration lifting (HTT 4.2.1.6, as the source cites); initial iff colimiting. Only [Quasicategory E] assumed; single universe u, forced by the dependency interface; L=∅ and E=∅ cases checked. No duplicate notion (joinSlice is the opposite orientation; joinCoslice and firstVertexCoslice are vertex-only). The only theorem is proved by sorry, docstrings carry source/blueprint and all 7 steps, lean.statement is verbatim, and the four added stmt_deps are landed nodes already in proof_deps. nt_compile --json on the local overlay: rc=0, no errors or warnings; a deliberate-error control was reported."
  }
 }

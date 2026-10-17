@@ -83,5 +83,28 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs",
+  "declaration": "AlgebraicGeometry.Etale.BaseChangeProperty",
+  "declarations": [
+   "AlgebraicGeometry.Etale.BaseChangeProperty",
+   "AlgebraicGeometry.Etale.baseChangeHomologyMap",
+   "AlgebraicGeometry.Etale.UniversalBaseChangeProperty"
+  ],
+  "statement": "def Etale.BaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop",
+  "branch": "slopmaster2",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The published slopmaster2 module defines the degree-q base-change map and the recorded BC property exactly for a commutative coefficient ring, arbitrary scheme morphism p, qcqs g and Cartesian square. Its baseChangeHomologyMap is the degree-q homology of the derived base-change morphism on F in degree zero. UniversalBaseChangeProperty supplies the universal base-change clause; naturality and square compatibilities are documented/proved in the adjacent SmoothBaseChange modules. No new definition is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0b0fade8",
+  "group": "NC",
+  "result": "pass",
+  "note": "The only node change is the lean field (existing: true), binding BaseChangeProperty, baseChangeHomologyMap and UniversalBaseChangeProperty in WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs; the blueprint source front matter names these same declarations. The node statement is verbatim the main-20261015 source. Clause check: arbitrary p, any commutative ring Λ (u+1 size convention) with no invertibility assumption, q : ℤ, qcqs hypotheses on g only, IsPullback e h g p with correct orientation, any sheaf of Λ-modules on T_et, conclusion IsIso. baseChangeHomologyMap is degree-q homology of the canonical unit/pullback-exchange/counit Etale.baseChange (MorphismDefs) applied to F[0]. The universal clause is exact; the cumulative clause is the bounded ∀ r ≤ q over UniversalBaseChangeProperty, consistent with the landed split node sbc-def-base-change-property. Edge cases q ≤ 0, zero ring, empty schemes and identity base change are covered. lean.statement is verbatim Defs.lean line 199. Probe compile via lcompile.py: exit 0, signatures as recorded, axioms only propext/choice/Quot.sound. The report has real Worker and Second-reading sections. No new module, no sorry, no live write."
  }
 }
