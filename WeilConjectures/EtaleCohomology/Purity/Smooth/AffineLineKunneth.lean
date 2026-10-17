@@ -81,7 +81,7 @@ noncomputable def leftDerivedUpperStarEquivalenceOfIsIso :
       leftDerivedUpperStarComp _ (inv e) e (𝟙 Y) (by simp))
     ((leftDerivedUpperStarComp _ e (inv e) (𝟙 X) (by simp)).symm ≪≫ leftDerivedUpperStarId _ X)
 
-instance isEquivalence_leftDerivedUpperStar_of_isIso :
+instance isEquivalence_leftDerivedUpperStar_of_isIso_of_equivalence :
     L((e)^*[ModuleCat.{u + 1} Λ]).IsEquivalence :=
   (leftDerivedUpperStarEquivalenceOfIsIso Λ e).isEquivalence_functor
 
