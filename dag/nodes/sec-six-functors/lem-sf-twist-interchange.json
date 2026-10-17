@@ -3,46 +3,170 @@
  "blueprint": {
   "is": "lem-sf-twist-interchange",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Internal Hom with an invertible twist",
- "statement": "In the setting of [def-sf-datum], let $K$ be perfect over\n$\\Lambda_X$, let $M\\in D^b_{ctf}(X,\\Lambda)$ and $m\\in\\mathbf Z$. Then\n$\\Lambda(m)_X$ is invertible locally constant of rank one and the canonical\nmap\n$R\\mathcal H om_X(K,M\\otimes^L_{\\Lambda_X}\\Lambda(m)_X)\\to R\\mathcal H om_X(K,M)\\otimes^L_{\\Lambda_X}\\Lambda(m)_X$ is an\nisomorphism; in particular\n$R\\mathcal H om_X(K,\\Lambda_X(m)[n])\\cong K^\\vee(m)[n]$.",
+ "statement": "Let $p,\\ell$ be distinct primes and let $a,N\\geq1$ be integers. Put $q=p^a$, $k_0=\\mathbf F_q$ and $k=\\overline{\\mathbf F}_q$. Let $E/\\mathbf Q_\\ell$ be a finite extension with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, put $A_{E,N}=\\mathcal O_E/\\varpi_E^N$, and choose $\\Lambda\\in\\{A_{E,N},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Fix a six-functor datum [def-sf-datum] on separated finite-type $k$-schemes and let $X$ be a scheme in this datum. Let $K,M\\in D^b_{ctf}(X,\\Lambda)$, with $K$ perfect over its coefficient unit $\\Lambda_X$: locally on the coefficient site it is isomorphic to a bounded complex of finite projective $\\Lambda_X$-modules, as in [def-weil-site-perfect-complex]. Let $m,r\\in\\mathbf Z$. Use the coefficient operations of [def-weil-derived-pullback-tensor-hom] and put $K^\\vee=R\\mathcal Hom_X(K,\\Lambda_X)$. The twist $\\Lambda(m)_X$ is the object of [def-coefficient-twists-detailed]. It is invertible: at finite coefficients it is a locally constant rank-one sheaf; at integral coefficients it is a locally free rank-one module over the completed coefficient sheaf; at $E$ and $\\overline{\\mathbf Q}_\\ell$ it is the image of that integral line in the rationalized and common-finite-stage categories, respectively. The canonical map\n$$\nR\\mathcal Hom_X(K,M\\otimes^L_{\\Lambda_X}\\Lambda(m)_X)\\longrightarrow R\\mathcal Hom_X(K,M)\\otimes^L_{\\Lambda_X}\\Lambda(m)_X\n$$\nis an isomorphism. Here this arrow is the inverse of the evaluation comparison $c_{M,\\Lambda(m)_X}$, the tensor–Hom transpose of $\\mathrm{ev}\\otimes1$ in the opposite direction. In particular,\n$$\nR\\mathcal Hom_X(K,\\Lambda_X(m)[r])\\cong K^\\vee(m)[r].\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/lem-sf-twist-interchange.md",
   "place": "node lem-sf-twist-interchange, order 2176"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-sf-datum",
+  "def-weil-site-perfect-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed"
  ],
  "proof": [
   {
-   "text": "By [def-coefficient-twists-detailed] each $\\Lambda(m)_X$ is invertible locally\nconstant of rank one with\n$\\Lambda(m)_X\\otimes^L\\Lambda(-m)_X\\cong\\Lambda_X$, so\n$T_m=-\\otimes^L\\Lambda(m)_X$ is an exact autoequivalence with inverse\n$T_{-m}$. For an invertible $N$ the canonical map\n$c_{M,N}:R\\mathcal H om_X(K,M)\\otimes^LN\\to R\\mathcal H om_X(K,M\\otimes^LN)$,\nthe tensor–Hom transpose of $\\mathrm{ev}\\otimes1$, is an isomorphism\ndirectly: by the coherence of these maps,\n$c_{M\\otimes N,N^{-1}}\\circ(c_{M,N}\\otimes N^{-1})=c_{M,N\\otimes N^{-1}}$ is\nthe identity under $N\\otimes^LN^{-1}\\cong\\Lambda_X$, and symmetrically on\nthe other side, so $c_{M,N}$ has a two-sided inverse. No appeal to a\ngenerator is made: $\\Lambda_X$ does not generate $D^b_{ctf}(X,\\Lambda)$, so\nagreement of the two sides at $M=\\Lambda_X$ would prove nothing, and\n[lem-sf-generating-class-determination] is not used. For $K$ perfect the asserted map is the identification of\n[prop-sf-dualizable-hom] twisted by the invertible local system\n$\\Lambda(m)_X$, and one computes it locally with a bounded complex\nof finite projective modules, where the identification is termwise by\n[lem-sf-hom-finite-projective] with compatible differentials and\nindependent of the chosen resolutions; the coefficient dual and the derived\ninternal Hom are those of [prop-sf-dualizable] and\n[def-weil-derived-pullback-tensor-hom]. The last display is the case\n$M=\\Lambda_X$ together with the shift of the second variable.",
+   "text": "Put $L=\\Lambda(m)_X$ and write $\\otimes$ for the specified derived tensor. Apply [prop-weil-twist-preserves] with $S=X$. Its coefficient rings and twists are exactly those of [def-coefficient-twists-detailed], since $\\ell\\ne p$ is invertible on the schemes in [def-sf-datum]. It gives the finite rank-one locally constant line, the integral rank-one line over the completed coefficient sheaf, and the invertible images at the two field stages. It also gives the inverse twist $(-)(-m)$ and preservation of $D^b_{ctf}$ at every stage. The unit $\\Lambda_X$ is an object of $D^b_{ctf}(X,\\Lambda)$ and $\\Lambda_X(m)=\\Lambda_X\\otimes^L L\\cong L$ by the unit isomorphism of the tensor of sheaf complexes, so $L$ and every $M(m)$ lie in $D^b_{ctf}(X,\\Lambda)$. At finite coefficients the specified tensor of [def-weil-derived-pullback-tensor-hom] is the derived tensor used in [def-coefficient-twists-detailed], so $M\\otimes L=M(m)$. At integral coefficients the specified tensor is the completed tensor $\\widehat\\otimes$, whereas the twist $M(m)=M\\otimes^L_{\\widehat{\\mathcal O}_{E,X}}L$ is the ordinary ambient tensor of the ringed site. Since $X$ is separated of finite type over $k$, it is quasi-compact and quasi-separated, and $M,L\\in D^b_c(X,\\mathcal O_E)$; hence [lem-fix-constructible-tensor-completion] gives the canonical natural isomorphism $\\chi_{M,L}:M(m)\\xrightarrow{\\sim}M\\mathbin{\\widehat\\otimes}L$. At $E$ and $\\overline{\\mathbf Q}_\\ell$ both the operations and the twists are formed on integral representatives, so the same comparison applies. Thus $M\\otimes L\\cong M(m)$ lies in the required coefficient category, and the twist autoequivalence is the specified one, not tensoring with a discrete constant integral or rational sheaf.",
    "uses": [
+    "prop-weil-twist-preserves",
     "def-coefficient-twists-detailed",
+    "def-sf-datum",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/lem-sf-twist-interchange.proof.md",
+    "place": "First sentence: coefficient twists are invertible lines; use the existing twist-preservation theorem for the precise coefficient-dependent assertion."
+   }
+  },
+  {
+   "text": "The perfect object $K$ in the coefficient category of the datum satisfies the local bounded finite-projective hypothesis of [prop-sf-dualizable-hom], by [def-weil-site-perfect-complex]. All operations are those of [def-weil-derived-pullback-tensor-hom], including completed integral tensor and the field-stage conventions. For $Q=M$ and $Q=M\\otimes L$, the latter being in $D^b_{ctf}$ by step 1, that proposition gives the canonical evaluation isomorphisms $a_Q:K^\\vee\\otimes Q\\xrightarrow{\\sim}R\\mathcal Hom_X(K,Q)$. Consequently the composite\n$$\nb=(a_M\\otimes1_L)\\circ\\alpha^{-1}\\circ a_{M\\otimes L}^{-1}:R\\mathcal Hom_X(K,M\\otimes L)\\xrightarrow{\\sim}R\\mathcal Hom_X(K,M)\\otimes L\n$$\nis an isomorphism, where $\\alpha:(K^\\vee\\otimes M)\\otimes L\\xrightarrow{\\sim}K^\\vee\\otimes(M\\otimes L)$ is tensor reassociation. This is precisely the perfect-duality route in the last part of the blueprint proof.",
+   "uses": [
     "prop-sf-dualizable-hom",
-    "lem-sf-hom-finite-projective",
-    "prop-sf-dualizable",
+    "def-weil-site-perfect-complex",
     "def-weil-derived-pullback-tensor-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/lem-sf-twist-interchange.proof.md",
+    "place": "Sentence beginning For K perfect: apply the coefficient-dual tensor comparison twice and reassociate."
+   }
+  },
+  {
+   "text": "It remains to identify $b$ with the displayed canonical arrow. Let $c_{M,L}:R\\mathcal Hom_X(K,M)\\otimes L\\to R\\mathcal Hom_X(K,M\\otimes L)$ be the transpose of $\\mathrm{ev}\\otimes1_L$. The canonical evaluation comparisons of [prop-sf-dualizable-hom] satisfy\n$$\nc_{M,L}\\circ(a_M\\otimes1_L)=a_{M\\otimes L}\\circ\\alpha.\n$$\nIndeed, after tensoring with $K$ and evaluating, both sides contract the same factors $K^\\vee\\otimes K\\to\\Lambda_X$ and leave $M\\otimes L$ unchanged; the associators and symmetry only put these factors in this order. This checks equality by the definition of the tensor–Hom transpose, with the same Koszul symmetry on both sides. At integral coefficients the comparison $\\chi$ of [lem-fix-constructible-tensor-completion] identifies the completed tensor on these objects with the ordinary tensor of the ringed site, so the transposes are the ordinary tensor–Hom transposes there; at the field stages the same identities hold after scalar localization and passage to a common stage. Since both $a$ maps and $\\alpha$ are invertible, the equation gives $c_{M,L}=b^{-1}$. Therefore the canonical arrow in the statement, its inverse, is the isomorphism $b$. No generator argument or identification with a small-etale abstract Tate object is used.",
+   "uses": [
+    "prop-sf-dualizable-hom",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/lem-sf-twist-interchange.proof.md",
+    "place": "Definition of c as transpose of evaluation, and the final perfect-duality sentence: identify the two canonical maps explicitly."
+   }
+  },
+  {
+   "text": "For the last assertion note $\\Lambda_X(m)[r]\\cong L[r]$ by step 1 and take $Q=L[r]$ in [prop-sf-dualizable-hom]; the line and its shift are in $D^b_{ctf}$ by step 1 and the triangulated-category convention in [def-weil-finite-tor-amplitude]. This gives $R\\mathcal Hom_X(K,L[r])\\cong K^\\vee\\otimes L[r]$. Tensor with a shifted second factor identifies the latter with $(K^\\vee\\otimes L)[r]$. At finite coefficients, let $P$ be a K-flat representative of $K^\\vee$ as used to compute the derived tensor in [def-weil-derived-pullback-tensor-hom], and regard $L$ as the degree-zero line. With the total-tensor differential of [def-pc-tensor-complex-sheaves] and the convention $d_{C[r]}=(-1)^r d_C$, this chain identification multiplies the summand $P^i\\otimes L$ by $(-1)^{ri}$: the target differential on that summand is $(-1)^r d_P$, so $(-1)^{r(i+1)}d_P=(-1)^r d_P(-1)^{ri}$. It is its own inverse. At integral coefficients the same formula is compatible with all finite reductions in [def-weil-derived-pullback-tensor-hom]; the shifted-cone limit construction commutes with the fixed shift and these maps. More explicitly, products commute with the shift by reindexing degrees, and with the convention $\\operatorname{Cone}(f)=B\\oplus A[1]$ the map $\\operatorname{Cone}(f[r])\\to\\operatorname{Cone}(f)[r]$ is $(b,a)\\mapsto(b,(-1)^r a)$; substituting in the cone differential checks the chain-map identity. Applying the outer shift $[-1]$ gives the comparison for the specified derived-limit complex. Rationalizing and representing at a common finite field preserves these isomorphisms. Finally $(K^\\vee\\otimes L)[r]\\cong K^\\vee(m)[r]$. At finite coefficients this is the definition in [def-coefficient-twists-detailed]. At integral coefficients, and hence on the integral representatives used at the field stages, it is the inverse of the comparison $\\chi_{K^\\vee,L}$ of [lem-fix-constructible-tensor-completion], applied to $K^\\vee=R\\mathcal Hom_X(K,\\Lambda_X)$ as the object of $D^b_c(X,\\mathcal O_E)$ on which the completed tensor of [prop-sf-dualizable-hom] is formed for $Q=\\Lambda_X$ (the displayed integral operations are taken on $D^b_c$), and to $L\\in D^b_c(X,\\mathcal O_E)$ from step 1; the twist itself is the ordinary tensor of [def-coefficient-twists-detailed].",
+   "uses": [
+    "prop-sf-dualizable-hom",
+    "def-weil-finite-tor-amplitude",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-coefficient-twists-detailed",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/lem-sf-twist-interchange.proof.md",
+    "place": "Last sentence: the coefficient-dual case, with the shift and its chain sign written explicitly."
+   }
   }
  ],
  "proof_deps": [
+  "prop-weil-twist-preserves",
   "def-coefficient-twists-detailed",
+  "def-sf-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-fix-constructible-tensor-completion",
   "prop-sf-dualizable-hom",
-  "lem-sf-hom-finite-projective",
-  "prop-sf-dualizable",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-site-perfect-complex",
+  "def-weil-finite-tor-amplitude",
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/lem-sf-twist-interchange.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/lem-sf-twist-interchange.proof.md",
+  "place": "Perfect-duality paragraph and last sentence, expanded using the existing twist-preservation and coefficient-dual evaluation statements."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ihomTensorToIhom|TateTwist|tateObject|IsInvertible",
+   "results": "0 hits: none; directory CategoryTheory/Monoidal",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states the pro-etale coefficient twist and all clauses of this item; abstract internal-Hom and underived condensed results are only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom with a perfect complex commutes with Tate twist on a pro-etale site",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, HomotopyCategory.instCommShiftIntUpMapHomotopyCategory, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, CategoryTheory.Abelian.Ext.homEquiv, HomotopyCategory.instCommShiftHomologicalComplexIntUpHomFunctorMapHomotopyCategoryFactors, LightCondensed.ihomPoints",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states the pro-etale coefficient twist and all clauses of this item; abstract internal-Hom and underived condensed results are only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, IsInvertible",
+   "results": "0 hits: none; loogle: unknown identifier 'IsInvertible'",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states the pro-etale coefficient twist and all clauses of this item; abstract internal-Hom and underived condensed results are only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect complex on the pro-etale site with l-adic coefficients derived internal Hom commutes with tensoring by a rank one Tate twist",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.ihomPoints",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states the pro-etale coefficient twist and all clauses of this item; abstract internal-Hom and underived condensed results are only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "ihomObjIsoTensor|ihom.*[Tt]ensor|[Tt]ensor.*ihom",
+   "results": "10 hits: Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean; directory CategoryTheory/Monoidal",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states the pro-etale coefficient twist and all clauses of this item; abstract internal-Hom and underived condensed results are only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.ihom",
+   "results": "0 hits: none; loogle: unknown identifier 'CategoryTheory.MonoidalClosed.ihom'",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states the pro-etale coefficient twist and all clauses of this item; abstract internal-Hom and underived condensed results are only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal category the internal Hom from a dualizable object is tensoring with its dual and therefore commutes with tensor products",
+   "results": "8 hits: CategoryTheory.ihom.ev_coev, CategoryTheory.exp.ev_coev, CategoryTheory.closedOfHasLeftDual, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.ihom.ev_coev_assoc, CategoryTheory.exp.ev_coev_assoc, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states the pro-etale coefficient twist and all clauses of this item; abstract internal-Hom and underived condensed results are only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom",
+   "results": "12 hits: CategoryTheory.ihom, CategoryTheory.ihom.instIsRightAdjoint, CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.id, CategoryTheory.MonoidalClosed.unitIsoSelf, CategoryTheory.MonoidalClosed.unitNatIso, CategoryTheory.MonoidalClosed.curry', CategoryTheory.MonoidalClosed.uncurry'",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states the pro-etale coefficient twist and all clauses of this item; abstract internal-Hom and underived condensed results are only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "def closedOfHasLeftDual|theorem tensorRightHomEquiv_tensor|theorem tensorLeftHomEquiv_tensor",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:486 closedOfHasLeftDual, :492 tensorLeftHomEquiv_tensor, :500 tensorRightHomEquiv_tensor. Read lines 470-512: abstract dual closed structure and compatibility of adjunction bijections with tensor maps.",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract monoidal ingredients do not supply the pro-etale Tate objects or all coefficient clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring by an invertible object in a closed monoidal category commutes with internal Hom from a dualizable object",
+   "results": "8 hits: CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation, CategoryTheory.tensorLeftHomEquiv_tensor",
+   "date": "2026-10-17",
+   "verdict": "no match: these abstract rigid-category Hom equivalences do not state the constructed coefficient twists, the completed integral operations, or the full item."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -81,5 +205,34 @@
   }
  ],
  "chapter": "sec-six-functors",
- "unit": "sk-lem-sf-twist-interchange"
+ "unit": "sk-lem-sf-twist-interchange",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-twist-interchange",
+  "worker": "stage1",
+  "summary": "Q38 split into four steps with no new nodes. Reused the existing coefficient-twist preservation theorem and perfect coefficient-dual evaluation comparison, checked their full coefficient domains, identified the canonical arrow by its transpose, and computed the shift sign. STATEMENT-DISPUTED: unqualified locally constant rank-one wording is not the literal completed integral or rational/common-stage sheaf convention. The statement now spells out exactly the coefficient-dependent line assertion already established by prop-weil-twist-preserves, binds the shift integer independently of the coefficient exponent, and specifies the direction of the canonical arrow. The rejected abstract small-etale Tate attachment is not used. Server preflight B2 repair: spelled out the datum parameters, scheme and coefficient-category domains instead of the inherited opening In the setting of.",
+  "blueprint": "The first invertible-twist sentence is realized by step 1; the For K perfect sentence and its coefficient-dual identification are steps 2-3; the last shift sentence is step 4. This is the perfect-duality argument explicitly offered in both master and main-20261015, without the optional generator discussion. The more general sk-lem-sf-twist-interchange is not identical to this concrete coefficient lemma and is not used as a replacement.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-twist-preserves",
+    "why": "Generic coefficient-line and twist-preservation theorem for the exact detailed coefficient objects used here; supplies the theorem incorrectly attributed to a definition in the imported proof."
+   },
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Generic integral coefficient comparison (ordinary ambient tensor = completed tensor on D^b_c of a qcqs scheme); needed because the twist K(m) of def-coefficient-twists-detailed is the ordinary tensor while the datum operations use the completed tensor; no node of this unit's route states it. Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-twist-preserves",
+  "lem-fix-constructible-tensor-completion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-4df4fb7bf",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-4df4fb7bf (reviewer sub-agent of L); spot-checked: I read the full mathematics against master and main-20261015 and every cited statement. The statement is not weakened. It spells out the six-functor datum's parameters, keeps K perfect in D^b_ctf (the same domain as prop-sf-dualizable-hom), and states the line clause in its exact form for each coefficient stage: locally free rank one over the completed sheaf at integral level, which matches def-coefficient-twists-detailed and prop-weil-twist-preserves. It names the arrow as c^{-1}, as in the main-20261015 unit proof. Steps 2-3: prop-sf-dualizable-hom applies to Q=M and Q=M(x)L. The identity c(a_M(x)1)=a_{M(x)L}alpha is a closed-monoidal coherence, so marking it elementary is acceptable. Step 4: I checked the sign (-1)^{ri} and the cone map (b,a)->(b,(-1)^r a). I tested m=0, m<0, r=0, r<0, K=0, M=0 and X empty. There are no new nodes and no duplicates; the imported general sk-lem-sf-twist-interchange node is in a different, unbridged category. Fault repaired (C1/C4): at integral level, step 1 treats M(x)L=M(m) and step 4 treats K^vee(x)L[r]=K^vee(m)[r] as holding by definition. But the datum's tensor is the completed derived-limit tensor, while the twist is the ordinary ringed-site tensor over the completed sheaf. The existing reviewed lem-fix-constructible-tensor-completion supplies the isomorphism chi: X is qcqs and M, L are in D^b_c. I cited it in steps 1, 3 and 4, added the unit identification Lambda_X(m)=L, and updated proof_deps. Accepted tool_uses: prop-weil-twist-preserves (declared by the worker) and lem-fix-constructible-tensor-completion (added by me in split_report.tool_uses); neither reaches the item, so there is no cycle. The unit's realized fields are correct. Remark, not counted against this item: membership of K^vee and RHom(K,M) in integral D^b_c is taken for granted, as in the reviewed prop-sf-dualizable-hom.; 1 file(s) fixed by the reviewer"
+ }
 }
