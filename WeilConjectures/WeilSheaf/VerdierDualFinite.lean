@@ -156,6 +156,7 @@ variable {Z : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z]
+  [HasVerdierDual k₀ l Z]
 
 open Pretriangulated.Opposite
 
@@ -281,7 +282,7 @@ theorem isLE_verdierDual_of_isGE (K : WeilComplex k₀ l Z) (n : ℤ)
 
 
 omit [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
-  [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] in
+  [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] [HasVerdierDual k₀ l Z] in
 lemma isZero_homologyFunctor_of_isGE (K : WeilComplex k₀ l Z) (n i : ℤ) (hi : i < n)
     (h : (tStructure k₀ l Z).IsGE K n) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj K.obj) :=
@@ -289,7 +290,7 @@ lemma isZero_homologyFunctor_of_isGE (K : WeilComplex k₀ l Z) (n i : ℤ) (hi 
   _root_.DerivedCategory.isZero_of_isGE _ n i hi
 
 omit [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
-  [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] in
+  [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] [HasVerdierDual k₀ l Z] in
 lemma isZero_homologyFunctor_of_isLE (K : WeilComplex k₀ l Z) (n i : ℤ) (hi : n < i)
     (h : (tStructure k₀ l Z).IsLE K n) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj K.obj) :=
