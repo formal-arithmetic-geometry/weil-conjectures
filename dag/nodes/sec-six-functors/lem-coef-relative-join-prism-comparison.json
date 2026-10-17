@@ -10,9 +10,98 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $0\\leq i\\leq m$, let $E_i$ be $D$ together with all simplices whose $B$-block coordinates are $<i$. This is already a simplicial subset: restriction cannot introduce a new $B$-coordinate and repetition preserves the inequality; pure $K$-simplices satisfy it vacuously and already belong to $(A\\star K)\\times\\Delta^m\\subseteq D$. Thus $E_0=D$ and $E_m=Z$. When $m=0$, these are the same set and the first assertion is an identity. Below take $i<m$, so $d=m-i\\geq1$, and put\n$$P_i=B\\times\\Delta^{\\{0,\\ldots,i\\}},\\quad L_i=(A\\times\\Delta^{\\{0,\\ldots,i\\}})\\cup(B\\times\\partial\\Delta^{\\{0,\\ldots,i\\}}),$$\n$$Q_i=K\\times\\Delta^{\\{i,\\ldots,m\\}},\\qquad H_i=K\\times\\Lambda^{\\{i,\\ldots,m\\}}_0.$$\nThe horn in this formula omits the face opposite the first vertex $i$: a simplex belongs to it precisely when it misses some vertex strictly greater than $i$. All these products and inclusions are degreewise as in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.9, (B1 prime) and (C2 prime), printed pp.1478-1480: threshold filtration; notation adapted to arbitrary A contained in B."
+   }
+  },
+  {
+   "text": "Concatenate the two blocks to define $\\psi_i:P_i\\star Q_i\\to T$: retain the coordinates in $\\{0,\\ldots,i\\}$ on the leading block and those in $\\{i,\\ldots,m\\}$ on the final block. The concatenation is monotone, commutes with operators, and is injective, since a join simplex has a unique block split and restrictions recover both coordinates. Its image lies in $E_{i+1}$. Conversely, a simplex in $E_{i+1}\\setminus E_i$ has a nonempty $B$-block with largest coordinate exactly $i$; monotonicity makes its $K$-block coordinates at least $i$. It therefore lies in this image. Pure $K$-simplices are already in $D$; the same recovery formula handles pure $B$-simplices. Hence $E_{i+1}=E_i\\cup\\operatorname{im}\\psi_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.9, same two cases: the join map for each threshold; explicit degreewise coverage."
+   }
+  },
+  {
+   "text": "Inside $P_i\\star Q_i$, set $C_i=(L_i\\star Q_i)\\cup(P_i\\star H_i)$. We show $\\psi_i^{-1}(E_i)=C_i$. Pure $K$-simplices lie in $D$ and in $L_i\\star Q_i$; pure $B$-simplices lie in $D$ because $i<m$, and in $P_i\\star H_i$. For a mixed simplex, membership of the leading block in $A\\times\\Delta^i$ gives membership in $D$. If its leading coordinate misses $a<i$, then no final coordinate can supply $a$, so the whole simplex belongs to the boundary part of $D$. If its leading coordinate misses $i$, it is already in $E_i$. These give $L_i\\star Q_i\\subseteq\\psi_i^{-1}(E_i)$. If the final coordinate misses $a>i$, the leading block cannot supply $a$, giving $P_i\\star H_i\\subseteq\\psi_i^{-1}(E_i)$. Conversely, outside $C_i$ the leading block is outside $A$, covers every $0,\\ldots,i$, and the final block covers every $i+1,\\ldots,m$. Thus the total coordinate is surjective and the largest leading coordinate is $i$, so it lies outside $E_i$. This proves the equality. Consequently $E_i\\hookrightarrow E_{i+1}$ is a pushout of $C_i\\hookrightarrow P_i\\star Q_i$: glue maps on the two degreewise subsets along this intersection; the glued map commutes with operators and is unique because the subsets cover.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.9, (B1 prime)/(C2 prime): explicit old-stage inverse image; direct gluing proves the pushout for general A, B."
+   }
+  },
+  {
+   "text": "To use the existing right-anodyne results in the required orientation, write $X^{\\mathrm{op}}$ for the simplicial set with the same sets of simplices as $X$ and with the operator for $\\alpha:[r]\\to[s]$ given by the old operator for $\\bar\\alpha(j)=s-\\alpha(r-j)$. The identity $\\overline{\\beta\\alpha}=\\bar\\beta\\bar\\alpha$ makes this an involution. It preserves degreewise products, inclusions, pushouts and continuous transfinite composites, as well as retract diagrams. Reversing a simplex's vertex labels gives $(\\Delta^n)^{\\mathrm{op}}\\cong\\Delta^n$ and $(\\Lambda_j^n)^{\\mathrm{op}}\\cong\\Lambda_{n-j}^n$, using the horn formula of [def-cbc-enhanced-diagrams-cones]. Reversing the two ordered join blocks gives $(X\\star Y)^{\\mathrm{op}}\\cong Y^{\\mathrm{op}}\\star X^{\\mathrm{op}}$: in each mixed summand interchange its two entries and reverse the vertex labels of the indexing blocks. These formulas commute with restriction. In particular taking opposites preserves the weakly saturated inner-horn class, since $0<j<n$ implies $0<n-j<n$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.9, application of HTT 2.1.2.3 and 2.1.2.7; explicit order reversal to reuse the existing right-anodyne nodes."
+   }
+  },
+  {
+   "text": "Identify $\\Delta^{\\{i,\\ldots,m\\}}$ with $\\Delta^d$. By step 4, $(H_i\\hookrightarrow Q_i)^{\\mathrm{op}}$ is the product of $K^{\\mathrm{op}}$ with $\\Lambda_d^d\\hookrightarrow\\Delta^d$. The latter is one of the right-horn generators, since $d\\geq1$ and $0<d\\leq d$. Apply [lem-coef-infinity-right-anodyne-product] to that generator and the degreewise injection $\\varnothing\\hookrightarrow K^{\\mathrm{op}}$, exchanging the two product coordinates. Its pushout-product is exactly $H_i^{\\mathrm{op}}\\hookrightarrow Q_i^{\\mathrm{op}}$, so this inclusion is right anodyne. No fibrancy or nonemptiness of $K$ is needed.",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.9, intermediate stages: K times the initial horn is left anodyne (HTT Corollary 2.1.2.7), here obtained by opposite right products."
+   }
+  },
+  {
+   "text": "Use the first assertion of [lem-coef-infinity-anodyne-cocones], with its right-anodyne inclusion $A\\hookrightarrow B$ equal to $H_i^{\\mathrm{op}}\\hookrightarrow Q_i^{\\mathrm{op}}$, and its arbitrary monomorphism $K\\hookrightarrow L$ equal to $L_i^{\\mathrm{op}}\\hookrightarrow P_i^{\\mathrm{op}}$. It says that\n$$(H_i^{\\mathrm{op}}\\star P_i^{\\mathrm{op}})\\cup(Q_i^{\\mathrm{op}}\\star L_i^{\\mathrm{op}})\\hookrightarrow Q_i^{\\mathrm{op}}\\star P_i^{\\mathrm{op}}$$\nis in the weakly saturated inner-horn class. Taking opposites as in step 4 identifies it with $C_i\\hookrightarrow P_i\\star Q_i$, which is therefore in that class too. Step 3 makes $E_i\\hookrightarrow E_{i+1}$ its pushout, so it is inner anodyne. Their finite composite for $i=0,\\ldots,m-1$ is $D\\hookrightarrow Z$, proving the first assertion. All objects stay small in the original universe.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.9, intermediate join attachments in (B1 prime)/(C2 prime); HTT Lemma 2.1.2.3 with the second factor left anodyne."
+   }
+  },
+  {
+   "text": "The final join map is $\\phi:(B\\times\\Delta^m)\\star K\\to T$. In degree $r$, retain the leading block's product coordinates and put coordinate $m$ on every final-block vertex. This is monotone and commutes with restrictions, and recovering the unique join split recovers the leading product simplex and the final $K$-simplex, so it is injective. If a simplex of $T$ is outside $Z$, its $B$-block is nonempty and contains a coordinate $m$. Every later $K$-coordinate is then $m$ by monotonicity, so the simplex lies in $\\operatorname{im}\\phi$. Thus $T=Z\\cup\\operatorname{im}\\phi$. This also proves coverage when $m=0$, since $Z=D=A\\star K$ and $\\phi$ is then an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.9, final join attachment (i=m) of the same two cases: canonical map and coverage."
+   }
+  },
+  {
+   "text": "Put $R=(A\\times\\Delta^m)\\cup(B\\times\\partial\\Delta^m)$. We have $\\phi^{-1}(Z)=R\\star K$. For a mixed simplex in the source, its final coordinates are all $m$. If its leading block belongs to $A$, its image lies in $D$. If its leading coordinate misses $a<m$, the whole coordinate misses $a$, again giving $D$. If the leading coordinate misses $m$, all its leading coordinates are $<m$, giving $Z$. Conversely, a leading block outside $R$ is outside $A$ and covers $0,\\ldots,m$; its image is outside $D$ and has a leading vertex at $m$, so is outside $Z$. Pure $K$-simplices lie on both sides, and for pure $B$-simplices membership in $Z$ is exactly membership in $R$: having all coordinates $<m$ already puts them in the boundary. This proves the inverse-image equality, including $m=0$. Since $\\phi$ is injective, maps on $Z$ and its image agree precisely when their restrictions to $R\\star K$ agree. Glue them in each degree; the rules agree on the intersection and commute with every operator, giving the unique map on $T$. This is the required pushout and proves that its canonical map to $T$ is an isomorphism. Empty factors and $A=B$ satisfy these same degreewise tests.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.9, final join attachment: explicit intersection and universal property for arbitrary A contained in B."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-infinity-anodyne-cocones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "HA Proposition B.1.9, cases (B1 prime) and (C2 prime), printed pp.1478-1480, read online 2026-10-17. Explicit relative threshold filtration for arbitrary A contained in B, old-stage intersection and final pushout; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +138,75 @@
    "results": "{\"t\": \"2026-10-17T04:20:46Z\", \"tool\": \"leansearch\", \"query\": \"Relative join product prism inner anodyne filtration of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.J\", \"SSet.RelativeMorphism.recOn\", \"SSet.Quasicategory.mk\", \"SSet.modelCategoryQuillen.I\", \"SSet.RelativeMorphism.comp\", \"SSet.RelativeMorphism\"], \"digest\": \"0ca095f28e963f8e\"}",
    "date": "2026-10-17",
    "verdict": "no match: read all hits; product-of-subcomplex coverage, bicartesian unions, unmarked horn interfaces, and ordinary relative morphisms do not give this specified inner-anodyne comparison or its final join pushout. The grep hits for join are mostly occurrences of adjoint/jointly, not a simplicial join construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For small simplicial sets A contained in B and K, the product of the ordered join B star K with Delta m has a relative inner horn filtration after excluding pure K simplices, and the remaining cells form a join pushout",
+   "results": "{\"t\": \"2026-10-17T05:28:18Z\", \"tool\": \"leanfinder\", \"query\": \"For small simplicial sets A contained in B and K, the product of the ordered join B star K with Delta m has a relative inner horn filtration after excluding pure K simplices, and the remaining cells form a join pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₂.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn₂₀.isPushout\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn.isColimit\", \"SSet.Subcomplex.BicartSq\", \"SSet.horn.multicoequalizerDiagram\"], \"digest\": \"f9047c66d4ec3f96\"}",
+   "date": "2026-10-17",
+   "verdict": "Exploratory query based on an incorrect concern about pure K simplices; pure K is already in D. Returned horn primitives do not state the item. This query is retained honestly and superseded by the threshold-filtration queries."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet innerAnodyne join product prism",
+   "results": "{\"t\": \"2026-10-17T05:28:19Z\", \"tool\": \"loogle\", \"query\": \"SSet innerAnodyne join product prism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  SSet\\nbut this term has type\\n  Type (?u.1 + 1)\\n\\nNote: Expected a function because this term is being applied to the argument\\n  innerAnodyne\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Invalid Loogle pattern: parser/type error returned, not evidence of absence. Replaced by the separately logged quoted-name query."
+  },
+  {
+   "tool": "grep",
+   "query": "join.*prod|inner.*horn.*join",
+   "results": "{\"t\": \"2026-10-17T05:28:19Z\", \"tool\": \"grep\", \"query\": \"join.*prod|inner.*horn.*join\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match or one-line specialization. Read returned signatures and Mathlib ProdStdSimplex.lean:38-110, SubcomplexColimits.lean:84-100, HornColimits.lean:54-130, FiniteProd.lean:32-50 and SimplicialNerve.lean:54-120. Product coordinates, individual horn pushouts, subcomplex gluing and realization data do not give the threshold join filtration and specified final join pushout. Grep occurrences of join are adjoint/jointly or disjoint.",
+   "directory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative join prism inner horn filtration excluding pure final factor simplices",
+   "results": "{\"t\": \"2026-10-17T05:28:19Z\", \"tool\": \"leansearch\", \"query\": \"Relative join prism inner horn filtration excluding pure final factor simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.ι_ι_assoc\", \"SSet.horn.faceι_ι\", \"SSet.horn_obj\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.horn\", \"SSet.horn_eq_iSup\", \"SimplexCategoryGenRel.exists_P_σ_P_δ_factorization\", \"SSet.horn.faceι_ι_assoc\"], \"digest\": \"ff799514ceab6783\"}",
+   "date": "2026-10-17",
+   "verdict": "Exploratory query based on an incorrect concern about pure K simplices; pure K is already in D. Returned horn primitives do not state the item. This query is retained honestly and superseded by the threshold-filtration queries."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative prism filtration of the product of an ordered simplicial join B star K with Delta m by the largest coordinate of the B block",
+   "results": "{\"t\": \"2026-10-17T05:38:28Z\", \"tool\": \"leanfinder\", \"query\": \"Relative prism filtration of the product of an ordered simplicial join B star K with Delta m by the largest coordinate of the B block\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"SSet.prodStdSimplex.orderHomOfSimplex\", \"StdSimplex.join\", \"SSet.prodStdSimplex.orderHomOfSimplex_coe\", \"SSet.horn\", \"SimplicialObject.Splitting.summand\", \"SSet.prodStdSimplex.strictMono_orderHomOfSimplex_iff\", \"SSet.iSup_subcomplexOfSimplex_prod_eq_top\"], \"digest\": \"e080f847571c2f87\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match or one-line specialization. Read returned signatures and Mathlib ProdStdSimplex.lean:38-110, SubcomplexColimits.lean:84-100, HornColimits.lean:54-130, FiniteProd.lean:32-50 and SimplicialNerve.lean:54-120. Product coordinates, individual horn pushouts, subcomplex gluing and realization data do not give the threshold join filtration and specified final join pushout. Grep occurrences of join are adjoint/jointly or disjoint."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial join times a simplex is the pushout of an inner anodyne initial subcomplex and the join of the first factor times the simplex with the second factor",
+   "results": "{\"t\": \"2026-10-17T05:38:30Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial join times a simplex is the pushout of an inner anodyne initial subcomplex and the join of the first factor times the simplex with the second factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₂.isPushout\", \"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.Subcomplex.BicartSq\", \"SSet.iSup_subcomplexOfSimplex_prod_eq_top\", \"SSet.ι₁\", \"SSet.Subcomplex.ofSimplexProd_eq_range\"], \"digest\": \"82151bb8ba6dd054\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match or one-line specialization. Read returned signatures and Mathlib ProdStdSimplex.lean:38-110, SubcomplexColimits.lean:84-100, HornColimits.lean:54-130, FiniteProd.lean:32-50 and SimplicialNerve.lean:54-120. Product coordinates, individual horn pushouts, subcomplex gluing and realization data do not give the threshold join filtration and specified final join pushout. Grep occurrences of join are adjoint/jointly or disjoint."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"innerAnodyne\", \"join\"",
+   "results": "{\"t\": \"2026-10-17T05:38:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"innerAnodyne\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match or one-line specialization. Read returned signatures and Mathlib ProdStdSimplex.lean:38-110, SubcomplexColimits.lean:84-100, HornColimits.lean:54-130, FiniteProd.lean:32-50 and SimplicialNerve.lean:54-120. Product coordinates, individual horn pushouts, subcomplex gluing and realization data do not give the threshold join filtration and specified final join pushout. Grep occurrences of join are adjoint/jointly or disjoint."
+  },
+  {
+   "tool": "grep",
+   "query": "[Jj]oin|[Pp]rism|[Ss]huffle",
+   "results": "{\"t\": \"2026-10-17T05:38:30Z\", \"tool\": \"grep\", \"query\": \"[Jj]oin|[Pp]rism|[Ss]huffle\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\"], \"digest\": \"a7ee68d0a5318e12\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match or one-line specialization. Read returned signatures and Mathlib ProdStdSimplex.lean:38-110, SubcomplexColimits.lean:84-100, HornColimits.lean:54-130, FiniteProd.lean:32-50 and SimplicialNerve.lean:54-120. Product coordinates, individual horn pushouts, subcomplex gluing and realization data do not give the threshold join filtration and specified final join pushout. Grep occurrences of join are adjoint/jointly or disjoint.",
+   "directory": "AlgebraicTopology/SimplicialSet"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative filtration of a simplicial join times Delta m by inner anodyne join pushout attachments",
+   "results": "{\"t\": \"2026-10-17T05:38:31Z\", \"tool\": \"leansearch\", \"query\": \"Relative filtration of a simplicial join times Delta m by inner anodyne join pushout attachments\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism\", \"IsFiltration.rec\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"IsFiltration.F_lt_le_F\", \"SSet.RelativeMorphism.comp\", \"IsFiltration.casesOn\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"IsFiltration.recOn\"], \"digest\": \"ae56bfd6ec59e45c\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match or one-line specialization. Read returned signatures and Mathlib ProdStdSimplex.lean:38-110, SubcomplexColimits.lean:84-100, HornColimits.lean:54-130, FiniteProd.lean:32-50 and SimplicialNerve.lean:54-120. Product coordinates, individual horn pushouts, subcomplex gluing and realization data do not give the threshold join filtration and specified final join pushout. Grep occurrences of join are adjoint/jointly or disjoint."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pattern-generator-product-cells",
@@ -81,5 +235,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-join-prism-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eight steps give the finite threshold filtration, each exact join-cell intersection, inner-anodyneness using the opposite forms of existing right-product and right-join statements, and the final canonical injection and pushout. No new nodes, no new Mathlib leaves. The proof avoids an unproved nondegenerate-shuffle assertion.",
+  "blueprint": "The inherited proof paragraph 2 finite-coefficient mapping-complex adjunction in prop-coef-integral-exceptional-adjoint uses HA B.1.9 via pattern-generator-product-cells. Steps 1-6 realize the inner threshold stages of the (B1 prime)/(C2 prime) cases; steps 7-8 realize the i=m final join attachment. Same ancestry and unit retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-1dff4e09d",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-1dff4e09d (reviewer sub-agent of L); spot-checked: Read the full item (statement and 8 steps), the full statements of def-cbc-enhanced-diagrams-cones, lem-coef-infinity-right-anodyne-product and lem-coef-infinity-anodyne-cocones, step 11 of the parent pattern-generator-product-cells, and the unit sk-prop-sf-biduality-general. Source: HA B.1.9 is not in literature/; it is recorded as WANTED, and the proof is marked as agent-written. The source text was not checked because it is not available locally. Every step is written out in full and I checked each one independently. Steps 1-3: the threshold filtration E_i is closed under operators, psi_i is injective, and psi_i^{-1}(E_i) = (L_i*Q_i) ∪ (P_i*H_i), checked on mixed, pure-B and pure-K simplices; this gives the degreewise pushout. Step 4: taking opposite simplicial sets (op) sends horn Λ_j to Λ_{n-j} and swaps the two factors of a join, so it preserves the inner-anodyne class. Step 5: the right-anodyne product lemma applies with Λ^d_d→Δ^d (d ≥ 1) and the empty set → K^op. Step 6: I checked that the cocone lemma takes its right-anodyne map in the left join factor by a small example ({1}→Δ^1 with Δ^0 gives Λ^2_1, which is inner). After op this gives C_i → P_i*Q_i, and composing the finitely many stages gives D→Z. Steps 7-8: phi is injective, Z ∪ im(phi) = T, and phi^{-1}(Z) = R*K, so the pushout holds. Small cases checked: B=Δ^0, K=Δ^0, m=1 (one inner Λ^2_1 filling and the pushout with Δ^2), and K empty, m=0, A=B, all of which check. With B=Δ^0, A=∅ and with B=Δ^n, A=∂Δ^n, D is exactly the source the parent's (B1)/(C2) products use; the item does not restate a clause of the parent. The proof uses no hypothesis the statement lacks. The two lemmas used are in the item's own unit, so no tool_uses are needed. No SGA citation. No new nodes; the duplicate search found no node stating this filtration or pushout, and the Mathlib searches cover all three kinds. No changes made."
  }
 }

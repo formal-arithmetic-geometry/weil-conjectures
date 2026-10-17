@@ -11,69 +11,125 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-simplicial-presheaf-projective-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P_k=\\coprod_{c_0\\to\\cdots\\to c_k}F_{c_k}Z(c_0)$. For a monotone map $\\alpha:[m]\\to[k]$, restrict a string to $c_{\\alpha(0)},\\ldots,c_{\\alpha(m)}$, compose the intervening arrows and the terminal arrow to $d$, and apply $Z(c_0\\to c_{\\alpha(0)})$ to its value. Associativity and functoriality identify restriction by $\\alpha\\beta$ with restriction first by $\\alpha$ and then by $\\beta$; identity restriction is the identity. These formulas give exactly the faces and degeneracies in the statement, including the last face composing $c_{k-1}\\to c_k\\to d$. They commute with inner simplicial operators. Degreewise the coend has representatives $(x,\\alpha)$ with $x\\in P_k(d)_r$ and $\\alpha:[r]\\to[k]$. The map $[x,\\alpha]\\mapsto P(\\alpha)(x)$ to $P_r(d)_r$ respects its defining relations; its inverse sends $y$ to $[y,1_{[r]}]$, since the coend relation gives $[x,\\alpha]=[P(\\alpha)x,1_{[r]}]$. These inverse formulas commute with the diagonal operators. Postcomposition of the terminal arrow gives the $C$-diagram structure, and a natural transformation of $Z$ commutes with each formula. All index sets are small under the cited conventions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "§7, printed p.13, displayed replacement over strings ending at i. Agent expansion of its operators and degreewise coend identification."
+   }
+  },
+  {
+   "text": "For fixed $d,r$, apply the cited unique nondegenerate decomposition to the outer simplicial set $k\\mapsto P_k(d)_r$. An outer simplex is degenerate exactly when one of the arrows among $c_0\\to\\cdots\\to c_k$ is an identity: degeneracies insert such arrows, and deleting them gives the converse. This criterion does not concern the last arrow $c_k\\to d$ or degeneracy of the inner value. Define $Q_kZ$ as the image of coend summands of outer degree at most $k$. To check the attaching square in inner degree $r$, a representative of the proposed degree-$k$ cell is $(x,\\alpha)$ with $x$ an outer-nondegenerate $k$-simplex in $P_k(d)_r$ and $\\alpha:[r]\\to[k]$. If $\\alpha$ is not surjective, factor it through its proper image $[t]\\hookrightarrow[k]$ with $t<k$. The coend relation identifies it with the corresponding proper face in $Q_{k-1}Z$. This is exactly the boundary attaching map; its compatibility on intersections is the simplex identity already checked. If $\\alpha$ is surjective, its image is the outer degeneracy $P(\\alpha)x$. Unique nondegenerate decomposition says that two such pairs have the same image only when both $x$ and $\\alpha$ agree, and none has image in $Q_{k-1}Z$. Conversely, every simplex in $Q_kZ$ has a nondegenerate ancestor of dimension at most $k$: factor the map in any coend representative through its image and then remove degeneracies. Thus the pushout has precisely the old simplices plus these distinct new interior simplices. This proves its bijection with $Q_kZ$ degreewise. The attaching maps and this bijection commute with inner operators and postcomposition in $d$, even when an inner operator makes an inner value degenerate, since it leaves the outer string unchanged. Grouping $x$ by its nonidentity string and final arrow gives exactly the displayed coproduct of $F_{c_k}(Z(c_0)\\times\\partial\\Delta^k)\\to F_{c_k}(Z(c_0)\\times\\Delta^k)$. For $k=0$ the boundary is empty. Finally every coend representative has finite outer degree, so these inclusions have colimit $QZ$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets. Agent degreewise pushout argument for the explicit free bar, consistent with Rezk §6 equation (6.2), printed p.11."
+   }
+  },
+  {
+   "text": "The coefficient-weighted boundary maps in the preceding step are projective cofibrations, although they need not be individual generating cofibrations. Indeed, $K\\times\\partial\\Delta^k\\hookrightarrow K\\times\\Delta^k$ is degreewise injective for every simplicial set $K$, so it is a Kan-model cofibration by [lem-coef-kan-quillen-right-proper]. For any diagram $X$, evaluation at $1_c$ gives $\\operatorname{Nat}(F_cK,X)\\cong\\operatorname{Hom}(K,X(c))$, with inverse sending $u:K\\to X(c)$ to $(a:c\\to d,z)\\mapsto X(a)u(z)$. Hence a lifting square from $F_c$ of the coefficient-weighted boundary against an objectwise trivial fibration is the corresponding square against its component at $c$, and has a diagonal. The projective lifting characterization in [lem-coef-simplicial-presheaf-projective-model], applied with $D=C^{\\mathrm{op}}$, therefore makes each free map a projective cofibration. The lifting property survives coproducts by choosing each diagonal and pushouts by their universal property. For the sequential composite, start at the initial stage and extend a lift over each successor using the attached maps; the compatible lifts induce a lift on the colimit. Thus $\\varnothing\\to QZ$ is a projective cofibration, as required.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.3.5, printed p.871, free-diagram projective cofibrations; the free/evaluation bijection and closure under attachments are written explicitly."
+   }
+  },
+  {
+   "text": "For fixed $d$ and inner degree $r$, augment a string by applying $Z$ to its composite $c_0\\to d$. Composition of strings shows that this commutes with every outer operator, and functoriality shows that it commutes with inner operators and postcomposition in $d$. Set $h_{-1}(z)=(d,1_d,z)$ and send $(c_0\\to\\cdots\\to c_k\\xrightarrow{a}d,z)$ under $h_k$ to $(c_0\\to\\cdots\\to c_k\\xrightarrow{a}d\\xrightarrow{1_d}d,z)$. The last face composes $a$ with $1_d$, giving $d_{k+1}h_k=1$. At $k=0$, the first face applies $Z(a)$ and leaves the string $d\\xrightarrow{1_d}d$, giving $d_0h_0=h_{-1}\\varepsilon$. For $k\\geq1$, the first face applies $Z(c_0\\to c_1)$ on either side of $d_0h_k=h_{k-1}d_0$, and both sides retain the same appended $d$. For $1\\leq i<k$ the face composes the same two internal arrows; for $i=k$ both sides have terminal composite $c_{k-1}\\to c_k\\to d$, followed by $1_d$. These give every stated remaining face identity. Inserting an identity at $c_i$ on either side gives $s_ih_k=h_{k+1}s_i$ for $0\\leq i\\leq k$. Also $\\varepsilon h_{-1}=1$ by $Z(1_d)=1$. The $h$ maps leave the inner value unchanged, and the augmentation commutes with inner operators because $Z(a)$ is a simplicial map. Naturality in $Z$ follows respectively from leaving the value unchanged and the naturality square for $Z(a)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "§7, printed p.13, augmentation of the displayed replacement. The terminal extra-degeneracies and each identity are agent expansions, not a quoted theorem of Rezk."
+   }
+  },
+  {
+   "text": "The coproduct and coend constructions are valid for empty indexing sets and empty simplicial sets, and no step used Kan fibrancy or nonemptiness. Thus the construction, filtration, augmentation identities and their naturality hold with exactly the hypotheses stated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "§7, printed p.13, arbitrary small diagram. Agent verification of empty-index and nonfibrant cases for the explicit construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction: auxiliary independent simplicial-space foundation for its enriched/coherent coefficient-system route. The free-bar construction, filtration proof and extra-degeneracy checks are agent-written expansions; they are not stated in that blueprint paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "The simplicial free diagram bar construction has a skeletal filtration by free cells indexed by chains of nonidentity arrows",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.sk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"ℕ → CategoryTheory.Functor SSet SSet\", \"doc\": \"The functor that maps a simplicial set to its $ n $-skeleton, constructed by truncating the simplicial set to dimension $ n $ (discarding data above $ n $) and then extending this truncated data to a \"}\n  {\"name\": \"SSet.skeleton\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton\", \"type\": \"(X : SSet) → ℕ →o X.Subcomplex\", \"doc\": \"The $n$-skeleton of a simplicial set $X$ is the subcomplex generated by all non-degenerate simplices of dimension strictly less than $n$. This is constructed as the union of subcomplexes generated by \"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteCoproducts C] → ChainComplex C ℕ → CategoryTheory.SimplicialObject C\", \"doc\": \"The Γ₀ functor maps a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts to a simplicial object. For each object $ \\\\Delta $ in the opposite simplex category $ \\\\Delta^\"}\n  {\"name\": \"SSet.mem_skeleton\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton\", \"type\": \"∀ (X : SSet) {i : ℕ} (x : X.obj (Opposite.op (SimplexCategory.mk i))) {n : ℕ},\\n  autoParam (i < n) SSet.mem_skeleton._auto_1 → x ∈ (X.skeleton n).obj (Opposite.op (SimplexCategory.mk i))\", \"doc\": \"For any simplicial set $X$, a simplex $x$ of dimension $i$ belongs to the $n$-skeleton of $X$ if $i < n$. This means that the $n$-skeleton of $X$ contains all simplices whose dimensions are strictly l\"}\n  {\"name\": \"SSet.skeleton_succ\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton\", \"type\": \"∀ (X : SSet) (n : ℕ), X.skeleton (n + 1) = X.skeleton n ⊔ ⨆ x, SSet.Subcomplex.ofSimplex ↑x\", \"doc\": \"For any natural number $ n $, the $(n+1)$-skeleton of a simplicial set $ X $ is equal to the join (⊔) of the $ n $-skeleton of $ X $ and the supremum (⨆) of the subcomplexes generated by each non-dege\"}\n  {\"name\": \"SimplexCategory.skeletalFunctor_obj\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic\", \"type\": \"∀ (a : SimplexCategory), SimplexCategory.skeletalFunctor.obj a = NonemptyFinLinOrd.of (Fin (a.len + 1))\", \"doc\": \"The skeletal functor maps each object $[n]$ in the simplex category $\\\\Delta$ to the nonempty finite linearly ordered type $\\\\mathrm{Fin}(n + 1)$, which consists of the elements $\\\\{0, 1, \\\\dots, n\\\\}$ equ\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.sk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasLeftKanExtension F] →\\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (Cate\", \"doc\": \"The functor that maps a simplicial object in a category $\\\\mathcal{C}$ to its skeletal approximation by first truncating it to dimension $n$ (discarding simplicial data above $n$) and then extending th\"}\n  {\"name\": \"SimplexCategory.isSkeletonOf\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic\", \"type\": \"CategoryTheory.IsSkeletonOf NonemptyFinLinOrd SimplexCategory SimplexCategory.skeletalFunctor\", \"doc\": \"The category of nonempty finite linearly ordered types is a skeleton of the simplex category $\\\\Delta$ via the skeletal functor that maps each ordinal $[n]$ to the type $\\\\mathrm{Fin}(n + 1)$, establish\"}",
+   "query": "Free bar construction on a small category has a skeletal filtration by representable boundary cell attachments",
+   "results": "SSet.sk (Mathlib/AlgebraicTopology/SimplicialSet/Basic); SSet.skeleton and SSet.skeleton_succ (Mathlib/AlgebraicTopology/SimplicialSet/Skeleton); no free categorical-bar filtration.",
    "date": "2026-10-17",
-   "verdict": "no match: SSet.skeleton_succ and RelativeCellComplex.AttachCells concern ordinary simplicial skeleta and abstract cell data; Rep.standardComplex.x_projective concerns linear group representations. None supplies the free C-diagram filtration or terminal contraction data. Read SimplicialSet/Skeleton.lean and RelativeCellComplex/Basic.lean:44ff; Loogle and grep found no matching result."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Projective cofibrancy of the free simplicial replacement follows from its nondegenerate chain boundary cell filtration",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.standardComplex.x_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k : Type u) [inst : CommRing k] (G : Type u) [inst_1 : Group G] (n : ℕ),\\n  CategoryTheory.Projective ((Rep.standardComplex k G).X n)\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the $n$-th term of the standard chain complex in the category $\\\\text{Rep}(k, G)$ is a projective object. This term is the free $k$-modu\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.N₁_obj_p\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorN\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (X : CategoryTheory.SimplicialObject C), (AlgebraicTopology.DoldKan.N₁.obj X).p = AlgebraicTopology.DoldKan.PInfty\", \"doc\": \"For any simplicial object $X$ in a preadditive category $\\\\mathcal{C}$, the idempotent morphism $p$ associated with the object $N_1(X)$ in the Karoubi envelope of chain complexes is equal to $P_\\\\infty$\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] (X : C),\\n  HomotopicalAlgebra.IsCofibrant (HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj X)\", \"doc\": \"For any object $X$ in a model category $\\\\mathcal{C}$, its cofibrant replacement $X'$ is cofibrant. This follows from the definition of cofibrant replacements, where $X'$ is constructed such that the u\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] (X : HomotopicalAlgebra.CofibrantObject C),\\n  HomotopicalAlgebra.IsCofibrant (HomotopicalAlgebra.CofibrantObject.ι.obj X)\", \"doc\": \"For any cofibrant object $X$ in the full subcategory of cofibrant objects of a category with cofibrations, the image of $X$ under the inclusion functor into the original category is itself a cofibrant\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.instIsCofibrantObjι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.BifibrantO\", \"doc\": \"For any bifibrant object $X$ in a category $\\\\mathcal{C}$, the image of $X$ under the inclusion functor from the full subcategory of bifibrant objects to $\\\\mathcal{C}$ is a cofibrant object in $\\\\mathca\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ),\\n  AlgebraicTopology.DoldKan.Γ₀'.obj K = SimplicialObject.Split.mk' (AlgebraicTopology.DoldKan.Γ₀.splitting K)\", \"doc\": \"The Γ₀' functor maps a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts to a split simplicial object by equipping $ K $ with a canonical splitting structure. This c\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteCoproducts C] → ChainComplex C ℕ → CategoryTheory.SimplicialObject C\", \"doc\": \"The Γ₀ functor maps a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts to a simplicial object. For each object $ \\\\Delta $ in the opposite simplex category $ \\\\Delta^\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.Γ\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.IsIdempotentComplete C] →\\n        [CategoryTheory.Limits.HasFiniteCoproducts C] →\\n          CategoryTheory.Functor (ChainComplex C ℕ) (CategoryTheory.SimplicialObjec\", \"doc\": \"The Γ functor establishes the Dold-Kan equivalence between chain complexes and simplicial objects in a preadditive, idempotent-complete category with finite coproducts. It maps chain complexes over su\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: SSet.skeleton_succ and RelativeCellComplex.AttachCells concern ordinary simplicial skeleta and abstract cell data; Rep.standardComplex.x_projective concerns linear group representations. None supplies the free C-diagram filtration or terminal contraction data. Read SimplicialSet/Skeleton.lean and RelativeCellComplex/Basic.lean:44ff; Loogle and grep found no matching result."
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"SimplicialObject\", \"cofibrant\"",
-   "results": "[loogle] OK 0 hit(s)",
+   "query": "\"SSet.skeleton_succ\", \"HomotopicalAlgebra.AttachCells\"",
+   "results": "0 hits.",
    "date": "2026-10-17",
-   "verdict": "no match: SSet.skeleton_succ and RelativeCellComplex.AttachCells concern ordinary simplicial skeleta and abstract cell data; Rep.standardComplex.x_projective concerns linear group representations. None supplies the free C-diagram filtration or terminal contraction data. Read SimplicialSet/Skeleton.lean and RelativeCellComplex/Basic.lean:44ff; Loogle and grep found no matching result."
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "bar.*cofibrant|cofibrant.*bar|simplicialReplacement|free.*bar.*cell",
-   "results": "[grep] OK 0 hit(s)",
+   "query": "bar.*cofibrant|free.*diagram.*boundary|nondegenerate.*simplicial",
+   "results": "Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean:459; Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean:148,165; Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplices.lean:189; Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean:124; Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean:351. None states the categorical bar filtration.",
    "date": "2026-10-17",
-   "verdict": "no match: SSet.skeleton_succ and RelativeCellComplex.AttachCells concern ordinary simplicial skeleta and abstract cell data; Rep.standardComplex.x_projective concerns linear group representations. None supplies the free C-diagram filtration or terminal contraction data. Read SimplicialSet/Skeleton.lean and RelativeCellComplex/Basic.lean:44ff; Loogle and grep found no matching result."
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Skeletal cell attachment formula for the enriched free diagram bar construction",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.AttachCells.cell\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.AttachCells\", \"type\": \"(i : c.ι) : B (c.π i) ⟶ X₂\", \"doc\": \"Given a category $\\\\mathcal{C}$, functors $A,B: \\\\alpha \\\\to \\\\mathcal{C}$, a family of morphisms $A(a) \\\\to B(a)$, and objects $X_1,X_2 \\\\in \\\\mathcal{C}$ with a morphism $X_1 \\\\to X_2$, the cell attachment \"}\n  {\"name\": \"HomotopicalAlgebra.AttachCells\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.AttachCells\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {α : Type t} →\\n      {A B : α → C} → ((a : α) → A a ⟶ B a) → {X₁ X₂ : C} → (X₁ ⟶ X₂) → Type (max (max (max t u) v) (w + 1))\", \"doc\": \"An inductive type parameterized by a category $\\\\mathcal{C}$, a type $\\\\alpha$, functors $A,B:\\\\alpha\\\\to\\\\mathcal{C}$, and a family of morphisms $A(a)\\\\to B(a)$ for each $a: \\\\alpha$. Given objects $X_1,X_2\"}\n  {\"name\": \"SSet.skeleton_succ\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Skeleton\", \"type\": \"(n : ℕ) : X.skeleton (n + 1) = X.skeleton n ⊔ ⨆ (x : X.nonDegenerate n), Subcomplex.ofSimplex x.1\", \"doc\": \"For any natural number $ n $, the $(n+1)$-skeleton of a simplicial set $ X $ is equal to the join (⊔) of the $ n $-skeleton of $ X $ and the supremum (⨆) of the subcomplexes generated by each non-dege\"}\n  {\"name\": \"HomotopicalAlgebra.AttachCells.mk.sizeOf_spec\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.AttachCells\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {α : Type t} {A B : α → C} {g : (a : α) → A a ⟶ B a}\\n  {X₁ X₂ : C} {f : X₁ ⟶ X₂} [inst_1 : SizeOf C] [inst_2 : SizeOf α] (ι : Type w) (π : ι → α)\\n  (cofan₁ : CategoryTheory.Limits.Cofan fun i => A (π i)) (cofan₂ : CategoryTheory.Limits.Cofan f\", \"doc\": \"The size of the attaching cells construction data in a category $\\\\mathcal{C}$ is computed as the sum of the sizes of the indexing type $\\\\iota$, the colimit cofans $\\\\text{cofan}_1$ and $\\\\text{cofan}_2$\"}\n  {\"name\": \"HomotopicalAlgebra.AttachCells.ι\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.AttachCells\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {α : Type t} →\\n      {A B : α → C} →\\n        {g : (a : α) → A a ⟶ B a} → {X₁ X₂ : C} → {f : X₁ ⟶ X₂} → HomotopicalAlgebra.AttachCells g f → Type w\", \"doc\": \"An inductive type parameterized by a category $\\\\mathcal{C}$, a type $\\\\alpha$, functors $A,B:\\\\alpha\\\\to\\\\mathcal{C}$, and a family of morphisms $A(a)\\\\to B(a)$ for each $a: \\\\alpha$. Given objects $X_1,X_2\"}\n  {\"name\": \"HomotopicalAlgebra.nonempty_attachCells_iff\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.AttachCells\", \"type\": \": Nonempty (AttachCells.{w} g f) ↔ (coproducts.{w} (ofHoms g)).pushouts f\", \"doc\": \"The cell attachment construction $\\\\mathrm{AttachCells}(g, f)$ is non-empty if and only if the morphism $f$ is a pushout of a coproduct of morphisms in the family $g$.\"}\n  {\"name\": \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"module\": \"Mathlib.CategoryTheory.SmallObject.IsCardinalForSmallObjectArgument\", \"type\": \"{F G : Arrow C ⥤ Arrow C} {φ : F ⟶ G} (h : (succStruct I κ).prop φ) (f : Arrow C) :\\n  AttachCells.{w} I.homFamily (φ.app f).left\", \"doc\": \"Given a natural transformation $\\\\phi: F \\\\Rightarrow G$ between functors $F, G: \\\\mathcal{C}^\\\\to \\\\to \\\\mathcal{C}^\\\\to$ satisfying the successor structure property for a morphism class $I$ and regular car\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w'} →\\n      [inst_1 : LinearOrder J] →\\n        [inst_2 : OrderBot J] →\\n          [inst_3 : SuccOrder J] →\\n            [inst_4 : WellFoundedLT J] →\\n              {α : J → Type t} →\\n                {A B : (j : J) → α j → C} →\\n \", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered index set $J$ with a least element and successor structure, families of objects $A_j(i)$ and $B_j(i)$ in $\\\\mathcal{C}$ indexed by $j \\\\in J$ and $i \\\\in \\\\a\"}",
+   "query": "Skeletal filtration of the categorical simplicial bar construction by free representable boundary cells",
+   "results": "SSet.skeleton; CategoryTheory.SimplicialObject.IsCoskeletal; CategoryTheory.SimplicialObject.sk; no categorical-bar filtration.",
    "date": "2026-10-17",
-   "verdict": "no match: SSet.skeleton_succ and RelativeCellComplex.AttachCells concern ordinary simplicial skeleta and abstract cell data; Rep.standardComplex.x_projective concerns linear group representations. None supplies the free C-diagram filtration or terminal contraction data. Read SimplicialSet/Skeleton.lean and RelativeCellComplex/Basic.lean:44ff; Loogle and grep found no matching result."
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "The skeletal filtration of the two sided simplicial bar construction attaches representables indexed by nondegenerate arrow strings",
-   "results": "{\"t\": \"2026-10-17T04:57:05Z\", \"tool\": \"leanfinder\", \"query\": \"The skeletal filtration of the two sided simplicial bar construction attaches representables indexed by nondegenerate arrow strings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.sk\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"CategoryTheory.SimplicialObject.sk\", \"SSet.skeleton\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"CategoryTheory.SimplicialNerve\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"SSet.skeleton_obj_eq_top\"], \"digest\": \"02c04426b48fc84c\"}",
+   "query": "Terminal extra degeneracy on the categorical bar construction appending the target object",
+   "results": "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy and related generic extra-degeneracy declarations; no categorical-bar specialization.",
    "date": "2026-10-17",
-   "verdict": "No match: skeleton functors and Dold–Kan splittings do not supply this free representable filtration or its terminal extra-degeneracy formulas. The SimplicialNerve hit is a definition of a different construction."
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "flexibleWeight|homotopyCoherent|coend.*[Ww]eak|[Ww]eak.*coend|bar.*[Cc]ofibrant|[Cc]ofibrant.*bar|vertex.*[Rr]ightKan",
-   "results": "{\"t\": \"2026-10-17T04:58:45Z\", \"tool\": \"grep\", \"query\": \"flexibleWeight|homotopyCoherent|coend.*[Ww]eak|[Ww]eak.*coend|bar.*[Cc]ofibrant|[Cc]ofibrant.*bar|vertex.*[Rr]ightKan\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "simplicialReplacement|barResolution|freeBar|ExtraDegeneracy",
+   "results": "{\"t\": \"2026-10-17T05:46:43Z\", \"tool\": \"grep\", \"query\": \"simplicialReplacement|barResolution|freeBar|ExtraDegeneracy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\"], \"digest\": \"36e0d35e189f91e5\"}",
    "date": "2026-10-17",
-   "verdict": "no match: independent second-reader search returned zero hits."
+   "verdict": "no match: the hits supply generic cofibrant replacements, additive Dold–Kan splittings, and generic extra-degeneracy structures, not the stated free C-diagram skeletal filtration with its explicit terminal maps. Read ExtraDegeneracy.lean:75-93 and ModelCategory/CofibrantObjectHomotopy.lean."
   },
   {
-   "tool": "loogle",
-   "query": "\"SimplicialNerve\", \"IsLimit\"",
-   "results": "{\"t\": \"2026-10-17T04:58:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "tool": "leanfinder",
+   "query": "Projectively cofibrant simplicial replacement of a functor, obtained from its split simplicial bar resolution",
+   "results": "{\"t\": \"2026-10-17T05:46:46Z\", \"tool\": \"leanfinder\", \"query\": \"Projectively cofibrant simplicial replacement of a functor, obtained from its split simplicial bar resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀'\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"AlgebraicTopology.DoldKan.Γ₀\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"CategoryTheory.Idempotents.DoldKan.Γ\", \"CategoryTheory.Abelian.DoldKan.Γ\", \"CategoryTheory.Preadditive.DoldKan.Γ\", \"AlgebraicTopology.DoldKan.Γ₂\"], \"digest\": \"da34bf5ca1491423\"}",
    "date": "2026-10-17",
-   "verdict": "no match: independent second-reader search returned zero hits."
+   "verdict": "no match: the hits supply generic cofibrant replacements, additive Dold–Kan splittings, and generic extra-degeneracy structures, not the stated free C-diagram skeletal filtration with its explicit terminal maps. Read ExtraDegeneracy.lean:75-93 and ModelCategory/CofibrantObjectHomotopy.lean."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-geometric-descent",
@@ -98,5 +154,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-free-bar-cell-filtration",
+  "worker": "stage1",
+  "summary": "Second-read five-step split with no new nodes: explicit simplex-operator/coend formulas, degreewise skeletal pushout via unique nondegenerate decomposition, coefficient-weighted projective cofibrancy proved by free/evaluation lifting, and all terminal extra-degeneracy identities. Statement unchanged. Rezk §7 supplies the displayed construction, §6 (6.2) the general skeletal context, and HTT A.3.3.5 the free-diagram cofibration principle; the detailed argument is agent-written. No Lean declaration attaches.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: independent explicit free-bar replacement, its free-cell filtration, and terminal extra-degeneracy contraction data."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-ec15c9bbd",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-ec15c9bbd (reviewer sub-agent of L); spot-checked: PASS, no fixes written. Read the full item (5 steps, no new nodes), the cited statements (def-cbc-enhanced-diagrams-cones; lem-coef-simplicial-presheaf-projective-model plus its model-category conventions from lem-coef-simplicial-boundary-collapse-test, where each WFS class is exactly the maps lifting against the other; lem-coef-kan-quillen-right-proper; the Eilenberg–Zilber Mathlib leaf), the parent lem-coef-space-geometric-descent step 6, and paragraph 2 of the ancestor prop-coef-integral-exceptional-adjoint. Statement checked by hand: (1) F_cK=Hom(c,-)xK equals h_c in U(C^op), so the variance is right. (2) The coend is the diagonal. (3) Outer-nondegenerate strings (no identity among c_0..c_k; the last arrow c_k->d is absorbed into F_{c_k}) form an inner-closed splitting, so the skeletal pushouts along F_{c_k}(Z(c_0)x boundary of Delta^k) are correct. (4) Every terminal extra-degeneracy identity holds: d_{k+1}h_k=1, d_0h_0=h_{-1}e, d_i h_k=h_{k-1}d_i for i<=k, s_i h_k=h_{k+1}s_i, e h_{-1}=1. Small cases tested: C=[1] with Z=* gives QZ(1)=Delta^1 and QZ(0)=*; discrete C; endomorphisms and isomorphisms; empty C or Z; k=0. Step 3 is correct: monomorphisms are Kan cofibrations, Yoneda moves the lifting problem to component c, and projective cofibrations are exactly the maps lifting against objectwise trivial fibrations. The long step 2 (2017 characters) is one degreewise Eilenberg–Zilber count of the new simplices, with its only non-elementary input cited; rg found no general skeletal/bisimplicial node in the DAG, so it may stay. Duplicate candidates read and ruled out: presheaf-simplex-hocolim-resolution, ordinary-two-sided-bar-comparison, reedy-realization-homotopy-invariance, cone-boundary-projective-cells, fixed-object-simplicial-free-calculus, associative-algebra-diagram-cell-filtration, combinatorial-cofibrant-density, extra-degeneracy-contraction. Route is in-unit or uses a Mathlib leaf or a definition; no tool_uses needed; no cycle; no SGA. Rezk and HTT are not archived, so the proof is correctly marked agent-written and the report lists them as WANTED. Not a target node, so the base-change and coefficient-category check does not apply."
  }
 }
