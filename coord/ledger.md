@@ -15845,3 +15845,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:27 L: merged deliver/B4/Sheaf.Paper.IntegralResidueTensorPullCounitModel (stage 3; reviewer PASS; first push; landing 20261017T142722-L-3876109 (interface); batch 20261017T142719; modules 2; new nodes 1)
 
 - 22:47 L: batch 20261017T144412 dependency take-out
+- 14:50 L: returned deliver/C4/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (the landing tools, head 42ef88c59) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Six)
