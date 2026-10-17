@@ -4509,6 +4509,8 @@ public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyExact
+public import WeilConjectures.WeilSheaf.CohomologyGeometricConjugacy
+public import WeilConjectures.WeilSheaf.CohomologyGeometricEquivalence
 public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.Constant
