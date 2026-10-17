@@ -1,7 +1,7 @@
 {
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-topos-inverse-image-differentials",
@@ -11,7 +11,7 @@
  "id": "lem-trf-sheafified-module-differentials-cokernel",
  "kind": "statement",
  "title": "Sheafified presentation of modules of differentials",
- "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and let $\\mathcal A\\to\\mathcal B$ be a morphism of presheaves of commutative rings. The module of differentials [def-weil-pbc-kahler-differentials] $\\Omega_{\\mathcal B^#/\\mathcal A^#}$ of the sheafified ring map is canonically the sheafification [def-weil-pbc-sheafification] of the presheaf $U\\mapsto\\Omega_{\\mathcal B(U)/\\mathcal A(U)}$, and the identification carries the sectionwise universal derivations to the sheaf universal derivation. Equivalently, both are the cokernel of the sheafified free-module relation map encoding additivity, Leibniz, and annihilation of $\\mathcal A$ in the category of sheaf modules [def-weil-sheaf-of-modules-category].",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology] and let $\\mathcal A\\to\\mathcal B$ be a morphism of presheaves of commutative rings. The module of differentials [def-weil-pbc-kahler-differentials] $\\Omega_{\\mathcal B^\\#/\\mathcal A^\\#}$ of the sheafified ring map is canonically the sheafification [def-weil-pbc-sheafification] of the presheaf $U\\mapsto\\Omega_{\\mathcal B(U)/\\mathcal A(U)}$, and the identification carries the sectionwise universal derivations to the sheaf universal derivation. Equivalently, both are the cokernel of the sheafified free-module relation map encoding additivity, Leibniz, and annihilation of $\\mathcal A$ in the category of sheaf modules [def-weil-sheaf-of-modules-category]. Here a derivation of sheaves is a morphism of underlying sheaves of sets satisfying additivity, the Leibniz rule, and vanishing on the image of the base ring on every object; the sheaf module of differentials means the representing module for this derivation functor, with its universal derivation.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 08TP, lemma-differentials-sheafify and proof (the displayed free-module relation map and exactness of sheafification)"
@@ -22,9 +22,103 @@
   "def-weil-pbc-kahler-differentials",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\varphi:\\mathcal A\\to\\mathcal B$. For a presheaf of sets $T$, put $\\mathcal B[T](U)=\\bigoplus_{t\\in T(U)}\\mathcal B(U)[t]$, with restrictions sending $b[t]$ to $b|_V[t|_V]$; this is the free module in the sense of [def-weil-pbc-free-module]. Form $F=\\mathcal B[\\mathcal B]$ and $E=\\mathcal B[\\mathcal B\\times\\mathcal B]\\oplus\\mathcal B[\\mathcal B\\times\\mathcal B]\\oplus\\mathcal B[\\mathcal A]$. Define $r:E\\to F$ by $[(a,b)]\\mapsto[a+b]-[a]-[b]$ on the first summand, $[(f,g)]\\mapsto[fg]-g[f]-f[g]$ on the second, and $[h]\\mapsto[\\varphi(h)]$ on the third. Restrictions commute with these formulas because they preserve addition, multiplication and $\\varphi$. The sectionwise quotient $P(U)=F(U)/\\operatorname{im}r_U$ is $\\Omega_{\\mathcal B(U)/\\mathcal A(U)}$ with $d_U(b)$ the class of $[b]$, by the explicit quotient construction in [def-weil-pbc-kahler-differentials]. Thus $P$ is the desired presheaf of differentials, with restrictions $d_U(b)\\mapsto d_V(b|_V)$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, displayed presheaf map; Algebra Tags 07BK and 00RO"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-sites-module-sheafification-interface] with the presheaf ring $\\mathcal O=\\mathcal B$ to $E,F,P$. Their abelian sheafifications acquire the canonical $\\mathcal B^\\#$-module structures and $r$ and $F\\to P$ sheafify to linear maps. By [lem-weil-pbc-sheafification-exact], the abelian cokernel presentation $E\\xrightarrow r F\\to P\\to0$ sheafifies to a cokernel presentation. The cokernel in $\\mathcal B^\\#$-module sheaves has the same underlying abelian cokernel by [def-weil-sheaf-of-modules-category]. Consequently $Q=P^\\#$, with $q:F^\\#\\to Q$, is the cokernel of $r^\\#:E^\\#\\to F^\\#$ in module sheaves.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, last sentence; Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03EI, lemma-sheafification-exact"
+   }
+  },
+  {
+   "text": "By [lem-pc-sites-sheafification-underlying-sets], the underlying set maps $\\mathcal A\\to\\mathcal A^\\#$ and $\\mathcal B\\to\\mathcal B^\\#$ are set sheafifications. The map $\\mathcal B\\times\\mathcal B\\to\\mathcal B^\\#\\times\\mathcal B^\\#$ is also a set sheafification: by [lem-weil-pbc-site-sheafification-sections-local], a pair of sheafified sections lifts locally to two original sections after taking a common covering refinement, and two lifts of the pair agree after a further common refinement. Given a map from $\\mathcal B\\times\\mathcal B$ into any sheaf of sets, apply it to these local lifts; local equality makes their values agree on overlaps, so they glue uniquely. This is exactly the universal property of sheafification. The common refinements are obtained by the covering pullback and composition axioms in [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, identification of the sheafified free terms; Sites Tags 00YR and 00WK"
+   }
+  },
+  {
+   "text": "For each $T=\\mathcal B,\\mathcal B\\times\\mathcal B,\\mathcal A$ and any sheaf $N$ of $\\mathcal B^\\#$-modules, [lem-pc-sites-module-sheafification-interface] gives $\\operatorname{Hom}_{\\mathcal B^\\#}(\\mathcal B[T]^\\#,N)=\\operatorname{Hom}_{\\mathcal B}(\\mathcal B[T],N)$. A map on the right is uniquely the linear extension of a map of set presheaves $T\\to|N|$: send $\\sum b_t[t]$ to $\\sum b_t v(t)$. Conversely evaluating at $[t]$ recovers $v$, and both constructions commute with restrictions. By the universal property [def-weil-pbc-sheafification] and Step 3 this equals $\\operatorname{Hom}_{\\mathrm{Sh}(\\mathcal C)}(T^\\#,|N|)$. Thus $\\mathcal B[T]^\\#$ is the free $\\mathcal B^\\#$-module sheaf on $T^\\#$, with its specified generators. In particular $F^\\#$ is free on $\\mathcal B^\\#$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, sentence identifying the sheaves in the presentation; Tag 04BL, lemma-universal-module, free-module notation"
+   }
+  },
+  {
+   "text": "The same adjunction identifies $E^\\#$ with the sum of the two free sheaves on $\\mathcal B^\\#\\times\\mathcal B^\\#$ and the free sheaf on $\\mathcal A^\\#$: a map from $E^\\#$ to $N$ is just three maps from its summands, by [lem-pc-sites-module-sheafification-interface]. Under these identifications $r^\\#$ is the sheaf relation map with the three formulas of Step 1, now for sheafified sections. Indeed both maps take the original generators to those displayed relations; equality on the original generators implies equality before sheafification by linear extension and then after sheafification by uniqueness in that adjunction. This also proves that sheafifying introduces no additional choice in the relation map.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, sheafified presentation compared with equation-define-module-differentials"
+   }
+  },
+  {
+   "text": "Let $j:\\mathcal B^\\#\\to|F^\\#|$ be the free-generator map from Step 4 and put $d=qj$. The three relations of Step 5 vanish in $Q$, so $d(a+b)=d(a)+d(b)$, $d(fg)=g\\,d(f)+f\\,d(g)$ and $d(\\varphi^\\#(h))=0$ for sections of the sheafified rings. Thus $d$ is a sheaf $\\mathcal A^\\#$-derivation. For any $\\mathcal B^\\#$-module sheaf $N$ and any such derivation $D:\\mathcal B^\\#\\to N$, Step 4 extends $D$ uniquely to a linear map $v:F^\\#\\to N$. Each of the three generator formulas for $vr^\\#$ is zero by the corresponding derivation identity, hence $vr^\\#=0$. The cokernel property of Step 2 gives a unique $\\alpha:Q\\to N$ with $\\alpha q=v$, and therefore $\\alpha d=D$. Conversely a linear map $\\alpha$ produces the derivation $\\alpha d$. These constructions are inverse: $\\alpha q$ is determined by its generator values and a map out of the cokernel is determined after $q$. This verifies the representing property for sheaf derivations directly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof after equation-define-module-differentials; Tag 04BN, definition-module-differentials"
+   }
+  },
+  {
+   "text": "It follows that $(Q,d)$ is a module of differentials of $\\mathcal A^\\#\\to\\mathcal B^\\#$. If $(\\Omega,d_{\\mathrm{sh}})$ is any other representing module, apply the two universal properties to obtain maps $Q\\to\\Omega$ and $\\Omega\\to Q$ carrying the universal derivations to each other. Each composite fixes the universal derivation and hence is the identity by uniqueness. This gives the canonical isomorphism $P^\\#=Q\\cong\\Omega_{\\mathcal B^\\#/\\mathcal A^\\#}$. For $b\\in\\mathcal B(U)$, the image of $d_U(b)$ in $Q(U)$ is $q([\\eta_{\\mathcal B}(b)])=d(\\eta_{\\mathcal B}(b))$, so the isomorphism carries every sectionwise universal derivation to $d_{\\mathrm{sh}}$. Steps 2 and 5 give exactly the asserted common sheafified-cokernel presentation, completing all clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify; Tag 04BN, representing-object uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-kahler-differentials",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TP (lemma-differentials-sheafify), expanding the free-module comparison and Tag 04BL (lemma-universal-module) generator argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,6 +138,48 @@
    "tool": "grep",
    "query": "KaehlerDifferential|sheafification",
    "results": "Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:195-209 and Sheaf/PullbackContinuous.lean:24,78-84; no combined theorem",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "differential|derivation [sub=Algebra/Category/ModuleCat/Sheaf]",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; read pinned Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242. These are presheaf-level universal differentials or ring algebra presentations, not the sheafified ring comparison with its cokernel presentation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of Kahler differentials of presheaves of rings is the sheaf of differentials",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialsConstruction\"",
+   "results": "7 hits; top=[\"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'\", 'PresheafOfModulesOfCommRing.DifferentialsConstruction.instHasDifferentials', \"PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_obj\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map_d\"]; note=; digest=1ad6a35401e35c19; read pinned Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242. These are presheaf-level universal differentials or ring algebra presentations, not the sheafified ring comparison with its cokernel presentation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of sectionwise Kahler differentials represents derivations of sheafified rings",
+   "results": "8 hits; top=[\"PresheafOfModules.DifferentialsConstruction.isUniversal'\", 'PresheafOfModules.HasDifferentials.exists_universal_derivation', \"PresheafOfModules.DifferentialsConstruction.derivation'\", 'PresheafOfModules.Derivation.Universal', \"PresheafOfModules.Derivation'.Universal.mk\", 'PresheafOfModules.DifferentialsConstruction.instHasDifferentials', 'PresheafOfModules.Derivation.Universal.desc', 'ModuleCat.Derivation.desc']; note=; digest=f6436f9393ebbb3f; read pinned Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242. These are presheaf-level universal differentials or ring algebra presentations, not the sheafified ring comparison with its cokernel presentation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|isUniversal|sheafification [sub=Algebra/Category/ModuleCat/Differentials]",
+   "results": "5 hits; top=['Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean', 'Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean', 'Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean', 'Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean', 'Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean']; note=; digest=25db6ed86ef33974; read pinned Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242. These are presheaf-level universal differentials or ring algebra presentations, not the sheafified ring comparison with its cokernel presentation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification preserves the generators and relations presentation of the relative differential module",
+   "results": "8 hits; top=['Algebra.Presentation.differentials', \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", 'PresheafOfModules.HasDifferentials.exists_universal_derivation', 'PresheafOfModules.DifferentialsConstruction.instHasDifferentials', 'Algebra.Presentation.differentialsSolution_isPresentation', \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", 'Algebra.Presentation.differentialsSolution']; note=; digest=387f45daaddc3d53; read pinned Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242. These are presheaf-level universal differentials or ring algebra presentations, not the sheafified ring comparison with its cokernel presentation.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
@@ -71,5 +207,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-sheafified-module-differentials-cokernel",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 08TP into the explicit presheaf relation map, exact sheafification, the free-module adjunction calculation, identification of all three relations, and the universal-derivation cokernel proof. Reused existing general site-level module and set sheafification tools; no new nodes. Clarified the sheaf-level representing property inline, retaining every hypothesis and conclusion.",
+  "blueprint": "Supports the inherited cotangent-comparison ancestry from lem-trf-local-term-locality: the sheafified relation-map presentation used in lem-trf-topos-inverse-image-differentials. This is a generic algebraic tool below the unit route, not a replacement of a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "General site-level module sheafification over a presheaf ring supplies the B# action and adjunction; no trace-formula node provides it."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Exactness of abelian sheafification supplies the cokernel comparison, a generic sheaf-theoretic input."
+   },
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "General site-level ring sheafification on underlying sets supplies the free-generator comparison."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local lifting and local equality justify the finite-product generator comparison on any site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-bef1a435b",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-bef1a435b (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, every cited node statement (none merged, none with a blueprint_update), Stacks sites-modules.tex 04BK/04BL/04BN/08TP/08TQ (lines 5915-6085), the only citer lem-trf-topos-inverse-image-differentials, and unit sk-i-curve-zero. Statement and source: the item matches 08TP for an arbitrary site and a presheaf ring map. The added derivation and representing-module sentence is exactly 04BK/04BN and fixes the old ring-only citation. Nothing is weakened. The coefficient category is Mod(B^#), a sheaf of rings, so it matches. Steps: S1's relation map matches the 08TP display and its quotient is 07BK. S2 uses the presheaf-ring interface (03CY), exactness of # (cokernels) and module cokernels as sheafified sectionwise cokernels; each cited node states what is used. S3 is a correct elementary gluing argument that B x B -> B^# x B^# is a set sheafification: common refinement by site axioms (ii)/(iii), local equality by 00WK. S4 checks the Hom chain identifying B[T]^# as the free sheaf on T^#. S5 identifies r^# by its values on generators. S6/S7 are the 04BL universal-property argument, and d_U(b) maps to d(eta b). Edge cases: identity map gives 0, A -> A[x] keeps dx, the zero ring, empty coverings, a non-sheaf presheaf ring. No new nodes. No duplicate found by rg for 08TP/04BL/04BN/differentials+sheafification, so same_as [] is right. No cycle. Accepted tool_uses: the 4 declared generic sheaf lemmas (3 Mathlib leaves, plus lem-weil-pbc-site-sheafification-sections-local from sk-thm-p1). Searches recorded honestly, LeanSearch marked unavailable. FIX (B4): the statement had a bare ^# in TeX math; corrected to ^\\# in fixes/dag/nodes/sec-trace-formula/lem-trf-sheafified-module-differentials-cokernel.json, with no other change.; 1 file(s) fixed by the reviewer"
  }
 }
