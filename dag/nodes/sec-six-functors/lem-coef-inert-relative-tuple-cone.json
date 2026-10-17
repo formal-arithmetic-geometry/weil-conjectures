@@ -213,5 +213,29 @@
   "group": "Q127",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-bffe29fd3 (reviewer sub-agent of L); spot-checked: I read the item in full: all 7 steps and the full statements of all 8 dependencies (def-coef-monoidal-infinity-category, def-coef-infinity-relative-cone, def-coef-infinity-fibrations, mapping-composition, cocartesian-mapping-criterion, cocartesian-composition-initiality, relative-cone-constant-test, spaces-homotopy-fiber-detection). I also read the unit, the chapter record, the blueprint proof file (main-20261015) and the citers' steps 4/6/7. No new nodes, statement unchanged. All dependencies are in the item's own unit sk-prop-sf-biduality-general, so there are no tool_uses. Step 1 (an equivalence over an identity is cocartesian) is correct and acceptably elementary. Step 2 builds an exact-boundary cone: Segal quasi-inverse, then fiber equivalences, then an inner-horn fill over (rho_i,1), so the base is exactly rho_i, and the composition lemma makes each edge cocartesian; for discrete I the join is n edges at the apex. Step 3 applies the stated dual constant test; base hom-sets are discrete, so the path pullback is a disjoint union of fiber products and fiber detection gives a fiberwise criterion. Step 4 is the definition's second clause. Steps 5-6 prove the converse correctly: a pi0 inverse argument shows h is an equivalence, then the composite c_i is cocartesian and in the same component as a_i over the same base. Step 7 handles n=0 with the empty product. Small cases checked: n=0 (Hom([m],[0]) has m+1 points), n=1 (an edge over an identity is p-cartesian iff cocartesian iff an equivalence) and n=2. Duplicate candidates checked; none states the item: inert-color-coslice-components, relative-cone-equivalence, cocartesian-cone-limit-section-test, left-cone-restriction-cocartesian, symmetric-relative-product-comparison. Gepner-Haugseng is not available locally, so it is WANTED and proof_origin=agent is correct. Not a target node. Non-blocking note: the report's worker and review sections are stale; they describe a removed 4-step singleton-restriction argument. The node's split_report is accurate. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fae64611",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps and the exact dependency declarations (IsMonoidalInfinityCategory, monoidalRho=mkOfSucc, monoidalFiberInclusion, leftJoinCone, IsRelativeLimitDiagram, IsCocartesianEdge, joinPointTopSimplex). Each node clause matches the Lean: discrete I as a coproduct of points; g pinned by hg0/hg1/hgrho; exact boundary via Sigma.desc of fiber vertices; existence with q≫p=g and cocartesian edges; for every q, IsRelativeLimitDiagram iff all edges cocartesian; n=0 covered. The helper edge is the canonical apex-to-point simplex. No extra assumptions; single universe u as the dependencies require. Node diff touches only lean; statement verbatim; deps byte-identical to base; docstrings have source, blueprint tag and all 7 proof steps; body sorry; no duplicate found. Worker report substantive; Second reading section has the 2026-10-17 direct-delivery notice. nt_compile --json on the snapshot module: rc 0, 3.0 s, no errors or warnings. Non-blocking: hg1 is redundant with hgrho for n>=1."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InertRelativeTupleCone",
+  "declaration": "SSet.Enhanced.inert_relative_tuple_cone",
+  "declarations": [
+   "SSet.Enhanced.monoidalTupleEdge",
+   "SSet.Enhanced.monoidalTupleBoundary",
+   "SSet.Enhanced.inert_relative_tuple_cone"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InertRelativeTupleCone.lean",
+  "statement": "theorem inert_relative_tuple_cone {E : SSet.{u}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{u}) (hp : IsMonoidalInfinityCategory p) (n : ℕ) (g : leftJoinCone (∐ fun _ : Fin n ↦ (Δ[0] : SSet.{u})) ⟶ monoidalSimplexBase.{u}) (hg₀ : (orderedJoinInl Δ[0] (∐ fun _ : Fin n ↦ (Δ[0] : SSet.{u})) ≫ g).app _ (stdSimplex.obj₀Equiv.symm 0) = monoidalBaseVertex n) (hg₁ : leftJoinConeInclusion (∐ fun _ : Fin n ↦ (Δ[0] : SSet.{u})) ≫ g = SSet.const (monoidalBaseVertex 1)) (hgρ : ∀ i : Fin n, monoidalTupleEdge n i ≫ g = monoidalBaseEdge (monoidalRho i)) (v : Fin n → (monoidalUnderlying p) _⦋0⦌) : (∃ q : leftJoinCone (∐ fun _ : Fin n ↦ (Δ[0] : SSet.{u})) ⟶ E, leftJoinConeInclusion (∐ fun _ : Fin n ↦ (Δ[0] : SSet.{u})) ≫ q = monoidalTupleBoundary p v ∧ q ≫ p = g ∧ ∀ i : Fin n, IsCocartesianEdge p (monoidalTupleEdge n i ≫ q)) ∧ (∀ q : leftJoinCone (∐ fun _ : Fin n ↦ (Δ[0] : SSet.{u})) ⟶ E, leftJoinConeInclusion (∐ fun _ : Fin n ↦ (Δ[0] : SSet.{u})) ≫ q = monoidalTupleBoundary p v → q ≫ p = g → (IsRelativeLimitDiagram p q ↔ ∀ i : Fin n, IsCocartesianEdge p (monoidalTupleEdge n i ≫ q)))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Exact prescribed-boundary existence and recognition for every cone over the specified inert base cone, including arity zero. The two helper definitions construct its canonical mixed join edges and prescribed boundary from the existing join and fiber inclusions."
  }
 }
