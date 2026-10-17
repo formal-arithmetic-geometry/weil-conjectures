@@ -51,17 +51,14 @@
    }
   },
   {
-   "text": "Use the constructible exceptional functor of [def-weil-exceptional-inverse-image]. The adjunction $F\\dashv G$ is the bounded constructible restriction of [thm-sf-ambient-adjoint-class]: every bounded constructible input has etale origin, as explicitly included in that theorem. A finite-dimensional compactification required there exists by [thm-nagata-compactification] and [lem-kun-dimension-finite-type]. We use only this restriction, not an adjunction on all pro-etale complexes. For a constructible pro-etale sheaf, choose its constructible etale representative by [lem-sf-proetale-constructible-origin]. On the etale site, [sbc-thm-finiteness-finite-type] gives its bounded constructible compact-support image. The comparison [lem-sf-class-compact-support-comparison] identifies the exact pro-etale realization of this image with $F$ of the original sheaf, and [lem-sf-proetale-constructible-origin] shows it is bounded constructible. Next use [lem-compact-support-direct-image-triangulated] to apply $F$ to the finite sequence of truncation triangles for any bounded constructible complex. Each triangle adds one shifted bounded constructible sheaf image, and a finite union of their cohomological intervals is bounded. Thus $F$ really is a functor between the bounded constructible categories used in steps 3 and 5. For any $A\\in D^b_c(Z,\\Lambda)$ and $K\\in D^b_c(W,\\Lambda)$, apply the genuine projection-formula theorem [fix-prop-projection-formula] at the finite-Tor object $M$. Together with step 2 and the two exceptional adjunctions it gives\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z(A,G(K\\otimes L))\n&\\cong\\operatorname{Hom}_W(FA,K\\otimes L)\\\\\n&\\cong\\operatorname{Hom}_W(FA\\otimes M,K)\\\\\n&\\cong\\operatorname{Hom}_W(F(A\\otimes PM),K)\\\\\n&\\cong\\operatorname{Hom}_Z(A\\otimes PM,GK)\\\\\n&\\cong\\operatorname{Hom}_Z(A,GK\\otimes PL).\n\\end{aligned}\n$$\nAll bijections are natural in $A$ and $K$. The projection theorem is applied with $A$ bounded constructible and $M$ finite-Tor; it is not inferred from the definition of the projection map.",
+   "text": "Use the constructible functor $G$ of [def-weil-exceptional-inverse-image]. The adjunction $F\\dashv G$ on bounded constructible inputs is the restriction in [thm-sf-ambient-adjoint-class]. Its finite-dimensional compactification exists by [thm-nagata-compactification] and [lem-kun-dimension-finite-type]: the proper part is finite type over $W$, hence over $k$. By [prop-finite-compact-support-constructibility], $F$ restricts to an exact triangulated functor between the bounded constructible categories. Its hypotheses hold with $f=i$ and $A=A_{E,n}$: the schemes are finite type over $k$, $i$ is separated of finite type, and $\\ell$ is invertible in $k$; moreover $E/\\mathbf Q_\\ell$ is finite and $n\\geq1$ by the purity conventions. For $A\\in D^b_c(Z,\\Lambda)$ and $K\\in D^b_c(W,\\Lambda)$, [fix-prop-projection-formula] applies to $(A,M)$, since $M$ has finite Tor amplitude. Combining its natural isomorphism with the tensor adjunctions of step 2 and the two exceptional adjunctions gives\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z(A,G(K\\otimes L))\n&\\cong\\operatorname{Hom}_W(FA,K\\otimes L)\\\\\n&\\cong\\operatorname{Hom}_W(FA\\otimes M,K)\\\\\n&\\cong\\operatorname{Hom}_W(F(A\\otimes PM),K)\\\\\n&\\cong\\operatorname{Hom}_Z(A\\otimes PM,GK)\\\\\n&\\cong\\operatorname{Hom}_Z(A,GK\\otimes PL).\n\\end{aligned}\n$$\nEvery bijection is natural in $A$ and $K$. All objects lie in the bounded constructible categories by step 1 and the cited preservation theorem; the exceptional adjunction is used only on its stated comparison class.",
    "uses": [
     "def-weil-exceptional-inverse-image",
     "thm-sf-ambient-adjoint-class",
     "thm-nagata-compactification",
     "lem-kun-dimension-finite-type",
-    "fix-prop-projection-formula",
-    "sbc-thm-finiteness-finite-type",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-class-compact-support-comparison",
-    "lem-compact-support-direct-image-triangulated"
+    "prop-finite-compact-support-constructibility",
+    "fix-prop-projection-formula"
    ],
    "elementary": false,
    "source": {
@@ -104,11 +101,8 @@
   "thm-sf-ambient-adjoint-class",
   "thm-nagata-compactification",
   "lem-kun-dimension-finite-type",
+  "prop-finite-compact-support-constructibility",
   "fix-prop-projection-formula",
-  "sbc-thm-finiteness-finite-type",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-class-compact-support-comparison",
-  "lem-compact-support-direct-image-triangulated",
   "lem-galois-yoneda-fully-faithful",
   "def-exchange-projection",
   "det-sp-unique-right-adjoint"
@@ -164,7 +158,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -202,7 +196,7 @@
   "date": "2026-10-17",
   "item": "lem-pur-coprojection",
   "worker": "stage1",
-  "summary": "Expanded the five natural Hom bijections, restricted them to the constructible domain, cited the actual projection theorem, proved representability gives inverse morphisms, and identified the canonical co-projection as the unique counit-compatible right-adjoint comparison. No new nodes. Recorded the implicit-domain correction and etale/pro-etale mismatch of the source Lean in the report.",
+  "summary": "Stage-1 repair following the independent return at fd6ee20dc687: step 3 uses the existing prop-finite-compact-support-constructibility instead of an inline preservation lemma, with all scheme and finite-coefficient hypotheses checked explicitly. The five Hom bijections, statement, statement dependencies and other steps are preserved. No new nodes or Mathlib leaves. The report identifies the duplicate-queue stage-classification defect and gives the exact maintainer-owned tool_uses reconciliation; this artifact is for stage-1 review and merge.",
   "blueprint": "Steps 1-2 supply the inverse tensor and restriction used by the unit; step 3 is its five-line Hom calculation; steps 4-5 expand its final naturality, canonical-map and Yoneda sentence. The core lemma does not claim the unit’s separate twist and diagonal consequences.",
   "tool_uses": [
    {
@@ -242,20 +236,8 @@
     "why": "The actual natural compact-support projection isomorphism, missing from the definition cited by the imported proof."
    },
    {
-    "node": "sbc-thm-finiteness-finite-type",
-    "why": "Supplies bounded constructibility of compact support for sheaves, extended to bounded complexes by their finite truncation filtration."
-   },
-   {
-    "node": "lem-sf-proetale-constructible-origin",
-    "why": "Supplies bounded constructible etale representatives and carries the compact-support result to the intrinsic pro-etale category."
-   },
-   {
-    "node": "lem-sf-class-compact-support-comparison",
-    "why": "Identifies pro-etale compact support on constructible inputs with the realization of the ordinary etale functor, allowing use of the etale finiteness theorem."
-   },
-   {
-    "node": "lem-compact-support-direct-image-triangulated",
-    "why": "Carries the finite cohomology filtration triangles to triangles, extending compact-support finiteness from sheaves to bounded complexes."
+    "node": "prop-finite-compact-support-constructibility",
+    "why": "Its bounded constructible exact triangulated restriction is the domain lemma previously hidden in step 3. It replaces that inline subargument without replacing the unit Hom calculation."
    }
   ]
  },
@@ -272,14 +254,15 @@
   "sbc-thm-finiteness-finite-type",
   "lem-sf-proetale-constructible-origin",
   "lem-sf-class-compact-support-comparison",
-  "lem-compact-support-direct-image-triangulated"
+  "lem-compact-support-direct-image-triangulated",
+  "prop-finite-compact-support-constructibility"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q44-3e9e32ffb",
-  "group": "Q44",
+  "reviewer": "NT-cc-Q104-465887955",
+  "group": "Q104",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-3e9e32ffb (reviewer sub-agent of L); spot-checked: I read the item's statement and all five proof steps in full, against the main-20261015 blueprint node and proof, the unit sk-lem-coprojection (_section and proof), and the full statements of every stmt/proof dependency. Statement: K in D^b_c contains the unit's D^b_ctf, so the item generalizes the unit. L is invertible in D^b_ctf with a ctf inverse M, which matches the unit (an inverse in D is RHom(L,Λ), which is ctf anyway). Coefficients are A_{E,n} on pro-étale sites, as def-pur-conventions prescribes. The 'separated schemes' hypothesis is the chapter convention and the only citer (lem-pur-immersion-twist) satisfies it. Small cases checked: i=id, Z empty, K=0, L=Λ[r], L=Λ(m)[2m]. Step 1: lem-sf-pullback-tor-amplitude, lem-pur-derived-pullback-tensor-iso and lem-sf-tensor-ctf(i) give the inverse PM and keep every tensor in D^b_c. Step 2: lem-coef-sheaf-flat-model gives the ambient monoidal structure and lem-weil-pbc-quasi-inverse-adjoint gives the tensor adjunctions. Step 3: thm-sf-ambient-adjoint-class(2) applies, since G=ν^*f^×Rν_* is def-weil-exceptional-inverse-image and the inputs are D^b_c of étale origin, by lem-sf-proetale-constructible-origin. FA is in D^b_c by the cited finiteness, comparison and triangle nodes. fix-prop-projection-formula applies with (A in D^b_c(Z), M in D^b_ctf(W)), and the PF direction matches def-exchange-projection. All five Hom bijections match the unit's display. Step 4: Yoneda in D^b_c(Z), with the typing taken from def-weil-exceptional-inverse-image. Step 5: det-sp-unique-right-adjoint identifies the canonical map in the stated direction. The route is the unit's. The tool_uses are accepted as black boxes. No new nodes; no cycle (checked over the full closure); no duplicate found by grep for co-projection, invertible and i^!. No SGA. One inaccuracy, not repaired: the report says source metadata was moved to main-20261015 with blueprint_snapshot added, but source.document still names master (order 2006) and there is no blueprint_snapshot field. The statement text is identical in both snapshots. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-465887955 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full, against the main-20261015 blueprint item and proof and the unit sk-lem-coprojection. The only change is step 3. It replaces an inline preservation argument and its four citations with a citation of the existing prop-finite-compact-support-constructibility. That proposition's hypotheses hold with K_0=k=F̄_q, f=i separated of finite type, A=A_{E,n}, ell invertible, E/Q_ell finite and n>=1. Its first clause is exactly the D^b_c-to-D^b_c exact triangulated restriction that the step uses (Stacks 0GL0, more-etale.tex theorem-constructible-shriek, checked). The adjunction comes from thm-sf-ambient-adjoint-class(2), whose statement itself covers bounded constructible inputs of étale origin; the compactification and its dimension come from Nagata and lem-kun-dimension-finite-type (d=0 if Z is empty). fix-prop-projection-formula applies to (A in D^b_c(Z), M in D^b_ctf(W)). The five Hom bijections match the unit's display. The Yoneda step (step 4) and the unique-right-adjoint step (step 5) are unchanged and correct. Edge cases checked: i=id, Z empty, K=0, L=Λ, Λ[r] and Λ(m)[2m]. There are no new nodes, no cycle and no SGA; proof_deps equals the union of the steps' uses, and there is no duplicate in the DAG. Batch-5 check: the closure of prop-finite-compact-support-constructibility reaches lem-pod-lisse-module-sheaves-as-module-objects. That node is a generic fact (lisse sheaves are module objects of FLC), not Poincaré duality or a step of its proof. Neither assumption leaf nor sk-thm-trace-transport is in the closure. The proposition is relative finiteness of compact support, whose corollary is finiteness of H^i_c, so it lies genuinely outside the assumptions. The old step 3 already reached the same chain via sbc-thm-finiteness-finite-type. Accepted tool use: prop-finite-compact-support-constructibility. At merge the top-level tool_uses should add it and drop the four nodes the item no longer cites. The source.document still names master; that metadata is maintainer-owned and not a fault of this delivery. No fixes written."
  }
 }

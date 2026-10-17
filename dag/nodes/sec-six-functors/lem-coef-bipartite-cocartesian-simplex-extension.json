@@ -16,9 +16,146 @@
   "def-weil-pbc-trivial-kan-fibration",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First consider the last-vertex version. Set $B=N(C)$, $b=p(x)$, and $U=E\\times_B N(J)$, using the terminal-block restriction of $g$. Nerves of ordinary categories are quasicategories: an inner horn specifies its chain of arrows, and composition gives the missing faces. The pullback $U\\to N(J)$ is inner: project a horn to $E$, fill over the given simplex of $N(J)$ using $p$, and pair the filler with that simplex. Hence $U$ and its vertex fibers $E_{g(a)}$ are quasicategories. Apply [lem-cbc-relative-coslice-left-fibration] to $q=p$, $K=\\Delta^0$, $K_0=\\varnothing$ and $f=x$. Its map $E_{x/}\\to E\\times_B B_{b/}$ is a left fibration. The map $U\\to E\\times_B B_{b/}$ sends $(y,\\sigma)$ to $(y,g_0|_{\\{d\\}\\star\\sigma})$. Its pullback is precisely $L^0\\to U$, degree by degree. Pullbacks of left fibrations are left fibrations by the same coordinatewise horn-lifting argument. Thus $L^0$ is a quasicategory. Restricting this pullback to $E_{g(a)}$ gives a left fibration $J_a^0\\to E_{g(a)}$, so $J_a^0$ is also a quasicategory. The identification uses only the join-coslice definitions, including the last-block operators.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BZ",
+    "place": "Proposition 4.3.6.8, coslice dual, with empty K_0; definition-level pullback application."
+   }
+  },
+  {
+   "text": "The inclusion $j:\\{d\\}\\hookrightarrow\\Delta^d$ is right anodyne. For $d>0$, identify $\\Delta^d=(\\Delta^{d-1})^{\\triangleright}$ and $\\{d\\}=\\varnothing^{\\triangleright}$; apply [lem-coef-infinity-cone-mono-right-anodyne] to the monomorphism $\\varnothing\\hookrightarrow\\Delta^{d-1}$. For $d=0$ the inclusion is the identity, included in the right anodyne class by its definition.",
+   "uses": [
+    "lem-coef-infinity-cone-mono-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Right-cone special case of the right-anodyne join calculus; the cone-monomorphism node supplies the class membership."
+   }
+  },
+  {
+   "text": "For $k\\geq0$, a boundary lifting problem for $R$ specifies a map into $E$ on\n$$P_k=(\\Delta^d\\star\\partial\\Delta^k)\\cup_{\\{d\\}\\star\\partial\\Delta^k}(\\{d\\}\\star\\Delta^k)\\subseteq\\Delta^d\\star\\Delta^k,$$\nwith the fixed restriction $\\tau$, over the simplex $g(\\operatorname{id}\\star\\sigma)$ in $B$. By [lem-coef-infinity-anodyne-cocones], applied to $j$ of step 2 and $\\partial\\Delta^k\\hookrightarrow\\Delta^k$, this inclusion is inner anodyne. The inner-fibration lifting condition for $p$ extends from inner horns to their weakly saturated closure: extend on each attached horn, glue at limit stages, and restrict a lift along the section for a retract. It therefore supplies a filler on $\\Delta^d\\star\\Delta^k$. This is exactly a boundary lift for $R$. When $k=0$, the first summand is $\\Delta^d\\star\\varnothing=\\Delta^d$, so the same argument proves surjectivity on vertices while retaining $\\tau$. By [def-weil-pbc-trivial-kan-fibration], $R$ is a trivial Kan fibration.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "def-coef-infinity-fibrations",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.2.5 and its boundary/pushout-join proof; compare Lemma 2.1.2.3."
+   }
+  },
+  {
+   "text": "All these maps retain the $N(J)$ coordinate, so $R$ is over $N(J)$ and $R_a$ is its pullback along $J_a^0\\hookrightarrow L^0$. A boundary lifting problem for $R_a$ is a problem for $R$ with base coordinate constantly $a$; its filler still has that coordinate. Thus every $R_a$ is a trivial Kan fibration. By [lem-weil-pbc-trivial-kan-lifts-monomorphisms], $R$ and $R_a$ lift inner horns, since horn inclusions are degreewise injective. Filling the image horn in the quasicategory $L^0$, then lifting that filler, proves $L$ is a quasicategory. The same argument with $J_a^0$ proves $J_a$ is one.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.2.5, base change and inner-horn consequences of boundary lifting."
+   }
+  },
+  {
+   "text": "The maps $R$ and $R_a$ have the right lifting property against every degreewise monomorphism by [lem-weil-pbc-trivial-kan-lifts-monomorphisms]. In the Joyal model structure [lem-coef-joyal-model-structure], these are exactly the cofibrations, and the right class of the weak factorization system (cofibrations, trivial fibrations) is exactly the trivial fibrations. Hence $R$ and $R_a$ are Joyal trivial fibrations and therefore categorical equivalences. This proves the categorical-equivalence assertions without assuming any properness of that model structure.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.2.5; categorical-equivalence consequence via the existing Joyal weak-factorization-system statement."
+   }
+  },
+  {
+   "text": "At a fixed object $a$, the map $g_0$ over its constant simplices is the constant vertex $f_a$ of $B_{b/}$. Consequently $J_a^0$ is exactly $L(x,f_a)=E_{x/}\\times_{B_{b/}}\\{f_a\\}$ of [lem-coef-infinity-cocartesian-composition-initiality], with all simplicial operators, not merely its set of vertices. That node states that the specified cocartesian lift $s_a$ is initial in this quasicategory. Surjectivity on vertices of $R_a$ supplies at least one vertex $z_a$ with $R_a(z_a)=s_a$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9, opposite-category dual, and surjectivity of the relative slice restriction."
+   }
+  },
+  {
+   "text": "Fix any such $z\\in J_a$ and any $w\\in J_a$. To show $z$ initial, consider the induced map\n$$\\operatorname{Map}_{J_a}(z,w)\\longrightarrow\\operatorname{Map}_{J_a^0}(s_a,R_aw).$$\nIn the right-pinched convention of [def-cbc-enhanced-diagrams-cones], a boundary lifting problem in dimension $k$ for this map is a lifting problem for $R_a$ on the monomorphism\n$$((\\partial\\Delta^k)\\star\\Delta^0)\\cup\\Delta^k\\cup\\Delta^0\\ \\hookrightarrow\\ \\Delta^k\\star\\Delta^0.$$\nThe initial face $\\Delta^k$ is prescribed constantly at $z$, the last vertex constantly at $w$, and the other part by the given boundary. The parts agree on intersections. The monomorphism lifting theorem [lem-weil-pbc-trivial-kan-lifts-monomorphisms] gives the filler, also for $k=0$. Thus the displayed mapping-space map is a trivial Kan fibration. The boundary characterization in [lem-coef-kan-quillen-right-proper] makes it a weak homotopy equivalence. Its target is weakly contractible by step 6. Composing with the target's map to a point and using two-out-of-three for those weak equivalences shows its source is weakly contractible. Since $w$ was arbitrary, $z$ is initial, as required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9 combined with the right-pinched boundary-lifting specialization; agent-written verification for every prescribed z."
+   }
+  },
+  {
+   "text": "For each nonidentity arrow $u:a\\to b$ of $J$, restrict $g_0$ to the triangle on $d,a,b$. The two edges $s_a:x\\to y_a$ and $s_b:x\\to y_b$ define a horn $\\Lambda^2_0\\to E$ over that triangle; its distinguished edge $0\\to1$ is $s_a$. The horn definition of $p$-cocartesianness in [def-coef-infinity-fibrations] supplies a filler. Write its third edge as $t_u:y_a\\to y_b$. In this triangle the first and long edges are $s_a$ and $s_b$, both $p$-cocartesian. Cancellation in [lem-coef-infinity-cocartesian-composition-initiality] therefore says $t_u$ is $p$-cocartesian. The same node says that degenerate edges are $p$-cocartesian; these will be the images of identity arrows.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.8, outer-horn criterion, and Proposition 2.4.1.7, cocartesian dual."
+   }
+  },
+  {
+   "text": "There is no nondegenerate simplex of $N(J)$ in dimension at least two: its successive arrows would all be nonidentity, contradicting the hypothesis on $J$. Thus $N(J)$ is obtained by gluing one $\\Delta^1$ for each nonidentity arrow to its specified endpoint vertices, with only their degeneracies added. In $L^0$, take vertex $s_a$ at $a$ and the edge corresponding to the triangle of step 8 at $u:a\\to b$. The faces of each edge are exactly $s_a,s_b$, so these maps glue to a simplicial map $i^0:N(J)\\to L^0$. Its composite with $\\rho^0$ is the identity on vertices and generating edges, hence on every simplex. Its terminal evaluation is $y_a$ on vertices, $t_u$ on nonidentity arrows, and the degenerate edge at $y_a$ on an identity. Step 8 therefore proves all these evaluated arrows $p$-cocartesian.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent incidence refinement of the initial-lift construction in Remark 2.4.1.9; the gluing is directly from the ordinary-nerve definition."
+   }
+  },
+  {
+   "text": "Now prescribe any family of vertices $z_a\\in J_a$ with $R_a(z_a)=s_a$. Let $V=\\coprod_{a\\in\\operatorname{Ob}J}\\Delta^0\\hookrightarrow N(J)$ be the simplicial subset of vertices and their degeneracies. The family gives a map $z:V\\to L$ whose composite with $R$ is $i^0|_V$. Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to this monomorphism and $R$: obtain $i:N(J)\\to L$ with $i|_V=z$ and $Ri=i^0$. Since $R$ is over $N(J)$, $\\rho i=\\rho^0i^0=\\operatorname{id}$. Restriction $R$ leaves the entire terminal block unchanged, so terminal evaluation of $i$ equals that of $i^0$ on every simplex. Its arrows are therefore $p$-cocartesian and its last cross edge at $a$ is exactly $s_a$. By the definition of $L$, each extension still restricts to the entire original $\\tau$. For $d=0$, $R$ is the identity and this includes every earlier assertion. For $J=\\varnothing$, $L=L^0=\\varnothing$ and the unique empty section has all the required properties; assertions indexed by $a$ are vacuous. This completes all clauses.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.2.5 and the monomorphism lifting consequence; prescribed-vertex relative lifting specialized to the incidence nerve."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-relative-coslice-left-fibration",
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cone-mono-right-anodyne",
+  "lem-coef-infinity-anodyne-cocones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent derived coefficient adjunction branch through the operadic family cell presentation. Agent expansion of the generic fixed-source incidence prerequisite, using online HTT Propositions 2.1.2.5 and 2.4.1.7, Remark 2.4.1.9, and Kerodon 018J/01BZ; archival copies requested in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +191,45 @@
    "results": "{\"t\": \"2026-10-17T08:44:03Z\", \"tool\": \"leansearch\", \"query\": \"Extend chosen cocartesian edges from the last vertex of a simplex over a bipartite diagram while fixing the entire source simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"CategoryTheory.Limits.Cocone.extend\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.map\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"CategoryTheory.Limits.Cocones.extend_hom\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.recOn\"], \"digest\": \"183a58f582fd1afd\"}",
    "date": "2026-10-17",
    "verdict": "no match: strict Segal and horn-colimit hits give neither a coherent cocartesian section nor initial objects in whole-simplex extension fibers. CategoryTheory.Functor.IsCocartesian.map and fac (FiberedCategory/Cocartesian.lean:90,97) concern ordinary categories and strict universal properties, not inner fibrations of quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|coCartesian|relativeCoslice",
+   "results": "{\"t\": \"2026-10-17T13:16:11Z\", \"tool\": \"grep\", \"query\": \"cocartesian|coCartesian|relativeCoslice\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cocartesian arrows, strict Segal coskeleta, generic model-category trivial fibrations, or primitive horns; none states this relative quasicategory join restriction, initiality, and prescribed cocartesian section theorem. Read ordinary Cocartesian.lean:82-105, Quasicategory/Basic.lean:36-55, SimplicialSet/CategoryWithFibrations.lean:38-55, ModelCategory/CategoryWithCofibrations.lean:96-112, and Coskeletal.lean:55-78."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative join extension from the final vertex is a trivial Kan fibration and admits a section fixing prescribed vertices",
+   "results": "{\"t\": \"2026-10-17T13:16:11Z\", \"tool\": \"leansearch\", \"query\": \"A relative join extension from the final vertex is a trivial Kan fibration and admits a section fixing prescribed vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"HomotopicalAlgebra.trivialCofibrations_rlp\", \"HomotopicalAlgebra.instFibrationPTrivialCofibrationsFibrations\", \"CategoryTheory.Bicategory.LeftExtension.IsAbsKan.isKan\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_trivialFibrations\", \"SSet.Truncated.rightExtensionInclusion_right_as\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\"], \"digest\": \"035013aece3377db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cocartesian arrows, strict Segal coskeleta, generic model-category trivial fibrations, or primitive horns; none states this relative quasicategory join restriction, initiality, and prescribed cocartesian section theorem. Read ordinary Cocartesian.lean:82-105, Quasicategory/Basic.lean:36-55, SimplicialSet/CategoryWithFibrations.lean:38-55, ModelCategory/CategoryWithCofibrations.lean:96-112, and Coskeletal.lean:55-78."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"cocartesian\"",
+   "results": "{\"t\": \"2026-10-17T13:16:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cocartesian arrows, strict Segal coskeleta, generic model-category trivial fibrations, or primitive horns; none states this relative quasicategory join restriction, initiality, and prescribed cocartesian section theorem. Read ordinary Cocartesian.lean:82-105, Quasicategory/Basic.lean:36-55, SimplicialSet/CategoryWithFibrations.lean:38-55, ModelCategory/CategoryWithCofibrations.lean:96-112, and Coskeletal.lean:55-78."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chosen cocartesian lifts from the last vertex of a simplex extend to a coherent section over a bipartite category",
+   "results": "{\"t\": \"2026-10-17T13:16:12Z\", \"tool\": \"leanfinder\", \"query\": \"Chosen cocartesian lifts from the last vertex of a simplex extend to a coherent section over a bipartite category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\"], \"digest\": \"426c7408420e56f8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cocartesian arrows, strict Segal coskeleta, generic model-category trivial fibrations, or primitive horns; none states this relative quasicategory join restriction, initiality, and prescribed cocartesian section theorem. Read ordinary Cocartesian.lean:82-105, Quasicategory/Basic.lean:36-55, SimplicialSet/CategoryWithFibrations.lean:38-55, ModelCategory/CategoryWithCofibrations.lean:96-112, and Coskeletal.lean:55-78."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a relative quasicategory coslice from a simplex to its final vertex is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-17T13:16:13Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a relative quasicategory coslice from a simplex to its final vertex is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory.hornFilling\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"3da149ba5ddf03d1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cocartesian arrows, strict Segal coskeleta, generic model-category trivial fibrations, or primitive horns; none states this relative quasicategory join restriction, initiality, and prescribed cocartesian section theorem. Read ordinary Cocartesian.lean:82-105, Quasicategory/Basic.lean:36-55, SimplicialSet/CategoryWithFibrations.lean:38-55, ModelCategory/CategoryWithCofibrations.lean:96-112, and Coskeletal.lean:55-78."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-family-cell-presentation",
@@ -84,5 +256,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-bipartite-cocartesian-simplex-extension",
+  "worker": "stage1",
+  "summary": "Unchanged statement; ten explicit steps prove relative slice restriction by pushout-join lifting, initiality by right-pinched mapping-space lifting, and prescribed-vertex section assembly from one cocartesian triangle per nonidentity arrow. Reused all prerequisite statements; no new nodes. Checked empty incidence category and d=0. No Lean written or compiled.",
+  "blueprint": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim; operadic free extension in the fixed-object rectification chain: the operadic Kan-extension existence and parameter extension used to make the derived adjunction coherent. This prerequisite supplies source-cell presentation for the operadic outer-horn problem. Extracted prerequisite of source-cell presentation, returned proof Step 8: Coherent cocartesian incidence sections with a fixed source simplex.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "The generic relative coslice left-fibration theorem proves L^0 and its fixed-base fibers are quasicategories. This is a simplicial tool, not a replacement of the coefficient adjunction route, and no statement of this unit supplies this relative projection theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-f6689d65f",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-f6689d65f (reviewer sub-agent of L); spot-checked: I read the full item, its ten steps and the full statement of every cited node; none is merged. The statement is inherited and unchanged, and the delivery adds no new nodes. Step 1: lem-cbc-relative-coslice-left-fibration with K=Δ^0, K_0=∅, f=x gives the left fibration E_{x/}→E×_B B_{b/}. Its pullback along U→E×_B B_{b/}, (y,σ)↦(y,g_0(id⋆σ)), is exactly L^0, so L^0 and J_a^0 are quasicategories. This is an off-unit tool use (unit sk-prop-sf-cbc), declared and accepted. Step 2: {d}↪Δ^d=(Δ^{d-1})^▷ is right anodyne, with the correct orientation. Step 3: P_k is the pushout-join with A={d}, B=Δ^d, K=∂Δ^k, L=Δ^k. I confirmed the variance on Λ^2_1, so lem-coef-infinity-anodyne-cocones makes P_k↪Δ^d⋆Δ^k inner anodyne. Fillers keep τ, and k=0 gives surjectivity on vertices, so R is a trivial Kan fibration. Steps 4-5: R_a is a pullback of R, so it is trivial too. L and J_a are quasicategories by lifting inner horns. The Joyal weak factorization system (monomorphisms, trivial fibrations) makes R and R_a categorical equivalences. Step 6: J_a^0=L(x,f_a) on all degrees, since g_0(id⋆const_a) is the degenerate simplex on f_a, so s_a is initial. Step 7: the right-pinched lifting domain ((∂Δ^k)⋆Δ^0)∪Δ^k∪Δ^0 glues correctly, and the mapping-space map is a trivial fibration. lem-coef-kan-quillen-right-proper and two-out-of-three then make every lift z of s_a initial. Step 8: a Λ^2_0 horn on s_a, s_b is filled by cocartesianness, and cancellation makes t_u cocartesian. Step 9: N(J) is 1-skeletal, reading the hypothesis as forbidding the pair (u,u); the statement stays true even otherwise, because {d}⋆∂Δ^k=Λ^{k+1}_0. Step 10: lifting through the monomorphism V↪N(J) gives the section with prescribed vertices, last edges s_a and cocartesian terminal evaluation. I checked d=0, J=∅, discrete J and J=[1]. Not duplicates: lem-coef-join-pullback-simplex-extension and lem-coef-initial-poset-slice-restriction state different results. HTT, HA and Kerodon are not archived; the WANTED lines are filed and proof_origin=agent is correct. There is no SGA citation, and proof_deps equals the union of the step uses. The item is not a target, so the base-change check does not apply. No fixes."
  }
 }

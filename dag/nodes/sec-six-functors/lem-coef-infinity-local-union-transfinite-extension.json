@@ -10,9 +10,63 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $\\alpha\\leq\\theta$, let $F_\\alpha$ be the set of simplicial maps $g:X_\\alpha\\to E$ whose restriction along $X_0\\hookrightarrow X_\\alpha$ is $f_0$. For $\\alpha\\leq\\beta$ let $\\rho_{\\beta\\alpha}:F_\\beta\\to F_\\alpha$ be restriction. Identity and composition of restrictions hold, and $F_0$ has the single prescribed element $f_0$. A compatible family in these sets is therefore exactly a family of extensions as in the conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p.250: organize the successive extensions as an inverse system of maps on the stages."
+   }
+  },
+  {
+   "text": "Fix $\\alpha<\\theta$ and $g\\in F_\\alpha$. By the hypothesis, the composite $A_\\alpha\\to X_\\alpha\\xrightarrow{g}E$ has an extension $h:B_\\alpha\\to E$. The assumed pushout square $X_{\\alpha+1}\\cong X_\\alpha\\amalg_{A_\\alpha}B_\\alpha$ and the equality of $h$ with $g$ on $A_\\alpha$ give, by the pushout universal property, a unique simplicial map $g^+:X_{\\alpha+1}\\to E$ restricting to $g$ on $X_\\alpha$ and to $h$ on $B_\\alpha$. Since $g$ extends $f_0$, so does $g^+$; hence $g^+\\in F_{\\alpha+1}$ and $\\rho_{\\alpha+1,\\alpha}(g^+)=g$. Thus every successor restriction map is surjective. This argument uses only the displayed pushout, so it also covers an arbitrary coproduct of cell inclusions presented as one degreewise-injective map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p.250: successor-stage extension across each attached cell and gluing along its boundary."
+   }
+  },
+  {
+   "text": "Let $0<\\beta\\leq\\theta$ be a limit ordinal and let $(g_\\alpha)_{\\alpha<\\beta}$ be a compatible family with $g_\\alpha\\in F_\\alpha$. For a simplex $x\\in (X_\\beta)_n$, continuity gives some $\\alpha<\\beta$ with $x\\in (X_\\alpha)_n$; define $g_\\beta(x):=g_\\alpha(x)$. If another stage contains $x$, compatibility makes the value equal. Every simplicial operator sends $x$ to a simplex in the same $X_\\alpha$, so these degreewise values commute with all operators and define a simplicial map $g_\\beta:X_\\beta\\to E$. It restricts to every $g_\\alpha$ and hence to $f_0$, so $g_\\beta\\in F_\\beta$. Therefore every compatible family below a nonzero limit stage lifts to that stage.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p.250: take the degreewise union at limit stages."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-well-ordered-inverse-system-section] to the small well-ordered set $J=\\{\\alpha\\mid \\alpha\\leq\\theta\\}$, with $F_\\alpha$ and $\\rho_{\\beta\\alpha}$ from step 1. Step 2 supplies the required surjectivity at each nonmaximal successor, and step 3 supplies the required lifting of every compatible family at each nonzero limit. Prescribing the bottom element $f_0\\in F_0$, the cited result gives a compatible family $(f_\\alpha)_{\\alpha\\leq\\theta}$. In particular $f_\\theta$ extends $f_0$, and compatibility gives $f_\\beta|_{X_\\alpha}=f_\\alpha$ for all $\\alpha\\leq\\beta\\leq\\theta$.",
+   "uses": [
+    "lem-coef-well-ordered-inverse-system-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p.250: transfinite recursion with fixed initial data."
+   }
+  },
+  {
+   "text": "When $\\theta=0$, the index set has only its bottom element and the given map $f_0$ itself is the required family. If $X_0$ is empty, the same construction starts from its unique empty map, and no step changes. The proof never uses more than the stated pushouts, successor extension hypothesis, and degreewise unions at limits, so empty stages and arbitrary coproducts of cell inclusions are included exactly as asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p.250: boundary cases and continuous union construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-well-ordered-inverse-system-section"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Proposition 4.2.3.4, printed p.250, transfinite construction with fixed initial data and unions at limit stages; source read online 2026-10-17 and not archived in literature/. The inverse-system selection step is isolated in the existing Mathlib leaf lem-coef-well-ordered-inverse-system-section."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +95,38 @@
    "results": "{\"t\": \"2026-10-17T10:45:31Z\", \"tool\": \"leansearch\", \"query\": \"Any map from the first simplicial subset in a continuous ordinal filtration extends to the union if every extension at a successor stage is possible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.rec\", \"CategoryTheory.SimplicialThickening\", \"SSet.iSup_skeletonOfMono\", \"CategoryTheory.SmallObject.transfiniteCompositionOfShapeSuccStructPropιIteration\", \"IsFiltration.recOn\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"Field.Emb.Cardinal.filtration\"], \"digest\": \"34bca1be7983413e\"}",
    "date": "2026-10-17",
    "verdict": "no match: iSup_skeletonOfMono and stability of monomorphisms under filtered colimits do not give the asserted compatible extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible map extends from the initial stage through a transfinite continuous sequence of simplicial pushouts when every successor cell boundary map extends",
+   "results": "HomotopicalAlgebra.RelativeCellComplex.attachCells; RelativeCellComplex.toTransfiniteCompositionOfShape; RelativeCellComplex.transfiniteCompositionOfShape; no fixed-initial-data extension theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned relative-cell-complex constructors, not the fixed-initial-data extension statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.WellOrderInductionData.surjective, CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingPropertyFixedBot_ι_app_bot",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: qualified comma query returned no declaration; existing inverse-system leaf was checked separately."
+  },
+  {
+   "tool": "grep",
+   "query": "WellOrderInductionData|transfiniteComposition|pushout.*simplicial CategoryTheory/SmallObject",
+   "results": "Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean lines 46,68-82,271-282; TransfiniteCompositionLifting.lean lines 8,17,22,69; no fixed-data simplicial theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; generic well-order induction infrastructure only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a continuous ordinal filtration of simplicial sets by pushouts, a map extending the initial stage extends to the union when every attached boundary map extends",
+   "results": "RelativeCellComplex.transfiniteCompositionOfShape; IsFiltration.rec; SmallObject attachment declarations; no exact fixed-data extension.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cell-complex and filtration results do not state the asserted extension."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-directed-union-local-colimits",
@@ -72,5 +154,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-local-union-transfinite-extension",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against HTT Proposition 4.2.3.4 and split its proof into the extension-set inverse system: successor extensions are glued by the given pushouts, limit stages are degreewise unions, and the existing Mathlib-backed well-ordered inverse-system section supplies a compatible family through the prescribed f_0. No new node was needed; the item includes theta=0, empty X_0, and arbitrary coproduct cell inclusions.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, passage from cellwise extensions to the map on the union: well order the cells and take unions at limit ordinals."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-b1b5932f0",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-b1b5932f0 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full; its statement is unchanged and true, and it serves the parent's use. Statement tests: theta=0, one cell, theta=omega with a simplex first appearing at a finite stage, and empty X_0 all hold. The extension hypothesis applies only to maps extending f_0, and that is exactly what the parent (lem-coef-infinity-directed-union-local-colimits, step 6) supplies through its steps 4 and 5. Steps 1-3 and 5 are genuinely elementary. Step 1: F_alpha is the set of extensions of f_0 to X_alpha, with restriction maps, and F_0={f_0}. Step 2: the pushout universal property, using the inclusion leg X_alpha into X_{alpha+1}, gives successor surjectivity. Step 3: the degreewise union at a nonzero limit is well defined by compatibility and commutes with the simplicial operators because each X_alpha is a simplicial subset. Step 4: the cited Mathlib leaf lem-coef-well-ordered-inverse-system-section matches. I read Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean, lines 40-82 (ofExists: surjectivity at not-IsMax successors, lifting at IsSuccLimit, which excludes bottom) and lines 265-282 (sectionsMk and surjective, which need OrderBot and WellFoundedLT). With J=[0,theta], steps 2 and 3 are exactly its hypotheses. proof_deps equals the union of uses, and there is no cycle. There are no new nodes. An rg search over dag/nodes for transfinite/limit-ordinal together with extend/pushout found no duplicate. A general LLP-under-transfinite-composition result does not specialize in one line, because the hypothesis is restricted to extensions of f_0. The route stays inside unit sk-prop-sf-biduality-general: the only proof dependency is a Mathlib leaf, no tool_uses are needed, and no SGA is cited. The blueprint from/place/via, same_as=[] and split_report.blueprint are present. This is not a target, so the base-change and coefficient checks do not apply. Source: HTT Prop. 4.2.3.4 is not in literature/, so I could not read the cited page. The node is correctly marked proof_origin agent with a WANTED entry, and I verified the argument on its own. No fixes."
  }
 }

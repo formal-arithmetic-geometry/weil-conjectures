@@ -1,0 +1,93 @@
+{
+ "id": "lem-sp-finite-free-direct-image-coherence",
+ "kind": "statement",
+ "title": "Coherent finite-free coefficient comparison for ambient derived direct image",
+ "statement": "Let $q:Z\\to W$ be a morphism of schemes, using small pro-etale sites [def-weil-pbc-proetale-site]. For $T=Z,W$, let $R_T\\to S_T$ be maps of sheaves of commutative rings, with specified isomorphisms $q^{-1}R_W\\cong R_Z$ and $q^{-1}S_W\\cong S_Z$ commuting with these maps. Suppose $S_W$ is finite free as an $R_W$-module sheaf, meaning $S_W\\cong R_W^{\\oplus d}$ for some finite integer $d\\geq0$. Use the ordinary unbounded derived categories $D(R_T)=D(\\operatorname{Mod}(R_T))$ and $D(S_T)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], canonical module pullback/direct-image adjunctions [def-weil-pbc-proetale-operations], and $C_T(M)=M\\otimes^L_{R_T}S_T$ [lem-pur-derived-change-of-rings]. Let $\\mu:Lq_S^*C_W\\xrightarrow{\\sim}C_ZLq_R^*$ be the canonical balancing comparison of derived pullback and scalar tensor [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For $M\\in D(R_Z)$ define\n$$\\pi_{S/R,q,M}:C_WRq_{*,R}M\\longrightarrow Rq_{*,S}C_ZM$$\nto be the $Lq_S^*\\dashv Rq_{*,S}$-adjunct of\n$$Lq_S^*C_WRq_{*,R}M\\xrightarrow{\\mu}C_ZLq_R^*Rq_{*,R}M\\xrightarrow{C_Z(\\varepsilon_{R,M})}C_ZM.$$\nThen $\\pi_{S/R,q}$ is a natural isomorphism of exact functors $D(R_Z)\\to D(S_W)$, including compatibility with the canonical cochain shift in the input $M$. In particular this is an equality of $S_W$-module derived morphisms, not just an equality after forgetting scalars.\n\nFor identity coefficient maps $R_T\\to R_T$, it is the identity under the multiplication identifications. More generally let $R_T\\to S_T\\to B_T$ be a further compatible tower of ring sheaves, with $q^{-1}B_W\\cong B_Z$, $B_W$ finite free over $S_W$, and all inverse-image identifications commuting with the coefficient maps. Write $C_{S/R,T},C_{B/S,T},C_{B/R,T}$ for the scalar functors and $a_T:C_{B/S,T}C_{S/R,T}\\xrightarrow{\\sim}C_{B/R,T}$ for balanced associativity. For every $M\\in D(R_Z)$ one has\n$$\\pi_{B/R,q,M}=Rq_{*,B}(a_{Z,M})\\,\\pi_{B/S,q,C_{S/R,Z}M}\\,C_{B/S,W}(\\pi_{S/R,q,M})\\,(a_{W,Rq_{*,R}M})^{-1}.$$\nNo completeness, constructibility, properness or base-field hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map, and Tag 0944, lemma-projection-formula (finite-free case); the input-shift and successive-coefficient equations are agent-extracted from the counit-tensor construction, not quoted as clauses of the Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteFree.*(DirectImage|directImage)|projectionFormula|projection_formula",
+   "results": "{\"t\": \"2026-10-17T08:05:33Z\", \"tool\": \"grep\", \"query\": \"finiteFree.*(DirectImage|directImage)|projectionFormula|projection_formula\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits for free sheaf pullback and underived pushforward counits, and Shift/Adjunction; none gives this coefficient-changing unbounded derived direct-image isomorphism with input-shift and successive-ring equations in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension of sheaf coefficient rings commutes with derived direct image and its canonical comparison commutes with shifts and successive scalar extensions",
+   "results": "{\"t\": \"2026-10-17T08:05:33Z\", \"tool\": \"leansearch\", \"query\": \"Finite free extension of sheaf coefficient rings commutes with derived direct image and its canonical comparison commutes with shifts and successive scalar extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.free\", \"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"SheafOfModules.restrictScalars\", \"SheafOfModules.freeFunctor\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"a233c46652b805f4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits for free sheaf pullback and underived pushforward counits, and Shift/Adjunction; none gives this coefficient-changing unbounded derived direct-image isomorphism with input-shift and successive-ring equations in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.shiftFunctor",
+   "results": "{\"t\": \"2026-10-17T08:05:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.shiftFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.LeftAdjointCommShift.iso\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso\", \"CategoryTheory.Adjunction.CommShift.CompatibilityCounit\", \"CategoryTheory.Adjunction.CommShift.CompatibilityUnit\", \"CategoryTheory.Adjunction.LeftAdjointCommShift.iso'\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso'\", \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit\", \"CategoryTheory.Adjunction.leftAdjointCommShift_commShiftIso\"], \"digest\": \"e990236489074b26\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits for free sheaf pullback and underived pushforward counits, and Shift/Adjunction; none gives this coefficient-changing unbounded derived direct-image isomorphism with input-shift and successive-ring equations in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi finite free change of coefficient rings commutes with unbounded derived direct image via the counit projection map, compatibly with input shifts and composition of coefficient extensions",
+   "results": "{\"t\": \"2026-10-17T08:05:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of ringed topoi finite free change of coefficient rings commutes with unbounded derived direct image via the counit projection map, compatibly with input shifts and composition of coefficient extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.ιFree_mapFree_inv_assoc\"], \"digest\": \"dcebc293346db42c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits for free sheaf pullback and underived pushforward counits, and Shift/Adjunction; none gives this coefficient-changing unbounded derived direct-image isomorphism with input-shift and successive-ring equations in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*(extendScalars|changeOfRings)|extendScalars.*pushforward|projectionFormula",
+   "results": "{\"t\": \"2026-10-17T08:08:24Z\", \"tool\": \"grep\", \"query\": \"pushforward.*(extendScalars|changeOfRings)|extendScalars.*pushforward|projectionFormula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits for free sheaf pullback and underived pushforward counits, and Shift/Adjunction; none gives this coefficient-changing unbounded derived direct-image isomorphism with input-shift and successive-ring equations in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit defined projection map from scalar extension of a derived direct image to direct image of a scalar extension is an exact natural isomorphism for finite free ring sheaf extensions and is transitive",
+   "results": "{\"t\": \"2026-10-17T08:08:35Z\", \"tool\": \"leanfinder\", \"query\": \"The counit defined projection map from scalar extension of a derived direct image to direct image of a scalar extension is an exact natural isomorphism for finite free ring sheaf extensions and is transitive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"Condensed.profiniteSolidCounit\", \"KaehlerDifferential.exact_mapBaseChange_map\", \"comonadicExtendScalars\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"digest\": \"3a8d930dfc475f57\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits for free sheaf pullback and underived pushforward counits, and Shift/Adjunction; none gives this coefficient-changing unbounded derived direct-image isomorphism with input-shift and successive-ring equations in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "map_ιFree_mapFree_hom|pullbackObjFreeIso_hom_naturality|pushforwardPushforwardAdj_counit_app_val_app",
+   "results": "{\"t\": \"2026-10-17T08:10:14Z\", \"tool\": \"grep\", \"query\": \"map_ιFree_mapFree_hom|pullbackObjFreeIso_hom_naturality|pushforwardPushforwardAdj_counit_app_val_app\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"14dc922d454156ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits for free sheaf pullback and underived pushforward counits, and Shift/Adjunction; none gives this coefficient-changing unbounded derived direct-image isomorphism with input-shift and successive-ring equations in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-rational-compact-support-coefficient-coherence",
+  "date": "2026-10-17",
+  "group": "Q150"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening paragraph of thm-cbc-qbar.proof.md: scalar extension commutes with Rp_*; ambient coefficient-changing counit projection, input shift and transitivity needed for the proper factor.",
+   "via": [
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
