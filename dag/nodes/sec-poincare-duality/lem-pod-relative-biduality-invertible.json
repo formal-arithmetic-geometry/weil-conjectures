@@ -1,0 +1,187 @@
+{
+ "id": "lem-pod-relative-biduality-invertible",
+ "kind": "statement",
+ "title": "Relative Verdier biduality on dualizable objects for an invertible relative dualizing complex",
+ "statement": "Let $\\ell$ be prime, $k$ a field of positive prime characteristic different from $\\ell$, and $a:X\\to S$ a morphism between separated finite-type $k$-schemes. In the actual condensed bounded constructible categories of [sk-def-sfb-bounded-constructible], with internal Hom of [def-sfb-dc-tensor-hom-adjunction] and exceptional inverse image of [sk-def-sfb-dc-upper-shriek], put $W=Ra^!\\mathbf{1}_S$. Suppose that $W$ has a two-sided tensor inverse and that $K$ is dualizable. Then the specified map $K\\to\\operatorname{RHom}(\\operatorname{RHom}(K,W),W)$, the transpose of braided evaluation, is an isomorphism. This is conditional and does not claim that $W$ is dualizing for every base or that every bounded constructible object is dualizable.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/_section.md",
+  "place": "Proof, double application of the invertible twist comparison and coefficient biduality; categorical implementation in WeilConjectures/CategoryTheory/Monoidal/Closed/InvertibleDualizing.lean, isIso_toIhomIhom_of_isDualizable"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-bounded-constructible",
+  "def-sfb-dc-tensor-hom-adjunction",
+  "sk-def-sfb-dc-upper-shriek"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing categorical theorem CategoryTheory.MonoidalClosed.isIso_toIhomIhom_of_isDualizable with T=W, gamma=Iso.refl W, the given invertibility of W and dualizability of K. Its proof identifies the double dual relative to W with coefficient biduality by tensoring the coefficient dual with W and using its inverse. The theorem has no geometric premise and applies to the actual condensed category, without identifying it with the etale coefficient categories.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The two named morphisms are definitionally equal: verdierBiduality unfolds to Verdier.bidualityMap W K, and both it and MonoidalClosed.toIhomIhom W K are curry of the braiding followed by the internal-Hom evaluation. Thus exact the categorical theorem closes the stated IsIso goal. No use is made of the disputed unrestricted isIso_verdierBiduality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/_section.md",
+  "place": "Proof; specialization of the existing categorical implementation to the actual condensed category"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a braided monoidal closed category biduality into an invertible object is an isomorphism for a dualizable object",
+   "results": {
+    "t": "2026-10-17T00:40:15Z",
+    "tool": "leanfinder",
+    "query": "In a braided monoidal closed category biduality into an invertible object is an isomorphism for a dualizable object",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight",
+     "CategoryTheory.leftDualIso",
+     "CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft",
+     "CategoryTheory.rightDualIso",
+     "CategoryTheory.leftDualIso_id",
+     "CategoryTheory.tensorRightHomEquiv",
+     "CategoryTheory.tensorLeftHomEquiv",
+     "CategoryTheory.exp.ev_coev"
+    ],
+    "digest": "f47ae830b848e54a"
+   },
+   "date": "2026-10-17",
+   "verdict": "No exact Mathlib match. The project theorem MonoidalClosed.isIso_toIhomIhom_of_isDualizable supplies the categorical result; its canonical map is definitionally the specified Verdier map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toIhomIhom\"",
+   "results": {
+    "t": "2026-10-17T00:41:03Z",
+    "tool": "loogle",
+    "query": "\"toIhomIhom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "No exact Mathlib match. The project theorem MonoidalClosed.isIso_toIhomIhom_of_isDualizable supplies the categorical result; its canonical map is definitionally the specified Verdier map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "biduality into an invertible object on dualizable objects in a monoidal closed category",
+   "results": {
+    "t": "2026-10-17T00:43:44Z",
+    "tool": "leansearch",
+    "query": "biduality into an invertible object on dualizable objects in a monoidal closed category",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Invertible.instDual",
+     "CategoryTheory.HasRightDual.rightDual",
+     "CategoryTheory.rightDual_leftDual",
+     "CategoryTheory.HasLeftDual",
+     "BoolAlg.dualEquiv",
+     "CategoryTheory.leftDual_rightDual",
+     "CategoryTheory.tensorRightHomEquiv",
+     "CategoryTheory.leftDualIso"
+    ],
+    "digest": "175da026f129fb08"
+   },
+   "date": "2026-10-17",
+   "verdict": "No exact Mathlib match. The project theorem MonoidalClosed.isIso_toIhomIhom_of_isDualizable supplies the categorical result; its canonical map is definitionally the specified Verdier map."
+  },
+  {
+   "tool": "grep",
+   "query": "toIhomIhom|isIso_verdierBiduality|bidualityMap",
+   "results": {
+    "t": "2026-10-17T00:43:49Z",
+    "tool": "grep",
+    "query": "toIhomIhom|isIso_verdierBiduality|bidualityMap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "No exact Mathlib match. The project theorem MonoidalClosed.isIso_toIhomIhom_of_isDualizable supplies the categorical result; its canonical map is definitionally the specified Verdier map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.PoincareDuality.Verdier",
+  "group": "G4",
+  "date": "2026-10-17"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-verdier-exchange",
+   "place": "Relative dualizing complexes occurring in the upstream Verdier module reached by nt-target-poincare-isiso; the return requests a separate correct conditional biduality variant, whose invertible-object argument is sourced from sk-thm-sf-dual-perfect. The target exchange proof is unchanged.",
+   "via": [
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.PoincareDuality.RelativeBiduality",
+  "file": "lean/Sheaf/PoincareDuality/RelativeBiduality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality_of_invertible_of_isDualizable",
+  "statement": "theorem isIso_verdierBiduality_of_invertible_of_isDualizable\n    (hω : IsInvertible (relativeDualizingComplex ℓ a))\n    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (hK : IsDualizable K) :\n    IsIso (verdierBiduality ℓ a K)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-17"
+ },
+ "import_flags": [
+  "unreachable"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261017T021602-L-694355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261017T021602-L-694355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

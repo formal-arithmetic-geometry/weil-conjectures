@@ -141,6 +141,12 @@ noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
     K ⟶ verdierDual ℓ a (verdierDual ℓ a K) :=
   Verdier.bidualityMap (relativeDualizingComplex ℓ a) K
 
+/- STATEMENT-DISPUTED: `Ra^! 𝟙_S` need not be dualizing for an arbitrary singular base.
+For the nodal curve `S = Spec(k[x,y]/(xy))` and its origin `a : Spec(k) ⟶ S`, the costalk
+has ranks one and two in degrees one and two. For the unit on the point, the second dual
+has degree-zero rank five, so the displayed assertion needs a base hypothesis.
+The upstream signature is retained verbatim. A proved conditional variant is in
+`Sheaf.PoincareDuality.RelativeBiduality`. -/
 /-- **Constructible Verdier biduality**: the double-dual morphism `δ_K` is an isomorphism for
 `K` bounded constructible. See the module docstring. -/
 theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
