@@ -4518,6 +4518,7 @@ public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.Topology.TopologicalFilteredCohomology
 public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.BorelMoore
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.Dualizing
