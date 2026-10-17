@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 import WeilConjectures.AlgebraicGeometry.ProperPerfectDirectImagePerfect
 import WeilConjectures.AlgebraicGeometry.PerfectObjectCompact
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import WeilConjectures.AlgebraicGeometry.CompactObjectPerfectWitness
+import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactRepresentatives
 import WeilConjectures.AlgebraicGeometry.ProperPerfectTransportCompact
 
 /-! # Compactness preserved by proper perfect pushforward
@@ -73,11 +73,13 @@ theorem properPerfect_preserves_compact
   set_option linter.style.haveILetI false in
     letI : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
   intro P hP
-  obtain ⟨hX, hY, hPerf⟩ := compactObject_perfect_witness (X := X) (Y := Y) P hP
+  obtain ⟨hX⟩ := noetherian_open_derived_categories_exists X
+  obtain ⟨hY⟩ := noetherian_open_derived_categories_exists Y
   set_option linter.style.haveILetI false in
     letI := hX
   set_option linter.style.haveILetI false in
     letI := hY
-  exact properPerfect_transport_compact f hTor R eR P hPerf
+  exact properPerfect_transport_compact f hTor R eR P
+    (compact_isPerfect_of_isNoetherian X P hP)
 
 end AlgebraicGeometry
