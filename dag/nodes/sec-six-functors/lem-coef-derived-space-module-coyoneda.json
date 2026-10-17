@@ -14,9 +14,120 @@
   "def-coef-enriched-coend",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U\\star_A V$ for the ordinary coend in chronological order, namely the coend of [def-coef-enriched-coend] with the two Cartesian factors interchanged. Its balancing relation is $[U(f)x,y]=[x,V(f)y]$ for $f\\in A(b,c)$. Consequently\n$$A(a,-)\\star_A V\\cong V(a),\\qquad [f,y]\\longmapsto V(f)y,$$\nwith inverse $y\\mapsto[1_a,y]$: balancing gives $[f,y]=[1_a,V(f)y]$, and the unit axiom gives the other composite. The same calculation in every simplicial degree proves the enriched isomorphism and its naturality. Products with a fixed simplicial set preserve coproducts and coequalizers, degreewise, since product of sets is left adjoint to its function-set functor. Thus all the coends below exist in the stipulated universe.",
+   "uses": [
+    "def-coef-enriched-coend"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; agent argument 1: ordinary representable evaluation and colimit algebra"
+   }
+  },
+  {
+   "text": "Take the explicit $P_\\bullet X$ and $Q_AX$ of [lem-coef-enriched-bar-projective-replacement]. Its conclusion gives projective cofibrancy of $Q_AX$. Composition of the chain, followed by the $X$-action, defines an enriched augmentation $Q_AX\\to X$. At a fixed $b$, the augmented simplicial object $P_\\bullet X(b)\\to X(b)$ has terminal extra degeneracy: append the vertex $b$, retain the old final factor $A(a_n,b)$ as a chain factor, and put $1_b$ in the new final factor $A(b,b)$. In degree $-1$ send $x\\in X(b)$ to $(x,1_b)$. The last face composes the old final mapping factor with $1_b$, so $d_{n+1}t_n=1$. For every earlier face $d_i$, appending leaves its action or composition unchanged, hence $d_it_n=t_{n-1}d_i$ for $n\\geq1$ and $0\\leq i\\leq n$; this includes the first face by the module action axiom. In degree zero $d_0t_0=t_{-1}\\varepsilon$; degeneracies commute with appending by the unit axioms. These are precisely the terminal identities in [lem-coef-simplicial-realization-extra-degeneracy]. All bisimplicial sets are Reedy cofibrant by [lem-coef-simplicial-space-reedy-cartesian]. That contraction theorem therefore makes $Q_AX(b)\\to X(b)$ a weak equivalence. The realization is the diagonal by [lem-coef-bisimplicial-diagonal-space-colimit]. The contractions need not be natural in $b$; the augmentation itself is enriched natural.",
+   "uses": [
+    "lem-coef-enriched-bar-projective-replacement",
+    "lem-coef-simplicial-realization-extra-degeneracy",
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-bisimplicial-diagonal-space-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; agent argument 2: explicit objectwise contraction of the free resolution"
+   }
+  },
+  {
+   "text": "Form $\\mathcal B_A(X,Y)=\\operatorname{diag}_{n,r}B_n(X,A,Y)_r$, with $B_n$ the displayed two-sided bar in the statement. Faces are the first action, internal compositions and the last action; associativity, the commuting action laws and units verify the simplicial identities. Coend colimits and realization commute because they are quotients of coproducts with their two sets of relations. Applying the evaluation isomorphism of step 1 to the last factor of $P_nX(b)$ gives a natural isomorphism\n$$(Q_AX)\\star_A Y\\cong\\mathcal B_A(X,Y).$$\nExplicitly a representative with final factors $f\\in A(a_n,b)$ and $y\\in Y(b)$ is sent to the same preceding word ending in $Y(f)y\\in Y(a_n)$. Its inverse inserts $b=a_n$ and $1_{a_n}$. Balancing proves these are inverse; the action axioms show they commute with every face and degeneracy. The quotient realization equals the diagonal, and its homotopy type is the homotopy realization, by [lem-coef-bisimplicial-diagonal-space-colimit].",
+   "uses": [
+    "def-coef-enriched-coend",
+    "lem-coef-enriched-bar-projective-replacement",
+    "lem-coef-bisimplicial-diagonal-space-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; agent argument 3: identification of the free-resolution coend with the two-sided bar"
+   }
+  },
+  {
+   "text": "The two-sided bar is homotopy invariant before making any replacements. An objectwise weak equivalence of either endpoint changes each $B_n$ by a coproduct of finite products of weak homotopy equivalences and identity maps. These are weak equivalences: [lem-coef-realization-finite-limits] identifies their realizations with disjoint unions of finite products of spaces, and components and all based homotopy groups of a finite product are products of the corresponding components and groups, while a sphere or a homotopy in a disjoint union stays in one component. Apply [lem-coef-bisimplicial-diagonal-equivalence] to conclude that the induced map of diagonals is a weak equivalence. This also applies objectwise when extra enriched variables are retained.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; agent argument 4: homotopy invariance of the bar"
+   }
+  },
+  {
+   "text": "In the projective model structures of [lem-coef-simplicial-projective-model-calculus], choose projective cofibrant replacements $qX\\to X$ and $qY\\to Y$. They can be chosen functorially as $Q_AX$ and $Q_{A^{\\mathrm{op}}}Y$ by step 2. The augmentation from step 2 and the comparison from step 3 give the natural zigzag\n$$\\mathcal B_A(X,Y)=(Q_AX)\\star_A Y\\ \\longleftarrow\\ (Q_AX)\\star_A qY\\ \\longrightarrow\\ X\\star_A qY\\ \\longleftarrow\\ qX\\star_A qY.$$\nEvery arrow is a weak equivalence by [lem-coef-enriched-coend-homotopy-invariance]: the first holds because $Q_AX$ is projectively cofibrant, and the second and third hold because $qY$ is projectively cofibrant. That node allows the varying module to be noncofibrant, so no additional hypothesis has been used. The last object is exactly the derived coend specified in the statement. Step 4 proves invariance under all objectwise weak equivalences and independence of replacements through this functorial zigzag. Thus homotopy realization of the displayed bar computes the stated derived coend.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-enriched-coend-homotopy-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; agent argument 5: comparison with the prescribed projective derived coend"
+   }
+  },
+  {
+   "text": "The representable $A(a,-)$ is projectively cofibrant: it is the free projective boundary cell $A(a,-)\\times\\partial\\Delta^0\\to A(a,-)\\times\\Delta^0$ from the initial object, using the cell characterization of [lem-coef-enriched-coend-homotopy-invariance]. Hence it can serve as its own cofibrant replacement. Step 1 identifies its ordinary coend with $qY$ as $qY(a)$; the comparison to $Y(a)$ is a weak equivalence by the definition of projective replacement. It is induced by the action, so the derived augmentation is exactly the claimed co-Yoneda equivalence. These formulas are natural in $a$, $Y$, and every retained module variable.",
+   "uses": [
+    "lem-coef-enriched-coend-homotopy-invariance",
+    "def-coef-enriched-coend"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; agent argument 6: derived representable contraction"
+   }
+  },
+  {
+   "text": "For Fubini use the trisimplicial set with outer degrees $p,q$ and internal simplicial degree $r$ whose $(p,q)$ object is\n$$T_{p,q}=\\coprod_{a_0,\\ldots,a_p,b_0,\\ldots,b_q}X(a_0)\\times\\prod_{i=1}^p A(a_{i-1},a_i)\\times M(a_p,b_0)\\times\\prod_{j=1}^q B(b_{j-1},b_j)\\times Y(b_q).$$\nThe $p$ and $q$ operators commute: the only possibly shared factor is $M$, and its two actions commute. First realize in $p$ to get the $B$-module $\\mathcal B_A(X,M)$. Taking its two-sided bar with $Y$ over $B$ gives the total diagonal $r\\mapsto(T_{r,r})_r$: in degree $r$ all finite products and coproducts are the displayed products and coproducts of sets. First realize in $q$ instead and the bar with $X$ over $A$ gives exactly the same simplicial set, with the same operators. The identity on this total diagonal is therefore a natural isomorphism between the two iterated bar models. Each realization is a homotopy realization by [lem-coef-bisimplicial-diagonal-space-colimit], and steps 4-5 apply to the intermediate modules without requiring them to be cofibrant. This proves the stated canonical equivalence of derived coends.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-space-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; agent argument 7: explicit common trisimplicial model for Fubini"
+   }
+  },
+  {
+   "text": "All comparisons preserve additional enriched variables: coproduct, Cartesian product, the coend balancing quotient and the diagonal are functors, and the maps displayed in steps 1-7 commute with their actions before passage to homotopy types. For a composition pairing the augmentation of a bar word applies the endpoint actions and composes all intervening arrows. On $T_{p,q}$ the two orders of augmentation apply the $A$-action and $B$-action to $M$ in opposite orders; these agree by the bimodule law, and composing adjacent arrows agrees by associativity. Insertion or deletion of an identity agrees by unitality. Thus every augmentation square commutes on its actual representatives, and the zigzag of step 5 commutes with it by naturality of replacement and of the action augmentation. The isomorphism in step 7 is the identity on those representatives, so it is the Fubini comparison compatible with composition, not a choice of an unrelated equivalence. No step used local Kan fibrancy of $A$ or $B$.",
+   "uses": [
+    "def-coef-enriched-coend"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; agent argument 8: enriched naturality and compatibility with composition augmentations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-enriched-coend",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-bisimplicial-diagonal-space-colimit",
+  "lem-coef-enriched-bar-projective-replacement",
+  "lem-coef-enriched-coend-homotopy-invariance",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-simplicial-realization-extra-degeneracy",
+  "lem-coef-simplicial-space-reedy-cartesian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; explicit free-bar argument, not a numbered theorem quoted from the blueprint"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +163,45 @@
    "results": "{\"t\": \"2026-10-17T06:54:58Z\", \"tool\": \"leanfinder\", \"query\": \"Derived coend of a covariant space valued functor with a representable presheaf is its evaluation and derived tensor products of bimodules are associative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.AssociatorBimod.homAux\", \"Bimod.AssociatorBimod.inv\", \"Bimod.TensorBimod.π_tensor_id_actRight\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\"], \"digest\": \"c89366e61e159fba\"}",
    "date": "2026-10-17",
    "verdict": "no match: Yoneda.lean:1051-1086 is ordinary Type-valued natural-transformation evaluation, not a derived coend; Bimod.lean:439-463 is the ordinary coequalizer associator, not homotopy tensor of simplicial-category modules. Tor and representation resolutions concern complexes. No exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived space module coyoneda theorem",
+   "results": "{\"t\": \"2026-10-17T08:26:30Z\", \"tool\": \"leanfinder\", \"query\": \"derived space module coyoneda theorem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.whiskering_linearCoyoneda\", \"CategoryTheory.linearCoyoneda_obj_obj_isModule\", \"CategoryTheory.whiskering_linearCoyoneda₂\", \"Ext\", \"CategoryTheory.linearCoyoneda\", \"CategoryTheory.linearYoneda_obj_obj_isModule\", \"CategoryTheory.linearCoyoneda_obj_obj_carrier\", \"CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.embedding\"], \"digest\": \"47f355f1d0b55f24\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the linearCoyoneda hits concern ordinary linear categories, not derived enriched coends of spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A two sided enriched bar construction computes the derived coend of simplicial category modules and tensor with a representable is evaluation",
+   "results": "{\"t\": \"2026-10-17T08:31:45Z\", \"tool\": \"leanfinder\", \"query\": \"A two sided enriched bar construction computes the derived coend of simplicial category modules and tensor with a representable is evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.eCoyoneda\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"CategoryTheory.enrichedNatTransYoneda\", \"CategoryTheory.Enriched.FunctorCategory.diagram\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHomπ\", \"CategoryTheory.Enriched.FunctorCategory.HasFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.HasEnrichedHom\", \"CategoryTheory.EnrichedCat.whiskerLeft\"], \"digest\": \"d3ef78c051241c1b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: eCoyoneda in Enriched/Ordinary/Basic.lean:214 is a definition; enrichedNatTransYoneda concerns transformations, not homotopy coends or Fubini."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy coends of space valued modules over a simplicial category satisfy co Yoneda and associative Fubini",
+   "results": "{\"t\": \"2026-10-17T08:32:40Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy coends of space valued modules over a simplicial category satisfy co Yoneda and associative Fubini\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coend.hom_ext_iff\", \"CategoryTheory.Limits.coend.condition_assoc\", \"CommMonCat.coyoneda\", \"CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit\", \"CategoryTheory.Limits.coend\", \"CategoryTheory.Limits.coend.map_comp_assoc\", \"CategoryTheory.Limits.coendFunctor\", \"CategoryTheory.Limits.coend.ι_map_assoc\"], \"digest\": \"847a6aa26445925a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coend and coconeOfCoconeUncurryIsColimit are ordinary colimit statements; neither supplies the projective derived comparison for simplicial modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coend\", \"yoneda\"",
+   "results": "{\"t\": \"2026-10-17T08:32:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coend\\\", \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "coend|coYoneda|coyoneda|twoSidedBar",
+   "results": "{\"t\": \"2026-10-17T08:31:35Z\", \"tool\": \"grep\", \"query\": \"coend|coYoneda|coyoneda|twoSidedBar\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/Linear/Yoneda.lean\", \"Mathlib/CategoryTheory/Linear/Yoneda.lean\", \"Mathlib/CategoryTheory/Linear/Yoneda.lean\"], \"digest\": \"2edbd9020cd90ff1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Yoneda.lean:1051-1086 and Monoidal/Bimod.lean:439-463 do not give the enriched derived assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocartesian-three-horn-face-conservation",
@@ -65,7 +211,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Supporting the inherited operadic extension branch of prop-coef-integral-exceptional-adjoint, paragraph 2 (coherent middle adjunction): co-Yoneda contraction for the mapping bimodules used at HA 3.1.2.4, three-horn face comparison",
+   "place": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules",
    "via": [
     "lem-coef-cocartesian-three-horn-face-conservation",
     "lem-coef-single-horn-relative-completion",
@@ -85,5 +231,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-derived-space-module-coyoneda",
+  "worker": "stage1",
+  "summary": "Constructs the free enriched resolution, contracts its augmentation, identifies its coend with the two-sided bar, compares it to the prescribed projective replacements, proves representable evaluation, and derives Fubini from the identical triple diagonal with explicit augmentation compatibility. One new statement-only node isolates projective cofibrancy of the explicit enriched free bar. The statement is unchanged.",
+  "blueprint": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; steps 1-6 give the co-Yoneda contraction and steps 7-8 the reassociation and compatibility of the mapping bimodules in the inherited operadic extension branch.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-ca67cdc93",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-ca67cdc93 (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, the new node and the full statement of every cited node. All cited proof nodes are in unit sk-prop-sf-biduality-general; the only off-unit citation is the Mathlib definition def-weil-pbc-simplicial-set, so tool_uses=[] is right. proof_deps equals the union of the step uses. A script walk of the 552 transitive dependencies does not reach the item, so there is no cycle. No SGA is cited, and the statement is unchanged and not weakened. Step 1: the balancing relation [f,y]=[1_a,V(f)y] and unitality give the evaluation isomorphism; elementary. Step 2: I checked each terminal extra-degeneracy identity against lem-coef-simplicial-realization-extra-degeneracy (d_{n+1}t_n=1, d_n t_n=t_{n-1}d_n, d_0t_0=t_{-1}ε, s_i t_n=t_{n+1}s_i). Reedy cofibrancy comes from Reedy cofibrations being monomorphisms (reedy-cartesian node), and realization equals the diagonal by the diagonal-space-colimit node. Step 3: the coend over b collapses the last factor by Step 1, giving B_r(X,A,Y)_r. Step 4: products and coproducts of weak equivalences are weak equivalences because realization preserves finite products; then the bisimplicial diagonal lemma applies with no Kan condition. Step 5: in every arrow of the zigzag the fixed module is cofibrant (Q_AX, then qY, then qY), as lem-coef-enriched-coend-homotopy-invariance requires, and it allows noncofibrant varying modules. Step 6: the k=0 cell (boundary of Δ^0 is empty) shows the representable is cofibrant. Step 7: both iterated bars equal T_{r,r} in inner degree r, with the variances of M correct. Step 8: compatibility is checked on representatives using the bimodule law, associativity and units. New node lem-coef-enriched-bar-projective-replacement: statement only and self-contained. It is true because P_n is free on chain objects, its latching maps are free on monomorphisms (insertions of the vertex 1_a), and the realization of a Reedy-cofibrant simplicial object is projectively cofibrant. I tested it on A empty, X empty, a non-Kan one-object simplicial monoid, and outer degrees n=0,1. It is not a duplicate: simplicial-bar-projective-resolution and free-bar-cell-filtration are for ordinary categories, and I also read join-cone-weight-cofibrancy, coherent-diagram-coyoneda, ordinary-two-sided-bar-comparison, infinity-free-module-bar, tensor-coend-skeletal-pushouts and others. It is strictly smaller than the item. I could not open Dugger 9.11/9.12/§19.1 or HTT A.3.3.2-A.3.3.5 (online only, network blocked for reviewers); the node labels itself agent-formulated, the item's proof is marked by agent, and WANTED lines are in the report, so I judged the mathematics directly. The blueprint ancestry is historical and kept as dag-sync.md requires. No fixes written."
  }
 }
