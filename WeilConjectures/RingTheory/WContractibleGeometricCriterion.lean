@@ -7,15 +7,14 @@ module
 
 public import WeilConjectures.RingTheory.ProEtale.WLocal
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-public import WeilConjectures.RingTheory.IndPrincipalZariski
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 public import Mathlib.Topology.ExtremallyDisconnected
 import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
 
-/-! # Geometric sufficient criterion for splitting weakly etale covers
+/-! # Faithfully flat weakly étale algebras over a w-contractible ring split
 
-Source: Stacks Project, Tag 0982, implication (3) to (1)
-(auxiliary; not a blueprint node).
+Source: blueprint, sec-proetale-coefficients / sk-thm-pe-weakly-contractible-basis,
+node `det-pe-wcb-split-cover` (blueprint: det-pe-wcb-split-cover); Stacks Project, Tag 0982.
 -/
 
 @[expose] public section
@@ -73,35 +72,17 @@ private theorem retraction_same_universe
   obtain ⟨s, hs⟩ := IsWContractibleRing.exists_retraction R E
   exact ⟨s.comp g, (RingHom.comp_assoc _ _ _).trans hs⟩
 
-/-- A w-local ring with extremally disconnected connected-component space and strictly
-henselian localizations at every maximal ideal splits every faithfully flat weakly etale map.
-Source: Stacks Project, Tag 0982, implication (3) to (1)
-(auxiliary; not a blueprint node).
+/-- A w-local ring `R` whose space of connected components of `Spec R` is extremally disconnected
+and whose localizations at all maximal ideals are strictly henselian (that is, a w-contractible
+ring, with the definition unpacked) splits every faithfully flat weakly étale ring map out of it.
+Source: blueprint `det-pe-wcb-split-cover` (blueprint: det-pe-wcb-split-cover);
+Stacks Project, Tag 0982, implication (3) to (1).
 
-Proof plan:
-1. Apply thm-weil-pbc-weak-etale-refinement to factor through an ind-etale R-algebra E,
-   faithfully flat over B. Faithful flatness composes, and ind-etale maps are weakly etale
-   by lem-weil-pbc-ind-etale-stability. A retraction after any further extension suffices.
-2. Let I be the intersection of maximal ideals of R. W-locality gives V(I) equal to the
-   closed points. For T = V(IE), every q in T is maximal: its contraction is maximal,
-   and lem-weil-pbc-weak-etale-field makes the corresponding residue extension algebraic.
-   Apply def-weil-pbc-retained-localization and lem-weil-pbc-retained-localization to form
-   S = E_[T]. Then S is w-local, its closed points are precisely V(IS), and R to S is
-   ind-etale, hence weakly etale by lem-weil-pbc-ind-etale-stability.
-3. At a maximal ideal n of S, its contraction m is maximal in R. The canonical local map
-   R_m to S_n is weakly etale by localization, base change and composition. The hypothesis
-   at m and thm-weil-pbc-weak-etale-strict-local make it an isomorphism. Localizing further
-   at primes below n identifies every local ring by the canonical map of
-   def-weil-pbc-localization-at-prime.
-4. The map R to S is flat. For p in Spec R choose a maximal m above it and, using
-   lem-weil-pbc-faithfully-flat-surjective-spectrum, a prime of E over m. Its retained
-   point in S lies over m. The local isomorphism lifts p to S. Thus the spectrum map is
-   surjective, and lem-weil-pbc-flat-surjective-spectrum-faithfully-flat gives faithful
-   flatness. When R is zero, B, E and S are zero and their spectra are empty.
-5. Apply lem-weil-pbc-wlocal-stalk-isomorphism-retraction with the ideal I, w-locality,
-   extremal disconnectedness, faithful flatness and the local isomorphisms. Compose the
-   resulting S to R retraction with B to E to S; associativity gives r.comp f = id.
--/
+Proof: the hypotheses say exactly `IsWContractibleRing R`. By `WeaklyEtale.exists_indEtale_comp`
+the weakly étale map `f : R → B` factors through a faithfully flat map `g : B → E` with
+`g ∘ f` ind-étale; `E` is then faithfully flat over `R`, and `IsWContractibleRing.exists_retraction`
+gives a retraction `s : E → R` of `g ∘ f`, so `s ∘ g` retracts `f`. The universes of `R` and `B`
+are first equalised with `ULift`. -/
 theorem exists_retraction_of_wlocal_geometric_criterion
     {R : Type u} [CommRing R] [IsWLocalRing R]
     [ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R))]
