@@ -17,6 +17,7 @@ import Mathlib.Algebra.Homology.BifunctorShift
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 
 /-!
 # Change of rings preserves K-flat complexes with flat terms

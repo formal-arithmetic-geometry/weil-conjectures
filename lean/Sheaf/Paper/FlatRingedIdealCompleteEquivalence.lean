@@ -25,6 +25,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Paper.RestrictionLocalCompleteness
 import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 
 /-!
 # Flat ringed-site equivalence on locally derived complete objects

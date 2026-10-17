@@ -23,6 +23,7 @@ import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 
 /-! # Derived reduction and restriction of scalars
 

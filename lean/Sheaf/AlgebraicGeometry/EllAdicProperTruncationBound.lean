@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
 public import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 
 /-! # Uniform upper bound for the discarded lower tail
 

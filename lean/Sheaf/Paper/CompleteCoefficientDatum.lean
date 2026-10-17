@@ -19,6 +19,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionGeneral
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 
 /-!
 # Adic coefficient datum and reduction tower

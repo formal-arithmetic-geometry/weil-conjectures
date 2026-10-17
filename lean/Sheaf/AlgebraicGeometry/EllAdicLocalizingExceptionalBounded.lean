@@ -6,6 +6,10 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.AlgebraicGeometry.EllAdicProperLocalizingPushforward
+import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import Sheaf.Paper.CondensedQbarLfpLocalTriviality
+import Sheaf.Paper.IntegralLfpLocalTorsionCharts
+import Sheaf.Paper.IntegralLfpLocallyFreeResolution
 
 /-! # Cohomological boundedness of the localizing exceptional object
 (blueprint: lem-sfb-adic-localizing-exceptional-bounded)

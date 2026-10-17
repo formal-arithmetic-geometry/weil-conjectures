@@ -17,6 +17,7 @@ import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 
 /-!
 # Compatible changes of ring sheaves and derived adjunctions

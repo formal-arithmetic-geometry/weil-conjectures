@@ -14,6 +14,7 @@ import Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
 import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 
 /-!
 # Restriction of scalars preserves and reflects local derived completeness
