@@ -1,0 +1,92 @@
+{
+ "id": "lem-trf-weak-relative-noether-normalization",
+ "kind": "statement",
+ "title": "Weak relative Noether normalization",
+ "statement": "Let $R$ and $A$ be commutative rings and let $h:\\operatorname{Spec}(A)\\to\\operatorname{Spec}(R)$ be the induced morphism of affine schemes [def-pc-scheme]. Assume that $h$ is of finite type [def-weil-finite-type-morphism]. Let $N\\ge0$ be an integer and suppose every scheme-theoretic fibre [def-pc-scheme-fibre] of $h$ has topological Krull dimension [def-kun-topological-krull-dimension] at most $N$. Then there exist an integer $d$ with $0\\le d\\le N$ and an $R$-algebra homomorphism $R[T_1,\\ldots,T_d]\\to A$ such that the induced morphism $\\operatorname{Spec}(A)\\to\\operatorname{Spec}(R[T_1,\\ldots,T_d])$ is quasi-finite (of finite type with finite discrete fibres, [pqf-def-quasifinite]).",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 0GTG (lemma-weak-relative-noether-normalization): a finite type ring map with fibre dimensions bounded by d admits a quasi-finite map from a polynomial ring in d variables over the base."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-krull-dimension",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type ring map whose fibres have dimension at most d there is a quasi-finite map from a polynomial ring in d variables over the base",
+   "results": "Returned RingHom.QuasiFinite.of_finite, RingHom.FiniteType.essFiniteType, RingHom.QuasiFinite, Algebra.QuasiFinite, and related generic ring results; no relative Noether normalization theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFinite, Polynomial",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherNormalization|quasiFinite.*polynomial|QuasiFinite [Mathlib/RingTheory]",
+   "results": "No hits in Mathlib/RingTheory. Maintainer reader note: the alternation was evidently run as a basic regex, so '|' was matched literally and the search was ineffective; superseded by the grep -E entry below.",
+   "date": "2026-10-18",
+   "verdict": "ineffective (superseded)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "weak relative Noether normalization quasi finite polynomial ring map",
+   "results": "Returned exists_finite_inj_algHom_of_fg and exists_integral_inj_algHom_of_fg in Mathlib.RingTheory.NoetherNormalization, plus generic QuasiFinite declarations; none handles a relative base ring and bounded fibre dimension.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherNormalization|quasiFinite.*polynomial|QuasiFinite [Mathlib/AlgebraicGeometry]",
+   "results": "No hits in Mathlib/AlgebraicGeometry. Maintainer reader note: the alternation was evidently run as a basic regex, so '|' was matched literally and the search was ineffective; superseded by the grep -E entry below.",
+   "date": "2026-10-18",
+   "verdict": "ineffective (superseded)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'NoetherNormalization|quasiFinite.*polynomial|QuasiFinite' Mathlib/RingTheory Mathlib/AlgebraicGeometry; then grep -rn 'MvPolynomial|krullDim|dimension' in the hits",
+   "results": "Hits: RingTheory/NoetherNormalization.lean (exists_finite_inj_algHom_of_fg, over a field only), RingTheory/QuasiFinite/{Basic,Polynomial,Weakly}.lean, RingHom/QuasiFinite.lean, Etale/QuasiFinite.lean, ZariskisMainTheorem.lean (private ZariskisMainProperty.of_algHom_mvPolynomial, assumes a finite map from MvPolynomial), AlgebraicGeometry/Morphisms/QuasiFinite.lean, AlgebraicGeometry/ZariskisMainTheorem.lean. None states a quasi-finite map from a polynomial ring over a general base with fibre-dimension bound.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-quasi-finite-projection",
+  "date": "2026-10-18",
+  "group": "Q56"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "No sentence of the proof of lem-trf-local-term-locality states this; the node serves it through the via chain: the step of lem-trf-bounded-dimension-projective-local-model that applies the local quasi-finite projection lemma, whose affine core (a quasi-finite R-algebra map from R[T_1,...,T_d], d at most the fibre bound) is this statement.",
+   "via": [
+    "lem-trf-local-quasi-finite-projection",
+    "lem-trf-bounded-dimension-projective-local-model",
+    "lem-trf-gabber-nearby-cycle-dimension-bound",
+    "lem-trf-gabber-strict-local-torsion-bound",
+    "lem-trf-finite-type-torsion-universal-star",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

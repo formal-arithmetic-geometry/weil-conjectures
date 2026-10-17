@@ -17,9 +17,68 @@
   "def-weil-proper-morphism",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=\\operatorname{Spec}(R)$. Since $g$ is locally of finite type and $B$ is affine, choose an affine open neighbourhood $U=\\operatorname{Spec}(A)$ of the image point of $y$ such that $g(U)\\subseteq B$ and the induced ring map $R\\to A$ is of finite type. This is exactly the affine-pair characterization of locally finite type.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 01T2, affine-pair characterization of locally finite type"
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak p$ of $R$, the fibre of $h=g|_U:\\operatorname{Spec}(A)\\to\\operatorname{Spec}(R)$ over $\\mathfrak p$ has underlying space $U\\cap g^{-1}(\\mathfrak p)$, an open subspace $W$ of the underlying space $g^{-1}(\\mathfrak p)$ of the fibre of $g$ [def-pc-scheme-fibre]. If $Z_0\\subsetneq\\cdots\\subsetneq Z_n$ is a chain of irreducible closed subsets of $W$, their closures $\\overline{Z_i}$ in $g^{-1}(\\mathfrak p)$ are irreducible and closed, and $\\overline{Z_i}\\cap W=Z_i$, so they form a chain of the same length in $g^{-1}(\\mathfrak p)$. Hence the fibre of $h$ has topological Krull dimension [def-kun-topological-krull-dimension] at most $N$. The morphism $h$ is of finite type [def-weil-finite-type-morphism]: it is locally of finite type by [lem-weil-pbc-lft-affine-pairs], because for affine opens $U'\\subseteq U$ and $V\\subseteq\\operatorname{Spec}(R)$ with $h(U')\\subseteq V$, $U'$ is an affine open of $Y$ with $g(U')\\subseteq V$, so $\\mathcal O(V)\\to\\mathcal O(U')$ is of finite type by the same lemma applied to $g$; and it is quasi-compact because a morphism of affine schemes is affine [lem-weil-pbc-morphism-affine-schemes-affine] and affine morphisms are quasi-compact [lem-weil-pbc-affine-morphism-permanence]. Apply [lem-trf-weak-relative-noether-normalization] to $h$ to obtain an integer $d$ with $0\\le d\\le N$ and an $R$-algebra homomorphism $R[T_1,\\ldots,T_d]\\to A$ whose induced morphism $\\operatorname{Spec}(A)\\to\\operatorname{Spec}(R[T_1,\\ldots,T_d])$ is quasi-finite.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-kun-topological-krull-dimension",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-trf-weak-relative-noether-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma Tag 0GTG, together with the definition of fibre dimension and the open-subspace chain inclusion"
+   }
+  },
+  {
+   "text": "The homomorphism defines an $R$-morphism $e:U\\to\\operatorname{Spec}(R[T_1,\\ldots,T_d])=\\mathbf A^d_B$ [def-nagata-relative-affine-space]; since it is an $R$-algebra homomorphism, $R\\to R[T_1,\\ldots,T_d]\\to A$ is the structure map $R\\to A$, so the composite of $e$ with the projection to $B$ is $g|_U$. As $U$ and $\\mathbf A^d_B$ are affine, $e$ is affine [lem-weil-pbc-morphism-affine-schemes-affine], hence separated [lem-weil-pbc-affine-morphism-permanence]. By Step 2, $e$ is quasi-finite [pqf-def-quasifinite]: of finite type, and every point of $U$ is isolated in its fibre. Each fibre $U\\times_{\\mathbf A^d_B}\\operatorname{Spec}\\kappa(q)=\\operatorname{Spec}(A\\otimes_{R[T]}\\kappa(q))$ is affine, so its underlying space is quasi-compact; a quasi-compact space all of whose points are isolated is finite and discrete. So $e$ has finite discrete fibres.",
+   "uses": [
+    "def-nagata-relative-affine-space",
+    "lem-trf-weak-relative-noether-normalization",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma Tag 0GTG conclusion, translated from the affine ring map to schemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-nagata-relative-affine-space",
+  "def-pc-scheme-fibre",
+  "def-weil-finite-type-morphism",
+  "lem-trf-weak-relative-noether-normalization",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma Tag 0GTG and the affine-pair characterization Tag 01T2; the scheme-level localization and separatedness translation are written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,7 +110,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-bounded-dimension-projective-local-model",
@@ -76,5 +135,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-quasi-finite-projection",
+  "worker": "stage1",
+  "summary": "The imported item has no finished declaration. I split its proof into the affine chart supplied by local finite type, the weak relative Noether normalization theorem (new child node lem-trf-weak-relative-noether-normalization), and the translation of the polynomial-ring map to a separated quasi-finite morphism to relative affine space. The fibre bound is preserved on the open affine chart because irreducible chains in an open fibre are chains in the original fibre. I searched the whole DAG and blueprint for Tag 0GTG and for relative quasi-finite projections; no duplicate exists. The local source PDF named by the import is unavailable, so the proof follows the local Stacks formulation of Tag 0GTG and records the source need below. Maintainer reader (2026-10-18): Step 2 now takes closures for the chain comparison and derives that $h$ is a finite-type morphism (the child's hypothesis) from the affine-pair lemma and the affine-morphism nodes; Step 3 cites the affine-schemes node for affineness of $e$ and derives finite discrete fibres from isolated points plus quasi-compactness of the affine fibres.",
+  "blueprint": "Realizes the first reduction paragraph of the blueprint ancestor lem-trf-local-term-locality: choose an affine neighbourhood and a quasi-finite projection to affine space with dimension bounded by the fibre bound.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-a1c708b97",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-a1c708b97 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited node's statement and the source Stacks Tag 0GTG (more-morphisms.tex, lemma-weak-relative-noether-normalization, l.8779, with its proof). The new node lem-trf-weak-relative-noether-normalization is faithful to 0GTG: a bound N on the fibre dimensions gives the maximum d <= N, and both the fibre dimension and quasi-finite match the definition nodes. I tested it on N=0, k[x,y]/(xy) with T->x+y, k[s,x]/(sx) and Z[x]. It is not a duplicate: rg over the DAG found only thm-zl-relative-noether, Noether normalization over a field or over a domain, and other different candidates. It is the affine core of the item, not a restatement of it. Mathlib has no match (exists_finite_inj_algHom_of_fg works over a field only). The item statement is unchanged from the base, and the parent lem-trf-bounded-dimension-projective-local-model gets from it exactly what it uses. The route is fine: every off-unit citation is a Mathlib leaf. I fixed three faults. (1) E5/C4 in Step 2: the chain-in-open-fibre argument now takes closures, and the step now proves that h is a finite-type morphism, which the child node assumes, using 01T2, lem-weil-pbc-morphism-affine-schemes-affine and affine permanence. (2) C4 in Step 3: pqf-def-quasifinite only gives isolated points, so the step now derives finite discrete fibres from quasi-compactness of the affine fibres; it also cites the affine-schemes node for the affineness of e. (3) B7: the new node's grep records said 'No hits', but grep -E gives 11 RingTheory files, so the alternation was evidently run as a basic regex. I marked those entries ineffective and added my real search, and I gave the new node an honest blueprint.from.place, since the ancestor's proof has no such paragraph. No tool_uses. The Orgogozo PDF is still WANTED. The report mentions a citations.json that is not in the delivery.; 2 file(s) fixed by the reviewer"
  }
 }
