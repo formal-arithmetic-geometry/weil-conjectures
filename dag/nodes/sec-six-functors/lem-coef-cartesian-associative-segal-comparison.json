@@ -14,9 +14,110 @@
   "lem-coef-cartesian-operadic-envelope",
   "lem-coef-cartesian-envelope-product-diagram-recognition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the pure-algebra ordinary category underlying $A$ in [def-coef-left-module-operadic-encoding] with $\\mathsf{Ass}^{\\otimes}$ by sending $(\\langle n\\rangle,\\varnothing)$ to $\\langle n\\rangle$. For these objects the module-input restrictions are vacuous, so both Hom sets consist of exactly the same pointed maps and ordered non-basepoint fibers. Both compositions concatenate the same lists, and both inert classes are the singleton-fiber maps. This is an isomorphism over $\\mathsf{Fin}_*$, not an identification of the image of Cut with $\\Delta^{\\mathrm{op}}$. The formulas for Cut on objects and ordered blocks agree under it.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7; Definition 4.1.1.3 and Remark 4.1.1.4; compare the pure-algebra part of Construction 4.2.1.1"
+   }
+  },
+  {
+   "text": "By the Cut clause of [lem-coef-lm-prism-approximation], the resulting $N(\\operatorname{Cut}):N(\\Delta^{\\mathrm{op}})\\to N(\\mathsf{Ass}^{\\otimes})$ is an approximation and induces an equivalence on the color fiber. The same node identifies its marked edges exactly with opposites of interval inclusions. Indeed, for $a:[m]\\to[n]$ the fiber over output $i$ is $(a(i-1),a(i)]$; it is a singleton for every output precisely when $a(i)=a(0)+i$. For $m=0$ this condition is vacuous and every vertex inclusion is an interval inclusion. Thus the marking is exactly the nonsymmetric inert class in [def-coef-monoidal-infinity-category]. The approximation is used in its categorical-fibration-replacement sense; Cut itself need not lift permutations and is not asserted to be a categorical fibration.",
+   "uses": [
+    "lem-coef-lm-prism-approximation",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9, Proposition 4.1.2.11 and Definition 4.1.3.1"
+   }
+  },
+  {
+   "text": "Check the target of approximation restriction. Write $P=\\mathcal C^\\times$ in the specified product-diagram model. [lem-coef-cartesian-envelope-product-diagram-recognition] gives its cocartesian fibration, fibers $\\mathcal C^n$, output mapping-space products, and its exact blockwise cocartesian criterion. Pull back first to $N(\\mathsf{Ass}^{\\otimes})$ and then to $N(\\Delta^{\\mathrm{op}})$; [lem-coef-cocartesian-straightening] gives these base changes as cocartesian fibrations, represented by the stated simplicial pullbacks. They have the same fibers and block formulas. Over an ordered operator the mapping space is the product of its output block mapping spaces; for an inert operator each block has one input. Consequently the pullback to Ass has the fiber and output Segal properties required of the operadic fibration in [lem-coef-operadic-approximation-restriction]. It is categorical: for a permutation in the base, permute the tuple and its subset product diagram; the resulting edge and its inverse have identity singleton block maps, and their compositions are the identity diagram. Hence every base equivalence lifts to an equivalence. Inner lifting is part of the cocartesian-fibration condition. On the planar pullback an inert edge is cocartesian precisely when these same singleton block maps are equivalences, so the two required markings agree. This verifies the target hypotheses, including arity zero, before applying the restriction theorem.",
+   "uses": [
+    "lem-coef-cartesian-envelope-product-diagram-recognition",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-operadic-approximation-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 4.1.3.11; Definition 2.1.2.13; use the explicit cartesian product-diagram model in the statement"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-operadic-approximation-restriction] to the approximation of step 2 and the operadic fibration of step 3. Its section category is exactly $\\operatorname{Alg}_{\\mathsf{Ass}}(\\mathcal C^\\times)$, and its category of marked lifts is exactly $\\operatorname{Alg}_{\\mathrm{pl}}$: a lift to the Ass pullback is the same simplicial map as a section of the planar pullback, and step 2 identifies the inert markings. The resulting equivalence is the specified precomposition by Cut, including coherent transformations over the identity base and their higher simplices. It has not been deduced merely from a bijection on algebra operations.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.1.3.19, by Proposition 4.1.2.11 and Theorem 2.3.3.23"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-generalized-cartesian-product-cones] with $\\mathcal M=N(\\Delta^{\\mathrm{op}})$ and its identity projection. The source hypotheses hold directly: every fiber is a point, every inert arrow is a cocartesian lift for the identity, and every mapping space over a prescribed base arrow is a point. Thus the edge and vertex incidence diagrams consist of points and satisfy their limit axiom; the zero fiber is the one-point Kan complex. The algebra category in that lemma is therefore $\\operatorname{Alg}_{\\mathrm{pl}}$. Its product-cone subcategory is precisely $\\operatorname{Mon}_\\Delta(\\mathcal C)$, since the color restrictions at $[n]$ are the $n$ maps $\\rho_i:[n]\\to[1]$, and the empty product condition is terminality at $[0]$. Use the product-diagram realization of the cartesian envelope: the total-product functor of the lemma is represented here by full-subset evaluation $\\pi$, as specified in [lem-coef-cartesian-envelope-product-diagram-recognition]. On a simplex its product cone and block comparisons are the restrictions of that model's relative-exponential evaluation. To account for choices of products, apply [lem-coef-parametric-universal-arrows] to the diagonal $\\mathcal C\\to\\mathcal C^I$ for each finite output set $I$: the product mapping-space property is exactly its universal-arrow hypothesis. Its arbitrary-parameter clause makes the projection-preserving comparison of product choices coherent on every base simplex, compatibly on faces and degeneracies; its contractible-choice clause identifies the two realizations. Thus composition with the specified $\\pi$ is the product-cone equivalence of the cited theorem. Composing it with step 4 gives the required second equivalence; no additional limits or colimits have been introduced.",
+   "uses": [
+    "lem-coef-generalized-cartesian-product-cones",
+    "lem-coef-cartesian-envelope-product-diagram-recognition",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.4.2.5; the planar instance of the cartesian product-cone argument preceding Proposition 4.1.2.10"
+   }
+  },
+  {
+   "text": "Let $x$ be the color value of a section. The singleton projections identify its value at $\\langle n\\rangle$ with the tuple $(x,\\ldots,x)$; evaluation by $\\pi$ gives $x^n$, including the terminal object for $n=0$. Since Cut sends $[1]$ to the color and $\\pi$ on the one-factor fiber is its given evaluation equivalence, both comparisons commute with the underlying-object functor. The endpoint-preserving $[r]\\to[1]$ has one ordered block containing every input, so its component is the standard-order operation $x^r\\to x$ by the block formula of [lem-coef-cartesian-envelope-product-diagram-recognition]. For $r=0$ its sole block is empty and gives the unit. For a transformation with color component $f:x\\to y$, naturality at every $\\rho_i$ gives $\\operatorname{pr}_i\\eta_n\\simeq f\\operatorname{pr}_i$. The product-cone universal property identifies this entire coherent tuple of components with $f^n$; the parametric clause of [lem-coef-parametric-universal-arrows], with $I=\\{1,\\ldots,n\\}$, includes the comparison homotopies and all higher parameter simplices. For $n=0$ both sides are the unique map of terminal product cones.",
+   "uses": [
+    "lem-coef-cartesian-envelope-product-diagram-recognition",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 4.1.2.5 and Remark 4.1.2.6; explicit evaluation of Construction 4.1.2.9"
+   }
+  },
+  {
+   "text": "The comparison on all transformations and higher families is already part of [lem-coef-operadic-approximation-restriction] and [lem-coef-generalized-cartesian-product-cones], so their composite is an equivalence of the full stated infinity categories, with their mapping spaces. Naturality in a finite-product-preserving $h:\\mathcal C\\to\\mathcal D$ follows from the coordinatewise strong functor $h^\\times$ of [lem-coef-cartesian-operadic-envelope], the target naturality of approximation restriction, and the coefficient-functor naturality of the product-cone equivalence. The comparison $h\\pi_{\\mathcal C}\\simeq\\pi_{\\mathcal D}h^\\times$ is the product comparison on every tuple; it preserves the specified projection cones. [lem-coef-parametric-universal-arrows] supplies its compatible arbitrary-parameter product comparisons, so it commutes coherently with all block maps, including empty blocks, and not only with their values on objects. These are exactly the naturality comparisons of the two equivalences. All indexing nerves are small after the universe enlargement allowed in the statement, and the only limits used in $\\mathcal C$ are finite products.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-generalized-cartesian-product-cones",
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Propositions 2.4.2.5 and 4.1.3.19, naturality of their specified composition and restriction functors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-left-module-operadic-encoding",
+  "lem-coef-lm-prism-approximation",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cartesian-envelope-product-diagram-recognition",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-operadic-approximation-restriction",
+  "lem-coef-generalized-cartesian-product-cones",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-cartesian-operadic-envelope"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Expanded application of HA 4.1.2.11, 4.1.3.19 and 2.4.2.5 through existing DAG statements; online HA read, archive absent from literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -164,10 +265,66 @@
    "results": "{\"t\": \"2026-10-17T03:39:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.tensorUnitLeft\", \"CategoryTheory.MonoidalCategory.tensorUnitRight\", \"CategoryTheory.MonoidalCategory.tensorLeft\", \"CategoryTheory.MonoidalCategory.tensorRight\", \"CategoryTheory.MonoidalCategory.tensor\", \"CategoryTheory.MonoidalCategory.curriedTensor\", \"CategoryTheory.MonoidalCategory.tensoringLeft\", \"CategoryTheory.MonoidalCategory.tensoringRight\"], \"digest\": \"95ee5af2f450ae35\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected ordinary monoidal category and strict nerve Segal declarations; none compares infinity-categorical associative algebra sections with Segal diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associative algebras in a cartesian monoidal infinity category are equivalent to reduced Segal simplicial diagrams, including coherent transformations",
+   "results": "{\"t\": \"2026-10-17T04:09:12Z\", \"tool\": \"leanfinder\", \"query\": \"Associative algebras in a cartesian monoidal infinity category are equivalent to reduced Segal simplicial diagrams, including coherent transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegalCore\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.instCartesianMonoidalCategory\", \"SSet.IsStrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.StrictSegal.quasicategory\"], \"digest\": \"839627d6b5f31bbb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60, CategoryTheory/Monoidal/Mon.lean:56-86, CategoryTheory/Monoidal/Cartesian/Basic.lean:1015-1020 and AlgebraicTopology/SimplexCategory/Basic.lean:883-885. Hits describe strict Segal simplicial sets, ordinary monoid/monoidal categories and the ordinary simplex functor; none states this infinity-categorical algebra/Segal equivalence or the operadic Cut approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal|[Aa]ssociative.*[Oo]perad|[Oo]peradic.*[Aa]pproximation",
+   "results": "{\"t\": \"2026-10-17T04:09:28Z\", \"tool\": \"grep\", \"query\": \"Segal|[Aa]ssociative.*[Oo]perad|[Oo]peradic.*[Aa]pproximation\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"0e5b99d5c6bfdff2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60, CategoryTheory/Monoidal/Mon.lean:56-86, CategoryTheory/Monoidal/Cartesian/Basic.lean:1015-1020 and AlgebraicTopology/SimplexCategory/Basic.lean:883-885. Hits describe strict Segal simplicial sets, ordinary monoid/monoidal categories and the ordinary simplex functor; none states this infinity-categorical algebra/Segal equivalence or the operadic Cut approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian associative infinity algebra objects and simplicial monoid objects have equivalent categories of coherent morphisms",
+   "results": "{\"t\": \"2026-10-17T04:09:29Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian associative infinity algebra objects and simplicial monoid objects have equivalent categories of coherent morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.mapGrp\", \"CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"CategoryTheory.Grp.instCartesianMonoidalCategory\", \"CategoryTheory.MonoidalCoherence.assoc\", \"CategoryTheory.Functor.Monoidal.μ_of_cartesianMonoidalCategory\", \"CategoryTheory.Grp.homMk'\", \"CategoryTheory.Grp.instMonObj.congr_simp\"], \"digest\": \"4dda3badc9260864\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60, CategoryTheory/Monoidal/Mon.lean:56-86, CategoryTheory/Monoidal/Cartesian/Basic.lean:1015-1020 and AlgebraicTopology/SimplexCategory/Basic.lean:883-885. Hits describe strict Segal simplicial sets, ordinary monoid/monoidal categories and the ordinary simplex functor; none states this infinity-categorical algebra/Segal equivalence or the operadic Cut approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.StrictSegal, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-17T04:09:29Z\", \"tool\": \"loogle\", \"query\": \"SSet.StrictSegal, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60, CategoryTheory/Monoidal/Mon.lean:56-86, CategoryTheory/Monoidal/Cartesian/Basic.lean:1015-1020 and AlgebraicTopology/SimplexCategory/Basic.lean:883-885. Hits describe strict Segal simplicial sets, ordinary monoid/monoidal categories and the ordinary simplex functor; none states this infinity-categorical algebra/Segal equivalence or the operadic Cut approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]peradic.*[Aa]pproximation|[Aa]ssoc.*[Oo]perad|[Cc]ut.*[Ff]unctor",
+   "results": "{\"t\": \"2026-10-17T04:09:42Z\", \"tool\": \"grep\", \"query\": \"[Oo]peradic.*[Aa]pproximation|[Aa]ssoc.*[Oo]perad|[Cc]ut.*[Ff]unctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60, CategoryTheory/Monoidal/Mon.lean:56-86, CategoryTheory/Monoidal/Cartesian/Basic.lean:1015-1020 and AlgebraicTopology/SimplexCategory/Basic.lean:883-885. Hits describe strict Segal simplicial sets, ordinary monoid/monoidal categories and the ordinary simplex functor; none states this infinity-categorical algebra/Segal equivalence or the operadic Cut approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered fiber category of the associative operad admits the opposite simplex category as an approximation inducing equivalence on colors",
+   "results": "{\"t\": \"2026-10-17T04:09:42Z\", \"tool\": \"leansearch\", \"query\": \"Ordered fiber category of the associative operad admits the opposite simplex category as an approximation inducing equivalence on colors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject\", \"SimplexCategory.toCat\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"SSet.opFunctor\", \"SimplicialObject.opEquivalence\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.fiber\", \"CategoryTheory.simplicialCosimplicialEquiv_functor_obj_map\", \"CategoryTheory.cosimplicialSimplicialEquiv_functor_obj_obj\"], \"digest\": \"05b1ff9545085741\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60, CategoryTheory/Monoidal/Mon.lean:56-86, CategoryTheory/Monoidal/Cartesian/Basic.lean:1015-1020 and AlgebraicTopology/SimplexCategory/Basic.lean:883-885. Hits describe strict Segal simplicial sets, ordinary monoid/monoidal categories and the ordinary simplex functor; none states this infinity-categorical algebra/Segal equivalence or the operadic Cut approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategory, CategoryTheory.Functor.IsCartesian",
+   "results": "{\"t\": \"2026-10-17T04:09:42Z\", \"tool\": \"loogle\", \"query\": \"SimplexCategory, CategoryTheory.Functor.IsCartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60, CategoryTheory/Monoidal/Mon.lean:56-86, CategoryTheory/Monoidal/Cartesian/Basic.lean:1015-1020 and AlgebraicTopology/SimplexCategory/Basic.lean:883-885. Hits describe strict Segal simplicial sets, ordinary monoid/monoidal categories and the ordinary simplex functor; none states this infinity-categorical algebra/Segal equivalence or the operadic Cut approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cut functor from the opposite simplex category to the associative operad is an operadic approximation with cartesian lifts of active maps",
+   "results": "{\"t\": \"2026-10-17T04:09:45Z\", \"tool\": \"leanfinder\", \"query\": \"The cut functor from the opposite simplex category to the associative operad is an operadic approximation with cartesian lifts of active maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve\", \"SimplexCategory.II\", \"CategoryTheory.nerve_obj\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"SimplexCategoryGenRel.toSimplexCategory\", \"AugmentedSimplexCategory\", \"CategoryTheory.SimplicialObject.sk\"], \"digest\": \"c601502926a0118c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:12-60, CategoryTheory/Monoidal/Mon.lean:56-86, CategoryTheory/Monoidal/Cartesian/Basic.lean:1015-1020 and AlgebraicTopology/SimplexCategory/Basic.lean:883-885. Hits describe strict Segal simplicial sets, ordinary monoid/monoidal categories and the ordinary simplex functor; none states this infinity-categorical algebra/Segal equivalence or the operadic Cut approximation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-monoidal-block-projection-coherence",
@@ -194,5 +351,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-associative-segal-comparison",
+  "worker": "stage1",
+  "summary": "Seven-step proof using the already reviewed Cut clause of lem-coef-lm-prism-approximation, general approximation restriction, and generalized cartesian product-cone recognition. The pure-algebra operator category and markings are identified explicitly, target hypotheses checked, and the specified product-evaluation functor, nullary operation, morphism components, higher families and naturality retained. No statement change and no new nodes. Initial missing-input diagnostic was resolved by the shared repository refresh.",
+  "blueprint": "Realizes the inherited ancestor place: prop-coef-integral-exceptional-adjoint proof paragraph 2, coherent realization before derived inverse limit, through the monoidal-Yoneda chain. This is the associative-section / Segal-diagram comparison needed by lem-coef-monoidal-block-projection-coherence; the separate tree reconstruction is not re-proved or weakened."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-a4a4853d6",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-a4a4853d6 (reviewer sub-agent of L); spot-checked: Pass with no changes. I read the item, all 7 steps and every cited statement in full. Shape: one commit, no new nodes, statement unchanged, proof_deps equals the union of the step uses, no cycle (708 ancestors checked). All cited statements are in unit sk-prop-sf-biduality-general; the only other-unit node is the definition def-cbc-enhanced-diagrams-cones, so no tool_uses are needed. The item is not a target, so the base-change morphism and coefficient-category check does not apply. No SGA source. Sources: Lurie's Higher Algebra is not in literature/; it is recorded as WANTED and proof_origin is agent. I checked the statement against HA Construction 4.1.2.9, Propositions 4.1.2.10, 4.1.2.11, 4.1.3.19 and 2.4.2.5 as I know them, and against the DAG's definitions. Statement: Ass^⊗ is the S=∅ part of LM^⊗ in def-coef-left-module-operadic-encoding, and the Cut formula matches both that node and lm-prism-approximation. Small cases: in C=Set, monoids correspond to bar-construction Segal diagrams with components f^n; at r=0 the empty block gives the unit; at n=0, F[0] is terminal; for C terminal both sides are contractible. Steps: (1) the identification of A with Ass^⊗ is correctly elementary. (2) The Cut approximation, the colour fibre and the interval-inclusion marking are all in the statement of lem-coef-lm-prism-approximation. (3) The Ass pullback is an inner fibration that lifts equivalences, with the fibre and output-product properties coming from recognition's block formula. (4) The hypotheses of operadic-approximation-restriction are met, and lifts of Cut are exactly sections of C^×_pl. (5) N(Δ^op) with the identity satisfies the generalized-operad axioms (i)–(iii) with a Kan zero fibre, and Mon_M becomes Mon_Δ. The envelope node's proof defines C^× as the same product-diagram subcategory of Q as recognition's P, so this model is literally the envelope; π and Π are matched through parametric-universal-arrows. (6) Operations, unit and f^n components follow, and the step is correctly marked non-elementary. (7) Naturality comes from the cited nodes' naturality clauses and h^×. Minor nit, not a fault: source.place still says 'retained sandbox HA.txt'."
  }
 }
