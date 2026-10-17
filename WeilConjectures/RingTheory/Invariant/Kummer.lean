@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Ideal.GoingUp
 public import Mathlib.RingTheory.Invariant.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.RootsOfUnity.Lemmas
@@ -208,5 +209,65 @@ theorem isInvariant_kummerAction_of_isPrimitiveRoot [NeZero n] {A : Type*} [Comm
     Algebra.IsInvariant R (AdjoinRoot (X ^ n - C π)) (Multiplicative (ZMod n)) :=
   isInvariant_kummerAction n π _ fun _ h0 hi ↦ by
     simpa using (hζ₀.isUnit_one_sub_pow hn h0 hi).map (algebraMap A R)
+
+section Local
+
+variable [IsLocalRing R]
+
+/-- The reduction `R[t] ⧸ (tⁿ - π) → κ(R)`, `t ↦ 0`, for `π` in the maximal ideal. -/
+noncomputable def residueX_pow_sub_C [NeZero n] (hπ : π ∈ IsLocalRing.maximalIdeal R) :
+    AdjoinRoot (X ^ n - C π) →ₐ[R] IsLocalRing.ResidueField R :=
+  liftAlgHom _ (Algebra.ofId R _) 0 (by
+    rw [eval₂_sub, eval₂_X_pow, eval₂_C, zero_pow (NeZero.ne n), zero_sub, neg_eq_zero]
+    exact (IsLocalRing.residue_eq_zero_iff π).2 hπ)
+
+lemma residueX_pow_sub_C_root [NeZero n] (hπ : π ∈ IsLocalRing.maximalIdeal R) :
+    residueX_pow_sub_C n π hπ (root (X ^ n - C π)) = 0 :=
+  liftAlgHom_root _ _ _ _
+
+/-- Every maximal ideal of `R[t] ⧸ (tⁿ - π)` contains `t` and the kernel of the reduction to
+`κ(R)`. -/
+lemma ker_residueX_pow_sub_C_le [NeZero n] (hπ : π ∈ IsLocalRing.maximalIdeal R)
+    (P : Ideal (AdjoinRoot (X ^ n - C π))) [hP : P.IsMaximal] :
+    root (X ^ n - C π) ∈ P ∧ RingHom.ker (residueX_pow_sub_C n π hπ) ≤ P := by
+  have : Module.Finite R (AdjoinRoot (X ^ n - C π)) :=
+    (powerBasis' (monic_X_pow_sub_C π (NeZero.ne n))).finite
+  have hcomap : P.comap (algebraMap R _) = IsLocalRing.maximalIdeal R :=
+    IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal P)
+  have hroot : root (X ^ n - C π) ∈ P := by
+    refine hP.isPrime.mem_of_pow_mem n ?_
+    rw [root_X_pow_sub_C_pow, ← algebraMap_eq, ← Ideal.mem_comap, hcomap]
+    exact hπ
+  refine ⟨hroot, fun x hx ↦ ?_⟩
+  obtain ⟨p, rfl⟩ := mk_surjective x
+  obtain ⟨q, hq⟩ := X_dvd_sub_C (p := p)
+  have hx' : mk (X ^ n - C π) p = of _ (p.coeff 0) + root _ * mk _ q := by
+    rw [← mk_C, ← mk_X, ← map_mul, ← hq, ← map_add, add_sub_cancel]
+  rw [RingHom.mem_ker, hx', map_add, map_mul, residueX_pow_sub_C_root, zero_mul,
+    add_zero] at hx
+  rw [hx']
+  refine add_mem ?_ (Ideal.mul_mem_right _ _ hroot)
+  rw [← algebraMap_eq, ← Ideal.mem_comap, hcomap, ← IsLocalRing.residue_eq_zero_iff]
+  rw [← algebraMap_eq, AlgHom.commutes] at hx
+  exact hx
+
+/-- **`R[t] ⧸ (tⁿ - π)` is local** for `R` local, `n ≠ 0` and `π` in the maximal ideal, and `t`
+lies in its maximal ideal. -/
+theorem isLocalRing_of_mem_maximalIdeal [NeZero n] (hπ : π ∈ IsLocalRing.maximalIdeal R) :
+    IsLocalRing (AdjoinRoot (X ^ n - C π)) := by
+  have hsurj : Function.Surjective (residueX_pow_sub_C n π hπ) := fun y ↦ by
+    obtain ⟨a, rfl⟩ := IsLocalRing.residue_surjective y
+    exact ⟨of _ a, by rw [← algebraMap_eq, AlgHom.commutes]; rfl⟩
+  have hmax := RingHom.ker_isMaximal_of_surjective _ hsurj
+  exact IsLocalRing.of_unique_max_ideal ⟨_, hmax, fun P hP ↦
+    (hmax.eq_of_le hP.ne_top (ker_residueX_pow_sub_C_le n π hπ P).2).symm⟩
+
+lemma root_mem_maximalIdeal [NeZero n] (hπ : π ∈ IsLocalRing.maximalIdeal R) :
+    letI := isLocalRing_of_mem_maximalIdeal n π hπ
+    root (X ^ n - C π) ∈ IsLocalRing.maximalIdeal (AdjoinRoot (X ^ n - C π)) :=
+  letI := isLocalRing_of_mem_maximalIdeal n π hπ
+  (ker_residueX_pow_sub_C_le n π hπ _).1
+
+end Local
 
 end AdjoinRoot
