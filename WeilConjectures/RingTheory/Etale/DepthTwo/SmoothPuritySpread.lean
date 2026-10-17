@@ -158,4 +158,69 @@ lemma exists_isDomain_away [IsReduced B] (P : Ideal B) [P.IsPrime]
 
 end Locus
 
+section Torsion
+
+variable {R₀ B M : Type u} [CommRing R₀] [IsDomain R₀] [IsIntegrallyClosed R₀]
+  [CommRing B] [Algebra R₀ B] [Algebra.Smooth R₀ B]
+  [CommRing M] [Algebra B M] [Algebra R₀ M] [IsScalarTower R₀ B M]
+
+/-- **Torsion in the integral closure.** Suppose that every prime `Q ∌ h` of `B` over `0 ⊆ R₀`
+has a neighbourhood over which the integral closure `T` of `B` in `M` is finite étale. If `s ∈ B`
+is nonzero in the local rings `B_Q` for `Q ∌ h`, then every `y ∈ T` with `s y = 0` is killed by a
+power of `h`. -/
+lemma exists_pow_smul_eq_zero (hunit : ∀ r : R₀, r ≠ 0 → IsUnit (algebraMap R₀ M r)) (h : B)
+    (hgood : ∀ Q : Ideal B, Q.IsPrime → h ∉ Q → Q.comap (algebraMap R₀ B) = ⊥ →
+      ∃ h' ∉ Q, Algebra.Etale (Localization.Away h')
+        (Localization.Away h' ⊗[B] integralClosure B M) ∧
+        Module.Finite (Localization.Away h') (Localization.Away h' ⊗[B] integralClosure B M))
+    {s : B} (hs : ∀ (Q : Ideal B) [Q.IsPrime], h ∉ Q → algebraMap B (Localization.AtPrime Q) s ≠ 0)
+    {y : integralClosure B M} (hy : s • y = 0) : ∃ k : ℕ, h ^ k • y = 0 := by
+  by_contra! hk
+  let J : Ideal B := LinearMap.ker (LinearMap.toSpanSingleton B (integralClosure B M) y)
+  let S := Submonoid.powers h ⊔ Algebra.algebraMapSubmonoid B (nonZeroDivisors R₀)
+  have hdisj : Disjoint (J : Set B) S := by
+    rw [Set.disjoint_left]
+    intro x hxJ hxS
+    obtain ⟨_, ⟨k, rfl⟩, _, ⟨r, hr, rfl⟩, rfl⟩ := Submonoid.mem_sup.1 hxS
+    apply hk k
+    have hxy : (h ^ k * algebraMap R₀ B r) • y = 0 := hxJ
+    have h2 : algebraMap R₀ B r • (h ^ k • y) = 0 := by
+      rw [smul_smul, mul_comm]
+      exact hxy
+    apply Subtype.ext
+    have h3 := congrArg Subtype.val h2
+    rw [ZeroMemClass.coe_zero, SetLike.val_smul, algebraMap_smul, Algebra.smul_def] at h3
+    exact ((hunit r (nonZeroDivisors.ne_zero hr)).mul_right_eq_zero).1 h3
+  obtain ⟨Q, hQ, hJQ, hQS⟩ := Ideal.exists_le_prime_disjoint J S hdisj
+  have hhQ : h ∉ Q := fun hh ↦ Set.disjoint_left.1 hQS hh
+    (Submonoid.mem_sup_left (Submonoid.mem_powers h))
+  have hQ0 : Q.comap (algebraMap R₀ B) = ⊥ := by
+    refine eq_bot_iff.2 fun r hr ↦ (Submodule.mem_bot R₀).2 ?_
+    by_contra hr0
+    exact Set.disjoint_left.1 hQS hr (Submonoid.mem_sup_right
+      ⟨r, mem_nonZeroDivisors_of_ne_zero hr0, rfl⟩)
+  obtain ⟨h', hh'Q, hE, -⟩ := hgood Q hQ hhQ hQ0
+  -- `B_Q ⊗ T` is flat over `B_Q`
+  let BQ := Localization.AtPrime Q
+  let : Algebra (Localization.Away h') BQ :=
+    (IsLocalization.Away.lift h'
+      (IsLocalization.map_units BQ (⟨h', hh'Q⟩ : Q.primeCompl))).toAlgebra
+  have : IsScalarTower B (Localization.Away h') BQ :=
+    .of_algebraMap_eq fun b ↦ (IsLocalization.Away.lift_eq h' _ b).symm
+  let e := Algebra.TensorProduct.cancelBaseChange B (Localization.Away h') BQ BQ
+    (integralClosure B M)
+  have : Module.Flat BQ (BQ ⊗[B] integralClosure B M) := .of_linearEquiv e.symm.toLinearEquiv
+  obtain ⟨hdom, -⟩ := Algebra.Smooth.isDomain_and_isIntegrallyClosed_localization R₀ B Q
+  have hreg : IsSMulRegular (BQ ⊗[B] integralClosure B M) (algebraMap B BQ s) :=
+    Module.Flat.isSMulRegular_of_isRegular (IsRegular.of_ne_zero (hs Q hhQ))
+  have h0 : TensorProduct.mk B BQ (integralClosure B M) 1 y = 0 := by
+    apply hreg
+    simp only [TensorProduct.mk_apply, smul_zero]
+    rw [algebraMap_smul, ← TensorProduct.tmul_smul, hy, TensorProduct.tmul_zero]
+  obtain ⟨⟨w, hw⟩, hwy⟩ := (IsLocalizedModule.eq_zero_iff Q.primeCompl
+    (TensorProduct.mk B BQ (integralClosure B M) 1)).1 h0
+  exact hw (hJQ hwy)
+
+end Torsion
+
 end RingTheory.DepthTwo
