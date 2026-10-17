@@ -240,5 +240,23 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-54aa80cf1 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with the item and the report, no new nodes, no fixes. The statement matches Stacks varieties.tex 0CCD (l.7154) and 0CCG (l.7254) exactly: p prime, S of characteristic p, f locally of finite type, n>=1, F^(n)=(F_X^n, f) into X x_{S,F_S^n} S, and the map is finite. No hypothesis is added or dropped. Step 1 (marked elementary): I rechecked each pair map by hand. theta_i, c_i and eta_i are well defined, theta eta = id and eta theta = id hold on both projections, u_i exists because s_i F_{Y_i} = F_S s_i, and r_i has projections pi_i F_{Y_i} and s_i. Step 2: lem-trf-relative-frobenius-universal-homeomorphism (split and reviewed, same unit) gives integrality of the one-step map with no finite-type hypothesis. Moving it across the isomorphism theta_i is correctly argued, and the induction uses clause (e) of lem-weil-pbc-closed-immersion-integral-separated-uc (integral composites, 01WK). Step 3 (marked elementary): the projection induction pi_{i+1}C_{i+1}=F_X pi_i C_i, by naturality of absolute Frobenius, and s_{i+1}C_{i+1}=f are correct, and uniqueness gives C_n=F^(n). Step 4: clause (f) of lem-weil-pbc-proper-fp-permanence (01T8) is applied to s_n o F^(n)=f and needs no hypothesis on s_n. Step 5: the reverse direction of lem-weil-pbc-finite-iff-integral-lft (01WJ). Edge cases checked: n=1, X=S, A[t], the empty scheme, nilpotents, a base with non-finite absolute Frobenius, infinite disjoint unions. A reachability check finds no cycle. No duplicate: i-relative-frob and d-relative-frob are finite-field special cases, and the parent lem-trf-scheme-frobenius-finite-radicial uses this item with n=a. same_as=[] and blueprint.from def-trf-scheme-frobenius are correct. The route stays in the unit apart from Mathlib leaves, so there are no tool_uses. No SGA is cited. The 16 search records are consistent. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFrobeniusFinite",
+  "declaration": "AlgebraicGeometry.Scheme.relativeFrobenius_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFrobeniusFinite.lean",
+  "statement": "theorem relativeFrobenius_finite (p : ℕ) (S X : Scheme.{u}) (hS : S.IsCharacteristic p) (f : X ⟶ S) [LocallyOfFiniteType f] (n : ℕ) (hn : 1 ≤ n) : ∃ hX : X.IsCharacteristic p, ∃ r : X ⟶ pullback f (S.iterateFrobenius hS.1 (hS.2 ⊤) n), r ≫ pullback.fst f (S.iterateFrobenius hS.1 (hS.2 ⊤) n) = X.iterateFrobenius hX.1 (hX.2 ⊤) n ∧ r ≫ pullback.snd f (S.iterateFrobenius hS.1 (hS.2 ⊤) n) = f ∧ IsFinite r ∧ ∀ s : X ⟶ pullback f (S.iterateFrobenius hS.1 (hS.2 ⊤) n), s ≫ pullback.fst f (S.iterateFrobenius hS.1 (hS.2 ⊤) n) = X.iterateFrobenius hX.1 (hX.2 ⊤) n → s ≫ pullback.snd f (S.iterateFrobenius hS.1 (hS.2 ⊤) n) = f → s = r",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5eb2038c1",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read the node, the five statement dependencies and their declarations (Scheme.IsCharacteristic, LocallyOfFiniteType, Scheme.iterateFrobenius, pullback, IsFinite), Stacks 0CCD/0CCG, the module and the report (Worker report and Second reading by Q06 both present). Every clause matches: prime p, char-p base, locally finite type f only, n>=1, pullback f (F_S^n), projection equations F_X^n and f, explicit uniqueness, IsFinite r. The existential hX : X.IsCharacteristic p follows from hS, is needed only to type X.iterateFrobenius, adds no hypothesis, and matches the recorded one-step sibling interface. Edge cases checked: n=1, f=id, empty and zero schemes, nilpotents, imperfect bases, infinite disjoint unions; n=0 excluded as in the node. One universe u, no restriction. No duplicate: the slopmaster2 relativeFrobenius finiteness assumes IsFinite of both Frobenii. No definitions, proof only sorry, docstrings carry the source place and blueprint id. The node differs from base only in lean, and lean.statement equals the file signature. nt_compile.py --json against the side overlay exits 0 with no errors or warnings (2.0 s). No findings."
  }
 }
