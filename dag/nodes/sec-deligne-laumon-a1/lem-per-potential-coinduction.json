@@ -228,5 +228,34 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-e9a75bc5d (reviewer sub-agent of L); spot-checked: I read the whole item and its source. Source: ILO Gabber XVII Prop. 6.2.1.1 (printed p. 294) prints the comparison 'dans D+(X_et,Λ)' for M in D+. That label is false. Counterexample I checked: X = Spec k̄, r = s = 1, K = F_ℓ[0], M = ⊕_{n≥0} F_ℓ[-n]; then RHom(M,K) has H^{-n} = F_ℓ for every n ≥ 0. The delivery changes the ambient category from D+ to D only and keeps every hypothesis and K_s in D+. The report names the change. The only citer, lem-per-gabber-local-duality-general step 4, gets its bounds from D_{K_1} and still holds. Step checks: U is exact; C = Hom_R(S,-) with its S-action and R-linear evaluation; I re-derived the U ⊣ C formulas and both inverse identities. The bounded-below injective K-injective I comes from 013K/070J. Stacks 08BJ (derived.tex:9857) has the right orientation (C is right adjoint to the exact U), so J = C(I) is S-K-injective and UJ = Hom^•(S[0],I). The degreewise products agree with the differential because e_I d_J = d_I e_I. Stacks 0A95 (sites-cohomology.tex:8754) gives independence of representatives and naturality. Duplicates: def-sfb-modobj-restrict-coextend-adjunction is the module-object version of Step 2 and does not apply directly to Mod(R_X), so the inline elementary step is fine. lem-sfb-dc-hom-scalar-adjunction is scalar extension, not coinduction. lem-per-potential-hom-coefficient-restriction is the pinning half of 6.2.1.1. I accept all four declared tool_uses as generic homological tools (enough injectives, D+ injective representative, 08BJ, 0A95). Edge cases s = r, X empty, M = 0 and non-flat r > s are fine. No SGA source is used, no new nodes are created and no fixes were written. Maintainer: please record the ILO 6.2.1.1 D+ → D source error in HUMAN.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PotentialCoinduction",
+  "declaration": "AlgebraicGeometry.Etale.potential_coinduction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.coinductionCochainTensor",
+   "AlgebraicGeometry.Etale.coinductionTensorInclusion",
+   "AlgebraicGeometry.Etale.coinductionTensorRepresentative",
+   "AlgebraicGeometry.Etale.CoinductionTensorMap",
+   "AlgebraicGeometry.Etale.CoinductionTensorNormalized",
+   "AlgebraicGeometry.Etale.coinductionInternalHomMap",
+   "AlgebraicGeometry.Etale.InternalCoinductionComparison",
+   "AlgebraicGeometry.Etale.potential_coinduction"
+  ],
+  "file": "lean/Sheaf/Paper/PotentialCoinduction.lean",
+  "statement": "theorem potential_coinduction (l r s : ℕ) [Fact l.Prime] (_hs : 1 ≤ s) (hsr : s ≤ r) (X : Scheme.{u}) : InternalCoinductionComparison ((ZMod.castHom (pow_dvd_pow l hsr) (ZMod (l ^ s))).ulift : ULift.{u + 1} (ZMod (l ^ r)) →+* ULift.{u + 1} (ZMod (l ^ s))) X",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The helper definitions package only the canonical comparison belonging to this node. InternalCoinductionComparison expands all clauses, keeping coefficient rings abstract until specialization to avoid the documented concrete-ModuleCat monoidal-instance elaboration problem. Its coextension uses the existing total right derived functor, and its natural isomorphism is normalized by the actual evaluation-at-one counit and the sectionwise tensor balancing map. The only postponed theorem is potential_coinduction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5c71efa3",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps, module, report, upstream coextendScalars/Sheaf.restrictScalars/derivedHom/derivedTensor/mapDerivedCategoryRightDerivedAdjunction. All clauses match: Fact l.Prime, 1≤s≤r, castHom quotient (ULift u+1), Scheme.{u} small etale ModuleCat sheaves; K_s = derived coextension with IsGE clause and U C ≅ RHom_A(UΛ_s,-); natural iso on D+(S)^op×D+(R) into unbounded D(R) pinned componentwise to the canonical evaluation-at-1 transpose; μ fixed by sectionwise balancing, determined on K-flat representatives, not hollow. Edge cases s=r, non-flat s<r, empty X, M unbounded above covered. Docstrings and 5-step proof present; sole sorry; lean.statement verbatim; report sections present; no duplicate (trf coinduction is ordinary modules). nt_compile --json clean, rc 0, 7.0/6.7 s. Advisories: constant-coefficient Sheaf.restrictScalars vs Q78 SheafOfModules rebind; coextendScalars/derivedTensor used only as canonical helpers."
  }
 }
