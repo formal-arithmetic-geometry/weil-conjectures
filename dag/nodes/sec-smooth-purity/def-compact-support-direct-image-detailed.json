@@ -94,22 +94,22 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek",
-  "declaration": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
-  "statement": "abbrev rightDerivedLowerShriekOfCompactification :\n    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)",
-  "branch": "slopmaster2",
-  "by": "Q98",
-  "date": "2026-10-17",
+  "module": "Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport",
+  "statement": "noncomputable def sfIntrinsicCompactSupport {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (c : Compactification f) (A : Type u) [CommRing A] [Finite A] :\n    proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18",
   "existing": true,
-  "note": "Section 1(B), exact existing presentation repair: sfIntrinsicCompactSupport has intrinsic ringed-site endpoints and coefficients Type u, while this consumer and the canonical comparison use fixed-ring sheaves with coefficients Type (u+1). The existing rightDerivedLowerShriekOfCompactification, specialized to ModuleCat.{u+1} A, is exactly the same R(c.g)_* after termwise exact (c.i)_! on ordinary constant-A modules at the specified compactification. It makes no compactification-independence assertion on the unbounded category. The intrinsic presentation remains available in its original module."
+  "note": "Section 1(B), existing exact realization repair: the recorded fixed-ring sheaf functor rightDerivedLowerShriekOfCompactification has fixed-scalar endpoints, whereas def-trf-coefficient-conventions records intrinsic constant-ring module derived categories. The existing sfIntrinsicCompactSupport is the same Di_! followed by Rg_* in precisely those intrinsic categories, using the canonical coefficient realization and the same specified compactification. No independence claim is added on arbitrary unbounded objects. Its original fixed-scalar realization remains available in the previous module."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-f33e87907",
-  "group": "Q98",
-  "result": "pass",
-  "note": "Read the packet, item node, new helper node, both Lean modules, report and the cited declarations (ProEtale/Etale projectionMapOfCompactification, compactSupportSiteComparison, derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso, comparisonUpperStarCompUpperStarIso, recorded finiteExchangeProjection and supportSiteComparisonCoefficientPullbackIso). Every hypothesis matches the node (FiniteFieldDatum, l prime and l≠p, finite E/Q_l, n≥1, finite-type X/Y over k, f separated of finite type, fixed c, D^b_c M and H, finite Tor for H only). The equation C_D∘P_f(τ)∘PF^p = V_Y(PF^e)∘t∘(C_M⊗1) has the right order and directions. PF^p is the same declaration and body as def-exchange-projection's projection component. PF^e is built from the recorded def-kun-projection-formula-map and lem-pur-etale-open-derived-tensor declarations. t is .inv of the canonical tensor comparison. The pullback iso is the canonical mate. The bounded-below witnesses are existential Props, not extra hypotheses. No hollow definitions; only sorry; docstrings present; statements verbatim; universes bound; edge cases covered. The §1(B) records for def-weil-derived-tensor and def-compact-support-direct-image-detailed are exact upstream declarations with notes. nt_compile.py on both files: 9.9 s and 2.7 s, no errors or warnings. Non-blocking: no lean.note records the upstream tensor and pullback comparison declarations on their dependency nodes."
+  "reviewer": "NT-stage2-cc-81ab4cf33",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Lean and records correct. nt_compile (--json, snapshot text at Sheaf/Paper/TraceFormulaTopologicalInvariance.lean) exit 0, no errors or warnings, 4.3 s; lean.statement verbatim. Clauses checked against the declarations: T conventions (n>=1, l!=p); X,Y any separated finite-type schemes over k (more general than X0 x k, matches proof step 1, no stronger assumption); IsFinite; (topologically IsHomeomorph).universally; finiteTorConstructibleCategory = intrinsic constructible + finite Tor amplitude; e.functor identified with T.derivedPullback (direction checked), e.inverse with proEtaleConstantDerivedDirectImage and with sfIntrinsicCompactSupport c for every c (true: finite r makes c.i open and closed, so j_! = j_*); unit and counit via unitIso/counitIso; reduction conjunct on nilradical.subschemeι with no caller hypotheses. Edge cases (empty, identity, nonreduced, n=1, zero complex, universes) ok. Helper is a real Prop, one sorry, docstrings and all six proof steps present, no duplicate declaration. Section 1(B) repoint of def-compact-support-direct-image-detailed to sfIntrinsicCompactSupport (existing:true, verbatim, intrinsic endpoints matching the coefficient conventions) accepted; non-blocking: the record has flipped Q34->N5->Q98->Q13 and Q98's consumer uses the fixed-ring form. Finding H11: the Second reading by Q13 section was a placeholder; replaced by fixes/i-topology.report.md (Worker report and Dependency modules kept verbatim, real clause-by-clause second reading added). No other change."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

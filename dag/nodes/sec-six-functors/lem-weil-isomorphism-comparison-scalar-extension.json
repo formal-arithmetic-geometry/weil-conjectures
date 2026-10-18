@@ -248,5 +248,36 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-65009c46f (reviewer sub-agent of L); spot-checked: Read in full: the item (all 8 steps), the new node lem-weil-specified-pullback-comparison-alpha, every cited statement (including def-weil-inverse-image-pullback-comparison (b) and the statement plus all steps of lem-pur-integral-operations-scalar-extension and of the normalization lemma), the parent's Steps 4/7/8, the unit route, and Bhatt–Scholze §6.5 Lemma 6.5.9(4)-(5) on pp. 50-51. Batch-5 flag on lem-weil-isomorphism-derived-pullback-comparison-normalization: it is genuinely outside the two assumptions. It compares inverse image with completed pullback for a scheme isomorphism at one coefficient field, a general six-functor fact rather than a step of the trace-formula or Poincaré-duality proof. Its closure has no sec-trace-formula, nt-assume or sk-thm-trace-transport node; the only sec-poincare-duality nodes in it are three sk-lem-finite algebra nodes. The batch-5 closure already reaches it through the parent lem-weil-frobenius-point-transport-natural Step 4, and it even lies in the statement closure of nt-assume-trace-formula, so this citation adds no new reach. No cycle. Mathematics: kappa is exactly the specified zero-shifted-coordinate cone map of def (b), and the coefficients are completed O_F-modules. I redid Step 7's generator computation; both routes give g^{-1}(p⊗1)⊗π^L_m(s), using π^L_m|_R = ι_m π^E_m and c^g-balancing. The Step 8 chain and its cancellation are correct. New node: self-contained, statement only, has the required searches, no duplicate found (I checked prop-weil-pbc-scalar-extension, lem-pod-canonical-coefficient-pullback-reduction, lem-a1-integral-pullback-completed-comparison, lem-tw-ordinary-completed-integral-pullback and others). Edge cases g=id, K=0 and E=L hold, and in the ramified case e>1 delta_P is a quasi-isomorphism by cofinality even though d_1 is not an isomorphism. The node pins down the descriptive alpha of the item statement, consistent with Steps 7-8 of the scalar-operation proof, and it does not restate the item. Accepted tool_uses: lem-pur-isomorphism-inverse-image-tensor-hom, lem-pur-integral-operations-scalar-extension, and the normalization lemma; kflat-change-of-rings is on route anyway. No SGA. One repair (C4 precision): Step 6 said the normalization lemma explicitly states resolution independence and naturality for kappa, but its statement gives them for theta. The corrected step derives them for kappa as θ^{-1}G(u), using naturality of u. Only Step 6's text changed, in fixes/dag/nodes/sec-six-functors/lem-weil-isomorphism-comparison-scalar-extension.json; uses, proof_deps and the statement are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismComparisonScalarExtension",
+  "declaration": "WeilConjectures.isomorphismComparison_scalarExtension",
+  "declarations": [
+   "WeilConjectures.isomorphismScalarSheafModel_existsUnique",
+   "WeilConjectures.isomorphismScalarSheafModel",
+   "WeilConjectures.isomorphismScalarModel_existsUnique",
+   "WeilConjectures.isomorphismScalarTensor_existsUnique",
+   "WeilConjectures.isomorphismScalarTensor",
+   "WeilConjectures.isomorphismScalarTensorDerived",
+   "WeilConjectures.isomorphismComparisonInputs_constructible",
+   "WeilConjectures.isomorphismComparisonScalarAlpha",
+   "WeilConjectures.isomorphismComparisonScalarBeta",
+   "WeilConjectures.isomorphismComparison_scalarExtension"
+  ],
+  "file": "lean/Sheaf/Paper/IsomorphismComparisonScalarExtension.lean",
+  "statement": "theorem isomorphismComparison_scalarExtension {X Y : AlgebraicGeometry.Scheme.{u}} (g : X ⟶ Y) [IsIso g] (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (K : DerivedCategory (integralTowerModules l E Y)) (hK : sfIntegralConstructible l E Y K) : (integralScalarExtension l E L ι X).map (inverseImagePullbackComparisonDerived l E g hX hY K) ≫ isomorphismComparisonScalarAlpha l E L ι g hX hY K hK = isomorphismComparisonScalarBeta l E L ι g hX hY K hK ≫ inverseImagePullbackComparisonDerived l L g hX hY ((integralScalarExtension l E L ι Y).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-2d92a3c5e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d92a3c5e",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Read item node and source place (BS 6.5.9(4), agent calculation from def (b)), both delivered modules, report, all stmt_dep records and the exact side-clone declarations. Statement matches clause by clause: T_X.map κ_E ≫ α = β ≫ κ_L(T_Y K), hK = sfIntegralConstructible, hX/hY, IsIso g. The ∃! helpers are consistent (integralCompletedScalarMap and completedCoefficientMap are fixed by the same residue equations; both χ normalized by the quotient augmentation with zero shifted coordinate; the sectionwise tensor b matches the node's local formula). The §1(B) evaluator for def-weil-inverse-image-pullback-comparison is justified: it applies the recorded part (b) on a representative with the existing K-flat resolution, independent universes, note present; the record shape is forced by merge_delivery filtering. The single universe u is inherited from the recorded IntegralOperationsScalarComparisons API. Edge cases E=L, g=id, empty schemes, K=0 checked. Fixes: (H4) isomorphismComparisonScalarAlpha now uses the recorded scalarPullbackCompleted, verified rfl-equal to the delivered body, so the statement is unchanged; (H9) removed the unused private import ChangeOfRingsKFlat. nt_compile: delivered files and the fixed module compile clean (negative control confirmed diagnostics are shown). The Second-reading section is the worker's own recheck under the dispatcher's instruction; accepted with a note."
  }
 }

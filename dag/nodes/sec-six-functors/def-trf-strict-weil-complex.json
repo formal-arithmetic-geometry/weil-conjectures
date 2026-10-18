@@ -93,5 +93,31 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-c7e9e1563 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the unit diff, the master (order 2165) and main-20261015 (order 2509, plus the _section.md at order 1837) blueprint texts, and the statements of all seven statement dependencies. I also read def-weil-finite-tor-amplitude, def-weil-endofunctor-fixed-pair-category, def-wf-weil-category, lem-weil-point-proetale-sections-exact and the DAG node sk-def-sf-weil-complexes. The data matches main-20261015 clause by clause: finite ring A=A_{E,n} with n>=1 and l!=p, X_0 separated of finite type, the geometric fibre, D^b_ctf(X,A) on the pro-etale site, an iso phi: Lg_gamma^*K->K in the ambient category, g_gamma=id x Spec(gamma^{-1} of z->z^q), commuting morphisms, and the forgetful functor. Two sentences changed, both justified and recorded under Source error in the report. (1) The rational category D^b_{c,W} is now described as a category of pairs, which is what the cited, reviewed def-weil-weil-sheaf-complex says. (2) The Jordan-block illustration is now placed on Spec k. I checked it: J(x,y)=(x+y,y) has no equivariant section because A!=0, and on Spec k sections are exact, so Hom(A,A[1])=0. The blueprint's general wording is false on general X: for X_0=G_m with l dividing q-1 there are nonzero pair maps (A,can)->(A[1],can). No objects, hypotheses or morphisms change, so no target is weakened. Edge cases checked: empty X_0, the zero complex, n=1. No new nodes and no cycle; sk-def-sf-weil-complexes (the general-Lambda form) is correctly in same_as. The unit change is limited to realized.statement and realized_by, matching the unit's own pointer to this item. No SGA source is cited. The item records no Mathlib searches; I did not count this as a fault, since other accepted definition splits also have none, and a Mathlib grep found no Weil-complex notion. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceFormulaStrictWeilComplex",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.strictWeilComplex",
+  "declarations": [
+   "WeilConjectures.TraceFormulaCoefficientConventions.strictWeilFrobeniusPullback",
+   "WeilConjectures.TraceFormulaCoefficientConventions.strictWeilCarrierProperty",
+   "WeilConjectures.TraceFormulaCoefficientConventions.strictWeilComplex",
+   "WeilConjectures.TraceFormulaCoefficientConventions.strictWeilForget",
+   "WeilConjectures.TraceFormulaCoefficientConventions.strictWeilFrobenius"
+  ],
+  "file": "lean/Sheaf/Paper/TraceFormulaStrictWeilComplex.lean",
+  "statement": "abbrev strictWeilComplex (T : TraceFormulaCoefficientConventions.{u}) : Type _",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Specializes the existing IsoAlgebra fixed-pair construction to the recorded intrinsic constant-ring module derived category, with the recorded bounded constructible finite-Tor carrier predicate. The structure isomorphism is ambient, so no pullback-stability assumption is added. The upstream ProEtale.StrictWeilComplex instead uses DerivedCategory (Sheaf ... (ModuleCat ...)); it does not have the recorded intrinsic SheafOfModules interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31e050dad",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Module compiles clean via nt_compile.py --json (13.0 s, exit 0, no warnings), matching the worker's record. Each node clause is rendered: T fixes datum, A=A_{E,n} with n>=1, X0 separated finite type and X on the pro-etale site; IsoAlgebra over T.derivedPullback(geometricGaloisFrobenius) gives an ambient phi: Lg*K≅K; the carrier is restricted by inverse image of boundedConstructibleFiniteTor; morphisms are the inherited commuting squares; strictWeilForget lifts to D^b_ctf. No extra hypotheses or universe restriction. Edge cases (empty X0, zero complex, n=1) are covered. No duplicate: upstream ProEtale.StrictWeilComplex is built on a different derived category. No sorry or hollow data; source/blueprint docstrings match main-20261015 order 2509; node diff is lean-only; lean.statement is verbatim. No findings."
  }
 }

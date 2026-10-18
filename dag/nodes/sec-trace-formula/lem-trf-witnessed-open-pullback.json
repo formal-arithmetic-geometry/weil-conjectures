@@ -279,5 +279,27 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-327740f5c (reviewer sub-agent of L); spot-checked: Read the item in full (statement byte-identical to the base, 7 steps), the statements of all cited nodes, the blueprint lem-trf-compactification-graph-operator proof (3) first sentence, the parent's DAG step (3a) (u=Phi^m, i=j, all three witnesses used), and Stacks 04JC/03DA/03DJ/015F at their labels. Coefficient category checked: the constant finite A_{E,n} module derived category on X_proet with Lu^* from def-weil-pbc-proetale-operations, the same category and functor as the parent's D^b_ctf(X,A) at finite level. Steps 1-3 (exactness, termwise derived functors, D^{>=n} preservation by cohomology) and steps 5-7 (delta_e via the Lambda-linear natural sheaf comparison and localization clauses (2)/(3); witness composites with sources, targets and inverses checked) are correct. Small cases checked: zero objects, u=id, empty or identity opens, nonflat u, distinct lower bounds. No new nodes. No duplicate: def-weil-pbc-fixed-derived-comparisons only records kappa as a Lean definition, and the adic witness nodes state different things. The 7 tool_uses are accepted. One repair: step 4 applied c_u to A-module sheaves without justifying A-linearity, which the cited statement does not give. I added the one-line naturality argument for the scalar endomorphisms lambda_a (fixes/dag/nodes/sec-trace-formula/lem-trf-witnessed-open-pullback.json, step text 1344 characters).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TrfWitnessedOpenPullback",
+  "declaration": "WeilConjectures.witnessed_open_pullback",
+  "declarations": [
+   "WeilConjectures.WitnessedOpenPullbackData",
+   "WeilConjectures.witnessed_open_pullback"
+  ],
+  "file": "lean/Sheaf/Paper/TrfWitnessedOpenPullback.lean",
+  "statement": "theorem witnessed_open_pullback (T : TraceFormulaCoefficientConventions.{u}) (U X V Y : Over (Spec (CommRingCat.of T.datum.k))) [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (u : U ⟶ X) (j : X ⟶ Y) (i : U ⟶ V) [IsOpenImmersion j.left] [IsOpenImmersion i.left] (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X.left) (ModuleCat.{u + 1} (ULift.{u + 1, u} T.coefficientRing)))) (w : Scheme.FixedEtaleOriginWitness X.left (ULift.{u + 1, u} T.coefficientRing) K) : Nonempty (WitnessedOpenPullbackData (ULift.{u + 1, u} T.coefficientRing) u.left j.left i.left K w)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc9543ac4",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Checked every node clause against the Lean: A_{E,n} as ULift.{u+1,u} T.coefficientRing; U,X,V,Y over Spec k with LocallyOfFiniteType+QuasiCompact+IsSeparated; IsOpenImmersion j.left and i.left; K in DerivedCategory.Plus with FixedEtaleOriginWitness kept as data. kappa, deltaJ and deltaI orientations are correct (nu_U^* u^-1 => Lu^* nu_X^*; nu_T^* e_! => e_! nu_S^*), and their normalizations equal mapDerivedCategoryNatIso (Localization.liftNatIso of the termwise comparisons) of the recorded supportSiteComparisonCoefficientPullbackIso and openImmersionLowerShriekComparisonUpperStarIso. The three witness formulas are in diagrammatic order and all objects are in D+ via mapDerivedCategoryPlus. A scratch sorry-free proof of Nonempty WitnessedOpenPullbackData (fields by rfl and HEq.rfl; axioms propext, Classical.choice, Quot.sound only) shows the HEq fields are well-typed and the statement is satisfiable. Node statement, stmt_deps and proof are byte-identical to base; only lean was added and lean.statement is verbatim in the file. Fixed-scalar ProEtale.upperStar and openImmersionLowerShriek match the recorded witness interface, and sfIntrinsicExtensionByZero is literally their conjugate. No duplicate found; no hollow definition; only sorry; source and blueprint docstrings with the seven-step plan; no line over 100 characters. nt_compile: module 9.0 s, no errors. Remarks: the second-reading section is a short self-reread; Lu^* is the fixed-scalar upperStar, which the node's proof step 1 identifies with the recorded pullback."
  }
 }

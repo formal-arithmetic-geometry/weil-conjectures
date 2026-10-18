@@ -218,5 +218,27 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-9419f0d24 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, unit/chapter route and source locations. Corrected proof attribution, Laumon references, and the projection-formula Tor citation plus explicit anti-diagonal calculation. No mathematical statement weakened or new node created. Corrected JSON is under fixes/dag/nodes/sec-fourier-transform/; concrete checks and accepted tool uses are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilFourierInversion",
+  "declaration": "AlgebraicGeometry.WeilComplex.nonempty_iso_affineFourierTransform_comp_inv",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.nonempty_iso_affineFourierTransform_comp_inv",
+   "AlgebraicGeometry.WeilComplex.nonempty_iso_affineFourierTransform_comp_self"
+  ],
+  "file": "lean/Sheaf/Paper/WeilFourierInversion.lean",
+  "statement": "theorem nonempty_iso_affineFourierTransform_comp_inv (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (n : Type u) [Fintype n] (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) : Nonempty (affineFourierTransform k₀ l n ψ ⋙ affineFourierTransform k₀ l n ψ⁻¹ ≅ tateTwist k₀ l (AffineSpace n (Spec (CommRingCat.of k₀))) (-(Fintype.card n : ℤ)))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eaa7d12d2",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Read the item node, the def-wf-tate-twist and def-fd-transform records, the blueprint source, the report and both modules. Statements: FT_{psi^-1} after FT_psi ~ tateTwist(-card n) and FT_psi after FT_psi ~ upperStar(AffineSpace.neg) then tateTwist(-card n), as functor isomorphisms on WeilComplex over AffineSpace n (Spec k0) with Fintype n (rank 0 allowed). Hypotheses: Fact l.Prime, ringChar k0 != l, psi != 1 (the chapter's standing nontriviality). Composition order and twist sign checked against Laumon 1.2.2.1, TateTwist.lean and the upstream rank-one nonempty_iso_fourierTransform_comp_inv. Edge cases rank 0, rank 1, char 2 and zero complex are fine; no universe restriction. The section 1(B) dependency module for def-fd-transform is justified (the recorded transform is ordinary-etale; the upstream Weil transform is rank one) and has real data and canonical instances. FINDING H4/H13: WeilSheaf.fourierPairingKernel duplicated the existing upstream artinSchreierOf (WeilSheaf/FourierInversion/Defs.lean); fixes/WeilFourierTransform.lean uses artinSchreierOf and isLisse_artinSchreierOf and imports FourierInversion.Defs, with no signature change. Fixed report adds a reviewer section: the worker's searches missed WeilSheaf/FourierInversion.lean (rank-one first formula only, so the item is not existing). The merge refit will drop Etale.fourierTransform from def-fd-transform lean.declarations; it stays publicly imported and in blueprint_lean. nt_compile.py: delivered pair 4.0 s and 3.6 s, fixed pair 3.7 s and 3.6 s, exit 0, no messages (the tool sets warn.sorry=false). Axiom probe: sorryAx in the defs comes from upstream functors; no sorry outside the two theorem proofs."
  }
 }

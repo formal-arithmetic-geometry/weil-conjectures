@@ -239,5 +239,27 @@
   "group": "Q117",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-06fe59539 (reviewer sub-agent of L); spot-checked: Read the item, the one new node, every cited statement, unit sk-i-topology, both blueprint snapshots, and Stacks proetale.tex:4962-4989 (09AB lemma-thickening) and morphisms.tex:11360-11383 (04DF). The item statement is the blueprint's, verbatim, and is not weakened. Its coefficient category is finite-level pro-etale D^b_ctf, the same category on which thm-sf-ctf-stability and prop-functor-package make their claims. Steps checked: (1) the new pro-etale topos lemma replaces the blueprint's etale-only opening sentence; (2) constant-ring-map and constant-exact give A-linear unit and counit, and r_* is exact because it is an equivalence; (3) exact functors commute with H^i, so localization descends the equivalence; termwise pullback is finite-level Lr^* by definition, and exact r_* sends a K-injective resolution to a quasi-isomorphism, so termwise r_* is Rr_*; (4) finite implies proper (Mathlib leaf) implies separated finite type, and clauses (i) and (iii) of thm-sf-ctf-stability restrict the equivalence to D^b_ctf; (5) clause (3) of prop-functor-package gives Rr_! ≅ Rr_* on the finite D^b_ctf domain, and I recomputed both triangle identities for the transported unit and counit; (6) Y_red -> Y is a surjective closed immersion and a universal homeomorphism (the cited lemma is Lean-closed), finite by the Mathlib leaf; Y_red is finite type, and separated because its diagonal is a base change of Delta_Y. The new node lem-trf-proetale-topological-invariance is exactly 09AB combined with 04DF, on Stacks' weakly etale site. It is true with no finiteness hypothesis; I tested it on identity and empty schemes, k[eps]/eps^2, Frobenius on A^1 and an inseparable field extension. It is statement-only, self-contained, has all three search kinds recorded, and its blueprint.from points to the opening sentence of i-topology's proof. Searching snapshot dag/nodes for 09AB and for universal homeomorphism with pro-etale found no duplicate: the existing nodes cover only the etale site, condensed surjective closed immersions, or affineness of thickenings. It is not a restatement of the item. No cycle; proof_deps equals the union of the step uses. Accepted tool uses: constant-ring-map, constant-exact, and thm-sf-ctf-stability (i),(iii). No SGA source is cited. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceFormulaTopologicalInvariance",
+  "declaration": "WeilConjectures.finiteUniversalHomeomorphism_traceFormula",
+  "declarations": [
+   "WeilConjectures.TraceFormulaTopologicalEquivalence",
+   "WeilConjectures.finiteUniversalHomeomorphism_traceFormula"
+  ],
+  "file": "lean/Sheaf/Paper/TraceFormulaTopologicalInvariance.lean",
+  "statement": "theorem finiteUniversalHomeomorphism_traceFormula (T : TraceFormulaCoefficientConventions.{u}) : (∀ (X Y : Over (Spec (CommRingCat.of T.datum.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (r : X ⟶ Y) [IsFinite r.left], (topologically IsHomeomorph).universally r.left → ∀ c : Compactification r.left, TraceFormulaTopologicalEquivalence T r.left c) ∧ (∀ (Y : Over (Spec (CommRingCat.of T.datum.k))) [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (c : Compactification Y.left.nilradical.subschemeι), TraceFormulaTopologicalEquivalence T Y.left.nilradical.subschemeι c)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81ab4cf33",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Lean and records correct. nt_compile (--json, snapshot text at Sheaf/Paper/TraceFormulaTopologicalInvariance.lean) exit 0, no errors or warnings, 4.3 s; lean.statement verbatim. Clauses checked against the declarations: T conventions (n>=1, l!=p); X,Y any separated finite-type schemes over k (more general than X0 x k, matches proof step 1, no stronger assumption); IsFinite; (topologically IsHomeomorph).universally; finiteTorConstructibleCategory = intrinsic constructible + finite Tor amplitude; e.functor identified with T.derivedPullback (direction checked), e.inverse with proEtaleConstantDerivedDirectImage and with sfIntrinsicCompactSupport c for every c (true: finite r makes c.i open and closed, so j_! = j_*); unit and counit via unitIso/counitIso; reduction conjunct on nilradical.subschemeι with no caller hypotheses. Edge cases (empty, identity, nonreduced, n=1, zero complex, universes) ok. Helper is a real Prop, one sorry, docstrings and all six proof steps present, no duplicate declaration. Section 1(B) repoint of def-compact-support-direct-image-detailed to sfIntrinsicCompactSupport (existing:true, verbatim, intrinsic endpoints matching the coefficient conventions) accepted; non-blocking: the record has flipped Q34->N5->Q98->Q13 and Q98's consumer uses the fixed-ring form. Finding H11: the Second reading by Q13 section was a placeholder; replaced by fixes/i-topology.report.md (Worker report and Dependency modules kept verbatim, real clause-by-clause second reading added). No other change."
  }
 }
