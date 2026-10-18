@@ -9644,11 +9644,13 @@ public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.PoincareDualityLisse
+public import WeilConjectures.WeilSheaf.ProjectionFormula.DualPullbackWeil
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualPullback
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerShriekIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerStarIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.OpenImmersionProjection
+public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarConstant
 public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensorCompat
 public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensorWeil
