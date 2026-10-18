@@ -183,6 +183,7 @@ noncomputable def projectiveFormulaMap {P : Scheme.{u}} (q : P ⟶ S) [HasInvert
       (R((q)_*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ P) :=
   biproduct.desc fun a ↦ chernPowMap q h a
 
+omit [Finite Λ] in
 /-- The projective-space formula in relative dimension `0`: for an isomorphism `q`, the map
 `Λ_S ⟶ Rq_* Λ_P` is an isomorphism. -/
 lemma isIso_projectiveFormulaMap_zero {P : Scheme.{u}} (q : P ⟶ S) [IsIso q]
@@ -214,6 +215,13 @@ lemma isIso_projectiveFormulaMap_zero {P : Scheme.{u}} (q : P ⟶ S) [IsIso q]
   rw [hdesc, chernPowMap, Adjunction.homEquiv_unit]
   simp only [chernPow]
   infer_instance
+
+omit [Finite Λ] in
+lemma isIso_projectiveFormulaMap_of_eq_zero {P : Scheme.{u}} (q : P ⟶ S) [IsIso q]
+    [HasInvertibleExponent Λ P] (h : constantComplex Λ P ⟶ (tateObject Λ P 1)⟦2 * (1 : ℤ)⟧)
+    (r : ℕ) (hr : r = 0) : IsIso (projectiveFormulaMap q h r) := by
+  subst hr
+  exact isIso_projectiveFormulaMap_zero q h
 
 variable [HasKummerClass.IsNormalized Λ] {k : Type u} [Field k] (aS : S ⟶ Spec (.of k))
   [IsSeparated aS] [LocallyOfFiniteType aS]
@@ -603,14 +611,18 @@ def ProjectiveFormula (n : Type u) [Fintype n] : Prop :=
     IsHyperplaneClass Λ n S γ →
       IsIso (projectiveFormulaMap (ℙ(Option n; S) ↘ S) (hyperplaneChernClass γ) (Fintype.card n))
 
-include aS in
+omit [HasKummerClass.IsNormalized Λ] in
 /-- *Induction step 0 of the projective-space formula*: `ℙ⁰_S = S`, and `Λ_S ⟶ Rq_* Λ` is an
 isomorphism.
 
-Not proved here: `ℙ(Option PEmpty; S) ⟶ S` is an isomorphism, so the unit is one, and the map is
+`ℙ(Option PEmpty; S) ⟶ S` is an isomorphism, so the unit is one, and the map is
 the unit up to the identification `Λ_S(0)[0] ≅ Λ_S`. -/
 lemma projectiveFormula_pempty : ProjectiveFormula Λ S PEmpty := by
-  sorry
+  intro γ _
+  have : Unique (Option PEmpty.{u + 1}) := ⟨⟨none⟩, fun a ↦ by cases a with
+    | none => rfl
+    | some x => exact x.elim⟩
+  exact isIso_projectiveFormulaMap_of_eq_zero _ _ _ Fintype.card_eq_zero
 
 include aS in
 /-- *Invariance under renaming the coordinates* of the projective-space formula.
@@ -664,7 +676,7 @@ theorem isIso_projectiveFormulaMap [Fintype n]
   have key : ∀ (n : Type u) [Fintype n], ProjectiveFormula Λ S n :=
     Fintype.induction_empty_option (P := fun n _ ↦ ProjectiveFormula Λ S n)
       (fun _ β _ e h ↦ letI := Fintype.ofEquiv β e.symm; projectiveFormula_of_equiv aS e h)
-      (projectiveFormula_pempty aS)
+      projectiveFormula_pempty
       (fun _ _ h ↦ projectiveFormula_option aS h)
   exact key n γ hγ
 

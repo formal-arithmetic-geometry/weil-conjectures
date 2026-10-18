@@ -811,6 +811,49 @@ lemma twistBundleSection_comp_π (t : n) :
       (twistBundleSectionSections_some_s_self n S t i) (some a) _).trans rfl
 
 
+/-- On the hyperplane `ℙ(m; S) ⊆ ℙ(Option m; S)`, the coordinate section `[x] ↦ [x : x_∗]` agrees
+with the zero section: both are `[x : 0] ↦ [x : 0 : 0]`. -/
+lemma hyperplane_comp_twistBundleSectionAux_none {m : Type u} :
+    hyperplane m S ≫ twistBundleSectionAux (Option m) S none =
+      hyperplane m S ≫ hyperplane (Option m) S := by
+  refine Scheme.Opens.hom_ext_of_iSup_eq_top (fun k ↦ standardOpen m S k) (iSup_standardOpen m S)
+    _ _ fun k ↦ ?_
+  have hr : Set.range ((standardOpen m S k).ι ≫ hyperplane m S).base ⊆
+      Set.range (standardOpen (Option m) S (some k)).ι.base := by
+    rintro _ ⟨x, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    have hx : x.1 ∈ hyperplane m S ⁻¹ᵁ standardOpen (Option m) S (some k) := by
+      rw [hyperplane_preimage_standardOpen_some]
+      exact x.2
+    exact hx
+  let c := IsOpenImmersion.lift _ _ hr
+  have hc : c ≫ (standardOpen (Option m) S (some k)).ι = (standardOpen m S k).ι ≫ hyperplane m S :=
+    IsOpenImmersion.lift_fac _ _ _
+  have h₁ : (standardOpen (Option m) S (some k)).ι ≫ twistBundleSectionAux (Option m) S none =
+      homOfSections ((standardOpen (Option m) S (some k)).ι ≫ ℙ(Option m; S) ↘ S)
+        (fun a ↦ (standardOpen (Option m) S (some k)).topIso.inv
+          ((twistBundleSectionSections (Option m) S none a).s (some k)))
+        (Scheme.CoordinateCover.span_topIso_inv _
+          (span_twistBundleSectionSections (Option m) S none) (some k)) :=
+    Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover (Option m) S) _ _ _ _
+  have h₂ : (standardOpen (Option m) S (some k)).ι ≫ hyperplane (Option m) S =
+      homOfSections ((standardOpen (Option m) S (some k)).ι ≫ ℙ(Option m; S) ↘ S)
+        (fun a ↦ (standardOpen (Option m) S (some k)).topIso.inv
+          ((hyperplaneSections (Option m) S a).s (some k)))
+        (Scheme.CoordinateCover.span_topIso_inv _
+          (span_hyperplaneSections (Option m) S) (some k)) :=
+    Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover (Option m) S) _ _ _ _
+  rw [← Category.assoc, ← hc, Category.assoc, h₁, ← Category.assoc, ← hc, Category.assoc, h₂,
+    comp_homOfSections, comp_homOfSections]
+  congr 1
+  funext b
+  cases b with
+  | some a => rfl
+  | none =>
+    simp only [twistBundleSectionSections, hyperplaneSections,
+      Scheme.CoordinateCover.zeroSection, map_zero]
+    sorry
+
 end ProjectiveSpace
 
 end AlgebraicGeometry
