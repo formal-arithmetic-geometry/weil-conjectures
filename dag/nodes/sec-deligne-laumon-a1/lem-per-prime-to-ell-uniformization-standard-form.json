@@ -18,50 +18,137 @@
   "def-weil-finite-integral-morphism",
   "def-weil-flat-morphism",
   "def-weil-etale-morphism",
-  "def-weil-regular-scheme"
+  "def-weil-regular-scheme",
+  "def-pc-finite-locally-free",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Z=X\\setminus U$. This is closed since $U$ is open and nowhere dense since $U$ is dense. The hypotheses already give that $X$ is reduced, Noetherian and quasi-excellent, and that $\\ell$ is invertible on $X$. Thus $(X,Z,\\ell)$ satisfies the input hypotheses of the regular-cover theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 3.2.1: apply IX 1.1 to the complement of the dense open."
+   }
+  },
+  {
+   "text": "Apply [lem-per-gabber-prime-to-ell-regular-cover] to $(X,Z,\\ell)$. Obtain a finite $\\ell'$-alteration covering family $q_b:Y_b\\to X$, with each $Y_b$ regular and Noetherian and each $q_b$ of finite type, and strict normal crossings boundaries $H_b$ satisfying $|H_b|=q_b^{-1}(Z)$. Consequently the inverse image $U\\times_XY_b$ is exactly the open complement $Y_b\\setminus |H_b|$. We retain these $Y_b$; no later refinement is required to preserve a boundary on its own source.",
+   "uses": [
+    "lem-per-gabber-prime-to-ell-regular-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Theorem 1.1; XIII 3.2.1, regular schemes Y_j and inverse images of U."
+   }
+  },
+  {
+   "text": "Apply [lem-per-alteration-cover-standard-refinement] to this finite covering family in $\\operatorname{alt}/X$. The scheme $X$ is integral and quasi-excellent, as required; $\\ell$ is the same invertible prime. It gives $p:X'\\to X$, the finite completely decomposed family $e_i:E_i\\to X'$, the finite locally free surjections $a_i:W_i\\to E_i$ of positive constant ranks prime to $\\ell$, and $X$-morphisms $h_i:W_i\\to Y_{b(i)}$. The conclusion of that theorem includes the dense-open isomorphism for $p$, integrality of $X'$, separatedness and finite type of the $e_i$, all the finite type assertions, and $q_{b(i)}h_i=pe_ia_i$.",
+   "uses": [
+    "lem-per-alteration-cover-standard-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Theorem 3.2.3 and Corollary 2.2.4, as combined in XIII 3.2.1."
+   }
+  },
+  {
+   "text": "Let $Y=\\coprod_bY_b$ be the disjoint union scheme: its space is the disjoint union of the spaces of the $Y_b$, with the structure sheaf equal to theirs on each open and closed summand. Give it the $X$-map whose restriction to $Y_b$ is $q_b$. For every $i$, compose $h_i$ with the inclusion $Y_{b(i)}\\hookrightarrow Y$. This is an $X$-morphism because its composite to $X$ is $q_{b(i)}h_i=pe_ia_i$. These are the requested maps $W_i\\to Y$. Together with the boundary complements from Step 2 and the standard diagram from Step 3 they give every clause of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 3.2.1, the top arrow to the finite disjoint union Y."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-gabber-prime-to-ell-regular-cover",
+  "lem-per-alteration-cover-standard-refinement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XIII 3.2.1, using IX Theorem 1.1 and II Theorem 3.2.3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Gabber prime to ell local uniformization quasi excellent schemes proper modification completely decomposed etale cover finite flat covers regular normal crossings",
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"5142cfc2f5ca8abb\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected hits concern scheme structure sheaves, constructible subsets, general sheaf generators, or unrelated names; none states this ordinary etale finite-coefficient result"
+   "verdict": "no match: the recorded hits give etale/smooth morphisms, normalization and general scheme constructions, not prime-to-ell uniformization in standard form."
   },
   {
    "tool": "loogle",
    "query": "\"IsEtale\", \"IsProper\", \"IsRegular\"",
    "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected hits concern scheme structure sheaves, constructible subsets, general sheaf generators, or unrelated names; none states this ordinary etale finite-coefficient result"
+   "verdict": "no match: the recorded hits give etale/smooth morphisms, normalization and general scheme constructions, not prime-to-ell uniformization in standard form."
   },
   {
    "tool": "grep",
    "query": "uniformi[sz]ation|prime.to.*alteration|normal.?crossing",
    "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected hits concern scheme structure sheaves, constructible subsets, general sheaf generators, or unrelated names; none states this ordinary etale finite-coefficient result"
+   "verdict": "no match: the recorded hits give etale/smooth morphisms, normalization and general scheme constructions, not prime-to-ell uniformization in standard form."
   },
   {
    "tool": "leansearch",
    "query": "Prime to ell alterations admit regular schemes with strict normal crossings boundary after a proper modification and completely decomposed etale covers",
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.IsEtaleAt.comp\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isProper_eq\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"492928c84cc76c06\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected hits concern scheme structure sheaves, constructible subsets, general sheaf generators, or unrelated names; none states this ordinary etale finite-coefficient result"
+   "verdict": "no match: the recorded hits give etale/smooth morphisms, normalization and general scheme constructions, not prime-to-ell uniformization in standard form."
   },
   {
    "tool": "leanfinder",
    "query": "Local alteration topology prime to ell regularization of pairs over a Noetherian quasi excellent scheme",
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_smooth\"], \"digest\": \"a3840f018feb8225\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected hits concern scheme structure sheaves, constructible subsets, general sheaf generators, or unrelated names; none states this ordinary etale finite-coefficient result"
+   "verdict": "no match: the recorded hits give etale/smooth morphisms, normalization and general scheme constructions, not prime-to-ell uniformization in standard form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime to ell local uniformization in standard form proper birational modification completely decomposed etale covers finite flat covers and regular schemes with strict normal crossings boundary",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"7e8e3975bf3a9342\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms, normalization, general covers or Noetherianity; none defines the alteration topology or states Gabber regularization or its standard refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularize a quasi excellent scheme with boundary using prime to ell finite locally free maps after a Nisnevich cover of a modification",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"ac9525e9df1ef3b1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms, normalization, general covers or Noetherianity; none defines the alteration topology or states Gabber regularization or its standard refinement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsProper\", \"IsRegular\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms, normalization, general covers or Noetherianity; none defines the alteration topology or states Gabber regularization or its standard refinement."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformi[sz]ation|prime.to.*alteration|normal.?crossing",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms, normalization, general covers or Noetherianity; none defines the alteration topology or states Gabber regularization or its standard refinement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime to ell uniformization admits regular schemes with normal crossings boundary after proper modification and Nisnevich covers",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"7a68087e26655f7f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms, normalization, general covers or Noetherianity; none defines the alteration topology or states Gabber regularization or its standard refinement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-open-immersion-sheaf-finiteness",
@@ -73,7 +160,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Ancestor proof Step 3, finite-residue duality, via finite exceptional preservation: the open-immersion input used after compactifying separated pieces of the ordinary direct-image finiteness argument. More precisely, ILO XIII IX Theorem 1.1; II Theorem 3.2.3; XIII 3.2.1.",
+   "place": "Ancestor proof Step 3 (Verdier duality), through the open-immersion finiteness input to finite exceptional preservation: ILO XIII 3.2.1, the sentence applying IX 1.1 and II 3.2.3 to construct the finite family of commutative diagrams.",
    "via": [
     "lem-per-gabber-open-immersion-sheaf-finiteness",
     "lem-per-quasi-excellent-etale-direct-image-finiteness",
@@ -84,5 +171,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prime-to-ell-uniformization-standard-form",
+  "worker": "stage1",
+  "summary": "Kept the statement and supplied the explicit combination in ILO XIII 3.2.1: apply prime-to-ell regular uniformization to the closed complement of U, then standard-refine that arbitrary alteration cover and compose with the coproduct inclusions. Added the two independent general source theorems and their alteration-site definition as statement-only nodes; retained prior search logs and added only searches actually recorded for Q61. No attachment or Mathlib leaf was found.",
+  "blueprint": "Ancestor proof Step 3 (Verdier duality), through the open-immersion finiteness input to finite exceptional preservation: ILO XIII 3.2.1, the sentence applying IX 1.1 and II 3.2.3 to construct the finite family of commutative diagrams.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-62227b07b",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-62227b07b (reviewer sub-agent of L); spot-checked: Read in full: the item, its 4 steps, the 3 new nodes and every cited definition, against ILO II 1.1.2, 1.1.8, 1.2.2, 2.1.1–2.3.1 and 3.2.1–3.2.3 (pp. 23–31), IX Thm 1.1 (p. 131) and XIII 3.2.1 (p. 199). The item statement is byte-identical to its base copy (Q23 snapshot), and that statement is XIII 3.2.1 restricted to integral X. Step 1 holds: Z = X∖U is closed and nowhere dense, and integral implies reduced. Step 2 holds: the Gabber node is IX 1.1 with 'connected' dropped and 'S reduced' added, both harmless; an snc divisor with support p⁻¹(Z), taken reduced, is a def-trf snc boundary, and the empty boundary is allowed. Step 3 holds: the refinement node is II 3.2.3. The dominating family lies in alt/X, so its schemes are reduced, and irreducible plus reduced gives integral. Cor. 2.2.4 makes the family finite, and passing to affine opens makes the e_i separated. Finite flat over a Noetherian base is finite locally free, and degree prime to ℓ means rank at least 1, constant on irreducible V_i, so a_i is surjective. A proper birational map of integral schemes is an isomorphism over a dense open. Step 4 (coproduct assembly) is elementary and correct. The definition node matches 1.2.2, 1.1.8, 2.1.1 and the sieve form of 2.3.1. DAG-wide searches (uniformization, alteration, Nisnevich/completely decomposed, ℓ′, de Jong, standard form) found no duplicate: the trf alteration nodes are single alterations. Neither new theorem restates the item, and there is no cycle. Batch-5 flag: def-trf-strict-normal-crossings-boundary is a general definition, outside both assumed statements, and the base item already cited it, so accepted. Route stays inside the unit, tool_uses is empty, no SGA. FIX, two B3 citation gaps: def-per-prime-to-ell-alteration-topology now cites def-weil-irreducible-components; lem-per-alteration-cover-standard-refinement now cites def-weil-surjective-morphism. The item got def-weil-surjective-morphism in stmt_deps only; its statement text is unchanged.; 3 file(s) fixed by the reviewer"
  }
 }
