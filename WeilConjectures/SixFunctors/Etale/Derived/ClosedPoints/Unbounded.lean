@@ -9,10 +9,40 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Hypercohomo
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitRange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Products
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Detection
+public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Acyclic
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+public import WeilConjectures.AlgebraicGeometry.GeometricStalkSupport
 
 /-!
 # Cohomology of unbounded complexes with acyclic cohomology sheaves
 
+Let `X` be a scheme, `K ∈ D(X_ét, Λ)` unbounded, and `B` a class of étale `X`-schemes covering
+`X_ét` such that `Hᵖ(U, ℋᵠ(K)) = 0` for `p > 0` and `U ∈ B`. Then `Hᵠ(U, K) ≅ Γ(U, ℋᵠ(K))`
+for `U ∈ B` (blueprint `lem-kun-0bkz`, Stacks 0BKZ). Following Stacks, `K` is compared with the
+homotopy limit `R lim τ^{≥ -n} K` of its truncations: `RΓ(U, -)` preserves countable products,
+hence homotopy limits, the towers `Hᵐ(U, τ^{≥ -n} K)` are eventually constant (so the Milnor
+sequence has no `lim¹` term), and since `B` covers `X_ét`, an object with vanishing `Hᵠ(U, -)`
+for all `U ∈ B` has `ℋᵠ = 0`. As an application, for `X` of finite type over a separably closed
+field, an unbounded `Q` whose cohomology sheaves are supported at closed points vanishes if and
+only if `Hⁱ(X_ét, Q) = 0` for all `i` (blueprint `lem-kun-0f1g`, Stacks 0F1G).
+
+## Main statements
+
+- `DerivedCategory.isIso_homologyFunctor_map_π_of_isHomotopyLimit_of_isIso`: the Milnor
+  sequence for an essentially constant tower in `D(R)`.
+- `CategoryTheory.Functor.preservesLimitsOfShape_discrete_nat_rightDerivedFunctor`: unbounded
+  right derived functors to `D(R)` preserve countable products.
+- `CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects`:
+  the abstract form of Stacks 0BKZ.
+- `AlgebraicGeometry.Etale.nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic`
+  (`lem-kun-0bkz`).
+- `AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology_rightDerivedGlobalSections`
+  (`lem-kun-0f1g`).
 -/
 
 @[expose] public section
@@ -288,12 +318,14 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
 transition `τ^{≥ -n-1} K ⟶ τ^{≥ -n} K` induces isomorphisms on `Hᵐ(RF(-))` for `m ≥ -n`: its
 fiber is `H^{-n-1}(K)` placed in degree `-n-1`, whose image under `RF` is concentrated in degree
 `-n-1`. -/
+omit [EnoughInjectives C] in
 lemma isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ [PreservesFiniteLimits F]
     (K : DerivedCategory C) (n : ℕ)
     (hK : F.IsRightAcyclic ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).obj K))
     (m : ℤ) (hm : -(n : ℤ) ≤ m) :
     IsIso ((DerivedCategory.homologyFunctor D m).map
-      (F.rightDerivedFunctor.map ((DerivedCategory.truncGETower K).map (homOfLE n.le_succ).op))) := by
+      (F.rightDerivedFunctor.map
+        ((DerivedCategory.truncGETower K).map (homOfLE n.le_succ).op))) := by
   let t := DerivedCategory.TStructure.t (C := C)
   let RF := F.rightDerivedFunctor
   let L := (DerivedCategory.truncGETower K).obj (op (n + 1))
@@ -406,7 +438,8 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects {ι 
     (hK : ∀ i q, (Γ i).IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj K))
     (i : ι) (q : ℤ) :
     Nonempty ((DerivedCategory.homologyFunctor (ModuleCat.{v} R) q).obj
-        ((Γ i).rightDerivedFunctor.obj K) ≅ (Γ i).obj ((DerivedCategory.homologyFunctor C q).obj K)) := by
+        ((Γ i).rightDerivedFunctor.obj K) ≅
+          (Γ i).obj ((DerivedCategory.homologyFunctor C q).obj K)) := by
   let t := DerivedCategory.TStructure.t (C := C)
   let T := DerivedCategory.truncGETower K
   obtain ⟨c, hc⟩ := Pretriangulated.exists_isHomotopyLimit T
@@ -522,7 +555,8 @@ representing `N` by a K-injective complex `I`, every local section of `ℋᵠ(I)
 a cycle of `I`, which on members of `B` is a boundary. -/
 theorem isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSections
     {X : Scheme.{u}} (B : Set X.Etale)
-    (hB : ∀ V : X.Etale, ∃ S ∈ X.smallEtaleTopology V, ∀ ⦃W : X.Etale⦄ (f : W ⟶ V), S f → W ∈ B)
+    (hB : ∀ V : X.Etale,
+      Sieve.generate (fun (W : X.Etale) (_ : W ⟶ V) ↦ W ∈ B) ∈ X.smallEtaleTopology V)
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (q : ℤ)
     (hN : ∀ U ∈ B, IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) q).obj
       (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
@@ -547,8 +581,9 @@ theorem isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSecti
     rw [← Sheaf.isLocallySurjective_iff_epi']
     constructor
     intro V s
-    obtain ⟨T, hT, hTB⟩ := hB V
-    refine GrothendieckTopology.superset_covering _ (fun W f hf ↦ ?_) hT
+    refine GrothendieckTopology.superset_covering _ (fun W f hf ↦ ?_) (hB V)
+    obtain ⟨W, g, f, hW, rfl⟩ := hf
+    refine Sieve.downward_closed _ ?_ g
     have hmono : Mono (S.iCycles.hom.app (op W)) := by
       have : Mono S.iCycles.hom := (sheafToPresheaf _ _).map_mono S.iCycles
       infer_instance
@@ -560,7 +595,7 @@ theorem isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSecti
         S.iCycles.hom.app (op W) (S.toCycles.hom.app (op W) y) =
           (I.d (q - 1) q).hom.app (op W) y :=
       ConcreteCategory.congr_hom (congrArg (fun φ ↦ φ.hom.app (op W)) S.toCycles_i) y
-    obtain ⟨y, hy⟩ := hex W (hTB f hf) _ (hcyc (S.cycles.obj.map f.op s))
+    obtain ⟨y, hy⟩ := hex W hW _ (hcyc (S.cycles.obj.map f.op s))
     exact ⟨y, (ModuleCat.mono_iff_injective _).1 hmono ((htc y).trans hy)⟩
   have hexact : S.Exact := S.exact_iff_epi_toCycles.2 hepi
   have hI' : I.ExactAt q := (I.exactAt_iff' (q - 1) q (q + 1) (by simp) (by simp)).2 hexact
@@ -577,14 +612,16 @@ functor `Γ(U, -)` on `D(X_ét, Λ)`.
 
 The blueprint argues with the hypercohomology spectral sequence; the proof here follows Stacks:
 `K` is the derived limit of its truncations `τ^{≥ -n} K`, and `RΓ(U, -)` commutes with derived
-limits (`CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects`,
+limits
+(`CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects`,
 with the detection property
-`AlgebraicGeometry.Etale.isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSections`
+`Etale.isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSections`
 provided by the coverings by members of `B`). -/
 theorem nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic {X : Scheme.{u}}
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (B : Set X.Etale)
-    (hB : ∀ V : X.Etale, ∃ S ∈ X.smallEtaleTopology V, ∀ ⦃W : X.Etale⦄ (f : W ⟶ V), S f → W ∈ B)
+    (hB : ∀ V : X.Etale,
+      Sieve.generate (fun (W : X.Etale) (_ : W ⟶ V) ↦ W ∈ B) ∈ X.smallEtaleTopology V)
     (hK : ∀ U ∈ B, ∀ q p : ℤ, 0 < p → IsZero ((_root_.DerivedCategory.homologyFunctor _ p).obj
       (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         (op U)).rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
@@ -599,5 +636,165 @@ theorem nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic {
     (fun V : B ↦ (sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op V.1))
     (fun N p hN ↦ isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSections Λ
       B hB N p fun V hV ↦ hN ⟨V, hV⟩) K (fun V q p hp ↦ hK V.1 V.2 q p hp) ⟨U, hU⟩ q
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+/-- The sections over an étale `X`-scheme `V` are the global sections of the restriction to
+`V_ét`: `Γ(V, -) ≅ Γ(V_ét, (V ⟶ X)^* -)`. -/
+noncomputable def sheafSectionsIsoUpperStarCompΓ {X : Scheme.{u}} (V : X.Etale) :
+    (sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op V) ≅
+      upperStar (ModuleCat.{u + 1} Λ) V.hom ⋙
+        Sheaf.Γ V.left.smallEtaleTopology (ModuleCat.{u + 1} Λ) := by
+  let A := ModuleCat.{u + 1} Λ
+  let w : V.left.Etale := Scheme.Etale.mk (𝟙 V.left)
+  let eW : (MorphismProperty.Over.map ⊤ (inferInstance : Etale V.hom)).obj w ≅ V :=
+    MorphismProperty.Over.isoMk (Iso.refl V.left) (by simp [w])
+  exact (sheafSections X.smallEtaleTopology A).mapIso eW.op ≪≫
+    Functor.isoWhiskerRight (upperStarIsoLocalizationRestriction A V.hom inferInstance).symm
+      ((sheafSections V.left.smallEtaleTopology A).obj (op w)) ≪≫
+    Functor.isoWhiskerLeft (upperStar A V.hom)
+      (Sheaf.ΓNatIsoSheafSections V.left.smallEtaleTopology A
+        (MorphismProperty.Over.mkIdTerminal (P := @Etale) V.left)).symm
+
+/-- The cohomology `Hᵖ(V, F)` of a sheaf `F` on `X_ét` over an étale `X`-scheme `V` is the
+cohomology `Hᵖ(V_ét, F|_V)` of its restriction: the restriction `(V ⟶ X)^*` is exact and has an
+exact left adjoint (extension by zero), so it preserves K-injective complexes. -/
+noncomputable def homologyRightDerivedFunctorSheafSectionsSingleIso {X : Scheme.{u}}
+    (V : X.Etale) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (p : ℤ) :
+    (_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) p).obj
+        (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+          (op V)).rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) ≅
+      (_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) p).obj
+        ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) V.left).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            ((upperStar (ModuleCat.{u + 1} Λ) V.hom).obj F))) :=
+  let T := upperStar (ModuleCat.{u + 1} Λ) V.hom
+  let G := Sheaf.Γ V.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  have : T.PreservesKInjectiveComplexes :=
+    (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) V.hom
+      inferInstance).preservesKInjectiveComplexes
+  (_root_.DerivedCategory.homologyFunctor _ p).mapIso
+    ((Functor.rightDerivedFunctorCompIso' T G
+      (sheafSectionsIsoUpperStarCompΓ Λ V).symm).symm.app _ ≪≫
+      G.rightDerivedFunctor.mapIso (T.singleFunctorCompRightDerivedFunctorIso.app F))
+
+
+/-- Two geometric points over the same point of a scheme have simultaneously zero stalks for
+every étale sheaf of `Λ`-modules (`lem-kun-support-geometric-point-independent`, transported
+from abelian groups along the forgetful functor). -/
+lemma isZero_sheafFiber_iff_of_same_image_moduleCat {X : Scheme.{u}}
+    {Ω Ω' : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ω'] [IsAlgClosed Ω']
+    (s : Spec (.of Ω) ⟶ X) (s' : Spec (.of Ω') ⟶ X) (h : s default = s' default)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsZero ((Scheme.pointSmallEtale s).sheafFiber.obj F) ↔
+      IsZero ((Scheme.pointSmallEtale s').sheafFiber.obj F) := by
+  have : PreservesFilteredColimitsOfSize.{u, u}
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have key {Ω₀ : Type u} [Field Ω₀] [IsAlgClosed Ω₀] (t : Spec (.of Ω₀) ⟶ X) :
+      IsZero ((Scheme.pointSmallEtale t).sheafFiber.obj F) ↔
+        IsZero ((Scheme.pointSmallEtale t).sheafFiber.obj ((sheafCompose X.smallEtaleTopology
+          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)) :=
+    (ModuleCat.isZero_iff_subsingleton.trans
+      (AddCommGrpCat.isZero_iff_subsingleton : IsZero ((forget₂ (ModuleCat.{u + 1} Λ)
+        AddCommGrpCat.{u + 1}).obj ((Scheme.pointSmallEtale t).sheafFiber.obj F)) ↔ _).symm).trans
+      (((Scheme.pointSmallEtale t).sheafFiberCompIso
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).app F).isZero_iff.symm
+  rw [key s, key s']
+  exact Scheme.isZero_sheafFiber_iff_of_same_image s s' h _
+
+/-- Under an étale morphism `g : U ⟶ X` with `X` locally of finite type over a field, the
+points lying over a closed point are closed: the residue field extensions of `g` are separable,
+hence algebraic, and closed points are those with residue field algebraic over the base. -/
+lemma isClosed_singleton_of_etale {k : Type u} [Field k] {U X : Scheme.{u}} (g : U ⟶ X)
+    [Etale g] (p : X ⟶ Spec (.of k)) [LocallyOfFiniteType p] (u : U) (hx : IsClosed {g u}) :
+    IsClosed ({u} : Set U) := by
+  let := (p.residueFieldAlgebraMap (g u)).toAlgebra
+  have h₁ : Algebra.IsAlgebraic k (X.residueField (g u)) :=
+    (p.isClosed_singleton_iff_isAlgebraic_residueField _).1 hx
+  let : Algebra (X.residueField (g u)) (U.residueField u) := (g.residueFieldMap u).hom.toAlgebra
+  have h₂ : Algebra.IsSeparable (X.residueField (g u)) (U.residueField u) := inferInstance
+  let := ((g ≫ p).residueFieldAlgebraMap u).toAlgebra
+  have : IsScalarTower k (X.residueField (g u)) (U.residueField u) := by
+    refine IsScalarTower.of_algebraMap_eq' ?_
+    simp only [RingHom.algebraMap_toAlgebra, Scheme.Hom.residueFieldAlgebraMap,
+      Scheme.residueFieldMap_comp, CommRingCat.hom_comp]
+    rfl
+  rw [(g ≫ p).isClosed_singleton_iff_isAlgebraic_residueField]
+  exact Algebra.IsAlgebraic.trans k (X.residueField (g u)) _
+
+
+/-- Blueprint `lem-kun-0f1f-vanish` on a quasi-compact étale `X`-scheme `V`: if `X` is locally
+of finite type over a separably closed field and the stalks of `F` vanish at the non-closed
+points of `X`, then `Hᵠ(V, F) = 0` for `q ≠ 0`. Indeed `Hᵠ(V, F) = Hᵠ(V_ét, F|_V)`, `V` is of
+finite type over the field, and the points of `V` over closed points of `X` are closed. -/
+lemma isZero_homology_rightDerivedFunctor_sheafSections_of_isZero_sheafFiber {K : Type u}
+    [Field K] [IsSepClosed K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
+    (V : X.Etale) [CompactSpace V.left] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hF : ∀ x ∉ closedPoints X,
+      IsZero ((Scheme.pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F))
+    {q : ℤ} (hq : q ≠ 0) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) q).obj
+      (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (op V)).rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := by
+  have : CompactSpace ((𝟭 Scheme).obj V.left) := ‹CompactSpace V.left›
+  refine (isZero_homology_rightDerivedGlobalSections_of_isZero_sheafFiber Λ (V.hom ≫ p)
+    ((upperStar _ V.hom).obj F) (fun u hu ↦ ?_) hq).of_iso
+      (homologyRightDerivedFunctorSheafSectionsSingleIso Λ V F q)
+  have hx : V.hom u ∉ closedPoints X := fun hx ↦
+    hu (isClosed_singleton_of_etale V.hom p u hx)
+  refine (Iso.isZero_iff ((upperStarCompSheafFiberIso _ V.hom
+    (V.left.algClosurePoint u)).app F)).2 ?_
+  refine (isZero_sheafFiber_iff_of_same_image_moduleCat Λ _ (X.algClosurePoint (V.hom u)) ?_
+    F).2 (hF _ hx)
+  simp
+
+/-- Blueprint `lem-kun-0f1g`: **detection of objects supported at closed points** (unbounded
+case). Let `K` be a separably closed field, `X` a scheme of finite type over `K` (structure
+morphism `p`, locally of finite type, `X` quasi-compact), and `Q ∈ D(X_ét, Λ)` (unbounded) such
+that the stalks of all cohomology sheaves `ℋᵠ(Q)` at the geometric points over non-closed
+points of `X` vanish. Then `Q = 0` if and only if `Hⁱ(X_ét, Q) = 0` for all `i`.
+
+Following the blueprint, the class `B` of quasi-compact étale `X`-schemes covers `X_ét`, and
+the cohomology sheaves of `Q` are acyclic on its members (`lem-kun-0f1f-vanish`), so that
+`Hⁱ(X_ét, Q) = Γ(X, ℋⁱ(Q))` by `lem-kun-0bkz`; the sheaves `ℋⁱ(Q)` are globally generated
+(`lem-kun-0f1f-gen`), hence vanish if they have no global sections. -/
+theorem isZero_iff_forall_isZero_homology_rightDerivedGlobalSections {K : Type u} [Field K]
+    [IsSepClosed K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
+    [CompactSpace X]
+    (Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hQ : ∀ q : ℤ, ∀ x ∉ closedPoints X,
+      IsZero ((Scheme.pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj Q))) :
+    IsZero Q ↔ ∀ i : ℤ,
+      IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) i).obj
+        ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj Q)) := by
+  refine ⟨fun h i ↦ (_root_.DerivedCategory.homologyFunctor _ i).map_isZero
+    ((rightDerivedGlobalSections _ X).map_isZero h), fun h ↦ ?_⟩
+  let B : Set X.Etale := {V | CompactSpace V.left}
+  have hB (V : X.Etale) :
+      Sieve.generate (fun (W : X.Etale) (_ : W ⟶ V) ↦ W ∈ B) ∈ X.smallEtaleTopology V :=
+    mem_smallEtaleTopology_of_forall_isAffine _ fun W g hW ↦
+      ⟨W, 𝟙 W, g, (inferInstance : CompactSpace W.left), Category.id_comp g⟩
+  have hK (U : X.Etale) (hU : U ∈ B) (q p' : ℤ) (hp : 0 < p') :
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ p').obj
+        (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+          (op U)).rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            ((_root_.DerivedCategory.homologyFunctor _ q).obj Q)))) := by
+    have : CompactSpace U.left := hU
+    exact isZero_homology_rightDerivedFunctor_sheafSections_of_isZero_sheafFiber Λ p U _
+      (hQ q) hp.ne'
+  have hT : etaleTerminal X ∈ B := (inferInstance : CompactSpace X)
+  let e := Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+    (isTerminalEtaleTerminal X)
+  refine (_root_.DerivedCategory.isZero_iff Q).2 fun q ↦ ?_
+  obtain ⟨φ⟩ := nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic Λ Q B hB
+    hK hT q
+  have hΓ := (h q).of_iso ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+    ((Functor.rightDerivedFunctorNatIso e).app Q) ≪≫ φ).symm
+  exact isZero_of_isZero_sheafFiber_of_subsingleton _ p (hQ q)
+    (ModuleCat.isZero_iff_subsingleton.1 hΓ)
 
 end AlgebraicGeometry.Etale
