@@ -125,6 +125,14 @@ lemma mateEquiv_app_comp_eq_aux {Sg Rg Sg' Sg'' : C ⥤ P} {S1 U1 : P ⥤ P} {Sc
   simp only [Category.assoc, hκ1]
   rw [← reassoc_of% hn, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id_app_assoc, hf,
     Iso.hom_inv_id_app_assoc]
+
+/-- Assembling a composite from two equations of partial composites. -/
+lemma assemble_aux {A B B' B'' D E F : P} {a₁ : A ⟶ B} {a₂ : B ⟶ B'} {a₃ : B' ⟶ B''}
+    {p : A ⟶ B''} (hA : a₁ ≫ a₂ ≫ a₃ = p) (u : B'' ⟶ D) {b₁ : D ⟶ E} {b₂ : E ⟶ F}
+    {q : D ⟶ F} (hB : q = b₁ ≫ b₂) :
+    a₁ ≫ a₂ ≫ a₃ ≫ u ≫ b₁ ≫ b₂ = p ≫ u ≫ q := by
+  rw [← hA, hB]
+  simp only [Category.assoc]
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -283,7 +291,7 @@ proof): the exceptional half `δ` of the coefficient pushforward along `(a_X, a_
 lemma lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit [IsProper c.c₂.left] :
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).hom.app _ ≫
         c.toPointDiagram.pushforwardCoeffCounit ≫
-        (boundedConstructibleUpperShriekId ℓ (point k)).hom.app _ ≫
+        (boundedConstructibleUpperShriekId ℓ (point k)).hom.app c.toPointDiagram.coeff ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.app K =
       (boundedConstructibleLowerShriekCompToPoint ℓ c.c₁).inv.app _ ≫
         (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
@@ -296,6 +304,63 @@ lemma lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit [IsProper c.c�
       (toPoint_ext _ _ : toPoint c.C ≫ 𝟙 (point k) = c.c₁ ≫ toPoint X) := rfl
   rw [e1, e2]
   exact lowerStarUpperShriekExchange_app_id_aux ℓ c.c₁ (toPoint X) (toPoint c.C) _ K
+
+/-- The ordinary half of the global operator (blueprint `thm-trf-fixed-point-localization`,
+proof): the unit of `Lc₂^* ⊣ Rc₂_*` read on `Ra_{X!}` and `Ra_{C!}` is the ordinary half `γ` of
+the coefficient pushforward along `(a_X, a_C)`. -/
+lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit [IsProper c.c₂.left] :
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ c.c₂).unit.app K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ c.c₂).inv.app _) ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ c.c₂).hom.app _ =
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).hom.app K ≫
+      (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).inv.app
+        c.toPointDiagram.coeff ≫
+      c.toPointDiagram.pushforwardCoeffUnit ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).inv.app _ := by
+  rw [boundedConstructibleLowerShriekCompToPoint_hom_app]
+  have e : c.toPointDiagram.pushforwardCoeffUnit =
+      (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (toPoint c.C)).unit.app _ ≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map
+          ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)
+              (𝟙 (point k))).inv.app _ ≫
+            eqToHom (by rw [Category.comp_id, comp_toPoint]) ≫
+            (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂
+              (toPoint X)).hom.app _ ≫
+            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
+              ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (toPoint X)).counit.app K)) :=
+    rfl
+  rw [e]
+  exact lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux ℓ c.c₂ (toPoint X) (toPoint c.C)
+    (comp_toPoint _) K
+
+-- the rewrites unify large composites of six-functor maps
+set_option maxHeartbeats 1600000 in
+/-- **The pushed coefficient map is the global operator** (blueprint
+`thm-trf-fixed-point-localization`, proof): the coefficient pushforward `[a_X, a_C]_! u` of `u`
+along the diagram to the point is the global operator `T_c(u)`, read through
+`Ra_{X!} ≅ Ra_{X*}` and `L(𝟙)^* ≅ 𝟭 ≅ R(𝟙)^!`. -/
+theorem globalOperator_eq_pushforwardCoeff [IsProper c.c₂.left] :
+    c.globalOperator =
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).hom.app K ≫
+        ((boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).inv.app
+          c.toPointDiagram.coeff ≫
+          c.toPointDiagram.pushforwardCoeff ≫
+          (boundedConstructibleUpperShriekId ℓ (point k)).hom.app c.toPointDiagram.coeff) ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.app K := by
+  have e : c.toPointDiagram.pushforwardCoeff = c.toPointDiagram.pushforwardCoeffUnit ≫
+      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map c.u ≫
+      c.toPointDiagram.pushforwardCoeffCounit := rfl
+  have hu : (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map
+      c.u = (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).inv.app _ ≫
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map
+          c.u ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).hom.app _ := by
+    simp
+  rw [globalOperator_eq, e, hu]
+  simp only [Category.assoc]
+  rw [reassoc_of% c.lowerShriek_map_unit_eq_pushforwardCoeffUnit,
+    ← c.lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit]
 end Correspondence
 
 end AlgebraicGeometry.ProEtale.CondensedRing
