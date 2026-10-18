@@ -31,9 +31,103 @@
   "def-weil-pbc-multivariate-power-series",
   "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field $F$ is Noetherian, since its only ideals are $0$ and $F$. Thus $\\operatorname{Spec}F$ is locally Noetherian by [pqf-def-locnoeth], and [pqf-lem-locnoeth-lft] applies to the given locally finite type structure morphism to show that $C$ is locally Noetherian. For any $x\\in C$, choose an affine open $U=\\operatorname{Spec}B$ from the Noetherian affine cover in [pqf-def-locnoeth]. By [lem-weil-pbc-affine-open-stalk-localization], $\\mathcal O_{C,x}$ is a localization of the Noetherian ring $B$ at the prime of $x$, and is therefore Noetherian by [lem-weil-pbc-localization-noetherian]. This is a pointwise assertion; no finite cover of $C$ is required.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian), locally Noetherian case; properties.tex Tag 01OV (definition-noetherian); schemes.tex Tag 01HV (lemma-spec-sheaves); algebra.tex Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Let $x$ be a closed point which has an open neighbourhood $V\\subseteq C$ smooth over $F$. By [sbc-lem-smooth-geometrically-reduced], $V\\to\\operatorname{Spec}F$ has geometrically reduced fibres. Its fibre over the unique point of $\\operatorname{Spec}F$ is $V$ itself, so $V$ is reduced (take the identity field extension). Consequently $\\mathcal O_{C,x}=\\mathcal O_{V,x}$ is reduced by [def-pc-reduced-scheme]. The equality of these local rings follows directly from stalks: the neighbourhoods of $x$ contained in the open $V$ are cofinal among all neighbourhoods of $x$.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T (lemma-smooth-geometrically-normal), smooth schemes over a field are geometrically reduced; curves.tex Tag 0E37 (lemma-facts-about-nodal-curves), reducedness paragraph. The open-stalk equality is the open-subspace construction, schemes.tex Tag 01HF (example-open-subspace)."
+   }
+  },
+  {
+   "text": "The model $R=F[[u,v]]/(uv)$ is reduced. Indeed, for the coefficientwise power series of [def-weil-pbc-multivariate-power-series], the two axis restrictions define a ring map $F[[u,v]]\\to F[[u]]\\times F[[v]]$, $f\\mapsto(f(u,0),f(0,v))$. Its kernel is exactly $(uv)$: both restrictions vanish precisely when all coefficients with $i=0$ or $j=0$ vanish, and then $f=uvg$ with $g_{ij}=f_{i+1,j+1}$. Thus the induced map from $R$ is injective. Both target factors are domains by [lem-weil-pbc-power-series-domain]. A nilpotent in $R$ maps to zero in each domain and hence is zero by injectivity.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E37 (lemma-facts-about-nodal-curves), final paragraph: the reduced nodal completed local ring; explicit coefficient calculation supplying the assertion for the model ring."
+   }
+  },
+  {
+   "text": "Now let $x$ be a closed point having no smooth open neighbourhood. Set $A=\\mathcal O_{C,x}$. This is a Noetherian local ring by step 1, so its maximal-ideal completion map $A\\to\\widehat A$ is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat]. In particular it is injective by [lem-weil-pbc-faithfully-flat-ideal-contraction], with the zero ideal. The hypothesis gives a ring isomorphism $\\widehat A\\cong R$, where $R$ is reduced by step 3. Any nilpotent of $A$ therefore maps to zero in $R$ and must itself be zero. Together with step 2, this proves reducedness of every local ring at a closed point of $C$. No compatibility of the completed-ring isomorphism with the ground-field maps is used.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat), local-ring clause, and 05CK (lemma-faithfully-flat-universally-injective), injectivity; curves.tex Tag 0E37 (lemma-facts-about-nodal-curves), reducedness argument."
+   }
+  },
+  {
+   "text": "Let $y\\in C$. By [lem-sc-lft-over-field-jacobson-space], closed points of $C$ in the nonempty closed subset $\\overline{\\{y\\}}$ are dense there. There is therefore such a closed point $x$. Choose an affine open $U=\\operatorname{Spec}B$ containing $x$; it also contains $y$, since every open neighbourhood of a specialization contains its generizations. In the Zariski topology of [def-weil-affine-spectrum], their primes satisfy $\\mathfrak q=\\mathfrak p_y\\subseteq\\mathfrak p=\\mathfrak p_x$ (the closure of $\\{\\mathfrak q\\}$ is $V(\\mathfrak q)$). By [lem-weil-pbc-affine-open-stalk-localization], the two local rings are $B_{\\mathfrak q}$ and $B_{\\mathfrak p}$. The following fraction calculation transfers reducedness, without any global finiteness assumption. If $a/b\\in B_{\\mathfrak q}$ is nilpotent, take $n\\geq1$ and $t\\notin\\mathfrak q$ with $ta^n=0$, using the zero criterion in [def-weil-pbc-localization-at-prime]. In $B_{\\mathfrak p}$ one has $(ta/1)^n=0$. This ring is reduced by steps 2 and 4, so $ta/1=0$. The same zero criterion gives $u\\notin\\mathfrak p$ with $uta=0$. Since $u\\notin\\mathfrak q$ and $t\\notin\\mathfrak q$, also $ut\\notin\\mathfrak q$; hence $a/b=0$ in $B_{\\mathfrak q}$. Thus $\\mathcal O_{C,y}$ is reduced.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), part (2); schemes.tex Tag 01HV (lemma-spec-sheaves), stalk localization; algebra.tex Tag 00CO (definition-localization), fraction equality. The transfer between the two stalks is the displayed elementary fraction calculation."
+   }
+  },
+  {
+   "text": "Every local ring of $C$ is reduced by step 5. By [def-pc-reduced-scheme] this says exactly that $C$ is reduced. If $C$ is empty the same local-ring condition is vacuous, so the conclusion includes that case. The proof never restricts the dimension of the smooth open pieces or assumes quasi-compactness, separatedness or properness.",
+   "uses": [
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J0 (definition-reduced) and 01J1 (lemma-reduced), local-ring characterization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-power-series-domain",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E37 (lemma-facts-about-nodal-curves), reducedness paragraph, expanded to the exact locally finite type statement using 01T6, 0478, 00MC and 05CK. The source lemma additionally assumes pure dimension one; this proof uses only its completed-node argument, not that extra hypothesis."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,10 +135,59 @@
    "results": "one hit, AlgebraicGeometry/Group/Smooth.lean:40 smooth_of_grpObj_of_isAlgClosed (reduced group schemes are smooth); no AdicCompletion use under AlgebraicGeometry.",
    "date": "2026-10-18",
    "verdict": "no match (grep only; LeanSearch/LeanFinder not reachable from the review machine, to be completed on the Codex machine)"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinaryDouble|isReduced.*[Cc]ompletion|[Cc]ompletion.*isReduced",
+   "results": "{\"t\": \"2026-10-18T23:04:39Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinaryDouble|isReduced.*[Cc]ompletion|[Cc]ompletion.*isReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}; Read hits: reduced-scheme definitions, all-stalk criteria, integral implies reduced, and geometrically reduced implies reduced do not supply the closed-point completion argument. FormallyUnramified.isReduced_of_field requires formal unramifiedness, which fails for a node; ext_of_apply_eq assumes reducedness of the source. Polynomial interpolation nodes are unrelated. No theorem found stating this item or a one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsReduced, AdicCompletion",
+   "results": "{\"t\": \"2026-10-18T23:04:40Z\", \"tool\": \"loogle\", \"query\": \"IsReduced, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: reduced-scheme definitions, all-stalk criteria, integral implies reduced, and geometrically reduced implies reduced do not supply the closed-point completion argument. FormallyUnramified.isReduced_of_field requires formal unramifiedness, which fails for a node; ext_of_apply_eq assumes reducedness of the source. Polynomial interpolation nodes are unrelated. No theorem found stating this item or a one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type scheme over an algebraically closed field with smooth or nodal closed points is reduced",
+   "results": "{\"t\": \"2026-10-18T23:04:40Z\", \"tool\": \"leansearch\", \"query\": \"A locally finite type scheme over an algebraically closed field with smooth or nodal closed points is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.affine_isReduced_iff\"], \"digest\": \"1f2d14a27061e3ee\"}; Read hits: reduced-scheme definitions, all-stalk criteria, integral implies reduced, and geometrically reduced implies reduced do not supply the closed-point completion argument. FormallyUnramified.isReduced_of_field requires formal unramifiedness, which fails for a node; ext_of_apply_eq assumes reducedness of the source. Polynomial interpolation nodes are unrelated. No theorem found stating this item or a one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme locally of finite type over an algebraically closed field is reduced if every nonsmooth closed point has completed local ring F[[u,v]]/(uv)",
+   "results": "{\"t\": \"2026-10-18T23:04:41Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme locally of finite type over an algebraically closed field is reduced if every nonsmooth closed point has completed local ring F[[u,v]]/(uv)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\"], \"digest\": \"32528461366097b6\"}; Read hits: reduced-scheme definitions, all-stalk criteria, integral implies reduced, and geometrically reduced implies reduced do not supply the closed-point completion argument. FormallyUnramified.isReduced_of_field requires formal unramifiedness, which fails for a node; ext_of_apply_eq assumes reducedness of the source. Polynomial interpolation nodes are unrelated. No theorem found stating this item or a one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isReduced.*(stalk|closed)|IsReduced.*AdicCompletion|AdicCompletion.*IsReduced",
+   "results": "{\"t\": \"2026-10-18T23:05:34Z\", \"tool\": \"grep\", \"query\": \"isReduced.*(stalk|closed)|IsReduced.*AdicCompletion|AdicCompletion.*IsReduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\"], \"digest\": \"19afd79bb4b94afd\"}; Read hits: reduced-scheme definitions, all-stalk criteria, integral implies reduced, and geometrically reduced implies reduced do not supply the closed-point completion argument. FormallyUnramified.isReduced_of_field requires formal unramifiedness, which fails for a node; ext_of_apply_eq assumes reducedness of the source. Polynomial interpolation nodes are unrelated. No theorem found stating this item or a one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, IsClosed",
+   "results": "{\"t\": \"2026-10-18T23:05:35Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsReduced, IsClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ext_of_apply_eq\"], \"digest\": \"475c80824b85097b\"}; Read hits: reduced-scheme definitions, all-stalk criteria, integral implies reduced, and geometrically reduced implies reduced do not supply the closed-point completion argument. FormallyUnramified.isReduced_of_field requires formal unramifiedness, which fails for a node; ext_of_apply_eq assumes reducedness of the source. Polynomial interpolation nodes are unrelated. No theorem found stating this item or a one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reducedness of a locally Noetherian Jacobson scheme follows when its completed local rings at all closed points are reduced",
+   "results": "{\"t\": \"2026-10-18T23:05:35Z\", \"tool\": \"leanfinder\", \"query\": \"Reducedness of a locally Noetherian Jacobson scheme follows when its completed local rings at all closed points are reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"AlgebraicGeometry.affine_isReduced_iff\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\"], \"digest\": \"fe3f3a5e706b5116\"}; Read hits: reduced-scheme definitions, all-stalk criteria, integral implies reduced, and geometrically reduced implies reduced do not supply the closed-point completion argument. FormallyUnramified.isReduced_of_field requires formal unramifiedness, which fails for a node; ext_of_apply_eq assumes reducedness of the source. Polynomial interpolation nodes are unrelated. No theorem found stating this item or a one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +204,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-nodal-points-reduced-algebraically-closed",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and clause, corrected only imported doubled TeX escapes, and supplied the full local proof. Reused the locally Noetherian, Jacobson, smooth-fibre reducedness, completion, faithful-flat injectivity, power-series domain and affine-stalk nodes. The axis kernel and the transfer from closed-point stalks to arbitrary stalks are explicit coefficient/fraction calculations. No new nodes or unit changes. Required logged Mathlib searches, two phrasings, found no match.",
+  "blueprint": "Supplies the historical stable-modification geometric-reducedness input recorded in blueprint.from.place (Temkin Lemma 5.1(ii), generic geometric fibre). The current main-20261015 local-term ancestor no longer contains this historical paragraph; its inherited provenance is retained, and this auxiliary algebraic input is split without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic permanence of locally Noetherian schemes under locally finite type morphisms, needed to apply local completion; the nodal subargument has no other such assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-41d123098",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-41d123098 (reviewer sub-agent of L); spot-checked: I read the full item, six steps and no new nodes; review.md has the details. The statement matches the imported one: only the TeX escapes changed, and the ring-isomorphism, locally-finite-type and empty-case clauses are kept. Small cases: Spec F, A^n, F[u,v]/(uv), infinite smooth disjoint unions and the empty scheme satisfy it; Spec F[e]/(e^2) correctly fails the premise. Step 1: 01T6 leaf, Noetherian cover, affine-stalk localization (c) and localization-noetherian. Step 2: sbc-lem-smooth-geometrically-reduced (unsplit, off-unit, but slopmaster2-closed as Smooth.geometricallyReduced) with the identity extension. Step 3: the axis-restriction kernel is (uv) with g_ij=f_{i+1,j+1}; checked, elementary. Step 4: 00MC faithful flatness, then injectivity from ideal contraction with I=0, transported along the ring isomorphism. Step 5: Jacobson density (0478) gives a closed point x in cl{y}; p_y is contained in p_x, and the fraction calculation (t a^n=0, then (ta)^n=0 in B_p, then uta=0 with u,t outside q) is correct. Step 6: definition. Checked Stacks 0E37 curves.tex:4565-4573 and tags 01T6/01OV/01HV/00FN/00MC/05CK/0478/056T; no SGA. lem-trf-nodal-geometric-fibres-reduced has different hypotheses and conclusion, so it is not a duplicate; no node states the item; no cycle. The tool_uses entry for the Mathlib leaf pqf-lem-locnoeth-lft is unnecessary but harmless. No changes."
  }
 }
