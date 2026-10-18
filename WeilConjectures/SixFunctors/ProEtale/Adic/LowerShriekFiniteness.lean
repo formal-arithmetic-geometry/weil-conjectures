@@ -14,7 +14,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
 Let `k` be an algebraically closed field with `ringChar k ≠ ℓ`. This file proves that the
 compactly supported direct image `Rf_! = Rg_* ∘ i_!` along a compactification
 `X ⟶[i] Z ⟶[g] Y` of a morphism `f` of finite-type `k`-schemes carries `Dᵇc(X, ℚ̄_ℓ)` into
-`Dᵇc(Y, ℚ̄_ℓ)`, the `ℓ`-adic counterpart of blueprint `sk-prop-sf-finiteness`.
+`Dᵇc(Y, ℚ̄_ℓ)`, the `ℓ`-adic counterpart of blueprint `sk-prop-sf-finiteness`, i.e. clause (3) of
+`det-thm-sf-ctf-stability-direct-images` at the stage `ℚ̄_ℓ`.
 
 As in `WeilConjectures.SixFunctors.ProEtale.Adic.Localization`, `Dᵇc(-, ℚ̄_ℓ)` is realised in the
 Bhatt–Scholze model: it is the full subcategory
@@ -53,7 +54,8 @@ lemma boundedConstructibleAdic_mapDerivedCategory_adicOpenImmersionLowerShriek
       ((((j)_!ᵃ[l]).mapDerivedCategoryHomologyFunctorIso n).app K)
       ((hK.2 n).openImmersionLowerShriek j)⟩
 
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
+/-- Blueprint `det-thm-sf-ctf-stability-direct-images` (3), `Rf_!` at the stage `ℚ̄_ℓ`; the `ℓ`-adic
+counterpart of the finite-coefficient `sk-prop-sf-finiteness`.
 
 **Finiteness of compactly supported direct images with `ℚ̄_ℓ`-coefficients.** Let `k` be an
 algebraically closed field with `ringChar k ≠ ℓ`, `Y` quasi-compact and locally of finite type

@@ -29,7 +29,8 @@ Let `K` be an algebraically closed field of characteristic different from `ℓ`,
 locally of finite type over `K` and `f : X ⟶ Y` a quasi-compact, quasi-separated morphism
 locally of finite type. The *finiteness theorem* (SGA 4½, *Th. finitude*, Th. 1.1, with
 `ℓ`-adic coefficients as in Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8, and the
-blueprint `sk-prop-sf-finiteness`) asserts that for a constructible `ℓ`-adic sheaf `F` on
+blueprint `det-thm-sf-ctf-stability-direct-images` (3), the `ℚ̄_ℓ` stage of the
+finite-coefficient `sk-prop-sf-finiteness`) asserts that for a constructible `ℓ`-adic sheaf `F` on
 `X_proét`:
 
 - the pushforward `f_* F` is constructible
@@ -65,7 +66,7 @@ which is stated with `sorry`:
 - the pushforward is the degree `0` case, `f_*` being left exact, and boundedness below holds for
   any sheaf.
 
-The proof of the remaining statement (blueprint `sk-prop-sf-finiteness`) proceeds by generic
+The proof of the remaining statement proceeds by generic
 constructibility for open immersions (Deligne's dévissage) and the proper case.
 
 ## Missing infrastructure
@@ -410,8 +411,9 @@ variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K] {X Y : 
 (SGA 4½, *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the
 derived pushforward `Rg_* F` of a constructible `ℓ`-adic sheaf along a morphism `g` locally of
 finite type between affine schemes, with target of finite type, is bounded with constructible
-cohomology sheaves `Rⁿg_* F`. This is the affine `ℚ̄_ℓ` case of blueprint
-`sk-prop-sf-finiteness`. -/
+cohomology sheaves `Rⁿg_* F`. This is the affine `ℚ̄_ℓ` case of clause (3) of blueprint
+`det-thm-sf-ctf-stability-direct-images` (subsection `sk-thm-sf-ctf-stability`: `Rf_*`
+preserves `Dᵇc(-, ℚ̄_ℓ)`); blueprint `sk-prop-sf-finiteness` is the finite-coefficient case. -/
 theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]
     {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :
