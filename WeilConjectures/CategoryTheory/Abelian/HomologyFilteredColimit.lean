@@ -21,7 +21,8 @@ cochain complexes commute with colimits of shape `J`
 
 We also record two facts on natural transformations and colimits:
 
-- `CategoryTheory.NatTrans.isIso_app_of_isColimit`: a natural transformation `τ : P ⟶ R` between
+- `CategoryTheory.NatTrans.isIso_app_of_isColimit_mapCocone`: a natural transformation
+  `τ : P ⟶ R` between
   functors preserving a colimit cocone `c` is an isomorphism at its point as soon as it is an
   isomorphism at all objects of the diagram;
 - `CategoryTheory.Limits.isColimitMapCoconeOfNatTrans`: if `β : P ⟶ R` is an isomorphism at all
@@ -110,7 +111,7 @@ variable {C D J : Type*} [Category* C] [Category* D] [Category* J] {P R : C ⥤ 
 /-- A natural transformation `τ : P ⟶ R` between functors which map a cocone `c` to colimit
 cocones is an isomorphism at the point of `c` if it is an isomorphism at all the objects of the
 diagram. -/
-lemma NatTrans.isIso_app_of_isColimit (τ : P ⟶ R) {K : J ⥤ C} (c : Cocone K)
+lemma NatTrans.isIso_app_of_isColimit_mapCocone (τ : P ⟶ R) {K : J ⥤ C} (c : Cocone K)
     (hP : IsColimit (P.mapCocone c)) (hR : IsColimit (R.mapCocone c))
     (h : ∀ j, IsIso (τ.app (K.obj j))) : IsIso (τ.app c.pt) := by
   have : ∀ j, IsIso ((Functor.whiskerLeft K τ).app j) := h

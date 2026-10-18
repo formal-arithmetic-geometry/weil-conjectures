@@ -60,7 +60,7 @@ variable {C D : Type*} [Category C] [Category D]
 
 /-- A natural transformation between additive functors which is an isomorphism at finitely many
 objects is an isomorphism at their biproduct. -/
-lemma CategoryTheory.NatTrans.isIso_app_biproduct [Preadditive C] [Preadditive D]
+lemma CategoryTheory.NatTrans.isIso_app_biproduct_of_hasBiproduct [Preadditive C] [Preadditive D]
     [HasFiniteBiproducts D] {S T : C ⥤ D} [S.Additive] [T.Additive]
     (τ : S ⟶ T) {ι : Type} [Finite ι] (f : ι → C) {_ : HasBiproduct f}
     (hf : ∀ i, IsIso (τ.app (f i))) :
@@ -83,12 +83,13 @@ lemma CategoryTheory.NatTrans.isIso_app_of_retract_biproduct [Preadditive C] [Pr
     [HasFiniteBiproducts D] {S T : C ⥤ D} [S.Additive] [T.Additive] (τ : S ⟶ T) {A Z : C}
     {m : ℕ} {_ : HasBiproduct (fun _ : Fin m ↦ Z)} (r : Retract A (⨁ fun _ : Fin m ↦ Z))
     (hZ : IsIso (τ.app Z)) : IsIso (τ.app A) :=
-  have := NatTrans.isIso_app_biproduct τ (fun _ : Fin m ↦ Z) fun _ ↦ hZ
+  have := NatTrans.isIso_app_biproduct_of_hasBiproduct τ (fun _ : Fin m ↦ Z) fun _ ↦ hZ
   NatTrans.isIso_app_of_retract τ r
 
 /-- A natural transformation between functors preserving a colimit, which is an isomorphism on
 the diagram, is an isomorphism at the colimit. -/
-lemma CategoryTheory.NatTrans.isIso_app_of_isColimit {J : Type*} [Category J] {S T : C ⥤ D}
+lemma CategoryTheory.NatTrans.isIso_app_coconePt_of_isIso_app {J : Type*} [Category J]
+    {S T : C ⥤ D}
     (τ : S ⟶ T) {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) [PreservesColimit F S]
     [PreservesColimit F T] (h : ∀ j, IsIso (τ.app (F.obj j))) : IsIso (τ.app c.pt) := by
   let hS := isColimitOfPreserves S hc
@@ -281,7 +282,7 @@ lemma isIso_tensorBaseChangeHomologyMap'_app_biproduct (q : ℤ) {r : ℕ}
     (hF : ∀ i, IsIso ((tensorBaseChangeHomologyMap' A p h e f' g w 𝓕 q).app (F i))) :
     IsIso ((tensorBaseChangeHomologyMap' A p h e f' g w 𝓕 q).app (⨁ F)) := by
   have : HasFiniteBiproducts (Sheaf X'.smallEtaleTopology A) := Abelian.hasFiniteBiproducts
-  exact NatTrans.isIso_app_biproduct _ _ hF
+  exact NatTrans.isIso_app_biproduct_of_hasBiproduct _ _ hF
 
 /-- The degree-wise base change map is an isomorphism in negative degrees. -/
 lemma isIso_tensorBaseChangeHomologyMap'_app_of_neg {q : ℤ} (hq : q < 0)
@@ -566,7 +567,7 @@ theorem isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar [QuasiCompac
     inferInstanceAs (PreservesColimitsOfShape I
       (tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕 ⋙
         higherDirectImageFunctor (ModuleCat.{u + 1} Λ) h q))
-  have key := NatTrans.isIso_app_of_isColimit
+  have key := NatTrans.isIso_app_coconePt_of_isIso_app
     (tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q) hcol fun j ↦ by
       have := hD j
       rw [isIso_tensorBaseChangeHomologyMap'_app_iff]

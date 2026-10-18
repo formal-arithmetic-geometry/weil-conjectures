@@ -56,7 +56,7 @@ variable {A B : Type*} [Category* A] [Category* B] [Preadditive A] [Preadditive 
 
 /-- A natural transformation between additive functors is an isomorphism at a finite biproduct
 if it is an isomorphism at its summands. -/
-lemma NatTrans.isIso_app_biproduct (τ : P ⟶ R) {J : Type} [Finite J] (f : J → A)
+lemma NatTrans.isIso_app_biproduct_of_finite (τ : P ⟶ R) {J : Type} [Finite J] (f : J → A)
     [HasBiproduct f] (h : ∀ j, IsIso (τ.app (f j))) : IsIso (τ.app (⨁ f)) := by
   have e : τ.app (⨁ f) = (P.mapBiproduct f).hom ≫
       (biproduct.mapIso fun j ↦ asIso (τ.app (f j))).hom ≫ (R.mapBiproduct f).inv := by
@@ -303,7 +303,7 @@ lemma isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_finsupp (E : Deriv
         (isIso_mapDerivedCategoryProjectionMap_app_tensorUnit adj E)
   exact (NatTrans.isIso_app_iff_of_iso (mapDerivedCategoryProjectionMap adj E)
     ((singleFunctor _ 0).mapIso (ModuleCat.finsuppIsoBiproduct Λ k))).2
-      (NatTrans.isIso_app_biproduct τ _ fun _ ↦ hunit)
+      (NatTrans.isIso_app_biproduct_of_finite τ _ fun _ ↦ hunit)
 
 /-- If the derived functors of `Γ` commute with filtered colimits, the projection map
 `RΓ E ⊗ᴸ M[0] ⟶ RΓ (E ⊗ᴸ D(F) M[0])` is an isomorphism for every bounded below `E` and every
@@ -400,7 +400,7 @@ theorem isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_of_flat
         (isColimitOfPreserves _ hc))
   have hR : IsColimit (R.mapCocone c) :=
     isColimitMapCoconeOfNatTrans β₃ c (fun A ↦ hβ₃ _ (hflat' A)) (hβ₃ M hM) hT
-  exact NatTrans.isIso_app_of_isColimit τn c hP hR fun A ↦
+  exact NatTrans.isIso_app_of_isColimit_mapCocone τn c hP hR fun A ↦
     have := isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_finsupp adj E A.n
     Functor.map_isIso H
       (τ.app ((singleFunctor _ 0).obj (ModuleCat.of Λ (Fin A.n →₀ Λ))))
