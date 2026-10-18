@@ -13,7 +13,8 @@
   "def-weil-constructible-heart",
   "def-weil-local-frobenius-trace",
   "def-weil-punctual-weights",
-  "def-weil-frobenius-detailed"
+  "def-weil-frobenius-detailed",
+  "def-zl-weil-ind-sheaf-category"
  ],
  "proof": [
   {
@@ -363,5 +364,59 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-2f7ffcad0 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit, blueprint, Deligne source, every cited node statement, coefficient and transport comparisons, all nine steps, hypotheses, edge cases, route constraints, and tool uses. No mathematical or delivery fault requires repair."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantExtensionWeilHeartEquivalence",
+  "declaration": "WeilConjectures.constantExtensionWeilHeartEquivalence",
+  "declarations": [
+   "WeilConjectures.constantExtensionField_properties",
+   "WeilConjectures.constantExtensionDatum",
+   "WeilConjectures.constantExtensionModel",
+   "WeilConjectures.constantExtensionOriginalModel",
+   "WeilConjectures.constantExtensionModel_properties",
+   "WeilConjectures.constantExtensionModel_lft",
+   "WeilConjectures.constantExtensionModel_qc",
+   "WeilConjectures.constantExtensionOriginalModel_lft",
+   "WeilConjectures.constantExtensionOriginalModel_qc",
+   "WeilConjectures.constantExtensionProjection",
+   "WeilConjectures.constantExtensionSheet_compatible",
+   "WeilConjectures.constantExtensionSheet",
+   "WeilConjectures.constantExtensionFiberMap_isIso",
+   "WeilConjectures.constantExtensionFiberIso",
+   "WeilConjectures.constantExtensionSheet_return",
+   "WeilConjectures.constantExtensionSheetPull",
+   "WeilConjectures.constantExtensionWeilIterate",
+   "WeilConjectures.constantExtensionReturnComparison",
+   "WeilConjectures.constantExtensionHeartForget",
+   "WeilConjectures.ConstantExtensionSheetSpec",
+   "WeilConjectures.constantExtensionResidueDegree",
+   "WeilConjectures.constantExtensionClosedImage_mem",
+   "WeilConjectures.constantExtensionClosedImage",
+   "WeilConjectures.ConstantExtensionLocalConjugacy",
+   "WeilConjectures.constantExtensionCyclicSheet",
+   "WeilConjectures.constantExtensionCyclicSheets",
+   "WeilConjectures.constantExtensionRestriction",
+   "WeilConjectures.constantExtensionFiber_return",
+   "WeilConjectures.constantExtensionFiberPull",
+   "WeilConjectures.constantExtensionRestrictionComparison",
+   "WeilConjectures.ConstantExtensionRestrictionSpec",
+   "WeilConjectures.constantExtensionSheetPullAt",
+   "WeilConjectures.constantExtensionWeilHeartEquivalence"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantExtensionWeilHeartEquivalence.lean",
+  "statement": "theorem constantExtensionWeilHeartEquivalence (iota : Ω ≃+* ℂ) : ∃ e : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω ≌ sfCommonStageWeilSheaf (constantExtensionDatum D m hm) l hl (constantExtensionModel D m hm X₀) Ω, ConstantExtensionSheetSpec D m hm X₀ l hl Ω e.functor ∧ PreservesFiniteLimits e.functor ∧ PreservesFiniteColimits e.functor ∧ PreservesFiniteLimits e.inverse ∧ PreservesFiniteColimits e.inverse ∧ ConstantExtensionRestrictionSpec D m hm X₀ l hl Ω (constantExtensionRestriction D m hm X₀ l hl Ω e) ∧ PreservesFiniteLimits (constantExtensionRestriction D m hm X₀ l hl Ω e) ∧ PreservesFiniteColimits (constantExtensionRestriction D m hm X₀ l hl Ω e) ∧ Nonempty (constantExtensionRestriction D m hm X₀ l hl Ω e ⋙ e.inverse ≅ zlWeilPull D l hl Ω (constantExtensionProjection D m hm X₀)) ∧ (∀ (A : sfCommonStageWeilSheaf (constantExtensionDatum D m hm) l hl (constantExtensionModel D m hm X₀) Ω) (i : Fin m), Nonempty ((constantExtensionSheetPullAt D m hm X₀ l hl Ω i).obj (e.inverse.obj A).obj.carrier ≅ A.obj.carrier)) ∧ (∀ (z : {z : (constantExtensionModel D m hm X₀).left // z ∈ closedPoints (constantExtensionModel D m hm X₀).left}), constantExtensionResidueDegree D m hm X₀ z.val = m / Nat.gcd (localClosedPointDegree D X₀ (constantExtensionClosedImage D m hm X₀ z)) m ∧ Nat.card ((constantExtensionModel D m hm X₀).left.residueField z.val) = Nat.card (X₀.left.residueField (constantExtensionClosedImage D m hm X₀ z).val) ^ constantExtensionResidueDegree D m hm X₀ z.val ∧ (∀ F : sfCommonStageWeilSheaf D l hl X₀ Ω, ConstantExtensionLocalConjugacy D m hm X₀ l hl Ω X₀ F ((constantExtensionRestriction D m hm X₀ l hl Ω e).obj F) (constantExtensionClosedImage D m hm X₀ z) z (constantExtensionResidueDegree D m hm X₀ z.val))) ∧ (∀ (N : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω) (z : {z : (constantExtensionModel D m hm X₀).left // z ∈ closedPoints (constantExtensionModel D m hm X₀).left}), ConstantExtensionLocalConjugacy D m hm X₀ l hl Ω (constantExtensionOriginalModel D m hm X₀) N (e.functor.obj N) z z 1) ∧ (∀ (N : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω) (w : ℝ), (SfIsPunctuallyPureOfWeight D l hl Ω (constantExtensionOriginalModel D m hm X₀) iota N w ↔ SfIsPunctuallyPureOfWeight (constantExtensionDatum D m hm) l hl Ω (constantExtensionModel D m hm X₀) iota (e.functor.obj N) w) ∧ (SfIsMixedOfWeightsAtMost D l hl Ω (constantExtensionOriginalModel D m hm X₀) iota N w ↔ SfIsMixedOfWeightsAtMost (constantExtensionDatum D m hm) l hl Ω (constantExtensionModel D m hm X₀) iota (e.functor.obj N) w))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical base-field datum, actual base changes, distinguished sheet and fibre identification are constructed explicitly. The sheet-return and restriction specifications use the recorded integral-normalized common-stage pullback comparisons. The main theorem retains exactness, arbitrary constructible sheaves, residue-degree local powers, the two-heart equivalence and all weight bounds. The separate cyclic-sheet theorem states the geometric decomposition. The added landed dependency supplies the already defined canonical Weil pullback and normalized common-stage compositor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ab8de972f",
+  "group": "Q06",
+  "result": "fix",
+  "note": "Mathematics, hypotheses, dependencies, universes, statement signature and pilot gates checked; snapshot module compiled cleanly twice. Complete replacement report in fixes/ repairs the placeholder second reading and adds compiler evidence. Details in review.md."
  }
 }
