@@ -9,10 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Sheaf.Topology.RingedSpaceModuleCohomology
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Pullbacks
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 
 /-! # The projective line is a genus-zero smooth proper connected curve
 
@@ -61,6 +60,31 @@ theorem isConnectedCurve_smooth_proper_genus_zero (k : Type u) [Field k] [IsAlgC
     Subsingleton ((RingedSpace.moduleCohomology
       (ProjectiveSpace (ULift.{u} (Fin 2)) (Spec (.of k))).toRingedSpace 1).obj
       (Scheme.Modules.unit (ProjectiveSpace (ULift.{u} (Fin 2)) (Spec (.of k))))) := by
-  sorry
+  have hs : SmoothOfRelativeDimension 1
+      (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) := inferInstance
+  have hdim : topologicalKrullDim (ProjectiveLine (Spec (.of k))) = 1 :=
+    topologicalKrullDim_eq_of_smoothOfRelativeDimension
+      (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) 1
+  have hc : IsConnectedCurve (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) :=
+    { krullDim_le_one := hdim.le
+      connectedSpace := inferInstance
+      krullDim_eq_one := hdim }
+  refine ⟨hc, SmoothOfRelativeDimension.smooth 1 _, inferInstance, ?_, ?_⟩
+  · obtain ⟨e⟩ := ProjectiveLine.nonempty_relativeDifferentials_iso_twist k
+    have : Subsingleton ((twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)).H 0) :=
+      ProjectiveLine.subsingleton_H_zero_twist_of_neg k (-2) (by decide)
+    have : Subsingleton
+        ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials.H 0) :=
+      Scheme.Modules.subsingleton_H_of_iso e.symm 0
+    rw [Scheme.Hom.genus_eq_finrankH_zero, Scheme.Modules.finrankH]
+    exact Module.finrank_zero_of_subsingleton
+  · have : Subsingleton ((twist (ULift.{u} (Fin 2)) (Spec (.of k)) 0).H 1) :=
+      ProjectiveLine.subsingleton_H_one_twist k 0 (by decide)
+    have : Subsingleton ((Scheme.Modules.unit (ProjectiveLine (Spec (.of k)))).H 1) :=
+      Scheme.Modules.subsingleton_H_of_iso
+        (unitIsoTwistZero (ULift.{u} (Fin 2)) (Spec (.of k))).symm 1
+    obtain ⟨e, _⟩ := Scheme.Modules.exists_moduleCohomology_source_comparison
+      (ProjectiveLine (Spec (.of k))) 1
+    exact (e _).toEquiv.subsingleton
 
 end AlgebraicGeometry.ProjectiveSpace
