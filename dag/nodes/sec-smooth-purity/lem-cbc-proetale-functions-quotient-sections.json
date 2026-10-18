@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "The map from the constant presheaf $P(U)=A$ to $L$ sends $a$ to the constant function $a$. It has the universal property of sheafification [def-weil-pbc-sheafification]: given any presheaf morphism $P\\to G$ into a sheaf, send a locally constant $f$ on $U$ to the section obtained by gluing the images of its constant values on an open cover where $f$ is constant. On overlaps the values agree; an empty overlap has only the zero section of $G$. Refining two such open covers by their intersections proves independence. Pulling the open cover back along any scheme morphism proves naturality, and refining covers for two functions proves additivity. Uniqueness follows because every locally constant function is constant on such an open cover. These open covers are coverings of the pro-etale site [def-weil-pbc-proetale-site]. Hence [def-weil-pbc-constant-sheaf] identifies $\\underline A$ with $L$, compatibly with constant sections and restrictions. The inclusion $L(U)\\subseteq\\operatorname{Map}(|U|,A)$ is injective for every $U$, so is a monomorphism of sheaves (cancellation is checked componentwise).",
+   "text": "The constant-presheaf map to discrete-valued continuous functions is locally surjective: cover by the open fibres, indexed by points of the object to stay in universe u. It is locally injective: unequal constants can agree only on the empty scheme, which has the empty cover. The sheafification map is therefore an isomorphism by Mathlib locally-bijective sheafification. Inclusion into all functions is pointwise injective, and its range consists exactly of locally constant functions. This identifies [def-weil-pbc-constant-sheaf] with that subsheaf, with the specified unit compatibility.",
    "uses": [
     "def-weil-pbc-sheafification",
     "def-weil-pbc-constant-sheaf",
@@ -64,11 +64,10 @@
    }
   },
   {
-   "text": "Let $v\\in V$ map to $x\\in X$. Base changing the weakly etale map $V\\to X$ to $\\operatorname{Spec}\\kappa(x)$ is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. Restricting this map to an affine open of the fibre remains weakly etale: open restriction leaves its local ring maps unchanged, as it does for the diagonal on the corresponding open of the fibre square; thus both flatness conditions in [def-weil-weakly-etale-morphism] remain true by [def-weil-flat-morphism]. On each such affine open apply [lem-weil-pbc-weak-etale-field]: its coordinate algebra $B$ is the union of finite etale $\\kappa(x)$-subalgebras, hence is integral over that field, and its residue fields are separable algebraic extensions of $\\kappa(x)$. To see points are closed without a noetherian assumption, for a prime $\\mathfrak p$ of $B$, $B/\\mathfrak p$ is an algebraic domain over a field, hence a field: a nonzero element has an algebraic equation with nonzero constant term, which solves for its inverse. Thus all primes are maximal, and no fibre point has a distinct specialization (any specialization shares an affine neighbourhood with the original point). The fibre is a closed subspace of $V$, because $x$ is closed; consequently $v$ is closed in $V$. The fibre point over $v$ has local ring $\\mathcal O_{V,v}/\\mathfrak m_x\\mathcal O_{V,v}$, whose maximal ideal is $\\mathfrak m_v/\\mathfrak m_x\\mathcal O_{V,v}$; its residue field is therefore exactly $\\mathcal O_{V,v}/\\mathfrak m_v=\\kappa(v)$ [def-weil-residue-field]. Each element of this residue field lies in a finite separable subextension, which is trivial by [lem-pc-sepclosed-finite-sep-trivial]; hence $\\kappa(v)=\\kappa(x)$ is separably closed. This proves both hypotheses needed to apply the affine acyclicity lemma to $V$.",
+   "text": "Base-change a weakly etale map to the residue field of a point. On an affine open of its fibre the coordinate algebra is weakly etale over that field. The source absolutely-flat API (Algebra.WeaklyEtale.flat_lmul' and Ring.AbsolutelyFlat.of_flat_lmul') implies every prime is maximal, so the affine open is T1. By [lem-weil-pbc-weak-etale-field] each residue field is separable over the base field and hence equal to it by Mathlib IsSepClosed.algebraMap_bijective. Transfer separable closedness along the resulting ring isomorphisms. Specializations share an affine neighbourhood, so the whole fibre is T1. Since the base point is closed, its residue-field map and its base change are closed immersions. A closed immersion carries closed fibre points to closed points. Surjectivity of its stalk maps makes its maps on residue fields bijective, transferring separable closedness to the original scheme.",
    "uses": [
     "lem-weil-pbc-weakly-etale-composition-base-change",
     "lem-weil-pbc-weak-etale-field",
-    "lem-pc-sepclosed-finite-sep-trivial",
     "def-weil-weakly-etale-morphism",
     "def-weil-flat-morphism",
     "def-weil-residue-field"
@@ -80,15 +79,14 @@
    }
   },
   {
-   "text": "On $V$ the comparison morphism [def-weil-pbc-site-comparison-morphism] takes the constant abelian etale sheaf to the constant abelian pro-etale sheaf. This follows from the adjunction and the universal property of a constant sheaf: maps from $\\underline A$ to $G$ correspond to maps from the constant presheaf to $G$, hence to homomorphisms $A\\to G(V)$ because $V$ is final. Therefore $\\operatorname{Hom}(\\nu_V^{-1}\\underline A_{\\mathrm{et}},G)=\\operatorname{Hom}(\\underline A_{\\mathrm{et}},\\nu_{V,*}G)=\\operatorname{Hom}(A,(\\nu_{V,*}G)(V))=\\operatorname{Hom}(A,G(V))$ naturally; the inverse maps are the adjunction and evaluation of constant sections, so these universal properties give the isomorphism. Apply [lem-cbc-abelian-etale-proetale-cohomology-comparison] in degree 1, then [lem-cbc-affine-sepclosed-etale-acyclic] using step 4 and affineness of $V$. It follows that $H^1(V_{\\mathrm{proet}},\\underline A)=H^1(V_{\\mathrm{et}},\\underline A)=0$. To use this for evaluation on the object $V$ of $X_{\\mathrm{proet}}$, [lem-weil-pbc-proetale-restriction-injectives] identifies its slice with $V_{\\mathrm{proet}}$, and [lem-weil-pbc-cohomology-over-object-localization] identifies object cohomology with cohomology on that slice. The restriction of $\\underline A_X=L$ is $\\underline A_V=L$, since both send $W\\to V$ to locally constant maps on $|W|$ by step 2.",
+   "text": "Use the declared comparisonConstantSheafIso and comparisonCohomologyMap_bijective in [lem-cbc-abelian-etale-proetale-cohomology-comparison], and apply [lem-cbc-affine-sepclosed-etale-acyclic] to the affine object with the geometric properties from step 4. Thus the pro-etale constant sheaf on the object has vanishing H1. Use the already proved sliceEquiv and sliceDense in [lem-weil-proetale-weakly-etale-localization] to identify its site with the slice of the base site. ConstantSheafOver and ConstantSheafEquivalence transport the constant sheaf through this equivalence, and the proved source H.mapFunctor_bijective transports H1 vanishing.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-sheafification",
     "lem-cbc-abelian-etale-proetale-cohomology-comparison",
     "lem-cbc-affine-sepclosed-etale-acyclic",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-weil-pbc-cohomology-over-object-localization"
+    "lem-weil-proetale-weakly-etale-localization"
    ],
    "elementary": false,
    "source": {
@@ -97,9 +95,8 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-derived-functor-long-exact] to the short exact sequence of step 3 and $\\Gamma(V,-)$. Its hypotheses hold by [def-weil-pbc-sites-and-cohomology]: abelian sheaves form an abelian category with enough injectives and evaluation is left exact additive, with $H^0(V,G)=G(V)$. The initial segment is $0\\to\\underline A(V)\\to\\operatorname{fun}(V,A)\\to\\mathcal Q_A(V)\\to H^1(V,\\underline A)$. The last term vanishes by step 5, so the third arrow is surjective with kernel $\\underline A(V)=\\operatorname{LC}(|V|,A)$ from step 2. Sending the class of $f$ to its image in $\\mathcal Q_A(V)$ is well-defined and injective by this kernel equality, and surjective by exactness. Its inverse gives the stated canonical isomorphism. All maps used are the natural inclusion and cokernel map, so this isomorphism is compatible with restriction between affine objects; no choice of representatives affects it.",
+   "text": "Restrict the cokernel short exact sequence directly to the slice at the affine object. The restriction preserves finite limits and colimits, hence the sequence remains short exact. At the terminal object of the slice the connecting map into H1 of the restricted constant sheaf is zero by step 5. The source lemma Sheaf.H.ker_δ, proved from the Ext exact sequence, identifies its kernel with the range of the cokernel projection; thus that projection is surjective on sections. Left exactness of evaluation identifies its kernel with the image of the constant sheaf, which is exactly the locally constant functions by step 2. QuotientAddGroup.quotientKerEquivOfSurjective gives the stated equivalence and the required formula by reflexivity. No generic derived-functor comparison or object-cohomology localization theorem is used.",
    "uses": [
-    "lem-weil-pbc-derived-functor-long-exact",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
@@ -118,21 +115,18 @@
   "lem-weil-pbc-sheafification-exact",
   "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-weil-pbc-weak-etale-field",
-  "lem-pc-sepclosed-finite-sep-trivial",
   "def-weil-weakly-etale-morphism",
   "def-weil-flat-morphism",
   "def-weil-residue-field",
   "def-weil-pbc-site-comparison-morphism",
   "lem-cbc-abelian-etale-proetale-cohomology-comparison",
   "lem-cbc-affine-sepclosed-etale-acyclic",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-cohomology-over-object-localization",
-  "lem-weil-pbc-derived-functor-long-exact"
+  "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0F6D, example-functions-mod-locally-constant-functions; preliminary continuous-map argument from Bhatt–Scholze Lemma 4.2.12"
+  "place": "Tag 0F6D, following its continuous-function, residue-field and H1 lifting argument. F2 realizes slice restriction directly using proved source Ext APIs, without the generic localization and derived-functor sequence nodes."
  },
  "mathlib_searches": [
   {
@@ -342,11 +336,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-weak-etale-field",
-  "lem-pc-sepclosed-finite-sep-trivial",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-cohomology-over-object-localization",
-  "lem-weil-pbc-derived-functor-long-exact"
+  "lem-weil-pbc-weak-etale-field"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -373,5 +363,15 @@
   "group": "NR",
   "result": "pass",
   "note": "Wrote review.md. Checked all statement clauses, seven dependencies, source passages, edge cases, universes, canonical maps, and maintainer gates. Signature matches verbatim; immutable module reproduced a clean server-only compile in 2.3 seconds. No delivery errors found; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-63b7d",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261018T062743-L-647420",
+  "kind": "proof",
+  "note": "independent cc review: public theorem signature vs clone and node lean.statement (identical); proof vs node steps/proof_deps; axioms vs the two still-sorry statements cited; removed ProEtaleSiteComparison import vs unit sk-prop-sf-comparison (still reached via AbelianEtaleProEtaleCohomologyComparison's public import, no importers)"
  }
 }
