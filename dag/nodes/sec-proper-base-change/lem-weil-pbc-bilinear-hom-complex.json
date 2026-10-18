@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-bilinear-hom-complex",
+ "kind": "statement",
+ "title": "Product Hom complexes for an additive coefficient bifunctor",
+ "statement": "Let A, B and D be preadditive categories, with D admitting small products, and let H:A^op -> (B -> D) be additive, with every H(a,-) additive. There exists a bifunctor on unbounded cochain complexes A^op x B -> D whose degree n object is the product over integers p of H(L^p,M^(p+n)). Its projections identify its differential with postcomposition by d_M minus (-1)^n times precomposition by d_L, and its action on chain maps with componentwise H(f^p,g^(p+n)). The product universal property, the differential formula and the functoriality formula hold for all integer indices with the stated equalities. No exactness of products, boundedness or abelian hypothesis is required.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I, the Hom-complex construction of E prime; differential and products as in sites-cohomology.tex, Section 0A8X."
+ },
+ "proof": [
+  {
+   "text": "Use products of H(L^p,M^(p+n)) in degree n. Define the map to each product factor by the difference of the two induced differential maps, multiplying the source-differential term by (-1)^n. If the target degree is not n+1 both input differentials vanish, and additivity of H in each variable makes the map zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check the composite of two successive differentials on every product projection. Functoriality of H makes the pure terms the images of d_M squared and d_L squared, hence zero. The two mixed terms coincide by naturality of the curried functor; their coefficients have opposite signs in consecutive degrees and cancel. This proves the complex identities without a finite-product or exact-product assumption.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For chain maps f and g define the induced map by the product lift of H(f^p,g^(p+n)) after the source projections. The chain-map equations give commutation with the displayed differential. Check identity and composition on each projection using the corresponding bifunctor laws. This defines the claimed bifunctor and proves all three formulas. This argument includes zero categories and zero complexes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I, the Hom-complex construction of E prime; differential and products as in sites-cohomology.tex, Section 0A8X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A separately additive bifunctor from an opposite preadditive category and a preadditive category to a category with products extends to the product Hom complex of unbounded cochain complexes",
+   "results": "Eight hits: additive opposite-complex and opposite-functor constructions, additive mapHomologicalComplex, and Functor.map₂HomologicalComplex. The latter totalizes a bicomplex using coproducts; it does not give the product Hom differential with its contravariant first argument.",
+   "date": "2026-10-18",
+   "verdict": "No exact match for the product Hom construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product total Hom complex for a contravariant covariant additive bifunctor with differential d f minus negative one power f d",
+   "results": "Eight hits: HomologicalComplex₂.total, HomologicalComplex.mapBifunctor, and its D₁/D₂ and associator differentials. These are coproduct totalizations. Read Bifunctor.lean and TotalComplex; obtaining this product Hom convention via opposite categories additionally requires reindexing and a sign comparison.",
+   "date": "2026-10-18",
+   "verdict": "No direct match; the explicit product construction is shorter for this sign convention."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorHomologicalComplex\"",
+   "results": "Twelve hits: mapBifunctorHomologicalComplexObj, mapBifunctorHomologicalComplex, and their component equations. They construct the bicomplex, not the specified contravariant product Hom complex.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "product.*Hom|Hom.*product|homComplex",
+   "results": "Twenty-five broad hits, including product triangles and unrelated tensor or matrix constructions. Project search found the proved sheaf HomComplex module and its dual-total short-complex comparison. The former has both inputs and output over one ring sheaf; the latter assumes a suitable opposite bicomplex and gives only short-complex comparisons. The present generic bifunctor construction allows different input categories and retains explicit differential and functoriality equations.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate; the existing sheaf Hom proof pattern was generalized."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedIdealCompleteEquivalence",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, coefficient comparison via flat-ringed complete equivalence, step 3: product Hom complex with coefficient action.",
+   "via": [
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BilinearHomComplex",
+  "file": "lean/Sheaf/Algebra/Homology/BilinearHomComplex.lean",
+  "declaration": "CategoryTheory.exists_bilinearHomComplexFunctor",
+  "statement": "theorem exists_bilinearHomComplexFunctor :\n    ∃ F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ,\n      ProductHomComplexSpecification H F",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.ProductHomComplexSpecification",
+   "CategoryTheory.exists_bilinearHomComplexFunctor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T103529-L-18130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T103529-L-18130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

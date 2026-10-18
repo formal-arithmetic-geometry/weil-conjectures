@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-restricted-coefficient-hom-complex",
+ "kind": "statement",
+ "title": "The coefficient action on product Hom complexes",
+ "statement": "Let C be a small site and phi:R -> B a morphism of commutative ring sheaves. The internal-Hom bifunctor with B-action by precomposition [lem-weil-pbc-restricted-coefficient-hom] extends to a bifunctor from unbounded B-module complexes contravariantly and unbounded R-module complexes covariantly to unbounded B-module complexes. In degree n its projections express the product of the coefficient Homs H(L^p,M^(p+n)); the differential is the product Hom differential d_M f - (-1)^n f d_L, with the functoriality formula given by componentwise precomposition and postcomposition. The underlying internal-Hom restriction isomorphism and its explicit coefficient-action formula are supplied as part of the same existence statement. No flatness, boundedness or completeness hypothesis is needed. Restriction of the constructed B-valued complex is naturally isomorphic, in both arguments, to the existing R-valued Hom-complex bifunctor after restricting its first argument.",
+ "stmt_deps": [
+  "lem-weil-pbc-restricted-coefficient-hom",
+  "lem-weil-pbc-bilinear-hom-complex",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I, construction of E prime = RHom(r(K prime), E), the chain-level coefficient action."
+ },
+ "proof": [
+  {
+   "text": "Obtain the underived internal-Hom bifunctor H, the natural restriction comparison and the explicit precomposition action formula from lem-weil-pbc-restricted-coefficient-hom. Its right partial functors are additive. Its left partial functors are additive as well, so equality of natural transformations on each component makes the curried functor additive into the functor category.",
+   "uses": [
+    "lem-weil-pbc-restricted-coefficient-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Sheaves of B-modules have all small products. Apply lem-weil-pbc-bilinear-hom-complex to the curried coefficient-Hom bifunctor. Its product terms, differentials and induced maps are all morphisms of B-module sheaves by construction. Retain the underived action formula and all the product and differential formulas.",
+   "uses": [
+    "lem-weil-pbc-bilinear-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction of scalars preserves all small limits: its composite with the underlying presheaf functor is the unchanged underlying presheaf functor for B-modules, and the latter preserves limits; the R-module underlying presheaf functor reflects limits. It therefore preserves the degreewise products. Postcompose the resulting product cone by the underived coefficient comparison. Compare it with the product cone of the existing R-valued Hom complex, using lem-sc-hom-complex-projections. The unique comparison of product cones gives isomorphisms in every degree. Expand both differentials on a projection; additivity of restriction and naturality of the underived coefficient comparison identify both terms, with the same sign. Thus the degreewise isomorphisms form a chain isomorphism. For a pair of chain maps, project its naturality square to any factor. The two induced-map formulas and the underived naturality square identify both composites. The product universal property then gives naturality in both variables. The proof applies to unbounded and zero complexes without any flatness hypothesis. Descent to derived categories remains outside this lemma.",
+   "uses": [
+    "lem-weil-pbc-restricted-coefficient-hom",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-restricted-coefficient-hom",
+  "lem-weil-pbc-bilinear-hom-complex",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I, construction of E prime = RHom(r(K prime), E), the chain-level coefficient action."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A separately additive bifunctor from an opposite preadditive category and a preadditive category to a category with products extends to the product Hom complex of unbounded cochain complexes",
+   "results": "Eight hits: additive opposite-complex and opposite-functor constructions, additive mapHomologicalComplex, and Functor.map₂HomologicalComplex. The latter totalizes a bicomplex using coproducts; it does not give the product Hom differential with its contravariant first argument.",
+   "date": "2026-10-18",
+   "verdict": "No exact match for the product Hom construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product total Hom complex for a contravariant covariant additive bifunctor with differential d f minus negative one power f d",
+   "results": "Eight hits: HomologicalComplex₂.total, HomologicalComplex.mapBifunctor, and its D₁/D₂ and associator differentials. These are coproduct totalizations. Read Bifunctor.lean and TotalComplex; obtaining this product Hom convention via opposite categories additionally requires reindexing and a sign comparison.",
+   "date": "2026-10-18",
+   "verdict": "No direct match; the explicit product construction is shorter for this sign convention."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorHomologicalComplex\"",
+   "results": "Twelve hits: mapBifunctorHomologicalComplexObj, mapBifunctorHomologicalComplex, and their component equations. They construct the bicomplex, not the specified contravariant product Hom complex.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "product.*Hom|Hom.*product|homComplex",
+   "results": "Twenty-five broad hits, including product triangles and unrelated tensor or matrix constructions. Project search found the proved sheaf HomComplex module and its dual-total short-complex comparison. The former has both inputs and output over one ring sheaf; the latter assumes a suitable opposite bicomplex and gives only short-complex comparisons. The present generic bifunctor construction allows different input categories and retains explicit differential and functoriality equations.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate; the existing sheaf Hom proof pattern was generalized."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedIdealCompleteEquivalence",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, coefficient comparison via flat-ringed complete equivalence, step 3: product Hom complex with coefficient action.",
+   "via": [
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictedCoefficientHomComplex",
+  "file": "lean/Sheaf/Paper/RestrictedCoefficientHomComplex.lean",
+  "declaration": "SheafOfModules.exists_restrictedCoefficientHomComplexFunctor",
+  "statement": "theorem exists_restrictedCoefficientHomComplexFunctor :\n    let MR := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n    let MB := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)\n    let r := restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)\n    ∃ H : MBᵒᵖ × MR ⥤ MB,\n      ∃ i : H ⋙ r ≅ (r.op.prod (𝟭 _) ⋙ Functor.uncurry.obj (homFunctor.{u, u, u, u} R)),\n        (∀ (M : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))\n          (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n          (U : C)\n          (b : ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B).obj.obj (op U))\n          (h : (H.obj (op M, N)).val.obj (op U)) (W : Over U)\n          (m : M.val.obj (op W.left)),\n          (((i.hom.app (op M, N)).val.app (op U)).hom\n            (@SMul.smul _ _ ((H.obj (op M, N)).val.obj (op U)).isModule.toSMul b h)).app (op W) m =\n            (((i.hom.app (op M, N)).val.app (op U)).hom h).app (op W)\n              (@SMul.smul _ _ (M.val.obj (op W.left)).isModule.toSMul\n                (B.obj.map W.hom.op b) m)) ∧\n        ∃ G : (CochainComplex MB ℤ)ᵒᵖ ⥤ CochainComplex MR ℤ ⥤ CochainComplex MB ℤ,\n          ProductHomComplexSpecification (Functor.curry.obj H) G ∧\n          Nonempty (Functor.uncurry.obj G ⋙ r.mapHomologicalComplex (.up ℤ) ≅\n            (r.mapHomologicalComplex (.up ℤ)).op.prod (𝟭 _) ⋙\n              Functor.uncurry.obj (homComplexFunctor (R := R)))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T103529-L-18130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T103529-L-18130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
