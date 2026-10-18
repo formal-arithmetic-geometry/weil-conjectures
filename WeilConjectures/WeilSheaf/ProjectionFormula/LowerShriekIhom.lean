@@ -114,7 +114,8 @@ attribute [local instance] Compactification.over
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- Pullbacks along equal morphisms are isomorphic. -/
-theorem nonempty_upperStar_iso_of_eq {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+theorem nonempty_proEtaleWeilSheaf_upperStar_iso_of_eq {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))]
     [Y.Over (Spec (CommRingCat.of k₀))] {f f' : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))]
     [f'.IsOver (Spec (CommRingCat.of k₀))] (h : f = f') :
     Nonempty (ProEtaleWeilSheaf.upperStar k₀ l f ≅ ProEtaleWeilSheaf.upperStar k₀ l f') := by
@@ -130,7 +131,7 @@ theorem nonempty_upperStar_compactification_iso {X Y : Scheme.{u}}
     Nonempty ((ProEtaleWeilSheaf.upperStar k₀ l f).obj A ≅
       (ProEtaleWeilSheaf.upperStar k₀ l c.i).obj
         ((ProEtaleWeilSheaf.upperStar k₀ l c.g).obj A)) := by
-  obtain ⟨ψ⟩ := nonempty_upperStar_iso_of_eq (k₀ := k₀) (l := l) c.comm
+  obtain ⟨ψ⟩ := nonempty_proEtaleWeilSheaf_upperStar_iso_of_eq (k₀ := k₀) (l := l) c.comm
   exact ⟨ψ.app A ≪≫ (ProEtaleWeilSheaf.upperStarCompIso k₀ l c.i c.g).app _⟩
 
 /-- **The projection formula for Weil complexes, from its two non-formal inputs**:

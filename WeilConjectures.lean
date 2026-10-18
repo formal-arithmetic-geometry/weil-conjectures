@@ -4806,6 +4806,7 @@ public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
+public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualPullback
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerShriekIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerStarIhom
