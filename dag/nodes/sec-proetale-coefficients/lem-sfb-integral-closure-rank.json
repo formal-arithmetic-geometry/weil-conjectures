@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-integral-closure-rank",
+ "kind": "statement",
+ "title": "Rank of an integral closure over a principal ideal domain",
+ "statement": "Let $A$ be a principal ideal domain with fraction field $K$, and let $L/K$ be a finite separable field extension [def-pc-field-extension], [def-weil-pbc-separable-algebraic-extension]. Let $C$ be a commutative $A$-algebra embedded in $L$, with both structural maps $A\\to L$ equal to the composite through $K$ and through $C$, and suppose $C$ is the integral closure of $A$ in $L$ [def-weil-pbc-integral-closure]. Then $\\operatorname{finrank}_A C=\\dim_K L$ [def-weil-vector-space-dimension]. Here the rank of the finite free $A$-module $C$ [def-weil-pbc-free-module] is the cardinality of any basis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+  "place": "Opening sentence, the clause of rank d; generic integral-closure rank calculation implemented by Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:192-200."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "A PID is Noetherian and integrally closed by [lem-weil-pbc-pid-noetherian-normal], so [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] makes $C$ finite over $A$. It is torsion-free since it embeds in the field $L$ and nonzero elements of $A$ stay nonzero there. The PID form of [lem-sc-dvr-fg-torsionfree-free] makes it free. Localizing an $A$-basis of $C$ at the nonzero elements of $A$ gives a $K$-basis of $L$: every $z\\in L$ has an integral nonzero multiple $az\\in C$, and every finite $K$-linear relation can be multiplied by a common nonzero denominator to give an $A$-linear relation. Thus the two basis cardinalities agree, giving the equality by [def-weil-vector-space-dimension]. This is exactly IsIntegralClosure.rank, whose proof uses IsIntegralClosure.isLocalization and Basis.localizationLocalization; its source and all hypotheses were checked in the pinned Mathlib.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Opening sentence, the clause of rank d; generic integral-closure rank calculation implemented by Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:192-200."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+  "place": "Opening sentence, the clause of rank d; generic integral-closure rank calculation implemented by Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:192-200."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The rank of the integral closure of a principal ideal domain in a finite separable extension of its fraction field equals the degree of the field extension",
+   "results": "IsIntegralClosure.rank; NumberField.RingOfIntegers.rank; IsIntegralClosure.isDedekindDomain. IsIntegralClosure.rank was the first hit.",
+   "date": "2026-10-18",
+   "verdict": "Exact generic match: checked full signature with #check @IsIntegralClosure.rank and source lines 192-200."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralClosure.rank\"",
+   "results": "IsIntegralClosure.rank in Mathlib.RingTheory.DedekindDomain.IntegralClosure.",
+   "date": "2026-10-18",
+   "verdict": "Exact match; one-line application IsIntegralClosure.rank A K L C."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralClosure.rank",
+   "results": "Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:192 declares the theorem; Mathlib/NumberTheory/NumberField/Basic.lean:416 applies it. Read source lines 180-200.",
+   "date": "2026-10-18",
+   "verdict": "Exact match; standard axioms only by #print axioms."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsIntegralClosure.rank",
+  "file": "Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean",
+  "line": 192,
+  "how": "IsIntegralClosure.rank A K L C is the stated equality. Full scalar tower, fraction field, finite dimensionality, domain, separability, principal ideal ring, and torsion-free hypotheses checked at lines 43-57, 87, 110, 147, 192-200. Torsion-freeness follows from the injective structural maps into the field L."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.NumberTheory.Padics.LocalFieldIntegralBasis",
+  "date": "2026-10-18",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sfb-cartesian-coefficients",
+   "place": "Step 3, the O_E-basis of O_F indexed by [F:E], expanded in the finite-free detail proof opening sentence, of rank d.",
+   "via": [
+    "lem-sfb-local-field-integral-basis"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.RingTheory.DedekindDomain.IntegralClosure",
+  "declaration": "IsIntegralClosure.rank",
+  "statement": "theorem IsIntegralClosure.rank (A : Type u_1) (K : Type u_2) [CommRing A] [Field K] [Algebra A K] [IsFractionRing A K] (L : Type u_3) [Field L] (C : Type u_4) [CommRing C] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra C L] [IsIntegralClosure C A L] [Algebra A C] [IsScalarTower A C L] [FiniteDimensional K L] [IsDomain A] [Algebra.IsSeparable K L] [IsPrincipalIdealRing A] [Module.IsTorsionFree A L] : Module.finrank A C = Module.finrank K L",
+  "branch": "mathlib",
+  "by": "D3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261018T145054-L-3636954",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261018T145054-L-3636954",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
