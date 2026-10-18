@@ -17,9 +17,147 @@
   "def-weil-surjective-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $i:U\\hookrightarrow C$ and $f=i\\circ g$. The scheme $C$ is quasi-compact by its finite affine cover and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. The open immersion $i$ is quasi-compact because its inverse images in Noetherian affine opens are quasi-compact; this is included in [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus $i$ has finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. A finite algebra is generated as an algebra by any finite module generating set, so $g$ has finite type; [lem-sfb-finite-type-composition-base-change] gives finite type of $f$. The fibres of $f$ are either fibres of $g$ or empty, hence finite by [lem-weil-pbc-finite-closed-map-finite-fibres]; [pqf-lem-qf-finitefibres] makes $f$ quasi-finite. Finally $g$ is separated by [lem-weil-pbc-finite-closed-map-finite-fibres]. Since $i$ is a monomorphism, $T\\times_C T=T\\times_U T$ by the pullback universal property, and the diagonal of $f$ is the closed diagonal of $g$. Therefore $f$ is separated.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "pqf-lem-qf-finitefibres",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05K0, verification of the finite-type separated quasi-finite hypotheses; Tags 01OY, 01T3 and 02NH"
+   }
+  },
+  {
+   "text": "Apply [thm-pqf-zmt-factorization] to $f$. Obtain $j:T\\hookrightarrow P$ a quasi-compact open immersion and $p:P\\to C$ finite with $p\\circ j=f$. The open $U$ is integral: its nonempty affine opens are nonempty affine opens of $C$, hence have domain coordinate rings by [def-pc-integral-scheme]. Therefore $U$ is reduced, and [etale-proposition-etale-reduced] makes $T$ reduced. Let $Z\\hookrightarrow P$ be the scheme-theoretic image of $j$. By [lem-trf-reduced-scheme-image] it is the reduced induced closed subscheme on $\\overline{j(T)}$, and by [lemma-nagata-immersion-open-in-scheme-image] the induced $T\\hookrightarrow Z$ is a dense open immersion. The morphism $r:Z\\to C$ is finite by [lem-weil-pbc-closed-immersion-finite] and [lem-weil-pbc-finite-composition].",
+   "uses": [
+    "thm-pqf-zmt-factorization",
+    "def-pc-integral-scheme",
+    "etale-proposition-etale-reduced",
+    "lem-trf-reduced-scheme-image",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05K0, followed by Morphisms Tag 056B (lemma-scheme-theoretic-image-reduced)"
+   }
+  },
+  {
+   "text": "In fact $Z\\times_C U$ equals $T$ as a $U$-scheme. To check this, put $P_U=p^{-1}(U)$ and let $j_U:T\\hookrightarrow P_U$ be the induced open immersion. The map $p_U:P_U\\to U$ is finite directly from the affine definition of a finite morphism: over every affine open of $U$, its ring map is the same finite ring map as for $p$. It is separated by [lem-weil-pbc-finite-closed-map-finite-fibres]. Since $p_U\\circ j_U=g$ is finite, [lem-weil-pbc-finite-permanence-over-separated] makes $j_U$ finite, hence a closed map. Thus $T$ is closed in $P_U$, and so also in $Z\\cap P_U$. But $T$ is dense in $Z$ and contained in this open subset; consequently $Z\\cap P_U=T$ topologically. The map $T\\hookrightarrow Z\\cap P_U$ is an open immersion onto the whole space and hence an isomorphism by [def-weil-open-immersion]. The pullback universal property identifies this open restriction with $Z\\times_C U$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-finite-permanence-over-separated",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035D (lemma-finite-permanence), 01WN; elementary dense-open restriction argument"
+   }
+  },
+  {
+   "text": "Let $\\eta$ be the generic point of $U$, also the generic point of $C$. It exists by [lem-sc-scheme-sober], since $U$ is nonempty and integral. Apply [lem-sbc-finite-etale-generic-fibre-cover-density] with base $S=U$, smooth map $c=\\mathrm{id}_U:U\\to U$, and the etale map $g:T\\to U$. The identity is smooth directly from the lifting definition [def-sbc-smooth-morphisms]: it has finite presentation and every prescribed map over $U$ lifts by the structure map. The lemma gives density of $T_\\eta\\to T$. Its function-field generic fibre is the residue-field fibre [def-pc-scheme-fibre], since on any nonempty affine domain chart the stalk at the zero prime is its field of fractions. The underlying fibre is finite by [lem-weil-pbc-finite-closed-map-finite-fibres], discrete by [lem-weil-pbc-etale-fibre-discrete-separable-points], and identified with $g^{-1}(\\eta)$ by [def-pc-scheme-fibre]. It is nonempty by surjectivity of $g$. Write its distinct points as $t_a$ for a nonempty finite index set $A$. Their image is dense in $T$, hence in $Z$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sbc-finite-etale-generic-fibre-cover-density",
+    "def-sbc-smooth-morphisms",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), Tag 01UA for the generic-fibre density input"
+   }
+  },
+  {
+   "text": "For $a\\in A$, let $H_a=\\overline{\\{t_a\\}}\\subset Z$. It is irreducible by [lem-weil-pbc-irreducible-closure]. Give $H_a$ its reduced induced closed subscheme structure $Y_a\\hookrightarrow Z$ using [lem-weil-pbc-reduced-induced-closed-subscheme]. It is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme]. The map $q_a:Y_a\\to C$ is finite by [lem-weil-pbc-closed-immersion-finite] and [lem-weil-pbc-finite-composition]. The finite closed union $\\bigcup_a H_a$ contains the dense set $\\{t_a:a\\in A\\}$, so it equals $Z$. Each $H_a$ meets the fibre over $\\eta$ in exactly $t_a$: any such point is a specialization of $t_a$, and specialization in the discrete subspace $r^{-1}(\\eta)=g^{-1}(\\eta)$ forces equality. In particular $H_a\\cap H_b$ has no point over $\\eta$ when $a\\ne b$. This argument proves the needed component property directly; it assumes no normality of $C$ or disjointness of components before shrinking.",
+   "uses": [
+    "lem-weil-pbc-irreducible-closure",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme); Topology Tag 004W; finite-union and specialization argument"
+   }
+  },
+  {
+   "text": "Set $B=\\bigcup_{a\\ne b}r(H_a\\cap H_b)$. Every intersection is closed in $Z$ and $r$ is finite, so [lem-weil-pbc-finite-closed-map-finite-fibres] shows that $B$ is closed in $C$. It avoids $\\eta$ by the preceding step. Choose an affine open $W$ with $\\eta\\in W\\subseteq U\\setminus B$ using [lem-weil-pbc-affine-opens-basis]. The open restriction $Z_W=r^{-1}(W)$ is the open $T\\times_U W$ by Step 3. The closed subsets $H_a\\cap Z_W$ cover it and are pairwise disjoint. Since there are finitely many of them, each is also open, its complement being the union of the others. Each contains $t_a$ and is nonempty.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN (finite morphisms are closed); Schemes Tag 01IT (lemma-basis-affine-opens)"
+   }
+  },
+  {
+   "text": "Put $V_a=Y_a\\times_C W$. Pullback along an open inclusion is the inverse-image open subscheme: for any scheme mapping to $Y_a$ with image over $W$, the unique map into this open restriction has precisely the pullback universal property [def-pc-fibre-product, def-weil-open-immersion]. Thus $V_a$ is open in $Y_a$ and nonempty because it contains $t_a$. Its closed immersion into $Z_W$ has support $H_a\\cap Z_W$. This is a reduced induced closed subscheme: on each affine open it is defined by the same radical ideal as $Y_a\\hookrightarrow Z$ restricted to that open, by the affine-local construction in [lem-weil-pbc-reduced-induced-closed-subscheme]. The open subscheme of the reduced scheme $Z_W$ on $H_a\\cap Z_W$ is itself reduced and is a closed subscheme, since the support is clopen; on affine charts its local rings are localizations of the reduced ambient coordinate rings. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies this open subscheme with $V_a$. Hence the $V_a$ are disjoint open subschemes covering $Z_W$. Gluing their inclusion maps and the inverse restrictions gives mutually inverse maps $\\coprod_a V_a\\simeq Z_W\\simeq T\\times_U W$ over $W$, using the scheme coproduct universal property [lem-weil-pbc-scheme-coproduct-family]. The pullback universal property also identifies the inverse image of $W$ in $\\coprod_aY_a$ with $\\coprod_a V_a$; the comparison is on the entire inverse image.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 and 01J4, affine-local reduced induced structure; gluing the finite disjoint open cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "etale-proposition-etale-reduced",
+  "lem-sbc-finite-etale-generic-fibre-cover-density",
+  "lem-sc-scheme-sober",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-reduced-scheme-image",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-permanence-over-separated",
+  "lem-weil-pbc-irreducible-closure",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "pqf-lem-qf-finitefibres",
+  "thm-pqf-zmt-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05K0 (lemma-quasi-finite-separated-pass-through-finite), combined with Morphisms Tags 035D, 056B, 02GL and reduced closures of the finitely many generic-fibre points"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +193,38 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"b90f20d47b87b2b6\"}",
    "date": "2026-10-18",
    "verdict": "no match: the hits give normalization, integrality of open subschemes, finite morphisms, etale base change, and open covers, but not integral finite models with this cartesian disjoint-union property after shrinking"
+  },
+  {
+   "tool": "grep",
+   "query": "compactif|zariskiMain|ZariskiMain|exists_isOpenImmersion_isFinite",
+   "results": "{\"t\": \"2026-10-18T20:23:56Z\", \"tool\": \"grep\", \"query\": \"compactif|zariskiMain|ZariskiMain|exists_isOpenImmersion_isFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/Analysis/CStarAlgebra/Multiplier.lean\", \"Mathlib/Combinatorics/Hindman.lean\", \"Mathlib/Tactic/Linter/DirectoryDependency.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\"], \"digest\": \"5e8ddf6b196a06df\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern normalization, finite or integral morphisms and etale algebra descent, not integral finite models with this full inverse-image comparison after shrinking"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale cover of a dense open of an integral Noetherian scheme admits integral finite models of its generic components after shrinking the base open",
+   "results": "{\"t\": \"2026-10-18T20:23:56Z\", \"tool\": \"leanfinder\", \"query\": \"A finite etale cover of a dense open of an integral Noetherian scheme admits integral finite models of its generic components after shrinking the base open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"e931231d214409b8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern normalization, finite or integral morphisms and etale algebra descent, not integral finite models with this full inverse-image comparison after shrinking"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generically finite etale cover extends to integral components finite over the base after deleting their closed intersection images",
+   "results": "{\"t\": \"2026-10-18T20:30:30Z\", \"tool\": \"leanfinder\", \"query\": \"A generically finite etale cover extends to integral components finite over the base after deleting their closed intersection images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"75759e7212d41345\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern normalization, finite or integral morphisms and etale algebra descent, not integral finite models with this full inverse-image comparison after shrinking"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(isOpenImmersion.*isFinite|finite.*integral)|zariskiMain|ZariskiMain",
+   "results": "{\"t\": \"2026-10-18T20:30:30Z\", \"tool\": \"grep\", \"query\": \"exists.*(isOpenImmersion.*isFinite|finite.*integral)|zariskiMain|ZariskiMain\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern normalization, finite or integral morphisms and etale algebra descent, not integral finite models with this full inverse-image comparison after shrinking"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-constructible-finite-open-constant-generation",
@@ -82,5 +248,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-etale-integral-models-after-shrinking",
+  "worker": "stage1",
+  "summary": "Seven steps prove the item using existing tools: verify the Zariski-main hypotheses, take the reduced schematic closure, prove its entire restriction over U equals T by finite permanence, obtain a finite dense generic fibre, form its integral reduced closures, remove closed images of intersections, and identify the resulting disjoint open subschemes scheme-theoretically. No new nodes.",
+  "blueprint": "Serves ancestor lem-per-artin-gabber-affine-curve proof Step 3 through the recorded finite-residue-duality / open-immersion-finiteness chain: supplies the integral finite models used by lem-per-constructible-finite-open-constant-generation. This is a generic geometric tool below the unit, preserving its route. Whole-blueprint searches for finite etale integral, integral models, integral finite and 05K0 found no duplicate of this statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Noetherianity supplies the quasi-separated target required by Zariski main. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Open subschemes of a Noetherian scheme are quasi-compact; this verifies finite type of the base open inclusion. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Converts the quasi-compact base open inclusion to a finite-type morphism. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type composition tool for the finite cover followed by the base open inclusion. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Finite-morphism separatedness, finite fibres and closed images, used for the factorization and the shrinking. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "pqf-lem-qf-finitefibres",
+    "why": "Converts finite type plus finite fibres to the quasi-finite hypothesis of Zariski main. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "thm-pqf-zmt-factorization",
+    "why": "Tag 05K0 finite compactification tool; no node in this unit supplies the factorization. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Reducedness of the etale cover over the reduced integral open. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Identifies the schematic closure with the reduced induced structure on its support. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lemma-nagata-immersion-open-in-scheme-image",
+    "why": "Supplies the original cover as a dense open of its schematic closure. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Makes reduced closed closures finite over the finite compactification. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "Composes finite closed-closure maps with the finite map to C. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-permanence-over-separated",
+    "why": "Shows the open inclusion of the cover into the restriction of its compactification is finite. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Provides the generic point of the integral base. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-sbc-finite-etale-generic-fibre-cover-density",
+    "why": "With the identity smooth family, gives density of the actual generic fibre in the cover. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Discreteness of the generic fibre distinguishes the reduced closures and removes their intersections. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-irreducible-closure",
+    "why": "The closure of each generic-fibre point is irreducible. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Constructs reduced closures and identifies their open restrictions scheme-theoretically. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Chooses an affine neighbourhood of the surviving generic point. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Assembles the finite disjoint cover of the whole inverse-image open as a coproduct. It is a general tool below the perverse-curve unit, not a replacement of its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "pqf-lem-qf-finitefibres",
+  "thm-pqf-zmt-factorization",
+  "etale-proposition-etale-reduced",
+  "lem-trf-reduced-scheme-image",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-permanence-over-separated",
+  "lem-sc-scheme-sober",
+  "lem-sbc-finite-etale-generic-fibre-cover-density",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-irreducible-closure",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NS-121df5741",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-121df5741 (reviewer sub-agent of L); spot-checked: I read all seven steps and the full statement of every one of the 26 cited nodes. Sources checked: Stacks 05K0 (more-morphisms.tex l.12457) against thm-pqf-zmt-factorization, and 056B (morphisms.tex l.977) against lem-trf-reduced-scheme-image. Step 1 checks every ZMT hypothesis: i is a quasi-compact open immersion because open subsets of Noetherian C are quasi-compact (01OW); C is quasi-separated (01OY); f has finite type and finite fibres, so it is quasi-finite (02NH); f is separated because i is a monomorphism, so T×_C T=T×_U T. Step 3 is correct: j_U is finite by 035D(1), so T is closed, open and dense in Z∩P_U, hence equal to it and r^{-1}(U)=T. Step 4 applies the generic-fibre density lemma with c=id_U and needs no normality. In Steps 5–6 the generic fibre is discrete, so each H_a meets r^{-1}(η) only in t_a, and the finite closed map r removes the pairwise intersections. Step 7 identifies V_a with the clopen open subscheme of Z_W by 01J3(3) uniqueness, so the comparison covers the whole inverse image. The statement is unchanged and the citer lem-per-constructible-finite-open-constant-generation uses it consistently. Edge cases checked: U=C, C the spectrum of a field, components meeting in Z, non-normal C. There are no new nodes and no duplicate (rg for 05K0, integral models, finite étale/integral/shrink; the r1 compactification node is only for curves over k=k̄, and lem-trf-finite-base-splits-etale is a different statement). Batch 5: lem-trf-reduced-scheme-image is the generic Stacks lemma 056B, not part of the trace-formula or Poincaré-duality proofs. Its 20-node closure contains no other sec-trace-formula or sec-poincare-duality node, and the proof does not really need it, so it is accepted. I accept all 20 declared tool_uses as generic scheme and topology lemmas."
  }
 }
