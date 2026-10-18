@@ -1,0 +1,109 @@
+{
+ "id": "def-sp-reduction-direct-image-comparison",
+ "kind": "definition",
+ "title": "Canonical compact-support coefficient comparison and normalized open coordinates",
+ "status": "split",
+ "statement": "Let $A,B$ be finite commutative unital rings and $\\varphi:A\\to B$ a unital ring homomorphism. For schemes use the ordinary uncompleted constant-ring module derived categories of [def-weil-pbc-proetale-modules] and scalar extension $T_T^{A,B}=(-)\\otimes^L_{A_T}B_T$ of [det-sp-scalar-extension-functor]. All geometric pullbacks, direct images, and adjunctions are those of [def-weil-pbc-proetale-operations], with canonical constant-ring comparisons. For a scheme map $q:T\\to V$, define $R q_{*,A}$ by that normalized derived direct image, the canonical tensor/pullback isomorphism $q_B^*T_V^{A,B}\\simeq T_T^{A,B}q_A^*$ by the balanced K-flat tensor map, and $\\gamma_q:T_V^{A,B}Rq_{*,A}\\to Rq_{*,B}T_T^{A,B}$ as its mate: its transpose is $T_T^{A,B}(\\varepsilon^A)$ after that pullback isomorphism.\n\nFor each $q$ and $A$, let $e_q:q_{\\mathrm{tensor}}^*\\simeq q_{\\mathrm{intrinsic}}^*$ be the unique ordinary module-pullback isomorphism preserving the sectionwise units: for every module $F$, object $W$ of $V_{\\mathrm{proet}}$, and $s\\in F(W)$, $e_{q,F}(\\eta^{\\mathrm{tensor}}_F(s))=\\eta^{\\mathrm{intrinsic}}_F(s)$ as sections over $T\\times_V W$. This unique isomorphism exists; it identifies the two presentations of pullback, without choosing an arbitrary natural isomorphism.\n\nFor an open immersion $j:X\\hookrightarrow Z$, let $j_!^A$ be the sectionwise sheafified extension by zero of [def-weil-extension-by-zero]. Also use its normalized left-adjoint presentation $J_j^A\\dashv j_A^*$. Define the ordinary comparison of these left adjoints by uniqueness after identifying their right adjoints through $e_j$, and descend it termwise to $r_j^A:j_!^A\\simeq J_j^A$. Define $\\beta_j:T_Z^{A,B}J_j^A\\simeq J_j^BT_X^{A,B}$ as the unique comparison of composite left adjoints whose right-adjoint comparison is the canonical scalar-restriction/pullback identification. Define $e_j^{A,B}:T_Z^{A,B}j_!^A\\simeq j_!^BT_X^{A,B}$ by transporting $\\beta_j$ through $r_j^A,r_j^B$. For any $p:Z\\to Y$, define $F_{j,p,A}=Rp_{*,A}j_!^A$ and the natural transformation $b_{j,p}^{A,B}:T_Y^{A,B}F_{j,p,A}\\to F_{j,p,B}T_X^{A,B}$ by $b(M)=Rp_{*,B}(e_j^{A,B}(M))\\circ\\gamma_p(j_!^AM)$. These are actual functors and natural comparisons on the entire ambient categories; properness of $p$, boundedness, constructibility and finite Tor amplitude are not required to define them.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "det-sp-scalar-extension-functor",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+  "place": "Steps 1-2: counit-transpose proper comparison, normalized extension-by-zero tensor comparison, and b = Rp_*(e) gamma; unit normalization as in Stacks 03D3 and 00YV"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "reductionDirectImageComparison|openSquarePullbackModel|directImageScalarComparison",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-18",
+   "verdict": "No compact-support comparison package; existing underlying constructions are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar comparison for compactly supported derived direct image as counit mate followed by extension by zero tensor comparison",
+   "results": "[leansearch] OK 8 hit(s): ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit, ModuleCat.ExtendRestrictScalarsAdj.unit, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.expComparison, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-18",
+   "verdict": "No compact-support comparison package; existing underlying constructions are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical unit preserving comparison of module pullbacks and compact support scalar extension",
+   "results": "[leanfinder] OK 8 hit(s): CompactlySupportedContinuousMap.compLinearMap, ContDiffMapSupportedIn.structureMapLM_eq_of_scalars, ContDiffMapSupportedIn.structureMapCLM_eq_of_scalars, ContDiffMapSupportedIn.toBoundedContinuousFunctionLM_eq_of_scalars, ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM_eq_of_scalars, CompactlySupportedContinuousMap.instModuleOfContinuousConstSMul, CompactlySupportedContinuousMap.instIsScalarTower, TestFunction.coe_ofSupportedInCLM",
+   "date": "2026-10-18",
+   "verdict": "No compact-support comparison package; existing underlying constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg reductionDirectImageComparison|openSquarePullbackModel|directImageScalarComparison|reductionOpenModel in WeilConjectures and lean/Sheaf; rg -l same declarations in dag/nodes; blueprint_refs.py search pullback model",
+   "results": "No upstream WeilConjectures hits. Sheaf hits: DirectImageScalarExchange.lean:92 directImageScalarComparison; ProEtaleConstantOpenSquareExchange.lean:39 openSquarePullbackModel_existsUnique and :52 openSquarePullbackModel. The DAG records those under exchange theorem nodes, not a definition node for the comparison package. blueprint_refs: 0 blueprint nodes match pullback model. No duplicate construction is introduced: this module publicly imports those exact declarations.",
+   "date": "2026-10-18",
+   "verdict": "The required definition node is absent; reuse published constituents and move the four item helpers here."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-reduction-direct-image",
+  "date": "2026-10-18",
+  "group": "N6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Steps 1-2: the canonical coefficient comparison before its invertibility is asserted",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ReductionDirectImageComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.reductionDirectImageComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.reductionOpenModel",
+   "AlgebraicGeometry.ProEtale.reductionOpenScalarIso",
+   "AlgebraicGeometry.ProEtale.reductionCompactSupport",
+   "AlgebraicGeometry.ProEtale.reductionDirectImageComparison"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ReductionDirectImageComparison.lean",
+  "statement": "def reductionDirectImageComparison {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) : reductionCompactSupport A j p ⋙ scalarExtensionFunctor φ Y ⟶ scalarExtensionFunctor φ X ⋙ reductionCompactSupport B j p",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Definition interface reexports the exact existing direct-image scalar mate, open extension/scalar isomorphism, and uniquely unit-normalized pullback model, including its existsUnique characterization; none is copied. The four reduction helpers are moved out of the item module into this owning module. No exchange theorem conclusion is used, and no new postponed theorem is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e6d6eda8",
+  "group": "N6",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e6d6eda8",
+  "group": "N6",
+  "result": "pass",
+  "note": "Re-delivery fixes R1-R3. R1: new definition node def-sp-reduction-direct-image-comparison owns ReductionDirectImageComparison.lean; the four helpers moved unchanged (diffed), the existing gamma/openExtension/openScalarIso/openSquarePullbackModel are re-exported rather than copied, the node text states the full unit-preservation rule, the H12 fields pass, and the item no longer cites the exchange theorem nodes. R2: a real clause-by-clause second reading. R3: lean.notes keep the old shared declarations; the rebound IsConstructibleProEtaleModuleSheaf and Has(Finite)ProEtaleTorAmplitude are real and verbatim. Item: only lean and stmt_deps changed; theorem signatures unchanged and re-checked (hypotheses, Dctf for both endpoints, NatTrans naturality, alpha-cocycle orientation, edge cases, universes). Two sorry, no hollow definitions, docstrings and lines OK. nt_compile.py on both files: 6.1 s and 4.1 s, exit 0, no diagnostics. Observations only: openSquarePullbackModel_existsUnique (general A) is still a sorry under lem-trf-open-square-exchange, whose statement covers only A_{E,n}; the shared constructibility/Tor records keep switching encodings."
+ }
+}

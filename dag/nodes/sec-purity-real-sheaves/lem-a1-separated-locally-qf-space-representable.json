@@ -279,5 +279,23 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-63fb10a49 (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics against the Stacks source: 03XX with its full proof, 03XW, 03FY, 03X4/03X5 including the proof that gives (a)-(h), 03BM, 02WU and 0262. The item statement is unchanged and correct. Steps 1-8 follow the 03XX proof. I checked the hypotheses of every cited node: 01JJ (1)/(2a-c) via field points; base change of local quasi-finiteness to an open T_i; R affine because the diagonal pulls back to a closed immersion into the affine U x_T U; 03X4 (1)-(6) and 03X5 (7) from affineness, local quasi-finiteness and etaleness; u' over p' from (U')_{p'} mapping bijectively onto {u_j}; finiteness of s', t' worked out on module generators, then finite locally free; the 02WU hypotheses including the full restriction (h); and 03XW quasi-affineness via the identity map. There is no cycle: the closure of the cited nodes (329 nodes) does not contain the item. The four new nodes contain statements only and are faithful specializations of 03FY, 03XW, 03X5 and 03BM. Two of them add true extras: the 03XW node assumes V' is representable, which makes its hypothesis stronger, and the 03BM node adds surjectivity of U->M and the S-structure. None restates a clause of the item, and rg over the DAG found no duplicate. I accept the five declared tool_uses. Batch-5 check: def-trf-algebraic-space is a general definition and is already reached by batch 5 independently, via lem-a1-algebraic-space-fpqc-sheaf. The three lem-trf lemmas (02X2/041F, 02WW and 02WU) are foundations on algebraic spaces and on etale/fppf equivalence relations. Neither assumption gives them, and they are not steps of the trace-formula or Poincare-duality argument: their 323-node closure has no thm-trf, sk-*, nt-* or trace node, and it adds only 23 Stacks Spaces/Descent lemmas to the batch-5 closure. I therefore judge these citations to be outside the assumed statements. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedLocallyQuasiFiniteSpaceRepresentable",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_scheme_of_separated_locally_quasi_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedLocallyQuasiFiniteSpaceRepresentable.lean",
+  "statement": "theorem exists_scheme_of_separated_locally_quasi_finite {S : Scheme.{u}} (T : Over S) (E : AlgebraicSpace S) (f : E.obj.obj ⟶ yoneda.obj T) (hqf : ∀ (V : Over S) (a : yoneda.obj V ⟶ E.obj.obj), IsEtale a → Scheme.Hom.IsLocallyQuasiFinite (yoneda.preimage (a ≫ f)).left) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal f)) : ∃ (Z : Over S) (g : Z ⟶ T) (e : yoneda.obj Z ≅ E.obj.obj), e.hom ≫ f = yoneda.map g",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-413f85fe2",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read the node, its 5 stmt_deps, Stacks 03XX (spaces-morphisms.tex l.10589), the module and the report. Every hypothesis and conclusion clause matches: chartwise IsEtale→Stacks IsLocallyQuasiFinite of yoneda.preimage(a≫f).left; IsRepresentableWith IsClosedImmersion on pullback.diagonal f over h_T; ∃ Z, g:Z⟶T, e:h_Z≅E with e.hom≫f=yoneda.map g. No extra assumptions or universe restriction. Edge cases: empty E, empty T, non-quasi-compact case, and T=S matches the citer exists_scheme_of_separated_etale. No duplicate in Sheaf/Mathlib. Node diff vs side clone is lean-only; statement is verbatim; source and blueprint docstrings and the 8-step proof docstring are present; proof is only sorry; Worker report and Second reading sections are present. nt_compile.py --json: rc=0, clean, 2.6 s. No findings."
  }
 }

@@ -714,10 +714,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-42dbb0dd7",
-  "group": "NM",
-  "result": "pass",
-  "note": "Re-delivery after return 070596bbadf3; the Lean module is byte-identical to that reviewed version. H2 repaired by the allowed §1(B) alternative: def-weil-exceptional-inverse-image is now existing:true, recording Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients System (statement verbatim with line 812) plus FieldStage/RingSystem/FieldSystem/Operation/Comparison etc., and keeps sfFiniteExceptionalAt (public import). The item dropped the theorem node lem-sf-constructible-exceptional-adjunction-coefficients from stmt_deps. System fixes the rational G (finiteRight étale-origin, rationalLeft = actual compact support, scalar normalizations), so it is not an arbitrary choice. Mechanical finding: lem-weil-constant-coefficient-objects-constructible is a genuine dependency, since coefficientUnit uses (integralConstantCoefficient_constructible …).2.1, the sfIntegralConstructible membership needed to type Ra^!E; PASS on that point. Re-read all clauses (internal Hom closure and adjunction with completed-tensor evaluation, D=RHom(-,ω) with evaluation, Rf^!≅D_X f* D_Y, Rf_!⊣Rf^! with unit/counit, ω≅Ra^!E, finite-scalar Hom and exceptional mate squares): all conclusions, no extra hypotheses, one universe u. Edge cases ok. lean.statement verbatim; node statement unchanged. nt_compile clean in 21.1 s with no diagnostics. Not blocking: the def and theorem nodes share a module that has a proof-only non-public import with a DAG back-edge (det-sp-unique-adjoint-coefficients), no Lean cycle; docstrings cite the main-20261015 source copy; the second reading is the author's own."
+  "reviewer": "NT-stage2-cc-88cfa2179",
+  "group": "NC",
+  "result": "fix",
+  "note": "Delivery re-confirms NM's landed and reviewed statement. Compared with the side clone it changes only one module-docstring sentence and lean.by NM->NC (lean.by=NC is required by stage2_delivery.py). lean.statement is verbatim the signature; all 20 node proof steps appear verbatim in the theorem docstring; all 17 lean.declarations exist; all stmt_deps are recorded and publicly imported. Clauses checked against Conclusion: HomIdentification (closure, tensorLeft⊣homRight, completed-tensor evaluation, duality D=RHom(-,ω) with evaluation), ExceptionalIdentification (Rf^!≅D f* D, Rf_!⊣Rf^! with unit/counit equations), DualizingIdentification (ω≅Ra^!E), ScalarCompatibility and HomScalarCompatibility on X and Y. No extra hypotheses, one universe u, edge cases covered. nt_compile --json clean (15.7-16.5 s delivered, 15.3 s fixed, no diagnostics). FIX: (1) H11, NC's second reading was generic; a labelled clause-by-clause completion is appended to the report fix with NC's text kept; (2) the report wrongly said the module was byte-unchanged; the fixed module drops the stray process sentence, is byte-identical to the landed module and compiles clean. Fixes: fixes/RationalOperations.lean, fixes/lem-coef-rational-operations.report.md."
  },
  "lean": {
   "module": "Sheaf.SixFunctors.RationalOperations",
@@ -744,7 +744,7 @@
   "file": "lean/Sheaf/SixFunctors/RationalOperations.lean",
   "statement": "theorem coef_rational_operations (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X Y : Scheme.{u}) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : RationalOperations.Conclusion D l hl Ω X Y f c",
   "branch": "newtargets-dag",
-  "by": "NM",
+  "by": "NC",
   "date": "2026-10-18",
   "existing": false,
   "note": "Identifies the recorded full rational internal Hom and etale-origin coefficient-system exceptional functors, retaining completed integral evaluation, actual adjunction units/counits and both finite-scalar squares. Section 1(B) repairs def-weil-exceptional-inverse-image to record the published integral/rational System and related definition records. Conclusion existentially asserts its own System; exists_system and its theorem node are not statement dependencies. The constant-coefficient theorem supplies the actual unit object membership proof."

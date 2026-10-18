@@ -129,23 +129,23 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-cad1f5abc",
-  "group": "Q04",
+  "reviewer": "NT-stage2-cc-1e6d6eda8",
+  "group": "N6",
   "result": "pass",
-  "note": "Checked every clause against the node and the source (proof Steps 1-6): field and primes, finite A with l^n = 0 (A = 0 allowed), separated finite-type f, s and f≫s, the same Compactification c on both sites, F_et and F_proet are the recorded Rg_*∘D(i_!) composites, nu^* is the left adjoint of proEtaleSiteComparisonModules, any given adjunction F_et ⊣ R, preservation hypothesis through isBoundedConstructible and hasTorAmplitudeIn. Conclusions: intrinsic pro-etale domain (bounded, IsConstructibleProEtaleFixedModuleSheaf on every H^i, all-module Tor), functorial etale origin E with α, H_K = E⋙R⋙nu_X^*, β on all of D^+, t equal to β^{-1}∘nu^*(ε)∘α exactly as Step 6, Hom bijection h ↦ G(h)≫t_K. Edge cases: A = 0, empty schemes, K = 0, a = b, universes not equated. Three §1(B) existing:true rebinds checked: torAmplitudeIn tests every sheaf with the derived tensor, the fixed-module constructibility matches the node, FiniteCoefficient lower shriek matches the node. Observation, not a fault: the shared pro-etale records flip back from the NC/Q91 coefficient interfaces; both forms are faithful and those modules stay landed. No hollow definitions, docstrings with source and blueprint, one sorry, lean.statement verbatim, report sections present (the second reading is an open self-check). nt_compile.py: module clean in 3.9 s; a control copy with a planted error reported it."
+  "note": "Re-delivery fixes R1-R3. R1: new definition node def-sp-reduction-direct-image-comparison owns ReductionDirectImageComparison.lean; the four helpers moved unchanged (diffed), the existing gamma/openExtension/openScalarIso/openSquarePullbackModel are re-exported rather than copied, the node text states the full unit-preservation rule, the H12 fields pass, and the item no longer cites the exchange theorem nodes. R2: a real clause-by-clause second reading. R3: lean.notes keep the old shared declarations; the rebound IsConstructibleProEtaleModuleSheaf and Has(Finite)ProEtaleTorAmplitude are real and verbatim. Item: only lean and stmt_deps changed; theorem signatures unchanged and re-checked (hypotheses, Dctf for both endpoints, NatTrans naturality, alpha-cocycle orientation, edge cases, universes). Two sorry, no hollow definitions, docstrings and lines OK. nt_compile.py on both files: 6.1 s and 4.1 s, exit 0, no diagnostics. Observations only: openSquarePullbackModel_existsUnique (general A) is still a sorry under lem-trf-open-square-exchange, whose statement covers only A_{E,n}; the shared constructibility/Tor records keep switching encodings."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude",
-  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude",
+  "declaration": "AlgebraicGeometry.Scheme.HasProEtaleTorAmplitude",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn",
-   "AlgebraicGeometry.ProEtale.DerivedCategory.finiteTorAmplitude"
+   "AlgebraicGeometry.Scheme.HasProEtaleTorAmplitude",
+   "AlgebraicGeometry.Scheme.HasFiniteProEtaleTorAmplitude"
   ],
-  "statement": "abbrev torAmplitudeIn (a b : ℤ) :\n    ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))",
-  "note": "Section 1(B): the recorded predicate requires ConstantCompletion.D on a coefficient-sized AsSmall site, not the ordinary fixed-ring module-sheaf derived category used by compact support. The existing upstream predicate is exactly Tor amplitude in the fixed-coefficient presentation: it uses the canonical derived tensor and tests every pro-etale module sheaf in degree zero. Specialize the coefficient category A to ModuleCat of the finite commutative ring; ordered intervals are explicitly required in the consumer. No classical-test restriction, etale origin, or equality of site universes is introduced.",
-  "branch": "slopmaster2",
-  "by": "Q04",
+  "statement": "def HasProEtaleTorAmplitude (Y : Scheme.{t}) (A : Type t) [CommRing A]\n    (K : proEtaleDerivedCategory Y A) (a b : ℤ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "N6",
   "date": "2026-10-18",
-  "existing": true
+  "existing": true,
+  "note": "Section 1(B): the recorded fixed-ModuleCat Tor predicate is not directly applicable to the intrinsic SheafOfModules derived objects of the scalar-extension and compact-support constructions. Rebind to the existing exact intrinsic predicate: an ordered common interval, testing derived tensor with every module sheaf in degree zero on all K-flat resolutions. Its finite-amplitude declaration existentially quantifies that common interval. There is no completion, test-sheaf restriction, added Tor bound, or equality of site object and morphism universes; the fixed-module predicate remains available upstream. Compatibility: the old declarations AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn and finiteTorAmplitude remain available with their unchanged signatures in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude; neither that source module nor any existing consumer is edited or removed by this delivery."
  }
 }

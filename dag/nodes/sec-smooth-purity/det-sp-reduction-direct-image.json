@@ -19,7 +19,8 @@
   "def-weil-proetale-tor-amplitude",
   "det-sp-scalar-extension-functor",
   "def-weil-pbc-proetale-operations",
-  "def-weil-extension-by-zero"
+  "def-weil-extension-by-zero",
+  "def-sp-reduction-direct-image-comparison"
  ],
  "proof": [
   {
@@ -409,5 +410,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ReductionDirectImage",
+  "declaration": "AlgebraicGeometry.ProEtale.reductionDirectImage_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.reductionDirectImage_isIso",
+   "AlgebraicGeometry.ProEtale.reductionDirectImage_cocycle"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ReductionDirectImage.lean",
+  "statement": "theorem reductionDirectImage_isIso (ℓ pchar : ℕ) [Fact ℓ.Prime] (hp : 0 < pchar) (hℓ : pchar ≠ ℓ) (k : Type u) [Field k] [CharP k pchar] {X Z Y : Scheme.{u}} [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (j : X ⟶ Z) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] (p : Z ⟶ Y) [IsProper p] [p.IsOver (Spec (.of k))] (hf : j ≫ p = f) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0) (hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B) (M : proEtaleDerivedCategory X A) (hbounded : Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) i).obj M)}) (hconstructible : ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf X A ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) i).obj M)) (hTor : HasFiniteProEtaleTorAmplitude X A M) : IsIso ((reductionDirectImageComparison φ j p).app M) ∧ (Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y B)) i).obj ((scalarExtensionFunctor φ Y).obj ((reductionCompactSupport A j p).obj M)))}) ∧ (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf Y B ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y B)) i).obj ((scalarExtensionFunctor φ Y).obj ((reductionCompactSupport A j p).obj M)))) ∧ HasFiniteProEtaleTorAmplitude Y B ((scalarExtensionFunctor φ Y).obj ((reductionCompactSupport A j p).obj M)) ∧ (Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y B)) i).obj ((reductionCompactSupport B j p).obj ((scalarExtensionFunctor φ X).obj M)))}) ∧ (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf Y B ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y B)) i).obj ((reductionCompactSupport B j p).obj ((scalarExtensionFunctor φ X).obj M)))) ∧ HasFiniteProEtaleTorAmplitude Y B ((reductionCompactSupport B j p).obj ((scalarExtensionFunctor φ X).obj M))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The main theorem states invertibility and bounded intrinsic constructibility with finite Tor amplitude for both endpoints. The actual comparison is a natural transformation formed from the published proper counit mate and open scalar isomorphism, transported through the unique unit-preserving identification with the recorded sheafified extension by zero. The coefficient cocycle uses precisely scalarExtensionFunctor_composition and is stated under the same standing and input hypotheses. All definition data are real constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e6d6eda8",
+  "group": "N6",
+  "result": "pass",
+  "note": "Re-delivery fixes R1-R3. R1: new definition node def-sp-reduction-direct-image-comparison owns ReductionDirectImageComparison.lean; the four helpers moved unchanged (diffed), the existing gamma/openExtension/openScalarIso/openSquarePullbackModel are re-exported rather than copied, the node text states the full unit-preservation rule, the H12 fields pass, and the item no longer cites the exchange theorem nodes. R2: a real clause-by-clause second reading. R3: lean.notes keep the old shared declarations; the rebound IsConstructibleProEtaleModuleSheaf and Has(Finite)ProEtaleTorAmplitude are real and verbatim. Item: only lean and stmt_deps changed; theorem signatures unchanged and re-checked (hypotheses, Dctf for both endpoints, NatTrans naturality, alpha-cocycle orientation, edge cases, universes). Two sorry, no hollow definitions, docstrings and lines OK. nt_compile.py on both files: 6.1 s and 4.1 s, exit 0, no diagnostics. Observations only: openSquarePullbackModel_existsUnique (general A) is still a sorry under lem-trf-open-square-exchange, whose statement covers only A_{E,n}; the shared constructibility/Tor records keep switching encodings."
  }
 }

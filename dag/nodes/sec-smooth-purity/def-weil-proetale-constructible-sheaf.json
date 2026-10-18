@@ -156,19 +156,22 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-cad1f5abc",
-  "group": "Q04",
+  "reviewer": "NT-stage2-cc-1e6d6eda8",
+  "group": "N6",
   "result": "pass",
-  "note": "Checked every clause against the node and the source (proof Steps 1-6): field and primes, finite A with l^n = 0 (A = 0 allowed), separated finite-type f, s and f≫s, the same Compactification c on both sites, F_et and F_proet are the recorded Rg_*∘D(i_!) composites, nu^* is the left adjoint of proEtaleSiteComparisonModules, any given adjunction F_et ⊣ R, preservation hypothesis through isBoundedConstructible and hasTorAmplitudeIn. Conclusions: intrinsic pro-etale domain (bounded, IsConstructibleProEtaleFixedModuleSheaf on every H^i, all-module Tor), functorial etale origin E with α, H_K = E⋙R⋙nu_X^*, β on all of D^+, t equal to β^{-1}∘nu^*(ε)∘α exactly as Step 6, Hom bijection h ↦ G(h)≫t_K. Edge cases: A = 0, empty schemes, K = 0, a = b, universes not equated. Three §1(B) existing:true rebinds checked: torAmplitudeIn tests every sheaf with the derived tensor, the fixed-module constructibility matches the node, FiniteCoefficient lower shriek matches the node. Observation, not a fault: the shared pro-etale records flip back from the NC/Q91 coefficient interfaces; both forms are faithful and those modules stay landed. No hollow definitions, docstrings with source and blueprint, one sorry, lean.statement verbatim, report sections present (the second reading is an open self-check). nt_compile.py: module clean in 3.9 s; a control copy with a planted error reported it."
+  "note": "Re-delivery fixes R1-R3. R1: new definition node def-sp-reduction-direct-image-comparison owns ReductionDirectImageComparison.lean; the four helpers moved unchanged (diffed), the existing gamma/openExtension/openScalarIso/openSquarePullbackModel are re-exported rather than copied, the node text states the full unit-preservation rule, the H12 fields pass, and the item no longer cites the exchange theorem nodes. R2: a real clause-by-clause second reading. R3: lean.notes keep the old shared declarations; the rebound IsConstructibleProEtaleModuleSheaf and Has(Finite)ProEtaleTorAmplitude are real and verbatim. Item: only lean and stmt_deps changed; theorem signatures unchanged and re-checked (hypotheses, Dctf for both endpoints, NatTrans naturality, alpha-cocycle orientation, edge cases, universes). Two sorry, no hollow definitions, docstrings and lines OK. nt_compile.py on both files: 6.1 s and 4.1 s, exit 0, no diagnostics. Observations only: openSquarePullbackModel_existsUnique (general A) is still a sorry under lem-trf-open-square-exchange, whose statement covers only A_{E,n}; the shared constructibility/Tor records keep switching encodings."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProEtaleFixedModuleConstructible",
-  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf",
-  "statement": "def IsConstructibleProEtaleFixedModuleSheaf (Y : Scheme.{u})\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop",
-  "note": "Section 1(B): the current record accepts pbcModules over adicLisseConstantRing and cannot be applied to the ordinary fixed-coefficient sheaves on which the compact-support functors act. Rebind to the already-published exact fixed-coefficient presentation: the same positive finite locally closed constructible partition, local constancy, and finite geometric stalks. This predicate is intrinsic and imposes no etale-origin assumption. The canonical associated-module-sheaf realization identifies this encoding with constant-ring module sheaves.",
+  "module": "Sheaf.Paper.ProEtaleConstructibleSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleModuleSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleModuleSheaf"
+  ],
+  "statement": "def IsConstructibleProEtaleModuleSheaf\n    (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]\n    (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q04",
+  "by": "N6",
   "date": "2026-10-18",
-  "existing": true
+  "existing": true,
+  "note": "Section 1(B): the recorded fixed-ModuleCat predicate cannot be applied directly to the ordinary intrinsic constant-ring modules used by scalarExtensionFunctor and the recorded extension by zero. Rebind to the already-published exact intrinsic formulation: the same positive finite constructible locally closed partition, local constancy and finite geometric stalks, with the canonical constant-section pullback. This is an existing definition of precisely this node, not a new constructibility condition or an etale-origin assumption; the fixed-module predicate remains available in its own module. Compatibility: the old declarations AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf remain available with their unchanged signatures in Sheaf.Paper.ProEtaleFixedModuleConstructible; neither that source module nor any existing consumer is edited or removed by this delivery."
  }
 }
