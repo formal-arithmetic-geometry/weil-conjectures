@@ -96,7 +96,15 @@ theorem continuousCoefficientDirectImageApp_naturality {X Y : Scheme.{u}}
       continuousCoefficientDirectImageApp f A V ≫
         ((Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj
           (latticeCoefficientSheaf X A)).obj.map g := by
-  sorry
+  apply CommRingCat.hom_ext
+  ext s : 1
+  apply ULift.ext
+  ext x
+  change s.down ((pullback.fst W.unop.hom f ≫ g.unop.left).base x) =
+    s.down ((((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).map g.unop).left ≫
+      pullback.fst V.unop.hom f).base x)
+  rw [MorphismProperty.Over.pullback_map_left, pullback.lift_fst]
+  rfl
 
 /-- Pull continuous functions back along the first projection of the base change.
 Source: Bhatt--Scholze, Definition 6.8.1; Stacks Tag 09A5
