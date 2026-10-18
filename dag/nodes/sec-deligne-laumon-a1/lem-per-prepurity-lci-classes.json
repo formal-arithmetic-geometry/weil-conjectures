@@ -13,18 +13,200 @@
   "thm-amb-etale-exceptional-adjoint",
   "def-weil-regular-scheme",
   "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism",
   "def-pc-integral-scheme",
   "def-weil-closed-immersion",
   "def-weil-pbc-regular-sequence",
   "def-sbc-smooth-morphisms",
   "def-weil-etale-morphism",
   "lem-per-regular-immersion-class-calculus",
-  "lem-per-ordinary-smooth-orientation"
+  "lem-per-ordinary-smooth-orientation",
+  "lem-asd-etale-finite-twist-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First supply global geometric factorizations. The trait is regular: at its closed point its dimension-one maximal ideal has one generator, and its generic local ring is a field. Every scheme in the statement is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Write a quasi-projective immersion as $T\\hookrightarrow V\\hookrightarrow\\mathbf P^N_S$, the first map closed and the second open, using the definition of immersion [def-weil-closed-immersion]. The standard projective charts [lem-weil-pbc-projective-space-twisting-sheaf-charts], base changed by [def-nagata-projective-space-base-change], are affine $N$-spaces. Thus [sbc-lem-affine-space-smooth, lem-weil-pbc-smooth-local-on-source, lem-weil-pbc-smooth-restrict-open-subschemes] show $V\\to S$ smooth of dimension $N$. Projective space is separated by [lemma-nagata-projective-space-base-change-proper], so $V\\to S$ is separated: the diagonal restricts to a closed subscheme on any source open. The same argument makes $U\\to S$ separated, and its base-changed diagonal makes $P\\to V$ separated below. For an $S$-map $f:T\\to U$, put $P=V\\times_SU$. The map $(i,f):T\\to P$ has closed composite $i$ with the separated projection $P\\to V$; it is closed by [lem-weil-pbc-closed-immersion-from-composite]. The projection $P\\to U$ is smooth by [lem-sbc-smooth-relative-dimension-permanence], and $P$ is regular by [lem-per-regular-lci-geometric-calculus]. Hence $(i,f)$ is regular by that same node. This is a global regular-closed/smooth factorization of $f$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "def-nagata-projective-space-base-change",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-closed-immersion-from-composite",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-per-regular-lci-geometric-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definitions 2.5.1--2.5.3; global factorization paragraph; Stacks 0E9J, 01NG, 01VA/01VB"
+   }
+  },
+  {
+   "text": "The pointwise formula in [lem-per-regular-lci-geometric-calculus] gives, for a factorization of $f:T\\to U$ and $t\\mapsto u$, $e_f=\\dim\\mathcal O_{T,t}-\\dim\\mathcal O_{U,u}+\\operatorname{trdeg}_{\\kappa(u)}\\kappa(t)$. It applies on arbitrary regular Noetherian schemes, not only the affine existence clause of that node. It proves factorization independence and local constancy of $e_f$. In particular $e_T$ is constant since $T$ is integral and therefore connected [def-pc-integral-scheme]. For $s=p_T(t)=p_U(u)$, subtract the formulas for $p_T$ and $p_U$ and use [lem-sbc-transcendence-degree-tower] for $\\kappa(s)\\to\\kappa(u)\\to\\kappa(t)$: the result is $e_f=e_T-e_U$. The same subtraction for three schemes gives $e_{hf}=e_f+e_h$. If $f$ is dominant generically finite etale, take their generic points: both local rings are fields, and their finite residue extension has transcendence degree zero, so $e_f=0$.",
+   "uses": [
+    "lem-per-regular-lci-geometric-calculus",
+    "def-pc-integral-scheme",
+    "lem-sbc-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definitions 2.5.1--2.5.3; first paragraph of Proposition 3.5.7 proof"
+   }
+  },
+  {
+   "text": "All maps just constructed are separated and finite type over Noetherian schemes, hence compactifiable by [thm-nagata-compactification]. Use the ordinary compact-support right adjoints [thm-amb-etale-exceptional-adjoint]. These right adjoints live on the unbounded ordinary categories, so the composition comparison $Rh_!Rf_!\\simeq R(hf)_!$ is taken there, from [lem-amb-unbounded-compact-support-comparisons]; on bounded-below inputs it restricts to that of [lem-amb-etale-compact-comparisons]. With [lem-cat-right-adjoint-composition] this gives $(hf)^!\\simeq f^!h^!$, with pasted counits. Put $a^?=a^!(-e_a)[-2e_a]$. The signed Tate lines and their inverse-image identifications are those of [lem-asd-etale-finite-twist-pullback]. For clarity the exceptional twist identification follows by adjunction: for an invertible line $L$ on the target, move $a^*L$ across Hom using its inverse, apply $Ra_!\\dashv a^!$, and move $L$ back. The projection formula needed in this Hom chain follows on a compactification from [lem-amb-proper-coproducts-projection] and the degreewise open-extension tensor identity (extension by zero has stalk either the given stalk or zero). Thus $a^!(M\\otimes L)\\simeq a^!M\\otimes a^*L$. Together with Step 2 this gives $f^?h^?\\simeq(hf)^?$. All these comparisons use pasted adjunctions; their associativity follows by taking the three Hom adjunctions in succession. Write $b\\star a=u^?(b)\\circ a$ for a class $a$ on $u$ and a class $b$ on the next map. Then $\\star$ is associative.",
+   "uses": [
+    "thm-nagata-compactification",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cat-right-adjoint-composition",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definitions 2.5.3 and 2.5.6; Stacks 0DV0 (composite adjunction), 0F7J (compact-support composition)"
+   }
+  },
+  {
+   "text": "For a factorization $f=pi$, put $a_i:A_T\\to i^?A_P$ equal to the $n=1$ supported Kummer class of [lem-per-regular-immersion-class-calculus], and $a_p:A_P\\to p^?A_U$ equal to the shifted diagonal/DNC orientation of [lem-per-ordinary-smooth-orientation]. Define $a_{p,i}=a_p\\star a_i$. This is a global morphism $A_T\\to f^?A_U$, since Step 1 provided a global factorization. Moving the twist-shift to the source gives $g_{p,i}:A_T(e_f)[2e_f]\\to f^!A_U$. The two mixed identities [lem-per-smooth-gysin-mixed-identities], specialized to $n=1$, apply to exactly these maps: its prime-power smooth orientation at $n=1$ is the same diagonal/DNC orientation, by the construction and normalization clauses of [lem-per-noetherian-prime-power-smooth-duality, lem-per-ordinary-smooth-orientation]. No immersion class is inverted in this construction.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus",
+    "lem-per-ordinary-smooth-orientation",
+    "lem-per-smooth-gysin-mixed-identities",
+    "lem-per-noetherian-prime-power-smooth-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 2.5.4; Lemmas 2.5.7--2.5.8, using the existing diagonal/DNC versions of their mixed identities"
+   }
+  },
+  {
+   "text": "Compare factorizations with $i=qi'$ and $p'=pq$, where $q:P'\\to P$ is smooth and separated. Form $X'=T\\times_PP'$ with projections $j:X'\\hookrightarrow P'$ and $q':X'\\to T$, and section $s:T\\to X'$ induced by $i'$. The geometric node [lem-per-regular-lci-geometric-calculus] makes $j$ regular (smooth maps are flat by [lem-pc-smooth-flat]) and $s$ regular, with $js=i'$. The mixed identities of [lem-per-smooth-gysin-mixed-identities] give $a_{q'}\\star a_s=1$ and $a_q\\star a_j=a_i\\star a_{q'}$. Immersion composition [lem-per-regular-immersion-class-calculus] now yields\n$$a_i=a_i\\star a_{q'}\\star a_s=a_q\\star a_j\\star a_s=a_q\\star a_{i'}.$$\nSmooth composition [lem-per-ordinary-smooth-orientation] gives $a_{p'}=a_p\\star a_q$, hence $a_{p,i}=a_{p',i'}$. This is an equality of the specified morphisms, so it proves independence in the dominated case.",
+   "uses": [
+    "lem-per-regular-lci-geometric-calculus",
+    "lem-per-smooth-gysin-mixed-identities",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-per-ordinary-smooth-orientation",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 2.5.5 proof, dominated-factorization diagram and the three displayed equalities"
+   }
+  },
+  {
+   "text": "For arbitrary global factorizations $T\\xrightarrow iP\\xrightarrow pU$ and $T\\xrightarrow{i'}P'\\xrightarrow{p'}U$, take $W=P\\times_UP'$. Both projections are smooth by [lem-sbc-smooth-relative-dimension-permanence], and $W$ is regular by [lem-per-regular-lci-geometric-calculus]. The map $k=(i,i'):T\\to W$ is closed by [lem-weil-pbc-closed-immersion-from-composite], applied to the separated projection $W\\to P$ and its closed composite $i$; it is regular by [lem-per-regular-lci-geometric-calculus]. Thus $k$ followed by $W\\to U$ is a global factorization dominating both given ones. Step 5 compares it with each. Consequently $a_f$ and $g_f$ are independent of all global smooth/regular choices. A local factorization computes the restriction of this same class by applying this comparison after restricting the global factorization; no gluing of morphisms in a derived category is required.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-per-regular-lci-geometric-calculus",
+    "lem-weil-pbc-closed-immersion-from-composite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 2.5.5 proof, reduction by the fibre product of the two smooth ambient schemes"
+   }
+  },
+  {
+   "text": "An identity immersion has Kummer class $1$, including codimension zero, by [lem-per-regular-immersion-class-calculus]. The identity smooth orientation is the dimension-zero etale comparison by [lem-per-ordinary-smooth-orientation]. Choosing one of these identity factors shows that $g_f$ specializes to the stated immersion class or smooth orientation. Both factor classes commute with open restriction by these same nodes. The exceptional restriction identification is [lem-amb-etale-adjoint-locality] for a source open, and [lem-amb-shriek-open-exchange-adjoint] for a target open. Restricting the defining composite therefore gives the composite of the restricted factors; Step 6 identifies it with the already constructed restricted class. Kummer signs agree because the immersion factors are the supported Kummer classes and the smooth factors have the diagonal/DNC normalization throughout.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus",
+    "lem-per-ordinary-smooth-orientation",
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-shriek-open-exchange-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 2.5.11; open restriction in Definitions 2.3.1 and 2.5.4"
+   }
+  },
+  {
+   "text": "For composition $T\\xrightarrow fU\\xrightarrow hZ$, choose $U\\xrightarrow jQ\\xrightarrow qZ$ with $j$ regular closed and $q$ smooth. Choose an immersion $T\\hookrightarrow\\mathbf P^N_S$ as in Step 1. The closed graph on the open ambient of Step 1 gives an immersion $T\\hookrightarrow\\mathbf P^N_U$. Choose an open $V\\subseteq\\mathbf P^N_U$ in which $T$ is closed. Since $\\mathbf P^N_U$ is closed in $\\mathbf P^N_Q$, this open is the inverse image of an open $W\\subseteq\\mathbf P^N_Q$; this is the definition of the subspace topology for a closed immersion. Let $i:T\\hookrightarrow V$, $j':V\\hookrightarrow W$, $p:V\\to U$ and $p':W\\to Q$. The standard charts and smooth restriction of Step 1 show $p,p'$ smooth, and the square with $j,j'$ is Cartesian. The geometric node [lem-per-regular-lci-geometric-calculus] makes $j'$ regular by flat base change, $i$ regular since its ambient scheme is smooth over regular $U$, and $j'i$ regular by composition. Thus $T\\xrightarrow{j'i}W\\xrightarrow{qp'}Z$ is a permitted factorization of $hf$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "def-nagata-projective-space-base-change",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "def-weil-closed-immersion",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-per-regular-lci-geometric-calculus",
+    "lem-weil-pbc-closed-immersion-from-composite",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 2.5.12 proof, projective-ambient diagram; use an ambient open so both immersion factors are closed"
+   }
+  },
+  {
+   "text": "Using the factorization of Step 8, immersion composition [lem-per-regular-immersion-class-calculus], smooth composition [lem-per-ordinary-smooth-orientation], and the Cartesian mixed identity [lem-per-smooth-gysin-mixed-identities] give\n$$a_{hf}=(a_q\\star a_{p'})\\star(a_{j'}\\star a_i)=a_q\\star(a_j\\star a_p)\\star a_i=(a_q\\star a_j)\\star(a_p\\star a_i)=a_h\\star a_f.$$\nHere the middle equality uses $a_{p'}\\star a_{j'}=a_j\\star a_p$, with the regular immersion $j$ and smooth map $p'$. Step 6 allows these particular factorizations. Since $e_{hf}=e_f+e_h$, moving the twist-shifts to the source gives precisely $g_{hf}=f^!(g_h)\\circ g_f(e_h)[2e_h]$.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus",
+    "lem-per-ordinary-smooth-orientation",
+    "lem-per-smooth-gysin-mixed-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 2.5.12 proof, its last three displayed equalities"
+   }
+  },
+  {
+   "text": "Apply the construction to $p_T$ to obtain $c_T=a_{p_T}:A_T\\to K_T$. For any $f:T\\to U$, Step 2 and the pasted transitivity of Step 3 identify $f^?K_U=K_T$ and Step 9 gives $c_T=f^?(c_U)\\circ a_f$. If $f$ is dominant generically finite etale, $e_f=0$, so $f^?=f^!$ and $a_f=g_f$. The result is $f^!K_U\\simeq K_T$ and $c_T=f^!(c_U)\\circ g_f$, as claimed. These identities only use the classes, not absolute-purity isomorphisms. In particular a scheme supported on the closed point is allowed: at its generic point the Step 2 formula is $e_T=\\operatorname{trdeg}_{\\kappa(s)}\\kappa(\\eta_T)-1$, so for $T=s$ it gives $e_T=-1$, not zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 3.5.4 and first paragraph of Proposition 3.5.7 proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-cat-right-adjoint-composition",
+  "lem-pc-smooth-flat",
+  "lem-per-noetherian-prime-power-smooth-duality",
+  "lem-per-ordinary-smooth-orientation",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-per-regular-lci-geometric-calculus",
+  "lem-per-smooth-gysin-mixed-identities",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-transcendence-degree-tower",
+  "lem-weil-pbc-closed-immersion-from-composite",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sbc-lem-affine-space-smooth",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Definitions 2.5.1--2.5.6, proof of Theorem 2.5.5, Definition 2.5.11 and proof of Theorem 2.5.12; Definition 3.5.4 and first paragraph of Proposition 3.5.7. The mixed identities are the existing diagonal/DNC versions, not the source trace route."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +249,45 @@
    "results": "Actual recorded hits: ",
    "date": "2026-10-18",
    "verdict": "no match: no relevant declaration; any finestTopologySingle hit is a substring collision"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale Gysin fundamental classes of smoothable local complete intersection maps are independent of the smooth regular factorization and compose without absolute purity",
+   "results": "Actual logged hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.of_comp, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-19",
+   "verdict": "no match: returned smooth/etale geometry or standard-etale presentations, with no ordinary-etale Gysin class; the finestTopologySingle hits are substring collisions"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|fundamentalClass|fundamental_class|smoothable",
+   "results": "Actual logged hits: Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: returned smooth/etale geometry or standard-etale presentations, with no ordinary-etale Gysin class; the finestTopologySingle hits are substring collisions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "Actual logged hits: CategoryTheory.Sheaf.finestTopologySingle",
+   "date": "2026-10-19",
+   "verdict": "no match: returned smooth/etale geometry or standard-etale presentations, with no ordinary-etale Gysin class; the finestTopologySingle hits are substring collisions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale Gysin class is independent of smooth regular factorization before absolute purity",
+   "results": "Actual logged hits: RingHom.IsStandardSmooth.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth",
+   "date": "2026-10-19",
+   "verdict": "no match: returned smooth/etale geometry or standard-etale presentations, with no ordinary-etale Gysin class; the finestTopologySingle hits are substring collisions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer normalized etale local complete intersection fundamental class with transitive Gysin maps on regular schemes over a discrete valuation ring",
+   "results": "Actual logged hits: StandardEtalePair.hasMap_X, StandardEtalePair, StandardEtalePresentation, StandardEtalePresentation.hasMap, StandardEtalePresentation.P, StandardEtalePresentation.toPresentation_σ', Algebra.IsStandardEtale, Algebra.etaleLocus",
+   "date": "2026-10-19",
+   "verdict": "no match: returned smooth/etale geometry or standard-etale presentations, with no ordinary-etale Gysin class; the finestTopologySingle hits are substring collisions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-punctual-purity-proper-degree-descent",
@@ -95,5 +312,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prepurity-lci-classes",
+  "worker": "stage1",
+  "summary": "Constructed the prepurity classes globally, proved factorization independence by the smooth-pullback/section comparison, and expanded the projective-ambient composition diagram. Reused the no-purity prime-power mixed identities and the geometric calculus; no new nodes or absolute-purity input. Audited all statements and coefficients, signed virtual dimensions and closed-fibre cases. Removed the unused proper-morphism statement dependency and supplied the actual signed-twist interface.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (regular finite-torsion duality input), via proper-degree descent: the prepurity construction and transitivity in ILO XVI 2.5.4--2.5.12 needed before Proposition 3.5.7.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-amb-shriek-open-exchange-adjoint",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic ordinary-etale compact-support formalism: Step 3 needs the composition comparison on the unbounded categories on which thm-amb-etale-exceptional-adjoint constructs the right adjoints, to take adjoints of it; no node of the perverse unit gives it."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-cat-right-adjoint-composition",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic smooth-flatness geometry needed for flat pullback of regular immersions; no change to the ILO XVI 2.5 route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-sbc-transcendence-degree-tower",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-from-composite",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic scheme geometry, field-dimension arithmetic or ordinary-etale adjunction tool used with exactly its stated hypotheses; it supplies infrastructure for the ILO XVI 2.5 factorization argument, not a replacement for the perverse unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-cat-right-adjoint-composition",
+  "lem-pc-smooth-flat",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-transcendence-degree-tower",
+  "lem-weil-pbc-closed-immersion-from-composite",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sbc-lem-affine-space-smooth",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-5c22c3ff5",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-5c22c3ff5 (reviewer sub-agent of L); spot-checked: Read ILO XVI 2.5.1–2.5.12 (pp.238–241) and 3.5.4–3.5.8 (pp.248–250), the item, and every cited statement. The statement is byte-identical to the Q41 base, so nothing is weakened. Removing the proper-morphism stmt_dep and adding lem-asd-etale-finite-twist-pullback (it defines the negative twists) is correct. No new nodes, no cycles, no SGA. Checks by step: Step 1, the global P=V×_SU factorization (closed-from-composite with a separated V-projection, regular ambient). Step 2, the dimension formula, which gives e_f=e_T−e_U, e=−1 at the closed point and e_f=0 at generic points. Steps 5–6 match ILO 2.5.5: the section identity, the Cartesian mixed identity and immersion composition give a_i=a_q⋆a_{i'}, and W=P×_UP' dominates both factorizations. Step 4: at n=1 the prime-power orientation is the same three-factor DNC construction as lem-per-ordinary-smooth-orientation. Steps 8–9 match the ILO 2.5.12 diagram (V=W×_QU is Cartesian); I re-derived the twist bookkeeping for g_{hf}=f^!(g_h)∘g_f(e_h)[2e_h]. Step 10 is elementary. One fault, C4 in Step 3: f^! is the right adjoint on the unbounded categories, but lem-amb-etale-compact-comparisons gives Rh_!Rf_!≅R(hf)_! only on D^+. The fix adds lem-amb-unbounded-compact-support-comparisons (to the step, proof_deps and tool_uses); that comparison restricts on bounded-below inputs to the D^+ one. Duplicate check: the regular/prime-power/absolute Gysin nodes assume affine excellent schemes and assert isomorphisms, so none is a duplicate. Batch 5: the cut closure (stopping at nt-assume, sk-thm-trace-transport, trf/pod chapters and the batch-4 targets) is unchanged, 15271 nodes with 0 new nodes and 0 new trf/pod hits, and all four flagged nodes are already in it. The flagged trf/pod nodes are generic tools, not steps of the trace-formula or Poincaré-duality proofs: lisse-module algebra, affine translation trace, the regular-sequence dimension formula and DNC section deformation. All are accepted, as are the declared tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
