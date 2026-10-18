@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1261**, closure **285**, holes in definitions **13**, definitions with undetermined data **28** (closure **8**).
+Holes now: library **1259**, closure **283**, holes in definitions **13**, definitions with undetermined data **28** (closure **8**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -55,23 +55,23 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1084 | 195 |
+| Sheaf | 1082 | 193 |
 | WeilConjectures | 177 | 90 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1680 | 746 | 934 | 734 | 18 |
-| 660345513 (Application of proof-dependency imports) | library | 1676 | 744 | 932 | 680 | 18 |
-| 660345513 (Application of proof-dependency imports) | closure | 1434 | 174 | 1260 | 604 | 1 |
+| 889327369 (Queue at the start of stage 3) | library | 1680 | 744 | 936 | 734 | 18 |
+| 660345513 (Application of proof-dependency imports) | library | 1676 | 742 | 934 | 680 | 18 |
+| 660345513 (Application of proof-dependency imports) | closure | 1434 | 172 | 1262 | 604 | 1 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3812 |
+| proved | 3813 |
 | decomposed | 52 |
 | moved | 4065 |
-| pruned | 136 |
+| pruned | 137 |
 | other | 631 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
@@ -79,14 +79,14 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
-| A2 | 133 | 131 | 100 | 31 | 70/133 (52.6%) |
+| A2 | 134 | 132 | 100 | 32 | 70/134 (52.2%) |
 | A3 | 135 | 131 | 85 | 46 | 59/135 (43.7%) |
 | A4 | 84 | 89 | 54 | 35 | 41/84 (48.8%) |
 | B2 | 136 | 142 | 88 | 54 | 55/136 (40.4%) |
 | B3 | 158 | 165 | 94 | 71 | 65/158 (41.1%) |
 | B4 | 77 | 79 | 50 | 29 | 35/77 (45.5%) |
 | C1 | 151 | 155 | 114 | 41 | 76/151 (50.3%) |
-| C2 | 128 | 123 | 86 | 37 | 59/128 (46.1%) |
+| C2 | 129 | 123 | 86 | 37 | 59/129 (45.7%) |
 | C3 | 123 | 131 | 82 | 49 | 57/123 (46.3%) |
 | C4 | 67 | 67 | 35 | 32 | 23/67 (34.3%) |
 | D2 | 149 | 147 | 92 | 55 | 63/149 (42.3%) |
