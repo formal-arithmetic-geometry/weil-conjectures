@@ -17,9 +17,132 @@
   "def-weil-residue-field",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The dimension assertion follows by the dimension-formula argument of Stacks Tag 02JW. $X$ is excellent, hence universally catenary [def-exc-excellent-ring], and so is $Y$, being of finite type over $X$ [lem-exc-finite-type-localization-excellent]. By [lem-per-immediate-specialization-criterion], on both schemes an immediate specialization $y'\\rightsquigarrow y$ in the geometric sense of [def-per-potential-dualizing] is exactly a specialization with $\\dim\\mathcal O_{\\overline{\\{y'\\}},y}=1$; so it suffices to prove $\\delta_Y(y')=\\delta_Y(y)+1$ for these, and $\\delta_X$ satisfies the same equation for the analogous specializations of $X$. For such $y'\\rightsquigarrow y$, restrict to affine neighbourhoods, then to the reduced closures of $y'$ and $f(y')$. These are integral affine schemes given by an inclusion $R\\subset B$ of finite-type domains with $R$ universally catenary, by [def-exc-excellent-ring, lem-exc-finite-type-localization-excellent]. Write $s'=f(y')$, $s=f(y)$. The height equality of [lem-exc-dimension-formula-universally-catenary-finite-type-domain] gives\n$$\\operatorname{trdeg}_{\\kappa(s')}\\kappa(y')-\\operatorname{trdeg}_{\\kappa(s)}\\kappa(y)=\\dim\\mathcal O_{\\overline{\\{y'\\}},y}-\\dim\\mathcal O_{\\overline{\\{s'\\}},s}.$$\nThe first local dimension is $1$. The closure of $s'$ is catenary, so a saturated chain from $s'$ to $s$ has length equal to the second local dimension; each of its steps has one-dimensional local ring of the closure, so the equations for $\\delta_X$ add along this chain. Hence $\\delta_Y(y')-\\delta_Y(y)=1$. All residue extensions have finite transcendence degree because $f$ is finite type. This proves the asserted integer-valued dimension function.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-immediate-specialization-criterion",
+    "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "def-per-potential-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JW, lemma-dimension-function-propagates (morphisms.tex), proof using Tag 02IJ; Zariski versus etale immediate specializations as in ILO Expose XIV, Proposition 2.1.4"
+   }
+  },
+  {
+   "text": "We first construct the pinning for any putative $K$. Fix $y\\in Y$, $x=f(y)$ and $d_y=\\operatorname{trdeg}_{\\kappa(x)}\\kappa(y)$. By [lem-per-exceptional-costalk-calculus] it suffices to work on the fibre $F=Y_x$ and to pin $\\pi^!R\\Gamma_xK$ at $y$. The reduced closure of $y$ in this fibre has a nonempty regular affine open $U$ containing its generic point: the regular locus is open by the J-2 clause of [def-exc-excellent-ring], and the generic local ring of an integral scheme is its function field. Excellence of this finite-type fibre and of its affine quotients is [lem-exc-finite-type-localization-excellent]. Write $j:U\\to F$, $q:U\\to\\operatorname{Spec}\\kappa(x)$. These are a locally closed immersion and a morphism between regular affine schemes. The virtual dimension of $q$ is $d_y$. Using [lem-per-regular-gysin-calculus] and the given $p_x$, take the composite\n$$\\Lambda_U(\\delta_X(x)+d_y)[2\\delta_X(x)+2d_y]\\xrightarrow{\\operatorname{Cl}_q}q^!\\Lambda(\\delta_X(x))[2\\delta_X(x)]\\xrightarrow{q^!(p_x^{-1})}q^!R\\Gamma_xK\\cong j^!\\pi^!R\\Gamma_xK.$$\nIts generic restriction is an isomorphism with target $R\\Gamma_y(f^!K)$ by the costalk comparison; define $p_y^f$ to be its inverse. This pins the actual adjoint object, without selecting another dualizing complex.",
+   "uses": [
+    "lem-per-exceptional-costalk-calculus",
+    "def-exc-excellent-ring",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-regular-gysin-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 4.4.1, first paragraph and displayed Gysin construction"
+   }
+  },
+  {
+   "text": "Two choices of $U$ have a common nonempty affine open in their intersection containing $y$. Open-restriction compatibility of $\\operatorname{Cl}_q$ in [lem-per-regular-gysin-calculus] and of the comparison in [lem-per-exceptional-costalk-calculus] identifies the two displayed composites there. Their generic restrictions, hence $p_y^f$, are equal. The same calculation on a smaller open chart in $Y$ or $X$ gives its restriction compatibility. Thus the pinnings are globally defined and can be tested in any affine neighbourhood of an immediate specialization.",
+   "uses": [
+    "lem-per-regular-gysin-calculus",
+    "lem-per-exceptional-costalk-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 4.4.1, independence of the regular open"
+   }
+  },
+  {
+   "text": "For composition, let $Z\\xrightarrow{g}Y\\xrightarrow{f}X$ and fix $z\\mapsto y\\mapsto x$. Let $C_y$ and $C_z$ be the reduced closures of $y$ in $Y_x$ and of $z$ in $Z_x$. Since $g(z)=y$ and $C_z$ is reduced, $g$ maps $C_z$ into $C_y$. Take $U\\subset C_y$ as in Step 2, with $q:U\\to\\operatorname{Spec}\\kappa(x)$. The regular locus of $C_z$ is open by J-2 [def-exc-excellent-ring, lem-exc-finite-type-localization-excellent], so we may choose a regular affine open $W\\subset C_z$ containing $z$ inside $g^{-1}(U)$; write $r:W\\to U$. Then $qr$ is a Step 2 model for $(fg)^!K$ at $z$. Since $U\\to Y$ is a monomorphism, $W_\\eta=W\\times_U\\operatorname{Spec}\\kappa(y)=W\\times_Y\\operatorname{Spec}\\kappa(y)$ is a reduced irreducible locally closed subscheme of the fibre of $g$ over $y$ with generic point $z$, hence an open of the reduced closure of $z$ there; it is affine, regular (a localization of $W$) and of finite type over $\\kappa(y)$. So $s=r_\\eta:W_\\eta\\to\\operatorname{Spec}\\kappa(y)$ is a Step 2 model for $g^!(f^!K)$ at $z$, and by the localization clause of [lem-per-regular-gysin-calculus] $\\operatorname{Cl}_s$ is the restriction of $\\operatorname{Cl}_r$. By the composition clause, $\\operatorname{Cl}_{qr}=r^!(\\operatorname{Cl}_q)\\circ\\operatorname{Cl}_r(d_{y/x})[2d_{y/x}]$. Restricting $r^!$ to the generic fibre of $U$ is $s^!$ of the generic restriction [lem-per-exceptional-costalk-calculus], so at $z$ the successive inverse pinning $\\operatorname{Cl}_s\\circ s^!(\\text{inverse of }p^f_y)$ is the generic restriction of $\\operatorname{Cl}_r\\circ r^!(\\operatorname{Cl}_q\\circ q^!(p_x^{-1}))$, which equals that of $\\operatorname{Cl}_{qr}\\circ(qr)^!(p_x^{-1})$, the inverse of the $(fg)$-pinning. The twist exponents add by [lem-exc-domain-transcendence-degree-tower]. Step 3 removes dependence on $U$ and $W$. Transitivity is the mate of compact-support composition [lem-amb-etale-compact-comparisons] (compose the Hom bijections of the adjunctions).",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-regular-gysin-calculus",
+    "lem-per-exceptional-costalk-calculus",
+    "lem-exc-domain-transcendence-degree-tower",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 4.4.1, composition assertion; Remark 4.1.3; Gysin composition"
+   }
+  },
+  {
+   "text": "If $i:Z\\hookrightarrow Y$ is a closed immersion, its fibre at any point of its image is the same residue field. In Step 2 the class for this identity field map is the identity by [lem-per-regular-gysin-calculus]. Hence its pinnings are exactly the original costalk pinnings under [lem-per-exceptional-costalk-calculus]. Every immediate specialization in $Z$ is immediate in $Y$: every intermediate point would remain in the closed subset $|Z|$. The same costalk lemma identifies its residue transition. Thus the equation $p_{z'}=p_z(1)[2]\\circ\\operatorname{sp}_{z',z}$ for $K$ is exactly that for $i^!K$ [def-per-potential-dualizing]. Closed exceptional restriction therefore preserves potentiality, including nonregular or nonreduced $Z$.",
+   "uses": [
+    "lem-per-regular-gysin-calculus",
+    "lem-per-exceptional-costalk-calculus",
+    "def-per-potential-dualizing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Definition 1.4.1 and final paragraph of Section 4.4"
+   }
+  },
+  {
+   "text": "Let $p:P\\to X$ be smooth, separated and compactifiable, of constant relative dimension $d$ (as $\\mathbf A^n_W\\to W$ in Step 7). It is regular, so [lem-per-regular-potential-pullback] makes $p^*K$ potential for\n$$\\delta_{\\mathrm{reg}}(t)=\\delta_X(p(t))-\\dim\\mathcal O_{P_{p(t)},t}.$$\nThe finite-type field dimension formula [lem-kun-dimension-formula] identifies $\\dim\\mathcal O_{P_{p(t)},t}+\\operatorname{trdeg}_{\\kappa(p(t))}\\kappa(t)$ with $d$. Hence $\\delta_P=\\delta_{\\mathrm{reg}}+d$. Tensor by $\\Lambda(d)[2d]$: the costalk pinnings and transition equation in [def-per-potential-dualizing] are shifted by $(d)[2d]$ on both sides, so $p^*K(d)[2d]$ is potential for $\\delta_P$. The normalized smooth isomorphism of [lem-per-ordinary-smooth-orientation] identifies this object with $p^!K$. Its pinnings agree with Step 2: on each fibre use the regular Gysin pinning from [lem-per-regular-potential-pullback], then compose its point Gysin class with the smooth orientation. Gysin composition and regular-base-change compatibility in [lem-per-regular-gysin-calculus] identify this composite with the class used on the regular open of the point closure in Step 2. The costalk comparison is [lem-per-exceptional-costalk-calculus]. Thus the prescribed pinnings, not just an unpinned isomorphism class, are potential.",
+   "uses": [
+    "lem-per-regular-potential-pullback",
+    "lem-kun-dimension-formula",
+    "def-per-potential-dualizing",
+    "lem-per-ordinary-smooth-orientation",
+    "lem-per-regular-gysin-calculus",
+    "lem-per-exceptional-costalk-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 4.4.1, smooth comparison; Proposition 4.1.1. Correct convention: p^!K = p^*K(d)[2d]"
+   }
+  },
+  {
+   "text": "Now take an immediate specialization in $Y$. Choose affine neighbourhoods $V=\\operatorname{Spec}B$ of its specialization and $W=\\operatorname{Spec}R$ of its image, with $f(V)\\subset W$. Since $B$ is a finite-type $R$-algebra, choose generators $b_1,\\ldots,b_n$. The surjection $R[T_1,\\ldots,T_n]\\twoheadrightarrow B$ gives\n$$V\\xrightarrow{i}\\mathbf A^n_W\\xrightarrow{p}W,$$\nwith $i$ closed [def-weil-closed-immersion, def-sbc-affine-space]. The ambient affine space is excellent by [lem-exc-finite-type-localization-excellent] and smooth of pure dimension $n$ by [sbc-lem-affine-space-smooth]. The open restriction of $K$ is potential, by its costalk definition [def-per-potential-dualizing] and the localization comparisons [lem-per-exceptional-costalk-calculus]. Step 6 makes $p^!K$ potential, and Step 5 makes $i^!p^!K$ potential. Step 4 identifies its pinnings with those of $f^!K$ on $V$. The chosen specialization therefore satisfies the transition equation. As it was arbitrary, $f^!K$ is potential. Empty schemes and $n=0$ cause no exception: there are then no points to pin, or the affine-space projection is the identity.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-affine-space",
+    "lem-exc-finite-type-localization-excellent",
+    "sbc-lem-affine-space-smooth",
+    "def-per-potential-dualizing",
+    "lem-per-exceptional-costalk-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Section 4.4, final paragraph: local closed/smooth factorization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-per-potential-dualizing",
+  "def-sbc-affine-space",
+  "def-weil-closed-immersion",
+  "lem-amb-etale-compact-comparisons",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-exc-domain-transcendence-degree-tower",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-kun-dimension-formula",
+  "lem-per-exceptional-costalk-calculus",
+  "lem-per-immediate-specialization-criterion",
+  "lem-per-ordinary-smooth-orientation",
+  "lem-per-regular-gysin-calculus",
+  "lem-per-regular-potential-pullback",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Section 4.4, with the explicit dimension, composition, closed-support and sign-corrected smooth arguments; smooth orientation follows the diagonal/DNC route of Scholze Theorem 7.19"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +178,45 @@
    "results": "[loogle] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary scheme morphisms, structure sheaves, linear duals or inverse limits of schemes; none states this etale derived-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary pullback of pinned potential dualizing complexes under finite type scheme morphisms",
+   "results": "Search returned 8 hits: AlgebraicGeometry.IsFinite.instSndScheme, AlgebraicGeometry.IsFinite.instFstScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme, AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'",
+   "date": "2026-10-18",
+   "verdict": "no match: none concerns pinned potential dualizing complexes or exceptional inverse image"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: none concerns pinned potential dualizing complexes or exceptional inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.*duali|extraordinary|upperShriek",
+   "results": "Search returned 2 hits: Mathlib/Geometry/Manifold/Bordism.lean, Mathlib/Geometry/Manifold/Bordism.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: none concerns pinned potential dualizing complexes or exceptional inverse image"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Potential dualizing complex extraordinary inverse image",
+   "results": "Search returned 8 hits: HomologicalComplex.unopInverse_obj, BotHom.symm_dual_comp, HomologicalComplex.opEquivalence_inverse, FractionalIdeal.dual_inv, LinearEquiv.dualMap_symm, CommRing.Pic.mk_dual, CommRing.Pic.inv_eq_dual, HomologicalComplex.Hom.isoApp_inv",
+   "date": "2026-10-18",
+   "verdict": "no match: none concerns pinned potential dualizing complexes or exceptional inverse image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized costalk pinnings preserved by exceptional inverse image of etale sheaves",
+   "results": "Search returned 8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk",
+   "date": "2026-10-18",
+   "verdict": "no match: none concerns pinned potential dualizing complexes or exceptional inverse image"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-residue-dualizing",
@@ -78,5 +236,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-potential-extraordinary-pullback",
+  "worker": "stage1",
+  "summary": "Constructed generic Gysin costalk pinnings on the actual exceptional adjoint, proved their independence and composition compatibility, and established potentiality by local closed/smooth factorization. Retained the statement and inherited searches; added four independently stated ordinary-etale input lemmas after DAG, blueprint, Lean and logged Mathlib searches. Corrected the reversed smooth twist/shift in the source proof, without changing the item statement.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, dimension-normalized Verdier duality in proof Step 3, through lem-per-qbar-arbitrary-field-duality and lem-per-finite-residue-dualizing; this item supplies finite-type normalized exceptional pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Supplies associative composition of ordinary bounded-below compact supports; taking right-adjoint mates gives the specified transitivity comparison. The perverse unit has no compactification-composition theorem."
+   },
+   {
+    "node": "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "why": "Supplies the height/transcendence-degree equality for the reduced affine point closures in Step 1; this unit has no commutative-algebra dimension-formula node."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Ensures the affine fibre closures, polynomial ambient spaces and regular models remain excellent so J-2 applies. This unit has no excellence-permanence theorem."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Identifies smooth-fibre local topological dimension with local-ring dimension plus residue-field transcendence degree in Step 6; this unit has no such dimension comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-compact-comparisons",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-kun-dimension-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N6-ba50cd983",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-ba50cd983 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement, unit sk-p-dl-a1-perverse, ILO XVII Prop. 4.1.1/4.1.2, Rem. 4.1.3 and all of §4.4 (p. 286), and ILO XIV 2.1.7–2.2.6. The item is 4.1.2 for n=ℓ on ordinary étale D^+ with the ordinary right adjoint of Rf_!. The statement is unchanged and nothing is weakened. The reported source error is real: the printed f⋆K≃f!K(d)[2d] is reversed (A¹ test), and Step 6 uses the correct f^!K≅f^*K(d)[2d]. The four new nodes are true and statement-only. None restates a clause of the item (D1), none duplicates an existing node, and none cites SGA. This head's node files are byte-identical to 0ba16e28b30b, which was reviewed FIX but refused at landing because def-per-potential-dualizing changed. So the earlier faults are still present, and I re-applied their repairs after checking each one again. (1) C1/E1, Step 1: the definition's geometric immediate specializations were treated as Zariski specializations with a one-dimensional local ring, with no node. The converse direction needs universal catenarity (ILO XIV 2.1.4) and no DAG node states it. I added the statement-only node lem-per-immediate-specialization-criterion (Mathlib searches are grep only: the other search services cannot be reached from this machine) and Step 1 now cites it. (2) E5, Step 4: the abstract B[1/b] spread-out model was never tied to the embedded point closures of Steps 2–3. I rewrote the step with a regular affine W in C_z ∩ g⁻¹(U) and its generic fibre over κ(y), using the localization and composition clauses of the Gysin and costalk nodes (1962 characters). Step 6 now also requires p separated and compactifiable. (3) B3: lem-per-regular-gysin-calculus now cites the definition nodes for smooth morphism, transcendence degree and residue field. Tool uses: lem-kun-dimension-formula is accepted as an off-route generic tool; the other declared nodes are on the route. Maintainer note: NK's later, unsplit lem-per-potential-dualizing-finite-pullback states this item for Z/ℓ^n, through its own separate definition def-per-potential-dualizing-complex. This item is the older node and the overlap is not a fault of this delivery; the NK node's split can follow this route.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
