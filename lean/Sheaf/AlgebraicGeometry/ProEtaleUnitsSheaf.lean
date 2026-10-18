@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.Grp.Adjunctions
 public import Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 public import Mathlib.Algebra.Category.Grp.Ulift
 
+import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
+
 /-! # Units of the pro-etale structure sheaf
 
 Source: Stacks Project, Tags 03PK and 03O3 (blueprint: def-pur-proetale-units-sheaf).
@@ -38,7 +40,11 @@ glued section is a unit. Uniqueness follows from uniqueness for the structure sh
 Changing multiplicative notation to additive notation and lifting universes preserve descent. -/
 theorem proEtaleUnitsPresheaf_isSheaf (S : Scheme.{u}) :
     Presheaf.IsSheaf (ProEt.topology S) (proEtaleUnitsPresheaf S) := by
-  sorry
+  exact Presheaf.isSheaf_comp_of_isSheaf (ProEt.topology S)
+    (proEtaleStructureSheaf S).obj
+    (forget₂ CommRingCat CommMonCat ⋙ CommMonCat.units ⋙
+      CommGrpCat.toAddCommGrp ⋙ AddCommGrpCat.uliftFunctor.{u + 1})
+    (proEtaleStructureSheaf S).property
 
 /-- The sheaf `G_m = O_Sˣ` of abelian groups on the small pro-etale site.
 Source: Stacks Project, Tag 03PK (blueprint: def-pur-proetale-units-sheaf). -/
