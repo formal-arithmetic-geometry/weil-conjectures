@@ -17,9 +17,149 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the stratum containing the generic point $\\eta$ of $X$ in a constructible stratification for $F$. A locally closed subset containing $\\eta$ is open: writing it as $V\\cap C$ with $V$ open and $C$ closed, the inclusion $\\eta\\in C$ forces $C=X$. Thus its image is a nonempty open $U_0$. Replace its immersion by the open immersion of $U_0$, using immersion independence (both have the same image). Consequently $F|_{U_0}$ is locally constant with finite module values. This is the dense lisse open asserted in the source.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-pc-integral-scheme",
+    "lemma-constructible-immersion-independence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.5.7, printed p.276; explicit elaboration of the finite normal trivializing cover; Stacks 095E (lemma-constructible-quasi-compact-quasi-separated), 03RU (definition-finite-locally-constant)"
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $V=\\operatorname{Spec}R\\subseteq U_0$. Its ring $R$ is an excellent domain. By J-2 in the definition of excellence, applied to the identity finite-type $R$-algebra, the set of primes with regular local ring is open. It contains $(0)$: the local ring there is the function field and a field is regular. Take a principal open $U=D(a)$ containing $(0)$ inside this locus. Every local ring of $U$ is regular, so $U$ is normal by regular-implies-normal. It is nonempty, affine, integral and hence connected. Restricting the finite constant models from step 1 shows that $F|_U$ remains finite locally constant. This auxiliary shrinking uses excellence without imposing any finite-type-over-a-field hypothesis.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-field-regular-ring",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.5.7, printed p.276; explicit elaboration of the finite normal trivializing cover; Stacks 07QT (definition-excellent), J-2; 0567 (lemma-regular-normal)"
+   }
+  },
+  {
+   "text": "Forget the module structure of $F|_U$ and apply the finite-set monodromy torsor lemma. It gives a connected finite etale torsor $c:P\\to U$ on which the underlying sheaf becomes constant. A torsor has a nonempty fibre at every geometric point, hence $c$ is surjective and $P$ is nonempty. Apply module-constant-of-set-pullback to obtain $c^*(F|_U)\\cong\\underline N_P$ as $A$-module sheaves. The module $N$ is finite: choose a geometric point of $P$; its stalk is $N$ by the constant-stalk lemma and also a stalk of $F|_U$ by inverse-image stalk comparison and forgetful compatibility. That latter stalk is finite by the finite-values lemma. The comparison isomorphisms for abelian inverse image suffice to check finiteness of the underlying set.",
+   "uses": [
+    "lem-weil-pbc-finite-set-monodromy-torsor",
+    "lem-weil-pbc-module-constant-of-set-pullback",
+    "def-sbc-normal-dominant-galois",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-etale-module-pullback-forget-naturality",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.5.7, printed p.276; explicit elaboration of the finite normal trivializing cover; Stacks 0DV5 (lemma-locally-constant-on-connected), parts (1) and (3); 03Q1 (lemma-stalk-pullback)"
+   }
+  },
+  {
+   "text": "Because $U$ is affine and $c$ finite, write $P=\\operatorname{Spec}B$ with $B$ finite over $\\Gamma(U,\\mathcal O_U)$. The finite-algebra Noetherian lemma gives that $P$ is Noetherian. Etale normal components over the normal integral scheme $U$ now decompose $P$ into finitely many open-and-closed normal integral schemes. Connectedness and nonemptiness of $P$ force exactly one component, so $P$ is normal integral. Put $K=k(X)=k(U)$ and $L=k(P)$. The generic point of $P$ maps to the generic point of $U$: the image of its closure contains the image of $P$, which is all of $U$. On the affine map $P\\to U$, the etale residue-field lemma at the generic point therefore gives that $L/K$ is finite separable.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-fin-etale-normal-components",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.5.7, printed p.276; explicit elaboration of the finite normal trivializing cover; Stacks 033C (lemma-normal-goes-up), 00FN (lemma-Noetherian-permanence), 02GL (lemma-etale-over-field)"
+   }
+  },
+  {
+   "text": "The scheme $X$ is quasi-separated since it is Noetherian. Normalize $X$ in $L$ using normalization in a finite residue-field extension at its generic point. This gives $f:Y\\to X$, with $Y$ integral normal and generic field $L$. It is finite: on any nonempty affine $W=\\operatorname{Spec}R\\subseteq X$, its ring is the integral closure of the excellent domain $R$ in $L$, by the affine normalization construction. The ring $R$ is quasi-excellent, hence Nagata; taking the prime $(0)$ in the definition of Nagata makes $R$ Japanese. Since $L/k(X)$ is finite, the definition of Japanese says precisely that this integral closure is a finite $R$-module. Thus the definition of a finite morphism applies on every affine. Finally a finite morphism is proper and hence closed; its image contains $\\eta$, so its closed image is all of $X$. Thus $f$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "def-fin-normalization-extension",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.5.7, printed p.276; explicit elaboration of the finite normal trivializing cover; Stacks 01OY; 035H (definition-normalization-X-in-Y), 035L (lemma-normal-normalization), 07QV (lemma-quasi-excellent-nagata), 032R (definition-nagata), 032F (definition-N)"
+   }
+  },
+  {
+   "text": "Over the affine $U=\\operatorname{Spec}R$ of step 2, write again $P=\\operatorname{Spec}B$. We check directly that $B$ is the integral closure of $R$ in $L$. First $B$ lies in that closure, since it is finite over $R$ and finite algebras are integral. Conversely, an element $z\\in L$ integral over $R$ is integral over every local ring $\\mathcal O_{P,p}$ (the same monic polynomial has coefficients there). Those local rings are integrally closed in their common fraction field $L$, by normality of $P$ and the integral-scheme stalk/function-field lemma. Thus $z$ lies in every $\\mathcal O_{P,p}$; the function-field sections-glue lemma yields $z\\in\\Gamma(P,\\mathcal O_P)=B$. The affine description of normalization therefore identifies $f^{-1}U=\\operatorname{Spec}B=P$ over $U$, with the same structure map $c$. In particular $f^{-1}U\\to U$ is finite etale.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-sc-function-field-sections-glue",
+    "def-fin-normalization-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.5.7, printed p.276; explicit elaboration of the finite normal trivializing cover; Stacks 0358 (lemma-normal-integral-sections), the same local monic-polynomial argument; affine normalization construction"
+   }
+  },
+  {
+   "text": "Under the isomorphism of step 6, the composite $P\\to Y\\to X$ equals $P\\xrightarrow c U\\hookrightarrow X$. The inverse-image composition isomorphisms identify $(f^*F)|_{f^{-1}U}$ with $c^*(F|_U)$, hence with $\\underline N_P$ from step 3. The composition isomorphisms on underlying abelian sheaves are natural in all endomorphisms of $F$, so commute with multiplication by each $a\\in A$; they are therefore $A$-linear. This gives the asserted module-sheaf isomorphism. Steps 2, 3, 5 and 6 give the required nonempty $U$, finite $N$, integral normal $Y$, finite surjective $f$, and finite etale restriction.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-module-pullback-forget-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.5.7, printed p.276; explicit elaboration of the finite normal trivializing cover; ordinary inverse-image functoriality, Stacks 03CB (lemma-composition-morphisms-sites)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-fin-normalization-extension",
+  "def-pc-integral-scheme",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-proper-morphism",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-fin-etale-normal-components",
+  "lem-sc-function-field-sections-glue",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-module-pullback-forget-naturality",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-set-monodromy-torsor",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-constant-of-set-pullback",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lemma-constructible-immersion-independence",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Lemma 3.5.7, printed p.276; explicit elaboration of the finite normal trivializing cover"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +200,50 @@
    "exit": 0,
    "date": "2026-10-19",
    "verdict": "no match: normalization of morphisms and locally constant functions on profinite spaces do not give a finite normal cover trivializing an etale module sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An excellent integral scheme has a finite surjective normal integral cover trivializing a constructible etale sheaf on a dense open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n",
+   "exit": 0,
+   "date": "2026-10-19",
+   "verdict": "no match: the hits provide normalization constructions or constant-sheaf predicates, not a finite normal generic trivializing cover for a constructible etale module sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNormal\", \"IsFinite\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "exit": 0,
+   "date": "2026-10-19",
+   "verdict": "no match: the hits provide normalization constructions or constant-sheaf predicates, not a finite normal generic trivializing cover for a constructible etale module sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally constant sheaf of modules on a connected scheme becomes constant on a finite etale cover, which extends by normalization over an excellent integral base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_of_iso\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{F : Sheaf J D} {X : D} (i : F ≅ (constantSheaf J D).obj X) : IsConstant J F\", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, is isomorphic to the constant sheaf associated with an object $ X \\\\in\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.casesOn\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u_2} →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J D] →\\n            {F : CategoryTheory.Sheaf J D} →\", \"doc\": \"Given a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ under a Grothendieck topology $ J $, if $ F $ lies in the essential image of the constant sheaf functor, then any property \"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{L : D ⥤ Sheaf J D} {T : C} (hT : IsTerminal T) (adj : L ⊣ (sheafSections J D).obj ⟨T⟩) (F : Sheaf J D) :\\n  IsConstant J F ↔ L.essImage F\", \"doc\": \"A sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, is constant if and only if $ F $ lies in the essential image of a functo\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {F : CategoryTheory.Sheaf J D}, (CategoryTheory.constantSheaf J D).essImage F → \", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, lies in the essential image of the constant sheaf functor, then $ F $\"}\n  {\"name\": \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"(F : Sheaf J D) [IsConstant J F] : (constantSheaf J D).essImage F\", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$ is constant with respect to a Grothendieck topology $ J $, then $ F $ is isomorphic to the constant sheaf associate\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) (s : (structureSheaf R).1.obj (op U)) {ι : Type*} (t : Finset ι) (a h : ι → R)\\n  (iDh : ∀ i : ι, PrimeSpectrum.basicOpen (h i) ⟶ U) (h_cover : U ≤ ⨆ i ∈ t, PrimeSpectrum.basicOpen (h i))\\n  (hs :\\n    ∀ i : ι,\\n      (const R (a i) (h i) (PrimeSpectrum.basicOpen (h i))\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type u_2} →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [CategoryTheory.HasWeakSheafify J D] → CategoryTheory.Sheaf J D → Prop\", \"doc\": \"A property asserting that a given sheaf on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $J$, is isomorphic to the sheafification of a constan\"}\n",
+   "exit": 0,
+   "date": "2026-10-19",
+   "verdict": "no match: the hits provide normalization constructions or constant-sheaf predicates, not a finite normal generic trivializing cover for a constructible etale module sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "trivializ.*[Ee]tale|[Ee]tale.*trivializ|normalization.*[Ff]inite|[Ff]inite.*normalization",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean\", \"line\": \"434\", \"text\": \"/-! ### Normalization of finite measures to probability measures\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/Extension.lean\", \"line\": \"24\", \"text\": \"to allow for possible normalization. As an example, consider a finite extension `K` of `ℚ_[p]`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"26\", \"text\": \"- If `f` is itself quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"29\", \"text\": \"  If `f` is proper and quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an isomorphism,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"203\", \"text\": \"2. `f.toNormalization ⁻¹ᵁ U` is the quasi-finite locus of `f`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"209\", \"text\": \"      (f.toNormalization ⁻¹ᵁ U).1 = { x | f.QuasiFiniteAt x } := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"222\", \"text\": \"  suffices (∃ i : { x | f.QuasiFiniteAt x }, toNormalization f x ∈ V i) ↔ f.QuasiFiniteAt x by\"}\n",
+   "exit": 0,
+   "date": "2026-10-19",
+   "verdict": "no match: the hits provide normalization constructions or constant-sheaf predicates, not a finite normal generic trivializing cover for a constructible etale module sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a Nagata integral scheme in the finite monodromy field extension of a constructible sheaf to obtain a generically etale trivializing cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n",
+   "exit": 0,
+   "date": "2026-10-19",
+   "verdict": "no match: the hits provide normalization constructions or constant-sheaf predicates, not a finite normal generic trivializing cover for a constructible etale module sheaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-residue-chain-reductions",
@@ -88,5 +268,129 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-generic-finite-normal-trivialization",
+  "worker": "stage1",
+  "summary": "Expanded the finite normal trivializing cover asserted in ILO XVII Lemma 3.5.7 into seven steps, using existing general monodromy, module constancy, normality and Nagata inputs. Proved the affine normalization comparison explicitly. No new nodes and no statement changes.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Expose XVII, Proposition 3.5.4 and Lemmas 3.5.5–3.5.7, printed pp.275–276; all finite comparisons are the normalized maps of Proposition 3.3.1, with coefficient integer ell^n; specifically the finite normal trivializing cover in ILO XVII, proof of Lemma 3.5.7.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-sc-function-field-sections-glue",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-sc-integral-scheme-stalks-in-function-field",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-pullback-forget-naturality",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-field-regular-ring",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-noetherian",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-constant-module-values",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-set-monodromy-torsor",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-module-constant-of-set-pullback",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "lemma-constructible-immersion-independence",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic ordinary-etale, scheme-theoretic or commutative-algebra input for the finite normal cover in ILO XVII 3.5.7; the unit has no alternate statement of this tool. Its hypotheses are checked in the cited step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-quasi-excellent-nagata",
+  "lem-fin-etale-normal-components",
+  "lem-sc-function-field-sections-glue",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-module-pullback-forget-naturality",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-set-monodromy-torsor",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-constant-of-set-pullback",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lemma-constructible-immersion-independence",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N8-28780ee5b",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-28780ee5b (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and all 34 cited statements in full, plus ILO XVII Lemma 3.5.7 at printed p.276 (PDF p.282). The source asserts the finite surjective normal integral cover with a dense finite étale open on which M becomes constant, using the word 'évidemment'. The item states this claim in more generality (Noetherian excellent integral X, any finite ring A). That is true and the statement is unchanged; there are no new nodes. Step checks: (1) the stratum containing η is open because η lies in the closed factor, and immersion independence moves it to the open immersion. (2) J-2 applied with A=R makes the regular locus open; (0) is in it because O_{X,η} is a field and fields are regular; so D(a) is normal by rem-pc-regular-normal (1) and connected. (3) The set monodromy torsor's fibres are nonempty by def-sbc, so P is nonempty and c surjective; module-constant-of-set-pullback gives N; N is finite via the constant-sheaf stalk, inverse-image stalk-germ, forget-naturality and module-values (2). (4) B is Noetherian, etale-normal-components plus connectedness gives one component, generic maps to generic, and the étale residue-field lemma gives L/K finite separable. (5) X is quasi-separated, normalization in L exists; R is quasi-excellent, hence Nagata, hence N-2, so the normalization is finite; finite ⇒ proper ⇒ closed image containing η ⇒ surjective. (6) Both inclusions B ⊆ closure ⊆ B hold via finite⇒integral, stalks-in-function-field and sections-glue, so f^{-1}U ≅ P over U. (7) Inverse-image composition plus forget-naturality, made A-linear by naturality. Edge cases checked: Spec K, F=0, A=0, constant F, non-normal X. I found no duplicate (perfect-closure-finite-normal-model and generic-curve-model are narrower) and no cycle. I accept the 21 declared tool_uses: all are generic algebra or étale-sheaf black boxes. No SGA is cited, and no fixes were needed."
  }
 }
