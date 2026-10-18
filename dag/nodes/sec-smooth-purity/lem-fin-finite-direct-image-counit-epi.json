@@ -1,0 +1,121 @@
+{
+ "id": "lem-fin-finite-direct-image-counit-epi",
+ "kind": "statement",
+ "title": "The finite direct-image counit is epimorphic for module sheaves",
+ "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism, def-weil-pbc-scheme-conventions], let $\\Lambda$ be a commutative ring, and let $G$ be a sheaf of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-sheaves]. Then the counit $f^*f_*G\\to G$ of the inverse-image/direct-image adjunction [def-weil-pbc-inverse-image, def-weil-pbc-direct-image] is an epimorphism. No Noetherianity, finiteness of $\\Lambda$, or surjectivity of $f$ is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QP, proposition-finite-higher-direct-image-zero (1); Tag 03PU, theorem-exactness-stalks; counit stalk projection in the proof of lem-fin-finite-reflects-constructibility."
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Fix a geometric point $z$ of $X$ with algebraically closed residue field. The finite-stalk formula identifies $(f_*G)_{f(z)}$ with the finite product of the $G_t$ over the geometric fibre. Under the inverse-image stalk comparison, the counit stalk map is restriction to the factor indexed by $z$: on a germ represented by a section over an etale neighbourhood, this is the adjunction triangle identity. The finite product projection is split epic in the module category, using zero in the other factors. Thus every geometric stalk of the counit is epic. The published proof uses stalkRestrict_eq_counit and the product projection formula in WeilConjectures.SixFunctors.Finite.Stalk.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-finite-stalk-formula-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Geometric stalks are exact. Apply them to the cokernel of the counit; the resulting objects are zero since all counit stalk maps are epic. The geometric stalk family reflects isomorphisms, so the map from that cokernel to zero is an isomorphism. The cokernel is zero and the counit is epic. Equivalently use the exact jointly conservative family of algebraic-closure geometric points to reflect epimorphisms, as the published instance does. No surjectivity of $f$ is required: the factor selected in the first step exists for each chosen point of $X$, and the empty source is included.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QP, proposition-finite-higher-direct-image-zero (1); Tag 03PU, theorem-exactness-stalks; counit stalk projection in the proof of lem-fin-finite-reflects-constructibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The counit of pullback pushforward on sheaves of modules along a finite morphism of schemes is an epimorphism",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.Adjunction.counit_epi_of_R_faithful, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.ExponentiableMorphism.ev, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib theorem for finite scheme direct-image counits; exact existing theorem found in WeilConjectures.SixFunctors.Finite.Counit.",
+   "digest": "1528f158a07e92d6"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit of pullback pushforward on sheaves of modules along a finite morphism of schemes is an epimorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.GeneratingSections.opEpi_comp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib theorem for finite scheme direct-image counits; exact existing theorem found in WeilConjectures.SixFunctors.Finite.Counit.",
+   "digest": "c238019ee26622c2"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*isFinite|epi.*counit",
+   "results": "25 hits: Mathlib/Condensed/Light/TopCatAdjunction.lean, Mathlib/Condensed/Light/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib theorem for finite scheme direct-image counits; exact existing theorem found in WeilConjectures.SixFunctors.Finite.Counit.",
+   "digest": "ca99f9efcf48101c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleOfFiniteDirectImage",
+  "date": "2026-10-18",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fin-finite-reflects-constructibility",
+   "place": "Proof, first paragraph: the counit stalk is a finite product projection, hence the counit is surjective.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Finite.Counit",
+  "declaration": "AlgebraicGeometry.Etale.epi_upperStarLowerStarAdjunction_counit_app_of_isFinite",
+  "statement": "instance Etale.epi_upperStarLowerStarAdjunction_counit_app_of_isFinite\n    (G : Sheaf X.smallEtaleTopology A) :\n    Epi ((Etale.upperStarLowerStarAdjunction A f).counit.app G)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-18",
+  "note": "Existing general concrete Grothendieck-abelian coefficient theorem, specialized in one line to A = ModuleCat Λ. Read lines 26-76 of its module. #print axioms reports only propext, Classical.choice, Quot.sound; no new Lean declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261018T062800-L-652148",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261018T062800-L-652148",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

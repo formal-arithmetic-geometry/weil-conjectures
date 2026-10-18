@@ -9,19 +9,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Finite.Counit
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Finite direct image reflects constructibility
@@ -70,6 +62,25 @@ theorem isConstructibleEtaleModuleSheaf_of_finite_lowerStar
     (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : IsConstructibleEtaleModuleSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) p).obj F)) :
     IsConstructibleEtaleModuleSheaf F := by
-  sorry
+  let G := (Etale.lowerStar (ModuleCat.{u + 1} Λ) p).obj F
+  let H := (Etale.upperStar (ModuleCat.{u + 1} Λ) p).obj G
+  let ε : H ⟶ F := (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).counit.app F
+  have : IsConstructibleSheaf G := (isConstructibleEtaleModuleSheaf_iff G).mp hF
+  have : IsConstructibleSheaf H := IsConstructibleSheaf.upperStar p G
+  have hH : IsConstructibleEtaleModuleSheaf H :=
+    (isConstructibleEtaleModuleSheaf_iff H).mpr inferInstance
+  have hK : IsConstructibleEtaleModuleSheaf (Limits.kernel ε) :=
+    isConstructibleEtaleModuleSheaf_of_mono_noetherian (Limits.kernel.ι ε) hH
+  have : IsConstructibleSheaf (Limits.kernel ε) :=
+    (isConstructibleEtaleModuleSheaf_iff _).mp hK
+  have : IsConstructibleSheaf (Limits.cokernel (Limits.kernel.ι ε)) :=
+    IsConstructibleSheaf.cokernel (Limits.kernel.ι ε)
+  -- The finite counit instance packages the stalk projection and conservativity steps.
+  have : Epi ε := inferInstance
+  have hε := Abelian.epiIsCokernelOfKernel _ (Limits.kernelIsKernel ε)
+  have : IsConstructibleSheaf F := IsConstructibleSheaf.of_iso
+    (F := Limits.cokernel (Limits.kernel.ι ε))
+    ((Limits.cokernelIsCokernel (Limits.kernel.ι ε)).coconePointUniqueUpToIso hε)
+  exact (isConstructibleEtaleModuleSheaf_iff F).mpr inferInstance
 
 end AlgebraicGeometry.Scheme

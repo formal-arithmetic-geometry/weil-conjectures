@@ -16030,3 +16030,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/G4/Sheaf.CategoryTheory.ModuleCechCriterion (stage 3; reviewer PASS; first push; landing 20261018T062758-L-651567 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/G4/Sheaf.RepresentationTheory.DiscreteRep (stage 3; reviewer PASS; first push; landing 20261018T062759-L-651704 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/G4/Sheaf.RingTheory.UniformPerfectQuotientBound (stage 3; reviewer PASS; first push; landing 20261018T062759-L-651895 (interface); batch 20261018T062645; modules 3; new nodes 2)
+- 06:28 L: merged deliver/G5/Sheaf.AlgebraicGeometry.ConstructibleOfFiniteDirectImage (stage 3; reviewer PASS; first push; landing 20261018T062800-L-652148 (proof); batch 20261018T062645; modules 1; new nodes 1)
