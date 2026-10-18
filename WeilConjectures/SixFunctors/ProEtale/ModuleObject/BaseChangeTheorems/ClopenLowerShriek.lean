@@ -157,6 +157,90 @@ lemma clopen_comparison_aux {DU DX : Type*} [Category DU] [Category DX]
 
 end Abstract
 
+/-! ### Unit laws of the derived pushforward -/
+
+section LowerStarUnit
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+
+/-- The identity isomorphism `R(𝟙 X)_* ≅ 𝟭` is `R(𝟙 X)_* ≅ L(𝟙 X)^* R(𝟙 X)_* ⟶ 𝟭`, the inverse
+of `L(𝟙 X)^* ≅ 𝟭` followed by the counit. -/
+lemma boundedConstructibleLowerStarId_hom_app (K : Dᵇc(X.left)⟦Λ⟧) :
+    (boundedConstructibleLowerStarId Λ ℓ X).hom.app K =
+      (boundedConstructibleUpperStarId Λ ℓ X).inv.app
+          ((boundedConstructibleLowerStar Λ ℓ (𝟙 X)).obj K) ≫
+        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 X)).counit.app K := by
+  simp [boundedConstructibleLowerStarId]
+
+/-- **Right unit law** for the composition isomorphisms of the derived pushforwards on bounded
+constructible complexes. -/
+lemma boundedConstructibleLowerStarId_inv_app_comp_lowerStarComp_hom_app (g : Y ⟶ X)
+    (N : Dᵇc(Y.left)⟦Λ⟧) :
+    (boundedConstructibleLowerStarId Λ ℓ X).inv.app ((boundedConstructibleLowerStar Λ ℓ g).obj N) ≫
+        (boundedConstructibleLowerStarComp Λ ℓ g (𝟙 X)).hom.app N =
+      eqToHom (by simp) := by
+  have key (n : Y ⟶ X) (e : n = g)
+      (v : boundedConstructibleUpperStar Λ ℓ n ≅
+        boundedConstructibleUpperStar Λ ℓ (𝟙 X) ⋙ boundedConstructibleUpperStar Λ ℓ g)
+      (hv : ∀ K, v.hom.app K ≫ (boundedConstructibleUpperStar Λ ℓ g).map
+        ((boundedConstructibleUpperStarId Λ ℓ X).hom.app K) = eqToHom (by simp [e])) :
+      (boundedConstructibleLowerStarId Λ ℓ X).inv.app
+          ((boundedConstructibleLowerStar Λ ℓ g).obj N) ≫
+        ((conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ n)
+          ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 X)).comp
+            (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ g)) v.symm).symm).hom.app N =
+        eqToHom (by simp [e]) := by
+    subst e
+    have hv' (K : Dᵇc(X.left)⟦Λ⟧) : v.hom.app K = (boundedConstructibleUpperStar Λ ℓ n).map
+        ((boundedConstructibleUpperStarId Λ ℓ X).inv.app K) := by
+      rw [← cancel_mono ((boundedConstructibleUpperStar Λ ℓ n).map
+        ((boundedConstructibleUpperStarId Λ ℓ X).hom.app K)), hv K, ← Functor.map_comp,
+        Iso.inv_hom_id_app]
+      simp
+    simp only [Iso.symm_hom, conjugateIsoEquiv_apply_inv, Iso.symm_inv, conjugateEquiv_apply_app,
+      Adjunction.comp_counit_app, hv', Functor.comp_obj, Functor.id_obj, Functor.map_comp]
+    rw [Adjunction.unit_naturality_assoc, Adjunction.unit_naturality_assoc,
+      Adjunction.right_triangle_components, Category.comp_id,
+      ← boundedConstructibleLowerStarId_hom_app, Iso.inv_hom_id_app]
+    simp
+  exact key _ (Category.comp_id g) _
+    (fun K ↦ boundedConstructibleUpperStarComp_id_right_app Λ ℓ g K)
+
+end LowerStarUnit
+
+/-! ### Base change along the trivial refinement -/
+
+section BaseChangeAux
+
+/-- The computation of the base change isomorphism `j_! ⋙ Lj^* ≅ L(𝟙)^* ⋙ (𝟙)_!` against the
+unit of `j_! ⊣ Lj^*`, for abstract functors: `BC` is inverse to the exchange morphism of the
+pullback square comparison `θ`, the adjunction `iS ⊣ Li` is identified with the identity
+adjunction by `ι` and `ui'` (`hF4`), and `θ` is compatible with the identity isomorphisms
+(`hθ`). -/
+lemma clopen_baseChange_aux {DU DX : Type*} [Category DU] [Category DX]
+    {jS : DU ⥤ DX} {Lj : DX ⥤ DU} (a : jS ⊣ Lj) {iS Li L1 : DU ⥤ DU} (a' : iS ⊣ Li)
+    (ι : iS ≅ 𝟭 DU) (ui' : Li ≅ 𝟭 DU) (ui : L1 ≅ 𝟭 DU) (θ : Lj ⋙ L1 ≅ Lj ⋙ Li)
+    (BC : jS ⋙ Lj ≅ L1 ⋙ iS) (hBC : BC.inv = Adjunction.exchangeLeft a a' θ)
+    (hF4 : ∀ W, ι.inv.app (Li.obj W) ≫ a'.counit.app W = ui'.hom.app W)
+    (hθ : ∀ Z, ui.inv.app (Lj.obj Z) ≫ θ.hom.app Z ≫ ui'.hom.app (Lj.obj Z) = 𝟙 _) (N : DU) :
+    a.unit.app N ≫ BC.hom.app N ≫ ι.hom.app (L1.obj N) = ui.inv.app N := by
+  have h : ui.inv.app N ≫ ι.inv.app (L1.obj N) ≫ BC.inv.app N = a.unit.app N := by
+    rw [hBC, Adjunction.exchangeLeft_app]
+    have n1 := ι.inv.naturality (L1.map (a.unit.app N))
+    have n2 := ui.inv.naturality (a.unit.app N)
+    have n3 := ι.inv.naturality (θ.hom.app (jS.obj N))
+    simp only [Functor.id_map, Functor.comp_obj, Functor.id_obj] at n1 n2 n3
+    rw [← reassoc_of% n1, ← reassoc_of% n2, ← reassoc_of% n3, hF4, hθ]
+    simp
+  rw [← h]
+  simp
+
+end BaseChangeAux
+
 /-! ### The refinement of an open and proper immersion -/
 
 section Clopen
