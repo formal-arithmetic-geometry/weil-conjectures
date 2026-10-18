@@ -15,9 +15,215 @@
   "def-kun-topological-krull-dimension",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Inverse image with transported constant coefficients is exact by [lem-trf-geometric-inverse-image-exact]. Thus its termwise action has $\\mathcal H^n(p^*A)=p^*\\mathcal H^n(A)$, since kernels, images and their quotients are preserved. It is triangulated by [lem-sf-exact-functor-derived-triangulated]. Pulling back a constructible sheaf preserves constructibility by [prop-constructible-pullback]; its finite module operations are transported by the same exact inverse image. Consequently pullback preserves the cohomological bounds and bounded constructibility. These assertions hold for every scheme morphism, with no regularity assumption.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, 4.2.2 and 6.2.3.2; exact constant-coefficient inverse image and constructibility"
+   }
+  },
+  {
+   "text": "Write $H(A,B)=R\\mathcal Hom_\\Lambda(A,B)$ and $\\beta_{A,B}:p^*H(A,B)\\to H(p^*A,p^*B)$. Use the tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the evaluation adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal] to define $\\beta$ as the unique transpose of $p^*\\mathrm{ev}_{A,B}$. Hence\n$$\\mathrm{ev}_{p^*A,p^*B}\\circ(\\beta_{A,B}\\otimes1)=p^*\\mathrm{ev}_{A,B},$$\nwith the tensor comparison understood. This equation gives naturality in both variables by transposition. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], internal Hom is triangulated in each variable and restricts to etale slices; the evaluation-defined comparison restricts to that same comparison because restriction takes evaluation to evaluation. The comparison is compatible with shifts in $A$: the tensor comparison and evaluation commute with the shift isomorphisms, with the sign of [lem-weil-pbc-ringed-internal-hom-exact-restriction], so the transposes do too. Hence for a distinguished triangle $A'\\to A\\to A''\\xrightarrow{\\delta}A'[1]$ the three maps $\\beta_{A'',B},\\beta_{A,B},\\beta_{A',B}$ form a morphism between the image triangles under $p^*H(-,B)$ and $H(p^*-,p^*B)$. The two squares over $A'\\to A\\to A''$ are naturality in the first variable; the connecting square is naturality for $\\delta$ composed with the shift compatibility. Thus the assertion that $\\beta$ is invertible is etale local and is closed under shifts and distinguished triangles in $A$, by [lem-sf-triangle-morphism-iso].",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 4.2.2, proof, printed pp. 281–282"
+   }
+  },
+  {
+   "text": "First suppose $A=M_X$ for a finite $\\Lambda$-module $M$. The finite ring $\\Lambda$ is Noetherian (it has finitely many ideals), so [lem-weil-pbc-finite-free-resolution-noetherian] supplies a resolution $P^\\bullet\\to M$ by finite free modules in degrees $\\leq0$. Its constant sheaf complex is still a resolution: the constant-sheaf functor is a geometric inverse image and is exact by [lem-trf-geometric-inverse-image-exact]. Choose a bounded-below representative $N^\\bullet$ of $B$ by [lem-weil-pbc-dplus-injective-representative]. The ringed-site model [lem-weil-pbc-ringed-site-bounded-free-rhom-model] computes both $H(M_X,B)$ and $H(M_Y,p^*B)$ by the corresponding Hom complexes. If $N^j=0$ for $j<a$, their degree-$n$ terms use only $a-n\\leq i\\leq0$. Inverse image preserves this finite sum, and $\\mathcal Hom(\\Lambda^{r_i},N^{i+n})=(N^{i+n})^{r_i}$. Thus termwise pullback is an isomorphism of these Hom complexes, respecting $d_Nf-(-1)^nf d_P$. The map is $\\beta_{M_X,B}$: its composite with evaluation is the pulled-back evaluation on each finite-free term. This proves the constant case without assuming that $M$ has finite projective dimension.",
+   "uses": [
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 4.2.2, proof, printed pp. 281–282"
+   }
+  },
+  {
+   "text": "If $A$ is lisse, an etale covering makes it a finite constant module by [def-weil-pbc-constructible-complexes]. Over each member of that cover Step 3 applies, and Step 2 identifies its map with the restriction of $\\beta_{A,B}$. The base-changed etale covering covers $Y$. Hence every geometric stalk of every cohomology sheaf of $\\beta_{A,B}$ is invertible, and [lem-weil-pbc-derived-stalk-conservative] gives invertibility. This argument works for any morphism and any bounded-below $B$.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 4.2.2, proof, printed pp. 281–282"
+   }
+  },
+  {
+   "text": "For the constructible-sheaf case we prove a stronger induction assertion: for every closed subscheme $T$ of $X$, every regular $v:W\\to T$ between Noetherian schemes with $\\ell$ invertible, every constructible sheaf $A$ on $T$, and every $B\\in D^+(T_{\\mathrm{et}},\\Lambda)$, $\\beta^v_{A,B}$ is invertible. Induct on the underlying closed subset using [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]; the assertion is uniform in the scheme structure on that subset. The empty case is zero. For nonempty $T$, there is a dense open $j:U\\hookrightarrow T$ on which $A$ is lisse: use its finite locally closed stratification [def-weil-pbc-constructible-complexes] and the finitely many irreducible components [lem-weil-pbc-noetherian-finitely-many-components]. On each component its generic point's stratum contains an open neighborhood in that component; remove the other components and the closed complement of that neighborhood. The union of these finitely many disjoint component opens is a dense open on which $A$ is lisse: the stratum's immersion restricted over a component open $V$ is an immersion with the same image as the open immersion $V\\hookrightarrow T$, and the restriction of a lisse sheaf to an open is lisse, so [lemma-constructible-immersion-independence] makes $A|_V$ lisse. Put $i:Z\\hookrightarrow T$ for the reduced closed complement. Restriction preserves constructibility by [prop-constructible-pullback]. The open schemes are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; closed subschemes are Noetherian by the quotient case of [lem-weil-pbc-finite-type-algebra-noetherian].",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-weil-pbc-constructible-complexes",
+    "lemma-constructible-immersion-independence",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 4.2.2, proof, printed pp. 281–282"
+   }
+  },
+  {
+   "text": "Apply [lem-per-etale-internal-hom-localization] to $(A,B)$ on $T$, and to $(v^*A,v^*B)$ on $W$. By Step 1, pulling back the first triangle is still distinguished. Write $W_U=W\\times_TU$, $W_Z=W\\times_TZ$, with induced $v_U,v_Z$ and immersions $j',i'$. These are open and closed immersions by [lem-weil-pbc-open-immersion-base-change] and [lem-weil-pbc-closed-immersion-base-change]. The maps $v_U,v_Z$ are regular: open restriction preserves the flatness and geometric fibre condition; for the closed restriction use the finite-type ring base-change theorem [lem-weil-pbc-regular-base-change] on affine charts. All schemes remain Noetherian; in particular $j$ and $i$ are quasi-compact and quasi-separated. The right vertices of the two triangles are identified by [lem-per-regular-etale-direct-image-base-change] with $g=j$, followed by Step 4 on $U$. The left vertices are identified by that same theorem with $g=i$, followed by the induction assertion on the proper closed subset $Z$ with second argument $i^!B$, and then by [lem-per-regular-supported-base-change], which identifies $v_Z^*i^!B$ with $i'^!v^*B$. The supported functor takes $D^+$ into $D^+$ by its right-derived definition.",
+   "uses": [
+    "lem-per-etale-internal-hom-localization",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-regular-base-change",
+    "lem-per-regular-etale-direct-image-base-change",
+    "lem-per-regular-supported-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 4.2.2, proof, printed pp. 281–282"
+   }
+  },
+  {
+   "text": "These left and right comparisons and the middle comparison $\\beta^v_{A,B}$ form a morphism of the localization triangles in Step 6. Indeed, the arrows in [lem-per-etale-internal-hom-localization] are obtained from the open/closed extension triangle by internal adjunction. Transposing their comparison squares turns them into naturality squares for evaluation composed with the open restriction unit and closed supported counit. The defining evaluation equation in Step 2 gives the former equality. The latter is precisely the closed-counit compatibility in [lem-per-regular-supported-base-change]. Therefore the actual evaluation-induced $\\beta$, rather than an arbitrarily chosen isomorphism of middle vertices, is the middle map. Since the outer maps are invertible, [lem-sf-triangle-morphism-iso] makes it invertible. This completes the induction for constructible sheaves. For $L\\in D^b_c$, the finitely many truncation triangles [lem-weil-pbc-truncation-triangle] build $L$ from its shifted constructible cohomology sheaves. Step 2 and the same triangle criterion give $\\beta_{L,Q}$ for all bounded-below $Q$.",
+   "uses": [
+    "lem-per-etale-internal-hom-localization",
+    "lem-per-regular-supported-base-change",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 4.2.2, proof, printed pp. 281–282"
+   }
+  },
+  {
+   "text": "For the biduality clause put $D=H(-,K)$, $D'=H(-,p^*K)$ and $F=p^*$. Step 7 gives $b=\\beta_{L,K}:FDL\\xrightarrow{\\sim}D'FL$ and $c=\\beta_{DL,K}:FD^2L\\xrightarrow{\\sim}D'FDL$, using exactly the two assumed constructibility hypotheses. The identification of double duals is\n$$a=D'(b^{-1})\\circ c:FD^2L\\xrightarrow{\\sim}D'^2FL.$$\nTo compare the bidual arrows, transpose $a\\circ F\\eta_L$ under the evaluation adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal]. Precompose its transpose with $1_{FL}\\otimes b$, an isomorphism. By the evaluation equation for $c$ and the definition of $\\eta_L$, the resulting pairing is $F\\mathrm{ev}_{L,K}\\circ\\sigma_{FL,FDL}$. The evaluation equation for $b$ makes this equal to $\\mathrm{ev}_{FL,FK}\\circ\\sigma_{FL,D'FL}\\circ(1\\otimes b)$, the same precomposition of the transpose of $\\eta_{FL}$. Cancel $1\\otimes b$ and transpose back. Thus $a\\circ F\\eta_L=\\eta_{FL}$. Pullback respects the symmetry here: on the signed tensor representatives both orders send a bidegree $(u,v)$ tensor to $(-1)^{uv}$ times the exchanged tensor. The tensor comparison is the representative comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. No pinnings or dualizing hypothesis on $K$ are used.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.2.3.2, formal biduality identification, with general K and the two explicit constructibility hypotheses"
+   }
+  },
+  {
+   "text": "Fix an affine neighborhood $\\operatorname{Spec}R$ of $x$, with $\\mathfrak p\\subset R$ the prime of $x$, and let $K$ be the separable closure of $\\kappa(x)$ in the geometric point. By [lem-weil-pbc-etale-local-ring-triples] the coordinate ring $C$ of $X_{(\\bar x)}$ [def-weil-pbc-strict-henselization-limit] is canonically the colimit of the triples $(B,\\mathfrak q,\\phi)$ over $(R,\\mathfrak p,K)$, compatibly with the maps from $R$. So by [lem-weil-pbc-strict-henselization-triples] $C$ is a local filtered colimit of etale $R$-algebras, i.e. ind-etale over $R$. By [lem-exc-affine-strict-local-ring-comparison] there is an $R$-algebra isomorphism of $C$ with an algebraic strict henselization $(R_{\\mathfrak p})^{\\mathrm{sh}}$ of the local ring $R_{\\mathfrak p}$ relative to $K$ [def-sc-ring-strict-henselization], compatibly with the structural maps to $X$. The pair category $(S,\\chi:S\\to K)$ of that definition for $(R_{\\mathfrak p},K)$ is isomorphic to the triple category of [lem-weil-pbc-strict-henselization-triples] for $(R_{\\mathfrak p},\\mathfrak pR_{\\mathfrak p},K)$: $\\chi$ has prime kernel $\\mathfrak q$ over the maximal ideal and induces $\\phi:\\kappa(\\mathfrak q)\\to K$, and conversely $\\chi=S\\to\\kappa(\\mathfrak q)\\xrightarrow{\\phi}K$; morphism conditions agree. So $C$ is the strict henselization meant in [lem-sc-strict-henselization-noetherian]. The local ring $R_{\\mathfrak p}$ is Noetherian by [lem-weil-pbc-localization-noetherian], so $C$ is Noetherian by [lem-sc-strict-henselization-noetherian]. Since an ind-etale map is weakly etale by [lem-weil-pbc-ind-etale-stability], and $R$ is excellent by the hypothesis on $X$, [lem-exc-weakly-etale-excellent] gives excellence of $C$. Finally [lem-weil-pbc-noetherian-local-finite-krull-dimension] gives finite dimension of $C$, hence of its spectrum under the two dimension conventions in the statement.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "def-sc-ring-strict-henselization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-exc-weakly-etale-excellent",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose I, Theorem 8.1(iv) and its strict-henselization consequence, printed p. 16; Expose XVII, beginning of 6.5; Stacks Noetherian and local dimension inputs"
+   }
+  },
+  {
+   "text": "The map $R\\to C$ of Step 9 is flat since it is weakly etale. To check geometric regularity of a fibre, base change it to any finite extension $k'$ of a residue field of $R$. Its algebra $B=C\\otimes_R k'$ is weakly etale over $k'$ by [lem-weil-pbc-ind-etale-stability]. It is Noetherian: $C\\otimes_R\\kappa(\\mathfrak q)$ is a localization of $C/\\mathfrak qC$, and tensoring it with the finite extension is finite type, so use [lem-weil-pbc-finite-type-algebra-noetherian] and [lem-weil-pbc-localization-noetherian]. By [lem-weil-pbc-weak-etale-field], $B$ is the union of finite etale $k'$-subalgebras. For $t\\in B$ choose such an algebra containing $t$. Being a finite product of separable fields, it contains $u$ with $t=t^2u$. In any local ring $B_{\\mathfrak b}$ this identity says that each nonzero element is invertible (the idempotent $tu$ is 0 or 1). Thus each such local ring is a field, of dimension zero and maximal ideal zero, and is regular by [def-weil-regular-scheme]. This proves the required geometric regularity. Hence $X_{(\\bar x)}\\to\\operatorname{Spec}R$, and therefore its composite with the affine open immersion into $X$, is regular. This verifies that Steps 1–8 apply to strict localizations.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-weak-etale-field",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose I, paragraph before Theorem 8.1 (ind-etale implies absolutely flat implies regular), printed pp. 15–16; Expose XVII, beginning of 6.5"
+   }
+  },
+  {
+   "text": "Let $f:A\\to B$ be a morphism of etale complexes whose pullbacks to all strict localizations are isomorphisms. At the closed geometric point of $X_{(\\bar x)}$, the stalk of each pulled-back cohomology map is the original map $\\mathcal H^n(f)_{\\bar x}$: use exactness from Step 1 and [lem-weil-pbc-inverse-image-stalk-germ]. Therefore every such stalk map is an isomorphism. For bounded-below complexes this gives the assertion directly by [lem-weil-pbc-derived-stalk-conservative]. For arbitrary complexes the same argument applies separately to each cohomology sheaf: [lemma-weil-pbc-geometric-stalk-conservative] makes each $\\mathcal H^n(f)$ invertible, so $f$ is a quasi-isomorphism, which is an isomorphism in the derived category by its definition [def-weil-pbc-derived-categories]. Conversely an isomorphism remains an isomorphism under every pullback functor. No uniform dimension bound on $X$ is needed.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, beginning of 6.5, strict-local testing; Stacks Tag 03Q1 for the stalk comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lemma-constructible-immersion-independence",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-per-etale-internal-hom-localization",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-regular-base-change",
+  "lem-per-regular-etale-direct-image-base-change",
+  "lem-per-regular-supported-base-change",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-weakly-etale-excellent",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-weak-etale-field",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 4.2.2 and Lemmas 4.2.4–4.2.5, Proposition 6.2.3.2 and beginning of 6.5; Expose I, Theorem 8.1 and preceding paragraph for strict local rings"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +252,38 @@
    "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"line\": \"202\", \"text\": \"    ⟨leftRegularHom _ 1, (leftRegularHomEquiv _).injective <| by\"}",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern ordinary module duals, generic derived categories, sheaf infrastructure or algebra descent; none states this etale potential-duality assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular pullback of etale derived internal Hom for bounded constructible complexes",
+   "results": "{\"t\": \"2026-10-18T18:20:57Z\", \"tool\": \"leanfinder\", \"query\": \"regular pullback of etale derived internal Hom for bounded constructible complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"CategoryTheory.ExponentiableMorphism\", \"CategoryTheory.ExponentiableMorphism.isExponentiable\", \"PresheafOfModules.pullbackObjIsDefined\"], \"digest\": \"fc77885d70d9bb94\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary scheme/module pullbacks, structure-sheaf stalks, or generic categories; none states regular etale derived internal-Hom comparison or strict-local testing"
+  },
+  {
+   "tool": "loogle",
+   "query": "RHom, IsIso, pullback",
+   "results": "{\"t\": \"2026-10-18T18:20:58Z\", \"tool\": \"loogle\", \"query\": \"RHom, IsIso, pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'RHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary scheme/module pullbacks, structure-sheaf stalks, or generic categories; none states regular etale derived internal-Hom comparison or strict-local testing"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*(RHom|derivedHom)|strict.*localization.*isomorphism",
+   "results": "{\"t\": \"2026-10-18T18:20:58Z\", \"tool\": \"grep\", \"query\": \"regular.*(RHom|derivedHom)|strict.*localization.*isomorphism\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary scheme/module pullbacks, structure-sheaf stalks, or generic categories; none states regular etale derived internal-Hom comparison or strict-local testing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict localization geometric stalks detect isomorphisms of etale complexes",
+   "results": "{\"t\": \"2026-10-18T18:20:58Z\", \"tool\": \"leansearch\", \"query\": \"strict localization geometric stalks detect isomorphisms of etale complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.stalkIso\", \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\", \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk\", \"AlgebraicGeometry.StructureSheaf.stalkIso\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso\", \"AlgebraicGeometry.StructureSheaf.stalkIso_inv\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\"], \"digest\": \"72a2ab6dc85b679f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary scheme/module pullbacks, structure-sheaf stalks, or generic categories; none states regular etale derived internal-Hom comparison or strict-local testing"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-local-duality-general",
@@ -71,5 +305,164 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-potential-regular-base-change",
+  "worker": "stage1",
+  "summary": "Retained the interrupted sandbox and recorded searches; proved regular internal-Hom comparison by finite-free constant models, etale-local lisse reduction and Noetherian open–closed induction, using existing regular direct-image and supported exchange nodes. Wrote the bidual transpose calculation, strict-local Noetherian/excellent/regular and finite dimension argument, and stalk testing. No statement changes and no new nodes.",
+  "blueprint": "Realizes the regular-pullback and strict-local testing portion of the local-duality input of lem-per-artin-gabber-affine-curve, Proof Step 3, through lem-per-gabber-local-duality-general; follows the source XVII 4.2.2 devissage rather than adding pinnings.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic Exactness of inverse image on abelian sheaves and modules; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic Pullback of constructible sheaves; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic The derived category of a ringed site is closed symmetric monoidal; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic A morphism of distinguished triangles with two isomorphic components is an isomorphism; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Generic A finite module over a Noetherian ring has a resolution by finite free modules (Stacks 00LP); used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic Every object of D^+ is represented by a bounded below K-injective complex of injectives; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic Bounded-above finite-projective sheaf Hom model; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks on the derived category; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic Closed subsets of a Noetherian scheme satisfy the minimal condition; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic A Noetherian scheme has finitely many irreducible components; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Finitely generated algebras over Noetherian rings are Noetherian; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic Base change of an open immersion is an open immersion (Stacks 01JY); used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic Base change of a closed immersion is a closed immersion; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-base-change",
+    "why": "Generic Regular ring maps are stable under finite type base change; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic The colimit over etale algebras with a point and a residue embedding is strictly henselian; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic Localizations of Noetherian rings are Noetherian; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic Strict henselization preserves Noetherianity of local rings; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic Stability and diagonal of an ind-etale algebra; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-exc-weakly-etale-excellent",
+    "why": "Generic Excellence ascends along weakly etale maps of Noetherian rings; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "why": "Generic A Noetherian local ring has finite Krull dimension; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Generic Weakly etale algebras over a field; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks; used only for its stated site, algebra, or derived-category operation in the XVII 4.2.2 devissage or strict-local reduction; no perverse-unit node supplies this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-weakly-etale-excellent",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-99efe9c57",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-99efe9c57 (reviewer sub-agent of L); spot-checked: Head 99efe9c5 is a re-delivery of 8d65a45f, which was FIXed. The item node is byte-identical to that head; only the report and citations.json changed, re-quoting the j_! revision of lem-per-etale-internal-hom-localization. That revision does not change Steps 6–7. Both repairs of the earlier FIX were therefore lost, and I re-applied them. (1) E5, Step 2: the step says beta is closed under distinguished triangles in A without showing that the connecting square commutes. Restored the argument: shift compatibility, naturality for the two squares, and naturality for delta for the connecting square. (2) C3/C4, Step 9: lem-weil-pbc-strict-henselization-triples does not identify the ring of def-weil-pbc-strict-henselization-limit with (R_p)^sh. Re-cited lem-weil-pbc-etale-local-ring-triples and lem-exc-affine-strict-local-ring-comparison, with the pair-to-triple translation for lem-sc-strict-henselization-noetherian. I re-read both nodes on the current DAG. (3) New, C1 minor, Step 5: the definition gives lisse only along the stratum's own immersion. Passing to the open subscheme V of T needs immersion independence, so I added the citation lemma-constructible-immersion-independence (sk-thm-p1, on route). Source check, ILO XVII: Prop. 4.2.2 (f regular, Noetherian, K in D^b_c, L in D^+) matches the statement. Steps 3–7 realize Cor. 4.2.3 and Lemmas 4.2.4–4.2.5 through 4.2.1 and the localization triangle: regular direct-image exchange for g = j and g = i, induction on Z with Ri^!B, supported base change and its closed-counit clause, then two-out-of-three and truncation. Step 3 needs no finite projective dimension; tested M = Z/l over Z/l^2. Step 8 uses exactly the hypotheses L and D_K L in D^b_c, as in 6.2.3.2. Steps 9–11 realize the opening of 6.5. Step 10 (fibres are absolutely flat, so their local rings are fields) is correct. Route: the only off-route citation is the declared generic lem-trf-geometric-inverse-image-exact, accepted as a tool use. Batch 5: the trace-formula and Poincare-duality nodes in the closure of the item's proof are all generic: def-trf-geometric-morphism, def-trf-abelian-inverse-image-presentation, the geometric inverse-image exactness node, lem-trf-bounded-below-derived-adjunction, 05WR strict-local invariance, henselian permanence, and lem-pod-separated-finite-type-base-change. So both flags are accepted: neither assumption gives these results, and ILO 4.2.3 is no step of the trace formula or of Poincare duality. No new nodes and no cycle; uses equal proof_deps; the longest step is 1872 characters. Maintainer: the 8d65 FIX never reached the group, so please make sure this one lands.; 1 file(s) fixed by the reviewer"
  }
 }
