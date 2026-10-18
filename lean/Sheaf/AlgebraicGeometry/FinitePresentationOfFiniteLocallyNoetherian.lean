@@ -40,6 +40,6 @@ Proof:
 theorem finitePresentation_of_finite_over_locallyNoetherian
     {S T : Scheme.{u}} (p : T ⟶ S) [IsLocallyNoetherian S] [IsFinite p] :
     LocallyOfFinitePresentation p ∧ QuasiCompact p ∧ QuasiSeparated p := by
-  sorry
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 end AlgebraicGeometry
