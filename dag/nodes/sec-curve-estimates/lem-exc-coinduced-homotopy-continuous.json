@@ -25,35 +25,38 @@
  ],
  "proof": [
   {
-   "text": "The hypotheses and constructions of [lem-exc-discrete-modules-abelian] and [lem-exc-coinduced-discrete-embedding] give the discrete topology on M and D(M), the pointwise A-module structure, and the right-translation action. Evaluation at 1 in M and substitution in the first G-variable are A-linear, so the displayed formula defines an A-linear map whenever it has values in C^{n-1}(G,D(M)).",
-   "uses": [
-    "lem-exc-discrete-modules-abelian",
-    "lem-exc-coinduced-discrete-embedding"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
-   }
-  },
-  {
-   "text": "Fix F and a point (g_1,...,g_{n-1}) in G^{n-1}. The map (x,g_1,...,g_{n-1}) -> F(x,g_1,...,g_{n-1})(1) is continuous with values in the discrete space M. For each x, continuity supplies product neighborhoods on which this value is constant; compactness of the profinite group G gives a finite subcover in the x-variable, whose intersection of the corresponding neighborhoods in G^{n-1} is a neighborhood of (g_1,...,g_{n-1}) on which all x-values are unchanged. Thus g -> h_n(F)(g) is locally constant as a map to the discrete space D(M), hence continuous. Therefore h_n(F) is a continuous (n-1)-cochain and the A-linearity from the first step proves the claim.",
+   "text": "Use the existing definition of DiscreteContinuousRep and the pointwise module structure on LocallyConstant maps. For F and a tuple g, define hF(g)(x) = F(Fin.cons x g)(1). Evaluation at one is postcomposition by a function, hence preserves local constancy; x -> Fin.cons x g is continuous by Continuous.finCons. Thus hF(g) is a locally constant function G -> M. This construction needs neither the abelian-category theorem nor the existence of the coinduced embedding.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, explicit continuity argument for the coinduced contraction"
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison (the contraction is an agent-written proof ingredient)"
+   }
+  },
+  {
+   "text": "The functions (g,x) -> F(Fin.cons x g) and (g,x) -> F(Fin.cons x g0) are locally constant, by IsLocallyConstant.comp_continuous and Continuous.finCons. Their eventual equalities to their common value at (g0,x0) show that they agree near (g0,x0). Apply Mathlib IsCompact.eventually_forall_of_forall_eventually to the compact set univ in G to obtain a neighborhood of g0 on which the two functions agree for every x. Evaluation at one and extensionality give hF(g) = hF(g0) there. By IsLocallyConstant.iff_eventually_eq, g -> hF(g) is locally constant into the whole coinduced function module with its discrete topology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison (the contraction is an agent-written proof ingredient)"
+   }
+  },
+  {
+   "text": "Package F -> hF as a linear map: additivity and scalar compatibility hold pointwise by the definitions of the LocallyConstant module operations. The required formula is definitionally true. No choice of coinduced embedding, abelian structure, or homotopy is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison (the contraction is an agent-written proof ingredient)"
    }
   }
  ],
- "proof_deps": [
-  "lem-exc-discrete-modules-abelian",
-  "lem-exc-coinduced-discrete-embedding"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG; explicit continuity argument for the coinduced contraction"
+  "place": "Tag 0DVG, section-continuous-group-cohomology; direct formalization of the existing compactness argument using Mathlib IsCompact.eventually_forall_of_forall_eventually, N4, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -132,5 +135,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261018T062840-L-667092",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
