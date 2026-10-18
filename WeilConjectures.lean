@@ -5383,6 +5383,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapUnit
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapIhom
 public import WeilConjectures.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingCoadjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingHomEquivCore
@@ -8804,6 +8805,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalComp
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalCore
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalCoreInduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalGeneral
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Formal
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryCompactSupport

@@ -107,7 +107,8 @@ noncomputable def derivedExtendScalarsCounit :
 instance : (derivedExtendScalars hφ ha X).IsLeftDerivedFunctor (derivedExtendScalarsCounit hφ ha X)
     (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) :=
   have := preservesKFlatQuasiIso_extendScalars hφ ha X
-  inferInstanceAs ((Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctor.IsLeftDerivedFunctor
+  inferInstanceAs (Functor.IsLeftDerivedFunctor
+    (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctor
     (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctorCounit _)
 
 /-- The derived extension of scalars is left adjoint to the derived restriction of scalars. -/
@@ -138,15 +139,25 @@ lemma nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
   exact ⟨asIso (((derivedExtendScalarsAdjunction hφ ha X).homEquiv K K').symm η)⟩
 
 /-- The derived extension of scalars is monoidal: `(K ⊗ᴸ M) ⊗ᴸ_Λ Λ' ≅ (K ⊗ᴸ_Λ Λ') ⊗ᴸ (M ⊗ᴸ_Λ Λ')`,
+naturally in `M`. (Stated as a `Nonempty`: the kernel checks the corresponding definition only
+very slowly.) -/
+theorem nonempty_derivedExtendScalarsTensorIso (K : 𝐃(X, Λ)) :
+    Nonempty ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K ⋙ derivedExtendScalars hφ ha X ≅
+      derivedExtendScalars hφ ha X ⋙
+        (derivedTensor (ModuleCat.{u + 1} Λ') X).obj ((derivedExtendScalars hφ ha X).obj K)) := by
+  have := preservesKFlatQuasiIso_extendScalars hφ ha X
+  have := Sheaf.preservesFlat_extendScalars X.smallEtaleTopology hφ ha
+  exact ⟨(Functor.leftDerivedTensorIsoOfKFlatOfIsLeftDerivedFunctor
+    (Sheaf.extendScalars X.smallEtaleTopology φ) (derivedExtendScalars hφ ha X)
+    (derivedExtendScalarsCounit hφ ha X) K :)⟩
+
+/-- The derived extension of scalars is monoidal: `(K ⊗ᴸ M) ⊗ᴸ_Λ Λ' ≅ (K ⊗ᴸ_Λ Λ') ⊗ᴸ (M ⊗ᴸ_Λ Λ')`,
 naturally in `M`. -/
 noncomputable def derivedExtendScalarsTensorIso (K : 𝐃(X, Λ)) :
     (derivedTensor (ModuleCat.{u + 1} Λ) X).obj K ⋙ derivedExtendScalars hφ ha X ≅
       derivedExtendScalars hφ ha X ⋙
         (derivedTensor (ModuleCat.{u + 1} Λ') X).obj ((derivedExtendScalars hφ ha X).obj K) :=
-  have := preservesKFlatQuasiIso_extendScalars hφ ha X
-  have := Sheaf.preservesFlat_extendScalars X.smallEtaleTopology hφ ha
-  ((Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedTensorIsoOfKFlatOfIsLeftDerivedFunctor
-    (derivedExtendScalars hφ ha X) (derivedExtendScalarsCounit hφ ha X) K :)
+  (nonempty_derivedExtendScalarsTensorIso hφ ha X K).some
 
 /-- The extension–restriction adjunction for internal homs:
 `RHom_Λ(K, Res N) ≅ Res RHom_{Λ'}(K ⊗ᴸ_Λ Λ', N)`, naturally in `N`. Both sides are right
@@ -163,6 +174,8 @@ noncomputable def derivedHomRestrictScalarsIso (K : 𝐃(X, Λ)) :
       (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ') ((derivedExtendScalars hφ ha X).obj K)))
     (derivedExtendScalarsTensorIso hφ ha X K).symm
 
+set_option maxHeartbeats 400000 in
+-- the kernel checks the ten isomorphisms of the chain below
 /-- With scalars restricted back to `Λ`, the derived extension of scalars `K ⊗ᴸ_Λ Λ'` is the
 derived tensor product `K ⊗ᴸ (Λ ⧸ (a))_X` with the constant sheaf: on a K-flat complex `P`
 both are computed by the complex `P ⊗ (Λ ⧸ (a))_X`. -/
@@ -174,6 +187,8 @@ lemma nonempty_iso_derivedRestrictScalars_derivedExtendScalars (L : 𝐃(X, Λ))
           ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
             (ModuleCat.of Λ (Λ ⧸ RingHom.ker φ))))) := by
   have := preservesKFlatQuasiIso_extendScalars hφ ha X
+  have : (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ).IsLeftAdjoint :=
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).isLeftAdjoint
   let F := Sheaf.extendScalars X.smallEtaleTopology φ
   let R := Sheaf.restrictScalars X.smallEtaleTopology φ
   let c := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
@@ -184,25 +199,51 @@ lemma nonempty_iso_derivedRestrictScalars_derivedExtendScalars (L : 𝐃(X, Λ))
   have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat P' hP'
   have := _root_.DerivedCategory.isIso_tensorLeftCounit _ hP
   let S := (HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj c
-  refine ⟨R.mapDerivedCategory.mapIso ((derivedExtendScalars hφ ha X).mapIso e.symm) ≪≫
-    R.mapDerivedCategory.mapIso
-      (asIso (F.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P'))) ≪≫
-    R.mapDerivedCategory.mapIso
+  let i1 := R.mapDerivedCategory.mapIso ((derivedExtendScalars hφ ha X).mapIso e.symm)
+  let i2 := R.mapDerivedCategory.mapIso
+      (asIso (F.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P')))
+  let i3 := R.mapDerivedCategory.mapIso
       (_root_.DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors _).app P') ≪≫
-        (_root_.DerivedCategory.quotientCompQhIso _).app ((F.mapHomologicalComplex _).obj P')) ≪≫
-    R.mapDerivedCategoryFactors.app _ ≪≫
-    _root_.DerivedCategory.Q.mapIso
-      ((Functor.mapHomologicalComplexCompIso
-          (Sheaf.extendScalarsCompRestrictScalarsIso X.smallEtaleTopology hφ ha) _).app P' ≪≫
-        ((CochainComplex.map₂HomologicalComplexFlipObjSingleIso (curriedTensor _) c).app
-          P').symm) ≪≫
-    ((_root_.DerivedCategory.quotientCompQhIso _).app _).symm ≪≫
-    _root_.DerivedCategory.Qh.mapIso
-      (Functor.Monoidal.μIso (HomotopyCategory.quotient _ (ComplexShape.up ℤ)) P' S).symm ≪≫
-    (asIso ((_root_.DerivedCategory.tensorLeftCounit ((HomotopyCategory.quotient _ _).obj P')).app
-      ((HomotopyCategory.quotient _ _).obj S))).symm ≪≫
-    tensorIso e ((_root_.DerivedCategory.quotientCompQhIso _).app S ≪≫
-      ((_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app c).symm)⟩
+        (_root_.DerivedCategory.quotientCompQhIso _).app ((F.mapHomologicalComplex _).obj P'))
+  let i4 := R.mapDerivedCategoryFactors.app ((F.mapHomologicalComplex _).obj P')
+  let i5 := (Functor.mapHomologicalComplexCompIso
+          (Sheaf.extendScalarsCompRestrictScalarsIso X.smallEtaleTopology hφ ha) _).app P'
+  let i6 := ((CochainComplex.map₂HomologicalComplexFlipObjSingleIso (curriedTensor _) c).app
+          P').symm
+  let i7 := ((_root_.DerivedCategory.quotientCompQhIso _).app (P' ⊗ S)).symm
+  let i8 := _root_.DerivedCategory.Qh.mapIso
+      (Functor.Monoidal.μIso (HomotopyCategory.quotient _ (ComplexShape.up ℤ)) P' S).symm
+  let i9 := (asIso ((_root_.DerivedCategory.tensorLeftCounit
+      ((HomotopyCategory.quotient _ _).obj P')).app
+      ((HomotopyCategory.quotient _ _).obj S))).symm
+  let i10 := tensorIso e ((_root_.DerivedCategory.quotientCompQhIso _).app S ≪≫
+      ((_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app c).symm)
+  exact ⟨i1 ≪≫ i2 ≪≫ i3 ≪≫ i4 ≪≫ _root_.DerivedCategory.Q.mapIso (i5 ≪≫ i6) ≪≫ i7 ≪≫ i8 ≪≫
+    i9 ≪≫ i10⟩
+
+include hφ ha in
+/-- For derived base changes `η : K ⟶ Res K'` and `η' : L ⟶ Res L'` along `φ`, the internal hom
+of `K` into the reduction `L ⊗ᴸ (Λ ⧸ ker φ)_X` is the restriction of scalars of the internal hom
+over `Λ'`: `RHom_Λ(K, L ⊗ᴸ (Λ ⧸ ker φ)_X) ≅ Res RHom_{Λ'}(K', L')`. -/
+theorem nonempty_iso_derivedHom_derivedTensor_of_isDerivedBaseChange {K L : 𝐃(X, Λ)}
+    {K' L' : 𝐃(X, Λ')} {η : K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj K'}
+    {η' : L ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj L'}
+    (hη : Sheaf.IsDerivedBaseChange η) (hη' : Sheaf.IsDerivedBaseChange η') :
+    Nonempty (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+              (ModuleCat.of Λ (Λ ⧸ RingHom.ker φ))))) ≅
+      (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj
+        (((derivedHom (ModuleCat.{u + 1} Λ') X).obj (op K')).obj L')) := by
+  obtain ⟨eK⟩ := nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange hφ ha X hη
+  obtain ⟨eL⟩ := nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange hφ ha X hη'
+  obtain ⟨e⟩ := nonempty_iso_derivedRestrictScalars_derivedExtendScalars hφ ha X L
+  let R := Sheaf.derivedRestrictScalars X.smallEtaleTopology φ
+  let g₁ := ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso (e.symm ≪≫ R.mapIso eL)
+  let g₂ := (derivedHomRestrictScalarsIso hφ ha X K).app L'
+  let g₃ := R.mapIso (((derivedHom (ModuleCat.{u + 1} Λ') X).mapIso eK.symm.op).app L')
+  exact ⟨g₁ ≪≫ g₂ ≪≫ g₃⟩
 
 end Etale
 

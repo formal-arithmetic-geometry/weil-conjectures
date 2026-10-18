@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalGeneral
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 
 /-!
@@ -20,8 +21,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_derivedHom`
   (`prop-trf-external-hom`): the external Hom map `β` is an isomorphism.
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_verdierDual`
-  (`thm-trf-kunneth-verdier`): the Künneth–Verdier map `κ` is an isomorphism, deduced from `α`
-  and `β` as in the blueprint.
+  (`thm-trf-kunneth-verdier`): the Künneth–Verdier map `κ` is an isomorphism; `β` is deduced
+  from `κ` by Verdier biduality.
 - `AlgebraicGeometry.Etale.hasKunnethComparisons` (`sk-thm-sf-kunneth-verdier`): the four
   comparison maps are isomorphisms.
 
@@ -181,18 +182,39 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek {X₁ X₂ Y₁ Y�
         (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) :=
   exceptionalKunneth_mapOverBase Λ (rightDerivedLowerShriekCompCoherence Λ) b₁ b₂ f₁ f₂ h₁ h₂
 
+/-- Blueprint `thm-trf-kunneth-verdier`: Künneth–Verdier isomorphism; the `κ` map.
+
+For `X`, `Y` separated of finite type over an algebraically closed field `k`, with projections
+`p_X`, `p_Y` of `X ×_k Y`, and for `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)`,
+
+`κ : M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. -/
+theorem nonempty_iso_externalProduct_verdierDual [IsAlgClosed k] {X Y : Scheme.{u}}
+    (a : X ⟶ Spec (.of k))
+    (b : Y ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
+    [HasCompactification b] [QuasiCompact b] [HasCompactification (pullback.fst a b)]
+    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
+    (hN : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N) :
+    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M
+        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N)) ≅
+      (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
+          (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
+        ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M)) :=
+  sorry
+
 /-- Blueprint `prop-trf-external-hom`: External Hom; the `β` map.
 
-For `Z₁`, `Z₂` separated of finite type over `k` and `E₁, N₁ ∈ Dctf(Z₁, Λ)`,
-`E₂, N₂ ∈ Dctf(Z₂, Λ)`,
+For `Z₁`, `Z₂` separated of finite type over an algebraically closed field `k` and
+`E₁, N₁ ∈ Dctf(Z₁, Λ)`, `E₂, N₂ ∈ Dctf(Z₂, Λ)`,
 
 `β : RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ≅ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`.
 
-The dualizable case is
-`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_derivedHom_of_isDualizable`; the general
-case is the dévissage in the `Eᵢ` of the blueprint proof, which uses
-`prop-trf-exceptional-kunneth`. -/
-theorem nonempty_iso_externalProduct_derivedHom {Z₁ Z₂ : Scheme.{u}}
+By Verdier biduality the Künneth–Verdier isomorphism
+(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_verdierDual`) says that Verdier duality
+commutes with external products, and `RHom(E, N) ≅ 𝔻(𝔻N ⊗ E)`
+(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_derivedHom_of_kunnethVerdier`). -/
+theorem nonempty_iso_externalProduct_derivedHom [IsAlgClosed k] {Z₁ Z₂ : Scheme.{u}}
     (c₁ : Z₁ ⟶ Spec (.of k)) (c₂ : Z₂ ⟶ Spec (.of k))
     [IsSeparated c₁] [LocallyOfFiniteType c₁] [QuasiCompact c₁]
     [IsSeparated c₂] [LocallyOfFiniteType c₂] [QuasiCompact c₂]
@@ -208,41 +230,8 @@ theorem nonempty_iso_externalProduct_derivedHom {Z₁ Z₂ : Scheme.{u}}
       (RHom(pullback c₁ c₂)[ModuleCat.{u + 1} Λ].obj
           (op (externalProduct (ModuleCat.{u + 1} Λ) c₁ c₂ E₁ E₂))).obj
         (externalProduct (ModuleCat.{u + 1} Λ) c₁ c₂ N₁ N₂)) :=
-  sorry
-
-/-- Blueprint `thm-trf-kunneth-verdier`: Künneth–Verdier isomorphism; the `κ` map.
-
-For `X`, `Y` separated of finite type over `k`, with projections `p_X`, `p_Y` of `X ×_k Y`, and
-for `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)`,
-
-`κ : M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`.
-
-As in the blueprint, it is the external Hom isomorphism
-(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_derivedHom`) for the pairs `(Λ_X, M)` and
-`(N, ω_Y)`, followed by the exceptional Künneth isomorphism
-(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek`) for
-`𝟙_X × b`, which reads `M ⊠ ω_Y ≅ Rp_X^! M`. -/
-theorem nonempty_iso_externalProduct_verdierDual {X Y : Scheme.{u}} (a : X ⟶ Spec (.of k))
-    (b : Y ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
-    [HasCompactification b] [QuasiCompact b] [HasCompactification (pullback.fst a b)]
-    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
-    (hN : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N) :
-    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M
-        ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N)) ≅
-      (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
-          (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
-        ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M)) := by
-  have hω : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y (dualizingComplex _ b) :=
-    constructibleFiniteTor_dualizingComplex Λ (𝟙 _) b (constructibleFiniteTor_tensorUnit Λ _)
-  have := hasCompactification_mapOverBase_id a b
-  refine nonempty_iso_externalProduct_verdierDual_of_iso Λ a b M N
-    (nonempty_iso_externalProduct_derivedHom Λ k a b (constructibleFiniteTor_tensorUnit Λ X) hN
-      hM hω) ?_
-  exact nonempty_iso_externalProduct_dualizingComplex_of_iso Λ a b M
-    (nonempty_iso_externalProduct_rightDerivedUpperShriek Λ k a (𝟙 _) (𝟙 X) b hM
-      (constructibleFiniteTor_tensorUnit Λ _))
+  nonempty_iso_externalProduct_derivedHom_of_kunnethVerdier Λ c₁ c₂
+    (fun hM hN ↦ nonempty_iso_externalProduct_verdierDual Λ k c₁ c₂ hM hN) hE₁ hE₂ hN₁ hN₂
 
 /-- Blueprint `sk-thm-sf-kunneth-verdier`: Künneth–Verdier isomorphism.
 
@@ -251,10 +240,10 @@ isomorphisms: besides the `!`-Künneth map `Ku_!`, which is an isomorphism by co
 this asserts the invertibility of the exceptional Künneth map `α`
 (`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek`), of the
 external Hom map `β` (`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_derivedHom`), and
-of the Künneth–Verdier map `κ` (`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_verdierDual`,
-deduced from `α` and `β`).
+of the Künneth–Verdier map `κ` (`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_verdierDual`).
 
-It is stated over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible
+It is stated over an algebraically closed field `k` (as in `sixOperationsPackage`), for a finite
+coefficient ring `Λ` whose exponent is invertible
 in `k`, as in the blueprint. The headline case is `kunnethVerdier`: for `X` and `Y` separated of
 finite type over `S = Spec k`,
 with projections `p_X : X ×_S Y ⟶ X` and `p_Y : X ×_S Y ⟶ Y`, and for `M` in `Dctf(X, A)`
@@ -263,7 +252,7 @@ and `N` in `Dctf(Y, A)`,
 `κ : M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`
 
 on `X ×_S Y`, where `𝔻_Y = RHom(-, ω_Y)` is the Verdier dual relative to `b : Y ⟶ S`. -/
-theorem hasKunnethComparisons :
+theorem hasKunnethComparisons [IsAlgClosed k] :
     HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k)) where
   kunnethShriek := by
     intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ hM₁ hM₂
