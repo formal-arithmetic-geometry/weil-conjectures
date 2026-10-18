@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Dimension shifting for a morphism of functors into an abelian category
@@ -118,5 +119,52 @@ theorem isIso_app_of_dimensionShift {C : Type*} [Category C] [HasZeroMorphisms C
       (by rw [← Functor.map_comp, hw, Functor.map_zero]) hδw hδ hbδ ((τ q).naturality i)
       ((τ q).naturality π) ((τ (q - 1)).naturality π)
     exact isIso_of_mono_of_epi _
+
+/-- **Comparison of right exact functors.** Let `α : Φ₁ ⟶ Φ₂` be a morphism of functors
+`C ⥤ D` between abelian categories which send short exact sequences `K ⟶ P ⟶ X` to right exact
+sequences `Φ K ⟶ Φ P ⟶ Φ X ⟶ 0`. If `α` is an isomorphism at the objects of a class `G` and every
+object is a quotient of an object of `G`, then `α` is an isomorphism. -/
+theorem isIso_app_of_rightExact {C : Type*} [Category C] [Abelian C] (Φ₁ Φ₂ : C ⥤ D)
+    [Φ₁.PreservesZeroMorphisms] [Φ₂.PreservesZeroMorphisms] (α : Φ₁ ⟶ Φ₂) (G : ObjectProperty C)
+    (hG : ∀ X, G X → IsIso (α.app X)) (hepi : ∀ X, ∃ (P : C) (π : P ⟶ X), G P ∧ Epi π)
+    (hR₁ : ∀ (S : ShortComplex C), S.ShortExact → Epi (Φ₁.map S.g) ∧ (S.map Φ₁).Exact)
+    (hR₂ : ∀ (S : ShortComplex C), S.ShortExact → Epi (Φ₂.map S.g) ∧ (S.map Φ₂).Exact)
+    (X : C) : IsIso (α.app X) := by
+  have hep (Y : C) : Epi (α.app Y) := by
+    obtain ⟨P, π, hP, _⟩ := hepi Y
+    have := hG P hP
+    have := (hR₂ (ShortComplex.mk (kernel.ι π) π (kernel.condition π))
+      (ShortComplex.ShortExact.mk' (S := ShortComplex.mk (kernel.ι π) π _)
+        (ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel π)) inferInstance inferInstance)).1
+    have : Epi (Φ₁.map π ≫ α.app Y) := by
+      rw [α.naturality]
+      infer_instance
+    exact epi_of_epi (Φ₁.map π) _
+  obtain ⟨P, π, hP, _⟩ := hepi X
+  have := hG P hP
+  let S := ShortComplex.mk (kernel.ι π) π (kernel.condition π)
+  have hS : S.ShortExact := ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel π))
+    inferInstance inferInstance
+  obtain ⟨h₁e, h₁⟩ := hR₁ S hS
+  obtain ⟨-, h₂⟩ := hR₂ S hS
+  have := hep (kernel π)
+  have : Mono (α.app X) := by
+    rw [Preadditive.mono_iff_cancel_zero]
+    intro A x hx
+    obtain ⟨A₁, π₁, _, p, e₁⟩ := surjective_up_to_refinements_of_epi (Φ₁.map π) x
+    have e₂ : (p ≫ α.app P) ≫ Φ₂.map π = 0 := by
+      rw [Category.assoc, ← α.naturality, ← reassoc_of% e₁, hx, comp_zero]
+    obtain ⟨A₂, π₂, _, k₂, e₃⟩ := h₂.exact_up_to_refinements (p ≫ α.app P) e₂
+    obtain ⟨A₃, π₃, _, k, e₄⟩ := surjective_up_to_refinements_of_epi (α.app (kernel π)) k₂
+    have e₅ : π₃ ≫ π₂ ≫ p = k ≫ Φ₁.map (kernel.ι π) := by
+      rw [← cancel_mono (α.app P)]
+      simp only [Category.assoc]
+      rw [e₃, reassoc_of% e₄]
+      exact congrArg _ (α.naturality _).symm
+    have e₆ : (π₃ ≫ π₂ ≫ π₁) ≫ x = 0 := by
+      rw [Category.assoc, Category.assoc, e₁, ← Category.assoc π₂, ← Category.assoc π₃, e₅,
+        Category.assoc, ← Φ₁.map_comp, kernel.condition, Φ₁.map_zero, comp_zero]
+    rwa [← cancel_epi (π₃ ≫ π₂ ≫ π₁), comp_zero]
+  exact isIso_of_mono_of_epi _
 
 end CategoryTheory

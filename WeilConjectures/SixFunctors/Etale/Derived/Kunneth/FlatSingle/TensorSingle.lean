@@ -6,6 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.DimensionShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidue
 
 /-!
 # The comparison between derived and underived tensor products of sheaves
@@ -122,6 +127,60 @@ lemma isIso_singleFunctorTensorToSingle_app (B : Sheaf X.smallEtaleTopology A)
   dsimp [singleFunctorTensorToSingle]
   rw [qhTensorRightμ_app]
   infer_instance
+
+/-- The derived tensor product of sheaves placed in degree `0` is concentrated in degrees `≤ 0`. -/
+instance isLE_singleFunctor_tensor_singleFunctor (F B : Sheaf X.smallEtaleTopology A) :
+    ((DerivedCategory.singleFunctor _ 0).obj F ⊗ (DerivedCategory.singleFunctor _ 0).obj B).IsLE
+      0 :=
+  have := DerivedCategory.isLE_tensor ((DerivedCategory.singleFunctor _ 0).obj F)
+    ((DerivedCategory.singleFunctor _ 0).obj B) 0 0
+  this
+
+/-- `F ↦ H⁰(F[0] ⊗ᴸ B[0])` sends short exact sequences to right exact sequences. -/
+lemma epi_and_exact_homologyFunctor_zero_singleFunctor_tensor (B : Sheaf X.smallEtaleTopology A)
+    (S : ShortComplex (Sheaf X.smallEtaleTopology A)) (hS : S.ShortExact) :
+    Epi ((DerivedCategory.singleFunctor _ 0 ⋙
+        tensorRight ((DerivedCategory.singleFunctor _ 0).obj B) ⋙
+          DerivedCategory.homologyFunctor _ 0).map S.g) ∧
+      (S.map (DerivedCategory.singleFunctor _ 0 ⋙
+        tensorRight ((DerivedCategory.singleFunctor _ 0).obj B) ⋙
+          DerivedCategory.homologyFunctor _ 0)).Exact := by
+  have hT := ((-⊗ᴸ-(X)[A]).flip.obj ((DerivedCategory.singleFunctor _ 0).obj B)).map_distinguished
+    _ hS.singleTriangle_distinguished
+  refine ⟨?_, DerivedCategory.HomologySequence.exact₂ _ hT 0⟩
+  refine (DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff _ hT 0 1).2 ?_
+  exact (DerivedCategory.isZero_of_isLE _ 0 1 (by lia)
+    (hX := isLE_singleFunctor_tensor_singleFunctor S.X₁ B)).eq_of_tgt _ _
+
+/-- **The degree zero homology of the derived tensor product of sheaves** is the tensor product:
+the comparison `H⁰(F[0] ⊗ᴸ B[0]) ⟶ H⁰((F ⊗ B)[0]) = F ⊗ B` is an isomorphism for every sheaf `F`.
+Both sides are right exact in `F` and agree for `F` flat, and every sheaf is a quotient of a flat
+one. -/
+lemma isIso_homologyFunctor_map_singleFunctorTensorToSingle_app
+    (B F : Sheaf X.smallEtaleTopology A) :
+    IsIso ((DerivedCategory.homologyFunctor _ 0).map ((singleFunctorTensorToSingle B).app F)) := by
+  have := preservesFiniteColimits_tensorRight B
+  let α : DerivedCategory.singleFunctor _ 0 ⋙
+      tensorRight ((DerivedCategory.singleFunctor _ 0).obj B) ⋙
+        DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology A) 0 ⟶ tensorRight B :=
+    Functor.whiskerRight (singleFunctorTensorToSingle B) (DerivedCategory.homologyFunctor _ 0) ≫
+      Functor.whiskerLeft (tensorRight B)
+        (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).hom
+  have key := isIso_app_of_rightExact _ _ α ObjectProperty.flat
+    (fun Y hY ↦ by
+      have := isIso_singleFunctorTensorToSingle_app B Y hY
+      dsimp [α]
+      infer_instance)
+    (fun Y ↦ by
+      let R := Classical.arbitrary (Abelian.LeftResolution
+        (ObjectProperty.flat.ι : _ ⥤ Sheaf X.smallEtaleTopology A))
+      exact ⟨_, R.π.app Y, (R.F.obj Y).property, inferInstance⟩)
+    (fun S hS ↦ epi_and_exact_homologyFunctor_zero_singleFunctor_tensor B S hS)
+    (fun S hS ↦ ⟨inferInstanceAs (Epi ((tensorRight B).map S.g)),
+      hS.exact.map_of_epi_of_preservesCokernel _ hS.epi_g inferInstance⟩) F
+  dsimp [α] at key
+  exact IsIso.of_isIso_comp_right _
+    ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).hom.app (F ⊗ B))
 
 end Etale
 
