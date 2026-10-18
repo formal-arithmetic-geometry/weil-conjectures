@@ -65,7 +65,7 @@ theorem ringedLocalizationTwoTermX_zero
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     ringedLocalizationTwoTermX O s 0 =
       SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) := by
-  sorry
+  simp [ringedLocalizationTwoTermX]
 
 /-- The degree-one term is the localization sheaf.
 Source: Stacks Project, algebraization.tex, Tag 0996
@@ -74,7 +74,7 @@ Proof: zero and one are distinct integers, so the second branch gives the locali
 theorem ringedLocalizationTwoTermX_one
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     ringedLocalizationTwoTermX O s 1 = ringedSectionLocalization O s := by
-  sorry
+  simp [ringedLocalizationTwoTermX]
 
 /-- The differential of the one-section complex is localization in degree zero.
 Source: Stacks Project, algebraization.tex, Tag 0996
@@ -97,7 +97,10 @@ its two neighbours vanish, so every composite is zero. -/
 theorem ringedLocalizationTwoTermD_comp
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℤ) :
     ringedLocalizationTwoTermD O s n ≫ ringedLocalizationTwoTermD O s (n + 1) = 0 := by
-  sorry
+  by_cases hn : n = 0
+  · subst n
+    simp [ringedLocalizationTwoTermD]
+  · simp [ringedLocalizationTwoTermD, hn]
 
 /-- The actual two-term localization complex, with no chosen or postponed data.
 Source: Stacks Project, algebraization.tex, Tag 0996
@@ -131,7 +134,16 @@ theorem ringedLocalizationTwoTermAugmentationF_comm
     (h : (ComplexShape.up ℤ).Rel n m) :
     ringedLocalizationTwoTermAugmentationF O s n ≫ (ringedSiteRingComplex O).d n m =
       (ringedLocalizationTwoTerm O s).d n m ≫ ringedLocalizationTwoTermAugmentationF O s m := by
-  sorry
+  have hm : n + 1 = m := h
+  subst m
+  rw [show (ringedSiteRingComplex O).d n (n + 1) = 0 from
+    HomologicalComplex.single_obj_d _ _ _ _ _, comp_zero]
+  by_cases hn : n = 0
+  · subst n
+    simp [ringedLocalizationTwoTermAugmentationF]
+  · change 0 = CochainComplex.of.d _ _ n (n + 1) ≫ _
+    rw [CochainComplex.of_d]
+    simp [ringedLocalizationTwoTermD, hn]
 
 /-- The augmented one-section localization complex.
 Source: Stacks Project, algebraization.tex, Tag 0996
