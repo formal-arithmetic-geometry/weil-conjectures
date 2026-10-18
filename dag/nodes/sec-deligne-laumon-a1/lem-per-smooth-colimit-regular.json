@@ -287,5 +287,23 @@
   "group": "Q97",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-18d84eb1d (reviewer sub-agent of L); spot-checked: Read Stacks 07EP (more-algebra.tex 10458-10483) and 07DX (algebra.tex 25834ff), every tag/label checked in tags/tags, the item and new node in full, and all 18 cited statements. The item statement, stmt_deps, source and blueprint are byte-equal to the base (Q43 snapshot) and match the parent's use. All six steps are correct. Step 1: smooth implies flat, the algebra colimit is the module colimit (J small filtered), so B is flat. Step 2: tensor-cancel with S=k, A=K plus a finite basis makes C finite over the Noetherian F, hence Noetherian; this is the Noetherianity 07EP leaves implicit. Step 3: the ring-colimit universal property is written out from tensor-elementwise. Step 4: smooth base change and smooth-over-field-regular-local; localization-at-prime gives the localized colimit; numerator test shows the transition maps are local; localization-noetherian. Step 5: Categories 0032 reindexing keeps the maps local; the new node applies, so C is regular. Step 6: the definition in def-weil-pbc-g-ring. New node lem-per-noetherian-local-colimit-regular is exactly 07DX: self-contained, statement-only, searched with three kinds of tool, blueprint from/via correct. It is true (tested on a constant system, a tower of fields, and non-injective local maps); the Noetherian apex is necessary. It is strictly smaller than the item (no base ring, smoothness, flatness or residue extension), not a restated clause. Whole-DAG grep found no duplicate: lem-weil-pbc-field-regular-ring covers only the field case. Accepted tool_uses: filtered-colimit-algebras-underlying-module, filtered-colimit-algebras-tensor-elementwise, smooth-over-field-regular-local (generic commutative algebra; they replace no unit step). No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SmoothColimitRegular",
+  "declaration": "CommAlgCat.smooth_colimit_regular",
+  "file": "lean/Sheaf/RingTheory/SmoothColimitRegular.lean",
+  "statement": "theorem smooth_colimit_regular (R : Type u) [CommRing R] {J : Type v} [SmallCategory J] [IsFiltered J] (A : J ⥤ CommAlgCat.{v, u} R) [HasColimit A] (hsmooth : ∀ j : J, Algebra.Smooth R (A.obj j)) (hfibre : ∀ (p : Ideal R) [p.IsPrime], IsNoetherianRing (p.Fiber (colimit A : CommAlgCat.{v, u} R))) : RingHom.IsRegular (algebraMap R (colimit A : CommAlgCat.{v, u} R))",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2eb4d46c0",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Snapshot changes only the item's lean field plus the new module SmoothColimitRegular.lean; the other 1232 nodes are byte-equal to live. Read Stacks 07EP (more-algebra.tex 10457-10483). Lean matches every clause: CommRing R; SmallCategory J with IsFiltered (includes Nonempty); A : J ⥤ CommAlgCat.{v,u} R with HasColimit (the recorded dependency convention); Algebra.Smooth at every stage; IsNoetherianRing (p.Fiber (colimit A)) for every prime (κ(p)⊗B, canonically isomorphic to the node's B⊗κ(p)); conclusion RingHom.IsRegular (algebraMap R (colimit A)) = flat + Noetherian geometrically regular fibres, with test fields in Type (max u v), which holds every finite extension of κ(p). No extra assumptions (R and B not Noetherian, no injective or local transition maps). Edge cases: empty J excluded as in the source; R=0, zero fibres and both characteristics covered; universes bound with autoImplicit false. lean.statement verbatim equal to the file signature. No duplicate (Popescu modules prove the converse; field-regular-ring is the field case only). Docstrings carry source, blueprint id and all six proof steps; proof is sorry only; imports follow rule 7. nt_compile --json clean in 1.9 s, exit 0. No findings."
  }
 }

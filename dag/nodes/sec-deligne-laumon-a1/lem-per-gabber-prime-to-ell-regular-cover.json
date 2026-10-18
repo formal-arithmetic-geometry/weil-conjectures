@@ -253,5 +253,24 @@
   "group": "Q47",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-9bbe92fc8 (reviewer sub-agent of L); spot-checked: I read the item, the four new nodes and every cited statement in full. Sources checked: ILO IX 1.1-2.4 (pp. 131-134), VII 4.3 (pp. 82-83), VIII 1.1 (p. 85) and 4.1.1-4.1.8 (pp. 117-118). The item statement is unchanged; it is IX 1.1 without the connectedness clause, so nothing is weakened. Step-by-step checks: Step 2 tame normalization (order ell^k is invertible, Y' is the normalization in kappa(V')). Step 3 nodal log regularity (all hypotheses hold; proper comes from projective via lem-kun-projective-implies-proper). Step 4 VIII 1.1 + VI 3.2 quotient modification (action is free on f^-1 b^-1 V; pi is surjective, so rho^-1|E| is inside B_M). Step 5 strict resolution, with the composite proper and birational. Step 6 elementary: a nonzero divides T^n, so 0AG0 factorization applies; the selected components form an snc subfamily with radical Cartier ideal (prod t_i). Step 7 is the reduction's conclusion verbatim. All four new nodes are true and tested on small cases (T empty, G trivial, B empty, enlarged boundary for an empty initial boundary). The reduction node is the IX 1.3-1.4 implication, whose antecedent is exactly situation (*) of 1.4. That antecedent is proved in Steps 2-6, so this is not a D1/D2 relabelling. No duplicates: the trf desingularization and strictification nodes work over a field, and the trf Kato tower nodes give only nc boundaries. No SGA citations and no cycle. Batch 5: the closure computed from both targets, with and without the delivery, differs only by the four new nodes. All flagged citations are already in the base closure and are generic: lem-trf-nodal-log-regularity (ILO VI 1.9 log geometry), lem-trf-regular-local-ufd-boundary-factorization (Stacks 0AG0 algebra), and the definitions def-trf-log-regular-pair and def-trf-strict-normal-crossings-boundary. None is given by the trace formula or PD, so the escape clause applies. I accept the worker's tool_uses (generic tools that unit sk-p-dl-a1-perverse does not state); recording them is left to the maintainer at the merge (C8)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GabberPrimeToEllRegularCover",
+  "declaration": "AlgebraicGeometry.gabber_primeToEll_regular_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberPrimeToEllRegularCover.lean",
+  "statement": "theorem gabber_primeToEll_regular_cover (S : Scheme.{u}) [IsReduced S] [IsNoetherian S] (hS : ∀ V : S.affineOpens, IsQuasiExcellent Γ(S, V.1)) (Z : Set S) (hZ : IsClosed Z) (hZrare : IsNowhereDense Z) (ell : ℕ) [Fact ell.Prime] (hinv : ∀ s : S, IsUnit (ell : S.presheaf.stalk s)) : ∃ base : PrimeToEllAlteration.Alt S, base.obj = Over.mk (𝟙 S) ∧ ∃ (n : ℕ) (T : Fin n → PrimeToEllAlteration.Alt S) (q : ∀ b, T b ⟶ base), PrimeToEllAlteration.IsCoveringFamily ell T q ∧ (∀ b, IsRegularScheme (T b).obj.left ∧ IsNoetherian (T b).obj.left) ∧ ∀ b, ∃ H : (T b).obj.left.IdealSheafData, IsStrictNormalCrossingsBoundary H ∧ (H.support : Set (T b).obj.left) = (T b).obj.hom ⁻¹' Z",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-79e213b15"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79e213b15",
+  "group": "Q59",
+  "result": "fix",
+  "note": "Statement matches node/ILO IX 1.1 clause by clause: reduced Noetherian S, IsQuasiExcellent (not IsExcellent) affine rings, closed nowhere dense Z, ell prime invertible via stalks; finite Fin n family in Alt S covering via recorded IsCoveringFamily with base.obj = Over.mk (𝟙 S) (same idiom as landed alteration_cover_standard_refinement); regular+Noetherian sources; finite type via Alt membership; SNC boundary with support EQUAL to preimage of Z. No extra hypotheses or universe restriction; edge cases (empty S, n=0, Z empty, reducible S) covered; no duplicate; node changes only lean; statement verbatim; docstrings/source/blueprint/7 proof steps present; sorry only. FIX (H9/§3 rule 7): added three missing plain imports of proof-dep modules landed before base (TameNormalizationLogRegular, TameLogQuotientModification, NoetherianLogPairStrictResolution). Original and fixed files both compile clean via nt_compile --json (1.9 s / 1.8 s)."
  }
 }

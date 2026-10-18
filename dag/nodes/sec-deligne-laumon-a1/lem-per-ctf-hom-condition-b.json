@@ -18,7 +18,8 @@
   "def-weil-pbc-constructible-complexes",
   "def-kun-derived-tensor",
   "def-pur-derived-internal-hom",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-per-galois-partition-modules"
  ],
  "proof": [
   {
@@ -284,5 +285,27 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-1b3d828e4 (reviewer sub-agent of L); spot-checked: I read in full the item, the four new nodes, every cited statement, and ILO XVII §§7.1–7.3 and pp. 311–314 (7.6.3, 7.6.5–7.6.11). The item statement is unchanged from NH's version and matches Def 7.6.8 and Prop 7.6.9. With N[v], the upper endpoint is v+c; the lower endpoint is u−b, from the explicit Hom-complex computation over the flat model. Steps 1–5 follow ILO's proof: the triangulated first-argument class, reduction to flat constructible sheaves, then a Noetherian induction (correctly set up) using the 7.6.10 and 7.6.11 children and the locally closed inheritance of dualizing complexes, which I checked is true for both the open and the closed case. The exact-refinement child is ILO 7.3.4/7.3.6/7.3.8. I found no duplicates in the DAG or the main-20261015 blueprint. Three faults, all repaired. (1) E2/E7: the last clause of lem-per-ctf-hom-locally-constant asserted a finite étale Galois cover trivializing F on each connected component. This is false: on a nodal cubic with A=F_ℓ[t,t^{-1}], F with monodromy t along the infinite chain is étale-locally constant and flat, but is constant on no C_n. ILO's own proof of 7.6.11 has the same gap (cf. Exercise 7.2.7). The main claim stays true by first stratifying to finite monodromy. I removed the clause and stated that local constancy is étale-local; Step 4 is unaffected. (2) C4: Step 6 cited prop-pur-kinjective-resolutions-exist for enough injectives, which it does not state; I re-cited it to lem-weil-pbc-module-sheaves-enough-injectives and updated uses, proof_deps and tool_uses. (3) Step 2 named condition (B) only as 'Definition 7.6.8'; it now cites the inline definition in lem-per-ctf-hom-localization-devissage. The remaining tool uses are generic homological algebra, and I accept them.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CtfHomConditionB",
+  "declaration": "AlgebraicGeometry.Etale.ctf_hom_condition_b",
+  "file": "lean/Sheaf/Paper/CtfHomConditionB.lean",
+  "statement": "theorem ctf_hom_condition_b (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] (Q : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) X) (_hQ : DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) X Q) (_hdual : HasConditionBDuality (ULift.{u + 1} (ZMod ℓ)) X Q) (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ZMod ℓ) A] (P : DerivedCategoryModule A X) (_hP : DerivedCategory.boundedConstructibleFiniteTor A X P) : ∃ r : ℤ, _root_.DerivedCategory.IsLE P r ∧ ∀ partition : Scheme.GaloisPartition X, ∃ (partition' : Scheme.GaloisPartition X) (c : ℤ), ∀ (u v : ℤ), u ≤ v → ∀ N : DerivedCategoryModule A X, partition.boundedDerived A N → _root_.DerivedCategory.homologyConcentratedIn u v N → partition'.boundedDerived A (((derivedHom (ModuleCat.{u + 1} A) X).obj (op P)).obj N) ∧ _root_.DerivedCategory.homologyConcentratedIn (u - r) (v + c) (((derivedHom (ModuleCat.{u + 1} A) X).obj (op P)).obj N) ∧ (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X N → DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X (((derivedHom (ModuleCat.{u + 1} A) X).obj (op P)).obj N))",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.HasConditionBDuality",
+   "AlgebraicGeometry.Etale.ctf_hom_condition_b"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbc7b7551",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed bb7823097173 makes exactly the requested H12/H4 repair: the duplicate def-per-galois-partition node and its module are dropped, stmt_deps cites the landed def-per-galois-partition-modules, and the module imports Sheaf.Paper.GaloisPartitionModules. Node diff vs the old head, live and side: only stmt_deps/lean; lean.statement is unchanged and verbatim. Q59's GaloisPartition/FiniteExtensions/modules/boundedDerived match ILO XVII 7.3.1-7.3.3. All clauses rechecked against ILO 7.6.8/7.6.9: r first, then partition' and c, then u,v,N; interval [u-r,v+c]; constructibility clause; canonical biduality transpose in HasConditionBDuality; boundedConstructibleFiniteTor; no finite-generation condition on N. nt_compile --json clean (2.5 s); a broken-copy control fails on the partition field. Advisory: GaloisPartitionModules/CtfHomLocallyConstant oleans are not yet published (infrastructure); the second reading is a worker self-check (H11); integer binders u,v shadow the universe name (cosmetic)."
  }
 }

@@ -17,7 +17,8 @@
   "def-weil-closed-immersion",
   "def-weil-pbc-regular-sequence",
   "def-sbc-smooth-morphisms",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-asd-finite-etale-tate-sheaf"
  ],
  "proof": [
   {
@@ -298,5 +299,28 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-7c828637d (reviewer sub-agent of L); spot-checked: I read the source: ILO XVI 3.5.4–3.5.10, pp.248–250. Lemma 3.5.9 gets Λ≅End(K_Y) from 'bidualité locale', which it cites to SGA 4½ Th. finitude 4.3, and then detects the claim on a nonempty open. The item states exactly that sentence; its statement is byte-identical to the base copy, and only the unused def-weil-proper-morphism stmt_dep was dropped, which is correct. The new node lem-per-complete-trait-constructible-biduality is unsplit, statement-only and self-contained. It is a true special case of Deligne's biduality over a regular base of dimension ≤1, checked on X=S, X=s (Q=A(−1)[−2]) and X=η. Quasi-projectivity gives the compactification that thm-amb-etale-exceptional-adjoint needs. It does not duplicate an existing node. The gabber-local-duality-general, potential-local-duality, potential-dualizing-finite-pullback, potential-dualizing-regular-unit and absolute-gysin-purity nodes all already contain this item in their dependency closure, so citing them would be circular (C6). The finite-residue, etale-geometric and fix-general biduality nodes work over field bases, and lem-per-coefficient-change-dualizing assumes a dualizing complex. The new node is also not a restated clause of the item: it says nothing about End or open restriction. All five steps are correct against the cited statements, which I read. Step 1 is biduality for A_T, whose evaluation transpose is the scalar map. Step 2 cancels the twist using the signed rank-one twists, closed adjunction and Yoneda, with even shifts. Step 3 restricts RHom to the slice, as in Stacks 08JB. Step 4 passes to global sections with Stacks 08JA and the degree-0 injective resolution. Step 5 uses that U is connected because T is irreducible, together with the locally constant model of A_V (Stacks 03P5). The 8 tool_uses are generic and I accept them. Advisory: identifying j^* with restriction to the slice follows the DAG's standing convention. Maintainer note: the split of the new node must avoid both SGA 4½, because of the route lock, and the potential-dualizing package, because of the cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitDualizingScalarRestriction",
+  "declaration": "AlgebraicGeometry.Etale.traitDualizing_scalar_restriction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.traitNormalizedDualizing",
+   "AlgebraicGeometry.Etale.traitDualizing_scalar_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitDualizingScalarRestriction.lean",
+  "statement": "theorem traitDualizing_scalar_restriction (l : ℕ) [Fact l.Prime] (R : Type u) [CommRing R] [IsNoetherianRing R] [IsDomain R] [IsStrictlyHenselianLocalRing R] [CharZero R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (hdim : ringKrullDim R = 1) (hprincipal : (IsLocalRing.maximalIdeal R).IsPrincipal) (hmixed : 0 < ringChar (IsLocalRing.ResidueField R)) (hl : IsUnit (l : R)) {T : Scheme.{u}} [IsIntegral T] (p : T ⟶ Spec (.of R)) [LocallyOfFiniteType p] [QuasiCompact p] (hregular : IsRegularScheme T) (hprojective : ∃ (n : ℕ) (i : T ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of R))), IsImmersion i ∧ i ≫ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of R)) ↘ Spec (.of R) = p) [HasCompactification p] (e : ℤ) (hvirtual : ∀ x : T, ∃ (V : T.Opens), x ∈ V ∧ ∃ (W : Scheme.{u}) (i : V.toScheme ⟶ W) (q : W ⟶ Spec (.of R)) (r c : ℕ), i ≫ q = V.ι ≫ p ∧ IsRegularImmersion c i ∧ SmoothOfRelativeDimension r q ∧ e = (r : ℤ) - (c : ℤ)) : _root_.DerivedCategory.TStructure.t.plus (traitNormalizedDualizing l p e) ∧ Function.Bijective (fun a : ULift.{u + 1} (ZMod l) => a • 𝟙 (traitNormalizedDualizing l p e)) ∧ ∀ {U : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] [Nonempty U], _root_.DerivedCategory.TStructure.t.plus ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l))) j).leftDerivedFunctor.obj (traitNormalizedDualizing l p e)) ∧ Function.Bijective (fun a : ULift.{u + 1} (ZMod l) => a • 𝟙 ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l))) j).leftDerivedFunctor.obj (traitNormalizedDualizing l p e))) ∧ (∀ a : ULift.{u + 1} (ZMod l), (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l))) j).leftDerivedFunctor.map (a • 𝟙 (traitNormalizedDualizing l p e)) = a • 𝟙 ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l))) j).leftDerivedFunctor.obj (traitNormalizedDualizing l p e))) ∧ Function.Injective (fun f : traitNormalizedDualizing l p e ⟶ traitNormalizedDualizing l p e => (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l))) j).leftDerivedFunctor.map f)",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The normalized object is constructed from the ordinary exceptional right adjoint, published signed finite Tate sheaf, derived tensor, and shift. D+ is full in D: bounded-below membership is stated explicitly and the ambient Hom sets give exactly its endomorphisms. Scalar isomorphisms are stated as bijectivity of the actual scalar functions, with their restriction identity and injectivity. HasCompactification is structural data already implied by the quasi-projective finite-type hypothesis, via immersion into proper projective space; it imposes no additional geometric case restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc3a5d695",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node, which is byte-identical to base; the only node changes are the stmt_dep add of the landed def-asd-finite-etale-tate-sheaf, which is actually used, and the lean record. Trait conditions match: Noetherian domain, strictly henselian local, dim 1, principal maximal ideal, IsAdicComplete, CharZero R with positive residue characteristic, IsUnit l. T: IsIntegral, IsRegularScheme, LocallyOfFiniteType+QuasiCompact, immersion into P^n_S. HasCompactification is a Prop class derivable via of_isImmersion; IsProper of P^n_S over S checked by instance. hvirtual is the local regular-closed-immersion plus smooth factorisation with e=r-c; the c=0 case is absorbed by the existential W. K_T = shift(-2e)(dualizingComplex p ⊗^L finiteEtaleTateSheaf(-e)) is real data. Conclusions: t.plus for K_T and j^*K_T (true, presupposed by the node), bijective a↦a•𝟙 through Mathlib DerivedCategory.instLinear, Lj^* sends a•𝟙 to a•𝟙, and Lj^* is injective on End(K_T); nonempty U required. No duplicate notion found in Sheaf/ or in runs/2. Docstrings carry source, blueprint tag and 5 steps; proof is sorry only. nt_compile --json: clean, 5.7 s."
  }
 }
