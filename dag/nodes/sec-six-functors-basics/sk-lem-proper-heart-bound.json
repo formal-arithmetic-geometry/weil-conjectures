@@ -404,5 +404,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-319ed8fff",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read the node, all 12 stmt_deps and their Lean records, the blueprint _section.md, the module, the report and the declarations used (IndHeartFullFaithfulnessAssertions, IsConstantModelConstructible, CondensedRing.lowerStar with rightDerivedFunctor, padicAlgClRingObj, continuousMapRingObj). Every hypothesis and clause matches: k-setting binders; E as a finite intermediate field and Qlb as padicAlgClRingObj; Mod over condensedRingObj; R^q p_* = singleFunctor 0, then rightDerived lowerStar, then homology q; hd encodes geometric-fibre dim <= d (bottom vacuous, top excluded, negative d allowed); vanishing for q>2d+1; IndCons membership for q>=0; ambient Cofan preservation for q>=0, equivalent to sum preservation in IndCons given closure and fullness. No extra hypotheses; edge cases fine; helpers are real data; docstrings cite the source and blueprint; proofs are sorry only; statement verbatim. nt_compile clean, single universe u, axioms propext/sorryAx/choice/Quot.sound. Only remark: source.external lists Stacks 0991 (stage-1 note, not a stage-2 fault)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperHeartBound",
+  "declaration": "AlgebraicGeometry.ProEtale.properHeartBound",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.properHeartHigherDirectImage",
+   "AlgebraicGeometry.ProEtale.ProperHeartBoundAssertions",
+   "AlgebraicGeometry.ProEtale.properHeartBound",
+   "AlgebraicGeometry.ProEtale.properHeartBound_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/ProperHeartBound.lean",
+  "statement": "theorem properHeartBound (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ) (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (d : ℤ) (hd : ∀ (y : Y) (n : ℕ), (n : WithBot ℕ∞) ≤ topologicalKrullDim (pullback p (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y) : Scheme.{u}) → (n : ℤ) ≤ d) : ProperHeartBoundAssertions (Profinite.continuousMapRingObj.{u} E) p d",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The two theorems state the finite E and condensed algebraic-closure cases. The real-data helpers expand the canonical degree-zero derived direct image and the three assertions. The integer fibre bound is tested against every finite lower bound of topologicalKrullDim, preserving negative d and empty fibres. Direct-sum preservation is stated by images of arbitrary ambient colimit cofans of ind-constructibles, equivalently sums in the full replete IndCons categories."
  }
 }
