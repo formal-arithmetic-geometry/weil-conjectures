@@ -1,0 +1,238 @@
+{
+ "id": "lem-sp-proper-open-coefficient-mate",
+ "kind": "statement",
+ "title": "Coefficient and site squares for cartesian proper/open interchange",
+ "statement": "Let $A\\to B$ be a unital map of finite commutative rings. Let\n$k:U\\hookrightarrow V$, $r:U\\to W$, $p:V\\to Z$, and $i:W\\hookrightarrow Z$, with $pk=ir$,\nbe a cartesian square of Noetherian schemes [def-pc-scheme], meaning schemes admitting finite affine covers by spectra of Noetherian rings [def-weil-pbc-noetherian-ring], with $r,p$ proper [def-weil-proper-morphism] and $k,i$ open immersions [def-weil-open-immersion]. Use ordinary constant-ring module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Write $T_T=-\\otimes^L_{A_T}B_T$ on either site, using [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For a proper map $v$, let $q_v:T Rv_{*,A}\\to Rv_{*,B}T$ be the $B$-linear adjoint transpose of $T$ of the $A$-counit, using the canonical pullback/tensor comparison. For an open immersion $a$, let $t_a:T a_{!,A}\\xrightarrow{\\sim}a_{!,B}T$ be the summandwise tensor comparison. Neither definition assumes $T$ preserves bounded-below complexes.\n\nLet $\\Gamma_R^{\\rm et}:i_!Rr_{*,R}\\xrightarrow{\\sim}Rp_{*,R}k_!$ be the specified proper/open map of [lem-amb-unbounded-proper-open-interchange]: it is the open adjunct of the inverse of open-restriction exchange followed by $k^*k_!=1$, with exchange the counit mate of the inverse-image square [def-kun-unbounded-exchange]. For $E\\in D^+(U_{\\rm et},A)$ such that $E_B\\in D^+(U_{\\rm et},B)$, the following equality holds in the unbounded $B$-module derived category:\n$$Rp_{*,B}(t_k(E))\\circ q_p(k_{!,A}E)\\circ T_Z(\\Gamma_A^{\\rm et}(E))\n=\\Gamma_B^{\\rm et}(E_B)\\circ i_{!,B}(q_r(E))\\circ t_i(Rr_{*,A}E).$$\n\nFor each finite commutative ring $R$ let $N_T=\\nu_T^*$ be exact site comparison, $e_a:N a_!^{\\rm et}\\xrightarrow{\\sim}a_!^{\\rm pro}N$ its canonical open-extension comparison [lem-cbc-proetale-extension-zero-comparison], and $d_v:N Rv_*^{\\rm et}\\xrightarrow{\\sim}Rv_*^{\\rm pro}N$ its specified counit mate [lem-weil-pbc-comparison-direct-image-canonical-mate]. On etale-origin bounded-below objects define $\\Gamma_R^{\\rm pro}$ by the same open-adjunction prescription using the site transports of the open-restriction exchange and the open unit. For every $E\\in D^+(U_{\\rm et},R)$, these specified maps satisfy\n$$Rp_{*,R}^{\\rm pro}(e_k(E))\\circ d_p(k_!^{\\rm et}E)\\circ N_Z(\\Gamma_R^{\\rm et}(E))\n=\\Gamma_R^{\\rm pro}(N_UE)\\circ i_!^{\\rm pro}(d_r(E))\\circ e_i(Rr_*^{\\rm et}E).$$\nBoth squares are natural in $E$. No flatness of $B$ over $A$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B (lemma-shriek-proper-and-open), its cartesian open-adjunction normalization; Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings). Agent-stated coefficient/site naturality of these specified maps, not an additional assertion quoted verbatim from either tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-amb-unbounded-proper-open-interchange",
+  "def-kun-unbounded-exchange",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "On the etale sites, write $\\lambda_v:T_Vv_{*,A}^{-1}\\to v_{*,B}^{-1}T_W$ for the canonical tensor/pullback comparison supplied by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The maps $q_p$ and $q_r$ are, by their definitions, the adjoint transposes of the corresponding $A$-counits after applying $T$. For the cartesian square, [lem-amb-unbounded-proper-open-interchange] identifies $\\Gamma_R^{\\rm et}$ as the open-adjunction adjunct of the inverse of the proper/open exchange. Apply the mate-pasting identities of [lem-weil-pbc-mate-pasting] to the rectangle formed by the two proper adjunctions, the two open adjunctions, and $T$. The two composites in the displayed etale equality are the mates of the same composite on inverse images: the tensor comparisons only reassociate $T$ with the inverse-image functors, while the proper and open factors are respectively the counit mates and the open-extension comparisons. Uniqueness of mates gives exactly the displayed equality, with no flatness assumption on $B$ over $A$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Existence, uniqueness, naturality; the coefficient comparison is the adjoint transpose, and the proper/open map is normalized by its open adjunct"
+   }
+  },
+  {
+   "text": "For the site equation, use the exact comparison functor $N=\\nu^*$ and its inverse-image compatibility [lem-weil-pbc-comparison-pullback]. For a proper edge $v$, the map $d_v$ is the specified counit mate and satisfies the counit normalization in [lem-weil-pbc-comparison-direct-image-canonical-mate]. For an open edge $a$, $e_a$ is the natural extension-by-zero comparison, compatible with composition, by [lem-cbc-proetale-extension-zero-comparison]. Transport the same mate rectangle from Step 1 across $N$: the tensor comparison is natural by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the proper and open sides become $d_v$ and $e_a$, and the transported open-adjunction prescription is precisely the definition of $\\Gamma_R^{\\rm pro}$. The mate-pasting identities therefore identify both sides with the same transported mate, yielding the displayed pro-etale equality on every bounded-below etale-origin object.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Existence, uniqueness, naturality; transport of the adjoint-transpose comparison through the site comparison"
+   }
+  },
+  {
+   "text": "Every constituent map in both composites is natural in the input: this is part of the naturality assertions for the tensor comparison, the proper/open interchange, the direct-image counit mate, and the extension-by-zero comparison cited above. Composition of natural transformations is natural, so both displayed equalities are natural in $E$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Existence, uniqueness, naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Existence, uniqueness, naturality; mate-pasting transport of the proper/open comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properOpen.*(tensor|coefficient)|interchange.*(tensor|scalar)|changeOfCoefficients",
+   "results": "{\"t\": \"2026-10-17T08:34:08Z\", \"tool\": \"grep\", \"query\": \"properOpen.*(tensor|coefficient)|interchange.*(tensor|scalar)|changeOfCoefficients\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mateEquiv",
+   "results": "{\"t\": \"2026-10-17T08:34:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Adjunction.mateEquiv'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with proper pushforward and extension by zero interchange",
+   "results": "{\"t\": \"2026-10-17T08:34:09Z\", \"tool\": \"leansearch\", \"query\": \"Extension of scalars commutes with proper pushforward and extension by zero interchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.map'\", \"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgHom.extendScalars\", \"ModuleCat.instIsLeftAdjointExtendScalars\", \"PresheafOfModules.pushforward_obj_obj\"], \"digest\": \"c9a71774756cdedb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-17T08:34:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.sheafificationAdjunction\", \"CategoryTheory.HasSheafify.mk'\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction\", \"CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction\", \"CategoryTheory.GrothendieckTopology.W_adj_unit_app\", \"CategoryTheory.sheafComposeNatIso\", \"CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans\"], \"digest\": \"352ff0439986de05\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of coefficients commutes with the proper open interchange isomorphism by the calculus of mates on etale sites",
+   "results": "{\"t\": \"2026-10-17T08:34:17Z\", \"tool\": \"leanfinder\", \"query\": \"Derived change of coefficients commutes with the proper open interchange isomorphism by the calculus of mates on etale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\"], \"digest\": \"148b267eb4e3749d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "grep",
+   "query": "proper|open|adjunction|tensor",
+   "results": "{\"t\": \"2026-10-17T08:39:45Z\", \"tool\": \"grep\", \"query\": \"proper|open|adjunction|tensor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Basic.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Basic.lean\", \"Mathlib/CategoryTheory/Square.lean\", \"Mathlib/CategoryTheory/Widesubcategory.lean\", \"Mathlib/CategoryTheory/Widesubcategory.lean\"], \"digest\": \"09607811b19b9ba7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open interchange comparison is compatible with change of coefficient rings",
+   "results": "{\"t\": \"2026-10-17T08:39:45Z\", \"tool\": \"leansearch\", \"query\": \"Proper open interchange comparison is compatible with change of coefficient rings\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-17T08:39:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.id\", \"CategoryTheory.Adjunction.instInhabitedId\", \"CategoryTheory.Equivalence.toAdjunction\", \"CategoryTheory.Equivalence.toAdjunction'\", \"CategoryTheory.Adjunction.isLeftAdjoint\", \"CategoryTheory.Adjunction.isRightAdjoint\", \"CategoryTheory.Adjunction.mk'\", \"CategoryTheory.Adjunction.mkOfHomEquiv\"], \"digest\": \"0319b40c2d671949\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper open interchange comparison is compatible with extension of scalars by the mate calculus on finite coefficient etale module derived categories",
+   "results": "{\"t\": \"2026-10-17T08:39:56Z\", \"tool\": \"leanfinder\", \"query\": \"Proper open interchange comparison is compatible with extension of scalars by the mate calculus on finite coefficient etale module derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"Algebra.FormallyEtale.comp\", \"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.Extension.tensorCotangentSpace\"], \"digest\": \"541c14f0970c6bd7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_square",
+   "results": "{\"t\": \"2026-10-17T09:41:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_square\"], \"digest\": \"f75c41a4078bcb6c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of coefficients commutes with the proper open interchange mate on etale module derived categories",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; KaehlerDifferential.isBaseChange_of_formallyEtale; related presheaf differential constructions",
+   "date": "2026-10-17",
+   "verdict": "no match: no proper/open derived coefficient mate square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction, tensorHom",
+   "results": "0 hits; unknown identifier tensorHom",
+   "date": "2026-10-17",
+   "verdict": "no match: no statement of this coefficient/site square"
+  },
+  {
+   "tool": "grep",
+   "query": "proper|open|adjunction|tensor|mate (Mathlib/CategoryTheory)",
+   "results": "25 hits, mostly MarkovCategory, Widesubcategory, and generic category files; no proper/open coefficient theorem",
+   "date": "2026-10-17",
+   "verdict": "no match: only unrelated generic category declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with the proper open comparison map by mate calculus",
+   "results": "8 hits: ModuleCat.ExtendScalars.map', ModuleCat.ExtendScalars.obj', AlgHom.extendScalars and related change-of-rings declarations",
+   "date": "2026-10-17",
+   "verdict": "no match: no derived sheaf proper/open coefficient map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension naturality of proper pushforward and open extension by zero comparison",
+   "results": "8 hits: SheafOfModules.pushforwardNatTrans_app_val_app_apply and related pushforward map/composition declarations",
+   "date": "2026-10-17",
+   "verdict": "no match: no normalized proper/open coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_square",
+   "results": "CategoryTheory.mateEquiv_square in Mathlib.CategoryTheory.Adjunction.Mates",
+   "date": "2026-10-17",
+   "verdict": "generalization: generic mate square composition, not this sheaf coefficient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|Adjunction|NatTrans (Mathlib/CategoryTheory)",
+   "results": "25 hits including generic Adjunction/Mates and NatTrans declarations; no proper/open coefficient result",
+   "date": "2026-10-17",
+   "verdict": "no match: only generic category theory"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-et-proet-coefficient-compatibility",
+  "date": "2026-10-17",
+  "group": "Q115"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Existence, uniqueness, naturality: the coefficient comparison is defined as an adjoint transpose, and the proper/open comparison is normalized by the open-adjunction mate; the present node makes the coefficient and site naturality square explicit.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-proper-open-coefficient-mate",
+  "worker": "stage1",
+  "summary": "Audited the imported coefficient/site mate statement against its cited Stacks proper/open interchange and the coefficient-reduction blueprint. No exact closed Lean declaration exists. The proof is split into the etale mate-pasting equality, its transport across the etale/pro-etale comparison using the named counit and extension-by-zero comparisons, and naturality. No new DAG node was needed: all non-elementary inputs are existing nodes.",
+  "blueprint": "The steps realize the existence/uniqueness/naturality paragraph of det-sp-reduction-exceptional: scalar-extension maps are adjoint transposes, and the proper/open comparison is fixed by its open-adjunction normalization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q93-1bc8e81bf",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-1bc8e81bf (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, required contract files, Stacks 0F7B/0GL6, current blueprint proof, and every cited node statement. Verified coefficient categories, base-change and mate directions, unbounded/bounded-below hypotheses, naturality, edge cases including Z/4→Z/2, identity and empty-open cases, duplicate searches, Mathlib searches, and no SGA use. No new nodes or repairs are needed; review.md records the checks."
+ }
+}

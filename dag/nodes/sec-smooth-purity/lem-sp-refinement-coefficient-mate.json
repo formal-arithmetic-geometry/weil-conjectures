@@ -1,0 +1,442 @@
+{
+ "id": "lem-sp-refinement-coefficient-mate",
+ "kind": "statement",
+ "title": "Coefficient and site squares for the explicit refinement theta",
+ "statement": "Let $X,T_1,T_2$ be Noetherian schemes [def-pc-scheme], meaning schemes admitting finite affine covers by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Let $u:T_1\\to T_2$ be proper [def-weil-proper-morphism] and $j_a:X\\hookrightarrow T_a$ open immersions [def-weil-open-immersion] with $uj_1=j_2$. Use the constant-ring module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. For every finite commutative ring $R$, form $V=T_1\\times_{T_2}X$ with $b:V\\to T_1$, $p:V\\to X$, and the open-and-closed section $s=(j_1,1_X):X\\to V$. Let\n$$\\theta_{u,R}=c_{p,s,R}\\circ Rp_{*,R}(e_{u,R})\\circ r_{u,R}:j_2^*Ru_{*,R}j_{1!}\\xrightarrow{\\sim}1$$\nbe the specified composite of open restriction $r_u$, open base-change $e_u:b^*j_{1!}\\cong s_!$, and component restriction $c_{p,s}:Rp_*s_!\\cong1$ in [def-weil-pbc-proper-open-comparison, lem-weil-pbc-derived-open-restriction, lem-weil-pbc-clopen-section-direct-image]. Let $\\alpha_{u,R}:j_{2!}\\to Ru_{*,R}j_{1!}$ be the open adjunct of $\\theta_{u,R}^{-1}$ specified there.\n\nLet $A\\to B$ be a unital map of finite commutative rings and set $T_T=-\\otimes^L_{A_T}B_T$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let $t_a:T a_{!,A}\\cong a_{!,B}T$ be the summandwise open tensor map, and $q_u:T Ru_{*,A}\\to Ru_{*,B}T$ the $B$-linear adjoint transpose of the $A$-counit after coefficient extension, using the canonical pullback/tensor comparison. For every $L\\in D^+(X_{\\rm et},A)$ with $L_B\\in D^+(X_{\\rm et},B)$,\n$$Ru_{*,B}(t_{j_1}(L))\\circ q_u(j_{1!,A}L)\\circ T_{T_2}(\\alpha_{u,A}(L))\n=\\alpha_{u,B}(L_B)\\circ t_{j_2}(L).$$\nThis is an equality in the unbounded category, without asserting $T(D^+)\\subseteq D^+$.\n\nFor a finite commutative $R$ write $N_T=\\nu_T^*$, $e_j:N j_!^{\\rm et}\\cong j_!^{\\rm pro}N$ for the canonical open comparison [lem-cbc-proetale-extension-zero-comparison], and $d_u:N Ru_*^{\\rm et}\\cong Ru_*^{\\rm pro}N$ for the counit mate [lem-weil-pbc-comparison-direct-image-canonical-mate]. Define $\\theta_{u,R}^{\\rm pro}$ on etale-origin bounded-below input by the same three constituents: the site-transported open-restriction exchange, the summandwise open base-change identification, and restriction to the clopen component. Let $\\alpha_{u,R}^{\\rm pro}$ be the open adjunct of its inverse. Then for every $L\\in D^+(X_{\\rm et},R)$,\n$$Ru_{*,R}^{\\rm pro}(e_{j_1}(L))\\circ d_u(j_{1!}^{\\rm et}L)\\circ N_{T_2}(\\alpha_{u,R}(L))\n=\\alpha_{u,R}^{\\rm pro}(N_XL)\\circ e_{j_2}(L).$$\nBoth equations are natural in $L$ and require no cartesian hypothesis on the original refinement square and no flatness hypothesis on $B$ over $A$.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B (lemma-shriek-proper-and-open), specialized to a refinement, with the theta_u construction specified in def-weil-pbc-proper-open-comparison. Agent-stated naturality of the three constituents under coefficient and site change."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-proper-open-comparison",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-clopen-section-direct-image",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "First identify the coefficient maps with the normalizations in [lem-sf-proper-open-coefficient-refinement]. Its $Q$ is our $T$, its $\\lambda_u:u_B^*T\\cong Tu_A^*$ is the same canonical pullback/tensor comparison, and its $\\chi_u$ is $q_u$: their $B$-linear transposes are both $T(\\varepsilon_{u,A})\\lambda_u$. Its $\\beta_j$ is $t_j$. Indeed, before deriving, the summandwise tensor map restricted to the open sends $m\\otimes b$ to the same tensor; under the open unit it is the identity. Its inverse therefore has open-adjunction transpose $\\lambda_{j,j_!M}^{-1}T(\\eta_{j,A,M})$, exactly the formula specifying $\\beta_j$. This check also holds on K-flat representatives and hence after localization, by [lem-weil-pbc-site-derived-tensor-descent]. It is a check of $B$-linear maps, not of their underlying $A$-linear maps.",
+   "uses": [
+    "lem-sf-proper-open-coefficient-refinement",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I, lemma-j-shriek-and-tensor; the identity on the open, with derived descent as in Tag 0GL1"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-proper-open-coefficient-refinement] with $K=L$. Its hypotheses are exactly the present proper refinement of Noetherian schemes, the unital map of finite commutative rings, $L\\in D^+(A)$ and $T_XL=L_B\\in D^+(B)$. Its $\\alpha_{u,R}$ uses the same specified three-factor $\\theta_{u,R}$, including component restriction. Substituting the identifications in Step 1 into its displayed equation gives the coefficient equation of this item in $D(T_{2,\\mathrm{et}},B)$. In particular no claim that $T$ preserves $D^+$ and no invertibility of $q_u$ on arbitrary input is used.",
+   "uses": [
+    "lem-sf-proper-open-coefficient-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; the named-map refinement is the existing cited node, not an additional assertion attributed to the remark"
+   }
+  },
+  {
+   "text": "For the site equation fix $R$ and suppress it in notation. Write superscripts $e,p$ for the etale and pro-etale functors. By [lem-weil-pbc-proper-open-section], $b$ is open, $s$ is clopen and $ps=1_X$; by [lem-weil-pbc-proper-open-p-proper], $p$ is proper. Thus the direct-image mate comparison applies to both proper maps $u,p$ (proper morphisms are quasi-compact and separated, hence quasi-separated). Put $K=j^e_{1!}L$. Exactness of etale open extension and inverse image, together with [lem-weil-pbc-exact-functor-bounded-below], gives $K,b_e^*K,s^*b_e^*K\\in D^+$. By [lem-sf-comparison-pullback-exact], every $N$ here is additive and exact, carries the constant ring to the same constant ring, and preserves these lower bounds. These facts type every occurrence of $d_u,d_p$ below on bounded-below etale input.",
+   "uses": [
+    "lem-weil-pbc-proper-open-section",
+    "lem-weil-pbc-proper-open-p-proper",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R, section-comparison; proper/open geometry of the specified theta construction"
+   }
+  },
+  {
+   "text": "Let $Z=V\\setminus s(X)$. We will use the two components $V=s(X)\\amalg Z$ to test maps, without testing derived maps on stalks. On the etale site [lem-weil-pbc-etale-sheaf-clopen-product] gives the product description of abelian sheaves and their morphisms. An $R$-action is a family of component actions, so the same description holds for $R$-module sheaves. On the pro-etale site the module version and the insertion $s_!M=(M,0)$ are [lem-sp-clopen-section-component]. These exact inverse equivalences extend to complexes and their homotopies componentwise. Quasi-isomorphisms are componentwise; the two inverse functors and their unit identities therefore descend by [lem-weil-pbc-localization-universal-property]. Consequently in each derived category a map into $s_!M$ is determined by its $s^*$ restriction: in the product it is a pair $(f,0)$. Also $s_!$ is right adjoint to $s^*$ with unit the projection $F\\to s_!s^*F$.",
+   "uses": [
+    "lem-weil-pbc-etale-sheaf-clopen-product",
+    "lem-sp-clopen-section-component",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.proof.md",
+    "place": "Disjoint-open-cover product description; componentwise extension to complexes and localization written out"
+   }
+  },
+  {
+   "text": "Write $a_v:N_{\\mathrm{src}(v)}v_e^*\\xrightarrow{\\sim}v_p^*N_{\\mathrm{tgt}(v)}$ for [lem-weil-pbc-comparison-pullback]. It is coherent for composites and the cartesian square defining $V$. Write $E_a:N a^e_!\\xrightarrow{\\sim}a^p_!N$ for [lem-cbc-proetale-extension-zero-comparison], reserving $e^e,e^p$ for the open base-change constituent of $\\theta$. The $E_a$ preserve the normalized open unit: the comparison identifies the same section over an object in the open, and extension by zero inserts zero otherwise; exactness lets this identity pass termwise to complexes. For the square $(1_X,s,j_1,b)$ this gives\n$$E_s(L)N_V(e^e_L)=e^p_{N_XL}\\,b_p^*(E_{j_1}(L))\\,a_{b,K}.\\tag{O}$$\nTo check the equation, use the inverse-open-unit description of etale base change in [lem-cbc-extension-zero-base-change], and the pro-etale unit normalization in [lem-sf-open-tensor-normalization] applied to $g=b,j=j_1$. Both sides land in $s^p_!N_XL$, and their sources are supported on $s(X)$ by the canonical open base-change isomorphisms. Restricting to $s(X)$ makes both maps the identity on $N_XL$, by coherence of $a$ and the preceding unit identity. Full faithfulness of pro-etale open extension, stated in that normalization node, proves (O).",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-extension-zero-base-change",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison, adjoint comparison; canonical open-unit normalization"
+   }
+  },
+  {
+   "text": "The open-restriction constituent obeys the following mate identity on $K$:\n$$r^p_{N_{T_1}K}\\,(j_2^p)^*d_u(K)\\,a_{j_2,Ru_*^eK}\n=Rp_*^p(a_{b,K})\\,d_p(b_e^*K)\\,N_X(r^e_K).\\tag{R}$$\nHere $r^e$ is open restriction [lem-weil-pbc-derived-open-restriction], with its canonical exchange normalization, and $r^p$ is the site-transported open restriction of the statement. To verify the named maps in (R), express restriction exchange as the adjoint of $b^*\\varepsilon_u$ after the inverse-image square, exactly the formula of [def-kun-unbounded-exchange]. Express $d_u$ and $d_p$ by the counit equations of [lem-weil-pbc-comparison-direct-image-canonical-mate]. The two pastings of inverse-image comparisons are equal because [lem-weil-pbc-comparison-pullback] is compatible with the cartesian identification and composites. Taking their mates by clauses (1),(2) of [lem-weil-pbc-mate-pasting] gives the two composites displayed in (R), with these orientations. This uses the normalization of $d$, not an unspecified isomorphism of the two direct images.",
+   "uses": [
+    "lem-weil-pbc-derived-open-restriction",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; Tags 0E46 and 0E47, pasting of exchange mates"
+   }
+  },
+  {
+   "text": "Write $c^e:Rp_*^es^e_!L\\xrightarrow{\\sim}L$ for [lem-weil-pbc-clopen-section-direct-image] and $c^p:Rp_*^ps^p_!N_XL\\xrightarrow{\\sim}N_XL$ for component restriction on the pro-etale side. The latter is computed termwise by [lem-sp-clopen-section-component], whose insertion preserves K-injectives. The inverse of either $c$ has proper-adjunction transpose\n$$\\rho^\\bullet:p_\\bullet^*M\\longrightarrow s^\\bullet_!M,$$\nthe clopen projection, using $s^*p^*M=M$. Indeed $s^*\\dashv s_!$ is the projection/insertion adjunction of Step 4, so its unit is $(1,0)$. The composite $s^*p^*\\dashv Rp_*s_!$ has left functor the identity and counit precisely restriction of sections to the component, which is the specified $c$. The composite hom bijection of [def-weil-pbc-composite-adjunction] therefore takes $c^{-1}$ to the identity under $s^*p^*=1$ and, before the last transpose, to the projection $\\rho$. This proves the normalization on both sites, not just existence of an isomorphism $Rp_*s_!\\cong1$.",
+   "uses": [
+    "lem-weil-pbc-clopen-section-direct-image",
+    "lem-sp-clopen-section-component",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.proof.md",
+    "place": "Component section formula; composite hom bijection and clopen projection normalization"
+   }
+  },
+  {
+   "text": "Exact additive $N_V$ preserves the clopen projection. More explicitly, with $M=L$ on the etale side and $M=N_XL$ on the pro-etale side, the map\n$$E_s(L)\\,N_V(\\rho^e_L)\\,a_{p,L}^{-1}:p_p^*N_XL\\longrightarrow s^p_!N_XL$$\nhas restriction $1_{N_XL}$ on $s(X)$: $ps=1_X$, compatibility of $a$ with composites, and the unit normalization of $E_s$ in Step 5 identify all factors there with the identity. Its complementary component is zero, since its target has zero complementary component. By Step 4 it is $\\rho^p_{N_XL}$. This is an equality in the module derived category, obtained from the product equivalence; no faithfulness of stalks or of a restriction-of-scalars functor is asserted.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF open comparison, restricted to a clopen component; component calculation"
+   }
+  },
+  {
+   "text": "Now form\n$$h=Rp_*^p(E_s(L))\\,d_p(s^e_!L)\\,N_X((c^e)^{-1}):N_XL\\longrightarrow Rp_*^ps^p_!N_XL.$$\nIts transpose under $p_p^*\\dashv Rp_*^p$, by the counit normalization of [lem-weil-pbc-comparison-direct-image-canonical-mate] and naturality of $a_p$, is\n$$E_s(L)\\,N_V\\bigl(\\varepsilon^e_{p,s_!L}\\,p_e^*((c^e)^{-1})\\bigr)\\,a_{p,L}^{-1}\n=E_s(L)N_V(\\rho^e_L)a_{p,L}^{-1}=\\rho^p_{N_XL}.$$\nThe first equality uses the transpose identified in Step 7, and the last equality is Step 8. The hom bijection [def-weil-pbc-adjunction-mate] makes $h=(c^p)^{-1}$. Multiplying by $c^p$ on the left and by $N_X(c^e)$ on the right gives\n$$c^p\\,Rp_*^p(E_s(L))\\,d_p(s^e_!L)=N_X(c^e).\\tag{C}$$",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints: counit normalization; explicit transpose calculation"
+   }
+  },
+  {
+   "text": "Define\n$$C_L=(j_2^p)^*Ru_*^p(E_{j_1}(L))\\,(j_2^p)^*d_u(K)\\,a_{j_2,Ru_*^eK}.$$\nIt maps $N_X(j_2^e)^*Ru_*^e j^e_{1!}L$ to $(j_2^p)^*Ru_*^p j^p_{1!}N_XL$. Using the specified composite in [def-weil-pbc-proper-open-comparison], multiply the three identities already proved:\n$$\\begin{aligned}\n\\theta^p C_L\n&=c^p\\,Rp_*^p\\bigl(e^p\\,b_p^*E_{j_1}\\,a_{b,K}\\bigr)\\,d_p(b_e^*K)\\,N_X(r^e)\\\\\n&=c^p\\,Rp_*^p(E_sN_V(e^e))\\,d_p(b_e^*K)\\,N_X(r^e)\\\\\n&=c^p\\,Rp_*^p(E_s)\\,d_p(s^e_!L)\\,N_X(Rp_*^e(e^e))\\,N_X(r^e)\\\\\n&=N_X(c^e)\\,N_X(Rp_*^e(e^e))\\,N_X(r^e)=N_X(\\theta^e).\n\\end{aligned}$$\nThe first line is (R) and naturality of $r^p$ in $E_{j_1}$; the second is (O); the third is naturality of $d_p$ in $e^e$; the fourth is (C). This explicitly compares the three constituents defining the two theta maps.",
+   "uses": [
+    "def-weil-pbc-proper-open-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, refinement case; explicit three-constituent calculation"
+   }
+  },
+  {
+   "text": "Let $H=Ru_*^p(E_{j_1}(L))\\,d_u(K)\\,N_{T_2}(\\alpha^e_{u,L})$. Transport its source by $E_{j_2}(L)^{-1}$, obtaining a map from $j^p_{2!}N_XL$. Under the open adjunction [prop-exc-open-adjoint], its transpose is $C_LN_X((\\theta^e)^{-1})$: this follows by naturality of $a_{j_2}$ and the open-unit compatibility of $E_{j_2}$ established in Step 5, since the transpose of $\\alpha^e$ is $(\\theta^e)^{-1}$ by [def-weil-pbc-proper-open-comparison]. Step 10 makes this transpose $(\\theta^p)^{-1}$. By definition this is also the transpose of $\\alpha^p_{u,R}(N_XL)$. Injectivity of the open-adjunction hom bijection gives $H=\\alpha^p_{u,R}(N_XL)E_{j_2}(L)$, the required site equation. Every factor and every hom bijection used is natural in $L$, so both equations are natural. The only cartesian squares used are those defining $V$ and open base change inside $V$; the original refinement square was never assumed cartesian. The coefficient argument used just the two stated lower bounds and imposed no flatness on $B$.",
+   "uses": [
+    "prop-exc-open-adjoint",
+    "def-weil-pbc-proper-open-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; open-adjunction transpose of the three-constituent identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proper-open-coefficient-refinement",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-proper-open-section",
+  "lem-weil-pbc-proper-open-p-proper",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-sp-clopen-section-component",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-extension-zero-base-change",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-derived-open-restriction",
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-clopen-section-direct-image",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-proper-open-comparison",
+  "prop-exc-open-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, refinement case; explicit compatibility of the prescribed theta constituents, using Tag 09AF and the counit mate formula of Tag 07A7. Coefficient square reused from lem-sf-proper-open-coefficient-refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open restriction proper direct image clopen section comparison is compatible with derived scalar extension",
+   "results": "{\"t\": \"2026-10-17T08:34:09Z\", \"tool\": \"leansearch\", \"query\": \"Open restriction proper direct image clopen section comparison is compatible with derived scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.Scheme.Hom.app_appIso_inv\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"Derivation.restrictScalars\", \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\"], \"digest\": \"c9b89164eeb23f3e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism restricting to the identity on an open subscheme the canonical compactification refinement comparison commutes with derived tensor and change of site",
+   "results": "{\"t\": \"2026-10-17T08:34:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper morphism restricting to the identity on an open subscheme the canonical compactification refinement comparison commutes with derived tensor and change of site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc\", \"AlgebraicGeometry.Scheme.Hom.map_appLE'\", \"AlgebraicGeometry.Scheme.Hom.appLE_map'\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\"], \"digest\": \"f12828507aba4a42\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|isIso|Functor",
+   "results": "{\"t\": \"2026-10-17T08:39:45Z\", \"tool\": \"grep\", \"query\": \"adjunction|isIso|Functor\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean\"], \"digest\": \"91a97751c2548d47\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactification refinement map commutes with tensor extension of scalars",
+   "results": "{\"t\": \"2026-10-17T08:39:45Z\", \"tool\": \"leansearch\", \"query\": \"Compactification refinement map commutes with tensor extension of scalars\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "{\"t\": \"2026-10-17T08:39:46Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapIso\", \"CategoryTheory.Functor.mapIso_refl\", \"CategoryTheory.Functor.mapIso_symm\", \"CategoryTheory.Functor.mapIso_hom\", \"CategoryTheory.Functor.mapIso_inv\", \"CategoryTheory.Functor.mapIso_trans\", \"CategoryTheory.Functor.mapIso_injective\", \"CategoryTheory.Functor.preimageIso_mapIso\"], \"digest\": \"84c93b8069f66a9f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical proper compactification refinement comparison is compatible with extension of scalars through its explicit theta construction",
+   "results": "{\"t\": \"2026-10-17T08:39:56Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical proper compactification refinement comparison is compatible with extension of scalars through its explicit theta construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AbstractCompletion.compare_comp_eq_compare\", \"Module.Baer.ExtensionOfMaxAdjoin.extensionToFun_wd\", \"preStoneCechExtend_extends\", \"stoneCechExtend_extends\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"IsAdicComplete.StrictMono.extend_eq\", \"Module.Baer.extensionOfMax_le\", \"Module.Baer.ExtensionOfMaxAdjoin.extensionToFun\"], \"digest\": \"e0ef5ec1701d0ea5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic category, algebraic etaleness or underived sheaf operations; no normalized finite-ring coefficient and site square"
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*(coefficient|tensor)|properOpen|clopenSection|proetale",
+   "results": "{\"t\": \"2026-10-17T14:14:02Z\", \"tool\": \"grep\", \"query\": \"refinement.*(coefficient|tensor)|properOpen|clopenSection|proetale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"7bd5a9f58fe6453b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on the specified derived proper/open coefficient and site comparisons",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical direct image comparison mate respects open restriction and extension by zero on etale and proetale derived categories",
+   "results": "{\"t\": \"2026-10-17T14:14:03Z\", \"tool\": \"leansearch\", \"query\": \"Canonical direct image comparison mate respects open restriction and extension by zero on etale and proetale derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrict_map\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom\"], \"digest\": \"5667eb88fc835db6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on the specified derived proper/open coefficient and site comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_square",
+   "results": "{\"t\": \"2026-10-17T14:14:03Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_square\"], \"digest\": \"f75c41a4078bcb6c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate-pasting identity only; does not supply the specified etale/pro-etale refinement maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proper open refinement comparison defined by open restriction and a clopen section commutes with extension of coefficients and etale to proetale pullback",
+   "results": "{\"t\": \"2026-10-17T14:14:13Z\", \"tool\": \"leanfinder\", \"query\": \"The proper open refinement comparison defined by open restriction and a clopen section commutes with extension of coefficients and etale to proetale pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom_assoc\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map_assoc\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom\"], \"digest\": \"0f4163c636e42eea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on the specified derived proper/open coefficient and site comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison functor between ringed sites preserves the canonical proper compactification refinement morphism because the direct image comparison is the mate of the pullback comparison",
+   "results": "{\"t\": \"2026-10-17T14:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"A comparison functor between ringed sites preserves the canonical proper compactification refinement morphism because the direct image comparison is the mate of the pullback comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"topCatToSheafCompHausLike_map_val_app\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"TopCat.Sheaf.pushforward_forget\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"TopCat.Sheaf.pushforwardForgetIso\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\"], \"digest\": \"6d87a199745a0450\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on the specified derived proper/open coefficient and site comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-et-proet-coefficient-compatibility",
+  "date": "2026-10-17",
+  "group": "Q115"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality, compatibility of b with extension by zero and composite adjunctions: the noncartesian refinement alpha_u, via its three-constituent theta_u (former Step 6).",
+   "via": [
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-refinement-coefficient-mate",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuse the existing exact coefficient-refinement node after checking the B-linear counit and open-unit normalizations. Prove the site square by open base-change compatibility, exchange mate pasting, the clopen projection transpose and the specified three-factor theta calculation. No new nodes. No SGA route or unrestricted boundedness claim.",
+  "blueprint": "det-sp-reduction-exceptional, Locality: compatibility of the compact-support coefficient comparison with open extension and composite adjunctions; this item supplies the noncartesian proper-refinement normalization required by lem-sp-et-proet-coefficient-compatibility. Steps 1–2 give coefficient compatibility; Steps 3–11 give the site square from the prescribed theta constituents.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proper-open-coefficient-refinement",
+    "why": "Exact existing coefficient square with the same theta normalization, reused instead of creating a duplicate; the site square is proved here."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-proper-open-section",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-proper-open-p-proper",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-etale-sheaf-clopen-product",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-sp-clopen-section-component",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-derived-open-restriction",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "def-kun-unbounded-exchange",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic mate-pasting identities for the site-comparison cube, preserving the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-clopen-section-direct-image",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "def-weil-pbc-proper-open-comparison",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   },
+   {
+    "node": "prop-exc-open-adjoint",
+    "why": "Generic construction or property used at its stated coefficient/site level for the theta constituent calculation; no alternative purity or compactification route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proper-open-coefficient-refinement",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-proper-open-section",
+  "lem-weil-pbc-proper-open-p-proper",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-sp-clopen-section-component",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-extension-zero-base-change",
+  "lem-weil-pbc-derived-open-restriction",
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-clopen-section-direct-image",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-proper-open-comparison",
+  "prop-exc-open-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q94-add72e938",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q94-add72e938 (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements and sources, chapter/unit route, and delivery instructions. Verified all 11 proof steps, coefficient/base-change types, bounded-below hypotheses, mate orientations, clopen component calculation, edge cases, duplicate search, and route-lock compliance. No repairs needed; review.md records the checks."
+ }
+}
