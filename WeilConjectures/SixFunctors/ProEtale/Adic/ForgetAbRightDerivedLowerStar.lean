@@ -11,10 +11,43 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicIntExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleComparison
 
 /-!
-# Scratch
+# Underlying abelian sheaves of derived direct images of `ℓ`-adic sheaves
+
+For a morphism of schemes `f : X ⟶ Y`, taking underlying abelian sheaves (forgetting the
+`ℚ̄_ℓ,X`-module structure and then the `ℚ̄_ℓ`-vector space structure,
+`AlgebraicGeometry.ProEtale.AdicSheaf.toAb`) commutes with the derived direct images:
+for an `ℓ`-adic sheaf `F` on `X_proét`,
+```
+Hᵠ(Rf_* F[0])_ab ≅ Hᵠ(Rf_* F_ab[0]),
+```
+the left hand side computed in `D(AdicSheaf l Y)` with `(f)_*ᵃ[l].rightDerivedFunctor`, the right
+hand side in the derived category of abelian sheaves on `Y_proét`
+(`AlgebraicGeometry.ProEtale.toAbHomologyRightDerivedAdicLowerStarIso`). The same holds for the
+underlying sheaves of `ℚ̄_ℓ`-modules
+(`AlgebraicGeometry.ProEtale.forgetHomologyRightDerivedAdicLowerStarIso`).
+
+The point is that **the underlying abelian sheaf of an injective `ℓ`-adic sheaf is injective**.
+Both forgetful functors have exact left adjoints:
+
+* the free `ℚ̄_ℓ,X`-module functor `G ↦ ℚ̄_ℓ,X ⊗ G` on sheaves of `ℚ̄_ℓ`-modules is exact,
+  because every sheaf of vector spaces over a field is flat
+  (`CategoryTheory.Sheaf.flat_of_field`, from the relation criterion of
+  `WeilConjectures.CategoryTheory.Sites.FlatLocalRelations`), so that the forgetful functor
+  from modules over a flat ring object preserves injectives
+  (`CategoryTheory.Mod.preservesInjectiveObjects_forget`);
+* the sheafified free `ℚ̄_ℓ`-module functor `A ↦ (ℚ̄_ℓ ⊗[ℤ] A)^#` on abelian sheaves is exact,
+  `ℚ̄_ℓ` being flat over `ℤ`.
+
+Hence the forgetful functors are exact, commute with `f_*` on the nose and send injectives to
+injectives, which makes the base change morphisms of derived functors invertible
+(`CategoryTheory.Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic`). Since
+`AdicSheaf.toAb` reflects isomorphisms, lisse sheaves can then be detected through morphisms
+inducing isomorphisms of underlying abelian sheaves
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.of_isIso_toAb_map`).
 -/
 
 @[expose] public section
@@ -114,7 +147,8 @@ lemma Functor.preservesMonomorphisms_whiskeringRight_obj {C D E : Type*} [Catego
     [Category* D] [Category* E] [HasPullbacks D] (F : D ⥤ E) [F.PreservesMonomorphisms] :
     ((Functor.whiskeringRight C D E).obj F).PreservesMonomorphisms where
   preserves α _ := by
-    have (X : C) : Mono ((Functor.whiskerRight α F).app X) := F.map_mono (α.app X)
+    have (X : C) : Mono ((((Functor.whiskeringRight C D E).obj F).map α).app X) :=
+      F.map_mono (α.app X)
     exact NatTrans.mono_of_mono_app _
 
 end CategoryTheory
@@ -157,5 +191,144 @@ instance preservesInjectiveObjects_weilCoefficientsForgetAb (X : Scheme.{u}) :
     (weilCoefficientsForgetAb l X).PreservesInjectiveObjects :=
   Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
     (weilCoefficientsFreeAdjunction X l)
+
+/-- The underlying abelian sheaf of an `ℓ`-adic sheaf on `X_proét`: forget the
+`ℚ̄_ℓ,X`-module structure, then the `ℚ̄_ℓ`-vector space structure. -/
+noncomputable abbrev AdicSheaf.toAb (X : Scheme.{u}) :
+    AdicSheaf l X ⥤ Sheaf (ProEt.topology X) Ab.{u + 1} :=
+  AdicSheaf.forget X ⋙ weilCoefficientsForgetAb l X
+
+/-- The underlying abelian sheaf of an injective `ℓ`-adic sheaf is injective. -/
+instance (X : Scheme.{u}) : (AdicSheaf.toAb l X).PreservesInjectiveObjects := by
+  unfold AdicSheaf.toAb
+  infer_instance
+
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- The pushforward of `ℓ`-adic sheaves commutes with taking underlying abelian sheaves. -/
+noncomputable def adicLowerStarCompToAbIso :
+    (f)_*ᵃ[l] ⋙ AdicSheaf.toAb l Y ≅ AdicSheaf.toAb l X ⋙ (f)_*[Ab.{u + 1}] :=
+  Iso.refl _
+
+/-- The base change morphism `(R⁺f_* K)_ab ⟶ R⁺f_*(K_ab)` comparing the derived pushforward
+of `ℓ`-adic sheaves with that of the underlying abelian sheaves, on `D⁺`. -/
+noncomputable def rightDerivedAdicLowerStarToAb :
+    ((f)_*ᵃ[l]).rightDerivedFunctorPlus ⋙ (AdicSheaf.toAb l Y).mapDerivedCategoryPlus ⟶
+      (AdicSheaf.toAb l X).mapDerivedCategoryPlus ⋙
+        ((f)_*[Ab.{u + 1}]).rightDerivedFunctorPlus :=
+  Functor.rightDerivedFunctorPlusBaseChange (adicLowerStarCompToAbIso l f).hom
+
+/-- The comparison `(R⁺f_* K)_ab ⟶ R⁺f_*(K_ab)` is an isomorphism, the underlying abelian
+sheaves of injective `ℓ`-adic sheaves being injective. -/
+instance isIso_rightDerivedAdicLowerStarToAb : IsIso (rightDerivedAdicLowerStarToAb l f) :=
+  Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic _
+    fun _ _ ↦ Functor.rightAcyclic_of_injective _
+
+/-- **Higher direct images of `ℓ`-adic sheaves have the higher direct images of the underlying
+abelian sheaves as underlying abelian sheaves**: `(Rᵠf_* F)_ab ≅ Rᵠf_*(F_ab)` for the classical
+right derived functors. -/
+noncomputable def rightDerivedAdicLowerStarToAbIso (q : ℕ) :
+    ((f)_*ᵃ[l]).rightDerived q ⋙ AdicSheaf.toAb l Y ≅
+      AdicSheaf.toAb l X ⋙ ((f)_*[Ab.{u + 1}]).rightDerived q :=
+  have : IsIso (Functor.rightDerivedBaseChange (adicLowerStarCompToAbIso l f).hom q) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro G
+    rw [Functor.rightDerivedBaseChange_app]
+    have : IsIso (Functor.rightDerivedFunctorPlusBaseChange (adicLowerStarCompToAbIso l f).hom) :=
+      isIso_rightDerivedAdicLowerStarToAb l f
+    infer_instance
+  asIso (Functor.rightDerivedBaseChange (adicLowerStarCompToAbIso l f).hom q)
+
+/-- **Cohomology sheaves of the derived pushforward of `ℓ`-adic sheaves, as abelian sheaves**:
+for an `ℓ`-adic sheaf `F` on `X_proét` and `q : ℕ`, the underlying abelian sheaf of
+`Hᵠ(Rf_* F[0])`, computed in `D(AdicSheaf l Y)`, is `Hᵠ(Rf_* F_ab[0])`, computed in the derived
+category of abelian sheaves on `Y_proét`. -/
+noncomputable def toAbHomologyRightDerivedAdicLowerStarIso (F : AdicSheaf l X) (q : ℕ) :
+    (AdicSheaf.toAb l Y).obj ((DerivedCategory.homologyFunctor _ q).obj
+        ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) ≅
+      (DerivedCategory.homologyFunctor _ q).obj (((f)_*[Ab.{u + 1}]).rightDerivedFunctor.obj
+        ((DerivedCategory.singleFunctor _ 0).obj ((AdicSheaf.toAb l X).obj F))) :=
+  (AdicSheaf.toAb l Y).mapIso
+      (((f)_*ᵃ[l]).homologyRightDerivedFunctorObjSingleFunctorIso F q) ≪≫
+    (rightDerivedAdicLowerStarToAbIso l f q).app F ≪≫
+    (((f)_*[Ab.{u + 1}]).homologyRightDerivedFunctorObjSingleFunctorIso _ q).symm
+
+/-! ### The underlying sheaves of `ℚ̄_ℓ`-modules -/
+
+/-- The pushforward of `ℓ`-adic sheaves commutes with taking underlying sheaves of
+`ℚ̄_ℓ`-modules. -/
+noncomputable def adicLowerStarCompForgetIso :
+    (f)_*ᵃ[l] ⋙ AdicSheaf.forget Y ≅ AdicSheaf.forget X ⋙ (f)_*[WeilCoefficients.{u} l] :=
+  Iso.refl _
+
+/-- The base change morphism `(R⁺f_* K)_{ℚ̄_ℓ} ⟶ R⁺f_*(K_{ℚ̄_ℓ})` comparing the derived pushforward
+of `ℓ`-adic sheaves with that of the underlying sheaves of `ℚ̄_ℓ`-modules, on `D⁺`. -/
+noncomputable def rightDerivedAdicLowerStarForget :
+    ((f)_*ᵃ[l]).rightDerivedFunctorPlus ⋙ (AdicSheaf.forget (l := l) Y).mapDerivedCategoryPlus ⟶
+      (AdicSheaf.forget (l := l) X).mapDerivedCategoryPlus ⋙
+        ((f)_*[WeilCoefficients.{u} l]).rightDerivedFunctorPlus :=
+  Functor.rightDerivedFunctorPlusBaseChange (adicLowerStarCompForgetIso l f).hom
+
+/-- The comparison `(R⁺f_* K)_{ℚ̄_ℓ} ⟶ R⁺f_*(K_{ℚ̄_ℓ})` is an isomorphism, the underlying sheaves
+of injective `ℓ`-adic sheaves being injective. -/
+instance isIso_rightDerivedAdicLowerStarForget : IsIso (rightDerivedAdicLowerStarForget l f) :=
+  Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic _
+    fun _ _ ↦ Functor.rightAcyclic_of_injective _
+
+/-- `(Rᵠf_* F)_{ℚ̄_ℓ} ≅ Rᵠf_*(F_{ℚ̄_ℓ})` for the classical right derived functors, the right hand
+side being computed for sheaves of `ℚ̄_ℓ`-modules. -/
+noncomputable def rightDerivedAdicLowerStarForgetIso (q : ℕ) :
+    ((f)_*ᵃ[l]).rightDerived q ⋙ AdicSheaf.forget Y ≅
+      AdicSheaf.forget X ⋙ ((f)_*[WeilCoefficients.{u} l]).rightDerived q :=
+  have : IsIso (Functor.rightDerivedBaseChange (adicLowerStarCompForgetIso l f).hom q) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro G
+    rw [Functor.rightDerivedBaseChange_app]
+    have : IsIso (Functor.rightDerivedFunctorPlusBaseChange (adicLowerStarCompForgetIso l f).hom) :=
+      isIso_rightDerivedAdicLowerStarForget l f
+    infer_instance
+  asIso (Functor.rightDerivedBaseChange (adicLowerStarCompForgetIso l f).hom q)
+
+/-- **Cohomology sheaves of the derived pushforward of `ℓ`-adic sheaves, as sheaves of
+`ℚ̄_ℓ`-modules**: the underlying sheaf of `ℚ̄_ℓ`-modules of `Hᵠ(Rf_* F[0])`, computed in
+`D(AdicSheaf l Y)`, is `Hᵠ(Rf_* F_{ℚ̄_ℓ}[0])`, computed for sheaves of `ℚ̄_ℓ`-modules. -/
+noncomputable def forgetHomologyRightDerivedAdicLowerStarIso (F : AdicSheaf l X) (q : ℕ) :
+    (AdicSheaf.forget Y).obj ((DerivedCategory.homologyFunctor _ q).obj
+        ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) ≅
+      (DerivedCategory.homologyFunctor _ q).obj
+        (((f)_*[WeilCoefficients.{u} l]).rightDerivedFunctor.obj
+          ((DerivedCategory.singleFunctor _ 0).obj ((AdicSheaf.forget X).obj F))) :=
+  (AdicSheaf.forget Y).mapIso
+      (((f)_*ᵃ[l]).homologyRightDerivedFunctorObjSingleFunctorIso F q) ≪≫
+    (rightDerivedAdicLowerStarForgetIso l f q).app F ≪≫
+    (((f)_*[WeilCoefficients.{u} l]).homologyRightDerivedFunctorObjSingleFunctorIso _ q).symm
+
+/-! ### Detecting isomorphisms and lisse sheaves on underlying abelian sheaves -/
+
+/-- A morphism of `ℓ`-adic sheaves is an isomorphism as soon as it is one on underlying abelian
+sheaves. -/
+instance (X : Scheme.{u}) : (AdicSheaf.toAb l X).ReflectsIsomorphisms := by
+  unfold AdicSheaf.toAb
+  infer_instance
+
+/-- An `ℓ`-adic sheaf receiving a morphism from a lisse sheaf which is an isomorphism on
+underlying abelian sheaves is lisse. This is how a computation of the abelian sheaf
+`Hᵠ(Rf_* F_ab[0])` (`AlgebraicGeometry.ProEtale.toAbHomologyRightDerivedAdicLowerStarIso`)
+shows that `Hᵠ(Rf_* F[0])` is lisse. -/
+lemma IsAdicLisseSheaf.of_isIso_toAb_map {X : Scheme.{u}} {G G' : AdicSheaf l X} (φ : G ⟶ G')
+    [IsIso ((AdicSheaf.toAb l X).map φ)] (hG : IsAdicLisseSheaf G) : IsAdicLisseSheaf G' :=
+  have := isIso_of_reflects_iso φ (AdicSheaf.toAb l X)
+  hG.of_iso (asIso φ)
+
+/-- In negative degrees the cohomology sheaves of `Rf_* F[0]` vanish, hence are lisse: the local
+constancy of `Hⁿ(Rf_* F[0])` is only a question in degrees `n = q : ℕ`, where
+`AlgebraicGeometry.ProEtale.toAbHomologyRightDerivedAdicLowerStarIso` applies. -/
+lemma isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_neg (F : AdicSheaf l X)
+    {n : ℤ} (hn : n < 0) :
+    IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ n).obj
+      ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) :=
+  have := ((f)_*ᵃ[l]).isGE_rightDerivedFunctor_obj_singleFunctor F
+  IsAdicLisseSheaf.of_isZero (DerivedCategory.isZero_of_isGE _ 0 n hn)
 
 end AlgebraicGeometry.ProEtale
