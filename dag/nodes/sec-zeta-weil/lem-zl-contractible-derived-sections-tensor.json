@@ -18,9 +18,148 @@
   "def-weil-abstract-derived-category",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every covering of $T$ refines a finite disjoint partition. For the affine scheme case apply [det-pe-wcb-clopen-partition] with $X=T$ and its final object $T$. For the profinite case, a covering $\\{V_i\\to T\\}_{i=1}^r$ gives a continuous surjection $\\coprod_iV_i\\to T$ of compact Hausdorff spaces. By [det-pe-stonean-projective] it has a section $s$. The inverse images $T_i=s^{-1}(V_i)$ are clopen, partition $T$, and their maps to $V_i$ give the required refinement. Empty components can be discarded. Both sites have disjoint finite coproducts stable under pullback, and the component families cover; these statements follow directly from disjoint unions of schemes, respectively profinite spaces, and the covering definitions. The empty object has the empty covering.",
+   "uses": [
+    "det-pe-wcb-clopen-partition",
+    "det-pe-stonean-projective",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098H, lemma-w-contractible-is-weakly-contractible; Hemo--Richarz--Scholbach Section 3, definition of the profinite site"
+   }
+  },
+  {
+   "text": "Apply [lem-zl-partition-refinement-sheafification] to presheaves of underlying sets; this is legitimate because a module sheafification [def-weil-presheaf-modules-sheafification] is the sheafification of the underlying presheaf of abelian groups, whose underlying sheaf of sets is the sheafification of the underlying presheaf of sets [lem-pc-sites-sheafification-underlying-sets]. For any small diagram of $\\mathcal O$-module sheaves, its colimit is the sheafification of the sectionwise module colimit by [lem-weil-pbc-module-sheaves-colimits-forgetful]. That presheaf sends finite disjoint unions to products: on $U=U_1\\sqcup U_2$, the ring is $\\mathcal O(U_1)\\times\\mathcal O(U_2)$ and each module is the pair of its two components; module colimits are formed separately in those components. Its value on the empty object is zero. Thus sheafification does not change this colimit at $T$, proving preservation of all small colimits by $\\Gamma(T,-)$. Kernels are sectionwise by the same node. Cokernels are colimits, so evaluation preserves kernels and cokernels, hence is exact. All bijections here preserve the induced $A$-actions.",
+   "uses": [
+    "lem-zl-partition-refinement-sheafification",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), and proetale.tex Tag 0F63"
+   }
+  },
+  {
+   "text": "Exact evaluation preserves cohomology of every complex and hence all quasi-isomorphisms, with no boundedness condition. It therefore descends termwise to $D(\\mathcal O)\\to D(A)$. Every complex $K$ admits a K-injective resolution $K\\to I$ by [prop-pur-kinjective-resolutions-exist]. By [def-sfb-right-derived-functor], $R\\Gamma(T,K)$ is represented by $\\Gamma(T,I)$. Exactness makes $\\Gamma(T,K)\\to\\Gamma(T,I)$ a quasi-isomorphism, proving that the descended functor is $G=R\\Gamma(T,-)$ with its canonical comparison. In particular $G(\\mathcal O[0])=A[0]$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; sites-cohomology.tex Section 07A5"
+   }
+  },
+  {
+   "text": "For module sheaves $M,N$, their tensor is the sheafification of $P(U)=M(U)\\otimes_{\\mathcal O(U)}N(U)$ by [def-pur-sheaf-tensor-product], taken as module sheafification [def-weil-presheaf-modules-sheafification]; its underlying sheaf of sets is the set sheafification of the underlying presheaf of sets [lem-pc-sites-sheafification-underlying-sets]. This presheaf sends finite disjoint unions to products: for rings $R_1,R_2$ and component modules, the isomorphism is $(M_1\\times M_2)\\otimes_{R_1\\times R_2}(N_1\\times N_2)\\cong(M_1\\otimes_{R_1}N_1)\\times(M_2\\otimes_{R_2}N_2)$; mixed tensors vanish since the two orthogonal idempotents multiply to zero. It sends the empty object to zero. Thus [lem-zl-partition-refinement-sheafification] identifies the usual section pairing $M(T)\\otimes_A N(T)\\to(M\\otimes_{\\mathcal O}N)(T)$ as an isomorphism. The unit is $A=\\mathcal O(T)$. Naturality and the associativity, symmetry and unit diagrams hold on pure tensors: both paths send local generators to the same tensor or scalar product.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-zl-partition-refinement-sheafification",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product); proetale.tex Tag 0F63"
+   }
+  },
+  {
+   "text": "If $F$ is a flat module sheaf, then $F(T)$ is a flat $A$-module. Indeed, consider a finite relation $\\sum_i a_ix_i=0$ in $F(T)$ and the kernel sheaf $H$ of the row map $\\mathcal O^n\\xrightarrow{(a_i)}\\mathcal O$. By the definition of flatness [def-pc-flat-sheaf-modules], $H\\otimes F\\to F^n\\to F$ is exact. Exact evaluation from step 2 and the tensor identification from step 4 show that $(x_i)$ is the image of an element of $H(T)\\otimes_A F(T)$. Write that element as a finite sum $\\sum_j h_j\\otimes y_j$. If $h_j=(b_{ij})$, then $x_i=\\sum_j b_{ij}y_j$ and $\\sum_i a_i b_{ij}=0$. Hence every relation in $F(T)$ is trivial in the precise sense of [lem-weil-pbc-flat-equational-criterion], and that criterion gives flatness. The case $n=0$ is included.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-flat-equational-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HK, lemma-flat-eq, proof of the forward implication applied to module sheaves and then exact sections"
+   }
+  },
+  {
+   "text": "For any complex $K$, take the compatible bounded-above flat complexes $E_n$ and quasi-isomorphisms $E_n\\to\\tau_{\\le n}K$ supplied by [lem-pc-flat-truncation-tower]. Put $B=\\bigoplus_n E_n$ and $P=\\operatorname{Cone}(1-s:B\\to B)$, where $s$ shifts each summand along $E_n\\to E_{n+1}$. By [lem-pc-kflat-closure], $P$ is K-flat and has flat terms. The compatible maps $E_n\\to K$ define $P\\to K$ (use their sum on the unshifted summand of the cone and zero on the shifted summand). By [lem-pc-complex-hocolim-colimit], $P\\to\\varinjlim_nE_n$ is a quasi-isomorphism. The second clause of [lem-pc-kflat-hocolim-truncations] makes $\\varinjlim_n E_n\\to\\varinjlim_n\\tau_{\\le n}K$ a quasi-isomorphism. The last colimit equals $K$ degree by degree, since each fixed degree eventually stabilizes. Thus $P\\to K$ is a K-flat resolution with flat terms. This uses only the tower's stated compatibility, not a choice of a functorial tower.",
+   "uses": [
+    "lem-pc-flat-truncation-tower",
+    "lem-pc-kflat-closure",
+    "lem-pc-complex-hocolim-colimit",
+    "lem-pc-kflat-hocolim-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 077J (lemma-resolution-by-direct-sums-extensions-by-zero) and 06YS (lemma-K-flat-resolution)"
+   }
+  },
+  {
+   "text": "Evaluation commutes with the sums, shifts and cone in step 6, by step 2 and the explicit cone differential. Hence $\\Gamma(T,P)$ is the telescope of the $\\Gamma(T,E_n)$. Each $\\Gamma(T,E_n)$ is bounded above with flat $A$-module terms by step 5. Apply [lem-pc-kflat-closure] on the one-object site with ring $A$: these complexes, their sum, and the cone of $1-s$ are K-flat. Consequently the particular resolution $P\\to K$ of step 6 has both $P$ K-flat on the site and $\\Gamma(T,P)$ K-flat over $A$. Exact evaluation also makes $\\Gamma(T,P)\\to\\Gamma(T,K)$ a quasi-isomorphism. No assertion that evaluation preserves all K-flat complexes is needed.",
+   "uses": [
+    "lem-pc-kflat-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas bounded-flat-K-flat and K-flat-resolution, telescope construction on the site and on the one-point ringed site"
+   }
+  },
+  {
+   "text": "Choose resolutions $P\\to K$ and $Q\\to L$ as in steps 6-7. By [lem-weil-pbc-site-derived-tensor-descent], their total tensor represents $K\\otimes_{\\mathcal O}^L L$; the same node on the one-object site says that $\\Gamma(T,P)\\otimes_A\\Gamma(T,Q)$ represents $G(K)\\otimes_A^L G(L)$. In degree $n$, step 2 and step 4 give the canonical isomorphism $\\bigoplus_{p+q=n}P^p(T)\\otimes_AQ^q(T)\\cong(\\bigoplus_{p+q=n}P^p\\otimes_{\\mathcal O}Q^q)(T)$. It commutes with the differential $d_P\\otimes1+(-1)^p1\\otimes d_Q$ by naturality of section pairings, so is an isomorphism of total complexes [def-pc-tensor-complex-sheaves]. It represents the canonical comparison in the statement: on K-flat resolutions the derived comparison is the usual tensor pairing of sections, preceded, in general, by the derived-to-ordinary module tensor map; here that preceding map is an isomorphism since both evaluated resolutions are K-flat. Thus the canonical comparison is invertible for every unbounded $K,L$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and 06YU (definition-derived-tor), applied to the resolutions of Tag 06YS"
+   }
+  },
+  {
+   "text": "The section pairings used in step 8 are natural in both complex variables. To interpret them without any choice of resolution, for arbitrary flat-term K-flat $P,Q$ use K-flat module resolutions of $P(T),Q(T)$, map their total tensor to $P(T)\\otimes_AQ(T)$, and then apply the section pairing into $(P\\otimes_{\\mathcal O}Q)(T)$. Resolving-class localization [lem-weil-pbc-site-derived-tensor-descent], also on the one-object site, identifies changes of these resolutions and gives the canonical natural comparison. The computations in step 8 compute its value using the adapted resolutions. For coherence use the constraints of [lem-sf-ringed-derived-closed-symmetric-monoidal]: on total-complex representatives associativity merely reindexes $(p,q,r)$, symmetry sends $x\\otimes y$ to $(-1)^{pq}y\\otimes x$, and the unit multiplies by a scalar. Section pairing preserves these formulas term by term, so the associativity, symmetry and unit diagrams commute before localization and therefore after localization. The unit comparison is the identity $A[0]\\to A[0]$ of step 3. The invertible tensor comparisons and this unit make $G$ strong symmetric monoidal.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor) and Tag 0FPT (lemma-symmetric-monoidal-derived); explicit section-pairing coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-wcb-clopen-partition",
+  "det-pe-stonean-projective",
+  "def-weil-pbc-proetale-site",
+  "lem-zl-partition-refinement-sheafification",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sfb-right-derived-functor",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-flat-equational-criterion",
+  "lem-pc-flat-truncation-tower",
+  "lem-pc-kflat-closure",
+  "lem-pc-complex-hocolim-colimit",
+  "lem-pc-kflat-hocolim-truncations",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1): finite-partition sheafification argument expanded for arbitrary ring sheaves; unbounded comparison proved using the flat-resolution telescope of Stacks Tags 077J and 06YS."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +202,31 @@
    "results": "CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; CategoryTheory.GrothendieckTopology.Point.instMonoidalSheafSheafFiber; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
    "date": "2026-10-18",
    "verdict": "no match: sheafification monoidality, a topos point fibre, and underived light condensed monoidality do not give evaluation of arbitrary ring-sheaf unbounded derived tensor at these objects; Tor and exact-functor localization results also do not state this comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact global sections on a weakly contractible object commute with unbounded derived tensor products",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Tor; LightCondensed.free_internallyProjective_iff_tensor_condition; CategoryTheory.Tor'; CategoryTheory.Tor'_map_app; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-18",
+   "verdict": "no match: evaluation/limits and monoidal sheafification or point-fibre results do not state exact, colimit-preserving strong monoidal evaluation on arbitrary ring-sheaf unbounded derived categories at these objects."
+  },
+  {
+   "tool": "grep",
+   "query": "(globalSections|sections|evaluation).*(tensor|Monoidal)|(tensor|Monoidal).*(globalSections|sections|evaluation)",
+   "results": "[grep] OK 12 hit(s); Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Action/End.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: evaluation/limits and monoidal sheafification or point-fibre results do not state exact, colimit-preserving strong monoidal evaluation on arbitrary ring-sheaf unbounded derived categories at these objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor evaluation on an extremally disconnected profinite space with a sheaf of rings",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.evaluation; smoothSheafCommRing.evalHom; smoothSheafCommRing.eval; SheafOfModules.evaluationPreservesLimitsOfSize; smoothSheafCommRing.ι_evalHom_assoc; SheafOfModules.evaluationPreservesLimit; smoothSheafCommRing.eval_surjective; SheafOfModules.evaluationPreservesLimitsOfShape",
+   "date": "2026-10-18",
+   "verdict": "no match: evaluation/limits and monoidal sheafification or point-fibre results do not state exact, colimit-preserving strong monoidal evaluation on arbitrary ring-sheaf unbounded derived categories at these objects."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-condensed-wcontractible-lisse-evaluation",
@@ -86,5 +246,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-contractible-derived-sections-tensor",
+  "worker": "stage1",
+  "summary": "NP checked Hemo--Richarz--Scholbach Lemma 4.1(1), both kinds of site and arbitrary coefficient ring sheaves. One new statement-only sheafification lemma isolates the general finite-partition argument of Stacks 0F63. Exactness, all colimits, flat evaluation by the equational criterion, and adapted K-flat telescopes give the full unbounded tensor comparison and its coherence. Statement unchanged. No Lean attachment or Mathlib leaf.",
+  "blueprint": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Specifically: Lemma 4.1(1): tensor compatibility and exact termwise evaluation used to compare dualizable objects, before the perfect/lisse equivalence.",
+  "tool_uses": [
+   {
+    "node": "det-pe-wcb-clopen-partition",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 1; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   },
+   {
+    "node": "det-pe-stonean-projective",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 1; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 2; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 3; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   },
+   {
+    "node": "lem-pc-flat-truncation-tower",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 6; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 6, 7; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   },
+   {
+    "node": "lem-pc-complex-hocolim-colimit",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 6; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   },
+   {
+    "node": "lem-pc-kflat-hocolim-truncations",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 6; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 8, 9; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic site/module/derived-category tool used with its stated hypotheses in steps 9; it expands contractible evaluation in HRS Lemma 4.1(1) and does not replace any step of the smooth-proper-purity unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-wcb-clopen-partition",
+  "det-pe-stonean-projective",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-flat-truncation-tower",
+  "lem-pc-kflat-closure",
+  "lem-pc-complex-hocolim-colimit",
+  "lem-pc-kflat-hocolim-truncations",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NP-720a9bcaa",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-720a9bcaa (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, HRS 2305.18131 Lemma 4.1(1) with its proof, and Stacks 0F63 with its full proof. Item statement: unchanged, not weakened. It generalizes HRS from condensed coefficients to arbitrary ring sheaves, and the proof never uses where the coefficients come from, so proof_origin agent is correct. New node lem-zl-partition-refinement-sheafification: the abstract form of the 0F63 plus-plus argument. I checked that the stated hypotheses suffice: disjoint, pullback-stable coproducts give monic components; a strict initial object makes P+(empty) a point; P+ keeps the finite-product condition; partitions are cofinal at W. It is true and self-contained, with no proof sketch. The P(empty)=point hypothesis is needed: a constant two-element presheaf fails at W=empty. It is strictly smaller than the item and not a duplicate. The existing scheme-only nodes det-pe-wc-sections-exact and lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits do not cover the profinite case or the tensor presheaf. Steps: step 1 uses det-pe-wcb-clopen-partition (its unbounded site contains the bounded site's covers, and the clopen pieces are objects of both) and det-pe-stonean-projective(3). Step 5 proves flatness of F(T) from the trivial-relation criterion 00HK and is correct. Steps 6-7 build a telescope that is K-flat both on the site and after evaluation; I checked the chain map and compatibility into the truncations. Steps 8-9 use resolving-class localization and the 0FPT coherence signs. Fault, repaired: steps 2 and 4 apply the set-valued new node to module sheafifications without citing that a module sheafification has the set sheafification as its underlying sheaf of sets. I added def-weil-presheaf-modules-sheafification and lem-pc-sites-sheafification-underlying-sets (both Mathlib leaves) to those steps and to proof_deps, in fixes/dag/nodes/sec-zeta-weil/lem-zl-contractible-derived-sections-tensor.json. The declared tool_uses are accepted as generic tools that replace no unit step. No SGA source is cited.; 1 file(s) fixed by the reviewer"
  }
 }
