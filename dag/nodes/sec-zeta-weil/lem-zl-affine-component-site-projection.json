@@ -1,0 +1,81 @@
+{
+ "id": "lem-zl-affine-component-site-projection",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "The component-site projection for an affine scheme",
+ "statement": "Let $T$ be an affine scheme [def-pc-scheme], and put $P=\\pi_0(|T|)$, the quotient by connected components with its quotient topology [lem-pe-spectral-components-profinite]. Use the universes of [def-weil-size-convention] and the small pro-etale site [def-weil-pbc-proetale-site]. Let $P_{\\mathrm{proet}}$ be the site of profinite spaces over $P$ with finite jointly surjective covering families. For a profinite map $E\\to P$, there is an affine ind-etale $T$-scheme $T_E$, whose underlying locally ringed space is $|T|\\times_P E$ with the inverse-image structure sheaf from $T$. Its component space is canonically $E$. The functor $E\\mapsto T_E$ preserves finite limits and coverings and defines a geometric morphism\n$$\\pi_T:\\operatorname{Sh}(T_{\\mathrm{proet}})\\longrightarrow\\operatorname{Sh}(P_{\\mathrm{proet}}).$$\nFor every sheaf of sets $F$ on $P_{\\mathrm{proet}}$ and every quasi-compact quasi-separated object $W\\to T$ of $T_{\\mathrm{proet}}$, there is a canonical identification\n$$(\\pi_T^{-1}F)(W)=F(\\pi_0(|W|)\\to P),$$\nnatural in $F$ and $W$. The same formula applies to sheaves of abelian groups and rings, preserving their operations.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 2.2.8 and its more precise statement (affine component pullback), paragraph preceding Lemma 4.2.13 and Lemma 4.2.13(1); extension to algebraic objects by their finite-product operations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pe-spectral-components-profinite",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(ConnectedComponents|connectedComponents).*(Sheaf|sheaf)|(Sheaf|sheaf).*(ConnectedComponents|connectedComponents)",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pro etale topos of a qcqs scheme maps to the topos of profinite sets over its connected component space with inverse image evaluated on connected components",
+   "results": "8 hits: CompHaus.toProfinite_obj', CompHaus.toProfiniteObj, AlgebraicGeometry.Scheme.smallEtaleTopology, CompHaus.toProfinite, Profinite.isoAsLimitConeLift, Condensed.lanCondensedSet, Profinite.toProfiniteAdjToCompHaus, Profinite.asLimit",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, ConnectedComponents",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme the component projection to its profinite connected component site induces a morphism of topoi whose inverse image on quasi compact quasi separated objects is evaluation on their connected components",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, lightProfiniteToLightCondSetIsoTopCatToLightCondSet, Condensed.isSheafProfinite, Condensed.lanSheafProfinite, Condensed.ofSheafForgetProfinite, CompHaus.toProfinite_obj', lightProfiniteToLightCondSetIsoTopCatToLightCondSet_hom_app_val_app_apply, Profinite.toCompHausEquivalence",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves on profinite sets over pi zero of a scheme pull back by the formula F of pi zero of an etale object",
+   "results": "8 hits: Condensed.lanSheafProfinite, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', Condensed.ofSheafForgetProfinite, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', CondensedSet.ofSheafProfinite, Condensed.isSheafProfinite, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-generic-fiber-components-section",
+  "date": "2026-10-18",
+  "group": "Q41"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Proof of Theorem 4.13, irreducible case and diagram (4.4); points of fiber products: Stacks Tag 03H4, spaces-properties.tex, lemma-points-cartesian. General component projection used in the irreducible-case diagram (4.4).",
+   "via": [
+    "lem-zl-generic-fiber-components-section",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

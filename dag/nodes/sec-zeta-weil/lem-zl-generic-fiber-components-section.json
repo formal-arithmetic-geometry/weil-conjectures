@@ -21,11 +21,137 @@
   "sk-def-sfb-pulled-back-coefficients",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-sfb-site-derived-constant-module-functor"
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-zl-affine-component-site-projection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}A$ and $U=\\operatorname{Spec}B$. By [lem-weil-pbc-fibre-product-affine-spectra], $V=\\operatorname{Spec}(B\\otimes_A\\Omega)$ is affine. By [lem-weil-pbc-ind-etale-stability] it is ind-etale over $\\Omega$. Both $U$ and $V$ are quasi-compact quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], hence spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Their component spaces are profinite by [lem-pe-spectral-components-profinite]. The continuous projection $V\\to U$ sends connected subsets into connected subsets, so it induces $r:S_\\eta\\to S$; the quotient-topology definition makes this map continuous.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-pe-spectral-components-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+   }
+  },
+  {
+   "text": "Let $C$ be a connected component of $U$ and choose $u\\in C$, represented by a prime $\\mathfrak q\\subset B$. Its contraction is a prime $\\mathfrak p\\subset A$. The prime $\\mathfrak p_0$ of the generic point of $X$ is contained in $\\mathfrak p$. The ind-etale map $A\\to B$ is weakly etale by [lem-weil-pbc-ind-etale-stability], and thus flat by [def-weil-pbc-ind-etale-algebra]. Apply [lem-sc-flat-going-down] to obtain $\\mathfrak q_0\\subseteq\\mathfrak q$ over $\\mathfrak p_0$. These two points of $U$ are in the same component: the closure of $\\{\\mathfrak q_0\\}$ is irreducible, hence connected, and contains both. Both $\\mathfrak q_0$ and the point of $\\operatorname{Spec}\\Omega$ lie over the generic point $\\mathfrak p_0$. The ring $\\kappa(\\mathfrak q_0)\\otimes_{\\kappa(\\mathfrak p_0)}\\Omega$ is a tensor product of two nonzero vector spaces over the field $\\kappa(\\mathfrak p_0)$, hence nonzero, and so has a prime ideal. By [lem-weil-pbc-fibre-product-points] for the schemes $U$ and $\\operatorname{Spec}\\Omega$ over $X$, this prime gives $v\\in V$ whose projection to $U$ is $\\mathfrak q_0$. The component of $v$ therefore maps to $C$, proving surjectivity of $r$. If $U$ is empty there is no component to choose and surjectivity is vacuous.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+   }
+  },
+  {
+   "text": "By [sk-def-pe-wlocal], w-contractibility of the affine $U$ means in particular that $S$ is extremally disconnected. Step 1 makes $S$ and $S_\\eta$ compact Hausdorff. Apply [lem-weil-pbc-extremally-disconnected-component-section] to the continuous surjection $r$ of Step 2. This supplies a continuous $s:S\\to S_\\eta$ with $rs=\\operatorname{id}_S$, including the empty case.",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "lem-weil-pbc-extremally-disconnected-component-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+   }
+  },
+  {
+   "text": "Use [lem-zl-affine-component-site-projection] for $T=U,V$ to define $\\pi_U,\\pi_V$. For a profinite map $E\\to S$, the base change of $U_E$ along $g:V\\to U$ is $V_{E\\times_S S_\\eta}$: both have locally ringed space $|V|\\times_S E$ and the inverse-image structure sheaf from $V$. The identifications respect maps in $E$, since both send $(v,e)$ to $(v,a(e))$. Consequently the two functors on site test objects around the square are naturally isomorphic. Their induced geometric morphisms give the claimed commutative square (commutative up to this specified canonical isomorphism). This is a routine associativity identity for the component-pullback construction, not an assertion that $g$ is surjective on points.",
+   "uses": [
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+   }
+  },
+  {
+   "text": "By [det-pe-condensed-point-basis] and [lem-weil-pbc-locally-constant-prime-spectrum], the affine ind-etale $\\Omega$-scheme $V$ is $\\Omega[S_\\eta]=\\operatorname{Spec}LC(S_\\eta,\\Omega)$, with its component quotient identified with $S_\\eta$. Apply [lem-weil-pbc-ind-etale-basis] over the affine $V$. Every basis object $W\\to V$ is also affine ind-etale over $\\Omega$ by composition in [lem-weil-pbc-ind-etale-stability], so it is $\\Omega[E]$ for a profinite $E$. Its map to $V$ corresponds uniquely to a continuous map $E\\to S_\\eta$. Conversely any such map gives an ind-etale map $\\Omega[E]\\to\\Omega[S_\\eta]$ by the assertion about maps between ind-etale algebras in [lem-weil-pbc-ind-etale-stability]. Thus this basis is equivalent to profinite sets over $S_\\eta$. Its finite covering families correspond precisely to jointly surjective families: the spectra are the profinite sets by the prime-spectrum homeomorphism, the arrows are weakly etale, and for affine sources finite joint surjectivity is exactly the fpqc covering condition of [def-weil-pbc-proetale-site]. Every covering of a basis object refines to such a finite basis covering. By [lem-weil-pbc-site-equivalence-is-morphism-of-sites] the basis equivalence gives an equivalence on sheaves; the basis restriction statement then gives an equivalence with sheaves on all of $V_{\\mathrm{proet}}$.",
+   "uses": [
+    "det-pe-condensed-point-basis",
+    "lem-weil-pbc-locally-constant-prime-spectrum",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+   }
+  },
+  {
+   "text": "On $W=\\Omega[E]$ in this basis, the inverse image of [lem-zl-affine-component-site-projection] takes $F$ to $F(E\\to S_\\eta)$, including its restriction maps. This is exactly the equivalence of Step 5, so that equivalence is $\\pi_V^{-1}$ itself. For the structure morphism $V\\to\\operatorname{Spec}\\Omega$, its site base-change functor is that of [def-weil-proetale-inverse-image]. It takes the absolute test object $\\Omega[E]$ to $V\\times_\\Omega\\Omega[E]=\\Omega[S_\\eta\\times E]$, as a $V$-object. Under [lem-weil-pbc-geometric-field-proetale-evaluation] and Step 5 this is exactly $E\\mapsto(S_\\eta\\times E\\to S_\\eta)$, the base-change functor for $S_\\eta\\to *$. Thus the corresponding geometric morphisms agree. For $U$, the same identity of component-pullback constructions as in Step 4 gives $p_U=q_S\\pi_U$, where $q_S:S_{\\mathrm{proet}}\\to *_{\\mathrm{proet}}$ is the structure morphism: pulling back a profinite test set $E$ gives $|U|\\times E$ in both constructions [sk-def-sfb-pullback-from-point]. Therefore the coefficient rings of [sk-def-sfb-pulled-back-coefficients] satisfy $\\pi_U^{-1}\\Lambda_S=\\Lambda_U$ and $\\pi_V^{-1}\\Lambda_{S_\\eta}=\\Lambda_V$, naturally for every commutative condensed ring.",
+   "uses": [
+    "lem-zl-affine-component-site-projection",
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+   }
+  },
+  {
+   "text": "Apply the sheaf equivalence and its inverse to an abelian group, a ring, and a module action and their defining equations. As equivalences preserve finite products, this gives inverse additive equivalences on module sheaves for the identified coefficient rings. These are exact by [lem-weil-pbc-equivalence-injective-resolutions](2). Apply the two functors termwise to arbitrary complexes. Exactness identifies their cohomology with the images of the original cohomology; they preserve quasi-isomorphisms, and the termwise unit and counit descend to inverse isomorphisms after localization. This proves the unbounded derived equivalence. Constant discrete sheaves are preserved since inverse image commutes with the constant-sheaf functor (both composites are inverse images from sets); this also holds termwise for the constant realization in [def-sfb-site-derived-constant-module-functor]. The tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] consequently sends $\\Lambda_{S_\\eta}\\otimes^L_{\\underline R}\\underline P$ to $\\Lambda_V\\otimes^L_{\\underline R}\\underline P$, for $R=\\Gamma(*,\\Lambda)$ and any $P\\in D(R)$. The action map $\\underline R\\to\\Lambda$ is preserved because a scalar $a$ is sent to its same constant section. Thus these are the asserted corresponding scalar extensions.",
+   "uses": [
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-pe-spectral-components-profinite",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-fibre-product-points",
+  "sk-def-pe-wlocal",
+  "lem-weil-pbc-extremally-disconnected-component-section",
+  "lem-zl-affine-component-site-projection",
+  "det-pe-condensed-point-basis",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +187,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations do not state this theorem; generic sheaf, triangulated, or etale algebra interfaces are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The component diagram of a geometric generic fiber of an affine ind etale weakly contractible scheme has a split surjection on profinite connected components and an equivalence of pro etale topoi",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, ConnectedComponents",
+   "results": "3 hits: AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph, AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph_apply, AlgebraicGeometry.continuousMapPresheafEquivOfTotallyDisconnectedSpace",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric generic fibre connected components split surjection for weakly contractible ind etale affines",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.has_decomp_connected_components, CategoryTheory.PreGaloisCategory.has_decomp_connected_components', AlgebraicGeometry.Scheme.Etale, genericPoints.component_surjective, AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.FormallyEtale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(ConnectedComponents|connected.components)|(ConnectedComponents|connected.components).*generic",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weakly contractible affine ind etale scheme over an irreducible base has a geometric generic fibre meeting every connected component, and its pro etale topos is sheaves over the profinite fibre component set",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-18",
+   "verdict": "no match: component spaces or discrete constant sheaves alone do not give the asserted pro-etale component-site comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-condensed-dualizable-local-perfect-models",
@@ -83,5 +244,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-generic-fiber-components-section",
+  "worker": "stage1",
+  "summary": "Follow Hemo–Richarz–Scholbach Theorem 4.13 diagram (4.4), using existing going-down and point-lifting nodes. Expose the general affine component-site projection as one unsplit node; prove the fibre-site equivalence on the affine ind-etale basis and explicitly transport all coefficients and unbounded complexes. Report the reversed specialization direction in an existing unused node.",
+  "blueprint": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Proof of Theorem 4.13, irreducible case and diagram (4.4); points of fiber products: Stacks Tag 03H4, spaces-properties.tex, lemma-points-cartesian.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "The affine tensor-product description proves that the geometric fibre is affine. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Base change and composition give the two ind-etale bases; maps between ind-etale algebras supply every profinite arrow. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Affine schemes are qcqs, needed to apply component spectrality. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "The underlying spaces of the two affine schemes are spectral. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-pe-spectral-components-profinite",
+    "why": "Connected-component quotients of the spectral spaces are profinite. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Going-down lifts the generic prime below an arbitrary source prime without an incorrect specialization-lifting assumption. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-points",
+    "why": "Points of a fibre product of schemes over given points with equal image are the primes of the tensor product of residue fields (01JT; scheme form of the 03H4 citation in HRS). Mathlib leaf; no node of the unit gives it."
+   },
+   {
+    "node": "det-pe-condensed-point-basis",
+    "why": "Classification of affine ind-etale algebras over a separably closed field identifies the relative basis with profinite sets. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-prime-spectrum",
+    "why": "The prime-spectrum homeomorphism identifies the classification parameter with the actual component quotient. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-basis",
+    "why": "The affine ind-etale basis, finite cover refinements and sheaf restriction detect the claimed site equivalence. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "why": "A covering-preserving categorical equivalence of the two bases induces inverse sheaf equivalences. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "why": "The geometric field topos is the profinite point topos, identifying the structure morphism. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-equivalence-injective-resolutions",
+    "why": "Clause (2) gives exactness of the additive equivalence of module-sheaf categories. This is a generic tool; the unit does not provide another statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "The general unbounded derived tensor comparison preserves the scalar extension of a constant complex. This is a generic tool; the unit does not provide another statement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-pe-spectral-components-profinite",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-fibre-product-points",
+  "det-pe-condensed-point-basis",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-971899f78",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-971899f78 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-zl-affine-component-site-projection, every cited statement, HRS Thm 4.13 irreducible case and diagram (4.4) (p.12), and Bhatt-Scholze Lemma 2.2.8, the paragraph before 4.2.13 and 4.2.13(1) (pp.10, 30-31). The item statement is unchanged and matches HRS, with all condensed coefficients and the ordinary unbounded module derived category; nothing is weakened. All 7 steps check: going-down via lem-sc-flat-going-down, Gleason section with S extremally disconnected, the base-change square (I checked it independently with the BS 2.2.8 right adjoint), the basis equivalence V=Omega[S_eta], pi_V^{-1} on Omega[E], p_U=q_S pi_U, and the termwise unbounded derived transport. The new node is exactly BS 2.2.8 plus 4.2.13(1) for affine (hence qcqs) T. I tested it on T empty, E=P, finite E and T a field. It is statement-only and not a duplicate: the existing nodes cover only w-contractible or absolute-point cases, and V need not be w-contractible. Batch-5 check: lem-a1-space-fibre-product-point reaches def-trf-algebraic-space, which is a general definition and not part of the trace-formula or Poincare proofs. I replaced it anyway with the scheme Mathlib leaf lem-weil-pbc-fibre-product-points (Stacks 01JT), whose closure is three definitions; step 2 now adds that kappa(q0) tensor Omega over kappa(p0) is nonzero and so has a prime. proof_deps, source.place and tool_uses were updated in fixes/dag/nodes/sec-zeta-weil/lem-zl-generic-fiber-components-section.json. I accept the declared tool_uses. The report wrongly says lem-weil-pbc-flat-generalizations-lift is reversed and unused; it is correct as 03HV and is cited by other nodes. No action needed. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
