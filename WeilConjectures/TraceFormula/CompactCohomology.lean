@@ -463,8 +463,8 @@ lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
         ((weilUpperStarComparison ℓ ΦZ (r ≫ p) (j ≫ p) hi).hom.app K) := by
   have hH := boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ hL sq K
-  have cH := boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app ℓ hZ
-    (hL.paste_horiz sq) rfl rfl rfl hy.symm K
+  have cH := boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app_bottom ℓ hZ
+    (hL.paste_horiz sq) hy.symm K
   have hk := baseChange_comp_relativeFrobenius_stalk ℓ hZ hL hT hi K
   simp only [weilLowerShriekFrobeniusComparison, Iso.trans_hom, NatTrans.comp_app, asIso_hom,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
@@ -473,7 +473,16 @@ lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {
     Category.id_comp, Functor.comp_obj, Functor.id_obj]
   simp only [Functor.map_comp, Category.assoc]
   rw [cH, hH]
-  sorry
+  rw [eqToHom_refl ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      (r ≫ f')).obj ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (r ≫ p)).obj K))]
+  rw [CategoryTheory.Functor.map_id, Category.id_comp
+      (X := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ f')).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ p)).obj K)))
+      ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app _)]
+  simp only [Category.assoc]
+  rw [hk]
 
 end Fibre
 
