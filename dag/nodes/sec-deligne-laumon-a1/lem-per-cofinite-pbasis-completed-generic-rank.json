@@ -11,12 +11,96 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-adically-complete-ring",
   "def-weil-pbc-krull-dimension-ring",
-  "def-weil-pbc-kahler-differentials",
-  "lem-weil-pbc-p-basis-exists"
+  "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-noetherian-local-system-of-parameters], choose $t_1,\\ldots,t_d\\in\\mathfrak m$ with $\\sqrt{(t_1,\\ldots,t_d)A}=\\mathfrak m$. Apply case (a) of [lem-per-parameter-ideal-formal-normalization] with $B=A$, $e=d$ and the given coefficient field $\\kappa$. A domain is reduced and its sole minimal prime is $(0)$, so its equidimensional hypothesis is exactly $\\dim A=d$. This gives an injective continuous evaluation $R=\\kappa[[t_1,\\ldots,t_d]]\\hookrightarrow A$, with $A$ finite over $R$ and $L/K$ finite for $K=\\operatorname{Frac}(R)$. The coefficient field is the prescribed one throughout.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-system-of-parameters",
+    "lem-per-parameter-ideal-formal-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.4–2.1.6: the fixed parameters and the finite injective parameter map"
+   }
+  },
+  {
+   "text": "For finite $J\\subseteq E$, put $R_J=F_J[[t_1^p,\\ldots,t_d^p]]$ and $K_J=\\operatorname{Frac}(R_J)\\subseteq K$. The statement of [lem-weil-pbc-power-series-ring-subfields], specialized to $n=d,m=0$, gives $R$ finite over $R_J$, $K^p\\subseteq K_J$, $\\bigcap_JK_J=K^p$, and $K_{J\\cup J\\prime}\\subseteq K_J\\cap K_{J\\prime}$. Each $K/K_J$ is finite: localize finitely many $R_J$-module generators of $R$ at $R_J\\setminus\\{0\\}$. This localization is a domain finite dimensional over $K_J$, hence a field (multiplication by a nonzero element is injective and thus surjective), and equals $K$. The index family is nonempty because $J=\\varnothing$ is allowed.",
+   "uses": [
+    "lem-weil-pbc-power-series-ring-subfields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.5–2.1.6: the family of cofinite fraction subfields; Stacks Tag 07P5, lemma-power-series-ring-subfields"
+   }
+  },
+  {
+   "text": "Here is the rank calculation for $K/K_J$. By [lem-weil-pbc-p-basis-complement-monomial-basis], the bounded monomials $\\beta^a$ on $J$ form an $F_J$-basis of $\\kappa$. Expanding each coefficient of a series in this finite basis and grouping each exponent vector modulo $p$ gives a unique expansion $f=\\sum_{a,b}\\beta^at^b f_{a,b}$ with $f_{a,b}\\in R_J$ and $0\\leq a_i,b_h<p$. Uniqueness follows coefficientwise from that basis. These monomials remain a $K_J$-basis of $K$: any relation has a common nonzero denominator in $R_J$, and for $f/g\\in K$ one has $f/g=fg^{p-1}/g^p$ with $g^p\\in R_J$. Since $K^p\\subseteq K_J$, the family consisting of the $\\beta_i$ for $i\\in J$ and the $t_h$ for $1\\leq h\\leq d$ is therefore a relative $p$-basis of $K/K_J$. By [lem-weil-pbc-p-basis-differentials-basis], its differentials form a $K$-basis of $\\Omega_{K/K_J}$. Consequently $\\dim_K\\Omega_{K/K_J}=d+|J|$.",
+   "uses": [
+    "lem-weil-pbc-p-basis-complement-monomial-basis",
+    "lem-weil-pbc-p-basis-differentials-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.6: the right hand side of (2.a); explicit bounded-monomial calculation of d+|J|"
+   }
+  },
+  {
+   "text": "Apply [lem-per-cofinite-subfields-finite-extension-differential-rank] to $L/K$ and the family $(K_J)$. Step 1 supplies finite $L/K$; Step 2 verifies every subfield-family hypothesis. It yields a finite $J_0$ such that the two differential dimensions agree over every cofinite subfield of $K_{J_0}$. For every finite $J\\supseteq J_0$, one has $K_J\\subseteq K_{J_0}$ by the defining coefficient-subfield inclusion, and Step 2 gives $[K:K_J]<\\infty$. Thus $\\dim_L\\Omega_{L/K_J}=\\dim_K\\Omega_{K/K_J}=d+|J|$.",
+   "uses": [
+    "lem-per-cofinite-subfields-finite-extension-differential-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.6, equation (2.a), using IV Proposition 1.2.4"
+   }
+  },
+  {
+   "text": "Fix such a $J$ and put $B_J=F_J[[t_1,\\ldots,t_d]]\\subseteq R$. The finite coefficient basis of [lem-weil-pbc-p-basis-complement-monomial-basis] expands series coefficientwise, so $R$ is a finite free $B_J$-module on the same coefficient monomials. Combining these with the finite $R$-generators of $A$ from Step 1 makes $A$ finite over $B_J$. The evaluation $B_J\\to A$ is local and continuous: the variables map into $\\mathfrak m$, and its constant field is a subfield of the coefficient field. Apply [lem-per-pth-power-series-completed-differential-comparison] with $F=F_J$, $C=A$ and these $d$ parameters. Its $B_1$ is exactly $R_J$, so the canonical map gives $M_J\\cong\\Omega_{A/R_J}$.",
+   "uses": [
+    "lem-weil-pbc-p-basis-complement-monomial-basis",
+    "lem-per-pth-power-series-completed-differential-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.6: completed/ordinary differential comparison before equation (2.b); EGA 0_IV 21.9.4"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kahler-differentials-localization], tensoring the identification in Step 5 with $L$ gives $M_J\\otimes_A L\\cong\\Omega_{L/R_J}$. An $R_J$-derivation on $L$ kills $K_J$: for $0\\neq s\\in R_J$ the identity $D(s^{-1})=-s^{-2}D(s)=0$ forces it to kill all fractions of $R_J$. Conversely, a $K_J$-derivation kills $R_J$. The universal property in [def-weil-pbc-kahler-differentials] therefore identifies $\\Omega_{L/R_J}\\cong\\Omega_{L/K_J}$ with $da\\mapsto da$. Taking dimensions and using Step 4 yields $\\dim_L(M_J\\otimes_A L)=d+|J|$ for every finite $J\\supseteq J_0$, as required.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.6: the generic fibre identification and equation (2.b)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-local-system-of-parameters",
+  "lem-per-parameter-ideal-formal-normalization",
+  "lem-weil-pbc-power-series-ring-subfields",
+  "lem-weil-pbc-p-basis-complement-monomial-basis",
+  "lem-weil-pbc-p-basis-differentials-basis",
+  "lem-per-cofinite-subfields-finite-extension-differential-rank",
+  "lem-per-pth-power-series-completed-differential-comparison",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 2.1.5–2.1.6 and Proposition 1.2.4; the reversed subscript in the sentence before (2.b) is corrected; completed comparison is EGA 0_IV 21.9.4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +136,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.mvPolynomialBasis_repr_apply\", \"module\": \"Mathlib.RingTheory.Kaehler.Polynomial\", \"type\": \"(σ) (x) (i) : (mvPolynomialBasis R σ).repr (D _ _ x) i = MvPolynomial.pderiv i x\", \"doc\": \"For a commutative ring $ R $ and a type $ \\\\sigma $, the representation of the Kähler differential $ D(x) $ of a polynomial $ x \\\\in R[\\\\sigma] $ in the standard basis $ \\\\{dX_s\\\\}_{s \\\\in \\\\sigma} $ is give\"}\n  {\"name\": \"Differential.differentialFiniteDimensional\", \"module\": \"Mathlib.FieldTheory.Differential.Basic\", \"type\": \"[FiniteDimensional F K] : Differential K\", \"doc\": \"For a field extension $ K/F $ of finite degree where $ F $ has characteristic zero, the differential structure on $ K $ is constructed by selecting a primitive element $ \\\\alpha \\\\in K $, using its moni\"}\n  {\"name\": \"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl_apply\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"{κ : Type*} {f : κ → ι} (hf : Function.Injective f) (hcompl : IsCompl (Set.range f) (Set.range P.map)) (k : κ) :\\n  P.basisKaehlerOfIsCompl hf hcompl k = KaehlerDifferential.D _ _ (P.val (f k))\", \"doc\": \"Given a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, if injective functions $ f : \\\\kappa \\\\to \\\\iota $ and $ P.\\\\text{map} : \\\\sigma \\\\to \\\\iota $ have comp\"}\n  {\"name\": \"Differential.differentialAlgebraFiniteDimensional\", \"module\": \"Mathlib.FieldTheory.Differential.Basic\", \"type\": \"[FiniteDimensional F K] :\\n  letI := differentialFiniteDimensional F K\\n  DifferentialAlgebra F K\", \"doc\": \"For a field extension $ K/F $ of finite degree where $ F $ has characteristic zero, the differential structure on $ K $ is constructed by selecting a primitive element $ \\\\alpha \\\\in K $, using its moni\"}\n  {\"name\": \"Algebra.SubmersivePresentation.basisKaehler_apply\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"(k : ((Set.range P.map)ᶜ : Set _)) : P.basisKaehler k = KaehlerDifferential.D _ _ (P.val k)\", \"doc\": \"Under a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, if the images of the canonical injection and presentation map form complementary subsets of the i\"}\n  {\"name\": \"KaehlerDifferential.mvPolynomialBasis_repr_D_X\", \"module\": \"Mathlib.RingTheory.Kaehler.Polynomial\", \"type\": \"(σ) (i) : (mvPolynomialBasis R σ).repr (D _ _ (.X i)) = Finsupp.single i 1\", \"doc\": \"For a multivariate polynomial ring $ R[\\\\sigma] $ over a commutative ring $ R $, the representation of the differential $ dX_i $ of the variable $ X_i $ in the standard basis $ \\\\{dX_s\\\\}_{s \\\\in \\\\sigma} \"}\n  {\"name\": \"KaehlerDifferential.mvPolynomialBasis_repr_D\", \"module\": \"Mathlib.RingTheory.Kaehler.Polynomial\", \"type\": \"(σ) (x) :\\n  (mvPolynomialBasis R σ).repr (D _ _ x) = MvPolynomial.mkDerivation R (Finsupp.single · (1 : MvPolynomial σ R)) x\", \"doc\": \"For a commutative ring $ R $ and type $ \\\\sigma $, the representation of the differential $ dX_x $ in the standard basis $ \\\\{dX_s\\\\}_{s \\\\in \\\\sigma} $ of the Kähler differentials $ \\\\Omega_{R[\\\\sigma]/R} $\"}\n  {\"name\": \"IsLocalFrameOn.mdifferentiableAt_of_coeff\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.LocalFrame\", \"type\": \"[FiniteDimensional 𝕜 F] (h : ∀ i, MDiffAt (hs.coeff i t) x) (hu : u ∈ 𝓝 x) : MDiffAt (T% t) x\", \"doc\": \"Let $ E $ be a vector bundle over a manifold with model field $ \\\\mathbb{K} $, and let $ s $ be a local frame on an open set $ U $ with finite-dimensional fiber $ F $. If each coefficient function $ \\\\s\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: smooth finitely presented algebra rank formulas concern ordinary differentials and do not stabilize completed differentials over cofinite coefficient subfields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stabilized generic rank of completed Kähler differentials after deleting finitely many p-basis elements",
+   "results": "Search returned 8 hits: Algebra.SubmersivePresentation.rank_kaehlerDifferential, Algebra.SubmersivePresentation.basisKaehlerOfIsCompl, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, Algebra.SubmersivePresentation.basisKaehlerOfIsCompl_apply, Algebra.SubmersivePresentation.basisKaehler_apply, Algebra.SubmersivePresentation.basisKaehler, Algebra.IsStandardSmooth.relativeDimension, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; digest 0b816a562d5b0268",
+   "date": "2026-10-19",
+   "verdict": "no match: standard smooth or polynomial ordinary differential ranks do not give stabilization of completed differentials for arbitrary complete local domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.rank, KaehlerDifferential, IsLocalRing",
+   "results": "Search returned 0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: standard smooth or polynomial ordinary differential ranks do not give stabilization of completed differentials for arbitrary complete local domains"
+  },
+  {
+   "tool": "grep",
+   "query": "KaehlerDifferential|completed.*differential|generic.*rank",
+   "results": "Search returned 0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: standard smooth or polynomial ordinary differential ranks do not give stabilization of completed differentials for arbitrary complete local domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completed Kähler differentials generic rank after removing a finite subset of a p-basis",
+   "results": "Search returned 8 hits: instInhabitedKaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.mvPolynomialBasis_repr_apply, KaehlerDifferential.mvPolynomialEquiv, KaehlerDifferential.span_range_map_derivation_of_isLocalization, Algebra.SubmersivePresentation.free_kaehlerDifferential, KaehlerDifferential.finite; digest eefa5ce5864ecb4c",
+   "date": "2026-10-19",
+   "verdict": "no match: standard smooth or polynomial ordinary differential ranks do not give stabilization of completed differentials for arbitrary complete local domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen Gabber continuous differential generic dimension d plus finite p basis cardinality",
+   "results": "Search returned 8 hits: Algebra.IsStandardSmooth.relativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmoothOfRelativeDimension, RingHom.IsStandardSmoothOfRelativeDimension, Differential.differentialFiniteDimensional, Algebra.SubmersivePresentation.rank_kaehlerDifferential, ClassGroup.cardM, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; digest 196de3df8c9d700c",
+   "date": "2026-10-19",
+   "verdict": "no match: standard smooth or polynomial ordinary differential ranks do not give stabilization of completed differentials for arbitrary complete local domains"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-coefficient-field-generic-differential-basis",
@@ -80,5 +199,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-cofinite-pbasis-completed-generic-rank",
+  "worker": "stage1",
+  "summary": "Verified ILO IV 2.1.5–2.1.6 and EGA 0_IV 21.9.4. Reused the supplied-parameter normalization and the Stacks subfield-family and p-basis nodes; separated the general finite-extension stabilization and completed differential comparison. The argument explicitly calculates the p-basis of the parameter fraction field and the generic-fibre identification. The statement is unchanged; removed the unused p-basis existence statement dependency.",
+  "blueprint": "Realizes the inherited ancestor Step 1 local-duality/Cohen–Gabber supporting input, specifically ILO IV 2.1.6 equations (2.a) and (2.b). No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-local-system-of-parameters",
+    "why": "Generic commutative-algebra tool used for choosing a parameter ideal; the unit sk-p-dl-a1-perverse does not supply this interface and the ILO IV route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-ring-subfields",
+    "why": "Generic commutative-algebra tool used for the specified power-series fraction-subfield family; the unit sk-p-dl-a1-perverse does not supply this interface and the ILO IV route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-p-basis-complement-monomial-basis",
+    "why": "Generic commutative-algebra tool used for bounded coefficient monomial expansions; the unit sk-p-dl-a1-perverse does not supply this interface and the ILO IV route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-p-basis-differentials-basis",
+    "why": "Generic commutative-algebra tool used for the differential basis associated with a relative p-basis; the unit sk-p-dl-a1-perverse does not supply this interface and the ILO IV route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-localization",
+    "why": "Generic commutative-algebra tool used for the generic fibre of ordinary differentials; the unit sk-p-dl-a1-perverse does not supply this interface and the ILO IV route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-local-system-of-parameters",
+  "lem-weil-pbc-power-series-ring-subfields",
+  "lem-weil-pbc-p-basis-complement-monomial-basis",
+  "lem-weil-pbc-p-basis-differentials-basis",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-62304e9fc",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-62304e9fc (reviewer sub-agent of L); spot-checked: PASS, no changes. I read ILO IV printed pp.47-51 (1.1.2-1.2.5 including Prop 1.2.4 and its proof, and 2.1.3-2.1.8 including (2.a) and (2.b)) and EGA 0_IV 21.9.4 with its proof. The item statement is unchanged and matches ILO 2.1.6 (2.b) for one integral component. Removing the p-basis existence theorem from stmt_deps is correct because the p-basis is supplied. Small cases: A=F_p(s)[[t]] gives rank 1 at J=empty and 2 at J={s}. A=κ[[x,y]]/(y^p-s x^p) gives rank 2 at J=empty, so J0 is genuinely needed, and rank 2=d+|J| at J={s}. Steps: Step 1 applies case (a) of the normalization node with the prescribed κ; a domain is reduced and equidimensional. Step 2 uses 07P5 with k_J=F_J and A_J=R_J; finiteness of K/K_J is argued in place and is correct. Step 3 expands by coefficient monomials, uses g^p in R_J, gets a relative p-basis because K^p is in K_J, and applies 07P2 to get dimension d+|J|. Step 4 checks every hypothesis of the stabilization node, and J containing J0 gives K_J inside K_J0. Step 5 uses that R is finite free over F_J[[t]], so A is finite over it, and B_1=R_J. Step 6 uses 00RT localization and the D(1/s) argument. Both new nodes are true. The stabilization node is ILO 1.2.4 word for word; I checked it for L=K, separable L/K and L=K(b^{1/p}). For the comparison node I gave my own proof: elements of B_1 have differentials in every m^n Omega, and Omega_{C/B_1} is finite and complete. Neither node is a clause of the item or a duplicate. lem-per-finite-formal-map-differential-cokernel needs a coefficient field and computes differentials relative to the full R. Advisory only: the comparison node could be derived in a few lines from lem-per-completed-differential-finite-conormal. I found no cycle, no SGA source, and every step is under 900 characters. I accept the five sec-proper-base-change tool_uses. The report's source-error section about the reversed subscript in ILO 2.1.6 is accurate."
  }
 }
