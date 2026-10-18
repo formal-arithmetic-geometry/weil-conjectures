@@ -10,6 +10,7 @@ public import Sheaf.CategoryTheory.LocalExtendedCechDescription
 public import Sheaf.CategoryTheory.RingedCompletionUnit
 import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.Algebra.Homology.HomComplexUnitEvaluationNaturality
 import Sheaf.Algebra.Homology.RhomGlobalSections
 import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
@@ -30,110 +31,240 @@ Source: Stacks Project, algebraization.tex, Tags 099E and 099F
 
 universe u w
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace CategoryTheory
 
-/-- A finite type ideal sheaf has a global augmented extended Cech model. For every such
-model, internal Hom gives the reflection into the locally derived complete objects,
-with the canonical augmentation-induced unit.
+set_option maxHeartbeats 1200000 in
+-- Descending evaluation compares several expanded product-localization functors.
+set_option backward.isDefEq.respectTransparency false in
+private theorem completion_unit_natural
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (O : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]
+    (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O)
+    (E E' : ringedSiteDerived O) (g : E ⟶ E') :
+    ringedCechCompletionUnit O K ε E ≫ (ringedCechCompletionFunctor O K).map g =
+      g ≫ ringedCechCompletionUnit O K ε E' := by
+  let A := ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)
+  let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let Q := DerivedCategory.Q (C := A)
+  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  let H := derivedInternalHom J O
+  let F := ringedCechCompletionFunctor O (ringedSiteRingComplex O)
+  let c := Localization.fac
+    ((𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor (R := O)) ⋙ Q)
+    (derivedInternalHom_inverts J O I η (fun M ↦
+      ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ M).2,
+        CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} _ M⟩))
+    (Q.op.prod Q)
+  let a : (homComplexFunctor (R := O)).obj
+      (Opposite.op (ringedSiteRingComplex O)) ≅ 𝟭 _ :=
+    NatIso.ofComponents (ringedHomUnitEvaluationIso O) (by
+      intro M N f
+      apply HomologicalComplex.hom_ext
+      intro n
+      exact homComplex_unit_evaluation_naturality J O f n)
+  let t : Q ⋙ 𝟭 _ ⟶ Q ⋙ F :=
+    { app := fun M ↦ Q.map (η.app M) ≫
+        Q.map (a.inv.app (I.obj M)) ≫ (c.inv.app (Opposite.op (ringedSiteRingComplex O), M))
+      naturality := by
+        intro M N f
+        dsimp only [Functor.comp_map, Functor.id_map, F, ringedCechCompletionFunctor]
+        have hc := c.inv.naturality
+          (X := (Opposite.op (ringedSiteRingComplex O), M))
+          (Y := (Opposite.op (ringedSiteRingComplex O), N)) (𝟙 _, f)
+        have ha := a.inv.naturality (I.map f)
+        have hη := η.naturality f
+        dsimp at hc ha hη
+        simp only [Functor.map_id, NatTrans.id_app, Category.id_comp, op_id] at hc
+        change Q.map f ≫ (Q.map (η.app N) ≫ Q.map (a.inv.app (I.obj N)) ≫
+            c.inv.app (Opposite.op (ringedSiteRingComplex O), N)) =
+          (Q.map (η.app M) ≫ Q.map (a.inv.app (I.obj M)) ≫
+            c.inv.app (Opposite.op (ringedSiteRingComplex O), M)) ≫
+              H.map
+                (X := (Opposite.op (Q.obj (ringedSiteRingComplex O)), Q.obj M))
+                (Y := (Opposite.op (Q.obj (ringedSiteRingComplex O)), Q.obj N))
+                (𝟙 _, Q.map f)
+        have hη' : Q.map f ≫ Q.map (η.app N) = Q.map (η.app M) ≫ Q.map (I.map f) := by
+          simpa only [← Q.map_comp] using congrArg Q.map hη
+        have ha' : Q.map (I.map f) ≫ Q.map (a.inv.app (I.obj N)) =
+            Q.map (a.inv.app (I.obj M)) ≫
+              Q.map ((homComplexFunctor (R := O)).obj
+                (Opposite.op (ringedSiteRingComplex O)) |>.map (I.map f)) := by
+          simpa only [← Q.map_comp] using congrArg Q.map ha
+        rw [← Category.assoc, hη']
+        simp only [Category.assoc]
+        rw [← Category.assoc (Q.map (I.map f)), ha']
+        simp only [Category.assoc]
+        rw [hc]
+        rfl }
+  let W := HomologicalComplex.quasiIso A (ComplexShape.up ℤ)
+  let full := Localization.fullyFaithfulWhiskeringLeft Q W (DerivedCategory A)
+  let d : 𝟭 (DerivedCategory A) ⟶ F := full.preimage t
+  have hd (M : CochainComplex A ℤ) : d.app (Q.obj M) = t.app M :=
+    congrArg (fun z ↦ z.app M) (full.map_preimage t)
+  have hu (X : ringedSiteDerived O) : ringedDerivedHomUnit O X = d.app X := by
+    let e := Q.objObjPreimageIso X
+    have hn := d.naturality e.hom
+    dsimp at hn
+    rw [← cancel_epi e.hom]
+    rw [hn, hd]
+    simp only [ringedDerivedHomUnit, t, a, e, Q, I, η, c,
+      Category.assoc, Iso.hom_inv_id_assoc]
+    rfl
+  have hn := d.naturality g
+  change (ringedDerivedHomUnit O E ≫ H.map
+      (X := (Opposite.op (Q.obj (ringedSiteRingComplex O)), E))
+      (Y := (Opposite.op (Q.obj K), E)) ((Q.map ε).op, 𝟙 E)) ≫
+      H.map (X := (Opposite.op (Q.obj K), E))
+        (Y := (Opposite.op (Q.obj K), E')) (𝟙 _, g) =
+    g ≫ ringedDerivedHomUnit O E' ≫ H.map
+      (X := (Opposite.op (Q.obj (ringedSiteRingComplex O)), E'))
+      (Y := (Opposite.op (Q.obj K), E')) ((Q.map ε).op, 𝟙 E')
+  have hs : H.map
+      (X := (Opposite.op (Q.obj (ringedSiteRingComplex O)), E))
+      (Y := (Opposite.op (Q.obj K), E)) ((Q.map ε).op, 𝟙 E) ≫
+      H.map (X := (Opposite.op (Q.obj K), E))
+        (Y := (Opposite.op (Q.obj K), E')) (𝟙 _, g) =
+      H.map (X := (Opposite.op (Q.obj (ringedSiteRingComplex O)), E))
+        (Y := (Opposite.op (Q.obj (ringedSiteRingComplex O)), E')) (𝟙 _, g) ≫
+      H.map (X := (Opposite.op (Q.obj (ringedSiteRingComplex O)), E'))
+        (Y := (Opposite.op (Q.obj K), E')) ((Q.map ε).op, 𝟙 E') := by
+    rw [← H.map_comp, ← H.map_comp]
+    congr 1
+    ext <;> simp
+  rw [Category.assoc, hs, ← Category.assoc, hu E, hu E']
+  change (d.app E ≫ F.map g) ≫ _ = _
+  rw [← hn, Category.assoc]
+  rfl
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem precomp_bijective_of_internalHom_isIso
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (O : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]
+    {X Y L : ringedSiteDerived O} (f : X ⟶ Y)
+    (hf : IsIso ((derivedInternalHom J O).map
+      (X := (Opposite.op Y, L)) (Y := (Opposite.op X, L)) (f.op, 𝟙 L))) :
+    Function.Bijective (fun h : Y ⟶ L ↦ f ≫ h) := by
+  obtain ⟨e, he⟩ := rhom_global_sections J O
+  let H := derivedInternalHom J O
+  let Γ := ringedSiteZerothHypercohomology J O
+  let t := H.map (X := (Opposite.op Y, L)) (Y := (Opposite.op X, L)) (f.op, 𝟙 L)
+  have : IsIso t := hf
+  let b : (Y ⟶ L) ≃ (X ⟶ L) :=
+    (e (Opposite.op Y, L)).symm.toEquiv.trans
+      ((Γ.mapIso (asIso t)).addCommGroupIsoToAddEquiv.toEquiv.trans (e (Opposite.op X, L)).toEquiv)
+  have hb (h : Y ⟶ L) : b h = f ≫ h := by
+    have hn := he (Opposite.op Y, L) (Opposite.op X, L) (f.op, 𝟙 L)
+      ((e (Opposite.op Y, L)).symm h)
+    change e (Opposite.op X, L) (Γ.map t ((e (Opposite.op Y, L)).symm h)) = f ≫ h
+    simpa only [Quiver.Hom.unop_op, AddEquiv.apply_symm_apply, Category.comp_id] using hn
+  have : (fun h : Y ⟶ L ↦ f ≫ h) = b := funext (fun h ↦ (hb h).symm)
+  rw [this]
+  exact b.bijective
+
+open CategoryTheory.Pretriangulated.Opposite in
+set_option backward.isDefEq.respectTransparency false in
+private theorem precomp_bijective_of_cone_internalHom_zero
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (O : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]
+    (T : Triangle (ringedSiteDerived O)) (hT : T ∈ distTriang (ringedSiteDerived O))
+    (L : ringedSiteDerived O)
+    (hz : IsZero ((derivedInternalHom J O).obj (Opposite.op T.obj₃, L))) :
+    Function.Bijective (fun h : T.obj₂ ⟶ L ↦ T.mor₁ ≫ h) := by
+  let F := (Functor.curry.obj (derivedInternalHom J O)).flip.obj L
+  obtain ⟨s, hs⟩ := (ringedInternalHom_exact J O).2 L
+  let : F.CommShift ℤ := s
+  let : F.IsTriangulated := hs
+  let S := (Pretriangulated.triangleOpEquivalence (ringedSiteDerived O)).functor.obj
+    (Opposite.op T)
+  have hS : S ∈ distTriang (ringedSiteDerived O)ᵒᵖ :=
+    Pretriangulated.op_distinguished T hT
+  have hz' : IsZero ((F.mapTriangle.obj S).obj₁) := hz
+  have hi := (Triangle.isZero₁_iff_isIso₂ (F.mapTriangle.obj S)
+    (F.map_distinguished S hS)).1 hz'
+  apply precomp_bijective_of_internalHom_isIso O T.mor₁
+  exact hi
+
+private theorem unit_isIso_of_complete_universal
+    {D : Type*} [Category D] (P : D → Prop) (F : D ⥤ D)
+    (η : ∀ E, E ⟶ F.obj E)
+    (hc : ∀ E, P (F.obj E))
+    (hu : ∀ E L, P L → Function.Bijective (fun h : F.obj E ⟶ L ↦ η E ≫ h))
+    (E : D) (hE : P E) : IsIso (η E) := by
+  obtain ⟨r, hr⟩ := (hu E E hE).2 (𝟙 E)
+  have hs : r ≫ η E = 𝟙 (F.obj E) := by
+    apply (hu E (F.obj E) (hc E)).1
+    simp only [← Category.assoc, hr, Category.id_comp, Category.comp_id]
+  exact ⟨⟨r, hr, hs⟩⟩
+
+/-- The global augmented model exists.
+Source: Stacks Project, algebraization.tex, Tag 099E.
+(blueprint: lem-weil-pbc-extended-cech-global-model).
+
+Proof: construct on the finite-generator subsite using the functorial ring complex, then sheafify
+and glue the local choices using the recorded site equivalence and exact sheafification. The
+remaining comparison between sequential and fraction localization is isolated in this theorem.
+-/
+theorem exists_ringedExtendedCech_global_model
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (O : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]
+    [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))]
+    (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
+    (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
+    [Mono ι] [I.IsFiniteType] :
+    ∃ (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O),
+      HasLocalExtendedCechDescription O I ι K ε := by
+  sorry
+
+/-- The internal-Hom reflector properties of every local extended Cech model.
+Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
+(blueprint: lem-weil-pbc-extended-cech-reflector-properties).
+
+Proof: on each finite-generator slice, contract the localized extended Cech complex, filter the
+augmentation cone by its positive localization terms, and use the internal-Hom tensor identity
+to prove orthogonality. Globalize by restriction and use zeroth derived global sections for the
+mapping bijection; the unit isomorphism follows from the resulting universal property.
+-/
+theorem ringedExtendedCech_reflector_properties
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (O : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]
+    [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))]
+    (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
+    (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
+    [Mono ι] [I.IsFiniteType]
+    (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O)
+    (hK : HasLocalExtendedCechDescription O I ι K ε) :
+    (∀ E : ringedSiteDerived O,
+      IsLocallyDerivedRingedIdealComplete O I ι ((ringedCechCompletionFunctor O K).obj E)) ∧
+    (∀ (E E' : ringedSiteDerived O) (g : E ⟶ E'),
+      ringedCechCompletionUnit O K ε E ≫ (ringedCechCompletionFunctor O K).map g =
+        g ≫ ringedCechCompletionUnit O K ε E') ∧
+    (∀ (E L : ringedSiteDerived O), IsLocallyDerivedRingedIdealComplete O I ι L →
+      Function.Bijective
+        (fun h : (ringedCechCompletionFunctor O K).obj E ⟶ L ↦
+          ringedCechCompletionUnit O K ε E ≫ h)) ∧
+    (∀ E : ringedSiteDerived O, IsLocallyDerivedRingedIdealComplete O I ι E →
+      IsIso (ringedCechCompletionUnit O K ε E)) := by
+  sorry
+
+/-- Global model plus its derived completion reflector.
 Source: Stacks Project, algebraization.tex, Tags 099E and 099F.
 (blueprint: lem-weil-pbc-extended-cech-completion-model).
-
-Proof:
-1. Give the full subcategory $\mathcal C'$ of objects with finitely many generators the induced
-coverings. Every object has a covering by these objects, by local finite generation. If $V\to U$
-and $U\in\mathcal C\prime$, the restrictions of a finite generating list on $U$ generate $\mathcal
-J|_V$, so $V\in\mathcal C\prime$. Consequently every covering of an object of $\mathcal C\prime$,
-and every covering fibre product over that object, already lies in this full subcategory. Give it
-exactly these coverings. The inclusion preserves coverings and their fibre products, which is
-continuity as defined in [def-weil-pbc-sites-and-cohomology](3); the same covering itself supplies
-the refinement required for cocontinuity. Faithfulness and fullness hold without refinement
-because the subcategory is full; cover-density is the first observation. Apply
-[lem-weil-pbc-special-cocontinuous-sheaf-equivalence]. Its equivalence preserves finite products,
-so ring operations, module operations, and their equations extend uniquely under its
-quasi-inverse; this gives an additive equivalence from modules over $\mathcal O$ to modules over
-its restricted sheaf $u^*\mathcal O$. Equivalences preserve kernels and cokernels, hence
-complexes, quasi-isomorphisms and augmentations. We may construct $K$ on $\mathcal C'$.
-
-2. On $\mathcal C'/U$, choose a finitely generated $I\subset\mathcal J(U)$ generating $\mathcal
-J|_U$. Define the presheaf complex at $V\to U$ to be $K(\mathcal O(V),I\mathcal O(V))$, with
-restriction maps and augmentation supplied by [lem-weil-pbc-ring-complex-functorial]. Sheafify
-degreewise; the differential still squares to zero and the augmentation remains a chain map
-because sheafification is a functor.
-
-3. For two such ideals $I=(a_1,\ldots,a_s)$ and $I'=(b_1,\ldots,b_t)$, each $a_i$ is locally a sum
-$\sum_j c_{ij}b_j$ because $I'$ generates the ideal sheaf. Refine the finitely many covers for the
-$a_i$, and then those expressing each $b_j$ in the $a_i$. On the resulting cover $U_k\to U$ both
-inclusions of section ideals hold, hence $I\mathcal O(U_k)=I'\mathcal O(U_k)$. On every object
-over $U_k$ the ring construction has identical inputs and identical maps, so the two presheaf
-complexes agree there. Their sheafifications are canonically identified by these identities; any
-two choices agree after the combined refinement, so the identification is unique with this local
-identity property and satisfies the cocycle identity.
-
-4. For $V\to U$, the restriction of the presheaf constructed with $I$ is literally the presheaf
-constructed with $I\mathcal O(V)$. Step 3 identifies its sheafification with the choice for $V$.
-Both successive restrictions and their composite are locally the identity on the same ring
-construction, so the identifications satisfy the cocycle condition. Define
-$K^n(U)=K_U^n(U\xrightarrow{1}U)$ and use these identifications for restriction maps. On a
-covering the sheaf condition is exactly that of the sheaf $K_U^n$ on $\mathcal C'/U$. The
-differentials and augmentations agree under restriction and therefore define $K^\bullet\to\mathcal
-O[0]$. For a chosen list generating $I$, clause (d) of [lem-weil-pbc-ring-complex-functorial]
-supplies an augmented derived isomorphism over $\mathcal O(U)$. Extend scalars to $\mathcal O_U$:
-its localization terms become the specified sheafified localizations. The functorial chain maps
-give a map from this derived scalar extension of $K(\mathcal O(U),I)$ to $K_U$; clause (c),
-evaluated on every $V\to U$, makes it a quasi-isomorphism after sheafification, using exactness of
-[lem-weil-pbc-ringed-site-module-sheafification-exact]. Thus the desired local Čech isomorphism
-follows without selecting nonfunctorial isomorphisms independently at every $V$. Return along the
-module equivalence of Step 1.
-
-5. For any augmented model as in the statement put $F(E)=R\mathcal Hom(K,E)$ and
-$\eta_E=\epsilon^*$. On a generating slice, [lem-weil-pbc-ringed-internal-hom-exact-restriction]
-identifies this with $R\mathcal Hom(C_f,E|_U)$ and its augmentation unit. For a generator $f_i$,
-[lem-weil-pbc-ringed-localization-rhom-calculus] identifies its derived internal Hom from
-$\mathcal O_U[1/f_i]$ with $R\mathcal Hom((C_f)_{f_i},E|_U)$. Here $(C_f)_{f_i}$ is contractible:
-for components indexed by sorted subsets $S$, set $(hx)_S=0$ if $i\in S$, and
-$(hx)_S=(-1)^{|\{j\in S:j<i\}|}x_{S\cup\{i\}}$ otherwise, using invertibility of $f_i$ to identify
-the localizations. In $dh+hd$ the term deleting $i$ is $x_S$; terms deleting any other index
-cancel in pairs with opposite signs. Thus $dh+hd=1$, including degree zero. The internal Hom
-vanishes for each generator on every further slice. By
-[lem-weil-pbc-ringed-derived-complete-elements-ideal] its vanishing sections form an ideal sheaf,
-hence contain every section of $\mathcal J$. This proves completeness of $F(E)$. For the empty
-list the complex and unit are the identity, and localization at zero is zero.
-
-6. If $L$ is complete, each nonempty product $g=\prod_{i\in S}f_i$ belongs to $\mathcal J(U)$, so
-$R\mathcal Hom(\mathcal O_U[1/g],L|_U)=0$. The kernel $A_f$ of $C_f\to\mathcal O_U[0]$ has only
-the positive-degree localization terms. Explicitly, let $F^pA_f$ be the subcomplex with the terms
-of $A_f$ in degrees $\geq p$ and zero below $p$, for $1\leq p\leq r+1$. Then $F^1A_f=A_f$,
-$F^{r+1}A_f=0$, and $F^pA_f/F^{p+1}A_f=A_f^p[-p]$, a finite sum of localizations shifted by $-p$.
-The degreewise split short exact sequences give distinguished triangles. Exactness of internal Hom
-[lem-weil-pbc-ringed-internal-hom-exact-restriction] applied successively to this filtration gives
-$R\mathcal Hom(A_f,L|_U)=0$. Applying it to $A_f\to C_f\to\mathcal O_U$ proves that $\eta_L|_U$ is
-an isomorphism. The cone of $\eta_L$ has zero cohomology on a generating cover, so its cohomology
-sheaves vanish globally and $\eta_L$ is an isomorphism.
-
-7. Let $Z_E$ be the cone of $\eta_E$. On a generating slice the triangle in Step 6 gives
-$Z_E|_U\cong R\mathcal Hom(A_f,E|_U)$. Applying contravariant internal Hom to the successive
-triangles of the explicit filtration in Step 6 expresses this object by finitely many
-distinguished triangles whose other terms are shifts of $M_g=R\mathcal Hom(\mathcal
-O_U[1/g],E|_U)$ for nonempty products $g$. A Hom-complex representative $\mathcal
-Hom^\bullet(\mathcal O_U[1/g],I^\bullet)$, with $I^\bullet$ K-injective, has a termwise $\mathcal
-O_U[1/g]$-action by precomposition; hence localization tensoring fixes it. Localization is flat
-(sectionwise localization preserves exact sequences and sheafification is exact by
-[lem-weil-pbc-ringed-site-module-sheafification-exact]), so also $M_g\otimes^{\mathbf L}\mathcal
-O_U[1/g]\cong M_g$. For complete $L$, the tensor/internal-Hom identity of
-[lem-weil-pbc-ringed-internal-hom-exact-restriction] gives $$R\mathcal Hom(M_g,L|_U)\cong
-R\mathcal Hom(M_g\otimes^{\mathbf L}\mathcal O_U[1/g],L|_U)\cong R\mathcal Hom(M_g,R\mathcal
-Hom(\mathcal O_U[1/g],L|_U))=0.$$ Applying internal Hom into $L|_U$ to those triangles and
-inducting from the zero end implies $R\mathcal Hom(Z_E|_U,L|_U)=0$. Slice compatibility of the
-same calculus node makes this the restriction of $R\mathcal Hom(Z_E,L)$; its cohomology sheaves
-vanish on a cover and hence globally. Applying internal Hom into $L$ to $E\to F(E)\to Z_E$ now
-gives an isomorphism $R\mathcal Hom(F(E),L)\to R\mathcal Hom(E,L)$. Taking zeroth derived global
-sections using [lem-pur-rhom-global-sections] gives the required bijection
-$\operatorname{Hom}(F(E),L)\to\operatorname{Hom}(E,L)$, induced by composition with $\eta_E$.
-Naturality follows from the internal-Hom functor and the fixed augmentation. Together with Step 5
-this proves the left adjoint for every augmented model with the stated local description. -/
+-/
 theorem exists_ringedExtendedCech_completion_model
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})
@@ -159,6 +290,9 @@ theorem exists_ringedExtendedCech_completion_model
               ringedCechCompletionUnit O K ε E ≫ h)) ∧
         (∀ E : ringedSiteDerived O, IsLocallyDerivedRingedIdealComplete O I ι E →
           IsIso (ringedCechCompletionUnit O K ε E)) := by
-  sorry
+  obtain ⟨K, ε, hK⟩ := exists_ringedExtendedCech_global_model J O I ι
+  refine ⟨⟨K, ε, hK⟩, ?_⟩
+  intro K' ε' hK'
+  exact ringedExtendedCech_reflector_properties J O I ι K' ε' hK'
 
 end CategoryTheory

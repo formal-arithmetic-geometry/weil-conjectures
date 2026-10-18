@@ -1,0 +1,104 @@
+{
+ "id": "lem-weil-pbc-extended-cech-global-model",
+ "kind": "statement",
+ "title": "Global augmented extended Cech model",
+ "statement": "For a small site (C,J), a sheaf of commutative rings O, a finite type ideal module I with monomorphism ι into O, and the required derived-category instances, there exist a complex K of O-module sheaves and an augmentation ε : K ⟶ O[0] having HasLocalExtendedCechDescription O I ι K ε.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099E and 099F"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-local-extended-cech-description",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof": [
+  {
+   "text": "The construction or finite-filtration orthogonality argument described in the source establishes this strictly smaller clause of the parent theorem; the missing sequential-localization comparison must be supplied by future work.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099E, lemma-global-extended-cech-complex"
+   }
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "stage-3 decomposition of the construction and reflector clauses",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global extended Cech complex derived completion ringed site",
+   "results": "No matching theorem; returned generic sheaf and cohomology declarations only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Bijective (fun h => f ≫ h)",
+   "results": "No matching derived completion reflector theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extended.*[Cc]ech.*completion|derived.*completion.*reflector",
+   "results": "Searched Mathlib and existing WeilConjectures/Sheaf modules; only this blueprint family was found.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099E and 099F; the current library lacks the localization comparison needed for the full proof"
+ },
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "declaration": "CategoryTheory.exists_ringedExtendedCech_global_model",
+  "file": "lean/Sheaf/Paper/ExtendedCechCompletionModel.lean",
+  "statement": "theorem exists_ringedExtendedCech_global_model {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (O : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))] (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) [Mono ι] [I.IsFiniteType] : ∃ (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O), HasLocalExtendedCechDescription O I ι K ε",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261018T071200-L-1670690",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261018T071200-L-1670690",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
