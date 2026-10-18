@@ -14,6 +14,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.CompactObjExtension
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
@@ -81,8 +82,6 @@ the closed point, which is not a constructible subset of `Y`.
 
 ## Sorried input
 
-- `essentiallySmall_isConstructibleModuleObject` (blueprint `det-brown-hypotheses-small`): the
-  constructible sheaves on a noetherian scheme are essentially small.
 - The inputs of `isCompactObj_singleLocalizingBoundedConstructible_continuousMapRingObj`,
   `isCompactObj_singleLocalizingBoundedConstructible_padicAlgClRingObj` (blueprint
   `sk-thm-constructible-compactness`) and
@@ -224,13 +223,14 @@ instance isClosedUnderIsomorphisms_isConstructibleModuleObject (X : Scheme.{u}) 
   of_iso e h := IsConstructibleModuleObject.of_iso e h
 
 /-- Blueprint `det-brown-hypotheses-small` (constructible hearts): the constructible module
-objects on a noetherian scheme are essentially small. A constructible sheaf is described by a
-finite stratification, pro-étale local finite presentations and gluing data, which form a set. -/
+objects on a noetherian scheme are essentially small. A constructible sheaf embeds into a finite
+product of pushforwards of pullbacks of finitely presented module objects, which form a set
+(`essentiallySmall_isConstructibleModuleObject_of_noetherianSpace`). -/
 theorem essentiallySmall_isConstructibleModuleObject (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X] :
     ObjectProperty.EssentiallySmall.{u + 1}
       (IsConstructibleModuleObject (condensedRingObj Λ X)) :=
-  sorry
+  essentiallySmall_isConstructibleModuleObject_of_noetherianSpace Λ X
 
 /-- Blueprint `det-brown-hypotheses-small`: the bounded constructible complexes on a noetherian
 scheme are essentially small: a bounded complex with constructible cohomology is obtained from

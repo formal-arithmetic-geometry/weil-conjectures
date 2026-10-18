@@ -152,7 +152,7 @@ lemma compactBoundedHom_singleFunctor_of_isFiniteLocallyConstantSheaf [Finite Λ
       exact (isDualizable_of_isFiniteLocallyConstantSheaf Λ _
         (ObjectProperty.flat_of_isZero (isZero_zero _))).of_iso (hz.isoZero).symm
   obtain ⟨Y, hpair, hY⟩ := exists_exactPairing_Q_obj P 0 0 hP
-  let := DerivedCategory.braidedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  let := DerivedCategory.braidedCategory' (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   let _ := BraidedCategory.exactPairing_swap (Q.obj P) Y
   let adj : tensorLeft (Q.obj P) ⊣ tensorLeft Y := tensorLeftAdjunction Y (Q.obj P)
   have : ∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J) (tensorLeft Y) := fun J ↦
