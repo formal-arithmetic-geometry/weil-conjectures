@@ -16,7 +16,8 @@
   "def-weil-closed-immersion",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-direct-image",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "def-weil-pbc-etale-sum-extension"
  ],
  "proof": [
   {
@@ -366,5 +367,29 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-e03151bbe (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement, and verdict is PASS. Shape: one commit, the item plus the report, no new nodes. Statement, stmt_deps, source and blueprint are unchanged from base (I diffed against the live unsplit node). There is no SGA citation, and every off-unit statement citation is declared in tool_uses as a generic tool. Source: ILO XVII 5.2 only states Gabber's perversity t-structure and gives no proof. The item honestly marks itself agent-formulated, with a WANTED line. The citer, localization-calculus Step 1 with Phi^a={p>=a}, gets exactly the condition H^a_x=0 for a>p(x). Steps, each checked against the cited statements: (1) closure of U_Phi under coproducts, summands, [1] and extensions, via termwise derived coproducts and exact, colimit-commuting stalks passed through the module forgetful functor, plus the long exact sequence; (2) generator support, from lem-kun-04ca's essential image and the lem-amb-etale-sum-stalks lift formula; (3) a rotated telescope triangle with lem-kun-complex-colimit-hocolim; (4) the zero-open criterion gives u(T) in S for any S, then the reduced structure and the open-closed sequence on Lambda_V with i^{-1} of a constant sheaf constant, so the map factors through the cokernel; (5) the C/V extension-by-zero presheaf equals def-weil-pbc-etale-sum-extension, surjectivity on germs follows formally from f=u^*(f~) o eta, and stalk conservativity then gives the epimorphism; (6) a supported kernel resolution, with the shift sign (P_n[-a])[n], n>=0, checked; (7) brutal tails via the complex short-exact-sequence triangle, then the telescope; (8) D^{<=b} in C via the standard t-structure representative, unbounded below allowed; (9) good-truncation induction from tau_{<=b}K, with the degreewise-stable union giving the unbounded reverse inclusion. Edge cases (X empty, Lambda=0, Phi^a empty, constant Phi, non-closed specialization-closed Phi, open j_!) all hold, and Noetherian X, finite Lambda and specialization-closure are never used. Stacks tags 04FR/04FT/01J3/095L/03DI/03DJ/03S5/0710/04CA/0152/0949/08J5/07D9(2)/03EW(3) match their uses. No duplicate: lem-per-set-generated-sheaf-aisle is the generic set-generation lemma. Advisory only: the inherited statement cites the grothendieck-abelian node for u_! on an arbitrary sheaf, and def-weil-pbc-etale-sum-extension would be the precise definition node; left unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSupportAisleGenerators",
+  "declaration": "AlgebraicGeometry.Etale.supportFiltrationClass_isLeast",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportFiltrationGenerator",
+   "AlgebraicGeometry.Etale.supportFiltrationClass",
+   "AlgebraicGeometry.Etale.supportFiltrationClass_isLeast"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleSupportAisleGenerators.lean",
+  "statement": "theorem supportFiltrationClass_isLeast (X : Scheme.{u}) [IsNoetherian X] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Φ : ℤ → Set X) (hΦ : ∀ a : ℤ, StableUnderSpecialization (Φ a)) (hdecr : ∀ a : ℤ, Φ (a + 1) ⊆ Φ a) (hbounded : ∃ b : ℤ, ∀ a : ℤ, a ≤ b → Φ a = Set.univ) : IsLeast {P : ObjectProperty (DerivedCategoryModule Λ X) | (∀ (K L : DerivedCategoryModule Λ X), Nonempty (K ≅ L) → P K → P L) ∧ P (0 : DerivedCategoryModule Λ X) ∧ (∀ (I : Type (u + 1)) (F : I → DerivedCategoryModule Λ X) (c : Cofan F), IsColimit c → (∀ i : I, P (F i)) → P c.pt) ∧ (∀ (K L : DerivedCategoryModule Λ X), Retract K L → P L → P K) ∧ (∀ K : DerivedCategoryModule Λ X, P K → P (K⟦(1 : ℤ)⟧)) ∧ (∀ T : Triangle (DerivedCategoryModule Λ X), T ∈ distTriang _ → P T.obj₁ → P T.obj₃ → P T.obj₂) ∧ (∀ (V : SmallModel.{u} X.AffineEtale) (Z : Scheme.{u}) (i : Z ⟶ ((Scheme.AffineEtale.Spec X).obj ((equivSmallModel.{u} X.AffineEtale).inverse.obj V)).left) (a : ℤ), IsReduced Z → IsClosedImmersion i → Set.range (fun z : Z ↦ ((Scheme.AffineEtale.Spec X).obj ((equivSmallModel.{u} X.AffineEtale).inverse.obj V)).hom (i z)) ⊆ Φ a → P (supportFiltrationGenerator X Λ ((Scheme.AffineEtale.Spec X).obj ((equivSmallModel.{u} X.AffineEtale).inverse.obj V)) Z i a))} (supportFiltrationClass X Λ Φ)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The two definitions spell out the generator and support class introduced by this node. IsLeast includes both closure and minimality. The added statement dependency records the existing canonical etale sum extension used in the generator."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f5004314",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Clause-by-clause match: Noetherian X, finite Λ in the recorded u+1 encoding, unbounded DerivedCategoryModule, Φ specialization-stable, decreasing and univ for a≤b; support class = nonzero pointedEtaleStalk of H^a at algClosurePoint; generator = singleFunctor 0 of etaleLowerShriek ∘ lowerStar ∘ constantSheaf, shifted by -a; IsLeast over iso/zero/Type(u+1) coproducts/retract/⟦1⟧/extension/generator closure, covering both inclusions. Node changed only in lean and stmt_deps; the added def-weil-pbc-etale-sum-extension is a landed node with a lean record, which line 140 allows. lean.statement verbatim. Defs real, theorem sorry, 9-step docstring, imports = proof_dep modules, lines ≤100. nt_compile --json clean in 2.7 s, exit 0. Second-reading section is process-only; not treated as H11, per NC/N3/N7. Advisory: etaleSheafSupport (def-kun-support, AddCommGrp) is a different encoding, not a duplicate."
  }
 }
