@@ -12,9 +12,122 @@
   "def-weil-pbc-adically-complete-ring",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathfrak m$ be the maximal ideal of $A$. The assumed completeness is maximal-ideal-adic completeness, including separatedness. Apply [lem-weil-pbc-complete-local-g-ring] to $(A,\\mathfrak m)$: its hypotheses are precisely Noetherianity, locality, and this completeness. Thus $A$ is a G-ring.",
+   "uses": [
+    "lem-weil-pbc-complete-local-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QW, proposition-ubiquity-excellent, first sentence; Tag 07PX, proposition-ubiquity-G-ring, case (2), using Tag 07PS, proposition-Noetherian-complete-G-ring."
+   }
+  },
+  {
+   "text": "Fix an arbitrary commutative $A$-algebra $B$ finite as an $A$-module. By [lem-weil-pbc-finite-over-complete-local-product], $B$ is Noetherian. For any prime $\\mathfrak q$ of $B$, put $D=B/\\mathfrak q$. This is a domain: a product of residue classes is zero only if one factor is zero, by primality, and $1$ is nonzero because $\\mathfrak q$ is proper. If $b_1,\\ldots,b_r$ generate $B$ as an $A$-module, their classes generate $D$, since reducing $b=\\sum_i a_ib_i$ modulo $\\mathfrak q$ gives the required expression for every class. Hence $D$ is a finite $A$-algebra. The domain clause of [lem-weil-pbc-finite-over-complete-local-product] now makes $D$ a Noetherian complete local domain. Apply [lem-per-complete-local-domain-regular-open] to obtain a nonempty open subset of $\\operatorname{Spec}D$ on which every local ring is regular. This holds for every prime $\\mathfrak q$ of $B$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-per-complete-local-domain-regular-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PJ, proposition-ubiquity-J-2, proof of case (2); Tag 07PI, lemma-complete-Noetherian-domain-J-0; finite-algebra completeness is Algebra Tag 0325, lemma-quotient-complete-local."
+   }
+  },
+  {
+   "text": "The arbitrary finite algebra $B$ in Step 2 is Noetherian, and every prime quotient $B/\\mathfrak q$ has a nonempty regular open. These are exactly the hypotheses of [lem-exc-regular-locus-open-from-prime-quotients]. It follows that the regular locus of $B$ itself is open. Since $B$ was arbitrary, every finite $A$-algebra has open regular locus, including the zero algebra, whose spectrum and regular locus are empty.",
+   "uses": [
+    "lem-exc-regular-locus-open-from-prime-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PJ, proposition-ubiquity-J-2, proof of case (2), applying Tag 07P9, lemma-intersection-regular-with-closed."
+   }
+  },
+  {
+   "text": "Apply [lem-per-j2-finite-algebra-criterion] to the Noetherian ring $A$ and the conclusion of Step 3. Every finite type $A$-algebra has open regular locus. Thus $A$ satisfies the J-2 condition; this argument has not assumed that $A$ itself is reduced or a domain.",
+   "uses": [
+    "lem-per-j2-finite-algebra-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PJ, proposition-ubiquity-J-2, proof of case (2), using condition (3) of Tag 07PC, lemma-J-2."
+   }
+  },
+  {
+   "text": "Noetherianity means every ideal is finitely generated, so $\\mathfrak m$ is finitely generated. The Cohen structure theorem [lem-weil-pbc-cohen-structure-power-series-surjection] therefore supplies $n\\geq0$, a coefficient ring $\\Lambda$ which is either a field or a Cohen ring, and a surjection $\\pi:S=\\Lambda[[x_1,\\ldots,x_n]]\\twoheadrightarrow A$. By [lem-weil-pbc-power-series-field-cohen-regular-complete], $S$ is a Noetherian regular local ring. This includes $n=0$ and both residue-characteristic cases.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-cohen-structure-power-series-surjection",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032C, remark-Noetherian-complete-local-ring-universally-catenary, first three sentences, using Tag 032A, theorem-cohen-structure-theorem."
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak p$ of $S$, [lem-weil-pbc-regular-local-localization] gives regularity of $S_{\\mathfrak p}$. Together with the Noetherianity of $S$ from Step 5, this is exactly the hypothesis of [lem-trf-regular-ring-universally-catenary]. Hence $S$ is universally catenary.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-regular-ring-universally-catenary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032C, remark-Noetherian-complete-local-ring-universally-catenary, final sentence; Tags 00NQ, lemma-regular-ring-CM, and 00NM, lemma-CM-ring-catenary; regular-local localization is Tag 0AFS."
+   }
+  },
+  {
+   "text": "Let $T$ be any finite type $A$-algebra, generated by $t_1,\\ldots,t_r$. It is also finite type over $S$: express any $t\\in T$ as a polynomial in the $t_i$ with coefficients in $A$ and lift each of the finitely many coefficients along the surjection $\\pi:S\\twoheadrightarrow A$. The resulting polynomial expression with coefficients in $S$ has the same value in $T$. Universal catenarity of $S$ now says that $T$ is catenary, with the finite bound on prime-chain lengths and the equality of saturated-chain lengths in [def-exc-excellent-ring]. These are properties of the ring $T$, independent of which coefficient ring was used. As $T$ was arbitrary, the Noetherian ring $A$ is universally catenary. This is the quotient-descent argument, written directly from the finite-type and universal-catenarity definitions.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032C, remark-Noetherian-complete-local-ring-universally-catenary, quotient consequence; universal catenarity is Tag 00NL, definition-universally-catenary."
+   }
+  },
+  {
+   "text": "Finally $A$ is Noetherian by hypothesis, a G-ring by Step 1, and J-2 by Step 4, so it is quasi-excellent by [def-exc-excellent-ring]. Step 7 gives universal catenarity. The same definition therefore makes $A$ excellent.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QW, proposition-ubiquity-excellent, clause (2), and Tag 07QT, definition-excellent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "lem-exc-regular-locus-open-from-prime-quotients",
+  "lem-per-complete-local-domain-regular-open",
+  "lem-per-j2-finite-algebra-criterion",
+  "lem-trf-regular-ring-universally-catenary",
+  "lem-weil-pbc-cohen-structure-power-series-surjection",
+  "lem-weil-pbc-complete-local-g-ring",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QW, proposition-ubiquity-excellent, clause (2) and its proof; J-2 follows the proof of Tag 07PJ case (2), and universal catenarity follows Algebra Tag 032C."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +156,45 @@
    "results": "Read 0 hits: ; no theorem about excellence of complete local rings or Galois conjugacy of geometric specialization maps.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(excellent|catenary|J2Ring|IsGRing)\\b",
+   "results": "{\"t\": \"2026-10-18T18:13:36Z\", \"tool\": \"grep\", \"query\": \"\\\\b(excellent|catenary|J2Ring|IsGRing)\\\\b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/InvariantForm.lean\"], \"digest\": \"371d3433061e241b\"}; read the returned hits: adic completeness, local dimension, Noetherianity, DVR criteria, or open smooth/unramified loci; no excellence theorem. The grep hit is only the bibliographic adjective excellent in Mathlib/Algebra/Lie/InvariantForm.lean:32.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete Noetherian local rings are excellent",
+   "results": "{\"t\": \"2026-10-18T18:13:36Z\", \"tool\": \"leansearch\", \"query\": \"Complete Noetherian local rings are excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.isLasker\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsNoetherianRing\", \"AdicCompletion.flat_of_isNoetherian\", \"HenselianLocalRing.toIsLocalRing\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"isArtinianRing_iff_isNilpotent_maximalIdeal\", \"instIsNoetherianRingOfIsArtinianRing\"], \"digest\": \"e00066706ab0155e\"}; read the returned hits: adic completeness, local dimension, Noetherianity, DVR criteria, or open smooth/unramified loci; no excellence theorem. The grep hit is only the bibliographic adjective excellent in Mathlib/Algebra/Lie/InvariantForm.lean:32.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Excellent\"",
+   "results": "{\"t\": \"2026-10-18T18:13:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Excellent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; read the returned hits: adic completeness, local dimension, Noetherianity, DVR criteria, or open smooth/unramified loci; no excellence theorem. The grep hit is only the bibliographic adjective excellent in Mathlib/Algebra/Lie/InvariantForm.lean:32.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every complete Noetherian local commutative ring is excellent",
+   "results": "{\"t\": \"2026-10-18T18:13:42Z\", \"tool\": \"leanfinder\", \"query\": \"Every complete Noetherian local commutative ring is excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsNoetherianRing.of_isLocalization_maximal\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsHausdorff.of_isLocalRing\", \"IsDiscreteValuationRing.TFAE\", \"IsHausdorff.of_isDomain\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"c66dc099ef30f6e9\"}; read the returned hits: adic completeness, local dimension, Noetherianity, DVR criteria, or open smooth/unramified loci; no excellence theorem. The grep hit is only the bibliographic adjective excellent in Mathlib/Algebra/Lie/InvariantForm.lean:32.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian ring with geometrically regular formal fibers open regular locus in every finite type algebra and universally catenary complete local rings",
+   "results": "{\"t\": \"2026-10-18T18:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherian ring with geometrically regular formal fibers open regular locus in every finite type algebra and universally catenary complete local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.of_isLocalization_maximal\", \"Algebra.QuasiFiniteAt\", \"AlgebraicGeometry.isNoetherianRing_of_away\", \"Algebra.isOpen_unramifiedLocus\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"Algebra.isOpen_smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.Smooth.flat_of_isNoetherianRing\"], \"digest\": \"b78e945350883682\"}; read the returned hits: adic completeness, local dimension, Noetherianity, DVR criteria, or open smooth/unramified loci; no excellence theorem. The grep hit is only the bibliographic adjective excellent in Mathlib/Algebra/Lie/InvariantForm.lean:32.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-top-residue-class",
@@ -70,5 +218,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-complete-local-excellence",
+  "worker": "stage1",
+  "summary": "Split Stacks 07QW(2) along its G-ring, J-2, and Cohen-presentation universal-catenarity argument. Reused seven existing non-elementary algebra inputs; created only the complete-local-domain regular-open theorem and the finite-algebra J-2 criterion, both statement-only and searched by two semantic phrasings, Loogle, grep, and LeanSearch. Wrote out the module-quotient finiteness and quotient descent of universal catenarity; checked every cited statement and small cases. The item statement is unchanged.",
+  "blueprint": "Supplies the complete-local excellence input under the finite-coefficient potential-dualizing construction of blueprint ancestor lem-per-artin-gabber-affine-curve, Proof Step 1 (dimension-normalized duality and the middle t-structure), through normal-top-residue-class and the recorded via chain. The actual algebra argument is the cited Stacks 07QW(2) proof, not an assertion that the affine-curve blueprint itself proves excellence. Whole-blueprint searches for complete local, complete Noetherian, catenary, J-0, J-2, regular locus, and finite algebra found no node stating this item or either new theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-local-g-ring",
+    "why": "The generic complete-local G-ring theorem supplies the formal-fibre condition; the perverse-sheaf unit has no commutative-algebra replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "The generic finite-algebra structure theorem supplies Noetherianity of a finite algebra and completeness/locality of its domain quotients; it does not replace a perverse-unit proof step."
+   },
+   {
+    "node": "lem-exc-regular-locus-open-from-prime-quotients",
+    "why": "The generic regular-locus criterion turns the regular opens of prime quotients into openness for each finite algebra."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-structure-power-series-surjection",
+    "why": "The generic Cohen presentation is the regular-source construction specifically used by Stacks for the universal-catenarity factor of excellence."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "The generic field/Cohen power-series theorem verifies regularity and Noetherianity of the presentation source."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "The generic localization theorem verifies all-prime regularity needed for the regular-ring universal-catenarity theorem."
+   },
+   {
+    "node": "lem-trf-regular-ring-universally-catenary",
+    "why": "The generic regular-ring dimension theorem gives universal catenarity of the presentation source, with no change to the perverse-unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-local-g-ring",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-exc-regular-locus-open-from-prime-quotients",
+  "lem-weil-pbc-cohen-structure-power-series-surjection",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-trf-regular-ring-universally-catenary"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-8844778bc",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-8844778bc (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all 12 cited statements in full, plus the Stacks source: 07QW (statement and proof), 07PJ case (2), 07PC (all four conditions and the proof) and 07PI. The split follows the source route. Step 1: complete-local G-ring (07PS); its hypotheses match the item exactly. Step 2: a finite algebra B is Noetherian, and each prime quotient B/q is a finite A-domain, so it is complete local (0325 node); the new 07PI node then gives it a nonempty regular open. Step 3: the 07P9 node gives open regular locus for every finite algebra; B=0 is vacuous. Step 4: the new 07PC (3)=>(1) node gives J-2. Steps 5-6: Cohen surjection Lambda[[x]]->A (field or Cohen ring, n>=0); S is regular local, all its localizations are regular, so S is universally catenary. Step 7 (elementary): a finite type A-algebra is finite type over S by lifting coefficients, so it is catenary; this is genuinely a few lines. Step 8: assembly. New node lem-per-complete-local-domain-regular-open is exactly 07PI with J-0 expanded. Tested on a field, on a cusp k[[x,y]]/(y^2-x^3) and on k[e]/(e^2), which shows the domain hypothesis is needed. No duplicate: 032D is only an input to its proof, and the lem-exc-j0 nodes take J-0 as input. New node lem-per-j2-finite-algebra-criterion is 07PC (3)=>(1). It is not a duplicate of lem-exc-j2-residue-field-criterion, which is (4)=>(1) with a different hypothesis. Note for the next splitter: it can cite that node after the short (3)=>(4) argument. Neither new node restates the item. Batch-5 flag on lem-trf-regular-ring-universally-catenary: I recomputed the batch-5 closure from both targets, stopping at assumed.tsv, with and without the item's new deps. It adds only that node, lem-trf-cm-ring-universally-catenary and lem-trf-polynomial-algebra-cm, which are pure commutative algebra (regular => CM => universally catenary, Stacks 00NM/00NQ). Everything below them is already in the closure. Neither the trace formula nor Poincare duality assumption gives this result and it is not a step of their proofs. No non-trf node states it, so I accept the citation. No cycle, no SGA citation, blueprint from/via/same_as are correct, and the 7 off-unit tool_uses are generic algebra tools, accepted."
  }
 }

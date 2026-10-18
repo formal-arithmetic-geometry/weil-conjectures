@@ -1,0 +1,86 @@
+{
+ "id": "lem-per-j2-finite-algebra-criterion",
+ "kind": "statement",
+ "title": "J-2 can be tested on module-finite algebras",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Suppose that for every commutative $R$-algebra $B$ which is finitely generated as an $R$-module [def-weil-finitely-generated-module], the subset $\\{\\mathfrak q\\in\\operatorname{Spec}B:B_{\\mathfrak q}\\text{ is regular local}\\}$ is Zariski open [def-weil-affine-spectrum, def-weil-pbc-localization-at-prime, def-weil-regular-scheme]. Then for every finite type commutative $R$-algebra $C$ [def-weil-pbc-finite-type-algebra], the subset $\\{\\mathfrak q\\in\\operatorname{Spec}C:C_{\\mathfrak q}\\text{ is regular local}\\}$ is Zariski open. Equivalently, $R$ is J-2 in the sense of [def-exc-excellent-ring].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PC, lemma-J-2, implication (3) implies (1); J-1 and J-2 expanded by Tag 07P7, definition-J."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-finite-type-algebra",
+  "def-exc-excellent-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring is J2 if every finite algebra over it has open regular locus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Finset R),\\n  Ideal.span ↑S = ⊤ → (∀ (s : ↥S), IsNoetherianRing (Localization.Away ↑s)) → IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"Algebra.EssFiniteType.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Localization/Submodule\", \"type\": \"∀ (R : Type u_3) (S : Type u_4) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] [IsNoetherianRing R], IsNoetherianRing S\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ S $ is a commutative ring that is finitely generated as an $ R $-algebra, then $ S $ is also a Noetherian ring.\"}\n  {\"name\": \"IsNoetherianRing.of_prime\", \"module\": \"Mathlib/RingTheory/Noetherian/OfPrime\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], (∀ (I : Ideal R), I.IsPrime → I.FG) → IsNoetherianRing R\", \"doc\": \"If every prime ideal in a commutative ring $ R $ is finitely generated, then $ R $ is a Noetherian ring.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"IsNoetherianRing.of_prime_ne_bot\", \"module\": \"Mathlib/RingTheory/Noetherian/OfPrime\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], (∀ (I : Ideal R), I.IsPrime → I ≠ ⊥ → I.FG) → IsNoetherianRing R\", \"doc\": \"Let $ R $ be a commutative ring. If every non-zero prime ideal of $ R $ is finitely generated, then $ R $ is a Noetherian ring.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"For a commutative ring $ R $, the scheme $ \\\\operatorname{Spec}(R) $ is Noetherian if and only if $ R $ is a Noetherian ring.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern Noetherianity, smooth or free loci, finite type, or the Jacobson property; none is the finite-algebra J-2 criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "To prove the regular locus of every finitely generated algebra is open it suffices to check every module finite algebra over a Noetherian base ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Finset R),\\n  Ideal.span ↑S = ⊤ → (∀ (s : ↥S), IsNoetherianRing (Localization.Away ↑s)) → IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"Algebra.FiniteType.of_span_eq_top_source\", \"module\": \"Mathlib/RingTheory/RingHom/FiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (s : Set R),\\n  Ideal.span s = ⊤ →\\n    (∀ i ∈ s, Algebra.FiniteType (Localization.Away i) (TensorProduct R (Localization.Away i) S)) →\\n      Algebra.FiniteType R S\", \"doc\": \"Let $R$ be a commutative ring and let $S$ be an $R$-algebra. Let $s \\\\subseteq R$ be a set of elements such that the ideal they generate is the whole ring, i.e., $\\\\langle s \\\\rangle = R$. If for every $\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern Noetherianity, smooth or free loci, finite type, or the Jacobson property; none is the finite-algebra J-2 criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"J2\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern Noetherianity, smooth or free loci, finite type, or the Jacobson property; none is the finite-algebra J-2 criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsJTwo|J2Ring|regularLocus|JTwo",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern Noetherianity, smooth or free loci, finite type, or the Jacobson property; none is the finite-algebra J-2 criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite algebra is J1 implies the Noetherian base ring is J2",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FiniteType.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.FiniteType\", \"type\": \"(R S : Type*) [CommRing R] [CommRing S] [Algebra R S] [h : Algebra.FiniteType R S] [IsNoetherianRing R] :\\n  IsNoetherianRing S\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ S $ is a commutative ring that is finitely generated as an $ R $-algebra, then $ S $ is also a Noetherian ring.\"}\n  {\"name\": \"Algebra.EssFiniteType.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Localization.Submodule\", \"type\": \"(R S : Type*) [CommRing R] [CommRing S] [Algebra R S] [Algebra.EssFiniteType R S] [IsNoetherianRing R] :\\n  IsNoetherianRing S\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ S $ is a commutative ring that is finitely generated as an $ R $-algebra, then $ S $ is also a Noetherian ring.\"}\n  {\"name\": \"isJacobsonRing_of_finiteType\", \"module\": \"Mathlib.RingTheory.Jacobson.Ring\", \"type\": \"{A B : Type*} [CommRing A] [CommRing B] [Algebra A B] [IsJacobsonRing A] [Algebra.FiniteType A B] : IsJacobsonRing B\", \"doc\": \"Let $A$ and $B$ be commutative rings with $B$ a finitely generated $A$-algebra. If $A$ is a Jacobson ring, then $B$ is also a Jacobson ring. This means that every prime ideal of $B$ is the intersectio\"}\n  {\"name\": \"RingHom.FiniteType.isJacobsonRing\", \"module\": \"Mathlib.RingTheory.Jacobson.Ring\", \"type\": \"{A B : Type*} [CommRing A] [CommRing B] {f : A →+* B} [IsJacobsonRing A] (H : f.FiniteType) : IsJacobsonRing B\", \"doc\": \"If $ A $ is a Jacobson ring and $ B $ is a finitely generated $ A $-algebra via a ring homomorphism $ f : A \\\\to B $, then $ B $ is also a Jacobson ring.\"}\n  {\"name\": \"AlgHom.FinitePresentation.of_finiteType\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"[IsNoetherianRing A] {f : A →ₐ[R] B} : f.FiniteType ↔ f.FinitePresentation\", \"doc\": \"Let $ A $ be a Noetherian ring and $ f : A \\to B $ an algebra homomorphism. Then $ f $ is of finite type if and only if it is finitely presented.\"}\n  {\"name\": \"isNoetherian_of_isNoetherianRing_of_finite\", \"module\": \"Mathlib.RingTheory.Noetherian.Basic\", \"type\": \"(R M : Type*) [Ring R] [AddCommGroup M] [Module R M] [IsNoetherianRing R] [Module.Finite R M] : IsNoetherian R M\", \"doc\": \"If $ R $ is a Noetherian ring and $ M $ is a finitely generated $ R $-module, then $ M $ is a Noetherian $ R $-module. This means that every submodule of $ M $ is finitely generated, provided $ R $ sa\"}\n  {\"name\": \"IsSemiprimaryRing.isNoetherianRing_iff_jacobson_fg\", \"module\": \"Mathlib.RingTheory.HopkinsLevitzki\", \"type\": \": IsNoetherianRing R ↔ (Ring.jacobson R).FG\", \"doc\": \"A semiprimary ring $ R $ is Noetherian if and only if its Jacobson radical $ J(R) $ is finitely generated.\"}\n  {\"name\": \"isNoetherianRing_of_fg\", \"module\": \"Mathlib.RingTheory.Adjoin.FG\", \"type\": \"{S : Subalgebra R A} (HS : S.FG) [IsNoetherianRing R] : IsNoetherianRing S\", \"doc\": \"Let $ S $ be a finitely generated subalgebra of a semiring $ A $ over a commutative Noetherian ring $ R $. Then $ S $ is a Noetherian ring, meaning every ideal of $ S $ is finitely generated.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern Noetherianity, smooth or free loci, finite type, or the Jacobson property; none is the finite-algebra J-2 criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-complete-local-excellence",
+  "date": "2026-10-19",
+  "group": "NH"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the supporting complete-local-ring excellence input in the normal top-residue-class construction, Stacks Tag 07QW clause (2). The J-2 input of Tag 07QW, proved in Tag 07PJ case (2), explicitly uses condition (3) of Tag 07PC.",
+   "via": [
+    "lem-per-complete-local-excellence",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
