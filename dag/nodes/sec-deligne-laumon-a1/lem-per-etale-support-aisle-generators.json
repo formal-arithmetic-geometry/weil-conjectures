@@ -18,9 +18,153 @@
   "def-weil-pbc-direct-image",
   "lem-weil-pbc-module-sheaves-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal C$ for the closure of the stated generators under the five operations. The module-sheaf category is Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], and [lem-kun-grothendieck-derived-coproducts] computes its derived coproducts termwise. By [lem-weil-pbc-module-sheaves-colimits-forgetful], [prop-weil-pbc-geometric-stalks-exact] and [lem-kun-stalks-commute-colimits], geometric stalks of module sheaves are exact and commute with small coproducts: apply the latter two statements after forgetting the module structure, using the first statement. Consequently $H^q(\\bigoplus K_t)_{\\bar x}=\\bigoplus H^q(K_t)_{\\bar x}$, by computing kernels and images of the termwise sum of complexes. Thus $\\mathcal U_\\Phi$ is closed under coproducts and summands. It is closed under extensions by the long exact sequence [lem-sf-derived-homology-long-exact], tested at these exact stalks. It is closed under $[1]$ since $H^q(K[1])=H^{q+1}(K)$ and $\\Phi^{q+1}\\subseteq\\Phi^q$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-kun-stalks-commute-colimits",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03DB (module colimits), 03PT (exact stalks), 07D9 (derived coproducts); derived long exact sequence"
+   }
+  },
+  {
+   "text": "For a closed immersion $i:Z\\hookrightarrow V$, [lem-kun-04ca] says that $i_*\\Lambda_Z$ has zero geometric stalk off $Z$. These stalk assertions for underlying abelian sheaves retain their module meaning because forgetting modules is exact and faithful [lem-weil-pbc-module-sheaves-colimits-forgetful]. By the direct-sum formula [lem-amb-etale-sum-stalks], $u_!i_*\\Lambda_Z$ has zero geometric stalk outside $u(|Z|)$. Hence each $G_{V,Z,a}$ has cohomology only in degree $a$, supported in $\\Phi^a$. Zero also satisfies the support condition. Step 1 and minimality give $\\mathcal C\\subseteq\\mathcal U_\\Phi$.",
+   "uses": [
+    "lem-kun-04ca",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-amb-etale-sum-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04CA and 03S5 (0710 for modules)"
+   }
+  },
+  {
+   "text": "Both the definition of a telescope [def-kun-truncations] and [lem-kun-complex-colimit-hocolim] apply to module sheaves on the small etale site without boundedness. If $E_n\\in\\mathcal C$, rotate its telescope triangle to $\\bigoplus E_n\\to\\operatorname{hocolim} E_n\\to(\\bigoplus E_n)[1]$. Both end objects are in $\\mathcal C$, so its middle object is too. In particular, for a sequence of actual complexes in $\\mathcal C$, its termwise colimit belongs to $\\mathcal C$ by that lemma. We shall use this only for explicit increasing truncation subcomplexes.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-kun-complex-colimit-hocolim"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Tag 0949 (lemma-colim-hocolim), and telescope definition"
+   }
+  },
+  {
+   "text": "Fix a sheaf $F$ with support in a subset $S\\subseteq|X|$, an affine etale object $u:V\\to X$ in the chosen skeleton, and $s\\in F(V)$. Apply [lem-sc-etale-section-zero-open] to the underlying abelian sheaf. Its zero open $W\\subseteq V$ has closed complement $T$, and $u(T)\\subseteq S$: a point outside $S$ has zero stalk, hence every germ of $s$ there is zero and the point lies in $W$. Give $T$ its reduced closed subscheme $i:Z\\hookrightarrow V$ using [lem-weil-pbc-reduced-induced-closed-subscheme]. The section $s$ defines the linear map $\\Lambda_V\\to F|_V$, $1\\mapsto s$, by sheafifying the constant-presheaf map. Its restriction to $W$ is zero. The module version of [lem-weil-pbc-open-closed-short-exact], applied to $\\Lambda_V$, and [lemma-constructible-pullback-constant] identify its quotient by $j_!\\Lambda_W$ with $i_*\\Lambda_Z$. The cokernel property therefore factors the map through $i_*\\Lambda_Z\\to F|_V$.",
+   "uses": [
+    "lem-sc-etale-section-zero-open",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04FR, 04FT, 01J3 (reduced closed structure), 095L (open-closed sequence)"
+   }
+  },
+  {
+   "text": "Transpose the map of Step 4 along the module adjunction [lem-pur-site-restriction-module-adjunction-exact] to obtain $u_!i_*\\Lambda_Z\\to F$. Take the coproduct of these maps over all pairs $(V,s)$. This is a set: the affine etale skeleton is small and each $F(V)$ is a set. It is an epimorphism. Indeed every element of every geometric stalk of $F$ is represented by some such $s$, after passing to an affine neighbourhood and a skeleton representative, by [def-weil-pbc-geometric-stalks]. The quotient $\\Lambda_V\\to i_*\\Lambda_Z$ followed by the factor map is the original map $1\\mapsto s$; the adjunction's section map sends its germ back to that same germ of $s$. This also follows directly from the summand/germ formula of [lem-amb-etale-sum-stalks]. The cokernel therefore has zero stalks by exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact], and is zero by [lemma-weil-pbc-geometric-stalk-conservative]. Forgetting modules is exact and faithful [lem-weil-pbc-module-sheaves-colimits-forgetful], so this is an epimorphism of module sheaves as well.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-geometric-stalks",
+    "lem-amb-etale-sum-stalks",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03DI--03DJ (adjunction), 03S5 (germ normalization), 03PT and 03PU (stalk tests)"
+   }
+  },
+  {
+   "text": "Now take $S=\\Phi^a$ and $\\operatorname{Supp}F\\subseteq S$. Steps 2 and 5 give an epimorphism $P_0\\to F$ where $P_0$ is a coproduct of $u_!i_*\\Lambda_Z$ supported in $S$. Its kernel is supported in $S$ by exactness of geometric stalks (and the exact module forgetful functor) [prop-weil-pbc-geometric-stalks-exact, lem-weil-pbc-module-sheaves-colimits-forgetful]. Repeat Step 5 on that kernel, and then recursively on each next kernel. This constructs an exact augmented resolution $\\cdots\\to P_2\\to P_1\\to P_0\\to F\\to0$, all $P_n$ coproducts of supported generators without shifts. Place $P_n$ in degree $a-n$; the resulting bounded-above complex $P$ maps quasi-isomorphically to $F[-a]$, since the displayed resolution is exact. Each term as a single-degree object belongs to $\\mathcal C$: $P_n[-a][n]$ is a coproduct of the prescribed generators at index $a$, shifted by the nonnegative integer $n$.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PT, 03DI, 03EW; iterative kernels of the supported epimorphisms of Steps 4--5"
+   }
+  },
+  {
+   "text": "For the resolution $P$ of Step 6 take its finite brutal subcomplexes $\\sigma_{\\ge a-n}P$. Each is a finite iterated extension of its terms placed in their degrees: remove its lowest degree to get a short exact sequence whose subcomplex is the higher-degree tail and whose quotient is that lowest term. [lem-weil-pbc-complex-ses-triangle] turns this sequence into the requisite extension triangle. By induction from the zero complex and Step 6 these finite complexes belong to $\\mathcal C$. Their inclusions have termwise colimit $P$, so Step 3 proves $F[-a]\\in\\mathcal C$. More generally, the identical finite-tail argument shows that any bounded-above complex whose individual degree terms lie in $\\mathcal C$ belongs to $\\mathcal C$; it uses no projectivity or lifting of maps.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Tag 0152 (lemma-derived-canonical-delta-functor), Tag 0949 (finite tails)"
+   }
+  },
+  {
+   "text": "For every $q\\le b$ the equality $\\Phi^q=X$ lets Step 7 apply to every sheaf $F$, giving $F[-q]\\in\\mathcal C$. If $K\\in D^{\\mathrm{ord},\\le b}$, the representative criterion of [def-sbc-standard-tstructure-derived-category] gives a complex zero in degrees above $b$. All its degree terms, placed in their degrees, are therefore in $\\mathcal C$. The finite-tail argument of Step 7 and Step 3 put $K$ in $\\mathcal C$. This establishes the uniform starting class $D^{\\mathrm{ord},\\le b}\\subseteq\\mathcal C$, even for complexes unbounded below.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Standard truncation representative and Tag 0949, starting bound $b$"
+   }
+  },
+  {
+   "text": "Let $K\\in\\mathcal U_\\Phi$. Step 8 puts $\\tau_{\\le b}K$ in $\\mathcal C$. Induct on $n\\ge b$: the triangle [lem-weil-pbc-truncation-triangle] has end objects $\\tau_{\\le n-1}K$ and $H^n(K)[-n]$. The former is in $\\mathcal C$ by induction; the latter is in $\\mathcal C$ by Step 7 because $\\operatorname{Supp}H^n(K)\\subseteq\\Phi^n$. Thus $\\tau_{\\le n}K\\in\\mathcal C$ for every $n\\ge b$. For an actual representative of $K$, these good truncation subcomplexes form a sequence with termwise colimit that representative: in each degree $q$ the terms and differential are unchanged once $n>q$. Apply [lem-kun-complex-colimit-hocolim] and Step 3 to conclude $K\\in\\mathcal C$. Together with Step 2 this proves the equality. The zero scheme and the zero coefficient ring yield zero objects throughout, with the same argument.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-kun-complex-colimit-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Tag 08J5 (remark-truncation-distinguished-triangle) and Tag 0949 (colimit telescope)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-stalks-commute-colimits",
+  "lem-sf-derived-homology-long-exact",
+  "lem-kun-04ca",
+  "lem-amb-etale-sum-stalks",
+  "def-kun-truncations",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-sc-etale-section-zero-open",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lemma-constructible-pullback-constant",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII 5.2 motivates the support filtration; the supported-generator equality is proved here from Stacks 04FR, 095L, 03DI, 03S5, 0949 and ordinary truncations, not attributed to ILO's unproved reference to Gabber."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +200,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      ↑M →\\n        (r : R) →\\n          (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) →\\n            (∀ x ∈ U, r ∈ x.asIdeal.primeCompl) → ↑(M.tildeInModuleCat.obj (Opposite.op U))\", \"doc\": \"Given an $R$-module $M$, an element $m \\\\in M$, an element $r \\\\in R$, and an open subset $U \\\\subseteq \\\\operatorname{Spec}(R)$ such that $r$ lies in the complement of every prime ideal corresponding to \"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"ModuleCat.tildeInType\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → TopCat.Sheaf (Type u) (AlgebraicGeometry.PrimeSpectrum.Top R)\", \"doc\": \"The sheaf on the prime spectrum $\\\\operatorname{Spec}(R)$ with values in the category of types, constructed by applying the sheafification process to the local predicate that sections are locally expre\"}\n  {\"name\": \"ModuleCat.Tilde.res_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (f : ↑M) (g : R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl)\\n  (V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hv : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl)\\n  (i\", \"doc\": \"For an $R$-module $M$ and its associated sheaf $\\\\widetilde{M}$ over $\\\\operatorname{Spec}(R)$, if $U \\\\supseteq V$ are open subsets where $g \\\\in R$ is invertible (i.e., $g$ lies in the complement of all\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) →\\n        ModuleCat.of R ↑M ⟶ M.tildeInModuleCat.obj (Opposite.op U)\", \"doc\": \"For an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the restriction map from the module $ M $ localized at $ U $ to the sections of the sheaf $ \\\\widetilde{M} $ over\"}\n  {\"name\": \"ModuleCat.Tilde.sectionsSubmodule\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : (TopologicalSpace.Opens (PrimeSpectrum R))ᵒᵖ) →\\n        Submodule (↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj U))\\n          ((x : ↥(Opposite.unop U)) → ModuleCat.Tilde.Localizations M ↑x)\", \"doc\": \"For a commutative ring $ R $, module $ M $, and open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this is the submodule of the product $ \\\\prod_{\\\\mathfrak{p} \\\\in U} M_{\\\\mathfrak{p}} $ co\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, when constructing ideal sheaf data via the specified method using a family of ideals on affine open subsets, compatibility conditions under restriction to basic open subsets, and a s\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: inspected the returned signatures; ordinary derived t-structures, module local cohomology, sheaf generators without support constraints, and open immersions do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "preaisle|supportFiltration|supported.*generator|generator.*support",
+   "results": "Returned: Mathlib/Algebra/MonoidAlgebra/Ideal.lean, Mathlib/Algebra/MonoidAlgebra/Ideal.lean; ",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures concern ordinary cohomological degree support, structure sheaves or monoid algebras; none gives the etale closed-support generator equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An aisle of complexes of etale sheaves with prescribed support of cohomology is generated by shifted closed support constant sheaves",
+   "results": "Returned: DerivedCategory.TStructure.t, CochainComplex.isStrictlyGE_shift, CategoryTheory.Sheaf.IsConstant.casesOn, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, HomologicalComplex.instIsSupportedOfIsStrictlySupported, HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported, HomologicalComplex.isSupported_of_iso, HomologicalComplex.isSupported_iff; ",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures concern ordinary cohomological degree support, structure sheaves or monoid algebras; none gives the etale closed-support generator equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure, DerivedCategory",
+   "results": "Returned: DerivedCategory.TStructure.t, DerivedCategory.Plus.TStructure.t; ",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures concern ordinary cohomological degree support, structure sheaves or monoid algebras; none gives the etale closed-support generator equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological support filtrations on etale derived categories are generated under coproducts extensions and positive shifts by closed supported constant sheaves",
+   "results": "Returned: DerivedCategory.IsGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE; ",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures concern ordinary cohomological degree support, structure sheaves or monoid algebras; none gives the etale closed-support generator equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any sheaf supported in a subset of a scheme is a quotient of sums of etale extensions of constant sheaves on closed subschemes",
+   "results": "Returned: AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; ",
+   "date": "2026-10-19",
+   "verdict": "no match: signatures concern ordinary cohomological degree support, structure sheaves or monoid algebras; none gives the etale closed-support generator equality."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-perversity-localization-calculus",
@@ -83,5 +262,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-etale-support-aisle-generators",
+  "worker": "stage1",
+  "summary": "Proved support generation using existing zero-open, reduced closed subscheme, open-closed quotient and etale-sum adjunction statements; supported resolutions, finite brutal tails, and good truncations give the unbounded equality. No new nodes, statement changes or Lean work.",
+  "blueprint": "Realizes the existing ancestor proof's perverse t-structure support input (via perversity-localization-calculus Step 1), through an explicit proof of the support-filtration generator equality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic Sheaves of Lambda-modules on the small etale site form a Grothendieck abelian category used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic Termwise coproducts in a Grothendieck derived category used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-kun-stalks-commute-colimits",
+    "why": "Generic Geometric stalks commute with colimits used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic Long exact cohomology sequence of a distinguished triangle in the derived category used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic Pushforward along a closed immersion used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-amb-etale-sum-stalks",
+    "why": "Generic Geometric stalks of etale sum extension used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "Generic Sequential colimits represent homotopy colimits used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-sc-etale-section-zero-open",
+    "why": "Generic The zero locus of an etale section is Zariski open used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic Reduced induced closed subscheme structure on a closed subset: existence and uniqueness used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic The open-closed short exact sequence of an etale sheaf used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic Pullback of a constant sheaf used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic A short exact sequence of complexes gives a distinguished triangle in D(A), functorially used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished used for the support presentation or ordinary derived-category assembly; this unit has no replacement for this general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-stalks-commute-colimits",
+  "lem-sf-derived-homology-long-exact",
+  "lem-kun-04ca",
+  "lem-amb-etale-sum-stalks",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-sc-etale-section-zero-open",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lemma-constructible-pullback-constant",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-e03151bbe",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-e03151bbe (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement, and verdict is PASS. Shape: one commit, the item plus the report, no new nodes. Statement, stmt_deps, source and blueprint are unchanged from base (I diffed against the live unsplit node). There is no SGA citation, and every off-unit statement citation is declared in tool_uses as a generic tool. Source: ILO XVII 5.2 only states Gabber's perversity t-structure and gives no proof. The item honestly marks itself agent-formulated, with a WANTED line. The citer, localization-calculus Step 1 with Phi^a={p>=a}, gets exactly the condition H^a_x=0 for a>p(x). Steps, each checked against the cited statements: (1) closure of U_Phi under coproducts, summands, [1] and extensions, via termwise derived coproducts and exact, colimit-commuting stalks passed through the module forgetful functor, plus the long exact sequence; (2) generator support, from lem-kun-04ca's essential image and the lem-amb-etale-sum-stalks lift formula; (3) a rotated telescope triangle with lem-kun-complex-colimit-hocolim; (4) the zero-open criterion gives u(T) in S for any S, then the reduced structure and the open-closed sequence on Lambda_V with i^{-1} of a constant sheaf constant, so the map factors through the cokernel; (5) the C/V extension-by-zero presheaf equals def-weil-pbc-etale-sum-extension, surjectivity on germs follows formally from f=u^*(f~) o eta, and stalk conservativity then gives the epimorphism; (6) a supported kernel resolution, with the shift sign (P_n[-a])[n], n>=0, checked; (7) brutal tails via the complex short-exact-sequence triangle, then the telescope; (8) D^{<=b} in C via the standard t-structure representative, unbounded below allowed; (9) good-truncation induction from tau_{<=b}K, with the degreewise-stable union giving the unbounded reverse inclusion. Edge cases (X empty, Lambda=0, Phi^a empty, constant Phi, non-closed specialization-closed Phi, open j_!) all hold, and Noetherian X, finite Lambda and specialization-closure are never used. Stacks tags 04FR/04FT/01J3/095L/03DI/03DJ/03S5/0710/04CA/0152/0949/08J5/07D9(2)/03EW(3) match their uses. No duplicate: lem-per-set-generated-sheaf-aisle is the generic set-generation lemma. Advisory only: the inherited statement cites the grothendieck-abelian node for u_! on an arbitrary sheaf, and def-weil-pbc-etale-sum-extension would be the precise definition node; left unchanged."
  }
 }
