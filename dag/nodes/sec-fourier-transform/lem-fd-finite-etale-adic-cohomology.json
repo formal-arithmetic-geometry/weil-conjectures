@@ -14,9 +14,172 @@
   "def-weil-derived-complete-integral-detailed",
   "def-weil-pbc-qbar-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_E$ and $G_n=f_{\\mathrm{et},*}F_n$. Finite direct image is exact by [lemma-weil-pbc-finite-direct-image-exact], and [lemma-weil-pbc-finite-stalk-formula] gives its finite fibre product. More precisely, [lem-weil-pbc-finite-etale-etale-local-split] supplies an etale covering $U\\to X$ on which $Y_U=\\coprod_{j\\in J}U$, with $J$ finite. By [lemma-weil-pbc-finite-exchange], $G_n|_U=\\prod_{j\\in J}F_{n,j}$. Refining $U$ to trivialize the finitely many $F_{n,j}$ shows that $G_n$ is locally constant finite free; the rank may vary between components, and an empty fibre gives rank zero. A finite product of modules is their direct sum, and tensor distributes over that finite sum. Therefore the given maps induce $G_{n+1}\\otimes_{A_{n+1}}A_n\\cong G_n$: additivity alone is not being used to commute tensor with pushforward. The identifications are canonical, since their maps are induced by the quotient maps and the finite-exchange maps.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lemma-weil-pbc-finite-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QP (proposition-finite-higher-direct-image-zero), 0959 (lemma-finite-pushforward-commutes-with-base-change); etale.tex, Tag 04HN (lemma-finite-etale-etale-local)"
+   }
+  },
+  {
+   "text": "For either normalized system $M_\\bullet=F_\\bullet$ on $Y$ or $G_\\bullet$ on $X$, write $N_n=\\nu^*M_n$ on the pro-etale site and $N=\\lim_nN_n$. The transition is a sheaf epimorphism: its cokernel is zero because it is the quotient $M_{n+1}\\twoheadrightarrow M_{n+1}/\\varpi^nM_{n+1}=M_n$, and $\\nu^*$ is exact by [det-pe-classical-sheaves-modules]. Repleteness is [det-pe-replete-epimorphism], and [det-pe-continuous-cohomology-limit] gives $N[0]\\simeq R\\lim_nN_n$. This is a sheaf inverse-limit assertion, without any passage of $R\\lim$ through geometric stalks. It also holds with completed $A$-module coefficients: the Roos map on module products has the same underlying abelian map, and module products are exact by [lem-weil-proetale-countable-products-exact]. Thus both realizations have sheaf amplitude $[0,0]$.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "det-pe-replete-epimorphism",
+    "det-pe-continuous-cohomology-limit",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 3.1.9 and 3.1.10; locally weakly contractible pro-etale topoi, Proposition 4.2.8"
+   }
+  },
+  {
+   "text": "The reductions of this actual limit are the specified finite sheaves, including their quotient maps. To check this without adding separatedness to the item, restrict to any affine open $W$ of $X$ or $Y$. It is Noetherian and separated, so [lem-per-lisse-completed-system-comparison] applies to $M_\\bullet|_W$: its inverse equivalence is precisely $N|_W=\\lim_n\\nu_W^*(M_n|_W)$, and its reductions are $M_n|_W$. It also makes $N|_W$ pro-etale locally finite free over the completed coefficient sheaf. On a free chart, tensor with $A_n$ is a finite direct sum of tensor with the unit, so ordinary and derived reduction agree. Restriction to slice sites is exact by [lem-pur-site-restriction-module-adjunction-exact]; under [lem-weil-proetale-weakly-etale-localization] it is sectionwise restriction, hence commutes with the products and kernels computing limits. These local reduction isomorphisms are the maps induced by the same projections $N\\to N_n$, so agree on overlaps. Their kernels and cokernels vanish on the affine cover, hence vanish globally. Consequently $N\\otimes^L A_n\\cong\\nu^*M_n$, coherently in $n$. Step 2 now proves derived completeness; the reductions are constructible in the fixed interval $[0,0]$. In particular, for $K=F_A$ we have the required specified witnesses $K\\otimes^LA_n\\cong\\nu_Y^*F_n$, not an identification between discrete integral etale sheaves and completed ones.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), Corollary 5.1.5; apply on affine opens and use the canonical projection maps"
+   }
+  },
+  {
+   "text": "Finite $f$ is affine and in particular quasi-compact and quasi-separated. Apply [sk-thm-pe-direct-image-comparison] with the discrete ring $A_n$ and the degree-zero etale complex $F_n$. Together with Step 1 it gives $Rf_{\\mathrm{proet},*,A_n}\\nu_Y^*F_n\\cong\\nu_X^*G_n$ in degree zero. The comparison intertwines units, counits and pullback composition. Hence its mate identifies the pro-etale finite-level exchange with the etale exchange of [lemma-weil-pbc-finite-exchange]: both are the unit, the pullback-square isomorphism and the counit in that order. This use of mate pasting is [lem-weil-pbc-mate-pasting]. In particular the pro-etale exchange is invertible for every indicated $u$. All maps respect the quotient transitions, since those are morphisms of the coefficient systems and the comparison is natural.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, direct-image comparison for qcqs morphisms; etale-cohomology.tex, Tag 0959"
+   }
+  },
+  {
+   "text": "By [lem-pur-completed-coefficient-pushforward-comparison] and Step 3, ordinary completed-ring derived direct image has the canonical comparison $Rf_{*,A}K\\cong R\\lim_n\\operatorname{Res}_n Rf_{*,A_n}(\\nu_Y^*F_n)$. Its projection at $n$ is the direct image of the reduction map, followed by coefficient restriction. Step 4 identifies this tower, with its actual quotient transitions, with $(\\nu_X^*G_n)_n$. Steps 2 and 3 identify its derived limit with the degree-zero integral realization of $G_\\bullet$. Thus $Rf_{*,A}K=f_*F_A$ with the required sheaf amplitude. In addition [prop-weil-pbc-direct-image-limits] identifies the canonical projection-formula reduction map $(Rf_{*,A}K)\\otimes^LA_n\\to Rf_{*,A_n}(K\\otimes^LA_n)$ as an isomorphism, coherently for all quotients. These are the reduction comparisons used below. This proves preservation of the constructible category for this $f$ and this system; no preservation theorem for an arbitrary structure morphism is invoked. The completed ring here is $R_W=\\varprojlim_n(A_n)_W$ of sheafified constant sheaves, as in the item's integral category, while Steps 3, 6 and 7 use the ring $A_W$ of the adic coefficient datum. Since $\\mathcal O_E$ is Noetherian and every $A_n$ is finite, the final clause of [lem-weil-pbc-completed-constant-sheaf-reduction] gives $(A_n)_W=(P_n)_W$ and $R_W=A_W$. So the two module derived categories coincide. By Steps 2–3, $F_A$ is derived complete, has constructible reductions of amplitude $[0,0]$ and has compatible etale-origin witnesses. It therefore lies in both integral categories, and the same holds for $f_*F_A$.",
+   "uses": [
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N (lemma-pushforward-Noetherian-case); sites-cohomology.tex, Tag 0A07 (lemma-Rf-commutes-with-Rlim), with the cited completed-coefficient comparisons"
+   }
+  },
+  {
+   "text": "Consider the actual integral exchange $\\alpha:L u^*_{\\mathrm{comp}}Rf_*K\\to Rf'_*L v^*_{\\mathrm{comp}}K$. By [lemma-weil-pbc-completed-pullback-reduction] its source reduces to $u_n^*((Rf_*K)_n)$, and its target reduces, using Step 5 for the finite etale $f'$, to $Rf'_{*,A_n}v_n^*K_n$. The equality of this specified ambient mate with the completed exchange assembled from the finite-level transformations is the last clause of [lem-sbc-completed-operations-linear-natural-exchange]. In particular, under these reduction comparisons the diagram has top arrow $\\alpha\\otimes^LA_n$ and bottom arrow the finite-level exchange of Step 4; the vertical arrows are exactly the projection-induced comparisons, and the diagram commutes. The same cited clause identifies the assembled arrow with $R\\lim$ of those exchanges under the canonical source and target limit comparisons; it is not inferred from equality of evaluated arrows. Both endpoints are derived complete by [lemma-weil-pbc-completed-pullback-reduction, prop-weil-pbc-direct-image-limits]. The bottom arrow for $n=1$ is invertible, so [sk-lem-pe-derived-nakayama] proves that $\\alpha$ itself is invertible. Here Nakayama detects invertibility, not equality of morphisms. Step 3 identifies the completed pullback of these lisse systems with the realization of their pulled-back finite levels, so this is exactly the exchange asserted in the item.",
+   "uses": [
+    "lemma-weil-pbc-completed-pullback-reduction",
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "prop-weil-pbc-direct-image-limits",
+    "sk-lem-pe-derived-nakayama"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, completed pullback and direct image; canonical mate/reduction compatibility as stated in lem-sbc-completed-operations-linear-natural-exchange; derived Nakayama"
+   }
+  },
+  {
+   "text": "Rationalize the integral identifications by [def-weil-pbc-rational-category]; all the operations and maps are $A$-linear, and on morphisms the descended map is $a\\otimes c\\mapsto T(a)c$. Thus the isomorphisms and their commutative diagrams remain isomorphisms and commutative diagrams at $E$. For $E\\subset L$, [prop-weil-pbc-scalar-extension] identifies scalar extension of direct image and completed pullback, and explicitly identifies scalar extension of the canonical exchange with the canonical $L$-exchange. The restrictions are legitimate: Steps 1–6, now for $\\mathcal O_L$, show constructibility and amplitude $[0,0]$ for the objects involved. The finite-level finite-product description also shows that coefficient extension of $G_\\bullet$ is the pushforward of the coefficient extension of $F_\\bullet$. The associators and successive-extension equations in that proposition, with [def-weil-pbc-qbar-category], give the claimed common-finite-stage $\\overline{\\mathbf Q}_\\ell$ identifications. Each is represented by a lisse degree-zero object at a finite stage, giving the stated degree-zero assertion at the rational and common stages.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.proof.md",
+    "place": "First displayed finite-pushforward comparison, interpreted at integral, rational and common finite coefficient stages"
+   }
+  },
+  {
+   "text": "For finite coefficients use the ringed etale topoi, and for integral coefficients the completed-ring pro-etale topoi. Let $a_X$ be the morphism from the relevant topos of $X$ to the topos of sets equipped with the constant ring $\\Lambda$; the structural ring map is the constant-section map $\\Lambda\\to\\Gamma(X,R_X)$. Its direct image on modules is precisely $\\Gamma(X,-)$ valued in all $\\Lambda$-modules. The composite $a_Xf$ is $a_Y$, with the same coefficient action. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to these two ringed-topos morphisms and invert its $\\kappa$ to obtain $R\\Gamma(X,Rf_*F_\\Lambda)\\xrightarrow{\\sim}R\\Gamma(Y,F_\\Lambda)$. Its normalization is the direct-image composition map on K-injective resolutions, hence it is the canonical section comparison. Substitute Steps 1 and 5 and take $H^i$. All categories here are the ambient unbounded module derived categories, so no bounded-constructible cohomology assertion at a base scheme is needed.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; apply to the ringed topos of a point, not to Spec Z[1/ell]"
+   }
+  },
+  {
+   "text": "The rational global-sections functor on an integral representative $M$ is the $A$-linear ambient functor of Step 8 followed by $-\\otimes_A E$ on module complexes. It descends to raw rationalization by the explicit rule $a\\otimes c\\mapsto R\\Gamma(a)\\otimes c$; this uses the Hom formula of [def-weil-pbc-rational-category]. Therefore tensoring the canonical integral comparison of Step 8 with $E$ is the canonical rational comparison and is an isomorphism. This construction takes values in the whole $D(E)$, with no finite-dimensional or bounded-output requirement. For a further finite stage $L$, [lem-weil-finite-free-completed-scalar-comparison] gives a finite free coefficient extension of rank $[L:E]$. After a coefficient basis is chosen, commutation with ambient derived sections is the identity on a finite direct sum of copies of $R\\Gamma(M)$; the resulting map is the canonical tensor-to-sections map, so is independent of that basis. Rationalizing gives the $E\\subset L$ section comparison. The associators on the full $D(E)$ are [lem-weil-derived-field-scalar-extension-tower]. Hence $R\\Gamma((E,M))=R\\Gamma_E(M)\\otimes_E\\overline{\\mathbf Q}_\\ell$ is well defined for the common-stage category, and the same canonical comparison is an isomorphism there. Taking $H^i$ proves the remaining cohomology assertions.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-derived-field-scalar-extension-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 6.8.4 and 6.8.14: lisse and constructible rational realization; raw localization and full module-valued derived sections as above"
+   }
+  },
+  {
+   "text": "All finite-level maps are natural in $F_n$ and in maps of coefficient systems. The projection normalizations in Steps 3–6 and the scalar associators in Steps 7–9 retain that naturality and its quotient-transition compatibilities. For an automorphism $h$ over $X$, pull back the system along $h$; the equality $fh=f$ identifies its pushforward with that of the original system. The normalized composition and its compatibility with adjunctions in [lem-sfb-ringed-derived-monoidal-comparisons] make the section comparison intertwine this pullback with the induced pushforward action. If an action on the same coefficient system is specified, insert its map $h^*F\\to F$; naturality yields the claimed intertwining on that system. Finally, for any coefficient endomorphism $e$ the naturality square for the exchange of Step 6 commutes, by [lem-sbc-completed-operations-linear-natural-exchange]; the scalar comparison in [prop-weil-pbc-scalar-extension] preserves it at later stages. Take $e$ to be each defined character idempotent. No character projector is asserted over a coefficient ring where its defining denominator is not invertible.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E and canonical adjunction-compatible composition; naturality of the specified exchange and scalar comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-rational-category",
+  "det-pe-classical-sheaves-modules",
+  "det-pe-continuous-cohomology-limit",
+  "det-pe-replete-epimorphism",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-derived-field-scalar-extension-tower",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-exchange",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-scalar-extension",
+  "sk-lem-pe-derived-nakayama",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-cohomology-affine-line-character.proof.md",
+  "place": "First displayed finite-pushforward comparison; repair using Stacks 04HN, 03QP, 0959, 09A6, 099N, 0D6E and Bhatt–Scholze Propositions 3.1.10 and 6.8.4 with the cited normalized completed-operation comparisons."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +229,66 @@
    "results": "Hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.bijective_pushforwardSections, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.IsEtale.of_comp, CategoryTheory.Functor.sheafPushforwardCocontinuous",
    "date": "2026-10-17",
    "verdict": "no match: generic sheaf pushforward or definitions of constant integral cohomology, not this adic finite-etale comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale pushforward of compatible finite free adic sheaves preserves local freeness and derived global sections",
+   "results": "Hits: generic IsEtale instances, Algebra.Etale.finitePresentation, Algebra.Etale.baseChange; no adic cohomology theorem",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite, Sheaf, rightDerivedGlobalSections",
+   "results": "0 hits; unknown identifier IsFinite",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(pushforward|direct image)|base.?change [Mathlib/AlgebraicGeometry/Sites]",
+   "results": "Hits: generic pretopology/base-change files; no finite etale adic cohomology assertion",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Leray comparison and base change for finite etale morphisms with adic coefficient systems",
+   "results": "Hits: Algebra.Etale.baseChange, IsEtale/IsFinite base-change instances; no Leray or adic coefficient comparison",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(pushforward|direct image)|adic.*cohomology",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean. Searched Mathlib/AlgebraicGeometry/Sites. Read the returned signatures; these are generic pushforward adjunctions, normalization constructions or definitions of constant ell-adic cohomology, not the normalized finite-etale adic assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of finite etale pushforward of lisse adic coefficient systems",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, CategoryTheory.Sheaf.Γ, SheafOfModules.pushforwardSections, CategoryTheory.instIsRightAdjointSheafΓ, CategoryTheory.HasGlobalSectionsFunctor, SheafOfModules.pushforwardSections_unitHomEquiv, AlgebraicGeometry.Scheme.Γ_def, SheafOfModules.pushforwardPushforwardAdj. Read the returned signatures; these are generic pushforward adjunctions, normalization constructions or definitions of constant ell-adic cohomology, not the normalized finite-etale adic assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale direct image of normalized finite free adic local systems commutes with base change and derived global sections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc. Read the returned signatures; these are generic pushforward adjunctions, normalization constructions or definitions of constant ell-adic cohomology, not the normalized finite-etale adic assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray isomorphism and finite pushforward base change for continuous ell adic sheaves",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pushforward. Read the returned signatures; these are generic pushforward adjunctions, normalization constructions or definitions of constant ell-adic cohomology, not the normalized finite-etale adic assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-cohomology-affine-line-character",
@@ -81,10 +300,25 @@
  "blueprint": {
   "from": {
    "node": "lem-fd-cohomology-affine-line-character",
-   "place": "The finite-pushforward identity in the first displayed formula, with the adic rather than discrete rational coefficient interpretation.",
+   "place": "The first displayed finite-pushforward cohomology comparison and the following finite-etale exchange assertion, with the adic rather than discrete rational coefficient interpretation.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-finite-etale-adic-cohomology",
+  "worker": "stage1",
+  "summary": "Repaired all six returned points: cite finite-etale local splitting, separate etale and pro-etale finite stages, construct actual normalized reductions locally, use sheaf repleteness rather than stalkwise Mittag-Leffler, identify the specified integral exchange through its reduction/limit compatibility and apply derived Nakayama, and compute sections in ambient module categories over the topos of a point. Scalar localization and common-stage sections do not require constructibility on a base scheme. Removed all worker-written tool_uses. No new nodes.",
+  "blueprint": "Steps 1–5 prove the adic finite-pushforward identification used in the first display of lem-fd-cohomology-affine-line-character; Steps 8–9 prove its cohomology comparison, Steps 6–7 and 10 its exchange, coefficient and action compatibilities."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NL-7c2e69fcf",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-7c2e69fcf (reviewer sub-agent of L); spot-checked: I read the item and all ten steps in full (no new nodes), along with the statement of each of the 25 cited nodes and the five statement dependencies, the unit sk-lem-as-properties and the parent proof in main-20261015 (lem-fd-cohomology-affine-line-character, first display). Sources checked: Stacks 04HN (etale.tex lemma-finite-etale-etale-local), 03QP, 0959, 09A6 (proetale.tex lemma-morphism-comparison), and Bhatt–Scholze Prop 3.1.10 and 6.8.4(1),(4). Step checks: Step 1 gets local splitting from 04HN and ⊗ commuting with finite products. Step 2 uses repleteness and the epimorphic-tower R lim; module products are exact. Step 3 applies the lisse reconstruction only on affine opens, so no separatedness is added, and the global reduction map is an isomorphism on a Zariski cover. This also supplies the etale-origin witnesses. Step 4 applies the qcqs etale/pro-etale comparison and mate pasting. Steps 5–6 are the completed pushforward comparison, then the reduction/limit clause of the exchange node, then derived Nakayama. Steps 7–9 cover rationalization, scalar extension with its preservation proviso discharged, and the ringed-topos section comparison in ambient categories. Step 10 covers naturality and the h-action through f h^* = f (h^{-1})_*. Small cases checked: f=id, Y empty, Y=X⊔X, rank 0, varying degree on components, a nonseparated X, u a closed point. No cycle and no duplicate (checked lem-fd-finite-pushforward-cohomology, lem-weil-pbc-finite-pushforward-cohomology, lem-zl-finite-adic-direct-image, lem-weil-pbc-integral-underived-push-comparison). One fault repaired (C1/C4): the proof mixed nodes over lim of sheafified constant (A_n)_W (the item's def-weil-derived-complete-integral-detailed, lem-pur-completed-coefficient-pushforward-comparison, lem-weil-finite-free-completed-scalar-comparison) with nodes over the adic-datum ring lim (P_n)_W (lem-per, prop-weil-pbc-direct-image-limits, the pbc rational and qbar categories) without citing the identification. Step 5 now cites the final clause of lem-weil-pbc-completed-constant-sheaf-reduction and places F_A in both integral categories. proof_deps were recomputed. The corrected item is in fixes/. Batch-5 check on lem-per-lisse-completed-system-comparison: it reaches sec-poincare-duality only through def-pod-lisse-l-adic-sheaves, a general definition, and lem-pod-adic-limit-finite-modules / lem-pod-adic-tower-reconstruction, which are pure DVR commutative algebra. Neither assumption leaf gives these and they are not steps of the duality or trace-formula proofs, so I accept the citation. The other closures reach only definitions, the same algebra lemmas and the generic localization lemma lem-trf-localization-essentially-surjective. Tool uses accepted for all off-unit generic nodes; they are listed in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
