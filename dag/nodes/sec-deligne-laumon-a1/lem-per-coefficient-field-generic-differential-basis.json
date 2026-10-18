@@ -13,9 +13,149 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a $p$-basis $(b_i)_{i\\in E}$ of the residue field $k$ using [lem-weil-pbc-p-basis-exists]. Choose arbitrary lifts $\\beta_i\\in B$. By [lem-per-prescribed-pbasis-coefficient-section] they lie in a coefficient field $\\kappa\\subset B$. The minimal primes are a finite list $\\mathfrak q_1,\\ldots,\\mathfrak q_c$ by [lem-sc-finite-minimal-primes-over-ideal] with ideal $(0)$. Put $A_j=B/\\mathfrak q_j$ and $L_j=\\operatorname{Frac}(A_j)$. Each $A_j$ is a complete local domain by the quotient assertion of [lem-per-completed-differential-finite-conormal], and has dimension $e$ by the hypothesis. The image of $\\kappa$ in every $A_j$ is still a coefficient field.",
+   "uses": [
+    "lem-weil-pbc-p-basis-exists",
+    "lem-per-prescribed-pbasis-coefficient-section",
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-per-completed-differential-finite-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.4 and 2.1.6; EGA 0_IV 20.7.8 for completeness of the quotients"
+   }
+  },
+  {
+   "text": "For finite $J\\subset E$ put $F_J=\\kappa^p(\\beta_i\\mid i\\notin J)$. The monomial basis in [lem-weil-pbc-p-basis-complement-monomial-basis] gives $[\\kappa:F_J]=p^{|J|}$. Apply [lem-per-cofinite-pbasis-completed-generic-rank] to each $A_j$, and take the union of the finitely many exceptional sets. Choose a finite $J$ containing this union, and put $r=|J|$, $F=F_J$ and $M=M_F(B)$. By [lem-per-completed-differential-finite-conormal], $M$ is finite, the exact differentials generate it, and its generic fibre $V_j=M\\otimes_B L_j$ identifies with that for $A_j$. Thus $\\dim_{L_j}V_j=e+r$ for every $j$.",
+   "uses": [
+    "lem-weil-pbc-p-basis-complement-monomial-basis",
+    "lem-per-cofinite-pbasis-completed-generic-rank",
+    "lem-per-completed-differential-finite-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.5–2.1.8(i), equations (2.a) and (2.b)"
+   }
+  },
+  {
+   "text": "Here is the ideal-spanning calculation used twice below. In any $A_j$, let $I$ be a nonzero ideal and choose $0\\neq u\\in I$. In its generic differential space the identity $d(au)=a\\,du+u\\,da$ gives $da=u^{-1}(d(au)-a\\,du)$ for every $a\\in A_j$. Both $u$ and $au$ belong to $I$. Since the exact differentials generate by [lem-per-completed-differential-finite-conormal], the vectors $df$ for $f\\in I$ span the generic differential space. This is the entire argument of the source's ideal-spanning lemma.",
+   "uses": [
+    "lem-per-completed-differential-finite-conormal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.9, proof"
+   }
+  },
+  {
+   "text": "We will also use this elementary linear selection argument. If $W$ spans a vector space $V$ with $\\dim V\\geq n$, then for any $v_1,\\ldots,v_n$ one can choose $w_i\\in W\\cup\\{0\\}$ with the $v_i+w_i$ independent. Induct on $n$: make the first $n-1$ independent, with span $U$. If $v_n\\notin U$, take $w_n=0$; otherwise choose $w_n\\in W\\setminus U$, possible since $\\dim U=n-1<\\dim V$. The case $n=0$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.10, with the omitted induction written out"
+   }
+  },
+  {
+   "text": "Enumerate $J$ as $1,\\ldots,r$. We construct lifts $\\gamma_i$ of $b_i$, $i\\in J$, whose differentials are independent in the first $j$ generic fibres, by induction on $j$. At $j=0$ use $\\gamma_i=\\beta_i$. At the step to $j+1$, let $Q=B$ if $j=0$, and $Q=\\bigcap_{h\\leq j}\\mathfrak q_h$ otherwise. The image $I$ of $Q\\cap\\mathfrak n$ in $A_{j+1}$ is nonzero: choose $t\\in\\mathfrak n\\setminus\\mathfrak q_{j+1}$ (the quotient has positive dimension), and, for each $h\\leq j$, choose $u_h\\in\\mathfrak q_h\\setminus\\mathfrak q_{j+1}$. Then $t\\prod_hu_h\\in Q\\cap\\mathfrak n$ has nonzero image. By the preceding ideal calculation and linear selection, choose $m_i\\in Q\\cap\\mathfrak n$ so that $d\\gamma_i+dm_i$ are independent in $V_{j+1}$; the dimension is $e+r\\geq r$. Replace $\\gamma_i$ by $\\gamma_i+m_i$. Their residues are unchanged, and on each earlier component $m_i$ maps to zero, so its differential is zero under the generic quotient identification of [lem-per-completed-differential-finite-conormal]. The previously obtained independence is preserved. This proves the induction.",
+   "uses": [
+    "lem-per-completed-differential-finite-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.8(ii), the induction following 2.1.9 and 2.1.10"
+   }
+  },
+  {
+   "text": "Set $\\gamma_i=\\beta_i$ for $i\\notin J$, and keep the final lifts from the preceding induction for $i\\in J$. Apply [lem-per-prescribed-pbasis-coefficient-section] to this entire family of lifts. It gives a coefficient section $s:k\\to B$ with image $\\kappa'$, whose $p$-basis is $(\\gamma_i)_{i\\in E}$. This constructs $\\kappa'$ without assuming that it contains the old $\\kappa^p$. The displayed subfield formula in 2.1.11 is not used; the report gives a counterexample to that formula.",
+   "uses": [
+    "lem-per-prescribed-pbasis-coefficient-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.4 applied to the perturbed lifts of 2.1.8; correction of the displayed formula in 2.1.11"
+   }
+  },
+  {
+   "text": "For any $B$-module $N$ and any derivation $D:B\\to N$ over $\\mathbf F_p$, one has $D(x^p)=0$. Finite $p$-monomial expansions in a coefficient field therefore show that $D$ kills $F=\\kappa^p(\\beta_i\\mid i\\notin J)$ exactly when it kills all the $\\beta_i$ with $i\\notin J$. Likewise it kills $\\kappa'$ exactly when it kills all the $\\gamma_i$. As these two families coincide off $J$, being a $\\kappa'$-derivation is equivalent to being an $F$-derivation with $D\\gamma_i=0$ for $i\\in J$. These assertions follow term by term from the Leibniz rule, including inverses via $D(x^{-1})=-x^{-2}D(x)$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.11: the corrected coefficient-change argument using the p-basis expansion"
+   }
+  },
+  {
+   "text": "Let $U$ be the $B$-submodule of $M=M_F(B)$ generated by the $r$ vectors $d_F\\gamma_i$, $i\\in J$. Both $M/U$ and $M_{\\kappa'}(B)$ are finite by [lem-per-completed-differential-finite-conormal]. They are complete by [lem-weil-pbc-finite-module-complete-over-complete-noetherian]. The preceding derivation calculation and the universal property in [lem-per-completed-differential-finite-conormal] give inverse canonical maps $M/U\\leftrightarrows M_{\\kappa'}(B)$: both maps carry the class of $d_Fa$ to $d_{\\kappa'}a$, and their composites are identities since exact differentials generate. On tensoring with $L_j$ this quotient has dimension $(e+r)-r=e$, since the $d_F\\gamma_i$ were independent in $V_j$. Hence $M'=M_{\\kappa'}(B)$ has generic rank $e$ on every component.",
+   "uses": [
+    "lem-per-completed-differential-finite-conormal",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.11, generic-rank conclusion; EGA 0_IV 20.7.14 for the universal property"
+   }
+  },
+  {
+   "text": "Apply the same finite induction on components to obtain $f_1,\\ldots,f_e\\in B$ with $d_{\\kappa'}f_i$ a basis on every component. Start with all $f_i=0$ and no processed components. At the next component use the ideal $I=\\operatorname{im}(Q\\cap\\mathfrak n\\to A_{j+1})\\neq0$ constructed above. Its exact differentials span by the earlier ideal calculation, now with coefficient field $\\kappa'$, using [lem-per-completed-differential-finite-conormal]. The linear selection argument with $n=e$ makes the next $e$ differentials independent by adding lifts from $Q\\cap\\mathfrak n$. Their images, and thus their differentials, vanish on all processed components; the generic quotient identification of the same cited node preserves the earlier bases. All the generic spaces have dimension $e$, so independence is a basis. At the end the same $e$ elements work on every component.",
+   "uses": [
+    "lem-per-completed-differential-finite-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "first paragraph of 2.1.12, spelling out its reference to the preceding induction"
+   }
+  },
+  {
+   "text": "For completeness one may move this tuple into $\\mathfrak n$ exactly as in the source. For each $j$ choose $t_j\\in\\mathfrak n\\setminus\\mathfrak q_j$ and $v_j\\in\\bigcap_{h\\neq j}\\mathfrak q_h\\setminus\\mathfrak q_j$; the latter is the product of elements of $\\mathfrak q_h\\setminus\\mathfrak q_j$, with empty product $1$. Then $h=\\sum_jt_jv_j$ belongs to $\\mathfrak n$ and has nonzero image modulo each $\\mathfrak q_j$, since all summands except the $j$th vanish there. Put $a_i=h^pf_i\\in\\mathfrak n$. The Leibniz rule gives $d_{\\kappa'}a_i=h^pd_{\\kappa'}f_i$, because $d_{\\kappa'}(h^p)=0$. Multiplication by this nonzero scalar on each generic fibre preserves a basis, giving precisely the requested $a_i$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "first paragraph of 2.1.12, multiplication by pth powers; explicit finite avoidance construction"
+   }
+  },
+  {
+   "text": "If a perfect subfield $k_0\\subseteq B$ was specified, its reduction is injective, since a nonzero field element is a unit. For $c\\in k_0$ and every $m\\geq1$, choose $c_m\\in k_0$ with $c_m^{p^m}=c$. The difference $c_m-s(\\overline{c_m})$ lies in $\\mathfrak n$, so in characteristic $p$,\n$$c-s(\\bar c)=\\bigl(c_m-s(\\overline{c_m})\\bigr)^{p^m}\\in\\mathfrak n^{p^m}.$$\nThe intersection of these powers is zero by [def-weil-pbc-adically-complete-ring]. Thus $s(\\bar c)=c$ for every $c\\in k_0$. This proves the optional compatibility for the section already constructed.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.4, compatibility with perfect constants, using completeness directly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-p-basis-exists",
+  "lem-per-prescribed-pbasis-coefficient-section",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-per-completed-differential-finite-conormal",
+  "lem-weil-pbc-p-basis-complement-monomial-basis",
+  "lem-per-cofinite-pbasis-completed-generic-rank",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 2.1.4–2.1.12; the coefficient-field formula of 2.1.11 is repaired using 2.1.4 and the derivation universal property (see report, Source error). Completed differential calculus: EGA 0_IV 20.7.8, 20.7.14–17, 21.9.1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +191,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[Nontrivial S] (n : ℕ) [IsStandardSmoothOfRelativeDimension n R S] : Module.rank S Ω[S⁄R] = n\", \"doc\": \"If $ S $ is a non-trivial commutative ring that is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then the rank of the module of Kähler differentials $ \\\\Omega_{S/\"}\n  {\"name\": \"Algebra.SubmersivePresentation.rank_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[Nontrivial S] [Finite ι] (P : SubmersivePresentation R S ι σ) : Module.rank S Ω[S⁄R] = P.dimension\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the rank of the module of Kähler differentials $ \\\\Omega_{S/R} $ over $ S $ equals the dimension of $\"}\n  {\"name\": \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.TFAE\", \"type\": \"[IsNoetherianRing R] [IsLocalRing R] [IsDomain R] :\\n  finrank (ResidueField R) (CotangentSpace R) = 1 ↔ IsDiscreteValuationRing R\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and a domain, the finite rank of the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) over the resi\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[Nontrivial S] [IsStandardSmooth R S] (n : ℕ) : IsStandardSmoothOfRelativeDimension n R S ↔ Module.rank S Ω[S⁄R] = n\", \"doc\": \"For a non-trivial commutative ring $ S $ that is a standard smooth algebra over a commutative ring $ R $, $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $ if and only if the r\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : finrank (ResidueField R) (CotangentSpace R) = 0 ↔ IsField R\", \"doc\": \"For a Noetherian local ring $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ as a module over the residue field $ R/\\\\mathfrak{m} $ is zero if and only if $ R $ is a field.\"}\n  {\"name\": \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.TFAE\", \"type\": \"[IsDomain R] [IsDiscreteValuationRing R] : finrank (ResidueField R) (CotangentSpace R) = 1\", \"doc\": \"For any discrete valuation ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) has finite rank 1 as a module over the residue \"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"(R) [Field R] : finrank (ResidueField R) (CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : finrank (ResidueField R) (CotangentSpace R) ≤ 1 ↔ (maximalIdeal R).IsPrincipal\", \"doc\": \"For any Noetherian local ring $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ over the residue field $ R/\\\\mathfrak{m} $ is at most one if and only if the maximal ideal $ \"}",
    "date": "2026-10-19",
    "verdict": "no match: standard smooth finite-presentation rank/basis results concern ordinary differentials and a supplied smooth presentation, not selection of coefficient representatives in a complete local ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "complete reduced equidimensional local ring characteristic p coefficient field completed differentials generic rank dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [Algebra.IsStandardSmooth R S] → ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Nontrivial S]\\n  [Algebra.IsStandardSmooth R S] (n : ℕ), Algebra.IsStandardSmoothOfRelativeDimension n R S ↔ Module.rank S Ω[S⁄R] = ↑n\", \"doc\": \"For a non-trivial commutative ring $ S $ that is a standard smooth algebra over a commutative ring $ R $, $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $ if and only if the r\"}\n  {\"name\": \"Algebra.SubmersivePresentation.rank_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] [Nontrivial S] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Module.rank S Ω[S⁄R] = ↑P.dimension\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the rank of the module of Kähler differentials $ \\\\Omega_{S/R} $ over $ S $ equals the dimension of $\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Nontrivial S] (n : ℕ)\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], Module.rank S Ω[S⁄R] = ↑n\", \"doc\": \"If $ S $ is a non-trivial commutative ring that is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then the rank of the module of Kähler differentials $ \\\\Omega_{S/\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R],\\n  Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 1\", \"doc\": \"For any discrete valuation ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) has finite rank 1 as a module over the residue \"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ (R : Type u_2) [inst : Field R], Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R] [IsNoetherianRing R],\\n  Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 0 ↔ IsField R\", \"doc\": \"For a Noetherian local ring $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ as a module over the residue field $ R/\\\\mathfrak{m} $ is zero if and only if $ R $ is a field.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits are ordinary finite-presentation smooth differentials, not a coefficient-field choice for complete local rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "complete reduced equidimensional local ring characteristic p coefficient field completed differentials generic rank dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[Nontrivial S] (n : ℕ) [IsStandardSmoothOfRelativeDimension n R S] : Module.rank S Ω[S⁄R] = n\", \"doc\": \"If $ S $ is a non-trivial commutative ring that is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then the rank of the module of Kähler differentials $ \\\\Omega_{S/\"}\n  {\"name\": \"Algebra.SubmersivePresentation.rank_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[Nontrivial S] [Finite ι] (P : SubmersivePresentation R S ι σ) : Module.rank S Ω[S⁄R] = P.dimension\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the rank of the module of Kähler differentials $ \\\\Omega_{S/R} $ over $ S $ equals the dimension of $\"}\n  {\"name\": \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.TFAE\", \"type\": \"[IsNoetherianRing R] [IsLocalRing R] [IsDomain R] :\\n  finrank (ResidueField R) (CotangentSpace R) = 1 ↔ IsDiscreteValuationRing R\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and a domain, the finite rank of the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) over the resi\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[Nontrivial S] [IsStandardSmooth R S] (n : ℕ) : IsStandardSmoothOfRelativeDimension n R S ↔ Module.rank S Ω[S⁄R] = n\", \"doc\": \"For a non-trivial commutative ring $ S $ that is a standard smooth algebra over a commutative ring $ R $, $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $ if and only if the r\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : finrank (ResidueField R) (CotangentSpace R) = 0 ↔ IsField R\", \"doc\": \"For a Noetherian local ring $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ as a module over the residue field $ R/\\\\mathfrak{m} $ is zero if and only if $ R $ is a field.\"}\n  {\"name\": \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.TFAE\", \"type\": \"[IsDomain R] [IsDiscreteValuationRing R] : finrank (ResidueField R) (CotangentSpace R) = 1\", \"doc\": \"For any discrete valuation ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) has finite rank 1 as a module over the residue \"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"(R) [Field R] : finrank (ResidueField R) (CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : finrank (ResidueField R) (CotangentSpace R) ≤ 1 ↔ (maximalIdeal R).IsPrincipal\", \"doc\": \"For any Noetherian local ring $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ over the residue field $ R/\\\\mathfrak{m} $ is at most one if and only if the maximal ideal $ \"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits are ordinary finite-presentation smooth differentials, not a coefficient-field choice for complete local rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"MvPowerSeries\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits are ordinary finite-presentation smooth differentials, not a coefficient-field choice for complete local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "completedDifferential|continuousDifferential|Cohen.?Gabber",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits are ordinary finite-presentation smooth differentials, not a coefficient-field choice for complete local rings"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-cohen-gabber-finite-presentations",
@@ -78,5 +246,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-coefficient-field-generic-differential-basis",
+  "worker": "stage1",
+  "summary": "Read ILO IV 2.1.4–2.1.12 and EGA 0_IV completed differential calculus. Split into prescribed p-basis coefficient lifts, the cofinite p-basis generic-rank calculation, and finite completed conormal calculus. Wrote both simultaneous component inductions, the two elementary selection calculations, the generic quotient comparison, and perfect-subfield compatibility. Corrected a false displayed field formula in source 2.1.11 without changing the item statement. No matching closed project declaration or Mathlib theorem was found.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5. Supporting input: Coefficient representatives with a common generic differential basis; supporting algebra input realizes ILO IV 2.1.4–2.1.12 without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-p-basis-exists",
+    "why": "Generic field-theory p-basis existence supplies the residue-field p-basis used in ILO 2.1.4; this unit has no p-basis existence node."
+   },
+   {
+    "node": "lem-weil-pbc-p-basis-complement-monomial-basis",
+    "why": "Generic p-basis monomial theorem gives finite residue degree over the cofinite coefficient subfield, needed for finite completed differential calculus; no node of this unit gives this field-theory fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic finite-module completion theorem makes the coefficient-change quotient a valid complete target for the continuous universal property; no node of this unit supplies module completeness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-p-basis-exists",
+  "lem-weil-pbc-p-basis-complement-monomial-basis",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-d82cc58ca",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d82cc58ca (reviewer sub-agent of L); spot-checked: I read ILO IV 2.1.1–2.1.12 with Prop. 1.2.4, and EGA 0_IV 20.7.14, 20.7.15, 20.7.20 and 21.9.1. The item statement is unchanged. All 11 steps check out against the cited statements. Source error confirmed: the field κ' := κ^p(β_i; β'_i) in ILO 2.1.11 contains m^p, a nonzero element of the maximal ideal, so it cannot be a subfield of A. Example: F_p(u)[[t]] with β' = u+t gives t^p ∈ κ'. The repair is correct: it takes the unique coefficient field containing the final lifts (ILO 2.1.4), and Step 7 shows that a κ'-derivation is the same as an F-derivation that kills the γ_i. Step 8 builds inverse maps M/U ⇄ M_{κ'}(B) from the universal property and gets generic rank (e+r)−r = e. Step 5 lifts corrections into Q∩n, which keeps residues unchanged; the source's lift into q_j does not. Steps 10 and 11 (h^p trick, perfect subfield through n^{p^m}) are correct. All three new nodes are true and strictly smaller than the item. (1) prescribed-pbasis-section is Bourbaki AC IX §2 Th. 1(a), as ILO 2.1.4 cites it; tested on F_p(u+t) ⊂ F_p(u)[[t]]. (2) cofinite generic rank is ILO (2.b) with the 'every J ⊇ J_0' form from Prop. 1.2.4. Tested on κ[[x]], and on κ[[x,y]]/(y^p − u x^p): rank 2 at J = ∅ and 1+1 at J = {u}, which shows the exceptional set is needed. (3) completed conormal follows from EGA 20.7.14, 20.7.15 and 20.7.20; the image of the finite I/I² is closed, and (q/q²)_q = 0 for a reduced ring at a minimal prime. Duplicate search: the trf continuous-differential nodes cover power-series presentations only, the sibling lem-per-finite-formal-map-differential-cokernel is a different sequence, and the blueprint has nothing. Tool uses accepted (generic field theory and commutative algebra): lem-weil-pbc-p-basis-exists, lem-weil-pbc-p-basis-complement-monomial-basis, lem-weil-pbc-finite-module-complete-over-complete-noetherian. Advisory only: the new nodes list lem-weil-pbc-p-basis-exists in stmt_deps for the notion 'p-basis', as existing pbc nodes do. No SGA cited. No fixes."
  }
 }
