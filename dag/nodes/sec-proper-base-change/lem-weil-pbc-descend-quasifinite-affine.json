@@ -31,60 +31,44 @@
  ],
  "proof": [
   {
-   "text": "Restrict to the directed tail $J=\\{i:i\\ge i_0\\}$. This does not change the ring colimit: given a cocone on the tail and $k\\in I$, choose $j\\ge k,i_0$ and compose $A_k\\to A_j$ with its leg; directedness proves independence of $j$ and compatibility, so the universal property gives exactly a cocone on $I$. Moreover $B$ is the colimit of the $B_i$: compatible maps $B_i\\to D$ are precisely a compatible family $A_i\\to D$ and one map $B_0\\to D$ agreeing on $A_{i_0}$, hence precisely a map from the pushout $A\\otimes_{A_{i_0}}B_0$ to $D$. This proves the colimit assertion in commutative rings, including its canonical legs. Choose algebra generators $b_1,\\ldots,b_n$ from a finite presentation of $B_0$. Every element of $B_i$ is a finite sum of tensors $a\\otimes b$; express $b$ as a polynomial in the $b_r$, so $B_i$ is generated over $A_i$ by $1\\otimes b_1,\\ldots,1\\otimes b_n$. Thus every $A_i\\to B_i$ is of finite type.",
+   "text": "Restrict to J = {i : i₀ ≤ i}. The inclusion is final: every index has a common upper bound with i₀, and parallel arrows in a poset coincide. Functor.Final.isColimitWhiskerEquiv therefore gives the same base colimit. Define B_j as the pushout of A_i₀ → A_j and b₀, with transition maps induced by the pushout universal property. Its cocone has point pushout(c.ι_i₀,b₀). To prove this cocone is colimiting, descend the left legs of a compatible cocone by the base colimit, and take its right leg at the initial tail index. The cocone identities show that every right leg equals this one. The pushout universal property gives the unique induced map. This is the explicit IsColimit construction in the Lean proof.",
    "uses": [
     "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-finite-type-algebra"
+    "lem-weil-pbc-fibre-product-affine-spectra"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "094M, setup of affine specialization of Situation 081D; elementary cocone and pushout argument"
-   }
+   "elementary": true
   },
   {
-   "text": "By quasi-finiteness of $f:\\operatorname{Spec}B\\to\\operatorname{Spec}A$, every point is isolated in its fibre. The scheme-fibre homeomorphism identifies these fibres with the underlying preimages, and the affine fibre-product formula identifies the fibre at a prime $\\mathfrak p$ with $\\operatorname{Spec}(B\\otimes_A\\kappa(\\mathfrak p))$. Since every singleton is open, every subset is a union of open singletons, and both it and its complement are open. An irreducible closed subset cannot contain distinct points: one singleton and its complement would partition it into two proper closed subsets. Thus every nonempty irreducible closed subset is a singleton, and no strict chain of these has positive length. By the definition of Krull dimension the fibre has dimension zero if nonempty, and $-\\infty$ if empty, hence at most zero in either case.",
+   "text": "Finite presentation of b₀ implies finite type. RingHom.finiteType_isStableUnderBaseChange.pushout_inl gives finite type of every left pushout inclusion. For i ≤ j, cancel the initial pushout square from the later one by IsPushout.of_top. This identifies the canonical comparison from the successive pushout with the inverse of the unique pushout comparison isomorphism. ConcreteCategory.bijective_of_isIso gives its surjectivity.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The quasi-finite hypothesis gives open singletons in the scheme fibres. Transport each such singleton by fiberHomeo; discreteTopology_iff_isOpen_singleton gives discreteness of each set-theoretic fibre. Mathlib locallyQuasiFinite_iff_isDiscrete_preimage_singleton applies, using the given local finite-type conjunct. After base change to the spectrum of any residue field, IsLocallyArtinian.of_locallyQuasiFinite makes the source locally Artinian, so discrete. Then topologicalKrullDim_zero_of_discreteTopology bounds its dimension by zero. The isomorphisms from the chosen ring colimits to the explicit cocone points commute with the induced ring map, as checked by colimit.hom_ext. Thus the same bound applies to colimMap φ. Apply exists_stage_fibre_dimension_le with d = 0, the finite-type maps and the surjective comparisons.",
    "uses": [
     "pqf-def-quasifinite",
     "def-pc-scheme-fibre",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-kun-topological-krull-dimension"
+    "def-kun-topological-krull-dimension",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-affine-limit-fibre-dimension-bound"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "094M: reduction to fibre dimension at most zero; 05M5 with d=0"
-   }
+   "elementary": false
   },
   {
-   "text": "For $i\\le j$ in the tail, the canonical map $A_j\\otimes_{A_i}B_i\\to B_j$ is an isomorphism: a map from either ring to $D$ is exactly maps from $A_j$ and $B_0$ to $D$ agreeing on $A_{i_0}$; equivalently, its inverse sends $a\\otimes b\\in B_j$ to $a\\otimes(1\\otimes b)$. In particular the comparison map is surjective. Apply the affine limit fibre-dimension bound to the two systems $(A_i)$ and $(B_i)$ on $J$, their ring colimits established in step 1, the finite-type maps of step 1, these surjective comparisons, and the bound of step 2 with $d=0$. It supplies $i\\ge i_0$ for which every fibre $\\operatorname{Spec}(B_i\\otimes_{A_i}\\kappa(\\mathfrak p_i))$ has dimension at most zero.",
+   "text": "At the resulting stage, the finite-type map of spectra is locally of finite type. For p in Spec A_i, Scheme.Spec.residueFieldIso and pullback.map identify the pullback using the algebraic residue field with its scheme-theoretic fibre; transport dimension by the induced homeomorphism. The fibre projection to Spec κ(p) is locally of finite type, so LocallyOfFiniteType.isLocallyNoetherian makes the fibre locally Noetherian. Mathlib IsLocallyArtinian.of_topologicalKrullDim_le_zero then makes it locally Artinian, and hence discrete. Every singleton of the form asFiber x is open. The affine map is quasi-compact. Assemble these three conjuncts of Scheme.Hom.IsQuasiFinite and return the index with its defining inequality i₀ ≤ i. This argument also applies to empty fibres and the zero ring.",
    "uses": [
-    "lem-weil-pbc-affine-limit-fibre-dimension-bound",
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 094M, application of Tag 05M5 (lemma-limit-dimension)"
-   }
-  },
-  {
-   "text": "Fix a prime $\\mathfrak q$ of $B_i$ and let $\\mathfrak p_i$ be its contraction. At its point in the fibre, the dimension at the point is at most the whole fibre dimension because the whole fibre is an open neighbourhood. It is at least zero since every neighbourhood contains that point. Hence it equals zero. The zero-fibre-dimension criterion, with the finite-type map $A_i\\to B_i$ from step 1, proves quasi-finiteness at $\\mathfrak q$. Using the full source and target as affine neighbourhoods in the definition of quasi-finiteness at a point proves that $f_i$ is locally quasi-finite. The morphism between these affine schemes is affine, and affine-morphism permanence makes it quasi-compact. The equivalence of quasi-finiteness with local quasi-finiteness plus quasi-compactness therefore proves that $f_i$ is quasi-finite. If $B_i$ is the zero ring there are no primes, and the same argument has a vacuous pointwise assertion.",
-   "uses": [
-    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
-    "def-kun-topological-dimension-at-point",
+    "def-pc-scheme-fibre",
     "pqf-def-quasifinite",
+    "def-weil-pbc-finite-type-algebra",
+    "def-kun-topological-krull-dimension",
     "lem-weil-pbc-morphism-affine-schemes-affine",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "pqf-lem-qf-locqf-qc"
+    "lem-weil-pbc-affine-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0397 (lemma-locally-quasi-finite-rel-dimension-0); final inference of 094M"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -96,16 +80,13 @@
   "def-pc-scheme-fibre",
   "def-kun-topological-krull-dimension",
   "lem-weil-pbc-affine-limit-fibre-dimension-bound",
-  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
-  "def-kun-topological-dimension-at-point",
   "lem-weil-pbc-morphism-affine-schemes-affine",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "pqf-lem-qf-locqf-qc"
+  "lem-weil-pbc-affine-morphism-permanence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "094M (lemma-descend-quasi-finite), applying 05M5 with d=0; affine setup and final pointwise criterion expanded using 0397."
+  "place": "Tag 094M (lemma-descend-quasi-finite), using Tag 05M5 with d=0. P7 formalizes the tail and pushout colimits and uses Mathlib Artinian fibre topology for the zero-dimensional criterion."
  },
  "mathlib_searches": [
   {
@@ -255,8 +236,7 @@
   "pqf-def-quasifinite",
   "def-pc-scheme-fibre",
   "lem-weil-pbc-morphism-affine-schemes-affine",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "pqf-lem-qf-locqf-qc"
+  "lem-weil-pbc-affine-morphism-permanence"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -295,5 +275,15 @@
   "by": "NY",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261018T062848-L-669053",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
