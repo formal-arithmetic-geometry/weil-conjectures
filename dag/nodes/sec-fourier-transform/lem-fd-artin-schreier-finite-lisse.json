@@ -17,11 +17,165 @@
   "def-fd-artin-schreier-sheaf",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-constructible-sheaf",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open $U=\\operatorname{Spec}A$ of $X$, the prescribed relative spectrum is $q^{-1}U=\\operatorname{Spec}B$, where $B=A[T]/(T^p-T-b|_U)$. The relation $T^p=T+b|_U$ reduces every power to an $A$-linear combination of $1,T,\\ldots,T^{p-1}$, by induction on its degree. Thus $B$ is a finite $A$-module and $q$ is finite by [def-weil-finite-integral-morphism]. The polynomial is monic and its derivative is $-1$, since $p=0$ in $A$. Consequently $B=A[T]_{-1}/(T^p-T-b|_U)$ is the standard étale algebra of [lem-weil-pbc-standard-etale-monic-derivative], so its spectrum is étale over $U$. These affine charts cover $X$ and their inverse images cover $Y$, hence $q$ is étale by the affine-local characterization in [def-weil-etale-morphism].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00UB (definition-standard-etale) and 00UC (lemma-standard-etale), clause (1); monic reduction and affine-local finiteness"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-artin-schreier-polynomial-cover] with $U=X$ and $t=b$. It gives an étale surjection $f:V\\to X$ and $\\omega\\in\\Gamma(V,\\mathcal O_V)$ with $\\omega^p-\\omega=f^*b$. For every affine $U=\\operatorname{Spec}A\\subset X$ and every affine open $W\\subset f^{-1}U$, the ring map $A[T]/(T^p-T-b|_U)\\to\\Gamma(W,\\mathcal O_V)$ sending $T$ to $\\omega|_W$ defines a spectrum map $W\\to q^{-1}U$; these maps agree on overlaps because they have the same base map and the same image of $T$. They glue to $h:V\\to Y$ with $qh=f$. Every point of $X$ therefore lies in the image of $q$. This proves surjectivity, also when $X$ is empty.",
+   "uses": [
+    "lem-sc-artin-schreier-polynomial-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J (section-artin-schreier), local solvability of T^p-T=b, followed by the explicit factorization through the specified covering"
+   }
+  },
+  {
+   "text": "Set $A=\\operatorname{Spec}\\mathbf F_p[x]$, $D=\\operatorname{Spec}\\mathbf F_p[u]$ and $\\alpha:D\\to A$, $x\\mapsto u^p-u$. Write $t$ for the universal root on $Y$ and let $h:Y\\to D$ send $u$ to $t$. Then $\\alpha h=bq$. This square is cartesian: for maps $s:Z\\to X$ and $v:Z\\to D$ with $bs=\\alpha v$, the function $v^*u$ satisfies $(v^*u)^p-v^*u=s^*b$. On each affine $W\\subset s^{-1}(U)$, $U=\\operatorname{Spec}R\\subset X$, there is the unique ring map $R[T]/(T^p-T-b|_U)\\to\\Gamma(W,\\mathcal O_Z)$ sending $T$ to $v^*u|_W$. These maps glue uniquely since the base map and root agree on overlaps. They give the unique $Z\\to Y$ over $X$ with composite $h$ equal to $v$, exactly [def-pc-fibre-product]. For $X=A$, $b=x$, this construction identifies the relative cover with $D$: the inverse ring maps send $(x,T)$ to $(u^p-u,u)$ and $u$ to $T$. Thus step 1 also proves that $\\alpha$ is finite étale. The maps $\\tau_a:D\\to D$, $u\\mapsto u+a$, and $\\sigma_a:Y\\to Y$, $t\\mapsto t+a$, satisfy $h\\sigma_a=\\tau_a h$, since both pull back $u$ to $t+a$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-as/def-fd-artin-schreier-sheaf.md",
+    "place": "AS_p and pullback along b; explicit universal-property verification for the equation T^p-T=b"
+   }
+  },
+  {
+   "text": "Put $M=\\mathcal L_\\Psi=\\operatorname{im}(e_\\Psi\\mid\\alpha_*\\Lambda_D)$ on $A$, so the current definition in the statement gives $L=b^{-1}M$. Apply [lemma-weil-pbc-finite-exchange] to the cartesian square $(h,q,\\alpha,b)$ of step 3, with $\\alpha$ finite and with the underlying abelian sheaf of $\\Lambda_D$. It makes the underived exchange an isomorphism of abelian sheaves. Apply [lem-weil-pbc-underived-exchange-module-linear] to this same square, coefficient ring $\\Lambda$ and module sheaf $\\Lambda_D$: the very same exchange map is $\\Lambda_X$-linear. By [prop-weil-pbc-inverse-image-modules-exact](1),(2), $h^{-1}\\Lambda_D\\cong\\Lambda_Y$ as constant module sheaves. Consequently these maps give a module-sheaf isomorphism\n$$\\beta:b^{-1}\\alpha_*\\Lambda_D\\xrightarrow{\\sim}q_*\\Lambda_Y.$$\nIndeed the inverse of a bijective module map is linear: if $\\beta(z)=w$, then $\\beta(\\lambda z)=\\lambda w$, whence $\\beta^{-1}(\\lambda w)=\\lambda\\beta^{-1}(w)$. No module base-change assertion is inferred solely from abelian invertibility, and only the underived finite-exchange clause is used.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-underived-exchange-module-linear",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0959, lemma-finite-pushforward-commutes-with-base-change; module linearity supplied by the cited existing node (Stacks 03S6 exchange on modules)"
+   }
+  },
+  {
+   "text": "The isomorphism $\\beta$ intertwines the translations, as follows from the section formula in [def-weil-pbc-underived-exchange]. For $V\\to X$ étale, take a representative consisting of $W\\to A$ étale, $V\\to W\\times_AX$ and a section $s$ of $\\Lambda_D$ on $D\\times_AW$. By [lem-weil-pbc-constant-sheaf-sections-locally-constant], view $s$ as a locally constant $\\Lambda$-valued function. Its image is pullback along $\\kappa:Y\\times_XV\\to D\\times_AW$, $(y,z)\\mapsto(h(y),w(z))$, with $w:V\\to W$ the given map, followed by sheafification. Step 3 gives\n$$\\kappa\\circ(\\sigma_a\\times\\mathrm{id}_V)=(\\tau_a\\times\\mathrm{id}_W)\\circ\\kappa.$$\nHence $(s\\circ(\\tau_a\\times\\mathrm{id}_W))\\circ\\kappa=(s\\circ\\kappa)\\circ(\\sigma_a\\times\\mathrm{id}_V)$. This identity persists under restriction and sheafification, proving $\\beta\\circ b^{-1}(\\tau_a^*)=\\sigma_a^*\\circ\\beta$. Since $\\beta$ is linear, it therefore intertwines $b^{-1}e_\\Psi$ and $e^Y_\\Psi=p^{-1}\\sum_a\\Psi(-a)\\sigma_a^*$. Exactness of $b^{-1}$ from [prop-weil-pbc-inverse-image-modules-exact](3) preserves images. Thus $L=b^{-1}M$ is canonically isomorphic to $\\operatorname{im}(e^Y_\\Psi\\mid q_*\\Lambda_Y)$, with its inclusion identified by $\\beta$. This proves the statement's 'explicitly' clause for the sheaf defined by pullback, before computing $q^{-1}L$.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0959, canonical exchange; section-restriction formula of def-weil-pbc-underived-exchange and Tag 03P5, remark-constant-locally-constant-maps"
+   }
+  },
+  {
+   "text": "Write $t$ for the universal root on $Y$, and $t_1,t_2$ for its two pullbacks to $Z=Y\\times_XY$. The characteristic-$p$ binomial identity gives $(t_2-t_1)^p-(t_2-t_1)=0$. At every point $z$ of $Z$, its local ring has $p=0$, so [lem-sc-local-ring-artin-schreier-kernel] gives a unique $a\\in\\mathbf F_p$ with $(t_2-t_1)_z=a$. Equality of germs holds on an open neighbourhood of $z$. Hence the loci $Z_a$ on which $t_2-t_1=a$ form a disjoint open partition of $Z$. The translation $t\\mapsto t+a$ defines $s_a:Y\\to Z$, $y\\mapsto(y,\\sigma_a y)$, since $(t+a)^p-(t+a)=b$. Its image lies in $Z_a$. Conversely, on $Z_a$ the two coordinates satisfy $t_2=t_1+a$, so the presentation by the universal root implies $s_a\\operatorname{pr}_1=\\mathrm{id}_{Z_a}$, while $\\operatorname{pr}_1s_a=\\mathrm{id}_Y$. Thus these actual inverse maps give $Z\\cong\\coprod_{a\\in\\mathbf F_p}Y$ over the first projection. There are no points or loci to check when $Y$ is empty.",
+   "uses": [
+    "lem-sc-local-ring-artin-schreier-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J (section-artin-schreier), kernel equal to the constant F_p; explicit root-difference trivialization"
+   }
+  },
+  {
+   "text": "Because $q$ is étale, [lem-weil-pbc-etale-inverse-image-restriction] identifies inverse image with restriction: for $V\\to Y$ étale, $(q^{-1}q_*\\Lambda_Y)(V)=(q_*\\Lambda_Y)(V\\to X)=\\Lambda_Y(V\\times_XY)$, the last equality being [def-weil-pbc-direct-image]. Step 6 identifies $V\\times_XY$ with $\\coprod_{a\\in\\mathbf F_p}V$. By [lem-weil-pbc-constant-sheaf-sections-locally-constant], sections of the constant sheaf are Zariski-locally constant functions; on this disjoint union they are tuples $(f_a)_{a\\in\\mathbf F_p}$ with $f_a\\in\\Lambda_V(V)$. This gives $q^{-1}q_*\\Lambda_Y\\cong\\prod_{a\\in\\mathbf F_p}\\Lambda_Y$, naturally in $V$. Naturality of the restriction comparison and the constant-ring comparison in [prop-weil-pbc-inverse-image-modules-exact] make this an isomorphism of $\\Lambda_Y$-modules. Pullback along translation by $c$ sends the tuple to $(f_{a+c})_a$: it changes the second root from $t+a$ to $t+a+c$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S2 (section-extension-by-zero), restriction description of étale inverse image; Tag 03P5 (remark-constant-locally-constant-maps)"
+   }
+  },
+  {
+   "text": "Using the identification of $L$ proved in step 5, exactness of the module inverse image in [prop-weil-pbc-inverse-image-modules-exact] identifies $q^{-1}L$ with the image of the pulled-back projector on the product in step 7. For a tuple $f=(f_a)$ of sections, put $c(f)=p^{-1}\\sum_{d\\in\\mathbf F_p}\\Psi(-d)f_d$. Reindexing $d=a+r$ gives\n$$ (e_\\Psi f)_r=p^{-1}\\sum_a\\Psi(-a)f_{r+a}=\\Psi(r)c(f). $$\nDefine $g_r=\\Psi(r)$. Then $c(g)=p^{-1}\\sum_d1=1$, so $e_\\Psi(g\\lambda)=g\\lambda$ for any section $\\lambda$ of $\\Lambda_Y$. Thus the image is exactly $\\{g\\lambda\\}$; multiplication by $g$ is an isomorphism from $\\Lambda_Y$ to that image, with inverse evaluation at $r=0$, since $\\Psi(0)=1$. All formulas commute with restriction, hence define an isomorphism of sheaves $q^{-1}L\\cong\\Lambda_Y$. No cancellation by a nonunit or character orthogonality is used. The same calculation works for the trivial character and the zero coefficient ring.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-as/def-fd-artin-schreier-sheaf.md",
+    "place": "Character projector e_Psi; explicit regular-representation computation over an arbitrary commutative coefficient ring"
+   }
+  },
+  {
+   "text": "Steps 1, 2 and 8 provide the singleton étale cover $q:Y\\to X$ on which $L$ is the free module $\\Lambda_Y$ of rank one. By [lem-weil-pbc-etale-inverse-image-restriction], $q^{-1}L$ is the restriction $L|_Y$, so this is a trivializing datum. Thus $L$ is étale locally free of rank one, and locally constant in the sense of [def-constructible-locally-constant]. Since $\\Lambda$ is finite, this is a finite locally constant module sheaf. For [def-weil-pbc-etale-constructible-sheaf] take the one-stratum partition $X$ with its identity immersion: its image is constructible (the whole space is open and is retrocompact in itself), and the required finite locally constant restriction is $L$ itself. If $X$ is empty, use the empty partition. This proves constructibility without any Noetherian or finite-type condition on $X$.",
+   "uses": [
+    "def-constructible-locally-constant",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RU (definition-finite-locally-constant); Tag 095E (lemma-constructible-quasi-compact-quasi-separated), condition (3) used as the recorded global definition"
+   }
+  },
+  {
+   "text": "Let $0\\to F'\\to F\\to F''\\to0$ be any short exact sequence of $\\Lambda_X$-module sheaves. Restriction to $Y$ is exact by [prop-weil-pbc-inverse-image-modules-exact]. The localization equivalence [lem-weil-pbc-etale-site-localization-open], together with [lem-weil-pbc-etale-inverse-image-restriction], identifies this with restriction to the slice site $X_{\\Et}/Y$. By [lem-sfb-localized-site-tensor-restriction], the restriction of the sequence tensored with $L$ is the restricted sequence tensored with $L|_Y\\cong\\Lambda_Y$ (step 8), hence is the original restricted exact sequence: the mutually inverse unit maps are $x\\otimes\\lambda\\mapsto\\lambda x$ and $x\\mapsto x\\otimes1$. Exactness therefore holds on this covering. Explicitly the kernel, cokernel and middle homology sheaves of the tensored sequence restrict to zero, since restriction is exact. For any étale $W\\to X$, [lem-weil-pbc-etale-covering-base-change] gives the cover $W\\times_XY\\to W$; a section of any of these defect sheaves is zero on that cover, so is zero by the separatedness axiom for a sheaf. All three defects vanish globally. Thus tensoring with $L$ is exact, which is flatness as defined in [def-pc-flat-sheaf-modules].",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DH (section-localize), 03EL (lemma-tensor-product-pullback), 03ER (definition-flat), item (3); exactness detected by the sheaf axiom on a cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "def-weil-etale-morphism",
+  "lem-sc-artin-schreier-polynomial-cover",
+  "def-pc-fibre-product",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-sc-local-ring-artin-schreier-kernel",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-direct-image",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-etale-covering-base-change",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3J (section-artin-schreier); explicit character-projector computation and local tensor argument supplied by Q33, supported by Tags 00UC, 03P5, 03S2, 03DH and 03EL; Tag 0959 finite exchange plus module linearity and explicit translation-equivariance repair"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +204,52 @@
    "results": "0 hits:  Subdirectory: AlgebraicGeometry",
    "date": "2026-10-18",
    "verdict": "no match: no declaration states this etale-sheaf theorem; algebraic modules, constructible subsets, analytic Fourier transforms and condensed sheaf constructions in the hits have different objects or conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "artinSchreierSheaf|[Aa]rtin.?[Ss]chreier|IsLocallyConstantSheaf",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: algebraic etale maps, general locally free sheaves, or averaging of representations do not state the Artin–Schreier sheaf theorem; the rank-one image calculation and sheaf trivialization are still required"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A character summand of the direct image of the constant sheaf along an Artin Schreier torsor is locally free of rank one",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_mem_essImage, AddChar.sum_mulShift, AddChar.sum_eq_ite, CategoryTheory.Sheaf.IsConstant.recOn, LightCondensed.IsDiscrete, CategoryTheory.Sheaf.IsConstant.casesOn, AddChar.sum_eq_card_of_eq_one, SheafOfModules.free",
+   "date": "2026-10-18",
+   "verdict": "no match: algebraic etale maps, general locally free sheaves, or averaging of representations do not state the Artin–Schreier sheaf theorem; the rank-one image calculation and sheaf trivialization are still required"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ArtinSchreier\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: algebraic etale maps, general locally free sheaves, or averaging of representations do not state the Artin–Schreier sheaf theorem; the rank-one image calculation and sheaf trivialization are still required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier character idempotent sheaf on an arbitrary characteristic p scheme is etale locally free of rank one and flat over a finite commutative ring",
+   "results": "8 hits: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Etale, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, StandardEtalePair.instFormallyEtaleRing, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.formallyEtale, Algebra.FormallySmooth.of_perfectField",
+   "date": "2026-10-18",
+   "verdict": "no match: algebraic etale maps, general locally free sheaves, or averaging of representations do not state the Artin–Schreier sheaf theorem; the rank-one image calculation and sheaf trivialization are still required"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]rtin.?[Ss]chreier|[Ll]ocally[Ff]ree|[Cc]haracter.*[Ss]heaf",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Stalk.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: algebraic etale maps, general locally free sheaves, or averaging of representations do not state the Artin–Schreier sheaf theorem; the rank-one image calculation and sheaf trivialization are still required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a character averaging projector on the regular representation of a finite torsor is a rank one locally constant module sheaf",
+   "results": "8 hits: Representation.isProj_averageMap, FDRep.average_char_eq_finrank_invariants, Representation.averageMap, Rep.leftRegular_projective, Rep.standardComplex.ε, Representation.averageMap_id, Profinite.NobelingProof.Nobeling_aux, FDRep.char_orthonormal",
+   "date": "2026-10-18",
+   "verdict": "no match: algebraic etale maps, general locally free sheaves, or averaging of representations do not state the Artin–Schreier sheaf theorem; the rank-one image calculation and sheaf trivialization are still required"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-fd-transform-well-defined",
@@ -70,5 +266,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-artin-schreier-finite-lisse",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: statement and logged Mathlib searches retained. Ten steps now prove the relative cover is the pullback of AS_p, upgrade finite exchange to a module isomorphism using the existing module-linearity node, and verify its translation-equivariance on section representatives. Exact pullback then identifies b^*L_Psi with the explicit projector image before the original line calculation. Added the missing inverse-image-as-restriction citation to the constructibility step. No new nodes or changed hypotheses.",
+  "blueprint": "thm-fd-transform-well-defined main-20261015 proof, first sentence: the Fourier kernel is a lisse rank-one module. This supplies the general finite-ring input requested by its repaired step 2; realizes the lisse kernel part of the sk-prop-well-defined route. The missing comparison is now supplied explicitly by steps 3–5, so the character sheaf used is the current pullback-defined kernel, as in P1/sk-prop-kernel-lisse and sk-lem-as-properties.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-artin-schreier-polynomial-cover",
+    "why": "Generic local solvability of an Artin–Schreier equation on any characteristic-p scheme; supplies surjectivity for the explicitly prescribed cover without finite-field base or finite-type restrictions."
+   },
+   {
+    "node": "lem-sc-local-ring-artin-schreier-kernel",
+    "why": "Generic local-ring kernel calculation identifies the difference of two roots with a locally constant element of F_p; the Fourier unit has no general-ring substitute."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic étale inverse image is restriction, giving the actual section formula for the pullback of q_*Lambda, not a derived base-change assertion."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "Generic constant-sheaf section formula identifies the pushforward on the split cover with functions on F_p."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact inverse image with constant coefficients preserves the projector image and the defects of exactness."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic equivalence of the small étale site of an étale object with the slice site permits applying the ringed-site tensor restriction statement."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic ordinary tensor comparison for localization; proves flatness on the actual étale covering without changing coefficient categories."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-exchange",
+    "why": "Generic underived finite base change on abelian sheaves; paired with the existing module-linearity lemma in step 4 it proves finite exchange in the actual constant-coefficient module category. The Fourier unit has no such exchange theorem."
+   },
+   {
+    "node": "lem-weil-pbc-underived-exchange-module-linear",
+    "why": "Gives precisely the module linearity of the same underived exchange map; together with abelian finite exchange this gives the module isomorphism, without changing coefficients."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-artin-schreier-polynomial-cover",
+  "lem-sc-local-ring-artin-schreier-kernel",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-underived-exchange-module-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q33-dff68eb55",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-dff68eb55 (reviewer sub-agent of L); spot-checked: Read the item, all ten steps, cited statements and source passages in full. Verified the canonical module exchange, translation equivariance, projector trivialization, constructibility and flatness. Small-ring checks passed; no new nodes, missing citations or oversized steps. Accepted all nine declared generic tool uses. Full findings are in review.md."
  }
 }

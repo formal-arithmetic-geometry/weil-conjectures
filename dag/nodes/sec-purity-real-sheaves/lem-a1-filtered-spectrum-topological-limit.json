@@ -11,9 +11,65 @@
   "def-weil-pbc-category-colimit",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a prime $\\mathfrak p\\subset A$, the contractions $\\mathfrak p_i=r_i^{-1}(\\mathfrak p)$ are prime and compatible, because the maps $r_i$ and $r_{ij}$ compose. Conversely, given compatible primes $\\mathfrak p_i$, define $\\mathfrak p\\subset A$ to consist of those elements represented by some $x_i\\in\\mathfrak p_i$. The elementwise description of filtered ring colimits gives representatives and says when two representatives agree. Using a common upper bound, compatibility shows that this set is closed under addition and multiplication by arbitrary elements and contains zero but not one. If $r_i(x_i)r_j(y_j)$ lies in it, move $x_i,y_j$ and the witnessing element to one common later stage; primality there puts one factor in the corresponding prime, so one of the original factors lies in $\\mathfrak p$. Thus $\\mathfrak p$ is prime, and the same common-stage argument gives $r_i^{-1}(\\mathfrak p)=\\mathfrak p_i$. These two constructions are inverse.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CUE, lemma-inverse-limit-sets, affine-case proof"
+   }
+  },
+  {
+   "text": "For every $i$ and $f\\in A_i$, the inverse image of the principal open $D(f)\\subset\\operatorname{Spec}A_i$ under $p_i$ is $D(r_i(f))\\subset\\operatorname{Spec}A$: membership is exactly the condition that the relevant element is absent from the prime. Every principal open of $\\operatorname{Spec}A$ has the form $D(r_i(f))$ for some $i,f$, since every element of $A$ is represented at a stage. Principal opens form a basis for the Zariski topology by the definition of affine spectrum. Hence the topology on $\\operatorname{Spec}A$ is exactly the coarsest topology making all $p_i$ continuous, and the bijection of Step 1 is a homeomorphism onto the compatible-family inverse-limit topology.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CUF, lemma-inverse-limit-top, affine-case proof"
+   }
+  },
+  {
+   "text": "Let $Q\\subseteq\\operatorname{Spec}A_i$ be quasi-compact and open. For each point of $Q$, choose a principal open contained in $Q$; quasi-compactness gives finitely many $D(f_1),\\ldots,D(f_n)$ covering $Q$. By Step 2, $p_i^{-1}(Q)=\\bigcup_{a=1}^nD(r_i(f_a))$. Each principal open $D(r_i(f_a))$ is homeomorphic to the spectrum of the localization $A_{r_i(f_a)}$ by [lem-weil-pbc-principal-localization-open-immersion], hence is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii); a finite union of quasi-compact opens is quasi-compact. This proves the final assertion.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E8, lemma-quasi-compact; Schemes Tag 01I3, lemma-standard-open-affine, for the principal-localization identification"
+   }
+  },
+  {
+   "text": "The compatible-family description, the topology identification, and the quasi-compact-preimage statement together give all clauses of the asserted homeomorphism and inverse-limit description.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 0CUE and 0CUF, affine-case conclusions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-principal-localization-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tags 0CUE and 0CUF affine-case proofs; final quasi-compactness assertion from Algebra Tag 00E8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +113,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-intersection-canonical-affine-embedding",
@@ -69,7 +125,7 @@
  "blueprint": {
   "from": {
    "node": "lem-a1-affine-hc0",
-   "place": "Tag 0API proof of the canonical embedding: Topological spectrum of a directed colimit of rings",
+   "place": "Tag 0API proof of the canonical embedding: the affine directed-colimit spectrum calculation (realized by the Stacks Tags 0CUE and 0CUF affine-case arguments).",
    "via": [
     "lem-a1-intersection-canonical-affine-embedding",
     "lem-a1-ind-quasi-affine-fpqc-effective-descent",
@@ -81,5 +137,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-filtered-spectrum-topological-limit",
+  "worker": "stage1",
+  "summary": "Split the affine directed-colimit spectrum assertion into the compatible-prime construction, the principal-open topology calculation, the quasi-compactness of inverse images of quasi-compact opens, and the final assembly. The proof follows Stacks Tags 0CUE and 0CUF, with Algebra Tag 00E8 for quasi-compact principal opens; existing filtered-colimit and affine-spectrum nodes are cited, and no new nodes were needed.",
+  "blueprint": "Realizes the Tag 0API canonical-embedding proof's affine directed-colimit spectrum calculation via its Tag 0CUE compatible-prime and Tag 0CUF topology arguments, including the finite principal-open quasi-compactness clause."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q50-88bd0bcad",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-88bd0bcad (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked Stacks 0CUE, 0CUF, 00E8 and 01I3. Added the existing principal-localization citation missing from step 3 and clarified step 1’s factor wording. Statements unchanged; edge cases and dependency checks pass. Review and corrected whole JSON written.; 1 file(s) fixed by the reviewer"
  }
 }

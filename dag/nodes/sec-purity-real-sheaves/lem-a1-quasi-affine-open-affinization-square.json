@@ -14,9 +14,97 @@
   "def-weil-affine-spectrum",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $q=\\operatorname{Spec}r$. The morphisms $q\\circ j_U$ and $j_V\\circ u$ correspond to the same homomorphism $r:B\\to A$: the canonical maps induce identities and the map induced by $u$ is restriction. Thus [lem-weil-pbc-morphism-into-affine-scheme] gives $q\\circ j_U=j_V\\circ u$. By [lem-trf-quasi-affine-canonical-affine-embedding], both $j_U$ and $j_V$ are open immersions and both schemes are quasi-compact and quasi-separated. In particular $j_V\\circ u$ identifies $U$ with an open subscheme $H\\subseteq\\operatorname{Spec}B$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof"
+   }
+  },
+  {
+   "text": "Apply the basis assertion of [lem-weil-pbc-spec-localization-away-basic-open] to the open $H$. The opens $D(g)\\subseteq H$, for $g\\in B$, cover $H$. Their inverse images under $j_V$ are $V_g$, by [lem-weil-pbc-morphism-into-affine-scheme]. The identification of $V$ with its image in step 1 identifies $V_g$ isomorphically with $D(g)$. By clause (0) of [lem-weil-pbc-affine-ideals-closed-subscheme], $D(g)$ is affine, so $V_g$ is affine, lies in $u(U)$, and these $V_g$ cover $u(U)$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof"
+   }
+  },
+  {
+   "text": "For each $g$ chosen in step 2 put $f=r(g)$. By [lem-weil-pbc-basic-open-pullback], $u^{-1}(V_g)=U_f$. Since $V_g\\subseteq u(U)$, the given open immersion identifies $U_f$ with all of $V_g$. Hence $U_f$ is affine, and these opens cover $U$. Moreover [lem-weil-pbc-morphism-into-affine-scheme], applied to $q$ and the element $g$, gives $q^{-1}(D(g))=D(f)$. The pullback section is $f$ since $q$ is induced by $r$.",
+   "uses": [
+    "lem-weil-pbc-basic-open-pullback",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof"
+   }
+  },
+  {
+   "text": "The inverse image of $D(f)\\subseteq\\operatorname{Spec}A$ under $j_U$ is $U_f$ by [lem-weil-pbc-morphism-into-affine-scheme]. Apply [lem-sc-p1-invertible-section-localization] with $X=U$, $\\mathcal L=\\mathcal F=\\mathcal O_U$, and $s=f$: $U$ is qcqs by step 1, and the structure module is quasi-coherent and free of rank one. Its tensor powers identify with $\\mathcal O_U$. Its degree-zero fractions are ordinary fractions $a/f^n$: equality is exactly $f^k(f^m a-f^n b)=0$ for some $k\\geq0$. The cited map is therefore the bijection $A_f\\to\\Gamma(U_f,\\mathcal O_U)$ sending $a/f^n$ to $a|_{U_f}/f|_{U_f}^n$. By clause (0) of [lem-weil-pbc-affine-ideals-closed-subscheme], $\\Gamma(D(f),\\mathcal O)=A_f$ compatibly with restriction. The section ring map of $j_U|_{U_f}$ is this bijection: it is the identity on global sections of $U$ and hence has the displayed value on every fraction. Thus it is a ring isomorphism. Both $U_f$ (step 3) and $D(f)$ (clause (0)) are affine. Use [lem-weil-pbc-morphism-into-affine-scheme] to realize the inverse ring homomorphism as an inverse scheme morphism; the composites induce identity ring maps and hence are identities by that bijection. Consequently $j_U(U_f)=D(f)$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-sc-p1-invertible-section-localization",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof; Tag 01P8 expanded using Tag 01PW(2), lemma-invert-s-sections, with both modules equal to the structure module"
+   }
+  },
+  {
+   "text": "Taking unions in the equalities of steps 2–4 gives $q^{-1}(H)=\\bigcup_g q^{-1}(D(g))=\\bigcup_gD(r(g))=\\bigcup_gj_U(U_{r(g)})=j_U(U)$. Because $j_U$ is an open immersion [def-weil-open-immersion], this equality identifies the inverse-image open subscheme, including its restricted structure sheaf, with $U$. The restricted morphism to $H$ agrees with $j_V\\circ u$ by the commutativity in step 1, so under the two identifications with $U$ it is the identity.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof"
+   }
+  },
+  {
+   "text": "For completeness check the fibre-product universal property [def-pc-fibre-product]. Given a scheme $T$ and $a:T\\to U$, $b:T\\to\\operatorname{Spec}A$ with $(j_V\\circ u)\\circ a=q\\circ b$, the image of $b$ lies in $q^{-1}(H)=j_U(U)$. The description of an open subscheme in [def-weil-open-immersion] restricts $b$ uniquely to $c:T\\to U$ with $j_U\\circ c=b$ (restrict its structure-sheaf map to this open). Commutativity then gives $(j_V\\circ u)\\circ c=(j_V\\circ u)\\circ a$; this open immersion is an isomorphism onto $H$, so $c=a$. This is exactly the unique factorization through the displayed top-left $U$ with its left projection $\\mathrm{id}_U$. It proves that the stated square is cartesian.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-basic-open-pullback",
+  "lem-sc-p1-invertible-section-localization",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +145,18 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ; AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.IsAffineOpen.map_fromSpec; AlgebraicGeometry.IsAffineOpen.toSpecΓ_fromSpec; AlgebraicGeometry.IsAffineOpen.SpecMap_appLE_fromSpec; AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ_assoc; AlgebraicGeometry.IsAffineOpen.toSpecΓ_fromSpec_assoc; AlgebraicGeometry.IsAffineOpen.Spec_map_appLE_fromSpec",
    "date": "2026-10-18",
    "verdict": "no match: QuasiAffine.lean:115-141 requires an affine morphism and has bottom left V, whereas this square has bottom left U and left identity. The open immersion U into V need not be affine. Lines 147-150 have the same affine hypothesis. IsOpenImmersion.isPullback requires proving the image-preimage equality rather than giving it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If U is an open subscheme of a quasi affine scheme V and U is quasi affine then the inverse image of U in Spec Gamma U under Spec Gamma U to Spec Gamma V equals U",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ; AlgebraicGeometry.IsAffineOpen.toSpecΓ_fromSpec; AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_self; AlgebraicGeometry.IsAffineOpen.opensRange_fromSpec; AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen'; AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ; AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen; AlgebraicGeometry.IsAffineOpen.isoSpec_inv_toSpecΓ_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match for this item: preimage_opensRange_toSpecΓ and isPullback_toSpecΓ_toSpecΓ assume IsAffineHom and concern the square with bottom-left V. A general open immersion of quasi-affine schemes need not be affine. The exact qcqs basic-open section-map result is used as a separate Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-intersection-canonical-affine-embedding",
@@ -84,5 +180,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-quasi-affine-open-affinization-square",
+  "worker": "stage1",
+  "summary": "Checked Tag 0ARY and retained its statement. Proved commutativity, the principal-open calculation, the inverse-image equality and the cartesian universal property. Reviewer removed the duplicate new section-map leaf: step 4 now specializes the existing invertible-section localization lemma to the structure module and explicitly checks the fraction map. No new nodes and no Lean or builds.",
+  "blueprint": "Inherited lem-a1-affine-hc0 geometric-support chain through pro-etale local-system representability and Tag 0API: the final open-subscheme assertion uses the Tag 0ARY square. Steps 1–4 realize its commutativity and principal-open calculation; steps 5–6 realize the inverse-image open and cartesian conclusion. The current blueprint ancestor contains only its vanishing statement; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-p1-invertible-section-localization",
+    "why": "Generic qcqs localization of sections, specialized to L=F=O_U, supplies the exact restriction-and-division map in step 4. This geometric tool is below the inherited representability chain and replaces no Rankin–Selberg unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-p1-invertible-section-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q51-b5adec4d8",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-b5adec4d8 (reviewer sub-agent of L); spot-checked: C5: removed a redundant new leaf by specializing existing lem-sc-p1-invertible-section-localization, with the canonical fraction map checked explicitly. Read all mathematics; verified Stacks 0ARY, 01P7–01P9, 01PW and the Mathlib match. Statement unchanged; corrected closure is acyclic. Review and corrected JSON written.; 1 file(s) fixed by the reviewer"
  }
 }
