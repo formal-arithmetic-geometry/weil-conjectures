@@ -11,7 +11,8 @@
   "def-pc-scheme",
   "def-trf-algebraic-space",
   "def-weil-size-convention",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-trf-algebraic-space-jointly-surjective-family"
  ],
  "proof": [
   {
@@ -186,5 +187,23 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-964945ca9 (reviewer sub-agent of L); spot-checked: Read in full: the item (03FY, lemma-union-of-quasi-compact, spaces-properties.tex lines 724-745), the 03FX construction (lines 700-722) and the new node checked against 06NF (lemma-etale-image-open, lines 536-558); also the statements of all cited nodes and unit sk-p-real-rankin. The item statement is unchanged and matches 03FY. The new node lem-a1-etale-scheme-map-open-image states 06NF's factorization part (surjective etale onto the open subspace with |X_f| = image), not the presentation clause. It is true (checked for U empty, f surjective and X a scheme), self-contained and statement-only, with correct blueprint from/via. It duplicates no existing node (rg over dag/nodes for 06NF/03FX/03FY and image-open phrasing; 03XW, 03M4, 02WW, 02WR and the chartwise-etale node differ). It does not restate a clause of the item. The steps are mathematically correct: atlas plus affine-basis choices; scheme-test etaleness by pasting, open immersion and composition; coverage via a residue-field point of Spec K x_X V; and the affine-base factorization via surjective lifts and uniqueness. FIX (C4): steps 1, 3 and 4 cited def-weil-open-immersion for factoring a map through an open subscheme, and step 2 cited it for base change of an open immersion. Both facts are existing Mathlib leaves: lem-weil-pbc-morphism-factors-through-open-subscheme and lem-weil-pbc-open-immersion-base-change. These citations are added in the corrected item JSON, with proof_deps recomputed and step 4 elementary set to false. Batch-5 check: def-trf-algebraic-space is the general definition of an algebraic space with definition-only deps. It is not a step of the trace formula or Poincare duality proofs, and the item and its parent already cite it, so it is outside the assumptions. No other trace/Poincare node is cited. Route: only definitions, Mathlib leaves and a same-unit node, so no tool_uses are needed. No SGA source is cited and no target is touched.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2fcb8bb36",
+  "group": "NK",
+  "result": "pass",
+  "note": "The delivery changes 3 files: the new module, the node record (only the lean record plus the landed stmt_dep def-trf-algebraic-space-jointly-surjective-family, allowed by brief-stage2 §5) and the report. Every clause matches Stacks 03FY (spaces-properties.tex 724-745) and the node: open pieces Xi as algebraic spaces whose map to X is representable and an open immersion after every scheme base change (the idiom of the landed OpenGluing module); covering via the landed IsJointlySurjective; affine U i with IsEtale and IsSurjective atlas maps, both including representability; affine-base clause as Nonempty map to h_W for an affine open W, which is exactly factorization because h_S is terminal and W.ι is mono. No extra hypotheses; I : Type u adds no universe restriction. Edge cases: empty X or S gives an empty family; empty U_i allowed; W chosen per i. No definitions, proof only sorry, docstrings give source, blueprint and the four proof steps, lean.statement matches the file verbatim, no existing declaration found. nt_compile.py --json on the snapshot file: clean in about 2 s, rc=0; a planted unknown identifier is reported as an error, so the clean result is real. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineAtlasOpenCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affine_atlas_open_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceAffineAtlasOpenCover.lean",
+  "statement": "theorem exists_affine_atlas_open_cover {S : Scheme.{u}} (X : AlgebraicSpace S) : ∃ (I : Type u) (Xi : I → AlgebraicSpace S) (j : ∀ i : I, Xi i ⟶ X) (U : I → Over S) (a : ∀ i : I, yoneda.obj (U i) ⟶ (Xi i).obj.obj), IsJointlySurjective (fun i : I ↦ (j i).hom.hom) ∧ ∀ i : I, IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (j i).hom.hom ∧ IsAffine (U i).left ∧ IsEtale (a i) ∧ IsSurjective (a i) ∧ ∃ W : S.Opens, IsAffine W.toScheme ∧ Nonempty ((Xi i).obj.obj ⟶ yoneda.obj (Over.mk W.ι))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

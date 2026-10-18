@@ -160,5 +160,23 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-4e9c87167 (reviewer sub-agent of L); spot-checked: I read Stacks 0APK (more-groupoids.tex l.3091, Gabber), Def. 0AP6 and Tag 0AP9 with its proof through 02LR (more-morphisms.tex l.19522, l.19681, l.12426), the item, both new nodes, every cited statement, the unit sk-p-real-rankin and the parent's use of the item. The item is 0APK for a one-member fpqc family plus 0AP9, with every hypothesis kept and nothing added or weakened. Small cases: V empty; an infinite disjoint union of copies of T' (not quasi-compact, so it needs 0APK and not 0247); a non-separated V is excluded. Kept new node lem-a1-ind-quasi-affine-fpqc-effective-descent is 0APK for one morphism. Its condition (quasi-compact opens over an affine open are quasi-affine over it) is equivalent to Stacks' ind-quasi-affine. It is true, a genuine generalization and not a restated clause. It is not a duplicate of lem-trf-quasi-affine-fpqc-effective-descent (which needs the whole morphism quasi-affine) or of lem-trf-separated-lqf-fppf-effective-descent (fppf). Its form, blueprint fields and searches are correct. Dropped node lem-a1-separated-lqf-ind-quasi-affine: true, but a few-line consequence of the existing node lemma-nagata-quasi-affine-morphism-of-quasi-finite, which is closed in slopmaster2 as IsQuasiAffineHom.of_locallyQuasiFinite (QuasiAffine.lean l.103-111). The report wrongly says that node needs finite presentation; it needs only locally of finite type, which locally quasi-finite already gives (C1/C5). The fix rewrites item step 1 to check (a) separated, elementary from the diagonal, (b) locally quasi-finite via lem-weil-pbc-lqf-restriction-to-opens, (c) quasi-compact via lem-weil-pbc-affine-scheme-qcqs and lem-weil-pbc-qcqs-morphism-permanence(1), (d) locally of finite type via lem-weil-pbc-lqf-locally-finite-type, then applies the Nagata node. This is the same argument as step 5 of the reviewed fppf node. proof_deps, proof_origin and split_report are updated. tool_uses are declared and accepted for these five generic or closed nodes, the same ones already accepted on lem-trf-separated-lqf-fppf-effective-descent. Nothing else cites the dropped node, and there is no cycle. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37f50f27c",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read node, Stacks 0APK (more-groupoids l.3092) and 0AP9/Def 0AP6 (more-morphisms l.19681/19522), the DescentDatum/IsEffective, IsLocallyQuasiFinite, fpqcPrecoverage and IsSeparated declarations. Every clause matches: the singleton fpqc covering is the recorded fpqcPrecoverage; separatedness is [IsSeparated V.hom]; local quasi-finiteness is the Stacks predicate; the descent datum is the recorded Over.DescentDatum with its cocycle; IsEffective has both the Cartesian square and the transport-invariance clause. No extra hypotheses, one arbitrary universe u, all variables bound. lean.statement is verbatim in the file and the node changed only in its lean field. No duplicate or name collision. No definitions, the proof is only sorry, docstrings carry the source place, blueprint id and two-step proof. nt_compile.py --json on the snapshot: clean, 2.0 s, rc=0, matching the recorded 2.2 s compile. Non-blocking: the 'Second reading by Q12' section is the authoring group's self-check, not an independent reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedLqfFpqcDescent",
+  "declaration": "CategoryTheory.Over.DescentDatum.isEffective_of_isSeparated_isLocallyQuasiFinite_fpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedLqfFpqcDescent.lean",
+  "statement": "theorem isEffective_of_isSeparated_isLocallyQuasiFinite_fpqc {T' T : Scheme.{u}} (f : T' ⟶ T) (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage T) {V : Over T'} [IsSeparated V.hom] (hV : V.hom.IsLocallyQuasiFinite) (D : Over.DescentDatum f V) : D.IsEffective",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

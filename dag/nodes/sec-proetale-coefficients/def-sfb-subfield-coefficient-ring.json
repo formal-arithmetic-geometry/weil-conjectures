@@ -191,5 +191,23 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ece1afb58",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Existing-declaration record AlgebraicGeometry.ProEtale.padicSubfieldRingObj (WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility); node changed only in lean; report has Worker report and Second reading sections. Clause check: [Fact ℓ.Prime]; E : FiniteIntermediateField ℓ = finite-dimensional IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), induced topology (rfl); body condensedRingObj (continuousMapRingObj E) X = p_X^* E̲ (rfl) via both recorded stmt_deps; MonObj via Functor.monObjObj and IsCommMonObj via isCommMonObj_condensedRingObj both synthesize; X arbitrary Scheme.{u}, coefficients Ab.{u+1}. Edge cases: E=Q_ℓ (⊥), ℓ=2, non-Galois E, empty scheme. nt_compile probe clean (3.0 s, only a long-line lint warning); axioms propext/Classical.choice/Quot.sound. check_existing (merge tool) gives no failures or notes; declaration identical in live and side sources. No hollow definition, no stronger assumptions, no proof, no build. Minor note only: recorded statement leaves out the noncomputable modifier, which the tool accepts."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.padicSubfieldRingObj",
+  "statement": "abbrev padicSubfieldRingObj (E : FiniteIntermediateField ℓ) :\n    Sheaf (ProEt.topology X) Ab.{u + 1}",
+  "branch": "slopmaster2",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing definition in the published upstream pro-etale framework, read from the shared overlay and confirmed with scompile.py --source. In the enclosing context (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime], E : PadicAlgCl.FiniteIntermediateField ℓ is a finite intermediate field of ℚ_[ℓ] in PadicAlgCl ℓ, with the induced topology. The body is condensedRingObj (Profinite.continuousMapRingObj E) X, namely p_X^* of the condensed ring C(-, E). Its MonObj structure is Functor.monObjObj and its commutativity is isCommMonObj_condensedRingObj applied to isCommMonObj_continuousMapRingObj. The slopmaster2 label denotes the published WeilConjectures source root, as in the recorded pulled-back-coefficients dependency; no duplicate module is supplied. A separate scompile.py probe confirmed the full type, both instances, the degree-one field case, and the declaration axioms (only propext, Classical.choice, Quot.sound)."
  }
 }

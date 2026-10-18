@@ -1,0 +1,142 @@
+{
+ "id": "def-sf-finite-coefficient-site-chain-tensor",
+ "kind": "definition",
+ "title": "Canonical finite coefficient site comparison on total tensor complexes",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension and $X$ a scheme. At every positive level $A_{E,n}$ of [def-weil-l-adic-coefficient-extension], use the etale complex and localization data of [def-sf-etale-finite-coefficient-hom-arrow], the intrinsic pro-etale operations of [def-weil-derived-pullback-tensor-hom], and the exact ordinary and derived inverse images $\\nu_n^*$ of [def-sf-finite-coefficient-site-scalar-arrow]. Define the comparison $\\nu_n^*\\operatorname{Tot}(P\\otimes Q)\\cong\\operatorname{Tot}(\\nu_n^*P\\otimes\\nu_n^*Q)$ for every pair of cochain complexes as the unique chain isomorphism sending each signed-total summand pure tensor of local etale sections to the corresponding intrinsic pure tensor of their images under the comparison and module-sheafification units. The localization comparison is the canonical exact-descent isomorphism $Q_{et}\\nu_n^*\\cong\\nu_n^*Q_{proet}$.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-finite-coefficient-site-scalar-arrow"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "last paragraph: transport the specified internal-Hom comparison to the pro-etale site; Stacks 00YV, 06YN, 07A4, 08J9"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image of sheaves of modules preserves the signed total tensor of cochain complexes, canonically on local pure tensors",
+   "results": {
+    "t": "2026-10-17T23:54:34Z",
+    "tool": "leansearch",
+    "query": "Exact inverse image of sheaves of modules preserves the signed total tensor of cochain complexes, canonically on local pure tensors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instAdditivePullback",
+     "CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app",
+     "AlgebraicGeometry.Scheme.Modules.inv_app",
+     "SheafOfModules.pushforwardNatIso_inv",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.sheafificationCompPullback",
+     "SheafOfModules.pullbackIso",
+     "SheafOfModules.mapFree"
+    ],
+    "digest": "8c69d9dc916c7d4c"
+   },
+   "date": "2026-10-17",
+   "verdict": "No specialized etale-to-intrinsic pro-etale chain tensor comparison; general pullback constructions are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex, HomologicalComplex.tensorObj",
+   "results": {
+    "t": "2026-10-17T23:54:34Z",
+    "tool": "loogle",
+    "query": "Functor.mapHomologicalComplex, HomologicalComplex.tensorObj",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Functor.mapHomologicalComplex'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "No specialized etale-to-intrinsic pro-etale chain tensor comparison; general pullback constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteHomNuChainTensor|finiteCoefficientIntrinsic.*[Tt]ensor|[Tt]ensor.*finiteCoefficientIntrinsic",
+   "results": {
+    "t": "2026-10-17T23:54:33Z",
+    "tool": "grep",
+    "query": "finiteHomNuChainTensor|finiteCoefficientIntrinsic.*[Tt]ensor|[Tt]ensor.*finiteCoefficientIntrinsic",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "No specialized etale-to-intrinsic pro-etale chain tensor comparison; general pullback constructions are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "thm-coef-finite-hom",
+  "date": "2026-10-17",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "final proof paragraph: termwise tensor comparison before derived localization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoefficientSiteChainTensor",
+  "declaration": "WeilConjectures.finiteHomNuChainTensor",
+  "declarations": [
+   "WeilConjectures.finiteHomNuComplex",
+   "WeilConjectures.finiteHomNuFactors",
+   "WeilConjectures.FiniteHomNuChainTensorNormalization",
+   "WeilConjectures.finiteHomNuChainTensor_existsUnique",
+   "WeilConjectures.finiteHomNuChainTensor"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCoefficientSiteChainTensor.lean",
+  "statement": "def finiteHomNuChainTensor (n : ℕ) (P Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) ℤ) : (finiteHomNuComplex l E X n).obj (HomologicalComplex.tensorObj P Q) ≅ (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)).obj ((finiteHomNuComplex l E X n).obj P, (finiteHomNuComplex l E X n).obj Q)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The unique chain isomorphism is fixed on all local signed-total pure tensors, using the published ordinary comparison. Extracts the ordinary construction from its derived localization consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5470a8b88",
+  "group": "Q59",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5470a8b88",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read all 5 modules, all 5 node records (chain-tensor node missing from snapshot; read from commit 5470a8b8 by read-only git show), dependency declarations and blueprint source. All node clauses rendered on both sites, ends checked: evaluation-defined v (étale etaleFiniteHomCanonical and pro-étale finiteIntrinsicReductionHom unfold to coefficientBaseChangeHom with the uniqueness clause's data), both ends in ctf plus IsIso, FiniteHomEvaluation identity and uniqueness, CoefficientEvaluationCompatible, both r<=m cocycles, beta/nu site square. Hypotheses exact (separated finite type over k, l != p, n>=m>=1 via n+1, m+1); single universe; edge cases (empty X, n=m, residue field, zero objects) covered. No sorry data in defs, no Nonempty.some, published étale and intrinsic pro-étale categories used, new files only; records, verbatim statements, declaration lists, H12 fields, report sections OK. nt_compile.py on all 5 files: exit 0, no messages (EtaleFiniteCoefficientHomArrow 42-49 s, near the 60 s limit). Notes: snapshot omitted the chain-tensor node; stage 3 needs a lemma identifying the thick-locus lemma's tensor comparison with ExceptionalCoefficients.tensorIso."
+ }
+}

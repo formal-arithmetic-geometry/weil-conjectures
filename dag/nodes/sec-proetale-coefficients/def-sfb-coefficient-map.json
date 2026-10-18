@@ -216,5 +216,28 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-991566524",
+  "group": "N8",
+  "result": "pass",
+  "note": "Existing binding to upstream AlgebraicGeometry.ProEtale.coefficientMap := (upperStarFromPoint X).map a : condensedRingObj Λ X ⟶ condensedRingObj Λ' X, with only MonObj on Λ, Λ' and IsMonHom a; no commutativity, X : Scheme.{u} arbitrary, Ab.{u+1} convention as in the deps. lean.statement matches the source verbatim; the only change in the delivery is the node's lean field. A probe via nt_compile.py --json (stdin, 12.8 s) confirmed the type, the IsMonHom instance (Functor.map.instIsMonHom), rfl with sfbPullbackFromPoint X).map a, and condensedRingObj = (coefficientRing X (Mon.mk Λ)).X by rfl. The bundled mapMon equality hit heartbeats (also in the worker's report), but Mathlib's mapMon map f := .mk (F.map f.hom) makes it definitional. Deps sk-def-sfb-condensed-ring, pullback-from-point and pulled-back-coefficients are consistent and all cited; no duplicate, no hollow definition, no stronger assumptions, no pro-etale substitute; the report has Worker report and Second reading sections."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientMap",
+   "CategoryTheory.Functor.map.instIsMonHom",
+   "CategoryTheory.Functor.mapMon"
+  ],
+  "statement": "noncomputable abbrev coefficientMap (X : Scheme.{u}) :\n    condensedRingObj Λ X ⟶ condensedRingObj Λ' X",
+  "branch": "slopmaster2",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing construction in the published upstream pro-etale framework, read in the shared side overlay and confirmed with scompile.py --source. In section CoefficientMap, Λ and Λ' are condensed abelian sheaves, with MonObj structures and IsMonHom a when regarded as ring objects. The abbreviation is (upperStarFromPoint X).map a; Functor.map.instIsMonHom supplies its ring-homomorphism structure. Equivalently it is the underlying arrow of (upperStarFromPoint X).mapMon.map (Mon.Hom.mk a), between coefficientRing X (Mon.mk Λ) and coefficientRing X (Mon.mk Λ'). No commutativity is assumed. The recorded point pullback sfbPullbackFromPoint is an abbreviation of this same upperStarFromPoint. The branch label denotes the published WeilConjectures source root; no duplicate module is introduced."
  }
 }

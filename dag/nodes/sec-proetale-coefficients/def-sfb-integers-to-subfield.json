@@ -280,5 +280,23 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bef69762b",
+  "group": "N4",
+  "result": "pass",
+  "note": "existing:true binding of def-sfb-integers-to-subfield to published AlgebraicGeometry.ProEtale.padicIntegersToPadicSubfield (EllAdicRationalization.lean:113-117); lean.statement verbatim. Clauses: Fact ℓ.Prime, E : PadicAlgCl.FiniteIntermediateField ℓ (embedding plus finiteness), arbitrary X : Scheme.{u}; body (upperStarFromPoint X).map of the canonical inclusion (continuousMapRingSheafMap (integers ℓ E).subtype); source/target condensedRingObj of 𝒪̲_E/E̲ as in sk-def-sfb-pulled-back-coefficients. nt_compile --json probe clean: type, IsMonHom, rfl to sfbPullbackFromPoint.map and to mapMon.map, E=⊥ case; axioms only propext/choice/Quot.sound. No duplicate, no citers, no extra assumptions or universe restriction. Observation only: dependency def-sfb-integers-to-subfield-point still has lean:null (its own item)."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization",
+  "declaration": "AlgebraicGeometry.ProEtale.padicIntegersToPadicSubfield",
+  "statement": "noncomputable abbrev padicIntegersToPadicSubfield :\n    condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X ⟶\n      condensedRingObj (Profinite.continuousMapRingObj E.1) X",
+  "branch": "slopmaster2",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact published upstream construction, read using scompile.py --source because the module is absent from the older local source checkout. In namespace AlgebraicGeometry.ProEtale, the surrounding variable command binds (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ). The body is (upperStarFromPoint X).map (padicIntegersRingObjToContinuousMapRingObj ℓ E); sfbPullbackFromPoint is definitionally upperStarFromPoint. Its IsMonHom instance and its definitional identification with the mapMon morphism between the two coefficientRing objects were checked with scompile.py. No duplicate definition or stronger hypothesis is introduced."
  }
 }

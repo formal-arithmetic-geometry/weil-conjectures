@@ -268,5 +268,23 @@
   "group": "Q139",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-22ef6dd12 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the docs, the item, every cited statement, and Stacks morphisms.tex 0AFE (lemma-rel-dimension-dimension) with definition-relative-dimension-d. The statement is faithful to 0AFE. 'Relative dimension d' is written as dim_a(X_{f(a)})=d at every point, which for fibres locally of finite type over a field is the same as 'equidimensional of dimension d'. No hypothesis was added and nothing is weakened. Tested on id (d=0), A^1_k->Spec k, A^n over a DVR, the empty scheme and infinite base dimension. No duplicate exists in the DAG or in either blueprint snapshot. Steps 1-5 follow the source: 01TX/01UA openness, shrinking to a surjective map, 0B7I for dim X_b=d, then 00ON with 0HA1 and 04MU pointwise and the supremum (finite summands, nonempty fibres). Fixes in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-flat-constant-relative-dimension.json: (C1) step 1 used dim U_1 <= dim U_0 without a citation, so I cited the Mathlib leaf lem-weil-pbc-open-subspace-dimension-monotone and wrote out both inequalities; step 2's locally-finite-type restriction is now written out with standard opens and cites the Mathlib leaf lem-weil-pbc-lft-pointwise-criterion; (B4) step 4 had '$R\\to S$' with a single backslash, which decodes to a TAB, now corrected; proof_deps recomputed. Tool uses: I accept the three declared ones (flat-lfp-open and flat-height-formula, both Mathlib leaves, and lem-pc-scheme-dimension-local-rings for 04MU) and added three undeclared off-unit generic tools: lem-weil-pbc-dimension-at-point-open-subspace, lem-weil-pbc-dimension-supremum-local-dimensions (0B7I) and lem-sbc-scheme-fibre-stalk-quotient (0HA1). The statement, stmt_deps and blueprint fields are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3fb2b33c",
+  "group": "Q13",
+  "result": "pass",
+  "note": "The Lean statement matches the node and Stacks 0AFE. Every hypothesis is there and none is stronger: locally Noetherian X and Y, Flat, LocallyOfFiniteType, d : ℕ. The fibre condition is topologicalKrullDimAt (f.asFiber a) = d for all a, which equals 'relative dimension d' for lft fibres. The conclusion is topologicalKrullDimAt x = topologicalKrullDimAt (f x) + d in WithBot ℕ∞. Edge cases: empty X or Y, d = 0, infinite dimension and non-surjective f are covered with no extra binders. Universes: one scheme universe, forced by the morphism. The only declaration is a theorem with proof sorry; there is no hollow definition and no duplicate (searched the side Sheaf and WeilConjectures trees with rg). Docstrings carry Tag 0AFE, the blueprint tag and the 5 proof steps. lean.statement is verbatim and only the node's lean field changed. The report has both required sections. nt_compile --json on the snapshot text: rc 0, 2.4 s, no messages. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatConstantRelativeDimension",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_eq_add_of_flat_constantRelativeDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatConstantRelativeDimension.lean",
+  "statement": "theorem topologicalKrullDimAt_eq_add_of_flat_constantRelativeDimension {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (f : X ⟶ Y) [Flat f] [LocallyOfFiniteType f] (d : ℕ) (hd : ∀ a : X, topologicalKrullDimAt (f.asFiber a) = (d : WithBot ℕ∞)) (x : X) : topologicalKrullDimAt x = topologicalKrullDimAt (f x) + (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

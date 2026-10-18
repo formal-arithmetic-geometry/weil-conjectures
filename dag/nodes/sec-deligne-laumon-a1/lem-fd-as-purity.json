@@ -117,5 +117,23 @@
   "group": "Q140",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-e8746b831 (reviewer sub-agent of L); spot-checked: I read the item, both blueprint snapshots (master order 2771 and main-20261015 order 3115, identical), the unit, the chapter and the full statements of every cited node. The delivery has no new nodes. The statement correction (fix psi = Psi∘Tr from def-fd-additive-character and require a in k0^x) is justified: these are exactly the hypotheses of lem-fd-as-trace, and they were undeclared in the source. It drops nothing a citer uses: lem-a1-exceptional-constituents assumes a in k0^x. The single step checks: lem-fd-as-lisse gives rank one, so the eigenvalue equals the trace; lem-fd-as-trace gives the value psi(Tr(au)); psi(t)^q = psi(qt) = psi(0) = 1, so it is a root of unity; lem-tw-root-of-unity-modulus gives |iota| = 1; def-weil-punctual-weights then gives weight 0. Edge cases checked: zero trace, q=2, high-degree points, and p dividing [k0:Fp]. Every cited unit is reached transitively from sk-p-dl-a1-some-weight, so no tool use is needed, and no SGA is cited. No duplicate exists in the DAG. The open Lean entry finiteLowerStar_singleFunctor_of_isAffine is a framework sorry that many reviewed nodes leave unattached the same way, and the item's proof does not use it. For the maintainer: the citer lem-fd-realified-kernel-real cites this lemma for the Fourier kernel K_psi (xy on A^2), which the source statement does not cover either; this is not a fault of this delivery. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-229242d5a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Existing-declaration binding: node changes only in lean (existing:true, slopmaster2, AlgebraicGeometry.isPunctuallyPureOfWeight_artinSchreier in WeilConjectures.WeilSheaf.ArtinSchreierPurity, tagged blueprint lem-fd-as-purity). Clauses match: k0 finite field of any universe, l != char k0, any ψ (specialise to Ψ.compTrace) and any a (covers a in k0^x), ι : PadicAlgCl l →+* ℂ via iota.toRingHom; artinSchreier ψ a = (x↦ax)^* image of e_ψ = q^-1 Σ ψ(-c)σ_c on AS_q,* of the constant adic Weil sheaf, the same construction as the def-fd-artin-schreier-sheaf blueprint_update; IsPunctuallyPureOfWeight ι 0 means every eigenvalue at every finite-residue (closed) point has norm 1, purity not a bound. Edge cases: a=0, trivial ψ, zero trace, q=2, all degrees, p|[k0:Fp]. check_existing gives no failures and no notes (statement verbatim). nt_compile --json probe (#check, an example specialising to iota and a unit a, #print axioms): clean, 5.8 s; sorryAx from the existing upstream framework sorry, acceptable at stage 2. Non-blocking: upstream vs Sf weight predicate and Weil vs étale AS sheaf encodings coexist, consistent with landed precedents and left to stage 3; second-reading section is the post-2026-10-17 placeholder."
+ },
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.ArtinSchreierPurity",
+  "declaration": "AlgebraicGeometry.isPunctuallyPureOfWeight_artinSchreier",
+  "statement": "theorem isPunctuallyPureOfWeight_artinSchreier (ι : PadicAlgCl l →+* ℂ)\n    (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :\n    (artinSchreier ψ a).IsPunctuallyPureOfWeight ι 0",
+  "branch": "slopmaster2",
+  "by": "Q16",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing upstream purity theorem for the canonical adic Weil Artin–Schreier sheaf. Specialize the character to the fixed nondegenerate trace character, a to the value of the specified unit, and ι to iota.toRingHom. The theorem is valid for all characters and scalars; this records the existing theorem rather than strengthening the DAG statement. Its punctual predicate is the upstream adic Weil-heart encoding of the same closed-point eigenvalue condition; the newer Sf predicate uses the common-stage heart, with the comparison left to stage 3."
  }
 }

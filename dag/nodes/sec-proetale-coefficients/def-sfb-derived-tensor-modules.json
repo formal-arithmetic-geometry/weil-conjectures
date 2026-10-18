@@ -426,5 +426,31 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bc8f4750",
+  "group": "NQ",
+  "result": "pass",
+  "note": "The existing-declaration record binds the node to upstream CondensedRing.derivedTensor and Mod.derivedMonoidalCategory, and every hypothesis and clause matches. #print shows the derived monoidal instance is built from Mod.monoidalCategory (relative tensor). A probe proved by rfl that derivedTensor = curriedTensor of Mod.derivedMonoidalCategory. The specialization takes any commutative condensed Λ and any scheme X, using condensedRingObj like the landed pulled-back-coefficients record. The statement field is verbatim. Universes are independent except the Grothendieck size convention shared with lem-sfb-derived-monoidal. The nt_compile probe found all 6 declarations; derivedTensor uses only standard axioms. Node diff is the lean record only. The second-reading section is the post-2026-10-17 standard note. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.derivedTensor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedTensor",
+   "CategoryTheory.Mod.derivedMonoidalCategory",
+   "CategoryTheory.Mod.isLeftDerivedFunctor₂_curriedTensor",
+   "CategoryTheory.Mod.laxMonoidalQ",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isLeftDerivedFunctor₂_derivedTensor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.laxMonoidal_Q"
+  ],
+  "statement": "noncomputable def derivedTensor :\n    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ⥤\n      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj Λ X)) ⥤\n        DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n          (condensedRingObj Λ X))",
+  "branch": "slopmaster2",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing upstream declarations in the published pro-etale framework (coord/pefw-upstream-framework.md), confirmed with scompile.py --source. The primary declaration is the condensed-coefficient specialization, defined as curriedTensor on DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)). The public import of ModuleObjects.DerivedCategory supplies the general Mod.derivedMonoidalCategory under exactly the closed symmetric monoidal, additive, Grothendieck abelian and functorial-flat-resolution hypotheses. The two IsLeftDerivedFunctor₂ instances identify this tensor with the K-flat derived relative tensor; no second construction or new axiom is introduced. The slopmaster2 branch label denotes the published WeilConjectures source root."
  }
 }
