@@ -13,9 +13,65 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\eta_P:P\\to P^\\#$ for the sheafification unit. By [def-weil-pbc-sheafification], $P^\\#$ is a sheaf. Thus the equalizer definition in [def-weil-pbc-sites-and-cohomology] makes its restriction map along every cover injective. In particular $P^\\#(\\varnothing)$ is a singleton, by the empty covering. Since $P(\\varnothing)$ is also a singleton, the conclusion holds if $W=\\varnothing$. For all other $W$ we use the same argument below; an empty refinement is allowed and the corresponding product is a singleton.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH, proposition-sheafification-adjoint; Tags 00VM/00VR, sheaf equalizer condition, including the empty cover"
+   }
+  },
+  {
+   "text": "For injectivity take $p,q\\in P(W)$ with $\\eta_{P,W}(p)=\\eta_{P,W}(q)$. The last assertion of [lem-weil-pbc-site-sheafification-sections-local] gives a covering $\\{v_i:V_i\\to W\\}$ with $v_i^*p=v_i^*q$ for every $i$. Apply the hypothesis on $W$ to choose a finite decomposition with component maps $j_a:W_a\\to W$ and factorizations $j_a=v_{i(a)}h_a$, where $h_a:W_a\\to V_{i(a)}$. Functoriality gives $j_a^*p=h_a^*v_{i(a)}^*p=h_a^*v_{i(a)}^*q=j_a^*q$. The assumed bijection $P(W)\\to\\prod_aP(W_a)$ is injective, so $p=q$. This also handles the empty product.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WK, lemma-sections-sheafification, with the local equality consequence of Tag 00WB, theorem-plus; finite-partition argument of proetale.tex Tag 0F63"
+   }
+  },
+  {
+   "text": "For surjectivity take $t\\in P^\\#(W)$. The local-representative assertion of [lem-weil-pbc-site-sheafification-sections-local] gives a covering $\\{v_i:V_i\\to W\\}$ and $s_i\\in P(V_i)$ with $\\eta_{P,V_i}(s_i)=v_i^*t$. Refine this cover by a finite decomposition, writing $j_a=v_{i(a)}h_a$ as above, and put $r_a=h_a^*s_{i(a)}\\in P(W_a)$. Surjectivity of $P(W)\\to\\prod_aP(W_a)$ supplies $p\\in P(W)$ with $j_a^*p=r_a$. Naturality of the presheaf morphism $\\eta_P$ gives $j_a^*\\eta_{P,W}(p)=\\eta_{P,W_a}(r_a)=h_a^*\\eta_{P,V_{i(a)}}(s_{i(a)})=j_a^*t$. The component maps $j_a$ are a covering by hypothesis, so the sheaf equalizer condition [def-weil-pbc-sites-and-cohomology] implies $\\eta_{P,W}(p)=t$. For an empty partition, the empty product supplies $p$ and separatedness for the empty cover supplies the same equality.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WK, lemma-sections-sheafification, local representatives; Tags 00VM/00VR, sheaf separatedness. Abstract adaptation of proetale.tex Tag 0F63, lemma-presheaf-value-weakly-contractible, final paragraph"
+   }
+  },
+  {
+   "text": "The preceding two steps prove that $\\eta_{P,W}$ is bijective. To check naturality, let $\\alpha:P\\to Q$ be a morphism between presheaves satisfying the hypotheses. The universal property [def-weil-pbc-sheafification] defines $\\alpha^\\#:P^\\#\\to Q^\\#$ by the equation $\\alpha^\\#\\eta_P=\\eta_Q\\alpha$; uniqueness gives the identity and composition laws. Evaluating this equation at $W$ gives $\\alpha^\\#_W\\eta_{P,W}=\\eta_{Q,W}\\alpha_W$. These are precisely the naturality squares of the claimed bijections (and, by composing with their inverses, of the inverse bijections).",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH, proposition-sheafification-adjoint, functoriality from the universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0F63, lemma-presheaf-value-weakly-contractible: abstract finite-partition argument, written directly using the local representatives and local equality theorem of Sites Tags 00WK/00WB instead of proving preservation of coproducts by the plus construction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +121,45 @@
    "results": "[loogle] OK 12 hit(s); CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts; CategoryTheory.instPreservesFiniteProductsOppositeObjFunctorIsSheafExtensiveTopology; CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective; CategoryTheory.Presheaf.instPreservesFiniteProductsOppositeObjFunctorIsSheafCoherentTopology; CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; CategoryTheory.instPreservesColimitsOfShapeSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreservesFiniteProductsColim; CategoryTheory.isSheaf_pointwiseColimit",
    "date": "2026-10-18",
    "verdict": "no match: extensive-cover descent is present, but the coherent-topology theorem assumes every object projective; isIso_toSheafify assumes the entire presheaf is a sheaf. Neither gives the component of sheafification at a single partition-refinable object for an otherwise arbitrary presheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf preserving finite disjoint unions is unchanged by sheafification at an object whose covers refine finite disjoint partitions",
+   "results": "OK 8 hits: CategoryTheory.GrothendieckTopology.sheafify_isSheaf; CategoryTheory.SheafOfTypes.finitary_extensive; LightProfinite.hasSheafify; CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover; CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify; CategoryTheory.PresheafIsFinite; CategoryTheory.presheafIsGeneratedBy_of_isFinite; LightProfinite.hasSheafify_type",
+   "date": "2026-10-18",
+   "verdict": "no match: the extensive result is descent only for coproduct covers; coherent projective results require every object projective and a specified coherent topology; isIso_toSheafify assumes the whole presheaf is already a sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteProducts, CategoryTheory.toSheafify",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: the extensive result is descent only for coproduct covers; coherent projective results require every object projective and a specified coherent topology; isIso_toSheafify assumes the whole presheaf is already a sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a finite product preserving presheaf evaluated on a projective object of an extensive site agrees with the presheaf",
+   "results": "OK 8 hits: CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp; CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts; CategoryTheory.isSheafFor_extensive_of_preservesFiniteProducts; CategoryTheory.Presheaf.isSheaf_iff_extensiveSheaf_of_projective; CategoryTheory.instPreservesFiniteProductsOppositeVal; CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts",
+   "date": "2026-10-18",
+   "verdict": "no match: the extensive result is descent only for coproduct covers; coherent projective results require every object projective and a specified coherent topology; isIso_toSheafify assumes the whole presheaf is already a sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification preserves evaluation on an object whose covers refine finite disjoint decompositions",
+   "results": "OK 8 hits: CategoryTheory.plusPlusSheaf; CategoryTheory.GrothendieckTopology.sheafify_isSheaf; CategoryTheory.GrothendieckTopology.sheafification; TopCat.Presheaf.sheafify; CategoryTheory.GrothendieckTopology.sheafify; CategoryTheory.preservesFiniteLimits_presheafToSheaf; CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification; CategoryTheory.GrothendieckTopology.instPreservesSheafification",
+   "date": "2026-10-18",
+   "verdict": "no match: the extensive result is descent only for coproduct covers; coherent projective results require every object projective and a specified coherent topology; isIso_toSheafify assumes the whole presheaf is already a sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf_iff_preservesFiniteProducts_of_projective|isSheafFor_extensive_of_preservesFiniteProducts|isIso_toSheafify",
+   "results": "OK 14 hits: Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean; Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean; Mathlib/Condensed/Explicit.lean; Mathlib/Condensed/Explicit.lean; Mathlib/Condensed/Explicit.lean; Mathlib/CategoryTheory/Sites/Sheafification.lean; Mathlib/CategoryTheory/Sites/Sheafification.lean; Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: the extensive result is descent only for coproduct covers; coherent projective results require every object projective and a specified coherent topology; isIso_toSheafify assumes the whole presheaf is already a sheaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-contractible-derived-sections-tensor",
@@ -89,5 +180,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-partition-refinement-sheafification",
+  "worker": "stage1",
+  "summary": "Retained the full statement. Proved injectivity by locally equal representatives and a partition refinement, and surjectivity by local lifts, product assembly and sheaf separatedness. Reused the existing set-valued local sheafification theorem; no new nodes. Checked empty covers, empty values, universes and naturality; repeated item Mathlib searches with two semantic phrasings and source reads.",
+  "blueprint": "The inherited ancestry serves prop-zl-smooth-proper-relative-purity, relative-duality Step 3, through the continuous-coefficient lisse/dualizable realization and Lemma 4.1(1) evaluation argument named in blueprint.from.place. Steps 2 and 3 supply the partition-refinement evaluation comparison required by lem-zl-contractible-derived-sections-tensor; step 4 supplies its coefficient naturality. No change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NY-b7a742346",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-b7a742346 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged; review.md has the step-by-step checks. Shape: one commit, the item node and its report only, no new nodes. Against the base copy, the statement, stmt_deps, blueprint, source and created fields are identical, and the 7 inherited Mathlib searches are kept with 5 added. Source: I read Stacks proetale.tex Tag 0F63 (lines 3247-3283) and sites.tex Tag 00WK. The item states 0F63 for an abstract site: finite coproducts whose component maps cover, an object W whose covers refine to finite decompositions, and a presheaf P sending finite coproducts to products with P(empty) a singleton. These hypotheses are enough. Disjointness, strictness and pullback stability are unused extra hypotheses, and they hold in the citer's settings. Instead of the source's two plus constructions, the proof argues directly from lem-weil-pbc-site-sheafification-sections-local (00WK/00WB), so proof_origin agent is correct. Steps: step 1 uses the empty covering to make the sheafification a singleton at the empty object (elementary). Step 2 (injectivity) takes the cover where the two sections agree from the last clause of the local lemma, refines it to a finite decomposition, and uses injectivity of the product map. Step 3 (surjectivity) takes local representatives from the first clause, pulls them back to the components, assembles a section with the product bijection, checks its image using naturality of the sheafification unit, and concludes by separatedness on the component cover, which the item's hypothesis makes a covering. Step 4 gets naturality from the universal property (elementary). Each cited statement says exactly what its step takes; in particular, the plus construction is never claimed from the sheafification definition (error C4 avoided). Edge cases checked: W empty, the empty decomposition, a nonempty W with P(W) empty, and a one-component decomposition. Applicability to the citer: an extremally disconnected T and a w-contractible affine both satisfy the refinement property. Duplicates: I searched with rg for 0F63, presheaf-value-weakly-contractible and 'finite disjoint unions to products'. lem-weil-pbc-proetale-sheafification-wcontractible-sections covers only one left-Kan presheaf on schemes, so it is not a duplicate. The only citer is lem-zl-contractible-derived-sections-tensor, and it uses the item as stated. Route: the one off-unit statement is lem-weil-pbc-site-sheafification-sections-local (unit sk-thm-p1). Its Lean is finished (CategoryTheory.sheafification_sections_local, closed in slopmaster2), so it counts as a generic tool rather than route, and I accept it. Mathlib: the candidates found (isSheaf_iff_preservesFiniteProducts_of_projective, isIso_toSheafify, isSheafFor_extensive_of_preservesFiniteProducts) need stronger global hypotheses, so the item is not a Mathlib leaf. No SGA citation. No target, base-change morphism or coefficient category is involved. No fixes written."
  }
 }
