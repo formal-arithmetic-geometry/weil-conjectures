@@ -203,5 +203,28 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-545dc215f (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the statements of every cited node, unit sk-i-curve-zero and the chapter, and the sources at the cited places: Stacks 080D/080E/080F (with the 080F proof), 0805 (with proof), 0814 proof paragraph 1, 07ZP, and the two Mathlib declarations. The statement is true and unchanged. I tested it on I=O_S, I=0, j=id and Z/p-torsion over Spec Z_(p). A non-flat j=Spec F_p->Spec Z gives F_p against 0, so flatness of j is needed. No DAG node duplicates the item. Repairs, three faults: (C5) both new Mathlib leaves duplicate existing ones: lem-trf-flat-morphism-base-change = lem-weil-pbc-flat-morphism-base-change (same declaration, line 81), and lem-trf-flat-pullback-exact is contained in lem-weil-pbc-flat-tensor-exact. Both are dropped and their citations repointed. (E5/C1) Step 3 applied flat exactness to 0->K->H->F^b->0, which only shows (j^b)^*K injects into H_Y. It then asserted without proof that pullback commutes with restriction to the exceptional complement (flat base change of the open-immersion pushforward). I rewrote it as the 080F/07ZP affine-chart a-power-torsion argument using existing nodes: lem-weil-pbc-flat-morphism-affine-criterion, thm-nagata-blowup-principalizes-center, lem-weil-pbc-affine-module-basic-open-localization(2), lem-weil-pbc-module-pullback-affine-sections-bijective, lem-weil-pbc-flat-tensor-exact and lem-weil-pbc-affine-opens-basis. I also made precise: j^b is the base change of j along X_B->X; D_Y=(j^b)^{-1}D via V(IO_T)=e^{-1}V(I); H_Y=p_Y^*j^*F with the composition isomorphism from p_X j^b = j p_Y; Step 4 uses right exactness of the left adjoint pullback (the unneeded cokernel-image lemma is removed). (C8) Off-unit tool uses were undeclared. I declared and accept thm-nagata-blowup-flat-base-change, thm-nagata-blowup-principalizes-center, lem-weil-pbc-affine-module-basic-open-localization and lem-weil-pbc-module-pullback-affine-sections-bijective, all generic tools. No cycle (checked), no SGA. The corrected item is in fixes/dag/nodes/sec-trace-formula/; details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleStrictTransformFlatPullback",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.existsUnique_moduleStrictTransform_flatPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformFlatPullbackMap",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformFlatPullbackSourceIso",
+   "AlgebraicGeometry.Scheme.Modules.existsUnique_moduleStrictTransform_flatPullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleStrictTransformFlatPullback.lean",
+  "statement": "theorem existsUnique_moduleStrictTransform_flatPullback {X S Y T : Scheme.{u}} (f : X ⟶ S) (e : T ⟶ S) (g : Y ⟶ T) (j : Y ⟶ X) (h : j ≫ f = g ≫ e) [Flat e] [Flat j] (I : S.IdealSheafData) [I.toModules.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] : ∃! θ : (tensorPullback (moduleStrictTransformFlatPullbackMap f e g j h I)).obj (moduleStrictTransform f I F) ≅ cokernel (kernel.ι (moduleStrictTransformRestriction g (I.comap e) ((tensorPullback j).obj F))), (tensorPullback (moduleStrictTransformFlatPullbackMap f e g j h I)).map (moduleStrictTransformπ f I F) ≫ θ.hom = (moduleStrictTransformFlatPullbackSourceIso f e g j h I F).hom ≫ cokernel.π (kernel.ι (moduleStrictTransformRestriction g (I.comap e) ((tensorPullback j).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ab3411d8",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Read the item, all 9 stmt_deps and their Lean (moduleStrictTransform*, tensorPullback/SectionComp, IdealSheafData.comap = I·O_T, blowupFlatBaseChange/Iso and _hom_snd in WeilConjectures/Blowup/FlatBaseChange, cited via closed slopmaster2 lean_audit as brief-stage2 allows). Every clause matches: one universe u; h : j≫f=g≫e; [Flat e][Flat j] only; [I.toModules.IsFiniteType]; [F.IsQuasicoherent]; jᵇ = pullback.lift(fst≫j, snd≫bc.hom≫fst), no free map; source iso from the normalized tensorPullbackSectionComp plus lift_fst; target cokernel = moduleStrictTransform g (I.comap e) (j^*F) by rfl (probed); ∃! iso with the quotient equation. Edge cases I=O_S, I=0, empty schemes, F=0 and identity maps are fine; flatness of j is needed. nt_compile --json: clean, 3.6 s, no warnings; probe clean. lean.statement verbatim; only the item's lean key changed; dependency nodes identical to live; one sorry (the theorem); docstrings complete; no duplicate in the side trees. Advisories: moduleStrictTransformπ is owned by theorem node lem-trf-strict-transform-sheaf-kernel, not in stmt_deps (plain cokernel.π abbreviation; stage 2 cannot add it); four plain proof-route imports are removable without breaking the compile; the two Nagata nodes have no lean record."
  }
 }
