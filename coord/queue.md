@@ -1,6 +1,6 @@
 # Work queue
 
-169 items; claim with `tools/claim.py next <group> [--stage N]`.
+168 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (169)
+## Stage 3: modules to prove (168)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -139,7 +139,6 @@
 | `Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap` | 12 | 2 | proof |
 | `Sheaf.CategoryTheory.FunctorPreservesSequentialHomotopyColimit` | 12 | 1 | proof |
 | `Sheaf.CategoryTheory.MateIsoAlongEquivalences` | 12 | 1 | proof |
-| `Sheaf.Paper.IntegralResidueTensorRouteKFlat` | 12 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.FiniteMorphism` | 12 | 2 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization` | 12 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.ArtinSchreier` | 12 | 4 | proof |
