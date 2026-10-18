@@ -327,5 +327,29 @@
   "group": "Q98",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-5fd2ec7a4 (reviewer sub-agent of L); spot-checked: I read the item and all 23 cited statements; there are no new nodes and no fixes. The item gives the forward direction of Stacks 095N (etale-cohomology.tex 12412-12466) with the same hypotheses: qcqs X, Noetherian R, constructible locally closed strata, finitely generated (f.g.) values, and no finite-set requirement. The statement change is only the backslash normalisation, so the target is not weakened. Steps: (1) Noetherian f.g. ⇒ f.p., and the local-gluing core node makes the global and affine-local predicates agree, so the Noetherian Serre closure applies; tracing a constructible set on an affine (retrocompact) open is two lines. (2) Sheafification of the free presheaf ≅ j_!R_W: checked against the sum-extension blueprint_update, local injectivity and surjectivity both hold. (3) 03S0, 03S6, 03S7 and finite-étale pushforward apply because W is affine and therefore qcqs, and the strata are constructible; this rewrites the argument of lem-per-noetherian-etale-sum-constructible rather than citing that weaker statement. (4) The support node's explicit statement defines constructible inline with f.g. values, consistent with its landed Lean IsConstructibleSheaf, and its proof does not use finite sets. (5) Point lift, stalk comparison and f.g. stalk generation. (6) Spectral compactness: the containment for the union of the finite subfamily is correct, the empty-family case gives X=∅, and conservativity finishes. (7) Second application to the kernel, elementary. Edge cases checked: X=∅, F=0, R=0, R=ℤ, infinite R. No cycle (closure of 912 nodes). new-constructible-affine-free-presentation-general is an overlap only under the finite-stalk def-constructible-constructible; noted for the maintainer, not cited. Batch-5: lem-trf-noetherian-submodule-finitely-presented is a pure-algebra Mathlib leaf with empty proof_deps, outside both assumptions, so it is accepted. All 19 declared tool_uses are generic and accepted. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianAffineFreePresentation",
+  "declaration": "AlgebraicGeometry.Scheme.exists_noetherian_affine_free_presentation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.affineFreeEtaleModule",
+   "AlgebraicGeometry.Scheme.finiteAffineFreeCoproduct",
+   "AlgebraicGeometry.Scheme.exists_noetherian_affine_free_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianAffineFreePresentation.lean",
+  "statement": "theorem exists_noetherian_affine_free_presentation (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (R : Type (u + 1)) [CommRing R] [IsNoetherianRing R] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) [IsConstructibleSheaf F] : ∃ (n m : ℕ) (U : Fin n → X.Etale) (V : Fin m → X.Etale), (∀ i : Fin n, IsAffine (U i).left) ∧ (∀ j : Fin m, IsAffine (V j).left) ∧ ∃ (f : finiteAffineFreeCoproduct X R m V ⟶ finiteAffineFreeCoproduct X R n U) (g : finiteAffineFreeCoproduct X R n U ⟶ F) (w : f ≫ g = 0), Nonempty (IsColimit (CokernelCofork.ofπ g w))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The two real-data helper definitions specialize the recorded etale sum-extension and finite categorical coproduct; no new constructibility predicate is introduced. IsConstructibleSheaf uses constructible immersed strata and finitely generated module stalks, with no finite-set hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae8ccc807",
+  "group": "NL",
+  "result": "pass",
+  "note": "Clause-by-clause match with node/Stacks 095N: qcqs X via CompactSpace+QuasiSeparatedSpace, Noetherian R : Type (u+1) (recorded convention), ModuleCat.{u+1} R étale sheaves, IsConstructibleSheaf (recorded in def-weil-pbc-locally-constant-finite-type-modules §1(B) record; constructible locally closed immersed strata, upperStar restrictions étale-locally constant with f.g. stalks ⇔ node's f.g. constant values), Fin n/Fin m affine X.Etale families, summands = etaleLowerShriek of constant regular module (real data), finite coproduct = colimit of Discrete.functor, exactness as IsColimit cokernel cofork. Edge cases X=∅, F=0, R=0, infinite R covered; no extra hypotheses. Statement verbatim; node unchanged vs live except lean; docstrings/source/blueprint/7 proof steps present; only sorry. nt_compile --json clean 4.1 s. Advisory: overlap with proved new-constructible-affine-free-presentation-general (Λ[h_W] form, not literal duplicate); proof-only imports unused by statement."
  }
 }
