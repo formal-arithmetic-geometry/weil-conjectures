@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroLocus
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.WeilSheaf.FourierInversion.ArtinSchreier
 public import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
@@ -76,27 +77,6 @@ theorem WeilComplex.nonempty_iso_upperStar_tensorLisse_artinSchreierOf_comp_uppe
       (Functor.isoWhiskerRight A (WeilComplex.derivedLowerShriek k₀ l π'))) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (C₁.symm ≪≫ E ≪≫ C₂) _ ≪≫ Functor.associator _ _ _⟩
-
-/-- The zero locus of a function: if `i : Z ⟶ X` is the base change of the zero section of
-`𝔸¹_S` along `h : X ⟶ 𝔸¹_S`, the image of `i` is the complement of the basic open set of the
-function `h^* t`. -/
-theorem range_eq_compl_basicOpen_of_isPullback {X Z S : Scheme.{u}}
-    (h : X ⟶ 𝔸(PUnit.{u + 1}; S)) (i : Z ⟶ X) (p : Z ⟶ S)
-    (hi : IsPullback p i (AffineSpace.zeroSection PUnit.{u + 1} S) h) :
-    Set.range i = (X.basicOpen (h.appTop (AffineSpace.coord S PUnit.unit)) : Set X)ᶜ := by
-  have hr :
-      Set.range i = Set.range (pullback.snd (AffineSpace.zeroSection PUnit.{u + 1} S) h) := by
-    ext x
-    refine ⟨?_, ?_⟩
-    · rintro ⟨z, rfl⟩
-      exact ⟨hi.isoPullback.hom z, by rw [← Scheme.Hom.comp_apply, hi.isoPullback_hom_snd]⟩
-    · rintro ⟨w, rfl⟩
-      exact ⟨hi.isoPullback.inv w, by rw [← Scheme.Hom.comp_apply, hi.isoPullback_inv_snd]⟩
-  rw [hr, Scheme.Pullback.range_snd, AffineSpace.range_zeroSection]
-  ext x
-  simp only [Set.mem_preimage, Set.mem_ofPred_eq, Set.mem_compl_iff, SetLike.mem_coe]
-  rw [← Scheme.preimage_basicOpen_top]
-  exact ⟨fun H ↦ H PUnit.unit, fun H _ ↦ H⟩
 
 /-- **The delta kernel on a trivial line bundle** (the relative form of blueprint
 `lem-fd-convolution-kernel`, `sk-prop-convolution-kernel`). Let `h` be a function on a
