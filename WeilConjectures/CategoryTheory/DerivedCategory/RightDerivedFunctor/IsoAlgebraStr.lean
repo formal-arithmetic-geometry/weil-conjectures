@@ -81,4 +81,86 @@ theorem str_homologyRightDerivedFunctorForgetIso {K : IsoAlgebra F}
   simp only [Category.assoc] at hβ
   exact hβ.symm
 
+section Frobenius
+
+variable {E : Type*} [Category E] [Abelian E] (ΓD : D ⥤ E) [ΓD.Additive]
+  [PreservesFiniteLimits ΓD] [PreservesFiniteColimits ΓD] (ΓC : C ⥤ E) [ΓC.Additive]
+  (κ : L ⋙ ΓD ≅ ΓC) (τ : ΓD ⟶ G ⋙ ΓD)
+
+/-- The Frobenius `Γ_C(a) ≅ Γ_D(L a) ⟶ Γ_D(G (L a)) ≅ Γ_D(L (F a)) ⟶ Γ_D(L a) ≅ Γ_C(a)` of an
+algebra `a`, built from `τ : Γ_D ⟶ G ⋙ Γ_D`, `e` and the structure isomorphism of `a`. -/
+@[simps]
+noncomputable def frobeniusNatTrans : forget F ⋙ ΓC ⟶ forget F ⋙ ΓC where
+  app X := κ.inv.app X.carrier ≫ τ.app (L.obj X.carrier) ≫
+    ΓD.map (e.hom.app X.carrier ≫ L.map X.str.hom) ≫ κ.hom.app X.carrier
+  naturality X Y f := by
+    have h1 := κ.inv.naturality f.hom.f
+    have h2 := τ.naturality (L.map f.hom.f)
+    have h3 := e.hom.naturality f.hom.f
+    have h4 := f.hom.h
+    have h5 := κ.hom.naturality f.hom.f
+    simp only [Functor.comp_obj, Functor.comp_map] at h1 h2 h3 h5
+    simp only [Functor.comp_obj, Functor.comp_map, forget_map, str_hom, Category.assoc]
+    rw [reassoc_of% h1, reassoc_of% h2, ← h5, ← ΓD.map_comp_assoc, ← ΓD.map_comp_assoc,
+      Category.assoc, ← L.map_comp, ← h4, L.map_comp, reassoc_of% h3, ΓD.map_comp_assoc]
+
+/-- The global sections `Γ_D` of the `r`-th homology of `RM(K[0])` are the `r`-th homology of
+the complex `Γ_C(I)` of global sections of an injective resolution `I` of `K`. -/
+noncomputable def globalSectionsHomologyIso {K : IsoAlgebra F} (I : InjectiveResolution K)
+    (r : ℕ) :
+    ΓD.obj ((forget G).obj ((DerivedCategory.homologyFunctor _ r).obj
+        ((mapOfNatIso e).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj K)))) ≅
+      ((I.cocomplex.sc r).map (forget F ⋙ ΓC)).homology :=
+  ΓD.mapIso (homologyRightDerivedFunctorForgetIso e I r) ≪≫
+    ((((mapResolution e I).sc r).map (forget G)).mapHomologyIso ΓD).symm ≪≫
+      ShortComplex.homologyMapIso
+        ((I.cocomplex.sc r).mapNatIso (Functor.isoWhiskerLeft (forget F) κ))
+
+/-- **The Frobenius of a right derived functor of algebras.** The Frobenius
+`Γ_D(H) ⟶ Γ_D(G H) ⟶ Γ_D(H)` of the `r`-th homology `H` of `RM(K[0])`, built from
+`τ : Γ_D ⟶ G ⋙ Γ_D` and the structure isomorphism of `H`, is the map induced on the `r`-th
+homology of `Γ_C(I)` by the Frobenius `frobeniusNatTrans` of the terms of `I`. -/
+theorem frobenius_globalSectionsHomologyIso {K : IsoAlgebra F} (I : InjectiveResolution K)
+    (r : ℕ) :
+    (τ.app _ ≫ ΓD.map ((DerivedCategory.homologyFunctor _ r).obj
+        ((mapOfNatIso e).rightDerivedFunctor.obj
+          ((DerivedCategory.singleFunctor _ 0).obj K))).str.hom) ≫
+        (globalSectionsHomologyIso e ΓD ΓC κ I r).hom =
+      (globalSectionsHomologyIso e ΓD ΓC κ I r).hom ≫
+        ShortComplex.homologyMap
+          ((I.cocomplex.sc r).mapNatTrans (frobeniusNatTrans e ΓD ΓC κ τ)) := by
+  have hstr := ΓD.congr_map (str_homologyRightDerivedFunctorForgetIso e I r)
+  have key₁ := ShortComplex.homologyMap_mapNatTrans
+    (((mapResolution e I).sc r).map (forget G)) τ
+  rw [ShortComplex.mapHomologyIso_comp] at key₁
+  have key₂ := ShortComplex.mapHomologyIso_hom_naturality
+    (((mapResolution e I).sc r).mapNatTrans (strNatTrans G)) ΓD
+  have k₁ : τ.app _ ≫ ΓD.map ((((mapResolution e I).sc r).map (forget G)).mapHomologyIso G).inv =
+      ((((mapResolution e I).sc r).map (forget G)).mapHomologyIso ΓD).inv ≫
+        ShortComplex.homologyMap ((((mapResolution e I).sc r).map (forget G)).mapNatTrans τ) ≫
+          (((((mapResolution e I).sc r).map (forget G)).map G).mapHomologyIso ΓD).hom := by
+    rw [key₁]
+    simp
+  simp only [globalSectionsHomologyIso, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
+    ShortComplex.homologyMapIso_hom, Category.assoc]
+  rw [← ΓD.map_comp_assoc, hstr, Functor.map_comp, Functor.map_comp, Category.assoc,
+    Category.assoc]
+  erw [← τ.naturality_assoc]
+  congr 1
+  rw [reassoc_of% k₁]
+  erw [← reassoc_of% key₂]
+  simp only [Iso.hom_inv_id_assoc, ← ShortComplex.homologyMap_comp]
+  congr 2
+  ext
+  all_goals
+    simp only [ShortComplex.comp_τ₁, ShortComplex.comp_τ₂, ShortComplex.comp_τ₃,
+      ShortComplex.mapNatTrans_τ₁, ShortComplex.mapNatTrans_τ₂, ShortComplex.mapNatTrans_τ₃,
+      ShortComplex.mapNatIso, Functor.mapShortComplex_map_τ₁, Functor.mapShortComplex_map_τ₂,
+      Functor.mapShortComplex_map_τ₃, frobeniusNatTrans_app, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerLeft_app]
+    erw [Iso.hom_inv_id_app_assoc]
+    rfl
+
+end Frobenius
+
 end CategoryTheory.Endofunctor.IsoAlgebra
