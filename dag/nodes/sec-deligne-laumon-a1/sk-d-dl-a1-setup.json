@@ -116,5 +116,27 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-b931fc8eb (reviewer sub-agent of L); spot-checked: FIX: I added four citations to stmt_deps; nothing else in the item changed. Checks: (1) The item statement matches main-20261015 sk-d-dl-a1-setup/_section.md (order 3066) word for word. The delivery creates no new node, and the unit record's realized fields are correct (statement [item], no steps). (2) rem-dl-a1-conventions (order 3067, same unit, already reviewed) states this setup sentence by sentence with citations. Recording it in same_as and citing it is correct; it is a blueprint node, not a created duplicate. (3) I checked each clause against the node it comes from. Pure of weight w and the punctual upper bound: def-weil-punctual-weights. '(-1) raises weights by two': lem-tw-tate-twist-weight-shift with n=-1; with geometric Frobenius, Qlb(-1) has eigenvalue q, weight 2. Stalks at missing points: lem-wf-boundary-stalk-invariants (smooth curve A1, F lisse, closed boundary point). j_{!*}(F[1])=(j_*F)[1]: lem-dl-a1-curve-intermediate-extension (A1 is smooth, geometrically connected, separated). Unramified at infinity iff trivial inertia: lem-dl-a1-lisse-extension-inertia with C0=U0∪{∞}. I tested it on the constant, Kummer and Artin-Schreier sheaves. Geometrically constant: cor-galois-lisse-representations; Qlb(-1) shows the Frobenius module can be nontrivial. (4) The two slopmaster2 predicates (Defs.lean lines 63-102) are sorry-free and match clauses 6 and 7. They cover only part of the item, so the node stays split. (5) Fix (C4/B3): clauses 6 and 7 were supported only through rem-dl-a1-conventions. I added d-real-boundary, def-wf-fundamental-representation, lem-dl-a1-lisse-extension-inertia and cor-galois-lisse-representations, all already in rem-dl-a1-conventions' closure. No cycle. (6) Batch-5 check: the closure of the item's dependencies is contained in rem-dl-a1-conventions' existing closure. It reaches neither thm-trf-grothendieck-lefschetz-qbar, sk-thm-trace-transport, sk-thm-sf-verdier-exchange, nt-target-poincare-isiso nor any target. Every flagged citation is a general definition or a general lemma: lisse sheaves, punctual weights, Tate twist and its weight shift, ordinary direct image, inertia-invariant stalks, the conventions node, and the lisse-sheaf/pi1 correspondence. None is one of the two assumed results or a step of their proofs, so no nt-assume leaf is needed. No SGA source is cited, no tool_uses are needed, and no target is weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9853bae16",
+  "group": "N3",
+  "result": "pass",
+  "note": "Delivery only adds lean field (existing: true) + report; statement, stmt_deps, unit and notes unchanged. Attached upstream AffineLine.Defs predicates IsGeometricallyConstant/IsUnramifiedAtInfinity (identical file in slopmaster2 and the side clone; same record as landed rem-dl-a1-conventions, linked by same_as). lean.statement matches line 63 verbatim. Bodies checked clause by clause: W forced to U0∪{∞} via ι⁻¹W=range j and ι.range⊔W=⊤, canonical lift j', lisse Weil G, Weil iso; geometric constancy = finite sum of AdicSheaf.unit on every connected geometric open, Frobenius dropped. Other conventions delegated to cited deps. Edge cases: n=0, empty V, j=id (Artin-Schreier), disconnected fibre, nontrivial Frobenius scalar. Not hollow (real pro-etale WeilSheaf/IsLisse/upperStar), no sorry, no extra assumptions or universe restriction. Scratch #check/#print probe via nt_compile --json: EXIT 0, 4.4 s, no warnings. Second reading section is the standard placeholder (current convention). Informational: lem-wf-boundary-stalk-invariants record names only module Boundary although the boundaryStalkEquivInvariants declarations are in BoundaryStalk.lean; not this item's fault."
+ },
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.Defs",
+  "declaration": "AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant",
+   "AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity"
+  ],
+  "statement": "def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop",
+  "branch": "slopmaster2",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing predicates introduced by the setup, also recorded by rem-dl-a1-conventions. The first forgets the Weil structure and requires finite sums of the constant adic coefficient sheaf on every connected geometric open; the second requires a lisse Weil extension on exactly U₀ union infinity in the standard projective chart. Finite-field, geometric cohomology/Frobenius, weight, twist, ordinary-image and perverse/inertia conventions reuse the recorded statement dependencies. No duplicate definition or new theorem is introduced. See the worker report for full clause matching and the boundary dependency metadata discrepancy."
  }
 }

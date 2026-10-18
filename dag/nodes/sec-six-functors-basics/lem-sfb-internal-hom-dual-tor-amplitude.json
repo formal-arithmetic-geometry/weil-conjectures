@@ -430,27 +430,26 @@
  "lean": {
   "module": "Sheaf.Paper.InternalHomDualTorAmplitude",
   "declaration": "AlgebraicGeometry.ProEtale.internalHom_dual_tor_amplitude",
-  "file": "lean/Sheaf/Paper/InternalHomDualTorAmplitude.lean",
-  "statement": "theorem internalHom_dual_tor_amplitude (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (S : Scheme.{u}) [S.Over (Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) [IsCommMonObj Λ.X] (_hΛ : (∃ (A : Type u) (_ : CommRing A) (_ : Finite A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), (∃ n : ℕ, (ℓ ^ n : A) = 0) ∧ Nonempty (Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A))) ∨ Nonempty (Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ Nonempty (Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨ Nonempty (Λ ≅ Mon.mk ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (Profinite.padicSubfieldCondensedRing ℓ E.1)))) ∨ Nonempty (Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) (P : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ.X S))) (hP : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S, ∀ i : 𝒰.I₀, ∃ F : CochainComplex (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ.X) ℤ, (∃ c d : ℤ, ∀ n : ℤ, n < c ∨ d < n → IsZero (F.X n)) ∧ (∀ n : ℤ, FiniteProjectiveCondensedModule Λ (F.X n)) ∧ ∃ hG : ((upperStarFromPoint (𝒰.X i)).mapMod Λ.X).PreservesZeroMorphisms, Nonempty (((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory).obj P ≅ DerivedCategory.Q.obj (scalarExtensionComplex (Λ := Λ) (U := 𝒰.X i) ((upperStarFromPoint (𝒰.X i)).mapMod Λ.X) hG F))) : ∃ a b : ℤ, a ≤ b ∧ (∀ N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ.X S), ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (((CondensedRing.derivedTensor Λ.X S).obj P).obj ((DerivedCategory.singleFunctor _ 0).obj N)))) ∧ (∀ N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ.X S), ∀ q : ℤ, q < -b ∨ -a < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (((CondensedRing.derivedTensor Λ.X S).obj (relativeInternalHomDual Λ S P)).obj ((DerivedCategory.singleFunctor _ 0).obj N)))) ∧ (IsEmpty S → a = 0 ∧ b = 0)",
-  "branch": "newtargets-dag",
-  "by": "Q109",
-  "date": "2026-10-18",
-  "existing": false,
   "declarations": [
    "AlgebraicGeometry.ProEtale.scalarExtensionComplex",
    "AlgebraicGeometry.ProEtale.FiniteProjectiveCondensedModule",
    "AlgebraicGeometry.ProEtale.relativeInternalHomDual",
    "AlgebraicGeometry.ProEtale.internalHom_dual_tor_amplitude"
   ],
-  "note": "Reviewer fix: the delivered theorem took an arbitrary commutative condensed ring Λ, dropping the node's hypothesis that Λ is one of the admissible coefficient rings A, Z_ℓ, O_E, Q_ℓ, E, Q̄_ℓ of sk-def-localizing-closure (H3). The hypothesis _hΛ is added in the exact form of the landed det-sf-comp-composition-interchange (properOpenInterchange), Mon.mk Λ replaced by Λ since Λ is a bundled Mon here. The three helper definitions are listed.",
-  "fixed_by": "NT-stage2-cc-edab44357"
+  "file": "lean/Sheaf/Paper/InternalHomDualTorAmplitude.lean",
+  "statement": "theorem internalHom_dual_tor_amplitude (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (S : Scheme.{u}) [S.Over (Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) [IsCommMonObj Λ.X] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ.X) (P : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ.X S))) (hP : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S, ∀ i : 𝒰.I₀, ∃ F : CochainComplex (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ.X) ℤ, (∃ c d : ℤ, ∀ n : ℤ, n < c ∨ d < n → IsZero (F.X n)) ∧ (∀ n : ℤ, FiniteProjectiveCondensedModule Λ (F.X n)) ∧ ∃ hG : ((upperStarFromPoint (𝒰.X i)).mapMod Λ.X).PreservesZeroMorphisms, Nonempty (((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory).obj P ≅ DerivedCategory.Q.obj (scalarExtensionComplex (Λ := Λ) (U := 𝒰.X i) ((upperStarFromPoint (𝒰.X i)).mapMod Λ.X) hG F))) : ∃ a b : ℤ, a ≤ b ∧ (∀ N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ.X S), ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (((CondensedRing.derivedTensor Λ.X S).obj P).obj ((DerivedCategory.singleFunctor _ 0).obj N)))) ∧ (∀ N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ.X S), ∀ q : ℤ, q < -b ∨ -a < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (((CondensedRing.derivedTensor Λ.X S).obj (relativeInternalHomDual Λ S P)).obj ((DerivedCategory.singleFunctor _ 0).obj N)))) ∧ (IsEmpty S → a = 0 ∧ b = 0)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the current recorded IsLocalizingAdmissibleCoefficient predicate, including the full continuous-map algebraic-closure coefficient. Replaces the older expanded admissibility list; retains the finite-projective scalar models, relative dual, uniform reflected Tor intervals and empty-scheme clause. Adds published proof-plan imports and the full seven-step proof docstring. No mathematical statement correction."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-edab44357",
-  "group": "Q109",
-  "result": "fix",
-  "note": "Read node, 7 stmt_deps, source place, module, report, upstream decls (upperStarFromPoint, condensedRingObj, derivedTensor/derivedHom, upperStar exactness, proetalePrecoverage=propQC WeaklyEtale). All clauses match (local B|_U⊗_R F via retracts of finiteFree, RHom into B[0], intervals [a,b]/[-b,-a], quantifier order, empty-S clause, hG existential is a satisfiable Prop) except H3: the admissible-coefficient restriction on Λ (A,Z_ℓ,O_E,Q_ℓ,E,Qbar_ℓ, sk-def-localizing-closure) was dropped. Fix adds _hΛ verbatim from landed properOpenInterchange (Mon.mk Λ -> Λ) + 2 imports + docstring; record lists the 3 helpers; report gets a reviewer-fix section. Delivered and fixed files compile per-file with nt_compile (exit 0); a deliberate-error run confirmed the wrapper reports errors and showed the elaborated signature. Helpers not hollow, only the theorem uses sorry, docstrings/blueprint tags present, one universe u, no global build or live write."
+  "reviewer": "NT-stage2-cc-d455a00e0",
+  "group": "NB",
+  "result": "pass",
+  "note": "In-place update of the published InternalHomDualTorAmplitude module. _hΛ now uses the recorded IsLocalizingAdmissibleCoefficient predicate (all six cases; the algebraic closure of Q_ℓ as all continuous maps into PadicAlgCl, replacing the wrong colimit object padicAlgClRingObj), adds proof-dependency imports and a seven-step proof docstring. Diffed against the side clone: only the node's lean field changed; statement, dependencies and proof unchanged. All clauses checked: k with prime characteristic ≠ ℓ, separated finite-type S, cover with bounded finite-free-retract models and canonical pullback, dual = derivedHom into B[0], a≤b chosen before N, intervals [a,b] and [-b,-a], empty-S clause. Edge cases and universes ok. Helpers not hollow, only the theorem is sorry, docstrings and blueprint tags present, lean.statement is verbatim the file signature, no importers affected. nt_compile --json rc 0 in 5.0 s with no diagnostics."
  }
 }

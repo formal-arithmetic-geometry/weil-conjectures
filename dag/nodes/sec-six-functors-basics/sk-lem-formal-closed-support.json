@@ -149,5 +149,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0151eb752",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Re-delivery after landing return of 71b965d0290e (name collision). The theorem is renamed formalClosedSupportAssertions, which is correct because a theorem and the functor def formalClosedSupport say different things. The module now uses the existing FormalClosedSupportAdjunction functor and maps throughout, with ordinaryAdjunction plus counit_normalization (comparison ≫ counit = kernel inclusion, unique since the comparison is an iso) and rightAdjoint_eq fixing the canonical derived adjunction. The fiber triangle and globalRHom have the same form as before, and stratum is unchanged apart from renaming. All node clauses, hypotheses and edge cases (empty Z/U/S, L=0, rank 0 or varying, u=id, unbounded K) were checked, with one universe. The Λ generalization (any commutative condensed ring) is accepted as before, and QuasiCompact j is automatic. lean.statement is verbatim, only the lean field differs from side main, no line exceeds 100 characters, docstrings carry the source place, blueprint tag and both proof steps, and the helper is real data without sorryAx. nt_compile --json on the snapshot is clean in 21.2 s with no warnings; a probe confirmed #check, #print axioms and error reporting. Non-blocking maintainer note: the Q15 (recorded) and Q30 (unrecorded) closed-support modules duplicate one notion after a parallel merge; this item uses the Q30 functor, as the landing return asked."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FormalClosedSupport",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupportAssertions",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupportSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupportSections_additive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FormalClosedSupportAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupportAssertions"
+  ],
+  "file": "lean/Sheaf/Paper/FormalClosedSupport.lean",
+  "statement": "theorem formalClosedSupportAssertions (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) {Z U X : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) : Nonempty (FormalClosedSupportAssertions Λ i j hij)",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of return 71b965d0290e: imports and uses the existing formalClosedSupport functor from Sheaf.AlgebraicGeometry.FormalClosedSupportAdjunction throughout. The new theorem formalClosedSupportAssertions asserts the two-clause paper result, including the stratum formula; it is a different declaration from the existing functor definition, not a renamed copy of that definition."
  }
 }

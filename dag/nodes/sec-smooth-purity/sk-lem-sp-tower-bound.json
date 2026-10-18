@@ -214,5 +214,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bf31724f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_deps and their Lean records, and the modules SmoothPurityTowerShriekLevels (Base/Operations/F/finiteF/Fcomparison/Laws), SmoothPurityNormalizedTowers (spConstructibleTorTowers, spDerivedCoefficientEvaluation), SpCoefficientTowersAbelian and Compactification. Clause by clause: p≠ℓ, char-p field k, separated finite-type X,Y over Spec k, finite E; smooth-of-rel-dim-d OR geometric-fibre topologicalKrullDim≤d (separably closed points, universe u enough); arbitrary Compactification; Rf_! = exact termwise j_! then total Rp_*, transported by the section-preserving realization; conjunct 1 D+ preserved, conjunct 2 natural level iso (Fcomparison), conjunct 3 spConstructibleTorTowers preserved without normalization. Holds for all b,o, since the conjuncts follow from the fields pushEvaluation/openEvaluation and are tested level by level; no extra assumptions. Shared universe u forced by recorded Base/normalized-tower interfaces; site universes untouched. Real defs (mapDerivedCategory of realization, conjugated F), single sorry, docstrings with source/blueprint and 4 proof steps, lines ≤100, node diff lean-only, statement verbatim, report has Worker report and Second reading by Q24 (author self-check, accepted form). No duplicates found. Edge cases d=0, empty schemes/fibres, n=0, zero/nonsurjective towers, ramified E, ℓ=2 ok. nt_compile --json: rc 0, 6.7 s, no errors or warnings. No blocking findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerBound",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_tower_bound",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spTowerShriekRealization",
+   "AlgebraicGeometry.ProEtale.spTowerCompactSupport",
+   "AlgebraicGeometry.ProEtale.sp_tower_bound"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerBound.lean",
+  "statement": "theorem sp_tower_bound (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hlp : l ≠ p) (X Y : Over (Spec (CommRingCat.of k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (d : ℕ) (_hd : SmoothOfRelativeDimension d f.left ∨ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ Y.left), topologicalKrullDim (pullback f.left s : Scheme.{u}) ≤ (d : WithBot ℕ∞)) (c : Compactification f.left) (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b) (DX : SpCoefficientTowersAbelian l E X.left) (DY : SpCoefficientTowersAbelian l E Y.left) : (∀ C : spDerivedCoefficientTowers l E X.left DX, (∃ a : ℤ, @DerivedCategory.IsGE (spCoefficientTowers l E X.left) _ _ DX.hasDerived C a) → ∃ a : ℤ, @DerivedCategory.IsGE (spCoefficientTowers l E Y.left) _ _ DY.hasDerived ((spTowerCompactSupport l E b o c DX DY).obj C) a) ∧ (∀ n : ℕ, Nonempty (@DerivedCategory.Plus.ι (spCoefficientTowers l E X.left) _ _ DX.hasDerived ⋙ spTowerCompactSupport l E b o c DX DY ⋙ spDerivedCoefficientEvaluation l E Y.left DY n ≅ @DerivedCategory.Plus.ι (spCoefficientTowers l E X.left) _ _ DX.hasDerived ⋙ spDerivedCoefficientEvaluation l E X.left DX n ⋙ SpTowerShriek.finiteF l E b c n)) ∧ (∀ C : spDerivedCoefficientTowers l E X.left DX, spConstructibleTorTowers l E X.left DX C → (∃ a : ℤ, @DerivedCategory.IsGE (spCoefficientTowers l E X.left) _ _ DX.hasDerived C a) ∧ spConstructibleTorTowers l E Y.left DY ((spTowerCompactSupport l E b o c DX DY).obj C))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The geometric operations are those of det-sp-tower-shriek-levels, transported by its section-normalized realization equivalence to the original coefficient towers. The level comparison is a natural isomorphism restricted to D+; the preservation clause uses exactly spConstructibleTorTowers, without normalization. The geometric hypothesis explicitly allows smooth pure relative dimension d or the general geometric fibre bound."
  }
 }

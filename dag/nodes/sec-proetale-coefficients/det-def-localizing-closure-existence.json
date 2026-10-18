@@ -261,5 +261,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02884f863",
+  "group": "NR",
+  "result": "pass",
+  "note": "Only the item node's lean field changed; stmt_deps is the base list; no new nodes or duplicate declarations; lean.statement matches the file verbatim; the only sorry is the theorem proof. Λ is any condensed ring with only MonObj (noncommutative allowed), the site is ProEt.topology X, the module category is internal Mod over condensedRingObj, D(A) uses HasDerivedCategory.{u+1}, and S is any class. Clause (1): HasCoproducts.{u+1}, one cofan of complexes that is a colimit in every degree and after Q, and a sum of distinguished triangles that is distinguished. Clauses (2)-(3) use the landed localizingClosure/IsLocalizingSubcategory and state localizing, contains S, minimal, retract-stable (with IsTriangulated this is thick per pur9-def-thick) and the S<=S'<=Loc S equality. The landed predicate's larger object-universe index is equivalent to small sums by the idempotent-counting argument, which I checked, so no hypothesis is added. Edge cases (empty index set, empty S, zero ring, empty scheme) are covered. Docstrings carry the source place, the blueprint tag and proof steps 1-6. Both report sections exist. nt_compile --json: clean, 9.0 s, exit 0."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalizingClosureExistence",
+  "declaration": "AlgebraicGeometry.ProEtale.localizingClosure_exists",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.localizingClosure_exists"
+  ],
+  "file": "lean/Sheaf/Paper/LocalizingClosureExistence.lean",
+  "statement": "theorem localizingClosure_exists (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] (X : Scheme.{u}) [HasDerivedCategory.{u + 1} (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))] (S : ObjectProperty (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))) : HasCoproducts.{u + 1} (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) ∧ (∀ (I : Type (u + 1)) (K : I → CochainComplex (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ), ∃ c : Cofan K, (∀ n : ℤ, Nonempty (IsColimit ((HomologicalComplex.eval _ _ n).mapCocone c))) ∧ Nonempty (IsColimit (DerivedCategory.Q.mapCocone c))) ∧ (∀ (I : Type (u + 1)) (T : I → Triangle (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))), (∀ i : I, T i ∈ distTriang _) → ∃ c : Cofan T, Nonempty (IsColimit (Triangle.π₁.mapCocone c)) ∧ Nonempty (IsColimit (Triangle.π₂.mapCocone c)) ∧ Nonempty (IsColimit (Triangle.π₃.mapCocone c)) ∧ c.pt ∈ distTriang _) ∧ IsLocalizingSubcategory (localizingClosure S) ∧ (S ≤ localizingClosure S) ∧ (∀ P : ObjectProperty (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), IsLocalizingSubcategory P → S ≤ P → localizingClosure S ≤ P) ∧ (localizingClosure S).IsStableUnderRetracts ∧ (∀ S' : ObjectProperty (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), S ≤ S' → S' ≤ localizingClosure S → localizingClosure S' = localizingClosure S)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

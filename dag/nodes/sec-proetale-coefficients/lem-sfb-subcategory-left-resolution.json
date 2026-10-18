@@ -419,5 +419,23 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-31a2a6401 (reviewer sub-agent of L); spot-checked: PASS: read in full, no faults found, no repairs and no fix files. Source: I read Stacks derived.tex, lemma-subcategory-left-resolution (Tag 05T7), lines 5302-5384, the statement and the whole proof of (1). The item matches 05T7(1) hypothesis by hypothesis: abelian A; P contains 0; every object is a quotient of an element of P; K^n=0 for n>a; the conclusion is a termwise-epic quasi-isomorphism with terms in P and P^n=0 for n>a. Nothing is weakened. The 7 steps write out IH_n and the 'reader easily checks' passage (D5). Base n=a+1 uses zero objects. T_n is the kernel of (dbar_K,-u_n) from K^{n-1}+Z^nP to Z^nK, with alpha=sq and d=iota t q; both chain identities re-derived. Using the refinements leaf: clause (a) gives alpha^{n-1} epic, u_{n-1} epic via the pair (iota_K x,0), and h_n epic; clauses (a) and (c) give h_n monic, with H^n(K) the cokernel of dbar_K and (b,z sigma) lifted through q giving a boundary. Mono plus epi gives an iso because every epi is a cokernel. Recursion: H^j is fixed at stage j-1. The leaf lem-sp-abelian-refinements clauses (a) and (c) match Mathlib Refinements.lean l.82 and l.127. Edge cases checked: K=0; K concentrated in degree a; only one zero object in P with no closure properties. No duplicate found by rg: the functorial-class nodes (lem-sfb-functorial-bounded-above-class-resolution, lem-sfb-left-resolution-bounded-minus, lem-pc-functorial-cycle-pullback-construction) need functorial covers or closure hypotheses, the flat replacements are about sheaves only, and 05T6 is the dual. No cycle: the truncation-resolution-system node cites this item, and the item cites only definitions and a Mathlib leaf. No new nodes and no tool_uses. Blueprint from/via/place and same_as=[] are present. Not a target node, so the base-change and coefficient checks do not apply. No SGA cited."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2ee0f657",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Checked each clause against node and Stacks 05T7(1) (derived.tex l.5300-5315): P:C→Prop, existential zero object (IsZero), Epi covers, termwise vanishing above a; conclusion QuasiIso f, terms in P, Epi f.f n for all n, IsZero above the same a. No extra hypotheses or universe restriction; quantifier order matches. Edge cases (K=0, K in degree a only, any a, P a single zero object, P not iso-closed as in the free-module citer) are covered. Node differs from side clone only in lean; lean.statement matches the file verbatim. No duplicate in side lean/Sheaf, DAG or slopmaster2. Proof only sorry, no definitions, docstrings give source and blueprint plus the 7 steps, autoImplicit off, Worker report and Second reading sections present. nt_compile --json on side overlay: clean, exit 0, 1.8 s. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SubcategoryLeftResolution",
+  "declaration": "CochainComplex.exists_subcategory_left_resolution",
+  "file": "lean/Sheaf/Algebra/Homology/SubcategoryLeftResolution.lean",
+  "statement": "theorem exists_subcategory_left_resolution {C : Type u} [Category.{v} C] [Abelian C] (P : C → Prop) (hzero : ∃ Z : C, P Z ∧ IsZero Z) (hcover : ∀ X : C, ∃ (Y : C) (p : Y ⟶ X), P Y ∧ Epi p) (a : ℤ) (K : CochainComplex C ℤ) (hK : ∀ n : ℤ, a < n → IsZero (K.X n)) : ∃ (L : CochainComplex C ℤ) (f : L ⟶ K), QuasiIso f ∧ (∀ n : ℤ, P (L.X n)) ∧ (∀ n : ℤ, Epi (f.f n)) ∧ (∀ n : ℤ, a < n → IsZero (L.X n))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

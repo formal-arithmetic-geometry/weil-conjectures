@@ -152,5 +152,23 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-dbd5a6bb0 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement and all 6 steps. Its statement matches Stacks 0FNR (more-algebra.tex lines 38552-38578, label lemma-complex-bounded-above-free-colim-bounded-finite-free, mapped through tags/tags) hypothesis by hypothesis: commutative ring, F^n=0 for n>b, free terms, a finite list of pairs, and a conclusion of a bounded subcomplex with finite-free terms. It is not weakened. The parent lem-zl-ring-derived-dualizable-perfect uses exactly this statement. Step 1 states the induction invariant P(t) explicitly, with a lower and an upper support bound; the base case t=b+1 holds because those elements are zero, and choosing a=min(degrees,b+1) closes the induction without circularity. Steps 2-3 are correct finite-coordinate support calculations, and E is isomorphic to A^J by extension by zero and restriction. Step 4 applies P(t+1) only to degrees >= t+1. Step 5 checks stability in each degree: n<=t-1, n=t (d(E) lies in the span of the c_k, which lies in H^{t+1}) and n>t. It gets d^2=0 from the statement of def-weil-abstract-derived-category, which says exactly that. Step 6 assembles G. Edge cases tested: empty list, all inputs above b, negative degrees, the zero ring, t=b, and Z/4 with differential 2, where the coordinate submodule is needed and is used. There are no new nodes. The only citation is a definition, so there is no route issue and no tool_uses. A grep of the snapshot DAG for 0FNR and finite-free subcomplex notions finds only the item and its parent; nearby candidates such as lem-wf-bounded-free-complex-projective-cohomology-splitting, lem-pc-derived-free-complex-cover and lem-sf-perfect-ring-classical-generator state different things. The blueprint.from chain agrees with the parent's. No fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6715929c3",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read node, Stacks 0FNR source (more-algebra.tex l.38552-38578), dependency def-weil-abstract-derived-category, module, report and node diff (adds only lean). Clause by clause: CommRing A (universe u), CochainComplex (ModuleCat.{v} A) ℤ with independent universes, termwise vanishing above b via Subsingleton, Module.Free terms, List of Sigma pairs, subcomplex given as d-stable submodules (the node's own definition), containment, G n = ⊥ outside [a,b], finite free given as G n ≃ₗ Fin r → A. Exact, no extra assumptions, quantifiers in the node's order. Edge cases: empty list, zero ring, inputs above b, Z/4 with d=2. No definitions, proof is sorry only, docstrings carry source and blueprint tag and the 6 proof steps. lean.statement matches the file signature verbatim. No name collision; upstream SubcomplexFamily (same universe, finite generation) correctly not attached. nt_compile --json clean, exit 0, 4.0 s. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedFreeFiniteSubcomplex",
+  "declaration": "CochainComplex.exists_bounded_finite_free_subcomplex",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedFreeFiniteSubcomplex.lean",
+  "statement": "theorem exists_bounded_finite_free_subcomplex {A : Type u} [CommRing A] (F : CochainComplex (ModuleCat.{v} A) ℤ) (hbounded : ∃ b : ℤ, ∀ n : ℤ, b < n → Subsingleton (F.X n)) (hfree : ∀ n : ℤ, Module.Free A (F.X n)) (xs : List (Σ n : ℤ, F.X n)) : ∃ G : (n : ℤ) → Submodule A (F.X n), (∀ p ∈ xs, p.2 ∈ G p.1) ∧ (∀ n : ℤ, (G n).map (F.d n (n + 1)).hom ≤ G (n + 1)) ∧ (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → G n = ⊥) ∧ (∀ n : ℤ, ∃ r : ℕ, Nonempty ((G n) ≃ₗ[A] (Fin r → A)))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

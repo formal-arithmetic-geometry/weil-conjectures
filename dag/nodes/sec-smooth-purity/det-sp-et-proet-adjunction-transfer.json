@@ -375,5 +375,36 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c21e10863",
+  "group": "N1",
+  "result": "pass",
+  "note": "Statement matches node item by item. ℓ, k (ringChar prime, ≠ ℓ), X, Y, f separated finite type over k; A finite with ℓ^n = 0, A = 0 allowed. Étale D_ctf uses the recorded isBoundedConstructible and the generic finiteTorAmplitude (tests every degree-0 module, one common interval). Pro-étale D_ctf is the étale-origin convention of def-weil-pbc-proetale-modules; it equals sk-def-sfb-constructible's notion by sk-thm-pe-constructible-comparison, and the node's equivalence assumption already makes them coincide. Equivalences eX/eY have forward functors pinned to termwise ν^*; cf orientation checked and pinned to the canonical compactSupportSiteComparison. Counit formula recomputed from proof steps 1–2 and correct. Brown clause holds for every right adjoint on the localizing closure in the identified presentation of sk-prop-sf-rf-shriek-preservation; preservation is concluded, and the unique γ satisfies the ambient counit equation with the original Brown counit. No hollow definitions, proof is sorry (sorryAx), docstrings carry source/blueprint and the 5 steps; only the lean field changed; lean.statement is exact; no lines over 100 characters; no name collisions. nt_compile rc 0, no errors or warnings, 5–7 s; probe checks elaborate and a deliberate error is caught. Stage-3 note: the Brown-clause proof should cite sk-thm-pe-constructible-comparison."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleProEtaleAdjunctionTransfer",
+  "declaration": "AlgebraicGeometry.ProEtale.AdjunctionTransfer.etaleProEtaleAdjunctionTransfer",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.etaleProperty",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.etaleToPlus",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.proEtaleProperty",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.comparison",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.etaleLowerShriek",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.proEtaleLowerShriek",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.toLocalizing",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.localizingLowerShriek",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.brownRestriction",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.etaleProEtaleAdjunctionTransfer"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleProEtaleAdjunctionTransfer.lean",
+  "statement": "theorem etaleProEtaleAdjunctionTransfer (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (_hA : ∃ n : ℕ, (ℓ ^ n : A) = 0) (c : Compactification f) (hX : ∀ K, etaleProperty A X K → proEtaleProperty A X ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K)) (hY : ∀ K, etaleProperty A Y K → proEtaleProperty A Y ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj K)) (eX : (etaleProperty A X).FullSubcategory ≌ (proEtaleProperty A X).FullSubcategory) (eY : (etaleProperty A Y).FullSubcategory ≌ (proEtaleProperty A Y).FullSubcategory) (heX : eX.functor = comparison A X hX) (heY : eY.functor = comparison A Y hY) (hEt : ∀ K, etaleProperty A X K → etaleProperty A Y ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K)) (hPro : ∀ K, proEtaleProperty A X K → proEtaleProperty A Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K)) (cf : etaleLowerShriek A c hEt ⋙ eY.functor ≅ eX.functor ⋙ proEtaleLowerShriek A c hPro) (_hcf : ∀ K : (etaleProperty A X).FullSubcategory, (cf.inv.app K).hom = (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map (eqToHom (congrArg (fun F ↦ (F.obj K).obj) heX)) ≫ (compactSupportSiteComparison A c).hom.app ((etaleToPlus A X).obj K) ≫ eqToHom (congrArg (fun F ↦ (F.obj ((etaleLowerShriek A c hEt).obj K)).obj) heY).symm) (G : (etaleProperty A Y).FullSubcategory ⥤ (etaleProperty A X).FullSubcategory) (adjEt : etaleLowerShriek A c hEt ⊣ G) : ∃ adjPro : proEtaleLowerShriek A c hPro ⊣ (eY.inverse ⋙ G ⋙ eX.functor), (∀ N : (etaleProperty A Y).FullSubcategory, (adjPro.counit.app (eY.functor.obj N)) = (proEtaleLowerShriek A c hPro).map (eX.functor.map (G.map (eY.unitIso.inv.app N))) ≫ cf.inv.app (G.obj N) ≫ eY.functor.map (adjEt.counit.app N)) ∧ (∀ (hLoc : ∀ K, CategoryTheory.localizingClosure (proEtaleProperty A X) K → CategoryTheory.localizingClosure (proEtaleProperty A Y) ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K)) (J : (CategoryTheory.localizingClosure (proEtaleProperty A Y)).FullSubcategory ⥤ (CategoryTheory.localizingClosure (proEtaleProperty A X)).FullSubcategory) (adjBrown : localizingLowerShriek A c hLoc ⊣ J), ∃ hJ : ∀ N : (proEtaleProperty A Y).FullSubcategory, proEtaleProperty A X ((J.obj ((toLocalizing A Y).obj N)).obj), ∃! γ : (eY.inverse ⋙ G ⋙ eX.functor) ≅ brownRestriction A J hJ, ∀ N : (proEtaleProperty A Y).FullSubcategory, (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map ((γ.hom.app N).hom) ≫ (adjBrown.counit.app ((toLocalizing A Y).obj N)).hom = (adjPro.counit.app N).hom)",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the ordinary constant-ring module-sheaf presentation, canonically equivalent to both the continuous-function coefficient module category and the finite-discrete internal module-object category. The exact finite-value etale constructibility predicate is used, not the different generic finitely-generated-stalk predicate. The comparison forward functors are constrained to the recorded termwise inverse images, and cf is constrained to the canonical proper-mate/open-extension compact-support comparison for the same chosen compactification. The Brown clause quantifies over its adjunction on the recorded localizing closure in this ordinary coefficient presentation, concludes finite-Tor constructible preservation, and gives the unique ambient counit-compatible natural isomorphism. No statement correction or missing mathematical notion."
  }
 }

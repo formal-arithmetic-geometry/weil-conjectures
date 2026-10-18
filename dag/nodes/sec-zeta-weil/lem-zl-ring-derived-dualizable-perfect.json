@@ -292,5 +292,23 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-e42cf990d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks more-algebra.tex at 0FNS (statement and proof), 0FNK (converse, sign rule) and 0FNR (induction). The item statement matches 0FNS: any commutative ring, the zero ring included, ordinary unbounded D(A), left-dual convention as in 0FNK (it correctly does not copy the source's 'eps: M⊗N→R' slip). It is not a target node, so no base-change or coefficient-category identification arises. All 7 steps check: K-flat localization of the chain-level dual; V placed as the K-flat first factor of the second-factor-functor node so it is natural in an arbitrary M; Hom(A[0],-)=H^0; the finite subcomplex K is closed under d since d^2=0 and is bounded; cycle lift by termwise injectivity; i∘r=1 by bifunctoriality, then H^n(Q)=0 above c and good truncation; free left resolution with its hypotheses checked (0 free, free modules surject); 0FNR finite-free retract; rotated-triangle w=0 → split → lem-sf-perfect-ring-summand. New 0FNK node: d_D^n=(-1)^{n+1}φ∘d matches Stacks' -(-1)^n; ε is a chain map under the Koszul sign of def-pc-tensor-complex-sheaves (I checked this); range [-b,-a]; tested on the zero complex, a shifted rank-one module and a non-free projective term; not a duplicate of lem-pc-perfect-ring-dual-term-flat, lem-pc-perfect-ring-hom-tensor-dual-iso or lem-sf-finite-projective-dual. New 0FNR node matches the source exactly, keeps the necessary upper bound, and was tested on the empty list, A=0 and an infinite-rank term. Neither new node restates a clause of the item, and neither cites an SGA source. I accept the nine declared generic tool_uses. Batch-5 check: lem-trf-flat-tensor-preserves-injection is a dependency-free Mathlib flatness leaf, so it is not really a trace-formula step, but the rule asks the closure not to newly reach sec-trace-formula. FIX: in Steps 3 and 6 I replaced it with the existing sec-proper-base-change Mathlib leaf lem-weil-pbc-flat-tensor-exact, whose final clause gives K^p⊗V^q→M^p⊗V^q injective in the needed orientation, and recomputed proof_deps. The corrected whole node is at fixes/dag/nodes/sec-zeta-weil/lem-zl-ring-derived-dualizable-perfect.json; the item now cites no sec-trace-formula or sec-poincare-duality node. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23df68fc1",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read node, 3 stmt deps, Stacks 0FNS (more-algebra.tex l.38580, left-dual convention), module, report. Lean: {A:Type u}[CommRing A][HasDerivedCategory.{w}(ModuleCat.{u} A)], ∃ D ev:D⊗Q⟶𝟙 coev:𝟙⟶Q⊗D with both triangle identities (types traced; = Mathlib ExactPairing Q D orientation) ↔ IsPerfectRingComplex Q (recorded predicate, bounded finite projective model). Monoidal instance resolves (probe #synth) to the canonical K-flat DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory, unit ≅ A[0] via singleFunctorObjUnitIso; no extra hypotheses; no Noetherian/Nontrivial; w independent of u; zero ring, Q=0 and w≠u covered. Node differs from side DAG only in lean; lean.statement verbatim in file; docstrings carry source place, blueprint tag and all 7 proof steps; only sorry; report has Worker report and Second reading by NQ. nt_compile --json: clean, 5.8 s, exit 0; axioms propext/sorryAx/choice/Quot.sound. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.RingDerivedDualizablePerfect",
+  "declaration": "DerivedCategory.dualizable_iff_isPerfectRingComplex",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/RingDerivedDualizablePerfect.lean",
+  "statement": "theorem dualizable_iff_isPerfectRingComplex {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] (Q : DerivedCategory (ModuleCat.{u} A)) : (∃ (D : DerivedCategory (ModuleCat.{u} A)) (ev : D ⊗ Q ⟶ 𝟙_ (DerivedCategory (ModuleCat.{u} A))) (coev : 𝟙_ (DerivedCategory (ModuleCat.{u} A)) ⟶ Q ⊗ D), (λ_ Q).inv ≫ coev ▷ Q ≫ (α_ Q D Q).hom ≫ Q ◁ ev ≫ (ρ_ Q).hom = 𝟙 Q ∧ (ρ_ D).inv ≫ D ◁ coev ≫ (α_ D Q D).inv ≫ ev ▷ D ≫ (λ_ D).hom = 𝟙 D) ↔ IsPerfectRingComplex Q",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
