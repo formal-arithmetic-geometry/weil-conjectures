@@ -124,7 +124,47 @@ theorem normalizedDerivedComparison_commonResolution
     [QuasiIso u] [QuasiIso v] :
     normalizedDerivedComparisonResolutionMap F G r s e enoughA enoughA' β u v =
       @CategoryTheory.inv _ _ _ _ _ (hFv J T v) := by
-  sorry
+  let RF := F.rightDerivedFunctorOfQuasiIsoResolutions enoughA
+  let RG := G.rightDerivedFunctorOfQuasiIsoResolutions enoughA'
+  let ru := (r.mapHomologicalComplex (.up ℤ)).map u
+  have hF : RF.map (DerivedCategory.Q.map ru) ≫
+      (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso enoughA v).hom =
+      (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso enoughA (ru ≫ v)).hom := by
+    simp [rightDerivedFunctorOfQuasiIsoResolutionsObjIso, RF, Functor.map_comp,
+      Category.assoc]
+  have hG : RG.map (DerivedCategory.Q.map u) ≫
+      (G.rightDerivedFunctorOfQuasiIsoResolutionsObjIso enoughA' (𝟙 J)).hom =
+      (G.rightDerivedFunctorOfQuasiIsoResolutionsObjIso enoughA' u).hom := by
+    simp [rightDerivedFunctorOfQuasiIsoResolutionsObjIso, RG]
+  have hnat : RF.map (DerivedCategory.Q.map ru) ≫
+      (normalizedDerivedComparisonComplexIso F G r s enoughA enoughA' β J).hom =
+      (normalizedDerivedComparisonComplexIso F G r s enoughA enoughA' β N).hom ≫
+        s.mapDerivedCategory.map (RG.map (DerivedCategory.Q.map u)) := by
+    dsimp only [normalizedDerivedComparisonComplexIso, Iso.trans_hom, mapIso_hom,
+      Iso.symm_hom, Iso.app_inv]
+    rw [← Category.assoc, ← RF.map_comp]
+    change RF.map ((r.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q).map u ≫
+      r.mapDerivedCategoryFactors.inv.app J) ≫ _ = _
+    rw [r.mapDerivedCategoryFactors.inv.naturality u, RF.map_comp]
+    simpa only [Functor.comp_map, Category.assoc, Iso.app_hom] using
+      congrArg (fun f ↦ RF.map (r.mapDerivedCategoryFactors.inv.app N) ≫ f)
+        (β.hom.naturality (DerivedCategory.Q.map u))
+  have hcancel :
+      (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso enoughA (ru ≫ v)).inv ≫
+        RF.map (DerivedCategory.Q.map ru) =
+      (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso enoughA v).inv := by
+    apply (cancel_mono
+      (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso enoughA v).hom).mp
+    simp only [Category.assoc, hF, Iso.inv_hom_id]
+  unfold normalizedDerivedComparisonResolutionMap
+  rw [← hG, s.mapDerivedCategory.map_comp]
+  simp only [Category.assoc]
+  rw [← Category.assoc
+    (normalizedDerivedComparisonComplexIso F G r s enoughA enoughA' β N).hom,
+    ← hnat]
+  simp only [← Category.assoc]
+  rw [hcancel]
+  simpa only [Category.assoc] using hnormalized J T v
 
 /-- The inverse arrows in the formula respect the canonical changes of both resolutions.
 Source: Stacks Tag 070Y, explicit change-of-resolution consequence
@@ -153,6 +193,11 @@ theorem normalizedDerivedComparison_commonResolution_transition
       s.mapDerivedCategory.map
         (G.kInjectiveDerivedResolutionTransition enoughA' u₁ u₂).hom ≫
       (normalizedDerivedComparisonTargetIso F G r s e J₂).inv := by
-  sorry
+  rw [← normalizedDerivedComparison_commonResolution F G r s e enoughA enoughA' β
+    hFv hnormalized u₂ v₂,
+    ← normalizedDerivedComparison_commonResolution F G r s e enoughA enoughA' β
+      hFv hnormalized u₁ v₁]
+  simp [normalizedDerivedComparisonResolutionMap, kInjectiveDerivedResolutionTransition,
+    Functor.map_comp, Category.assoc]
 
 end CategoryTheory.Functor
