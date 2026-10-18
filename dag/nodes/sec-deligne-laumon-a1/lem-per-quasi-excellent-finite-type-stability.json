@@ -1,11 +1,101 @@
 {
  "id": "lem-per-quasi-excellent-finite-type-stability",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each affine open $V=\\operatorname{Spec}R$ of $Y$, [def-weil-finite-type-morphism] gives an affine open cover $h^{-1}(V)=\\bigcup_j U_{V,j}$, with $U_{V,j}=\\operatorname{Spec}A_{V,j}$ and $A_{V,j}$ a finite type $R$-algebra. The affine opens $V$ cover $Y$ by the definition of a scheme [def-pc-scheme], so all the $U_{V,j}$ together cover $X$. The hypothesis on $Y$ and [def-exc-excellent-ring] say that every such $R$ is Noetherian, a G-ring, and J-2. No finite cover of $Y$ or quasi-compactness of $h$ has been used.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-scheme",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0HAC, lemma-finite-type-excellent, affine reduction; Tag 01T1, definition-finite-type; Tag 01T2, lemma-locally-finite-type-characterize"
+   }
+  },
+  {
+   "text": "Fix a chart $R\\to A=A_{V,j}$ from Step 1. Its finite type hypothesis and the Noetherianity of $R$ meet exactly the hypotheses of [lem-weil-pbc-finite-type-algebra-noetherian], so $A$ is Noetherian. Since $R$ is a G-ring, apply [lem-weil-pbc-finite-type-over-g-ring] to the same map to obtain that $A$ is a G-ring. Neither theorem requires $R\\to A$ to be injective or $R$ to be universally catenary.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-over-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, finite type case; Tag 07PV, proposition-finite-type-over-G-ring; algebra.tex Tag 00FN, lemma-Noetherian-permanence"
+   }
+  },
+  {
+   "text": "The same $A$ is J-2 directly from the definitions. Indeed, let $C$ be any finite type $A$-algebra. Choose finitely many $R$-algebra generators $a_1,\\ldots,a_r$ of $A$ and finitely many $A$-algebra generators $c_1,\\ldots,c_s$ of $C$, using [def-weil-pbc-finite-type-algebra]. Expressing each coefficient from $A$ as a polynomial in the $a_i$ shows that the images of the $a_i$ together with the $c_j$ generate $C$ over $R$. Thus $C$ is a finite type $R$-algebra, and J-2 for $R$ says its regular locus is open. As this holds for every $C$, [def-exc-excellent-ring] gives J-2 for $A$. This is the finite type J-2 argument of Tag 07QU, with the composition of generators written out.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, first proof sentence; Tag 07P7, definition-J"
+   }
+  },
+  {
+   "text": "The affine cover of Step 1 has Noetherian coordinate rings by Step 2. Hence $X$ is locally Noetherian by [pqf-def-locnoeth]. Apply [lem-trf-g-ring-affine-cover] to this cover and its G-rings from Step 2: every affine open $W\\subseteq X$ has a G-ring $B=\\mathcal O_X(W)$. In particular $B$ is Noetherian, since this is part of [def-weil-pbc-g-ring]. Now [lem-trf-j2-affine-cover] applies to the same cover: its required local Noetherianity has just been established, and its charts are J-2 by Step 3. Thus every such $B$ is also J-2. These cover-locality statements apply to arbitrary schemes and arbitrary affine covers; no separatedness, finiteness of the cover, or assumption that intersections of affine opens are affine is needed.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-trf-g-ring-affine-cover",
+    "def-weil-pbc-g-ring",
+    "lem-trf-j2-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0HAB, lemma-locally-excellent, quasi-excellent part of proof, using Tag 07R4, lemma-J, and properties.tex Tag 0HA5, lemma-locally-G-scheme"
+   }
+  },
+  {
+   "text": "For every affine open $W\\subseteq X$, Step 4 gives precisely Noetherianity, the G-ring property and J-2 for $\\mathcal O_X(W)$. By [def-exc-excellent-ring] these three conditions say that its coordinate ring is quasi-excellent. This proves the first conclusion. Universal catenarity is an additional condition only for excellence, and has not been asserted or used; no bound on dimension was used.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QT, definition-excellent, quasi-excellent alternative"
+   }
+  },
+  {
+   "text": "If $X$ is quasi-compact, apply [def-weil-pbc-quasi-compact-scheme] to the affine open cover of Step 1 to choose a finite subcover $U_1,\\ldots,U_m$. Every coordinate ring of this subcover is Noetherian by Step 2. This is exactly the finite affine cover condition for Noetherianness written in the statement (equivalently, local Noetherianity together with quasi-compactness, properties.tex Tag 01OV). If $X$ is empty, take the empty finite cover. Quasi-compactness is used only in this final step.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV, definition-noetherian; schemes.tex Section 01K2, section-quasi-compact"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "pqf-def-locnoeth",
+  "lem-trf-g-ring-affine-cover",
+  "def-weil-pbc-g-ring",
+  "lem-trf-j2-affine-cover",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 0HAC (lemma-finite-type-excellent) and 0HAB (lemma-locally-excellent), quasi-excellent alternatives, with the finite type ring argument of more-algebra.tex Tag 07QU expanded; properties.tex Tag 01OV for the quasi-compact conclusion."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-quasi-excellent-etale-direct-image-finiteness",
@@ -69,6 +159,41 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.isNoetherian_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\"], \"digest\": \"4aa7628e8aeb0c2a\"}",
    "date": "2026-10-18",
    "verdict": "no match: the hits concern quasi-finite algebras, localization and Noetherianness, not G-rings/J-2 or preservation of quasi-excellence"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiExcellent|quasi.?excellent|IsGRing|IsJ2",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results give only Noetherianity, finite type or quasi-finite algebras, not G-ring/J-2 or quasi-excellence permanence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type algebras over quasi excellent rings and affine locality of quasi excellence",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.recOn\", \"RingHom.finiteType_isLocal\", \"Algebra.QuasiFinite.iff_finite_primesOver\", \"Algebra.quasiFinite_iff\", \"Algebra.QuasiFinite.casesOn\", \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"Algebra.QuasiFinite\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\"], \"digest\": \"66945eeb90063cc6\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results give only Noetherianity, finite type or quasi-finite algebras, not G-ring/J-2 or quasi-excellence permanence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results give only Noetherianity, finite type or quasi-finite algebras, not G-ring/J-2 or quasi-excellence permanence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme locally of finite type over a quasi excellent scheme is quasi excellent and is Noetherian if quasi compact",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.isNoetherian_iff\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\"], \"digest\": \"13285749c7eacfaf\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results give only Noetherianity, finite type or quasi-finite algebras, not G-ring/J-2 or quasi-excellence permanence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type extension of a G ring is a G ring and J-2 is local on affine covers",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"RingHom.finiteType_isLocal\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"RingHom.QuasiFinite.propertyIsLocal\", \"AlgebraicGeometry.affineAnd_isLocal\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\"], \"digest\": \"cc44d866844f0d3f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results give only Noetherianity, finite type or quasi-finite algebras, not G-ring/J-2 or quasi-excellence permanence"
   }
  ],
  "blueprint": {
@@ -84,5 +209,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-quasi-excellent-finite-type-stability",
+  "worker": "stage1",
+  "summary": "Preserved the statement, checked the quasi-excellent alternatives of Stacks 0HAC/0HAB/07QU and 01OV, and expanded the finite type J-2 argument by algebra generators. Reused existing finite type G-ring permanence and component affine-cover locality, with local Noetherianity established before J-2 locality. All non-elementary inputs are existing cited nodes. No new nodes, no Lean attachment, and no new Mathlib leaf.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (Verdier duality), through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-finite-exceptional-preservation and lem-per-quasi-excellent-etale-direct-image-finiteness: supply the finite type stability required of compactification schemes in the finiteness argument. This is a generic commutative-algebra/scheme tool below the unit proof; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "Finite type affine charts preserve the G-ring property; the perverse-curve unit has no commutative-algebra permanence result."
+   },
+   {
+    "node": "lem-trf-g-ring-affine-cover",
+    "why": "Pass the G-ring condition from the chosen finite type charts to every affine open; this is a general scheme locality tool."
+   },
+   {
+    "node": "lem-trf-j2-affine-cover",
+    "why": "Pass the J-2 condition from the chosen charts to every affine open after proving local Noetherianity; this is a general scheme locality tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-trf-g-ring-affine-cover",
+  "lem-trf-j2-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-c7efa7d83",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-c7efa7d83 (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full, and the sources Stacks 07QT, 07QU, morphisms 0HAB/0HAC and 01OV (0HAB's proof cites 07R4 and 0HA5). The statement is unchanged from the imported node and is the quasi-excellent alternative of 0HAC, with the quasi-compact => Noetherian remark of 01OV. Step 1 builds affine charts from the cover definition. Step 2 gets Noetherian from the Mathlib leaf FiniteType.isNoetherianRing and the G-ring property from 07PV; neither needs catenarity or injectivity. Step 3 writes out the J-2 argument with algebra generators: C of finite type over A is of finite type over R. Step 4 first shows X is locally Noetherian, then applies lem-trf-g-ring-affine-cover (0HA5) and lem-trf-j2-affine-cover (07R4) within their stated hypotheses, without assuming affine intersections. Step 5 reassembles quasi-excellence, and Step 6 takes a finite subcover of the chart cover. Edge cases checked: empty X, an infinite disjoint union of Spec k (not quasi-compact, so no Noetherian claim), 𝔸ⁿ_ℤ, and quotient maps. There is no duplicate in the DAG: lem-exc-finite-type-localization-excellent needs excellence. There are no new nodes. The three declared tool_uses (07PV, 0HA5, 07R4) are accepted as generic algebra. There is no SGA citation. Batch-5 flag: the closures of lem-trf-g-ring-affine-cover (23 nodes) and lem-trf-j2-affine-cover (81 nodes) contain no trace-formula or Poincaré-duality theorem, no sk-* node and no assumption leaf. They are pure scheme locality from Stacks, not steps of either assumed proof, so the escape clause applies and the flag is not a RETURN."
  }
 }
