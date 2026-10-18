@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import all Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 
 /-! # Statements of the new targets (batch 2) about `GrothendieckDerivedCoproducts`
