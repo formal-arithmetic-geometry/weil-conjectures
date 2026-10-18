@@ -332,5 +332,27 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-a2b84da65 (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, no new nodes, statement unchanged. Read all 26 cited statements and ILO XVII Prop. 10.1.1 (PDF p. 331, printed p. 325), whose first proof paragraph asserts that Ext^q(X,-) commutes with filtered colimits for X in D^-_c over a Noetherian Z and a Noetherian ring A. The item states exactly this with the same hypotheses: no Tor-amplitude or lower-bound condition, the ordinary D(X_et,A), and the caller rhom-coproduct-continuity uses identical hypotheses. Checked each step: (1) syzygies from flat-lifting with p=g=1_F plus Serre closure; (2) Ext(u_!A_U,G)=H^q(U,G|U), with the qcqs filtered-colimit node's module clause; (3)-(4) a correct injectivity chase before the five lemma, induction not circular; (5) presheaf Ext on affine etale V (Noetherian), exact sheafification, and an isomorphism on a basis; (6) degree bound t<b-a checked; (7) devissage over the bounded interval; (8) m<min(-n,r) makes degrees n-1 and n vanish. FIX: step 1 fed the kernel back into the lifting node, whose constructibility uses a global stratification, while the Serre node's convention is per affine open with finitely presented values. Step 1 now works on affine Noetherian T (the only case step 5 uses) and gives the two-line agreement of the conventions there. Off-route tool use lem-sfb-discrete-noetherian-constructible-serre accepted (generic Serre closure, arbitrary Noetherian R); the other two declared tool uses are inside the route. No cycle (closure of 477 nodes). No duplicate among the pro-etale/condensed/F_ell continuity nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleExtFilteredColimit",
+  "declaration": "AlgebraicGeometry.Etale.isIso_sheafExt_filteredColimit",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sheafExtCoefficientFunctor",
+   "AlgebraicGeometry.Etale.isIso_sheafExt_filteredColimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleExtFilteredColimit.lean",
+  "statement": "theorem isIso_sheafExt_filteredColimit (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (K : DerivedCategoryModule A X) (_hbounded : ∃ r : ℤ, ∀ j : ℤ, r < j → IsZero ((_root_.DerivedCategory.homologyFunctor _ j).obj K)) (_hconstructible : ∀ j : ℤ, ∃ S : Scheme.FiniteLocallyClosedStratification X, ∀ i : Fin S.n, Scheme.IsFiniteLocallyConstantSheaf ((upperStar (ModuleCat.{u + 1} A) (S.immersion i)).obj ((_root_.DerivedCategory.homologyFunctor _ j).obj K))) (n : ℤ) {J : Type (u + 1)} [SmallCategory J] [IsFiltered J] (G : J ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) : IsIso (colimit.post G (sheafExtCoefficientFunctor X A K n))",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2c23b190",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Item lean field only changed; statement verbatim; 11 dep records identical to live. Clause-by-clause match: IsNoetherian X, CommRing+IsNoetherianRing A (Type (u+1) recorded encoding), K in DerivedCategoryModule, ∃ r upper vanishing, per-degree FiniteLocallyClosedStratification with IsFiniteLocallyConstantSheaf pullbacks (f.g. stalks, no constructible-strata strengthening), all n : ℤ, small filtered J (u+1), Ext = singleFunctor 0 ⋙ recorded Etale.derivedHom(op K) ⋙ homologyFunctor n (real data), conclusion IsIso of the canonical colimit.post. Source ILO XVII 10.1.1 p.325 imposes no Tor/lower bound; none added. Docstrings with source/blueprint and 8-step proof; no hollow defs; only sorry. nt_compile --json: 4.6 s, exit 0, clean. Advisory: second reading is a self-check."
  }
 }
