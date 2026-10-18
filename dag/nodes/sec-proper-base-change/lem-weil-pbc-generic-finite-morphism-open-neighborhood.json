@@ -32,15 +32,12 @@
  ],
  "proof": [
   {
-   "text": "Fix a generic point $\\eta$ of a component of $Y$ and choose an affine neighbourhood $V_0=\\operatorname{Spec}R$. Put $X_0=f^{-1}(V_0)$ and $f_0:X_0\\to V_0$. The open-fibre-product identification and quasi-compact base change make $f_0$ quasi-compact; also $X_0$ is quasi-compact by the definition. To check $X_0$ quasi-separated directly, take affine opens $A,B\\subseteq X_0$. The open-fibre-product lemma identifies $A\\times_{V_0}B$ with an open of $X\\times_YX$, and the affine tensor-product lemma makes it affine, hence quasi-compact. Its preimage under the quasi-compact diagonal of $f$ is $A\\cap B$, hence quasi-compact. The affine-cover criterion now proves $X_0$ quasi-separated. The intersection of the component of $\\eta$ with $V_0$ is a component of $V_0$: any irreducible subset containing it has closure in $Y$ containing the original component, hence equals that component. Thus $\\eta$ is still generic in $V_0$.",
+   "text": "Fix a component generic point η and choose an affine open V₀ containing it. Restrict f to V₀; quasi-compactness, quasi-separatedness and local finite type are preserved by this restriction. The finite fibre is preserved under the subtype inclusion. Genericity in V₀ follows because every generalization maps to a generalization of η in Y, hence equals η, and the open inclusion is injective. For the restricted map with affine target, Mathlib quasiSeparatedSpace_of_quasiSeparated supplies quasi-separatedness of the source directly; no explicit diagonal or affine tensor-product calculation is needed.",
    "uses": [
     "def-pc-scheme",
     "def-weil-finite-type-morphism",
     "def-weil-quasi-separated-morphism",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-pc-quasi-compact-base-change",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+    "lem-pc-quasi-compact-base-change"
    ],
    "elementary": false,
    "source": {
@@ -65,7 +62,7 @@
    }
   },
   {
-   "text": "If $n>0$, apply the affine-neighbourhood theorem to $X_0$, the finitely many components just obtained, and $x=\\xi_1$. This gives an affine open $U=\\operatorname{Spec}S\\subseteq X_0$ containing the entire fibre over $\\eta$. If $n=0$, use the empty affine open $U=\\operatorname{Spec}(0)$. In both cases $U$ is affine and contains every point over $\\eta$.",
+   "text": "Apply the existing theorem exists_isAffineOpen_of_subset_genericPoints to the finite set f⁻¹{η}, which the preceding step shows lies in the generic points of the source. This gives one affine open U containing the entire fibre. This version includes the empty finite set and requires no distinguished point of the fibre.",
    "uses": [
     "lem-chow-affine-through-generic-points",
     "def-weil-affine-spectrum"
@@ -77,7 +74,7 @@
    }
   },
   {
-   "text": "The affine-pairs finite-type criterion applied to $U\\subseteq X$, $V_0\\subseteq Y$ makes the induced map $\\varphi:R\\to S$ of finite type. The prime $\\mathfrak p$ of $\\eta$ is minimal by the spectrum/component correspondence: $\\overline{\\{\\mathfrak p\\}}=V(\\mathfrak p)$, so a strictly smaller prime would contradict maximality of that component. The primes of $S$ contracting to $\\mathfrak p$ are precisely the points of $U$ mapping to $\\eta$, hence form a finite set. Apply the algebraic localization lemma to obtain $g\\notin\\mathfrak p$ with $R_g\\to S_{\\varphi(g)}$ finite. Put $V_1=D(g)\\subseteq V_0$ and $U_1=U\\cap f^{-1}(V_1)=D(\\varphi(g))$. The basic-open pullback identity and principal-localization open immersion identify these with the affine schemes $\\operatorname{Spec}R_g$ and $\\operatorname{Spec}S_{\\varphi(g)}$. Their induced ring map sends $a/g^k$ to $\\varphi(a)/\\varphi(g)^k$: it agrees with $\\varphi$ on $R$ and preserves inverses of the now invertible $g$. Thus it is exactly the finite localized map just obtained. The affine-cover criterion for finite morphisms, applied to the one-member cover of $V_1$, shows $U_1\\to V_1$ finite.",
+   "text": "For the map U → V₀, identify both affine schemes with spectra of their global sections. The affine finite-type criterion makes the global-section ring homomorphism φ finite type. The image p of η is a generic point of a component of Spec R, hence a minimal prime by PrimeSpectrum.mem_genericPoints_iff. Transport finiteness of the set-theoretic fibre through the affine isomorphisms; equality of contracted prime ideals is equivalent to equality of points in Spec R. Apply RingHom.exists_finite_awayMap_of_finite_fiber_minimalPrime to obtain g outside p with finite Localization.awayMap φ g. Mathlib SpecMapRestrictBasicOpenIso identifies restriction to D(g) with Spec of this localized map, and IsFinite.SpecMap_iff proves the restriction finite. Transport back through the affine scheme isomorphisms. The existing restriction/localization isomorphism handles basic-open pullback and localization coordinates directly.",
    "uses": [
     "lem-weil-pbc-lft-affine-pairs",
     "lem-weil-pbc-spec-irreducible-components-minimal-primes",
@@ -86,7 +83,8 @@
     "lem-weil-pbc-basic-open-pullback",
     "lem-weil-pbc-principal-localization-open-immersion",
     "def-weil-ring-localization-away",
-    "lem-weil-pbc-finite-local-on-target"
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-weil-pbc-spec-localization-away-basic-open"
    ],
    "elementary": false,
    "source": {
@@ -95,13 +93,12 @@
    }
   },
   {
-   "text": "The closed subset $Z=X_0\\setminus U$ has $\\eta\\notin f_0(Z)$ because $U$ contains the full fibre. By the closed-subset construction choose a closed immersion $i:T\\to X_0$ with image $Z$, and put $j=f_0\\circ i:T\\to V_0$. This composite is quasi-compact: over any affine open $A\\subseteq V_0$, its inverse image is homeomorphic to the closed subset $Z\\cap f_0^{-1}(A)$ of the quasi-compact space $f_0^{-1}(A)$, hence is quasi-compact. If $\\eta\\in\\overline{j(T)}$, the closure-specialization theorem gives $t\\in T$ with $j(t)$ specializing to $\\eta$. As proved in step 2, the component generic point $\\eta$ has no proper generalization, so $j(t)=\\eta$, contradicting $\\eta\\notin f_0(Z)$. Consequently $W=V_0\\setminus\\overline{j(T)}$ is open, contains $\\eta$, and $f_0^{-1}(W)\\cap Z=\\varnothing$. Choose a principal open $V_\\eta=D(h)$ of $V_0$ with $\\eta\\in V_\\eta\\subseteq W\\cap V_1$. Then $f^{-1}(V_\\eta)\\subseteq U$, so it equals $U_1\\cap f^{-1}(V_\\eta)$ as an open subscheme. It is therefore the restriction of the finite morphism $U_1\\to V_1$ to $V_\\eta$, hence finite by target restriction.",
+   "text": "Give the closed complement X₀ ∖ U its reduced closed subscheme structure by IdealSheafData.vanishingIdeal, and let j be its inclusion followed by f₀. The inclusion is closed, hence quasi-compact, so j is quasi-compact. If η lies in the closure of range j, exists_specializes_of_mem_closure_range gives t with j(t) specializing to η. Genericity forces j(t)=η, contradicting that U contains the full fibre. Thus W, the complement of that closure, is an open neighbourhood of η with f₀⁻¹(W) contained in U. Intersect W with the finite neighbourhood obtained for U → V₀. Restricting this finite map stays finite. The restriction of U → X₀ over that intersection is an open immersion and is surjective by the preimage containment, hence an isomorphism; cancelling it proves the restriction of f₀ finite. An additional principal-open refinement is unnecessary.",
    "uses": [
     "lem-weil-pbc-closed-subset-closed-subscheme",
     "def-weil-closed-immersion",
     "def-weil-finite-type-morphism",
     "lem-sc-picard-closure-specialization",
-    "lem-weil-pbc-spec-localization-away-basic-open",
     "lem-weil-pbc-finite-local-on-target"
    ],
    "elementary": false,
@@ -111,7 +108,7 @@
    }
   },
   {
-   "text": "Perform the preceding construction for every generic point $\\eta$ and set $V=\\bigcup_\\eta V_\\eta$. Each $V_\\eta$ is an affine open of $Y$, hence of $V$, and these opens cover $V$. The finite-local-on-target lemma shows $f^{-1}(V)\\to V$ finite. The union contains every component generic point. For any $y\\in Y$, choose an irreducible component containing $y$ and its generic point $\\eta$. Since $\\eta\\in V$ and $y\\in\\overline{\\{\\eta\\}}$, one has $y\\in\\overline V$, so $V$ is dense. If $Y$ is empty, take $V=\\varnothing$; the same cover criterion is vacuous and its preimage is empty. No intersection of the different $V_\\eta$ is taken, since such an intersection could lose other generic points.",
+   "text": "Let V be the supremum of all open subsets W of Y for which f restricted to W is finite. The preceding local construction shows every component generic point lies in V. Therefore V is dense by dense_of_genericPoints_subset, whose sobriety proof uses that irreducible components cover Y. The opens V.ι⁻¹(W) cover V. By morphismRestrictRestrict and the equality V.ι(image(V.ι⁻¹(W)))=W for W≤V, the restriction of f|V to each is finite. IsZariskiLocalAtTarget.of_iSup_eq_top then proves f|V finite. If Y is empty the same cover argument is vacuous. There is no intersection across different generic points and no chosen witness is used in a definition.",
    "uses": [
     "lem-weil-pbc-finite-local-on-target",
     "lem-sc-irreducible-components-cover",
@@ -129,10 +126,7 @@
   "def-pc-scheme",
   "def-weil-finite-type-morphism",
   "def-weil-quasi-separated-morphism",
-  "lem-weil-pbc-open-fibre-product",
   "lem-pc-quasi-compact-base-change",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
   "pqf-lem-locqf-fibre-discrete",
   "def-pc-scheme-fibre",
   "lem-weil-pbc-scheme-sober",
@@ -148,15 +142,15 @@
   "lem-weil-pbc-principal-localization-open-immersion",
   "def-weil-ring-localization-away",
   "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-spec-localization-away-basic-open",
   "lem-weil-pbc-closed-subset-closed-subscheme",
   "def-weil-closed-immersion",
-  "lem-sc-picard-closure-specialization",
-  "lem-weil-pbc-spec-localization-away-basic-open"
+  "lem-sc-picard-closure-specialization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 02NW, label lemma-generically-finite, proof of (1) => (3) => (4), followed by union over component generic points"
+  "place": "Tag 02NW, lemma-generically-finite, (1) => (3) => (4); realized in Lean using the existing affine, specialization, localization and restriction APIs, followed by the union of all finite opens (E5, 2026-10-18)."
  },
  "mathlib_searches": [
   {
@@ -285,5 +279,15 @@
   "by": "NK",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261018T062736-L-644322",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
