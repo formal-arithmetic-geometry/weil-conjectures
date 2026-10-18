@@ -19,9 +19,156 @@
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First keep track of the particular comparison, rather than choose an arbitrary isomorphism of costalks. The map $a_z$ is finite between spectra of fields, hence has virtual dimension zero, so its Gysin class is invertible by [lem-per-absolute-gysin-purity]. The field tensor map is invertible on every $C_wM\\in D^+$ by [lem-per-field-exceptional-tensor], and [lem-per-prime-power-supported-calculus] supplies the final supported-composition isomorphism. Thus $B_{f,z,M}$ is invertible and natural in $M$. For $Y'\\xrightarrow gY\\xrightarrow fX$, the Gysin composition law, the displayed composition identity for the counit-defined $T$, and supported transitivity give\n$$B_{fg,z,M}=B_{g,z,f^!M}\\circ a_g^*B_{f,g(z),M}.$$\nIndeed, substitute $\\operatorname{Cl}_{a_fa_g}=a_g^!(\\operatorname{Cl}_{a_f})\\circ\\operatorname{Cl}_{a_g}$ in the defining composite and move $\\operatorname{Cl}_{a_f}$ through $T_{a_g}$ by its naturality; the two remaining tensor maps compose to $T_{a_fa_g}$. The same statements commute with twists and cochain shifts. They are the canonical comparisons under localization and strict localization: the Gysin classes restrict by the cited purity statement, and the tensor and supported comparisons have precisely those restrictions in their cited statements.",
+   "uses": [
+    "lem-per-absolute-gysin-purity",
+    "lem-per-field-exceptional-tensor",
+    "lem-per-prime-power-supported-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "Strictly localize $X$ at $\\bar x$. By [lem-trf-finite-base-strict-localization], the finite pullback of $Y$ is the disjoint union of its strict localizations at points over $\\bar x$; take the summand specified by $\\bar u$. The prescribed lift of the specialization gives its point $\\bar v$. By the strict-local comparison in [lem-per-prime-power-supported-calculus] and Step 1, this replaces both $f^!$ and $B$ by their restrictions, with the specified geometric points. The costalk and residue conventions of [def-per-potential-dualizing-complex] and [lem-per-prime-power-costalk-reduction] compute the two transitions on precisely these strict localizations. Thus it is enough to work over this finite map of strictly henselian local schemes, with the chosen closed points.",
+   "uses": [
+    "lem-trf-finite-base-strict-localization",
+    "lem-per-prime-power-supported-calculus",
+    "def-per-potential-dualizing-complex",
+    "lem-per-prime-power-costalk-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "In these local schemes take the reduced closures $C$ of $\\bar v$ and $D$ of $\\bar y$, with closed immersions $k:C\\hookrightarrow Y_{(\\bar u)}$ and $i:D\\hookrightarrow X_{(\\bar x)}$. By [lem-per-prime-power-costalk-reduction] they are integral excellent strictly henselian local schemes of dimension one. The induced map $h:C\\to D$ is finite and dominant: on affine rings it is the injective map obtained by quotienting the finite ring map by the prime defining $C$ and its contraction. The contraction defines $D$, and the original finite module generators still generate its quotient. Put $L=i^!(M|_{X_{(\\bar x)}})$. Supported transitivity gives $k^!f^!M=h^!L$ by [lem-per-prime-power-supported-calculus]. Both costalks and transitions become those for $L$ on $D$ and $h^!L$ on $C$: in the defining recipe of [def-per-potential-dualizing-complex], the closure of the chosen generic point is now $D$ or $C$ itself, and successive extraordinary restrictions compose to $i^!$ or $k^!$. The residue fields are unchanged by these closed immersions. Hence the supported comparisons in $B$ are also exactly those for $h$. It remains to prove the assertion for a finite dominant map $h:C\\to D$ of these local integral curves.",
+   "uses": [
+    "lem-per-prime-power-costalk-reduction",
+    "lem-per-prime-power-supported-calculus",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "Treat first the normalization $\\nu:\\widetilde D\\to D$. By [lem-per-prime-power-costalk-reduction], it is finite, a universal homeomorphism, unchanged at the generic point, and $\\widetilde D$ is an excellent strictly henselian trait. Its closed residue degree $d$ is purely inseparable and invertible in $\\Lambda$. The etale equivalence identifies $\\nu^!$ with $\\nu^*$, using the adjunction counit, and identifies their supported restrictions. Under this equivalence, the counit-defined tensor map is the identity tensor comparison. By the finite purely inseparable field clause of [lem-per-prime-power-regular-gysin], $B_{\\nu,\\bar\\eta,L}=1$ and $B_{\\nu,\\bar s,L}=d\\cdot1$ in these identifications. Definition [def-per-potential-dualizing-complex] gives $\\operatorname{sp}_D(L)=d^{-1}\\operatorname{sp}_{\\widetilde D}(\\nu^*L)$. Consequently the two paths are equal:\n$$B_{\\nu,\\bar s,L}(1)[2]\\operatorname{sp}_D(L)=d\\,d^{-1}\\operatorname{sp}_{\\widetilde D}(\\nu^*L)=\\operatorname{sp}_{\\widetilde D}(\\nu^!L)B_{\\nu,\\bar\\eta,L}.$$\nThis proves the normalization case, for all degrees and arbitrary $L$.",
+   "uses": [
+    "lem-per-prime-power-costalk-reduction",
+    "lem-per-prime-power-regular-gysin",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "Normalize both $C$ and $D$. The finite dominant map $h$ lifts to a finite dominant map $\\widetilde h:\\widetilde C\\to\\widetilde D$: if $A\\subset B$ is the finite injection of their coordinate domains, every element of the integral closure of $A$ is integral over $B$ inside $\\operatorname{Frac}(B)$ and hence belongs to its integral closure. This gives the lift. The latter integral closure is finite over $B$ by [lem-per-prime-power-costalk-reduction], thus finite over $A$; the same finite $A$-module generators generate over the integral closure of $A$, proving finiteness of the lift. The normalizations are traits by that same node. There is an equality of composites $h\\nu_C=\\nu_D\\widetilde h$. Once the assertion is proved for $\\widetilde h$, Step 4 proves it for both normalizations, and Step 1 pastes the commuting squares for $\\nu_D\\widetilde h$. It therefore proves it for $h\\nu_C$. Cancel the invertible $B_{\\nu_C}$ on the two vertices to obtain the square for $h$. It remains only to prove the assertion for a finite dominant map of excellent strictly henselian traits.",
+   "uses": [
+    "lem-per-prime-power-costalk-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "Write $h:T'\\to T$ for that trait map, $\\eta,s$ and $\\eta',s'$ for the generic and closed points. Use the isomorphisms $B$ to transport the upper transition to the costalks on $T$, and let\n$$\\delta_K=H^2(B_{h,\\bar s,K}(1))^{-1}\\operatorname{sp}_{T'}^0(h^!K)H^0(B_{h,\\bar\\eta,K})-\\operatorname{sp}_T^0(K).$$\nThis is a natural homomorphism $H^0(K_{\\bar\\eta})\\to H^2(C_{\\bar s}K(1))$: naturality of $B$ follows from Step 1 and naturality of the trait transition is in [lem-per-prime-power-trait-residue-model]. In particular every morphism of complexes gives the commutative naturality square for $\\delta$. We will show that this natural transformation is zero; no exactness of $h^!$ is being assumed.",
+   "uses": [
+    "lem-per-prime-power-trait-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "Replace $K$ by $A=\\tau_{\\le0}K$ using its canonical inclusion: the exact geometric stalk gives $H^0(A_{\\bar\\eta})=H^0(K_{\\bar\\eta})$, so naturality implies $\\delta_K=0$ if $\\delta_A=0$. We next use the canonical projection $A\\to H^0K$, not an arrow in the reverse direction. Here the trait model of [lem-per-prime-power-trait-residue-model] gives an isomorphism on $H^2(C_{\\bar s}(-)(1))$. Explicitly, choose the usual truncated representative with $A^i=0$ for $i>0$. Write $F^0,F^1,F^2$ for the three exact component functors in the cited model. The degree-two cohomology of $\\operatorname{Tot}F(A)$ is\n$$F^2(A^0)/\\bigl(\\operatorname{im}(F^1(A^0)\\to F^2(A^0))+\\operatorname{im}F^2(d^{-1})\\bigr).$$\nExactness of $F^2$ quotients the second image to $F^2(H^0A)$; exactness of $F^1$ identifies the remaining image with that from $F^1(H^0A)$. The quotient is therefore $H^2F(H^0A)$. The projection also induces the identity on generic $H^0$. Naturality now gives $\\delta_A=0$ if and only if $\\delta_{H^0K}=0$. Thus only sheaves need be considered. The elementary truncation maps and their naturality are those explicitly stated in [lem-weil-pbc-truncation-step-ses].",
+   "uses": [
+    "lem-per-prime-power-trait-residue-model",
+    "lem-weil-pbc-truncation-step-ses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "For a sheaf $M$ on $T$, let $j:\\eta\\hookrightarrow T$ and $N=M_{\\bar\\eta}$ with its inertia action $H$. The counit $j_!j^*M\\to M$ is the identity on generic stalks. In the model of [lem-per-prime-power-trait-residue-model], its degree-one and degree-two terms are identities, so it is also an isomorphism on $H^2(C_{\\bar s}(-)(1))$. Thus it suffices to consider $j_!N$. Write $S$ for wild inertia, $G=H/S$, and choose $\\sigma\\in G$ as in that model. Evaluation at $1-\\sigma$ identifies\n$$H^2(C_{\\bar s}(j_!N))=\\operatorname{coker}(N^S\\xrightarrow{1-\\sigma}N^S).$$\nThe natural quotient $N\\twoheadrightarrow Q=N_H$ to the module modulo all $hn-n$ induces an isomorphism on this cokernel. Indeed averaging gives $N_S\\cong N^S$: the projector kills every $sn-n$, and for each vector, averaging over its finite $p$-group orbit shows that its difference from its average is a sum of such differences. Quotienting next by $\\sigma-1$ is quotienting by all $g-1$, because each vector has an open stabilizer and $\\sigma$ generates every finite cyclic quotient through which its orbit factors. Hence $(N^S)_G\\cong N_H=Q$. This calculation also commutes with the common Tate twist. Naturality for $j_!N\\to j_!Q$, whose map on generic stalks is surjective and on degree-two supported cohomology is invertible, implies $\\delta_{j_!N}=0$ if and only if $\\delta_{j_!Q}=0$.",
+   "uses": [
+    "lem-per-prime-power-trait-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "The inertia action on $Q$ is trivial, so it defines the constant sheaf $Q_T$ on $T$ and $j_!Q\\to Q_T$ again induces identities in degrees one and two of the trait model. Thus $\\delta_{j_!Q}=0$ follows from $\\delta_{Q_T}=0$. For every $q\\in Q$ the constant-sheaf morphism $\\Lambda_T\\to Q_T$, $1\\mapsto q$, gives by naturality\n$$\\delta_{Q_T}(q)=H^2(C_{\\bar s}(\\Lambda_T\\to Q_T)(1))(\\delta_{\\Lambda_T}(1)).$$\nIt follows that $\\delta_{\\Lambda_T}=0$ implies $\\delta_{Q_T}=0$, even for infinitely generated $Q$. This is an elementwise argument, requiring neither constructibility nor a commutation of $h^!$ with filtered colimits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "Finally take $K=\\Lambda_T$. The finite map $h$ between these regular affine schemes has virtual dimension zero: the local dimensions at the generic points are both zero and at the closed points both one. By [lem-per-absolute-gysin-purity], $c=\\operatorname{Cl}_h:\\Lambda_{T'}\\xrightarrow{\\sim}h^!\\Lambda_T$. Write $i:s\\hookrightarrow T$ and $i':s'\\hookrightarrow T'$. The same Gysin composition law applied to $hi'=ia_s$ gives, with the twist and shift displayed,\n$$C_{\\bar s'}(c)(1)[2]\\circ\\operatorname{Cl}_{i'}(1)[2]\n =B_{h,\\bar s,\\Lambda_T}(1)[2]\\circ\\operatorname{Cl}_i(1)[2].$$\nHere the costalk of $\\Lambda_T$ is the invertible Tate line $\\Lambda(-1)[-2]$ by purity, so the tensor map is exactly the twist/shift comparison; the counit normalization and composition identity in [lem-per-field-exceptional-tensor] give the stated $B$, rather than an unspecified identification. At the generic point the same composition identity gives $C_{\\bar\\eta'}(c)=B_{h,\\bar\\eta,\\Lambda_T}$.",
+   "uses": [
+    "lem-per-absolute-gysin-purity",
+    "lem-per-field-exceptional-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  },
+  {
+   "text": "The two constant-sheaf trait residues are exactly $\\operatorname{Cl}_i(1)[2]$ and $\\operatorname{Cl}_{i'}(1)[2]$, including the sign, by [lem-per-trait-gysin-residue]. Apply naturality of the transition on $T'$ to the morphism $c:\\Lambda_{T'}\\to h^!\\Lambda_T$. Step 10 then gives\n$$\\operatorname{sp}_{T'}(h^!\\Lambda_T)B_{h,\\bar\\eta,\\Lambda_T}\n=C_{\\bar s'}(c)(1)[2]\\operatorname{sp}_{T'}(\\Lambda_{T'})\n=B_{h,\\bar s,\\Lambda_T}(1)[2]\\operatorname{sp}_T(\\Lambda_T).$$\nThus $\\delta_{\\Lambda_T}=0$. Steps 7–9 prove $\\delta_K=0$ for every bounded-below $K$. Apply the same argument to $K[q]$ to obtain every integer $q$; the even shift $[2]$ in the trait cochain map introduces no odd-shift sign. Step 5 descends from traits to local curves, and Steps 2–3 identify the resulting equality with the square in the statement. These steps used arbitrary inputs throughout and imposed none of the excluded pinning, potentiality, constructibility, or Tor hypotheses.",
+   "uses": [
+    "lem-per-trait-gysin-residue",
+    "lem-per-prime-power-trait-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-absolute-gysin-purity",
+  "lem-per-field-exceptional-tensor",
+  "lem-per-prime-power-supported-calculus",
+  "lem-trf-finite-base-strict-localization",
+  "def-per-potential-dualizing-complex",
+  "lem-per-prime-power-costalk-reduction",
+  "lem-per-prime-power-regular-gysin",
+  "lem-per-prime-power-trait-residue-model",
+  "lem-weil-pbc-truncation-step-ses",
+  "lem-per-trait-gysin-residue"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Proposition 3.3.1, proof, printed pp.269–270"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +204,45 @@
    "results": "{\"t\": \"2026-10-18T14:22:45Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the codimension one etale cohomology residue homomorphism for finite exceptional inverse image and the absolute Gysin class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Γevaluation_naturality\", \"AlgebraicGeometry.Scheme.evaluation_naturality\", \"AlgebraicGeometry.Scheme.evaluation_naturality_assoc\", \"AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc\", \"AlgebraicGeometry.Scheme.evaluation_naturality_apply\", \"AlgebraicGeometry.Scheme.residue_residueFieldMap\", \"AlgebraicGeometry.Scheme.residueFieldMap_comp\", \"AlgebraicGeometry.Scheme.Γevaluation_naturality_apply\"], \"digest\": \"953fc47bf80bd7eb\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite exceptional pullback commutes with codimension one etale cohomology residue transitions using the Gysin class",
+   "results": "{\"t\": \"2026-10-18T17:25:07Z\", \"tool\": \"leanfinder\", \"query\": \"Finite exceptional pullback commutes with codimension one etale cohomology residue transitions using the Gysin class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint\", \"AlgebraicGeometry.Scheme.residue_residueFieldMap\", \"AlgebraicGeometry.Scheme.residueFieldMap_comp\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.residue_residueFieldMap_assoc\"], \"digest\": \"b0abae5875bf6f29\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|costalk|residue.*transition|transition.*residue",
+   "results": "{\"t\": \"2026-10-18T17:25:08Z\", \"tool\": \"grep\", \"query\": \"Gysin|costalk|residue.*transition|transition.*residue\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "{\"t\": \"2026-10-18T17:25:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Gysin\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\"], \"digest\": \"31824d43e9c1a0fd\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of finite extraordinary inverse image with etale cohomology codimension one residues",
+   "results": "{\"t\": \"2026-10-18T17:36:38Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of finite extraordinary inverse image with etale cohomology codimension one residues\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.mapCyclesIso_inv_naturality_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality_apply\", \"CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality\", \"CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality\", \"CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\", \"CategoryTheory.ShortComplex.mapCyclesIso_inv_naturality\", \"CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality_assoc\"], \"digest\": \"9f03d6c2abaac852\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gysin isomorphism finite maps strict henselian traits specialization local cohomology bounded below complexes",
+   "results": "{\"t\": \"2026-10-18T17:36:40Z\", \"tool\": \"leanfinder\", \"query\": \"Gysin isomorphism finite maps strict henselian traits specialization local cohomology bounded below complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.isoSelfLERadical\", \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"06720f49cfb746f8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-putative-finite-detection",
@@ -83,5 +265,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-residue-gysin-naturality",
+  "worker": "stage1",
+  "summary": "Followed ILO XVII Proposition 3.3.1: explicit strict-local closed-support reduction, normalization degree cancellation, trait truncation and coinvariant calculations, and the constant case from composition and the signed trait Gysin comparison. Reused existing inputs; no new nodes. Corrected the direction of the source truncation map in the proof, without changing the item statement.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, main-20261015 proof Step 3: dimension-normalized duality, via the recorded generic duality and finite-regular-reduction chain; this item supplies finite exceptional compatibility of immediate residues.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "Finite pullback over a strict localization decomposes into the specified strict local summands; this generic scheme tool is not replaced by the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-step-ses",
+    "why": "The natural projection from the good truncation to its degree-zero cohomology, with its explicit complex description; generic homological algebra used in the trait-model calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-base-strict-localization",
+  "lem-weil-pbc-truncation-step-ses"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NG-3a9715d55",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-3a9715d55 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit, no new nodes. The statement, stmt_deps and source are unchanged from the unsplit item in the earlier Q44 snapshot. I checked the 11 steps against ILO XVII 3.3.1 (pp.269-270), 2.4.3.1-2.4.3.4 (pp.266-267) and 2.4.4.1 (p.268), with every cited statement open. The source error is real and handled: ILO's 'H^0K -> tau<=0 K' should be the projection tau<=0K -> H^0K. That projection is an isomorphism on H^2_s(-(1)) because RGamma_s has amplitude [0,2] on a strictly henselian trait. Step 7 recomputes this degree-2 total cohomology from the exact three-term model, and I re-derived it. Step 4: the d^{-1} is explicit in the definition of the normalized transition (def-per-potential-dualizing-complex), and the regular-gysin clause says the Gysin class of a purely inseparable extension is multiplication by its degree, so d*d^{-1}=1. Step 5: the lift to normalizations and its finiteness are correct, and so is cancelling B_{nu_C}, which I wrote out by hand. Step 8: coinvariants are computed through averaging over the pro-p wild inertia (p != l) and procyclicity of tame inertia. Step 9: the elementwise naturality argument avoids ILO's reduction to constructible sheaves. Steps 10-11 follow the diagram of ILO Lemma 2.4.3.4: purity for a finite map of virtual dimension 0, plus the trait-gysin-residue sign. Edge cases tested: identity map, closed immersion, d=p^r, n=1 and n>1, characteristic 0, zero and infinitely generated sheaves. No cycle, no duplicate (the 3.3.1 hits are only citers), no SGA, every step under 2000 characters. Tool uses accepted: trf-finite-base-strict-localization (generic Stacks 04GH-type) and pbc-truncation-step-ses. Batch-5 flags: the closure with and without the item's proof adds 0 nodes. The three flagged citations, trf-finite-base-strict-localization (scheme decomposition) and costalk-reduction / trait-gysin-residue (via the generic 05WR-type trf-ind-etale-strict-local-invariance), are outside both assumed statements and their proofs, so I accepted them. Advisory: Step 9, marked elementary, could repeat the trait-model citation."
  }
 }
