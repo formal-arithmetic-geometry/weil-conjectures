@@ -17,9 +17,103 @@
   "def-pc-fibre-product",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\bar x\\to D$ and put $S=X_{(\\bar x)}=\\operatorname{Spec}R$. Its ring is strictly henselian by [lem-weil-pbc-strict-henselization-local-structure]. On an affine open chart $\\operatorname{Spec}B\\ni x$ with prime $\\mathfrak p$, the affine comparison [lem-exc-affine-strict-local-ring-comparison] identifies $R$, as a $B$-algebra, with the algebraic strict henselization of $\\mathcal O_{X,x}=B_{\\mathfrak p}$; hence $R$ is Noetherian and regular by [lem-sc-strict-henselization-noetherian, lem-sc-strict-henselization-regular], applied to the regular local ring $\\mathcal O_{X,x}$. Choose an affine divisor chart at $x$ with equation $f$. Its image $t$ lies in the maximal ideal of $R$ because $x\\in D$. The structural ring map is flat by [lem-sbc-affine-strict-henselization-structural-flat]; thus the base-changed closed immersion is regular of codimension one by [lem-per-regular-lci-geometric-calculus], so $t$ is a nonzerodivisor. The Cartesian strict-localization identification [lem-trf-closed-immersion-strict-localization-cartesian] identifies $D\\times_XS$ with the strict localization of $D$ at $\\bar x$. Applying the same affine comparison and regularity under strict henselization also to $\\mathcal O_{D,x}$ proves that $R/(t)$ is regular. In particular $U_{\\bar x}=\\operatorname{Spec}R[1/t]$, and $\\ell$ remains a unit.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-regular",
+    "lem-sbc-affine-strict-henselization-structural-flat",
+    "lem-per-regular-lci-geometric-calculus",
+    "lem-trf-closed-immersion-strict-localization-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2, strict-local regular pair; regularity from Stacks Tag 06LN and closed quotient from Tag 05WS"
+   }
+  },
+  {
+   "text": "Apply [lem-per-strict-local-divisor-low-kummer] to $(R,t,\\ell)$. It gives $H^0(U_{\\bar x},A)=A$, $H^0(U_{\\bar x},A(1))=\\mu_\\ell(R)$, and $H^1(U_{\\bar x},A(1))=A\\kappa(t)$ freely on the Kummer class. Choose the primitive root supplied there. The induced isomorphism $A_S\\simeq A_S(1)$ restricts to $U_{\\bar x}$, so it identifies their cohomology in every degree. Consequently vanishing of $H^q(U_{\\bar x},A)$ is equivalent to vanishing of $H^q(U_{\\bar x},A(1))$ for each $q$. This choice is used only to test vanishing, not to change the supported class.",
+   "uses": [
+    "lem-per-strict-local-divisor-low-kummer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2, low-degree calculation; Stacks Tags 03PL, 0AFZ, 0AG0"
+   }
+  },
+  {
+   "text": "Let $j:X-D\\hookrightarrow X$. On a divisor chart $j$ is the principal open immersion $D(f)\\hookrightarrow\\operatorname{Spec}B$, hence $j$ is quasi-compact and quasi-separated. Apply [lem-exc-closed-support-triangle] to $A_X(1)$, take cohomology by [lem-sf-derived-homology-long-exact], and take exact geometric stalks by [prop-weil-pbc-geometric-stalks-exact]. The closed-stalk identification [lemma-openclosed-stalk-lowerstar] identifies the first term with cohomology of $(i^!A_X(1))_{\\bar x}$. The strict-local direct-image formula [prop-weil-pbc-strict-henselization-stalk-formula] identifies the third term in degree $q$ with $H^q(U_{\\bar x},A(1))$. The middle term has only degree zero, equal to $A(1)_{\\bar x}=\\mu_\\ell(R)$, and its degree-zero restriction to the third term is the isomorphism of Step 2. The exact sequence therefore gives zero first-term cohomology in degrees $m\\leq1$ and isomorphisms\n$$\\mathcal H^m(i^!A_X(1))_{\\bar x}\\simeq H^{m-1}(U_{\\bar x},A(1))\\quad(m\\geq2),$$\ninduced by the localization connecting map. Equivalently, for $B=i^!A_X(1)[2]$, its stalk cohomology vanishes for $r<0$, is $A\\kappa(t)$ for $r=0$, and is $H^{r+1}(U_{\\bar x},A(1))$ for $r>0$.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-openclosed-stalk-lowerstar",
+    "prop-weil-pbc-strict-henselization-stalk-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2; Stacks Tags 0A45 (lemma-cohomology-with-support-triangle) and 03Q9 (theorem-higher-direct-images)"
+   }
+  },
+  {
+   "text": "The map $\\eta:A_D\\to B$ in the statement induces an isomorphism in degree zero at $\\bar x$. Indeed [lem-per-regular-immersion-class-calculus] makes it the transpose of the supported Cartier Kummer map of [lem-asd-ordinary-supported-kummer], compatibly with strict-local restriction. The definition [def-asd-ordinary-supported-kummer-boundary] realizes that supported class by the Kummer extension of the line bundle with its canonical off-divisor frame. On our principal chart $\\mathcal O(D)=t^{-1}R$ has frame $t^{-1}$, and its canonical section $1$ has coordinate $t$. Thus the torsor of $\\ell$-th roots of this section is $z^\\ell=t$; using the dual frame instead gives $z^\\ell=t^{-1}$. To identify the supported splice with the boundary, apply [lem-per-supported-yoneda-localization] to $0\\to\\mu_\\ell\\to\\mathbf G_m\\xrightarrow{(-)^\\ell}\\mathbf G_m\\to0$ and $h=t$ (or $t^{-1}$). Its pushout extension is the frame extension: both are generated by a supported lift of $1$ and by $\\mathbf G_m$, with the off-divisor lift fixed by that frame. The supported-Hom identification of [lem-amb-closed-support-hom] then identifies the splice with the connecting image of $\\kappa(t)$, up to the frame sign. Therefore $\\mathcal H^0(\\eta)_{\\bar x}$ sends $1$ to $\\kappa(t)$ or $-\\kappa(t)$ under that identification. Both generate the free rank-one $A$-module of Step 2, including when $\\ell=2$. This establishes invertibility of the actual class map, rather than just the rank of its target.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus",
+    "lem-asd-ordinary-supported-kummer",
+    "def-asd-ordinary-supported-kummer-boundary",
+    "lem-per-supported-yoneda-localization",
+    "lem-amb-closed-support-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI section 2.1, supported Kummer class, and Proposition 3.4.2, low-degree normalization; the local-frame description is the defining Kummer extension"
+   }
+  },
+  {
+   "text": "For each $\\bar x\\to D$, the source $A_D$ has only degree-zero stalk cohomology. Steps 3 and 4 show that $\\eta$ induces isomorphisms on all its stalk cohomology groups if and only if $H^{r+1}(U_{\\bar x},A(1))=0$ for every $r>0$. Step 2 turns this into precisely $H^q(U_{\\bar x},A)=0$ for every $q\\geq2$. Now apply [lem-weil-pbc-derived-stalk-conservative] on $D$: $\\eta$ is an isomorphism if and only if these conditions hold at every geometric point. If $D$ is empty, the map is the unique morphism between zero objects on the empty site and the quantified condition is vacuous, so the same equivalence holds.",
+   "uses": [
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2, conclude by geometric stalks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-amb-closed-support-hom",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-exc-closed-support-triangle",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-per-regular-lci-geometric-calculus",
+  "lem-per-strict-local-divisor-low-kummer",
+  "lem-per-supported-yoneda-localization",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sf-derived-homology-long-exact",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-strict-henselization-stalk-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Proposition 3.4.2, printed p.245; expand the low-degree input with Stacks Kummer and regular-local algebra, and use Stacks 0A45/03Q9 for localization and stalks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +149,31 @@
    "results": "{\"t\": \"2026-10-18T21:33:10Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing of etale cohomology above degree one on the complement of a smooth Cartier divisor in a strictly henselian regular local scheme characterizes codimension one purity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"89a7188e4765590f\"}",
    "date": "2026-10-19",
    "verdict": "no match: returned etale algebra loci and regular-element definitions, or substring collisions in finestTopologySingle; none concerns derived etale divisor purity"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|cohomological.?purity|regularDivisor",
+   "results": "{\"t\": \"2026-10-18T22:26:34Z\", \"tool\": \"grep\", \"query\": \"Gysin|cohomological.?purity|regularDivisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: Kummer number theory and substring hits in finestTopologySingle; no strict-local etale cohomology computation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Codimension one cohomological purity is equivalent to cohomology vanishing above degree one on every strict henselian complement of the divisor",
+   "results": "{\"t\": \"2026-10-18T22:26:35Z\", \"tool\": \"leansearch\", \"query\": \"Codimension one cohomological purity is equivalent to cohomology vanishing above degree one on every strict henselian complement of the divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isStrictlyGE_iff\", \"CochainComplex.isZero_of_isStrictlyGE\", \"isConnected_compl_of_one_lt_codim\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Submodule.connectedComponentIn_eq_self_of_one_lt_codim\", \"Algebra.formallyEtale_iff\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.Extension.cotangentComplex_injective_iff\"], \"digest\": \"961110d8daccfc3a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: group cohomology, cotangent H1 and cochain bounds; no etale divisor-complement calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular effective Cartier divisor the Kummer purity map is an isomorphism if and only if all strict local complements have vanishing etale cohomology in degrees at least two",
+   "results": "{\"t\": \"2026-10-18T22:26:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a regular effective Cartier divisor the Kummer purity map is an isomorphism if and only if all strict local complements have vanishing etale cohomology in degrees at least two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.formallyEtale\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.formallyEtale_iff\", \"Algebra.IsEtaleAt\"], \"digest\": \"0e06311084bff9e0\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: henselian root lifting, Selmer groups or etale algebra loci; none states the requested etale cohomology or purity result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-flat-regular-divisor-purity-descent",
@@ -85,5 +200,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-divisor-purity-strict-local-criterion",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses exactly. Expanded ILO XVI Proposition 3.4.2 by strict-local regular-pair geometry, a separate low-degree Kummer calculation, the ordinary localization triangle and geometric stalk formula, the local generator of the actual supported Kummer class, and stalkwise detection. One new statement-only node isolates the low-degree calculation, not a clause of the high-degree equivalence. No excluded source is used.",
+  "blueprint": "Realizes the historical regular-divisor purity input beneath lem-per-artin-gabber-affine-curve Step 3, via finite-flat divisor purity descent and the existing regular-pair purity chain. Current ancestor Step 1 uses the finite-coefficient duality construction to which this chain belongs. This is a generic local criterion within that chain, without replacing a chapter or unit step.",
+  "tool_uses": [
+   {
+    "node": "def-asd-ordinary-supported-kummer-boundary",
+    "why": "Generic ordinary-etale or strict-local algebra interface used as a black box; the perverse unit has no statement of this general input."
+   },
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "Generic ordinary-etale or strict-local algebra interface used as a black box; the perverse unit has no statement of this general input."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Supported Cartier Kummer class on arbitrary schemes, without an excellence or finite-field assumption."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "The ordinary small-etale localization triangle for a finite ring on arbitrary schemes; no field or constructibility restriction is imported."
+   },
+   {
+    "node": "lem-sbc-affine-strict-henselization-structural-flat",
+    "why": "Flatness of the canonical structural map used to preserve the regular codimension-one immersion."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Preservation of Noetherianity for local strict henselization."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Preservation of regularity for local strict henselization, applied to both X and D."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The cohomology exact sequence of a distinguished triangle in any abelian derived category."
+   },
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "Identification of the scheme-theoretic divisor pullback with the strict localization of D, retaining its ideal."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Detection of a bounded-below derived isomorphism by all cohomology stalks."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Strict henselian local structure of the chosen pointed-neighbourhood colimit."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Closed direct-image geometric stalk equals the stalk on the closed subscheme."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness of the geometric stalk functor permits taking the localization cohomology sequence at x."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "The qcqs small-etale higher-direct-image stalk formula applied to the principal-open complement, with torsion twist coefficients."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Identifies the chosen pointed-neighbourhood colimit with the algebraic strict henselization of the local ring, so that the Noetherian and regularity transfer lemmas apply."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-amb-closed-support-hom",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-exc-closed-support-triangle",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sf-derived-homology-long-exact",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-exc-affine-strict-local-ring-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-847dcce00",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-847dcce00 (reviewer sub-agent of L); spot-checked: Read ILO XVI Prop 3.4.2 (printed p.245). Its one-line proof cites SGA 4½ for degrees 0 and 1; the delivery rebuilds that input from Stacks 03PL/0AFZ/0AG0 and cites no SGA anywhere. New node lem-per-strict-local-divisor-low-kummer is true: R is a UFD, R/(t) regular makes t prime, so R[1/t] is a connected domain with Pic = 0, R[1/t]^× = R^×·t^Z, and R^× is ℓ-divisible by Hensel, so H^1 = Z/ℓ·κ(t). Tested on k[[x]], k[[x,y]] and t = x² with ℓ = 2 (excluded by the regularity hypothesis); fields are excluded because no nonzerodivisor lies in m. It is not a clause of the item and not a duplicate (rg search over the DAG). Item steps checked: Step 3 localization triangle and stalks at x̄ with the shift by 2; Step 4 frame extension equals the pushout e_h with h = t^{±1}, Yoneda-localization gives ±∂κ(t), a generator also for ℓ = 2; Step 5 stalk conservativity on D^+, with the empty divisor handled. Fault fixed: Step 1 applied the strict-henselization Noetherian/regular lemmas (algebraic R^sh) to the chosen geometric colimit without the bridge, and lem-weil-pbc-strict-henselization-local-structure explicitly gives no such identification. Added lem-exc-affine-strict-local-ring-comparison to the text, uses, proof_deps and tool_uses, for both X and D. Batch 5: closures computed myself. lem-pod-etale-stalk-tensor-scalar (via asd supported Kummer), lem-trf-regular-sequence-dimension-formula, lem-trf-additive-homotopy-category-triangulated with the filtered-localization nodes, and lem-trf-closed-immersion-strict-localization-cartesian (Stacks 05WS; its own closure has no trf/pod nodes) are generic algebra or homological algebra. None is part of the trace formula or Poincaré duality or their proofs, so all are accepted. The added node's closure is clean.; 1 file(s) fixed by the reviewer"
  }
 }
