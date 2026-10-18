@@ -188,8 +188,48 @@ def read_blob(oid):
     return result
 
 
-@functools.lru_cache(None)
+# 2026-10-18 (waste): history was recomputed from the stage-3 baseline (18 000+ first-parent commits) on every run, and
+# every blob was parsed again; since 09:39 that day each post-build run hit its 900 s timeout and produced nothing.
+# Parsed blobs and the history state are now kept in local/ (keyed by this tool's own source and leanindex.py), so a
+# run parses only new blobs and walks only the commits after the last one it reached.
+import hashlib, pickle
+_SALT=hashlib.sha256(b''.join(pathlib.Path(__file__).resolve().parent.joinpath(n).read_bytes()
+                             for n in ('sorry_ledger.py','leanindex.py'))).hexdigest()
+BLOB_CACHE=ROOT/'local/sorry-ledger-blobs.pickle'
+HISTORY_CACHE=ROOT/'local/sorry-ledger-history.pickle'
+_BLOBS=None; _USED=set()
+
+
+def _load(path):
+    try:
+        with open(path,'rb') as f: c=pickle.load(f)
+        return c if c.get('salt')==_SALT else None
+    except Exception:
+        return None
+
+
+def _save(path,value):
+    tmp=path.with_name(path.name+f'.tmp{os.getpid()}')
+    with open(tmp,'wb') as f: pickle.dump(dict(value,salt=_SALT),f,protocol=pickle.HIGHEST_PROTOCOL)
+    os.replace(tmp,path)
+
+
+def save_blob_cache():
+    """Keep the blobs this run used (the head and baseline trees and the new history commits)."""
+    if _BLOBS is not None:
+        _save(BLOB_CACHE,dict(blobs={k:_BLOBS[k] for k in _USED if k in _BLOBS}))
+
+
 def blob(oid):
+    global _BLOBS
+    if _BLOBS is None:
+        c=_load(BLOB_CACHE); _BLOBS=c['blobs'] if c else {}
+    _USED.add(oid)
+    if oid not in _BLOBS: _BLOBS[oid]=_parse_blob(oid)
+    return _BLOBS[oid]
+
+
+def _parse_blob(oid):
     text=read_blob(oid).decode('utf-8')
     rows,errors=scan_text(text)
     try: imports=set(li._IMPORT.findall(mask(text)))
@@ -419,9 +459,14 @@ def classify(d,a,b):
 
 
 def history(since,head):
-    files=tree(since); a=snapshot(files); out=[]
-    logs=git('log','--first-parent','--reverse','--format=%H%x09%s',since+'..'+head).decode()
-    for line in logs.splitlines():
+    logs=git('log','--first-parent','--reverse','--format=%H%x09%s',since+'..'+head).decode().splitlines()
+    c=_load(HISTORY_CACHE); start=0
+    commits=[l.split('\t',1)[0] for l in logs]
+    if c and c['since']==since and c['commit'] in commits:
+        start=commits.index(c['commit'])+1; files=c['files']; a=c['a']; out=list(c['out'])
+    else:
+        files=tree(since); a=snapshot(files); out=[]
+    for line in logs[start:]:
         commit,subject=line.split('\t',1); touched=set()
         for raw in git('diff-tree','--no-commit-id','--raw','-r','--no-renames',commit+'^',commit).decode().splitlines():
             meta,p=raw.split('\t',1)
@@ -436,6 +481,9 @@ def history(since,head):
                             reviewer=(m[2] or '<unspecified>') if m else '<unknown>',
                             classification=classify(d,a,b),delta=d,closure_delta=delta(a,b,True),warnings=sorted(set(b['warnings'])-set(a['warnings']))))
         a=b
+    if logs and start<len(logs):
+        try: _save(HISTORY_CACHE,dict(since=since,commit=commits[-1],files=files,a=a,out=out))
+        except OSError: pass
     return out
 
 
@@ -528,6 +576,8 @@ def report(head, output=None):
     for w in sorted(set(now['warnings'])): add('diagnostic','','','','','',w)
     (output/'sorry-ledger.tsv').write_text('\n'.join(machine)+'\n')
     (output/'sorry-ledger.md').write_text('\n'.join(lines)+'\n')
+    try: save_blob_cache()
+    except OSError: pass
     return dict(now={k:v for k,v in now.items() if k not in ('rows','undetermined_rows')},baselines=baselines,classes=dict(sorted(classes.items())),groups=groups)
 
 
