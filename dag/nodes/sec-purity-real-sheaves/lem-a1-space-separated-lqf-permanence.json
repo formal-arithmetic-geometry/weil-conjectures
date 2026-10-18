@@ -17,9 +17,100 @@
   "def-weil-open-immersion",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $h_U\\to X$ using [def-trf-algebraic-space]. By the hypothesis on every chart, the scheme morphism $U\\to T$ is locally quasi-finite. The fibre product $X_B$ exists as an algebraic space by [lem-trf-space-fibre-products-etale-covers]. Put $U_B=U\\times_T B$. On scheme tests, $h_{U_B}=h_U\\times_X X_B$: on a test scheme $H$, a section is a pair $(u,\\beta)$ with $f\\circ u=b\\circ\\beta$. For every scheme $D\\to X_B$ its atlas pullback is $D\\times_{X_B}h_{U_B}\\cong D\\times_Xh_U$, which is a scheme surjective etale over $D$ by the original atlas definition. Thus $h_{U_B}\\to X_B$ is representable surjective etale. The scheme map $U_B\\to B$ is locally quasi-finite by clause (2) of [lem-weil-pbc-separated-lqf-base-change], applied to $U\\to T$ and the arbitrary map $B\\to T$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-separated-lqf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03XL (lemma-base-change-quasi-finite) and 0ABM (lemma-base-change-quasi-finite-locus), proof: pull back a scheme atlas; scheme permanence is Tag 01TM"
+   }
+  },
+  {
+   "text": "Let $h_V\\to X_B$ be any representable etale chart. The fibre product $W=h_V\\times_{X_B}h_{U_B}$ is represented by a scheme. Its projection $p:W\\to V$ is surjective etale because it is the scheme test of the atlas from step 1; its other projection $q:W\\to U_B$ is etale because it is the scheme test of the chart $V\\to X_B$ [def-trf-algebraic-space]. Apply the forward assertion of [lem-a1-scheme-lqf-etale-source-locality] to $q$ and the locally quasi-finite scheme map $U_B\\to B$. Hence $W\\to B$ is locally quasi-finite. Since $W\\to B$ is also $W\\xrightarrow{p}V\\to B$, apply the converse assertion to the surjective etale $p$. This proves $V\\to B$ locally quasi-finite for every chart, precisely the required chartwise property for $X_B\\to B$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-scheme-lqf-etale-source-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABM (lemma-base-change-quasi-finite-locus), proof, reduction to scheme charts and etale source locality; Tag 03XL"
+   }
+  },
+  {
+   "text": "Write $j:O\\to X_B$ for the open inclusion. For a scheme $H\\to X_B$, the scheme $O_H=H\\times_{X_B}O\\to H$ is an open immersion by hypothesis, and hence etale by [lem-weil-pbc-etale-composition-cancellation](1). For any representable etale chart $h_V\\to O$, its composite to $X_B$ is representable etale: on the same scheme test $H$, the pullback is $V\\times_O O_H$, a scheme etale over the scheme $O_H$ by [def-trf-algebraic-space], and the composite to $H$ is etale by [lem-weil-pbc-etale-composition-cancellation](2). Step 2 applies to this chart of $X_B$, giving $V\\to B$ locally quasi-finite. Since $V$ was arbitrary, $O\\to B$ is chartwise locally quasi-finite.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XK (lemma-composition-quasi-finite), specialized to the open inclusion and expanded by scheme tests; scheme etale inputs are Tags 02GP and 02GN"
+   }
+  },
+  {
+   "text": "The inclusion $j$ is a monomorphism of sheaves. Indeed, suppose $a_1,a_2\\in O(H)$ have the same image $c\\in X_B(H)$ for a scheme $H$. They give two sections of the scheme open immersion $H\\times_{c,X_B}O\\to H$, both lying over $1_H$. These sections are equal by [lem-weil-pbc-open-immersion-monomorphism], so $a_1=a_2$. This proves injectivity on every $H$, which is precisely monomorphy for these set-valued sheaves. The identity inclusion $X_B\\to X_B$ is also a monomorphism.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KQ (lemma-composition-separated), open-inclusion specialization: its diagonal is an isomorphism, here expressed as injectivity on sections"
+   }
+  },
+  {
+   "text": "Take $Y=X_B$ or $Y=O$, and the monomorphism $j_Y:Y\\to X_B$ from step 4. Let $D$ be any scheme with a map to $Y\\times_B Y$, represented by $y_1,y_2\\in Y(D)$ with the same image $\\beta\\in B(D)$. Let $x_i\\in X(D)$ be their images. The scheme test of $\\Delta_{Y/B}$ represents equality $y_1=y_2$. On every further scheme test $H\\to D$, equality $x_1=x_2$ is equivalent to equality of $(x_1,\\beta),(x_2,\\beta)$ in $X_B(H)$, and then to $y_1=y_2$ by monomorphy of $j_Y$. Consequently, naturally over $D$,\n$$D\\times_{Y\\times_B Y}Y\\ \\cong\\ D\\times_{X\\times_T X}X.$$\nHere the map $D\\to X\\times_T X$ is $(x_1,x_2)$; it exists because both $f(x_i)$ equal the image of $\\beta$ in $T$. These identifications use the equality description of sheaf fibre products [def-trf-algebraic-space] and the fibre-product universal property [def-pc-fibre-product]. The right side is a scheme closed-immersed in $D$ by the assumed separatedness of $f$. Thus the left side is a scheme closed-immersed in $D$ as well [def-weil-closed-immersion]. This proves the required separatedness of both $X_B\\to B$ and $O\\to B$ on every scheme test.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KL (lemma-base-change-separated), diagonal pullback formula; Tag 03KQ for the monomorphic open restriction, with the equality of the two pullback functors written explicitly"
+   }
+  },
+  {
+   "text": "Finally suppose $O=h_Z$ for a scheme $Z$. The identity chart of $h_Z$ is representable etale: every scheme pullback is an identity, etale directly from the definition [def-weil-etale-morphism]. Applying step 3 to that chart gives the scheme map $Z\\to B$ locally quasi-finite. The fibre product $Z\\times_B Z$ is a scheme by [def-pc-fibre-product]; taking it as the scheme test by the identity map in step 5 says that the scheme diagonal $Z\\to Z\\times_B Z$ is a closed immersion. This is exactly separatedness of a scheme morphism in [def-weil-proper-morphism]. Taking $Y=X_B$ in steps 2 and 5 already supplies the in-particular clause.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KY (lemma-match-separated), definitions on a representable source, and Tag 03XJ (definition-locally-quasi-finite)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-a1-scheme-lqf-etale-source-locality",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KL and 03KQ for diagonals; Tags 03XL, 0ABM and 03XK for local quasi-finiteness via charts, with scheme source locality from descent.tex Tag 03X4."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +146,38 @@
    "results": "{\"t\": \"2026-10-18T02:07:24Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space locally quasi finite and separated over a scheme remains so on any base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\"], \"digest\": \"0244d34a3bce5417\"}",
    "date": "2026-10-18",
    "verdict": "no match: the hits are about schemes or ring maps, not algebraic spaces and their chartwise properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space mapping to a scheme local quasi finiteness of every etale chart is preserved by arbitrary base change",
+   "results": "{\"t\": \"2026-10-18T02:21:48Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic space mapping to a scheme local quasi finiteness of every etale chart is preserved by arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteSndScheme\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"74a1bf3b803ab23e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the semantic hits are scheme permanence only; the algebraic-space grep and Loogle queries find no algebraic-space declaration. Scheme LocallyQuasiFinite also lacks local finite type, so these are not one-line matches for the stated chartwise Stacks property."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space",
+   "results": "{\"t\": \"2026-10-18T02:22:25Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic space\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the semantic hits are scheme permanence only; the algebraic-space grep and Loogle queries find no algebraic-space declaration. Scheme LocallyQuasiFinite also lacks local finite type, so these are not one-line matches for the stated chartwise Stacks property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space with closed diagonal and locally quasi finite etale charts stays separated and locally quasi finite under base change and open restriction",
+   "results": "{\"t\": \"2026-10-18T02:22:26Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic space with closed diagonal and locally quasi finite etale charts stays separated and locally quasi finite under base change and open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.instResLE\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.isSeparated_iff\"], \"digest\": \"76466c7dfb492323\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the semantic hits are scheme permanence only; the algebraic-space grep and Loogle queries find no algebraic-space declaration. Scheme LocallyQuasiFinite also lacks local finite type, so these are not one-line matches for the stated chartwise Stacks property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "{\"t\": \"2026-10-18T02:22:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the semantic hits are scheme permanence only; the algebraic-space grep and Loogle queries find no algebraic-space declaration. Scheme LocallyQuasiFinite also lacks local finite type, so these are not one-line matches for the stated chartwise Stacks property."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-etale-quasi-affine-image-scheme",
@@ -79,5 +198,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-space-separated-lqf-permanence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six explicit steps: pull back an atlas, compare every chart using etale source locality of the Stacks scheme notion, compose open charts by scheme tests, prove the inclusion monic, identify both diagonal tests with tests of the original closed diagonal, and recover the scheme case by the identity chart. One new statement-only scheme locality input; no new algebraic-space permanence clause disguised as a lemma. All source hypotheses and cited statements read; Mathlib notion mismatch retained.",
+  "blueprint": "The inherited auxiliary representability branch beneath lem-a1-affine-hc0 (via the etale-space representability nodes): the base-change and open-restriction hypotheses in the Stacks 03XX/03XW induction. This foundational input does not replace either Rankin–Selberg unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products; the Rankin–Selberg unit supplies no alternative construction."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Clause (2) supplies base change of the Stacks scheme-local-quasi-finite notion for an atlas; it is a generic scheme tool, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-separated-lqf-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N5-de9149f43",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-de9149f43 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-a1-scheme-lqf-etale-source-locality, the statement of every cited node, Stacks spaces-morphisms 03KL/03KQ/03KY/03XJ/0ABM/03XK/03XL and descent 036G/03X4 (both statement and proof), the unit sk-p-real-rankin, and the parent lem-a1-etale-quasi-affine-image-scheme steps 6 and 8. The item statement is unchanged and is used by its parent exactly as stated. Step 1: h_{U_B} = h_U x_X X_B holds on sections, D x_{X_B} h_{U_B} = D x_X h_U, and U_B -> B is locally quasi-finite by clause (2) of the scheme base-change lemma. Step 2: W = V x_{X_B} U_B is a scheme; the new lemma is applied the right way round, forward along the etale map q and converse along the surjective etale map p, and the two composites W -> B agree. Step 3: a chart of O composes to a representable etale chart of X_B, using open immersion => etale and composition of etale maps. Step 4: monomorphy of O -> X_B comes from sections of a scheme open immersion. Step 5: a Yoneda identification D x_{YxBY} Y = D x_{XxTX} X, with the correct bases (Y x_B Y and X x_T X). Step 6: the identity chart and the test D = Z x_B Z give scheme separatedness. The new node is 03X4 for the singleton cover {p} and the cover {id, p}. It is true, and both hypotheses are needed: the empty source over A^1_k shows surjectivity is needed, and A^1_k -> Spec k shows etaleness is needed. It is statement-only and self-contained, with correct blueprint from/via fields. It is not a restatement of an item clause. An rg search for 03X4, 'local on the source' and quasi-finite statements found no duplicate. Mathlib's LocallyQuasiFinite lacks local finite type, so the node is not a Mathlib leaf. Accepted tool_uses: lem-trf-space-fibre-products-etale-covers (existence of X_B) and lem-weil-pbc-separated-lqf-base-change(2) (scheme base change). No SGA citation, no added hypotheses, no fixes."
  }
 }
