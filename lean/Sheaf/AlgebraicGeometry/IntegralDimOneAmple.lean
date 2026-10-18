@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AffineComplementFiniteOnIntegralCurve
 import Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated
 import Sheaf.AlgebraicGeometry.FindGloballyGenerated
+import Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated
 
 /-! # Ample invertible modules on integral curves
 
@@ -50,6 +51,13 @@ theorem exists_isAmple_of_integral_dim_one
     [Y.IsSeparated]
     (hY : topologicalKrullDim Y = (1 : WithBot ℕ∞)) :
     ∃ L : Y.Modules, ∃ hL : L.IsInvertible, @IsAmple Y L hL := by
-  sorry
+  apply exists_isAmple_of_enough_globallyGenerated Y
+  intro x
+  obtain ⟨U, hU, hx, _⟩ := exists_isAffineOpen_mem_and_subset
+    (X := Y) (x := x) (U := ⊤) (by trivial)
+  obtain ⟨L, hL, hG, s, hs⟩ :=
+    exists_globallyGenerated_invertible_nonvanishing_eq Y hY U hU ⟨x, hx⟩
+      (hU.finite_compl_of_integral_dim_one hY ⟨x, hx⟩)
+  exact ⟨L, hL, hG, s, U, hs.symm, hx, hU⟩
 
 end AlgebraicGeometry.Scheme.Modules
