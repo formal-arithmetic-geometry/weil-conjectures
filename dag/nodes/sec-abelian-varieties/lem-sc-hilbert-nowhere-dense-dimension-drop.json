@@ -25,52 +25,43 @@
  ],
  "proof": [
   {
-   "text": "If Z is empty, its Krull dimension is -infinity and the conclusion is immediate. Otherwise, let C be an irreducible component of Z. By [lem-sc-irreducible-components-cover], C is contained in an irreducible component W of X.",
+   "text": "For every w in Z choose an affine open neighbourhood U. By [pqf-def-locnoeth] its coordinate ring is Noetherian, and [lem-sc-affine-noetherian-underlying-space] makes its underlying space Noetherian. Choose the irreducible component C of U containing w using [lem-sc-irreducible-components-cover], and take its generic point eta [def-sc-generic-point]; open subschemes of schemes are sober, as supplied by Mathlib.",
    "uses": [
+    "pqf-def-locnoeth",
+    "lem-sc-affine-noetherian-underlying-space",
     "lem-sc-irreducible-components-cover",
-    "def-kun-topological-krull-dimension"
+    "def-sc-generic-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02P2, conclusion from the nowhere-dense closed support; irreducible-component containment from Topology Tag 004W"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sc-locnoeth-components-locally-finite], the irreducible components of X are locally finite. Hence the union of the components other than W is closed near the generic point of W, and W has a nonempty open subset disjoint from that union. If C=W, this open subset lies in Z, contradicting that Z is nowhere dense. Therefore C is strictly contained in W. Every chain of irreducible closed subsets in C extends by W, so dim C + 1 <= dim W <= d.",
+   "text": "If eta belongs to Z, the defining closure equality for the generic point and closedness of Z imply C is contained in the inverse image of Z in U. By [lem-sfb-noetherian-component-open], C contains a nonempty open O of U. Since U is open in X, the image of O is a nonempty open of X contained in Z, contradicting IsNowhereDense Z. Therefore eta lies outside Z and specializes to w. This argument is written completely in the Lean proof and needs no local-finiteness theorem for the global components.",
    "uses": [
-    "lem-sc-locnoeth-components-locally-finite",
-    "lem-sc-irreducible-components-cover",
-    "def-kun-topological-krull-dimension"
+    "def-sc-generic-point",
+    "lem-sfb-noetherian-component-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02P2, finite-dimensional Noetherian dimension argument from a nowhere-dense closed support"
-   }
+   "elementary": true
   },
   {
-   "text": "Taking the supremum over all irreducible components C of Z gives dim Z <= d - 1, hence dim Z < d. The same argument covers d=0: a nonempty C would force a strict chain in X, while the empty case was handled in step 1.",
+   "text": "Apply the proved source-library theorem topologicalKrullDim_lt_of_forall_exists_specializes (WeilConjectures.Mathlib.Topology.KrullDimension) to Z inside the ambient closed subset univ. Its hypothesis on generalizations is the preceding step. The subspace dimension bound [def-kun-topological-krull-dimension] and hX imply dim(univ) <= dim X = d < d+1. The theorem extends a specialization chain of length d in Z by an outside generalization, contradicting this bound, and concludes dim Z < d. It also handles Z empty and d=0. No new postponed theorem is used.",
    "uses": [
     "def-kun-topological-krull-dimension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02P2, dimension conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-sc-affine-noetherian-underlying-space",
   "lem-sc-irreducible-components-cover",
-  "def-kun-topological-krull-dimension",
-  "lem-sc-locnoeth-components-locally-finite",
-  "lem-sc-irreducible-components-cover"
+  "def-sc-generic-point",
+  "lem-sfb-noetherian-component-open",
+  "def-kun-topological-krull-dimension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/topology.tex",
-  "place": "Tag 0052 (topology-lemma-Noetherian), with Tag 004W (topology-lemma-irreducible) for the component-cover input"
+  "place": "Tag 0052 (lemma-Noetherian), part (3), on affine Noetherian neighbourhoods; dimension chain extension from the proved source-library theorem topologicalKrullDim_lt_of_forall_exists_specializes in WeilConjectures.Mathlib.Topology.KrullDimension. Replaces the global local-finiteness and component-supremum argument."
  },
  "mathlib_searches": [
   {
@@ -155,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261018T062925-L-683980",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
