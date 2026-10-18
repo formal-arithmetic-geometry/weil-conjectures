@@ -15,24 +15,9 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.TensorPullback
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
-import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
-import Sheaf.AlgebraicGeometry.EtaleFiniteAffineCechBasis
-import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
-import WeilConjectures.CategoryTheory.SiteCechMathlibComparison
-import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen
-import Sheaf.CategoryTheory.AcyclicCechEdgeCompatibility
-import Sheaf.AlgebraicGeometry.ModuleCechComparison
-import Sheaf.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.CategoryTheory.RingedSiteCechRefinementSquare
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.QcoherentPullbackSections
+import Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare
+import Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison
 
 /-! # Quasi-coherent cohomology comparison and pullback
 
@@ -51,44 +36,21 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 set_option autoImplicit false
-
-/-- Structural pullback of a tensor section across a square, followed by the module map.
-Source: Stacks Project, Tags 03P2, 03DR and 01FD.
-(blueprint: lem-weil-pbc-qcoherent-cohomology-comparison-pullback). -/
-def qcoherentPullbackSection {X Y : Scheme.{u}} (g : Y ⟶ X)
-    (F : X.Modules) (G : Y.Modules) (ψ : (tensorPullback g).obj F ⟶ G)
-    (U : X.Etale) (V : Y.Etale) (p : V.left ⟶ U.left)
-    (h : p ≫ U.hom = V.hom ≫ g) :
-    Γ((tensorPullback U.hom).obj F, ⊤) ⟶ Γ((tensorPullback V.hom).obj G, ⊤) :=
-  tensorSectionsUnit p ((tensorPullback U.hom).obj F) ≫
-    ((tensorSectionsComp p U.hom).hom.app F).app ⊤ ≫
-    (eqToHom (congrArg (fun f ↦ (tensorPullback f).obj F) h)).app ⊤ ≫
-    ((tensorSectionsComp V.hom g).inv.app F).app ⊤ ≫
-    ((tensorPullback V.hom).map ψ).app ⊤
+attribute [local irreducible] moduleAbelianCohomologyLarge coherentEtaleMap
+  qcoherentPullbackSection moduleCohomologyFMap IsNormalizedCoherentEtaleComparison
 
 /-- The simultaneous normalized comparison, natural for arbitrary scheme pullback.
 Source: Stacks Project, Étale Cohomology, Tag 03P2 and Cohomology, Tag 01FD.
 (blueprint: lem-weil-pbc-qcoherent-cohomology-comparison-pullback).
 
-Proof: Choose finite affine covers by qcqs-scheme-cofinal-finite-coverings. Separatedness
-makes tuple intersections affine (separated-affine-open-intersection); identify their
-fibre products by zariski-etale-inclusion-morphism-of-sites. Quasi-coherent restriction
-and etale-cohomology-over-open reduce ordinary affine acyclicity to etale-affine-qcoherent.
-For lifted coefficients use finite-affine-cech-basis, affine-tensor-cech-vanishing,
-site-cech-mathlib-comparison and cech-vanishing-criterion. The acyclic-cech-edge-compatibility
-and module-cech-comparison, together with module-cech-beta-affine-quasi-iso, give invertible
-normalized edges. Between them insert coordinatewise ULift.down. It commutes with the
-signed face restrictions and has inverse ULift.up. The double-complex-total sign
-(-1)^(tr) identifies the two totalizations and is identity on the augmentation axes.
-This proves normalization in degree zero. Common affine refinements and the
-ringed-site-cech-refinement-square show independence of the cover. For a morphism g,
-refine the inverse image cover on Y by affine opens, without assuming the inverse images
-are affine. The same refinement square for the etale sites (sets-etale-inverse-image-exact)
-and the ringed Zariski sites identifies the two cochain maps: structurally pull back
-and apply ψ. Coordinatewise down commutes with this formula. Cancel the invertible
-edges to obtain naturality for cohomology-pullback and module-cohomology-fmap. Finally
-specialize g to identity and ψ to multiplication; cohomology-pullback-functorial gives
-the scalar clause. -/
+Proof: Choose the uniquely normalized comparison on each scheme and invert it.
+Its section normalization gives the degree-zero clause after cancelling the two
+additive equivalences. The normalized Cech refinement square supplies the coefficient sheaf map with
+its structural section formula and the required cohomology equality for the
+arbitrary scheme morphism and coefficient map. For scalars, use coefficient
+naturality of the normalized comparison on module cohomology, specialized to
+multiplication by the scalar.
+Cancel the chosen additive equivalence to obtain the scalar identity. -/
 theorem exists_qcoherentCohomologyComparisonPullback :
     ∃ c : ∀ (X : Scheme.{u}) [CompactSpace X] [Scheme.IsSeparated X]
       (F : X.Modules) [F.IsQuasicoherent] (q : ℕ),
@@ -123,9 +85,28 @@ theorem exists_qcoherentCohomologyComparisonPullback :
         (F : X.Modules) [F.IsQuasicoherent] (a : Γ(X, ⊤)) (q : ℕ)
         (x : Sheaf.H (liftedCoherentEtaleSheaf F) q),
         c X F q (Sheaf.H.map (coherentEtaleMap F F (F.smulHom a)) q x) =
-          (RingedSpace.moduleCohomology X.toRingedSpace q).map (F.smulHom a) (c X F q x)) := by
-  sorry
+          (RingedSpace.moduleCohomology X.toRingedSpace q).map (F.smulHom a)
+            (c X F q x)) := by
+  classical
+  choose d hd using fun (X : Scheme.{u}) (hC : CompactSpace X)
+      (hS : Scheme.IsSeparated X) ↦
+    (@exists_unique_qcoherentNormalizedComparison X hC hS).exists
+  refine ⟨fun X hC hS F hF q ↦ (@d X hC hS F hF q).symm, ?_, ?_, ?_⟩
+  · intro X hC hS F hF s
+    have hz := (hd X hC hS).2.1
+    exact (@d X hC hS F hF 0).symm_apply_eq.mpr
+      ((Sheaf.H.equiv₀ (liftedCoherentEtaleSheaf F) terminalIsTerminal).symm_apply_eq.mpr
+        (@hz F hF s).symm)
+  · intro X Y hCX hSX hCY hSY g F G hF hG ψ
+    exact @qcoherentNormalizedComparison_pullback_square X Y hCX hSX hCY hSY
+      (d X hCX hSX) (d Y hCY hSY) (hd X hCX hSX).1 (hd Y hCY hSY).1
+      g F G hF hG ψ
+  · intro X hC hS F hF a q x
+    have hn := (hd X hC hS).2.2
+    have h := @hn F F hF hF (F.smulHom a) q ((@d X hC hS F hF q).symm x)
+    exact (@d X hC hS F hF q).symm_apply_eq.mpr
+      ((h.trans (congrArg (fun z ↦ Sheaf.H.map (coherentEtaleMap F F (F.smulHom a)) q z)
+        ((@d X hC hS F hF q).apply_symm_apply x))).symm)
 
 end
-
 end AlgebraicGeometry.Scheme.Modules
