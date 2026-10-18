@@ -20,9 +20,158 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work on an affine Noetherian scheme $T$ (step 5 only needs this case) with constructible $A$-module sheaves in the finite-stratification, finite-type sense of the statement. Finitely generated $A$-modules are finitely presented by [lem-sc-noetherian-finite-module-finite-presentation], so the closure theorem [lem-sfb-discrete-noetherian-constructible-serre] applies, and on affine $T$ its convention agrees with ours: a finite stratification of $T$ meets each affine open $U$ in a finite partition by locally closed, hence (as $U$ is Noetherian) constructible subsets, with the same locally constant restrictions; conversely, taking $U=T$ in its convention gives a finite stratification of $T$ itself. Given such a sheaf $F$, apply [lem-per-noetherian-constructible-flat-lifting] with $p=1_F$ and $g=1_F$. It gives an epimorphism $E\\to F$ with $E$ constructible and a finite sum of $u_!A_U$ for affine etale $U$. Its kernel $F'$ is constructible by the closure theorem, hence again in our sense. Repeating gives as many constructible syzygies as needed, without assuming finite projective dimension. All colimits below are over the given small filtered category; module sheaves have exact such colimits by [lem-weil-pbc-module-sheaves-grothendieck-abelian].",
+   "uses": [
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-sfb-discrete-noetherian-constructible-serre",
+    "lem-per-noetherian-constructible-flat-lifting",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095N, lemma-category-constructible-modules; 03RZ, lemma-constructible-abelian (3); 03TT, lemma-when-ctf, finite affine lifting input."
+   }
+  },
+  {
+   "text": "For $E=\\bigoplus_t u_{t!}A_{U_t}$ and every $q\\geq0$, the adjunction and injective preservation of [lem-weil-pbc-etale-restriction-injectives], followed by [lem-weil-pbc-free-sheaf-derived-sections] and [lem-weil-pbc-ext-via-injective-resolution], give naturally in $G$\n$$\\operatorname{Ext}^q_T(E,G)=\\bigoplus_t H^q(U_t,G|_{U_t}).$$\nIndeed a cocycle $E\\to I^q$ is a finite tuple of sections of the restricted injective resolution; the adjunction carries both differentials and postcomposition by a coefficient map to their sectionwise counterparts. Each $U_t$ is affine, hence qcqs. Restriction preserves the colimit as a left adjoint by [prop-weil-pbc-inverse-image-modules-exact]. The module-coefficient clause of [lem-weil-pbc-cohomology-filtered-colimit] therefore shows that the canonical comparison for $\\operatorname{Ext}^q_T(E,-)$ is an isomorphism. Finite sums commute with colimits by their universal properties.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-free-sheaf-derived-sections",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q5, lemma-colimit; the etale sum-extension adjunction and injective-resolution computation."
+   }
+  },
+  {
+   "text": "For a constructible $F$, write $0\\to F'\\to E_0\\to F\\to0$ as in step 1 and choose a cover $E_1\\to F'$. Then $\\operatorname{Hom}(F,G)$ is the kernel of $\\operatorname{Hom}(E_0,G)\\to\\operatorname{Hom}(E_1,G)$. Step 2 in degree zero and exactness of filtered colimits of groups [lem-weil-pbc-filtered-colimit-abelian-groups-exact] prove the canonical degree-zero comparison for $F$. Put $c_F^q:\\varinjlim_i\\operatorname{Ext}^q_T(F,G_i)\\to\\operatorname{Ext}^q_T(F,G)$, where $G=\\varinjlim_iG_i$. Induct on $q$ simultaneously for all constructible $F$. The induction hypothesis is that every $c_F^{q-1}$ is an isomorphism. The first-variable exact sequence [lem-coef-ext-contravariant-six-term] gives the natural comparison ladder on\n$$\\operatorname{Ext}^{q-1}(E_0,-)\\to\\operatorname{Ext}^{q-1}(F',-)\\to\\operatorname{Ext}^{q}(F,-)\\to\\operatorname{Ext}^{q}(E_0,-)\\to\\operatorname{Ext}^{q}(F',-).$$\nThe upper row stays exact after colimit by the exactness lemma.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-coef-ext-contravariant-six-term"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095N and 03Q5; first-variable Ext exact sequence as in derived.tex, Tag 06XP, section-ext."
+   }
+  },
+  {
+   "text": "First every $c_F^q$ is injective. If $x$ in its source maps to zero, its image in the fourth term is zero since $c_{E_0}^q$ is an isomorphism. Thus $x$ comes from $y$ in the second term. Its lower image comes from the first term. Lift this first-term element through $c_{E_0}^{q-1}$ and subtract its image from $y$. The result maps to zero below and is zero because $c_{F'}^{q-1}$ is injective. Hence $x=0$. This argument works for every constructible $F$, so in particular $c_{F'}^q$ is injective. In the five-term ladder of step 3, the first comparison is epi, the second and fourth are isomorphisms, and the fifth is now mono. The five lemma [lem-weil-pbc-five-lemma] proves that $c_F^q$ is an isomorphism. This completes the induction for all $q\\geq0$ and all constructible sheaves; negative Ext between degree-zero sheaves vanishes by a nonnegative injective resolution [lem-weil-pbc-dplus-injective-representative, lem-weil-pbc-kinjective-hom-derived].",
+   "uses": [
+    "lem-weil-pbc-five-lemma",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Agent dimension-shifting argument expanding ILO XVII 10.1.1, first proof paragraph, using Tags 095N and 03Q5."
+   }
+  },
+  {
+   "text": "Pass from these global Ext groups to sheaf Ext. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], derived internal Hom restricts to every etale slice. For a sheaf $F$ and an injective resolution $G\\to I^\\bullet$ in degrees $\\geq0$, [def-pur-derived-internal-hom, def-pur-sheaf-hom] identify its Hom complex evaluated at $V$ with $\\operatorname{Hom}(F|_V,I^\\bullet|_V)$. Restriction preserves injectives [lem-weil-pbc-etale-restriction-injectives], so its degree-$q$ cohomology is $\\operatorname{Ext}^q_V(F|_V,G|_V)$ by [lem-weil-pbc-ext-via-injective-resolution]. Exact sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact] identifies sheaf Ext with the associated sheaf of this presheaf. Use affine etale $V$ as a basis. These are Noetherian: etale maps are locally finitely presented [def-weil-etale-morphism], and on affine charts their finite-type algebras over Noetherian rings are Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]. Constructibility restricts by pulling back the finite stratification and its constant charts; on a Noetherian scheme all locally closed strata are constructible. Apply steps 1--4 on $V$. Restrictions preserve colimits by [prop-weil-pbc-inverse-image-modules-exact]; sheafification preserves them as a left adjoint [def-weil-presheaf-modules-sheafification]. Sheafifying the objectwise Ext comparisons proves the desired sheaf comparison when $K=F[0]$. The cocycle formula shows that its legs are exactly the prescribed coefficient maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-derived-internal-hom",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 08JB, lemma-restriction-RHom-to-U, sites-cohomology.tex; Tag 03EI, lemma-sheafification-exact, sites-modules.tex; Tag 03Q5 on affine etale objects."
+   }
+  },
+  {
+   "text": "If $C\\in D^{\\leq a}(X_{\\mathrm{et}},A)$ and $N\\in D^{\\geq b}$, then $R\\mathcal Hom(C,N)\\in D^{\\geq b-a}$. To see the bound directly, take a representative $P$ with $P^j=0$ for $j>a$ by [def-sbc-standard-tstructure-derived-category], and an injective representative $I$ of $N$ with $I^j=0$ for $j<b$ by [lem-weil-pbc-dplus-injective-representative]. The formula [def-pur-derived-internal-hom] has degree-$t$ terms $\\prod_j\\mathcal Hom(P^j,I^{j+t})$. For $t<b-a$, every factor is zero: $j>a$ kills $P^j$, while $j\\leq a$ gives $j+t<b$ and kills $I^{j+t}$. Thus its cohomology is zero there. This is a degreewise computation, requiring no finite Tor amplitude.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Agent degree calculation in the Hom-complex model of sites-cohomology.tex Tag 08J7; derived.tex Tags 013K and 070J."
+   }
+  },
+  {
+   "text": "For a bounded cohomological complex $B$ with constructible cohomology, the assertion now follows by finite induction on its cohomological interval. The truncation triangle [lem-weil-pbc-truncation-triangle] removes the highest cohomology sheaf $H^q(B)[-q]$. Shifts merely reindex the Ext degrees by [lem-weil-pbc-ringed-internal-hom-exact-restriction], so step 5 handles that sheaf and all its shifts. The same internal-Hom lemma takes the triangle to a triangle in the first variable. Its cohomology long exact sequence is [lem-sf-derived-homology-long-exact], naturally in the coefficient maps by [lem-weil-pbc-derived-cohomology-ladder]. Exact filtered colimits in module sheaves [lem-weil-pbc-module-sheaves-grothendieck-abelian] give the comparison ladder. Five consecutive terms have outer four comparisons invertible by induction, so [lem-weil-pbc-five-lemma] gives the middle comparison. The base is the zero object (every Hom complex is zero); hence all finite intervals, including a single nonzero cohomology degree, are covered.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Agent finite Postnikov devissage; derived.tex Tag 08J5, remark-truncation-distinguished-triangle; sites-cohomology.tex Tag 08JC, lemma-RHom-triangulated."
+   }
+  },
+  {
+   "text": "Finally fix the requested integer $n$ and choose $m<\\min(-n,r)$. The standard truncation triangle [lem-sf-derived-truncation-triangle] is $C=\\tau_{\\leq m-1}K\\to K\\to B=\\tau_{\\geq m}K\\to C[1]$. Here $B$ has constructible cohomology in the finite interval $[m,r]$. Step 6 with $a=m-1,b=0$ gives $H^tR\\mathcal Hom(C,G_i)=H^tR\\mathcal Hom(C,G)=0$ for $t<1-m$. In particular these vanish for $t=n-1,n$. Apply the contravariant triangle and its long exact cohomology sequence [lem-weil-pbc-ringed-internal-hom-exact-restriction, lem-sf-derived-homology-long-exact]: the natural map $H^nR\\mathcal Hom(B,-)\\to H^nR\\mathcal Hom(K,-)$ is an isomorphism on every $G_i$ and on $G$. Naturality [lem-weil-pbc-derived-cohomology-ladder] identifies the resulting square with the canonical filtered-colimit comparison square. Its top arrow is an isomorphism by step 7 and its vertical arrows are isomorphisms, so its bottom arrow is an isomorphism. This proves the statement for all integers $n$, including negative ones, without any lower bound on $K$.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-cohomology-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "ILO XVII Proposition 10.1.1, p. 325, Ext continuity assertion expanded by a finite truncation window."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-per-noetherian-constructible-flat-lifting",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-free-sheaf-derived-sections",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-coef-ext-contravariant-six-term",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-pur-derived-internal-hom",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-sf-derived-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII Proposition 10.1.1, p. 325, first proof paragraph; expanded using Stacks 095N, 03RZ, 03Q5, 08J7 and 08JC."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +235,45 @@
    "results": "25 hits; top: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean; Mathlib subdirectory: CategoryTheory/Sites; digest: e92ca9111ca5ce29",
    "date": "2026-10-18",
    "verdict": "no match: results give general sheaf, Ext, derived-category or spectral-object infrastructure, not the stated constructible etale continuity or the stated internal-Hom spectral sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of a finite type constant module along a quasi compact etale map is constructible over any Noetherian coefficient ring",
+   "results": "{\"t\": \"2026-10-18T20:12:22Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero of a finite type constant module along a quasi compact etale map is constructible over any Noetherian coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"ChevalleyThm.chevalley_mvPolynomialC\", \"ChevalleyThm.chevalley_polynomialC\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"PrimeSpectrum.isConstructible_range_comap\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"PrimeSpectrum.isConstructible_comap_image\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\"], \"digest\": \"c910c72810d8e21a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern general sheaf/Ext/filtered-colimit infrastructure, not constructible etale Ext continuity"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext|filtered.*colimit|constructible",
+   "results": "{\"t\": \"2026-10-18T20:18:38Z\", \"tool\": \"grep\", \"query\": \"Ext|filtered.*colimit|constructible\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ExactSequence.lean\", \"Mathlib/Algebra/Homology/ExactSequence.lean\", \"Mathlib/Algebra/Homology/ExactSequence.lean\", \"Mathlib/Algebra/Homology/ExactSequence.lean\", \"Mathlib/Algebra/Homology/ExactSequence.lean\", \"Mathlib/Algebra/Homology/ComplexShapeSigns.lean\", \"Mathlib/Algebra/Homology/ComplexShapeSigns.lean\", \"Mathlib/Algebra/Homology/ComplexShapeSigns.lean\"], \"digest\": \"2f8fb0a48fa0c71e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern general sheaf/Ext/filtered-colimit infrastructure, not constructible etale Ext continuity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Noetherian scheme and Noetherian ring, sheaf Ext from a bounded above constructible complex commutes with filtered colimits of module sheaves",
+   "results": "{\"t\": \"2026-10-18T20:18:39Z\", \"tool\": \"leansearch\", \"query\": \"For a Noetherian scheme and Noetherian ring, sheaf Ext from a bounded above constructible complex commutes with filtered colimits of module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.FilteredColimits.M\", \"ModuleCat.FilteredColimits.colimit\", \"ModuleCat.FilteredColimits.M.mk\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"CategoryTheory.Sheaf.H\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"CommRingCat.FilteredColimits.colimit\"], \"digest\": \"ae820f23ce0296f4\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern general sheaf/Ext/filtered-colimit infrastructure, not constructible etale Ext continuity"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext, CategoryTheory.Limits.Filtered",
+   "results": "{\"t\": \"2026-10-18T20:18:39Z\", \"tool\": \"loogle\", \"query\": \"Ext, CategoryTheory.Limits.Filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.Filtered'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.Limits.Filtered'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf Ext from a constructible complex commutes with filtered colimits of sheaves on the etale site",
+   "results": "{\"t\": \"2026-10-18T20:18:40Z\", \"tool\": \"leanfinder\", \"query\": \"Derived sheaf Ext from a constructible complex commutes with filtered colimits of sheaves on the etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"SheafOfModules.Presentation.isColimit\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.isSheaf_pointwiseColimit\", \"Ext\", \"CategoryTheory.Sheaf.ab5ofSize\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\"], \"digest\": \"3471da66fcf0771a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern general sheaf/Ext/filtered-colimit infrastructure, not constructible etale Ext continuity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-constructible-rhom-coproduct-continuity",
@@ -114,5 +298,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-constructible-ext-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Expanded Ext continuity by finite affine free covers with arbitrary Noetherian coefficients, global Ext induction, exact sheafification, and bounded truncation devissage. No change to statement and no new nodes.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 1 relative Verdier duality, via coefficient comparison: the ILO XVII 10.1.1 first-paragraph Ext-continuity input. Steps 1--5 prove the sheaf case, steps 6--8 pass to D_c^-.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-discrete-noetherian-constructible-serre",
+    "why": "Generic Constructible sheaves over a discrete Noetherian ring form a weak Serre subcategory used as sheaf/homological algebra infrastructure for Ext continuity; the perverse-curve unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic Sheaves of Lambda-modules on the small etale site form a Grothendieck abelian category used as sheaf/homological algebra infrastructure for Ext continuity; the perverse-curve unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites used as sheaf/homological algebra infrastructure for Ext continuity; the perverse-curve unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-a2b84da65",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-a2b84da65 (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, no new nodes, statement unchanged. Read all 26 cited statements and ILO XVII Prop. 10.1.1 (PDF p. 331, printed p. 325), whose first proof paragraph asserts that Ext^q(X,-) commutes with filtered colimits for X in D^-_c over a Noetherian Z and a Noetherian ring A. The item states exactly this with the same hypotheses: no Tor-amplitude or lower-bound condition, the ordinary D(X_et,A), and the caller rhom-coproduct-continuity uses identical hypotheses. Checked each step: (1) syzygies from flat-lifting with p=g=1_F plus Serre closure; (2) Ext(u_!A_U,G)=H^q(U,G|U), with the qcqs filtered-colimit node's module clause; (3)-(4) a correct injectivity chase before the five lemma, induction not circular; (5) presheaf Ext on affine etale V (Noetherian), exact sheafification, and an isomorphism on a basis; (6) degree bound t<b-a checked; (7) devissage over the bounded interval; (8) m<min(-n,r) makes degrees n-1 and n vanish. FIX: step 1 fed the kernel back into the lifting node, whose constructibility uses a global stratification, while the Serre node's convention is per affine open with finitely presented values. Step 1 now works on affine Noetherian T (the only case step 5 uses) and gives the two-line agreement of the conventions there. Off-route tool use lem-sfb-discrete-noetherian-constructible-serre accepted (generic Serre closure, arbitrary Noetherian R); the other two declared tool uses are inside the route. No cycle (closure of 477 nodes). No duplicate among the pro-etale/condensed/F_ell continuity nodes.; 1 file(s) fixed by the reviewer"
  }
 }
