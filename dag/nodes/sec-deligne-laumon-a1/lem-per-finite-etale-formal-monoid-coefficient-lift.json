@@ -16,9 +16,173 @@
   "def-weil-etale-morphism",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=E/\\mathfrak n$, $R=E[S]$ and $\\mathfrak b=(\\mathfrak n,[s]:s\\ne0)\\subset R$. Sharpness implies that a sum of nonzero monoid elements cannot be zero, so sending every nonzero monomial to zero defines the augmentation $R\\to E$. Thus $R/\\mathfrak b=k$. Choose finitely many nonzero generators of $S$; their monomials, together with generators of $\\mathfrak n$, generate $\\mathfrak b$. Also $R$ is a quotient of a polynomial ring in finitely many variables over $E$, hence is Noetherian by finite-type permanence. Its completion $H$ is Noetherian by completion permanence. The completion-mod-ideal theorem gives that $H$ is complete for $\\mathfrak bH$ and that $H/\\mathfrak bH=k$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 0316 (lemma-completion-Noetherian-Noetherian), 05GG (lemma-hathat-finitely-generated)."
+   }
+  },
+  {
+   "text": "Every $z\\in\\mathfrak bH$ is topologically nilpotent, so the compatible partial sums $1+z+\\cdots+z^{q-1}$ define an inverse of $1-z$ in the complete ring $H$. If $h$ has nonzero image in the field $H/\\mathfrak bH=k$, choose $v$ with $hv\\equiv1\\pmod{\\mathfrak bH}$; the preceding inverse makes $h$ a unit. Therefore $H$ is nonzero local with maximal ideal $\\mathfrak bH$ and residue field $k$. Since $f$ is in this maximal ideal, $(f)$ is proper. The complete-local quotient theorem makes $A_0=H/(f)$ a nonzero complete Noetherian local ring with maximal ideal $\\mathfrak m_0=\\mathfrak bH/(f)$ and residue field $k$. Completeness makes both $(E,\\mathfrak n)$ and $(A_0,\\mathfrak m_0)$ henselian pairs, hence henselian local rings.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-weil-pbc-complete-pair-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 0325 (lemma-quotient-complete-local); More on Algebra Tag 0ALJ (lemma-complete-henselian). The geometric-series argument is written out."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be the maximal ideal of $K$. Since $K$ is finite over $A_0$, the finite-algebra integrality theorem and contraction of maximal ideals under integral maps give $\\mathfrak q\\cap A_0=\\mathfrak m_0$. Apply the etale prime-ideal theorem at $\\mathfrak q$. As localization of a local ring at its maximal ideal is the ring itself, it yields $\\mathfrak q=\\mathfrak m_0K$. The etale residue-field theorem gives that $L=K/\\mathfrak q=\\kappa(K)$ is finite separable over $k$. Thus $L$ is a nonzero finite etale $k$-algebra by the finite-separable-extension theorem.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral), 00OI (lemma-going-up-maximal-on-top), with 00GU (lemma-integral-going-up), 00U4 (lemma-etale-at-prime), 00U3 (lemma-etale-over-field)."
+   }
+  },
+  {
+   "text": "Apply essential surjectivity of the henselian finite-etale equivalence to $E$ and the finite etale $k$-algebra $L$. It supplies a finite etale $E$-algebra $D$ with a fixed $k$-algebra isomorphism $D/\\mathfrak nD\\cong L$. This makes $D$ nonzero. The finite-algebra integrality theorem shows that every maximal ideal of $D$ contracts to the unique maximal ideal $\\mathfrak n$ of $E$. Consequently every maximal ideal of $D$ contains $\\mathfrak nD$; since the quotient is a field, $\\mathfrak nD$ is the unique maximal ideal. Thus $D$ is local and $\\mathfrak m_D=\\mathfrak nD$, with residue field identified with $L$. A finite module algebra is finite type: a finite set of module generators also generates the algebra. Finite-type permanence makes $D$ Noetherian. The finite-module completeness theorem over the complete Noetherian ring $E$ makes $D$ complete for $\\mathfrak nD=\\mathfrak m_D$.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GK (lemma-henselian-cat-finite-etale), 00GK (lemma-finite-is-integral), 00OI (lemma-going-up-maximal-on-top), with 00GU (lemma-integral-going-up), 00FN (lemma-Noetherian-permanence), 00MA (lemma-completion-tensor), part (3)."
+   }
+  },
+  {
+   "text": "The regular-local localization theorem makes $E$ a regular ring. The affine etale comparison identifies $E\\to D$ with a finitely presented ring map having $H_1(L_{D/E})=0$ and $\\Omega_{D/E}=0$. The zero module is finite projective (a direct summand of the rank-zero free module), so the definition of a smooth ring map makes $E\\to D$ smooth. Regularity ascends along smooth ring maps. Therefore $D$ is regular, and its localization at its unique maximal ideal, which is $D$ itself, is a regular local ring.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-regular-ring-smooth-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0AFS (lemma-localization-of-regular-local-is-regular), 00U1 (definition-etale), 00T2 (definition-smooth), 07NF (lemma-regular-goes-up); Morphisms Tag 02GJ (lemma-etale-characterize)."
+   }
+  },
+  {
+   "text": "The etale-flatness theorem makes $D$ flat over $E$. Since it is finite and $E$ is local, the finite-flat-local theorem makes $D$ free over $E$. Its basis can be taken finite: the union of the finite supports of any finite generating set contains every basis vector. Fix such a basis $d_1,\\ldots,d_r$; $r>0$ because $D\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-finite-flat-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U2 (lemma-etale), flatness assertion; 00NZ (lemma-finite-flat-local)."
+   }
+  },
+  {
+   "text": "Put $R_D=D[S]$ and $\\mathfrak b_D=(\\mathfrak m_D,[s]:s\\ne0)$. Since $\\mathfrak m_D=\\mathfrak nD$, one has $\\mathfrak b_D=\\mathfrak bR_D$. The chosen basis gives $R_D=\\bigoplus_{i=1}^r d_iR$ and, for every $q\\ge1$, $\\mathfrak b_D^q=\\bigoplus_{i=1}^r d_i\\mathfrak b^q$: expand elements in the basis and multiply by the generators of the extended ideal. Hence $R_D/\\mathfrak b_D^q=\\bigoplus_i d_i(R/\\mathfrak b^q)$. A compatible sequence in this finite direct sum is exactly $r$ compatible coordinate sequences. Taking the defining inverse limits therefore identifies $D[[S]]$ with $\\bigoplus_i d_iH$. The resulting map $\\Phi:D\\otimes_E H\\to D[[S]]$ sends $d\\otimes h$ to the product of the constant coefficient $d$ and the image of $h$. It is bijective by the displayed basis calculation and multiplicative because it is induced by the commuting coefficient and monoid maps at every quotient level. Thus $\\Phi$ is a ring isomorphism. In particular the image of $h\\in H$ is its coefficientwise image. This calculation also works when $S=\\{0\\}$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary finite-basis computation from the defining inverse limits; compatible with Tag 00MA (lemma-completion-tensor)."
+   }
+  },
+  {
+   "text": "Under $\\Phi$, multiplication by the coefficientwise image of $f$ acts as multiplication by $f$ in each of the $r$ coordinates $H$. Thus quotienting gives an $A_0$-algebra isomorphism $C:=D\\otimes_E A_0\\cong D[[S]]/(f)$: both modules are $\\bigoplus_i d_i(H/(f))$, and their ring operations are induced by the same coefficient products in $D$ and multiplication in $H$. Explicitly the map is $d\\otimes\\bar h\\mapsto\\overline{\\Phi(d\\otimes h)}$, independent of the chosen lift $h$ since two lifts differ by a multiple of $f$. The inverse is given coordinatewise in the basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary quotient and finite-basis calculation; no commutation of an infinite tensor product with a limit is assumed."
+   }
+  },
+  {
+   "text": "The base-change theorem makes $C=D\\otimes_E A_0$ etale over $A_0$, and its displayed $r$-element basis makes it finite. Reducing this basis presentation modulo $\\mathfrak m_0$, or just sending $d\\otimes a$ to $\\bar a\\,\\bar d$, gives $C/\\mathfrak m_0C\\cong D\\otimes_E k=D/\\mathfrak nD\\cong L$. Step 3 identifies $K/\\mathfrak m_0K$ with the same $L$, compatibly as $k$-algebras. Full faithfulness of the henselian finite-etale equivalence for $A_0$ lifts this residue-algebra isomorphism to an $A_0$-algebra isomorphism $C\\cong K$: lift the map and its inverse, and use faithfulness to see that their composites are identities. Composing its inverse with Step 8 gives the required $K\\cong D[[S]]/(f)$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-henselian-finite-etale-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U2 (lemma-etale), base-change assertion; Tag 04GK (lemma-henselian-cat-finite-etale), full faithfulness (equivalently More on Algebra Tag 09ZL)."
+   }
+  },
+  {
+   "text": "The topology on $D[[S]]$ is its $\\mathfrak b_DD[[S]]$-adic topology by completion-mod-ideal, since $\\mathfrak m_D$ and $S$ are finitely generated and hence so is $\\mathfrak b_D$. Its quotient by that ideal is $D/\\mathfrak m_D=L$; the geometric-series argument of Step 2 shows that this ideal is the unique maximal ideal. The image of $f$ belongs to it. Thus on $D[[S]]/(f)$ the quotient adic topology is the maximal-ideal topology, because its defining ideal is the image of $\\mathfrak b_DD[[S]]$. The algebra isomorphism from Step 9 identifies maximal ideals and all their powers. It and its inverse are therefore continuous for the maximal-ideal topologies, including the finite-algebra topology on $K$, whose defining ideal is $\\mathfrak m_0K=\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated); explicit geometric-series and ideal-power calculation."
+   }
+  },
+  {
+   "text": "Finally $E\\to D$ is a local flat homomorphism: it is flat by Step 6 and $\\mathfrak m_D=\\mathfrak nD$ by Step 4. The flat-local theorem makes it faithfully flat. Apply faithful-flat ideal contraction to $\\mathfrak n^2$. If $x\\in\\mathfrak n\\setminus\\mathfrak n^2$ had image in $\\mathfrak m_D^2=(\\mathfrak nD)^2=\\mathfrak n^2D$, contraction would give $x\\in\\mathfrak n^2$, a contradiction. Its image is already in $\\mathfrak m_D$, proving the final assertion. When $\\mathfrak n=0$ the assertion is vacuous. None of these arguments requires $f\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HR (lemma-local-flat-ff), 05CK (lemma-faithfully-flat-universally-injective), ideal contraction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-finite-flat-local-free",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit finite-basis formal-monoid specialization of Tags 04GK/09ZL, with 05GG, 0325, 0ALJ, 00U4, 00NZ, 07NF and 05CK; the tensor-completion comparison is written out, not quoted from ILO."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -47,10 +211,45 @@
    "results": "Returned 8 hits: StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallyEtale.comp_bijective, StandardEtalePresentation.lift_bijective, StandardEtalePair.homEquiv_symm_apply, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, IsAdicComplete.henselianRing, StandardEtalePair.lift. ",
    "date": "2026-10-19",
    "verdict": "no match: the read signatures give general etale, power-series substitution, or completion infrastructure, not the stated comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*(completion|adic)|Etale.*(henselian|residue)",
+   "results": "Returned 3 hits: Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean. ",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned general etale / field / polynomial-factorization statements do not provide the formal-monoid coefficient lifting and cotangent clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale local algebras over a henselian local ring are determined by finite separable residue field extensions",
+   "results": "Returned 8 hits: Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.of_isSeparable_aux, RingHom.Etale, Algebra.FormallyEtale.iff_isSeparable, Algebra.Etale.finitePresentation. ",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned general etale / field / polynomial-factorization statements do not provide the formal-monoid coefficient lifting and cotangent clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Henselian\"",
+   "results": "Returned 0 hits: . ",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned general etale / field / polynomial-factorization statements do not provide the formal-monoid coefficient lifting and cotangent clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale local algebras over complete local formal monoid rings modulo a principal ideal are scalar extensions of finite etale coefficient algebras",
+   "results": "Returned 8 hits: Algebra.FormallyEtale.localization_base, StandardEtalePair.instEtaleRing, StandardEtalePair.instAlgebraRing, RingHom.Etale.ofLocalizationSpan, StandardEtalePresentation, Algebra.Etale.exists_subalgebra_fg, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.instFormallyEtaleRing. ",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned general etale / field / polynomial-factorization statements do not provide the formal-monoid coefficient lifting and cotangent clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion commutes with scalar extension by a finite free algebra; finite etale algebras are equivalent over a complete local ring and its residue field",
+   "results": "Returned 8 hits: Algebra.Etale.comp, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.finitePresentation, Algebra.Etale.exists_subalgebra_fg, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, RingHom.etale_algebraMap, StandardEtalePair.instEtaleRing, RingHom.Etale.ofLocalizationSpan. ",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned general etale / field / polynomial-factorization statements do not provide the formal-monoid coefficient lifting and cotangent clauses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-completed-invertible-kummer-monoid-extension",
@@ -62,7 +261,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Stacks Tags 09ZL (more-algebra, lemma-finite-etale-equivalence), 07NF (algebra, lemma-regular-goes-up), 031B (algebra, lemma-when-finite-module-complete-over-complete-ring); formal monoid coefficient base-change consequence used in ILO VI 2.3.",
+   "place": "Local-algebra detail in the arbitrary-field duality ancestry of lem-per-artin-gabber-affine-curve, concretely lem-per-completed-invertible-kummer-monoid-extension proof step 5 (finite-etale coefficient lift for the complete ILO VI 2.3 model) and step 8 (preservation of the coefficient cotangent class).",
    "via": [
     "lem-per-completed-invertible-kummer-monoid-extension",
     "lem-per-invertible-kummer-chart-log-regular",
@@ -78,5 +277,60 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-etale-formal-monoid-coefficient-lift",
+  "worker": "stage1",
+  "group": "Q117",
+  "summary": "Proved the formal-monoid coefficient lift by the existing henselian finite-etale equivalence and an explicit finite-basis completion calculation. Reused existing DAG inputs throughout; no new nodes. Checked the residue field, locality, regularity, completeness, coefficientwise f, continuity and cotangent-class assertion, including f=0 and the zero monoid. No change to mathematical statement.",
+  "blueprint": "Auxiliary local-algebra detail below lem-per-artin-gabber-affine-curve via its arbitrary-field duality / finite-residue chain: the coefficient-extension paragraph (step 5) and cotangent-class paragraph (step 8) of lem-per-completed-invertible-kummer-monoid-extension, implementing ILO VI 2.3 complete Kummer chart coefficients. The current main-20261015 ancestor has no separate formal-monoid statement; its perverse unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra input used exactly as stated in the numbered steps; this perverse Fourier unit contains no alternative statement of this algebra fact. It only supplies the completed Kummer-chart coefficient calculation below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Generic commutative-algebra input used exactly as stated in the numbered steps; this perverse Fourier unit contains no alternative statement of this algebra fact. It only supplies the completed Kummer-chart coefficient calculation below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic commutative-algebra input used exactly as stated in the numbered steps; this perverse Fourier unit contains no alternative statement of this algebra fact. It only supplies the completed Kummer-chart coefficient calculation below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "why": "Generic commutative-algebra input used exactly as stated in the numbered steps; this perverse Fourier unit contains no alternative statement of this algebra fact. It only supplies the completed Kummer-chart coefficient calculation below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic commutative-algebra input used exactly as stated in the numbered steps; this perverse Fourier unit contains no alternative statement of this algebra fact. It only supplies the completed Kummer-chart coefficient calculation below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic commutative-algebra input used exactly as stated in the numbered steps; this perverse Fourier unit contains no alternative statement of this algebra fact. It only supplies the completed Kummer-chart coefficient calculation below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic commutative-algebra input used exactly as stated in the numbered steps; this perverse Fourier unit contains no alternative statement of this algebra fact. It only supplies the completed Kummer-chart coefficient calculation below the fixed unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-smooth-ascent"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-aeaa8d6ac",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-aeaa8d6ac (reviewer sub-agent of L); spot-checked: I read all 11 steps against the statements of their 22 cited nodes and found no fault, so nothing was changed and no FIX files were written. The delivery has 0 new nodes. The item's statement, stmt_deps and source are byte-identical to the live unsplit node: only proof, proof_deps, proof_origin, split_report, status, mathlib_searches and blueprint.from.place changed. No node in the 408-node dependency closure cites the item, so there is no cycle. Steps 1-2: the monoid ring is Noetherian (00FN), its completion is Noetherian (0316) and complete with residue field k (05GG). Sharpness is what makes the augmentation well defined. A geometric series shows H is local. The quotient by f is complete local (0325) and henselian (0ALJ); the henselian-terminology node defines a henselian local ring as one whose maximal-ideal pair is henselian. Step 3: integrality (00GK) and maximal contraction (00OI), then 00U4 at the maximal ideal of the local ring K, give q=m_0K, and 00U3 gives a finite separable residue field. Step 4: the 04GK equivalence gives D. Locality and m_D=nD are argued correctly from integrality, and completeness follows from 00MA with J=n. Step 5: 0AFS, the 02GJ etale comparison, Omega=0 so the map is smooth (00T2), then 07NF gives regularity. Step 6: 00U2(6) and 00NZ give a finite free D. Steps 7-8: the explicit finite-basis identifications D(x)H = D[[S]] and C = D[[S]]/(f) are genuinely elementary. Step 9: full faithfulness of 04GK over the henselian ring A_0 yields an A_0-algebra isomorphism, with compatible residue identifications. Step 10: continuity holds because the isomorphism matches maximal ideals and the quotient adic topology is the maximal-ideal topology. Step 11: 00HR and 05CK with I=n^2 prove the cotangent clause. Stacks tags 04GK, 09ZL, 07NF, 031B, 00MA, 05GG, 0325, 0ALJ, 00U4, 00NZ, 00HR and 05CK were checked against the labels file; there is no SGA. Small cases tested: S={0}; E a field; E=Z_p, f=p (D is W(F_{p^r})); S=N, f=t^2; f=0. The statement serves the parent lem-per-completed-invertible-kummer-monoid-extension in steps 5 and 8 exactly. A DAG-wide search found no duplicate; lem-per-formal-monoid-implicit-elimination and lem-trf-formal-monoid-extension-model state different things. The 7 tool_uses are generic sk-thm-p1 Stacks algebra nodes and are accepted."
  }
 }
