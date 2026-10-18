@@ -1,0 +1,101 @@
+{
+ "id": "def-zl-derived-change-of-rings-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3: the fixed derived extension model used to define F on the coefficient site.",
+   "via": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical derived change-of-rings cochain model",
+ "status": "split",
+ "statement": "For a small site $\\mathcal C$ with a sheaf morphism of commutative rings $\\varphi:\\mathcal O\\to\\mathcal O'$, and chosen derived categories of modules, define the canonical derived change-of-rings cochain model to be the object selected by $\\operatorname{Nonempty}(\\text{DerivedChangeOfRingsCochainModel}(\\varphi))$ from [lem-pur-derived-change-of-rings]. Its ordinary extension is the prescribed sheafified scalar extension, and its derived functor, universal counit and K-flat computation are the fields of that model.",
+ "source": {
+  "document": "Stacks Project, Tags 06YT, 06YY and 06XN",
+  "place": "Derived change of rings and resolving-class construction"
+ },
+ "stmt_deps": [
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived change of rings cochain model selected from a nonempty universal pair",
+   "results": "No exact LeanSearch result; only generic derived category localization declarations.",
+   "date": "2026-10-18",
+   "verdict": "no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedChangeOfRingsCochainModel",
+   "results": "0 hits outside the project module.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedChangeOfRingsCochainModel in Mathlib, WeilConjectures and lean/Sheaf",
+   "results": "The universal structure and existence theorem are in Sheaf/Algebra/Homology/DerivedChangeOfRingsCochainModel.lean; no prior canonical selector definition or DAG node.",
+   "date": "2026-10-18",
+   "verdict": "new definition interface required."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "date": "2026-10-18",
+  "group": "NU"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedChangeOfRingsModel",
+  "declaration": "SheafOfModules.canonicalDerivedChangeOfRingsModel",
+  "declarations": [
+   "SheafOfModules.canonicalDerivedChangeOfRingsModel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedChangeOfRingsModel.lean",
+  "statement": "def canonicalDerivedChangeOfRingsModel : DerivedChangeOfRingsCochainModel.{u, v, r, wO, wS} φ",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Dedicated canonical data definition for Evaluation.extensionModel; it selects the landed universal model supplied by lem-pur-derived-change-of-rings."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cccd21d7",
+  "group": "NU",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cccd21d7",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery after 07f043deb8be RETURN; Lean byte-identical, only records/report changed: lem-zl-component-relative-profinite-site restored to stmt_deps, false lem-pur claim corrected, def-zl-ring-derived-scalar-extension now cites its owner lem-sfb-constant-realization-derived-scalar-extension. Mechanical theorem-stmt_dep finding: PASS on this point, since componentTests := Classical.choose (component_relative_profinite_site T) (lines 229-231) is the theorem-constructed test functor (characterized by its ∃! mapping property) that underlies componentInverse/Modules/Derived/componentClause. Re-checked all hypotheses and conclusion clauses against the node (both bases, canonical A_T/F/G/perfect/lisse, component pullback, α/β coefficient compatibility, A_T≅Γ(S,Λ), both squares, final scalar formula, profinite clause), edge cases, universes, docstrings with nine proof steps, single sorry, lean.statement verbatim, all 31 declarations present, report sections present. nt_compile --json on the local side overlay with all three modules together: exit 0, no errors or warnings (item 6.3 s)."
+ }
+}

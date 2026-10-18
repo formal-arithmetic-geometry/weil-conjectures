@@ -373,5 +373,37 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-4f9faa11d (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics, every cited statement, the parent node and the blueprint sk-thm-regular Step 2 and Step 4(i)-(iii) with the sk-lem-coprojection Hom chain. The statement is true when kappa uses the adjunction unit of (-)⊗N' ⊣ (-)⊗N, which the statement's 'conjugate' clause and Step 2 both specify. With e∘sym as the unit it would be off by the sign ε(N); I checked N=A[1]. For the only use, N=Λ(c)[2c], the two choices agree. Small cases checked: e=id, an open immersion, a fold X⊔X→X, empty U, N=A, N=A[1]. Step 2: I recomputed T∘PF=1 from the tensor-action law (action-laws(3)), the unit normalization (mate-exact α=1, open unitor) and the triangle identity. Step 3 is the blueprint coprojection chain reversed. Steps 5-7: I recomputed the transpose chain ε^S S(Q) d_B = (ε_K⊗1)PF^{-1} = q. The étale P^c of support-map-compatibility(2) is the same composite as the PF^e of projection-comparison-etale-origin. FIX, one missing citation: Step 4 needs ν_U^*e^{-1}≅e^{-1}ν_X^* to be monoidal, and Step 6 needs μ to commute with the signed symmetries. The cited lem-weil-pbc-ringed-topoi-derived-tensor-pullback gives only the existence of μ. I added lem-sfb-ringed-derived-monoidal-comparisons (reviewed pass) to the uses of steps 4 and 6, to proof_deps and to tool_uses. Batch-5 check: with every PD/trace-chapter node removed, the item is still reached via thm-weil-deligne-purity → … → thm-pur-regular-immersion-purity → sk-thm-regular. Each of the six listed citations reaches sec-poincare-duality only through generic lemmas: lem-pod-etale-stalk-tensor-scalar (stalks commute with ⊗) and lem-pod-lisse-module-sheaves-as-module-objects (lisse sheaves as module objects in FLC). Neither assumption gives these and neither is a step of the PD or trace-formula proofs, so all six are kept. The added node reaches no PD or trace node. No new nodes, no duplicates (rg on ρ_e/projection/coProj), no cycle, no SGA. I accept all 17 declared tool_uses plus the added one.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleRhoMonoidalMate",
+  "declaration": "AlgebraicGeometry.ProEtale.EtaleProjectionMate.finite_etale_rho_monoidal_mate",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.OperationData",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.operations",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteDataWitness",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteData",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteData_eq",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteRho",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.IsFiniteKappa",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteKappa_existsUnique",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteKappa",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteKappa_normalization",
+   "AlgebraicGeometry.ProEtale.EtaleProjectionMate.finite_etale_rho_monoidal_mate"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleRhoMonoidalMate.lean",
+  "statement": "theorem finite_etale_rho_monoidal_mate (P : WeilConjectures.PurityFiniteSetting.{u}) {S T : Scheme.{u}} [S.Over (Spec (.of P.field.k))] [T.Over (Spec (.of P.field.k))] [IsSeparated (S ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (S ↘ Spec (.of P.field.k))] [QuasiCompact (S ↘ Spec (.of P.field.k))] [IsSeparated (T ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (T ↘ Spec (.of P.field.k))] [QuasiCompact (T ↘ Spec (.of P.field.k))] (h : S ⟶ T) [h.IsOver (Spec (.of P.field.k))] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] [Etale h] (K N : Etale.DerivedCategoryModule P.Coefficient T) (hK : FiniteEtaleNormalization.domain P T K) (hN : FiniteEtaleNormalization.domain P T N) (d : TensorInvertibleData (fun L M => (((finiteData P h).tensorT.obj L).obj M)) (finiteData P h).unitT N) (hM : FiniteEtaleNormalization.domain P T d.inverse) : finiteKappa P h K N hK hN d hM ≫ (finiteRho P h).hom.app (((finiteData P h).tensorT.obj K).obj N) = ((finiteData P h).tensorS.map ((finiteRho P h).hom.app K)).app ((finiteData P h).Q.obj N) ≫ ((finiteData P h).mu K N).inv ∧ ∃ c : (finiteData P h).G.obj (((finiteData P h).tensorT.obj K).obj N) ≅ ((finiteData P h).tensorS.obj ((finiteData P h).G.obj K)).obj ((finiteData P h).Q.obj N), c.inv = finiteKappa P h K N hK hN d hM ∧ (finiteRho P h).hom.app (((finiteData P h).tensorT.obj K).obj N) ≫ ((finiteData P h).mu K N).hom = c.hom ≫ ((finiteData P h).tensorS.map ((finiteRho P h).hom.app K)).app ((finiteData P h).Q.obj N)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical etale-origin coordinates of the recorded finite normalization; the operation package contains the existing specified maps and its equality specification. Kappa is the unique counit/projection-normalized morphism, equivalent to the displayed inverse-twist composite by the existing DAG proof Steps 1–3."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67b4c2cb2",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records and their side-clone declarations (normalization rho/domain/counit/compactification, TensorInvertibleData, purityCoprojectionProperty, Etale.projectionMap, leftDerivedUpperStarTensorIso), the module and the report. Every clause matches in the landed etale-origin domain convention. Kappa is the unique solution of PF ≫ F f ≫ ε = ε⊗1, which node Step 2 identifies with the inverse-twist composite; it is not an arbitrary map. Independence and the closed-immersion coProj equation are stated. The main equality and the invertibility/coProj form are in the right diagrammatic order. The opaque operations package has its real body and an equality spec. No hollow defs; all theorems sorry with proof docstrings; docstrings and verbatim statement ok; only the item's lean field changed; stmt_deps unchanged, so the theorem-stmt_dep rule does not apply. nt_compile --json clean (rc 0, 16.1 s / 7.6 s). Notes: the closed-immersion clause is in etale coordinates, not linked to purity_coprojection; the report's claim that the PurityCoprojection import breaks is stale (it compiles)."
  }
 }

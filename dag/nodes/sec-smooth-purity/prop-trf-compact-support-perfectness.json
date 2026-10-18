@@ -361,5 +361,28 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-37f53266b (reviewer sub-agent of L); spot-checked: Read in full: the main-20261015 item statement and proof, the unit sk-prop-sf-trace-perfectness, pur9-def-derived-stalk, lem-trf-finite-tor-amplitude-perfect and every cited DAG statement. Stacks tags checked: 0GL0, 09BQ, 0GL6, 09AL, 0GLZ, 0658. Statement: making D^b_fin mean the perfect category of def-trf-categorical-trace, and writing the derived stalk as RGamma of the pullback (pur9), are both faithful and weaken nothing; all hypotheses are kept. Step 1: prop-finite-compact-support-constructibility hypotheses hold (K_0=k, X and s of finite type, a_X separated of finite type, ell != p). Step 2: K_1 is bounded constructible over kappa via K-flat change of rings, the scalar-tensor comparison, the tensor-constructibility lemma with kappa_X in D^b_c, and the Tor bound tested on kappa_X; the kappa-linearity argument is elementary. Step 3: lem-fix-compact-support-coefficient-change with m=1. Step 4: the pro-etale residue test on s gives Tor amplitude for F; this correctly replaces the etale-only lem-exc. Step 5: I checked the etale-origin, comparison-pullback, unit-on-final-object, point-stalk and comparison-stalk identifications plus the four exactness statements; with Omega algebraically closed they give RGamma(P_proet, L t^*M) = geometric stalk. Step 6: fix-lem-finite-tor-perfect at id_s gives C perfect; its own proof uses lem-trf-finite-tor-amplitude-perfect, so the unit route is realized. Step 7: the same lemma on X. No new nodes, no cycle (traversal does not return to the item), no SGA source. Edge cases n=1, X empty, A^1 and n=2 kappa_X all behave. The 14 declared tool_uses are accepted as generic black boxes. One B3 fault fixed: 'geometric point' cited no definition node, while pur9 admits a separably closed Omega and steps 5 and 7 need it algebraically closed. I added [def-weil-geometric-point] to the statement and stmt_deps in fixes/dag/nodes/sec-smooth-purity/prop-trf-compact-support-perfectness.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportPerfectness",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.compactSupport_perfect",
+  "declarations": [
+   "WeilConjectures.TraceFormulaCoefficientConventions.perfectnessDerivedGeometricStalk",
+   "WeilConjectures.TraceFormulaCoefficientConventions.compactSupport_perfect"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportPerfectness.lean",
+  "statement": "theorem compactSupport_perfect (T : TraceFormulaCoefficientConventions.{u}) (c : Compactification T.structureMap) (K : proEtaleDerivedCategory T.geometricBaseChange T.coefficientRing) (hK : T.boundedConstructibleFiniteTor K) : @DerivedCategory.IsPerfectRingComplex.{u + 1, u + 1} (ULift.{u + 1, u} T.coefficientRing) _ (HasDerivedCategory.ofIsGrothendieckAbelian _) (T.compactSupportComplex c ⟨K, hK.1⟩).obj ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (xbar : Spec (.of Ω) ⟶ T.geometricBaseChange), DerivedCategory.IsPerfectRingComplex.{u + 1, u + 2} (T.perfectnessDerivedGeometricStalk Ω xbar K)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The helper specializes pur9-def-derived-stalk to the recorded positive coefficient level, with the canonical equality transport and inherited invertibility; it introduces no alternate stalk notion. The conjunction asserts perfectness of both recorded ordinary-module complexes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e838e5890",
+  "group": "NG",
+  "result": "pass",
+  "note": "All clauses match the node: TraceFormulaCoefficientConventions supplies the datum, ℓ≠p, E, n≥1 and separated finite-type a_X with no extra hypothesis; hK is the recorded finiteTorConstructible; RΓ_c is the recorded compactSupportComplex c ⟨K,hK.1⟩ with c universally quantified; D^b_fin = IsPerfectRingComplex (bounded, finite projective terms, iso to Q.obj P) on the recorded ULift/u+1 coefficient complexes; ∀ Ω : Type u algebraically closed, xbar : Spec Ω ⟶ X; the stalk helper is the recorded finiteDerivedGeometricStalk shifted by the level equality, with ℓ-invertibility proved, not assumed. Statement verbatim; 8 dependency records identical to live; docstrings and 7-step proof present; sorry only; no hollow definition. nt_compile --json exit 0, the delivered file has no error or warning. Edge cases n=1, empty X, K=0 and non-finite-type Ω covered. Remark only: the stalk clause sits under the ∀ c binder, equivalent by Nagata."
  }
 }

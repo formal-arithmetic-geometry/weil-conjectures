@@ -1,0 +1,128 @@
+{
+ "id": "def-pur-finite-tate-site-comparison",
+ "kind": "definition",
+ "title": "Finite Tate tensor generators and root-normalized site comparison predicates",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and $n\\geq0$, and put $A=\\mathcal O_E/\\varpi_E^{n+1}$ [def-weil-l-adic-coefficient-extension]. Let $T$ be a scheme [def-pc-scheme]. Use constant sheaves [def-weil-pbc-constant-sheaf] and sheaf tensor [def-pur-sheaf-tensor-product]. Write $L_T=\\varprojlim_{s\\geq1}\\mu_{\\ell^s,T}^{\\mathrm{pro}}$, with its specified root projections $p_s$, using [def-pur-roots-of-unity-sheaf] and [def-pur-sheaf-inverse-limit]. Define $P_T(k)$, for $k\\geq0$, to be the already prescribed finite pro-etale twist $A_T(k)$ of [def-coefficient-twists-detailed], restricted to the fixed constant $A$-module encoding. Its pure tensor generator $g_{T,k}(a;x_1,\\ldots,x_k)$ is the image under the recorded coefficient extension and sheafification units of the ordered tensor of root-limit sections, with scalar $a$ in the first factor; for $k=0$ it is the constant scalar-unit section $a$, and for $k+1\\geq2$ it is $g_{T,k}(a;x_1,\\ldots,x_k)\\otimes g_{T,1}(1;x_{k+1})$.\nFor any commutative coefficient ring $B$ and integer $m\\geq0$ with $mB=0$, define $e_{T,k}(b;z_1,\\ldots,z_k)$ in the existing etale twist $B_T(k)$ of [def-asd-finite-etale-tate-twist] by its sheafification-unit pure root tensor, with the same scalar placement and recursion, including the constant scalar unit for $k=0$. Denote by $v^{\\mathrm{et}}_m(z)$ the underlying unit in $\\Gamma(U,\\mathcal O_U)^\\times$ of an etale root section, and by $v^{\\mathrm{pro}}_s(x)$ the underlying unit of $p_s(x)$.\nUse the site comparison $\\nu_T$ of [def-weil-pbc-site-comparison-morphism]. For $r\\geq0$ with $\\ell^{r+1}A=0$, put $m=\\ell^{r+1}$. Define the following predicates, without asserting the existence of any comparison:\n(1) An isomorphism $b:\\nu_T^*A_T^{\\mathrm{et}}(k)\\to P_T(k)$ is root-normalized if for every etale $U/T$, pro-etale $W/T$, map $f:W\\to U$ over $T$, scalar $a\\in A$ and tuples of etale roots $z_i$ on $U$ and root-limit sections $x_i$ on $W$ satisfying $v^{\\mathrm{pro}}_{r+1}(x_i)=f^*v^{\\mathrm{et}}_m(z_i)$, its value on the restriction to $W$ of the comparison-adjunction unit applied to $e_{T,k}(a;z_i)$ is $g_{T,k}(a;x_i)$.\n(2) For a scheme map $v:T'\\to T$, an etale pullback isomorphism $c:v_{\\mathrm{et}}^*A_T^{\\mathrm{et}}(k)\\to A_{T'}^{\\mathrm{et}}(k)$ is root-normalized if its adjunct sends $e_{T,k}(a;z_i)$ to $e_{T',k}(a;z'_i)$ on $T'\\times_T U$ whenever the underlying units $z'_i$ are the pullbacks of the units $z_i$.\n(3) A pro-etale pullback isomorphism $d:v_{\\mathrm{pro}}^*P_T(k)\\to P_{T'}(k)$ is root-normalized if its adjunct sends $g_{T,k}(a;x_i)$ to $g_{T',k}(a;x'_i)$ on $T'\\times_T U$ whenever the underlying units of every root projection of $x'_i$ are the pullbacks of those of $x_i$.\n(4) For $r,r'\\geq0$ with both $\\ell^{r+1}A=0$ and $\\ell^{r'+1}A=0$, an etale exponent-change isomorphism $t:A_T^{\\mathrm{et},\\ell^{r'+1}}(k)\\to A_T^{\\mathrm{et},\\ell^{r+1}}(k)$ is root-normalized if it sends $e_{T,k}(a;z'_i)$ to $e_{T,k}(a;z_i)$ whenever $v^{\\mathrm{et}}_{\\ell^{r+1}}(z_i)=v^{\\mathrm{et}}_{\\ell^{r'+1}}(z'_i)^{\\ell^{r'-r}}$ for every $i$, with natural-number subtraction in the exponent. The intended transitions use $r\\leq r'$; the predicate itself is defined for every pair. No invertibility, flatness, or ramification-divisibility condition is imposed merely to define these objects and predicates.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK, section-kummer; sites-modules.tex Tag 03EK, section-tensor-product; proetale.tex Tags 099R and 0GLZ, section-comparison and lemma-describe-pullback-from-etale. Explicit tensor-generator conventions of finite Tate descent, used in the finite normalization of the smooth dualizing corollary."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-coefficient-twists-detailed",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteTate|IsFiniteTate",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib or upstream match. Reuse the existing side-library definitions in Sheaf.Paper.FiniteTateSiteDescent with existing: true; no definition extraction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite Tate site comparison normalized on local root tensors etale proetale",
+   "results": "8 hits: RingHom.Etale.propertyIsLocal, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, Algebra.Etale.finitePresentation, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib or upstream match. Reuse the existing side-library definitions in Sheaf.Paper.FiniteTateSiteDescent with existing: true; no definition extraction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Tate proetale sheaf tensor generators and root normalized comparison predicates",
+   "results": "8 hits: StandardEtalePresentation, StandardEtalePair, StandardEtalePresentation.toPresentation_σ', Algebra.Etale.exists_subalgebra_fg, Algebra.Smooth.exists_finiteType, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Smooth.exists_subalgebra_fg",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib or upstream match. Reuse the existing side-library definitions in Sheaf.Paper.FiniteTateSiteDescent with existing: true; no definition extraction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l finiteTate|IsFiniteTate|finite Tate.*comparison|finite Tate.*generator dag/nodes; rg -n finiteTate|IsFiniteTate upstream WeilConjectures and lean/Sheaf; blueprint_refs.py search \"finite Tate\"; blueprint_refs.py ancestor cor-pur-adic-and-rational-smooth-dualizing-complexes",
+   "results": "No upstream definitions. The side library defines precisely these notions only in Sheaf.Paper.FiniteTateSiteDescent, where a theorem node owns them. DAG and blueprint searches find existing finite etale twists and the descent theorem, but no definition node for the comparison predicates. The existing twists are reused and the definitions are extracted unchanged into their own module, as required by return H12/H13. Ancestor is cor-pur-adic-and-rational-smooth-dualizing-complexes.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib or upstream match. Reuse the existing side-library definitions in Sheaf.Paper.FiniteTateSiteDescent with existing: true; no definition extraction."
+  },
+  {
+   "tool": "grep",
+   "query": "Compare all twelve declarations in the saved FiniteTateSiteComparison.lean with lean/Sheaf/Paper/FiniteTateSiteDescent.lean; scompile.py --source Sheaf.Paper.FiniteTateSiteDescent",
+   "results": "All twelve declaration signatures and bodies are identical, after replacing only blueprint docstring tags. The live-source wrapper confirms that FiniteTateSiteDescent still owns the original declarations.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the live module and existing declarations. Deliver no FiniteTateSiteComparison module and no replacement FiniteTateSiteDescent module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+  "date": "2026-10-18",
+  "group": "Q39"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+   "place": "Finite-level root and scalar comparison conventions for the coefficient transport and normalized counit in the corollary proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTateSiteDescent",
+  "declaration": "AlgebraicGeometry.Scheme.IsFiniteTateSiteComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteTateCoefficient",
+   "AlgebraicGeometry.Scheme.finiteTateConstantRestriction",
+   "AlgebraicGeometry.Scheme.finiteTateProSheaf",
+   "AlgebraicGeometry.Scheme.finiteTateProGenerator",
+   "AlgebraicGeometry.Scheme.finiteTateProPowerGenerator",
+   "AlgebraicGeometry.Scheme.finiteTateEtalePowerGenerator",
+   "AlgebraicGeometry.Scheme.finiteTateEtaleRootValue",
+   "AlgebraicGeometry.Scheme.finiteTateLimitRootValue",
+   "AlgebraicGeometry.Scheme.IsFiniteTateSiteComparison",
+   "AlgebraicGeometry.Scheme.IsFiniteTateEtalePullback",
+   "AlgebraicGeometry.Scheme.IsFiniteTateProPullback",
+   "AlgebraicGeometry.Scheme.IsFiniteTateEtaleTransition"
+  ],
+  "statement": "def IsFiniteTateSiteComparison (r : ℕ)\n    (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ)\n    (b : (ProEtale.comparisonUpperStar\n      (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj\n        (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≅ finiteTateProSheaf l E n T k) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Reuses all twelve existing definitions in Sheaf.Paper.FiniteTateSiteDescent, unchanged. Their bodies are identical to the returned extraction, apart from blueprint docstring tags. This definition node records the conventions only; it asserts no descent theorem. The corollary imports the existing owner module, and no module is copied, extracted, or redeclared."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28b4f446f",
+  "group": "Q39",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28b4f446f",
+  "group": "Q39",
+  "result": "fix",
+  "note": "28b4 = a678 delivery plus twiceSucc replaced by the existing PurityFiniteSetting.frameDegreeNext (identical signature, PurityFrameClass.lean:139, proof-irrelevant use in EtalePowerPresentation.normalized); this repairs the duplicate-declaration refusal. Statement and binders are byte-identical to a678, which earlier reviews read clause by clause: O_E/E/Qbar clauses and counit equations, no extra hypotheses or universe restriction, edge cases d=0, empty X, levels n+1. lean.statement is verbatim and all 48 declarations are present. Mechanical finding: thm-pur-diagonal-dualizing-object is a genuine dependency (finiteIntegration uses diagonalDualizingObject = existsUnique_diagonalDualizingObject.exists.choose), PASS on that point. FIX 1 (H6): structureIsOver was again a proof term for the Prop class Hom.IsOver, the 84cf/a678 fixes having been lost on re-delivery; restored as theorem := by sorry with a proof docstring plus attribute [instance]. FIX 2: re-applied the a678 inlining of non-instance lets in finitePowerComparison/finiteIntegration (zeta-equal, no signature change). Report sentence corrected and a Reviewer fix section added. nt_compile --json on the local overlay at load about 80: delivered clean in 37.6 s; fixed clean in about 48 s and 29.6 s. Note: frameDegreeNext's owner def-pur-frame-class is not in stmt_deps (proof-irrelevant arithmetic, no rule requires it)."
+ }
+}

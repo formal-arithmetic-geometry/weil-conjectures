@@ -742,12 +742,12 @@
   }
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-c5b4e33e6",
-  "group": "Q51",
-  "result": "pass",
-  "note": "Wrote review.md. All statement clauses, dependencies, sources, canonical maps, universes, edge cases, docstrings, and report sections checked. Immutable module compiled cleanly through scompile.py (23.2s sandbox, 28.8s artifact). No delivery defects or fixes required; branch head unchanged."
+  "reviewer": "NT-stage2-cc-32a682350",
+  "group": "N5",
+  "result": "fix",
+  "note": "Read the node, all 14 stmt_deps, the four delivered modules (WeilOpenImageDelta, SfCommonStageDirectImage, SfCommonStageWeilCohomology, CondensedERealization diffed against live), MiddleExtensionCurve, IsCommonStageLisse and the citers p-dl-a1-exact and lem-dl-a1-constant-field-charts. Every clause and edge case matches (j=id, empty or disconnected C, empty W, rank 0, r<0, independent universes); the B-repairs build on the existing constructions and are not hollow; the CondensedERealization API repair is needed (the landed file fails against the live build) and keeps its statement. One H3 finding, fixed: DlOpenImageData.degreeZero (R^0 j_* = j_*) was an unconstrained natural iso, so boundary was fixed only up to a natural automorphism of j_* (e.g. sign). Added degreeZero_normalization: degreeZero is the inverse of H^0 of the augmentation (adjoint of the ordinary counit) composed with the heart truncation maps. Theorem signature, lean.statement and stmt_deps unchanged. nt_compile --json on all four modules: delivered 43.7/10.7/15.0/12.6 s clean; fixed 49.1/6.6/17.0/22.9 s clean; a broken control copy errors as expected. CondensedERealization is close to the 60 s limit."
  },
  "lean": {
   "module": "Sheaf.Paper.CondensedERealization",
@@ -772,14 +772,25 @@
    "WeilConjectures.CondensedERealization.Data.pullOnOverHom",
    "WeilConjectures.CondensedERealization.Data.square",
    "WeilConjectures.CondensedERealization.Data.mate",
-   "WeilConjectures.CondensedERealization.Exchange"
+   "WeilConjectures.CondensedERealization.Exchange",
+   "WeilConjectures.CondensedERealization.Base.model",
+   "WeilConjectures.CondensedERealization.Base.modelFinite",
+   "WeilConjectures.CondensedERealization.Base.modelQuasiCompact",
+   "WeilConjectures.CondensedERealization.Base.modelSeparated",
+   "WeilConjectures.CondensedERealization.Base.map",
+   "WeilConjectures.CondensedERealization.fieldUpperStar_isLeftAdjoint",
+   "WeilConjectures.CondensedERealization.fieldLowerStar",
+   "WeilConjectures.CondensedERealization.fieldAdjunction",
+   "WeilConjectures.CondensedERealization.fieldSquare",
+   "WeilConjectures.CondensedERealization.fieldBaseChange",
+   "WeilConjectures.condensedE_realization"
   ],
   "file": "lean/Sheaf/Paper/CondensedERealization.lean",
   "statement": "theorem condensedE_realization (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] : ∃ D : CondensedERealization.Data l E k, Nonempty (CondensedERealization.Exchange l E k D)",
   "branch": "newtargets-dag",
-  "by": "Q51",
-  "date": "2026-10-16",
+  "by": "N5",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "The realization, coefficient maps, localized operations, adjunction coherence, and specified exchange equalities are packaged in records owned by this node. All category abbreviations reuse the recorded dependencies; no new independent notion is introduced."
+  "note": "Section 1(B): the recorded module fails against the current boundedConstructibleUpperStar API, whose base field argument is implicit, and its lower-star constructor excludes arbitrary small finite coefficient fields. Retain the coefficient, scalar, exchange and normalization interfaces, repair the upper-star applications, and supply the constructible right adjoint for the actual continuous E inverse image with its specifying adjunction; the completed-tower and unit/counit normalizations are unchanged."
  }
 }

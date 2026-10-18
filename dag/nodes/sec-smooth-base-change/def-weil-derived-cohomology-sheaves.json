@@ -99,28 +99,36 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-rem-rest",
  "lean": {
-  "module": "Sheaf.Paper.PbcQbarStandardCohomology",
-  "declaration": "AlgebraicGeometry.Scheme.pbcQbarCohomology",
+  "module": "Sheaf.Paper.SfCommonStageWeilCohomology",
+  "declaration": "WeilConjectures.sfModelCohomology",
   "declarations": [
-   "AlgebraicGeometry.Scheme.pbcQbarStandardClass",
-   "AlgebraicGeometry.Scheme.pbcQbarStandardT_existsUnique",
-   "AlgebraicGeometry.Scheme.pbcQbarStandardT",
-   "AlgebraicGeometry.Scheme.pbcQbarCohomology"
+   "WeilConjectures.sfTruncationShift_existsUnique",
+   "WeilConjectures.sfCohomologyShift",
+   "WeilConjectures.sfBaseChangeFinite",
+   "WeilConjectures.sfBaseChangeQuasiCompact",
+   "WeilConjectures.sfModelGeometricFinite",
+   "WeilConjectures.sfModelGeometricQuasiCompact",
+   "WeilConjectures.sfModelCohomology",
+   "WeilConjectures.sfModelPullCohomology",
+   "WeilConjectures.sfModelFrobeniusCohomology",
+   "WeilConjectures.sfModelWeilCohomologyPair",
+   "WeilConjectures.sfModelWeilCohomology_mem",
+   "WeilConjectures.sfModelWeilCohomology"
   ],
-  "file": "lean/Sheaf/Paper/PbcQbarStandardCohomology.lean",
-  "statement": "def pbcQbarCohomology (n : ℤ) : pbcQbarCategory l Ω X ⥤ pbcQbarCategory l Ω X",
+  "file": "lean/Sheaf/Paper/SfCommonStageWeilCohomology.lean",
+  "statement": "def sfModelCohomology (n : ℤ)",
   "branch": "newtargets-dag",
-  "by": "Q99",
-  "date": "2026-10-17",
+  "by": "N5",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "The recorded ambient and rational-stage cohomology declarations remain publicly imported and are used without change. They do not supply cohomology objects on the common-finite-stage Qbar pair category. This generalized interface supplies the same standard t-structure, uniquely specified by the strictly full images of integral bounds at finite stages, and its cohomology objects. Unlike the PerAdic.Base specialization in the proof dependency, it requires invertibility only on the scheme and so also covers empty schemes over characteristic-l fields."
+  "note": "The recorded pbcQbarCohomology uses the Pbc coefficient-pair category, which is not the intrinsic sfCommonStageWeilComplex of this consumer. The module publicly retains the previous ambient/coefficient-pair definitions and applies the existing standard truncations to the intrinsic common-stage category, inducing the Weil map by the normalized Frobenius comparison."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-4de831828",
-  "group": "Q99",
+  "reviewer": "NT-stage2-cc-32a682350",
+  "group": "N5",
   "result": "fix",
-  "note": "Lean and mathematics correct. Every hypothesis is matched and none is stronger: PerAdic.Base gives separated finite type over k with no nonemptiness; l is invertible on the schemes only; d : ℕ with SmoothOfRelativeDimension. Conjunct 1 is t-exactness, conjunct 2 is the natural iso with the correct -i+d sign, conjunct 3 is the support-dimension inequality with ⊥ for -∞. The statement field is verbatim. The item node changes only in lean plus the landed stmt_dep lem-per-adic-heart-pullback-fibres; the two dependency nodes change only in lean, with notes. The §1(B) modules are correct and canonical: strictly full integral image classes with a unique t-structure, and the unique descended family with stage functors pbcDescentPullback and β fixed by PbcPullbackBetaSpec. They generalize PerAdic.commonT/commonPull without IsUnit (l:k) (observation only). Edge cases checked: empty schemes, char l, d=0, K=0, f not surjective, non-closed support, negative i, independent universes u and w. nt_compile of all 3 files: exit 0, no errors or warnings. Fault: delivery-errors A11, the Second reading by Q99 was the worker's self-check; fixed by fixes/lem-per-smooth-pullback-support-dimension.report.md (full report, that section replaced by an independent reading)."
+  "note": "Read the node, all 14 stmt_deps, the four delivered modules (WeilOpenImageDelta, SfCommonStageDirectImage, SfCommonStageWeilCohomology, CondensedERealization diffed against live), MiddleExtensionCurve, IsCommonStageLisse and the citers p-dl-a1-exact and lem-dl-a1-constant-field-charts. Every clause and edge case matches (j=id, empty or disconnected C, empty W, rank 0, r<0, independent universes); the B-repairs build on the existing constructions and are not hollow; the CondensedERealization API repair is needed (the landed file fails against the live build) and keeps its statement. One H3 finding, fixed: DlOpenImageData.degreeZero (R^0 j_* = j_*) was an unconstrained natural iso, so boundary was fixed only up to a natural automorphism of j_* (e.g. sign). Added degreeZero_normalization: degreeZero is the inverse of H^0 of the augmentation (adjoint of the ordinary counit) composed with the heart truncation maps. Theorem signature, lean.statement and stmt_deps unchanged. nt_compile --json on all four modules: delivered 43.7/10.7/15.0/12.6 s clean; fixed 49.1/6.6/17.0/22.9 s clean; a broken control copy errors as expected. CondensedERealization is close to the 60 s limit."
  }
 }

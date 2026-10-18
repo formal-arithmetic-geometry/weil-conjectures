@@ -1,0 +1,125 @@
+{
+ "id": "def-zl-ring-derived-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: the scalar extension used in the condensed evaluation and component comparison.",
+   "via": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Derived restriction and extension of scalars for ordinary modules",
+ "status": "split",
+ "statement": "For commutative rings $A$ and $B$ and a ring homomorphism $f:A\\to B$, with chosen unbounded derived categories $D(A)$ and $D(B)$ [def-weil-abstract-derived-category], define derived restriction of scalars $D(B)\\to D(A)$ as the derived functor of $\\operatorname{ModCat}.restrictScalars(f)$. It has its canonical right-adjoint structure. Define $\\operatorname{moduleDerivedExtension}(f):D(A)\\to D(B)$ to be the left adjoint of this restriction functor; this is the canonical unbounded derived extension of scalars (Stacks Tags 06YY and 07A6). These are the ordinary-module scalar functors of [lem-sfb-constant-realization-derived-scalar-extension], re-exposed without changing their construction.",
+ "source": {
+  "document": "Stacks Project, Tags 06YY and 07A6",
+  "place": "Derived change of rings and derived extension/restriction of scalars"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sfb-constant-realization-derived-scalar-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived restriction and extension of scalars for commutative rings",
+   "results": "LeanSearch returned Mathlib.ModuleCat.extendRestrictScalarsAdj and related underived change-of-rings declarations; no derived functor.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; the derived construction is project-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived restriction of scalars and derived extension of scalars for commutative rings",
+   "results": "ModuleCat.extendRestrictScalarsAdj and related ordinary (underived) change-of-rings declarations; no derived module functor matching the notion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; Mathlib only provides the underived adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "moduleDerivedExtension, moduleDerivedRestriction",
+   "results": "0 hits; identifiers are project-specific.",
+   "date": "2026-10-18",
+   "verdict": "no match."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleDerivedExtension|moduleDerivedRestriction in Mathlib",
+   "results": "0 hits in the Mathlib source.",
+   "date": "2026-10-18",
+   "verdict": "no match."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleDerivedExtension|moduleDerivedRestriction in WeilConjectures and lean/Sheaf",
+   "results": "The existing source declaration is in Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean; no separate definition node existed.",
+   "date": "2026-10-18",
+   "verdict": "the existing declarations are the canonical construction but were owned only by the theorem node; this delivery gives them a dedicated definition interface."
+  },
+  {
+   "tool": "grep",
+   "query": "def-zl-ring-derived-scalar-extension in dag/nodes",
+   "results": "0 hits before this delivery.",
+   "date": "2026-10-18",
+   "verdict": "new DAG definition node required."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "date": "2026-10-18",
+  "group": "NU"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RingDerivedScalarExtension",
+  "declaration": "CategoryTheory.RingDerivedScalarExtension.moduleDerivedExtension",
+  "declarations": [
+   "CategoryTheory.RingDerivedScalarExtension.moduleDerivedRestriction",
+   "CategoryTheory.RingDerivedScalarExtension.moduleDerivedRestriction_rightAdjoint",
+   "CategoryTheory.RingDerivedScalarExtension.moduleDerivedExtension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RingDerivedScalarExtension.lean",
+  "statement": "def moduleDerivedExtension {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B) [HasDerivedCategory.{wR} (ModuleCat.{r} A)] [HasDerivedCategory.{wS} (ModuleCat.{r} B)] : DerivedCategory (ModuleCat.{r} A) ⥤ DerivedCategory (ModuleCat.{r} B)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Definition interface re-exposing CategoryTheory.ConstantScalarRealization.moduleDerivedRestriction and moduleDerivedExtension, with their canonical right-adjoint instance, from Sheaf.Paper.ConstantRealizationDerivedScalarExtension. Its owning node lem-sfb-constant-realization-derived-scalar-extension is cited in stmt_deps; no new scalar-extension construction is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cccd21d7",
+  "group": "NU",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cccd21d7",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery after 07f043deb8be RETURN; Lean byte-identical, only records/report changed: lem-zl-component-relative-profinite-site restored to stmt_deps, false lem-pur claim corrected, def-zl-ring-derived-scalar-extension now cites its owner lem-sfb-constant-realization-derived-scalar-extension. Mechanical theorem-stmt_dep finding: PASS on this point, since componentTests := Classical.choose (component_relative_profinite_site T) (lines 229-231) is the theorem-constructed test functor (characterized by its ∃! mapping property) that underlies componentInverse/Modules/Derived/componentClause. Re-checked all hypotheses and conclusion clauses against the node (both bases, canonical A_T/F/G/perfect/lisse, component pullback, α/β coefficient compatibility, A_T≅Γ(S,Λ), both squares, final scalar formula, profinite clause), edge cases, universes, docstrings with nine proof steps, single sorry, lean.statement verbatim, all 31 declarations present, report sections present. nt_compile --json on the local side overlay with all three modules together: exit 0, no errors or warnings (item 6.3 s)."
+ }
+}

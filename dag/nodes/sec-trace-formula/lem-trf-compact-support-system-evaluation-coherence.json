@@ -14,7 +14,8 @@
   "def-weil-completed-integral-coefficients",
   "lem-coef-semilinear-derived-sections",
   "def-weil-scheme-morphism-properties",
-  "def-coef-ringed-sequence-site"
+  "def-coef-ringed-sequence-site",
+  "def-trf-compact-support-system-evaluation-diagram"
  ],
  "proof": [
   {
@@ -206,5 +207,40 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-3818dc5a2 (reviewer sub-agent of L); spot-checked: Read the item, its six steps, the full statements of every cited node and the only citer (realization-normalization, all 8 steps). Also read the sibling tower-functor node with its proof, lem-sf-compact-support-restriction-of-scalars, and the blueprint prop-trf-rational-frobenius-integral-model.proof.md clause (3), second paragraph. The repaired statement is true and follows the ordinary semilinear-system route. Small cases checked: M=0, j=id, p=id, zero transitions, nonflat quotients, unbounded M; the hypotheses fit the parent. No new nodes, no SGA. Three faults fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-compact-support-system-evaluation-coherence.json. (1) B2: the target tower's transitions were never defined. They are now explicit: Res_m of the transpose of Rp_{*,n}(t^N_{m,n})∘b_{m,n,N_m}, with N=J M carrying the transitions j_!(τ^M). Θ is now stated as levelwise isomorphisms in D(R̂_Y) that are compatible with transitions. (2) C1, step 2: the coefficient identification p^{-1}B_{Y,n}≅B_{Z,n}, compatible with the quotients, was used without citation. Added def-weil-proetale-inverse-image and prop-weil-pbc-proetale-constant-ring-map. (3) C1, step 3: the open localization was used without citation. Added lem-weil-proetale-weakly-etale-localization and lem-pur-site-restriction-module-adjunction-exact. Step 4 is rewritten against the explicit transitions, and proof_deps is updated. review_split passes the route check on a scratch copy with the fix applied. For the maintainer: the item's title and source.place still describe the removed strict/enhanced model comparison and should be updated. The parent's steps 1, 7 and 8 still call this item a model equivalence. That text is stale, but the citations still get what they need from the repaired item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompactSupportSystemEvaluationCoherence",
+  "declaration": "WeilConjectures.compactSupportSystemEvaluationCoherence",
+  "declarations": [
+   "WeilConjectures.compactSupportCoefficientSquareNormalized",
+   "WeilConjectures.compactSupportDirectImageEvaluationNormalized",
+   "WeilConjectures.CompactSupportUnitEvaluation",
+   "WeilConjectures.CompactSupportCounitEvaluation",
+   "WeilConjectures.compactSupportOrdinaryCoefficientSectionsNormalized",
+   "WeilConjectures.compactSupportOpenRestrictionSectionsNormalized",
+   "WeilConjectures.compactSupportOrdinaryDirectImageSectionsNormalized",
+   "WeilConjectures.CompactSupportSystemTransitionCompatibility",
+   "WeilConjectures.CompactSupportSystemOpenUnitCompatibility",
+   "WeilConjectures.CompactSupportSystemOpenCounitCompatibility",
+   "WeilConjectures.CompactSupportSystemDirectImageUnitCompatibility",
+   "WeilConjectures.CompactSupportSystemDirectImageCounitCompatibility",
+   "WeilConjectures.CompactSupportSystemEvaluationWitness",
+   "WeilConjectures.compactSupportSystemEvaluationCoherence"
+  ],
+  "file": "lean/Sheaf/TraceFormula/CompactSupportSystemEvaluationCoherence.lean",
+  "statement": "theorem compactSupportSystemEvaluationCoherence {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j] [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))] [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))] : ∃ D : CompactSupportSystemEvaluationData l E X Z Y j p, Nonempty (CompactSupportSystemEvaluationWitness l E (D := D))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-196ee6053"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-196ee6053",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Read the item, the new def node, both modules, the report, prior returns and the IntegralOpenReduction/OpenSystems interfaces. Clauses, hypotheses, universes and edge cases match; the source and target transitions are real definitions, the functors are canonical, units/counits are conclusions; ordinary/derived coefficient squares, p evaluations and the j right evaluation are pinned by section/K-injective normalization and unit/counit equations; the scalar adjunctions cancel. Fault (H3): the existentially chosen open presentation o has unnormalized OpenSystems.restrictionEvaluation, so extensionEvaluation, theta and the target transitions can be twisted by per-level units (e.g. (-1)^n). Fix: the witness conjunct compactSupportOpenRestrictionSectionsNormalized (restrictionEvaluation is the identity on sections), which pins e_n J = j_! e_n; full replacement module and lean-record override with the declarations list; statement text unchanged; a rfl check of section-carrier defeq timed out (argued on paper). nt_compile --json clean: delivered 18.7 s/6.5 s, fixed 27.3 s/5.0 s."
  }
 }

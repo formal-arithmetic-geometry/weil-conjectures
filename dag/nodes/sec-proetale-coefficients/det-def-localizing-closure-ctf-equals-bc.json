@@ -497,5 +497,35 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalizingClosureCtfEqualsBc",
+  "declaration": "AlgebraicGeometry.ProEtale.localizingClosure_ctf_equals_bc",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarResidue",
+   "AlgebraicGeometry.ProEtale.scalarMulHom",
+   "AlgebraicGeometry.ProEtale.scalarTwoTermComplex",
+   "AlgebraicGeometry.ProEtale.scalarFiniteRingExample",
+   "AlgebraicGeometry.ProEtale.constantResidueModule",
+   "AlgebraicGeometry.ProEtale.constantResidueModuleOnSpec",
+   "AlgebraicGeometry.ProEtale.constantFiniteRingExample",
+   "AlgebraicGeometry.ProEtale.finiteRingTruncationFailure",
+   "AlgebraicGeometry.ProEtale.localizingClosureCtfEqualsBcAssertions",
+   "AlgebraicGeometry.ProEtale.localizingClosure_ctf_equals_bc"
+  ],
+  "file": "lean/Sheaf/Paper/LocalizingClosureCtfEqualsBc.lean",
+  "statement": "theorem localizingClosure_ctf_equals_bc (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) : localizingClosureCtfEqualsBcAssertions ℓ Λ X ∧ ((Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) → ∀ (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), IsConstantModelConstructible Λ X M → DerivedCategory.torAmplitudeIn (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) 0 0 ((DerivedCategory.singleFunctor (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) 0).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06b086e63",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after the a496697bf3fb RETURN. The diff against that head shows only docstring changes in the Lean module (all 8 helpers and localizingClosureCtfEqualsBcAssertions now name the source place and carry (blueprint: det-def-localizing-closure-ctf-equals-bc)) and the full lean.declarations list (10, equal to the file). The sk-def-sfb-qlbar-condensed record at head is byte-identical to the live Q83 record, so H2 is resolved; the other five dependency records also equal live. Independent re-check against the node: the 5-way hΛ uses the live padicAlgClRingObj; X is qcqs; clause 1 is [-1,0], with [0,0] for the field cases; clause 2 is [a-1,b] with homologyConcentratedIn; Dbc⊓finiteTorAmplitude = Dbc (the same ⊓ as the recorded ConstantModelConstructibleFiniteTor, so H4 is fine); localizingClosure is equal on both sides; finite-ring thickness (IsTriangulated ∧ IsStableUnderRetracts) holds for A : Type u and all qcqs T; the ℤ/ℓ² examples are stated (finite with infinite projective dimension; mapping-cone [A -ℓ-> A] perfect while single F_ℓ is not; constant F_ℓ on separably closed Spec k constructible but not finite-Tor; truncGE 0 failure). The only universe is u (counterexamples use k : Type). Helpers have real data, the theorem's proof is the only sorry, and its docstring has all 12 steps. lean.statement is verbatim; report has Worker report and Second reading by Q10. nt_compile --json: clean, 7.0 s, exit 0, no warnings. No findings."
  }
 }

@@ -158,13 +158,32 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-c5444868d (reviewer sub-agent of L); spot-checked: PASS with no fixes, no drop_nodes and no tool_uses. Read the master (order 2017) and main-20261015 (order 2361) source definitions, and current def-pur-smooth-purity-map (order 2356). Read in full the statements and updates of all 21 statement dependencies; all exist and none is merged. Only allowed fields changed against the base, and there are no new nodes. The added hypotheses (f separated and finite type; X, X', Y, Y' finite-type k-schemes) are forced: def-weil-exceptional-inverse-image, def-pur-smooth-purity-map and the diagonal and tensor theorems already require them. The line with doubled origin shows smoothness does not give separatedness. Every citer with hypotheses also assumes separated f, so no citer loses a case. Nothing is imposed on v. f' is checked via lem-sbc-smooth-relative-dimension-permanence (1) (01VB/02NK) and lem-pod-separated-finite-type-base-change (01KU/01T4). Lv*K lies in D^b_ctf: P_n is O_E/varpi^n under lem-weil-pbc-pullback-preserves-bounded-constructible, with lem-sf-proetale-constructible-origin for the constructibility convention, and Tor amplitude follows from the flat model of lem-sf-flat-model plus flat pullback (05VD), whose (i) matches def-weil-finite-tor-amplitude verbatim. The twist comparison uses 07A4 (lem-pur-derived-pullback-tensor-iso) with det-prop-sfb-cartesian-coefficients-twists; the shift comparison is termwise and elementary. Directions of c_{u,f}^{-1} and c_{f',v} (0D6D) check out against fu=vf'. Stacks labels verified in tags. Full stmt+proof traversal (12,884 nodes) never returns to the item: no cycle. No duplicate (grep Ex^{!}) and no SGA citation. Small cases checked: d=0, v=id, K=0, empty schemes, non-flat closed-point v, n=1."
  },
  "lean": {
-  "branch": "master",
-  "existing": true,
-  "module": "WeilConjectures.EtaleCohomology.Purity.Smooth.Basic",
-  "declaration": "AlgebraicGeometry.Etale.smoothPullbackExchange",
+  "module": "Sheaf.Paper.FiniteSmoothPullbackExchange",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionSmoothExchange",
   "declarations": [
-   "AlgebraicGeometry.Etale.smoothPullbackExchange"
+   "WeilConjectures.PurityFiniteSetting.finiteReductionPullbackCommShift",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionPullbackCompositor",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionPullbackSquare",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_finiteReductionBaseChangeSource",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionBaseChangeSource",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionBaseChangeInput",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionPurityIsIso",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionSmoothExchange"
   ],
-  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.Smooth.Basic: the blueprint item def-pur-smooth-pullback-exchange's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+  "file": "lean/Sheaf/Paper/FiniteSmoothPullbackExchange.lean",
+  "statement": "def finiteReductionSmoothExchange (K : Scheme.proEtaleDerivedCategory Y P.Ring) (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K) : (P.finiteReductionPullback u).obj ((P.compositionExceptional f).obj K) ≅ (P.compositionExceptional f').obj ((P.finiteReductionPullback v).obj K)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The current upstream AlgebraicGeometry.Etale.smoothPullbackExchange takes arbitrary supplied dualizing orientations and tensor isomorphisms on etale derived categories. This dependency module specializes the node to its recorded canonical diagonal orientation and tensor map on the intrinsic finite-Tor pro-etale category, with its literal inverse-purity/source/purity composite. The middle source identification is independently fixed by ordinary pullback compositors, root charts and shifts. No smoothness, flatness or properness of v is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-861cad2e9",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read item, source (master + main-20261015), all 6 delivered modules, the cited declarations (SmoothPurityMap, PurityCompositionCoherence, SmoothTrace, FixedFinitePositiveCoefficientTwist, ordinary_supported_kummer, affineLine_orientation) and both replaced upstream records (map_smoothPurityIso_hom_comp takes the constituent compatibilities as hypotheses; Etale.smoothPullbackExchange takes arbitrary supplied θ/φ on the étale site; neither states its node). Lean matches every clause: main square with node directions; affine orientation; trace for general K and the unit; composition = exact RHS of smoothPurityCompositionCoherence; base change (b_□ and exchange; v arbitrary). No added hypotheses, no e|n or flatness, universes as the deps, autoImplicit off. Every ∃! spec checked true: root-chart source/base-change comparisons (roots exist since k alg closed and ℓ≠p; independent of the root choice), counit-normalised exceptional maps via a genuine adjunction, unique Kummer class. Chart HEq factor types confirmed by test compiles; tests for the two pieces resting on upstream smoothPurityTensorPresentation timed out at 60 s (project's propositional-equality pattern). No hollow defs; theorems sorry. Records verbatim; stmt_deps additions allowed; report sections present; docstrings present. nt_compile of all 6 modules clean (6.5–24.3 s). Notes: finiteReductionPurityIsIso duplicates landed isIso_smoothPurityMap (not citable: dependency stmt_deps fixed in S2); new nodes use plain defs from PurityCompositionCoherence without citing thm-pur-composition-coherence (item already cites it); new orientation should be identified with affineLine_orientation (e|n only) in stage 3; proof-only imports; global Sheaf.monoidalCategory has precedent."
  }
 }

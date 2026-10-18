@@ -19,7 +19,9 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-derived-cohomology-sheaves",
   "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism"
+  "def-weil-finite-type-morphism",
+  "def-real-common-stage-lisse",
+  "def-zl-weil-ind-sheaf-category"
  ],
  "proof": [
   {
@@ -338,5 +340,34 @@
   "group": "Q136",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-821d188d3 (reviewer sub-agent of L); spot-checked: I read every proof step and the statement of every cited node. Sources checked: blueprint main-20261015 p-dl-a1-exact Steps 1–2; Stacks derived.tex 05TD and 05TE; sites-cohomology.tex 0D6G and 08FI. The statement is unchanged and true: tested with j=id, empty X, A^1 minus a point (delta can be nonzero) and disconnected X. Steps 1, 3, 4, 5, 7 and 8 are correct and their hypotheses hold (Noetherian, finite-dimensional, perfect field, smooth pure dimension-one curve, quasi-compact opens). Step 4's naturality argument (TR3 plus the cokernel) and step 5's Frobenius equivariance (uniqueness of the boundary, the Weil structure on Rj_* from lem-fix-weil-operations) are complete. There are no new nodes and no cycle. Two citations were missing (C4, E6) and I repaired both in the fixed item file. (1) Step 2 applied prop-weil-pbc-rational-transport, which is stated for def-weil-pbc-bounded-constructible-complete, to the def-weil-derived-complete-integral-detailed category without citing lem-weil-pbc-integral-stratified-perfect-characterization, which identifies the two. (2) Steps 2 and 6 descended the exact functor and the natural isomorphisms to the common-stage Qlbar category using only def-weil-algebraically-closed-coefficients; they now cite prop-weil-pbc-descent-functors. proof_deps and tool_uses are updated. Batch-5 check: lem-fix-weil-operations reaches only generic foundations: lem-pod-integral-pullback-composition (composition of integral pullbacks), plus the open-square exchange and adjunction-coherence lemmas of the trace-formula chapter. lem-weil-pbc-condensed-e-realization reaches only the general definition def-pod-ring-scalar-extension. Neither is a statement or proof step of the trace formula or Poincare duality. Except lem-trf-adjoint-composition-coherence, an adjunction-coherence lemma, all of them are already in the closure of the pre-existing statement dependency rem-dl-a1-conventions, and my two added citations reach nothing new. I accept the 14 declared tool uses and added 2.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilOpenImageDelta",
+  "declaration": "WeilConjectures.dlOpenImageDelta",
+  "declarations": [
+   "WeilConjectures.dlOpenOrdinaryAdjunction",
+   "WeilConjectures.dlOpenHigherImage",
+   "WeilConjectures.dlHigherGeometricComparison",
+   "WeilConjectures.DlOpenIsLisse",
+   "WeilConjectures.DlOpenLisseSES",
+   "WeilConjectures.DlOpenImageData",
+   "WeilConjectures.DlOpenImageRestriction",
+   "WeilConjectures.dlOpenImageDelta"
+  ],
+  "file": "lean/Sheaf/Paper/WeilOpenImageDelta.lean",
+  "statement": "theorem dlOpenImageDelta : ∃ I : ∀ c : Scheme.MiddleExtensionCurve D, DlOpenImageData D l hl Ω c, ∀ (c d : Scheme.MiddleExtensionCurve D) (a : d.C ⟶ c.C) (b : d.U ⟶ c.U) [IsOpenImmersion a.left] [IsOpenImmersion b.left], ∀ h : IsPullback b.left d.j.left c.j.left a.left, Nonempty (DlOpenImageRestriction D l hl Ω I c d a b h)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-32a682350"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32a682350",
+  "group": "N5",
+  "result": "fix",
+  "note": "Read the node, all 14 stmt_deps, the four delivered modules (WeilOpenImageDelta, SfCommonStageDirectImage, SfCommonStageWeilCohomology, CondensedERealization diffed against live), MiddleExtensionCurve, IsCommonStageLisse and the citers p-dl-a1-exact and lem-dl-a1-constant-field-charts. Every clause and edge case matches (j=id, empty or disconnected C, empty W, rank 0, r<0, independent universes); the B-repairs build on the existing constructions and are not hollow; the CondensedERealization API repair is needed (the landed file fails against the live build) and keeps its statement. One H3 finding, fixed: DlOpenImageData.degreeZero (R^0 j_* = j_*) was an unconstrained natural iso, so boundary was fixed only up to a natural automorphism of j_* (e.g. sign). Added degreeZero_normalization: degreeZero is the inverse of H^0 of the augmentation (adjoint of the ordinary counit) composed with the heart truncation maps. Theorem signature, lean.statement and stmt_deps unchanged. nt_compile --json on all four modules: delivered 43.7/10.7/15.0/12.6 s clean; fixed 49.1/6.6/17.0/22.9 s clean; a broken control copy errors as expected. CondensedERealization is close to the 60 s limit."
  }
 }

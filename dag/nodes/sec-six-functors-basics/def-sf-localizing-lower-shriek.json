@@ -1,0 +1,118 @@
+{
+ "id": "def-sf-localizing-lower-shriek",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-existence",
+   "place": "Definition of the restricted compactification lower shriek and its inherited shift comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Restriction of compactification lower shriek to the localizing closure",
+ "statement": "For a condensed coefficient ring $\\Lambda$ on the pro-étale site and schemes $X,Y$ with a\nmorphism $f:X\\to Y$, let $c$ be a compactification of $f$. Write\n$\\Loc_X=\\Loc(\\Dctf(X,\\Lambda))$ and $\\Loc_Y=\\Loc(\\Dctf(Y,\\Lambda))$ as in\n[sk-def-localizing-closure], and let\n$R\\!f^c_!$ be the ambient compactification lower-shriek functor of\n[sk-def-sfb-module-derived-lower-shriek]. Given a preservation map\n$$\nh:\\ \\forall K,\\ \\Loc_X(K)\\to\\Loc_Y(R\\!f^c_!(K)),$$\nthe *localizing lower-shriek attached to $c$* is the full-subcategory functor\n$$\n\\mathsf{L}\\!f^c_!:\\ \\Loc_X\\hookrightarrow D_X\n  \\xrightarrow{R\\!f^c_!}D_Y\\quad\\text{lifted to}\\quad\\Loc_Y,\n$$\nwith object membership supplied by $h$. When both localizing closures carry their\ninherited triangulated structures, this restricted functor is equipped with the\ncommutative shift structure induced by the ambient functor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/_section.md",
+  "place": "node sk-thm-existence, clause 2 (definition of the restricted lower shriek)"
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-lower-shriek"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of compactification lower shriek to localizing closure with inherited shift",
+   "results": "No exact match; returned generic exactness and derived-category declarations.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of compactification lower shriek to localizing closure full subcategories inherited commutative shift",
+   "results": "No exact existing project or Mathlib notion; Mathlib hits concern unrelated localization commShift constructions.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor CommShift ObjectProperty.lift",
+   "results": "No hits; CommShift is not a standalone Loogle identifier.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizingLowerShriek|localizingLowerShriekCommShift",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizingLowerShriek|localizingLowerShriekCommShift",
+   "results": "0 hits in WeilConjectures/.",
+   "date": "2026-10-18",
+   "verdict": "no upstream match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizingLowerShriek|localizingLowerShriekCommShift",
+   "results": "Existing hits were only in Sheaf.Paper.LocalizingExceptionalAdjoint and consumers; the helpers were bundled with the theorem and are moved to the dedicated module in this delivery.",
+   "date": "2026-10-18",
+   "verdict": "existing declaration found but ownership was unusable"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-existence",
+  "date": "2026-10-18",
+  "group": "NB"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-existence",
+ "lean": {
+  "module": "Sheaf.Paper.LocalizingExceptionalAdjoint",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.localizingLowerShriek",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.localizingLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.localizingLowerShriekCommShift"
+  ],
+  "existing": true,
+  "note": "Existing declaration in Sheaf.Paper.LocalizingExceptionalAdjoint; reuse the canonical restriction and inherited CommShift already in the live library.",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "statement": "noncomputable def localizingLowerShriek (c : Compactification f)\n    (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y\n      ((rightDerivedLowerShriekOfCompactification Λ c).obj K)) :\n    (localizingClosureProEtale Λ X).FullSubcategory ⥤\n      (localizingClosureProEtale Λ Y).FullSubcategory"
+ },
+ "status": "split",
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e5a7931c",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e5a7931c",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after L's 06:31 return of e8440f2ec593 ('also in LocalizingExceptionalAdjoint'). Delta (diff -rq of the snapshots): the duplicate LocalizingLowerShriek.lean and the edited LocalizingExceptionalAdjoint.lean are dropped; the item drops only its import of LocalizingLowerShriek, so the theorem is byte-identical to the version PASSed at 23cbcc/e8440; def-sf-localizing-lower-shriek is now existing:true on the live localizingLowerShriek (ObjectProperty.lift of ι⋙Rp_*D(j_!), real data) and localizingLowerShriekCommShift (inherited instance), the accepted resolution already used for NO fe34. Re-checked: setting, admissible Λ, clauses 1-4, Dctf=Dbc for the non-finite coefficients, no stronger hypotheses, edge cases and universes, lean.statement verbatim, one sorry, docstrings, Worker report and Second reading by NB. No cycle (the sk-prop-sf-existence proof_deps do not cite the item). nt_compile --json clean: rc 0, 11.3 s. Maintainer: NO det-sf-existence-brown fe34 delivers the same node id def-sf-localizing-lower-shriek (same declarations, different prose and deps); the second landing may collide."
+ }
+}

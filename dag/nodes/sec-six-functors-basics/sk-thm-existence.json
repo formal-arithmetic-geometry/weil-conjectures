@@ -16,7 +16,10 @@
   "sk-def-sfb-dc-setting",
   "sk-def-sfb-constructible",
   "sk-def-localizing-closure",
-  "sk-def-sfb-dc-lower-shriek"
+  "sk-def-sfb-dc-lower-shriek",
+  "def-pc-compact-object",
+  "def-pc-generators",
+  "def-sf-localizing-lower-shriek"
  ],
  "proof": [
   {
@@ -250,5 +253,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-4815d2397 (reviewer sub-agent of L); spot-checked: I read the item and all eleven cited node statements in full, along with the main-20261015 unit proof files (_section, sk-thm-existence.proof, det-existence-localizing.proof, det-existence-restriction.proof). The statement is byte-identical to the unit statement and is not weakened. The coefficient category is the same module-object D(Mod_{Λ_X}) everywhere, with Loc taken using ambient sums. The delivery creates no new nodes and introduces no cycle or SGA citation. Steps 1, 3, 4 and 5 are correct as cited: brown-hypotheses gives (1); sk-prop-sf-existence gives the single Brown application for (3); in step 4, rf-shriek-preservation covers finite A, det-prop-int-brown-adjoint identifies the integral adjoint so that sk-thm-int-restriction applies, and sk-thm-restriction covers E and Q̄_ℓ; in step 5, ctf-equals-bc(2) applies to the non-finite coefficients only, with its qcqs hypothesis checked. One fault (C1/E1): step 2 applied Nagata, comp-coherence-single/-cocycle and later sk-prop-sf-existence/restriction, all of which assume f is separated and of finite type, but it checked only that X and Y are qcqs. I repaired it with the existing Mathlib leaves lem-weil-pbc-separated-cancellation(b), lem-weil-pbc-proper-fp-permanence(f) and lem-weil-pbc-qcqs-morphism-permanence(1). I also declared the off-unit statements cited by the unit's own blueprint proof files in split_report.tool_uses and accepted them. I left the unit's realized fields to maintenance, because the previous landing refused a unit-file edit. Batch 5: the five flagged citations (int-brown-adjoint, comp-coherence-single/-cocycle, brown-hypotheses, int-restriction) are the construction of Rf_!/f^! and Dctf preservation. The Poincaré-duality assumption leaf takes that adjunction as a given notion, and the construction is not a step of the duality or trace-formula proofs. The closure reaches those chapters only through generic tools: the étale stalk tensor lemma, a Mathlib localization leaf, the lisse/π₁ correspondence and the module-object comparison. So the citations are genuinely outside the assumptions.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalInverseImageExistence",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.exceptionalInverseImage_exists",
+  "file": "lean/Sheaf/Paper/ExceptionalInverseImageExistence.lean",
+  "statement": "theorem exceptionalInverseImage_exists (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) : ∃ (hX : L(X.left).IsTriangulated) (hY : L(Y.left).IsTriangulated) (hSX : S(X.left) ≤ L(X.left)) (hSY : S(Y.left) ≤ L(Y.left)) (h : ∀ K, L(X.left) K → L(Y.left) ((rightDerivedLowerShriekOfCompactification Λ (compactificationOverField f)).obj K)) (sX : HasCoproducts.{u + 1} L(X.left).FullSubcategory) (sY : HasCoproducts.{u + 1} L(Y.left).FullSubcategory), (fun [triX : L(X.left).IsTriangulated] [triY : L(Y.left).IsTriangulated] [sumsX : HasCoproducts.{u + 1} L(X.left).FullSubcategory] [sumsY : HasCoproducts.{u + 1} L(Y.left).FullSubcategory] ↦ (∀ K : ConstantModelConstructibleFiniteTor Λ X.left, IsCompactObject.{u + 1} ((ObjectProperty.ιOfLE hSX).obj K)) ∧ (LocallySmall.{u + 1} (ConstantModelConstructibleFiniteTor Λ X.left) ∧ ∃ (I : Type (u + 1)) (E : I → ConstantModelConstructibleFiniteTor Λ X.left), (∀ K, ∃ i, Nonempty (E i ≅ K)) ∧ (∀ i j, Nonempty (E i ≅ E j) → i = j) ∧ IsTriangulatedGeneratingFamily (fun i ↦ (ObjectProperty.ιOfLE hSX).obj (E i))) ∧ (localizingLowerShriek Λ (compactificationOverField f) h).IsTriangulated ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) (localizingLowerShriek Λ (compactificationOverField f) h)) ∧ (∀ K : L(X.left).FullSubcategory, S(X.left) K.obj → S(Y.left) ((localizingLowerShriek Λ (compactificationOverField f) h).obj K).obj) ∧ (∀ c : Compactification f.left, Nonempty ((localizingLowerShriek Λ (compactificationOverField f) h) ⋙ L(Y.left).ι ≅ L(X.left).ι ⋙ rightDerivedLowerShriekOfCompactification Λ c)) ∧ (∃ G : L(Y.left).FullSubcategory ⥤ L(X.left).FullSubcategory, ∃ s : G.CommShift ℤ, (fun [comm : G.CommShift ℤ] ↦ G.IsTriangulated ∧ Nonempty (localizingLowerShriek Λ (compactificationOverField f) h ⊣ G) ∧ (∀ N : L(Y.left).FullSubcategory, S(Y.left) N.obj → S(X.left) (G.obj N).obj)) (comm := s)) ∧ ((Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ)))) → S(X.left) = constantModelBoundedConstructible Λ X.left ∧ S(Y.left) = constantModelBoundedConstructible Λ Y.left)) (triX := hX) (triY := hY) (sumsX := sX) (sumsY := sY)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e5a7931c",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after L's 06:31 return of e8440f2ec593 ('also in LocalizingExceptionalAdjoint'). Delta (diff -rq of the snapshots): the duplicate LocalizingLowerShriek.lean and the edited LocalizingExceptionalAdjoint.lean are dropped; the item drops only its import of LocalizingLowerShriek, so the theorem is byte-identical to the version PASSed at 23cbcc/e8440; def-sf-localizing-lower-shriek is now existing:true on the live localizingLowerShriek (ObjectProperty.lift of ι⋙Rp_*D(j_!), real data) and localizingLowerShriekCommShift (inherited instance), the accepted resolution already used for NO fe34. Re-checked: setting, admissible Λ, clauses 1-4, Dctf=Dbc for the non-finite coefficients, no stronger hypotheses, edge cases and universes, lean.statement verbatim, one sorry, docstrings, Worker report and Second reading by NB. No cycle (the sk-prop-sf-existence proof_deps do not cite the item). nt_compile --json clean: rc 0, 11.3 s. Maintainer: NO det-sf-existence-brown fe34 delivers the same node id def-sf-localizing-lower-shriek (same declarations, different prose and deps); the second landing may collide."
  }
 }

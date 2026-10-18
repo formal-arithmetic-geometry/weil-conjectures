@@ -26,7 +26,9 @@
   "def-weil-proper-morphism",
   "sk-def-sfb-base-change-morphism",
   "det-def-sfb-base-change-morphism-bc",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-sfb-module-object-projection-map",
+  "def-sfb-derived-push-hom"
  ],
  "proof": [
   {
@@ -487,5 +489,35 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperBaseChangeRational",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_rationalizationPushHom_boundedBelow",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalizationPushHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalFinitenessPushforwardPreservation",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalCoefficientPushforwardPreservation",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_rationalizationPushHom_boundedBelow",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_finiteCoefficientPushHom_boundedBelow",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_algClCoefficientPushHom_boundedBelow",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properPushforward_boundedConstructible_rational",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_properProjectionMap_boundedConstructible_rational",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_properBaseChange_boundedConstructible_rational"
+  ],
+  "file": "lean/Sheaf/Paper/ProperBaseChangeRational.lean",
+  "statement": "theorem isIso_rationalizationPushHom_boundedBelow (E : PadicAlgCl.FiniteIntermediateField ℓ) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left))) (_hK : DerivedCategory.TStructure.t.plus K) : IsIso ((rationalizationPushHom ℓ E p.left).app K)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All three clauses are stated by six theorems: three canonical coefficient comparisons, then preservation, projection and base change for precisely E or Qlbar. The latter cases are expressed by equality of bundled ring objects, so multiplication is fixed. Base change uses the recorded OfPreserves map and the existing preservation proof, with no added assumption; its invertibility is stated componentwise on the full Dbc subcategory. The three helpers only specialize the existing map or package existing preservation proofs. Two landed canonical-map nodes were added to stmt_deps. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60d63f12d",
+  "group": "NY",
+  "result": "pass",
+  "note": "Identical in Lean, node and report to the PASSed head 551619cf1e56, which was returned only for the 60 s library-export timeout. Read independently. The standing setting (char p>0, p≠ℓ, separated finite type over k, IsProper p.left bound in all six theorems, one universe u) matches the node. Clause 1 inverts the actual derivedPushHom maps O_E->E (flatness from the named padicIntegers_invertEll), F/E finite (E≤F) and E->Qlbar on t.plus (bounded-below) K. Clauses 2-3 take Λ exactly E or Qlbar by bundled Mon equality, use the recorded boundedConstructible predicate, the landed moduleObjectProjectionMap (Rp*K⊗M->Rp*(K⊗Lp*M), K and M independent) and boundedConstructibleBaseChangeOfPreserves on every IsPullback square with g arbitrary; the preservation proof is a Prop term. No hollow definition, sorry only, docstrings with source, blueprint id and steps 1-11, statement verbatim, stmt_deps gain only two landed nodes. Edge cases covered. Overlaps with upstream (finite and Qlbar comparisons proved, clause 2 sorry) are recorded in the report and are not second definitions. nt_compile --json: clean at 47.2, 49.1 and 59.5 s; timeouts at 60 s under load ~110. The ~10-12 s one-time compiled-output (.olean) cost comes from theorems naming specific-ring maps and no meaning-preserving fix was found. Land at lower load."
  }
 }

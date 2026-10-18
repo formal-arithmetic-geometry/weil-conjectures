@@ -19,7 +19,11 @@
   "sk-def-pe-wlocal",
   "def-pc-perfect-ring-complex",
   "def-sfb-site-derived-constant-module-functor",
-  "lem-pe-spectral-components-profinite"
+  "lem-pe-spectral-components-profinite",
+  "def-zl-derived-change-of-rings-model",
+  "def-zl-condensed-scalar-realization",
+  "def-zl-ring-derived-scalar-extension",
+  "lem-zl-component-relative-profinite-site"
  ],
  "proof": [
   {
@@ -319,5 +323,57 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-f635fb196 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Hemo–Richarz–Scholbach §3 ((3.1)–(3.2), Remark 3.2), Lemma 4.1 with its proof and Example 4.2, the construction of (4.1), and Proposition 4.3 with its proof; also Stacks 0FNS. The item's statement is unchanged. It uses the ordinary unbounded D(T_proet, Λ_T) with Λ_T = p_T^*Λ, and F_T is Remark 3.2's functor. 'Exact' means triangulated, not t-exact: Example 4.2 shows t-exactness would be false. Steps 1–9 each match their cited statements. Step 2: the module adjunction applied with u = global sections to the point gives E = O ⊗ (constant), right adjoint Γ. Step 3: the free-module case and presentations are correct. Step 4: the unit is invertible on all of D(A) via K-flat representatives. Steps 5–6: the transposition argument and the counit argument via the triangle identity are both correct. Step 7: I checked that w-contractibility implies topos weak contractibility via the finite clopen partitions of det-pe-wcb-clopen-partition, and that the two definitions of w-contractible agree; A_T ≅ Λ(π0 T) comes from condensed-point-basis-evaluation. Step 8 is the commuting square of HRS 4.3(3). Step 9: the balanced chain maps are correct. New nodes, all statement-only and self-contained, with created/blueprint/search records in order: (a) contractible-derived-sections-tensor is true; every covering sieve of T contains a finite clopen partition, so sections of sheafified finite-product presheaves agree with presheaf sections, and K-flat resolutions built from j_! O_U have flat global sections; tested on empty T, the zero ring and a singleton. (b) ring-derived-dualizable-perfect is exactly 0FNS and no existing node states the converse direction. (c) component-relative-profinite-site checks out: affine/pro-étale limit, covers, and p_T ≅ q_S π_T via Spec LC(S', Z). I found no duplicates, no restated clauses and no cycle. Batch-5 check: def-trf-geometric-morphism is a general definition. lem-trf-geometric-inverse-image-exact is the general exactness of inverse images; its closure within the trace-formula and Poincaré chapters is only that definition, plus generic pbc foundations. Neither assumption leaf states either fact, so both citations are accepted. All ten declared tool_uses are generic interfaces and are accepted. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensed_wcontractible_lisse_evaluation",
+  "statement": "theorem condensed_wcontractible_lisse_evaluation (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] : (∀ (T : Scheme.{u}) [IsAffine T] [IsWContractibleRing Γ(T, ⊤)], Evaluation.Statement (Scheme.ProEt.topology T) (condensedRingObj Λ.X T) (Scheme.ProEt.mk (𝟙 T)) (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.WeaklyEtale T) ∧ componentClause Λ.X T) ∧ (∀ (S : Profinite.{u}), ExtremallyDisconnected S → Evaluation.Statement ((coherentTopology Profinite.{u}).over S) (profiniteCoefficient Λ.X S) (Over.mk (𝟙 S)) Over.mkIdTerminal ∧ profiniteScalarClause Λ.X S)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedWContractibleLisseEvaluation.lean",
+  "note": "Return repair: lem-zl-component-relative-profinite-site is a statement dependency because componentTests selects its universally characterized functor and affineComponentSpace is its declaration. Derived change of rings is cited through def-zl-derived-change-of-rings-model. Ordinary module scalar extension is cited through def-zl-ring-derived-scalar-extension, which records its published owner.",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.ringSheaf",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.D",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.A",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.scalarMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.constantHasDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.sectionHasDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.extensionModel",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.F",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.sections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.sectionsAdditive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.G",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.lisse",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.perfect",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.strongSymmetric",
+   "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.Statement",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteCoefficient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteCoefficientMon",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteCoefficientComm",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteSectionRingIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteScalarMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteScalarRealization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteScalarClause",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentTests",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentInverse",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentModules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentModulesAdditive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentSymmetric",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentComparisons",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentClause",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensed_wcontractible_lisse_evaluation"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cccd21d7",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery after 07f043deb8be RETURN; Lean byte-identical, only records/report changed: lem-zl-component-relative-profinite-site restored to stmt_deps, false lem-pur claim corrected, def-zl-ring-derived-scalar-extension now cites its owner lem-sfb-constant-realization-derived-scalar-extension. Mechanical theorem-stmt_dep finding: PASS on this point, since componentTests := Classical.choose (component_relative_profinite_site T) (lines 229-231) is the theorem-constructed test functor (characterized by its ∃! mapping property) that underlies componentInverse/Modules/Derived/componentClause. Re-checked all hypotheses and conclusion clauses against the node (both bases, canonical A_T/F/G/perfect/lisse, component pullback, α/β coefficient compatibility, A_T≅Γ(S,Λ), both squares, final scalar formula, profinite clause), edge cases, universes, docstrings with nine proof steps, single sorry, lean.statement verbatim, all 31 declarations present, report sections present. nt_compile --json on the local side overlay with all three modules together: exit 0, no errors or warnings (item 6.3 s)."
  }
 }

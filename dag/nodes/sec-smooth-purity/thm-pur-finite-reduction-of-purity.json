@@ -25,7 +25,12 @@
   "thm-pur-smooth-base-change-coherence",
   "def-weil-scheme-morphism-properties",
   "def-weil-finite-tor-amplitude",
-  "def-weil-finite-torsion-constructibility"
+  "def-weil-finite-torsion-constructibility",
+  "def-pur-finite-reduction-chart-calculus",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-finite-affine-orientation-comparison",
+  "def-pur-smooth-pullback-exchange"
  ],
  "proof": [
   {
@@ -362,14 +367,32 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "lean": {
-  "branch": "master",
-  "existing": true,
-  "module": "WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction",
-  "declaration": "AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp",
+  "module": "Sheaf.Paper.FiniteReductionOfPurity",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionOfPurity",
   "declarations": [
-   "AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp",
-   "AlgebraicGeometry.Etale.map_smoothPurityTrace"
+   "WeilConjectures.PurityFiniteSetting.finiteReductionOfPurity",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionOfSmoothTrace",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionOfUnitSmoothTrace",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionOfCompositionSource",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionOfCompositionExceptional",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionOfCompositionCoherence",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionOfBaseChange",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionOfAffineOrientation"
   ],
-  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction: the blueprint item thm-pur-finite-reduction-of-purity's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+  "file": "lean/Sheaf/Paper/FiniteReductionOfPurity.lean",
+  "statement": "theorem finiteReductionOfPurity (d : ℕ) [SmoothOfRelativeDimension d f] (K : Scheme.proEtaleDerivedCategory Y P.Ring) (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K) : (P.finiteReduction m hm hmn X).map (P.smoothPurityMap f d K hK) ≫ P.finiteReductionExceptionalComparison m hm hmn f d K hK = (P.finiteReductionSourceComparison m hm hmn f d K).hom ≫ (P.finiteReductionSetting m hm).smoothPurityMap f d ((P.finiteReduction m hm hmn Y).obj K) (P.finiteReduction_preserves_ctf m hm hmn Y K hK)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The newly attached upstream map_smoothPurityIso_hom_comp assumes arbitrary coefficient functors, purity constituents and their compatibility equations on etale derived categories. This packet instead states the node for the actual quotient map on the intrinsic pro-etale finite-Tor constructible category, with independently normalized canonical comparisons, and includes its affine-orientation, trace, composition and base-change clauses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-861cad2e9",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read item, source (master + main-20261015), all 6 delivered modules, the cited declarations (SmoothPurityMap, PurityCompositionCoherence, SmoothTrace, FixedFinitePositiveCoefficientTwist, ordinary_supported_kummer, affineLine_orientation) and both replaced upstream records (map_smoothPurityIso_hom_comp takes the constituent compatibilities as hypotheses; Etale.smoothPullbackExchange takes arbitrary supplied θ/φ on the étale site; neither states its node). Lean matches every clause: main square with node directions; affine orientation; trace for general K and the unit; composition = exact RHS of smoothPurityCompositionCoherence; base change (b_□ and exchange; v arbitrary). No added hypotheses, no e|n or flatness, universes as the deps, autoImplicit off. Every ∃! spec checked true: root-chart source/base-change comparisons (roots exist since k alg closed and ℓ≠p; independent of the root choice), counit-normalised exceptional maps via a genuine adjunction, unique Kummer class. Chart HEq factor types confirmed by test compiles; tests for the two pieces resting on upstream smoothPurityTensorPresentation timed out at 60 s (project's propositional-equality pattern). No hollow defs; theorems sorry. Records verbatim; stmt_deps additions allowed; report sections present; docstrings present. nt_compile of all 6 modules clean (6.5–24.3 s). Notes: finiteReductionPurityIsIso duplicates landed isIso_smoothPurityMap (not citable: dependency stmt_deps fixed in S2); new nodes use plain defs from PurityCompositionCoherence without citing thm-pur-composition-coherence (item already cites it); new orientation should be identified with affineLine_orientation (e|n only) in stage 3; proof-only imports; global Sheaf.monoidalCategory has precedent."
  }
 }

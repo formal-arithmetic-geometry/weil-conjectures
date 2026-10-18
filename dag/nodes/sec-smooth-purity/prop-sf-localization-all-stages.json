@@ -909,6 +909,9 @@
    "WeilConjectures.SfSupportedLocalization",
    "WeilConjectures.SfSupportedLocalizationTor",
    "WeilConjectures.SfLocalizationFiniteCategory",
+   "WeilConjectures.SfLocalizationUnitCompatibility",
+   "WeilConjectures.SfLocalizationScalarUnitCompatibility",
+   "WeilConjectures.SfLocalizationScalarCounitCompatibility",
    "WeilConjectures.SfFiniteLocalization",
    "WeilConjectures.sfLocalizationResidueMap",
    "WeilConjectures.sfLocalizationPrimeInvertible",
@@ -930,17 +933,18 @@
   "file": "lean/Sheaf/Paper/SfLocalizationAllStages.lean",
   "statement": "theorem sfLocalizationAllStages (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : k)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X : Scheme.{u}) (t : X ⟶ Spec (.of k)) [IsSeparated t] [LocallyOfFiniteType t] [QuasiCompact t] {Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hij : Set.range j = (Set.range i)ᶜ) : (∀ n : ℕ, Nonempty (SfFiniteLocalization l E n k i j)) ∧ Nonempty (SfIntegralLocalization l E k hl t i j) ∧ Nonempty (SfRationalLocalization l E k hl t i j) ∧ Nonempty (SfAlgebraicallyClosedLocalization l Ω k hl t i j)",
   "branch": "newtargets-dag",
-  "by": "Q64",
-  "date": "2026-10-17",
+  "by": "Q116",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "All four coefficient stages and the separate actual-pair Weil clause. Owning-node helper records package the asserted adjunctions, canonical operation comparisons, natural supported boundary and Tor bounds. sfLocalizationExceptionalLimit states the integral Rlim formula with its reduction projections. No functor is assumed as an extra hypothesis or chosen from bare nonemptiness."
+  "note": "Dependency interface repair: server confirmation timed out compiling the recorded SfLocalizationAllStages module under its 60-second per-file limit. Disable transparency-sensitive backward defeq elaboration for its existing derived-functor constructions. All definitions, statements, and proofs are retained verbatim; no extra hypothesis or weaker conclusion is introduced. Factor the finite unit compatibility equation into a transparent clause predicate to avoid repeated derived-adjunction reduction; its formula, quantification and canonical maps are unchanged. On the 2026-10-18 retry, profiler traces identified the repeated rational and stage-comparison unit/counit equations as further elaboration costs. SfLocalizationScalarUnitCompatibility and SfLocalizationScalarCounitCompatibility transparently name those six literal commuting equations with the identical adjunctions and comparison maps; every normalization and its object quantification is retained.",
+  "fixed_by": "NT-stage2-cc-1ca8a11be"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b8aa7ebdf",
-  "group": "Q64",
+  "reviewer": "NT-stage2-cc-1ca8a11be",
+  "group": "Q116",
   "result": "fix",
-  "note": "Lean and statement audit passed; supplied complete replacement report with substantive ## Second reading by Q64 section."
+  "note": "Head 1ca8a11be123 is byte-identical in Lean and node records to the PASSed 09a01da968eb; only the report and blueprint-index differ. L returned 09a01da at landing for the 60 s timeout of SfLocalizationAllStages. Re-read clauses (i)-(vii) against the node: pullback; tensor [a+c,b+d]; general Hom [c-b-2m,d-a+2m]; site-perfect dual formula and [c-b,d-a]; origin example with Tor [0,0], i_*A(-1)[-2], H2 nonzero; Rf_* [a,b+2d]; sfIntrinsicCompactSupport for every compactification; Rf^! preservation, D_X f* D_Y and [a-2dX,b+2dY]; exact Verdier anti-equivalence; finite, integral, rational and Qbar passages. Edge cases: empty scheme with bound 0, level 1, identity quotient, ramified E, general Hom without site-perfectness. lean.statement verbatim (4288 chars), 37/37 declarations present, only sorry proofs, no hollow data, real Worker report and Second reading by Q116. nt_compile --json on the head: clean at load ~93 (SfLocalizationAllStages 45.9 s, FiniteTorStability 38.7 s). F1 (mechanical): fixes/SfLocalizationAllStages.lean adds only set_option genInjectivity false and set_option genSizeOfSpec false after the header options, for its nine large structures. Back to back: fix 16.1 s and 14.0 s, original 40.4 s and 38.8 s. With the fix all 4 delivered files are clean (2.6 / 2.4 / 13.7 / 23.6 s). No statement, declaration or record change; no live importer uses the injEq/sizeOf lemmas."
  }
 }
