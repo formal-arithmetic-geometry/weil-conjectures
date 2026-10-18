@@ -14,9 +14,160 @@
   "def-pur-supported-cup",
   "lem-pur-supported-cup-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=X\\setminus Z$ and let $j:U\\hookrightarrow X$. The field $k$ is Noetherian (its only ideals are $0$ and $k$), so $\\operatorname{Spec}k$ is Noetherian. By [lem-weil-pbc-finite-type-over-noetherian], $X$ is Noetherian. For every affine open $V\\subset X$, the open subscheme $U\\cap V$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus $j$ is a quasi-compact morphism, by the affine-preimage definition in [def-weil-finite-type-morphism]. These are precisely the geometric hypotheses required below for closed pro-etale direct image and its supported essential image.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tags 01OW, 01OZ and topology.tex Tag 04ZA for the open-subscheme consequence"
+   }
+  },
+  {
+   "text": "Write $S=i_*A_Z$, $F=A_X(t)$, $G=A_X(s)$ and $q:A_X\\to S$ for constant restriction. Use [lem-pur-supported-hom] with $i$ and with the identity closed immersion of $X$ to represent the given classes by $\\widetilde\\alpha:A_X\\to F[a]$ and $\\widetilde\\beta:S\\to G[b]$. Both coefficient sheaves are in degree zero, hence bounded below, so this use requires no constructibility or Tor assertion. In [def-pur-supported-cup] the coefficient map for the pair of supports $(X,Z)$ is the left unitor $\\lambda_S:A_X\\otimes_A^LS\\xrightarrow{\\sim}S$: its formula is multiplication of constant sections. Consequently the supported product is represented by $\\sigma_{a,b}(\\widetilde\\alpha\\otimes\\widetilde\\beta)\\lambda_S^{-1}$, followed by the twist multiplication $F\\otimes_A^LG\\cong A_X(t+s)$.",
+   "uses": [
+    "lem-pur-supported-hom",
+    "def-pur-supported-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-pur-supported-cup.md",
+    "place": "Displayed tensor-morphism definition, with first support X and second support Z; supported Hom is the adjacent lem-pur-supported-hom.md"
+   }
+  },
+  {
+   "text": "In these representatives forgetting support is precomposition by $q$. Indeed the normalization in [lem-pur-supported-hom-adjunction-transpose] derives the evaluation $v_M(\\varphi)=\\varphi_X(q(1))$. For a sheaf $M$, inclusion $\\Gamma_Z(X,M)\\subseteq\\Gamma(X,M)$ therefore corresponds to $\\varphi\\mapsto\\varphi q$ under $\\operatorname{Hom}(S,M)$ and $\\operatorname{Hom}(A_X,M)=\\Gamma(X,M)$. Applying this equality degree by degree on an injective resolution gives the same equality on cohomology. Thus $\\operatorname{forg}(\\beta)$ is represented by $\\widetilde\\beta q$; the identical calculation applies to the output coefficient $A_X(t+s)$. The locally Noetherian hypothesis of the normalization lemma follows from Step 1.",
+   "uses": [
+    "lem-pur-supported-hom-adjunction-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0G77, lemma-support-cup-product (whose proof is omitted): explicit forgetting-support calculation using the normalized supported-Hom evaluation"
+   }
+  },
+  {
+   "text": "Ordinary restriction of $\\alpha$ is represented by $Li^*\\widetilde\\alpha:A_Z\\to A_Z(t)[a]$. To check the normalization, apply [lem-pur-supported-hom-pullback] to the full support $X\\hookrightarrow X$ and the morphism $i:Z\\to X$; its closed-constant exchange is then the coefficient-unit identification. The pro-etale clause applies to the present finite twists: [lem-amb-finite-tate-site-descent] identifies the finite positive Tate twists with the pullbacks of their etale versions, and [lem-asd-etale-finite-twist-pullback] gives those etale twists for every integer. For a negative twist the same comparison follows by dualizing a rank-one locally free sheaf: locally a basis and its dual have evaluation $1$, and the exact comparison inverse image [lem-sf-comparison-pullback-exact], with its tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], preserves this equation, so these dual comparisons glue. Hence the assumption $i^*\\alpha=0$ says exactly $Li^*\\widetilde\\alpha=0$. This uses no comparison for an exceptional inverse image.",
+   "uses": [
+    "lem-pur-supported-hom-pullback",
+    "lem-amb-finite-tate-site-descent",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0G76, remark-support-cup-product-global, first restriction arrow; its pro-etale morphism interpretation uses the cited supported-Hom pullback and finite Tate descent statements"
+   }
+  },
+  {
+   "text": "The coefficient calculation in [def-pur-supported-cup] proves that $S=i_*A_Z$ is flat. Thus $T:=F[a]\\otimes_A^LS$ is the shift $H[a]$ of the sheaf $H:=F\\otimes_{A_X}S$: using the degree-zero K-flat model $S$ computes this tensor without a resolution of $F$. By [lem-sf-ringed-closed-kernel-adjoint], $j^*S=0$. The underived comparison [lem-pur-proetale-inverse-image-tensor-comparison] gives $j^*H\\cong j^*F\\otimes j^*S=0$. The zero tensor is zero directly from its balanced generators. By [lem-exc-proetale-closed-essential-image], the actual sheaf adjunction unit $\\eta_H:H\\to i_*i^*H$ is an isomorphism. Constant coefficient rings satisfy its required inverse-image identifications, as in [prop-weil-pbc-proetale-constant-exact].",
+   "uses": [
+    "def-pur-supported-cup",
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-exc-proetale-closed-essential-image",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)"
+   }
+  },
+  {
+   "text": "Use the derived adjunction $Li^*\\dashv i_*$ of [lem-sf-ringed-closed-kernel-adjoint]. Here $i_*$ is exact, and $i^*$ is exact by [prop-weil-pbc-proetale-constant-exact]. Its unit $\\eta_K:K\\to i_*Li^*K$ is represented on any complex by the termwise sheaf unit. More explicitly, [lem-weil-pbc-termwise-adjunction-homotopy] gives those natural termwise units; [lem-weil-pbc-exact-functor-derived-factorization] shows both functors preserve quasi-isomorphisms and commute with shifts. Localizing the termwise naturality and the two adjunction identities gives this adjunction on the derived categories with these same units. In particular $\\eta_T$ is identified with $\\eta_H[a]$ under $T\\cong H[a]$, and is an isomorphism by Step 5. This is a calculation for a shifted sheaf, not a claim that arbitrary derived morphisms can be checked on their cohomology sheaves.",
+   "uses": [
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), termwise computation and shifts; proof of Tag 08BJ (lemma-adjoint-preserve-K-injectives) for the termwise adjunction, localized here for two exact functors"
+   }
+  },
+  {
+   "text": "Let $m=(\\widetilde\\alpha\\otimes1_S)\\lambda_S^{-1}:S\\to T$. The finite-level tensor comparison [lem-pur-derived-pullback-tensor-iso] is natural on the ambient pro-etale derived categories, so $Li^*m$ is, up to its invertible unit and tensor comparisons, $(Li^*\\widetilde\\alpha)\\otimes1_{Li^*S}$. This is zero by Step 4. To make preservation of zero explicit, the additive tensor-morphism operation of [lem-pur-shifted-tensor-morphism-calculus] sends the zero first factor to zero; take its second degree to be zero. Thus $Li^*m=0$.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); the signed additive tensor-morphism calculation is the cited general calculus lemma"
+   }
+  },
+  {
+   "text": "Naturality of the unit in Step 6 gives $\\eta_T\\circ m=i_*(Li^*m)\\circ\\eta_S=0$. Direct image is additive, so it sends the zero morphism of Step 7 to zero. Since $\\eta_T$ is invertible, composition with its inverse gives $m=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0G76, factorization through restriction; explicit adjunction-naturality calculation on the pro-etale site"
+   }
+  },
+  {
+   "text": "Bifunctoriality of derived tensor [lem-weil-derived-tensor-functorial] gives $\\widetilde\\alpha\\otimes\\widetilde\\beta=(1_{F[a]}\\otimes\\widetilde\\beta)(\\widetilde\\alpha\\otimes1_S)$. Therefore the morphism representing the supported product in Step 2 equals $\\sigma_{a,b}(1_{F[a]}\\otimes\\widetilde\\beta)m$, followed by twist multiplication. It is zero by Step 8. The Hom identification of Step 2 then gives $\\alpha\\cup\\beta=0$ in $H_Z^{a+b}(X,A(t+s))$.",
+   "uses": [
+    "lem-weil-derived-tensor-functorial",
+    "def-pur-supported-cup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-pur-supported-cup.md",
+    "place": "Displayed tensor-morphism formula; expand tensor bifunctoriality before composing the shift and twist comparisons"
+   }
+  },
+  {
+   "text": "Finally the unitors satisfy $\\lambda_S^{-1}q=(1_{A_X}\\otimes q)\\lambda_{A_X}^{-1}$, by naturality of $\\lambda$. Hence $(\\widetilde\\alpha\\otimes\\widetilde\\beta)\\lambda_S^{-1}q=(\\widetilde\\alpha\\otimes(\\widetilde\\beta q))\\lambda_{A_X}^{-1}$. Composing with the same shift and twist maps proves $\\operatorname{forg}(\\alpha\\cup\\beta)=\\alpha\\cup\\operatorname{forg}(\\beta)$, using Step 3 for the two forgetful maps and the full-support case of Step 2 for ordinary cup. The left side is zero by Step 9, proving the second assertion.",
+   "uses": [
+    "lem-weil-derived-tensor-functorial",
+    "def-pur-supported-cup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0G77, lemma-support-cup-product: explicit tensor-unitor proof of the omitted compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-finite-type-morphism",
+  "lem-pur-supported-hom",
+  "def-pur-supported-cup",
+  "lem-pur-supported-hom-adjunction-transpose",
+  "lem-pur-supported-hom-pullback",
+  "lem-amb-finite-tate-site-descent",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-exc-proetale-closed-essential-image",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-weil-derived-tensor-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0G75-0G77 motivate the closed-restriction action and forgetting square; agent proof on ordinary finite-coefficient pro-etale sites using the tensor-morphism definition, closed supported essential image, and natural adjunction unit. No ringed-space result is applied to a site."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +210,38 @@
    "results": "{\"t\": \"2026-10-18T02:37:07Z\", \"tool\": \"leansearch\", \"query\": \"The action of ordinary etale cohomology on cohomology with closed support factors through restriction to the closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"AlgebraicGeometry.Scheme.Opens.ι_app\", \"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.IsOpenImmersion.isoRestrict\", \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"AlgebraicGeometry.Scheme.restrict_presheaf_map\", \"AlgebraicGeometry.Scheme.Hom.resLE\"], \"digest\": \"8608f3d4c1982b0d\"}",
    "date": "2026-10-18",
    "verdict": "no match: Read returned hits; none states finite-coefficient scheme cohomology with the claimed Chern or closed-support operation."
+  },
+  {
+   "tool": "grep",
+   "query": "cup.*support|support.*cup|cohomologyWithSupport",
+   "results": "{\"t\": \"2026-10-18T03:04:10Z\", \"tool\": \"grep\", \"query\": \"cup.*support|support.*cup|cohomologyWithSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations concern sections of the structure sheaf, vanishing terms of complexes, or topological support; none states supported cohomology cup annihilation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology with closed support cup product vanishes if the ordinary cohomology factor restricts to zero on the closed subscheme",
+   "results": "{\"t\": \"2026-10-18T03:04:10Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology with closed support cup product vanishes if the ordinary cohomology factor restricts to zero on the closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isZero_of_isStrictlyGE\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"HasCompactSupport\"], \"digest\": \"d784f5f524872efa\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations concern sections of the structure sheaf, vanishing terms of complexes, or topological support; none states supported cohomology cup annihilation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cup\", \"support\"",
+   "results": "{\"t\": \"2026-10-18T03:04:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"cup\\\", \\\"support\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations concern sections of the structure sheaf, vanishing terms of complexes, or topological support; none states supported cohomology cup annihilation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomology class whose restriction to a closed subscheme is zero acts by zero on cohomology with support in that subscheme",
+   "results": "{\"t\": \"2026-10-18T03:04:12Z\", \"tool\": \"leanfinder\", \"query\": \"A cohomology class whose restriction to a closed subscheme is zero acts by zero on cohomology with support in that subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.RingedSpace.res_zero\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.Modules.Hom.zero_app\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\"], \"digest\": \"f3c0e900c74f100c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations concern sections of the structure sheaf, vanishing terms of complexes, or topological support; none states supported cohomology cup annihilation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-chern-flag-formula",
@@ -81,5 +260,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-closed-supported-cup-vanishing",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave ten explicit steps: finite-type geometric hypotheses, normalized Hom representatives and forgetting, ordinary pullback of Tate classes, supported shifted-sheaf target and its closed unit, vanishing by naturality, tensor factorization, and the forgetful square. Reused existing generic results throughout; no new nodes. No purity, regularity, or exceptional-base-change isomorphism is used.",
+  "blueprint": "thm-pur-localized-top-chern, proof Step 4 (L4), ordinary splitting-principle Chern formula: supplies closed-support cup annihilation used by lem-pur-chern-flag-formula to check the cohomology axiom of Stacks Tag 0FI4. The ancestor and via=[lem-pur-chern-flag-formula] are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-supported-hom",
+    "why": "Generic Supported cohomology as morphisms used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-pur-supported-hom-adjunction-transpose",
+    "why": "Generic The supported-Hom identification is the closed-support adjunction transpose used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-pur-supported-hom-pullback",
+    "why": "Generic Pullback compatibility of the supported-Hom identification used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic Finite Tate lines on the small etale site and their pullback used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-sf-ringed-closed-kernel-adjoint",
+    "why": "Generic The support-kernel adjoint for an arbitrary pro-etale ring sheaf used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Generic Pure-tensor description and coherence of the pro-etale inverse-image tensor comparison used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-exc-proetale-closed-essential-image",
+    "why": "Generic The essential image of closed direct image used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic Exactness of the pro-etale inverse image for constant coefficients used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic Derived pullback commutes with derived tensor product on the constructible categories used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-pur-shifted-tensor-morphism-calculus",
+    "why": "Generic Signed calculus of shifted derived tensor morphisms on ringed sites used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-weil-derived-tensor-functorial",
+    "why": "Generic Functoriality of the derived tensor product used only for its stated finite-coefficient sheaf, derived-category, or cohomology interface; sk-prop-an does not replace this tool. No purity theorem or construction of a Chern class is imported."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic finite-coefficient comparison inverse image or derived tensor comparison, used to identify the dual finite Tate twist and the ordinary pullback of a cohomology class; it supplies no geometric purity argument."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic finite-coefficient comparison inverse image or derived tensor comparison, used to identify the dual finite Tate twist and the ordinary pullback of a cohomology class; it supplies no geometric purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-supported-hom",
+  "lem-pur-supported-hom-adjunction-transpose",
+  "lem-pur-supported-hom-pullback",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-exc-proetale-closed-essential-image",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-weil-derived-tensor-functorial",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-comparison-pullback-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-2896d2eec",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-2896d2eec (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources, and route. All ten steps check: finite-coefficient restriction, closed-unit vanishing, and forgetting-support compatibility are explicit. No new nodes, circular dependency, dropped-route dependency, or over-2000-character step. Accepted generic tool uses and source checks are recorded in review.md; no repairs needed."
  }
 }
