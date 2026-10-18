@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.CounitIso
+public import WeilConjectures.CategoryTheory.Triangulated.CounitIso
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization

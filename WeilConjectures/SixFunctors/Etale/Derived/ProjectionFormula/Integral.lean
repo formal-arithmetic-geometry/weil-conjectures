@@ -62,6 +62,11 @@ the locally constant functions `C → 𝒪_E`, a torsion-free module which is no
 complete since `C` is infinite, hence not derived complete. So derived completeness of the two
 sides is a hypothesis of `AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral`;
 it holds in the intended pro-étale setting.
+
+Note that `X = Spec R` above is not of finite type over `k`: the counterexample shows that the
+removed statements were false as stated (without finiteness assumptions on `X` and `Y`), not that
+they fail for finite-type `k`-schemes, the setting of the blueprint. Whether they hold for
+finite-type `X`, `Y` on the étale model is not settled here, so the hypotheses are kept.
 -/
 
 @[expose] public section

@@ -8026,6 +8026,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.
 public import WeilConjectures.CategoryTheory.Triangulated.CompactBoundedHom
 public import WeilConjectures.CategoryTheory.Triangulated.CompactFamily
 public import WeilConjectures.CategoryTheory.Triangulated.CompactObjExtension
+public import WeilConjectures.CategoryTheory.Triangulated.CounitIso
 public import WeilConjectures.CategoryTheory.Triangulated.DenominatorTriangleCompletion
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
@@ -8049,7 +8050,6 @@ public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existenc
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Milnor
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
 public import WeilConjectures.CategoryTheory.Triangulated.IdempotentCompleteOfCoproducts
-public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
 public import WeilConjectures.CategoryTheory.Triangulated.MilnorBoundaryFactorization
@@ -9056,7 +9056,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.CoproductTriangle
-public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.CounitIso
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
@@ -10807,8 +10806,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDual
 public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDualCompat
 public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDualProper
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.ExcisionComparison
@@ -10936,8 +10933,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.De
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
@@ -10970,8 +10965,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OrientationDatum
 public import WeilConjectures.SixFunctors.Etale.Derived.Package
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
-public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
-public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.FiniteProjective
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.PointPerfectness
@@ -10983,8 +10976,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.PointBiduality
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.CompactSupportRational
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
@@ -11435,8 +11426,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
