@@ -1,0 +1,76 @@
+{
+ "id": "def-per-fs-log-smooth-etale",
+ "kind": "definition",
+ "title": "Log smooth and log etale morphisms of fs log schemes",
+ "statement": "Let $f:(V,M_V)\\to(B,M_B)$ be a morphism of locally Noetherian fs log schemes [def-trf-fs-log-blowup]. For a commutative monoid $P$, write $\\mathbf Z[P]=\\bigoplus_{p\\in P}\\mathbf Zz^p$ with $z^pz^q=z^{p+q}$. The morphism is log smooth if etale locally on source and target there are compatible fine saturated charts $P\\to M_B$, $Q\\to M_V$ and $u:P\\to Q$ such that the kernel and the torsion subgroup of the cokernel of $u^{\\rm gp}$ are finite of orders invertible on $V$, and the comparison morphism $V\\to B\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$ is smooth [def-sbc-smooth-morphisms]. It is log etale if charts can be chosen with both the kernel and the whole cokernel finite of invertible orders and the comparison morphism etale [def-weil-etale-morphism]. Charts and group completions mean those of [def-trf-fs-log-blowup]; the comparisons use scheme fibre products [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2 and its proof, pp.136--138, chart criterion recalled there; Expose XVI 3.6.1--3.6.3, p.252 (trait version). General criterion is Kato, Logarithmic structures of Fontaine--Illusie, Theorem 3.5 (WANTED locally)."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fine saturated logarithmic schemes log smooth and log etale chart criterion finite kernel torsion cokernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary smooth or etale morphisms, invariant-field algebra, module quotients and projectivizations do not state the logarithmic or scheme-quotient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kato logarithmic smoothness for charts of monoids and monoid algebras",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Smooth R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the submonoid generated by all powers of an element $ r $, then $ A $ is a smooth $ R $-algebra.\"}\n  {\"name\": \"ContMDiffAddMonoidMorphism.contMDiff_toFun\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {H' : Type u_5} [inst_4 : TopologicalSpace H']\\n  {E' : Type u_6} [inst_5 : NormedAddCommGroup E'] [inst_6 : NormedSpace 𝕜 E'] {\", \"doc\": \"The underlying function of a smooth additive monoid morphism between charted spaces with corners is $ C^n $-differentiable everywhere with respect to the model spaces $ I $ and $ I' $.\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"ContMDiffMonoidMorphism.mk.injEq\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {H' : Type u_5} [inst_4 : TopologicalSpace H']\\n  {E' : Type u_6} [inst_5 : NormedAddCommGroup E'] [inst_6 : NormedSpace 𝕜 E'] {\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, charted spaces with corners modeled on normed vector spaces, and $C^n$-differentiable monoid homomorphisms between them, two smooth monoid morphisms are\"}\n  {\"name\": \"ContMDiffMonoidMorphism.toMonoidHom\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {H' : Type u_5} →\\n                [inst_4 : TopologicalSpace \", \"doc\": \"A monoid homomorphism that is also a smooth map between charted spaces modeled on normed vector spaces with corners, over a nontrivially normed field $\\\\mathbb{K}$. This structure combines the algebrai\"}\n  {\"name\": \"ContMDiffMonoidMorphism.contMDiff_toFun\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {H' : Type u_5} [inst_4 : TopologicalSpace H']\\n  {E' : Type u_6} [inst_5 : NormedAddCommGroup E'] [inst_6 : NormedSpace 𝕜 E'] {\", \"doc\": \"The function associated with a smooth monoid morphism between charted spaces modeled on normed vector spaces with corners over a nontrivially normed field is $ C^n $-differentiable everywhere.\"}\n  {\"name\": \"ContMDiffMonoidMorphism\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {H' : Type u_5} →\\n                [inst_4 : TopologicalSpace \", \"doc\": \"A morphism of monoids that is also a smooth map between charted spaces modeled on normed vector spaces with corners, over a nontrivially normed field $\\\\mathbb{K}$. This structure combines the algebrai\"}\n  {\"name\": \"LeftInvariantDerivation.coeFnAddMonoidHom\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LeftInvariantDerivation\", \"type\": \": LeftInvariantDerivation I G →+ C^∞⟮I, G; 𝕜⟯ → C^∞⟮I, G; 𝕜⟯\", \"doc\": \"The additive monoid homomorphism that maps each left-invariant derivation to its corresponding function on smooth functions, preserving addition and the zero element.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary smooth or etale morphisms, invariant-field algebra, module quotients and projectivizations do not state the logarithmic or scheme-quotient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogSmooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary smooth or etale morphisms, invariant-field algebra, module quotients and projectivizations do not state the logarithmic or scheme-quotient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "LogSmooth|LogEtale|log.smooth|log.etale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary smooth or etale morphisms, invariant-field algebra, module quotients and projectivizations do not state the logarithmic or scheme-quotient assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-trait-prime-to-ell-log-alteration",
+  "date": "2026-10-19",
+  "group": "Q53"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 second paragraph through its last paragraph, printed pp.254--255: semistable G-alteration, ell-Sylow H, tame equivariant modification, quotient over T=S prime/H, and log resolution. Geometric construction only, before applying Theorem 3.6.2 and Proposition 3.5.7; preliminary finite extension to normalize constants in the first paragraph. Specifically: The fs charts used in XVI 3.7 for the semistable model, tame trait change and log resolution.",
+   "via": [
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
