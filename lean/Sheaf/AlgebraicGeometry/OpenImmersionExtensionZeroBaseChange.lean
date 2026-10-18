@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 public import Mathlib.Algebra.Homology.Additive
-import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
@@ -53,6 +52,11 @@ theorem openImmersionExtensionZero_exact_baseChange
     IsIso ((openImmersionLowerShriekBaseChangeMap AddCommGrpCat.{u + 1}
       (IsPullback.of_hasPullback a j).flip.toCommSq).mapHomologicalComplex
         (ComplexShape.up ℤ)) := by
-  sorry
+  have hbc := isIso_openImmersionLowerShriekBaseChangeMap AddCommGrpCat.{u + 1}
+    (IsPullback.of_hasPullback a j).flip
+  refine ⟨inferInstance, inferInstance, inferInstance, hbc, ?_⟩
+  exact (NatIso.mapHomologicalComplex
+    (asIso (openImmersionLowerShriekBaseChangeMap AddCommGrpCat.{u + 1}
+      (IsPullback.of_hasPullback a j).flip.toCommSq)) (ComplexShape.up ℤ)).isIso_hom
 
 end AlgebraicGeometry.Etale
