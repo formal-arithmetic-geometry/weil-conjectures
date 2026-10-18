@@ -43,7 +43,30 @@ theorem nonempty_strictlyHenselian_constant_sections_natural_iso
         (evaluation (Spec (CommRingCat.of R)).Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
           (op (AlgebraicGeometry.Scheme.Etale.mk
             (𝟙 (Spec (CommRingCat.of R)))))) ≅ 𝟭 AddCommGrpCat.{u + 1}) := by
-  sorry
+  let X := Spec (CommRingCat.of R)
+  let A := AddCommGrpCat.{u + 1}
+  let T : X.Etale := AlgebraicGeometry.Scheme.Etale.mk (𝟙 X)
+  let η : 𝟭 A ⟶ constantSheaf X.smallEtaleTopology A ⋙
+      sheafToPresheaf X.smallEtaleTopology A ⋙
+      (evaluation X.Etaleᵒᵖ A).obj (op T) :=
+    { app := fun M => (toSheafify X.smallEtaleTopology
+          ((Functor.const X.Etaleᵒᵖ).obj M)).app (op T)
+      naturality := by
+        intro M N f
+        have h := congr_app (toSheafify_naturality X.smallEtaleTopology
+          ((Functor.const X.Etaleᵒᵖ).map f)) (op T)
+        exact h }
+  letI : ConnectedSpace X := by
+    change ConnectedSpace (PrimeSpectrum R)
+    apply PrimeSpectrum.connectedSpace_of_isIdempotentElem
+    intro e he
+    exact he.eq_zero_or_one_of_isLocalRing
+  have hη (M : A) : IsIso (η.app M) := by
+    let e := AddEquiv.ofBijective (η.app M).hom
+      (Scheme.bijective_toSheafify_app_terminal X M)
+    exact e.toAddCommGrpIso.isIso_hom
+  letI : IsIso η := NatIso.isIso_of_isIso_app η
+  exact ⟨(asIso η).symm⟩
 
 /-- Degree-zero cohomology of constant abelian étale sheaves on `Spec R` is naturally the
 coefficient group. The natural isomorphism is in `AddCommGrpCat`, so its components are
