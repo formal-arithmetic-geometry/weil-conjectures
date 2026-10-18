@@ -27,9 +27,10 @@
  ],
  "proof": [
   {
-   "text": "Take $\\mathcal P$ to be the class of all projective $A$-modules. Using the lifting-along-surjections characterization in [def-weil-pbc-projective-module], a map out of $P_1\\oplus P_2$ lifts componentwise if both summands are projective; conversely a map out of a summand lifts by precomposing with the projection and restricting a lift. Thus $P_1$ and $P_1\\oplus P_2$ belong to $\\mathcal P$ if and only if $P_1,P_2$ do. If a module $T$ satisfies $T/IT=0$, then $T=IT=I^2T=\\cdots=I^NT=0$. For any map $u$ surjective modulo $I$, its cokernel $T$ satisfies $T/IT=0$: every target element is a sum of an image element and an element of $I$ times the target, so $T=IT$. Hence $u$ is surjective. This verifies hypotheses (1), (2), (3) of the general class lifting theorem without a finiteness hypothesis.",
+   "text": "Take $\\mathcal P$ to be the class of all projective $A$-modules. Using the lifting-along-surjections characterization in [def-weil-pbc-projective-module], a map out of $P_1\\oplus P_2$ lifts componentwise if both summands are projective; conversely a map out of a summand lifts by precomposing with the projection and restricting a lift. Thus $P_1$ and $P_1\\oplus P_2$ belong to $\\mathcal P$ if and only if $P_1,P_2$ do. If a module $T$ satisfies $T/IT=0$, then $T=IT=I^2T=\\cdots=I^NT=0$. For any map $u$ surjective modulo $I$, its cokernel $T$ satisfies $T/IT=0$: every target element is a sum of an image element and an element of $I$ times the target, so $T=IT$. Hence $u$ is surjective. This verifies hypotheses (1), (2), (3) of the general class lifting theorem without a finiteness hypothesis. In Lean identify quotient scalar extension with P/IP using TensorProduct.quotTensorEquivQuotSMul and apply the already proved nilpotent Nakayama lemma [lem-weil-pbc-nakayama-nilpotent].",
    "uses": [
-    "def-weil-pbc-projective-module"
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-nakayama-nilpotent"
    ],
    "elementary": true,
    "source": {
@@ -49,9 +50,9 @@
    }
   },
   {
-   "text": "Choose $b\\in\\mathbf Z$ with $E^i=0$ for $i>b$. The formula $H^i(E)=\\ker(d^i)/\\operatorname{im}(d^{i-1})$ gives $H^i(E)=0$ in those degrees. The supplied derived isomorphism therefore gives $H^i(C\\otimes_A^{\\mathbf L}A/I)=0$ for $i>b$, since cohomology factors through the derived localization. Apply [lem-weil-pbc-nilpotent-derived-upper-bound] to obtain $H^i(C)=0$ for $i>b$.",
+   "text": "Choose $b\\in\\mathbf Z$ with $E^i=0$ for $i>b$. The formula $H^i(E)=\\ker(d^i)/\\operatorname{im}(d^{i-1})$ gives $H^i(E)=0$ in those degrees. The supplied derived isomorphism therefore gives $H^i(C\\otimes_A^{\\mathbf L}A/I)=0$ for $i>b$, since cohomology factors through the derived localization. Apply [lem-weil-pbc-nilpotent-module-derived-upper-bound] to obtain $H^i(C)=0$ for $i>b$.",
    "uses": [
-    "lem-weil-pbc-nilpotent-derived-upper-bound",
+    "lem-weil-pbc-nilpotent-module-derived-upper-bound",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
@@ -72,7 +73,20 @@
    }
   },
   {
-   "text": "Apply [lem-sc-complex-lift-class-projective] with $R=A$, $K=C$, the given ideal $I$, the given complex $E^\\bullet$, and the class $\\mathcal P$ from step 1. The given derived reduction isomorphism supplies its initial datum; steps 1, 2, 4 verify all five hypotheses. Its conclusion supplies a bounded-above complex $P^\\bullet$ of projective $A$-modules representing $C$ and an isomorphism $P^\\bullet/IP^\\bullet\\cong E^\\bullet$ of complexes, precisely both required conclusions.",
+   "text": "A bounded-above projective complex K₀ is K-projective by Mathlib. Every complex has a filtered free resolution [lem-pc-large-filtered-free-resolution], and that resolution is K-projective [lem-pc-filtered-free-kprojective]. A quasi-isomorphism between K-projective complexes is a homotopy equivalence, hence every functor on the homotopy category sends it to an isomorphism. Apply [lem-pur-left-derived-from-kflat-class] with the resolving class of K-projective complexes and the functor given by scalar extension followed by derived localization. Its counit is invertible at K₀. Uniqueness of the universal left derived pair identifies this functor with the supplied L, so L(Q(K₀)) is isomorphic to Q(K₀ tensor_A A/I). Compose with the representative isomorphism and hReduction to obtain the reduced derived comparison required by Tag 0BCA.",
+   "uses": [
+    "lem-pc-large-filtered-free-resolution",
+    "lem-pc-filtered-free-kprojective",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN and 05SE, left derived functor computed on a resolving class; the bounded-above projective representative in Tag 09AR"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-complex-lift-class-projective] with $R=A$, $K=C$, the given ideal $I$, the given complex $E^\\bullet$, and the class $\\mathcal P$ from step 1. The given derived reduction isomorphism supplies its initial datum; steps 1, 2, 4 and 5 verify all five hypotheses. Its conclusion supplies a bounded-above complex $P^\\bullet$ of projective $A$-modules representing $C$ and an isomorphism $P^\\bullet/IP^\\bullet\\cong E^\\bullet$ of complexes, precisely both required conclusions.",
    "uses": [
     "lem-sc-complex-lift-class-projective"
    ],
@@ -85,16 +99,21 @@
  ],
  "proof_deps": [
   "def-weil-pbc-projective-module",
+  "lem-weil-pbc-nakayama-nilpotent",
   "lem-weil-pbc-nilpotent-projective-module-lift",
-  "lem-weil-pbc-nilpotent-derived-upper-bound",
+  "lem-weil-pbc-nilpotent-module-derived-upper-bound",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-bounded-above-projective-model",
+  "lem-pc-large-filtered-free-resolution",
+  "lem-pc-filtered-free-kprojective",
+  "lem-pur-left-derived-from-kflat-class",
   "lem-sc-complex-lift-class-projective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 09AR, lemma-lift-complex-projectives; upper-bound-only reading of Tag 0H75 made explicit in a separate input"
+  "place": "Tag 09AR, lemma-lift-complex-projectives, following the five hypotheses of Tag 0BCA; explicit ordinary-module universe transport and K-projective derived-counit computation",
+  "note": "The original mathematical route is retained. The upper-bound input is transported from ring-site modules rather than assumed to match ordinary modules definitionally. The derived comparison uses the proved generic resolving-class theorem."
  },
  "mathlib_searches": [
   {
@@ -261,5 +280,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261018T071156-L-1669019",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
