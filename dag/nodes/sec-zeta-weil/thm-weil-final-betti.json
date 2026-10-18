@@ -225,5 +225,24 @@
   "prop-endpoints",
   "lem-weil-reciprocal-polynomial",
   "prop-arithmetic-roots"
- ]
+ ],
+ "lean": {
+  "module": "WeilConjectures.ZetaFunction.BettiSymmetry",
+  "declaration": "AlgebraicGeometry.Scheme.betti_symmetry",
+  "statement": "theorem betti_symmetry {P : Fin (2 * d + 1) → Polynomial ℤ}\n    (hP : ∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) :\n    (∀ (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (i : Fin (2 * d + 1)),\n      (P i).natDegree = Module.finrank (PadicAlgCl l)\n        ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier) ∧\n    (∀ i : Fin (2 * d + 1), (P i.rev).natDegree = (P i).natDegree) ∧\n    (P 0).natDegree = 1 ∧ (P (Fin.last (2 * d))).natDegree = 1 ∧\n    P 0 = 1 - Polynomial.X ∧\n    P (Fin.last (2 * d)) = 1 - C ((Nat.card k₀ : ℤ) ^ d) * Polynomial.X ∧\n    ((∏ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ Even i.1),\n        (P i).map (Int.castRingHom ℚ)).rootMultiplicity 1 = 1 ∧\n      ¬ (∏ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ Odd i.1),\n        (P i).map (Int.castRingHom ℚ)).IsRoot 1) ∧\n    (1 ≤ d →\n      (∏ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ Even i.1),\n        (P i).map (Int.castRingHom ℚ)).rootMultiplicity ((Nat.card k₀ : ℚ) ^ d)⁻¹ = 1 ∧\n      ¬ (∏ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ Odd i.1),\n        (P i).map (Int.castRingHom ℚ)).IsRoot ((Nat.card k₀ : ℚ) ^ d)⁻¹)",
+  "branch": "slopmaster2",
+  "by": "Q126",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing published theorem AlgebraicGeometry.Scheme.betti_symmetry (WeilConjectures.ZetaFunction.BettiSymmetry), read in the live source; #check compiled against the published build. SmoothOfRelativeDimension d over a field encodes smooth of pure geometric dimension d; IsProper gives finite type and separatedness; GeometricallyConnected includes nonemptiness. The recorded cohomological-family interface (frobeniusCharpolyRev, IsIntegralFrobeniusFactor) uses PadicAlgCl l coefficients; flat scalar extension from Q_l preserves finrank, so the first conjunct is b_i = dim H^i(X,Q_l). P_i(0)=1 follows from hP. Pole clauses: with N = odd-index product and D = even-index product in Q[T] (so Z = N/D), the Lean asserts rootMultiplicity_c(D) = 1 and N(c) != 0 at c = 1 and, for d >= 1, at c = q^{-d}. This IMPLIES the node's 'pole of order exactly 1' (def-weil-rational-function-pole-order, its criterion R = A/((T-c)B) with A = N, B = D/(T-c)); it is not equivalent, since it also excludes a pole of order 1 arising as m_c(D) = 2, m_c(N) = 1. The extra content (no odd P_i vanishes at c) is exactly Step 5 of the node's proof (weight separation), so the stronger existing theorem is accepted for the node (maintainer review, cc NT, 2026-10-19).",
+  "fixed_by": "NT-stage2-cc-1278ef9f7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1278ef9f7",
+  "group": "Q126",
+  "result": "fix",
+  "note": "existing:true record for AlgebraicGeometry.Scheme.betti_symmetry (WeilConjectures.ZetaFunction.BettiSymmetry). The statement is verbatim from the published source; only the lean field changed vs base; #check compiles clean (7.2 s). All hypotheses match: finite field, IsProper, SmoothOfRelativeDimension d (= smooth of pure geometric dim d), GeometricallyConnected, P : Fin (2d+1) → Z[X], hP gives the det condition for every ℓ ≠ p and implies P(0)=1. The conclusions b_i = finrank (Qbar_ℓ coefficients, as in the recorded family deps), b_i = b_{2d−i}, b_0 = b_{2d} = 1, P_0 = 1−T, P_{2d} = 1−q^dT all match. The pole clauses (m_c(even-product denominator) = 1 and numerator(c) ≠ 0) imply the node's simple pole but are strictly stronger; the extra content is node proof Step 5 (weight separation), so accepted. FIX: the record note falsely called this an equivalence; fixes/thm-weil-final-betti.lean-record.json replaces only the note with an accurate account."
+ }
 }
