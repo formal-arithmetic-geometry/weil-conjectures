@@ -49,7 +49,7 @@ Proof:
    every map satisfying the germ formula agrees with the comparison everywhere. -/
 theorem etaleSetInverseImageStalkGerm (S T : Scheme.{u}) (e : T ⟶ S)
     (G : Sheaf S.smallEtaleTopology (Type (u + 1)))
-    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :
+    (Ω : Type u) [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ T) :
     ∃ c : (Scheme.pointSmallEtale t).sheafFiber.obj ((Scheme.etaleSetPullback e).obj G) →
         (Scheme.pointSmallEtale (t ≫ e)).sheafFiber.obj G,
       Function.Bijective c ∧

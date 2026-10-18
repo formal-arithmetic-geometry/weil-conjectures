@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
+
+
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.Compactification.FiniteTypeDirected
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
