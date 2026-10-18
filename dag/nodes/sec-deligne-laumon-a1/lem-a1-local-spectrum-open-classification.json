@@ -2,7 +2,7 @@
  "id": "lem-a1-local-spectrum-open-classification",
  "kind": "statement",
  "title": "Open subsets of a one-dimensional Noetherian local spectrum",
- "statement": "Let $(A,\\mathfrak m)$ be a Noetherian local commutative ring [def-weil-pbc-noetherian-ring] whose Krull dimension is at most one [def-weil-pbc-krull-dimension-ring], and let $S=\\operatorname{Spec}(A)$ be its affine scheme [def-pc-scheme, def-weil-affine-spectrum]. For every open subset $W\\subseteq S$, if the closed point $\\mathfrak m$ belongs to $W$, then $W=S$; if $\\mathfrak m\\notin W$, then $W$ has a finite discrete underlying topological space and the induced open subscheme is affine.",
+ "statement": "Let $(A,\\mathfrak m)$ be a Noetherian local commutative ring [def-weil-pbc-noetherian-ring] whose Krull dimension is at most one [def-weil-pbc-krull-dimension-ring], and let $S=\\operatorname{Spec}(A)$ be its affine scheme [def-pc-scheme, def-weil-affine-spectrum]. For every open subset $W\\subseteq S$, if the closed point $\\mathfrak m$ belongs to $W$, then $W=S$; if $\\mathfrak m\\notin W$, then $W$ has a finite discrete underlying topological space and the induced open subscheme is affine. Here local means that the nonunits of $A$ form the proper ideal $\\mathfrak m$; finite discrete means that there are finitely many points and every subset is open.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 09N8 (lemma-affine), proof: reduction to the spectrum of a Noetherian local ring and the case analysis at the closed point; Algebra Tag 00FR and Schemes Tag 02O0"
@@ -13,9 +13,76 @@
   "def-pc-scheme",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every prime ideal $\\mathfrak p$ is contained in $\\mathfrak m$: an element outside $\\mathfrak m$ is a unit, and no proper ideal contains a unit. If $\\mathfrak m\\in W$, choose a basic Zariski open $D(f)$ with $\\mathfrak m\\in D(f)\\subseteq W$. By the definition $D(f)=\\{\\mathfrak p:f\\notin\\mathfrak p\\}$, we have $f\\notin\\mathfrak m$, so $f$ is a unit and $D(f)=S$. Thus $W=S$. In the remaining steps assume $\\mathfrak m\\notin W$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N8 (lemma-affine), proof, local-spectrum case analysis"
+   }
+  },
+  {
+   "text": "If $\\mathfrak p\\ne\\mathfrak m$ is prime, it is minimal: otherwise there is a prime $\\mathfrak q\\subsetneq\\mathfrak p$, giving the length-two chain $\\mathfrak q\\subsetneq\\mathfrak p\\subsetneq\\mathfrak m$, contrary to $\\dim A\\leq1$. For the same reason the only primes containing $\\mathfrak p$ are $\\mathfrak p$ and $\\mathfrak m$. This argument also includes dimension zero, when there is no prime other than $\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N8 (lemma-affine), proof, local-spectrum case analysis"
+   }
+  },
+  {
+   "text": "The ring $A$ is Noetherian, so [lem-weil-pbc-noetherian-finitely-many-minimal-primes] gives a finite set of minimal prime ideals of $A$. Every point of $W$ is a nonmaximal prime and hence, by step 2, belongs to that finite set. Therefore $W$ has finitely many points.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FR (lemma-Noetherian-irreducible-components), applied in the proof of Varieties Tag 09N8"
+   }
+  },
+  {
+   "text": "For $\\mathfrak p\\in W$, the Zariski closed set $V(\\mathfrak p)=\\{\\mathfrak q:\\mathfrak p\\subseteq\\mathfrak q\\}$ consists of $\\mathfrak p$ and $\\mathfrak m$ by step 2. Since $\\mathfrak m\\notin W$, its intersection with $W$ is the singleton $\\{\\mathfrak p\\}$, which is therefore closed in $W$. Given any point $\\mathfrak p\\in W$, its complement in $W$ is a finite union of the other closed singletons by step 3; hence $\\{\\mathfrak p\\}$ is also open. Every subset is a union of these open singletons, so $W$ is discrete. For $W=\\varnothing$ the same conclusion is vacuous.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N8 (lemma-affine), proof, local-spectrum case analysis"
+   }
+  },
+  {
+   "text": "The induced open subscheme with underlying space $W$ is a scheme [def-pc-scheme]. Its space is finite and discrete by steps 3 and 4, so [lem-weil-pbc-finite-discrete-scheme-affine] applies and makes it affine. That statement includes the empty scheme, so no nonemptiness hypothesis on $W$ is needed.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-finite-discrete-scheme-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 02O0 (lemma-scheme-finite-discrete-affine), applied in the proof of Varieties Tag 09N8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "def-pc-scheme",
+  "lem-weil-pbc-finite-discrete-scheme-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09N8 (lemma-affine), proof, local-spectrum case analysis"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +111,52 @@
    "results": "8 hits; AlgebraicGeometry.IsAffineOpen; AlgebraicGeometry.IsAffineOpen.Spec_basicOpen; AlgebraicGeometry.isAffineOpen_top; AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk; AlgebraicGeometry.Scheme.affineOpens; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; AlgebraicGeometry.IsAffineOpen.of_subsingleton; AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen; logged digest 2e1132d3bb19ea65",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalRing|finite.*discrete|discrete.*finite",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; logged digest d0f44c2aeeb5b09f",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a one dimensional local Noetherian ring every open not containing the closed point has finite discrete topology and is affine",
+   "results": "8 hits; AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat; AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology; AlgebraicGeometry.IsNoetherian.noetherianSpace; AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology; AlgebraicGeometry.IsLocallyArtinian.discreteTopology; AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine; PrimeSpectrum.instDiscreteTopology; PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero; logged digest 6d78a40561a95bd4",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, PrimeSpectrum",
+   "results": "12 hits; IsLocalRing.closedPoint; IsLocalRing.instOrderTopPrimeSpectrum; IsLocalRing.specializes_closedPoint; IsLocalRing.instBoundedOrderPrimeSpectrumOfIsDomain; IsLocalRing.isClosed_singleton_closedPoint; IsLocalRing.PrimeSpectrum.asIdeal_top; IsLocalRing.PrimeSpectrum.comap_residue; IsLocalRing.Ring.KrullDimLE.eq_bot_or_eq_top; logged digest c86c8789ca6ce586",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every open subset of the prime spectrum of a Noetherian local ring of Krull dimension at most one is the whole spectrum or a finite discrete affine open subscheme",
+   "results": "8 hits; PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero; AlgebraicGeometry.instIsArtinianSchemeSpecOfIsArtinianRingCarrier; AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier; AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero; AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier; AlgebraicGeometry.isLocallyNoetherian_Spec; AlgebraicGeometry.IsArtinianScheme; AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology; logged digest 556f37c35aa7f825",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "punctured|closedPoint_mem_iff|eq_bot_or_eq_top|finite_setOf_isMin",
+   "results": "4 hits; Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean; Mathlib/RingTheory/Spectrum/Prime/Basic.lean; Mathlib/RingTheory/Spectrum/Prime/Topology.lean; Mathlib/RingTheory/Spectrum/Prime/Topology.lean; logged digest aec519d0200fe575",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The punctured spectrum of a local Noetherian ring of dimension at most one is finite and discrete; an open containing its unique closed point is the whole space",
+   "results": "8 hits; PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero; PrimeSpectrum.instDiscreteTopology; instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing; PrimeSpectrum.unique_of_ringKrullDimLE_zero; instFiniteMaximalSpectrumOfIsFractionRing; Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton; IsDiscreteValuationRing.TFAE; tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain; logged digest ddb59335e9c95004",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-open-dimension-one-higher-image-vanishing",
@@ -67,5 +176,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-local-spectrum-open-classification",
+  "worker": "stage1",
+  "summary": "Expanded the local-spectrum case analysis of Stacks 09N8 into five steps. Reused existing Mathlib leaves for finite minimal primes and finite-discrete affineness; proved the dimension-chain and topology arguments explicitly. Added only inline explanations of local and finite discrete; no hypotheses or conclusions changed, no new nodes. Project Lean searches found no attachment.",
+  "blueprint": "Serves the recorded ancestor lem-a1-middle-extension-endpoints via lem-a1-affine-curve-open-affine and lem-a1-open-dimension-one-higher-image-vanishing: the local-spectrum case analysis of Tag 09N8 that supplies the affine-curve open-affineness input. The endpoint statement/unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q47-1e433a329",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q47-1e433a329 (reviewer sub-agent of L); spot-checked: Reviewed item, unit, chapter, all five steps, cited nodes, and Stacks Tags 09N8, 00FR, and 02O0. The statement and proof are correct, edge cases pass, no duplicates or route violations exist, and no repairs are needed. Review written to review.md."
  }
 }
