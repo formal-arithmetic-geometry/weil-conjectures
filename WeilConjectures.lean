@@ -9064,6 +9064,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenFunctions
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedGlobalSectionsTransport
+public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedLimitEpimorphicTower
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedLowerStarDerivedLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExchangeMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
@@ -9081,6 +9082,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralCoefficientLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeLocal
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
@@ -9145,6 +9147,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowAbSheafCokernel
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowCokernel
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
 public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexample

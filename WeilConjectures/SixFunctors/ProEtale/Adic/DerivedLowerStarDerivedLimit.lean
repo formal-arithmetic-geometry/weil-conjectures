@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 
 /-!
@@ -101,5 +102,14 @@ theorem isDerivedLimitTriangle_rightDerivedLowerStar {Z Y : Scheme.{u}} (g : Z �
         (e.inv ≫ R((g)_*[A]).map δ ≫ (R((g)_*[A]).commShiftIso (1 : ℤ)).hom.app L) := by
   have := (derivedUpperStarLowerStarAdjunction A g).rightAdjoint_preservesLimits
   exact R((g)_*[A]).isDerivedLimitTriangle_map f L p δ h
+
+/-- **`Rg_* R lim = R lim Rg_*`**, homotopy limit form: the derived pushforward along any
+morphism of schemes sends a homotopy limit cone of a tower in `D(Z_proét)` to a homotopy limit
+cone of the image tower in `D(Y_proét)`, being a triangulated right adjoint. -/
+theorem isHomotopyLimit_rightDerivedLowerStar_mapCone {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    {F : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)} {c : Cone F}
+    (hc : IsHomotopyLimit c) : IsHomotopyLimit (R((g)_*[A]).mapCone c) := by
+  have := (derivedUpperStarLowerStarAdjunction A g).rightAdjoint_preservesLimits
+  exact hc.map _
 
 end AlgebraicGeometry.ProEtale
