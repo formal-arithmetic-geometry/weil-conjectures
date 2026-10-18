@@ -9,15 +9,8 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Data.Int.Interval
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.Algebra.Homology.FirstQuadrantTotalComparison
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.HomComplex
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomMapQuasiIso
+import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomFiniteSupport
 
 /-!
 # Bounded-above finite-projective internal Hom on a ringed site
@@ -44,24 +37,14 @@ Source: Stacks Project, Cohomology on Sites, Tag 08JI
 (blueprint: lem-weil-pbc-ringed-site-bounded-free-rhom-model).
 
 Proof:
-1. Module sheaves are Grothendieck (`prop-pur-kinjective-resolutions-exist`), hence have
-   enough injectives (`lem-sp-grothendieck-enough-injectives`). The bounded-below injective
-   representative (`lem-weil-pbc-dplus-injective-representative`) and the localization
-   bijection (`lem-weil-pbc-kinjective-hom-derived`) give a bounded-below K-injective
-   replacement map from N.
-2. Internal Hom from a finite free sheaf is a finite power of the target. Thus it
-   preserves quasi-isomorphisms; splitting the idempotent proves the same for a summand.
-3. Form the first-quadrant double complex Hom(P^(b-u), N^(a+v)), and similarly for the
-   replacement. Translate degrees by c = a-b. Multiplication on each summand by
-   (-1)^(uv+u(u-1)/2+u(c+1)) identifies its total differential with the Hom differential.
-4. The map of columns is a quasi-isomorphism by step 2. First-quadrant total comparison
-   (`lem-sc-first-quadrant-total-column-comparison`) makes the Hom map a quasi-isomorphism.
-5. Internal Hom into a K-injective computes derived internal Hom. Comparisons of
-   replacements lift uniquely up to homotopy by `lem-weil-pbc-kinjective-hom-derived`;
-   Hom preserves target homotopies and `lem-pur-rhom-well-defined` gives independence.
-6. All product factors outside a-n ≤ i ≤ b vanish. Removing them leaves a finite
-   product, canonically the finite coproduct, including the empty interval. The original
-   Hom differential retains exactly its sign. -/
+1. Apply the finite-projective Hom comparison to obtain a quasi-isomorphism into
+   every K-injective replacement. Localization sends this map to an isomorphism.
+2. Choose the functorial K-injective replacement of N. The existing computation
+   of derived internal Hom with a K-injective target identifies its localized Hom
+   complex with RHom(QP,QN). Compose the two isomorphisms.
+3. Apply the finite-support calculation. Outside a-n ≤ i ≤ b an internal Hom
+   factor vanishes; the remaining finite product is the finite coproduct. Its
+   projections retain the defining Hom differential and its sign. -/
 theorem ringedSite_boundedFree_rhom_model
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})
@@ -103,6 +86,34 @@ theorem ringedSite_boundedFree_rhom_model
               eqToHom (congrArg (fun k : ℤ ↦
                 SheafOfModules.homObj (R := R) (P.X k) (N.X (k + n))) h)
             else 0) := by
-  sorry
+  classical
+  have hP' : ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (P.X i) := ⟨b, hP⟩
+  have hmap (I : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
+      [I.IsKInjective] (α : N ⟶ I) [QuasiIso α] :
+      IsIso (DerivedCategory.Q.map (((homComplexFunctor (R := R)).obj (op P)).map α)) := by
+    have hq := ringedSite_boundedFree_rhom_map_quasiIso J R P hP' hfinite I N ⟨a, hN⟩ α
+    exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hq
+  have hfiniteSupport := ringedSite_boundedFree_rhom_finiteSupport J R P N a b hP hN
+  refine ⟨?_, ?_, hfiniteSupport⟩
+  · let A := SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+    let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+    let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+    let η := CochainComplex.toKInjectiveResolution.{u} A
+    have hα : QuasiIso (η.app N) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app A N).2
+    let eM : DerivedCategory.Q.obj (I.obj N) ≅ DerivedCategory.Q.obj N :=
+      (asIso (DerivedCategory.Q.map (η.app N))).symm
+    obtain ⟨e⟩ := derivedInternalHom_obj_iso J R
+      (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) P (I.obj N)
+      (Iso.refl _) eM
+    have hq : IsIso (DerivedCategory.Q.map
+        (((homComplexFunctor (R := R)).obj (op P)).map (η.app N))) :=
+      hmap (I.obj N) (η.app N)
+    exact ⟨asIso (DerivedCategory.Q.map
+        (((homComplexFunctor (R := R)).obj (op P)).map (η.app N))) ≪≫ e.symm⟩
+  · intro I _ α _
+    exact hmap I α
 
 end CategoryTheory

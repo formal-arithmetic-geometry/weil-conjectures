@@ -30,7 +30,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
 
-private theorem shortExact_of_retract
+/-- A retract of a short exact complex in an abelian category is short exact. -/
+theorem shortExact_of_retract
     {A : Type*} [Category A] [Abelian A] {S T : ShortComplex A}
     (i : S ⟶ T) (r : T ⟶ S) (hir : i ≫ r = 𝟙 S) (hT : T.ShortExact) :
     S.ShortExact := by

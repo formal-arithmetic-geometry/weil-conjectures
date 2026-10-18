@@ -1,0 +1,168 @@
+{
+ "id": "lem-weil-pbc-ringed-site-bounded-free-rhom-finite-support",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Finite-diagonal derived Hom calculation in proof (c), local finite coefficient models",
+   "via": [
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
+    "lem-weil-pbc-compatible-finite-derived-trivializations",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite support and coproduct structure of bounded Hom diagonals",
+ "statement": "Let C be a small site, J its topology, and R a commutative ring sheaf. For complexes P,N of R-modules [def-weil-sheaf-of-modules-category, def-pc-cochain-complex-modules], suppose P^i is zero for i>b and N^j is zero for j<a. The product Hom complex [def-pur-hom-complex] has projections to the internal Hom factors [def-pur-sheaf-hom] with its defining differential d_N f-(-1)^n f d_P. In each degree n these projections also exhibit that term as the coproduct over the finite interval [a-n,b]. Its inclusions have identity projection on their own factor and zero projection on all other factors, including the empty-interval case.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Take the existing limit projections of the chosen Hom bifunctor, retaining their differential identity.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free"
+   }
+  },
+  {
+   "text": "For p outside [a-n,b], either N^(p+n) or P^p is zero. The identity of the internal Hom factor is therefore zero, as follows directly from the internal Hom map formula.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free"
+   }
+  },
+  {
+   "text": "Restrict the limit fan to the finite interval. A cone on the restricted factors extends by zero to all integers; uniqueness follows from the zero factors. Lift each coordinate identity and zeros along the original limit fan. The lift equations give the Kronecker projection identities. These maps form a finite bicone; the preadditive finite-bicone theorem isBilimitOfIsLimit makes its cocone colimiting.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections",
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JI; finite-support and finite-truncation proof of the stated comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsLimit\", \"biproduct\"",
+   "results": "5 hits: CategoryTheory.Limits.biproduct.isLimit, CategoryTheory.Limits.biproduct.isLimitFromSubtype, CategoryTheory.Limits.kernelForkBiproductToSubtype_isLimit, CategoryTheory.Limits.BinaryBiproduct.isLimit, CategoryTheory.Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The finite product/biproduct API is used for finite support; the other results concern external Hom, single sheaves, or preservation by an already exact functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a bounded above complex of finite projective sheaves into a bounded below complex preserves quasi-isomorphisms",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.IsKProjective.Qh_map_bijective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.isKProjective_of_projective",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The finite product/biproduct API is used for finite support; the other results concern external Hom, single sheaves, or preservation by an already exact functor."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*homComplex|IsLimit.*Fan|isBilimitOfIsLimit",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean, Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The finite product/biproduct API is used for finite support; the other results concern external Hom, single sheaves, or preservation by an already exact functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal sheaf Hom preserves bounded below quasi-isomorphisms for a bounded above complex of finite projective module sheaves",
+   "results": "8 hits: CategoryTheory.sheafHom, HomologicalComplex.quasiIso_map_of_preservesHomology, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, CategoryTheory.Pseudofunctor.sheafHom, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.Hom, CategoryTheory.Sheaf.Hom, CategoryTheory.ShortComplex.QuasiIso.isIso",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The finite product/biproduct API is used for finite support; the other results concern external Hom, single sheaves, or preservation by an already exact functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A product with only finitely many nonzero factors in a preadditive category is a coproduct with coordinate inclusions",
+   "results": "8 hits: CategoryTheory.NonPreadditiveAbelian.has_finite_coproducts, CategoryTheory.Limits.hasCoproduct_of_hasBiproduct, CategoryTheory.Limits.hasFiniteCoproducts_of_hasFiniteBiproducts, CategoryTheory.Limits.HasFiniteBiproducts.of_hasFiniteProducts, CategoryTheory.Limits.HasBiproduct.of_hasProduct, CategoryTheory.Limits.HasBinaryBiproducts.of_hasBinaryProducts, CategoryTheory.Limits.hasFiniteCoproducts_of_hasFiniteColimits, CategoryTheory.Limits.HasFiniteBiproducts.casesOn",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The finite product/biproduct API is used for finite support; the other results concern external Hom, single sheaves, or preservation by an already exact functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel",
+  "date": "2026-10-18",
+  "group": "K3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomFiniteSupport",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteBoundedFreeRHomFiniteSupport.lean",
+  "declaration": "CategoryTheory.ringedSite_boundedFree_rhom_finiteSupport",
+  "statement": "theorem ringedSite_boundedFree_rhom_finiteSupport\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u})\n    (P N : CochainComplex\n      (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)\n    (a b : ℤ) (hP : ∀ i : ℤ, b < i → IsZero (P.X i))\n    (hN : ∀ j : ℤ, j < a → IsZero (N.X j)) :\n    ∃ π : ∀ (n p q : ℤ), p + n = q →\n        ((homComplex (R := R) P N).X n ⟶\n          SheafOfModules.homObj (R := R) (P.X p) (N.X q)),\n      (∀ n : ℤ, Nonempty (IsLimit (Fan.mk ((homComplex (R := R) P N).X n)\n        (fun p : ℤ ↦ π n p (p + n) rfl)))) ∧\n      (∀ (n m p q q' p' : ℤ) (_hnm : n + 1 = m)\n        (hpq : p + m = q) (hq' : p + n = q') (hp' : p' + n = q),\n        (homComplex (R := R) P N).d n m ≫ π m p q hpq =\n          π n p q' hq' ≫ SheafOfModules.homObjMap (R := R)\n              (𝟙 (P.X p)) (N.d q' q) -\n            n.negOnePow • (π n p' q hp' ≫\n              SheafOfModules.homObjMap (R := R) (P.d p p') (𝟙 (N.X q)))) ∧\n      (∀ (n : ℤ), ∃ ι : ∀ i : ↥(Finset.Icc (a - n) b),\n          SheafOfModules.homObj (R := R) (P.X i) (N.X (i + n)) ⟶\n            (homComplex (R := R) P N).X n,\n        Nonempty (IsColimit (Cofan.mk ((homComplex (R := R) P N).X n) ι)) ∧\n        ∀ (i : ↥(Finset.Icc (a - n) b)) (p : ℤ),\n          ι i ≫ π n p (p + n) rfl =\n            if h : (i : ℤ) = p then eqToHom (congrArg (fun k : ℤ ↦\n              SheafOfModules.homObj (R := R) (P.X k) (N.X (k + n))) h)\n            else 0)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-ringed-site-bounded-free-rhom-finite-support",
+  "worker": "stage3 K3",
+  "summary": "Proved in Lean; no new proof hole.",
+  "blueprint": "Sublemma of the finite-diagonal model below the proper-base-change unit; the unit statement and realized steps are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-hom-complex-projections",
+    "why": "Generic homological algebra input for internal Hom; it does not replace any unit statement or step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261018T091407-L-3256704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261018T091407-L-3256704",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

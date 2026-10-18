@@ -32,101 +32,52 @@
  ],
  "proof": [
   {
-   "text": "The category $\\Mod(\\mathcal O)$ is Grothendieck by [prop-pur-kinjective-resolutions-exist], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Apply [lem-weil-pbc-dplus-injective-representative] to $QN$, whose cohomology vanishes below $a$, to obtain a complex $I$ of injectives with $I^j=0$ for $j<a$, an isomorphism $QN\\cong QI$, and K-injectivity of $I$. By [lem-weil-pbc-kinjective-hom-derived] this isomorphism lifts to a homotopy class represented by a chain map $\\alpha:N\\to I$. Since cohomology factors through localization [def-weil-abstract-derived-category], every $H^j(\\alpha)$ is an isomorphism, so $\\alpha$ is a quasi-isomorphism. This supplies an actual bounded-below replacement map, not just an isomorphism of derived objects.",
+   "text": "Apply the finite-projective Hom comparison to any quasi-isomorphism from N into a K-injective I. Derived localization sends the resulting Hom quasi-isomorphism to an isomorphism.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-quasi-iso",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free"
    }
   },
   {
-   "text": "For a finite free sheaf $F=\\mathcal O^{\\oplus r}$, evaluation on its basis on every slice gives $\\mathcal Hom(F,M)\\cong M^{\\oplus r}$ naturally in $M$, by [def-pur-sheaf-hom]. Thus $\\mathcal Hom(F,\\alpha)$ is a quasi-isomorphism: kernels, images and their quotients in a finite biproduct are the finite biproducts of the respective kernels, images and quotients. Choose splitting maps exhibiting $P^i$ as a summand of such an $F$, so $F\\cong P^i\\oplus T$. The Hom complexes and their cohomology split into the two corresponding summands. The inverse of the cohomology map for $F$ commutes with the splitting idempotent (the map itself commutes with it), and therefore restricts to an inverse on the $P^i$ summand. Consequently $\\mathcal Hom(P^i,\\alpha)$ is a quasi-isomorphism for every $i$. This is internal sheaf Hom, and makes no assertion that $P^i$ is projective for global Hom.",
+   "text": "Take the functorial K-injective resolution eta_N:N→I(N). The preceding comparison identifies QHom(P,N) with QHom(P,I(N)). The K-injective computation derivedInternalHom_obj_iso identifies the latter with RHom(QP,QN). Compose these isomorphisms.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
-   }
-  },
-  {
-   "text": "Put $c=a-b$. For $M=N$ or $I$ form the first-quadrant double complex $D_M^{u,v}=\\mathcal Hom(P^{b-u},M^{a+v})$ for $u,v\\geq0$, and zero elsewhere [def-sp-double-complex-total]. Its horizontal differential is precomposition by $d_P^{b-u-1}$ and its vertical differential is postcomposition by $d_M^{a+v}$; they commute and both square to zero. In translated total degree $n=u+v+c$ the Hom differential [def-pur-hom-complex] is postcomposition by $d_M$ plus $(-1)^{n+1}$ times precomposition by $d_P$. The standard total differential is horizontal plus $(-1)^u$ vertical. Multiplication on the $(u,v)$ summand by $s(u,v)=(-1)^{uv+u(u-1)/2+u(c+1)}$ identifies this standard total, with degrees translated by $c$, with the Hom complex: $s(u,v+1)=(-1)^u s(u,v)$ verifies the vertical term and $s(u+1,v)=(-1)^{u+v+c+1}s(u,v)$ verifies the horizontal term. All signs are units even in characteristic two. Translation here leaves the differential unchanged and merely renames degree $t$ as $t+c$, so it also merely renames the cohomology degree.",
-   "uses": [
-    "def-sp-double-complex-total",
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
-   }
-  },
-  {
-   "text": "Postcomposition with $\\alpha$ gives a double-complex map $D_N\\to D_I$ commuting with both differentials. For each fixed $u$, the vertical complex is $\\mathcal Hom(P^{b-u},M^{a+\\bullet})$, and the induced map is a quasi-isomorphism by step 2. Apply [lem-sc-first-quadrant-total-column-comparison] in the abelian category $\\Mod(\\mathcal O)$ [def-weil-sheaf-of-modules-category]. Its first-quadrant and column hypotheses are exactly those just checked. Hence the total map is a quasi-isomorphism. The summand signs in step 3 depend only on $u,v,a,b$, so commute with postcomposition by $\\alpha$ and identify this total map with $\\mathcal Hom^\\bullet(P,\\alpha)$. Translating degrees preserves kernels and images. Therefore $\\mathcal Hom^\\bullet(P,N)\\to\\mathcal Hom^\\bullet(P,I)$ is a quasi-isomorphism. The arrow is in this direction, contrary to the reversed arrow in one sentence of the source proof.",
-   "uses": [
-    "lem-sc-first-quadrant-total-column-comparison",
-    "def-weil-sheaf-of-modules-category"
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free"
    }
   },
   {
-   "text": "By [def-pur-derived-internal-hom], the Hom complex into a K-injective replacement computes $R\\mathcal Hom(QP,QN)$. Thus the quasi-isomorphism in step 4 gives the claimed derived isomorphism. Its canonicity can also be checked directly: for two K-injective replacements $\\alpha:N\\to I$, $\\alpha':N\\to J$, [lem-weil-pbc-kinjective-hom-derived] lifts the derived morphism $Q\\alpha'\\,(Q\\alpha)^{-1}:QI\\to QJ$ to a chain map $h:I\\to J$, unique up to homotopy. Injectivity of the same localization bijection with source $N$ and target $J$ implies that $h\\alpha$ is homotopic to $\\alpha'$. Applying internal Hom from $P$ preserves target homotopies: for a homotopy $k$ the degree-minus-one map on Hom families is $f\\mapsto kf$, and expansion of the Hom differential gives $d(kf)+k(df)=(d_Jk+kd_I)f$. Therefore the two comparison diagrams commute in the derived category [def-weil-abstract-derived-category]. The comparison of replacements is a quasi-isomorphism since its localization is $Q\\alpha'\\,(Q\\alpha)^{-1}$; [lem-pur-rhom-well-defined] gives the quasi-isomorphism on internal Hom. This identifies the isomorphism with the resolution-independent canonical one, rather than a chosen unrelated isomorphism.",
+   "text": "Apply the finite-support calculation to obtain the product projections, signed differential formula, and finite coproduct with its coordinate inclusions.",
    "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pur-hom-complex",
-    "def-weil-abstract-derived-category",
-    "lem-pur-rhom-well-defined"
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-finite-support"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
-   }
-  },
-  {
-   "text": "Finally the degree-$n$ product of [def-pur-hom-complex] has a nonzero factor only when $i\\leq b$ and $i+n\\geq a$, equivalently $a-n\\leq i\\leq b$. Removing zero factors leaves a finite product, canonically the finite biproduct, giving the displayed direct sum. If the interval is empty it is the zero object. The differential is exactly $d_Nf-(-1)^nf d_P$ from that definition; no change of signs is made in the asserted model.",
-   "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free"
    }
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-quasi-iso",
   "def-weil-abstract-derived-category",
-  "def-pur-sheaf-hom",
-  "def-weil-sheaf-of-modules-category",
-  "def-sp-double-complex-total",
-  "def-pur-hom-complex",
-  "lem-sc-first-quadrant-total-column-comparison",
+  "prop-pur-kinjective-resolutions-exist",
   "def-pur-derived-internal-hom",
-  "lem-pur-rhom-well-defined"
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-finite-support"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+  "place": "Tag 08JI, using finite source truncation and the existing bounded exact-term Hom theorem instead of explicit signed totalization"
  },
  "mathlib_searches": [
   {
@@ -331,17 +282,8 @@
  },
  "tool_uses": [
   "prop-pur-kinjective-resolutions-exist",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived",
   "def-weil-abstract-derived-category",
-  "def-pur-sheaf-hom",
-  "def-weil-sheaf-of-modules-category",
-  "def-sp-double-complex-total",
-  "def-pur-hom-complex",
-  "lem-sc-first-quadrant-total-column-comparison",
-  "def-pur-derived-internal-hom",
-  "lem-pur-rhom-well-defined"
+  "def-pur-derived-internal-hom"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -368,5 +310,15 @@
   "by": "NX",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261018T091407-L-3256704",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
