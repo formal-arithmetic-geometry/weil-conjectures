@@ -14,9 +14,98 @@
   "def-weil-residue-field",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume (i), and write $r:\\kappa(x)\\xrightarrow{\\sim}\\kappa(y)$ for its residue-field map. Put $K=\\kappa(x)$. The canonical field-valued point $j_y$ and naturality in [lem-weil-pbc-morphism-from-spec-field, lem-weil-pbc-residue-field-point-naturality] give $t=j_y\\circ\\operatorname{Spec}(r^{-1}):\\operatorname{Spec}K\\to Y$ with $f\\circ t=j_x$. Choose an affine open $U=\\operatorname{Spec}A$ about $x$ and, using the affine cover in [def-weil-finite-type-morphism], an affine open $V=\\operatorname{Spec}B\\subseteq f^{-1}(U)$ about $y$, with $B$ a finitely generated $A$-algebra. A map from a one-point field spectrum whose image lies in an open factors through that open: restrict the map to the inverse image, which is the whole source [def-weil-open-immersion]. Thus $t$ factors through $V$. Under the affine correspondence [def-weil-affine-spectrum], write $\\alpha:A\\to B$ for $f|_V$ and $\\psi:B\\to K$ for this factorization. Identify $x$ with a prime $\\mathfrak p\\subset A$. Open-immersion residue invariance and [lem-weil-pbc-spec-residue-field-identification] identify $K$ with $\\kappa(\\mathfrak p)$, and $f\\circ t=j_x$ gives $\\psi\\alpha=\\pi:A\\to\\kappa(\\mathfrak p)$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-finite-type-morphism",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-residue-field-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.3, printed p. 27 (cd(f) and sections over subschemes); its proof chooses an open of the reduced closure of x."
+   }
+  },
+  {
+   "text": "Set $R=A/\\mathfrak p$. By [lem-weil-pbc-prime-residue-field-algebra], $R$ embeds into $K$ and $K$ is its fraction field. Choose $A$-algebra generators $b_1,\\ldots,b_m$ of $B$, and write $\\psi(b_i)=u_i/v_i$ with $u_i,v_i\\in R$ and $v_i\\ne0$. Set $d=\\prod_i v_i\\ne0$, taking $d=1$ if $m=0$, and $D=R[1/d]$ [def-weil-ring-localization-away]. The fraction map $\\iota:D\\to K$, $u/d^q\\mapsto u/d^q$, is injective: equality in $K$ gives equality of cross-products in the domain $R$, hence equality in $D$. Each $u_i/v_i=u_i\\prod_{h\\ne i}v_h/d$ belongs to its image. Since every element of $B$ is a polynomial in the $b_i$ with coefficients from $A$, all of $\\psi(B)$ lies in $\\iota(D)$. Define $\\beta:B\\to D$ as $\\iota^{-1}\\psi$ on this image. Injectivity of $\\iota$ makes $\\beta$ a ring map and gives $\\beta\\alpha=\\lambda:A\\to A/\\mathfrak p\\to D$. This is an explicit finite-generator calculation; no finite presentation, relation-lifting, or separation assertion is used.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.3, printed p. 27 (cd(f) and sections over subschemes); its proof chooses an open of the reduced closure of x."
+   }
+  },
+  {
+   "text": "Choose $a\\in A$ lifting $d\\in R$, so $a\\notin\\mathfrak p$. Put $Z=\\operatorname{Spec}D$. The map $\\lambda:A\\to D$ factors as $A\\to A[1/a]\\xrightarrow{q}D$, where $q(c/a^e)=\\bar c/d^e$. This formula respects the fraction equivalence of [def-weil-ring-localization-away], and $q$ is surjective because every $u/d^e$ has a numerator lifted from $A$. Since $q$ is surjective, it induces a ring isomorphism $A[1/a]/\\ker q\\cong D$, so $\\operatorname{Spec}q$ is this isomorphism of spectra followed by $\\operatorname{Spec}(A[1/a]/\\ker q)\\to\\operatorname{Spec}A[1/a]$, which is a closed immersion by [lem-weil-pbc-spec-quotient-closed-immersion]; precomposing with an isomorphism keeps both conditions of [def-weil-closed-immersion]. Therefore $\\operatorname{Spec}q:Z\\to\\operatorname{Spec}A[1/a]$ is a closed immersion. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}A[1/a]\\to U$ is an open immersion. Its composite with $U\\to X$ is an open immersion, since the composite of two isomorphisms onto open subschemes is again one [def-weil-open-immersion]. Thus $j:Z\\to X$ induced by $\\lambda$ is a closed immersion followed by an open immersion, hence an immersion. This is precisely an affine open of the reduced closure of $x$ used in ILO II 2.2.3; the construction does not assume that the singleton $\\{x\\}$ is locally closed.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-spec-quotient-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.3, printed p. 27 (cd(f) and sections over subschemes); its proof chooses an open of the reduced closure of x."
+   }
+  },
+  {
+   "text": "Define $s:Z\\xrightarrow{\\operatorname{Spec}\\beta}V\\hookrightarrow Y$. Contravariant functoriality and the equality $\\beta\\alpha=\\lambda$ from Step 2 give $f\\circ s=j$ [def-weil-affine-spectrum]. Also $\\iota\\lambda=\\pi$; applying $\\operatorname{Spec}$ shows that the composite $\\operatorname{Spec}K\\xrightarrow{\\operatorname{Spec}\\iota}Z\\xrightarrow{j}X$ is $j_x$, using the canonical affine residue-field identification from Step 1 [lem-weil-pbc-spec-residue-field-identification]. Since $j_x$ maps the unique point to $x$ [lem-weil-pbc-morphism-from-spec-field], $x$ lies in $j(Z)$. This proves (ii).",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.3, printed p. 27 (cd(f) and sections over subschemes); its proof chooses an open of the reduced closure of x."
+   }
+  },
+  {
+   "text": "Conversely assume (ii), choose $z\\in Z$ with $j(z)=x$, and set $y=s(z)$. Then $f(y)=x$. Factor the immersion $j$ as a closed immersion followed by an open immersion [def-weil-closed-immersion]. The closed-immersion residue-field isomorphism [lem-weil-pbc-closed-immersion-residue-field-iso] and the open-immersion assertion of [lem-weil-pbc-residue-field-point-naturality] show that the induced map $c:\\kappa(x)\\to\\kappa(z)$ is an isomorphism. By the residue-field maps of [def-weil-residue-field], $f\\circ s=j$ gives $ba=c$, where $a:\\kappa(x)\\to\\kappa(y)$ and $b:\\kappa(y)\\to\\kappa(z)$. Put $b'=c^{-1}b$, so $b'a=1$. A unital homomorphism of fields is injective: its kernel is a proper ideal of a field, hence zero. Consequently, for $v\\in\\kappa(y)$, $b'(a(b'(v)))=b'(v)$ implies $a(b'(v))=v$. Thus $ab'=1$ as well, so $a$ is an isomorphism, proving (i). No quasi-compactness or separatedness of $Y$ is used in either direction.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.3, printed p. 27 (cd(f) and sections over subschemes); its proof chooses an open of the reduced closure of x."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-residue-field",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-spec-residue-field-identification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II, Proposition 2.2.3, printed p. 27 (cd(f) and sections over subschemes); its proof chooses an open of the reduced closure of x. The generic-section extension is expanded in affine coordinates by a common denominator."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,6 +148,41 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.residue_surjective\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\"], \"digest\": \"89a8902d01b3808d\"}",
    "date": "2026-10-18",
    "verdict": "no match: spreading-out from a stalk is relevant, but identifying the generic stalk of the reduced closure with the residue field and constructing the locally closed subscheme requires a further argument."
+  },
+  {
+   "tool": "grep",
+   "query": "spread_out_of_isGermInjective|section.*locallyClosed|completely.decomposed",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"6f5271692157f1f8\"} ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state the pointwise equivalence; the spreading-out candidate requires the reduced-closure construction and residue-field identifications, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes locally of finite type has a rational lift at a point if and only if it admits a section on a locally closed subscheme containing the point",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"AlgebraicGeometry.LocallyOfFiniteType.rec\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.recOn\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\"], \"digest\": \"b92cdbbbaaf328f7\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state the pointwise equivalence; the spreading-out candidate requires the reduced-closure construction and residue-field identifications, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"section\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.StructureSheaf.sectionsSubalgebra\", \"AlgebraicGeometry.StructureSheaf.sectionsSubmodule\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom\", \"AlgebraicGeometry.StructureSheaf.sectionsSubalgebraSubmodule\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv\", \"AlgebraicGeometry.Scheme.algebra_section_section_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine\"], \"digest\": \"810e3f7fff040f51\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state the pointwise equivalence; the spreading-out candidate requires the reduced-closure construction and residue-field identifications, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational point in a fibre of a locally finite type scheme morphism extends to a section on a locally closed subscheme through the point",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\"], \"digest\": \"7e18691d8a482026\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state the pointwise equivalence; the spreading-out candidate requires the reduced-closure construction and residue-field identifications, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type algebra map into the fraction field of a prime quotient factors through a principal localization of that quotient",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl\", \"IsLocalization.AtPrime.exists_algebraMap_quot_eq_of_mem_quot\", \"Localization.AtPrime.liftAlgebra\", \"instAlgebraAtPrimeFractionRing\", \"AlgHom.IsArithFrobAt.localize_algebraMap\", \"IsLocalization.AtPrime.algebraMap_equivQuotMaximalIdeal_symm_apply\", \"Localization.AtPrime.algebra_localization_localization\"], \"digest\": \"360f9942098960fe\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state the pointwise equivalence; the spreading-out candidate requires the reduced-closure construction and residue-field identifications, not a one-line specialization."
   }
  ],
  "mathlib_match": null,
@@ -68,7 +192,7 @@
   "line": 374,
   "reason": "Read lines 335--389: this extends a morphism from Spec of a stalk on a germ-injective scheme, not a rational lift over an arbitrary point. One must form the reduced closure of x, identify its generic stalk with kappa(x), and apply the theorem relative to X. This is not a one-line specialization."
  },
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-completely-decomposed-etale-finite-subcover",
@@ -95,5 +219,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-rational-lift-locally-closed-section",
+  "worker": "stage1",
+  "summary": "Verified ILO II Proposition 2.2.3 and wrote out its extension from the generic point as an explicit finite-generator fraction construction on an affine open of the reduced closure. The reverse direction includes the field-retraction argument. Statement unchanged; existing Mathlib leaves and one existing closed-immersion tool suffice; no new nodes.",
+  "blueprint": "Realizes the pointwise-section ingredient ILO II 2.2.3 in the recorded ancestor Step 3 through lem-per-completely-decomposed-etale-finite-subcover and the finite completely decomposed refinement. Current main-20261015 ancestor statement and proof were read; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic scheme-theoretic tool: the closed factor of an immersion induces residue-field isomorphisms. This unit has no separate result supplying it; it only proves the easy reverse implication of ILO II 2.2.3."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-7d0742d1d",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-7d0742d1d (reviewer sub-agent of L); spot-checked: Read ILO II Prop. 2.2.3 (printed p.27, PDF p.33). Its hypotheses are f locally of finite type and X Noetherian; the item states it faithfully and is not weakened. The proof follows the source: affine charts U=Spec A and V=Spec B at x and y; the field-valued lift t=j_y∘Spec(r^{-1}); then a common denominator d of ψ(b_i) in R=A/p. β=ι^{-1}ψ is well defined because ι:R[1/d]→Frac R is injective, so no relation lifting is needed; finite type suffices. Then Z=Spec R[1/d]→Spec A[1/a]→U→X is an immersion, and x∈j(Z) via j_x. The converse is the field-retraction argument with the closed and open residue isomorphisms. Every cited statement was read and says what its step takes from it. Edge cases checked: m=0, closed x, non-locally-closed generic point, nonreduced base, non-separated Y. The parent 2.2.4 use (étale u_i) is consistent. The declared tool_use lem-weil-pbc-closed-immersion-residue-field-iso (sk-thm-p1) is accepted as a generic black box. No new nodes, and no duplicate found in dag/nodes. One fault, C1/C4 in Step 3: the step took 'Spec of a surjection is a closed immersion' from the definition's affine-open criterion alone. FIX: Spec q is now factored through A[1/a]/ker q ≅ D and the step cites the Mathlib leaf lem-weil-pbc-spec-quotient-closed-immersion; uses and proof_deps are updated. Statement unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
