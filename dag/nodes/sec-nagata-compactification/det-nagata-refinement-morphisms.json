@@ -20,91 +20,43 @@
  ],
  "proof": [
   {
-   "text": "Properness. The two compactifications give proper structure maps $p'$ and $p$ by [def-nagata-compactification]. In particular $p$ is separated by [def-weil-proper-morphism]. Apply [lem-weil-pbc-proper-over-separated] to the triangle $\\overline X'\\xrightarrow{h}\\overline X\\xrightarrow{p}S$, whose composite is $p'$. Its source is proper over $S$ and its target is separated over $S$, so $h$ is proper. This packages exactly the graph factorization of the blueprint's first paragraph (Stacks Tag 01W6).",
+   "text": "Bundle the given h, hj and hS as the upstream refinement r:c′.obj.Refinement c.obj. Its properness instance is proper-over-separated [lem-weil-pbc-proper-over-separated], since both structure morphisms are proper [def-nagata-compactification, def-weil-proper-morphism]. This gives the first conjunct.",
    "uses": [
     "def-nagata-compactification",
     "def-weil-proper-morphism",
     "lem-weil-pbc-proper-over-separated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
-    "place": "Proof, Properness; Stacks morphisms.tex, Tag 01W6 (lemma-image-proper-scheme-closed), part (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "Form the open subscheme $V=h^{-1}(j(X))$ of $\\overline X'$ and write $i:V\\hookrightarrow\\overline X'$. By [def-weil-open-immersion], $j$ identifies $X$ with its open image. Thus the fibre product $\\overline X'\\times_{\\overline X}X$ is $V$, with second projection $g=j^{-1}\\circ h|_V:V\\to X$ [def-pc-base-change]. Since $h$ is proper by Step 1, [lem-weil-pbc-proper-base-change] makes $g$ proper; it is therefore separated [def-weil-proper-morphism]. The equality $hj'=j$ defines a map $s:X\\to V$ with $is=j'$ and $gs=\\mathrm{id}_X$: the second equality follows by applying the inverse of the isomorphism $X\\simeq j(X)$ to $hj'=j$.",
+   "text": "Install the quasi-compactness proof c′.property and the density hypothesis hc′ as instances. Apply the existing, fully proved cartesian-refinement tool [lem-nagata-dense-refinement-cartesian]. Flip the resulting square, apply Scheme.image_preimage_eq_of_isPullback to the whole set X, and simplify the identity and whole-set images. This gives h⁻¹(c.i(X))=c′.i(X) as equality in Scheme.Opens, which is the boundaryRefinementProperty of [det-nagata-definition-refinement]. It proves precisely the original inverse-image conclusion, including equality of open subschemes.",
    "uses": [
-    "def-weil-open-immersion",
-    "def-pc-base-change",
-    "lem-weil-pbc-proper-base-change",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
-    "place": "Proof, Inverse image of X, construction of V and g; Stacks morphisms.tex, Tag 01W4 (lemma-base-change-proper)"
-   }
-  },
-  {
-   "text": "The map $s$ of Step 2 is a section of the separated morphism $g$. Hence [lem-weil-pbc-section-separated-closed-immersion] makes $s$ a closed immersion. Its image is exactly $j'(X)$, viewed inside $V$, since $is=j'$. This image is closed by [def-weil-closed-immersion] and open because $j'$ is an open immersion [def-weil-open-immersion]. Consequently the complement $V''=V\\setminus j'(X)$ is open in $V$, and hence open in $\\overline X'$. No assertion that an arbitrary morphism factors through a locally closed subscheme merely from its pointwise image is used: $s$ was constructed through an open subscheme in Step 2.",
-   "uses": [
-    "lem-weil-pbc-section-separated-closed-immersion",
-    "def-weil-closed-immersion",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
-    "place": "Proof, Inverse image of X, section is closed; Stacks schemes.tex, Tag 01KT (lemma-section-immersion)"
-   }
-  },
-  {
-   "text": "By [def-nagata-dense-compactification] and [def-nagata-scheme-theoretically-dense-open], quasi-compactness of $j'$ identifies its density with injectivity of $\\mathcal O_{\\overline X'}\\to j'_*\\mathcal O_X$. Restrict this injective sheaf map to the open $V''$ from Step 3. For every open $W\\subseteq V''$ its target has sections $\\mathcal O_X((j')^{-1}W)=\\mathcal O_X(\\varnothing)=0$, since $W\\cap j'(X)=\\varnothing$. Thus $\\mathcal O_{V''}=0$. Any affine open $\\operatorname{Spec}A$ of $V''$ then has $A=0$, so has no prime ideals and is empty. Such affine opens cover $V''$, giving $V''=\\varnothing$. Therefore $V=j'(X)$. These opens carry the restrictions of the same structure sheaf of $\\overline X'$, so this is equality of open subschemes, not only of point sets. Together with the two given commutativities and the quasi-compactness hypotheses, it is precisely a refinement in [det-nagata-definition-refinement].",
-   "uses": [
-    "def-nagata-dense-compactification",
-    "def-nagata-scheme-theoretically-dense-open",
+    "lem-nagata-dense-refinement-cartesian",
     "det-nagata-definition-refinement"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
-    "place": "Proof, Inverse image of X, restriction to V double-prime and vanishing; Stacks morphisms.tex, Tags 01RD (lemma-scheme-theoretically-dense-quasi-compact) and 01RE (lemma-characterize-scheme-theoretically-dense)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $h_1,h_2:\\overline X'\\to\\overline X$ be any two $S$-morphisms with $h_1j'=j=h_2j'$. Both composites with $p$ equal $p'$. The map $p$ is separated because it is proper [def-nagata-compactification, def-weil-proper-morphism], and $j'$ is scheme-theoretically dominant by the density hypothesis [def-nagata-dense-compactification]. Apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] with $s=p$, $T=\\overline X'$, $W=X$, and $\\iota=j'$: its equality over the base and its equality after $\\iota$ are exactly the two displayed identities. It gives $h_1=h_2$. The originally supplied $h$ is one such map, so it is unique.",
+   "text": "For a competing h′ the equations h′S and hS give h′ ≫ c.g = h ≫ c.g; the equations h′j and hj give c′.i ≫ h′ = c′.i ≫ h. Since the target structure map is proper, hence separated, apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] to c′.i and hc′ to deduce h′=h.",
    "uses": [
-    "def-nagata-compactification",
     "def-weil-proper-morphism",
-    "def-nagata-dense-compactification",
     "lemma-nagata-ext-scheme-theoretically-dominant-separated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
-    "place": "Proof, Uniqueness; Stacks morphisms.tex, Tag 01RH (lemma-equality-of-morphisms)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-nagata-compactification",
   "def-weil-proper-morphism",
   "lem-weil-pbc-proper-over-separated",
-  "def-weil-open-immersion",
-  "def-pc-base-change",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-section-separated-closed-immersion",
-  "def-weil-closed-immersion",
-  "def-nagata-dense-compactification",
-  "def-nagata-scheme-theoretically-dense-open",
+  "lem-nagata-dense-refinement-cartesian",
   "det-nagata-definition-refinement",
   "lemma-nagata-ext-scheme-theoretically-dominant-separated"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
-  "place": "Proof, all three paragraphs; graph properness and section argument verified against Stacks Tags 01W6, 01W4, 01KT, 01RD, 01RE, 01RH"
+  "document": "lean/WeilConjectures/Compactification/RefinementPullback.lean",
+  "place": "Use the existing proved cartesian-refinement theorem for the inverse-image paragraph, properness from Refinement.isProper, and separated-target rigidity for uniqueness. This is a shorter formalization of the same blueprint argument; no unit-level step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -259,5 +211,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261018T150715-L-3837382",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

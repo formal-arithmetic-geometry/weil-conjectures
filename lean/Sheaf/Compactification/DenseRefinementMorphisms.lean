@@ -9,19 +9,7 @@ public import WeilConjectures.Compactification.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.Compactification.BoundaryRefinement
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Topology.InverseImageModule
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Topology.Sheaves.Functors
-import WeilConjectures.AlgebraicGeometry.Picard.Defs
+import WeilConjectures.Compactification.RefinementPullback
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
@@ -44,28 +32,11 @@ exactly the distinguished open, and is unique among morphisms satisfying the two
 commuting triangles. Source: blueprint main-20261015, sec-nagata-compactification,
 `det-nagata-refinement-morphisms` (blueprint: det-nagata-refinement-morphisms).
 
-Proof (the five steps of the DAG node):
-1. The structure maps are proper by `def-nagata-compactification`; the target structure
-   map is separated by `def-weil-proper-morphism`. Apply
-   `lem-weil-pbc-proper-over-separated` to `hS` (Stacks Tag 01W6).
-2. Let `V` be the inverse image of `c.obj.i.opensRange`. The open immersion identifies
-   `X` with its open image (`def-weil-open-immersion`), so `V` is the base change of `h`
-   along `c.obj.i` (`def-pc-base-change`). Its projection `g` to `X` is proper by
-   `lem-weil-pbc-proper-base-change`, hence separated. The equality `hj` constructs a
-   section `s : X ⟶ V` with composite into the ambient scheme equal to `c'.obj.i`.
-3. By `lem-weil-pbc-section-separated-closed-immersion`, `s` is a closed immersion.
-   Its image is also open because `c'.obj.i` is open. Its complement `V''` in `V` is
-   therefore open in the ambient scheme (`def-weil-closed-immersion`).
-4. Density and quasi-compactness give an injective map from the ambient structure sheaf
-   to the direct image from `X` (`def-nagata-dense-compactification` and
-   `def-nagata-scheme-theoretically-dense-open`). Its restriction to `V''` has zero
-   target, so the structure sheaf on `V''` is zero. Every affine open of `V''` then has
-   zero coordinate ring and empty spectrum; hence `V''` is empty. Thus the inverse-image
-   open equals `c'.obj.i.opensRange`, including its restricted structure sheaf. This is
-   `det-nagata-definition-refinement` for the two triangles supplied by `hS` and `hj`.
-5. For uniqueness, any competing `h'` agrees with `h` after `c'.obj.i` and over `S`.
-   Apply `lemma-nagata-ext-scheme-theoretically-dominant-separated` using `hc'` and
-   separatedness of the proper target structure map (Stacks Tag 01RH). -/
+Proof: bundle the two triangles as an upstream refinement, whose ambient map is
+proper. The existing dense-refinement pullback theorem identifies its square over
+`X` as cartesian; the image/preimage identity for this square, applied to the whole
+of `X`, gives equality of the distinguished opens. Finally, separated-target
+rigidity applied after the scheme-theoretically dominant source open proves uniqueness. -/
 theorem denseCompactification_refinement_morphisms {X S : Scheme.{u}} {f : X ⟶ S}
     (c' c : Compactification.QuasiCompactObjects f)
     (hc' : IsSchemeTheoreticallyDominant c'.obj.i)
@@ -77,6 +48,17 @@ theorem denseCompactification_refinement_morphisms {X S : Scheme.{u}} {f : X ⟶
         (ObjectProperty.homMk (X := c') (Y := c) ⟨h, hj, hS⟩) ∧
       ∀ (h' : c'.obj.Z ⟶ c.obj.Z),
         h' ≫ c.obj.g = c'.obj.g → c'.obj.i ≫ h' = c.obj.i → h' = h := by
-  sorry
+  have : QuasiCompact c'.obj.i := c'.property
+  have := hc'
+  let r : c'.obj.Refinement c.obj := ⟨h, hj, hS⟩
+  refine ⟨r.isProper, ?_, ?_⟩
+  · have hp := r.isPullback_of_isSchemeTheoreticallyDominant
+    change h ⁻¹ᵁ c.obj.i.opensRange = c'.obj.i.opensRange
+    apply TopologicalSpace.Opens.ext
+    have he := Scheme.image_preimage_eq_of_isPullback hp.flip (Set.univ : Set X)
+    simpa using he.symm
+  · intro h' h'S h'j
+    exact ext_of_isSchemeTheoreticallyDominant_of_isSeparated c.obj.g
+      (h'S.trans hS.symm) c'.obj.i (h'j.trans hj.symm)
 
 end AlgebraicGeometry

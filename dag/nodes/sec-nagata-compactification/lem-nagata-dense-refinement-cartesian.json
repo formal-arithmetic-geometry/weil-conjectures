@@ -1,0 +1,136 @@
+{
+ "id": "lem-nagata-dense-refinement-cartesian",
+ "kind": "statement",
+ "title": "A dense quasi-compact refinement is cartesian over the distinguished open",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes, and let $c,d$ be compactifications of $f$ [def-nagata-compactification]. Let $r:c.Z\\to d.Z$ satisfy $c.i;r=d.i$ and $r;d.g=c.g$, the two upstream refinement triangles [def-weil-compactifications-refinements]. Assume that $c.i$ is quasi-compact and scheme-theoretically dominant [def-nagata-dense-compactification]. Then the square with top map $c.i$, left map $\\mathrm{id}_X$, right map $r$, and bottom map $d.i$ is cartesian [def-pc-base-change]. No quasi-compactness or density of $d.i$ is required.",
+ "source": {
+  "document": "lean/WeilConjectures/Compactification/RefinementPullback.lean",
+  "place": "isPullback_of_isSchemeTheoreticallyDominant, proof; the cartesian form of blueprint det-nagata-refinement-morphisms, Inverse image of X"
+ },
+ "stmt_deps": [
+  "def-nagata-compactification",
+  "def-weil-compactifications-refinements",
+  "def-nagata-dense-compactification",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Let P be the fibre product of r.hom with d.i, and let t:X → P be the lift of c.i and the identity of X. The two projections satisfy t ≫ fst = c.i and t ≫ snd = id. The ambient map r.hom is proper by proper-over-separated [lem-weil-pbc-proper-over-separated], so snd is proper by [lem-weil-pbc-proper-base-change]. Its section t is therefore a closed immersion by [lem-weil-pbc-section-separated-closed-immersion]. These are the first half of the existing Lean proof, not new unproved obligations.",
+   "uses": [
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-section-separated-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The projection fst is an open immersion, hence a flat monomorphism. The square expressing t as the base change of t ≫ fst along fst is cartesian because fst is mono. Flat base change of scheme-theoretic dominance gives dominance of t from that of c.i, with quasi-compactness supplied by the hypothesis on c.i. This is precisely the proved source lemma IsSchemeTheoreticallyDominant.of_comp used in RefinementPullback. Thus t has zero kernel. A closed immersion with zero kernel is an isomorphism (IsClosedImmersion.isIso_iff_ker_eq_bot).",
+   "uses": [
+    "def-nagata-scheme-theoretically-dense-open",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical comparison t from X to P is now an isomorphism respecting both projections. IsPullback.of_iso_pullback therefore proves that the square with sides c.i, id_X, r.hom and d.i is cartesian. This is exactly the existing theorem, whose built-in axiom guard excludes sorryAx.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Compactification/RefinementPullback.lean",
+  "place": "isPullback_of_isSchemeTheoreticallyDominant, proof; the cartesian form of blueprint det-nagata-refinement-morphisms, Inverse image of X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isPullback_of_isSchemeTheoreticallyDominant",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib statement; source-library search found the proved RefinementPullback theorem instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSchemeTheoreticallyDominant",
+   "results": "12 hits: AlgebraicGeometry.instIsMultiplicativeSchemeIsSchemeTheoreticallyDominant, AlgebraicGeometry.IsSchemeTheoreticallyDominant, AlgebraicGeometry.instIsSchemeTheoreticallyDominantOfIsIsoScheme, AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isDominant, AlgebraicGeometry.instIsDominantOfIsSchemeTheoreticallyDominantOfQuasiCompact, AlgebraicGeometry.IsSchemeTheoreticallyDominant.isReduced, AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isDominant, AlgebraicGeometry.IsSchemeTheoreticallyDominant.ker_eq_bot",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib statement; source-library search found the proved RefinementPullback theorem instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A refinement of compactifications whose source is scheme theoretically dense is a pullback over the distinguished open",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id, AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V, AlgebraicGeometry.Scheme.IsLocallyDirected.t, AlgebraicGeometry.IsOpenImmersion.isPullback, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib statement; source-library search found the proved RefinementPullback theorem instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A refinement from a schematically dense compactification is cartesian over the open source",
+   "results": "8 hits: AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.Scheme.Hom.isCompact_preimage, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.PartialMap.restrict_hom, AlgebraicGeometry.Scheme.instQuasiCompactToImage, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib statement; source-library search found the proved RefinementPullback theorem instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Compactification.DenseRefinementMorphisms",
+  "date": "2026-10-18",
+  "group": "S6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-nagata-refinement-morphisms",
+   "place": "Proof, Inverse image of X: the inverse image of the distinguished open is exactly the source open, expressed as a cartesian square",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-comp-category",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Compactification.RefinementPullback",
+  "declaration": "AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheoreticallyDominant",
+  "statement": "theorem isPullback_of_isSchemeTheoreticallyDominant (r : c.Refinement d) [IsSchemeTheoreticallyDominant c.i] [QuasiCompact c.i] : IsPullback c.i (𝟙 X) r.hom d.i",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-18",
+  "note": "Existing proved source-library theorem; no new Lean declaration or file. The theorem has its own standard-axioms-only guard. Blueprint and DAG searches found no existing node for this cartesian statement. Empty X and identity refinements are allowed; no nonemptiness is used."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261018T150715-L-3837382",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261018T150715-L-3837382",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
