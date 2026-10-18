@@ -3281,6 +3281,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategor
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtHomology
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMap
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
