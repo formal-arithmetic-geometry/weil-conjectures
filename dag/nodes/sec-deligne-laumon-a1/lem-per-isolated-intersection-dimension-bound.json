@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-affine-spectrum",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-per-local-cohomological-dimension"
  ],
  "proof": [
   {
@@ -185,5 +186,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-cee8a6b76 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited node, and the source Stacks local-cohomology.tex (0DXA lemma-cd-change-rings l.516, 0DXE lemma-cd-maximal, 0DXF lemma-cd-bound-dim-local l.636-650). Statement: the 0DXF prime case is kept verbatim as the 'in particular' clause. The closed-Z extension is true, via irreducible components, and is proved directly by applying the same quotient argument to B=A/J. 0DXE needs no domain hypothesis, so this works. Steps: (1) Z=V(J) with m in Z, so B=A/J is nonzero Noetherian local, and Spec B is homeomorphic to Z by the spec-quotient leaf. (2) V_B(IB)={n}, so sqrt(IB)=n by the radical leaf. (3) n^N is contained in IB by the pigeonhole bound on monomials, so Gamma_{IB}=Gamma_n and the two cd's are equal; this is truly elementary and r=0 is handled. (4) change-rings and top-nonvanishing give d <= cd(B,n) = cd(B,IB) <= cd(A,I). (5) The prime case follows. New nodes: change-rings is 0DXA restricted to Noetherian rings. It is true for derived torsion functors on modules, because Cech complexes agree under restriction of scalars. top-nonvanishing is the first half of 0DXE, checked on d=0 and on k[[x]]. Both nodes carry statements only, are self-contained, have all three kinds of searches with no match, and do not restate a clause of the item. Duplicate grep over dag/nodes for 0DXA, 0DXE, cd and local cohomology found only distinct nodes (generator-bound 0DX9/0ECP, sbc derived-torsion). No SGA, no cycle, no off-route statements, no tool_uses. Advisory: the new nodes define Gamma_K inline instead of citing def-sbc-ideal-power-torsion-functor, as the landed Q11 siblings already do. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IsolatedIntersectionDimensionBound",
+  "declaration": "PrimeSpectrum.isolated_intersection_dimension_bound",
+  "file": "lean/Sheaf/RingTheory/IsolatedIntersectionDimensionBound.lean",
+  "statement": "theorem isolated_intersection_dimension_bound (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (hfinite : topologicalKrullDim (PrimeSpectrum A) < ⊤) (I : Ideal A) (hI : I ≠ ⊤) : (∀ Z : Set (PrimeSpectrum A), IsClosed Z → Z ∩ zeroLocus (I : Set A) = {IsLocalRing.closedPoint A} → topologicalKrullDim Z ≤ ModuleCat.localCohomologicalDimension I) ∧ (∀ p : PrimeSpectrum A, zeroLocus (p.asIdeal : Set A) ∩ zeroLocus (I : Set A) = {IsLocalRing.closedPoint A} → topologicalKrullDim (PrimeSpectrum (A ⧸ p.asIdeal)) ≤ ModuleCat.localCohomologicalDimension I)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e2b29a46",
+  "group": "N6",
+  "result": "pass",
+  "note": "Statement matches node/Stacks 0DXF clause by clause: Noetherian local A (IsLocalRing gives nonzero), finite topologicalKrullDim, I≠⊤, closed Z with Z∩V(I)={closedPoint} ⇒ topologicalKrullDim Z ≤ cd, and the prime clause via PrimeSpectrum (A⧸p). Node copy differs from live only by lean + the added stmt_dep on the new def node; statement unchanged; dep records identical to live; lean.statement verbatim. New def-per-local-cohomological-dimension is a real sSup in WithBot ℕ∞ over degrees where rightDerived of the landed idealPowerTorsion is non-zero (⊥=−1). A compiled probe proved the least-upper-bound characterisation (= least q≥−1 per 0DX8/0DX7). Module universe = ring universe, disclosed and equivalent for Noetherian rings. No duplicate (def-kun-cd is étale cd; no live/runs-2 cd-of-ideal). Docstrings carry source and blueprint tags and the five proof steps; sorry only. nt_compile --json: both files clean (1.7 s and 2.3 s). Advisories: unused Scheme import; future change-rings/top-nonvanishing nodes should reuse this cd definition."
  }
 }

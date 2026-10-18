@@ -21,7 +21,8 @@
   "det-prop-scalar-six-pullback",
   "lem-weil-pbc-finite-discrete-condensed-ring-constant",
   "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "prop-trf-scheme-galois-comparison"
+  "prop-trf-scheme-galois-comparison",
+  "def-sp-constant-scalar-pullback-comparison"
  ],
  "proof": [
   {
@@ -226,5 +227,23 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-c569dc2e6 (reviewer sub-agent of L); spot-checked: Read the item, the new helper, all cited statements (with main-20261015 blueprint_update proofs), unit sk-p-trace-coeff, the thm-trf-finite-coefficient-map proof and Stacks 0F6W (more-morphisms.tex:19215). The item's hypotheses, coefficient category D(X_proet,R), T, c_h (inverse of det-prop-scalar-six-pullback (1)) and kappa^(m) all match prop-trf-scheme-galois-comparison; no target is weakened. Step 1: Fr^(q^m)=F^{am}=g_sigma^m Phi^m with g_gamma=g_sigma^{-1}, so Phi^m=g^m H. Step 2: the composition orientation is correct, d:S->PG and kappa=t_G∘d as in the blueprint proof; only clause (1)'s composition law is used, and inverting it gives the displayed equation. Step 3: the helper at b=am on G_AK, plus naturality of t_B. Step 4: a five-line substitution, verified. The helper is true, since the site trivialization from the relative-Frobenius isos is compatible with ring sheaves and termwise K-flat tensors. Edge cases: b=0, empty X, B=0, u=id, nonflat Z/l^2->F_l. It is not a duplicate of lem-trf-absolute-frobenius-site or lem-pur-frobenius-trivialization-pullback, and does not restate a clause of the item. Accepted tool uses: det-prop-scalar-six-pullback (off-route generic comparison); the rest are on route or generic infrastructure. Fix: Step 2 unfolded kappa without citing prop-trf-scheme-galois-comparison; added it to the Step 2 text, uses and proof_deps (on route) in fixes/dag/nodes/sec-trace-formula/lem-trf-scheme-galois-coefficient-change.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SchemeGaloisCoefficientChange",
+  "declaration": "WeilConjectures.FiniteFieldDatum.schemeGaloisComparison_coefficientChange",
+  "file": "lean/Sheaf/SixFunctors/SchemeGaloisCoefficientChange.lean",
+  "statement": "theorem schemeGaloisComparison_coefficientChange (D : WeilConjectures.FiniteFieldDatum.{u}) (X₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B] (hA : ∃ n : ℕ, IsUnit (n : D.k) ∧ ∀ a : A, n • a = 0) (hB : ∃ n : ℕ, IsUnit (n : D.k) ∧ ∀ b : B, n • b = 0) (φ : A →+* B) (m : ℕ) (hm : 1 ≤ m) (K : proEtaleDerivedCategory (D.geometricFiber X₀).left A) : (directImageScalarPullbackIso φ (D.schemeFrobeniusIterate X₀ m)).hom.app K ≫ (directImageScalarExtension φ (D.geometricFiber X₀).left).map ((D.canonicalSchemeGaloisComparison X₀ A hA m hm).hom.app K) = (D.canonicalSchemeGaloisComparison X₀ B hB m hm).hom.app ((directImageScalarExtension φ (D.geometricFiber X₀).left).obj K) ≫ (directImageScalarPullbackIso φ (HPow.hPow (α := End (D.geometricFiber X₀).left) (D.geometricGaloisFrobenius X₀) m)).hom.app K",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43d34746b",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: FiniteFieldDatum, finite-type X₀ (LOFT+QC), Φ^m and g^m as End powers, arbitrary finite commutative A,B with IsUnit(n:k) annihilator (= prime to p), arbitrary φ, every m≥1 and K in the constant-ring unbounded D(X_proet,R). κ = canonicalSchemeGaloisComparison, pinned by schemeGaloisComparison's last clause (compositor then derived τ fixed by unit/projection equations), not arbitrary. c = directImageScalarPullbackIso.hom (landed def-sp canonical K-flat-normalized comparison; same map as transported det-prop (1) θ⁻¹); direction and ≫ order checked. Adding the landed def-sp node to stmt_deps is permitted; no other node change. Statement verbatim; docstrings carry source, blueprint id and 4 steps; only sorry; lines ≤91. nt_compile --json rc 0, item 3.8 s, no diagnostics. Advisories: unused public imports for stmt_deps; stage-3 needs a composition law for directImageScalarPullbackIso; proof dep absolute-frobenius-coefficient-naturality has no Lean yet."
  }
 }
