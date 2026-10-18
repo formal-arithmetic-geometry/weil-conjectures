@@ -216,5 +216,23 @@
   "group": "Q47",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-19f602ec5 (reviewer sub-agent of L); spot-checked: I read the full item and its 4 steps (it has no new nodes), every cited node's statement, ILO XVII Def 5.2.1 / Prop 5.2.2 with its proof (p. 287), the citer lem-per-perversity-localization-calculus Steps 3 and 6, and the unit route. The statement matches Def 5.2.1 and is true. It was tested on an open immersion, Spec A_p→Spec A, the generic point Spec κ(η)→X, a closed immersion (fails the hypothesis and the conclusion) and an étale double cover (fails injectivity). Steps 2–4 are mathematically correct: the pointed étale categories are reindexed along α and the inverse colimit maps follow from the colimit universal property; clause (3) of the functoriality node identifies the result with the canonical map; Step 4 is a correct monomorphism and cancellation argument. I fixed missing citations (C1/C2/B3) in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-pseudo-open-strict-local-fibre.json. (1) Step 1 was marked elementary but used, uncited, the stalk of the sheaf inverse image and the fact that f^{-1}O_X→O_Y is the adjoint of f♯. It now cites lem-weil-pbc-topological-inverse-image-stalk (Lean-closed) and def-weil-pbc-topological-inverse-image, proves α=f♯_y, and is elementary:false. The statement gains only the citation bracket for the inverse image, and stmt_deps gains def-weil-pbc-topological-inverse-image. (2) Steps 2 and 3 applied the D_p-chart comparison to O_{X,x} without the identification D_p≅O_{X,x}; they now cite the Mathlib leaf lem-weil-pbc-affine-open-stalk-localization. (3) Step 3 used maps into an affine scheme via ring maps without citation; it now cites the Mathlib leaf lem-a1-locally-ringed-space-affine-adjunction. (4) Step 4's inverse-image form of composition now cites the adjunction in def-weil-pbc-topological-inverse-image. proof_deps is the union of uses; there are no cycles and every step is under 2000 characters. I accepted the declared tool uses lem-exc-affine-strict-local-ring-comparison and lem-weil-pbc-strict-henselization-functoriality: both are generic strict-local comparisons, and the unit's route is unchanged. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PseudoOpenStrictLocalFibre",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_pseudoOpen_strictLocalFibre",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoOpenStrictLocalFibre.lean",
+  "statement": "theorem isIso_pseudoOpen_strictLocalFibre {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : Y ⟶ X) (htop : Topology.IsEmbedding f) (hsheaf : IsIso (((TopCat.Sheaf.pullbackPushforwardAdjunction CommRingCat.{u} f.base).homEquiv X.sheaf Y.sheaf).symm ⟨f.c⟩)) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (ybar : Spec (.of Ω) ⟶ Y) : IsIso (strictHenselizationMap f ybar) ∧ IsIso (pullback.lift (f := f) (g := strictHenselizationStructuralMap (ybar ≫ f)) (strictHenselizationStructuralMap ybar) (strictHenselizationMap f ybar) (strictHenselizationMap_over f ybar).symm)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e12883df",
+  "group": "NG",
+  "result": "pass",
+  "note": "Statement matches ILO XVII 5.2.1/5.2.2 node clause by clause: IsNoetherian X,Y (node's own hypothesis); IsEmbedding f; IsIso of the actual pullbackPushforwardAdjunction adjoint of f.c (direction checked); arbitrary geometric point ybar with downstairs ybar ≫ f; conclusions IsIso of the canonical ∃!-characterized strictHenselizationMap and IsIso of pullback.lift with projections j_Y and e (.symm correct). Edge cases (empty, open immersion, Spec A_p, closed immersion, étale cover) checked; statement true. lean.statement verbatim; node copy changes only lean; proof-only imports match proof_deps modules; no duplicate found. No new defs, sorry only, docstrings with source/blueprint and 4 proof steps. nt_compile --json clean in 1.9 s, broken control fails. Advisory: Second-reading section is the worker's self-check."
  }
 }
