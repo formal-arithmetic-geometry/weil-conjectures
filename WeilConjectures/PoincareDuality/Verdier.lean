@@ -5,7 +5,9 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.VerdierBiduality
 public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.TraceFormula.Dualizing
 
@@ -142,6 +144,30 @@ noncomputable def verdierDual (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj �
 noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     K ⟶ verdierDual ℓ a (verdierDual ℓ a K) :=
   Verdier.bidualityMap (relativeDualizingComplex ℓ a) K
+
+/-- **Biduality for dualizable complexes** (the lisse step of the blueprint theorem
+`thm-coef-qbar-verdier`): if the dualizing complex `ω_X` relative to `a` is isomorphic to an
+invertible object (as `ℚ̄_ℓ(d)[2d]` is, for `a` smooth of relative dimension `d`), the double-dual
+morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every dualizable `K`. -/
+theorem isIso_verdierBiduality_of_isDualizable {T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (γ : T ≅ relativeDualizingComplex ℓ a) (hT : IsInvertible T)
+    {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hK : IsDualizable K) :
+    IsIso (verdierBiduality ℓ a K) :=
+  Verdier.isIso_bidualityMap_of_isDualizable γ hT hK
+
+/-- **Open–closed dévissage of biduality**: for a quasi-compact open immersion `j : U ⟶ X` and a
+closed immersion `i : Z ⟶ X` onto its complement, the double-dual morphism `δ_K` is an
+isomorphism as soon as its restrictions `Lj^* δ_K` and `Li^* δ_K` are. -/
+theorem isIso_verdierBiduality_of_isCompl {Z U : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+    (i : Z ⟶ X) [IsClosedImmersion i.left] (j : U ⟶ X) [QuasiCompact j.left]
+    (hij : IsCompl (Set.range i.left.base) (Set.range j.left.base))
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hj : IsIso ((boundedConstructibleUpperStar _ ℓ j).map (verdierBiduality ℓ a K)))
+    (hi : IsIso ((boundedConstructibleUpperStar _ ℓ i).map (verdierBiduality ℓ a K))) :
+    IsIso (verdierBiduality ℓ a K) :=
+  isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl _ ℓ i j hij _ hj hi
 
 /-- For the structure morphism `a_X : X ⟶ Spec k`, the relative dualizing complex is the
 dualizing complex `ω_X = Ra_X^! ℚ̄_ℓ` of `ProEtale.CondensedRing.dualizingComplex`. -/

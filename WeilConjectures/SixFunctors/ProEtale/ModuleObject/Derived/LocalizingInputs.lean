@@ -161,8 +161,7 @@ theorem isIso_baseChangeMap_of_localizing_padicIntegersRingObj {p : X ⟶ Y} {g 
 
 /-- Blueprint `sk-prop-open-coefficients`: Direct image along an open immersion; the case
 `Λ = 𝒪̲_E`: for a quasi-compact open immersion `j : U ⟶ X`, `Rj_*` maps `Dbc(U, 𝒪_E)` into
-`Dbc(X, 𝒪_E)`. The node states this for `Λ = 𝒪_E, E, ℚ̄_ℓ`; only the case `Λ = 𝒪̲_E`, the one
-used, is stated here. -/
+`Dbc(X, 𝒪_E)`. The node states this for `Λ = 𝒪_E, E, ℚ̄_ℓ`, by one declaration each. -/
 theorem boundedConstructible_rightDerivedLowerStar_openImmersion_padicIntegersRingObj
     (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left]
     {K : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left)}
@@ -208,9 +207,12 @@ projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = E̲`. Let `p : X ⟶ 
 
 Stated here: (2) and (3), for `Λ = E̲`. Not stated: the comparisons (1) of the direct image
 with the changes of coefficients `𝒪_E → E`, `E → F`, `E → ℚ̄_ℓ` on bounded below complexes;
-the comparison maps `AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` need these
-extensions of scalars to be exact (for instance `E_X` flat over `𝒪_{E,X}`), which is not
-available; the morphisms of condensed rings involved are constructed only for finite
+the comparison maps `AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` are defined only
+for an exact extension of scalars; exactness is not available for `𝒪_{E,X} ⟶ E_X`, and for
+`E_X ⟶ F_X`, `E_X ⟶ ℚ̄_ℓ,X` it is only an unproved input of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` (where the
+comparisons for these two changes are also asserted, on all unbounded objects), which formalises
+no blueprint node. The morphisms of condensed rings involved are constructed only for finite
 subextensions of `ℚ̄_ℓ` (`PadicAlgCl.FiniteIntermediateField`). -/
 theorem properDirectImage_baseChange_projectionFormula_continuousMapRingObj (p : X ⟶ Y)
     [IsProper p.left] :
@@ -256,6 +258,15 @@ theorem isIso_baseChangeMap_of_localizing_continuousMapRingObj {p : X ⟶ Y} {g 
     IsIso ((baseChangeMap 𝐄 ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
   sorry
 
+/-- Blueprint `sk-prop-open-coefficients`: Direct image along an open immersion; the case
+`Λ = E̲`: for a quasi-compact open immersion `j : U ⟶ X`, `Rj_*` maps `Dbc(U, Λ)` into
+`Dbc(X, Λ)`. -/
+theorem boundedConstructible_rightDerivedLowerStar_openImmersion_continuousMapRingObj
+    (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left]
+    {K : 𝔻[𝐄](X.left)} (hK : boundedConstructible (condensedRingObj 𝐄 X.left) K) :
+    boundedConstructible (condensedRingObj 𝐄 Y.left) ((R((j.left)_*⟦𝐄⟧)).obj K) :=
+  sorry
+
 end Field
 
 /-! ### The coefficient ring ℚ̲̄_ℓ -/
@@ -290,9 +301,12 @@ projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = ℚ̲̄_ℓ`. Let `p 
 
 Stated here: (2) and (3), for `Λ = ℚ̲̄_ℓ`. Not stated: the comparisons (1) of the direct image
 with the changes of coefficients `𝒪_E → E`, `E → F`, `E → ℚ̄_ℓ` on bounded below complexes;
-the comparison maps `AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` need these
-extensions of scalars to be exact (for instance `E_X` flat over `𝒪_{E,X}`), which is not
-available; the morphisms of condensed rings involved are constructed only for finite
+the comparison maps `AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` are defined only
+for an exact extension of scalars; exactness is not available for `𝒪_{E,X} ⟶ E_X`, and for
+`E_X ⟶ F_X`, `E_X ⟶ ℚ̄_ℓ,X` it is only an unproved input of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` (where the
+comparisons for these two changes are also asserted, on all unbounded objects), which formalises
+no blueprint node. The morphisms of condensed rings involved are constructed only for finite
 subextensions of `ℚ̄_ℓ` (`PadicAlgCl.FiniteIntermediateField`). -/
 theorem properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (p : X ⟶ Y)
     [IsProper p.left] :
@@ -336,6 +350,15 @@ theorem isIso_baseChangeMap_of_localizing_padicAlgClRingObj {p : X ⟶ Y} {g : Y
     {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p.left] (sq : IsPullback g' p' p g)
     {K : 𝔻[𝐐](X.left)} (hK : localizingBoundedConstructible 𝐐 X.left K) :
     IsIso ((baseChangeMap 𝐐 ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
+  sorry
+
+/-- Blueprint `sk-prop-open-coefficients`: Direct image along an open immersion; the case
+`Λ = ℚ̲̄_ℓ`: for a quasi-compact open immersion `j : U ⟶ X`, `Rj_*` maps `Dbc(U, Λ)` into
+`Dbc(X, Λ)`. -/
+theorem boundedConstructible_rightDerivedLowerStar_openImmersion_padicAlgClRingObj
+    (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left]
+    {K : 𝔻[𝐐](X.left)} (hK : boundedConstructible (condensedRingObj 𝐐 X.left) K) :
+    boundedConstructible (condensedRingObj 𝐐 Y.left) ((R((j.left)_*⟦𝐐⟧)).obj K) :=
   sorry
 
 end AlgCl
