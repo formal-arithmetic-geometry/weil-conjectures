@@ -85,6 +85,12 @@ lemma nonempty_iso_derivedHom_self_of_isInvertible
   exact ⟨(MonoidalClosed.internalHom.flip.obj T).mapIso (λ_ T).op ≪≫
     (asIso (MonoidalClosed.ihomUnitToIhomTensor (𝟙_ _) T)).symm ≪≫ e⟩
 
+/-- The endomorphisms of `Λ_X` commute. -/
+lemma endUnit_comm_derivedCategory
+    (f g : 𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) ⟶ 𝟙_ _) :
+    f ≫ g = g ≫ f :=
+  MonoidalCategory.endUnit_comm f g
+
 end Generic
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ]
@@ -115,7 +121,8 @@ theorem nonempty_iso_rightDerivedLowerStar_constantComplex_affineSpace
   obtain ⟨ω⟩ := nonempty_iso_dualizingComplex_affineSpace Λ d Y aY
   obtain ⟨tr⟩ := nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace_fin Λ d Y
   obtain ⟨hP⟩ := nonempty_iso_derivedHom_tateObjectShift Λ 𝔸(ULift.{u} (Fin d); Y) d
-  obtain ⟨hΛ⟩ := nonempty_iso_derivedHom_unit (A := ModuleCat.{u + 1} Λ) (𝟙_ _ : _root_.DerivedCategory
+  obtain ⟨hΛ⟩ := nonempty_iso_derivedHom_unit (A := ModuleCat.{u + 1} Λ)
+    (𝟙_ _ : _root_.DerivedCategory
     (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
   let eM : (twistShift Λ 𝔸(ULift.{u} (Fin d); Y) d).obj (constantComplex Λ 𝔸(ULift.{u} (Fin d); Y))
       ≅ (tateObject Λ 𝔸(ULift.{u} (Fin d); Y) d)⟦(2 * d : ℤ)⟧ :=
@@ -125,5 +132,27 @@ theorem nonempty_iso_rightDerivedLowerStar_constantComplex_affineSpace
     (RHom(_)[ModuleCat.{u + 1} Λ].mapIso eM.symm.op).app _ ≪≫ hP
   exact ⟨(R((𝔸(ULift.{u} (Fin d); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).mapIso e₁.symm ≪≫ th ≪≫
     (RHom(Y)[ModuleCat.{u + 1} Λ].mapIso tr.symm.op).app _ ≪≫ hΛ⟩
+
+/-- **Homotopy invariance** for relative affine space: over a separated scheme `Y` of finite
+type over a field, the unit `Λ_Y ⟶ Rp_* Λ_{𝔸^d_Y}` is an isomorphism. It has a left inverse,
+restriction along the zero section, and `Rp_* Λ ≅ Λ_Y`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_constantComplex_affineSpace`);
+the endomorphisms of `Λ_Y` commute, so a morphism `Λ_Y ⟶ Rp_* Λ` with a left inverse is an
+isomorphism. -/
+theorem isIso_constantComplexUnit_affineSpace
+    {k : Type u} [Field k] (d : ℕ)
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
+    [HasInvertibleExponent Λ Y] :
+    IsIso (constantComplexUnit Λ (𝔸(ULift.{u} (Fin d); Y) ↘ Y)) := by
+  obtain ⟨ψ⟩ := nonempty_iso_rightDerivedLowerStar_constantComplex_affineSpace Λ d Y aY
+  let z : Y ⟶ 𝔸(ULift.{u} (Fin d); Y) := AffineSpace.homOfVector (𝟙 Y) 0
+  have hz : z ≫ 𝔸(ULift.{u} (Fin d); Y) ↘ Y = 𝟙 Y := AffineSpace.homOfVector_over _ _
+  have := isIso_constantComplexUnit_comp_map_unit Λ _ z hz
+  let w := (R((𝔸(ULift.{u} (Fin d); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).map
+    ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) z).unit.app
+      (constantComplex Λ _))
+  refine isIso_of_comp_eq_id_of_iso _ (w ≫ inv (constantComplexUnit Λ _ ≫ w)) ?_ ψ
+    endUnit_comm_derivedCategory
+  rw [← Category.assoc, IsIso.hom_inv_id]
 
 end AlgebraicGeometry.Etale
