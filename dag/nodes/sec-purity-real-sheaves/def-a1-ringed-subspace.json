@@ -1,0 +1,117 @@
+{
+ "id": "def-a1-ringed-subspace",
+ "kind": "definition",
+ "title": "Ringed subspace with the inverse-image structure sheaf",
+ "status": "split",
+ "statement": "Let $X$ be a locally ringed space [def-weil-locally-ringed-space-morphism] and $S\\subseteq |X|$ any subset. Give $S$ the subspace topology and let $i:S\\hookrightarrow |X|$ be inclusion. The ringed subspace $X|_S$ is $(S,i^{-1}\\mathcal O_X)$, using the inverse-image sheaf of commutative rings [def-weil-pbc-topological-inverse-image]. Its canonical ringed-space morphism to $X$ has base $i$ and sheaf map the unit $\\mathcal O_X\\to i_*i^{-1}\\mathcal O_X$. When supplied with a proof that its stalks are local rings, bundle this same ringed space as a locally ringed space; only proof data are supplied, and its topology and sheaf remain the specified ones.",
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0API, lemma-sits-in-functions, restricted ringed spaces in the statement and first sentence of the proof"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of the structure sheaf on an arbitrary subspace of a locally ringed space",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.𝒪; AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply; AlgebraicGeometry.LocallyRingedSpace.restrict; AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_assoc; AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso; AlgebraicGeometry.LocallyRingedSpace.preimage_basicOpen; AlgebraicGeometry.StructureSheaf.comapFun; AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ",
+   "date": "2026-10-18",
+   "verdict": "No arbitrary ringed-subspace construction: restrict requires an open embedding; 𝒪 and pullback give its ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of the structure sheaf on an arbitrary subspace of a locally ringed space",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.restrict_presheaf_obj; AlgebraicGeometry.LocallyRingedSpace.ofRestrict; AlgebraicGeometry.Spec.locallyRingedSpaceObj_presheaf_map; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict_invApp_apply; AlgebraicGeometry.Spec.locallyRingedSpaceObj_presheaf_map'; AlgebraicGeometry.LocallyRingedSpace.toToΓSpecMapBasicOpen; AlgebraicGeometry.LocallyRingedSpace.preimage_basicOpen; AlgebraicGeometry.StructureSheaf.toOpen_res",
+   "date": "2026-10-18",
+   "verdict": "No match: open restrictions, spectrum structure sheaf, and canonical affinization components only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyRingedSpace\", \"restrict\"",
+   "results": "12 hits, all LocallyRingedSpace.restrict, ofRestrict, their carrier/stalk formulas and restrictTopIso. The full restrict signature requires IsOpenEmbedding.",
+   "date": "2026-10-18",
+   "verdict": "No arbitrary subset restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "subspace|inverseImage|inverse_image",
+   "results": "msearch grep Geometry/RingedSpace: 8 hits, gluing comments and open/top restriction comments only. Direct rg of WeilConjectures and lean/Sheaf for ringedSubspace|locallyRingedSubspace|subspaceInclusion|ringedSubspaceι: no hits. DAG exact phrase/name search: only the current item and two open module-restriction lemmas. blueprint_refs.py search \"locally ringed subspace\": 0 blueprint nodes.",
+   "date": "2026-10-18",
+   "verdict": "No existing arbitrary ringed-subspace notion; construct it from the recorded inverse-image sheaf."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-intersection-canonical-affine-embedding",
+  "date": "2026-10-18",
+  "group": "Q58"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Tag 0API canonical embedding of the inverse-image ringed subspace E, used by the Gabber input.",
+   "via": [
+    "lem-a1-intersection-canonical-affine-embedding",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability",
+    "lem-a1-normal-locally-constant-finite-section",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RingedSubspace",
+  "declaration": "AlgebraicGeometry.LocallyRingedSpace.ringedSubspace",
+  "declarations": [
+   "AlgebraicGeometry.LocallyRingedSpace.subspaceInclusion",
+   "AlgebraicGeometry.LocallyRingedSpace.ringedSubspace",
+   "AlgebraicGeometry.LocallyRingedSpace.ringedSubspaceι",
+   "AlgebraicGeometry.LocallyRingedSpace.locallyRingedSubspace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSubspace.lean",
+  "statement": "def ringedSubspace (X : LocallyRingedSpace.{u}) (S : Set X) : SheafedSpace CommRingCat.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0e60a5254",
+  "group": "Q58",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0e60a5254",
+  "group": "Q58",
+  "result": "fix",
+  "note": "Both immutable Lean modules compile cleanly; source, dependencies, clauses, universes and edge cases pass. Repaired H11’s placeholder second reading with a complete replacement report under fixes/. Full findings and compiler evidence are in review.md."
+ }
+}

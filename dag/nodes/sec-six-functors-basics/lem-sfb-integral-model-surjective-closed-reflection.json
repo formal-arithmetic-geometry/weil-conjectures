@@ -277,5 +277,28 @@
   "group": "Q148",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-454e4b7c8 (reviewer sub-agent of L); spot-checked: I read in full the item, the four proof steps, every cited statement, the parent det-lem-int-ext-formula steps 3-5 and the unit sk-lem-int-ext. Stacks proetale.tex 09BK (line 4801) and 09AB (line 4963) are checked. I also read the Lean source of condensedSurjectiveClosedPullback_isEquivalence. Its functor is extendScalars(condensedPullbackHom) after mapMod(upperStar Ab), which is exactly the module pullback of sk-def-sfb-module-pushforward-pullback, so the coefficient category matches. The statement is true and unchanged: an arbitrary surjective closed immersion, no Noetherian or nilpotence-bound hypothesis, and torsion modules allowed. The parent uses only (b)=>(a), which this item supplies. Step 1 uses colimit preservation, strong monoidality and the coequalizer of sk-def-sfb-change-of-scalars(2), so pullback preserves the constant models. Compatibility of alpha_f with the constant-section maps is implicit but routine. Step 2 base-changes the covering and uses the composition isomorphisms. Step 3 uses exactly the IsPullback witnesses of the cover-refinement node; the base change q is a surjective closed immersion, as the equivalence node requires. Step 4 lifts the isomorphism and its inverse by fullness and gets the identities by faithfulness; no gluing is needed. I tested i=id, X empty, Spec k -> Spec k[e]/e^2, and P = 0, O_E, O_E/varpi, O_E/varpi^2. There are no cycles and no SGA. I accept the five declared tool_uses: left-exact inverse-image tensor, cover refinement, universal homeomorphism, condensed equivalence and cartesian coefficients. No new nodes. The closest existing node, lem-sfb-surjective-closed-module-invariance, is for a finite ring with constant sheaves, so it is not a duplicate; the lfp-reflection nodes use sheaf-valued matrices. The Mathlib searches cover all three kinds. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1d7c6c6ab",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all nine statement dependencies, source correspondence, exact declarations, verbatim signature, universes, edge cases, docstrings, and route-pivot compliance. Immutable module compiled cleanly through scompile.py in sandbox and library modes. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralModelSurjectiveClosedReflection",
+  "declaration": "AlgebraicGeometry.ProEtale.integralModel_surjective_closed_reflection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralModelCondensedCoefficients",
+   "AlgebraicGeometry.ProEtale.integralModelCondensedCoefficients_isCommMonObj",
+   "AlgebraicGeometry.ProEtale.integralModel_surjective_closed_reflection"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralModelSurjectiveClosedReflection.lean",
+  "statement": "theorem integralModel_surjective_closed_reflection (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [Surjective i] (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (integralModelCondensedCoefficients l E).X X)) : HasFiniteConstantLocalModel (integralModelCondensedCoefficients l E).X X F ↔ HasFiniteConstantLocalModel (integralModelCondensedCoefficients l E).X Z ((CondensedRing.upperStar (integralModelCondensedCoefficients l E).X i).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

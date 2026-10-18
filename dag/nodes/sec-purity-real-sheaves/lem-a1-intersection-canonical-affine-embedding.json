@@ -12,7 +12,8 @@
   "def-weil-affine-spectrum",
   "def-weil-open-immersion",
   "def-weil-pbc-topological-inverse-image",
-  "def-weil-locally-ringed-space-morphism"
+  "def-weil-locally-ringed-space-morphism",
+  "def-a1-ringed-subspace"
  ],
  "proof": [
   {
@@ -304,5 +305,26 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-fe2aea3e5 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks 0API (more-groupoids.tex, lemma-sits-in-functions), including the paragraph before it with equation-sections-of-intersection. I also read 0ARY (properties.tex), 0CUE/0CUF (limits.tex), 01I1, and every cited node's statement. Batch-5 flag: lem-trf-quasi-affine-canonical-affine-embedding, cited in steps 1 and 4, is genuinely outside both assumptions. It is the generic quasi-affine fact of Stacks 01P9 (quasi-compact, separated, open immersion into Spec Γ). It is a Mathlib leaf with empty proof_deps, and I checked the match at QuasiAffine.lean lines 34, 41, 46 and 54. Neither the trace formula nor Poincaré duality states it, and its closure reaches no proof node of either. It is a tool, not a step of the trace-formula proof. Steps: (1) the qc intersection property is proved from ind-quasi-affineness, not from an assumed quasi-separatedness; the system is directed and spectral, and E is its topological limit. (2) the spectral pullback-sections node applies with all hypotheses checked; the ring and set colimit and sheafification are matched through the elementwise and underlying-set nodes. (3) the LRS adjunction is needed because E may not be a scheme; naturality gives p_i∘j_E = j_i|_E. (4) I checked the bijection E→F by hand, the topologies match, and p_i^{-1}(Q_i) is quasi-compact. (5) the stalk isomorphism uses Spec-stalks clause (1) without the domain hypothesis; the injectivity argument with t∉p_i is correct. (6) the stalk criterion is applied to the set sheaves. (7) 0ARY is applied to U_k⊆U_i; I verified j_E(W)=p_i^{-1}(j_i(W)) coordinatewise, including indices not ≥ i, so it holds for W that is not quasi-compact. (8) naturality is elementary. New nodes: the LRS adjunction is an exact Mathlib leaf (GammaSpecAdjunction.lean locallyRingedSpaceAdjunction, lines 332-342, homEquiv at 370-380). The 0ARY square is correct; I tested it on D(x)⊂A², A² minus the origin in A², U=V and U=∅. Mathlib's isPullback_toSpecΓ_toSpecΓ needs an affine morphism, so it is correctly not used as a leaf. The spectrum-limit node with its extra quasi-compactness clause is correct; I tested a constant system and a zero colimit. I found no duplicates by grepping tags, labels and concepts across dag/nodes, and no restated clauses or cycles. The nine declared tool_uses are generic infrastructure and I accept them. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0e60a5254",
+  "group": "Q58",
+  "result": "fix",
+  "note": "Both immutable Lean modules compile cleanly; source, dependencies, clauses, universes and edge cases pass. Repaired H11’s placeholder second reading with a complete replacement report under fixes/. Full findings and compiler evidence are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntersectionCanonicalAffineEmbedding",
+  "declaration": "AlgebraicGeometry.intersection_canonical_affine_embedding",
+  "declarations": [
+   "AlgebraicGeometry.intersection_canonical_affine_embedding"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IntersectionCanonicalAffineEmbedding.lean",
+  "statement": "theorem intersection_canonical_affine_embedding (Y : Scheme.{u}) (hY : ∀ U : Y.Opens, IsCompact (U : Set Y) → Scheme.IsQuasiAffine U.toScheme) (I : Type v) [Nonempty I] (U : I → Y.Opens) (hU : ∀ i : I, IsCompact (U i : Set Y)) (E : Set Y) (hE : E = ⋂ i : I, (U i : Set Y)) : ∃ hlocal : ∀ x : E, IsLocalRing ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.stalk x), ∃ j : locallyRingedSubspace Y.toLocallyRingedSpace E hlocal ⟶ (Spec ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤))).toLocallyRingedSpace, (toSpecΓ ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤)) ≫ j.c.app (op ⊤) = 𝟙 _) ∧ (∀ j' : locallyRingedSubspace Y.toLocallyRingedSpace E hlocal ⟶ (Spec ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤))).toLocallyRingedSpace, toSpecΓ ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤)) ≫ j'.c.app (op ⊤) = 𝟙 _ → j' = j) ∧ (∃ (V : Set (Spec ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤))).Opens), V.Nonempty ∧ (∀ W ∈ V, IsCompact (W : Set (Spec ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤))))) ∧ ∃ hF : ∀ x : (⋂₀ (SetLike.coe '' V) : Set (Spec ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤)))), IsLocalRing ((ringedSubspace (Spec ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤))).toLocallyRingedSpace (⋂₀ (SetLike.coe '' V))).presheaf.stalk x), ∃ e : locallyRingedSubspace Y.toLocallyRingedSpace E hlocal ≅ locallyRingedSubspace (Spec ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤))).toLocallyRingedSpace (⋂₀ (SetLike.coe '' V)) hF, e.hom.toShHom ≫ ringedSubspaceι (Spec ((ringedSubspace Y.toLocallyRingedSpace E).presheaf.obj (op ⊤))).toLocallyRingedSpace (⋂₀ (SetLike.coe '' V)) = j.toShHom) ∧ (∀ (W : Y.Opens) (hW : (W : Set Y) ⊆ E), ∃ l : W.toScheme.toLocallyRingedSpace ⟶ locallyRingedSubspace Y.toLocallyRingedSpace E hlocal, (∀ x : W, l.base x = ⟨x.val, hW x.property⟩) ∧ (l.toShHom ≫ ringedSubspaceι Y.toLocallyRingedSpace E = W.ι.toLRSHom.toShHom) ∧ (l ≫ j = ΓSpec.locallyRingedSpaceAdjunction.homEquiv _ _ (LocallyRingedSpace.Γ.map l.op).op) ∧ IsOpenImmersion (Scheme.Hom.mk (l ≫ j))) ∧ (∀ (Y' : Scheme.{u}) (E' : Set Y') (hlocal' : ∀ x : E', IsLocalRing ((ringedSubspace Y'.toLocallyRingedSpace E').presheaf.stalk x)) (e : Y ≅ Y') (he : e.hom '' E = E'), ∃ a : locallyRingedSubspace Y.toLocallyRingedSpace E hlocal ≅ locallyRingedSubspace Y'.toLocallyRingedSpace E' hlocal', (∀ x : E, (a.hom.base x).val = e.hom x.val) ∧ (a.hom.toShHom ≫ ringedSubspaceι Y'.toLocallyRingedSpace E' = ringedSubspaceι Y.toLocallyRingedSpace E ≫ e.hom.toLRSHom.toShHom) ∧ a.hom ≫ (locallyRingedSubspace Y'.toLocallyRingedSpace E' hlocal').toΓSpec = j ≫ Spec.locallyRingedSpaceMap (LocallyRingedSpace.Γ.map a.hom.op))",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
