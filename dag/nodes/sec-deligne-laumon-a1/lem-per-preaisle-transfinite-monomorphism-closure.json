@@ -12,9 +12,100 @@
   "def-weil-pbc-category-colimit",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Induct on $\\beta\\leq\\theta$, with induction assertion $Q(E_\\beta^\\bullet)\\in\\mathcal V_0$. The base case is $E_0^\\bullet=0$. At a successor, degreewise monicity gives $0\\to E_\\beta^\\bullet\\to E_{\\beta+1}^\\bullet\\to E_{\\beta+1}^\\bullet/E_\\beta^\\bullet\\to0$. Apply the short-exact-sequence triangle theorem. Its first and third objects lie in $\\mathcal V_0$, respectively by induction and the successive-quotient hypothesis. Extension closure puts the middle object $Q(E_{\\beta+1}^\\bullet)$ in $\\mathcal V_0$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Step 2, middle t-structure existence input; agent-supplied transfinite induction, base and successor."
+   }
+  },
+  {
+   "text": "Let $\\lambda\\leq\\theta$ be a nonzero limit ordinal and assume the induction assertion below $\\lambda$. The $\\mathcal V$-small preorder $I=\\{\\beta:\\beta<\\lambda\\}$ is nonempty and filtered: the maximum of two indices is still below $\\lambda$, and there are no distinct parallel arrows. Its colimits in $\\mathcal A$ are exact by the Grothendieck hypothesis. For $D(\\beta)=E_\\beta^\\bullet$, form the bar total $B^\\bullet$ of [def-sc-preorder-bar-total]. Its $p$th column $B_p^\\bullet$ is the coproduct of $E_{\\beta_0}^\\bullet$ over $\\beta_0\\leq\\cdots\\leq\\beta_p<\\lambda$, and the total degree is $q-p$. Each finite-string index set is $\\mathcal V$-small. The derived-coproduct theorem and the induction hypothesis give $Q(B_p^\\bullet)\\in\\mathcal V_0$. Continuity identifies the degreewise colimit of $D$ with $E_\\lambda^\\bullet$. The exact-colimit bar-augmentation theorem therefore gives a quasi-isomorphism $B^\\bullet\\to E_\\lambda^\\bullet$, including for unbounded complexes.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-sc-preorder-bar-total",
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-sc-preorder-bar-filtered-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Step 2, middle t-structure existence input; agent-supplied ordinal bar construction at a limit."
+   }
+  },
+  {
+   "text": "For $n\\geq0$ let $T_n^\\bullet$ retain columns $0\\leq p\\leq n$ of $B^\\bullet$. The horizontal face differential lowers $p$, while the vertical differential retains $p$, so these columns form a subcomplex. The inclusion $T_n^\\bullet\\to T_{n+1}^\\bullet$ is degreewise the inclusion of a finite partial sum. In its quotient only column $n+1$ remains; its vertical differential is $(-1)^{n+1}d$, so the quotient is precisely $B_{n+1}^\\bullet[n+1]$ with the stated shift convention. Thus $T_0^\\bullet=B_0^\\bullet$ and the short-exact-sequence triangle for $0\\to T_n^\\bullet\\to T_{n+1}^\\bullet\\to B_{n+1}^\\bullet[n+1]\\to0$ proves $Q(T_n^\\bullet)\\in\\mathcal V_0$ by ordinary induction: the quotient belongs by step 2 and repeated closure under $[1]$, and extension closure gives the middle object. The column calculation is a direct computation from the bar total, not a boundedness assumption.",
+   "uses": [
+    "def-sc-preorder-bar-total",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Step 2, middle t-structure existence input; agent-supplied finite horizontal skeleta."
+   }
+  },
+  {
+   "text": "Put $W^\\bullet=\\bigoplus_{n\\geq0}T_n^\\bullet$, write $j_n:T_n^\\bullet\\to T_{n+1}^\\bullet$ for inclusion, and define $u\\iota_n=\\iota_n-\\iota_{n+1}j_n$. Let $q:W^\\bullet\\to B^\\bullet$ sum the skeletal inclusions. In each degree, $B^r=\\bigoplus_{p\\geq0}B_p^{r+p}$ is the colimit of its finite partial sums $T_n^r$: compatible maps from the partial sums are exactly families of maps from all the summands. A morphism $h:W^r\\to X$ satisfies $hu^r=0$ exactly when its components satisfy $h_n=h_{n+1}j_n^r$. These compatible components factor uniquely through $B^r$, so $q^r$ is a cokernel of $u^r$. The general sequential-telescope monomorphism lemma makes $u^r$ monic. Its hypothesis holds because exact filtered colimits in a Grothendieck abelian category preserve finite limits, including kernels and finite biproducts; the indexing categories here are countable or categories of finite subsets of $\\mathbf N$, hence $\\mathcal V$-small. Consequently $0\\to W^\\bullet\\xrightarrow{u}W^\\bullet\\xrightarrow{q}B^\\bullet\\to0$ is degreewise short exact. This proves the telescope exactness directly in $\\mathcal A$.",
+   "uses": [
+    "def-sc-preorder-bar-total",
+    "def-weil-pbc-category-colimit",
+    "def-sp-grothendieck-abelian",
+    "lem-kun-sequential-telescope-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 093W, lemma-compute-colimit; direct cokernel universal-property argument for the skeletal sequence."
+   }
+  },
+  {
+   "text": "By the derived-coproduct theorem, $Q(W^\\bullet)$ is a coproduct of the $Q(T_n^\\bullet)$, so step 3 and coproduct closure put it in $\\mathcal V_0$. Apply the short-exact-sequence triangle theorem to step 4 and rotate the distinguished triangle once, obtaining $Q(W^\\bullet)\\to Q(B^\\bullet)\\to Q(W^\\bullet)[1]\\to Q(W^\\bullet)[1]$. The first and third objects belong to $\\mathcal V_0$, using $[1]$-closure for the third. Extension closure now gives $Q(B^\\bullet)\\in\\mathcal V_0$. Rotation is essential here: the unrotated triangle has $Q(B^\\bullet)$ as its third object.",
+   "uses": [
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Step 2, middle t-structure existence input; agent-supplied passage from finite skeleta to the full bar total."
+   }
+  },
+  {
+   "text": "The quasi-isomorphism $B^\\bullet\\to E_\\lambda^\\bullet$ from step 2 is inverted by the derived localization. Strict fullness therefore transfers membership from $Q(B^\\bullet)$ to $Q(E_\\lambda^\\bullet)$. This completes the limit step and hence transfinite induction through $\\theta$. The argument only used nonnegative shifts, extensions, and the stated small coproducts; it did not require boundedness, compactness, or closure under direct summands.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Step 2, middle t-structure existence input; conclusion of the auxiliary transfinite-closure proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-preorder-bar-total",
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit",
+  "def-weil-triangulated-category",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-kun-sequential-telescope-mono",
+  "lem-sc-preorder-bar-filtered-augmentation",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+  "place": "Step 2 supplies the middle t-structure motivation only. Agent-supplied bar-skeleton proof, with telescope exactness as in Stacks Tag 093W (lemma-compute-colimit)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +134,31 @@
    "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/Probability/Process/Filtration.lean\", \"line\": \"26\", \"text\": \"* `MeasureTheory.Filtration.IsRightContinuous`: a filtration is right-continuous if it is equal\"}\n  {\"file\": \"Mathlib/Probability/Process/Filtration.lean\", \"line\": \"373\", \"text\": \"class IsRightContinuous (𝓕 : Filtration ι m) where\"}\n  {\"file\": \"Mathlib/Probability/Process/Filtration.lean\", \"line\": \"377\", \"text\": \"lemma IsRightContinuous.eq {𝓕 : Filtration ι m} [h : IsRightContinuous 𝓕] :\"}\n  {\"file\": \"Mathlib/Probability/Process/Filtration.lean\", \"line\": \"382\", \"text\": \"lemma IsRightContinuous.measurableSet {𝓕 : Filtration ι m} [IsRightContinuous 𝓕] {i : ι}\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"89\", \"text\": \"lemma innerAnodyneExtensions_eq_retracts_transfiniteCompositions :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"90\", \"text\": \"    innerAnodyneExtensions = (transfiniteCompositions.{u}\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"94\", \"text\": \"lemma innerAnodyneExtensions_eq_retracts_transfiniteCompositionsOfShape :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"95\", \"text\": \"    innerAnodyneExtensions = (transfiniteCompositionsOfShape\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"line\": \"18\", \"text\": \"Strong (inner) anodyne extensions are transfinite compositions of pushouts of coproducts\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"111\", \"text\": \"lemma anodyneExtensions_eq_retracts_transfiniteCompositions :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"112\", \"text\": \"    anodyneExtensions = (transfiniteCompositions.{u}\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"116\", \"text\": \"lemma anodyneExtensions_eq_retracts_transfiniteCompositionsOfShape :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"117\", \"text\": \"    anodyneExtensions = (transfiniteCompositionsOfShape\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"line\": \"620\", \"text\": \"      (Functor.isColimitOfIsWellOrderContinuous f.filtration_monotone.functor m hm)⟩⟩\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: probability filtrations and simplicial anodyne extensions do not state the derived preaisle assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coproduct and positive shift closed extension closed subcategories of a Grothendieck derived category are closed under transfinite extensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Triangulated.Subcategory\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n      [inst_2 : CategoryTheory.HasShift C ℤ] →\\n        [inst_3 : CategoryTheory.Preadditive C] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"A predicate on objects of a category $\\\\mathcal{C}$ defining a subcategory that is triangulated, i.e., closed under integer shifts, extensions (distinguished triangles), and contains the zero object. T\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {inst_1 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_2 : CategoryTheory.HasShift C ℤ} {inst_3 : CategoryTheory.Preadditive C}\\n  {inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive} {inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"In a pretriangulated category equipped with a zero object, integer-indexed shift operations, and additive shift functors, any predicate defining a triangulated subcategory (closed under shifts by inte\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"[P.IsTriangulated] : P.IsTriangulatedClosed₃\", \"doc\": \"If a subcategory defined by the property $P$ is triangulated (i.e., closed under shifts by integers, extensions (triangles), and contains the zero object), then $P$ is closed under shifts by integers,\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsStableUnderTransfiniteCompositionMonomorphisms\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Monomorphisms\", \"type\": \"{C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C] :\\n  IsStableUnderTransfiniteComposition.{w} (monomorphisms C)\", \"doc\": \"In any Grothendieck abelian category $\\\\mathcal{C}$, the class of monomorphisms is stable under transfinite composition. This means the property of being a monomorphism satisfies the inductive conditio\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderExtensions.mk\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Extensions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.ObjectProperty C}\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C],\\n  (∀ {S : CategoryTheory.ShortComplex C}, S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂) → P.IsClosedUnderExtensions\", \"doc\": \"If for every short exact sequence in the category, the property $P$ holds for the first and third objects $X_1$ and $X_3$ implies it holds for the middle object $X_2$, then $P$ is closed under extensi\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulated.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a category instance, zero object, integer-parameterized shift operation, preadditive structure, and pretriangulated structure requiring additive shift functors, thi\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsTriangulatedIsoClosure\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"[P.IsTriangulated] : P.isoClosure.IsTriangulated\", \"doc\": \"If a subcategory defined by a property $P$ of objects in a category $\\\\mathcal{C}$ is triangulated (i.e., closed under integer shifts, extensions, and contains the zero object), then the subcategory de\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \"[P.IsTriangulated] : P.IsTriangulatedClosed₁\", \"doc\": \"If a property $ P $ on objects of a category $ \\\\mathcal{C} $ defines a triangulated subcategory (i.e., is closed under shifts by integers, contains the zero object, and is closed under distinguished t\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: triangulated subcategory APIs require integer shift closure, and transfinite composition of abelian monomorphisms does not prove the preaisle assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"transfinite\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "preaisle|transfinite.*[eE]xtension|[eE]xtension.*transfinite",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"89\", \"text\": \"lemma innerAnodyneExtensions_eq_retracts_transfiniteCompositions :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"90\", \"text\": \"    innerAnodyneExtensions = (transfiniteCompositions.{u}\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"94\", \"text\": \"lemma innerAnodyneExtensions_eq_retracts_transfiniteCompositionsOfShape :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"95\", \"text\": \"    innerAnodyneExtensions = (transfiniteCompositionsOfShape\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"line\": \"18\", \"text\": \"Strong (inner) anodyne extensions are transfinite compositions of pushouts of coproducts\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"111\", \"text\": \"lemma anodyneExtensions_eq_retracts_transfiniteCompositions :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"112\", \"text\": \"    anodyneExtensions = (transfiniteCompositions.{u}\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"116\", \"text\": \"lemma anodyneExtensions_eq_retracts_transfiniteCompositionsOfShape :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"117\", \"text\": \"    anodyneExtensions = (transfiniteCompositionsOfShape\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the nine hits concern simplicial anodyne extensions, not derived preaisles."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-set-generated-sheaf-aisle",
@@ -71,5 +183,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-preaisle-transfinite-monomorphism-closure",
+  "worker": "stage1",
+  "summary": "Completed the preserved transfinite induction and bar-skeleton proof without changing the statement or adding nodes. Repaired the previous sheaf-only telescope citation by citing the general sequential-telescope monomorphism lemma and writing its cokernel universal property in the arbitrary Grothendieck category. Rotated the telescope triangle so extension closure applies to its middle object. Checked unbounded complexes, signs, universes, every cited statement, and inherited searches.",
+  "blueprint": "Realizes Step 2 of lem-per-artin-gabber-affine-curve: middle t-structure existence input, specifically the auxiliary assertion that a coproduct-, positive-shift-, and extension-closed preaisle contains continuous transfinite monomorphism filtrations.",
+  "tool_uses": [
+   {
+    "node": "def-sp-grothendieck-abelian",
+    "why": "Its defining exact filtered colimits and small colimits verify the bar and telescope hypotheses in the given universe."
+   },
+   {
+    "node": "def-sc-preorder-bar-total",
+    "why": "The existing general preorder bar construction specifies the columns, signs and total degree used in the auxiliary limit-stage argument."
+   },
+   {
+    "node": "lem-sc-preorder-bar-filtered-augmentation",
+    "why": "Its exact-colimit augmentation theorem identifies the unbounded ordinal bar total with the continuous colimit; it is a generic homological tool."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Its general Grothendieck statement identifies termwise coproducts with derived coproducts; no perverse-unit node supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Its generic abelian-derived triangle applies to successor quotients and the two skeletal short exact sequences."
+   },
+   {
+    "node": "lem-kun-sequential-telescope-mono",
+    "why": "Its general abelian AB5 statement supplies degreewise monicity of identity minus shift; the perverse unit has no such telescope tool."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "The rotation axiom specifies the distinguished rotated telescope triangle used for extension closure."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Its localization and shift conventions justify the skeletal quotient signs and invert the bar augmentation."
+   },
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Its universal property is used to identify the skeletal union and the telescope cokernel."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sp-grothendieck-abelian",
+  "def-sc-preorder-bar-total",
+  "lem-sc-preorder-bar-filtered-augmentation",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-kun-sequential-telescope-mono",
+  "def-weil-triangulated-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-5b178624b",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-5b178624b (reviewer sub-agent of L); spot-checked: Read in full: the item, all 9 cited statements, the parent lem-per-set-generated-sheaf-aisle (it uses the item on Mod(R) with a [-1]-shifted filtration, matching the stated closure hypotheses), Stacks derived.tex lemma-compute-colimit (093W, l.10326), and the blueprint Step 2 (motivation only; proof_origin.by=agent is correct). The statement is true and strictly smaller than the parent; it is not a restated clause. Step 1: successor stage via the SES triangle plus extension closure. Step 2: I={β<λ} is nonempty, directed and V-small; Grothendieck exactness satisfies the bar-augmentation hypotheses, so the bar total B→E_λ is a quasi-isomorphism for unbounded complexes; Q(B_p) is in V_0 by derived coproducts. Step 3: column skeleta form subcomplexes; the quotient is B_{n+1}[n+1], whose sign (-1)^{n+1}d matches the (K[1])^r=K^{r+1}, -d convention. Step 4: B^r is the colimit of the finite partial sums, q=coker u, and u is monic by lem-kun-sequential-telescope-mono (AB5 gives its finite-limit hypothesis). Step 5: the TR2 rotation W→B→W[1]→W[1] puts B in the middle, with ends in V_0. Step 6: Q inverts the quasi-isomorphism and strict fullness transfers membership. Edge cases checked: θ=0, λ=ω, uncountable cofinality, unbounded complexes, only nonnegative shifts. grep for preaisle/transfinite/hocolim over dag/nodes found no duplicate. Declared tool_uses (bar total and augmentation, derived coproducts, telescope mono, SES triangle, base definitions) are generic black boxes and are accepted. No SGA source; no new nodes; no fixes."
  }
 }
