@@ -22,7 +22,13 @@
   "sk-def-sfb-derived-tensor-hom",
   "lem-pe-internal-section-tensor-comparison",
   "def-pur-derived-internal-hom",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sfb-ringed-slice-comparison-model",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-sfb-internal-section-derived-tensor-comparison",
+  "def-sfb-internal-slice-derived-hom-comparison",
+  "def-sfb-internal-section-total-comparison"
  ],
  "proof": [
   {
@@ -206,5 +212,29 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-321d7b5cd (reviewer sub-agent of L); spot-checked: Read in full: the item, all cited node statements, and Stacks sites-cohomology 08J7, 08JA, 08J9 and 08JB at the cited labels; tags 03CV, 00YV, 03EK, 03EL and 0GMW resolve to the labels given. The statement is true, unchanged and not a duplicate: no other node states this comparison, and a grep of the DAG for 08J9/08JA finds only the scheme versions and general tools. Edge cases checked: empty X, U equal to X, and Λ = Z. Coefficients are the layer-B module objects, identified with Mod(B_sec) only through the existing equivalence. Steps 1-2 are correct: K-flat transport through the tensor comparison, and the layer-B adjunction transported across the equivalence D(F). Three faults, all repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-module-object-ringed-site-derived-comparison.json, which changes only proof, proof_deps and split_report. (1) C3, step 3: lem-sfb-derived-internal-hom-sections-model presupposes a right adjoint and does not state that the K-injective model is one; the adjunction is only in its proof. The 'ringed-site evaluation' was not tied to any statement, and the left/right tensor order was not handled. Step 3 now derives the adjunction Hom(A,H(K,N)) ≅ H^0 H(A,H(K,N)) ≅ H^0 H(A⊗K,N) ≅ Hom(A⊗K,N), using lem-pur-rhom-global-sections (in route, natural in both variables) and the currying of lem-weil-pbc-ringed-internal-hom-exact-restriction, plus the Koszul exchange; this is Stacks 08J9 'recovers equation-internal-hom'. The evaluation is now the counit, and step 4 writes out the Yoneda uniqueness of parametrized right adjoints. (2) Step 5: 'all maps are natural' was a shortcut and its source path did not exist. The step now applies Steps 1-4 on the slice, defines the module-side restriction comparison from θ^U, the restriction ρ of 08JB and θ|_U, and checks the cocycle from ρ's compatibility with successive restrictions; the source path is corrected. (3) Off-unit statements were cited without declaring tool uses. Two remain and are declared and accepted: lem-pe-internal-section-tensor-comparison and lem-weil-pbc-ringed-internal-hom-exact-restriction. sections-model and lem-sfb-localized-site-tensor-restriction are no longer cited. A DFS on the snapshot shows no new cycle. No new nodes. Details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c734d8d9d",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Third delivery; fixes F1-F3 of the f471 RETURN. F1: the slice clause now uses the framework's native local derived tensor (Mod.derivedMonoidalCategory), MonoidalClosed.internalHom (DerivedCategory.monoidalClosed, same construction as the global CondensedRing.derivedHom) and the native counit, none of them transported from S_U. SliceTensorComparison is pinned on K-flat representatives by the unique summand/pure-tensor total comparison (exists-unique with HEq). SliceHomComparison gives theta^U on all local objects with the native evaluation equation and the Step-5 restriction square (variances checked: (c K).inv.op contravariant, (c N).hom covariant); r_U is its unique lift. Global theta/evaluation clause unchanged and correct. No extra hypotheses or universe restrictions; edge cases (empty scheme, zero ring, U=X, unbounded complexes) admitted. lean.statement verbatim for the item and the 3 owned def nodes; all declarations exist; item stmt_deps only gain def nodes used in the Lean. F2: the second reading is substantive. F3: nt_compile --json clean, no errors or warnings: 31.3/3.8/47.4/16.4 s (limit 60 s)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.moduleObject_ringedSite_derived_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.internalMonoidal_eq_localization",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.internalBraiding",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.moduleObject_ringedSite_derived_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/ModuleObjectRingedSiteDerivedComparison.lean",
+  "statement": "theorem moduleObject_ringedSite_derived_comparison : ∃ (S : CoefficientClosedStructure (hom Λ X)) (T : CoefficientTensorModels.{u, u + 1, u, u + 1} (Scheme.ProEt.topology X) (ring Λ X) S) (t : TensorComparison Λ X S T) (θ : Functor.uncurry.obj (CondensedRing.derivedHom Λ X) ⋙ forward Λ X ≅ ((forward Λ X).op.prod (forward Λ X)) ⋙ hom Λ X), (∀ K N : DerivedCategory (Internal Λ X), (forward Λ X).map ((@BraidedCategory.braiding _ _ _ (internalBraiding Λ X) (((CondensedRing.derivedHom Λ X).obj (op K)).obj N) K).hom ≫ (CondensedRing.derivedTensorHomAdjunction Λ K).counit.app N) = (t.iso.hom.app (((CondensedRing.derivedHom Λ X).obj (op K)).obj N, K)) ≫ S.tensor.map (X := ((forward Λ X).obj (((CondensedRing.derivedHom Λ X).obj (op K)).obj N), (forward Λ X).obj K)) (Y := ((hom Λ X).obj (op ((forward Λ X).obj K), (forward Λ X).obj N), (forward Λ X).obj K)) (θ.hom.app (op K, N), 𝟙 ((forward Λ X).obj K)) ≫ S.evaluation ((forward Λ X).obj K) ((forward Λ X).obj N)) ∧ (∀ U : X.ProEt, ∃ (SU : CoefficientClosedStructure (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1} ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U))) (TU : CoefficientTensorModels.{u, u + 1, u, u + 1} ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) SU) (tU : SliceTensorComparison Λ X U SU TU) (d : RingedSliceEvaluationComparisons (hom Λ X) (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1} ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U)) (ringedSliceDerivedRestriction.{u + 1, u, u, u + 1, u + 1} (Scheme.ProEt.topology X) (ring Λ X) U) S SU (RingedSliceFlatRestriction.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X) U)), RingedSliceEvaluationNormalized.{u + 1, u, u, u + 1, u + 1} (Scheme.ProEt.topology X) (ring Λ X) U S T SU TU d ∧ Nonempty (SliceHomComparison Λ X U S SU TU tU d θ))",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the actual local B|U module-object category and its derived Hom on all local objects. The SliceHomComparison field includes local evaluation normalization and the module-object Hom restriction square, rather than only a composite ringed-site isomorphism. Ringed slice definitions are cited through their own definition node, existing:true, reusing the single published implementation."
  }
 }

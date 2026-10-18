@@ -19,7 +19,9 @@
   "lem-asd-proper-finite-coefficient-extension",
   "lem-amb-proper-coproducts-projection",
   "lem-pur-etale-open-derived-tensor",
-  "lem-amb-unbounded-compact-support-comparisons"
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pur-exceptional-coefficient-comparison",
+  "def-pur-open-coefficient-normalizations"
  ],
  "proof": [
   {
@@ -474,5 +476,38 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d1e390657 (reviewer sub-agent of L); spot-checked: Read the item's 14 steps, the statements of all 27 cited nodes, Stacks more-etale.tex Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings) with the projection-formula lemma before it, and the ancestor cor-pur-vector-bundle-purity, proof paragraph 2. Every cited Stacks tag resolves to the stated label. No SGA is cited and there are no new nodes. The statement and stmt_deps are unchanged, and proof_deps equals the union of the uses. Step checks: Step 3's balancing map matches the extension-by-zero presheaf and has the open-unit transpose normalization. Steps 4 and 5: lem-asd-proper-finite-coefficient-extension applies (finite rings, any input, Noetherian compactification by finite type and the open-subscheme fact), and ringed-exchange-tensor-coherence on the identity-topos square needs no cartesianness. I redid the substitutions of Steps 7, 9 and 10. Step 10: Γ in lem-sp-proper-open-coefficient-mate (étale clause only) is the same map as in lem-amb-unbounded-compact-support-comparisons. Step 12: the open base change runs the direction C_{f,v} needs, via def-weil-pbc-etale-shriek-base-change-map and lem-cbc-extension-zero-base-change. Edge cases: identity φ, empty open, identity maps, and Z/4→Z/2, where Q_X M is unbounded below, so restricting composition and refinement to M, Q_X M ∈ D^+ is correct. No duplicate in the DAG: the 0GL6 and scalar-compact-support nodes are finite-Tor, finite-free or tower special cases. I accept all 23 declared tool_uses. FIX: Step 10 transferred the result to the item's chosen compactification of g through Step 9 with input F_{f,A}M, without checking that F_{f,A}M and Q_Y F_{f,A}M are bounded below, which Step 9 requires. I added that check: F_{f,A}M is in D^+ because a bounded-below injective resolution is K-injective [def-weil-pbc-direct-image], and Q_Y F_{f,A}M ≅ F_{f,A'} Q_X M is in D^+ by Step 4. def-weil-pbc-direct-image is added to that step's uses and to proof_deps. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-pur-etale-compact-scalar-coherence.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4e1f9b66",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after the RETURN of 7aa75df5b5a6. The Lean module is byte-identical to the one already found correct in every clause: iso on all inputs, ordered projection square, refinement and composition on the D+ pair (M and Q M), open restriction via ofIsPullback, unit laws; edge cases and universes ok. F1 fixed: the item's stmt_deps replace lem-sf-proper-open-coefficient-refinement with new def node def-pur-open-coefficient-normalizations, which points (existing:true) to exactly the plain defs properOpenCoefficientPullbackIso and properOpenCoefficientOpenInverse (ProperOpenCoefficientRefinement.lean l.54/l.67). Its statement is verbatim from the file, its TeX matches the Lean, it claims no invertibility, all H12 fields are ok, there is no cycle, and the refinement theorem stays in proof_deps. Mechanical finding judged PASS: the statement genuinely uses objects constructed by lem-pur-exceptional-coefficient-comparison (tensorIso = siteTensorIso_existsUnique.choose, tensorIso_existsUnique.choose, unitIso = unitIso_existsUnique.choose); the exceptional comparison itself is not used. No hollow defs, all six theorems sorry, source/blueprint docstrings present. nt_compile --json clean in 9.0 s, exit 0, matching the delivery's 8.3/9.5 s."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleCompactScalarCoherence",
+  "declaration": "AlgebraicGeometry.Etale.etaleCompactScalarCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactScalarOpen_normalization",
+   "AlgebraicGeometry.Etale.compactScalarMap_naturality",
+   "AlgebraicGeometry.Etale.compactScalarMap",
+   "AlgebraicGeometry.Etale.compactScalarProjection",
+   "AlgebraicGeometry.Etale.compactScalarProjectionTarget",
+   "AlgebraicGeometry.Etale.compactScalarChosenMap",
+   "AlgebraicGeometry.Etale.etaleCompactScalarCoherence",
+   "AlgebraicGeometry.Etale.etaleCompactScalarComposition",
+   "AlgebraicGeometry.Etale.etaleCompactScalarOpenRestriction",
+   "AlgebraicGeometry.Etale.CompactScalarTensorUnitLaw",
+   "AlgebraicGeometry.Etale.CompactScalarPullUnitLaw",
+   "AlgebraicGeometry.Etale.etaleCompactScalarUnit"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleCompactScalarCoherence.lean",
+  "statement": "theorem etaleCompactScalarCoherence [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : (∀ M : DerivedCategoryModule A X, IsIso ((compactScalarMap φ c).app M)) ∧ (∀ (K : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X), (scalarExtension φ Y).map (compactScalarProjection A c K M) ≫ (compactScalarMap φ c).app (((derivedTensor (ModuleCat.{u + 1} A) X).obj ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)).obj M) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c).map (compactScalarProjectionTarget φ f K M) = (ExceptionalCoefficients.tensorIso φ Y).hom.app (K, (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj M) ≫ ((derivedTensor (ModuleCat.{u + 1} B) Y).obj ((scalarExtension φ Y).obj K)).map ((compactScalarMap φ c).app M) ≫ compactScalarProjection B c ((scalarExtension φ Y).obj K) ((scalarExtension φ X).obj M)) ∧ (∀ (d : Compactification f) (M : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))), (∃ N : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)), N.obj = (scalarExtension φ X).obj M.obj) → (scalarExtension φ Y).map ((rightDerivedLowerShriekOfCompactificationIso A c d).hom.app M.obj) ≫ (compactScalarMap φ d).app M.obj = (compactScalarMap φ c).app M.obj ≫ (rightDerivedLowerShriekOfCompactificationIso B c d).hom.app ((scalarExtension φ X).obj M.obj))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The listed declarations state the full package: canonical open-unit normalization, natural scalar map on each compactification, all-input isomorphism and ordered projection coherence, bounded-below-pair refinement and composition, all-input open restriction, and multiplication-unit coherence. The scalar tensor, scalar unit and componentwise compact-support map reuse the already published canonical helpers of ExceptionalCoefficients, not its exceptional-pullback comparison theorem. The new definition node def-pur-open-coefficient-normalizations records precisely the two plain proper/open helper definitions used by the statement. The refinement theorem stays only in proof_deps. The landed exceptional coefficient node remains a genuine statement dependency because tensorIso and unitIso are selected from its uniquely normalized existence theorems; its exceptional-pullback comparison is not assumed."
  }
 }
