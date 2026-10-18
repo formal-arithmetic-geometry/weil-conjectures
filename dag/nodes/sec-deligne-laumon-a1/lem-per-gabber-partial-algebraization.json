@@ -16,9 +16,123 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}A$. Apply [lem-per-cohen-gabber-finite-presentations] to obtain $A\\hookrightarrow A'$, $\\Lambda$, $r$, $R=\\Lambda[[t_1,\\ldots,t_r]]\\hookrightarrow A'$ and $f$ as in its statement. The normal domain $A'$ is finite over the complete Noetherian local ring $A$, hence is itself Noetherian complete local by [lem-weil-pbc-finite-over-complete-local-product]. The injection $A\\to A'$ gives a finite morphism by [def-weil-finite-integral-morphism], hence an integral morphism by [pqf-lem-finite-integral-lft]; its map on spectra is surjective by [lem-weil-pbc-integral-injective-lying-over]. In equal characteristic this map is the identity. Put $D=\\Lambda[[t_1,\\ldots,t_{r-1}]]$. The presentation lemma gives that $D$ is complete regular Noetherian local, and its dimension is $d-1$ in both cases: $r-1=d-1$ over a field, and $1+(r-1)=d-1$ over a discrete valuation ring. Its residue field is separably closed. Also $\\ell$ is a unit in $D$: the residue characteristic is that of $A'$, a finite residue extension of that of $A$, and is different from $\\ell$.",
+   "uses": [
+    "lem-per-cohen-gabber-finite-presentations",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "pqf-lem-finite-integral-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV 2.1.1, 4.2.2 and 4.2.5; V 2.2.2, 3.1.3 and Remark 3.1.4. Only a finite surjection, not a prime-to-ell degree, is required here."
+   }
+  },
+  {
+   "text": "Replace $f$ by $f t_r$. This remains nonzero modulo $\\mathfrak m_\\Lambda$, belongs to $\\mathfrak m_R$, and the finite map is still etale after inverting it, because that localization also inverts the original $f$. More explicitly, the open immersion of the inverse image of $D(ft_r)$ into the inverse image of $D(f)$ is etale; compose with the etale map to $D(f)$ and cancel the etale open immersion $D(ft_r)\\to D(f)$, using (1)–(3) of [lem-weil-pbc-etale-composition-cancellation]. Use [lem-per-weierstrass-henselian-cylinder] on this element. Re-express the presentation $R\\to A'$ in the coordinates of that lemma (equivalently compose it with the inverse coordinate automorphism). It supplies a distinguished polynomial $g\\in D[T]$, $R_0=D[T]$, $\\mathfrak q=(\\mathfrak m_D,T)$, and $H=(R_0)_{\\mathfrak q}^{h}$ with $(H,gH)$ henselian, $H$ Noetherian, and $\\widehat H_{gH}=R=\\widehat H_{\\mathfrak m_H}$. The map $R\\to A'$ is etale away from $g$: $c(ft_r)=ug$ with $u$ a unit, so the corresponding principal open is exactly $D(g)$. This also covers mixed dimension $d=2$, where $r=1$ and there are no coordinates to change.",
+   "uses": [
+    "lem-per-weierstrass-henselian-cylinder",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose V 1.1.1, 1.1.3, 1.2.3 and 2.2.3; the same cylinder construction applies to the mixed-characteristic presentation of IV 4.2.2."
+   }
+  },
+  {
+   "text": "Apply [lem-per-elkik-finite-etale-away-completion] to the Noetherian henselian pair $(H,gH)$. Its $g$-adic completion is the ring $R$ from Step 2, and the finite $R$-algebra $A'$ is etale outside $V(g)$. Thus there is a finite $H$-algebra $C$ and an $R$-algebra isomorphism $R\\otimes_H C\\cong A'$. No smoothness at points of $V(g)$ is assumed or used.",
+   "uses": [
+    "lem-per-elkik-finite-etale-away-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose V Theorem 1.2.4 and its application in 2.2.3."
+   }
+  },
+  {
+   "text": "Use [lem-per-finite-henselian-algebra-local-model] with the Noetherian base $D$, $R_0=D[T]$, the closed point $\\mathfrak q=(\\mathfrak m_D,T)$, and the finite $H$-algebra $C$ of Step 3. Its residue-field hypothesis holds because $\\kappa(\\mathfrak q)=D/\\mathfrak m_D$ is separably closed. Its completed-tensor hypothesis holds because $\\widehat H_{\\mathfrak m_H}=R$ and $R\\otimes_H C\\cong A'$ is a nonzero local domain. We obtain a Noetherian strictly henselian local ring $C$, a finite-type $D$-scheme $Z=\\operatorname{Spec}F$, and a geometric closed point $\\bar z$ over the closed point of $\\operatorname{Spec}D$, with $\\operatorname{Spec}C\\cong Z_{(\\bar z)}$. This is the strict localization itself, not merely an ordinary local ring with the same completion.",
+   "uses": [
+    "lem-per-finite-henselian-algebra-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose V 2.2.7, and the strict-local formulation of Expose XVII 6.5, printed p.300."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-completion-finite-extension] to the finite map $H\\to C$ at $\\mathfrak m_H$. Since $C$ is local, there is exactly one prime over $\\mathfrak m_H$: any such prime is maximal by [pqf-lem-finite-integral-lft] and [lem-weil-pbc-integral-prime-over-maximal-maximal], and its maximal ideal lies over $\\mathfrak m_H$ by [lem-weil-pbc-finite-algebra-local-radical]. The completion theorem therefore identifies $\\widehat H\\otimes_H C$ with the maximal-ideal completion $\\widehat C$, as algebras over $C$. Combining this identification with Step 3 gives $A'\\cong\\widehat C$. Thus $X'=\\operatorname{Spec}A'\\cong\\widehat{Z_{(\\bar z)}}$, compatibly with the canonical completion map to $Z_{(\\bar z)}$.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "pqf-lem-finite-integral-lft",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose V 2.2.3 (both completion topologies) and 2.2.7; Stacks algebra.tex, Tag 07N9, lemma-completion-finite-extension."
+   }
+  },
+  {
+   "text": "The base $D$ is excellent by [lem-per-complete-local-excellence]. Since $F$ is finite type over $D$, [lem-exc-finite-type-localization-excellent] makes $Z$ Noetherian excellent. Apply [lem-per-regular-strict-local-model] to the identity regular morphism $Z\\to Z$ at $\\bar z$: the identity is flat and has field fibres, which remain fields after extension of the residue field. That node gives that $Z_{(\\bar z)}=\\operatorname{Spec}C$ is Noetherian excellent. In particular $C$ is a G-ring by [def-exc-excellent-ring]. Now [lem-weil-pbc-g-ring-completion-regular], for the ideal $\\mathfrak m_C$, says precisely that the canonical completion morphism $X'=\\operatorname{Spec}\\widehat C\\to\\operatorname{Spec}C$ is flat with geometrically regular fibres.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-regular-strict-local-model",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-g-ring-completion-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, final paragraph of 6.5; Stacks more-algebra.tex, Tags 07QW (complete local excellence), 07QU (finite type and localization), and 0AH2 (regular completion of a G-ring)."
+   }
+  },
+  {
+   "text": "Excellence implies universal catenarity by [def-exc-excellent-ring]. The Noetherian excellent local scheme $Z_{(\\bar z)}$ therefore admits a dimension function by [lem-per-local-dimension-function-calculus]. Together with Steps 1 and 5 this gives every asserted property, with $S=\\operatorname{Spec}D$ and the already constructed finite-type map $Z\\to S$.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-per-local-dimension-function-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV Proposition 2.1.4 and Theorem 2.2.1; Expose XVII 6.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-finite-integral-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-cohen-gabber-finite-presentations",
+  "lem-per-complete-local-excellence",
+  "lem-per-elkik-finite-etale-away-completion",
+  "lem-per-finite-henselian-algebra-local-model",
+  "lem-per-local-dimension-function-calculus",
+  "lem-per-regular-strict-local-model",
+  "lem-per-weierstrass-henselian-cylinder",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "pqf-lem-finite-integral-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose V 1.1.1–1.2.4, 2.2.2–2.2.7, 3.1.3–3.1.4; Expose IV 4.2.2; Expose XVII final paragraph 6.5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,7 +164,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-local-duality-general",
@@ -62,7 +176,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof, Step 3: the local duality input for the Verdier lower-bound argument; Partial algebraization of a complete normal strictly local scheme",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general.",
    "via": [
     "lem-per-gabber-local-duality-general",
     "lem-per-potential-local-duality",
@@ -72,5 +186,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-gabber-partial-algebraization",
+  "worker": "stage1",
+  "summary": "Split the geometric partial algebraization into Cohen–Gabber power-series presentations, a Weierstrass henselian cylinder, Elkik finite-algebra descent, finite-type strict local models, and existing completion/excellence/dimension-function results. The mixed-characteristic cover uses IV 4.2.2 because no degree constraint occurs in this item.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Finite normal covers of the complete local input remain complete local. This general commutative-algebra tool is not supplied by a node of the perverse-sheaf unit."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Translate a module-finite injection into a finite morphism. This general commutative-algebra tool is not supplied by a node of the perverse-sheaf unit."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-lying-over",
+    "why": "Surjectivity on spectra for the injective finite extension. This general commutative-algebra tool is not supplied by a node of the perverse-sheaf unit."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Identify the canonical completion of the finite henselian algebra with base change to the completed base. This general commutative-algebra tool is not supplied by a node of the perverse-sheaf unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-local-radical",
+    "why": "Identify the single prime of the local finite algebra lying over the base maximal ideal. This general commutative-algebra tool is not supplied by a node of the perverse-sheaf unit."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Finite-type stability of excellence for the algebraized scheme. This general commutative-algebra tool is not supplied by a node of the perverse-sheaf unit."
+   },
+   {
+    "node": "def-exc-excellent-ring",
+    "why": "Read off the G-ring and universal-catenarity clauses. This general commutative-algebra tool is not supplied by a node of the perverse-sheaf unit."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "Regularity of the canonical completion morphism. This general commutative-algebra tool is not supplied by a node of the perverse-sheaf unit."
+   },
+   {
+    "node": "pqf-lem-finite-integral-lft",
+    "why": "Finite morphisms are integral, used for lying over and the primes of a finite algebra. General tool; the perverse-sheaf unit does not supply this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "why": "A prime of the finite algebra over the maximal ideal is maximal, needed to reduce the completion product to one factor. General tool; the perverse-sheaf unit does not supply this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Restriction of the etale map to a smaller principal open, by open-immersion etaleness, composition and cancellation; a general scheme-theoretic tool not supplied by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-exc-finite-type-localization-excellent",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "pqf-lem-finite-integral-lft",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-9a2161507",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-9a2161507 (reviewer sub-agent of L); spot-checked: Read the item, the four new nodes and every cited statement against ILO IV 2.1.1, IV 4.2.2/4.2.5, V 1.1.1, 1.1.3, 1.2.3, 1.2.4, V 2.2.2–2.2.8, V 3.1.3–3.1.4, XVII 6.5 and Stacks 032D. The statement is unchanged from live. XVII 6.5 needs only a finite surjection, so using IV 4.2.2 in mixed characteristic is legitimate; no prime-to-ℓ claim is made. Steps 1–7 check out. Step 1: complete local A′; surjectivity via finite⇒integral and injective lying-over; dim D = d−1 in both cases; ℓ is a unit because the residue field has characteristic ≠ ℓ. Step 2: f·t_r ∈ m_R stays nonzero mod m_Λ; the étale restriction is done via composition/cancellation; c⁻¹ moves the étale locus to D(g). Step 3: Elkik for the Noetherian henselian pair (H,gH). Step 4: all local-model hypotheses hold, giving C ≅ O^sh_{Z,z̄}. Step 5: exactly one prime over m_H, so Ĥ⊗C = Ĉ. Step 6: excellence via complete-local excellence, finite type, and the 'both excellent' clause of regular-strict-local-model applied to id; the G-ring completion is regular. Step 7: dimension-function clause. The new nodes are true and tested on small cases: Cohen–Gabber (k[[x,y]], W[[x]]); cylinder (T², p+T; f=p excluded); Elkik = ILO V 1.2.4; local model (H, H[x]/(x²−T), inseparable residue extension, H×H excluded). The DAG has no duplicates of them, none restates a clause of the item, there is no cycle, and no SGA is cited. tool_uses are generic commutative algebra and accepted. Batch-5 flags accepted: lem-trf-regular-ring-universally-catenary (regular ⇒ universally catenary) is pure algebra outside both assumptions, and def-weil-pbc-henselization-at-prime is a general definition. FIX: the source place of lem-per-cohen-gabber-finite-presentations claimed ILO V 2.2.2 covers equal characteristic zero, but V 2.2.2 only refers to the characteristic-p IV 2.1.1. Replaced with Stacks Tag 032D (field case) plus automatic generic étaleness in characteristic 0; the statement is unchanged. Advisory: the report mentions a citations.json that is not in the commit.; 1 file(s) fixed by the reviewer"
  }
 }

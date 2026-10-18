@@ -1,0 +1,89 @@
+{
+ "id": "lem-per-finite-henselian-algebra-local-model",
+ "kind": "statement",
+ "title": "Finite algebras over a local henselization have finite-type strict local models",
+ "statement": "Let $D$ be a commutative Noetherian ring, let $R_0$ be a finite-type $D$-algebra [def-weil-pbc-noetherian-ring, def-weil-pbc-finite-type-algebra], and let $\\mathfrak q\\subset R_0$ be maximal with separably closed residue field $\\kappa(\\mathfrak q)$ [def-weil-residue-field, def-kun-separably-closed]. Let $H=((R_0)_{\\mathfrak q})^h$ be the local henselization [def-weil-pbc-henselization-at-prime], let $\\widehat H$ be its maximal-ideal completion [def-weil-pbc-adic-completion], and let $C$ be a commutative $H$-algebra finite as an $H$-module [def-weil-finitely-generated-module]. Suppose $\\widehat H\\otimes_H C$ is a nonzero local ring [def-weil-pbc-module-tensor-product]. Then $C$ is a Noetherian strictly henselian local ring [def-weil-pbc-henselian-terminology]. There exist a finite-type $R_0$-algebra $F$, a maximal ideal $\\mathfrak z\\subset F$ over $\\mathfrak q$, and a geometric point $\\bar z$ of $Z=\\operatorname{Spec}F$ supported at $\\mathfrak z$ [def-weil-geometric-point, def-weil-affine-spectrum], with an isomorphism of $R_0$-algebras $C\\cong\\mathcal O^{\\mathrm{sh}}_{Z,\\bar z}$ [def-weil-pbc-strict-henselization-limit]. In particular $Z\\to\\operatorname{Spec}D$ is finite type and the image of $\\mathfrak z$ in $\\operatorname{Spec}R_0$ is the specified closed point $\\mathfrak q$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose V, proof 2.2.7 (finite algebra descended from the local henselization); strict-local form in Expose XVII, final paragraph 6.5. Algebraic identification: Stacks algebra.tex Tag 05WP, lemma-quasi-finite-henselization; locality and henselianity: Tag 04GH, lemma-finite-over-henselian. The completed tensor being local selects the unique factor."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-residue-field",
+  "def-kun-separably-closed",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-geometric-point",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite algebra over henselization of local ring descends to etale neighborhood with same local henselization and completion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardEtale R S] {Sₛ : Type u_4} [inst_4 : CommRing Sₛ] [inst_5 : Algebra S Sₛ] [inst_6 : Algebra R Sₛ]\\n  [IsScalarTower R S Sₛ] (s : S) [IsLocalization.Away s Sₛ], Algebra.IsStandardEtale\", \"doc\": \"If $ S $ is a standard étale algebra over a commutative ring $ R $, and $ S_\\\\mathfrak{s} $ is the localization of $ S $ at the powers of an element $ s \\\\in S $, then $ S_\\\\mathfrak{s} $ is also a stand\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits give henselian root lifting and local etale properties; none descends a finite algebra over a henselization to a finite-type strict local model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite local algebra over henselian ring with local completion is henselian and completion equals completion of finite type local model",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits give henselian root lifting and local etale properties; none descends a finite algebra over a henselization to a finite-type strict local model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"Module.Finite\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits give henselian root lifting and local etale properties; none descends a finite algebra over a henselization to a finite-type strict local model"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*finite|finite.*henseli|henseli.*complet|complet.*henseli",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Henselian.lean\", \"line\": \"37\", \"text\": \"* `IsAdicComplete.henselianRing`:\"}\n  {\"file\": \"Mathlib/RingTheory/Henselian.lean\", \"line\": \"38\", \"text\": \"  a ring `R` with ideal `I` that is `I`-adically complete is Henselian at `I`\"}\n  {\"file\": \"Mathlib/RingTheory/Henselian.lean\", \"line\": \"169\", \"text\": \"/-- A ring `R` that is `I`-adically complete is Henselian at `I`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Henselian.lean\", \"line\": \"170\", \"text\": \"instance (priority := 100) IsAdicComplete.henselianRing (R : Type*) [CommRing R] (I : Ideal R)\"}\n  {\"file\": \"Mathlib/RingTheory/Henselian.lean\", \"line\": \"171\", \"text\": \"    [IsAdicComplete I R] : HenselianRing R I where\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits give henselian root lifting and local etale properties; none descends a finite algebra over a henselization to a finite-type strict local model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite algebra over local henselization descends to finite type algebra local ring same residue field completion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u) [CommRing R] [IsLocalRing R] :\\n  TFAE\\n    [HenselianLocalRing R,\\n      ∀ f : R[X],\\n        f.Monic →\\n          ∀ a₀ : ResidueField R, aeval a₀ f = 0 → aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀,\\n      ∀ {K : Type u} [Field K],\\n        ∀ (φ : R →+* K),\\n         \", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"Algebra.QuasiFinite.casesOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure such that for every prime ideal $ P $ in $ R $, the tensor product of the resi\"}\n  {\"name\": \"IsLocalRing.finite_residueField_of_compactSpace\", \"module\": \"Mathlib.Topology.Algebra.Ring.Compact\", \"type\": \": Finite (ResidueField R)\", \"doc\": \"If $ R $ is a compact local ring, then its residue field (the quotient of $ R $ by its unique maximal ideal) is a finite field.\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib.RingTheory.RingHom.EssFiniteType\", \"type\": \"{f : R →+* S} [IsLocalRing R] [IsLocalRing S] [IsLocalHom f] (hf : f.EssFiniteType) :\\n  (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"[Module.Finite R S] (hfin : Finite (ResidueField R)) : Finite (ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits give henselian root lifting and local etale properties; none descends a finite algebra over a henselization to a finite-type strict local model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-gabber-partial-algebraization",
+  "date": "2026-10-19",
+  "group": "Q36"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Finite algebras over a local henselization have finite-type strict local models",
+   "via": [
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
