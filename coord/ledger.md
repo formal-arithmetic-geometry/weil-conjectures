@@ -15997,3 +15997,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/E8/Sheaf.AlgebraicGeometry.NoetherianSymmetricProductFiniteSurjective (stage 3; reviewer PASS; first push; landing 20261018T062739-L-645597 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/E8/Sheaf.AlgebraicGeometry.SpecializationCospecializationArrows (stage 3; reviewer PASS; first push; landing 20261018T062740-L-645919 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/E9/Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations (stage 3; reviewer PASS; first push; landing 20261018T062740-L-646295 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/F1/Sheaf.AlgebraicGeometry.LocallyNoetherianComponentsLocallyFinite (stage 3; reviewer PASS; first push; landing 20261018T062741-L-646596 (proof); batch 20261018T062645; modules 1; new nodes 0)

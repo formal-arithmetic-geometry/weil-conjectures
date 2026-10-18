@@ -43,6 +43,26 @@ theorem exists_open_finite_irreducibleComponents (X : Scheme.{u}) [IsLocallyNoet
     (x : X) :
     ∃ U : X.Opens, x ∈ U ∧
       {Z : Set X | Z ∈ irreducibleComponents X ∧ (Z ∩ (U : Set X)).Nonempty}.Finite := by
-  sorry
+  obtain ⟨U, hU, hxU, -⟩ := exists_isAffineOpen_mem_and_subset (U := ⊤) (x := x)
+    (by trivial)
+  have : IsNoetherianRing Γ(X, U) := IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
+  have : TopologicalSpace.NoetherianSpace U := noetherianSpace_of_isAffineOpen U hU
+  let ι : U → X := Subtype.val
+  refine ⟨U, hxU, Set.Finite.of_injOn (f := fun Z : Set X ↦ ι ⁻¹' Z) ?_ ?_
+    (TopologicalSpace.NoetherianSpace.finite_irreducibleComponents (α := U))⟩
+  · intro Z hZ
+    apply preimage_mem_irreducibleComponents hZ.1 U.isOpen.isOpenEmbedding_subtypeVal
+    simpa only [Subtype.range_coe_subtype, Set.ofPred_mem_eq] using hZ.2
+  · intro Z hZ W hW hZW
+    have hclosure (C : Set X)
+        (hC : C ∈ irreducibleComponents X ∧ (C ∩ (U : Set X)).Nonempty) :
+        closure (ι '' (ι ⁻¹' C)) = C := by
+      apply closure_image_preimage_of_isPreirreducible _
+        U.isOpen.isOpenEmbedding_subtypeVal.isOpenMap _ _ hC.1.1.2
+        (isClosed_of_mem_irreducibleComponents _ hC.1)
+      obtain ⟨y, hyC, hyU⟩ := hC.2
+      exact ⟨⟨y, hyU⟩, hyC⟩
+    exact (hclosure Z hZ).symm.trans ((congrArg (fun C ↦ closure (ι '' C)) hZW).trans
+      (hclosure W hW))
 
 end AlgebraicGeometry
