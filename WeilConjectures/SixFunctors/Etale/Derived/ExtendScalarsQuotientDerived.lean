@@ -236,6 +236,23 @@ theorem nonempty_iso_reductionModIdeal_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
   exact ⟨(Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).mapIso
     e.symm ≪≫ e'⟩
 
+/-- **Internal adjunction for a derived base change.** For a derived base change
+`η : K ⟶ Res K'` of `K` along `Λ ⟶ Λ ⧸ J` and `N ∈ D(X_ét, Λ ⧸ J)`,
+`RHom_Λ(K, Res N) ≅ Res RHom_{Λ ⧸ J}(K', N)`
+(`AlgebraicGeometry.Etale.derivedHomCompIsoOfAdjunction`). -/
+theorem nonempty_iso_derivedHom_restrictScalars_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
+    {K' : 𝐃(X, Λ ⧸ J)}
+    {η : K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).obj K'}
+    (hη : Sheaf.IsDerivedBaseChange η) (N : 𝐃(X, Λ ⧸ J)) :
+    Nonempty (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj
+        ((Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).obj N) ≅
+      (Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).obj
+        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ J)) X).obj (op K')).obj N)) := by
+  obtain ⟨eK, -⟩ := exists_iso_leftDerived_of_isDerivedBaseChange hη
+  exact ⟨(derivedHomCompIsoOfAdjunction (derivedExtendScalarsAdjunction J X) K).app N ≪≫
+    (Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).mapIso
+      (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ J)) X).mapIso eK.symm.op).app N)⟩
+
 end BaseChange
 
 end AlgebraicGeometry.Etale

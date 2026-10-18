@@ -142,14 +142,19 @@ noncomputable def derivedRestrictScalarsRingEquivIso :
     Functor.mapDerivedCategoryNatIso (restrictScalarsIdIso J (RingHom.id R) rfl) ≪≫
     Functor.mapDerivedCategoryIdIso _
 
+/-- For a ring isomorphism `e : R ≃+* S` and `K ∈ D(J, R)`, `Res_e Res_{e⁻¹} K ≅ K`. -/
+noncomputable def derivedRestrictScalarsRingEquivObjIso
+    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
+    (derivedRestrictScalars J e.toRingHom).obj ((derivedRestrictScalars J e.symm.toRingHom).obj K) ≅
+      K :=
+  (derivedRestrictScalarsRingEquivIso e).app K
+
 /-- Along a ring isomorphism `e : R ≃+* S`, the restriction of scalars `Res_{e⁻¹} K` along `e⁻¹`
 is a derived base change of `K`: the comparison `K ≅ Res_e Res_{e⁻¹} K` is universal, since
 `Res_e` is an equivalence. -/
 lemma isDerivedBaseChange_ringEquiv (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    IsDerivedBaseChange (f := e.toRingHom) (K := K)
-      (K' := (derivedRestrictScalars J e.symm.toRingHom).obj K)
-      ((derivedRestrictScalarsRingEquivIso e).inv.app K) :=
-  fun _ ↦ ((derivedRestrictScalarsRingEquivIso e).app K).homFromEquiv.bijective.comp
+    IsDerivedBaseChange (f := e.toRingHom) (derivedRestrictScalarsRingEquivObjIso e K).inv :=
+  fun _ ↦ (derivedRestrictScalarsRingEquivObjIso e K).homFromEquiv.bijective.comp
     ((Functor.FullyFaithful.ofFullyFaithful
       (derivedRestrictScalars J e.toRingHom)).map_bijective _ _)
 
