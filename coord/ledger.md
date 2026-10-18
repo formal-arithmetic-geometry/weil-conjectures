@@ -15959,3 +15959,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/C7/Sheaf.AlgebraicGeometry.NagataQCOpenEqEventually (stage 3; reviewer PASS; first push; landing 20261018T062718-L-638199 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/C8/Sheaf.AlgebraicGeometry.FiniteConstructibleDirectImage (stage 3; reviewer PASS; first push; landing 20261018T062719-L-638390 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/C8/Sheaf.AlgebraicGeometry.NagataRelativeGluingDatumDescends (stage 3; reviewer PASS; first push; landing 20261018T062719-L-638570 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/C9/Sheaf.AlgebraicGeometry.FiniteFinitePresentationPushforwardConstructible (stage 3; reviewer PASS; first push; landing 20261018T062720-L-638695 (proof); batch 20261018T062645; modules 1; new nodes 1)

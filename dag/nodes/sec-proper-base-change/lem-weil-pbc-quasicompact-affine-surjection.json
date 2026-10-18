@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-quasicompact-affine-surjection",
+ "kind": "statement",
+ "title": "A quasi-compact scheme is the surjective image of an affine scheme",
+ "statement": "Let X be a scheme [def-pc-scheme]. Its underlying space is quasi-compact [def-weil-pbc-quasi-compact-scheme] if and only if there exist a commutative ring R and a scheme morphism a : Spec R → X [def-weil-affine-spectrum] which is surjective on underlying points [def-weil-surjective-morphism]. The empty scheme is allowed (take the zero ring).",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Section section-quasi-compact: extract a finite affine open cover; Lemma lemma-disjoint-union-affines: its finite disjoint union is affine. Formal result: Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, compactSpace_iff_exists, lines 196–200."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib AlgebraicGeometry.compactSpace_iff_exists, whose equivalence is precisely the statement after expanding quasi-compactness and surjectivity. Its forward proof takes a finite affine open subcover and the spectrum of sections of its affine disjoint union; its reverse proof uses the continuous surjective image of the quasi-compact spectrum. The construction includes the empty coproduct, whose section ring is the zero ring.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "place": "compactSpace_iff_exists, lines 196–200"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a quasi compact scheme admits a surjective morphism from an affine scheme",
+   "results": "Exact match AlgebraicGeometry.compactSpace_iff_exists in Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact. Signature: CompactSpace X ↔ ∃ R, ∃ f : Spec R ⟶ X, Function.Surjective f.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every quasi compact scheme admits a surjective morphism from an affine scheme",
+   "results": "Exact match AlgebraicGeometry.compactSpace_iff_exists, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact. Also the more general Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.compactSpace_iff_exists",
+   "results": "Exact match: {X : Scheme} : CompactSpace X ↔ ∃ R, ∃ f : Spec R ⟶ X, Function.Surjective f.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma compactSpace_iff_exists",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:196. Read lines 196–200; the forward implication constructs the spectrum of sections of a finite disjoint union of affine opens. Blueprint searches affine surjection and affine cover found no duplicate statement.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.compactSpace_iff_exists",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "how": "Exact equivalence, with CompactSpace expressing quasi-compactness and Function.Surjective expressing surjectivity on points."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFinitePresentationPushforwardConstructible",
+  "group": "C9",
+  "date": "2026-10-18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Tag 095R affine reduction in the finite pushforward constructibility input; realization of the affine reduction by a single affine surjection.",
+   "via": [
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact",
+  "declaration": "AlgebraicGeometry.compactSpace_iff_exists",
+  "statement": "lemma compactSpace_iff_exists {X : Scheme.{u}} :\n    CompactSpace X ↔ ∃ R, ∃ f : Spec R ⟶ X, Function.Surjective f",
+  "branch": "mathlib",
+  "by": "C9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261018T062720-L-638695",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261018T062720-L-638695",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

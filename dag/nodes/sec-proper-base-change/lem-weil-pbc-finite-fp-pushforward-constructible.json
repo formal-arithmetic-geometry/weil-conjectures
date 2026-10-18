@@ -31,20 +31,21 @@
  ],
  "proof": [
   {
-   "text": "Reduce to affine opens of $Y$. For any affine open $U\\subset Y$, its inverse image $V=f^{-1}(U)$ is affine by finiteness [def-weil-finite-integral-morphism]. The restricted map $h:V\\to U$ is finite by the affine-open definition of finiteness. To check local finite presentation at $x\\in V$, choose an original finite-presentation chart $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ about $x$ and $f(x)$. Choose a principal open $D(t)$ about $f(x)$ contained in $U\\cap\\operatorname{Spec}A$. Its inverse image in this chart is $\\operatorname{Spec}B_t$, contained in $V$, and a presentation $B=A[z_1,\\ldots,z_n]/(r_1,\\ldots,r_m)$ localizes to $B_t=A_t[z_1,\\ldots,z_n]/(r_1,\\ldots,r_m)$. This supplies the required chart for $h$ at every $x$. Quasi-compactness and quasi-separatedness restrict over an open target: the inverse images of its affine opens, and of affine opens in the diagonal target, are the same as before. Thus $h$ is finitely presented. By [lem-weil-pbc-constructible-etale-module-sheaf-comparison] and [prop-constructible-pullback], $F|_V$ is constructible. Finite exchange identifies $(f_*F)|_U$ with $h_*(F|_V)$; alternatively their module sections are both $W\\mapsto F(W\\times_Y X)$ for $W\\to U$ etale. By [lem-weil-pbc-constructible-qcqs-affine-local], proving the assertion for every such affine pair proves the original assertion. Work henceforth with $X,Y$ affine.",
+   "text": "By [lem-weil-pbc-quasicompact-affine-surjection], choose a surjection a₀ : Spec R → Y. Base change f along a₀, with projections b₀ : X₀ → X and f₀ : X₀ → Spec R. The map f₀ is finite and locally of finite presentation by base change [lem-weil-pbc-finite-morphism-permanence, def-sbc-locally-finite-presentation], and X₀ is affine. The inverse image b₀^*F is constructible by [prop-constructible-pullback] and [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. Finite exchange [lemma-weil-pbc-finite-exchange] identifies a₀^*(f_*F) with f₀_*b₀^*F. Therefore constructibility for finite finitely presented morphisms of affine schemes implies the original assertion by isomorphism invariance [lemma-constructible-iso-invariance] and surjective descent [lem-weil-pbc-constructible-module-surjective-descent]. All schemes to which descent is applied are qcqs: Y by hypothesis and Spec R by affineness. No flatness is needed. Work henceforth with X,Y affine.",
    "uses": [
-    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-quasicompact-affine-surjection",
+    "lem-weil-pbc-finite-morphism-permanence",
     "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "lemma-weil-pbc-finite-exchange",
-    "lem-weil-pbc-constructible-qcqs-affine-local",
-    "def-weil-pbc-direct-image"
+    "lemma-constructible-iso-invariance",
+    "lem-weil-pbc-constructible-module-surjective-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "095R first sentence; 095F (lemma-constructible-local); 095E"
+    "place": "Tag 095R affine reduction, implemented via Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact.compactSpace_iff_exists and the same finite exchange and surjective descent as the next reduction."
    }
   },
   {
@@ -102,7 +103,7 @@
    }
   },
   {
-   "text": "Finite exchange [lemma-weil-pbc-finite-exchange] in the cartesian square for $a$ identifies $a^{-1}(f_*F)$ with $f\\prime_*b^{-1}F=f\\prime_*F\\prime$. Thus $a^{-1}(f_*F)$ is constructible, by [lemma-constructible-iso-invariance] for $\\mathrm{ModuleCat}(\\Lambda)$-valued sheaves, and the two directions of [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. Apply [lem-weil-pbc-constructible-module-surjective-descent] to $a:Y\\prime\\to Y$: it is surjective and both schemes are affine, hence qcqs. This proves constructibility of $f_*F$ in the affine case, and Step 1 proves it on the original qcqs $Y$.",
+   "text": "Finite exchange [lemma-weil-pbc-finite-exchange] in the cartesian square for $a$ identifies $a^{-1}(f_*F)$ with $f\\prime_*b^{-1}F=f\\prime_*F\\prime$. Thus $a^{-1}(f_*F)$ is constructible, by [lemma-constructible-iso-invariance] for $\\mathrm{ModuleCat}(\\Lambda)$-valued sheaves, and the two directions of [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. Apply [lem-weil-pbc-constructible-module-surjective-descent] to $a:Y\\prime\\to Y$: it is surjective and both schemes are affine, hence qcqs. This proves constructibility of $f_*F$ in the affine case, and the affine-surjection reduction of Step 1 proves it on the original qcqs $Y$.",
    "uses": [
     "lemma-weil-pbc-finite-exchange",
     "lemma-constructible-iso-invariance",
@@ -117,28 +118,29 @@
   }
  ],
  "proof_deps": [
-  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-quasicompact-affine-surjection",
+  "lem-weil-pbc-finite-morphism-permanence",
   "def-sbc-locally-finite-presentation",
-  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "lemma-weil-pbc-finite-exchange",
-  "lem-weil-pbc-constructible-qcqs-affine-local",
-  "def-weil-pbc-direct-image",
+  "lemma-constructible-iso-invariance",
+  "lem-weil-pbc-constructible-module-surjective-descent",
   "pqf-lem-finite-qf",
   "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
-  "lem-weil-pbc-finite-morphism-permanence",
   "def-weil-closed-immersion",
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-inverse-image",
   "sbc-lem-thickening-etale-site",
-  "lem-weil-pbc-finite-etale-pushforward-constructible",
-  "lemma-constructible-iso-invariance",
-  "lem-weil-pbc-constructible-module-surjective-descent"
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-finite-etale-pushforward-constructible"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "C9",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 095R, label lemma-finite-pushforward-constructible, proof"
+  "place": "Tag 095R, proof; same affine thickening argument, replacing affine-open locality by compactSpace_iff_exists, finite exchange and surjective descent."
  },
  "mathlib_searches": [
   {
@@ -286,5 +288,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Wrote review.md. Checked all statement clauses, seven dependencies, source 095R, universes, edge cases, reuse, docstrings and sorry-only proof. Signature matches verbatim; scompile.py reproduced a clean per-file compile. No defects found; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261018T062720-L-638695",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
