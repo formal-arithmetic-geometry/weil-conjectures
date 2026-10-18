@@ -12,9 +12,136 @@
   "def-weil-pbc-adic-completion",
   "def-trf-fs-log-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=D[[T]]$, $\\mathfrak m_A=(\\mathfrak n,Y^t:t\\ne0)$, and $\\mathfrak m_H=(\\mathfrak n,X^s,Y^t:s,t\\ne0)$. Finite generation of $S,T$ gives surjections from finite-variable polynomial $D$-algebras onto $D[S],D[T],D[S\\oplus T]$: send one variable to each chosen monoid generator. Thus these algebras are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Their displayed defining ideals are finitely generated. Their completions, including $A,H$, are Noetherian by [lem-weil-pbc-adic-completion-noetherian], and complete and separated for the extended defining ideals by [lem-weil-pbc-adic-completion-mod-ideal]. The same node identifies their residue quotients with $D/\\mathfrak n$, a nonzero field.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  },
+  {
+   "text": "These defining ideals are the maximal ideals of the completed rings. Indeed, if $f$ has nonzero residue in $D/\\mathfrak n$, choose $d\\in D^\\times$ with the same residue and write $f=d(1-v)$ with $v$ in the defining ideal. The partial sums $1+v+\\cdots+v^N$ have compatible residues modulo every power, and their limit is inverse to $1-v$. Thus every element outside the defining ideal is invertible, while an element inside cannot be invertible because the residue field is nonzero. In particular $A,H$ are nonzero complete Noetherian local rings.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  },
+  {
+   "text": "Choose nonzero generators $s_1,\\ldots,s_h$ of $S$. For a monoid homomorphism $a:S\\to(A,\\cdot)$ taking nonzero elements into $\\mathfrak m_A$, let $E_a:D[[S]]\\to A$ be [lem-per-formal-monoid-adic-evaluation] with coefficient inclusion. Define $F(a)(s)=E_a(u(s))Y^{\\beta(s)}$. Both factors are multiplicative in $s$, and $F(a)(0)=1$. Since $\\beta(s)\\ne0$ for $s\\ne0$, $F(a)(s)\\in\\mathfrak m_A$. If $a(s_i)-b(s_i)\\in\\mathfrak m_A^r$, the congruence clause of the cited node gives $E_a(u(s))-E_b(u(s))\\in\\mathfrak m_A^r$ for every $s$. Consequently $F(a)(s)-F(b)(s)\\in\\mathfrak m_A^{r+1}$ for every nonzero $s$. This contraction preserves every relation of $S$ because its arguments and outputs are monoid homomorphisms.",
+   "uses": [
+    "lem-per-formal-monoid-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  },
+  {
+   "text": "Set $a_0(0)=1$ and $a_0(s)=0$ for $s\\ne0$. This is multiplicative: sharpness implies that $s+s'=0$ only when $s=s'=0$. Define $a_{k+1}=F(a_k)$. First $a_1(s)-a_0(s)\\in\\mathfrak m_A$ for every nonzero $s$. Induction using the contraction gives $a_{k+1}(s)-a_k(s)\\in\\mathfrak m_A^{k+1}$. For each $s$, its residues modulo $\\mathfrak m_A^r$ therefore stabilize as $k\\to\\infty$. Completeness gives a unique element $a(s)$ with these stabilized residues. The identities $a_k(0)=1$ and $a_k(s+s')=a_k(s)a_k(s')$ hold modulo every power at the limit, so separatedness gives $a(0)=1$ and $a(s+s')=a(s)a(s')$. Also $a(s)\\in\\mathfrak m_A$ for $s\\ne0$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  },
+  {
+   "text": "For every $r\\ge1$, the construction gives $a(s_i)-a_k(s_i)\\in\\mathfrak m_A^r$ whenever $k\\ge r$. The congruence clause of [lem-per-formal-monoid-adic-evaluation] shows that $E_a(u(s))-E_{a_k}(u(s))\\in\\mathfrak m_A^r$. Passing to stabilized residues in $a_{k+1}(s)=E_{a_k}(u(s))Y^{\\beta(s)}$, and using separatedness, yields the exact fixed-point equations $a(s)=E_a(u(s))Y^{\\beta(s)}$ for every $s$. In particular every nonzero $a(s)$ (with $s\\ne0$) is a multiple of the individual monomial $Y^{\\beta(s)}$; no closedness assertion about the monomial ideal is needed.",
+   "uses": [
+    "lem-per-formal-monoid-adic-evaluation",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  },
+  {
+   "text": "Apply [lem-per-formal-monoid-adic-evaluation] to $S\\oplus T$ and the monoid homomorphism $(s,t)\\mapsto a(s)Y^t$. It gives a continuous $D$-algebra map $\\phi:H\\to A$ fixing every $Y^t$. Its restriction to $D[[S]]$ is $E_a$ by uniqueness of evaluation. The fixed-point equations imply $\\phi(X^s-u(s)Y^{\\beta(s)})=0$, hence $I\\subseteq\\ker\\phi$. Since $\\phi(1)=1$ and $A\\ne0$, $I$ is proper. There is an induced continuous map $\\bar\\phi:C=H/I\\to A$ for the quotient topology.",
+   "uses": [
+    "lem-per-formal-monoid-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-complete-local-quotient], $C$ is a Noetherian complete local ring with maximal ideal $\\mathfrak m_C=\\mathfrak m_H/I$. Apply [lem-per-formal-monoid-adic-evaluation] to $T$, with target $C$ and $t\\mapsto\\overline{Y^t}$, to obtain the continuous coefficient-and-monomial map $j:A\\to C$ in the statement. The quotient topology on $C$ is precisely its maximal-ideal-adic topology since the images of $\\mathfrak m_H^r$ are $\\mathfrak m_C^r$. The composite $\\bar\\phi j$ fixes $D$ and all $Y^t$, so uniqueness of evaluation gives $\\bar\\phi j=\\operatorname{id}_A$.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-per-formal-monoid-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  },
+  {
+   "text": "In $C$, put $b(s)=\\overline{X^s}$ and $c(s)=j(a(s))$. These are monoid homomorphisms sending nonzero elements to $\\mathfrak m_C$. Evaluation uniqueness shows that evaluation at $b$ is the quotient map restricted to $D[[S]]$, and evaluation at $c$ is $jE_a$. Thus the defining relations and Step 5 give $b(s)=E_b(u(s))\\overline{Y^{\\beta(s)}}$ and $c(s)=E_c(u(s))\\overline{Y^{\\beta(s)}}$. Initially $b(s)-c(s)\\in\\mathfrak m_C$. If the generator differences lie in $\\mathfrak m_C^r$, the congruence clause of [lem-per-formal-monoid-adic-evaluation], followed by multiplication by $\\overline{Y^{\\beta(s)}}\\in\\mathfrak m_C$, places all differences in $\\mathfrak m_C^{r+1}$. Induction and separatedness give $b(s)=c(s)$ for every $s$.",
+   "uses": [
+    "lem-per-formal-monoid-adic-evaluation",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  },
+  {
+   "text": "Let $q:H\\to C$ be the quotient map. The continuous maps $q$ and $j\\bar\\phi q$ agree on $D$, all $X^s$ by Step 8, and all $Y^t$ by construction. Uniqueness in [lem-per-formal-monoid-adic-evaluation], now for $S\\oplus T$, gives $q=j\\bar\\phi q$. Surjectivity of $q$ gives $j\\bar\\phi=\\operatorname{id}_C$. Together with Step 7 this proves that $j$ is a continuous isomorphism with continuous inverse $\\bar\\phi$.",
+   "uses": [
+    "lem-per-formal-monoid-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  },
+  {
+   "text": "For $s\\ne0$, the inverse sends $\\overline{X^s}$ to $a(s)=E_a(u(s))Y^{\\beta(s)}\\in(Y^t:t\\ne0)A$, since $\\beta(s)\\ne0$. It fixes every coefficient $d\\in D$. Reducing modulo the nonzero $T$-monomials therefore leaves $d$ unchanged and kills each nonzero $X$-monomial. Equivalently, compose with the continuous augmentation $A\\to D$, given by evaluation at $Y^0=1$ and $Y^t=0$ for $t\\ne0$; the evaluation node applies because $D$ is $\\mathfrak n$-adically complete. This composite is the identity on $D$, as required.",
+   "uses": [
+    "lem-per-formal-monoid-adic-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "lem-per-formal-monoid-adic-evaluation",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-finite-type-algebra-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 2.3, printed p.73, displayed completed Kummer chart formulas; agent-supplied implicit elimination retaining unit twists"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +198,108 @@
    "results": "Returned 8 hits: MvPowerSeries.subst_monomial, MvPowerSeries.HasSubst.X, PowerSeries.HasSubst.smul_X', MvPowerSeries.subst_X, MvPowerSeries.subst, PowerSeries.subst_X, PowerSeries.HasSubst.X', PowerSeries.subst_mul. ",
    "date": "2026-10-19",
    "verdict": "no match: the read signatures give general etale, power-series substitution, or completion infrastructure, not the stated comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "lift|eval",
+   "results": "{\"t\": \"2026-10-18T22:49:52Z\", \"tool\": \"grep\", \"query\": \"lift|eval\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"e9b236d4362b8971\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"lift\"",
+   "results": "{\"t\": \"2026-10-18T22:49:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdicCompletion.lift\", \"AdicCompletion.eval_lift\", \"AdicCompletion.lift_smul\", \"AdicCompletion.eval_lift_apply\", \"AdicCompletion.lift_add\", \"AdicCompletion.liftRingHom\", \"AdicCompletion.liftAlgHom\", \"AdicCompletion.evalₐ_liftRingHom\"], \"digest\": \"b2b0313f098b9a16\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic evaluation on a completed finitely generated monoid algebra in a complete ring extends monoid maps into the ideal and respects congruence modulo powers of the ideal",
+   "results": "{\"t\": \"2026-10-18T22:49:54Z\", \"tool\": \"leanfinder\", \"query\": \"Adic evaluation on a completed finitely generated monoid algebra in a complete ring extends monoid maps into the ideal and respects congruence modulo powers of the ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.evalₐ_of\", \"AdicCompletion.evalₐ_mk\", \"AdicCompletion.evalₐ\", \"AdicCompletion.evalₐ_mkₐ\", \"AdicCompletion.evalₐ_liftRingHom\", \"AdicCompletion.evalOneₐ_liftAlgHom\", \"AdicCompletion.evalOneₐ\", \"AdicCompletion.eval_of\"], \"digest\": \"75cdb37d6f6359c6\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "implicit|contract|inverse",
+   "results": "{\"t\": \"2026-10-18T22:50:32Z\", \"tool\": \"grep\", \"query\": \"implicit|contract|inverse\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"374a7a526caf2122\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal implicit function theorem for unit twisted monoid variables eliminates X from X_s equals u_s(X) times Y_beta(s)",
+   "results": "{\"t\": \"2026-10-18T22:50:33Z\", \"tool\": \"leansearch\", \"query\": \"Formal implicit function theorem for unit twisted monoid variables eliminates X from X_s equals u_s(X) times Y_beta(s)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submonoid.LocalizationMap.mul_inv\", \"IsUnit.smul_bijective\", \"Units.mulRight_apply\", \"IsUnit.mul_right_injective\", \"divp_eq_iff_mul_eq\", \"IsUnit.smul_left_cancel\", \"Units.ext\", \"Units.val_injective\"], \"digest\": \"2a2ca032433aa5b5\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"subst\"",
+   "results": "{\"t\": \"2026-10-18T22:50:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"subst\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.HasSubst\", \"MvPowerSeries.HasSubst.X\", \"MvPowerSeries.hasSubstIdeal\", \"MvPowerSeries.subst\", \"MvPowerSeries.HasSubst.hasEval\", \"MvPowerSeries.HasSubst.zero\", \"MvPowerSeries.hasSubst_iff_hasEval_of_discreteTopology\", \"MvPowerSeries.subst_self\"], \"digest\": \"c64d90546d06c0d5\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Implicit elimination in completed sharp monoid algebras: equations X_s=u_s(X)Y_beta(s) have a unique multiplicative formal solution and the quotient is the target monoid algebra",
+   "results": "{\"t\": \"2026-10-18T22:50:34Z\", \"tool\": \"leanfinder\", \"query\": \"Implicit elimination in completed sharp monoid algebras: equations X_s=u_s(X)Y_beta(s) have a unique multiplicative formal solution and the quotient is the target monoid algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.lift_unique\", \"MonoidAlgebra.lift_unique'\", \"MonoidAlgebra.mul_apply_mul_eq_mul_of_uniqueMul\", \"MonoidAlgebra.lift\", \"MonoidAlgebra.ext\", \"MonoidAlgebra.algHom_ext\", \"MonoidAlgebra.algHom_ext'\", \"MonoidAlgebra.lift_symm_apply\"], \"digest\": \"864f0e0ceaa720a2\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*MonoidAlgebra|MonoidAlgebra.*AdicCompletion|liftRingHom|eq_liftRingHom",
+   "results": "{\"t\": \"2026-10-18T22:52:15Z\", \"tool\": \"grep\", \"query\": \"AdicCompletion.*MonoidAlgebra|MonoidAlgebra.*AdicCompletion|liftRingHom|eq_liftRingHom\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\"], \"digest\": \"98de2889d62cfcd2\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluate formal monoid series in an ideal adically complete algebra by a monoid homomorphism sending nonzero exponents into the ideal",
+   "results": "{\"t\": \"2026-10-18T22:52:15Z\", \"tool\": \"leansearch\", \"query\": \"Evaluate formal monoid series in an ideal adically complete algebra by a monoid homomorphism sending nonzero exponents into the ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.comp_aeval\", \"PowerSeries.heval\", \"AdicCompletion.evalₐ_comp_liftRingHom\", \"AdicCompletion.mkₐ\", \"PowerSeries.eval₂Hom\", \"IsAdicComplete.liftRingHom\", \"AdicCompletion.evalOneₐ_liftAlgHom\", \"MvPowerSeries.eval₂Hom\"], \"digest\": \"2904396a3f35d3c1\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"lift\"",
+   "results": "{\"t\": \"2026-10-18T22:52:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"AddMonoidAlgebra\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.liftNC\", \"AddMonoidAlgebra.liftNCRingHom\", \"AddMonoidAlgebra.liftNC_single\", \"AddMonoidAlgebra.liftNC_one\", \"AddMonoidAlgebra.liftNCRingHom_single\", \"AddMonoidAlgebra.liftNC_mul\", \"AddMonoidAlgebra.liftNC_smul\", \"AddMonoidAlgebra.lift\"], \"digest\": \"c7684fbf9cdb5673\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous homomorphisms from the adic completion of a finitely generated monoid algebra are determined by a monoid map into topologically nilpotent elements; congruent monoid maps give congruent evaluations",
+   "results": "{\"t\": \"2026-10-18T22:52:17Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous homomorphisms from the adic completion of a finitely generated monoid algebra are determined by a monoid map into topologically nilpotent elements; congruent monoid maps give congruent evaluations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.algHom_ext\", \"AdicCompletion.ext_evalₐ\", \"PowerSeries.aeval_unique\", \"AdicCompletion.evalₐ_liftAlgHom\", \"AdicCompletion.evalOneₐ_liftAlgHom\", \"AdicCompletion.factor_evalₐ_eq_eval\", \"AdicCompletion.evalₐ_mkₐ\", \"AdicCompletion.evalₐ_liftRingHom\"], \"digest\": \"998ca2ea123c2f02\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A contractive unit twisted substitution on a sharp affine semigroup formal algebra identifies the quotient by X_s-u_s Y_beta(s) with the target formal semigroup ring",
+   "results": "{\"t\": \"2026-10-18T22:52:18Z\", \"tool\": \"leanfinder\", \"query\": \"A contractive unit twisted substitution on a sharp affine semigroup formal algebra identifies the quotient by X_s-u_s Y_beta(s) with the target formal semigroup ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.HasSubst.X\", \"Algebra.Generators.σ\", \"Algebra.PreSubmersivePresentation.ofHasCoeffs_σ'\", \"Algebra.Generators.Simps.σ\", \"MvPowerSeries.HasSubst.X_pow\", \"MvPowerSeries.substAlgHom_X\", \"MvPowerSeries.substAlgHom_eq_aeval\", \"MvPowerSeries.map_algebraMap_eq_subst_X\"], \"digest\": \"829f95d7bb1ba061\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "substAlgHom|HasSubst",
+   "results": "{\"t\": \"2026-10-18T22:54:23Z\", \"tool\": \"grep\", \"query\": \"substAlgHom|HasSubst\", \"sub\": \"RingTheory/MvPowerSeries/Substitution.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"24\", \"31\", \"32\", \"77\", \"78\"], \"digest\": \"082af16b753866fc\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique continuous evaluation homomorphism on the completion of a monoid ring with respect to a finitely generated ideal and congruence of evaluations",
+   "results": "{\"t\": \"2026-10-18T22:54:24Z\", \"tool\": \"leansearch\", \"query\": \"Unique continuous evaluation homomorphism on the completion of a monoid ring with respect to a finitely generated ideal and congruence of evaluations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.eval₂_unique\", \"MvPowerSeries.eval₂_unique\", \"MvPowerSeries.aeval_unique\", \"MvPowerSeries.eval₂Hom\", \"UniformSpace.Completion.extensionHom\", \"PowerSeries.aeval_unique\", \"PowerSeries.eval₂Hom\", \"MvPowerSeries.aeval\"], \"digest\": \"a4fb74c06ec96a4b\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-completed-invertible-kummer-monoid-extension",
@@ -102,5 +327,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-formal-monoid-implicit-elimination",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Constructed the solution by iteration on monoid homomorphisms, proving the contraction, limit equations, inverse maps and ideal/augmentation clauses. Added only the general adic evaluation and congruence lemma, not an elimination or fixed-point restatement. Checked completion, properness and quotient completeness before evaluation in the quotient.",
+  "blueprint": "Auxiliary algebra for the ILO VI 2.3 completed Kummer chart formulas, beneath lem-per-artin-gabber-affine-curve via the existing unit-twisted Kummer chart branch.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Noetherianity of completed finite-type monoid rings; generic commutative algebra used as a tool, not a change of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Completeness and separatedness of H/I are needed to compare the two fixed points in the quotient; the Fourier unit has no quotient-completeness statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-local-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-56890514d",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-56890514d (reviewer sub-agent of L); spot-checked: Read the item (10 steps), the new node lem-per-formal-monoid-adic-evaluation and every cited statement. Item statement and stmt_deps are unchanged from base (compared with the Q117 snapshot); the parent's steps 7-8 use the item exactly as stated. ILO VI 1.6 and 2.3 (pp.72-73) checked: they give the completed Kummer charts but no unit-twisted elimination, so proof_origin agent is right. No SGA source. The new node is true, statement-only and self-contained: b is finitely generated, so Stacks 05GG (algebra-lemma-hathat-finitely-generated) gives ker(B->R[P]/b^n)=b^nB; evaluation is the limit of finite-level maps, unique by density; congruence follows by splitting f=f_r+g_r with g_r in b^rB, needing neither closedness of J^r nor finite generation of J. Edge cases P=0, J=0, A=0 are fine. It duplicates none of the trf monoid-completion, support-projection, extension-model, completed-chart or coefficient-lift nodes and is not an item clause. All four search kinds are recorded. Steps: 1 (finite-type, completion-Noetherian and mod-ideal nodes; residue field via sharpness), 2 (geometric-series locality), 3 (contraction to m^{r+1} through Y^beta(s) with beta(s)!=0), 4-5 (iteration, limit, exact fixed point by separatedness), 6-9 (phi, quotient via complete-local-quotient for a proper ideal, j, uniqueness and surjectivity give mutual inverses), 10 (ideal clause; augmentation via evaluation into D). All verified. Tested S=T=N, beta(1)=m, u=1+X gives X=Y^m/(1-Y^m); T=0 forces S=0. Accepted tool uses: lem-weil-pbc-adic-completion-noetherian and lem-weil-pbc-complete-local-quotient (generic commutative algebra). No fixes."
  }
 }
