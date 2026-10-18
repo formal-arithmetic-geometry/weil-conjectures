@@ -82,97 +82,26 @@
  ],
  "proof": [
   {
-   "text": "*Only if.* If $f=i\\circ g$ for a morphism $g:Y\\to Z$, then on underlying sets $f(Y)=i(g(Y))\\subseteq i(Z)$.",
-   "uses": [
-    "def-pc-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), statement lines 2268-2276; this direction is not written in the proof"
-   }
+   "text": "If f = g ≫ i, every point f(y) is i(g(y)), so the range of f is contained in the range of i. The Lean proof supplies g.base y as the preimage.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*Sections of the ideal vanish at the points of $Y$.* Assume $f(Y)\\subseteq i(Z)$ and let $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ be the ideal sheaf of $i$ [def-sbc-closed-immersion-ideal-sheaf]. Let $U\\subseteq X$ be an affine open, $g\\in\\mathcal I(U)$, and let $V\\subseteq f^{-1}(U)$ be an affine open of $Y$ with $B=\\mathcal O_Y(V)$; put $b=f^\\sharp_U(g)|_V\\in B$. Let $y\\in V$ and $x=f(y)\\in U\\cap i(Z)$. By [lem-weil-pbc-closed-immersion-image-zero-locus], $\\mathcal I(U)\\subseteq\\mathfrak p_x$, so $g\\in\\mathfrak p_x$, hence $g(x)=0$ in $\\kappa(x)$ by [lem-weil-pbc-affine-open-section-vanishing-prime](a), i.e. the germ $g_x$ lies in $\\mathfrak m_x$. A morphism of schemes is a morphism of locally ringed spaces [def-pc-scheme]: the germ of $b$ at $y$ is $f^\\sharp_y(g_x)$, where $f^\\sharp_y:\\mathcal O_{X,x}\\to\\mathcal O_{Y,y}$ is a local homomorphism, so $b_y\\in\\mathfrak m_y$, i.e. $b(y)=0$ in $\\kappa(y)$ [def-weil-residue-field] (it is the image of $g(x)=0$ under $\\kappa(x)\\to\\kappa(y)$).",
-   "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-closed-immersion-image-zero-locus",
-    "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "def-pc-scheme",
-    "def-weil-residue-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
-   }
+   "text": "Conversely apply the already proved source-library theorem AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_range_subset_range (lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, lines 181-191) to i, f and the range inclusion. Its hypotheses are exactly reducedness of Y and that i is a closed immersion. Forget uniqueness to obtain the required existential factorization. This source theorem is closed and uses the reduced-source ideal-kernel criterion, so no separate affine-section proof dependencies are needed here.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "*The pullback is zero on affine opens of $Y$.* With $b\\in B=\\mathcal O_Y(V)$ as in the previous step, $b(y)=0$ for every $y\\in V$, so $b\\in\\mathfrak p_y$ for every $y\\in V$ by [lem-weil-pbc-affine-open-section-vanishing-prime](a) applied to the affine open $V$ of $Y$. Every prime $\\mathfrak q\\subset B$ is of the form $\\mathfrak p_y$: with $\\iota_V:\\operatorname{Spec}B\\to Y$ the open immersion of [lem-weil-pbc-affine-open-spec-points] and $y=\\iota_V(\\mathfrak q)\\in V$, one has $\\iota_V(\\mathfrak p_y)=y=\\iota_V(\\mathfrak q)$, and $\\iota_V$ is injective, so $\\mathfrak q=\\mathfrak p_y$. Hence $b\\in\\bigcap_{\\mathfrak q}\\mathfrak q=\\sqrt{(0)}$ by [lem-weil-pbc-zero-locus-eq-iff-radical-eq] (with $I=(0)$, $V(0)$ being all primes), so $b$ is nilpotent. Since $Y$ is reduced, $B=\\mathcal O_Y(V)$ is a reduced ring [def-pc-reduced-scheme], so $b=0$.",
-   "uses": [
-    "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-    "def-pc-reduced-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
-   }
-  },
-  {
-   "text": "*The pullback is zero on $f^{-1}(U)$.* The affine opens $V$ of $Y$ contained in the open $f^{-1}(U)$ cover it [lem-weil-pbc-affine-opens-basis], and by the previous step $f^\\sharp_U(g)|_V=0$ for each of them; since $\\mathcal O_Y$ is a sheaf [def-pc-scheme], $f^\\sharp_U(g)=0$ in $\\mathcal O_Y(f^{-1}(U))$. Thus for every affine open $U\\subseteq X$, $f^\\sharp_U$ kills $\\mathcal I(U)$.",
-   "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "def-pc-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
-   }
-  },
-  {
-   "text": "*Factorization.* By the previous step the hypothesis of [lem-weil-pbc-closed-immersion-lift-ideal-kills-sections] holds for $i$ and $f$, which gives $g:Y\\to Z$ with $f=i\\circ g$.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-lift-ideal-kills-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
-   }
-  },
-  {
-   "text": "*In particular.* The reduction $i_X:X_{\\mathrm{red}}\\to X$ is a closed immersion which is the identity on underlying sets [def-weil-pbc-scheme-reduction], so $i_X(X_{\\mathrm{red}})=X\\supseteq f(Y)$ for every morphism $f:Y\\to X$, and the equivalence just proved (with $Z=X_{\\mathrm{red}}$, $i=i_X$) gives the factorization $Y\\to X_{\\mathrm{red}}\\to X$.",
-   "uses": [
-    "def-weil-pbc-scheme-reduction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), last sentence of the statement, lines 2275-2276"
-   }
+   "text": "For the final clause take the source-library canonical morphism f.liftNilradical. Its equation f.liftNilradical_subschemeι is exactly the required composite equation (lean/WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, lines 405-425). The source construction is explicit from the scheme-theoretic image and the nilradical-kernel inclusion, with no arbitrary existence witness.",
+   "uses": [],
+   "elementary": false
   }
  ],
- "proof_deps": [
-  "def-pc-scheme",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-closed-immersion-image-zero-locus",
-  "lem-weil-pbc-affine-open-section-vanishing-prime",
-  "def-weil-residue-field",
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-  "def-pc-reduced-scheme",
-  "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-closed-immersion-lift-ideal-kills-sections",
-  "def-weil-pbc-scheme-reduction"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 0356 (lemma-map-into-reduction), proof, lines 2280-2289"
+  "by": "library",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; lean/WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+  "place": "IsClosedImmersion.existsUnique_fac_of_range_subset_range, lines 181-191; Scheme.Hom.liftNilradical and liftNilradical_subschemeι, lines 405-425. Source arguments implement Stacks Schemes Lemma 0356; the wrapper proves the forward range inclusion and packages the two existing results."
  },
  "mathlib_match": null,
  "status": "split",
@@ -230,10 +159,10 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J7",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261018T062817-L-658627",
-  "kind": "interface",
+  "landing": "20261018T071207-L-1673212",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

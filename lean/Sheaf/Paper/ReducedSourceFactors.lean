@@ -6,6 +6,8 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Maps from reduced schemes through closed subschemes
 
@@ -55,6 +57,12 @@ theorem reduced_source_factors_through_closed_subscheme
     (i : Z ⟶ X) [IsClosedImmersion i] (f : Y ⟶ X) :
     ((∃ g : Y ⟶ Z, g ≫ i = f) ↔ Set.range f.base ⊆ Set.range i.base) ∧
       (∃ g : Y ⟶ X.nilradical.subscheme, g ≫ X.nilradical.subschemeι = f) := by
-  sorry
+  constructor
+  · constructor
+    · rintro ⟨g, rfl⟩ y ⟨x, rfl⟩
+      exact ⟨g.base x, rfl⟩
+    · intro h
+      exact (IsClosedImmersion.existsUnique_fac_of_range_subset_range i f h).exists
+  · exact ⟨f.liftNilradical, f.liftNilradical_subschemeι⟩
 
 end AlgebraicGeometry
