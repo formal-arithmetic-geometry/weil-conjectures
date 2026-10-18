@@ -238,5 +238,32 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-a79b81cb0 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, every cited statement, unit sk-lem-finite and the chapter, main-20261015 Step 7 (l.83-88) and Weil II (1.1.7), (1.1.10)-(1.1.11), (1.1.14). The item statement is unchanged and true. Step 1: lem-sf-integral-direct-image-constructible (K_0=k) puts N_n in D^b_c, and the exchange lemma's equations combine as Gamma(lambda^g)H0(tau)=Gamma(B)Gamma(lambda^h)Gamma(j^h)sigma=p_g. Step 2: c_n=eps∘g^{-1}(phi) returns the constant 1. Step 3: the hypotheses of the tower-realization lemma are verified. Step 4: each of the three arrows is projected using a cited compatibility: tower realization, FrEx=beta L(e) alpha with lem-fix-operation-reduction, and pi_n theta_R=Res(c_n lambda_n)rho_n. Step 5: H0 injectivity from lem-pod-connected-constant-h0(2). Step 6: rationalization. New node lem-pod-frobenius-exchange-degree-zero is true: (Y->^g Y)≅Y x_{s,h}(s->^h s) via (g,a), and it holds for Y=Spec k and M=0. New node lem-pod-canonical-coefficient-pullback-reduction is true: theta_K kappa=F(eta), so lambda kappa=id, and rho_n kappa=theta_n gives the projection formula; checked for g=id and the empty scheme. It states lambda explicitly, matching Step 8 of the proof of lem-weil-isomorphism-derived-pullback. Neither new node restates a clause of the item or duplicates an existing node; the nearest candidates are graph-point-exchange, which needs properness, and the comparison-normalization node, which leaves lambda open. Searches recorded; no SGA. All five declared tool_uses are accepted as generic. Maintainer notes: (1) the item's protected source still cites Weil I (1.11)-(1.12) and should become blueprint Step 7 (agent-written) with Weil II as background; (2) def-weil-constant-weil-structure(3) takes lambda from a statement that only asserts existence, and the item depends on the canonical lambda (Weil II 1.1.14 warning), so stage 2 should bind it to the specified comparison. FIX applied: proof_origin page range changed from pp.150-152 to pp.150-153, since (1.1.14) is on p.153.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusFixesUnitSection",
+  "declaration": "WeilConjectures.frobenius_fixes_unit_section",
+  "declarations": [
+   "WeilConjectures.frobeniusUnitIntegralImage",
+   "WeilConjectures.frobeniusUnitFiniteComparison",
+   "WeilConjectures.FrobeniusUnitH0ComparisonSpec",
+   "WeilConjectures.frobeniusUnitH0Comparison_existsUnique",
+   "WeilConjectures.frobeniusUnitH0Comparison",
+   "WeilConjectures.frobenius_fixes_unit_section"
+  ],
+  "file": "lean/Sheaf/Paper/FrobeniusFixesUnitSection.lean",
+  "statement": "theorem frobenius_fixes_unit_section (c₀ : Compactification Y₀.hom) : (globalGeometricFrobeniusOnCohomology D c E Y₀ c₀ (constantWeilRationalComplex c.l E.val D c.different Y₀) 0).1 ((frobeniusUnitH0Comparison D c E Y₀ c₀).hom (oneRational D c.l c.different E.val (D.geometricFiber Y₀).left)) = (frobeniusUnitH0Comparison D c E Y₀ c₀).hom (oneRational D c.l c.different E.val (D.geometricFiber Y₀).left)",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The global operator and oneRational use distinct presentations of ordinary cohomology. The helper H0 isomorphism is uniquely specified by the actual finite coefficient comparison maps before rationalization; the theorem transports precisely the recorded unit, without adding an arbitrary comparison as a hypothesis. Both postponed theorems belong to this unit-class statement and have full proof docstrings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5849f18f0",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Clause-by-clause match of the item statement: FiniteFieldDatum/CoefficientDatum/FiniteCoefficientFields, LocallyOfFiniteType+QuasiCompact+IsSeparated, ConnectedSpace on the geometric fiber (includes nonempty), constantWeilRationalComplex, globalGeometricFrobeniusOnCohomology .1 in degree 0, oneRational. c₀ is a parameter of the recorded F; the ordinary component does not depend on it. The new H0 comparison between the Roos presentation (rationalOrdinaryCohomology) and the model presentation of F is not found elsewhere; it is pinned uniquely via integral beta matching sfDirectImageReductionComparison, chosen from a plausible exists-unique (TR3 on Roos triangles, H^-1=0 Milnor injectivity, exact localization). Because H0 is 1-dimensional, the statement is equivalent to F=id for any linear iso, so it is not hollow. Statement verbatim; all 6 declarations present; node differs from live only in lean; docstrings and sorry-only proofs OK; nt_compile --json clean, 8.1 s. Advisory: helper decls from non-stmt_dep nodes (FrobeniusExchange.*, integralImage); source field still cites Weil I."
  }
 }
