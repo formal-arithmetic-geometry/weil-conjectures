@@ -5111,6 +5111,8 @@ public import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 public import WeilConjectures.AlgebraicGeometry.SupportedRelativeOpenGluing
 public import WeilConjectures.AlgebraicGeometry.SupportedThickeningDictionary
 public import WeilConjectures.AlgebraicGeometry.SurjectiveUniversallyClosedAffineTarget
+public import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheafChart
 public import WeilConjectures.AlgebraicGeometry.SymmetricStabilizationDifferentials
 public import WeilConjectures.AlgebraicGeometry.TailOpenCohomologyArrowLaws
 public import WeilConjectures.AlgebraicGeometry.TailOpenCohomologyLegNaturality
@@ -7155,6 +7157,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.LinearAlgebra.PiTensorProduct.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
