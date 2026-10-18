@@ -12,9 +12,104 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal C=X_{\\mathrm{aff,proet}}$, $\\mathcal D=X_{\\mathrm{proet}}$, and let $u$ be the full inclusion. An open immersion is étale and hence weakly étale by the two cited comparison statements. Composition stability therefore makes every affine open $A\\subset U$ of a weakly étale $U\\to X$ an object of $\\mathcal C$. Affine opens cover $U$ by the affine-basis lemma. The family of all affine opens $A\\to U$ is a pro-etale covering directly by the covering definition: for any affine open $W\\subset U$, the member $A=W$ alone has image $W$. Thus every object of $\\mathcal D$ has a covering by image objects. This works for arbitrary $U$ and $X$, with no quasi-compactness or separatedness assumption.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "det-pe-morphisms-etale-comparison",
+    "sk-lem-pe-weakly-etale-stability",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098W (lemma-alternative), image-object covering condition of Tag 03A0; affine opens: 01IT; open immersions: 02GP and 094X; composition: 094T"
+   }
+  },
+  {
+   "text": "For a finite family $\\{A_j\\to U\\}$ of weakly étale maps with all $A_j$ and $U$ affine, the pro-etale covering condition is equivalent to $\\bigcup_j\\operatorname{im}(A_j\\to U)=U$. Necessity follows by taking the affine open $U$ itself in the definition. For sufficiency, fix any affine open $W\\subset U$. Each inverse image $A_j\\times_U W$ is an affine open of $A_j$ by the cited affine-morphism theorem; these finitely many opens have images with union $W$. This is exactly the finite-affine-refinement condition in the definition. In particular the standard coverings used here agree with Tag 098E, not with an ind-etale presentation condition.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098E (definition-standard-proetale); affine-morphism input: Tag 01SH (morphisms/lemma-morphism-affines-affine)"
+   }
+  },
+  {
+   "text": "The declared standard coverings make $\\mathcal C$ a site and $u$ continuous. Indeed, a pullback $A\\times_U B$ needed for a covering in $\\mathcal C$ is affine by the affine-spectra fibre-product theorem. Its map to $B$ is weakly étale by base-change stability, and its composite to $X$ is weakly étale by composition stability. Thus this is also the pullback in the full subcategory. Pro-etale coverings are precisely fpqc families of weakly étale arrows by the site definition. The three fpqc covering axioms, together with weakly étale base-change and composition stability, show that singleton isomorphisms, finite composites of standard coverings, and their pullbacks are standard coverings again: the index sets remain finite, and all their domains remain affine. The inclusion preserves these covering families and their pullbacks, which is exactly continuity in the cited site definition.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "sk-lem-pe-weakly-etale-stability",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098W (lemma-alternative), continuity verification; Tags 098C (lemma-proetale), 01I4/01JQ (affine fibre products), 022D (fpqc covering axioms)"
+   }
+  },
+  {
+   "text": "To check cocontinuity, let $U$ be an object of $\\mathcal C$ and $\\{V_i\\to U\\}$ any covering of $\\mathcal D$. Apply the defining covering condition to the affine open $U\\subset U$: it gives finitely many affine opens $A_j\\subset V_{i(j)}$ whose composite images cover $U$. Step 1 makes the open inclusions weakly étale, and composition stability makes $A_j\\to U$ and $A_j\\to X$ weakly étale. By step 2 the finite family $\\{A_j\\to U\\}$ is a standard covering in $\\mathcal C$. Each arrow factors through the chosen $V_{i(j)}$, so its image family refines the original covering. This is precisely the cocontinuity condition, with the required factors explicitly given by $A_j\\hookrightarrow V_{i(j)}$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "sk-lem-pe-weakly-etale-stability",
+    "def-weil-pbc-special-cocontinuous-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 098D (lemma-proetale-affine), 098W (lemma-alternative), and 00XJ/03A0 (cocontinuity)"
+   }
+  },
+  {
+   "text": "Because $\\mathcal C$ is a full subcategory, $u(a)=u(b)$ for parallel arrows implies $a=b$; the singleton identity covering witnesses local faithfulness. Every arrow $c:u(U^{\\prime})\\to u(U)$ is already the image of a unique arrow $U^{\\prime}\\to U$; again the singleton identity covering witnesses local fullness. Together with continuity in step 3, cocontinuity in step 4 and the image-object coverings in step 1, these verify all five conditions in the cited definition of a special cocontinuous functor.",
+   "uses": [
+    "def-weil-pbc-special-cocontinuous-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098W (lemma-alternative); Tag 03A0 (lemma-equivalence), conditions (3)-(5)"
+   }
+  },
+  {
+   "text": "Use the compatible universes and small skeletons of the stated pro-etale site convention, and apply the special-cocontinuous sheaf-equivalence theorem to $u:\\mathcal C\\to\\mathcal D$. Its hypotheses have all been verified in steps 1–5. Its inverse-image functor is precomposition with $u$, hence on objects it sends $F$ to $F|_{\\mathcal C}$ and on morphisms it restricts each component to affine objects. Therefore restriction is the asserted equivalence $\\operatorname{Sh}(X_{\\mathrm{proet}})\\simeq\\operatorname{Sh}(X_{\\mathrm{aff,proet}})$, and the cited theorem identifies it with an equivalence of topoi.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-special-cocontinuous-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098W (lemma-alternative), application of Sites Tag 03A0 (lemma-equivalence)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "det-pe-morphisms-etale-comparison",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
+  "sk-lem-pe-weakly-etale-stability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 098W (lemma-alternative): expanded verification of the five hypotheses of Sites Tag 03A0, with finite affine refinement from 098D and standard coverings from 098E."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +152,38 @@
    "results": "{\"t\": \"2026-10-18T03:31:31Z\", \"tool\": \"grep\", \"query\": \"IsDenseSubsite|sheafEquiv\", \"sub\": \"CategoryTheory/Sites/DenseSubsite\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean\"], \"digest\": \"ab94d886864c18f3\"}",
    "date": "2026-10-18",
    "verdict": "no match: generic dense-subsite equivalences require the site-specific density theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves from the small pro-etale site to its affine weakly etale objects is an equivalence",
+   "results": "{\"t\": \"2026-10-18T03:41:00Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of sheaves from the small pro-etale site to its affine weakly etale objects is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor\", \"CategoryTheory.Equivalence.sheafCongr\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"09237769ac21d232\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: dense-subsite comparison requires the site-specific hypotheses; affine-etale and affine-Zariski equivalences have different sites"
+  },
+  {
+   "tool": "grep",
+   "query": "AffineProEt|affine.*[Pp]roetale|sheafEquiv",
+   "results": "{\"t\": \"2026-10-18T03:41:19Z\", \"tool\": \"grep\", \"query\": \"AffineProEt|affine.*[Pp]roetale|sheafEquiv\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\"], \"digest\": \"1ed7e5f68058ad1a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: dense-subsite comparison requires the site-specific hypotheses; affine-etale and affine-Zariski equivalences have different sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+   "results": "{\"t\": \"2026-10-18T03:41:19Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquivSheafificationCompatibility\", \"CategoryTheory.Sheaf.isConstant_iff_of_equivalence\", \"CategoryTheory.equivCommuteConstant\", \"CategoryTheory.equivCommuteConstant'\"], \"digest\": \"5e69ffd84410ba36\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: dense-subsite comparison requires the site-specific hypotheses; affine-etale and affine-Zariski equivalences have different sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of affine weakly etale schemes over a scheme into its small proetale site induces an equivalence of categories of sheaves",
+   "results": "{\"t\": \"2026-10-18T03:41:19Z\", \"tool\": \"leansearch\", \"query\": \"The inclusion of affine weakly etale schemes over a scheme into its small proetale site induces an equivalence of categories of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"CategoryTheory.Equivalence.sheafCongr_functor\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"CategoryTheory.Equivalence.sheafCongr\", \"CategoryTheory.Equivalence.sheafCongr.functor\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.grothendieckTopology\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent\"], \"digest\": \"50f3bd8a1e4e0cf3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: dense-subsite comparison requires the site-specific hypotheses; affine-etale and affine-Zariski equivalences have different sites"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-proetale-enough-points",
@@ -79,5 +202,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-proetale-affine-subsite-equivalence",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 098W into six steps verifying every special-cocontinuity hypothesis; reused existing geometric and site-comparison nodes and created none. Kept the statement unchanged, distinguished all affine weakly etale objects from the narrower source AffineProEt, and checked arbitrary non-quasi-separated bases and empty covers.",
+  "blueprint": "Auxiliary descendant of lem-sfb-module-mapmod-pullback-kflat through lem-sfb-proetale-enough-points, serving the recorded replacement stalk argument for the ancestor final K-flatness sentence. The current blueprint ancestor statement contains no affine-site proof; this geometric input follows Stacks 098W and does not alter its unit route. Whole-blueprint searches for affine pro and special cocontinuous found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Open immersions are étale; generic geometric input for the affine-open coverings, with no replacement of the module-factorization unit route."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Only clause 1, étale implies weakly étale, is used to put open subobjects in the site."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Composition and base-change stability ensure that affine refinements and covering pullbacks stay in the small pro-etale site."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Affine opens cover an arbitrary scheme; the module-factorization unit has no geometric basis lemma."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Preimages of affine opens under maps of affine schemes are affine; used to verify finite standard covers."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Affine fibre products give the covering pullbacks in the full affine subcategory."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Generic covering stability under isomorphisms, composition and base change verifies the affine site axioms."
+   },
+   {
+    "node": "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
+    "why": "General site-comparison theorem of Stacks 03A0, expressly invoked by 098W; the unit contains no comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-etale",
+  "det-pe-morphisms-etale-comparison",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-special-cocontinuous-sheaf-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-d9501b3e9",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d9501b3e9 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, together with every cited node's statement (11 nodes plus the fpqc, pro-étale covering, small pro-étale site and weakly étale definitions). The statement matches Stacks 098W (proetale.tex lemma-alternative, l.2696) with the coverings of 098E; Stacks writes S_affine,etale in its display, which is a typo for S_affine,proetale, and the item uses the correct site. Step 1 gives cover-density (03A0(5)): 02GP and etale-implies-weakly-etale plus composition put affine opens in the site, and the family of all affine opens is a covering because each affine open W is itself a member. Step 2 shows that standard coverings are exactly the pro-étale coverings of an affine target, using 01SH as that node states it (098D/098E). Step 3 shows the affine subcategory is a site and the inclusion is continuous: fibre products are taken over an affine U (01I4/01JQ), so no quasi-separatedness of X is used, and the site axioms come from 022D/098C plus weakly-étale stability. Step 4 gives cocontinuity through the finite affine refinement of the affine target, matching clause (1) of the special-cocontinuous definition. Step 5 is correctly marked elementary: local fullness and faithfulness hold for a full inclusion, witnessed by identity coverings. Step 6 applies the 03A0 node, whose statement says the inverse image is precomposition, i.e. restriction; this agrees with the 03A0 proof (g^{-1}G(U)=G(u(U))). Edge cases checked: empty X, the empty covering of an empty affine, non-quasi-compact and non-quasi-separated X, and infinite coverings. There are no new nodes. A search found no pro-étale duplicate; the étale analogue lem-weil-pbc-affine-etale-site-topos is a different site, and the Lean AffineProEt is narrower. tools/review_split.py reports PASS. The eight declared tool_uses are accepted as generic black boxes from chapters that sec-six-functors-basics uses. No SGA is cited, no target was weakened, and there are no changes."
  }
 }
