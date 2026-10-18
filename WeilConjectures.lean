@@ -2352,9 +2352,11 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomDual
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.IsoAlgebraTensor
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorExchange
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TransposePairing
@@ -4736,6 +4738,7 @@ public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
+public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensor
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
