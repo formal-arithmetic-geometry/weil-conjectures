@@ -140,6 +140,24 @@ noncomputable def elementDirectSumMap {C : Type u} [SmallCategory C]
           (fun t ↦ (L.val.obj (elementObj A V t) : Type u)) (A.obj.map f s)))) :
       ModuleCat.of (R.obj.obj U) (L.val.obj (elementObj A U s) : Type u) ⟶ _).hom)
 
+open Classical in
+private theorem elementDirectSumMap_lof {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u))
+    (L : ringedSiteModules (elementRing R A)) {U V : Cᵒᵖ} (f : U ⟶ V)
+    (s : A.obj.obj U) (x : L.val.obj (elementObj A U s)) :
+    elementDirectSumMap R A L f
+      (DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+        (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x) =
+    DirectSum.lof (R.obj.obj V) (A.obj.obj V)
+      (fun t ↦ (L.val.obj (elementObj A V t) : Type u)) (A.obj.map f s)
+      (L.val.map (elementObjMap A f s) x) := by
+  classical
+  change (DirectSum.toModule (R.obj.obj U) (A.obj.obj U) _ _)
+    (DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+      (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x) = _
+  rw [DirectSum.toModule_lof]
+  rfl
+
 /-- The direct-sum restriction preserves identities.
 
 Source: Stacks Project, sites-modules.tex, Tag 04IE
@@ -155,7 +173,31 @@ theorem elementDirectSumMap_id {C : Type u} [SmallCategory C]
     elementDirectSumMap R A L (𝟙 U) =
       (ModuleCat.restrictScalarsId' (R.obj.map (𝟙 U)).hom
         (congrArg RingCat.Hom.hom (R.obj.map_id U))).inv.app _ := by
-  sorry
+  classical
+  ext s x
+  simp only [LinearMap.comp_apply]
+  change (DirectSum.toModule (R.obj.obj U) (A.obj.obj U) _ _)
+    (DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+      (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x) = _
+  rw [DirectSum.toModule_lof]
+  change DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+    (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) (A.obj.map (𝟙 U) s)
+    (L.val.map (elementObjMap A (𝟙 U) s) x) = DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+      (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x
+  have aux (t : A.obj.obj U) (ht : A.obj.map (𝟙 U) s = t) :
+      DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+        (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) t
+        (L.val.map (CategoryOfElements.homMk (A.obj.elementsMk U s)
+          (A.obj.elementsMk U t) (𝟙 U) ht).op.op x) =
+      DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+        (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x := by
+    have h : s = t := by simpa only [Functor.map_id_apply] using ht
+    cases h
+    change DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+      (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s (L.val.map (𝟙 _) x) = _
+    simp
+  exact aux _ rfl
+
 
 /-- The direct-sum restriction is compatible with composition.
 
@@ -175,7 +217,40 @@ theorem elementDirectSumMap_comp {C : Type u} [SmallCategory C]
           (ModuleCat.restrictScalarsComp' (R.obj.map f).hom (R.obj.map g).hom
             (R.obj.map (f ≫ g)).hom
             (congrArg RingCat.Hom.hom <| R.obj.map_comp f g)).inv.app _ := by
-  sorry
+  classical
+  ext s x
+  simp only [LinearMap.comp_apply]
+  change elementDirectSumMap R A L (f ≫ g)
+    (DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+      (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x) =
+    elementDirectSumMap R A L g
+      (elementDirectSumMap R A L f
+        (DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+          (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x))
+  have aux (t : A.obj.obj W) (ht : A.obj.map (f ≫ g) s = t) :
+      elementDirectSumMap R A L (f ≫ g)
+        (DirectSum.lof (R.obj.obj U) (A.obj.obj U)
+          (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x) =
+      DirectSum.lof (R.obj.obj W) (A.obj.obj W)
+        (fun t ↦ (L.val.obj (elementObj A W t) : Type u)) t
+        (L.val.map (CategoryOfElements.homMk (A.obj.elementsMk U s)
+          (A.obj.elementsMk W t) (f ≫ g) ht).op.op x) := by
+    cases ht
+    exact elementDirectSumMap_lof R A L (f ≫ g) s x
+  rw [aux _ (A.obj.map_comp_apply f g s), elementDirectSumMap_lof,
+    elementDirectSumMap_lof]
+  apply congrArg (DirectSum.lof (R.obj.obj W) (A.obj.obj W)
+    (fun t ↦ (L.val.obj (elementObj A W t) : Type u)) (A.obj.map g (A.obj.map f s)))
+  have h : (CategoryOfElements.homMk (A.obj.elementsMk U s)
+      (A.obj.elementsMk W (A.obj.map g (A.obj.map f s))) (f ≫ g)
+        (A.obj.map_comp_apply f g s)).op.op =
+      elementObjMap A f s ≫ elementObjMap A g (A.obj.map f s) := by
+    apply Quiver.Hom.unop_inj
+    apply Quiver.Hom.unop_inj
+    apply Subtype.ext
+    rfl
+  rw [h]
+  exact L.val.map_comp_apply _ _ x
 
 /-- The presheaf of `R`-modules `U ↦ ⨁_{s ∈ A(U)} L(U,s)` whose module sheafification is the
 extension by zero of `L`.
