@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CompletionMap
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsGeneral
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
@@ -228,6 +229,7 @@ theorem adicCompletionReduction_restricted_isIso (X : Scheme.{t}) {Λ : Type t} 
       (adicCompletionReduction X d M N n)) := by
   sorry
 
+set_option linter.style.haveILetI false in
 /-- Exact restriction is conservative on the derived categories. Reflect the vanishing of
 the cone degree by degree through the exact underlying sheaf functor, using derived
 change of rings. Source: order 1260, proof step 6
@@ -236,7 +238,45 @@ theorem adicDerivedRestrict_reflectsIsomorphisms (X : Scheme.{t})
     {A B : Type t} [CommRing A] [CommRing B] (φ : A →+* B) :
     ∀ {Y Z : proEtaleDerivedCategory X B} (f : Y ⟶ Z),
       IsIso ((adicDerivedRestrict (X := X) (A := A) (B := B) φ).map f) → IsIso f := by
-  sorry
+  have hs : HasSheafify (ProEt.topology X) AddCommGrpCat.{t + 1} :=
+    SheafOfModules.hasSheafify_coefficientUniverse.{t + 1, t, t + 1}
+      (C := X.ProEt) (J := ProEt.topology X)
+  have hw : GrothendieckTopology.WEqualsLocallyBijective.{t + 1, t + 1, t,
+      t + 2, t + 1, t + 1} (ProEt.topology X) AddCommGrpCat.{t + 1} :=
+    SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{t + 1, t, t + 1}
+      (C := X.ProEt) (J := ProEt.topology X)
+  letI : HasDerivedCategory.{t + 2, t + 1, t + 2}
+      (SheafOfModules.{t + 1} (adicModuleRing X A)) :=
+    HasDerivedCategory.standard _
+  letI : HasDerivedCategory.{t + 2, t + 1, t + 2}
+      (SheafOfModules.{t + 1} (adicModuleRing X B)) :=
+    HasDerivedCategory.standard _
+  letI := (adicRestrictScalars_exact X φ).1
+  letI := (adicRestrictScalars_exact X φ).2
+  let UA := SheafOfModules.toSheaf.{t + 1, t, t + 1, t + 1} (adicModuleRing X A)
+  let UB := SheafOfModules.toSheaf.{t + 1, t, t + 1, t + 1} (adicModuleRing X B)
+  let F := SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)
+  letI : F.Additive := inferInstance
+  have hF : F.ReflectsIsomorphisms := by
+    have hcomp : (F ⋙ UA).ReflectsIsomorphisms := by
+      change UB.ReflectsIsomorphisms
+      infer_instance
+    letI := hcomp
+    exact reflectsIsomorphisms_of_comp F UA
+  letI := hF
+  intro Y Z f hf
+  change IsIso ((F.mapDerivedCategory).map f) at hf
+  rw [DerivedCategory.isIso_iff]
+  intro i
+  have hi : IsIso (F.map ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{t + 1} (adicModuleRing X B)) i).map f)) := by
+    exact (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso i) f).2
+      (by
+        change IsIso ((DerivedCategory.homologyFunctor
+          (SheafOfModules.{t + 1} (adicModuleRing X A)) i).map
+          ((F.mapDerivedCategory).map f))
+        infer_instance)
+  exact isIso_of_reflects_iso _ F
 
 set_option linter.style.haveILetI false
 /-- Every finite reduction of completion is the original reduction via evaluation's

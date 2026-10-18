@@ -16394,3 +16394,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:49 L: returned deliver/C2/Sheaf.RingTheory.RlimPerfectComplete (reviewer RETURN: (the landing tools, head 792f0bb85) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 09:49 L: merged deliver/A2/WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization (stage 3; reviewer PASS; first push; landing 20261018T094933-L-3721634 (interface); batch 20261018T094929; modules 4; new nodes 4; change records: coord/changes/A2-etale-compact-support-arbitrary-base.md)
 - 09:49 L: merged deliver/D4/Sheaf.CategoryTheory.RingedKoszulSystem (stage 3; reviewer PASS; first push; landing 20261018T094934-L-3722179 (proof); batch 20261018T094929; modules 1; new nodes 0)
+- 09:49 L: merged deliver/F3/Sheaf.Paper.AdicCompletionReduction (stage 3; reviewer PASS; first push; landing 20261018T094935-L-3722747 (proof); batch 20261018T094929; modules 1; new nodes 0)
