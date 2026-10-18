@@ -95,84 +95,100 @@ lemma exists_im_eq (n : ℕ) [IsArtinianObject (G.obj (op n))] :
   obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le (n.le_add_right N |>.trans hm)
   exact congrArg OrderDual.ofDual (hN k (by lia)).symm
 
-variable [∀ n : ℕ, IsArtinianObject (G.obj (op n))]
+/-- The images of the transitions `G m ⟶ G n` **stabilise**: for every `n` there is `N ≥ n` such
+that the image of `G m ⟶ G n` is the same for all `m ≥ N`. -/
+def ImagesStabilize : Prop :=
+  ∀ n : ℕ, ∃ (N : ℕ) (hN : n ≤ N), ∀ (m : ℕ) (hm : N ≤ m), im G (hN.trans hm) = im G hN
+
+/-- In a tower of Artinian objects the images stabilise. -/
+lemma imagesStabilize_of_isArtinianObject [∀ n : ℕ, IsArtinianObject (G.obj (op n))] :
+    ImagesStabilize G :=
+  fun n ↦ exists_im_eq G n
+
+variable {G} (hG : ImagesStabilize G)
 
 /-- A stabilisation index of the images at `n`. -/
-noncomputable def stabIdx (n : ℕ) : ℕ := (exists_im_eq G n).choose
+noncomputable def stabIdx (n : ℕ) : ℕ := (hG n).choose
 
 /-- The stabilisation index lies above `n`. -/
-lemma le_stabIdx (n : ℕ) : n ≤ stabIdx G n := (exists_im_eq G n).choose_spec.choose
+lemma le_stabIdx (n : ℕ) : n ≤ stabIdx hG n := (hG n).choose_spec.choose
 
 /-- The stable image at `n`: the image of `G m ⟶ G n` for all large `m`. -/
-noncomputable abbrev stab (n : ℕ) : Subobject (G.obj (op n)) := im G (le_stabIdx G n)
+noncomputable abbrev stab (n : ℕ) : Subobject (G.obj (op n)) := im G (le_stabIdx hG n)
 
 /-- The stable image is the image of every transition from beyond the stabilisation index. -/
-lemma stab_eq (n m : ℕ) (hm : stabIdx G n ≤ m) :
-    stab G n = im G ((le_stabIdx G n).trans hm) :=
-  ((exists_im_eq G n).choose_spec.choose_spec m hm).symm
+lemma stab_eq (n m : ℕ) (hm : stabIdx hG n ≤ m) :
+    stab hG n = im G ((le_stabIdx hG n).trans hm) :=
+  ((hG n).choose_spec.choose_spec m hm).symm
 
 /-- Transitions map stable images into stable images. -/
-lemma stab_factors {n m : ℕ} (h : n ≤ m) : (stab G n).Factors ((stab G m).arrow ≫ tr G h) := by
-  let M := max (stabIdx G m) (stabIdx G n)
-  have hm : stabIdx G m ≤ M := le_max_left _ _
-  have hn : stabIdx G n ≤ M := le_max_right _ _
-  rw [stab_eq G n M hn]
-  have e := stab_eq G m M hm
-  have hf : (stab G m).Factors (tr G ((le_stabIdx G m).trans hm)) := by
+lemma stab_factors {n m : ℕ} (h : n ≤ m) : (stab hG n).Factors ((stab hG m).arrow ≫ tr G h) := by
+  let M := max (stabIdx hG m) (stabIdx hG n)
+  have hm : stabIdx hG m ≤ M := le_max_left _ _
+  have hn : stabIdx hG n ≤ M := le_max_right _ _
+  rw [stab_eq hG n M hn]
+  have e := stab_eq hG m M hm
+  have hf : (stab hG m).Factors (tr G ((le_stabIdx hG m).trans hm)) := by
     rw [e]; exact factors_imageSubobject _
   have := Subobject.epi_factorThru_of_eq_imageSubobject _ e hf
-  refine Subobject.factors_of_epi_comp _ ((stab G m).factorThru _ hf) _ ?_
+  refine Subobject.factors_of_epi_comp _ ((stab hG m).factorThru _ hf) _ ?_
   rw [← assoc, Subobject.factorThru_arrow, tr_comp]
   exact factors_imageSubobject _
 
-/-- The tower of stable images of a tower of Artinian objects. -/
+/-- The tower of stable images of a tower whose images stabilise. -/
 @[simps]
 noncomputable def stabTower : ℕᵒᵖ ⥤ C where
-  obj n := (stab G n.unop : C)
-  map {n m} f := (stab G m.unop).factorThru ((stab G n.unop).arrow ≫ G.map f)
-    (stab_factors G (leOfHom f.unop))
+  obj n := (stab hG n.unop : C)
+  map {n m} f := (stab hG m.unop).factorThru ((stab hG n.unop).arrow ≫ G.map f)
+    (stab_factors hG (leOfHom f.unop))
   map_id n := by
-    rw [← cancel_mono (stab G n.unop).arrow, Subobject.factorThru_arrow]
+    rw [← cancel_mono (stab hG n.unop).arrow, Subobject.factorThru_arrow]
     simp
   map_comp f g := by
-    rw [← cancel_mono (stab G _).arrow, Subobject.factorThru_arrow]
+    rw [← cancel_mono (stab hG _).arrow, Subobject.factorThru_arrow]
     simp
 
 /-- The inclusion of the tower of stable images. -/
 @[simps]
-noncomputable def stabTowerι : stabTower G ⟶ G where
-  app n := (stab G n.unop).arrow
+noncomputable def stabTowerι : stabTower hG ⟶ G where
+  app n := (stab hG n.unop).arrow
 
 /-- The corestriction of a transition from beyond the stabilisation index to the stable image
 is an epimorphism. -/
-lemma epi_factorThru_tr (n M : ℕ) (hM : stabIdx G n ≤ M) (h) :
-    Epi ((stab G n).factorThru (tr G ((le_stabIdx G n).trans hM)) h) :=
-  Subobject.epi_factorThru_of_eq_imageSubobject _ (stab_eq G n M hM) h
+lemma epi_factorThru_tr (n M : ℕ) (hM : stabIdx hG n ≤ M) (h) :
+    Epi ((stab hG n).factorThru (tr G ((le_stabIdx hG n).trans hM)) h) :=
+  Subobject.epi_factorThru_of_eq_imageSubobject _ (stab_eq hG n M hM) h
 
 end ArtinianTower
 
 open ArtinianTower in
-/-- **Towers of Artinian objects are Mittag-Leffler** (e.g. towers of finite length objects in
-an abelian category): the images of `G m ⟶ G n` stabilise, and the stable images form a
-subtower with epimorphic transitions through which the transitions factor. -/
-theorem isMittagLefflerTower_of_isArtinianObject
-    [∀ n : ℕ, IsArtinianObject (G.obj (op n))] : IsMittagLefflerTower G := by
-  refine ⟨stabTower G, stabTowerι G, fun n ↦ ?_, fun n ↦ ?_, fun n ↦ ?_⟩
-  · exact inferInstanceAs (Mono (stab G n).arrow)
-  · let M := max (stabIdx G n) (stabIdx G (n + 1))
-    have hn : stabIdx G n ≤ M := le_max_left _ _
-    have hn' : stabIdx G (n + 1) ≤ M := le_max_right _ _
-    have hf : (stab G (n + 1)).Factors (tr G ((le_stabIdx G (n + 1)).trans hn')) := by
-      rw [stab_eq G (n + 1) M hn']; exact factors_imageSubobject _
-    have hg : (stab G n).Factors (tr G ((le_stabIdx G n).trans hn)) := by
-      rw [stab_eq G n M hn]; exact factors_imageSubobject _
-    have := epi_factorThru_tr G n M hn hg
-    refine epi_of_epi_fac (f := (stab G (n + 1)).factorThru _ hf)
-      (h := (stab G n).factorThru _ hg) ?_
-    rw [← cancel_mono (stab G n).arrow]
+/-- **Towers whose images stabilise are Mittag-Leffler**: the stable images form a subtower
+with epimorphic transitions through which the transitions factor. -/
+theorem isMittagLefflerTower_of_imagesStabilize {G : ℕᵒᵖ ⥤ C} (hG : ImagesStabilize G) :
+    IsMittagLefflerTower G := by
+  refine ⟨stabTower hG, stabTowerι hG, fun n ↦ ?_, fun n ↦ ?_, fun n ↦ ?_⟩
+  · exact inferInstanceAs (Mono (stab hG n).arrow)
+  · let M := max (stabIdx hG n) (stabIdx hG (n + 1))
+    have hn : stabIdx hG n ≤ M := le_max_left _ _
+    have hn' : stabIdx hG (n + 1) ≤ M := le_max_right _ _
+    have hf : (stab hG (n + 1)).Factors (tr G ((le_stabIdx hG (n + 1)).trans hn')) := by
+      rw [stab_eq hG (n + 1) M hn']; exact factors_imageSubobject _
+    have hg : (stab hG n).Factors (tr G ((le_stabIdx hG n).trans hn)) := by
+      rw [stab_eq hG n M hn]; exact factors_imageSubobject _
+    have := epi_factorThru_tr hG n M hn hg
+    refine epi_of_epi_fac (f := (stab hG (n + 1)).factorThru _ hf)
+      (h := (stab hG n).factorThru _ hg) ?_
+    rw [← cancel_mono (stab hG n).arrow]
     simp [tr_comp]
-  · have hf : (stab G n).Factors (tr G (le_stabIdx G n)) := factors_imageSubobject _
-    refine ⟨stabIdx G n, le_stabIdx G n, (stab G n).factorThru _ hf, ?_⟩
+  · have hf : (stab hG n).Factors (tr G (le_stabIdx hG n)) := factors_imageSubobject _
+    refine ⟨stabIdx hG n, le_stabIdx hG n, (stab hG n).factorThru _ hf, ?_⟩
     simp
+
+open ArtinianTower in
+/-- **Towers of Artinian objects are Mittag-Leffler** (e.g. towers of finite length objects in
+an abelian category): the images of `G m ⟶ G n` stabilise. -/
+theorem isMittagLefflerTower_of_isArtinianObject
+    [∀ n : ℕ, IsArtinianObject (G.obj (op n))] : IsMittagLefflerTower G :=
+  isMittagLefflerTower_of_imagesStabilize (imagesStabilize_of_isArtinianObject G)
 
 end CategoryTheory.Limits

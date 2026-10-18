@@ -5956,6 +5956,7 @@ public import WeilConjectures.CategoryTheory.Sites.CohomologyResolutionEvaluatio
 public import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 public import WeilConjectures.CategoryTheory.Sites.CoinduceZMod
 public import WeilConjectures.CategoryTheory.Sites.ConstantForget
+public import WeilConjectures.CategoryTheory.Sites.ConstantSheafCompose
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.CategoryTheory.Sites.ConstantTowerStandardization
 public import WeilConjectures.CategoryTheory.Sites.ContractedProductPresentation
@@ -8775,6 +8776,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCompari
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConstantMittagLeffler
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConstantTower
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
