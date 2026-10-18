@@ -28,21 +28,21 @@
  ],
  "proof": [
   {
-   "text": "Build the sectionwise extension-of-scalars functor from the landed changeOfRingsPresheaf and changeOfRingsHom_naturality [def-pur-sheaf-tensor-product]. Identity, composition and additivity hold sectionwise. Compose with sheafification. Extension of scalars and sheafification are additive by their adjunctions to additive restriction/forgetful functors (Mathlib Adjunction.left_adjoint_additive). This gives E with the exact objects and maps required.",
+   "text": "Reuse the ordinary-extension and K-flat-invariance clauses of the existing theorem SheafOfModules.derivedChangeOfRingsIndependentCoefficients, the former homotopy-category presentation of this node. Instantiate its two derived categories with HasDerivedCategory.standard, so their Hom universes agree; retain only E, its prescribed objects and maps [def-pur-sheaf-tensor-product], its additivity and its invariance clause. These clauses mention neither derived category and therefore apply with independent target and source localization universes. The ordinary functor is determined by its prescribed objects and maps, so no arbitrary undetermined object is chosen.",
    "uses": [
     "def-pur-sheaf-tensor-product"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-pur-change-of-rings-kflat-quasi-iso] to E, using its reflexive object identification and the proved morphism identification, to obtain clause (1).",
+   "text": "Retain the K-flat quasi-isomorphism invariance clause from the same existing interface. This is precisely the independent-site-universe form of [lem-pur-change-of-rings-kflat-quasi-iso]; the currently attached standalone declaration of that dependency only handles coincident site and coefficient universes, so it cannot be applied directly here.",
    "uses": [
     "lem-pur-change-of-rings-kflat-quasi-iso"
    ],
    "elementary": true
   },
   {
-   "text": "Let F be E.mapHomotopyCategory followed by the derived localization [def-weil-abstract-derived-category]. Mathlib supplies its shift compatibility and triangulatedness. Define S to consist of homotopy-category objects represented by K-flat complexes [def-pc-kflat-complex]. Each homotopy object is the quotient of a complex G; [lem-pc-kflat-resolution] gives P → G, and quotient_map_mem_quasiIso_iff shows that its homotopy image is a resolution from S. For a quasi-isomorphism between objects in S choose their K-flat representatives and lift the morphism through the full quotient functor. quotient_map_mem_quasiIso_iff gives a chain quasi-isomorphism; clause (1) makes its termwise E image a quasi-isomorphism. Localization.inverts then makes its F image an isomorphism. Apply [lem-pur-left-derived-from-kflat-class] to F and S. Its pointwise existence, universal derived pair and triangulatedness supply clause (2). Its counit-isomorphism clause applied to the representation (P,hP,rfl) supplies the final clause for every K-flat P.",
+   "text": "Let F be E.mapHomotopyCategory followed by the derived localization [def-weil-abstract-derived-category]. Mathlib supplies its shift compatibility and triangulatedness. Define S to consist of homotopy-category objects represented by K-flat complexes [def-pc-kflat-complex]. Each homotopy object is the quotient of a complex G; [lem-pc-kflat-resolution] gives P → G, and quotient_map_mem_quasiIso_iff shows that its homotopy image is a resolution from S. For a quasi-isomorphism between objects in S choose their K-flat representatives and lift the morphism through the full quotient functor. quotient_map_mem_quasiIso_iff gives a chain quasi-isomorphism; clause (1) makes its termwise E image a quasi-isomorphism. Localization.inverts then makes its F image an isomorphism. Apply [lem-pur-left-derived-from-kflat-class] to F and S. Its pointwise existence, universal derived pair and triangulatedness supply clause (2). Its counit-isomorphism clause applied to the representation (P,hP,rfl) supplies the final clause for every K-flat P. To transfer the result to cochain complexes, use the full, essentially surjective homotopy quotient. Its induced structured-arrow functors are full and essentially surjective, hence initial: in the comma category, lift the target to a fixed object, and every other object maps to this lift, giving connectedness. Initial restriction preserves the limit cones defining pointwise right Kan extension. Transport the cones along quotientCompQhIso and mapHomotopyCategoryFactors. The transported counit is the composite of the old counit with invertible comparison components; therefore it is invertible on every K-flat complex. Pointwise universality implies ordinary universality.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-pc-kflat-complex",
@@ -64,7 +64,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YT and 06YY; derived.tex Tags 06XN and 05SE; sectionwise additive functor assembly in Lean"
+  "place": "Tags 06YT and 06YY; derived.tex Tags 06XN and 05SE. E1 reuses only ordinary-extension and invariance clauses of the existing independent-coefficient interface, reconstructs the derived pair via the resolving class in the two selected universes, and proves the pointwise homotopy-to-cochain transfer by initial restriction of limit cones."
  },
  "mathlib_searches": [
   {
@@ -163,13 +163,13 @@
   "note": "Item module matches the node clause by clause: site/final object, exact abelian sections, rho:R->O(U), A=R/(t), full short exact coefficient sequence via the uniquely characterised section multiplication, G/G' by restriction along the coefficient maps, T from the derived extension with E fixed to changeOfRings, L at A[0], theta uniquely normalised on pure tensors, c via leftDerivedUnique and the pointwise counit, alpha = L(factors) ; c ; Q(theta) ; factors'^-1 ; G'(K-flat counit^-1), both conjuncts with correct quantifiers; no invertibility of alpha; no hollow definitions; docstrings and the 6-step proof present; statement fields verbatim; node copies change only lean; report has Worker report and Second reading by NZ; edge cases (t unit, t=0, torsion, unbounded, separate universes) covered. Finding (H3): the §1(B) dependency module DerivedChangeOfRingsCochainModel omitted the 'everywhere defined' (HasPointwiseLeftDerivedFunctor) clause of lem-pur-derived-change-of-rings, which the old record stated, while calling the interface equivalent. Fixed: fixes/DerivedChangeOfRingsCochainModel.lean adds the pointwise field (Stacks 05SV/06XN) with docstrings; theorem signature unchanged. The dependency lean.note was left as delivered (no dependency JSON fix is accepted); it does not mention the new field. Not blocking: the rebind leaves the old sorry'd derivedChangeOfRingsIndependentCoefficients unowned, but it is now a corollary of the new structure. nt_compile --json: delivered pair 5.0/36.2 s and 16.0/42.7 s; fixed dependency + item 9.2/30.5 s; exit 0, no messages."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T085316-L-30639",
-  "kind": "interface",
+  "landing": "20261018T145056-L-3637452",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

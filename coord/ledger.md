@@ -16517,3 +16517,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:50 L: merged deliver/C8/Sheaf.Paper.ProperUnboundedWindow (stage 3; reviewer PASS; first push; landing 20261018T145054-L-3636633 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:50 L: merged deliver/D3/Sheaf.NumberTheory.Padics.LocalFieldIntegralBasis (stage 3; reviewer PASS; first push; landing 20261018T145054-L-3636954 (proof); batch 20261018T145048; modules 1; new nodes 1)
 - 14:50 L: merged deliver/D9/Sheaf.Topology.WLocalComponents (stage 3; reviewer PASS; first push; landing 20261018T145055-L-3637216 (proof); batch 20261018T145048; modules 1; new nodes 0)
+- 14:50 L: merged deliver/E1/Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel (stage 3; reviewer PASS; first push; landing 20261018T145056-L-3637452 (proof); batch 20261018T145048; modules 1; new nodes 0)
