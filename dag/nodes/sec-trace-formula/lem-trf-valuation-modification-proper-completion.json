@@ -24,9 +24,167 @@
   "def-pc-integral-scheme",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Replace the base by $S=\\operatorname{Spec}R$, where $R=V_{\\mathfrak p}$. This is still a valuation ring with fraction field $K$ and finitely many prime ideals. It is normal: if an integral fraction $b$ lay outside $R$, then $b^{-1}$ would belong to its maximal ideal, and dividing a monic equation for $b$ by its leading power would put $1$ in that ideal. Its localizations have the same property. The base changes of $C,Y$ remain flat finitely presented curves, and the base change of $f$ is proper, by [lem-weil-pbc-flat-morphism-base-change], [lem-weil-pbc-qcqs-morphism-permanence], [lem-trf-relative-dimension-base-change] and [lem-weil-pbc-proper-base-change]. The generic-fibre isomorphism and the given schematic-density injections restrict to this base. In fact $S\\to T$ is open: if a prime immediately above $\\mathfrak p$ exists, choose $a$ in it outside $\\mathfrak p$; then its image is $D(a)$, and otherwise $S=T$. Thus this is an open restriction as well. If $\\mathfrak p=(0)$, $f$ is already the generic-fibre isomorphism and the positive-dimensional fibre cannot occur.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-relative-dimension-base-change",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  },
+  {
+   "text": "Choose an affine neighbourhood of $x$ inside the smooth neighbourhood supplied by the assumption that $x$ is a smooth point. Let $N$ be the open neighbourhood of $Y_x$ on which the geometric fibres are nodal, as in the hypothesis. The closed set $Y\\setminus N$ has closed image under $f$, by universal closedness in [def-weil-proper-morphism], and that image misses $x$. Shrink the affine neighbourhood inside its complement and call it $C_0$; put $Y_0=Y\\times_C C_0$. Then $C_0/S$ is smooth and all geometric fibres of $Y_0/S$ are nodal. Flatness, local finite presentation and fibre purity restrict to these opens. Both restrictions are of finite presentation: $C_0$ is affine, $Y_0$ is quasi-compact because $f$ is proper, and both are quasi-separated opens of the original finitely presented $S$-schemes. These are precisely the quasi-compactness and quasi-separatedness conditions in [lem-weil-pbc-qcqs-morphism-permanence]. By [sbc-lem-smooth-geometrically-reduced] the fibres of $C_0$ are geometrically reduced. In particular their geometric fibres, the base changes to algebraic closures of the residue fields, are reduced. With empty marking, $Y_0$ is a semistable multipointed $S$-curve in the sense of [lem-trf-geometrically-reduced-eta-normal]: it is flat and finitely presented of pure relative dimension one, and every singular point of every geometric fibre is an ordinary node by the hypothesis on $N$. The nodal hypothesis concerns only these geometric fibres, so it is used through that semistable clause rather than through a criterion requiring all algebraically closed extensions.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-trf-geometrically-reduced-eta-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  },
+  {
+   "text": "Apply the normalization clause of [lem-trf-valuation-curve-projective-preparation] separately to $C_0$ and $Y_0$, whose generic fibres are smooth. Each normalization is a finite $\\eta$-modification with normal source. It is actually an isomorphism. To see this without assuming the total space normal, cover the target by affine opens $W$. Each $W/S$ is flat finitely presented (affine source and base). For $C_0$ it has reduced geometric fibres by Step 2; for $Y_0$ it is an open of the semistable curve $Y_0$, hence again a semistable multipointed $S$-curve with empty marking. The normal integral affine base $S$ is qcqs, so [lem-trf-geometrically-reduced-eta-normal] (its main assertion for $C_0$, its semistable-curve clause for $Y_0$) says that every finite $\\eta$-modification of $W$ is an isomorphism. The restriction of the finite normalization is one: finiteness restricts by affine restriction, and the generic isomorphism and the schematic-density injections restrict. Hence the normalization is an isomorphism on every $W$, and therefore globally. Consequently both $C_0$ and $Y_0$ are normal; no change of their points or of the ambient neighbourhood of $Y_x$ has been made.",
+   "uses": [
+    "lem-trf-valuation-curve-projective-preparation",
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  },
+  {
+   "text": "Use [lem-trf-valuation-horizontal-curve-models] with empty marking to get finitely many irreducible components of $C_0$. In a normal scheme with finitely many components these components are disjoint: two components through a point would give two minimal primes of its local ring, whereas that local ring is a domain. They are therefore open and closed. Retain the component containing $x$ and choose an affine neighbourhood of $x$ in it, again denoted $C_0$; restrict $Y_0$ accordingly. Now $C_0$ is integral. Its nonempty generic fibre is integral, and $Y_{0,\\eta}\\cong C_{0,\\eta}$. For every affine chart of either curve, [lem-sc-flat-invertible-sections-torsion-free], applied to its structure line, makes multiplication by every nonzero element of $R$ injective. Thus the chart ring injects into its generic localization, so the generic fibre is schematically dense. In particular $Y_0$ is the closure of its irreducible generic fibre and is irreducible; since it is normal it is reduced and integral. This chooses one generic component before taking a proper completion, rather than imposing a connectedness hypothesis on the original curves.",
+   "uses": [
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  },
+  {
+   "text": "Let $L$ be the closed modification locus of $Y_0\\to C_0$. By [lem-trf-valuation-curve-projective-preparation] it is a finite set and quasi-finite over $S$. The point $x$ belongs to it because a morphism which is an isomorphism near $x$ has a zero-dimensional fibre there. By [pqf-def-quasifinite], every point of $L_s$ is isolated in that fibre; hence it is a discrete finite subspace. Since $L_s$ is closed in $(C_0)_s$, $x$ is closed in $(C_0)_s$. The fibre over the closed point $s$ is closed in $C_0$, so $x$ is closed in $C_0$ and in $L$. We may therefore apply the closed-point localization and shrinking clause of the preparation lemma at $x$. The base localization is now $R_s=R$, and it yields a connected affine neighbourhood $U$ with $x$ as its only closed modification point. It stays inside the smooth $C_0$ chosen above.",
+   "uses": [
+    "lem-trf-valuation-curve-projective-preparation",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  },
+  {
+   "text": "Apply the compactification and extension clauses of [lem-trf-valuation-curve-projective-preparation] to this normal affine $U$ and the normal modification $Y_U\\to U$. Obtain a normal projective $S$-curve $P$ containing $U$ openly, and its normal proper extension $Q\\to P$ with geometrically reduced fibres, an isomorphism generically and off the modification locus in $U$. Both are flat and finitely presented curves. Concretely the extension uses the two target charts $U$ and $P\\setminus L_U$: over the former it is exactly $Y_U\\to U$, and over the latter it is the identity, with the specified isomorphism on the overlap. These are the extension properties stated in that lemma, not properties inferred from its proof. In particular the entire original $Y_U$, including the neighbourhood of $Y_x$, is retained. Properness of $Q/S$ also follows by [lem-weil-pbc-proper-composition]. The target is proper because projective morphisms are proper [lem-kun-projective-implies-proper].",
+   "uses": [
+    "lem-trf-valuation-curve-projective-preparation",
+    "lem-weil-pbc-proper-composition",
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  },
+  {
+   "text": "We may retain just the component of this completion containing $U$. Here is why it is open and closed, so that this operation preserves properness and finite presentation. For $P$ and $Q$, flatness gives schematic density of the generic fibre, by [lem-sc-flat-invertible-sections-torsion-free] on affine charts. Their generic fibres are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and have finitely many irreducible components by [lem-weil-pbc-noetherian-finite-components]. Taking closures of those finitely many generic components covers the whole space by density, so the whole space has finitely many irreducible components. Normality makes them disjoint, by the local-domain argument in Step 4, hence open and closed. Since the integral open $U$ lies in a single component $\\bar C$ of $P$, take $\\bar Y$ to be the inverse image of $\\bar C$ in $Q$. Its generic fibre is isomorphic to the integral generic fibre of $\\bar C$, and is schematically dense, so $\\bar Y$ is integral. All properties restrict to these open-and-closed pieces. The preparation lemma gives reducedness of the fibres after base change to an algebraic closure of the residue field; by [lem-trf-geometric-reducedness-algebraic-closure-test] every fibre is then reduced after every field extension, in particular after every algebraically closed $\\Omega$, as the statement requires. Properness of $\\bar C/S$ follows by composing its closed immersion into $P$ with $P/S$, using [lem-weil-pbc-closed-immersion-proper] and [lem-weil-pbc-proper-composition]. The same argument applies to $\\bar Y/S$. Write $\\bar f:\\bar Y\\to\\bar C$ for the restricted morphism.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-trf-geometric-reducedness-algebraic-closure-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  },
+  {
+   "text": "The generic fibres of $\\bar C$ and $\\bar Y$ are integral finite-type $K$-schemes, reduced after every field extension by Step 7 and [lem-trf-geometric-reducedness-algebraic-closure-test]. Apply [lem-trf-sepclosed-valuation-geometric-components] with the valuation ring $R$ and its prime $(0)$ to each: their unique reduced irreducible component is geometrically integral. Thus both generic fibres are geometrically integral, as required. Their isomorphism is the generic isomorphism of the extension. The generic fibre is an open subscheme: choose a nonzero element in the smallest nonzero prime of $R$ to express $\\eta=D(a)$ (the field case was excluded in Step 1). The schematic-density injections proved above show that these generic opens are schematically dense in both completions. They therefore witness the required isomorphism between schematically dense opens.",
+   "uses": [
+    "lem-trf-sepclosed-valuation-geometric-components",
+    "lem-trf-geometric-reducedness-algebraic-closure-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  },
+  {
+   "text": "The only closed modification point in $U$ is $x$, and the extension is the identity outside $U$. Every point of $L_U\\cap U_s$ is closed in $U$ by the quasi-finite discrete-fibre argument of Step 5. Thus $L_U\\cap U_s=\\{x\\}$. The point $x$ is still closed in $\\bar C_s$: the modification locus stays closed in the completion in the extension clause of [lem-trf-valuation-curve-projective-preparation], so its intersection with the closed fibre is the closed singleton $\\{x\\}$. It follows that $\\bar f_s$ is an isomorphism away from $x$. Let $k=\\kappa(s)$. By [lem-trf-sepclosed-valuation-geometric-components], $k$ is separably closed. By [lem-kun-closed-point-field], the residue extension $\\kappa(x)/k$ is finite purely inseparable. The universal injectivity in [lem-pc-spec-pure-insep-integral-radicial-surjective] shows that, for each specified algebraically closed $\\Omega$ with a geometric point over $x$, there is just one point $y$ over $x$ in $\\bar C_\\Omega$; existence is supplied by that geometric point. Base change of the isomorphism on $\\bar C_s\\setminus\\{x\\}$ is the required isomorphism on $\\bar C_\\Omega\\setminus\\{y\\}$. The source and target over $U$ remain exactly the original base-changed map.",
+   "uses": [
+    "lem-trf-valuation-curve-projective-preparation",
+    "lem-trf-sepclosed-valuation-geometric-components",
+    "lem-kun-closed-point-field",
+    "lem-pc-spec-pure-insep-integral-radicial-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  },
+  {
+   "text": "The neighbourhood $U$ lies in the smooth locus of the original target. Smoothness is stable under base change by [lem-sbc-smooth-relative-dimension-permanence], so its $\\Omega$-fibre is smooth at $y$. Since $U\\hookrightarrow\\bar C$ is open, the same is true of $\\bar C_\\Omega$ at $y$. Finally the specified identification $\\bar Y\\times_{\\bar C}U\\cong Y\\times_CU$ is an identification of morphisms to $U$; applying the fibre-product universal property with $\\operatorname{Spec}\\Omega\\to U$ identifies the inverse images of $y$, together with these open ambient neighbourhoods. This proves the neighbourhood clause as well as the fibre clause. All shrinking and normalization arguments were made after passing to affine target neighbourhoods and proper inverse images, so they required no separatedness or properness of the initial structure maps to $T$.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.1 and the local-to-proper reduction in Lemma 4.4.2, printed pp. 30–31; agent expansion of the hypotheses and component choices."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-kun-closed-point-field",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-trf-relative-dimension-base-change",
+  "lem-trf-sepclosed-valuation-geometric-components",
+  "lem-trf-valuation-curve-projective-preparation",
+  "lem-trf-valuation-horizontal-curve-models",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "pqf-def-quasifinite",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin Lemma 4.4.1 and the first reduction paragraphs of Lemma 4.4.2, printed pp. 30–31, and Proposition 3.5.2, pp. 20–21; author PDF read online. Archival local copy WANTED. Expanded using existing preparation and eta-normality nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +220,45 @@
    "results": "[grep] OK 4 hit(s).  Returned names/files: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean. The valuative criterion for Proj, normalization localization and reduced-fibre definitions do not provide a simultaneous proper curve completion preserving the chosen neighbourhood. Elliptic minimal-model results do not apply to arbitrary relative curves.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|eta.normal|reduced.*fibre|reduced.*fiber",
+   "results": "OK 4 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean.  Read returned signatures: elliptic minimal models, valuative criteria and normalization descent do not give a simultaneous completion preserving the specified nodal neighbourhood; geometric reducedness definitions give no such existence theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A modification of curves over a separably closed valued field admits a proper completion preserving a semistable neighbourhood",
+   "results": "OK 8 hits: WeierstrassCurve.IsGoodReduction.congr_simp, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.exists_isIntegral, WeierstrassCurve.IsIntegral.integral, Valued.extension, WeierstrassCurve.reduction, WeierstrassCurve.baseChange_integralModel_eq, Valued.completable.  Read returned signatures: elliptic minimal models, valuative criteria and normalization descent do not give a simultaneous completion preserving the specified nodal neighbourhood; geometric reducedness definitions give no such existence theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactification\", \"IsProper\"",
+   "results": "OK 0 hits: .  Read returned signatures: elliptic minimal models, valuative criteria and normalization descent do not give a simultaneous completion preserving the specified nodal neighbourhood; geometric reducedness definitions give no such existence theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactify an affine normal curve over a valuation ring and extend a birational proper morphism by the identity preserving a specified fibre",
+   "results": "OK 8 hits: AlgebraicGeometry.ValuativeCommSq.i₁, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.ValuativeCommSq.field, AlgebraicGeometry.ValuativeCriterion.uniqueness, AlgebraicGeometry.Scheme.Hom.normalizationDesc.  Read returned signatures: elliptic minimal models, valuative criteria and normalization descent do not give a simultaneous completion preserving the specified nodal neighbourhood; geometric reducedness definitions give no such existence theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper modification of relative curves over a finite rank valuation ring can be completed near a nodal exceptional fibre to proper normal curves with geometrically reduced fibres",
+   "results": "OK 8 hits: WeierstrassCurve.exists_isMinimal, WeierstrassCurve.IsGoodReduction, WeierstrassCurve.minimal, WeierstrassCurve.IsMinimal, WeierstrassCurve.reduction, WeierstrassCurve.instIsMinimalMinimal, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.Proj.valuativeCriterion_existence.  Read returned signatures: elliptic minimal models, valuative criteria and normalization descent do not give a simultaneous completion preserving the specified nodal neighbourhood; geometric reducedness definitions give no such existence theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-smooth-target-modification-exceptional-tree",
@@ -94,5 +287,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-modification-proper-completion",
+  "worker": "stage1",
+  "summary": "Ten-step split, with no new nodes: shrink to a smooth target and nodal inverse image; prove both are unchanged by finite normalization via eta-normality; choose the generic component; isolate the closed modification point; apply the existing normal-curve projective preparation theorem; retain integral completion components; check geometric integrality, the unique geometric centre and preservation of the whole original neighbourhood. The item statement is unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: Temkin stable-modification input, specifically Lemma 4.3.2, p. 29, retaining semistability of the modified pair.; local geometric input to the repaired marking-globalization argument: the unmarked smooth-target exceptional-tree case of Temkin Lemma 4.4.2. Numerical proof of the unmarked smooth-target exceptional-fibre assertion, following Temkin Lemma 4.4.2. Auxiliary input: localizing the centre, compactifying the normal target and extending the modification, before the genus calculation. Realizes the local-to-proper preparation for the numerical exceptional-tree argument; preserves the existing Temkin branch below the blueprint unit.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "The closed point of the finite-type special fibre has finite purely inseparable residue extension over the separably closed residue field."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-pc-spec-pure-insep-integral-radicial-surjective",
+    "why": "Universal injectivity gives a unique geometric point over the closed centre after scalar extension."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "Injectivity on structure-sheaf sections proves schematic density of generic fibres and justifies component selection."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-components",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "General scheme-morphism permanence, finiteness, or smoothness tool used to check the hypotheses of Temkin preparation; it does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-a47e122a7",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-a47e122a7 (reviewer sub-agent of L); spot-checked: I read all ten steps in full, every cited statement, and Temkin (author PDF) at Prop. 3.5.2, Lemma 4.4.1(i),(ii) and the reduction in the proof of Lemma 4.4.2, pp. 30-31. The split follows Temkin's route: localize, isolate the closed point of the modification locus, compactify the normal affine curve, extend by the identity, normalize. There are no new nodes and the statement is unchanged. review_split passes and there is no cycle. I accept all 13 declared tool_uses as generic permanence facts. Two faults are repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-modification-proper-completion.json. (1) E1/C4, Step 2: it applied lem-trf-nodal-geometric-fibres-reduced, which needs smooth-or-node at closed points over every algebraically closed Omega. The item only gives this for the geometric fibre over an algebraic closure, and the transfer to larger fields is not elementary. Steps 2 and 3 now use the explicit semistable-curve clause of lem-trf-geometrically-reduced-eta-normal for Y_0 with empty marking, and the nodal lemma is no longer cited. (2) C1, Steps 7 and 8: the preparation lemma gives reduced fibres only after base change to an algebraic closure. The item's clause (every algebraically closed Omega) and lem-trf-sepclosed-valuation-geometric-components (every field extension) need more. Both steps now cite the same-unit node lem-trf-geometric-reducedness-algebraic-closure-test. proof_deps is recomputed. I also checked that the modification locus L_U is closed in the completion, using the finite chain and purely inseparable residue extensions, and that the geometric centre is unique by pure inseparability. Edge cases checked: height 0, identity map, higher finite rank, disconnected generic fibre, imperfect residue field.; 1 file(s) fixed by the reviewer"
  }
 }
