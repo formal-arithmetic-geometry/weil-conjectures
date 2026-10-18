@@ -136,7 +136,8 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar
     (Ideal.Quotient.mk J) f KB a
   have := isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle Λ aX aY f hf d hd K b B
   exact ⟨e₁ ≪≫ (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso eB ≪≫
-    ((R((f)_*[ModuleCat.{u + 1} Λ])).mapIso (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).mapIso
+    ((R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
+      (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
       (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f B)).symm ≪≫
     (asIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K).app
       (constantSingle (ModuleCat.{u + 1} Λ) Y B))).symm⟩

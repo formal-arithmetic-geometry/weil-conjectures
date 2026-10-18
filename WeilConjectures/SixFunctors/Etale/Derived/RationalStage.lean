@@ -45,8 +45,8 @@ morphism is `ϖ⁻ᴺ u` for an integral morphism `u`.
   (`AlgebraicGeometry.Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational`).
   Following the blueprint it is deduced from the finite-stage Karoubian theorem
   `thm-weil-pbc-finite-stage-karoubian`, which belongs to another part of the blueprint and is
-  only stated here. The Karoubi envelope carries no triangulated structure in this repository, so the equivalence
-  with the Karoubi envelope is stated as an equivalence of categories.
+  only stated here. The Karoubi envelope carries no triangulated structure in this repository,
+  so the equivalence with the Karoubi envelope is stated as an equivalence of categories.
 
 ## Main results
 

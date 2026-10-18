@@ -146,9 +146,12 @@ noncomputable def derivedRestrictScalarsRingEquivIso :
 is a derived base change of `K`: the comparison `K ≅ Res_e Res_{e⁻¹} K` is universal, since
 `Res_e` is an equivalence. -/
 lemma isDerivedBaseChange_ringEquiv (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    IsDerivedBaseChange (f := e.toRingHom) ((derivedRestrictScalarsRingEquivIso e).inv.app K) :=
+    IsDerivedBaseChange (f := e.toRingHom) (K := K)
+      (K' := (derivedRestrictScalars J e.symm.toRingHom).obj K)
+      ((derivedRestrictScalarsRingEquivIso e).inv.app K) :=
   fun _ ↦ ((derivedRestrictScalarsRingEquivIso e).app K).homFromEquiv.bijective.comp
-    (derivedRestrictScalars J e.toRingHom).map_bijective
+    ((Functor.FullyFaithful.ofFullyFaithful
+      (derivedRestrictScalars J e.toRingHom)).map_bijective _ _)
 
 end RingEquiv
 
