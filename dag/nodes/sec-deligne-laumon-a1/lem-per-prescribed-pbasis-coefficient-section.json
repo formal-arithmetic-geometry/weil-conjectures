@@ -2,19 +2,90 @@
  "id": "lem-per-prescribed-pbasis-coefficient-section",
  "kind": "statement",
  "title": "Coefficient section with prescribed p-basis lifts",
- "statement": "Let $(A,\\mathfrak m)$ be a nonzero complete Noetherian local ring [def-weil-pbc-noetherian-ring] [def-weil-pbc-adically-complete-ring] of characteristic $p>0$, with residue field $k=A/\\mathfrak m$. Let $(b_i)_{i\\in E}$ be a $p$-basis of $k$, meaning that the finitely supported monomials $\\prod_i b_i^{n_i}$, $0\\leq n_i<p$, form a vector-space basis of $k$ over $k^p=\\{x^p:x\\in k\\}$. For each $i$ choose any lift $\\beta_i\\in A$ of $b_i$. There is a unique field homomorphism $s:k\\to A$ whose composite with the residue map is the identity and such that $s(b_i)=\\beta_i$ for every $i$.",
+ "statement": "Let $p$ be a prime number. Let $(A,\\mathfrak m)$ be a nonzero complete Noetherian local ring [def-weil-pbc-noetherian-ring] [def-weil-pbc-adically-complete-ring] of characteristic $p>0$, with residue field $k=A/\\mathfrak m$. Let $(b_i)_{i\\in E}$ be a $p$-basis of $k$, meaning that the finitely supported monomials $\\prod_i b_i^{n_i}$, $0\\leq n_i<p$, form a vector-space basis of $k$ over $k^p=\\{x^p:x\\in k\\}$. For each $i$ choose any lift $\\beta_i\\in A$ of $b_i$. There is a unique field homomorphism $s:k\\to A$ whose composite with the residue map is the identity and such that $s(b_i)=\\beta_i$ for every $i$.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose IV 2.1.4, printed p.50: unique coefficient field containing arbitrary lifts of a residue-field p-basis (there attributed to Bourbaki, Algebre commutative IX, section 2, no.2, Theorem 1(a))."
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-adically-complete-ring",
-  "lem-weil-pbc-p-basis-exists"
+  "def-weil-pbc-adically-complete-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $q_n=p^n$ and let $D_n$ be the finitely supported exponent families $e:E\\to\\{0,\\ldots,q_n-1\\}$. Every $x\\in k$ has a unique finite expansion $x=\\sum_{e\\in D_n}a_{n,e}(x)^{q_n}b^e$ with $a_{n,e}(x)\\in k$. Here is the induction from the assumed $p$-basis, including uniqueness. At $n=0$ the only exponent is zero and its coefficient is $x$. Given the expansion at $n$, expand each $a_{n,e}(x)=\\sum_f d_{e,f}^{p}b^f$ in the assumed $p$-basis. Frobenius additivity [def-weil-ring-frobenius] gives $x=\\sum_{e,f}d_{e,f}^{p^{n+1}}b^{e+p^nf}$. The digit decomposition of each exponent less than $p^{n+1}$ as $e+p^nf$ is unique. Conversely, group any such expansion by $e$ and use uniqueness at level $n$, followed by uniqueness in the original $p$-basis, to recover every $d_{e,f}$. Frobenius on a field is injective: $u^{q_n}=v^{q_n}$ implies $(u-v)^{q_n}=0$, hence $u=v$. All sums are finite, even when $E$ is infinite.",
+   "uses": [
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV 2.1.4, printed p.50 (statement); explicit Frobenius-expansion proof supplied by Q23 since the cited Bourbaki proof is not in the literature."
+   }
+  },
+  {
+   "text": "Put $R_n=A/\\mathfrak m^{q_n}$, and let $\\bar\\beta_i$ denote the image of $\\beta_i$ there. Define $t_n:k^{q_n}\\to R_n$ by $t_n(a^{q_n})=\\widetilde a^{q_n}\\bmod\\mathfrak m^{q_n}$, where $\\widetilde a$ is any residue lift of $a$. The root $a$ is unique by field Frobenius injectivity. Two lifts differ by an element of $\\mathfrak m$, so their $q_n$th powers differ by an element of $\\mathfrak m^{q_n}$, by [def-weil-ring-frobenius]. Lifts of $a+a'$ and $aa'$ may be chosen as $\\widetilde a+\\widetilde {a'}$ and $\\widetilde a\\widetilde {a'}$; the same Frobenius identities prove that $t_n$ preserves addition, multiplication, and $1$. In particular $t_n(b_i^{q_n})=\\bar\\beta_i^{q_n}$.",
+   "uses": [
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV 2.1.4, printed p.50 (statement); explicit Frobenius-expansion proof supplied by Q23 since the cited Bourbaki proof is not in the literature."
+   }
+  },
+  {
+   "text": "Using the finite expansion of Step 1, define $s_n:k\\to R_n$ by $s_n(x)=\\sum_e t_n(a_{n,e}(x)^{q_n})\\bar\\beta^e$. This is a ring homomorphism, as the following coefficient calculation shows. Addition adds the coefficients in $k^{q_n}$, so is preserved by $t_n$. For multiplication it suffices by distributivity to multiply two terms $c b^e$ and $d b^f$, with $c,d\\in k^{q_n}$. Write $e_i+f_i=g_i+q_nh_i$, with $0\\le g_i<q_n$. Their product in $k$ has bounded expansion $cd\\prod_i(b_i^{q_n})^{h_i}b^g$. Its image is $t_n(c)t_n(d)\\prod_i\\bar\\beta_i^{q_nh_i}\\bar\\beta^g=t_n(c)t_n(d)\\bar\\beta^{e+f}$, exactly the product of the images. The expansion of $1$ gives $s_n(1)=1$. Reducing this formula modulo $\\mathfrak m$ gives $x$, so $s_n$ is a residue section. For $n\\ge1$ the expansion of $b_i$ has its sole nonzero coefficient $1$ at the $i$th unit exponent, giving $s_n(b_i)=\\bar\\beta_i$. For $n=0$, $R_0=k$ and the same assertion is the residue-lift assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV 2.1.4, printed p.50 (statement); explicit Frobenius-expansion proof supplied by Q23 since the cited Bourbaki proof is not in the literature."
+   }
+  },
+  {
+   "text": "The sections commute with $R_{n+1}\\to R_n$. To check this without assuming compatibility of the chosen lifts, write the expansion of $x$ at level $n+1$ with root coefficients $d_{e,f}$ and exponent $e+q_nf$, as in Step 1. Its level-$n$ root coefficient is $a_e=\\sum_f d_{e,f}^{p}b^f$. Choose arbitrary lifts $\\widetilde d_{e,f}$ and $\\widetilde a_e$ in $A$. The element $\\widetilde a_e-\\sum_f\\widetilde d_{e,f}^{p}\\beta^f$ lies in $\\mathfrak m$ because its residue is zero. Its $q_n$th power lies in $\\mathfrak m^{q_n}$, and [def-weil-ring-frobenius] therefore gives\n$$\\widetilde a_e^{q_n}\\equiv\\sum_f\\widetilde d_{e,f}^{p^{n+1}}\\beta^{q_nf}\\pmod{\\mathfrak m^{q_n}}.$$\nMultiply by $\\beta^e$ and sum over $e$. The left side is the formula for $s_n(x)$, and the right side is the reduction of the formula for $s_{n+1}(x)$, proving compatibility.",
+   "uses": [
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV 2.1.4, printed p.50 (statement); explicit Frobenius-expansion proof supplied by Q23 since the cited Bourbaki proof is not in the literature."
+   }
+  },
+  {
+   "text": "For each positive integer $N$, choose $n$ with $q_n\\ge N$ and reduce $s_n(x)$ to $A/\\mathfrak m^N$. Compatibility in Step 4 makes this independent of $n$: two indices are compared with their maximum. These residues form a compatible tuple over all $N$. By the bijectivity of $A\\to\\varprojlim_N A/\\mathfrak m^N$ in [def-weil-pbc-adically-complete-ring], there is a unique element $s(x)\\in A$ with those residues. Addition, multiplication, and $1$ are preserved because they are preserved in every quotient and the same canonical map is injective. Thus $s:k\\to A$ is a unital ring homomorphism; it is injective since its residue composite is $1_k$, so it is a field embedding into $A$. The residues of $s(b_i)$ and $\\beta_i$ agree at every $N$ by Step 3; injectivity gives $s(b_i)=\\beta_i$. Its residue composite is the identity by the residue-section assertion of Step 3.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV 2.1.4, printed p.50 (statement); explicit Frobenius-expansion proof supplied by Q23 since the cited Bourbaki proof is not in the literature."
+   }
+  },
+  {
+   "text": "Suppose $u:k\\to A$ is any other field homomorphism with the stated residue composite and prescribed values. For fixed $n$, apply $u$ to the unique expansion from Step 1:\n$$u(x)=\\sum_e u(a_{n,e}(x))^{q_n}\\beta^e.$$\nEach $u(a_{n,e}(x))$ is a residue lift of $a_{n,e}(x)$, so its $q_n$th power is the coefficient defining $s_n(x)$ in Step 2. Hence $u(x)\\equiv s(x)\\pmod{\\mathfrak m^{q_n}}$ for every $n$. Since $q_n$ tends to infinity, $u(x)-s(x)$ belongs to every $\\mathfrak m^N$, whose intersection is zero by [def-weil-pbc-adically-complete-ring]. Thus $u=s$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV 2.1.4, printed p.50 (statement); explicit Frobenius-expansion proof supplied by Q23 since the cited Bourbaki proof is not in the literature."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-frobenius",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 2.1.4, printed p.50 (statement); explicit Frobenius-expansion proof supplied by Q23 since the cited Bourbaki proof is not in the literature."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +121,66 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PowerBasis.repr_gen_pow_isIntegral\", \"module\": \"Mathlib.RingTheory.Adjoin.PowerBasis\", \"type\": \"(hB : IsIntegral R B.gen) (hmin : minpoly S B.gen = (minpoly R B.gen).map (algebraMap R S)) (n : ℕ) :\\n  ∀ i, IsIntegral R (B.basis.repr (B.gen ^ n) i)\", \"doc\": \"Let $ R $ be a commutative ring and $ S $ an $ R $-algebra equipped with a power basis $ B $ having generator $ \\\\alpha $. If $ \\\\alpha $ is integral over $ R $ and the minimal polynomial of $ \\\\alpha $ \"}\n  {\"name\": \"IsLocalRing.basisQuotient_repr\", \"module\": \"Mathlib.RingTheory.LocalRing.Quotient\", \"type\": \"{ι} [Fintype ι] (b : Basis ι R S) (x) (i) :\\n  (basisQuotient b).repr (Ideal.Quotient.mk pS x) i = Ideal.Quotient.mk p (b.repr x i)\", \"doc\": \"For a finite basis $ b $ of an $ R $-module $ S $ over a local ring $ R $, the representation of elements in the quotient module $ S/pS $ using the induced basis $ \\\\overline{b} $ corresponds to applyi\"}\n  {\"name\": \"PowerSeries.residueFieldOfPowerSeries\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": ResidueField k⟦X⟧ ≃+* k\", \"doc\": \"For any field $ k $, the residue field of the ring of univariate power series $ k[[X]] $ is isomorphic to $ k $. This isomorphism arises because the maximal ideal of $ k[[X]] $ consists of power serie\"}\n  {\"name\": \"IsLocalRing.basisQuotient_apply\", \"module\": \"Mathlib.RingTheory.LocalRing.Quotient\", \"type\": \"[Fintype ι] (b : Basis ι R S) (i) : (basisQuotient b) i = Ideal.Quotient.mk pS (b i)\", \"doc\": \"For each index $i$, the $i$-th element of the basis for the quotient module $S/pS$ over $R/p$ is the image of the original basis element $b_i$ under the canonical quotient map $S \\to S/pS$.\"}\n  {\"name\": \"PadicInt.instIsLocalRing\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": IsLocalRing ℤ_[p]\", \"doc\": \"The ring of p-adic integers $\\\\mathbb{Z}_p$ is a local ring, meaning it has a unique maximal ideal consisting of all p-adic integers with p-adic valuation strictly greater than 0.\"}\n  {\"name\": \"IsAdjoinRootMonic.coeff_apply_coe\", \"module\": \"Mathlib.RingTheory.IsAdjoinRoot\", \"type\": \"(z : S) (i : Fin (natDegree f)) : h.coeff z i = h.basis.repr z i\", \"doc\": \"For any element $ z $ in the semiring $ S $ obtained by adjoining a root of a monic polynomial $ f $ over a commutative semiring $ R $, and for any index $ i $ in $ \\\\{0, 1, \\\\dots, \\\\deg(f)-1\\\\} $, the c\"}\n  {\"name\": \"PadicInt.isFractionRing\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": IsFractionRing ℤ_[p] ℚ_[p]\", \"doc\": \"The field of p-adic numbers $\\\\mathbb{Q}_p$ is the fraction field of the ring of p-adic integers $\\\\mathbb{Z}_p$. This means every non-zero element of $\\\\mathbb{Z}_p$ becomes invertible in $\\\\mathbb{Q}_p$\"}\n  {\"name\": \"mahler\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \"(k : ℕ) : C(ℤ_[p], ℤ_[p])\", \"doc\": \"For each natural number $k$, the function $\\\\mathbb{Z}_p \\\\to \\\\mathbb{Z}_p$ defined by $x \\\\mapsto \\\\binom{x}{k}$ (the binomial coefficient), which is continuous with respect to the p-adic topology. These\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: pretilts, power bases, and residue fields do not give a coefficient section with arbitrary prescribed p-basis lifts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "complete Noetherian local ring of characteristic p has unique coefficient field containing prescribed lifts of residue-field p-basis",
+   "results": "{\"t\": \"2026-10-18T22:11:36Z\", \"tool\": \"leanfinder\", \"query\": \"complete Noetherian local ring of characteristic p has unique coefficient field containing prescribed lifts of residue-field p-basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.untiltFun\", \"PreTilt\", \"PreTilt.coeff_def\", \"Tilt\", \"PreTilt.exists_smodEq_untiltAux\", \"PreTilt.instPerfectRing\", \"HenselianLocalRing\", \"WittVector.StandardOneDimIsocrystal\"], \"digest\": \"5819d392dc708860\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: pretilt and separable-extension basis results do not construct the prescribed residue-field section; polynomial monomial bases concern a different vector space"
+  },
+  {
+   "tool": "loogle",
+   "query": "CoefficientField, pBasis, IsAdicComplete",
+   "results": "{\"t\": \"2026-10-18T22:11:37Z\", \"tool\": \"loogle\", \"query\": \"CoefficientField, pBasis, IsAdicComplete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CoefficientField'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: pretilt and separable-extension basis results do not construct the prescribed residue-field section; polynomial monomial bases concern a different vector space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure theorem residue field representatives prescribed p-basis equal characteristic complete local ring",
+   "results": "{\"t\": \"2026-10-18T22:14:18Z\", \"tool\": \"leanfinder\", \"query\": \"Cohen structure theorem residue field representatives prescribed p-basis equal characteristic complete local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.untiltFun\", \"PreTilt\", \"PreTilt.exists_smodEq_untiltAux\", \"PreTilt.mk_untilt_eq_coeff_zero\", \"PreTilt.untiltAux_smodEq_untiltFun\", \"Algebra.instFormallyUnramifiedResidueField\", \"IsLocalRing.basisQuotient_repr\", \"PreTilt.coeff_def\"], \"digest\": \"a14299dff889144c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: pretilt and separable-extension basis results do not construct the prescribed residue-field section; polynomial monomial bases concern a different vector space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If b is a p-basis of a characteristic p field k then monomials with exponents less than p^n form a basis over k^(p^n)",
+   "results": "{\"t\": \"2026-10-18T22:15:21Z\", \"tool\": \"leanfinder\", \"query\": \"If b is a p-basis of a characteristic p field k then monomials with exponents less than p^n form a basis over k^(p^n)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.mapPowExpCharPowOfIsSeparable\", \"PowerBasis.coe_basis\", \"PowerBasis.basis\", \"Field.powerBasisOfFiniteOfSeparable\", \"IntermediateField.powerBasisAux\", \"PowerBasis.basis_eq_pow\", \"Module.Basis.PowerBasis\", \"PowerBasis\"], \"digest\": \"98c5f38a67976ade\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: pretilt and separable-extension basis results do not construct the prescribed residue-field section; polynomial monomial bases concern a different vector space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "iterating Frobenius gives higher p power monomial bases from a p-basis",
+   "results": "{\"t\": \"2026-10-18T22:15:22Z\", \"tool\": \"leanfinder\", \"query\": \"iterating Frobenius gives higher p power monomial bases from a p-basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectClosure.iterate_frobenius_mk\", \"IsPurelyInseparable.iterateFrobeniusₛₗ\", \"Perfection.coeff_iterate_frobenius'\", \"Perfection.coeff_iterate_frobenius\", \"PreTilt.coeff_iterate_frobenius'\", \"PreTilt.coeff_iterate_frobenius\", \"Module.Basis.mapPowExpCharPowOfIsSeparable\", \"LinearMap.iterateFrobenius_def\"], \"digest\": \"2dbb03118592de4b\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: pretilt and separable-extension basis results do not construct the prescribed residue-field section; polynomial monomial bases concern a different vector space"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, frobenius",
+   "results": "{\"t\": \"2026-10-18T22:15:23Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: pretilt and separable-extension basis results do not construct the prescribed residue-field section; polynomial monomial bases concern a different vector space"
+  },
+  {
+   "tool": "grep",
+   "query": "pBasis|p_basis|p-basis|mapPowExpCharPowOfIsSeparable",
+   "results": "{\"t\": \"2026-10-18T22:15:23Z\", \"tool\": \"grep\", \"query\": \"pBasis|p_basis|p-basis|mapPowExpCharPowOfIsSeparable\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/LinearDisjoint.lean\", \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\"], \"digest\": \"5dcdecd612822bae\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: pretilt and separable-extension basis results do not construct the prescribed residue-field section; polynomial monomial bases concern a different vector space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded monomials of a p-basis are a vector space basis over iterated Frobenius powers",
+   "results": "{\"t\": \"2026-10-18T22:15:24Z\", \"tool\": \"leansearch\", \"query\": \"bounded monomials of a p-basis are a vector space basis over iterated Frobenius powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.coe_basisMonomials\", \"Polynomial.basisMonomials\", \"Polynomial.Sequence.basis\", \"Module.Basis.mapPowExpCharPowOfIsSeparable\", \"MvPolynomial.basisMonomials\", \"Module.Basis.symmetricAlgebra\", \"MvPowerSeries.map_iterateFrobenius_expand\", \"MvPolynomial.coe_basisMonomials\"], \"digest\": \"06c8fba4588e7e3c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: pretilt and separable-extension basis results do not construct the prescribed residue-field section; polynomial monomial bases concern a different vector space"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-coefficient-field-generic-differential-basis",
@@ -78,5 +205,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prescribed-pbasis-coefficient-section",
+  "worker": "stage1",
+  "summary": "Made primality of p explicit (the composite-characteristic literal reading fails for Z/4Z), checked against ILO IV 2.1.4. Supplied an explicit six-step Frobenius-expansion construction and uniqueness proof, using only the assumed p-basis, Frobenius identities, and the inverse-limit definition of completeness. No new nodes: the digit induction and carry calculations are written out as elementary finite-sum arguments. Removed the unused p-basis-existence statement dependency because a p-basis is assumed and defined inline. Searches and citation audit recorded in report.md.",
+  "blueprint": "Supports the coefficient-field choice inside ILO IV 2.1.4 used in Steps 1 and 6 of lem-per-coefficient-field-generic-differential-basis; through the existing from/via chain, the dimension-normalized duality input to Step 1 of lem-per-artin-gabber-affine-curve. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-f4b8d63ac",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-f4b8d63ac (reviewer sub-agent of L); spot-checked: Read ILO IV 2.1.1–2.1.4 (pdf pp.56–57, printed p.50). The item states the same thing as IV 2.1.4: a unique coefficient section of a complete Noetherian local ring of characteristic p sending a residue p-basis to arbitrarily chosen lifts. The added 'p prime' is justified: with Z/4, k=F_2=k^4 and the empty family, the statement fails, and ILO takes p prime throughout. The only citer, lem-per-coefficient-field-generic-differential-basis (Steps 1 and 6), works in a reduced local ring, where the characteristic is forced to be prime. Dropping lem-weil-pbc-p-basis-exists from stmt_deps is correct because the p-basis is assumed and defined inline. I re-derived all six steps. Step 1 is the base-p digit induction with uniqueness. Step 2 shows t_n is well defined because (a+μ)^{q_n}=a^{q_n}+μ^{q_n} with μ^{q_n} in m^{q_n}. Step 3 shows s_n is a ring map through the carry calculation. Step 4 shows the s_n are compatible for arbitrary lifts. Step 5 takes the limit through the completeness bijection. Step 6 proves uniqueness from the expansion plus ∩m^N=0. Steps cite only def-weil-ring-frobenius and def-weil-pbc-adically-complete-ring, whose statements cover what the steps take. Small cases checked: E=∅, A=k, F_p(u)[[t]], F_p(u)[ε]/ε². The DAG has no duplicate (searched coefficient-field, p-basis and Cohen nodes). The delivery has no new nodes, no route issue and no tool_uses; this review made no fixes."
  }
 }
