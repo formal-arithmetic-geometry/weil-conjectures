@@ -14,9 +14,100 @@
   "def-kun-topological-krull-dimension",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=\\widehat A$. For every minimal prime $\\mathfrak p$ of $A$, put $R_{\\mathfrak p}=A/\\mathfrak p$ and $C_{\\mathfrak p}=\\widehat{R_{\\mathfrak p}}$. A quotient of a Noetherian local ring by a prime is a nonzero Noetherian local domain: ideals lift to ideals of $A$, primes are proper, and every maximal ideal lifts to $\\mathfrak m$. By [lem-weil-pbc-local-completion-quotient] we identify $C_{\\mathfrak p}=B/\\mathfrak pB$ through the canonical compatible quotient maps. The completions $B$ and $C_{\\mathfrak p}$ are Noetherian local by [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-local-completion-local-ring]. Both maps $A\\to B$ and $R_{\\mathfrak p}\\to C_{\\mathfrak p}$ are faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat].",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Lemma 2.1.6, general case: completion of each reduced irreducible component; the completion/quotient comparison is supplied by Stacks 00MA rather than the SGA reference printed there."
+   }
+  },
+  {
+   "text": "If $\\mathfrak q$ is minimal in $B$, its contraction $\\mathfrak p$ is minimal in $A$: for any prime $\\mathfrak r\\subseteq\\mathfrak p$, flat going down [lem-sc-flat-going-down] produces a prime $\\mathfrak q_0\\subseteq\\mathfrak q$ contracting to $\\mathfrak r$; minimality gives $\\mathfrak q_0=\\mathfrak q$ and $\\mathfrak r=\\mathfrak p$. Since $\\mathfrak pB\\subseteq\\mathfrak q$, the prime $\\mathfrak q/\\mathfrak pB$ is minimal in $C_{\\mathfrak p}$: any smaller prime would lift to a smaller prime in $B$.",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Lemma 2.1.6, last paragraph: each completed irreducible component dominates a component of the original scheme; contraction direction."
+   }
+  },
+  {
+   "text": "Conversely fix a minimal prime $\\mathfrak p$ of $A$ and a minimal prime $\\overline{\\mathfrak q}$ of $C_{\\mathfrak p}$. Flat going down [lem-sc-flat-going-down] for $R_{\\mathfrak p}\\to C_{\\mathfrak p}$ shows that $\\overline{\\mathfrak q}$ contracts to zero: zero is a prime of the domain $R_{\\mathfrak p}$, and a prime below $\\overline{\\mathfrak q}$ contracting to zero must equal $\\overline{\\mathfrak q}$. Its inverse image $\\mathfrak q\\subset B$ therefore contracts to $\\mathfrak p$. Choose a minimal prime $\\mathfrak q_0\\subseteq\\mathfrak q$ using [lem-weil-pbc-prime-contains-minimal-prime]. Its contraction is a prime contained in $\\mathfrak p$, hence equals $\\mathfrak p$; thus $\\mathfrak pB\\subseteq\\mathfrak q_0$. The minimality of $\\overline{\\mathfrak q}$ now forces $\\mathfrak q_0=\\mathfrak q$. Consequently every component of $\\operatorname{Spec}C_{\\mathfrak p}$ is a component of $\\operatorname{Spec}B$, by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. Conversely Step 2 assigns every component of $\\operatorname{Spec}B$ to such a $C_{\\mathfrak p}$.",
+   "uses": [
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Lemma 2.1.6, last paragraph: the components of the completed reduced components are exactly the components of the completion."
+   }
+  },
+  {
+   "text": "We use the following direct prime-chain interpretation throughout. For an ideal $I\\subset R$, taking inverse images gives a bijection between primes of $R/I$ and primes of $R$ containing $I$, preserving inclusion and the Zariski closed sets $V(J)$; its inverse sends $\\mathfrak r$ to $\\mathfrak r/I$. Thus $\\operatorname{Spec}(R/I)$ is homeomorphic to $V(I)$. Combine this with [lem-weil-pbc-spec-irreducible-components-minimal-primes] and [lem-weil-pbc-spec-topological-krull-dimension-ring]: components of $\\operatorname{Spec}R$ have dimensions $\\dim(R/\\mathfrak r)$ for minimal primes $\\mathfrak r$. In particular all the component identifications in Steps 2 and 3 preserve dimension.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Lemma 2.1.6, both cases: dimensions of reduced components; prime-chain form of the closed-subscheme identifications."
+   }
+  },
+  {
+   "text": "For the forward implication, choose a component $V(\\mathfrak p)$ of $\\operatorname{Spec}A$ of dimension one. Step 4 says $\\dim R_{\\mathfrak p}=1$, so [lem-weil-pbc-completion-dimension] gives $\\dim C_{\\mathfrak p}=1$. Choose a minimal prime $\\overline{\\mathfrak q}$ of $C_{\\mathfrak p}$ below its maximal ideal using [lem-weil-pbc-prime-contains-minimal-prime]. In any local ring of dimension one no minimal prime can be its maximal ideal: if it were, every prime, being contained in that maximal ideal, would equal it, contrary to dimension one. Therefore $\\overline{\\mathfrak q}$ is strictly below the maximal ideal. This gives a chain of length one in $C_{\\mathfrak p}/\\overline{\\mathfrak q}$; a longer chain would lift to a chain in $C_{\\mathfrak p}$, so this quotient has dimension exactly one. By Steps 3 and 4 the corresponding $V(\\mathfrak q)\\subset\\operatorname{Spec}B$ is the required component. No catenarity hypothesis was used.",
+   "uses": [
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Lemma 2.1.6, integral forward case and general-case reduction."
+   }
+  },
+  {
+   "text": "For the converse assume $A$ universally catenary, and choose a component $V(\\mathfrak q)\\subset\\operatorname{Spec}B$ of dimension one. Step 2 gives a minimal prime $\\mathfrak p$ of $A$ with $\\overline{\\mathfrak q}=\\mathfrak q/\\mathfrak pB$ minimal in $C_{\\mathfrak p}$. By Step 4 this is a dimension-one component of $\\operatorname{Spec}C_{\\mathfrak p}$. Apply [lem-per-ratliff-formal-catenarity] to $A$: all components of this particular $\\operatorname{Spec}(B/\\mathfrak pB)$ have the same dimension, hence all have dimension one. Every finite prime chain in $C_{\\mathfrak p}$ lies above a minimal prime below its first term, by [lem-weil-pbc-prime-contains-minimal-prime], so it has length at most one. The chosen component supplies a length-one chain. Thus $\\dim C_{\\mathfrak p}=1$, and [lem-weil-pbc-completion-dimension] gives $\\dim R_{\\mathfrak p}=1$. Step 4 identifies $\\operatorname{Spec}R_{\\mathfrak p}$ with the irreducible component $V(\\mathfrak p)$ of $T$, proving the converse.",
+   "uses": [
+    "lem-per-ratliff-formal-catenarity",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-completion-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Lemma 2.1.6, integral converse using Theorem 1.2.2, followed by the last-paragraph component reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-weil-pbc-completion-dimension",
+  "lem-per-ratliff-formal-catenarity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIV, Lemma 2.1.6, pp. 210-211; Ratliff input in Theorem 1.2.2, p. 208. Completion of quotients supplied by Stacks 00MA."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +143,45 @@
    "results": "Retained search hits: AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.IsIntegral.nonempty, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced. None states the strict-localization component/fibre comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a Noetherian local ring preserves one dimensional irreducible components and reflects them for universally catenary rings",
+   "results": "{\"t\": \"2026-10-18T15:31:52Z\", \"tool\": \"leanfinder\", \"query\": \"Completion of a Noetherian local ring preserves one dimensional irreducible components and reflects them for universally catenary rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDiscreteValuationRing.TFAE\", \"PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal\", \"ringKrullDim_eq_one_iff_of_isLocalRing_isDomain\", \"Ring.DimensionLEOne.localization\", \"Ring.DimensionLEOne.isIntegralClosure\"], \"digest\": \"9010f437ede5549b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "catenary|equidimensional|ringKrullDim.*AdicCompletion|AdicCompletion.*ringKrullDim",
+   "results": "{\"t\": \"2026-10-18T15:41:02Z\", \"tool\": \"grep\", \"query\": \"catenary|equidimensional|ringKrullDim.*AdicCompletion|AdicCompletion.*ringKrullDim\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally catenary local domain has equidimensional completion",
+   "results": "{\"t\": \"2026-10-18T15:41:03Z\", \"tool\": \"leansearch\", \"query\": \"A universally catenary local domain has equidimensional completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofLinearEquiv.congr_simp\", \"completeIntegralClosure_eq_integralClosure\", \"UniformSpace.Completion.commRing\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ext_iff\", \"IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers\", \"AdicCompletion.congr\"], \"digest\": \"36903bd9471c8bff\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of the completion of a universally catenary local domain have quotient dimension equal to the dimension of the domain",
+   "results": "{\"t\": \"2026-10-18T15:41:04Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal primes of the completion of a universally catenary local domain have quotient dimension equal to the dimension of the domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"Ring.KrullDimLE.of_isLocalization\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_quotient\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\"], \"digest\": \"23c6d953edc93641\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, ringKrullDim",
+   "results": "{\"t\": \"2026-10-18T15:41:05Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-immediate-specialization-criterion",
@@ -77,5 +203,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-completion-component-dimension",
+  "worker": "stage1",
+  "summary": "Read ILO XIV 2.1.6 and XIV 1.2.1-1.2.2; retained the correct two-direction statement. Expanded the component correspondence by flat going down and elementary minimal-prime comparisons, and expanded the dimension-one local-ring and equidimensionality arguments. Reused existing completion/quotient, dimension and flatness nodes; added one statement-only Ratliff criterion, sourced by Stacks 0AW6/0AW2. Preserved prior search records and retained work, with fresh logged searches for the genuinely new lemma. No Lean written or compiled.",
+  "blueprint": "Proof Step 3, dimension-normalized Verdier duality over the arbitrary base field, expanded through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-extraordinary-pullback: the dimension-function normalization and its identification of Zariski and etale immediate specializations: completion applied first to the henselization and then, in the reverse direction, to the universally catenary reduced local closure (ILO XIV 2.1.6). The six steps supply the completion comparison used in ILO XIV 2.1.4 through the imported ancestor Step 3; no unit-level route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic completion/quotient identification for A/p, replacing only the SGA reference printed in ILO; the unit has no other such algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherianity of completion, needed for the completed component rings; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic equality of dimension with the local completion, exactly the dimension input used in ILO XIV 2.1.6; the unit has no separate version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-308d1f133",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-308d1f133 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 15 cited statements, ILO XIV 2.1.6 (pp. 210-211) and XIV 1.2.1-1.2.2 (p. 208), and Stacks 0AW2 (definition-formally-catenary), 0AW6 (proposition-ratliff) and topology definition-equidimensional. Statement: it matches ILO 2.1.6 exactly (forward implication with no extra hypothesis, converse under universal catenarity). Compared with the earlier unsplit version, the statement, stmt_deps, source and blueprint are unchanged; the only changes are the proof, proof_deps, status, split_report and appended searches. Steps: Step 1 identifies C_p with B/pB through the 00MA node and gets Noetherian, local and faithfully flat from the completion nodes. Step 2 is correct: by going down, a minimal q of B contracts to a minimal p, and q/pB is minimal in C_p. Step 3 is correct: by going down for A/p to C_p, a minimal prime of C_p contracts to 0, then the 00E0 node gives q0 = q. Step 4 uses Spec(R/I) = V(I) with the 00ES node and the topological = ring dimension node. Step 5 (forward) uses 07NV for A/p; a minimal prime of a 1-dimensional local ring is not its maximal ideal, so that component has dimension exactly 1, and no catenarity is used. Step 6 (converse) applies Ratliff to A, so Spec(B/pB) is equidimensional of dimension 1, hence dim C_p = 1, hence dim A/p = 1 by 07NV. The universal-catenarity hypothesis is used exactly there. New node lem-per-ratliff-formal-catenarity is a correct statement of Stacks 0AW6 with 0AW2 expanded inline ('finite' is automatic). It is statement-only, self-contained, cites its definition nodes, has logged searches, and its from/via are right. I found no duplicate after an rg for ratliff, formally catenary, 0AW2/0AW3/0AW6 and equidimensional and reading all 29 universally-catenary nodes; the closest is Greco's weakly-etale lemma, which is about a different map. Small cases tested: a field, an Artinian ring, a DVR, k[[x,y,z]]/(xy,xz), Nagata's non-universally-catenary domain (consistent with the converse needing the hypothesis) and analytically reducible domains (no bijection between components is claimed). Accepted tool_uses: three generic sk-thm-p1 completion nodes. No SGA 4 citation; the ILO SGA 1 reference is replaced by Stacks 00MA. No fixes."
  }
 }
