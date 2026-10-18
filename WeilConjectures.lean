@@ -8732,6 +8732,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.AbelianConstant
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
@@ -9139,11 +9140,13 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerShriekFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarClopenSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantBounded
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissage
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteEtaleAlgClosed
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SplitCovering
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation

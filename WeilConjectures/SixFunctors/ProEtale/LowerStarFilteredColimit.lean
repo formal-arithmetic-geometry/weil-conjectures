@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.CohomologyFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
 
 /-!
 # The pro-étale pushforward along a qcqs morphism preserves filtered colimits
@@ -119,5 +120,32 @@ theorem rightAcyclic_lowerStar_of_isColimit_of_injective {T Y : Scheme.{u}} (g :
     ((ProEtale.upperStar AddCommGrpCat.{u + 1} V.hom).obj c.pt) q
   rw [AddCommGrpCat.isZero_iff_subsingleton]
   exact ⟨fun a b ↦ e.symm.injective (@Subsingleton.elim _ hs _ _)⟩
+
+/-- The pushforward along a quasi-compact quasi-separated morphism preserves filtered colimits
+of abelian pro-étale sheaves indexed by `u + 1`-small categories. -/
+instance preservesColimitsOfShape_lowerStar {T Y : Scheme.{u}} (g : T ⟶ Y) [QuasiCompact g]
+    [QuasiSeparated g] (K : Type (u + 1)) [SmallCategory K] [IsFiltered K] :
+    PreservesColimitsOfShape K (ProEtale.lowerStar AddCommGrpCat.{u + 1} g) :=
+  ⟨fun {_} ↦ ⟨fun hc ↦ ⟨(isColimit_lowerStar_mapCocone g hc).some⟩⟩⟩
+
+/-- **The higher direct images along a qcqs morphism commute with filtered colimits**
+([Stacks 0739] on the pro-étale site): `Rⁱg_*` preserves colimits of `u + 1`-small filtered
+diagrams of abelian sheaves. In degree `0` this is
+`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_lowerStar`; the induction step
+`CategoryTheory.Functor.preservesColimitsOfShape_rightDerived_succ` needs filtered colimits of
+injective sheaves to be `g_*`-acyclic
+(`AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isColimit_of_injective`). -/
+instance preservesColimitsOfShape_rightDerived_lowerStar {T Y : Scheme.{u}} (g : T ⟶ Y)
+    [QuasiCompact g] [QuasiSeparated g] (K : Type (u + 1)) [SmallCategory K] [IsFiltered K]
+    (n : ℕ) :
+    PreservesColimitsOfShape K ((ProEtale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived n) := by
+  induction n with
+  | zero =>
+    exact preservesColimitsOfShape_of_natIso
+      (ProEtale.lowerStar AddCommGrpCat.{u + 1} g).rightDerivedZeroIsoSelf.symm
+  | succ n ih =>
+    exact Functor.preservesColimitsOfShape_rightDerived_succ _ K n fun J hJ ↦
+      have := hJ
+      rightAcyclic_lowerStar_of_isColimit_of_injective g (colimit.isColimit J) n
 
 end AlgebraicGeometry.ProEtale
