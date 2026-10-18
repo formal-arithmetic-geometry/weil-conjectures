@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-fd-fourier-perverse",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Perverse amplitude of the Fourier transform",
@@ -20,48 +20,155 @@
  ],
  "proof": [
   {
-   "text": "Let $K\\in{}^pD^{\\le0}(V)$ (respectively $K\\in{}^pD^{\\ge0}(V)$),\nand put $X:=V\\times_{k_0}V^\\vee$. The projection $p_1$ is smooth\nof constant relative dimension one, so the smooth-pullback exactness\n[lem-per-smooth-pullback-t-exact] of the perverse-curve chapter gives\n\n$$\nLp_1^*K\\in{}^pD^{\\le1}(X),\\qquad\nLp_1^*K\\in{}^pD^{\\ge1}(X)\n$$\n\nfor the corresponding side: with the shift convention\n${}^pD^{\\le n}={}^pD^{\\le0}[-n]$, the direct statement is\n$Lp_1^*[1]K\\in{}^pD^{\\le0}(X)$ and\n$Lp_1^*[1]K\\in{}^pD^{\\ge0}(X)$, and the displayed inclusions are\nthe same statements after the $[-1]$-shift (the shift\n$[-1]$ lowers both indices by one:\n${}^pD^{\\le0}[-1]={}^pD^{\\le1}$,\n${}^pD^{\\ge0}[-1]={}^pD^{\\ge1}$).",
+   "text": "Put $X=V\\times_{k_0}V^\\vee=\\operatorname{Spec}k_0[x,\\xi]$. Under [def-sbc-affine-space], $p_1$ and $p_2$ are respectively the relative affine lines $\\mathbf A^1_V\\to V$ and $\\mathbf A^1_{V^\\vee}\\to V^\\vee$. By [sbc-lem-affine-space-smooth] both are smooth of constant relative dimension one. This also applies over each geometric point, since that lemma allows every base scheme: their geometric fibers are smooth of pure dimension one, in the sense of [def-sbc-smooth-morphisms]. The affine charts are polynomial rings in one variable over the target chart, so both projections are affine and of finite type; their relative diagonals are cut out by the difference of the two fiber coordinates, hence closed. The same description over $k_0$ shows that $V,V^\\vee,X$ are separated of finite type. These verify the geometric hypotheses of the two permanence lemmas below, using the morphism conventions of [def-weil-pbc-scheme-conventions].",
    "uses": [
-    "lem-per-smooth-pullback-t-exact"
+    "def-sbc-affine-space",
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-fd-fourier-perverse.proof.md",
+    "place": "paragraphs 1 and 3: geometry of the two projections"
+   }
   },
   {
-   "text": "The kernel $\\mathcal K_\\psi$ is lisse of rank one [prop-kernel-lisse] (the pullback\n$b^*\\mathcal L_{\\psi(b(x,\\xi))}$ of the rank-one lisse\nArtin–Schreier sheaf of [lem-fd-as-lisse]), so the lisse-tensor\npermanence [lem-per-lisse-tensor-permanence] of the perverse-curve chapter\ngives the same sidewise inclusions for\n$Lp_1^*K\\otimes^L\\mathcal K_\\psi$:\n\n$$\nLp_1^*K\\otimes^L\\mathcal K_\\psi\\in{}^pD^{\\le1}(X),\n\\qquad\nLp_1^*K\\otimes^L\\mathcal K_\\psi\\in{}^pD^{\\ge1}(X).\n$$",
+   "text": "Take $K\\in{}^pD^{\\le0}(V)$, or separately $K\\in{}^pD^{\\ge0}(V)$, in the bounded constructible coefficient category implicit in [def-per-perverse-subcategories]. Apply [lem-per-smooth-pullback-t-exact] to $p_1$ with $d=1$. It says exactly that $Lp_1^*K[1]$ lies in the corresponding class of index zero on $X$. Therefore $Lp_1^*K$ lies in ${}^pD^{\\le1}(X)$, respectively ${}^pD^{\\ge1}(X)$, because [def-per-perverse-subcategories] defines the index-$1$ class to be the index-zero class shifted by $[-1]$. In particular $[-1]$ raises the index from $0$ to $1$.",
    "uses": [
-    "prop-kernel-lisse",
-    "lem-fd-as-lisse",
-    "lem-per-lisse-tensor-permanence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The projection $p_2$ is affine with fibers of dimension at most\none, so the affine pushforward amplitude\n[lem-per-artin-gabber-affine-curve] of the perverse-curve chapter (relative\ndimension $d=1$) gives $p_{2,!}\\bigl({}^pD^{\\le0}(X)\\bigr) \\subset{}^pD^{\\le1}(V^\\vee)$ and\n$p_{2,!}\\bigl({}^pD^{\\ge0}(X)\\bigr)\\subset {}^pD^{\\ge-1}(V^\\vee)$; applied to the\n$[-1]$-shifted objects of the two families above (the functor\n$p_{2,!}$ commutes with shifts), this yields\n\n$$\np_{2,!}\\bigl(Lp_1^*K\\otimes^L\\mathcal K_\\psi\\bigr)\n\\in{}^pD^{\\le2}(V^\\vee),\\qquad\n\\bigl(\\,\\cdot\\,\\bigr)\\in{}^pD^{\\ge0}(V^\\vee)\n$$\n\nsidewise (the $\\le$-bound increases the index by one for the\n$[-1]$-shifted input, and the $\\ge$-bound respectively). The\nnormalization $[1]$ of [def-fd-transform] lowers both indices\nby one, since\n${}^pD^{\\le n}[1]={}^pD^{\\le n-1}$ and\n${}^pD^{\\ge n}[1]={}^pD^{\\ge n-1}$ by the shift convention of\n[def-per-perverse-subcategories], so\n\n$$\n\\operatorname{FT}_\\psi(K)\\in{}^pD^{\\le1}(V^\\vee),\\qquad\n\\operatorname{FT}_\\psi(K)\\in{}^pD^{\\ge-1}(V^\\vee)\n$$\n\nfor the two sides respectively, which is the asserted amplitude.",
-   "uses": [
-    "lem-per-artin-gabber-affine-curve",
-    "def-fd-transform",
+    "lem-per-smooth-pullback-t-exact",
     "def-per-perverse-subcategories"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-fd-fourier-perverse.proof.md",
+    "place": "paragraph 1: smooth pullback and shift convention"
+   }
+  },
+  {
+   "text": "By [prop-kernel-lisse], the kernel $\\mathcal K_\\psi$ is lisse of rank one and has finite Tor amplitude. The scheme $X=\\mathbf A^2_{k_0}$ is smooth of pure dimension two, by [sbc-lem-affine-space-smooth] with $n=2$, so the hypothesis on $X$ in [lem-per-lisse-tensor-permanence] holds. Apply its explicitly stated shifted versions to the corresponding conclusion of step 2. For $H:=Lp_1^*K\\otimes^L\\mathcal K_\\psi$ this gives $H\\in{}^pD^{\\le1}(X)$, respectively $H\\in{}^pD^{\\ge1}(X)$. Both sides of this invocation use the $\\overline{\\mathbf Q}_\\ell$ statement of the permanence node; no identification with a finite-coefficient Lean category is made.",
+   "uses": [
+    "prop-kernel-lisse",
+    "sbc-lem-affine-space-smooth",
+    "lem-per-lisse-tensor-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-fd-fourier-perverse.proof.md",
+    "place": "paragraph 2: lisse kernel and tensor permanence"
+   }
+  },
+  {
+   "text": "For the affine bound we need the natural comparison\n\\(Rp_{2,!}(H[1])\\cong(Rp_{2,!}H)[1]\\). The adic coefficient convention\n[def-fourier-set], under which the \\(\\otimes^L_E\\) and the\ncompact-support direct image \\(Rf_!=Rf_*\\circ j_!\\) (read through a\ncompactification) of the transform are taken on the derived-complete\nconstructible categories \\(D^b_c(-,E)\\), not on discrete sheaves, binds the\n\\(p_{2,!}\\) of [def-fd-transform] to the compact-support operation on the\nrational finite-stage categories. Since \\(V\\times_{k_0}V^\\vee\\) and\n\\(V^\\vee\\) are noetherian, the open immersion\n\\(\\mathbf A^1\\times\\mathbf A^1\\subset\\mathbf P^1\\times\\mathbf A^1\\) of the\nstandard compactification of \\(p_2\\) is quasi-compact, and \\(\\ell\\ne p\\) is\ninvertible, so the hypotheses of the next lemma hold. At the\nintegral stage [lem-cbc-integral-compact-support-uniform-restriction]\nsays that the chosen-compactification compact-support operation is an\nexact \\(\\mathcal O_E\\)-linear functor on the compatible constructible\ncategory. By the definition of an exact functor in\n[def-weil-triangulated-category], this includes a natural shift\nisomorphism \\(Rf_{!,\\mathcal O_E}(T[1])\\simeq(Rf_{!,\\mathcal O_E}T)[1]\\).\nThe rational transport [prop-weil-pbc-rational-transport] carries this\ncomparison to every finite coefficient field. The coefficient-coherence\nstatement [lem-cbc-rational-compact-support-coefficient-coherence] says\nthat these rational compact-support comparisons commute with shifts and\nwith every scalar-extension map. Therefore, for a \\(\\overline{\\mathbf\nQ}_\\ell\\)-object represented at a finite stage, the shift isomorphisms are\ncompatible with all reduction maps and with restriction of scalars, and\nremain compatible after passage to a common finite stage. By the\ncommon-stage definition [def-weil-pbc-qbar-category], this compatible\nfamily is an isomorphism in the common-stage category \\(D^b_c(V^\\vee,\\overline{\\mathbf Q}_\\ell)\\) of [def-weil-pbc-qbar-category]. This proves the required comparison without identifying a\nshifted Roos cone with an unshifted one or choosing a non-functorial\nisomorphism.",
+   "uses": [
+    "def-fourier-set",
+    "lem-cbc-integral-compact-support-uniform-restriction",
+    "def-weil-triangulated-category",
+    "prop-weil-pbc-rational-transport",
+    "lem-cbc-rational-compact-support-coefficient-coherence",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-fd-fourier-perverse.proof.md",
+    "place": "paragraph 3: compact-support direct image commutes with shifts"
+   }
+  },
+  {
+   "text": "By step 3 and [def-per-perverse-subcategories], \\(H[1]\\) lies in the\ncorresponding index-zero class. Under the convention of\n[def-fourier-set], the morphism along which the transform integrates is exactly \\(p_2:\\mathbf A^1_{k_0}\\times\n\\mathbf A^1_{k_0}\\to\\mathbf A^1_{k_0}\\), interpreted in the adic\n\\(D^b_c(-,\\overline{\\mathbf Q}_\\ell)\\) category by its common finite-stage\nconstruction. It is affine of relative dimension one, so the two displayed\ninclusions of [lem-per-artin-gabber-affine-curve] give\n\\(Rp_{2,!}(H[1])\\in{}^pD^{\\le1}(V^\\vee)\\) for the support input and\n\\(Rp_{2,!}(H[1])\\in{}^pD^{\\ge-1}(V^\\vee)\\) for the cosupport input. By\nstep 4 this is isomorphic to \\((Rp_{2,!}H)[1]\\), which is precisely\n\\(\\operatorname{FT}_\\psi(K)\\) by [def-fd-transform] with rank \\(r=1\\).\nThus the two claimed inclusions hold for their respective inputs.",
+   "uses": [
+    "def-per-perverse-subcategories",
+    "def-fourier-set",
+    "lem-per-artin-gabber-affine-curve",
+    "def-fd-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-fd-fourier-perverse.proof.md",
+    "place": "paragraph 3: affine amplitude and the normalization [1]"
+   }
+  },
+  {
+   "text": "If $K$ lies in the perverse heart candidate, [def-per-perverse-subcategories] says that it satisfies both input conditions. The two inclusions just proved therefore put the same object $\\operatorname{FT}_\\psi(K)$ in both ${}^pD^{\\le1}(V^\\vee)$ and ${}^pD^{\\ge-1}(V^\\vee)$, hence in their intersection. No existence of truncation functors or a perverse t-structure is needed for this intersection argument.",
+   "uses": [
+    "def-per-perverse-subcategories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-fd-fourier-perverse.proof.md",
+    "place": "concluding sentence: heart candidate maps into the strip"
+   }
   }
  ],
  "proof_deps": [
+  "def-fd-transform",
+  "def-fourier-set",
+  "def-per-perverse-subcategories",
+  "def-sbc-affine-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-triangulated-category",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "lem-cbc-rational-compact-support-coefficient-coherence",
+  "lem-per-artin-gabber-affine-curve",
+  "lem-per-lisse-tensor-permanence",
   "lem-per-smooth-pullback-t-exact",
   "prop-kernel-lisse",
-  "lem-fd-as-lisse",
-  "lem-per-lisse-tensor-permanence",
-  "lem-per-artin-gabber-affine-curve",
-  "def-fd-transform",
-  "def-per-perverse-subcategories"
+  "prop-weil-pbc-rational-transport",
+  "sbc-lem-affine-space-smooth"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-fd-fourier-perverse.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-fd-fourier-perverse.proof.md",
+  "place": "Proof, paragraphs 1-3; geometric hypotheses and higher-coefficient shift passage expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fourierTransform|IsPerverse|[Pp]erverse",
+   "results": "{\"t\": \"2026-10-17T12:47:57Z\", \"tool\": \"grep\", \"query\": \"fourierTransform|IsPerverse|[Pp]erverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Measure/CharacteristicFunction.lean\", \"Mathlib/MeasureTheory/Measure/CharacteristicFunction/Basic.lean\", \"Mathlib/MeasureTheory/Measure/CharacteristicFunction/TaylorExpansion.lean\", \"Mathlib/NumberTheory/LSeries/DirichletContinuation.lean\", \"Mathlib/Probability/Distributions/Gaussian/Real.lean\", \"Mathlib/Analysis/MellinInversion.lean\", \"Mathlib/Analysis/SpecialFunctions/Gaussian/PoissonSummation.lean\", \"Mathlib/Analysis/SpecialFunctions/Gaussian/PoissonSummation.lean\"], \"digest\": \"7e61cc2f2df525c7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary t-structures, analytic Fourier transforms, scheme module pullbacks, or unrelated Deligne references; none is the Fourier-Deligne perverse amplitude theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform perverse cohomological amplitude etale sheaves",
+   "results": "{\"t\": \"2026-10-17T12:47:57Z\", \"tool\": \"leansearch\", \"query\": \"Fourier Deligne transform perverse cohomological amplitude etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FourierTransform.mk\", \"FourierTransform.fourier\", \"FourierTransform.fourierₗ\", \"FourierPair\", \"FourierTransform.term𝓕\", \"FourierTransform\", \"FourierInvPair\", \"FourierAdd.fourier_add\"], \"digest\": \"3f8a398a8b594140\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary t-structures, analytic Fourier transforms, scheme module pullbacks, or unrelated Deligne references; none is the Fourier-Deligne perverse amplitude theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "fourierTransform, Perverse",
+   "results": "{\"t\": \"2026-10-17T12:47:57Z\", \"tool\": \"loogle\", \"query\": \"fourierTransform, Perverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'fourierTransform'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary t-structures, analytic Fourier transforms, scheme module pullbacks, or unrelated Deligne references; none is the Fourier-Deligne perverse amplitude theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Deligne transform of bounded constructible etale sheaves has perverse amplitude at most one",
+   "results": "{\"t\": \"2026-10-17T12:48:06Z\", \"tool\": \"leanfinder\", \"query\": \"Fourier Deligne transform of bounded constructible etale sheaves has perverse amplitude at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"DerivedCategory.IsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"ff1374375580056f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary t-structures, analytic Fourier transforms, scheme module pullbacks, or unrelated Deligne references; none is the Fourier-Deligne perverse amplitude theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]erverse|Deligne",
+   "results": "{\"t\": \"2026-10-17T12:48:15Z\", \"tool\": \"grep\", \"query\": \"[Pp]erverse|Deligne\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"25913077d36b99b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary t-structures, analytic Fourier transforms, scheme module pullbacks, or unrelated Deligne references; none is the Fourier-Deligne perverse amplitude theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth pullback shifted by relative dimension and affine compact support pushforward preserve perverse support and cosupport bounds",
+   "results": "{\"t\": \"2026-10-17T12:48:25Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth pullback shifted by relative dimension and affine compact support pushforward preserve perverse support and cosupport bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\"], \"digest\": \"0048ffcbf5de83f7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary t-structures, analytic Fourier transforms, scheme module pullbacks, or unrelated Deligne references; none is the Fourier-Deligne perverse amplitude theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -258,5 +365,54 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-fd-fourier-perverse",
+  "worker": "stage1",
+  "summary": "Repaired the compact-support shift step after return: the proof now uses the exact integral compact-support functor, rational transport, explicit scalar-coherence of the compact-support comparisons, and the common-stage shift, with the adic interpretation of p2,! bound to the Fourier transform. It explicitly verifies inverse-system/restriction compatibility and binds the affine lemma to the same adic p2,!. No new DAG nodes.",
+  "blueprint": "Current main-20261015 thm-fd-fourier-perverse proof: paragraph 1 is steps 1-2; paragraph 2 is step 3; paragraph 3 is steps 1,4,5; its concluding heart clause is step 6. This is the existing auxiliary amplitude bound, not the stronger key theorem of the curve-heart unit.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic geometric fact verifies the affine-line projections and the smooth pure-dimensional surface; it does not replace the Fourier argument."
+   },
+   {
+    "node": "prop-kernel-lisse",
+    "why": "Kernel lissity and finite Tor amplitude are generic input to tensor permanence and are supplied by the kernel unit."
+   },
+   {
+    "node": "lem-cbc-integral-compact-support-uniform-restriction",
+    "why": "Generic exact compact-support operation on the compatible integral category supplies the shift comparison; this unit has no replacement."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic scalar localization transports the integral compact-support shift to finite rational coefficient stages."
+   },
+   {
+    "node": "lem-cbc-rational-compact-support-coefficient-coherence",
+    "why": "Generic compact-support coefficient coherence makes the finite-stage shift comparisons natural and compatible with scalar extensions."
+   },
+   {
+    "node": "def-weil-pbc-qbar-category",
+    "why": "Generic common-stage construction assembles the compatible finite-stage shift maps into the Qlbar-category isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth",
+  "prop-kernel-lisse",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "prop-weil-pbc-rational-transport",
+  "lem-cbc-rational-compact-support-coefficient-coherence",
+  "def-weil-pbc-qbar-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-3b951d947",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-3b951d947 (reviewer sub-agent of L); spot-checked: Read in full: the docs listed in the prompt, the report, the item, the blueprint statement and proof (master and main-20261015, which are identical), and every cited statement. The statement matches the blueprint verbatim, is not weakened, and is true (FT is in fact t-exact). I tested it on δ_0→Q̄_ℓ[1], Q̄_ℓ[1]→δ_0(-1) and 0. Steps: (1) the projections are relative A^1 by def-sbc-affine-space; sbc-lem-affine-space-smooth gives relative dimension 1 for them and dimension 2 for X. (2) lem-per-smooth-pullback-t-exact with d=1 and the convention ^pD^{≤n}=^pD^{≤0}[-n]; the signs check. (3) prop-kernel-lisse gives a lisse rank-one kernel, and lem-per-lisse-tensor-permanence (shifted form) applies on the smooth A^2. (4) The shift comparison for Rp_{2,!} comes from the exact integral functor of lem-cbc-integral-compact-support-uniform-restriction (j quasi-compact since the schemes are noetherian, ℓ≠p), the exact-functor shift of def-weil-triangulated-category, prop-weil-pbc-rational-transport ('localized shift comparison'), the shift-commuting b^h of lem-cbc-rational-compact-support-coefficient-coherence, and the common-stage shift of def-weil-pbc-qbar-category; each node says what the step takes from it. (5) lem-per-artin-gabber-affine-curve with d=1 gives ≤1 and ≥-1. (6) The heart clause is an elementary intersection. Batch-5: lem-cbc-integral and lem-cbc-rational reach the PD chapter only at def-pod-ring-scalar-extension, a general definition of extension of scalars, so I accepted them. lem-fd-base-change reaches lem-pod-integral-pullback-composition, which is general pullback pseudofunctoriality that neither assumption gives. But the item used that base-change theorem only for its coefficient-convention sentence, so I replaced it in steps 4 and 5 with the convention definition def-fourier-set (no dependencies). That removes this path, and I recomputed proof_deps and removed the tool_use for lem-fd-base-change. Tool uses accepted: sbc-lem-affine-space-smooth, lem-cbc-integral-compact-support-uniform-restriction, prop-weil-pbc-rational-transport, lem-cbc-rational-compact-support-coefficient-coherence. No new nodes, no SGA source. Corrected item: fixes/dag/nodes/sec-deligne-laumon-a1/thm-fd-fourier-perverse.json; details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
