@@ -2,7 +2,7 @@
  "id": "lem-per-proper-finite-coefficient-bounded-preservation",
  "kind": "statement",
  "title": "Proper direct image preserves ordinary finite-coefficient bounded constructibility over a Noetherian base",
- "statement": "Let $f:Y\\to S$ be a proper morphism of Noetherian schemes [def-pc-scheme, def-weil-proper-morphism, def-weil-pbc-noetherian-ring], and let $A$ be a finite commutative ring. Use ordinary constant-$A$ module sheaves on small etale sites and their derived direct image [def-weil-pbc-direct-image]. Then for every $L\\in D^b_c(Y_{\\mathrm{et}},A)$ [def-weil-pbc-constructible-complexes], one has $Rf_*L\\in D^b_c(S_{\\mathrm{et}},A)$. Neither scheme is assumed to have finite Krull dimension. No invertibility condition on $A$ on $S$ is imposed.",
+ "statement": "Let $f:Y\\to S$ be a proper morphism [def-weil-proper-morphism] of Noetherian schemes [def-pc-scheme], where Noetherian means admitting a finite affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Let $A$ be a finite commutative ring. Use ordinary constant-$A$ module sheaves on small etale sites and their derived direct image [def-weil-pbc-direct-image]. Then for every $L\\in D^b_c(Y_{\\mathrm{et}},A)$ [def-weil-pbc-constructible-complexes], one has $Rf_*L\\in D^b_c(S_{\\mathrm{et}},A)$. Neither scheme is assumed to have finite Krull dimension. No invertibility condition on $A$ on $S$ is imposed.",
  "source": {
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tag 0GL0, theorem-constructible-shriek, with the identity-open compactification for proper f; boundedness from literature/stacks-project/etale-cohomology.tex, Tag 095U, lemma-cohomological-dimension-proper. This is the proper-finiteness input used in ILO XIII Proposition 3.4.2."
@@ -14,9 +14,112 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-constructible-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Both schemes have finite affine covers by hypothesis, so are quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. They are locally Noetherian by [pqf-def-locnoeth], and hence quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. By [def-weil-proper-morphism] and [def-weil-finite-type-morphism], $f$ is separated, quasi-compact and locally of finite type. Since $S$ is locally Noetherian, [pqf-lem-lft-fp-locnoeth] makes $f$ locally of finite presentation. Its separatedness implies quasi-separatedness by [lem-pc-separated-quasi-separated]; together with quasi-compactness this is finite presentation as defined in [def-weil-pbc-scheme-conventions]. Thus the qcqs and finite-presentation hypotheses of the constructibility theorem hold.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-pc-separated-quasi-separated",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TX, lemma-noetherian-finite-type-finite-presentation; properties.tex Tags 01OV and 01OY (locally Noetherian and quasi-separated)"
+   }
+  },
+  {
+   "text": "Choose integers $a\\leq b$ with $\\mathcal H^r(L)=0$ outside $[a,b]$ and all $\\mathcal H^r(L)$ constructible, using [def-weil-pbc-constructible-complexes]. For the proper map $f$, take the identity compactification $(j,p)=(1_Y,f)$ of [def-weil-pbc-projection-compactification]. Every object of $Y_{\\mathrm{et}}$ factors uniquely through $1_Y$, so the presheaf defining $(1_Y)_!F$ in [def-weil-pbc-extension-by-zero] is exactly the already sheafified $F$, including its restriction maps. Consequently $(1_Y)_!$ is the identity termwise and the compactification candidate is $Rf_*L$. Apply [lem-weil-pbc-etale-compactification-constructibility] to this candidate and the bounded-below complex $L$: every $\\mathcal H^q(Rf_*L)$ is constructible. The cited theorem allows any finite commutative coefficient ring, with no invertibility hypothesis.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-projection-compactification",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-etale-compactification-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL0, theorem-constructible-shriek; section-derived-lower-shriek-compactification, identity-open compactification"
+   }
+  },
+  {
+   "text": "The morphism $f$ is of finite type and $S$ is quasi-compact by Step 1. Apply [lem-fin-finite-type-fibre-dimension-bound] to obtain one integer $d\\geq0$ bounding the dimensions of all scheme-theoretic fibres $Y_s$. This is a bound for the fibres only, and does not require finite Krull dimension of $Y$ or $S$. Empty fibres are permitted by the cited statement.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0A3V, lemma-morphism-finite-type-bounded-dimension"
+   }
+  },
+  {
+   "text": "For any ordinary $A$-module sheaf $M$ on $Y_{\\mathrm{et}}$, its underlying abelian sheaf is torsion: finiteness of $A$ gives integers $i<j$ with $i1_A=j1_A$, so $N=j-i>0$ satisfies $N1_A=0$ and kills every local section of every $A$-module. By [lem-kun-proper-torsion-cd-bound], the abelian higher direct images vanish for $q>2d$. The comparison [lem-sbc-higher-direct-image-forget-comparison] identifies these with the underlying abelian sheaves of the module higher direct images. A module sheaf whose underlying abelian sheaf is zero is zero, so $\\mathcal H^q(Rf_*(M[0]))=0$ for $q>2d$ also with $A$-module coefficients. The categories of module sheaves are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], and $f_*$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Thus [lem-weil-pbc-derived-functor-negative-vanishing] gives vanishing for $q<0$. Altogether $Rf_*(M[0])$ has cohomology only in $[0,2d]$, including when $A$ is the zero ring.",
+   "uses": [
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095U, lemma-cohomological-dimension-proper; sites-cohomology.tex Tags 03FD and 072W; derived.tex Tag 05TC, lemma-negative-vanishing"
+   }
+  },
+  {
+   "text": "The module categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Apply [lem-weil-pbc-derived-direct-image-triangulated] to their additive left exact direct image from Step 4: $Rf_*$ preserves distinguished triangles and commutes with shifts on $D^+$. For $a\\leq r\\leq b$, use the successive triangles of [lem-weil-pbc-truncation-triangle], with terms $\\tau_{\\leq r-1}L$, $\\tau_{\\leq r}L$, and $\\mathcal H^r(L)[-r]$. The first truncation $\\tau_{\\leq a-1}L$ is zero, since all its cohomology is zero. Step 4 and [lem-sp-derived-cohomology-shift] put the image of the third term in degrees $[r,r+2d]\\subseteq[a,b+2d]$. Inductively, if the image of the first term has cohomology zero outside $[a,b+2d]$, exactness of $\\mathcal H^q$ of the three terms from [lem-sf-derived-homology-long-exact] forces the same for the middle term. This proves the claim for every $r$ through $b$; since $\\tau_{\\leq b}L\\simeq L$, $Rf_*L$ has cohomology only in $[a,b+2d]$. Together with Step 2 and the definition [def-weil-pbc-constructible-complexes], this proves $Rf_*L\\in D^b_c(S_{\\mathrm{et}},A)$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sp-derived-cohomology-shift",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0G2A, lemma-derived-lower-shriek-bounded, proof of (3), proper case; derived.tex Tags 08J5 and 05SE"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-pc-separated-quasi-separated",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-etale-compactification-constructibility",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL0, theorem-constructible-shriek, identity compactification; Tag 0G2A, lemma-derived-lower-shriek-bounded, proper case and finite truncation argument for (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +155,45 @@
    "results": "{\"t\": \"2026-10-18T18:16:54Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper morphism of Noetherian schemes higher direct images of constructible finite ring sheaves are constructible and vanish uniformly in sufficiently high degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\"], \"digest\": \"6439a32f03c18567\"}",
    "date": "2026-10-18",
    "verdict": "no match: results concern constructible subsets, scheme morphism properties or general sheaf pushforward, not bounded constructible ordinary etale finite-ring direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper derived direct image preserves bounded constructible finite coefficient etale complexes over Noetherian schemes of possibly infinite Krull dimension",
+   "results": "{\"t\": \"2026-10-18T19:41:54Z\", \"tool\": \"leanfinder\", \"query\": \"Proper derived direct image preserves bounded constructible finite coefficient etale complexes over Noetherian schemes of possibly infinite Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\"], \"digest\": \"47313ab8db3dbf80\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern scheme morphism properties, constructible subsets, or underived sheaf pushforwards; none states the proper finite-coefficient etale finiteness theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"Constructible\"",
+   "results": "{\"t\": \"2026-10-18T19:42:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"Constructible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern scheme morphism properties, constructible subsets, or underived sheaf pushforwards; none states the proper finite-coefficient etale finiteness theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.*[Cc]onstructible|[Cc]onstructible.*IsProper|boundedConstructible|proper.*cohomolog",
+   "results": "{\"t\": \"2026-10-18T19:42:45Z\", \"tool\": \"grep\", \"query\": \"IsProper.*[Cc]onstructible|[Cc]onstructible.*IsProper|boundedConstructible|proper.*cohomolog\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern scheme morphism properties, constructible subsets, or underived sheaf pushforwards; none states the proper finite-coefficient etale finiteness theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For proper morphisms higher direct images of constructible sheaves of modules over a finite ring are constructible and vanish in sufficiently large degrees",
+   "results": "{\"t\": \"2026-10-18T19:42:46Z\", \"tool\": \"leansearch\", \"query\": \"For proper morphisms higher direct images of constructible sheaves of modules over a finite ring are constructible and vanish in sufficiently large degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"SheafOfModules.Finite.hasFiniteLimits\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"SheafOfModules.IsFiniteType.mk\", \"AlgebraicGeometry.IsFinite.recOn\"], \"digest\": \"5d623fdc3eb1173a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern scheme morphism properties, constructible subsets, or underived sheaf pushforwards; none states the proper finite-coefficient etale finiteness theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper pushforward on the small etale site with a torsion Noetherian coefficient ring preserves bounded constructible complexes without invertibility assumptions",
+   "results": "{\"t\": \"2026-10-18T19:42:47Z\", \"tool\": \"leanfinder\", \"query\": \"A proper pushforward on the small etale site with a torsion Noetherian coefficient ring preserves bounded constructible complexes without invertibility assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"SheafOfModules.pushforward\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"PrimeSpectrum.isConstructible_comap_image\"], \"digest\": \"54af6df1b3d1eff4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern scheme morphism properties, constructible subsets, or underived sheaf pushforwards; none states the proper finite-coefficient etale finiteness theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-birational-bad-locus-comparison",
@@ -79,5 +217,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-proper-finite-coefficient-bounded-preservation",
+  "worker": "stage1",
+  "summary": "Proved constructibility by the existing 0GL0 compactification theorem with the identity open immersion, and boundedness by the existing uniform fibre-dimension bound 0A3V, torsion bound 095U, module/abelian comparison and explicit finite truncation induction. No finite-dimensional-base or invertibility hypothesis was added. Reused existing nodes throughout; no new nodes. Normalized doubled TeX backslashes and made the existing meaning of Noetherian explicit.",
+  "blueprint": "Realizes the ordinary proper-finiteness input of ancestor lem-per-artin-gabber-affine-curve Step 3, via the open-immersion finite-residue finiteness route and lem-per-birational-bad-locus-comparison (proper maps p_U and p over the bad locus).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-compactification-constructibility",
+    "why": "Generic finite-ring compactification constructibility (0GL0) used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic uniform bound on dimensions of fibres (0A3V) used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "Generic proper torsion cohomological-dimension bound (095U) used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic comparison between module and abelian higher direct images used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-sp-derived-cohomology-shift",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic scheme-theoretic or derived-category tool used under its stated hypotheses. The perverse-curve unit supplies no replacement for this general ordinary-etale input; this does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-etale-compactification-constructibility",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-c164a5c75",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-c164a5c75 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and its report, with no new nodes. I also read every cited statement (5 stmt_deps, 23 proof_deps) and the sources: Stacks 0GL0 (more-etale.tex l.4711, which needs only qcqs schemes, a separated finite-presentation map and a Noetherian torsion Λ), 095U (etale-cohomology.tex l.18786, any torsion abelian sheaf, no invertibility or Noetherian hypothesis) and 0A3V (morphisms.tex l.5488). The statement is true and unweakened: proper f between Noetherian schemes, finite commutative A, ordinary constant-A étale module sheaves, Rf_* sends D^b_c to D^b_c. def-weil-pbc-direct-image includes the module-sheaf Rf_*. Step 1 is correct: quasi-compact via the finite affine cover; quasi-separated via locally Noetherian; lft→lfp over a locally Noetherian base plus separated→quasi-separated gives finite presentation (01TP). Step 2 is correct: the identity compactification is explicitly allowed, (1_Y)_! is the identity since the presheaf is already a sheaf, and lem-weil-pbc-etale-compactification-constructibility applies to L in D^+ with constructible cohomology. Step 3: the 0A3V bound needs only a quasi-compact S. Step 4: finite A is torsion; 095U bounds the abelian direct images; the forget comparison holds for any q and any Λ including the zero ring; negative vanishing comes from the Grothendieck-abelian and left-exact nodes. Step 5 is a properly stated finite induction (r=a..b) on the truncation triangles in D^+, using the triangulated Rf_* with its shift isomorphism and the long exact sequence, giving amplitude [a,b+2d]. Edge cases checked: f=id, finite f (d=0), empty fibres, A=0, p-torsion A in characteristic p, L=0, a=b. No cycle: no cited node's closure reaches the item. No duplicates: the existing proper-finiteness nodes all add finite dimension or invertibility, require a base field, or are adic/pro-étale or oriented; lem-per-quasi-excellent-etale-direct-image-finiteness would create a cycle. Batch-5: both flagged citations are finiteness inputs (constructibility of Rf_!, proper cohomological dimension), outside the trace-formula and Poincaré-duality statements and not steps of their proofs. The flagged paths end in generic nodes: lem-trf-bounded-below-derived-adjunction (abstract D^+ adjunction) and lem-pod-lisse-module-sheaves-as-module-objects (lisse sheaves as module objects of finite locally constant sheaves). Both accepted. The declared tool_uses are generic and accepted. No fixes."
  }
 }
