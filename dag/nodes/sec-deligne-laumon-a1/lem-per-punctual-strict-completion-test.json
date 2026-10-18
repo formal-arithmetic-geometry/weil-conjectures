@@ -19,9 +19,130 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $C=R^{\\mathrm{sh}}$, $K=k^{\\mathrm{sep}}$, and $d=\\dim R$. The strict henselization of the statement is the colimit of [def-weil-pbc-strict-henselization-limit] over pointed etale neighbourhoods of the geometric point given by the fixed separable closure (inside an algebraic closure $\\Omega$, the separable closure of $k$ in $\\Omega$ is $K$). By [lem-weil-pbc-etale-local-ring-triples](2)--(3), applied to $Y=\\operatorname{Spec}R$ with $U=Y$ and $\\mathfrak p=\\mathfrak m$, this colimit is canonically the colimit over the triples $(S,\\mathfrak q,\\phi)$ with $\\phi$ landing in $K$, compatibly with the maps from the etale $R$-algebras; this is the ring of [lem-weil-pbc-strict-henselization-triples] and the strict henselization used by the three Stacks-based results below. The construction [lem-weil-pbc-strict-henselization-triples] says that $C$ is strictly henselian, is a filtered colimit of etale $R$-algebras, has maximal ideal $\\mathfrak mC$, and has residue field $K$. The three strict-henselization results [lem-sc-strict-henselization-noetherian, lem-sc-strict-henselization-regular, lem-sc-strict-henselization-dimension] give Noetherianity, regularity, and $\\dim C=d$. For $B=\\widehat C$, [lem-weil-pbc-adic-completion-noetherian, lem-weil-pbc-local-completion-local-ring, lem-weil-pbc-completion-dimension, lem-weil-pbc-completion-regular-local] give the same assertions and identify the residue field with $K$. The maximal ideal of $C$ is finitely generated, so [lem-weil-pbc-module-completion-complete] makes $B$ complete, also for its maximal ideal: the powers of $\\mathfrak m_CB$ are exactly $\\mathfrak m_C^rB$. By [lem-weil-pbc-complete-pair-henselian], $B$ is henselian and therefore strictly henselian. The image of an inverse of $\\ell$ remains an inverse in $C$ and $B$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-dimension",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-complete-pair-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06LJ, 06LK, 06LN, 07NV, 07NY and 0ALJ; algebra.tex Tags 04GP, 04GW, 0316, 05GG and 05GI."
+   }
+  },
+  {
+   "text": "Write $g:\\operatorname{Spec}C\\to\\operatorname{Spec}R$, $h:\\operatorname{Spec}K\\to\\operatorname{Spec}k$, and $i_C,i_R$ for the closed inclusions. Step 1 identifies the square with its Cartesian closed base-change square: quotienting $C$ by $\\mathfrak mC$ gives $K$. Since $g$ is affine ind-etale and both rings are Noetherian, [lem-per-ind-etale-closed-support-base-change] gives $h^*i_R^!A_R(d)[2d]\\simeq i_C^!A_C(d)[2d]$. The twist pullback is [lem-asd-etale-finite-twist-pullback], with modulus $\\ell$ and coefficient ring $A=\\mathbf F_\\ell$. The strict-local compatibility of [lem-per-regular-immersion-class-calculus] identifies $h^*\\eta_R$ with $\\eta_C$. By [lem-exc-etale-sheaves-gsets-point], sheaves on $\\operatorname{Spec}k$ are discrete continuous Galois sets; for module sheaves the same equivalence retains addition and scalar multiplication. Pullback to $K$ is the forgetful functor on these actions, hence is exact and reflects isomorphisms. On complexes it therefore reflects quasi-isomorphisms. Thus $\\eta_R$ is an isomorphism if and only if $\\eta_C$ is. The common codimension is $d$ by Step 1.",
+   "uses": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-exc-etale-sheaves-gsets-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.2.1 and its following paragraph, p.244; strict-local supported exchange and Stacks 03QT."
+   }
+  },
+  {
+   "text": "Put $X=\\operatorname{Spec}C$, $\\widehat X=\\operatorname{Spec}B$, with closed points $s,\\widehat s$. For either strictly local scheme $T$ and its closed point $a$, [lem-weil-pbc-strictly-henselian-sections-stalk] identifies global sections with the closed geometric stalk. Stalks are exact by [prop-weil-pbc-geometric-stalks-exact], so global sections are exact, including on $A$-module sheaves (the same kernels and cokernels with their scalar actions). The same is true on $a=\\operatorname{Spec}K$ by [lem-exc-etale-sheaves-gsets-point], since its absolute Galois group is trivial. Choose a bounded-below injective module-sheaf representative $I^\\bullet$ using [lem-weil-pbc-module-sheaves-enough-injectives, lem-weil-pbc-dplus-injective-representative]. Let $P_aF=\\ker(F\\to j_*j^*F)$ for the open complement $j$. The natural identification $P_aI\\simeq i_*i^!_0I$ of [lem-pur-etale-supported-kernel-adjunction] respects scalar actions, by naturality for multiplication by every scalar. Hence termwise $\\Gamma_a(T,I^\\bullet)=\\Gamma(a,i^!_0I^\\bullet)$. By [lem-weil-pbc-right-derived-plus-injective] the latter computes $R\\Gamma(a,i^!L)$: $i^!_0I^\\bullet$ computes $i^!L$, and $\\Gamma(a,-)$ is exact. The former computes supported cohomology by [def-pur-etale-derived-supported-sections]. Thus $R\\Gamma_a(T,L)\\simeq R\\Gamma(a,i^!L)$, with the actual supported-section inclusion. No purity theorem enters this identification.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-exc-etale-sheaves-gsets-point",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO (closed stalk), Tag 09XQ (support kernel), and derived.tex Tags 013K and 05TH; explicit injective-representative calculation."
+   }
+  },
+  {
+   "text": "Let $U=X\\setminus\\{s\\}$ and $\\widehat U=\\widehat X\\setminus\\{\\widehat s\\}$, and let $f:\\widehat X\\to X$ be the completion morphism. By Step 1, $\\mathfrak m_CB=\\mathfrak m_B$, so $f^{-1}(s)=\\{\\widehat s\\}$ and $\\widehat U=f^{-1}(U)=\\widehat X\\times_XU$. Apply [lem-per-henselian-completion-open-rigidity] to the Noetherian henselian pair $(C,\\mathfrak m_C)$ of Step 1, whose $\\mathfrak m_C$-adic completion is $B$, and to the torsion sheaf $A_U(d)$: the canonical pullback maps $H^q(U,A(d))\\to H^q(\\widehat U,A(d))$ are isomorphisms for $q\\geq0$, with the coefficient identification $f_U^{-1}A_U(d)\\cong A_{\\widehat U}(d)$ of [lem-asd-etale-finite-twist-pullback]; in negative degrees both vanish. The ambient pullback $H^q(X,A(d))\\to H^q(\\widehat X,A(d))$ is also an isomorphism: by exactness of global sections from Step 3, positive degrees vanish on both sides, and in degree zero [lem-weil-pbc-strictly-henselian-sections-stalk] identifies both groups with the stalk at a geometric point over the closed point; $f$ maps $\\widehat s$ to $s$ inducing the residue-field identification of Step 1, and a pulled-back global section has the same germ, so the degree-zero map is the identity of $A_K(d)$. Since $A(d)$ is a torsion sheaf, [thm-pur-with-support-exactness] gives the long exact support sequences $\\cdots\\to H^q_s(X,A(d))\\to H^q(X,A(d))\\to H^q(U,A(d))\\to H^{q+1}_s(X,A(d))\\to\\cdots$ and the analogous sequence on $\\widehat X$ with support $\\widehat s$. They are functorial in the pair: $f$ is a morphism of pairs $(\\widehat X,\\widehat U)\\to(X,U)$ because $f^{-1}(U)=\\widehat U$, so the pullback maps on supported, ambient and open cohomology, followed by the twist identification, form a morphism of long exact sequences, including the squares with the connecting maps. For each integer $q$ the five consecutive terms centered on $H^q_s$ are $H^{q-1}(X),H^{q-1}(U),H^q_s(X),H^q(X),H^q(U)$, all with twist $d$, and the other four vertical maps are isomorphisms. The five lemma [lem-weil-pbc-five-lemma] gives the canonical isomorphism $H^q_s(X,A(d))\\to H^q_{\\widehat s}(\\widehat X,A(d))$ in every integer degree $q$. These supported groups are formed with abelian-sheaf injectives as in [def-pur-support-cohomology]; by [lem-pur-module-restriction-kernel-comparison], for the monomorphism $U\\to X$ (resp. $\\widehat U\\to\\widehat X$) of the etale site, they are canonically the $A$-module supported cohomology of [def-pur-etale-derived-supported-sections] used in Step 3. Both comparisons are induced on representatives by forgetting scalars, which commutes with termwise inverse image and pullback of sections, so the supported pullback is an isomorphism also for the $A$-module groups.",
+   "uses": [
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "thm-pur-with-support-exactness",
+    "lem-weil-pbc-five-lemma",
+    "def-pur-support-cohomology",
+    "lem-pur-module-restriction-kernel-comparison",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX section 4.4, p.373, assertion (*), applied to completion; support triangle Stacks 0A45 and five lemma 05QB."
+   }
+  },
+  {
+   "text": "The completion map $C\\to B$ is flat by [lem-weil-pbc-local-completion-faithfully-flat]. The closed fibre is $K$ by Step 1. Thus the closed immersion $s\\hookrightarrow X$ base changes to $\\widehat s\\hookrightarrow\\widehat X$, both of codimension $d$. Flat base-change compatibility of [lem-per-regular-immersion-class-calculus] carries its supported Kummer class to the supported class of this base-changed immersion. In particular the canonical supported pullback of Step 4 carries the map induced by $\\eta_C$ to the map induced by $\\eta_B$; this is a comparison of the specified classes, not just an abstract equality of cohomology dimensions. On the sources $H^q(s,A)\\to H^q(\\widehat s,A)$ the map is the identity after the same residue-field identification. Step 3 identifies the targets of these maps with $H^{q+2d}_s(X,A(d))$ and $H^{q+2d}_{\\widehat s}(\\widehat X,A(d))$. Their vertical map is an isomorphism by Step 4, so the map induced by $\\eta_C$ is an isomorphism in each degree if and only if the map induced by $\\eta_B$ is. Global sections on $s$ and $\\widehat s$ are exact equivalences with $A$-modules by Step 3. The cohomology criterion [lem-weil-pbc-unbounded-derived-iso-cohomology] therefore says $\\eta_C$ is an isomorphism if and only if $\\eta_B$ is. Combine with Step 2. If $d=0$, the two immersions are identities and the specified classes are $1$; the punctured spectra are empty and the localization argument still applies.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.3.1, 2.3.1--2.3.2 and 3.2.4, p.244: flat class compatibility and closed-point completion test; Stacks 00MC and derived.tex 05RT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-exc-etale-sheaves-gsets-point",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-pur-etale-derived-supported-sections",
+  "lem-per-henselian-completion-open-rigidity",
+  "thm-pur-with-support-exactness",
+  "lem-weil-pbc-five-lemma",
+  "def-pur-support-cohomology",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expansion of XVI Definition 3.2.1 and Proposition 3.2.4, p.244, using XX section 4.4, p.373, instead of assuming regularity of a nonexcellent completion map."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +181,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-punctual-purity-trait-test",
@@ -85,5 +206,149 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-punctual-strict-completion-test",
+  "worker": "stage1",
+  "summary": "Proved the strict-henselization comparison from canonical ind-etale support exchange and Galois stalk detection, and the completion comparison from general henselian open-complement rigidity, exact closed-point sections, and the support triangle. Verified local algebra and actual Kummer-class compatibility; no excellence or regularity of the completion morphism is assumed. One new general rigidity input, statement-only, with logged searches.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. The five steps supply this local purity reduction through the recorded ancestry, preserving the chapter and unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-exc-etale-sheaves-gsets-point",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "thm-pur-with-support-exactness",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "def-pur-support-cohomology",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "This generic support, completion, strict-local or derived-category statement is used exactly as stated; the perverse unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-exc-etale-sheaves-gsets-point",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "thm-pur-with-support-exactness",
+  "def-pur-support-cohomology",
+  "lem-pur-module-restriction-kernel-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-3396c75a1",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-3396c75a1 (reviewer sub-agent of L); spot-checked: I read the item against ILO XVI Def 3.2.1 and the remark after it, and Prop 3.2.4 (p.244). It is the strict-henselisation and completion test with Λ=F_ℓ, and its statement is unchanged from base. Three steps are correct as delivered: Steps 2, 3 and 5. Step 2: ind-étale closed-support exchange, strict-localisation compatibility of the class calculus, and conservativity of Galois-set pullback from 03QT. Step 3: exact Γ on strictly local schemes and the separably closed point (03QO), plus the support-kernel adjunction on injective representatives. Step 5: flat base change of the supported class (00MC flat, closed fibre K, 𝔪_C B = 𝔪_B), then the 05RT criterion; the d=0 case was checked. Two faults, both repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-punctual-strict-completion-test.json. (1) C1/C4, Step 1: the item defines R^sh as the def-weil-pbc-strict-henselization-limit colimit, but the Stacks-based nodes concern the triples colimit, and no step linked them. I added the bridge lem-weil-pbc-etale-local-ring-triples (2)-(3) and the def node to the uses. (2) C4/E5, Step 4: the five lemma needs pullback along X̂→X to be a morphism of the support long exact sequences. lem-pur-support-restriction-triangle is natural only in F on a fixed T, so it does not give the square with the connecting maps. I re-cited thm-pur-with-support-exactness, which is functorial in the pair; f is a morphism of pairs because f⁻¹U = Û. I added lem-pur-module-restriction-kernel-comparison to identify abelian with A-module supported cohomology, and the 03QO node for H^0. proof_deps were recomputed, and tool_uses dropped the triangle and added the four new citations; the worker wrote tool_uses itself, which is for the maintainer to confirm. New node lem-per-henselian-completion-open-rigidity is the Fujiwara–Gabber comparison of ILO XX §4.4 (CTC for torsion sheaves, with (*) as the strictly local case) and Fujiwara 1995 6.6.4. Its general global form follows from CTC plus Gabber's affine proper base change. It is true without excellence (checked on a henselian non-excellent DVR), self-contained, and statement-only. It is no duplicate: lem-per-completion-supported-constant-comparison needs an excellent ring. It does not restate the item. Batch-5 flag: lem-per-ind-etale-closed-support-base-change reaches only two sec-trace-formula nodes, lem-trf-bounded-below-derived-adjunction (the generic derivedPlus adjunction) and lem-trf-ind-etale-strict-local-invariance (05WR-type algebra). Neither is part of either assumed statement or its proof, so the flag is accepted, as in NW 45bd4f27. The fix adds no trace-formula or Poincaré node to the closure. No SGA citation.; 1 file(s) fixed by the reviewer"
  }
 }
