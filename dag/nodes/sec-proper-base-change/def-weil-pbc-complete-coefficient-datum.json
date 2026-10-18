@@ -26,70 +26,86 @@
  ],
  "proof": [
   {
-   "text": "Choose one K-flat resolution $Q\\to K$ with flat terms by [lem-pc-kflat-resolution], on the ringed site $(X_{\\mathrm{proet}},\\Lambda_X)$ [def-weil-pbc-proetale-site]. By [lem-pur-derived-change-of-rings], the complex $Q_n=Q\\otimes_{\\Lambda_X}(P_n)_X$ is a model of $K_n$ in the derived category of $(P_n)_X$-modules, with canonical comparisons for different resolutions. Use these models to specify the tower and normalization maps. No boundedness of $K$ or flatness of $P_n$ over $\\Lambda$ is required.",
+   "text": "Choose a K-flat representative Q of K with flat terms using [lem-pc-kflat-resolution], and compose the localization of its quasi-isomorphic augmentation with the representative isomorphism. Define each reduction by localizing the termwise change of rings [def-pur-change-of-rings-complex] on the constant ring sheaves of [def-weil-pbc-proetale-site]. No boundedness or flatness of a quotient over the original ring is needed.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "def-weil-pbc-proetale-site",
-    "lem-pur-derived-change-of-rings"
+    "def-pur-change-of-rings-complex",
+    "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change)"
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YY, lemma-derived-base-change"
    }
   },
   {
-   "text": "For $b\\geq a$, $I^b\\subseteq I^a$: write $I^b=I^aI^{b-a}$ and use that an ideal absorbs multiplication [def-weil-pbc-algebra-hom-quotient]. Thus $\\pi_{b,a}:P_b\\to P_a$ sends the class of $x$ to its class modulo $I^a$. On classes, $\\pi_{a,a}=1$ and $\\pi_{c,a}=\\pi_{b,a}\\circ\\pi_{c,b}$. Define the chain map $Q_b\\to Q_a$ by $u\\otimes t\\mapsto u\\otimes\\pi_{b,a}(t)$ using sheaf change of rings [def-pur-sheaf-tensor-product], then take its derived class after restriction of scalars [def-pc-sheaf-restrict-scalars]. Restriction retains the underlying abelian sheaves and differentials, hence the same kernels, images and cohomology; it preserves quasi-isomorphisms. The two chain-map identities hold on the displayed generators in every degree and pass to the localization. For a chain map $h:Q\\to Q'$, the comparison maps $h\\otimes1$ commute with these transitions: both composites send $u\\otimes t$ to $h(u)\\otimes\\pi_{b,a}(t)$. This equality also holds after inverting quasi-isomorphisms between K-flat models, so the canonical resolution comparisons of step 1 preserve the tower.",
+   "text": "Construct scalar-extension transposition and its inverse directly from sectionwise extension/restriction adjunctions and module sheafification [def-pur-sheaf-tensor-product]. Comparing restriction along the composite with successive restrictions [def-pc-sheaf-restrict-scalars] gives the balancing map by two lifts. On local generators it sends s tensor (r tensor m) to (s times psi(r)) tensor m. Lift the composite of the two scalar-extension units to construct the inverse, sending s tensor m to s times (1 tensor (1 tensor m)). Transposition reduces both inverse identities to evaluation on m; the formulas and preservation of one give identity. These maps commute with differentials and chain maps by the same generator formulas, giving the balancing chain isomorphism and its naturality. The changed complexes remain K-flat with flat terms by [lem-pur-kflat-change-of-rings], as required to compute successive derived extensions.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat; Tag 0D6D, lemma-derived-pullback-composition, coefficient-change specialization; sites-modules.tex Section 03EK"
+   }
+  },
+  {
+   "text": "The quotient maps of [def-weil-pbc-algebra-hom-quotient] compose and are identities at equal indices. Use the scalar-extension unit, the identity-on-sections comparison for composing restrictions [def-pc-sheaf-restrict-scalars], and the balancing map of step 2 to construct the transition chain map. Its local formula is r tensor m maps to pi(r) tensor m. The sheafification adjunction and tensor generation [def-pur-sheaf-tensor-product] prove uniqueness. Both differential compatibility and naturality follow by applying the original differential or chain map to m in this formula. The quotient identities prove the chain-map identities, which localization preserves.",
    "uses": [
     "def-weil-pbc-algebra-hom-quotient",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-sheaf-restrict-scalars"
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-complete-coefficient-datum.md",
-    "place": "transition maps and quotient identities"
+    "place": "transition maps and quotient identities; Stacks Section 03EK"
    }
   },
   {
-   "text": "By [lem-pur-kflat-change-of-rings], $Q_b$ is K-flat with flat terms over $(P_b)_X$. Apply [lem-pur-derived-change-of-rings] to $(P_b)_X\\to(P_a)_X$: the source of $\\theta_{b,a}$ is represented by $(Q\\otimes_{\\Lambda_X}(P_b)_X)\\otimes_{(P_b)_X}(P_a)_X$. In each degree the map $(u\\otimes t)\\otimes s\\mapsto u\\otimes\\pi_{b,a}(t)s$ has inverse $u\\otimes s\\mapsto(u\\otimes1)\\otimes s$. The balancing relations over both rings prove well-definedness, and their composites are identity by the relation $(u\\otimes t)\\otimes s=(u\\otimes1)\\otimes\\pi_{b,a}(t)s$. These are maps of the sheafified tensor products [def-pur-sheaf-tensor-product]: the formulas commute with restriction and extend uniquely by sheafification. They commute with the differentials, which act on $u$, and are $(P_a)_X$-linear. Their derived classes give $\\theta_{b,a}$, naturally and independently of the resolution by the canonical comparisons in [lem-pur-derived-change-of-rings]: for a chain map $h:Q\\to Q'$, either order of comparison and normalization sends $(u\\otimes t)\\otimes s$ to $h(u)\\otimes\\pi_{b,a}(t)s$. The same equality holds for inverses of quasi-isomorphisms and hence for the canonical comparisons in the localized category.",
-   "uses": [
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat); Tag 0D6D (lemma-derived-pullback-composition), proof for identity topoi and coefficient changes; sites-modules.tex Section 03EK (section-tensor-product)"
-   }
-  },
-  {
-   "text": "For $c\\geq b\\geq a$, both normalization paths on the same K-flat models take $((u\\otimes t)\\otimes s)\\otimes v$ to $u\\otimes\\pi_{c,a}(t)\\pi_{b,a}(s)v$. Indeed the two-stage path gives $u\\otimes\\pi_{b,a}(\\pi_{c,b}(t)s)v$, which is this expression because the quotient maps are ring homomorphisms and compose. The other path first identifies the last two extensions by the same balancing isomorphism and gives the same expression. Equality on these local tensor generators gives equality of sheaf maps, chain maps, and derived maps. For $b=a$, the formula is $(u\\otimes t)\\otimes s\\mapsto u\\otimes ts$, the unit identification. This proves the cocycle and unit identities using the explicit change-of-rings tensors [def-pur-sheaf-tensor-product]; K-flatness needed to compute the successive derived extensions is supplied by [lem-pur-kflat-change-of-rings].",
+   "text": "For c at least b at least a, transpose the proposed chain-map equality along the last two scalar extensions. Tensor generation [def-pur-sheaf-tensor-product] then reduces it to s tensor (r tensor (t tensor m)) with the transposed scalar factors equal to one. Apply the explicit balancing formulas and the functoriality of the constant quotient maps: the coefficient paths agree because quotient homomorphisms compose. Localize this equality to obtain the normalization cocycle. For the identity ring map, lift the identity-on-sections restriction isomorphism to obtain the unit map; its inverse is the scalar-extension unit. The two inverse identities follow after transposition. Its generator formula is s tensor m maps to s times m. This formula and the equal-index quotient identity identify normalization with the unit map before and after localization.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "lem-pur-kflat-change-of-rings"
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D (lemma-derived-pullback-composition), explicit coherence check on its K-flat models"
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; sites-modules.tex Section 03EK"
+   }
+  },
+  {
+   "text": "Specialize [lem-pur-change-of-rings-tensor-cancellation] to the unit module over the quotient ring sheaf. The left unitor identifies restricted scalar extension with the tensor of the restricted quotient unit and the original module. Braid the factors to put the model first. Naturality of cancellation, the unitor and the braiding gives an isomorphism of termwise complexes. The single-complex tensor isomorphism identifies this termwise tensor with total tensor against the quotient module in degree zero. Localization yields exactly the object called derivedTensorRing in [def-weil-derived-tensor], hence the required reduction comparison. No quotient-flatness assumption is used.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation",
+    "def-weil-derived-tensor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V4, lemma-flat-change-of-rings, displayed tensor identity; Section 03EK; sites-cohomology.tex Tag 06YU"
    }
   }
  ],
  "proof_deps": [
   "def-pc-sheaf-restrict-scalars",
+  "def-pur-change-of-rings-complex",
   "def-pur-sheaf-tensor-product",
+  "def-weil-derived-tensor",
   "def-weil-pbc-algebra-hom-quotient",
   "def-weil-pbc-proetale-site",
   "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
+  "lem-pur-change-of-rings-tensor-cancellation",
   "lem-pur-kflat-change-of-rings"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-complete-coefficient-datum.md",
-  "place": "explicit K-flat-model verification of the transition identities and normalization cocycle, following sites-cohomology.tex Tags 06YY, 0G7E, 0D6D"
+  "place": "H2 stage 3: explicit sheafification adjunction, balanced scalar-extension and unit inverses, generator coherence, and the proved sheaf tensor cancellation specialized to the coefficient unit; Stacks Tags 03EK, 05V4, 06YS, 06YY, 0G7E, 0D6D"
  },
  "mathlib_searches": [
   {
@@ -193,7 +209,6 @@
  },
  "tool_uses": [
   "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
   "lem-pur-kflat-change-of-rings"
  ],
  "reviewed": {
@@ -267,30 +282,10 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261018T091409-L-3257686",
+  "landing": "20261018T094038-L-3603702",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.adicBalanceHom_naturality",
-   "AlgebraicGeometry.Scheme.adicBalance_exists",
-   "AlgebraicGeometry.Scheme.adicNormalization_cocycle",
-   "AlgebraicGeometry.Scheme.adicNormalization_unit",
-   "AlgebraicGeometry.Scheme.adicReductionUnderlying_tensor",
-   "AlgebraicGeometry.Scheme.adicTransitionComplex_exists",
-   "AlgebraicGeometry.Scheme.adicTransitionComplex_naturality",
-   "AlgebraicGeometry.Scheme.adicUnit_exists"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.adicBalanceHom_naturality",
-   "AlgebraicGeometry.Scheme.adicBalance_exists",
-   "AlgebraicGeometry.Scheme.adicNormalization_cocycle",
-   "AlgebraicGeometry.Scheme.adicNormalization_unit",
-   "AlgebraicGeometry.Scheme.adicReductionUnderlying_tensor",
-   "AlgebraicGeometry.Scheme.adicTransitionComplex_exists",
-   "AlgebraicGeometry.Scheme.adicTransitionComplex_naturality",
-   "AlgebraicGeometry.Scheme.adicUnit_exists_data"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
