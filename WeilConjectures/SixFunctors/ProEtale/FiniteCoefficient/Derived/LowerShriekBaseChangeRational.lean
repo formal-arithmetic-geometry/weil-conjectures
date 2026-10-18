@@ -174,7 +174,8 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
 /-- The completed compact-support exchange map, restricted to the integral stage: a natural
 transformation `(Lg^* Rf_!(c) K)^ ⟶ (Rf'_!(c') Lg'^* K)^` of functors
 `D_comp(X_proét, 𝒪_E) ⥤ D_comp(Y'_proét, 𝒪_E)`
-(`AlgebraicGeometry.ProEtale.completedRightDerivedLowerShriekOfCompactificationBaseChangeMap`). -/
+(`AlgebraicGeometry.ProEtale.completedRightDerivedLowerShriekOfCompactificationBaseChangeMap`,
+on the derived complete objects). -/
 noncomputable def integralRightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     integralOperation l E (Rf_!(c)[ModuleCat.{u + 1} 𝐎] ⋙ L((g)^*[ModuleCat.{u + 1} 𝐎])) ⟶
@@ -240,7 +241,6 @@ theorem isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
   have h := isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E) sq c _ K.2
     Kn η hη hKn
-  rw [completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app] at h
   have h' : IsIso ((integralRightDerivedLowerShriekOfCompactificationBaseChangeMap l E sq
       c).app K) := by
     rw [integralRightDerivedLowerShriekOfCompactificationBaseChangeMap_app]
