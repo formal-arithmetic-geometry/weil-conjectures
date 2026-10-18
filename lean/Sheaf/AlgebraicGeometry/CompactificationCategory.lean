@@ -12,19 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.Compactification.BaseChange
-import WeilConjectures.Compactification.Constructions
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import WeilConjectures.Compactification.Defs
+import Mathlib.Algebra.Field.ULift
+import Mathlib.Algebra.Field.Rat
 
 /-!
 # The compactification category and base change
@@ -41,6 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Compactification
 
+set_option linter.unusedVariables false in
 /-- Source: blueprint sec-nagata-compactification/sk-prop-nagata-sketch-comp-category,
 prop-nagata-compactification-category (blueprint: prop-nagata-compactification-category).
 
@@ -110,6 +100,105 @@ theorem compactificationCategory_properties {X S : Scheme.{u}} (f : X ⟶ S)
       LocallyOfFiniteType f₀ ∧ QuasiCompact f₀ ∧ QuasiCompact c₀.i ∧
       IsSchemeTheoreticallyDominant c₀.i ∧
       ¬ IsSchemeTheoreticallyDominant (c₀.baseChange t₀).i) := by
-  sorry
+  classical
+  refine ⟨inferInstance, fun c ↦ c.quasiCompact_openImmersion inferInstance,
+    ?_, ?_, ?_, inferInstance, ?_, ?_⟩
+  · intro c d
+    exact ⟨inf_Z c d, isSchemeTheoreticallyDominant_inf_i c d, ⟨infFst c d⟩, ⟨infSnd c d⟩⟩
+  · intro I _ c
+    let := Fintype.ofFinite I
+    obtain ⟨e, he⟩ := IsCofiltered.inf_objs_exists (Finset.univ.image c)
+    exact ⟨e, fun i ↦ he (Finset.mem_image.mpr ⟨i, Finset.mem_univ i, rfl⟩)⟩
+  · intro c d r s
+    let a : c.Z ⟶ pullback d.g d.g :=
+      pullback.lift r.hom s.hom (by rw [r.hom_g, s.hom_g])
+    let E := pullback a (pullback.diagonal d.g)
+    let k : E ⟶ c.Z := pullback.fst a (pullback.diagonal d.g)
+    have : IsClosedImmersion k := inferInstance
+    let j : X ⟶ E := pullback.lift c.i d.i (by
+      apply pullback.hom_ext <;> simp [a, r.i_hom, s.i_hom])
+    have hj : j ≫ k = c.i := pullback.lift_fst _ _ _
+    have hsq : IsPullback (𝟙 X) j c.i k :=
+      IsPullback.of_horiz_isIso_mono ⟨by simpa using hj.symm⟩
+    have : IsOpenImmersion j :=
+      MorphismProperty.IsStableUnderBaseChange.of_isPullback hsq c.isOpenImmersion
+    let e : Compactification f :=
+      { Z := E
+        g := k ≫ c.g
+        i := j
+        comm := by rw [← Category.assoc, hj, ← c.comm]
+        isProper := inferInstance
+        isOpenImmersion := inferInstance }
+    let h : e ⟶ c := { hom := k, i_hom := hj, hom_g := rfl }
+    refine ⟨e, h, ?_⟩
+    apply Refinement.ext
+    change k ≫ r.hom = k ≫ s.hom
+    have hk := pullback.condition (f := a) (g := pullback.diagonal d.g)
+    have hfst := congrArg (fun q ↦ q ≫ pullback.fst d.g d.g) hk
+    have hsnd := congrArg (fun q ↦ q ≫ pullback.snd d.g d.g) hk
+    simp only [Category.assoc, pullback.diagonal_fst, pullback.diagonal_snd,
+      Category.comp_id] at hfst hsnd
+    simpa [a, k] using hfst.trans hsnd.symm
+  · intro T t
+    refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+    · intro c
+      exact (c.baseChange t).quasiCompact_openImmersion inferInstance
+    · intro c d r
+      infer_instance
+    · intro c d e r s
+      exact ⟨⟨(baseChangeFunctor t).map r⟩, ⟨(baseChangeFunctor t).map s⟩⟩
+    · intro c d e r s h hh
+      rw [← Functor.map_comp, ← Functor.map_comp, hh]
+    · intro c d
+      refine ⟨inferInstance, infBaseChange_comp_infFst c d t,
+        infBaseChange_comp_infSnd c d t, ?_⟩
+      intro ht
+      have := ht
+      infer_instance
+    · intro ht c hc
+      have := ht
+      have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+      exact isSchemeTheoreticallyDominant_i_baseChange c t hc
+  · let R := Polynomial (ULift.{u} ℚ)
+    let S₀ : Scheme.{u} := Spec (CommRingCat.of R)
+    let U : S₀.Opens := PrimeSpectrum.basicOpen (Polynomial.X : R)
+    have : IsAffine U := IsAffineOpen.Spec_basicOpen (R := CommRingCat.of R) (Polynomial.X : R)
+    have : QuasiCompact U.ι := inferInstance
+    have hU : (U : Set S₀).Nonempty := by
+      refine ⟨⟨⊥, Ideal.isPrime_bot⟩, ?_⟩
+      exact Polynomial.X_ne_zero
+    have : IsDominant U.ι := Opens.isDominant_ι (U.isOpen.dense hU)
+    have : IsSchemeTheoreticallyDominant U.ι :=
+      IsSchemeTheoreticallyDominant.of_isDominant U.ι
+    let p : S₀ := ⟨RingHom.ker (Polynomial.evalRingHom (0 : ULift.{u} ℚ)),
+      RingHom.ker_isPrime _⟩
+    have hp : p ∉ U := by
+      change ¬ Polynomial.X ∉ RingHom.ker (Polynomial.evalRingHom (0 : ULift.{u} ℚ))
+      simp
+    let T₀ := Spec (S₀.residueField p)
+    let t : T₀ ⟶ S₀ := S₀.fromSpecResidueField p
+    let c := ofIsOpenImmersion U.ι
+    have : QuasiCompact c.i := ‹QuasiCompact U.ι›
+    have : IsSchemeTheoreticallyDominant c.i := ‹IsSchemeTheoreticallyDominant U.ι›
+    refine ⟨U, S₀, T₀, U.ι, t, c, inferInstance, inferInstance, inferInstance,
+      inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
+    intro hc
+    have := hc
+    have : QuasiCompact (c.baseChange t).i :=
+      (c.baseChange t).quasiCompact_openImmersion inferInstance
+    have : IsIso (c.baseChange t).g := by
+      change IsIso (pullback.snd (𝟙 S₀) t)
+      infer_instance
+    have : IsDominant (pullback.snd U.ι t) := by
+      rw [(c.baseChange t).comm]
+      infer_instance
+    obtain ⟨z⟩ := (pullback.snd U.ι t).denseRange.nonempty_iff.mpr inferInstance
+    apply hp
+    have hz := congrArg (fun k ↦ k z) (pullback.condition (f := U.ι) (g := t))
+    have hz' : U.ι (pullback.fst U.ι t z) = p := by
+      change U.ι (pullback.fst U.ι t z) = t (pullback.snd U.ι t z) at hz
+      exact hz.trans (S₀.fromSpecResidueField_apply p _)
+    rw [← hz']
+    exact (pullback.fst U.ι t z).property
 
 end AlgebraicGeometry.Compactification

@@ -69,7 +69,7 @@
    }
   },
   {
-   "text": "Apply the immersion compactification construction to a and the proper map Y→S. The cited immersion theorem makes C(a) a compactification, whose ambient scheme is SIm(a), and the image-factor theorem makes its open immersion j quasi-compact and scheme-theoretically dense. The restricted projections p_i:SIm(a)→bar X_i are over S and satisfy p_i j=j_i by the image factorization equality. They are proper by the proper-to-separated-target lemma since the source is proper over S and each target is separated over S. They are the required refinements.",
+   "text": "Apply the immersion compactification construction to a and the proper map Y→S. The cited immersion theorem makes C(a) a compactification, whose ambient scheme is SIm(a), and the image-factor theorem makes its open immersion j quasi-compact and scheme-theoretically dense. The restricted projections p_i:SIm(a)→bar X_i are over S and satisfy p_i j=j_i by the image factorization equality. They are proper by the proper-to-separated-target lemma since the source is proper over S and each target is separated over S. They are the required refinements. In Lean reuse the already proved graph-image construction Compactification.inf: inf_Z identifies its ambient scheme, isSchemeTheoreticallyDominant_inf_i gives density, and infFst and infSnd give the two refinements. This keeps the graph-image construction of the unit.",
    "uses": [
     "def-nagata-immersion-compactification",
     "lemma-nagata-immersion-into-proper",
@@ -85,7 +85,7 @@
    }
   },
   {
-   "text": "For the empty finite family choose the object from nonemptiness; a singleton refines itself by its identity. Inductively refine an object already refining the first n objects together with object n+1 by the pair construction. Compose its arrows to the previous objects. Associativity preserves their required equations, and properness of composites was checked in step 1. This proves the finite-family assertion.",
+   "text": "For the empty finite family choose the object from nonemptiness; a singleton refines itself by its identity. Inductively refine an object already refining the first n objects together with object n+1 by the pair construction. Compose its arrows to the previous objects. Associativity preserves their required equations, and properness of composites was checked in step 1. This proves the finite-family assertion. The Lean finite-family assertion uses IsCofiltered.inf_objs_exists on the finite image of the family; this library lemma is exactly the finite induction described here.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -94,7 +94,7 @@
    }
   },
   {
-   "text": "For parallel u,v:c_1→c_2 let E be the pullback of the diagonal of bar X_2→S along (u,v):bar X_1→bar X_2 times_S bar X_2. The target structure map is separated, so its diagonal is closed; closed immersions base-change, hence i:E→bar X_1 is closed. Consequently E→S is proper. The equality u j_1=v j_1 gives a unique j_E:X→E with i j_E=j_1 by the pullback universal property. Since i is a monomorphism, the square with upper map id_X, left j_E, right j_1 and bottom i is cartesian: for t:T→X and e:T→E with j_1 t=i e, cancellation in i j_E t=i e forces e=j_E t. Thus j_E is the base change of j_1, so is open. The open-immersion-quasi-compactness lemma applies to X→E→S, since f is finite type and E→S is proper, hence separated. Therefore j_E is quasi-compact. The pair (j_E,E→S) is a compactification; i is a proper refinement and equalizes u and v. Monomorphism cancellation here is elementary from the closed-subscheme description: a map factoring through a quotient sheaf has at most one such factorization.",
+   "text": "For parallel u,v:c_1→c_2 let E be the pullback of the diagonal of bar X_2→S along (u,v):bar X_1→bar X_2 times_S bar X_2. The target structure map is separated, so its diagonal is closed; closed immersions base-change, hence i:E→bar X_1 is closed. Consequently E→S is proper. The equality u j_1=v j_1 gives a unique j_E:X→E with i j_E=j_1 by the pullback universal property. Since i is a monomorphism, the square with upper map id_X, left j_E, right j_1 and bottom i is cartesian: for t:T→X and e:T→E with j_1 t=i e, cancellation in i j_E t=i e forces e=j_E t. Thus j_E is the base change of j_1, so is open. The open-immersion-quasi-compactness lemma applies to X→E→S, since f is finite type and E→S is proper, hence separated. Therefore j_E is quasi-compact. The pair (j_E,E→S) is a compactification; i is a proper refinement and equalizes u and v. Monomorphism cancellation here is elementary from the closed-subscheme description: a map factoring through a quotient sheaf has at most one such factorization. In Lean take a = pullback.lift r.hom s.hom and E = pullback a (pullback.diagonal d.g). Its first projection k is closed. The lift j is open because IsPullback.of_horiz_isIso_mono gives the cartesian square from j ≫ k = c.i. Give E the structure morphism k ≫ c.g and compare both projections of the pullback condition to prove that its refinement equalizes r and s.",
    "uses": [
     "def-pc-fibre-product",
     "def-weil-proper-morphism",
@@ -112,7 +112,7 @@
    }
   },
   {
-   "text": "A category is cofiltered precisely when it is nonempty, each pair of objects receives arrows from one object, and each pair of parallel arrows is equalized by an arrow into their source. Steps 2, 4 and 6 give these three properties. This is a direct application of that definition, without any smallness requirement on the collection of compactifications.",
+   "text": "A category is cofiltered precisely when it is nonempty, each pair of objects receives arrows from one object, and each pair of parallel arrows is equalized by an arrow into their source. Steps 2, 4 and 6 give these three properties. This is a direct application of that definition, without any smallness requirement on the collection of compactifications. The cofilteredness clause itself reuses the source library instance Compactification.isCofiltered under Nagata nonemptiness.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -167,7 +167,7 @@
    }
   },
   {
-   "text": "Density under arbitrary base change fails already for S=bar X=Spec K[t], X=D(t), and the ambient structure map id_S. The source map is a principal open immersion and quasi-compact. On a nonempty principal affine open D(s), the restriction on functions is K[t]_s→(K[t]_s)_t, injective since K[t]_s is a domain and t is nonzero. On the empty principal open both rings of sections are zero, so the restriction is injective there too. Principal opens form a basis, so injectivity on these section maps proves sheaf injectivity; hence O_S→j_*O_X is injective. This is a dense compactification of the separated finite-type map D(t)→S. After the nonflat base change t=0 its source has coordinate ring K[t,t⁻¹] tensor_{K[t]} K=0 (t is simultaneously zero and invertible), while the ambient scheme is Spec K. The map K→0 is not injective. Thus the base-changed compactification is not dense. For flat g and any dense c, apply the preceding dense-flat-pullback argument directly to its quasi-compact open immersion j and the flat projection bar X times_S S′→bar X; it proves preservation of density. The counterexample is elementary localization and quotient algebra, and does not assert that density fails for every nonflat base change.",
+   "text": "For the counterexample choose K = ULift of the rational field, R = K[t], S = Spec R, and U = D(t). The basic open is affine, so its inclusion is quasi-compact. The zero prime lies in U, since t is nonzero. The spectrum of the domain R is irreducible, hence U is topologically dense; since S is reduced, IsSchemeTheoreticallyDominant.of_isDominant makes its inclusion scheme-theoretically dominant. Let p be the prime kernel of evaluation at zero. Then p is outside U. Set T = Spec kappa(p) and let t0 : T -> S be the canonical residue-field morphism, whose value at every point is p. Compactify U -> S by S itself, using the identity proper structure map. All finiteness, separatedness, and qcqs hypotheses follow from affineness and the quasi-compact open immersion. If the base-changed open immersion were scheme-theoretically dominant, its quasi-compactness would imply topological dominance. The base-changed ambient structure map is an isomorphism because it is the base change of the identity. Therefore U times_S T -> T would be dominant. The spectrum of a field is nonempty, so dominance would give a point z of U times_S T. The pullback equation makes the image of its U-projection equal p, contradicting p not in U. This proves failure of density without a tensor-product computation. For flat base change and any c, derive QuasiCompact c.i from QuasiCompact f and apply the already proved isSchemeTheoreticallyDominant_i_baseChange; it is the dense-flat-pullback argument of step 10.",
    "uses": [
     "def-nagata-compactification",
     "def-nagata-dense-compactification",
@@ -214,7 +214,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/prop-nagata-compactification-category.md",
-  "place": "## Proof"
+  "place": "Proof, Category through Density; source-library graph-image and base-change API; B2 Lean proof, 2026-10-18. The counterexample uses the residue field of the evaluation-at-zero point, and reducedness plus topological density instead of explicit localization kernels."
  },
  "mathlib_searches": [
   {
@@ -325,5 +325,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Combined statement uses the upstream category, graph-image inf, baseChangeFunctor and infBaseChange without duplicating them. Compactification omits quasi-compactness in its general definition, but this agrees exactly here since QuasiCompact f implies QuasiCompact c.i; this is stated explicitly. Includes the existential failure of arbitrary-base-change density absent from the upstream results."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261018T062657-L-630403",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

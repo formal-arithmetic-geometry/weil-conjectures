@@ -15920,3 +15920,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:26 L: merged deliver/A8/Sheaf.AlgebraicGeometry.FiniteLocallyFreeResidueIso (stage 3; reviewer PASS; first push; landing 20261018T062656-L-630028 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:26 L: merged deliver/A8/Sheaf.AlgebraicGeometry.FiniteReflectsBoundedConstructible (stage 3; reviewer PASS; first push; landing 20261018T062656-L-630158 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:26 L: merged deliver/A9/Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf (stage 3; reviewer PASS; first push; landing 20261018T062657-L-630276 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:26 L: merged deliver/B2/Sheaf.AlgebraicGeometry.CompactificationCategory (stage 3; reviewer PASS; first push; landing 20261018T062657-L-630403 (proof); batch 20261018T062645; modules 1; new nodes 0)
