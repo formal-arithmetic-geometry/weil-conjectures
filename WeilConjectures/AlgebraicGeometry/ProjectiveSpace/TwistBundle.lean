@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Hyperplane
+public import WeilConjectures.AlgebraicGeometry.VectorBundle
 
 /-!
 # The total space of `𝒪(1)` on projective space
@@ -21,6 +23,8 @@ the hyperplane embedding.
   open subscheme.
 - `AlgebraicGeometry.ProjectiveSpace.twistBundleOpen`: the open `W`.
 - `AlgebraicGeometry.ProjectiveSpace.twistBundleπ`: the projection `W ⟶ ℙ(n; S)`.
+- `AlgebraicGeometry.ProjectiveSpace.twistBundleChart`: the charts `π⁻¹(D₊(Tᵢ)) ≅ 𝔸¹_{D₊(Tᵢ)}`.
+- `AlgebraicGeometry.ProjectiveSpace.twistBundle`: `𝒪(1)` as a `VectorBundle 1`.
 -/
 
 @[expose] public section
@@ -475,6 +479,218 @@ lemma twistBundleπ_appLE_coordRatio' (i k : n) (h h') :
           (coordRatio (Option n) S (some i) (some k)) := by
         rw [CommRingCat.comp_apply, CommRingCat.comp_apply, twistBundleπ_appLE_coordRatio]
     _ = _ := by rw [Scheme.Hom.appLE_map]
+
+lemma twistBundleChartHom_comp_chartInv (i : n) :
+    twistBundleChartHom n S i ≫ twistBundleChartInv n S i = 𝟙 _ := by
+  have hf : ((twistBundleπ n S ⁻¹ᵁ standardOpen n S i).ι ≫ (twistBundleOpen n S).ι) ⁻¹ᵁ
+      standardOpen (Option n) S (some i) = ⊤ := by
+    change (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).ι ⁻¹ᵁ
+      ((twistBundleOpen n S).ι ⁻¹ᵁ standardOpen (Option n) S (some i)) = ⊤
+    rw [← twistBundleπ_preimage_standardOpen]
+    exact Scheme.Opens.ι_preimage_self _
+  have e₁ : (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).topIso.inv =
+      (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).ι.appLE (twistBundleπ n S ⁻¹ᵁ standardOpen n S i)
+        ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+    rw [Scheme.Opens.ι_appLE]
+    rfl
+  rw [← cancel_mono ((twistBundleπ n S ⁻¹ᵁ standardOpen n S i).ι ≫ (twistBundleOpen n S).ι),
+    Category.assoc, twistBundleChartInv_ι, Category.id_comp, twistBundleChartInvAux,
+    comp_homOfSections]
+  conv_rhs => rw [eq_homOfSections_of_preimage_eq_top (Option n) S _ (some i) hf]
+  congr 1
+  · rw [twistBundleChartHom_over_assoc, morphismRestrict_ι_assoc, twistBundleπ_over]
+    simp only [Category.assoc]
+  · funext a
+    cases a with
+    | none =>
+      change (twistBundleChartHom n S i).appTop (AffineSpace.coord _ ⟨0⟩) = _
+      rw [twistBundleChartHom, AffineSpace.homOfVector_appTop_coord, twistBundleFiberCoord, e₁,
+        ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
+    | some k =>
+      have e₀ : (standardOpen n S i).topIso.inv =
+          (standardOpen n S i).ι.appLE (standardOpen n S i) ⊤
+            (Scheme.Opens.ι_preimage_self _).ge := by
+        rw [Scheme.Opens.ι_appLE]
+        rfl
+      have e₂ : (twistBundleπ n S ∣_ standardOpen n S i).appTop =
+          (twistBundleπ n S ∣_ standardOpen n S i).appLE ⊤ ⊤ le_top := by
+        rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+        rfl
+      change (twistBundleChartHom n S i).appTop ((𝔸(ULift.{u} (Fin 1);
+        (standardOpen n S i).toScheme) ↘ _).appTop _) = _
+      rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, twistBundleChartHom_over, e₀, e₂,
+        ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE,
+        appLE_eq_of_eq (morphismRestrict_ι _ _),
+        ← Scheme.Hom.appLE_comp_appLE _ _ _ (twistBundleπ n S ⁻¹ᵁ standardOpen n S i) _ le_rfl
+          (Scheme.Opens.ι_preimage_self _).ge,
+        CommRingCat.comp_apply, twistBundleπ_appLE_coordRatio' n S i k _ (by
+          rw [← twistBundleπ_preimage_standardOpen]),
+        ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
+
+/-- The chart `π⁻¹(D₊(Tᵢ)) ≅ 𝔸¹_{D₊(Tᵢ)}` of the total space of `𝒪(1)`. -/
+noncomputable def twistBundleChart (i : n) :
+    (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).toScheme ≅
+      𝔸(ULift.{u} (Fin 1); (standardOpen n S i).toScheme) where
+  hom := twistBundleChartHom n S i
+  inv := twistBundleChartInv n S i
+  hom_inv_id := twistBundleChartHom_comp_chartInv n S i
+  inv_hom_id := twistBundleChartInv_comp_chartHom n S i
+
+/-- The chart carries the zero section to the zero section. -/
+lemma twistBundleZero_resLE_chart (i : n) :
+    (twistBundleZero n S).resLE (twistBundleπ n S ⁻¹ᵁ standardOpen n S i) (standardOpen n S i)
+        (Scheme.Hom.le_preimage_preimage_of_comp_eq_id (twistBundleZero_comp_π n S) _) ≫
+      (twistBundleChart n S i).hom = AffineSpace.zeroSection _ _ := by
+  refine AffineSpace.hom_ext ?_ fun j ↦ ?_
+  · rw [Category.assoc, twistBundleChart, twistBundleChartHom_over,
+      AffineSpace.zeroSection_over, ← cancel_mono (standardOpen n S i).ι, Category.assoc,
+      morphismRestrict_ι, Scheme.Hom.resLE_comp_ι_assoc, twistBundleZero_comp_π,
+      Category.comp_id, Category.id_comp]
+  · obtain rfl : j = ⟨0⟩ := Subsingleton.elim _ _
+    rw [AffineSpace.zeroSection_appTop_coord, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+      twistBundleChart]
+    dsimp only
+    rw [twistBundleChartHom, AffineSpace.homOfVector_appTop_coord, twistBundleFiberCoord]
+    have e₁ : (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).topIso.inv =
+        (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).ι.appLE
+          (twistBundleπ n S ⁻¹ᵁ standardOpen n S i) ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+      rw [Scheme.Opens.ι_appLE]
+      rfl
+    have e₂ : ((twistBundleZero n S).resLE (twistBundleπ n S ⁻¹ᵁ standardOpen n S i)
+        (standardOpen n S i)
+          (Scheme.Hom.le_preimage_preimage_of_comp_eq_id (twistBundleZero_comp_π n S) _)).appTop =
+        ((twistBundleZero n S).resLE (twistBundleπ n S ⁻¹ᵁ standardOpen n S i)
+          (standardOpen n S i)
+            (Scheme.Hom.le_preimage_preimage_of_comp_eq_id (twistBundleZero_comp_π n S) _)).appLE
+              ⊤ ⊤ le_top := by
+      rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+      rfl
+    have hh := Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover n S)
+      (hyperplaneSections n S) (span_hyperplaneSections n S) (ℙ(n; S) ↘ S) i
+    have hh' : (standardOpen n S i).ι ≫ hyperplane n S = homOfSections
+        ((standardOpen n S i).ι ≫ ℙ(n; S) ↘ S)
+        (fun a ↦ (standardOpen n S i).topIso.inv ((hyperplaneSections n S a).s i))
+        (Scheme.CoordinateCover.span_topIso_inv _ (span_hyperplaneSections n S) i) := hh
+    rw [e₁, e₂, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply,
+      Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_comp_appLE,
+      appLE_eq_of_eq (show ((twistBundleZero n S).resLE _ _ _ ≫
+        (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).ι) ≫ (twistBundleOpen n S).ι =
+          (standardOpen n S i).ι ≫ hyperplane n S by
+        rw [Scheme.Hom.resLE_comp_ι, Category.assoc, twistBundleZero_ι]),
+      appLE_eq_of_eq hh']
+    refine (homOfSections_appLE_coordRatio (S := S) ((standardOpen n S i).ι ≫ ℙ(n; S) ↘ S)
+      (fun a ↦ (standardOpen n S i).topIso.inv ((hyperplaneSections n S a).s i))
+      (Scheme.CoordinateCover.span_topIso_inv _ (span_hyperplaneSections n S) i)
+      (hyperplaneSections_some_s_self n S i) none _).trans ?_
+    simp [hyperplaneSections, Scheme.CoordinateCover.zeroSection]
+
+lemma twistBundleπ_appLE_coordRatio_of_le (i k : n) {V : (twistBundleOpen n S).toScheme.Opens}
+    (hV : V ≤ (twistBundleCover n S).U i) (h h') :
+    (twistBundleπ n S).appLE (standardOpen n S i) V h (coordRatio n S i k) =
+      (twistBundleOpen n S).ι.appLE (standardOpen (Option n) S (some i)) V h'
+        (coordRatio (Option n) S (some i) (some k)) := by
+  have eL : (twistBundleCover n S).U i ≤ twistBundleπ n S ⁻¹ᵁ standardOpen n S i := by
+    rw [twistBundleπ_preimage_standardOpen, twistBundleCover_U]
+  have eR : (twistBundleCover n S).U i ≤
+      (twistBundleOpen n S).ι ⁻¹ᵁ standardOpen (Option n) S (some i) := by
+    rw [twistBundleCover_U]
+  calc _ = ((twistBundleπ n S).appLE (standardOpen n S i) _ eL ≫
+        (twistBundleOpen n S).toScheme.presheaf.map (homOfLE hV).op) (coordRatio n S i k) := by
+        rw [Scheme.Hom.appLE_map]
+    _ = ((twistBundleOpen n S).ι.appLE (standardOpen (Option n) S (some i)) _ eR ≫
+        (twistBundleOpen n S).toScheme.presheaf.map (homOfLE hV).op)
+          (coordRatio (Option n) S (some i) (some k)) := by
+        rw [CommRingCat.comp_apply, CommRingCat.comp_apply, twistBundleπ_appLE_coordRatio]
+    _ = _ := by rw [Scheme.Hom.appLE_map]
+
+/-- The restriction of a function on an open `U` of the base to its preimage. -/
+lemma morphismRestrict_appTop_topIso_inv {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
+    (x : Γ(Y, U)) :
+    (f ∣_ U).appTop (U.topIso.inv x) =
+      (f ⁻¹ᵁ U).topIso.inv (f.appLE U (f ⁻¹ᵁ U) le_rfl x) := by
+  have e₀ : U.topIso.inv = U.ι.appLE U ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+    rw [Scheme.Opens.ι_appLE]
+    rfl
+  have e₁ : (f ⁻¹ᵁ U).topIso.inv =
+      (f ⁻¹ᵁ U).ι.appLE (f ⁻¹ᵁ U) ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+    rw [Scheme.Opens.ι_appLE]
+    rfl
+  have e₂ : (f ∣_ U).appTop = (f ∣_ U).appLE ⊤ ⊤ le_top := by
+    rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+    rfl
+  rw [e₀, e₁, e₂, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply,
+    Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_comp_appLE,
+    appLE_eq_of_eq (morphismRestrict_ι f U)]
+
+/-- The transition functions of the total space of `𝒪(1)` are linear: on `π⁻¹(D₊(Tᵢ) ∩ D₊(Tⱼ))`
+the fibre coordinates satisfy `T_∗ / Tⱼ = (Tᵢ / Tⱼ) (T_∗ / Tᵢ)`. -/
+lemma twistBundle_linear (i j : n) :
+    ∃ M : Matrix (Fin 1) (Fin 1) Γ((standardOpen n S i ⊓ standardOpen n S j).toScheme, ⊤),
+      IsUnit M.det ∧ ∀ a,
+        ((twistBundleOpen n S).toScheme.homOfLE ((twistBundleπ n S).preimage_mono inf_le_right) ≫
+          (twistBundleChart n S j).hom).appTop (AffineSpace.coord _ (ULift.up a)) =
+        ∑ b, (twistBundleπ n S ∣_ (standardOpen n S i ⊓ standardOpen n S j)).appTop (M a b) *
+          ((twistBundleOpen n S).toScheme.homOfLE ((twistBundleπ n S).preimage_mono inf_le_left) ≫
+            (twistBundleChart n S i).hom).appTop (AffineSpace.coord _ (ULift.up b)) := by
+  have hU : standardOpen n S i ⊓ standardOpen n S j ≤
+      ℙ(n; S).basicOpen (coordRatio n S j i) := by
+    rw [← standardCoordinateCover_ratio, (standardCoordinateCover n S).basicOpen_ratio,
+      standardCoordinateCover_U, standardCoordinateCover_U, inf_comm]
+  refine ⟨Matrix.of fun _ _ ↦ (standardOpen n S i ⊓ standardOpen n S j).topIso.inv
+    (ℙ(n; S).presheaf.map (homOfLE inf_le_right).op (coordRatio n S j i)), ?_, fun a ↦ ?_⟩
+  · rw [Matrix.det_unique, Matrix.of_apply]
+    exact (Scheme.isUnit_map_of_le_basicOpen (coordRatio n S j i) hU).map _
+  obtain rfl : a = 0 := Subsingleton.elim _ _
+  rw [Fin.sum_univ_one, Matrix.of_apply, morphismRestrict_appTop_topIso_inv]
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, twistBundleChart,
+    twistBundleChartHom, AffineSpace.homOfVector_appTop_coord, twistBundleFiberCoord,
+    Scheme.homOfLE_appTop_topIso_inv]
+  rw [← map_mul]
+  congr 1
+  have hZi : twistBundleπ n S ⁻¹ᵁ (standardOpen n S i ⊓ standardOpen n S j) ≤
+      (twistBundleCover n S).U j := by
+    rw [twistBundleCover_U, ← twistBundleπ_preimage_standardOpen]
+    exact (twistBundleπ n S).preimage_mono inf_le_right
+  have hO : twistBundleπ n S ⁻¹ᵁ (standardOpen n S i ⊓ standardOpen n S j) ≤
+      (twistBundleOpen n S).ι ⁻¹ᵁ (standardOpen (Option n) S (some i) ⊓
+        standardOpen (Option n) S (some j)) := by
+    rw [Scheme.Hom.preimage_inf, Scheme.Hom.preimage_inf, ← twistBundleπ_preimage_standardOpen,
+      ← twistBundleπ_preimage_standardOpen]
+  simp only [← CommRingCat.comp_apply, Scheme.Hom.appLE_map, Scheme.Hom.map_appLE]
+  rw [twistBundleπ_appLE_coordRatio_of_le n S j i hZi _ (hO.trans
+      ((twistBundleOpen n S).ι.preimage_mono inf_le_right))]
+  rw [← Scheme.Hom.map_appLE (twistBundleOpen n S).ι hO (homOfLE (inf_le_right :
+      standardOpen (Option n) S (some i) ⊓ standardOpen (Option n) S (some j) ≤ _)).op,
+    ← Scheme.Hom.map_appLE (twistBundleOpen n S).ι hO (homOfLE (inf_le_left :
+      standardOpen (Option n) S (some i) ⊓ standardOpen (Option n) S (some j) ≤ _)).op]
+  simp only [CommRingCat.comp_apply]
+  rw [← map_mul]
+  congr 1
+  rw [map_coordRatio_eq_mul (inf_le_right : standardOpen (Option n) S (some i) ⊓
+      standardOpen (Option n) S (some j) ≤ _) inf_le_left none, mul_comm]
+
+/-- **The line bundle `𝒪(1)` on `ℙ(n; S)`** as a vector bundle of rank one: the total space
+`W = ⋃ᵢ D₊(Tᵢ) ⊆ ℙ(Option n; S)` with the projection `[x : t] ↦ [x]`, the zero section the
+hyperplane embedding, the charts `π⁻¹(D₊(Tᵢ)) ≅ 𝔸¹_{D₊(Tᵢ)}` given by the fibre coordinate
+`T_∗ / Tᵢ`, and the transition functions `Tᵢ / Tⱼ`. -/
+noncomputable def twistBundle : VectorBundle 1 (twistBundleπ n S) where
+  zero := twistBundleZero n S
+  zero_comp := twistBundleZero_comp_π n S
+  ι := n
+  U := standardOpen n S
+  iSup_U := iSup_standardOpen n S
+  chart := twistBundleChart n S
+  chart_over := twistBundleChartHom_over n S
+  zero_chart := twistBundleZero_resLE_chart n S
+  linear := twistBundle_linear n S
+
+/-- The coordinate of the chart of `𝒪(1)` over `D₊(Tᵢ)` is the fibre coordinate `T_∗ / Tᵢ`. -/
+lemma twistBundle_coord (i : n) (a : Fin 1) :
+    (twistBundle n S).coord i a = twistBundleFiberCoord n S i :=
+  AffineSpace.homOfVector_appTop_coord _ _ _
+
+@[simp]
+lemma twistBundle_zero : (twistBundle n S).zero = twistBundleZero n S := rfl
 
 end ProjectiveSpace
 
