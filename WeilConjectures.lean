@@ -4618,6 +4618,7 @@ public import WeilConjectures.TraceFormula.DegreeOne
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.Fibration
 public import WeilConjectures.TraceFormula.FixedPoint
+public import WeilConjectures.TraceFormula.Induction
 public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LocalTerm
