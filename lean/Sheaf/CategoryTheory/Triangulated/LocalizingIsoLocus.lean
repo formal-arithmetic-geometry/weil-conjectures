@@ -80,6 +80,16 @@ theorem isoLocus_localizing
         sInf {P : ObjectProperty C | S ≤ P ∧ P.IsTriangulated ∧
           ∀ I : Type w, Nonempty (P.IsClosedUnderColimitsOfShape (Discrete I))} ≤
             η.isoLocus) := by
-  sorry
+  have hcolim : ∀ I : Type w,
+      Nonempty (η.isoLocus.IsClosedUnderColimitsOfShape (Discrete I)) := by
+    intro I
+    refine ⟨⟨?_⟩⟩
+    intro X ⟨p⟩
+    have hη : ∀ j, IsIso ((Functor.whiskerLeft p.diag η).app j) := p.prop_diag_obj
+    have : IsIso (Functor.whiskerLeft p.diag η) := NatIso.isIso_of_isIso_app _
+    exact isIso_app_coconePt_of_preservesColimit p.diag η _ p.isColimit
+  refine ⟨inferInstance, hcolim, ⟨inferInstance⟩, ?_⟩
+  intro hS
+  exact sInf_le ⟨hS, inferInstance, hcolim⟩
 
 end CategoryTheory.NatTrans
