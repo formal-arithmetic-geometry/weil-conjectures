@@ -16505,3 +16505,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:44 L: merged deliver/Q7/Sheaf.CategoryTheory.RingedSiteInjectiveMonoRestriction (stage 3; reviewer PASS; first push; landing 20261018T144417-L-3503827 (proof); batch 20261018T144352; modules 1; new nodes 0)
 - 14:44 L: merged deliver/R3/Sheaf.NumberTheory.Padics.ContinuousUniformizerDivision (stage 3; reviewer PASS; first push; landing 20261018T144419-L-3504299 (proof); batch 20261018T144352; modules 1; new nodes 0)
 - 14:44 L: merged deliver/R7/Sheaf.AlgebraicGeometry.EtaleCompactSupportAmplitude (stage 3; reviewer PASS; first push; landing 20261018T144422-L-3505510 (proof); batch 20261018T144352; modules 1; new nodes 0)
+- 14:44 L: merged deliver/S4/Sheaf.SixFunctors.FrobeniusSquareCartesian (stage 3; reviewer PASS; first push; landing 20261018T144423-L-3506139 (proof); batch 20261018T144352; modules 1; new nodes 0)

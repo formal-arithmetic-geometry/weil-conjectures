@@ -27,75 +27,65 @@
  ],
  "proof": [
   {
-   "text": "Put $S_0=\\operatorname{Spec}k_0$, $s=\\operatorname{Spec}k$, $u=\\operatorname{Spec}(\\iota):s\\to S_0$, $\\sigma=\\operatorname{Spec}(\\gamma)$ and $\\rho=\\operatorname{Spec}(\\gamma^{-1})$. By the field-level clause of [def-weil-frobenius-detailed], $\\gamma$ and $\\gamma^{-1}$ fix $\\iota(k_0)$ and are inverse ring maps. The contravariant functoriality in [def-weil-affine-spectrum] therefore gives $u\\sigma=u$, $u\\rho=u$, and $\\sigma\\rho=\\rho\\sigma=\\operatorname{id}_s$. Thus both maps may be used over $S_0$. Here and below juxtaposition denotes ordinary composition, with the rightmost map applied first.",
+   "text": "Specialize the existing galoisMap_inverse theorem of [def-weil-frobenius-detailed] to geometricFrobeniusAlgEquivOfAlgebraic for the finite-field datum [def-weil-finite-field-fiber], separately for X_0.hom and Y_0.hom. Its two components give the four displayed inverse identities, with precisely the prescribed inverse coefficient actions.",
    "uses": [
-    "def-weil-finite-field-fiber",
     "def-weil-frobenius-detailed",
-    "def-weil-affine-spectrum"
+    "def-weil-finite-field-fiber"
    ],
-   "elementary": true,
-   "source": {
-    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean",
-    "place": "Spec.map_id, Spec.map_comp, Scheme.Spec, lines 482-498; agent-written application to the two inverse field automorphisms"
-   }
+   "elementary": true
   },
   {
-   "text": "For either $Z_0=X_0$ or $Z_0=Y_0$, write $Z=Z_0\\times_{S_0}s$ with projections $\\pi_Z:Z\\to Z_0$ and $b_Z:Z\\to s$. The induced map $g_Z$ is characterized by $\\pi_Zg_Z=\\pi_Z$ and $b_Zg_Z=\\sigma b_Z$, by [def-pc-fibre-product]. Likewise define $h_Z=\\operatorname{id}_{Z_0}\\times_{S_0}\\rho$, with $\\pi_Zh_Z=\\pi_Z$ and $b_Zh_Z=\\rho b_Z$. These maps exist because step 1 gives $u\\sigma=u\\rho=u$. The two projections of $g_Zh_Z$ are $\\pi_Z$ and $\\sigma\\rho b_Z=b_Z$, and those of $h_Zg_Z$ are $\\pi_Z$ and $\\rho\\sigma b_Z=b_Z$. Uniqueness in the same universal property makes both composites $\\operatorname{id}_Z$. This proves clause 1 with precisely the displayed inverses, for both schemes.",
+   "text": "Bundle each coefficient action together with its explicit inverse and the identities from step 1 into an isomorphism of schemes. The IsIso instances of their hom morphisms give invertibility of the two horizontal maps. No finite-type hypothesis is needed.",
    "uses": [
-    "def-pc-fibre-product"
+    "def-weil-frobenius-detailed"
    ],
-   "elementary": true,
-   "source": {
-    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
-    "place": "pullback.lift, pullback.lift_fst, pullback.lift_snd and pullback.hom_ext (read in lines 125-235); pullback.map, lines 260-275; agent-written universal-property calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "The base-changed morphism $f$ has $\\pi_Yf=f_0\\pi_X$ and $b_Yf=b_X$, by the induced-morphism clause of [def-pc-fibre-product]; the hypothesis that $f_0$ is over $S_0$ is exactly the compatibility needed to induce it. The composites $fg_X$ and $g_Yf$ have the same two projections to $Y_0$ and $s$: respectively $f_0\\pi_X$ and $\\sigma b_X$. Uniqueness for the fibre product $Y$ gives $fg_X=g_Yf$, proving clause 2. Multiplying this equality by the inverses established in step 2 also gives $fh_X=h_Yf$: explicitly $h_Yfg_X=f$, hence $h_Yf=fh_X$.",
+   "text": "For f=((Over.pullback b).map f_0).left, where b=Spec(algebraMap k_0 k), use pullback.hom_ext from [def-pc-fibre-product] to prove g_X followed by f equals f followed by g_Y. Over.pullback_map_left identifies f with the universal lift, so pullback.lift_fst and pullback.lift_snd compute its projections. Apply galoisMap_projections from [def-weil-frobenius-detailed] to both models. The first composites are both the first projection followed by f_0.left, and the second are both the second projection followed by Spec(gamma). The Over morphism [def-weil-scheme-over-base] supplies the compatibility in the universal lift.",
    "uses": [
     "def-pc-fibre-product",
+    "def-weil-frobenius-detailed",
     "def-weil-scheme-over-base"
    ],
-   "elementary": true,
-   "source": {
-    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
-    "place": "pullback.lift, pullback.lift_fst, pullback.lift_snd and pullback.hom_ext (read in lines 125-235); pullback.map, lines 260-275; agent-written universal-property calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $P=X\\times_{f,Y,g_Y}Y$, with projections $r:P\\to X$ and $t:P\\to Y$, so $fr=g_Yt$. By step 3 and [def-pc-fibre-product], the map $\\eta=(g_X,f):X\\to P$ exists, with $r\\eta=g_X$ and $t\\eta=f$. Set $\\theta=h_Xr:P\\to X$. Then $\\theta\\eta=h_Xg_X=\\operatorname{id}_X$. For the other composite, $r\\eta\\theta=g_Xh_Xr=r$ and $t\\eta\\theta=fh_Xr=h_Yfr=h_Yg_Yt=t$. The uniqueness clause for $P$ gives $\\eta\\theta=\\operatorname{id}_P$. Thus the exact morphism $(g_X,f)$ specified in clause 3 is an isomorphism, with inverse $h_Xr$, proving that this square is Cartesian.",
+   "text": "Apply Mathlib CategoryTheory.IsPullback.of_horiz_isIso to the commutative square from step 3 with the two isomorphism instances from step 2. This is the general universal-property argument giving the inverse r followed by g_X inverse to the canonical comparison (g_X,f) into the chosen pullback, so it proves exactly the required Cartesian square.",
    "uses": [
     "def-pc-fibre-product"
    ],
    "elementary": true,
    "source": {
-    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
-    "place": "pullback.lift, pullback.lift_fst, pullback.lift_snd and pullback.hom_ext (read in lines 125-235); pullback.map, lines 260-275; agent-written universal-property calculation"
+    "document": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean",
+    "place": "IsPullback.of_horiz_isIso and of_horiz_isIso_mono, lines 69-80"
    }
   },
   {
-   "text": "If $Y_0=S_0$, its structure map is $\\operatorname{id}_{S_0}$. The projection $b_Y:S_0\\times_{S_0}s\\to s$ is an isomorphism with inverse $(u,\\operatorname{id}_s)$: one composite is immediately $\\operatorname{id}_s$; the other has projections $ub_Y=\\pi_Y$ and $b_Y$, so is the identity by [def-pc-fibre-product]. Under this particular identification $Y=s$, the equation $b_Yg_Y=\\sigma b_Y$ identifies $g_Y$ with $g_s=\\sigma$, and $f$ with the scalar-extended structure morphism $a_X=b_X$. Clauses 2 and 3 now give exactly $a_Xg_X=g_sa_X$ and the claimed Cartesian structure square with its specified comparison map.",
+   "text": "The second projection of the pullback of the identity structure morphism is an isomorphism by the standard pullback instance. For the structure square, unfold galoisMap to baseChangeMap along the Over endomorphism with left morphism Spec(gamma), as in [def-weil-affine-spectrum]. Apply the existing AlgebraicGeometry.isPullback_baseChangeMap theorem: its top map, vertical second projections and bottom Spec(gamma) are definitionally the displayed maps. This theorem proves the base-change square by pullback pasting, with no additional Frobenius-specific assumption.",
    "uses": [
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "def-weil-frobenius-detailed"
    ],
    "elementary": true,
    "source": {
-    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
-    "place": "pullback.lift, pullback.lift_fst, pullback.lift_snd and pullback.hom_ext (read in lines 125-235); pullback.map, lines 260-275; agent-written universal-property calculation"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/PicardFunctor.lean",
+    "place": "AlgebraicGeometry.isPullback_baseChangeMap, lines 311-317"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-field-fiber",
   "def-weil-frobenius-detailed",
-  "def-weil-affine-spectrum",
+  "def-weil-finite-field-fiber",
   "def-pc-fibre-product",
-  "def-weil-scheme-over-base"
+  "def-weil-scheme-over-base",
+  "def-weil-affine-spectrum"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
-  "place": "Explicit projection and inverse calculation from the fibre-product universal property, Stacks Tag 001V, categories.tex, definition-fibre-products, lines 715-746 (read at /home/ubuntu/work-bp/sheaf/literature/stacks-project/categories.tex), and pullback.lift/pullback.map; Spec functoriality read in AlgebraicGeometry/Scheme.lean. Deligne (1.1.7), (1.1.10)(i), (1.1.11), (1.1.14) and the original blueprint were independently read during second reading; they supply the convention and the Cartesian assertion, whose omitted calculation is written out here."
+  "document": "lean/Sheaf/SixFunctors/FrobeniusSquareCartesian.lean",
+  "place": "S4 stage-3 proof, 2026-10-18: existing galoisMap_inverse and galoisMap_projections, pullback projection extensionality, Mathlib IsPullback.of_horiz_isIso, and source isPullback_baseChangeMap. This specializes the original universal-property plan without new lemmas or changes to the statement or unit route."
  },
  "mathlib_searches": [
   {
@@ -230,5 +220,15 @@
   "group": "N1",
   "result": "pass",
   "note": "Wrote review.md. Checked all clauses, dependencies, sources, edge cases, docstrings, and verbatim signature. Exact snapshot compiled cleanly in both scompile.py passes. One nonblocking inherited page typo recorded; no substantive defects."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261018T144423-L-3506139",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

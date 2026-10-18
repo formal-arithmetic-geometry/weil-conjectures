@@ -106,7 +106,30 @@ theorem frobenius_square_cartesian (D : WeilConjectures.FiniteFieldDatum.{u})
       (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
       (Spec.map (CommRingCat.ofHom
       (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
-      (Fintype.ofFinite D.k₀) _ _ _).toRingHom)) :=
-  sorry
+      (Fintype.ofFinite D.k₀) _ _ _).toRingHom)) := by
+  let σ := @FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
+    (Fintype.ofFinite D.k₀) _ _ _
+  let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  let f := ((Over.pullback b).map f₀).left
+  have hX := D.galoisMap_inverse X₀.hom σ
+  have hY := D.galoisMap_inverse Y₀.hom σ
+  have hcomm : D.galoisMap X₀.hom σ ≫ f = f ≫ D.galoisMap Y₀.hom σ := by
+    apply pullback.hom_ext
+    · simp only [Category.assoc, f, Over.pullback_map_left, pullback.lift_fst]
+      rw [← Category.assoc, (D.galoisMap_projections X₀.hom σ).1,
+        (D.galoisMap_projections Y₀.hom σ).1]
+      simp only [b, pullback.lift_fst]
+    · simp only [Category.assoc, f, Over.pullback_map_left, pullback.lift_snd]
+      rw [(D.galoisMap_projections X₀.hom σ).2,
+        (D.galoisMap_projections Y₀.hom σ).2]
+      simp [b]
+  let eX : _ ≅ _ := ⟨D.galoisMap X₀.hom σ, D.galoisMap X₀.hom σ.symm, hX.1, hX.2⟩
+  let eY : _ ≅ _ := ⟨D.galoisMap Y₀.hom σ, D.galoisMap Y₀.hom σ.symm, hY.1, hY.2⟩
+  have : IsIso (D.galoisMap X₀.hom σ) := eX.isIso_hom
+  have : IsIso (D.galoisMap Y₀.hom σ) := eY.isIso_hom
+  refine ⟨hX.1, hX.2, hY.1, hY.2, hcomm, IsPullback.of_horiz_isIso ⟨hcomm⟩,
+    inferInstance, ?_⟩
+  change IsPullback (baseChangeMap X₀.hom _) _ _ _
+  exact isPullback_baseChangeMap X₀.hom _
 
 end WeilConjectures.FiniteFieldDatum
