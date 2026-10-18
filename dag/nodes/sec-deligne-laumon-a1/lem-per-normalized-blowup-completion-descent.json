@@ -18,9 +18,126 @@
   "def-pc-fibre-product",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Y_i=Z_i$ for the given tower and $\\kappa=A/\\mathfrak m$. Proceed by induction on $i$, with inductive claim: there are proper normalized blowups $X_i\\to\\cdots\\to X_0=\\operatorname{Spec}A$ with centres over the closed point and an isomorphism $X_i\\times_A\\widehat A\\cong Y_i$ compatible with the structure morphisms of both towers. The base $i=0$ is $\\operatorname{Spec}A\\times_A\\widehat A=\\operatorname{Spec}\\widehat A=Y_0$; this is also the whole statement for length zero (the identity tower). For the induction step, $\\widehat A$ is local with maximal ideal $\\mathfrak m\\widehat A$ and $\\kappa\\cong\\widehat A/\\mathfrak m\\widehat A$, so $Y_i\\times_{\\widehat A}\\operatorname{Spec}(\\widehat A/\\mathfrak m\\widehat A)\\cong X_i\\times_A\\operatorname{Spec}(\\widehat A/\\mathfrak m\\widehat A)\\cong X_i\\times_A\\operatorname{Spec}\\kappa$: the closed fibres of $Y_i$ and $X_i$ are isomorphic. The centre $y_i$ of the next normalized blowup is a closed point over the closed point of $\\operatorname{Spec}\\widehat A$, so it corresponds to a closed point $x_i$ of the closed fibre of $X_i$; the closed fibre is closed in $X_i$, hence $x_i$ is a closed point of $X_i$ over the closed point of $\\operatorname{Spec}A$, and $\\kappa(x_i)\\cong\\kappa(y_i)$ is a $\\kappa$-algebra.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-local-completion-local-ring",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGA proof, induction setup and correspondence of closed points in the special fibres."
+   }
+  },
+  {
+   "text": "Let $X_i^{\\prime}\\to X_i$ be the ordinary blowup at the reduced point $x_i$, with ideal sheaf $\\mathcal I$. The completion map $A\\to\\widehat A$ is flat, and flatness is preserved by base change, so $g:Y_i=X_i\\times_A\\widehat A\\to X_i$ is flat. The closed subscheme $V(\\mathcal I\\mathcal O_{Y_i})=g^{-1}(x_i)=\\operatorname{Spec}(\\kappa(x_i)\\otimes_A\\widehat A)=\\operatorname{Spec}(\\kappa(x_i)\\otimes_\\kappa\\widehat A/\\mathfrak m\\widehat A)=\\operatorname{Spec}\\kappa(x_i)$ is the reduced point $y_i$, by the identification of closed fibres in Step 1. So the flat blowup base-change comparison identifies $X_i^{\\prime}\\times_A\\widehat A$, over $Y_i$, with the ordinary blowup $Y_i^{\\prime}$ of $Y_i$ at $y_i$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-global-blowup",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGA proof, paragraph beginning “Let $X_i^{\\prime}\\to X_i$ be the blowup”; flat blowup base change is Tag 0805."
+   }
+  },
+  {
+   "text": "By hypothesis $Y_{i+1}\\to Y_i^{\\prime}$ is the normalization of $Y_i^{\\prime}$ in its function field, so $Y_i^{\\prime}$ is integral and $Y_{i+1}$ is the componentwise normalization $(Y_i^{\\prime})^\\nu$ (one component). $X_i^{\\prime}$ is integral too: $\\operatorname{Spec}\\widehat A\\to\\operatorname{Spec}A$ is faithfully flat, hence surjective, so its base change $Y_i^{\\prime}\\to X_i^{\\prime}$ is flat and surjective; $X_i^{\\prime}$ is nonempty and irreducible as the continuous image of the irreducible $Y_i^{\\prime}$, and reduced because for $x\\in X_i^{\\prime}$ and $y$ over it the flat local map $\\mathcal O_{X_i^{\\prime},x}\\to\\mathcal O_{Y_i^{\\prime},y}$ is faithfully flat, hence injective (its kernel $K$ has $K\\otimes\\mathcal O_{Y_i^{\\prime},y}=0$), into a reduced ring. Next, $Y_i$ is normal: $Y_0=\\operatorname{Spec}\\widehat A$ by hypothesis, and $Y_i$ for $i\\geq1$ is a normalization in the function field, i.e. the normalization of $Y_{i-1}^{\\prime}$ in its generic point $\\operatorname{Spec}K\\to Y_{i-1}^{\\prime}$, whose local rings are integrally closed. The centre $y_i$ lies in the special fibre, so the complement of the special fibre of $Y_i^{\\prime}$ is contained in the inverse image of $Y_i\\setminus\\{y_i\\}$, over which the blowup is an isomorphism; hence it is isomorphic to an open of the normal scheme $Y_i$, and is normal. $X_i^{\\prime}$ is of finite type over $A$ (Step 4). Apply the normalization-completion comparison (Tag 0BG9) to $X_i^{\\prime}\\to\\operatorname{Spec}A$: its normalization $X_{i+1}:=(X_i^{\\prime})^\\nu\\to X_i^{\\prime}$, which for the integral $X_i^{\\prime}$ is its normalization in its function field, is finite, and its base change to $\\widehat A$ is $(Y_i^{\\prime})^\\nu=Y_{i+1}$ over $Y_i^{\\prime}$. Composing with Step 2 gives $X_{i+1}\\times_A\\widehat A\\cong Y_{i+1}$ compatibly with $X_{i+1}\\to X_i$ and $Y_{i+1}\\to Y_i$, which is the inductive claim at $i+1$ once Step 4 gives properness.",
+   "uses": [
+    "lem-per-normalization-completion-base-change",
+    "thm-nagata-global-blowup-complement",
+    "def-weil-pbc-normal-ring",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-normalization-normal-stalks",
+    "def-weil-pbc-reduced-normalization",
+    "def-sc-normalization",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGA proof, induction step; Tag 0BG9 for normalization after the ordinary blowup."
+   }
+  },
+  {
+   "text": "$X_i$ is of finite type over the Noetherian ring $A$, hence locally Noetherian, so the ideal sheaf of the closed point $x_i$ is of finite type and the ordinary blowup $X_i^{\\prime}\\to X_i$ is proper; in particular $X_i^{\\prime}$ is of finite type over $A$. The normalization $X_{i+1}\\to X_i^{\\prime}$ supplied by the comparison node is finite, hence proper, and the composite of these two proper maps is proper. Therefore every descended arrow $X_{i+1}\\to X_i$ is a proper normalized blowup; its centre $x_i$ lies over the closed point by Step 1.",
+   "uses": [
+    "thm-nagata-global-blowup-proper",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGA statement and proof, with properness of blowups and finiteness of normalization."
+   }
+  },
+  {
+   "text": "Assume the endpoint $Z_n=Y_n$ is regular. The completion map $A\\to\\widehat A$ is faithfully flat, so $\\operatorname{Spec}\\widehat A\\to\\operatorname{Spec}A$ is flat and surjective, and its base change $Z_n\\cong X_n\\times_A\\widehat A\\to X_n$ is flat and surjective. For each point $x\\in X_n$, choose a point $y\\in Z_n$ over it. The induced local map $\\mathcal O_{X_n,x}\\to\\mathcal O_{Z_n,y}$ is flat and local, hence faithfully flat. The ring $\\mathcal O_{Z_n,y}$ is Noetherian and each of its localizations at a prime is the local ring of $Z_n$ at a generization of $y$, hence regular; so it is a regular ring, and regularity descends along the faithfully flat map: $\\mathcal O_{X_n,x}$ is a regular (local) ring. Thus every local ring of the locally Noetherian scheme $X_n$ is regular, so $X_n$ is regular.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+    "def-weil-regular-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG6(3), proof of regularity descent from the completed proper model; algebraic faithful-flat regularity descent is Tag 07NG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-global-blowup",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-sc-normalization",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-proper-morphism",
+  "def-weil-regular-scheme",
+  "lem-per-normalization-completion-base-change",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-normalization-normal-stalks",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+  "lem-weil-pbc-surjective-base-change",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-global-blowup-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tags 0BGA and 0BG6(3), with Tag 0BG9 for the normalization-completion step."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,7 +169,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-excellent-surface-desingularization",
@@ -64,7 +181,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality), via the potential-dualizing surface construction; ILO Expose XVII 3.4.1, first paragraph, printed p.270: Lipman's regular birational model. Realizes the proof of Stacks 0BGP (4) implies (3). Tags 0BGA (resolve-lemma-normalized-blowup-completion) and 0BG6(3) (resolve-lemma-port-regularity-to-completion), for the proper descended endpoint.",
+   "place": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality): the completion descent of normalized point blowups, realizing Stacks Tags 0BGA and 0BG6(3) with the normalization comparison of Tag 0BG9.",
    "via": [
     "lem-per-excellent-surface-desingularization",
     "lem-per-surface-resolution-supported-presentation",
@@ -78,5 +195,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normalized-blowup-completion-descent",
+  "worker": "stage1",
+  "summary": "Split the completion descent into the Stacks 0BGA induction on the tower length. The proof descends each closed-point centre through the common special fibre, uses flat base change for the ordinary blowup, applies the new Tag 0BG9 normalization-completion node, proves properness by finite normalization and composition, and descends endpoint regularity by faithful-flat local regularity descent. The item statement is unchanged and the length-zero case is explicit.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality): the normalized point-blowup completion descent used in the potential-dualizing surface construction; Steps 1–4 realize Tags 0BGA and 0BG9, and Step 5 realizes Tag 0BG6(3).",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "The ordinary blowup base-change comparison is a generic blowup tool from the Nagata compactification unit."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "The fact that a blowup is an isomorphism off its centre is a generic blowup tool."
+   },
+   {
+    "node": "thm-nagata-global-blowup-proper",
+    "why": "Properness of each ordinary blowup is a generic blowup tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-completion-flat",
+    "why": "Flatness of the adic completion is used to base-change the ordinary blowup."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Flatness survives the base change from A to the completion."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Faithful flatness of the completion supplies points above every point of the descended endpoint."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "The localized flat local map of local rings is faithfully flat."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+    "why": "Regularity of the completed local ring descends through the faithfully flat local map."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-normal-stalks",
+    "why": "Normality of the normalized stages Y_i (normalization in the generic point has integrally closed local rings) is a generic normalization tool; no node of the DLAFT unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Surjectivity of the base change of Spec of the completion supplies points above every point, used for integrality of the descended blowup and for regularity descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-global-blowup-proper",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+  "lem-weil-pbc-normalization-normal-stalks",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-f318582dc",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-f318582dc (reviewer sub-agent of L); spot-checked: Read Stacks resolve.tex 0BGA (l.3018), 0BG9 (l.3972→2972), 0BG6 (l.2779) and the normalized-blowup definition (l.1004), plus every cited statement. The item statement is unchanged and matches 0BGA plus the 0BG6(1) direction. There is no cycle (the item is not in its own 201-node closure), and the DAG has no duplicate of 0BG9 or 0BGA. The new node states Tag 0BG9 verbatim with all its hypotheses and was tested on the cusp, Spec κ, Spec A/m², non-Nagata domains and the empty scheme. Repaired: (1) B3: the new node cited def-sc-normalization, which covers integral schemes only, for an arbitrary locally finite-type X; it now cites def-weil-pbc-reduced-normalization, the componentwise normalization Stacks uses, and states the iso over Y. (2) E3: Step 3 said the complement of the special fibre equals the complement of the centre, which is false as sets; it is only contained in it, and normality still follows. The step also never showed X_i' integral; it now descends integrality from Y_i' through surjective flat base change and injective faithfully flat local maps, and declares lem-weil-pbc-normalization-normal-stalks in tool_uses. (3) C1: Step 5 used surjective base change without a citation; it now cites lem-weil-pbc-surjective-base-change and explains why O_{Z,y} is a regular ring, as 07NG descent requires. Editorial: Step 2 had the blowup arrow reversed and left implicit that IO_Y is the reduced y_i, now shown; Step 1 declares Y_i=Z_i and states the inductive claim; Step 4 notes the finite-type ideal. The corrected files are in fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer"
  }
 }
