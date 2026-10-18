@@ -4741,6 +4741,7 @@ public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerShriekIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerStarIhom
+public import WeilConjectures.WeilSheaf.ProjectionFormula.OpenImmersionProjection
 public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensorCompat
 public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensorWeil
