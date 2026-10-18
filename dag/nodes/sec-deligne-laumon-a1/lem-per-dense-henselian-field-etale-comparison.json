@@ -16,9 +16,141 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove that every element $a\\in K^{\\prime}$ separable algebraic over $K$ lies in $K$. Put $E=K(a)$. By [lem-per-henselian-finite-extension-topology], the topology on $E$ inherited from $K^{\\prime}$ is the topology of the unique prolonged henselian valuation of $K$: the extension is finite separable, and its subspace topology induces exactly the given topology of $K$. Embed $E$ in a finite Galois $N/K$ using [lem-weil-pbc-finite-galois-receiving-separable-extensions], and prolong the valuation by [lem-per-henselian-finite-extension-topology]. By [lem-per-henselian-krasner-neighbourhood], a sufficiently small open neighbourhood of $a$ in $N$ consists of $b$ with $a\\in K(b)$. Its intersection with $E$ is open. Since $K$ is dense in $K^{\\prime}$ and $K\\subseteq E\\subseteq K^{\\prime}$, $K$ is dense in $E$: an open subset of $E$ is its intersection with an open subset of $K^{\\prime}$, and density gives a point of $K$ in that intersection. Choose such a $b\\in K$. Then $K(b)=K$, so $a\\in K$. This uses equality of valuation topologies, without silently identifying the two valuations on $K$.",
+   "uses": [
+    "lem-per-henselian-finite-extension-topology",
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "lem-per-henselian-krasner-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, expansion of the forms-of-Krasner argument."
+   }
+  },
+  {
+   "text": "Every monic separable irreducible $h\\in K[T]$ remains irreducible over $K^{\\prime}$. Indeed [lem-trf-separable-polynomial-linear-factorization] splits $h$ into distinct linear factors in $K^{\\mathrm{sep}}$, and [lem-weil-pbc-separable-closure-exists-galois] says that this closure is separable algebraic and normal over $K$. If a proper monic factor of $h$ existed in $K^{\\prime}[T]$, its coefficients, being elementary symmetric functions of a subset of the roots of $h$, would also lie in $K^{\\mathrm{sep}}$. Each coefficient is therefore separable algebraic over $K$ and lies in $K^{\\prime}$, hence lies in $K$ by Step 1. This contradicts irreducibility over $K$. The same reasoning applies to the complementary factor. In particular, for a finite separable $L/K$, choose $L=K(t)$ by [lem-weil-pbc-finite-separable-primitive-element]; then $K^{\\prime}\\otimes_K L=K^{\\prime}[T]/(\\min_t)$ is a field, and its map into the compositum $K^{\\prime}L$ is an isomorphism.",
+   "uses": [
+    "lem-trf-separable-polynomial-linear-factorization",
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-finite-separable-primitive-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, expansion of the forms-of-Krasner argument."
+   }
+  },
+  {
+   "text": "Fix $\\theta\\in(K^{\\prime})^{\\mathrm{sep}}$ and put $L=K^{\\prime}(\\theta)$. If $\\theta\\in K^{\\prime}$, it already lies in $K^{\\prime}K^{\\mathrm{sep}}$; otherwise its monic minimal polynomial $f\\in K^{\\prime}[T]$ has degree $n>1$ and $f^{\\prime}(\\theta)\\ne0$. By [lem-weil-pbc-finite-galois-receiving-separable-extensions] take a finite Galois extension $N/K^{\\prime}$ containing $L$. By [lem-per-henselian-finite-extension-topology] extend the valuation to $N$; its restriction makes $L$ henselian and induces the given topology on $K^{\\prime}$. Choose the open Krasner neighbourhood $U$ of $\\theta$ in $N$ supplied by [lem-per-henselian-krasner-neighbourhood]. Apply [lem-per-henselian-simple-root-stability] over the henselian field $L$, to $f$, its simple root $\\theta$, and $U\\cap L$. This gives an open neighbourhood $V$ of the coefficient tuple of $f$ in $L^n$. Its inverse image in $(K^{\\prime})^n$ is open and contains that tuple. A product of $n$ open neighbourhoods is contained in this inverse image; choose each coordinate in $K$ using density. We obtain a monic $g\\in K[T]$ of degree $n$ with a simple root $\\beta\\in U\\cap L$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "lem-per-henselian-finite-extension-topology",
+    "lem-per-henselian-krasner-neighbourhood",
+    "lem-per-henselian-simple-root-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, expansion of the forms-of-Krasner argument."
+   }
+  },
+  {
+   "text": "By the defining property of $U$ in [lem-per-henselian-krasner-neighbourhood], $\\theta\\in K^{\\prime}(\\beta)$. Since $\\beta\\in L=K^{\\prime}(\\theta)$, these two fields are equal. Thus the minimal polynomial of $\\beta$ over $K^{\\prime}$ has degree $n$, and divides the monic degree-$n$ polynomial $g$; hence it is $g$. Therefore $g$ is irreducible over $K^{\\prime}$, and consequently over $K$. Since $g^{\\prime}(\\beta)\\ne0$, irreducibility makes $g$ separable: a nontrivial common divisor of $g$ and $g^{\\prime}$ would have to be $g$, impossible as its derivative is nonzero of smaller degree. The splitting of separable polynomials in [lem-trf-separable-polynomial-linear-factorization] implies that this particular $\\beta$, a root of $g$ in the fixed overfield, lies in the embedded $K^{\\mathrm{sep}}$. Hence $\\theta\\in K^{\\prime}K^{\\mathrm{sep}}$. Since $\\theta$ was arbitrary and the reverse inclusion is part of the chosen tower, we have $(K^{\\prime})^{\\mathrm{sep}}=K^{\\prime}K^{\\mathrm{sep}}$.",
+   "uses": [
+    "lem-per-henselian-krasner-neighbourhood",
+    "lem-trf-separable-polynomial-linear-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, expansion of the forms-of-Krasner argument."
+   }
+  },
+  {
+   "text": "Now identify restriction algebraically. Every finite subset of $K^{\\mathrm{sep}}$ lies in a finite separable subextension, and [lem-weil-pbc-finite-separable-primitive-element] makes it simple. By Step 2 its scalar extension to $K^{\\prime}$ is a field, identified with its compositum. Thus the map $K^{\\prime}\\otimes_K K^{\\mathrm{sep}}\\to K^{\\prime}K^{\\mathrm{sep}}$ is injective: a relation involves finitely many elements and is already tested in one such finite subextension. Its image is a field, being the directed union of these finite-stage field images, so the image is the whole compositum. For $\\sigma\\in\\operatorname{Gal}(K^{\\mathrm{sep}}/K)$ the map $1\\otimes\\sigma$ therefore acts on the compositum, sending $\\sum_i a_i b_i$ to $\\sum_i a_i\\sigma(b_i)$; it fixes $K^{\\prime}$ and has inverse $1\\otimes\\sigma^{-1}$. Step 4 identifies this compositum with $(K^{\\prime})^{\\mathrm{sep}}$, so this constructs an extension of $\\sigma$. Conversely an automorphism fixing both $K^{\\prime}$ and $K^{\\mathrm{sep}}$ fixes their compositum pointwise. Restriction is consequently a bijective group homomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-primitive-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, expansion of the forms-of-Krasner argument."
+   }
+  },
+  {
+   "text": "This bijection and its inverse are continuous for the Krull topologies. The inverse image under restriction of the subgroup fixing a finite subset $S\\subset K^{\\mathrm{sep}}$ is precisely the subgroup of $\\operatorname{Gal}((K^{\\prime})^{\\mathrm{sep}}/K^{\\prime})$ fixing the same $S$, which is open. Conversely, express a finite subset $T\\subset(K^{\\prime})^{\\mathrm{sep}}=K^{\\prime}K^{\\mathrm{sep}}$ using finitely many field operations and coefficients from $K^{\\prime}$ and a finite subset $S\\subset K^{\\mathrm{sep}}$. The extension constructed in Step 5 of any automorphism fixing $S$ fixes every expression in $T$. Thus the inverse image of the stabilizer of $T$ contains the open stabilizer of $S$, and is an open subgroup. Stabilizers of finite subsets form the identity-neighbourhood basis of the Krull topology; translations give continuity everywhere. This proves the asserted topological-group isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, expansion of the forms-of-Krasner argument."
+   }
+  },
+  {
+   "text": "Let $u:\\operatorname{Spec}K^{\\prime}\\to\\operatorname{Spec}K$ and let $B$ be base change on the small etale sites. For each etale $K$-scheme $X$, [lem-weil-pbc-etale-fibre-discrete-separable-points] writes $X$ as a disjoint union of spectra of finite separable extensions of $K$ (apply it to the only point of $\\operatorname{Spec}K$). On each such summand, a $K$-embedding into $(K^{\\prime})^{\\mathrm{sep}}$ lands in the specified $K^{\\mathrm{sep}}$: a separable minimal polynomial over $K$ splits there by [lem-trf-separable-polynomial-linear-factorization]. Thus restriction and extension of the point maps give a natural bijection from the geometric fibre of $B(X)$ to that of $X$. The actions agree through the restriction homomorphism, because both send an embedding $j$ to $\\sigma\\circ j$. By [lem-exc-etale-field-gsets], the fibre functors on both fields are equivalences and identify coverings with jointly surjective equivariant maps. Restriction of discrete actions along the topological-group isomorphism of Step 6 is an equivalence, with inverse restriction along its inverse; open stabilizers are preserved. It follows that $B$ is an equivalence of categories preserving and reflecting covering families.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-trf-separable-polynomial-linear-factorization",
+    "lem-exc-etale-field-gsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT (theorem-equivalence-sheaves-point), with field-etale classification Tag 03QR and covering description Tag 03QS."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-equivalence-is-morphism-of-sites] to the site equivalence $B$ of Step 7. Precomposition along $B$ is an equivalence of abelian sheaf categories. It is exactly $u_*$, since [def-weil-pbc-direct-image] gives $(u_*F)(X)=F(B(X))$. The left adjoint $u^{-1}$ of [def-weil-pbc-inverse-image] is therefore its quasi-inverse: the quasi-inverse adjunction has bijective Hom maps, and uniqueness of left adjoints identifies it with the specified adjunction. Hence its unit $\\eta:1\\to u_*u^{-1}$ is an isomorphism. Evaluating at the final object gives an isomorphism $\\Gamma(\\operatorname{Spec}K,F)\\to\\Gamma(\\operatorname{Spec}K^{\\prime},u^{-1}F)$ for every abelian sheaf $F$; it is precisely the pullback of sections given by the adjunction unit, not an arbitrarily chosen invariant-group comparison.",
+   "uses": [
+    "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0 (lemma-equivalence); direct and inverse images as recorded in the cited definition nodes."
+   }
+  },
+  {
+   "text": "Choose a bounded-below injective resolution $G\\to I^{\\bullet}$. By [lem-weil-pbc-equivalence-injective-resolutions], the additive equivalence $u^{-1}$ carries it to an injective resolution of $u^{-1}G$. In every degree, Step 8 identifies the map of sections induced by $\\eta_{I^r}$ with an isomorphism. Naturality of $\\eta$ makes these degreewise maps an isomorphism of complexes. Taking degree-$q$ cohomology gives the required isomorphism for every $q\\geq0$. By [def-weil-pbc-cohomology-pullback], choose the second resolution to be $u^{-1}I^{\\bullet}$ itself and its comparison map to be the identity; the resulting cohomology map is exactly the canonical pullback in the statement. The resolution convention in that definition includes bounded-below injective resolutions as K-injective ones. Naturality in $G$ follows from [lem-weil-pbc-cohomology-pullback-functorial]. This proves the torsion assertion (the argument actually works for every abelian sheaf), with no condition on residue characteristic.",
+   "uses": [
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QU (lemma-compare-cohomology-point), expanded via the site equivalence and injective resolutions; canonical map as in cohomology.tex Tag 01F8 (lemma-functoriality)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-exc-etale-field-gsets",
+  "lem-per-henselian-finite-extension-topology",
+  "lem-per-henselian-krasner-neighbourhood",
+  "lem-per-henselian-simple-root-stability",
+  "lem-trf-separable-polynomial-linear-factorization",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-finite-separable-primitive-element",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 4.4, printed p.374. Expansion of the cited forms of Krasner lemma; Bourbaki VI section 8 exercises 12 and 14(a) are not locally available (WANTED in report). The topological-field comparison is followed by the existing Stacks field-etale and injective-resolution route."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +179,38 @@
    "results": "{\"t\": \"2026-10-18T21:43:12Z\", \"tool\": \"grep\", \"query\": \"Krasner|henselian.*dense|dense.*henselian|absoluteGalois\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\"], \"digest\": \"b695414f949e2184\"}",
    "date": "2026-10-19",
    "verdict": "no match: inspected returned signatures; none states this etale comparison or its geometric presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dense extension of henselian valued fields induces an isomorphism of absolute Galois groups and preserves etale cohomology",
+   "results": "{\"t\": \"2026-10-18T22:34:57Z\", \"tool\": \"leanfinder\", \"query\": \"A dense extension of henselian valued fields induces an isomorphism of absolute Galois groups and preserves etale cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galLiftEquiv\", \"galLiftEquiv_apply\", \"galLiftEquiv_symm_apply\", \"galRestrict\", \"Field.absoluteGaloisGroup\", \"Field.absoluteGaloisGroupAbelianization\", \"InfiniteGalois.algEquivToLimit\", \"IsGaloisGroup.of_isFractionRing\"], \"digest\": \"bb90e666c6a13e2a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; complete normed-field Krasner, p-adic Hensel, valuation-extension definitions and topology infrastructure do not state the arbitrary-rank henselian assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dense henselian field extensions have equivalent finite separable extensions",
+   "results": "{\"t\": \"2026-10-18T22:48:28Z\", \"tool\": \"leanfinder\", \"query\": \"Dense henselian field extensions have equivalent finite separable extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.lift_def\", \"Field.henselian\", \"Field.finSepDegree_eq_of_isAlgClosed\", \"IsSepClosed\", \"Field.insepDegree_eq_of_isSeparable\", \"SeparableClosure\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"Algebra.IsAlgebraic.isSepClosed\"], \"digest\": \"3ab85c12cf5e8054\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; complete normed-field Krasner, p-adic Hensel, valuation-extension definitions and topology infrastructure do not state the arbitrary-rank henselian assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"absoluteGaloisGroup\"",
+   "results": "{\"t\": \"2026-10-18T22:48:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"absoluteGaloisGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Field.absoluteGaloisGroup\", \"Field.absoluteGaloisGroupAbelianization\", \"Field.instGroupAbsoluteGaloisGroup\", \"Field.instTopologicalSpaceAbsoluteGaloisGroup\", \"Field.instIsTopologicalGroupAbsoluteGaloisGroup\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Field.absoluteGaloisGroup.map\", \"Field.absoluteGaloisGroup.mapOfAlgebra\"], \"digest\": \"925573f3ddf9bb40\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; complete normed-field Krasner, p-adic Hensel, valuation-extension definitions and topology infrastructure do not state the arbitrary-rank henselian assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "dense|henselian",
+   "results": "{\"t\": \"2026-10-18T22:48:25Z\", \"tool\": \"grep\", \"query\": \"dense|henselian\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; complete normed-field Krasner, p-adic Hensel, valuation-extension definitions and topology infrastructure do not state the arbitrary-rank henselian assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-henselian-completion-open-rigidity",
@@ -77,5 +237,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-dense-henselian-field-etale-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the arbitrary-rank Krasner argument into relative separable closure, irreducibility under scalar extension, coefficient approximation, generation of the separable closure, and explicit mutually continuous restriction maps; identified the canonical etale pullback via the existing site-equivalence and injective-resolution nodes. Created three statement-only valuation inputs after DAG, blueprint, Lean and logged Mathlib searches. Preserved the statement, in particular its topological compatibility hypothesis.",
+  "blueprint": "The inherited ancestor lem-per-artin-gabber-affine-curve, proof Step 3, dimension-normalized Verdier duality and regular finite-torsion local-model purity: completion comparison on punctured strict-local models, reducing at valuative stalks to ILO XX 4.4 p.374 dense henselian fields. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-field-gsets",
+    "why": "Generic field, site-equivalence or injective-resolution tool used in the explicit dense-field argument; the perverse-curve unit has no such general statement, and no step of its Fourier/duality route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Generic field, site-equivalence or injective-resolution tool used in the explicit dense-field argument; the perverse-curve unit has no such general statement, and no step of its Fourier/duality route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic field, site-equivalence or injective-resolution tool used in the explicit dense-field argument; the perverse-curve unit has no such general statement, and no step of its Fourier/duality route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Generic field, site-equivalence or injective-resolution tool used in the explicit dense-field argument; the perverse-curve unit has no such general statement, and no step of its Fourier/duality route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "why": "Generic field, site-equivalence or injective-resolution tool used in the explicit dense-field argument; the perverse-curve unit has no such general statement, and no step of its Fourier/duality route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-field-gsets",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-340a701c9",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-340a701c9 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. The item statement is identical to the Q27 snapshot that created it, with the same stmt_deps, so it is not weakened. It matches ILO XX 4.4, printed p.374 (PDF p.380): for a dense embedding of henselian valued fields, Gal(K'sep/K') ≅ Gal(Ksep/K) by forms of Krasner. All nine steps are correct. Step 1 gets relative separable closedness from the topology clause, the Krasner lemma and density; the topology of E from N equals the one from K' by uniqueness of prolongation. Step 2 shows irreducibility is kept over K' via the splitting leaf and Step 1. Steps 3–4 approximate the minimal polynomial over L by simple-root stability and density, and Krasner gives K'(β)=L. In Step 4, irreducible together with g'(β)≠0 gives separability, also in characteristic p, so (K')^sep = K'K^sep. Step 5 identifies the tensor product with the compositum, and Step 6 gives Krull continuity in both directions. Step 7 makes B an equivalence that preserves coverings, through G-sets. In Steps 8–9 u^{-1} is a quasi-inverse of u_*, so the unit is an iso, and the def-weil-pbc-cohomology-pullback convention J=u^{-1}I gives the canonical pullback. All three new nodes are true and generic, and none restates a clause of the item. The topology node holds because a valuation topology inducing the v-topology is dependent with the prolongation, by a shared henselian coarsening and uniqueness over it. The Krasner node is the standard henselian proof (w∘τ=w). Simple-root stability is Newton's lemma for henselian fields of arbitrary rank. I found no duplicates: I searched Krasner, prolongation, henselian valued fields and every valuation node, including lem-trf-valuation-separable-closure-extension, lem-trf-valuation-algebraic-height and lemma-nagata-valuation-ring-extension. Batch-5: def-trf-valuation-ring is the general definition from Stacks 00I9 and lem-trf-separable-polynomial-linear-factorization is a generic IsSepClosed algebra leaf. Both are Mathlib leaves with only def stmt_deps, are outside the assumed trace-formula and Poincaré-duality statements and proofs, and are accepted. I accept the listed tool_uses. No SGA is cited. Advisory: the Krasner node leaves 'open in N' implicitly as the w-topology."
  }
 }
