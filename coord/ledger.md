@@ -15982,3 +15982,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/E1/Sheaf.Paper.EtaleFlatKFlatResolution (stage 3; reviewer PASS; first push; landing 20261018T062731-L-642310 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/E2/Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower (stage 3; reviewer PASS; first push; landing 20261018T062732-L-642444 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/E2/Sheaf.AlgebraicGeometry.GeometricPointCohomology (stage 3; reviewer PASS; first push; landing 20261018T062732-L-642702 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/E2/Sheaf.CategoryTheory.DerivedCountableSumsExact (stage 3; reviewer PASS; first push; landing 20261018T062733-L-642905 (proof); batch 20261018T062645; modules 1; new nodes 0)
