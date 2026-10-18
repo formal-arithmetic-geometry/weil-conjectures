@@ -4020,6 +4020,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExt
 public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExtPullback
+public import WeilConjectures.SixFunctors.Etale.ConstantRingEndomorphisms
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AffineDirectImageVanishing
