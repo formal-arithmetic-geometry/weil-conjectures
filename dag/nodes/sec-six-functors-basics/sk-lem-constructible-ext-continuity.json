@@ -23,7 +23,8 @@
   "sk-def-sfb-constructible",
   "sk-def-sfb-bounded-constructible",
   "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-weil-pbc-quasi-compact-scheme",
+  "det-lem-coefficient-heart-common-stratification"
  ],
  "proof": [
   {
@@ -218,5 +219,35 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleExtContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.constructible_ext_continuity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.extContinuityTestFunctor",
+   "AlgebraicGeometry.ProEtale.extContinuityComparison",
+   "AlgebraicGeometry.ProEtale.IsExtContinuityStratum",
+   "AlgebraicGeometry.ProEtale.extContinuityShiftedStrata",
+   "AlgebraicGeometry.ProEtale.IsExtContinuityGenerated",
+   "AlgebraicGeometry.ProEtale.constructible_ext_continuity",
+   "AlgebraicGeometry.ProEtale.bounded_constructible_ext_generated",
+   "AlgebraicGeometry.ProEtale.constructible_sheaf_ext_continuity",
+   "AlgebraicGeometry.ProEtale.integral_finite_extension_ext_generated"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleExtContinuity.lean",
+  "statement": "theorem constructible_ext_continuity (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj (coefficientHeartRingObj R)] (hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨ R = Profinite.padicAlgClCondensedRing ℓ ∨ R = Profinite.padicIntegersCondensedRing ℓ E) (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (coefficientHeartRingObj R) X))) (hC : IsExtContinuityGenerated (coefficientHeartRingObj R) X Set.univ C) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (K : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (coefficientHeartRingObj R) X)) ℤ) (b : ℤ) (hb : ∀ (i : I) (r : ℤ), r < b → IsZero ((K.obj i).X r)) (c : Cocone K) (hc : IsColimit c) (q : ℤ) : IsIso (extContinuityComparison C K c q)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All clauses are recorded: canonical additive Hom-colimit comparison, finite shifted stratum extensions, field-coefficient bounded constructible generation and constructible-sheaf Ext continuity, and the integral finite-extension clause. Helpers are concrete definitions in the owning module. The added landed statement dependency supplies the existing lisse predicate and canonical underlying ring-object abbreviation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1f27fc553",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all clauses, dependencies, exact declarations, sources, universes, edge cases, reuse, docstrings and route-pivot compliance. Immutable module compiled cleanly through scompile.py in both modes (54.6 s and 16.2 s). No corrections or repository changes."
  }
 }
