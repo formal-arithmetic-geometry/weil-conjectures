@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Formula
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
