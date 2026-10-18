@@ -60,7 +60,63 @@ trivial action. Products are finite and the coordinate actions are continuous;
 the pairing of equivariant maps is equivariant. -/
 theorem finiteContAction_hasFiniteProducts (G : Type g) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] : Limits.HasFiniteProducts (ContAction FintypeCat.{u} G) := by
-  sorry
+  classical
+  open Limits in
+    refine ⟨fun n ↦ ⟨fun F ↦ ?_⟩⟩
+    let X (i : Fin n) := (F.obj ⟨i⟩).obj.V
+    let A : Action FintypeCat.{u} G :=
+      { V := FintypeCat.of (∀ i, X i)
+        ρ :=
+          { toFun := fun g ↦ FintypeCat.homMk
+              (fun x i ↦ ConcreteCategory.hom ((F.obj ⟨i⟩).obj.ρ g) (x i))
+            map_one' := by
+              apply ConcreteCategory.hom_ext
+              intro x
+              funext i
+              exact ConcreteCategory.congr_hom ((F.obj ⟨i⟩).obj.ρ.map_one) (x i)
+            map_mul' := by
+              intro g h
+              apply ConcreteCategory.hom_ext
+              intro x
+              funext i
+              exact ConcreteCategory.congr_hom ((F.obj ⟨i⟩).obj.ρ.map_mul g h) (x i) } }
+    have hA : A.IsContinuous := by
+      rw [Action.isContinuous_def]
+      let : TopologicalSpace (∀ i, X i) := ⊥
+      have : DiscreteTopology (∀ i, X i) := ⟨rfl⟩
+      change Continuous (fun p : G × (∀ i, X i) ↦
+        fun i ↦ ConcreteCategory.hom ((F.obj ⟨i⟩).obj.ρ p.1) (p.2 i))
+      apply continuous_prod_of_discrete_right.mpr
+      intro x
+      change @Continuous G (∀ i, X i) _ ⊥ _
+      rw [← (show (Pi.topologicalSpace : TopologicalSpace (∀ i, X i)) = ⊥ from
+        DiscreteTopology.eq_bot)]
+      apply continuous_pi
+      intro i
+      exact (F.obj ⟨i⟩).property.continuous_smul.comp
+        (continuous_id.prodMk continuous_const)
+    let P : ContAction FintypeCat.{u} G := ⟨A, hA⟩
+    let c : Cone F :=
+      { pt := P
+        π := Discrete.natTrans (fun i ↦ ObjectProperty.homMk
+          { hom := FintypeCat.homMk (fun x ↦ x i.as)
+            comm := fun _ ↦ rfl }) }
+    refine ⟨⟨c, ?_⟩⟩
+    refine
+      { lift := fun s ↦ ObjectProperty.homMk
+          { hom := FintypeCat.homMk (fun x i ↦ (s.π.app ⟨i⟩).hom.hom x)
+            comm := fun g ↦ by
+              apply ConcreteCategory.hom_ext
+              intro x
+              funext i
+              exact ConcreteCategory.congr_hom ((s.π.app ⟨i⟩).hom.comm g) x }
+        fac := fun s i ↦ by rfl
+        uniq := fun s m hm ↦ ?_ }
+    apply ObjectProperty.hom_ext
+    apply Action.hom_ext
+    ext x i
+    exact ConcreteCategory.congr_hom
+      (congrArg (fun f ↦ f.hom.hom) (hm ⟨i⟩)) x
 
 /-- Choose finite products for finite continuous group sets.
 Source: Stacks Tag 0DV5 (blueprint: def-pod-finite-continuous-module). -/
