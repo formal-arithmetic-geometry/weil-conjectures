@@ -6,6 +6,7 @@ Authors: SHEAF group Q24
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteLevelAmplification
+import Sheaf.Paper.RestrictionDirectImage
 
 /-!
 # Amplitude containments implied by finite-level amplification
@@ -39,10 +40,9 @@ prop-weil-pbc-restriction-direct-image to the first FIN clause, using the defini
 of def-weil-pbc-constructible-direct-image-finiteness, to obtain constructibility
 and the interval [a,b+c] for Rf_*. Apply the same proposition to the second FIN
 clause to obtain the identical bound for Rf'_*. The last two containments are
-the constructibility and interval clauses of the two pullback restrictions, as
-stated in lem-weil-pbc-pullback-preserves-bounded-constructible. These arguments
-apply to every ambient object satisfying the bounded constructible predicate and
-the indicated cohomology vanishing predicate. -/
+the constructibility and interval clauses already included in the two pullback
+amplification hypotheses. These arguments apply to every ambient object satisfying
+the bounded constructible predicate and the indicated cohomology vanishing predicate. -/
 theorem finiteLevelAmplification_consequences
     {X' X Y' Y : Scheme.{u}} (g' : X' ⟶ X) (f' : X' ⟶ Y')
     (f : X ⟶ Y) (g : Y' ⟶ Y) (square : ChosenCartesianSquare g' f' f g)
@@ -93,6 +93,20 @@ theorem finiteLevelAmplification_consequences
           ((finiteCoefficientDerivedPullback X (A ⧸ I ^ (n : ℕ)) g').obj K) ∧
         finiteCoefficientCohomologyIn X' (A ⧸ I ^ (n : ℕ)) a b
           ((finiteCoefficientDerivedPullback X (A ⧸ I ^ (n : ℕ)) g').obj K)) := by
-  sorry
+  cases DiscreteTopology.eq_bot (α := A ⧸ I ^ (n : ℕ))
+  obtain ⟨hfin, hfin', hpull, hpull'⟩ := hAmp n
+  obtain ⟨hconstructible, _, hinterval⟩ :=
+    restrictionDirectImage A I hI htorsion hperfect n hDimY (hInvertY n) f c hfin
+  obtain ⟨hconstructible', _, hinterval'⟩ :=
+    restrictionDirectImage A I hI htorsion hperfect n hDimY' (hInvertY' n) f' c hfin'
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro K hK hdegrees
+    exact ⟨hconstructible ⟨K, hK⟩, hinterval ⟨K, hK⟩ a b hdegrees⟩
+  · intro K hK hdegrees
+    exact ⟨hconstructible' ⟨K, hK⟩, hinterval' ⟨K, hK⟩ a b hdegrees⟩
+  · intro K hK hdegrees
+    exact ⟨hpull.2.2.1 K hK, hpull.2.2.2 a b hab K hK hdegrees⟩
+  · intro K hK hdegrees
+    exact ⟨hpull'.2.2.1 K hK, hpull'.2.2.2 a b hab K hK hdegrees⟩
 
 end AlgebraicGeometry.ProEtale

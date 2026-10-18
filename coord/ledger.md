@@ -16442,3 +16442,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/U3/Sheaf.CategoryTheory.LevelwiseKInjectiveTowerImage (stage 3; reviewer PASS; first push; landing 20261018T135211-L-2847950 (proof); batch 20261018T135200; modules 1; new nodes 0)
 - 13:52 L: merged deliver/U3/Sheaf.Paper.PurityVectorBundleZeroSection (stage 3; reviewer PASS; first push; landing 20261018T135212-L-2848191 (proof); batch 20261018T135200; modules 1; new nodes 0)
 - 13:52 L: merged deliver/V3/Sheaf.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso (stage 3; reviewer PASS; first push; landing 20261018T135213-L-2848404 (proof); batch 20261018T135200; modules 1; new nodes 0)
+- 13:59 L: merged deliver/C4/Sheaf.AlgebraicGeometry.AmplificationConsequences (stage 3; reviewer PASS; first push; landing 20261018T135903-L-2958998 (proof); batch 20261018T135825; modules 1; new nodes 0)
