@@ -17,9 +17,106 @@
   "def-weil-closed-immersion",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The stabilizer of a geometric point is a subgroup of $G$, so its order divides $|G|$ and is invertible: the action is tame. Apply [lem-per-gabber-equivariant-log-modification] to $C,B,G$ (its hypotheses are exactly those of the item, with excellence) to obtain $C_1$, the equivariant $f:C_1\\to C$, a dense open $C^0\\subseteq C$ with $f^{-1}(C^0)\\to C^0$ an isomorphism, and $B_1=f^{-1}(B\\cup T)$ with $(C_1,B_1)$ log regular and the action very tame. Over every affine open $W'\\subseteq C$, $f^{-1}(W')\\to W'$ is a closed immersion into some $\\mathbf P^N_{W'}$ followed by projection. Put $V=\\bigcap_{g\\in G}gC^0\\setminus(B\\cup T)$. It is invariant; it is open and dense, since $C$ is irreducible, $B$ is nowhere dense, and $T$ is closed with $C\\setminus T$ nonempty because the action is generically free. As $V\\subseteq C^0$, the restriction $f^{-1}(V)\\to V$ of the isomorphism over $C^0$ is an isomorphism, and $f^{-1}(V)$ is dense in $C_1$ by the last clause of the cited node.",
+   "uses": [
+    "lem-per-gabber-equivariant-log-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Theorem 1.1, p.85; IX Theorem 2.3, p.134"
+   }
+  },
+  {
+   "text": "For every affine open $W\\subset X$, the finite morphism $\\pi$ makes $C_W=\\pi^{-1}W$ affine Noetherian. Apply [lem-fin-finite-over-projective] with the identity projective morphism $W\\to W$ and the finite map $C_W\\to W$: this last map is H-projective. The projective morphism $C_{1,W}\\to C_W$ followed by this map is H-projective by [lem-trf-h-projective-composition]. Apply [lem-per-projective-finite-group-quotient] over the affine base $W$ to $C_{1,W}$. Obtain a finite surjective quotient $q_W:C_{1,W}\\to M_W$ and a projective $M_W\\to W$, with $M_W$ integral, geometric fibres equal to orbits, and invariant structure sheaf.",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "lem-trf-h-projective-composition",
+    "lem-per-projective-finite-group-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.4, quotient diagram, p.134; local finite projective quotient construction"
+   }
+  },
+  {
+   "text": "For affine inclusions $W'\\subset W$, the open $C_{1,W'}$ is invariant. The restriction clause of [lem-per-projective-finite-group-quotient] identifies its quotient with the open inverse image of $W'$ in $M_W$. Categorical uniqueness makes these identifications the identity on repeated restrictions and makes their composites equal for triples. Apply [lem-weil-pbc-relative-glueing-affine-opens] to obtain $\\rho:M\\to X$ restricting to $M_W\\to W$. The local maps $q_W$ agree under these identifications, so glue to $q:C_1\\to M$. Every orbit is contained in some $C_{1,W}$ and, there, in an affine fibre-preimage of an affine open of $M_W$ under the finite map $q_W$; hence the action on $C_1$ is admissible. The glued quotient has orbit-space topology, geometric orbit fibres and invariant structure sheaf because all these descriptions restrict to the $W$.",
+   "uses": [
+    "lem-per-projective-finite-group-quotient",
+    "lem-weil-pbc-relative-glueing-affine-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.4, p.134; affine-open quotient gluing"
+   }
+  },
+  {
+   "text": "Each $M_W\\to W$ is projective, hence proper by [lem-kun-projective-implies-proper]. Properness is local on the target by [lemma-nagata-projective-target-local], so $\\rho$ is proper. It is locally of finite type by the definition of properness [def-weil-proper-morphism]. Each $M_W$ is integral; the images $q(f^{-1}V)$ meet all nonempty open sets of $M$, since their inverse images meet the dense open $f^{-1}V$ under the surjective quotient map. This image is irreducible, as the image of the irreducible scheme $V$. Thus $M$ is irreducible and locally reduced, hence integral. For a finite affine cover of the Noetherian scheme $X$, the finite-type local descriptions in [def-weil-finite-type-morphism] give a finite affine cover of $M$ by finite-type algebras over excellent affine coordinate rings of $X$. Those algebras are excellent by [lem-exc-finite-type-localization-excellent], and hence Noetherian. This proves excellence and Noetherianity of $M$.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lemma-nagata-projective-target-local",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.4, p.134; Stacks Tag 07QU (more-algebra, lemma-finite-type-over-excellent)"
+   }
+  },
+  {
+   "text": "Set $B_M=q(B_1)$. The hypotheses of [lem-per-very-tame-quotient-log-regular] now hold: $(C_1,B_1)$ is log regular, the action is generically free on $f^{-1}V$, it is very tame by Step 1, and admissibility and the finite quotient were established in Steps 2–3. The cited theorem gives the fs log regular pair $(M,B_M)$, including its dense open triviality locus. Thus $B_M$ is a nowhere dense closed subset.",
+   "uses": [
+    "lem-per-very-tame-quotient-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Theorem 3.2 and Proposition 3.5(c), pp.74–75; IX 2.4, p.134"
+   }
+  },
+  {
+   "text": "The invariant dense open $V\\subset C$ is saturated for $\\pi$ because the fibres are orbits. Its image $O=\\pi(V)$ is open by the quotient topology and dense because $\\pi$ is surjective and $V$ is dense. The equality $\\rho q=\\pi f$ implies $q^{-1}(\\rho^{-1}O)=f^{-1}V$. The equivariant isomorphism $f^{-1}V\\simeq V$ identifies their orbit spaces and invariant sheaves, and therefore identifies $\\rho^{-1}O\\to O$ with an isomorphism of schemes. The source open is dense by Step 4. Hence $\\rho$ is birational in the stated dense-open sense.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.4, p.134: the descended map is a modification"
+   }
+  },
+  {
+   "text": "Because $B$ is invariant and the fibres of $\\pi$ are orbits, $\\pi^{-1}(\\pi(B))=B$. For $m\\in\\rho^{-1}(\\pi(B))$, choose $c_1$ over $m$ under the surjective map $q$. Then $\\pi(f(c_1))=\\rho(m)\\in\\pi(B)$, so $f(c_1)\\in B$ and $c_1\\in f^{-1}B\\subset B_1$. It follows that $m=q(c_1)\\in q(B_1)=B_M$. This proves the required inclusion without adding or enlarging any boundary.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.4, p.134: inverse-image boundary inclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-per-gabber-equivariant-log-modification",
+  "lem-per-projective-finite-group-quotient",
+  "lem-per-very-tame-quotient-log-regular",
+  "lem-trf-h-projective-composition",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lemma-nagata-projective-target-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expanded from VIII Theorem 1.1, VI Theorem 3.2 and IX 2.3–2.4; affine-local quotient gluing and boundary inclusion written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +155,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-prime-to-ell-regular-cover",
@@ -83,5 +180,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-tame-log-quotient-modification",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Split into Gabber equivariant very-tame modification and the very-tame log-regular quotient theorem. Reused the newly available projective finite-group quotient node, finite-over-projective and H-projective composition, affine-open gluing, target-local properness and genuine excellence stability (07QU). The proof constructs M as the quotient itself; no strict resolution or unsupported boundary enlargement is used. All citations were read and the orbit argument proves the full inverse-image inclusion.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve proof Step 3: the uniformization input below the duality/finiteness branch, through the unchanged ancestry. Concretely realizes the VIII 1.1 / VI 3.2 quotient-modification consequence used in IX 2.4.",
+  "tool_uses": [
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic scheme-theoretic construction or permanence result used in the affine-local quotient construction; the perverse-unit route supplies no replacement."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic scheme-theoretic construction or permanence result used in the affine-local quotient construction; the perverse-unit route supplies no replacement."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic scheme-theoretic construction or permanence result used in the affine-local quotient construction; the perverse-unit route supplies no replacement."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Generic scheme-theoretic construction or permanence result used in the affine-local quotient construction; the perverse-unit route supplies no replacement."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic scheme-theoretic construction or permanence result used in the affine-local quotient construction; the perverse-unit route supplies no replacement."
+   },
+   {
+    "node": "lem-per-projective-finite-group-quotient",
+    "why": "Generic scheme-theoretic construction or permanence result used in the affine-local quotient construction; the perverse-unit route supplies no replacement."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic scheme-theoretic construction or permanence result used in the affine-local quotient construction; the perverse-unit route supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-relative-glueing-affine-opens",
+    "why": "Generic scheme-theoretic construction or permanence result used in the affine-local quotient construction; the perverse-unit route supplies no replacement."
+   },
+   {
+    "node": "lemma-nagata-projective-target-local",
+    "why": "Generic scheme-theoretic construction or permanence result used in the affine-local quotient construction; the perverse-unit route supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-per-projective-finite-group-quotient",
+  "lem-trf-h-projective-composition",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lemma-nagata-projective-target-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-854facfa9",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-854facfa9 (reviewer sub-agent of L); spot-checked: I read ILO VIII 1.1 and 1.2 (pp.85-86), VI 1.2-1.4 and 3.1-3.5 (pp.69-74), IX 2.2-2.4 (pp.133-134), Stacks 01W8 (excellent schemes) and 07QU, every cited node's statement, and both new nodes in full. Two repairable C3/C4 faults, both in the new node lem-per-gabber-equivariant-log-modification and both used in Step 1. (1) The node defined projective as a closed immersion into projective space 'Zariski locally on the target'. Step 1 asserts, and Step 2 needs, H-projectivity over every affine open of C, which a locally projective map over an affine need not have. The source's EGA-projective over a Noetherian base does give the per-affine form, so the node now states that. (2) 'An isomorphism between dense opens' does not give f^{-1}(V) ≅ V, which Step 1 asserts and Step 6 needs to get q^{-1}ρ^{-1}O = f^{-1}V. The full-preimage form follows because f is separated and C_1 is irreducible, so the node now states f^{-1}(C^0) ≅ C^0 for a dense open C^0. I also put the very-tame stalks on C_1, the scheme the condition is about. Step 1 is rewritten with V = ∩ gC^0 minus (B ∪ T); its uses are unchanged. Fixed files are under fixes/dag/nodes/sec-deligne-laumon-a1/. Steps 2-7 check out: C_W is affine; finite-over-projective with p = id; 01WE composition; Rydh quotient over B = W; 01LH gluing, with the cocycle from categorical uniqueness; admissibility from the finite q_W; properness from 01WC and 08J0; integrality as the image of irreducible C_1 with integral charts; excellence via a finite cover of X by excellent affines and 07QU, matching the Stacks cover definition; VI 3.2 hypotheses all checked; birationality from saturation of V; the boundary inclusion is elementary. The new VI 3.2 node matches 3.2, 3.5 and 1.4, and VIII 1.2(b) agrees with it. No duplicates: the X 1.1 trait node is relative and log-smooth, and the projective-quotient node has no log structure. No SGA citation. Batch-5 flags: lem-trf-h-projective-composition (Stacks 01WE) is a generic scheme lemma and def-trf-log-regular-pair is the general ILO VI definition; neither is part of the trace formula or Poincaré duality, so both are accepted. The declared tool_uses are generic scheme-theoretic black boxes, accepted.; 2 file(s) fixed by the reviewer"
  }
 }
