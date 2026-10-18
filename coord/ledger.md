@@ -16415,3 +16415,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:35 L: merged deliver/B4/Sheaf.Paper.FlatRingedIdealCompleteEquivalence (stage 3; reviewer PASS; first push; landing 20261018T103529-L-18130 (interface); batch 20261018T103522; modules 4; new nodes 3; change records: coord/changes/B4-bilinear-hom-complex-specification.md, coord/changes/B4-site-complete-restrict-scalars.md)
 
 - 18:52 L: batch 20261018T103522 dependency take-out
+- 11:03 L: returned deliver/D3/Sheaf.CategoryTheory.RingedCechKoszulDualKFlat (reviewer RETURN: (the landing tools, head 09c51b8d1) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
