@@ -13,9 +13,192 @@
   "def-kun-derived-tensor",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a bounded representative $L$ of $K$, supported in $[a,b]$, by [lem-sfb-bounded-representative]. Use a small skeleton of the small etale site, as in [def-weil-size-convention]. Put $R=\\Lambda_X$ and $S=k_X$. Define an augmented complex $P\\to S[0]$ by $P^{-j}=R$ for $j\\geq0$, zero positive terms, augmentation $R\\to S$, and $d^{-j}=\\ell$ for odd $j$ and $d^{-j}=\\ell^{n-1}$ for positive even $j$. In $\\mathbf Z/\\ell^n$, $\\ker(\\ell)=(\\ell^{n-1})$ and $\\ker(\\ell^{n-1})=(\\ell)$, so this augmented complex is exact. Exact sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact] gives the same conclusion for the constant module sheaves. This includes $n=1$: the two maps are $0$ and $1$. Each term $R$ is flat since $R\\otimes_R-$ is the identity, so [lem-pc-bounded-above-flat-kflat-site] makes $P$ K-flat.",
+   "uses": [
+    "lem-sfb-bounded-representative",
+    "def-weil-size-convention",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, bounded representative and alternating resolution underlying the displayed double complex, pp. 294-295"
+   }
+  },
+  {
+   "text": "Let $A=\\operatorname{Tot}(P\\otimes_R L)$; by [def-kun-derived-tensor] it represents $K\\otimes^L_\\Lambda k_X$ after forgetting $k$-scalars. The sheaf Hom complex $\\mathcal Hom^\\bullet_R(P,L)$ represents the underlying $\\Lambda$-object of $R\\mathcal Hom_\\Lambda(k_X,K)$. Indeed take $L\\to I$ bounded-below injective and K-injective by [lem-sc-bounded-below-injective-resolution]. The cone of $L\\to I$ is bounded-below acyclic; [lem-sc-bounded-above-finite-free-hom-acyclic] applied to $P$ makes $\\mathcal Hom(P,L)\\to\\mathcal Hom(P,I)$ a quasi-isomorphism. Applying [lem-pur-rhom-well-defined] with $t:P\\to S$ and the identity of $I$ makes $\\mathcal Hom(S,I)\\to\\mathcal Hom(P,I)$ a quasi-isomorphism. Use [def-pur-derived-internal-hom] for the former complex. Rephase the summand $\\mathcal Hom(P^{-p},L^q)=L^q$ by $(-1)^{pq+p(p+1)/2}$. The resulting complex $B$ has horizontal columns $p\\geq0$, differential $\\ell$ for even $p$ and $\\ell^{n-1}$ for odd $p$, and vertical differential $(-1)^p d_L$. The Hom differential gives exactly this rephasing. Thus $A$ vanishes in degrees $>b$, and $B$ vanishes in degrees $<a$.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-sc-bounded-above-finite-free-hom-acyclic",
+    "lem-pur-rhom-well-defined",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, alternating tensor and Hom half-complexes; Hom comparison uses Stacks 0A95"
+   }
+  },
+  {
+   "text": "Form the two-sided double complex with a copy of $L$ in each horizontal column $p\\in\\mathbf Z$, horizontal differential $c^p=\\ell^{n-1}$ for even $p$ and $c^p=\\ell$ for odd $p$, and total differential $c^p+(-1)^p d_L$. Call its total $C$. In each total degree only $b-a+1$ columns can contribute, so its sums are finite. The two summands of the differential anticommute because consecutive columns have opposite signs, while $\\ell^n=0$. Translation $p\\mapsto p+2$ gives an actual chain isomorphism $C\\cong C[2]$. Projection to columns $p\\leq0$ gives $C\\twoheadrightarrow A$. Its kernel is the positive-column total, isomorphic to $B[-1]$: in column $p\\geq1$ use the scalar $(-1)^{p-1}$ to compare $B[-1]$ with $C$. Hence there is a degreewise split short exact sequence of complexes $0\\to B[-1]\\to C\\to A\\to0$. Its connecting map $A\\to B$ on column zero is multiplication by $\\ell^{n-1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, displayed two-sided complex, distinguished triangle and footnote iv; signs and the degreewise split sequence written explicitly"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-homology-long-exact] to this sequence. Since $B$ vanishes below $a$, $H^q(C)\\cong H^q(A)$ for $q<a-1$. Since $A$ vanishes above $b$, $H^q(C)\\cong H^{q-1}(B)$ for $q>b+1$. If $A$ is bounded, the first identity makes $H^q(C)=0$ for all sufficiently negative $q$; if $B$ is bounded, the second makes it zero for all sufficiently positive $q$. In either case $H^q(C)\\cong H^{q+2}(C)$ forces every cohomology sheaf of $C$ to vanish. Conversely, if $C$ is acyclic, the connecting maps give $H^q(A)\\cong H^q(B)$ for every $q$. The upper bound on $A$ and lower bound on $B$ then make both bounded. Thus (ii) and (iii) are equivalent. Forgetting $k$-scalars does not change kernels, images or whether cohomology sheaves vanish, so this is the required boundedness in the $k$-derived categories.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, three observations on C and equivalence of its acyclicity with the two boundedness conditions"
+   }
+  },
+  {
+   "text": "If (i) holds with Tor interval $[u,v]$, substitute the sheaf $k_X$ in [def-kun-tor-amplitude] to get (ii). Conversely assume (ii), with $H^i(K\\otimes^L_R S)=0$ outside $[u,v]$ (enlarge the interval if necessary so $u\\leq v$). By [lem-kun-flat-resolution-existence] choose a K-flat resolution $Q\\to L$ with flat terms. Put $D=Q\\otimes_R S$. Then $D$ represents the reduction by [def-kun-derived-tensor], so its cohomology is zero outside $[u,v]$.",
+   "uses": [
+    "def-kun-tor-amplitude",
+    "lem-kun-flat-resolution-existence",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, the recalled implication (i) iff (ii); expanded using Stacks 06YS and 06YU"
+   }
+  },
+  {
+   "text": "For an arbitrary $S$-module sheaf $N$, [lem-exc-constant-field-sheaf-tensor-cohomology] gives $H^i(D\\otimes_S N)=H^i(D)\\otimes_S N$, hence zero outside $[u,v]$. There is an isomorphism of complexes $(Q\\otimes_R S)\\otimes_S N\\to Q\\otimes_R N$, sending $(x\\otimes s)\\otimes y$ to $x\\otimes sy$, inverse $x\\otimes y\\mapsto(x\\otimes1)\\otimes y$. These formulas are balanced and commute with differentials. By [lem-pc-sites-module-sheafification-tensor] tensor sheaves are sheafifications of the sectionwise tensor products; thus these inverse formulas on pure tensors define inverse maps of sheaves. Therefore $H^i(Q\\otimes_R N)=0$ outside $[u,v]$.",
+   "uses": [
+    "lem-exc-constant-field-sheaf-tensor-cohomology",
+    "lem-pc-sites-module-sheafification-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, recalled residue-field test, expanded by the field calculation and nilpotent devissage; Stacks 0GMW"
+   }
+  },
+  {
+   "text": "For an arbitrary $R$-module sheaf $M$ set $F_sM=\\operatorname{im}(\\ell^s:M\\to M)$, $0\\leq s\\leq n$. Then $F_0M=M$, $F_nM=0$, and $G_s=F_sM/F_{s+1}M$ is killed by $\\ell$. Exact sheafification of the constant quotient sequence identifies $R/\\ell R$ with $S$, by [lem-weil-pbc-site-module-presheaf-sheafification-exact]. Hence $G_s$ has a unique $S$-module structure: a local lift of a scalar from $S$ acts through $R$, and two lifts differ by a multiple of $\\ell$, which kills $G_s$. Step 6 applies to every $G_s$. This filtration is finite for every module sheaf, without constructibility or finite-generation assumptions.",
+   "uses": [
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, recalled residue-field Tor criterion: explicit finite filtration by powers of ell"
+   }
+  },
+  {
+   "text": "For each $s<n$, apply the exact tensor functor with $Q^j$ to $0\\to F_{s+1}M\\to F_sM\\to G_s\\to0$ in every degree $j$; exactness is precisely [def-pc-flat-sheaf-modules], using tensor symmetry. By [lem-weil-pbc-complex-ses-homology-long-exact], for $i\\notin[u,v]$ there is an exact segment $H^i(Q\\otimes F_{s+1}M)\\to H^i(Q\\otimes F_sM)\\to H^i(Q\\otimes G_s)$. Descending induction on $s$ starts with $F_nM=0$; the right term vanishes by step 6 and the left term by induction, so the middle vanishes. At $s=0$, [def-kun-derived-tensor] identifies this with $H^i(K\\otimes_R^L M)=0$. The same interval works for every $M$, giving (i) by [def-kun-tor-amplitude]. This proves all three conditions equivalent.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-kun-derived-tensor",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, recalled residue-field Tor test: exact tensoring and finite descending induction; Stacks 0117"
+   }
+  },
+  {
+   "text": "Suppose the equivalent conditions hold. Apply [lem-sp-ringed-site-tor-flat-model] on the small ringed site $(X_{\\mathrm{et}},R)$ to choose a bounded complex $F$ of flat $R$-module sheaves representing $K$. No constructibility is required by that statement. By [lem-pc-bounded-above-flat-kflat-site], $F$ is K-flat, so [def-kun-derived-tensor] computes the reduction as $F\\otimes_R S=F/\\ell F$ in the category of $S$-module sheaves.",
+   "uses": [
+    "lem-sp-ringed-site-tor-flat-model",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, last paragraph: bounded flat representative; Stacks 08G1 and 06YQ"
+   }
+  },
+  {
+   "text": "For a flat $R$-module sheaf $M$, tensor the constant exact sequences $0\\to(\\ell^{n-1})\\to R\\xrightarrow{\\ell}(\\ell)\\to0$ and $0\\to(\\ell)\\to R\\xrightarrow{\\ell^{n-1}}(\\ell^{n-1})\\to0$ with $M$, also tensoring the inclusions of the two ideals into $R$. Exactness, by [def-pc-flat-sheaf-modules], gives $\\ker(\\ell:M\\to M)=\\ell^{n-1}M$ and $\\ker(\\ell^{n-1}:M\\to M)=\\ell M$. The ideal sequences are sheafifications of the elementary constant module sequences, by [lem-weil-pbc-site-module-presheaf-sheafification-exact]. Consequently multiplication by $\\ell^{n-1}$ gives a natural $S$-linear isomorphism $M/\\ell M\\to M[\\ell]$, where $M[\\ell]=\\ker(\\ell:M\\to M)=\\mathcal Hom_R(S,M)$, the last identification being evaluation at $1$. These identities hold also for $n=1$, when this is the identity of $M$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, final paragraph, the isomorphism K/ell K to ell-torsion induced by ell^(n-1)"
+   }
+  },
+  {
+   "text": "Use step 2 with $L=M[0]$ for a flat sheaf $M$. The positive cohomology of the alternating Hom complex is zero by the two kernel-image identities in step 10. Thus $\\mathcal Hom_R(S,-)$ has no positive right-derived sheaves on a flat $M$. Regard this left exact additive functor as $G:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$ with the scalar action provided by [lem-weil-pbc-restricted-coefficient-hom], taking its first argument $S$. Both module-sheaf categories have enough injectives by [prop-pur-kinjective-resolutions-exist], and $G$ is left exact because maps from $S$ commute with kernels. The same proposition gives their Grothendieck property. Using the bounded-below K-injective resolution of step 2, the underlying $R$-complex of $RG(K)$ is $\\mathcal Hom_R(S,I)$, hence is $R\\mathcal Hom_R(S,K)$ by [def-pur-derived-internal-hom]. This also describes its $S$-action. Forgetting that action is exact and detects zero cohomology, so the preceding vanishing proves that every term of $F$ is $G$-right-acyclic. By [lem-sp-derived-functor-single-identification], these positive cohomology sheaves are precisely the higher right-derived functors of $G$ on $M$, so this is the acyclicity required in step 12.",
+   "uses": [
+    "lem-weil-pbc-restricted-coefficient-hom",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, final sentence: flat sheaves are acyclic for Hom from k; coefficient action is evaluation on the first argument"
+   }
+  },
+  {
+   "text": "Apply [src-right-derived-functor-plus-acyclic-unit] to $G$ and the bounded-below complex $F$. It gives the canonical isomorphism $G(F)\\to RG(K)$ in $D(S)$. Combining with step 10 termwise yields $K\\otimes_R^L S\\cong F/\\ell F\\xrightarrow{\\ell^{n-1}}F[\\ell]=G(F)\\xrightarrow{\\sim}R\\mathcal Hom_R(S,K)$ in $D^b(S)$. To specify canonicity without a choice of flat model, on every bounded complex $L$ use the composite of the derived tensor counit, the natural map $L/\\ell L\\to L[\\ell]$ given by $\\ell^{n-1}$, and the right-derived unit for $G$. The left derived functor is [lem-pur-derived-change-of-rings], with its counit and K-flat computation as in [lem-pur-left-derived-from-kflat-class]; the last unit and its universal property are [lem-weil-pbc-right-derived-plus-injective]. This composite is natural on the homotopy category and is a map between functors which factor through the derived localization. The universal property of that localization [def-weil-abstract-derived-category] therefore gives a unique natural morphism on $D^b(R)$. On the flat representative it is exactly the displayed isomorphism. Its inverse is the canonical isomorphism in the orientation of the statement.",
+   "uses": [
+    "src-right-derived-functor-plus-acyclic-unit",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-abstract-derived-category",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.2.2.4, final paragraph; naturality made explicit using derived counit/unit and Stacks 05TA"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "lem-exc-constant-field-sheaf-tensor-cohomology",
+  "lem-kun-flat-resolution-existence",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-rhom-well-defined",
+  "lem-sc-bounded-above-finite-free-hom-acyclic",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sfb-bounded-representative",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-restricted-coefficient-hom",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "src-right-derived-functor-plus-acyclic-unit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Lemma 6.2.2.4, pp. 294-295; the recalled residue-field test is expanded by nilpotent filtration, and the final comparison by the acyclic-complex computation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +227,45 @@
    "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/AlternatingConst.lean\", \"line\": \"16\", \"text\": \"defines the periodic chain and cochain complexes\"}\n  {\"file\": \"Mathlib/Algebra/Homology/AlternatingConst.lean\", \"line\": \"19\", \"text\": \"different parity). We calculate the homology of these periodic complexes.\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|alternatingConst|periodic",
+   "results": "5 hits: Mathlib/Algebra/Homology/AlternatingConst.lean; Mathlib/Algebra/Homology/AlternatingConst.lean; Mathlib/Algebra/Homology/AlternatingConst.lean; Mathlib/Algebra/Homology/AlternatingConst.lean; Mathlib/Algebra/Homology/AlternatingConst.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: boundedness/Tor functors and alternating-complex infrastructure do not state the sheaf prime-power Hom/tensor criterion or its canonical k-linear comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules over an Artinian local principal ring: derived Hom from its residue field is bounded exactly when tensor with the residue field is bounded",
+   "results": "8 hits: IsLocalRing.subsingleton_tensorProduct; IsLocalRing.map_tensorProduct_mk_eq_top; Algebra.QuasiFinite.finite_fiber; AlgebraicGeometry.Scheme.Modules.Hom; SheafOfModules.Hom; ModuleCat.tildeInModuleCat; SheafOfModules.hasLimit; SheafOfModules.hasLimitsOfSize",
+   "date": "2026-10-18",
+   "verdict": "no match: boundedness/Tor functors and alternating-complex infrastructure do not state the sheaf prime-power Hom/tensor criterion or its canonical k-linear comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlternatingConst\"",
+   "results": "12 hits: ChainComplex.alternatingConst; ChainComplex.instHasHomologyNatObjAlternatingConst; ChainComplex.alternatingConstHomologyDataOdd; ChainComplex.alternatingConst_exactAt; ChainComplex.alternatingConstHomologyDataZero; ChainComplex.alternatingConstHomologyDataEvenNEZero; ChainComplex.alternatingConstHomologyZero; HomologicalComplex.alternatingConst",
+   "date": "2026-10-18",
+   "verdict": "no match: boundedness/Tor functors and alternating-complex infrastructure do not state the sheaf prime-power Hom/tensor criterion or its canonical k-linear comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded derived tensor with the residue field detects finite Tor amplitude over Z modulo a prime power; bounded derived Hom is equivalent by the two periodic resolution",
+   "results": "8 hits: CategoryTheory.Tor; Module.free_of_lTensor_residueField_injective; Module.mem_support_iff_nontrivial_residueField_tensorProduct; CategoryTheory.Tor'; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-18",
+   "verdict": "no match: boundedness/Tor functors and alternating-complex infrastructure do not state the sheaf prime-power Hom/tensor criterion or its canonical k-linear comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded complex over a quotient of a discrete valuation ring its Tor and Ext with the residue field are computed by alternating multiplication by the uniformizer and its complementary power",
+   "results": "8 hits: BDeRham; IsLocalRing.finrank_CotangentSpace_eq_one; localCohomology.diagram; IsLocalRing.instModuleResidueFieldCotangentSpace; IsLocalRing.finrank_CotangentSpace_eq_one_iff; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Ideal.quotientRangePowQuotSuccInclusionEquiv; IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing",
+   "date": "2026-10-18",
+   "verdict": "no match: boundedness/Tor functors and alternating-complex infrastructure do not state the sheaf prime-power Hom/tensor criterion or its canonical k-linear comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-uniqueness",
@@ -69,5 +287,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-prime-power-hom-tensor-test",
+  "worker": "stage1",
+  "summary": "Expanded Gabber XVII 6.2.2.4 into the alternating resolution, a finite-diagonal two-sided total and its exact sequence, periodicity, the residue-field nilpotent filtration criterion, and the canonical k-linear comparison on a bounded flat model. Reused existing nodes throughout; no new nodes or statement change.",
+  "blueprint": "Realizes the dimension-normalized duality part of lem-per-artin-gabber-affine-curve via lem-per-qbar-middle-tstructure, lem-per-qbar-generic-duality-model, lem-per-finite-regular-reduction-dualizing and lem-per-potential-dualizing-uniqueness; specifically the last proof step of the latter (XVII Proposition 6.2.2.3), where bounded Hom from k implies finite Tor amplitude. The present source fills that exact criterion, not a different perverse-duality route.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-constant-field-sheaf-tensor-cohomology",
+    "why": "Generic Tensoring over a constant field sheaf commutes with cohomology, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-kun-flat-resolution-existence",
+    "why": "Generic Flat K-flat resolutions, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic Bounded-above flat complexes on a ringed site are K-flat, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic Tensor and sheafification for modules over a presheaf of rings, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic Left derived functor on the derived category computed by a resolving class, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic The Hom complex into K-injective complexes respects quasi-isomorphisms, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-sc-bounded-above-finite-free-hom-acyclic",
+    "why": "Generic Hom from bounded-above finite-free complexes preserves bounded-below acyclicity, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic Bounded-below complexes admit bounded-below K-injective resolutions, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "Generic The derived functor on an object placed in degree 0 computes the classical right derived functors, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-sp-ringed-site-tor-flat-model",
+    "why": "Generic Finite Tor intervals and bounded flat models on a ringed site, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-restricted-coefficient-hom",
+    "why": "Generic Functorial coefficient action on restricted internal Hom, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   },
+   {
+    "node": "src-right-derived-functor-plus-acyclic-unit",
+    "why": "Generic The bounded-below derived unit is invertible on right-acyclic complexes, used only with the hypotheses explicitly verified in the proof; it supplies homological algebra or sheaf algebra, not a replacement of the perverse-duality unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-constant-field-sheaf-tensor-cohomology",
+  "lem-kun-flat-resolution-existence",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-rhom-well-defined",
+  "lem-sc-bounded-above-finite-free-hom-acyclic",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-restricted-coefficient-hom",
+  "prop-pur-kinjective-resolutions-exist",
+  "src-right-derived-functor-plus-acyclic-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-fc9ba4e68",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-fc9ba4e68 (reviewer sub-agent of L); spot-checked: Read Gabber/ILO XVII Lemma 6.2.2.4 (pp.294-295) with 6.2.2.3 and footnote iv; the unchanged item statement matches it hypothesis by hypothesis (X Noetherian only; no excellence, no ell invertible, no constructibility). The source's D^b_ctf in its last paragraph is not needed: Stacks 08G1 (sites-cohomology.tex l.12430) gives a bounded flat model from finite Tor amplitude. Field diff against the live base: only proof, proof_deps, proof_origin, mathlib_searches, status and split_report changed; no new nodes or unit edits; proof_deps equals the union of the step uses; no SGA citation. Checked all 12 steps against the cited statements. The alternating resolution is exact, including n=1. The Hom rephasing sign (-1)^(pq+p(p+1)/2) gives vertical (-1)^p and horizontal +1, verified by hand. The column maps match Gabber's display, with connecting map ell^(n-1). The long-exact-sequence bounds q<a-1 and q>b+1 plus periodicity give (ii)<=>(iii). (i)<=>(ii) goes through field-sheaf tensor cohomology, the ell-adic image filtration and degreewise flat exactness, with no constructibility. Steps 9-12 use 08G1, the kernel identities ker ell = ell^(n-1)M and ker ell^(n-1) = ell M for flat M, G-acyclicity via lem-sp-derived-functor-single-identification and the acyclic-unit theorem; canonicity comes from counit, ell^(n-1) and unit through the localization. Small cases: n=1 (identity); a point with n=2 and K=k[0] (all three conditions fail); K=Lambda[0] (ell^(n-1): Lambda/ell to ell-torsion is an isomorphism). No duplicate found: lem-exc-residue-tor-test needs D^b_c, and lem-per-potential-hom-coefficient-restriction states something else. Accepted all 14 declared tool_uses as generic homological or sheaf algebra. Advisory: step 2 compresses the derived-tensor balancing (resolving S rather than K) into a two-line argument from K-flatness. The item lacks lean_audit, as does its base."
  }
 }
