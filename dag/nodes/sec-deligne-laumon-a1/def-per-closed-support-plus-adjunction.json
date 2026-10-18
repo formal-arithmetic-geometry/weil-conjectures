@@ -1,0 +1,116 @@
+{
+ "id": "def-per-closed-support-plus-adjunction",
+ "kind": "definition",
+ "title": "Bounded-below closed-support right adjoint and its fixed adjunction",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring and $i:Z\\hookrightarrow T$ a closed immersion of schemes [def-weil-closed-immersion]. Work in the ordinary bounded-below derived categories $D^+(Z_{\\mathrm{et}},A)$ and $D^+(T_{\\mathrm{et}},A)$ of small-etale $A$-module sheaves [def-weil-pbc-derived-categories]. Write $i_*$ for the right derived direct image [def-weil-pbc-direct-image], which agrees with exact closed direct image. Define $i^!$ to be the chosen right adjoint of $i_*$, with its fixed adjunction $i_*\\dashv i^!$, its unit and its counit. This is the bounded-below closed-support adjoint of [lem-exc-closed-ambient], obtained by deriving the supported inverse image $F\\mapsto i^{-1}\\ker(F\\to j_*j^{-1}F)$ for the open complement $j$ [def-pur-etale-supported-kernel]. Equip $i^!$ with the cohomological-shift comparison obtained as the adjunction mate of the direct-image shift comparison. The right adjoint is chosen by its adjunction universal property, not as an unspecified functor.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "lem-exc-closed-ambient",
+  "def-pur-etale-supported-kernel"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XQ (lemma-sections-with-support-acyclic), its supported-subsheaf definition and proof, and Tag 0A45 (lemma-cohomology-with-support-triangle); bounded-below derived supported-kernel adjunction, with canonical adjunction-mate shifts."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The bounded below derived closed support right adjoint to direct image of a closed immersion of schemes with finite ring coefficients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-18",
+   "verdict": "No specialized closed-support adjunction in Mathlib; reuse the published project helpers."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofIsLeftAdjoint",
+   "results": "2 hits: CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.isLeftAdjoint_square_lift",
+   "date": "2026-10-18",
+   "verdict": "No specialized closed-support adjunction in Mathlib; reuse the published project helpers."
+  },
+  {
+   "tool": "grep",
+   "query": "closedSupportPlus|closedSupportPlusAdjunction|rightAdjointCommShift",
+   "results": "5 hits: Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean",
+   "date": "2026-10-18",
+   "verdict": "No specialized closed-support adjunction in Mathlib; reuse the published project helpers."
+  },
+  {
+   "tool": "grep",
+   "query": "closedSupportPlusAdjunction|closedSupportPlusCommShift|closed-support-plus-adjunction in dag/nodes; closedSupportPlus|closedSupportPlusAdjunction in WeilConjectures and lean/Sheaf; blueprint_refs.py search closed support",
+   "results": "Only lem-per-ind-etale-closed-support-base-change lists these helper declarations. No upstream WeilConjectures occurrence. lean/Sheaf/AlgebraicGeometry/IndEtaleClosedSupportBaseChange.lean defines all four helpers at lines 84-107. Blueprint search returned 12 nodes about other closed-support settings; none owns this bounded-below finite-coefficient adjunction definition.",
+   "date": "2026-10-18",
+   "verdict": "Existing project declarations, no dedicated definition node; bind existing:true as requested by the H2 return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-finite-closed-support-exchange",
+  "date": "2026-10-18",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Finite closed-support exchange, Step 3: fix the bounded-below closed right adjoints and their actual adjunction units and counits.",
+   "via": [
+    "lem-per-finite-closed-support-exchange",
+    "lem-per-finite-modification-pinned-gluing",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.closedSupportPlus",
+  "declarations": [
+   "AlgebraicGeometry.Etale.closedSupportPlus_isLeftAdjoint",
+   "AlgebraicGeometry.Etale.closedSupportPlus",
+   "AlgebraicGeometry.Etale.closedSupportPlusAdjunction",
+   "AlgebraicGeometry.Etale.closedSupportPlusCommShift"
+  ],
+  "statement": "abbrev closedSupportPlus {Z T : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "H2 repair: binds the four already published general closed-support adjunction helpers, not the ind-etale base-change theorem. closedSupportPlus_isLeftAdjoint supplies the bounded-below derived supported-kernel adjunction; closedSupportPlus is Functor.rightAdjoint, closedSupportPlusAdjunction is Adjunction.ofIsLeftAdjoint, and closedSupportPlusCommShift is its canonical mate shift structure. No module or declaration is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc779966a",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc779966a",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 7eff593465ab. Item .lean byte-identical (sha256 65d2b073); item node differs only by stmt_dep lem-per-ind-etale-closed-support-base-change -> def-per-closed-support-plus-adjunction. New def node: existing:true on Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange owning closedSupportPlus_isLeftAdjoint/closedSupportPlus/closedSupportPlusAdjunction/closedSupportPlusCommShift (all present live); statement (chosen right adjoint of exact closed D+ i_*, fixed adjunction, mate shifts) matches the Lean; lean.statement equals normalized signature; source Stacks 09XQ/0A45 verified in etale-cohomology.tex; stmt_deps exist and are cited; no other def owner. Item clauses re-confirmed (A finite comm ring u+1, X',X Noetherian, finite p, closed i, pullback projections, e.inv = canonical exchange, unit iso, normalized identity, IsIso i^!(E)); edge cases ok; no hollow defs; sorry only. nt_compile --json exit 0, 3.0 s, no errors. Advisory: identity clause is definitional given e.inv (node's normalization)."
+ }
+}

@@ -13,7 +13,8 @@
   "def-pc-fibre-product",
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image",
-  "lem-exc-closed-ambient"
+  "lem-exc-closed-ambient",
+  "def-per-closed-support-plus-adjunction"
  ],
  "proof": [
   {
@@ -458,5 +459,30 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-56fe33d8f (reviewer sub-agent of L); spot-checked: I read the item (7 steps, no new nodes), the report, every cited statement including the blueprint_update texts, and ILO XVII Prop. 5.4.1 with its proof, printed pp. 290-292. The item makes precise the source's claim that i^!q_*K_{Y'} -> i^!p_*K_{X'} is an isomorphism, which ILO proves by i^!q_*i'^! = i^!i_*p'_*i'^! = p'_*i'^! = i^!p_*. Statement changes from base: the citation def-amb-etale-compact-support is replaced by def-weil-pbc-direct-image and lem-exc-closed-ambient, and the Noetherian convention is written inline. i^! is fixed as the right adjoint to i_*, so the meaning is unchanged and nothing is weakened. The coefficients are ordinary small-étale A-modules with A a finite ring, which matches lem-exc-closed-ambient. Step checks: (1) the B/IB chart shows p' is finite, and both composites are N(V x_X Y') via c_N. (2) Exactness passes from abelian sheaves to modules, and the derived adjunctions are termwise. (3) i^! preserves D+ by t-structure orthogonality, which is a few lines, so the elementary flag is acceptable. (4) Counit-iso implies full faithfulness for i^* ⊣ i_*; post-composition with u_N equals the bijection f -> adj(i_*f), so u is invertible by coyoneda in the opposite category. (5) The finite exchange square is f=i, g=p, giving p^*i_* -> i'_*p'^*, the correct direction; delta = Phi(1). (6) I checked the mate identity i'_*(a')θ = a∘p^*(c) on sections: both transposes equal c_N by the p' triangle identity. Naturality of a then gives delta = i^!(E)∘u. (7) delta^{-1}∘i^!(E)∘u = 1, which proves every clause. Edge cases checked: Y empty, i = id, p = id, nonreduced Y, A of any characteristic. No step needs flatness or constructibility. No duplicate exists: I grepped the DAG for i^!p_* / g^!f_* patterns, read the four nearest candidates (regular closed-support base change, supported calculus, finite residue Gysin, trf shriek calculus), and blueprint_refs gave 0 hits. No SGA is cited. I accept the 7 declared tool_uses as generic tools that leave the unit route unchanged. tools/review_split.py: PASS. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClosedSupportExchange",
+  "declaration": "AlgebraicGeometry.Etale.finite_closedSupport_exchange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteClosedSupportDirectImageIso",
+   "AlgebraicGeometry.Etale.finiteClosedSupportCounit",
+   "AlgebraicGeometry.Etale.finiteClosedSupportExchange",
+   "AlgebraicGeometry.Etale.finite_closedSupport_exchange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClosedSupportExchange.lean",
+  "statement": "theorem finite_closedSupport_exchange {X' X Y : Scheme.{u}} [IsNoetherian X'] [IsNoetherian X] (p : X' ⟶ X) [IsFinite p] (i : Y ⟶ X) [IsClosedImmersion i] : IsIso (closedSupportPlusAdjunction A i).unit ∧ ∃ e : (lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctorPlus ⋙ closedSupportPlus A i ≅ closedSupportPlus A (pullback.snd i p) ⋙ (lowerStar (ModuleCat.{u + 1} A) (pullback.fst i p)).rightDerivedFunctorPlus, e.inv = finiteClosedSupportExchange A p i ∧ ∀ M : _root_.DerivedCategory.Plus (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} A)), (closedSupportPlusAdjunction A i).unit.app (((lowerStar (ModuleCat.{u + 1} A) (pullback.fst i p)).rightDerivedFunctorPlus).obj ((closedSupportPlus A (pullback.snd i p)).obj M)) ≫ (closedSupportPlus A i).map ((finiteClosedSupportCounit A p i).app M) ≫ e.hom.app M = 𝟙 _ ∧ IsIso ((closedSupportPlus A i).map ((finiteClosedSupportCounit A p i).app M))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Helpers construct the canonical direct-image compositor, pushed closed counit and its transpose. Reuses the already published D+ closed adjunction; no arbitrary comparison is chosen. The natural isomorphism has inverse equal to this specified comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc779966a",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 7eff593465ab. Item .lean byte-identical (sha256 65d2b073); item node differs only by stmt_dep lem-per-ind-etale-closed-support-base-change -> def-per-closed-support-plus-adjunction. New def node: existing:true on Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange owning closedSupportPlus_isLeftAdjoint/closedSupportPlus/closedSupportPlusAdjunction/closedSupportPlusCommShift (all present live); statement (chosen right adjoint of exact closed D+ i_*, fixed adjunction, mate shifts) matches the Lean; lean.statement equals normalized signature; source Stacks 09XQ/0A45 verified in etale-cohomology.tex; stmt_deps exist and are cited; no other def owner. Item clauses re-confirmed (A finite comm ring u+1, X',X Noetherian, finite p, closed i, pullback projections, e.inv = canonical exchange, unit iso, normalized identity, IsIso i^!(E)); edge cases ok; no hollow defs; sorry only. nt_compile --json exit 0, 3.0 s, no errors. Advisory: identity clause is definitional given e.inv (node's normalization)."
  }
 }
