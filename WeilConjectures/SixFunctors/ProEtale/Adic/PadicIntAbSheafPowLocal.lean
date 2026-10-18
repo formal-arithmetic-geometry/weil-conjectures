@@ -99,4 +99,70 @@ theorem exists_cover_nonempty_iso_padicIntAbSheaf_pow (r : ℕ)
     ((ProEt.topology X).overPullback Ab.{u + 1} (W i)).mapIso
       (limitZmodPowAbSheafDiagramPowIso X l r)⟩⟩
 
+variable {X} in
+/-- Restriction of abelian sheaves on `X_proét` to a slice preserves colimits: it is left adjoint
+to the pushforward along the cocontinuous functor `Over.forget Y`. -/
+instance preservesColimitsOfSize_overPullback (Y : X.ProEt) :
+    PreservesColimitsOfSize.{0, 0} ((ProEt.topology X).overPullback Ab.{u + 1} Y) :=
+  ((Over.forget Y).sheafAdjunctionCocontinuous Ab.{u + 1} ((ProEt.topology X).over Y)
+    (ProEt.topology X)).leftAdjoint_preservesColimits
+
+variable {X} in
+/-- A cokernel of multiplication by an integer `N` remains one after restriction to any slice:
+restriction preserves colimits. -/
+lemma exists_isColimit_cokernelCofork_overPullback {A B : Sheaf (ProEt.topology X) Ab.{u + 1}}
+    {N : ℤ} {π : A ⟶ B} {w : (N • 𝟙 A) ≫ π = 0} (h : IsColimit (CokernelCofork.ofπ π w))
+    (Y : X.ProEt) :
+    ∃ w' : (N • 𝟙 _) ≫ ((ProEt.topology X).overPullback Ab.{u + 1} Y).map π = 0,
+      Nonempty (IsColimit (CokernelCofork.ofπ _ w')) :=
+  exists_isColimit_cokernelCofork_of_iso
+    (w := by rw [← Functor.map_comp, Cofork.π_ofπ, w, Functor.map_zero])
+    (CokernelCofork.mapIsColimit _ h ((ProEt.topology X).overPullback Ab.{u + 1} Y))
+    (Iso.refl _) (Iso.refl _)
+    (by
+      rw [Iso.refl_hom, Category.comp_id, Category.id_comp, Functor.map_zsmul,
+        CategoryTheory.Functor.map_id])
+    (by
+      rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl)
+
+/-- **An `ℓ`-adic tower of sheaves locally isomorphic to `(ℤ/ℓⁿ)_X^r` has a lattice which is
+locally `ℤ_ℓ,X^r`**, for a tower `(Gₙ)` whose transitions are cokernels of `ℓⁿ`
+(`Gₙ₊₁/ℓⁿ ≅ Gₙ`) on `X_proét`; see `exists_cover_nonempty_iso_padicIntAbSheaf_pow`. -/
+theorem exists_cover_nonempty_iso_padicIntAbSheaf_pow_of_isColimit (r : ℕ)
+    (G : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) Ab.{u + 1})
+    (hG : ∀ n : ℕ, ∃ w : (((l ^ n : ℕ) : ℤ) • 𝟙 _) ≫ G.map (homOfLE n.le_succ).op = 0,
+      Nonempty (IsColimit (CokernelCofork.ofπ _ w)))
+    (hloc : ∀ (n : ℕ) (V : X.ProEt), ∃ S ∈ ProEt.topology X V,
+      ∀ ⦃Y : X.ProEt⦄ (f : Y ⟶ V), S f →
+        Nonempty ((isoPresheaf ((zmodPowAbSheafDiagramPow X l r).obj (op n))
+          (G.obj (op n))).obj (op Y)))
+    (V : X.ProEt) :
+    ∃ (ι : Type u) (W : ι → X.ProEt) (f : ∀ i, W i ⟶ V),
+      Sieve.ofArrows W f ∈ ProEt.topology X V ∧
+      ∀ i, Nonempty (((ProEt.topology X).overPullback Ab.{u + 1} (W i)).obj (limit G) ≅
+        ((ProEt.topology X).overPullback Ab.{u + 1} (W i)).obj
+          (⨁ fun _ : Fin r ↦ padicIntAbSheaf X l)) :=
+  exists_cover_nonempty_iso_padicIntAbSheaf_pow X l r G
+    (fun n Y ↦ exists_isColimit_cokernelCofork_overPullback (hG n).choose_spec.some Y) hloc V
+
+/-- **An `ℓ`-adic tower of sheaves locally isomorphic to `(ℤ/ℓⁿ)_X` has a lattice which is
+locally `ℤ_ℓ,X`**, for a tower `(Gₙ)` whose transitions are cokernels of `ℓⁿ`
+(`Gₙ₊₁/ℓⁿ ≅ Gₙ`) on `X_proét`; see `exists_cover_nonempty_iso_padicIntAbSheaf_of_locally_iso`. -/
+theorem exists_cover_nonempty_iso_padicIntAbSheaf_of_isColimit
+    (G : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) Ab.{u + 1})
+    (hG : ∀ n : ℕ, ∃ w : (((l ^ n : ℕ) : ℤ) • 𝟙 _) ≫ G.map (homOfLE n.le_succ).op = 0,
+      Nonempty (IsColimit (CokernelCofork.ofπ _ w)))
+    (hloc : ∀ (n : ℕ) (V : X.ProEt), ∃ S ∈ ProEt.topology X V,
+      ∀ ⦃Y : X.ProEt⦄ (f : Y ⟶ V), S f →
+        Nonempty ((isoPresheaf ((zmodPowAbSheafDiagram X l).obj (op n)) (G.obj (op n))).obj
+          (op Y)))
+    (V : X.ProEt) :
+    ∃ (ι : Type u) (W : ι → X.ProEt) (f : ∀ i, W i ⟶ V),
+      Sieve.ofArrows W f ∈ ProEt.topology X V ∧
+      ∀ i, Nonempty (((ProEt.topology X).overPullback Ab.{u + 1} (W i)).obj (limit G) ≅
+        ((ProEt.topology X).overPullback Ab.{u + 1} (W i)).obj (padicIntAbSheaf X l)) :=
+  exists_cover_nonempty_iso_padicIntAbSheaf_of_locally_iso X l G
+    (fun n Y ↦ exists_isColimit_cokernelCofork_overPullback (hG n).choose_spec.some Y) hloc V
+
 end AlgebraicGeometry.ProEtale

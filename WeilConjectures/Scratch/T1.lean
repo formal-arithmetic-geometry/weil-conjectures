@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntAbSheafPowLocal
-
-#print axioms AlgebraicGeometry.ProEtale.exists_cover_nonempty_iso_padicIntAbSheaf_pow
-#print axioms AlgebraicGeometry.ProEtale.exists_cover_nonempty_iso_padicIntAbSheaf_of_locally_iso

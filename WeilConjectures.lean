@@ -9132,6 +9132,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafComparison
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafRing
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntAbSheafPowLocal
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProEtOpenCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
@@ -9148,7 +9149,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowAbSheafCokernel
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowAutLift
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowCokernel
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowGLLift
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
 public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexample
