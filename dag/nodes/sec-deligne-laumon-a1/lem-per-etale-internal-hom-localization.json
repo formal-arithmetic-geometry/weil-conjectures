@@ -362,5 +362,43 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-e082815a4 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, ILO XVII 7.6.10 (printed p.313: the displayed triangle i⋆RHom(i⋆K,i!L)→RHom(K,L)→Rj⋆RHom(j⋆K,j⋆L)) and the cited Stacks lemmas 09XQ, 08FJ, 0A96, 0G7E, 08JC and 095L. The item says the same as ILO, restricted to K bounded and N bounded below. The parent only applies it to N in D^b_P, and the live statement changed only by an added [def-weil-pbc-extension-by-zero] citation for j_! (already in stmt_deps), so nothing is weakened. All seven steps check against their cited statements. Step 1: B bounded; I is a bounded-below complex of injectives, so K-injective; i^!_0 I is K-injective by the new node and computes Ri^! by right-derived-plus (2). Step 2: open/closed short exact sequence, cone, distinguished triangle. Step 3: the first-variable order of lem-sf-hom-triangulated matches. Step 4: finite products from bounded B; Hom sign as in def-pur-derived-internal-hom. Step 5: accepted as elementary; the slice presheaf identity comes straight from the definition, sheafification commutes with restriction to a slice, and the DAG has no étale internal j_! Hom node. Step 6: K-flat j^*P, K-injective j^*I, then J is K-injective by 0A96; QJ lies in D^+, so j_*J computes Rj_*. Step 7: the triangle is transported by isomorphisms. The new node lem-per-etale-closed-sheaf-internal-adjunction is true. Tests: Z empty, Z=X, A=0, and a strictly henselian DVR with F=A_X (both sides 0). It is self-contained, has no proof sketch and does not restate a clause of the item. It strictly generalizes lem-pur-etale-supported-kernel-adjunction (abelian sheaves, global Hom) by adding A-modules, the internal Hom form and injectives; its later split should cite that node. The pro-étale lem-sfb-open-closed-internal-hom-formulas and the finite-coefficient closed-support nodes do not apply. No cycle. The declared generic tool_uses are accepted. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleInternalHomLocalization",
+  "declaration": "AlgebraicGeometry.Etale.etale_internalHom_localization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.perEtaleSupportKernel",
+   "AlgebraicGeometry.Etale.perEtaleClosedSupport",
+   "AlgebraicGeometry.Etale.perEtaleClosedSupport_additive",
+   "AlgebraicGeometry.Etale.perEtalePull",
+   "AlgebraicGeometry.Etale.perEtaleClosedPush",
+   "AlgebraicGeometry.Etale.perEtaleHom",
+   "AlgebraicGeometry.Etale.perEtalePullTensorIso",
+   "AlgebraicGeometry.Etale.perEtaleClosedHomSource",
+   "AlgebraicGeometry.Etale.perEtaleClosedHom",
+   "AlgebraicGeometry.Etale.perEtaleOpenHomSource",
+   "AlgebraicGeometry.Etale.perEtaleOpenHom",
+   "AlgebraicGeometry.Etale.perEtaleClosedStarAdjunction",
+   "AlgebraicGeometry.Etale.perEtaleClosedHomComparison",
+   "AlgebraicGeometry.Etale.perEtaleOpenHomComparison",
+   "AlgebraicGeometry.Etale.perEtaleBoundedPlusPairs",
+   "AlgebraicGeometry.Etale.etale_internalHom_localization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInternalHomLocalization.lean",
+  "statement": "theorem etale_internalHom_localization {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ) : ∃ a : lowerStar (ModuleCat.{u + 1} A) i ⊣ perEtaleClosedSupport A i j, (∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A), (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).unit.app ((perEtaleSupportKernel A j).obj F) ≫ a.counit.app F = (kernel.ι (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit).app F) ∧ ∃ (eC : perEtaleBoundedPlusPairs A X ⋙ perEtaleClosedHom A i j ≅ perEtaleBoundedPlusPairs A X ⋙ perEtaleClosedHomSource A i) (eO : perEtaleBoundedPlusPairs A X ⋙ perEtaleOpenHomSource A j ≅ perEtaleBoundedPlusPairs A X ⋙ perEtaleOpenHom A j), (∀ (K : _root_.DerivedCategory.Bounded (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (N : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))), eC.hom.app (op K, N) = perEtaleClosedHomComparison A i j a K.obj N.obj ∧ eO.hom.app (op K, N) = perEtaleOpenHomComparison A j K.obj N.obj) ∧ ∃ δ : perEtaleBoundedPlusPairs A X ⋙ perEtaleOpenHom A j ⟶ (perEtaleBoundedPlusPairs A X ⋙ perEtaleClosedHom A i j) ⋙ shiftFunctor (DerivedCategoryModule A X) (1 : ℤ), ∀ (K : _root_.DerivedCategory.Bounded (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (N : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))), Triangle.mk (eC.hom.app (op K, N) ≫ ((derivedHom (ModuleCat.{u + 1} A) X).map ((perEtaleClosedStarAdjunction A i).unit.app K.obj).op).app N.obj) (((derivedHom (ModuleCat.{u + 1} A) X).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).counit.app K.obj).op).app N.obj ≫ eO.hom.app (op K, N)) (δ.app (op K, N)) ∈ distTriang _",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The support kernel and its closed inverse image are explicit helpers of this notion. The exact closed direct image is termwise. The existential support adjunction is normalized by the kernel inclusion; endpoint natural isomorphisms are constrained to explicit tensor-evaluation comparisons. Natural transformations are on the full product of bounded and bounded-below inputs. No finiteness or duality assumption on coefficients. Maintainer FIX (2026-10-19): the sorry'd local helper perEtaleClosedDirectImage_exact restated the proved upstream instance AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite (WeilConjectures.SixFunctors.Finite.Exact, recorded in sk-lem-pbc-finite), which applies to closed immersions through Mathlib's IsClosedImmersion → IsFinite instance; the helper is dropped and that module is imported publicly.",
+  "fixed_by": "NT-stage2-cc-af69aedad"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af69aedad",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Statement matches node/ILO XVII 7.6.10 clause by clause: arbitrary CommRing A (ModuleCat.{u+1}, recorded encoding), complementary i/j via hij, K∈D^b, N∈D^+, termwise i^*,j^*,i_*, Rj_* and Ri^! = R(i^*∘ker unit); support adjunction pinned by kernel-inclusion counit equation (true); eC/eO pinned to explicit canonical tensor-evaluation comparisons (recomputed, isos); first two arrows are unit/counit precompositions as specified, natural δ, distinguished. No extra hypotheses; edge cases Z/U empty, A=0 OK; statement verbatim; docstrings/7 steps present; dep records unchanged. Fault H4: sorry'd helper perEtaleClosedDirectImage_exact restated the proved upstream instance Etale.preservesFiniteColimits_lowerStar_of_isFinite (Finite.Exact; IsClosedImmersion→IsFinite). FIX: helper removed, public import added, declarations/note/report updated. nt_compile --json: delivered and fixed files rc 0, 3.3 s, clean; control error detected. Advisory: coordinateSupportSheaf is the same kernel only for i.openComplement; additive helper sorry'd as in landed pattern."
  }
 }
