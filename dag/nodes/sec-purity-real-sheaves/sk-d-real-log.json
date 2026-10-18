@@ -84,5 +84,28 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.CoefficientExtensionSmallLog",
+  "declaration": "Padic.coefficientExtensionSmallLog",
+  "file": "lean/Sheaf/NumberTheory/Padics/CoefficientExtensionSmallLog.lean",
+  "statement": "def coefficientExtensionSmallLog (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (x : E) : E",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "Padic.coefficientExtensionSmallUnits",
+   "Padic.coefficientExtensionSmallLog"
+  ],
+  "note": "Dependency supplied under §1(B) and the bottom-up missing-node authorization. No lean binding was recorded. The blueprint names PadicAlgCl.smallLog/smallUnits, but those require Algebra E (PadicAlgCl ℓ), hence an additional embedding not supplied for the arbitrary finite extension of the item. This module gives the same small-unit domain using the recorded coefficientExtensionIntegers and the identical logarithm series in the uniquely extended spectral-norm topology, without assuming an embedding. The small-unit domain is a set of units; the item states additivity directly and requires no separate subgroup construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9c1b2a7b",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion clause against the node and its deps: the finite-type base (GeometricallyConnected, IsSeparated, LOFT+QC); the recorded weilGroup/weilGroupDeg on Aut(fiber x); Pi = ker deg per the exact-sequence node; E finite over Q_l with the spectral-norm topology (the recorded absolute value), universe v independent of u; chi a MonoidHom continuous into E; deg s = 1; exists N r >= 1; chi(g)^N in coefficientExtensionSmallUnits; lam = smallLog(chi(g)^N - 1); continuity; additivity; both conjugations. Compiled probes confirmed the subtype topology on Aut x Multiplicative Z with Z discrete, and conjNormal s g = s*g*s^-1. The sk-d-real-log dependency module is a valid 1(B) repair: upstream PadicAlgCl.smallLog needs an embedding of E; the series and the 1+l^2 O_E domain are faithful and built on the recorded integer ring, with real data; only the lean fields of the two nodes changed. Both files compile clean through nt_compile.py --json, and an error-control copy showed the tool reports errors. Docstrings give source and blueprint id, the only proof is sorry, statement fields match the files verbatim, and both report sections are present. Informational: the side tree's WeilGroup.exists_smallLog_pow_hom carries this blueprint id, contrary to the worker's search note, but it is a non-exact variant (axiomatized curve Weil group, chosen embedding), so the new module stands; the docstring proof plan has 5 numbered steps for the node's 6, with all content present."
  }
 }
