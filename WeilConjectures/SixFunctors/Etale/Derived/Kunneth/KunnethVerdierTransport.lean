@@ -6,8 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapIhom
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalGeneral
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 
@@ -43,7 +45,7 @@ the internal hom of the derived category is very expensive.
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory MonoidalClosed
+open CategoryTheory Limits MonoidalCategory MonoidalClosed Opposite
 
 open scoped CategoryTheory.Functor
 
@@ -172,6 +174,85 @@ lemma isIso_pairingKunnethMap_pulledBackPairing_rightDerivedUpperShriek_unit (φ
     (𝟙_ _)).1 (Functor.map_isIso _ _)
 
 end Transport
+
+section KunnethVerdierMap
+
+/-! The Künneth map of the pulled back evaluation pairing, written with `derivedTensor` and
+`derivedHom`, so that it can be used at `A = ModuleCat Λ` without comparing monoidal instances
+(see the implementation notes of `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`). -/
+
+variable {P : Scheme.{u}}
+
+variable (A) in
+/-- The **Künneth–Verdier map** (`thm-trf-kunneth-verdier`) of `φ : P ⟶ Y` at `S ∈ D(P_ét)`:
+`S ⊗ᴸ Lφ^* RHom(N, ω) ⟶ RHom(Lφ^* N, S ⊗ᴸ Lφ^* ω)`, the Künneth map of the pulled back
+evaluation pairing. For `φ` the second projection of `X ×_k Y`, `ω = ω_Y` and `S = Lp^* M` it is
+the map `κ : M ⊠ 𝔻_Y N ⟶ RHom(p_Y^* N, Lp^* M ⊗ᴸ Lq^* ω_Y)`. -/
+noncomputable def kunnethVerdierMap (φ : P ⟶ Y)
+    (S : _root_.DerivedCategory (Sheaf P.smallEtaleTopology A)) :
+    ((derivedTensor A P).obj S).obj ((L((φ)^*[A])).obj ((RHom(Y)[A].obj (op N)).obj ω)) ⟶
+      (RHom(P)[A].obj (op ((L((φ)^*[A])).obj N))).obj
+        (((derivedTensor A P).obj S).obj ((L((φ)^*[A])).obj ω)) :=
+  pairingKunnethMap (pulledBackPairing A N ω φ) S
+
+/-- Whether the Künneth–Verdier map is invertible only depends on `S` up to isomorphism
+(`thm-trf-kunneth-verdier`). -/
+lemma isIso_kunnethVerdierMap_iff_of_iso (φ : P ⟶ Y)
+    {S S' : _root_.DerivedCategory (Sheaf P.smallEtaleTopology A)} (e : S ≅ S') :
+    IsIso (kunnethVerdierMap A N ω φ S) ↔ IsIso (kunnethVerdierMap A N ω φ S') :=
+  isIso_pairingKunnethMap_iff_of_iso _ e
+
+/-- The Künneth–Verdier map only depends on the morphism `φ` (`thm-trf-kunneth-verdier`). -/
+lemma isIso_kunnethVerdierMap_congr {φ φ' : P ⟶ Y} (h : φ = φ')
+    (S : _root_.DerivedCategory (Sheaf P.smallEtaleTopology A)) :
+    IsIso (kunnethVerdierMap A N ω φ S) ↔ IsIso (kunnethVerdierMap A N ω φ' S) := by
+  subst h; rfl
+
+/-- **Transport along `Rg^!`** of the Künneth–Verdier map (`thm-trf-kunneth-verdier`): if the
+tensor maps of `Rg^!` at `(S, Lφ^* RHom(N, ω))` and `(S, Lφ^* ω)` are invertible, then `Rg^!` of
+the Künneth–Verdier map of `φ` at `S` is invertible if and only if the Künneth–Verdier map of
+`g ≫ φ` at `Rg^! S` is. -/
+lemma isIso_map_kunnethVerdierMap_iff {P' : Scheme.{u}} (g : P' ⟶ P) [HasCompactification g]
+    [(R(g)_![A]).IsLeftAdjoint] [IsIso (projectionMap A g)]
+    (hassoc : ProjectionMapAssociativity A g) (φ : P ⟶ Y)
+    (S : _root_.DerivedCategory (Sheaf P.smallEtaleTopology A))
+    (h₁ : IsIso (rightDerivedUpperShriekTensorMap g S
+      ((L((φ)^*[A])).obj ((RHom(Y)[A].obj (op N)).obj ω))))
+    (h₂ : IsIso (rightDerivedUpperShriekTensorMap g S ((L((φ)^*[A])).obj ω))) :
+    IsIso ((R(g)^![A]).map (kunnethVerdierMap A N ω φ S)) ↔
+      IsIso (kunnethVerdierMap A N ω (g ≫ φ) ((R(g)^![A]).obj S)) :=
+  @isIso_map_pairingKunnethMap_pulledBackPairing_iff _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ N ω _ _ g _ _
+    _ hassoc φ S h₁ h₂
+
+/-- **The Künneth–Verdier map at `Rφ^! Λ`** (`thm-trf-kunneth-verdier`): it is invertible as soon
+as the tensor maps of `Rφ^!` at `(Λ, RHom(N, ω))` and `(Λ, ω)` are, being the transport along
+`Rφ^!` of the Künneth map of the evaluation pairing at the unit. -/
+lemma isIso_kunnethVerdierMap_rightDerivedUpperShriek_unit (φ : P ⟶ Y)
+    [HasCompactification φ] [(R(φ)_![A]).IsLeftAdjoint] [IsIso (projectionMap A φ)]
+    (hassoc : ProjectionMapAssociativity A φ)
+    (h₁ : IsIso (rightDerivedUpperShriekTensorMap φ (𝟙_ _) ((RHom(Y)[A].obj (op N)).obj ω)))
+    (h₂ : IsIso (rightDerivedUpperShriekTensorMap φ (𝟙_ _) ω)) :
+    IsIso (kunnethVerdierMap A N ω φ ((R(φ)^![A]).obj (𝟙_ _))) :=
+  have : IsIso (rightDerivedUpperShriekTensorMap φ (𝟙_ _) ((ihom N).obj ω)) := h₁
+  have := h₂
+  isIso_pairingKunnethMap_pulledBackPairing_rightDerivedUpperShriek_unit N ω φ hassoc
+
+/-- **Tensoring with a dualizable object** (`thm-trf-kunneth-verdier`): if `D` has a right dual
+`F` on `X` and the Künneth–Verdier map of `φ` is invertible at `S`, then it is invertible at
+`Lp^* D ⊗ᴸ S` for every `p : P ⟶ X`. -/
+lemma isIso_kunnethVerdierMap_derivedTensor_of_exactPairing
+    {X : Scheme.{u}} (φ : P ⟶ Y) (p : P ⟶ X)
+    (D F : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    [ExactPairing D F] (S : _root_.DerivedCategory (Sheaf P.smallEtaleTopology A))
+    (h : IsIso (kunnethVerdierMap A N ω φ S)) :
+    IsIso (kunnethVerdierMap A N ω φ (((derivedTensor A P).obj ((L((p)^*[A])).obj D)).obj S)) := by
+  obtain ⟨_⟩ := nonempty_monoidal_leftDerivedUpperStar A p
+  let _ := ExactPairing.map L((p)^*[A]) D F
+  have : HasRightDual ((L((p)^*[A])).obj D) := ⟨(L((p)^*[A])).obj F⟩
+  have : IsIso (pairingKunnethMap (pulledBackPairing A N ω φ) S) := h
+  exact isIso_pairingKunnethMap_tensor_left _ _ _
+
+end KunnethVerdierMap
 
 end Etale
 
