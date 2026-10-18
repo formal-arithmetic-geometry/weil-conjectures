@@ -86,6 +86,15 @@ theorem additive_total_transport
             (additiveTotalComparison F B hB hP).hom ≫
               (F.mapHomologicalComplex (ComplexShape.up ℤ)).map
                 (total.map φ (ComplexShape.up ℤ)) := by
-  sorry
+  have hB : B.HasTotal (ComplexShape.up ℤ) := hasTotal_of_isStrictlyLE B b 0
+  have hP : F.PreservesTotalComplex B (ComplexShape.up ℤ) :=
+    preservesTotal_of_isStrictlyLE B b 0 F
+  refine ⟨hB, hP, inferInstance, ?_⟩
+  intro B' b' _ _ φ
+  have hB' : B'.HasTotal (ComplexShape.up ℤ) := hasTotal_of_isStrictlyLE B' b' 0
+  have hP' : F.PreservesTotalComplex B' (ComplexShape.up ℤ) :=
+    preservesTotal_of_isStrictlyLE B' b' 0 F
+  refine ⟨hB', hP', ?_⟩
+  exact mapTotalIso_hom_naturality F φ (ComplexShape.up ℤ)
 
 end HomologicalComplex₂
