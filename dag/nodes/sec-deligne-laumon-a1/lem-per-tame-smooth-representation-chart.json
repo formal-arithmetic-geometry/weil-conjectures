@@ -11,9 +11,92 @@
   "def-sbc-smooth-morphisms",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $x$ for the underlying point, $R=\\mathcal O_{X,x}$, $k=\\kappa(x)$, and $D=k\\otimes_R\\Omega^1_{X/B,x}$. Every element of $G$ fixes $x$ and acts identically on $k$: the embedding of $k$ into the geometric residue field is injective and is fixed by the hypothesis on $\\bar x$. Thus the actions on $R$ and $D$ are $\\Lambda$-linear, and the action on $D$ is $k$-linear. The universal derivation $\\delta:R\\to D$ is equivariant (differentiate the equivariance of $h$). By [def-sc-relative-differential-sheaf], the elements $\\delta(f)$, $f\\in R$, span $D$ over $k$. By [lem-ag-smooth-relative-differentials-finite-locally-free], $D$ has finite dimension. This uses relative differentials, without identifying them with a maximal-ideal quotient.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "lem-ag-smooth-relative-differentials-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, second assertion, printed p.138, equations (4)--(5) and Jacobian criterion; localization of the coefficient ring in X 1.3, printed pp.139--140. Adaptation using relative differential generators at the given point."
+   }
+  },
+  {
+   "text": "Use [lem-per-local-cyclotomic-group-algebra-split] to choose matrix units $E^i_{ab}\\in\\Lambda[G]$ for all its matrix factors, acting on $R$ and $D$. For each $i$, the vectors $E^i_{11}\\delta(f)=\\delta(E^i_{11}f)$ span $E^i_{11}D$ over $k$, since $G$ fixes $k$. Choose $f_{i\\ell}\\in R$ so that these vectors form a basis, with $1\\leq\\ell\\leq m_i$; $m_i=0$ is permitted. Set $V=\\bigoplus_i(\\Lambda^{d_i})^{m_i}$, with its $\\Lambda[G]$-action through the matrix decomposition, and define $\\phi:V\\to R$ by $\\phi(e^i_{a\\ell})=E^i_{a1}f_{i\\ell}$. The identities $E^j_{bc}E^i_{a1}=0$ for $j\\ne i$ and $E^i_{bc}E^i_{a1}=\\delta_{ca}E^i_{b1}$ prove that $\\phi$ is equivariant. The images of the standard basis under $\\delta\\phi$ form a $k$-basis of $D$: indeed $D=\\bigoplus_{i,a}E^i_{aa}D$, and $E^i_{a1}:E^i_{11}D\\to E^i_{aa}D$ has inverse $E^i_{1a}$. Consequently $k\\otimes_\\Lambda V\\to D$ is an isomorphism. The displayed direct sum already gives a finite basis of $V$; no freeness theorem over local rings is needed.",
+   "uses": [
+    "lem-per-local-cyclotomic-group-algebra-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, second assertion, printed p.138, equations (4)--(5) and Jacobian criterion; localization of the coefficient ring in X 1.3, printed pp.139--140. Adaptation using relative differential generators at the given point."
+   }
+  },
+  {
+   "text": "There are finitely many functions $\\phi(e^i_{a\\ell})$ and finitely many equivariance identities, one for each $g\\in G$ and basis vector. Represent the functions by sections on a common open neighbourhood of $x$. An equality of germs holds on a smaller open neighbourhood, so shrink once for each of these finitely many identities. Intersect all the translates of the resulting open: every translate contains $x$, and their finite intersection $U$ is open and $G$-stable. Restrictions of the sections then define an equivariant $\\Lambda$-linear map $V\\to\\Gamma(U,\\mathcal O_U)$. No affine intersection or invariant affine neighbourhood is assumed. Actions on functions use inverse pullback, so that they are left actions; all matrix-unit and equivariance identities use this convention.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, second assertion, printed p.138, equations (4)--(5) and Jacobian criterion; localization of the coefficient ring in X 1.3, printed pp.139--140. Adaptation using relative differential generators at the given point."
+   }
+  },
+  {
+   "text": "The symmetric-algebra presentation in the statement extends this linear map uniquely to a $\\Lambda$-algebra map $\\operatorname{Sym}_\\Lambda(V)\\to\\Gamma(U,\\mathcal O_U)$. Together with $h|_U$ this defines $c:U\\to B\\times_{\\operatorname{Spec}\\Lambda}\\operatorname{Spec}\\operatorname{Sym}_\\Lambda(V)$ over $B$. Its equivariance is checked on constants and the generators $[v]$, where it is exactly the equivariance proved in Step 3. Choose the displayed finite basis of $V$; it identifies its symmetric algebra with a polynomial algebra, and the coordinate differentials of $c$ at $x$ are precisely the basis of $D$ from Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, second assertion, printed p.138, equations (4)--(5) and Jacobian criterion; localization of the coefficient ring in X 1.3, printed pp.139--140. Adaptation using relative differential generators at the given point."
+   }
+  },
+  {
+   "text": "Take an affine standard smooth chart $\\operatorname{Spec}A\\to\\operatorname{Spec}C$ for $h|_U$ at $x$, using [lem-weil-pbc-smooth-locally-standard-smooth]. Write its presentation as $A=C[z_1,\\ldots,z_n]/(F_1,\\ldots,F_c)$ with the first $c$ by $c$ Jacobian minor invertible. By [lem-weil-pbc-standard-smooth-kahler-basis], $\\Omega_{A/C}$ has basis $\\mathrm dz_{c+1},\\ldots,\\mathrm dz_n$. Put $d=n-c=\\dim_kD$, and lift the $d$ coordinate functions of $c$ to polynomials $H_1,\\ldots,H_d\\in C[z_1,\\ldots,z_n]$. Their differential classes form a basis at $x$ by Step 2. Therefore the $n$ rows $\\mathrm dF_1,\\ldots,\\mathrm dF_c,\\mathrm dH_1,\\ldots,\\mathrm dH_d$ form a basis of $k^n$: the first $c$ are independent by the invertible minor, and the last $d$ are a basis modulo their span. The determinant $J$ of this square matrix is consequently nonzero in $k$.",
+   "uses": [
+    "lem-weil-pbc-smooth-locally-standard-smooth",
+    "lem-weil-pbc-standard-smooth-kahler-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V7, lemma-smooth-locally-standard-smooth; Tag 02GU, lemma-etale-at-point, condition (8); Algebra 00T7, lemma-standard-smooth. The specified-coordinate square-Jacobian calculation."
+   }
+  },
+  {
+   "text": "As a $C[T_1,\\ldots,T_d]$-algebra, $A[1/J]$ has the presentation with variables $z_1,\\ldots,z_n,w$ and relations $F_1,\\ldots,F_c,H_1-T_1,\\ldots,H_d-T_d,wJ-1$. Its square Jacobian determinant is $J^2$, up to sign: expand along the last column, whose only nonzero entry is $J$ in the last row. It is a unit. Thus [lem-exc-etale-jacobian-presentation] and [def-exc-jacobian-presentation] make this algebra etale over $C[T_1,\\ldots,T_d]$. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], $c$ is etale on this open neighbourhood $U_0$ of $x$. Replace $U_0$ by $\\bigcap_{g\\in G}gU_0$, an invariant open containing $x$ and contained in $U_0$. Etaleness persists on this restriction by the local definition [def-weil-etale-morphism]. This gives the required pointed equivariant etale neighbourhood; the base is unchanged. Projection to $B$ is $h$ by Step 4. For $D=0$, $V=0$ and $d=0$; the same square-Jacobian argument proves that $h$ is etale near $x$.",
+   "uses": [
+    "lem-exc-etale-jacobian-presentation",
+    "def-exc-jacobian-presentation",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V7, lemma-smooth-locally-standard-smooth; Tag 02GU, lemma-etale-at-point, condition (8); Algebra 00T7, lemma-standard-smooth. The specified-coordinate square-Jacobian calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-per-local-cyclotomic-group-algebra-split",
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "lem-exc-etale-jacobian-presentation",
+  "def-exc-jacobian-presentation",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, second assertion, printed p.138, equations (4)--(5) and Jacobian criterion; localization of the coefficient ring in X 1.3, printed pp.139--140.",
+  "note": "The representation-and-Jacobian route of the source is retained; matrix units choose differential generators at the original point and avoid the radicial base change and rational-point maximal-ideal quotient used in the source."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +125,38 @@
    "results": "{\"t\": \"2026-10-18T21:39:48Z\", \"tool\": \"grep\", \"query\": \"equivariant.*(smooth|etale)|lineariz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary scheme smoothness and etaleness, set-theoretic fixed points, abstract Tor vanishing for projectives, and monoid-algebra ring maps do not give the equivariant logarithmic or regular-center blowup assertion here.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*(smooth|etale)|lineariz",
+   "results": "{\"t\": \"2026-10-18T22:17:05Z\", \"tool\": \"grep\", \"query\": \"equivariant.*(smooth|etale)|lineariz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Ordinary smooth charts and etale loci have no group action or prescribed equivariant free representation; manifold tangent coordinates are a different category.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant etale coordinates of a smooth morphism near a point fixed by a finite tame group",
+   "results": "{\"t\": \"2026-10-18T22:17:05Z\", \"tool\": \"leansearch\", \"query\": \"Equivariant etale coordinates of a smooth morphism near a point fixed by a finite tame group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.Etale\", \"AffineBasis.coord_smul\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale\", \"inTangentCoordinates_eq\", \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"MDifferentiable.coordChangeL\"], \"digest\": \"b7f501d754085646\"}; Ordinary smooth charts and etale loci have no group action or prescribed equivariant free representation; manifold tangent coordinates are a different category.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tame finite group action on a smooth scheme morphism at a fixed geometric point admits equivariant etale coordinates in a free cyclotomic representation",
+   "results": "{\"t\": \"2026-10-18T22:17:06Z\", \"tool\": \"leanfinder\", \"query\": \"Tame finite group action on a smooth scheme morphism at a fixed geometric point admits equivariant etale coordinates in a free cyclotomic representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"IsArithFrobAt.exists_of_isInvariant\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"arithFrobAt\", \"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"d34b5dc54e5890b8\"}; Ordinary smooth charts and etale loci have no group action or prescribed equivariant free representation; manifold tangent coordinates are a different category.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth variety with finite linearly reductive group action has an equivariant etale map to its tangent representation",
+   "results": "{\"t\": \"2026-10-18T22:17:07Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth variety with finite linearly reductive group action has an equivariant etale map to its tangent representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"641283763fb28960\"}; Ordinary smooth charts and etale loci have no group action or prescribed equivariant free representation; manifold tangent coordinates are a different category.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-fixed-locus-log-chart",
@@ -72,5 +183,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-tame-smooth-representation-chart",
+  "worker": "stage1",
+  "summary": "Retain the complete equivariant chart statement. Separate the integral split-group-algebra input as one searched statement-only node. Construct the finite free representation and germ map using matrix units on relative differentials, then spread finitely many identities to an invariant open. Prove the prescribed-coordinate square-Jacobian calculation explicitly from existing standard-smooth, differential-basis and etale-presentation nodes. No rational or closed point assumption or radicial base change is introduced.",
+  "blueprint": "Realizes the existing ancestor chain from lem-per-artin-gabber-affine-curve Proof Step 3 to Gabber preparation X 1.2 second assertion: relative tangent representation (Steps 1--2), equation (5) as equivariant functions (Step 3), symmetric-algebra map and Jacobian criterion (Steps 4--6).",
+  "tool_uses": [
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic finite rank of smooth relative differentials; this unit has no algebraic-geometric differential-sheaf rank lemma."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-locally-standard-smooth",
+    "why": "Generic affine standard-smooth chart theorem, used only to test the already constructed coordinates by the Jacobian criterion."
+   },
+   {
+    "node": "lem-weil-pbc-standard-smooth-kahler-basis",
+    "why": "Generic differential basis calculation in a standard smooth algebra, needed to compute the square determinant."
+   },
+   {
+    "node": "lem-exc-etale-jacobian-presentation",
+    "why": "Generic square-Jacobian criterion, used with the explicitly displayed equations."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "Generic ring/scheme translation for etaleness on the calculated affine chart."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "lem-exc-etale-jacobian-presentation",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-27cbc74bf",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-27cbc74bf (reviewer sub-agent of L); spot-checked: Read in full: the item's 6 steps, the new node lem-per-local-cyclotomic-group-algebra-split, every cited statement, and ILO X Prop. 1.2 second assertion and X 1.3 (pp.136-140). The item statement and stmt_deps are byte-identical to base. Steps 1-2: the geometric-point fixedness makes the actions k-linear on D, and delta is Lambda-linear and equivariant. The matrix units E^i_{ab} give an equivariant phi with k⊗V ≅ D; I checked the E_{a1}/E_{1a} block isomorphisms. Step 3 spreads out to an invariant open with no affineness assumption. Step 4 is the universal property of Sym. Step 5: the rows dF, dH form a basis by a dimension count from the cited Kähler-basis node, so 'elementary' is acceptable. Step 6: in the square presentation C[T][z,w]/(F,H-T,wJ-1), c+d=n, so it has n+1 equations in n+1 variables. Its determinant is J^2. The etale-presentation and ring/scheme nodes then apply, and the result is restricted to ∩gU_0. Avoiding ILO's radicial base change and its formula (4) is legitimate: (4) fails at a non-closed point fixed by C2 acting by (s,t)->(s,-t) on A^2. The new node is true (Brauer splitting plus a maximal order when |G| is invertible). I tested it on G=1, C2, S3 with N=6, Q8 with N=4, and p=0. Its form is correct (B1-B9). It does not restate the item. A search of all node statements for group algebra, group ring, Maschke, Brauer, splitting field, matrix units and cyclotomic found no duplicate; the nearest is lem-per-semisimple-algebra-matrix-division, which is the field case with division factors. There is no cycle. No SGA source is cited. The five declared off-unit tool_uses are generic black boxes and accepted."
  }
 }
