@@ -1,0 +1,81 @@
+{
+ "id": "lem-per-componentwise-normalization-affine-charts",
+ "kind": "statement",
+ "title": "Affine charts of componentwise normalization",
+ "statement": "Let $X$ be a reduced locally Noetherian scheme [def-pc-reduced-scheme, pqf-def-locnoeth], and let $\\nu:X^\\nu\\to X$ be its componentwise normalization [def-weil-pbc-reduced-normalization]. For an affine open $U=\\operatorname{Spec}A\\subseteq X$ [def-weil-affine-spectrum], enumerate the finitely many minimal prime ideals of $A$ (a minimal prime contains no strictly smaller prime ideal) without repetitions as $\\mathfrak p_1,\\ldots,\\mathfrak p_t$. Put $K_i=\\operatorname{Frac}(A/\\mathfrak p_i)$, the field of fractions of the domain $A/\\mathfrak p_i$, and let $B_i$ be its integral closure in $K_i$ [def-weil-pbc-integral-closure]. There are canonical isomorphisms of $U$-schemes $\\nu^{-1}(U)\\simeq\\coprod_{i=1}^t\\operatorname{Spec}B_i\\simeq\\operatorname{Spec}(\\prod_{i=1}^t B_i)$ [lem-weil-pbc-scheme-coproduct-family]. Under these isomorphisms, the structural ring map is $A\\to\\prod_i B_i$, $a\\mapsto(a\\bmod\\mathfrak p_i)_i$. If $U$ is empty then $t=0$, the product is the zero ring and the coproduct is the empty scheme.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035P (lemma-description-normalization), parts (1), (3), (4), and Tag 0CDV (lemma-normalization-in-terms-of-components); the finite-product spectrum is the disjoint union of its factor spectra."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced locally Noetherian scheme, the inverse image of an affine open under componentwise normalization is the spectrum of the product of the integral closures of its minimal-prime quotients in their fraction fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  (TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.fromNormalization f).base).obj ↑U =\\n    AlgebraicGeometry.Scheme.Hom.opensRange (\", \"doc\": \"For any affine open subset $U$ of the target scheme $Y$, the preimage of $U$ under the normalization morphism $f.\\text{fromNormalization}$ is equal to the open subset of the normalization scheme obtain\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj ↑U).ι\\n      (AlgebraicGeometry.Scheme.Hom.toNormalization f) =\\n\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\", \"doc\": \"For a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, the composition of the open cover morphism of the normalization with the normalization morphism to $ Y $ and an arbitrary mor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization interfaces do not identify the componentwise absolute normalization with the minimal-prime integral-closure product; no excellence or Nagata finiteness theorem is returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization on an affine open is the disjoint union of spectra of the integral closures of the irreducible components",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover_X\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.AffineOpenCover) (j : 𝒰.I₀), 𝒰.openCover.X j = AlgebraicGeometry.Spec (𝒰.X j)\", \"doc\": \"For any scheme $X$ and its affine open cover $\\\\mathcal{U}$, each component of the associated open cover at index $j \\\\in \\\\mathcal{U}.I_0$ is the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{U}.X(j))$, w\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(U : Y.affineOpens) : f.fromNormalization ⁻¹ᵁ U = (f.normalizationOpenCover.f U).opensRange\", \"doc\": \"For any affine open subset $U$ of the target scheme $Y$, the preimage of $U$ under the normalization morphism $f.\\text{fromNormalization}$ is equal to the open subset of the normalization scheme obtain\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsIntegral X] : IrreducibleSpace X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(U : Y.affineOpens) :\\n  letI := (f.app U.1).hom.toAlgebra\\n  (f ⁻¹ᵁ U.1).ι ≫ f.toNormalization =\\n    (f ⁻¹ᵁ U.1).toSpecΓ ≫\\n      Spec.map (CommRingCat.ofHom <| integralClosure Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1) |>.val.toRingHom) ≫\\n        f.normalizationOpenCover.f U\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization interfaces do not identify the componentwise absolute normalization with the minimal-prime integral-closure product; no excellence or Nagata finiteness theorem is returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizationObjIso\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationObjIso\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {U : Y.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) : (AlgebraicGeometry.Scheme.Hom.normalization f).presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map (AlgebraicGeometry.Schem\", \"doc\": \"The sections of the relative normalization on the preimage of an affine open is isomorphic to\\nthe integral closure.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationObjIso_hom_val\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {U : Y.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.normalizationObjIso f hU).hom (CommRingCat.ofHom (integralClo\", \"doc\": \"\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization interfaces do not identify the componentwise absolute normalization with the minimal-prime integral-closure product; no excellence or Nagata finiteness theorem is returned"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationObjIso|normalization.*[Cc]oprod|normalization.*[Aa]ffine",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"143\", \"text\": \"      |>.val.toRingHom) ≫ f.normalizationOpenCover.f U) fun {U V : Y.AffineZariskiSite} i ↦ by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"161\", \"text\": \"lemma ι_toNormalization (U : Y.affineOpens) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"178\", \"text\": \"lemma ι_fromNormalization (U : Y.affineOpens) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"184\", \"text\": \"lemma fromNormalization_preimage (U : Y.affineOpens) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"217\", \"text\": \"/-- The sections of the relative normalization on the preimage of an affine open is isomorphic to\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"132\", \"text\": \"      (Scheme.Hom.normalizationCoprodIso (pullback.snd f fT) H).symm ≪≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"134\", \"text\": \"    let ι : V.toScheme ⟶ V ⨿ (W.ι ≫ pullback.snd f fT).normalization := coprod.inl\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"139\", \"text\": \"      simp [ι, e, Scheme.Hom.normalizationCoprodIso]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"147\", \"text\": \"        replace hab : ι b = ((W.ι ≫ pullback.snd f fT).toNormalization ≫ coprod.inr) a := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"151\", \"text\": \"          simpa [-Scheme.Hom.comp_base, Scheme.Hom.normalizationCoprodIso,\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization interfaces do not identify the componentwise absolute normalization with the minimal-prime integral-closure product; no excellence or Nagata finiteness theorem is returned"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-excellent-normalization-preparation",
+  "date": "2026-10-18",
+  "group": "Q17"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.normalizationObjIso; AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage",
+  "file": "Mathlib/AlgebraicGeometry/Normalization.lean",
+  "reason": "Lines 184 and 220 describe relative normalization of a qcqs morphism. The identification of componentwise absolute normalization and the product indexed by the minimal primes is additional mathematics, so these are not an exact match or a one-line specialization."
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, dimension-normalized Verdier duality, expanded through lem-per-potential-dualizing-uniqueness Step 3: the affine algebra of the finite normalization used for the normal/non-normal decomposition.",
+   "via": [
+    "lem-per-excellent-normalization-preparation",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

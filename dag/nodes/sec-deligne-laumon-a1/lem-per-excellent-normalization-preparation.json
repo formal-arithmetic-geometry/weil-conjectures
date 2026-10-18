@@ -2,7 +2,7 @@
  "id": "lem-per-excellent-normalization-preparation",
  "kind": "statement",
  "title": "Finite normalization over a dense open of an excellent scheme",
- "statement": "Let $X$ be a reduced Noetherian excellent scheme [def-pc-reduced-scheme, def-exc-excellent-ring], and let $\\nu:X^\\nu\\to X$ be its componentwise normalization [def-weil-pbc-reduced-normalization]. Then $\\nu$ is finite and surjective [def-weil-finite-integral-morphism], $X^\\nu$ is Noetherian excellent, and every local ring of $X^\\nu$ is an integrally closed domain [def-weil-pbc-normal-ring]. There is a dense open subscheme $U\\subseteq X$ containing every generic point of $X$ such that $\\nu^{-1}U\\to U$ is an isomorphism [def-weil-open-immersion]. The empty scheme is allowed, with $U$ empty.",
+ "statement": "Let $X$ be a reduced Noetherian excellent scheme [def-pc-reduced-scheme, def-exc-excellent-ring], where Noetherian means locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme] and excellent means that every affine open has excellent coordinate ring, and let $\\nu:X^\\nu\\to X$ be its componentwise normalization [def-weil-pbc-reduced-normalization]. Then $\\nu$ is finite and surjective [def-weil-finite-integral-morphism], $X^\\nu$ is Noetherian excellent, and every local ring of $X^\\nu$ is an integrally closed domain [def-weil-pbc-normal-ring]. There is a dense open subscheme $U\\subseteq X$ containing every generic point of $X$ [def-sc-generic-point] such that $\\nu^{-1}U\\to U$ is an isomorphism [def-weil-open-immersion]. The empty scheme is allowed, with $U$ empty.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tags 035S (lemma-nagata-normalization), 035Q (lemma-normalization-normal), and 0BAJ (lemma-birational-isomorphism-over-dense-open); excellence via More on Algebra Tags 07QV and 07QU"
@@ -13,11 +13,152 @@
   "def-weil-pbc-reduced-normalization",
   "def-weil-finite-integral-morphism",
   "def-weil-pbc-normal-ring",
+  "def-weil-open-immersion",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-generic-point"
+ ],
+ "proof": [
+  {
+   "text": "If $X=\\varnothing$, its componentwise normalization is the empty coproduct, its map is finite and surjective, all local-ring conditions are vacuous, and $U=\\varnothing$ works. Henceforth allow nonempty affine opens. On every affine open $V=\\operatorname{Spec}A\\subseteq X$, the affine-chart lemma identifies $\\nu^{-1}(V)$ with $\\operatorname{Spec}(\\prod_i B_i)$, where $B_i$ is the integral closure of $A/\\mathfrak p_i$ in $K_i=\\operatorname{Frac}(A/\\mathfrak p_i)$ and the $\\mathfrak p_i$ are the finitely many minimal primes. In particular $\\nu$ is affine, and the same chart is the disjoint union of the open subschemes $\\operatorname{Spec}B_i$.",
+   "uses": [
+    "def-weil-pbc-reduced-normalization",
+    "lem-per-componentwise-normalization-affine-charts",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-description-normalization (035P), affine description; empty componentwise construction"
+   }
+  },
+  {
+   "text": "The ring $A$ is excellent by hypothesis, hence quasi-excellent by definition and Nagata by the cited excellence theorem. Thus, by the definition of a Nagata ring, every $A/\\mathfrak p_i$ is N-2. Apply its N-2 property to the degree-one extension $K_i/K_i$: each $B_i$ is a finite $A/\\mathfrak p_i$-module. Its module generators also generate it over $A$, since the $A$-action factors through the surjection $A\\to A/\\mathfrak p_i$. The finitely many tuples supported in one coordinate and containing these generators generate $\\prod_i B_i$ over $A$. Consequently every affine chart from Step 1 has a finite structural ring map, so $\\nu$ is finite by the definition of a finite morphism.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-nagata-normalization (035S), direct affine proof; more-algebra.tex lemma-quasi-excellent-nagata (07QV)"
+   }
+  },
+  {
+   "text": "For each $i$, the inclusion $A/\\mathfrak p_i\\hookrightarrow B_i\\subseteq K_i$ is injective and integral, since $B_i$ consists of the elements integral over $A/\\mathfrak p_i$. Lying over gives a prime of $B_i$ above every prime of $A/\\mathfrak p_i$. Thus the image of $\\operatorname{Spec}B_i\\to\\operatorname{Spec}A$ is $V(\\mathfrak p_i)$. These are the irreducible components of $\\operatorname{Spec}A$ and cover it. The affine description in Step 1 therefore makes $\\nu$ surjective on every affine open and hence on $X$.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-per-componentwise-normalization-affine-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-normalization-normal (035Q)(2), surjectivity; algebra.tex lying over for integral injections"
+   }
+  },
+  {
+   "text": "Apply the integral-closure normal-domain lemma to $A/\\mathfrak p_i$ and the degree-one extension $K_i/K_i$. It gives that $B_i$ is a normal domain. Every point of $X^\\nu$ lies in one of the affine open summands $\\operatorname{Spec}B_i$ of Step 1. Its local ring is $(B_i)_{\\mathfrak q}$ by the affine stalk theorem, and this is a normal domain by localization of normal domains (the prime complement does not contain zero). Thus every local ring of $X^\\nu$ is an integrally closed domain.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-per-componentwise-normalization-affine-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-normalization-normal (035Q)(1); algebra.tex lemma-integral-closure-in-normal (034L) and lemma-localize-normal-domain (00GY)"
+   }
+  },
+  {
+   "text": "By Step 2 each $B_i$ is finite as an $A$-module. A finite set of module generators also generates $B_i$ as an $A$-algebra, so finite-type stability of excellence gives that $B_i$ is excellent. The spectra of these rings, over all affine opens of $X$, form an affine open cover of $X^\\nu$. The excellence affine-cover theorem therefore gives excellence on every affine open of $X^\\nu$. To check global Noetherianness, choose a finite affine cover of $X$, using its quasi-compactness. Each inverse image has only finitely many of the affine summands in Step 1, and their excellent coordinate rings are Noetherian by definition. Together these give a finite affine cover of $X^\\nu$ by spectra of Noetherian rings. It is locally Noetherian by definition; it is quasi-compact because each affine is quasi-compact by the cited affine-scheme theorem and there are finitely many of them. This is precisely the Noetherian-scheme convention in the statement.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "def-exc-excellent-ring",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "lemma-finite-type-over-excellent (07QU); morphisms.tex lemma-locally-excellent (0HAB); properties.tex definition-noetherian (01OV)"
+   }
+  },
+  {
+   "text": "Enumerate the finitely many irreducible components $Z_1,\\ldots,Z_r$ of $X$, with their unique generic points $\\eta_i$ supplied by scheme sobriety. For each $i$, the open $X\\setminus\\bigcup_{j\\ne i}Z_j$ contains $\\eta_i$ and meets no other component. The affine-open basis theorem supplies an affine open neighbourhood $W_i=\\operatorname{Spec}R_i$ of $\\eta_i$ inside it. Its topological space is an open subspace of the irreducible space $Z_i$, so is irreducible; it is reduced as an open of $X$. Hence $R_i$ is a domain. These $W_i$ need not cover $X$; only the generic points must lie in them.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-birational-isomorphism-over-dense-open (0BAJ), reduction to an irreducible affine open for each component"
+   }
+  },
+  {
+   "text": "On $W_i$, Step 1 has one summand: $\\nu^{-1}(W_i)=\\operatorname{Spec}C_i$, where $R_i\\subseteq C_i\\subseteq\\operatorname{Frac}(R_i)$ is the integral closure, finite over $R_i$ by Step 2. Choose module generators $c_1,\\ldots,c_m$, and write $c_j=a_j/b_j$ with $0\\ne b_j\\in R_i$. Let $s_i=\\prod_j b_j$, taking $s_i=1$ if the list is empty. Then $s_i\\ne0$ and every generator lies in $(R_i)_{s_i}$, so $(C_i)_{s_i}\\subseteq(R_i)_{s_i}$; the reverse inclusion follows from $R_i\\subseteq C_i$, giving equality inside the fraction field. Integral closure commutes with localization, so the affine-chart lemma on $D(s_i)\\subseteq W_i$ identifies its inverse image with $\\operatorname{Spec}(C_i)_{s_i}$ and its restriction map with this equality. It is an isomorphism. The open $D(s_i)$ contains $\\eta_i$ because $s_i\\ne0$.",
+   "uses": [
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-birational-isomorphism-over-dense-open (0BAJ), finite birational affine case written out using module generators; algebra.tex lemma-integral-closure-localize (0307)"
+   }
+  },
+  {
+   "text": "Put $U=\\bigcup_{i=1}^r D(s_i)$, each principal open being viewed as an open of $X$ through $W_i$. The restriction of $\\nu$ over each $D(s_i)$ is an isomorphism by Step 7. Their inverse morphisms agree on overlaps: each is an inverse of the same restricted morphism, and a two-sided inverse is unique. Their continuous maps define a continuous map $U\\to\\nu^{-1}(U)$ because the domains are an open cover. Their maps on structure sheaves agree on overlaps and glue by the sheaf axiom; on stalks the resulting homomorphisms are the local inverse isomorphisms and hence local. This defines a scheme morphism, whose two composites are identities on the covering opens and thus globally. It is an inverse of $\\nu^{-1}(U)\\to U$. Every $\\eta_i$ belongs to $U$, so its closure contains every $Z_i=\\overline{\\{\\eta_i\\}}$ and is all of $X$. Thus $U$ is dense and has the required generic-point and isomorphism properties.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-birational-isomorphism-over-dense-open (0BAJ), assembly of the componentwise dense opens"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-reduced-normalization",
+  "lem-per-componentwise-normalization-affine-charts",
+  "def-weil-finite-integral-morphism",
+  "def-exc-excellent-ring",
+  "lem-exc-quasi-excellent-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-excellent-scheme-affine-cover",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-integral-closure-commutes-localization",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "lemma-nagata-normalization (035S), lemma-normalization-normal (035Q), and finite birational dense-open proof of lemma-birational-isomorphism-over-dense-open (0BAJ); excellence from more-algebra.tex lemma-finite-type-over-excellent (07QU) and lemma-quasi-excellent-nagata (07QV)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +187,38 @@
    "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"15\", \"text\": \"# Relative Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"17\", \"text\": \"Given a qcqs morphism `f : X ⟶ Y`, we define the relative normalization `f.normalization`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"19\", \"text\": \"- `f.toNormalization : X ⟶ f.normalization`: a dominant morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"20\", \"text\": \"- `f.fromNormalization : f.normalization ⟶ Y`: an integral morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"24\", \"text\": \"the map `X ⟶ T` factors through `f.normalization` uniquely.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.AlgebraicGeometry.Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"21\", \"text\": \"`f` to the relative normalization `X'` of `Y` in `X` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"26\", \"text\": \"- If `f` is itself quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"29\", \"text\": \"  If `f` is proper and quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an isomorphism,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"119\", \"text\": \"lemma Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a reduced Noetherian excellent scheme is finite surjective normal and is an isomorphism on a dense open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization interfaces do not identify the componentwise absolute normalization with the minimal-prime integral-closure product; no excellence or Nagata finiteness theorem is returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Nagata scheme has finite normalization and an excellent scheme has excellent normalization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsReduced X] : IsReduced f.normalization\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ f₁_1 : X ⟶ T) (e_f₁ : f₁ = f₁_1)\\n  (f₂ f₂_1 : T ⟶ Y) (e_f₂ : f₂ = f₂_1) [inst_2 : AlgebraicGeometry.IsIntegralHom f₂]\\n  (H : f =\", \"doc\": \"Given schemes $X, Y, T$ and morphisms $f: X \\\\to Y$, $f_1, f_1': X \\\\to T$, $f_2, f_2': T \\\\to Y$ such that $f_1 = f_1'$, $f_2 = f_2'$, and $f = f_1 \\\\circ f_2 = f_1' \\\\circ f_2'$, with $f$ quasi-compact, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [toIsLocallyNoetherian : AlgebraicGeometry.IsLocallyNoetherian X]\\n  [toCompactSpace : CompactSpace ↥X], AlgebraicGeometry.IsNoetherian X\", \"doc\": \"A scheme $X$ is Noetherian if it is locally Noetherian (admits an open cover by Noetherian schemes) and its underlying topological space is compact (every open cover has a finite subcover).\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization interfaces do not identify the componentwise absolute normalization with the minimal-prime integral-closure product; no excellence or Nagata finiteness theorem is returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", AlgebraicGeometry.IsFinite",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization interfaces do not identify the componentwise absolute normalization with the minimal-prime integral-closure product; no excellence or Nagata finiteness theorem is returned"
+  },
+  {
+   "tool": "grep",
+   "query": "excellent|nagata|normalization",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"15\", \"text\": \"# Relative Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"17\", \"text\": \"Given a qcqs morphism `f : X ⟶ Y`, we define the relative normalization `f.normalization`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"19\", \"text\": \"- `f.toNormalization : X ⟶ f.normalization`: a dominant morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"20\", \"text\": \"- `f.fromNormalization : f.normalization ⟶ Y`: an integral morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"24\", \"text\": \"the map `X ⟶ T` factors through `f.normalization` uniquely.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.AlgebraicGeometry.Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"21\", \"text\": \"`f` to the relative normalization `X'` of `Y` in `X` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"26\", \"text\": \"- If `f` is itself quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"29\", \"text\": \"  If `f` is proper and quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an isomorphism,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"119\", \"text\": \"lemma Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: relative normalization interfaces do not identify the componentwise absolute normalization with the minimal-prime integral-closure product; no excellence or Nagata finiteness theorem is returned"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-uniqueness",
@@ -71,5 +240,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-excellent-normalization-preparation",
+  "worker": "stage1",
+  "summary": "Proved the normalization preparation from its affine integral-closure product description. Excellence gives Nagata rings and hence finite closure modules; lying over gives surjectivity, localization gives normal stalks, and finite-type stability gives excellence and Noetherianness. A finite set of module-generator denominators constructs an isomorphism open around every generic point. Added one statement-only affine-chart interface, without moving any conclusion clause into it. Clarified only the existing Noetherian/excellent scheme conventions; the mathematical statement is unchanged.",
+  "blueprint": "The normalization preparation requested by descendant lem-per-potential-dualizing-uniqueness Step 3 in the dimension-normalized duality branch from lem-per-artin-gabber-affine-curve; realizes the existing blueprint.from place and ancestry, without changing the perverse unit or its route.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "The generic commutative-algebra theorem supplies Nagata finiteness for excellent affine rings; no node of this perverse-sheaf unit gives it."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic stability of excellence is needed for the finite affine normalization algebras; it does not replace a step of the perverse-sheaf unit."
+   },
+   {
+    "node": "lem-trf-excellent-scheme-affine-cover",
+    "why": "Generic locality of excellence turns the normalization affine cover into the all-affine excellence convention; no local theorem of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Basic quasi-compactness of affine schemes is needed to turn the finite normalization chart cover into quasi-compactness of the normalization."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Generic points of the finitely many irreducible components are needed in the dense-open construction."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Affine neighbourhoods inside the open avoiding the other components are needed; no perverse-sheaf argument supplies this scheme topology fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-quasi-excellent-nagata",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-3f5fe197d",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-3f5fe197d (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new chart node and every cited statement in full, and checked them against the Stacks sources: morphisms 035P (statement and proof), 0CDV, 035S and 0BAJ, plus the tag entries for 07QV, 07QU and 0HAB. The item gives its parent (lem-per-potential-dualizing-uniqueness Step 3) exactly what that step uses: a finite surjective map with normal source, an isomorphism over a dense open containing every generic point, and Noetherian excellence preserved. The Noetherian and excellent conventions it spells out are the standard ones and don't make the item easier. Steps: Step 2 gets finiteness from excellent ⇒ quasi-excellent ⇒ Nagata, then N-2 with L=K_i, product over the components and the finite-morphism definition. Step 3 gets surjectivity from lying over, with the V(p_i) covering Spec A. Step 4 gets normality from the integral closure being a normal domain, the affine stalk lemma and localization. Step 5 gets excellence from 07QU with S={1} and the 0HAB affine-cover lemma, and Noetherianness from a finite affine cover. Step 6 gets affine W_i around each generic point inside the complement of the other components, so R_i is a domain. Step 7 is the denominator argument, written out: s = product of generator denominators gives (C_i)_s = (R_i)_s. Step 8 glues the isomorphisms, and U is dense. Edge cases checked: empty X, a field, a normal domain, k[x,y]/(xy) and k[t²,t³]. New node lem-per-componentwise-normalization-affine-charts: it is 035P(1),(3),(4) plus 0CDV, and it is true. It is statement-only with the three kinds of search recorded. It restates no item clause, and searches of the DAG by 035P/0CDV and by normalization with Nagata/excellent found no duplicate. Tool uses accepted: 07QV, 07QU, 0HAB and Mathlib-leaf scheme facts, all generic. Batch-5 flag on lem-trf-excellent-scheme-affine-cover: it is the generic Stacks 0HAB locality of excellence. Its 92-node dependency closure contains only its own affine-locality sub-lemmas and reaches no node of the trace-formula or Poincaré duality proofs. Neither assumption gives this fact, so it is genuinely outside the assumed statements and the citation is accepted. No SGA source is cited. No fixes."
  }
 }
