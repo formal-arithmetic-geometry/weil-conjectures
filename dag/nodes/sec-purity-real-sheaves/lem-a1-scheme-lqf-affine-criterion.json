@@ -14,9 +14,72 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume (1). By [lem-weil-pbc-lqf-locally-finite-type], f is locally of finite type, and [lem-weil-pbc-lft-affine-pairs] therefore makes the induced map on any affine pair A,B of finite type. Let q be any prime of the coordinate ring of A and let x be the corresponding point. The definition [pqf-def-quasifinite] says that f is quasi-finite at x. The existing characterization [lem-weil-pbc-quasi-finite-at-point-isolated] makes the point of the fibre over f(x) isolated. Applying [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] to this x and the given affine pair A,B gives that the same ring map is quasi-finite at q. Thus it is of finite type and quasi-finite at every prime, proving (2).",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TK, proof of (1) => (2), using Tag 01TH and Tag 01T2."
+   }
+  },
+  {
+   "text": "Assume (2) and fix x in X. By [lem-weil-pbc-affine-opens-basis], choose an affine open B around f(x), and then an affine open A around x contained in f^{-1}(B). Condition (2) applied to A and B supplies a finite-type ring map which is quasi-finite at the prime corresponding to x. By the definition [pqf-def-quasifinite], this makes f quasi-finite at x. Since x was arbitrary, f is locally quasi-finite, proving (1).",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TK, proof of (2) => (1), with affine opens supplied by Schemes Tag 01IT."
+   }
+  },
+  {
+   "text": "Assume (1). Choose an affine open cover S=⋃_j B_j using [lem-weil-pbc-affine-opens-basis]. For each j, apply the same basis statement to the open subscheme f^{-1}(B_j) to obtain an affine open cover f^{-1}(B_j)=⋃_i A_{ji}. The restriction [lem-weil-pbc-lqf-restriction-to-opens] of a locally quasi-finite morphism to these open subschemes is locally quasi-finite, so every A_{ji}->B_j is locally quasi-finite. This is (3).",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lqf-restriction-to-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TK, proof of (1) => (3), together with Tag 01TH (4) and Schemes Tag 01IT."
+   }
+  },
+  {
+   "text": "Assume (3) and let x be any point of X. Choose j with f(x) in B_j and then i with x in A_{ji}. Since A_{ji}->B_j is locally quasi-finite, [pqf-def-quasifinite] supplies affine neighbourhoods inside these opens whose induced ring map is finite type and quasi-finite at the prime of x. The same neighbourhoods are open subschemes of X and S, so they witness that f is quasi-finite at x. Hence f is locally quasi-finite, proving (1).",
+   "uses": [
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TK, proof of (3) => (1), by unpacking Definition 01TD on the covering pieces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01TK (lemma-locally-quasi-finite-characterize), equivalences (1), (2), (3), with Tag 01TH and Tag 01T2 for the point and finite-type criteria."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +122,17 @@
    "results": "{\"t\": \"2026-10-18T02:37:39Z\", \"tool\": \"grep\", \"query\": \"quasiFinite_appLE|locallyQuasiFinite_iff\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"49907cb120e4d55c\"}",
    "date": "2026-10-18",
    "verdict": "no match: locallyQuasiFinite_iff and quasiFinite_appLE use Mathlib RingHom.QuasiFinite, a fibrewise module-finiteness predicate without finite type; matching the Stacks isolated-fibre predicate requires a comparison theorem. Source read: Morphisms/QuasiFinite.lean:19-24,49-81."
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme morphism locally quasi-finite iff all affine chart ring maps are finite type and quasi-finite at every prime",
+   "results": "AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, RingHom.QuasiFinite (Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite)",
+   "date": "2026-10-18",
+   "verdict": "no match: Mathlib LocallyQuasiFinite uses RingHom.QuasiFinite on affine pairs and does not include the Stacks finite-type plus isolated-fibre predicate used here; the comparison is itself a theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-scheme-lqf-etale-source-locality",
@@ -85,5 +155,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-scheme-lqf-affine-criterion",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 01TK into four steps. The (1) to (2) direction uses the existing local-finite-type and all-affine-pairs criteria, then passes from quasi-finiteness at a point to an isolated fibre point and back to quasi-finiteness at the arbitrary affine-pair prime. The reverse direction unpacks the definition after choosing affine neighbourhoods. The covering equivalence uses affine-open bases and the existing restriction-to-opens lemma. No new node was needed; all cited facts already exist in the DAG.",
+  "blueprint": "Realizes the imported affine-chart/locality input below the existing lem-a1-affine-hc0 ancestry; the detailed proof follows Stacks Tag 01TK rather than a blueprint theorem, and the item has no same_as blueprint node.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Generic definition of scheme local quasi-finiteness used to unpack and reassemble the pointwise witnesses; no replacement definition occurs in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic finite-type consequence of local quasi-finiteness used in the affine-chart direction; no replacement node occurs in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic all-affine-pairs criterion for local finite type used to obtain finite type on the arbitrary pair; no replacement node occurs in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic point/fibre characterization used to pass from quasi-finiteness at x to an isolated fibre point; no replacement node occurs in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "why": "Generic affine-pair characterization of an isolated fibre point used for the arbitrary prime; no replacement node occurs in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic scheme topology tool used to choose affine neighbourhoods and covers; no replacement node occurs in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic restriction permanence used for the covering direction; no replacement node occurs in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lqf-restriction-to-opens"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q15-1a2450c63",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-1a2450c63 (reviewer sub-agent of L); spot-checked: Read the item, source Tag 01TK, all cited node statements, unit/chapter route, delivery instructions, and recorded searches. All four proof steps are mathematically valid with matching hypotheses; no hidden finiteness, separation, or Noetherian assumptions occur. Edge cases were checked, no duplicate/new-node issue exists, and no route-lock violation was found. Wrote review.md."
  }
 }
