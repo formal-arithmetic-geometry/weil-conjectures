@@ -1,6 +1,6 @@
 # Work queue
 
-57 items; claim with `tools/claim.py next <group> [--stage N]`.
+52 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,30 +8,25 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (57)
+## Stage 3: modules to prove (52)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
-| `Sheaf.AlgebraicGeometry.BoundedConstructibleLowerStarHomology` | 3 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction` | 3 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.BoundedConstructibleLowerStarSingleUpperBound` | 4 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.AdicFiniteCoefficientBound` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.AffineCurveRangePositive` | 5 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.EllAdicAffineLineRepresentable` | 7 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
-| `Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackBase` | 14 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackRest` | 14 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.BoundedConstructibleLowerStarHomology` | 3 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange` | 5 | 1 | proof | 1 |
 | `Sheaf.CategoryTheory.Galois.GaloisTransitive` | 5 | 1 | proof | 1 |
 | `Sheaf.Paper.GaloisLisseRepresentations` | 6 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.EtaleNormalComponents` | - | 1 | proof | 1 |
+| `Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction` | 3 | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists` | 6 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.QcqsHigherDirectImage` | - | 1 | proof | 2 |
@@ -72,7 +67,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ClosedPointSheafApproximation` | - | 1 | proof | 16 |
 | `Sheaf.AlgebraicGeometry.FiniteClosedPoints` | - | 1 | proof | 17 |
 
-## Stage 3: waiting for statements of dependencies (10)
+## Stage 3: waiting for statements of dependencies (9)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -81,7 +76,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.SmoothPurity.NormalizedWitness` | 1 | 1 | `lem-pur-condensed-exceptional-reconstruction` |
 | `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | `def-weil-global-geometric-frobenius` |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | `det-thm-sfb-proper-base-change-integral` |
-| `Sheaf.AlgebraicGeometry.BoundedConstructibleHomSingle` | 4 | 1 | `lem-sfb-integral-cohomological-adic-criterion` |
 | `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | `def-weil-global-geometric-frobenius` |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-proper-unbounded-window-arbitrary` |
 | `WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy` | 5 | 7 | `lem-trf-rational-local-frobenius-powers` |
