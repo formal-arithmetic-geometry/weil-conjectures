@@ -19,9 +19,164 @@
   "def-weil-etale-morphism",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the regularity assertion for an arbitrary field or complete DVR $\\Lambda$, including a ramified DVR. For $S_j=\\Lambda[[t_1,\\ldots,t_j]]$, [lem-weil-pbc-power-series-noetherian], [lem-weil-pbc-power-series-domain], and [lem-weil-pbc-power-series-local-ring] give a Noetherian local domain. Its maximal ideal is $(t_1,\\ldots,t_j)$ in the field case and $(\\pi,t_1,\\ldots,t_j)$ in the DVR case: a series is a unit exactly when its constant coefficient is a unit, and its difference from its constant coefficient belongs to the variable ideal by [lem-weil-pbc-power-series-quotient-variables]. The residue field is therefore that of $\\Lambda$. Apply [lem-weil-pbc-power-series-complete-over-complete-base] with $J=0$ or $J=(\\pi)$ for completeness. The generator bound [lem-weil-pbc-noetherian-local-dimension-le-generators] gives dimension at most $j$ or $j+1$. For the reverse bound use the strict prime chain $(0)\\subsetneq(t_1)\\subsetneq\\cdots\\subsetneq(t_1,\\ldots,t_j)$, and in the DVR case append $(\\pi,t_1,\\ldots,t_j)$. Quotients at the intermediate terms are domains by the quotient and domain nodes, and the last quotient is the residue field. Strictness follows because the next variable (or $\\pi$) is nonzero in that quotient. Hence equality holds, and these maximal-ideal generators prove regularity by [def-weil-regular-scheme]. For $j=0$ this is respectively a field or a DVR and the same argument applies.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-quotient-variables",
+    "lem-weil-pbc-power-series-complete-over-complete-base",
+    "lem-weil-pbc-noetherian-local-dimension-le-generators",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.1.3; algebraic verification using Stacks 032C with the same parameter-chain argument for any complete DVR"
+   }
+  },
+  {
+   "text": "In equal characteristic zero apply [lem-weil-pbc-complete-local-domain-finite-over-regular] to $A$. Its coefficient ring is a field: a Cohen DVR with prime uniformizer cannot map locally to a ring whose residue field has characteristic zero. Thus the supplied finite local inclusion has the form $R=\\Lambda[[t_1,\\ldots,t_r]]\\hookrightarrow A$, with residue-field isomorphism. By [lem-weil-pbc-finite-algebra-is-integral] and [lem-weil-pbc-integral-injective-dimension-equal], $\\dim R=d$; step 1 gives $r=d$. Put $A'=A$. By [lem-trf-finite-domain-fraction-degree], $A\\otimes_R\\operatorname{Frac}(R)=\\operatorname{Frac}(A)$ is a finite field extension: the localized domain is finite-dimensional, so multiplication by each nonzero element is bijective. This extension is separable by [lem-weil-pbc-char-zero-field-extension-separable]. Apply [lem-per-finite-algebra-etale-near-field-or-dvr] at $(0)$, using alternative (ii), to obtain $0\\ne f\\in R$ and the required etale localization. Since $\\mathfrak m_\\Lambda=0$, its nonzero reduction is automatic.",
+   "uses": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-trf-finite-domain-fraction-degree",
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "lem-per-finite-algebra-etale-near-field-or-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Equal characteristic zero: Stacks Tag 032D, lemma-complete-local-Noetherian-domain-finite-over-regular, field case, and separability in characteristic zero"
+   }
+  },
+  {
+   "text": "For the characteristic-$p$ construction, work with any reduced equidimensional complete Noetherian local ring $(B,\\mathfrak n)$ of dimension $e\\geq1$ and residue field $k$; allow a fixed perfect subfield $k_0\\subset B$. We will use this construction both for $B=A$ in equal characteristic and for a reduced special fibre below. Choose a coefficient section $s:k\\hookrightarrow B$ and $a_1,\\ldots,a_e\\in\\mathfrak n$ with the simultaneous generic differential-basis property by [lem-per-coefficient-field-generic-differential-basis]. The section respects $k_0$ when specified. Choose parameters $\\tau_1,\\ldots,\\tau_e$ with $\\sqrt{(\\tau_1,\\ldots,\\tau_e)}=\\mathfrak n$ by [lem-weil-pbc-noetherian-local-system-of-parameters]. The finite normalization node [lem-per-parameter-ideal-formal-normalization], case (a) for these $\\tau_i$, shows that the map from $k[[\\tau_1,\\ldots,\\tau_e]]$ is injective on every minimal component. In particular every $\\tau_i$ is nonzero in every $\\operatorname{Frac}(B/\\mathfrak q)$.",
+   "uses": [
+    "lem-per-coefficient-field-generic-differential-basis",
+    "lem-weil-pbc-noetherian-local-system-of-parameters",
+    "lem-per-parameter-ideal-formal-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.1.4–2.1.11 and first paragraph of 2.1.12"
+   }
+  },
+  {
+   "text": "Set $u_i=\\tau_i^p(1+a_i)$. Each $1+a_i$ is a unit, so $\\sqrt{(u_1,\\ldots,u_e)}=\\sqrt{(\\tau_1^p,\\ldots,\\tau_e^p)}=\\mathfrak n$. Apply case (a) of [lem-per-parameter-ideal-formal-normalization] to obtain a finite injective local map $R_B=k[[u_1,\\ldots,u_e]]\\to B$, inducing the identity on residue fields. In characteristic $p$, $\\mathrm du_i=\\tau_i^p\\mathrm da_i$. The coefficients $\\tau_i^p$ are nonzero in every component fraction field, so these differentials form a basis there by step 3. The cokernel sequence of [lem-per-finite-formal-map-differential-cokernel], tensored with each component fraction field, now gives $\\Omega_{B/R_B}\\otimes_B\\operatorname{Frac}(B/\\mathfrak q)=0$. The generic-product clause of the normalization node identifies $B\\otimes_{R_B}\\operatorname{Frac}(R_B)$ with the finite product of these component fields; a module over a finite product is the sum of its idempotent components. Hence the relative differential module vanishes after this generic localization. Here localization commutes with the differential module directly from its universal presentation: $\\mathrm d(b/s)=s^{-1}\\mathrm db$ for denominators $s$ from the base.",
+   "uses": [
+    "lem-per-parameter-ideal-formal-normalization",
+    "lem-per-finite-formal-map-differential-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.1.12, the parameter replacement and displayed exact sequence across pp. 52–53"
+   }
+  },
+  {
+   "text": "Apply [lem-per-finite-algebra-etale-near-field-or-dvr] to $R_B\\to B$ at the zero prime, with alternative (i) from step 4. Its finiteness and torsion-freeness are given by the normalization node in step 4, and $R_B$ is Noetherian by step 1. This produces an element $g\\ne0$ in $R_B$ for which $R_B[1/g]\\to B[1/g]$ is etale. For the equal-characteristic-$p$ case take $B=A$, $e=d$, $A'=A$, $\\Lambda=k$ and $r=d$. A domain is reduced and has just the zero minimal prime, so all hypotheses of steps 3–4 hold. Again $g$ has nonzero reduction modulo $\\mathfrak m_\\Lambda=0$. Thus both equal-characteristic cases have been proved without changing $A$.",
+   "uses": [
+    "lem-per-finite-algebra-etale-near-field-or-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.1.12 and Remarks 2.1.2 (dense etale base open)"
+   }
+  },
+  {
+   "text": "Now suppose $A$ has mixed characteristic $(0,p)$. Apply [lem-per-mixed-reduced-special-fibre-cover] to obtain a finite injective local map $A\\hookrightarrow C$, with $C$ a complete Noetherian normal local domain of dimension $d$, and $W\\hookrightarrow C$ with uniformizer $\\pi$, perfect residue field $k_0$, and $B=C/\\pi C$ reduced equidimensional of dimension $e=d-1\\geq1$. Its residue field is $k'=C/\\mathfrak n$, finite over the residue field of $A$. The map $k_0\\to B$ is injective because it is a unital map from a field to a nonzero ring. Apply the construction of steps 3–5 to $B$ with this fixed $k_0$. It gives a $k_0$-linear coefficient section $s:k'\\to B$, parameters $u_1,\\ldots,u_e$, and a finite injective local map $k'[[T_1,\\ldots,T_e]]\\to B$ with zero generic relative differentials and residue-field isomorphism.",
+   "uses": [
+    "lem-per-mixed-reduced-special-fibre-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3–4.2.5, reduced special fibre and application of IV 2.1.1"
+   }
+  },
+  {
+   "text": "Use [lem-per-perfect-residue-coefficient-dvr] with $W$, $k'/k_0$, $C$, and the section $s:k'\\to C/\\pi C$ just constructed. It provides a complete DVR $\\Lambda$ of residue field $k'$, with the same uniformizer $\\pi$, and a local $W$-algebra lift $\\Lambda\\to C$ of $s$. This lift is injective: a nonzero ideal of a DVR contains a power of its uniformizer, while the image of every power of $\\pi$ is nonzero in the characteristic-zero domain $C$. Choose lifts $x_i\\in\\mathfrak n$ of the $u_i\\in\\mathfrak n_B$. Evaluation by [lem-weil-pbc-power-series-universal-property-complete] gives $\\varphi:R=\\Lambda[[T_1,\\ldots,T_e]]\\to C$, sending $T_i$ to $x_i$. Its reduction modulo $\\pi$ is precisely the map of step 6: coefficients reduce through $s$, and variables map to $u_i$. The coefficientwise reduction $\\Lambda[[T]]/\\pi\\Lambda[[T]]\\cong k'[[T]]$ follows by lifting every coefficient, its kernel being the series with all coefficients divisible by $\\pi$.",
+   "uses": [
+    "lem-per-perfect-residue-coefficient-dvr",
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.5, formally smooth coefficient lift and lifting the parameters"
+   }
+  },
+  {
+   "text": "The ideal $(\\pi,x_1,\\ldots,x_e)C$ has radical $\\mathfrak n$: its quotient is $B/(u_1,\\ldots,u_e)B$, whose parameter ideal has radical the maximal ideal by step 4. Therefore case (b) of [lem-per-parameter-ideal-formal-normalization] makes $\\varphi$ finite, injective, local, and a residue-field isomorphism. Its dimension hypothesis is $\\dim C=d=e+1$ from step 6. Since $C$ is a domain and $R\\to C$ is injective, $C$ is also torsion free over $R$. Put $A'=C$ and $r=e=d-1$; the finite injective map $A\\to A'$ is the one from step 6, independent of the new finite presentation over $R$.",
+   "uses": [
+    "lem-per-parameter-ideal-formal-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.5, last paragraph: finite injective formal parameter map"
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak p=\\pi R$ is prime because $R/\\pi R=k'[[T_1,\\ldots,T_e]]$ is a domain by [lem-weil-pbc-power-series-domain]. Multiplication by $\\pi$ in $R$ is injective since it is injective on coefficients. The localization $R_{\\mathfrak p}$ is a DVR by [lem-sbc-regular-principal-prime-localization-dvr]. The fibre algebra $C\\otimes_R\\kappa(\\mathfrak p)$ is $B\\otimes_{k'[[T]]}\\operatorname{Frac}(k'[[T]])$. Its relative differential module vanishes by the characteristic-$p$ construction in step 4. Apply [lem-per-finite-algebra-etale-near-field-or-dvr] at $\\mathfrak p$, using the finiteness and torsion-freeness of step 8 and alternative (i). It yields $f\\notin\\pi R$ with $R[1/f]\\to C[1/f]$ etale. Precisely because $f\\notin\\pi R$, its reduction in $k'[[T_1,\\ldots,T_e]]$ is nonzero, which is the required special-fibre condition.",
+   "uses": [
+    "lem-weil-pbc-power-series-domain",
+    "lem-sbc-regular-principal-prime-localization-dvr",
+    "lem-per-finite-algebra-etale-near-field-or-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.5, last sentence, and 4.2.1 (p-dense open)"
+   }
+  },
+  {
+   "text": "In equal characteristic the residue field of $\\Lambda$ is the residue field of $A$, hence separably closed. In mixed characteristic $k'/k_A$ is finite by step 6; [lem-weil-pbc-sepclosed-finite-extension-unique-embedding], clause (a), implies $k'$ is separably closed. This is the residue field of $\\Lambda$. Step 1 applies for every $0\\leq j\\leq r$ to the field or complete DVR actually obtained, giving completeness, Noetherianity, regularity, and dimensions $j$ or $j+1$ as stated. Finally $r=d$ in equal characteristic and $r=d-1$ in mixed characteristic, so $r\\geq1$ under $d\\geq2$. These constructions provide all the asserted maps and localizations.",
+   "uses": [
+    "lem-weil-pbc-sepclosed-finite-extension-unique-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.5 and V 3.1.3–3.1.4; separable-closedness under finite extension is Stacks Fields 030K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-domain",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-noetherian-local-dimension-le-generators",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-trf-finite-domain-fraction-degree",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-per-finite-algebra-etale-near-field-or-dvr",
+  "lem-per-coefficient-field-generic-differential-basis",
+  "lem-weil-pbc-noetherian-local-system-of-parameters",
+  "lem-per-parameter-ideal-formal-normalization",
+  "lem-per-finite-formal-map-differential-cokernel",
+  "lem-per-mixed-reduced-special-fibre-cover",
+  "lem-per-perfect-residue-coefficient-dvr",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-sbc-regular-principal-prime-localization-dvr",
+  "lem-weil-pbc-sepclosed-finite-extension-unique-embedding"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 2.1.4–2.1.12 and 4.2.3–4.2.5; equal characteristic zero uses Stacks 032D. The power-series base properties are expanded from the regular base in Expose V 3.1.3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +212,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsAdicComplete (IsLocalRing.maximalIdeal A) A] (hg : g.map (IsLocalRing.residue A) ≠ 0) :\\n  ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n  {\"name\": \"PowerSeries.fg_iff_of_isPrime\", \"module\": \"Mathlib.RingTheory.PowerSeries.Ideal\", \"type\": \": P.FG ↔ (P.map constantCoeff).FG\", \"doc\": \"For an ideal $ P $ in the ring of formal power series over a commutative ring $ R $, $ P $ is finitely generated if and only if the ideal generated by the constant terms of elements of $ P $ in $ R $ \"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_val\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (a : Fin 2),\\n  P.toPresentation.val a =\\n    (P.lift P.x ⋯)\\n      (P.equivMvPolynomialQuotient.symm\\n        ((Ideal.Quotient.mk\\n            (Ideal.span\\n              \", \"doc\": \"Given a standard étale presentation $ P $ of an $ R $-algebra $ S $, the $ i $-th generator ($ i = 0, 1 $) of the algebra presentation corresponds to the image of $ X_i $ in the quotient ring $ R[X_0,\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}",
    "date": "2026-10-19",
    "verdict": "no match: the hits concern standard etale presentations or ordinary Weierstrass preparation; they do not give Cohen–Gabber presentations, even after a finite normal extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen Gabber finite generically etale power series subring of complete local ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"Algebra.IsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that an algebra $ S $ over a commutative ring $ R $ is standard étale, meaning it is isomorphic to a localization of a polynomial ring over $ R $ modulo a monic polynomial whose derivativ\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.instIsStandardEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.IsStandardEtale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ (f, g) $ over $ R $, the quotient ring $ R[X, Y]/(f, Yg - 1) $ is a standard étale algebra over $ R $. This means it is isomorphic to a localiz\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no Cohen–Gabber presentation or mixed-characteristic finite cover; etale-locus and standard presentations only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "complete normal local mixed characteristic finite cover etale over discrete valuation power series base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}\n  {\"name\": \"Algebra.IsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that an algebra $ S $ over a commutative ring $ R $ is standard étale, meaning it is isomorphic to a localization of a polynomial ring over $ R $ modulo a monic polynomial whose derivativ\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no Cohen–Gabber presentation or mixed-characteristic finite cover; etale-locus and standard presentations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: no Cohen–Gabber presentation or mixed-characteristic finite cover; etale-locus and standard presentations only"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Gabber|genericallyEtale|generically.etale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: no Cohen–Gabber presentation or mixed-characteristic finite cover; etale-locus and standard presentations only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen Gabber finite generically etale power series subring of complete local ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"PowerSeries.instIsLocalRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsLocalRing R⟦X⟧\", \"doc\": \"If $ R $ is a local ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a local ring.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"PowerSeries.toSubring\", \"module\": \"Mathlib.RingTheory.PowerSeries.Basic\", \"type\": \": PowerSeries T\", \"doc\": \"The subring of power series over a ring $ R $ consisting of all power series whose coefficients lie in a given subring $ T $ of $ R $. This is constructed by taking the coefficient-wise inclusion of $\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"LaurentSeries.powerSeries_ext_subring\", \"module\": \"Mathlib.RingTheory.LaurentSeries\", \"type\": \":\\n  Subring.map (LaurentSeriesRingEquiv K).toRingHom (powerSeries_as_subring K) =\\n    ((idealX K).adicCompletionIntegers (RatFunc K)).toSubring\", \"doc\": \"The image of the power series subring under the canonical embedding into the Laurent series ring equals the subring obtained by completing the polynomial ring $ K[X] $ with respect to the ideal genera\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no Cohen–Gabber presentation or mixed-characteristic finite cover; etale-locus and standard presentations only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-partial-algebraization",
@@ -83,5 +273,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-cohen-gabber-finite-presentations",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded ILO IV 2.1.12 using generic differential representatives and explicit p-power parameter replacement; mixed characteristic uses a reduced-fibre Epp cover, a formally smooth coefficient DVR and lifted parameters. Kept ordinary Cohen normalization separate for characteristic zero. Proved regularity for all intermediate power-series rings over an arbitrary complete DVR, avoiding the existing Cohen-only regularity node. Six supporting nodes remain statement-only after recorded searches.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-quotient-variables",
+    "why": "Generic commutative algebra input for the supplied complete local presentation; this unit has no replacement for Killing the first variables of a power series ring."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Generic commutative algebra input for the supplied complete local presentation; this unit has no replacement for Power series over a complete Noetherian ring are complete for the combined ideal."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "why": "Generic commutative algebra input for the supplied complete local presentation; this unit has no replacement for A Noetherian complete local domain is finite over a regular complete power series subring."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic commutative algebra input for the supplied complete local presentation; this unit has no replacement for An injective integral extension preserves Krull dimension."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Generic commutative algebra input for the supplied complete local presentation; this unit has no replacement for Universal property of a power series ring mapping into a complete ring."
+   },
+   {
+    "node": "lem-sbc-regular-principal-prime-localization-dvr",
+    "why": "Generic commutative algebra input for the supplied complete local presentation; this unit has no replacement for A regular principal-prime localization is a DVR."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-sbc-regular-principal-prime-localization-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NG-f8ab0d3e7",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-f8ab0d3e7 (reviewer sub-agent of L); spot-checked: I read the item, all six new nodes and every cited node in full. I checked them against ILO IV 2.1.1–2.1.12 (pp. 50–53), 4.1.2–4.1.8 and 4.2.1–4.2.5 (pp. 56–59) and Stacks 032D/031D. The item statement is unchanged, matches ILO 2.1.1 and 4.2.2, and is not weakened. Taking f outside πR makes D(f) meet V(π) in a nonempty open subset of Spec k'[[t]], which is ILO's p-dense condition. Step 1 proves regularity of Λ[[t]] for any complete DVR, including ramified ones, through a strict prime chain and the generator bound. Step 2 handles characteristic zero: the 032D coefficient ring must be a field, r=d by integral dimension equality, the extension is finite and separable, and the neighbourhood lemma (ii) at (0) gives f. Steps 3–5 follow ILO 2.1.12: case (a) gives componentwise injectivity because nonzero elements of R become units in each nonzero L_q; du_i=τ_i^p da_i; tensoring the right-exact cokernel sequence with L_q kills Ω_{B/R_B}, so Ω_{F/K}=0. Step 6 checks that k_0 maps into a characteristic-p B. Step 7: the lift is injective because π^n≠0 in C, and its reduction mod π equals the step-6 map by the uniqueness clause of the universal property. Step 8: the radical of (π,x) is the maximal ideal, so case (b) applies with dim C=e+1. Step 9: R localized at πR is a DVR, the fibre is B⊗Frac(k'[[T]]), and f lies outside πR in the base, not just source-locally étale. Step 10: k' is finite over a separably closed field, hence separably closed. I proved each new node true. The neighbourhood lemma follows from torsion-free over a field or DVR implying free, the closed non-étale locus and the closed image of a finite map; R/π over a DVR shows torsion-freeness is needed. The cokernel node follows from EGA 0_IV 20.7.17 with Mittag-Leffler. The Epp cover follows from ILO 4.2.3–4.2.5: a component is local, normal and a domain, 4.2.4 gives reducedness, and catenary equidimensionality gives dimension d−1. The normalization node follows from 031D, dimension and incomparability. The DVR node follows from ILO 4.1.3–4.1.6, since every extension of a perfect field is separable. The differential-basis node is ILO 2.1.4–2.1.12, which explicitly covers reduced equidimensional rings; compatibility with k_0 is automatic because p^N-th roots in k_0 lie in K+n^{p^N}. None of the new nodes duplicates the trf continuous-differential nodes, the pbc 032D/parameter nodes or the étale-neighbourhood nodes. Batch-5 flag on lem-trf-finite-domain-fraction-degree: it is a Mathlib-status node (fraction fields of a finite injective map of domains form a finite extension) with no proof_deps. It is generic algebra, outside both assumed statements and their proofs, so I accept it and do not RETURN. There are no SGA citations, and citations match uses and proof_deps. Two cosmetic advisories: the perfect-residue node lists def-weil-pbc-noetherian-ring in stmt_deps without citing it inline, and step 2's source document is the ILO PDF while its place is Stacks 032D."
  }
 }
