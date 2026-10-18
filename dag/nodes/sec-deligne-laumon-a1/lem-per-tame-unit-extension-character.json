@@ -11,9 +11,88 @@
   "def-weil-pbc-henselian-terminology",
   "def-trf-fs-log-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=\\ker(A^\\times\\to k^\\times)=1+\\mathfrak m$; it is preserved by $H$. Since $H$ is a group, $n=|H|\\geq1$. For $u\\in U$, apply the henselian local root-lifting criterion to the monic polynomial $T^n-u$ and the residue root $1$. Its derivative there is the nonzero residue of $n$, since $n$ is a unit. It gives $v\\in A$ with $v^n=u$ and residue $1$, so $v\\in U$. The simple-root uniqueness lemma, applied to any two such roots (derivative $nv^{n-1}$ is a unit), gives uniqueness. Thus taking the unique $n$th root defines $r:U\\to U$. Products and inverses of roots have the required powers and residues, so uniqueness makes $r$ a group homomorphism; likewise $r(h(u))=h(r(u))$.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-weil-pbc-simple-root-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, proof 3.7(a), printed p.75, cocycle square and principal-unit argument; expanded with Stacks algebra.tex Tags 04GF (definition-henselian), 04GG (lemma-characterize-henselian), and 06RR (lemma-uniqueness)."
+   }
+  },
+  {
+   "text": "Use multiplicative notation for $E$, writing $s_0(\\ell+\\ell')=s_0(\\ell)s_0(\\ell')$. The trivial action on $L$ implies that $h(s_0(\\ell))s_0(\\ell)^{-1}$ belongs to the kernel $A^\\times$; write it as $z_h(\\ell)$. For each $h$, this is a homomorphism $L\\to A^\\times$. Applying $g$ to $h(s_0(\\ell))=z_h(\\ell)s_0(\\ell)$ gives $z_{gh}(\\ell)=g(z_h(\\ell))z_g(\\ell)$. Reducing modulo $\\mathfrak m$, the trivial residue action gives $\\overline z_{gh}(\\ell)=\\overline z_h(\\ell)\\overline z_g(\\ell)$. In particular each $h\\mapsto\\overline z_h(\\ell)$ is a group homomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, proof 3.7(a), printed p.75, cocycle square and principal-unit argument; expanded with Stacks algebra.tex Tags 04GF (definition-henselian), 04GG (lemma-characterize-henselian), and 06RR (lemma-uniqueness)."
+   }
+  },
+  {
+   "text": "For fixed $\\ell$, multiply the identity $\\overline z_{gh}(\\ell)=\\overline z_g(\\ell)\\overline z_h(\\ell)$ over $h\\in H$. Left multiplication by $g$ permutes $H$, so cancellation gives $\\overline z_g(\\ell)^n=1$. Thus all residue cocycle values lie in $\\mu_n(k)$. This uses only a finite-product reindexing, without any cohomology vanishing theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, proof 3.7(a), printed p.75, cocycle square and principal-unit argument; expanded with Stacks algebra.tex Tags 04GF (definition-henselian), 04GG (lemma-characterize-henselian), and 06RR (lemma-uniqueness)."
+   }
+  },
+  {
+   "text": "For each $h,\\ell$, lift $\\overline z_h(\\ell)$ by the henselian root-lifting criterion for $T^n-1$: the root is nonzero and its derivative $n\\overline z_h(\\ell)^{n-1}$ is nonzero. Denote the lift by $\\alpha_h(\\ell)\\in\\mu_n(A)$. It is unique by the simple-root uniqueness lemma. The same uniqueness proves multiplicativity in $\\ell$ and in $h$, since the respective products lift $\\overline z_h(\\ell+\\ell')$ and $\\overline z_{gh}(\\ell)$. Also every $\\zeta\\in\\mu_n(A)$ is fixed by $H$: $h(\\zeta)$ and $\\zeta$ have the same residue and are roots of $T^n-1$, whose derivative at $\\zeta$ is a unit. Hence each $\\alpha_h(\\ell)$ is $H$-fixed.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-weil-pbc-simple-root-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, proof 3.7(a), printed p.75, cocycle square and principal-unit argument; expanded with Stacks algebra.tex Tags 04GF (definition-henselian), 04GG (lemma-characterize-henselian), and 06RR (lemma-uniqueness)."
+   }
+  },
+  {
+   "text": "Define $d_h(\\ell)=z_h(\\ell)\\alpha_h(\\ell)^{-1}\\in U$. It is a homomorphism in $\\ell$, and the fixedness and multiplicativity of $\\alpha$ give $d_{gh}(\\ell)=g(d_h(\\ell))d_g(\\ell)$. Set $P(\\ell)=\\prod_{h\\in H}d_h(\\ell)\\in U$, a homomorphism $L\\to U$. Multiplying this cocycle identity over $h$, and reindexing $gh$, gives the explicit equality $P(\\ell)=g(P(\\ell))d_g(\\ell)^n$, or $g(P(\\ell))P(\\ell)^{-1}=d_g(\\ell)^{-n}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, proof 3.7(a), printed p.75, cocycle square and principal-unit argument; expanded with Stacks algebra.tex Tags 04GF (definition-henselian), 04GG (lemma-characterize-henselian), and 06RR (lemma-uniqueness)."
+   }
+  },
+  {
+   "text": "Set $b(\\ell)=r(P(\\ell))$, where $r$ is the root homomorphism constructed in Step 1. Then $b:L\\to U$ is a homomorphism. The last identity in Step 5 yields $(g(b(\\ell))b(\\ell)^{-1})^n=d_g(\\ell)^{-n}$. Both $g(b(\\ell))b(\\ell)^{-1}$ and $d_g(\\ell)^{-1}$ are in $U$; applying simple-root uniqueness to $T^n-d_g(\\ell)^{-n}$ (both residues are $1$ and the derivative is a unit) proves $g(b(\\ell))b(\\ell)^{-1}=d_g(\\ell)^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-simple-root-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, proof 3.7(a), printed p.75, cocycle square and principal-unit argument; expanded with Stacks algebra.tex Tags 04GF (definition-henselian), 04GG (lemma-characterize-henselian), and 06RR (lemma-uniqueness)."
+   }
+  },
+  {
+   "text": "Define $s(\\ell)=b(\\ell)s_0(\\ell)$. It is a group homomorphism and a section of $E\\to L$, because $b(\\ell)$ is in the kernel $A^\\times$. For $\\ell\\in L_+$, the assumed $s_0(\\ell)\\in M$ multiplied by the unit $b(\\ell)\\in A^\\times\\subset M$ is still in $M$. Finally $g(s(\\ell))s(\\ell)^{-1}=(g(b(\\ell))b(\\ell)^{-1})z_g(\\ell)=d_g(\\ell)^{-1}z_g(\\ell)=\\alpha_g(\\ell)$. For fixed $\\ell$, the homomorphism $H\\to\\mu_n(A)$ kills commutators because its target is abelian; it therefore factors through $H_{\\rm ab}$. Multiplicativity in $\\ell$ gives a bilinear pairing $H_{\\rm ab}\\times L\\to\\mu_n(A)$ and hence the required homomorphism $\\chi:H_{\\rm ab}\\otimes_{\\mathbf Z}L\\to\\mu_n(A)$. Its value on $g\\otimes\\ell$ is $\\alpha_g(\\ell)$, so this is exactly the asserted action formula. Step 4 already proved fixedness of all $n$th roots of unity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, proof 3.7(a), printed p.75, cocycle square and principal-unit argument; expanded with Stacks algebra.tex Tags 04GF (definition-henselian), 04GG (lemma-characterize-henselian), and 06RR (lemma-uniqueness)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-simple-root-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI, proof 3.7(a), printed p.75, cocycle square and principal-unit argument; expanded with Stacks algebra.tex Tags 04GF (definition-henselian), 04GG (lemma-characterize-henselian), and 06RR (lemma-uniqueness). The finite-product formula writes out the vanishing/coboundary calculation used in the source."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +121,59 @@
    "results": "Hits concern cyclotomic characters, Hilbert 90, and abstract group cohomology; no exact statement.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite tame group cocycle on units of a strictly henselian local ring has a root of unity character",
+   "results": "{\"t\": \"2026-10-18T22:42:13Z\", \"tool\": \"leanfinder\", \"query\": \"finite tame group cocycle on units of a strictly henselian local ring has a root of unity character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulChar.apply_mem_rootsOfUnity\", \"cyclotomicCharacter\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"modularCyclotomicCharacter'\", \"modularCyclotomicCharacter\", \"modularCyclotomicCharacter'.spec'\", \"cyclotomicCharacter.toFun\", \"cyclotomicCharacter.toFun_spec\"], \"digest\": \"8f61eef96f91c66d\"}; Read hits: Hilbert90 concerns units of a finite-dimensional field extension with its full automorphism group; cyclotomic characters and MulChar concern other settings, not this unit extension.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GroupCohomology.H1, IsUnit, rootsOfUnity",
+   "results": "{\"t\": \"2026-10-18T22:42:14Z\", \"tool\": \"loogle\", \"query\": \"GroupCohomology.H1, IsUnit, rootsOfUnity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'GroupCohomology.H1'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Loogle rejected unknown identifier GroupCohomology.H1; this query alone supplies no absence evidence.",
+   "date": "2026-10-19",
+   "verdict": "invalid query; no conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "Henselian|rootsOfUnity|Cohomology",
+   "results": "{\"t\": \"2026-10-18T22:42:14Z\", \"tool\": \"grep\", \"query\": \"Henselian|rootsOfUnity|Cohomology\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/DividedPowerAlgebra/Init.lean\"], \"digest\": \"2cdd62201cb90fb9\"}; Henselian root criteria and roots-of-unity constructions occur, but none states the section/character conclusion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocycle of a finite group in local ring units can be changed by a coboundary to a character in roots of unity",
+   "results": "{\"t\": \"2026-10-18T22:42:34Z\", \"tool\": \"leansearch\", \"query\": \"A cocycle of a finite group in local ring units can be changed by a coboundary to a character in roots of unity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cocycles₁\", \"groupCohomology.H1π_eq_zero_iff\", \"groupCohomology.cocyclesOfIsCocycle₁\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"groupCohomology.cocycles\", \"modularCyclotomicCharacter.toFun\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"groupCohomology.mem_cocycles₁_iff\"], \"digest\": \"773d983466dea162\"}; Hits give definitions and Hilbert90; the latter requires field Galois automorphism coefficients, absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First group cohomology vanishes for a finite group when multiplication by its order on the coefficient module is bijective",
+   "results": "{\"t\": \"2026-10-18T22:42:35Z\", \"tool\": \"leanfinder\", \"query\": \"First group cohomology vanishes for a finite group when multiplication by its order on the coefficient module is bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.coboundaries₁_eq_bot_of_isTrivial\", \"isZero_groupCohomology_succ_of_subsingleton\", \"groupCohomology.map₁_one\", \"groupCohomology.map_1_one\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff\"], \"digest\": \"d0ab018f4d58ea58\"}; Hits give trivial-action coboundaries, subgroup/cyclic cohomology and Hilbert90; none is this local-unit/lattice assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"IsMulCocycle\"",
+   "results": "{\"t\": \"2026-10-18T22:42:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"groupCohomology\\\", \\\"IsMulCocycle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"groupCohomology.IsMulCocycle₁\", \"groupCohomology.IsMulCocycle₂\", \"groupCohomology.map_one_of_isMulCocycle₁\", \"groupCohomology.map_one_fst_of_isMulCocycle₂\", \"groupCohomology.map_one_snd_of_isMulCocycle₂\", \"groupCohomology.map_inv_of_isMulCocycle₁\", \"groupCohomology.smul_map_inv_div_map_inv_of_isMulCocycle₂\", \"groupCohomology.isMulCocycle₁_of_mem_cocycles₁\"], \"digest\": \"792229b6f370895d\"}; LowDegree definitions and elementary cocycle identities only, not the required splitting.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "card.*(cocycle|cohomology)|(cocycle|cohomology).*card|IsMulCocycle₁|IsMulCoboundary₁",
+   "results": "{\"t\": \"2026-10-18T22:48:31Z\", \"tool\": \"grep\", \"query\": \"card.*(cocycle|cohomology)|(cocycle|cohomology).*card|IsMulCocycle₁|IsMulCoboundary₁\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean\"], \"digest\": \"f034a14eef9e0f61\"}; LowDegree.lean:621,673 define multiplicative cocycles and coboundaries; Hilbert90.lean:84 uses field automorphisms. No local-unit/lattice splitting.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-very-tame-equivariant-sharp-chart",
@@ -73,5 +201,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-tame-unit-extension-character",
+  "worker": "stage1",
+  "summary": "Expanded the ILO VI 3.7(a) cocycle argument, correcting its printed cocycle identity and making the adjustment of the chosen section explicit. Unique n-divisibility of principal units and character lifting use the existing henselian root criterion and simple-root uniqueness. The remaining coboundary calculation is an explicit finite product, so no new nodes are needed. Statement unchanged.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3, the local uniformization input reached through the very-tame sharp-chart chain; precisely ILO VI 3.7(a), printed p.75. Steps 1 and 4 give the root lifting used at the cocycle square, Steps 2–3 form the residue character, Steps 5–6 give the coboundary adjustment, and Step 7 gives the chart section.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic henselian algebra criterion for lifting simple roots of monic polynomials; used for T^n-u and T^n-1. The unit contains no substitute for this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-d77a6d5a6",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-d77a6d5a6 (reviewer sub-agent of L); spot-checked: I read the item and checked its seven steps against ILO VI 3.7(a), printed pp.74-75 (PDF pp.80-81). The statement is unchanged from live sheaf-dag. The delivery has no new nodes and I made no fixes. The source has two errors, both correctly identified by the worker. First, the printed cocycle identity z(g1g2)=(g1 z(g2))z(g2) should end in z(g1); with g1=1 and the sign action it gives -1=1. Second, the claim that z is the unique lift of its residue fails for an arbitrary section (C[[t]], t to -t, b=1+t gives z=(1-t)/(1+t)). Steps 5-7 fix this by changing the section. All steps check. Step 1: the n-th root map r on 1+m uses henselian root lifting (i)=>(ii), which holds since strictly henselian implies henselian, and 06RR uniqueness with the unit derivative n v^(n-1). Step 2: the cocycle z_{gh}=g(z_h)z_g. Step 3: a finite product shows the residue values lie in mu_n(k). Step 4: unique lifts alpha in mu_n(A) are multiplicative in h and l, and mu_n(A) is H-fixed because the residue action is trivial. Step 5: d_{gh}=g(d_h)d_g and g(P)/P=d_g^{-n}, with the sign checked. Step 6: g(b)/b=d_g^{-1} by 06RR. Step 7: s=b*s0 keeps s(L_+) inside M (this also works if M->M^gp is not injective), g(s)/s=alpha_g, and alpha factors through H_ab tensor L. Edge cases tested: H=1, L=0, the sign action on C, the C[[t]] coboundary, and nilpotents. Invertibility of n is used at Steps 1, 4 and 6. I accept the declared tool use of lem-weil-pbc-henselian-local-root-lifting (sk-thm-p1): it is generic algebra and is used as a black box. simple-root-uniqueness is a Mathlib leaf. Source n=exponent vs node n=|H|: the parent uses |H| consistently. No duplicate found (searched H_ab, mu_n(A), VI 3.7, principal units), no cycle, no SGA citation, proof_deps equals the union of the step uses, and every step is under 2000 characters."
  }
 }
