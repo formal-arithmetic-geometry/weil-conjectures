@@ -18,7 +18,7 @@ For a finite coefficient ring `Λ` and a quasi-compact open immersion `j : U ⟶
 by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` (applied levelwise, `j_!` being exact)
 
 * maps `Dctf(U, Λ)` into `Dctf(X, Λ)`
-  (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek`):
+  (`ProEtale.DerivedCategory.constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek`):
   an object of `Dctf(U, Λ)` is `ν_U^* K'` for an étale `K' ∈ Dctf(U, Λ)`, and
   `j_! ν_U^* K' ≅ ν_X^* j_! K'` with `j_! K' ∈ Dctf(X, Λ)` (`lem-trf-open-ctf`);
 * preserves coproducts, being a left adjoint;
@@ -69,6 +69,7 @@ theorem DerivedCategory.constructibleFiniteTor_mapDerivedCategory_openImmersionL
     (DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a' b').prop_of_iso E
       ((DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a' b' _).2 ht)⟩
 
+omit [Finite Λ] [QuasiCompact j] in
 /-- The extension by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` along an open immersion
 preserves coproducts, being left adjoint to `j^*`. -/
 lemma preservesColimitsOfShape_mapDerivedCategory_openImmersionLowerShriek (J : Type (u + 1)) :

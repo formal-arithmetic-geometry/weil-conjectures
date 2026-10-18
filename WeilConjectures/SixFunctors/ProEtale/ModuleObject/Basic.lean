@@ -316,7 +316,8 @@ lemma coverPreserving_profiniteToProEt :
       exact (inferInstance : QuasiCompact (Spec.map (profiniteToCommRingCatOp.map (π a)).unop))
     have : Finite 𝒰.I₀ := by dsimp only [𝒰, Scheme.Cover.mkOfCovers]; infer_instance
     have hmem : Presieve.ofArrows (fun a ↦ profiniteToProEt.obj (Y a))
-        (fun a ↦ profiniteToProEt.map (π a)) ∈ ProEt.precoverage specZ (profiniteToProEt.obj U) := by
+        (fun a ↦ profiniteToProEt.map (π a)) ∈
+          ProEt.precoverage specZ (profiniteToProEt.obj U) := by
       rw [ProEt.precoverage, Precoverage.mem_comap_iff, Presieve.map_ofArrows]
       exact ⟨Scheme.presieve₀_mem_qcPrecoverage_iff.2 (QuasiCompactCover.of_finite (𝒰 := 𝒰)),
         𝒰.mem₀⟩

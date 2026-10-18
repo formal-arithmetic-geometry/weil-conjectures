@@ -109,8 +109,8 @@ theorem nonempty_iso_externalProduct_rightDerivedLowerStar (Λ : Type (u + 1)) [
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
-    (hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
+    (_hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
+    (_hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) b c
         ((R((f)_*[ModuleCat.{u + 1} Λ])).obj M) Q ≅
       (R((pullback.mapOverBaseRight f b c)_*[ModuleCat.{u + 1} Λ])).obj

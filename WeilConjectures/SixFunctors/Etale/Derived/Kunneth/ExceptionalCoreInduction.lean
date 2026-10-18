@@ -189,6 +189,75 @@ theorem coreProp_of_isAffine (hE : RightDerivedLowerShriekCompCoherence Λ) {X :
   subst h
   exact coreProp_comp_of_isClosedImmersion Λ b _ ι hE (coreProp_affineSpace Λ b n)
 
+/-- **The induction on the number of affine opens.** If `X` is covered by at most `n` affine
+opens, the canonical maps of `AlgebraicGeometry.Etale.CoreProp` are isomorphisms for `X`: for
+an affine open `U` of the cover with closed complement `Z` (reduced), `Z` is covered by the
+remaining `n - 1` affine opens, and the dévissage step
+(`AlgebraicGeometry.Etale.coreProp_of_isClosedImmersion_of_isOpenImmersion`) applies. -/
+theorem coreProp_of_card_le (hE : RightDerivedLowerShriekCompCoherence Λ) (n : ℕ) :
+    ∀ {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a]
+      [QuasiCompact a] (t : Finset X.affineOpens), (∀ x : X, ∃ U ∈ t, x ∈ U.1) →
+      t.card ≤ n → CoreProp Λ b a _ _ (IsPullback.of_hasPullback a b) := by
+  classical
+  induction n with
+  | zero =>
+    intro X a _ _ _ t ht hn
+    have : IsEmpty X := ⟨fun x ↦ by
+      obtain ⟨U, hU, -⟩ := ht x
+      rw [Finset.card_eq_zero.1 (Nat.le_zero.1 hn)] at hU
+      simp at hU⟩
+    exact coreProp_of_isAffine Λ b hE a
+  | succ n ih =>
+    intro X a _ _ _ t ht hn
+    by_cases hX : IsEmpty X
+    · exact coreProp_of_isAffine Λ b hE a
+    obtain ⟨x₀⟩ := not_isEmpty_iff.1 hX
+    obtain ⟨U₀, hU₀, -⟩ := ht x₀
+    have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace a
+    have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian a }
+    let j := U₀.1.ι
+    have : TopologicalSpace.NoetherianSpace U₀.1 := j.isOpenEmbedding.isInducing.noetherianSpace
+    have : QuasiCompact j := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+    have : IsAffine U₀.1 := U₀.2
+    let C : TopologicalSpace.Closeds X := ⟨(U₀.1 : Set X)ᶜ, U₀.1.isOpen.isClosed_compl⟩
+    let i := (Scheme.IdealSheafData.vanishingIdeal C).subschemeι
+    have hij : Set.range i.base = (Set.range j.base)ᶜ := by
+      simp [i, j, C, Scheme.IdealSheafData.range_subschemeι,
+        Scheme.IdealSheafData.coe_support_vanishingIdeal]
+    let t' : Finset (Scheme.IdealSheafData.vanishingIdeal C).subscheme.affineOpens :=
+      (t.erase U₀).image fun U ↦ ⟨i ⁻¹ᵁ U.1, U.2.preimage i⟩
+    have ht' : ∀ z, ∃ U ∈ t', z ∈ (U.1 : Scheme.Opens _) := by
+      intro z
+      have hz : i.base z ∉ Set.range j.base := by
+        rw [← Set.mem_compl_iff, ← hij]; exact ⟨z, rfl⟩
+      obtain ⟨U, hU, hzU⟩ := ht (i.base z)
+      refine ⟨⟨i ⁻¹ᵁ U.1, U.2.preimage i⟩, Finset.mem_image_of_mem _
+        (Finset.mem_erase.2 ⟨?_, hU⟩), hzU⟩
+      rintro rfl
+      exact hz (by rw [Scheme.Opens.range_ι]; exact hzU)
+    have hcard : t'.card ≤ n := by
+      refine Finset.card_image_le.trans ?_
+      rw [Finset.card_erase_of_mem hU₀]
+      omega
+    exact coreProp_of_isClosedImmersion_of_isOpenImmersion Λ b hE a i j hij
+      (ih (i ≫ a) t' ht' hcard) (coreProp_of_isAffine Λ b hE (j ≫ a))
+
+/-- The canonical maps of `AlgebraicGeometry.Etale.CoreProp` are isomorphisms for every `X`
+separated of finite type over `k` (`prop-trf-exceptional-kunneth`, constant auxiliary
+coefficient): `X` is covered by finitely many affine opens. -/
+theorem coreProp (hE : RightDerivedLowerShriekCompCoherence Λ) {X : Scheme.{u}}
+    (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] :
+    CoreProp Λ b a _ _ (IsPullback.of_hasPullback a b) := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace a
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover
+    (fun U : X.affineOpens ↦ ((U : X.Opens) : Set X)) (fun U ↦ U.1.isOpen) (fun x _ ↦ by
+      obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+        X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+      exact Set.mem_iUnion.2 ⟨⟨U, hU⟩, hxU⟩)
+  refine coreProp_of_card_le Λ b hE t.card a t (fun x ↦ ?_) le_rfl
+  obtain ⟨U, hU, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
+  exact ⟨U, hU, hx⟩
+
 end Etale
 
 end AlgebraicGeometry
