@@ -356,7 +356,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 |---|---:|
 | proved | 4216 |
 | decomposed | 56 |
-| moved | 4160 |
+| moved | 4161 |
 | pruned | 147 |
 | other | 634 |
 
@@ -374,7 +374,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | A8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | A9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
 | B2 | 142 | 150 | 96 | 54 | 58/142 (40.8%) |
-| B3 | 163 | 171 | 96 | 75 | 66/163 (40.5%) |
+| B3 | 164 | 172 | 97 | 75 | 67/164 (40.9%) |
 | B4 | 83 | 86 | 52 | 34 | 36/83 (43.4%) |
 | B5 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
 | B6 | 3 | 3 | 1 | 2 | 1/3 (33.3%) |
@@ -584,7 +584,7 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 3 | D3 |
 | WeilConjectures.ZetaFunction.TraceFormula | 2 | 1 | — |
 | Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded | 3 | 1 | — |
-| Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology | 3 | 1 | — |
+| Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology | 3 | 1 | C8 |
 | Sheaf.PoincareDuality.ProperProjectionFormulaBounded | 3 | 1 | C3 |
 | WeilConjectures.WeilSheaf.PoincareDuality | 3 | 1 | — |
 | Sheaf.CategoryTheory.RingedDerivedRestriction | 4 | 1 | — |
