@@ -354,14 +354,26 @@ theorem coefficient_le_stage
     (data : NagataMorphismDescentData D c hc i₀ p q phi d hd r) (j : Fin data.J)
     (k : Fin (data.K j)) (l : Fin (data.L j k)) :
     data.coefficientStage j k l ≤ data.stage := by
-  sorry
+  classical
+  apply le_directedFiniteUpperBound i₀ d hd r
+  apply Finset.mem_union_left
+  apply Finset.mem_union_left
+  rw [data.F₀_eq]
+  simp only [Finset.mem_union, Finset.mem_singleton, Finset.mem_biUnion,
+    Finset.mem_univ, true_and, Finset.mem_insert, Finset.mem_image]
+  exact Or.inr ⟨j, k, Or.inr (Or.inr ⟨l, Or.inr rfl⟩)⟩
 
 /-- The final stage is in the original indexing tail. Source: blueprint node order 353
 (blueprint: def-nagata-morphism-descent).
 Proof: i₀ belongs to F₀ and hence F; apply `le_directedFiniteUpperBound` with hd. -/
 theorem base_le_stage
     (data : NagataMorphismDescentData D c hc i₀ p q phi d hd r) : i₀ ≤ data.stage := by
-  sorry
+  classical
+  apply le_directedFiniteUpperBound i₀ d hd r
+  apply Finset.mem_union_left
+  apply Finset.mem_union_left
+  rw [data.F₀_eq]
+  exact Finset.mem_union_left _ (Finset.mem_singleton_self _)
 
 /-- The transported affine charts cover at the chosen stage. Source: blueprint node order
 353 (blueprint: def-nagata-morphism-descent).
@@ -378,7 +390,98 @@ theorem charts_cover
         (data.coefficient_le_stage j k l)) :
       ((baseChangeDiagram D p).obj
         (Over.mk (homOfLE data.base_le_stage).op)).Opens) = ⊤ := by
-  sorry
+  classical
+  have hprime : data.prime ≤ data.stage := by
+    apply le_directedFiniteUpperBound i₀ d hd r
+    simp [stages]
+  have hunion : data.unionStage ≤ data.stage := by
+    apply le_directedFiniteUpperBound i₀ d hd r
+    simp [stages]
+  let f : Over.mk (homOfLE data.base_le_stage).op ⟶
+      Over.mk (homOfLE data.primeGE).op :=
+    Over.homMk (homOfLE hprime).op (Subsingleton.elim _ _)
+  have heq := @nagataQCOpenEqEventually I _ _ _ D c hc (inferInstance) data.prime _
+    (pullback.snd p (D.map (homOfLE data.primeGE).op))
+    data.compactPrime data.separatedPrime data.unionOpen ⊤ data.compactUnion
+    isCompact_univ data.unionLimit_eq d hd r data.stage hprime
+    (data.unionSelected ▸ hunion)
+  let e := (isPullback_baseChangeDiagram_map D p f).isoPullback
+  have hcover : (baseChangeDiagram D p).map f ⁻¹ᵁ data.unionOpen = ⊤ := by
+    have hfst : e.hom ≫ pullback.fst
+        (pullback.snd p (D.map (homOfLE data.primeGE).op))
+        (D.map (homOfLE hprime).op) = (baseChangeDiagram D p).map f :=
+      IsPullback.isoPullback_hom_fst _
+    have h := congrArg (fun W ↦ e.hom ⁻¹ᵁ W) heq
+    simpa only [← Scheme.Hom.comp_preimage, hfst, Scheme.Hom.preimage_top] using h
+  rw [data.unionOpen_eq] at hcover
+  simp only [Scheme.Hom.preimage_iSup] at hcover
+  refine Eq.trans ?_ hcover
+  congr 1
+  funext j
+  congr 1
+  funext k
+  congr 1
+  funext l
+  rw [data.chart_eq, data.chart_eq, ← Scheme.Hom.comp_preimage, ← Functor.map_comp]
+  congr 2
+
+private theorem mapAt_transition
+    (data : NagataMorphismDescentData D c hc i₀ p q phi d hd r)
+    (j : Fin data.J) (k : Fin (data.K j)) (l : Fin (data.L j k))
+    (s t : I) (hs : data.coefficientStage j k l ≤ s) (hst : s ≤ t)
+    (Z : Scheme.{u})
+    (a : Z ⟶ (data.chart j k l t
+      (((data.generatorGE j k l).trans (data.coefficientGE j k l)).trans
+        (hs.trans hst))).toScheme)
+    (b : Z ⟶ (data.chart j k l s
+      (((data.generatorGE j k l).trans (data.coefficientGE j k l)).trans hs)).toScheme)
+    (hab : a ≫ (data.chart j k l t
+        (((data.generatorGE j k l).trans (data.coefficientGE j k l)).trans
+          (hs.trans hst))).ι ≫
+        (baseChangeDiagram D p).map
+          (Over.homMk (homOfLE hst).op (Subsingleton.elim _ _)) =
+      b ≫ (data.chart j k l s
+        (((data.generatorGE j k l).trans (data.coefficientGE j k l)).trans hs)).ι) :
+    a ≫ data.mapAt j k l t (hs.trans hst) ≫
+        (baseChangeDiagram D q).map
+          (Over.homMk (homOfLE hst).op (Subsingleton.elim _ _)) =
+      b ≫ data.mapAt j k l s hs := by
+  have hcoeff : a ≫ data.toCoefficient j k l t (hs.trans hst) =
+      b ≫ data.toCoefficient j k l s hs := by
+    rw [← cancel_mono (data.chart j k l (data.coefficientStage j k l)
+      ((data.generatorGE j k l).trans (data.coefficientGE j k l))).ι]
+    let si : Over (op i₀) := Over.mk (homOfLE ((data.openGE j k).trans
+      (((data.generatorGE j k l).trans (data.coefficientGE j k l)).trans hs))).op
+    let ci : Over (op i₀) := Over.mk (homOfLE ((data.openGE j k).trans
+      ((data.generatorGE j k l).trans (data.coefficientGE j k l)))).op
+    let g : si ⟶ ci := Over.homMk (homOfLE hs).op (Subsingleton.elim _ _)
+    have h := congrArg (fun z ↦ z ≫ (baseChangeDiagram D p).map g) hab
+    simp only [Category.assoc, data.toCoefficient_eq]
+    simp only [Category.assoc, ← Functor.map_comp] at h
+    convert h using 1
+    congr 2
+  apply pullback.hom_ext
+  · simp only [Category.assoc, baseChangeDiagram_map_fst]
+    dsimp only [Over.mk_hom]
+    simpa only [Category.assoc, data.mapAt_fst]
+      using congrArg (fun z ↦ z ≫ data.localMap j k l ≫ (data.V j k).ι) hcoeff
+  · have h := congrArg (fun z ↦ z ≫ pullback.snd p
+        (D.map (homOfLE ((data.openGE j k).trans
+          (((data.generatorGE j k l).trans (data.coefficientGE j k l)).trans hs))).op))
+      hab
+    let si : Over (op i₀) := Over.mk (homOfLE ((data.openGE j k).trans
+      (((data.generatorGE j k l).trans (data.coefficientGE j k l)).trans hs))).op
+    let ti : Over (op i₀) := Over.mk (homOfLE ((data.openGE j k).trans
+      (((data.generatorGE j k l).trans (data.coefficientGE j k l)).trans
+        (hs.trans hst)))).op
+    let f : ti ⟶ si := Over.homMk (homOfLE hst).op (Subsingleton.elim _ _)
+    have hmap := baseChangeDiagram_map_snd D p f
+    dsimp only [si, ti, f, Over.mk_hom, Over.homMk_left] at hmap
+    simp only [Category.assoc, hmap] at h
+    simp only [Category.assoc, baseChangeDiagram_map_snd]
+    dsimp only [Over.mk_hom, Over.homMk_left]
+    rw [← Category.assoc (data.mapAt j k l t (hs.trans hst)), data.mapAt_snd]
+    simpa only [Category.assoc, data.mapAt_snd] using h
 
 /-- The transported maps agree on overlaps at the chosen stage. Source: blueprint node
 order 353 (blueprint: def-nagata-morphism-descent).
@@ -414,7 +517,116 @@ theorem charts_agree
           (data.coefficient_le_stage y.1 y.2.1 y.2.2))).ι ≫
       data.mapAt y.1 y.2.1 y.2.2 data.stage
         (data.coefficient_le_stage y.1 y.2.1 y.2.2) := by
-  sorry
+  classical
+  have hprime : data.prime ≤ data.stage := by
+    apply le_directedFiniteUpperBound i₀ d hd r
+    simp [stages]
+  have hover : data.overlapStage x y ≤ data.stage := by
+    apply le_directedFiniteUpperBound i₀ d hd r
+    simp only [stages, Finset.mem_union, Finset.mem_biUnion, Finset.mem_univ,
+      true_and, Finset.mem_image]
+    exact Or.inr ⟨x, y, rfl⟩
+  let f : Over.mk (homOfLE data.base_le_stage).op ⟶
+      Over.mk (homOfLE data.primeGE).op :=
+    Over.homMk (homOfLE hprime).op (Subsingleton.elim _ _)
+  let fp := (baseChangeDiagram D p).map f
+  let fq := (baseChangeDiagram D q).map f
+  let Xs := (baseChangeDiagram D p).obj (Over.mk (homOfLE data.base_le_stage).op)
+  let U := data.chart x.1 x.2.1 x.2.2 data.stage
+    (((data.generatorGE x.1 x.2.1 x.2.2).trans
+      (data.coefficientGE x.1 x.2.1 x.2.2)).trans
+      (data.coefficient_le_stage x.1 x.2.1 x.2.2))
+  let V := data.chart y.1 y.2.1 y.2.2 data.stage
+    (((data.generatorGE y.1 y.2.1 y.2.2).trans
+      (data.coefficientGE y.1 y.2.1 y.2.2)).trans
+      (data.coefficient_le_stage y.1 y.2.1 y.2.2))
+  have hx : U = fp ⁻¹ᵁ data.chart x.1 x.2.1 x.2.2 data.prime
+      (((data.generatorGE x.1 x.2.1 x.2.2).trans
+        (data.coefficientGE x.1 x.2.1 x.2.2)).trans
+        (data.chartPrimeGE x.1 x.2.1 x.2.2)) := by
+    dsimp only [U, fp]
+    rw [data.chart_eq, data.chart_eq, ← Scheme.Hom.comp_preimage, ← Functor.map_comp]
+    rfl
+  have hy : V = fp ⁻¹ᵁ data.chart y.1 y.2.1 y.2.2 data.prime
+      (((data.generatorGE y.1 y.2.1 y.2.2).trans
+        (data.coefficientGE y.1 y.2.1 y.2.2)).trans
+        (data.chartPrimeGE y.1 y.2.1 y.2.2)) := by
+    dsimp only [V, fp]
+    rw [data.chart_eq, data.chart_eq, ← Scheme.Hom.comp_preimage, ← Functor.map_comp]
+    rfl
+  have ho : U ⊓ V ≤ fp ⁻¹ᵁ data.overlap x y := by
+    rw [data.overlap_eq, Scheme.Hom.preimage_inf, ← hx, ← hy]
+  let z := fp.resLE (data.overlap x y) (U ⊓ V) ho
+  have hz : z ≫ (data.overlap x y).ι = (U ⊓ V).ι ≫ fp :=
+    Scheme.Hom.resLE_comp_ι _ _
+  let ax := Xs.homOfLE (U := U ⊓ V) (V := U) inf_le_left
+  let ay := Xs.homOfLE (U := U ⊓ V) (V := V) inf_le_right
+  have haxι : ax ≫ U.ι = (U ⊓ V).ι := Scheme.homOfLE_ι Xs inf_le_left
+  have hayι : ay ≫ V.ι = (U ⊓ V).ι := Scheme.homOfLE_ι Xs inf_le_right
+  have hax : ax ≫ data.mapAt x.1 x.2.1 x.2.2 data.stage
+        (data.coefficient_le_stage x.1 x.2.1 x.2.2) ≫ fq =
+      z ≫ data.overlapLeft x y := by
+    rw [data.overlapLeft_eq, ← Category.assoc z]
+    apply data.mapAt_transition x.1 x.2.1 x.2.2 data.prime data.stage
+      (data.chartPrimeGE x.1 x.2.1 x.2.2) hprime
+    change ax ≫ U.ι ≫ fp = (z ≫ _) ≫ _
+    rw [← Category.assoc, haxι, Category.assoc, Scheme.homOfLE_ι]
+    exact hz.symm
+  have hay : ay ≫ data.mapAt y.1 y.2.1 y.2.2 data.stage
+        (data.coefficient_le_stage y.1 y.2.1 y.2.2) ≫ fq =
+      z ≫ data.overlapRight x y := by
+    rw [data.overlapRight_eq, ← Category.assoc z]
+    apply data.mapAt_transition y.1 y.2.1 y.2.2 data.prime data.stage
+      (data.chartPrimeGE y.1 y.2.1 y.2.2) hprime
+    change ay ≫ V.ι ≫ fp = (z ≫ _) ≫ _
+    rw [← Category.assoc, hayι, Category.assoc, Scheme.homOfLE_ι]
+    exact hz.symm
+  have : CompactSpace (D.obj (op data.prime)) := data.compactBasePrime
+  have : QuasiSeparatedSpace (D.obj (op data.prime)) := data.separatedBasePrime
+  have : CompactSpace (data.overlap x y).toScheme := data.compactOverlap x y
+  have : QuasiSeparatedSpace (data.overlap x y).toScheme := data.separatedOverlap x y
+  have := data.fpOverlap x y
+  have := data.qcOverlap x y
+  have := data.qsOverlap x y
+  have := data.fpTargetPrime
+  have := data.qcTargetPrime
+  have := data.qsTargetPrime
+  have heq := nagataMorphismEqEventually (data.overlapData x y) data.stage hprime
+    (data.overlapSelected x y ▸ hover)
+  let ps := pullback.snd p (D.map (homOfLE data.base_le_stage).op)
+  let pp := pullback.snd p (D.map (homOfLE data.primeGE).op)
+  let qp := pullback.snd q (D.map (homOfLE data.primeGE).op)
+  let t := D.map (homOfLE hprime).op
+  have hw : z ≫ (data.overlap x y).ι ≫ pp = ((U ⊓ V).ι ≫ ps) ≫ t := by
+    rw [← Category.assoc, hz, Category.assoc]
+    exact congrArg (fun h ↦ (U ⊓ V).ι ≫ h) (baseChangeDiagram_map_snd D p f)
+  let zz := pullback.lift z ((U ⊓ V).ι ≫ ps) hw
+  have heq' : z ≫ data.overlapLeft x y = z ≫ data.overlapRight x y := by
+    have h := congrArg (fun h ↦ zz ≫ h ≫ pullback.fst qp t) heq
+    simp only [Over.pullback_map_left, Over.homMk_left, Over.mk_hom] at h
+    dsimp only [zz, pp, qp, ps, t] at h
+    rw [pullback.lift_fst, pullback.lift_fst] at h
+    simpa only [pullback.lift_fst_assoc] using h
+  have hlocal : ax ≫ data.mapAt x.1 x.2.1 x.2.2 data.stage
+        (data.coefficient_le_stage x.1 x.2.1 x.2.2) =
+      ay ≫ data.mapAt y.1 y.2.1 y.2.2 data.stage
+        (data.coefficient_le_stage y.1 y.2.1 y.2.2) := by
+    apply (isPullback_baseChangeDiagram_map D q f).hom_ext
+    · exact hax.trans (heq'.trans hay.symm)
+    · change (ax ≫ data.mapAt x.1 x.2.1 x.2.2 data.stage _) ≫
+          pullback.snd q (D.map (homOfLE data.base_le_stage).op) =
+        (ay ≫ data.mapAt y.1 y.2.1 y.2.2 data.stage _) ≫
+          pullback.snd q (D.map (homOfLE data.base_le_stage).op)
+      simp only [Category.assoc, data.mapAt_snd]
+      change ax ≫ U.ι ≫ ps = ay ≫ V.ι ≫ ps
+      rw [← Category.assoc, haxι, ← Category.assoc, hayι]
+  let e := (isPullback_opens_inf U V).isoPullback
+  apply (cancel_epi e.hom).1
+  change e.hom ≫ (pullback.fst U.ι V.ι ≫ _) =
+    e.hom ≫ (pullback.snd U.ι V.ι ≫ _)
+  rw [← Category.assoc, IsPullback.isoPullback_hom_fst,
+    ← Category.assoc, IsPullback.isoPullback_hom_snd]
+  exact hlocal
 
 end NagataMorphismDescentData
 
@@ -454,7 +666,13 @@ theorem nagataMorphismDescentGluedMap_over
         (nagataMorphismDescentGluedMap D c hc i₀ p q phi d hd r data).2.1).op) =
       pullback.snd p (D.map (homOfLE
         (nagataMorphismDescentGluedMap D c hc i₀ p q phi d hd r data).2.1).op) := by
-  sorry
+  classical
+  dsimp only [nagataMorphismDescentGluedMap]
+  apply Scheme.Cover.hom_ext
+  · intro x
+    rw [← Category.assoc, Scheme.Cover.ι_glueMorphisms]
+    exact data.mapAt_snd x.1 x.2.1 x.2.2 data.stage
+      (data.coefficient_le_stage x.1 x.2.1 x.2.2)
 
 /-- The finite-stage model of phi, as a morphism over S at the selected stage u(F).
 Source: blueprint node order 353 (blueprint: def-nagata-morphism-descent).
