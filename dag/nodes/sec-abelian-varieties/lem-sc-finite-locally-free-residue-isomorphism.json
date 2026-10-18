@@ -24,38 +24,38 @@
  ],
  "proof": [
   {
-   "text": "Fix s∈S and put R=O_{S,s}, with maximal ideal m and residue field kappa(s). On an open neighbourhood of s both modules are free of finite rank [def-amb-finite-locally-free-module], so E_s and F_s are finite free R-modules. Let C=coker(v_s), a finitely generated R-module (quotient of F_s). Right exactness of tensor product and surjectivity of the fibre map give C/mC=0, so C=0 by Nakayama [lem-weil-pbc-nakayama-local-generators] (with N=0); thus v_s is surjective. Since F_s is free, this surjection splits: E_s ≅ K ⊕ F_s with K=ker(v_s), so K is a direct summand of E_s, hence finitely generated, and the split exact sequence 0→K→E_s→F_s→0 stays exact after tensoring with kappa(s). Hence K⊗kappa(s) is the kernel of the fibre map E_s⊗kappa(s)→F_s⊗kappa(s), which is injective by hypothesis; so K/mK=0, and Nakayama [lem-weil-pbc-nakayama-local-generators] gives K=0. Hence v_s is bijective.",
+   "text": "Refine each constant-rank neighbourhood supplied by hE or hF into an open cover on which that restriction is free of the stated finite rank, using IsFiniteLocallyFreeOfRank.exists_restrict_iso_free. Index the composite open immersions by the sigma type of points and members of the corresponding cover. Every point lies in a member of its own cover. The restriction-composition isomorphism identifies each restricted module with its free model, so isFiniteLocallyFree_of_restrict_iso_free gives finite local freeness of E and F. Apply stalk_isFiniteFree_of_isFiniteLocallyFree to obtain free and finite stalk modules at every point.",
    "uses": [
-    "lem-weil-pbc-nakayama-local-generators",
-    "def-amb-finite-locally-free-module"
+    "def-amb-finite-locally-free-module",
+    "lem-sc-stalk-finite-free-of-finite-locally-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00O0, Lemma cokernel-flat, part (3), local criterion"
-   }
+   "elementary": false
   },
   {
-   "text": "By step 1 the stalk map v_s is bijective for every s∈S, so v is an isomorphism of O_S-modules by [lem-weil-pbc-module-iso-on-stalks].",
+   "text": "For each s, the map O_{S,s} to kappa(s) is a local homomorphism to a field. Apply isIso_of_isIso_extendScalars_of_finite_free to ModuleCat.ofHom (v.stalkLinearMap s), using the two finite free stalks and the given isomorphism of scalar extensions. The concrete isomorphism criterion for ModuleCat gives bijectivity of v.stalkLinearMap s. This uses the already proved finite-free matrix reflection theorem instead of constructing a cokernel and kernel and applying Nakayama twice.",
+   "uses": [
+    "lem-sc-local-free-base-change-reflects-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isIso_of_bijective_stalkLinearMap to v and the bijectivity at every s from the preceding step. This proves IsIso v without modifying its hypotheses or conclusion.",
    "uses": [
     "lem-weil-pbc-module-iso-on-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00O0, Lemma cokernel-flat, part (3), sheaf-local conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-nakayama-local-generators",
   "def-amb-finite-locally-free-module",
+  "lem-sc-stalk-finite-free-of-finite-locally-free",
+  "lem-sc-local-free-base-change-reflects-iso",
   "lem-weil-pbc-module-iso-on-stalks"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00O0, Lemma cokernel-flat, part (3)"
+  "place": "Tag 00O0, Lemma cokernel-flat, part (3); reuse the proved finite-free local-hom matrix criterion and finite-free stalk theorem (A8, 2026-10-18)"
  },
  "mathlib_searches": [
   {
@@ -111,7 +111,6 @@
   "blueprint": "Realizes the theorem-of-the-cube proof sentence concluding that a map of finite locally free modules is an isomorphism when all residue-field fibres are isomorphisms."
  },
  "tool_uses": [
-  "lem-weil-pbc-nakayama-local-generators",
   "lem-weil-pbc-module-iso-on-stalks",
   "def-amb-finite-locally-free-module"
  ],
@@ -153,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261018T062656-L-630028",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

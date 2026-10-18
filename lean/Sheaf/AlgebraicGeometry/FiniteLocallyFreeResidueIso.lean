@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.StalkFiniteFree
+import Sheaf.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
 
 /-!
 # Residue-field criterion for finite locally free modules
@@ -26,6 +27,25 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
 noncomputable section
+
+/-- Assemble the constant-rank neighbourhoods into finite local trivializations. -/
+private theorem isFiniteLocallyFree_of_pointwise {S : Scheme.{u}} (M : S.Modules)
+    (hM : ∀ s : S, ∃ U : S.Opens, s ∈ U ∧
+      ∃ d : ℕ, (M.restrict U.ι).IsFiniteLocallyFreeOfRank d) :
+    M.IsFiniteLocallyFree := by
+  classical
+  choose U hx d hd using hM
+  choose I V hV e using fun s : S ↦
+    @IsFiniteLocallyFreeOfRank.exists_restrict_iso_free _ (M.restrict (U s).ι) (d s) (hd s)
+  refine isFiniteLocallyFree_of_restrict_iso_free M
+    (fun j : Σ s, I s ↦ (V j.1 j.2).ι ≫ (U j.1).ι) ?_
+    (fun j ↦ ULift.{u} (Fin (d j.1))) fun j ↦
+      ⟨(restrictFunctorComp _ _).app M ≪≫ (e j.1 j.2).some⟩
+  apply top_unique
+  intro s hs
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp
+    (show (⟨s, hx s⟩ : U s) ∈ ⨆ i, V s i by rw [hV s]; trivial)
+  exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨s, i⟩, ⟨⟨⟨s, hx s⟩, hi⟩, rfl⟩⟩
 
 /--
 Source: Stacks Project, Tag 00O0, Lemma cokernel-flat, part (3)
@@ -56,7 +76,26 @@ theorem finiteLocallyFree_residueField_isIso {S : Scheme.{u}}
     (h : ∀ s : S, IsIso (X := residueFiber E s) (Y := residueFiber F s)
       ((ModuleCat.extendScalars (S.residue s).hom).map
         (ModuleCat.ofHom (v.stalkLinearMap s)))) : IsIso v := by
-  sorry
+  have := isFiniteLocallyFree_of_pointwise E hE
+  have := isFiniteLocallyFree_of_pointwise F hF
+  apply isIso_of_bijective_stalkLinearMap v
+  intro s
+  have hEs := stalk_isFiniteFree_of_isFiniteLocallyFree E s
+  have hFs := stalk_isFiniteFree_of_isFiniteLocallyFree F s
+  change Module.Free (S.presheaf.stalk s) (E.presheaf.stalk s) ∧
+    Module.Finite (S.presheaf.stalk s) (E.presheaf.stalk s) at hEs
+  change Module.Free (S.presheaf.stalk s) (F.presheaf.stalk s) ∧
+    Module.Finite (S.presheaf.stalk s) (F.presheaf.stalk s) at hFs
+  have := hEs.1
+  have := hEs.2
+  have := hFs.1
+  have := hFs.2
+  have : IsLocalHom (S.residue s).hom := by
+    change IsLocalHom (IsLocalRing.residue (S.presheaf.stalk s))
+    infer_instance
+  have hv := isIso_of_isIso_extendScalars_of_finite_free (S.residue s).hom
+    (ModuleCat.ofHom (v.stalkLinearMap s)) (h s)
+  exact (ConcreteCategory.isIso_iff_bijective _).mp hv
 
 end
 end AlgebraicGeometry.Scheme.Modules
