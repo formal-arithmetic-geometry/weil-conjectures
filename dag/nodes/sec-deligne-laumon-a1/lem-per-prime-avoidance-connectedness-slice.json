@@ -1,0 +1,83 @@
+{
+ "id": "lem-per-prime-avoidance-connectedness-slice",
+ "kind": "statement",
+ "title": "Cutting a closed subset while meeting locally closed pieces",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero Noetherian local ring of finite dimension [def-weil-pbc-noetherian-ring, def-kun-topological-krull-dimension], let $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and put $U=X\\setminus\\{\\mathfrak m\\}$. Let $T\\subseteq X$ be a nonempty closed subset of dimension $e\\geq0$. Let $W_1,\\ldots,W_s$ be a finite family of nonempty locally closed subsets of $U\\setminus T$; the family is allowed to be empty. Then there exist $f_1,\\ldots,f_e\\in\\mathfrak m$ such that $T\\cap V(f_1,\\ldots,f_e)=\\{\\mathfrak m\\}$ and $W_j\\cap V(f_1,\\ldots,f_e)\\ne\\varnothing$ for every $1\\leq j\\leq s$. Here locally closed means the intersection of an open and a closed subset, and $V(f_1,\\ldots,f_e)$ is the set of prime ideals containing every $f_i$.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0ECR (lemma-punctured-still-connected), prime-avoidance construction in the second half of the proof; closed points in the puncture are supplied by Morphisms Tag 02J6 (lemma-ubiquity-Jacobson-schemes), case (4)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian local spectrum cut a nonempty closed subset T of dimension e to the closed point by e equations while meeting finitely many prescribed nonempty locally closed subsets of its punctured complement",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/LTSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {p₁ p₀ : PrimeSpectrum R},\\n  p₀ < p₁ →\\n    p₁ < IsLocalRing.closedPoint R →\\n      ∀ {x : R}, x ∈ IsLocalRing.maximalIdeal R → ∃ q, x ∈ q.asIdeal ∧ p₀ < q ∧ q.asIdeal < IsLocalRing.maximalIdeal R\", \"doc\": \"In a local ring $ R $, given prime ideals $ p_0 $ and $ p_1 $ strictly contained in the maximal ideal $ \\\\mathfrak{m} $ (the closed point) with $ p_0 \\\\subsetneq p_1 $, and an element $ x \\\\in \\\\mathfrak{\"}\n  {\"name\": \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/LTSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] (p : LTSeries (PrimeSpectrum R)) {x : R},\\n  x ∈ (RelSeries.last p).asIdeal →\\n    ∃ q,\\n      x ∈ (q.toFun 1).asIdeal ∧\\n        p.length = q.length ∧ RelSeries.head p = RelSeries.head q ∧ RelSeries.last p = RelSeries.last q\", \"doc\": \"For any strict order relation series $ p $ in the prime spectrum of a commutative semiring $ R $, if an element $ x \\\\in R $ belongs to the last ideal of $ p $, then there exists another strict order r\"}\n  {\"name\": \"PrimeSpectrum.exist_mem_one_of_mem_two\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/LTSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {p₁ p₀ p₂ : PrimeSpectrum R},\\n  p₀ < p₁ → p₁ < p₂ → ∀ {x : R}, x ∈ p₂.asIdeal → ∃ q, x ∈ q.asIdeal ∧ p₀ < q ∧ q < p₂\", \"doc\": \"For any chain of prime ideals $p₀ < p₁ < p₂$ in the prime spectrum of a commutative semiring $R$, and for any element $x$ in the ideal $p₂$, there exists a prime ideal $q$ such that $x$ is in the idea\"}\n  {\"name\": \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], TopologicalSpace.NoetherianSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any Noetherian commutative ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of\"}\n  {\"name\": \"PrimeSpectrum.instNoetherianSpace\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Noetherian\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [IsNoetherianRing R], TopologicalSpace.NoetherianSpace (PrimeSpectrum R)\", \"doc\": \"For any Noetherian ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of Zariski-clo\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [inst_3 : p.IsPrime] [IsArtinianRing R] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R p],\\n  ∃ f ∉ p, ↑(PrimeSpectrum.basicOpen f) = {{ asIdeal := p, isPrime := inst_3 }}\", \"doc\": \"Let $ R $ be an Artinian ring, $ S $ a commutative ring of essential finite type over $ R $, and $ \\\\mathfrak{p} $ a prime ideal of $ S $ such that $ S $ is quasi-finite at $ \\\\mathfrak{p} $. Then there\"}\n  {\"name\": \"Ideal.exists_finset_card_eq_height_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] (p : Ideal R) [p.IsPrime],\\n  ∃ s, p ∈ (Ideal.span ↑s).minimalPrimes ∧ ↑s.card = p.height\", \"doc\": \"In a Noetherian commutative ring $ R $, for any prime ideal $ \\\\mathfrak{p} $, there exists a finite subset $ S \\\\subseteq R $ such that $ \\\\mathfrak{p} $ is a minimal prime ideal containing the ideal ge\"}\n  {\"name\": \"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Jacobson\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsJacobsonRing R] (x : PrimeSpectrum R),\\n  [IsOpen {x}, IsClopen {x}, IsClosed {x} ∧ StableUnderGeneralization {x}].TFAE\", \"doc\": \"In a Noetherian Jacobson ring $ R $, for any prime ideal $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, the following are equivalent: (1) the singleton set $ \\\\{x\\\\} $ is open in the Zariski to\"}\n",
+   "date": "2026-10-19",
+   "verdict": "No match: spectrum closed-point and prime-chain results do not supply simultaneous parameter cutting with prescribed locally closed pieces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime avoidance constructs parameters on a closed subset vanishing at prescribed points closed in the punctured local spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isClosed_zeroLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (s : Set R), IsClosed (PrimeSpectrum.zeroLocus s)\", \"doc\": \"For any subset $ S $ of a commutative semiring $ R $, the zero locus of $ S $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is a closed set in the Zariski topology.\"}\n  {\"name\": \"PrimeSpectrum.isClosed_iff_zeroLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (Z : Set (PrimeSpectrum R)), IsClosed Z ↔ ∃ s, Z = PrimeSpectrum.zeroLocus s\", \"doc\": \"A subset $ Z $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $ is closed in the Zariski topology if and only if there exists a subset $ s \\\\subseteq R $ such that $ Z $\"}\n  {\"name\": \"PrimeSpectrum.basicOpen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"{R : Type u} → [inst : CommSemiring R] → R → TopologicalSpace.Opens (PrimeSpectrum R)\", \"doc\": \"For a commutative semiring $ R $, the basic open set $ D(r) $ in the Zariski topology on $ \\\\operatorname{Spec}(R) $ is the set of all prime ideals that do not contain the element $ r \\\\in R $. This cor\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"module\": \"Mathlib/Geometry/RingedSpace/Basic\", \"type\": \"(X : AlgebraicGeometry.RingedSpace) →\\n  {U : TopologicalSpace.Opens ↑↑X.toPresheafedSpace} → Set ↑(X.presheaf.obj (Opposite.op U)) → Set ↑↑X.toPresheafedSpace\", \"doc\": \"For a ringed space $ X $, given an open subset $ U $ and a set $ s $ of sections over $ U $, the zero locus $ \\\\text{ZeroLocus}(U, s) $ is the set of all points $ x \\\\in U $ such that the germ of every \"}\n  {\"name\": \"PrimeSpectrum.isClosed_iff_zeroLocus_ideal\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (Z : Set (PrimeSpectrum R)), IsClosed Z ↔ ∃ I, Z = PrimeSpectrum.zeroLocus ↑I\", \"doc\": \"A subset $ Z $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $ is closed in the Zariski topology if and only if there exists an ideal $ I $ of $ R $ such that $ Z $ is\"}\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_isClosed_isIrreducible\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R],\\n  PrimeSpectrum.vanishingIdeal '' {s | IsClosed s ∧ IsIrreducible s} = {P | P.IsPrime}\", \"doc\": \"The vanishing ideal of a closed irreducible subset of the prime spectrum $\\\\operatorname{Spec}(R)$ under the Zariski topology is a prime ideal of the commutative semiring $R$. Conversely, every prime i\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.mem_zeroLocus_iff\", \"module\": \"Mathlib/Geometry/RingedSpace/Basic\", \"type\": \"∀ (X : AlgebraicGeometry.RingedSpace) {U : TopologicalSpace.Opens ↑↑X.toPresheafedSpace}\\n  (s : Set ↑(X.presheaf.obj (Opposite.op U))) (x : ↑↑X.toPresheafedSpace),\\n  x ∈ X.zeroLocus s ↔ ∀ f ∈ s, x ∉ X.basicOpen f\", \"doc\": \"A point $x$ in a ringed space $X$ belongs to the zero locus of a set $s$ of sections over an open set $U$ if and only if for every section $f$ in $s$, the point $x$ is not contained in the basic open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mem_zeroLocus_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (s : Set ↑(X.presheaf.obj (Opposite.op U))) (x : ↥X),\\n  x ∈ X.zeroLocus s ↔ ∀ f ∈ s, x ∉ X.basicOpen f\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, a set $s$ of sections of the structure sheaf over $U$, and a point $x \\\\in X$, the point $x$ lies in the zero locus of $s$ if and only if for every sec\"}\n",
+   "date": "2026-10-19",
+   "verdict": "No match: spectrum closed-point and prime-chain results do not supply simultaneous parameter cutting with prescribed locally closed pieces."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, PrimeSpectrum, IsClosed",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"IsLocalRing.isClosed_singleton_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" (R : Type u) [CommSemiring R] [IsLocalRing R] : IsClosed {IsLocalRing.closedPoint R}\", \"doc\": \"\"}\n",
+   "date": "2026-10-19",
+   "verdict": "No match: spectrum closed-point and prime-chain results do not supply simultaneous parameter cutting with prescribed locally closed pieces."
+  },
+  {
+   "tool": "grep",
+   "query": "primeAvoidance|prime_avoidance|punctured.*[Jj]acobson|[Jj]acobson.*punctured",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "No match: spectrum closed-point and prime-chain results do not supply simultaneous parameter cutting with prescribed locally closed pieces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "System of parameters cutting a closed subset while preserving points in finitely many locally closed subsets of a punctured local spectrum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": PrimeSpectrum R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal. This defines a closed point in the prime spectrum of $ R $, corresponding to the u\"}\n  {\"name\": \"IsLocalRing.closedPoint.congr_simp\", \"module\": \"Mathlib.RingTheory.KrullDimension.Module\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [inst_1 : IsLocalRing R], IsLocalRing.closedPoint R = IsLocalRing.closedPoint R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal, thereby defining a closed point in the prime spectrum of $ R $.\"}\n  {\"name\": \"IsLocalRing.specializes_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(x : PrimeSpectrum R) : x ⤳ closedPoint R\", \"doc\": \"In the Zariski topology on the prime spectrum of a local ring $ R $, every prime ideal specializes to the unique closed point corresponding to the maximal ideal of $ R $.\"}\n  {\"name\": \"IsLocalRing.isClosed_singleton_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": IsClosed {closedPoint R}\", \"doc\": \"In the prime spectrum of a local ring equipped with the Zariski topology, the singleton set containing the unique closed point (the maximal ideal) is a closed set. This follows because the maximal ide\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Basic\", \"type\": \"(s : Set R) : Set (PrimeSpectrum R)\", \"doc\": \"The zero locus of a subset $ S $ of a commutative semiring $ R $ is the set of all prime ideals in the prime spectrum of $ R $ that contain $ S $ as a subset of their underlying ideal.\"}\n  {\"name\": \"IsLocalRing.closedPoint_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(U : TopologicalSpace.Opens <| PrimeSpectrum R) : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point of $ R $ is contained in an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if $ U $ is the entire space $ \\\\operatorname{Spec}(R\"}\n  {\"name\": \"IsLocalRing.closed_point_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{U : TopologicalSpace.Opens (PrimeSpectrum R)} : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point $ \\\\mathfrak{m} $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in an open set $ U $ if and only if $ U $ is the entire space $ \\\\operatorname{Sp\"}\n  {\"name\": \"IsLocalRing.comap_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{S : Type v} [CommSemiring S] [IsLocalRing S] (f : R →+* S) [IsLocalHom f] :\\n  PrimeSpectrum.comap f (closedPoint S) = closedPoint R\", \"doc\": \"Given commutative semirings $ R $ and $ S $, where $ S $ is a local ring, and a local homomorphism $ f : R \\\\to S $, the preimage of the closed point (maximal ideal) in the prime spectrum of $ S $ unde\"}\n",
+   "date": "2026-10-19",
+   "verdict": "No match: spectrum closed-point and prime-chain results do not supply simultaneous parameter cutting with prescribed locally closed pieces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-complete-local-connectedness-bound",
+  "date": "2026-10-19",
+  "group": "Q11"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The prime-avoidance slicing construction in the complete-local connectedness input, retaining points in the two clopen pieces; the zero-piece case treats an empty complement.",
+   "via": [
+    "lem-per-complete-local-connectedness-bound",
+    "lem-per-normal-punctured-hypersurface-connected",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

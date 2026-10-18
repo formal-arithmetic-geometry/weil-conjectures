@@ -16,24 +16,128 @@
   "def-weil-connected-scheme",
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $t=\\operatorname{cd}(R,I)$, with local cohomology and its dimension as defined in [lem-per-local-cohomology-generator-bound]. That statement gives $0\\leq t\\leq r$. We first prove the punctured assertion for the stronger hypothesis $t<\\min(c,d-1)$, so that it can later be applied to any proper ideal, including one obtained by adjoining equations.",
+   "uses": [
+    "lem-per-local-cohomology-generator-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  },
+  {
+   "text": "Under $t<\\min(c,d-1)$, the puncture $Y\\setminus\\{\\mathfrak m\\}$ cannot be empty. Otherwise $X\\cap V(I)=\\{\\mathfrak m\\}$; [lem-per-isolated-intersection-dimension-bound] with $Z=X$ gives $\\dim X\\leq t$. Every irreducible component is a subspace of $X$, so its chains are also chains in $X$ and $d\\leq\\dim X\\leq t$, contradicting $t<d-1$. Thus $U\\cap Y$ is nonempty, for $U=X\\setminus\\{\\mathfrak m\\}$.",
+   "uses": [
+    "lem-per-isolated-intersection-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  },
+  {
+   "text": "Still assume $t<\\min(c,d-1)$. Since $d>t+1$, apply [lem-per-formal-punctured-idempotent-algebraization] with $A=R$. Its hypotheses are exactly the complete Noetherian local hypotheses of this item. It supplies the ring isomorphism from the colimit of $\\Gamma(V_{\\rm red},\\mathcal O)$ over neighborhoods $V$ of $U\\cap Y$ to the inverse limit of $\\Gamma(T_n,\\mathcal O)$. Here $R_{\\rm red}=R/\\sqrt{(0)}$ is used only for the structure sheaf: every prime of $R$ contains $\\sqrt{(0)}$, and a prime contains $I^n$ exactly when it contains $I$. Thus all $T_n$ have underlying space $U\\cap Y$, and $V_{\\rm red}$ has the same underlying space as $V$.",
+   "uses": [
+    "lem-per-formal-punctured-idempotent-algebraization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  },
+  {
+   "text": "If $U\\cap Y=W_1\\amalg W_2$ were a separation into nonempty clopen subsets, [lem-weil-pbc-scheme-clopen-idempotent](b) gives on each $T_n$ the idempotent $e_n$ equal to $1$ on $W_1$ and $0$ on $W_2$. Part (c) shows compatibility under reduction, and nonemptiness of both pieces gives $e_n\\ne0,1$. Via the preceding isomorphism this compatible family has a preimage $a$ in the colimit ring. Represent $a$ by a section on one $V_{\\rm red}$. Since $a^2-a=0$ in the filtered colimit, after restricting to a smaller neighborhood its representative $e$ satisfies $e^2=e$. The neighborhoods form a filtered system because the intersection of two is again a neighborhood. The representative is neither $0$ nor $1$, since either equality would give $e_n=0$ or $1$ for every $n$. By part (b) of the same cited statement it determines a nontrivial clopen separation of $V_{\\rm red}$, hence of $V$.",
+   "uses": [
+    "lem-weil-pbc-scheme-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  },
+  {
+   "text": "For this disconnected neighborhood $V\\subseteq U$ put $Z=X\\setminus V$. The inclusion $U\\cap Y\\subseteq V$ gives $Z\\cap Y=\\{\\mathfrak m\\}$. Thus [lem-per-isolated-intersection-dimension-bound] gives $\\dim Z\\leq t$. The definition of $c$ gives $c\\leq\\dim Z$, since $X\\setminus Z=V$ is disconnected. This contradicts $t<c$. This proves that $Y\\setminus\\{\\mathfrak m\\}$ is nonempty and connected whenever $\\operatorname{cd}(R,I)<\\min(c,d-1)$.",
+   "uses": [
+    "lem-per-isolated-intersection-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  },
+  {
+   "text": "Now fix closed $T\\subseteq Y$. If $T=\\varnothing$, then $Y=\\operatorname{Spec}(R/I)$ is nonempty and connected: its maximal ideal gives a point, and any clopen piece containing this point contains every prime, because opens are stable under generalization and every prime is contained in the maximal ideal. Hence no separation into two nonempty clopen pieces exists. This proves the assertion in this case without any numerical assumption. Otherwise $T$ contains $\\mathfrak m$ (every nonempty closed subset of a local spectrum contains its closed point), and $e=\\dim T$ is a finite nonnegative integer. Suppose for contradiction that $Y\\setminus T$ is not connected. By [def-weil-connected-scheme], it is either empty or the disjoint union of two nonempty clopen pieces $W_1,W_2$.",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-per-prime-avoidance-connectedness-slice] to this nonempty closed $T\\subseteq X$. If $Y\\setminus T$ is empty use the empty family; otherwise use the two pieces $W_1,W_2$. These are locally closed subsets of $U\\setminus T$: $Y\\setminus T$ is closed in $U\\setminus T$, and each piece is open and closed in it. Obtain $e$ elements $f_i\\in\\mathfrak m$, and set $K=(f_1,\\ldots,f_e)$ and $J=I+K$. The slice $V(K)$ meets $T$ only at $\\mathfrak m$ and meets both pieces when present. Since $I$ and all $f_i$ lie in $\\mathfrak m$, $J$ is proper.",
+   "uses": [
+    "lem-per-prime-avoidance-connectedness-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  },
+  {
+   "text": "The puncture $V(J)\\setminus\\{\\mathfrak m\\}$ is not connected. Indeed it equals $V(K)\\cap(Y\\setminus T)$, because $V(K)\\cap T=\\{\\mathfrak m\\}$. If $Y=T$ this set is empty. Otherwise its intersections with $W_1$ and $W_2$ are disjoint, nonempty, clopen, and cover it. This supplies the small detail omitted in the source and treats its empty case as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  },
+  {
+   "text": "For the proper ideal $J=I+(f_1,\\ldots,f_e)$, [lem-per-local-cohomology-generator-bound] gives $\\operatorname{cd}(R,J)\\leq t+e$. Apply the contrapositive of the punctured assertion proved in steps 2--5 to $J$: its disconnected (possibly empty) puncture forces $\\min(c,d-1)\\leq\\operatorname{cd}(R,J)\\leq t+e\\leq r+e$. Therefore $\\dim T=e\\geq\\min(c,d-1)-r$. This contradicts the hypothesis of the item and proves its general assertion.",
+   "uses": [
+    "lem-per-local-cohomology-generator-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  },
+  {
+   "text": "Finally $\\{\\mathfrak m\\}\\subseteq Y$ is closed and has dimension $0$. If $r<\\min(c,d-1)$, then $0<\\min(c,d-1)-r$, so the general assertion with $T=\\{\\mathfrak m\\}$ gives the stated nonempty connected puncture.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR (lemma-punctured-still-connected), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-connected-scheme",
+  "lem-per-formal-punctured-idempotent-algebraization",
+  "lem-per-isolated-intersection-dimension-bound",
+  "lem-per-local-cohomology-generator-bound",
+  "lem-per-prime-avoidance-connectedness-slice",
+  "lem-weil-pbc-scheme-clopen-idempotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0ECR (lemma-punctured-still-connected), both cases of its slicing argument and its formal-sections proof; generator bound Tag 0DX9 and proper-sum bound Tag 0ECP."
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Grothendieck connectedness bound for a complete Noetherian local ring quotient by an ideal with r generators using connectedness dimension and dimensions of irreducible components",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_card\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {S : Finset R},\\n  ↑S ⊆ ↑(IsLocalRing.maximalIdeal R) → ringKrullDim R ≤ ringKrullDim (R ⧸ Ideal.span ↑S) + ↑S.card\", \"doc\": \"For a commutative ring $ R $ and a finite set $ S $ of elements in the maximal ideal of $ R $, the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R / I $ (where $ I $ i\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] {I : Ideal R},\\n  I ≠ ⊤ → ringKrullDim R ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a commutative ring $ R $ and a proper ideal $ I $ of $ R $, the Krull dimension of $ R $ is less than or equal to the sum of the Krull dimension of the quotient ring $ R/I $ and the finite rank of\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotient_add_card\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] (s : Finset R),\\n  ↑s ⊆ ↑(Ring.jacobson R) → ringKrullDim R ≤ ringKrullDim (R ⧸ Ideal.span ↑s) + ↑s.card\", \"doc\": \"For any finite set $s$ of elements in the Jacobson radical of a commutative ring $R$, the Krull dimension of $R$ is less than or equal to the Krull dimension of the quotient ring $R/I$ (where $I$ is t\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R],\\n  ∀ I ≤ Ring.jacobson R, ringKrullDim R ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ contained in the Jacobson radical of $ R $, the Krull dimension of $ R $ is at most the sum of the Krull dimension of the quotient ring $ R/I $ and the \"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotient_add_encard\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R],\\n  ∀ s ⊆ ↑(Ring.jacobson R), ringKrullDim R ≤ ringKrullDim (R ⧸ Ideal.span s) + ↑s.encard\", \"doc\": \"For a commutative ring $ R $ and a subset $ s $ of its Jacobson radical $ \\\\text{Jac}(R) $, the Krull dimension of $ R $ satisfies $ \\\\dim(R) \\\\leq \\\\dim(R/(s)) + |s| $, where $ (s) $ denotes the ideal ge\"}\n  {\"name\": \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] (rs : List R),\\n  RingTheory.Sequence.IsRegular R rs → ringKrullDim (R ⧸ Ideal.ofList rs) + ↑rs.length = ringKrullDim R\", \"doc\": \"For a commutative ring $ R $ and a regular sequence $ rs $ in $ R $, the Krull dimension of the quotient ring $ R $ modulo the ideal generated by $ rs $ plus the length of $ rs $ equals the Krull dime\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → ringKrullDim R ≤ ringKrullDim (R ⧸ x • ⊤) + 1\", \"doc\": \"If $ x $ is an element of the maximal ideal of a commutative semiring $ R $, then the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R/(x) $ plus one, i.e., $ \\\\dim(R) \\\\\"}\n  {\"name\": \"height_le_ringKrullDim_quotient_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {p I : Ideal R} [p.IsPrime],\\n  I ≤ p → ↑p.height ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ R $ containing an ideal $ I $, the height of $ p $ satisfies $ \\\\operatorname{ht}(p) \\\\leq \\\\dim(R/I) + \\\\operatorname{rank}(I) $, where $ \\\\dim(R/I) $ denot\"}\n",
-   "date": "2026-10-19",
-   "verdict": "no match: dimension bounds, completeness and unrelated connectedness results do not state this connectedness estimate"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Punctured spectrum of a complete local ring quotient is connected when the number of generators of the ideal is less than the connectedness dimension and minimum component dimension minus one",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": PrimeSpectrum R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal. This defines a closed point in the prime spectrum of $ R $, corresponding to the u\"}\n  {\"name\": \"PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Jacobson\", \"type\": \"[IsJacobsonRing R] : JacobsonSpace (PrimeSpectrum R)\", \"doc\": \"If $ R $ is a Jacobson ring, then the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Jacobson space. This means that every closed irreducible subset of $ \\\\operatorna\"}\n  {\"name\": \"IsLocalRing.isClosed_singleton_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": IsClosed {closedPoint R}\", \"doc\": \"In the prime spectrum of a local ring equipped with the Zariski topology, the singleton set containing the unique closed point (the maximal ideal) is a closed set. This follows because the maximal ide\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"module\": \"Mathlib.RingTheory.KrullDimension.Regular\", \"type\": \"{I : Ideal R} (h : I ≠ ⊤) : ringKrullDim R ≤ ringKrullDim (R ⧸ I) + I.spanFinrank\", \"doc\": \"For a commutative ring $ R $ and a proper ideal $ I $ of $ R $, the Krull dimension of $ R $ is less than or equal to the sum of the Krull dimension of the quotient ring $ R/I $ and the finite rank of\"}\n  {\"name\": \"IsLocalRing.closedPoint.congr_simp\", \"module\": \"Mathlib.RingTheory.KrullDimension.Module\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [inst_1 : IsLocalRing R], IsLocalRing.closedPoint R = IsLocalRing.closedPoint R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal, thereby defining a closed point in the prime spectrum of $ R $.\"}\n  {\"name\": \"Ring.KrullDimLE.subsingleton_primeSpectrum\", \"module\": \"Mathlib.RingTheory.KrullDimension.Zero\", \"type\": \"[IsLocalRing R] : Subsingleton (PrimeSpectrum R)\", \"doc\": \"If $ R $ is a local ring, then its prime spectrum $ \\text{Spec}(R) $ contains at most one prime ideal, i.e., $ \\text{Spec}(R) $ is a subsingleton set.\"}\n  {\"name\": \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{R : CommRingCat} [IsDomain R] : IrreducibleSpace (Spec R)\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is an irreducible topological space. This means $ \\\\operatorn\"}\n  {\"name\": \"isConnected_compl_of_one_lt_codim\", \"module\": \"Mathlib.Analysis.Normed.Module.Connected\", \"type\": \"{E : Submodule ℝ F} (hcodim : 1 < Module.rank ℝ (F ⧸ E)) : IsConnected (Eᶜ : Set F)\", \"doc\": \"If the codimension of a subspace $ E $ in a real vector space $ F $ (i.e., the rank of the quotient module $ F/E $) is strictly greater than one, then the complement of $ E $ in $ F $ is a connected s\"}\n",
-   "date": "2026-10-19",
-   "verdict": "no match: dimension bounds, completeness and unrelated connectedness results do not state this connectedness estimate"
-  },
   {
    "tool": "loogle",
    "query": "PrimeSpectrum, IsConnected",
@@ -50,14 +154,21 @@
   },
   {
    "tool": "leanfinder",
-   "query": "Faltings connectedness theorem for ideals of complete local rings",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete.le_jacobson_bot\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], I ≤ ⊥.jacobson\", \"doc\": \"If a commutative ring $ R $ is $ I $-adic complete with respect to an ideal $ I $, then $ I $ is contained in the Jacobson radical of $ R $, which is the intersection of all maximal ideals of $ R $. T\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"IsHausdorff.of_isLocalRing\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M] [IsLocalRing R], I ≠ ⊤ → IsHausdorff I M\", \"doc\": \"If $ R $ is a local ring and $ I $ is a proper ideal of $ R $, then the $ I $-adic topology on the module $ M $ is Hausdorff, meaning the intersection of all powers of $ I $ in $ M $ is trivial.\"}\n  {\"name\": \"isUnit_iff_notMem_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R] (r : R), IsUnit r ↔ r ∉ m\", \"doc\": \"In an adic complete commutative ring $ R $ with respect to a maximal ideal $ \\\\mathfrak{m} $, an element $ r \\\\in R $ is a unit if and only if $ r \\\\notin \\\\mathfrak{m} $.\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsHausdorff.of_isDomain\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R] [IsDomain R], I ≠ ⊤ → IsHausdorff I R\", \"doc\": \"If $ R $ is a Noetherian ring and $ I $ is a proper ideal of $ R $, then the $ I $-adic topology on $ R $ is Hausdorff.\"}\n  {\"name\": \"instIsHausdorffMaximalIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsNoetherianRing R]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R], IsHausdorff (IsLocalRing.maximalIdeal R) M\", \"doc\": \"The maximal ideal of a local Noetherian ring is equipped with a Hausdorff topology, ensuring that the intersection of all powers of the ideal is trivial.\"}\n",
+   "query": "Complete Noetherian local quotient by r equations has connectedness dimension at least min of connectedness dimension of the ring and minimum component dimension minus one minus r",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_card\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {S : Finset R},\\n  ↑S ⊆ ↑(IsLocalRing.maximalIdeal R) → ringKrullDim R ≤ ringKrullDim (R ⧸ Ideal.span ↑S) + ↑S.card\", \"doc\": \"For a commutative ring $ R $ and a finite set $ S $ of elements in the maximal ideal of $ R $, the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R / I $ (where $ I $ i\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] {I : Ideal R},\\n  I ≠ ⊤ → ringKrullDim R ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a commutative ring $ R $ and a proper ideal $ I $ of $ R $, the Krull dimension of $ R $ is less than or equal to the sum of the Krull dimension of the quotient ring $ R/I $ and the finite rank of\"}\n  {\"name\": \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] (rs : List R),\\n  RingTheory.Sequence.IsRegular R rs → ringKrullDim (R ⧸ Ideal.ofList rs) + ↑rs.length = ringKrullDim R\", \"doc\": \"For a commutative ring $ R $ and a regular sequence $ rs $ in $ R $, the Krull dimension of the quotient ring $ R $ modulo the ideal generated by $ rs $ plus the length of $ rs $ equals the Krull dime\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → ringKrullDim R ≤ ringKrullDim (R ⧸ x • ⊤) + 1\", \"doc\": \"If $ x $ is an element of the maximal ideal of a commutative semiring $ R $, then the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R/(x) $ plus one, i.e., $ \\\\dim(R) \\\\\"}\n  {\"name\": \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  IsSMulRegular R x → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R\", \"doc\": \"For a local ring $ R $, if $ x $ is a regular element in its maximal ideal, then the Krull dimension of the quotient ring $ R / (x) $ satisfies $ \\\\dim(R / (x)) + 1 = \\\\dim(R) $.\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotient_add_encard\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R],\\n  ∀ s ⊆ ↑(Ring.jacobson R), ringKrullDim R ≤ ringKrullDim (R ⧸ Ideal.span s) + ↑s.encard\", \"doc\": \"For a commutative ring $ R $ and a subset $ s $ of its Jacobson radical $ \\\\text{Jac}(R) $, the Krull dimension of $ R $ satisfies $ \\\\dim(R) \\\\leq \\\\dim(R/(s)) + |s| $, where $ (s) $ denotes the ideal ge\"}\n  {\"name\": \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  x ∈ nonZeroDivisors R → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a non-zero divisor in the maximal ideal of a local ring $ R $, then the Krull dimension of the quotient ring $ R / (x) $ satisfies $ \\\\dim(R / (x)) + 1 = \\\\dim(R) $, where $ (x) $ denotes th\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R],\\n  ∀ I ≤ Ring.jacobson R, ringKrullDim R ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ contained in the Jacobson radical of $ R $, the Krull dimension of $ R $ is at most the sum of the Krull dimension of the quotient ring $ R/I $ and the \"}\n",
    "date": "2026-10-19",
-   "verdict": "no match: dimension bounds, completeness and unrelated connectedness results do not state this connectedness estimate"
+   "verdict": "No match: the hits are Krull dimension inequalities, not a connectedness estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck Faltings connectedness estimate for complete local rings and the number of generators of an ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.FG.of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Noetherian.Defs\", \"type\": \"∀ {R : Type u_1} [inst : Semiring R] [IsNoetherianRing R] (I : Ideal R), I.FG\", \"doc\": \"In a Noetherian ring $ R $, every ideal $ I $ is finitely generated. That is, if $ R $ is a semiring equipped with the Noetherian property (every ideal is finitely generated), then for any ideal $ I \\\\\"}\n  {\"name\": \"Ideal.fg_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Noetherian.Defs\", \"type\": \"{R : Type*} [Semiring R] [IsNoetherianRing R] (I : Ideal R) : I.FG\", \"doc\": \"In a Noetherian ring $ R $, every ideal $ I $ is finitely generated.\"}\n  {\"name\": \"Ideal.fg_of_localizationSpan\", \"module\": \"Mathlib.RingTheory.Localization.Finiteness\", \"type\": \"{I : Ideal R} (t : Set R) (ht : Ideal.span t = ⊤)\\n  (H : ∀ (g : t), (I.map (algebraMap R (Localization.Away g.val))).FG) : I.FG\", \"doc\": \"If an ideal $ I $ in a ring $ R $ satisfies that for every element $ g $ in a set $ t $ generating $ R $ as an ideal, the localization of $ I $ at the multiplicative set generated by $ g $ is finitely\"}\n  {\"name\": \"Algebra.Presentation.ofFinitePresentationRels\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Basic\", \"type\": \"[FinitePresentation R S] : ℕ\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-algebra $ S $ that is finitely presented, this definition specifies the number of generators in a finite presentation of $ S $ as the quotient of a polynomi\"}\n  {\"name\": \"Algebra.Presentation.ofFinitePresentationVars\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Basic\", \"type\": \"[FinitePresentation R S] : ℕ\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-algebra $ S $ that is finitely presented over $ R $, this function returns the natural number representing the number of generators in a finite presentation\"}\n  {\"name\": \"Algebra.FiniteType.of_span_eq_top_target\", \"module\": \"Mathlib.RingTheory.RingHom.FiniteType\", \"type\": \"(s : Set S) (hs : Ideal.span (s : Set S) = ⊤) (h : ∀ x ∈ s, Algebra.FiniteType R (Localization.Away x)) :\\n  Algebra.FiniteType R S\", \"doc\": \"If the ideal generated by a set $ s $ in $ S $ is the entire ring (i.e., $ \\\\text{span}(s) = \\\\top $), and for every $ x \\\\in s $ the localization $ S_x $ is a finitely generated $ R $-algebra, then $ S \"}\n  {\"name\": \"Module.Finite.of_localizationSpan\", \"module\": \"Mathlib.RingTheory.Localization.Finiteness\", \"type\": \"(t : Set R) (ht : Ideal.span t = ⊤)\\n  (H : ∀ (g : t), Module.Finite (Localization.Away g.val) (LocalizedModule (Submonoid.powers g.val) M)) :\\n  Module.Finite R M\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. Let $t \\\\subseteq R$ be a set of elements such that the ideal generated by $t$ is $R$ itself (i.e., $\\\\langle t \\\\rangle = R$). If for every elemen\"}\n  {\"name\": \"Ideal.fg_top\", \"module\": \"Mathlib.RingTheory.Finiteness.Basic\", \"type\": \": (⊤ : Ideal R).FG\", \"doc\": \"The entire ring $ R $, considered as an ideal over itself, is finitely generated.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "No match: finite generation and presentation lemmas do not assert connectedness."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-punctured-hypersurface-connected",
@@ -82,5 +193,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-complete-local-connectedness-bound",
+  "worker": "stage1",
+  "summary": "Repaired retained work after the mandatory first dry run: replaced unlogged search claims with actual msearch results, corrected the sum-bound tag to 0ECP, exposed the formal-section ring comparison instead of moving the connectedness conclusion to a helper, added the isolated-intersection dimension bound, and wrote both empty-complement and separated-complement slicing cases. Item statement unchanged. Four statement-only new nodes; no Lean writing or compilation.",
+  "blueprint": "Proof Step 1 of the blueprint ancestor: the connectedness input used in the normal-local top-residue-class construction; the four steps realize the complete-local punctured connectedness estimate and its generator-bound reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-clopen-idempotent",
+    "why": "Generic scheme idempotents/clopen bijection and its pullback compatibility, used on infinitesimal neighborhoods and an algebraized open; no statement in this unit supplies this general scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-clopen-idempotent"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-a0ee0e770",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-a0ee0e770 (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes, every cited statement, and the Stacks sources (0ECR in full, 0DXR, 0DX7/0DX8/0DX9, 0ECP, 0DXF, 02J6(4)); all tags match their labels. The item statement is unchanged. It is 0ECR with cd replaced by the generator count r, which is valid because cd ≤ r. It holds at T=∅ (Y=Spec R/I is local) and at dim R=0 (only T=∅ qualifies). Steps 2–5 follow 0ECR's first half. The empty puncture gives d ≤ dim X ≤ t < d−1. The formal-sections comparison plus clopen-idempotent (b),(c) gives a disconnected V, with the filtered-colimit lift of the idempotent written out. Z=X\\V meets Y only in {m}, so c ≤ dim Z ≤ t. Steps 6–9 follow the slicing half, cases Y=T and two clopen pieces. The 'small detail omitted' is written out as V(J)\\{m}=V(K)∩(Y\\T). The proper-sum bound gives cd(R,J) ≤ t+e, and the contrapositive is applied to J without a cycle. All 4 new nodes are true, statement-only and smaller than the item. Generator bound: needs I+J≠A, a valid source-error restriction since 0ECP fails at I=J=A with cd(A,A)=−1. Isolated-intersection bound: 0DXF applied to each irreducible component. Formal sections: 0DXR for (A/√0)~ on U; it has a dualizing complex (0BFR), I-adic completeness (090T), and its associated points are the minimal primes, each of dimension ≥ d > cd+1. Slicing: prime avoidance on ∏p_j for points w_j closed in U, which exist by the Jacobson property; checked at e=0 and s=0. Duplicate grep over the DAG for these tags and concepts found no existing node. No SGA. proof_deps equals the union of uses. I accept the tool use lem-weil-pbc-scheme-clopen-idempotent (generic scheme fact). Advisory: the inline Γ_K definition could cite def-sbc-ideal-power-torsion-functor. The formal-sections node id still says 'idempotent'. No fixes."
  }
 }
