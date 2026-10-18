@@ -4,9 +4,7 @@ Copyright (c) 2026 The SHEAF contributors.
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleLeftComplete
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
-import Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant
 
 /-!
 # Cohomology of the truncation tower

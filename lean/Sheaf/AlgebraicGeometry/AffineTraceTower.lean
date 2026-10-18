@@ -5,9 +5,7 @@ Authors: SHEAF group Q24
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
-public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.Defs
 
 /-!

@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.RegularImmersionPureCodimension
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 
 /-!

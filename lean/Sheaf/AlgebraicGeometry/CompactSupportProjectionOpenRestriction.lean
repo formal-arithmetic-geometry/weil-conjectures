@@ -6,7 +6,6 @@ Authors: SHEAF group Q81
 module
 
 public import Sheaf.AlgebraicGeometry.CompactProjectionExchange
-public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Compact-support projection and open restriction

@@ -6,10 +6,6 @@ Authors: SHEAF group N8
 module
 
 public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
-public import Mathlib.AlgebraicGeometry.OpenImmersion
-public import Mathlib.CategoryTheory.Endomorphism
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Frobenius squares for an open subscheme over a finite field

@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.Algebra.Homology.Functor
 
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-!
 # Levelwise K-injective towers compute additive functors

@@ -5,7 +5,6 @@ Authors: SHEAF group N4
 -/
 module
 
-public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.CompletedConstantSheafReduction
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification

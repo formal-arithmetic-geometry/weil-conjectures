@@ -5,7 +5,6 @@ Authors: SHEAF group Q143
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
 public import Sheaf.Paper.IntegralDerivedOperations
 

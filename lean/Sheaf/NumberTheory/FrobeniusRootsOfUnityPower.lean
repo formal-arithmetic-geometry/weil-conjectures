@@ -6,8 +6,6 @@ Authors: SHEAF group Q51
 module
 
 public import Sheaf.Paper.FiniteFieldFiber
-public import Mathlib.FieldTheory.Finite.Basic
-public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 public import WeilConjectures.GroupTheory.TateModule
 import Mathlib.Algebra.CharP.CharAndCard
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed

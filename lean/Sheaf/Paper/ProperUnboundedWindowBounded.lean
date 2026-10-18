@@ -8,18 +8,9 @@ module
 public import Sheaf.Paper.ModuleObjects
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
-public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
 import Sheaf.AlgebraicGeometry.EllAdicProperBoundedBelowCoproducts
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Proper pushforward and uniformly bounded coproducts

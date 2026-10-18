@@ -5,14 +5,9 @@ Authors: SHEAF groups Q21, S8
 -/
 module
 
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.NumberTheory.Padics.IntegersProfiniteTower
-public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
-public import Mathlib.Data.Matrix.Block
-public import Mathlib.Topology.Sets.Opens
 import Sheaf.NumberTheory.Padics.ContinuousUniformizerDivision
 import Sheaf.LinearAlgebra.Matrix.ContinuousUnitPivot
-import Mathlib.LinearAlgebra.Matrix.Reindex
 
 /-!
 # Local splitting of a continuous integral dominating pivot

@@ -6,8 +6,6 @@ Authors: SHEAF group NM
 module
 
 public import WeilConjectures.Compactification.CommonRefinement
-public import WeilConjectures.Compactification.Refinement
-public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Sheaf.Compactification.BoundaryRefinement
 
 /-!

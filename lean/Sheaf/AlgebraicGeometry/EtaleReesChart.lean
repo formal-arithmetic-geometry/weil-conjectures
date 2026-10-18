@@ -6,9 +6,6 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 
 import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth

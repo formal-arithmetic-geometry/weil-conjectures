@@ -6,7 +6,6 @@ Authors: SHEAF group NM
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Basic
-public import Mathlib.CategoryTheory.Products.Basic
 
 /-!
 # Tensor-parameter composition through an adjunction

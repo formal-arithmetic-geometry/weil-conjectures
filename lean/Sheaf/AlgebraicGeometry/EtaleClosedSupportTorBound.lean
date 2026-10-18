@@ -6,15 +6,8 @@ Authors: SHEAF group Q56
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 # Closed support Tor bound

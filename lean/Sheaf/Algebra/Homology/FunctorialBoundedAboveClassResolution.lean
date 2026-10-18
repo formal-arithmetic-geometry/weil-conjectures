@@ -5,8 +5,6 @@ Authors: SHEAF group Q27
 -/
 module
 
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.CategoryTheory.ObjectProperty.ContainsZero
 public import WeilConjectures.FromJoel.Algebra.Homology.CochainComplexMinus
 
 import Sheaf.Algebra.Homology.LeftResolutionReducedClass

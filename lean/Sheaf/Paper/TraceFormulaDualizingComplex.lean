@@ -5,30 +5,8 @@ Authors: SHEAF group NY
 -/
 module
 
-public import Sheaf.Paper.TraceExceptionalAdmissibility
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
-public import Sheaf.Paper.DerivedPullbackTensorHom
-public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
 public import Sheaf.SixFunctors.FiniteDualizing
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.Paper.FiniteTorAmplitude
-public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-public import Sheaf.Paper.SfIntegralConstructible
-public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-public import Sheaf.Paper.SfDerivedComplete
-public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-public import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-public import Sheaf.Paper.CoefficientRingedTensorHomModel
-public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-public import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 
 /-!
 # Dualizing complexes and Verdier duality for the trace formula

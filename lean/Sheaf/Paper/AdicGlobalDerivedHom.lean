@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.BoundedConstructibleTower
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # Global derived Hom with completed adic coefficients
 

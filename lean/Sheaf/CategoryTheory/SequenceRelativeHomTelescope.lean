@@ -6,11 +6,9 @@ Authors: SHEAF group Q156
 module
 
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.DirectSum.Basic
-public import Mathlib.CategoryTheory.Category.Preorder
 
 /-!
 # Hom into a sequence-relative telescope

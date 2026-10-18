@@ -6,10 +6,6 @@ Authors: SHEAF group Q21
 module
 
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-public import Mathlib.RingTheory.Finiteness.Defs
-public import Mathlib.LinearAlgebra.Quotient.Basic
-public import Mathlib.LinearAlgebra.Prod
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # Cancellation of a cyclic summand over a discrete valuation ring

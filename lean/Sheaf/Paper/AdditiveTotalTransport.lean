@@ -4,7 +4,6 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
-import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # Additive transport for uniformly bounded bicomplex totals
 

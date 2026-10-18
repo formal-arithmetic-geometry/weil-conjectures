@@ -10,7 +10,6 @@ public import Sheaf.Paper.PointFgCompleteComplexes
 public import Sheaf.Paper.PointFdQbarCategory
 public import Sheaf.Paper.FieldCohomologyScalarExtension
 public import Sheaf.Paper.FiniteFieldFiber
-import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Cohomology modules of coefficient complexes
 
