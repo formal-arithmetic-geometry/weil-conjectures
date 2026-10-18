@@ -7,17 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DegreeZeroFibreSurjective
+public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 import Sheaf.Algebra.Homology.AffinePerfectCutDegreeZero
 import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
-import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 import Sheaf.AlgebraicGeometry.AffinePerfectFibreSurjectivity
 import Sheaf.AlgebraicGeometry.AffinePerfectCutSheafRealization
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Mathlib.Algebra.Homology.Monoidal
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Splitting a perfect complex at degree zero near a point
 
