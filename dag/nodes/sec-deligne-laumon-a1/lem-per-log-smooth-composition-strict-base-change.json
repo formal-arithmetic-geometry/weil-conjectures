@@ -11,9 +11,127 @@
   "def-trf-fs-log-blowup",
   "def-per-fs-log-smooth-etale"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the unique-lifting implication in [lem-per-fs-log-infinitesimal-criterion], every log etale morphism has the existence property and local finite presentation, hence is log smooth. Identities are log etale: in the chart definition [def-per-fs-log-smooth-etale] use $P\\xrightarrow{1}P$, with zero group kernel and cokernel and identity comparison. More generally a strict etale map is log etale: pull back each target chart $P$, use $P\\xrightarrow{1}P$, and its comparison map is the given etale scheme map. The associated-log-structure universal property [lem-trf-associated-log-universal-stalks] identifies this with the source chart; restrictions to etale neighborhoods preserve the chart.",
+   "uses": [
+    "lem-per-fs-log-infinitesimal-criterion",
+    "def-per-fs-log-smooth-etale",
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.2 proof, chart criterion; VIII 3.3.4(ii), strict etale charts; agent lifting argument using Kato 3.3/3.5"
+   }
+  },
+  {
+   "text": "Let $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ be log smooth. Their underlying maps, and therefore their composite by [lem-sbc-locally-finite-presentation-composition], are locally of finite presentation. For a strict square-zero test $T_0\\hookrightarrow T$ and maps $a:T_0\\to X$, $b:T\\to Z$, first lift $fa:T_0\\to Y$ over $b$ etale locally on $T$, using the criterion for $g$. On each resulting $T_j$, lift $a|_{T_{0,j}}$ over the chosen $T_j\\to Y$ using the criterion for $f$. By [lem-weil-pbc-first-order-thickening-base-change], the pulled-back immersion is a first order thickening, and pulled-back log structures still make the immersion strict. The composite family covers $T$ by [lem-weil-pbc-etale-covering-composition]. The criterion now gives log smoothness of $gf$. If both maps are log etale, the criterion gives a unique global lift to $Y$ and then a unique global lift to $X$; any lift to $X$ must induce that lift to $Y$, so the composite has unique lifting and is log etale. This also proves the mixed composition assertion after Step 1.",
+   "uses": [
+    "lem-per-fs-log-infinitesimal-criterion",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-etale-covering-composition",
+    "lem-weil-pbc-first-order-thickening-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X proof of 1.1, p.139 and 1.9(i), p.148; XVI 3.7, p.254 (composition); agent two-stage lifting argument"
+   }
+  },
+  {
+   "text": "For a strict $h:Y'\\to Y$ and $f:X\\to Y$, form the ordinary scheme product $X'=X\\times_YY'$ with projections $p,q$ [def-pc-fibre-product]. Put $M_{X'}=p^*M_X$, the associated log structure of $p^{-1}M_X\\to\\mathcal O_{X'}$. Strictness gives $M_{Y'}=h^*M_Y$; thus the map of log structures for $q$ is the pullback of that for $f$. This is a log fibre product: a compatible pair of log maps to $X,Y'$ has a unique underlying scheme map to $X'$ and a unique log map: locally send a chart germ $[q,u]$ to the given image of $q$ times the unit $u$. The defining relations hold because both maps preserve structure maps; uniqueness fixes chart elements and units. These maps agree on overlaps by uniqueness. Locally its log structure is associated to the pullback of any fs chart $Q$ of $X$, so it is fs. For clarity, on a stalk with ring $A'$ that associated chart is $Q\\oplus_{\\beta^{-1}(A'^\\times)}A'^\\times$; the original chart and this chart are related by adjoining the new units, which is precisely log pullback. Assume $f$ is locally of finite presentation, as every log smooth $f$ is by [lem-per-fs-log-infinitesimal-criterion]. Then $q$ is locally of finite presentation: affine opens $\\operatorname{Spec}A\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R'$ of $X'$ have ring $A\\otimes_RR'$ [lem-weil-pbc-fibre-product-affine-spectra], finite presentation is preserved by scalar extension [lem-weil-pbc-finite-presentation-base-change-composition], and [def-sbc-locally-finite-presentation] is affine-local. Hence $X'$ is locally Noetherian over the locally Noetherian $Y'$ [pqf-lem-locnoeth-lft], so $p^*M_X$ is a log structure in the sense of [def-trf-fs-log-blowup].",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-pc-fibre-product",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-per-fs-log-infinitesimal-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-sbc-locally-finite-presentation",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.5--3.3.6, chart base change and strictness; explicit universal-property verification"
+   }
+  },
+  {
+   "text": "Suppose $f$ is log smooth and $h$ strict, with the product of Step 3. By Step 3, the underlying $q$ is locally of finite presentation and $X'$ is a locally Noetherian fs log scheme. Given a strict square-zero test for $q$, project its map $T_0\\to X'$ to $X$ and its map $T\\to Y'$ to $Y$. The criterion for $f$ gives etale-local lifts $T_j\\to X$ compatible with $T_j\\to Y$. Pair each with the fixed $T_j\\to Y'$: Step 3 gives a log map $T_j\\to X'$ whose restriction is the prescribed map on $T_{0,j}$ by uniqueness of the pairing. Thus $q$ satisfies existence, so is log smooth by the criterion. If $f$ is log etale the lift to $X$ is unique globally, and pairing proves unique lifting for $q$, so strict base change also preserves log etaleness.",
+   "uses": [
+    "lem-per-fs-log-infinitesimal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.5--3.3.6; agent strict-base-change lifting argument using Kato 3.3/3.5"
+   }
+  },
+  {
+   "text": "Locality means strict etale squares $U_i\\to X$, $V_i\\to Y$ with compatible $f_i:U_i\\to V_i$ and the $U_i$ jointly covering $X$. If each $f_i$ has the required charts, compose its chart-neighborhood maps with $U_i\\to X$ and $V_i\\to Y$. These are etale by [lem-weil-pbc-etale-composition-cancellation], and the source chart-neighborhoods cover $X$ by [lem-weil-pbc-etale-covering-composition]. Strictness identifies all pulled-back log structures, so these same charts satisfy the definition for $f$ [def-per-fs-log-smooth-etale]. Conversely, factor $f_i$ through $X\\times_YV_i$. The projection to $V_i$ has the desired logarithmic property by Step 4. The map $U_i\\to X\\times_YV_i$ is strict and etale: both $U_i$ and $X\\times_YV_i$ are etale over $X$, using [lem-weil-pbc-etale-scheme-base-change], and cancellation gives etaleness of the factor. Step 1 makes that factor log etale, and Step 2 proves the claim. This proves both the smooth and etale locality assertions; arbitrary target coverings are pulled back to covering families by [lem-weil-pbc-etale-covering-base-change].",
+   "uses": [
+    "def-per-fs-log-smooth-etale",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-covering-composition",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 (etale-local charts); VIII 3.3.4(ii), 3.3.8 descent; explicit chart-family argument"
+   }
+  },
+  {
+   "text": "Let $\\mathcal I$ be a nonempty coherent log ideal. On a strict etale affine chart with fs monoid $P$ and nonempty finite generating set $E\\subset P$, [lem-trf-coherent-log-ideal-chart-construction] presents its saturated log blowup by the charts $\\operatorname{Spec}(A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q_e^{\\rm sat}])$, $e\\in E$, with $(Q_e^{\\rm sat})^{\\rm gp}=P^{\\rm gp}$. For each chart the map $P\\to Q_e^{\\rm sat}$ therefore has group kernel and cokernel zero, of order one, invertible everywhere. Its comparison with the fibre product in [def-per-fs-log-smooth-etale] is an isomorphism (on rings it is the identity on the displayed tensor product), hence is etale. Thus the chart definition and Step 5 give log etaleness globally. The constructed model and any saturated blowup in the statement are uniquely isomorphic: their universal properties give maps in both directions and force both composites to be identities [def-trf-fs-log-blowup]. Consequently the claim applies to whichever representative of the universal object is used.",
+   "uses": [
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "def-per-fs-log-smooth-etale",
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.11, pp.107--108 (saturated blowup charts and log etaleness)"
+   }
+  },
+  {
+   "text": "Induct on the finite length of a saturated log blowup tower [def-trf-fs-log-blowup]. The empty tower has identity composite, log etale by Step 1. For the induction step the last blowup is log etale by Step 6, and the composite of it with the preceding tower is log etale by the log-etale part of Step 2. This includes principal centers, whose universal blowup is the identity, and empty underlying schemes.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.9--3.3.11 (towers); X 1.3, p.139 (application to saturated log blowup towers)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-fs-log-infinitesimal-criterion",
+  "def-per-fs-log-smooth-etale",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-first-order-thickening-base-change",
+  "def-trf-fs-log-blowup",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-trf-coherent-log-ideal-chart-construction",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 3.3.8--3.3.11, X proof of 1.1 and 1.9, XVI 3.7; arguments spelled out using the Kato infinitesimal criterion, whose local document is WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +160,38 @@
    "results": "{\"t\": \"2026-10-18T20:43:20Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmically smooth morphisms compose and are stable under strict base change and logarithmically etale morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"RingHom.Smooth.stableUnderComposition\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"abbfc1ffc3fd2d0e\"}; Read the returned results: ordinary smoothness, projective spectra, abstract group actions, monoid representations and unrelated manifold charts do not state this logarithmic assertion.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogEtale|LogSmooth|logarithmic.*smooth",
+   "results": "{\"t\": \"2026-10-18T21:41:50Z\", \"tool\": \"grep\", \"query\": \"LogEtale|LogSmooth|logarithmic.*smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: these concern ordinary scheme smoothness/etaleness or ordinary algebra lifting, with no log structure, monoid-chart condition, or strict logarithmic thickening.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition and strict base change of log smooth morphisms and saturated log blowups of fine saturated log schemes",
+   "results": "{\"t\": \"2026-10-18T21:41:50Z\", \"tool\": \"leansearch\", \"query\": \"Composition and strict base change of log smooth morphisms and saturated log blowups of fine saturated log schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.comp_iff\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"IsBaseChange.of_comp\", \"IsBaseChange.comp\", \"AlgebraicGeometry.isSmooth_comp\", \"LinearMap.liftBaseChange_comp\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\"], \"digest\": \"81815acb53cefba3\"}; Read hits: these concern ordinary scheme smoothness/etaleness or ordinary algebra lifting, with no log structure, monoid-chart condition, or strict logarithmic thickening.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogEtale\"",
+   "results": "{\"t\": \"2026-10-18T21:41:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: these concern ordinary scheme smoothness/etaleness or ordinary algebra lifting, with no log structure, monoid-chart condition, or strict logarithmic thickening.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composites of logarithmically smooth morphisms of fine saturated log schemes are log smooth and strict base change preserves log smoothness; saturated logarithmic blowups are log etale",
+   "results": "{\"t\": \"2026-10-18T21:41:51Z\", \"tool\": \"leanfinder\", \"query\": \"Composites of logarithmically smooth morphisms of fine saturated log schemes are log smooth and strict base change preserves log smoothness; saturated logarithmic blowups are log etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"6cad69672325416a\"}; Read hits: these concern ordinary scheme smoothness/etaleness or ordinary algebra lifting, with no log structure, monoid-chart condition, or strict logarithmic thickening.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-log-smooth-equivariant-modification",
@@ -71,5 +217,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-log-smooth-composition-strict-base-change",
+  "worker": "stage1",
+  "summary": "Preserved every clause. Supplied composition via strict square-zero lifting, strict pullback construction and lifting, chart-family locality, explicit saturated blowup chart calculation, and induction on towers. One new statement-only node records the substantive chart/infinitesimal equivalence. Reused the existing general saturated blowup construction rather than creating a blowup-etale clause-node. No project Lean attachment or Mathlib match.",
+  "blueprint": "Inherited ancestor lem-per-artin-gabber-affine-curve, proof Step 3 and the expanded ILO XVI 3.7 geometric modification chain: supplies exactly the log-smooth composition and saturated log-blowup calculus used in X proof of 1.1 / 1.3 and XVI 3.7; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-associated-log-universal-stalks",
+    "why": "Generic associated-log-structure universal property, used for strict chart pullback and the strict product; no corresponding construction is supplied by this unit."
+   },
+   {
+    "node": "lem-trf-coherent-log-ideal-chart-construction",
+    "why": "Generic explicit saturated blowup charts and their group completions; used to check the log-etale chart criterion, rather than replacing any unit proof route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product tensor-ring identification for local finite presentation and the blowup comparison; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-first-order-thickening-base-change",
+    "why": "Preservation of strict test square-zero scheme immersions after the etale neighborhoods used in two-stage lifting; generic scheme tool. This unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-sbc-locally-finite-presentation-composition",
+    "why": "Generic finite-presentation closure for the two-stage logarithmic lifting argument. This unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-composition",
+    "why": "Composition of the etale neighborhoods produced by the lifting criterion. This unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Scalar extension of finitely presented rings for the underlying strict base change. This unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Ordinary scheme etale composition and cancellation for the chart-family locality argument. This unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Ordinary scheme etale stability for the factor through the pulled-back target chart. This unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Pulling target chart covers back to the source. This unit supplies no replacement statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-associated-log-universal-stalks",
+  "lem-trf-coherent-log-ideal-chart-construction",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-first-order-thickening-base-change",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-aeebf2a54",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-aeebf2a54 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, the new node lem-per-fs-log-infinitesimal-criterion, every cited statement, and ILO X 1.2 with its proof (pp.136-139). That proof adapts Kato 1988 3.5 and refines it to fs charts, so the new node (Kato 3.5 chart criterion <=> strict square-zero lifting, log smooth and log etale versions) is true, not a duplicate, and not a restated item clause. No cycle. Small cases checked: trivial log structures reduce to Stacks 02H6; Spec k[N] is log smooth but not log etale. Steps 1, 2 and 4-7 are correct. Step 6 reads the saturated charts with (Q_e^sat)^gp = P^gp, so K = C = 0 and the comparison is the identity. Fix 1, E1 in Step 3: X' = X x_Y Y' was asserted locally Noetherian 'because the construction is used within the category'. A fibre product of locally Noetherian schemes need not be locally Noetherian, and def-trf-fs-log-blowup needs this for p^*M_X. I moved the lfp argument for q into Step 3 and concluded with the Mathlib leaf pqf-lem-locnoeth-lft (01T6). Step 4 now refers to Step 3. Fix 2, B3 in the new node: the sheaf inverse image i^{-1}L and the associated log structure of a sheaf were undefined. They are now defined inline, citing def-weil-pbc-inverse-image, def-weil-pbc-sheafification and def-weil-pbc-etale-site. Batch-5 flags: none of the closures of def-trf-fs-log-blowup, def-per-fs-log-smooth-etale, lem-trf-associated-log-universal-stalks and lem-trf-coherent-log-ideal-chart-construction contains a thm-trf node, trace-transport or a Poincare-duality node. They are generic log-geometry, descent and Proj material, so all are accepted. All 10 declared tool_uses are accepted as generic. No SGA source is used.; 2 file(s) fixed by the reviewer"
  }
 }
