@@ -10,9 +10,83 @@
  "stmt_deps": [
   "def-trf-fine-fan-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G=P^{\\rm gp}$. By integrality regard $P$ as a submonoid of $G$; $U=P^\\times$ is a subgroup since the inverse of a unit lies in $P$. Let $q:P\\to B$ be the quotient. The map $B\\to G/U$, $q(p)\\mapsto p+U$, is well defined and injective: equality of cosets means $p-p'\\in U$, which is exactly equality modulo addition of a unit. Thus $B$ is integral. Write $H=B^{\\rm gp}$ and let $\\pi:G\\to H$ send $p-p'$ to $q(p)-q(p')$. It is surjective because every element of $H$ is such a difference. Since $B$ embeds in its group completion, $\\pi(p-p')=0$ exactly when $q(p)=q(p')$, equivalently $p-p'\\in U$. Therefore $\\ker\\pi=U$. These are direct checks from the group presentation and the unit equivalence relation, not an appeal to an uncited exactness theorem.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.11, p.100: explicit algebraic refinement of the sharpening/group-completion comparison."
+   }
+  },
+  {
+   "text": "Choose a finite monoid generating list $a_1,\\ldots,a_d$ for $P$. The elements $q(a_i)$ generate $B$, so their images generate $H$ as an abelian group: expand each difference of elements of $B$ into integer combinations of those images. The hypothesis says that $H$ is torsion free. Apply [lem-trf-fg-torsionfree-group-free] to obtain a finite basis $e_1,\\ldots,e_r$ of $H$.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.11 and 3.1.26, pp.100,102: agent refinement; finite-basis input as in VI 3.7(a), p.75."
+   }
+  },
+  {
+   "text": "For each basis element choose $g_i\\in G$ with $\\pi(g_i)=e_i$, using the surjectivity proved in Step 1. Define $t:H\\to G$ by $t(\\sum_i n_i e_i)=\\sum_i n_i g_i$. Unique basis coordinates make this well defined and additive, and the displayed formula gives $\\pi\\circ t=1_H$. This constructs the required group section explicitly, without invoking a separate splitting theorem. When $r=0$ the sums are empty and $t$ is the zero homomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.11 and 3.1.26, pp.100,102: agent algebraic refinement, lifting a finite basis."
+   }
+  },
+  {
+   "text": "For $b\\in B$ choose $p\\in P$ with $q(p)=b$. In $G$ the difference $t(b)-p$ has image $b-b=0$ under $\\pi$, hence belongs to $U$ by Step 1. Every unit belongs to $P$, so $t(b)=p+(t(b)-p)$ belongs to $P$. Define $j(b)=t(b)$, now with codomain $P$. This definition is independent of the chosen $p$, since it is the restriction of the fixed map $t$. Additivity and $j(0)=0$ follow from $t$, and $q(j(b))=b$ follows from $\\pi t=1$ and the embedding $B\\subset H$. Thus $j$ is a monoid section.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.11, p.100: agent refinement; restricting the group section to the sharp monoid."
+   }
+  },
+  {
+   "text": "Define $F:B\\oplus U\\to P$ by $F(b,u)=j(b)+u$ and $E:P\\to B\\oplus U$ by $E(p)=(q(p),p-j(q(p)))$. The second coordinate of $E(p)$ lies in $\\ker\\pi=U$. Both maps preserve addition and zero. Direct substitution gives $F(E(p))=p$ and $E(F(b,u))=(b,u)$, since $q(u)=0$ and $qj=1$. They are inverse monoid isomorphisms. Moreover $q(F(b,u))=b$, so the quotient is the first projection, with the specified copy of $U$ preserved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.11 and 3.1.26, pp.100,102: agent refinement, explicit inverse formulas for the local lift comparison."
+   }
+  },
+  {
+   "text": "It remains to identify $U$ with $\\mathbf Z^s$. In the generating list from Step 2, every generator occurring with positive coefficient in an expression $u=\\sum_i n_i a_i$ for a unit is itself a unit: if $u=a_i+v$, then $a_i+(v-u)=0$ and $v-u=v+(-u)$ lies in $P$. Hence the sublist consisting of the $a_i$ that are units generates $U$ as a monoid, and in particular as an abelian group. It is torsion free because it is a subgroup of the assumed torsion-free group $G$. Apply [lem-trf-fg-torsionfree-group-free] to $U$ to obtain a finite basis of length $s\\geq0$. Its integer-coordinate map is an isomorphism $U\\simeq\\mathbf Z^s$. Composing its product with $1_B$ with Step 5 proves both formulations of the statement.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.11 and 3.1.26, pp.100,102: agent refinement; VI 3.7(a), p.75 for the finite-basis input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-fs-log-blowup",
+  "lem-trf-fg-torsionfree-group-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.1.11 and 3.1.26, pp.100,102, algebraic refinement with the stated torsion-free sharp group hypothesis; finite-basis input VI 3.7(a), p.75."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +129,45 @@
    "results": "{\"t\": \"2026-10-17T23:55:29Z\", \"tool\": \"grep\", \"query\": \"Associates.*(prod|splitt|equiv)|[Ss]plitt.*[Uu]nits|[Uu]nits.*[Ss]plitt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/BinaryBiproducts.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/FactorSet.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/FactorSet.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/FactorSet.lean\"], \"digest\": \"0628cf5daa7d634f\"}; Read hits: associatesEquivOfUniqueUnits assumes every unit is trivial; the other hits are factorization, principal-ideal equivalences and products of associates, not a splitting over units with torsion-free sharp group.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Associates.*(split|prod|equiv)|[Uu]nits.*[Ss]plitt|[Ss]plitt.*[Uu]nits",
+   "results": "{\"t\": \"2026-10-18T20:36:20Z\", \"tool\": \"grep\", \"query\": \"Associates.*(split|prod|equiv)|[Uu]nits.*[Ss]plitt|[Ss]plitt.*[Uu]nits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/FactorSet.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/FactorSet.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/FactorSet.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/FactorSet.lean\"], \"digest\": \"8bad6d8a0c9a9168\"}; Read hits: products of Associates in factorization arguments, principal ideal equivalences, and associatesEquivOfUniqueUnits (Basic.lean:1013) do not split a monoid with nontrivial units over its sharp quotient.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral monoid is the product of its group of units and its sharpening if the sharpening has free abelian group completion",
+   "results": "{\"t\": \"2026-10-18T20:36:20Z\", \"tool\": \"leansearch\", \"query\": \"An integral monoid is the product of its group of units and its sharpening if the sharpening has free abelian group completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulEquiv.prodUnits\", \"Prod.instSubsingletonUnits\", \"Prod.isUnit_iff\", \"GCDMonoid.toIsIntegrallyClosed\", \"Pi.isUnit_iff\", \"Units.instGroup\", \"UniqueFactorizationMonoid.instIsIntegrallyClosed\", \"UniqueFactorizationMonoid.instIsMulTorsionFree\"], \"digest\": \"bd38dceca316c20a\"}; Read returned types: units of a product and preservation of integrally closed monoids do not construct a product decomposition of a monoid.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Associates\", \"Equiv\"",
+   "results": "{\"t\": \"2026-10-18T20:36:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Associates\\\", \\\"Equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"associatesNonZeroDivisorsEquiv\", \"associatesNonZeroDivisorsEquiv_mk_mk\", \"associatesNonZeroDivisorsEquiv_symm_mk_mk\", \"associatesEquivOfUniqueUnits\", \"associatesEquivOfUniqueUnits_apply\", \"associatesEquivOfUniqueUnits_symm_apply\", \"associatesIntEquivNat\", \"Ideal.associatesEquivIsPrincipal\"], \"digest\": \"084481d8df433525\"}; Read returned types: associatesEquivOfUniqueUnits requires trivial units and a monoid with zero; the other equivalences identify nonzero divisors or principal ideals, not this splitting.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated cancellative commutative monoid splits as its units times the quotient by units when the group completion of that quotient is torsion free",
+   "results": "{\"t\": \"2026-10-18T20:36:21Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated cancellative commutative monoid splits as its units times the quotient by units when the group completion of that quotient is torsion free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AffineMonoid.to_twoUniqueProds\", \"Algebra.GrothendieckGroup.instFG\", \"Monoid.IsTorsion.torsionMulEquiv_apply\", \"Algebra.GrothendieckGroup\", \"NumberField.Units.instFreeIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion\", \"Algebra.GrothendieckAddGroup.instFG\", \"Monoid.IsTorsion.torsionMulEquiv_symm_apply_coe\", \"associatesEquivOfUniqueUnits\"], \"digest\": \"e39d4ebcd8ae9383\"}; Read returned types: the group-completion finite-generation instances and two-unique-products theorem do not supply a section over the sharp quotient. Associates equivalences require trivial units; number-field unit results have unrelated hypotheses.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive cancellative monoid is the direct product of its invertible elements and its associates if the group of differences of its associates is free abelian",
+   "results": "{\"t\": \"2026-10-18T20:38:09Z\", \"tool\": \"leanfinder\", \"query\": \"An additive cancellative monoid is the direct product of its invertible elements and its associates if the group of differences of its associates is free abelian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Associates.decompositionMonoid_iff\", \"Associates.instDecompositionMonoid\", \"associatesEquivOfUniqueUnits_apply\", \"associatesEquivOfUniqueUnits\", \"Associates.ufm\", \"associatesEquivOfUniqueUnits_symm_apply\", \"AffineMonoid.to_twoUniqueProds\", \"Associates.uniqueUnits\"], \"digest\": \"676c412f9d836d4b\"}; Read returned types: the group-completion finite-generation instances and two-unique-products theorem do not supply a section over the sharp quotient. Associates equivalences require trivial units; number-field unit results have unrelated hypotheses.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-sharpening-fan-bijection",
@@ -85,5 +194,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-fine-monoid-unit-splitting",
+  "worker": "stage1",
+  "group": "NX",
+  "summary": "Constructed the group quotient and its kernel, lifted a finite basis of the sharp group, proved the group section lands in P using the full group of units, and wrote both inverse monoid maps. Proved finite generation of units directly from a finite generating list and reused the existing finite torsion-free abelian-group basis node twice. No new nodes or statement changes; all earlier searches retained and fresh searches logged.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Lemma 3.1.25, 3.1.26, Theorem 3.1.27, Remark 3.1.28, printed p.102; synchronization refers to Remark 2.3.5(ii), p.92. Local lift comparison in ILO VIII 3.1.11 and 3.1.26: splitting a monoid over its sharp quotient with torsion-free group completion. The six steps give the algebraic local-unit splitting used by lem-trf-sharpening-fan-bijection, especially its proof steps 2, 4 and 9. This is the historical auxiliary ancestry recorded on the item; no unit/chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NX-0fef7bc40",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-0fef7bc40 (reviewer sub-agent of L); spot-checked: I read the item, all three cited nodes and the parent lem-trf-sharpening-fan-bijection in full, plus ILO VIII 3.1.11–3.1.16 and 3.1.24–3.1.28 (printed pp.100–102). The statement is unchanged from the Q02 creation and is true. Both torsion-free hypotheses are necessary: P=Z/2 fails without the first, and P=<(±2,0),(0,1),(1,1)> in Z^2 fails without the second, since there U=2Z×0 and B^gp=Z/2⊕Z, so no section exists. ILO does not state this algebra; it only uses local lifting in 3.1.11 and 3.1.26. The node therefore correctly records proof_origin as agent. Step 1: ker(G→B^gp)=U via the injection B→G/U, elementary. Step 2: the leaf lem-trf-fg-torsionfree-group-free (Module.basisOfFiniteTypeTorsionFree') gives a finite basis of the f.g. torsion-free B^gp. Step 3: lifting the basis gives a group section t. Step 4: t(b)−p lies in U⊂P, so the restriction j of t is a monoid section with qj=1. Step 5: explicit inverse maps E and F. Step 6: any generator appearing in a unit is a unit (a_i+(v−u)=0), so U is finitely generated and torsion free, and the leaf gives U≅Z^s. No new nodes. There are no duplicates among face-localization-units, fs-face-sharpening, fs-chart-free-factorization or the subgroup-free leaf. The parent's steps 2, 4, 9 and 14 use exactly this conclusion. The route stays inside unit sk-i-curve-zero, there are no SGA citations, no tool_uses, and proof_deps equals the union of uses. Small cases checked: P=0, P a group, P sharp, and <2,3>⊂N."
  }
 }
