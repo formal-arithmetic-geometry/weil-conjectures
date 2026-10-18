@@ -1,6 +1,6 @@
 # Work queue
 
-1410 items; claim with `tools/claim.py next <group> [--stage N]`.
+1414 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1410)
+## Stage 3: modules to prove (1414)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -21,17 +21,21 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | proof | route |
 | `Sheaf.WeilSheaf.AdicFiniteCoefficientBound` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof | route |
+| `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension` | 4 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | proof | route |
 | `Sheaf.WeilSheaf.AffineCurveRangePositive` | 5 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
+| `WeilConjectures.WeilSheaf.DenseOpen` | 7 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof | route |
+| `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 10 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | 11 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.FourierInversion.UpperStar` | 12 | 3 | proof | route |
 | `Sheaf.Paper.DenseOpenPiOneSurjective` | - | 8 | proof | route |
 | `Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange` | 5 | 1 | proof | 1 |
 | `Sheaf.CategoryTheory.Galois.GaloisTransitive` | 5 | 1 | proof | 1 |
+| `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary` | 6 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra` | - | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.ArtinSchreierPrimeCharacterComparison` | - | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison` | - | 1 | proof | 1 |
@@ -1512,7 +1516,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.SixFunctors.RationalOperations` | - | 1 | `lem-coef-finite-free-extension` |
 | `Sheaf.Targets.AffineSpaceRationalLine` | - | 1 | `det-prop-p1-adjunction-rational-triangle` |
 
-## Stage 3: held for an open upstream PR (20)
+## Stage 3: held for an open upstream PR (16)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
@@ -1520,21 +1524,17 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 |---|---|
 | `WeilConjectures.AlgebraicGeometry.Bertini` | bundle/sec-deligne-laumon-general-d1 |
 | `WeilConjectures.DeligneLaumon.AffineLine.DegreeOne` | bundle/sec-deligne-laumon-a1-d1 |
-| `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | bundle/sec-deligne-laumon-a1-d1,bundle/sec-fourier-transform-d1 |
+| `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | bundle/sec-deligne-laumon-a1-d1,bundle/sec-fourier-transform-d1,bundle/sec-six-functors-d1 |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | bundle/sec-deligne-laumon-general-d1 |
-| `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary` | bundle/sec-purity-real-sheaves-d1 |
-| `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension` | bundle/sec-smooth-purity-d5 |
 | `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` | bundle/sec-smooth-purity-d2 |
 | `WeilConjectures.SixFunctors.Etale.Perverse.Operations` | bundle/sec-deligne-laumon-a1-d1 |
-| `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | bundle/sec-purity-real-sheaves-d1 |
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1 |
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | bundle/sec-fourier-transform-d1 |
 | `WeilConjectures.WeilSheaf.CurveEndpoints` | bundle/sec-deligne-laumon-a1-d1 |
-| `WeilConjectures.WeilSheaf.DenseOpen` | bundle/sec-purity-real-sheaves-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.Delta` | bundle/sec-fourier-transform-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-fourier-transform-d1,bundle/sec-poincare-duality-c1,bundle/sec-smooth-purity-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1,bundle/sec-smooth-purity-d3 |
-| `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-poincare-duality-c1,bundle/sec-six-functors-d1 |
+| `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-fourier-transform-d1,bundle/sec-poincare-duality-c1,bundle/sec-six-functors-d1 |
 | `WeilConjectures.WeilSheaf.PoincareDuality` | bundle/sec-poincare-duality-c1 |
-| `WeilConjectures.WeilSheaf.TraceIsomorphism` | bundle/sec-poincare-duality-c1 |
+| `WeilConjectures.WeilSheaf.TraceIsomorphism` | bundle/sec-poincare-duality-c1,bundle/sec-purity-real-sheaves-d1 |
