@@ -1,6 +1,6 @@
 # Work queue
 
-945 items; claim with `tools/claim.py next <group> [--stage N]`.
+944 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (945)
+## Stage 3: modules to prove (944)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -363,7 +363,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProEtaleClassicalZariskiLocal` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback` | - | 3 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ProEtaleConstantModuleUnit` | - | 1 | proof | 3 |
-| `Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackIdentity` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ProEtaleFiniteConstantHom` | - | 3 | proof | 3 |
