@@ -17,7 +17,9 @@
   "def-weil-pbc-locally-constant-finite-type-modules",
   "def-weil-finitely-generated-module",
   "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-etale-sum-extension"
+  "def-weil-pbc-etale-sum-extension",
+  "def-constructible-constructible",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof": [
   {
@@ -296,5 +298,24 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-8fed60b64 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, against Stacks 03RX (l.11671), 03S8(3) (l.12185), 095N (l.12412) and the proof of 03TT (l.13744). One fault, repaired (E2). As delivered, the new node lem-per-noetherian-affine-free-presentation was false: it allowed qcqs X with arbitrary locally closed strata (def-constructible-stratification), but Stacks 03RX requires constructible strata. Counterexample: X=Spec(prod F_2), x a non-isolated point, F=i_*R. F has a constant restriction on each of {x} and X\\{x}, but its support {x} is not constructible, so F has no finite affine presentation (095N with lemma-support-constructible). FIX: the node now requires constructible strata [def-weil-constructible-subset], and in that form it is a special case of 095N. Item Step 1 now proves G's strata are constructible on the Noetherian X: it adds lem-weil-pbc-noetherian-scheme-closed-subsets-minimal and lem-sfb-noetherian-space-compact-subsets (Mathlib leaves) and def-weil-constructible-subset, and proof_deps is updated. Steps 2-7 check out. Step 2: the Hom formula P_W to F(W) needs only naturality in F. Step 3: the refinement arrows lie in the lifting sieve and are jointly surjective, so they form a covering. Step 4: epicness by the sheaf axiom. Step 5: 03S8(3) with M=R, plus closure under finite sums. Step 6: all hypotheses of the flat sum-extension node hold (separated, finite presentation, hence finite type). Step 7: edge cases. The 03S8(3) node is true as stated. Neither new node restates the item, and neither duplicates an existing node, since the existing presentation and sum nodes need finite Lambda or finite-set values. Batch 5: lem-pur-etale-sum-flat-kflat reaches only lem-pod-etale-stalk-tensor-scalar (stalk of a tensor product), which is generic and not part of the trace formula or Poincare duality, so I accept it. The 10 declared tool_uses are generic and accepted. No SGA. Corrected files are in fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.NoetherianConstructibleFlatLifting",
+  "declaration": "AlgebraicGeometry.Etale.exists_noetherian_constructible_flat_lifting",
+  "file": "lean/Sheaf/DeligneLaumon/NoetherianConstructibleFlatLifting.lean",
+  "statement": "theorem exists_noetherian_constructible_flat_lifting (X : Scheme.{u}) [IsNoetherian X] (R : Type (u + 1)) [CommRing R] [IsNoetherianRing R] (B C G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (p : B ⟶ C) [Epi p] (g : G ⟶ C) [Scheme.IsConstructibleSheaf G] : ∃ (n : ℕ) (U : Fin n → X.Etale), (∀ i, IsAffine (U i).left) ∧ let E : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R) := ∐ fun i : Fin n ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} R) (U i).hom inferInstance).obj ((constantSheaf (U i).left.smallEtaleTopology (ModuleCat.{u + 1} R)).obj (ModuleCat.of R R)) ∃ (e : E ⟶ G) (h : E ⟶ B), exactFunctor _ _ (tensorLeft E) ∧ Scheme.IsConstructibleSheaf E ∧ Epi e ∧ h ≫ p = e ≫ g",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The module-valued etale-sheaf encoding is identified with modules over the constant ring sheaf by Scheme.etaleConstantModuleFunctor_isEquivalence in WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence. This equivalence justifies the category encoding; its declaration does not occur in the theorem signature and is not a statement dependency. Flatness is stated literally as exactFunctor applied to tensorLeft E. Constructibility uses the existing arbitrary-coefficient IsConstructibleSheaf, exposed by the recorded finite-type local-constancy dependency; on Noetherian X the constructibility of locally closed strata is automatic. The finite sum E is a let-expression with real data, allowing n=0. Added the two already recorded definition nodes def-constructible-constructible and def-pc-flat-sheaf-modules for the predicates used in the signature; no definition or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3cfb5b0cf",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H7 RETURN at 9c59bff0ec14: theorem stmt_dep lem-weil-pbc-etale-constant-ring-module-equivalence removed and lean.note reworded; Lean module byte-identical; live-node diff = lean + 2 def stmt_deps (def-constructible-constructible owns IsConstructibleSheaf, def-pc-flat-sheaf-modules exposes exactFunctor). Re-checked every clause: Noetherian X; CommRing+IsNoetherianRing R in the Type (u+1) convention with no finiteness; epi p; constructible G only (constructible strata automatic on Noetherian X; finite = f.g. stalks); E = real Fin n coproduct of etaleLowerShriek of constant R over affine U_i; exactFunctor (tensorLeft E); IsConstructibleSheaf E; Epi e; h ≫ p = e ≫ g. Edge cases n=0, G=0, empty X, zero ring admitted. Statement verbatim; docstrings carry the source and 7 steps; report sections present; no duplicate or sibling delivery. nt_compile --json clean 3.0 s exit 0. Advisory: unused public import of EtaleConstantRingModuleEquivalence."
  }
 }
