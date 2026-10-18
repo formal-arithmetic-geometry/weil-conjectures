@@ -9653,6 +9653,7 @@ public import WeilConjectures.WeilSheaf.ProjectionFormula.ExtensionByZeroIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualPullback
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDuality
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityAssembly
+public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityProof
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityWeil
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerShriekIhom
