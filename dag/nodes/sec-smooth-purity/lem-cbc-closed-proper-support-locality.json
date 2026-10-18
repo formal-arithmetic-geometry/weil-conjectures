@@ -28,14 +28,12 @@
  ],
  "proof": [
   {
-   "text": "Write $i:Z=C_{\\mathrm{red}}\\hookrightarrow T$ for the reduced induced closed subscheme. Its underlying set is $C$ by [lem-weil-pbc-reduced-induced-closed-subscheme](2), and if $C$ is proper over $S$, this means that $p\\circ i$ is proper by [def-weil-pbc-closed-subset-proper-over-base]. For any $v:S\\prime\\to S$, put $Z\\prime=Z\\times_SS\\prime$. By the fibre-product universal property, $Z\\prime\\cong Z\\times_T(T\\times_SS\\prime)$; thus $Z\\prime\\to T\\prime$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Its underlying set is $v_T^{-1}(C)$, as follows. Cover $T$ by affine opens $U=\\operatorname{Spec}R$ and $v_T^{-1}(U)$ by affine opens $V=\\operatorname{Spec}B$. The reduced-structure statement gives $Z\\times_TU=\\operatorname{Spec}(R/I)$ with $C\\cap U=V(I)$. By [lem-weil-pbc-open-fibre-product] the restriction of $Z\\times_TT\\prime$ over $V$ is $\\operatorname{Spec}(R/I)\\times_{\\operatorname{Spec}R}\\operatorname{Spec}B$, and by [lem-weil-pbc-fibre-product-affine-spectra] it is $\\operatorname{Spec}((R/I)\\otimes_RB)$. The ring map $(R/I)\\otimes_RB\\to B/IB$, $\\bar r\\otimes b\\mapsto rb\\bmod IB$, is an isomorphism: its inverse sends $b\\bmod IB$ to $1\\otimes b$, which kills $IB$ since $1\\otimes rb=\\bar r\\otimes b=0$ for $r\\in I$. Consequently the image over $V$ consists of primes of $B$ containing $IB$; a prime contains $IB$ exactly when its contraction to $R$ contains $I$, which is exactly membership in $v_T^{-1}(C)\\cap V$. These affine opens cover $T\\prime$, proving the asserted equality. This argument also identifies the supports for all the covering base changes below.",
+   "text": "Let i:Z→T be the canonical reduced induced closed immersion with image C, using the vanishing-ideal subscheme API of [lem-weil-pbc-reduced-induced-closed-subscheme]. For w:S′→S put q:T×_S S′→T. Pull i back along q; the second projection j:Z×_T(T×_S S′)→T×_S S′ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Mathlib Scheme.Pullback.range_snd states range(j)=q⁻¹(range(i)), hence its image is precisely q⁻¹(C). This replaces the affine tensor-quotient calculation with the existing proved pullback-carrier theorem. Paste the two pullback squares by IsPullback.paste_vert to see that j followed by T×_S S′→S′ is the base change of i followed by p.",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme",
     "def-weil-pbc-closed-subset-proper-over-base",
     "def-pc-fibre-product",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra"
+    "lem-weil-pbc-closed-immersion-base-change"
    ],
    "elementary": false,
    "source": {
@@ -71,7 +69,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-proper-morphism-fpqc-descent] to the morphism $Z\\to S$ and the fpqc covering from step 3. All its pullbacks $Z_i\\to S_i$ are proper by that step, so $Z\\to S$ is proper. By [def-weil-pbc-closed-subset-proper-over-base] this says that $C$ is proper over $S$, proving (2). The argument uses fpqc covering families, not quasi-compactness of $p$, $S$, or the covering members.",
+   "text": "For every covering member, step 3 gives properness of the morphism from the iterated pullback Z×_T(T×_S S_i) to S_i. The pasted pullback square of step 1 supplies its canonical isomorphism to Z×_S S_i. Its inverse followed by the iterated projection is the canonical second projection, by IsPullback.isoPullback_inv_snd. Properness is preserved under composition with this isomorphism. Apply [lem-weil-pbc-proper-morphism-fpqc-descent] to i followed by p and the fpqc cover of step 3. The conclusion is exactly [def-weil-pbc-closed-subset-proper-over-base], proving (2), with no quasi-compactness hypotheses.",
    "uses": [
     "lem-weil-pbc-proper-morphism-fpqc-descent",
     "def-weil-pbc-closed-subset-proper-over-base"
@@ -88,8 +86,6 @@
   "def-weil-pbc-closed-subset-proper-over-base",
   "def-pc-fibre-product",
   "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-lft-base-change",
   "lem-weil-pbc-proper-base-change",
   "lem-weil-pbc-closed-subset-proper-over-base-properties",
@@ -100,7 +96,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex; literature/stacks-project/descent.tex",
-  "place": "Tag 0CYP proof; Tag 0F4J proof via 0CYL and 02L1"
+  "place": "Tags 0CYP and 0F4J via 0CYL and 02L1; support identification uses the proved Mathlib Scheme.Pullback.range_snd instead of the affine calculation; pullback pasting and canonical isomorphism transport are explicit in Lean."
  },
  "mathlib_searches": [
   {
@@ -249,5 +245,15 @@
   "by": "NQ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261018T062942-L-689195",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
