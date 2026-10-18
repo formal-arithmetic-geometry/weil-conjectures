@@ -157,5 +157,23 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-38c7b73ec (reviewer sub-agent of L); spot-checked: I read the item in full, its 4 cited leaves (Nakayama: IsLocalRing.map_mkQ_eq_top; field tensor nontrivial: lTensor_nontrivial + Free.of_divisionRing + faithfully-flat instance at Basic.lean:209; tensor-product def; finitely-generated def), Stacks 00DV (lemma-NAK, items 1-7) and 00CX (lemma-tensor-product), the consumer lem-trf-local-derived-tensor-nonvanishing Step 5 and unit sk-i-curve-zero. The statement is unchanged apart from the correct added def-weil-pbc-module-tensor-product citation, and it is true. Small cases: a field; Z_(p) with Z/p; k[e]/e^2 with k; R/m^2 with R/m. Each hypothesis is needed: Z/2 tensor Z/3=0 over the non-local ring Z, and Q tensor Z/p=0 over Z_(p) without finite generation. Step 1: the Nakayama leaf applied to the zero submodule gives nonzero residue quotients. Step 2: the field leaf applies verbatim over kappa. Step 3: a correct elementary R-bilinear map M x N to M/mM tensor_kappa N/mN, surjective by generation by pure tensors (part of the definition node's statement). There are no new nodes. My searches of the DAG and the main-20261015 blueprint found no duplicate; same_as [] is correct. Mathlib has no two-factor lemma, so the split is right. Route respected, no SGA, no tool_uses, not a target node. One fault, which I could not fix: the maintainer-owned top-level source.place cites 'Section 010Z', but tags/tags gives 010Z = homology-definition-quasi-isomorphism. The maintainer should change it to 00DV + 00CX/00CV; the steps and proof_origin already use these. No fix files written."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalFiniteTensorNontrivial",
+  "declaration": "IsLocalRing.nontrivial_tensorProduct_of_finite",
+  "file": "lean/Sheaf/RingTheory/LocalFiniteTensorNontrivial.lean",
+  "statement": "theorem nontrivial_tensorProduct_of_finite (R : Type u) [CommRing R] [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M] (N : Type w) [AddCommGroup N] [Module R N] [Module.Finite R N] [Nontrivial N] : Nontrivial (TensorProduct R M N)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5a647f68",
+  "group": "Q155",
+  "result": "pass",
+  "note": "The theorem IsLocalRing.nontrivial_tensorProduct_of_finite matches the node: CommRing + IsLocalRing, Module.Finite and Nontrivial on M and N in independent universes, conclusion Nontrivial (TensorProduct R M N). No extra hypotheses; lean.statement is verbatim the file signature; the delivery changes only the lean field of the node. Mathlib has only the residue-field-factor case and faithfully-flat variants, and the project has no declaration of this statement, so no duplicate. Docstrings carry the source places, the blueprint tag and the three proof steps; the single theorem is sorry; no definitions. nt_compile --json compiles clean in 1.4 s. Advisory: the maintainer-owned source.place cites 'Section 010Z', which should be 00DV + 00CV/00CX; already flagged in the stage-1 review."
  }
 }
