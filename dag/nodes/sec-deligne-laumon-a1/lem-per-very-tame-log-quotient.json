@@ -9,7 +9,10 @@
  },
  "stmt_deps": [
   "def-trf-fs-log-blowup",
-  "def-per-fs-log-smooth-etale"
+  "def-per-fs-log-smooth-etale",
+  "def-per-fs-log-group-action",
+  "def-per-very-tame-fs-log-action",
+  "def-per-kummer-log-morphism"
  ],
  "proof": [
   {
@@ -346,5 +349,26 @@
   "group": "Q145",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-cc4fd81cf (reviewer sub-agent of L); spot-checked: I read ILO VI §§2.2–2.3, 3.1–3.5 and proof 3.7(a)–(c), printed pp.72–76. The item's statement matches Theorem 3.2, Proposition 3.5 and §2.2: the same hypotheses (admissible, generically free, very tame), M_Y=(q_*M)^G, fs log regular, Kummer étale with the strict-local cartesian chart over Z[P]→Z[Q], and the categorical property. Steps 1–5, 7, 8 and 10 are correct. Every hypothesis of each cited node is supplied by an earlier step; C is finite over B by reducing exponents mod n; Q^gp is torsion free by saturation and sharpness, so the closed fibre of C is local; the completed-model argument shows C is a domain; the dimension-chain argument makes C→A injective. Two citation faults are repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-very-tame-log-quotient.json. (1) C1/C4 in Step 6: lem-per-invertible-kummer-chart-log-regular needs (Spec B,P) log regular at every geometric point, while Step 4 proves it on Y. I added lem-trf-ind-etale-strict-local-invariance with the transfer sentence, to uses and proof_deps, and declared it in tool_uses. (2) C3 in Step 9: the identification of the comparison on strict local rings with C→A is the strict-localization clause of lem-per-tame-diagonal-standard-closed-immersion, which the step now cites. Both new nodes are true, self-contained, statement-only, strictly smaller than the item and not duplicates; I grepped the DAG for R^G/A^G/X/G and for 'strict closed immersion', and checked the quotient, torsor, local-Kummer-quotient and Q109 integral-pair nodes. lem-per-tame-admissible-scheme-quotient: tameness excludes Nagarajan's wild counterexample. With |G| invertible, A is a Noetherian A^G-module by the skew-group-ring argument (eSe≅A^G, Se≅A); a free action gives a Galois extension; the general tame case reduces étale-locally to the inertia groups. Tested on empty X, trivial G and a free Z/p action. lem-per-tame-diagonal-standard-closed-immersion is the Nakayama argument of 3.7(b), which I recomputed: A=B+I by the Reynolds operator, I^N⊂m_B·A since a(q)^n=a(nq)∈J. I checked the report's k[ε]/ε² and k[[t]] examples. Batch-5 flags: I computed the closure of each flagged citation and found no thm-trf, sk-*, nt-* or Poincaré-duality node. def-trf-fs-log-blowup and def-per-fs-log-smooth-etale are general definitions. lem-per-invertible-kummer-chart-log-regular (Q67 PASS) reaches only generic monoid, log-chart and commutative-algebra trf lemmas. lem-trf-log-regular-completed-chart (Kato structure theorem), lem-trf-log-regular-saturation-normality (normality of monoid rings) and lem-trf-closed-immersion-strict-localization-cartesian are generic; none is a step of the trace formula, so all are accepted. I accept the declared tool_uses (generic commutative algebra and log geometry). No SGA is cited. Unit and chapter unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VeryTameLogQuotient",
+  "declaration": "AlgebraicGeometry.exists_veryTame_logQuotient",
+  "declarations": [
+   "AlgebraicGeometry.exists_veryTame_logQuotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VeryTameLogQuotient.lean",
+  "statement": "theorem exists_veryTame_logQuotient (X : FineSaturatedLogScheme.{u}) [IsNoetherian X.scheme] (G : Type v) [Group G] [Finite G] (a : FSLogGroupAction G X) (hadmissible : ∀ x : X.scheme, ∃ U : X.scheme.Opens, x ∈ U ∧ IsAffineOpen U ∧ ∀ (g : G) (z : X.scheme), (a.baseAction g).hom z ∈ U ↔ z ∈ U) (hfree : a.IsGenericallyFree) (hregular : X.IsLogRegular) (hverytame : a.IsVeryTame) : ∃ (Y : FineSaturatedLogScheme.{u}) (q : EtaleLogHom X Y), IsNoetherian Y.scheme ∧ IsFinite q.base ∧ Surjective q.base ∧ a.IsQuotient q ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x z : Spec (.of Ω) ⟶ X.scheme), x ≫ q.base = z ≫ q.base ↔ ∃ g : G, x ≫ (a.baseAction g).hom = z) ∧ Y.IsLogRegular ∧ q.IsLogEtale ∧ q.IsKummer ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), q.HasStrictLocalKummerChart t) ∧ ∀ (S : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X S), (∀ g : G, (a.logMap g).CompEq f f) → ∃! r : EtaleLogHom Y S, q.CompEq r f",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74dae3218",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Checked ILO VI 2.1-2.3, 3.1-3.5 and proof 3.7 clause by clause. Hypotheses: Noetherian fs log regular X; finite G acting by log automorphisms; admissible invariant affine cover; generically free (geometric stabilizers on a dense invariant open); IsVeryTame = IsTame + inertia Associated on log germs (characteristic monoid) + ring germ difference in nonunitIdeal (strict local stratum). Conclusions: exists Y and q; Noetherian, finite, surjective; IsQuotient (invariant rings, M_Y=(q_*M)^G on etale tests, injective log pullback); geometric orbit fibres on Spec Omega points; Y log regular; IsLogEtale; IsKummer (ILO 2.1); HasStrictLocalKummerChart at every geometric point (fs stalk charts, ring map pinned on germs, injective Kummer h, finite cokernel killed by a d invertible on O^sh_Y, IsPullback correctly oriented, as in ILO 2.2/3.5(c)); unique EtaleLogHom factorization of invariant maps (uniqueness follows from log_injective). New def nodes def-per-very-tame-fs-log-action and def-per-kummer-log-morphism are true and not hollow, with source/blueprint docstrings. No duplicate: IsVeryTameDivisorialAction/veryTame_quotient_logRegular are a divisorial-pair interface; no competing landed node. The statement interface matches the live citer exists_gabber_logSmooth_equivariant_modification. Imports: all proof dependencies with recorded modules are imported. lean.statement is verbatim in all 3 records. Compile: nt_compile --json clean (3.0 s, 3.0 s, 2.5 s) at load 83. Edge cases: empty X, trivial G, trivial log structure, t->-t, universes. No findings."
  }
 }

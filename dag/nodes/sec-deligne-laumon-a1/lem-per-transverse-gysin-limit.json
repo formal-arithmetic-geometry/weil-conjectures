@@ -13,7 +13,8 @@
   "def-weil-pbc-regular-sequence",
   "def-weil-closed-immersion",
   "def-pur-etale-derived-supported-sections",
-  "lem-per-regular-immersion-class-calculus"
+  "lem-per-regular-immersion-class-calculus",
+  "lem-asd-etale-finite-twist-pullback"
  ],
  "proof": [
   {
@@ -264,5 +265,39 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-bfd7aaf38 (reviewer sub-agent of L); spot-checked: Read the item and all 6 steps in full (no new nodes, statement unchanged) and opened the statements of all 9 cited nodes. Sources: ILO XVI Def 2.3.1, Thm 2.3.2 and Prop 2.2.3.1 match the item's class and base change; Stacks 03Q6 continuity matches the continuity node (qcqs, affine transitions, torsion sheaf). Step 1: the preserved generators give J_{j,k}=J_{i,k}R_j, so W and U are Cartesian; U_i is qcqs and each flag step is Cartier by regularity at every stage and at the limit. Step 2: the twist-pullback node turns each coefficient into the pullback of a fixed torsion sheaf, so continuity applies to V, U and Z. Step 3: the small-étale support triangle, the closed-support-Hom cone, filtered-colimit exactness and the explicit five-term argument are correct. Step 4: class calculus with n=1 gives the chart composite; the product calculus identifies c_D with the positive e_D and action with composition of supported morphisms; the twist and degree bookkeeping is right. Step 5: the Kummer node's clause for any Cartier-preserving morphism plus pullback of pairs gives v^*G_i=G_j v^*, with no flatness used. Step 6 is elementary. Small cases checked: c=0, q<0, negative twists, and the nonflat k[t,x]->k[t] example; t->0 is correctly excluded. No duplicate found (the class calculus and regular-supported-base-change are flat-only). The six tool_uses are generic and accepted. Batch-5: the ordinary-supported-kummer closure reaches only generic pod nodes (stalk tensor, finite local constancy, separated finite-type base change); the product-calculus closure reaches only generic trf site and topos localization nodes, as accepted at Q20. The b5 closure walk with and without the item, stopping at the assumption leaves, trace transport and trf/pd, adds 0 nodes. No SGA source used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TransverseGysinLimit",
+  "declaration": "AlgebraicGeometry.Etale.transverse_gysin_limit",
+  "declarations": [
+   "AlgebraicGeometry.Etale.transverseTateObject",
+   "AlgebraicGeometry.Etale.transverseOrdinaryGroup",
+   "AlgebraicGeometry.Etale.transverseSupportedGroup",
+   "AlgebraicGeometry.Etale.transverseHomPullback",
+   "AlgebraicGeometry.Etale.transverseOrdinaryPullback",
+   "AlgebraicGeometry.Etale.transverseClosedExchangeInverse",
+   "AlgebraicGeometry.Etale.transverseSupportedPullback",
+   "AlgebraicGeometry.Etale.transverseClassFamily",
+   "AlgebraicGeometry.Etale.transverseGysin",
+   "AlgebraicGeometry.Etale.TransverseContinuity",
+   "AlgebraicGeometry.Etale.transverseUnitPullback",
+   "AlgebraicGeometry.Etale.transverseSupportedTransition",
+   "AlgebraicGeometry.Etale.transverseSupportedProjection",
+   "AlgebraicGeometry.Etale.transverse_gysin_limit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TransverseGysinLimit.lean",
+  "statement": "theorem transverse_gysin_limit (ℓ : ℕ) (hℓ : ℓ.Prime) {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (a₀ : I) (Z V : Iᵒᵖ ⥤ Scheme.{u}) (i : Z ⟶ V) [∀ a : I, IsAffine (V.obj (op a))] [∀ a : I, IsAffine (Z.obj (op a))] [∀ a : I, IsNoetherian (V.obj (op a))] [∀ a : I, IsNoetherian (Z.obj (op a))] [∀ a : I, IsClosedImmersion (i.app (op a))] (z : Cone Z) (v : Cone V) (_hz : IsLimit z) (_hv : IsLimit v) [IsNoetherian z.pt] [IsNoetherian v.pt] (j : z.pt ⟶ v.pt) [IsClosedImmersion j] (hj : ∀ a : I, z.π.app (op a) ≫ i.app (op a) = j ≫ v.π.app (op a)) (c : ℕ) (t : ∀ a : I, List Γ(V.obj (op a), ⊤)) (tLimit : List Γ(v.pt, ⊤)) (_hlen : ∀ a : I, (t a).length = c) (_hlenLimit : tLimit.length = c) (_hreg : ∀ a : I, RingTheory.Sequence.IsRegular Γ(V.obj (op a), ⊤) (t a)) (_hregLimit : RingTheory.Sequence.IsRegular Γ(v.pt, ⊤) tLimit) (_hcut : ∀ a : I, Ideal.ofList (t a) = RingHom.ker (i.app (op a)).appTop.hom) (_hcutLimit : Ideal.ofList tLimit = RingHom.ker j.appTop.hom) (_ht : ∀ (a b : I) (h : a ≤ b), (t a).map (V.map (homOfLE h).op).appTop.hom = t b) (_htLimit : ∀ a : I, (t a).map (v.π.app (op a)).appTop.hom = tLimit) (hV : ∀ a : I, IsUnit ((ℓ ^ 1 : ℕ) : Γ(V.obj (op a), ⊤))) : (∀ q m : ℤ, TransverseContinuity (fun a ↦ transverseSupportedGroup ℓ (i.app (op a)) q m) (transverseSupportedGroup ℓ j q m) (transverseSupportedProjection ℓ hℓ i z v j hj hV (transverseUnitPullback ℓ (v.π.app (op a₀)) (hV a₀)) q m) (transverseSupportedTransition ℓ hℓ i hV q m) ∧ TransverseContinuity (fun a ↦ transverseOrdinaryGroup ℓ (Z.obj (op a)) q m) (transverseOrdinaryGroup ℓ z.pt q m) (fun a ↦ transverseOrdinaryPullback ℓ hℓ (z.π.app (op a)) (transverseUnitPullback ℓ (i.app (op a)) (hV a)) (transverseUnitPullback ℓ j (transverseUnitPullback ℓ (v.π.app (op a₀)) (hV a₀))) q m) (fun a b h ↦ transverseOrdinaryPullback ℓ hℓ (Z.map (homOfLE h).op) (transverseUnitPullback ℓ (i.app (op a)) (hV a)) (transverseUnitPullback ℓ (i.app (op b)) (hV b)) q m)) ∧ (∀ (q : ℤ) (a b : I) (h : a ≤ b) (x : transverseOrdinaryGroup ℓ (Z.obj (op a)) q 0), transverseSupportedTransition ℓ hℓ i hV (q + 2 * (c : ℤ)) c a b h (transverseGysin ℓ hℓ (i.app (op a)) c (hV a) q x) = transverseGysin ℓ hℓ (i.app (op b)) c (hV b) q (transverseOrdinaryPullback ℓ hℓ (Z.map (homOfLE h).op) (transverseUnitPullback ℓ (i.app (op a)) (hV a)) (transverseUnitPullback ℓ (i.app (op b)) (hV b)) q 0 x)) ∧ (∀ (q : ℤ) (a : I) (x : transverseOrdinaryGroup ℓ (Z.obj (op a)) q 0), transverseSupportedProjection ℓ hℓ i z v j hj hV (transverseUnitPullback ℓ (v.π.app (op a₀)) (hV a₀)) (q + 2 * (c : ℤ)) c a (transverseGysin ℓ hℓ (i.app (op a)) c (hV a) q x) = transverseGysin ℓ hℓ j c (transverseUnitPullback ℓ (v.π.app (op a₀)) (hV a₀)) q (transverseOrdinaryPullback ℓ hℓ (z.π.app (op a)) (transverseUnitPullback ℓ (i.app (op a)) (hV a)) (transverseUnitPullback ℓ j (transverseUnitPullback ℓ (v.π.app (op a₀)) (hV a₀))) q 0 x))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-befa16a8a",
+  "group": "N3",
+  "result": "fix",
+  "note": "Item statement correct clause by clause: affine Noetherian closed pairs, regular sequences cutting them out, preservation by transitions and limit projections, no flatness, l invertible; continuity for all integer q,m; transition and limit equations for the Kummer maps. Supported cohomology = derived Hom from the closed direct image of the constant sheaf (closedSupportHom form, the form of the landed class family); supported pullback inverts the canonical closed exchange, Cartesian squares so the zero branch is never reached; Kummer map uses the unique class family, stalk-regularity holds so its zero branch is never reached. Mechanical finding: stmt_dep lem-asd-etale-finite-twist-pullback is genuine, since regularClassTwistPullback = .c of the theorem's Classical.choice data -> PASS on that point. F1 fixed: landed dep modules EtaleFiniteTwistPullback and RegularImmersionClassCalculus re-pushed with only a docstring paragraph, to work around the stale published olean (00:12, lacks finiteEtaleTwistPullbackData; confirmed by nt_compile); fixes/ hold the byte-identical live texts. Maintainer: land with --revert-nodes for lem-asd-etale-finite-twist-pullback and lem-per-regular-immersion-class-calculus (records rewritten: by Q02->N3, Q02's repair note overwritten). Compile: live dep texts + item, lcompile run_set timeout 560: clean (21.2/2.1/59.5/57.5 s); nt_compile item timed out at 60 s twice at load ~84; retry landing at lower load if it times out."
  }
 }

@@ -11,7 +11,15 @@
   "def-nagata-strict-transform",
   "def-weil-pbc-regular-sequence",
   "def-weil-pbc-tor-modules",
-  "def-weil-regular-scheme"
+  "def-weil-regular-scheme",
+  "def-per-adapted-normal-crossings-center",
+  "def-per-regular-closed-immersion-codimension",
+  "def-pc-pullback-stalk-tensor-comparison",
+  "def-pc-module-pullback",
+  "def-trf-normal-crossings-divisor",
+  "def-nagata-global-blowup",
+  "def-sbc-ideal-sheaf-powers",
+  "def-pc-integral-scheme"
  ],
  "proof": [
   {
@@ -344,5 +352,28 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-dc3b5a008 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the parent's Steps 5–6, ILO X 1.6 (printed pp.142–143) with the 1.7 Claim and U_i/V_i charts (pp.143–145), and Stacks 09CC (more-algebra.tex lines 7445–7469). I recomputed the reported counterexample and it is correct. Take A=k[x,y,z,t], X'=V(t), I=(x+y,x(x+tz)), W=V(xy). On the u=x+y chart, B=A[v]/(uv−x(x+tz)), L1=(x,v), L2=(y,v−x−tz) and B/(L1+L2)=k[z,t]/(tz). This ring has t-torsion, so the Mayer–Vietoris sequence picks up a nonzero Tor_1 and the strict-transform comparison fails. All component-wise hypotheses hold, so the base general-center NCD clause is false; the earlier Q143 'true by Mayer–Vietoris' acceptance was wrong because (I+J1)∩(I+J2)≠I+J1J2. The repair restores ILO 1.7's adapted coordinates (the center is made of members of a regular system of parameters), and the parent's Step 5 satisfies that hypothesis. It is an E7 correction named in the report, not a weakening. The X 1.6 paragraphs, with the W correction of ILO's (1.b) typo, are unchanged. Steps 1–9 check out: Koszul resolution, base change and the new criterion with the principal neighbourhood; split-resolution Tor exactness; the monomial gr basis with induction and the low-degree Tor sequence giving g*I^a≅I'^a; arbitrary Proj base change; the bounded termwise Tor-acyclic Koszul argument giving Tor^B(D,B⊗C)=0; W^st=Bl_{V∩W}W; regularity of the full parameter tuple by Step 1; the 0BIQ chart equations T_{z_j} or z_j; and saturation of the product ideal in the domain chart. Edge cases a=0, I=0 and the unit ideal hold. The new node lem-per-noetherian-local-koszul-criterion is 09CC (2)⇒(1) with M=R≠0. It is true, statement-only, and not a duplicate: lem-weil-pbc-regular-sequence-koszul-regular is the converse and lem-pur-quasi-regular-noetherian-local starts from gr. I accept the 16 declared generic tool uses. Batch-5 flag lem-trf-blowup-chart-regular-sequence-presentation: it is Stacks 0BIQ, pure algebra. Its 18-node closure contains no thm-trf, trace-transport, Poincaré or batch-4 node, so it is outside both assumptions. There is no SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorIndependentBlowupTransform",
+  "declaration": "AlgebraicGeometry.torIndependent_blowup_transform",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorIndependentBlowupTransform.lean",
+  "statement": "theorem torIndependent_blowup_transform {X X' : Scheme.{u}} [IsNoetherian X] [IsNoetherian X'] (g : X' ⟶ X) (I : X.IdealSheafData) (hI : ∃ c : I.subscheme → ℕ, IsRegularClosedImmersionWithCodimension I.subschemeι c) (hTor : PullbackStalkTensor.IsTorIndependent I.subschemeι g) : (∃ c : (I.comap g).subscheme → ℕ, IsRegularClosedImmersionWithCodimension (I.comap g).subschemeι c) ∧ (∀ a : ℕ, ∃ e : (Scheme.Modules.tensorPullback g).obj (I ^ a).toModules ≅ ((I.comap g) ^ a).toModules, e.hom ≫ ((I.comap g) ^ a).toModulesι = idealPowerPullbackToStructure g I a) ∧ (∃ e : (I.comap g).blowup ≅ pullback g I.blowupMap, e.hom ≫ pullback.fst g I.blowupMap = (I.comap g).blowupMap) ∧ (∀ W : X.IdealSheafData, (∃ c : W.subscheme → ℕ, IsRegularClosedImmersionWithCodimension W.subschemeι c) → (∃ c : (I.comap W.subschemeι).subscheme → ℕ, IsRegularClosedImmersionWithCodimension (I.comap W.subschemeι).subschemeι c) → PullbackStalkTensor.IsTorIndependent W.subschemeι g → PullbackStalkTensor.IsTorIndependent ((I.comap W.subschemeι).subschemeι ≫ W.subschemeι) g → (∃ c : ((I.comap g).comap (W.comap g).subschemeι).subscheme → ℕ, IsRegularClosedImmersionWithCodimension ((I.comap g).comap (W.comap g).subschemeι).subschemeι c) ∧ HasStrictTransformBaseChange g I W) ∧ (IsRegularScheme X → IsRegularScheme X' → ∀ (r : ℕ) (W : Fin r → X.IdealSheafData), (∀ j : Fin r, IsIntegral (W j).subscheme) → Function.Injective W → (∏ j : Fin r, W j).IsNormalCrossingsDivisor → ((∏ j : Fin r, W j).comap g).IsNormalCrossingsDivisor → HasAdaptedNormalCrossingsCenter I W → (∀ s : Finset (Fin r), s.Nonempty → (∃ c : (s.sup W).subscheme → ℕ, IsRegularClosedImmersionWithCodimension (s.sup W).subschemeι c) ∧ (∃ c : (I.comap (s.sup W).subschemeι).subscheme → ℕ, IsRegularClosedImmersionWithCodimension (I.comap (s.sup W).subschemeι).subschemeι c) ∧ PullbackStalkTensor.IsTorIndependent (s.sup W).subschemeι g ∧ PullbackStalkTensor.IsTorIndependent ((I.comap (s.sup W).subschemeι).subschemeι ≫ (s.sup W).subschemeι) g) → HasStrictTransformBaseChange g I (∏ j : Fin r, W j)) ∧ (I = ⊥ → IsEmpty I.blowup ∧ ∀ (Z : Scheme.{u}) (j : Z ⟶ X), IsEmpty (I.strictTransform j))",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.idealPowerPullbackToStructure",
+   "AlgebraicGeometry.HasStrictTransformBaseChange",
+   "AlgebraicGeometry.torIndependent_blowup_transform"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ca2ee6d8",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Clause-by-clause match. (1) Noetherian X,X'. (2) Regular center via existential IsRegularClosedImmersionWithCodimension (length 0 and empty center allowed). (3) Stalkwise IsTorIndependent is equivalent to affine Tor_i^A(A',A/J)=0 by localization. (4) Regularity of I.comap g. (5) g^*(I^a) ≅ (I')^a pinned to the adjoint of I^a→O_X→g_*O_X' (unique section-normalized adjunction), a=0 included. (6) Blowup iso over X'. (7) W clause: four premises, regularity of the restricted pulled-back center, and HasStrictTransformBaseChange pinned to the ambient closed immersions. (8) NC clause: regular X,X'; integral injective components (refinement convention); NCD of the product and of its pullback; ∀ nonempty s, s.sup W hypotheses; adapted center. (9) I=⊥ gives empty blowup and strict transforms. New def node HasAdaptedNormalCrossingsCenter matches its statement and ILO X 1.7, not a duplicate of IsPermissibleCenter; fields complete. Statements verbatim; 8 added stmt_deps all used, none dropped; proof imports present; helpers real; only sorry. nt_compile --json of both files: rc 0, no warnings beyond sorry (2.2 s / 2.9 s). Advisory: def-nagata-strict-transform record names only strictTransform; the item also uses same-module IdealSheafData.strictTransform/strictTransformToSource/strictTransformMap."
  }
 }

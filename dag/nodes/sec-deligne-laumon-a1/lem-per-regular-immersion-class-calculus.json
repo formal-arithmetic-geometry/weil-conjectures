@@ -363,16 +363,18 @@
   "file": "lean/Sheaf/AlgebraicGeometry/RegularImmersionClassCalculus.lean",
   "statement": "theorem regular_immersion_class_calculus (ℓ : ℕ) (hℓ : ℓ.Prime) : ∃! classes : RegularImmersionClassFamily.{u} ℓ, RegularImmersionClassLaws ℓ hℓ classes",
   "branch": "newtargets-dag",
-  "by": "Q02",
+  "by": "N3",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "note": "Dependency-interface republication: the server compiler resolves a stale finite-Tate module without FiniteEtaleTwistPullbackData, so the recorded regular-class consumer fails on its .c and .p calls. The dependency sources are republished together with module documentation clarified; mathematical declarations are verbatim, retaining the canonical structured witnesses and every original law. No mathematical statement or definition is changed.",
+  "fixed_by": "NT-stage2-cc-befa16a8a"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-fe0cb8814",
-  "group": "Q02",
-  "result": "pass",
-  "note": "Re-delivery after RETURN of dfbd1782: H13/H2 fixed (NJ's EtaleFiniteTwistPullback.lean prefix byte-identical to live; FiniteEtaleTwistPullbackData/nonempty_/finiteEtaleTwistPullbackData appended in the same module; record main declaration/statement/module unchanged, superset declarations + lean.note, by=Q02 per preflight); H9 fixed (4 unused imports dropped); def-asd-ordinary-supported-kummer-boundary added to stmt_deps. Item statement, signature and new node def-per-stalk-regular-closed-immersion unchanged from the head read in full earlier (Ext from i_*, SupportedKummerBoundary sign, clopen c=0, composition, flat base change, normalised reduction, tensor normalisation; edge cases fine). Theorem stmt_dep lem-asd-etale-finite-twist-pullback is genuine: .c/.p of the Classical.choice of that node's theorem, pinned by the laws -> PASS on that point. nt_compile --json clean: 2.1/17.9/51.8 s at load ~54. Maintainer notes: the ∃! uniqueness is flagged STATEMENT-DISPUTED (ILO proves uniqueness only with the blowup image; the laws have no non-flat base change; no semi-purity on singular X) - node-level, Lean follows the node; item compile is close to the 60 s limit."
+  "reviewer": "NT-stage2-cc-befa16a8a",
+  "group": "N3",
+  "result": "fix",
+  "note": "Item statement correct clause by clause: affine Noetherian closed pairs, regular sequences cutting them out, preservation by transitions and limit projections, no flatness, l invertible; continuity for all integer q,m; transition and limit equations for the Kummer maps. Supported cohomology = derived Hom from the closed direct image of the constant sheaf (closedSupportHom form, the form of the landed class family); supported pullback inverts the canonical closed exchange, Cartesian squares so the zero branch is never reached; Kummer map uses the unique class family, stalk-regularity holds so its zero branch is never reached. Mechanical finding: stmt_dep lem-asd-etale-finite-twist-pullback is genuine, since regularClassTwistPullback = .c of the theorem's Classical.choice data -> PASS on that point. F1 fixed: landed dep modules EtaleFiniteTwistPullback and RegularImmersionClassCalculus re-pushed with only a docstring paragraph, to work around the stale published olean (00:12, lacks finiteEtaleTwistPullbackData; confirmed by nt_compile); fixes/ hold the byte-identical live texts. Maintainer: land with --revert-nodes for lem-asd-etale-finite-twist-pullback and lem-per-regular-immersion-class-calculus (records rewritten: by Q02->N3, Q02's repair note overwritten). Compile: live dep texts + item, lcompile run_set timeout 560: clean (21.2/2.1/59.5/57.5 s); nt_compile item timed out at 60 s twice at load ~84; retry landing at lower load if it times out."
  }
 }
