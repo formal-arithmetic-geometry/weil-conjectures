@@ -34,117 +34,44 @@
  ],
  "proof": [
   {
-   "text": "*Being locally of finite type is invariant under isomorphism and Zariski local on the base (conditions (0) and (2) of [lem-weil-pbc-fpqc-local-on-base-criterion] for $\\mathcal P$ = locally of finite type).* By [lem-weil-pbc-lft-pointwise-criterion] a morphism $f:X\\to S$ is locally of finite type [def-weil-finite-type-morphism] if and only if every $x\\in X$ lies in an affine open $U\\subseteq X$ with $f(U)\\subseteq V$ for an affine open $V\\subseteq S$ such that $\\mathcal O_S(V)\\to\\mathcal O_X(U)$ is of finite type [def-weil-pbc-finite-type-algebra]; we use this form. (0): let $f:X\\to S$ be locally of finite type and $a:X\\to\\tilde X$, $b:S\\to\\tilde S$ isomorphisms with $\\tilde f\\circ a=b\\circ f$. For $\\tilde x=a(x)\\in\\tilde X$ take $U\\ni x$, $V$ as above for $f$. Then $a(U)\\ni\\tilde x$ and $b(V)$ are affine opens [def-pc-scheme] with $\\tilde f(a(U))\\subseteq b(V)$, and $\\mathcal O_{\\tilde S}(b(V))\\to\\mathcal O_{\\tilde X}(a(U))$ is identified with $\\mathcal O_S(V)\\to\\mathcal O_X(U)$ through the ring isomorphisms $b^\\sharp,a^\\sharp$, hence is of finite type (the images under $a^\\sharp$ of finitely many generators generate); so $\\tilde f$ is locally of finite type by [lem-weil-pbc-lft-pointwise-criterion]. (2): let $S=\\bigcup_kV_k$ be an open covering such that every restriction $f^{-1}(V_k)\\to V_k$ is locally of finite type. For $x\\in X$ pick $k$ with $f(x)\\in V_k$; [lem-weil-pbc-lft-pointwise-criterion] for $f^{-1}(V_k)\\to V_k$ gives affine opens $x\\in U\\subseteq f^{-1}(V_k)$, $V\\subseteq V_k$ with $f(U)\\subseteq V$ and $\\mathcal O(V)\\to\\mathcal O(U)$ of finite type. An affine open of an open subscheme is an affine open of the ambient scheme, with the same ring of sections [def-pc-scheme]; so the same $U,V$ serve for $f$ at $x$, and $f$ is locally of finite type by [lem-weil-pbc-lft-pointwise-criterion].",
+   "text": "Local finite type is Zariski local on the target (including invariance under isomorphisms), and stable under arbitrary base change, hence under flat base change. Use the Mathlib instances IsZariskiLocalAtTarget and locallyOfFiniteType_isStableUnderBaseChange. These supply locality and hflat for fpqc_local_on_base_criterion.",
    "uses": [
     "lem-weil-pbc-lft-pointwise-criterion",
-    "def-weil-finite-type-morphism",
-    "def-weil-pbc-finite-type-algebra",
-    "def-pc-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KX (lemma-descending-property-locally-finite-type, line 5737), proof, second sentence: 'Being locally of finite type is Zariski local on the base, see Morphisms, Lemma 01T2' (lemma-locally-finite-type-characterize, morphisms.tex line 2673); invariance under isomorphism is the convention of Definition Tag 02KO (definition-property-morphisms-local, line 5310)"
-   }
-  },
-  {
-   "text": "*Being locally of finite type is stable under base change (condition (1)).* If $f:X\\to S$ is locally of finite type and $g:S'\\to S$ is any morphism, in particular a flat one, then the second projection $X\\times_SS'\\to S'$ is locally of finite type by [lem-weil-pbc-lft-base-change].",
-   "uses": [
     "lem-weil-pbc-lft-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KX, proof, first sentence: 'Being locally of finite type is preserved under base change, see Morphisms, Lemma 01T4' (lemma-base-change-finite-type, morphisms.tex line 2732)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Condition (3), the ring map of the base.* Let $g:S'\\to S$ be a flat surjective [def-weil-surjective-morphism] morphism of affine schemes, $f:X\\to S$ a morphism, $X'=X\\times_SS'$ with projections $g':X'\\to X$, $f':X'\\to S'$ [def-pc-fibre-product], and assume $f'$ locally of finite type. By step 1 (invariance under isomorphism, applied to $f$, $g$ and $f'$) we may assume $S=\\operatorname{Spec}R$ and $S'=\\operatorname{Spec}R'$ [def-pc-scheme]; then $g=\\operatorname{Spec}\\rho$ for a unique ring map $\\rho:R\\to R'$ [def-weil-affine-spectrum]. Since $g$ is flat, $\\rho$ is a flat ring map by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Since $g$ is surjective, the map of prime spectra $\\mathfrak q\\mapsto\\rho^{-1}(\\mathfrak q)$, which is the map of underlying sets of $\\operatorname{Spec}\\rho$ [def-weil-affine-spectrum], is surjective. Hence $\\rho$ is faithfully flat by [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] [def-weil-pbc-faithfully-flat-ring-map].",
-   "uses": [
-    "def-weil-surjective-morphism",
-    "def-pc-fibre-product",
-    "def-pc-scheme",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
-    "def-weil-pbc-faithfully-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KX, proof: 'let S' -> S be a flat surjective morphism of affine schemes ... Write S = Spec(R), S' = Spec(R') ... We know that R -> R' is faithfully flat' (the faithful flatness is Algebra, Lemma Tag 00HQ, lemma-ff-rings, algebra.tex line 9164, with Morphisms, Lemma Tag 01U5)"
-   }
-  },
-  {
-   "text": "*Condition (3), the base change of an affine open.* Keep the notation of step 3 and let $U\\subseteq X$ be an affine open, $U\\cong\\operatorname{Spec}A$ [def-pc-scheme]; then $f|_U:U\\to\\operatorname{Spec}R$ is $\\operatorname{Spec}\\alpha$ for a unique ring map $\\alpha:R\\to A$ [def-weil-affine-spectrum], making $A$ an $R$-algebra. Let $U'=g'^{-1}(U)$, an open subscheme of $X'$. By [lem-weil-pbc-open-preimage-fibre-product] (applied to $g'$ and $U$) the square formed by $U'\\to U$, $U'\\hookrightarrow X'$, $U\\hookrightarrow X$, $g'$ is cartesian; it sits on top of the cartesian square $(X',g',f')$ of $f$ and $g$, so by [lem-weil-pbc-cartesian-square-pasting] the outer rectangle is cartesian: $U'$ with $U'\\to U$ and $f'|_{U'}:U'\\to S'$ is a fibre product $U\\times_SS'$ of $f|_U$ and $g$ [def-pc-fibre-product]. By [lem-weil-pbc-fibre-product-affine-spectra] and the uniqueness of fibre products up to unique isomorphism, there is an isomorphism $U'\\cong\\operatorname{Spec}(A\\otimes_RR')$ under which $f'|_{U'}$ becomes $\\operatorname{Spec}$ of $R'\\to A\\otimes_RR'$, $r'\\mapsto1\\otimes r'$. In particular $U'$ is an affine open of $X'$ with $f'(U')\\subseteq S'$, $S'$ affine, and the ring map $\\mathcal O_{S'}(S')=R'\\to\\mathcal O_{X'}(U')\\cong A\\otimes_RR'$ induced by $f'$ is $r'\\mapsto1\\otimes r'$. Since $f'$ is locally of finite type, this ring map is of finite type by [lem-weil-pbc-lft-affine-pairs] (with $U'\\subseteq X'$, $V=S'$). Through the swap isomorphism $A\\otimes_RR'\\cong R'\\otimes_RA$, $a\\otimes r'\\mapsto r'\\otimes a$, which is an isomorphism of $R'$-algebras (it carries generators to generators), this says: $A'=R'\\otimes_RA$, with $r'\\mapsto r'\\otimes1$, is a finite type $R'$-algebra [def-weil-pbc-finite-type-algebra].",
+   "text": "For a flat surjective morphism g:T -> S between affine schemes, g is affine and therefore quasi-compact. Apply the local-finite-type clause of lem-galois-lft-formally-unramified-single-fpqc-descent (Mathlib LocalFlatDescent, lines 35-36) via MorphismProperty.of_pullback_snd_of_descendsAlong to the assumed local finite type of pullback.snd f g. This proves the affine descent condition without repeating the tensor-product argument already formalized in Mathlib.",
    "uses": [
     "def-pc-scheme",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-lft-affine-pairs",
-    "def-weil-pbc-finite-type-algebra"
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-galois-lft-formally-unramified-single-fpqc-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KX, proof: 'Let U ⊂ X be an affine open. Then U' = S' ×_S U is affine and of finite type over S' ... U = Spec(A), U' = Spec(A') ... A' = R' ⊗_R A and R' -> A' is of finite type' (Morphisms, Lemma Tag 01T2 (1)=>(2) for the last clause)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Condition (3), conclusion.* By step 3, $\\rho:R\\to R'$ is faithfully flat, and by step 4, $R'\\otimes_RA$ is a finite type $R'$-algebra; so $\\alpha:R\\to A$ is of finite type by the direction 'if' of [lem-weil-pbc-finite-type-descends-faithfully-flat]. The ring map $\\alpha$ is the map $\\mathcal O_S(S)\\to\\mathcal O_X(U)$ induced by $f$, with $U\\subseteq X$ and $S$ affine opens and $f(U)\\subseteq S$. Every $x\\in X$ lies in an affine open $U$ [def-pc-scheme], so the criterion of [lem-weil-pbc-lft-pointwise-criterion] holds at every point (with $V=S$), and $f$ is locally of finite type [def-weil-finite-type-morphism]. Thus being locally of finite type satisfies condition (3) of [lem-weil-pbc-fpqc-local-on-base-criterion].",
+   "text": "Apply fpqc_local_on_base_criterion to P = LocallyOfFiniteType, the flat-base-change and affine-descent verifications above, f, g, hcover, and the given local-finite-type hypotheses for all base changes. It yields LocallyOfFiniteType f.",
    "uses": [
-    "lem-weil-pbc-finite-type-descends-faithfully-flat",
-    "def-pc-scheme",
-    "lem-weil-pbc-lft-pointwise-criterion",
-    "def-weil-finite-type-morphism"
+    "lem-weil-pbc-fpqc-local-on-base-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KX, proof: 'We have to show that R -> A is of finite type. This is the result of Algebra, Lemma 00QP (lemma-finite-type-descends, algebra.tex line 31443). It follows that f is locally of finite type.'"
-   }
-  },
-  {
-   "text": "*Conclusion.* By steps 1, 2 and 5 the class of morphisms locally of finite type [def-weil-finite-type-morphism] satisfies conditions (0)-(3) of [lem-weil-pbc-fpqc-local-on-base-criterion]. Applied to $f:X\\to S$ and the fpqc covering $\\{g_i:S_i\\to S\\}_{i\\in I}$ [def-weil-pbc-fpqc-covering], whose base changes $f_i:X\\times_SS_i\\to S_i$ are locally of finite type by hypothesis, it gives that $f$ is locally of finite type.",
-   "uses": [
-    "lem-weil-pbc-fpqc-local-on-base-criterion",
-    "def-weil-finite-type-morphism",
-    "def-weil-pbc-fpqc-covering"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KX, proof, last sentence: 'Therefore Lemma 02KP (lemma-descending-properties-morphisms, line 5407) applies and we win.'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-lft-pointwise-criterion",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-finite-type-algebra",
-  "def-pc-scheme",
   "lem-weil-pbc-lft-base-change",
-  "def-weil-surjective-morphism",
-  "def-pc-fibre-product",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
-  "def-weil-pbc-faithfully-flat-ring-map",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-lft-affine-pairs",
-  "lem-weil-pbc-finite-type-descends-faithfully-flat",
-  "lem-weil-pbc-fpqc-local-on-base-criterion",
-  "def-weil-pbc-fpqc-covering"
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-galois-lft-formally-unramified-single-fpqc-descent",
+  "lem-weil-pbc-fpqc-local-on-base-criterion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Descent, Lemma Tag 02KX (lemma-descending-property-locally-finite-type, line 5737) and its proof, through Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407); Algebra, Lemma Tag 00QP; Morphisms, Lemmas Tag 01T2 and 01T4"
+  "place": "Lemma Tag 02KX and its proof through Lemma Tag 02KP; the affine faithfully-flat descent argument is supplied by Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent, lines 35-36 (HasRingHomProperty.descendsAlong_flat RingHom.FiniteType.codescendsAlong_faithfullyFlat).",
+  "formalized_by": "D4",
+  "date": "2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -238,5 +165,15 @@
   "group": "J1",
   "result": "fix",
   "note": "f:X⟶S, arbitrary I:Type v, S' explicit family, g_i, hcover: ofArrows ∈ fpqcPrecoverage S (= def-weil-pbc-fpqc-covering), h: ∀ i LocallyOfFiniteType (pullback.snd f (g i)) (f_i = second projection), concl LocallyOfFiniteType f; binders refit to H1 f7dc0d331 FPQC DESCENT FORM; covering family, not Mathlib single-morphism DescendsAlong"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261018T071141-L-1665290",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
