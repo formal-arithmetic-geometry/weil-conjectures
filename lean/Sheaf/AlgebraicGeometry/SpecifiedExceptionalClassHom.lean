@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass
 public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
 public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 
 /-!
 # The relative Hom bijection at a specified compactification
@@ -54,7 +55,18 @@ theorem specifiedExceptionalEtale_boundedBelow
       ((Etale.rightDerivedLowerShriekOfCompactification
           (ModuleCat.{u + 1} Λ) c).rightAdjoint.obj
         ((comparisonLowerStar (ModuleCat.{u + 1} Λ) Y).rightDerivedFunctor.obj K.obj)) := by
-  sorry
+  let : HasCompactification f := ⟨⟨c⟩⟩
+  let adj₁ := Adjunction.ofIsLeftAdjoint
+    (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c)
+  let adj₂ := (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).ofNatIsoLeft
+    (Etale.rightDerivedLowerShriekIso Λ c).symm
+  let e := adj₁.rightAdjointUniq adj₂
+  have hR : DerivedCategory.TStructure.t.plus
+      ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj
+        ((comparisonLowerStar (ModuleCat.{u + 1} Λ) Y).rightDerivedFunctor.obj K.obj)) := by
+    apply Etale.plus_rightDerivedUpperShriek_obj
+    exact plus_rightDerivedFunctor_comparisonLowerStar_obj K.property
+  exact DerivedCategory.TStructure.t.plus.prop_of_iso (e.app _).symm hR
 
 /-- The normalized Hom chain of the class adjunction, evaluated at an explicit retained
 etale origin. The successive factors are alpha, the normalized compact-support
