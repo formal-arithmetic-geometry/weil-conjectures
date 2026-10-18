@@ -1,0 +1,80 @@
+{
+ "id": "lem-per-normal-punctured-hypersurface-connected",
+ "kind": "statement",
+ "title": "Connected punctured principal slices of excellent normal local rings",
+ "statement": "Let $(A,\\mathfrak m)$ be an excellent Noetherian normal local integral domain of finite dimension at least $3$ [def-exc-excellent-ring, def-weil-pbc-normal-ring, def-weil-pbc-noetherian-ring, def-weil-pbc-krull-dimension-ring]. For every nonzero $f\\in\\mathfrak m$, the subspace $V(f)\\setminus\\{\\mathfrak m\\}$ of $\\operatorname{Spec}A$ is nonempty and connected. Here $V(f)$ is the set of prime ideals containing $f$, with its Zariski topology [def-weil-affine-spectrum]; connected means that it has no decomposition as a union of two disjoint nonempty open and closed subsets.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0ECR, lemma-punctured-still-connected, applied to the normal domain completion and the principal ideal (f); descend connectedness along the surjective faithfully flat completion map. Completion normality: More on Algebra, lemma-completion-normal-local-ring (Tag 0C23). This is the connectedness input used in ILO XVII Lemma 3.5.8."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The punctured spectrum of a principal divisor in an excellent normal henselian local ring of dimension at least three is connected",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], IrreducibleSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is an irreducible topological space. This means $ \\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n  {\"name\": \"PrimeSpectrum.irreducibleSpace\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] [IsDomain R], IrreducibleSpace (PrimeSpectrum R)\", \"doc\": \"If $ R $ is a domain, then the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is an irreducible topological space.\"}\n  {\"name\": \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [inst_1 : IsDomain A] [h : IsDedekindDomainDvr A], Ring.DimensionLEOne A\", \"doc\": \"A Dedekind domain $ A $ is a discrete valuation ring, meaning it is a commutative ring that is an integral domain with Krull dimension at most one, and every nonzero element belongs to exactly one max\"}\n  {\"name\": \"PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/LTSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {p₁ p₀ : PrimeSpectrum R},\\n  p₀ < p₁ →\\n    p₁ < IsLocalRing.closedPoint R →\\n      ∀ {x : R}, x ∈ IsLocalRing.maximalIdeal R → ∃ q, x ∈ q.asIdeal ∧ p₀ < q ∧ q.asIdeal < IsLocalRing.maximalIdeal R\", \"doc\": \"In a local ring $ R $, given prime ideals $ p_0 $ and $ p_1 $ strictly contained in the maximal ideal $ \\\\mathfrak{m} $ (the closed point) with $ p_0 \\\\subsetneq p_1 $, and an element $ x \\\\in \\\\mathfrak{\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [inst_3 : p.IsPrime] [IsArtinianRing R] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R p],\\n  ∃ f ∉ p, ↑(PrimeSpectrum.basicOpen f) = {{ asIdeal := p, isPrime := inst_3 }}\", \"doc\": \"Let $ R $ be an Artinian ring, $ S $ a commutative ring of essential finite type over $ R $, and $ \\\\mathfrak{p} $ a prime ideal of $ S $ such that $ S $ is quasi-finite at $ \\\\mathfrak{p} $. Then there\"}\n  {\"name\": \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  [IsPrincipalIdealRing R, ValuationRing R, IsDedekindDomain R,\\n      IsIntegrallyClosed R ∧ ∀ (P : Ideal R), P ≠ ⊥ → P.IsPrime → P = IsLocalRing.maximalIdeal R,\\n      Submodule.IsPrincipal (IsL\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and an integral domain, the following are equivalent: (1) $ R $ is a principal ideal ring; (2) $ R $ is a valuation ring; (3) $ R $ is a Dedekin\"}\n  {\"name\": \"IsDiscreteValuationRing.TFAE\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  ¬IsField R →\\n    [IsDiscreteValuationRing R, ValuationRing R, IsDedekindDomain R, IsIntegrallyClosed R ∧ ∃! P, P ≠ ⊥ ∧ P.IsPrime,\\n        Submodule.IsPrincipal (IsLocalRing.maximalIdeal R),\\n  \", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, an integral domain, and not a field, the following are equivalent: (1) $ R $ is a discrete valuation ring; (2) $ R $ is a valuation ring; (3) $ \"}\n",
+   "exit": 0,
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this etale residue or connectedness assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck connectedness of a punctured hypersurface in an analytically irreducible Noetherian local ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsIntegral X] : X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"Type (u + 1)\", \"doc\": \"A topological space equipped with a sheaf of commutative rings such that every stalk is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsLocallyNoetherian X] : X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  (U : X.Opens) (hU : (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U) {Z : CommRingCat}\\n  (h : R ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (X.presheaf.g\", \"doc\": \"For a scheme $ X $, the type of open subsets of its underlying topological space.\"}\n  {\"name\": \"isConnected_compl_singleton_of_one_lt_rank\", \"module\": \"Mathlib.Analysis.Normed.Module.Connected\", \"type\": \"(h : 1 < Module.rank ℝ E) (x : E) : IsConnected { x }ᶜ\", \"doc\": \"If the rank of a real module $ E $ is greater than 1, then the complement of any singleton set $ \\\\{x\\\\} $ in $ E $ is connected.\"}\n  {\"name\": \"IsLocalRing.closedPoint_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(U : TopologicalSpace.Opens <| PrimeSpectrum R) : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point of $ R $ is contained in an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if $ U $ is the entire space $ \\\\operatorname{Spec}(R\"}\n  {\"name\": \"IsLocalRing.closed_point_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{U : TopologicalSpace.Opens (PrimeSpectrum R)} : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point $ \\\\mathfrak{m} $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in an open set $ U $ if and only if $ U $ is the entire space $ \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.stalkClosedPointIso\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \": (Spec R).presheaf.stalk (closedPoint R) ≅ R\", \"doc\": \"The stalk of the structure sheaf at the closed point of the prime spectrum of a commutative ring $ R $ is isomorphic to $ R $ itself. This isomorphism is constructed by composing the canonical isomorp\"}\n",
+   "exit": 0,
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this etale residue or connectedness assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, IsConnected",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "exit": 0,
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this etale residue or connectedness assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "punctured.*connected|connected.*punctured|connectedness",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Tactic/GrindAttrs.lean\", \"line\": \"56\", \"text\": \"* Implement other grind sets, e.g. `boundedness`, `countability`, `connectedness`, ...\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Connectivity/Connected.lean\", \"line\": \"866\", \"text\": \"/-- Deleting a non-bridge edge from a connected graph preserves connectedness. -/\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Uniqueness.lean\", \"line\": \"165\", \"text\": \"    by connectedness. -/\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/IsolatedZeros.lean\", \"line\": \"288\", \"text\": \"  -- Now connectedness implies that `z` is an accumulation point of `U`, so at least one of\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Module/Connected.lean\", \"line\": \"15\", \"text\": \"# Connectedness of subsets of vector spaces\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Module/Connected.lean\", \"line\": \"17\", \"text\": \"We show several results related to the (path)-connectedness of subsets of real vector spaces:\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Module/Connected.lean\", \"line\": \"26\", \"text\": \"Statements with connectedness instead of path-connectedness are also given.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/IsConnected.lean\", \"line\": \"32\", \"text\": \"## Final functors preserve connectedness of categories (in both directions)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/CartanMatrix.lean\", \"line\": \"28\", \"text\": \"* `RootPairing.Base.induction_on_cartanMatrix`: an induction principle expressing the connectedness\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/CartanMatrix.lean\", \"line\": \"229\", \"text\": \"/-- A characterisation of the connectedness of the Dynkin diagram for irreducible root pairings. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/GuitartExact/Basic.lean\", \"line\": \"227\", \"text\": \"for characterizations in terms of the connectedness of auxiliary categories. -/\"}\n  {\"file\": \"Mathlib/Topology/Sets/VietorisTopology.lean\", \"line\": \"387\", \"text\": \"    -- By the connectedness of `t`, `U` and `V` intersect within `t`, and therefore within `⋃₀ s`.\"}\n  {\"file\": \"Mathlib/Topology/Sets/VietorisTopology.lean\", \"line\": \"787\", \"text\": \"  -- By density, it is enough to show connectedness for finite sets in the basic open set.\"}\n  {\"file\": \"Mathlib/CategoryTheory/IsConnected.lean\", \"line\": \"223\", \"text\": \"/-- Lifting the universe level of morphisms and objects preserves connectedness. -/\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/Basic.lean\", \"line\": \"29\", \"text\": \"* The connectedness of `OnePoint X` for a noncompact, preconnected `X`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Examples.lean\", \"line\": \"113\", \"text\": \"    connectedness, the orbit equals `X.V`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Decomposition.lean\", \"line\": \"149\", \"text\": \"  subobject of `A` and `B` and hence isomorphic to `A` and `B` by connectedness. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"line\": \"108\", \"text\": \"/-- A functor is said to preserve connectedness if whenever `X : C` is connected,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Full.lean\", \"line\": \"26\", \"text\": \"preserves connectedness, which translates to the fact that `Aut F` acts transitively on\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Full.lean\", \"line\": \"49\", \"text\": \"For a version without the connectedness assumption, see `exists_lift_of_mono`.\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"line\": \"306\", \"text\": \"connectedness assumption, by looking at connected components. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean\", \"line\": \"23\", \"text\": \"The connectedness assumption on `J` is necessary: take `C` to be the category of abelian groups,\"}\n  {\"file\": \"Mathlib/Topology/Separation/Connected.lean\", \"line\": \"12\", \"text\": \"# Interaction of separation properties with connectedness properties\"}\n  {\"file\": \"Mathlib/Topology/Order/LeftRightNhds.lean\", \"line\": \"501\", \"text\": \"/-- If `S` is order-connected and contains two points `x < y`, then `S` is a punctured left\"}\n  {\"file\": \"Mathlib/Topology/Connected/Basic.lean\", \"line\": \"186\", \"text\": \"/-- Preconnectedness of the iUnion of a family of preconnected sets\"}\n",
+   "exit": 0,
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this etale residue or connectedness assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-normal-top-residue-class",
+  "date": "2026-10-19",
+  "group": "Q22"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Tag 0ECR, lemma-punctured-still-connected, applied to the normal domain completion and the principal ideal (f); descend connectedness along the surjective faithfully flat completion map. Completion normality: More on Algebra, lemma-completion-normal-local-ring (Tag 0C23). This is the connectedness input used in ILO XVII Lemma 3.5.8.",
+   "via": [
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

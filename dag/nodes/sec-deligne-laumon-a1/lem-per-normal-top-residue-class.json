@@ -2,7 +2,7 @@
  "id": "lem-per-normal-top-residue-class",
  "kind": "statement",
  "title": "Top normal local cohomology classes and general residue transitions",
- "statement": "Let $\\ell$ be prime, $n\\geq1$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, and $X$ a Noetherian excellent scheme with $\\ell$ invertible [def-exc-excellent-ring]. Use ordinary etale derived categories [def-weil-pbc-derived-categories]. Geometric points, costalks $R\\Gamma_{\\bar x}$, roots-of-unity twists, and immediate normalized residue transitions are as in [def-per-potential-dualizing-complex]. For every geometric specialization $\\bar y\\rightsquigarrow\\bar x$ of finite codimension $c$ (the dimension of the reduced closure of $\\bar y$ in the strict localization at $\\bar x$), every $M\\in D^+(X_{\\mathrm{et}},\\Lambda)$, and every $a\\in\\mathbf Z$, there are canonical maps\n$$\\operatorname{sp}^X_{\\bar y,\\bar x}:H^a(R\\Gamma_{\\bar y}M)\\longrightarrow H^{a+2c}(R\\Gamma_{\\bar x}M(c)).$$\nThey are natural in $M$, agree with the normalized immediate transitions when $c=1$ and with the identity when $c=0$, commute with etale and strict-local restriction, and compose under chains of specializations, including the indicated Tate twists.\n\nIf $S$ is a Noetherian excellent normal strictly henselian local scheme of dimension $d$, with closed point $s$ and $\\ell$ invertible [def-weil-pbc-normal-ring, def-weil-pbc-henselian-terminology, def-weil-pbc-krull-dimension-ring], then\n$$H^q_s(S,\\Lambda(d))=0\\quad(q>2d),\\qquad [s]:\\Lambda\\xrightarrow{\\sim}H^{2d}_s(S,\\Lambda(d)).$$\nThe classes $[s]$ are invariant under the automorphisms of the chosen geometric points and commute with etale localization. On a normal integral excellent scheme, writing $r_x=\\dim\\mathcal O_{X,x}$, the corresponding geometric classes $c_{\\bar x}\\in H^{2r_x}(R\\Gamma_{\\bar x}\\Lambda(r_x))$ satisfy\n$$\\operatorname{sp}_{\\bar y,\\bar x}(c_{\\bar y})=c_{\\bar x}$$\nfor every immediate geometric specialization, where $r_x=r_y+1$ and the source is twisted by $r_y$. At a geometric generic point the class is $1\\in\\Lambda$. Consequently the general specialization from a geometric generic point to $\\bar x$ carries $1$ to $c_{\\bar x}$.",
+ "statement": "Let $\\ell$ be prime, $n\\geq1$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, and $X$ a Noetherian excellent scheme with $\\ell$ invertible [def-exc-excellent-ring]. Use ordinary etale derived categories [def-weil-pbc-derived-categories]. Geometric points, costalks $R\\Gamma_{\\bar x}$, roots-of-unity twists, and immediate normalized residue transitions are as in [def-per-potential-dualizing-complex]. For every geometric specialization $\\bar y\\rightsquigarrow\\bar x$ of finite codimension $c$ (the dimension of the reduced closure of $\\bar y$ in the strict localization at $\\bar x$), every $M\\in D^+(X_{\\mathrm{et}},\\Lambda)$, and every $a\\in\\mathbf Z$, there are canonical maps\n$$\\operatorname{sp}^X_{\\bar y,\\bar x}:H^a(R\\Gamma_{\\bar y}M)\\longrightarrow H^{a+2c}(R\\Gamma_{\\bar x}M(c)).$$\nThey are natural in $M$, agree with the normalized immediate transitions when $c=1$ and with transport along the specified geometric specialization when $c=0$ (the identity for an identity specialization), commute with etale and strict-local restriction, and compose under chains of specializations, including the indicated Tate twists.\n\nIf $S$ is a Noetherian excellent normal strictly henselian local scheme of dimension $d$, with closed point $s$ and $\\ell$ invertible [def-weil-pbc-normal-ring, def-weil-pbc-henselian-terminology, def-weil-pbc-krull-dimension-ring], then\n$$H^q_s(S,\\Lambda(d))=0\\quad(q>2d),\\qquad [s]:\\Lambda\\xrightarrow{\\sim}H^{2d}_s(S,\\Lambda(d)).$$\nThe classes $[s]$ are invariant under the automorphisms of the chosen geometric points and commute with etale localization. On a normal integral excellent scheme, writing $r_x=\\dim\\mathcal O_{X,x}$, the corresponding geometric classes $c_{\\bar x}\\in H^{2r_x}(R\\Gamma_{\\bar x}\\Lambda(r_x))$ satisfy\n$$\\operatorname{sp}_{\\bar y,\\bar x}(c_{\\bar y})=c_{\\bar x}$$\nfor every immediate geometric specialization, where $r_x=r_y+1$ and the source is twisted by $r_y$. At a geometric generic point the class is $1\\in\\Lambda$. Consequently the general specialization from a geometric generic point to $\\bar x$ carries $1$ to $c_{\\bar x}$.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, Theorems 3.1.1 and 3.1.2 and their proofs, especially 3.6.1 (invariance of the class); printed pp. 268, 277–280"
@@ -15,9 +15,254 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First choose a finite saturated chain between the generic and closed points of the reduced closure in the target strict localization. This is possible because its Krull dimension is finite; a maximal-length chain is saturated. Choose geometric lifts successively, retaining the specified generic specialization. The universal property of strict localization [lem-weil-pbc-map-into-henselian-colimit] factors the given map through each chosen strict localization; [lem-trf-ind-etale-strict-local-invariance] identifies its iterated strict localizations with the original ones. By [lem-per-immediate-specialization-criterion] the positive-codimension factors are immediate. Codimension-zero factors are the specified geometric transports. Compose the normalized immediate maps of [def-per-potential-dualizing-complex], with twists and shifts. Their naturality is part of the trait model in that definition. Write $P_c,Q_c$ for the chain-independence assertions of [lem-per-residue-chain-reductions]. That node reduces $P_c$ to $Q_c$. For $c\\leq1$, two factorizations differ only by codimension-zero transports, and the immediate construction is compatible with those identifications. We prove $P_c$ by induction before proving the top-class assertion.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-per-immediate-specialization-criterion",
+    "def-per-potential-dualizing-complex",
+    "lem-per-residue-chain-reductions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Definitions 3.5.1–3.5.3 and Lemmas 3.5.5–3.5.7"
+   }
+  },
+  {
+   "text": "For $Q_2$, apply [lem-per-surface-resolution-supported-presentation]. Its exact presentation has generators $e_i$ and relations $d_z(e_i-e_j)$, with $d_z$ units. Connectedness of the intersection graph therefore identifies all generators in the cokernel; the sum-of-coefficients map identifies this cokernel with $\\Lambda$. A normalized point class on any component gives its common generator. To compare resolutions, dominate both by a third as in that node. The common-domination and isomorphism-locus clauses of that node supply a closed point where pullback identifies the normalized point representatives. Thus the common generator in $H_s^4(S,\\Lambda(2))$ is independent of the resolution. The node's flag formula says every two-step flag sends $1$ to that generator. Codimension-zero factors fix $1$, so $Q_2$ follows, and the reduction theorem gives $P_2$.",
+   "uses": [
+    "lem-per-surface-resolution-supported-presentation",
+    "lem-per-residue-chain-reductions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Propositions 3.4.1.3–3.4.1.4, section 3.4.2, and section 3.4.3"
+   }
+  },
+  {
+   "text": "Let $c\\geq3$ and suppose $P_{c-1}$. On a normal strictly henselian local $S$ of dimension $c$, for each $z\\neq\\eta,s$ compose the already defined transitions through a geometric lift of $z$ and apply the composite to $1$. Both positive codimensions are less than $c$. Conjugacy [lem-per-normal-geometric-specialization-conjugacy] and the fact that generic Galois automorphisms fix $1$ show that the resulting $\\gamma_z\\in H_s^{2c}(S,\\Lambda(c))$ is independent of all lifts and factorizations. For comparable intermediate points $z\\rightsquigarrow z'$, the induction hypothesis applied to the two shorter pieces gives $\\gamma_z=\\gamma_{z'}$. Given any $z,z'$, their nonzero prime ideals contain a common nonzero element $f$ (multiply one nonzero element from each). The punctured hypersurface $V(f)\\setminus\\{s\\}$ is connected by [lem-per-normal-punctured-hypersurface-connected]. On each irreducible component, comparison with its generic point makes $\\gamma$ constant; the finite component intersection graph is connected, so these constants agree. Thus all $\\gamma_z$ agree. Every full flag has an intermediate point, hence $Q_c$ holds. [lem-per-residue-chain-reductions] now gives $P_c$, completing the induction.",
+   "uses": [
+    "lem-per-normal-geometric-specialization-conjugacy",
+    "lem-per-normal-punctured-hypersurface-connected",
+    "lem-per-residue-chain-reductions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 3.5.8 and the conclusion of section 3.5"
+   }
+  },
+  {
+   "text": "The independent composite defines the asserted map for every complex and degree. Concatenation of factorizations proves composition, and naturality follows factor by factor. Composition is degree-correct because every factorization of a geometric specialization $\\bar y\\rightsquigarrow\\bar x$ of codimension $c$ into codimension-zero and immediate factors has exactly $c$ immediate factors, so codimensions add. Indeed, the reduced closure $Z$ of the image of $\\bar y$ in $X_{(\\bar x)}$ is a local domain of dimension $c$; it is a quotient of the strict henselization of a localization of an excellent ring, hence Noetherian and excellent [lem-sc-strict-henselization-noetherian], [lem-exc-finite-type-localization-excellent], [lem-exc-weakly-etale-excellent], [lem-weil-pbc-ind-etale-stability], so catenary [def-exc-excellent-ring]. The special points of the factors map to a chain of points of $Z$; a codimension-zero factor does not move the image point, and for an immediate factor $\\bar z\\rightsquigarrow\\bar z'$ the identification of strict localizations [lem-trf-ind-etale-strict-local-invariance] and invariance of dimension [lem-sc-strict-henselization-dimension] show that the corresponding primes of $Z$ are adjacent. Thus the image chain is saturated from the generic to the closed point of $Z$, and by catenarity its length is $\\dim Z=c$. For an etale or strict-local restriction, use [lem-per-prime-power-costalk-reduction] to compute each immediate factor on the same strict-local curve with the same normalized formula $d^{-1}\\operatorname{sp}_{\\widetilde Z}(\\nu^*i^!M)$ of [def-per-potential-dualizing-complex]. These computations have identical sources, targets and degree $d$, so their maps agree. Factorization independence proves restriction compatibility for the composite. Codimension zero is geometric transport; only an identity specialization necessarily gives the identity map.",
+   "uses": [
+    "lem-per-prime-power-costalk-reduction",
+    "def-per-potential-dualizing-complex",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-exc-weakly-etale-excellent",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-exc-excellent-ring",
+    "lem-sc-strict-henselization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Theorem 3.1.2 and Definitions 1.3.1–1.4.1"
+   }
+  },
+  {
+   "text": "First construct a class without asserting it is a generator. For a normal henselian local $S$ choose geometric generic and closed points and a specialization $t$, and put $c_{\\bar s}=\\operatorname{sp}_t(1)$. For $t'=t\\sigma$, conjugacy [lem-per-normal-geometric-specialization-conjugacy] and composition from the transition construction in Steps 1–4 give $\\operatorname{sp}_{t'}(1)=\\operatorname{sp}_t(\\sigma(1))=\\operatorname{sp}_t(1)$. For a closed geometric automorphism $\\tau$, use $\\tau t=t\\sigma$ to obtain $\\tau(c_{\\bar s})=c_{\\bar s}$. An isomorphism of chosen generic geometric points has the same calculation. This proves independence and Galois invariance before any assertion on the size of the cohomology group. Step 4 also proves that these classes commute with etale localization.",
+   "uses": [
+    "lem-per-normal-geometric-specialization-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.6.1"
+   }
+  },
+  {
+   "text": "The bound [lem-per-strict-local-etale-dimension-bounds] applied to the sheaf $\\Lambda(d)$ gives $H_s^q(S,\\Lambda(d))=0$ for $q>2d$. Prove that $1\\mapsto c_{\\bar s}$ is an isomorphism simultaneously for all such $S$, by induction on $d$. For $d=0$, normality says its local ring is a domain, and dimension zero makes its zero prime maximal, so it is a field; it is separably closed because $S$ is strictly henselian. The specialization is the identity and the assertion is $\\Lambda=\\Lambda$. For $d=1$, a normal one-dimensional Noetherian local ring is regular by [lem-weil-pbc-regular-local-dim-one-iff-normal]. The potential pinning of $\\Lambda$ in [lem-per-potential-dualizing-regular-unit] and its immediate compatibility give $\\Lambda\\xrightarrow{\\sim}H_s^2(S,\\Lambda(1))$, sending $1$ to the transition of $1$. For $d=2$, Step 2 already proved that every flag image of $1$ is the generator of the surface presentation, so the assertion holds. The remaining induction begins at $d\\geq3$.",
+   "uses": [
+    "lem-per-strict-local-etale-dimension-bounds",
+    "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-surface-resolution-supported-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.2.1 and Section 2.4 (base dimensions 0 and 1)"
+   }
+  },
+  {
+   "text": "Fix $d\\geq3$ and assume the assertion through dimension $d-1$. For $y\\in U=S\\setminus\\{s\\}$ put $p=\\dim\\mathcal O_{S,y}<d$. Its strict local scheme is Noetherian by [lem-sc-strict-henselization-noetherian], normal by [lem-weil-pbc-etale-colimit-normal-local-domain] applied to [lem-weil-pbc-strict-henselization-triples], and of dimension $p$ by [lem-sc-strict-henselization-dimension]. Localization preserves excellence by [lem-exc-finite-type-localization-excellent]; the strict localization is excellent by [lem-exc-weakly-etale-excellent] and [lem-weil-pbc-ind-etale-stability]. Apply the induction hypothesis there. Step 5 gives independence and invariance, so its top isomorphism is the isomorphism of residue-field sheaves $\\Lambda\\cong\\mathcal H^{2p}(C_y\\Lambda(p))$, not merely an isomorphism of one stalk. Its higher cohomology sheaves vanish. Thus all the local costalk hypotheses of [lem-per-coniveau-top-edge-presentation] hold.",
+   "uses": [
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-dimension",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-exc-weakly-etale-excellent",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-per-coniveau-top-edge-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 3.6.2, first half"
+   }
+  },
+  {
+   "text": "For $y\\in U^p$, the reduced closure $Z=\\overline{\\{y\\}}\\subset S$ is integral and strictly henselian local; it is a quotient of the excellent local ring of $S$. Excellence is preserved by [lem-exc-finite-type-localization-excellent]. The strict henselian property of a quotient follows by lifting a simple-root polynomial to the original ring and lifting its root there; its residue field is unchanged. Catenarity in [def-exc-excellent-ring] gives $\\dim Z=d-p$, by concatenating saturated chains through $y$. Apply the integral generic-point clause of [lem-per-strict-local-etale-dimension-bounds] to $Z$ to obtain the required bound $\\operatorname{cd}_\\ell\\kappa(y)\\leq d-p$. The coniveau theorem now gives a surjection $\\bigoplus_{y\\in U^{d-1}}H^1(\\kappa(y),\\Lambda(1))\\twoheadrightarrow H_s^{2d}(S,\\Lambda(d))$.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-per-strict-local-etale-dimension-bounds",
+    "lem-per-coniveau-top-edge-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.2.2 and Lemma 3.6.2, spectral-sequence bounds"
+   }
+  },
+  {
+   "text": "Write $e_{\\bar y}=\\operatorname{sp}_{\\bar\\eta,\\bar y}(1)$ for the lower-dimensional canonical class. The component formula in [lem-per-coniveau-top-edge-presentation] sends $b$ to $\\epsilon\\rho_y(b)\\operatorname{sp}_{\\bar y,\\bar s}(e_{\\bar y})$ with $\\epsilon=\\pm1$; only its image $\\Lambda\\operatorname{sp}_{\\bar y,\\bar s}(e_{\\bar y})$ is used. By the transition construction in Steps 1–4 the latter transition of $e_{\\bar y}$ is $\\operatorname{sp}_{\\bar\\eta,\\bar s}(1)=c_{\\bar s}$; Step 5 removes the choice of the intermediate geometric lifts. Every component of the surjection in Step 8 therefore lands in $\\Lambda c_{\\bar s}$. Since that map is surjective, $\\Lambda\\to H_s^{2d}(S,\\Lambda(d))$, $a\\mapsto a c_{\\bar s}$, is surjective. This argument proves the surjectivity part in dimension $d$ for every $S$, before starting its injectivity part.",
+   "uses": [
+    "lem-per-coniveau-top-edge-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 3.6.2, final paragraph (normalized components)"
+   }
+  },
+  {
+   "text": "Write $A=\\mathcal O_S(S)$ and $\\widehat A$ for its maximal-ideal completion. By [lem-weil-pbc-adic-completion-noetherian], [lem-weil-pbc-module-completion-complete], [lem-weil-pbc-local-completion-local-ring] and [lem-weil-pbc-completion-dimension], $\\widehat A$ is complete Noetherian local, has the same residue field and dimension $d$, and is henselian by [lem-weil-pbc-complete-pair-henselian], hence strictly henselian. It is excellent by [lem-per-complete-local-excellence]. To verify normality, use that excellence makes $A$ a G-ring [def-exc-excellent-ring], [def-weil-pbc-g-ring]: the map $A\\to\\widehat A$ is flat with geometrically regular Noetherian fibres. The fibres are normal by [lem-weil-pbc-regular-ring-normal]; [lem-weil-pbc-flat-normal-fibres-noetherian-normal] gives that $\\widehat A$ is normal. Thus $\\widehat S$ satisfies all hypotheses in the same dimension. [lem-per-completion-supported-constant-comparison] identifies its top cohomology module with that of $S$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-per-complete-local-excellence",
+    "def-exc-excellent-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-per-completion-supported-constant-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 3.6.3, completion reduction; Stacks 0C23 and 07QW"
+   }
+  },
+  {
+   "text": "Construct a testing potential complex on $\\widehat S$. [lem-weil-pbc-cohen-power-series-presentation] gives a surjective local map $B\\twoheadrightarrow\\widehat A$ with $B$ complete Noetherian regular local and the same residue field. Hence $\\ell$ is invertible in $B$; it is excellent by [lem-per-complete-local-excellence]. Put $i:\\widehat S\\hookrightarrow P=\\operatorname{Spec}B$ and $h=\\dim\\mathcal O_{P,i(\\eta)}$. By [lem-per-potential-dualizing-regular-unit], $L=\\Lambda_P(h)[2h]$ is potential for $h-\\operatorname{codim}_P$. Set $K=i^!L$. The closed-immersion clause of [lem-per-prime-power-supported-calculus] identifies $C_xK$ with $C_{i(x)}L$, giving pinnings for the restricted dimension function. For an immediate specialization in $\\widehat S$, its reduced strict-local curve and residue degree are identical to those in $P$; the finite-residue compatibility [lem-per-finite-residue-gysin-naturality], with identity residue-field maps, identifies its transition square with that of $L$. Thus these pinnings are potential. The generic dimension is zero by the definition of $h$, and the closed dimension is $-d$, by successive unit drops of the dimension function along a length-$d$ flag.",
+   "uses": [
+    "lem-weil-pbc-cohen-power-series-presentation",
+    "lem-per-complete-local-excellence",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-prime-power-supported-calculus",
+    "lem-per-finite-residue-gysin-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 3.6.3; Proposition 2.4.3.1, Proposition 3.3.1 and Proposition 2.4.4.1 (closed-immersion case only)"
+   }
+  },
+  {
+   "text": "By [lem-per-normal-potential-low-degrees], the generic pinning of this $K$ extends to a map $f:\\Lambda_{\\widehat S}\\to K$ equal to the identity at the geometric generic point. Naturality of the transition construction in Steps 1–4 gives a square with top row $\\Lambda=H^0_{\\bar\\eta}\\Lambda\\to H^{2d}_{\\bar s}(\\Lambda(d))$, bottom row $H^0_{\\bar\\eta}K\\to H^{2d}_{\\bar s}(K(d))$, and vertical maps induced by $f$. The left map is an isomorphism. The bottom map is an isomorphism: factor the specialization, and use the compatibility of each immediate transition with the pinnings of [def-per-potential-dualizing-complex]; each is identified with the identity of $\\Lambda$ after the indicated twists and shifts. Therefore if $a c_{\\bar s}=0$ on $\\widehat S$, the bottom isomorphism sends $a$ to zero, so $a=0$. Together with Step 9 (which applies also to $\\widehat S$), this proves its top module is $\\Lambda$.",
+   "uses": [
+    "lem-per-normal-potential-low-degrees",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 3.6.3, final commutative square, printed pp. 279–280"
+   }
+  },
+  {
+   "text": "The comparison of Step 10 consequently says that $H_s^{2d}(S,\\Lambda(d))$ has exactly $\\ell^n$ elements. Step 9 gives a surjection from the $\\ell^n$-element module $\\Lambda$ onto it. A surjection of two finite sets of the same cardinality has singleton fibres, hence is injective. This proves that $1\\mapsto c_{\\bar s}$ is an isomorphism for $S$ and completes the induction. Only an isomorphism of modules under completion was used; compatibility of the class with completion is not assumed.",
+   "uses": [
+    "lem-per-completion-supported-constant-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 3.6.3, conclusion"
+   }
+  },
+  {
+   "text": "On a normal integral excellent scheme, form the class at each geometric $\\bar x$ in its normal strict localization. Its strict localization is Noetherian [lem-sc-strict-henselization-noetherian], a normal domain [lem-weil-pbc-etale-colimit-normal-local-domain] applied to [lem-weil-pbc-strict-henselization-triples], excellent [lem-exc-finite-type-localization-excellent], [lem-exc-weakly-etale-excellent], [lem-weil-pbc-ind-etale-stability], and of dimension $r_x$ [lem-sc-strict-henselization-dimension], so the result just proved gives $\\Lambda\\cong H^{2r_x}(C_{\\bar x}\\Lambda(r_x))$. For an immediate specialization $\\bar y\\rightsquigarrow\\bar x$, concatenate a generic-to-$\\bar y$ specialization with it. Composition in the transition construction in Steps 1–4 gives $\\operatorname{sp}_{\\bar y,\\bar x}(c_{\\bar y})=\\operatorname{sp}_{\\bar\\eta,\\bar x}(1)=c_{\\bar x}$ with the source twisted by $r_y$. Here $r_x=r_y+1$: by [lem-per-immediate-specialization-criterion] the closure of $y$ has one-dimensional local ring at $x$, and $\\mathcal O_{X,x}$ is a catenary local domain [def-exc-excellent-ring], so a maximal chain of primes of $\\mathcal O_{X,x}$ through $y$ has length $r_y+1$, while every saturated chain of primes of $\\mathcal O_{X,x}$ has length $r_x$. Independence, automorphism invariance and etale compatibility are Step 5; the generic class is the identity transition of $1$. A finite immediate factorization and repeated application of this equality give the final general-specialization assertion.",
+   "uses": [
+    "lem-sc-strict-henselization-dimension",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-exc-weakly-etale-excellent",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-per-immediate-specialization-criterion",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Theorem 3.1.1 and Proposition 3.6.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-per-potential-dualizing-complex",
+  "def-weil-pbc-g-ring",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-weakly-etale-excellent",
+  "lem-per-complete-local-excellence",
+  "lem-per-completion-supported-constant-comparison",
+  "lem-per-coniveau-top-edge-presentation",
+  "lem-per-finite-residue-gysin-naturality",
+  "lem-per-immediate-specialization-criterion",
+  "lem-per-normal-geometric-specialization-conjugacy",
+  "lem-per-normal-potential-low-degrees",
+  "lem-per-normal-punctured-hypersurface-connected",
+  "lem-per-potential-dualizing-regular-unit",
+  "lem-per-prime-power-costalk-reduction",
+  "lem-per-prime-power-supported-calculus",
+  "lem-per-residue-chain-reductions",
+  "lem-per-strict-local-etale-dimension-bounds",
+  "lem-per-surface-resolution-supported-presentation",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-cohen-power-series-presentation",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII sections 3.4–3.6, with Stacks 0ECR for the connectedness input and Stacks completion/Cohen inputs; explicit noncircular ordering"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +319,42 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match: the hits concern ordinary derived truncation, scheme stalks, ring-theoretic local cohomology, or unrelated uses of the words; none gives this etale perverse/potential-dualizing statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Top local etale cohomology fundamental class for normal excellent strictly henselian schemes and residue specialization maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_descResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u} [inst : Field K] {X : AlgebraicGeometry.Scheme} {x : ↥X}\\n  (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [inst_1 : IsLocalHom (CommRingCat.Hom.hom f)],\\n  CategoryTheory.CategoryStruct.comp (X.residue x) (AlgebraicGeometry.Scheme.descResi\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, given a field $K$ and a local ring homomorphism $f : \\\\mathcal{O}_{X,x} \\\\to K$ from the stalk of the structure sheaf at $x$ to $K$, the composition of the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_descResidueField_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u} [inst : Field K] {X : AlgebraicGeometry.Scheme} {x : ↥X}\\n  (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [inst_1 : IsLocalHom (CommRingCat.Hom.hom f)] {Z : CommRingCat}\\n  (h : { carrier := K, commRing := Field.toEuclideanDomain.toCommRin\", \"doc\": \"For a scheme $X$ with point $x$, field $K$, and commutative ring $Z$, the composition of the residue map $\\\\mathcal{O}_{X,x} \\\\to k(x)$ with the morphism $\\\\text{descResidueField}(f): \\\\text{Stalk}(X,x) \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {X : AlgebraicGeometry.Scheme} →\\n      {x : ↥X} →\\n        (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing }) →\\n          [IsLocalHom (CommRingCat.Hom.hom f)] →\\n            X.residueField x ⟶ { carrier := K, commRing := \", \"doc\": \"Let $X$ be a scheme, $x$ a point in $X$, and $K$ a field. Given a local ring homomorphism $f \\\\colon \\\\mathcal{O}_{X,x} \\\\to K$ from the stalk of the structure sheaf at $x$, this function constructs the \"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n",
+   "exit": 0,
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned declarations; none states this ordinary etale cohomology assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical etale costalk transitions shift twice codimension and top local cohomology of normal schemes is cyclic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X ⟶ Y) (x : X) : IsLocalHom (f.toHom.stalkMap x).hom\", \"doc\": \"For any morphism $f : X \\\\to Y$ between two locally ringed spaces, and for any point $x \\\\in X$, the ring homomorphism $\\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ induced by $f$ at $x$ is a local rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : Field (X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": Sheaf CommRingCat X.toTopCat\", \"doc\": \"The sheaf $\\\\mathcal{O}_X$ of commutative rings on the underlying topological space of a locally ringed space $X$, where every stalk is a local ring. This is the canonical sheaf associated to the local\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrictStalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) (x) : Arrow.mk ((f ∣_ U).stalkMap x) ≅ Arrow.mk (f.stalkMap x.1)\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$, an open subset $U \\\\subseteq Y$, and a point $x \\\\in f^{-1}(U)$, this definition provides a canonical isomorphism in the arrow category of commutative rings bet\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : CommRingCat.of (Localization.AtPrime x.asIdeal) ⟶ (structureSheaf R).presheaf.stalk x\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, this is the canonical ring homomorphism from the localization $ R_{\\\\mathfrak{p}} $ (at the prime ideal \"}\n",
+   "exit": 0,
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned declarations; none states this ordinary etale cohomology assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localCohomology\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"localCohomology.SelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : Type u\", \"doc\": \"The full subcategory of all ideals with radical containing `J`\"}\n  {\"name\": \"localCohomology.instCategorySelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u_1} [CommRing R] (J : Ideal R) : CategoryTheory.Category.{u_1, u_1} (localCohomology.SelfLERadical J)\", \"doc\": \"\"}\n  {\"name\": \"localCohomology.SelfLERadical.inhabited\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : Inhabited (localCohomology.SelfLERadical J)\", \"doc\": \"\"}\n  {\"name\": \"localCohomology.idealPowersToSelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : CategoryTheory.Functor ℕᵒᵖ (localCohomology.SelfLERadical J)\", \"doc\": \"Lifting `idealPowersDiagram J` from a diagram valued in `ideals R` to a diagram\\nvalued in `SelfLERadical J`.\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) (i : ℕ) : CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"`localCohomology J i` is `i`-th the local cohomology module of a module `M` over\\na commutative ring `R` with support in the ideal `J` of `R`, defined as the direct limit\\nof `Ext^i(R/J^t, M)` over all \"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) (i : ℕ) : CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Local cohomology as the direct limit of `Ext^i(R/J', M)` over *all* ideals `J'` with radical\\ncontaining `J`.\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J : Ideal R} [hR : IsNoetherian R R] : (localCohomology.idealPowersToSelfLERadical J).Initial\", \"doc\": \"The diagram of powers of `J` is initial in the diagram of all ideals with\\nradical containing `J`. This uses Noetherianness.\"}\n  {\"name\": \"localCohomology.SelfLERadical.cast\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J K : Ideal R} (hJK : J.radical = K.radical) : CategoryTheory.Functor (localCohomology.SelfLERadical J) (localCohomology.SelfLERadical K)\", \"doc\": \"Casting from the full subcategory of ideals with radical containing `J` to the full\\nsubcategory of ideals with radical containing `K`.\"}\n  {\"name\": \"localCohomology.SelfLERadical.castEquivalence\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J K : Ideal R} (hJK : J.radical = K.radical) : localCohomology.SelfLERadical J ≌ localCohomology.SelfLERadical K\", \"doc\": \"The equivalence of categories `SelfLERadical J ≌ SelfLERadical K`\\nwhen `J.radical = K.radical`.\"}\n  {\"name\": \"localCohomology.SelfLERadical.cast_isEquivalence\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J K : Ideal R} (hJK : J.radical = K.radical) : (localCohomology.SelfLERadical.cast hJK).IsEquivalence\", \"doc\": \"\"}\n  {\"name\": \"localCohomology.idealPowersDiagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : CategoryTheory.Functor ℕᵒᵖ (Ideal R)\", \"doc\": \"The functor sending a natural number `i` to the `i`-th power of the ideal `J`\"}\n  {\"name\": \"localCohomology.selfLERadicalDiagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : CategoryTheory.Functor (localCohomology.SelfLERadical J) (Ideal R)\", \"doc\": \"The diagram of all ideals with radical containing `J`, represented as a functor.\\nThis is the \\\"largest\\\" diagram that computes local cohomology with support in `J`.\"}\n",
+   "exit": 0,
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned declarations; none states this ordinary etale cohomology assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|costalk|residue.*transition",
+   "results": "[grep] OK 0 hit(s)\n",
+   "exit": 0,
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned declarations; none states this ordinary etale cohomology assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-pinned-extension",
@@ -100,5 +377,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normal-top-residue-class",
+  "worker": "stage1",
+  "summary": "Repaired the saved circular use of higher-residue-transitivity: proved chain independence by surface presentation, finite/generic reduction and punctured-hypersurface connectedness before the top-class induction. Replaced general finite-type exceptional pullback by supported composition and immediate finite-residue compatibility. Retained the saved five nodes, citations and logged searches; retained three previously stated technical inputs, with no split of any child. Corrected codimension-zero identity to geometric transport.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-exc-weakly-etale-excellent",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-power-series-presentation",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic local algebra or strict-local geometry input to the ILO construction; the perverse unit does not state this auxiliary fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-weakly-etale-excellent",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-cohen-power-series-presentation",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-52ee35df0",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-52ee35df0 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, all eight new nodes, the statements of every cited node, and ILO XVII §3 (printed pp. 268–280) against the item. The proof follows ILO §3: 3.4 (surface case), 3.5.4–3.5.8 (chain reductions and the connectedness induction), 3.6.1 and 3.6.2–3.6.4 (completion and the test complex). It cites no SGA: connectedness comes from Stacks 0ECR on the completion, which is a normal domain by 0C23. The only statement change is c=0 'identity' replaced by 'transport', as the NW and Q42 reviewers asked; the old wording fails for a nontrivial Galois element. I checked closures: there is no cycle, and the delivery avoids higher-residue-transitivity and general-costalk-transitions, which both cite this item. All 8 new nodes are statement-only and true; none restates a clause of the item. I checked them on small cases: 0ECR with c=d≥3 and cd≤1, the E_1 bounds re-derived by hand, conjugacy via K-embeddings of Frac O^sh, dimension-bounds edge case e=0. I fixed three faults. (1) C1/E5, Step 4: composition needs codimension additivity, which the NW reviewer had required and the delivery never proved. Step 4 now proves it: the closure Z in X_(x̄) is excellent, so catenary; immediate factors give adjacent primes via 05WR and strict-henselization dimension, so the chain is saturated of length c. (2) C1, Step 14: the strict-local properties were uncited and r_x=r_y+1 was unargued. Step 14 now cites them and derives r_x=r_y+1 from the immediate criterion and catenarity of O_{X,x}. (3) E2 precaution: the coniveau node's codimension-one component formula pinned a sign that ILO never asserts (ILO states only the image). It now reads ε=±1 times ρ_y, and item Step 9 uses only the image. Batch-5 flags are all accepted as generic: the ind-étale strict-local invariance node (Stacks 05WR/0GIP), finite-base strict localization (Stacks 05WR/0GIP/04GH), the derivedPlus adjunction, and the stalk tensor via absolute-gysin-purity. None is a step of the trace formula or of Poincaré duality. I accept the 16 tool_uses (generic algebra). Maintainer notes: dimension-bounds is the Z/ℓ^n generalization of lem-per-punctured-support-cohomological-bound (F_ℓ, ILO 3.2.1), and the report misdescribes that node; conjugacy overlaps lem-trf-normal-generic-arrow-transitivity, stated for topos points; ILO 3.1.2 is still stated in three nodes. Fixes are in fixes/dag/nodes/sec-deligne-laumon-a1/ (the item and the coniveau node).; 2 file(s) fixed by the reviewer"
  }
 }
