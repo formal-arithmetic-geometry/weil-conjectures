@@ -1,0 +1,103 @@
+{
+ "id": "lem-fin-projective-curve-finite-group-prime-cases",
+ "kind": "statement",
+ "title": "Prime-order abelian coefficient case",
+ "statement": "For a projective family over a field with geometric fibres of dimension at most one, the higher direct image of the constant abelian sheaf with value ULift (ZMod ℓ) is constructible whenever ℓ is prime and invertible on the base.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/cor-fin-projective-curve-finite-group.md",
+  "place": "Proof, application of thm-fin-projective-curve-constant and coefficient forgetting"
+ },
+ "stmt_deps": [
+  "thm-fin-projective-curve-constant"
+ ],
+ "proof": [
+  {
+   "text": "Apply the prime-coefficient constructibility theorem for module sheaves and transport the result through the exact forgetful functor to abelian sheaves, using the canonical derived direct-image coefficient comparison.",
+   "uses": [
+    "thm-fin-projective-curve-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-fin-projective-curve-constant"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/cor-fin-projective-curve-finite-group.md",
+  "place": "Proof, prime coefficient case"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroup",
+  "date": "2026-10-18",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "cor-fin-projective-curve-finite-group"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroupPrimeCases",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCurveFiniteGroupPrimeCases.lean",
+  "declaration": "AlgebraicGeometry.finite_group_prime_abelian_case",
+  "statement": "theorem finite_group_prime_abelian_case (k : Type u) [Field k] (X S : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] (f : X ⟶ S) [IsProjective f.left] (hdim : ∀ s : S.left, topologicalKrullDim (pullback f.left (Spec.map (CommRingCat.ofHom (algebraMap (S.left.residueField s) (AlgebraicClosure (S.left.residueField s)))) ≫ S.left.fromSpecResidueField s) : Scheme.{u}) ≤ 1) (ℓ : ℕ) [Fact ℓ.Prime] (hinv : IsUnit (ℓ : Γ(S.left, ⊤))) (q : ℤ) : Scheme.IsConstructibleAbelianSheaf ((DerivedCategory.Plus.homologyFunctor (Sheaf S.left.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((Etale.rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f.left).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.left.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj ((constantSheaf X.left.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ)))))))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-18"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite abelian group devissage constructible higher direct image prime coefficients",
+   "results": "No direct match; only finite Serre class hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsConstructibleAbelianSheaf",
+   "results": "No hits; project-specific notion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_group_devissage|prime_abelian_case",
+   "results": "No existing declaration.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite abelian group devissage constructible higher direct image",
+   "results": "No direct constructibility theorem; finite torsion group lemmas only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261018T110336-L-342043",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261018T110336-L-342043",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

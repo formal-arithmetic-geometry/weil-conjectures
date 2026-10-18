@@ -12,25 +12,9 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-import Sheaf.Paper.SheavesKilledByNZmodModules
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
-import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroupDevissage
+import Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroupPrimeCases
 
 /-!
 # Constructible higher direct images of finite constant groups on curve families
@@ -98,6 +82,8 @@ theorem isConstructibleAbelianSheaf_higherDirectImage_constant_of_projective_cur
           ((DerivedCategory.Plus.singleFunctor
             (Sheaf X.left.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
             ((constantSheaf X.left.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M)))) := by
-  sorry
+  exact finite_group_devissage_of_prime_module_case k X S f hdim
+    (fun ℓ _ hinv r ↦
+      finite_group_prime_abelian_case k X S f hdim ℓ hinv r) M horder q
 
 end AlgebraicGeometry
