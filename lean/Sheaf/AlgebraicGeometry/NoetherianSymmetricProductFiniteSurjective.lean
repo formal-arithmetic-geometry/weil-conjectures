@@ -11,7 +11,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Sheaf.AlgebraicGeometry.SymmetricProductFinite
 import Sheaf.AlgebraicGeometry.SymmetricProductSurjective
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
 
 /-!
 # A finite symmetric-product cover over a Noetherian base
@@ -70,6 +69,9 @@ theorem symmetricProduct_finite_surjective_of_isNoetherian
       (symmetricProductCoordinateSection (fun i ↦ (pr i).left))
       (Classical.choose (Classical.choose_spec
         (symmetricProduct_properties S m X pr hprod).2.2.2))) := by
-  sorry
+  constructor
+  · exact (symmetricProduct_finite S m X pr hprod _ _ _ rfl).1
+  · exact (symmetricProduct_surjective S m X pr hprod).elim fun hL h ↦
+      h.elim fun hs hsurj ↦ hsurj
 
 end AlgebraicGeometry
