@@ -14,9 +14,36 @@
   "def-sfb-preserves-kflat-quasi-iso",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Introduce the graded tensor compatibility instances by applying the assumed preservation of colimits to each of the coproduct diagrams in their definitions. Unfolding the two definitions identifies IsKFlatForTotalTensor of [def-sfb-preserves-kflat-quasi-iso] with (HomologicalComplex.quasiIso A (.up ℤ)).kFlat: the tensorLeft and tensorRight maps are tensorHom with the identity in the fixed variable.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved upstream HomotopyCategory.kFlat_quotient_obj_iff (cited in the source and lean_audit of this node) in each direction. A HomotopyEquiv induces HomotopyCategory.isoOfHomotopyEquiv in the quotient category of [def-weil-abstract-derived-category]; transport K-flatness along this isomorphism using ObjectProperty.prop_of_iso. This proves the first clause.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify the displayed existential object property with (HomotopyCategory.quasiIso A (.up ℤ)).kFlat. In the forward direction transport quotient K-flatness along the inverse of the witnessing isomorphism. In the reverse direction choose a complex representative using quotient_obj_surjective, use the identity isomorphism, and apply kFlat_quotient_obj_iff. Rewrite by this equality and apply the already proved upstream IsTriangulated instance from WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat, which the source and lean_audit of this node already identify.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+  "place": "First three sentences, using the existing upstream kFlat_quotient_obj_iff, isomorphism closure, and IsTriangulated instance cited by this node; C3 supplies the explicit definition and representative comparisons."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -334,5 +361,15 @@
   "existing": false,
   "note": "Second-reader fix (maintainer review): the delivered conclusion was only ObjectProperty.IsTriangulated of the isomorphism closure of q(K-flat complexes), which omits the node's clause that K-flatness is invariant under cochain homotopy equivalence (so P(qL) iff L is K-flat; upstream HomotopyCategory.kFlat_quotient_obj_iff). Added that clause as a first conjunct via Mathlib HomotopyEquiv; the triangulated conjunct and all hypotheses are unchanged. Docstrings now cite the node's source document lem-sfb-derived-monoidal.proof.md.",
   "fixed_by": "NT-stage2-cc-f30940916"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T142714-L-3300364",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

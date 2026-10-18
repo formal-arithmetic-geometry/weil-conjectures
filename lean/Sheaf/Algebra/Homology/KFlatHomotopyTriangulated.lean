@@ -6,6 +6,8 @@ module
 
 public import Sheaf.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
 
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+
 /-!
 # K-flatness is triangulated in the homotopy category
 
@@ -78,6 +80,47 @@ theorem kFlat_homotopy_isTriangulated
         ∃ (L : CochainComplex A ℤ),
           Nonempty (K ≅ (HomotopyCategory.quotient A (.up ℤ)).obj L) ∧
             L.IsKFlatForTotalTensor) := by
-  sorry
+  let : ∀ X : A, PreservesColimitsOfSize.{0, 0} ((curriedTensor A).obj X) :=
+    fun X ↦ preservesSmallestColimits_of_preservesColimits (tensorLeft X)
+  let : ∀ X : A, PreservesColimitsOfSize.{0, 0} ((curriedTensor A).flip.obj X) :=
+    fun X ↦ preservesSmallestColimits_of_preservesColimits (tensorRight X)
+  let : ∀ (X₁ X₂ : GradedObject ℤ A), GradedObject.HasTensor X₁ X₂ :=
+    fun _ _ ↦ inferInstance
+  let : ∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := fun _ _ _ _ _ _ ↦ inferInstance
+  let : ∀ (X₁ X₂ X₃ : GradedObject ℤ A),
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := fun _ _ _ _ _ ↦ inferInstance
+  let : ∀ (X₁ X₂ X₃ : GradedObject ℤ A),
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := fun _ _ _ _ _ ↦ inferInstance
+  let : ∀ (X : A), PreservesColimit (Functor.empty.{0} A) ((curriedTensor A).obj X) :=
+    fun _ ↦ inferInstance
+  let : ∀ (X : A), PreservesColimit (Functor.empty.{0} A) ((curriedTensor A).flip.obj X) :=
+    fun _ ↦ inferInstance
+  have hflat (L : CochainComplex A ℤ) :
+      L.IsKFlatForTotalTensor ↔ (HomologicalComplex.quasiIso A (.up ℤ)).kFlat L :=
+    Iff.rfl
+  constructor
+  · intro L L' e hL
+    apply (hflat L').2
+    apply (HomotopyCategory.kFlat_quotient_obj_iff L').1
+    exact ObjectProperty.prop_of_iso _ (HomotopyCategory.isoOfHomotopyEquiv e)
+      ((HomotopyCategory.kFlat_quotient_obj_iff L).2 ((hflat L).1 hL))
+  · have hprop :
+        (fun K : HomotopyCategory A (.up ℤ) ↦
+          ∃ (L : CochainComplex A ℤ),
+            Nonempty (K ≅ (HomotopyCategory.quotient A (.up ℤ)).obj L) ∧
+              L.IsKFlatForTotalTensor) = (HomotopyCategory.quasiIso A (.up ℤ)).kFlat := by
+      funext K
+      apply propext
+      constructor
+      · rintro ⟨L, ⟨e⟩, hL⟩
+        exact ObjectProperty.prop_of_iso _ e.symm
+          ((HomotopyCategory.kFlat_quotient_obj_iff L).2 ((hflat L).1 hL))
+      · intro hK
+        obtain ⟨L, rfl⟩ := K.quotient_obj_surjective
+        exact ⟨L, ⟨Iso.refl _⟩, (hflat L).2
+          ((HomotopyCategory.kFlat_quotient_obj_iff L).1 hK)⟩
+    rw [hprop]
+    infer_instance
 
 end CategoryTheory
