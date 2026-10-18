@@ -18,9 +18,92 @@
   "def-amb-etale-compact-support",
   "lem-per-potential-dualizing-finite-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P=f^{-1}$, $F=Rf_*$, $G=f^!$, and $H_T(A,B)=R\\mathcal Hom_\\Lambda(A,B)$; suppress $\\otimes^L_\\Lambda$ to $\\otimes$. A proper morphism is separated and of finite type, and $f=f\\circ\\mathrm{id}_Y$ is a compactification. Thus the finite-ring, Noetherian hypotheses of the ordinary-etale internal adjunction apply. For this compactification $Rf_!=F$. The counit-compatible uniqueness of right adjoints identifies its $f^\\times$ with the $G$ in the statement; throughout use that identification, so its exceptional counit is $\\tau:FGK_X\\to K_X$. The potential-pullback theorem applies to this compactification and gives exactly the indicated pinnings on $K_Y=GK_X$ for the displayed $\\delta_Y$. No absolute dualizing base or evaluation isomorphism is used.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-asd-compactifiable",
+    "def-amb-etale-compact-support",
+    "det-sp-unique-right-adjoint",
+    "lem-per-potential-dualizing-finite-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-asd-internal-adjunction.md",
+    "place": "Proof: canonical internal adjunction via the natural Hom bijections and evaluation/counit formula; relative specialization for proper f"
+   }
+  },
+  {
+   "text": "Let $\\varepsilon_A:PFA\\to A$ be the ordinary counit. The inverse-image tensor comparison identifies $P(FA\\otimes FB)$ with $PFA\\otimes PFB$. Define $\\mu_{A,B}:FA\\otimes FB\\to F(A\\otimes B)$ to have adjoint $\\varepsilon_A\\otimes\\varepsilon_B$. This is the first map in the displayed evaluation--counit pairing. Naturality of the counit gives, for $u:A\\to A'$ and $v:B\\to B'$,\n$$F(u\\otimes v)\\mu_{A,B}=\\mu_{A',B'}(Fu\\otimes Fv).$$\nAlso $F(\\sigma_{A,B})\\mu_{A,B}=\\mu_{B,A}\\sigma_{FA,FB}$: take ordinary adjoints, use naturality of $\\sigma$, and both sides become $(\\varepsilon_B\\otimes\\varepsilon_A)\\sigma_{PFA,PFB}$. The inverse-image comparison respects this symmetry: on total tensors the degree-$(p,q)$ swap has the same sign $(-1)^{pq}$ before and after the exact inverse image. Finally let $\\Pi_{Q,B}:Q\\otimes FB\\to F(PQ\\otimes B)$ be the normalized proper projection map. The projection-adjunct lemma, with $a=1_{FB}$, and naturality of ordinary adjunction show\n$$\\mu_{A,B}=F(\\varepsilon_A\\otimes1_B)\\Pi_{FA,B}:$$\nthe adjoint of the right side is again $\\varepsilon_A\\otimes\\varepsilon_B$. These are identities of the specified maps, not choices of isomorphisms.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-amb-tensor-projection-adjunct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-asd-internal-adjunction.md",
+    "place": "Proof: canonical internal adjunction via the natural Hom bijections and evaluation/counit formula; relative specialization for proper f"
+   }
+  },
+  {
+   "text": "Put $e_M:D_YM\\otimes M\\to K_Y$ for evaluation and $\\rho_M=\\tau\\circ F(e_M)\\circ\\mu_{D_YM,M}$. The general internal adjunction supplies an isomorphism $\\alpha_M:FD_YM\\xrightarrow{\\sim}D_XFM$ for every ambient $M$. Its evaluation-normalization lemma, applied with $Q=FD_YM$ and $h=1$, says its tensor--Hom transpose is\n$$\\tau\\circ F\\bigl(e_M\\circ(\\varepsilon_{D_YM}\\otimes1_M)\\bigr)\\circ\\Pi_{FD_YM,M}.$$\nThe last identity of step 2 identifies this composite with $\\rho_M$. Hence $\\alpha_M$ is precisely $a_M$, by the tensor--Hom bijection. In particular the pairing specified in the statement has invertible transpose. The argument applies to $D_YM$ as well; the assumed preservation of $D^b_c$ ensures that $D_YM$ is an allowed input for the stated iteration.",
+   "uses": [
+    "prop-asd-internal-adjunction",
+    "lem-asd-internal-adjunction-evaluation",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-asd-internal-adjunction.md",
+    "place": "Proof: canonical internal adjunction via the natural Hom bijections and evaluation/counit formula; relative specialization for proper f"
+   }
+  },
+  {
+   "text": "By the evaluation definition of $\\eta^Y_M$ and the tensor--Hom bijection,\n$$e_{D_YM}\\circ(\\eta^Y_M\\otimes1_{D_YM})=e_M\\circ\\sigma_{M,D_YM}.$$\nTake the tensor--Hom transpose of $a_{D_YM}\\circ F\\eta^Y_M$, whose target is $D_X(FD_YM)$. By the definition of $a$ in step 3 it is $\\rho_{D_YM}\\circ(F\\eta^Y_M\\otimes1_{FD_YM})$. Naturality and symmetry of $\\mu$ from step 2, followed by the displayed evaluation identity, compute this map as\n$$\\begin{aligned}\n\\rho_{D_YM}(F\\eta^Y_M\\otimes1)\n&=\\tau F\\bigl(e_{D_YM}(\\eta^Y_M\\otimes1)\\bigr)\\mu_{M,D_YM}\\\\\n&=\\tau F(e_M\\sigma_{M,D_YM})\\mu_{M,D_YM}\\\\\n&=\\rho_M\\sigma_{FM,FD_YM}.\n\\end{aligned}$$\nAll terms have domain $FM\\otimes FD_YM$ and codomain $K_X$. In particular the symmetry, including its Koszul signs, has not been suppressed from the calculation.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom), 0A97 (lemma-internal-hom-evaluate), 0FPT (lemma-symmetric-monoidal-derived); explicit relative evaluation calculation by the worker"
+   }
+  },
+  {
+   "text": "Let $E_A:D_XA\\otimes A\\to K_X$ be base evaluation. The transpose of $D_X(a_M)\\circ\\eta^X_{FM}:FM\\to D_X(FD_YM)$ is\n$$E_{FD_YM}\\circ(D_X(a_M)\\otimes1)\\circ(\\eta^X_{FM}\\otimes1).$$\nNaturality of evaluation in its argument replaces the first two factors by $E_{D_XFM}\\circ(1_{D_X^2FM}\\otimes a_M)$. The defining identity $E_{D_XFM}(\\eta^X_{FM}\\otimes1)=E_{FM}\\sigma_{FM,D_XFM}$ and naturality of symmetry therefore make this transpose\n$$E_{FM}\\circ(a_M\\otimes1_{FM})\\circ\\sigma_{FM,FD_YM}=\\rho_M\\sigma_{FM,FD_YM}.$$\nIt equals step 4's transpose. Injectivity of the tensor--Hom bijection gives\n$$a_{D_YM}\\circ F\\eta^Y_M=D_X(a_M)\\circ\\eta^X_{FM}.$$\nCompose with $D_X(a_M^{-1})$. Contravariant functoriality gives $D_X(a_M^{-1})D_X(a_M)=1$; thus the result is exactly $b_M\\circ F\\eta^Y_M=\\eta^X_{FM}$. Both factors defining $b_M$ are isomorphisms (step 3 and preservation of inverses by a functor). This uses no invertibility of either $\\eta$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom), 0A97 (lemma-internal-hom-evaluate), 0FPT (lemma-symmetric-monoidal-derived); explicit relative evaluation calculation by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-asd-compactifiable",
+  "def-amb-etale-compact-support",
+  "det-sp-unique-right-adjoint",
+  "lem-per-potential-dualizing-finite-pullback",
+  "def-kun-projection-formula-map",
+  "lem-kun-inverse-image-monoidal",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-amb-tensor-projection-adjunct",
+  "prop-asd-internal-adjunction",
+  "lem-asd-internal-adjunction-evaluation",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-asd-internal-adjunction.md",
+  "place": "Relative specialization of the internal-adjunction argument, with the evaluation and symmetry calculations written out; realizes the proper-image biduality-cone comparison used by ILO XVII 6.4.2, printed p.298."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +146,45 @@
    "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: the logged hits concern ordinary linear duals, generic derived-category bounds, ordinary sheaf adjunctions or etale morphisms, not the asserted potential-complex theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*dual|dual.*proper|exceptional.*[hH]om",
+   "results": "{\"t\": \"2026-10-18T20:05:42Z\", \"tool\": \"grep\", \"query\": \"proper.*dual|dual.*proper|exceptional.*[hH]om\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Transcendental/Liouville/Measure.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/Topology/Order/MonotoneConvergence.lean\", \"Mathlib/Topology/Baire/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Basis.lean\", \"Mathlib/LinearAlgebra/Dual/Basis.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean\", \"Mathlib/Order/Ideal.lean\"], \"digest\": \"89efa89cf4d9e386\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the actual hits give ordinary module duals, ordinary scheme-module pullback adjunctions, abstract closed-category adjunctions or unrelated properness; none states the relative etale exceptional-duality comparison with its evaluation compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality proper direct image preserves evaluation double dual morphism without biduality assumptions",
+   "results": "{\"t\": \"2026-10-18T20:05:42Z\", \"tool\": \"leansearch\", \"query\": \"Verdier duality proper direct image preserves evaluation double dual morphism without biduality assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive.bijective_dual_eval'\", \"Module.Dual.eval_comp_comp_evalEquiv_eq\", \"Module.Dual.eval_naturality\", \"Module.Dual.eval\", \"Module.bijective_dual_eval\", \"Module.evalEquiv\", \"LinearEquiv.trans_dualMap_symm_flip\", \"Module.evalEquiv_apply\"], \"digest\": \"5c57ee08023ffd50\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the actual hits give ordinary module duals, ordinary scheme-module pullback adjunctions, abstract closed-category adjunctions or unrelated properness; none states the relative etale exceptional-duality comparison with its evaluation compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"adjunction\"",
+   "results": "{\"t\": \"2026-10-18T20:05:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"ihom\\\", \\\"adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.adjunction\", \"CategoryTheory.ihom.ihom_adjunction_counit\", \"CategoryTheory.ihom.ihom_adjunction_unit\"], \"digest\": \"3e431ca5aaa0bca4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the actual hits give ordinary module duals, ordinary scheme-module pullback adjunctions, abstract closed-category adjunctions or unrelated properness; none states the relative etale exceptional-duality comparison with its evaluation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of etale complexes exchanges internal Hom into an exceptional pullback with internal Hom on the base",
+   "results": "{\"t\": \"2026-10-18T20:05:43Z\", \"tool\": \"leanfinder\", \"query\": \"Proper pushforward of etale complexes exchanges internal Hom into an exceptional pullback with internal Hom on the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"CategoryTheory.ExponentiableMorphism.ev\", \"CategoryTheory.ExponentiableMorphism.coev_naturality\", \"CategoryTheory.ExponentiableMorphism.pushforwardCurry\"], \"digest\": \"f371bcb6d8aad8e3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the actual hits give ordinary module duals, ordinary scheme-module pullback adjunctions, abstract closed-category adjunctions or unrelated properness; none states the relative etale exceptional-duality comparison with its evaluation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection formula and right adjoint imply relative Grothendieck duality compatible with double dual evaluation",
+   "results": "{\"t\": \"2026-10-18T20:06:22Z\", \"tool\": \"leanfinder\", \"query\": \"A projection formula and right adjoint imply relative Grothendieck duality compatible with double dual evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.coev_ev\", \"CategoryTheory.ExponentiableMorphism.coev_ev_assoc\", \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"CategoryTheory.ExponentiableMorphism.ev_coev_assoc\", \"CategoryTheory.ExponentiableMorphism.ev_def\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"CategoryTheory.ExponentiableMorphism.coev\"], \"digest\": \"645d860b8579a7c4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the actual hits give ordinary module duals, ordinary scheme-module pullback adjunctions, abstract closed-category adjunctions or unrelated properness; none states the relative etale exceptional-duality comparison with its evaluation compatibility"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-biduality-finite-type-propagation",
@@ -89,5 +207,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-proper-potential-bidual-comparison",
+  "worker": "stage1",
+  "summary": "Retained the complete statement. Reused existing ambient relative internal adjunction and its evaluation normalization, identified the prescribed direct-image pairing through its two-counit adjoint, and computed the two biduality transposes explicitly. No new nodes, no absolute dualizing base, no assumption of biduality. Mathlib and project source searched; no attachment or leaf.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3: dimension-normalized local Verdier duality, via the recorded potential-local-duality chain and ILO XVII 6.4.2 proper-image comparison of the biduality cone. This split supplies that relative proper-image comparison without using the absolute duality theorem being proved.",
+  "tool_uses": [
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Counit-preserving identification of two right adjoints; a generic categorical tool, not an absolute duality assertion."
+   },
+   {
+    "node": "lem-amb-tensor-projection-adjunct",
+    "why": "The ordinary-etale counit formula identifies the specified two-counit tensor map with the normalized projection composite."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "The ordinary-etale inverse image tensor comparison needed to define and compare the direct-image tensor maps."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Closed tensor--Hom bijections, evaluation and signed symmetry on any small ringed site; the perverse unit does not construct this ambient structure."
+   },
+   {
+    "node": "prop-asd-internal-adjunction",
+    "why": "General ordinary-etale relative internal adjunction on arbitrary Noetherian bases; used as an ambient tool without assuming absolute duality."
+   },
+   {
+    "node": "lem-asd-internal-adjunction-evaluation",
+    "why": "Normalizes that relative adjunction by projection, evaluation and exceptional counit, so the item proves compatibility for its exact prescribed map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-unique-right-adjoint",
+  "lem-amb-tensor-projection-adjunct",
+  "lem-kun-inverse-image-monoidal",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "prop-asd-internal-adjunction",
+  "lem-asd-internal-adjunction-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-f247193b4",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-f247193b4 (reviewer sub-agent of L); spot-checked: I read the full delivery, the sources and every cited statement; no changes needed. The statement, stmt_deps, blueprint and source fields are byte-identical to the version Q10 created and to the live node (still unsplit). The delivery has no new nodes, no cycle in its closure, and no SGA citation. Source: ILO XVII Prop. 6.4.2, printed p.298 (PDF p.304), 'Rπ⋆C s'identifie au cône du morphisme de bidualité Rπ⋆M → D_X D_X Rπ⋆M'. The item states exactly this, and its only citer, lem-per-biduality-finite-type-propagation, uses it that way. Step 1: proper gives the compactification f∘id, so Rf_!^c = Rf_*; det-sp-unique-right-adjoint identifies f^× with the statement's G. Step 2: I rechecked the adjoints of μ, the symmetry identity, and μ = F(ε⊗1)Π using lem-amb-tensor-projection-adjunct with a = 1. Step 3: lem-asd-internal-adjunction-evaluation with h = 1 gives transpose ρ_M; its Π, read from lem-amb-proper-coproducts-projection, is the same explicit σ/PF composite as π_f, so a_M = α_M is invertible by prop-asd-internal-adjunction (finite ring, Noetherian, compactifiable, arbitrary complexes). Steps 4 and 5: I recomputed both transposes, which equal ρ_M∘σ with Koszul signs kept; the D_X(a^{-1})∘D_X(a) cancellation has the right direction and neither η is inverted. Edge cases checked: f = id, M = 0, r > 1, f finite (consistent with lem-per-potential-finite-bidual-comparison), P¹ → Spec k. The proof does not assume local duality. No duplicate exists: the finite comparison and the relative bidual triangles are narrower, and the internal adjunction lacks the η-compatibility. Accepted tool_uses (generic ambient tools, nothing from the perverse Fourier unit replaced): prop-asd-internal-adjunction, lem-asd-internal-adjunction-evaluation, lem-amb-tensor-projection-adjunct, lem-kun-inverse-image-monoidal, lem-sf-ringed-derived-closed-symmetric-monoidal. Advisory 1: step 1 matches the D^+ exceptional adjoint of the finite-pullback lemma with the unbounded G without saying that G preserves D^+ (true because a proper Rf_* has finite cohomological dimension); the pinnings are inherited statement data the proof never uses. Advisory 2: step 3 could name lem-amb-proper-coproducts-projection; it enters only as the definition of Π, through a stmt_dep of the cited evaluation lemma."
  }
 }
