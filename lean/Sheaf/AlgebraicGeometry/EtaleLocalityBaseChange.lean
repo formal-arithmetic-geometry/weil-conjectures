@@ -9,22 +9,12 @@ public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import Sheaf.Paper.SliceSiteLocalization
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.Paper.SiteRestrictionExact
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
-import Sheaf.CategoryTheory.SiteMorphismComposition
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import WeilConjectures.SixFunctors.BaseChange.Etale
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.EtaleSetBaseChangeLocalTransport
+import Sheaf.AlgebraicGeometry.EtaleDerivedBaseChangeLocalTransport
+import Mathlib.CategoryTheory.Sites.LocalProperties
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Etale locality of base change
@@ -42,6 +32,64 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isIso_of_localizationRestriction
+    (A : Type*) [Category.{u + 1} A]
+    {X : Scheme.{u}} {ι : Type w} {U : ι → Scheme.{u}}
+    (a : ∀ i, U i ⟶ X) [∀ i, AlgebraicGeometry.Etale (a i)]
+    (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
+    {F G : Sheaf X.smallEtaleTopology A} (φ : F ⟶ G)
+    (hφ : ∀ i, IsIso ((localizationRestriction A (a i) inferInstance).map φ)) :
+    IsIso φ := by
+  let V : ι → X.Etale := fun i => Scheme.Etale.mk (a i)
+  have hV : X.smallEtaleTopology.CoversTop V := by
+    rw [X.smallEtaleTopology.coversTop_iff_of_isTerminal (Scheme.Etale.mk (𝟙 X))
+      (Scheme.Etale.isTerminalMkId X)]
+    rw [Scheme.mem_smallEtaleTopology_iff]
+    intro x
+    obtain ⟨i, y, hy⟩ := ha x
+    refine ⟨V i, MorphismProperty.Over.homMk (a i) ?_, ?_, y, hy⟩
+    · change a i ≫ 𝟙 X = a i
+      exact Category.comp_id _
+    · exact ⟨i, ⟨𝟙 _⟩⟩
+  apply Sheaf.isIso_of_coversTop hV
+  intro i
+  have := hφ i
+  rw [← ObjectProperty.isIso_hom_iff, NatTrans.isIso_iff_isIso_app]
+  rintro ⟨Z⟩
+  let W : (U i).Etale := Scheme.Etale.mk Z.hom.left
+  have hW : IsIso
+      (((localizationRestriction A (a i) inferInstance).map φ).hom.app (Opposite.op W)) :=
+    inferInstance
+  let e : ((MorphismProperty.Over.map ⊤ (inferInstance : AlgebraicGeometry.Etale (a i))).obj W)
+      ≅ Z.left :=
+    MorphismProperty.Over.isoMk (Iso.refl _) (by
+      change 𝟙 _ ≫ Z.left.hom = Z.hom.left ≫ a i
+      rw [Category.id_comp]
+      exact (show Z.hom.left ≫ a i = Z.left.hom from
+        MorphismProperty.Over.w Z.hom).symm)
+  exact (NatTrans.isIso_app_iff_of_iso φ.hom e.op).2 hW
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isIso_of_upperStar
+    {X : Scheme.{u}} {ι : Type w} {U : ι → Scheme.{u}}
+    (a : ∀ i, U i ⟶ X) [∀ i, AlgebraicGeometry.Etale (a i)]
+    (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
+    {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G)
+    (hφ : ∀ i, IsIso ((upperStar AddCommGrpCat.{u + 1} (a i)).map φ)) :
+    IsIso φ := by
+  apply isIso_of_localizationRestriction AddCommGrpCat.{u + 1} a ha
+  intro i
+  exact (NatIso.isIso_map_iff
+    (upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} (a i) inferInstance) φ).1
+    (hφ i)
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Etale locality for sets, unbounded abelian complexes, and a single cohomological degree.
 The chosen local squares are the associated Cartesian squares: `hc` identifies `T' i`
 with `V i ×[S] T`, and `wfactor` and `localSquare` identify `Y' i` with `U i ×[X] Y`.
@@ -132,6 +180,32 @@ theorem etale_locality_baseChange
             ((upperStar AddCommGrpCat.{u + 1} (c i)).obj F))))) →
       IsIso ((DerivedCategory.homologyFunctor _ q).map
         (abelianDerivedBaseChangeArrow sq ((DerivedCategory.singleFunctor _ 0).obj F)))) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro F hF
+    apply isIso_of_localizationRestriction (Type (u + 1)) a ha
+    intro i
+    obtain ⟨ρ, _⟩ := etaleSetInverseImageRestriction (a i)
+    exact (NatIso.isIso_map_iff ρ (setBaseChangeArrow sq F)).1
+      (setBaseChangeArrow_local_isIso sq (a i) (fi i) (b i) (wfactor i)
+        (c i) (gi i) (hc i) (localSquare i) F (hF i))
+  · intro K hK
+    apply (DerivedCategory.isIso_iff _ _).2
+    intro q
+    apply isIso_of_upperStar a ha
+    intro i
+    have := hK i
+    exact abelianDerivedBaseChangeArrow_local_homology_isIso sq (a i) (fi i) (b i)
+      (wfactor i) (c i) (gi i) (hc i) (localSquare i) K q (by infer_instance)
+  · intro F q hF
+    apply isIso_of_upperStar a ha
+    intro i
+    apply abelianDerivedBaseChangeArrow_local_homology_isIso sq (a i) (fi i) (b i)
+      (wfactor i) (c i) (gi i) (hc i) (localSquare i)
+      ((DerivedCategory.singleFunctor _ 0).obj F) q
+    exact (NatTrans.isIso_app_iff_of_iso
+      (Functor.whiskerRight (abelianDerivedBaseChangeTransformation (localSquare i))
+        (DerivedCategory.homologyFunctor _ q))
+      (((upperStar AddCommGrpCat.{u + 1} (c i)).mapDerivedCategorySingleFunctor 0).app F)).2
+      (hF i)
 
 end AlgebraicGeometry.Etale

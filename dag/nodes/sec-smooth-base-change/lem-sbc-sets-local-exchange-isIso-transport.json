@@ -1,0 +1,136 @@
+{
+ "id": "lem-sbc-sets-local-exchange-isIso-transport",
+ "kind": "statement",
+ "title": "Set-valued exchange invertibility on one etale chart",
+ "statement": "Use the chosen Cartesian squares and canonical exchange arrows of [sbc-def-base-change-square] and [sbc-def-base-change-map]. Let Y to X, Y to T, X to S, T to S be a global Cartesian square. Let a:U to X and b:V to S be etale, fi:U to V satisfy fi followed by b=a followed by f, and let c:T' to T, gi:T' to V give a Cartesian square over g,b. Let hi:Y' to U and ei:Y' to T' be any chosen Cartesian square over fi,gi. For every sheaf of sets F on T_et, if the local set-valued exchange at c inverse image of F is invertible, then a inverse image of the global set-valued exchange at F is invertible. There is no covering or joint-surjectivity assumption. The fibre products are those of [def-pc-fibre-product]. The chosen Cartesian representatives are arbitrary.",
+ "stmt_deps": [
+  "sbc-def-base-change-square",
+  "sbc-def-base-change-map",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZR, lemma-base-change-local, restriction identities and their exchange compatibility"
+ },
+ "proof": [
+  {
+   "text": "Proof: Construct d : Y' to Y by the universal property of the global Cartesian\nsquare. Pasting the local square with hc and cancelling the global square proves that\nd, hi, h, a is Cartesian. Both c and d are etale by base change. The ordinary etale\nexchange is invertible because inverse image is restriction to the localized site.\nTransport that comparison from restriction to the specified set-valued inverse image\nusing uniqueness of left adjoints. Define the composition comparisons of these left\nadjoints by conjugating direct-image composition, and prove their associativity by\nconjugating direct-image associativity. The mate pasting law now writes the exchange\nof the outer rectangle in two ways: first as the local exchange composed with the\ninvertible exchange for hc, and second as inverse image along a of the global exchange\ncomposed with the invertible exchange for d. Cancel the comparison isomorphisms and\nthe exchange for d. Finally the iterated-mates identity identifies this mate definition\nwith the stated unit/composition/counit definition of setBaseChangeArrow: invert Mathlib mateEquiv using Equiv.eq_symm_apply and evaluate its inverse at F. No separately restated inverse-mate formula is used.",
+   "uses": [
+    "sbc-def-base-change-square",
+    "sbc-def-base-change-map",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-direct-image-composition-coherence",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-etale-underived-exchange-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, lemma-base-change-local, restriction identities and their exchange compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-def-base-change-square",
+  "sbc-def-base-change-map",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-direct-image-composition-coherence",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-etale-underived-exchange-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N1",
+  "date": "2026-10-18",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZR, single-chart comparison, proved by two horizontal mate-pasting laws and etale exchange"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exchange base change map is an isomorphism if it is an isomorphism on a jointly surjective family of etale scheme morphisms",
+   "results": "Etale scheme base-change geometry; no sheaf-exchange chart transport theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.IsIso",
+   "results": "Sheafification and sheaf functor isomorphism lemmas; no local exchange transport.",
+   "verdict": "no exact match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(cover|jointly)|baseChange.*local",
+   "results": "Existing source locality is for ModuleCat coefficients and bounded-below complexes; canonical localization nodes have no Lean files in the checkout or published build.",
+   "verdict": "no applicable declaration for sets or unbounded abelian coefficients",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exchange morphism for sheaves of sets commutes with restriction along an etale chart",
+   "results": "CategoryTheory.Sheaf.ΓRes, ΓRes_naturality, TopCat.Presheaf.map_restrict and scheme open-restriction lemmas; no exchange comparison.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "rg etale.*baseChange|baseChange.*etale|derived.*localizationRestriction in Mathlib/CategoryTheory and Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLocalityBaseChange",
+  "date": "2026-10-18",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-etale-locality",
+   "place": "First paragraph, restriction identities and compatibility with exchange",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-def-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetBaseChangeLocalTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetBaseChangeLocalTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.setBaseChangeArrow_local_isIso",
+  "statement": "theorem setBaseChangeArrow_local_isIso\n    {X Y S T U V T' Y' : Scheme.{u}}\n    {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S}\n    (sq : ChosenCartesianSquare h e f g)\n    (a : U ⟶ X) [AlgebraicGeometry.Etale a]\n    (fi : U ⟶ V) (b : V ⟶ S) [AlgebraicGeometry.Etale b]\n    (wfactor : fi ≫ b = a ≫ f)\n    (c : T' ⟶ T) (gi : T' ⟶ V) (hc : IsPullback c gi g b)\n    {ei : Y' ⟶ T'} {hi : Y' ⟶ U}\n    (localSquare : ChosenCartesianSquare hi ei fi gi)\n    (F : Sheaf T.smallEtaleTopology (Type (u + 1)))\n    (hF : IsIso (setBaseChangeArrow localSquare ((Scheme.etaleSetPullback c).obj F))) :\n    IsIso ((Scheme.etaleSetPullback a).map (setBaseChangeArrow sq F))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261018T092208-L-3362353",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261018T092208-L-3362353",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
