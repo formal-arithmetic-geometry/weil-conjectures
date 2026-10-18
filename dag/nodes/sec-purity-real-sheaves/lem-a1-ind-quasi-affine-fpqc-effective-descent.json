@@ -256,5 +256,23 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-f8a29d514 (reviewer sub-agent of L); spot-checked: I read Stacks 0APK, 0API, 0APJ, Groupoids 0APA/0APB/constructing-invariant-opens/cartesian-descent-datum and More on Morphisms 0AP6/0F1U/0AP7 in full, plus the statement of every cited node. The item is the exact singleton-cover case of 0APK, and its property P is 0F1U(2), i.e. ind-quasi-affine. No hypothesis was dropped and the statement is not weakened. Step 1: all three 02W3 conditions are checked, including m=0. Step 2: quasi-separatedness of V and the fpqc condition are both derived. In the new invariant-neighbourhood node, s and t are base changes of p, so flat and quasi-compact, and W⊂Q⊂E=t(s^{-1}(Q)) gives the inclusion order the source needs. Step 3: the omitted cocycle is written out with the correct reversal ψ02=ψ01∘ψ12, and 0APJ's quasi-separated hypothesis holds for V and for V×_S X. Step 4: the affine-effectivity node applies to Spec C. Step 5: the cartesian square D⊗_C(C⊗_RA)=D⊗_RA and θ∘j'=j''∘φ give equal inverse images of J. Steps 6-7: open descent along Z→Z_0 (an fpqc base change), then gluing by 0AP4. All four new nodes are true, statement-only and self-contained; I tested them on E empty, T=R and V empty, and none restates a clause of the item. Duplicate search over the DAG (tags and key words) finds only narrower nodes: the quasi-affine-only 0247 node, the qc quasi-affine embedding, qcqs flat base change, and topology 0A31. The tool_uses 02W3, 0245, 022D, 03N0 and 0AP4 are accepted as generic black boxes; there is no SGA. FIX 1 (B3): lem-a1-intersection-canonical-affine-embedding now defines j_E itself, as the unique morphism of locally ringed spaces with global-sections map id_C, and adds the restriction clause j_E|_L = the map for C→Γ(L). FIX 2 (C1): item step 5 now cites lem-weil-pbc-morphism-into-affine-scheme in its uses and proof_deps. The corrected files are under fixes/dag/nodes/sec-purity-real-sheaves/.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59d14105e",
+  "group": "N2",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0APK/0F1U(2) clause by clause: singleton fpqcPrecoverage cover; V : Over A; for each affine open U and compact open K of Limits.pullback V.hom U.ι, IsQuasiAffineHom (K.ι ≫ pullback.snd); recorded Over.DescentDatum and IsEffective (includes datum compatibility); no qc/lfp/extra assumptions; single universe u as in sibling recorded items. lean.statement verbatim in file; elaborated signature checked via #check. Edge cases (empty V, K, U, A; non-qc V) covered. No hollow definitions, one sorry, source and blueprint docstrings with 7-step proof, imports match recorded modules with no cycle. nt_compile --json: rc 0, 1.9 s, no errors; a scratch false-example compile confirmed the tool reports errors. Non-blocking note: the 'Second reading by N2' section is the author's own pass, not an independent reader's; its content is correct and this review redid every check."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndQuasiAffineFpqcDescent",
+  "declaration": "CategoryTheory.Over.DescentDatum.isEffective_of_indQuasiAffine_fpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/IndQuasiAffineFpqcDescent.lean",
+  "statement": "theorem isEffective_of_indQuasiAffine_fpqc {A B : Scheme.{u}} (p : A ⟶ B) (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage B) {V : Over A} (hV : ∀ (U : A.Opens), IsAffineOpen U → ∀ (K : (Limits.pullback V.hom U.ι).Opens), IsCompact (K : Set (Limits.pullback (C := Scheme.{u}) V.hom U.ι)) → IsQuasiAffineHom (K.ι ≫ Limits.pullback.snd V.hom U.ι)) (D : Over.DescentDatum p V) : D.IsEffective",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

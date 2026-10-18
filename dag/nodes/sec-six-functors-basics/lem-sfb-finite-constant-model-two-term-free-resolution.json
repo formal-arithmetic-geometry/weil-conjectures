@@ -269,35 +269,25 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-65af5d9e4",
-  "group": "N2",
-  "result": "pass",
-  "note": "Read the node, all 16 stmt_deps, report, module and the dependency sources (constructibility, constant module functor, O_E/spectral topology, Mod.finiteFree/IsFree, upperStarFromPoint). Node diff is only lean plus four landed stmt_deps, no cycle; lean.statement verbatim; all 13 declarations present. Clause check: both coefficient cases as a conjunction, unique spectral-norm topology (rfl-checked equal to coefficientExtensionIntegersTopology on O_E), B_T = recorded condensedRingObj, canonical scalarMap via sheafifyLift of constant functions, L = p_T^* of change of rings of constant P (canonically iso to the tensor on T, natural in P; same convention as landed HasFiniteConstantLocalModel), full scalar exactness, ShortExact of actual modelMaps, finite-free term isos, fixed differential and augmentation, QuasiIso, field case a=0 and IsFree; no hypotheses on T or P; E,T share universe u as the coefficient interface and size convention allow. Edge cases P=0, rank 0, torsion P, empty basis, empty scheme covered. sorry only in the theorem; helpers have real data (sorryAx only via landed commutativeSiteConstantModuleFunctor's postponed Prop instance). No duplicate found. nt_compile --json clean (4.5 s). Notes: author-written second reading, accepted because this review is the independent reading; det-prop proof dep has no Lean statement yet (proof-only)."
+  "reviewer": "NT-stage2-cc-c98348d0e",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Conclusion was weaker than the node (H3): the delivered Lean only asserted some short exact 0→B_T^a→B_T^b→L→0 with arbitrary maps, dropping the node's exact scalar sequence 0→A^a→A^b→P→0 and the maps 1⊗u, 1⊗v. The complete fix in fixes/ adds point-level u:Λ^a⟶Λ^b and v:Λ^b⟶P (matrices over Λ(*)=A) with a short exact point sequence, ties K.d(-1)0 to p_T^*u and the augmentation to p_T^*v through em/e0 to p_T^*Λ^n, states that p_T^*Λ^n is finite free and the pulled-back sequence is short exact, and keeps QuasiIso ε and the field clause. The fixed module, record statement (normalized signature) and report are in fixes/. Hypotheses match the HasFiniteConstantLocalModel convention; the wrappers use the upstream continuousMapRingObjOfUniverse (real data, no duplicate); universes, docstrings and sorry-only proof are fine. nt_compile: delivered 2.8 s clean, fixed 4.1 s clean."
  },
  "lean": {
+  "existing": false,
   "module": "Sheaf.Paper.FiniteConstantModelTwoTermFreeResolution",
   "declaration": "AlgebraicGeometry.ProEtale.finite_constant_model_two_term_free_resolution",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.pointRing",
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.pointSectionIso",
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.scalarPresheafMap",
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.scalarMap",
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.pointModel",
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.pointModelMap",
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.model",
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.modelMap",
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.scalarFree",
-   "AlgebraicGeometry.ProEtale.FiniteScalarModel.HasTwoTermFreeResolution",
-   "AlgebraicGeometry.ProEtale.IntegralFiniteScalarResolution",
-   "AlgebraicGeometry.ProEtale.RationalFiniteScalarResolution",
+   "AlgebraicGeometry.ProEtale.finiteExtensionCondensedField",
+   "AlgebraicGeometry.ProEtale.finiteExtensionCondensedIntegers",
    "AlgebraicGeometry.ProEtale.finite_constant_model_two_term_free_resolution"
   ],
   "file": "lean/Sheaf/Paper/FiniteConstantModelTwoTermFreeResolution.lean",
-  "statement": "theorem finite_constant_model_two_term_free_resolution (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (T : Scheme.{u}) : IntegralFiniteScalarResolution ℓ E T ∧ RationalFiniteScalarResolution ℓ E T",
+  "statement": "theorem finite_constant_model_two_term_free_resolution (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) (hΛ : Λ = finiteExtensionCondensedIntegers l E ∨ Λ = finiteExtensionCondensedField l E) (P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ.X) (hP : Mod.IsFinitelyPresented Λ.X P) : ∃ (a b : ℕ) (u : Mod.finiteFree Λ.X a ⟶ Mod.finiteFree Λ.X b) (v : Mod.finiteFree Λ.X b ⟶ P) (huv : u ≫ v = 0) (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology T) Ab) ((upperStarFromPoint T).obj Λ.X)) ℤ) (em : K.X (-1) ≅ ((upperStarFromPoint T).mapMod Λ.X).obj (Mod.finiteFree Λ.X a)) (e0 : K.X 0 ≅ ((upperStarFromPoint T).mapMod Λ.X).obj (Mod.finiteFree Λ.X b)) (ε : K ⟶ (CochainComplex.singleFunctor (Mod (Sheaf (Scheme.ProEt.topology T) Ab) ((upperStarFromPoint T).obj Λ.X)) 0).obj (((upperStarFromPoint T).mapMod Λ.X).obj P)), (ShortComplex.mk u v huv).ShortExact ∧ Nonempty (((upperStarFromPoint T).mapMod Λ.X).obj (Mod.finiteFree Λ.X a) ≅ Mod.finiteFree ((upperStarFromPoint T).obj Λ.X) a) ∧ Nonempty (((upperStarFromPoint T).mapMod Λ.X).obj (Mod.finiteFree Λ.X b) ≅ Mod.finiteFree ((upperStarFromPoint T).obj Λ.X) b) ∧ (∀ i : ℤ, i ≠ -1 → i ≠ 0 → IsZero (K.X i)) ∧ K.d (-1) 0 = em.hom ≫ ((upperStarFromPoint T).mapMod Λ.X).map u ≫ e0.inv ∧ ε.f 0 ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (((upperStarFromPoint T).mapMod Λ.X).obj P)).hom = e0.hom ≫ ((upperStarFromPoint T).mapMod Λ.X).map v ∧ (∃ hB : ((upperStarFromPoint T).mapMod Λ.X).map u ≫ ((upperStarFromPoint T).mapMod Λ.X).map v = 0, (ShortComplex.mk (((upperStarFromPoint T).mapMod Λ.X).map u) (((upperStarFromPoint T).mapMod Λ.X).map v) hB).ShortExact) ∧ QuasiIso ε ∧ (Λ = finiteExtensionCondensedField l E → a = 0 ∧ ∃ n : ℕ, Nonempty (((upperStarFromPoint T).mapMod Λ.X).obj P ≅ Mod.finiteFree ((upperStarFromPoint T).obj Λ.X) n))",
   "branch": "newtargets-dag",
-  "by": "N2",
+  "by": "Q27",
   "date": "2026-10-18",
-  "existing": false,
-  "note": "The conjunction covers integral and rational coefficients for an arbitrary finite extension with the unique spectral-norm topology, and every scheme. The auxiliary definitions construct the canonical constant-scalar map and scalar model from existing constant sheafification, sheafified scalar extension, sectionwise/internal module equivalence and point inverse image; all data are real. HasTwoTermFreeResolution spells out scalar exactness, the resulting exact sheaf sequence, finite free identifications and the normalized quasi-isomorphic augmentation. The four added statement dependencies are already landed interfaces used by these constructions."
+  "fixed_by": "NT-stage2-cc-c98348d0e"
  }
 }

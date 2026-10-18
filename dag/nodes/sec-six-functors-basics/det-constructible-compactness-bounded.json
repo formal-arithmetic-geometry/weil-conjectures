@@ -214,24 +214,25 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-ad3596942",
-  "group": "Q33",
+  "reviewer": "NT-stage2-cc-cac93639c",
+  "group": "Q19",
   "result": "pass",
-  "note": "Read node, blueprint source sk-thm-constructible-compactness-bounded.md, all 7 stmt deps and their declarations (IsConstantModelConstructible, condensedRingObj, continuousMapRingObj E / padicAlgClRingObj, FiniteIntermediateField, Mathlib Mod/DerivedCategory/ObjectProperty.ind). Every clause matches: char p>0 with p!=l, separated finite-type X, both coefficient cases as two theorems, ordinary uncompleted D(Mod), C constructible in degree 0, Dic inline via ObjectProperty.ind.{u+1} (no existing Dic decl), uniform [a,b] bound, arbitrary colimit cofan, every s. The comparison is DirectSum.toAddMonoid of f -> f >> (c.inj i)[s], and Bijective is the node's isomorphism. Empty I, zero objects, a=b, empty scheme and E=Q_l are allowed; universes bound, I : Type (u+1) as in the landed sibling module. Only the lean field changed; lean.statement matches the file signature exactly. Only sorried theorems, no definitions; docstrings carry source, blueprint id and step-by-step proof. Report has both sections. nt_compile.py --json clean twice (46.6 s, 41.9 s), no errors or warnings. No findings."
+  "note": "All node clauses match the Lean one for one: prime ℓ; field k of char p>0 with p≠ℓ; X separated and finite type over k; E as a PadicAlgCl.FiniteIntermediateField, plus a second theorem for the closure built from finite subextensions; Λ_X = condensedRingObj; Mod objects in the ordinary DerivedCategory with no completion; C constructible via the recorded IsConstantModelConstructible in degree 0; IndCons as ObjectProperty.ind.{u+1}, the same encoding as the landed sibling; Dic on every H^n; cohomological bound [a,b]; I : Type (u+1). The comparison map is real data: DirectSum.toAddMonoid of postcomposition with the shifted coprojections. The conclusion asserts that a colimit cofan exists; this is true and implied by the node, and equivalent to the statement for every coproduct. Edge cases (empty I, zero objects, empty X, a=b, every shift s, E=Q_ℓ) are covered. Only the node's lean field changed and lean.statement is verbatim; imports follow the proof-dependency rule; docstrings carry the source, blueprint id and seven proof steps; no hollow definitions, sorry-only proofs, standard axioms. No duplicate declaration found. The Second reading section is the accepted 2026-10-17 direct-delivery placeholder. nt_compile.py: module rc 0, 45.3 s, no errors or warnings."
  },
  "lean": {
   "module": "Sheaf.Paper.ConstructibleCompactnessBounded",
-  "declaration": "AlgebraicGeometry.ProEtale.constructible_compact_bounded_indFamilies",
+  "declaration": "AlgebraicGeometry.ProEtale.constructible_compactness_bounded",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.constructible_compact_bounded_indFamilies",
-   "AlgebraicGeometry.ProEtale.constructible_compact_bounded_indFamilies_padicAlgCl"
+   "AlgebraicGeometry.ProEtale.constructibleBoundedComparison",
+   "AlgebraicGeometry.ProEtale.constructible_compactness_bounded",
+   "AlgebraicGeometry.ProEtale.constructible_compactness_bounded_padicAlgCl"
   ],
   "file": "lean/Sheaf/Paper/ConstructibleCompactnessBounded.lean",
-  "statement": "theorem constructible_compact_bounded_indFamilies (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (C : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X)) (hC : IsConstantModelConstructible (Profinite.continuousMapRingObj E) X C) (a b : ℤ) (hab : a ≤ b) (I : Type (u + 1)) (K : I → DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X))) (hK : ∀ (i : I) (n : ℤ), ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ n).obj (K i))) (hbound : ∀ (i : I) (n : ℤ), (n < a ∨ b < n) → IsZero ((DerivedCategory.homologyFunctor _ n).obj (K i))) (c : Cofan K) (hc : IsColimit c) (s : ℤ) : Function.Bijective (DirectSum.toAddMonoid (fun i : I ↦ Preadditive.rightComp ((DerivedCategory.singleFunctor _ 0).obj C) ((shiftFunctor _ s).map (c.inj i))) : (⨁ i : I, ((DerivedCategory.singleFunctor _ 0).obj C ⟶ (K i)⟦s⟧)) →+ ((DerivedCategory.singleFunctor _ 0).obj C ⟶ c.pt⟦s⟧))",
+  "statement": "theorem constructible_compactness_bounded (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (C : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X)) (hC : IsConstantModelConstructible (Profinite.continuousMapRingObj E) X C) (a b : ℤ) (hab : a ≤ b) (I : Type (u + 1)) (K : I → DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X))) (hK : ∀ (i : I) (n : ℤ), ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ n).obj (K i))) (hbound : ∀ (i : I) (n : ℤ), n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor _ n).obj (K i))) : ∃ (c : Cofan K) (_ : IsColimit c), ∀ s : ℤ, Function.Bijective (constructibleBoundedComparison C K c s)",
   "branch": "newtargets-dag",
-  "by": "Q33",
+  "by": "Q19",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The two declarations cover the finite subextension and condensed algebraic closure cases. Both use IsConstantModelConstructible, ambient ObjectProperty.ind, and the ordinary DerivedCategory of internal modules over condensedRingObj. A coproduct is represented by an arbitrary colimit cofan; its shifted coprojections define exactly the displayed additive comparison map."
+  "note": "The finite-subextension and algebraic-closure cases are the two theorem declarations. The real-data comparison is DirectSum.toAddMonoid of postcomposition with shifted coprojections. The conclusion supplies a coproduct cofan and its universal property, followed by bijectivity in every shift; the unique compatible isomorphism transports the assertion to any chosen coproduct. IndCons uses Mathlib ObjectProperty.ind of the recorded finite constant-model constructibility, and Dic is imposed on all cohomology sheaves. No derived completion or alternative local-presentation constructibility is imposed."
  }
 }
