@@ -11,15 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Finite.Counit
 import Sheaf.AlgebraicGeometry.ConstructibleOfFiniteDirectImage
-import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-!
 # Finite direct image reflects bounded constructibility
@@ -36,6 +29,29 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
+/-- Transport the stratification, its covers and its finite constant values along an iso. -/
+private theorem constructible_of_iso
+    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
+    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : F ≅ G)
+    (hG : Scheme.IsConstructibleEtaleModuleSheaf G) :
+    Scheme.IsConstructibleEtaleModuleSheaf F := by
+  obtain ⟨S, hS⟩ := hG
+  refine ⟨S, fun k ↦ ?_⟩
+  obtain ⟨d, hd⟩ := hS k
+  let e' := (upperStar (ModuleCat.{u + 1} Λ) (S.immersion k)).mapIso e
+  let d' : Scheme.LocallyConstantDatum
+      ((upperStar (ModuleCat.{u + 1} Λ) (S.immersion k)).obj F) :=
+    { cover := d.cover
+      isConstant := fun i ↦ by
+        have := d.isConstant i
+        exact Sheaf.isConstant_congr _
+          (((S.domain k).smallEtaleTopology.overPullback (ModuleCat.{u + 1} Λ)
+            (d.cover.etalePrecoverageToEtale i)).mapIso e').symm }
+  refine ⟨d', fun i ↦ ?_⟩
+  obtain ⟨M, hM, ⟨iM⟩⟩ := hd i
+  exact ⟨M, hM, ⟨((S.domain k).smallEtaleTopology.overPullback
+    (ModuleCat.{u + 1} Λ) (d.cover.etalePrecoverageToEtale i)).mapIso e' ≪≫ iM⟩⟩
+
 /-- For a finite morphism of Noetherian schemes and a finite commutative coefficient ring,
 the total derived direct image on ordinary, unbounded etale module derived categories
 reflects membership in `D^b_c`.
@@ -43,26 +59,22 @@ reflects membership in `D^b_c`.
 Source: blueprint, sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-reflects-derived.md
 (blueprint: lem-fin-finite-reflects-derived).
 
-Proof plan:
-1. Finite direct image is exact on abelian sheaves
-(`lemma-weil-pbc-finite-direct-image-exact`), and hence on module sheaves, because the
-underlying abelian sheaves compute kernels and sheafified cokernels
-(`def-weil-sheaf-of-modules-category`). Apply
-`lem-weil-pbc-exact-functor-derived-factorization` and
-`lem-weil-pbc-exact-functor-derived-functor`: even an unbounded complex computes the
-right derived functor. By `lem-weil-pbc-exact-functor-complex-cohomology`, its degree-q
-cohomology is the direct image of the degree-q cohomology of the original complex.
-2. If the direct image of a module sheaf vanishes, the finite stalk formula
-(`lemma-weil-pbc-finite-stalk-formula`) makes every geometric stalk vanish: each stalk
-is a factor in a zero product, and each factor embeds by inserting zero in the other
-coordinates. Geometric stalk conservativity
-(`lemma-weil-pbc-geometric-stalk-conservative`) then makes the sheaf zero. Apply this
-in every degree outside the bounded interval of the image; the same interval bounds K.
-3. In every remaining degree apply `lem-fin-finite-reflects-constructibility` to the
-cohomology sheaf, using the cohomology comparison from step 1. Outside the interval the
-zero sheaf is finite locally constant and constructible (one stratum for a nonempty
-scheme, the empty partition for the empty scheme). The recorded definition
-`def-weil-pbc-constructible-complexes` now gives bounded constructibility of K. -/
+Proof:
+1. The finite direct image on module sheaves is exact
+(`lemma-weil-pbc-finite-direct-image-exact`). The source library's
+`Functor.rightDerivedFunctorHomologyFunctorIso` combines exact-functor descent and
+commutation with cohomology, giving `p_* H^q(K) ≅ H^q(Rp_*K)` for every integer q,
+without a boundedness hypothesis.
+2. The source library's `isZero_of_isZero_lowerStar_of_isFinite` reflects zero objects:
+the finite stalk formula (`lemma-weil-pbc-finite-stalk-formula`) identifies each source
+stalk as a quotient of a stalk of the image, and geometric stalk conservativity
+(`lemma-weil-pbc-geometric-stalk-conservative`) detects the zero sheaf. Apply this to
+cohomology outside the bounds of the image. Exactly the same interval bounds K.
+3. Transport constructibility along the cohomology comparison by retaining the
+stratification and its finite constant values, composing each trivialization with the
+restricted comparison. Apply `lem-fin-finite-reflects-constructibility` in every degree.
+The definition `def-weil-pbc-constructible-complexes` supplies constructible cohomology
+of the image in every degree, so no separate zero-sheaf constructibility lemma is needed. -/
 theorem isBoundedConstructible_of_finite_rightDerivedLowerStar
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {Z S : Scheme.{u}} [IsNoetherian Z] [IsNoetherian S]
@@ -70,6 +82,17 @@ theorem isBoundedConstructible_of_finite_rightDerivedLowerStar
     (hK : DerivedCategory.isBoundedConstructible Λ S
       ((rightDerivedLowerStar (ModuleCat.{u + 1} Λ) p).obj K)) :
     DerivedCategory.isBoundedConstructible Λ Z K := by
-  sorry
+  let F := lowerStar (ModuleCat.{u + 1} Λ) p
+  have e (i : ℤ) :
+      F.obj ((_root_.DerivedCategory.homologyFunctor _ i).obj K) ≅
+        (_root_.DerivedCategory.homologyFunctor _ i).obj
+          ((rightDerivedLowerStar (ModuleCat.{u + 1} Λ) p).obj K) :=
+    (F.rightDerivedFunctorHomologyFunctorIso i).app K
+  obtain ⟨hc, a, b, hab, hz⟩ := hK
+  refine ⟨fun i ↦ ?_, a, b, hab, fun i hi ↦ ?_⟩
+  · apply Scheme.isConstructibleEtaleModuleSheaf_of_finite_lowerStar p
+    exact constructible_of_iso (e i) (hc i)
+  · apply isZero_of_isZero_lowerStar_of_isFinite (ModuleCat.{u + 1} Λ) p
+    exact (hz i hi).of_iso (e i)
 
 end AlgebraicGeometry.Etale

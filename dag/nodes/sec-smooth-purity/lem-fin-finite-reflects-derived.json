@@ -21,12 +21,10 @@
  ],
  "proof": [
   {
-   "text": "Let $K$ be any object of $D(Z_{\\Et},\\Lambda)$ and represent it by a complex $C$. Finite direct image is exact on abelian sheaves by [lemma-weil-pbc-finite-direct-image-exact]. It is also exact on sheaves of modules over the same constant ring $\\Lambda$: direct image has the same underlying abelian sheaf, and kernels and sheafified cokernels of module maps are those of the underlying abelian maps with their induced actions, as in [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-exact-functor-derived-functor] to this exact module functor. Thus $Rp_*K$ is represented by the termwise complex $p_*C$ even when $K$ is not bounded below. By [lem-weil-pbc-exact-functor-complex-cohomology], for every integer $q$ there is a canonical isomorphism $\\mathcal H^q(Rp_*K)\\cong p_*\\mathcal H^q(K)$. This avoids assuming that $K$ is bounded below before that has been proved.",
+   "text": "Let F be the finite module direct image. Its exactness instance is already proved in WeilConjectures.SixFunctors.Finite.Exact for ModuleCat coefficients, so no passage through a second ringed-site encoding is needed. The proved source-library F.rightDerivedFunctorHomologyFunctorIso combines exact-functor derived factorization with commutation with homology and gives, for every integer q, an isomorphism p_* H^q(K) ≅ H^q(Rp_* K). It applies to the ordinary unbounded derived category: no bounds on K are assumed.",
    "uses": [
     "lemma-weil-pbc-finite-direct-image-exact",
-    "def-weil-sheaf-of-modules-category",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
     "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false,
@@ -36,7 +34,7 @@
    }
   },
   {
-   "text": "First consider an etale sheaf $G$ of $\\Lambda$-modules with $p_*G=0$. Apply [lemma-weil-pbc-finite-stalk-formula] to its underlying abelian sheaf. For any geometric point $\\bar z$ of $Z$, let $\\bar s=p\\bar z$ (using the same algebraically closed field), so the factor $G_{\\bar z}$ occurs in the product $(p_*G)_{\\bar s}\\cong\\prod_{\\bar w\\mid\\bar s}G_{\\bar w}$. If that product is zero, each factor is zero: put a proposed element of one factor in its coordinate and zero in the other coordinates. Apply [lemma-weil-pbc-geometric-stalk-conservative] to $0\\to G$ on underlying abelian sheaves. This morphism is an isomorphism at every geometric stalk, hence $G=0$ as an abelian sheaf, and therefore also as a module sheaf. Now suppose $Rp_*K\\in D^b_c(S_{\\Et},\\Lambda)$ and choose integers $a\\le b$ outside which its cohomology is zero, using [def-weil-pbc-constructible-complexes]. For every $q\\notin[a,b]$, Step 1 gives $p_*\\mathcal H^q(K)=0$, so the argument just given proves $\\mathcal H^q(K)=0$. The same finite interval bounds $K$.",
+   "text": "Use the proved source-library isZero_of_isZero_lowerStar_of_isFinite (WeilConjectures.SixFunctors.Finite.Counit), which implements the finite-stalk and conservative-geometric-stalk argument: each source stalk is a quotient of the product stalk of the image, so a zero image forces every source stalk to be zero and hence the source sheaf is zero. Unpack the bounded interval a ≤ b of Rp_* K. In every degree i with i < a or b < i, transport its zero cohomology along the comparison of Step 1 and apply reflection of zero to H^i(K). The same a,b bound K, with the identical inequality a ≤ b.",
    "uses": [
     "lemma-weil-pbc-finite-stalk-formula",
     "lemma-weil-pbc-geometric-stalk-conservative",
@@ -49,7 +47,7 @@
    }
   },
   {
-   "text": "For each $q\\in[a,b]$, the definition [def-weil-pbc-constructible-complexes] says that $\\mathcal H^q(Rp_*K)$ is constructible. Step 1 identifies this module sheaf with $p_*\\mathcal H^q(K)$. Apply [lem-fin-finite-reflects-constructibility] to $\\mathcal H^q(K)$: its hypotheses are precisely that $p$ is finite between Noetherian schemes, $\\Lambda$ is a finite commutative ring, and $\\mathcal H^q(K)$ is an etale sheaf of $\\Lambda$-modules. Hence $\\mathcal H^q(K)$ is constructible. Outside $[a,b]$ it is the zero sheaf, which is the constant sheaf with value the finite zero module, hence finite locally constant. For nonempty $Z$ the single stratum $Z$ proves constructibility; for empty $Z$ use the empty partition. These degreewise assertions and Step 2 give $K\\in D^b_c(Z_{\\Et},\\Lambda)$ by the same definition.",
+   "text": "For every integer q (including those outside the bounds), the bounded-constructible predicate supplies constructibility of H^q(Rp_* K). Transport it along Step 1's isomorphism to p_* H^q(K). The private elementary helper constructible_of_iso keeps the same stratification, the same etale covers and the same finite constant module values, and composes their trivializing isomorphisms with the pullback and over-site restriction of the comparison. Apply isConstructibleEtaleModuleSheaf_of_finite_lowerStar to H^q(K), using precisely the existing finite morphism, Noetherian schemes and finite commutative ring hypotheses. Combine this degreewise constructibility with Step 2's bounds to obtain the original bounded-constructible predicate. Empty schemes and the zero coefficient ring require no case distinction; the same transported existential witnesses and bounds apply.",
    "uses": [
     "lem-fin-finite-reflects-constructibility",
     "def-weil-pbc-constructible-complexes"
@@ -63,9 +61,7 @@
  ],
  "proof_deps": [
   "lemma-weil-pbc-finite-direct-image-exact",
-  "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lemma-weil-pbc-finite-stalk-formula",
   "lemma-weil-pbc-geometric-stalk-conservative",
@@ -74,8 +70,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-reflects-derived.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-finite-reflects-derived.proof.md",
+  "place": "Proof, all three sentences; implemented using proved source-library exactness/cohomology and finite zero-reflection APIs; A8, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -185,9 +181,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-exact-functor-derived-functor"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -213,5 +207,15 @@
   "by": "NV",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261018T062656-L-630158",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
