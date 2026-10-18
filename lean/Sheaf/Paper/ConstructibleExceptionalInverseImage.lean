@@ -1,0 +1,76 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group NX
+-/
+module
+
+public import Sheaf.Paper.FiniteExceptionalInverseImage
+public import Sheaf.Paper.PurityFiniteSetting
+
+/-!
+# Purity specialization of the published intrinsic exceptional inverse image
+
+Source: Weil blueprint, sec-smooth-purity/sk-def-sf-operations, order 1489
+(blueprint: def-weil-exceptional-inverse-image).
+
+`Scheme.finiteExceptionalInverseImage` already constructs the canonical composite
+nu_X^* f^times Rnu_Y,* in intrinsic constant-ring modules. This module only provides
+transparent aliases and the finite-quotient instances needed by the purity setting.
+It introduces no second comparison, realization, inverse, or exceptional construction.
+
+## Main definitions
+
+- `Scheme.sfIntrinsicExceptionalInverseImage`: alias of the published finite-level functor.
+- `PurityFiniteSetting.exceptionalInverseImage`: its purity-setting specialization.
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+
+namespace AlgebraicGeometry.Scheme
+
+/-- Compatibility alias for the published finite-level intrinsic functor. The full
+construction, including canonical coefficient realization and Nagata compactification,
+is `finiteExceptionalInverseImage`; it is reused rather than reconstructed here.
+Source: blueprint sk-def-sf-operations (vi), order 1489
+(blueprint: def-weil-exceptional-inverse-image). -/
+noncomputable abbrev sfIntrinsicExceptionalInverseImage := @finiteExceptionalInverseImage
+
+end AlgebraicGeometry.Scheme
+
+namespace WeilConjectures.PurityFiniteSetting
+
+/-- Finiteness of the positive finite coefficient quotient, using the recorded theorem.
+Source: blueprint sk-def-sf-operations (vi), finite coefficients
+(blueprint: def-weil-exceptional-inverse-image). -/
+noncomputable instance ringFinite (P : PurityFiniteSetting.{u}) : Finite P.Ring :=
+  Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos
+
+/-- Finiteness is preserved by the standard coefficient-size lift.
+Source: blueprint sk-def-sf-operations (vi), coefficient universe convention
+(blueprint: def-weil-exceptional-inverse-image). -/
+noncomputable instance coefficientFinite (P : PurityFiniteSetting.{u}) : Finite P.Coefficient :=
+  inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
+
+/-- The published intrinsic exceptional inverse image at the purity setting's actual
+finite quotient. This transparent alias uses the existing construction unchanged.
+Source: blueprint sk-def-sf-operations (vi), order 1489
+(blueprint: def-weil-exceptional-inverse-image). -/
+noncomputable abbrev exceptionalInverseImage (P : PurityFiniteSetting.{u})
+    {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]
+    [QuasiCompact (X ↘ Spec (.of P.field.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]
+    [QuasiCompact (Y ↘ Spec (.of P.field.k))]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+    Scheme.proEtaleDerivedCategory Y P.Ring ⥤ Scheme.proEtaleDerivedCategory X P.Ring :=
+  Scheme.finiteExceptionalInverseImage P.coefficients.l P.extension P.level P.level_pos
+    P.field.k X Y f
+
+end WeilConjectures.PurityFiniteSetting
