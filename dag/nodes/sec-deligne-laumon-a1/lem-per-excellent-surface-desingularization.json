@@ -228,5 +228,23 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-ef847f7db (reviewer sub-agent of L); spot-checked: PASS: I read the item and all six new nodes in full against Stacks resolve.tex (0BBS/0BFT, 0BFV–0BFZ, 0BG6, 0BGA, 0BGM, 0BGN, and 0BGP with its proof) and more-algebra 0C23. The item statement is unchanged from base (same md5 as earlier snapshots), so the target is not weakened. The seven steps follow the 0BGP (4)⇒(3) argument correctly. Step 1: normalization is finite and the regular locus is open and normal, so it is unchanged. Step 2: the local data hold (finitely many closed singular points; O_{X,x} and its completion are normal of dimension 2). Steps 3–4: 0BGN, then 0BGM, then 0BGA plus 0BG6(3); properness puts the centres over the closed point. Step 5: 0BFZ applies because S is normal, so the local towers are isomorphisms off s_i; regularity is checked at every point. Step 6: the tower is projective in the bundle sense (0B3I/02NS/0C4P), and 087S over the ample base Y gives an embedding in P^m_Y. Step 7 is genuinely elementary. Each new node is a true statement with exactly its Stacks hypotheses. None restates a clause of the item, and none duplicates an existing node: the Q25 quasi-projective normalized-blowup node needs an affine base, and the trf normalized-blowup node is over Q. No SGA is cited and there is no cycle. Batch-5: def-trf-projective-bundle-morphism is a general definition (01W8), and lem-trf-projective-bundle-to-h-projective is generic 087S. Their closures contain only five trf nodes (projective-bundle definitions, H-projective composition, globally generated bundle, Proj invertible twist) and no trace-formula, Poincaré-duality, trace-transport or batch-4 node, so I accept both. Accepted tool_uses: rem-pc-regular-normal and lem-trf-projective-bundle-to-h-projective. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExcellentSurfaceDesingularization",
+  "declaration": "AlgebraicGeometry.exists_projective_regular_resolution_of_excellent_surface",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExcellentSurfaceDesingularization.lean",
+  "statement": "theorem exists_projective_regular_resolution_of_excellent_surface (Y : Scheme.{u}) [IsIntegral Y] [IsNoetherian Y] (hExcellent : ∀ U : Y.affineOpens, IsExcellent Γ(Y, U)) (hDim : topologicalKrullDim Y = 2) (hAmple : ∃ (L : Y.Modules) (hL : L.IsInvertible), @Scheme.Modules.IsAmple Y L hL) : ∃ (V : Scheme.{u}) (_ : IsIntegral V) (r : V ⟶ Y), IsRegularScheme V ∧ IsHProjective r ∧ (∃ hη : r (genericPoint V) = genericPoint Y, IsIso (r.functionFieldMap hη)) ∧ ∃ U : Y.Opens, (∀ y : Y, y ∈ U ↔ IsRegularLocalRing (Y.presheaf.stalk y)) ∧ IsIso (r ∣_ U)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586227ae2",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BGP clause by clause: IsIntegral/IsNoetherian Y, IsExcellent on all affine opens (equivalent by locality), topologicalKrullDim Y = 2, recorded IsAmple with an invertibility witness; ∃ integral V, IsRegularScheme V, IsHProjective r (finite coordinate type, nonempty since V nonempty), birationality as IsIso of the induced Hom.functionFieldMap with generic-point equality, iso over an open U pinned exactly to the points with regular stalk. No extra hypotheses; single universe u; edge cases (empty scheme excluded by integrality, regular Y, empty singular set) fine. Statement verbatim, lines ≤100, docstrings with source/blueprint and 7 steps, sorry-only proof, non-public imports are the two stated proof_dep modules, only the lean field changed vs live, no name collision. nt_compile --json clean in 3.4 s (control with an injected error fails). Advisory: the second reading is the author's self-check."
  }
 }

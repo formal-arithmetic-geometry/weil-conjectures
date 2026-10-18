@@ -263,5 +263,23 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-43b0b53e1 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps and the new node lem-per-punctured-local-closed-points in full, together with Stacks 0ECR (proof, second half, lines 4420-4445), 02J6(4), 02IM(1) and the remark after 005U. The item statement is unchanged from Q11's version. The new node is statement-only and self-contained, and it is exactly 02J6(4) plus the 005U locally-closed characterization (points closed in U, not in X; I tested it on a field, an Artinian ring, a DVR and k[x,y]_(x,y)). Searching the DAG statements for Jacobson, prime avoidance and punctured closed points found no duplicate. Step checks: Step 2 shows a locally closed subset of U\\T is locally closed in U, and V(p_j)={w_j,m}. Step 4 shows p_j is not inside q, using q in T and w_j not in T. Step 6 meets prime avoidance's hypotheses (r>=1, all ideals prime) and takes f=0 when the list is empty. Step 7 proves the dimension upper bound by extending chains through a component, without catenarity. Step 8 ends with T_e={m}. The cases e=0 and s=0 are handled. All off-unit nodes are Mathlib leaves or definitions, so no tool_uses are needed. There is no cycle and no SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrimeAvoidanceConnectednessSlice",
+  "declaration": "PrimeSpectrum.exists_zeroLocus_inter_eq_closedPoint_meeting",
+  "file": "lean/Sheaf/RingTheory/PrimeAvoidanceConnectednessSlice.lean",
+  "statement": "theorem exists_zeroLocus_inter_eq_closedPoint_meeting (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (hfinite : topologicalKrullDim (AlgebraicGeometry.Spec (.of A)) < ⊤) (T : Set (AlgebraicGeometry.Spec (.of A))) (hTclosed : IsClosed T) (hTnonempty : T.Nonempty) (e : ℕ) (hTdim : topologicalKrullDim T = e) (s : ℕ) (W : Fin s → Set (AlgebraicGeometry.Spec (.of A))) (hWnonempty : ∀ j : Fin s, (W j).Nonempty) (hWlocallyClosed : ∀ j : Fin s, IsLocallyClosed (W j)) (hWsubset : ∀ j : Fin s, W j ⊆ {IsLocalRing.closedPoint A}ᶜ \\ T) : ∃ f : Fin e → A, (∀ i : Fin e, f i ∈ IsLocalRing.maximalIdeal A) ∧ T ∩ zeroLocus (Set.range f) = {IsLocalRing.closedPoint A} ∧ ∀ j : Fin s, (W j ∩ zeroLocus (Set.range f)).Nonempty",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a88e0880",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Lean statement PrimeSpectrum.exists_zeroLocus_inter_eq_closedPoint_meeting matches the node clause by clause: Noetherian local A (IsLocalRing includes nonzero), finite topologicalKrullDim of Spec, T closed nonempty with topologicalKrullDim T = e, s possibly 0, W j nonempty and locally closed in the ambient spectrum inside {closedPoint}ᶜ \\ T (equivalent because U\\T is open), f : Fin e → A in m, T ∩ zeroLocus = {m}, every W j meets the zero locus. lean.statement is verbatim the file signature. Stmt_dep records are Mathlib existing ones and are used. Edge cases e=0, s=0, field/Artinian and T=X are correct, and the statement is mathematically true via 02J6(4) plus prime avoidance. Proof is sorry only, docstrings carry source, blueprint and all 8 proof steps, no definitions, no name clash, live node has no lean record yet, citer CompleteLocalConnectednessBound is compatible. nt_compile --json clean in 2.2 s. Advisory: the plain proof-plan imports Ideal.Operations and NoetherianSpace are redundant for the statement (a copy without them also compiles clean) but harmless."
  }
 }

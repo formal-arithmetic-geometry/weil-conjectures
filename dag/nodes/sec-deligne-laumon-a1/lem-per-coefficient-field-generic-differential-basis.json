@@ -280,5 +280,28 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d82cc58ca (reviewer sub-agent of L); spot-checked: I read ILO IV 2.1.1–2.1.12 with Prop. 1.2.4, and EGA 0_IV 20.7.14, 20.7.15, 20.7.20 and 21.9.1. The item statement is unchanged. All 11 steps check out against the cited statements. Source error confirmed: the field κ' := κ^p(β_i; β'_i) in ILO 2.1.11 contains m^p, a nonzero element of the maximal ideal, so it cannot be a subfield of A. Example: F_p(u)[[t]] with β' = u+t gives t^p ∈ κ'. The repair is correct: it takes the unique coefficient field containing the final lifts (ILO 2.1.4), and Step 7 shows that a κ'-derivation is the same as an F-derivation that kills the γ_i. Step 8 builds inverse maps M/U ⇄ M_{κ'}(B) from the universal property and gets generic rank (e+r)−r = e. Step 5 lifts corrections into Q∩n, which keeps residues unchanged; the source's lift into q_j does not. Steps 10 and 11 (h^p trick, perfect subfield through n^{p^m}) are correct. All three new nodes are true and strictly smaller than the item. (1) prescribed-pbasis-section is Bourbaki AC IX §2 Th. 1(a), as ILO 2.1.4 cites it; tested on F_p(u+t) ⊂ F_p(u)[[t]]. (2) cofinite generic rank is ILO (2.b) with the 'every J ⊇ J_0' form from Prop. 1.2.4. Tested on κ[[x]], and on κ[[x,y]]/(y^p − u x^p): rank 2 at J = ∅ and 1+1 at J = {u}, which shows the exceptional set is needed. (3) completed conormal follows from EGA 20.7.14, 20.7.15 and 20.7.20; the image of the finite I/I² is closed, and (q/q²)_q = 0 for a reduced ring at a minimal prime. Duplicate search: the trf continuous-differential nodes cover power-series presentations only, the sibling lem-per-finite-formal-map-differential-cokernel is a different sequence, and the blueprint has nothing. Tool uses accepted (generic field theory and commutative algebra): lem-weil-pbc-p-basis-exists, lem-weil-pbc-p-basis-complement-monomial-basis, lem-weil-pbc-finite-module-complete-over-complete-noetherian. Advisory only: the new nodes list lem-weil-pbc-p-basis-exists in stmt_deps for the notion 'p-basis', as existing pbc nodes do. No SGA cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientFieldGenericDifferentialBasis",
+  "declaration": "WeilConjectures.coefficient_field_generic_differential_basis",
+  "declarations": [
+   "WeilConjectures.CoefficientSectionGenericDifferentialBasis",
+   "WeilConjectures.coefficient_field_generic_differential_basis"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientFieldGenericDifferentialBasis.lean",
+  "statement": "theorem coefficient_field_generic_differential_basis (p : ℕ) [Fact p.Prime] (B : Type u) [CommRing B] [IsNoetherianRing B] [IsLocalRing B] [IsReduced B] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] [CharP B p] (e : ℕ) (he : 1 ≤ e) (hequidim : ∀ q : Ideal B, IsMinimalPrime q → ringKrullDim (B ⧸ q) = (e : WithBot ℕ∞)) (K₀ : Type v) [Field K₀] (constants : Option (K₀ →+* B)) (hperfect : ∀ ι : K₀ →+* B, constants = some ι → Function.Bijective (fun x : K₀ ↦ x ^ p)) : ∃ (s : IsLocalRing.ResidueField B →+* B) (a : Fin e → B), (IsLocalRing.residue B).comp s = RingHom.id (IsLocalRing.ResidueField B) ∧ (∀ i : Fin e, a i ∈ IsLocalRing.maximalIdeal B) ∧ CoefficientSectionGenericDifferentialBasis B e s a ∧ (∀ ι : K₀ →+* B, constants = some ι → ∀ x : K₀, s (IsLocalRing.residue B (ι x)) = ι x)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The helper is the exact generic-basis clause for a supplied section and tuple, using s.toAlgebra, canonical adic completion and q.ResidueField = Frac(B/q). Optional perfect constants are encoded by Option of a field inclusion; none imposes no perfection condition. No statement correction or new notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64b41f4ce",
+  "group": "NH",
+  "result": "pass",
+  "note": "Only the lean field changed vs the live node; lean.statement matches the file verbatim. Clause-by-clause match: reduced complete Noetherian local ring (IsAdicComplete on the maximal ideal), prime p with CharP (not stronger, since a reduced local ring of positive characteristic has prime characteristic), equidimension as ringKrullDim(B/q)=e on minimal primes with e>=1, section s with residue∘s=id, a_i in the maximal ideal, s.toAlgebra used for the differentials, AdicCompletion of KaehlerDifferential tensored with q.ResidueField (=Frac(B/q)), basis vectors pinned to 1⊗of(D a_i), ∃ s,a before ∀ q, Option encoding of the perfect subfield with the compatibility s(residue(ι x))=ι x. Helper predicate is genuine, not hollow, and listed in declarations; docstrings carry the blueprint tag, source place and 11 proof steps; proof is sorry; imports follow the stage-2 rule; no existing equivalent declaration. nt_compile --json clean in 2.0 s. Advisory: the Second reading section is an author self-check (dispatch forbade other agents), not a substance fault."
  }
 }
