@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import Sheaf.AlgebraicGeometry.EtaleCompactificationConstructibility
