@@ -16216,3 +16216,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/W6/Sheaf.AlgebraicGeometry.NormalizationProjectiveComponents (stage 3; reviewer PASS; first push; landing 20261018T062943-L-689748 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/W7/Sheaf.AlgebraicGeometry.ProjectiveFlatCoherentRanks (stage 3; reviewer PASS; first push; landing 20261018T062944-L-689898 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/W8/Sheaf.AlgebraicGeometry.ProperFiniteFibreFiniteNeighbourhood (stage 3; reviewer PASS; first push; landing 20261018T062944-L-690029 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/W9/Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable (stage 3; reviewer PASS; first push; landing 20261018T062945-L-690213 (proof); batch 20261018T062645; modules 1; new nodes 0)
