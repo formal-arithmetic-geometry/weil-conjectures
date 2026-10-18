@@ -63,15 +63,16 @@ a Frobenius-compatible graded-commutative cup product and a trace on which Frobe
 `i + j = 2 * d`, since `2 * d - (2 * d - i)` is not definitionally `i`. Outside `[0, 2d]` both
 groups vanish and perfectness is automatic.
 
-*Ingredients.* Three inputs from other subsections of the blueprint are not yet available for
-Weil sheaves and are stated here as separate lemmas, with `sorry`:
+*Ingredients.* The theorem is deduced by linear algebra
+(`WeilConjectures.ZetaLinearAlgebra.TraceCup`) from three statements about Weil sheaves:
 `AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant` (vanishing outside
-`[0, 2d]`, `sk-lem-finite`), `AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect` (trace
-isomorphism and perfectness, `sk-cor-trace`, `sk-thm-derived-duality`, `sk-thm-transport`,
-`sk-thm-frobenius`) and
+`[0, 2d]`, `sk-lem-finite`, proved through the pro-étale cohomological dimension of `ℚ̄_ℓ`),
 `AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField` (the Frobenius of
-`k₀'` is `F^r`, `sk-def-weil`). Everything else is deduced from these by linear algebra
-(`WeilConjectures.ZetaLinearAlgebra.TraceCup`).
+`k₀'` is `F^r`, proved by transporting Weil structures along the base change) and
+`AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect` (trace isomorphism and perfectness at
+the coefficient stage `ℚ̄_ℓ`, `sk-cor-trace`, `sk-thm-derived-duality`, `sk-thm-transport`,
+`sk-thm-frobenius`), which is still `sorry`: it needs the cup product and trace of `ℚ̄_ℓ`-Weil
+cohomology, transported from the finite levels.
 -/
 
 @[expose] public section
