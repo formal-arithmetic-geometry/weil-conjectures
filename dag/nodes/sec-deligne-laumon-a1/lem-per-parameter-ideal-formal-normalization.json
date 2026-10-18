@@ -16,9 +16,136 @@
   "def-weil-finitely-generated-module",
   "def-weil-module-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=\\mathfrak m_\\Lambda R+(T_1,\\ldots,T_e)$. A field and a DVR are Noetherian: all ideals are principal. The power-series Noetherian, domain, and local-ring statements therefore show that $R$ is a Noetherian local domain. The constant-coefficient quotient statement identifies $R/(T_1,\\ldots,T_e)$ with $\\Lambda$. Consequently the maximal ideal described by the local-ring statement is exactly $I$, and $R/I=\\Lambda/\\mathfrak m_\\Lambda$. The complete-base power-series statement applied to $\\Lambda$ and $\\mathfrak m_\\Lambda$ gives $I$-adic completeness, including for an arbitrary complete DVR, not just an unramified Cohen ring.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-quotient-variables",
+    "lem-weil-pbc-power-series-complete-over-complete-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032D, lemma-complete-local-Noetherian-domain-finite-over-regular, Cases I and II; basic power-series facts as in Tag 032C, remark-Noetherian-complete-local-ring-universally-catenary; Noetherianity Tag 0306, lemma-Noetherian-power-series"
+   }
+  },
+  {
+   "text": "For $0\\le i\\le e$, the variable-quotient statement identifies $R/(T_1,\\ldots,T_i)$ with $\\Lambda[[T_{i+1},\\ldots,T_e]]$, a Noetherian local domain by the three cited power-series statements. If $i<e$, the next variable is a nonzero element of its maximal ideal, so the nonzerodivisor dimension formula gives\n$\\dim R/(T_1,\\ldots,T_i)=1+\\dim R/(T_1,\\ldots,T_{i+1})$.\nIterating yields $\\dim R=e+\\dim\\Lambda$. A field has dimension zero. A DVR has dimension at most one by the maximal-ideal generator bound, and at least one from the prime chain $(0)\\subsetneq(\\pi)$. Thus $\\dim R=e$ in (a) and $e+1$ in (b). This argument includes $e=0$, when there is no variable to remove.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-quotient-variables",
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-weil-pbc-noetherian-local-dimension-le-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KW, lemma-one-equation; Tag 00KQ, proposition-dimension; source dimension argument of Tag 032D adapted to the complete DVR of ILO IV 4.2.5"
+   }
+  },
+  {
+   "text": "Apply the complete power-series universal property to the coefficient map $\\Lambda\\to B$, the ideal $\\mathfrak n$, and the supplied $b_i\\in\\mathfrak n$. This constructs the evaluation map $\\varphi$ with the prescribed values. Its image on $I$ is contained in $\\mathfrak n$; hence $\\varphi(I^m)\\subseteq\\mathfrak n^m$ proves continuity. The induced map $R/I\\to B/\\mathfrak n$ is the assumed coefficient residue-field isomorphism. Therefore an element outside $I$ has nonzero residue and its image is outside $\\mathfrak n$; the inverse image of $\\mathfrak n$ is exactly $I$, proving locality.",
+   "uses": [
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032D, lemma-complete-local-Noetherian-domain-finite-over-regular, parameter evaluation in Cases I and II; ILO IV 2.1.12 and IV 4.2.5"
+   }
+  },
+  {
+   "text": "Let $J=IB$, the supplied ideal $(b_1,\\ldots,b_e)B$ in (a) or $(\\pi,b_1,\\ldots,b_e)B$ in (b). We use the given radical equality, not the existence of some other parameters. Choose generators $z_1,\\ldots,z_s$ of $\\mathfrak n$. Since $z_i\\in\\sqrt J$, choose $a_i\\ge1$ with $z_i^{a_i}\\in J$. Every monomial of degree $N=1+\\sum_i(a_i-1)$ contains one such power, so $\\mathfrak n^N\\subseteq J\\subseteq\\mathfrak n$. This also covers $s=0$ by taking $N=1$. The quotient-Artinian-local statement applies to $B/J$. Its residue field is $k=R/I$, and the coefficient map gives an actual map $k\\to B/J$: in (b) the uniformizer belongs to $J$. The Artinian finite-over-residue statement, applied to $k\\to B/J$ and its one-dimensional residue quotient, shows $B/J$ finite over $k$. Finally $J^m\\subseteq\\mathfrak n^m$ gives $\\bigcap_m I^mB=0$ by the assumed completeness of $B$. Together with the completeness of $R$ in Step 1, these are precisely the three hypotheses of the finite-over-complete-ring statement. It follows that $B$ is finite over $R$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "lem-weil-pbc-artinian-finite-over-residue-finite",
+    "lem-weil-pbc-finite-over-complete-ring",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032D, lemma-complete-local-Noetherian-domain-finite-over-regular, finiteness argument; Tag 031D, lemma-finite-over-complete-ring; Tag 00JB, lemma-artinian-finite-length"
+   }
+  },
+  {
+   "text": "Write $d=\\dim R$. In (b) put $C=B$; in (a) fix any minimal prime $\\mathfrak q$ and put $C=B/\\mathfrak q$. In both cases $C$ is a nonzero finite $R$-module (images of generators of $B$ generate its quotient), and $\\dim C=d$ by the hypotheses and Step 2. Suppose $0\\ne f\\in\\ker(R\\to C)$. This proper kernel lies in the maximal ideal of the local ring $R$, and $f$ is a nonzerodivisor since $R$ is a domain. Thus $\\dim(R/(f))+1=d$ by the dimension formula. The same finite set generates $C$ over $R/(f)$, so finite-implies-integral and the integral dimension inequality give $d=\\dim C\\le\\dim(R/(f))$, a contradiction. Hence $R\\to C$ is injective. This proves injectivity in (b) and injectivity on every minimal component in (a), and therefore injectivity into $B$ in (a) as well. For $d=0$ the supposition is already impossible because the maximal ideal of $R=\\Lambda$ is zero.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-extension-dimension",
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032D, lemma-complete-local-Noetherian-domain-finite-over-regular, injectivity argument; Tags 00GK, lemma-finite-is-integral; 00OJ, lemma-integral-dim-up; 00KW, lemma-one-equation"
+   }
+  },
+  {
+   "text": "In (b), if $0\\ne r\\in R$ and $rb=0$, injectivity and the domain property of $B$ imply $b=0$. In (a), Step 5 says that the image of $r$ in every $B/\\mathfrak q$ is nonzero. The image of $r$ therefore lies in no minimal prime of $B$; the reduced-ring zero-divisor statement shows that multiplication by $r$ on $B$ is injective. Thus $B$ is torsion free over $R$ in either case.",
+   "uses": [
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EW, lemma-reduced-ring-sub-product-fields, clause (3); ILO IV 2.1.1, torsion-free conclusion"
+   }
+  },
+  {
+   "text": "For the remaining assertions work in case (a), and set $S=R\\setminus\\{0\\}$ and $K=\\operatorname{Frac}(R)$. Identify the tensor product of the base-change definition with $S^{-1}B$ by $b\\otimes(a/s)\\mapsto ab/s$, with inverse $b/s\\mapsto b\\otimes(1/s)$; the balanced relations and the fraction equivalence relation verify these inverse maps. If $b_1',\\ldots,b_h'$ generate $B$ over $R$, their images span this localization over $K$, so it is finite-dimensional. Let $t$ be any nonzerodivisor of $B$. If $tb/s=0$, some $u\\in S$ has $utb=0$ in $B$, whence $ub=0$ and $b/s=0$. Multiplication by $t$ is therefore injective on $S^{-1}B$; on a finite-dimensional vector space an injective endomorphism is surjective, since it sends a basis to a linearly independent set of the same cardinality. In particular $tv=1$ for some $v$, so every such $t$ is invertible. Since Step 6 makes every element of $S$ a nonzerodivisor, the fraction maps in both directions identify $S^{-1}B$ with the total ring of fractions $Q(B)$.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02LX, lemma-total-ring-fractions-no-embedded-points, total-fraction setting; elementary tensor/fraction calculation and finite-dimensional basis argument"
+   }
+  },
+  {
+   "text": "Apply the reduced Noetherian total-fraction statement to $B$. It gives finitely many minimal primes and the canonical isomorphism $Q(B)\\cong\\prod_{\\mathfrak q}B_{\\mathfrak q}$, with $B_{\\mathfrak q}$ a field and $\\mathfrak qB_{\\mathfrak q}=0$. Thus $B\\to B_{\\mathfrak q}$ factors through $B/\\mathfrak q$, and every nonzero class in this domain maps to a unit, since its representative is outside $\\mathfrak q$. The induced map $\\operatorname{Frac}(B/\\mathfrak q)\\to B_{\\mathfrak q}$ and the localization map in the reverse direction both send a fraction $b/s$ to the same fraction, hence are inverse. Each $B/\\mathfrak q$ is finite over $R$ and the map from $R$ is injective by Step 5, so the finite-domain-fraction-degree statement makes $L_{\\mathfrak q}/K$ finite. Combining these maps with Step 7 gives the asserted isomorphism. All component maps send $b\\otimes(a/s)$ to $a\\bar b/\\bar s$, so it is the canonical map in the statement.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-trf-finite-domain-fraction-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02LX, lemma-total-ring-fractions-no-embedded-points; Tag 00EU, lemma-minimal-prime-reduced-ring; elementary identification of the component field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-trf-finite-domain-fraction-degree",
+  "lem-weil-pbc-artinian-finite-over-residue-finite",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-weil-pbc-noetherian-local-dimension-le-generators",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-domain",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 032D, lemma-complete-local-Noetherian-domain-finite-over-regular, supplied-parameter argument in Cases I and II; componentwise reduced extension as in ILO IV 2.1.12; general complete DVR adaptation as in ILO IV 4.2.5; generic decomposition Tag 02LX."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +184,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-cohen-gabber-finite-presentations",
@@ -69,7 +196,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5. Supporting input: Finite formal normalization for supplied parameter ideals",
+   "place": "Current split of blueprint ancestor lem-per-artin-gabber-affine-curve: the finite formal parameter normalization used in Step 4 of lem-per-gabber-local-duality-general; equal-characteristic proof follows ILO IV 2.1.4–2.1.12 and mixed-characteristic proof follows ILO IV 4.2.3–4.2.5.",
    "via": [
     "lem-per-cohen-gabber-finite-presentations",
     "lem-per-gabber-partial-algebraization",
@@ -81,5 +208,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-parameter-ideal-formal-normalization",
+  "worker": "stage1",
+  "summary": "Eight steps construct evaluation, establish source structure and dimension for fields and arbitrary complete DVRs, prove finiteness using the supplied radical ideal, prove componentwise injectivity and torsion-freeness, and identify the generic product by explicit fraction maps. Repaired the retained attempt: the Cohen-only source lemma and existential parameter lemma do not state their previous uses. Replaced them with general existing power-series statements and a generator-power argument. No statement change or new nodes.",
+  "blueprint": "The eight steps supply the finite formal normalization used by lem-per-cohen-gabber-finite-presentations in the ancestor proof of lem-per-artin-gabber-affine-curve: Steps 1–2 source algebra, Step 3 evaluation, Step 4 finite generation, Steps 5–6 componentwise injectivity and torsion-freeness, and Steps 7–8 the canonical generic product. The original unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Combined-ideal completeness for the given complete DVR; a ring-theoretic tool independent of the perverse-sheaf route."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-quotient-variables",
+    "why": "Identifies the constant-coefficient quotient and successive variable quotients; an algebraic tool not supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "why": "Dimension drops for successive variables and a hypothetical kernel element; this unit contains no substitute for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "why": "Artinianness of the actual supplied parameter quotient, after checking the maximal-ideal power containment."
+   },
+   {
+    "node": "lem-weil-pbc-artinian-finite-over-residue-finite",
+    "why": "Finite generation of the Artinian parameter quotient over the common residue field."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-ring",
+    "why": "Finite generation from source completeness, target separatedness and the finite parameter quotient."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Integrality of each finite component map over the source quotient; generic algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-extension-dimension",
+    "why": "Dimension bound contradicting a nonzero kernel on each full-dimensional component."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "why": "Converts componentwise injectivity into torsion-freeness of a reduced ring."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Canonical product decomposition of the reduced total ring of fractions. All these tools are below the unit route, not replacements of it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-artinian-finite-over-residue-finite",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-6947bc2f1",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-6947bc2f1 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full against Stacks 032D Cases I/II (algebra.tex l.45064) and 031D (l.22860). The statement did not change and is true. Case (a) is reduced and equidimensional with a coefficient field; case (b) is a domain over an arbitrary complete DVR. Its clauses cover how the parent cohen-gabber-finite-presentations uses it in steps 3, 4 and 8. The cited statements give every claim the steps take from them. Step 1 builds R with maximal ideal I, Noetherian, local, a domain and complete, from the general power-series nodes. Step 2 gets dim R=e+dim Λ from quotient-variables, nonzerodivisor-dimension and the generator bound for a DVR. Step 3 uses the universal property with B 𝔫-adically complete, and locality comes from the residue isomorphism (π∈𝔫 because Λ→B is local). Step 4 replaces the old existential-parameters citation with a correct pigeonhole bound 𝔫^N⊆J from the supplied radical. It then checks Artinian quotient → finite over k → all three 031D hypotheses, with separatedness taken from the completeness definition. Step 5 proves injectivity on each component by the dimension contradiction through R/(f)→C integral. Step 6 gets torsion-freeness from the reduced zero-divisor criterion. Steps 7–8 prove the tensor ≅ S⁻¹B ≅ Q(B) ≅ ∏ Frac(B/𝔮) chain explicitly, with L_𝔮/K finite. Small cases checked: e=0 in both cases, k[[x,y]]/(xy) with t=x+y, and a ramified DVR. I found no duplicate in the DAG and the delivery adds no new nodes. Batch-5 flag: lem-trf-finite-domain-fraction-degree is a Mathlib leaf (instFiniteDimensionalFractionRingOfFinite) whose only deps are definitions. It is general algebra, not a step of the trace formula or Poincaré duality or their proofs, so I accept it. I accept the declared sk-thm-p1 tool uses, plus the undeclared lem-weil-pbc-power-series-universal-property-complete as a generic algebra tool for the maintainer to record. There is no SGA citation and no fixes."
  }
 }
