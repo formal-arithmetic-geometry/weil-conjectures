@@ -19,9 +19,189 @@
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-etale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=\\mathbf F_\\ell$. First reduce to constructible $B$-module sheaves. For the given $C$ set $C_i=\\operatorname{im}(\\ell^i:C\\to C)$, $0\\leq i\\leq n$. The kernel/cokernel closure in [thm-constructible-serre] makes each $C_i$ and $Q_i=C_i/C_{i+1}$ constructible. Multiplication by $\\ell$ kills $Q_i$, so it is a sheaf of $B$-modules; on each defining locally constant finite stratum, its finite module is simply regarded as a $B$-vector space, hence it remains constructible. We have $C_0=C$, $C_n=0$, and $0\\to C_{i+1}\\to C_i\\to Q_i\\to0$. Exact forgetting of module structures is [lem-weil-pbc-module-sheaves-colimits-forgetful]. Thus these are short exact sequences of abelian sheaves. The cohomology exact sequences in [lem-weil-pbc-pullback-cohomology-long-exact-ladder], with the scheme map the identity, show by descending induction on $i$ that vanishing above $d$ for all $Q_i$ implies vanishing above $d$ for $C$.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3: reduction to prime coefficients, expanded by the finite multiplication filtration; constructibility: Stacks, etale-cohomology.tex, Tag 09BH, proposition-constructible-over-noetherian (Serre property)."
+   }
+  },
+  {
+   "text": "On $V$ let $\\mathcal A$ be the full class of $B$-module sheaves $F$ with $H^q(V,F)=0$ for every $q>d$, always taking underlying abelian-sheaf cohomology. This class is closed under extensions by the exact sequence of [lem-weil-pbc-pullback-cohomology-long-exact-ladder] and exact forgetting [lem-weil-pbc-module-sheaves-colimits-forgetful]. It is closed under finite sums and retracts: cohomology is additive, so it carries a finite biproduct to the same biproduct, and a split pair to a split pair. Additivity is supplied by the right-derived delta-functor theorem [lem-weil-pbc-right-derived-universal-delta-functor]; abelian sheaves have enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives], and global sections evaluate at the terminal object [def-weil-pbc-global-sections-functor]. Evaluation is additive and preserves kernels: sums of maps and kernels of sheaf morphisms are computed on sections. Thus this is the left exact additive functor to which that theorem applies. The affine open $V$ is Noetherian by [pqf-lem-affine-open-locnoeth]. Apply [lem-per-constructible-finite-open-constant-generation] to $S=V$ and the finite field $B$. It suffices to prove the bound for $\\pi_*k_!B_W$, where $\\pi:T\\to V$ is finite, $T$ is integral, and $k:W\\hookrightarrow T$ is a nonempty open immersion. This is the finite-pushforward/trace reduction of XV 1.2.3, in the form proved in XIII 3.7.2; no assertion about arbitrary subquotients of $\\mathcal A$ is used.",
+   "uses": [
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-weil-pbc-global-sections-functor",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-per-constructible-finite-open-constant-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3 and XIII 3.7.2 (printed pp. 219 and 203), expanded using the existing finite-field generator theorem. Its trace input is Stacks Tag 03SH, not an SGA source."
+   }
+  },
+  {
+   "text": "Fix one such generator. Write $X=\\operatorname{Spec}R$, $V=\\operatorname{Spec}R_V$, and $T=\\operatorname{Spec}E$; $E$ is a domain, finite over $R_V$, by the definition of finite morphism [def-weil-finite-integral-morphism]. The inclusion $V\\hookrightarrow X$ is quasi-compact: an affine open of the affine $X$ is a finite union of principal opens, since principal opens form a basis and $V$ is quasi-compact [lem-weil-pbc-affine-scheme-qcqs]. Consequently [lem-weil-pbc-qc-open-immersion-finite-type] makes this inclusion finite type. The map $R_V\\to E$ is finite type by [lem-weil-pbc-finite-ring-map-quasi-finite], and the composite $T\\to X$ is finite type by [lem-sfb-finite-type-composition-base-change]. Each of its fibres is either empty or a fibre of the finite map $\\pi$, so is finite by [lem-weil-pbc-finite-closed-map-finite-fibres]. The criterion [pqf-lem-qf-finitefibres] now makes $T\\to X$ quasi-finite.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "pqf-lem-qf-finitefibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3; affine Zariski-main preparation. Stacks morphisms.tex Tag 01TU, lemma-quasi-compact-open-immersion-finite-presentation (quasi-compact open immersion), 01T3 (finite-type composition), 02NH (finite fibres)."
+   }
+  },
+  {
+   "text": "The hypothesis of that theorem holds: $R\\to E$ is of finite type by Step 3, and by the definition of quasi-finite morphism [pqf-def-quasifinite] every point of the affine $T=\\operatorname{Spec}E$ is isolated in its fibre $\\operatorname{Spec}(E\\otimes_R\\kappa(\\mathfrak p))$, which is precisely quasi-finiteness of $R\\to E$ at every prime [def-weil-pbc-ring-map-quasi-finite-at-prime]. Apply [lem-weil-pbc-quasi-finite-ring-map-integral-closure-open], clause (3), to $R\\to E$. It gives a finite $R$-subalgebra $A\\subseteq E$ for which $T\\to Y=\\operatorname{Spec}A$ is an open immersion. As a subring of the domain $E$, $A$ is a domain, and this open is dense and nonempty: its generic point maps to the zero prime of $A$. In particular $Y$ is integral and finite over $X$. This uses the subalgebra clause of the cited theorem, rather than assuming an arbitrary finite compactification is integral.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "lem-weil-pbc-quasi-finite-ring-map-integral-closure-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3; affine Zariski main theorem, Stacks algebra.tex Tag 00QB, lemma-quasi-finite-open-integral-closure, clause (3)."
+   }
+  },
+  {
+   "text": "The open $T\\subseteq Y$ is exactly $Y\\times_XV$. Indeed it is contained in that inverse image by its map to $V$. Put $A_V=A\\otimes_R R_V$, the coordinate ring of $Y\\times_XV$. The map $A_V\\to E$ makes $E$ finite over $A_V$: the same finitely many generators over $R_V$ generate over $A_V$, because the map is compatible with $R_V\\to E$. Thus the open immersion $T\\to Y\\times_XV$ is finite by [def-weil-finite-integral-morphism], and its image is closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. It is also dense because $T$ is dense in $Y$. Its image is therefore all of $Y\\times_XV$, and an open immersion with full image is an isomorphism [def-weil-open-immersion]. In particular $T$ is an affine open of $Y$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3, finite-open compactification; the same cartesian identification is written explicitly in Stacks etale-cohomology.tex, proof of lemma-vanishing-easier-coefficients (Tag 0GJH)."
+   }
+  },
+  {
+   "text": "The finite integral model $Y$ has the required local properties. By [lem-weil-pbc-finite-over-henselian-local-product], $A$ is a finite product of henselian local rings. Since $A$ is a nonzero domain, only one nonzero factor occurs, so $A$ itself is henselian local and its residue field is finite over the separably closed residue field of $R$. That extension is separably closed by [lem-kun-sep-closed-finite-extension-sep-closed]; hence $A$ is strictly henselian. A finite $R$-algebra is finite type, so $A$ is excellent by [lem-exc-finite-type-localization-excellent] with multiplicative set $\\{1\\}$. The subalgebra $A$ is contained in the integral closure of $R$ in $E$, so it is integral over $R$; [lem-weil-pbc-integral-extension-dimension] gives $e=\\dim A\\leq\\dim R=d$. Thus $Y$ is a Noetherian excellent strictly local integral scheme of finite dimension $e\\geq0$, with $\\ell$ invertible. Excellence implies quasi-excellence by [def-exc-excellent-ring].",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-kun-sep-closed-finite-extension-sep-closed",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-integral-extension-dimension",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3 finite-pushforward reduction; Stacks Tags 04GH, 07QU, and the integral-extension dimension theorem."
+   }
+  },
+  {
+   "text": "Let $F=T\\setminus W$ with its reduced induced closed structure, and let $Z$ be its reduced closure in $Y$, as supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Because $F$ is closed in the open $T$, its closure meets $T$ in precisely $F$; uniqueness of reduced induced structure identifies $F=Z\\times_YT$. Thus $F$ is an affine open of $Z$, since it is closed in the affine $T$. The subset $Z$ misses the generic point of the integral $Y$, as the nonempty open $W\\subseteq T$ contains that point. Every strict chain in $Z$ can therefore be extended by the generic point of $Y$, proving $\\dim Z\\leq e-1$ when $Z$ is nonempty. If $e=0$, $Z$ is empty. Otherwise $Z=\\operatorname{Spec}(A/I)$ for a proper ideal $I$ in the local $A$. The quotient is strictly henselian by [lem-weil-pbc-strictly-henselian-quotient], and excellent by [lem-exc-finite-type-localization-excellent] applied to the finite-type quotient algebra and $\\{1\\}$. It has the inherited invertible $\\ell$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-strictly-henselian-quotient",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3: remove the closed boundary after finite compactification; XIII 3.7.4 explains this open-closed reduction. Dimension drop is the explicit chain argument, not an additional vanishing theorem."
+   }
+  },
+  {
+   "text": "Use the constant-coefficient bound [lem-per-affine-open-strict-local-constant-bound] with $m=\\ell$ on the affine open $T\\subseteq Y$: $H^q(T,B)=0$ for $q>e$. If $Z$ is nonempty, it is strictly local excellent (therefore quasi-excellent) of dimension $r\\leq e-1$, and $F\\subseteq Z$ is affine open, so the same bound gives $H^a(F,B)=0$ for $a>r$. In particular, for $q>d$ we have $q>e$ and $q-1\\geq d\\geq e>r$, hence $H^q(T,B)=H^{q-1}(F,B)=0$. If $Z$ is empty then $F$ is empty and the latter group is zero directly. The proof uses only the constant case of XV 1.2.4, with the actual dimensions $e,r$ of the two finite local models.",
+   "uses": [
+    "lem-per-affine-open-strict-local-constant-bound",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV Corollaire 1.2.4, printed p. 220, applied twice after the reductions of 1.2.3; XIII 3.7.4 supplies the boundary pattern."
+   }
+  },
+  {
+   "text": "Apply the open-closed triangle [lem-cbc-open-closed-recollement] on $T$ to $B_T[0]$, with closed complement $i:F\\hookrightarrow T$ of $k:W\\hookrightarrow T$. Constant inverse image is identified with the corresponding constant sheaf by [lem-pe-constant-left-module-inverse-image]. As these are exact sheaf functors, degree-zero cohomology of the triangle gives $0\\to k_!B_W\\to B_T\\to i_*B_F\\to0$. Forget scalars using [lem-weil-pbc-module-sheaves-colimits-forgetful] and take its cohomology sequence [lem-weil-pbc-pullback-cohomology-long-exact-ladder]. The closed immersion $i$ is finite by [lem-weil-pbc-closed-immersion-finite], so [lem-weil-pbc-finite-pushforward-cohomology] identifies the relevant exact segment as $$H^{q-1}(F,B)\\longrightarrow H^q(T,k_!B_W)\\longrightarrow H^q(T,B).$$ For $q>d$ both outside groups vanish by Step 8; hence $H^q(T,k_!B_W)=0$. Here $q\\geq1$, including $d=0$, so the displayed degrees are nonnegative.",
+   "uses": [
+    "lem-cbc-open-closed-recollement",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-pushforward-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3 and XIII 3.7.4: the localization triangle expanded as a short exact sequence; Stacks etale-cohomology.tex Tag 095L, lemma-ses-associated-to-open, and Tag 03QP for finite pushforward."
+   }
+  },
+  {
+   "text": "Finally apply [lem-weil-pbc-finite-pushforward-cohomology] to $\\pi:T\\to V$ and the underlying abelian sheaf of $k_!B_W$. It gives $$H^q(V,\\pi_*k_!B_W)\\cong H^q(T,k_!B_W)=0\\qquad(q>d).$$ The ordinary module direct image has the same underlying abelian direct image: both evaluate on an etale object $U\\to V$ by sections on $U\\times_VT$, as in [def-weil-pbc-direct-image]. Every generator of Step 2 is consequently in $\\mathcal A$. The finite-sum, extension and retract closure established there and [lem-per-constructible-finite-open-constant-generation] put every constructible $B$-module sheaf in $\\mathcal A$. Apply this to the $Q_i$ of Step 1 and use its descending induction to obtain the required vanishing for $C$ over $\\mathbf Z/\\ell^n\\mathbf Z$. The zero sheaf and empty $V$ give zero cohomology directly and are also allowed by the empty finite constructions.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "def-weil-pbc-direct-image",
+    "lem-per-constructible-finite-open-constant-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3 (finite pushforward, trace, constant reduction), completed by the finite multiplication filtration of Step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-constructible-serre",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-pbc-global-sections-functor",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-per-constructible-finite-open-constant-generation",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "pqf-lem-qf-finitefibres",
+  "lem-weil-pbc-quasi-finite-ring-map-integral-closure-open",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-kun-sep-closed-finite-extension-sep-closed",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-integral-extension-dimension",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-per-affine-open-strict-local-constant-bound",
+  "lem-cbc-open-closed-recollement",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "def-weil-pbc-direct-image",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XV 1.2.3–1.2.4 and XIII 3.7.2–3.7.4; finite-model and boundary reductions expanded with the cited Stacks statements."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -229,10 +409,53 @@
    },
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber affine Lefschetz theorem for constructible finite torsion sheaves on affine opens of excellent strictly local schemes",
+   "results": {
+    "t": "2026-10-18T21:41:01Z",
+    "tool": "leanfinder",
+    "query": "Gabber affine Lefschetz theorem for constructible finite torsion sheaves on affine opens of excellent strictly local schemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit"
+    ],
+    "digest": "f25422fbfd9d230b"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: returned affine algebra and section lemmas do not state the etale cohomological-dimension bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Etale, cohomology, constructible, affine",
+   "results": {
+    "t": "2026-10-18T21:41:02Z",
+    "tool": "loogle",
+    "query": "Scheme.Etale, cohomology, constructible, affine",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Scheme.Etale'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: returned affine algebra and section lemmas do not state the etale cohomological-dimension bound"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-affine-open-strict-local-cd",
@@ -244,12 +467,146 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 1: the affine-open cohomological-dimension input in the specialization to an affine open immersion; ILO XV, Corollary 1.2.2 (printed p. 219) for the open immersion V -> X and a constructible sheaf, whose constant-coefficient case is Corollary 1.2.4 (printed p. 220).",
+   "place": "Proof Step 1: strictly local finite-coefficient dimension estimates underlying the middle t-structure; the constructible affine-open estimate used through lem-per-affine-open-strict-local-cd, now reduced to constants by XV 1.2.3.",
    "via": [
     "lem-per-affine-open-strict-local-cd"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-affine-open-strict-local-cd-constructible",
+  "worker": "stage1",
+  "summary": "Repair D3/C1: replace the single invocation of the entire affine Lefschetz theorem by prime-power filtration, the existing finite-field finite-open trace generators, an integral finite model across the affine open, a boundary dimension drop, two applications of the new constant bound, the localization exact sequence, and finite-pushforward cohomology. No statement change. One new statement-only constant-coefficient node, searched in Mathlib; all other tools are reused.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, Step 1: dimension-normalized duality/middle t-structure via the strict-local dimension bounds. Steps 1–2 and 10 realize XV 1.2.3 coefficient and trace reductions; Steps 3–7 make the finite models and lower-dimensional boundary explicit; Steps 8–9 reduce to the independent constant bound XV 1.2.4.",
+  "tool_uses": [
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic input used in proof step(s) 1 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic input used in proof step(s) 1, 2, 9 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Generic input used in proof step(s) 1, 2, 9 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic input used in proof step(s) 2 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Generic input used in proof step(s) 2 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic input used in proof step(s) 2 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic input used in proof step(s) 3 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic input used in proof step(s) 3 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "why": "Generic input used in proof step(s) 3 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic input used in proof step(s) 3 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic input used in proof step(s) 3, 5 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "pqf-lem-qf-finitefibres",
+    "why": "Generic input used in proof step(s) 3 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-ring-map-integral-closure-open",
+    "why": "Generic input used in proof step(s) 4 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic input used in proof step(s) 6 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-kun-sep-closed-finite-extension-sep-closed",
+    "why": "Generic input used in proof step(s) 6 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic input used in proof step(s) 6, 7 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-extension-dimension",
+    "why": "Generic input used in proof step(s) 6 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic input used in proof step(s) 7 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-quotient",
+    "why": "Generic input used in proof step(s) 7 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic input used in proof step(s) 9 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic input used in proof step(s) 9 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Generic input used in proof step(s) 9 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-cohomology",
+    "why": "Generic input used in proof step(s) 9, 10 for the explicit finite-model/constant-coefficient reduction; the unit does not supply this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-constructible-serre",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "pqf-lem-qf-finitefibres",
+  "lem-weil-pbc-quasi-finite-ring-map-integral-closure-open",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-kun-sep-closed-finite-extension-sep-closed",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-cbc-open-closed-recollement",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-pushforward-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-00eb7d3cb",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-00eb7d3cb (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-affine-open-strict-local-constant-bound, every cited statement and ILO XV §1 (printed pp. 219–220). The item is unchanged and is XV 1.2.2 for the affine open immersion V→X with bound q>d. The new node is exactly XV Corollaire 1.2.4 (constant Z/m, q>e). It carries the statement only, its blueprint/created/searches fields are valid, and it is strictly smaller than the item: no D1/D2 relabelling. The rg duplicate search found nothing; the parent would make a cycle. Small cases checked: e=0, e=1 (strictly henselian DVR generic point, cd≤1), m=1. Steps checked against the cited statements: (1) ℓ-power filtration via thm-constructible-serre and the long exact ladder; (2) the generation node's statement gives exactly the generators and the sum/extension/summand closure; (3) T→X quasi-finite by 02NH; (4) 00QB(3) gives finite A⊆E; (5) T=Y×_XV; (6) A strictly henselian, excellent, dim ≤ d (04GH, 07QU, integral dimension); (7) boundary Z has dim ≤ e−1, strictly henselian and excellent; (8) constant node on the affine opens T⊆Y and F⊆Z with q>d≥e>r; (9) recollement short exact sequence plus finite pushforward; (10) return along π. FIX: Step 4 applied 00QB, which needs R→E quasi-finite at every prime in the ring sense, from Step 3's scheme-level quasi-finiteness with no bridge. I added the definitional sentence and cited pqf-def-quasifinite and def-weil-pbc-ring-map-quasi-finite-at-prime (step uses and proof_deps). Batch-5 flag: the only sec-trace-formula node in the closure is lem-trf-reduced-scheme-image (Stacks 056B, the scheme-theoretic image of a reduced scheme is the reduced closure). That is generic scheme theory, not part of the trace formula or Poincaré duality, so I accept it. No SGA is cited. The generic off-unit tool_uses are accepted. Maintainer note: the item's source.place still says 'not the reduction of 1.2.3'; it is stale against the new proof but not a split-owned field, so I left it.; 1 file(s) fixed by the reviewer"
  }
 }
