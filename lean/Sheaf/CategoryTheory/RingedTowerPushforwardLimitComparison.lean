@@ -5,6 +5,7 @@ Authors: SHEAF groups NU and S1
 -/
 module
 
+public import Sheaf.CategoryTheory.RingedToposMorphism
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.CategoryTheory.RingedTowerPushforwardLimitAcyclic
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
