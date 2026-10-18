@@ -267,6 +267,7 @@ theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_rationalPoint
   obtain ⟨e₁⟩ := WeilSheaf.nonempty_equiv_stalk_upperStar p
     ((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)) y
     (affineLine.rationalPoint k₀ a) rfl (hdy.trans hdx.symm)
+  replace e₁ := e₁.symm
   -- the stalk on the point is the global sections
   set G := (WeilSheaf.upperStar p).obj ((WeilComplex.homologySheaf r).obj
     ((fourierTransform ψ).obj K))

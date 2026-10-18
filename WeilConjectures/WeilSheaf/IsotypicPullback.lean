@@ -62,12 +62,8 @@ lemma lowerStar_map_adicConstantSheafToLowerStar_comp_torsorTranslation (g : G) 
   apply pullback.hom_ext
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
       MorphismProperty.Over.pullback, MorphismProperty.Over.mk]
-  · simp only [Functor.id_obj, Functor.const_obj_obj, Functor.comp_obj, Quiver.Hom.unop_op,
-      MorphismProperty.Over.pullbackComp_inv_app_left, pullback.map_id, Category.comp_id,
-      Category.assoc, MorphismProperty.Over.pullbackComp_hom_app_left, Category.id_comp,
-      limit.lift_π, PullbackCone.mk_π_app, MorphismProperty.Over.pullbackCongr,
-      MorphismProperty.Over.pullback, MorphismProperty.Over.mk]
-    rw [hτs]
+  · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
+      MorphismProperty.Over.pullback, MorphismProperty.Over.mk, hτs]
 
 
 /-- Pulling back functions along `s` commutes with pulling back along automorphisms `e_W`,
@@ -91,6 +87,27 @@ lemma adicConstantSheafToLowerStar_lowerStarExchange (eW : W ⟶ W) (eW₁ : W�
   simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
       MorphismProperty.Over.pullback, MorphismProperty.Over.mk]
 
+
+/-- The pullback of functions along `s` is compatible with the structure isomorphisms
+`(e_W⁻¹)_* ℚ̄_ℓ ≅ ℚ̄_ℓ` and `(e_{W₁}⁻¹)_* ℚ̄_ℓ ≅ ℚ̄_ℓ` for automorphisms with
+`s ≫ e_{W₁}⁻¹ = e_W⁻¹ ≫ s` (the form of the Weil structures of pushforwards). -/
+lemma adicConstantSheafToLowerStar_lowerStarExchange_iso (eW : W ≅ W) (eW₁ : W₁ ≅ W₁)
+    (hc : s ≫ eW₁.inv = eW.inv ≫ s) :
+    (eW₁.inv)_*[WeilCoefficients.{u} l].map (adicConstantSheafToLowerStar l s) ≫
+      (lowerStarComp (WeilCoefficients.{u} l) s eW₁.inv).hom.app _ ≫
+      (lowerStarCongr (WeilCoefficients.{u} l) hc).hom.app _ ≫
+      (lowerStarComp (WeilCoefficients.{u} l) eW.inv s).inv.app _ ≫
+      (s)_*[WeilCoefficients.{u} l].map (adicConstantSheafLowerStarIso l eW.symm).hom =
+    (adicConstantSheafLowerStarIso l eW₁.symm).hom ≫ adicConstantSheafToLowerStar l s :=
+  have h := adicConstantSheafToLowerStar_lowerStarExchange (l := l) s eW.inv eW₁.inv hc
+  rw [← Iso.inv_comp_eq]
+  change adicConstantSheafToLowerStar l eW₁.inv ≫ _ = _
+  simp only [← Category.assoc] at h ⊢
+  rw [h, Category.assoc, ← CategoryTheory.Functor.map_comp]
+  change _ ≫ (s)_*[WeilCoefficients.{u} l].map
+    ((adicConstantSheafLowerStarIso l eW.symm).inv ≫ (adicConstantSheafLowerStarIso l eW.symm).hom) =
+      _
+  rw [Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.comp_id]
 
 variable (l) in
 /-- The morphism `ℚ̄_ℓ ⟶ s_* ℚ̄_ℓ` of sheaves of `ℚ̄_ℓ`-modules pulling back functions along

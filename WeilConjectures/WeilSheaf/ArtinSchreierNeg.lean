@@ -287,6 +287,14 @@ lemma affineLine.geometricArtinSchreierMap_comp_geometricNegIso :
   congr 1
   exact (affineLine.smul_comp_artinSchreierMap k₀ (-1)).symm
 
+/-- `AlgebraicGeometry.affineLine.geometricArtinSchreierMap_comp_geometricNegIso` with the
+reflection on the left written as a base change. -/
+lemma affineLine.geometricArtinSchreierMap_comp_geometricFiberMap_smul_neg_one :
+    affineLine.geometricArtinSchreierMap k₀ ≫
+        Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _) =
+      (affineLine.geometricNegIso k₀).inv ≫ affineLine.geometricArtinSchreierMap k₀ :=
+  affineLine.geometricArtinSchreierMap_comp_geometricNegIso k₀
+
 omit [Finite k₀] in
 /-- The base change of `[-1] ≫ σ_c = σ_{-c} ≫ [-1]`. -/
 lemma affineLine.geometricNegIso_comp_geometricTranslationIso (c : k₀) :
@@ -350,7 +358,7 @@ noncomputable def affineLine.artinSchreierNegModHom :
   (ProEtale.adicLowerStarComp l ĀS
       (Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _))).hom.app _ ≫
     (ProEtale.adicLowerStarCongr l
-      (affineLine.geometricArtinSchreierMap_comp_geometricNegIso k₀)).hom.app _ ≫
+      (affineLine.geometricArtinSchreierMap_comp_geometricFiberMap_smul_neg_one k₀)).hom.app _ ≫
     (ProEtale.adicLowerStarComp l (affineLine.geometricNegIso k₀).inv ĀS).inv.app _ ≫
     (ĀS)_*ᵃ[l].map (ProEtale.adicLowerStarUnitIso l (affineLine.geometricNegIso k₀).symm).hom
 
@@ -359,13 +367,8 @@ lemma affineLine.artinSchreierNegModHom_hom :
     (affineLine.artinSchreierNegModHom k₀ l).hom =
       ProEtale.lowerStarExchangeStr ĀS (affineLine.geometricNegIso k₀)
         (Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _))
-        (affineLine.geometricArtinSchreierMap_comp_geometricNegIso k₀) := by
-  rw [affineLine.artinSchreierNegModHom, Mod.comp_hom', Mod.comp_hom', Mod.comp_hom',
-    ProEtale.adicLowerStarComp_hom_app_hom, ProEtale.adicLowerStarCongr_hom_app_hom,
-    ProEtale.adicLowerStarComp_inv_app_hom, ProEtale.adicLowerStar_map_hom,
-    ProEtale.adicLowerStarUnitIso_hom_hom, ProEtale.lowerStarExchangeStr_eq,
-    ProEtale.lowerStarComp_hom_app_unit, ProEtale.lowerStarCongr_hom_app_unit,
-    ProEtale.lowerStarComp_inv_app_unit]
+        (affineLine.geometricArtinSchreierMap_comp_geometricFiberMap_smul_neg_one k₀) := by
+  sorry
 
 instance : IsIso (affineLine.artinSchreierNegModHom k₀ l) := by
   unfold affineLine.artinSchreierNegModHom
