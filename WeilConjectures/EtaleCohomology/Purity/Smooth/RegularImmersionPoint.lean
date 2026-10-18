@@ -83,7 +83,6 @@ lemma supportedClassMap_supportedUnitClass_comp
   simp only [supportedClassMap, rightDerivedLowerShriekTranspose, supportedUnitClass,
     Category.assoc, NatTrans.naturality, IsIso.inv_hom_id_assoc]
   rw [Adjunction.homEquiv_naturality_right_symm, Equiv.symm_apply_apply, Iso.inv_hom_id_assoc]
-  rfl
 
 /-- Every class with supports `γ : Λ_X ⟶ Ri_! Ri^! L` is the class `1` followed by `Ri_!` of its
 adjoint `Λ_Z ⟶ Ri^! L` (`AlgebraicGeometry.Etale.supportedClassMap`). -/
@@ -143,16 +142,13 @@ theorem isIso_sectionUnitClass (h : s ≫ p = 𝟙 Y) : IsIso (sectionUnitClass 
             (compactificationConstantComplexIso Λ s).hom) ≫
         inv ((rightDerivedLowerShriekToLowerStarComp (ModuleCat.{u + 1} Λ) s).app _)) ≫
       (rightDerivedLowerShriekIsoRightDerivedLowerStar _ p).inv.app _ := by
+    have nat := adjgi.unit.naturality (leftDerivedUpperStarConstantComplexIso Λ p).hom
+    simp only [Functor.id_map] at nat
     simp only [sectionUnitClass, supportedUnitClass, adj, Adjunction.comp_unit_app,
-      Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
-    rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
-      ← Functor.map_comp_assoc]
-    congr 3
-    have := adjgi.unit.naturality (leftDerivedUpperStarConstantComplexIso Λ p).hom
-    simp only [Functor.id_map, Functor.comp_map] at this
-    simp only [adjgi, Adjunction.comp_unit_app, Functor.comp_map, Functor.map_comp,
-      Category.assoc] at this ⊢
-    rw [reassoc_of% this]
+      Adjunction.homEquiv_unit, Category.assoc]
+    rw [reassoc_of% nat]
+    simp only [Functor.map_comp, Category.assoc, Functor.comp_map, adjgi,
+      Adjunction.comp_unit_app]
   rw [hu]
   infer_instance
 
