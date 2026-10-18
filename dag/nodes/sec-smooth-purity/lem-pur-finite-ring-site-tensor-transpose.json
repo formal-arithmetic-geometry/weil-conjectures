@@ -373,5 +373,43 @@
   "group": "Q152",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-ad1c715db (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the statement of every cited node (15 statement deps, 20 proof deps), the parent det-sp-finite-general-ring (its steps 3 and 5 cite this item) and its 2026-10-15 blueprint Proof (2)/(3), and Stacks 09SN and 0GL1. There are no new nodes. Against the side-DAG base, the only statement change swaps the proper-factor citation from the D⁺-only lem-weil-pbc-comparison-direct-image-canonical-mate to lem-sfb-unbounded-direct-image-comparison: the same counit-mate normalization on unbounded complexes, so nothing is weakened, and the report names the change. Hypotheses (k=F̄_q, any finite ℓ-primary A including the zero ring, separated finite-type X, Y, chosen compactification) match every cited node; Step 1 supplies the Noetherian hypotheses. Pro-étale coefficients are reached only through the ring identification in det-ctf-finite-comparison-localizing, so the two coefficient categories are not silently identified. Step 2's generator argument is correct; det-ctf-finite-comparison-whole states the same equality but sits in an off-route unit, so re-deriving it from on-route nodes is not a fault. Step 4's transport and counit formula check out, and det-sp-unique-right-adjoint gives exactly assertion 1, uniqueness included. I recomputed the Step 6 transpose (normalization at H, the PF definition, cancellation of b_P) and it equals PF_p. Steps 7–10 check out: invertibility, the open square checked via the j_! ⊣ j* adjunct and K-flat summands, the pasting with β_f = Rp_*(e_j)∘b, and the transpose equality by adjunct injectivity. Step 11 covers the opposite tensor order, X=∅ and A=0. proof_deps equals the union of uses, there is no cycle, no SGA, no merged ids. No existing node duplicates the unbounded arbitrary-ring statement. Minor wording: the statement's description of PF_f only type-checks as Step 9's order (proper map first); this wording was already in the base and is left unchanged. Accepted tool_uses: lem-sfb-unbounded-site-comparison, det-ctf-finite-comparison-localizing and lem-sfb-unbounded-direct-image-comparison (unit sk-prop-ctf-finite-comparison), and lem-trf-open-tensor (sk-lem-sf-open-ctf). det-sp-unique-right-adjoint (a Mathlib leaf) and def-kun-projection-formula-map (a definition) need no tool use. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingSiteTensorTranspose",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTranspose",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteRingSitePull",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensor",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteUnit",
+   "AlgebraicGeometry.ProEtale.finiteRingSitePullback",
+   "AlgebraicGeometry.ProEtale.finiteRingEtaleShriek",
+   "AlgebraicGeometry.ProEtale.finiteRingProShriek",
+   "AlgebraicGeometry.ProEtale.finiteRingEtalePF",
+   "AlgebraicGeometry.ProEtale.finiteRingProPF",
+   "AlgebraicGeometry.ProEtale.finiteRingRestriction",
+   "AlgebraicGeometry.ProEtale.finiteRingImageLift",
+   "AlgebraicGeometry.ProEtale.finiteRingTensorPullbackComparison",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeStatement",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeSiteFunctors",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeCanonicalTensor",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeCanonicalSymmetry",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeWithCoefficients",
+   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTranspose"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingSiteTensorTranspose.lean",
+  "statement": "theorem finiteRingSiteTensorTranspose (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ D.p) (hB : ∃ n : ℕ, (ℓ : B) ^ n = 0) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] (c : Compactification f) [c.Z.Over (Spec (.of D.k))] [LocallyOfFiniteType (c.Z ↘ Spec (.of D.k))] [QuasiCompact (c.Z ↘ Spec (.of D.k))] [IsSeparated (c.Z ↘ Spec (.of D.k))] [c.i.IsOver (Spec (.of D.k))] [c.g.IsOver (Spec (.of D.k))] : finiteRingSiteTensorTransposeWithCoefficients (ModuleCat.{u + 1} (ULift.{u + 1} B)) c (finiteComparisonProEtaleClosure B eR X) (finiteComparisonProEtaleClosure B eR Y) (finiteComparisonCompactSupportMap B c.i c.g) (unboundedDirectImagePullbackIso (ULift.{u + 1} B) f)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the recorded ordinary fixed-module coefficient presentations and the transported finiteComparisonProEtaleClosure. The canonical compact-support comparison and both projection maps are pinned by hom equalities; the comparison of arbitrary chosen exceptional adjunctions has the explicit counit normalization. The final clause is the signed-symmetry version of the integration-transpose law."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d69b20150",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Re-delivery after the landing refused 40ee as duplicate declarations: the renamed FiniteComparisonLocalizingRepair module is removed and the owning Sheaf/Paper/FiniteComparisonLocalizing.lean is repaired in place. Its only change vs live is a one-line import swap to ProEtale.FiniteCoefficient.Derived.LowerShriekComparison. It is byte-identical to the previously reviewed repair, and all 14 declarations and signatures are unchanged. The item module is identical to 40ee except for that import; node records are unchanged apart from lean. Statement re-read clause by clause: ess image = finiteComparisonProEtaleClosure, unique ρ with the counit equation, β pinned to finiteComparisonCompactSupportMap, PF pinned to projectionMapOfCompactification, route equality, transposes in both tensor orders with DerivedCategory braidings. No extra hypotheses; X=∅ and the zero ring are covered. Statement verbatim and the 17 declarations checked; docstrings carry source, blueprint and 11 steps; sorry only; nothing hollow. nt_compile --json clean: dependency module 7.2 s, item 10.4 s. Maintainer note: overwrites NY's landed import-only det-ctf record. There are no live or pending importers, and the new import matches the family of det-ctf's recorded lem-cbc dependency."
  }
 }
