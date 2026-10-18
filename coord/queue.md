@@ -1,6 +1,6 @@
 # Work queue
 
-950 items; claim with `tools/claim.py next <group> [--stage N]`.
+951 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (950)
+## Stage 3: modules to prove (951)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -246,6 +246,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IndConstructibleFilteredColimits` | - | 2 | proof | 2 |
 | `Sheaf.Paper.IndHeartFullFaithfulness` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IndHeartKernelsCokernels` | - | 1 | proof | 2 |
+| `Sheaf.Paper.IntegralConstructibleExt` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralCtfTriangulated` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralHomReduction` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralHomReductionComparison` | - | 1 | proof | 2 |
@@ -965,7 +966,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (23)
+## Stage 3: waiting for statements of dependencies (22)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -988,7 +989,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.EtaleWeilFundamentalRepresentation` | - | 8 | `def-tw-frobenius-action` |
 | `Sheaf.Paper.IntegralConstantModelHeart` | - | 1 | `sk-lem-integral-models` |
 | `Sheaf.Paper.IntegralConstructibleCompactness` | - | 1 | `sk-lem-int-integral-heart` |
-| `Sheaf.Paper.IntegralConstructibleExt` | - | 1 | `det-lem-int-ext-bound` |
 | `Sheaf.Paper.PfRefinementCompatibility` | - | 1 | `lem-sf-proper-open-projection-mate` |
 | `Sheaf.Paper.PurityFiniteSetting` | - | 8 | `lem-pur-twist-frobenius-scalar` |
 | `Sheaf.Paper.RationalOpenDirectImageConstructible` | - | 1 | `det-prop-scalar-six-pullback` |
