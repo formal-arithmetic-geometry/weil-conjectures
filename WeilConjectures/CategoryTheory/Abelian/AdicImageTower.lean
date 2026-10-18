@@ -53,6 +53,7 @@ tower. -/
 abbrev adicImageTowerMap (m : ℕ) : H.obj (op (m + c + c)) ⟶ H.obj (op (m + c)) :=
   H.map (homOfLE (Nat.le_add_right (m + c) c)).op ≫ (ℓ ^ c • 𝟙 _)
 
+/-- The maps `ψₘ` commute with the transition maps of `H`. -/
 lemma adicImageTowerMap_comm {m k : ℕ} (h : m ≤ k) :
     H.map (homOfLE (by omega : m + c + c ≤ k + c + c)).op ≫ H.adicImageTowerMap ℓ c m =
       H.adicImageTowerMap ℓ c k ≫ H.map (homOfLE (by omega : m + c ≤ k + c)).op := by
@@ -80,6 +81,7 @@ of a tower `H`. -/
 noncomputable def adicImageTower : ℕᵒᵖ ⥤ C :=
   H.adicImageTowerArrow ℓ c ⋙ im
 
+/-- The `m`-th term of the `ℓ`-adic image tower is the image of `ψₘ`. -/
 lemma adicImageTower_obj (m : ℕ) :
     (H.adicImageTower ℓ c).obj (op m) = image (H.adicImageTowerMap ℓ c m) :=
   rfl
@@ -94,15 +96,18 @@ noncomputable def adicImageTowerι (m : ℕ) :
     (H.adicImageTower ℓ c).obj (op m) ⟶ H.obj (op (m + c)) :=
   image.ι (H.adicImageTowerMap ℓ c m)
 
+/-- `H_{m+2c} ⟶ G'ₘ` is an epimorphism. -/
 instance (m : ℕ) : Epi (H.adicImageTowerπ ℓ c m) := by
   dsimp [adicImageTowerπ]
   infer_instance
 
+/-- `G'ₘ ⟶ H_{m+c}` is a monomorphism. -/
 instance (m : ℕ) : Mono (H.adicImageTowerι ℓ c m) := by
   dsimp [adicImageTowerι]
   infer_instance
 
 @[reassoc (attr := simp)]
+/-- `ψₘ` factors as `H_{m+2c} ⟶ G'ₘ ⟶ H_{m+c}`. -/
 lemma adicImageTowerπ_ι (m : ℕ) :
     H.adicImageTowerπ ℓ c m ≫ H.adicImageTowerι ℓ c m = H.adicImageTowerMap ℓ c m :=
   image.fac _
@@ -124,6 +129,7 @@ noncomputable def adicImageTowerHom : H.adicImageTower ℓ c ⟶ H.towerShift c 
   naturality _ _ h := H.adicImageTower_map_comp_ι ℓ c (leOfHom h.unop)
 
 @[simp]
+/-- The components of `G' ⟶ (H_{m+c})ₘ` are the inclusions `G'ₘ ⟶ H_{m+c}`. -/
 lemma adicImageTowerHom_app (m : ℕ) :
     (H.adicImageTowerHom ℓ c).app (op m) = H.adicImageTowerι ℓ c m :=
   rfl
@@ -149,6 +155,30 @@ lemma pow_smul_cokernel_π_adicImageTowerι_eq_zero
       Category.id_comp, pow_add, mul_smul]
   rw [← Category.id_comp (cokernel.π _), ← Preadditive.nsmul_comp, h, Category.assoc,
     Category.assoc, cokernel.condition, Limits.comp_zero, Limits.comp_zero]
+
+section AdicTowerStructure
+
+variable {D : Type*} [Category D] [Abelian D] {G : ℕᵒᵖ ⥤ D} (A : AdicTowerStructure G ℓ)
+  (T : D ⥤ C) [T.Additive]
+
+include A in
+/-- `ℓⁿ` kills `T Gₙ` for an `ℓ`-adic tower `G` and an additive functor `T`. -/
+lemma pow_smul_id_eq_zero_of_adicTowerStructure (n : ℕ) :
+    ℓ ^ n • 𝟙 ((G ⋙ T).obj (op n)) = 0 := by
+  rw [Functor.comp_obj, ← T.map_id, ← T.map_nsmul, A.pow_smul_id_eq_zero, T.map_zero]
+
+include A in
+/-- **The cokernel of `G'ₘ ⟶ T G_{m+c}` is killed by `ℓ²ᶜ`** for the `ℓ`-adic image tower of
+`T G`, `G` an `ℓ`-adic tower and `T` an additive functor: `ℓᶜ : T Gₙ ⟶ T Gₙ` factors through
+the transition map `T G_{n+c} ⟶ T Gₙ` by `T ιₙ꜀`. -/
+lemma pow_smul_cokernel_π_adicImageTowerι_eq_zero_of_adicTowerStructure (m : ℕ) :
+    ℓ ^ (c + c) • cokernel.π ((G ⋙ T).adicImageTowerι ℓ c m) = 0 :=
+  (G ⋙ T).pow_smul_cokernel_π_adicImageTowerι_eq_zero ℓ c (fun n ↦ T.map (A.ι n c))
+    (fun n ↦ by
+      rw [Functor.comp_map, ← T.map_comp, A.ι_comp_map, T.map_nsmul, T.map_id]
+      rfl) m
+
+end AdicTowerStructure
 
 section Stalk
 

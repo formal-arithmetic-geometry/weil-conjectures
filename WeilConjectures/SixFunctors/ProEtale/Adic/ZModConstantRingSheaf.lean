@@ -55,6 +55,7 @@ noncomputable def zmodConstToContinuousMap :
     ((ContinuousMap.C (α := U.unop.left)).comp ULift.ringEquiv.toRingHom))
   naturality _ _ _ := rfl
 
+/-- The constant functions send `a` to the constant function `a`. -/
 lemma zmodConstToContinuousMap_app_apply (U : X.ProEtᵒᵖ) (a : ULift.{u + 1} (ZMod N)) :
     (zmodConstToContinuousMap X N).app U a = ULift.up (ContinuousMap.const _ a.down) :=
   rfl
@@ -95,6 +96,8 @@ noncomputable def zmodConstSheafToContinuousMap :
   ((sheafificationAdjunction (ProEt.topology X) Ab.{u + 1}).homEquiv _ _).symm
     (Functor.whiskerRight (zmodConstToContinuousMap X N) (forget₂ RingCat.{u + 1} Ab.{u + 1}))
 
+/-- `ProEtale.zmodConstSheafToContinuousMap` is the sheafification of the constant functions
+followed by the counit of the sheafification adjunction. -/
 lemma zmodConstSheafToContinuousMap_eq :
     zmodConstSheafToContinuousMap X N =
       (presheafToSheaf (ProEt.topology X) Ab.{u + 1}).map
@@ -104,10 +107,12 @@ lemma zmodConstSheafToContinuousMap_eq :
           (continuousMapRingSheaf X (ZMod N))).hom :=
   Adjunction.homEquiv_counit _ _ _ _
 
+/-- The comparison from the sheafified constant ring `ℤ/N` is a morphism of ring objects. -/
 instance : IsMonHom (zmodConstSheafToContinuousMap X N) := by
   rw [zmodConstSheafToContinuousMap_eq]
   infer_instance
 
+/-- The comparison restricted along the unit of sheafification is the constant functions map. -/
 lemma toSheafify_zmodConstSheafToContinuousMap :
     toSheafify (ProEt.topology X) _ ≫ (zmodConstSheafToContinuousMap X N).hom =
       Functor.whiskerRight (zmodConstToContinuousMap X N) (forget₂ RingCat.{u + 1} Ab.{u + 1}) := by
@@ -118,16 +123,17 @@ lemma toSheafify_zmodConstSheafToContinuousMap :
   rw [Adjunction.homEquiv_unit, sheafificationAdjunction_unit_app] at h
   exact h
 
+/-- The comparison is an isomorphism, the constant functions being locally bijective. -/
 instance : IsIso (zmodConstSheafToContinuousMap X N) := by
   have : PreservesLimitsOfSize.{u, u + 1} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
     preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
   have h := toSheafify_zmodConstSheafToContinuousMap X N
   refine (Sheaf.isLocallyBijective_iff_isIso (zmodConstSheafToContinuousMap X N)).1 ⟨?_, ?_⟩
-  · change Presheaf.IsLocallyInjective _ _
-    rw [← Presheaf.comp_isLocallyInjective_iff _ (toSheafify (ProEt.topology X) _), h]
+  · refine (Presheaf.comp_isLocallyInjective_iff _ (toSheafify (ProEt.topology X) _) _).1 ?_
+    rw [h]
     infer_instance
-  · change Presheaf.IsLocallySurjective _ _
-    rw [← Presheaf.comp_isLocallySurjective_iff _ (toSheafify (ProEt.topology X) _), h]
+  · refine (Presheaf.comp_isLocallySurjective_iff _ (toSheafify (ProEt.topology X) _) _).1 ?_
+    rw [h]
     infer_instance
 
 /-- **The constant ring sheaf `ℤ/N` is the sheaf of locally constant functions**: the
@@ -139,9 +145,11 @@ noncomputable def zmodConstSheafRingIso :
         (continuousMapRingSheaf X (ZMod N)) :=
   asIso (zmodConstSheafToContinuousMap X N)
 
+/-- The isomorphism `ProEtale.zmodConstSheafRingIso` is an isomorphism of ring objects. -/
 instance : IsMonHom (zmodConstSheafRingIso X N).hom :=
   inferInstanceAs (IsMonHom (zmodConstSheafToContinuousMap X N))
 
+/-- The inverse of `ProEtale.zmodConstSheafRingIso` is a morphism of ring objects. -/
 instance : IsMonHom (zmodConstSheafRingIso X N).inv :=
   inferInstance
 

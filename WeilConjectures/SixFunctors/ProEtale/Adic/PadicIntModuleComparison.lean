@@ -144,16 +144,19 @@ noncomputable def comparisonUpperStarAb :
   ν^*(X)[ModuleCat.{u + 1} Λ] ⋙
     sheafCompose (ProEt.topology X) (forget₂ (ModuleCat.{u + 1} Λ) Ab.{u + 1})
 
+/-- `ProEtale.comparisonUpperStarAb` is additive. -/
 instance : (comparisonUpperStarAb Λ X).Additive :=
   inferInstanceAs (ν^*(X)[ModuleCat.{u + 1} Λ] ⋙
     sheafCompose (ProEt.topology X) (forget₂ (ModuleCat.{u + 1} Λ) Ab.{u + 1})).Additive
 
+/-- `ProEtale.comparisonUpperStarAb` preserves colimits, being a composite of left adjoints. -/
 instance : PreservesColimitsOfSize.{u + 1, u + 1} (comparisonUpperStarAb Λ X) := by
   have : PreservesColimitsOfSize.{u + 1, u + 1} ν^*(X)[ModuleCat.{u + 1} Λ] :=
     (comparisonAdjunction (ModuleCat.{u + 1} Λ) X).leftAdjoint_preservesColimits
   exact inferInstanceAs (PreservesColimitsOfSize (ν^*(X)[ModuleCat.{u + 1} Λ] ⋙
     sheafCompose (ProEt.topology X) (forget₂ (ModuleCat.{u + 1} Λ) Ab.{u + 1})))
 
+/-- `ProEtale.comparisonUpperStarAb` is left exact. -/
 instance : PreservesFiniteLimits (comparisonUpperStarAb Λ X) :=
   inferInstanceAs (PreservesFiniteLimits (ν^*(X)[ModuleCat.{u + 1} Λ] ⋙
     sheafCompose (ProEt.topology X) (forget₂ (ModuleCat.{u + 1} Λ) Ab.{u + 1})))
@@ -240,6 +243,7 @@ noncomputable def comparisonPadicIntModTowerMap
         ((comparisonUpperStarAb Λ X).map_comp _ _)))
 
 variable {X l} in
+/-- The components of `ProEtale.comparisonPadicIntModTowerMap φ` are `ν^*` of those of `φ`. -/
 lemma comparisonPadicIntModTowerMap_app_hom
     {G H : ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     {hG : ∀ n : ℕ, ((l ^ n : ℕ) : ℤ) • 𝟙 (G.obj (op n)) = 0}

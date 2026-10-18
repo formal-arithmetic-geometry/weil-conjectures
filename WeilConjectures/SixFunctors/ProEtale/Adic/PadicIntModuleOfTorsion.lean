@@ -46,11 +46,13 @@ noncomputable def zmodSMulAddHom : ULift.{w} (ZMod N) →+ (A →+ A) :=
     ext a
     simpa using h a⟩).comp AddEquiv.ulift.toAddMonoidHom
 
+/-- The integer `k` acts by `k • -`. -/
 lemma zmodSMulAddHom_intCast (k : ℤ) (a : A) :
     zmodSMulAddHom N h (ULift.up (k : ZMod N)) a = k • a := by
   rw [zmodSMulAddHom, AddMonoidHom.comp_apply]
   exact DFunLike.congr_fun (ZMod.lift_coe N _ k) a
 
+/-- The action of `ℤ/N` is multiplicative. -/
 lemma zmodSMulAddHom_mul (z z' : ULift.{w} (ZMod N)) (a : A) :
     zmodSMulAddHom N h (z * z') a = zmodSMulAddHom N h z (zmodSMulAddHom N h z' a) := by
   obtain ⟨z⟩ := z
@@ -68,21 +70,25 @@ noncomputable def zmodSMul : of (ULift.{w} (ZMod N)) ⊗ A ⟶ A :=
   ofHom (TensorProduct.liftAddHom (zmodSMulAddHom N h) fun r m n ↦ by
     rw [map_zsmul, AddMonoidHom.smul_apply, map_zsmul])
 
+/-- `AddCommGrpCat.zmodSMul` on pure tensors. -/
 lemma zmodSMul_tmul (z : ULift.{w} (ZMod N)) (a : A) :
     (zmodSMul N h).hom (z ⊗ₜ[ℤ] a) = zmodSMulAddHom N h z a :=
   rfl
 
+/-- The unit of `ℤ/N` acts trivially. -/
 lemma one_whiskerRight_zmodSMul :
     η[of (ULift.{w} (ZMod N))] ▷ A ≫ zmodSMul N h = (λ_ A).hom :=
   hom_ext_toIntLinearMap (TensorProduct.ext' fun (n : ULift.{w} ℤ) (a : A) ↦
     zmodSMulAddHom_intCast N h n.down a)
 
+/-- The action of `ℤ/N` is associative. -/
 lemma mul_whiskerRight_zmodSMul :
     μ[of (ULift.{w} (ZMod N))] ▷ A ≫ zmodSMul N h =
       (α_ _ _ A).hom ≫ of (ULift.{w} (ZMod N)) ◁ zmodSMul N h ≫ zmodSMul N h :=
   hom_ext_toIntLinearMap (TensorProduct.ext_threefold fun z z' a ↦
     zmodSMulAddHom_mul N h z z' a)
 
+/-- Additive maps between groups killed by `N` commute with the action of `ℤ/N`. -/
 lemma zmodSMul_naturality {B : Ab.{w}} (h' : ∀ b : B, (N : ℤ) • b = 0) (f : A ⟶ B) :
     zmodSMul N h ≫ f = of (ULift.{w} (ZMod N)) ◁ f ≫ zmodSMul N h' :=
   hom_ext_toIntLinearMap (TensorProduct.ext' fun (z : ULift.{w} (ZMod N)) (a : A) ↦ by
