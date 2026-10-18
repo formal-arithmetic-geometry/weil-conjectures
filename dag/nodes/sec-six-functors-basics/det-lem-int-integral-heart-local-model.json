@@ -336,17 +336,17 @@
   "file": "lean/Sheaf/Paper/IntegralHeartLocalModel.lean",
   "statement": "theorem integralHeartLocalModel (k₀ : Type u) [Field k₀] (p : ℕ) [CharP k₀ p] (_hp : 0 < p) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : p ≠ ℓ) (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u}) [X.Over (Spec (.of k₀))] [IsSeparated (X ↘ Spec (.of k₀))] [LocallyOfFiniteType (X ↘ Spec (.of k₀))] [QuasiCompact (X ↘ Spec (.of k₀))] (K : integralHeartDerivedCategory.{u} ℓ E X) (hK : constantModelBoundedConstructible (SmallAdicCompletion.Coefficients.integerRing ℓ E) X K) : integralHeartFiniteFreeLocalModel.{u} ℓ E X K ∧ (∀ q : ℤ, SmallAdicCompletion.IsDerivedComplete ℓ E X (integralHeartCohomology.{u} ℓ E X K q) ∧ constantModelBoundedConstructible (SmallAdicCompletion.Coefficients.integerRing ℓ E) X (integralHeartCohomology.{u} ℓ E X K q)) ∧ (∀ q : ℤ, constantModelBoundedConstructible (SmallAdicCompletion.Coefficients.integerRing ℓ E) X ((DerivedCategory.TStructure.t.truncLE q).obj K) ∧ constantModelBoundedConstructible (SmallAdicCompletion.Coefficients.integerRing ℓ E) X ((DerivedCategory.TStructure.t.truncGE q).obj K))",
   "branch": "newtargets-dag",
-  "by": "NW",
-  "date": "2026-10-18",
+  "by": "Q06",
+  "date": "2026-10-19",
   "existing": false,
-  "note": "Repair R1/R2: Q16 completion record is untouched. The small-coefficient construction is owned by def-sfb-small-coefficient-derived-completion, with a coefficient-ring abbreviation definitionally identical to the sibling ring and no import of its theorem."
+  "note": "The published live build lacks the recorded module object file, so the recorded declaration is unusable to the stage-2 compiler despite its source being present. This delivery supplies the exact recorded module and declaration unchanged, including all helper declarations, to compile the item against the dependency notion."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-021e041cb",
-  "group": "NW",
-  "result": "pass",
-  "note": "Re-delivery after landing return L (45b4f1be, 5 'same statement' theorems in SmallCoefficientDerivedCompletion). Delta vs PASSed 45b4f1be: only those five signatures now bind l, E : Type v, X : Scheme.{u} (and P/K over SmallAdicCompletion.Modules) explicitly; conclusions are textually unchanged, all still sorry, arg order matches section order so call sites elaborate. def-pur-sheaf-tensor-product record = live C2 landing byte-for-byte (rebase, no overwrite); other dep records = live; item node/Lean and new def node unchanged. Counterparts are genuinely different (E : Type u, original continuousCoefficientRingSheaf / AdicCompletion.Modules vs Shrink-based small coefficients with independent v), so explicit binders are the prescribed remedy, not a duplicate notion. nt_compile --json clean twice (load ~50): dep module 36.3/34.8 s, item 6.2/7.4 s. Report has Worker report + Second reading by NW. Prior advisories stand (stage-3 IsDerivedComplete comparison, over-cited condensed-ring, unused ProfinitePointPullback import)."
+  "reviewer": "NT-stage2-cc-0c57f52fc",
+  "group": "Q06",
+  "result": "fix",
+  "note": "Item correct (H3): ℓ prime, char k = p > 0 with p ≠ ℓ, X separated of finite type over k, E/Q_ℓ finite in an independent universe. (1) triangulated, bounded and truncation-stable; constructible sheaves = degree-0 objects in both directions; abelian heart with ambient kernels/cokernels, extension-closed, essentially small. (2) one finite stratification, pro-étale charts with finite O_E-modules, torsion allowed. (3) ExactPairing dual on the same strata, Tor amplitude [-1,0] for C and [0,1] for the dual, both on Mod.derivedMonoidalCategory. Edge cases: empty X, C = 0, O_E/π. F1 (H13/H2): to get round missing published oleans the delivery re-sent three landed modules (IntegralHeartLocalModel, SmallCoefficientDerivedCompletion, IntegralModels) changed only by a trailing comment, and rewrote the NW/NW/NZ dependency records' by/note to say 'unusable'. Fixed: fixes/ hold the byte-identical landed texts. M1: land with --revert-nodes det-lem-int-integral-heart-local-model def-sfb-small-coefficient-derived-completion sk-lem-integral-models; a missing olean at landing is an infrastructure retry. F2 (H9): unused import Sheaf.Paper.IntegralModels dropped; signature unchanged. Advisory: plain declarations from the det-lem-int-integral-heart-triangulated and det-lem-int-integral-heart-local-model theorem modules and from def-sfb-small-coefficient-derived-completion are used outside stmt_deps. nt_compile --json of the exact fix set clean, exit 0 (41.1/24.4/6.9/15.4 s)."
  }
 }

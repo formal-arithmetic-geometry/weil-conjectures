@@ -22,7 +22,9 @@
   "def-pc-reduced-scheme",
   "def-galois-object",
   "def-weil-pbc-inverse-image",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-constructible-constructible",
+  "def-sf-setting"
  ],
  "proof": [
   {
@@ -267,5 +269,24 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-904d92dfe (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited node in full. Sources: Stacks 03TT with its proof and remark-projective-each-degree, 095N, 03S0, 03S8(3) and 03SF (pione.tex); ILO XVII Def 7.3.1, Lemma 7.6.11 and the proof of 7.6.1 (pp. 303, 313-314). The item statement is unchanged and matches 03TT plus the ILO Galois partition, with no l-invertibility needed. Step 1: the Noetherian constructible Serre node gives closure under kernels, cokernels and extensions; the affine-local partitions are converted to a global one by disjointing the affine cover, and finite type to finite presentation by the Mathlib leaf. Step 2: biproduct closure and the lifting square are exactly the flat-lifting node with R=A. Step 3: every hypothesis of lem-sf-flat-model-class-resolution is verified; the node is Lean-closed and has no finite-ring hypothesis. Step 4: the Galois-partition node is applied to the finite family of terms. Step 5: flat pullback to a point and the constant stalk give flat finitely presented values, hence projective by 00NX; V_i is nonempty because it is connected. Step 6: the empty case is elementary. New nodes, both true and statement-only. Flat-lifting follows the 095N affine-free quotient argument (local lifts refined to finitely many affines, flat by free stalks, constructible by 03S8(3)). Galois-partition holds for any Noetherian X: a finite affine trivializing cover, 03S0 to make it finite etale on strata, connected components, then the Galois closure. Stratifying is necessary because infinite monodromy is possible on a nodal curve with A=F_l[t], and the node allows it. Neither node restates a clause of the item. Not duplicates: lem-sf-etale-flat-constructible-lifting needs finite Lambda, which the new node generalizes; lem-per-constructible-finite-monodromy-filtration trivializes only the graded pieces of a filtration. B1-B9 hold and all three kinds of search are recorded. The declared tool_uses are accepted as generic black boxes. No SGA, no cycle. Maintainer notes: lem-sf-etale-flat-constructible-lifting could cite the new flat-lifting node when split; the Galois-partition node's source.document says etale-cohomology.tex while its place names pione.tex for 03SF (cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianCtfFlatModel",
+  "declaration": "AlgebraicGeometry.Etale.exists_noetherian_ctf_flat_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianCtfFlatModel.lean",
+  "statement": "theorem exists_noetherian_ctf_flat_model (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ZMod l) A] (a b : ℤ) (_hab : a ≤ b) (K : DerivedCategoryModule A X) (_hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X K) (_hTor : DerivedCategory.hasTorAmplitudeIn A X a b K) : ∃ F : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, Nonempty ((_root_.DerivedCategory.Q).obj F ≅ K) ∧ (∀ q : ℤ, (q < a ∨ b < q) → IsZero (F.X q)) ∧ (∀ q : ℤ, ObjectProperty.flat (F.X q) ∧ Scheme.IsConstructibleSheaf (F.X q)) ∧ ∃ S : Scheme.FiniteLocallyClosedStratification X, (∀ i : Fin S.n, IsReduced (S.domain i)) ∧ ∀ i : Fin S.n, ∃ hS : ConnectedSpace (S.domain i), ∃ V : (S.domain i).FiniteEtale, @PreGaloisCategory.IsGalois _ _ (@Scheme.FiniteEtale.galoisCategory (S.domain i) hS) V ∧ ConnectedSpace V.obj.left ∧ ∀ q : ℤ, a ≤ q → q ≤ b → ∃ M : ModuleCat.{u + 1} A, Module.Finite A M ∧ Module.Projective A M ∧ Nonempty ((upperStar (ModuleCat.{u + 1} A) (V.obj.hom ≫ S.immersion i)).obj (F.X q) ≅ (constantSheaf V.obj.left.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the existing arbitrary-coefficient boundedConstructible and IsConstructibleSheaf predicates, whose module-sheaf specialization is locally constant with finitely generated stalks. On Noetherian X every locally closed stratum is constructible. Added the already recorded definition nodes def-constructible-constructible and def-sf-setting for these existing declarations; no new notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-476b3fc30",
+  "group": "N7",
+  "result": "pass",
+  "note": "Item statement matches the node clause by clause: Noetherian X; Noetherian ZMod l-algebra A : Type (u+1) (the recorded DerivedCategoryModule convention); boundedConstructible plus hasTorAmplitudeIn tested on every degree-0 module sheaf; F with Q.obj F ≅ K, zero outside [a,b], flat (Mathlib sheafMonoidalCategory, confirmed by probe) and IsConstructibleSheaf terms; FiniteLocallyClosedStratification with reduced, connected strata and a connected IsGalois finite etale V per stratum, chosen before the degree q, with finite projective constant values. The upstream constructible-strata condition is automatic on Noetherian X. Edge cases checked: empty X, a=b, zero algebra, disconnected X. Only the item node changed (lean, plus two landed stmt_deps, as brief §5 permits); lean.statement verbatim; record complete; no duplicate (the closest existing theorem needs [Finite Λ]). Docstrings carry source place, blueprint id and six proof steps; proof is sorry only. nt_compile --json clean, 3.2 s. Advisory: the stmt_deps for locally constant finite-type modules and the finite-ring D^b_c are not used through their recorded declarations (one needs equal site universes, the other a finite ring); the general IsConstructibleSheaf is used instead, as the report explains."
  }
 }

@@ -17,7 +17,8 @@
   "def-weil-pbc-locally-constant-finite-type-modules",
   "def-weil-finitely-generated-module",
   "def-weil-size-convention",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-constructible-finite-locally-constant"
  ],
  "proof": [
   {
@@ -181,5 +182,23 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-a7deadcca (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited node statement in full. Source: ILO XVII Prop. 10.1.1, proof p. 325, first paragraph (X in D^-_c, so Ext^q(X,-) commutes with filtered inductive limits, hence with representable direct sums in D^+). The item's common lower bound is the same as representability of the sum in D^+, because H^j of the sum is the sum of the H^j. The statement is unchanged and is what the citer lem-per-ctf-hom-universal-coefficients Step 1 uses. Step 1: Grothendieck abelian (Lean-closed node), so sums are exact; lem-kun-grothendieck-derived-coproducts gives the termwise derived coproduct, including the empty family (accepted tool_use: a generic coproduct computation not given in the unit). Step 2: the finite-subset filtered poset (nonempty even for I empty), finite additivity, and lem-per-constructible-ext-filtered-colimit with the identical hypotheses on K. Step 3: I checked the indices myself. The outgoing d_s vanishes for s>q-c+1 and the incoming one for s>p+r, and only -r<=p<=n-c occur, so pages and finite filtrations are uniform in i and the summed comparison is an isomorphism. Step 4 is the Mathlib DerivedCategory.isIso_iff leaf. New node lem-per-constructible-ext-filtered-colimit is true: it reduces to tau_{>=m}K with m<-n, then by devissage to a constructible sheaf, which has a resolution by finite sums of j_!A_U, and Rj_* commutes with filtered colimits on Noetherian X. It is not a duplicate of the pro-etale/condensed nodes (sk-lem-constructible-ext-continuity, lem-sfb-constructible-internal-hom-continuity), the adic global-Hom compactness node or the finite-field ind-etale node. New node lem-per-bounded-above-rhom-hyperext is true: the Postnikov couple has E_2 vanishing for p<-r and q<c and finite convergence because RHom(K, tau_{>m}L) lies in D^{>m-r}, with bidegree (s,1-s). It is not a duplicate of thm-sp-truncation-e2 or the other truncation-couple nodes, which handle derived functors of a single left-exact functor, base-change functors or coherent global Ext. Small cases checked: I empty, K=0, K=A_X[0], K=F[t] shifts. Both new nodes are statement-only, B1-B9 hold, there is no restated clause and no cycle, and nothing cites SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleRHomCoproductContinuity",
+  "declaration": "AlgebraicGeometry.Etale.isIso_sigmaComparison_derivedHom_of_constructible",
+  "file": "lean/Sheaf/Paper/ConstructibleRHomCoproductContinuity.lean",
+  "statement": "theorem isIso_sigmaComparison_derivedHom_of_constructible (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (X : Scheme.{u}) [IsNoetherian X] (K : DerivedCategoryModule A X) (_hK : ∃ r : ℤ, K.IsLE r) (_hc : ∀ j : ℤ, ∃ S : Scheme.FiniteLocallyClosedStratification X, ∀ i : Fin S.n, Scheme.IsFiniteLocallyConstantSheaf ((upperStar (ModuleCat.{u + 1} A) (S.immersion i)).obj ((_root_.DerivedCategory.homologyFunctor _ j).obj K))) (I : Type (u + 1)) (L : I → DerivedCategoryModule A X) (_hL : ∃ c : ℤ, ∀ i : I, (L i).IsGE c) : ∃ hcoprod : HasCoproducts.{u + 1} (DerivedCategoryModule A X), IsIso (@sigmaComparison I _ _ _ _ ((derivedHom (ModuleCat.{u + 1} A) X).obj (op K)) L (@HasColimitsOfShape.has_colimit _ _ _ _ (hcoprod I) (Discrete.functor L)) (@HasColimitsOfShape.has_colimit _ _ _ _ (hcoprod I) (Discrete.functor fun i ↦ ((derivedHom (ModuleCat.{u + 1} A) X).obj (op K)).obj (L i))))",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a79a96f4",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Clause-by-clause match: Noetherian X, Noetherian CommRing A : Type (u+1), ordinary etale DerivedCategoryModule; K.IsLE r; per-degree FiniteLocallyClosedStratification with IsFiniteLocallyConstantSheaf (etale-locally constant + finitely generated geometric stalks) of the upperStar pullbacks; I : Type (u+1); common lower bound c quantified before i; conclusion IsIso of Mathlib sigmaComparison for derivedHom.obj (op K), with coproduct existence packaged as a true Prop existential, not a hypothesis. stmt_deps gains only the existing node def-constructible-finite-locally-constant, whose declaration is used (allowed); the recorded predicate of def-weil-pbc-locally-constant-finite-type-modules needs equal universes and cannot apply here. Consistent with citer HomUniversalCoefficients (constructibleHomology implies _hc). Edge cases: empty I, K=0, empty X, zero ring, any characteristic. No hollow defs; sorry only as the proof; source and blueprint docstrings with proof steps; lean.statement verbatim. nt_compile --json clean (2.7 s). Advisory: two unused public imports."
  }
 }
