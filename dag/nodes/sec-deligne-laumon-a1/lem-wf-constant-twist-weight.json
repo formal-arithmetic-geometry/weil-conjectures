@@ -1,103 +1,223 @@
 {
-  "id": "lem-wf-constant-twist-weight",
-  "blueprint": {
-    "is": "lem-wf-constant-twist-weight",
-    "from": null,
-    "same_as": null
+ "id": "lem-wf-constant-twist-weight",
+ "blueprint": {
+  "is": "lem-wf-constant-twist-weight",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Weight of a constant twist",
+ "statement": "Fix the finite-field and coefficient datum of [def-weil-punctual-weights]: $k_0=\\mathbf F_q$, $q=p^a>1$, $k=\\overline{k_0}$, a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and an isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. Let $X_0$ be a separated finite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, and let $\\mathcal F=(M,\\theta)$ be a constructible $\\Qlb$-Weil sheaf in [def-weil-weil-sheaf-complex], punctually $\\iota$-pure of weight $w\\in\\mathbf R$.\n\nFor $b\\in\\Qlb^\\times$, put $\\mathcal F_b=(M,b\\theta)$, with inverse structure map $b^{-1}\\theta^{-1}$; scalar morphisms are computed over a common finite coefficient extension [def-weil-algebraically-closed-coefficients, def-weil-rationalization-karoubi]. Let $J_X$ be the coefficient equivalence on Weil pairs of [lem-fd-rational-coefficient-category-comparison]. In the PBC model [def-wf-weil-category], use the explicit constant Weil line $\\widetilde{\\mathcal B}_{b,X_0}=J_X(E_X,b\\theta_E)$ of [lem-wf-constant-twist-coefficient-comparison], where $(E_X,\\theta_E)$ is [def-weil-constant-weil-structure] at any finite field $E$ containing $b$. Its tensor with $J_X(\\mathcal F)$ is the completed derived tensor of [def-wf-tensor-product], and its punctual weights mean the weights after transport back to [def-weil-weil-sheaf-complex].\n\nIf $c\\in\\mathbf R$ satisfies $2\\log_q|\\iota(b)|=c$, then both $\\mathcal F_b$ and the transported tensor $J_X(\\mathcal F)\\otimes\\widetilde{\\mathcal B}_{b,X_0}$ are punctually $\\iota$-pure of weight $w+c$. On the geometrically connected domain where the representation prescription of [def-wf-constant-weil-twist] defines $\\mathcal B_b$, the comparison identifies $\\widetilde{\\mathcal B}_{b,X_0}$ with that specified line. In particular the blueprint tensor $\\mathcal F\\otimes\\mathcal B_b$ is punctually $\\iota$-pure of weight $w+c$ there. On arbitrary separated finite-type $X_0$ the explicit line $\\widetilde{\\mathcal B}_{b,X_0}$ supplies the constant-line tensor assertion without a geometric-connectedness or lisse hypothesis.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-constant-twist-weight.md",
+  "place": "node lem-wf-constant-twist-weight, order 2763"
+ },
+ "stmt_deps": [
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "lem-fd-rational-coefficient-category-comparison",
+  "def-wf-weil-category",
+  "def-weil-constant-weil-structure",
+  "def-wf-tensor-product",
+  "def-wf-constant-weil-twist",
+  "lem-wf-constant-twist-coefficient-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The scalar twist in the statement is an object of precisely the category in which purity is defined. By [def-weil-algebraically-closed-coefficients], compute $b$, $\\theta$ and $\\theta^{-1}$ over a common finite coefficient extension. The morphism groups and scalar-extension formula in [def-weil-rationalization-karoubi] make scalar multiplication compatible with a further extension, so $b\\theta$ is a well-defined morphism $Lg_X^*M\\to M$ in that common-stage category. Bilinearity of composition gives $(b\\theta)(b^{-1}\\theta^{-1})=\\operatorname{id}_M$ and $(b^{-1}\\theta^{-1})(b\\theta)=\\operatorname{id}_{Lg_X^*M}$. Thus [def-weil-weil-sheaf-complex], items 1 and 3, makes $(M,b\\theta)$ a Weil sheaf: its underlying object is still $M$ in the constructible heart. This construction does not require a Weil-group representation or any tensor-product comparison.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-rationalization-karoubi",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-constant-twist-weight.proof.md",
+    "place": "First sentence, constant twist, with its intrinsic scalar-rescaling meaning made explicit; statement correction R1/R2"
+   }
   },
-  "kind": "statement",
-  "title": "Weight of a constant twist",
-  "statement": "If $\\mathcal F$ is lisse and punctually $\\iota$-pure of weight\n$w$, and $2\\log_q|\\iota(b)|=c$, then\n$\\mathcal F\\otimes\\mathcal B_b$ is punctually $\\iota$-pure of weight\n$w+c$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-constant-twist-weight.md",
-    "place": "node lem-wf-constant-twist-weight, order 2763"
+  {
+   "text": "Fix a closed point $y$ of degree $m\\geq1$. In [def-weil-local-frobenius-trace], the local operator is obtained by the point transport, the pullback-composition comparison, and the pullback of $\\theta^{[m]}$. Pullbacks are coefficient-linear by the rational-stage formulas of [def-weil-derived-pullback-tensor-hom]. The recurrence for the iterates in [def-weil-local-frobenius-trace] therefore gives $(b\\theta)^{[m]}=b^m\\theta^{[m]}$: it holds for $m=1$, and the next composite multiplies $b^m$ by the additional $b$. The point transport and composition comparison depend only on the unchanged underlying object. The point fiber is coefficient-linear by [def-weil-finite-coefficient-point]. Consequently the local Frobenius on the twist, for the pair constructed in Step 1, is $b^m F_y$. This uses the local definition itself, without identifying a general constructible sheaf with a global fundamental-group representation.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-constant-twist-weight.proof.md",
+    "place": "First sentence: Frobenius at a point of degree m is multiplied by b^m"
+   }
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "At a closed point $y$ of degree $m$, the twist\n[def-wf-constant-weil-twist] multiplies every eigenvalue of\n$F_y$ by $b^m$, so every eigenvalue $\\alpha$ of\n$\\mathcal F_{\\bar y}$ becomes $b^m\\alpha$, and\n\n$$\n|\\iota(b^m\\alpha)|=|\\iota(b)|^m\\,q_y^{w/2}=q^{mc/2}q^{mw/2}\n=q_y^{(w+c)/2},\n$$\n\nwhich is the punctual purity of weight $w+c$ of\n[def-weil-punctual-weights].",
-      "uses": [
-        "def-wf-constant-weil-twist",
-        "def-weil-punctual-weights"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-wf-constant-weil-twist",
+  {
+   "text": "Put $V=\\mathcal F_{\\bar y}$ and $t=b^m\\ne0$. If $v\\ne0$ and $(tF_y)v=\\beta v$, then $F_yv=(\\beta/t)v$; conversely $F_yv=\\alpha v$ implies $(tF_y)v=(t\\alpha)v$. Thus every eigenvalue of the twisted local operator is $b^m\\alpha$ for an eigenvalue $\\alpha$ of $F_y$. The calculation does not assume diagonalizability. When $V=0$ there are no eigenvalues and the assertion is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-constant-twist-weight.proof.md",
+    "place": "First sentence: every eigenvalue alpha becomes b^m alpha"
+   }
+  },
+  {
+   "text": "Write $r=|\\iota(b)|>0$. Since $q>1$, the hypothesis $2\\log_q r=c$ says $\\log r=(c/2)\\log q$, hence $r=q^{c/2}$. At a closed point of degree $m$, $q_y=\\#\\kappa(y)=q^m$. Punctual purity of $\\mathcal F$, as defined in [def-weil-punctual-weights], gives $|\\iota(\\alpha)|=q_y^{w/2}$. For the eigenvalue from Step 3, multiplicativity of $\\iota$ and the complex norm give\n$$|\\iota(b^m\\alpha)|=r^m q_y^{w/2}=q^{mc/2}q^{mw/2}=q_y^{(w+c)/2}.$$\nHere the identities for real powers follow by writing each as $\\exp(s\\log q)$, with positive base $q$. Every closed point and every eigenvalue were arbitrary, so [def-weil-punctual-weights] gives the asserted purity of weight $w+c$.",
+   "uses": [
     "def-weil-punctual-weights"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-constant-twist-weight.md",
-    "place": "## Proof"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-constant-twist-weight.proof.md",
+    "place": "Displayed norm identity and final sentence"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2763,
-  "blueprint_uses": [
+  {
+   "text": "Apply [lem-wf-constant-twist-coefficient-comparison] to $\\mathcal F$ and $b$. It identifies the PBC tensor $J_X(\\mathcal F)\\otimes\\widetilde{\\mathcal B}_{b,X_0}$, transported to the common-stage model, with $\\mathcal F_b$ as a constructible Weil sheaf, and gives intertwining isomorphisms of their local Frobenius spaces. If $A T=T' A$ and $A$ is invertible, a nonzero eigenvector $v$ of $T$ maps to the nonzero eigenvector $Av$ of $T'$ with the same eigenvalue; applying $A^{-1}$ gives the converse. Thus the two local operators have the same eigenvalues. Step 4 and [def-weil-punctual-weights] give purity of the transported tensor of weight $w+c$. On the geometrically connected domain of [def-wf-constant-weil-twist], the same comparison identifies the explicit line with the specified $\\mathcal B_b$, so this is purity of the actual blueprint tensor $\\mathcal F\\otimes\\mathcal B_b$. For other schemes the explicit constant line in the comparison gives the asserted tensor construction directly.",
+   "uses": [
+    "lem-wf-constant-twist-coefficient-comparison",
     "def-weil-punctual-weights",
     "def-wf-constant-weil-twist"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed_part",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            350,
-            370
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.constantTwist"
-      ],
-      "open": []
-    }
-  },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-l-dl-a1-energy",
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-    "declaration": "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist",
-    "branch": "slopmaster2",
-    "line": 353,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "If $\\mathcal F$ is a Weil sheaf, punctually $\\iota$-pure of weight\n$w$, and $2\\log_q|\\iota(b)|=c$, then\n$\\mathcal F\\otimes\\mathcal B_b$ is punctually $\\iota$-pure of weight\n$w+c$.",
-    "proof": [
-      {
-        "text": "At a closed point $y$ of degree $m$, the twist\n[def-wf-constant-weil-twist] multiplies every eigenvalue of\n$F_y$ by $b^m$, so every eigenvalue $\\alpha$ of\n$\\mathcal F_{\\bar y}$ becomes $b^m\\alpha$, and\n\n$$\n|\\iota(b^m\\alpha)|=|\\iota(b)|^m\\,q_y^{w/2}=q^{mc/2}q^{mw/2}\n=q_y^{(w+c)/2},\n$$\n\nwhich is the punctual purity of weight $w+c$ of\n[def-weil-punctual-weights].",
-        "uses": [
-          "def-wf-constant-weil-twist",
-          "def-weil-punctual-weights"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-constant-twist-weight.proof.md",
+    "place": "First sentence: identify the constant-line tensor with scalar rescaling; final purity conclusion"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-punctual-weights",
+  "lem-wf-constant-twist-coefficient-comparison",
+  "def-wf-constant-weil-twist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-constant-twist-weight.proof.md",
+  "place": "Local eigenvalue and norm calculation, with the previously missing tensor/coefficient-model comparison exposed as an unsplit statement node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsPunctuallyPureOfWeight\"",
+   "results": "No hits. Read returned signatures: no statement about constructible Weil-sheaf punctual purity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPunctuallyPureOfWeight|constantTwist|WeilSheaf",
+   "results": "No hits. Read returned signatures: no statement about constructible Weil-sheaf punctual purity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Punctual purity of Weil sheaves is shifted by rescaling the Frobenius structure by a constant scalar",
+   "results": "WittVector.frobenius_verschiebung, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.verschiebung_frobenius_comm, LinearMap.frobenius, WittVector.verschiebung_frobenius, WittVector.instIsocrystalStandardOneDimIsocrystal, IsPurelyInseparable.iterateFrobeniusₛₗ Read returned signatures: no statement about constructible Weil-sheaf punctual purity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rescaling the Frobenius isomorphism of a constructible adic Weil sheaf by a nonzero scalar shifts punctual purity weight by twice the base q logarithm of its complex norm",
+   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply, PreTilt.untilt_iterate_frobeniusEquiv_symm_pow, WittVector.exists_frobenius_solution_fractionRing_aux, PreTilt.coeff_frobeniusEquiv_symm, PowerSeries.weierstrassDistinguished_smul, WittVector.instIsocrystalStandardOneDimIsocrystal, PreTilt.coeff_frobenius, WittVector.exists_frobenius_solution_fractionRing Read returned signatures: no statement about constructible Weil-sheaf punctual purity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplying a linear Frobenius automorphism by b multiplies its degree m local eigenvalues by b to the power m and adds the logarithmic norm to its weight",
+   "results": "LinearMap.frobenius, LinearMap.iterateFrobenius, IsPurelyInseparable.iterateFrobeniusₛₗ, WittVector.StandardOneDimIsocrystal.frobenius_apply, LinearMap.frobenius_def, IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base Read returned signatures: no statement about constructible Weil-sheaf punctual purity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2763,
+ "blueprint_uses": [
+  "def-weil-punctual-weights",
+  "def-wf-constant-weil-twist"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      350,
+      370
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.constantTwist"
+   ],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+  "declaration": "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist",
+  "branch": "slopmaster2",
+  "line": 353,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.constantTwist"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "If $\\mathcal F$ is a Weil sheaf, punctually $\\iota$-pure of weight\n$w$, and $2\\log_q|\\iota(b)|=c$, then\n$\\mathcal F\\otimes\\mathcal B_b$ is punctually $\\iota$-pure of weight\n$w+c$.",
+  "proof": [
+   {
+    "text": "At a closed point $y$ of degree $m$, the twist\n[def-wf-constant-weil-twist] multiplies every eigenvalue of\n$F_y$ by $b^m$, so every eigenvalue $\\alpha$ of\n$\\mathcal F_{\\bar y}$ becomes $b^m\\alpha$, and\n\n$$\n|\\iota(b^m\\alpha)|=|\\iota(b)|^m\\,q_y^{w/2}=q^{mc/2}q^{mw/2}\n=q_y^{(w+c)/2},\n$$\n\nwhich is the punctual purity of weight $w+c$ of\n[def-weil-punctual-weights].",
+    "uses": [
+     "def-wf-constant-weil-twist",
+     "def-weil-punctual-weights"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-constant-twist-weight",
+  "worker": "stage1",
+  "summary": "Repair of C4/E7 and earlier R1/R2: retain all four accepted scalar-twist steps, add an unsplit comparison lemma for completed PBC tensor with the explicit constant Weil line and the common-stage scalar twist, and conclude purity of the tensor itself. Reuse the existing rational coefficient equivalence rather than assume it. Restore def-wf-constant-weil-twist as a statement dependency and identify its line on its geometrically connected domain. Explicitly construct the constant line on arbitrary schemes and report the global representation-definition domain error and all four callers for maintainer/HUMAN follow-up. One new statement node, no Mathlib leaves.",
+  "blueprint": "Steps 1-3 expand the first sentence: intrinsic scalar rescaling and the b^m eigenvalues; Step 4 is the norm identity; Step 5 uses the explicit comparison to recover the first sentence's tensor and the blueprint's concluding purity assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-3b943af71",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-3b943af71 (reviewer sub-agent of L); spot-checked: I read the governance files, the packet, the report, the item and the new node in full, the current and older blueprint text for the item, the unit sk-l-dl-a1-energy, and the statement of every cited node. The item is not weakened: wherever def-wf-constant-weil-twist defines B_b, it keeps the current blueprint conclusion that F tensor B_b is pure of weight w+c, with no lisse hypothesis (following the 2026-10-15 update). Its other two clauses are extra content. Step 1: b theta is a valid Weil structure because composition is bilinear at a common stage. Step 2: (b theta)^[m] = b^m theta^[m], checked against the recurrence in def-weil-local-frobenius-trace and the linearity of pullback and of the point fibre. Steps 3-4: the eigenvalue correspondence holds without diagonalizability, and the norm identity holds for any real c and w. Step 5: a conjugacy preserves eigenvalues. The new node lem-wf-constant-twist-coefficient-comparison is unsplit, self-contained and properly searched. It states that the completed right-unit map turns the tensor Frobenius (phi_K tensor b theta_E) composed with mu into b phi_K. This holds because the same c_n coefficient isomorphisms enter def-weil-constant-weil-structure and def-wf-tensor-product. It also states that on the geometrically connected domain T_s = b, so rho(g) = b^deg g, which matches def-wf-constant-weil-twist and the blueprint's b^m. It contains no weight content and is not a duplicate of lem-fd-rational-coefficient-category-comparison, lem-wf-constant-twist-cohomology, lem-sfb-sheaf-tensor-unit-comparison, lem-tw-tate-twist-weight-shift or prop-wf-weil-sheaf-representation-equivalence. I tested it on Spec F_q, on a degree-2 point (factor b^2), on b=1, on a non-integral b, on the zero sheaf and on empty X_0. There is no cycle. Batch-5 check: (1) lem-fd-rational-coefficient-category-comparison is a coefficient-category equivalence that neither assumption gives. No trace-formula or Poincare node cites it, and it is already in the batch-5 closure through the existing lem-fd-as-trace. The node it reaches, lem-trf-integral-pullback-comparison-realization, is general pullback and scalar coherence, already reached through the existing lem-fd-weil-pullback-local-frobenius and lem-wf-rational-stalk-exact. Accepted. (2) def-weil-local-frobenius-trace is a general definition, already in the closure. Accepted. (3) def-wf-weil-group, def-wf-fundamental-representation and def-wf-constant-weil-twist are definitions whose closure reaches only the definition def-pod-lisse-l-adic-sheaves. Accepted. For the maintainer: the domain error the worker reported in def-wf-constant-weil-twist is real (W(X_0) needs geometric connectedness; counterexamples Spec F_q disjoint union Spec F_q and Spec F_{q^2}). There is also a pre-existing mismatch: def-wf-fundamental-representation uses the def-pod-lisse model while B_b sits in the PBC def-wf-weil-category. No fixes were made and no nodes dropped."
+ }
 }
