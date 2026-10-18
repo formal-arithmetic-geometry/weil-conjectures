@@ -17,9 +17,309 @@
   "thm-amb-etale-exceptional-adjoint",
   "def-asd-finite-etale-tate-twist"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\Lambda_n$ and $\\omega_h=h_n^!A$. The self-product $W=P\\times_XP$ is Noetherian, its first projection $p_1$ is separated finite type and smooth of dimension $r$, and its diagonal $\\Delta$ is a regular closed immersion of codimension $r$ with normal bundle $T_{P/X}$. Indeed apply finite-type permanence, separated finite-type base change, smooth-dimension permanence and the diagonal regular-immersion lemma. A Noetherian scheme is quasi-compact by definition and quasi-separated by the locally-Noetherian lemma, so Nagata supplies compactifications for the separated finite-type maps used below. In particular the section-deformation lemma applies to $(p_1,\\Delta)$; it supplies Noetherianity, smoothness and compactifiability of the deformation and normal-bundle maps. The same verifications apply after any Noetherian change of base.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pur-diagonal-regular-immersion",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Geometry of the diagonal and the ordinary Noetherian extension of the finite-stage argument"
+   }
+  },
+  {
+   "text": "Fix the normalization for affine space over a Noetherian base $S$. For $q:\\mathbf P^1_S\\to S$, the ordinary finite projective-line adjunction has $G_qK=q^*K(1)[2]$ and counit $(1\\otimes t_q)\\mathrm{PF}^{-1}$, with $t_qc_1(\\mathcal O(1))=1$. Its unit is the supported-diagonal formula of [det-sp-p1-adjunction]; the two diagonal integrals in [lem-sp-tower-p1-arbitrary-base-integrals] are its triangle identities. Compose this adjunction with open extension for $\\mathbf A^1_S\\subset\\mathbf P^1_S$, and then successively in the ordered coordinate tower. This is precisely the affine-space adjunction and trace of [lem-amb-affine-space-top-trace], with identity adjunction when $r=0$. Thus the chosen affine comparison $\\Gamma_{r}:A(r)[2r]\\to\\omega_{p_r}$ uses the supported first Chern class of the diagonal and the prescribed integration normalization.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "det-sp-p1-adjunction",
+    "lem-sp-tower-p1-arbitrary-base-integrals",
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Affine-line diagonal class, projective-line integration and ordered products"
+   }
+  },
+  {
+   "text": "Apply [prop-asd-smooth-base-change] to the self-base-change square of $p$. Its unit-coefficient comparison $p_2^*\\omega_p\\xrightarrow{\\sim}\\omega_{p_1}$ restricts along $\\Delta$ to $a_p:\\omega_p\\xrightarrow{\\sim}\\Delta^*\\omega_{p_1}$, because $p_2\\Delta=1_P$. The normalized finite-ring section deformation gives $\\delta_p:\\Delta^*\\omega_{p_1}\\xrightarrow{\\sim}z^*\\omega_\\pi$, where $\\pi:T_{P/X}\\to P$ and $z$ is zero. The same $\\delta_p$ is the normalized comparison $\\delta_{p_1,\\Delta}$ of [lem-pur-noetherian-etale-section-specialization]: that lemma applies to $(p_1,\\Delta)$ with $A=\\Lambda_n$ (its regularity, smoothness and compactifiability hypotheses are those verified in Step 1), it uses the same Rees family $D=\\underline{\\operatorname{Spec}}_W\\mathcal O_W[t,\\mathcal I/t]$ and the same exceptional base-change fibre identifications, and both lemmas characterize $\\kappa$ as the unique isomorphism $F\\to a^*C$ restricting to $1_C$ at $t=1$. Hence the deformation factor of Step 12 and the comparison $\\kappa$ of Step 16 are the ones used here. In [thm-amb-vector-bundle-purity] take the coefficient extension $F=\\mathbf Q_\\ell$, uniformizer $\\ell$, and stage $n$; its coefficient ring is $A$. Denote its unit comparison by $v_\\pi:A(r)[2r]\\xrightarrow{\\sim}\\omega_\\pi$. Set\n$$\\alpha_p=z^*(v_\\pi^{-1})\\circ\\delta_p\\circ a_p,\\qquad\\gamma_{p,n}=\\alpha_p^{-1}.$$\nThe Tate comparison is exactly the ordinary roots-of-unity comparison in that theorem and [lem-asd-etale-finite-twist-pullback]. This proves the specified three-factor orientation is an isomorphism.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "lem-trf-finite-ring-section-deformation",
+    "thm-amb-vector-bundle-purity",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-noetherian-etale-section-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+    "place": "The displayed diagonal / deformation / inverse vector-bundle chain"
+   }
+  },
+  {
+   "text": "For every $K\\in D^+(X_{\\mathrm{et}},A)$, define\n$$\\gamma_{p,K}=\\phi_{p,K}\\circ(1\\otimes\\alpha_p^{-1}):p^*K(r)[2r]\\longrightarrow p_n^!K,$$\nwith the tensor/shift unit identifications understood. Here $\\phi_{p,K}$ is exactly the transpose of inverse compact-support projection followed by the unit-object counit, as specified in [thm-asd-smooth-tensor]. That theorem makes this actual map invertible for every ordinary derived input. Step 3 makes its other factor invertible. Therefore $\\gamma_{p,K}$ is an isomorphism natural in $K$. This uses neither constructibility nor finite Tor amplitude of $K$.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Definition of gamma as the inverse orientation followed by the canonical tensor map"
+   }
+  },
+  {
+   "text": "We compute the orientation on an affine smooth chart $h:U\\to V$, with a separated etale coordinate map $e:U\\to\\mathbf A^r_V$. Such charts exist by [sbc-thm-etale-local-normal-form]; their opens are Noetherian. On $U\\times_VU$ the functions $e_j(u_2)-e_j(u_1)$ define an etale map to $\\mathbf A^r_U$, by etale base change and the translation isomorphism. Its zero fibre is $U\\times_{\\mathbf A^r_V}U$, etale separated over $U$. The diagonal is a clopen section of that fibre; remove its complementary closed subscheme. This gives a neighbourhood of the diagonal whose inverse image of zero is exactly the diagonal. The section-deformation theorem identifies the normal frame with the classes of these coordinate differences and identifies its normalized $\\delta$ with the identity on the standard section invariant.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1 and 2: Cartesian square of centres and induced normal frame"
+   }
+  },
+  {
+   "text": "The self-base-change comparison $a_h$ computed using $(u_1,e(u_2))$ agrees with the one computed using $(u_1,e(u_2)-e(u_1))$. Indeed these charts differ by translation by the section $e(u_1)$, and [lem-trf-ambient-affine-translation-trace] states that this translation preserves the actual ordered trace. Taking mates identifies the dualizing comparisons. The vector-bundle orientation in the normal frame of Step 5 is the ordered affine orientation: the finite-ring section theorem states this normalization, and vector-bundle purity specifies its counit. The affine orientation is compatible with base change along $h$: for $h':\\mathbf A^r_U\\to\\mathbf A^r_V$, the map $\\beta_{p_r,h}:h'^*\\omega_{p_r,V}\\xrightarrow{\\sim}\\omega_{p_r,U}$ of [prop-asd-smooth-base-change] is the transpose of the pulled-back counit through compact-support base change, and the equality $t_{p_{r,U}}\\circ C_{r,h}=h^*t_{p_{r,V}}$ of [lem-amb-affine-space-top-trace] says exactly that this transpose carries $h'^*\\Gamma_{r,V}$ to $\\Gamma_{r,U}$. The chart $(u_1,e(u_2))$ is the base change of $e$ along $h$, so this identifies $a_h$, under $E_e$ and the etale comparison for that chart, with the restriction along the section $(u,e(u))$ of $\\Gamma_{r,U}$; the translation by $e(u_1)$ moves this section to zero. Pasting the self-product squares through $h=p_re$, using etale adjoint locality and mate pasting, now gives\n$$\\alpha_h=e^*(\\Gamma_r^{-1})\\circ E_e,\\quad E_e:\\omega_h\\xrightarrow{\\sim}e^*\\omega_{p_r}.$$\nHere $E_e$ is the counit-preserving etale comparison. The tensor-mate identity for etale precomposition identifies $\\gamma_{h,K}$ with that same coordinate adjunction for every $K$.",
+   "uses": [
+    "lem-trf-ambient-affine-translation-trace",
+    "lem-trf-finite-ring-section-deformation",
+    "thm-amb-vector-bundle-purity",
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-mate-pasting",
+    "lem-asd-tensor-mate-etale-precomp",
+    "prop-asd-smooth-base-change",
+    "lem-amb-affine-space-top-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 3 and 4: all three factors have the specified affine chart normalization"
+   }
+  },
+  {
+   "text": "For $b:X'\\to X$ with $X'$ Noetherian, let $b':P'\\to P$ and $B:b'^*\\omega_p\\xrightarrow{\\sim}\\omega_{p'}$ be the canonical exceptional mate. The self-product square after base change is the pullback of the original square. Compact-support exchange is compatible with successive base changes and composition, and its exceptional mates obey pasting. These equations identify the pullback of $a_p$ with $a_{p'}$. The section-deformation theorem identifies the pullback of $\\delta_p$ with $\\delta_{p'}$, under these same fibre and normal-bundle comparisons. Thus the first two factors of $\\alpha_p$ commute with this arbitrary Noetherian base change.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+    "place": "Base-change compatibility of the diagonal and deformation factors"
+   }
+  },
+  {
+   "text": "For the vector factor, integration on each bundle trivialization is the affine trace. The equality $t_{p'_r}C_{r,b}=b^*t_{p_r}$ in the affine-space trace theorem therefore identifies the two integration maps on the pulled-back trivializing cover. Their compact-support source is concentrated in degree zero: locally it is isomorphic to $A[0]$ by that theorem. The definition of vector integration, full faithfulness of the degree-zero embedding and sheaf-Hom gluing give equality globally. Taking mates gives the corresponding equality for $v_\\pi$ and its zero-section restriction. Together with Step 7 this proves\n$$\\alpha_{p'}B=b'^*\\alpha_p.$$\nThe tensor/base-change identity in [prop-asd-smooth-base-change], with $\\alpha_{p'}^{-1}=B(b'^*\\alpha_p)^{-1}$ substituted, gives $\\beta_{p,b,K}b'^*\\gamma_{p,K}=\\gamma_{p',b^*K}$, with the canonical twist comparison.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-amb-vector-integration",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-weil-pbc-mate-pasting",
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+    "place": "Base-change compatibility of vector integration and the tensor composite"
+   }
+  },
+  {
+   "text": "Open or separated etale restriction on the source preserves the specified orientation. First let $V\\subset X$ be open and $U\\subset P_V=P\\times_XV$ open, with $h=p|_U$. Restriction of the base to $V$ is the Noetherian base change of Steps 7 and 8. For the open $U\\subset P_V$ the three factors restrict separately. (a) $U\\times_VU$ is open in $P_V\\times_VP_V$; the maps $\\beta$ of [prop-asd-smooth-base-change] for the two self-squares are transposes of pulled-back counits, so the etale comparisons of [lem-amb-etale-adjoint-locality] and mate pasting carry the restriction of $a_{p_V}$ to $a_h$. (b) The normalized comparison commutes with the Noetherian base change $U\\to P_V$ of the section base and with the open neighbourhood $U\\times_VU$ of the diagonal, whose square of centres is Cartesian, by [lem-trf-finite-ring-section-deformation]. (c) $T_{U/V}=T_{P_V/V}|_U$, and by [def-amb-vector-integration] both integrations are the unique maps restricting to the affine traces on trivializations, so $v_\\pi$ restricts to $v_{\\pi_U}$. Thus $\\alpha_p|_U$ corresponds to $\\alpha_h$ under the counit-preserving open comparison; in particular Steps 5 and 6 compute $\\alpha_p$ itself on every coordinate chart. For a separated etale $j:P'\\to P$, compute both orientations on a further smooth coordinate cover using Steps 5 and 6: both are the pullback of the same ordered affine orientation under the counit-preserving etale comparison. Successive etale charts compose, and their exceptional comparisons compose by mate pasting. The two unit-object maps are between equally shifted locally free rank-one sheaves by smooth tensor, so full faithfulness and sheaf-Hom gluing promote this coverwise equality to equality globally. The etale-precomposition tensor identity then gives the equality for every $K$. Base restrictions are already covered by Steps 7 and 8.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-mate-pasting",
+    "thm-asd-smooth-tensor",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-asd-tensor-mate-etale-precomp",
+    "prop-asd-smooth-base-change",
+    "lem-trf-finite-ring-section-deformation",
+    "def-amb-vector-integration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Etale source restriction and gluing of orientation maps"
+   }
+  },
+  {
+   "text": "Let $P\\xrightarrow p X\\xrightarrow q Y$ be smooth of dimensions $r,s$. Let $c:(qp)^!\\xrightarrow{\\sim}p^!q^!$ be the counit-preserving comparison. Put $u_{p,q}=c^{-1}\\phi_{p,\\omega_q}:p^*\\omega_q\\otimes\\omega_p\\to\\omega_{qp}$. Transpose under $R(qp)_!\\dashv(qp)^!$. The projection-composition identity of [lem-amb-shriek-tensor-composition], and the composite counit $\\epsilon_q\\circ Rq_!\\epsilon_p$, identify the transpose of\n$$c^{-1}p^!(\\phi_{q,K})\\phi_{p,q^*K\\otimes\\omega_q}$$\nwith the transpose of $\\phi_{qp,K}(1\\otimes u_{p,q})$. Both are inverse projection for $p$, its unit-object counit, inverse projection for $q$, and its counit, in that order. The adjunction bijection gives equality. Thus composition for all $\\gamma_{p,K}$ reduces to\n$$\\alpha_{qp}^{-1}=u_{p,q}(p^*\\alpha_q^{-1}\\otimes\\alpha_p^{-1}),$$\nAll twists are reassociated canonically.",
+   "uses": [
+    "lem-amb-shriek-tensor-composition",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "thm-asd-smooth-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Formal projection/counit part of smooth composition"
+   }
+  },
+  {
+   "text": "Choose compatible affine charts $U\\to\\mathbf A^r_V$ for $p$ and $V\\to\\mathbf A^s_T$ for $q$. The composite chart $U\\to\\mathbf A^{r+s}_T$ is etale, by base change and composition of etale maps. Order the $r$ fibre coordinates before the $s$ base coordinates. Step 6 identifies the diagonal orientations with the counit-preserving chart adjunction comparisons. The $(r+s)$ coordinate adjunction and the successive $r$ and $s$ adjunctions have the same Hom bijection: the same ordered succession of affine-line Hom bijections, with the same etale Hom bijections. Therefore their counits are equal. Coherent compact-support composition and mate pasting identify their right-adjoint comparisons; uniqueness of the counit-preserving comparison proves the unit equality in Step 10 on these charts. Both sides are maps between equal shifts of rank-one locally constant sheaves, so full faithfulness and sheaf gluing give the equality globally. Step 10 proves composition for every $K$. The shifts $2r,2s$ are even, so no sign is introduced.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "det-sp-unique-right-adjoint",
+    "thm-asd-smooth-tensor",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Coordinate-tower argument for composition; orientation equality checked as a sheaf map"
+   }
+  },
+  {
+   "text": "When $r=0$, smoothness is etaleness. Apply [lem-pur-finite-smooth-gamma-normalization] at the given stage $n$. Its three-factor orientation is exactly Step 3 and its tensor composite is Step 4. It says that the orientation becomes the identity under the etale sum-adjunction identification, and that the tensor composite is the unique right-adjoint comparison preserving the sum/evaluation counit. Thus the claimed dimension-zero normalization holds, including identity maps, open immersions, nontrivial etale covers and the empty scheme.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-pur-finite-smooth-gamma-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Etale normalization of the same three-factor map"
+   }
+  },
+  {
+   "text": "For coefficient reduction write $A=\\Lambda_N$, $B=\\Lambda_n$ and $S_T=(-)\\otimes_A^LB$. Use the canonical compactification coefficient map $b:S_YRp_{!,A}\\to Rp_{!,B}S_P$ in [lem-pur-exceptional-coefficient-comparison], at the bounded constructible finite-Tor inputs used here. Its quotient cocycle is checked with a common compactification: the proper comparison is the mate of the scalar/pullback associator, hence consecutive proper comparisons agree by mate pasting; the open comparison is the balancing identity $(m\\otimes b)\\otimes c=m\\otimes bc$ on the open and zero off it. Pasting gives the cocycle for $b$. Hence the cited coefficient lemma defines $c_K:S_Pp_A^!K\\to p_B^!S_XK$ by\n$$\\epsilon_B\\,Rp_{!,B}(c_K)=S_X\\epsilon_A\\,b_{p_A^!K}^{-1}.$$\nWe use only $K=A_X$ and the unit objects for the diagonal projection, vector bundle and deformation. These are bounded constructible finite-Tor; their dualizing objects are shifted locally free rank-one sheaves by smooth tensor. The coefficient lemma supplies the tensor and geometric-base-change identities for these actual $c$, without assuming $c$ invertible.",
+   "uses": [
+    "lem-pur-exceptional-coefficient-comparison",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "thm-asd-smooth-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+    "place": "Counit-defined coefficient map and quotient cocycle"
+   }
+  },
+  {
+   "text": "At the affine line, compare the Kummer sequences with exponents $\\ell^N$ and $\\ell^n$. The vertical map on their first $\\mathbf G_m$ is $u\\mapsto u^{\\ell^{N-n}}$ and on their last $\\mathbf G_m$ is the identity; their squares commute since $(u^{\\ell^{N-n}})^{\\ell^n}=u^{\\ell^N}$. The kernel map is therefore the power map on roots of unity, and the connecting morphism sends the $N$-level first Chern class to the $n$-level class. The ordinary supported Kummer class is defined by this boundary and derived scalar extension, so the same assertion holds with diagonal support. The Tate lemma identifies $S_TA_T(1)$ with $B_T(1)$ by precisely this power map. Tensor powers give all twists used here. This is a comparison of the Kummer maps themselves; no tensoring-cohomology assertion with a nonflat quotient is used.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+    "place": "Kummer normalization at consecutive exponents; Stacks 03PL, etale-cohomology.tex, lemma-kummer-sequence"
+   }
+  },
+  {
+   "text": "For the projective line let $b_{q,R}:R(1)[2]\\oplus R\\xrightarrow{\\sim}Rq_*R(1)[2]$ be its two-summand decomposition, $R=A,B$. Under the proper coefficient comparison, its first summand reduces to the shifted twisted unit (transpose the identity), and Step 14 identifies its second summand with $c_1(\\mathcal O(1))$ over $B$. Thus $S(b_{q,A})$ becomes $b_{q,B}$. Taking inverse and the second projection shows that $t_{q,A}$ becomes $t_{q,B}$. The canonical proper coefficient map is the projection map after restriction of scalars, by [lem-pur-etale-scalar-mate-projection]; it is invertible on these inputs by the proper projection theorem. Open extension and the ordered affine-line tower preserve this counit identity, by mate pasting. Consequently the affine-space right-adjoint comparison at $A$ reduces to the corresponding $B$ comparison. On vector-bundle trivializations this proves\n$$z^*(v_{\\pi,B}^{-1})\\,z^*c_{\\pi,A}=S(z^*v_{\\pi,A}^{-1}).$$\nBoth sides are maps between equally shifted rank-one $B$-sheaves. Full faithfulness and sheaf gluing give this equality globally. The needed projection/coefficient compatibility is the ringed exchange/tensor identity applied to the coefficient-change square.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-pur-etale-scalar-mate-projection",
+    "lem-amb-proper-coproducts-projection",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-amb-affine-space-top-trace",
+    "lem-weil-pbc-mate-pasting",
+    "thm-amb-vector-bundle-purity",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+    "place": "Coefficient compatibility of the normalized projective-line splitting, ordered counit and vector factor"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-diagonal-orientation-compatibility] to $(p_1,\\Delta)$, with its normalized deformation family $F_A,F_B$ and section lines $C_A,C_B$. Take $e_F$ and $e_C$ to be section pullbacks of the counit-defined coefficient comparisons of Step 13. Their restrictions at $t=1$ agree: this is the geometric-base-change identity for $c$ in that lemma, applied to the deformation fibre $i_1$. The orientation-compatibility lemma gives\n$$\\delta_Be_C=e_0S(\\delta_A).$$\nIt does not require any of these coefficient maps to be invertible. The same geometric-base-change identity on the diagonal self-square gives $a_{p,B}c_{p,A}=(\\Delta^*c_{p_1,A})S(a_{p,A})$. Compose this with the displayed deformation equality and the vector equality of Step 15. All middle comparison maps cancel by substitution, yielding\n$$\\alpha_{p,B}c_{p,A}=S(\\alpha_{p,A}).$$\nMultiplying by $S(\\alpha_{p,A}^{-1})$ gives $c_{p,A}S(\\gamma_{p,N})=\\gamma_{p,n}$. In particular the coefficient comparison on this unit dualizing object is an isomorphism, as a consequence of this equality. This is the requested reduction of the specified orientation, with the power-map Tate identification of Step 14.",
+   "uses": [
+    "lem-pur-diagonal-orientation-compatibility",
+    "lem-pur-exceptional-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+    "place": "Normalized deformation and diagonal factors under coefficient reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-composite-adjunction",
+  "det-sp-p1-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-kummer-any-base",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-asd-tensor-mate-etale-precomp",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-diagonal-orientation-compatibility",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-pur-exceptional-coefficient-comparison",
+  "lem-pur-finite-smooth-gamma-normalization",
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "lem-trf-ambient-affine-translation-trace",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-asd-smooth-base-change",
+  "sbc-thm-etale-local-normal-form",
+  "thm-amb-vector-bundle-purity",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/scholze-six-functor-formalisms.pdf",
+  "place": "Theorem 7.19 and following DNC paragraph; finite-level details follow current blueprint sk-prop-sp-orientation, sk-thm-dnc, sk-thm-smooth-purity and sk-lem-sp-reduction proof files, expanded over arbitrary Noetherian bases."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +358,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-absolute-gysin-purity",
@@ -81,5 +381,179 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-noetherian-prime-power-smooth-duality",
+  "worker": "stage1",
+  "summary": "Constructed the explicit diagonal/DNC/vector orientation and tensor comparison over ordinary etale categories, checked chart normalization, Noetherian base change, composition, rank zero and nonflat prime-power reduction using existing nodes only. No statement change, new nodes or Lean work.",
+  "blueprint": "Realizes the regular finite-torsion duality input to lem-per-artin-gabber-affine-curve, Proof Step 3, through the current sk-prop-sp-orientation three-factor diagonal chain, sk-thm-dnc normalized section comparison, sk-thm-smooth-purity tensor formula and sk-lem-sp-reduction counit comparison. The intervening created.item ancestry is retained.",
+  "tool_uses": [
+   {
+    "node": "det-sp-p1-adjunction",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-amb-shriek-tensor-composition",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-asd-tensor-mate-etale-precomp",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-diagonal-orientation-compatibility",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-diagonal-regular-immersion",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-etale-scalar-mate-projection",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-exceptional-coefficient-comparison",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-finite-smooth-gamma-normalization",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-sp-tower-p1-arbitrary-base-integrals",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-trf-ambient-affine-translation-trace",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-trf-finite-ring-section-deformation",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "thm-amb-vector-bundle-purity",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic ordinary-etale, scheme-geometric or adjunction input for the diagonal/DNC proof; the perverse-curve unit has no corresponding ambient tool. Used exactly in the cited proof steps, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-noetherian-etale-section-specialization",
+    "why": "Reviewer repair: identifies the trf normalized section comparison of Step 3 with the pur deformation family used by lem-pur-finite-smooth-gamma-normalization (Step 12) and lem-pur-diagonal-orientation-compatibility (Step 16); generic purity input, no node of the perverse-curve unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-p1-adjunction",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-kummer-any-base",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-asd-tensor-mate-etale-precomp",
+  "lem-pur-diagonal-orientation-compatibility",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-pur-exceptional-coefficient-comparison",
+  "lem-pur-finite-smooth-gamma-normalization",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "lem-trf-ambient-affine-translation-trace",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-asd-smooth-base-change",
+  "sbc-thm-etale-local-normal-form",
+  "thm-amb-vector-bundle-purity",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification",
+  "lem-pur-noetherian-etale-section-specialization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-9db0f5aa1",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-9db0f5aa1 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 16 steps, and the statement of every cited node (43 proof_deps and 8 stmt_deps). Sources checked: Scholze Six-Functor Formalisms Thm 7.19 and the paragraph after it (the source only sketches the argument; the node marks its proof by: agent), and the blueprint main-20261015 places the steps follow: sk-prop-sp-orientation (proof), sk-prop-sp-orientation-charts, sk-prop-sp-composition and sk-lem-sp-reduction. The statement is unchanged and not weakened. Cases I tested: r=0 (etale is smooth of relative dimension 0, Step 12), N=n, D+ input, the Kummer transition u -> u^(l^(N-n)) (it is an isomorphism mu_{l^N} tensor Z/l^n -> mu_{l^n}, with kernel (mu_{l^N})^{l^n}), and signs (even shifts, trivial swap on rank-one sheaves). No new nodes, no duplicate, no SGA citation. Three repairs, all in the item, in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-noetherian-prime-power-smooth-duality.json. (F1, C1/C4) Step 6 used, without citing them, the base change of the affine orientation along h, i.e. the equality t_{p'} C = h^* t of lem-amb-affine-space-top-trace transposed through the definition of beta in prop-asd-smooth-base-change. I added the sentence and both citations. (F2, E5) Step 9 computed alpha_p on charts, which already assumes the open-restriction case the step is proving. I added a factorwise proof: beta restricts by etale adjoint locality and mate pasting; delta restricts by the base-change and etale-neighbourhood clauses of lem-trf-finite-ring-section-deformation; v restricts by the uniqueness in def-amb-vector-integration. (F3, C4) Steps 12 and 16 apply pur nodes built on the deformation comparison of lem-pur-noetherian-etale-section-specialization, while Step 3 builds delta from the trf node. I added the identification (same Rees family, same fibre identifications, kappa unique with i_1^* kappa = 1) and added the pur node to Step 3's uses, to proof_deps and to tool_uses. It is already in the batch-5 closure and creates no cycle. Steps 13-16 check out: the quotient-cocycle hypothesis is discharged as in lem-pur-finite-smooth-adjunction-general-base Step 3, and c is never assumed invertible. Batch 5: I recomputed the closure from the two targets, stopping at the nt-assume leaves. It has 16527 nodes without the item's proof and 16528 with it. The one added node is lem-pur-diagonal-orientation-compatibility (coefficient reduction, generic; its flagged chain ends in the generic lem-pod-etale-stalk-tensor-scalar). Every other flagged citation (det-sp-p1-adjunction, lem-amb-shriek-tensor-composition, lem-asd-ordinary-supported-kummer, lem-asd-tensor-mate-etale-precomp, lem-pur-finite-smooth-gamma-normalization, lem-sp-tower-p1-arbitrary-base-integrals, thm-amb-vector-bundle-purity, and the trf nodes affine-translation-trace and finite-ring-section-deformation) was already in the closure and is generic six-functor or purity input, not a step of the trace-formula or Poincare-duality proofs. All accepted. I accept the declared tool_uses. Three repairable faults, so FIX.; 1 file(s) fixed by the reviewer"
  }
 }
