@@ -9,6 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
 
+import Sheaf.AlgebraicGeometry.ProjectiveLineConstructible
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
+import WeilConjectures.ConstructibleSheaf.ExtensionByZero
+
 /-!
 # Constructibility of projective direct images
 
@@ -46,6 +51,23 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
+private theorem constructibleDirectImages_closedImmersion
+    {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}}
+    [IsNoetherian Y] (p : X ⟶ Y) [IsClosedImmersion p] :
+    HasConstructibleDirectImages Λ p := by
+  intro F hF
+  have : IsConstructibleSheaf F := hF
+  have : IsConstructibleSheaf ((p)_*[ModuleCat.{u + 1} Λ].obj F) :=
+    IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact p F
+  let e : (R((p)_*[ModuleCat.{u + 1} Λ])).obj
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F) ≅
+        (_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((p)_*[ModuleCat.{u + 1} Λ].obj F) :=
+    (rightDerivedFunctorLowerStarIsoMapDerivedCategory _ p).app _ ≪≫
+      (((p)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app F
+  exact (DerivedCategory.constructibleHomology (ModuleCat.{u + 1} Λ) Y).prop_of_iso e.symm
+    (DerivedCategory.boundedConstructible_singleFunctor_obj _ 0).2
+
 /-- Blueprint `thm-fin-projective-line-constructible`: Constructible coefficients on the
 projective line.
 
@@ -54,8 +76,36 @@ invertible in `k`. For every constructible sheaf `F` of `Λ`-modules on `ℙ¹_S
 direct image `Rᵠπ_* F` along `π : ℙ¹_S ⟶ S` is constructible. -/
 theorem hasConstructibleDirectImages_projectiveLine [HasInvertibleExponent Λ (Spec (.of k))]
     {S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] :
-    HasConstructibleDirectImages Λ (ProjectiveLine S ↘ S) :=
-  sorry
+    HasConstructibleDirectImages Λ (ProjectiveLine S ↘ S) := by
+  let : S.Over (Spec (.of k)) := ⟨aS⟩
+  have : LocallyOfFiniteType (S ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType aS
+    infer_instance
+  have : QuasiCompact (S ↘ Spec (.of k)) := by
+    change QuasiCompact aS
+    infer_instance
+  obtain ⟨n, hn, hΛ, hu⟩ :=
+    HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Spec (.of k))
+  have hc : IsSmoothBaseChangeCoefficients n Λ (Spec (.of k)) :=
+    ⟨hn, inferInstance, hΛ, hu⟩
+  intro F hF q
+  have hcF := isConstructibleEtaleModuleSheaf_higherDirectImage_projectiveLine
+    k S n Λ hc F ((Scheme.isConstructibleEtaleModuleSheaf_iff F).2 hF) q
+  have hC : IsConstructibleSheaf
+      ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj
+        ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) (ProjectiveLine S ↘ S)).obj
+          ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F))) :=
+    (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 hcF
+  have : IsConstructibleSheaf
+      ((_root_.DerivedCategory.homologyFunctor _ q).obj
+        (((ProjectiveLine S ↘ S)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ⋙
+          _root_.DerivedCategory.Plus.ι).obj
+            ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
+    exact hC
+  exact IsConstructibleSheaf.of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+      ((ProjectiveLine S ↘ S)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusCompatibility.app
+        ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F)))
 
 /-- Blueprint `lem-finrepair-projective-from-line`: Projective constructibility from
 projective-line constructibility.
@@ -68,8 +118,49 @@ theorem HasConstructibleDirectImages.of_projectiveLine
       HasConstructibleDirectImages Λ (ProjectiveLine T ↘ T))
     {X S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS]
     (f : X ⟶ S) (N : Type u) [Finite N] (e : X ⟶ ℙ(N; S)) [IsClosedImmersion e]
-    (he : e ≫ ℙ(N; S) ↘ S = f) : HasConstructibleDirectImages Λ f :=
-  sorry
+    (he : e ≫ ℙ(N; S) ↘ S = f) : HasConstructibleDirectImages Λ f := by
+  classical
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+  have : IsNoetherian S := {}
+  have : IsLocallyNoetherian ℙ(N; S) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ℙ(N; S) ↘ S)
+  have : CompactSpace ℙ(N; S) :=
+    QuasiCompact.compactSpace_of_compactSpace (ℙ(N; S) ↘ S)
+  have : IsNoetherian ℙ(N; S) := {}
+  have hp : HasConstructibleDirectImages Λ (ℙ(N; S) ↘ S) := by
+    cases isEmpty_or_nonempty N with
+    | inl hN =>
+      have : IsEmpty N := hN
+      exact constructibleDirectImages_closedImmersion _
+    | inr hN =>
+      have : Nonempty N := hN
+      have hproper : ∀ m, IsProper (ProjectiveSpace.projectiveLinePowProj m S) := by
+        intro m
+        induction m with
+        | zero => change IsProper (𝟙 S); infer_instance
+        | succ m ih =>
+          change IsProper ((ProjectiveLine (ProjectiveSpace.projectiveLinePow m S) ↘
+            ProjectiveSpace.projectiveLinePow m S) ≫ ProjectiveSpace.projectiveLinePowProj m S)
+          have := ih
+          infer_instance
+      have hpow : ∀ m, HasConstructibleDirectImages Λ
+          (ProjectiveSpace.projectiveLinePowProj m S) := by
+        intro m
+        induction m with
+        | zero => exact constructibleDirectImages_closedImmersion (𝟙 S)
+        | succ m ih =>
+          have := hproper m
+          exact (h _ (ProjectiveSpace.projectiveLinePowProj m S ≫ aS)).comp ih
+      obtain ⟨m, σ, hfin, hsurj, hσ⟩ :=
+        ProjectiveSpace.exists_isFinite_surjective_projectiveLinePow N S
+      have := hfin
+      have := hsurj
+      apply HasConstructibleDirectImages.of_comp_of_isFinite ((ℙ(N; S) ↘ S) ≫ aS) _ σ
+      rw [hσ]
+      exact hpow m
+  rw [← he]
+  exact (constructibleDirectImages_closedImmersion e).comp hp
 
 /-- Blueprint `thm-fin-projective-constructibility-complete`: Projective direct-image
 constructibility.
